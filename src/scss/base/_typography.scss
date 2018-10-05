@@ -1,0 +1,91 @@
+body {
+  color: $text-body;
+  font-family: $body-font-family;
+  font-style: normal;
+  font-weight: 400;
+  line-height: $base-line-height;
+  font-feature-settings: 'lnum', 'pnum';
+}
+
+a {
+  color: cv('action');
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 600;
+}
+
+sup {
+  font-size: ms(-2);
+  line-height: 1;
+  vertical-align: super;
+}
+
+blockquote {
+  margin: 0 0 $base-spacing;
+  padding: 0 0 0 $em-small-spacing;
+  border-left: 2px solid $base-border-color;
+}
+
+p {
+  max-width: $max-line-length;
+  margin-bottom: $base-spacing;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+ul {
+  margin-bottom: $base-spacing;
+  list-style-type: disc;
+}
+
+li {
+  max-width: $max-line-length;
+  margin-bottom: $small-spacing;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 $base-spacing 0;
+  color: $text-heading;
+}
+
+h1 {
+  font-size: ms(5);
+}
+
+h2 {
+  font-size: ms(4);
+}
+
+h3 {
+  font-size: ms(3);
+}
+
+h4 {
+  font-size: ms(2);
+}
+
+h5 {
+  font-size: ms(1);
+}
+
+h6 {
+  font-size: ms(0);
+}
+
+.legalese {
+  color: $text-sub;
+  font-size: ms(-2);
+}
+

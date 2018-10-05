@@ -1,0 +1,9 @@
+.text-input {
+  @include input-baseline;
+}
+
+.text-area {
+  min-width: $base-spacing;
+  max-width: $max-line-length;
+  min-height: $base-spacing * 2;
+}

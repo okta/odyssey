@@ -1,0 +1,15 @@
+{
+  "name": "@okta/nim",
+  "version": "0.0.1",
+  "description": "Okta's design system",
+  "files": [
+    "dist",
+    "src/scss"
+  ],
+  "scripts": {
+    "build": "node-sass src/scss/nim.scss dist/nim.css"
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.4"
+  }
+}

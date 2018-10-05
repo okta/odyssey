@@ -1,0 +1,106 @@
+/* stylelint-disable no-descending-specificity, max-nesting-depth */
+
+.radio {
+  @include is-visually-hidden;
+
+  &:checked {
+    + .radio--label {
+      &::after {
+        background-color: rgba(cv('action'), 1);
+      }
+    }
+  }
+
+  &:focus {
+    + .radio--label {
+      &::before {
+        border-color: cv('action', 'base');
+      }
+    }
+  }
+
+  &:disabled {
+    + .radio--label {
+      opacity: $med-opaque;
+      pointer-events: none;
+
+      &::before {
+        border-color: $base-border-color;
+      }
+    }
+
+    &:checked {
+      + .radio--label {
+        &::after {
+          background-color: cv('gray', '300');
+        }
+      }
+    }
+  }
+
+  &[data-invalid] {
+    + .radio--label {
+      &::before {
+        border-color: cv('danger');
+      }
+
+      &:hover {
+        &::after {
+          background-color: rgba(cv('danger'), $med-opaque);
+        }
+      }
+    }
+
+    &:checked {
+      + .radio--label {
+        &::after {
+          background-color: cv('danger');
+        }
+      }
+    }
+  }
+}
+
+.radio--label {
+  display: block;
+  position: relative;
+  padding-left: 1em + $em-tiny-spacing;
+  font-size: ms(0);
+  font-weight: 400;
+  text-align: left;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1em;
+    height: 1em;
+    transition-property: border-color, background;
+    transition-duration: $base-duration;
+    transition-timing-function: $base-timing;
+    border: 1px solid transparent;
+    border-radius: 50%;
+  }
+
+  // Outer Circle
+  &::before {
+    transform: translateY(-50%);
+    border-color: $base-border-color;
+  }
+
+  // Inner Circle
+  &::after {
+    transform: translateY(-50%) scale(0.571);
+    background-color: rgba(cv('action'), 0);
+  }
+
+  &:hover {
+    &::before {
+      border-color: cv('action', 'base');
+    }
+  }
+}
+
