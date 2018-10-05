@@ -1,0 +1,39 @@
+// Establish Type Scale
+
+$body-font-family: 'Proxima Nova', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+
+$base-font-size: 16px;
+$scale-ratio: 1.1429;
+$base-line-height: 1.5;
+$heading-line-height: 1.25;
+$max-line-length: 45ch;
+
+// Spacing Variables
+
+$base-spacing: $base-line-height * 1rem;
+$small-spacing: $base-spacing / 2;
+$tiny-spacing: $small-spacing / 2;
+$big-spacing: $base-spacing * 2;
+$huge-spacing: $big-spacing * 2;
+
+$em-base-spacing: $base-line-height * 1em;
+$em-small-spacing: $em-base-spacing / 2;
+$em-tiny-spacing: $em-small-spacing / 2;
+$em-big-spacing: $em-base-spacing * 2;
+
+// Animation/Transition Baselines
+
+$base-duration: 250ms;
+$base-timing: ease-in-out;
+
+// Borders
+
+$base-border-color: cv('gray', '300');
+$base-border-radius: 3px;
+$border-default: 1px solid $base-border-color;
+
+// Opacity
+
+$more-opaque: 0.618;
+$med-opaque: 0.5;
+$less-opaque: 0.382;

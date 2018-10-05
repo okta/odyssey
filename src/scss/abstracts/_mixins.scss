@@ -1,0 +1,59 @@
+@mixin is-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+@mixin input-baseline {
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: $max-line-length;
+  margin: 0;
+  padding: $small-spacing;
+  transition-property: border-color, background-color;
+  transition-duration: 250ms;
+  transition-timing-function: ease-in-out;
+  border: 0;
+  border-bottom: 1px solid $base-border-color;
+  border-radius: $base-border-radius $base-border-radius 0 0;
+  background-color: cv('gray', '000');
+  box-shadow: none;
+  color: $text-body;
+  font-size: ms(0);
+  line-height: $heading-line-height;
+
+  &:hover,
+  &:focus {
+    border-color: cv('action');
+  }
+
+  &:disabled {
+    opacity: $med-opaque;
+    pointer-events: none;
+  }
+
+  &[readonly] {
+    // Should transition to :read-only once we have AutoPrefixer setup
+    padding-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    border: 0;
+    background-color: transparent;
+  }
+
+  &[data-invalid] {
+    border-color: cv('danger');
+    background-color: cv('danger', 'lightest');
+  }
+
+  &::placeholder {
+    color: $text-sub;
+  }
+}
+
