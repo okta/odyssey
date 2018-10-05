@@ -1,0 +1,7 @@
+.number-input {
+  @include input-baseline;
+
+  &[readonly] {
+    appearance: textfield;
+  }
+}
