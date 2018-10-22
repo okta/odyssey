@@ -1,0 +1,81 @@
+.callout {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: $max-line-length;
+  margin: 0 0 $base-spacing;
+  padding: $base-spacing $base-spacing $base-spacing calc(#{$base-spacing} + 3px);
+  border: 1px solid $base-border-color;
+  border-radius: $base-border-radius;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    width: 3px;
+    border-radius: $base-border-radius 0 0 $base-border-radius;
+    background-color: cv('yellow', 'base');
+  }
+}
+
+.callout--icon {
+  flex-shrink: 0;
+  width: $base-spacing;
+  height: $base-spacing;
+  margin-right: $small-spacing;
+}
+
+.callout--content {
+  ul {
+    list-style-position: inside;
+  }
+}
+
+.callout--title {
+  margin-bottom: $base-spacing;
+  font-size: ms(1);
+  font-weight: 600;
+}
+
+.is-callout-error {
+  &::before {
+    background-color: cv('danger', 'base');
+  }
+
+  .icon--fill {
+    fill: cv('danger', 'base');
+  }
+}
+
+.is-callout-pending {
+  &::before {
+    background-color: cv('yellow', 'base');
+  }
+
+  .icon--fill {
+    fill: cv('yellow', 'base');
+  }
+}
+
+.is-callout-warning {
+  &::before {
+    background-color: cv('yellow', 'base');
+  }
+
+  .icon--fill {
+    fill: cv('yellow', 'base');
+  }
+}
+
+.is-callout-help {
+  &::before {
+    background-color: cv('action', 'base');
+  }
+
+  .icon--fill {
+    fill: cv('action', 'base');
+  }
+}
