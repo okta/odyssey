@@ -43,11 +43,23 @@ p {
 ul {
   margin-bottom: $base-spacing;
   list-style-type: disc;
+
+  p + & {
+    margin-top: -$small-spacing;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 li {
   max-width: $max-line-length;
   margin-bottom: $small-spacing;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 h1,
