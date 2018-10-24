@@ -70,30 +70,37 @@ h5,
 h6 {
   margin: 0 0 $base-spacing 0;
   color: $text-heading;
+  line-height: $heading-line-height;
 }
 
 h1 {
-  font-size: ms(5);
+  font-size: ms(7);
+  font-weight: 300;
 }
 
 h2 {
   font-size: ms(4);
+  font-weight: 600;
 }
 
 h3 {
-  font-size: ms(3);
-}
-
-h4 {
   font-size: ms(2);
 }
 
+h4 {
+  font-size: ms(0);
+  font-weight: 600;
+}
+
 h5 {
-  font-size: ms(1);
+  font-size: ms(0);
+  font-weight: 300;
 }
 
 h6 {
-  font-size: ms(0);
+  color: $text-sub;
+  font-size: ms(-1);
+  font-weight: 600;
 }
 
 .legalese {
