@@ -50,9 +50,9 @@
     max-width: 100% !important;
     min-height: 0 !important;
     max-height: none !important;
-    margin: 0 2px 0 0 !important;
-    padding: 0 !important;
-    border: 0 none !important;
+    margin: 0 2px 0 0;
+    padding: 0;
+    border: 0;
     background: none !important;
     box-shadow: none !important;
     font-size: inherit;
@@ -91,22 +91,29 @@
 
   &.multi {
     .selectize-input {
-      > .item {
-        &::after {
-          content: ',';
-          margin-right: 0.5ch;
-        }
+      padding-top: calc(#{$small-spacing} - (#{$tiny-spacing} / 2) - 1px);
+      padding-bottom: calc(#{$small-spacing} - (#{$tiny-spacing} / 2) - #{$tiny-spacing} - 1px);
 
-        &:last-of-type {
-          &::after {
-            content: '';
-          }
+      > input {
+        margin: 0 0 $tiny-spacing 0;
+        padding: ($tiny-spacing / 2) 0 ($tiny-spacing / 2);
+        border: 1px solid transparent;
+      }
+
+      > .item {
+        margin: 0 $tiny-spacing $tiny-spacing 0;
+        padding: ($tiny-spacing / 2) 0 ($tiny-spacing / 2) $small-spacing;
+        border: 1px solid $base-border-color;
+        border-radius: 1em;
+        background-color: $white;
+        cursor: default;
+
+        &:last-child {
+          margin-right: 0;
         }
 
         &.active {
-          border: 0 solid #cacaca;
-          background: #e8e8e8;
-          color: #303030;
+          border-color: cv('action', 'base');
         }
       }
 
@@ -171,47 +178,17 @@
   &.plugin-remove_button {
     [data-value] {
       position: relative;
-      padding-right: 24px !important;
 
       .remove {
         display: inline-block;
-        position: absolute;
-        z-index: 1;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        box-sizing: border-box;
-        width: 17px;
-        padding: 2px 0 0;
-        border-left: 1px solid #d0d0d0;
-        border-radius: 0 2px 2px 0;
-        color: inherit;
-        font-size: 12px;
-        font-weight: bold;
-        text-align: center;
+        padding: 0 $small-spacing;
+        color: $text-sub;
+        font-weight: 600;
         text-decoration: none;
-        vertical-align: middle;
+        cursor: default;
 
         &:hover {
-          background: rgba(cv('gray', '900'), 0.05);
-        }
-      }
-
-      &.active {
-        .remove {
-          border-left-color: #cacaca;
-        }
-      }
-    }
-
-    .disabled {
-      [data-value] {
-        .remove {
-          border-left-color: $white;
-
-          &:hover {
-            background: none;
-          }
+          color: $text-heading;
         }
       }
     }
@@ -313,10 +290,7 @@
     }
 
     &.selected {
-      background-color: cv('action', 'lightest');
-      background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%229%22%20height%3D%228%22%20fill%3D%22none%22%3E%0A%20%20%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h9v8H0z%22%2F%3E%0A%20%20%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h9v8H0z%22%2F%3E%0A%20%20%3Cpath%20fill%3D%22%231662DD%22%20d%3D%22M.208363%205.16583c-.3072892-.28911-.268878-.75891.076823-1.01188.307289-.28911.806634-.25297%201.075514.07228l1.7285%201.87921L8.00583.359379c.61458-.722775%201.3828-.252971.76823.505943L3.7806%207.69555c-.03841.03614-.07682.07227-.11523.10841-.3457.28911-.80664.25297-1.11392-.07227L.208363%205.16583z%22%2F%3E%0A%3C%2Fsvg%3E%0A');
-      background-repeat: no-repeat;
-      background-position: center right $small-spacing;
+      // Empty rule to maintain available selector
     }
   }
 
