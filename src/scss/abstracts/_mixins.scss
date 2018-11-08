@@ -33,12 +33,12 @@
   transition-property: border-color, background-color;
   transition-duration: 250ms;
   transition-timing-function: ease-in-out;
-  border: 0;
-  border-bottom: 1px solid $base-border-color;
-  border-radius: $base-border-radius $base-border-radius 0 0;
-  background-color: cv('gray', '000');
+  border: 1px solid $base-border-color;
+  border-radius: $base-border-radius;
+  background-color: $white;
   box-shadow: none;
   color: $text-body;
+  font-family: $body-font-family;
   font-size: ms(0);
   line-height: $heading-line-height;
 
