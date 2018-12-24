@@ -1,0 +1,203 @@
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Rem-based modular scale for type
+// Not ready for general use.
+
+.tooltip {
+  display: block;
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  padding: $tiny-spacing $small-spacing;
+  transition: opacity $base-duration $base-timing 1s;
+  border: 1px solid cv('gray', '900');
+  border-radius: $base-border-radius;
+  opacity: 0;
+  background: cv('gray', '900');
+  color: cv('gray', '000');
+  font-size: ms(-1);
+  white-space: nowrap;
+  pointer-events: none;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+  }
+
+  &::after {
+    border-width: calc(#{$tiny-spacing} - 2px);
+  }
+
+  &::before {
+    border-width: $tiny-spacing;
+  }
+
+  *:focus + &,
+  .has-tooltip:hover &,
+  .has-tooltip:focus & {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.is-tooltip-top {
+  bottom: calc(100% + #{$small-spacing});
+  left: 50%;
+  transform: translateX(-50%);
+
+  &::after,
+  &::before {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &::after {
+    border-top-color: cv('gray', '900');
+  }
+
+  &::before {
+    border-top-color: cv('gray', '900');
+  }
+}
+
+.is-tooltip-right {
+  top: 50%;
+  left: calc(100% + #{$small-spacing});
+  transform: translateY(-50%);
+
+  &::after,
+  &::before {
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    border-right-color: cv('gray', '900');
+  }
+
+  &::before {
+    border-right-color: cv('gray', '900');
+  }
+}
+
+.is-tooltip-bottom {
+  top: calc(100% + #{$small-spacing});
+  left: 50%;
+  transform: translateX(-50%);
+
+  &::after,
+  &::before {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &::after {
+    border-bottom-color: cv('gray', '900');
+  }
+
+  &::before {
+    border-bottom-color: cv('gray', '900');
+  }
+}
+
+.is-tooltip-left {
+  top: 50%;
+  right: calc(100% + #{$small-spacing});
+  transform: translateY(-50%);
+
+  &::after,
+  &::before {
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    border-left-color: cv('gray', '900');
+  }
+
+  &::before {
+    border-left-color: cv('gray', '900');
+  }
+}
+
+.has-tooltip {
+  display: inline-block;
+  position: relative;
+
+  svg {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 75ch) {
+  .tooltip {
+    display: block;
+    visibility: hidden;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    width: 100vw;
+    border: 0;
+    border-radius: 0;
+    opacity: 0;
+    font-size: ms(-1);
+    white-space: wrap;
+    pointer-events: none;
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: solid transparent;
+    }
+
+    &::after {
+      border-width: calc(#{$tiny-spacing} - 2px);
+    }
+
+    &::before {
+      border-width: $tiny-spacing;
+    }
+  }
+
+  .is-tooltip-top,
+  .is-tooltip-right,
+  .is-tooltip-bottom,
+  .is-tooltip-left {
+    top: 0;
+    right: unset;
+    bottom: unset;
+    left: 0;
+    transform: none;
+
+    &::after,
+    &::before {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 0;
+    }
+  }
+}

@@ -23,6 +23,7 @@
 
 // Base
 @import 'base/reset';
+@import 'base/accessibility';
 @import 'base/typography';
 
 // Components
@@ -36,6 +37,7 @@
 @import 'components/radio-button';
 @import 'components/table';
 @import 'components/text-input';
+@import 'components/tooltip';
 
 // Vendor Extensions
 @import 'vendors-ext/selectize-ext';
