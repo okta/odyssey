@@ -25,6 +25,10 @@ a {
   color: cv('action');
 }
 
+abbr {
+  border-bottom: 1px dashed cv('action', 'base');
+}
+
 em {
   font-style: italic;
 }
