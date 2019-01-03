@@ -1,0 +1,43 @@
+.navigation {
+  display: flex;
+}
+
+.navigation--list {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.navigation--item {
+  display: block;
+  margin: 0;
+  line-height: 1;
+}
+
+.navigation--category,
+.navigation--link {
+  display: inline-block;
+  padding: $tiny-spacing ($small-spacing + $tiny-spacing);
+}
+
+.navigation--category {
+  cursor: default;
+
+  &:hover {
+    color: $text-heading;
+  }
+}
+
+.navigation--link {
+  color: $text-body;
+  text-decoration: none;
+
+  &:hover,
+  .navigation--item:hover &,
+  &.is-link-active {
+    color: cv('action', 'base');
+  }
+}
+

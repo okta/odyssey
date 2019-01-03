@@ -124,6 +124,12 @@ o-button {
   }
 }
 
+.top-bar {
+  .button {
+    @extend %button-small;
+  }
+}
+
 .form--header {
   .button {
     @extend %button-small;
