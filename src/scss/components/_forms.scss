@@ -14,6 +14,10 @@
 
 .fieldset {
   margin: 0 0 $base-spacing;
+
+  &:last-child {
+    margin: 0;
+  }
 }
 
 .form {
@@ -34,7 +38,7 @@
   margin: 0;
   padding: 0;
   color: $text-heading;
-  font-size: ms(2);
+  font-size: ms(4);
   font-weight: 600;
   line-height: $heading-line-height;
 }
@@ -107,14 +111,14 @@
 .input-legend {
   margin: 0 0 $tiny-spacing;
   color: $text-heading;
-  font-size: ms(-1);
+  font-size: ms(0);
   font-weight: 600;
 }
 
 .group-legend {
   margin: 0 0 $small-spacing;
   color: $text-heading;
-  font-size: ms(1);
+  font-size: ms(2);
   font-weight: 600;
 }
 

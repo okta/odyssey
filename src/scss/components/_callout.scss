@@ -43,6 +43,8 @@
 }
 
 .callout--content {
+  font-size: ms(0);
+
   ul {
     list-style-position: inside;
   }
@@ -50,7 +52,7 @@
 
 .callout--title {
   margin-bottom: $base-spacing;
-  font-size: ms(1);
+  font-size: ms(2);
   font-weight: 600;
 }
 

@@ -66,12 +66,13 @@
   margin-bottom: 0;
   color: $text-heading;
   font-size: ms(2);
-  font-weight: 400;
+  font-weight: 600;
   line-height: $heading-line-height;
 }
 
 .modal--content {
   padding: $base-spacing 0 $big-spacing;
+  font-size: ms(0);
 }
 
 .modal--footer {
