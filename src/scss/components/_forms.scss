@@ -60,14 +60,19 @@
   font-size: ms(-1);
 }
 
-.form--hint {
-  margin-top: $tiny-spacing;
-  color: $text-sub;
+.field--hint,
+.field--error {
   font-size: ms(-1);
+}
 
-  [data-invalid] ~ & {
-    color: cv('danger');
-  }
+.field--hint {
+  margin-bottom: $tiny-spacing;
+  color: $text-sub;
+}
+
+.field--error {
+  margin-top: $tiny-spacing;
+  color: cv('danger', 'base');
 }
 
 .fieldset--pair {
@@ -87,7 +92,8 @@
   flex-direction: column;
   max-width: $max-line-length;
 
-  .label {
+  .label,
+  .input-legend {
     order: 1;
   }
 
@@ -96,15 +102,19 @@
   .select-input,
   .input--unavailable,
   .fieldset--pair {
-    order: 2;
+    order: 3;
   }
 
   .input--unavailable {
     margin: 0;
   }
 
-  .form--hint {
-    order: 3;
+  .field--hint {
+    order: 2;
+  }
+
+  .field--error {
+    order: 4;
   }
 }
 
