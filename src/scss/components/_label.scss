@@ -60,10 +60,5 @@
       font-weight: 400;
     }
   }
-
-  .text-input[data-invalid] ~ &,
-  .number-input[data-invalid] ~ & {
-    color: cv('danger');
-  }
 }
 
