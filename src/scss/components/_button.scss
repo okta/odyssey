@@ -130,6 +130,12 @@ o-button {
   }
 }
 
+.card--footer {
+  .button {
+    @extend %button-small;
+  }
+}
+
 .form--header {
   .button {
     @extend %button-small;
