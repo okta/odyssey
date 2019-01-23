@@ -1,0 +1,162 @@
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+.card {
+  display: block;
+  position: relative;
+  align-self: start;
+  max-width: $max-line-length;
+  border: 1px solid $base-border-color;
+  border-radius: $base-border-radius;
+}
+
+.card--state {
+  margin: -1px -1px 0;
+  padding: $tiny-spacing $base-spacing;
+  border-radius: $base-border-radius $base-border-radius 0 0;
+  color: $white;
+  font-size: ms(-2);
+  text-align: right;
+}
+
+.card--media {
+  margin: -1px -1px 0;
+  padding-bottom: $small-spacing;
+  overflow: hidden;
+  border-radius: $base-border-radius $base-border-radius 0 0;
+}
+
+.card--media-image {
+  width: 100%;
+}
+
+.card--header {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  padding: $small-spacing $base-spacing $small-spacing;
+
+  &:first-child {
+    padding-top: $base-spacing;
+  }
+
+  &:last-child {
+    padding-bottom: $base-spacing;
+  }
+
+  .card--state + & {
+    padding-top: $base-spacing;
+  }
+}
+
+.card--header-icon {
+  flex-basis: 0%;
+  height: $big-spacing;
+  margin-right: $small-spacing;
+  line-height: 1;
+
+  svg {
+    height: 100%;
+  }
+}
+
+.card--header-main {
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.card--meta {
+  color: $text-sub;
+  font-size: ms(-1);
+}
+
+.card--kebab {
+  position: absolute;
+  top: $base-spacing;
+  right: $base-spacing;
+}
+
+.card--title {
+  margin: 0 0 $tiny-spacing 0;
+  font-size: ms(2);
+  font-weight: 600;
+  line-height: $heading-line-height;
+
+  &:only-child {
+    margin-bottom: 0;
+  }
+}
+
+.card--main {
+  padding: $small-spacing $base-spacing $small-spacing;
+  color: $text-body;
+
+  &:first-child {
+    padding-top: $base-spacing + $tiny-spacing;
+  }
+
+  &:last-child {
+    padding-bottom: $base-spacing;
+  }
+}
+
+.card--footer {
+  padding: $small-spacing $base-spacing $base-spacing;
+}
+
+.card--actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card--link {
+  color: cv('action', 'base');
+}
+
+.is-card-action {
+  .card--state {
+    background: cv('action', 'base');
+  }
+}
+
+.is-card-error {
+  .card--state {
+    background: cv('danger', 'base');
+  }
+}
+
+.is-card-clickable {
+  transition: box-shadow $base-duration $base-timing;
+  border: 0;
+  box-shadow: 0 3px 6px rgba(cv('gray', '900'), 0.2);
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 6px 24px rgba(cv('gray', '900'), 0.2);
+  }
+
+  &:active {
+    background: cv('gray', '000');
+  }
+}
+
+.card--list {
+  display: grid;
+  grid-auto-rows: minmax(0, auto);
+  grid-gap: $base-spacing;
+  grid-template-columns: repeat(auto-fill, minmax(calc(27ch), 1fr));
+}
