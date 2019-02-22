@@ -16,7 +16,7 @@
   display: inline-block;
   position: relative;
   margin: 0;
-  padding: $em-small-spacing ($em-base-spacing + $em-tiny-spacing);
+  padding: $small-spacing $base-spacing;
   transition-property: color, background-color, border-color, transform;
   transition-duration: 250ms;
   transition-timing-function: ease-in-out;
@@ -49,11 +49,11 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: calc(100% + #{$em-small-spacing});
-      height: calc(100% + #{$em-small-spacing});
+      width: calc(100% + #{$small-spacing});
+      height: calc(100% + #{$small-spacing});
       transform: translate(-50%, -50%);
       border: 2px dotted $text-body;
-      border-radius: calc(#{$em-tiny-spacing} + #{$base-border-radius} - 2px); // Outer radius calc: padding + start radius - border size
+      border-radius: calc(#{$tiny-spacing} + #{$base-border-radius} - 2px); // Outer radius calc: padding + start radius - border size
     }
   }
 
@@ -113,14 +113,14 @@
 }
 
 %button-small {
-  font-size: ms(-2);
+  padding: $tiny-spacing $base-spacing;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
 .button,
 o-button {
   & + & {
-    margin-left: $em-small-spacing;
+    margin-left: $small-spacing;
   }
 }
 
