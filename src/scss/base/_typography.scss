@@ -32,6 +32,7 @@ a {
     color: cv('violet', 'dark');
   }
 
+  /* stylelint-disable-next-line selector-no-qualifying-type */
   &[target='_blank']:not([href^='mailto:'])::after {
     content: '';
     display: inline-block;
@@ -143,4 +144,3 @@ h6 {
   color: $text-sub;
   font-size: ms(-2);
 }
-

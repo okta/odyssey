@@ -1,0 +1,7 @@
+language: node_js
+cache: yarn
+node_js:
+  - "10"
+sudo: false
+before_script:
+  - yarn build

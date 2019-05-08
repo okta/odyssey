@@ -8,7 +8,9 @@
   ],
   "scripts": {
     "prepare": "yarn build",
-    "build": "node-sass src/scss/nim.scss dist/nim.css && cp -R src/scss dist/"
+    "build": "node-sass src/scss/nim.scss dist/nim.css && cp -R src/scss dist/",
+    "lint": "stylelint src/",
+    "test": "yarn lint"
   },
   "devDependencies": {
     "node-sass": "^4.9.4",
