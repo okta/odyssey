@@ -2,6 +2,8 @@
   "name": "@okta/nim",
   "version": "0.0.1",
   "description": "Okta's design system",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
   "files": [
     "dist",
     "src/scss"
