@@ -87,6 +87,13 @@
   }
 }
 
+.input-legend {
+  margin: 0 0 $tiny-spacing;
+  color: $text-heading;
+  font-size: ms(0);
+  font-weight: 600;
+}
+
 .fieldset-flex {
   display: flex;
   flex-direction: column;
@@ -116,13 +123,6 @@
   .field--error {
     order: 4;
   }
-}
-
-.input-legend {
-  margin: 0 0 $tiny-spacing;
-  color: $text-heading;
-  font-size: ms(0);
-  font-weight: 600;
 }
 
 .group-legend {

@@ -144,6 +144,7 @@
 }
 
 .navigation--item {
+  /* stylelint-disable-next-line no-descending-specificity */
   .dropdown {
     // Account for .navigation--link padding
     top: calc(100% + #{$small-spacing});
