@@ -14,7 +14,7 @@
 
 /* stylelint-disable no-descending-specificity, max-nesting-depth */
 
-.checkbox {
+input.checkbox {
   @include is-visually-hidden;
 
   &:checked {
