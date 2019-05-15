@@ -98,31 +98,6 @@
   display: flex;
   flex-direction: column;
   max-width: $max-line-length;
-
-  .label,
-  .input-legend {
-    order: 1;
-  }
-
-  .number-input,
-  .text-input,
-  .select-input,
-  .input--unavailable,
-  .fieldset--pair {
-    order: 3;
-  }
-
-  .input--unavailable {
-    margin: 0;
-  }
-
-  .field--hint {
-    order: 2;
-  }
-
-  .field--error {
-    order: 4;
-  }
 }
 
 .group-legend {
