@@ -49,6 +49,7 @@
 
   &:disabled {
     opacity: $med-opaque;
+    cursor: not-allowed;
     pointer-events: none;
   }
 

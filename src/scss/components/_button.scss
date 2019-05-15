@@ -57,9 +57,12 @@
     }
   }
 
-  &:disabled {
+  &:disabled,
+  &.disabled,
+  .form.disabled & {
     border-color: transparent;
     background-color: cv('gray', '300');
+    cursor: not-allowed;
     pointer-events: none;
   }
 }
@@ -76,10 +79,12 @@
     color: cv('action', 'dark');
   }
 
-  &:disabled {
+  &:disabled,
+  &.disabled {
     border-color: cv('gray', '300');
     background-color: $white;
     color: cv('gray', '300');
+    cursor: not-allowed;
   }
 }
 
@@ -104,10 +109,12 @@
       color: cv('danger', 'dark');
     }
 
-    &:disabled {
+    &:disabled,
+    &.disabled {
       border-color: cv('gray', '300');
       background-color: $white;
       color: cv('gray', '300');
+      cursor: not-allowed;
     }
   }
 }
