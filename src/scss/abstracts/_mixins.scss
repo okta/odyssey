@@ -67,6 +67,7 @@
   }
 
   &::placeholder {
-    color: $text-sub;
+    opacity: 1;
+    color: cv('gray', '500');
   }
 }
