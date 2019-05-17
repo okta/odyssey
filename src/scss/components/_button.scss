@@ -42,25 +42,18 @@
   &:focus,
   &.is-button-focus {
     outline: 0;
-
-    &::before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: calc(100% + #{$small-spacing});
-      height: calc(100% + #{$small-spacing});
-      transform: translate(-50%, -50%);
-      border: 2px dotted $text-body;
-      border-radius: calc(#{$tiny-spacing} + #{$base-border-radius} - 2px); // Outer radius calc: padding + start radius - border size
-    }
+    box-shadow: 0 0 0 0.2rem rgba(cv('action'), 0.25);
   }
 
   &:disabled {
     border-color: transparent;
     background-color: cv('gray', '300');
     pointer-events: none;
+
+    &:focus,
+    &.is-button-focus {
+      box-shadow: 0 0 0 0.2rem rgba(cv('gray', '300'), 0.25);
+    }
   }
 }
 
@@ -92,6 +85,11 @@
     background-color: cv('danger', 'dark');
   }
 
+  &:focus,
+  &.is-button-focus {
+    box-shadow: 0 0 0 0.2rem rgba(cv('danger'), 0.25);
+  }
+
   &.is-button-secondary {
     border-color: cv('danger');
     background-color: $white;
@@ -119,24 +117,28 @@
 /* stylelint-disable-next-line no-descending-specificity */
 .button,
 o-button {
+  /* stylelint-disable-next-line no-descending-specificity */
   & + & {
     margin-left: $small-spacing;
   }
 }
 
 .top-bar {
+  /* stylelint-disable-next-line no-descending-specificity */
   .button {
     @extend %button-small;
   }
 }
 
 .card--footer {
+  /* stylelint-disable-next-line no-descending-specificity */
   .button {
     @extend %button-small;
   }
 }
 
 .form--header {
+  /* stylelint-disable-next-line no-descending-specificity */
   .button {
     @extend %button-small;
   }
