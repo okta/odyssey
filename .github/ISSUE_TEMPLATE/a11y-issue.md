@@ -1,8 +1,8 @@
 ---
-name: 'Bug report'
-about: 'Oops, all berries? Let us know.'
+name: 'A11y issue'
+about: 'Help us improve our accessibility.'
 title: ''
-labels: 'bug'
+labels: 'a11y'
 assignees: ''
 ---
 
@@ -16,6 +16,10 @@ assignees: ''
 
 > What browser & version are you experiencing this in?
 
+> Is there a specific WCAG checkpoint or ARIA guideline being violated?
+
+> Is this issue related to a specific assistive technology?
+
 ## Steps to reproduce the issue
 
 1. Step one.
@@ -25,6 +29,6 @@ assignees: ''
 
 ## Screenshots
 
-Please include screenshots to help illuminate the issue.
+If relevant, please include screenshots to help illuminate the issue.
 
 ## Additional information
