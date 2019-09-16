@@ -1,6 +1,6 @@
 ---
 name: 'A11y issue'
-about: 'Help us improve our accessibility.'
+about: 'Help us improve our accessibility'
 title: ''
 labels: 'a11y'
 assignees: ''
@@ -24,8 +24,8 @@ assignees: ''
 
 1. Step one.
 2. Step two.
-3. ???
-4. Profit.
+3. Step three.
+4. Uh oh.
 
 ## Screenshots
 
