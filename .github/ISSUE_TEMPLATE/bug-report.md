@@ -20,8 +20,8 @@ assignees: ''
 
 1. Step one.
 2. Step two.
-3. ???
-4. Profit.
+3. Step three.
+4. Bug!
 
 ## Screenshots
 
