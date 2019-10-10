@@ -1,0 +1,192 @@
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+.banner {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: $small-spacing ($big-spacing + ms(0) + $big-spacing) $small-spacing $big-spacing;
+  background: cv('action', 'base');
+  color: $white;
+  font-size: ms(0);
+}
+
+.banner--pen {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.banner--title {
+  display: inline;
+  position: relative;
+  margin: 0 $small-spacing 0 0;
+  color: $white;
+  font-size: ms(0);
+  font-weight: 600;
+}
+
+.banner--icon {
+  position: absolute;
+  top: 50%;
+  left: calc(-#{$small-spacing} - #{ms(1)});
+  width: ms(1);
+  height: ms(1);
+  margin: 0;
+  transform: translateY(-50%);
+
+  .icon--fill {
+    fill: $white;
+  }
+
+  .icon--stroke {
+    fill: cv('action', 'base');
+  }
+}
+
+.banner--content {
+  display: inline;
+  margin: 0;
+
+  a {
+    color: $white;
+
+    &:hover {
+      color: cv('action', 'lightest');
+    }
+  }
+}
+
+.banner--close {
+  position: absolute;
+  top: 50%;
+  right: $big-spacing;
+  width: ms(-1);
+  height: ms(-1);
+  margin: 0;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: $white;
+  font-size: ms(0);
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  cursor: default;
+  appearance: none;
+}
+
+.banner--close-icon {
+  .icon--stroke {
+    stroke: $white;
+  }
+}
+
+.is-banner-info {
+  background: cv('action', 'base');
+  color: $white;
+
+  .banner--title {
+    color: $white;
+  }
+
+  .banner--icon {
+    .icon--fill {
+      fill: $white;
+    }
+
+    .icon--stroke {
+      fill: cv('action', 'base');
+    }
+  }
+
+  .banner--content {
+    a {
+      color: $white;
+    }
+  }
+
+  .banner--close-icon {
+    .icon--stroke {
+      stroke: $white;
+    }
+  }
+}
+
+.is-banner-danger {
+  background: cv('danger', 'base');
+  color: $white;
+
+  .banner--title {
+    color: $white;
+  }
+
+  .banner--icon {
+    .icon--fill {
+      fill: $white;
+    }
+
+    .icon--stroke {
+      fill: cv('danger', 'base');
+    }
+  }
+
+  .banner--content {
+    a {
+      color: $white;
+    }
+  }
+
+  .banner--close-icon {
+    .icon--stroke {
+      stroke: $white;
+    }
+  }
+}
+
+.is-banner-yellow {
+  background: cv('yellow', 'base');
+  color: $text-heading;
+
+  .banner--title {
+    color: $text-heading;
+  }
+
+  .banner--icon {
+    .icon--fill {
+      fill: $text-heading;
+    }
+
+    .icon--stroke {
+      fill: cv('yellow', 'base');
+    }
+  }
+
+  .banner--content {
+    a {
+      color: $text-heading;
+    }
+  }
+
+  .banner--close-icon {
+    .icon--stroke {
+      stroke: $text-heading;
+    }
+  }
+}

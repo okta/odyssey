@@ -16,18 +16,19 @@
   display: inline-block;
   position: relative;
   margin: 0;
-  padding: $small-spacing $base-spacing;
-  transition-property: color, background-color, border-color, transform;
-  transition-duration: 250ms;
-  transition-timing-function: ease-in-out;
-  border: 1px solid transparent;
+  padding: $em-tiny-spacing $em-base-spacing;
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 100ms;
+  transition-timing-function: linear;
+  border: 2px solid transparent;
   border-radius: $base-border-radius;
   background-color: cv('action');
+  box-shadow: 0 0 0 0 fauxpacity(cv('action', 'base'));
   color: $white;
   font-family: $body-font-family;
   font-size: ms(0);
   font-weight: 600;
-  line-height: 1;
+  line-height: $heading-line-height;
 
   &:hover,
   &.is-button-hover {
@@ -35,32 +36,17 @@
     background-color: cv('action', 'dark');
   }
 
-  &:active {
-    transform: scale(0.95);
-  }
-
   &:focus,
   &.is-button-focus {
     outline: 0;
-
-    &::before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: calc(100% + #{$small-spacing});
-      height: calc(100% + #{$small-spacing});
-      transform: translate(-50%, -50%);
-      border: 2px dotted $text-body;
-      border-radius: calc(#{$tiny-spacing} + #{$base-border-radius} - 2px); // Outer radius calc: padding + start radius - border size
-    }
+    background-color: cv('action', 'dark');
+    box-shadow: 0 0 0 4px fauxpacity(cv('action', 'base'));
   }
 
   &:disabled {
     border-color: transparent;
-    background-color: cv('gray', '300');
-    pointer-events: none;
+    background-color: fauxpacity(cv('action', 'base'));
+    cursor: not-allowed;
   }
 }
 
@@ -72,14 +58,21 @@
   &:hover,
   &.is-button-hover {
     border-color: cv('action', 'dark');
-    background-color: $white;
+    background-color: cv('action', 'lightest');
+    color: cv('action', 'dark');
+  }
+
+  &:focus,
+  &.is-button-focus {
+    border-color: cv('action', 'dark');
+    background-color: cv('action', 'lightest');
     color: cv('action', 'dark');
   }
 
   &:disabled {
-    border-color: cv('gray', '300');
+    border-color: fauxpacity(cv('action', 'base'));
     background-color: $white;
-    color: cv('gray', '300');
+    color: fauxpacity(cv('action', 'base'));
   }
 }
 
@@ -92,28 +85,87 @@
     background-color: cv('danger', 'dark');
   }
 
+  &:focus,
+  &.is-button-focus {
+    background-color: cv('danger', 'dark');
+    box-shadow: 0 0 0 4px fauxpacity(cv('danger', 'base'));
+  }
+
+  &:disabled {
+    background-color: fauxpacity(cv('danger', 'base'));
+  }
+
   &.is-button-secondary {
     border-color: cv('danger');
     background-color: $white;
     color: cv('danger');
 
-    &:hover,
-    &.is-button-hover {
+    &:focus,
+    &.is-button-focus {
       border-color: cv('danger', 'dark');
-      background-color: $white;
+      background-color: cv('danger', 'lightest');
       color: cv('danger', 'dark');
     }
 
     &:disabled {
-      border-color: cv('gray', '300');
+      border-color: fauxpacity(cv('danger', 'base'));
       background-color: $white;
-      color: cv('gray', '300');
+      color: fauxpacity(cv('danger', 'base'));
     }
   }
 }
 
+.is-button-overlay {
+  background-color: $white;
+  color: $text-body;
+
+  &:hover,
+  &.is-button-hover {
+    border-color: transparent;
+    background-color: cv('gray', '000');
+  }
+
+  &:focus,
+  &.is-button-focus {
+    background-color: cv('gray', '000');
+    box-shadow: 0 0 0 4px cv('action', 'base');
+  }
+
+  &:disabled {
+    opacity: $more-opaque;
+    background-color: $white;
+  }
+}
+
+.is-button-clear {
+  background-color: transparent;
+  color: cv('action', 'base');
+
+  &:hover,
+  &.is-button-hover {
+    border-color: transparent;
+    background-color: cv('action', 'lightest');
+    color: cv('action', 'dark');
+  }
+
+  &:focus,
+  &.is-button-focus {
+    background-color: cv('action', 'lightest');
+    color: cv('action', 'dark');
+  }
+
+  &:disabled {
+    background-color: transparent;
+    color: fauxpacity(cv('action', 'base'));
+  }
+}
+
 %button-small {
-  padding: $tiny-spacing $base-spacing;
+  font-size: ms(-1);
+}
+
+.is-button-small {
+  @extend %button-small;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
