@@ -28,7 +28,7 @@
   caption {
     margin-bottom: $small-spacing;
     color: $text-heading;
-    font-size: ms(2);
+    font-size: ms(1);
     font-weight: 600;
     text-align: left;
   }
@@ -151,13 +151,13 @@
 }
 
 .is-table-inessential {
-  @media only screen and (max-width: 75ch) {
+  @media only screen and (max-width: 40rem) {
     @include is-visually-hidden;
   }
 }
 
 .is-table-linear {
-  @media only screen and (max-width: 75ch) {
+  @media only screen and (max-width: 40rem) {
     table,
     caption,
     tbody,

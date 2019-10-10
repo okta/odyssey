@@ -136,6 +136,11 @@ section {
 
 // Element Specific Resets
 
+img,
+svg {
+  max-width: 100%;
+}
+
 ol,
 ul {
   list-style: none;
