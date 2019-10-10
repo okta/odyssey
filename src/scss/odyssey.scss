@@ -17,7 +17,7 @@
 // Abstracts
 @import 'abstracts/functions';
 @import 'abstracts/colors';
-// @import 'abstracts/fonts';
+@import 'abstracts/fonts';
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
 
@@ -27,6 +27,7 @@
 @import 'base/typography';
 
 // Components
+@import 'components/banner';
 @import 'components/button';
 @import 'components/callout';
 @import 'components/card';
@@ -39,8 +40,10 @@
 @import 'components/navigation';
 @import 'components/number-input';
 @import 'components/radio-button';
+@import 'components/switch';
 @import 'components/table';
 @import 'components/text-input';
+@import 'components/toast';
 @import 'components/tooltip';
 @import 'components/top-bar';
 

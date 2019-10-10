@@ -1,3 +1,5 @@
+/* stylelint-disable color-no-hex  */
+
 // Copyright 2018-Present Okta, Inc.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -90,6 +92,6 @@ $white: #ffffff;
 
 $box-shadow-default: 0 2px 0 rgba(175, 175, 175, 0.12);
 
-$text-body: cv('gray', '700');
+$text-body: cv('gray', '900');
 $text-heading: cv('gray', '900');
 $text-sub: cv('gray', '500');

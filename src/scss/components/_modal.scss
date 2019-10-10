@@ -29,35 +29,26 @@
   position: relative;
   max-width: calc(#{$max-line-length} + #{$base-spacing} + #{$base-spacing});
   max-height: calc(100vh - #{$big-spacing});
-  padding: ($base-spacing + $tiny-spacing)  $base-spacing 0;
+  padding: $base-spacing  $base-spacing 0;
   overflow-y: auto;
   border-radius: $base-border-radius;
   background-color: $white;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: $tiny-spacing;
-    background-color: cv('action', 'base');
-  }
 }
 
 .modal--header {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
 .modal--close {
-  width: $base-spacing;
-  height: $base-spacing;
+  align-self: flex-end;
+  width: ms(0);
+  height: ms(0);
+  margin-bottom: $tiny-spacing;
   padding: 0;
   border: 0;
   background-color: transparent;
-  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2219%22%20height%3D%2219%22%20fill%3D%22none%22%3E%0A%20%20%3Cpath%20stroke%3D%22%232F3F4A%22%20stroke-width%3D%221.5%22%20d%3D%22M1%2018L18%201M18%2018L1%201%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+  background-image: get-icon('close', cv('gray', '900'));
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -66,13 +57,13 @@
   margin-top: 0;
   margin-bottom: 0;
   color: $text-heading;
-  font-size: ms(2);
+  font-size: ms(1);
   font-weight: 600;
   line-height: $heading-line-height;
 }
 
 .modal--content {
-  padding: $base-spacing 0 $big-spacing;
+  padding: $tiny-spacing 0 $big-spacing;
   font-size: ms(0);
 }
 
@@ -80,14 +71,6 @@
   display: flex;
   justify-content: flex-end;
   padding-bottom: $base-spacing;
-}
-
-.is-modal-danger {
-  .modal--dialog {
-    &::before {
-      background-color: cv('danger', 'base');
-    }
-  }
 }
 
 // Animations
