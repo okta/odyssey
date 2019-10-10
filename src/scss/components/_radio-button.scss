@@ -19,8 +19,9 @@
 
   &:checked {
     + .radio--label {
-      &::after {
-        background-color: rgba(cv('action'), 1);
+      &::before {
+        border-color: cv('action', 'base');
+        background-color: cv('action', 'base');
       }
     }
   }
@@ -29,24 +30,27 @@
     + .radio--label {
       &::before {
         border-color: cv('action', 'base');
+        box-shadow: 0 0 0 2px fauxpacity(cv('action', 'base'));
       }
     }
   }
 
   &:disabled {
     + .radio--label {
-      opacity: $med-opaque;
-      pointer-events: none;
+      color: $text-sub;
+      cursor: not-allowed;
 
       &::before {
-        border-color: $base-border-color;
+        border-color: cv('gray', '200');
+        background-color: cv('gray', '000');
       }
     }
 
     &:checked {
       + .radio--label {
-        &::after {
-          background-color: cv('gray', '300');
+        &::before {
+          border-color: fauxpacity(cv('action', 'base'));
+          background-color: fauxpacity(cv('action', 'base'));
         }
       }
     }
@@ -57,18 +61,40 @@
       &::before {
         border-color: cv('danger');
       }
-
-      &:hover {
-        &::after {
-          background-color: rgba(cv('danger'), $med-opaque);
-        }
-      }
     }
 
     &:checked {
       + .radio--label {
-        &::after {
-          background-color: cv('danger');
+        &::before {
+          background-color: cv('danger', 'base');
+        }
+      }
+    }
+
+    &:focus {
+      + .radio--label {
+        &::before {
+          border-color: cv('danger', 'base');
+          box-shadow: 0 0 0 2px fauxpacity(cv('danger', 'base'));
+        }
+      }
+    }
+
+    &:disabled {
+      + .radio--label {
+        color: $text-sub;
+
+        &::before {
+          border-color: fauxpacity(cv('danger', 'base'));
+        }
+      }
+
+      &:checked {
+        + .radio--label {
+          &::before {
+            border-color: fauxpacity(cv('danger', 'base'));
+            background-color: fauxpacity(cv('danger', 'base'));
+          }
         }
       }
     }
@@ -78,6 +104,7 @@
 .radio--label {
   display: block;
   position: relative;
+  margin-bottom: $tiny-spacing;
   padding-left: 1em + $em-tiny-spacing;
   font-size: ms(0);
   font-weight: 400;
@@ -92,28 +119,35 @@
     left: 0;
     width: 1em;
     height: 1em;
-    transition-property: border-color, background;
+    transition-property: border-color, background, opacity, box-shadow;
     transition-duration: $base-duration;
     transition-timing-function: $base-timing;
-    border: 1px solid transparent;
-    border-radius: 50%;
+    border: 2px solid transparent;
+    border-radius: 1em;
   }
 
-  // Outer Circle
+  // Box
   &::before {
     transform: translateY(-50%);
     border-color: $base-border-color;
+    box-shadow: 0 0 0 0 fauxpacity(cv('action', 'base'));
   }
 
-  // Inner Circle
+  // Check
   &::after {
-    transform: translateY(-50%) scale(0.571);
-    background-color: rgba(cv('action'), 0);
+    transform: translateY(-50%) scale(0.4);
+    background-color: $white;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   &:hover {
     &::before {
       border-color: cv('action', 'base');
     }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }
