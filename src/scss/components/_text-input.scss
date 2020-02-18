@@ -18,7 +18,7 @@
   width: 100%;
   max-width: $max-line-length;
   margin: 0;
-  padding: $small-spacing;
+  padding: $em-tiny-spacing $em-small-spacing;
   transition-property: border-color, background-color, box-shadow;
   transition-duration: $base-duration;
   transition-timing-function: $base-timing;
@@ -29,7 +29,7 @@
   color: $text-body;
   font-family: $body-font-family;
   font-size: ms(0);
-  line-height: $heading-line-height;
+  line-height: $base-line-height;
 
   &:hover,
   &:focus {
@@ -74,4 +74,5 @@
   min-width: $base-spacing;
   max-width: $max-line-length;
   min-height: $base-spacing * 2;
+  padding: $em-tiny-spacing $em-small-spacing $em-small-spacing;
 }
