@@ -1,7 +1,9 @@
 language: node_js
 cache: yarn
 node_js:
-  - "10"
+  - "12.13"
 sudo: false
 before_script:
-  - yarn build
+  - yarn workspaces run build
+script:
+  - yarn workspaces run test
