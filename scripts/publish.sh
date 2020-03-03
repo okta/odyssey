@@ -17,6 +17,9 @@ else
   TARGET_BRANCH=${BRANCH}
 fi
 
+# TEMPORARY: Navigate directly into a single package until we use lerna publish
+cd ${OKTA_HOME}/${REPO}/packages/odyssey
+
 if ! ci-update-package --branch ${TARGET_BRANCH}; then
   echo "ci-update-package failed! Exiting..."
   exit $FAILED_SETUP
@@ -32,5 +35,7 @@ if ! artifactory_curl -X PUT -u ${ARTIFACTORY_CREDS} ${DATALOAD} -v -f; then
   echo "artifactory_curl failed! Exiting..."
   exit ${PUBLISH_ARTIFACTORY_FAILURE}
 fi
+
+popd
 
 exit ${SUCCESS}
