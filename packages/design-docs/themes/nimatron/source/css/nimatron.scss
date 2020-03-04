@@ -1,0 +1,259 @@
+// Import Nim
+// TODO: remove this relative path after moving to webpack
+@import '../../../../../odyssey/src/scss/nim';
+
+// Nimatron Specific Styles
+@import 'samples';
+@import 'prism-ext';
+
+.is-not-provisional {
+  display: none;
+}
+
+.nimatron {
+  display: block;
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom, cv('action', 'dark') (-$huge-spacing * 2), cv('cyan', 'dark') 75vh);
+  background-repeat: no-repeat;
+
+  @media only screen and (min-width: 75ch) {
+    display: grid;
+    grid-template-columns: minmax(auto, max-content) minmax(auto, auto);
+  }
+}
+
+.nimatron--header {
+  padding: $base-spacing $big-spacing;
+  color: $white;
+}
+
+.nimatron--header-title {
+  font-size: 0;
+}
+
+.nimatron--header-logo {
+  height: $base-spacing;
+  fill: $white;
+}
+
+.nimatron--nav {
+  display: grid;
+  grid-template-columns: minmax(auto, auto) minmax(auto, auto);
+  column-gap: $base-spacing;
+  text-transform: capitalize;
+
+  @media only screen and (min-width: 75ch) {
+    display: block;
+  }
+}
+
+.nimatron--nav-section {
+  margin: 0 0 $base-spacing;
+}
+
+.nimatron--nav-heading {
+  margin: 0 0 $small-spacing;
+  color: $white;
+  font-size: ms(0);
+  font-weight: 600;
+}
+
+.nimatron--nav-list {
+  margin: 0 0 $base-spacing;
+  list-style-type: none;
+  font-size: ms(-1);
+  font-weight: 300;
+
+  a {
+    position: relative;
+    color: $white;
+    text-decoration: none;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      transition: border-bottom-color $base-duration $base-timing;
+      border-bottom: 1px solid;
+      border-bottom-color: rgba($white, $less-opaque);
+    }
+
+    &:hover {
+      &::before {
+        border-bottom-color: rgba($white, $more-opaque);
+      }
+    }
+  }
+}
+
+.nimatron--nav-item {
+  margin-bottom: $tiny-spacing;
+}
+
+.nimatron--main {
+  display: block;
+  background-color: $white;
+
+  @media only screen and (min-width: 75ch) {
+    display: grid;
+    grid-template-columns: minmax(auto, ($max-line-length * 2)) minmax(auto, auto);
+    min-width: 0;
+    box-shadow: 0 2px ms(0) rgba(0, 0, 0, 0.2);
+  }
+
+  h2 {
+    position: relative;
+    padding-top: $base-spacing;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -$big-spacing;
+      width: calc(100% + #{$big-spacing} + #{$big-spacing});
+      border-top: 1px solid cv('gray', '100');
+    }
+  }
+}
+
+.nimatron--article {
+  min-width: 0;
+  padding: $base-spacing $big-spacing;
+}
+
+.nimatron--toc {
+  display: none;
+  position: relative;
+  font-size: ms(-1);
+
+  @media only screen and (min-width: 125ch) {
+    display: block;
+    border-left: 1px solid cv('gray', '100');
+  }
+}
+
+.nimatron--toc-space-holder,
+.nimatron--toc-fixed {
+  padding: $base-spacing;
+}
+
+.nimatron--toc-space-holder {
+  color: transparent;
+  pointer-events: none;
+}
+
+.nimatron--toc-fixed {
+  position: fixed;
+}
+
+.nimatron--toc-title {
+  margin-bottom: $small-spacing;
+  font-size: ms(0);
+  font-weight: 600;
+}
+
+.nimatron--toc-list-item {
+  margin-bottom: 0;
+}
+
+.nimatron--toc-list-level-2 {
+  margin-bottom: $tiny-spacing;
+}
+
+.nimatron--toc-list-level-3 {
+  .nimatron--toc-list-child {
+    display: none;
+  }
+}
+.nimatron--toc-list-link {
+  position: relative;
+  color: $text-sub;
+  text-decoration: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transition: border-bottom-color $base-duration $base-timing;
+    border-bottom: 1px solid;
+    border-bottom-color: transparent;
+  }
+
+  &:hover {
+    &::before {
+      border-bottom-color: cv('action', 'base');
+    }
+  }
+
+  &[href='#undefined'] {
+    display: none;
+  }
+
+  .nimatron--toc-space-holder & {
+    color: transparent;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .nimatron--toc-list-level-2 > & {
+    color: $text-body;
+    font-weight: 600;
+
+    .nimatron--toc-space-holder & {
+      color: transparent;
+    }
+  }
+}
+
+.nimatron--example {
+  max-width: 100%;
+  margin-bottom: $base-spacing;
+}
+
+.nimatron--rendered {
+  padding: $base-spacing;
+  border: 1px dashed cv('gray', '200');
+  border-radius: $base-border-radius;
+
+  &:not(:only-child) {
+    border-bottom: 0;
+  }
+
+  &.is-example-disallowed {
+    position: relative;
+    border-color: cv('danger', 'base');
+
+    &::after {
+      content: "This is a Don't.";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 0 $small-spacing $small-spacing 0;
+      font-size: ms(-1);
+      font-weight: 600;
+      color: cv('danger', 'dark');
+    }
+  }
+}
+
+.nimatron--figure {
+  margin-bottom: $base-spacing;
+}
+
+svg {
+  max-width: 100%;
+}
+
+// Hexo Render Hack
+
+h1 {
+  &:empty {
+    margin: 0;
+  }
+}
