@@ -6,22 +6,26 @@ Hello and welcome! These are the early days of Okta's design system, and things 
 
 ### Grab All the Things
 
-These docs are maintained in the `design-docs` package, which exists to document `@okta/nim`.
+These docs are maintained in the `design-docs` package, which exists to document `@okta/odyssey`.
 
-1. You'll need the `okta-ui` repo.
+1. You'll need the `odyssey` repo.
+
     ```bash
-    [okta]$ git clone git@github.com:okta/okta-ui.git
+    [okta]$ git clone git@github.com:okta/odyssey.git
     ```
-2. Make sure you are on the right node version - node 8.1.1.
+
+2. Make sure you are on a supported node version: `>=12.13.0`.
 
 3. Change directory to the `design-docs` package.
+
     ```bash
-    [okta]$ cd okta-ui/packages/design-docs
+    [okta]$ cd odyssey/packages/design-docs
     ```
 
 4. Run a [yarn install](https://yarnpkg.com/en/docs/cli/install)
+
     ```bash
-    [okta/okta-ui/packages/design-docs]$ yarn install
+    [okta/odyssey/packages/design-docs]$ yarn install
     ```
 
 You may need to [install yarn](https://yarnpkg.com/en/docs/install) if it's not available.
@@ -29,39 +33,44 @@ You may need to [install yarn](https://yarnpkg.com/en/docs/install) if it's not 
 ### Serving the Docs
 
 1. Start up Hexo:
+
     ```bash
-     [okta/okta-ui/packages/design-docs]$ yarn start
+     [okta/odyssey/packages/design-docs]$ yarn start
     ```
 
     This will generate a fresh set of docs and then start a webserver to view them.
 
-2. Go to <http://localhost:400/>
+2. Go to <http://localhost:4000/>
 
 ### Odyssey Development
 
-In order to see your changes to the `@okta/nim` package reflected here during development, you'll need to link that package locally.
+In order to see your changes to the `@okta/odyssey` package reflected here during development, you'll need to link that package locally.
 
-1. Change directory to the `@okta/nim` package.
+1. Change directory to the `@okta/odyssey` package.
+
     ```bash
-    [okta/okta-ui]$ cd packages/nim
+    [okta/odyssey]$ cd packages/odyssey
     ```
 
 2. Create a yarn link.
+
     ```bash
-    [okta/okta-ui/packages/nim]$ yarn link
+    [okta/odyssey/packages/odyssey]$ yarn link
     ```
 
 3. Change directory to the `design-docs` package.
+
     ```bash
-    [okta/okta-ui/packages/nim]$ cd ../design-docs
+    [okta/odyssey/packages/odyssey]$ cd ../design-docs
     ```
 
 4. Tell `yarn` to utilize the linked package instead of the published one.
+
     ```bash
-    [okta/okta-ui/packages/design-docs]$ yarn link @okta/nim
+    [okta/odyssey/packages/design-docs]$ yarn link @okta/odyssey
     ```
 
-Now any changes you make in your local version of `@okta/nim` should be reflected in your local server.
+Now any changes you make in your local version of `@okta/odyssey` should be reflected in your local server.
 
 ## Questions?
 

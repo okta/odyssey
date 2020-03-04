@@ -1,45 +1,77 @@
-Welcome to our design system docs!
+# Odyssey - the Okta design system
 
-Our [design system](https://oktawiki.atlassian.net/wiki/spaces/UX/pages/286458744/Design+System+Project) will provide and document the styles and components we use throughout Okta. Our first step is a visual inventory of Courage components.
+Hello and welcome! These are the early days of Okta's design system, and things will be in flux for a while. Feel free to poke around, test things out, and explore our guidelines.
 
-`/design-docs/` is built separately from the rest of Courage, and will eventually be moved to a separate repo.
+## Contributing
 
-# Getting Started
+### Grab All the Things
 
-1. Clone this repo
+These docs are maintained in the `design-docs` package, which exists to document `@okta/odyssey`.
+
+1. You'll need the `odyssey` repo.
+
     ```bash
-    [okta]$ git clone git@github.com:okta/courage.git
+    [okta]$ git clone git@github.com:okta/odyssey.git
     ```
-2. Make sure you are on the right node version - node 8.1.1.
 
-3. `cd` into this directory
+2. Make sure you are on a supported node version: `>=12.13.0`.
+
+3. Change directory to the `design-docs` package.
+
     ```bash
-    [okta]$ cd courage/packages/design-docs
+    [okta]$ cd odyssey/packages/design-docs
     ```
 
 4. Run a [yarn install](https://yarnpkg.com/en/docs/cli/install)
-    ```bash
-    [okta/courage/packages/design-docs]$ yarn install
-    ```
-_[install yarn](https://yarnpkg.com/en/docs/install) if it's not available in your system yet_
 
-## Serving the Docs
+    ```bash
+    [okta/odyssey/packages/design-docs]$ yarn install
+    ```
+
+You may need to [install yarn](https://yarnpkg.com/en/docs/install) if it's not available.
+
+### Serving the Docs
 
 1. Start up Hexo:
+
     ```bash
-     [okta/courage/packages/design-docs]$ yarn start
+     [okta/odyssey/packages/design-docs]$ yarn start
     ```
 
     This will generate a fresh set of docs and then start a webserver to view them.
 
 2. Go to <http://localhost:4000/>
 
-# Development
+### Odyssey Development
 
-Markdown content is intended to be portable and long-living.
+In order to see your changes to the `@okta/odyssey` package reflected here during development, you'll need to link that package locally.
 
-Build tools will be replaced and documented as we progress.
+1. Change directory to the `@okta/odyssey` package.
 
-# Questions?
+    ```bash
+    [okta/odyssey]$ cd packages/odyssey
+    ```
 
-Ask [@edburyenegren-okta](https://github.com/edburyenegren-okta).
+2. Create a yarn link.
+
+    ```bash
+    [okta/odyssey/packages/odyssey]$ yarn link
+    ```
+
+3. Change directory to the `design-docs` package.
+
+    ```bash
+    [okta/odyssey/packages/odyssey]$ cd ../design-docs
+    ```
+
+4. Tell `yarn` to utilize the linked package instead of the published one.
+
+    ```bash
+    [okta/odyssey/packages/design-docs]$ yarn link @okta/odyssey
+    ```
+
+Now any changes you make in your local version of `@okta/odyssey` should be reflected in your local server.
+
+## Questions?
+
+Stop by [#design_system](https://okta.slack.com/messages/C7T2H3KNJ) and say hello (Oktanauts-only for now).
