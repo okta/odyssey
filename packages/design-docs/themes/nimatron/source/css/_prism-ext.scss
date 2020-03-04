@@ -1,0 +1,129 @@
+/* stylelint-disable selector-no-qualifying-type */
+
+code:not([class]) {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  color: cv('magenta', 'base');
+  font-size: ms(-1);
+}
+
+code[class*='language-'],
+pre[class*='language-'] {
+  background: none;
+  color: $text-body;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  line-height: $base-line-height;
+  text-align: left;
+  word-wrap: normal;
+  word-break: normal;
+  white-space: pre;
+  word-spacing: normal;
+  hyphens: none;
+  tab-size: 2;
+}
+
+@media print {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    text-shadow: none;
+  }
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  max-height: $max-line-length;
+  margin: 0 0 $base-spacing;
+  padding: $base-spacing;
+  overflow: auto;
+  border: 1px dashed cv('gray', '200');
+  border-radius: 0 0 $base-border-radius $base-border-radius;
+  background-color: $white;
+  font-size: ms(-1);
+
+  .nimatron--example & {
+    margin: 0;
+  }
+}
+
+:not(pre) > code[class*='language-'] {
+  background: $white;
+}
+
+/* Inline code */
+:not(pre) > code[class*='language-'] {
+  padding: $tiny-spacing;
+  border-radius: $base-border-radius;
+  white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: $text-sub;
+}
+
+.token.punctuation {
+  color: $text-heading;
+}
+
+.namespace {
+  opacity: $more-opaque;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: cv('violet', 'base');
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: cv('cyan', 'base');
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  background: hsla(0, 0%, 100%, $less-opaque);
+  color: cv('warning', 'dark');
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: cv('action', 'base');
+}
+
+.token.function,
+.token.class-name {
+  color: cv('danger', 'base');
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: cv('warning', 'base');
+}
+
+.token.important,
+.token.bold {
+  font-weight: 600;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
