@@ -14,10 +14,11 @@
     "micromodal": "cp ../../node_modules/micromodal/dist/micromodal.min.js themes/nimatron/source/js/vendor/micromodal.min.js",
     "selectize": "cp ../../node_modules/selectize/dist/js/standalone/selectize.min.js themes/nimatron/source/js/vendor/selectize.min.js",
     "prism": "cp ../../node_modules/prismjs/prism.js themes/nimatron/source/js/vendor/prism.js && cp ../../node_modules/prismjs/components/prism-scss.js themes/nimatron/source/js/vendor/prism-scss.js",
-    "start": "yarn build && hexo s"
+    "start": "yarn build && hexo s",
+    "test": "echo \"Tests have not been implemented for ${npm_package_name}\" && exit 0"
   },
   "devDependencies": {
-    "@okta/nim": "*",
+    "@okta/odyssey": "*",
     "hexo": "^3.2.0",
     "hexo-generator-archive": "^0.1.4",
     "hexo-generator-category": "^0.1.3",
