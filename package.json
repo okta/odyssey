@@ -1,8 +1,14 @@
 {
-    "private": true,
-    "workspaces": ["packages/*"],
-    "engines": {
-      "yarn": "^1.15.2",
-      "node": ">=12.13"
-    }
+  "name": "odyssey",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "yarn": "^1.15.2",
+    "node": ">=12.13"
+  },
+  "devDependencies": {
+    "lerna": "3.3.2"
+  }
 }
