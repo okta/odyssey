@@ -4,6 +4,6 @@ node_js:
   - "12.13"
 sudo: false
 before_script:
-  - yarn workspaces run build
+  - lerna run build
 script:
-  - yarn workspaces run test
+  - lerna run test
