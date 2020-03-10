@@ -1,0 +1,5 @@
+node_sass:
+  outputStyle: nested
+  precision: 5
+  sourceComments: false
+
