@@ -1,0 +1,12 @@
+#
+# Description:
+#  Code ownership file for the okta/odyssey GitHub repository for mapping resources to teams.
+#  See [CODEOWNERS] for details.
+#
+# Notes:
+#  Users must have write access to the repo in order for this mechanism to work correctly.
+#
+# Resources
+#  - [CODEOWNERS] https://help.github.com/articles/about-codeowners
+
+*       @okta/design-system
