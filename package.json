@@ -4,6 +4,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "docs": "yarn --cwd packages/docs start"
+  },
   "engines": {
     "yarn": "^1.15.2",
     "node": ">=12.13"
