@@ -6,7 +6,7 @@ Hello and welcome! These are the early days of Okta's design system, and things 
 
 ### Grab All the Things
 
-These docs are maintained in the `design-docs` package, which exists to document `@okta/odyssey`.
+These docs are maintained in the `docs` package, which exists to document `@okta/odyssey`.
 
 1. You'll need the `odyssey` repo.
 
@@ -16,16 +16,16 @@ These docs are maintained in the `design-docs` package, which exists to document
 
 2. Make sure you are on a supported node version: `>=12.13.0`.
 
-3. Change directory to the `design-docs` package.
+3. Change directory to the `docs` package.
 
     ```bash
-    [okta]$ cd odyssey/packages/design-docs
+    [okta]$ cd odyssey/packages/docs
     ```
 
 4. Run a [yarn install](https://yarnpkg.com/en/docs/cli/install)
 
     ```bash
-    [okta/odyssey/packages/design-docs]$ yarn install
+    [okta/odyssey/packages/docs]$ yarn install
     ```
 
 You may need to [install yarn](https://yarnpkg.com/en/docs/install) if it's not available.
@@ -35,7 +35,7 @@ You may need to [install yarn](https://yarnpkg.com/en/docs/install) if it's not 
 1. Start up Hexo:
 
     ```bash
-     [okta/odyssey/packages/design-docs]$ yarn start
+     [okta/odyssey/packages/docs]$ yarn start
     ```
 
     This will generate a fresh set of docs and then start a webserver to view them.
@@ -58,16 +58,16 @@ In order to see your changes to the `@okta/odyssey` package reflected here durin
     [okta/odyssey/packages/odyssey]$ yarn link
     ```
 
-3. Change directory to the `design-docs` package.
+3. Change directory to the `docs` package.
 
     ```bash
-    [okta/odyssey/packages/odyssey]$ cd ../design-docs
+    [okta/odyssey/packages/odyssey]$ cd ../docs
     ```
 
 4. Tell `yarn` to utilize the linked package instead of the published one.
 
     ```bash
-    [okta/odyssey/packages/design-docs]$ yarn link @okta/odyssey
+    [okta/odyssey/packages/docs]$ yarn link @okta/odyssey
     ```
 
 Now any changes you make in your local version of `@okta/odyssey` should be reflected in your local server.
