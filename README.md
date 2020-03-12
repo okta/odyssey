@@ -1,53 +1,62 @@
-# @okta/odyssey
+[![Travis CI Status](http://img.shields.io/travis/okta/odyssey.svg?label=travis)](https://travis-ci.org/okta/odyssey/master)
 
-This package provides the necessary SCSS and fonts to utilize Odyssey, Okta's design system.
+# Odyssey
 
-For guidance on how and when to implement individual components, please see our <a href="https://design-docs.trexcloud.com/">online docs</a>.
+Odyssey is Okta’s official design system that consists of reusable components to design and build products, websites, and features.
 
-## What's Included
+**Table of Contents**
 
-`dist/odyssey.css` - A precompiled version of Odyssey for those who don't need the benefits of Sass.
+<!-- TOC depthFrom:2 -->
 
-`src/scss` - The SCSS source files for Odyssey, ready to be `@import`'d into your project.
+- [Getting Started](#getting-started)
+    - [Running the Design System Docs](#running-the-design-system-docs)
+- [Packages](#packages)
+    - [Monorepo](#monorepo)
+    - [Versioning](#versioning)
 
-`src/scss/odyssey.scss` - The main compilation sheet for Odyssey.
+<!-- /TOC -->
 
 ## Getting Started
 
-### Install Odyssey
+We use [Yarn](https://github.com/yarnpkg/yarn) as our node package manager client. To install Yarn, check out their [installation instructions](https://yarnpkg.com/getting-started/install).
 
-Using yarn:
+```bash
+# Clone this repo and navigate into it
 
-`$ yarn add @okta/odyssey`
+git clone git@github.com:okta/odyssey.git
+cd odyssey
 
-If you prefer npm, use the following command instead:
-
-`$ npm install --save @okta/odyssey`
-
-### SCSS
-
-Usage of the Odyssey Sass files assumes the use of a SCSS pre-processor. All Sass files use the `*.scss` file extension and syntax.
-
-#### Autoprefixer
-
-Make sure your asset pipeline utilizes <a href="https://github.com/postcss/autoprefixer">autoprefixer</a> to ensure vendor prefixes are automatically added to your compiled CSS.
-
-#### Importing SCSS files
-
-To add a Odyssey to your build, import the compilation sheet directly.
-
-```scss
-@import 'node_modules/odyssey/src/scss/odyssey';
+# Install all package dependencies
+yarn install
 ```
 
-This will import all functions, mixins, abstracts, components, and layouts into your build.
+### Running the Design System Docs
 
-If you are looking for a more limited selection, you can also import select components, etc individually.
+Want to see Odyssey in action? Our `docs` package contains a static website styled using Odyssey. Simply run the following command to launch it:
 
-## Contributing
+```bash
+# Generates the design docs website
+yarn docs
+```
 
-### Linting
+Once the website is built, visit <http://localhost:4000/> in your browser.
 
-Odyssey utilizes <a href="https://stylelint.io/">stylelint</a> for our live linting as well as our lint tests.
+## Packages
 
-You can check the current syntax rule configuration in `stylelint.json`.
+### Monorepo
+
+This repository is managed as a **monorepo** using [Yarn Workspaces](https://yarnpkg.com/blog/2017/08/02/introducing-workspaces/) for dev dependencies and [Lerna](https://lernajs.io/) for everything else. You can think of each package as a separate npm module - each with their own dependencies, package name, and versioned using [Semantic Versioning](https://semver.org/).
+
+Packages are parsed from the `workspaces` property in [package.json](package.json), and adhere to this structure:
+
+```bash
+packages/
+  docs/
+  odyssey/
+```
+
+### Versioning
+
+| Package | Status | Description |
+| -------- | ----- | ------ |
+| [odyssey](/packages/odyssey) | [![npm version](https://img.shields.io/npm/v/@okta/odyssey.svg?style=flat-square)](https://www.npmjs.com/package/@okta/odyssey) | All necessary SCSS and fonts to utilize Odyssey, Okta's design system. |
