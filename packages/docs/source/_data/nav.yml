@@ -1,13 +1,16 @@
 #guidelines:
   #'data viz': '/guidelines/data-viz.html'
 
-building-blocks:
+'getting started':
+  'UI status': '/getting-started/status.html'
+
+'building blocks':
   'color': '/building-blocks/color.html'
   #'iconography': '/building-blocks/iconography.html'
   'spacing': '/building-blocks/spacing.html'
   'type': '/building-blocks/type.html'
 
-components:
+'components':
   # Needs Docs  'banner': '/components/banner.html'
   'button': '/components/button.html'
   #'callout': '/components/callout.html'
