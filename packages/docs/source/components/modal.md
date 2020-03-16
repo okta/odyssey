@@ -40,27 +40,27 @@ Here are a few smells for when a modal dialog may be inappropriate:
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <button class="button" data-micromodal-trigger="modal-standard">Let me see it already!</button>
+    <button class="ods-button" data-micromodal-trigger="ods-modal-standard">Let me see it already!</button>
   </div>
 
   ```html
-  <div class="modal" id="modal-standard" aria-hidden="true">
-    <div class="modal--overlay" tabindex="-1" data-micromodal-close>
-      <div class="modal--dialog" role="dialog" aria-modal="true" aria-labelledby="modal-standard-title">
-        <header class="modal--header">
-          <button class="modal--close" aria-label="Close modal" data-micromodal-close></button>
-          <h1 class="modal--title" id="modal-standard-title">
+  <div class="ods-modal" id="ods-modal-standard" aria-hidden="true">
+    <div class="ods-modal--overlay" tabindex="-1" data-micromodal-close>
+      <div class="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title">
+        <header class="ods-modal--header">
+          <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
+          <h1 class="ods-modal--title" id="ods-modal-standard-title">
             This is a Modal
           </h1>
         </header>
-        <main class="modal--content" id="modal-standard-content">
+        <main class="ods-modal--content" id="ods-modal-standard-content">
           <p>
             Try hitting the <kbd>tab</kbd> key and notice how the focus stays within the modal itself. Also, <kbd>esc</kbd> to close modal.
           </p>
         </main>
-        <footer class="modal--footer">
-          <button class="button is-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
-          <button class="button">Continue</button>
+        <footer class="ods-modal--footer">
+          <button class="ods-button is-ods-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
+          <button class="ods-button">Continue</button>
         </footer>
       </div>
     </div>
@@ -87,7 +87,7 @@ The modal components makes use of several ARIA attributes in order to give assis
     <code>aria-modal="true"</code> - This indicates that the rest of the workflow is stopped while this element is present.
   </li>
   <li>
-    <code>aria-labelledby="modal--title-id"</code> - This attribute informs ATs which other element can be treated as the label for this dialog. Please use the unique <code>id</code> associated with the dialog's title.
+    <code>aria-labelledby="ods-modal--title-id"</code> - This attribute informs ATs which other element can be treated as the label for this dialog. Please use the unique <code>id</code> associated with the dialog's title.
   </li>
   <li>
     <code>aria-label="Close"</code> - Please use this tag on any <code>button</code> that allows the user to exit the dialog. By default, this is included on the modal's exit "X".
@@ -133,7 +133,7 @@ While our current usage of modals doesn't conform to the recommended guidelines 
   </li>
 </ul>
 
-<button class="button is-button-secondary" data-micromodal-trigger="modal-form">Form Modal</button>
+<button class="ods-button is-ods-button-secondary" data-micromodal-trigger="ods-modal-form">Form Modal</button>
 
 ## Further Reading
 

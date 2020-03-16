@@ -4,19 +4,19 @@
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="number-input" type="number" name="number-default" id="number-default" autocomplete="off" spellcheck="false" required>
-        <label class="label" for="number-default">Instances</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-number-input" type="number" name="number-default" id="number-default" autocomplete="off" spellcheck="false" required>
+        <label class="ods-label" for="number-default">Instances</label>
       </div>
     </fieldset>
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="number-input" type="number" name="number-default" id="number-default" autocomplete="off" spellcheck="false" required>
-      <label class="label" for="number-default">Instances</label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-number-input" type="number" name="number-default" id="number-default" autocomplete="off" spellcheck="false" required>
+      <label class="ods-label" for="number-default">Instances</label>
     </div>
   </fieldset>
   ```
@@ -34,31 +34,31 @@ Since controls in this state are not intended for interaction, we remove the spi
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="number-input" type="number" name="number-readonly" id="number-readonly" autocomplete="off" spellcheck="false" required readonly>
-        <label class="label" for="number-readonly">Instances</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-number-input" type="number" name="number-readonly" id="number-readonly" autocomplete="off" spellcheck="false" required readonly>
+        <label class="ods-label" for="number-readonly">Instances</label>
       </div>
     </fieldset>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="number-input" type="number" name="number-filled-readonly" id="number-filled-readonly" autocomplete="off" spellcheck="false" value="7" required readonly>
-        <label class="label" for="number-filled-readonly">Instances</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-number-input" type="number" name="number-filled-readonly" id="number-filled-readonly" autocomplete="off" spellcheck="false" value="7" required readonly>
+        <label class="ods-label" for="number-filled-readonly">Instances</label>
       </div>
     </fieldset>
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="number-input" type="number" name="number-readonly" id="number-readonly" autocomplete="off" spellcheck="false" required readonly>
-      <label class="label" for="number-readonly">Instances</label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-number-input" type="number" name="number-readonly" id="number-readonly" autocomplete="off" spellcheck="false" required readonly>
+      <label class="ods-label" for="number-readonly">Instances</label>
     </div>
   </fieldset>
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="number-input" type="number" name="number-filled-readonly" id="number-filled-readonly" autocomplete="off" spellcheck="false" value="7" required readonly>
-      <label class="label" for="number-filled-readonly">Instances</label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-number-input" type="number" name="number-filled-readonly" id="number-filled-readonly" autocomplete="off" spellcheck="false" value="7" required readonly>
+      <label class="ods-label" for="number-filled-readonly">Instances</label>
     </div>
   </fieldset>
   ```

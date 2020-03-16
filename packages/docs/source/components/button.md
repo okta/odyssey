@@ -12,15 +12,15 @@ Primary buttons, our default, are used for the principal action in a view. For e
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <button class="button">Primary</button>
-    <button class="button is-button-hover">Hover</button>
-    <button class="button is-button-focus">Focus</button>
-    <button class="button" disabled>Disabled</button>
+    <button class="ods-button">Primary</button>
+    <button class="ods-button is-ods-button-hover">Hover</button>
+    <button class="ods-button is-ods-button-focus">Focus</button>
+    <button class="ods-button" disabled>Disabled</button>
   </div>
 
   ```html
-  <button class="button">Primary</button>
-  <button class="button" disabled>Primary</button>
+  <button class="ods-button">Primary</button>
+  <button class="ods-button" disabled>Primary</button>
   ```
 </figure>
 
@@ -30,15 +30,15 @@ Secondary buttons indicate other safe actions a user might take.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <button class="button is-button-secondary">Secondary</button>
-    <button class="button is-button-secondary is-button-hover">Hover</button>
-    <button class="button is-button-secondary is-button-focus">Focus</button>
-    <button class="button is-button-secondary" disabled>Disabled</button>
+    <button class="ods-button is-ods-button-secondary">Secondary</button>
+    <button class="ods-button is-ods-button-secondary is-ods-button-hover">Hover</button>
+    <button class="ods-button is-ods-button-secondary is-ods-button-focus">Focus</button>
+    <button class="ods-button is-ods-button-secondary" disabled>Disabled</button>
   </div>
 
   ```html
-  <button class="button is-button-secondary">Secondary</button>
-  <button class="button is-button-secondary" disabled>Secondary</button>
+  <button class="ods-button is-ods-button-secondary">Secondary</button>
+  <button class="ods-button is-ods-button-secondary" disabled>Secondary</button>
   ```
 </figure>
 
@@ -48,15 +48,15 @@ These buttons indicate actions that, while the primary focus of a view, are dang
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <button class="button is-button-danger">Danger</button>
-    <button class="button is-button-danger is-button-hover">Hover</button>
-    <button class="button is-button-danger is-button-focus">Focus</button>
-    <button class="button is-button-danger" disabled>Disabled</button>
+    <button class="ods-button is-ods-button-danger">Danger</button>
+    <button class="ods-button is-ods-button-danger is-ods-button-hover">Hover</button>
+    <button class="ods-button is-ods-button-danger is-ods-button-focus">Focus</button>
+    <button class="ods-button is-ods-button-danger" disabled>Disabled</button>
   </div>
 
   ```html
-  <button class="button is-button-danger">Danger</button>
-  <button class="button is-button-danger" disabled>Danger</button>
+  <button class="ods-button is-ods-button-danger">Danger</button>
+  <button class="ods-button is-ods-button-danger" disabled>Danger</button>
   ```
 </figure>
 
@@ -68,15 +68,15 @@ Lastly, they only exist at the Large size.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered is-rendered-success">
-    <button class="button is-button-overlay">Overlay</button>
-    <button class="button is-button-overlay is-button-hover">Hover</button>
-    <button class="button is-button-overlay is-button-focus">Focus</button>
-    <button class="button is-button-overlay" disabled>Disabled</button>
+    <button class="ods-button is-ods-button-overlay">Overlay</button>
+    <button class="ods-button is-ods-button-overlay is-ods-button-hover">Hover</button>
+    <button class="ods-button is-ods-button-overlay is-ods-button-focus">Focus</button>
+    <button class="ods-button is-ods-button-overlay" disabled>Disabled</button>
   </div>
 
   ```html
-  <button class="button is-button-overlay">Overlay</button>
-  <button class="button is-button-overlay" disabled>Overlay</button>
+  <button class="ods-button is-ods-button-overlay">Overlay</button>
+  <button class="ods-button is-ods-button-overlay" disabled>Overlay</button>
   ```
 </figure>
 
@@ -88,15 +88,15 @@ They also pair well with Primary and Secondary buttons.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <button class="button is-button-clear">Clear</button>
-    <button class="button is-button-clear is-button-hover">Hover</button>
-    <button class="button is-button-clear is-button-focus">Focus</button>
-    <button class="button is-button-clear" disabled>Disabled</button>
+    <button class="ods-button is-ods-button-clear">Clear</button>
+    <button class="ods-button is-ods-button-clear is-ods-button-hover">Hover</button>
+    <button class="ods-button is-ods-button-clear is-ods-button-focus">Focus</button>
+    <button class="ods-button is-ods-button-clear" disabled>Disabled</button>
   </div>
 
   ```html
-  <button class="button is-button-clear">Clear</button>
-  <button class="button is-button-clear" disabled>Clear</button>
+  <button class="ods-button is-ods-button-clear">Clear</button>
+  <button class="ods-button is-ods-button-clear" disabled>Clear</button>
   ```
 </figure>
 
@@ -108,13 +108,13 @@ Some Odyssey components may automatically resize buttons to better suit their co
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <button class="button">Large</button>
-    <button class="button is-button-small">Small</button>
+    <button class="ods-button">Large</button>
+    <button class="ods-button is-ods-button-small">Small</button>
   </div>
 
   ```html
-  <button class="button">Large</button>
-  <button class="button is-button-small">Small</button>
+  <button class="ods-button">Large</button>
+  <button class="ods-button is-ods-button-small">Small</button>
   ```
 </figure>
 
@@ -141,8 +141,8 @@ Styles related to buttons can be found in `/components/_button.scss`.
 
 Semantic states can be combined to produce Secondary Danger styles.
 
-<figure class="table--figure">
-  <table class="table">
+<figure class="ods-table--figure">
+  <table class="ods-table">
     <thead>
       <tr>
         <th scope="column">
@@ -156,7 +156,7 @@ Semantic states can be combined to produce Secondary Danger styles.
     <tbody>
       <tr>
         <td>
-          <code>.button</code>
+          <code>.ods-button</code>
         </td>
         <td>
           Applies primary & general button styles
@@ -164,7 +164,7 @@ Semantic states can be combined to produce Secondary Danger styles.
       </tr>
       <tr>
         <td>
-          <code>.is-button-secondary</code>
+          <code>.is-ods-button-secondary</code>
         </td>
         <td>
           Applies Secondary button styles
@@ -172,7 +172,7 @@ Semantic states can be combined to produce Secondary Danger styles.
       </tr>
       <tr>
         <td>
-          <code>.is-button-danger</code>
+          <code>.is-ods-button-danger</code>
         </td>
         <td>
           Applies Danger button styles

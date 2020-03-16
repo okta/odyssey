@@ -1,8 +1,8 @@
 # Switch
 > A switch is any control which presents two mutually exclusive options or states. - <cite><a href='https://developer.mozilla.org/en-US/docs/Archive/B2G_OS/Firefox_OS_apps/Building_blocks/1.x/Switch'>MDN</a></cite>
 
-<figure class="table--figure">
-  <table class="table">
+<figure class="ods-table--figure">
+  <table class="ods-table">
     <thead>
       <tr>
         <th scope="column">Use</th>
@@ -33,21 +33,21 @@
 ### Enabled
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <figure class="switch--figure">
-      <span class="switch--label" id="switch-oktaverify">Okta Verify</span>
-      <button type="button" role="switch" aria-checked="true" class="switch" aria-labelledby="switch-oktaverify">
-        <span class="switch--dial"></span>
-        <span class="switch--dial"></span>
+    <figure class="ods-switch--figure">
+      <span class="ods-switch--label" id="switch-oktaverify">Okta Verify</span>
+      <button type="button" role="switch" aria-checked="true" class="ods-switch" aria-labelledby="switch-oktaverify">
+        <span class="ods-switch--dial"></span>
+        <span class="ods-switch--dial"></span>
       </button>
     </figure>
   </div>
 
   ```html
-  <figure class="switch--figure">
-    <span class="switch--label" id="switch-oktaverify">Okta Verify</span>
-    <button type="button" role="switch" aria-checked="true" class="switch" aria-labelledby="switch-oktaverify">
-      <span class="switch--dial"></span>
-      <span class="switch--dial"></span>
+  <figure class="ods-switch--figure">
+    <span class="ods-switch--label" id="switch-oktaverify">Okta Verify</span>
+    <button type="button" role="switch" aria-checked="true" class="ods-switch" aria-labelledby="switch-oktaverify">
+      <span class="ods-switch--dial"></span>
+      <span class="ods-switch--dial"></span>
     </button>
   </figure>
   ```
@@ -57,21 +57,21 @@
 When a switch is disabled, make sure there is context in the page explaining why it's disabled. If there is no content in the page, use a <a href="../components/tooltip.html">tootltip</a> to give more context.
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-  <figure class="switch--figure">
-    <span class="switch--label" id="switch-disabled-example">Disabled example</span>
-    <button type="button" role="switch" aria-checked="false" class="switch" aria-labelledby="switch-disabled-example" disabled>
-      <span class="switch--dial"></span>
-      <span class="switch--dial"></span>
+  <figure class="ods-switch--figure">
+    <span class="ods-switch--label" id="switch-disabled-example">Disabled example</span>
+    <button type="button" role="switch" aria-checked="false" class="ods-switch" aria-labelledby="switch-disabled-example" disabled>
+      <span class="ods-switch--dial"></span>
+      <span class="ods-switch--dial"></span>
     </button>
   </figure>
   </div>
 
   ```html
-  <figure class="switch--figure">
-    <span class="switch--label" id="switch-disabled-example">Disabled example</span>
-    <button type="button" role="switch" aria-checked="false" class="switch" aria-labelledby="switch-disabled-example" disabled>
-      <span class="switch--dial"></span>
-      <span class="switch--dial"></span>
+  <figure class="ods-switch--figure">
+    <span class="ods-switch--label" id="switch-disabled-example">Disabled example</span>
+    <button type="button" role="switch" aria-checked="false" class="ods-switch" aria-labelledby="switch-disabled-example" disabled>
+      <span class="ods-switch--dial"></span>
+      <span class="ods-switch--dial"></span>
     </button>
   </figure>
   ```

@@ -1,7 +1,7 @@
 # UI Status
 
-<figure class="table--figure">
-  <table class="table">
+<figure class="ods-table--figure">
+  <table class="ods-table">
     <thead>
       <th scope="column">
         Component

@@ -18,22 +18,22 @@ This is especially important for distinguishing between visually or contextually
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <span class="has-tooltip">
-      <button class="button" aria-describedby="edit-label">
+    <span class="has-ods-tooltip">
+      <button class="ods-button" aria-describedby="edit-label">
         &#9998;
       </button>
-      <aside id="edit-label" class="tooltip is-tooltip-top" role="tooltip">
+      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         Edit
       </aside>
     </span>
   </div>
 
   ```html
-  <span class="has-tooltip">
-    <button class="button" aria-describedby="edit-label">
+  <span class="has-ods-tooltip">
+    <button class="ods-button" aria-describedby="edit-label">
       <svg>...</svg>
     </button>
-    <aside id="edit-label" class="tooltip is-tooltip-top" role="tooltip">
+    <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
       Edit
     </aside>
   </span>
@@ -46,22 +46,22 @@ This may be the case for disabled controls or inline content like abbreviations.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <span class="has-tooltip sample--tip">
-      <button class="button" aria-describedby="download-description" disabled>
+    <span class="has-ods-tooltip sample--tip">
+      <button class="ods-button" aria-describedby="download-description" disabled>
         Download
       </button>
-      <aside id="download-description" class="tooltip is-tooltip-right" role="tooltip">
+      <aside id="download-description" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
         Downloads are disabled during an import.
       </aside>
     </span>
   </div>
 
   ```html
-  <span class="has-tooltip">
-    <button class="button" aria-describedby="download-description" disabled>
+  <span class="has-ods-tooltip">
+    <button class="ods-button" aria-describedby="download-description" disabled>
       Download
     </button>
-    <aside id="download-description" class="tooltip is-tooltip-right" role="tooltip">
+    <aside id="download-description" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
       Downloads are disabled during an import.
     </aside>
   </span>
@@ -72,9 +72,9 @@ This may be the case for disabled controls or inline content like abbreviations.
   <div class="nimatron--rendered">
     <p>
       The reintroduction of
-      <span class="has-tooltip">
+      <span class="has-ods-tooltip">
         <abbr tabindex="0" aria-describedby="pups-tip">PUPS</abbr>
-        <span id="pups-tip" class="tooltip is-tooltip-top" role="tooltip">
+        <span id="pups-tip" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
           Puppy Uniform Protection and Safety Act
         </span>
       </span>
@@ -85,9 +85,9 @@ This may be the case for disabled controls or inline content like abbreviations.
   ```html
   <p>
     The reintroduction of
-    <span class="has-tooltip">
+    <span class="has-ods-tooltip">
       <abbr tabindex="0" aria-describedby="pups-tip">PUPS</abbr>
-      <span id="pups-tip" class="tooltip is-tooltip-top" role="tooltip">
+      <span id="pups-tip" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         Puppy Uniform Protection and Safety Act
       </span>
     </span>
@@ -104,11 +104,11 @@ Tooltips are transient by design, which makes them a bad candidate for interacti
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered is-example-disallowed">
-    <span class="has-tooltip sample--tip">
-      <button class="button" aria-describedby="download-description-link" disabled>
+    <span class="has-ods-tooltip sample--tip">
+      <button class="ods-button" aria-describedby="download-description-link" disabled>
         Download
       </button>
-      <aside id="download-description-link" class="tooltip is-tooltip-right" role="tooltip">
+      <aside id="download-description-link" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
         Find out why by <a href="#">visiting the docs</a>.
       </aside>
     </span>
@@ -121,11 +121,11 @@ Tooltips are intended to provide short, clear descriptions. If your content requ
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered is-example-disallowed">
-    <span class="has-tooltip sample--tip">
-      <button class="button" aria-describedby="download-description-image" disabled>
+    <span class="has-ods-tooltip sample--tip">
+      <button class="ods-button" aria-describedby="download-description-image" disabled>
         Download
       </button>
-      <aside id="download-description-image" class="tooltip is-tooltip-right" role="tooltip">
+      <aside id="download-description-image" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
         <img src="https://media.giphy.com/media/uOAXDA7ZeJJzW/giphy.gif" alt="An animated gif of an animated gif of Newman wagging his finger." style="width: 150px;">
       </aside>
     </span>
@@ -162,54 +162,54 @@ The following positional classes are available:
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <span class="has-tooltip sample--tip">
+    <span class="has-ods-tooltip sample--tip">
       <abbr tabindex="0" aria-describedby="tip-top">Top</abbr>
-      <aside id="tip-top" class="tooltip is-tooltip-top" role="tooltip">
+      <aside id="tip-top" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         A top tip.
       </aside>
     </span>
-    <span class="has-tooltip sample--tip">
+    <span class="has-ods-tooltip sample--tip">
       <abbr tabindex="0" aria-describedby="tip-right">Right</abbr>
-      <aside id="tip-right" class="tooltip is-tooltip-right" role="tooltip">
+      <aside id="tip-right" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
         A right-hand tip.
       </aside>
     </span>
-    <span class="has-tooltip sample--tip">
+    <span class="has-ods-tooltip sample--tip">
       <abbr tabindex="0" aria-describedby="tip-bottom">Bottom</abbr>
-      <aside id="tip-bottom" class="tooltip is-tooltip-bottom" role="tooltip">
+      <aside id="tip-bottom" class="ods-tooltip is-ods-tooltip-bottom" role="tooltip">
         A bottom tip.
       </aside>
     </span>
-    <span class="has-tooltip sample--tip">
+    <span class="has-ods-tooltip sample--tip">
       <abbr tabindex="0" aria-describedby="tip-left">Left</abbr>
-      <aside id="tip-left" class="tooltip is-tooltip-left" role="tooltip">
+      <aside id="tip-left" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
         A left-hand tip.
       </aside>
     </span>
   </div>
 
   ```html
-  <span class="has-tooltip">
+  <span class="has-ods-tooltip">
     <abbr tabindex="0" aria-describedby="tip-top">Top</abbr>
-    <aside id="tip-top" class="tooltip is-tooltip-top" role="tooltip">
+    <aside id="tip-top" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
       A top tip.
     </aside>
   </span>
-  <span class="has-tooltip">
+  <span class="has-ods-tooltip">
     <abbr tabindex="0" aria-describedby="tip-right">Right</abbr>
-    <aside id="tip-right" class="tooltip is-tooltip-right" role="tooltip">
+    <aside id="tip-right" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
       A right-hand tip.
     </aside>
   </span>
-  <span class="has-tooltip">
+  <span class="has-ods-tooltip">
     <abbr tabindex="0" aria-describedby="tip-bottom">Bottom</abbr>
-    <aside id="tip-bottom" class="tooltip is-tooltip-bottom" role="tooltip">
+    <aside id="tip-bottom" class="ods-tooltip is-ods-tooltip-bottom" role="tooltip">
       A bottom tip.
     </aside>
   </span>
-  <span class="has-tooltip">
+  <span class="has-ods-tooltip">
     <abbr tabindex="0" aria-describedby="tip-left">Left</abbr>
-    <aside id="tip-left" class="tooltip is-tooltip-left" role="tooltip">
+    <aside id="tip-left" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
       A left-hand tip.
     </aside>
   </span>
@@ -220,7 +220,7 @@ The following positional classes are available:
 
 Tooltips activate on `:hover` or `:focus`.
 
-In the case of `:hover` or `:focus`, tooltips support being triggered both by the shared parent container (`.has-tip`) or the paired sibling. If you are describing an element that already supports the `:focus` state, no additional work is necessary.
+In the case of `:hover` or `:focus`, tooltips support being triggered both by the shared parent container (`.has-ods-tip`) or the paired sibling. If you are describing an element that already supports the `:focus` state, no additional work is necessary.
 
 If you would like the tooltip to trigger via the parent container or a non-interactive element like `<abbr>` or a disabled `<button>`, include the `tabindex="0"` attribute on the parent or sibling:
 
@@ -228,9 +228,9 @@ If you would like the tooltip to trigger via the parent container or a non-inter
   <div class="nimatron--rendered">
     <p>
       The reintroduction of
-      <span class="has-tooltip">
+      <span class="has-ods-tooltip">
         <abbr tabindex="0" aria-describedby="pups-tip-2">PUPS</abbr>
-        <span id="pups-tip-2" class="tooltip is-tooltip-top" role="tooltip">
+        <span id="pups-tip-2" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
           Puppy Uniform Protection and Safety Act
         </span>
       </span>
@@ -241,9 +241,9 @@ If you would like the tooltip to trigger via the parent container or a non-inter
   ```html
   <p>
     The reintroduction of
-    <span class="has-tooltip">
+    <span class="has-ods-tooltip">
       <abbr tabindex="0" aria-describedby="pups-tip">PUPS</abbr>
-      <span id="pups-tip" class="tooltip is-tooltip-top" role="tooltip">
+      <span id="pups-tip" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         Puppy Uniform Protection and Safety Act
       </span>
     </span>
@@ -279,22 +279,22 @@ When using tooltips as a label, no further considerations are necessary. Assisti
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <span class="has-tooltip">
-      <button class="button" aria-describedby="access-edit-label">
+    <span class="has-ods-tooltip">
+      <button class="ods-button" aria-describedby="access-edit-label">
         &#9998;
       </button>
-      <aside id="access-edit-label" class="tooltip is-tooltip-top" role="tooltip">
+      <aside id="access-edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         Edit
       </aside>
     </span>
   </div>
 
   ```html
-  <span class="has-tooltip">
-    <button class="button" aria-describedby="access-edit-label">
+  <span class="has-ods-tooltip">
+    <button class="ods-button" aria-describedby="access-edit-label">
       <svg>...</svg>
     </button>
-    <aside id="access-edit-label" class="tooltip is-tooltip-top" role="tooltip">
+    <aside id="access-edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
       Edit
     </aside>
   </span>
@@ -307,26 +307,26 @@ When using tooltips to provide additional information, ensure that the element a
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <span class="has-tooltip">
-      <button class="button" aria-describedby="edit-description">
+    <span class="has-ods-tooltip">
+      <button class="ods-button" aria-describedby="edit-description">
         &#9998;
         <span class="u-visually-hidden">Edit</span>
       </button>
-      <aside id="edit-description" class="tooltip is-tooltip-top" role="tooltip">
+      <aside id="edit-description" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         View and manage this profile.
       </aside>
     </span>
   </div>
 
   ```html
-  <span class="has-tooltip">
-    <button class="button" aria-describedby="edit-description">
+  <span class="has-ods-tooltip">
+    <button class="ods-button" aria-describedby="edit-description">
       <svg>...</svg>
       <span class="u-visually-hidden">
         Edit
       </span>
     </button>
-    <aside id="edit-description" class="tooltip is-tooltip-top" role="tooltip">
+    <aside id="edit-description" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
       View and manage this profile.
     </aside>
   </span>
