@@ -15,7 +15,7 @@
 // Rem-based modular scale for type
 // Not ready for general use.
 
-.tooltip {
+.ods-tooltip {
   display: block;
   visibility: hidden;
   position: absolute;
@@ -51,14 +51,14 @@
   }
 
   *:focus + &,
-  .has-tooltip:hover &,
-  .has-tooltip:focus & {
+  .has-ods-tooltip:hover &,
+  .has-ods-tooltip:focus & {
     visibility: visible;
     opacity: 1;
   }
 }
 
-.is-tooltip-top {
+.is-ods-tooltip-top {
   bottom: calc(100% + #{$small-spacing});
   left: 50%;
   transform: translateX(-50%);
@@ -79,7 +79,7 @@
   }
 }
 
-.is-tooltip-right {
+.is-ods-tooltip-right {
   top: 50%;
   left: calc(100% + #{$small-spacing});
   transform: translateY(-50%);
@@ -100,7 +100,7 @@
   }
 }
 
-.is-tooltip-bottom {
+.is-ods-tooltip-bottom {
   top: calc(100% + #{$small-spacing});
   left: 50%;
   transform: translateX(-50%);
@@ -121,7 +121,7 @@
   }
 }
 
-.is-tooltip-left {
+.is-ods-tooltip-left {
   top: 50%;
   right: calc(100% + #{$small-spacing});
   transform: translateY(-50%);
@@ -142,7 +142,7 @@
   }
 }
 
-.has-tooltip {
+.has-ods-tooltip {
   display: inline-block;
   position: relative;
 
@@ -152,7 +152,7 @@
 }
 
 @media only screen and (max-width: 40rem) {
-  .tooltip {
+  .ods-tooltip {
     display: block;
     visibility: hidden;
     position: fixed;
@@ -184,10 +184,10 @@
     }
   }
 
-  .is-tooltip-top,
-  .is-tooltip-right,
-  .is-tooltip-bottom,
-  .is-tooltip-left {
+  .is-ods-tooltip-top,
+  .is-ods-tooltip-right,
+  .is-ods-tooltip-bottom,
+  .is-ods-tooltip-left {
     top: 0;
     right: unset;
     bottom: unset;

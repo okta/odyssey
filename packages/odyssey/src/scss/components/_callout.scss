@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.callout {
+.ods-callout {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -35,14 +35,14 @@
   }
 }
 
-.callout--icon {
+.ods-callout--icon {
   flex-shrink: 0;
   width: $base-spacing;
   height: $base-spacing;
   margin-right: $small-spacing;
 }
 
-.callout--content {
+.ods-callout--content {
   font-size: ms(0);
 
   ul {
@@ -50,13 +50,13 @@
   }
 }
 
-.callout--title {
+.ods-callout--title {
   margin-bottom: $base-spacing;
   font-size: ms(1);
   font-weight: 600;
 }
 
-.is-callout-error {
+.is-ods-callout-error {
   &::before {
     background-color: cv('danger', 'base');
   }
@@ -66,7 +66,7 @@
   }
 }
 
-.is-callout-pending {
+.is-ods-callout-pending {
   &::before {
     background-color: cv('yellow', 'base');
   }
@@ -76,7 +76,7 @@
   }
 }
 
-.is-callout-warning {
+.is-ods-callout-warning {
   &::before {
     background-color: cv('yellow', 'base');
   }
@@ -86,7 +86,7 @@
   }
 }
 
-.is-callout-help {
+.is-ods-callout-help {
   &::before {
     background-color: cv('action', 'base');
   }

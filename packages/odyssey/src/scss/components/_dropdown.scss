@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.has-dropdown {
+.has-ods-dropdown {
   position: relative;
 
   &::after {
@@ -25,7 +25,7 @@
   }
 }
 
-.dropdown {
+.ods-dropdown {
   display: none;
   visibility: hidden;
   position: absolute;
@@ -52,15 +52,15 @@
 
   &:hover,
   &:focus,
-  .has-dropdown:hover > &,
-  .has-dropdown:focus-within > & {
+  .has-ods-dropdown:hover > &,
+  .has-ods-dropdown:focus-within > & {
     display: block;
     visibility: visible;
     opacity: 1;
   }
 }
 
-.dropdown--desc {
+.ods-dropdown--desc {
   min-width: ($max-line-length / 2);
   margin-bottom: $small-spacing;
   color: $text-sub;
@@ -73,22 +73,22 @@
   }
 }
 
-.dropdown--header {
+.ods-dropdown--header {
   border-bottom: 1px solid cv('gray', '100');
 
-  .dropdown--header-link {
+  .ods-dropdown--header-link {
     display: block;
     font-size: ms(-1);
     text-decoration: none;
   }
 }
 
-.dropdown--main {
+.ods-dropdown--main {
   display: flex;
 }
 
-.dropdown--header,
-.dropdown--main {
+.ods-dropdown--header,
+.ods-dropdown--main {
   padding: $base-spacing;
 
   &:first-child {
@@ -117,7 +117,7 @@
   }
 }
 
-.dropdown--list {
+.ods-dropdown--list {
   margin: 0;
   list-style-type: none;
 
@@ -126,11 +126,11 @@
   }
 }
 
-.dropdown--item {
+.ods-dropdown--item {
   margin-bottom: $small-spacing;
 }
 
-.dropdown--link {
+.ods-dropdown--link {
   display: block;
   color: $text-heading;
   font-weight: 600;
@@ -145,7 +145,7 @@
 
 .navigation--item {
   /* stylelint-disable-next-line no-descending-specificity  */
-  .dropdown {
+  .ods-dropdown {
     // Account for .navigation--link padding
     top: calc(100% + #{$small-spacing});
 
