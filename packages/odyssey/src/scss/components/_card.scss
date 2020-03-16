@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.card {
+.ods-card {
   display: block;
   position: relative;
   align-self: start;
@@ -21,7 +21,7 @@
   border-radius: $base-border-radius;
 }
 
-.card--state {
+.ods-card--state {
   margin: -1px -1px 0;
   padding: $tiny-spacing $base-spacing;
   border-radius: $base-border-radius $base-border-radius 0 0;
@@ -30,18 +30,18 @@
   text-align: right;
 }
 
-.card--media {
+.ods-card--media {
   margin: -1px -1px 0;
   padding-bottom: $small-spacing;
   overflow: hidden;
   border-radius: $base-border-radius $base-border-radius 0 0;
 }
 
-.card--media-image {
+.ods-card--media-image {
   width: 100%;
 }
 
-.card--header {
+.ods-card--header {
   display: flex;
   position: relative;
   align-items: center;
@@ -56,12 +56,12 @@
     padding-bottom: $base-spacing;
   }
 
-  .card--state + & {
+  .ods-card--state + & {
     padding-top: $base-spacing;
   }
 }
 
-.card--header-icon {
+.ods-card--header-icon {
   flex-basis: auto;
   height: $big-spacing;
   margin-right: $small-spacing;
@@ -72,24 +72,24 @@
   }
 }
 
-.card--header-main {
+.ods-card--header-main {
   flex-basis: auto;
   flex-grow: 1;
   flex-shrink: 0;
 }
 
-.card--meta {
+.ods-card--meta {
   color: $text-sub;
   font-size: ms(-1);
 }
 
-.card--kebab {
+.ods-card--kebab {
   position: absolute;
   top: $base-spacing;
   right: $base-spacing;
 }
 
-.card--title {
+.ods-card--title {
   margin: 0 0 $tiny-spacing 0;
   font-size: ms(1);
   font-weight: 600;
@@ -100,7 +100,7 @@
   }
 }
 
-.card--main {
+.ods-card--main {
   padding: $small-spacing $base-spacing $small-spacing;
   color: $text-body;
 
@@ -113,32 +113,32 @@
   }
 }
 
-.card--footer {
+.ods-card--footer {
   padding: $small-spacing $base-spacing $base-spacing;
 }
 
-.card--actions {
+.ods-card--actions {
   display: flex;
   justify-content: flex-end;
 }
 
-.card--link {
+.ods-card--link {
   color: cv('action', 'base');
 }
 
-.is-card-action {
-  .card--state {
+.is-ods-card-action {
+  .ods-card--state {
     background: cv('action', 'base');
   }
 }
 
-.is-card-error {
-  .card--state {
+.is-ods-card-error {
+  .ods-card--state {
     background: cv('danger', 'base');
   }
 }
 
-.is-card-clickable {
+.is-ods-card-clickable {
   transition: box-shadow $base-duration $base-timing;
   border: 0;
   box-shadow: 0 3px 6px rgba(cv('gray', '900'), 0.2);
@@ -154,7 +154,7 @@
   }
 }
 
-.card--list {
+.ods-card--list {
   display: grid;
   grid-auto-rows: minmax(0, auto);
   grid-gap: $base-spacing;

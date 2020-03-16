@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.modal--overlay {
+.ods-modal--overlay {
   display: flex;
   position: fixed;
   z-index: 1;
@@ -25,7 +25,7 @@
   background: rgba(cv('gray', '900'), 0.9);
 }
 
-.modal--dialog {
+.ods-modal--dialog {
   position: relative;
   max-width: calc(#{$max-line-length} + #{$base-spacing} + #{$base-spacing});
   max-height: calc(100vh - #{$big-spacing});
@@ -35,12 +35,12 @@
   background-color: $white;
 }
 
-.modal--header {
+.ods-modal--header {
   display: flex;
   flex-direction: column;
 }
 
-.modal--close {
+.ods-modal--close {
   align-self: flex-end;
   width: ms(0);
   height: ms(0);
@@ -53,7 +53,7 @@
   background-position: center;
 }
 
-.modal--title {
+.ods-modal--title {
   margin-top: 0;
   margin-bottom: 0;
   color: $text-heading;
@@ -62,12 +62,12 @@
   line-height: $heading-line-height;
 }
 
-.modal--content {
+.ods-modal--content {
   padding: $tiny-spacing 0 $big-spacing;
   font-size: ms(0);
 }
 
-.modal--footer {
+.ods-modal--footer {
   display: flex;
   justify-content: flex-end;
   padding-bottom: $base-spacing;
@@ -119,7 +119,7 @@
   }
 }
 
-.modal {
+.ods-modal {
   display: none;
 
   &.is-open {
@@ -127,21 +127,21 @@
   }
 
   &[aria-hidden='false'] {
-    .modal--overlay {
+    .ods-modal--overlay {
       animation: overlay-in $base-duration $base-timing;
     }
 
-    .modal--dialog {
+    .ods-modal--dialog {
       animation: dialog-in $base-duration $base-timing;
     }
   }
 
   &[aria-hidden='true'] {
-    .modal--overlay {
+    .ods-modal--overlay {
       animation: overlay-out $base-duration $base-timing;
     }
 
-    &[aria-hidden='true'] .modal--dialog {
+    &[aria-hidden='true'] .ods-modal--dialog {
       animation: dialog-out $base-duration $base-timing;
     }
   }

@@ -14,7 +14,7 @@
 
 $meter-border-radius: $tiny-spacing/3;
 
-.meter {
+.ods-meter {
   // Reset the default appearance
   width: 100%;
   height: $tiny-spacing;
@@ -26,59 +26,59 @@ $meter-border-radius: $tiny-spacing/3;
 }
 
 //  WebKit
-.meter::-webkit-meter-bar {
+.ods-meter::-webkit-meter-bar {
   border: 0;
   border-radius: $meter-border-radius;
   background: cv('gray', '100');
   box-shadow: none;
 }
 
-.meter::-webkit-meter-optimum-value,
-.meter::-webkit-meter-suboptimum-value,
-.meter::-webkit-meter-even-less-good-value {
+.ods-meter::-webkit-meter-optimum-value,
+.ods-meter::-webkit-meter-suboptimum-value,
+.ods-meter::-webkit-meter-even-less-good-value {
   border-radius: $meter-border-radius;
 }
 
-.meter::-webkit-meter-optimum-value {
+.ods-meter::-webkit-meter-optimum-value {
   background: cv('success', 'base');
 }
 
-.meter::-webkit-meter-suboptimum-value {
+.ods-meter::-webkit-meter-suboptimum-value {
   background: cv('yellow', 'base');
 }
 
-.meter::-webkit-meter-even-less-good-value {
+.ods-meter::-webkit-meter-even-less-good-value {
   background: cv('danger', 'base');
 }
 
 // Firefox
-.meter::-moz-meter-bar {
+.ods-meter::-moz-meter-bar {
   border: 0;
   border-radius: $meter-border-radius;
 }
 
-.meter:-moz-meter-optimum::-moz-meter-bar {
+.ods-meter:-moz-meter-optimum::-moz-meter-bar {
   background: cv('success', 'base');
 }
 
-.meter:-moz-meter-sub-optimum::-moz-meter-bar {
+.ods-meter:-moz-meter-sub-optimum::-moz-meter-bar {
   background: cv('yellow', 'base');
 }
 
-.meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+.ods-meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
   background: cv('danger', 'base');
 }
 
-.meter--value {
+.ods-meter--value {
   font-weight: 600;
 }
 
-.meter--label {
+.ods-meter--label {
   display: block;
 }
 
 // Meter Fallback
-.meter--fallback {
+.ods-meter--fallback {
   display: block;
   width: 100%;
   height: $tiny-spacing;
@@ -87,7 +87,7 @@ $meter-border-radius: $tiny-spacing/3;
   background: cv('gray', '100');
 }
 
-.meter--fallback > .meter--fallback--value {
+.ods-meter--fallback > .ods-meter--fallback--value {
   display: block;
   height: inherit;
   border-radius: $meter-border-radius;
@@ -95,14 +95,14 @@ $meter-border-radius: $tiny-spacing/3;
   text-indent: -9999px;
 }
 
-.meter--optimum-value {
+.ods-meter--optimum-value {
   background: cv('success', 'base');
 }
 
-.meter--suboptimum-value {
+.ods-meter--suboptimum-value {
   background: cv('yellow', 'base');
 }
 
-.meter--subsuboptimum-value {
+.ods-meter--subsuboptimum-value {
   background: cv('danger', 'base');
 }
