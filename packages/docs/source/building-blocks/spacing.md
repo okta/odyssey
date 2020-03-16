@@ -9,8 +9,8 @@
   <li class="sample--spacing-tiny-spacing"></li>
 </ul>
 
-<figure class="table--figure">
-  <table class="table">
+<figure class="ods-table--figure">
+  <table class="ods-table">
     <thead>
       <tr>
         <th scope="column">
