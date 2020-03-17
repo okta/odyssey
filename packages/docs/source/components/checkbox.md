@@ -163,3 +163,143 @@ Individually, checkboxes can be set to `required` - most commonly seen when a us
   </fieldset>
   ```
 </figure>
+
+### Indeterminate
+
+In the case of nested checkboxes, an `:indeterminate` state may be required.
+
+Please note that this state must be set via javascript and is not reflected in the DOM - only `checked` and `unchecked` states will be submitted by default.
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <figure class="ods-table--figure">
+      <figcaption class="ods-table--figcaption">
+        Big and small countries
+      </figcaption>
+      <table class="ods-table">
+        <caption>Information about the largest and smallest countries.</caption>
+        <thead>
+          <tr>
+            <th scope="column" class="is-ods-table-checkbox">
+              <input class="ods-checkbox" type="checkbox" name="row[all]" id="checkbox-all" value="check-all">
+              <label class="ods-checkbox--label" for="checkbox-all">
+                <span class="u-visually-hidden">Select this row</span>
+              </label>
+            </th>
+            <th scope="column">Country</th>
+            <th scope="column" class="is-ods-table-num">Area (km<sup>2</sup>)</th>
+            <th scope="column" class="is-ods-table-num">Population</th>
+            <th scope="column">Capital</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="is-ods-table-checkbox">
+              <input class="ods-checkbox" type="checkbox" name="row[0]" id="checkbox-0" value="check-0" checked>
+              <label class="ods-checkbox--label" for="checkbox-0">
+                <span class="u-visually-hidden">Select this row</span>
+              </label>
+            </td>
+            <td>Brazil</td>
+            <td class="is-ods-table-num">8,514,877</td>
+            <td class="is-ods-table-num">203,429,773</td>
+            <td>Brasília</td>
+          </tr>
+          <tr>
+            <td class="is-ods-table-checkbox">
+              <input class="ods-checkbox" type="checkbox" name="row[1]" id="checkbox-1" value="check-1">
+              <label class="ods-checkbox--label" for="checkbox-1">
+                <span class="u-visually-hidden">Select this row</span>
+              </label>
+            </td>
+            <td>Argentina</td>
+            <td class="is-ods-table-num">2,780,400</td>
+            <td class="is-ods-table-num">41,769,726</td>
+            <td>Buenos Aires</td>
+          </tr>
+          <tr>
+            <td class="is-ods-table-checkbox">
+              <input class="ods-checkbox" type="checkbox" name="row[2]" id="checkbox-2" value="check-2" checked>
+              <label class="ods-checkbox--label" for="checkbox-2">
+                <span class="u-visually-hidden">Select this row</span>
+              </label>
+            </td>
+            <td>Democratic Republic of the Congo</td>
+            <td class="is-ods-table-num">2,344,858</td>
+            <td class="is-ods-table-num">84,004,989</td>
+            <td>Kinshasa</td>
+          </tr>
+        </tbody>
+      </table>
+    </figure>
+  </div>
+
+  ```html
+  <figure class="ods-table--figure">
+    <figcaption class="ods-table--figcaption">
+      Big and small countries
+    </figcaption>
+    <table class="ods-table">
+      <caption>Information about the largest and smallest countries.</caption>
+      <thead>
+        <tr>
+          <th scope="column" class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[all]" id="checkbox-all" value="check-all">
+            <label class="ods-checkbox--label" for="checkbox-all">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </th>
+          <th scope="column">Country</th>
+          <th scope="column" class="is-ods-table-num">Area (km<sup>2</sup>)</th>
+          <th scope="column" class="is-ods-table-num">Population</th>
+          <th scope="column">Capital</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[0]" id="checkbox-0" value="check-0" checked>
+            <label class="ods-checkbox--label" for="checkbox-0">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </td>
+          <td>Brazil</td>
+          <td class="is-ods-table-num">8,514,877</td>
+          <td class="is-ods-table-num">203,429,773</td>
+          <td>Brasília</td>
+        </tr>
+        <tr>
+          <td class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[1]" id="checkbox-1" value="check-1">
+            <label class="ods-checkbox--label" for="checkbox-1">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </td>
+          <td>Argentina</td>
+          <td class="is-ods-table-num">2,780,400</td>
+          <td class="is-ods-table-num">41,769,726</td>
+          <td>Buenos Aires</td>
+        </tr>
+        <tr>
+          <td class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[2]" id="checkbox-2" value="check-2" checked>
+            <label class="ods-checkbox--label" for="checkbox-2">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </td>
+          <td>Democratic Republic of the Congo</td>
+          <td class="is-ods-table-num">2,344,858</td>
+          <td class="is-ods-table-num">84,004,989</td>
+          <td>Kinshasa</td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+  ```
+</figure>
+
+<script>
+  var checkbox = document.getElementById("checkbox-all");
+  checkbox.indeterminate = true;
+</script>
+
