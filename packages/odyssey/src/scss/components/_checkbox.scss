@@ -17,11 +17,21 @@
 .ods-checkbox {
   @include is-visually-hidden;
 
-  &:checked {
+  &:checked,
+  &:indeterminate {
     + .ods-checkbox--label {
       &::before {
         border-color: cv('action', 'base');
         background-color: cv('action', 'base');
+      }
+    }
+  }
+
+  &:indeterminate {
+    + .ods-checkbox--label {
+      &::after {
+        transform: translateY(-50%) scale(0.9);
+        background-image: get-icon('dash', $white);
       }
     }
   }
@@ -46,7 +56,8 @@
       }
     }
 
-    &:checked {
+    &:checked,
+    &:indeterminate {
       + .ods-checkbox--label {
         &::before {
           border-color: fauxpacity(cv('action', 'base'));
@@ -63,7 +74,8 @@
       }
     }
 
-    &:checked {
+    &:checked,
+    &:indeterminate {
       + .ods-checkbox--label {
         &::before {
           background-color: cv('danger', 'base');
@@ -89,7 +101,8 @@
         }
       }
 
-      &:checked {
+      &:checked,
+      &:indeterminate {
         + .ods-checkbox--label {
           &::before {
             border-color: fauxpacity(cv('danger', 'base'));
