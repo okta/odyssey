@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.top-bar {
+.ods-top-bar {
   display: flex;
   padding: $small-spacing $big-spacing;
   border-bottom: 1px solid cv('gray', '100');
 }
 
-.top-bar--logo {
+.ods-top-bar--logo {
   height: ms(1);
   fill: cv('action', 'base');
 }
 
-.top-bar--actions {
+.ods-top-bar--actions {
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;

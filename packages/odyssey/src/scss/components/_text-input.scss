@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.text-input {
+.ods-text-input {
   display: block;
   position: relative;
   width: 100%;
@@ -70,7 +70,7 @@
   }
 }
 
-.text-area {
+.ods-text-area {
   min-width: $base-spacing;
   max-width: $max-line-length;
   min-height: $base-spacing * 2;

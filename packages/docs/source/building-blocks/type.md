@@ -10,8 +10,8 @@ Typographical hierarchy indicates importance of content. Through size and weight
 
 To ensure consistency in typography sizes throughout Okta touchpoints, we’ve created a custom modular type scale.
 
-<figure class="table--figure">
-  <table class="table type-sample--table">
+<figure class="ods-table--figure">
+  <table class="ods-table type-sample--table">
     <thead>
       <tr>
         <th scope="column">
@@ -101,8 +101,8 @@ Each step up in the modular scale is proportionally larger than the step before.
 
 In order to maintain consistency across browsers and typefaces, we specify weights by their numbered value, not name. Currently, the following weights are available:
 
-<figure class="table--figure">
-  <table class="table">
+<figure class="ods-table--figure">
+  <table class="ods-table">
     <thead>
       <tr>
         <th scope="column">
@@ -138,8 +138,8 @@ In order to maintain consistency across browsers and typefaces, we specify weigh
 
 Our type variants include two <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height">line-heights</a> available for use:
 
-<figure class="table--figure">
-  <table class="table">
+<figure class="ods-table--figure">
+  <table class="ods-table">
     <thead>
       <tr>
         <th scope="column">

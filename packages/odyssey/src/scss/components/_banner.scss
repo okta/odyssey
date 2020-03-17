@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.banner {
+.ods-banner {
   display: flex;
   position: relative;
   align-items: center;
@@ -24,7 +24,7 @@
   font-size: ms(0);
 }
 
-.banner--pen {
+.ods-banner--pen {
   position: absolute;
   z-index: 1;
   top: 0;
@@ -32,7 +32,7 @@
   width: 100%;
 }
 
-.banner--title {
+.ods-banner--title {
   display: inline;
   position: relative;
   margin: 0 $small-spacing 0 0;
@@ -41,7 +41,7 @@
   font-weight: 600;
 }
 
-.banner--icon {
+.ods-banner--icon {
   position: absolute;
   top: 50%;
   left: calc(-#{$small-spacing} - #{ms(1)});
@@ -59,7 +59,7 @@
   }
 }
 
-.banner--content {
+.ods-banner--content {
   display: inline;
   margin: 0;
 
@@ -72,7 +72,7 @@
   }
 }
 
-.banner--close {
+.ods-banner--close {
   position: absolute;
   top: 50%;
   right: $big-spacing;
@@ -92,21 +92,21 @@
   appearance: none;
 }
 
-.banner--close-icon {
+.ods-banner--close-icon {
   .icon--stroke {
     stroke: $white;
   }
 }
 
-.is-banner-info {
+.is-ods-banner-info {
   background: cv('action', 'base');
   color: $white;
 
-  .banner--title {
+  .ods-banner--title {
     color: $white;
   }
 
-  .banner--icon {
+  .ods-banner--icon {
     .icon--fill {
       fill: $white;
     }
@@ -116,28 +116,28 @@
     }
   }
 
-  .banner--content {
+  .ods-banner--content {
     a {
       color: $white;
     }
   }
 
-  .banner--close-icon {
+  .ods-banner--close-icon {
     .icon--stroke {
       stroke: $white;
     }
   }
 }
 
-.is-banner-danger {
+.is-ods-banner-danger {
   background: cv('danger', 'base');
   color: $white;
 
-  .banner--title {
+  .ods-banner--title {
     color: $white;
   }
 
-  .banner--icon {
+  .ods-banner--icon {
     .icon--fill {
       fill: $white;
     }
@@ -147,28 +147,28 @@
     }
   }
 
-  .banner--content {
+  .ods-banner--content {
     a {
       color: $white;
     }
   }
 
-  .banner--close-icon {
+  .ods-banner--close-icon {
     .icon--stroke {
       stroke: $white;
     }
   }
 }
 
-.is-banner-yellow {
+.is-ods-banner-yellow {
   background: cv('yellow', 'base');
   color: $text-heading;
 
-  .banner--title {
+  .ods-banner--title {
     color: $text-heading;
   }
 
-  .banner--icon {
+  .ods-banner--icon {
     .icon--fill {
       fill: $text-heading;
     }
@@ -178,13 +178,13 @@
     }
   }
 
-  .banner--content {
+  .ods-banner--content {
     a {
       color: $text-heading;
     }
   }
 
-  .banner--close-icon {
+  .ods-banner--close-icon {
     .icon--stroke {
       stroke: $text-heading;
     }

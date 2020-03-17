@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.navigation {
+.ods-navigation {
   display: flex;
 }
 
-.navigation--list {
+.ods-navigation--list {
   display: flex;
   align-items: center;
   margin: 0;
@@ -24,19 +24,19 @@
   list-style: none;
 }
 
-.navigation--item {
+.ods-navigation--item {
   display: block;
   margin: 0;
   line-height: 1;
 }
 
-.navigation--category,
-.navigation--link {
+.ods-navigation--category,
+.ods-navigation--link {
   display: inline-block;
   padding: $tiny-spacing ($small-spacing + $tiny-spacing);
 }
 
-.navigation--category {
+.ods-navigation--category {
   cursor: default;
 
   &:hover {
@@ -44,12 +44,12 @@
   }
 }
 
-.navigation--link {
+.ods-navigation--link {
   color: $text-body;
   text-decoration: none;
 
   &:hover,
-  .navigation--item:hover &,
+  .ods-navigation--item:hover &,
   &.is-link-active {
     color: cv('action', 'base');
   }
