@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.toast--pen {
+.ods-toast--pen {
   position: fixed;
   z-index: 1;
   right: $big-spacing;
   bottom: $big-spacing;
 }
 
-.toast {
+.ods-toast {
   display: flex;
   position: relative;
   align-items: flex-start;
@@ -36,7 +36,7 @@
   }
 }
 
-.toast--icon {
+.ods-toast--icon {
   flex-grow: 0;
   flex-shrink: 0;
   width: $base-spacing;
@@ -53,14 +53,14 @@
   }
 }
 
-.toast--title {
+.ods-toast--title {
   margin-bottom: $small-spacing;
   color: $text-heading;
   font-size: ms(1);
   font-weight: 600;
 }
 
-.toast--close {
+.ods-toast--close {
   position: absolute;
   top: $small-spacing;
   right: $small-spacing;
@@ -79,7 +79,7 @@
   appearance: none;
 }
 
-.toast--close-icon {
+.ods-toast--close-icon {
   .icon--stroke {
     stroke: $text-sub;
   }

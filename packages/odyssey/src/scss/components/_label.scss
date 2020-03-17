@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.label {
+.ods-label {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -20,20 +20,20 @@
   font-size: ms(0);
   font-weight: 600;
 
-  .text-input:disabled ~ &,
-  .text-input[readonly] ~ & {
+  .ods-text-input:disabled ~ &,
+  .ods-text-input[readonly] ~ & {
     color: $text-sub;
   }
 }
 
-.label--optional {
+.ods-label--optional {
   display: none;
   color: $text-sub;
   font-size: ms(-1);
   font-weight: 400;
   line-height: $base-spacing; // Helps optically match line-height above
 
-  .text-input:optional ~ .label & {
+  .ods-text-input:optional ~ .ods-label & {
     display: block;
   }
 }

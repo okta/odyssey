@@ -13,88 +13,88 @@ Note that tables should _not_ have a fixed width, nor should their columns. Brow
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <figure class="table--figure">
-      <table class="table">
+    <figure class="ods-table--figure">
+      <table class="ods-table">
         <caption>Big and small countries</caption>
         <thead>
           <tr>
             <th scope="column">Country</th>
-            <th scope="column" class="is-table-num">Area (km<sup>2</sup>)</th>
-            <th scope="column" class="is-table-num">Population</th>
+            <th scope="column" class="is-ods-table-num">Area (km<sup>2</sup>)</th>
+            <th scope="column" class="is-ods-table-num">Population</th>
             <th scope="column">Capital</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>China</td>
-            <td class="is-table-num">9,596,961</td>
-            <td class="is-table-num">1,343,239,923</td>
+            <td class="is-ods-table-num">9,596,961</td>
+            <td class="is-ods-table-num">1,343,239,923</td>
             <td>Beijing</td>
           </tr>
           <tr>
             <td>Brazil</td>
-            <td class="is-table-num">8,514,877</td>
-            <td class="is-table-num">203,429,773</td>
+            <td class="is-ods-table-num">8,514,877</td>
+            <td class="is-ods-table-num">203,429,773</td>
             <td>Brasília</td>
           </tr>
           <tr>
             <td>India</td>
-            <td class="is-table-num">3,287,263</td>
-            <td class="is-table-num">1,205,073,612</td>
+            <td class="is-ods-table-num">3,287,263</td>
+            <td class="is-ods-table-num">1,205,073,612</td>
             <td>New Delhi</td>
           </tr>
           <tr>
             <td>Argentina</td>
-            <td class="is-table-num">2,780,400</td>
-            <td class="is-table-num">41,769,726</td>
+            <td class="is-ods-table-num">2,780,400</td>
+            <td class="is-ods-table-num">41,769,726</td>
             <td>Buenos Aires</td>
           </tr>
           <tr>
             <td>Algeria</td>
-            <td class="is-table-num">2,381,740</td>
-            <td class="is-table-num">42,008,054</td>
+            <td class="is-ods-table-num">2,381,740</td>
+            <td class="is-ods-table-num">42,008,054</td>
             <td>Algiers</td>
           </tr>
           <tr>
             <td>Democratic Republic of the Congo</td>
-            <td class="is-table-num">2,344,858</td>
-            <td class="is-table-num">84,004,989</td>
+            <td class="is-ods-table-num">2,344,858</td>
+            <td class="is-ods-table-num">84,004,989</td>
             <td>Kinshasa</td>
           </tr>
           <tr>
             <td>Uruguay</td>
-            <td class="is-table-num">176,215</td>
-            <td class="is-table-num">3,308,535</td>
+            <td class="is-ods-table-num">176,215</td>
+            <td class="is-ods-table-num">3,308,535</td>
             <td>Montevideo</td>
           </tr>
           <tr>
             <td>Suriname</td>
-            <td class="is-table-num">163,820</td>
-            <td class="is-table-num">491,989</td>
+            <td class="is-ods-table-num">163,820</td>
+            <td class="is-ods-table-num">491,989</td>
             <td>Paramaribo</td>
           </tr>
           <tr>
             <td>São Tomé and Príncipe</td>
-            <td class="is-table-num">964</td>
-            <td class="is-table-num">208,818</td>
+            <td class="is-ods-table-num">964</td>
+            <td class="is-ods-table-num">208,818</td>
             <td>São Tomé</td>
           </tr>
           <tr>
             <td>Singapore</td>
-            <td class="is-table-num">697</td>
-            <td class="is-table-num">5,353,494</td>
+            <td class="is-ods-table-num">697</td>
+            <td class="is-ods-table-num">5,353,494</td>
             <td>Singapore</td>
           </tr>
           <tr>
             <td>Seychelles</td>
-            <td class="is-table-num">451</td>
-            <td class="is-table-num">95,235</td>
+            <td class="is-ods-table-num">451</td>
+            <td class="is-ods-table-num">95,235</td>
             <td>Victoria</td>
           </tr>
           <tr>
             <td>Maldives</td>
-            <td class="is-table-num">298</td>
-            <td class="is-table-num">394,451</td>
+            <td class="is-ods-table-num">298</td>
+            <td class="is-ods-table-num">394,451</td>
             <td>Malé</td>
           </tr>
         </tbody>
@@ -103,88 +103,88 @@ Note that tables should _not_ have a fixed width, nor should their columns. Brow
   </div>
 
   ```html
-  <figure class="table--figure">
-    <table class="table">
+  <figure class="ods-table--figure">
+    <table class="ods-table">
       <caption>Big and small countries</caption>
       <thead>
         <tr>
           <th scope="column">Country</th>
-          <th scope="column" class="is-table-num">Area (km<sup>2</sup>)</th>
-          <th scope="column" class="is-table-num">Population</th>
+          <th scope="column" class="is-ods-table-num">Area (km<sup>2</sup>)</th>
+          <th scope="column" class="is-ods-table-num">Population</th>
           <th scope="column">Capital</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>China</td>
-          <td class="is-table-num">9,596,961</td>
-          <td class="is-table-num">1,343,239,923</td>
+          <td class="is-ods-table-num">9,596,961</td>
+          <td class="is-ods-table-num">1,343,239,923</td>
           <td>Beijing</td>
         </tr>
         <tr>
           <td>Brazil</td>
-          <td class="is-table-num">8,514,877</td>
-          <td class="is-table-num">203,429,773</td>
+          <td class="is-ods-table-num">8,514,877</td>
+          <td class="is-ods-table-num">203,429,773</td>
           <td>Brasília</td>
         </tr>
         <tr>
           <td>India</td>
-          <td class="is-table-num">3,287,263</td>
-          <td class="is-table-num">1,205,073,612</td>
+          <td class="is-ods-table-num">3,287,263</td>
+          <td class="is-ods-table-num">1,205,073,612</td>
           <td>New Delhi</td>
         </tr>
         <tr>
           <td>Argentina</td>
-          <td class="is-table-num">2,780,400</td>
-          <td class="is-table-num">41,769,726</td>
+          <td class="is-ods-table-num">2,780,400</td>
+          <td class="is-ods-table-num">41,769,726</td>
           <td>Buenos Aires</td>
         </tr>
         <tr>
           <td>Algeria</td>
-          <td class="is-table-num">2,381,740</td>
-          <td class="is-table-num">42,008,054</td>
+          <td class="is-ods-table-num">2,381,740</td>
+          <td class="is-ods-table-num">42,008,054</td>
           <td>Algiers</td>
         </tr>
         <tr>
           <td>Democratic Republic of the Congo</td>
-          <td class="is-table-num">2,344,858</td>
-          <td class="is-table-num">84,004,989</td>
+          <td class="is-ods-table-num">2,344,858</td>
+          <td class="is-ods-table-num">84,004,989</td>
           <td>Kinshasa</td>
         </tr>
         <tr>
           <td>Uruguay</td>
-          <td class="is-table-num">176,215</td>
-          <td class="is-table-num">3,308,535</td>
+          <td class="is-ods-table-num">176,215</td>
+          <td class="is-ods-table-num">3,308,535</td>
           <td>Montevideo</td>
         </tr>
         <tr>
           <td>Suriname</td>
-          <td class="is-table-num">163,820</td>
-          <td class="is-table-num">491,989</td>
+          <td class="is-ods-table-num">163,820</td>
+          <td class="is-ods-table-num">491,989</td>
           <td>Paramaribo</td>
         </tr>
         <tr>
           <td>São Tomé and Príncipe</td>
-          <td class="is-table-num">964</td>
-          <td class="is-table-num">208,818</td>
+          <td class="is-ods-table-num">964</td>
+          <td class="is-ods-table-num">208,818</td>
           <td>São Tomé</td>
         </tr>
         <tr>
           <td>Singapore</td>
-          <td class="is-table-num">697</td>
-          <td class="is-table-num">5,353,494</td>
+          <td class="is-ods-table-num">697</td>
+          <td class="is-ods-table-num">5,353,494</td>
           <td>Singapore</td>
         </tr>
         <tr>
           <td>Seychelles</td>
-          <td class="is-table-num">451</td>
-          <td class="is-table-num">95,235</td>
+          <td class="is-ods-table-num">451</td>
+          <td class="is-ods-table-num">95,235</td>
           <td>Victoria</td>
         </tr>
         <tr>
           <td>Maldives</td>
-          <td class="is-table-num">298</td>
-          <td class="is-table-num">394,451</td>
+          <td class="is-ods-table-num">298</td>
+          <td class="is-ods-table-num">394,451</td>
           <td>Malé</td>
         </tr>
       </tbody>
@@ -203,88 +203,88 @@ Be sure to identify your row heading column as well - that is, don't leave a bla
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <figure class="table--figure">
-      <table class="table">
+    <figure class="ods-table--figure">
+      <table class="ods-table">
         <caption>Big and small countries</caption>
         <thead>
           <tr>
             <th scope="column">Country</th>
-            <th scope="column" class="is-table-num">Area (km<sup>2</sup>)</th>
-            <th scope="column" class="is-table-num">Population</th>
+            <th scope="column" class="is-ods-table-num">Area (km<sup>2</sup>)</th>
+            <th scope="column" class="is-ods-table-num">Population</th>
             <th scope="column">Capital</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">Algeria</td>
-            <td class="is-table-num">2,381,740</td>
-            <td class="is-table-num">42,008,054</td>
+            <td class="is-ods-table-num">2,381,740</td>
+            <td class="is-ods-table-num">42,008,054</td>
             <td>Algiers</td>
           </tr>
           <tr>
             <th scope="row">Argentina</th>
-            <td class="is-table-num">2,780,400</td>
-            <td class="is-table-num">41,769,726</td>
+            <td class="is-ods-table-num">2,780,400</td>
+            <td class="is-ods-table-num">41,769,726</td>
             <td>Buenos Aires</td>
           </tr>
           <tr>
             <th scope="row">Brazil</th>
-            <td class="is-table-num">8,514,877</td>
-            <td class="is-table-num">203,429,773</td>
+            <td class="is-ods-table-num">8,514,877</td>
+            <td class="is-ods-table-num">203,429,773</td>
             <td>Brasília</td>
           </tr>
           <tr>
             <th scope="row">China</th>
-            <td class="is-table-num">9,596,961</td>
-            <td class="is-table-num">1,343,239,923</td>
+            <td class="is-ods-table-num">9,596,961</td>
+            <td class="is-ods-table-num">1,343,239,923</td>
             <td>Beijing</td>
           </tr>
           <tr>
             <th scope="row">Democratic Republic of the Congo</th>
-            <td class="is-table-num">2,344,858</td>
-            <td class="is-table-num">84,004,989</td>
+            <td class="is-ods-table-num">2,344,858</td>
+            <td class="is-ods-table-num">84,004,989</td>
             <td>Kinshasa</td>
           </tr>
           <tr>
             <th scope="row">India</th>
-            <td class="is-table-num">3,287,263</td>
-            <td class="is-table-num">1,205,073,612</td>
+            <td class="is-ods-table-num">3,287,263</td>
+            <td class="is-ods-table-num">1,205,073,612</td>
             <td>New Delhi</td>
           </tr>
           <tr>
             <th scope="row">Maldives</th>
-            <td class="is-table-num">298</td>
-            <td class="is-table-num">394,451</td>
+            <td class="is-ods-table-num">298</td>
+            <td class="is-ods-table-num">394,451</td>
             <td>Malé</td>
           </tr>
           <tr>
             <th scope="row">São Tomé and Príncipe</th>
-            <td class="is-table-num">964</td>
-            <td class="is-table-num">208,818</td>
+            <td class="is-ods-table-num">964</td>
+            <td class="is-ods-table-num">208,818</td>
             <td>São Tomé</td>
           </tr>
           <tr>
             <th scope="row">Seychelles</th>
-            <td class="is-table-num">451</td>
-            <td class="is-table-num">95,235</td>
+            <td class="is-ods-table-num">451</td>
+            <td class="is-ods-table-num">95,235</td>
             <td>Victoria</td>
           </tr>
           <tr>
             <th scope="row">Singapore</th>
-            <td class="is-table-num">697</td>
-            <td class="is-table-num">5,353,494</td>
+            <td class="is-ods-table-num">697</td>
+            <td class="is-ods-table-num">5,353,494</td>
             <td>Singapore</td>
           </tr>
           <tr>
             <th scope="row">Suriname</th>
-            <td class="is-table-num">163,820</td>
-            <td class="is-table-num">491,989</td>
+            <td class="is-ods-table-num">163,820</td>
+            <td class="is-ods-table-num">491,989</td>
             <td>Paramaribo</td>
           </tr>
           <tr>
             <th scope="row">Uruguay</th>
-            <td class="is-table-num">176,215</td>
-            <td class="is-table-num">3,308,535</td>
+            <td class="is-ods-table-num">176,215</td>
+            <td class="is-ods-table-num">3,308,535</td>
             <td>Montevideo</td>
           </tr>
         </tbody>
@@ -293,88 +293,88 @@ Be sure to identify your row heading column as well - that is, don't leave a bla
   </div>
 
   ```html
-  <figure class="table--figure">
-    <table class="table">
+  <figure class="ods-table--figure">
+    <table class="ods-table">
       <caption>Big and small countries</caption>
       <thead>
         <tr>
           <th scope="column">Country</th>
-          <th scope="column" class="is-table-num">Area (km<sup>2</sup>)</th>
-          <th scope="column" class="is-table-num">Population</th>
+          <th scope="column" class="is-ods-table-num">Area (km<sup>2</sup>)</th>
+          <th scope="column" class="is-ods-table-num">Population</th>
           <th scope="column">Capital</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row">Algeria</td>
-          <td class="is-table-num">2,381,740</td>
-          <td class="is-table-num">42,008,054</td>
+          <td class="is-ods-table-num">2,381,740</td>
+          <td class="is-ods-table-num">42,008,054</td>
           <td>Algiers</td>
         </tr>
         <tr>
           <th scope="row">Argentina</th>
-          <td class="is-table-num">2,780,400</td>
-          <td class="is-table-num">41,769,726</td>
+          <td class="is-ods-table-num">2,780,400</td>
+          <td class="is-ods-table-num">41,769,726</td>
           <td>Buenos Aires</td>
         </tr>
         <tr>
           <th scope="row">Brazil</th>
-          <td class="is-table-num">8,514,877</td>
-          <td class="is-table-num">203,429,773</td>
+          <td class="is-ods-table-num">8,514,877</td>
+          <td class="is-ods-table-num">203,429,773</td>
           <td>Brasília</td>
         </tr>
         <tr>
           <th scope="row">China</th>
-          <td class="is-table-num">9,596,961</td>
-          <td class="is-table-num">1,343,239,923</td>
+          <td class="is-ods-table-num">9,596,961</td>
+          <td class="is-ods-table-num">1,343,239,923</td>
           <td>Beijing</td>
         </tr>
         <tr>
           <th scope="row">Democratic Republic of the Congo</th>
-          <td class="is-table-num">2,344,858</td>
-          <td class="is-table-num">84,004,989</td>
+          <td class="is-ods-table-num">2,344,858</td>
+          <td class="is-ods-table-num">84,004,989</td>
           <td>Kinshasa</td>
         </tr>
         <tr>
           <th scope="row">India</th>
-          <td class="is-table-num">3,287,263</td>
-          <td class="is-table-num">1,205,073,612</td>
+          <td class="is-ods-table-num">3,287,263</td>
+          <td class="is-ods-table-num">1,205,073,612</td>
           <td>New Delhi</td>
         </tr>
         <tr>
           <th scope="row">Maldives</th>
-          <td class="is-table-num">298</td>
-          <td class="is-table-num">394,451</td>
+          <td class="is-ods-table-num">298</td>
+          <td class="is-ods-table-num">394,451</td>
           <td>Malé</td>
         </tr>
         <tr>
           <th scope="row">São Tomé and Príncipe</th>
-          <td class="is-table-num">964</td>
-          <td class="is-table-num">208,818</td>
+          <td class="is-ods-table-num">964</td>
+          <td class="is-ods-table-num">208,818</td>
           <td>São Tomé</td>
         </tr>
         <tr>
           <th scope="row">Seychelles</th>
-          <td class="is-table-num">451</td>
-          <td class="is-table-num">95,235</td>
+          <td class="is-ods-table-num">451</td>
+          <td class="is-ods-table-num">95,235</td>
           <td>Victoria</td>
         </tr>
         <tr>
           <th scope="row">Singapore</th>
-          <td class="is-table-num">697</td>
-          <td class="is-table-num">5,353,494</td>
+          <td class="is-ods-table-num">697</td>
+          <td class="is-ods-table-num">5,353,494</td>
           <td>Singapore</td>
         </tr>
         <tr>
           <th scope="row">Suriname</th>
-          <td class="is-table-num">163,820</td>
-          <td class="is-table-num">491,989</td>
+          <td class="is-ods-table-num">163,820</td>
+          <td class="is-ods-table-num">491,989</td>
           <td>Paramaribo</td>
         </tr>
         <tr>
           <th scope="row">Uruguay</th>
-          <td class="is-table-num">176,215</td>
-          <td class="is-table-num">3,308,535</td>
+          <td class="is-ods-table-num">176,215</td>
+          <td class="is-ods-table-num">3,308,535</td>
           <td>Montevideo</td>
         </tr>
       </tbody>
@@ -391,15 +391,15 @@ Note that the use of <code>colspan</code> or <code>rowspan</code> may cause acce
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <figure class="table--figure">
-      <table class="table">
+    <figure class="ods-table--figure">
+      <table class="ods-table">
         <caption>Big and small countries</caption>
         <thead>
           <tr>
             <th scope="column">Continent</th>
             <th scope="column">Country</th>
-            <th scope="column" class="is-table-num">Area (km<sup>2</sup>)</th>
-            <th scope="column" class="is-table-num">Population</th>
+            <th scope="column" class="is-ods-table-num">Area (km<sup>2</sup>)</th>
+            <th scope="column" class="is-ods-table-num">Population</th>
             <th scope="column">Capital</th>
           </tr>
         </thead>
@@ -407,76 +407,76 @@ Note that the use of <code>colspan</code> or <code>rowspan</code> may cause acce
           <tr>
             <th scope="row" rowspan="4">Africa</th>
             <td>Algeria</td>
-            <td class="is-table-num">2,381,740</td>
-            <td class="is-table-num">42,008,054</td>
+            <td class="is-ods-table-num">2,381,740</td>
+            <td class="is-ods-table-num">42,008,054</td>
             <td>Algiers</td>
           </tr>
           <tr>
             <td>Democratic Republic of the Congo</td>
-            <td class="is-table-num">2,344,858</td>
-            <td class="is-table-num">84,004,989</td>
+            <td class="is-ods-table-num">2,344,858</td>
+            <td class="is-ods-table-num">84,004,989</td>
             <td>Kinshasa</td>
           </tr>
           <tr>
             <td>São Tomé and Príncipe</td>
-            <td class="is-table-num">964</td>
-            <td class="is-table-num">208,818</td>
+            <td class="is-ods-table-num">964</td>
+            <td class="is-ods-table-num">208,818</td>
             <td>São Tomé</td>
           </tr>
           <tr>
             <td>Seychelles</td>
-            <td class="is-table-num">451</td>
-            <td class="is-table-num">95,235</td>
+            <td class="is-ods-table-num">451</td>
+            <td class="is-ods-table-num">95,235</td>
             <td>Victoria</td>
           </tr>
           <tr>
             <th scope="row" rowspan="4">Asia</th>
             <td>China</td>
-            <td class="is-table-num">9,596,961</td>
-            <td class="is-table-num">1,343,239,923</td>
+            <td class="is-ods-table-num">9,596,961</td>
+            <td class="is-ods-table-num">1,343,239,923</td>
             <td>Beijing</td>
           </tr>
           <tr>
             <td>India</td>
-            <td class="is-table-num">3,287,263</td>
-            <td class="is-table-num">1,205,073,612</td>
+            <td class="is-ods-table-num">3,287,263</td>
+            <td class="is-ods-table-num">1,205,073,612</td>
             <td>New Delhi</td>
           </tr>
           <tr>
             <td>Maldives</td>
-            <td class="is-table-num">298</td>
-            <td class="is-table-num">394,451</td>
+            <td class="is-ods-table-num">298</td>
+            <td class="is-ods-table-num">394,451</td>
             <td>Malé</td>
           </tr>
           <tr>
             <td>Singapore</td>
-            <td class="is-table-num">697</td>
-            <td class="is-table-num">5,353,494</td>
+            <td class="is-ods-table-num">697</td>
+            <td class="is-ods-table-num">5,353,494</td>
             <td>Singapore</td>
           </tr>
           <tr>
             <th scope="row" rowspan="4">South America</th>
             <td>Argentina</td>
-            <td class="is-table-num">2,780,400</td>
-            <td class="is-table-num">41,769,726</td>
+            <td class="is-ods-table-num">2,780,400</td>
+            <td class="is-ods-table-num">41,769,726</td>
             <td>Buenos Aires</td>
           </tr>
           <tr>
             <td>Brazil</td>
-            <td class="is-table-num">8,514,877</td>
-            <td class="is-table-num">203,429,773</td>
+            <td class="is-ods-table-num">8,514,877</td>
+            <td class="is-ods-table-num">203,429,773</td>
             <td>Brasília</td>
           </tr>
           <tr>
             <td>Suriname</td>
-            <td class="is-table-num">163,820</td>
-            <td class="is-table-num">491,989</td>
+            <td class="is-ods-table-num">163,820</td>
+            <td class="is-ods-table-num">491,989</td>
             <td>Paramaribo</td>
           </tr>
           <tr>
             <td>Uruguay</td>
-            <td class="is-table-num">176,215</td>
-            <td class="is-table-num">3,308,535</td>
+            <td class="is-ods-table-num">176,215</td>
+            <td class="is-ods-table-num">3,308,535</td>
             <td>Montevideo</td>
           </tr>
         </tbody>
@@ -485,15 +485,15 @@ Note that the use of <code>colspan</code> or <code>rowspan</code> may cause acce
   </div>
 
   ```html
-  <figure class="table--figure">
-    <table class="table">
+  <figure class="ods-table--figure">
+    <table class="ods-table">
       <caption>Big and small countries</caption>
       <thead>
         <tr>
           <th scope="column">Continent</th>
           <th scope="column">Country</th>
-          <th scope="column" class="is-table-num">Area (km<sup>2</sup>)</th>
-          <th scope="column" class="is-table-num">Population</th>
+          <th scope="column" class="is-ods-table-num">Area (km<sup>2</sup>)</th>
+          <th scope="column" class="is-ods-table-num">Population</th>
           <th scope="column">Capital</th>
         </tr>
       </thead>
@@ -501,76 +501,76 @@ Note that the use of <code>colspan</code> or <code>rowspan</code> may cause acce
         <tr>
           <th scope="row" rowspan="4">Africa</th>
           <td>Algeria</td>
-          <td class="is-table-num">2,381,740</td>
-          <td class="is-table-num">42,008,054</td>
+          <td class="is-ods-table-num">2,381,740</td>
+          <td class="is-ods-table-num">42,008,054</td>
           <td>Algiers</td>
         </tr>
         <tr>
           <td>Democratic Republic of the Congo</td>
-          <td class="is-table-num">2,344,858</td>
-          <td class="is-table-num">84,004,989</td>
+          <td class="is-ods-table-num">2,344,858</td>
+          <td class="is-ods-table-num">84,004,989</td>
           <td>Kinshasa</td>
         </tr>
         <tr>
           <td>São Tomé and Príncipe</td>
-          <td class="is-table-num">964</td>
-          <td class="is-table-num">208,818</td>
+          <td class="is-ods-table-num">964</td>
+          <td class="is-ods-table-num">208,818</td>
           <td>São Tomé</td>
         </tr>
         <tr>
           <td>Seychelles</td>
-          <td class="is-table-num">451</td>
-          <td class="is-table-num">95,235</td>
+          <td class="is-ods-table-num">451</td>
+          <td class="is-ods-table-num">95,235</td>
           <td>Victoria</td>
         </tr>
         <tr>
           <th scope="row" rowspan="4">Asia</th>
           <td>China</td>
-          <td class="is-table-num">9,596,961</td>
-          <td class="is-table-num">1,343,239,923</td>
+          <td class="is-ods-table-num">9,596,961</td>
+          <td class="is-ods-table-num">1,343,239,923</td>
           <td>Beijing</td>
         </tr>
         <tr>
           <td>India</td>
-          <td class="is-table-num">3,287,263</td>
-          <td class="is-table-num">1,205,073,612</td>
+          <td class="is-ods-table-num">3,287,263</td>
+          <td class="is-ods-table-num">1,205,073,612</td>
           <td>New Delhi</td>
         </tr>
         <tr>
           <td>Maldives</td>
-          <td class="is-table-num">298</td>
-          <td class="is-table-num">394,451</td>
+          <td class="is-ods-table-num">298</td>
+          <td class="is-ods-table-num">394,451</td>
           <td>Malé</td>
         </tr>
         <tr>
           <td>Singapore</td>
-          <td class="is-table-num">697</td>
-          <td class="is-table-num">5,353,494</td>
+          <td class="is-ods-table-num">697</td>
+          <td class="is-ods-table-num">5,353,494</td>
           <td>Singapore</td>
         </tr>
         <tr>
           <th scope="row" rowspan="4">South America</th>
           <td>Argentina</td>
-          <td class="is-table-num">2,780,400</td>
-          <td class="is-table-num">41,769,726</td>
+          <td class="is-ods-table-num">2,780,400</td>
+          <td class="is-ods-table-num">41,769,726</td>
           <td>Buenos Aires</td>
         </tr>
         <tr>
           <td>Brazil</td>
-          <td class="is-table-num">8,514,877</td>
-          <td class="is-table-num">203,429,773</td>
+          <td class="is-ods-table-num">8,514,877</td>
+          <td class="is-ods-table-num">203,429,773</td>
           <td>Brasília</td>
         </tr>
         <tr>
           <td>Suriname</td>
-          <td class="is-table-num">163,820</td>
-          <td class="is-table-num">491,989</td>
+          <td class="is-ods-table-num">163,820</td>
+          <td class="is-ods-table-num">491,989</td>
           <td>Paramaribo</td>
         </tr>
         <tr>
           <td>Uruguay</td>
-          <td class="is-table-num">176,215</td>
-          <td class="is-table-num">3,308,535</td>
+          <td class="is-ods-table-num">176,215</td>
+          <td class="is-ods-table-num">3,308,535</td>
           <td>Montevideo</td>
         </tr>
       </tbody>
@@ -585,13 +585,13 @@ The basic table styling is based on what is most legible and scannable for a nor
 
 ### Numerical Data
 
-If the data in a column consists primarily of figures or numerical data, you can utilize the <code>.is-table-num</code> class. It's been applied to the above examples in order to ensure tabular number display and right-align the figures for easy comparison.
+If the data in a column consists primarily of figures or numerical data, you can utilize the <code>.is-ods-table-num</code> class. It's been applied to the above examples in order to ensure tabular number display and right-align the figures for easy comparison.
 
 When presenting numerical data, be sure to leave off any units and incorporate them into the column's header.
 
 ### Dates
 
-To maintain ease of reading, dates should not be line-broken. To preserve their white space, you can utilize the <code>.is-table-date</code> class throughout their column.
+To maintain ease of reading, dates should not be line-broken. To preserve their white space, you can utilize the <code>.is-ods-table-date</code> class throughout their column.
 
 ## Empty Tables
 
@@ -601,14 +601,14 @@ The <code>data-null</code> attribute will ensure the table styling is adjusted.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <figure class="table--figure">
-      <table class="table" data-null>
+    <figure class="ods-table--figure">
+      <table class="ods-table" data-null>
         <caption>Big and small countries</caption>
         <thead>
           <tr>
             <th scope="column">Country</th>
-            <th scope="column" class="is-table-num">Area (km<sup>2</sup>)</th>
-            <th scope="column" class="is-table-num">Population</th>
+            <th scope="column" class="is-ods-table-num">Area (km<sup>2</sup>)</th>
+            <th scope="column" class="is-ods-table-num">Population</th>
             <th scope="column">Capital</th>
           </tr>
         </thead>
@@ -626,14 +626,14 @@ The <code>data-null</code> attribute will ensure the table styling is adjusted.
   </div>
 
   ```html
-  <figure class="table--figure">
-    <table class="table" data-null>
+  <figure class="ods-table--figure">
+    <table class="ods-table" data-null>
       <caption>Big and small countries</caption>
       <thead>
         <tr>
           <th scope="column">Country</th>
-          <th scope="column" class="is-table-num">Area (km<sup>2</sup>)</th>
-          <th scope="column" class="is-table-num">Population</th>
+          <th scope="column" class="is-ods-table-num">Area (km<sup>2</sup>)</th>
+          <th scope="column" class="is-ods-table-num">Population</th>
           <th scope="column">Capital</th>
         </tr>
       </thead>
@@ -653,18 +653,18 @@ The <code>data-null</code> attribute will ensure the table styling is adjusted.
 
 ## Responsive Tables
 
-Our default tables here have all been wrapped in `<figure class="table--figure">` which will ensure that our tables are always scrollable and never extend beyond their container. This default behavior assumes that comparison across rows is important.
+Our default tables here have all been wrapped in `<figure class="ods-table--figure">` which will ensure that our tables are always scrollable and never extend beyond their container. This default behavior assumes that comparison across rows is important.
 
 If this isn't true for your use case, you may want to utilize a linear table.
 
 ### Linear Tables
 
-If the data in your table is not intended for comparison, then moving to a linear table might be a good option - especially if you'd like to maintain the visibility of the entire dataset. Using the `.is-table-linear` class in conjunction with the `data-title` attribute, you can achieve beautiful things.
+If the data in your table is not intended for comparison, then moving to a linear table might be a good option - especially if you'd like to maintain the visibility of the entire dataset. Using the `.is-ods-table-linear` class in conjunction with the `data-title` attribute, you can achieve beautiful things.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <figure class="table--figure">
-      <table class="table is-table-linear">
+    <figure class="ods-table--figure">
+      <table class="ods-table is-ods-table-linear">
         <caption>Directory / People</caption>
         <thead>
           <tr>
@@ -801,8 +801,8 @@ If the data in your table is not intended for comparison, then moving to a linea
   </div>
 
   ```html
-  <figure class="table--figure">
-    <table class="table is-table-linear">
+  <figure class="ods-table--figure">
+    <table class="ods-table is-ods-table-linear">
       <caption>Directory / People</caption>
       <thead>
         <tr>
@@ -977,12 +977,12 @@ Below is an actual data set from a QA SysLog. The slight underline represents a 
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <figure class="table--figure">
-      <table class="table">
+    <figure class="ods-table--figure">
+      <table class="ods-table">
         <caption>SysLog Events</caption>
         <thead>
           <tr>
-            <th scope="column" class="is-table-date">Time</th>
+            <th scope="column" class="is-ods-table-date">Time</th>
             <th scope="column">Actor</th>
             <th scope="column">Event Info</th>
             <th scope="column">Targets</th>
@@ -990,626 +990,626 @@ Below is an actual data set from a QA SysLog. The slight underline represents a 
         </thead>
         <tbody>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 22:48:22
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 22:48:21
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 22:48:18
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 22:48:18
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user:</button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user:</button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 22:48:18
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 22:48:16
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 22:48:16
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 19:48:22
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 19:48:19
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 19:48:18
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 19:48:18
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 19:48:18
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 19:48:17
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 19:48:17
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 16:57:52
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User accessing Okta admin app</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User accessing Okta admin app</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(AppUser)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(AppUser)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 16:57:44
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Evaluating of sign-on policy</button>
-              <button class="table--cell-filter table--cell-status">allow</button>
+              <button class="ods-table--cell-filter">Evaluating of sign-on policy</button>
+              <button class="ods-table--cell-filter table--cell-status">allow</button>
             </td>
             <td>
-              <ul class="table--cell-list">
+              <ul class="ods-table--cell-list">
                 <li>
-                  <button class="table--cell-filter">Default Policy</button> <button class="table--cell-filter">(PolicyEntity)</button>
+                  <button class="ods-table--cell-filter">Default Policy</button> <button class="ods-table--cell-filter">(PolicyEntity)</button>
                 </li>
                 <li>
-                  <button class="table--cell-filter">Default Rule</button> <button class="table--cell-filter">(PolicyRule)</button>
+                  <button class="ods-table--cell-filter">Default Rule</button> <button class="ods-table--cell-filter">(PolicyRule)</button>
                 </li>
               </ul>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 16:57:43
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User login to Okta</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User login to Okta</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 16:48:23
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 16:48:18
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 16:48:18
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 16:48:18
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 16:48:17
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 16:48:17
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-              <button class="table--cell-filter table--cell-status">failure</button>
+              <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+              <button class="ods-table--cell-filter table--cell-status">failure</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 16:48:17
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:47:17
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User accessing Okta admin app</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User accessing Okta admin app</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(AppUser)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(AppUser)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:47:15
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Evaluating of sign-on policy</button>
-              <button class="table--cell-filter table--cell-status">allow</button>
+              <button class="ods-table--cell-filter">Evaluating of sign-on policy</button>
+              <button class="ods-table--cell-filter table--cell-status">allow</button>
             </td>
             <td>
-              <ul class="table--cell-list">
+              <ul class="ods-table--cell-list">
                 <li>
-                  <button class="table--cell-filter">Default Policy</button> <button class="table--cell-filter">(PolicyEntity)</button>
+                  <button class="ods-table--cell-filter">Default Policy</button> <button class="ods-table--cell-filter">(PolicyEntity)</button>
                 </li>
                 <li>
-                  <button class="table--cell-filter">Default Rule</button> <button class="table--cell-filter">(PolicyRule)</button>
+                  <button class="ods-table--cell-filter">Default Rule</button> <button class="ods-table--cell-filter">(PolicyRule)</button>
                 </li>
               </ul>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:47:15
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User login to Okta</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User login to Okta</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:47:15
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User reset password for Okta (by admin)</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User reset password for Okta (by admin)</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:47:15
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User update password for Okta</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User update password for Okta</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:44:19
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User reset password for Okta (by admin)</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User reset password for Okta (by admin)</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:44:19
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Send self-service password reset email</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Send self-service password reset email</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:42:27
             </td>
             <td>
-              <button class="table--cell-filter">Taylor Laubach</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Taylor Laubach</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User accessing Okta admin app</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User accessing Okta admin app</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Taylor Laubach</button> <button class="table--cell-filter">(AppUser)</button>
+              <button class="ods-table--cell-filter">Taylor Laubach</button> <button class="ods-table--cell-filter">(AppUser)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:42:26
             </td>
             <td>
-              <button class="table--cell-filter">Taylor Laubach</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Taylor Laubach</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Evaluating of sign-on policy</button>
-              <button class="table--cell-filter table--cell-status">allow</button>
+              <button class="ods-table--cell-filter">Evaluating of sign-on policy</button>
+              <button class="ods-table--cell-filter table--cell-status">allow</button>
             </td>
             <td>
-              <ul class="table--cell-list">
+              <ul class="ods-table--cell-list">
                 <li>
-                  <button class="table--cell-filter">Default Policy</button> <button class="table--cell-filter">(PolicyEntity)</button>
+                  <button class="ods-table--cell-filter">Default Policy</button> <button class="ods-table--cell-filter">(PolicyEntity)</button>
                 </li>
                 <li>
-                  <button class="table--cell-filter">Default Rule</button> <button class="table--cell-filter">(PolicyRule)</button>
+                  <button class="ods-table--cell-filter">Default Rule</button> <button class="ods-table--cell-filter">(PolicyRule)</button>
                 </li>
               </ul>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:42:26
             </td>
             <td>
-              <button class="table--cell-filter">Taylor Laubach</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Taylor Laubach</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User login to Okta</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User login to Okta</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:36:24
             </td>
             <td>
-              <button class="table--cell-filter">Johnatan Uribe</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Johnatan Uribe</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User accessing Okta admin app</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User accessing Okta admin app</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Johnatan Uribe</button> <button class="table--cell-filter">(AppUser)</button>
+              <button class="ods-table--cell-filter">Johnatan Uribe</button> <button class="ods-table--cell-filter">(AppUser)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:36:23
             </td>
             <td>
-              <button class="table--cell-filter">Johnatan Uribe</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Johnatan Uribe</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Evaluating of sign-on policy</button>
-              <button class="table--cell-filter table--cell-status">allow</button>
+              <button class="ods-table--cell-filter">Evaluating of sign-on policy</button>
+              <button class="ods-table--cell-filter table--cell-status">allow</button>
             </td>
             <td>
-              <ul class="table--cell-list">
+              <ul class="ods-table--cell-list">
                 <li>
-                  <button class="table--cell-filter">Default Policy</button> <button class="table--cell-filter">(PolicyEntity)</button>
+                  <button class="ods-table--cell-filter">Default Policy</button> <button class="ods-table--cell-filter">(PolicyEntity)</button>
                 </li>
                 <li>
-                  <button class="table--cell-filter">Default Rule</button> <button class="table--cell-filter">(PolicyRule)</button>
+                  <button class="ods-table--cell-filter">Default Rule</button> <button class="ods-table--cell-filter">(PolicyRule)</button>
                 </li>
               </ul>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:36:23
             </td>
             <td>
-              <button class="table--cell-filter">Johnatan Uribe</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Johnatan Uribe</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User login to Okta</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">User login to Okta</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 14:36:10
             </td>
             <td>
-              <button class="table--cell-filter">Johnatan Uribe</button> <button class="table--cell-filter">(User)</button>
+              <button class="ods-table--cell-filter">Johnatan Uribe</button> <button class="ods-table--cell-filter">(User)</button>
             </td>
             <td>
-              <button class="table--cell-filter">User login to Okta</button>
-              <button class="table--cell-filter table--cell-status">failure: INVALID CREDENTIALS</button>
+              <button class="ods-table--cell-filter">User login to Okta</button>
+              <button class="ods-table--cell-filter table--cell-status">failure: INVALID CREDENTIALS</button>
             </td>
             <td>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 13:48:26
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
           <tr>
-            <td class="is-table-date">
+            <td class="is-ods-table-date">
               Sep 11 13:48:23
             </td>
             <td>
-              <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+              <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
             </td>
             <td>
-              <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-              <button class="table--cell-filter table--cell-status">success</button>
+              <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+              <button class="ods-table--cell-filter table--cell-status">success</button>
             </td>
             <td>
-              <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+              <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
             </td>
           </tr>
         </tbody>
@@ -1618,12 +1618,12 @@ Below is an actual data set from a QA SysLog. The slight underline represents a 
   </div>
 
   ```html
-  <figure class="table--figure">
-    <table class="table">
+  <figure class="ods-table--figure">
+    <table class="ods-table">
       <caption>SysLog Events</caption>
       <thead>
         <tr>
-          <th scope="column" class="is-table-date">Time</th>
+          <th scope="column" class="is-ods-table-date">Time</th>
           <th scope="column">Actor</th>
           <th scope="column">Event Info</th>
           <th scope="column">Targets</th>
@@ -1631,626 +1631,626 @@ Below is an actual data set from a QA SysLog. The slight underline represents a 
       </thead>
       <tbody>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 22:48:22
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 22:48:21
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 22:48:18
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 22:48:18
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user:</button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user:</button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 22:48:18
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 22:48:16
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 22:48:16
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 19:48:22
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 19:48:19
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 19:48:18
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 19:48:18
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 19:48:18
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 19:48:17
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 19:48:17
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 16:57:52
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User accessing Okta admin app</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User accessing Okta admin app</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(AppUser)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(AppUser)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 16:57:44
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Evaluating of sign-on policy</button>
-            <button class="table--cell-filter table--cell-status">allow</button>
+            <button class="ods-table--cell-filter">Evaluating of sign-on policy</button>
+            <button class="ods-table--cell-filter table--cell-status">allow</button>
           </td>
           <td>
-            <ul class="table--cell-list">
+            <ul class="ods-table--cell-list">
               <li>
-                <button class="table--cell-filter">Default Policy</button> <button class="table--cell-filter">(PolicyEntity)</button>
+                <button class="ods-table--cell-filter">Default Policy</button> <button class="ods-table--cell-filter">(PolicyEntity)</button>
               </li>
               <li>
-                <button class="table--cell-filter">Default Rule</button> <button class="table--cell-filter">(PolicyRule)</button>
+                <button class="ods-table--cell-filter">Default Rule</button> <button class="ods-table--cell-filter">(PolicyRule)</button>
               </li>
             </ul>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 16:57:43
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User login to Okta</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User login to Okta</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 16:48:23
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 16:48:18
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 16:48:18
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 16:48:18
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 16:48:17
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Unable to read Office 365 directory sync for the company, received error: Could not validate your Office 365 credentials, received error: Invalid Credentials., user: </button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 16:48:17
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
-            <button class="table--cell-filter table--cell-status">failure</button>
+            <button class="ods-table--cell-filter">Could not validate your Office 365 credentials, received error: Invalid Credentials.</button>
+            <button class="ods-table--cell-filter table--cell-status">failure</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 16:48:17
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:47:17
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User accessing Okta admin app</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User accessing Okta admin app</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(AppUser)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(AppUser)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:47:15
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Evaluating of sign-on policy</button>
-            <button class="table--cell-filter table--cell-status">allow</button>
+            <button class="ods-table--cell-filter">Evaluating of sign-on policy</button>
+            <button class="ods-table--cell-filter table--cell-status">allow</button>
           </td>
           <td>
-            <ul class="table--cell-list">
+            <ul class="ods-table--cell-list">
               <li>
-                <button class="table--cell-filter">Default Policy</button> <button class="table--cell-filter">(PolicyEntity)</button>
+                <button class="ods-table--cell-filter">Default Policy</button> <button class="ods-table--cell-filter">(PolicyEntity)</button>
               </li>
               <li>
-                <button class="table--cell-filter">Default Rule</button> <button class="table--cell-filter">(PolicyRule)</button>
+                <button class="ods-table--cell-filter">Default Rule</button> <button class="ods-table--cell-filter">(PolicyRule)</button>
               </li>
             </ul>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:47:15
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User login to Okta</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User login to Okta</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:47:15
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User reset password for Okta (by admin)</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User reset password for Okta (by admin)</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:47:15
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User update password for Okta</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User update password for Okta</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:44:19
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User reset password for Okta (by admin)</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User reset password for Okta (by admin)</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:44:19
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Send self-service password reset email</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Send self-service password reset email</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Edbury Enegren</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Edbury Enegren</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:42:27
           </td>
           <td>
-            <button class="table--cell-filter">Taylor Laubach</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Taylor Laubach</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User accessing Okta admin app</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User accessing Okta admin app</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Taylor Laubach</button> <button class="table--cell-filter">(AppUser)</button>
+            <button class="ods-table--cell-filter">Taylor Laubach</button> <button class="ods-table--cell-filter">(AppUser)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:42:26
           </td>
           <td>
-            <button class="table--cell-filter">Taylor Laubach</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Taylor Laubach</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Evaluating of sign-on policy</button>
-            <button class="table--cell-filter table--cell-status">allow</button>
+            <button class="ods-table--cell-filter">Evaluating of sign-on policy</button>
+            <button class="ods-table--cell-filter table--cell-status">allow</button>
           </td>
           <td>
-            <ul class="table--cell-list">
+            <ul class="ods-table--cell-list">
               <li>
-                <button class="table--cell-filter">Default Policy</button> <button class="table--cell-filter">(PolicyEntity)</button>
+                <button class="ods-table--cell-filter">Default Policy</button> <button class="ods-table--cell-filter">(PolicyEntity)</button>
               </li>
               <li>
-                <button class="table--cell-filter">Default Rule</button> <button class="table--cell-filter">(PolicyRule)</button>
+                <button class="ods-table--cell-filter">Default Rule</button> <button class="ods-table--cell-filter">(PolicyRule)</button>
               </li>
             </ul>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:42:26
           </td>
           <td>
-            <button class="table--cell-filter">Taylor Laubach</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Taylor Laubach</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User login to Okta</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User login to Okta</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:36:24
           </td>
           <td>
-            <button class="table--cell-filter">Johnatan Uribe</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Johnatan Uribe</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User accessing Okta admin app</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User accessing Okta admin app</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Johnatan Uribe</button> <button class="table--cell-filter">(AppUser)</button>
+            <button class="ods-table--cell-filter">Johnatan Uribe</button> <button class="ods-table--cell-filter">(AppUser)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:36:23
           </td>
           <td>
-            <button class="table--cell-filter">Johnatan Uribe</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Johnatan Uribe</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Evaluating of sign-on policy</button>
-            <button class="table--cell-filter table--cell-status">allow</button>
+            <button class="ods-table--cell-filter">Evaluating of sign-on policy</button>
+            <button class="ods-table--cell-filter table--cell-status">allow</button>
           </td>
           <td>
-            <ul class="table--cell-list">
+            <ul class="ods-table--cell-list">
               <li>
-                <button class="table--cell-filter">Default Policy</button> <button class="table--cell-filter">(PolicyEntity)</button>
+                <button class="ods-table--cell-filter">Default Policy</button> <button class="ods-table--cell-filter">(PolicyEntity)</button>
               </li>
               <li>
-                <button class="table--cell-filter">Default Rule</button> <button class="table--cell-filter">(PolicyRule)</button>
+                <button class="ods-table--cell-filter">Default Rule</button> <button class="ods-table--cell-filter">(PolicyRule)</button>
               </li>
             </ul>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:36:23
           </td>
           <td>
-            <button class="table--cell-filter">Johnatan Uribe</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Johnatan Uribe</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User login to Okta</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">User login to Okta</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 14:36:10
           </td>
           <td>
-            <button class="table--cell-filter">Johnatan Uribe</button> <button class="table--cell-filter">(User)</button>
+            <button class="ods-table--cell-filter">Johnatan Uribe</button> <button class="ods-table--cell-filter">(User)</button>
           </td>
           <td>
-            <button class="table--cell-filter">User login to Okta</button>
-            <button class="table--cell-filter table--cell-status">failure: INVALID CREDENTIALS</button>
+            <button class="ods-table--cell-filter">User login to Okta</button>
+            <button class="ods-table--cell-filter table--cell-status">failure: INVALID CREDENTIALS</button>
           </td>
           <td>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 13:48:26
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
         <tr>
-          <td class="is-table-date">
+          <td class="is-ods-table-date">
             Sep 11 13:48:23
           </td>
           <td>
-            <button class="table--cell-filter">Okta System</button> <button class="table--cell-filter">(SystemPrincipal)</button>
+            <button class="ods-table--cell-filter">Okta System</button> <button class="ods-table--cell-filter">(SystemPrincipal)</button>
           </td>
           <td>
-            <button class="table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
-            <button class="table--cell-filter table--cell-status">success</button>
+            <button class="ods-table--cell-filter">Heartbeat sent to Microsoft Azure Active Directory.</button>
+            <button class="ods-table--cell-filter table--cell-status">success</button>
           </td>
           <td>
-            <button class="table--cell-filter">Microsoft Office 365</button> <button class="table--cell-filter">(AppInstance)</button>
+            <button class="ods-table--cell-filter">Microsoft Office 365</button> <button class="ods-table--cell-filter">(AppInstance)</button>
           </td>
         </tr>
       </tbody>
