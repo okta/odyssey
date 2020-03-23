@@ -1,0 +1,83 @@
+// Note: This file contians empty, commented out style definitons. This means they were not overriden in anyway, but accounted for in documentation.
+
+$blockquote-border-left: 3px solid cv('gray', '200');
+$ins-background: cv('success', 'lightest');
+$del-background: cv('danger', 'lightest');
+$mark-background: cv('warning', 'lightest');
+
+blockquote {
+    border-left: $blockquote-border-left;
+    padding: 0 $base-spacing;
+}
+
+// cite {}
+
+del {
+    background: $del-background;
+    display: inline-block;
+}
+
+del::before, 
+del::after {
+  clip-path: inset(100%);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+del::before {
+  content: " [deletion start] ";
+}
+
+del::after {
+  content: " [deletion end] ";
+}
+
+// em {}
+
+ins {
+    background: $ins-background;
+    display: inline-block;
+}
+
+ins::before, 
+ins::after {
+  clip-path: inset(100%);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+ins::before {
+  content: " [insertion start] ";
+}
+
+ins::after {
+  content: " [insertion end] ";
+}
+
+mark {
+    background: $mark-background;
+}
+
+// s {}
+
+// sup {}
+
+sub {
+    font-size: 0.66012rem;
+    line-height: 1;
+    vertical-align: sub;
+}
+
+// strong {}
+
+small {
+    font-size: ms(-1);
+}

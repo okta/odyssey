@@ -9,6 +9,7 @@
   #'iconography': '/building-blocks/iconography.html'
   'spacing': '/building-blocks/spacing.html'
   'type': '/building-blocks/type.html'
+  'elements': '/building-blocks/glossary.html'
 
 'components':
   # Needs Docs  'banner': '/components/banner.html'
