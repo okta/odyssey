@@ -382,14 +382,16 @@ Be sure to identify your row heading column as well - that is, don't leave a bla
   </figure>
   ```
 </div>
-
-### Row Grouping
-
-If you need to group rows by a shared data point, we also support using <code>rowspan</code> to do so. Otherwise, follow the same implementation guidelines as above.
-
-Note that the use of <code>colspan</code> or <code>rowspan</code> may cause accessibility issues for users aided by assistive technologies, so proceed with caution or consider a different approach.
+</figure>
 
 <figure class="nimatron--example">
+
+  ### Row Grouping
+
+  If you need to group rows by a shared data point, we also support using <code>rowspan</code> to do so. Otherwise, follow the same implementation guidelines as above.
+
+  Note that the use of <code>colspan</code> or <code>rowspan</code> may cause accessibility issues for users aided by assistive technologies, so proceed with caution or consider a different approach.
+
   <div class="nimatron--rendered">
     <figure class="ods-table--figure">
       <table class="ods-table">
