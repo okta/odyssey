@@ -2,9 +2,6 @@
 
 Odyssey takes care to provide additional style to the following HTML elements by default.
 
-
-
-
 ## blockquote <a name="blockquote"></a>
 > The HTML `<blockquote>` Element (or HTML Block Quotation Element) indicates that the enclosed text is an extended quotation. Usually, this is rendered visually by indentation (see Notes for how to change it). A URL for the source of the quotation may be given using the cite attribute, while a text representation of the source can be given using the `<cite>` element.
 >  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote'>MDN</a></cite>
@@ -56,16 +53,21 @@ Odyssey takes care to provide additional style to the following HTML elements by
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <blockquote>
-        There is <del>nothing</del> <ins>no code</ins> either good or bad, but <del>thinking</del> <ins>running it</ins> makes it so.
+      There is <del data-a11y-start=" [deletion start] "  data-a11y-end=" [deletion end] ">nothing</del> <ins data-a11y-start=" [insertion start] "  data-a11y-end=" [insertion end] ">no code</ins> either good or bad, but running it makes it so.
     </blockquote>
   </div>
 
 ```html
   <blockquote>
-      There is <del>nothing</del> <ins>no code</ins> either good or bad, but <del>thinking</del> <ins>running it</ins> makes it so.
+      There is <del data-a11y-start=" [deletion start] "  data-a11y-end=" [deletion end] ">nothing</del> <ins data-a11y-start=" [insertion start] "  data-a11y-end=" [insertion end] ">no code</ins> either good or bad, but running it makes it so.
   </blockquote>
 ```
 </figure>
+
+### Accessibility
+
+#### Screen Readers
+Many screen readers do not let users know of the presence of `del`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
 
 ## em <a name="em"></a>
 > The HTML `<em>` element marks text that has stress emphasis. The `<em>` element can be nested, with each level of nesting indicating a greater degree of emphasis.
@@ -79,15 +81,12 @@ Odyssey takes care to provide additional style to the following HTML elements by
   </div>
 
 ```html
-  <blockquote>
-    <p>Get out of bed <em>now</em>!</p>
-
-    <p>We <em>had</em> to do something about it.</p>
-
-    <p>This is <em>not</em> a drill!</p>
-  </blockquote>
+  <p>Get out of bed <em>now</em>!</p>
+  <p>We <em>had</em> to do something about it.</p>
+  <p>This is <em>not</em> a drill!</p>
 ```
 </figure>
+
 
 ## ins <a name="ins"></a> 
 > The HTML `<ins>` element represents a range of text that has been added to a document. You can use the `<del>` element to similarly represent a range of text that has been deleted from the document.
@@ -96,22 +95,29 @@ Odyssey takes care to provide additional style to the following HTML elements by
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <p>“You're late!”</p>
-    <del>
+    <del data-a11y-start=" [deletion start] "  data-a11y-end=" [deletion end] ">
         <p>“I apologize for the delay.”</p>
     </del>
-    <ins cite="../howtobeawizard.html" datetime="2018-05">
+    <ins data-a11y-start=" [insertion start] "  data-a11y-end=" [insertion end] " cite="../howtobeawizard.html" datetime="2018-05">
         <p>“A wizard is never late &hellip;”</p>
     </ins>
   </div>
 
+
+### Accessibility
+
+#### Screen Readers
+Many screen readers do not let users know of the presence of `ins`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
+
+
 ```html
-    <p>“You're late!”</p>
-    <del>
-        <p>“I apologize for the delay.”</p>
-    </del>
-    <ins cite="../howtobeawizard.html" datetime="2018-05">
-        <p>“A wizard is never late &hellip;”</p>
-    </ins>  
+<p>“You're late!”</p>
+<del>
+    <p>“I apologize for the delay.”</p>
+</del>
+<ins cite="../howtobeawizard.html" datetime="2018-05">
+    <p>“A wizard is never late &hellip;”</p>
+</ins>  
 ```
 </figure>
 
@@ -128,13 +134,13 @@ Odyssey takes care to provide additional style to the following HTML elements by
   </div>
 
 ```html
-    <p>Search results for "salamander":</p>
+<p>Search results for "salamander":</p>
 
-    <hr>
+<hr>
 
-    <p>Several species of <mark>salamander</mark> inhabit the temperate rainforest of the Pacific Northwest.</p>
+<p>Several species of <mark>salamander</mark> inhabit the temperate rainforest of the Pacific Northwest.</p>
 
-    <p>Most <mark>salamander</mark>s are nocturnal, and hunt for insects, worms, and other small creatures.</p>
+<p>Most <mark>salamander</mark>s are nocturnal, and hunt for insects, worms, and other small creatures.</p>
 ```
 </figure>
 
@@ -164,7 +170,9 @@ Odyssey takes care to provide additional style to the following HTML elements by
   </div>
 
 ```html
-  <p>Almost every developer's favorite molecule is <var>C</var><sub>8</sub><var>H</var><sub>10</sub><var>N</var><sub>4</sub><var>O</var><sub>2</sub>, also known as "caffeine."</p>
+<p>
+  Almost every developer's favorite molecule is <var>C</var><sub>8</sub><var>H</var><sub>10</sub><var>N</var><sub>4</sub><var>O</var><sub>2</sub>, also known as "caffeine."
+</p>
 ```
 </figure>
 
@@ -179,9 +187,8 @@ Odyssey takes care to provide additional style to the following HTML elements by
   </div>
 
 ```html
-  <p>The <b>Pythagorean theorem</b> is often expressed as the following equation:</p>
-
-  <p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>
+<p>The <b>Pythagorean theorem</b> is often expressed as the following equation:</p>
+<p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>
 ```
 </figure>
 
@@ -192,11 +199,19 @@ Odyssey takes care to provide additional style to the following HTML elements by
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>... the most important rule, the rule you can never forget, no matter how much he cries, no matter how much he begs: <strong>never feed him after midnight</strong>.</p>
+    <p>
+      &hellip; the most important rule, the rule you can never 
+      forget, no matter how much he cries, no matter how much 
+      he begs: <strong>never feed him after midnight</strong>.
+    </p>
   </div>
 
 ```html
-  <p>... the most important rule, the rule you can never forget, no matter how much he cries, no matter how much he begs: <strong>never feed him after midnight</strong>.</p>
+<p>
+  &hellip; the most important rule, the rule you can never 
+  forget, no matter how much he cries, no matter how much 
+  he begs: <strong>never feed him after midnight</strong>.
+</p>
 ```
 </figure>
 
@@ -214,9 +229,7 @@ Odyssey takes care to provide additional style to the following HTML elements by
 
 ```html
 <p>MDN Web Docs is a learning platform for Web technologies and the software that powers the Web.</p>
-
 <hr>
-
 <p><small>The content is licensed under a Creative Commons Attribution-ShareAlike 2.5 Generic License.</small></p>
 ```
 </figure>

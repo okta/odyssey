@@ -1,83 +1,86 @@
-// Note: This file contians empty, commented out style definitons. This means they were not overriden in anyway, but accounted for in documentation.
-
-$blockquote-border-left: 3px solid cv('gray', '200');
-$ins-background: cv('success', 'lightest');
-$del-background: cv('danger', 'lightest');
-$mark-background: cv('warning', 'lightest');
-
 blockquote {
-    border-left: $blockquote-border-left;
-    padding: 0 $base-spacing;
+  padding: 0 $base-spacing;
+  border-left: 3px solid $base-border-color;
 }
 
-// cite {}
+cite {
+  font-style: italic;
+}
 
 del {
-    background: $del-background;
-    display: inline-block;
+  display: inline-block;
+  background: cv('danger', 'lightest');
 }
 
-del::before, 
+del::before,
 del::after {
-  clip-path: inset(100%);
-  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute;
+  width: 1px;
   height: 1px;
   overflow: hidden;
-  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap;
-  width: 1px;
+  clip-path: inset(100%);
 }
 
 del::before {
-  content: " [deletion start] ";
+  content: attr(data-a11y-start);
 }
 
 del::after {
-  content: " [deletion end] ";
+  content: attr(data-a11y-end);
 }
 
-// em {}
+em {
+  font-style: italic;
+
+  > em { text-decoration: underline; }
+}
 
 ins {
-    background: $ins-background;
-    display: inline-block;
+  display: inline-block;
+  background: cv('success', 'lightest');
 }
 
-ins::before, 
+ins::before,
 ins::after {
-  clip-path: inset(100%);
-  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute;
+  width: 1px;
   height: 1px;
   overflow: hidden;
-  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap;
-  width: 1px;
+  clip-path: inset(100%);
 }
 
 ins::before {
-  content: " [insertion start] ";
+  content: attr(data-a11y-start);
 }
 
 ins::after {
-  content: " [insertion end] ";
+  content: attr(data-a11y-end);
 }
 
-mark {
-    background: $mark-background;
+mark { background: cv('warning', 'lightest'); }
+
+s { text-decoration: line-through; }
+
+sup {
+  font-size: 0.66012rem;
+  line-height: 1;
+  vertical-align: super;
 }
-
-// s {}
-
-// sup {}
 
 sub {
-    font-size: 0.66012rem;
-    line-height: 1;
-    vertical-align: sub;
+  font-size: 0.66012rem;
+  line-height: 1;
+  vertical-align: sub;
 }
 
-// strong {}
+strong {
+  font-weight: bold;
 
-small {
-    font-size: ms(-1);
+  > strong { text-decoration: underline; }
 }
+
+small { font-size: ms(-1); }
