@@ -3,8 +3,7 @@
 Odyssey takes care to provide additional style to the following HTML elements by default.
 
 ## blockquote <a name="blockquote"></a>
-> The HTML `<blockquote>` Element (or HTML Block Quotation Element) indicates that the enclosed text is an extended quotation. Usually, this is rendered visually by indentation (see Notes for how to change it). A URL for the source of the quotation may be given using the cite attribute, while a text representation of the source can be given using the `<cite>` element.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote'>MDN</a></cite>
+> The HTML `<blockquote>` Element (or HTML Block Quotation Element) indicates that the enclosed text is an extended quotation. Usually, this is rendered visually by indentation (see Notes for how to change it). A URL for the source of the quotation may be given using the cite attribute, while a text representation of the source can be given using the `<cite>` element. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -23,8 +22,7 @@ Odyssey takes care to provide additional style to the following HTML elements by
 </figure>
 
 ## cite <a name="cite"></a>
-> The HTML Citation element (`<cite>`) is used to describe a reference to a cited creative work, and must include the title of that work.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite'>MDN</a></cite>
+> The HTML Citation element (`<cite>`) is used to describe a reference to a cited creative work, and must include the title of that work. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -47,8 +45,7 @@ Odyssey takes care to provide additional style to the following HTML elements by
 </figure>
 
 ## del <a name="del"></a>
-> The HTML `<del>` element represents a range of text that has been deleted from a document. This can be used when rendering "track changes" or source code diff information, for example. The `<ins>` element can be used for the opposite purpose: to indicate text that has been added to the document.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del'>MDN</a></cite>
+> The HTML `<del>` element represents a range of text that has been deleted from a document. This can be used when rendering "track changes" or source code diff information, for example. The `<ins>` element can be used for the opposite purpose: to indicate text that has been added to the document. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -70,8 +67,7 @@ Odyssey takes care to provide additional style to the following HTML elements by
 Many screen readers do not let users know of the presence of `del`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
 
 ## em <a name="em"></a>
-> The HTML `<em>` element marks text that has stress emphasis. The `<em>` element can be nested, with each level of nesting indicating a greater degree of emphasis.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em'>MDN</a></cite>
+> The HTML `<em>` element marks text that has stress emphasis. The `<em>` element can be nested, with each level of nesting indicating a greater degree of emphasis. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -89,8 +85,7 @@ Many screen readers do not let users know of the presence of `del`. To fix this,
 
 
 ## ins <a name="ins"></a> 
-> The HTML `<ins>` element represents a range of text that has been added to a document. You can use the `<del>` element to similarly represent a range of text that has been deleted from the document.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins'>MDN</a></cite>
+> The HTML `<ins>` element represents a range of text that has been added to a document. You can use the `<del>` element to similarly represent a range of text that has been deleted from the document. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -122,8 +117,7 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 </figure>
 
 ## mark <a name="mark"></a>
-> The HTML Mark Text element (`<mark>`) represents text which is marked or highlighted for reference or notation purposes, due to the marked passage's relevance or importance in the enclosing context.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark'>MDN</a></cite>
+> The HTML Mark Text element (`<mark>`) represents text which is marked or highlighted for reference or notation purposes, due to the marked passage's relevance or importance in the enclosing context. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -145,8 +139,7 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 </figure>
 
 ## s <a name="s"></a>
-> The HTML `<s>` element renders text with a strikethrough, or a line through it. Use the `<s>` element to represent things that are no longer relevant or no longer accurate. However, `<s>` is not appropriate when indicating document edits; for that, use the `<del>` and `<ins>` elements, as appropriate.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s'>MDN</a></cite>
+> The HTML `<s>` element renders text with a strikethrough, or a line through it. Use the `<s>` element to represent things that are no longer relevant or no longer accurate. However, `<s>` is not appropriate when indicating document edits; for that, use the `<del>` and `<ins>` elements, as appropriate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -161,8 +154,7 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 </figure>
 
 ## sub <a name="sub"></a>
-> The HTML Subscript element (`<sub>`) specifies inline text which should be displayed as subscript for solely typographical reasons. Subscripts are typically rendered with a lowered baseline using smaller text.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub'>MDN</a></cite>
+> The HTML Subscript element (`<sub>`) specifies inline text which should be displayed as subscript for solely typographical reasons. Subscripts are typically rendered with a lowered baseline using smaller text. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -177,8 +169,7 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 </figure>
 
 ## sup <a name="sup"></a>
-> The HTML Superscript element (`<sup>`) specifies inline text which is to be displayed as superscript for solely typographical reasons. Superscripts are usually rendered with a raised baseline using smaller text.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup'>MDN</a></cite>
+> The HTML Superscript element (`<sup>`) specifies inline text which is to be displayed as superscript for solely typographical reasons. Superscripts are usually rendered with a raised baseline using smaller text. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -193,8 +184,7 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 </figure>
 
 ## strong <a name="strong"></a>
-> The HTML Strong Importance Element (`<strong>`) indicates that its contents have strong importance, seriousness, or urgency. Browsers typically render the contents in bold type.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong'>MDN</a></cite>
+> The HTML Strong Importance Element (`<strong>`) indicates that its contents have strong importance, seriousness, or urgency. Browsers typically render the contents in bold type. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong'>MDN</a></cite>
 
 
 <figure class="nimatron--example">
@@ -216,8 +206,7 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 </figure>
 
 ## small <a name="small"></a>
-> The HTML `<small>` element represents side-comments and small print, like copyright and legal text, independent of its styled presentation. By default, it renders text within it one font-size smaller, such as from small to x-small.
->  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small'>MDN</a></cite>
+> The HTML `<small>` element represents side-comments and small print, like copyright and legal text, independent of its styled presentation. By default, it renders text within it one font-size smaller, such as from small to x-small. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small'>MDN</a></cite>
 
 
 <figure class="nimatron--example">
