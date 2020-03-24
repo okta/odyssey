@@ -53,22 +53,31 @@ abbr {
 
 em {
   font-style: italic;
+  > em { text-decoration: underline; }
 }
 
 strong {
   font-weight: 600;
+
+  > strong { text-decoration: underline; }
 }
 
 sup {
-  font-size: ms(-2);
+  font-size: ms(-0.0412575);
   line-height: 1;
   vertical-align: super;
 }
 
+sub {
+  font-size: ms(-0.0412575);
+  line-height: 1;
+  vertical-align: sub;
+}
+
 blockquote {
   margin: 0 0 $base-spacing;
-  padding: 0 0 0 $em-small-spacing;
-  border-left: 2px solid $base-border-color;
+  padding: 0 0 0 $base-spacing;
+  border-left: 3px solid $base-border-color;
 }
 
 p {
@@ -158,3 +167,49 @@ h6 {
   color: $text-sub;
   font-size: ms(-1);
 }
+
+cite {
+  font-style: italic;
+}
+
+del {
+  display: inline-block;
+  background: cv('danger', 'lightest');
+}
+
+del::before,
+del::after {
+  @include is-visually-hidden;
+}
+
+del::before {
+  content: attr(data-a11y-start);
+}
+
+del::after {
+  content: attr(data-a11y-end);
+}
+
+ins {
+  display: inline-block;
+  background: cv('success', 'lightest');
+}
+
+ins::before,
+ins::after {
+  @include is-visually-hidden;
+}
+
+ins::before {
+  content: attr(data-a11y-start);
+}
+
+ins::after {
+  content: attr(data-a11y-end);
+}
+
+mark { background: cv('warning', 'lightest'); }
+
+s { text-decoration: line-through; }
+
+small { font-size: ms(-1); }
