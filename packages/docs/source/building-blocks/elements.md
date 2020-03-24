@@ -47,6 +47,11 @@ Odyssey takes care to provide additional style to the following HTML elements by
 ## del <a name="del"></a>
 > The HTML `<del>` element represents a range of text that has been deleted from a document. This can be used when rendering "track changes" or source code diff information, for example. The `<ins>` element can be used for the opposite purpose: to indicate text that has been added to the document. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del'>MDN</a></cite>
 
+
+### Accessibility
+
+Many screen readers do not let users know of the presence of `del`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
+
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <blockquote>
@@ -60,11 +65,6 @@ Odyssey takes care to provide additional style to the following HTML elements by
   </blockquote>
 ```
 </figure>
-
-### Accessibility
-
-#### Screen Readers
-Many screen readers do not let users know of the presence of `del`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
 
 ## em <a name="em"></a>
 > The HTML `<em>` element marks text that has stress emphasis. The `<em>` element can be nested, with each level of nesting indicating a greater degree of emphasis. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em'>MDN</a></cite>
@@ -83,9 +83,25 @@ Many screen readers do not let users know of the presence of `del`. To fix this,
 ```
 </figure>
 
+You can also nest `em` tags to provide an added level of emphasis. Doing so will provide additional style.
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <p>Do you <em>really, <em>really</em></em> want to see that movie?</p>
+  </div>
+
+```html
+<p>Do you <em>really, <em>really</em></em> want to see that movie?</p>
+```
+</figure>
+
 
 ## ins <a name="ins"></a> 
 > The HTML `<ins>` element represents a range of text that has been added to a document. You can use the `<del>` element to similarly represent a range of text that has been deleted from the document. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins'>MDN</a></cite>
+
+### Accessibility
+
+Many screen readers do not let users know of the presence of `ins`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -97,13 +113,6 @@ Many screen readers do not let users know of the presence of `del`. To fix this,
         <p>“A wizard is never late &hellip;”</p>
     </ins>
   </div>
-
-
-### Accessibility
-
-#### Screen Readers
-Many screen readers do not let users know of the presence of `ins`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
-
 
 ```html
 <p>“You're late!”</p>
@@ -204,6 +213,25 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 </p>
 ```
 </figure>
+
+You can also nest `strong`. Doing so will provide additional style.
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <p>
+      &hellip; the most important rule, the rule you can never 
+      forget, no matter how much he cries, no matter how much 
+      he begs: <strong>never feed him <strong>after midnight</strong></strong>.
+    </p>
+  </div>
+
+```html
+<p>
+  &hellip; the most important rule, the rule you can never 
+  forget, no matter how much he cries, no matter how much 
+  he begs: <strong>never feed him <strong>after midnight</strong></strong>.
+</p>
+```
 
 ## small <a name="small"></a>
 > The HTML `<small>` element represents side-comments and small print, like copyright and legal text, independent of its styled presentation. By default, it renders text within it one font-size smaller, such as from small to x-small. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small'>MDN</a></cite>
