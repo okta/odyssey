@@ -1,0 +1,35 @@
+ol,
+ul {
+  &:not([class]) {
+    max-width: $max-line-length;
+    margin: 0 0 $base-spacing 0;
+    padding: 0 0 0 $base-spacing;
+    list-style-position: outside;
+
+    li {
+      margin-bottom: $small-spacing;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    p + & {
+      margin-top: -$small-spacing;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+ul:not([class]) {
+  list-style-type: disc;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+ol:not([class]) {
+  list-style-type: decimal;
+}

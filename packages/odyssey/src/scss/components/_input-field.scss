@@ -1,0 +1,96 @@
+
+.ods-field--hint,
+.ods-field--error {
+  font-size: ms(-1);
+}
+
+.ods-field--hint {
+  margin-bottom: $tiny-spacing;
+  color: $text-body;
+
+  .ods-text-input:disabled ~ &,
+  .ods-text-input[readonly] ~ & {
+    color: $text-sub;
+  }
+}
+
+.ods-field--error {
+  display: flex;
+  align-items: center;
+  margin-top: $tiny-spacing;
+  color: cv('danger', 'base');
+
+  &::before {
+    content: '';
+    width: ms(-1);
+    height: ms(-1);
+    margin: 0 $tiny-spacing 0 0;
+    background-image: get-icon('alert', cv('danger', 'base'));
+    background-repeat: no-repeat;
+  }
+}
+
+.ods-fieldset--pair {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .ods-number-input,
+  .ods-text-input,
+  .ods-select-input {
+    width: calc(50% - #{$small-spacing});
+  }
+}
+
+.ods-fieldset-flex {
+  display: flex;
+  flex-direction: column;
+  max-width: $max-line-length;
+
+  .label,
+  .ods-input-legend {
+    order: 1;
+    margin-bottom: $tiny-spacing;
+  }
+
+  .ods-number-input,
+  .ods-text-input,
+  .ods-select-input,
+  .ods-input--unavailable,
+  .ods-fieldset--pair {
+    order: 3;
+  }
+
+  .ods-input--unavailable {
+    margin: 0;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity  */
+  .ods-field--hint {
+    order: 2;
+    margin-bottom: $tiny-spacing;
+
+    + .ods-label {
+      margin-bottom: 0;
+    }
+  }
+
+  .ods-field--error {
+    order: 4;
+  }
+}
+
+/* stylelint-disable-next-line no-descending-specificity  */
+.ods-input-legend {
+  margin: 0 0 $tiny-spacing;
+  color: $text-heading;
+  font-size: ms(0);
+  font-weight: 600;
+}
+
+.ods-group-legend {
+  margin: 0 0 $small-spacing;
+  color: $text-heading;
+  font-size: ms(1);
+  font-weight: 600;
+}
