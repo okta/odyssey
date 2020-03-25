@@ -74,4 +74,4 @@ Now any changes you make in your local version of `@okta/odyssey` should be refl
 
 ## Questions?
 
-Stop by [#design_system](https://okta.slack.com/messages/C7T2H3KNJ) and say hello (Oktanauts-only for now).
+Stop by [#odyssey](https://okta.slack.com/messages/C7T2H3KNJ) and say hello (Oktanauts-only for now).
