@@ -1,4 +1,3 @@
-
 .ods-field--hint,
 .ods-field--error {
   font-size: ms(-1);
@@ -37,7 +36,7 @@
 
   .ods-number-input,
   .ods-text-input,
-  .ods-select-input {
+  .ods-select {
     width: calc(50% - #{$small-spacing});
   }
 }
@@ -55,7 +54,7 @@
 
   .ods-number-input,
   .ods-text-input,
-  .ods-select-input,
+  .ods-select,
   .ods-input--unavailable,
   .ods-fieldset--pair {
     order: 3;

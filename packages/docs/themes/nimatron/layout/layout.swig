@@ -304,27 +304,45 @@
       disableFocus: true
     });
   </script>
-  <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  {{ js('js/vendor/selectize.min.js') }}
+  {{ js('js/vendor/choices.min.js') }}
   <script>
-    $('.select-input').selectize({
-      plugins: ['remove_button'],
-      delimiter: ',',
-      create: function(input) {
-        return {
-          value: input,
-          text: input
-        }
-      },
-      sortField: 'text',
-      persist: false,
-      onDropdownClose: function($dropdown){
-        $($dropdown).find('.selected').not('.active').removeClass('selected');
-      }
-    });
+    var selectExamples = document.querySelectorAll('[data-js-choices]');
+    for (i = 0; i < selectExamples.length; ++i) {
+      var element = selectExamples[i];
+      new Choices(element, {
+        searchEnabled: false,
+        shouldSort: false,
+        itemSelectText: '',
+        classNames: {
+          containerOuter: 'ods-select',
+          containerInner: 'ods-select--inner',
+          input: 'ods-select--input',
+          inputCloned: 'ods-select--input--cloned',
+          list: 'ods-select--list',
+          listItems: 'ods-select--list--multiple',
+          listSingle: 'ods-select--list--single',
+          listDropdown: 'ods-select--list--dropdown',
+          item: 'ods-select--item',
+          itemSelectable: 'ods-select--item--selectable',
+          itemDisabled: 'ods-select--item--disabled',
+          itemChoice: 'ods-select--item--choice',
+          placeholder: 'ods-select--placeholder',
+          group: 'ods-select--group',
+          groupHeading: 'ods-select--heading',
+          button: 'ods-select--button',
+          activeState: 'is-ods-select-active',
+          focusState: 'is-ods-select-focused',
+          openState: 'is-ods-select-open',
+          disabledState: 'is-ods-select-disabled',
+          highlightedState: 'is-ods-select-highlighted',
+          selectedState: 'is-ods-select-selected',
+          flippedState: 'is-ods-select-flipped',
+          loadingState: 'is-ods-select-loading',
+          noResults: 'has-no-ods-select-results',
+          noChoices: 'has-no-ods-select-choices'
+        },
+      });
+    }
   </script>
   </body>
 </html>

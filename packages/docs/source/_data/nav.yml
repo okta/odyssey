@@ -24,7 +24,7 @@
   'modal': '/components/modal.html'
   #'navigation': '/components/navigation.html'
   'radio button': '/components/radio-button.html'
-  #'select': '/components/select.html'
+  'select': '/components/select.html'
   #'switch': '/components/switch.html'
   'table': '/components/table.html'
   #'toast': '/components/toast.html'

@@ -122,7 +122,7 @@ Unlike radio buttons, checkboxes validate individually, not as a group.
       <label class="ods-checkbox--label" for="checkbox-clark">Clark</label>
       <input class="ods-checkbox" type="checkbox" aria-describedby="checkbox-invalid-error" name="checkbox-invalid" id="checkbox-alfred-invalid" value="alfred">
       <label class="ods-checkbox--label" for="checkbox-alfred-invalid">Alfred</label>
-      <aside class="field--error" id="checkbox-invalid-error">This combination won't work.</aside>
+      <aside class="ods-field--error" id="checkbox-invalid-error">This combination won't work.</aside>
     </fieldset>
   </div>
 
@@ -137,7 +137,7 @@ Unlike radio buttons, checkboxes validate individually, not as a group.
     <label class="ods-checkbox--label" for="checkbox-clark">Clark</label>
     <input class="ods-checkbox" type="checkbox" aria-describedby="checkbox-invalid-error" name="checkbox-invalid" id="checkbox-alfred-invalid" value="alfred">
     <label class="ods-checkbox--label" for="checkbox-alfred-invalid">Alfred</label>
-    <aside class="field--error" id="checkbox-invalid-error">This combination won't work.</aside>
+    <aside class="ods-field--error" id="checkbox-invalid-error">This combination won't work.</aside>
   </fieldset>
   ```
 </figure>
