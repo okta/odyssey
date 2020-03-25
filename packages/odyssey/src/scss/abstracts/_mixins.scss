@@ -29,41 +29,51 @@
   width: 100%;
   max-width: $max-line-length;
   margin: 0;
-  padding: $small-spacing;
-  transition-property: border-color, background-color;
-  transition-duration: 250ms;
-  transition-timing-function: ease-in-out;
+  padding: $em-tiny-spacing $em-small-spacing;
+  transition-property: border-color, background-color, box-shadow;
+  transition-duration: $base-duration;
+  transition-timing-function: $base-timing;
   border: 1px solid $base-border-color;
   border-radius: $base-border-radius;
   background-color: $white;
-  box-shadow: none;
+  box-shadow: 0 0 0 0 fauxpacity(cv('action', 'base'));
   color: $text-body;
   font-family: $body-font-family;
   font-size: ms(0);
-  line-height: $heading-line-height;
+  line-height: $base-line-height;
 
   &:hover,
   &:focus {
     border-color: cv('action');
   }
 
-  &:disabled {
-    opacity: $med-opaque;
-    pointer-events: none;
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 4px fauxpacity(cv('action', 'base'));
   }
 
+  &:disabled {
+    opacity: 1;
+    color: $text-sub;
+    cursor: not-allowed;
+  }
+
+  &:disabled,
   &[readonly] {
-    // Should transition to :read-only once we have AutoPrefixer setup
-    padding-top: 0;
-    padding-right: 0;
-    padding-left: 0;
-    border: 0;
-    background-color: transparent;
+    border-color: cv('gray', '200');
+    background-color: cv('gray', '000');
+
+    &:hover {
+      border-color: cv('gray', '200');
+    }
   }
 
   &[data-invalid] {
     border-color: cv('danger');
-    background-color: cv('danger', 'lightest');
+
+    &:focus {
+      box-shadow: 0 0 0 4px fauxpacity(cv('danger', 'base'));
+    }
   }
 
   &::placeholder {

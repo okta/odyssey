@@ -33,7 +33,8 @@
   font-weight: 400;
   line-height: $base-spacing; // Helps optically match line-height above
 
-  .ods-text-input:optional ~ .ods-label & {
+  [data-optional] &,
+  :optional ~ .ods-label & {
     display: block;
   }
 }
