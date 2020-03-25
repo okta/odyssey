@@ -14,12 +14,8 @@
 
 // Catch-all border-box bad boy
 
-html {
-  box-sizing: border-box;
-}
-
 * {
-  box-sizing: inherit;
+  box-sizing: border-box;
 
   &::before,
   &::after {
