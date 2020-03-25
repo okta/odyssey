@@ -188,6 +188,12 @@ o-button {
   }
 }
 
+.ods-table {
+  .ods-button {
+    @extend %button-small;
+  }
+}
+
 .ods-form--header {
   .ods-button {
     @extend %button-small;
