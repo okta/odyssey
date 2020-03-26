@@ -159,16 +159,4 @@
       border-color: cv('action', 'base');
     }
   }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.ods-table {
-  .ods-checkbox--label {
-    &:empty {
-      height: calc(1em * #{$heading-line-height});
-    }
-  }
 }

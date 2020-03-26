@@ -1,0 +1,6 @@
+/* stylelint-disable-next-line no-descending-specificity */
+.ods-button {
+  & + & {
+    margin-left: $small-spacing;
+  }
+}

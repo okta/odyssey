@@ -1,0 +1,25 @@
+a {
+  color: cv('action');
+
+  &:hover {
+    color: cv('action', 'dark');
+  }
+
+  &:visited {
+    color: cv('violet', 'dark');
+  }
+
+  /* stylelint-disable selector-no-qualifying-type */
+  &[target='_blank']:not([href^='mailto:'])::after {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-left: 0.2em;
+    background-image: get-icon('external', cv('action', 'base'));
+    background-repeat: no-repeat;
+    vertical-align: middle;
+  }
+
+  /* stylelint-enable */
+}
