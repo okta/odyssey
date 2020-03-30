@@ -10,3 +10,7 @@
 #  - [CODEOWNERS] https://help.github.com/articles/about-codeowners
 
 *       @okta/design-system
+
+# Require UI Core reviews for scripts
+*.js    @okta/eng-uicore
+*.sh    @okta/eng-uicore

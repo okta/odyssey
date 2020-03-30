@@ -13,6 +13,8 @@ Odyssey is Okta’s official design system that consists of reusable components 
 - [Packages](#packages)
     - [Monorepo](#monorepo)
     - [Versioning](#versioning)
+    - [Development](#development)
+        - [Publishing a new version](#publishing-a-new-version)
 
 <!-- /TOC -->
 
@@ -60,3 +62,32 @@ packages/
 | Package | Status | Description |
 | -------- | ----- | ------ |
 | [odyssey](/packages/odyssey) | [![npm version](https://img.shields.io/npm/v/@okta/odyssey.svg?style=flat-square)](https://www.npmjs.com/package/@okta/odyssey) | All necessary SCSS and fonts to utilize Odyssey, Okta's design system. |
+
+### Development
+
+#### Publishing a new version
+
+Before publishing a new version, ensure the following steps are performed:
+
+1. All changes our outlined in the package's `CHANGELOG` file. If there are breaking changes, attempt to create a migration guide.
+
+2. Increment the package versions following [Semantic Versioning](https://semver.org/).
+
+    ```bash
+    yarn lerna-version
+
+    # Console output will appear similar to:
+    ? Select a new version (currently 0.0.1) (Use arrow keys)
+    ❯ Patch (0.0.2)
+      Minor (0.1.0)
+      Major (1.0.0)
+      Prepatch (0.0.2-alpha.0)
+      Preminor (0.1.0-alpha.0)
+      Premajor (1.0.0-alpha.0)
+      Custom Prerelease
+      Custom Version
+    ```
+
+3. Commit your changes and submit the `CHANGELOG` for approval. Once approved, merge into `master`.
+
+4. (*Internal use only*) Reach out in the `#odyssey` slack channel to promote the package to public NPM.
