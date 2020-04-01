@@ -14,7 +14,7 @@ else
   echo "Yarn installation failed!"
 fi
 
-cd ${OKTA_HOME}/${REPO}
+cd ${OKTA_HOME}/odyssey
 
 if ! yarn install; then
   echo "yarn install command failed! Exiting..."
