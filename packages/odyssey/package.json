@@ -11,10 +11,10 @@
   "main": "src/scss/odyssey.scss",
   "style": "src/scss/odyssey.scss",
   "scripts": {
-    "prepare": "yarn build",
-    "build": "node-sass src/scss/odyssey.scss dist/odyssey.css",
-    "lint": "stylelint src/",
-    "test": "yarn lint"
+    "prepare": "./scripts/prepare",
+    "build": "./scripts/build",
+    "lint": "./scripts/prepare",
+    "test": "./scripts/test"
   },
   "devDependencies": {
     "node-sass": "^4.9.4",
