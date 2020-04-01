@@ -161,7 +161,7 @@ The form below utilizes two field sets, "General Info" and "Authentication Setti
         <legend class="ods-group-legend">Authentication Settings</legend>
         <fieldset class="ods-fieldset">
           <div class="ods-fieldset-flex">
-            <select class="ods-select-input" name="user-match" id="user-match" aria-describedby="user-match-hint"  autocomplete="off" spellcheck="false" required>
+            <select class="ods-select" name="user-match" id="user-match" aria-describedby="user-match-hint"  autocomplete="off" spellcheck="false" required>
               <option value="dir" selected>Employee Directory</option>
               <option value="client">Client List</option>
               <option value="customer">Customer Database</option>
@@ -209,7 +209,7 @@ The form below utilizes two field sets, "General Info" and "Authentication Setti
       <legend class="ods-group-legend">Authentication Settings</legend>
       <fieldset class="ods-fieldset">
         <div class="ods-fieldset-flex">
-          <select class="ods-select-input" name="user-match" id="user-match" aria-describedby="user-match-hint"  autocomplete="off" spellcheck="false" required>
+          <select class="ods-select" name="user-match" id="user-match" aria-describedby="user-match-hint"  autocomplete="off" spellcheck="false" required>
             <option value="dir" selected>Employee Directory</option>
             <option value="client">Client List</option>
             <option value="customer">Customer Database</option>
@@ -273,7 +273,7 @@ Fields should also include various error messages for possible invalid states. E
       <div class="ods-fieldset-flex">
         <input class="ods-text-input" type="email" name="email-empty" id="email-empty" autocomplete="email" aria-describedby="email-empty-error" spellcheck="false" required data-invalid>
         <label class="ods-label" for="email-empty">Email</label>
-        <aside class="field--error" id="email-empty-error">
+        <aside class="ods-field--error" id="email-empty-error">
           <span class="u-visually-hidden">Error:</span>This field can't be left blank.
         </aside>
       </div>
@@ -285,7 +285,7 @@ Fields should also include various error messages for possible invalid states. E
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="email" name="email-empty" id="email-empty" autocomplete="email" aria-describedby="email-empty-error" spellcheck="false" required data-invalid>
       <label class="ods-label" for="email-empty">Email</label>
-      <aside class="field--error" id="email-empty-error">
+      <aside class="ods-field--error" id="email-empty-error">
         <span class="u-visually-hidden">Error:</span>This field can't be left blank.
       </aside>
     </div>
@@ -299,7 +299,7 @@ Fields should also include various error messages for possible invalid states. E
       <div class="ods-fieldset-flex">
         <input class="ods-text-input" type="email" name="email-invalid" id="email-invalid" autocomplete="email" aria-describedby="email-invalid-error" value="not gonna happen" spellcheck="false" required data-invalid>
         <label class="ods-label" for="email-invalid">Email</label>
-        <aside class="field--error" id="email-invalid-error">
+        <aside class="ods-field--error" id="email-invalid-error">
           <span class="u-visually-hidden">Error:</span>This does not appear to be a valid email address.
         </aside>
       </div>
@@ -311,7 +311,7 @@ Fields should also include various error messages for possible invalid states. E
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="email" name="email-invalid" id="email-invalid" autocomplete="email" aria-describedby="email-invalid-error" value="not gonna happen" spellcheck="false" required data-invalid>
       <label class="ods-label" for="email-invalid">Email</label>
-      <aside class="field--error" id="email-invalid-error">
+      <aside class="ods-field--error" id="email-invalid-error">
         <span class="u-visually-hidden">Error:</span>This does not appear to be a valid email address.
       </aside>
     </div>
@@ -327,7 +327,7 @@ Fields may utilize field hints to provide context, formatting help, or other gui
       <div class="ods-fieldset-flex">
         <input class="ods-text-input" type="email" name="email-hinted" id="email-hinted" autocomplete="email" spellcheck="false" aria-describedby="email-hinted-hint" required>
         <label class="ods-label" for="email-hinted">Email</label>
-        <aside class="field--hint" id="email-hinted-hint">
+        <aside class="ods-field--hint" id="email-hinted-hint">
           e.g. jane.doe@gmail.com
         </aside>
       </div>
@@ -339,7 +339,7 @@ Fields may utilize field hints to provide context, formatting help, or other gui
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="email" name="email-hinted" id="email-hinted" autocomplete="email" spellcheck="false" aria-describedby="email-hinted-hint" required>
       <label class="ods-label" for="email-hinted">Email</label>
-      <aside class="field--hint" id="email-hinted-hint">
+      <aside class="ods-field--hint" id="email-hinted-hint">
         e.g. jane.doe@gmail.com
       </aside>
     </div>
@@ -355,10 +355,10 @@ Field hints remain in place when an error message is displayed. In these cases, 
       <div class="ods-fieldset-flex">
         <input class="ods-text-input" data-invalid type="email" name="email-both" id="email-both" autocomplete="email" spellcheck="false" aria-describedby="email-both-hint email-both-error" required>
         <label class="ods-label" for="email-hinted">Email</label>
-        <aside class="field--hint" id="email-both-hint">
+        <aside class="ods-field--hint" id="email-both-hint">
           e.g. jane.doe@gmail.com
         </aside>
-        <aside class="field--error" id="email-both-error">
+        <aside class="ods-field--error" id="email-both-error">
           <span class="u-visually-hidden">Error:</span>This field can't be left blank.
         </aside>
       </div>
@@ -370,10 +370,10 @@ Field hints remain in place when an error message is displayed. In these cases, 
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="email" name="email-both" id="email-both" autocomplete="email" spellcheck="false" aria-describedby="email-both-hint email-both-error" required>
       <label class="ods-label" for="email-hinted">Email</label>
-      <aside class="field--hint" id="email-both-hint">
+      <aside class="ods-field--hint" id="email-both-hint">
         e.g. jane.doe@gmail.com
       </aside>
-      <aside class="field--error" id="email-both-error">
+      <aside class="ods-field--error" id="email-both-error">
         <span class="u-visually-hidden">Error:</span>This field can't be left blank.
       </aside>
     </div>
@@ -458,7 +458,7 @@ Some forms require a read-only state. This can be achieved by adding the `data-r
         <div class="ods-fieldset-flex">
           <input class="ods-text-input" aria-describedby="org-tel-hint"  type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" readonly required>
           <label class="ods-label" for="org-tel">Telephone number</label>
-          <aside class="field--hint" id="org-tel-hint">
+          <aside class="ods-field--hint" id="org-tel-hint">
             Please include country code if outside the US.
           </aside>
         </div>
@@ -525,7 +525,7 @@ Some forms require a read-only state. This can be achieved by adding the `data-r
         <div class="ods-fieldset-flex">
           <input class="ods-text-input" aria-describedby="org-tel-hint"  type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" required>
           <label class="ods-label" for="org-tel">Telephone number</label>
-          <aside class="field--hint" id="org-tel-hint">
+          <aside class="ods-field--hint" id="org-tel-hint">
             Please include country code if outside the US.
           </aside>
         </div>

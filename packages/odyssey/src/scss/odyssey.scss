@@ -48,6 +48,7 @@
 @import 'components/number-input';
 @import 'components/radio-button';
 @import 'components/radio-button-layout';
+@import 'components/select';
 @import 'components/switch';
 @import 'components/table';
 @import 'components/text-input';
@@ -56,4 +57,4 @@
 @import 'components/top-bar';
 
 // Vendor Extensions
-@import 'vendors-ext/selectize-ext';
+@import 'vendors-ext/choices-ext';
