@@ -30,7 +30,7 @@ They can also be combined with an `.ods-field--hint` to provide greater context:
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
         <input class="ods-text-input" type="text" aria-describedby="name-hinted-hint" name="name-hinted" id="name-hinted" autocomplete="name-hinted" spellcheck="false" required>
-        <aside class="field--hint" id="name-hinted-hint">Your full name, please.</aside>
+        <aside class="ods-field--hint" id="name-hinted-hint">Your full name, please.</aside>
         <label class="ods-label" for="name">Name</label>
       </div>
     </fieldset>
@@ -40,7 +40,7 @@ They can also be combined with an `.ods-field--hint` to provide greater context:
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="text" aria-describedby="name-hinted-hint" name="name-hinted" id="name-hinted" autocomplete="name-hinted" spellcheck="false" required>
-      <aside class="field--hint" id="name-hinted-hint">Your full name, please.</aside>
+      <aside class="ods-field--hint" id="name-hinted-hint">Your full name, please.</aside>
       <label class="ods-label" for="name">Name</label>
     </div>
   </fieldset>
@@ -149,7 +149,7 @@ Note, when indicating a validation error, please use a `.ods-field--error` to in
       <div class="ods-fieldset-flex">
         <input class="ods-text-input" type="text" aria-describedby="name-invalid-hint" name="name-invalid" id="name-invalid" autocomplete="name" spellcheck="false" required data-invalid>
         <label class="ods-label" for="name-invalid">Name</label>
-        <aside class="field--error" id="name-invalid-hint">
+        <aside class="ods-field--error" id="name-invalid-hint">
           This field is required and cannot be left empty.
         </aside>
       </div>
@@ -161,7 +161,7 @@ Note, when indicating a validation error, please use a `.ods-field--error` to in
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="text" aria-describedby="name-invalid-hint" name="name-invalid" id="name-invalid" autocomplete="name" spellcheck="false" required data-invalid>
       <label class="ods-label" for="name-invalid">Name</label>
-      <aside class="field--error" id="name-invalid-hint">
+      <aside class="ods-field--error" id="name-invalid-hint">
         This field is required and cannot be left empty.
       </aside>
     </div>
@@ -180,7 +180,7 @@ Note, when indicating a validation error, please use a `.ods-field--error` to in
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
         <textarea class="ods-text-input ods-text-area" name="description" id="description" rows='4' cols='50' spellcheck="true" required></textarea>
-        <aside class="field--hint">
+        <aside class="ods-field--hint">
           Please describe your perfect Saturday in as many words as you need.
         </aside>
         <label class="ods-label" for="description">Your Perfect Saturday</label>
@@ -192,7 +192,7 @@ Note, when indicating a validation error, please use a `.ods-field--error` to in
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <textarea class="ods-text-input ods-text-area" name="description" id="description" rows='4' cols='50' spellcheck="true" required></textarea>
-      <aside class="field--hint">
+      <aside class="ods-field--hint">
         Please describe your perfect Saturday in as many words as you need.
       </aside>
       <label class="ods-label" for="description">Your Perfect Saturday</label>

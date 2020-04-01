@@ -120,7 +120,7 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
       <label class="ods-radio--label" for="radio-moon">The moon</label>
       <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-tennis-ball-invalid" value="tennis-ball" required>
       <label class="ods-radio--label" for="radio-tennis-ball-invalid">A tennis ball</label>
-      <aside class="field--error" id="radio-invalid-error">This selection is invalid.</aside>
+      <aside class="ods-field--error" id="radio-invalid-error">This selection is invalid.</aside>
     </fieldset>
   </div>
 
@@ -135,7 +135,7 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
     <label class="ods-radio--label" for="radio-moon">The moon</label>
     <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-tennis-ball-invalid" value="tennis-ball" required>
     <label class="ods-radio--label" for="radio-tennis-ball-invalid">A tennis ball</label>
-    <aside class="field--error" id="radio-invalid-error">This selection is invalid.</aside>
+    <aside class="ods-field--error" id="radio-invalid-error">This selection is invalid.</aside>
   </fieldset>
   ```
 </figure>
