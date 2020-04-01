@@ -1,0 +1,4 @@
+mkdir -p ./themes/nimatron/source/js/vendor && mkdir -p ./themes/nimatron/source/css/vendor/;
+cp ../../node_modules/micromodal/dist/micromodal.min.js themes/nimatron/source/js/vendor/micromodal.min.js;
+cp ../../node_modules/choices.js/public/assets/scripts/choices.min.js themes/nimatron/source/js/vendor/choices.min.js;
+cp ../../node_modules/prismjs/prism.js themes/nimatron/source/js/vendor/prism.js && cp ../../node_modules/prismjs/components/prism-scss.js themes/nimatron/source/js/vendor/prism-scss.js;
