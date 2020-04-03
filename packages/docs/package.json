@@ -1,7 +1,7 @@
 {
   "name": "@okta/design-docs",
   "description": "Design System Docs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "hexo": {
     "version": "3.9.0"
   },

@@ -73,19 +73,13 @@ Before publishing a new version, ensure the following steps are performed:
 
 2. Increment the package versions following [Semantic Versioning](https://semver.org/).
 
-    ```bash
-    yarn lerna-version
-
-    # Console output will appear similar to:
-    ? Select a new version (currently 0.0.1) (Use arrow keys)
-    ❯ Patch (0.0.2)
-      Minor (0.1.0)
-      Major (1.0.0)
-      Prepatch (0.0.2-alpha.0)
-      Preminor (0.1.0-alpha.0)
-      Premajor (1.0.0-alpha.0)
-      Custom Prerelease
-      Custom Version
+    ```diff
+    {
+      "name": "@okta/odyssey",
+    -  "version": "0.1.0",
+    +  "version": "0.2.0",
+      ...
+    }
     ```
 
 3. Commit your changes and submit the `CHANGELOG` for approval. Once approved, merge into `master`.
