@@ -10,7 +10,7 @@
   },
   "scripts": {
     "docs": "yarn --cwd packages/docs start",
-    "lerna-version": "lerna version --no-git-tag-version",
+    "lerna-version": "lerna version --no-git-tag-version --force-publish",
     "prelerna-publish": "lerna run build",
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry"
   },
