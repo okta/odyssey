@@ -48,7 +48,7 @@ Finally, Select inputs should not have a set default choice unless a supermajori
   ```
 </figure>
 
-### Option Groups
+### Option groups
 
 Options may also be grouped within the Select dropdown list to help guide users.
 

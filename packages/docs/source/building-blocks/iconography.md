@@ -13,7 +13,7 @@
   </div>
 </aside>
 
-## Messaging Icons
+## Messaging icons
 
 Icons are widely leveraged across the Okta ecosystem (roughly several hundred). There is a small subset of icons that are displayed in critical touchpoints for our users. We have classified these as messaging icons.
 

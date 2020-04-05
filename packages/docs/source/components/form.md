@@ -82,7 +82,7 @@ Forms are a container for interactive controls used to submit information.
   ```
 </figure>
 
-## Form Anatomy
+## Form anatomy
 
 While their content may get complicated, our forms are designed to present a hierarchy that is straightforward to implement as well as use. Most forms will utilize a header, some amount of field sets (each containing fields or form controls), actions, and an optional footer.
 
@@ -130,7 +130,7 @@ If your form utilizes Read/Edit states, you may also include an "Edit" button to
   ```
 </figure>
 
-### Field Sets
+### Field sets
 
 Field sets are used to group related form controls. When grouping fields, be sure to include a `<legend>` to both contextualize how the fields are related and ensure a clear hierarchy.
 
@@ -591,7 +591,7 @@ Placeholder text disappears when a field is interacted with. For this reason, it
 
 Placeholder content is limited to static text. Additionally, placeholder text is truncated beyond the width of its input.
 
-#### Field Value Confusion
+#### Field value confusion
 
 Low-contrast placeholder styling may be illegible for some users; however, there's evidence to suggest that placeholders with compliant contrast can be mistaken for field values.
 
@@ -601,7 +601,7 @@ Regardless of styling, users with low digital literacy may not understand the pu
 
 ## Reference
 
-### Related Components
+### Related components
 
 <ul>
   <li>
@@ -636,7 +636,7 @@ Regardless of styling, users with low digital literacy may not understand the pu
   </li>
 </ul>
 
-### Further Reading
+### Further reading
 
 <ul>
   <li>
