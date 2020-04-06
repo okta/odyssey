@@ -127,10 +127,10 @@
           Select
         </th>
         <td>
-          In Progress
+          Beta
         </td>
         <td>
-          In Progress
+          Beta
         </td>
         <td>
           -
@@ -144,10 +144,10 @@
           Table
         </th>
         <td>
-          In Progress
+          Beta
         </td>
         <td>
-          In Progress
+          Beta
         </td>
         <td>
           -
