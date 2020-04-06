@@ -85,7 +85,7 @@ We use a `button` with the `switch` role instead of a checkbox. It functions ide
 
 The `aria-checked` attribute is required with either `true` or `false` values. `true` represents "on"; `false` represents "off". When the user clicks on the `switch`, a click event is fired, which changes the state of the `switch`. The handler also changes the value of the `aria-checked` attribute from `true` to `false` and the other way around.
 
-## Further Reading
+## Further reading
 
 <ul>
     <li>

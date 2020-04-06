@@ -79,7 +79,7 @@ They can also be combined with an `.ods-field--hint` to provide greater context:
   ```
 </figure>
 
-### Read Only
+### Read only
 
 > This Boolean attribute prevents the user from modifying the value of the input. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly'>MDN</a></cite>
 
@@ -169,9 +169,9 @@ Note, when indicating a validation error, please use a `.ods-field--error` to in
   ```
 </figure>
 
-## Additional Types
+## Additional types
 
-### Text Area
+### Text area
 
 > The HTML `<textarea>` element represents a multi-line plain-text editing control, useful when you want to allow users to enter a sizeable amount of free-form text, for example a comment on a review or feedback form. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea">MDN</a></cite>
 
@@ -250,7 +250,7 @@ Note, when indicating a validation error, please use a `.ods-field--error` to in
   ```
 </figure>
 
-### Telephone Number
+### Telephone number
 
 >`<input>` elements of type "tel" are used to let the user enter and edit a telephone number. Unlike `<input type="email">` and `<input type="url">`, the input value is not automatically validated to a particular format before the form can be submitted, because formats for telephone numbers vary so much around the world. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel'>MDN</a></cite>
 

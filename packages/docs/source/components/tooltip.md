@@ -96,7 +96,7 @@ This may be the case for disabled controls or inline content like abbreviations.
   ```
 </figure>
 
-### Don't Use
+### Don't use
 
 #### When users need to interact with the content
 
@@ -258,7 +258,7 @@ Tooltips are hidden when losing `:hover` or `:focus`. In order to maintain parit
 
 The cursor displayed when hovering a tooltipped item will be determined by the item itself, not the tip.
 
-## Responsive Considerations
+## Responsive considerations
 
 With few exceptions, `:focus` and `:hover` interactions are typically unavailable on touchscreen devices, or trigger `:active` at the same time. (Android's <a href="https://material.io/design/interaction/gestures.html#types-of-gestures">long press action gesture</a> is one such exception.) This means tooltips on controls may be completely invisible for users of these devices.
 
@@ -273,7 +273,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
 * The tooltip itself should utilize the `role='tooltip'` attribute to distinguish it from other popups.
 * Per <a href="https://www.w3.org/TR/wai-aria-1.1/#tooltip">ARIA guidelines</a>, our tooltips triggered by :hover and :focus employ a short delay (1s) before animating.
 
-### Tooltip as a Label
+### Tooltip as a label
 
 When using tooltips as a label, no further considerations are necessary. Assistive technologies will read the following as "Edit".
 
@@ -301,7 +301,7 @@ When using tooltips as a label, no further considerations are necessary. Assisti
   ```
 </figure>
 
-### Tooltip as a Description
+### Tooltip as a description
 
 When using tooltips to provide additional information, ensure that the element also includes a visually hidden, accessible label. Assistive technologies will read the following as "Edit. View and manage this profile."
 

@@ -123,7 +123,7 @@ A navigational element that creates more real estate to house additional navigat
   ```
 </figure>
 
-## Dropdown Anatomy
+## Dropdown anatomy
 
 Dropdowns offer a variety of optional parts that may be combined to provide the level of detail your use requires.
 
@@ -223,7 +223,7 @@ Dropdowns may include a header to provide additional context. If the associated 
   ```
 </figure>
 
-### Dropdown Items
+### Dropdown items
 
 The bulk of dropdown content will be its items. In the case of navigational dropdowns, these will always be links.
 
@@ -602,7 +602,7 @@ When utilizing item descriptions, you should aim to limit your item count to fiv
   </li>
 </ul>
 
-### UI Text
+### UI text
 
 When naming dropdown items and writing descriptions, try to be as succint and clear as possible. Remember that assistive technologies will read out the dropdown link and description. While context is important, long item descriptions may be frustrating.
 
@@ -612,13 +612,13 @@ When naming dropdown items and writing descriptions, try to be as succint and cl
 
 Every dropdown container should utilize `aria-label='submenu'` to indicate that the user is in a second level of hierarchy.
 
-### Tab Index
+### Tab index
 
 Any dropdown trigger that is not a link should utilize `tabindex='0'` to ensure that the dropdown can be triggered by a `:focus` state. While the dropdown items are accessible to screen readers whether or not the menu is visible, sighted users should be able to trigger display via the keyboard.
 
 ## References
 
-### Related Components
+### Related components
 
 <ul>
   <li>

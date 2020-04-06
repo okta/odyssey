@@ -1,4 +1,4 @@
-# UI Status
+# UI status
 
 <figure class="ods-table--figure">
   <table class="ods-table">
@@ -12,12 +12,6 @@
       <th scope="column">
         Figma
       </th>
-      <th scope="column">
-        Web Component
-      </th>
-      <th scope="column">
-        React
-      </th>
     </thead>
     <tbody>
       <tr>
@@ -30,12 +24,6 @@
         <td>
           Beta
         </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
-        </td>
       </tr>
       <tr>
         <th scope="row">
@@ -46,12 +34,6 @@
         </td>
         <td>
           Beta
-        </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
         </td>
       </tr>
       <tr>
@@ -64,12 +46,6 @@
         <td>
           Beta
         </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
-        </td>
       </tr>
       <tr>
         <th scope="row">
@@ -80,12 +56,6 @@
         </td>
         <td>
           Beta
-        </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
         </td>
       </tr>
       <tr>
@@ -98,12 +68,6 @@
         <td>
           Beta
         </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
-        </td>
       </tr>
       <tr>
         <th scope="row">
@@ -114,12 +78,6 @@
         </td>
         <td>
           Beta
-        </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
         </td>
       </tr>
       <tr>
@@ -132,12 +90,6 @@
         <td>
           Beta
         </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
-        </td>
       </tr>
       <tr>
         <th scope="row">
@@ -148,12 +100,6 @@
         </td>
         <td>
           Beta
-        </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
         </td>
       </tr>
       <tr>
@@ -166,12 +112,6 @@
         <td>
           Beta
         </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
-        </td>
       </tr>
       <tr>
         <th scope="row">
@@ -182,12 +122,6 @@
         </td>
         <td>
           Beta
-        </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
         </td>
       </tr>
     </tbody>

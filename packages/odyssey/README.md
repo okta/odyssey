@@ -4,7 +4,7 @@ This package provides the necessary SCSS and fonts to utilize Odyssey, Okta's de
 
 For guidance on how and when to implement individual components, please see our <a href="https://design-docs.trexcloud.com/">online docs</a>.
 
-## What's Included
+## What's included
 
 `dist/odyssey.css` - A precompiled version of Odyssey for those who don't need the benefits of Sass.
 
@@ -12,7 +12,7 @@ For guidance on how and when to implement individual components, please see our 
 
 `src/scss/odyssey.scss` - The main compilation sheet for Odyssey.
 
-## Getting Started
+## Getting started
 
 ### Install Odyssey
 

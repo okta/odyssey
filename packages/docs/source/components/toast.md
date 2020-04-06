@@ -13,7 +13,7 @@ Toasts are non-disruptive messaging components that appear at the bottom right o
     <li>Link: Provides a follow-up action, if necessary. [Optional]</li>
 </ol>
 
-### Defining Characteristics
+### Defining characteristics
 
 #### Position
 
@@ -116,13 +116,13 @@ Responsive, fixed to the bottom right corner of the viewport.
 
 ## Reference
 
-### Related Components
+### Related components
 <ul>
     <li><a href="#">Callouts</a></li>
     <li><a href="#">Banners</a></li>
 </ul>
 
-### Further Reading
+### Further reading
 <ul>
     <li><a href="#" target="_blank" rel="noopener">Link #1</a> - <cite>Author (XXXX)</cite></li>
 </ul>

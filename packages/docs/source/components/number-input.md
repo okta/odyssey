@@ -1,4 +1,4 @@
-# Number Input
+# Number input
 
 > `<input>` elements of type "number" are used to let the user enter a number. They include built-in validation to reject non-numerical entries. The browser may opt to provide stepper arrows to let the user increase and decrease the value using their mouse or by simply tapping with a fingertip. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number'>MDN</a></cite>
 
@@ -26,7 +26,7 @@
 
 Number Inputs have the same available states as Text Inputs unless noted below.
 
-### Read Only
+### Read only
 
 > This Boolean attribute prevents the user from modifying the value of the input. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly'>MDN</a></cite>
 

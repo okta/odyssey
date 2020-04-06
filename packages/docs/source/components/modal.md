@@ -1,6 +1,6 @@
 # Modals
 
-## General Guidelines
+## General guidelines
 
 Modal dialogs are a powerful UI element. They are inserted above the main content and change the context to a special mode that requires user interaction. That is, they disable all other contexts until the user interacts with the modal itself.
 
@@ -72,7 +72,7 @@ Here are a few smells for when a modal dialog may be inappropriate:
 
 Modal dialogs are notorious for their accessibility issues, but don't worry! We've got your back.
 
-### Accessible Attributes
+### Accessible attributes
 
 The modal components makes use of several ARIA attributes in order to give assistive technologies (AT) as much information as possible.
 
@@ -94,7 +94,7 @@ The modal components makes use of several ARIA attributes in order to give assis
   </li>
 </ul>
 
-### Accessible Behavior
+### Accessible behavior
 
 When a modal dialog is opened, interaction is limited to the new context. While this may seem expected, it can surprise users - and is even worse for users requiring assistive technologies.
 
@@ -114,7 +114,7 @@ For convenience, users can exit the modal in a few ways:
 
 For users happy with their new context, we ensure their attention won't be misdirected. Scrolling on the main content becomes locked, and we inform the browser to lock the `tabindex` to the modal context. This way, regardless of input method, a user's interactions are limited to their new scope.
 
-## Legacy Support
+## Legacy support
 
 While our current usage of modals doesn't conform to the recommended guidelines above, the updated UI does come with a few additional benefits for our content-heavy configuration modals:
 
@@ -135,7 +135,7 @@ While our current usage of modals doesn't conform to the recommended guidelines 
 
 <button class="ods-button is-ods-button-secondary" data-micromodal-trigger="ods-modal-form">Form Modal</button>
 
-## Further Reading
+## Further reading
 
 <ul>
   <li>

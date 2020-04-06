@@ -1,4 +1,4 @@
-# Previewing Changes
+# Previewing changes
 
 **Aspirational. We do not yet do this reliably.**
 
