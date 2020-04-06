@@ -7,3 +7,4 @@ public/
 dist/
 .deploy*/
 vendor/
+source/getting-started/changelog.md

@@ -9,13 +9,15 @@
     "dist"
   ],
   "scripts": {
-    "build": "yarn vendor && yarn micromodal && yarn choices && yarn prism && hexo g",
+    "prebuild": "yarn changelog && yarn vendor && yarn micromodal && yarn choices && yarn prism",
+    "build": "hexo g",
+    "start": "yarn build && hexo s",
+    "test": "echo \"Tests have not been implemented for ${npm_package_name}\" && exit 0",
     "vendor": "mkdir -p themes/nimatron/source/js/vendor && mkdir -p themes/nimatron/source/css/vendor/",
     "micromodal": "cp ../../node_modules/micromodal/dist/micromodal.min.js themes/nimatron/source/js/vendor/micromodal.min.js",
     "choices": "cp ../../node_modules/choices.js/public/assets/scripts/choices.min.js themes/nimatron/source/js/vendor/choices.min.js",
     "prism": "cp ../../node_modules/prismjs/prism.js themes/nimatron/source/js/vendor/prism.js && cp ../../node_modules/prismjs/components/prism-scss.js themes/nimatron/source/js/vendor/prism-scss.js",
-    "start": "yarn build && hexo s",
-    "test": "echo \"Tests have not been implemented for ${npm_package_name}\" && exit 0"
+    "changelog": "cp ../odyssey/CHANGELOG.md ./source/getting-started/changelog.md"
   },
   "browserslist": [
     "last 2 versions"
