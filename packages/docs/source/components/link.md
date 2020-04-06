@@ -87,7 +87,7 @@ Links should display a visible <code>:focus</code> state when users interact via
 
 When localizing links, avoid putting the text through a translator and applying the markup. Instead, consider the language's nuances and grammar to make the link and its surrounding messaging feel natural.
 
-## Further Reading
+## Further reading
 
 <ul>
   <li><a href="https://usabilitygeek.com/hyperlink-usability-guidelines-usable-links/ " target="_blank" rel="noopener">https://usabilitygeek.com/hyperlink-usability-guidelines-usable-links/</a></li>

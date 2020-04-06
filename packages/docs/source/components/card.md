@@ -96,7 +96,7 @@ Cards can be used for a wide range of purposes and content types, so we've desig
 
 A card may be assembled from no fewer than 2 of these sections.
 
-### Featured Media
+### Featured media
 
 The featured media section can be used to showcase full bleed images or video. If your card employs a data visualization, consider including it in the main content area instead. It will benefit from context provided by the header or surrounding prose.
 
@@ -361,7 +361,7 @@ While cards do not have semantic states by default, your use case may require th
   ```
 </figure>
 
-### State Accessibility
+### State accessibility
 
 When indicating a card's state, remember that color is not an effective affordance for all users. Be sure to use a label that clearly communicates the state. You should also utilize the `aria-describedby` to inform assistive technologies of the relationship between `.card` and `.card--state`.
 

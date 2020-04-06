@@ -1,4 +1,4 @@
-# Intentional UI Friction
+# Intentional UI friction
 
 In general we strive to make our UI as efficient and easy-to-use as possible. However, there are times when intentional inefficiency helps our users.
 

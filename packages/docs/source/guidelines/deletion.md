@@ -1,8 +1,8 @@
-# Deletion & Deactivation
+# Deletion & deactivation
 
 When things are removed or deactivated in Okta, there is often some impact to other settings. To ensure predicatability and reduce risk, our system behavior should be consistent and conservative with regards to these references. Five cases will be discussed.
 
-## When Settings are Removed
+## When Settings are removed
 
 Deactivating a setting
 
@@ -16,7 +16,7 @@ Hiding a setting
 * Behavior: On the backend, we will save the settings. This matches our API standard of non-destruction and allows the old settings to be queried via the API. However, when the setting is turned back on, it should be in a default state.
 * Notes: Our reasoning is that when something new appears in the UI, it is reasonable to assume that it is in a default state. Because it could be dangerous to reinstate something with non-default settings, Okta should revert settings back to our best practice default. If we expect frequent on/off behavior, we should use an activation state.
 
-## When Objects are Removed
+## When Objects are removed
 
 Deleting an object that is depended upon by something else
 

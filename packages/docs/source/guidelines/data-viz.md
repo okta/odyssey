@@ -1,4 +1,4 @@
-# Data Visualization
+# Data visualization
 
 <aside class="ods-callout is-ods-callout-warning" aria-live="polite">
   <svg class="ods-callout--icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
@@ -20,10 +20,10 @@ Data visualization helps our users:
 * Identify patterns and trends that text alone can not
 * Simplify complex information
 
-## Chart Types
+## Chart types
 Different chart types for different use cases.
 
-### Vertical Bar Chart
+### Vertical bar chart
 
 Show continuous data, i.e., usage over time. 
 Use to compare different categories of data across categorized points over a period of time.
@@ -163,7 +163,7 @@ Use to compare a specific group.
   </svg>
 </figure>
 
-### Line Chart
+### Line chart
 
 Coming soon
 
@@ -191,7 +191,7 @@ This color palette has been selected specifically to optimize for accessibility 
   <li class="sample--color is-sample-magenta-dark"></li>
 </ul>
 
-### Axis Lines
+### Axis lines
 Axis lines are points of reference to help understand quantitative data. They break a graph in blocks of data that help the user understand and compare the visualization. Axis lines should be simple and unobtrusive.
 <figure class="illustrative--example">
   <svg width="729" height="287" viewBox="0 0 729 287" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -453,7 +453,7 @@ Providing a caption helps anyone who relies on assistive technology understand t
   </svg>
 </figure>
 
-## Further Reading
+## Further reading
 <ul>
   <li>
     <a href="https://alistapart.com/article/accessibledatavisualization" target="_blank" rel="noopener">Accessible Data Visualization with Web Standards</a> - <cite>Wilson Minner (2008)</cite>

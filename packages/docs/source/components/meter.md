@@ -261,7 +261,7 @@ The meter tag is not supported on IE, Edge 12, Firefox 2-15, Chrome 4-7, Safari 
 * Browsers offer different levels of support for screen readers and can vary quite a bit. For a full list of screen reader support, <a href="https://scottaohara.github.io/a11y_styled_form_controls/src/meter/" target="_blank" rel="noopener">see this article.</a>
 
 
-## Further Reading
+## Further reading
 
 <ul>
     <li>
