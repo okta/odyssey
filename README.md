@@ -18,7 +18,7 @@ Odyssey is Okta’s official design system that consists of reusable components 
 
 <!-- /TOC -->
 
-## Getting Started
+## Getting started
 
 We use [Yarn](https://github.com/yarnpkg/yarn) as our node package manager client. To install Yarn, check out their [installation instructions](https://yarnpkg.com/getting-started/install).
 
@@ -32,7 +32,7 @@ cd odyssey
 yarn install
 ```
 
-### Running the Design System Docs
+### Running the design system docs
 
 Want to see Odyssey in action? Our `docs` package contains a static website styled using Odyssey. Simply run the following command to launch it:
 
