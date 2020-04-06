@@ -1,4 +1,4 @@
-# Top Bar
+# Top bar
 
 <aside class="ods-callout is-ods-callout-warning" aria-live="polite">
   <svg class="ods-callout--icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">

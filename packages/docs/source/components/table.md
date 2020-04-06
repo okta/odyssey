@@ -112,7 +112,7 @@ Note that tables should _not_ have a fixed width, nor should their columns. Brow
   ```
 </figure>
 
-### Row Headings
+### Row headings
 
 If your data set has keys on two axes, we also support setting the left-most column as a row heading. This is particularly helpful when we expect the user to utilize a known value for data lookup (e.g. "What is the capital of Brazil?").
 
@@ -222,7 +222,7 @@ Be sure to identify your row heading column as well - that is, don't leave a bla
   ```
 </figure>
 
-### Row Grouping
+### Row grouping
 
 If you need to group rows by a shared data point, we also support using <code>rowspan</code> to do so. Otherwise, follow the same implementation guidelines as above.
 
@@ -388,7 +388,7 @@ Note that the use of <code>colspan</code> or <code>rowspan</code> may cause acce
   ```
 </figure>
 
-## Content Guidelines
+## Content guidelines
 
 ### Do's
 
@@ -400,11 +400,11 @@ Note that the use of <code>colspan</code> or <code>rowspan</code> may cause acce
 - Use overly long column headings - try to keep them as short as or shorter than your column content.
 - Don’t create complex interactions that change the state of the row.
 
-### Supported Content Types
+### Supported content types
 
 The basic table styling is based on what is most legible and scannable for a normal string of text. However, different data types may require alternate styling. Currently, we provide three variant styles and will add more as necessary.
 
-#### Numerical Data
+#### Numerical data
 
 If the data in a column consists primarily of figures or numerical data, you can utilize the <code>.is-ods-table-num</code> class. It's been applied to the above examples in order to ensure tabular number display and right-align the figures for easy comparison.
 
@@ -424,7 +424,7 @@ Please follow normal Button variant guidelines within tables.
 
 You may include checkboxes in the first column of your table if row selection is necessary. Use the `.is-ods-table-checkbox` class on each cell to ensure proper spacing.
 
-##### Checkbox Behavior
+##### Checkbox behavior
 
 Our Sass package does not come with JavaScript, so you'll need to use one of our associated libraries or implement the appropriate checkbox behavior yourself:
 
@@ -610,11 +610,11 @@ If the selection of total rows is in a mixed state, the heading checkbox should 
 
 ## States
 
-### Empty Cells
+### Empty cells
 
 If the value of a cell is empty, use an en dash (&ndash;) to indicate this.
 
-### Empty Tables
+### Empty tables
 
 If no data is returned - whether due to filtering or an empty data set - be sure to provide a null state for your users. If you can detect why no data was returned, make that clear in the <code>tfoot</code>.
 
@@ -675,9 +675,9 @@ The <code>data-null</code> attribute will ensure the table styling is adjusted.
   ```
 </figure>
 
-## Additional Features
+## Additional features
 
-### Sortable Tables
+### Sortable tables
 
 While we provide styling for sortable tables, our Sass package does not currently come with JavaScript. You'll need to use one of our associated libraries or implement the appropriate sorting behavior yourself:
 
@@ -823,15 +823,15 @@ When any column becomes sorted, the previously active column should return to an
   ```
 </figure>
 
-## Responsive Design
+## Responsive design
 
-### Fluid Tables
+### Fluid tables
 
 Our default tables here have all been wrapped in `<figure class="ods-table--figure">` which will ensure that our tables are always scrollable and never extend beyond their container.
 
 ## Accessibility
 
-### Titles and Captions
+### Titles and captions
 
 Please provide each table with both a title and caption.
 
@@ -853,7 +853,7 @@ A note on the current HTML5 spec:
   </p>
 </blockquote>
 
-### Complicated Tables
+### Complicated tables
 
 While the browser support is strong and they are valid attributes, try to refrain from using complicated table layouts that rely on <code>colspan</code> or <code>rowspan</code>.
 
