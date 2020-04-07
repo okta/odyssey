@@ -27,7 +27,6 @@ Odyssey takes care to provide additional style to the following HTML elements by
       <a href="tel:+18887227871">(888) 722-7871</a>
     </address>
   </div>
-
 ```html
 <p>Okta Headquarters</p>
 <address>
@@ -240,7 +239,6 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 ## small <a name="small"></a>
 > The HTML `<small>` element represents side-comments and small print, like copyright and legal text, independent of its styled presentation. By default, it renders text within it one font-size smaller, such as from small to x-small. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small'>MDN</a></cite>
 
-
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <p><small>&copy; 2020 Atko, Inc. All Rights Reserved.</small></p>
@@ -253,7 +251,6 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 
 ## strong <a name="strong"></a>
 > The HTML Strong Importance Element (`<strong>`) indicates that its contents have strong importance, seriousness, or urgency. Browsers typically render the contents in bold type. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong'>MDN</a></cite>
-
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -283,6 +280,7 @@ You can also nest `strong`. Doing so will provide additional style.
   <strong>For your safety and the safety of others, <strong>please don't run.</strong></strong>
 </p>
 ```
+</figure>
 
 ## sub <a name="sub"></a>
 > The HTML Subscript element (`<sub>`) specifies inline text which should be displayed as subscript for solely typographical reasons. Subscripts are typically rendered with a lowered baseline using smaller text. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub'>MDN</a></cite>
