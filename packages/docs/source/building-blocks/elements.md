@@ -22,7 +22,6 @@ Odyssey takes care to provide additional style to the following HTML elements by
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <p>Contact the author of this page:</p>
-
     <address>
       <a href="mailto:jim@rock.com">jim@rock.com</a><br>
       <a href="tel:+13115552368">(311) 555-2368</a>
