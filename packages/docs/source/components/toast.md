@@ -13,7 +13,7 @@ Toasts are non-disruptive messaging components that appear at the bottom right o
     <li>Link: Provides a follow-up action, if necessary. [Optional]</li>
 </ol>
 
-### Defining Characteristics
+### Defining characteristics
 
 #### Position
 
@@ -73,8 +73,8 @@ Responsive, fixed to the bottom right corner of the viewport.
 Responsive, fixed to the bottom right corner of the viewport.
 
 ## Guidelines
-<figure class="table--figure">
-  <table class="table">
+<figure class="ods-table--figure">
+  <table class="ods-table">
       <thead>
         <tr>
           <th scope="column">Dos</th>
@@ -116,51 +116,51 @@ Responsive, fixed to the bottom right corner of the viewport.
 
 ## Reference
 
-### Related Components
+### Related components
 <ul>
     <li><a href="#">Callouts</a></li>
     <li><a href="#">Banners</a></li>
 </ul>
 
-### Further Reading
+### Further reading
 <ul>
     <li><a href="#" target="_blank" rel="noopener">Link #1</a> - <cite>Author (XXXX)</cite></li>
 </ul>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <div class="toast--pen">
-      <aside class="toast">
-        <svg class="toast--icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
+    <div class="ods-toast--pen">
+      <aside class="ods-toast">
+        <svg class="ods-toast--icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
           <circle class="icon--fill" cx="50" cy="50" r="50"/>
           <path class="icon--stroke" d="M42.997 69c-.917 0-1.834-.39-2.489-1.04L27.146 54.712c-1.31-1.298-1.572-3.507-.393-4.806 1.31-1.559 3.668-1.688 5.109-.26l11.135 11.042h.131l24.76-24.55c1.31-1.3 3.405-1.56 4.846-.39 1.572 1.298 1.703 3.637.262 5.066L45.486 68.09c-.655.65-1.572.909-2.489.909z"/>
         </svg>
-        <section class="toast--main">
-          <p class="toast-content">
+        <section class="ods-toast--main">
+          <p class="ods-toast-content">
             Okta has been added to your dashboard.
           </p>
         </section>
-        <button class="toast--close">
-          <svg class="toast--close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+        <button class="ods-toast--close">
+          <svg class="ods-toast--close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path class="icon--stroke" d="M.572 1.184l12.244 12.244M12.816 1.184L.571 13.428"/>
           </svg>
         </button>
       </aside>
-      <aside class="toast">
-        <svg class="toast--icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
+      <aside class="ods-toast">
+        <svg class="ods-toast--icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
           <circle class="icon--fill" cx="50" cy="50" r="50"/>
           <path class="icon--stroke" d="M42.997 69c-.917 0-1.834-.39-2.489-1.04L27.146 54.712c-1.31-1.298-1.572-3.507-.393-4.806 1.31-1.559 3.668-1.688 5.109-.26l11.135 11.042h.131l24.76-24.55c1.31-1.3 3.405-1.56 4.846-.39 1.572 1.298 1.703 3.637.262 5.066L45.486 68.09c-.655.65-1.572.909-2.489.909z"/>
         </svg>
-        <section class="toast--main">
-          <h1 class="toast--title">
+        <section class="ods-toast--main">
+          <h1 class="ods-toast--title">
             App Added
           </h1>
-          <p class="toast-content">
+          <p class="ods-toast-content">
             Okta has been added to your dashboard.
           </p>
         </section>
-        <button class="toast--close">
-          <svg class="toast--close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+        <button class="ods-toast--close">
+          <svg class="ods-toast--close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path class="icon--stroke" d="M.572 1.184l12.244 12.244M12.816 1.184L.571 13.428"/>
           </svg>
         </button>

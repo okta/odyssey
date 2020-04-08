@@ -1,7 +1,7 @@
-# UI Status
+# UI status
 
-<figure class="table--figure">
-  <table class="table">
+<figure class="ods-table--figure">
+  <table class="ods-table">
     <thead>
       <th scope="column">
         Component
@@ -11,12 +11,6 @@
       </th>
       <th scope="column">
         Figma
-      </th>
-      <th scope="column">
-        Web Component
-      </th>
-      <th scope="column">
-        React
       </th>
     </thead>
     <tbody>
@@ -30,12 +24,6 @@
         <td>
           Beta
         </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
-        </td>
       </tr>
       <tr>
         <th scope="row">
@@ -46,12 +34,6 @@
         </td>
         <td>
           Beta
-        </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
         </td>
       </tr>
       <tr>
@@ -64,12 +46,6 @@
         <td>
           Beta
         </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
-        </td>
       </tr>
       <tr>
         <th scope="row">
@@ -80,12 +56,6 @@
         </td>
         <td>
           Beta
-        </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
         </td>
       </tr>
       <tr>
@@ -98,12 +68,6 @@
         <td>
           Beta
         </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
-        </td>
       </tr>
       <tr>
         <th scope="row">
@@ -115,28 +79,16 @@
         <td>
           Beta
         </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
-        </td>
       </tr>
       <tr>
         <th scope="row">
           Select
         </th>
         <td>
-          In Progress
+          Beta
         </td>
         <td>
-          In Progress
-        </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
+          Beta
         </td>
       </tr>
       <tr>
@@ -144,16 +96,10 @@
           Table
         </th>
         <td>
-          In Progress
+          Beta
         </td>
         <td>
-          In Progress
-        </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
+          Beta
         </td>
       </tr>
       <tr>
@@ -166,12 +112,6 @@
         <td>
           Beta
         </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
-        </td>
       </tr>
       <tr>
         <th scope="row">
@@ -182,12 +122,6 @@
         </td>
         <td>
           Beta
-        </td>
-        <td>
-          -
-        </td>
-        <td>
-          -
         </td>
       </tr>
     </tbody>

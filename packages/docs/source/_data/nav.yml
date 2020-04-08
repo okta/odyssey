@@ -3,12 +3,14 @@
 
 'getting started':
   'UI status': '/getting-started/status.html'
+  'Changelog': '/getting-started/changelog.html'
 
 'building blocks':
   'color': '/building-blocks/color.html'
   #'iconography': '/building-blocks/iconography.html'
   'spacing': '/building-blocks/spacing.html'
   'type': '/building-blocks/type.html'
+  'elements': '/building-blocks/elements.html'
 
 'components':
   # Needs Docs  'banner': '/components/banner.html'
@@ -23,9 +25,9 @@
   'modal': '/components/modal.html'
   #'navigation': '/components/navigation.html'
   'radio button': '/components/radio-button.html'
-  #'select': '/components/select.html'
+  'select': '/components/select.html'
   #'switch': '/components/switch.html'
-  #'table': '/components/table.html'
+  'table': '/components/table.html'
   #'toast': '/components/toast.html'
   #'top bar': '/components/top-bar.html'
   'text input': '/components/text-input.html'

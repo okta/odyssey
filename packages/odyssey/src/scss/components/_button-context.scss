@@ -1,0 +1,30 @@
+
+.ods-top-bar {
+  .ods-button {
+    @extend %button-small;
+  }
+}
+
+.ods-card--footer {
+  .ods-button {
+    @extend %button-small;
+  }
+}
+
+.ods-table {
+  .ods-button {
+    @extend %button-small;
+  }
+}
+
+.ods-form--header {
+  .ods-button {
+    @extend %button-small;
+  }
+
+  .ods-form:not([data-readonly]) & {
+    .ods-button {
+      display: none;
+    }
+  }
+}

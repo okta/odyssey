@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.button {
+.ods-button {
   display: inline-block;
   position: relative;
   margin: 0;
@@ -31,13 +31,13 @@
   line-height: $base-line-height;
 
   &:hover,
-  &.is-button-hover {
+  &.is-ods-button-hover {
     border-color: cv('action', 'dark');
     background-color: cv('action', 'dark');
   }
 
   &:focus,
-  &.is-button-focus {
+  &.is-ods-button-focus {
     outline: 0;
     background-color: cv('action', 'dark');
     box-shadow: 0 0 0 4px fauxpacity(cv('action', 'base'));
@@ -50,20 +50,20 @@
   }
 }
 
-.is-button-secondary {
+.is-ods-button-secondary {
   border-color: cv('action');
   background-color: $white;
   color: cv('action');
 
   &:hover,
-  &.is-button-hover {
+  &.is-ods-button-hover {
     border-color: cv('action', 'dark');
     background-color: cv('action', 'lightest');
     color: cv('action', 'dark');
   }
 
   &:focus,
-  &.is-button-focus {
+  &.is-ods-button-focus {
     border-color: cv('action', 'dark');
     background-color: cv('action', 'lightest');
     color: cv('action', 'dark');
@@ -76,17 +76,17 @@
   }
 }
 
-.is-button-danger {
+.is-ods-button-danger {
   background-color: cv('danger');
 
   &:hover,
-  &.is-button-hover {
+  &.is-ods-button-hover {
     border-color: cv('danger', 'dark');
     background-color: cv('danger', 'dark');
   }
 
   &:focus,
-  &.is-button-focus {
+  &.is-ods-button-focus {
     background-color: cv('danger', 'dark');
     box-shadow: 0 0 0 4px fauxpacity(cv('danger', 'base'));
   }
@@ -95,13 +95,13 @@
     background-color: fauxpacity(cv('danger', 'base'));
   }
 
-  &.is-button-secondary {
+  &.is-ods-button-secondary {
     border-color: cv('danger');
     background-color: $white;
     color: cv('danger');
 
     &:focus,
-    &.is-button-focus {
+    &.is-ods-button-focus {
       border-color: cv('danger', 'dark');
       background-color: cv('danger', 'lightest');
       color: cv('danger', 'dark');
@@ -115,18 +115,18 @@
   }
 }
 
-.is-button-overlay {
+.is-ods-button-overlay {
   background-color: $white;
   color: $text-body;
 
   &:hover,
-  &.is-button-hover {
+  &.is-ods-button-hover {
     border-color: transparent;
     background-color: cv('gray', '000');
   }
 
   &:focus,
-  &.is-button-focus {
+  &.is-ods-button-focus {
     background-color: cv('gray', '000');
     box-shadow: 0 0 0 4px cv('action', 'base');
   }
@@ -137,19 +137,19 @@
   }
 }
 
-.is-button-clear {
+.is-ods-button-clear {
   background-color: transparent;
   color: cv('action', 'base');
 
   &:hover,
-  &.is-button-hover {
+  &.is-ods-button-hover {
     border-color: transparent;
     background-color: cv('action', 'lightest');
     color: cv('action', 'dark');
   }
 
   &:focus,
-  &.is-button-focus {
+  &.is-ods-button-focus {
     background-color: cv('action', 'lightest');
     color: cv('action', 'dark');
   }
@@ -164,38 +164,6 @@
   font-size: ms(-1);
 }
 
-.is-button-small {
+.is-ods-button-small {
   @extend %button-small;
-}
-
-/* stylelint-disable-next-line no-descending-specificity */
-.button,
-o-button {
-  & + & {
-    margin-left: $small-spacing;
-  }
-}
-
-.top-bar {
-  .button {
-    @extend %button-small;
-  }
-}
-
-.card--footer {
-  .button {
-    @extend %button-small;
-  }
-}
-
-.form--header {
-  .button {
-    @extend %button-small;
-  }
-
-  .form:not([data-readonly]) & {
-    .button {
-      display: none;
-    }
-  }
 }

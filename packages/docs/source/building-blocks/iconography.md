@@ -1,19 +1,19 @@
 # Iconography
 
-<aside class="callout is-callout-warning" aria-live="polite">
-  <svg class="callout--icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
+<aside class="ods-callout is-ods-callout-warning" aria-live="polite">
+  <svg class="ods-callout--icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100">
     <path class="icon--fill" fill="#2F3F4A" d="M97.186 73.579L60.63 11.364C58.23 7.414 54.083 5 49.5 5c-4.583 0-8.73 2.414-11.13 6.364L1.814 73.58c-2.4 3.95-2.4 8.887-.109 12.838C4.105 90.585 8.252 93 12.835 93h73.33c4.582 0 8.838-2.414 11.13-6.584 2.291-3.95 2.291-8.887-.11-12.837z"/>
     <path fill="#fff" d="M49 28c-1.645 0-3 1.566-3 3.466v28.067C46 61.434 47.355 63 49 63s3-1.566 3-3.467V31.466c0-1.9-1.355-3.466-3-3.466z"/>
     <ellipse cx="49" cy="73" fill="#fff" rx="4" ry="3"/>
   </svg>
-  <div class="callout--content">
+  <div class="ods-callout--content">
     <p>
       Iconography guidelines and aesthetics have not been standardized. The documentation here is provisional and subject to change as these standards evolve.
     </p>
   </div>
 </aside>
 
-## Messaging Icons
+## Messaging icons
 
 Icons are widely leveraged across the Okta ecosystem (roughly several hundred). There is a small subset of icons that are displayed in critical touchpoints for our users. We have classified these as messaging icons.
 

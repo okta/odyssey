@@ -1,0 +1,10 @@
+.ods-modal {
+  .ods-form {
+    padding: 0;
+    border: 0;
+  }
+
+  .ods-form--header {
+    @include is-visually-hidden;
+  }
+}

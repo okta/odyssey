@@ -4,7 +4,7 @@ Hello and welcome! These are the early days of Okta's design system, and things 
 
 ## Contributing
 
-### Grab All the Things
+### Grab all the things
 
 These docs are maintained in the `docs` package, which exists to document `@okta/odyssey`.
 
@@ -42,7 +42,7 @@ You may need to [install yarn](https://yarnpkg.com/en/docs/install) if it's not 
 
 2. Go to <http://localhost:4000/>
 
-### Odyssey Development
+### Odyssey development
 
 In order to see your changes to the `@okta/odyssey` package reflected here during development, you'll need to link that package locally.
 
@@ -74,4 +74,4 @@ Now any changes you make in your local version of `@okta/odyssey` should be refl
 
 ## Questions?
 
-Stop by [#design_system](https://okta.slack.com/messages/C7T2H3KNJ) and say hello (Oktanauts-only for now).
+Stop by [#odyssey](https://okta.slack.com/messages/C7T2H3KNJ) and say hello (Oktanauts-only for now).

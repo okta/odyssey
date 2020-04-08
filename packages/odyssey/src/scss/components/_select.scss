@@ -1,0 +1,13 @@
+.ods-select:not([data-type]) {
+  @include input-baseline;
+
+  background-image: get-icon('caret', $text-body);
+  background-repeat: no-repeat;
+  background-position: right $em-small-spacing center;
+  background-size: ms(-1);
+  appearance: none;
+
+  option {
+    padding: 0;
+  }
+}

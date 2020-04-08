@@ -4,44 +4,44 @@
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="name" id="name" autocomplete="name" spellcheck="false" required>
-        <label class="label" for="name">Name</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="name" id="name" autocomplete="name" spellcheck="false" required>
+        <label class="ods-label" for="name">Name</label>
       </div>
     </fieldset>
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="text" name="name" id="name" autocomplete="name" spellcheck="false" required>
-      <label class="label" for="name">Name</label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="name" id="name" autocomplete="name" spellcheck="false" required>
+      <label class="ods-label" for="name">Name</label>
     </div>
   </fieldset>
   ```
 </figure>
 
 
-They can also be combined with a `.field--hint` to provide greater context:
+They can also be combined with an `.ods-field--hint` to provide greater context:
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" aria-describedby="name-hinted-hint" name="name-hinted" id="name-hinted" autocomplete="name-hinted" spellcheck="false" required>
-        <aside class="field--hint" id="name-hinted-hint">Your full name, please.</aside>
-        <label class="label" for="name">Name</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" aria-describedby="name-hinted-hint" name="name-hinted" id="name-hinted" autocomplete="name-hinted" spellcheck="false" required>
+        <aside class="ods-field--hint" id="name-hinted-hint">Your full name, please.</aside>
+        <label class="ods-label" for="name">Name</label>
       </div>
     </fieldset>
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="text" aria-describedby="name-hinted-hint" name="name-hinted" id="name-hinted" autocomplete="name-hinted" spellcheck="false" required>
-      <aside class="field--hint" id="name-hinted-hint">Your full name, please.</aside>
-      <label class="label" for="name">Name</label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" aria-describedby="name-hinted-hint" name="name-hinted" id="name-hinted" autocomplete="name-hinted" spellcheck="false" required>
+      <aside class="ods-field--hint" id="name-hinted-hint">Your full name, please.</aside>
+      <label class="ods-label" for="name">Name</label>
     </div>
   </fieldset>
   ```
@@ -55,55 +55,55 @@ They can also be combined with a `.field--hint` to provide greater context:
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="name-disabled" id="name-disabled" autocomplete="name" spellcheck="false" required disabled>
-        <label class="label" for="name-disabled">Name</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="name-disabled" id="name-disabled" autocomplete="name" spellcheck="false" required disabled>
+        <label class="ods-label" for="name-disabled">Name</label>
       </div>
     </fieldset>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="name-disabled" id="name-disabled" autocomplete="name" spellcheck="false" value="Diana Prince" required disabled>
-        <label class="label" for="name-disabled">Name</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="name-disabled" id="name-disabled" autocomplete="name" spellcheck="false" value="Diana Prince" required disabled>
+        <label class="ods-label" for="name-disabled">Name</label>
       </div>
     </fieldset>
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="text" name="name-disabled" id="name-disabled" autocomplete="name" spellcheck="false" required disabled>
-      <label class="label" for="name-disabled">Name</label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="name-disabled" id="name-disabled" autocomplete="name" spellcheck="false" required disabled>
+      <label class="ods-label" for="name-disabled">Name</label>
     </div>
   </fieldset>
   ```
 </figure>
 
-### Read Only
+### Read only
 
 > This Boolean attribute prevents the user from modifying the value of the input. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="name-readonly" id="name-readonly" autocomplete="name" spellcheck="false" required readonly>
-        <label class="label" for="name-readonly">Name</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="name-readonly" id="name-readonly" autocomplete="name" spellcheck="false" required readonly>
+        <label class="ods-label" for="name-readonly">Name</label>
       </div>
     </fieldset>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="name-filled-readonly" id="name-filled-readonly" autocomplete="name" spellcheck="false" value="Diana Prince" required readonly>
-        <label class="label" for="name-filled-readonly">Name</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="name-filled-readonly" id="name-filled-readonly" autocomplete="name" spellcheck="false" value="Diana Prince" required readonly>
+        <label class="ods-label" for="name-filled-readonly">Name</label>
       </div>
     </fieldset>
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="text" name="name-readonly" id="name-readonly" autocomplete="name" spellcheck="false" required readonly>
-      <label class="label" for="name-readonly">Name</label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="name-readonly" id="name-readonly" autocomplete="name" spellcheck="false" required readonly>
+      <label class="ods-label" for="name-readonly">Name</label>
     </div>
   </fieldset>
   ```
@@ -117,19 +117,19 @@ Based on our use cases, it's a better affordance to treat `:required` as our def
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="name-optional" id="name-optional" autocomplete="name" spellcheck="false">
-        <label class="label" for="name-optional">Name <span class="label--optional">Optional</span></label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="name-optional" id="name-optional" autocomplete="name" spellcheck="false">
+        <label class="ods-label" for="name-optional">Name <span class="ods-label--optional">Optional</span></label>
       </div>
     </fieldset>
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="text" name="name-optional" id="name-optional" autocomplete="name" spellcheck="false">
-      <label class="label" for="name-optional">Name <span class="label--optional">Optional</span></label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="name-optional" id="name-optional" autocomplete="name" spellcheck="false">
+      <label class="ods-label" for="name-optional">Name <span class="ods-label--optional">Optional</span></label>
     </div>
   </fieldset>
   ```
@@ -141,15 +141,15 @@ Based on our use cases, it's a better affordance to treat `:required` as our def
 
 Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
 
-Note, when indicating a validation error, please use a `.field--error` to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
+Note, when indicating a validation error, please use a `.ods-field--error` to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" aria-describedby="name-invalid-hint" name="name-invalid" id="name-invalid" autocomplete="name" spellcheck="false" required data-invalid>
-        <label class="label" for="name-invalid">Name</label>
-        <aside class="field--error" id="name-invalid-hint">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" aria-describedby="name-invalid-hint" name="name-invalid" id="name-invalid" autocomplete="name" spellcheck="false" required data-invalid>
+        <label class="ods-label" for="name-invalid">Name</label>
+        <aside class="ods-field--error" id="name-invalid-hint">
           This field is required and cannot be left empty.
         </aside>
       </div>
@@ -157,11 +157,11 @@ Note, when indicating a validation error, please use a `.field--error` to indica
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="text" aria-describedby="name-invalid-hint" name="name-invalid" id="name-invalid" autocomplete="name" spellcheck="false" required data-invalid>
-      <label class="label" for="name-invalid">Name</label>
-      <aside class="field--error" id="name-invalid-hint">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" aria-describedby="name-invalid-hint" name="name-invalid" id="name-invalid" autocomplete="name" spellcheck="false" required data-invalid>
+      <label class="ods-label" for="name-invalid">Name</label>
+      <aside class="ods-field--error" id="name-invalid-hint">
         This field is required and cannot be left empty.
       </aside>
     </div>
@@ -169,33 +169,33 @@ Note, when indicating a validation error, please use a `.field--error` to indica
   ```
 </figure>
 
-## Additional Types
+## Additional types
 
-### Text Area
+### Text area
 
 > The HTML `<textarea>` element represents a multi-line plain-text editing control, useful when you want to allow users to enter a sizeable amount of free-form text, for example a comment on a review or feedback form. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea">MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <textarea class="text-input text-area" name="description" id="description" rows='4' cols='50' spellcheck="true" required></textarea>
-        <aside class="field--hint">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <textarea class="ods-text-input ods-text-area" name="description" id="description" rows='4' cols='50' spellcheck="true" required></textarea>
+        <aside class="ods-field--hint">
           Please describe your perfect Saturday in as many words as you need.
         </aside>
-        <label class="label" for="description">Your Perfect Saturday</label>
+        <label class="ods-label" for="description">Your Perfect Saturday</label>
       </div>
     </fieldset>
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <textarea class="text-input text-area" name="description" id="description" rows='4' cols='50' spellcheck="true" required></textarea>
-      <aside class="field--hint">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <textarea class="ods-text-input ods-text-area" name="description" id="description" rows='4' cols='50' spellcheck="true" required></textarea>
+      <aside class="ods-field--hint">
         Please describe your perfect Saturday in as many words as you need.
       </aside>
-      <label class="label" for="description">Your Perfect Saturday</label>
+      <label class="ods-label" for="description">Your Perfect Saturday</label>
     </div>
   </fieldset>
   ```
@@ -207,20 +207,20 @@ Note, when indicating a validation error, please use a `.field--error` to indica
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="email" name="email" id="email" autocomplete="email" spellcheck="false" required>
-        <label class="label" for="email">Email</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="email" name="email" id="email" autocomplete="email" spellcheck="false" required>
+        <label class="ods-label" for="email">Email</label>
       </div>
     </fieldset>
   </div>
 
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="email" name="email" id="email" autocomplete="email" spellcheck="false" required>
-      <label class="label" for="email">Email</label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="email" name="email" id="email" autocomplete="email" spellcheck="false" required>
+      <label class="ods-label" for="email">Email</label>
     </div>
   </fieldset>
   ```
@@ -232,43 +232,43 @@ Note, when indicating a validation error, please use a `.field--error` to indica
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="password" name="password" id="password" autocomplete="new-password" spellcheck="false" required>
-        <label class="label" for="password">Password</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="password" name="password" id="password" autocomplete="new-password" spellcheck="false" required>
+        <label class="ods-label" for="password">Password</label>
       </div>
     </fieldset>
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="password" name="password" id="password" autocomplete="new-password" spellcheck="false" required>
-      <label class="label" for="password">Password</label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="password" name="password" id="password" autocomplete="new-password" spellcheck="false" required>
+      <label class="ods-label" for="password">Password</label>
     </div>
   </fieldset>
   ```
 </figure>
 
-### Telephone Number
+### Telephone number
 
 >`<input>` elements of type "tel" are used to let the user enter and edit a telephone number. Unlike `<input type="email">` and `<input type="url">`, the input value is not automatically validated to a particular format before the form can be submitted, because formats for telephone numbers vary so much around the world. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel'>MDN</a></cite>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="tel" name="tel" id="tel" autocomplete="tel-national" spellcheck="false" required>
-        <label class="label" for="tel">Telephone Number</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="tel" name="tel" id="tel" autocomplete="tel-national" spellcheck="false" required>
+        <label class="ods-label" for="tel">Telephone Number</label>
       </div>
     </fieldset>
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="tel" name="tel" id="tel" autocomplete="tel-national" spellcheck="false" required>
-      <label class="label" for="tel">Telephone Number</label>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="tel" name="tel" id="tel" autocomplete="tel-national" spellcheck="false" required>
+      <label class="ods-label" for="tel">Telephone Number</label>
     </div>
   </fieldset>
   ```

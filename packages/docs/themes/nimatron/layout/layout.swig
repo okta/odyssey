@@ -56,178 +56,178 @@
       </nav>
     </main>
   </div>
-  <div class="modal" id="modal-standard" aria-hidden="true">
-    <div class="modal--overlay" tabindex="-1" data-micromodal-close>
-      <div class="modal--dialog" role="dialog" aria-modal="true" aria-labelledby="modal-standard-title">
-        <header class="modal--header">
-          <button class="modal--close" aria-label="Close modal" data-micromodal-close></button>
-          <h1 class="modal--title" id="modal-standard-title">
+  <div class="ods-modal" id="ods-modal-standard" aria-hidden="true">
+    <div class="ods-modal--overlay" tabindex="-1" data-micromodal-close>
+      <div class="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title">
+        <header class="ods-modal--header">
+          <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
+          <h1 class="ods-modal--title" id="ods-modal-standard-title">
             This is a Modal
           </h1>
         </header>
-        <main class="modal--content" id="modal-standard-content">
+        <main class="ods-modal--content" id="ods-modal-standard-content">
           <p>
             Try hitting the <kbd>tab</kbd> key and notice how the focus stays within the modal itself. Also, <kbd>esc</kbd> to close modal.
           </p>
         </main>
-        <footer class="modal--footer">
-          <button class="button is-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
-          <button class="button">Continue</button>
+        <footer class="ods-modal--footer">
+          <button class="ods-button is-ods-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
+          <button class="ods-button">Continue</button>
         </footer>
       </div>
     </div>
   </div>
-  <div class="modal is-modal-danger  micromodal-slide" id="modal-danger" aria-hidden="true">
-    <div class="modal--overlay" tabindex="-1" data-micromodal-close>
-      <div class="modal--dialog" role="alertdialog" aria-modal="true" aria-labelledby="modal-danger-title">
-        <header class="modal--header">
-          <h1 class="modal--title" id="modal-danger-title">
+  <div class="ods-modal is-ods-modal-danger  micromodal-slide" id="ods-modal-danger" aria-hidden="true">
+    <div class="ods-modal--overlay" tabindex="-1" data-micromodal-close>
+      <div class="ods-modal--dialog" role="alertdialog" aria-modal="true" aria-labelledby="ods-modal-danger-title">
+        <header class="ods-modal--header">
+          <h1 class="ods-modal--title" id="ods-modal-danger-title">
             Are you sure you want to delete everything?
           </h1>
-          <button class="modal--close" aria-label="Close modal" data-micromodal-close></button>
+          <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
         </header>
-        <main class="modal--content" id="modal-danger-content">
+        <main class="ods-modal--content" id="ods-modal-danger-content">
           <p>
             Hold on there, pardner! You're about to delete all of your files. This is an irreversible action that will certainly leave your machine inoperable.
           </p>
         </main>
-        <footer class="modal--footer">
-          <button class="button is-button-secondary is-button-danger" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
-          <button class="button is-button-danger">Delete Everything</button>
+        <footer class="ods-modal--footer">
+          <button class="ods-button is-ods-button-secondary is-ods-button-danger" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
+          <button class="ods-button is-ods-button-danger">Delete Everything</button>
         </footer>
       </div>
     </div>
   </div>
-  <div class="modal micromodal-slide" id="modal-form" aria-hidden="true">
-    <div class="modal--overlay" tabindex="-1" data-micromodal-close>
-      <div class="modal--dialog" role="dialog" aria-modal="true" aria-labelledby="modal-form-title">
-        <header class="modal--header">
-          <h1 class="modal--title" id="modal-form-title">
+  <div class="ods-modal micromodal-slide" id="ods-modal-form" aria-hidden="true">
+    <div class="ods-modal--overlay" tabindex="-1" data-micromodal-close>
+      <div class="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-form-title">
+        <header class="ods-modal--header">
+          <h1 class="ods-modal--title" id="ods-modal-form-title">
             Add Identity Provider
           </h1>
-          <button class="modal--close" aria-label="Close modal" data-micromodal-close></button>
+          <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
         </header>
-        <main class="modal--content" id="modal-form-content">
-          <form class="form" action=".">
-            <header class="form--header">
-              <h1 class="form--title">Add Identity Provider</h1>
+        <main class="ods-modal--content" id="ods-modal-form-content">
+          <form class="ods-form" action=".">
+            <header class="ods-form--header">
+              <h1 class="ods-form--title">Add Identity Provider</h1>
             </header>
-            <fieldset class="fieldset">
-              <legend class="group-legend">General Settings</legend>
-              <fieldset class="fieldset">
-                <div class="fieldset-flex">
-                  <input class="text-input" type="text" name="idp-name" id="idp-name"  autocomplete="off" spellcheck="false" required>
-                  <label class="label" for="idp-name">Name</label>
+            <fieldset class="ods-fieldset">
+              <legend class="ods-group-legend">General Settings</legend>
+              <fieldset class="ods-fieldset">
+                <div class="ods-fieldset-flex">
+                  <input class="ods-text-input" type="text" name="idp-name" id="idp-name"  autocomplete="off" spellcheck="false" required>
+                  <label class="ods-label" for="idp-name">Name</label>
                 </div>
               </fieldset>
-              <fieldset class="fieldset">
-                <div class="fieldset-flex">
-                  <input class="text-input" type="text" name="idp-protocol" id="idp-protocol" value="SAML" autocomplete="off" spellcheck="false" required readonly>
-                  <label class="label" for="idp-protocol">Protocol</label>
+              <fieldset class="ods-fieldset">
+                <div class="ods-fieldset-flex">
+                  <input class="ods-text-input" type="text" name="idp-protocol" id="idp-protocol" value="SAML" autocomplete="off" spellcheck="false" required readonly>
+                  <label class="ods-label" for="idp-protocol">Protocol</label>
                 </div>
               </fieldset>
             </fieldset>
-            <fieldset class="fieldset">
-              <legend class="group-legend">Authentication Settings</legend>
-              <fieldset class="fieldset">
-                <div class="fieldset-flex">
-                  <select class="select-input" name="idp-username" id="idp-username" aria-describedby="idp-username-hint"  autocomplete="off" spellcheck="false" required>
+            <fieldset class="ods-fieldset">
+              <legend class="ods-group-legend">Authentication Settings</legend>
+              <fieldset class="ods-fieldset">
+                <div class="ods-fieldset-flex">
+                  <select class="ods-select-input" name="idp-username" id="idp-username" aria-describedby="idp-username-hint"  autocomplete="off" spellcheck="false" required>
                     <option value="un">a username</option>
                   </select>
-                  <label class="label" for="idp-username">IdP Username</label>
-                  <aside class="field--hint" id="idp-username-hint">
+                  <label class="ods-label" for="idp-username">IdP Username</label>
+                  <aside class="ods-field--hint" id="idp-username-hint">
                     Specifies how to construct the subject's username from the SAML assertion using an Okta Expression Language transform of attributes defined in the IdP User Profile.<br>
                     <a href="#">Expression Language Reference</a>
                   </aside>
                 </div>
               </fieldset>
-              <fieldset class="fieldset">
+              <fieldset class="ods-fieldset">
                 <input class="checkbox" type="checkbox" name="idp-filter" id="idp-filter" aria-describedby="idp-filter=hint" value="filter-on">
                 <label class="checkbox--label" for="idp-filter">Only allow usernames that match a defined RegEx pattern</label>
-                <aside class="field--hint" id="idp-filter-hint">
+                <aside class="ods-field--hint" id="idp-filter-hint">
                   Optional regular expression pattern used to filter IdP username to prevent the IdP from authentication unintended or privileged users.
                 </aside>
               </fieldset>
-              <fieldset class="fieldset">
-                <div class="fieldset-flex">
-                  <select class="select-input" name="idp-match" id="idp-match" aria-describedby="idp-match-hint"  autocomplete="off" spellcheck="false" required>
+              <fieldset class="ods-fieldset">
+                <div class="ods-fieldset-flex">
+                  <select class="ods-select-input" name="idp-match" id="idp-match" aria-describedby="idp-match-hint"  autocomplete="off" spellcheck="false" required>
                     <option value="un" selected>Okta Username</option>
                   </select>
-                  <label class="label" for="idp-match">Match against</label>
-                  <aside class="field--hint" id="idp-username-hint">
+                  <label class="ods-label" for="idp-match">Match against</label>
+                  <aside class="ods-field--hint" id="idp-username-hint">
                     Specifies what attribute(s) of existing users in Okta are compared to the IdP username to determine whether the authentication response is for a new or existing user.
                   </aside>
                 </div>
               </fieldset>
-              <fieldset class="fieldset">
+              <fieldset class="ods-fieldset">
                 <legend class="input-legend">If no match is found</legend>
                 <input class="radio" type="radio" name="idp-no-match" id="idp-no-match-new" aria-describedby="idp-no-match-hint" value="new" required checked>
                 <label class="radio--label" for="idp-no-match-new">Create new user (JIT)</label>
                 <input class="radio" type="radio" name="idp-no-match" id="idp-no-match-redirect" aria-describedby="idp-no-match-hint" value="redirect" required>
                 <label class="radio--label" for="idp-no-match-redirect">Redirect to Okta sign-in page</label>
-                <aside class="field--hint" id="idp-no-match-hint">
+                <aside class="ods-field--hint" id="idp-no-match-hint">
                   Specifies the action for authentication responses that do not match an existing user in the Okta organization.
                 </aside>
               </fieldset>
             </fieldset>
-            <fieldset class="fieldset">
-              <legend class="group-legend">JIT Settings</legend>
-              <fieldset class="fieldset">
+            <fieldset class="ods-fieldset">
+              <legend class="ods-group-legend">JIT Settings</legend>
+              <fieldset class="ods-fieldset">
                 <legend class="input-legend">Profile Master</legend>
                 <input class="checkbox" type="checkbox" name="idp-profile" id="idp-profile" aria-describedby="idp-profile-hint" value="profile-update">
                 <label class="checkbox--label" for="idp-profile">Update attributes for existing users</label>
-                <aside class="field--hint" id="idp-profile-hint">
+                <aside class="ods-field--hint" id="idp-profile-hint">
                   Determines if the IdP should act as a source of truth for user profile attributes. The IdP must be prioritized with other Profile Masters if the user is assigned to additional apps or directories that are also Profile Masters. See <a href="#">Profile Mastering documentation</a> for more information.
                 </aside>
               </fieldset>
-              <fieldset class="fieldset">
-                <div class="fieldset-flex">
-                  <select class="select-input" name="idp-group" id="idp-group" aria-describedby="idp-group-hint"  autocomplete="off" spellcheck="false" required>
+              <fieldset class="ods-fieldset">
+                <div class="ods-fieldset-flex">
+                  <select class="ods-select-input" name="idp-group" id="idp-group" aria-describedby="idp-group-hint"  autocomplete="off" spellcheck="false" required>
                     <option value="none" selected>None</option>
                     <option value="b">Group B</option>
                   </select>
-                  <label class="label" for="idp-group">Group Assignment</label>
-                  <aside class="field--hint" id="idp-group-hint">
+                  <label class="ods-label" for="idp-group">Group Assignment</label>
+                  <aside class="ods-field--hint" id="idp-group-hint">
                     Specifies the behavior of group assignments during provisioning.
                   </aside>
                 </div>
               </fieldset>
             </fieldset>
-            <fieldset class="fieldset">
-              <legend class="group-legend">SAML Protocol Settings</legend>
-              <fieldset class="fieldset">
-                <div class="fieldset-flex">
-                  <input class="text-input" type="url" name="idp-uri" id="idp-uri" aria-describedby="idp-uri-hint"  autocomplete="off" spellcheck="false" required>
-                  <label class="label" for="idp-uri">IdP Issuer URI</label>
-                  <aside class="field--hint" id="idp-uri-hint">
+            <fieldset class="ods-fieldset">
+              <legend class="ods-group-legend">SAML Protocol Settings</legend>
+              <fieldset class="ods-fieldset">
+                <div class="ods-fieldset-flex">
+                  <input class="ods-text-input" type="url" name="idp-uri" id="idp-uri" aria-describedby="idp-uri-hint"  autocomplete="off" spellcheck="false" required>
+                  <label class="ods-label" for="idp-uri">IdP Issuer URI</label>
+                  <aside class="ods-field--hint" id="idp-uri-hint">
                     This value is usually the SAML Metadata EntityID of the IdP EntityDescriptor.
                   </aside>
                 </div>
               </fieldset>
-              <fieldset class="fieldset">
-                <div class="fieldset-flex">
-                  <input class="text-input" type="url" name="idp-sign-on-url" id="idp-sign-on-url" aria-describedby="idp-sign-on-url-hint"  autocomplete="off" spellcheck="false" required>
-                  <label class="label" for="idp-sign-on-url">IdP Single Sign-On URL</label>
-                  <aside class="field--hint" id="idp-sign-on-url-hint">
+              <fieldset class="ods-fieldset">
+                <div class="ods-fieldset-flex">
+                  <input class="ods-text-input" type="url" name="idp-sign-on-url" id="idp-sign-on-url" aria-describedby="idp-sign-on-url-hint"  autocomplete="off" spellcheck="false" required>
+                  <label class="ods-label" for="idp-sign-on-url">IdP Single Sign-On URL</label>
+                  <aside class="ods-field--hint" id="idp-sign-on-url-hint">
                     The binding-specific IdP Authentication Request Protocol endpoint that receives SAML AuthnRequest messages from Okta.
                   </aside>
                 </div>
               </fieldset>
-              <fieldset class="fieldset">
-                <div class="fieldset-flex">
-                  <input class="text-input" type="file" name="idp-cert" id="idp-cert" aria-describedby="idp-cert-hint"  autocomplete="off" spellcheck="false" required>
-                  <label class="label" for="idp-cert">IdP Signature Certificate</label>
-                  <aside class="field--hint" id="idp-cert-hint">
+              <fieldset class="ods-fieldset">
+                <div class="ods-fieldset-flex">
+                  <input class="ods-text-input" type="file" name="idp-cert" id="idp-cert" aria-describedby="idp-cert-hint"  autocomplete="off" spellcheck="false" required>
+                  <label class="ods-label" for="idp-cert">IdP Signature Certificate</label>
+                  <aside class="ods-field--hint" id="idp-cert-hint">
                     The PEM or DER encoded public key certificate of the Identity Provider used to verify SAML messages and assertion signatures.
                   </aside>
                 </div>
               </fieldset>
             </fieldset>
-            <fieldset class="fieldst">
-              <legend class="group-legend">All the States</legend>
-              <fieldset class="fieldset">
-                <div class="fieldset-flex">
-                  <select id="select-multi" name="state[]" multiple class="select-input">
+            <fieldset class="ods-fieldst">
+              <legend class="ods-group-legend">All the States</legend>
+              <fieldset class="ods-fieldset">
+                <div class="ods-fieldset-flex">
+                  <select id="select-multi" name="state[]" multiple class="ods-select-input">
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>
@@ -280,15 +280,15 @@
                     <option value="WI">Wisconsin</option>
                     <option value="WY">Wyoming</option>
                   </select>
-                  <label class="label" for="fav-dino">Favorite states</label>
+                  <label class="ods-label" for="fav-dino">Favorite states</label>
                 </div>
               </fieldset>
             </fieldset>
           </form>
         </main>
-        <footer class="modal--footer">
-          <button class="button is-button-secondary" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
-          <button class="button">Submit</button>
+        <footer class="ods-modal--footer">
+          <button class="ods-button is-ods-button-secondary" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
+          <button class="ods-button">Submit</button>
         </footer>
       </div>
     </div>
@@ -304,27 +304,45 @@
       disableFocus: true
     });
   </script>
-  <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  {{ js('js/vendor/selectize.min.js') }}
+  {{ js('js/vendor/choices.min.js') }}
   <script>
-    $('.select-input').selectize({
-      plugins: ['remove_button'],
-      delimiter: ',',
-      create: function(input) {
-        return {
-          value: input,
-          text: input
-        }
-      },
-      sortField: 'text',
-      persist: false,
-      onDropdownClose: function($dropdown){
-        $($dropdown).find('.selected').not('.active').removeClass('selected');
-      }
-    });
+    var selectExamples = document.querySelectorAll('[data-js-choices]');
+    for (i = 0; i < selectExamples.length; ++i) {
+      var element = selectExamples[i];
+      new Choices(element, {
+        searchEnabled: false,
+        shouldSort: false,
+        itemSelectText: '',
+        classNames: {
+          containerOuter: 'ods-select',
+          containerInner: 'ods-select--inner',
+          input: 'ods-select--input',
+          inputCloned: 'ods-select--input--cloned',
+          list: 'ods-select--list',
+          listItems: 'ods-select--list--multiple',
+          listSingle: 'ods-select--list--single',
+          listDropdown: 'ods-select--list--dropdown',
+          item: 'ods-select--item',
+          itemSelectable: 'ods-select--item--selectable',
+          itemDisabled: 'ods-select--item--disabled',
+          itemChoice: 'ods-select--item--choice',
+          placeholder: 'ods-select--placeholder',
+          group: 'ods-select--group',
+          groupHeading: 'ods-select--heading',
+          button: 'ods-select--button',
+          activeState: 'is-ods-select-active',
+          focusState: 'is-ods-select-focused',
+          openState: 'is-ods-select-open',
+          disabledState: 'is-ods-select-disabled',
+          highlightedState: 'is-ods-select-highlighted',
+          selectedState: 'is-ods-select-selected',
+          flippedState: 'is-ods-select-flipped',
+          loadingState: 'is-ods-select-loading',
+          noResults: 'has-no-ods-select-results',
+          noChoices: 'has-no-ods-select-choices'
+        },
+      });
+    }
   </script>
   </body>
 </html>

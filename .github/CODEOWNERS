@@ -9,4 +9,8 @@
 # Resources
 #  - [CODEOWNERS] https://help.github.com/articles/about-codeowners
 
-*       @okta/design-system
+*       @okta/eng-uicore
+
+*.md    @okta/design-system
+*.scss  @okta/design-system
+*.html  @okta/design-system

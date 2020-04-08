@@ -14,11 +14,11 @@
 
 /* stylelint-disable no-descending-specificity, max-nesting-depth */
 
-.radio {
+.ods-radio {
   @include is-visually-hidden;
 
   &:checked {
-    + .radio--label {
+    + .ods-radio--label {
       &::before {
         border-color: cv('action', 'base');
         background-color: cv('action', 'base');
@@ -27,7 +27,7 @@
   }
 
   &:focus {
-    + .radio--label {
+    + .ods-radio--label {
       &::before {
         border-color: cv('action', 'base');
         box-shadow: 0 0 0 2px fauxpacity(cv('action', 'base'));
@@ -36,7 +36,7 @@
   }
 
   &:disabled {
-    + .radio--label {
+    + .ods-radio--label {
       color: $text-sub;
       cursor: not-allowed;
 
@@ -47,7 +47,7 @@
     }
 
     &:checked {
-      + .radio--label {
+      + .ods-radio--label {
         &::before {
           border-color: fauxpacity(cv('action', 'base'));
           background-color: fauxpacity(cv('action', 'base'));
@@ -57,14 +57,14 @@
   }
 
   &[data-invalid] {
-    + .radio--label {
+    + .ods-radio--label {
       &::before {
         border-color: cv('danger');
       }
     }
 
     &:checked {
-      + .radio--label {
+      + .ods-radio--label {
         &::before {
           background-color: cv('danger', 'base');
         }
@@ -72,7 +72,7 @@
     }
 
     &:focus {
-      + .radio--label {
+      + .ods-radio--label {
         &::before {
           border-color: cv('danger', 'base');
           box-shadow: 0 0 0 2px fauxpacity(cv('danger', 'base'));
@@ -81,7 +81,7 @@
     }
 
     &:disabled {
-      + .radio--label {
+      + .ods-radio--label {
         color: $text-sub;
 
         &::before {
@@ -90,7 +90,7 @@
       }
 
       &:checked {
-        + .radio--label {
+        + .ods-radio--label {
           &::before {
             border-color: fauxpacity(cv('danger', 'base'));
             background-color: fauxpacity(cv('danger', 'base'));
@@ -101,7 +101,7 @@
   }
 }
 
-.radio--label {
+.ods-radio--label {
   display: block;
   position: relative;
   margin-bottom: $tiny-spacing;
@@ -145,9 +145,5 @@
     &::before {
       border-color: cv('action', 'base');
     }
-  }
-
-  &:last-child {
-    margin-bottom: 0;
   }
 }

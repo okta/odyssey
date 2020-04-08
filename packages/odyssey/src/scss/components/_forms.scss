@@ -12,29 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.fieldset {
-  margin: 0 0 $base-spacing;
-
-  &:last-child {
-    margin: 0;
-  }
-}
-
-.form {
+.ods-form {
   max-width: calc(#{$max-line-length} + #{$base-spacing} + #{$base-spacing} + 2px);
   padding: $base-spacing;
   border: 1px solid $base-border-color;
   border-radius: $base-border-radius;
 }
 
-.form--header {
+.ods-form--header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0 0 $base-spacing;
 }
 
-.form--title {
+.ods-form--title {
   margin: 0;
   padding: 0;
   color: $text-heading;
@@ -43,7 +35,7 @@
   line-height: $heading-line-height;
 }
 
-.form--actions {
+.ods-form--actions {
   display: flex;
   justify-content: flex-end;
 
@@ -56,113 +48,6 @@
   }
 }
 
-.form--footer {
+.ods-form--footer {
   font-size: ms(-1);
-}
-
-.field--hint,
-.field--error {
-  font-size: ms(-1);
-}
-
-.field--hint {
-  margin-bottom: $tiny-spacing;
-  color: $text-body;
-
-  .text-input:disabled ~ &,
-  .text-input[readonly] ~ & {
-    color: $text-sub;
-  }
-}
-
-.field--error {
-  display: flex;
-  align-items: center;
-  margin-top: $tiny-spacing;
-  color: cv('danger', 'base');
-
-  &::before {
-    content: '';
-    width: ms(-1);
-    height: ms(-1);
-    margin: 0 $tiny-spacing 0 0;
-    background-image: get-icon('alert', cv('danger', 'base'));
-    background-repeat: no-repeat;
-  }
-}
-
-.fieldset--pair {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  .number-input,
-  .text-input,
-  .select-input {
-    width: calc(50% - #{$small-spacing});
-  }
-}
-
-.fieldset-flex {
-  display: flex;
-  flex-direction: column;
-  max-width: $max-line-length;
-
-  .label,
-  .input-legend {
-    order: 1;
-    margin-bottom: $tiny-spacing;
-  }
-
-  .number-input,
-  .text-input,
-  .select-input,
-  .input--unavailable,
-  .fieldset--pair {
-    order: 3;
-  }
-
-  .input--unavailable {
-    margin: 0;
-  }
-
-  /* stylelint-disable-next-line no-descending-specificity  */
-  .field--hint {
-    order: 2;
-    margin-bottom: $tiny-spacing;
-
-    + .label {
-      margin-bottom: 0;
-    }
-  }
-
-  .field--error {
-    order: 4;
-  }
-}
-
-/* stylelint-disable-next-line no-descending-specificity  */
-.input-legend {
-  margin: 0 0 $tiny-spacing;
-  color: $text-heading;
-  font-size: ms(0);
-  font-weight: 600;
-}
-
-.group-legend {
-  margin: 0 0 $small-spacing;
-  color: $text-heading;
-  font-size: ms(1);
-  font-weight: 600;
-}
-
-.modal {
-  .form {
-    padding: 0;
-    border: 0;
-  }
-
-  .form--header {
-    @include is-visually-hidden;
-  }
 }

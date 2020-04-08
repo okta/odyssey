@@ -4,37 +4,37 @@ Forms are a container for interactive controls used to submit information.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <form class="form" action="." novalidate>
-      <header class="form--header">
-        <h1 class="form--title">Getting to Know You</h1>
+    <form class="ods-form" action="." novalidate>
+      <header class="ods-form--header">
+        <h1 class="ods-form--title">Getting to Know You</h1>
       </header>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <input class="text-input" type="text" name="full-name" id="full-name" autocomplete="name" spellcheck="false" required>
-          <label class="label" for="full-name">Full Name</label>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="text" name="full-name" id="full-name" autocomplete="name" spellcheck="false" required>
+          <label class="ods-label" for="full-name">Full Name</label>
         </div>
       </fieldset>
-      <fieldset class="fieldset">
-        <legend class="input-legend">What's your favorite color?</legend>
-        <input class="radio" type="radio" name="favorite-color" id="favorite-color-red" value="red" required checked>
-        <label class="radio--label" for="favorite-color-red">Red is dread</label>
-        <input class="radio" type="radio" name="favorite-color" id="favorite-color-yellow" value="yellow" required>
-        <label class="radio--label" for="favorite-color-yellow">Yellow is mellow</label>
-        <input class="radio" type="radio" name="favorite-color" id="favorite-color-green" value="green" required>
-        <label class="radio--label" for="favorite-color-green">Green is queen</label>
-        <input class="radio" type="radio" name="favorite-color" id="favorite-color-blue" value="blue" required>
-        <label class="radio--label" for="favorite-color-blue">Blue is true</label>
+      <fieldset class="ods-fieldset">
+        <legend class="ods-input-legend">What's your favorite color?</legend>
+        <input class="ods-radio" type="radio" name="favorite-color" id="favorite-color-red" value="red" required checked>
+        <label class="ods-radio--label" for="favorite-color-red">Red is dread</label>
+        <input class="ods-radio" type="radio" name="favorite-color" id="favorite-color-yellow" value="yellow" required>
+        <label class="ods-radio--label" for="favorite-color-yellow">Yellow is mellow</label>
+        <input class="ods-radio" type="radio" name="favorite-color" id="favorite-color-green" value="green" required>
+        <label class="ods-radio--label" for="favorite-color-green">Green is queen</label>
+        <input class="ods-radio" type="radio" name="favorite-color" id="favorite-color-blue" value="blue" required>
+        <label class="ods-radio--label" for="favorite-color-blue">Blue is true</label>
       </fieldset>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <textarea class="text-input" name="additional-comments" id="additional-comments" rows="4" cols="50" spellcheck="true" required=""></textarea>
-          <label class="label" for="additional-comments">Additional Comments</label>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <textarea class="ods-text-input" name="additional-comments" id="additional-comments" rows="4" cols="50" spellcheck="true" required=""></textarea>
+          <label class="ods-label" for="additional-comments">Additional Comments</label>
         </div>
       </fieldset>
-      <section class="form--actions">
-        <button class="button">Submit Form</button>
+      <section class="ods-form--actions">
+        <button class="ods-button">Submit Form</button>
       </section>
-      <footer class="form--footer">
+      <footer class="ods-form--footer">
         <p class="legalese">
           By clicking the button you agree to the <a href="#">terms & conditions</a> and understand the <a href="#">no obligation trial</a>.
         </p>
@@ -43,37 +43,37 @@ Forms are a container for interactive controls used to submit information.
   </div>
 
   ```html
-  <form class="form" action="." novalidate>
-    <header class="form--header">
-      <h1 class="form--title">Getting to Know You</h1>
+  <form class="ods-form" action="." novalidate>
+    <header class="ods-form--header">
+      <h1 class="ods-form--title">Getting to Know You</h1>
     </header>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="full-name" id="full-name" autocomplete="name" spellcheck="false" required>
-        <label class="label" for="full-name">Full Name</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="full-name" id="full-name" autocomplete="name" spellcheck="false" required>
+        <label class="ods-label" for="full-name">Full Name</label>
       </div>
     </fieldset>
-    <fieldset class="fieldset">
-      <legend class="input-legend">What's your favorite color?</legend>
-      <input class="radio" type="radio" name="favorite-color" id="favorite-color-red" value="red" required checked>
-      <label class="radio--label" for="favorite-color-red">Red is dread</label>
-      <input class="radio" type="radio" name="favorite-color" id="favorite-color-yellow" value="yellow" required>
-      <label class="radio--label" for="favorite-color-yellow">Yellow is mellow</label>
-      <input class="radio" type="radio" name="favorite-color" id="favorite-color-green" value="green" required>
-      <label class="radio--label" for="favorite-color-green">Green is queen</label>
-      <input class="radio" type="radio" name="favorite-color" id="favorite-color-blue" value="blue" required>
-      <label class="radio--label" for="favorite-color-blue">Blue is true</label>
+    <fieldset class="ods-fieldset">
+      <legend class="ods-input-legend">What's your favorite color?</legend>
+      <input class="ods-radio" type="radio" name="favorite-color" id="favorite-color-red" value="red" required checked>
+      <label class="ods-radio--label" for="favorite-color-red">Red is dread</label>
+      <input class="ods-radio" type="radio" name="favorite-color" id="favorite-color-yellow" value="yellow" required>
+      <label class="ods-radio--label" for="favorite-color-yellow">Yellow is mellow</label>
+      <input class="ods-radio" type="radio" name="favorite-color" id="favorite-color-green" value="green" required>
+      <label class="ods-radio--label" for="favorite-color-green">Green is queen</label>
+      <input class="ods-radio" type="radio" name="favorite-color" id="favorite-color-blue" value="blue" required>
+      <label class="ods-radio--label" for="favorite-color-blue">Blue is true</label>
     </fieldset>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <textarea class="text-input" name="additional-comments" id="additional-comments" rows="4" cols="50" spellcheck="true" required=""></textarea>
-        <label class="label" for="additional-comments">Additional Comments</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <textarea class="ods-text-input" name="additional-comments" id="additional-comments" rows="4" cols="50" spellcheck="true" required=""></textarea>
+        <label class="ods-label" for="additional-comments">Additional Comments</label>
       </div>
     </fieldset>
-    <section class="form--actions">
-      <button class="button">Submit Form</button>
+    <section class="ods-form--actions">
+      <button class="ods-button">Submit Form</button>
     </section>
-    <footer class="form--footer">
+    <footer class="ods-form--footer">
       <p class="legalese">
         By clicking the button you agree to the <a href="#">terms & conditions</a> and understand the <a href="#">no obligation trial</a>.
       </p>
@@ -82,7 +82,7 @@ Forms are a container for interactive controls used to submit information.
   ```
 </figure>
 
-## Form Anatomy
+## Form anatomy
 
 While their content may get complicated, our forms are designed to present a hierarchy that is straightforward to implement as well as use. Most forms will utilize a header, some amount of field sets (each containing fields or form controls), actions, and an optional footer.
 
@@ -92,17 +92,17 @@ In most cases, the form header will only include the form title. The title shoul
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <form class="form" action="." novalidate>
-      <header class="form--header">
-        <h1 class="form--title">Give Us Your Feedback</h1>
+    <form class="ods-form" action="." novalidate>
+      <header class="ods-form--header">
+        <h1 class="ods-form--title">Give Us Your Feedback</h1>
       </header>
     </form>
   </div>
 
   ```html
-  <form class="form" action="." novalidate>
-    <header class="form--header">
-      <h1 class="form--title">Give Us Your Feedback</h1>
+  <form class="ods-form" action="." novalidate>
+    <header class="ods-form--header">
+      <h1 class="ods-form--title">Give Us Your Feedback</h1>
     </header>
   </form>
   ```
@@ -112,25 +112,25 @@ If your form utilizes Read/Edit states, you may also include an "Edit" button to
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <form class="form" action="." data-readonly>
-      <header class="form--header">
-        <h1 class="form--title">Give Us Your Feedback</h1>
-        <button class="button is-button-secondary">Edit</button>
+    <form class="ods-form" action="." data-readonly>
+      <header class="ods-form--header">
+        <h1 class="ods-form--title">Give Us Your Feedback</h1>
+        <button class="ods-button is-ods-button-secondary">Edit</button>
       </header>
     </form>
   </div>
 
   ```html
-  <form class="form" action="." data-readonly>
-    <header class="form--header">
-      <h1 class="form--title">Give Us Your Feedback</h1>
-      <button class="button is-button-secondary">Edit</button>
+  <form class="ods-form" action="." data-readonly>
+    <header class="ods-form--header">
+      <h1 class="ods-form--title">Give Us Your Feedback</h1>
+      <button class="ods-button is-ods-button-secondary">Edit</button>
     </header>
   </form>
   ```
 </figure>
 
-### Field Sets
+### Field sets
 
 Field sets are used to group related form controls. When grouping fields, be sure to include a `<legend>` to both contextualize how the fields are related and ensure a clear hierarchy.
 
@@ -138,97 +138,97 @@ The form below utilizes two field sets, "General Info" and "Authentication Setti
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <form class="form" action=".">
-      <header class="form--header">
-        <h1 class="form--title">Add New User</h1>
+    <form class="ods-form" action=".">
+      <header class="ods-form--header">
+        <h1 class="ods-form--title">Add New User</h1>
       </header>
-      <fieldset class="fieldset">
-        <legend class="group-legend">General Info</legend>
-        <fieldset class="fieldset">
-          <div class="fieldset-flex">
-            <input class="text-input" type="text" name="user-name" id="user-name"  autocomplete="off" spellcheck="false" required>
-            <label class="label" for="user-name">Full Name</label>
+      <fieldset class="ods-fieldset">
+        <legend class="ods-group-legend">General Info</legend>
+        <fieldset class="ods-fieldset">
+          <div class="ods-fieldset-flex">
+            <input class="ods-text-input" type="text" name="user-name" id="user-name"  autocomplete="off" spellcheck="false" required>
+            <label class="ods-label" for="user-name">Full Name</label>
           </div>
         </fieldset>
-        <fieldset class="fieldset">
-          <div class="fieldset-flex">
-            <input class="text-input" type="email" name="user-email" id="user-email" autocomplete="off" spellcheck="false" required>
-            <label class="label" for="user-email">Email</label>
+        <fieldset class="ods-fieldset">
+          <div class="ods-fieldset-flex">
+            <input class="ods-text-input" type="email" name="user-email" id="user-email" autocomplete="off" spellcheck="false" required>
+            <label class="ods-label" for="user-email">Email</label>
           </div>
         </fieldset>
       </fieldset>
-      <fieldset class="fieldset">
-        <legend class="group-legend">Authentication Settings</legend>
-        <fieldset class="fieldset">
-          <div class="fieldset-flex">
-            <select class="select-input" name="user-match" id="user-match" aria-describedby="user-match-hint"  autocomplete="off" spellcheck="false" required>
+      <fieldset class="ods-fieldset">
+        <legend class="ods-group-legend">Authentication Settings</legend>
+        <fieldset class="ods-fieldset">
+          <div class="ods-fieldset-flex">
+            <select class="ods-select" name="user-match" id="user-match" aria-describedby="user-match-hint"  autocomplete="off" spellcheck="false" required>
               <option value="dir" selected>Employee Directory</option>
               <option value="client">Client List</option>
               <option value="customer">Customer Database</option>
               <option value="supes">Known Aliases</option>
               <option value="NOC">NOC List</option>
             </select>
-            <label class="label" for="user-match">Match new users against</label>
+            <label class="ods-label" for="user-match">Match new users against</label>
           </div>
         </fieldset>
-        <fieldset class="fieldset">
-          <legend class="input-legend">If no match is found</legend>
-          <input class="radio" type="radio" name="user-no-match" id="user-no-match-new" aria-describedby="user-no-match-hint" value="new" required checked>
-          <label class="radio--label" for="user-no-match-new">Create new user</label>
-          <input class="radio" type="radio" name="user-no-match" id="user-no-match-redirect" aria-describedby="user-no-match-hint" value="redirect" required>
-          <label class="radio--label" for="user-no-match-redirect">Deny Access</label>
+        <fieldset class="ods-fieldset">
+          <legend class="ods-input-legend">If no match is found</legend>
+          <input class="ods-radio" type="radio" name="user-no-match" id="user-no-match-new" aria-describedby="user-no-match-hint" value="new" required checked>
+          <label class="ods-radio--label" for="user-no-match-new">Create new user</label>
+          <input class="ods-radio" type="radio" name="user-no-match" id="user-no-match-redirect" aria-describedby="user-no-match-hint" value="redirect" required>
+          <label class="ods-radio--label" for="user-no-match-redirect">Deny Access</label>
         </fieldset>
       </fieldset>
-      <section class="form--actions">
-        <button class="button">Add User</button>
+      <section class="ods-form--actions">
+        <button class="ods-button">Add User</button>
       </section>
     </form>
   </div>
 
   ```html
-  <form class="form" action=".">
-    <header class="form--header">
-      <h1 class="form--title">Add New User</h1>
+  <form class="ods-form" action=".">
+    <header class="ods-form--header">
+      <h1 class="ods-form--title">Add New User</h1>
     </header>
-    <fieldset class="fieldset">
-      <legend class="group-legend">General Info</legend>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <input class="text-input" type="text" name="user-name" id="user-name"  autocomplete="off" spellcheck="false" required>
-          <label class="label" for="user-name">Full Name</label>
+    <fieldset class="ods-fieldset">
+      <legend class="ods-group-legend">General Info</legend>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="text" name="user-name" id="user-name"  autocomplete="off" spellcheck="false" required>
+          <label class="ods-label" for="user-name">Full Name</label>
         </div>
       </fieldset>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <input class="text-input" type="email" name="user-email" id="user-email" autocomplete="off" spellcheck="false" required>
-          <label class="label" for="user-email">Email</label>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="email" name="user-email" id="user-email" autocomplete="off" spellcheck="false" required>
+          <label class="ods-label" for="user-email">Email</label>
         </div>
       </fieldset>
     </fieldset>
-    <fieldset class="fieldset">
-      <legend class="group-legend">Authentication Settings</legend>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <select class="select-input" name="user-match" id="user-match" aria-describedby="user-match-hint"  autocomplete="off" spellcheck="false" required>
+    <fieldset class="ods-fieldset">
+      <legend class="ods-group-legend">Authentication Settings</legend>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <select class="ods-select" name="user-match" id="user-match" aria-describedby="user-match-hint"  autocomplete="off" spellcheck="false" required>
             <option value="dir" selected>Employee Directory</option>
             <option value="client">Client List</option>
             <option value="customer">Customer Database</option>
             <option value="supes">Known Aliases</option>
             <option value="NOC">NOC List</option>
           </select>
-          <label class="label" for="user-match">Match new users against</label>
+          <label class="ods-label" for="user-match">Match new users against</label>
         </div>
       </fieldset>
-      <fieldset class="fieldset">
-        <legend class="input-legend">If no match is found</legend>
-        <input class="radio" type="radio" name="user-no-match" id="user-no-match-new" aria-describedby="user-no-match-hint" value="new" required checked>
-        <label class="radio--label" for="user-no-match-new">Create new user</label>
-        <input class="radio" type="radio" name="user-no-match" id="user-no-match-redirect" aria-describedby="user-no-match-hint" value="redirect" required>
-        <label class="radio--label" for="user-no-match-redirect">Deny Access</label>
+      <fieldset class="ods-fieldset">
+        <legend class="ods-input-legend">If no match is found</legend>
+        <input class="ods-radio" type="radio" name="user-no-match" id="user-no-match-new" aria-describedby="user-no-match-hint" value="new" required checked>
+        <label class="ods-radio--label" for="user-no-match-new">Create new user</label>
+        <input class="ods-radio" type="radio" name="user-no-match" id="user-no-match-redirect" aria-describedby="user-no-match-hint" value="redirect" required>
+        <label class="ods-radio--label" for="user-no-match-redirect">Deny Access</label>
       </fieldset>
     </fieldset>
-    <section class="form--actions">
-      <button class="button">Add User</button>
+    <section class="ods-form--actions">
+      <button class="ods-button">Add User</button>
     </section>
   </form>
   ```
@@ -240,10 +240,10 @@ Though each field type may have its own set of guidelines, their general anatomy
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="email" name="email-1" id="email-1" autocomplete="email" spellcheck="false" required>
-        <label class="label" for="email-1">Email</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="email" name="email-1" id="email-1" autocomplete="email" spellcheck="false" required>
+        <label class="ods-label" for="email-1">Email</label>
       </div>
     </fieldset>
   </div>
@@ -251,16 +251,16 @@ Though each field type may have its own set of guidelines, their general anatomy
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <legend class="input-legend">What's your favorite color?</legend>
-      <input class="radio" type="radio" name="favorite-color-2" id="favorite-color-red-2" value="red" required checked>
-      <label class="radio--label" for="favorite-color-red-2">Red is dread</label>
-      <input class="radio" type="radio" name="favorite-color-2" id="favorite-color-yellow-2" value="yellow" required>
-      <label class="radio--label" for="favorite-color-yellow-2">Yellow is mellow</label>
-      <input class="radio" type="radio" name="favorite-color-2" id="favorite-color-green-2" value="green" required>
-      <label class="radio--label" for="favorite-color-green-2">Green is queen</label>
-      <input class="radio" type="radio" name="favorite-color-2" id="favorite-color-blue-2" value="blue" required>
-      <label class="radio--label" for="favorite-color-blue-2">Blue is true</label>
+    <fieldset class="ods-fieldset">
+      <legend class="ods-input-legend">What's your favorite color?</legend>
+      <input class="ods-radio" type="radio" name="favorite-color-2" id="favorite-color-red-2" value="red" required checked>
+      <label class="ods-radio--label" for="favorite-color-red-2">Red is dread</label>
+      <input class="ods-radio" type="radio" name="favorite-color-2" id="favorite-color-yellow-2" value="yellow" required>
+      <label class="ods-radio--label" for="favorite-color-yellow-2">Yellow is mellow</label>
+      <input class="ods-radio" type="radio" name="favorite-color-2" id="favorite-color-green-2" value="green" required>
+      <label class="ods-radio--label" for="favorite-color-green-2">Green is queen</label>
+      <input class="ods-radio" type="radio" name="favorite-color-2" id="favorite-color-blue-2" value="blue" required>
+      <label class="ods-radio--label" for="favorite-color-blue-2">Blue is true</label>
     </fieldset>
   </div>
 </figure>
@@ -269,11 +269,11 @@ Fields should also include various error messages for possible invalid states. E
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="email" name="email-empty" id="email-empty" autocomplete="email" aria-describedby="email-empty-error" spellcheck="false" required data-invalid>
-        <label class="label" for="email-empty">Email</label>
-        <aside class="field--error" id="email-empty-error">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="email" name="email-empty" id="email-empty" autocomplete="email" aria-describedby="email-empty-error" spellcheck="false" required data-invalid>
+        <label class="ods-label" for="email-empty">Email</label>
+        <aside class="ods-field--error" id="email-empty-error">
           <span class="u-visually-hidden">Error:</span>This field can't be left blank.
         </aside>
       </div>
@@ -281,11 +281,11 @@ Fields should also include various error messages for possible invalid states. E
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="email" name="email-empty" id="email-empty" autocomplete="email" aria-describedby="email-empty-error" spellcheck="false" required data-invalid>
-      <label class="label" for="email-empty">Email</label>
-      <aside class="field--error" id="email-empty-error">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="email" name="email-empty" id="email-empty" autocomplete="email" aria-describedby="email-empty-error" spellcheck="false" required data-invalid>
+      <label class="ods-label" for="email-empty">Email</label>
+      <aside class="ods-field--error" id="email-empty-error">
         <span class="u-visually-hidden">Error:</span>This field can't be left blank.
       </aside>
     </div>
@@ -295,11 +295,11 @@ Fields should also include various error messages for possible invalid states. E
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="email" name="email-invalid" id="email-invalid" autocomplete="email" aria-describedby="email-invalid-error" value="not gonna happen" spellcheck="false" required data-invalid>
-        <label class="label" for="email-invalid">Email</label>
-        <aside class="field--error" id="email-invalid-error">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="email" name="email-invalid" id="email-invalid" autocomplete="email" aria-describedby="email-invalid-error" value="not gonna happen" spellcheck="false" required data-invalid>
+        <label class="ods-label" for="email-invalid">Email</label>
+        <aside class="ods-field--error" id="email-invalid-error">
           <span class="u-visually-hidden">Error:</span>This does not appear to be a valid email address.
         </aside>
       </div>
@@ -307,11 +307,11 @@ Fields should also include various error messages for possible invalid states. E
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="email" name="email-invalid" id="email-invalid" autocomplete="email" aria-describedby="email-invalid-error" value="not gonna happen" spellcheck="false" required data-invalid>
-      <label class="label" for="email-invalid">Email</label>
-      <aside class="field--error" id="email-invalid-error">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="email" name="email-invalid" id="email-invalid" autocomplete="email" aria-describedby="email-invalid-error" value="not gonna happen" spellcheck="false" required data-invalid>
+      <label class="ods-label" for="email-invalid">Email</label>
+      <aside class="ods-field--error" id="email-invalid-error">
         <span class="u-visually-hidden">Error:</span>This does not appear to be a valid email address.
       </aside>
     </div>
@@ -323,11 +323,11 @@ Fields may utilize field hints to provide context, formatting help, or other gui
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="email" name="email-hinted" id="email-hinted" autocomplete="email" spellcheck="false" aria-describedby="email-hinted-hint" required>
-        <label class="label" for="email-hinted">Email</label>
-        <aside class="field--hint" id="email-hinted-hint">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="email" name="email-hinted" id="email-hinted" autocomplete="email" spellcheck="false" aria-describedby="email-hinted-hint" required>
+        <label class="ods-label" for="email-hinted">Email</label>
+        <aside class="ods-field--hint" id="email-hinted-hint">
           e.g. jane.doe@gmail.com
         </aside>
       </div>
@@ -335,11 +335,11 @@ Fields may utilize field hints to provide context, formatting help, or other gui
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="email" name="email-hinted" id="email-hinted" autocomplete="email" spellcheck="false" aria-describedby="email-hinted-hint" required>
-      <label class="label" for="email-hinted">Email</label>
-      <aside class="field--hint" id="email-hinted-hint">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="email" name="email-hinted" id="email-hinted" autocomplete="email" spellcheck="false" aria-describedby="email-hinted-hint" required>
+      <label class="ods-label" for="email-hinted">Email</label>
+      <aside class="ods-field--hint" id="email-hinted-hint">
         e.g. jane.doe@gmail.com
       </aside>
     </div>
@@ -351,14 +351,14 @@ Field hints remain in place when an error message is displayed. In these cases, 
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" data-invalid type="email" name="email-both" id="email-both" autocomplete="email" spellcheck="false" aria-describedby="email-both-hint email-both-error" required>
-        <label class="label" for="email-hinted">Email</label>
-        <aside class="field--hint" id="email-both-hint">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" data-invalid type="email" name="email-both" id="email-both" autocomplete="email" spellcheck="false" aria-describedby="email-both-hint email-both-error" required>
+        <label class="ods-label" for="email-hinted">Email</label>
+        <aside class="ods-field--hint" id="email-both-hint">
           e.g. jane.doe@gmail.com
         </aside>
-        <aside class="field--error" id="email-both-error">
+        <aside class="ods-field--error" id="email-both-error">
           <span class="u-visually-hidden">Error:</span>This field can't be left blank.
         </aside>
       </div>
@@ -366,14 +366,14 @@ Field hints remain in place when an error message is displayed. In these cases, 
   </div>
 
   ```html
-  <fieldset class="fieldset">
-    <div class="fieldset-flex">
-      <input class="text-input" type="email" name="email-both" id="email-both" autocomplete="email" spellcheck="false" aria-describedby="email-both-hint email-both-error" required>
-      <label class="label" for="email-hinted">Email</label>
-      <aside class="field--hint" id="email-both-hint">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="email" name="email-both" id="email-both" autocomplete="email" spellcheck="false" aria-describedby="email-both-hint email-both-error" required>
+      <label class="ods-label" for="email-hinted">Email</label>
+      <aside class="ods-field--hint" id="email-both-hint">
         e.g. jane.doe@gmail.com
       </aside>
-      <aside class="field--error" id="email-both-error">
+      <aside class="ods-field--error" id="email-both-error">
         <span class="u-visually-hidden">Error:</span>This field can't be left blank.
       </aside>
     </div>
@@ -393,17 +393,17 @@ This section is automatically hidden when forms are in a read-only state.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <form class="form" action="." novalidate>
-      <section class="form--actions">
-        <button class="button">Add User</button>
+    <form class="ods-form" action="." novalidate>
+      <section class="ods-form--actions">
+        <button class="ods-button">Add User</button>
       </section>
     </form>
   </div>
 
   ```html
-  <form class="form" action="." novalidate>
-    <section class="form--actions">
-      <button class="button">Add User</button>
+  <form class="ods-form" action="." novalidate>
+    <section class="ods-form--actions">
+      <button class="ods-button">Add User</button>
     </section>
   </form>
   ```
@@ -415,8 +415,8 @@ This optional section may contain form meta-data, support links, or "legalese" c
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <form class="form" action="." novalidate>
-      <footer class="form--footer">
+    <form class="ods-form" action="." novalidate>
+      <footer class="ods-form--footer">
         <p class="legalese">
           By clicking the button you agree to the <a href="#">terms & conditions</a> and understand the <a href="#">no obligation trial</a>.
         </p>
@@ -425,8 +425,8 @@ This optional section may contain form meta-data, support links, or "legalese" c
   </div>
 
   ```html
-  <form class="form" action="." novalidate>
-    <footer class="form--footer">
+  <form class="ods-form" action="." novalidate>
+    <footer class="ods-form--footer">
       <p class="legalese">
         By clicking the button you agree to the <a href="#">terms & conditions</a> and understand the <a href="#">no obligation trial</a>.
       </p>
@@ -443,66 +443,66 @@ Some forms require a read-only state. This can be achieved by adding the `data-r
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <form class="form" action="." data-readonly>
-      <header class="form--header">
-        <h1 class="form--title">Organization Contact</h1>
-        <button class="button is-button-secondary">Edit</button>
+    <form class="ods-form" action="." data-readonly>
+      <header class="ods-form--header">
+        <h1 class="ods-form--title">Organization Contact</h1>
+        <button class="ods-button is-ods-button-secondary">Edit</button>
       </header>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <input class="text-input" type="text" name="org-company" id="org-company" value="Okta" autocomplete="off" spellcheck="false" readonly required>
-          <label class="label" for="org-company">Company Name</label>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="text" name="org-company" id="org-company" value="Okta" autocomplete="off" spellcheck="false" readonly required>
+          <label class="ods-label" for="org-company">Company Name</label>
         </div>
       </fieldset>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <input class="text-input" aria-describedby="org-tel-hint"  type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" readonly required>
-          <label class="label" for="org-tel">Telephone number</label>
-          <aside class="field--hint" id="org-tel-hint">
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" aria-describedby="org-tel-hint"  type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" readonly required>
+          <label class="ods-label" for="org-tel">Telephone number</label>
+          <aside class="ods-field--hint" id="org-tel-hint">
             Please include country code if outside the US.
           </aside>
         </div>
       </fieldset>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <input class="text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" readonly required>
-          <label class="label" for="org-address">Address</label>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" readonly required>
+          <label class="ods-label" for="org-address">Address</label>
         </div>
       </fieldset>
-      <section class="form--actions">
-        <button class="button is-button-secondary">Cancel</button>
-        <button class="button">Save</button>
+      <section class="ods-form--actions">
+        <button class="ods-button is-ods-button-secondary">Cancel</button>
+        <button class="ods-button">Save</button>
       </section>
     </form>
   </div>
 
   ```html
-  <form class="form" action="." data-readonly>
-    <header class="form--header">
-      <h1 class="form--title">Organization Contact</h1>
-      <button class="button is-button-secondary">Edit</button>
+  <form class="ods-form" action="." data-readonly>
+    <header class="ods-form--header">
+      <h1 class="ods-form--title">Organization Contact</h1>
+      <button class="ods-button is-ods-button-secondary">Edit</button>
     </header>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="org-company" id="org-company" value="Okta" autocomplete="off" spellcheck="false" readonly required>
-        <label class="label" for="org-company">Company Name</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="org-company" id="org-company" value="Okta" autocomplete="off" spellcheck="false" readonly required>
+        <label class="ods-label" for="org-company">Company Name</label>
       </div>
     </fieldset>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" readonly required>
-        <label class="label" for="org-tel">Telephone number</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" readonly required>
+        <label class="ods-label" for="org-tel">Telephone number</label>
       </div>
     </fieldset>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" readonly required>
-        <label class="label" for="org-address">Address</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" readonly required>
+        <label class="ods-label" for="org-address">Address</label>
       </div>
     </fieldset>
-    <section class="form--actions">
-      <button class="button is-button-secondary">Cancel</button>
-      <button class="button">Save</button>
+    <section class="ods-form--actions">
+      <button class="ods-button is-ods-button-secondary">Cancel</button>
+      <button class="ods-button">Save</button>
     </section>
   </form>
   ```
@@ -510,66 +510,66 @@ Some forms require a read-only state. This can be achieved by adding the `data-r
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <form class="form" action="." novalidate>
-      <header class="form--header">
-        <h1 class="form--title">Organization Contact</h1>
-        <button class="button is-button-secondary">Edit</button>
+    <form class="ods-form" action="." novalidate>
+      <header class="ods-form--header">
+        <h1 class="ods-form--title">Organization Contact</h1>
+        <button class="ods-button is-ods-button-secondary">Edit</button>
       </header>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <input class="text-input" type="text" name="org-company" id="org-company" value="Okta" autocomplete="off" spellcheck="false" required>
-          <label class="label" for="org-company">Company Name</label>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="text" name="org-company" id="org-company" value="Okta" autocomplete="off" spellcheck="false" required>
+          <label class="ods-label" for="org-company">Company Name</label>
         </div>
       </fieldset>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <input class="text-input" aria-describedby="org-tel-hint"  type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" required>
-          <label class="label" for="org-tel">Telephone number</label>
-          <aside class="field--hint" id="org-tel-hint">
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" aria-describedby="org-tel-hint"  type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" required>
+          <label class="ods-label" for="org-tel">Telephone number</label>
+          <aside class="ods-field--hint" id="org-tel-hint">
             Please include country code if outside the US.
           </aside>
         </div>
       </fieldset>
-      <fieldset class="fieldset">
-        <div class="fieldset-flex">
-          <input class="text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" required>
-          <label class="label" for="org-address">Address</label>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" required>
+          <label class="ods-label" for="org-address">Address</label>
         </div>
       </fieldset>
-      <section class="form--actions">
-        <button class="button is-button-secondary">Cancel</button>
-        <button class="button">Save</button>
+      <section class="ods-form--actions">
+        <button class="ods-button is-ods-button-secondary">Cancel</button>
+        <button class="ods-button">Save</button>
       </section>
     </form>
   </div>
 
   ```html
-  <form class="form" action="." novalidate>
-    <header class="form--header">
-      <h1 class="form--title">Organization Contact</h1>
-      <button class="button is-button-secondary">Edit</button>
+  <form class="ods-form" action="." novalidate>
+    <header class="ods-form--header">
+      <h1 class="ods-form--title">Organization Contact</h1>
+      <button class="ods-button is-ods-button-secondary">Edit</button>
     </header>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="org-company" id="org-company" value="Okta" autocomplete="off" spellcheck="false" required>
-        <label class="label" for="org-company">Company Name</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="org-company" id="org-company" value="Okta" autocomplete="off" spellcheck="false" required>
+        <label class="ods-label" for="org-company">Company Name</label>
       </div>
     </fieldset>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" required>
-        <label class="label" for="org-tel">Telephone number</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" required>
+        <label class="ods-label" for="org-tel">Telephone number</label>
       </div>
     </fieldset>
-    <fieldset class="fieldset">
-      <div class="fieldset-flex">
-        <input class="text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" required>
-        <label class="label" for="org-address">Address</label>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" required>
+        <label class="ods-label" for="org-address">Address</label>
       </div>
     </fieldset>
-    <section class="form--actions">
-      <button class="button is-button-secondary">Cancel</button>
-      <button class="button">Save</button>
+    <section class="ods-form--actions">
+      <button class="ods-button is-ods-button-secondary">Cancel</button>
+      <button class="ods-button">Save</button>
     </section>
   </form>
   ```
@@ -591,7 +591,7 @@ Placeholder text disappears when a field is interacted with. For this reason, it
 
 Placeholder content is limited to static text. Additionally, placeholder text is truncated beyond the width of its input.
 
-#### Field Value Confusion
+#### Field value confusion
 
 Low-contrast placeholder styling may be illegible for some users; however, there's evidence to suggest that placeholders with compliant contrast can be mistaken for field values.
 
@@ -601,7 +601,7 @@ Regardless of styling, users with low digital literacy may not understand the pu
 
 ## Reference
 
-### Related Components
+### Related components
 
 <ul>
   <li>
@@ -636,7 +636,7 @@ Regardless of styling, users with low digital literacy may not understand the pu
   </li>
 </ul>
 
-### Further Reading
+### Further reading
 
 <ul>
   <li>

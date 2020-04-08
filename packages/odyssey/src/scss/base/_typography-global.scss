@@ -1,0 +1,8 @@
+body {
+  color: $text-body;
+  font-family: $body-font-family;
+  font-style: normal;
+  font-weight: 400;
+  line-height: $base-line-height;
+  font-feature-settings: 'lnum', 'pnum';
+}

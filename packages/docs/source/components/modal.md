@@ -1,6 +1,6 @@
 # Modals
 
-## General Guidelines
+## General guidelines
 
 Modal dialogs are a powerful UI element. They are inserted above the main content and change the context to a special mode that requires user interaction. That is, they disable all other contexts until the user interacts with the modal itself.
 
@@ -40,27 +40,27 @@ Here are a few smells for when a modal dialog may be inappropriate:
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <button class="button" data-micromodal-trigger="modal-standard">Let me see it already!</button>
+    <button class="ods-button" data-micromodal-trigger="ods-modal-standard">Let me see it already!</button>
   </div>
 
   ```html
-  <div class="modal" id="modal-standard" aria-hidden="true">
-    <div class="modal--overlay" tabindex="-1" data-micromodal-close>
-      <div class="modal--dialog" role="dialog" aria-modal="true" aria-labelledby="modal-standard-title">
-        <header class="modal--header">
-          <button class="modal--close" aria-label="Close modal" data-micromodal-close></button>
-          <h1 class="modal--title" id="modal-standard-title">
+  <div class="ods-modal" id="ods-modal-standard" aria-hidden="true">
+    <div class="ods-modal--overlay" tabindex="-1" data-micromodal-close>
+      <div class="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title">
+        <header class="ods-modal--header">
+          <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
+          <h1 class="ods-modal--title" id="ods-modal-standard-title">
             This is a Modal
           </h1>
         </header>
-        <main class="modal--content" id="modal-standard-content">
+        <main class="ods-modal--content" id="ods-modal-standard-content">
           <p>
             Try hitting the <kbd>tab</kbd> key and notice how the focus stays within the modal itself. Also, <kbd>esc</kbd> to close modal.
           </p>
         </main>
-        <footer class="modal--footer">
-          <button class="button is-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
-          <button class="button">Continue</button>
+        <footer class="ods-modal--footer">
+          <button class="ods-button is-ods-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
+          <button class="ods-button">Continue</button>
         </footer>
       </div>
     </div>
@@ -72,7 +72,7 @@ Here are a few smells for when a modal dialog may be inappropriate:
 
 Modal dialogs are notorious for their accessibility issues, but don't worry! We've got your back.
 
-### Accessible Attributes
+### Accessible attributes
 
 The modal components makes use of several ARIA attributes in order to give assistive technologies (AT) as much information as possible.
 
@@ -87,14 +87,14 @@ The modal components makes use of several ARIA attributes in order to give assis
     <code>aria-modal="true"</code> - This indicates that the rest of the workflow is stopped while this element is present.
   </li>
   <li>
-    <code>aria-labelledby="modal--title-id"</code> - This attribute informs ATs which other element can be treated as the label for this dialog. Please use the unique <code>id</code> associated with the dialog's title.
+    <code>aria-labelledby="ods-modal--title-id"</code> - This attribute informs ATs which other element can be treated as the label for this dialog. Please use the unique <code>id</code> associated with the dialog's title.
   </li>
   <li>
     <code>aria-label="Close"</code> - Please use this tag on any <code>button</code> that allows the user to exit the dialog. By default, this is included on the modal's exit "X".
   </li>
 </ul>
 
-### Accessible Behavior
+### Accessible behavior
 
 When a modal dialog is opened, interaction is limited to the new context. While this may seem expected, it can surprise users - and is even worse for users requiring assistive technologies.
 
@@ -114,7 +114,7 @@ For convenience, users can exit the modal in a few ways:
 
 For users happy with their new context, we ensure their attention won't be misdirected. Scrolling on the main content becomes locked, and we inform the browser to lock the `tabindex` to the modal context. This way, regardless of input method, a user's interactions are limited to their new scope.
 
-## Legacy Support
+## Legacy support
 
 While our current usage of modals doesn't conform to the recommended guidelines above, the updated UI does come with a few additional benefits for our content-heavy configuration modals:
 
@@ -133,9 +133,9 @@ While our current usage of modals doesn't conform to the recommended guidelines 
   </li>
 </ul>
 
-<button class="button is-button-secondary" data-micromodal-trigger="modal-form">Form Modal</button>
+<button class="ods-button is-ods-button-secondary" data-micromodal-trigger="ods-modal-form">Form Modal</button>
 
-## Further Reading
+## Further reading
 
 <ul>
   <li>

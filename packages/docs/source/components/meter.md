@@ -2,7 +2,7 @@
 
 > The `<meter>` element represents either a scalar value within a known range or a fractional value. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter' target="_blank" rel="noopener">MDN</a></cite>
 
-<table class="table">
+<table class="ods-table">
     <thead>
       <tr>
         <th scope="column">Use</th>
@@ -140,17 +140,17 @@ Conversely, if optimum falls between high and max, order is reversed: red > yell
 ### Empty
 <figure class="nimatron--example">
     <div class="nimatron--rendered">
-        <meter class="meter" title="Meter empty" min="0" max="100" low="89" high="99" optimum="80" value="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <figure class="meter--fallback" aria-label="meter 0% filled">
-                <span style="width: 0%;" class="meter--optimum-value"></span>
+        <meter class="ods-meter" title="Meter empty" min="0" max="100" low="89" high="99" optimum="80" value="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <figure class="ods-meter--fallback" aria-label="meter 0% filled">
+                <span style="width: 0%;" class="ods-meter--optimum-value"></span>
             </figure>
         </meter>
     </div>
 
   ```html
-        <meter class="meter" title="meter empty" min="0" max="100" low="89" high="99" optimum="80" value="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-          <figure class="meter--fallback" aria-label="meter 0% filled">
-                <span style="width: 0%;" class="meter--optimum-value"></span>
+        <meter class="ods-meter" title="meter empty" min="0" max="100" low="89" high="99" optimum="80" value="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <figure class="ods-meter--fallback" aria-label="meter 0% filled">
+                <span style="width: 0%;" class="ods-meter--optimum-value"></span>
             </figure>
         </meter>
   ```
@@ -159,17 +159,17 @@ Conversely, if optimum falls between high and max, order is reversed: red > yell
 ### Success
 <figure class="nimatron--example">
     <div class="nimatron--rendered">
-        <meter class="meter" title="meter success" min="0" max="100" low="89" high="99" optimum="80" value="30" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30">
-            <figure class="meter--fallback" aria-label="meter 30% filled">
-                <span style="width: 30%;" class="meter--optimum-value"></span>
+        <meter class="ods-meter" title="meter success" min="0" max="100" low="89" high="99" optimum="80" value="30" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30">
+            <figure class="ods-meter--fallback" aria-label="meter 30% filled">
+                <span style="width: 30%;" class="ods-meter--optimum-value"></span>
             </figure>
         </meter>
     </div>
 
   ```html
-        <meter class="meter" title="meter success" min="0" max="100" low="89" high="99" optimum="80" value="30" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30">
-            <figure class="meter--fallback" aria-label="meter 30% filled">
-                <span style="width: 30%;" class="meter--optimum-value"></span>
+        <meter class="ods-meter" title="meter success" min="0" max="100" low="89" high="99" optimum="80" value="30" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30">
+            <figure class="ods-meter--fallback" aria-label="meter 30% filled">
+                <span style="width: 30%;" class="ods-meter--optimum-value"></span>
             </figure>
         </meter>
   ```
@@ -178,17 +178,17 @@ Conversely, if optimum falls between high and max, order is reversed: red > yell
 ### Warning
 <figure class="nimatron--example">
     <div class="nimatron--rendered">
-        <meter class="meter" title="meter warning" min="0" max="100" low="89" high="99" optimum="80" value="95" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95">
-            <figure class="meter--fallback" aria-label="meter 95% filled">
-                <span style="width: 95%;" class="meter--suboptimum-value"></span>
+        <meter class="ods-meter" title="meter warning" min="0" max="100" low="89" high="99" optimum="80" value="95" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95">
+            <figure class="ods-meter--fallback" aria-label="meter 95% filled">
+                <span style="width: 95%;" class="ods-meter--suboptimum-value"></span>
             </figure>
         </meter>
     </div>
 
   ```html
-        <meter class="meter" title="meter warning" min="0" max="100" low="89" high="99" optimum="80" value="95" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95">
-            <figure class="meter--fallback" aria-label="meter 95% filled">
-                <span style="width: 95%;" class="meter--suboptimum-value"></span>
+        <meter class="ods-meter" title="meter warning" min="0" max="100" low="89" high="99" optimum="80" value="95" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95">
+            <figure class="ods-meter--fallback" aria-label="meter 95% filled">
+                <span style="width: 95%;" class="ods-meter--suboptimum-value"></span>
             </figure>
         </meter>
   ```
@@ -197,17 +197,17 @@ Conversely, if optimum falls between high and max, order is reversed: red > yell
 ### Danger
 <figure class="nimatron--example">
     <div class="nimatron--rendered">
-        <meter class="meter" title="meter danger" min="0" max="100" low="89" high="99" optimum="80" value="100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
-            <figure class="meter--fallback" aria-label="meter 100% filled">
-                <span style="width: 100%;" class="meter--subsuboptimum-value"></span>
+        <meter class="ods-meter" title="meter danger" min="0" max="100" low="89" high="99" optimum="80" value="100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+            <figure class="ods-meter--fallback" aria-label="meter 100% filled">
+                <span style="width: 100%;" class="ods-meter--subsuboptimum-value"></span>
             </figure>
         </meter>
     </div>
 
   ```html
-        <meter class="meter" title="meter danger" min="0" max="100" low="89" high="99" optimum="80" value="100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
-            <figure class="meter--fallback" aria-label="meter 100% filled">
-                <span style="width: 100%;" class="meter--subsuboptimum-value"></span>
+        <meter class="ods-meter" title="meter danger" min="0" max="100" low="89" high="99" optimum="80" value="100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+            <figure class="ods-meter--fallback" aria-label="meter 100% filled">
+                <span style="width: 100%;" class="ods-meter--subsuboptimum-value"></span>
             </figure>
         </meter>
   ```
@@ -218,19 +218,19 @@ Meters should be accompanied by a label that represents the data in the meter e.
 
 <figure class="nimatron--example">
     <div class="nimatron--rendered">
-        <label for="meter--label" class="meter--label"><span class="meter--value">35% · 1,470</span> activated users of 4,200 total</label>
-        <meter class="meter" id="meter--label" title="Total activated users" min="0" max="100" low="89" high="99" optimum="80" value="35" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35">
-            <figure class="meter--fallback" aria-label="meter 35% filled">
-                <span style="width: 35%;" class="meter--optimum-value"></span>
+        <label for="meter--label" class="ods-meter--label"><span class="ods-meter--value">35% · 1,470</span> activated users of 4,200 total</label>
+        <meter class="ods-meter" id="meter--label" title="Total activated users" min="0" max="100" low="89" high="99" optimum="80" value="35" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35">
+            <figure class="ods-meter--fallback" aria-label="meter 35% filled">
+                <span style="width: 35%;" class="ods-meter--optimum-value"></span>
             </figure>
         </meter>
     </div>
 
  ```html
-        <label for="meter" class="meter--label"><span class="meter--value">35% · 1,470</span> activated users of 4,200 total</label>
-        <meter class="meter" title="Total activated users" min="0" max="100" low="89" high="99" optimum="80" value="35" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35">
-            <figure class="meter--fallback" aria-label="meter 35% filled">
-                <span style="width: 35%;" class="meter--optimum-value"></span>
+        <label for="meter" class="ods-meter--label"><span class="ods-meter--value">35% · 1,470</span> activated users of 4,200 total</label>
+        <meter class="ods-meter" title="Total activated users" min="0" max="100" low="89" high="99" optimum="80" value="35" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35">
+            <figure class="ods-meter--fallback" aria-label="meter 35% filled">
+                <span style="width: 35%;" class="ods-meter--optimum-value"></span>
             </figure>
         </meter>
  ```
@@ -241,16 +241,16 @@ The meter tag is not supported on IE, Edge 12, Firefox 2-15, Chrome 4-7, Safari 
 
 <figure class="nimatron--example">
     <div class="nimatron--rendered">
-        <label for="meter" class="meter--label"><span class="meter--value">35% · 1,470</span> activated users of 4,200 total</label>
-        <figure class="meter--fallback" aria-label="meter 35% filled">
-            <span style="width: 35%;" class="meter--fallback--value meter--optimum-value"></span>
+        <label for="meter" class="ods-meter--label"><span class="ods-meter--value">35% · 1,470</span> activated users of 4,200 total</label>
+        <figure class="ods-meter--fallback" aria-label="meter 35% filled">
+            <span style="width: 35%;" class="ods-meter--fallback--value meter--optimum-value"></span>
         </figure>
     </div>
 
  ```html
-        <label for="meter" class="meter--label"><span class="meter--value">35% · 1,470</span> activated users of 4,200 total</label>
-        <figure class="meter--fallback" aria-label="meter 35% filled">
-            <span style="width: 35%;" class="meter--fallback--value meter--optimum-value"></span>
+        <label for="meter" class="ods-meter--label"><span class="ods-meter--value">35% · 1,470</span> activated users of 4,200 total</label>
+        <figure class="ods-meter--fallback" aria-label="meter 35% filled">
+            <span style="width: 35%;" class="ods-meter--fallback--value meter--optimum-value"></span>
         </figure>
  ```
 </figure>
@@ -261,7 +261,7 @@ The meter tag is not supported on IE, Edge 12, Firefox 2-15, Chrome 4-7, Safari 
 * Browsers offer different levels of support for screen readers and can vary quite a bit. For a full list of screen reader support, <a href="https://scottaohara.github.io/a11y_styled_form_controls/src/meter/" target="_blank" rel="noopener">see this article.</a>
 
 
-## Further Reading
+## Further reading
 
 <ul>
     <li>

@@ -10,8 +10,8 @@ Typographical hierarchy indicates importance of content. Through size and weight
 
 To ensure consistency in typography sizes throughout Okta touchpoints, we’ve created a custom modular type scale.
 
-<figure class="table--figure">
-  <table class="table type-sample--table">
+<figure class="ods-table--figure">
+  <table class="ods-table type-sample--table">
     <thead>
       <tr>
         <th scope="column">
@@ -101,8 +101,8 @@ Each step up in the modular scale is proportionally larger than the step before.
 
 In order to maintain consistency across browsers and typefaces, we specify weights by their numbered value, not name. Currently, the following weights are available:
 
-<figure class="table--figure">
-  <table class="table">
+<figure class="ods-table--figure">
+  <table class="ods-table">
     <thead>
       <tr>
         <th scope="column">
@@ -138,8 +138,8 @@ In order to maintain consistency across browsers and typefaces, we specify weigh
 
 Our type variants include two <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height">line-heights</a> available for use:
 
-<figure class="table--figure">
-  <table class="table">
+<figure class="ods-table--figure">
+  <table class="ods-table">
     <thead>
       <tr>
         <th scope="column">
@@ -182,17 +182,17 @@ Our type variants include two <a href="https://developer.mozilla.org/en-US/docs/
 
 Our heading line-height should be used for any `font-size` set to `ms(4)` or higher.
 
-### Accessibility Concerns
+### Accessibility concerns
 
 Our body copy line-height is based on the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height#Accessibility_concerns">MDN recommendation</a>. A minimum value of 1.5 help text remain legible for low-vision users, as well as those with cognitive concerns.
 
 Unitless values ensure that page zooming behaves as expected.
 
-## Line Length
+## Line length
 
 For inline and block level content, the line length should be 50 to 75 characters long. In order to facilitate consistency across designs, `max-width: $max-line-length` can be helpful.
 
-## Heading Implementation
+## Heading implementation
 
 When constructing a component or page, always start with <code>h1</code> for the topmost level of hierarchy.
 
@@ -200,7 +200,7 @@ Do not rely on heading elements for styling purposes; instead use classes like <
 
 Following these guidelines will ensure a clean document outline, which will increase both SEO performance and accessibility.
 
-## Further Reading
+## Further reading
 
 <ul>
   <li>
@@ -211,7 +211,7 @@ Following these guidelines will ensure a clean document outline, which will incr
   </li>
 </ul>
 
-### Components Referenced
+### Components referenced
 
 <ul>
   <li>

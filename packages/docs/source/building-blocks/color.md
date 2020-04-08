@@ -29,7 +29,7 @@ These foundations are only available in the draft spec.
 
 The current palette is constrained to three shades per hue. Use <strong>lightest</strong> variants to highlight specific states in typically-white backgrounds (e.g. a Text Input might have a `cv('danger', 'lightest')` background during an error state. The <strong>base</strong> variant can be treated as a safe default. <strong>Dark</strong> shades should be used for `:hover`-esque  states or to increase contrast.
 
-## Semantic Hues
+## Semantic hues
 
 Every selection from our palette should communicate meaning, not just be used for decoration.
 
