@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Rebrand type and color changes
+- bugfix/ee-463 - fixes table cell overflow by wrapping long strings
 
 ## [0.2.0] - 2020-04-30
 
