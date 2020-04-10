@@ -14,3 +14,10 @@
 *.md    @okta/design-system
 *.scss  @okta/design-system
 *.html  @okta/design-system
+*.swig  @okta/design-system
+*.woff  @okta/design-system
+*.woff2 @okta/design-system
+*.svg   @okta/design-system
+*.css   @okta/design-system
+*.png   @okta/design-system
+*.gif   @okta/design-system
