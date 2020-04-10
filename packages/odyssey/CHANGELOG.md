@@ -8,7 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Rebrand type and color changes
+
+## [0.1.3] - 2020-04-10
+
+### Added
+
+- Styled HTML Elements `abbr`, `address`, `code`, `kbd`, `hr` and `var`
+
+### Changed
+
 - bugfix/ee-463 - fixes table cell overflow by wrapping long strings
+- [Docs] Rename "Building Blocks" section to "Foundations"
 
 ## [0.2.0] - 2020-04-30
 
