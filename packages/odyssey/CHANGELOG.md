@@ -8,17 +8,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Rebrand type and color changes
+
+## [0.1.3] - 2020-04-10
+
+### Added
+
+- Styled HTML Elements `abbr`, `address`, `code`, `kbd`, `hr` and `var`
+
+### Changed
+
 - bugfix/ee-463 - fixes table cell overflow by wrapping long strings
+- [Docs] Rename "Building Blocks" section to "Foundations"
 
 ## [0.1.2] - 2020-04-06
 
 ### Added
 
-- Changelog now visible in Docs
+- [Docs] Changelog
 
 ### Changed
 
-- Heading casing changed to sentence throughout docs
+- [Docs] Heading casing changed to sentence throughout docs 
 
 ## [0.1.1] - 2020-04-01
 
@@ -26,9 +36,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Table: styling and documentation for default table behavior, sorting, and various content types
 - Select: support for default select input behavior via plain HTML and Choices.js
-- Styled Element Glossary: blockquote, cite, del, em, ins, mark, s, small, sub, sup, strong
-- Component Status Page
-- Code of Conduct
+- Styled Element Glossary: `blockquote`, `cite`, `del`, `em`, `ins`, `mark`, `s`, `small`, `sub`, `sup`, `strong`
+- [Docs] Component Status Page
+- [Docs] Code of Conduct
 
 ### Changed
 
@@ -38,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Removed documentation for multiple items not yet ready for public use: Banner, Callout, Card, Dropdown, Iconography, Meter, Navigation, Switch, Toast, Top Bar, Layouts
+- [Docs] Removed documentation for multiple items not yet ready for public use: Banner, Callout, Card, Dropdown, Iconography, Meter, Navigation, Switch, Toast, Top Bar, Layouts
 
 ## [0.0.1] - 2019-10-10
 
