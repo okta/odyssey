@@ -38,11 +38,11 @@
 
   &:focus,
   &.is-ods-button-focus {
-    outline: 0;
-    background-color: cv('action', 'dark');
-    box-shadow: 0 0 0 4px fauxpacity(cv('action', 'base'));
-  }
+    @include outline;
 
+    background-color: cv('action', 'dark');
+  }
+  
   &:disabled {
     border-color: transparent;
     background-color: fauxpacity(cv('action', 'base'));
@@ -87,8 +87,9 @@
 
   &:focus,
   &.is-ods-button-focus {
+    @include outline('danger');
+
     background-color: cv('danger', 'dark');
-    box-shadow: 0 0 0 4px fauxpacity(cv('danger', 'base'));
   }
 
   &:disabled {
@@ -127,8 +128,9 @@
 
   &:focus,
   &.is-ods-button-focus {
+    @include outline;
+
     background-color: cv('gray', '000');
-    box-shadow: 0 0 0 4px cv('action', 'base');
   }
 
   &:disabled {
