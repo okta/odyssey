@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Styled HTML Elements `abbr`, `address`, `code`, `kbd`, `hr` and `var`
+<<<<<<< HEAD
+=======
+- Update all HTML element examples
+>>>>>>> master
 
 ### Changed
 

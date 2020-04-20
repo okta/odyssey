@@ -8,11 +8,11 @@ Odyssey takes care to provide additional style to the following HTML elements by
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>You can use <abbr title="Cascading Style Sheets">CSS</abbr> to style your <abbr title="HyperText Markup Language">HTML</abbr>.</p>
+    <p>If you're a <abbr title="Backend">BE</abbr> or <abbr title="Frontend">FE</abbr> developer, you should checkout our dev docs.</p>
   </div>
 
 ```html
-<p>You can use <abbr title="Cascading Style Sheets">CSS</abbr> to style your <abbr title="HyperText Markup Language">HTML</abbr>.</p>
+<p>If you're a <abbr title="Backend">BE</abbr> or <abbr title="Frontend">FE</abbr> developer, you should checkout our dev docs.</p>
 ```
 </figure>
 
@@ -21,18 +21,18 @@ Odyssey takes care to provide additional style to the following HTML elements by
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>Contact the author of this page:</p>
+    <p>Okta Headquarters</p>
     <address>
-      <a href="mailto:jim@rock.com">jim@rock.com</a><br>
-      <a href="tel:+13115552368">(311) 555-2368</a>
+      <a href="mailto:press@okta.com">press@okta.com</a><br>
+      <a href="tel:+18887227871">(888) 722-7871</a>
     </address>
   </div>
 
 ```html
-<p>Contact the author of this page:</p>
+<p>Okta Headquarters</p>
 <address>
-  <a href="mailto:jim@rock.com">jim@rock.com</a><br>
-  <a href="tel:+13115552368">(311) 555-2368</a>
+  <a href="mailto:press@okta.com">press@okta.com</a><br>
+  <a href="tel:+18887227871">(888) 722-7871</a>
 </address>
 ```
 </figure>
@@ -42,16 +42,16 @@ Odyssey takes care to provide additional style to the following HTML elements by
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <blockquote cite="https://www.huxley.net/bnw/four.html">
-      <p>Words can be like X-rays, if you use them properly—they’ll go through anything. You read and you’re pierced.</p>
-      <footer>—Aldous Huxley, <cite>Brave New World</cite></footer>
+    <blockquote cite="https://books.google.com/books?id=dlYEAAAAMBAJ&lpg=PP1&dq=Life,+2+May+1955&pg=PA61&hl=en#v=onepage&q=Life%2C%202%20May%201955&f=false">
+      <p>The important thing is not to stop questioning. Curiosity has its own reason for existence.</p>
+      <footer>Albert Einstein, <cite>Old Man's Advice to Youth: "Never Lose a Holy Curiosity," LIFE magazine (2 May 1955) statement to William Miller, p. 64.</cite></footer>
     </blockquote>
   </div>
 
 ```html
-  <blockquote cite="https://www.huxley.net/bnw/four.html">
-    <p>Words can be like X-rays, if you use them properly—they’ll go through anything. You read and you’re pierced.</p>
-    <footer>—Aldous Huxley, <cite>Brave New World</cite></footer>
+  <blockquote cite="https://books.google.com/books?id=dlYEAAAAMBAJ&lpg=PP1&dq=Life,+2+May+1955&pg=PA61&hl=en#v=onepage&q=Life%2C%202%20May%201955&f=false">
+    <p>The important thing is not to stop questioning. Curiosity has its own reason for existence.</p>
+    <footer>Albert Einstein, <cite>Old Man's Advice to Youth: "Never Lose a Holy Curiosity," LIFE magazine (2 May 1955) statement to William Miller, p. 64.</cite></footer>
   </blockquote>
 ```
 </figure>
@@ -62,18 +62,18 @@ Odyssey takes care to provide additional style to the following HTML elements by
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <blockquote>
-        <p>It was a bright cold day in April, and the clocks were striking thirteen.</p>
+        <p>Tell me, O Muse, of that ingenious hero who travelled far and wide after he had sacked the famous town of Troy.</p>
         <footer>
-            First sentence in <cite><a href="http://www.george-orwell.org/1984/0.html">Nineteen Eighty-Four</a></cite> by George Orwell (Part 1, Chapter 1).
+            First sentence in <cite><a href="https://www.gutenberg.org/files/1727/1727-h/1727-h.htm#chap01">The Odyssey</a></cite> by Homer (Book I).
         </footer>
     </blockquote>
   </div>
 
 ```html
   <blockquote>
-    <p>It was a bright cold day in April, and the clocks were striking thirteen.</p>
+    <p>Tell me, O Muse, of that ingenious hero who travelled far and wide after he had sacked the famous town of Troy.</p>
     <footer>
-      First sentence in <cite><a href="http://www.george-orwell.org/1984/0.html">Nineteen Eighty-Four</a></cite> by George Orwell (Part 1, Chapter 1).
+        First sentence in <cite><a href="https://www.gutenberg.org/files/1727/1727-h/1727-h.htm#chap01">The Odyssey</a></cite> by Homer (Book I).
     </footer>
   </blockquote>
 ```
@@ -84,11 +84,11 @@ Odyssey takes care to provide additional style to the following HTML elements by
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>The <code>push()</code> method adds one or more elements to the end of an array and returns the new length of the array.</p>
+    <p>The <code>pop()</code> array method removes the last element of an array and returns that element.</p>
   </div>
 
 ```html
-<p>The <code>push()</code> method adds one or more elements to the end of an array and returns the new length of the array.</p>
+<p>The <code>pop()</code> array method removes the last element of an array and returns that element.</p>
 ```
 </figure>
 
@@ -119,15 +119,11 @@ Many screen readers do not let users know of the presence of `del`. To fix this,
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>Get out of bed <em>now</em>!</p>
-    <p>We <em>had</em> to do something about it.</p>
-    <p>This is <em>not</em> a drill!</p>
+    <p>Do you <em>really</em> want to see that movie?</p>
   </div>
 
 ```html
-<p>Get out of bed <em>now</em>!</p>
-<p>We <em>had</em> to do something about it.</p>
-<p>This is <em>not</em> a drill!</p>
+<p>Do you <em>really</em> want to see that movie?</p>
 ```
 </figure>
 
@@ -149,15 +145,15 @@ You can also nest `em` tags to provide an added level of emphasis. Doing so will
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>§1: The first rule of Fight Club is: You do not talk about Fight Club.</p>
+    <p>This is the first paragraph.</p>
     <hr>
-    <p>§2: The second rule of Fight Club is: Always bring cupcakes.</p>
+    <p>This is the second paragraph.</p>
   </div>
 
 ```html
-<p>§1: The first rule of Fight Club is: You do not talk about Fight Club.</p>
+<p>This is the first paragraph.</p>
 <hr>
-<p>§2: The second rule of Fight Club is: Always bring cupcakes.</p>
+<p>This is the second paragraph.</p>
 ```
 </figure>
 
@@ -195,11 +191,11 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>Please press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> to re-render an MDN page.</p>
+    <p>Pressing <kbd>tab</kbd> will take you to the next focusable element on the page.</p>
   </div>
 
 ```html
-<p>Please press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> to re-render an MDN page.</p>
+    <p>Pressing <kbd>tab</kbd> will take you to the next focusable element on the page.</p>
 ```
 </figure>
 
@@ -208,20 +204,21 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>Search results for "salamander":</p>
+    <p>Search results for "Button":</p>
     <hr>
-    <p>Several species of <mark>salamander</mark> inhabit the temperate rainforest of the Pacific Northwest.</p>
-    <p>Most <mark>salamander</mark>s are nocturnal, and hunt for insects, worms, and other small creatures.</p>
+    <ul>
+      <li><mark>Button</mark> labels should clearly indicate what action the user is taking, e.g. "Add User" instead of "Submit".</li>
+      <li>Please follow normal <mark>Button</mark> variant guidelines within tables.</li>
+    </ul>
   </div>
 
 ```html
-<p>Search results for "salamander":</p>
-
+<p>Search results for "Button":</p>
 <hr>
-
-<p>Several species of <mark>salamander</mark> inhabit the temperate rainforest of the Pacific Northwest.</p>
-
-<p>Most <mark>salamander</mark>s are nocturnal, and hunt for insects, worms, and other small creatures.</p>
+<ul>
+  <li><mark>Button</mark> labels should clearly indicate what action the user is taking, e.g. "Add User" instead of "Submit".</li>
+  <li>Please follow normal <mark>Button</mark> variant guidelines within tables.</li>
+</ul>
 ```
 </figure>
 
@@ -230,13 +227,13 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p><s>There will be a few tickets available at the box office tonight.</s></p>
-    <p><strong>The show is now SOLD OUT!</strong></p>
+    <p><s>Ramen with white "Paitan" Broth  (Limited: 15 servings per day).</s></p>
+    <p><strong>This dish is now SOLD OUT!</strong></p>
   </div>
 
 ```html
-  <p><s>There will be a few tickets available at the box office tonight.</s></p>
-  <p><strong>The show is now SOLD OUT!</strong></p>
+<p><s>Ramen with white "Paitan" Broth  (Limited: 15 servings per day).</s></p>
+<p><strong>This dish is now SOLD OUT!</strong></p>
 ```
 </figure>
 
@@ -246,15 +243,11 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>MDN Web Docs is a learning platform for Web technologies and the software that powers the Web.</p>
-    <hr>
-    <p><small>The content is licensed under a Creative Commons Attribution-ShareAlike 2.5 Generic License.</small></p>
+    <p><small>&copy; 2020 Atko, Inc. All Rights Reserved.</small></p>
   </div>
 
 ```html
-<p>MDN Web Docs is a learning platform for Web technologies and the software that powers the Web.</p>
-<hr>
-<p><small>The content is licensed under a Creative Commons Attribution-ShareAlike 2.5 Generic License.</small></p>
+<p><small>&copy; 2020 Atko, Inc. All Rights Reserved.</small></p>
 ```
 </figure>   
 
@@ -265,37 +258,29 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <p>
-      &hellip; the most important rule, the rule you can never 
-      forget, no matter how much he cries, no matter how much 
-      he begs: <strong>never feed him after midnight</strong>.
+      For your safety and the safety of others, <strong>please don't run.</strong>
     </p>
   </div>
 
 ```html
 <p>
-  &hellip; the most important rule, the rule you can never 
-  forget, no matter how much he cries, no matter how much 
-  he begs: <strong>never feed him after midnight</strong>.
+  For your safety and the safety of others, <strong>please don't run.</strong>
 </p>
 ```
-</figure>
+</figure>   
 
 You can also nest `strong`. Doing so will provide additional style.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <p>
-      &hellip; the most important rule, the rule you can never 
-      forget, no matter how much he cries, no matter how much 
-      he begs: <strong>never feed him <strong>after midnight</strong></strong>.
+      <strong>For your safety and the safety of others, <strong>please don't run.</strong></strong>
     </p>
   </div>
 
 ```html
 <p>
-  &hellip; the most important rule, the rule you can never 
-  forget, no matter how much he cries, no matter how much 
-  he begs: <strong>never feed him <strong>after midnight</strong></strong>.
+  <strong>For your safety and the safety of others, <strong>please don't run.</strong></strong>
 </p>
 ```
 
@@ -304,12 +289,14 @@ You can also nest `strong`. Doing so will provide additional style.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>Almost every developer's favorite molecule is <var>C</var><sub>8</sub><var>H</var><sub>10</sub><var>N</var><sub>4</sub><var>O</var><sub>2</sub>, also known as "caffeine."</p>
+    <p>
+      Penicillin (R-C<sub>9</sub>H<sub>11</sub>N<sub>2</sub>O<sub>4</sub>S) was discovered by Alexander Fleming in 1928.
+    </p>
   </div>
 
 ```html
 <p>
-  Almost every developer's favorite molecule is <var>C</var><sub>8</sub><var>H</var><sub>10</sub><var>N</var><sub>4</sub><var>O</var><sub>2</sub>, also known as "caffeine."
+  Penicillin (R-C<sub>9</sub>H<sub>11</sub>N<sub>2</sub>O<sub>4</sub>S) was discovered by Alexander Fleming in 1928.
 </p>
 ```
 </figure>
@@ -324,7 +311,7 @@ You can also nest `strong`. Doing so will provide additional style.
   </div>
 
 ```html
-<p>The <b>Pythagorean theorem</b> is often expressed as the following equation:</p>
+<p> </p>
 <p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>
 ```
 </figure>
@@ -334,10 +321,12 @@ You can also nest `strong`. Doing so will provide additional style.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <p>The volume of a box is <var>l</var> × <var>w</var> × <var>h</var>, where <var>l</var> represents the length, <var>w</var> the width and <var>h</var> the height of the box.</p>
+    <h3>Solve for <var>x</var></h3>
+    <p>2<sup>2</sup>(<var>x</var>+3)+9-5=32</p>
   </div>
 
 ```html
-<p>The volume of a box is <var>l</var> × <var>w</var> × <var>h</var>, where <var>l</var> represents the length, <var>w</var> the width and <var>h</var> the height of the box.</p>
+<h3>Solve for <var>x</var></h3>
+<p>2<sup>2</sup>(<var>x</var>+3)+9-5=32</p>
 ```
 </figure>
