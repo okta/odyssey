@@ -2,12 +2,14 @@
 
 Tabs are a navigational component used to organize content by grouping similar information on the same page. They allow content to be viewed without having to navigate away from that page or route.
 
-## Usage
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <div class="ods-tabs" id="example-0">
+    <div class="ods-tabs" id="example-0" style="
+      --ods-indicator-width: 99px;
+      --ods-indicator-pos-x: 0;
+    ">
       <div class="ods-tablist" role="tablist" aria-label="">
-        <button class="ods-tab" id="tablistitem-0-0" role="tab" aria-selected="false" aria-controls="tab-0-0">Agents</button>
+        <button class="ods-tab" id="tablistitem-0-0" role="tab" aria-selected="true" aria-controls="tab-0-0">Agents</button>
         <button class="ods-tab" id="tablistitem-0-1" role="tab" aria-selected="false" aria-controls="tab-0-1">People</button>
         <button class="ods-tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-2">Settings</button>
         <button class="ods-tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-3">Import</button>
@@ -66,16 +68,109 @@ Tabs are a navigational component used to organize content by grouping similar i
 ## Anatomy
 
 ### Tablist
-The tablist is the element in which tabs are contained. It provides no style in and of itself.
+The tablist is the parent element that houses tabs. It provides no style in and of itself.
 
 ### Tab
 The tab is the element in which the user clicks to change to the corresponding tabpanel.
 
 ### Tab indicator
-The tab indicator is a pseudo element which is used to indicate the active tab. It's position should be changed by calculating the left offset, as well as width of the active tab element.
+The tab indicator is a pseudo-element used to indicate the active tab. Its position changes by calculating the left offset, as well as the width of the active tab element. (See [Switching Tabs](#switching-tabs))
 
 ### Tabpanel
-A tabpanel is an simple container element. For each tab, there is an associated tab panel which contains the content associated with that tab.
+A tabpanel is a simple container element. For each tab, there is an associated tab panel which contains the content associated with that tab.
+
+## Switching tabs
+
+When a tab is selected, three things must happen:
+
+1. The indicator must change position and width.
+2. The selected tab button's `aria-selected` attribute is `true`. If a different tab was previously selected, that tab button's `aria-selected` attribute must is `false`.
+3. The tabpanel corresponding to the tab button is shown. This is done by removing the `hidden` attribute on the tabpanel. If a different tabpanel was previously visible, the `hidden` attribute is applied to it.
+
+### CSS custom properties
+The tab indicator's left position and width are changed by updating CSS custom properties on the `ods-tabs` element. In the following example, you can see the tab indicator position is on the second element:
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <div class="ods-tabs" id="example-1" style="
+      --ods-indicator-width:97px;
+      --ods-indicator-pos-x:103px;
+    ">
+      <div class="ods-tablist" role="tablist" aria-label="">
+        <button class="ods-tab" id="tablistitem-1-0" role="tab" aria-selected="false" aria-controls="tab-1-0">Agents</button>
+        <button class="ods-tab" id="tablistitem-1-1" role="tab" aria-selected="true" aria-controls="tab-1-1">People</button>
+        <button class="ods-tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-2">Settings</button>
+        <button class="ods-tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-3">Import</button>
+      </div>
+      <div class="ods-tabpanel">
+        <div id="tab-1-0" tabindex="0" role="tabpanel" aria-labelledby="tablistit-1-0" hidden="">
+          <p>Tab Panel 0: Agents</p>
+        </div>
+        <div id="tab-1-1" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-1">
+          <p>Tab Panel 1: People</p>
+        </div>
+        <div id="tab-1-2" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-2" hidden="">
+          <p>Tab Panel 2: Settings</p>
+        </div>
+        <div id="tab-1-3" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-3" hidden="">
+          <p>Tab Panel 3: Import</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>
+
+```html
+<div class="ods-tabs" id="example-1" style="
+  --ods-indicator-width:97px;
+  --ods-indicator-pos-x:103px;
+">
+  <div class="ods-tablist" role="tablist" aria-label="">
+    <button class="ods-tab" id="tablistitem-1-0" role="tab" aria-selected="false" aria-controls="tab-1-0">Agents</button>
+    <button class="ods-tab" id="tablistitem-1-1" role="tab" aria-selected="true" aria-controls="tab-1-1">People</button>
+    <button class="ods-tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-2">Settings</button>
+    <button class="ods-tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-3">Import</button>
+  </div>
+  <div class="ods-tabpanel">
+    <div id="tab-1-0" tabindex="0" role="tabpanel" aria-labelledby="tablistit-1-0" hidden="">
+      <p>Tab Panel 0: Agents</p>
+    </div>
+    <div id="tab-1-1" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-1">
+      <p>Tab Panel 1: People</p>
+    </div>
+    <div id="tab-1-2" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-2" hidden="">
+      <p>Tab Panel 2: Settings</p>
+    </div>
+    <div id="tab-1-3" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-3" hidden="">
+      <p>Tab Panel 3: Import</p>
+    </div>
+  </div>
+</div>
+```
+
+This can be accomplished by changing the following custom properties:
+
+<figure class="ods-table--figure">
+  <table class="ods-table">
+    <caption>Odyssey takes care to ensure apropriate keyboard navigation for the tab component.</caption>
+    <thead>
+      <tr>
+        <th scope="column">CSS variable</th>
+        <th scope="column">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--ods-indicator-width</code></td>
+        <td>The width of the tab indicator</td>
+      </tr>
+      <tr>
+        <td><code>--ods-indicator-pos-x</code></td>
+        <td>The position of the tab indicator along the x-axis</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
 ## Accessibility
 
@@ -140,8 +235,7 @@ A tabpanel is an simple container element. For each tab, there is an associated 
 - Use tabs without tabpanels.
 - Use tabs as navigation. Meaning they don’t take you from place to place. Rather, they are meant for context switching related to the page.
 - Nest tabs within a tabpanel. Tabs should live as high up in the main content area hierarchy as possible.
-
-<!-- ## Responsive Design -->
+- Have more than 8 tabs in a tablist.
 
 <script>
 
@@ -209,6 +303,4 @@ class Tab {
   }
   
   new Tab('#example-0')
-  new Tab('#example-1')
-  new Tab('#example-2')
 </script>

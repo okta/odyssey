@@ -16,7 +16,6 @@
   --ods-indicator-width: 0;
   --ods-indicator-pos-x: 0;
 
-
   .ods-tablist {
     position: relative;
 
@@ -51,7 +50,7 @@
   }
 
   .ods-tabpanel [role='tabpanel'] {
-    padding: $base-spacing;
+    padding: $base-spacing 0;
     border-top: 1px solid $base-border-color;
 
     &:focus {
