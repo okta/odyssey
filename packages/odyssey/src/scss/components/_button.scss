@@ -42,7 +42,7 @@
 
     background-color: cv('action', 'dark');
   }
-  
+
   &:disabled {
     border-color: transparent;
     background-color: fauxpacity(cv('action', 'base'));
