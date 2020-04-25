@@ -13,48 +13,46 @@
 // limitations under the License.
 
 .ods-tabs {
-  --ods-indicator-width: 0;
-  --ods-indicator-pos-x: 0;
+  --ods-tabs-indicator-width: 0;
+  --ods-tabs-indicator-pos-x: 0;
+}
 
-  .ods-tablist {
-    position: relative;
+.ods-tabs--tablist {
+  position: relative;
 
-    &::before {
-      content: '';
-      position: absolute;
-      z-index: 1;
-      bottom: -1px;
-      left: var(--ods-indicator-pos-x);
-      width: var(--ods-indicator-width);
-      height: 3px;
-      transition: all 0.23s ease-in-out;
-      background: cv('action', 'base');
-    }
-
-    .ods-tab {
-      display: inline-block;
-      position: relative;
-      margin: 0;
-      padding: $small-spacing $base-spacing;
-      border: 0;
-      background: none;
-      font-family: inherit;
-      font-size: ms(0);
-      font-weight: 600;
-      line-height: 1.5;
-
-      &:focus {
-        @include outline;
-      }
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    bottom: -1px;
+    left: var(--ods-tabs-indicator-pos-x);
+    width: var(--ods-tabs-indicator-width);
+    height: 3px;
+    transition: all $base-duration $base-timing;
+    background: cv('action', 'base');
   }
+}
 
-  .ods-tabpanel [role='tabpanel'] {
-    padding: $base-spacing 0;
-    border-top: 1px solid $base-border-color;
+.ods-tabs--tab {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: $small-spacing $base-spacing;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: ms(0);
+  font-weight: 600;
+  &:focus {
+    @include outline;
+  }
+}
 
-    &:focus {
-      @include outline;
-    }
+.ods-tabs--tabpanel [role='tabpanel'] {
+  padding: $base-spacing 0;
+  border-top: 1px solid $base-border-color;
+
+  &:focus {
+    @include outline;
   }
 }

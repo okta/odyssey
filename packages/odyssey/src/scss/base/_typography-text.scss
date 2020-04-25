@@ -99,6 +99,7 @@ small {
 }
 
 kbd {
+  display: inline-block;
   padding: 0 $tiny-spacing;
   border: 1px solid cv('gray', '200');
   border-radius: $base-border-radius;

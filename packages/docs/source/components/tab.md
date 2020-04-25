@@ -5,16 +5,16 @@ Tabs are a navigational component used to organize content by grouping similar i
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <div class="ods-tabs" id="example-0" style="
-      --ods-indicator-width: 99px;
-      --ods-indicator-pos-x: 0;
+      --ods-tabs-indicator-width: 99px;
+      --ods-tabs-indicator-pos-x: 0;
     ">
-      <div class="ods-tablist" role="tablist" aria-label="">
-        <button class="ods-tab" id="tablistitem-0-0" role="tab" aria-selected="true" aria-controls="tab-0-0">Agents</button>
-        <button class="ods-tab" id="tablistitem-0-1" role="tab" aria-selected="false" aria-controls="tab-0-1">People</button>
-        <button class="ods-tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-2">Settings</button>
-        <button class="ods-tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-3">Import</button>
+      <div class="ods-tabs--tablist" role="tablist" aria-label="">
+        <button class="ods-tabs--tab" id="tablistitem-0-0" role="tab" aria-selected="true" aria-controls="tab-0-0">Agents</button>
+        <button class="ods-tabs--tab" id="tablistitem-0-1" role="tab" aria-selected="false" aria-controls="tab-0-1">People</button>
+        <button class="ods-tabs--tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-2">Settings</button>
+        <button class="ods-tabs--tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-3">Import</button>
       </div>
-      <div class="ods-tabpanel">
+      <div class="ods-tabs--tabpanel">
         <div id="tab-0-0" tabindex="0" role="tabpanel" aria-labelledby="tablistit-0-0">
           <p>Tab Panel 0: Agents</p>
         </div>
@@ -33,22 +33,17 @@ Tabs are a navigational component used to organize content by grouping similar i
 </figure>
 
 ```html
-    <div class="ods-tabs" id="example-0">
-      <div class="ods-tablist" role="tablist" aria-label="">
-        <button class="ods-tab" id="tablistitem-0-0" role="tab" aria-selected="false" aria-controls="tab-0-0">
-          Agents
-        </button>
-        <button class="ods-tab" id="tablistitem-0-1" role="tab" aria-selected="false" aria-controls="tab-0-1">
-          People
-        </button>
-        <button class="ods-tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-2">
-          Settings
-        </button>
-        <button class="ods-tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-3">
-          Import
-        </button>
+    <div class="ods-tabs" id="example-0" style="
+      --ods-tabs-indicator-width: 99px;
+      --ods-tabs-indicator-pos-x: 0;
+    ">
+      <div class="ods-tabs--tablist" role="tablist" aria-label="">
+        <button class="ods-tabs--tab" id="tablistitem-0-0" role="tab" aria-selected="true" aria-controls="tab-0-0">Agents</button>
+        <button class="ods-tabs--tab" id="tablistitem-0-1" role="tab" aria-selected="false" aria-controls="tab-0-1">People</button>
+        <button class="ods-tabs--tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-2">Settings</button>
+        <button class="ods-tabs--tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-3">Import</button>
       </div>
-      <div class="ods-tabpanel">
+      <div class="ods-tabs--tabpanel">
         <div id="tab-0-0" tabindex="0" role="tabpanel" aria-labelledby="tablistit-0-0">
           <p>Tab Panel 0: Agents</p>
         </div>
@@ -63,9 +58,23 @@ Tabs are a navigational component used to organize content by grouping similar i
         </div>
       </div>
     </div>
-  </div>
 ```
-## Anatomy
+
+## Usage
+
+### Do
+
+- Place tabs as high as possible in your main content area.
+- Use tabs to allow users to switch quickly between related pieces of information.
+
+### Don't
+
+- Use tabs without tabpanels.
+- Use tabs as navigation. Meaning they don’t take you from place to place. Rather, they are meant for context switching related to the page.
+- Nest tabs within a tabpanel. Tabs should live as high up in the main content area hierarchy as possible.
+- Have more than 8 tabs in a tablist.
+
+<!-- ## Anatomy
 
 ### Tablist
 The tablist is the parent element that houses tabs. It provides no style in and of itself.
@@ -77,32 +86,32 @@ The tab is the element in which the user clicks to change to the corresponding t
 The tab indicator is a pseudo-element used to indicate the active tab. Its position changes by calculating the left offset, as well as the width of the active tab element. (See [Switching Tabs](#switching-tabs))
 
 ### Tabpanel
-A tabpanel is a simple container element. For each tab, there is an associated tab panel which contains the content associated with that tab.
+A tabpanel is a simple container element. For each tab, there is an associated tab panel which contains the content associated with that tab. -->
 
 ## Switching tabs
 
-When a tab is selected, three things must happen:
+The JS included here is for demo purposes only. For those implementing the Tab component from scratch, be sure to implement the behavior as follows:
 
-1. The indicator must change position and width.
-2. The selected tab button's `aria-selected` attribute is `true`. If a different tab was previously selected, that tab button's `aria-selected` attribute must is `false`.
+1. Update the CSS custom properties to animate the Tab indicator correctly. (See [CSS custom properties](#css-custom-properties))
+2. Set the select tab button's `aria-selected` attribute to `true`. If a different tab was previously selected, that tab button's `aria-selected` attribute must be set to `false`.
 3. The tabpanel corresponding to the tab button is shown. This is done by removing the `hidden` attribute on the tabpanel. If a different tabpanel was previously visible, the `hidden` attribute is applied to it.
 
 ### CSS custom properties
-The tab indicator's left position and width are changed by updating CSS custom properties on the `ods-tabs` element. In the following example, you can see the tab indicator position is on the second element:
+The tab indicator's left position and width are changed by updating CSS custom properties on the `.ods-tabs` element. In the following example, you can see the tab indicator position is on the second element:
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <div class="ods-tabs" id="example-1" style="
-      --ods-indicator-width:97px;
-      --ods-indicator-pos-x:103px;
+      --ods-tabs-indicator-width:97px;
+      --ods-tabs-indicator-pos-x:103px;
     ">
-      <div class="ods-tablist" role="tablist" aria-label="">
-        <button class="ods-tab" id="tablistitem-1-0" role="tab" aria-selected="false" aria-controls="tab-1-0">Agents</button>
-        <button class="ods-tab" id="tablistitem-1-1" role="tab" aria-selected="true" aria-controls="tab-1-1">People</button>
-        <button class="ods-tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-2">Settings</button>
-        <button class="ods-tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-3">Import</button>
+      <div class="ods-tabs--tablist" role="tablist" aria-label="">
+        <button class="ods-tabs--tab" id="tablistitem-1-0" role="tab" aria-selected="false" aria-controls="tab-1-0">Agents</button>
+        <button class="ods-tabs--tab" id="tablistitem-1-1" role="tab" aria-selected="true" aria-controls="tab-1-1">People</button>
+        <button class="ods-tabs--tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-2">Settings</button>
+        <button class="ods-tabs--tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-3">Import</button>
       </div>
-      <div class="ods-tabpanel">
+      <div class="ods-tabs--tabpanel">
         <div id="tab-1-0" tabindex="0" role="tabpanel" aria-labelledby="tablistit-1-0" hidden="">
           <p>Tab Panel 0: Agents</p>
         </div>
@@ -122,16 +131,16 @@ The tab indicator's left position and width are changed by updating CSS custom p
 
 ```html
 <div class="ods-tabs" id="example-1" style="
-  --ods-indicator-width:97px;
-  --ods-indicator-pos-x:103px;
+  --ods-tabs-indicator-width:97px;
+  --ods-tabs-indicator-pos-x:103px;
 ">
-  <div class="ods-tablist" role="tablist" aria-label="">
-    <button class="ods-tab" id="tablistitem-1-0" role="tab" aria-selected="false" aria-controls="tab-1-0">Agents</button>
-    <button class="ods-tab" id="tablistitem-1-1" role="tab" aria-selected="true" aria-controls="tab-1-1">People</button>
-    <button class="ods-tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-2">Settings</button>
-    <button class="ods-tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-3">Import</button>
+  <div class="ods-tabs--tablist" role="tablist" aria-label="">
+    <button class="ods-tabs--tab" id="tablistitem-1-0" role="tab" aria-selected="false" aria-controls="tab-1-0">Agents</button>
+    <button class="ods-tabs--tab" id="tablistitem-1-1" role="tab" aria-selected="true" aria-controls="tab-1-1">People</button>
+    <button class="ods-tabs--tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-2">Settings</button>
+    <button class="ods-tabs--tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-3">Import</button>
   </div>
-  <div class="ods-tabpanel">
+  <div class="ods-tabs--tabpanel">
     <div id="tab-1-0" tabindex="0" role="tabpanel" aria-labelledby="tablistit-1-0" hidden="">
       <p>Tab Panel 0: Agents</p>
     </div>
@@ -161,11 +170,11 @@ This can be accomplished by changing the following custom properties:
     </thead>
     <tbody>
       <tr>
-        <td><code>--ods-indicator-width</code></td>
+        <td><code>--ods-tabs-indicator-width</code></td>
         <td>The width of the tab indicator</td>
       </tr>
       <tr>
-        <td><code>--ods-indicator-pos-x</code></td>
+        <td><code>--ods-tabs-indicator-pos-x</code></td>
         <td>The position of the tab indicator along the x-axis</td>
       </tr>
     </tbody>
@@ -177,7 +186,7 @@ This can be accomplished by changing the following custom properties:
 ### Keyboard support
 <figure class="ods-table--figure">
   <table class="ods-table">
-    <caption>Odyssey takes care to ensure apropriate keyboard navigation for the tab component.</caption>
+    <caption>When implementing this component you should consider the following keyboard behaviors.</caption>
     <thead>
       <tr>
         <th scope="column">Key</th>
@@ -190,7 +199,7 @@ This can be accomplished by changing the following custom properties:
         <td>When focus moves in to <code>tablist</code> the focus is placed on the first <code>tab</code> element.</td>
       </tr>
       <tr>
-        <td>When focus is in to <code>tablist</code> focus moves in to the active <code>tabpanel</code>.</td>
+        <td>Unlike the right arrow key, if you tab past the last element, the tab focus continues down the page as normal. In this case, it should set focus in to the active <code>tabpanel</code></td>
       </tr>
       <tr>
         <td><kbd>Enter</kbd> <kbd>Space</kbd></td>
@@ -222,23 +231,7 @@ This can be accomplished by changing the following custom properties:
   </table>
 </figure>
 
-
-## Content Guidelines
-
-### Do
-
-- Place tabs as high as possible in your main content area.
-- Use tabs to allow users to switch quickly between related pieces of information.
-
-### Don't
-
-- Use tabs without tabpanels.
-- Use tabs as navigation. Meaning they don’t take you from place to place. Rather, they are meant for context switching related to the page.
-- Nest tabs within a tabpanel. Tabs should live as high up in the main content area hierarchy as possible.
-- Have more than 8 tabs in a tablist.
-
 <script>
-
 // TODO: Set active tab on load
 class Tab {
     constructor (element) {
@@ -258,7 +251,7 @@ class Tab {
         const isButton = target.tagName === 'BUTTON'
         const hasRole = target.hasAttribute('role')
         const isTab = isButton && hasRole
-  
+
         if (isTab) {
           this.updateTabs(event)
         }
@@ -278,16 +271,16 @@ class Tab {
       const oldTabElement = [...newTabElement.parentNode.children][oldTabIndex]
       
       // New/Old TabPanels
-      const oldTabPanelElement = [...element.querySelectorAll('.ods-tabpanel')[0].children][oldTabIndex]
-      const newTabPanelElement = [...element.querySelectorAll('.ods-tabpanel')[0].children][newTabIndex]
+      const oldTabPanelElement = [...element.querySelectorAll('.ods-tabs--tabpanel')[0].children][oldTabIndex]
+      const newTabPanelElement = [...element.querySelectorAll('.ods-tabs--tabpanel')[0].children][newTabIndex]
 
       // Update aria-selected attributes
       oldTabElement.setAttribute('aria-selected', 'false')
       newTabElement.setAttribute('aria-selected', 'true')
-  
+
       // Update Tab Custom Properties     
-      element.style.setProperty('--ods-indicator-width', `${newTabWidth}px`);
-      element.style.setProperty('--ods-indicator-pos-x', `${newPosX}px`);
+      element.style.setProperty('--ods-tabs-indicator-width', `${newTabWidth}px`);
+      element.style.setProperty('--ods-tabs-indicator-pos-x', `${newPosX}px`);
       
       // Show/Hide tab panels
       oldTabPanelElement.setAttribute('hidden', '')
@@ -301,6 +294,6 @@ class Tab {
       }
     }
   }
-  
+
   new Tab('#example-0')
 </script>
