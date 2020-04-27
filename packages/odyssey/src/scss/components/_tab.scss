@@ -43,9 +43,6 @@
   font-family: inherit;
   font-size: ms(0);
   font-weight: 600;
-  &:focus {
-    @include outline;
-  }
 }
 
 .ods-tabs--tabpanel [role='tabpanel'] {
@@ -53,6 +50,6 @@
   border-top: 1px solid $base-border-color;
 
   &:focus {
-    @include outline;
+    outline: none;
   }
 }

@@ -30,7 +30,6 @@ Tabs are a navigational component used to organize content by grouping similar i
       </div>
     </div>
   </div>
-</figure>
 
 ```html
     <div class="ods-tabs" id="example-0" style="
@@ -59,6 +58,7 @@ Tabs are a navigational component used to organize content by grouping similar i
       </div>
     </div>
 ```
+</figure>
 
 ## Usage
 
@@ -97,7 +97,31 @@ The JS included here is for demo purposes only. For those implementing the Tab c
 3. The tabpanel corresponding to the tab button is shown. This is done by removing the `hidden` attribute on the tabpanel. If a different tabpanel was previously visible, the `hidden` attribute is applied to it.
 
 ### CSS custom properties
-The tab indicator's left position and width are changed by updating CSS custom properties on the `.ods-tabs` element. In the following example, you can see the tab indicator position is on the second element:
+The tab indicator's left position and width are changed by updating CSS custom properties on the `.ods-tabs` element. The custom properties are as follow:
+
+<figure class="ods-table--figure">
+  <table class="ods-table">
+    <caption>Odyssey takes care to ensure apropriate keyboard navigation for the tab component.</caption>
+    <thead>
+      <tr>
+        <th scope="column">CSS variable</th>
+        <th scope="column">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--ods-tabs-indicator-width</code></td>
+        <td>The width of the tab indicator</td>
+      </tr>
+      <tr>
+        <td><code>--ods-tabs-indicator-pos-x</code></td>
+        <td>The position of the tab indicator along the x-axis</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<p style="margin: 1.5rem 0">In the following example, you can see the tab indicator position is on the second element:</p>
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -127,7 +151,6 @@ The tab indicator's left position and width are changed by updating CSS custom p
       </div>
     </div>
   </div>
-</figure>
 
 ```html
 <div class="ods-tabs" id="example-1" style="
@@ -156,31 +179,9 @@ The tab indicator's left position and width are changed by updating CSS custom p
   </div>
 </div>
 ```
-
-This can be accomplished by changing the following custom properties:
-
-<figure class="ods-table--figure">
-  <table class="ods-table">
-    <caption>Odyssey takes care to ensure apropriate keyboard navigation for the tab component.</caption>
-    <thead>
-      <tr>
-        <th scope="column">CSS variable</th>
-        <th scope="column">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>--ods-tabs-indicator-width</code></td>
-        <td>The width of the tab indicator</td>
-      </tr>
-      <tr>
-        <td><code>--ods-tabs-indicator-pos-x</code></td>
-        <td>The position of the tab indicator along the x-axis</td>
-      </tr>
-    </tbody>
-  </table>
 </figure>
 
+<!-- 
 ## Accessibility
 
 ### Keyboard support
@@ -229,7 +230,7 @@ This can be accomplished by changing the following custom properties:
       </tr>
     </tbody>
   </table>
-</figure>
+</figure> -->
 
 <script>
 // TODO: Set active tab on load
