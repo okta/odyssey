@@ -581,7 +581,7 @@ Some forms require a read-only state. This can be achieved by adding the `data-r
 
 #### Translation
 
-Users who utilize their browser's auto-translation feature will still see placeholder text in its untranslated state. In order to prevent triggering a change in page layout or logic, browsers skip over translating certain attriubutes, `placeholder` included.
+Users who utilize their browser's auto-translation feature will still see placeholder text in its untranslated state. In order to prevent triggering a change in page layout or logic, browsers skip over translating certain attributes, `placeholder` included.
 
 #### Recall
 
