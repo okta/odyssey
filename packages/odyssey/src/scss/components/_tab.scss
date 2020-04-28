@@ -28,7 +28,7 @@
     left: var(--ods-tabs-indicator-pos-x);
     width: var(--ods-tabs-indicator-width);
     height: 3px;
-    transition: all $base-duration $base-timing;
+    transition: left 230ms ease-in-out, width 230ms ease-in-out;
     background: cv('action', 'base');
   }
 }
