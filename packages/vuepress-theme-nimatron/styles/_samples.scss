@@ -1,0 +1,245 @@
+.page--sign-in {
+  .form {
+    max-width: 35ch;
+  }
+
+  .form--actions {
+    .button {
+      width: 100%;
+    }
+  }
+}
+
+.modal--form {
+  position: relative;
+  border-radius: 0 0 $base-border-radius $base-border-radius;
+  box-shadow: 0 0 20px rgba(cv('gray', '900'), 0.1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: calc(100% + 2px);
+    border-top: 2px solid cv('action', 'dark');
+  }
+}
+
+.sample--icon {
+  width: $base-spacing;
+  margin-right: $base-spacing;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.sample--layout {
+  max-width: $max-line-length;
+}
+
+.sample--tip {
+  display: inline-block;
+
+  & + & {
+    margin-left: $base-spacing;
+  }
+}
+//// Generate Conversion Classes
+
+.sample--list {
+  list-style-type: none;
+}
+
+@function rem-to-px($value) {
+  @if variable-exists('base-font-size') {
+    @return ($value / 1rem) * $base-font-size;
+  }
+}
+
+$spacing-units: (
+  'huge-spacing': $huge-spacing,
+  'big-spacing': $big-spacing,
+  'base-spacing': $base-spacing,
+  'small-spacing': $small-spacing,
+  'tiny-spacing': $tiny-spacing,
+);
+
+.type-sample--wrap {
+  max-width: $max-line-length;
+  overflow-x: scroll;
+}
+
+.type-sample--table {
+  white-space: nowrap;
+}
+
+@for $i from 1 through 7 {
+  $x: $i - 2;
+
+  .type-sample:nth-of-type(#{$i}) {
+    .type-sample--rem {
+      $rem: ms($x);
+      $rem: inspect($rem);
+      $rem: str-slice($rem, 1, -4);
+      $rem: str-slice($rem, 1, 4);
+      $rem: $rem + 'rem';
+
+      &::before {
+        content: '#{$rem}';
+      }
+    }
+
+    .type-sample--px {
+      &::before {
+        content: '#{round(rem-to-px(ms($x)));}';
+      }
+    }
+
+    .type-sample--function {
+      &::before {
+        content: 'ms(#{$x})';
+      }
+    }
+
+    .type-sample--example {
+      font-size: ms($x);
+    }
+  }
+}
+
+.type-sample--400,
+.type-sample--400,
+.type-sample--600 {
+  font-size: ms(2);
+  line-height: $heading-line-height;
+}
+
+.type-sample--400 {
+  font-weight: 400;
+}
+
+.type-sample--400 {
+  font-weight: normal;
+}
+
+.type-sample--600 {
+  font-weight: 600;
+}
+
+@each $name, $value in $spacing-units {
+  .conversion--#{$name}-actual {
+    &::before {
+      content: '#{$value}';
+    }
+  }
+
+  .conversion--#{$name}-px {
+    &::before {
+      content: '#{rem-to-px($value)}';
+    }
+  }
+
+  .sample--type-#{$name} {
+    position: relative;
+    min-height: ms(0);
+    margin-bottom: $base-spacing;
+    padding: 0 0 0 $big-spacing;
+    font-size: $value;
+
+    &::before {
+      content: 'ms(#{str-slice($name, 4)})';
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: ms(-1);
+    }
+  }
+
+  .sample--spacing-#{$name} {
+    position: relative;
+    width: $value;
+    height: $value;
+    margin: 0 0 $base-spacing 0;
+    border: 1px solid cv('gray', '900');
+  }
+}
+
+.sample--colors-wrap {
+  /* Fallback Support */
+  display: flex;
+  display: grid;
+  grid-gap: $base-spacing;
+  grid-template-columns: repeat(auto-fill, minmax(($max-line-length / 2), 1fr));
+  flex-wrap: wrap;
+}
+
+.sample--color-list {
+  overflow: hidden;
+  border-radius: $base-border-radius;
+}
+
+.sample--color {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+  padding: $small-spacing;
+}
+
+@each $hue, $variants in $colors {
+  @each $variant, $color in $variants {
+    .is-sample-#{$hue}-#{$variant} {
+      background: cv($hue, $variant);
+
+      &::before,
+      &::after {
+        position: static;
+        padding: $tiny-spacing;
+        background: $white;
+        font-size: ms(-1);
+        font-weight: 400;
+      }
+
+      &::before {
+        content: '#{$hue}, #{$variant}';
+      }
+
+      &::after {
+        content: '#{$color}';
+      }
+    }
+  }
+}
+
+.sample--modal-container,
+.sample--wizard-container {
+  position: relative;
+  margin-bottom: $huge-spacing;
+}
+
+.nimatron--rendered .is-link-default {
+  color: cv('action', 'base');
+}
+
+.nimatron--rendered .is-link-default:hover,
+.nimatron--rendered .is-link-hover {
+  color: cv('action', 'dark');
+}
+
+.is-rendered-success {
+  background: cv('success', 'base');
+}
+
+.is-link-visited {
+  color: cv('violet', 'dark');
+}
+
+.sample--external-link-icon {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M13.5%2010.5V13C13.5%2013.3%2013.3%2013.5%2013%2013.5H3C2.7%2013.5%202.5%2013.3%202.5%2013V3C2.5%202.7%202.7%202.5%203%202.5H5.5%22%20stroke%3D%22%231662DD%22%20stroke-miterlimit%3D%2210%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M8%208L14%202%22%20stroke%3D%22%231662DD%22%20stroke-miterlimit%3D%2210%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M9.5%201.5H14.5%22%20stroke%3D%22%231662DD%22%20stroke-miterlimit%3D%2210%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M14.5%206.5V1.5%22%20stroke%3D%22%231662DD%22%20stroke-miterlimit%3D%2210%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3C%2Fsvg%3E%0A');
+  vertical-align: middle;
+}
