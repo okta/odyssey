@@ -10,8 +10,8 @@
   ],
   "scripts": {
     "prebuild": "yarn changelog && yarn vendor && yarn micromodal && yarn choices && yarn prism",
-    "build": "hexo g",
-    "start": "yarn build && hexo s",
+    "build": "vuepress build source",
+    "start": "yarn build && vuepress dev source",
     "test": "echo \"Tests have not been implemented for ${npm_package_name}\" && exit 0",
     "vendor": "mkdir -p themes/nimatron/source/js/vendor && mkdir -p themes/nimatron/source/css/vendor/",
     "micromodal": "cp ../../node_modules/micromodal/dist/micromodal.min.js themes/nimatron/source/js/vendor/micromodal.min.js",
@@ -37,6 +37,7 @@
     "hexo-renderer-stylus": "^0.3.1",
     "hexo-server": "^0.2.0",
     "micromodal": "^0.3.2",
-    "prismjs": "^1.14.0"
+    "prismjs": "^1.14.0",
+    "vuepress": "^1.4.1"
   }
 }
