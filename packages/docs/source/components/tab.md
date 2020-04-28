@@ -73,6 +73,7 @@ Tabs are a navigational component used to organize content by grouping similar i
 - Use tabs as navigation. Meaning they don’t take you from place to place. Rather, they are meant for context switching related to the page.
 - Nest tabs within a tabpanel. Tabs should live as high up in the main content area hierarchy as possible.
 - Have more than 8 tabs in a tablist.
+- Add an icon to a tab. Icons should be reserved for very specific things. It can be hard to maintain consistency with use of icons as it pertains to their semantic meanings and meaning to Okta. Without an established icon repo, it’s best to not use them for now.
 
 <!-- ## Anatomy
 
