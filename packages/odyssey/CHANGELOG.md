@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Rebrand type and color changes
 
+## [0.2.0] - 2020-04-30
+
+### Added
+- Status: New component and documentation
+- Tab: New component and documentation
+- Tag: New component and documentation
+- Toast: New component and documentation
+
+### Changed
+- All focus outline instances now use new outline mixin
+- Fix #19: External link indicator now scales with link font-size
+- [Docs] Fix misspelling in Form documentation
+- [Docs] Rename "Foundation" to "Base" in nav
+
 ## [0.1.3] - 2020-04-10
 
 ### Added
