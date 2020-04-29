@@ -4,59 +4,47 @@ Tabs are a navigational component used to organize content by grouping similar i
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <div class="ods-tabs" id="example-0" style="
-      --ods-tabs-indicator-width: 71px;
-      --ods-tabs-indicator-pos-x: 0;
-    ">
-      <div class="ods-tabs--tablist" role="tablist" aria-label="">
-        <button class="ods-tabs--tab" id="tablistitem-0-0" role="tab" aria-selected="true" aria-controls="tab-0-0">Agents</button>
-        <button class="ods-tabs--tab" id="tablistitem-0-1" role="tab" aria-selected="false" aria-controls="tab-0-1">People</button>
-        <button class="ods-tabs--tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-2">Settings</button>
-        <button class="ods-tabs--tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-3">Import</button>
-      </div>
-      <div class="ods-tabs--tabpanel">
-        <div id="tab-0-0" tabindex="0" role="tabpanel" aria-labelledby="tablistit-0-0">
-          <p>Tab Panel 0: Agents</p>
-        </div>
-        <div id="tab-0-1" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-0-1" hidden="">
-          <p>Tab Panel 1: People</p>
-        </div>
-        <div id="tab-0-2" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-0-2" hidden="">
-          <p>Tab Panel 2: Settings</p>
-        </div>
-        <div id="tab-0-3" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-0-3" hidden="">
-          <p>Tab Panel 3: Import</p>
-        </div>
-      </div>
-    </div>
+    <OdsTabs label="Mocha Joe's Menu" :active="tabs.active" :tablist="tabs.tablist" :id="tabs.id">
+      <template slot="donuts-tab">
+        <p>Tab Panel: Donuts</p>
+      </template>
+      <template slot="pastries-tab">
+        <p>Tab Panel: Pastries</p>
+      </template>
+      <template slot="coffee-tab">
+        <p>Tab Panel: Coffee</p>
+      </template>
+    </OdsTabs>
   </div>
 
 ```html
-    <div class="ods-tabs" id="example-0" style="
-      --ods-tabs-indicator-width: 71px;
-      --ods-tabs-indicator-pos-x: 0;
-    ">
-      <div class="ods-tabs--tablist" role="tablist" aria-label="">
-        <button class="ods-tabs--tab" id="tablistitem-0-0" role="tab" aria-selected="true" aria-controls="tab-0-0">Agents</button>
-        <button class="ods-tabs--tab" id="tablistitem-0-1" role="tab" aria-selected="false" aria-controls="tab-0-1">People</button>
-        <button class="ods-tabs--tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-2">Settings</button>
-        <button class="ods-tabs--tab" id="tablistitem-0-2" role="tab" aria-selected="false" aria-controls="tab-0-3">Import</button>
-      </div>
-      <div class="ods-tabs--tabpanel">
-        <div id="tab-0-0" tabindex="0" role="tabpanel" aria-labelledby="tablistit-0-0">
-          <p>Tab Panel 0: Agents</p>
-        </div>
-        <div id="tab-0-1" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-0-1" hidden="">
-          <p>Tab Panel 1: People</p>
-        </div>
-        <div id="tab-0-2" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-0-2" hidden="">
-          <p>Tab Panel 2: Settings</p>
-        </div>
-        <div id="tab-0-3" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-0-3" hidden="">
-          <p>Tab Panel 3: Import</p>
-        </div>
-      </div>
+<div id="example-0" class="ods-tabs">
+  <div role="tablist" aria-label="Mocha Joe's Menu" class="ods-tabs--tablist" style="
+    --ods-tabs-indicator-width:99px; 
+    --ods-tabs-indicator-pos-x:0px;
+  ">
+    <button role="tab" id="donuts-tab" tabindex="0" aria-controls="donuts-tab-tabpanel" class="ods-tabs--tab" aria-selected="true">
+        Donuts
+    </button>
+    <button role="tab" id="pastries-tab" tabindex="-1" aria-controls="pastries-tab-tabpanel" class="ods-tabs--tab">
+        Pastries
+    </button>
+    <button role="tab" id="coffee-tab" tabindex="-1" aria-controls="coffee-tab-tabpanel" class="ods-tabs--tab">
+        Coffee
+    </button>
+  </div>
+  <div class="ods-tabs--tabpanel">
+    <div role="tabpanel" id="donuts-tab-tabpanel" aria-labelledby="donuts-tab" tabindex="0">
+        <p>Tab Panel: Donuts</p>
     </div>
+    <div role="tabpanel" id="pastries-tab-tabpanel" aria-labelledby="pastries-tab" tabindex="0" hidden="hidden">
+        <p>Tab Panel: Pastries</p>
+    </div>
+    <div role="tabpanel" id="coffee-tab-tabpanel" aria-labelledby="coffee-tab" tabindex="0" hidden="hidden">
+        <p>Tab Panel: Coffee</p>
+    </div>
+  </div>
+</div>
 ```
 </figure>
 
@@ -182,7 +170,7 @@ The tab indicator's left position and width are changed by updating CSS custom p
 ```
 </figure>
 
-<!-- 
+
 ## Accessibility
 
 ### Keyboard support
@@ -231,71 +219,22 @@ The tab indicator's left position and width are changed by updating CSS custom p
       </tr>
     </tbody>
   </table>
-</figure> -->
+</figure>
 
 <script>
-// TODO: Set active tab on load
-class Tab {
-    constructor (element) {
-      this.element = document.querySelectorAll(element)[0]
-      this.selectedTabProperties = {
-        index: 0,
-        width: 0,
-        posX: 0
-      }
-      this.init()
-    }
-    
-    init () {
-      const element = this.element
-      element.addEventListener('click', (event) => {
-        const target = event.target
-        const isButton = target.tagName === 'BUTTON'
-        const hasRole = target.hasAttribute('role')
-        const isTab = isButton && hasRole
-
-        if (isTab) {
-          this.updateTabs(event)
-        }
-      });
-    }
-    // TODO: This method is too damn big. Consider breaking it up a bit.
-    updateTabs (event) {
-      const element = this.element
-      // New Tabs
-      const newTabElement = event.target
-      const newTabIndex = [...newTabElement.parentElement.children].indexOf(newTabElement)
-      const newTabWidth = newTabElement.offsetWidth
-      const newPosX = newTabElement.offsetLeft
-      
-      // Old Tabs
-      const oldTabIndex = this.selectedTabProperties.index
-      const oldTabElement = [...newTabElement.parentNode.children][oldTabIndex]
-      
-      // New/Old TabPanels
-      const oldTabPanelElement = [...element.querySelectorAll('.ods-tabs--tabpanel')[0].children][oldTabIndex]
-      const newTabPanelElement = [...element.querySelectorAll('.ods-tabs--tabpanel')[0].children][newTabIndex]
-
-      // Update aria-selected attributes
-      oldTabElement.setAttribute('aria-selected', 'false')
-      newTabElement.setAttribute('aria-selected', 'true')
-
-      // Update Tab Custom Properties     
-      element.style.setProperty('--ods-tabs-indicator-width', `${newTabWidth}px`);
-      element.style.setProperty('--ods-tabs-indicator-pos-x', `${newPosX}px`);
-      
-      // Show/Hide tab panels
-      oldTabPanelElement.setAttribute('hidden', '')
-      newTabPanelElement.removeAttribute('hidden')
-
-      // Update class tab props for future use
-      this.selectedTabProperties = {
-        index: newTabIndex,
-        width: newTabWidth,
-        posX: newPosX
+export default {
+  data () {
+    return {
+      tabs: {
+        id: 'example-0',
+        active: "donuts-tab",
+        tablist: [
+          { id: "donuts-tab", label: 'Donuts' },
+          { id: "pastries-tab", label: 'Pastries' },
+          { id: "coffee-tab", label: 'Coffee' }
+        ]
       }
     }
   }
-
-  new Tab('#example-0')
+}
 </script>
