@@ -5,12 +5,12 @@
   'UI status': '/getting-started/status.html'
   'Changelog': '/getting-started/changelog.html'
 
-'Foundations':
-  'color': '/foundations/color.html'
-  #'iconography': '/foundations/iconography.html'
-  'spacing': '/foundations/spacing.html'
-  'type': '/foundations/type.html'
-  'elements': '/foundations/elements.html'
+'Base':
+  'color': '/base/color.html'
+  #'iconography': '/base/iconography.html'
+  'spacing': '/base/spacing.html'
+  'type': '/base/type.html'
+  'elements': '/base/elements.html'
 
 'components':
   # Needs Docs  'banner': '/components/banner.html'
