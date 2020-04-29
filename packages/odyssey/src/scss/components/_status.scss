@@ -1,0 +1,55 @@
+.ods-status--label {
+  display: block;
+  margin-bottom: $tiny-spacing;
+  font-weight: 600;
+}
+
+.ods-status--value {
+  position: relative;
+  padding-left: 0.5em + $em-small-spacing;
+  background-color: transparent;
+  color: $text-body;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0.5em;
+    height: 0.5em;
+    margin-right: $tiny-spacing;
+    transform: translateY(-50%);
+    border-radius: 1em;
+    background-color: cv('gray', '700');
+  }
+}
+
+.is-ods-status-label-hidden {
+  .ods-status--label {
+    @include is-visually-hidden;
+  }
+}
+
+.is-ods-status-success {
+  .ods-status--value {
+    &::before {
+      background-color: cv('success', 'base');
+    }
+  }
+}
+
+.is-ods-status-caution {
+  .ods-status--value {
+    &::before {
+      background-color: cv('caution', 'base');
+    }
+  }
+}
+
+.is-ods-status-danger {
+  .ods-status--value {
+    &::before {
+      background-color: cv('danger', 'base');
+    }
+  }
+}

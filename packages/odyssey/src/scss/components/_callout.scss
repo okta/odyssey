@@ -31,7 +31,7 @@
     left: -1px;
     width: 3px;
     border-radius: $base-border-radius 0 0 $base-border-radius;
-    background-color: cv('yellow', 'base');
+    background-color: cv('caution', 'base');
   }
 }
 
@@ -68,21 +68,21 @@
 
 .is-ods-callout-pending {
   &::before {
-    background-color: cv('yellow', 'base');
+    background-color: cv('caution', 'base');
   }
 
   .icon--fill {
-    fill: cv('yellow', 'base');
+    fill: cv('caution', 'base');
   }
 }
 
 .is-ods-callout-warning {
   &::before {
-    background-color: cv('yellow', 'base');
+    background-color: cv('caution', 'base');
   }
 
   .icon--fill {
-    fill: cv('yellow', 'base');
+    fill: cv('caution', 'base');
   }
 }
 

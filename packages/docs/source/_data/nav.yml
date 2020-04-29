@@ -26,6 +26,7 @@
   #'navigation': '/components/navigation.html'
   'radio button': '/components/radio-button.html'
   'select': '/components/select.html'
+  'status': '/components/status.html'
   #'switch': '/components/switch.html'
   'table': '/components/table.html'
   'tab': '/components/tab.html'
