@@ -268,28 +268,7 @@ h1 {
     position: relative;
 
     .header-anchor {
-      position: absolute;
-      left: -30px;
-      width: 30px;
-      opacity: 0;
-      text-align: center;
-      text-decoration: none;
-    }
-
-    &:hover {
-      .header-anchor {
-        opacity: 1;
-      }
+     display: none;
     }
   }
-}
-
-.fade-leave-active,
-.fade-enter-active {
-  transition: opacity 0.5s;
-}
-
-.fade-leave-to, /* .fade-leave-active below version 2.1.8 */
-.fade-enter {
-  opacity: 0;
 }

@@ -12,9 +12,7 @@
     </Sidebar>
     <main class="nimatron--main">
       <article class="nimatron--article">
-        <transition name="fade">
-            <Content />
-        </transition>
+          <Content />
       </article>
     </main>
   </div>
