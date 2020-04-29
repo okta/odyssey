@@ -160,8 +160,8 @@
   }
 }
 
-.is-ods-banner-yellow {
-  background: cv('yellow', 'base');
+.is-ods-banner-caution {
+  background: cv('caution', 'base');
   color: $text-heading;
 
   .ods-banner--title {
@@ -174,7 +174,7 @@
     }
 
     .icon--stroke {
-      fill: cv('yellow', 'base');
+      fill: cv('caution', 'base');
     }
   }
 

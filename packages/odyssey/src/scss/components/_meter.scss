@@ -44,7 +44,7 @@ $meter-border-radius: $tiny-spacing/3;
 }
 
 .ods-meter::-webkit-meter-suboptimum-value {
-  background: cv('yellow', 'base');
+  background: cv('caution', 'base');
 }
 
 .ods-meter::-webkit-meter-even-less-good-value {
@@ -62,7 +62,7 @@ $meter-border-radius: $tiny-spacing/3;
 }
 
 .ods-meter:-moz-meter-sub-optimum::-moz-meter-bar {
-  background: cv('yellow', 'base');
+  background: cv('caution', 'base');
 }
 
 .ods-meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
@@ -100,7 +100,7 @@ $meter-border-radius: $tiny-spacing/3;
 }
 
 .ods-meter--suboptimum-value {
-  background: cv('yellow', 'base');
+  background: cv('caution', 'base');
 }
 
 .ods-meter--subsuboptimum-value {
