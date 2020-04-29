@@ -28,6 +28,7 @@
   'select': '/components/select.html'
   #'switch': '/components/switch.html'
   'table': '/components/table.html'
+  'tab': '/components/tab.html'
   #'toast': '/components/toast.html'
   #'top bar': '/components/top-bar.html'
   'text input': '/components/text-input.html'

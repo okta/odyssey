@@ -29,8 +29,9 @@
   &:focus {
     + .ods-radio--label {
       &::before {
+        @include outline('action', 2px);
+
         border-color: cv('action', 'base');
-        box-shadow: 0 0 0 2px fauxpacity(cv('action', 'base'));
       }
     }
   }
@@ -74,8 +75,9 @@
     &:focus {
       + .ods-radio--label {
         &::before {
+          @include outline('danger', 2px);
+
           border-color: cv('danger', 'base');
-          box-shadow: 0 0 0 2px fauxpacity(cv('danger', 'base'));
         }
       }
     }
