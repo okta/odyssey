@@ -55,4 +55,3 @@
   <li class="sample--color is-sample-turquoise-500"></li>
   <li class="sample--color is-sample-orange-500"></li>
 </ul>
-
