@@ -283,6 +283,7 @@ You can also nest `strong`. Doing so will provide additional style.
   <strong>For your safety and the safety of others, <strong>please don't run.</strong></strong>
 </p>
 ```
+</figure>
 
 ## sub <a name="sub"></a>
 > The HTML Subscript element (`<sub>`) specifies inline text which should be displayed as subscript for solely typographical reasons. Subscripts are typically rendered with a lowered baseline using smaller text. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub'>MDN</a></cite>

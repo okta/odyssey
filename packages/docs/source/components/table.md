@@ -136,7 +136,7 @@ Be sure to identify your row heading column as well - that is, don't leave a bla
         </thead>
         <tbody>
           <tr>
-            <th scope="row">Algeria</td>
+            <th scope="row">Algeria</th>
             <td class="is-ods-table-num">2,381,740</td>
             <td class="is-ods-table-num">42,008,054</td>
             <td>Algiers</td>
@@ -187,7 +187,7 @@ Be sure to identify your row heading column as well - that is, don't leave a bla
       </thead>
       <tbody>
         <tr>
-          <th scope="row">Algeria</td>
+          <th scope="row">Algeria</th>
           <td class="is-ods-table-num">2,381,740</td>
           <td class="is-ods-table-num">42,008,054</td>
           <td>Algiers</td>
@@ -872,6 +872,10 @@ While the browser support is strong and they are valid attributes, try to refrai
 This same advice applies to nested tables or hidden rows as well. While convenient for designers and useful for some users, they introduce accessibility problems that may make your data inaccessible to some users.
 
 <script>
-  var checkbox = document.getElementById("checkbox-all");
-  checkbox.indeterminate = true;
+export default {
+  mounted () { 
+    var checkbox = this.$el.querySelector("#checkbox-all");
+    checkbox.indeterminate = true;
+  }
+}
 </script>

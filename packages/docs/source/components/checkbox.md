@@ -299,7 +299,11 @@ Please note that this state must be set via javascript and is not reflected in t
 </figure>
 
 <script>
-  var checkbox = document.getElementById("checkbox-all");
-  checkbox.indeterminate = true;
+export default {
+  mounted () { 
+    var checkbox = this.$el.querySelector("#checkbox-all");
+    checkbox.indeterminate = true;
+  }
+}
 </script>
 

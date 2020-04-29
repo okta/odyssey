@@ -126,3 +126,4 @@
       </tr>
     </tbody>
   </table>
+</figure>
