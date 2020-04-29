@@ -66,7 +66,7 @@ module.exports = {
           { title: 'Status', link: '/components/status/', isVisible: true  },
           { title: 'Switch', link: '/components/switch/', isVisible: false },
           { title: 'Tab', link: '/components/tab/', isVisible: true},
-          { title: 'Tag', link: '/components/table/', isVisible: true },
+          { title: 'Tag', link: '/components/tag/', isVisible: true },
           { title: 'Table', link: '/components/table', isVisible: true },
           { title: 'Text Input', link: '/components/text-input', isVisible: true },
           { title: 'Toast', link: '/components/toast', isVisible: false },
