@@ -37,13 +37,13 @@ module.exports = {
         ]
       },
       {
-        title: 'Foundations',
+        title: 'Base',
         children: [
-          { title: 'Color', link: '/foundations/color', isVisible: true },
-          { title: 'Elements', link: '/foundations/elements', isVisible: true },
-          { title: 'Spacing', link: '/foundations/spacing', isVisible: true },
-          { title: 'Type', link: '/foundations/type', isVisible: true },
-          { title: 'Grid', link: '/foundations/grid', isVisible: false },
+          { title: 'Color', link: '/base/color', isVisible: true },
+          { title: 'Elements', link: '/base/elements', isVisible: true },
+          { title: 'Spacing', link: '/base/spacing', isVisible: true },
+          { title: 'Type', link: '/base/type', isVisible: true },
+          { title: 'Grid', link: '/base/grid', isVisible: false },
         ]
       },
       {
