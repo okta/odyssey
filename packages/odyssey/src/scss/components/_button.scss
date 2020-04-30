@@ -38,9 +38,9 @@
 
   &:focus,
   &.is-ods-button-focus {
-    outline: 0;
+    @include outline;
+
     background-color: cv('action', 'dark');
-    box-shadow: 0 0 0 4px fauxpacity(cv('action', 'base'));
   }
 
   &:disabled {
@@ -87,8 +87,9 @@
 
   &:focus,
   &.is-ods-button-focus {
+    @include outline('danger');
+
     background-color: cv('danger', 'dark');
-    box-shadow: 0 0 0 4px fauxpacity(cv('danger', 'base'));
   }
 
   &:disabled {
@@ -127,8 +128,9 @@
 
   &:focus,
   &.is-ods-button-focus {
+    @include outline;
+
     background-color: cv('gray', '000');
-    box-shadow: 0 0 0 4px cv('action', 'base');
   }
 
   &:disabled {

@@ -5,12 +5,12 @@
   'UI status': '/getting-started/status.html'
   'Changelog': '/getting-started/changelog.html'
 
-'Foundations':
-  'color': '/foundations/color.html'
-  #'iconography': '/foundations/iconography.html'
-  'spacing': '/foundations/spacing.html'
-  'type': '/foundations/type.html'
-  'elements': '/foundations/elements.html'
+'Base':
+  'color': '/base/color.html'
+  #'iconography': '/base/iconography.html'
+  'spacing': '/base/spacing.html'
+  'type': '/base/type.html'
+  'elements': '/base/elements.html'
 
 'components':
   # Needs Docs  'banner': '/components/banner.html'
@@ -26,8 +26,11 @@
   #'navigation': '/components/navigation.html'
   'radio button': '/components/radio-button.html'
   'select': '/components/select.html'
+  'status': '/components/status.html'
   #'switch': '/components/switch.html'
+  'tab': '/components/tab.html'
   'table': '/components/table.html'
+  'tag': '/components/tag.html'
   #'toast': '/components/toast.html'
   #'top bar': '/components/top-bar.html'
   'text input': '/components/text-input.html'
