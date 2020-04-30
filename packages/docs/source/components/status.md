@@ -195,7 +195,7 @@ If the current state of Status may change asynchronously while a user is visitin
         Server status
       </dt>
       <dd class="ods-status--value">
-        Service Disruption
+        Service disruption
       </dd>
     </dl>
   </div>
@@ -206,7 +206,7 @@ If the current state of Status may change asynchronously while a user is visitin
       Server status
     </dt>
     <dd class="ods-status--value">
-      Service Disruption
+      Service disruption
     </dd>
   </dl>
   ```
