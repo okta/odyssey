@@ -410,15 +410,21 @@ If the data in a column consists primarily of figures or numerical data, you can
 
 When presenting numerical data, be sure to leave off any units and incorporate them into the column's header.
 
-#### Dates
+#### Date
 
 To maintain ease of reading, dates should not be line-broken. To preserve their white space, you can utilize the <code>.is-ods-table-date</code> class throughout their column.
 
-#### Buttons
+#### Button
 
 No extra styling is required when adding Buttons to your table. Buttons will automatically resize to their "Small" variant and align to the baseline of other type in the row.
 
 Please follow normal Button variant guidelines within tables.
+
+#### Status
+
+No extra styling is required when adding Statuses to your table. However, the label should be hidden, and they require their own column with an appropriate heading.
+
+Please follow all other Status guidelines as normal.
 
 #### Checkboxes
 

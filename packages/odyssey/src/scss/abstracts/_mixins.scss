@@ -23,6 +23,11 @@
   border: 0;
 }
 
+@mixin outline($outlineColor: 'action', $radius: 4px) {
+  outline: 0;
+  box-shadow: 0 0 0 $radius fauxpacity(cv($outlineColor, 'base'));
+}
+
 @mixin input-baseline {
   display: block;
   position: relative;
@@ -48,8 +53,7 @@
   }
 
   &:focus {
-    outline: 0;
-    box-shadow: 0 0 0 4px fauxpacity(cv('action', 'base'));
+    @include outline;
   }
 
   &:disabled {
@@ -72,7 +76,7 @@
     border-color: cv('danger');
 
     &:focus {
-      box-shadow: 0 0 0 4px fauxpacity(cv('danger', 'base'));
+      @include outline('danger');
     }
   }
 
