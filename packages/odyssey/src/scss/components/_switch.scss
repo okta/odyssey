@@ -1,0 +1,87 @@
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+.ods-switch--figure {
+  display: flex;
+  width: 100%;
+}
+
+.ods-switch--label {
+  font-size: ms(0);
+  font-weight: 400;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.ods-switch {
+  display: inline-flex;
+  align-items: center;
+  height: $base-spacing; // match line-height of label
+  margin-left: auto;
+  padding: 0.28em;
+  transition: all 300ms ease-in-out;
+  border-radius: $small-spacing;
+  vertical-align: middle;
+
+  .ods-switch--dial {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: cv('gray', '100');
+  }
+
+  &:disabled {
+    opacity: $med-opaque;
+    pointer-events: none;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem cv('action', 'lightest');
+  }
+}
+
+.ods-switch[aria-checked='false'] {
+  background: cv('gray', '500');
+
+  .ods-switch--dial {
+    background: url('data:image/svg+xml,%3Csvg%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M6%209C7.65685%209%209%207.65685%209%206C9%204.34315%207.65685%203%206%203C4.34315%203%203%204.34315%203%206C3%207.65685%204.34315%209%206%209ZM6%2011C8.76142%2011%2011%208.76142%2011%206C11%203.23858%208.76142%201%206%201C3.23858%201%201%203.23858%201%206C1%208.76142%203.23858%2011%206%2011Z%22%20fill%3D%22%23FAFAFA%22%2F%3E%0A%3C%2Fsvg%3E%0A') no-repeat center;
+  }
+
+  &:hover {
+    background: cv('gray', '600');
+  }
+}
+
+.ods-switch[aria-checked='true'] {
+  background: cv('action', 'base');
+
+  .ods-switch--dial {
+    background: url('data:image/svg+xml,%3Csvg%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M5%2011L5%201L7%201L7%2011L5%2011Z%22%20fill%3D%22%23FAFAFA%22%2F%3E%0A%3C%2Fsvg%3E%0A') no-repeat center;
+  }
+
+  &:hover {
+    background-color: cv('action', 'dark');
+  }
+}
+
+.ods-switch[aria-checked='false'] :first-child,
+.ods-switch[aria-checked='true'] :last-child {
+  background: cv('gray', '000');
+}
+
+.ods-switch[aria-checked='false'] :last-child,
+.ods-switch[aria-checked='true'] :first-child {
+  color: cv('gray', '000');
+}
