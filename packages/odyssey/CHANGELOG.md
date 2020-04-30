@@ -15,11 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Status: New component and documentation
 - Tab: New component and documentation
 - Tag: New component and documentation
-- Toast: New component and documentation
 
 ### Changed
+- [Breaking Change] Rename `yellow` color variable to `caution`
 - All focus outline instances now use new outline mixin
-- Fix #19: External link indicator now scales with link font-size
+- Adds Status content type to Table component
 - [Docs] Fix misspelling in Form documentation
 - [Docs] Rename "Foundation" to "Base" in nav
 
@@ -57,7 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- <mark><strong>[Breaking Change]</strong></mark> All classes are now prefixed with `.ods-`
+- [Breaking Change] All classes are now prefixed with `.ods-`
 - Standard borders are now set to 1px (from 2px)
 - Input and Button now share the same height math
 
