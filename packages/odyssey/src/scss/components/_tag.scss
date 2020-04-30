@@ -1,0 +1,13 @@
+.ods-tag {
+  display: inline-block;
+  margin: 0 $tiny-spacing $tiny-spacing 0;
+  padding: 0 $em-tiny-spacing;
+  border-radius: $base-border-radius;
+  background: cv('gray', '100');
+  color: $text-body;
+}
+
+.ods-tag--list {
+  margin-bottom: -$tiny-spacing;
+  list-style-type: none;
+}
