@@ -1,8 +1,8 @@
 /* stylelint-disable selector-no-qualifying-type */
 
 code:not([class]) {
+  color: cv('lilac', 'base');
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  color: cv('magenta', 'base');
   font-size: ms(-1);
 }
 
@@ -44,14 +44,11 @@ pre[class*='language-'] {
   }
 }
 
-:not(pre) > code[class*='language-'] {
-  background: $white;
-}
-
 /* Inline code */
 :not(pre) > code[class*='language-'] {
   padding: $tiny-spacing;
   border-radius: $base-border-radius;
+  background: $white;
   white-space: normal;
 }
 
@@ -77,7 +74,7 @@ pre[class*='language-'] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: cv('violet', 'base');
+  color: cv('lilac', 'base');
 }
 
 .token.selector,
@@ -95,7 +92,7 @@ pre[class*='language-'] {
 .language-css .token.string,
 .style .token.string {
   background: hsla(0, 0%, 100%, $less-opaque);
-  color: cv('warning', 'dark');
+  color: cv('caution', 'dark');
 }
 
 .token.atrule,
@@ -112,7 +109,7 @@ pre[class*='language-'] {
 .token.regex,
 .token.important,
 .token.variable {
-  color: cv('warning', 'base');
+  color: cv('caution', 'base');
 }
 
 .token.important,

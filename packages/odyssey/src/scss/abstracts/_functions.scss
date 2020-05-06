@@ -56,12 +56,6 @@
   @return $map;
 }
 
-@function fauxpacity($color) {
-  $value: mix($color, $white, 40%);
-
-  @return $value;
-}
-
 /**
  * Retrieves and encodes icons for use in CSS
  * Works down to IE9

@@ -42,7 +42,11 @@
       cursor: not-allowed;
 
       &::before {
-        border-color: cv('gray', '200');
+        border-color: $disabled-border-color;
+        background-color: cv('gray', '000');
+      }
+
+      &::after {
         background-color: cv('gray', '000');
       }
     }
@@ -50,8 +54,8 @@
     &:checked {
       + .ods-radio--label {
         &::before {
-          border-color: fauxpacity(cv('action', 'base'));
-          background-color: fauxpacity(cv('action', 'base'));
+          border-color: cv('action', 'light');
+          background-color: cv('action', 'light');
         }
       }
     }
@@ -87,15 +91,15 @@
         color: $text-sub;
 
         &::before {
-          border-color: fauxpacity(cv('danger', 'base'));
+          border-color: cv('danger', 'light');
         }
       }
 
       &:checked {
         + .ods-radio--label {
           &::before {
-            border-color: fauxpacity(cv('danger', 'base'));
-            background-color: fauxpacity(cv('danger', 'base'));
+            border-color: cv('danger', 'light');
+            background-color: cv('danger', 'light');
           }
         }
       }
@@ -132,7 +136,7 @@
   &::before {
     transform: translateY(-50%);
     border-color: $base-border-color;
-    box-shadow: 0 0 0 0 fauxpacity(cv('action', 'base'));
+    box-shadow: 0 0 0 0 cv('action', 'light');
   }
 
   // Check

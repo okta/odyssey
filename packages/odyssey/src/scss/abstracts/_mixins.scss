@@ -25,7 +25,7 @@
 
 @mixin outline($outlineColor: 'action', $radius: 4px) {
   outline: 0;
-  box-shadow: 0 0 0 $radius fauxpacity(cv($outlineColor, 'base'));
+  box-shadow: 0 0 0 $radius cv($outlineColor, 'light');
 }
 
 @mixin input-baseline {
@@ -41,7 +41,7 @@
   border: 1px solid $base-border-color;
   border-radius: $base-border-radius;
   background-color: $white;
-  box-shadow: 0 0 0 0 fauxpacity(cv('action', 'base'));
+  box-shadow: 0 0 0 0 cv('action', 'light');
   color: $text-body;
   font-family: $body-font-family;
   font-size: ms(0);
@@ -64,11 +64,11 @@
 
   &:disabled,
   &[readonly] {
-    border-color: cv('gray', '200');
+    border-color: $disabled-border-color;
     background-color: cv('gray', '000');
 
     &:hover {
-      border-color: cv('gray', '200');
+      border-color: $disabled-border-color;
     }
   }
 

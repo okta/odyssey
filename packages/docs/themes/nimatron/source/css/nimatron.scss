@@ -113,7 +113,7 @@
       top: 0;
       left: -$big-spacing;
       width: calc(100% + #{$big-spacing} + #{$big-spacing});
-      border-top: 1px solid cv('gray', '100');
+      border-top: 1px solid cv('gray', '200');
     }
   }
 }
@@ -130,7 +130,7 @@
 
   @media only screen and (min-width: 125ch) {
     display: block;
-    border-left: 1px solid cv('gray', '100');
+    border-left: 1px solid cv('gray', '200');
   }
 }
 

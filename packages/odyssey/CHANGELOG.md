@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rebrand type and color changes
 - [Breaking Change] Removed documentation and Sass styles for unapproved components: Banner, Callout, Card, Dropdown, Meter, Navigation, Switch, Toast, Top Bar
 - Removed all other unused/unapproved documentation
+- [Breaking Change] Removed `fauxpacity` function, preferring "light" color variants
+- [Breaking Change] Renamed "warning" to "orange, renamed "violet" to "lilac"
+- [Breaking Change] Removed grays 100, 300, 500, 700, 900
+- [Breaking Change] Removed "magenta"
 
 ## [0.2.0] - 2020-04-30
 

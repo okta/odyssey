@@ -23,7 +23,7 @@
   border: 1px solid transparent;
   border-radius: $base-border-radius;
   background-color: cv('action');
-  box-shadow: 0 0 0 0 fauxpacity(cv('action', 'base'));
+  box-shadow: 0 0 0 0 cv('action', 'light');
   color: $white;
   font-family: $body-font-family;
   font-size: ms(0);
@@ -45,7 +45,7 @@
 
   &:disabled {
     border-color: transparent;
-    background-color: fauxpacity(cv('action', 'base'));
+    background-color: cv('action', 'light');
     cursor: not-allowed;
   }
 }
@@ -57,22 +57,22 @@
 
   &:hover,
   &.is-ods-button-hover {
-    border-color: cv('action', 'dark');
-    background-color: cv('action', 'lightest');
-    color: cv('action', 'dark');
+    border-color: cv('action', 'base');
+    background-color: cv('action', 'base');
+    color: $white;
   }
 
   &:focus,
   &.is-ods-button-focus {
-    border-color: cv('action', 'dark');
-    background-color: cv('action', 'lightest');
-    color: cv('action', 'dark');
+    border-color: cv('action', 'base');
+    background-color: $white;
+    color: cv('action', 'base');
   }
 
   &:disabled {
-    border-color: fauxpacity(cv('action', 'base'));
+    border-color: cv('action', 'light');
     background-color: $white;
-    color: fauxpacity(cv('action', 'base'));
+    color: cv('action', 'light');
   }
 }
 
@@ -93,7 +93,7 @@
   }
 
   &:disabled {
-    background-color: fauxpacity(cv('danger', 'base'));
+    background-color: cv('danger', 'light');
   }
 
   &.is-ods-button-secondary {
@@ -104,14 +104,14 @@
     &:focus,
     &.is-ods-button-focus {
       border-color: cv('danger', 'dark');
-      background-color: cv('danger', 'lightest');
+      background-color: cv('danger', 'light');
       color: cv('danger', 'dark');
     }
 
     &:disabled {
-      border-color: fauxpacity(cv('danger', 'base'));
+      border-color: cv('danger', 'light');
       background-color: $white;
-      color: fauxpacity(cv('danger', 'base'));
+      color: cv('danger', 'light');
     }
   }
 }
@@ -128,14 +128,14 @@
 
   &:focus,
   &.is-ods-button-focus {
-    @include outline;
-
-    background-color: cv('gray', '000');
+    outline: 0;
+    background-color: $white;
+    box-shadow: 0 0 0 $base-border-radius cv('action');
   }
 
   &:disabled {
-    opacity: $more-opaque;
     background-color: $white;
+    color: cv('gray', '400');
   }
 }
 
@@ -146,19 +146,19 @@
   &:hover,
   &.is-ods-button-hover {
     border-color: transparent;
-    background-color: cv('action', 'lightest');
+    background-color: cv('action', 'light');
     color: cv('action', 'dark');
   }
 
   &:focus,
   &.is-ods-button-focus {
-    background-color: cv('action', 'lightest');
-    color: cv('action', 'dark');
+    background-color: $white;
+    color: cv('action', 'base');
   }
 
   &:disabled {
     background-color: transparent;
-    color: fauxpacity(cv('action', 'base'));
+    color: cv('action', 'light');
   }
 }
 

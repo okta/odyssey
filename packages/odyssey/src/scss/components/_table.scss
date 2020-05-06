@@ -52,13 +52,13 @@
 
   tbody {
     [rowspan] {
-      border-bottom: 1px solid cv('gray', '100');
+      border-bottom: 1px solid cv('gray', '200');
     }
 
     tr {
       td,
       th {
-        border-bottom: 1px solid cv('gray', '100');
+        border-bottom: 1px solid cv('gray', '200');
       }
 
       &:first-child {
