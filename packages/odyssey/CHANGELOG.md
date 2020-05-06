@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Rebrand type and color changes
+- [Breaking Change] Removed documentation and Sass styles for unapproved components: Banner, Callout, Card, Dropdown, Meter, Navigation, Switch, Toast, Top Bar
+- Removed all other unused/unapproved documentation
 
 ## [0.2.0] - 2020-04-30
 
@@ -43,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- [Docs] Heading casing changed to sentence throughout docs 
+- [Docs] Heading casing changed to sentence throughout docs
 
 ## [0.1.1] - 2020-04-01
 
