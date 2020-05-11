@@ -1,6 +1,6 @@
 {
   "name": "@okta/vuepress-theme-nimatron",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "VuePress theme for Odyssey Documentation",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
