@@ -18,19 +18,19 @@
 
 $colors: (
   'success': (
-    'light': #a0dcc3,
+    'light': #e5faf3,
     'base': #00b478,
-    'dark': #1e5046,
+    'dark': #163b34,
   ),
   'action': (
-    'light': #92bcff,
+    'light': #f2f5ff,
     'base': #1662dd,
     'dark': #00297a,
   ),
   'caution': (
     'light': #fae496,
     'base': #ffc61c,
-    'dark': #9d6612,
+    'dark': #663800,
   ),
   'danger': (
     'light': #faafa3,
@@ -38,26 +38,31 @@ $colors: (
     'dark': #892100,
   ),
   'orange': (
-    'light': #f0bf87,
+    'light': #feefe1,
     'base': #e97107,
-    'dark': #873800,
-  ),
-  'lilac': (
-    'light': #bf9daf,
-    'base': #8d6e97,
-    'dark': #3c2b57,
+    'dark': #521f00,
   ),
   'cyan': (
-    'light': #abd5d6,
+    'light': #e3fafb,
     'base': #2d8c9e,
-    'dark': #095661,
+    'dark': #053d46,
+  ),
+  'lilac': (
+    'light': #3a2d49,
+    'base': #8d6e97,
+    'dark': #f3f0f4,
   ),
   'gray': (
     '000': #f5f5f6,
+    '100': #ebebed,
     '200': #d7d7dc,
+    '300': #c1c1c8,
     '400': #aaaab4,
+    '500': #8c8c96,
     '600': #6e6e78,
+    '700': #585862,
     '800': #41414b,
+    '900': #212126,
   ),
 );
 
