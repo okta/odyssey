@@ -1,49 +1,15 @@
-$color-primary-text: cv('blue', '500');
-$color-primary-text-disabled: $white;
-$color-primary-border: cv('blue', '500');
-$color-primary-border-disabled: cv('blue', '300');
-$color-primary-bg: cv('blue', '500');
-$color-primary-bg-disabled: cv('blue', '300');
-$color-primary-bg-focus: cv('blue', '900');
-$color-primary-bg-hover: cv('blue', '900');
-$color-primary-outline: cv('blue', '300');
+$color-primary-light: cv('blue', '300');
+$color-primary-base: cv('blue', '500');
+$color-primary-dark: cv('blue', '800');
 
-$color-secondary-text: cv('blue', '500');
-$color-secondary-text-disabled: cv('blue', '300');
-$color-secondary-border: cv('blue', '500');
-$color-secondary-border-disabled: cv('blue', '300');
-$color-secondary-bg: $white;
-$color-secondary-bg-disabled: $white;
-$color-secondary-bg-focus: cv('blue', '200');
-$color-secondary-bg-hover: cv('blue', '200');
-$color-secondary-outline: $color-primary-outline;
+$color-danger-light: cv('red', '300');
+$color-danger-base: cv('red', '500');
+$color-danger-dark: cv('red', '700');
 
-$color-danger-text: $white;
-$color-danger-text-disabled: $white;
-$color-danger-border: cv('red', '500');
-$color-danger-border-disabled: $white;
-$color-danger-bg: cv('red', '500');
+$color-primary-bg: $color-primary-base;
+$color-primary-bg-disabled: $color-primary-light;
+$color-primary-outline: $color-primary-light;
+
+$color-danger-bg: $color-danger-base;
 $color-danger-bg-disabled: cv('red', '100');
-$color-danger-bg-focus: cv('red', '700');
-$color-danger-bg-hover: cv('red', '700');
-$color-danger-outline: cv('red', '300');
-
-$color-overlay-text: cv('gray', '900');
-$color-overlay-text-disabled: cv('gray', '700');
-$color-overlay-border: transparent;
-$color-overlay-border-disabled: $color-overlay-border;
-$color-overlay-bg: $white;
-$color-overlay-bg-disabled: transparentize($white, 0.6);
-$color-overlay-bg-focus: cv('gray', '000');
-$color-overlay-bg-hover: cv('gray', '000');
-$color-overlay-outline: $color-primary-outline;
-
-$color-clear-text: cv('blue', '500');
-$color-clear-text-disabled: cv('blue', '300');
-$color-clear-border: transparent;
-$color-clear-border-disabled: $color-clear-border;
-$color-clear-bg: transparent;
-$color-clear-bg-disabled: transparent;
-$color-clear-bg-focus: cv('blue', '100');
-$color-clear-bg-hover: cv('blue', '100');
-$color-clear-outline: $color-primary-outline;
+$color-danger-outline: $color-danger-light;
