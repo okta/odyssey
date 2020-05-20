@@ -31,14 +31,14 @@
   display: flex;
   align-items: center;
   margin-top: $tiny-spacing;
-  color: cv('red', 'base');
+  color: cv('red', '500');
 
   &::before {
     content: '';
     width: ms(-1);
     height: ms(-1);
     margin: 0 $tiny-spacing 0 0;
-    background-image: get-icon('alert', cv('red', 'base'));
+    background-image: get-icon('alert', cv('red', '500'));
     background-repeat: no-repeat;
   }
 }

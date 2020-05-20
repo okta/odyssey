@@ -20,8 +20,8 @@
   &:checked {
     + .ods-radio--label {
       &::before {
-        border-color: cv('blue', 'base');
-        background-color: cv('blue', 'base');
+        border-color: cv('blue', '500');
+        background-color: cv('blue', '500');
       }
     }
   }
@@ -31,7 +31,7 @@
       &::before {
         @include outline('blue', 2px);
 
-        border-color: cv('blue', 'base');
+        border-color: cv('blue', '500');
       }
     }
   }
@@ -54,8 +54,8 @@
     &:checked {
       + .ods-radio--label {
         &::before {
-          border-color: cv('blue', 'light');
-          background-color: cv('blue', 'light');
+          border-color: cv('blue', '000');
+          background-color: cv('blue', '000');
         }
       }
     }
@@ -71,7 +71,7 @@
     &:checked {
       + .ods-radio--label {
         &::before {
-          background-color: cv('red', 'base');
+          background-color: cv('red', '500');
         }
       }
     }
@@ -81,7 +81,7 @@
         &::before {
           @include outline('red', 2px);
 
-          border-color: cv('red', 'base');
+          border-color: cv('red', '500');
         }
       }
     }
@@ -91,15 +91,15 @@
         color: $text-sub;
 
         &::before {
-          border-color: cv('red', 'light');
+          border-color: cv('red', '100');
         }
       }
 
       &:checked {
         + .ods-radio--label {
           &::before {
-            border-color: cv('red', 'light');
-            background-color: cv('red', 'light');
+            border-color: cv('red', '100');
+            background-color: cv('red', '100');
           }
         }
       }
@@ -136,7 +136,7 @@
   &::before {
     transform: translateY(-50%);
     border-color: $base-border-color;
-    box-shadow: 0 0 0 0 cv('blue', 'light');
+    box-shadow: 0 0 0 0 cv('blue', '000');
   }
 
   // Check
@@ -149,7 +149,7 @@
 
   &:hover {
     &::before {
-      border-color: cv('blue', 'base');
+      border-color: cv('blue', '500');
     }
   }
 }

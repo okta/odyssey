@@ -92,24 +92,24 @@ pre[class*='language-'] {
 .language-css .token.string,
 .style .token.string {
   background: hsla(0, 0%, 100%, $less-opaque);
-  color: cv('yellow', 'dark');
+  color: cv('yellow', '900');
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: cv('blue', 'base');
+  color: cv('blue', '500');
 }
 
 .token.function,
 .token.class-name {
-  color: cv('red', 'base');
+  color: cv('red', '500');
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  color: cv('yellow', 'base');
+  color: cv('yellow', '500');
 }
 
 .token.important,
