@@ -15,13 +15,13 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   &.is-ods-select-focused {
     border-radius: $base-border-radius;
     outline: none;
-    box-shadow: 0 0 0 4px cv('action', 'light');
+    box-shadow: 0 0 0 4px cv('blue', 'light');
 
     &.is-ods-select-open {
-      box-shadow: 0 0 0 4px cv('action', 'light'), 0 2px 0 4px cv('action', 'light');
+      box-shadow: 0 0 0 4px cv('blue', 'light'), 0 2px 0 4px cv('blue', 'light');
 
       &.is-ods-select-flipped {
-        box-shadow: 0 0 0 4px cv('action', 'light'), 0 -2px 0 4px cv('action', 'light');
+        box-shadow: 0 0 0 4px cv('blue', 'light'), 0 -2px 0 4px cv('blue', 'light');
       }
     }
   }
@@ -63,20 +63,20 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     &.is-ods-select-focused {
       border-radius: $base-border-radius;
       outline: none;
-      box-shadow: 0 0 0 4px cv('danger', 'light');
+      box-shadow: 0 0 0 4px cv('red', 'light');
 
       &.is-ods-select-open {
-        box-shadow: 0 0 0 4px cv('danger', 'light'), 0 2px 0 4px cv('danger', 'light');
+        box-shadow: 0 0 0 4px cv('red', 'light'), 0 2px 0 4px cv('red', 'light');
 
         &.is-ods-select-flipped {
-          box-shadow: 0 0 0 4px cv('danger', 'light'), 0 -2px 0 4px cv('danger', 'light');
+          box-shadow: 0 0 0 4px cv('red', 'light'), 0 -2px 0 4px cv('red', 'light');
         }
       }
     }
 
     .ods-select--inner,
     .ods-select--input {
-      border-color: cv('danger');
+      border-color: cv('red');
     }
   }
 
@@ -119,7 +119,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     &:focus {
-      box-shadow: 0 0 0 2px cv('action', 'base');
+      box-shadow: 0 0 0 2px cv('blue', 'base');
     }
   }
 
@@ -177,7 +177,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     margin-bottom: 0;
     margin-left: $choices-button-offset;
     padding-left: $choices-button-offset * 2;
-    border-left: 1px solid darken(cv('action', 'base'), 10%);
+    border-left: 1px solid darken(cv('blue', 'base'), 10%);
     border-radius: 0;
     opacity: 0.75;
     background-image: $choices-icon-cross;
@@ -202,7 +202,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   border: 1px solid $base-border-color;
   border-radius: $base-border-radius;
   background-color: $white;
-  box-shadow: 0 0 0 0 cv('action', 'light');
+  box-shadow: 0 0 0 0 cv('blue', 'light');
   color: $text-body;
   font-family: $body-font-family;
   font-size: ms(0);
@@ -212,7 +212,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   &:hover,
   .is-ods-select-focused &,
   .is-ods-select-open & {
-    border-color: cv('action', 'base');
+    border-color: cv('blue', 'base');
   }
 
   .is-ods-select-open &,
@@ -225,7 +225,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   [data-invalid] .is-ods-select-flipped.is-ods-select-open & {
     border-radius: 0 0 $base-border-radius $base-border-radius;
     border-top-color: $base-border-color;
-    border-bottom-color: cv('action', 'base');
+    border-bottom-color: cv('blue', 'base');
   }
 }
 
@@ -257,9 +257,9 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     margin-right: 3.75px;
     margin-bottom: 3.75px;
     padding: 4px $small-spacing;
-    border: 1px solid darken(cv('action', 'base'), 5%);
+    border: 1px solid darken(cv('blue', 'base'), 5%);
     border-radius: ($base-border-radius * 2);
-    background-color: cv('action', 'base');
+    background-color: cv('blue', 'base');
     color: $white;
     font-size: ms(-1);
     font-weight: 500;
@@ -276,8 +276,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     &.is-ods-select-highlighted {
-      border: 1px solid darken(cv('action', 'base'), 10%);
-      background-color: darken(cv('action', 'base'), 5%);
+      border: 1px solid darken(cv('blue', 'base'), 10%);
+      background-color: darken(cv('blue', 'base'), 5%);
     }
 
     .is-ods-select-disabled & {
@@ -307,12 +307,12 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 
   .is-ods-select-focused & {
-    box-shadow: 0 0 0 4px cv('action', 'light');
+    box-shadow: 0 0 0 4px cv('blue', 'light');
     clip-path: inset(0 -4px -4px -4px);
   }
 
   .is-ods-select-open & {
-    border-color: cv('action', 'base');
+    border-color: cv('blue', 'base');
   }
 
   .is-ods-select-flipped & {
@@ -385,11 +385,11 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 
   [data-invalid] .is-ods-select-focused & {
-    box-shadow: 0 0 0 4px cv('danger', 'light');
+    box-shadow: 0 0 0 4px cv('red', 'light');
   }
 
   [data-invalid] .is-ods-select-open & {
-    border-color: cv('danger', 'base');
+    border-color: cv('red', 'base');
   }
 }
 

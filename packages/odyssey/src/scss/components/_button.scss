@@ -12,7 +12,54 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@mixin make-ods-button-variant(
+  $color-border,
+  $color-border-disabled,
+  $color-bg,
+  $color-bg-disabled,
+  $color-bg-focus,
+  $color-bg-hover,
+  $color-outline: $color-primary-outline,
+  $color-text: cv('blue'),
+  $color-text-disabled: cv('blue'),
+) {
+  border-color: $color-border;
+  background-color: $color-bg;
+  color: $color-text;
+
+  &:hover,
+  &.is-ods-button-hover {
+    background-color: $color-bg-hover;
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    @include outline($color-outline);
+
+    background-color: $color-bg-focus;
+  }
+
+  &:disabled {
+    border-color: $color-border-disabled;
+    background-color: $color-bg-disabled;
+    color: $color-text-disabled;
+    cursor: not-allowed;
+  }
+}
+
 .ods-button {
+  @include make-ods-button-variant(
+    $color-primary-border,
+    $color-primary-border-disabled,
+    $color-primary-bg,
+    $color-primary-bg-disabled,
+    $color-primary-bg-focus,
+    $color-primary-bg-hover,
+    $color-primary-outline,
+    $color-primary-text,
+    $color-primary-text-disabled,
+  );
+
   display: inline-block;
   position: relative;
   margin: 0;
@@ -22,144 +69,67 @@
   transition-timing-function: linear;
   border: 1px solid transparent;
   border-radius: $base-border-radius;
-  background-color: cv('action');
-  box-shadow: 0 0 0 0 cv('action', 'light');
   color: $white;
   font-family: $body-font-family;
   font-size: ms(0);
   font-weight: 600;
   line-height: $base-line-height;
-
-  &:hover,
-  &.is-ods-button-hover {
-    border-color: cv('action', 'dark');
-    background-color: cv('action', 'dark');
-  }
-
-  &:focus,
-  &.is-ods-button-focus {
-    @include outline;
-
-    background-color: cv('action', 'dark');
-  }
-
-  &:disabled {
-    border-color: transparent;
-    background-color: cv('action', 'light');
-    cursor: not-allowed;
-  }
 }
 
 .is-ods-button-secondary {
-  border-color: cv('action');
-  background-color: $white;
-  color: cv('action');
-
-  &:hover,
-  &.is-ods-button-hover {
-    border-color: cv('action', 'base');
-    background-color: cv('action', 'base');
-    color: $white;
-  }
-
-  &:focus,
-  &.is-ods-button-focus {
-    border-color: cv('action', 'base');
-    background-color: $white;
-    color: cv('action', 'base');
-  }
-
-  &:disabled {
-    border-color: cv('action', 'light');
-    background-color: $white;
-    color: cv('action', 'light');
-  }
+  @include make-ods-button-variant(
+    $color-secondary-border,
+    $color-secondary-border-disabled,
+    $color-secondary-bg,
+    $color-secondary-bg-disabled,
+    $color-secondary-bg-focus,
+    $color-secondary-bg-hover,
+    $color-secondary-outline,
+    $color-secondary-text,
+    $color-secondary-text-disabled,
+  );
 }
 
 .is-ods-button-danger {
-  background-color: cv('danger');
-
-  &:hover,
-  &.is-ods-button-hover {
-    border-color: cv('danger', 'dark');
-    background-color: cv('danger', 'dark');
-  }
-
-  &:focus,
-  &.is-ods-button-focus {
-    @include outline('danger');
-
-    background-color: cv('danger', 'dark');
-  }
-
-  &:disabled {
-    background-color: cv('danger', 'light');
-  }
-
-  &.is-ods-button-secondary {
-    border-color: cv('danger');
-    background-color: $white;
-    color: cv('danger');
-
-    &:focus,
-    &.is-ods-button-focus {
-      border-color: cv('danger', 'dark');
-      background-color: cv('danger', 'light');
-      color: cv('danger', 'dark');
-    }
-
-    &:disabled {
-      border-color: cv('danger', 'light');
-      background-color: $white;
-      color: cv('danger', 'light');
-    }
-  }
+  @include make-ods-button-variant(
+    $color-danger-border,
+    $color-danger-border-disabled,
+    $color-danger-bg,
+    $color-danger-bg-disabled,
+    $color-danger-bg-focus,
+    $color-danger-bg-hover,
+    $color-danger-outline,
+    $color-danger-text,
+    $color-danger-text-disabled,
+  );
 }
 
 .is-ods-button-overlay {
-  background-color: $white;
-  color: $text-body;
-
-  &:hover,
-  &.is-ods-button-hover {
-    border-color: transparent;
-    background-color: cv('gray', '000');
-  }
-
-  &:focus,
-  &.is-ods-button-focus {
-    outline: 0;
-    background-color: $white;
-    box-shadow: 0 0 0 $base-border-radius cv('action');
-  }
-
-  &:disabled {
-    background-color: $white;
-    color: cv('gray', '400');
-  }
+  @include make-ods-button-variant(
+    $color-overlay-border,
+    $color-overlay-border-disabled,
+    $color-overlay-bg,
+    $color-overlay-bg-disabled,
+    $color-overlay-bg-focus,
+    $color-overlay-bg-hover,
+    $color-overlay-outline,
+    $color-overlay-text,
+    $color-overlay-text-disabled,
+  );
 }
 
 .is-ods-button-clear {
-  background-color: transparent;
-  color: cv('action', 'base');
-
-  &:hover,
-  &.is-ods-button-hover {
-    border-color: transparent;
-    background-color: cv('action', 'light');
-    color: cv('action', 'dark');
-  }
-
-  &:focus,
-  &.is-ods-button-focus {
-    background-color: $white;
-    color: cv('action', 'base');
-  }
-
-  &:disabled {
-    background-color: transparent;
-    color: cv('action', 'light');
-  }
+  @include make-ods-button-variant(
+    $color-clear-border,
+    $color-clear-border-disabled,
+    $color-clear-bg,
+    $color-clear-bg-disabled,
+    $color-clear-bg-focus,
+    $color-clear-bg-hover,
+    $color-clear-outline,
+    $color-clear-text,
+    $color-clear-text-disabled,
+  );
 }
 
 %button-small {

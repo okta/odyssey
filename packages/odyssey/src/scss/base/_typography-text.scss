@@ -13,7 +13,7 @@
 // limitations under the License.
 
 abbr {
-  border-bottom: 1px dashed cv('action', 'dark');
+  border-bottom: 1px dashed cv('blue', 'dark');
   text-decoration: none;
 }
 
@@ -66,7 +66,7 @@ cite {
 
 del {
   display: inline-block;
-  background: cv('danger', 'light');
+  background: cv('red', 'light');
 }
 
 del::before,
@@ -84,7 +84,7 @@ del::after {
 
 ins {
   display: inline-block;
-  background: cv('success', 'light');
+  background: cv('green', 'light');
 }
 
 ins::before,
@@ -101,7 +101,7 @@ ins::after {
 }
 
 mark {
-  background: cv('caution', 'light');
+  background: cv('yellow', 'light');
 }
 
 s {
@@ -130,7 +130,7 @@ hr {
 }
 
 code {
-  color: cv('cyan', 'dark');
+  color: cv('turquoise');
   font-family: $mono-font-family;
 }
 

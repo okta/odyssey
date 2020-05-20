@@ -17,41 +17,6 @@
 // Color Variants
 
 $colors: (
-  'success': (
-    'light': #e5faf3,
-    'base': #00b478,
-    'dark': #163b34,
-  ),
-  'action': (
-    'light': #f2f5ff,
-    'base': #1662dd,
-    'dark': #00297a,
-  ),
-  'caution': (
-    'light': #fae496,
-    'base': #ffc61c,
-    'dark': #663800,
-  ),
-  'danger': (
-    'light': #faafa3,
-    'base': #da372c,
-    'dark': #892100,
-  ),
-  'orange': (
-    'light': #feefe1,
-    'base': #e97107,
-    'dark': #521f00,
-  ),
-  'cyan': (
-    'light': #e3fafb,
-    'base': #2d8c9e,
-    'dark': #053d46,
-  ),
-  'lilac': (
-    'light': #3a2d49,
-    'base': #8d6e97,
-    'dark': #f3f0f4,
-  ),
   'gray': (
     '000': #f5f5f6,
     '100': #ebebed,
@@ -64,6 +29,82 @@ $colors: (
     '800': #41414b,
     '900': #212126,
   ),
+  // action/primary
+  'blue': (
+    '000': #f2f5ff,
+    '100': #e5e9f9,
+    '200': #d1d8f5,
+    '300': #a7b5ec,
+    '400': #7d91e3,
+    '500': #1662dd,
+    '600': #1354be,
+    '700': #0f4294,
+    '800': #0c3579,
+    '900': #00297a,
+    'light': #f2f5ff,
+    'base': #1662dd,
+    'dark': #00297a,
+  ),
+  // success
+  'green': (
+    '000': #e5faf3,
+    '100': #d1f0e6,
+    '200': #b2e3d0,
+    '300': #84d2b1,
+    '400': #5fc49a,
+    '500': #00b478,
+    '600': #008055,
+    '700': #006644,
+    '800': #004d37,
+    '900': #163b348c,
+    'light': #e5faf3,
+    'base': #00b478,
+    'dark': #163b34,
+  ),
+  // danger
+  'red': (
+    '000': #ffdfe2,
+    '100': #ffc8cc,
+    '200': #faa5ad,
+    '300': #f88c90,
+    '400': #f66260,
+    '500': #ec3629,
+    '600': #ce1f12,
+    '700': #ad1a0f,
+    '800': #7f0f00,
+    '900': #5a0a0a,
+    'light': #faafa3,
+    'base': #da372c,
+    'dark': #892100,
+  ),
+  // caution
+  'yellow': (
+    '000': #faf5dc,
+    '100': #fcedbb,
+    '200': #fae496,
+    '300': #f9dc77,
+    '400': #fcd754,
+    '500': #ffc61c,
+    '600': #e5ac00,
+    '700': #c28900,
+    '800': #915107,
+    '900': #663800,
+    'light': #fae496,
+    'base': #ffc61c,
+    'dark': #663800,
+  ),
+  // orange
+  'orange': (
+    '500': #e97107
+  ),
+  // turquoise
+  'turquoise': (
+    '500': #2d8c9e
+  ),
+  // lilac
+  'purple': (
+    '500': #8d6e97
+  ),
 );
 
 $black: #000000;
@@ -74,7 +115,7 @@ $white: #ffffff;
  * color: cv(action, light); // color: #96bafa;
  */
 
-@function cv($color, $variation: 'base') {
+@function cv($color, $variation: '500') {
   @if not map-has-key($colors, $color) {
     @error 'Invalid color name: `#{$color}`.';
   }
@@ -90,7 +131,8 @@ $white: #ffffff;
 
 $box-shadow-default: 0 2px 0 rgba(175, 175, 175, 0.12);
 
-$brand: cv('action', 'dark');
+$brand: cv('blue', 'dark');
 $text-body: cv('gray', '800');
 $text-heading: $black;
 $text-sub: cv('gray', '600');
+

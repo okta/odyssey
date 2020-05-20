@@ -21,7 +21,7 @@
     top: -1px;
     left: -1px;
     width: calc(100% + 2px);
-    border-top: 2px solid cv('action', 'dark');
+    border-top: 2px solid cv('blue', 'dark');
   }
 }
 
@@ -219,20 +219,20 @@ $spacing-units: (
 }
 
 .nimatron--rendered .is-link-default {
-  color: cv('action', 'base');
+  color: cv('blue', 'base');
 }
 
 .nimatron--rendered .is-link-default:hover,
 .nimatron--rendered .is-link-hover {
-  color: cv('action', 'dark');
+  color: cv('blue', 'dark');
 }
 
 .is-rendered-success {
-  background: cv('success', 'base');
+  background: cv('green', 'base');
 }
 
 .is-link-visited {
-  color: cv('lilac', 'dark');
+  color: cv('purple');
 }
 
 .sample--external-link-icon {

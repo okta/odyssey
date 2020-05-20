@@ -23,9 +23,9 @@
   border: 0;
 }
 
-@mixin outline($outlineColor: 'action', $radius: 4px) {
+@mixin outline($outlineCv: $color-primary-outline, $radius: 4px) {
   outline: 0;
-  box-shadow: 0 0 0 $radius cv($outlineColor, 'light');
+  box-shadow: 0 0 0 $radius $outlineCv;
 }
 
 @mixin input-baseline {
@@ -41,7 +41,7 @@
   border: 1px solid $base-border-color;
   border-radius: $base-border-radius;
   background-color: $white;
-  box-shadow: 0 0 0 0 cv('action', 'light');
+  box-shadow: 0 0 0 0 cv('blue', 'light');
   color: $text-body;
   font-family: $body-font-family;
   font-size: ms(0);
@@ -49,7 +49,7 @@
 
   &:hover,
   &:focus {
-    border-color: cv('action');
+    border-color: cv('blue');
   }
 
   &:focus {
@@ -73,10 +73,10 @@
   }
 
   &[data-invalid] {
-    border-color: cv('danger');
+    border-color: cv('red');
 
     &:focus {
-      @include outline('danger');
+      @include outline('red');
     }
   }
 

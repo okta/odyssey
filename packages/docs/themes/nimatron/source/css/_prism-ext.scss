@@ -1,7 +1,7 @@
 /* stylelint-disable selector-no-qualifying-type */
 
 code:not([class]) {
-  color: cv('lilac', 'base');
+  color: cv('purple');
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: ms(-1);
 }
@@ -74,7 +74,7 @@ pre[class*='language-'] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: cv('lilac', 'base');
+  color: cv('purple');
 }
 
 .token.selector,
@@ -83,7 +83,7 @@ pre[class*='language-'] {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: cv('cyan', 'base');
+  color: cv('turquoise');
 }
 
 .token.operator,
@@ -92,24 +92,24 @@ pre[class*='language-'] {
 .language-css .token.string,
 .style .token.string {
   background: hsla(0, 0%, 100%, $less-opaque);
-  color: cv('caution', 'dark');
+  color: cv('yellow', 'dark');
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: cv('action', 'base');
+  color: cv('blue', 'base');
 }
 
 .token.function,
 .token.class-name {
-  color: cv('danger', 'base');
+  color: cv('red', 'base');
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  color: cv('caution', 'base');
+  color: cv('yellow', 'base');
 }
 
 .token.important,

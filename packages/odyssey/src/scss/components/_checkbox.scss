@@ -21,8 +21,8 @@
   &:indeterminate {
     + .ods-checkbox--label {
       &::before {
-        border-color: cv('action', 'base');
-        background-color: cv('action', 'base');
+        border-color: cv('blue', 'base');
+        background-color: cv('blue', 'base');
       }
     }
   }
@@ -39,9 +39,9 @@
   &:focus {
     + .ods-checkbox--label {
       &::before {
-        @include outline('action', 2px);
+        @include outline('blue', 2px);
 
-        border-color: cv('action', 'base');
+        border-color: cv('blue', 'base');
       }
     }
   }
@@ -65,8 +65,8 @@
     &:indeterminate {
       + .ods-checkbox--label {
         &::before {
-          border-color: cv('action', 'light');
-          background-color: cv('action', 'light');
+          border-color: cv('blue', 'light');
+          background-color: cv('blue', 'light');
         }
       }
     }
@@ -75,7 +75,7 @@
   &[data-invalid] {
     + .ods-checkbox--label {
       &::before {
-        border-color: cv('danger');
+        border-color: cv('red');
       }
     }
 
@@ -83,7 +83,7 @@
     &:indeterminate {
       + .ods-checkbox--label {
         &::before {
-          background-color: cv('danger', 'base');
+          background-color: cv('red', 'base');
         }
       }
     }
@@ -91,9 +91,9 @@
     &:focus {
       + .ods-checkbox--label {
         &::before {
-          @include outline('danger', 2px);
+          @include outline('red', 2px);
 
-          border-color: cv('danger', 'base');
+          border-color: cv('red', 'base');
         }
       }
     }
@@ -103,7 +103,7 @@
         color: $text-sub;
 
         &::before {
-          border-color: cv('danger', 'light');
+          border-color: cv('red', 'light');
         }
       }
 
@@ -111,8 +111,8 @@
       &:indeterminate {
         + .ods-checkbox--label {
           &::before {
-            border-color: cv('danger', 'light');
-            background-color: cv('danger', 'light');
+            border-color: cv('red', 'light');
+            background-color: cv('red', 'light');
           }
         }
       }
@@ -149,7 +149,7 @@
   &::before {
     transform: translateY(-50%);
     border-color: $base-border-color;
-    box-shadow: 0 0 0 0 cv('action', 'light');
+    box-shadow: 0 0 0 0 cv('blue', 'light');
   }
 
   // Check
@@ -162,7 +162,7 @@
 
   &:hover {
     &::before {
-      border-color: cv('action', 'base');
+      border-color: cv('blue', 'base');
     }
   }
 }
