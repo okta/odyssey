@@ -6,10 +6,10 @@ $color-danger-light: cv('red', '300');
 $color-danger-base: cv('red', '500');
 $color-danger-dark: cv('red', '900');
 
-$color-primary-bg: $color-primary-base;
-$color-primary-bg-disabled: $color-primary-light;
-$color-primary-outline: $color-primary-light;
+$bg-primary: $color-primary-base;
+$bg-primary-disabled: $color-primary-light;
+$outline-primary: $color-primary-light;
 
-$color-danger-bg: $color-danger-base;
-$color-danger-bg-disabled: cv('red', '000');
-$color-danger-outline: $color-danger-light;
+$bg-danger: $color-danger-base;
+$bg-danger-disabled: cv('red', '000');
+$outline-danger: $color-danger-light;

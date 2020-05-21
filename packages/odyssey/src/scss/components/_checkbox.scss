@@ -39,9 +39,9 @@
   &:focus {
     + .ods-checkbox--label {
       &::before {
-        @include outline($color-primary-outline, 2px);
+        @include outline($outline-primary, 2px);
 
-        border-color: $color-primary-bg;
+        border-color: $bg-primary;
       }
     }
   }
@@ -65,8 +65,8 @@
     &:indeterminate {
       + .ods-checkbox--label {
         &::before {
-          border-color: $color-primary-bg-disabled;
-          background-color: $color-primary-bg-disabled;
+          border-color: $bg-primary-disabled;
+          background-color: $bg-primary-disabled;
         }
       }
     }
@@ -75,7 +75,7 @@
   &[data-invalid] {
     + .ods-checkbox--label {
       &::before {
-        border-color: $color-danger-bg;
+        border-color: $bg-danger;
       }
     }
 
@@ -83,7 +83,7 @@
     &:indeterminate {
       + .ods-checkbox--label {
         &::before {
-          background-color: $color-danger-bg;
+          background-color: $bg-danger;
         }
       }
     }
@@ -91,9 +91,9 @@
     &:focus {
       + .ods-checkbox--label {
         &::before {
-          @include outline($color-danger-outline, 2px);
+          @include outline($outline-danger, 2px);
 
-          border-color: $color-danger-bg;
+          border-color: $bg-danger;
         }
       }
     }
@@ -103,7 +103,7 @@
         color: $text-sub;
 
         &::before {
-          border-color: $color-danger-bg-disabled;
+          border-color: $bg-danger-disabled;
         }
       }
 
@@ -111,8 +111,8 @@
       &:indeterminate {
         + .ods-checkbox--label {
           &::before {
-            border-color: $color-danger-bg-disabled;
-            background-color: $color-danger-bg-disabled;
+            border-color: $bg-danger-disabled;
+            background-color: $bg-danger-disabled;
           }
         }
       }

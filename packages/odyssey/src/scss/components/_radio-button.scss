@@ -20,8 +20,8 @@
   &:checked {
     + .ods-radio--label {
       &::before {
-        border-color: $color-primary-bg;
-        background-color: $color-primary-bg;
+        border-color: $bg-primary;
+        background-color: $bg-primary;
       }
     }
   }
@@ -29,9 +29,9 @@
   &:focus {
     + .ods-radio--label {
       &::before {
-        @include outline($color-primary-outline, 2px);
+        @include outline($outline-primary, 2px);
 
-        border-color: $color-primary-bg;
+        border-color: $bg-primary;
       }
     }
   }
@@ -54,8 +54,8 @@
     &:checked {
       + .ods-radio--label {
         &::before {
-          border-color: $color-primary-bg-disabled;
-          background-color: $color-primary-bg-disabled;
+          border-color: $bg-primary-disabled;
+          background-color: $bg-primary-disabled;
         }
       }
     }
@@ -64,14 +64,14 @@
   &[data-invalid] {
     + .ods-radio--label {
       &::before {
-        border-color: $color-danger-bg;
+        border-color: $bg-danger;
       }
     }
 
     &:checked {
       + .ods-radio--label {
         &::before {
-          background-color: $color-danger-bg;
+          background-color: $bg-danger;
         }
       }
     }
@@ -79,9 +79,9 @@
     &:focus {
       + .ods-radio--label {
         &::before {
-          @include outline($color-danger-outline, 2px);
+          @include outline($outline-danger, 2px);
 
-          border-color: $color-danger-bg;
+          border-color: $bg-danger;
         }
       }
     }
@@ -91,15 +91,15 @@
         color: $text-sub;
 
         &::before {
-          border-color: $color-danger-bg-disabled;
+          border-color: $bg-danger-disabled;
         }
       }
 
       &:checked {
         + .ods-radio--label {
           &::before {
-            border-color: $color-danger-bg-disabled;
-            background-color: $color-danger-bg-disabled;
+            border-color: $bg-danger-disabled;
+            background-color: $bg-danger-disabled;
           }
         }
       }
@@ -148,7 +148,7 @@
 
   &:hover {
     &::before {
-      border-color: $color-primary-bg;
+      border-color: $bg-primary;
     }
   }
 }

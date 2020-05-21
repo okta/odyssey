@@ -23,7 +23,7 @@
   border: 0;
 }
 
-@mixin outline($outlineCv: $color-primary-outline, $radius: 4px) {
+@mixin outline($outlineCv: $outline-primary, $radius: 4px) {
   outline: 0;
   box-shadow: 0 0 0 $radius $outlineCv;
 }
@@ -73,10 +73,10 @@
   }
 
   &[data-invalid] {
-    border-color: $color-danger-bg;
+    border-color: $bg-danger;
 
     &:focus {
-      @include outline($color-danger-outline);
+      @include outline($outline-danger);
     }
   }
 
