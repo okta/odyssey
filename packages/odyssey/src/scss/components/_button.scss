@@ -91,8 +91,8 @@
 .is-ods-button-secondary {
   @include make-ods-button-variant((
     'bg': transparent,
-    'bg-focus': cv('blue', '100'),
-    'bg-hover': cv('blue', '100'),
+    'bg-focus': cv('blue', '000'),
+    'bg-hover': cv('blue', '000'),
     'bg-disabled': transparent,
     'border-color': $color-primary-bg,
     'border-color-focus': $color-primary-dark,
@@ -135,27 +135,27 @@
     'border-color-hover': cv('gray', '100'),
     'border-color-disabled': transparent,
     'color-outline': $color-primary-outline,
-    'color-text': cv('gray', '800'),
-    'color-text-focus': cv('gray', '800'),
-    'color-text-hover': cv('gray', '800'),
-    'color-text-disabled': cv('gray', '700'),
+    'color-text': cv('gray', '900'),
+    'color-text-focus': cv('gray', '900'),
+    'color-text-hover': cv('gray', '900'),
+    'color-text-disabled': cv('gray', '600'),
   ));
 }
 
 .is-ods-button-clear {
   @include make-ods-button-variant((
     'bg': transparent,
-    'bg-focus': cv('blue', '100'),
-    'bg-hover': cv('blue', '100'),
+    'bg-focus': cv('blue', '000'),
+    'bg-hover': cv('blue', '000'),
     'bg-disabled': transparentize($white, 0.6),
     'border-color': $white,
-    'border-color-focus': cv('gray', '100'),
-    'border-color-hover': cv('gray', '100'),
+    'border-color-focus': cv('blue', '000'),
+    'border-color-hover': cv('blue', '000'),
     'border-color-disabled': transparent,
     'color-outline': $color-primary-outline,
     'color-text': $color-primary-base,
-    'color-text-focus': cv('blue', '700'),
-    'color-text-hover': cv('blue', '700'),
+    'color-text-focus': cv('blue', '900'),
+    'color-text-hover': cv('blue', '900'),
     'color-text-disabled': cv('blue', '300'),
   ));
 }

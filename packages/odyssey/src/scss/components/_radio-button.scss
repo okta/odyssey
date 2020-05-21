@@ -91,15 +91,15 @@
         color: $text-sub;
 
         &::before {
-          border-color: cv('red', '100');
+          border-color: cv('red', '000');
         }
       }
 
       &:checked {
         + .ods-radio--label {
           &::before {
-            border-color: cv('red', '100');
-            background-color: cv('red', '100');
+            border-color: cv('red', '000');
+            background-color: cv('red', '000');
           }
         }
       }

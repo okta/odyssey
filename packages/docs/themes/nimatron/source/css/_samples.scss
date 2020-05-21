@@ -13,7 +13,7 @@
 .modal--form {
   position: relative;
   border-radius: 0 0 $base-border-radius $base-border-radius;
-  box-shadow: 0 0 20px rgba(cv('gray', '800'), 0.1);
+  box-shadow: 0 0 20px rgba(cv('gray', '900'), 0.1);
 
   &::before {
     content: '';
@@ -161,7 +161,7 @@ $spacing-units: (
     width: $value;
     height: $value;
     margin: 0 0 $base-spacing 0;
-    border: 1px solid cv('gray', '800');
+    border: 1px solid cv('gray', '900');
   }
 }
 

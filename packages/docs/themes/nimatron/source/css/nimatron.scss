@@ -13,7 +13,7 @@
 .nimatron {
   display: block;
   min-height: 100vh;
-  background-image: linear-gradient(to bottom, cv('blue', '900') (-$huge-spacing * 2), cv('blue', '700') 75vh);
+  background-image: linear-gradient(to bottom, cv('blue', '500') (-$huge-spacing * 2), cv('blue', '900') 75vh);
   background-repeat: no-repeat;
 
   @media only screen and (min-width: 75ch) {
@@ -237,7 +237,7 @@
       padding: 0 $small-spacing $small-spacing 0;
       font-size: ms(-1);
       font-weight: 600;
-      color: cv('red', '800');
+      color: cv('red', '900');
     }
   }
 }

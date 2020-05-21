@@ -22,10 +22,10 @@
   z-index: 1;
   padding: $tiny-spacing $small-spacing;
   transition: opacity $base-duration $base-timing 1s;
-  border: 1px solid cv('gray', '800');
+  border: 1px solid cv('gray', '900');
   border-radius: $base-border-radius;
   opacity: 0;
-  background: cv('gray', '800');
+  background: cv('gray', '900');
   color: cv('gray', '000');
   font-size: ms(-1);
   font-weight: 600;
@@ -71,11 +71,11 @@
   }
 
   &::after {
-    border-top-color: cv('gray', '800');
+    border-top-color: cv('gray', '900');
   }
 
   &::before {
-    border-top-color: cv('gray', '800');
+    border-top-color: cv('gray', '900');
   }
 }
 
@@ -92,11 +92,11 @@
   }
 
   &::after {
-    border-right-color: cv('gray', '800');
+    border-right-color: cv('gray', '900');
   }
 
   &::before {
-    border-right-color: cv('gray', '800');
+    border-right-color: cv('gray', '900');
   }
 }
 
@@ -113,11 +113,11 @@
   }
 
   &::after {
-    border-bottom-color: cv('gray', '800');
+    border-bottom-color: cv('gray', '900');
   }
 
   &::before {
-    border-bottom-color: cv('gray', '800');
+    border-bottom-color: cv('gray', '900');
   }
 }
 
@@ -134,11 +134,11 @@
   }
 
   &::after {
-    border-left-color: cv('gray', '800');
+    border-left-color: cv('gray', '900');
   }
 
   &::before {
-    border-left-color: cv('gray', '800');
+    border-left-color: cv('gray', '900');
   }
 }
 

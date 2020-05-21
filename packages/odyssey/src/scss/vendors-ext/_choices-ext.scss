@@ -63,13 +63,13 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     &.is-ods-select-focused {
       border-radius: $base-border-radius;
       outline: none;
-      box-shadow: 0 0 0 4px cv('red', '100');
+      box-shadow: 0 0 0 4px cv('red', '000');
 
       &.is-ods-select-open {
-        box-shadow: 0 0 0 4px cv('red', '100'), 0 2px 0 4px cv('red', '100');
+        box-shadow: 0 0 0 4px cv('red', '000'), 0 2px 0 4px cv('red', '000');
 
         &.is-ods-select-flipped {
-          box-shadow: 0 0 0 4px cv('red', '100'), 0 -2px 0 4px cv('red', '100');
+          box-shadow: 0 0 0 4px cv('red', '000'), 0 -2px 0 4px cv('red', '000');
         }
       }
     }
@@ -385,7 +385,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 
   [data-invalid] .is-ods-select-focused & {
-    box-shadow: 0 0 0 4px cv('red', '100');
+    box-shadow: 0 0 0 4px cv('red', '000');
   }
 
   [data-invalid] .is-ods-select-open & {
