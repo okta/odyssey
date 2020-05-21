@@ -42,9 +42,9 @@
   &.is-ods-button-focus {
     @include outline($color-outline);
 
-    color: $color-text-focus;
     border-color: $border-color-focus;
     background-color: $bg-focus;
+    color: $color-text-focus;
   }
 
   &:disabled {

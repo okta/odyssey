@@ -73,10 +73,10 @@
   }
 
   &[data-invalid] {
-    border-color: cv('red');
+    border-color: $color-danger-bg;
 
     &:focus {
-      @include outline('red');
+      @include outline($color-danger-outline);
     }
   }
 
