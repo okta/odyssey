@@ -15,7 +15,7 @@
     <tbody>
       <tr>
         <td><span class="sample-token sample-token--color-primary-light"></span></td>
-        <td><code>$color-primary-light</code></td>
+        <td>Red, 300 <div><code>$color-primary-light</code></div></td>
         <td class="is-ods-table-num">TODO</td>
       </tr>
       <tr>
@@ -50,7 +50,7 @@
 
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
-    Background Colors
+    Background
   </figcaption>
   <table class="ods-table">
     <thead>
@@ -87,7 +87,7 @@
 
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
-    Outline/Focus Colors
+    Outline/Focus
   </figcaption>
   <table class="ods-table">
     <thead>
@@ -106,6 +106,29 @@
       <tr>
         <td><span class="sample-token sample-token--color-danger-outline"></span></td>
         <td><code>$outline-primary</code></td>
+        <td class="is-ods-table-num">TODO</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+
+<figure class="ods-table--figure">
+  <figcaption class="ods-table--figcaption">
+    Shadow
+  </figcaption>
+  <table class="ods-table">
+    <thead>
+      <tr>
+        <th scope="column" class="is-ods-table-num">Example</th>
+        <th scope="column">Token Name</th>
+        <th scope="column" class="is-ods-table-num">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="sample-token sample-token--box-shadow-default"></span></td>
+        <td><code>$box-shadow-default</code></td>
         <td class="is-ods-table-num">TODO</td>
       </tr>
     </tbody>

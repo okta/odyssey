@@ -1,3 +1,4 @@
+// Color
 $color-primary-light: cv('blue', '300');
 $color-primary-base: cv('blue', '500');
 $color-primary-dark: cv('blue', '900');
@@ -6,10 +7,22 @@ $color-danger-light: cv('red', '300');
 $color-danger-base: cv('red', '500');
 $color-danger-dark: cv('red', '900');
 
+// Background
 $bg-primary: $color-primary-base;
 $bg-primary-disabled: $color-primary-light;
-$outline-primary: $color-primary-light;
 
 $bg-danger: $color-danger-base;
 $bg-danger-disabled: cv('red', '000');
+
+// Outlines
+$outline-primary: $color-primary-light;
 $outline-danger: $color-danger-light;
+
+// Box Shadow
+$box-shadow-default: 0 2px 0 rgba(175, 175, 175, 0.12);
+
+// TODO: Should we deprecate these in favor of the above? and/or text/label colors?
+$brand: cv('blue', '500');
+$text-body: cv('gray', '900');
+$text-heading: $black;
+$text-sub: cv('gray', '600');

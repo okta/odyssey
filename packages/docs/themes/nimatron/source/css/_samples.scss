@@ -255,6 +255,7 @@ $spacing-units: (
   margin: 0 auto;
 }
 
+// Token Examples: Color
 .sample-token--color-primary-light {
   background: $color-primary-light;
 }
@@ -283,12 +284,9 @@ $spacing-units: (
   background: $bg-primary;
 }
 
+// Token Examples: Background
 .sample-token--color-primary-bg-disabled {
   background: $bg-primary-disabled;
-}
-
-.sample-token--color-primary-outline {
-  background: $outline-primary;
 }
 
 .sample-token--color-danger-bg {
@@ -299,6 +297,17 @@ $spacing-units: (
   background: $bg-danger-disabled;
 }
 
+// Token Examples: Outline
+.sample-token--color-primary-outline {
+  background: $outline-primary;
+}
+
 .sample-token--color-danger-outline {
   background: $outline-danger;
+}
+
+// Token Examples: Shadow
+
+.sample-token--box-shadow-default {
+  box-shadow: $box-shadow-default;
 }
