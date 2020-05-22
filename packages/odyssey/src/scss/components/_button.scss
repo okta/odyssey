@@ -91,17 +91,17 @@
 .is-ods-button-secondary {
   @include make-ods-button-variant((
     'bg': transparent,
-    'bg-focus': cv('blue', '000'),
-    'bg-hover': cv('blue', '000'),
+    'bg-focus': $white  ,
+    'bg-hover': $color-primary-base,
     'bg-disabled': transparent,
     'border-color': $bg-primary,
-    'border-color-focus': $color-primary-dark,
-    'border-color-hover': $color-primary-dark,
+    'border-color-focus': $color-primary-base,
+    'border-color-hover': $color-primary-base,
     'border-color-disabled': cv('blue', '300'),
     'color-outline': $color-primary-light,
     'color-text': $color-primary-base,
     'color-text-focus': $color-primary-base,
-    'color-text-hover': $color-primary-base,
+    'color-text-hover': $white,
     'color-text-disabled': cv('blue', '300'),
   ));
 }
@@ -145,7 +145,7 @@
 .is-ods-button-clear {
   @include make-ods-button-variant((
     'bg': transparent,
-    'bg-focus': cv('blue', '000'),
+    'bg-focus': transparent,
     'bg-hover': cv('blue', '000'),
     'bg-disabled': transparentize($white, 0.6),
     'border-color': $white,
@@ -154,8 +154,8 @@
     'border-color-disabled': transparent,
     'color-outline': $outline-primary,
     'color-text': $color-primary-base,
-    'color-text-focus': cv('blue', '900'),
-    'color-text-hover': cv('blue', '900'),
+    'color-text-focus': $color-primary-base,
+    'color-text-hover': $color-primary-dark,
     'color-text-disabled': cv('blue', '300'),
   ));
 }

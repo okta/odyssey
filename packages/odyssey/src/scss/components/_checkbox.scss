@@ -21,8 +21,8 @@
   &:indeterminate {
     + .ods-checkbox--label {
       &::before {
-        border-color: cv('blue', '500');
-        background-color: cv('blue', '500');
+        border-color: $bg-primary;
+        background-color: $bg-primary;
       }
     }
   }
@@ -149,7 +149,6 @@
   &::before {
     transform: translateY(-50%);
     border-color: $base-border-color;
-    box-shadow: 0 0 0 0 cv('blue', '000');
   }
 
   // Check
@@ -162,7 +161,7 @@
 
   &:hover {
     &::before {
-      border-color: cv('blue', '500');
+      border-color: $bg-primary;
     }
   }
 }

@@ -7,12 +7,20 @@ $color-danger-light: cv('red', '300');
 $color-danger-base: cv('red', '500');
 $color-danger-dark: cv('red', '900');
 
+$color-caution-base: cv('yellow', '500');
+
+$color-success-base: cv('green', '500');
+
 // Background
 $bg-primary: $color-primary-base;
 $bg-primary-disabled: $color-primary-light;
 
 $bg-danger: $color-danger-base;
 $bg-danger-disabled: cv('red', '000');
+
+// bg-caution and bg-success not documented
+$bg-caution: $color-caution-base;
+$bg-success: $color-success-base; 
 
 // Outlines
 $outline-primary: $color-primary-light;
@@ -23,6 +31,7 @@ $text-body: cv('gray', '900');
 $text-heading: $black;
 $text-sub: cv('gray', '600');
 $text-code: cv('gray', '900');
+$text-danger: $color-danger-base;
 
 // Space
 $spacing-m: $base-line-height * 1rem;

@@ -297,7 +297,7 @@ Fields should also include various error messages for possible invalid states. E
   <div class="nimatron--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="email" name="email-invalid" id="email-invalid" autocomplete="email" aria-describedby="email-invalid-error" value="not gonna happen" spellcheck="false" required data-invalid>
+        <input class="ods-text-input" type="email" name="email-invalid" id="email-invalid" autocomplete="email" aria-describedby="email-invalid-error" value="invalidemail@address" spellcheck="false" required data-invalid>
         <label class="ods-label" for="email-invalid">Email</label>
         <aside class="ods-field--error" id="email-invalid-error">
           <span class="u-visually-hidden">Error:</span>This does not appear to be a valid email address.

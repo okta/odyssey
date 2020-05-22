@@ -227,7 +227,7 @@
 
   &.is-example-disallowed {
     position: relative;
-    border-color: cv('red', '500');
+    border-color: $text-danger;
 
     &::after {
       content: "This is a Don't.";
