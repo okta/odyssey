@@ -139,7 +139,7 @@
       <tr>
         <td><code>$text-heading</code></td>
         <td><span class="sample-token sample-token--text-heading">Aa</span></td>
-        <td>#000000</td>
+        <td>gray, 900</td>
       </tr>
       <tr>
         <td><code>$text-sub</code></td>

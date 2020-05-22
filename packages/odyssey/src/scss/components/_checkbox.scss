@@ -52,12 +52,12 @@
       cursor: not-allowed;
 
       &::before {
-        border-color: $disabled-border-color;
-        background-color: cv('gray', '000');
+        border-color: $border-input-disabled;
+        background-color: $bg-input-disabled;
       }
 
       &::after {
-        background-image: get-icon('check', cv('gray', '000'));
+        background-image: get-icon('dash', $bg-input-disabled);
       }
     }
 
@@ -65,8 +65,24 @@
     &:indeterminate {
       + .ods-checkbox--label {
         &::before {
-          border-color: $bg-primary-disabled;
-          background-color: $bg-primary-disabled;
+          border-color: $border-input-disabled;
+          background-color: $bg-input-disabled;
+        }
+      }
+    }
+
+    &:checked {
+      + .ods-checkbox--label {
+        &::after {
+          background-image: get-icon('check', cv('gray', '400'));
+        }
+      }
+    }
+
+    &:indeterminate {
+      + .ods-checkbox--label {
+        &::after {
+          background-image: get-icon('dash', cv('gray', '400'));
         }
       }
     }
@@ -74,6 +90,8 @@
 
   &[data-invalid] {
     + .ods-checkbox--label {
+      color: $text-danger;
+
       &::before {
         border-color: $bg-danger;
       }
@@ -85,6 +103,12 @@
         &::before {
           background-color: $bg-danger;
         }
+      }
+    }
+
+    &:hover:not(:checked) {
+      + .ods-checkbox--label::before {
+        border-color: cv('red', '900');
       }
     }
 
@@ -100,10 +124,14 @@
 
     &:disabled {
       + .ods-checkbox--label {
-        color: $text-sub;
+        color: $text-danger-disabled;
 
         &::before {
           border-color: $bg-danger-disabled;
+        }
+
+        &::after {
+          background-image: get-icon('check', $white);
         }
       }
 

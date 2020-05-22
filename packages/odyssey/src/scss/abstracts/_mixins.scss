@@ -64,11 +64,11 @@
 
   &:disabled,
   &[readonly] {
-    border-color: $disabled-border-color;
+    border-color: $border-input-disabled;
     background-color: cv('gray', '000');
 
     &:hover {
-      border-color: $disabled-border-color;
+      border-color: $border-input-disabled;
     }
   }
 
