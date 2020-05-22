@@ -27,9 +27,9 @@
 
 .ods-modal--dialog {
   position: relative;
-  max-width: calc(#{$max-line-length} + #{$base-spacing} + #{$base-spacing});
-  max-height: calc(100vh - #{$big-spacing});
-  padding: $base-spacing  $base-spacing 0;
+  max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
+  max-height: calc(100vh - #{$spacing-l});
+  padding: $spacing-m  $spacing-m 0;
   overflow-y: auto;
   border-radius: $base-border-radius;
   background-color: $white;
@@ -44,7 +44,7 @@
   align-self: flex-end;
   width: ms(0);
   height: ms(0);
-  margin-bottom: $tiny-spacing;
+  margin-bottom: $spacing-xs;
   padding: 0;
   border: 0;
   background-color: transparent;
@@ -63,14 +63,14 @@
 }
 
 .ods-modal--content {
-  padding: $tiny-spacing 0 $big-spacing;
+  padding: $spacing-xs 0 $spacing-l;
   font-size: ms(0);
 }
 
 .ods-modal--footer {
   display: flex;
   justify-content: flex-end;
-  padding-bottom: $base-spacing;
+  padding-bottom: $spacing-m;
 }
 
 // Animations

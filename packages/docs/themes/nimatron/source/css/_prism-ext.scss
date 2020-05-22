@@ -1,7 +1,6 @@
 /* stylelint-disable selector-no-qualifying-type */
 
 code:not([class]) {
-  color: cv('purple');
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: ms(-1);
 }
@@ -31,8 +30,8 @@ pre[class*='language-'] {
 /* Code blocks */
 pre[class*='language-'] {
   max-height: $max-line-length;
-  margin: 0 0 $base-spacing;
-  padding: $base-spacing;
+  margin: 0 0 $spacing-m;
+  padding: $spacing-m;
   overflow: auto;
   border: 1px dashed cv('gray', '200');
   border-radius: 0 0 $base-border-radius $base-border-radius;
@@ -46,7 +45,7 @@ pre[class*='language-'] {
 
 /* Inline code */
 :not(pre) > code[class*='language-'] {
-  padding: $tiny-spacing;
+  padding: $spacing-xs;
   border-radius: $base-border-radius;
   background: $white;
   white-space: normal;

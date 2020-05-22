@@ -31,7 +31,7 @@
   color: $text-sub;
   font-size: ms(-1);
   font-weight: 400;
-  line-height: $base-spacing; // Helps optically match line-height above
+  line-height: $spacing-m; // Helps optically match line-height above
 
   [data-optional] &,
   :optional ~ .ods-label & {

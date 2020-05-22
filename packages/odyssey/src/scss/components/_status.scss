@@ -14,7 +14,7 @@
 
 .ods-status--label {
   display: block;
-  margin-bottom: $tiny-spacing;
+  margin-bottom: $spacing-xs;
   font-weight: 600;
 }
 
@@ -31,7 +31,7 @@
     left: 0;
     width: 0.5em;
     height: 0.5em;
-    margin-right: $tiny-spacing;
+    margin-right: $spacing-xs;
     transform: translateY(-50%);
     border-radius: 1em;
     background-color: cv('gray', '600');

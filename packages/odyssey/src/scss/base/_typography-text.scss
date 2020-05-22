@@ -46,14 +46,14 @@ sub {
 }
 
 blockquote {
-  margin: 0 0 $base-spacing;
-  padding: 0 0 0 $base-spacing;
+  margin: 0 0 $spacing-m;
+  padding: 0 0 0 $spacing-m;
   border-left: 3px solid $base-border-color;
 }
 
 p {
   max-width: $max-line-length;
-  margin-bottom: $base-spacing;
+  margin-bottom: $spacing-m;
 
   &:last-child {
     margin-bottom: 0;
@@ -114,7 +114,7 @@ small {
 
 kbd {
   display: inline-block;
-  padding: 0 $tiny-spacing;
+  padding: 0 $spacing-xs;
   border: 1px solid cv('gray', '200');
   border-radius: $base-border-radius;
   background: cv('gray', '000');
@@ -123,14 +123,14 @@ kbd {
 }
 
 hr {
-  margin: $base-spacing 0;
+  margin: $spacing-m 0;
   border-width: 1px;
   border-style: solid;
   border-color: cv('gray', '200');
 }
 
 code {
-  color: cv('turquoise');
+  color: $text-code;
   font-family: $mono-font-family;
 }
 

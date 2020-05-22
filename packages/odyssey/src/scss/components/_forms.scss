@@ -13,8 +13,8 @@
 // limitations under the License.
 
 .ods-form {
-  max-width: calc(#{$max-line-length} + #{$base-spacing} + #{$base-spacing} + 2px);
-  padding: $base-spacing;
+  max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m} + 2px);
+  padding: $spacing-m;
   border: 1px solid $base-border-color;
   border-radius: $base-border-radius;
 }
@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 0 $base-spacing;
+  margin: 0 0 $spacing-m;
 }
 
 .ods-form--title {
@@ -40,7 +40,7 @@
   justify-content: flex-end;
 
   &:not(:last-child) {
-    margin-bottom: $small-spacing;
+    margin-bottom: $spacing-s;
   }
 
   [data-readonly] & {

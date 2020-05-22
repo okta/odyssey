@@ -37,7 +37,7 @@
   display: inline-block;
   position: relative;
   margin: 0;
-  padding: $small-spacing $base-spacing;
+  padding: $spacing-s $spacing-m;
   border: 0;
   background: none;
   color: $text-body;
@@ -47,7 +47,7 @@
 }
 
 .ods-tabs--tabpanel [role='tabpanel'] {
-  padding: $base-spacing 0;
+  padding: $spacing-m 0;
   border-top: 1px solid $base-border-color;
 
   &:focus {

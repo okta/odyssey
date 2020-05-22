@@ -25,12 +25,6 @@ $max-line-length: 32em;
 
 // Spacing Variables
 
-$base-spacing: $base-line-height * 1rem;
-$small-spacing: $base-spacing / 2;
-$tiny-spacing: $small-spacing / 2;
-$big-spacing: $base-spacing * 2;
-$huge-spacing: $big-spacing * 2;
-
 $em-base-spacing: $base-line-height * 1em;
 $em-small-spacing: $em-base-spacing / 2;
 $em-tiny-spacing: $em-small-spacing / 2;
@@ -48,8 +42,7 @@ $disabled-border-color: cv('gray', '200');
 $base-border-radius: 4px;
 $border-default: 1px solid $base-border-color;
 
-// Opacity
-
+// Opacity (Used internally in docs)
 $more-opaque: 0.6;
 $med-opaque: 0.5;
 $less-opaque: 0.3;

@@ -14,7 +14,7 @@
 
 .ods-tag {
   display: inline-block;
-  margin: 0 $tiny-spacing $tiny-spacing 0;
+  margin: 0 $spacing-xs $spacing-xs 0;
   padding: 0 $em-tiny-spacing;
   border-radius: $base-border-radius;
   background: cv('gray', '200');
@@ -22,6 +22,6 @@
 }
 
 .ods-tag--list {
-  margin-bottom: -$tiny-spacing;
+  margin-bottom: -$spacing-xs;
   list-style-type: none;
 }

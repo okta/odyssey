@@ -20,7 +20,7 @@
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  padding: $tiny-spacing $small-spacing;
+  padding: $spacing-xs $spacing-s;
   transition: opacity $base-duration $base-timing 1s;
   border: 1px solid cv('gray', '900');
   border-radius: $base-border-radius;
@@ -43,11 +43,11 @@
   }
 
   &::after {
-    border-width: calc(#{$tiny-spacing} - 2px);
+    border-width: calc(#{$spacing-xs} - 2px);
   }
 
   &::before {
-    border-width: $tiny-spacing;
+    border-width: $spacing-xs;
   }
 
   *:focus + &,
@@ -59,7 +59,7 @@
 }
 
 .is-ods-tooltip-top {
-  bottom: calc(100% + #{$small-spacing});
+  bottom: calc(100% + #{$spacing-s});
   left: 50%;
   transform: translateX(-50%);
 
@@ -81,7 +81,7 @@
 
 .is-ods-tooltip-right {
   top: 50%;
-  left: calc(100% + #{$small-spacing});
+  left: calc(100% + #{$spacing-s});
   transform: translateY(-50%);
 
   &::after,
@@ -101,7 +101,7 @@
 }
 
 .is-ods-tooltip-bottom {
-  top: calc(100% + #{$small-spacing});
+  top: calc(100% + #{$spacing-s});
   left: 50%;
   transform: translateX(-50%);
 
@@ -123,7 +123,7 @@
 
 .is-ods-tooltip-left {
   top: 50%;
-  right: calc(100% + #{$small-spacing});
+  right: calc(100% + #{$spacing-s});
   transform: translateY(-50%);
 
   &::after,
@@ -176,11 +176,11 @@
     }
 
     &::after {
-      border-width: calc(#{$tiny-spacing} - 2px);
+      border-width: calc(#{$spacing-xs} - 2px);
     }
 
     &::before {
-      border-width: $tiny-spacing;
+      border-width: $spacing-xs;
     }
   }
 

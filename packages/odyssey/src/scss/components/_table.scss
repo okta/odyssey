@@ -16,7 +16,7 @@
 
 .ods-table {
   width: auto;
-  margin: 0 0 $base-spacing;
+  margin: 0 0 $spacing-m;
   border-spacing: 0;
   border-collapse: collapse;
   line-height: $heading-line-height;
@@ -32,7 +32,7 @@
   td,
   th {
     max-width: $max-line-length;
-    padding: $small-spacing $base-spacing;
+    padding: $spacing-s $spacing-m;
     text-align: left;
     vertical-align: baseline;
     overflow-wrap: break-word;
@@ -78,7 +78,7 @@
       tr {
         td {
           max-width: 100%;
-          padding: $big-spacing $huge-spacing;
+          padding: $spacing-l $spacing-xl;
           background: cv('gray', '000');
           color: $text-sub;
           text-align: center;
@@ -104,7 +104,7 @@
   .is-ods-table-unsorted,
   .is-ods-table-asc,
   .is-ods-table-desc {
-    padding: 0 calc(1em + #{$small-spacing}) 0 0;
+    padding: 0 calc(1em + #{$spacing-s}) 0 0;
 
     &::after {
       content: '';
@@ -113,7 +113,7 @@
       right: 0;
       width: 1em;
       height: 1em;
-      margin: 0 0 0 $small-spacing;
+      margin: 0 0 0 $spacing-s;
       transform: translateY(-50%) scale(0.75);
       background-repeat: no-repeat;
       background-position: center;
@@ -171,7 +171,7 @@
   overflow-x: auto;
 
   .ods-table--figcaption {
-    margin-bottom: $small-spacing;
+    margin-bottom: $spacing-s;
     color: $text-heading;
     font-size: ms(1);
     font-weight: 600;
@@ -199,15 +199,15 @@
     td {
       display: flex;
       justify-content: space-between;
-      padding: $tiny-spacing $small-spacing;
+      padding: $spacing-xs $spacing-s;
 
       &:first-child {
-        padding: $base-spacing $small-spacing $tiny-spacing;
+        padding: $spacing-m $spacing-s $spacing-xs;
         color: $text-heading;
       }
 
       &:last-child {
-        padding: $tiny-spacing $small-spacing $base-spacing;
+        padding: $spacing-xs $spacing-s $spacing-m;
         border-bottom: 1px solid $base-border-color;
       }
     }
@@ -230,7 +230,7 @@
       &::before {
         content: attr(data-title);
         display: inline-block;
-        padding-right: $base-spacing;
+        padding-right: $spacing-m;
         font-weight: 600;
       }
     }
@@ -239,7 +239,7 @@
       ~ tbody {
         tr:first-child {
           td:first-child {
-            padding-top: $small-spacing;
+            padding-top: $spacing-s;
           }
         }
       }

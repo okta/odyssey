@@ -13,7 +13,7 @@
 .nimatron {
   display: block;
   min-height: 100vh;
-  background-image: linear-gradient(to bottom, cv('blue', '500') (-$huge-spacing * 2), cv('blue', '900') 75vh);
+  background-image: linear-gradient(to bottom, cv('blue', '500') (-$spacing-xl * 2), cv('blue', '900') 75vh);
   background-repeat: no-repeat;
 
   @media only screen and (min-width: 75ch) {
@@ -23,7 +23,7 @@
 }
 
 .nimatron--header {
-  padding: $base-spacing $big-spacing;
+  padding: $spacing-m $spacing-l;
   color: $white;
 }
 
@@ -32,14 +32,14 @@
 }
 
 .nimatron--header-logo {
-  height: $base-spacing;
+  height: $spacing-m;
   fill: $white;
 }
 
 .nimatron--nav {
   display: grid;
   grid-template-columns: minmax(auto, auto) minmax(auto, auto);
-  column-gap: $base-spacing;
+  column-gap: $spacing-m;
   text-transform: capitalize;
 
   @media only screen and (min-width: 75ch) {
@@ -48,18 +48,18 @@
 }
 
 .nimatron--nav-section {
-  margin: 0 0 $base-spacing;
+  margin: 0 0 $spacing-m;
 }
 
 .nimatron--nav-heading {
-  margin: 0 0 $small-spacing;
+  margin: 0 0 $spacing-s;
   color: $white;
   font-size: ms(0);
   font-weight: 600;
 }
 
 .nimatron--nav-list {
-  margin: 0 0 $base-spacing;
+  margin: 0 0 $spacing-m;
   list-style-type: none;
   font-size: ms(0);
   font-weight: 400;
@@ -89,7 +89,7 @@
 }
 
 .nimatron--nav-item {
-  margin-bottom: $tiny-spacing;
+  margin-bottom: $spacing-xs;
 }
 
 .nimatron--main {
@@ -105,14 +105,14 @@
 
   h2 {
     position: relative;
-    padding-top: $base-spacing;
+    padding-top: $spacing-m;
 
     &::before {
       content: '';
       position: absolute;
       top: 0;
-      left: -$big-spacing;
-      width: calc(100% + #{$big-spacing} + #{$big-spacing});
+      left: -$spacing-l;
+      width: calc(100% + #{$spacing-l} + #{$spacing-l});
       border-top: 1px solid cv('gray', '200');
     }
   }
@@ -120,7 +120,7 @@
 
 .nimatron--article {
   min-width: 0;
-  padding: $base-spacing $big-spacing;
+  padding: $spacing-m $spacing-l;
 }
 
 .nimatron--toc {
@@ -136,7 +136,7 @@
 
 .nimatron--toc-space-holder,
 .nimatron--toc-fixed {
-  padding: $base-spacing;
+  padding: $spacing-m;
 }
 
 .nimatron--toc-space-holder {
@@ -149,7 +149,7 @@
 }
 
 .nimatron--toc-title {
-  margin-bottom: $small-spacing;
+  margin-bottom: $spacing-s;
   font-size: ms(0);
   font-weight: 600;
 }
@@ -159,7 +159,7 @@
 }
 
 .nimatron--toc-list-level-2 {
-  margin-bottom: $tiny-spacing;
+  margin-bottom: $spacing-xs;
 }
 
 .nimatron--toc-list-level-3 {
@@ -213,11 +213,11 @@
 
 .nimatron--example {
   max-width: 100%;
-  margin-bottom: $base-spacing;
+  margin-bottom: $spacing-m;
 }
 
 .nimatron--rendered {
-  padding: $base-spacing;
+  padding: $spacing-m;
   border: 1px dashed cv('gray', '200');
   border-radius: $base-border-radius;
 
@@ -234,7 +234,7 @@
       position: absolute;
       bottom: 0;
       right: 0;
-      padding: 0 $small-spacing $small-spacing 0;
+      padding: 0 $spacing-s $spacing-s 0;
       font-size: ms(-1);
       font-weight: 600;
       color: cv('red', '900');
@@ -243,7 +243,7 @@
 }
 
 .nimatron--figure {
-  margin-bottom: $base-spacing;
+  margin-bottom: $spacing-m;
 }
 
 svg {

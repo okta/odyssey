@@ -1,47 +1,48 @@
 # Design Tokens
 
+### Color
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
-    Colors
+    Semantic
   </figcaption>
   <table class="ods-table">
     <thead>
       <tr>
-        <th scope="column" class="is-ods-table-num">Example</th>
         <th scope="column">Token Name</th>
-        <th scope="column" class="is-ods-table-num">Description</th>
+        <th scope="column">Example</th>
+        <th scope="column">Value</th>
       </tr>
     </thead>
     <tbody>
       <tr>
+        <td class="is-ods-table-checkbox"><div><code>$color-primary-light</code></div></td>
         <td><span class="sample-token sample-token--color-primary-light"></span></td>
-        <td>Red, 300 <div><code>$color-primary-light</code></div></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td>blue, 300</td>
       </tr>
       <tr>
-        <td><span class="sample-token sample-token--color-primary-base"></span></td>
         <td><code>$color-primary-base</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><span class="sample-token sample-token--color-primary-base"></span></td>
+        <td>blue, 500</td>
       </tr>
       <tr>
-        <td><span class="sample-token sample-token--color-primary-dark"></span></td>
         <td><code>$color-primary-dark</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><span class="sample-token sample-token--color-primary-dark"></span></td>
+        <td>blue, 900</td>
       </tr>
       <tr>
-        <td><span class="sample-token sample-token--color-danger-light"></span></td>
         <td><code>$color-danger-light</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><span class="sample-token sample-token--color-danger-light"></span></td>
+        <td>blue, 300</td>
       </tr>
       <tr>
-        <td><span class="sample-token sample-token--color-danger-base"></span></td>
         <td><code>$color-danger-base</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><span class="sample-token sample-token--color-danger-base"></span></td>
+        <td>blue, 500</td>
       </tr>
       <tr>
-        <td><span class="sample-token sample-token--color-danger-dark"></span></td>
         <td><code>$color-danger-dark</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><span class="sample-token sample-token--color-danger-dark"></span></td>
+        <td>blue, 900</td>
       </tr>
     </tbody>
   </table>
@@ -55,31 +56,31 @@
   <table class="ods-table">
     <thead>
       <tr>
-        <th scope="column" class="is-ods-table-num">Example</th>
         <th scope="column">Token Name</th>
-        <th scope="column" class="is-ods-table-num">Description</th>
+        <th scope="column">Example</th>
+        <th scope="column">Value</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="sample-token sample-token--color-primary-bg"></span></td>
         <td><code>$bg-primary</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><span class="sample-token sample-token--color-primary-bg"></span></td>
+        <td>blue, 500</td>
       </tr>
       <tr>
-        <td><span class="sample-token sample-token--color-primary-bg-disabled"></span></td>
         <td><code>$bg-primary-disabled</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><span class="sample-token sample-token--color-primary-bg-disabled"></span></td>
+        <td>blue, 300</td>
       </tr>
       <tr>
-        <td><span class="sample-token sample-token--color-danger-bg"></span></td>
         <td><code>$bg-danger</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><span class="sample-token sample-token--color-danger-bg"></span></td>
+        <td>red, 500</td>
       </tr>
       <tr>
-        <td><span class="sample-token sample-token--color-danger-bg-disabled"></span></td>
         <td><code>$bg-danger-disabled</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><span class="sample-token sample-token--color-danger-bg-disabled"></span></td>
+        <td>red, 300</td>
       </tr>
     </tbody>
   </table>
@@ -92,44 +93,91 @@
   <table class="ods-table">
     <thead>
       <tr>
-        <th scope="column" class="is-ods-table-num">Example</th>
         <th scope="column">Token Name</th>
-        <th scope="column" class="is-ods-table-num">Description</th>
+        <th scope="column">Example</th>
+        <th scope="column">Value</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="sample-token sample-token--color-primary-outline"></span></td>
         <td><code>$outline-primary</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><span class="sample-token sample-token--color-primary-outline"></span></td>
+        <td>red, 300</td>
       </tr>
       <tr>
+        <td><code>$outline-danger</code></td>
         <td><span class="sample-token sample-token--color-danger-outline"></span></td>
-        <td><code>$outline-primary</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td>red, 300</td>
       </tr>
     </tbody>
   </table>
 </figure>
 
-
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
-    Shadow
+    Type
   </figcaption>
   <table class="ods-table">
     <thead>
       <tr>
-        <th scope="column" class="is-ods-table-num">Example</th>
         <th scope="column">Token Name</th>
-        <th scope="column" class="is-ods-table-num">Description</th>
+        <th scope="column">Example</th>
+        <th scope="column">Value</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="sample-token sample-token--box-shadow-default"></span></td>
-        <td><code>$box-shadow-default</code></td>
-        <td class="is-ods-table-num">TODO</td>
+        <td><code>$text-body</code></td>
+        <td><span class="sample-token sample-token--text-body">Aa</span></td>
+        <td>gray, 900</td>
+      </tr>
+      <tr>
+        <td><code>$text-heading</code></td>
+        <td><span class="sample-token sample-token--text-heading">Aa</span></td>
+        <td>#000000</td>
+      </tr>
+      <tr>
+        <td><code>$text-sub</code></td>
+        <td><span class="sample-token sample-token--text-sub">Aa</span></td>
+        <td>gray, 600</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+### Spacing
+
+<figure class="ods-table--figure">
+  <!-- <figcaption class="ods-table--figcaption">
+    Spacing
+  </figcaption> -->
+  <table class="ods-table">
+    <thead>
+      <tr>
+        <th scope="column">Token Name</th>
+        <th scope="column">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>$spacing-xs</code></td>
+        <td>0.375rem (6px)</td>
+      </tr>
+      <tr>
+        <td><code>$spacing-s</code></td>
+        <td>0.75rem (12px)</td>
+      </tr>
+      <tr>
+        <td><code>$spacing-m</code></td>
+        <td>1.5rem (14px)</td>
+      </tr>
+      <tr>
+        <td><code>$spacing-l</code></td>
+        <td>3rem (48px)</td>
+      </tr>
+      <tr>
+        <td><code>$spacing-xl</code></td>
+        <td>6rem (96px)</td>
       </tr>
     </tbody>
   </table>

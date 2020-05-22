@@ -26,8 +26,8 @@
 }
 
 .sample--icon {
-  width: $base-spacing;
-  margin-right: $base-spacing;
+  width: $spacing-m;
+  margin-right: $spacing-m;
 
   &:last-of-type {
     margin-right: 0;
@@ -42,7 +42,7 @@
   display: inline-block;
 
   & + & {
-    margin-left: $base-spacing;
+    margin-left: $spacing-m;
   }
 }
 //// Generate Conversion Classes
@@ -58,11 +58,11 @@
 }
 
 $spacing-units: (
-  'huge-spacing': $huge-spacing,
-  'big-spacing': $big-spacing,
-  'base-spacing': $base-spacing,
-  'small-spacing': $small-spacing,
-  'tiny-spacing': $tiny-spacing,
+  'huge-spacing': $spacing-xl,
+  'big-spacing': $spacing-l,
+  'base-spacing': $spacing-m,
+  'small-spacing': $spacing-s,
+  'tiny-spacing': $spacing-xs,
 );
 
 .type-sample--wrap {
@@ -143,8 +143,8 @@ $spacing-units: (
   .sample--type-#{$name} {
     position: relative;
     min-height: ms(0);
-    margin-bottom: $base-spacing;
-    padding: 0 0 0 $big-spacing;
+    margin-bottom: $spacing-m;
+    padding: 0 0 0 $spacing-l;
     font-size: $value;
 
     &::before {
@@ -160,7 +160,7 @@ $spacing-units: (
     position: relative;
     width: $value;
     height: $value;
-    margin: 0 0 $base-spacing 0;
+    margin: 0 0 $spacing-m 0;
     border: 1px solid cv('gray', '900');
   }
 }
@@ -169,7 +169,7 @@ $spacing-units: (
   /* Fallback Support */
   display: flex;
   display: grid;
-  grid-gap: $base-spacing;
+  grid-gap: $spacing-m;
   grid-template-columns: repeat(auto-fill, minmax(($max-line-length / 2), 1fr));
   flex-wrap: wrap;
 }
@@ -177,7 +177,7 @@ $spacing-units: (
 .sample--color-list {
   overflow: hidden;
   border-radius: $base-border-radius;
-  margin-bottom: $big-spacing;
+  margin-bottom: $spacing-l;
 }
 
 .sample--color {
@@ -185,7 +185,7 @@ $spacing-units: (
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0;
-  padding: $small-spacing;
+  padding: $spacing-s;
 }
 
 @each $hue, $variants in $colors {
@@ -196,7 +196,7 @@ $spacing-units: (
       &::before,
       &::after {
         position: static;
-        padding: $tiny-spacing;
+        padding: $spacing-xs;
         background: $white;
         font-size: ms(-1);
         font-weight: 400;
@@ -216,7 +216,7 @@ $spacing-units: (
 .sample--modal-container,
 .sample--wizard-container {
   position: relative;
-  margin-bottom: $huge-spacing;
+  margin-bottom: $spacing-xl;
 }
 
 .nimatron--rendered .is-link-default {
@@ -250,9 +250,9 @@ $spacing-units: (
 .sample-token {
   display: block;
   width: 21px;
-  height: 21px;
+  height: 7px;
+  margin: $spacing-xs auto 0;
   border-radius: 4px;
-  margin: 0 auto;
 }
 
 // Token Examples: Color
@@ -310,4 +310,16 @@ $spacing-units: (
 
 .sample-token--box-shadow-default {
   box-shadow: $box-shadow-default;
+}
+
+.sample-token--text-body {
+  color: $text-body;
+}
+
+.sample-token--text-heading {
+  color: $text-heading;
+}
+
+.sample-token--text-sub {
+  color: $text-sub;
 }

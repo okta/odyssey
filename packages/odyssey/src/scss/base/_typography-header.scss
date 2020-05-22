@@ -18,7 +18,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 $base-spacing 0;
+  margin: 0 0 $spacing-m 0;
   color: $text-heading;
   font-weight: 600;
   line-height: $heading-line-height;
@@ -46,7 +46,7 @@ h5 {
 }
 
 h6 {
-  margin-bottom: $small-spacing;
+  margin-bottom: $spacing-s;
   font-size: ms(0);
 }
 

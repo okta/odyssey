@@ -27,7 +27,7 @@
     <tbody>
       <tr>
         <td>
-          $huge-spacing
+          $spacing-xl
         </td>
         <td>
           <span class="conversion--huge-spacing-actual"></span>
@@ -38,7 +38,7 @@
       </tr>
       <tr>
         <td>
-          $big-spacing
+          $spacing-l
         </td>
         <td>
           <span class="conversion--big-spacing-actual"></span>
@@ -49,7 +49,7 @@
       </tr>
       <tr>
         <td>
-          $base-spacing
+          $spacing-m
         </td>
         <td>
           <span class="conversion--base-spacing-actual"></span>
@@ -60,7 +60,7 @@
       </tr>
       <tr>
         <td>
-          $small-spacing
+          $spacing-s
         </td>
         <td>
           <span class="conversion--small-spacing-actual"></span>
@@ -71,7 +71,7 @@
       </tr>
       <tr>
         <td>
-          $tiny-spacing
+          $spacing-xs
         </td>
         <td>
           <span class="conversion--tiny-spacing-actual"></span>

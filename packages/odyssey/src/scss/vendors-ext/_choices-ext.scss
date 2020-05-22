@@ -87,14 +87,14 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 
 .ods-select[data-type*='select-one'] {
   .ods-select--inner {
-    padding-bottom: $tiny-spacing;
+    padding-bottom: $spacing-xs;
   }
 
   .ods-select--input {
     display: block;
     width: 100%;
     margin: 0;
-    padding: $small-spacing;
+    padding: $spacing-s;
     border-bottom: 1px solid $base-border-color;
     background-color: $white;
   }
@@ -105,7 +105,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     right: 0;
     width: 20px;
     height: 20px;
-    margin-top: -$small-spacing;
+    margin-top: -$spacing-s;
     margin-right: 25px;
     padding: 0;
     border-radius: 10em;
@@ -256,7 +256,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     display: inline-block;
     margin-right: 3.75px;
     margin-bottom: 3.75px;
-    padding: 4px $small-spacing;
+    padding: 4px $spacing-s;
     border: 1px solid darken(cv('blue', '500'), 5%);
     border-radius: ($base-border-radius * 2);
     background-color: cv('blue', '500');
@@ -337,7 +337,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 
   .ods-select--item {
     position: relative;
-    padding: $small-spacing;
+    padding: $spacing-s;
     font-size: ms(0);
 
     [dir='rtl'] & {
@@ -357,20 +357,20 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
         content: attr(data-select-text);
         position: absolute;
         top: 50%;
-        right: $small-spacing;
+        right: $spacing-s;
         transform: translateY(-50%);
         opacity: 0;
         font-size: ms(-1);
       }
 
       [dir='rtl'] & {
-        padding-right: $small-spacing;
+        padding-right: $spacing-s;
         padding-left: 100px;
         text-align: right;
 
         &::after {
           right: auto;
-          left: $small-spacing;
+          left: $spacing-s;
         }
       }
     }
@@ -408,7 +408,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 }
 
 .ods-select--heading {
-  padding: $small-spacing $small-spacing 0;
+  padding: $spacing-s $spacing-s 0;
   color: $text-sub;
   font-size: ms(-1);
   font-weight: 600;
