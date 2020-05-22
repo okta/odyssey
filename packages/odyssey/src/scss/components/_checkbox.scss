@@ -39,7 +39,7 @@
   &:focus {
     + .ods-checkbox--label {
       &::before {
-        @include outline($outline-primary, 2px);
+        @include outline($focus-ring-primary, 2px);
 
         border-color: $bg-primary;
       }
@@ -91,7 +91,7 @@
     &:focus {
       + .ods-checkbox--label {
         &::before {
-          @include outline($outline-danger, 2px);
+          @include outline($focus-ring-danger, 2px);
 
           border-color: $bg-danger;
         }

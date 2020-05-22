@@ -20,11 +20,11 @@ $bg-danger-disabled: cv('red', '000');
 
 // bg-caution and bg-success not documented
 $bg-caution: $color-caution-base;
-$bg-success: $color-success-base; 
+$bg-success: $color-success-base;
 
 // Outlines
-$outline-primary: $color-primary-light;
-$outline-danger: $color-danger-light;
+$focus-ring-primary: $color-primary-light;
+$focus-ring-danger: $color-danger-light;
 
 // Text Color
 $text-body: cv('gray', '900');

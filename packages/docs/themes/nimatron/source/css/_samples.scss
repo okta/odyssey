@@ -229,7 +229,7 @@ $spacing-units: (
 }
 
 .is-rendered-success {
-  background: cv('green', '500');
+  background: cv('green', '500  ');
 }
 
 .is-link-visited {
@@ -299,11 +299,11 @@ $spacing-units: (
 
 // Token Examples: Outline
 .sample-token--color-primary-outline {
-  background: $outline-primary;
+  background: $focus-ring-primary;
 }
 
 .sample-token--color-danger-outline {
-  background: $outline-danger;
+  background: $focus-ring-danger;
 }
 
 // Token Examples: Shadow

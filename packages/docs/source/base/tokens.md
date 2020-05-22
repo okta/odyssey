@@ -88,7 +88,7 @@
 
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
-    Outline/Focus
+    Focus Ring
   </figcaption>
   <table class="ods-table">
     <thead>
@@ -100,12 +100,12 @@
     </thead>
     <tbody>
       <tr>
-        <td><code>$outline-primary</code></td>
+        <td><code>$focus-ring-primary</code></td>
         <td><span class="sample-token sample-token--color-primary-outline"></span></td>
         <td>red, 300</td>
       </tr>
       <tr>
-        <td><code>$outline-danger</code></td>
+        <td><code>$focus-ring-danger</code></td>
         <td><span class="sample-token sample-token--color-danger-outline"></span></td>
         <td>red, 300</td>
       </tr>
