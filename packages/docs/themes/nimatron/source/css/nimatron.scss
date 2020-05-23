@@ -2,9 +2,15 @@
 // TODO: remove this relative path after moving to webpack
 @import '../../../../../odyssey/src/scss/odyssey';
 
+// Doc Specific Tokens
+$more-opaque: 0.6;
+$med-opaque: 0.5;
+$less-opaque: 0.3;
+
 // Nimatron Specific Styles
 @import 'samples';
 @import 'prism-ext';
+
 
 .is-not-provisional {
   display: none;
@@ -257,3 +263,4 @@ h1 {
     margin: 0;
   }
 }
+

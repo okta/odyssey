@@ -1,3 +1,17 @@
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 // Semantic Variables
 $color-primary-light: cv('blue', '300');
 $color-primary-base: cv('blue', '500');
@@ -12,17 +26,7 @@ $color-caution-base: cv('yellow', '500');
 $color-success-base: cv('green', '500');
 
 // Background
-
-// TODO: bg-neutral and bg-neutral-disabled not documented
-$bg-primary: $color-primary-base;
-$bg-primary-disabled: $color-primary-light;
-
-$bg-danger: $color-danger-base;
-$bg-danger-disabled: cv('red', '300');
-
-// TODO: bg-caution and bg-success not documented
-$bg-caution: $color-caution-base;
-$bg-success: $color-success-base;
+$color-danger-base-disabled: cv('red', '300');
 
 // Outlines
 $focus-ring-primary: $color-primary-light;

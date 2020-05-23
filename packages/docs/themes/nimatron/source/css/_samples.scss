@@ -281,20 +281,20 @@ $spacing-units: (
 }
 
 .sample-token--color-primary-bg {
-  background: $bg-primary;
+  background: $color-primary-base;
 }
 
 // Token Examples: Background
 .sample-token--color-primary-bg-disabled {
-  background: $bg-primary-disabled;
+  background: $color-primary-light;
 }
 
 .sample-token--color-danger-bg {
-  background: $bg-danger;
+  background: $color-danger-base;
 }
 
 .sample-token--color-danger-bg-disabled {
-  background: $bg-danger-disabled;
+  background: $color-danger-light;
 }
 
 // Token Examples: Outline

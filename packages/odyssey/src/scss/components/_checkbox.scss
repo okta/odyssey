@@ -21,8 +21,17 @@
   &:indeterminate {
     + .ods-checkbox--label {
       &::before {
-        border-color: $bg-primary;
-        background-color: $bg-primary;
+        border-color: $color-primary-base;
+        background-color: $color-primary-base;
+      }
+    }
+  }
+
+  &:checked {
+    + .ods-checkbox--label {
+      &::after {
+        transform: translateY(-50%) scale(0.9);
+        background-image: get-icon('check', $white);
       }
     }
   }
@@ -41,7 +50,7 @@
       &::before {
         @include outline($focus-ring-primary, 2px);
 
-        border-color: $bg-primary;
+        border-color: $color-primary-base;
       }
     }
   }
@@ -53,11 +62,7 @@
 
       &::before {
         border-color: $border-input-disabled;
-        background-color: $bg-input-disabled;
-      }
-
-      &::after {
-        background-image: get-icon('dash', $bg-input-disabled);
+        background-color: $white;
       }
     }
 
@@ -65,8 +70,8 @@
     &:indeterminate {
       + .ods-checkbox--label {
         &::before {
-          border-color: $border-input-disabled;
-          background-color: $bg-input-disabled;
+          border-color: $color-primary-light;
+          background-color: $color-primary-light;
         }
       }
     }
@@ -74,7 +79,7 @@
     &:checked {
       + .ods-checkbox--label {
         &::after {
-          background-image: get-icon('check', cv('gray', '400'));
+          background-image: get-icon('check', $white);
         }
       }
     }
@@ -82,7 +87,7 @@
     &:indeterminate {
       + .ods-checkbox--label {
         &::after {
-          background-image: get-icon('dash', cv('gray', '400'));
+          background-image: get-icon('dash', $white);
         }
       }
     }
@@ -93,7 +98,7 @@
       color: $text-danger;
 
       &::before {
-        border-color: $bg-danger;
+        border-color: cv('red', '500');
       }
     }
 
@@ -101,14 +106,14 @@
     &:indeterminate {
       + .ods-checkbox--label {
         &::before {
-          background-color: $bg-danger;
+          background-color: cv('red', '500');
         }
       }
     }
 
     &:hover:not(:checked) {
       + .ods-checkbox--label::before {
-        border-color: cv('red', '900');
+        border-color: $color-danger-dark;
       }
     }
 
@@ -117,7 +122,7 @@
         &::before {
           @include outline($focus-ring-danger, 2px);
 
-          border-color: $bg-danger;
+          border-color: cv('red', '500');
         }
       }
     }
@@ -127,7 +132,7 @@
         color: $text-danger-disabled;
 
         &::before {
-          border-color: $bg-danger-disabled;
+          background-color: $color-danger-light;
         }
 
         &::after {
@@ -139,8 +144,15 @@
       &:indeterminate {
         + .ods-checkbox--label {
           &::before {
-            border-color: $bg-danger-disabled;
-            background-color: $bg-danger-disabled;
+            border-color: $color-danger-light;
+          }
+        }
+      }
+
+      &:indeterminate {
+        + .ods-checkbox--label {
+          &::after {
+            background-image: get-icon('dash', $white);
           }
         }
       }
@@ -182,14 +194,14 @@
   // Check
   &::after {
     transform: translateY(-50%) scale(0.9);
-    background-image: get-icon('check', $white);
+    background-image: get-icon('check', transparent);
     background-repeat: no-repeat;
     background-position: center;
   }
 
   &:hover {
     &::before {
-      border-color: $bg-primary;
+      border-color: $color-primary-base;
     }
   }
 }

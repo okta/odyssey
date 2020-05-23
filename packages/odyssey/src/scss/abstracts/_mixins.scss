@@ -73,7 +73,7 @@
   }
 
   &[data-invalid] {
-    border-color: $bg-danger;
+    border-color: $color-danger-base;
 
     &:focus {
       @include outline($focus-ring-danger);

@@ -48,44 +48,6 @@
   </table>
 </figure>
 
-
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">
-    Background
-  </figcaption>
-  <table class="ods-table">
-    <thead>
-      <tr>
-        <th scope="column">Token Name</th>
-        <th scope="column">Example</th>
-        <th scope="column">Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>$bg-primary</code></td>
-        <td><span class="sample-token sample-token--color-primary-bg"></span></td>
-        <td>blue, 500</td>
-      </tr>
-      <tr>
-        <td><code>$bg-primary-disabled</code></td>
-        <td><span class="sample-token sample-token--color-primary-bg-disabled"></span></td>
-        <td>blue, 300</td>
-      </tr>
-      <tr>
-        <td><code>$bg-danger</code></td>
-        <td><span class="sample-token sample-token--color-danger-bg"></span></td>
-        <td>red, 500</td>
-      </tr>
-      <tr>
-        <td><code>$bg-danger-disabled</code></td>
-        <td><span class="sample-token sample-token--color-danger-bg-disabled"></span></td>
-        <td>red, 300</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
     Focus Ring

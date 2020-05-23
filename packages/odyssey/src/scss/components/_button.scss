@@ -57,11 +57,11 @@
 
 .ods-button {
   @include make-ods-button-variant((
-    'bg': $bg-primary,
+    'bg': $color-primary-base,
     'bg-focus': $color-primary-dark,
     'bg-hover': $color-primary-dark,
     'bg-disabled': $color-primary-light,
-    'border-color': $bg-primary,
+    'border-color': $color-primary-base,
     'border-color-focus': $color-primary-dark,
     'border-color-hover': $color-primary-dark,
     'border-color-disabled': $color-primary-light,
@@ -94,7 +94,7 @@
     'bg-focus': $white  ,
     'bg-hover': $color-primary-base,
     'bg-disabled': transparent,
-    'border-color': $bg-primary,
+    'border-color': $color-primary-base,
     'border-color-focus': $color-primary-base,
     'border-color-hover': $color-primary-base,
     'border-color-disabled': cv('blue', '300'),
@@ -108,11 +108,11 @@
 
 .is-ods-button-danger {
   @include make-ods-button-variant((
-    'bg': $bg-danger,
+    'bg': $color-danger-base,
     'bg-focus': $color-danger-dark,
     'bg-hover': $color-danger-dark,
     'bg-disabled': $color-danger-light,
-    'border-color': $bg-danger,
+    'border-color': $color-danger-base,
     'border-color-focus': $color-danger-dark,
     'border-color-hover': $color-danger-dark,
     'border-color-disabled': $color-danger-light,

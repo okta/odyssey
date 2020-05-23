@@ -47,7 +47,7 @@
 .is-ods-status-success {
   .ods-status--value {
     &::before {
-      background-color: $bg-success;
+      background-color: $color-success-base;
     }
   }
 }
@@ -55,7 +55,7 @@
 .is-ods-status-caution {
   .ods-status--value {
     &::before {
-      background-color: $bg-caution;
+      background-color: $color-caution-base;
     }
   }
 }
@@ -63,7 +63,7 @@
 .is-ods-status-danger {
   .ods-status--value {
     &::before {
-      background-color: $bg-danger;
+      background-color: $color-danger-base;
     }
   }
 }

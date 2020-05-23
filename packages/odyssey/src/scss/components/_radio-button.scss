@@ -20,8 +20,8 @@
   &:checked {
     + .ods-radio--label {
       &::before {
-        border-color: $bg-primary;
-        background-color: $bg-primary;
+        border-color: $color-primary-base;
+        background-color: $color-primary-base;
       }
 
       &::after {
@@ -35,7 +35,7 @@
       &::before {
         @include outline($focus-ring-primary, 2px);
 
-        border-color: $bg-primary;
+        border-color: $color-primary-base;
       }
     }
   }
@@ -76,14 +76,14 @@
       color: $text-danger;
 
       &::before {
-        border-color: $bg-danger;
+        border-color: $color-danger-base;
       }
     }
 
     &:checked {
       + .ods-radio--label {
         &::before {
-          background-color: $bg-danger;
+          background-color: $color-danger-base;
         }
       }
     }
@@ -93,7 +93,7 @@
         &::before {
           @include outline($focus-ring-danger, 2px);
 
-          border-color: $bg-danger;
+          border-color: $color-danger-base;
         }
       }
     }
@@ -103,7 +103,7 @@
         color: $text-danger-disabled;
 
         &::before {
-          border-color: $bg-danger-disabled;
+          border-color: $color-danger-base-disabled;
           background: $white;
         }
       }
@@ -111,12 +111,12 @@
       &:checked {
         + .ods-radio--label {
           &::before {
-            border-color: $bg-danger-disabled;
-            background-color: $bg-danger-disabled;
+            border-color: $color-danger-base-disabled;
+            background-color: $color-danger-base-disabled;
           }
 
           &::after {
-            border-color: $bg-danger-disabled;
+            border-color: $color-danger-base-disabled;
             background-color: $white;
           }
         }
@@ -166,7 +166,7 @@
 
   &:hover {
     &::before {
-      border-color: $bg-primary;
+      border-color: $color-primary-base;
     }
   }
 }
