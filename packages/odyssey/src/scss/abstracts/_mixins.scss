@@ -65,7 +65,7 @@
   &:disabled,
   &[readonly] {
     border-color: $border-input-disabled;
-    background-color: cv('gray', '000');
+    background-color: $bg-input-disabled;
 
     &:hover {
       border-color: $border-input-disabled;

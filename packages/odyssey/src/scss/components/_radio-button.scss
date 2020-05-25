@@ -47,28 +47,26 @@
 
       &::before {
         border-color: $border-input-disabled;
-        background-color: cv('gray', '000');
+        background-color: $bg-input-disabled;
       }
     }
 
     &:checked {
       + .ods-radio--label {
         &::before {
-          border-color: $border-input-disabled;
-          background-color: $bg-input-disabled;
+          border-color: cv('blue', '300');
+          background-color: cv('blue', '300');
         }
 
         &::after {
-          background-color: cv('gray', '400');
+          background-color: $white;
         }
       }
     }
   }
 
   &[data-invalid] {
-
-
-    &:hover + .ods-radio--label::before {
+    &:hover:not(:checked) + .ods-radio--label::before {
       border-color: cv('red', '900');
     }
 
