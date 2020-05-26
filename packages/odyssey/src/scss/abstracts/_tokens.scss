@@ -12,6 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Typography
+$body-font-family: 'Whyte', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+$mono-font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+
+$base-font-size: 14px;
+$scale-ratio: 1.2308;
+$base-line-height: 1.5;
+$heading-line-height: 1.2;
+$max-line-length: 32em;
+
+// Establish Type Scale
+$size-display-1: 9.143rem;
+$size-display-2: 6.857rem;
+$size-heading-1: 4.571rem; // ms(5)
+$size-heading-2: 3.429rem; // ms(4)
+$size-heading-3: 2.286rem; // ms(3)
+$size-heading-4: 1.714rem; // ms(2)
+$size-heading-5: 1.429rem; // ms(1)
+$size-heading-6: 1rem; // n/a, will only be used for default h6
+$size-base: 1rem; // ms(0)
+$size-caption: 0.857rem; // ms(-1)
+
 // Semantic Variables
 $color-primary-light: cv('blue', '300');
 $color-primary-base: cv('blue', '500');
@@ -50,3 +72,24 @@ $spacing-xl: $spacing-l * 2;
 // Input disabled
 $bg-input-disabled: cv('gray', '000');
 $border-input-disabled: cv('gray', '200');
+
+// TODO: Sort the rest out, these come from a now defunct variables.scss file.
+//       need to be documented
+
+// Spacing Variables
+
+$em-base-spacing: $base-line-height * 1em;
+$em-small-spacing: $em-base-spacing / 2;
+$em-tiny-spacing: $em-small-spacing / 2;
+$em-big-spacing: $em-base-spacing * 2;
+
+// Animation/Transition Baselines
+
+$base-duration: 100ms;
+$base-timing: linear;
+
+// Borders
+
+$base-border-color: cv('gray', '400');
+$base-border-radius: 4px;
+$border-default: 1px solid $base-border-color;

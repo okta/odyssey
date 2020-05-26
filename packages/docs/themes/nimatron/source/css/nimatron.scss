@@ -67,7 +67,6 @@ $less-opaque: 0.3;
 .nimatron--nav-list {
   margin: 0 0 $spacing-m;
   list-style-type: none;
-  font-size: ms(0);
   font-weight: 400;
 
   a {
@@ -156,7 +155,7 @@ $less-opaque: 0.3;
 
 .nimatron--toc-title {
   margin-bottom: $spacing-s;
-  font-size: ms(0);
+  font-size: $size-base;
   font-weight: 600;
 }
 
