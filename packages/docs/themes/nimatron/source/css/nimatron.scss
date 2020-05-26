@@ -108,7 +108,7 @@ $less-opaque: 0.3;
     box-shadow: 0 2px $size-base rgba(0, 0, 0, 0.2);
   }
 
-  h2 {
+  h2:not([class]) {
     position: relative;
     padding-top: $spacing-m;
 
