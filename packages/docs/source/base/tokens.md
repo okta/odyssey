@@ -1,4 +1,4 @@
-# Design Tokens
+# Design tokens
 
 ### Color
 <figure class="ods-table--figure">

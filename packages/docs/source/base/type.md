@@ -6,22 +6,18 @@ Okta’s typography system is designed for clarity in readability and hierarchy.
 
 Typographical hierarchy indicates importance of content. Through size and weight, a strong hierarchy can provide clarity to a user to easily understand which level of the content they’re on. Sections need subsections, and those subsections may also need their own subsections. Visually, a user should be able to clearly tell a parent section from a child section simply by the relationship in size and weight between headings.
 
-### Scale
-
-To ensure consistency in typography sizes throughout Okta touchpoints, we’ve created a custom modular type scale.
-
 <figure class="ods-table--figure">
   <table class="ods-table type-sample--table">
     <thead>
       <tr>
         <th scope="column">
+          variable
+        </th>
+        <th scope="column">
           rem
         </th>
         <th scope="column">
           px
-        </th>
-        <th scope="column">
-          function
         </th>
         <th scope="column">
           example
@@ -30,72 +26,56 @@ To ensure consistency in typography sizes throughout Okta touchpoints, we’ve c
     </thead>
     <tbody>
       <tr class="type-sample">
-        <td class="type-sample--rem"></td>
-        <td class="type-sample--px"></td>
-        <td class="type-sample--function"></td>
-        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+        <td class="type-sample--token"><code>$size-display-1</code></td>
+        <td class="type-sample--rem">9.143rem</td>
+        <td class="type-sample--px">128px</td>
+        <td class="type-sample--example type-sample--example-size-display-1">Display 1</td>
       </tr>
       <tr class="type-sample">
-        <td class="type-sample--rem"></td>
-        <td class="type-sample--px"></td>
-        <td class="type-sample--function"></td>
-        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+        <td class="type-sample--token"><code>$size-display-2</code></td>
+        <td class="type-sample--rem">6.857rem</td>
+        <td class="type-sample--px">96px</td>
+        <td class="type-sample--example type-sample--example-size-display-2">Display 2</td>
       </tr>
       <tr class="type-sample">
-        <td class="type-sample--rem"></td>
-        <td class="type-sample--px"></td>
-        <td class="type-sample--function"></td>
-        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+        <td class="type-sample--token"><code>$size-heading-1</code></td>
+        <td class="type-sample--rem">3.429rem</td>
+        <td class="type-sample--px">48px</td>
+        <td class="type-sample--example type-sample--example-size-heading-1">Heading 1</td>
       </tr>
       <tr class="type-sample">
-        <td class="type-sample--rem"></td>
-        <td class="type-sample--px"></td>
-        <td class="type-sample--function"></td>
-        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+        <td class="type-sample--token"><code>$size-heading-2</code></td>
+        <td class="type-sample--rem">2.285rem</td>
+        <td class="type-sample--px">32px</td>
+        <td class="type-sample--example type-sample--example-size-heading-2">Heading 2</td>
       </tr>
       <tr class="type-sample">
-        <td class="type-sample--rem"></td>
-        <td class="type-sample--px"></td>
-        <td class="type-sample--function"></td>
-        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+        <td class="type-sample--token"><code>$size-heading-3</code></td>
+        <td class="type-sample--rem">1.714rem</td>
+        <td class="type-sample--px">24px</td>
+        <td class="type-sample--example type-sample--example-size-heading-3">Heading 3</td>
       </tr>
       <tr class="type-sample">
-        <td class="type-sample--rem"></td>
-        <td class="type-sample--px"></td>
-        <td class="type-sample--function"></td>
-        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+        <td class="type-sample--token"><code>$size-heading-4</code></td>
+        <td class="type-sample--rem">1.429rem</td>
+        <td class="type-sample--px">20px</td>
+        <td class="type-sample--example type-sample--example-size-heading-4">Heading 4</td>
       </tr>
       <tr class="type-sample">
-        <td class="type-sample--rem"></td>
-        <td class="type-sample--px"></td>
-        <td class="type-sample--function"></td>
-        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+        <td class="type-sample--token"><code>$size-heading-5</code></td>
+        <td class="type-sample--rem">1.285rem</td>
+        <td class="type-sample--px">18px</td>
+        <td class="type-sample--example type-sample--example-size-heading-5">Heading 5</td>
+      </tr>
+      <tr class="type-sample">
+        <td class="type-sample--token"><code>$size-heading-6</code></td>
+        <td class="type-sample--rem">1.142rem</td>
+        <td class="type-sample--px">16px</td>
+        <td class="type-sample--example type-sample--example-size-heading-6">Heading 6</td>
       </tr>
     </tbody>
   </table>
 </figure>
-
-Each step up in the modular scale is proportionally larger than the step before. The function looks like this:
-
-```scss
-@function ms($step) {
-  $value: 1rem;
-
-  @if $step > 0 {
-    @for $i from 1 through $step {
-      $value: ($value * $scale-ratio);
-    }
-  }
-
-  @if $step < 0 {
-    @for $i from $step through -1 {
-      $value: ($value / $scale-ratio);
-    }
-  }
-
-  @return $value;
-}
-```
 
 ### Weight
 
@@ -180,7 +160,7 @@ Our type variants include two <a href="https://developer.mozilla.org/en-US/docs/
   </table>
 </figure>
 
-Our heading line-height should be used for any `font-size` set to `ms(4)` or higher.
+Our heading line-height should be used for any `font-size` set to `$size-heading-2` or higher.
 
 ### Accessibility concerns
 

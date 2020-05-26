@@ -9,7 +9,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   position: relative;
   max-width: $max-line-length;
   overflow: hidden;
-  font-size: ms(0);
+  font-size: $size-base;
 
   &:focus,
   &.is-ods-select-focused {
@@ -132,12 +132,12 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     position: absolute;
     top: 50%;
     right: $em-small-spacing;
-    width: ms(-1);
-    height: ms(-1);
+    width: $size-caption;
+    height: $size-caption;
     transform: translateY(-50%);
     background-image: get-icon('caret', $text-body);
     background-repeat: no-repeat;
-    background-size: ms(-1);
+    background-size: $size-caption;
     pointer-events: none;
   }
 
@@ -205,7 +205,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   box-shadow: 0 0 0 0 cv('blue', '000');
   color: $text-body;
   font-family: $body-font-family;
-  font-size: ms(0);
+  font-size: $size-base;
   line-height: $base-line-height;
   vertical-align: top;
 
@@ -261,7 +261,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     border-radius: ($base-border-radius * 2);
     background-color: cv('blue', '500');
     color: $white;
-    font-size: ms(-1);
+    font-size: $size-caption;
     font-weight: 500;
     word-break: break-all;
     vertical-align: middle;
@@ -338,7 +338,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   .ods-select--item {
     position: relative;
     padding: $spacing-s;
-    font-size: ms(0);
+    font-size: $size-base;
 
     [dir='rtl'] & {
       text-align: right;
@@ -360,7 +360,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
         right: $spacing-s;
         transform: translateY(-50%);
         opacity: 0;
-        font-size: ms(-1);
+        font-size: $size-caption;
       }
 
       [dir='rtl'] & {
@@ -410,7 +410,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 .ods-select--heading {
   padding: $spacing-s $spacing-s 0;
   color: $text-sub;
-  font-size: ms(-1);
+  font-size: $size-caption;
   font-weight: 600;
 }
 
@@ -435,7 +435,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   border: 0;
   border-radius: 0;
   background-color: $white;
-  font-size: ms(0);
+  font-size: $size-base;
   vertical-align: baseline;
 
   &:focus {

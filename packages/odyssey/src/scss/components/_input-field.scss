@@ -14,7 +14,7 @@
 
 .ods-field--hint,
 .ods-field--error {
-  font-size: ms(-1);
+  font-size: $size-caption;
 }
 
 .ods-field--hint {
@@ -35,8 +35,8 @@
 
   &::before {
     content: '';
-    width: ms(-1);
-    height: ms(-1);
+    width: $size-caption;
+    height: $size-caption;
     margin: 0 $spacing-xs 0 0;
     background-image: get-icon('alert', $text-danger);
     background-repeat: no-repeat;
@@ -97,13 +97,13 @@
 .ods-input-legend {
   margin: 0 0 $spacing-xs;
   color: $text-heading;
-  font-size: ms(0);
+  font-size: $size-base;
   font-weight: 600;
 }
 
 .ods-group-legend {
   margin: 0 0 $spacing-s;
   color: $text-heading;
-  font-size: ms(1);
+  font-size: $size-heading-5;
   font-weight: 600;
 }

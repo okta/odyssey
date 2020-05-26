@@ -83,7 +83,7 @@
   border-radius: $base-border-radius;
   color: $white;
   font-family: $body-font-family;
-  font-size: ms(0);
+  font-size: $size-base;
   font-weight: 600;
   line-height: $base-line-height;
 }
@@ -161,7 +161,7 @@
 }
 
 %button-small {
-  font-size: ms(-1);
+  font-size: $size-caption;
 }
 
 .is-ods-button-small {

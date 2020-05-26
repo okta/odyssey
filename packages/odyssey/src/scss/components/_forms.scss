@@ -30,7 +30,7 @@
   margin: 0;
   padding: 0;
   color: $text-heading;
-  font-size: ms(2);
+  font-size: $size-heading-4;
   font-weight: 600;
   line-height: $heading-line-height;
 }
@@ -49,5 +49,5 @@
 }
 
 .ods-form--footer {
-  font-size: ms(-1);
+  font-size: $size-caption;
 }

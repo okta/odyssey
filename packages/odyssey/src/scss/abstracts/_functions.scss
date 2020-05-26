@@ -13,28 +13,6 @@
 // limitations under the License.
 
 /**
- * Rem-based modular scale for type
- */
-
-@function ms($step) {
-  $value: 1rem;
-
-  @if $step > 0 {
-    @for $i from 1 through $step {
-      $value: ($value * $scale-ratio);
-    }
-  }
-
-  @if $step < 0 {
-    @for $i from $step through -1 {
-      $value: ($value / $scale-ratio);
-    }
-  }
-
-  @return $value;
-}
-
-/**
  * Simple string replacement
  */
 

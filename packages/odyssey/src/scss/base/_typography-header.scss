@@ -25,32 +25,32 @@ h6 {
 }
 
 h1 {
-  font-size: ms(5);
+  font-size: $size-heading-1;
 }
 
 h2 {
-  font-size: ms(4);
+  font-size: $size-heading-2;
 }
 
 h3 {
-  font-size: ms(3);
+  font-size: $size-heading-3;
 }
 
 h4 {
-  font-size: ms(2);
+  font-size: $size-heading-4;
 }
 
 h5 {
-  font-size: ms(1);
+  font-size: $size-heading-5;
   line-height: $base-line-height;
 }
 
 h6 {
   margin-bottom: $spacing-s;
-  font-size: ms(0);
+  font-size: $size-heading-6;
 }
 
 .legalese {
   color: $text-sub;
-  font-size: ms(-1);
+  font-size: $size-caption;
 }
