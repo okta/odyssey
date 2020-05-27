@@ -29,16 +29,17 @@ $less-opaque: 0.3;
 }
 
 .nimatron--header {
-  padding: $spacing-m $spacing-l;
+  padding: $spacing-xl $spacing-xxl;
   color: $white;
 }
 
 .nimatron--header-title {
+  margin-bottom: $spacing-xl;
   font-size: 0;
 }
 
 .nimatron--header-logo {
-  height: $spacing-m;
+  height: $spacing-l;
   fill: $white;
 }
 
@@ -54,7 +55,7 @@ $less-opaque: 0.3;
 }
 
 .nimatron--nav-section {
-  margin: 0 0 $spacing-m;
+  margin: 0 0 $spacing-l;
 }
 
 .nimatron--nav-heading {

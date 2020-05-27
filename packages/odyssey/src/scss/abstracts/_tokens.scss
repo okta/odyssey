@@ -63,11 +63,12 @@ $text-danger: $color-danger-base;
 $text-danger-disabled: $color-danger-light;
 
 // Space
-$spacing-m: $base-line-height * 1rem;
-$spacing-s: $spacing-m / 2;
-$spacing-xs: $spacing-s / 2;
-$spacing-l: $spacing-m * 2;
-$spacing-xl: $spacing-l * 2;
+$spacing-xxl: 3.428571428571429rem;
+$spacing-xl: 2.285714285714286rem;
+$spacing-l: 1.714285714285714rem;
+$spacing-m: 1.142857142857143rem;
+$spacing-s: 0.571428571428571rem;
+$spacing-xs: 0.285714285714286rem;
 
 // Input disabled
 $bg-input-disabled: cv('gray', '000');

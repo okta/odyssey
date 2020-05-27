@@ -108,7 +108,7 @@ Typographical hierarchy indicates importance of content. Through size and weight
   </table>
 </figure>
 
-### Weight
+## Weight
 
 In order to maintain consistency across browsers and typefaces, we specify weights by their numbered value, not name. Currently, the following weights are available:
 

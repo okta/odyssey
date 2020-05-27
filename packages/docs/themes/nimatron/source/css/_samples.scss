@@ -52,11 +52,12 @@
 }
 
 $spacing-units: (
-  'huge-spacing': $spacing-xl,
-  'big-spacing': $spacing-l,
-  'base-spacing': $spacing-m,
-  'small-spacing': $spacing-s,
-  'tiny-spacing': $spacing-xs,
+  'spacing-xxl': $spacing-xxl,
+  'spacing-xl': $spacing-xl,
+  'spacing-l': $spacing-l,
+  'spacing-m': $spacing-m,
+  'spacing-s': $spacing-s,
+  'spacing-xs': $spacing-xs,
 );
 
 @each $name, $value in $spacing-units {

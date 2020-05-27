@@ -12,6 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@function rem-to-px($value) {
+  @if variable-exists('base-font-size') {
+    @return ($value / 1rem) * $base-font-size;
+  }
+}
+
+@function px-to-rem($target, $context: 14) {
+  @return $target;
+}
+
 /**
  * Simple string replacement
  */

@@ -2,11 +2,12 @@
 
 
 <ul class="sample--list">
-  <li class="sample--spacing-huge-spacing"></li>
-  <li class="sample--spacing-big-spacing"></li>
-  <li class="sample--spacing-base-spacing"></li>
-  <li class="sample--spacing-small-spacing"></li>
-  <li class="sample--spacing-tiny-spacing"></li>
+  <li class="sample--spacing-spacing-xxl"></li>
+  <li class="sample--spacing-spacing-xl"></li>
+  <li class="sample--spacing-spacing-l"></li>
+  <li class="sample--spacing-spacing-m"></li>
+  <li class="sample--spacing-spacing-s"></li>
+  <li class="sample--spacing-spacing-xs"></li>
 </ul>
 
 <figure class="ods-table--figure">
@@ -27,13 +28,24 @@
     <tbody>
       <tr>
         <td>
+          $spacing-xxl
+        </td>
+        <td>
+          <span class="conversion--spacing-xxl-actual"></span>
+        </td>
+        <td>
+          <span class="conversion--spacing-xxl-px"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
           $spacing-xl
         </td>
         <td>
-          <span class="conversion--huge-spacing-actual"></span>
+          <span class="conversion--spacing-xl-actual"></span>
         </td>
         <td>
-          <span class="conversion--huge-spacing-px"></span>
+          <span class="conversion--spacing-xl-px"></span>
         </td>
       </tr>
       <tr>
@@ -41,10 +53,10 @@
           $spacing-l
         </td>
         <td>
-          <span class="conversion--big-spacing-actual"></span>
+          <span class="conversion--spacing-l-actual"></span>
         </td>
         <td>
-          <span class="conversion--big-spacing-px"></span>
+          <span class="conversion--spacing-l-px"></span>
         </td>
       </tr>
       <tr>
@@ -52,10 +64,10 @@
           $spacing-m
         </td>
         <td>
-          <span class="conversion--base-spacing-actual"></span>
+          <span class="conversion--spacing-m-actual"></span>
         </td>
         <td>
-          <span class="conversion--base-spacing-px"></span>
+          <span class="conversion--spacing-m-px"></span>
         </td>
       </tr>
       <tr>
@@ -63,10 +75,10 @@
           $spacing-s
         </td>
         <td>
-          <span class="conversion--small-spacing-actual"></span>
+          <span class="conversion--spacing-s-actual"></span>
         </td>
         <td>
-          <span class="conversion--small-spacing-px"></span>
+          <span class="conversion--spacing-s-px"></span>
         </td>
       </tr>
       <tr>
@@ -74,10 +86,10 @@
           $spacing-xs
         </td>
         <td>
-          <span class="conversion--tiny-spacing-actual"></span>
+          <span class="conversion--spacing-xs-actual"></span>
         </td>
         <td>
-          <span class="conversion--tiny-spacing-px"></span>
+          <span class="conversion--spacing-xs-px"></span>
         </td>
       </tr>
     </tbody>
