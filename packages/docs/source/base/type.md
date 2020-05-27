@@ -37,32 +37,32 @@ Typographical hierarchy indicates importance of content. Through size and weight
     <tbody>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-heading-1</code></td>
-        <td class="type-sample--rem">3.429rem</td>
+        <td class="type-sample--rem">3rem</td>
         <td class="type-sample--px">48px</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-heading-2</code></td>
-        <td class="type-sample--rem">2.285rem</td>
+        <td class="type-sample--rem">2rem</td>
         <td class="type-sample--px">32px</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-heading-3</code></td>
-        <td class="type-sample--rem">1.714rem</td>
+        <td class="type-sample--rem">1.5rem</td>
         <td class="type-sample--px">24px</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-heading-4</code></td>
-        <td class="type-sample--rem">1.429rem</td>
+        <td class="type-sample--rem">1.25rem</td>
         <td class="type-sample--px">20px</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-heading-5</code></td>
-        <td class="type-sample--rem">1.285rem</td>
+        <td class="type-sample--rem">1.125rem</td>
         <td class="type-sample--px">18px</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-heading-6</code></td>
-        <td class="type-sample--rem">1.142rem</td>
+        <td class="type-sample--rem">1rem</td>
         <td class="type-sample--px">16px</td>
       </tr>
     </tbody>
@@ -96,12 +96,12 @@ Typographical hierarchy indicates importance of content. Through size and weight
     <tbody>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-display-1</code></td>
-        <td class="type-sample--rem">9.143rem</td>
+        <td class="type-sample--rem">8rem</td>
         <td class="type-sample--px">128px</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-display-2</code></td>
-        <td class="type-sample--rem">6.857rem</td>
+        <td class="type-sample--rem">6rem</td>
         <td class="type-sample--px">96px</td>
       </tr>
     </tbody>
