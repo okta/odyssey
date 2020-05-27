@@ -94,7 +94,7 @@ $spacing-units: (
     width: $value;
     height: $value;
     margin: 0 0 $spacing-m 0;
-    border: 1px solid cv('gray', '900');
+    background: cv('red', '300');
   }
 }
 
