@@ -24,6 +24,12 @@ h6 {
   line-height: $heading-line-height;
 }
 
+h1,
+h2 {
+  line-height: 1.2;
+
+}
+
 h1 {
   font-size: $size-heading-1;
 }
