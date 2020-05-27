@@ -20,7 +20,7 @@ $base-font-size: 16px; // 1rem @ 16px
 $base-body-font-size: 14px;
 $scale-ratio: 1.2308;
 $base-line-height: 1.5;
-$heading-line-height: 1.2;
+$heading-line-height: $base-line-height;
 $max-line-length: 32em;
 
 // Establish Type Scale
