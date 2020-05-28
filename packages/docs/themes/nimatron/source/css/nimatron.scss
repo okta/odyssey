@@ -69,6 +69,7 @@ $less-opaque: 0.3;
   margin: 0 0 $spacing-m;
   list-style-type: none;
   font-weight: 400;
+  font-size: 14px;
 
   a {
     position: relative;
@@ -117,8 +118,8 @@ $less-opaque: 0.3;
       content: '';
       position: absolute;
       top: 0;
-      left: -$spacing-l;
-      width: calc(100% + #{$spacing-l} + #{$spacing-l});
+      left: -$spacing-xxl;
+      width: calc(100% + #{$spacing-xxl} + #{$spacing-xxl});
       border-top: 1px solid cv('gray', '200');
     }
   }
@@ -126,7 +127,7 @@ $less-opaque: 0.3;
 
 .nimatron--article {
   min-width: 0;
-  padding: $spacing-m $spacing-l;
+  padding: $spacing-xl $spacing-xxl;
 }
 
 .nimatron--toc {
