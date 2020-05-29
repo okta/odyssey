@@ -31,7 +31,7 @@ pre[class*='language-'] {
 pre[class*='language-'] {
   max-height: $max-line-length;
   margin: 0 0 $spacing-m;
-  padding: $spacing-m;
+  padding: $spacing-l;
   overflow: auto;
   border: 1px dashed cv('gray', '200');
   border-radius: 0 0 $base-border-radius $base-border-radius;

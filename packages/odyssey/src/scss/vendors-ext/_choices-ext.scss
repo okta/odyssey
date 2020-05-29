@@ -131,7 +131,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     content: '';
     position: absolute;
     top: 50%;
-    right: $em-small-spacing;
+    right: $spacing-s-em;
     width: $size-caption;
     height: $size-caption;
     transform: translateY(-50%);
@@ -194,7 +194,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 .ods-select--inner {
   display: inline-block;
   width: 100%;
-  padding: $em-tiny-spacing $em-small-spacing;
+  padding: $spacing-xs-em $spacing-s-em;
   overflow: hidden;
   transition-property: border-color, background-color, box-shadow;
   transition-duration: $base-duration;

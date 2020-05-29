@@ -164,7 +164,7 @@
   display: block;
   position: relative;
   margin-bottom: $spacing-xs;
-  padding-left: 1em + $em-tiny-spacing;
+  padding-left: 1em + $spacing-xs-em;
   font-size: $size-base;
   font-weight: 400;
   text-align: left;
@@ -176,8 +176,8 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 1em;
-    height: 1em;
+    width: 1.1428571429em;
+    height: 1.1428571429em;
     transition-property: border-color, background, opacity, box-shadow;
     transition-duration: $base-duration;
     transition-timing-function: $base-timing;

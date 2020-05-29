@@ -19,6 +19,7 @@
   margin: 0 0 $spacing-m;
   border-spacing: 0;
   border-collapse: collapse;
+  font-size: $size-base;
   line-height: $title-line-height;
 
   &:only-child {
@@ -174,7 +175,7 @@
   .ods-table--figcaption {
     margin-bottom: $spacing-s;
     color: $text-heading;
-    font-size: $size-title-5;
+    font-size: $size-title-6;
     font-weight: 600;
     text-align: left;
   }

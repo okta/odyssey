@@ -31,7 +31,7 @@ $size-title-3: 1.5rem;
 $size-title-4: 1.25rem;
 $size-title-5: 1.125rem;
 $size-title-6: 1rem;
-$size-base: 0.875rem;
+$size-base: 0.875rem; //1
 $size-caption: 0.75rem; // $size-caption
 
 // Semantic Variables
@@ -79,10 +79,10 @@ $border-input-disabled: cv('gray', '200');
 
 // Spacing Variables
 
-$em-base-spacing: $base-line-height * 1em;
-$em-small-spacing: $em-base-spacing / 2;
-$em-tiny-spacing: $em-small-spacing / 2;
-$em-big-spacing: $em-base-spacing * 2;
+$spacing-m-em: $base-line-height * 1em;
+$spacing-s-em: $spacing-m-em / 2;
+$spacing-xs-em: $spacing-s-em / 2;
+$spacing-l-em: $spacing-m-em * 2;
 
 // Animation/Transition Baselines
 

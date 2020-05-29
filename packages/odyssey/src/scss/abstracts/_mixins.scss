@@ -34,7 +34,7 @@
   width: 100%;
   max-width: $max-line-length;
   margin: 0;
-  padding: $em-tiny-spacing $em-small-spacing;
+  padding: $spacing-xs-em $spacing-s-em;
   transition-property: border-color, background-color, box-shadow;
   transition-duration: $base-duration;
   transition-timing-function: $base-timing;
