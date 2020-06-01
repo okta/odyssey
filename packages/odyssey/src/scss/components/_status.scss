@@ -11,26 +11,29 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+$status-indicator-size: 0.5714285714em;
 
 .ods-status--label {
   display: block;
   margin-bottom: $spacing-xs;
+  font-size: $size-base;
   font-weight: 600;
 }
 
 .ods-status--value {
   position: relative;
-  padding-left: 0.5em + $spacing-s-em;
+  padding-left: $status-indicator-size + $spacing-s-em;
   background-color: transparent;
   color: $text-body;
+  font-size: $size-base;
 
   &::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 0;
-    width: 0.5em;
-    height: 0.5em;
+    width: $status-indicator-size;
+    height: $status-indicator-size;
     margin-right: $spacing-xs;
     transform: translateY(-50%);
     border-radius: 1em;
