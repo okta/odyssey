@@ -14,6 +14,8 @@
 
 /* stylelint-disable no-descending-specificity, max-nesting-depth */
 
+$size-checkbox: 1.1428571429em;
+
 .ods-checkbox {
   @include is-visually-hidden;
 
@@ -164,7 +166,7 @@
   display: block;
   position: relative;
   margin-bottom: $spacing-xs;
-  padding-left: 1em + $spacing-xs-em;
+  padding-left: $size-checkbox + $spacing-s-em;
   font-size: $size-base;
   font-weight: 400;
   text-align: left;
@@ -176,8 +178,8 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 1.1428571429em;
-    height: 1.1428571429em;
+    width: $size-checkbox;
+    height: $size-checkbox;
     transition-property: border-color, background, opacity, box-shadow;
     transition-duration: $base-duration;
     transition-timing-function: $base-timing;
