@@ -112,11 +112,12 @@ $less-opaque: 0.3;
 
   h2:not([class]) {
     position: relative;
-    padding-top: $spacing-m;
+    // padding-top: $spacing-m;
 
     &::before {
       content: '';
       position: absolute;
+      display: none;
       top: 0;
       left: -$spacing-xxl;
       width: calc(100% + #{$spacing-xxl} + #{$spacing-xxl});
