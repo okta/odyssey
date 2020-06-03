@@ -62,47 +62,8 @@ Typographical hierarchy indicates importance of content. Through size and weight
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-6</code></td>
-        <td class="type-sample--rem">1rem</td>
-        <td class="type-sample--px">0.875rem</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-
-## Display sizes
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <h1 class="type-sample--example type-sample--example-size-display-1">Display 1</h1>
-    <h1 class="type-sample--example type-sample--example-size-display-2">Display 2</h1>
-  </div>
-</figure>
-
-
-<figure class="ods-table--figure">
-  <table class="ods-table type-sample--table">
-    <thead>
-      <tr>
-        <th scope="column">
-          variable
-        </th>
-        <th scope="column">
-          rem
-        </th>
-        <th scope="column">
-          px
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="type-sample">
-        <td class="type-sample--token"><code>$size-display-1</code></td>
-        <td class="type-sample--rem">8rem</td>
-        <td class="type-sample--px">128px</td>
-      </tr>
-      <tr class="type-sample">
-        <td class="type-sample--token"><code>$size-display-2</code></td>
-        <td class="type-sample--rem">6rem</td>
-        <td class="type-sample--px">96px</td>
+        <td class="type-sample--rem">0.875rem</td>
+        <td class="type-sample--px">14px</td>
       </tr>
     </tbody>
   </table>
