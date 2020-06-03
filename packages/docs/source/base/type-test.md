@@ -10,6 +10,9 @@ Many of our customers are examining their own preparations for potential disrupt
 - Unordered list item 2
 - Unordered list item 3
 
+#### Section Heading (Title 3)
+Many of our customers are examining their own preparations for potential disruptions caused by COVID-19. In the spirit of transparency, another of our core values, we are proactively sharing the information below to support their efforts. We will continue to assess our plans, and share relevant updates, as warranted. 
+
 ## People + Remote Work(Title 2)
 Thanks in part to our own technology, Okta employees and contractors are already able to (and frequently do) work from anywhere, and have the resources and tools they need to do their jobs securely from any location. To make determinations around remote work and office closures, we carefully monitor and consider advice from the World Health Organization, the Centers for Disease Control, the U.S. Department of State, and government and health officials in local communities where our employees live and work.
 
