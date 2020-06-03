@@ -23,15 +23,15 @@ $title-line-height: $base-line-height;
 $max-line-length: 32em;
 
 // Establish Type Scale
+$size-base: 0.875rem; // 14px
 $size-display-1: 8rem;
 $size-display-2: 6rem;
-$size-title-1: 3rem;
-$size-title-2: 2rem;
-$size-title-3: 1.5rem;
-$size-title-4: 1.25rem;
-$size-title-5: 1.125rem;
-$size-title-6: 1rem;
-$size-base: 0.875rem; // 14px
+$size-title-1: 2rem;
+$size-title-2: 1.5rem;
+$size-title-3: 1.25rem;
+$size-title-4: 1.125rem;
+$size-title-5: 1rem;
+$size-title-6: $size-base;
 $size-caption: 0.75rem; // $size-caption
 
 // Semantic Variables
