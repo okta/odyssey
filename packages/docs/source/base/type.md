@@ -37,33 +37,33 @@ Typographical hierarchy indicates importance of content. Through size and weight
     <tbody>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-1</code></td>
-        <td class="type-sample--rem">3rem</td>
-        <td class="type-sample--px">48px</td>
-      </tr>
-      <tr class="type-sample">
-        <td class="type-sample--token"><code>$size-title-2</code></td>
         <td class="type-sample--rem">2rem</td>
         <td class="type-sample--px">32px</td>
       </tr>
       <tr class="type-sample">
-        <td class="type-sample--token"><code>$size-title-3</code></td>
+        <td class="type-sample--token"><code>$size-title-2</code></td>
         <td class="type-sample--rem">1.5rem</td>
         <td class="type-sample--px">24px</td>
       </tr>
       <tr class="type-sample">
-        <td class="type-sample--token"><code>$size-title-4</code></td>
+        <td class="type-sample--token"><code>$size-title-3</code></td>
         <td class="type-sample--rem">1.25rem</td>
         <td class="type-sample--px">20px</td>
       </tr>
       <tr class="type-sample">
-        <td class="type-sample--token"><code>$size-title-5</code></td>
+        <td class="type-sample--token"><code>$size-title-4</code></td>
         <td class="type-sample--rem">1.125rem</td>
         <td class="type-sample--px">18px</td>
       </tr>
       <tr class="type-sample">
-        <td class="type-sample--token"><code>$size-title-6</code></td>
+        <td class="type-sample--token"><code>$size-title-5</code></td>
         <td class="type-sample--rem">1rem</td>
         <td class="type-sample--px">16px</td>
+      </tr>
+      <tr class="type-sample">
+        <td class="type-sample--token"><code>$size-title-6</code></td>
+        <td class="type-sample--rem">1rem</td>
+        <td class="type-sample--px">0.875rem</td>
       </tr>
     </tbody>
   </table>
