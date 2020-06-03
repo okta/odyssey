@@ -18,10 +18,9 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 $spacing-m 0;
+  margin: $spacing-xl 0 $spacing-m 0;
   color: $text-heading;
   font-weight: 600;
-  line-height: $title-line-height;
 }
 
 h1,
