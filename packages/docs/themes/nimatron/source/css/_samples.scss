@@ -261,5 +261,34 @@ $spacing-units: (
   color: $text-danger;
 }
 
-.type-sample--example-size-display-1 { font-size: $size-display-1; }
-.type-sample--example-size-display-2 { font-size: $size-display-2; }
+.type-sample--table {
+  width: 90%;
+  white-space: nowrap;
+
+  .type-sample:nth-of-type(1) .type-sample--example {
+    font-size: $size-title-1;
+  }
+
+  .type-sample:nth-of-type(2) .type-sample--example {
+    font-size: $size-title-2;
+  }
+
+  .type-sample:nth-of-type(3) .type-sample--example {
+    font-size: $size-title-3;
+  }
+
+  .type-sample:nth-of-type(4) .type-sample--example {
+    font-size: $size-title-4;
+  }
+
+  .type-sample:nth-of-type(5) .type-sample--example {
+    font-size: $size-title-5;
+  }
+
+  .type-sample:nth-of-type(6) .type-sample--example {
+    font-size: $size-title-6;
+  }
+}
+
+.type-sample--400 { font-weight: 400; }
+.type-sample--700 { font-weight: 700; }

@@ -6,31 +6,24 @@ Okta’s typography system is designed for clarity in readability and hierarchy.
 
 Typographical hierarchy indicates importance of content. Through size and weight, a strong hierarchy can provide clarity to a user to easily understand which level of the content they’re on. Sections need subsections, and those subsections may also need their own subsections. Visually, a user should be able to clearly tell a parent section from a child section simply by the relationship in size and weight between headings.
 
-## Titles
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <h1 class="type-sample--example">Title 1</h1>
-    <h2 class="type-sample--example">Title 2</h2>
-    <h3 class="type-sample--example">Title 3</h3>
-    <h4 class="type-sample--example">Title 4</h4>
-    <h5 class="type-sample--example">Title 5</h5>
-    <h6 class="type-sample--example">Title 6</h6>
-  </div>
-</figure>
+## Scale
+To ensure consistency in typography sizes throughout Okta touchpoints, we’ve created a custom type scale.
 
 <figure class="ods-table--figure">
   <table class="ods-table type-sample--table">
     <thead>
       <tr>
         <th scope="column">
-          variable
+          Variable
         </th>
         <th scope="column">
           rem
         </th>
         <th scope="column">
           px
+        </th>
+        <th scope="column">
+          Example
         </th>
       </tr>
     </thead>
@@ -39,31 +32,37 @@ Typographical hierarchy indicates importance of content. Through size and weight
         <td class="type-sample--token"><code>$size-title-1</code></td>
         <td class="type-sample--rem">2rem</td>
         <td class="type-sample--px">32px</td>
+        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-2</code></td>
         <td class="type-sample--rem">1.5rem</td>
         <td class="type-sample--px">24px</td>
+        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-3</code></td>
         <td class="type-sample--rem">1.25rem</td>
         <td class="type-sample--px">20px</td>
+        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-4</code></td>
         <td class="type-sample--rem">1.125rem</td>
         <td class="type-sample--px">18px</td>
+        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-5</code></td>
         <td class="type-sample--rem">1rem</td>
         <td class="type-sample--px">16px</td>
+        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-6</code></td>
         <td class="type-sample--rem">0.875rem</td>
         <td class="type-sample--px">14px</td>
+        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
     </tbody>
   </table>
@@ -91,15 +90,15 @@ In order to maintain consistency across browsers and typefaces, we specify weigh
           <code>font-weight: 400</code>
         </td>
         <td class="type-sample--400">
-          Normal 400
+          Normal (Book) 400
         </td>
       </tr>
       <tr>
         <td>
-          <code>font-weight: 600</code>
+          <code>font-weight: 700</code>
         </td>
-        <td class="type-sample--600">
-          Semi-bold 600
+        <td class="type-sample--700">
+          Bold 700
         </td>
       </tr>
     </tbody>
@@ -153,6 +152,10 @@ Our type variants include two <a href="https://developer.mozilla.org/en-US/docs/
 </figure>
 
 Our heading line-height should be used for any `font-size` set to `$size-title-2` or higher.
+
+## Type styles
+
+Odyssey provides type styles by way of mixins. Typestyles bind color, weight, and size together. These styles are to be used for specific purposes, after which they are named.
 
 ### Accessibility concerns
 
