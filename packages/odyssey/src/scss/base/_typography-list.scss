@@ -16,7 +16,7 @@ ol,
 ul {
   &:not([class]) {
     max-width: $max-line-length;
-    margin: 0 0 $spacing-m 0;
+    margin: 0 0 $spacing-l 0;
     padding: 0 0 0 $spacing-m;
     list-style-position: outside;
 
