@@ -1,6 +1,6 @@
 # Odyssey - the Okta design system
 
-Hello and welcome! These are the early days of Okta's design system, and things will be in flux for a while. Feel free to poke around, test things out, and explore our guidelines.
+This is the home for Okta's Design System "Odyssey". Here you will find assets to build high quality UIs along with documentation to guide you along the way.
 
 ## Contributing
 
