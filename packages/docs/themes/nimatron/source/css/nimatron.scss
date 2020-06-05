@@ -19,7 +19,7 @@ $less-opaque: 0.3;
 .nimatron {
   display: block;
   min-height: 100vh;
-  background-image: linear-gradient(to bottom, cv('blue', '500') (-$spacing-xl * 2), cv('blue', '900') 75vh);
+  background-color: cv('blue', '900');
   background-repeat: no-repeat;
 
   @media only screen and (min-width: 75ch) {
