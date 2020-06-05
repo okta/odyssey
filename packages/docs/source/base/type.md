@@ -157,6 +157,13 @@ Our heading line-height should be used for any `font-size` set to `$size-title-2
 
 Odyssey provides type styles by way of mixins. Typestyles bind color, weight, and size together. These styles are to be used for specific purposes, after which they are named.
 
+<h1>Title 1</h1>
+<h2>Title 2</h2>
+<h3>Title 3</h3>
+<h4>Title 4</h4>
+<h5>Title 5</h5>
+<h6>Title 6</h6>
+
 ### Accessibility concerns
 
 Our body copy line-height is based on the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height#Accessibility_concerns">MDN recommendation</a>. A minimum value of 1.5 help text remain legible for low-vision users, as well as those with cognitive concerns.

@@ -13,43 +13,43 @@
 // limitations under the License.
 
 @font-face {
-  font-family: 'whyte-trial';
+  font-family: 'Whyte';
   font-style: normal;
   font-weight: normal;
-  src: url('/font/WhyteTrial-Book.woff2') format('woff2'), url('/font/WhyteTrial-Book.woff') format('woff');
+  src: url('path/Whyte-Book.otf') format('opentype');
 }
 
 @font-face {
-  font-family: 'whyte-trial';
+  font-family: 'Whyte';
   font-style: italic;
   font-weight: normal;
-  src: url('/font/WhyteTrial-BookItalic.woff2') format('woff2'), url('/font/WhyteTrial-BookItalic.woff') format('woff');
+  src: url('/font/Whyte-BookItalic.woff2') format('opentype');
 }
 
 @font-face {
-  font-family: 'whyte-trial';
+  font-family: 'Whyte';
   font-style: normal;
   font-weight: bold;
-  src: url('/font/WhyteTrial-Medium.woff2') format('woff2'), url('/font/WhyteTrial-Medium.woff') format('woff');
+  src: url('/font/Whyte-Medium.woff2') format('opentype');
 }
 
 @font-face {
-  font-family: 'whyte-trial';
+  font-family: 'Whyte';
   font-style: normal;
   font-weight: 600;
-  src: url('/font/WhyteTrial-Medium.woff2') format('woff2'), url('/font/WhyteTrial-Medium.woff') format('woff');
+  src: url('/font/Whyte-Medium.woff2') format('opentype');
 }
 
 @font-face {
-  font-family: 'whyte-trial';
-  font-style: normal;
-  font-weight: 300;
-  src: url('/font/WhyteTrial-Book.woff2') format('woff2'), url('/font/WhyteTrial-Book.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'whyte-trial';
+  font-family: 'Whyte';
   font-style: italic;
-  font-weight: 300;
-  src: url('/font/WhyteTrial-BookItalic.woff2') format('woff2'), url('/font/WhyteTrial-BookItalic.woff') format('woff');
+  font-weight: bold;
+  src: url('/font/Whyte-MediumItalic.woff2') format('opentype');
+}
+
+@font-face {
+  font-family: 'Whyte';
+  font-style: italic;
+  font-weight: 600;
+  src: url('/font/Whyte-MediumItalic.woff2') format('opentype');
 }

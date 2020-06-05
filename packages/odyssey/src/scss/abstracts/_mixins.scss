@@ -84,3 +84,17 @@
     color: $text-sub;
   }
 }
+
+@mixin type-style ($name) {
+  @if $name == title-1 {
+    border-bottom-color: $color;
+  } @else if $name == title-2 {
+    border-left-color: $color;
+  } @else if $name == title-3 {
+    border-top-color: $color;
+  } @else if $name == title-4 {
+    border-right-color: $color;
+  } @else {
+    @error 'Unknown name #{$name}.';
+  }
+}
