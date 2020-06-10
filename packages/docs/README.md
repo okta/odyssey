@@ -4,7 +4,8 @@ This is the home for Okta's Design System "Odyssey". Here you will find assets t
 
 ## Contributing
 
-### Grab all the things
+### Grab all the thi
+ngs
 
 These docs are maintained in the `docs` package, which exists to document `@okta/odyssey`.
 

@@ -16,7 +16,7 @@
 
 .ods-table {
   width: auto;
-  margin: 0 0 $spacing-m;
+  margin: 0;
   border-spacing: 0;
   border-collapse: collapse;
   font-size: $size-base;
@@ -169,7 +169,7 @@
 
 .ods-table--figure {
   max-width: 100%;
-  margin: 0 0 $spacing-m;
+  margin: 0 0 $spacing-l;
   overflow-x: auto;
 
   .ods-table--figcaption {
