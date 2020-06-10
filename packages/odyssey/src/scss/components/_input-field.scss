@@ -14,7 +14,7 @@
 
 .ods-field--hint,
 .ods-field--error {
-  font-size: $size-caption;
+  font-size: $size-body-s;
 }
 
 .ods-field--hint {
@@ -35,8 +35,8 @@
 
   &::before {
     content: '';
-    width: $size-caption;
-    height: $size-caption;
+    width: $size-body-s;
+    height: $size-body-s;
     margin: 0 $spacing-xs 0 0;
     background-image: get-icon('alert', $text-danger);
     background-repeat: no-repeat;

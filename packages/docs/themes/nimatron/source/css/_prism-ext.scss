@@ -2,7 +2,7 @@
 
 code:not([class]) {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  font-size: $size-caption;
+  font-size: $size-body-s;
 }
 
 code[class*='language-'],
@@ -36,7 +36,7 @@ pre[class*='language-'] {
   border: 1px dashed cv('gray', '200');
   border-radius: 0 0 $base-border-radius $base-border-radius;
   background-color: $white;
-  font-size: $size-caption;
+  font-size: $size-body-s;
 
   .nimatron--example & {
     margin: 0;

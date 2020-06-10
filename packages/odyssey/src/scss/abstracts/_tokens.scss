@@ -32,7 +32,10 @@ $size-title-3: 1.25rem;
 $size-title-4: 1.125rem;
 $size-title-5: 1rem;
 $size-title-6: $size-base;
-$size-caption: 0.75rem; // $size-caption
+
+$size-body-l: $size-title-5;
+$size-body-m: $size-base;
+$size-body-s: 0.75rem;
 
 // Semantic Variables
 $color-primary-light: cv('blue', '300');
@@ -91,6 +94,6 @@ $base-timing: linear;
 
 // Borders
 
-$base-border-color: cv('gray', '400');
+$base-border-color: cv('gray', '300');
 $base-border-radius: 4px;
 $border-default: 1px solid $base-border-color;

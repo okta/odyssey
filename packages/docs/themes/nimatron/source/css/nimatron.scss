@@ -134,7 +134,7 @@ $less-opaque: 0.3;
 .nimatron--toc {
   display: none;
   position: relative;
-  font-size: $size-caption;
+  font-size: $size-body-s;
 
   @media only screen and (min-width: 125ch) {
     display: block;
@@ -243,7 +243,7 @@ $less-opaque: 0.3;
       bottom: 0;
       right: 0;
       padding: 0 $spacing-s $spacing-s 0;
-      font-size: $size-caption;
+      font-size: $size-body-s;
       font-weight: 600;
       color: cv('red', '900');
     }

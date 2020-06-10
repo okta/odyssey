@@ -9,8 +9,56 @@ Typographical hierarchy indicates importance of content. Through size and weight
 ## Scale
 To ensure consistency in typography sizes throughout Okta touchpoints, we’ve created a custom type scale.
 
+### Body
+
+Odyssey ships with a base font of `16px`. However there are times when different sizes are required.
+
 <figure class="ods-table--figure">
-  <table class="ods-table type-sample--table">
+  <table class="ods-table type-body-sample--table">
+    <thead>
+      <tr>
+        <th scope="column">
+          Variable
+        </th>
+        <th scope="column">
+          rem
+        </th>
+        <th scope="column">
+          px
+        </th>
+        <th scope="column">
+          Example
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="type-sample">
+        <td class="type-sample--token"><code>$size-body-l</code></td>
+        <td class="type-sample--rem">1rem</td>
+        <td class="type-sample--px">16px</td>
+        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+      </tr>
+      <tr class="type-sample">
+        <td class="type-sample--token"><code>$size-body-m</code></td>
+        <td class="type-sample--rem">0.875rem</td>
+        <td class="type-sample--px">14px</td>
+        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+      </tr>
+      <tr class="type-sample">
+        <td class="type-sample--token"><code>$size-body-s</code></td>
+        <td class="type-sample--rem">0.75rem</td>
+        <td class="type-sample--px">12px</td>
+        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+### Titles
+Titles are used to describe the main idea of a page, a section, or content that follows it. By default, header tags (`h1` through `h6`) use the corresponding title size.
+
+<figure class="ods-table--figure">
+  <table class="ods-table type-title-sample--table">
     <thead>
       <tr>
         <th scope="column">
@@ -95,10 +143,10 @@ In order to maintain consistency across browsers and typefaces, we specify weigh
       </tr>
       <tr>
         <td>
-          <code>font-weight: 700</code>
+          <code>font-weight: 600</code>
         </td>
-        <td class="type-sample--700">
-          Bold 700
+        <td class="type-sample--600">
+          Bold (Medium) 600
         </td>
       </tr>
     </tbody>
@@ -157,12 +205,7 @@ Our heading line-height should be used for any `font-size` set to `$size-title-2
 
 Odyssey provides type styles by way of mixins. Typestyles bind color, weight, and size together. These styles are to be used for specific purposes, after which they are named.
 
-<h1>Title 1</h1>
-<h2>Title 2</h2>
-<h3>Title 3</h3>
-<h4>Title 4</h4>
-<h5>Title 5</h5>
-<h6>Title 6</h6>
+<h1 class="wip">TODO</h1>
 
 ### Accessibility concerns
 
@@ -185,9 +228,6 @@ Following these guidelines will ensure a clean document outline, which will incr
 ## Further reading
 
 <ul>
-  <li>
-    <a href="https://alistapart.com/article/more-meaningful-typography">More Meaningful Typography</a>
-  </li>
   <li>
     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height">"line-height" on MDN</a>
   </li>
