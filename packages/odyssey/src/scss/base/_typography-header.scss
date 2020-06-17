@@ -24,35 +24,28 @@ h6 {
   line-height: $title-line-height;
 }
 
-h1,
-h2 {
-  margin: 0 0 $spacing-s 0;
-  line-height: 1.2;
-}
-
 h1 {
-  font-size: $size-title-1;
+  font-size: ms(5);
 }
 
 h2 {
-  font-size: $size-title-2;
+  font-size: ms(4);
 }
 
 h3 {
-  font-size: $size-title-3;
+  font-size: ms(3);
 }
 
 h4 {
-  font-size: $size-title-4;
+  font-size: ms(2);
 }
 
 h5 {
-  font-size: $size-title-5;
+  font-size: ms(1);
 }
 
 h6 {
-  margin-bottom: $spacing-s;
-  font-size: $size-title-6;
+  font-size: $base-font-size;
 }
 
 .legalese {

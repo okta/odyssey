@@ -17,15 +17,14 @@ $body-font-family: 'Whyte', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 
 $mono-font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
 $base-font-size: 14px; // 1rem @ 14px
-$scale-ratio: 1.2308;
+$scale-ratio: 1.1487;
 $base-line-height: 1.71;
 $title-line-height: $base-line-height;
 $max-line-length: 32em;
 
 // Establish Type Scale
 $size-base: 0.875rem; // 14px
-$size-display-1: 8rem;
-$size-display-2: 6rem;
+
 $size-title-1: 2rem;
 $size-title-2: 1.5rem;
 $size-title-3: 1.25rem;
@@ -66,12 +65,11 @@ $text-danger: $color-danger-base;
 $text-danger-disabled: $color-danger-light;
 
 // Space
-$spacing-xxl: 3rem;
-$spacing-xl: 2rem;
-$spacing-l: 1.5rem;
-$spacing-m: 1rem;
-$spacing-s: 0.5rem;
-$spacing-xs: 0.25rem;
+$spacing-m: ms(0) * $base-line-height;
+$spacing-l: $spacing-m * 2;
+$spacing-xl: $spacing-l * 2;
+$spacing-s: $spacing-m / 2;
+$spacing-xs: $spacing-s / 2;
 
 // Input disabled
 $bg-input-disabled: cv('gray', '000');

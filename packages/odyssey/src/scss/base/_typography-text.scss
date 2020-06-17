@@ -46,14 +46,14 @@ sub {
 }
 
 blockquote {
-  margin: 0 0 $spacing-m;
-  padding: 0 0 0 $spacing-m;
+  margin: 0 0 $spacing-s;
+  padding: 0 0 0 $spacing-s;
   border-left: 3px solid $border-color-ui;
 }
 
 p {
   max-width: $max-line-length;
-  margin-bottom: $spacing-l;
+  margin-bottom: $spacing-s;
 
   &:last-child {
     margin-bottom: 0;
@@ -123,7 +123,7 @@ kbd {
 }
 
 hr {
-  margin: $spacing-m 0;
+  margin: $spacing-s 0;
   border-width: 1px;
   border-style: solid;
   border-color: cv('gray', '200');

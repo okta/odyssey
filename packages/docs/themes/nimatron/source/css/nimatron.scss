@@ -29,17 +29,17 @@ $less-opaque: 0.3;
 }
 
 .nimatron--header {
-  padding: $spacing-xl $spacing-xxl;
+  padding: $spacing-l $spacing-l;
   color: $white;
 }
 
 .nimatron--header-title {
-  margin-bottom: $spacing-xl;
+  margin-bottom: $spacing-m;
   font-size: 0;
 }
 
 .nimatron--header-logo {
-  height: $spacing-l;
+  height: $spacing-m;
   fill: $white;
 }
 
@@ -55,11 +55,10 @@ $less-opaque: 0.3;
 }
 
 .nimatron--nav-section {
-  margin: 0 0 $spacing-l;
+  margin: 0 0 $spacing-m;
 }
 
 .nimatron--nav-heading {
-  margin: 0 0 $spacing-s;
   color: $white;
   font-size: $size-base;
   font-weight: 600;
@@ -95,10 +94,6 @@ $less-opaque: 0.3;
   }
 }
 
-.nimatron--nav-item {
-  margin-bottom: $spacing-xs;
-}
-
 .nimatron--main {
   display: block;
   background-color: $white;
@@ -119,8 +114,8 @@ $less-opaque: 0.3;
       position: absolute;
       display: none;
       top: 0;
-      left: -$spacing-xxl;
-      width: calc(100% + #{$spacing-xxl} + #{$spacing-xxl});
+      left: -$spacing-l;
+      width: calc(100% + #{$spacing-l} + #{$spacing-l});
       border-top: 1px solid cv('gray', '200');
     }
   }
@@ -128,7 +123,7 @@ $less-opaque: 0.3;
 
 .nimatron--article {
   min-width: 0;
-  padding: $spacing-xl $spacing-xxl;
+  padding: $spacing-m $spacing-l;
 }
 
 .nimatron--toc {

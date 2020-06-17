@@ -52,13 +52,55 @@
 }
 
 $spacing-units: (
-  'spacing-xxl': $spacing-xxl,
   'spacing-xl': $spacing-xl,
   'spacing-l': $spacing-l,
   'spacing-m': $spacing-m,
   'spacing-s': $spacing-s,
   'spacing-xs': $spacing-xs,
 );
+
+.type-sample--wrap {
+  max-width: $max-line-length;
+  overflow-x: scroll;
+}
+
+.type-sample--table {
+  white-space: nowrap;
+}
+
+@for $i from 1 through 7 {
+  $x: $i - 2;
+
+  .type-sample:nth-of-type(#{$i}) {
+    .type-sample--rem {
+      $rem: ms($x);
+      $rem: inspect($rem);
+      $rem: str-slice($rem, 1, -4);
+      $rem: str-slice($rem, 1, 4);
+      $rem: $rem + 'rem';
+
+      &::before {
+        content: '#{$rem}';
+      }
+    }
+
+    .type-sample--px {
+      &::before {
+        content: '#{round(rem-to-px(ms($x)));}';
+      }
+    }
+
+    .type-sample--function {
+      &::before {
+        content: 'ms(#{$x})';
+      }
+    }
+
+    .type-sample--example {
+      font-size: ms($x);
+    }
+  }
+}
 
 @each $name, $value in $spacing-units {
   .conversion--#{$name}-actual {
@@ -69,7 +111,7 @@ $spacing-units: (
 
   .conversion--#{$name}-px {
     &::before {
-      content: '#{rem-to-px($value)}';
+      content: '#{round(rem-to-px($value))}';
     }
   }
 
@@ -240,7 +282,6 @@ $spacing-units: (
 }
 
 // Token Examples: Shadow
-
 .sample-token--box-shadow-default {
   box-shadow: $box-shadow-default;
 }
@@ -281,30 +322,6 @@ $spacing-units: (
 .type-title-sample--table {
   width: 90%;
   white-space: nowrap;
-
-  .type-sample:nth-of-type(1) .type-sample--example {
-    font-size: $size-title-1;
-  }
-
-  .type-sample:nth-of-type(2) .type-sample--example {
-    font-size: $size-title-2;
-  }
-
-  .type-sample:nth-of-type(3) .type-sample--example {
-    font-size: $size-title-3;
-  }
-
-  .type-sample:nth-of-type(4) .type-sample--example {
-    font-size: $size-title-4;
-  }
-
-  .type-sample:nth-of-type(5) .type-sample--example {
-    font-size: $size-title-5;
-  }
-
-  .type-sample:nth-of-type(6) .type-sample--example {
-    font-size: $size-title-6;
-  }
 }
 
 .type-sample--400 { font-weight: 400; }

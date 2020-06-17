@@ -28,17 +28,6 @@
     <tbody>
       <tr>
         <td>
-          $spacing-xxl
-        </td>
-        <td>
-          <span class="conversion--spacing-xxl-actual"></span>
-        </td>
-        <td>
-          <span class="conversion--spacing-xxl-px"></span>
-        </td>
-      </tr>
-      <tr>
-        <td>
           $spacing-xl
         </td>
         <td>

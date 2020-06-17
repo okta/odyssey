@@ -12,6 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@function ms($step) {
+  $value: 1rem;
+
+  @if $step > 0 {
+    @for $i from 1 through $step {
+      $value: ($value * $scale-ratio);
+    }
+  }
+
+  @if $step < 0 {
+    @for $i from $step through -1 {
+      $value: ($value / $scale-ratio);
+    }
+  }
+
+  @return $value;
+}
+
+// TODO: get rid of this
 @function rem-to-px($value) {
   @if variable-exists('base-font-size') {
     @return ($value / 1rem) * $base-font-size;

@@ -34,20 +34,20 @@ Odyssey ships with a base font of `16px`. However there are times when different
     <tbody>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-body-l</code></td>
-        <td class="type-sample--rem">1rem</td>
-        <td class="type-sample--px">16px</td>
+        <td class="type-sample--rem"></td>
+        <td class="type-sample--px"></td>
         <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-body-m</code></td>
-        <td class="type-sample--rem">0.875rem</td>
-        <td class="type-sample--px">14px</td>
+        <td class="type-sample--rem"></td>
+        <td class="type-sample--px"></td>
         <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-body-s</code></td>
-        <td class="type-sample--rem">0.75rem</td>
-        <td class="type-sample--px">12px</td>
+        <td class="type-sample--rem"></td>
+        <td class="type-sample--px"></td>
         <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
     </tbody>
@@ -78,38 +78,38 @@ Titles are used to describe the main idea of a page, a section, or content that 
     <tbody>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-1</code></td>
-        <td class="type-sample--rem">2rem</td>
-        <td class="type-sample--px">32px</td>
+        <td class="type-sample--rem"></td>
+        <td class="type-sample--px"></td>
         <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-2</code></td>
-        <td class="type-sample--rem">1.5rem</td>
-        <td class="type-sample--px">24px</td>
+        <td class="type-sample--rem"></td>
+        <td class="type-sample--px"></td>
         <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-3</code></td>
-        <td class="type-sample--rem">1.25rem</td>
-        <td class="type-sample--px">20px</td>
+        <td class="type-sample--rem"></td>
+        <td class="type-sample--px"></td>
         <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-4</code></td>
-        <td class="type-sample--rem">1.125rem</td>
-        <td class="type-sample--px">18px</td>
+        <td class="type-sample--rem"></td>
+        <td class="type-sample--px"></td>
         <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-5</code></td>
-        <td class="type-sample--rem">1rem</td>
-        <td class="type-sample--px">16px</td>
+        <td class="type-sample--rem"></td>
+        <td class="type-sample--px"></td>
         <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
       <tr class="type-sample">
         <td class="type-sample--token"><code>$size-title-6</code></td>
-        <td class="type-sample--rem">0.875rem</td>
-        <td class="type-sample--px">14px</td>
+        <td class="type-sample--rem"></td>
+        <td class="type-sample--px"></td>
         <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
     </tbody>
