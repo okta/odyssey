@@ -33,7 +33,7 @@
   td,
   th {
     max-width: $max-line-length;
-    padding: $spacing-s $spacing-m;
+    padding: $spacing-s;
     text-align: left;
     vertical-align: baseline;
     overflow-wrap: break-word;
@@ -175,7 +175,7 @@
   .ods-table--figcaption {
     margin-bottom: $spacing-s;
     color: $text-heading;
-    font-size: $size-title-6;
+    font-size: $size-title-4;
     font-weight: 600;
     text-align: left;
   }
