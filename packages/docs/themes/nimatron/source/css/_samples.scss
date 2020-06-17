@@ -68,8 +68,8 @@ $spacing-units: (
   white-space: nowrap;
 }
 
-@for $i from 1 through 7 {
-  $x: $i - 2;
+@for $i from 6 to 0 {
+  $x: $i - 1;
 
   .type-sample:nth-of-type(#{$i}) {
     .type-sample--rem {

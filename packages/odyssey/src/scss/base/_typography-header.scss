@@ -48,6 +48,10 @@ h6 {
   font-size: $base-font-size;
 }
 
+h5, h6 {
+  line-height: $base-line-height;
+}
+
 .legalese {
   color: $text-sub;
   font-size: $size-body-s;
