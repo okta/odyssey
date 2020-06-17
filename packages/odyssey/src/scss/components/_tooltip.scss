@@ -20,7 +20,7 @@
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  padding: $spacing-xs $spacing-m;
+  padding: $spacing-xs $spacing-s;
   transition: opacity $base-duration $base-timing 1s;
   border: 1px solid cv('gray', '900');
   border-radius: $base-border-radius;
