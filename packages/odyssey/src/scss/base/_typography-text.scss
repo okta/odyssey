@@ -48,7 +48,7 @@ sub {
 blockquote {
   margin: 0 0 $spacing-m;
   padding: 0 0 0 $spacing-m;
-  border-left: 3px solid $base-border-color;
+  border-left: 3px solid $border-color-ui;
 }
 
 p {

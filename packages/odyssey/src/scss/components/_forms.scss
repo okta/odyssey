@@ -15,7 +15,7 @@
 .ods-form {
   max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m} + 2px);
   padding: $spacing-m;
-  border: 1px solid $base-border-color;
+  border: 1px solid $border-color-ui;
   border-radius: $base-border-radius;
 }
 

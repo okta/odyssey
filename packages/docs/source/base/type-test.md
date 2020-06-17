@@ -13,13 +13,13 @@ Many of our customers are examining their own preparations for potential disrupt
 #### Section Heading (Title 4)
 Many of our customers are examining their own preparations for potential disruptions caused by COVID-19. In the spirit of transparency, another of our core values, we are proactively sharing the information below to support their efforts. We will continue to assess our plans, and share relevant updates, as warranted. 
 
-## People + Remote Work(Title 2)
+## People + Remote Work (Title 2)
 Thanks in part to our own technology, Okta employees and contractors are already able to (and frequently do) work from anywhere, and have the resources and tools they need to do their jobs securely from any location. To make determinations around remote work and office closures, we carefully monitor and consider advice from the World Health Organization, the Centers for Disease Control, the U.S. Department of State, and government and health officials in local communities where our employees live and work.
 
-## Business Continuity Planning(Title 2)
+## Business Continuity Planning (Title 2)
 As a cloud-native company with a geographically-dispersed team and flexible, remote workforce, we are prepared to virtually manage business continuity challenges. Our approach is designed to ensure that our service remains available to our customers during times of natural disaster or other unexpected and challenging events. Our business continuity planning is also intended to ensure we will have open channels for timely communications with our customers and other stakeholders.
 
-## Service + Operations(Title 2)
+## Service + Operations (Title 2)
 Our cloud service is designed with a high degree of redundancy and geographic fail-over capabilities to reduce the likelihood of significant impact. We maintain policies and procedures for responding to emergencies, including a disaster recovery plan, which we describe in detail in our Trust & Compliance Documentation. And we, along with our sub-processors, have data centers and technical support located around the world, including across North America, EMEA, and APAC.
 
 1. Ordered list item 1

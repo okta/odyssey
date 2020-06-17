@@ -190,7 +190,7 @@ $size-checkbox: 1.1428571429em;
   // Box
   &::before {
     transform: translateY(-50%);
-    border-color: $base-border-color;
+    border-color: $border-color-ui;
   }
 
   // Check

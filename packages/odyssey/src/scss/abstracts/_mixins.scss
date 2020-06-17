@@ -38,7 +38,7 @@
   transition-property: border-color, background-color, box-shadow;
   transition-duration: $base-duration;
   transition-timing-function: $base-timing;
-  border: 1px solid $base-border-color;
+  border: 1px solid $border-color-ui;
   border-radius: $base-border-radius;
   background-color: $white;
   box-shadow: 0 0 0 0 cv('blue', '000');
@@ -82,19 +82,5 @@
 
   &::placeholder {
     color: $text-sub;
-  }
-}
-
-@mixin type-style ($name) {
-  @if $name == title-1 {
-    border-bottom-color: $color;
-  } @else if $name == title-2 {
-    border-left-color: $color;
-  } @else if $name == title-3 {
-    border-top-color: $color;
-  } @else if $name == title-4 {
-    border-right-color: $color;
-  } @else {
-    @error 'Unknown name #{$name}.';
   }
 }
