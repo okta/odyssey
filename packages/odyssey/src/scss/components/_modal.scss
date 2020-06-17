@@ -28,8 +28,8 @@
 .ods-modal--dialog {
   position: relative;
   max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
-  max-height: calc(100vh - #{$spacing-l});
-  padding: $spacing-l  $spacing-l 0;
+  max-height: calc(100vh - #{$spacing-m});
+  padding: $spacing-m  $spacing-m 0;
   overflow-y: auto;
   border-radius: $base-border-radius;
   background-color: $white;
@@ -57,7 +57,7 @@
   margin-top: 0;
   margin-bottom: 0;
   color: $text-heading;
-  font-size: $size-title-5;
+  font-size: $size-title-4;
   font-weight: 600;
   line-height: $title-line-height;
 }

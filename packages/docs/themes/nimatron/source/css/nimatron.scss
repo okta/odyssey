@@ -29,7 +29,7 @@ $less-opaque: 0.3;
 }
 
 .nimatron--header {
-  padding: $spacing-l $spacing-l;
+  padding: $spacing-l;
   color: $white;
 }
 
@@ -220,7 +220,7 @@ $less-opaque: 0.3;
 }
 
 .nimatron--rendered {
-  padding: $spacing-l;
+  padding: $spacing-m;
   border: 1px dashed cv('gray', '200');
   border-radius: $base-border-radius;
 

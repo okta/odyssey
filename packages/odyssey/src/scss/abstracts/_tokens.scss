@@ -19,7 +19,7 @@ $mono-font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier
 $base-font-size: 14px; // 1rem @ 14px
 $scale-ratio: 1.1487;
 $base-line-height: 1.71;
-$title-line-height: $base-line-height;
+$title-line-height: 1.3;
 $max-line-length: 32em;
 
 // Establish Type Scale
@@ -79,11 +79,11 @@ $border-input-disabled: cv('gray', '200');
 //       need to be documented
 
 // Spacing Variables
-
-$spacing-m-em: 1em;
+$spacing-m-em: 1em * $base-line-height;
+$spacing-l-em: $spacing-m-em * 2;
+$spacing-xl-em: $spacing-l-em * 2;
 $spacing-s-em: $spacing-m-em / 2;
 $spacing-xs-em: $spacing-s-em / 2;
-$spacing-l-em: $spacing-m-em * 2;
 
 // Animation/Transition Baselines
 
