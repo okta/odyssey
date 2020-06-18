@@ -68,10 +68,11 @@ $spacing-units: (
   white-space: nowrap;
 }
 
-@for $i from 6 to 0 {
+@for $i from 7 through 1 {
   $x: $i - 1;
+  $n: 7 - $i;
 
-  .type-sample:nth-of-type(#{$i}) {
+  .type-sample:nth-of-type(#{$n}) {
     .type-sample--rem {
       $rem: ms($x);
       $rem: inspect($rem);
