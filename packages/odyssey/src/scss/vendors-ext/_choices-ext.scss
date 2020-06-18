@@ -9,6 +9,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   position: relative;
   max-width: $max-line-length;
   overflow: hidden;
+  font-size: $size-body-m;
 
   &:focus,
   &.is-ods-select-focused {
@@ -204,6 +205,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   box-shadow: 0 0 0 0 cv('blue', '000');
   color: $text-body;
   font-family: $body-font-family;
+  font-size: $size-body-m;
   line-height: $base-line-height;
   vertical-align: top;
 
@@ -336,6 +338,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   .ods-select--item {
     position: relative;
     padding: $spacing-s;
+    font-size: $size-body-s;
 
     [dir='rtl'] & {
       text-align: right;
