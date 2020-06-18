@@ -9,51 +9,6 @@ Typographical hierarchy indicates importance of content. Through size and weight
 ## Scale
 To ensure consistency in typography sizes throughout Okta touchpoints, we’ve created a custom type scale.
 
-### Body
-
-Odyssey ships with a base font of `16px`. However there are times when different sizes are required.
-
-<figure class="ods-table--figure">
-  <table class="ods-table type-body-sample--table">
-    <thead>
-      <tr>
-        <th scope="column">
-          Variable
-        </th>
-        <th scope="column">
-          rem
-        </th>
-        <th scope="column">
-          px
-        </th>
-        <th scope="column">
-          Example
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="type-sample">
-        <td class="type-sample--token"><code>$size-body-l</code></td>
-        <td class="type-sample--rem"></td>
-        <td class="type-sample--px"></td>
-        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
-      </tr>
-      <tr class="type-sample">
-        <td class="type-sample--token"><code>$size-body-m</code></td>
-        <td class="type-sample--rem"></td>
-        <td class="type-sample--px"></td>
-        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
-      </tr>
-      <tr class="type-sample">
-        <td class="type-sample--token"><code>$size-body-s</code></td>
-        <td class="type-sample--rem"></td>
-        <td class="type-sample--px"></td>
-        <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-
 ### Titles
 Titles are used to describe the main idea of a page, a section, or content that follows it. By default, header tags (`h1` through `h6`) use the corresponding title size.
 
@@ -111,6 +66,52 @@ Titles are used to describe the main idea of a page, a section, or content that 
         <td class="type-sample--rem"></td>
         <td class="type-sample--px"></td>
         <td class="type-sample--example">Waltz, bad nymph, for quick jigs vex!</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+### Body
+
+Odyssey ships with a base font of `14px`. However there are times when different sizes are required.
+
+
+<figure class="ods-table--figure">
+  <table class="ods-table type-body-sample--table">
+    <thead>
+      <tr>
+        <th scope="column">
+          Variable
+        </th>
+        <th scope="column">
+          rem
+        </th>
+        <th scope="column">
+          px
+        </th>
+        <th scope="column">
+          Example
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="type-sample-body">
+        <td class="type-sample-body--token"><code>$size-body-l</code></td>
+        <td class="type-sample-body--rem"></td>
+        <td class="type-sample-body--px"></td>
+        <td class="type-sample-body--example">Waltz, bad nymph, for quick jigs vex!</td>
+      </tr>
+      <tr class="type-sample-body">
+        <td class="type-sample-body--token"><code>$size-body-m</code></td>
+        <td class="type-sample-body--rem"></td>
+        <td class="type-sample-body--px"></td>
+        <td class="type-sample-body--example">Waltz, bad nymph, for quick jigs vex!</td>
+      </tr>
+      <tr class="type-sample-body">
+        <td class="type-sample-body--token"><code>$size-body-s</code></td>
+        <td class="type-sample-body--rem"></td>
+        <td class="type-sample-body--px"></td>
+        <td class="type-sample-body--example">Waltz, bad nymph, for quick jigs vex!</td>
       </tr>
     </tbody>
   </table>
@@ -200,12 +201,6 @@ Our type variants include two <a href="https://developer.mozilla.org/en-US/docs/
 </figure>
 
 Our heading line-height should be used for any `font-size` set to `$size-title-2` or higher.
-
-## Type styles
-
-Odyssey provides type styles by way of mixins. Typestyles bind color, weight, and size together. These styles are to be used for specific purposes, after which they are named.
-
-<h1 class="wip">TODO</h1>
 
 ### Accessibility concerns
 

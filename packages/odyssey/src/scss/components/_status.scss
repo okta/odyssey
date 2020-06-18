@@ -16,7 +16,6 @@ $status-indicator-size: 0.5714285714em;
 .ods-status--label {
   display: block;
   margin-bottom: $spacing-xs;
-  font-size: $size-base;
   font-weight: 600;
 }
 
@@ -25,7 +24,6 @@ $status-indicator-size: 0.5714285714em;
   padding-left: $status-indicator-size + $spacing-s-em;
   background-color: transparent;
   color: $text-body;
-  font-size: $size-base;
 
   &::before {
     content: '';

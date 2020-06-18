@@ -42,8 +42,8 @@
 
 .ods-modal--close {
   align-self: flex-end;
-  width: $size-base;
-  height: $size-base;
+  width: $base-font-size;
+  height: $base-font-size;
   margin-bottom: $spacing-xs;
   padding: 0;
   border: 0;
@@ -64,7 +64,6 @@
 
 .ods-modal--content {
   padding: $spacing-xs 0 $spacing-l;
-  font-size: $size-base;
 }
 
 .ods-modal--footer {

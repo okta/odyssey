@@ -114,6 +114,12 @@ video {
   vertical-align: baseline;
 }
 
+button,
+input {
+  font: inherit;
+  font-size: 100%;
+}
+
 // HTML5 display-role reset for older browsers
 
 article,

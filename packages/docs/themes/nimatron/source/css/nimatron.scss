@@ -29,7 +29,7 @@ $less-opaque: 0.3;
 }
 
 .nimatron--header {
-  padding: $spacing-l;
+  padding: $spacing-m $spacing-l $spacing-l $spacing-m;
   color: $white;
 }
 
@@ -58,9 +58,14 @@ $less-opaque: 0.3;
   margin: 0 0 $spacing-m;
 }
 
+.nimatron--nav-item {
+  margin: 0 0 $spacing-xs;
+}
+
 .nimatron--nav-heading {
   color: $white;
-  font-size: $size-base;
+  font-size: $size-body-m;
+  margin: $spacing-s 0 $spacing-s;
   font-weight: 600;
 }
 
@@ -102,7 +107,7 @@ $less-opaque: 0.3;
     display: grid;
     grid-template-columns: minmax(auto, ($max-line-length * 2)) minmax(auto, auto);
     min-width: 0;
-    box-shadow: 0 2px $size-base rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px $base-font-size rgba(0, 0, 0, 0.2);
   }
 
   h2:not([class]) {
@@ -152,8 +157,8 @@ $less-opaque: 0.3;
 }
 
 .nimatron--toc-title {
+  font-size: $size-body-m;
   margin-bottom: $spacing-s;
-  font-size: $size-base;
   font-weight: 600;
 }
 

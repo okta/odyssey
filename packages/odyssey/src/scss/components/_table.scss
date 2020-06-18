@@ -19,7 +19,6 @@
   margin: 0;
   border-spacing: 0;
   border-collapse: collapse;
-  font-size: $size-base;
   line-height: $title-line-height;
 
   &:only-child {
@@ -169,7 +168,7 @@
 
 .ods-table--figure {
   max-width: 100%;
-  margin: 0 0 $spacing-l;
+  margin: 0 0 $spacing-m;
   overflow-x: auto;
 
   .ods-table--figcaption {

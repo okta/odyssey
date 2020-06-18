@@ -91,13 +91,36 @@ $spacing-units: (
       }
     }
 
-    .type-sample--function {
+    .type-sample--example {
+      font-size: ms($x);
+    }
+  }
+}
+
+@for $i from 3 through 1 {
+  $x: $i + 1;
+  $n: 4 - $i;
+
+  .type-sample-body:nth-of-type(#{$n}) {
+    .type-sample-body--rem {
+      $rem: ms($x);
+      $rem: inspect($rem);
+      $rem: str-slice($rem, 1, -4);
+      $rem: str-slice($rem, 1, 4);
+      $rem: $rem + 'rem';
+
       &::before {
-        content: 'ms(#{$x})';
+        content: '#{$rem}';
       }
     }
 
-    .type-sample--example {
+    .type-sample-body--px {
+      &::before {
+        content: '#{round(rem-to-px(ms($x)));}';
+      }
+    }
+
+    .type-sample-body--example {
       font-size: ms($x);
     }
   }
@@ -118,7 +141,7 @@ $spacing-units: (
 
   .sample--type-#{$name} {
     position: relative;
-    min-height: $size-base;
+    min-height: $base-font-size;
     margin-bottom: $spacing-m;
     padding: 0 0 0 $spacing-l;
     font-size: $value;
