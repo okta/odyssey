@@ -2,6 +2,7 @@
 
 Okta’s typography system is designed for clarity in readability and hierarchy.
 
+
 ## Hierarchy
 
 Typographical hierarchy indicates importance of content. Through size and weight, a strong hierarchy can provide clarity to a user to easily understand which level of the content they’re on. Sections need subsections, and those subsections may also need their own subsections. Visually, a user should be able to clearly tell a parent section from a child section simply by the relationship in size and weight between headings.
@@ -153,60 +154,6 @@ In order to maintain consistency across browsers and typefaces, we specify weigh
     </tbody>
   </table>
 </figure>
-
-## Line-height
-
-Our type variants include two <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height">line-heights</a> available for use:
-
-<figure class="ods-table--figure">
-  <table class="ods-table">
-    <thead>
-      <tr>
-        <th scope="column">
-          Line-height
-        </th>
-        <th scope="column"
-          Variable
-        </th>
-        <th scope="column">
-          Ratio
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          Body Copy &amp; Standard UI
-        </td>
-        <td>
-          <code>$base-line-height</code>
-        </td>
-        <td>
-          1:1.5
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Headings
-        </td>
-        <td>
-          <code>$title-line-height</code>
-        </td>
-        <td>
-          1:1.2
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-
-Our heading line-height should be used for any `font-size` set to `$size-title-2` or higher.
-
-### Accessibility concerns
-
-Our body copy line-height is based on the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height#Accessibility_concerns">MDN recommendation</a>. A minimum value of 1.5 help text remain legible for low-vision users, as well as those with cognitive concerns.
-
-Unitless values ensure that page zooming behaves as expected.
 
 ## Line length
 
