@@ -12,66 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-@mixin make-ods-button-variant($theme) {
-  $bg: map-get($map: $theme, $key: 'bg');
-  $bg-focus: map-get($map: $theme, $key: 'bg-focus');
-  $bg-hover: map-get($map: $theme, $key: 'bg-hover');
-  $bg-disabled: map-get($map: $theme, $key: 'bg-disabled');
-  $border-color: map-get($map: $theme, $key: 'border-color');
-  $border-color-focus: map-get($map: $theme, $key: 'border-color-focus');
-  $border-color-hover: map-get($map: $theme, $key: 'border-color-hover');
-  $border-color-disabled: map-get($map: $theme, $key: 'border-color-disabled');
-  $color-outline: map-get($map: $theme, $key: 'color-outline');
-  $color-text: map-get($map: $theme, $key: 'color-text');
-  $color-text-focus: map-get($map: $theme, $key: 'color-text-focus');
-  $color-text-hover: map-get($map: $theme, $key: 'color-text-hover');
-  $color-text-disabled: map-get($map: $theme, $key: 'color-text-disabled');
-
-  border-color: $border-color;
-  background-color: $bg;
-  color: $color-text;
-
-  &:hover,
-  &.is-ods-button-hover {
-    border-color: $border-color-hover;
-    background-color: $bg-hover;
-    color: $color-text-hover;
-  }
-
-  &:focus,
-  &.is-ods-button-focus {
-    @include outline($color-outline);
-
-    border-color: $border-color-focus;
-    background-color: $bg-focus;
-    color: $color-text-focus;
-  }
-
-  &:disabled {
-    border-color: $border-color-disabled;
-    background-color: $bg-disabled;
-    color: $color-text-disabled;
-    cursor: not-allowed;
-  }
-}
-
 .ods-button {
-  @include make-ods-button-variant((
-    'bg': $color-primary-base,
-    'bg-focus': $color-primary-dark,
-    'bg-hover': $color-primary-dark,
-    'bg-disabled': $color-primary-light,
-    'border-color': $color-primary-base,
-    'border-color-focus': $color-primary-dark,
-    'border-color-hover': $color-primary-dark,
-    'border-color-disabled': $color-primary-light,
-    'color-outline': $color-primary-light,
-    'color-text': $white,
-    'color-text-focus': $white,
-    'color-text-hover': $white,
-    'color-text-disabled': $white,
-  ));
-
   display: inline-block;
   position: relative;
   margin: 0;
@@ -81,87 +22,147 @@
   transition-timing-function: linear;
   border: 1px solid transparent;
   border-radius: $base-border-radius;
+  background-color: $color-primary-base;
+  box-shadow: 0 0 0 0 $color-primary-light;
   color: $white;
   font-family: $body-font-family;
-  font-size: $size-body-m;
+  font-size: ms(0);
   font-weight: 600;
   line-height: $base-line-height;
+
+  &:hover,
+  &.is-ods-button-hover {
+    border-color: $color-primary-dark;
+    background-color: $color-primary-dark;
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    @include outline;
+
+    background-color: $color-primary-dark;
+  }
+
+  &:disabled {
+    border-color: transparent;
+    background-color: $color-primary-light;
+    cursor: not-allowed;
+  }
 }
 
 .is-ods-button-secondary {
-  @include make-ods-button-variant((
-    'bg': transparent,
-    'bg-focus': $white  ,
-    'bg-hover': $color-primary-base,
-    'bg-disabled': transparent,
-    'border-color': $color-primary-base,
-    'border-color-focus': $color-primary-base,
-    'border-color-hover': $color-primary-base,
-    'border-color-disabled': cv('blue', '300'),
-    'color-outline': $color-primary-light,
-    'color-text': $color-primary-base,
-    'color-text-focus': $color-primary-base,
-    'color-text-hover': $white,
-    'color-text-disabled': cv('blue', '300'),
-  ));
+  border-color: $color-primary-base;
+  background-color: $white;
+  color: $color-primary-base;
+
+  &:hover,
+  &.is-ods-button-hover {
+    border-color: $color-primary-base;
+    background-color: $color-primary-base;
+    color: $white;
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    border-color: $color-primary-base;
+    background-color: $white;
+    color: $color-primary-base;
+  }
+
+  &:disabled {
+    border-color: $color-primary-light;
+    background-color: $white;
+    color: $color-primary-light;
+  }
 }
 
 .is-ods-button-danger {
-  @include make-ods-button-variant((
-    'bg': $color-danger-base,
-    'bg-focus': $color-danger-dark,
-    'bg-hover': $color-danger-dark,
-    'bg-disabled': $color-danger-light,
-    'border-color': $color-danger-base,
-    'border-color-focus': $color-danger-dark,
-    'border-color-hover': $color-danger-dark,
-    'border-color-disabled': $color-danger-light,
-    'color-outline': $color-danger-light,
-    'color-text': $white,
-    'color-text-focus': $white,
-    'color-text-hover': $white,
-    'color-text-disabled': $white,
-  ));
+  background-color: $color-danger-base;
+
+  &:hover,
+  &.is-ods-button-hover {
+    border-color: $color-danger-dark;
+    background-color: $color-danger-dark;
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    @include outline($focus-ring-danger);
+
+    background-color: $color-danger-dark;
+  }
+
+  &:disabled {
+    background-color: $color-danger-light;
+  }
+
+  &.is-ods-button-secondary {
+    border-color: $color-danger-base;
+    background-color: $white;
+    color: $color-danger-base;
+
+    &:focus,
+    &.is-ods-button-focus {
+      border-color: $color-danger-dark;
+      background-color: $color-danger-light;
+      color: $color-danger-dark;
+    }
+
+    &:disabled {
+      border-color: $color-danger-light;
+      background-color: $white;
+      color: $color-danger-light;
+    }
+  }
 }
 
 .is-ods-button-overlay {
-  @include make-ods-button-variant((
-    'bg': $white,
-    'bg-focus': cv('gray', '100'),
-    'bg-hover': cv('gray', '100'),
-    'bg-disabled': transparentize($white, 0.6),
-    'border-color': $white,
-    'border-color-focus': cv('gray', '100'),
-    'border-color-hover': cv('gray', '100'),
-    'border-color-disabled': transparent,
-    'color-outline': $focus-ring-primary,
-    'color-text': cv('gray', '900'),
-    'color-text-focus': cv('gray', '900'),
-    'color-text-hover': cv('gray', '900'),
-    'color-text-disabled': cv('gray', '600'),
-  ));
+  background-color: $white;
+  color: $text-body;
+
+  &:hover,
+  &.is-ods-button-hover {
+    border-color: transparent;
+    background-color: cv('gray', '100');
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    outline: 0;
+    background-color: cv('gray', '100');
+  }
+
+  &:disabled {
+    background-color: transparentize(cv('gray', '100'), 0.5);
+    color: cv('gray', '600');
+  }
 }
 
 .is-ods-button-clear {
-  @include make-ods-button-variant((
-    'bg': transparent,
-    'bg-focus': transparent,
-    'bg-hover': cv('blue', '000'),
-    'bg-disabled': transparentize($white, 0.6),
-    'border-color': $white,
-    'border-color-focus': cv('blue', '000'),
-    'border-color-hover': cv('blue', '000'),
-    'border-color-disabled': transparent,
-    'color-outline': $focus-ring-primary,
-    'color-text': $color-primary-base,
-    'color-text-focus': $color-primary-base,
-    'color-text-hover': $color-primary-dark,
-    'color-text-disabled': cv('blue', '300'),
-  ));
+  background-color: transparent;
+  color: $color-primary-base;
+
+  &:hover,
+  &.is-ods-button-hover {
+    border-color: transparent;
+    background-color: cv('blue', '000');
+    color: $color-primary-dark;
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    background-color: $white;
+    color: $color-primary-base;
+  }
+
+  &:disabled {
+    background-color: transparent;
+    color: $color-primary-light;
+  }
 }
 
 %button-small {
-  font-size: $size-body-s;
+  font-size: ms(-1);
 }
 
 .is-ods-button-small {
