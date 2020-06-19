@@ -87,7 +87,7 @@ $spacing-units: (
 
     .type-sample--px {
       &::before {
-        content: '#{rem-to-px(ms($x)))}';
+        content: '#{round(rem-to-px(ms($x))))}';
       }
     }
 
@@ -97,8 +97,8 @@ $spacing-units: (
   }
 }
 
-@for $i from 3 through 1 {
-  $x: $i + 1;
+@for $i from 4 through 1 {
+  $x: $i - 2;
   $n: 4 - $i;
 
   .type-sample-body:nth-of-type(#{$n}) {
@@ -116,7 +116,7 @@ $spacing-units: (
 
     .type-sample-body--px {
       &::before {
-        content: '#{rem-to-px(ms($x)))}';
+        content: '#{round(rem-to-px(ms($x)))}';
       }
     }
 
@@ -135,7 +135,7 @@ $spacing-units: (
 
   .conversion--#{$name}-px {
     &::before {
-      content: '#{rem-to-px($value)}';
+      content: '#{round(rem-to-px($value))}';
     }
   }
 
