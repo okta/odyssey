@@ -2,7 +2,6 @@
 
 
 <ul class="sample--list">
-  <li class="sample--spacing-spacing-xxl"></li>
   <li class="sample--spacing-spacing-xl"></li>
   <li class="sample--spacing-spacing-l"></li>
   <li class="sample--spacing-spacing-m"></li>
