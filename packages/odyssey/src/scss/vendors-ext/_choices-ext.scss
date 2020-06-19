@@ -261,7 +261,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     border-radius: ($base-border-radius * 2);
     background-color: cv('blue', '500');
     color: $white;
-    font-size: $size-body-s;
+    font-size: $size-body-m;
     font-weight: 500;
     word-break: break-all;
     vertical-align: middle;
@@ -338,7 +338,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   .ods-select--item {
     position: relative;
     padding: $spacing-xs	$spacing-s;
-    font-size: $size-body-s;
+    font-size: $size-body-m;
 
     [dir='rtl'] & {
       text-align: right;
