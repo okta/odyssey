@@ -87,7 +87,7 @@ $spacing-units: (
 
     .type-sample--px {
       &::before {
-        content: '#{round(rem-to-px(ms($x)));}';
+        content: '#{rem-to-px(ms($x)))}';
       }
     }
 
@@ -116,7 +116,7 @@ $spacing-units: (
 
     .type-sample-body--px {
       &::before {
-        content: '#{round(rem-to-px(ms($x)));}';
+        content: '#{rem-to-px(ms($x)))}';
       }
     }
 
@@ -135,7 +135,7 @@ $spacing-units: (
 
   .conversion--#{$name}-px {
     &::before {
-      content: '#{round(rem-to-px($value))}';
+      content: '#{rem-to-px($value)}';
     }
   }
 
@@ -184,7 +184,7 @@ $spacing-units: (
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0;
-  padding: $spacing-s;
+  padding: $spacing-xs $spacing-s;
 }
 
 @each $hue, $variants in $colors {
@@ -350,7 +350,3 @@ $spacing-units: (
 
 .type-sample--400 { font-weight: 400; }
 .type-sample--600 { font-weight: 600; }
-
-.wip {
-  background: rgba(red, 0.2);
-}

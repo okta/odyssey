@@ -337,7 +337,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 
   .ods-select--item {
     position: relative;
-    padding: $spacing-s;
+    padding: $spacing-xs	$spacing-s;
     font-size: $size-body-s;
 
     [dir='rtl'] & {
@@ -376,7 +376,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     &.is-ods-select-highlighted {
-      background-color: cv('gray', '000');
+      background-color: cv('blue', '000');
 
       &::after {
         opacity: 0.5;
