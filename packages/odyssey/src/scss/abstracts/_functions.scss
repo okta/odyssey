@@ -37,11 +37,6 @@
   }
 }
 
-@function px-to-rem($target, $context: 14) {
-  @return $target;
-}
-
-
 /**
  * Simple string replacement
  */
