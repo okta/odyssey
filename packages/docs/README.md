@@ -1,6 +1,6 @@
 # Odyssey - the Okta design system
 
-This is the home for Okta's Design System "Odyssey". Here you will find assets to build high quality UIs along with documentation to guide you along the way.
+This is the home for Odyssey, Okta's design system. Here you will find assets to build high quality UIs along with documentation to guide you along the way.
 
 ## Contributing
 
