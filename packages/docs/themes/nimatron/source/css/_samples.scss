@@ -251,7 +251,7 @@ $spacing-units: (
   width: 21px;
   height: 7px;
   margin: $spacing-xs auto 0;
-  border-radius: 4px;
+  border-radius: $base-border-radius;
 }
 
 // Token Examples: Color
