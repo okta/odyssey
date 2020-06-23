@@ -64,7 +64,7 @@ $less-opaque: 0.3;
 
 .nimatron--nav-heading {
   color: $white;
-  font-size: $size-body-m;
+  font-size: $size-body-base;
   margin: $spacing-s 0 $spacing-s;
   font-weight: 600;
 }
@@ -133,7 +133,7 @@ $less-opaque: 0.3;
 .nimatron--toc {
   display: none;
   position: relative;
-  font-size: $size-body-s;
+  font-size: $size-body-caption;
 
   @media only screen and (min-width: 125ch) {
     display: block;
@@ -156,7 +156,7 @@ $less-opaque: 0.3;
 }
 
 .nimatron--toc-title {
-  font-size: $size-body-m;
+  font-size: $size-body-base;
   margin-bottom: $spacing-s;
   font-weight: 600;
 }
@@ -242,7 +242,7 @@ $less-opaque: 0.3;
       bottom: 0;
       right: 0;
       padding: 0 $spacing-s $spacing-s 0;
-      font-size: $size-body-s;
+      font-size: $size-body-caption;
       font-weight: 600;
       color: cv('red', '900');
     }

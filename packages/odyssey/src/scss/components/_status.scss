@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-$status-indicator-size: 0.5714285714em;
+$status-indicator-size: 1em / 2;
 
 .ods-status--label {
   display: block;
@@ -21,7 +21,7 @@ $status-indicator-size: 0.5714285714em;
 
 .ods-status--value {
   position: relative;
-  padding-left: $status-indicator-size + $spacing-s-em;
+  padding-left: $status-indicator-size + $spacing-xs-em;
   background-color: transparent;
   color: $text-body;
 

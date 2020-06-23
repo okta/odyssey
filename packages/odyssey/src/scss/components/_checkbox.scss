@@ -14,7 +14,7 @@
 
 /* stylelint-disable no-descending-specificity, max-nesting-depth */
 
-$size-checkbox: 1.1428571429em;
+$size-checkbox: 1em / 0.875;
 
 .ods-checkbox {
   @include is-visually-hidden;
@@ -100,7 +100,7 @@ $size-checkbox: 1.1428571429em;
       color: $text-danger;
 
       &::before {
-        border-color: cv('red', '500');
+        border-color: $color-danger-base;
       }
     }
 
@@ -108,7 +108,7 @@ $size-checkbox: 1.1428571429em;
     &:indeterminate {
       + .ods-checkbox--label {
         &::before {
-          background-color: cv('red', '500');
+          background-color: $color-danger-base;
         }
       }
     }
@@ -124,7 +124,7 @@ $size-checkbox: 1.1428571429em;
         &::before {
           @include outline($focus-ring-danger, 2px);
 
-          border-color: cv('red', '500');
+          border-color: $color-danger-base;
         }
       }
     }
@@ -167,7 +167,7 @@ $size-checkbox: 1.1428571429em;
   position: relative;
   margin-bottom: $spacing-xs;
   padding-left: $size-checkbox + $spacing-s-em;
-  font-size: $size-body-m;
+  font-size: $size-body-base;
   font-weight: 400;
   text-align: left;
 

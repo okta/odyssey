@@ -151,7 +151,7 @@ $spacing-units: (
       position: absolute;
       top: 0;
       left: 0;
-      font-size: $size-body-s;
+      font-size: $size-body-caption;
     }
   }
 
@@ -197,7 +197,7 @@ $spacing-units: (
         position: static;
         padding: $spacing-xs;
         background: $white;
-        font-size: $size-body-s;
+        font-size: $size-body-caption;
         font-weight: 400;
       }
 
@@ -248,7 +248,6 @@ $spacing-units: (
 
 .sample-token {
   display: block;
-  width: 21px;
   height: 7px;
   margin: $spacing-xs auto 0;
   border-radius: $base-border-radius;
