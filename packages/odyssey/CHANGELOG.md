@@ -7,16 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0] - 2020-06-24
 
-- Rebrand color, type and spacing changes
-- [Breaking Change] replace semantic `cv` arguments (lightest, base, dark) with 000-900
+### Added
+- Design Tokens
+
+### Changed
+- Color, type and spacing to reflect rebrand
+- [Breaking Change] `_variables.scss` has been renamed to `_tokens.scss`, this introduces design tokens into Odyssey
+- [Breaking Change] Renamed "warning" to "orange"
+- [Breaking Change] Changed spacing variables (tokens) to use t-shirt sizing as well as new values
+- [Breaking Change] Changed typography, font family. Now refers to "headings" as titles throughout
+- [Breaking Change] Change semantic `cv` arguments (lightest, base, dark) in favor of 000-900
+
+### Removed
 - [Breaking Change] Removed colors: magenta, grays 100, 300, 500, 700, 900
-- [Breaking Change] Renamed "warning" to "orange
-- [Breaking Change] Updated spacing variables (tokens) to use t-shirt sizing as well as new values
 - [Breaking Change] Removed `fauxpacity` function, preferring "light" color variants
 - [Breaking Change] Removed documentation and Sass styles for unapproved components: Banner, Callout, Card, Dropdown, Meter, Navigation, Switch, Toast, Top Bar
 - Removed all other unused/unapproved documentation
-- [Breaking Change] Updates typography, font family. Now refers to "headings" as titles throughout
-- [Breaking Change] `_variables.scss` has been renamed to `_tokens.scss`, this introduces design tokens into Odyssey
 
 ## [0.2.0] - 2020-04-30
 
