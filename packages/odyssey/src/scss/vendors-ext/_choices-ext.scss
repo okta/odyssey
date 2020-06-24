@@ -15,13 +15,13 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   &.is-ods-select-focused {
     border-radius: $base-border-radius;
     outline: none;
-    box-shadow: 0 0 0 4px cv('blue', '000');
+    box-shadow: 0 0 0 4px cv('blue', '300');
 
     &.is-ods-select-open {
-      box-shadow: 0 0 0 4px cv('blue', '000'), 0 2px 0 4px cv('blue', '000');
+      box-shadow: 0 0 0 4px cv('blue', '300'), 0 2px 0 4px cv('blue', '300');
 
       &.is-ods-select-flipped {
-        box-shadow: 0 0 0 4px cv('blue', '000'), 0 -2px 0 4px cv('blue', '000');
+        box-shadow: 0 0 0 4px cv('blue', '300'), 0 -2px 0 4px cv('blue', '300');
       }
     }
   }
@@ -38,7 +38,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     .ods-select--inner,
     .ods-select--input {
       border-color: cv('gray', '200');
-      background: cv('gray', '000');
+      background: cv('gray', '300');
       color: $text-sub;
       cursor: not-allowed;
       user-select: none;
@@ -61,15 +61,16 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   [data-invalid] & {
     &:focus,
     &.is-ods-select-focused {
+      @include outline($focus-ring-danger);
+
       border-radius: $base-border-radius;
       outline: none;
-      box-shadow: 0 0 0 4px cv('red', '000');
 
       &.is-ods-select-open {
-        box-shadow: 0 0 0 4px cv('red', '000'), 0 2px 0 4px cv('red', '000');
+        box-shadow: 0 0 0 4px cv('red', '300'), 0 2px 0 4px cv('red', '300');
 
         &.is-ods-select-flipped {
-          box-shadow: 0 0 0 4px cv('red', '000'), 0 -2px 0 4px cv('red', '000');
+          box-shadow: 0 0 0 4px cv('red', '300'), 0 -2px 0 4px cv('red', '300');
         }
       }
     }
@@ -119,7 +120,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     &:focus {
-      box-shadow: 0 0 0 2px cv('blue', '500');
+      @include outline($focus-ring-primary);
     }
   }
 
@@ -202,7 +203,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   border: 1px solid $border-color-ui;
   border-radius: $base-border-radius;
   background-color: $white;
-  box-shadow: 0 0 0 0 cv('blue', '000');
+  box-shadow: 0 0 0 0 cv('blue', '300');
   color: $text-body;
   font-family: $body-font-family;
   font-size: $size-body-base;
@@ -281,8 +282,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     .is-ods-select-disabled & {
-      border: 1px solid darken(cv('gray', '000'), 35%);
-      background-color: darken(cv('gray', '000'), 25%);
+      border: 1px solid darken(cv('gray', '300'), 35%);
+      background-color: darken(cv('gray', '300'), 25%);
     }
   }
 }
@@ -307,7 +308,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 
   .is-ods-select-focused & {
-    box-shadow: 0 0 0 4px cv('blue', '000');
+    @include outline($focus-ring-primary);
+
     clip-path: inset(0 -4px -4px -4px);
   }
 
@@ -376,7 +378,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     &.is-ods-select-highlighted {
-      background-color: cv('blue', '000');
+      background-color: cv('blue', '300');
 
       &::after {
         opacity: 0.5;
@@ -385,7 +387,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 
   [data-invalid] .is-ods-select-focused & {
-    box-shadow: 0 0 0 4px cv('red', '000');
+    @include outline($focus-ring-danger);
   }
 
   [data-invalid] .is-ods-select-open & {

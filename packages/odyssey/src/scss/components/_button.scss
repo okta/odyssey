@@ -93,6 +93,7 @@
   }
 
   &:disabled {
+    border-color: $color-danger-light;
     background-color: $color-danger-light;
   }
 
@@ -163,6 +164,7 @@
 
 %button-small {
   font-size: ms(-1);
+  line-height: $title-line-height;
 }
 
 .is-ods-button-small {

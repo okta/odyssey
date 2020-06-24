@@ -120,6 +120,7 @@ kbd {
   background: cv('gray', '000');
   box-shadow: 0 2px 0 cv('gray', '000'), 0 3px 0 cv('gray', '200');
   font-weight: 400;
+  line-height: $title-line-height;
 }
 
 hr {
