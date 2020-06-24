@@ -55,8 +55,8 @@ $size-checkbox: 1em / 0.875;
     &:checked {
       + .ods-radio--label {
         &::before {
-          border-color: cv('blue', '300');
-          background-color: cv('blue', '300');
+          border-color: $color-primary-light;
+          background-color: $color-primary-light;
         }
 
         &::after {
@@ -68,7 +68,7 @@ $size-checkbox: 1em / 0.875;
 
   &[data-invalid] {
     &:hover:not(:checked) + .ods-radio--label::before {
-      border-color: cv('red', '900');
+      border-color: $color-danger-dark;
     }
 
     + .ods-radio--label {

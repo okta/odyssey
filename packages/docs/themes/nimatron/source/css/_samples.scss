@@ -21,7 +21,7 @@
     top: -1px;
     left: -1px;
     width: calc(100% + 2px);
-    border-top: 2px solid cv('blue', '900');
+    border-top: 2px solid $color-primary-dark;
   }
 }
 
@@ -160,7 +160,7 @@ $spacing-units: (
     width: $value;
     height: $value;
     margin: 0 0 $spacing-m 0;
-    background: cv('red', '300');
+    background: $color-danger-light);
   }
 }
 
@@ -219,12 +219,12 @@ $spacing-units: (
 }
 
 .nimatron--rendered .is-link-default {
-  color: cv('blue', '500');
+  color: $color-primary-base;
 }
 
 .nimatron--rendered .is-link-default:hover,
 .nimatron--rendered .is-link-hover {
-  color: cv('blue', '900');
+  color: $color-primary-dark;
 }
 
 .is-rendered-success {

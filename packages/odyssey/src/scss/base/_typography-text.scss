@@ -13,7 +13,7 @@
 // limitations under the License.
 
 abbr {
-  border-bottom: 1px dashed cv('blue', '900');
+  border-bottom: 1px dashed $color-primary-dark;
   text-decoration: none;
 }
 
@@ -34,13 +34,13 @@ strong {
 }
 
 sup {
-  font-size: 0.66rem;
+  font-size: ms(-2);
   line-height: 1;
   vertical-align: super;
 }
 
 sub {
-  font-size: 0.66rem;
+  font-size: ms(-2);
   line-height: 1;
   vertical-align: sub;
 }
@@ -67,7 +67,7 @@ cite {
 
 del {
   display: inline-block;
-  background: cv('red', '000');
+  background: $color-danger-light;
 }
 
 del::before,

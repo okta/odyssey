@@ -23,9 +23,9 @@
   border: 0;
 }
 
-@mixin outline($outlineCv: $focus-ring-primary, $radius: 4px) {
+@mixin outline($outline-cv: $focus-ring-primary, $radius: 4px) {
   outline: 0;
-  box-shadow: 0 0 0 $radius $outlineCv;
+  box-shadow: 0 0 0 $radius $outline-cv;
 }
 
 @mixin input-baseline {

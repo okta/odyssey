@@ -97,7 +97,7 @@ pre[class*='language-'] {
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: cv('blue', '500');
+  color: $color-primary-base;
 }
 
 .token.function,

@@ -20,7 +20,7 @@ $less-opaque: 0.3;
 .nimatron {
   display: block;
   min-height: 100vh;
-  background-color: cv('blue', '900');
+  background-color: $color-primary-dark;
   background-repeat: no-repeat;
 
   @media only screen and (min-width: 75ch) {
@@ -193,7 +193,7 @@ $less-opaque: 0.3;
 
   &:hover {
     &::before {
-      border-bottom-color: cv('blue', '500');
+      border-bottom-color: $color-primary-base;
     }
   }
 

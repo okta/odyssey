@@ -15,13 +15,13 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   &.is-ods-select-focused {
     border-radius: $base-border-radius;
     outline: none;
-    box-shadow: 0 0 0 4px cv('blue', '300');
+    box-shadow: 0 0 0 4px $color-primary-light;
 
     &.is-ods-select-open {
-      box-shadow: 0 0 0 4px cv('blue', '300'), 0 2px 0 4px cv('blue', '300');
+      box-shadow: 0 0 0 4px $color-primary-light, 0 2px 0 4px $color-primary-light;
 
       &.is-ods-select-flipped {
-        box-shadow: 0 0 0 4px cv('blue', '300'), 0 -2px 0 4px cv('blue', '300');
+        box-shadow: 0 0 0 4px $color-primary-light, 0 -2px 0 4px $color-primary-light;
       }
     }
   }
@@ -67,17 +67,17 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
       outline: none;
 
       &.is-ods-select-open {
-        box-shadow: 0 0 0 4px cv('red', '300'), 0 2px 0 4px cv('red', '300');
+        box-shadow: 0 0 0 4px $color-danger-light, 0 2px 0 4px $color-danger-light;
 
         &.is-ods-select-flipped {
-          box-shadow: 0 0 0 4px cv('red', '300'), 0 -2px 0 4px cv('red', '300');
+          box-shadow: 0 0 0 4px $color-danger-light, 0 -2px 0 4px $color-danger-light;
         }
       }
     }
 
     .ods-select--inner,
     .ods-select--input {
-      border-color: cv('red');
+      border-color: $color-danger-base;
     }
   }
 
@@ -178,7 +178,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     margin-bottom: 0;
     margin-left: $choices-button-offset;
     padding-left: $choices-button-offset * 2;
-    border-left: 1px solid darken(cv('blue', '500'), 10%);
+    border-left: 1px solid darken($color-primary-base, 10%);
     border-radius: 0;
     opacity: 0.75;
     background-image: $choices-icon-cross;
@@ -203,7 +203,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   border: 1px solid $border-color-ui;
   border-radius: $base-border-radius;
   background-color: $white;
-  box-shadow: 0 0 0 0 cv('blue', '300');
+  box-shadow: 0 0 0 0 $color-primary-light;
   color: $text-body;
   font-family: $body-font-family;
   font-size: $size-body-base;
@@ -213,7 +213,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   &:hover,
   .is-ods-select-focused &,
   .is-ods-select-open & {
-    border-color: cv('blue', '500');
+    border-color: $color-primary-base;
   }
 
   .is-ods-select-open &,
@@ -226,7 +226,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   [data-invalid] .is-ods-select-flipped.is-ods-select-open & {
     border-radius: 0 0 $base-border-radius $base-border-radius;
     border-top-color: $border-color-ui;
-    border-bottom-color: cv('blue', '500');
+    border-bottom-color: $color-primary-base;
   }
 }
 
@@ -258,9 +258,9 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     margin-right: 3.75px;
     margin-bottom: 3.75px;
     padding: 4px $spacing-s;
-    border: 1px solid darken(cv('blue', '500'), 5%);
+    border: 1px solid darken($color-primary-base, 5%);
     border-radius: ($base-border-radius * 2);
-    background-color: cv('blue', '500');
+    background-color: $color-primary-base;
     color: $white;
     font-size: $size-body-base;
     font-weight: 500;
@@ -277,8 +277,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     &.is-ods-select-highlighted {
-      border: 1px solid darken(cv('blue', '500'), 10%);
-      background-color: darken(cv('blue', '500'), 5%);
+      border: 1px solid darken($color-primary-base, 10%);
+      background-color: darken($color-primary-base, 5%);
     }
 
     .is-ods-select-disabled & {
@@ -314,7 +314,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 
   .is-ods-select-open & {
-    border-color: cv('blue', '500');
+    border-color: $color-primary-base;
   }
 
   .is-ods-select-flipped & {
@@ -378,7 +378,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     &.is-ods-select-highlighted {
-      background-color: cv('blue', '300');
+      background-color: $color-primary-light;
 
       &::after {
         opacity: 0.5;
@@ -391,7 +391,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 
   [data-invalid] .is-ods-select-open & {
-    border-color: cv('red', '500');
+    border-color: $color-danger-base;
   }
 }
 
