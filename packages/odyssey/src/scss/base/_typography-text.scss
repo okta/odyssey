@@ -54,6 +54,7 @@ blockquote {
 p {
   max-width: $max-line-length;
   margin-bottom: $spacing-s;
+  font-size: $size-body-sentence;
 
   &:last-child {
     margin-bottom: 0;
