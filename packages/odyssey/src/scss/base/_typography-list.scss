@@ -19,6 +19,7 @@ ul {
     margin: 0 0 $spacing-s 0;
     padding: 0 0 0 $spacing-m;
     list-style-position: outside;
+    font-size: $size-body-sentence;
 
     li {
       &:last-child {
