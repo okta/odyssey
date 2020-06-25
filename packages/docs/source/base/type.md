@@ -163,7 +163,7 @@ For inline and block level content, the line length should be 50 to 75 character
 
 When constructing a component or page, always start with <code>h1</code> for the topmost level of hierarchy.
 
-Do not rely on heading elements for styling purposes; instead use classes like <code>.callout--title</code> to style component headings.
+Do not rely on heading elements for styling purposes; instead use classes like <code>.page--title</code> to style component headings.
 
 Following these guidelines will ensure a clean document outline, which will increase both SEO performance and accessibility.
 
@@ -179,10 +179,7 @@ Following these guidelines will ensure a clean document outline, which will incr
 
 <ul>
   <li>
-    <a href="/components/callout.html">Callout</a>
-  </li>
-  <li>
-    <a href="/components/forms.html">Form</a>
+    <a href="/components/form.html">Form</a>
   </li>
   <li>
     <a href="/components/text-input.html">Text Input</a>
