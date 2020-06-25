@@ -17,7 +17,6 @@
   align-items: flex-end;
   justify-content: space-between;
   color: $text-heading;
-  font-size: ms(0);
   font-weight: 600;
 
   .ods-text-input:disabled ~ &,
@@ -29,9 +28,9 @@
 .ods-label--optional {
   display: none;
   color: $text-sub;
-  font-size: ms(-1);
+  font-size: $size-body-caption;
   font-weight: 400;
-  line-height: $base-spacing; // Helps optically match line-height above
+  line-height: $spacing-m; // Helps optically match line-height above
 
   [data-optional] &,
   :optional ~ .ods-label & {

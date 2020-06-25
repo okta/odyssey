@@ -14,11 +14,11 @@
 
 .ods-field--hint,
 .ods-field--error {
-  font-size: ms(-1);
+  font-size: $size-body-caption;
 }
 
 .ods-field--hint {
-  margin-bottom: $tiny-spacing;
+  margin-bottom: $spacing-xs;
   color: $text-body;
 
   .ods-text-input:disabled ~ &,
@@ -30,15 +30,15 @@
 .ods-field--error {
   display: flex;
   align-items: center;
-  margin-top: $tiny-spacing;
-  color: cv('danger', 'base');
+  margin-top: $spacing-xs;
+  color: $text-danger;
 
   &::before {
     content: '';
-    width: ms(-1);
-    height: ms(-1);
-    margin: 0 $tiny-spacing 0 0;
-    background-image: get-icon('alert', cv('danger', 'base'));
+    width: $size-body-caption;
+    height: $size-body-caption;
+    margin: 0 $spacing-xs 0 0;
+    background-image: get-icon('alert', $text-danger);
     background-repeat: no-repeat;
   }
 }
@@ -51,7 +51,7 @@
   .ods-number-input,
   .ods-text-input,
   .ods-select {
-    width: calc(50% - #{$small-spacing});
+    width: calc(50% - #{$spacing-s});
   }
 }
 
@@ -63,7 +63,7 @@
   .ods-label,
   .ods-input-legend {
     order: 1;
-    margin-bottom: $tiny-spacing;
+    margin-bottom: $spacing-xs;
   }
 
   .ods-number-input,
@@ -81,7 +81,7 @@
   /* stylelint-disable-next-line no-descending-specificity  */
   .ods-field--hint {
     order: 2;
-    margin-bottom: $tiny-spacing;
+    margin-bottom: $spacing-xs;
 
     + .ods-label {
       margin-bottom: 0;
@@ -95,15 +95,15 @@
 
 /* stylelint-disable-next-line no-descending-specificity  */
 .ods-input-legend {
-  margin: 0 0 $tiny-spacing;
+  margin: 0 0 $spacing-xs;
   color: $text-heading;
-  font-size: ms(0);
+  font-size: $size-body-base;
   font-weight: 600;
 }
 
 .ods-group-legend {
-  margin: 0 0 $small-spacing;
+  margin: 0 0 $spacing-s;
   color: $text-heading;
-  font-size: ms(1);
+  font-size: $size-body-sentence;
   font-weight: 600;
 }

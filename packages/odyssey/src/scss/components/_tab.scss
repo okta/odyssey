@@ -29,7 +29,7 @@
     width: var(--ods-tabs-indicator-width);
     height: 3px;
     transition: left 230ms ease-in-out, width 230ms ease-in-out;
-    background: cv('action', 'base');
+    background: $color-primary-base;
   }
 }
 
@@ -37,18 +37,17 @@
   display: inline-block;
   position: relative;
   margin: 0;
-  padding: $small-spacing $base-spacing;
+  padding: $spacing-s $spacing-s;
   border: 0;
   background: none;
   color: $text-body;
   font-family: inherit;
-  font-size: ms(0);
   font-weight: 600;
 }
 
 .ods-tabs--tabpanel [role='tabpanel'] {
-  padding: $base-spacing 0;
-  border-top: 1px solid $base-border-color;
+  padding: $spacing-m 0;
+  border-top: 1px solid $border-color-ui;
 
   &:focus {
     outline: none;

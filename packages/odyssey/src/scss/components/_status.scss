@@ -11,16 +11,17 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+$status-indicator-size: 1em / 2;
 
 .ods-status--label {
   display: block;
-  margin-bottom: $tiny-spacing;
+  margin-bottom: $spacing-xs;
   font-weight: 600;
 }
 
 .ods-status--value {
   position: relative;
-  padding-left: 0.5em + $em-small-spacing;
+  padding-left: $status-indicator-size + $spacing-xs-em;
   background-color: transparent;
   color: $text-body;
 
@@ -29,12 +30,12 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 0.5em;
-    height: 0.5em;
-    margin-right: $tiny-spacing;
+    width: $status-indicator-size;
+    height: $status-indicator-size;
+    margin-right: $spacing-xs;
     transform: translateY(-50%);
     border-radius: 1em;
-    background-color: cv('gray', '700');
+    background-color: cv('gray', '600');
   }
 }
 
@@ -47,7 +48,7 @@
 .is-ods-status-success {
   .ods-status--value {
     &::before {
-      background-color: cv('success', 'base');
+      background-color: $color-success-base;
     }
   }
 }
@@ -55,7 +56,7 @@
 .is-ods-status-caution {
   .ods-status--value {
     &::before {
-      background-color: cv('caution', 'base');
+      background-color: $color-caution-base;
     }
   }
 }
@@ -63,7 +64,7 @@
 .is-ods-status-danger {
   .ods-status--value {
     &::before {
-      background-color: cv('danger', 'base');
+      background-color: $color-danger-base;
     }
   }
 }

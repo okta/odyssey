@@ -14,6 +14,8 @@
 
 /* stylelint-disable no-descending-specificity, max-nesting-depth */
 
+$size-checkbox: 1em / 0.875;
+
 .ods-checkbox {
   @include is-visually-hidden;
 
@@ -21,8 +23,17 @@
   &:indeterminate {
     + .ods-checkbox--label {
       &::before {
-        border-color: cv('action', 'base');
-        background-color: cv('action', 'base');
+        border-color: $color-primary-base;
+        background-color: $color-primary-base;
+      }
+    }
+  }
+
+  &:checked {
+    + .ods-checkbox--label {
+      &::after {
+        transform: translateY(-50%) scale(0.9);
+        background-image: get-icon('check', $white);
       }
     }
   }
@@ -39,9 +50,9 @@
   &:focus {
     + .ods-checkbox--label {
       &::before {
-        @include outline('action', 2px);
+        @include outline($focus-ring-primary, 2px);
 
-        border-color: cv('action', 'base');
+        border-color: $color-primary-base;
       }
     }
   }
@@ -52,8 +63,8 @@
       cursor: not-allowed;
 
       &::before {
-        border-color: cv('gray', '200');
-        background-color: cv('gray', '000');
+        border-color: $border-input-disabled;
+        background-color: $bg-input-disabled;
       }
     }
 
@@ -61,8 +72,24 @@
     &:indeterminate {
       + .ods-checkbox--label {
         &::before {
-          border-color: fauxpacity(cv('action', 'base'));
-          background-color: fauxpacity(cv('action', 'base'));
+          border-color: $color-primary-light;
+          background-color: $color-primary-light;
+        }
+      }
+    }
+
+    &:checked {
+      + .ods-checkbox--label {
+        &::after {
+          background-image: get-icon('check', $white);
+        }
+      }
+    }
+
+    &:indeterminate {
+      + .ods-checkbox--label {
+        &::after {
+          background-image: get-icon('dash', $white);
         }
       }
     }
@@ -70,8 +97,10 @@
 
   &[data-invalid] {
     + .ods-checkbox--label {
+      color: $text-danger;
+
       &::before {
-        border-color: cv('danger');
+        border-color: $color-danger-base;
       }
     }
 
@@ -79,27 +108,37 @@
     &:indeterminate {
       + .ods-checkbox--label {
         &::before {
-          background-color: cv('danger', 'base');
+          background-color: $color-danger-base;
         }
+      }
+    }
+
+    &:hover:not(:checked) {
+      + .ods-checkbox--label::before {
+        border-color: $color-danger-dark;
       }
     }
 
     &:focus {
       + .ods-checkbox--label {
         &::before {
-          @include outline('danger', 2px);
+          @include outline($focus-ring-danger, 2px);
 
-          border-color: cv('danger', 'base');
+          border-color: $color-danger-base;
         }
       }
     }
 
     &:disabled {
       + .ods-checkbox--label {
-        color: $text-sub;
+        color: $text-danger-disabled;
 
         &::before {
-          border-color: fauxpacity(cv('danger', 'base'));
+          background-color: $color-danger-light;
+        }
+
+        &::after {
+          background-image: get-icon('check', $white);
         }
       }
 
@@ -107,8 +146,15 @@
       &:indeterminate {
         + .ods-checkbox--label {
           &::before {
-            border-color: fauxpacity(cv('danger', 'base'));
-            background-color: fauxpacity(cv('danger', 'base'));
+            border-color: $color-danger-light;
+          }
+        }
+      }
+
+      &:indeterminate {
+        + .ods-checkbox--label {
+          &::after {
+            background-image: get-icon('dash', $white);
           }
         }
       }
@@ -119,9 +165,9 @@
 .ods-checkbox--label {
   display: block;
   position: relative;
-  margin-bottom: $tiny-spacing;
-  padding-left: 1em + $em-tiny-spacing;
-  font-size: ms(0);
+  margin-bottom: $spacing-xs;
+  padding-left: $size-checkbox + $spacing-s-em;
+  font-size: $size-body-base;
   font-weight: 400;
   text-align: left;
 
@@ -132,8 +178,8 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 1em;
-    height: 1em;
+    width: $size-checkbox;
+    height: $size-checkbox;
     transition-property: border-color, background, opacity, box-shadow;
     transition-duration: $base-duration;
     transition-timing-function: $base-timing;
@@ -144,21 +190,20 @@
   // Box
   &::before {
     transform: translateY(-50%);
-    border-color: $base-border-color;
-    box-shadow: 0 0 0 0 fauxpacity(cv('action', 'base'));
+    border-color: $border-color-ui;
   }
 
   // Check
   &::after {
     transform: translateY(-50%) scale(0.9);
-    background-image: get-icon('check', $white);
+    background-image: get-icon('check', transparent);
     background-repeat: no-repeat;
     background-position: center;
   }
 
   &:hover {
     &::before {
-      border-color: cv('action', 'base');
+      border-color: $color-primary-base;
     }
   }
 }

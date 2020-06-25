@@ -5,7 +5,7 @@ Tabs are a navigational component used to organize content by grouping similar i
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <div class="ods-tabs" id="example-0" style="
-      --ods-tabs-indicator-width: 99px;
+      --ods-tabs-indicator-width: 71px;
       --ods-tabs-indicator-pos-x: 0;
     ">
       <div class="ods-tabs--tablist" role="tablist" aria-label="">
@@ -33,7 +33,7 @@ Tabs are a navigational component used to organize content by grouping similar i
 
 ```html
     <div class="ods-tabs" id="example-0" style="
-      --ods-tabs-indicator-width: 99px;
+      --ods-tabs-indicator-width: 71px;
       --ods-tabs-indicator-pos-x: 0;
     ">
       <div class="ods-tabs--tablist" role="tablist" aria-label="">
@@ -127,8 +127,8 @@ The tab indicator's left position and width are changed by updating CSS custom p
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <div class="ods-tabs" id="example-1" style="
-      --ods-tabs-indicator-width:97px;
-      --ods-tabs-indicator-pos-x:103px;
+      --ods-tabs-indicator-width:69px;
+      --ods-tabs-indicator-pos-x:75px;
     ">
       <div class="ods-tabs--tablist" role="tablist" aria-label="">
         <button class="ods-tabs--tab" id="tablistitem-1-0" role="tab" aria-selected="false" aria-controls="tab-1-0">Agents</button>
@@ -155,8 +155,8 @@ The tab indicator's left position and width are changed by updating CSS custom p
 
 ```html
 <div class="ods-tabs" id="example-1" style="
-  --ods-tabs-indicator-width:97px;
-  --ods-tabs-indicator-pos-x:103px;
+    --ods-tabs-indicator-width:69px;
+    --ods-tabs-indicator-pos-x:75px;
 ">
   <div class="ods-tabs--tablist" role="tablist" aria-label="">
     <button class="ods-tabs--tab" id="tablistitem-1-0" role="tab" aria-selected="false" aria-controls="tab-1-0">Agents</button>

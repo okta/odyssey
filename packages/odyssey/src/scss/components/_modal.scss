@@ -22,14 +22,14 @@
   left: 0;
   align-items: center;
   justify-content: center;
-  background: rgba(cv('gray', '900'), 0.9);
+  background: rgba(cv('gray', '900'), 0.75);
 }
 
 .ods-modal--dialog {
   position: relative;
-  max-width: calc(#{$max-line-length} + #{$base-spacing} + #{$base-spacing});
-  max-height: calc(100vh - #{$big-spacing});
-  padding: $base-spacing  $base-spacing 0;
+  max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
+  max-height: calc(100vh - #{$spacing-m});
+  padding: $spacing-m  $spacing-m 0;
   overflow-y: auto;
   border-radius: $base-border-radius;
   background-color: $white;
@@ -42,13 +42,13 @@
 
 .ods-modal--close {
   align-self: flex-end;
-  width: ms(0);
-  height: ms(0);
-  margin-bottom: $tiny-spacing;
+  width: $base-font-size;
+  height: $base-font-size;
+  margin-bottom: $spacing-xs;
   padding: 0;
   border: 0;
   background-color: transparent;
-  background-image: get-icon('close', cv('gray', '900'));
+  background-image: get-icon('close', $text-body);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -57,20 +57,20 @@
   margin-top: 0;
   margin-bottom: 0;
   color: $text-heading;
-  font-size: ms(1);
+  font-size: $size-title-4;
   font-weight: 600;
-  line-height: $heading-line-height;
+  line-height: $title-line-height;
 }
 
 .ods-modal--content {
-  padding: $tiny-spacing 0 $big-spacing;
-  font-size: ms(0);
+  padding: $spacing-xs 0 $spacing-l;
+  font-size: $size-body-base;
 }
 
 .ods-modal--footer {
   display: flex;
   justify-content: flex-end;
-  padding-bottom: $base-spacing;
+  padding-bottom: $spacing-m;
 }
 
 // Animations
