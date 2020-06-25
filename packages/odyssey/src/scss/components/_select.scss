@@ -17,8 +17,8 @@
 
   background-image: get-icon('caret', $text-body);
   background-repeat: no-repeat;
-  background-position: right $em-small-spacing center;
-  background-size: ms(-1);
+  background-position: right $spacing-s-em center;
+  background-size: $size-body-caption;
   appearance: none;
 
   option {

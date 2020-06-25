@@ -13,14 +13,14 @@
 // limitations under the License.
 
 a {
-  color: cv('action');
+  color: cv('blue');
 
   &:hover {
-    color: cv('action', 'dark');
+    color: $color-primary-dark;
   }
 
   &:visited {
-    color: cv('violet', 'dark');
+    color: cv('purple');
   }
 
   /* stylelint-disable selector-no-qualifying-type */
@@ -30,7 +30,7 @@ a {
     width: 1em;
     height: 1em;
     margin-left: 0.2em;
-    background-image: get-icon('external', cv('action', 'base'));
+    background-image: get-icon('external', $color-primary-base);
     background-repeat: no-repeat;
     vertical-align: middle;
   }

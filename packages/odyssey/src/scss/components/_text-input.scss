@@ -17,8 +17,8 @@
 }
 
 .ods-text-area {
-  min-width: $base-spacing;
+  min-width: $spacing-m;
   max-width: $max-line-length;
-  min-height: $base-spacing * 2;
-  padding: $em-tiny-spacing $em-small-spacing $em-small-spacing;
+  min-height: $spacing-m * 2;
+  padding: $spacing-xs-em $spacing-s-em $spacing-s-em;
 }
