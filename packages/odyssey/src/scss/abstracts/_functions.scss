@@ -12,10 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Rem-based modular scale for type
- */
-
 @function ms($step) {
   $value: 1rem;
 
@@ -32,6 +28,13 @@
   }
 
   @return $value;
+}
+
+// TODO: get rid of this
+@function rem-to-px($value) {
+  @if variable-exists('base-font-size') {
+    @return ($value / 1rem) * $base-font-size;
+  }
 }
 
 /**
@@ -54,12 +57,6 @@
   }
 
   @return $map;
-}
-
-@function fauxpacity($color) {
-  $value: mix($color, $white, 40%);
-
-  @return $value;
 }
 
 /**

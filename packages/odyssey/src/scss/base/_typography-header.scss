@@ -18,10 +18,10 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 $base-spacing 0;
+  margin: 0 0 $spacing-xs 0;
   color: $text-heading;
   font-weight: 600;
-  line-height: $heading-line-height;
+  line-height: $title-line-height;
 }
 
 h1 {
@@ -42,15 +42,18 @@ h4 {
 
 h5 {
   font-size: ms(1);
-  line-height: $base-line-height;
 }
 
 h6 {
-  margin-bottom: $small-spacing;
-  font-size: ms(0);
+  font-size: $base-font-size;
+}
+
+h5,
+h6 {
+  line-height: $base-line-height;
 }
 
 .legalese {
   color: $text-sub;
-  font-size: ms(-1);
+  font-size: $size-body-caption;
 }

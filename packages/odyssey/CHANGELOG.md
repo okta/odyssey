@@ -5,9 +5,50 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.3.0] - 2020-06-24
 
-- Rebrand type and color changes
+### Added
+- Design Tokens
+
+### Changed
+- Color, type and spacing to reflect rebrand
+- [Breaking Change] `_variables.scss` has been renamed to `_tokens.scss`, this introduces design tokens into Odyssey
+- [Breaking Change] Renamed "warning" to "orange"
+- [Breaking Change] Changed spacing variables (tokens) to use t-shirt sizing as well as new values
+- [Breaking Change] Changed typography, font family. Now refers to "headings" as titles throughout
+- [Breaking Change] Change semantic `cv` arguments (lightest, base, dark) in favor of 000-900
+
+### Removed
+- [Breaking Change] Removed colors: magenta, grays 100, 300, 500, 700, 900
+- [Breaking Change] Removed `fauxpacity` function, preferring "light" color variants
+- [Breaking Change] Removed documentation and Sass styles for unapproved components: Banner, Callout, Card, Dropdown, Meter, Navigation, Switch, Toast, Top Bar
+- Removed all other unused/unapproved documentation
+
+## [0.2.0] - 2020-04-30
+
+### Added
+- Status: New component and documentation
+- Tab: New component and documentation
+- Tag: New component and documentation
+
+### Changed
+- [Breaking Change] Rename `yellow` color variable to `caution`
+- All focus outline instances now use new outline mixin
+- Adds Status content type to Table component
+- [Docs] Fix misspelling in Form documentation
+- [Docs] Rename "Foundation" to "Base" in nav
+
+## [0.1.3] - 2020-04-10
+
+### Added
+
+- Styled HTML Elements `abbr`, `address`, `code`, `kbd`, `hr` and `var`
+- Update all HTML element examples
+
+### Changed
+
+- bugfix/ee-463 - fixes table cell overflow by wrapping long strings
+- [Docs] Rename "Building Blocks" section to "Foundations"
 
 ## [0.2.0] - 2020-04-30
 
@@ -43,7 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- [Docs] Heading casing changed to sentence throughout docs 
+- [Docs] Heading casing changed to sentence throughout docs
 
 ## [0.1.1] - 2020-04-01
 

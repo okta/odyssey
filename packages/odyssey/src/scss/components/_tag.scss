@@ -14,14 +14,14 @@
 
 .ods-tag {
   display: inline-block;
-  margin: 0 $tiny-spacing $tiny-spacing 0;
-  padding: 0 $em-tiny-spacing;
+  margin: 0 $spacing-xs $spacing-xs 0;
+  padding: 0 $spacing-xs-em;
   border-radius: $base-border-radius;
-  background: cv('gray', '100');
+  background: cv('gray', '200');
   color: $text-body;
 }
 
 .ods-tag--list {
-  margin-bottom: -$tiny-spacing;
+  margin-bottom: -$spacing-xs;
   list-style-type: none;
 }

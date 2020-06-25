@@ -5,6 +5,7 @@ db.json
 node_modules/
 public/
 dist/
+source/font
 .deploy*/
 vendor/
 source/getting-started/changelog.md

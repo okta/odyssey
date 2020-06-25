@@ -17,58 +17,52 @@
 // Color Variants
 
 $colors: (
-  'success': (
-    'lightest': #e5fff6,
-    'base': #00d1b3,
-    'dark': #00a08e,
-  ),
-  'action': (
-    'lightest': #e5edfb,
-    'base': #1662dd,
-    'dark': #124a94,
-  ),
-  'caution': (
-    'lightest': #fcf9e1,
-    'base': #ebd551,
-    'dark': #bc960f,
-  ),
-  'warning': (
-    'lightest': #feefe2,
-    'base': #f47c25,
-    'dark': #cb5500,
-  ),
-  'danger': (
-    'lightest': #fee6ea,
-    'base': #dd0744,
-    'dark': #b80047,
-  ),
-  'cyan': (
-    'lightest': #c6fafa,
-    'base': #007f9c,
-    'dark': #004d6b,
-  ),
-  'violet': (
-    'lightest': #f3eafe,
-    'base': #963fe6,
-    'dark': #5a13b4,
-  ),
-  'magenta': (
-    'base': #c72c86,
-  ),
   'gray': (
-    '000': #fafafa,
-    '100': #e4e5e7,
-    '200': #cdd1d3,
-    '300': #b7bcc0,
-    '400': #a0a7ac,
-    '500': #899298,
-    '600': #737d85,
-    '700': #5c6971,
-    '800': #46545e,
-    '900': #2f3f4a,
+    '000': #f5f5f6,
+    '100': #ebebed,
+    '200': #d7d7dc,
+    '300': #c1c1c8,
+    '400': #aaaab4,
+    '600': #6e6e78,
+    '900': #212126,
+  ),
+  'blue': (
+    '000': #f2f5ff,
+    '300': #a7b5ec,
+    '500': #1662dd,
+    '900': #00297a,
+  ),
+  'green': (
+    '000': #e5faf3,
+    '300': #84d2b1,
+    '500': #00b478,
+    '900': #00503c,
+  ),
+  'red': (
+    '000': #ffdfe2,
+    '300': #f88c90,
+    '500': #da372c,
+    '900': #640019,
+  ),
+  // caution
+  'yellow': (
+    '000': #faf5dc,
+    '300': #f9dc77,
+    '500': #ffc61c,
+    '900': #663800,
+  ),
+  'orange': (
+    '500': #e97107
+  ),
+  'turquoise': (
+    '500': #2d8c9e
+  ),
+  'purple': (
+    '500': #8d6e97
   ),
 );
 
+$black: #000000;
 $white: #ffffff;
 
 /**
@@ -76,7 +70,7 @@ $white: #ffffff;
  * color: cv(action, light); // color: #96bafa;
  */
 
-@function cv($color, $variation: 'base') {
+@function cv($color, $variation: '500') {
   @if not map-has-key($colors, $color) {
     @error 'Invalid color name: `#{$color}`.';
   }
@@ -91,7 +85,3 @@ $white: #ffffff;
 }
 
 $box-shadow-default: 0 2px 0 rgba(175, 175, 175, 0.12);
-
-$text-body: cv('gray', '900');
-$text-heading: cv('gray', '900');
-$text-sub: cv('gray', '500');

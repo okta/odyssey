@@ -116,7 +116,7 @@ Unlike radio buttons, checkboxes validate individually, not as a group.
       <legend class="ods-input-legend">Who should Bruce invite to his birthday?</legend>
       <input data-invalid class="ods-checkbox" type="checkbox" aria-describedby="checkbox-invalid-error" name="checkbox-invalid" id="checkbox-lex-invalid" value="lex" checked>
       <label class="ods-checkbox--label" for="checkbox-lex-invalid">Lex</label>
-      <input class="ods-checkbox" type="checkbox" aria-describedby="checkbox-invalid-error" name="checkbox-invalid" id="checkbox-diana-invalid" value="diana">
+      <input class="ods-checkbox" type="checkbox" aria-describedby="checkbox-invalid-error" name="checkbox-invalid" id="checkbox-diana-invalid" value="diana" data-invalid>
       <label class="ods-checkbox--label" for="checkbox-diana-invalid">Diana</label>
       <input data-invalid class="ods-checkbox" type="checkbox" aria-describedby="checkbox-invalid-error" name="checkbox-invalid" id="checkbox-clark-invalid" value="clark" checked disabled>
       <label class="ods-checkbox--label" for="checkbox-clark">Clark</label>
