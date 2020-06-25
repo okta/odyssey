@@ -23,7 +23,7 @@
     "last 2 versions"
   ],
   "devDependencies": {
-    "@okta/odyssey": "^0.2.0",
+    "@okta/odyssey": "^0.3.0",
     "choices.js": "^9.0.1",
     "hexo": "^3.2.0",
     "hexo-autoprefixer": "^2.0.0",
