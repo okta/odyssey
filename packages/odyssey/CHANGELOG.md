@@ -50,6 +50,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - bugfix/ee-463 - fixes table cell overflow by wrapping long strings
 - [Docs] Rename "Building Blocks" section to "Foundations"
 
+## [0.2.0] - 2020-04-30
+
+### Added
+- Status: New component and documentation
+- Tab: New component and documentation
+- Tag: New component and documentation
+
+### Changed
+- [Breaking Change] Rename `yellow` color variable to `caution`
+- All focus outline instances now use new outline mixin
+- Adds Status content type to Table component
+- [Docs] Fix misspelling in Form documentation
+- [Docs] Rename "Foundation" to "Base" in nav
+
+## [0.1.3] - 2020-04-10
+
+### Added
+
+- Styled HTML Elements `abbr`, `address`, `code`, `kbd`, `hr` and `var`
+- Update all HTML element examples
+
+### Changed
+
+- bugfix/ee-463 - fixes table cell overflow by wrapping long strings
+- [Docs] Rename "Building Blocks" section to "Foundations"
+
 ## [0.1.2] - 2020-04-06
 
 ### Added
