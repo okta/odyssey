@@ -37,14 +37,14 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   &.is-ods-select-disabled {
     .ods-select--inner,
     .ods-select--input {
-      border-color: cv('gray', '200');
-      background: cv('gray', '300');
+      border-color: $border-color-ui;
+      background: cv('gray', '000');
       color: $text-sub;
       cursor: not-allowed;
       user-select: none;
 
       &:hover {
-        border-color: cv('gray', '200');
+        border-color: $border-color-ui;
       }
     }
 
