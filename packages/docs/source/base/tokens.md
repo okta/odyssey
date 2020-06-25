@@ -1,9 +1,8 @@
 # Design tokens
 
-### Color
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
-    Semantic
+    Semantic Colors
   </figcaption>
   <table class="ods-table">
     <thead>
@@ -112,40 +111,98 @@
   </table>
 </figure>
 
-### Spacing
-
 <figure class="ods-table--figure">
-  <!-- <figcaption class="ods-table--figcaption">
+  <figcaption class="ods-table--figcaption">
     Spacing
-  </figcaption> -->
+  </figcaption>
   <table class="ods-table">
     <thead>
       <tr>
-        <th scope="column">Token Name</th>
-        <th scope="column">Value</th>
+        <th scope="column">
+          Token Name
+        </th>
+        <th scope="column">
+          Example
+        </th>
+        <th scope="column">
+          Value
+        </th>
+        <th scope="column">
+          Pixels
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><code>$spacing-xs</code></td>
-        <td>0.375rem (6px)</td>
+        <td>
+          <code>$spacing-xl</code>
+        </td>
+        <td>
+          <div class="sample--spacing-spacing-xl"></div>
+        </td>
+        <td>
+          <span class="conversion--spacing-xl-actual"></span>
+        </td>
+        <td>
+          <span class="conversion--spacing-xl-px"></span>
+        </td>
       </tr>
       <tr>
-        <td><code>$spacing-s</code></td>
-        <td>0.75rem (12px)</td>
+        <td>
+          <code>$spacing-l</code>
+        </td>
+        <td>
+          <div class="sample--spacing-spacing-l"></div>
+        </td>
+        <td>
+          <span class="conversion--spacing-l-actual"></span>
+        </td>
+        <td>
+          <span class="conversion--spacing-l-px"></span>
+        </td>
       </tr>
       <tr>
-        <td><code>$spacing-m</code></td>
-        <td>1.5rem (14px)</td>
+        <td>
+          <code>$spacing-m</code>
+        </td>
+        <td>
+          <div class="sample--spacing-spacing-m"></div>
+        </td>
+        <td>
+          <span class="conversion--spacing-m-actual"></span>
+        </td>
+        <td>
+          <span class="conversion--spacing-m-px"></span>
+        </td>
       </tr>
       <tr>
-        <td><code>$spacing-l</code></td>
-        <td>3rem (48px)</td>
+        <td>
+          <code>$spacing-s</code>
+        </td>
+        <td>
+          <div class="sample--spacing-spacing-s"></div>
+        </td>
+        <td>
+          <span class="conversion--spacing-s-actual"></span>
+        </td>
+        <td>
+          <span class="conversion--spacing-s-px"></span>
+        </td>
       </tr>
       <tr>
-        <td><code>$spacing-xl</code></td>
-        <td>6rem (96px)</td>
+        <td>
+          <code>$spacing-xs</code>
+        </td>
+        <td>
+          <div class="sample--spacing-spacing-xs"></div>
+        </td>
+        <td>
+          <span class="conversion--spacing-xs-actual"></span>
+        </td>
+        <td>
+          <span class="conversion--spacing-xs-px"></span>
+        </td>
       </tr>
     </tbody>
   </table>
-</figure>
+</table>

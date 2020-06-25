@@ -100,25 +100,6 @@ They also pair well with Primary and Secondary buttons.
   ```
 </figure>
 
-### Large vs Small
-
-There are two button sizes, Large and Small. Almost always, the Large size should be used to provide clear path of action for users.
-
-Some Odyssey components may automatically resize buttons to better suit their context.
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <button class="ods-button">Large</button>
-    <button class="ods-button is-ods-button-small">Small</button>
-  </div>
-
-  ```html
-  <button class="ods-button">Large</button>
-  <button class="ods-button is-ods-button-small">Small</button>
-  ```
-</figure>
-
-
 ## Guidelines
 
 **Do** use buttons to indicate the important actions that can be taken in a view.

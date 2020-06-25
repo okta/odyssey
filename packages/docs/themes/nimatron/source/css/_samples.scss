@@ -159,8 +159,7 @@ $spacing-units: (
     position: relative;
     width: $value;
     height: $value;
-    margin: 0 0 $spacing-m 0;
-    background: $color-danger-light);
+    background: $color-danger-light;
   }
 }
 
@@ -174,9 +173,9 @@ $spacing-units: (
 }
 
 .sample--color-list {
+  margin-bottom: $spacing-l;
   overflow: hidden;
   border-radius: $base-border-radius;
-  margin-bottom: $spacing-l;
 }
 
 .sample--color {
@@ -326,13 +325,15 @@ $spacing-units: (
 }
 
 .type-body-sample--table {
-  width: 90%;
   white-space: nowrap;
 }
 
 .type-title-sample--table {
-  width: 90%;
   white-space: nowrap;
+
+  .type-sample--example {
+    font-weight: 600;
+  }
 }
 
 .type-sample--400 { font-weight: 400; }

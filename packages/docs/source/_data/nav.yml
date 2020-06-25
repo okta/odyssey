@@ -5,7 +5,6 @@
 'Base':
   'color': '/base/color.html'
   'type': '/base/type.html'
-  'spacing': '/base/spacing.html'
   'tokens': '/base/tokens.html'
   'elements': '/base/elements.html'
 

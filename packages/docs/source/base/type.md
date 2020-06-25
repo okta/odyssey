@@ -7,8 +7,8 @@ Okta’s typography system is designed for clarity in readability and hierarchy.
 
 Typographical hierarchy indicates importance of content. Through size and weight, a strong hierarchy can provide clarity to a user to easily understand which level of the content they’re on. Sections need subsections, and those subsections may also need their own subsections. Visually, a user should be able to clearly tell a parent section from a child section simply by the relationship in size and weight between headings.
 
-## Scale
-To ensure consistency in typography sizes throughout Okta touchpoints, we’ve created a custom type scale.
+## Type Styles
+To ensure consistency in typography sizes throughout Okta touchpoints, we’ve created a custom type scale paired with appropriate weights and line-heights.
 
 ### Titles
 Titles are used to describe the main idea of a page, a section, or content that follows it. By default, header tags (`h1` through `h6`) use the corresponding title size.
