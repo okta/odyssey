@@ -4,8 +4,8 @@
 
 'Base':
   'color': '/base/color.html'
-  'spacing': '/base/spacing.html'
   'type': '/base/type.html'
+  'tokens': '/base/tokens.html'
   'elements': '/base/elements.html'
 
 'components':

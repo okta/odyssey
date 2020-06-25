@@ -12,18 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.ods-top-bar {
-  .ods-button {
-    @extend %button-small;
-  }
-}
-
-.ods-card--footer {
-  .ods-button {
-    @extend %button-small;
-  }
-}
-
 .ods-table {
   .ods-button {
     @extend %button-small;

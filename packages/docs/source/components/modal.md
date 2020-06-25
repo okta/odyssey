@@ -114,27 +114,6 @@ For convenience, users can exit the modal in a few ways:
 
 For users happy with their new context, we ensure their attention won't be misdirected. Scrolling on the main content becomes locked, and we inform the browser to lock the `tabindex` to the modal context. This way, regardless of input method, a user's interactions are limited to their new scope.
 
-## Legacy support
-
-While our current usage of modals doesn't conform to the recommended guidelines above, the updated UI does come with a few additional benefits for our content-heavy configuration modals:
-
-<ul>
-  <li>
-    Modal dialogs automatically expand in width and height based on their content.
-  </li>
-  <li>
-    Modal height is adjusted for absolutely positioned UI elements like dropdowns (no more cut off select boxes).
-  </li>
-  <li>
-    Scroll behavior is now uniform and applies to the entire modal.
-  </li>
-  <li>
-    Form display is automatically adjusted for modal contexts.
-  </li>
-</ul>
-
-<button class="ods-button is-ods-button-secondary" data-micromodal-trigger="ods-modal-form">Form Modal</button>
-
 ## Further reading
 
 <ul>

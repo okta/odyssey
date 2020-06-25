@@ -108,28 +108,6 @@ In most cases, the form header will only include the form title. The title shoul
   ```
 </figure>
 
-If your form utilizes Read/Edit states, you may also include an "Edit" button to switch modes:
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <form class="ods-form" action="." data-readonly>
-      <header class="ods-form--header">
-        <h1 class="ods-form--title">Give Us Your Feedback</h1>
-        <button class="ods-button is-ods-button-secondary">Edit</button>
-      </header>
-    </form>
-  </div>
-
-  ```html
-  <form class="ods-form" action="." data-readonly>
-    <header class="ods-form--header">
-      <h1 class="ods-form--title">Give Us Your Feedback</h1>
-      <button class="ods-button is-ods-button-secondary">Edit</button>
-    </header>
-  </form>
-  ```
-</figure>
-
 ### Field sets
 
 Field sets are used to group related form controls. When grouping fields, be sure to include a `<legend>` to both contextualize how the fields are related and ensure a clear hierarchy.
@@ -297,7 +275,7 @@ Fields should also include various error messages for possible invalid states. E
   <div class="nimatron--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="email" name="email-invalid" id="email-invalid" autocomplete="email" aria-describedby="email-invalid-error" value="not gonna happen" spellcheck="false" required data-invalid>
+        <input class="ods-text-input" type="email" name="email-invalid" id="email-invalid" autocomplete="email" aria-describedby="email-invalid-error" value="invalidemail@address" spellcheck="false" required data-invalid>
         <label class="ods-label" for="email-invalid">Email</label>
         <aside class="ods-field--error" id="email-invalid-error">
           <span class="u-visually-hidden">Error:</span>This does not appear to be a valid email address.
@@ -439,14 +417,13 @@ This optional section may contain form meta-data, support links, or "legalese" c
 
 ### Read-Only
 
-Some forms require a read-only state. This can be achieved by adding the `data-readonly` attribute on your `<form>` and `readonly` on your `<input>`s. When in a read-only states, forms will automatically hide the actions section. Be sure to include an "Edit" action in the header if users are able to toggle this state.
+Some forms require a read-only state. This can be achieved by adding the `data-readonly` attribute on your `<form>` and `readonly` on your `<input>`s. When in a read-only states, forms will automatically hide the actions section.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <form class="ods-form" action="." data-readonly>
       <header class="ods-form--header">
         <h1 class="ods-form--title">Organization Contact</h1>
-        <button class="ods-button is-ods-button-secondary">Edit</button>
       </header>
       <fieldset class="ods-fieldset">
         <div class="ods-fieldset-flex">
@@ -480,7 +457,6 @@ Some forms require a read-only state. This can be achieved by adding the `data-r
   <form class="ods-form" action="." data-readonly>
     <header class="ods-form--header">
       <h1 class="ods-form--title">Organization Contact</h1>
-      <button class="ods-button is-ods-button-secondary">Edit</button>
     </header>
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
@@ -497,73 +473,6 @@ Some forms require a read-only state. This can be achieved by adding the `data-r
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
         <input class="ods-text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" readonly required>
-        <label class="ods-label" for="org-address">Address</label>
-      </div>
-    </fieldset>
-    <section class="ods-form--actions">
-      <button class="ods-button is-ods-button-secondary">Cancel</button>
-      <button class="ods-button">Save</button>
-    </section>
-  </form>
-  ```
-</figure>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <form class="ods-form" action="." novalidate>
-      <header class="ods-form--header">
-        <h1 class="ods-form--title">Organization Contact</h1>
-        <button class="ods-button is-ods-button-secondary">Edit</button>
-      </header>
-      <fieldset class="ods-fieldset">
-        <div class="ods-fieldset-flex">
-          <input class="ods-text-input" type="text" name="org-company" id="org-company" value="Okta" autocomplete="off" spellcheck="false" required>
-          <label class="ods-label" for="org-company">Company Name</label>
-        </div>
-      </fieldset>
-      <fieldset class="ods-fieldset">
-        <div class="ods-fieldset-flex">
-          <input class="ods-text-input" aria-describedby="org-tel-hint"  type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" required>
-          <label class="ods-label" for="org-tel">Telephone number</label>
-          <aside class="ods-field--hint" id="org-tel-hint">
-            Please include country code if outside the US.
-          </aside>
-        </div>
-      </fieldset>
-      <fieldset class="ods-fieldset">
-        <div class="ods-fieldset-flex">
-          <input class="ods-text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" required>
-          <label class="ods-label" for="org-address">Address</label>
-        </div>
-      </fieldset>
-      <section class="ods-form--actions">
-        <button class="ods-button is-ods-button-secondary">Cancel</button>
-        <button class="ods-button">Save</button>
-      </section>
-    </form>
-  </div>
-
-  ```html
-  <form class="ods-form" action="." novalidate>
-    <header class="ods-form--header">
-      <h1 class="ods-form--title">Organization Contact</h1>
-      <button class="ods-button is-ods-button-secondary">Edit</button>
-    </header>
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="org-company" id="org-company" value="Okta" autocomplete="off" spellcheck="false" required>
-        <label class="ods-label" for="org-company">Company Name</label>
-      </div>
-    </fieldset>
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="tel" name="org-tel" id="org-tel" value="555-555-5555" autocomplete="off" spellcheck="false" required>
-        <label class="ods-label" for="org-tel">Telephone number</label>
-      </div>
-    </fieldset>
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="org-address" id="org-address" value="123 Street Avenue"  autocomplete="off" spellcheck="false" required>
         <label class="ods-label" for="org-address">Address</label>
       </div>
     </fieldset>
