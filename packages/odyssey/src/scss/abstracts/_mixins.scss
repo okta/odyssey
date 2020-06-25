@@ -23,9 +23,9 @@
   border: 0;
 }
 
-@mixin outline($outlineColor: 'action', $radius: 4px) {
+@mixin outline($outline-cv: $focus-ring-primary, $radius: 4px) {
   outline: 0;
-  box-shadow: 0 0 0 $radius fauxpacity(cv($outlineColor, 'base'));
+  box-shadow: 0 0 0 $radius $outline-cv;
 }
 
 @mixin input-baseline {
@@ -34,22 +34,22 @@
   width: 100%;
   max-width: $max-line-length;
   margin: 0;
-  padding: $em-tiny-spacing $em-small-spacing;
+  padding: $spacing-xs-em $spacing-s-em;
   transition-property: border-color, background-color, box-shadow;
   transition-duration: $base-duration;
   transition-timing-function: $base-timing;
-  border: 1px solid $base-border-color;
+  border: 1px solid $border-color-ui;
   border-radius: $base-border-radius;
   background-color: $white;
-  box-shadow: 0 0 0 0 fauxpacity(cv('action', 'base'));
+  box-shadow: 0 0 0 0 cv('blue', '000');
   color: $text-body;
   font-family: $body-font-family;
-  font-size: ms(0);
+  font-size: $size-body-base;
   line-height: $base-line-height;
 
   &:hover,
   &:focus {
-    border-color: cv('action');
+    border-color: cv('blue');
   }
 
   &:focus {
@@ -64,19 +64,19 @@
 
   &:disabled,
   &[readonly] {
-    border-color: cv('gray', '200');
-    background-color: cv('gray', '000');
+    border-color: $border-input-disabled;
+    background-color: $bg-input-disabled;
 
     &:hover {
-      border-color: cv('gray', '200');
+      border-color: $border-input-disabled;
     }
   }
 
   &[data-invalid] {
-    border-color: cv('danger');
+    border-color: $color-danger-base;
 
     &:focus {
-      @include outline('danger');
+      @include outline($focus-ring-danger);
     }
   }
 

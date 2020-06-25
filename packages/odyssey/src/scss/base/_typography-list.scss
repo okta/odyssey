@@ -16,20 +16,15 @@ ol,
 ul {
   &:not([class]) {
     max-width: $max-line-length;
-    margin: 0 0 $base-spacing 0;
-    padding: 0 0 0 $base-spacing;
+    margin: 0 0 $spacing-s 0;
+    padding: 0 0 0 $spacing-m;
     list-style-position: outside;
+    font-size: $size-body-sentence;
 
     li {
-      margin-bottom: $small-spacing;
-
       &:last-child {
         margin-bottom: 0;
       }
-    }
-
-    p + & {
-      margin-top: -$small-spacing;
     }
 
     &:last-child {

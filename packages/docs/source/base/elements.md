@@ -267,7 +267,7 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
   For your safety and the safety of others, <strong>please don't run.</strong>
 </p>
 ```
-</figure>
+</figure>   
 
 You can also nest `strong`. Doing so will provide additional style.
 
