@@ -1,6 +1,11 @@
 @import '~@okta/odyssey';
 @import '~prismjs/themes/prism.css';
 
+// Doc Specific Tokens
+$more-opaque: 0.6;
+$med-opaque: 0.5;
+$less-opaque: 0.3;
+
 // Nimatron Specific Styles
 @import 'prism-ext'; // TODO: Create prism-theme-odyssey package for this
 @import 'samples';
@@ -12,7 +17,7 @@
 .nimatron {
   display: block;
   min-height: 100vh;
-  background-image: linear-gradient(to bottom, cv('action', 'dark') (-$huge-spacing * 2), cv('cyan', 'dark') 75vh);
+  background-color: $color-primary-dark;
   background-repeat: no-repeat;
 
   @media only screen and (min-width: 75ch) {
@@ -22,23 +27,24 @@
 }
 
 .nimatron--header {
-  padding: $base-spacing $big-spacing;
+  padding: $spacing-m $spacing-l $spacing-l $spacing-m;
   color: $white;
 }
 
 .nimatron--header-title {
+  margin-bottom: $spacing-m;
   font-size: 0;
 }
 
 .nimatron--header-logo {
-  height: $base-spacing;
+  height: $spacing-m;
   fill: $white;
 }
 
 .nimatron--nav {
   display: grid;
   grid-template-columns: minmax(auto, auto) minmax(auto, auto);
-  column-gap: $base-spacing;
+  column-gap: $spacing-m;
   text-transform: capitalize;
 
   @media only screen and (min-width: 75ch) {
@@ -47,21 +53,25 @@
 }
 
 .nimatron--nav-section {
-  margin: 0 0 $base-spacing;
+  margin: 0 0 $spacing-m;
+}
+
+.nimatron--nav-item {
+  margin: 0 0 $spacing-xs;
 }
 
 .nimatron--nav-heading {
-  margin: 0 0 $small-spacing;
   color: $white;
-  font-size: ms(0);
+  font-size: $size-body-base;
+  margin: $spacing-s 0 $spacing-s;
   font-weight: 600;
 }
 
 .nimatron--nav-list {
-  margin: 0 0 $base-spacing;
+  margin: 0 0 $spacing-m;
   list-style-type: none;
-  font-size: ms(0);
   font-weight: 400;
+  font-size: 14px;
 
   a {
     position: relative;
@@ -87,10 +97,6 @@
   }
 }
 
-.nimatron--nav-item {
-  margin-bottom: $tiny-spacing;
-}
-
 .nimatron--main {
   display: block;
   background-color: $white;
@@ -99,43 +105,43 @@
     display: grid;
     grid-template-columns: minmax(auto, ($max-line-length * 2)) minmax(auto, auto);
     min-width: 0;
-    box-shadow: 0 2px ms(0) rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px $base-font-size rgba(0, 0, 0, 0.2);
   }
 
-  h2 {
+  h2:not([class]) {
     position: relative;
-    padding-top: $base-spacing;
 
     &::before {
       content: '';
       position: absolute;
+      display: none;
       top: 0;
-      left: -$big-spacing;
-      width: calc(100% + #{$big-spacing} + #{$big-spacing});
-      border-top: 1px solid cv('gray', '100');
+      left: -$spacing-l;
+      width: calc(100% + #{$spacing-l} + #{$spacing-l});
+      border-top: 1px solid cv('gray', '200');
     }
   }
 }
 
 .nimatron--article {
   min-width: 0;
-  padding: $base-spacing $big-spacing;
+  padding: $spacing-m $spacing-l;
 }
 
 .nimatron--toc {
   display: none;
   position: relative;
-  font-size: ms(-1);
+  font-size: $size-body-caption;
 
   @media only screen and (min-width: 125ch) {
     display: block;
-    border-left: 1px solid cv('gray', '100');
+    border-left: 1px solid cv('gray', '200');
   }
 }
 
 .nimatron--toc-space-holder,
 .nimatron--toc-fixed {
-  padding: $base-spacing;
+  padding: $spacing-m;
 }
 
 .nimatron--toc-space-holder {
@@ -148,8 +154,8 @@
 }
 
 .nimatron--toc-title {
-  margin-bottom: $small-spacing;
-  font-size: ms(0);
+  font-size: $size-body-base;
+  margin-bottom: $spacing-s;
   font-weight: 600;
 }
 
@@ -158,7 +164,7 @@
 }
 
 .nimatron--toc-list-level-2 {
-  margin-bottom: $tiny-spacing;
+  margin-bottom: $spacing-xs;
 }
 
 .nimatron--toc-list-level-3 {
@@ -166,7 +172,6 @@
     display: none;
   }
 }
-
 .nimatron--toc-list-link {
   position: relative;
   color: $text-sub;
@@ -185,7 +190,7 @@
 
   &:hover {
     &::before {
-      border-bottom-color: cv('action', 'base');
+      border-bottom-color: $color-primary-base;
     }
   }
 
@@ -213,11 +218,11 @@
 
 .nimatron--example {
   max-width: 100%;
-  margin-bottom: $base-spacing;
+  margin-bottom: $spacing-m;
 }
 
 .nimatron--rendered {
-  padding: $base-spacing;
+  padding: $spacing-m;
   border: 1px dashed cv('gray', '200');
   border-radius: $base-border-radius;
 
@@ -227,23 +232,23 @@
 
   &.is-example-disallowed {
     position: relative;
-    border-color: cv('danger', 'base');
+    border-color: $text-danger;
 
     &::after {
       content: "This is a Don't.";
       position: absolute;
-      right: 0;
       bottom: 0;
-      padding: 0 $small-spacing $small-spacing 0;
-      color: cv('danger', 'dark');
-      font-size: ms(-1);
+      right: 0;
+      padding: 0 $spacing-s $spacing-s 0;
+      font-size: $size-body-caption;
       font-weight: 600;
+      color: cv('red', '900');
     }
   }
 }
 
 .nimatron--figure {
-  margin-bottom: $base-spacing;
+  margin-bottom: $spacing-m;
 }
 
 svg {

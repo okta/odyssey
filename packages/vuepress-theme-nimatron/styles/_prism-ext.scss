@@ -1,9 +1,8 @@
 /* stylelint-disable selector-no-qualifying-type */
 
 code:not([class]) {
-  color: cv('magenta', 'base');
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  font-size: ms(-1);
+  font-size: $size-body-caption;
 }
 
 code[class*='language-'],
@@ -31,27 +30,24 @@ pre[class*='language-'] {
 /* Code blocks */
 pre[class*='language-'] {
   max-height: $max-line-length;
-  margin: 0 0 $base-spacing;
-  padding: $base-spacing;
+  margin: 0 0 $spacing-m;
+  padding: $spacing-m;
   overflow: auto;
   border: 1px dashed cv('gray', '200');
   border-radius: 0 0 $base-border-radius $base-border-radius;
   background-color: $white;
-  font-size: ms(-1);
+  font-size: $size-body-caption;
 
   .nimatron--example & {
     margin: 0;
   }
 }
 
-:not(pre) > code[class*='language-'] {
-  background: $white;
-}
-
 /* Inline code */
 :not(pre) > code[class*='language-'] {
-  padding: $tiny-spacing;
+  padding: $spacing-xs;
   border-radius: $base-border-radius;
+  background: $white;
   white-space: normal;
 }
 
@@ -77,7 +73,7 @@ pre[class*='language-'] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: cv('violet', 'base');
+  color: cv('purple');
 }
 
 .token.selector,
@@ -86,7 +82,7 @@ pre[class*='language-'] {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: cv('cyan', 'base');
+  color: cv('turquoise');
 }
 
 .token.operator,
@@ -95,24 +91,24 @@ pre[class*='language-'] {
 .language-css .token.string,
 .style .token.string {
   background: hsla(0, 0%, 100%, $less-opaque);
-  color: cv('warning', 'dark');
+  color: cv('yellow', '900');
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: cv('action', 'base');
+  color: $color-primary-base;
 }
 
 .token.function,
 .token.class-name {
-  color: cv('danger', 'base');
+  color: cv('red', '500');
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  color: cv('warning', 'base');
+  color: cv('yellow', '500');
 }
 
 .token.important,
