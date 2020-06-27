@@ -1,4 +1,4 @@
-# Buttons
+# Button
 
 Buttons are primarily used for in-page interactions like form submissions.
 

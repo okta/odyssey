@@ -1,0 +1,44 @@
+@import '~@okta/odyssey';
+
+// Nimatron Specific Styles
+@import 'legacy-samples';
+@import 'legacy-prism-ext';
+
+.is-not-provisional {
+  display: none;
+}
+
+.nimatron--example {
+  max-width: 100%;
+  margin-bottom: $spacing-m;
+}
+
+.nimatron--rendered {
+  padding: $spacing-m;
+  border: 1px dashed cv('gray', '200');
+  border-radius: $base-border-radius;
+
+  &:not(:only-child) {
+    border-bottom: 0;
+  }
+
+  &.is-example-disallowed {
+    position: relative;
+    border-color: $text-danger;
+
+    &::after {
+      content: "This is a Don't.";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 0 $spacing-s $spacing-s 0;
+      font-size: $size-body-caption;
+      font-weight: 600;
+      color: cv('red', '900');
+    }
+  }
+}
+
+.nimatron--figure {
+  margin-bottom: $spacing-m;
+}

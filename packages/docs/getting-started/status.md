@@ -1,4 +1,4 @@
-# UI status
+# UI Status
 
 <figure class="ods-table--figure">
   <table class="ods-table">

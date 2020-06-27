@@ -1,6 +1,6 @@
 // .vuepress/config.js
 module.exports = {
-  theme: '@okta/vuepress-theme-nimatron',
+  theme: '@okta/vuepress-theme-odyssey',
   dest: 'dist',
   head: [
     [
@@ -41,7 +41,7 @@ module.exports = {
         children: [
           { title: 'Color', link: '/base/color', isVisible: true },
           { title: 'Elements', link: '/base/elements', isVisible: true },
-          { title: 'Spacing', link: '/base/spacing', isVisible: true },
+          { title: 'Design Tokens', link: '/base/Tokens', isVisible: true },
           { title: 'Type', link: '/base/type', isVisible: true },
           { title: 'Grid', link: '/base/grid', isVisible: false },
         ]

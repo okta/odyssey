@@ -1,4 +1,4 @@
-# Forms
+# Form
 
 Forms are a container for interactive controls used to submit information.
 

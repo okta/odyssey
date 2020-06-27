@@ -1,4 +1,4 @@
-# Design tokens
+# Design Tokens
 
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">

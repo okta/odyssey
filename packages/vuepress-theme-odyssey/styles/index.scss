@@ -1,0 +1,71 @@
+@import '~@okta/odyssey';
+@import '~prismjs/themes/prism.css';
+
+.header-anchor {
+  display: none;
+}
+
+.odo-nav {
+  padding: $spacing-l;
+
+  header {
+    position: sticky;
+    top: $spacing-l;
+  }
+}
+
+.theme-odyssey {
+  display: grid;
+  grid-template-columns: 320px minmax(auto, auto);
+}
+
+.odyssey--main {
+  max-width: 1024px;
+  padding: $spacing-l $spacing-m;
+}
+
+.fade-leave-active,
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
+
+.fade-leave-to, /* .fade-leave-active below version 2.1.8 */
+.fade-enter {
+  opacity: 0;
+}
+
+.ods-nav-vertical {
+  .ods-nav-vertical--section {
+    margin: $spacing-m 0;
+  }
+
+  .ods-vertical-nav--heading {
+    font-size: $size-title-5;
+  }
+
+  .ods-vertical-nav--list {
+    padding-left: $spacing-xs;
+  }
+
+  .ods-vertical-nav--list-item {
+    list-style-type: none;
+    font-size: ms(0);
+
+    a {
+      display: block;
+      padding: $spacing-xs $spacing-s;
+      border-radius: $base-border-radius;
+      color: cv('gray', '900');
+      text-decoration: none;
+    }
+
+    &.is-ods-vertical-nav--list-item-selected a{
+      background: cv('blue', '000');
+      color: $color-primary-dark;
+      font-weight: 600;
+    }
+  }
+}
+
+// TODO: Refactor the contents of _legacy.scss and remove.
+@import 'legacy';

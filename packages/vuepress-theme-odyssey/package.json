@@ -1,11 +1,12 @@
 {
-  "name": "@okta/vuepress-theme-nimatron",
+  "name": "@okta/vuepress-theme-odyssey",
   "version": "0.3.0",
   "description": "VuePress theme for Odyssey Documentation",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "main": "index.js",
   "devDependencies": {
+    "@okta/odyssey": "^0.3.0",
     "node-sass": "4.13.1",
     "sass-loader": "8.0.2",
     "vuepress-plugin-clean-urls": "^1.1.1",

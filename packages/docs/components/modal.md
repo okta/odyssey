@@ -1,4 +1,4 @@
-# Modals
+# Modal
 
 ## General guidelines
 
