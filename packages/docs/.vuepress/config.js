@@ -1,6 +1,6 @@
 // .vuepress/config.js
 module.exports = {
-  theme: '@okta/vuepress-theme-odyssey',
+  theme: '@okta/vuepress-theme-nimatron',
   dest: 'dist',
   head: [
     [
@@ -22,7 +22,7 @@ module.exports = {
       }
     ],
   ],
-  // These plugins are required to instantiate choices.js and micromodal apropriately in our third party app.
+  // These plugins include vendor libraries which are required by Odyssey docs. 
   plugins: [
     require('./plugins/plugin-choices/index.js'),
     require('./plugins/plugin-micromodal/index.js')
