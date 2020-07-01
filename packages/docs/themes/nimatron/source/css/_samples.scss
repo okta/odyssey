@@ -294,6 +294,14 @@ $spacing-units: (
   background: $color-danger-light;
 }
 
+.sample-token--border-color-display {
+  background: $border-color-display;
+}
+
+.sample-token--border-color-ui {
+  background: $border-color-ui;
+}
+
 // Token Examples: Outline
 .sample-token--color-primary-outline {
   background: $focus-ring-primary;

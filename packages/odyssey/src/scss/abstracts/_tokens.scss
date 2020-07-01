@@ -54,6 +54,12 @@ $color-danger-base-disabled: cv('red', '300');
 $focus-ring-primary: $color-primary-light;
 $focus-ring-danger: $color-danger-light;
 
+// Borders
+$border-color-ui: cv('gray', '300');
+$border-color-display: cv('gray', '200');
+$base-border-radius: 4px;
+$border-default: 1px solid $border-color-ui;
+
 // Text Color
 $text-body: cv('gray', '900');
 $text-heading: cv('gray', '900');
@@ -87,9 +93,3 @@ $spacing-xs-em: $spacing-s-em / 2;
 
 $base-duration: 100ms;
 $base-timing: linear;
-
-// Borders
-$border-color-ui: cv('gray', '300');
-$border-color-display: cv('gray', '200');
-$base-border-radius: 4px;
-$border-default: 1px solid $border-color-ui;

@@ -49,6 +49,43 @@
 
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
+    Borders
+  </figcaption>
+  <table class="ods-table">
+    <thead>
+      <tr>
+        <th scope="column">Token Name</th>
+        <th scope="column">Example</th>
+        <th scope="column">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>$border-color-ui</code></td>
+        <td><span class="sample-token sample-token--border-color-ui"></span></td>
+        <td>gray, 300</td>
+      </tr>
+      <tr>
+        <td><code>$border-color-display</code></td>
+        <td><span class="sample-token sample-token--border-color-display"></span></td>
+        <td>gray, 200</td>
+      </tr>
+      <tr>
+        <td><code>$base-border-radius</code></td>
+        <td><span class="sample-token sample-token--color-danger-outline"></span></td>
+        <td>4px</td>
+      </tr>
+      <tr>
+        <td><code>$border-default</code></td>
+        <td><span class="sample-token sample-token--color-danger-outline"></span></td>
+        <td><code>1px solid $border-color-ui</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<figure class="ods-table--figure">
+  <figcaption class="ods-table--figcaption">
     Focus Ring
   </figcaption>
   <table class="ods-table">
