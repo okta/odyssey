@@ -29,6 +29,7 @@
   font-size: ms(0);
   font-weight: 600;
   line-height: $base-line-height;
+  white-space: nowrap;
 
   &:hover,
   &.is-ods-button-hover {
