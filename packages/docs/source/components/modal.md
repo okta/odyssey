@@ -53,11 +53,11 @@ Here are a few smells for when a modal dialog may be inappropriate:
             This is a Modal
           </h1>
         </header>
-        <main class="ods-modal--content" id="ods-modal-standard-content">
+        <div class="ods-modal--content" id="ods-modal-standard-content">
           <p>
             Try hitting the <kbd>tab</kbd> key and notice how the focus stays within the modal itself. Also, <kbd>esc</kbd> to close modal.
           </p>
-        </main>
+        </div>
         <footer class="ods-modal--footer">
           <button class="ods-button is-ods-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
           <button class="ods-button">Continue</button>
