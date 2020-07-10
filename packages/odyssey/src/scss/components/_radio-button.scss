@@ -43,7 +43,7 @@ $size-checkbox: 1em / 0.875;
 
   &:disabled {
     + .ods-radio--label {
-      color: $text-sub;
+      color: $text-body;
       cursor: not-allowed;
 
       &::before {
@@ -99,7 +99,7 @@ $size-checkbox: 1em / 0.875;
 
     &:disabled {
       + .ods-radio--label {
-        color: $text-danger-disabled;
+        color: $text-danger;
 
         &::before {
           border-color: $color-danger-base-disabled;
