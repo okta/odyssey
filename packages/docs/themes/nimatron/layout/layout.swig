@@ -65,11 +65,11 @@
             This is a Modal
           </h1>
         </header>
-        <main class="ods-modal--content" id="ods-modal-standard-content">
+        <div class="ods-modal--content" id="ods-modal-standard-content">
           <p>
             Try hitting the <kbd>tab</kbd> key and notice how the focus stays within the modal itself. Also, <kbd>esc</kbd> to close modal.
           </p>
-        </main>
+        </div>
         <footer class="ods-modal--footer">
           <button class="ods-button is-ods-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
           <button class="ods-button">Continue</button>
@@ -86,11 +86,11 @@
           </h1>
           <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
         </header>
-        <main class="ods-modal--content" id="ods-modal-danger-content">
+        <div class="ods-modal--content" id="ods-modal-danger-content">
           <p>
             Hold on there, pardner! You're about to delete all of your files. This is an irreversible action that will certainly leave your machine inoperable.
           </p>
-        </main>
+        </div>
         <footer class="ods-modal--footer">
           <button class="ods-button is-ods-button-secondary is-ods-button-danger" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
           <button class="ods-button is-ods-button-danger">Delete Everything</button>
