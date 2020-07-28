@@ -21,7 +21,7 @@
 
   .ods-text-input:disabled ~ &,
   .ods-text-input[readonly] ~ & {
-    color: $text-sub;
+    color: $text-body;
   }
 }
 
