@@ -25,7 +25,6 @@ import { resolveSidebarItems } from '../utils'
 export default {
   components: {
     Sidebar: () => import('../components/Sidebar.vue'),
-    Example: () => import('../global-components/Example.vue'),
     // Odyssey Vue Components
     OdsTabs: () => import('../global-components/OdsTabs.vue'),
   },
