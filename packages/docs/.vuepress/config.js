@@ -11,16 +11,6 @@ module.exports = {
         'og:image': 'https://www.okta.com/sites/default/files/okta-logo-onblue.png',
       },
     ],
-    [
-      'script', { 
-        'src': 'https://unpkg.com/micromodal@0.3.2/dist/micromodal.min.js',
-      }
-    ],
-    [
-      'script', { 
-        'src': 'https://unpkg.com/choices.js@9.0.1/public/assets/scripts/choices.min.js',
-      }
-    ],
   ],
   // These plugins include vendor libraries which are required by Odyssey docs. 
   plugins: [

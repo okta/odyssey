@@ -6999,10 +6999,10 @@ micromatch@^3.1.10, micromatch@^3.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.2"
 
-micromodal@^0.3.2:
-  version "0.3.2"
-  resolved "https://artifacts.aue1d.saasure.com:443/artifactory/api/npm/npm-okta-master/micromodal/-/micromodal-0.3.2.tgz#c5f8d3f80ca822a3a84df152a830bd4a7bf1ceb6"
-  integrity sha1-xfjT+AyoIqOoTfFSqDC9SnvxzrY=
+micromodal@^0.4.6:
+  version "0.4.6"
+  resolved "https://artifacts.aue1d.saasure.com:443/artifactory/api/npm/npm-okta-master/micromodal/-/micromodal-0.4.6.tgz#0425ad026c47923208cf826de6b58ed0693cb25a"
+  integrity sha1-BCWtAmxHkjIIz4Jt5rWO0Gk8slo=
 
 miller-rabin@^4.0.0:
   version "4.0.1"
