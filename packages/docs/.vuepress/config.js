@@ -8,7 +8,7 @@ module.exports = {
         'og:title': 'Odyssey, the Okta design system',
         'og:type': 'article',
         'og:url': 'https://design-docs.trexcloud.com',
-        'og:image': 'https://www.okta.com/sites/default/files/okta-logo-onblue.png',
+        'og:image': '/images/og-logo.png',
       },
     ],
   ],
