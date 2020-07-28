@@ -4,6 +4,7 @@
   "description": "VuePress theme for Odyssey Documentation",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
+  "private": true,
   "main": "index.js",
   "devDependencies": {
     "node-sass": "4.13.1",
