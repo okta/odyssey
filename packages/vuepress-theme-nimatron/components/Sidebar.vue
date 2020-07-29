@@ -15,7 +15,7 @@
 
     <nav class="nimatron--nav">
       <section class="nimatron--nav-section" v-for="(item, index) in items">
-        <h1 class="nimatron--nav-heading">{{item.title}}</h1>
+        <h1 class="nimatron--nav-heading" v-if="item.title">{{item.title}}</h1>
         <ul class="nimatron--nav-list" v-if="item.children">
           <li v-for="itemx in item.children" v-if="itemx.isVisible" class="nimatron--nav-item">
             <SidebarLink :item="itemx" />

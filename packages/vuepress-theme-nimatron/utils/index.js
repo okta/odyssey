@@ -36,7 +36,7 @@ export function ensureExt (path) {
 }
 
 export function resolveSidebarItems (page, regularPath, site, localePath) {
-  const { pages, themeConfig } = site
+  const { themeConfig } = site
   
   return themeConfig.nav
 }

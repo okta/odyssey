@@ -3,7 +3,6 @@
     v-if="isInternal"
     class="nav-link"
     :to="link"
-    :exact="exact"
   >
     {{ item.title }}
   </RouterLink>
@@ -15,7 +14,6 @@
     :rel="rel"
   >
     {{ item.title }}
-    <!-- <OutboundLink v-if="isBlankTarget" /> -->
   </a>
 </template>
 

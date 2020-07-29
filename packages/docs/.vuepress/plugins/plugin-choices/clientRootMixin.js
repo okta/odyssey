@@ -4,7 +4,7 @@ module.exports = {
       const Choices = module.default
       var selectExamples = document.querySelectorAll('[data-js-choices]');
       if (selectExamples) {
-        for (i = 0; i < selectExamples.length; ++i) {
+        for (i = 0; i < selectExamples.length; i += 1) {
           var element = selectExamples[i];
           new Choices(element, {
             searchEnabled: false,
@@ -41,6 +41,6 @@ module.exports = {
           });
         }
       }
-    })
+    });
   }
 }
