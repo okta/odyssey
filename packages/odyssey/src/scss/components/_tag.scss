@@ -12,20 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.ods-table {
-  .ods-button {
-    @extend %button-small;
-  }
+.ods-tag {
+  display: inline-block;
+  margin: 0 $spacing-xs $spacing-xs 0;
+  padding: 0 $spacing-xs-em;
+  border-radius: $base-border-radius;
+  background: cv('gray', '200');
+  color: $text-body;
 }
 
-.ods-form--header {
-  .ods-button {
-    @extend %button-small;
-  }
-
-  .ods-form:not([data-readonly]) & {
-    .ods-button {
-      display: none;
-    }
-  }
+.ods-tag--list {
+  margin-bottom: -$spacing-xs;
+  list-style-type: none;
 }

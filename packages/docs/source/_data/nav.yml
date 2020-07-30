@@ -1,37 +1,24 @@
-#guidelines:
-  #'data viz': '/guidelines/data-viz.html'
-
 'getting started':
   'UI status': '/getting-started/status.html'
   'Changelog': '/getting-started/changelog.html'
 
-'building blocks':
-  'color': '/building-blocks/color.html'
-  #'iconography': '/building-blocks/iconography.html'
-  'spacing': '/building-blocks/spacing.html'
-  'type': '/building-blocks/type.html'
-  'elements': '/building-blocks/elements.html'
+'Base':
+  'color': '/base/color.html'
+  'type': '/base/type.html'
+  'tokens': '/base/tokens.html'
+  'elements': '/base/elements.html'
 
 'components':
-  # Needs Docs  'banner': '/components/banner.html'
   'button': '/components/button.html'
-  #'callout': '/components/callout.html'
-  #'card': '/components/card.html'
   'checkbox': '/components/checkbox.html'
-  #'dropdown': '/components/dropdown.html'
   'form': '/components/form.html'
   'link': '/components/link.html'
-  #'meter': '/components/meter.html'
   'modal': '/components/modal.html'
-  #'navigation': '/components/navigation.html'
   'radio button': '/components/radio-button.html'
   'select': '/components/select.html'
-  #'switch': '/components/switch.html'
+  'status': '/components/status.html'
+  'tab': '/components/tab.html'
   'table': '/components/table.html'
-  #'toast': '/components/toast.html'
-  #'top bar': '/components/top-bar.html'
+  'tag': '/components/tag.html'
   'text input': '/components/text-input.html'
   'tooltip': '/components/tooltip.html'
-
-#layouts:
-  #'Docs - Prose': '/layouts/docs-prose.html'

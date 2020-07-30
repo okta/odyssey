@@ -12,20 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.ods-table {
-  .ods-button {
-    @extend %button-small;
-  }
-}
+.ods-status {
+  margin-bottom: $spacing-m;
 
-.ods-form--header {
-  .ods-button {
-    @extend %button-small;
-  }
-
-  .ods-form:not([data-readonly]) & {
-    .ods-button {
-      display: none;
-    }
+  &:last-child {
+    margin-bottom: 0;
   }
 }

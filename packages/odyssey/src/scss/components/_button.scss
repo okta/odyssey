@@ -16,14 +16,14 @@
   display: inline-block;
   position: relative;
   margin: 0;
-  padding: $em-tiny-spacing $em-base-spacing;
+  padding: $spacing-xs-em $spacing-s-em;
   transition-property: color, background-color, border-color, box-shadow;
   transition-duration: 100ms;
   transition-timing-function: linear;
   border: 1px solid transparent;
   border-radius: $base-border-radius;
-  background-color: cv('action');
-  box-shadow: 0 0 0 0 fauxpacity(cv('action', 'base'));
+  background-color: $color-primary-base;
+  box-shadow: 0 0 0 0 $color-primary-light;
   color: $white;
   font-family: $body-font-family;
   font-size: ms(0);
@@ -32,85 +32,87 @@
 
   &:hover,
   &.is-ods-button-hover {
-    border-color: cv('action', 'dark');
-    background-color: cv('action', 'dark');
+    border-color: $color-primary-dark;
+    background-color: $color-primary-dark;
   }
 
   &:focus,
   &.is-ods-button-focus {
-    outline: 0;
-    background-color: cv('action', 'dark');
-    box-shadow: 0 0 0 4px fauxpacity(cv('action', 'base'));
+    @include outline;
+
+    background-color: $color-primary-dark;
   }
 
   &:disabled {
     border-color: transparent;
-    background-color: fauxpacity(cv('action', 'base'));
+    background-color: $color-primary-light;
     cursor: not-allowed;
   }
 }
 
 .is-ods-button-secondary {
-  border-color: cv('action');
+  border-color: $color-primary-base;
   background-color: $white;
-  color: cv('action');
+  color: $color-primary-base;
 
   &:hover,
   &.is-ods-button-hover {
-    border-color: cv('action', 'dark');
-    background-color: cv('action', 'lightest');
-    color: cv('action', 'dark');
+    border-color: $color-primary-base;
+    background-color: $color-primary-base;
+    color: $white;
   }
 
   &:focus,
   &.is-ods-button-focus {
-    border-color: cv('action', 'dark');
-    background-color: cv('action', 'lightest');
-    color: cv('action', 'dark');
+    border-color: $color-primary-base;
+    background-color: $white;
+    color: $color-primary-base;
   }
 
   &:disabled {
-    border-color: fauxpacity(cv('action', 'base'));
+    border-color: $color-primary-light;
     background-color: $white;
-    color: fauxpacity(cv('action', 'base'));
+    color: $color-primary-light;
   }
 }
 
 .is-ods-button-danger {
-  background-color: cv('danger');
+  background-color: $color-danger-base;
 
   &:hover,
   &.is-ods-button-hover {
-    border-color: cv('danger', 'dark');
-    background-color: cv('danger', 'dark');
+    border-color: $color-danger-dark;
+    background-color: $color-danger-dark;
   }
 
   &:focus,
   &.is-ods-button-focus {
-    background-color: cv('danger', 'dark');
-    box-shadow: 0 0 0 4px fauxpacity(cv('danger', 'base'));
+    @include outline($focus-ring-danger);
+
+    background-color: $color-danger-dark;
   }
 
   &:disabled {
-    background-color: fauxpacity(cv('danger', 'base'));
+    border-color: $color-danger-light;
+    background-color: $color-danger-light;
   }
 
   &.is-ods-button-secondary {
-    border-color: cv('danger');
+    border-color: $color-danger-base;
     background-color: $white;
-    color: cv('danger');
+    color: $color-danger-base;
 
     &:focus,
     &.is-ods-button-focus {
-      border-color: cv('danger', 'dark');
-      background-color: cv('danger', 'lightest');
-      color: cv('danger', 'dark');
+      border-color: $color-danger-dark;
+      background-color: $color-danger-light;
+      color: $color-danger-dark;
     }
 
     &:disabled {
-      border-color: fauxpacity(cv('danger', 'base'));
+      border-color: $color-danger-light;
       background-color: $white;
-      color: fauxpacity(cv('danger', 'base'));
+      color: $color-danger-light;
     }
   }
 }
@@ -122,46 +124,47 @@
   &:hover,
   &.is-ods-button-hover {
     border-color: transparent;
-    background-color: cv('gray', '000');
+    background-color: cv('gray', '100');
   }
 
   &:focus,
   &.is-ods-button-focus {
-    background-color: cv('gray', '000');
-    box-shadow: 0 0 0 4px cv('action', 'base');
+    outline: 0;
+    background-color: cv('gray', '100');
   }
 
   &:disabled {
-    opacity: $more-opaque;
-    background-color: $white;
+    background-color: transparentize(cv('gray', '100'), 0.5);
+    color: cv('gray', '600');
   }
 }
 
 .is-ods-button-clear {
   background-color: transparent;
-  color: cv('action', 'base');
+  color: $color-primary-base;
 
   &:hover,
   &.is-ods-button-hover {
     border-color: transparent;
-    background-color: cv('action', 'lightest');
-    color: cv('action', 'dark');
+    background-color: cv('blue', '000');
+    color: $color-primary-dark;
   }
 
   &:focus,
   &.is-ods-button-focus {
-    background-color: cv('action', 'lightest');
-    color: cv('action', 'dark');
+    background-color: $white;
+    color: $color-primary-base;
   }
 
   &:disabled {
     background-color: transparent;
-    color: fauxpacity(cv('action', 'base'));
+    color: $color-primary-light;
   }
 }
 
 %button-small {
   font-size: ms(-1);
+  line-height: $title-line-height;
 }
 
 .is-ods-button-small {
