@@ -1,0 +1,27 @@
+{
+  "name": "@okta/odyssey-icons",
+  "version": "0.3.0",
+  "description": "The home for Odyssey's supported icons.",
+  "homepage": "https://github.com/okta/odyssey",
+  "license": "Apache-2.0",
+  "author": "Okta, Inc.",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "svgo": "svgo --config='.svgo.yml' -f figma -o src"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okta/odyssey.git"
+  },
+  "bugs": {
+    "url": "https://github.com/okta/odyssey/issues"
+  },
+  "devDependencies": {
+    "svgo": "^1.3.2"
+  }
+}
