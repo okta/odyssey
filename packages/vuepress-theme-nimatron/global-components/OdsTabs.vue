@@ -80,6 +80,8 @@ export default {
         case 'Home':
           this.tabFirst()
           break;
+        default:
+          break;
       }
 
       this.focusItem()
