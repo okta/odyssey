@@ -4,44 +4,49 @@ Tabs are a navigational component used to organize content by grouping similar i
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <OdsTabs label="Mocha Joe's Menu" :active="tabs.active" :tablist="tabs.tablist" :id="tabs.id">
-      <template slot="donuts-tab">
-        <p>Tab Panel: Donuts</p>
-      </template>
-      <template slot="pastries-tab">
-        <p>Tab Panel: Pastries</p>
-      </template>
-      <template slot="coffee-tab">
-        <p>Tab Panel: Coffee</p>
-      </template>
+    <OdsTabs label="User profile options" :active="tabs.active" :tablist="tabs.tablist" :id="tabs.id">
+      <template slot="tab-applications"><p>Tabpanel: Applications</p></template>
+      <template slot="tab-groups"><p>Tabpanel: Groups</p></template>
+      <template slot="tab-profile"><p>Tabpanel: Profile</p></template>
+      <template slot="tab-devices"><p>Tabpanel: Devices</p></template>
+      <template slot="tab-omm"><p>Tabpanel: OMM</p></template>
     </OdsTabs>
   </div>
 
 ```html
-<div id="example-0" class="ods-tabs">
-  <div role="tablist" aria-label="Mocha Joe's Menu" class="ods-tabs--tablist" style="
-    --ods-tabs-indicator-width:99px; 
-    --ods-tabs-indicator-pos-x:0px;
-  ">
-    <button role="tab" id="donuts-tab" tabindex="0" aria-controls="donuts-tab-tabpanel" class="ods-tabs--tab" aria-selected="true">
-        Donuts
+<div id="user-profile-tabs" class="ods-tabs" label="User profile options">
+  <div role="tablist" aria-label="" class="ods-tabs--tablist">
+    <button role="tab" id="tab-applications" aria-selected="true" tabindex="0" aria-controls="tab-applications-tabpanel" class="ods-tabs--tab">
+      Applications
     </button>
-    <button role="tab" id="pastries-tab" tabindex="-1" aria-controls="pastries-tab-tabpanel" class="ods-tabs--tab">
-        Pastries
+    <button role="tab" id="tab-groups" tabindex="-1" aria-controls="tab-groups-tabpanel" class="ods-tabs--tab">
+      Groups
     </button>
-    <button role="tab" id="coffee-tab" tabindex="-1" aria-controls="coffee-tab-tabpanel" class="ods-tabs--tab">
-        Coffee
+    <button role="tab" id="tab-profile" tabindex="-1" aria-controls="tab-profile-tabpanel" class="ods-tabs--tab">
+      Profile
+    </button>
+    <button role="tab" id="tab-devices" tabindex="-1" aria-controls="tab-devices-tabpanel" class="ods-tabs--tab">
+      Devices
+    </button>
+    <button role="tab" id="tab-omm" tabindex="-1" aria-controls="tab-omm-tabpanel" class="ods-tabs--tab">
+      OMM
     </button>
   </div>
   <div class="ods-tabs--tabpanel">
-    <div role="tabpanel" id="donuts-tab-tabpanel" aria-labelledby="donuts-tab" tabindex="0">
-        <p>Tab Panel: Donuts</p>
+    <div role="tabpanel" id="tab-applications-tabpanel" aria-labelledby="tab-applications" tabindex="0">
+      <p>Tabpanel: Applications</p>
     </div>
-    <div role="tabpanel" id="pastries-tab-tabpanel" aria-labelledby="pastries-tab" tabindex="0" hidden="hidden">
-        <p>Tab Panel: Pastries</p>
+    <div role="tabpanel" id="tab-groups-tabpanel" aria-labelledby="tab-groups" hidden="hidden" tabindex="0">
+      <p>Tabpanel: Groups</p>
     </div>
-    <div role="tabpanel" id="coffee-tab-tabpanel" aria-labelledby="coffee-tab" tabindex="0" hidden="hidden">
-        <p>Tab Panel: Coffee</p>
+    <div role="tabpanel" id="tab-profile-tabpanel" aria-labelledby="tab-profile" hidden="hidden" tabindex="0">
+      <p>Tabpanel: Profile</p>
+    </div>
+    <div role="tabpanel" id="tab-devices-tabpanel" aria-labelledby="tab-devices" hidden="hidden" tabindex="0">
+      <p>Tabpanel: Devices</p>
+    </div>
+    <div role="tabpanel" id="tab-omm-tabpanel" aria-labelledby="tab-omm" hidden="hidden" tabindex="0">
+      <p>Tabpanel: OMM</p>
     </div>
   </div>
 </div>
@@ -63,112 +68,12 @@ Tabs are a navigational component used to organize content by grouping similar i
 - Have more than 8 tabs in a tablist.
 - Add an icon to a tab. Icons should be reserved for very specific things. It can be hard to maintain consistency with use of icons as it pertains to their semantic meanings and meaning to Okta. Without an established icon repo, it’s best to not use them for now.
 
-<!-- ## Anatomy
-
-### Tablist
-The tablist is the parent element that houses tabs. It provides no style in and of itself.
-
-### Tab
-The tab is the element in which the user clicks to change to the corresponding tabpanel.
-
-### Tab indicator
-The tab indicator is a pseudo-element used to indicate the active tab. Its position changes by calculating the left offset, as well as the width of the active tab element. (See [Switching Tabs](#switching-tabs))
-
-### Tabpanel
-A tabpanel is a simple container element. For each tab, there is an associated tab panel which contains the content associated with that tab. -->
-
 ## Switching tabs
 
 The JS included here is for demo purposes only. For those implementing the Tab component from scratch, be sure to implement the behavior as follows:
 
-1. Update the CSS custom properties to animate the Tab indicator correctly. (See [CSS custom properties](#css-custom-properties))
-2. Set the select tab button's `aria-selected` attribute to `true`. If a different tab was previously selected, that tab button's `aria-selected` attribute must be set to `false`.
-3. The tabpanel corresponding to the tab button is shown. This is done by removing the `hidden` attribute on the tabpanel. If a different tabpanel was previously visible, the `hidden` attribute is applied to it.
-
-### CSS custom properties
-The tab indicator's left position and width are changed by updating CSS custom properties on the `.ods-tabs` element. The custom properties are as follow:
-
-<figure class="ods-table--figure">
-  <table class="ods-table">
-    <caption>Odyssey takes care to ensure apropriate keyboard navigation for the tab component.</caption>
-    <thead>
-      <tr>
-        <th scope="column">CSS variable</th>
-        <th scope="column">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>--ods-tabs-indicator-width</code></td>
-        <td>The width of the tab indicator</td>
-      </tr>
-      <tr>
-        <td><code>--ods-tabs-indicator-pos-x</code></td>
-        <td>The position of the tab indicator along the x-axis</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-
-<p style="margin: 1.5rem 0">In the following example, you can see the tab indicator position is on the second element:</p>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <div class="ods-tabs" id="example-1" style="
-      --ods-tabs-indicator-width:69px;
-      --ods-tabs-indicator-pos-x:75px;
-    ">
-      <div class="ods-tabs--tablist" role="tablist" aria-label="">
-        <button class="ods-tabs--tab" id="tablistitem-1-0" role="tab" aria-selected="false" aria-controls="tab-1-0">Agents</button>
-        <button class="ods-tabs--tab" id="tablistitem-1-1" role="tab" aria-selected="true" aria-controls="tab-1-1">People</button>
-        <button class="ods-tabs--tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-2">Settings</button>
-        <button class="ods-tabs--tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-3">Import</button>
-      </div>
-      <div class="ods-tabs--tabpanel">
-        <div id="tab-1-0" tabindex="0" role="tabpanel" aria-labelledby="tablistit-1-0" hidden="">
-          <p>Tab Panel 0: Agents</p>
-        </div>
-        <div id="tab-1-1" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-1">
-          <p>Tab Panel 1: People</p>
-        </div>
-        <div id="tab-1-2" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-2" hidden="">
-          <p>Tab Panel 2: Settings</p>
-        </div>
-        <div id="tab-1-3" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-3" hidden="">
-          <p>Tab Panel 3: Import</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-```html
-<div class="ods-tabs" id="example-1" style="
-    --ods-tabs-indicator-width:69px;
-    --ods-tabs-indicator-pos-x:75px;
-">
-  <div class="ods-tabs--tablist" role="tablist" aria-label="">
-    <button class="ods-tabs--tab" id="tablistitem-1-0" role="tab" aria-selected="false" aria-controls="tab-1-0">Agents</button>
-    <button class="ods-tabs--tab" id="tablistitem-1-1" role="tab" aria-selected="true" aria-controls="tab-1-1">People</button>
-    <button class="ods-tabs--tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-2">Settings</button>
-    <button class="ods-tabs--tab" id="tablistitem-1-2" role="tab" aria-selected="false" aria-controls="tab-1-3">Import</button>
-  </div>
-  <div class="ods-tabs--tabpanel">
-    <div id="tab-1-0" tabindex="0" role="tabpanel" aria-labelledby="tablistit-1-0" hidden="">
-      <p>Tab Panel 0: Agents</p>
-    </div>
-    <div id="tab-1-1" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-1">
-      <p>Tab Panel 1: People</p>
-    </div>
-    <div id="tab-1-2" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-2" hidden="">
-      <p>Tab Panel 2: Settings</p>
-    </div>
-    <div id="tab-1-3" tabindex="0" role="tabpanel" aria-labelledby="tablistitem-1-3" hidden="">
-      <p>Tab Panel 3: Import</p>
-    </div>
-  </div>
-</div>
-```
-</figure>
+1. Set the select tab button's `aria-selected` attribute to `true`. If a different tab was previously selected, that tab button's `aria-selected` attribute must be set to `false`.
+2. The tabpanel corresponding to the tab button is shown. This is done by removing the `hidden` attribute on the tabpanel. If a different tabpanel was previously visible, the `hidden` attribute is applied to it.
 
 
 ## Accessibility
@@ -226,12 +131,14 @@ export default {
   data () {
     return {
       tabs: {
-        id: 'example-0',
-        active: "donuts-tab",
+        id: 'user-profile-tabs',
+        active: "tab-applications",
         tablist: [
-          { id: "donuts-tab", label: 'Donuts' },
-          { id: "pastries-tab", label: 'Pastries' },
-          { id: "coffee-tab", label: 'Coffee' }
+          { id: "tab-applications", label: 'Applications' },
+          { id: "tab-groups", label: 'Groups' },
+          { id: "tab-profile", label: 'Profile' },
+          { id: "tab-devices", label: 'Devices' },
+          { id: "tab-omm", label: 'OMM' }
         ]
       }
     }
