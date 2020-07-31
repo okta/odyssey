@@ -41,7 +41,7 @@ Want to see Odyssey in action? Our `docs` package contains a static website styl
 yarn docs
 ```
 
-Once the website is built, visit <http://localhost:4000/> in your browser.
+Once the website is built, visit <http://localhost:8080/> in your browser.
 
 ## Packages
 
@@ -54,7 +54,9 @@ Packages are parsed from the `workspaces` property in [package.json](package.jso
 ```bash
 packages/
   docs/
+  odyssey-icons/
   odyssey/
+  vuepress-theme-nimatron/
 ```
 
 ### Versioning

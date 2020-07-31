@@ -32,7 +32,7 @@ You may need to [install yarn](https://yarnpkg.com/en/docs/install) if it's not 
 
 ### Serving the docs
 
-1. Start up Hexo:
+1. Start up VuePress:
 
     ```bash
     [okta/odyssey/packages/docs]$ yarn start
@@ -40,7 +40,7 @@ You may need to [install yarn](https://yarnpkg.com/en/docs/install) if it's not 
 
     This will generate a fresh set of docs and then start a webserver to view them.
 
-2. Go to <http://localhost:4000/>
+2. Go to <http://localhost:8080/>
 
 ### Odyssey development
 
