@@ -7,4 +7,4 @@ dist/
 source/font
 .deploy*/
 vendor/
-source/getting-started/changelog.md
+getting-started/changelog.md
