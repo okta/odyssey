@@ -1,6 +1,6 @@
 <template>
   <div class="ods-tabs" :id="id">     
-    <div class="ods-tabs--tablist" ref="tablist" role="tablist" aria-label="" :style="indicatorStyle" @keydown.left.right.end.home.prevent="handleTabFocus">
+    <div class="ods-tabs--tablist" ref="tablist" role="tablist" aria-label="" @keydown.left.right.end.home.prevent="handleTabFocus">
       <button 
         class="ods-tabs--tab"
         role="tab"
@@ -55,18 +55,9 @@ export default {
   },
   data() {
      return {
-      indicator: { width: 0, x: 0 },
       focusIndex: 0,
       focusCount: 0
      }
-  },
-  computed: {
-    indicatorStyle() {
-      return `
-        --ods-tabs-indicator-width: ${this.indicator.width}px;
-        --ods-tabs-indicator-pos-x: ${this.indicator.x}px;
-      ` 
-    },
   },
   methods: {
     tabSelect (event) {
@@ -74,25 +65,25 @@ export default {
       
       this.active = tab.id
       this.focusIndex = [...tab.parentElement.children].indexOf(tab)
-      this.indicator = {
-        width: tab.offsetWidth,
-        x: tab.offsetLeft
-      }
     },
     handleTabFocus ({ key }) {
-      if (key === 'ArrowLeft') {
-        this.tabPrev()
+      switch (key) {
+        case 'ArrowLeft':
+          this.tabPrev()
+          break;
+        case 'ArrowRight':
+          this.tabNext()
+          break;
+        case 'End':
+          this.tabLast()
+          break;
+        case 'Home':
+          this.tabFirst()
+          break;
+        default:
+          break;
       }
-      else if (key === 'ArrowRight') {
-        this.tabNext()
-      }
-      else if (key === 'End') {
-        this.tabLast()
-      }
-      else if (key === 'Home') {
-        this.tabFirst()
-      }
-      
+
       this.focusItem()
     },
     tabPrev () {
@@ -131,11 +122,6 @@ export default {
 
     this.focusCount = this.tablist.length - 1 // use zero index
     this.focusIndex = 1
-    
-    this.indicator = {
-      width: activeTab.offsetWidth,
-      x: activeTab.offsetLeft
-    }
   },
 }
 </script>
