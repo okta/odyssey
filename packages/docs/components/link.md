@@ -10,7 +10,6 @@ Links are navigation elements displayed as text. A link can open another page or
   <div class="nimatron--rendered">
     <p>Here is a <a href="#" class="is-link-default">regular link</a>.</p>
     <p>Here is a <a href="#" class="is-link-hover">hovered link</a>.</p>
-    <p>Here is a <a href="#" class="is-link-visited">visited link</a>.</p>
   </div>
 
   ```html
@@ -20,10 +19,6 @@ Links are navigation elements displayed as text. A link can open another page or
 </figure>
 
 The <code>:active</code> state of a link does not have any unique styling, so it matches the <code>:hover</code> styling.
-
-### Anchor
-
-An anchor link takes you to a location on the current page. It is typically used in documentation.
 
 ### Mailto
 
@@ -62,6 +57,10 @@ Use an external link when:
   ```
 </figure>
 
+### Visited Links
+
+Odyssey has removed unique styling for `:visited` links. This is an intentional compromise that preferences user security and ease of maintenance over the `:visited` affordance.
+
 ## Guidelines
 
 ### Best practices
@@ -75,7 +74,7 @@ Use an external link when:
 
 ### Styling
 
-By default, links embedded inside blocks of prose text are underlined, while links used inside navigational menus and nav bars do not require an underline and may be custom-styled. 
+By default, links embedded inside blocks of prose text are underlined, while links used inside navigational menus and nav bars do not require an underline and may be custom-styled.
 
 Link styling can also be adjusted for branding, theme, or contextual purposes. Examples include color, font size, or font weight. Be mindful of consistency with the system you are designing for.
 
