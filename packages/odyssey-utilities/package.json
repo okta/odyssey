@@ -1,0 +1,24 @@
+{
+  "name": "odyssey-utilities",
+  "version": "0.3.0",
+  "description": "Tailwind theme and plugin for Odyssey utility and component classes",
+  "homepage": "https://github.com/okta/odyssey#readme",
+  "main": "lib/odyssey-utilities.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okta/odyssey.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/okta/odyssey/issues"
+  }
+}
