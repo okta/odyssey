@@ -1,0 +1,17 @@
+{
+  "name": "@okta/vuepress-theme-nimatron",
+  "version": "0.4.0",
+  "description": "VuePress theme for Odyssey Documentation",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "private": true,
+  "main": "index.js",
+  "devDependencies": {
+    "@okta/odyssey": "^0.4.0",
+    "node-sass": "4.13.1",
+    "sass-loader": "8.0.2",
+    "vue-prism-component": "1.2.0",
+    "vuepress-plugin-clean-urls": "^1.1.1",
+    "vuepress-plugin-container": "^2.1.3"
+  }
+}

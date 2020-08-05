@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2020-08-05
+
+### Added
+
+- `@okta/odyssey-icons` package: includes an initial set of SVGs and process for batch optimizing via `svgo`
+
+### Changed
+
+- Changed the Odyssey documentation platform from `hexo` to `vuepress`
+- The documentation theme is now sourced via the private `@okta/vuepress-theme-nimatron` package
+- `.gitignore` now includes the auto-generated `CHANGELOG` to avoid creating duplicate files
+- `:disabled` and `:read-only` labels now share text and border styling
+- Tab indicators no longer animate via CSS vars
+
+### Removed
+
+- [Breaking Change] `$border-default` token has been removed
+- `:visited` link styling has been removed for user privacy
+
+### Fixed
+
+- Buttons labels no longer wrap (`white-spacing: nowrap`)
+
 ## [0.3.0] - 2020-06-24
 
 ### Added
@@ -46,25 +69,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update all HTML element examples
 
 ### Changed
-
-- bugfix/ee-463 - fixes table cell overflow by wrapping long strings
-- [Docs] Rename "Building Blocks" section to "Foundations"
-
-## [0.2.0] - 2020-04-30
-
-### Added
-- Status: New component and documentation
-- Tab: New component and documentation
-- Tag: New component and documentation
-
-### Changed
-- [Breaking Change] Rename `yellow` color variable to `caution`
-- All focus outline instances now use new outline mixin
-- Adds Status content type to Table component
-- [Docs] Fix misspelling in Form documentation
-- [Docs] Rename "Foundation" to "Base" in nav
-
-## [0.1.3] - 2020-04-10
 
 ### Added
 

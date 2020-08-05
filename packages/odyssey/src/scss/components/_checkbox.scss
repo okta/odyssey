@@ -59,7 +59,7 @@ $size-checkbox: 1em / 0.875;
 
   &:disabled {
     + .ods-checkbox--label {
-      color: $text-sub;
+      color: $text-body;
       cursor: not-allowed;
 
       &::before {
@@ -131,7 +131,7 @@ $size-checkbox: 1em / 0.875;
 
     &:disabled {
       + .ods-checkbox--label {
-        color: $text-danger-disabled;
+        color: $text-danger;
 
         &::before {
           background-color: $color-danger-light;
