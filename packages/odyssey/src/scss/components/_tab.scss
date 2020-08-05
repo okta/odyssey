@@ -19,18 +19,6 @@
 
 .ods-tabs--tablist {
   position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    bottom: -1px;
-    left: var(--ods-tabs-indicator-pos-x);
-    width: var(--ods-tabs-indicator-width);
-    height: 3px;
-    transition: left 230ms ease-in-out, width 230ms ease-in-out;
-    background: $color-primary-base;
-  }
 }
 
 .ods-tabs--tab {
@@ -43,6 +31,19 @@
   color: $text-body;
   font-family: inherit;
   font-weight: 600;
+
+  &[aria-selected='true'] {
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: $color-primary-base;
+    }
+  }
 }
 
 .ods-tabs--tabpanel [role='tabpanel'] {
