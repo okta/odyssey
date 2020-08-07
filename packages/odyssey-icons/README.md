@@ -1,3 +1,3 @@
 # `@okta/odyssey-icons`
 
-The future home for Odyssey's icons.
+This package contains pre-optimized SVGs for use as Icons with the Odyssey Design System.
