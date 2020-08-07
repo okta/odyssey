@@ -1,6 +1,6 @@
 // .vuepress/config.js
 module.exports = {
-  theme: '@okta/vuepress-theme-nimatron',
+  theme: '@okta/vuepress-theme-odyssey',
   dest: 'dist',
   head: [
     [
