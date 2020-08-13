@@ -12,8 +12,8 @@
     </header>
     <main class="odyssey--main">
       <article class="odo--article">
-        <Content />
         <TemplateComponent v-if="$page.frontmatter.template === 'component'" />
+        <Content v-if="$page.frontmatter.template !== 'component'" />
       </article>
     </main>
   </div>

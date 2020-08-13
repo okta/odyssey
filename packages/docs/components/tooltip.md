@@ -1,7 +1,51 @@
-# Tooltip
+---
+template: component
+name: Tooltip
+lead: A contextual pop-up that provides a label for or description of an element.
+tabs:
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML'
+    id: 'scss'
+  - label: 'Figma guide'
+    id: 'figma-guide'
+links:
+  - icon: github
+    label: View source
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_tooltip.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/pULYhG6KIhBsnQTFjkpTFv/Buttons?node-id=2660%3A365
+---
 
-A contextual pop-up that provides a label for or description of an element.
 
+::: slot overview
+<section class="odo-grid--2col">
+  <div>
+  
+
+  ## Guidelines
+
+  Tooltips should be employed to help users understand unknown or unfamiliar objects or states that aren't described by the visible UI.
+
+  Good tooltips provide info only when needed, require minimal user effort to trigger, are easily discoverable, and reduce screen clutter.
+  
+  </div>
+
+  <div>
+    <span class="has-ods-tooltip">
+      <button class="ods-button" aria-describedby="edit-label">
+        &#9998;
+      </button>
+      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+        Edit
+      </aside>
+    </span>
+  </div>
+
+</section>
+
+<!-- 
 ## Usage
 
 Tooltips should be employed to help users understand unknown or unfamiliar objects or states that aren't described by the visible UI.
@@ -331,4 +375,7 @@ When using tooltips to provide additional information, ensure that the element a
     </aside>
   </span>
   ```
-</figure>
+</figure> 
+-->
+
+:::

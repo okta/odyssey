@@ -1,7 +1,6 @@
 <template>
   <div :class="'odo-example is-odo-example-' + type">
     <h6 class="odo-example--title">
-      <OdsIcon :icon="type === 'positive' ? 'complete' : 'close'" /> 
       {{ type === 'positive' ? 'Do' : `Don't` }}
     </h6>
     <figure>
@@ -19,32 +18,20 @@
     .odo-example--title {
       display: flex;
       align-items: center;
-    }
+      font-weight: normal;
 
-    .ods-icon {
-      margin-right: $spacing-s;
-      border-radius: $base-border-radius;
-      color: $white;
-    }
-
-    .ods-icon svg {
-      content: '';
-      display: block;
-      width: 1.2857142857em;
-      height: 1.2857142857em;
-      
-    }
-
-    &.is-odo-example-positive {
-      .ods-icon {
-        background: $color-success-base;
+      &::before {
+        margin-right: $spacing-xs;
+        font-size: $size-title-5;
       }
     }
 
-    &.is-odo-example-negative {      
-      .ods-icon {
-        background: $color-danger-base;
-      }
+    &.is-odo-example-positive .odo-example--title::before {
+      content: '👍';
+    }
+
+    &.is-odo-example-negative .odo-example--title::before {      
+      content: '👎';
     }
 
     figure {

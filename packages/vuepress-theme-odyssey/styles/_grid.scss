@@ -1,0 +1,22 @@
+$grid-gap: $spacing-l;
+
+.odo-grid--1col {
+  display: grid;
+  grid-gap: $grid-gap 0;
+  grid-template-columns: 1fr;
+  margin-bottom: $grid-gap;
+}
+
+.odo-grid--2col {
+  display: grid;
+  grid-gap: $grid-gap $grid-gap;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: $grid-gap;
+}
+
+.odo-grid--3col {
+  display: grid;
+  grid-gap: $grid-gap $grid-gap;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: $grid-gap;
+}

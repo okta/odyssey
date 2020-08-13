@@ -4,11 +4,11 @@ name: Button
 lead: An Odyssey button appears as a rounded rectangle that is wider than it is tall, with a descriptive caption inflexs center. Users press the button by clicking it with a pointer controlled by a mouse, keystrokes can also be used to execute the command of a button.
 tabs:
   - label: 'Overview'
-    id: 'overview'
-  - label: 'SCSS'
-    id: 'scss'
+    id: 'odyssey-overview'
+  - label: 'HTML + SCSS'
+    id: 'odyssey-html-scss'
   - label: 'Figma guide'
-    id: 'figma-guide'
+    id: 'odyssey-figma-guide'
 links:
   - icon: github
     label: View source
@@ -18,7 +18,7 @@ links:
     href: https://www.figma.com/file/pULYhG6KIhBsnQTFjkpTFv/Buttons?node-id=2660%3A365
 ---
 
-::: slot overview
+::: slot odyssey-overview
 <section class="odo-grid--2col">
   <header class="odo-header">
 
@@ -47,7 +47,7 @@ links:
   <Example>
   
   ##### Secondary
-  
+
   Ideal for a secondary actions to compliment the Primary button. Similar to the Primary button, use this button sparingly to provide focus to the user. 
 
   It’s best to use this button on a white background.
@@ -126,10 +126,11 @@ links:
 
 <section class="odo-grid--2col">
   <header class="odo-header">
-
+  
   ## Guidelines
 
   Use buttons to indicate the important actions that a user can take. Don’t use buttons to navigate around the site or product; use links instead
+
 
   </header>
 
@@ -203,7 +204,7 @@ links:
 
 :::
 
-::: slot scss
+::: slot odyssey-html-scss
 
 ##### Primary
 
@@ -337,7 +338,7 @@ Semantic states can be combined to produce Secondary Danger styles.
 </figure>
 :::
 
-::: slot figma-guide
+::: slot odyssey-figma-guide
 <section class="odo-grid--2col">
   <header class="odo-header">
   

@@ -1,6 +1,8 @@
 // .vuepress/config.js
+const themeName = process.env.THEME || 'nimatron'
+
 module.exports = {
-  theme: '@okta/vuepress-theme-odyssey',
+  theme: `@okta/vuepress-theme-${themeName}`,
   dest: 'dist',
   head: [
     [
