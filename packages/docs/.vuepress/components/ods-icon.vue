@@ -9,9 +9,9 @@
   display: inline-block;
 
   svg {
-    fill: currentColor;
-    height: 24px;
     width: 24px;
+    height: 24px;
+    fill: currentColor;
   }
 }
 </style>
