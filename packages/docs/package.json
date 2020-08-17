@@ -9,7 +9,7 @@
     "prebuild": "yarn changelog",
     "build": "vuepress build",
     "start": "yarn build && vuepress dev",
-    "test": "echo \"Tests have not been implemented for ${npm_package_name}\" && exit 0",
+    "test": "echo \"Tests have not been implemented for ${npm_package_name}\" && exit 0"
   },
   "browserslist": [
     "last 2 versions"
