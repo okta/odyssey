@@ -20,13 +20,6 @@ module.exports = {
   themeConfig: {
     nav: [
       {
-        title: 'Getting Started', // required
-        children: [
-          { title: 'UI Status', link: '/getting-started/status', isVisible: true },
-          { title: 'Changelog', link: '/getting-started/changelog', isVisible: true},
-        ]
-      },
-      {
         title: 'Base',
         children: [
           { title: 'Color', link: '/base/color', isVisible: true },
@@ -63,6 +56,11 @@ module.exports = {
           { title: 'Tooltip', link: '/components/tooltip', isVisible: true },
           { title: 'Top Bar', link: '/components/top-bar', isVisible: false },
         ],
+      },
+      {
+        children: [
+          { title: 'Changelog', link: 'https://github.com/okta/odyssey/blob/master/packages/odyssey/CHANGELOG.md', isVisible: true},
+        ]
       },
     ]
   }

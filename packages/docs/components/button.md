@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Button
 
 Buttons are primarily used for in-page interactions like form submissions.
@@ -162,3 +164,5 @@ Semantic states can be combined to produce Secondary Danger styles.
     </tbody>
   </table>
 </figure>
+
+:::

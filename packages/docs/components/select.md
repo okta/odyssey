@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Select
 
 The Select input is a form element that provides a menu of options for the user to... select.
@@ -561,3 +563,5 @@ Choices.js doesn't pass along unknown `data-*` attributes, so `data-invalid` sho
   </fieldset>
   ```
 </figure>
+
+:::

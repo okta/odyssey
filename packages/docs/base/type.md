@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Type
 
 Okta’s typography system is designed for clarity in readability and hierarchy.
@@ -185,3 +187,5 @@ Following these guidelines will ensure a clean document outline, which will incr
     <a href="/components/text-input.html">Text Input</a>
   </li>
 </ul>
+
+:::

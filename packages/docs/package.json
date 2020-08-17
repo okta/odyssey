@@ -13,7 +13,6 @@
     "build": "vuepress build",
     "start": "yarn build && vuepress dev",
     "test": "echo \"Tests have not been implemented for ${npm_package_name}\" && exit 0",
-    "changelog": "cp ../odyssey/CHANGELOG.md ./getting-started/changelog.md"
   },
   "browserslist": [
     "last 2 versions"

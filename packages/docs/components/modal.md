@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Modal
 
 ## General guidelines
@@ -130,3 +132,5 @@ For users happy with their new context, we ensure their attention won't be misdi
     <a href="https://micromodal.now.sh/">Micromodal.js</a> - JS Documentation
   </li>
 </ul>
+
+:::
