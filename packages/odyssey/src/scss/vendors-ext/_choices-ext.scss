@@ -289,8 +289,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     .is-ods-select-disabled & {
-      border: 1px solid darken(cv('gray', '300'), 35%);
-      background-color: darken(cv('gray', '300'), 25%);
+      border: 1px solid cv('gray', '500');
+      background-color: cv('gray', '500');
     }
   }
 }

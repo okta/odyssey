@@ -1,4 +1,4 @@
-# Type
+# Typography
 
 Okta’s typography system is designed for clarity in readability and hierarchy.
 
