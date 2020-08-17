@@ -17,8 +17,6 @@
 </style>
 
 <script>
-import html from '@okta/odyssey-icons/src/back.svg';
-
 export default {
     name: 'ods-icon',
     props: {
