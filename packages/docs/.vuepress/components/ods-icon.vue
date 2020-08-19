@@ -18,12 +18,12 @@
 
 <script>
 export default {
-    name: 'ods-icon',
-    props: {
-        icon: {
-            type: String,
-            default: null
-        }
+  name: 'ods-icon',
+  props: {
+    icon: {
+      type: String,
+      required: true
     }
+  }
 }
 </script>
