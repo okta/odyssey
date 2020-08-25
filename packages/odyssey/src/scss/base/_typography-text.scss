@@ -46,7 +46,7 @@ sub {
 }
 
 blockquote {
-  margin: 0 0 2em;
+  margin: 0 0 $spacing-a11y-bottom;
   padding: 0 0 0 $spacing-s;
   border-left: 3px solid $border-color-ui;
 
@@ -57,7 +57,7 @@ blockquote {
 
 p {
   max-width: $max-line-length;
-  margin-bottom: 2em;
+  margin-bottom: $spacing-a11y-bottom;
   font-size: $size-body-sentence;
 
   &:last-child {

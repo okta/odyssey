@@ -218,7 +218,11 @@ $less-opaque: 0.3;
 
 .nimatron--example {
   max-width: 100%;
-  margin-bottom: $spacing-m;
+  margin-bottom: $spacing-a11y-bottom;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .nimatron--rendered {

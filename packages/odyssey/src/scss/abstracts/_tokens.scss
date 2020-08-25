@@ -69,19 +69,22 @@ $spacing-xl: $spacing-l * 2;
 $spacing-s: $spacing-m / 2;
 $spacing-xs: $spacing-s / 2;
 
+// Relative Spacing
+$spacing-m-em: 1em * $base-line-height;
+$spacing-l-em: $spacing-m-em * 2;
+$spacing-xl-em: $spacing-l-em * 2;
+$spacing-s-em: $spacing-m-em / 2;
+$spacing-xs-em: $spacing-s-em / 2;
+
+// A11y Spacing
+$spacing-a11y-bottom: 2em;
+
 // Input disabled
 $bg-input-disabled: cv('gray', '000');
 $border-input-disabled: cv('gray', '200');
 
 // TODO: Sort the rest out, these come from a now defunct variables.scss file.
 //       need to be documented
-
-// Spacing Variables
-$spacing-m-em: 1em * $base-line-height;
-$spacing-l-em: $spacing-m-em * 2;
-$spacing-xl-em: $spacing-l-em * 2;
-$spacing-s-em: $spacing-m-em / 2;
-$spacing-xs-em: $spacing-s-em / 2;
 
 // Animation/Transition Baselines
 
