@@ -46,14 +46,18 @@ sub {
 }
 
 blockquote {
-  margin: 0 0 $spacing-s;
+  margin: 0 0 2em;
   padding: 0 0 0 $spacing-s;
   border-left: 3px solid $border-color-ui;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 p {
   max-width: $max-line-length;
-  margin-bottom: $spacing-s;
+  margin-bottom: 2em;
   font-size: $size-body-sentence;
 
   &:last-child {
