@@ -24,4 +24,8 @@
   option {
     padding: 0;
   }
+
+  &[multiple] {
+    background-image: none;
+  }
 }
