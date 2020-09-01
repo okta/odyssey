@@ -102,13 +102,16 @@ Options may also be grouped within the Select dropdown list to help guide users.
 
 Odyssey provides styling and guidelines for both plain HTML `select` elements, as well as those using the <a href="https://github.com/jshjohnson/Choices">Choices.js</a> library. Demos beyond this section will provide examples of both implementations.
 
-Currently, only `select`'s normal functionality is supported when using Choices.js. We recommend the following configuration as a baseline to ensure proper class names are applied:
+We recommend using the Choices.js variant to enable more consistent UI. If you're disallowed from utilizing third-party libraries, we also supply an HTML-only variant.
+
+We use the following configuration as a baseline to ensure proper class names are applied:
 
 ```javascript
 new Choices(element, {
   searchEnabled: false,
   shouldSort: false,
   itemSelectText: '',
+  removeItemButton: true,
   classNames: {
     containerOuter: 'ods-select',
     containerInner: 'ods-select--inner',
@@ -564,4 +567,87 @@ Choices.js doesn't pass along unknown `data-*` attributes, so `data-invalid` sho
   ```
 </figure>
 
+## Variants
+
+### Multi-Select
+
+If the user can select more than one option, you can use the `multiple` attribute to enable multi-select behavior.
+
+By default, the Choices.js variant will allow users to type to filter their available options. 
+
+#### Choices.js
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" multiple required>
+          <option value="red">Red</option>
+          <option value="orange">Orange</option>
+          <option value="yellow">Yellow</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+          <option value="indigo">Indigo</option>
+          <option value="violet">Violet</option>
+        </select>
+        <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
+        <option value="red">Red</option>
+        <option value="orange">Orange</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="indigo">Indigo</option>
+        <option value="violet">Violet</option>
+      </select>
+      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+#### Vanilla HTML
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <select class="ods-select" id="fav-color" name="fav-color" multiple required>
+          <option value="red">Red</option>
+          <option value="orange">Orange</option>
+          <option value="yellow">Yellow</option>
+          <option value="green">Green</option>
+          <option value="blue">Blue</option>
+          <option value="indigo">Indigo</option>
+          <option value="violet">Violet</option>
+        </select>
+        <label class="ods-label" for="fav-color">Favorite color</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" id="fav-color" name="fav-color" required>
+        <option value="red">Red</option>
+        <option value="orange">Orange</option>
+        <option value="yellow">Yellow</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="indigo">Indigo</option>
+        <option value="violet">Violet</option>
+      </select>
+      <label class="ods-label" for="fav-color">Favorite color</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
 :::
