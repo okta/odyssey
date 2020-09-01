@@ -51,7 +51,7 @@ plugins:
   - removeEmptyContainers: true
   - mergePaths: true
   - removeUnusedNS: true
-  - sortAttrs: true
+  - sortAttrs: false
   - sortDefsChildren: true
   - removeTitle: false
   - removeDesc: false
@@ -59,7 +59,8 @@ plugins:
   - removeAttrs: false
   - removeAttributesBySelector: false
   - removeElementsByAttr: false
-  - addClassesToSVGElement: "ods-icon"
+  - addClassesToSVGElement:
+      classNames: ["ods-icon"]
   - removeStyleElement: true
   - removeScriptElement: true
   - addAttributesToSVGElement: false
