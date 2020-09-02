@@ -133,7 +133,6 @@ For users happy with their new context, we ensure their attention won't be misdi
   </li>
 </ul>
 
-:::
 
 <!-- The following are the modals shown to the user on the site -->
 <div class="ods-modal" id="ods-modal-standard" aria-hidden="true">
@@ -158,3 +157,4 @@ For users happy with their new context, we ensure their attention won't be misdi
     </div>
   </div>
 </div>
+:::
