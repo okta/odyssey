@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Color
 
 Here's a quick overview of the colors available in Odyssey and some guidelines for their use.
@@ -504,3 +506,11 @@ Here's a quick overview of the colors available in Odyssey and some guidelines f
     </tbody>
   </table>
 </figure>
+
+<ul class="sample--color-list">
+  <li class="sample--color is-sample-purple-500"></li>
+  <li class="sample--color is-sample-turquoise-500"></li>
+  <li class="sample--color is-sample-orange-500"></li>
+</ul>
+
+:::

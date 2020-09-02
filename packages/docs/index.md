@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Odyssey - the Okta design system
 
 This is the home for Okta's Design System "Odyssey". Here you will find assets to build high quality UIs along with documentation to guide you along the way.
@@ -75,3 +77,5 @@ Now any changes you make in your local version of `@okta/odyssey` should be refl
 ## Questions?
 
 Stop by [#odyssey](https://okta.slack.com/messages/C7T2H3KNJ) and say hello (Oktanauts-only for now).
+
+:::

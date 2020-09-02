@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Modal
 
 ## General guidelines
@@ -155,3 +157,4 @@ For users happy with their new context, we ensure their attention won't be misdi
     </div>
   </div>
 </div>
+:::

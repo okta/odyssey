@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Tooltip
 
 A contextual pop-up that provides a label for or description of an element.
@@ -332,3 +334,5 @@ When using tooltips to provide additional information, ensure that the element a
   </span>
   ```
 </figure>
+
+:::

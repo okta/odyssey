@@ -78,6 +78,17 @@ $less-opaque: 0.3;
     color: $white;
     text-decoration: none;
 
+    &[target='_blank']:not([href^='mailto:'])::after {
+      content: '';
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      margin-left: 0.2em;
+      background-image: get-icon('external', $white);
+      background-repeat: no-repeat;
+      vertical-align: middle;
+    }
+    
     &::before {
       content: '';
       position: absolute;
@@ -263,7 +274,7 @@ h1 {
   }
 }
 
-.content__default { // stylelint-disable
+.content__nimatron-all { // stylelint-disable
   > h1,
   > h2,
   > h3,
