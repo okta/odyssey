@@ -86,18 +86,16 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 }
 
-.ods-select[data-type*='select-one'] {
-  .ods-select--inner {
-    padding-bottom: $spacing-xs;
-  }
-
+.ods-select[data-type*='select-one'],
+.ods-select[data-type*='select-multiple'] {
   .ods-select--input {
-    display: block;
+    display: inline-block;
     width: 100%;
-    margin: 0;
-    padding: $spacing-s;
-    border-bottom: 1px solid $border-color-ui;
-    background-color: $white;
+    margin: 0 0 $spacing-xs;
+    padding: 0;
+    border-bottom: 0;
+    background-color: transparent;
+    vertical-align: top;
   }
 
   .ods-select--button {
@@ -163,31 +161,40 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 }
 
+.ods-select[data-type*='select-one'] {
+  .ods-select--button {
+    display: none; // remove this functionality for Single Select, unavailable via JS
+  }
+}
+
 .ods-select[data-type*='select-multiple'],
 .ods-select[data-type*='text'] {
   .ods-select--inner {
+    padding-bottom: 0;
     cursor: text;
   }
 
   .ods-select--button {
     display: inline-block;
     position: relative;
-    width: $choices-button-dimension;
+    width: 1em;
+    height: 1em;
     margin-top: 0;
-    margin-right: -$choices-button-offset/2;
+    margin-right: 0;
     margin-bottom: 0;
-    margin-left: $choices-button-offset;
-    padding-left: $choices-button-offset * 2;
-    border-left: 1px solid darken($color-primary-base, 10%);
-    border-radius: 0;
-    opacity: 0.75;
-    background-image: $choices-icon-cross;
-    background-size: $choices-button-dimension;
+    margin-left: $spacing-s;
+    padding: 0;
+    border-radius: 100%;
+    opacity: 1;
+    background-color: cv('blue', '400');
+    background-image: get-icon('close', $white);
+    background-position: center;
+    background-size: ($base-line-height * 1em) - 1em; // funky math to evade half-pixel rounding errors
     line-height: 1;
 
     &:hover,
     &:focus {
-      opacity: 1;
+      background-color: $color-primary-base;
     }
   }
 }
@@ -255,30 +262,30 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 
   .ods-select--item {
     display: inline-block;
-    margin-right: 3.75px;
-    margin-bottom: 3.75px;
-    padding: 4px $spacing-s;
-    border: 1px solid darken($color-primary-base, 5%);
-    border-radius: ($base-border-radius * 2);
-    background-color: $color-primary-base;
-    color: $white;
+    margin-right: $spacing-xs;
+    margin-bottom: $spacing-xs;
+    padding: 0 $spacing-s;
+    border: 1px solid $color-primary-light;
+    border-radius: 1em;
+    background-color: cv('blue', '000');
+    color: $text-body;
     font-size: $size-body-base;
-    font-weight: 500;
+    font-weight: 400;
+    line-height: calc((#{$base-line-height} * 1em) - 2px); // Adjust for pill border
     word-break: break-all;
     vertical-align: middle;
 
     &[data-deletable] {
-      padding-right: 5px;
+      padding-right: $spacing-xs;
     }
 
     [dir='rtl'] & {
       margin-right: 0;
-      margin-left: 3.75px;
+      margin-left: $spacing-xs;
     }
 
     &.is-ods-select-highlighted {
-      border: 1px solid darken($color-primary-base, 10%);
-      background-color: darken($color-primary-base, 5%);
+      background-color: $color-primary-light;
     }
 
     .is-ods-select-disabled & {
