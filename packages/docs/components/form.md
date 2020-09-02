@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Form
 
 Forms are a container for interactive controls used to submit information.
@@ -569,3 +571,5 @@ Regardless of styling, users with low digital literacy may not understand the pu
     </a>
   </li>
 </ul>
+
+:::
