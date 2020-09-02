@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Iconography
 
  An icon is a graphic that represents an idea or concept, independent of any particular language, specific words, or phrases. Below are icons that can be used for design projects in Odyssey.
@@ -214,3 +216,5 @@ As a result, this will drastically reduce the amount of icons we have, increase 
 By default, all icons are Grey 900. If using an icon on top of a solid color, for example in a primary button, it should be White. As a general guideline, icons should be the same color as their accompanying text.
 
 As an example, if you have a “Delete policy” button, do not colorize the delete button or trashcan icon with Green 400.
+
+:::

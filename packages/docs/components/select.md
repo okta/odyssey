@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Select
 
 The Select input is a form element that provides a menu of options for the user to... select.
@@ -648,3 +650,4 @@ By default, the Choices.js variant will allow users to type to filter their avai
   </fieldset>
   ```
 </figure>
+:::

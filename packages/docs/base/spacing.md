@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Spacing
 
 
@@ -83,3 +85,5 @@
     </tbody>
   </table>
 </figure>
+
+:::

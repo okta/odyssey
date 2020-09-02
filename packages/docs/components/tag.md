@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Tag
 
 Tags are used to help describe and differentiate an entity or object. Think of them as “adjectives” in your UI toolbox that make navigating and parsing content easier.
@@ -21,3 +23,5 @@ For example, "Cat" may be an individual "Animal" object that has the Tags "Small
   </ul>
   ```
 </figure>
+
+:::
