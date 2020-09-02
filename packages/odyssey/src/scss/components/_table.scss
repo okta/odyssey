@@ -45,20 +45,20 @@
 
   thead {
     th {
-      border-top: 1px solid $border-color-ui;
-      border-bottom: 1px solid $border-color-ui;
+      border-top: 1px solid $border-color-display;
+      border-bottom: 1px solid $border-color-display;
     }
   }
 
   tbody {
     [rowspan] {
-      border-bottom: 1px solid cv('gray', '200');
+      border-bottom: 1px solid $border-color-display;
     }
 
     tr {
       td,
       th {
-        border-bottom: 1px solid cv('gray', '200');
+        border-bottom: 1px solid $border-color-display;
       }
 
       &:first-child {
