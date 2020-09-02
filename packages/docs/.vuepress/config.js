@@ -30,10 +30,11 @@ module.exports = {
         title: 'Base',
         children: [
           { title: 'Color', link: '/base/color', isVisible: true },
-          { title: 'Elements', link: '/base/elements', isVisible: true },
           { title: 'Design Tokens', link: '/base/Tokens', isVisible: true },
-          { title: 'Type', link: '/base/type', isVisible: true },
+          { title: 'Elements', link: '/base/elements', isVisible: true },
           { title: 'Grid', link: '/base/grid', isVisible: false },
+          { title: 'Iconography', link: '/base/iconography', isVisible: true },
+          { title: 'Typography', link: '/base/typography', isVisible: true },
         ]
       },
       {
