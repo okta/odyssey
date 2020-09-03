@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2020-09-02
+
+### Added
+- [Docs] Iconography documentation, available at /base/iconography
+- Basic styles for inline Icon display
+- Multi-Select variant for Select (both Choices.js and HTML-only)
+- Button w/ Icon variant has been added to Button
+- Blue, 400 is now available for use via Sass maps (no Token)
+- Gray, 500 is now available for use via Sass maps (no Token)
+
+### Changed
+- [Docs] Type documentation is now titled "Typography" and located at /base/typography
+- [Docs] Documentation now references this CHANGELOG on GH directly rather than copying over
+- [Docs] Color documentation has been revamped entirely
+- [Docs] Documentation sorts now utilizes Vuepress slots for future-friendliness
+- Recommended Choices.js configuration updated (non-breaking)
+- SVGO configuration no longer sorts attributes, now adds `.ods-icon`
+- [Breaking Change] "info", "back", and "forward" icons have been renamed to "get-info", "go-backward", and "go-forward"
+- `$border-color-ui` is now a11y-compliant, utilizes Gray, 500
+- `blockquote`, Form, Table, and Tab borders now use `$border-color-display` as they are not a11y-constrained
+
+### Removed
+- [Docs] Type test page has been removed from docs
+- [Breaking Change] Grays 300 and 400 have been removed from available use
+
+### Fixed
+- [Docs] Modal examples now work as intended
+- [Docs] `address` example now renders correctly
+- All Icons now use a 14px grid instead of 24px for optimal display
+
 ## [0.4.0] - 2020-08-05
 
 ### Added

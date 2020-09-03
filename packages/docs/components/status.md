@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Status
 
 Status is used to keep users informed, by providing appropriate feedback on particular concepts or entities. For Okta, status can be used to display overall operational status all the way down to very granular concepts, like user status.
@@ -211,3 +213,5 @@ If the current state of Status may change asynchronously while a user is visitin
   </dl>
   ```
 </figure>
+
+:::

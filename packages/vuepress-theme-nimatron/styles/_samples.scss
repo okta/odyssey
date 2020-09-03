@@ -34,6 +34,11 @@
   }
 }
 
+.sample--emoji {
+  display: inline-block;
+  margin-right: $spacing-xs;
+}
+
 .sample--layout {
   max-width: $max-line-length;
 }
@@ -45,6 +50,22 @@
     margin-left: $spacing-m;
   }
 }
+
+// Special table content types for styles
+
+.ods-table {
+  td, 
+  th {
+    &.is-sample-table-swatch {
+      text-align: center;
+    }    
+  }
+}
+
+.is-sample-table-token {
+  white-space: nowrap;
+}
+
 //// Generate Conversion Classes
 
 .sample--list {
@@ -163,50 +184,19 @@ $spacing-units: (
   }
 }
 
-.sample--colors-wrap {
-  /* Fallback Support */
-  display: flex;
-  display: grid;
-  grid-gap: $spacing-m;
-  grid-template-columns: repeat(auto-fill, minmax(($max-line-length / 2), 1fr));
-  flex-wrap: wrap;
-}
-
-.sample--color-list {
-  margin-bottom: $spacing-l;
-  overflow: hidden;
+.sample-color {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
   border-radius: $base-border-radius;
-}
-
-.sample--color {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0;
-  padding: $spacing-xs $spacing-s;
+  vertical-align: middle;
 }
 
 @each $hue, $variants in $colors {
   @each $variant, $color in $variants {
-    .is-sample-#{$hue}-#{$variant} {
+    .sample-color--#{$hue}-#{$variant} {
       background: cv($hue, $variant);
-
-      &::before,
-      &::after {
-        position: static;
-        padding: $spacing-xs;
-        background: $white;
-        font-size: $size-body-caption;
-        font-weight: 400;
-      }
-
-      &::before {
-        content: '#{$hue}, #{$variant}';
-      }
-
-      &::after {
-        content: '#{$color}';
-      }
     }
   }
 }
@@ -247,8 +237,9 @@ $spacing-units: (
 
 .sample-token {
   display: block;
-  height: 7px;
-  margin: $spacing-xs auto 0;
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
   border-radius: $base-border-radius;
 }
 

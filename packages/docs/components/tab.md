@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Tab
 
 Tabs are a navigational component used to organize content by grouping similar information on the same page. They allow content to be viewed without having to navigate away from that page or route.
@@ -145,3 +147,5 @@ export default {
   }
 }
 </script>
+
+:::

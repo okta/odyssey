@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Design Tokens
 
 <figure class="ods-table--figure">
@@ -206,3 +208,5 @@
     </tbody>
   </table>
 </figure>
+
+:::

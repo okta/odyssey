@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Table
 
 A table is a structured set of data made up of rows and columns also known as tabular data. They allow you to quickly and easily look up values that indicate some kind of connection between different types of data or content.
@@ -879,3 +881,5 @@ export default {
   }
 }
 </script>
+
+:::

@@ -12,7 +12,7 @@
     </Sidebar>
     <main class="nimatron--main">
       <article class="nimatron--article">
-          <Content />
+          <Content slot-key="nimatron-all" />
       </article>
     </main>
   </div>
