@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Modal
 
 ## General guidelines
@@ -130,3 +132,29 @@ For users happy with their new context, we ensure their attention won't be misdi
     <a href="https://micromodal.now.sh/">Micromodal.js</a> - JS Documentation
   </li>
 </ul>
+
+
+<!-- The following are the modals shown to the user on the site -->
+<div class="ods-modal" id="ods-modal-standard" aria-hidden="true">
+    <div class="ods-modal--overlay" tabindex="-1" data-micromodal-close>
+      <div class="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title">
+        <header class="ods-modal--header">
+          <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
+          <h1 class="ods-modal--title" id="ods-modal-standard-title">
+            This is a Modal
+          </h1>
+        </header>
+        <main class="ods-modal--content" id="ods-modal-standard-content">
+          <p>
+            Try hitting the <kbd>tab</kbd> key and notice how the focus stays within the modal itself. Also, <kbd>esc</kbd> to close modal.
+          </p>
+        </main>
+        <footer class="ods-modal--footer">
+          <button class="ods-button is-ods-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
+          <button class="ods-button">Continue</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>
+:::

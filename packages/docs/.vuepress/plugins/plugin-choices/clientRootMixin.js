@@ -10,6 +10,7 @@ module.exports = {
             searchEnabled: false,
             shouldSort: false,
             itemSelectText: '',
+            removeItemButton: true,
             classNames: {
               containerOuter: 'ods-select',
               containerInner: 'ods-select--inner',

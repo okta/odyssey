@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Elements
 
 Odyssey takes care to provide additional style to the following HTML elements by default.
@@ -27,6 +29,7 @@ Odyssey takes care to provide additional style to the following HTML elements by
       <a href="tel:+18887227871">(888) 722-7871</a>
     </address>
   </div>
+
 ```html
 <p>Okta Headquarters</p>
 <address>
@@ -328,3 +331,5 @@ You can also nest `strong`. Doing so will provide additional style.
 <p>2<sup>2</sup>(<var>x</var>+3)+9-5=32</p>
 ```
 </figure>
+
+:::
