@@ -6,9 +6,9 @@
   "license": "Apache-2.0",
   "main": "layouts/Layout.vue",
   "devDependencies": {
-    "@okta/odyssey": "^0.3.0",
-    "@okta/odyssey-icons": "^0.3.0",
-    "@okta/prism-theme-odyssey": "^0.3.0",
+    "@okta/odyssey": "^0.5.0",
+    "@okta/odyssey-icons": "^0.5.0",
+    "@okta/prism-theme-odyssey": "^0.5.0",
     "html-loader": "^1.1.0",
     "node-sass": "4.13.1",
     "prismjs": "^1.14.0",

@@ -1,3 +1,12 @@
+---
+template: component
+name: Form
+lead: Forms are a container for interactive controls used to submit information.
+tabs:
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
+---
+
 ::: slot nimatron-all
 
 # Form

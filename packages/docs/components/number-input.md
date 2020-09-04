@@ -1,3 +1,11 @@
+---
+template: component
+name: Number Input
+tabs:
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
+---
+
 ::: slot nimatron-all
 
 # Number input

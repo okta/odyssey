@@ -4,7 +4,7 @@
       <Sidebar
         :items="SidebarItems"
       >
-        <template slot="Sidebar-top"><h3>Odyssey UI</h3></template>
+        <template slot="Sidebar-top"><h3>Odyssey Design System</h3></template>
         <template #bottom>
           <slot name="Sidebar-bottom" />
         </template>

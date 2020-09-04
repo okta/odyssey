@@ -1,3 +1,11 @@
+---
+template: component
+name: Modal
+tabs:
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
+---
+
 ::: slot nimatron-all
 
 # Modal

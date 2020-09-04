@@ -17,11 +17,11 @@
       </div>
     </header>
 
-    <OdsTabs :label="$page.frontmatter.name + ' documentation sections'" active="odyssey-overview" :tablist="$page.frontmatter.tabs" id="tabs-doc-sections">
+    <ods-tabs :label="$page.frontmatter.name + ' documentation sections'" active="odyssey-overview" :tablist="$page.frontmatter.tabs" id="tabs-doc-sections">
       <template v-for="slot in $page.frontmatter.tabs" :slot="slot.id">
           <Content :key="slot.id" :slot-key="slot.id" />
       </template>
-    </OdsTabs>
+    </ods-tabs>
   </article>
 </template>
 
@@ -29,7 +29,7 @@
 export default {
   name: 'TemplateComponent',
   components: {
-    OdsTabs: () => import('../global-components/OdsTabs.vue'),
+    ['ods-tabs']: () => import('../global-components/ods-tabs.vue'),
   }
 }
 </script>

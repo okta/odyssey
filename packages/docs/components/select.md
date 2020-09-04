@@ -1,3 +1,12 @@
+---
+template: component
+name: Select
+lead: The Select input is a form element that provides a menu of options for the user to... select.
+tabs:
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
+---
+
 ::: slot nimatron-all
 
 # Select

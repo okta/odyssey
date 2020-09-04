@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: 'OdsTabs',
+  name: 'ods-tabs',
   props: {
     active: {
       type: String,

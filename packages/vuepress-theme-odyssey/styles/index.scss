@@ -38,43 +38,39 @@ h1, h2, h3, h4, h5, h6 {
 
 .odo--article {
   max-width: 960px;
-  margin: $spacing-l auto;
-  padding: $spacing-l $spacing-xl;
-  border: 1px solid $border-color-display;
-  border-radius: 12px;
-  box-shadow: 8px 8px 0 cv('gray', '000');
+  margin: $spacing-l 0;
 }
 
 .ods-nav-vertical {
-  .ods-nav-vertical--section {
-    margin: $spacing-m 0;
-  }
+  // .ods-nav-vertical--section {
+  //   margin: $spacing-m 0;
+  // }
 
-  .ods-vertical-nav--heading {
-    font-size: $size-title-6;
-  }
+  // .ods-vertical-nav--heading {
+  //   font-size: $size-title-6;
+  // }
 
-  .ods-vertical-nav--list {
-    padding-left: $spacing-xs;
-  }
+  // .ods-vertical-nav--list {
+  //   padding-left: $spacing-xs;
+  // }
 
-  .ods-vertical-nav--list-item {
-    list-style-type: none;
-    font-size: ms(0);
+  // .ods-vertical-nav--list-item {
+  //   list-style-type: none;
+  //   font-size: ms(0);
 
-    a {
-      display: block;
-      padding: 0 $spacing-s;
-      border-radius: $base-border-radius;
-      color: cv('gray', '900');
-      text-decoration: none;
-    }
+  //   a {
+  //     display: block;
+  //     padding: 0 $spacing-s;
+  //     border-radius: $base-border-radius;
+  //     color: cv('gray', '900');
+  //     text-decoration: none;
+  //   }
 
-    &.is-ods-vertical-nav--list-item-selected a {
-      background: cv('blue', '500');
-      color: $white;
-    }
-  }
+  //   &.is-ods-vertical-nav--list-item-selected a {
+  //     background: cv('blue', '500');
+  //     color: $white;
+  //   }
+  // }
 }
 
 .odo-doc-header {
@@ -92,6 +88,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+// Odyssey Button with added custom variants (not shipped)
 .ods-button {
   &.is-odo-button-shadow {
     display: inline-flex;

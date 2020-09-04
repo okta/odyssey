@@ -9,6 +9,8 @@ tabs:
     id: 'odyssey-html-scss'
   - label: 'Figma guide'
     id: 'odyssey-figma-guide'
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
 links:
   - icon: github
     label: View source

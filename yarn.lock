@@ -1692,6 +1692,16 @@
   dependencies:
     "@types/node" ">= 8"
 
+"@okta/odyssey-icons@^0.5.0":
+  version "0.5.0"
+  resolved "https://artifacts.aue1d.saasure.com:443/artifactory/api/npm/npm-okta-release/@okta/odyssey-icons/-/@okta/odyssey-icons-0.5.0.tgz#a63a6490cd6974bf2f68ceb623805fb42be7ba0d"
+  integrity sha1-pjpkkM1pdL8vaM62I4BftCvnug0=
+
+"@okta/odyssey@^0.5.0":
+  version "0.5.0"
+  resolved "https://artifacts.aue1d.saasure.com:443/artifactory/api/npm/npm-okta-release/@okta/odyssey/-/@okta/odyssey-0.5.0.tgz#f2f79b9618b53386aed18ff7f9f7cdda836b561e"
+  integrity sha1-8veblhi1M4au0Y/3+ffN2oNrVh4=
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"

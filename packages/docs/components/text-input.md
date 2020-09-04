@@ -1,3 +1,11 @@
+---
+template: component
+name: Text Input
+tabs:
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
+---
+
 ::: slot nimatron-all
 
 # Text Input

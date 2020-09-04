@@ -1,6 +1,7 @@
 <template>
   <header>
     <slot name="Sidebar-top"></slot>
+    <form><input class="ods-input"></form>
     <nav class="ods-nav-vertical">
       <section class="ods-nav-vertical--section" v-for="(item, index) in items">
         <h2 v-if="item.title" id="nav-subhead-1" class="ods-vertical-nav--heading">{{item.title}}</h2>
