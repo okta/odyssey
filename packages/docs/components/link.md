@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Link
 
 Links are navigation elements displayed as text. A link can open another page or jump to a section of a page.
@@ -97,4 +99,4 @@ When localizing links, avoid putting the text through a translator and applying 
   <li><a href="https://ux.stackexchange.com/questions/19892/opening-website-external-links-in-new-window-published-usability-tests " target="_blank" rel="noopener">https://ux.stackexchange.com/questions/19892/opening-website-external-links-in-new-window-published-usability-tests</a></li>
 </ul>
 
-
+:::

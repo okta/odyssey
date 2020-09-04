@@ -1,3 +1,5 @@
+::: slot nimatron-all
+
 # Elements
 
 Odyssey takes care to provide additional style to the following HTML elements by default.
@@ -328,3 +330,5 @@ You can also nest `strong`. Doing so will provide additional style.
 <p>2<sup>2</sup>(<var>x</var>+3)+9-5=32</p>
 ```
 </figure>
+
+:::

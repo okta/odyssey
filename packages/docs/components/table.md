@@ -3,12 +3,8 @@ template: component
 name: Table
 lead: A table is a structured set of data made up of rows and columns also known as tabular data. They allow you to quickly and easily look up values that indicate some kind of connection between different types of data or content.
 tabs:
-  - label: 'Overview'
-    id: 'odyssey-overview'
-  - label: 'HTML + SCSS'
-    id: 'odyssey-html-scss'
-  - label: 'Figma guide'
-    id: 'odyssey-figma-guide'
+  - label: 'Legacy Docs'
+    id: 'nimatorn-all'
 links:
   - icon: github
     label: View source
@@ -18,52 +14,11 @@ links:
     href: https://www.figma.com/file/pULYhG6KIhBsnQTFjkpTFv/Buttons?node-id=2660%3A365
 ---
 
-::: slot odyssey-overview
-
-## Attributes
-
-<div class="odo-grid--3col">
-  <div>
-  
-  ##### Content types
-  Our tables currently support Status’, checkboxes, buttons, dates, numbers, and text which is default.
-
-  </div>
-  <div>
-
-  ##### Sorting
-  We use three sorting states; ascending order, descending order, and unsorted. You can choose to use sorting or not.
-
-  </div>
-  <div>
-
-  ##### Responsive
-  No matter the screen size, our tables are always scrollable and never extend beyond their container. 
-
-  </div>
-</div>
-
----
-
-## Anatomy
-Our table is comprised of Odyssey foundational elements such as color, type, and spacing. 
-
-<FigureAnatomy img="/images/table-anatomy.svg" />
-
----
-
-## Behavior
-Here is an example of how a table responds to smaller screens.
-
-:::
-::: slot odyssey-html-scss
-# HTML + SCSS
-:::
-::: slot odyssey-figma-guide
-# Figma Guide
-:::
 ::: slot nimatron-all
+
 # Table
+
+A table is a structured set of data made up of rows and columns also known as tabular data. They allow you to quickly and easily look up values that indicate some kind of connection between different types of data or content.
 
 ## Usage
 
@@ -933,9 +888,7 @@ While the browser support is strong and they are valid attributes, try to refrai
 </blockquote>
 
 This same advice applies to nested tables or hidden rows as well. While convenient for designers and useful for some users, they introduce accessibility problems that may make your data inaccessible to some users.
-:::
 
-<!-- 
 <script>
 export default {
   mounted () { 
@@ -943,4 +896,6 @@ export default {
     checkbox.indeterminate = true;
   }
 }
-</script> -->
+</script>
+
+:::
