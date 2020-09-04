@@ -37,8 +37,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   &.is-ods-select-disabled {
     .ods-select--inner,
     .ods-select--input {
-      border-color: $border-color-ui;
-      background: cv('gray', '000');
+      border: 1px solid $border-input-disabled;
+      background-color: $bg-input-disabled;
       color: $text-sub;
       cursor: not-allowed;
       user-select: none;
@@ -289,8 +289,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
 
     .is-ods-select-disabled & {
-      border: 1px solid cv('gray', '500');
-      background-color: cv('gray', '500');
+      border: 1px solid $border-input-disabled;
+      background-color: $bg-input-disabled;
     }
   }
 }
