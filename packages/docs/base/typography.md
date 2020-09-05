@@ -1,3 +1,7 @@
+---
+title: Typography
+---
+
 ::: slot nimatron-all
 
 # Typography

@@ -1,6 +1,6 @@
 ---
 template: component
-name: Tooltip
+title: Tooltip
 lead: A contextual pop-up that provides a label for or description of an element.
 tabs:
   - label: 'Legacy Docs'

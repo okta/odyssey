@@ -1,6 +1,6 @@
 ---
 template: component
-name: Modal
+title: Modal
 tabs:
   - label: 'Legacy docs'
     id: 'nimatron-all'

@@ -1,3 +1,7 @@
+---
+title: Elements
+---
+
 ::: slot nimatron-all
 
 # Elements

@@ -1,6 +1,6 @@
 ---
 template: component
-name: Radio Button
+title: Radio Button
 tabs:
   - label: 'Legacy docs'
     id: 'nimatron-all'

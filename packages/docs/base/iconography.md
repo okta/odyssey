@@ -1,3 +1,7 @@
+---
+title: Iconography
+---
+
 ::: slot nimatron-all
 
 # Iconography

@@ -1,6 +1,6 @@
 ---
 template: component
-name: Text Input
+title: Text Input
 tabs:
   - label: 'Legacy docs'
     id: 'nimatron-all'

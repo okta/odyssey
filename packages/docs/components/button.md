@@ -1,6 +1,6 @@
 ---
 template: component
-name: Button
+title: Button
 lead: An Odyssey button appears as a rounded rectangle that is wider than it is tall, with a descriptive caption inflexs center. Users press the button by clicking it with a pointer controlled by a mouse, keystrokes can also be used to execute the command of a button.
 tabs:
   - label: 'Overview'

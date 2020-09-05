@@ -1,6 +1,6 @@
 ---
 template: component
-name: Link
+title: Link
 tabs:
   - label: 'Legacy docs'
     id: 'nimatron-all'

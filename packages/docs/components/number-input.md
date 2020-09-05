@@ -1,6 +1,6 @@
 ---
 template: component
-name: Number Input
+title: Number Input
 tabs:
   - label: 'Legacy docs'
     id: 'nimatron-all'

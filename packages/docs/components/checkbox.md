@@ -1,6 +1,6 @@
 ---
 template: component
-name: Checkbox
+title: Checkbox
 tabs:
   - label: 'Legacy docs'
     id: 'nimatron-all'
