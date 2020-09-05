@@ -24,6 +24,7 @@
       <article class="odo--article">
         <odo-template-component v-if="$page.frontmatter.template === 'component'" />
         <odo-template-index v-else-if="$page.frontmatter.template === 'index'" />
+        <odo-template-plain v-else-if="$page.frontmatter.template === 'plain'" />
         <Content v-else />
       </article>
     </main>
@@ -68,6 +69,7 @@ export default {
     'odo-link': () => import('../components/odo-link.vue'),
     'odo-nav-vertical': () => import('../components/odo-nav-vertical.vue'),
     'odo-template-index': () => import('../templates/odo-template-index.vue'),
+    'odo-template-plain': () => import('../templates/odo-template-plain.vue'),
     'odo-template-component': () => import('../templates/odo-template-component.vue'),
   },
   computed: {
