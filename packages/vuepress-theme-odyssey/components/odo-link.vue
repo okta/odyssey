@@ -1,20 +1,18 @@
 <template>
    <RouterLink
     v-if="isInternal"
-    class="nav-link"
     :to="link"
     :exact="exact"
   >
-    {{ item.title }}
+    <slot></slot>
   </RouterLink>
   <a
     v-else
     :href="link"
-    class="nav-link external"
-    :target="target"
-    :rel="rel"
+    :target="hasTarget"
+    :rel="hasRel"
   >
-    {{ item.title }}
+    <slot></slot>
   </a>
 </template>
 
@@ -22,15 +20,15 @@
 import { isExternal, isMailto, isTel, ensureExt } from '../utils'
 
 export default {
-  name: 'SidebarLink',
+  name: 'odo-sidebar-link',
   props: {
-    item: {
+    href: {
       required: true
     }
   },
   computed: {
     link () {
-      return ensureExt(this.item.link)
+      return ensureExt(this.href)
     },
     exact () {
       if (this.$site.locales) {
@@ -47,21 +45,21 @@ export default {
     isInternal () {
       return !isExternal(this.link) && !this.isBlankTarget
     },
-    target () {
+    hasTarget () {
       if (this.isNonHttpURI) {
         return null
       }
-      if (this.item.target) {
-        return this.item.target
+      if (this.target) {
+        return this.target
       }
       return isExternal(this.link) ? '_blank' : ''
     },
-    rel () {
+    hasRel () {
       if (this.isNonHttpURI) {
         return null
       }
-      if (this.item.rel) {
-        return this.item.rel
+      if (this.rel) {
+        return this.rel
       }
       return this.isBlankTarget ? 'noopener noreferrer' : ''
     }
