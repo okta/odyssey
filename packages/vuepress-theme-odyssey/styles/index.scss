@@ -8,69 +8,26 @@
   display: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   &:hover .header-anchor {
     opacity: 1;
   }
 }
 
 .theme-odyssey {
-  max-width: 1440px;
-}
-
-.odo-nav {
-  padding: $spacing-l;
-
-  h3 {
-    font-size: $size-title-5;
-  }
-  
-  header {
-    position: sticky;
-    top: $spacing-m;
-  }
-}
-
-.theme-odyssey {
   display: grid;
-  grid-template-columns: 318px auto;
+  grid-template-columns: 294px auto;
+  max-width: 1440px;
 }
 
 .odo--article {
   max-width: 960px;
-  margin: $spacing-l 0;
-}
-
-.ods-nav-vertical {
-  // .ods-nav-vertical--section {
-  //   margin: $spacing-m 0;
-  // }
-
-  // .ods-vertical-nav--heading {
-  //   font-size: $size-title-6;
-  // }
-
-  // .ods-vertical-nav--list {
-  //   padding-left: $spacing-xs;
-  // }
-
-  // .ods-vertical-nav--list-item {
-  //   list-style-type: none;
-  //   font-size: ms(0);
-
-  //   a {
-  //     display: block;
-  //     padding: 0 $spacing-s;
-  //     border-radius: $base-border-radius;
-  //     color: cv('gray', '900');
-  //     text-decoration: none;
-  //   }
-
-  //   &.is-ods-vertical-nav--list-item-selected a {
-  //     background: cv('blue', '500');
-  //     color: $white;
-  //   }
-  // }
+  margin: $spacing-xl auto;
 }
 
 .odo-doc-header {
@@ -92,9 +49,8 @@ h1, h2, h3, h4, h5, h6 {
 .ods-button {
   &.is-odo-button-shadow {
     display: inline-flex;
-    justify-content: center;
     align-items: center;
-    
+    justify-content: center;
     border: 1px solid $border-color-display;
     background: transparent;
     box-shadow: 4px 4px 0 cv('gray', '000');
@@ -104,6 +60,7 @@ h1, h2, h3, h4, h5, h6 {
     span {
       margin-left: $spacing-xs;
     }
+
     &:visited {
       color: cv('blue', '500');
     }
@@ -133,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: $size-body-sentence;
 
     code {
-      font-family: "Inconsolata";
+      font-family: 'Inconsolata', monospace;
     }
   }
 
