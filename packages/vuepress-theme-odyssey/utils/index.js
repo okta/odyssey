@@ -35,8 +35,8 @@ export function ensureExt (path) {
   return normalized + '.html' + hash
 }
 
-export function resolveSidebarItems (page, regularPath, site, localePath) {
+export function resolveNav (page, regularPath, site, localePath) {
   const { pages, themeConfig } = site
-  
+
   return themeConfig.nav
 }
