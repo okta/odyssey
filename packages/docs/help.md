@@ -8,6 +8,8 @@ lead: We're here for ya!
 <section class="odo-grid--2col">
   <div>
 
+  <img aria-hidden="true" src="/images/icon-slack.svg">
+
   ## Slack
 
   If you’re wondering if we already have a solution for a design or development issue or would like assistance figuring out a problem, reach out to @ds-help in #odyssey.
@@ -15,8 +17,10 @@ lead: We're here for ya!
   <button class="ods-button">Open Slack</button>
 
   </div>
-  <div/>
+  
   <div>
+
+  <img aria-hidden="true" src="/images/icon-github.svg">
 
   ## Github
 
@@ -25,7 +29,7 @@ lead: We're here for ya!
   <button class="ods-button">Open GitHub</button>
 
   </div>
-  <div/>
+  
   <div>
 
   ## Office hours
