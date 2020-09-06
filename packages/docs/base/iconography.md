@@ -1,5 +1,9 @@
 ---
+template: component
 title: Iconography
+tabs:
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
 ---
 
 ::: slot nimatron-all
