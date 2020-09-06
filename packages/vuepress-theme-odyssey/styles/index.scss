@@ -21,13 +21,8 @@ h6 {
 
 .theme-odyssey {
   display: grid;
-  grid-template-columns: 294px auto;
+  grid-template-columns: 308px auto;
   max-width: 1440px;
-}
-
-.odo--article {
-  max-width: 960px;
-  margin: $spacing-xl auto;
 }
 
 .odo-doc-header {
