@@ -52,6 +52,8 @@ blockquote {
 }
 
 p {
+  max-width: $max-line-length;
+  margin-bottom: $spacing-s;
   font-size: $size-body-sentence;
 
   &:last-child {
@@ -123,7 +125,7 @@ kbd {
 }
 
 hr {
-  margin: $spacing-l 0;
+  margin: $spacing-s 0;
   border-width: 1px;
   border-style: solid;
   border-color: cv('gray', '200');

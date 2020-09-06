@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article class="odo-main--content">
     <header class="odo-doc-header">
       <div>
         <h1 class="odo-doc-header--title">{{$page.frontmatter.headline}}</h1>
