@@ -4,7 +4,7 @@
 
     <odo-sidebar>
       <template v-slot:header>
-        <a class="odo-sidebar--title" href="/">{{$site.title}}</a>
+        <a class="odo-site--title" href="/">{{$site.title}}</a>
         <fieldset class="ods-fieldset" v-if="$site.themeConfig.flags.hasSearch">
           <div class="ods-fieldset-flex">
             <input class="ods-text-input" type="text" name="search" id="search">
@@ -20,19 +20,19 @@
       </template>
     </odo-sidebar>
 
-    <main class="odyssey--main" id="main">
-      <article class="odo--article">
-        <odo-template-home v-if="$page.frontmatter.template === 'home'" />
-        <odo-template-component v-else-if="$page.frontmatter.template === 'component'" />
-        <odo-template-index v-else-if="$page.frontmatter.template === 'index'" />
-        <odo-template-plain v-else-if="$page.frontmatter.template === 'plain'" />
-        <Content v-else />
-      </article>
+    <main class="odo-main" id="main">
+      <odo-template-home v-if="$page.frontmatter.template === 'home'" />
+      <odo-template-component v-else-if="$page.frontmatter.template === 'component'" />
+      <odo-template-index v-else-if="$page.frontmatter.template === 'index'" />
+      <odo-template-plain v-else-if="$page.frontmatter.template === 'plain'" />
+      <Content v-else />
     </main>
   </div>
 </template>
 
 <style lang="scss">
+@import '@okta/odyssey';
+
 .odo-skip-content {
   position: absolute;
   top: auto;
@@ -46,6 +46,21 @@
     width: auto;
     height: auto;
   }
+}
+
+.odo-site--title,
+.odo-site--title:visited {
+  display: block;
+  padding: $spacing-xs;
+  color: $text-heading;
+  font-size: $size-title-4;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.odo-main--content {
+  max-width: 960px;
+  margin: $spacing-xl auto;
 }
 </style>
 
