@@ -97,7 +97,6 @@ Odyssey takes care to provide additional style to the following HTML elements by
 ## del <a name="del"></a>
 > The HTML `<del>` element represents a range of text that has been deleted from a document. This can be used when rendering "track changes" or source code diff information, for example. The `<ins>` element can be used for the opposite purpose: to indicate text that has been added to the document. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del'>MDN</a></cite>
 
-
 ### Accessibility
 
 Many screen readers do not let users know of the presence of `del`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
@@ -113,6 +112,68 @@ Many screen readers do not let users know of the presence of `del`. To fix this,
   <blockquote>
       There is <del data-a11y-start=" [deletion start] "  data-a11y-end=" [deletion end] ">nothing</del> <ins data-a11y-start=" [insertion start] "  data-a11y-end=" [insertion end] ">no code</ins> either good or bad, but running it makes it so.
   </blockquote>
+```
+</figure>
+
+## details <a name="details"></a>
+> The HTML Details Element (`<details>`) creates a disclosure widget in which information is visible only when the widget is toggled into an "open" state. A summary or label can be provided using the `<summary>` element. [...] If the first child of the `<details>` element is a `<summary>`, the contents of the `<summary>` element are used as the label for the disclosure widget.  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details'>MDN</a></cite>
+
+### IE11 support
+
+IE 11 incorrectly renders the `summary` element as "always open". Other than this behavior, it is safe for use.
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <details>
+      <summary>What is Okta?</summary>
+      <p>Okta is the foundation for secure connections between people and technology. It’s a service that gives employees, customers, and partners secure access to the tools they need to do their most important work.</p>
+    </details>
+  </div>
+
+```html
+  <details>
+    <summary>What is Okta?</summary>
+    <p>Okta is the foundation for secure connections between people and technology. It’s a service that gives employees, customers, and partners secure access to the tools they need to do their most important work.</p>
+  </details>
+```
+</figure>
+
+## dl <a name="dl"></a>
+> The HTML `<dl>` element represents a description list. The element encloses a list of groups of terms (specified using the `<dt>` element) and descriptions (provided by `<dd>` elements). Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs).  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl'>MDN</a></cite>
+
+### Accessibility
+
+Screen readers announce `<dl>` content differently - some may not indicate that the content is a list. To improve usability make sure each list item's content communicates its relationship to other list items.
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <h4>Gentlemen of the Mushroom Kingdon</h4>
+    <dl>
+      <dt>Mario</dt>
+      <dd>red hat, older twin brother, classic mustache</dd>
+      <dt>Luigi</dt>
+      <dd>green hat, younger twin brother, classic mustache</dd>
+      <dt>Wario</dt>
+      <dd>yellow hat, not a twin, kinked mustache</dd>
+      <dd>loves garlic</dd>
+      <dt>Waluigi</dt>
+      <dd>purple hat, not a twin, pointy mustache</dd>
+    </dl> 
+  </div>
+
+```html
+  <h4>Gentlemen of the Mushroom Kingdon</h4>
+  <dl>
+      <dt>Mario</dt>
+      <dd>red hat, older twin brother, classic mustache</dd>
+      <dt>Luigi</dt>
+      <dd>green hat, younger twin brother, classic mustache</dd>
+      <dt>Wario</dt>
+      <dd>yellow hat, not a twin, kinked mustache</dd>
+      <dd>loves garlic</dd>
+      <dt>Waluigi</dt>
+      <dd>purple hat, not a twin, pointy mustache</dd>
+    </dl>
 ```
 </figure>
 
@@ -224,6 +285,29 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 ```
 </figure>
 
+## pre <a name="pre"></a>
+> The HTML `<pre>` element represents preformatted text which is to be presented exactly as written in the HTML file. The text is typically rendered using a non-proportional ("monospace") font. Whitespace inside this element is displayed as written. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre">MDN</a></cite>
+
+### Usage
+
+Since the `pre` tag preserves all whitespace, it's best to begin and end your content without linebreaks as below.
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+<pre><code>const fruitColors = {
+  apple: 'red',
+  banana: 'yellow'
+}</code></pre>
+  </div>
+
+```html
+<pre><code>const fruitColors = {
+  apple: 'red',
+  banana: 'yellow'
+}</code></pre>
+```
+</figure>
+
 ## s <a name="s"></a>
 > The HTML `<s>` element renders text with a strikethrough, or a line through it. Use the `<s>` element to represent things that are no longer relevant or no longer accurate. However, `<s>` is not appropriate when indicating document edits; for that, use the `<del>` and `<ins>` elements, as appropriate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s'>MDN</a></cite>
 
@@ -301,6 +385,11 @@ You can also nest `strong`. Doing so will provide additional style.
 </p>
 ```
 </figure>
+
+## summary <a name="summary"></a>
+> The HTML Disclosure Summary element (`<summary>`) element specifies a summary, caption, or legend for a `<details>` element's disclosure box. Clicking the `<summary>` element toggles the state of the parent `<details>` element open and closed.
+
+See <a href="#details">`details`</a> for example.
 
 ## sup <a name="sup"></a>
 > The HTML Superscript element (`<sup>`) specifies inline text which is to be displayed as superscript for solely typographical reasons. Superscripts are usually rendered with a raised baseline using smaller text. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup'>MDN</a></cite>
