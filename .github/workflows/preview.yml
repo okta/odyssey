@@ -1,0 +1,42 @@
+name: Preview
+on:
+  pull_request:
+    branches: 
+      - master
+      - develop
+      - 'release/**'
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      
+      - name: install deps
+        run: yarn
+
+      - name: build docs
+        run: yarn workspace @okta/design-docs build
+
+      - name: deploying docs to ods.dev
+        run: | 
+          SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
+          aws s3 sync ./packages/docs/dist/ s3://ods.dev/$SHA --delete
+      
+      - name: deployment complete
+        run: |
+          SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
+          curl \
+            -X POST \
+            $URL \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            --data '{ "body": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev" }'
+        env:
+          URL: ${{ github.event.pull_request.comments_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
