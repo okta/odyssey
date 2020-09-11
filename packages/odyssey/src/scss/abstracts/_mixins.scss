@@ -13,14 +13,14 @@
 // limitations under the License.
 
 @mixin is-visually-hidden {
-  padding: 0;
   position: absolute;
-  height: 1px;
-  overflow: hidden;
-  margin: -1px;
   width: 1px;
-  border: 0;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
   clip: rect(0 0 0 0);
+  border: 0;
 }
 
 @mixin outline($outline-cv: $focus-ring-primary, $radius: 4px) {
