@@ -1,0 +1,20 @@
+{
+  "name": "@okta/vuepress-theme-odyssey",
+  "version": "0.3.0",
+  "description": "VuePress theme for Odyssey Documentation",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "main": "layouts/Layout.vue",
+  "devDependencies": {
+    "@okta/odyssey": "^0.5.0",
+    "@okta/odyssey-icons": "^0.5.0",
+    "@okta/prism-theme-odyssey": "^0.5.0",
+    "html-loader": "^1.1.0",
+    "node-sass": "4.13.1",
+    "prismjs": "^1.14.0",
+    "sass-loader": "8.0.2",
+    "vue-prism-component": "1.2.0",
+    "vuepress-plugin-clean-urls": "^1.1.1",
+    "vuepress-plugin-container": "^2.1.3"
+  }
+}

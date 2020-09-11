@@ -1,3 +1,11 @@
+---
+template: component
+title: Link
+tabs:
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
+---
+
 ::: slot nimatron-all
 
 # Link

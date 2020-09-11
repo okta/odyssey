@@ -1,3 +1,7 @@
+---
+title: Color
+---
+
 ::: slot nimatron-all
 
 # Color

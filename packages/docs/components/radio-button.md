@@ -1,3 +1,11 @@
+---
+template: component
+title: Radio Button
+tabs:
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
+---
+
 ::: slot nimatron-all
 
 # Radio Button

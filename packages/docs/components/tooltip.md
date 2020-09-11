@@ -1,3 +1,19 @@
+---
+template: component
+title: Tooltip
+lead: A contextual pop-up that provides a label for or description of an element.
+tabs:
+  - label: 'Legacy Docs'
+    id: 'nimatron-all'
+links:
+  - icon: github
+    label: View source
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_tooltip.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/pULYhG6KIhBsnQTFjkpTFv/Buttons?node-id=2660%3A365
+---
+
 ::: slot nimatron-all
 
 # Tooltip
