@@ -36,12 +36,6 @@ jobs:
           URL: ${{ github.event.pull_request.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
-      - name: Get Commit Message
-        run: |
-          MSG=$(git log --format=%B -n 1 ${{ github.event.after }})
-          echo "::set-env name=COMMIT_MESSAGE::${MSG}"
-          
       - name: notify (slack)
         run: |
           SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
