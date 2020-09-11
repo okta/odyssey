@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -23,12 +23,12 @@ jobs:
       - name: build docs
         run: yarn workspace @okta/design-docs build
 
-      - name: deploying docs to ods.dev
+      - name: deploying docs to preview environment
         run: | 
           SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
           aws s3 sync ./packages/docs/dist/ s3://ods.dev/$SHA --delete
       
-      - name: deployment complete
+      - name: notify (github)
         run: |
           SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
           curl \
@@ -36,7 +36,16 @@ jobs:
             $URL \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            --data '{ "body": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev" }'
+            --data '{ "body": "🤖The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev" }'
+      
+      - name: notify (slack)
+        run: |
+          curl \
+            -X POST \
+            ${{ secrets.SLACK_WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            --data '{ "body": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev" }' \
         env:
           URL: ${{ github.event.pull_request.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
