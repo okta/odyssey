@@ -28,19 +28,16 @@ jobs:
           SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
           aws s3 sync ./packages/docs/dist/ s3://ods.dev/$SHA --delete
       
-      - name: notify (github)
-        env:
-          URL: ${{ github.event.issue.comments_url }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
-          curl -X POST -H "Content-Type: application/json" -H "Authorization: token $GITHUB_TOKEN" --data '{"body": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev"}' $URL
 
-      - name: notify (slack)
+      - name: notify (github)
         run: |
           SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
-          curl -X POST -H "Content-Type: application/json" -H "Authorization: token $GITHUB_TOKEN" --data '{"text": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+          curl -X POST -H "Content-Type: application/json" -H "Authorization: token $GITHUB_TOKEN" --data '{ "body": "✅  The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev" }' $URL
         env:
           URL: ${{ github.event.pull_request.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: notify (slack)
+        run: |
+          SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
+          curl -X POST -H "Content-Type: application/json" --data '{"text": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev"}' ${{ secrets.SLACK_WEBHOOK_URL }}
