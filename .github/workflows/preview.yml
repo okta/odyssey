@@ -28,15 +28,15 @@ jobs:
           SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
           aws s3 sync ./packages/docs/dist/ s3://ods.dev/$SHA --delete
       
-      - name: notify (github)
-        run: |
-          SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }}) \
-          curl \
-            -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            --data '{ "body": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev" }' \
-            $URL
+      # - name: notify (github)
+      #   run: |
+      #     SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }}) \
+      #     curl \
+      #       -X POST \
+      #       -H "Content-Type: application/json" \
+      #       -H "Authorization: token $GITHUB_TOKEN" \
+      #       --data '{ "body": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev" }' \
+      #       $URL
 
       - name: notify (slack)
         run: |
