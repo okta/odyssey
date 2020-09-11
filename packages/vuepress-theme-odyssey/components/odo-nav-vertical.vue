@@ -81,7 +81,7 @@
   }
 
   .router-link-active {
-    font-weight: bold;
+    font-weight: 600;
 
     & + .ods-nav-vertical--list-sub {
       display: block;
@@ -95,7 +95,7 @@
 
 
   &.is-ods-nav-secondary {
-    font-weight: bold;
+    font-weight: 600;
 
     a {
       font-size: $size-body-base;

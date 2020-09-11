@@ -5,8 +5,8 @@ headline: Need Help?
 lead: We're here for ya!
 ---
 
-<section class="odo-grid--2col">
-  <div>
+<section class="odo-grid--1col">
+  <section>
 
   <img aria-hidden="true" src="/images/icon-slack.svg">
 
@@ -16,9 +16,8 @@ lead: We're here for ya!
 
   <button class="ods-button">Open Slack</button>
 
-  </div>
-  
-  <div>
+  </section>
+  <section>
 
   <img aria-hidden="true" src="/images/icon-github.svg">
 
@@ -27,10 +26,10 @@ lead: We're here for ya!
   Code for SCSS, tokens, icons, and the documentation lives in our Odyssey repo. We also do all of our project planning there too.
 
   <button class="ods-button">Open GitHub</button>
-
-  </div>
   
-  <div>
+  </section>
+  <section>
+
 
   ## Office hours
 
@@ -38,6 +37,6 @@ lead: We're here for ya!
 
   <a href="https://oktawiki.atlassian.net/wiki/spaces/UX/pages/880512140/Odyssey+Office+Hours" target="_blank">Sign up for a time slot</a>
 
-  </div>
+  </section>
 
 </section>

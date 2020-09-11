@@ -25,6 +25,7 @@
   background: none;
   color: $text-body;
   font-family: inherit;
+  font-size: $size-body-sentence;
   font-weight: 600;
 
   &[aria-selected='true'] {

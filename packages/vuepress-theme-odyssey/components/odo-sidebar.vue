@@ -23,6 +23,10 @@
 .odo-sidebar {
   padding: $spacing-l $spacing-m 0 $spacing-l;
 
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+
   .odo-sidebar--content {
     display: grid;
     position: sticky;

@@ -23,6 +23,10 @@ h6 {
   display: grid;
   grid-template-columns: 308px auto;
   max-width: 1440px;
+
+  @media screen and (max-width: 800px){
+    display: block;
+  }
 }
 
 .odo-doc-header {

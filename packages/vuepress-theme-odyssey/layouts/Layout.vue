@@ -54,14 +54,16 @@
   padding: $spacing-xs;
   color: $text-heading;
   font-size: $size-title-4;
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: none;
 }
 
 .odo-main--content {
-  max-width: 960px;
+  max-width: calc(960px + #{$spacing-l});
   margin: $spacing-xl auto;
+  padding: 0 $spacing-m;
 }
+
 </style>
 
 <script>

@@ -6,11 +6,8 @@
         <p class="odo-doc-header--lead">{{$page.frontmatter.lead}}</p>
       </div>
     </header>
-    
     <hr />
-
     <Content />
-
   </article>
 </template>
 
