@@ -36,7 +36,7 @@ jobs:
             $URL \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            --data '{ "body": "🤖The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev" }'
+            --data '{ "body": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev" }'
       
       - name: notify (slack)
         run: |
