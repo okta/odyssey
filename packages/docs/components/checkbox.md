@@ -1,3 +1,11 @@
+---
+template: component
+title: Checkbox
+tabs:
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
+---
+
 ::: slot nimatron-all
 
 # Checkbox

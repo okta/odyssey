@@ -1,3 +1,27 @@
+---
+template: component
+title: Table
+tabs:
+  - label: 'Legacy docs'
+    id: 'nimatron-all'
+---
+
+---
+template: component
+title:Table
+lead: A table is a structured set of data made up of rows and columns also known as tabular data. They allow you to quickly and easily look up values that indicate some kind of connection between different types of data or content.
+tabs:
+  - label: 'Legacy Docs'
+    id: 'nimatorn-all'
+links:
+  - icon: github
+    label: View source
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_table.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/pULYhG6KIhBsnQTFjkpTFv/Buttons?node-id=2660%3A365
+---
+
 ::: slot nimatron-all
 
 # Table

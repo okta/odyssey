@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Prism Theme Odyssey</title>
+      <style>
+        main {
+          max-width: 960px;
+          margin: 48px auto;
+        }
+
+        section {
+          padding: 48px 0 !important;
+        }
+      </style>
+   </head>
+   <body>
+    <main>
+      <h1>Prism Theme Odyssey</h1>
+      <section>
+        <h2>HTML</h2>
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+  &lt;html lang="en"&gt;
+    &lt;head&gt;
+      &lt;meta charset="utf-8"&gt;
+      &lt;title&gt;Hello world&lt;/title&gt;
+      &lt;link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'&gt;
+      &lt;link rel="stylesheet" href="index.css" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;div id="app"&gt;&lt;/div&gt;
+      &lt;script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"&gt;&lt;/script&gt;
+      &lt;script src="vendor/prism.js"&gt;&lt;/script&gt;
+      &lt;script src="examples.bundle.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre>
+      </section>
+      <section>
+        <h2>CSS</h2>
+<pre><code class="language-css">.ods-label {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  color: $text-heading;
+  font-weight: 600;
+
+  .ods-text-input:disabled ~ &,
+  .ods-text-input[readonly] ~ & {
+    color: $text-sub;
+  }
+}
+
+.ods-label--optional {
+  display: none;
+  color: $text-sub;
+  font-size: $size-body-caption;
+  font-weight: 400;
+  line-height: $spacing-m; // Helps optically match line-height above
+
+  [data-optional] &,
+  :optional ~ .ods-label & {
+    display: block;
+  }
+}</code></pre>
+      </section>
+
+      <section>
+        <h2>JavaScript</h2>
+<pre><code class="language-js">import {x, y} as p from 'point';
+  const ANSWER = 42;
+  
+  class Car extends Vehicle {
+    constructor(speed, cost) {
+      super(speed);
+  
+      var c = Symbol('cost');
+      this[c] = cost;
+  
+      this.intro = `This is a car runs at
+        ${speed}.`;
+    }
+  }
+  
+  for (let num of [1, 2, 3]) {
+    console.log(num + 0b111110111);
+  }
+  
+  function $initHighlight(block, flags) {
+    try {
+      if (block.className.search(/\bno\-highlight\b/) != -1)
+        return processBlock(block.function, true, 0x0F) + ' class=""';
+    } catch (e) {
+      /* handle exception */
+      var e4x =
+          <div>Example
+              <p>1234</p></div>;
+    }
+    for (var i = 0 / 2; i < classes.length; i++) {
+    // "0 / 2" should not be parsed as regexp
+      if (checkCondition(classes[i]) === undefined)
+        return /\d+[\s/]/g;
+    }
+    console.log(Array.every(classes, Boolean));
+  }
+  
+  export  $initHighlight;</code></pre>
+      </section>
+    </main>
+   </body>
+</html>

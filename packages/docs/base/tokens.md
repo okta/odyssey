@@ -1,3 +1,7 @@
+---
+title: Design Tokens
+---
+
 ::: slot nimatron-all
 
 # Design Tokens
