@@ -27,15 +27,15 @@ jobs:
         run: | 
           SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
           aws s3 sync ./packages/docs/dist/ s3://ods.dev/$SHA --delete
-
       - name: notify (slack)
         run: |
           curl \
             -X POST \
             -H "Content-Type: application/json" \
             -H "Authorization: token $GITHUB_TOKEN" \
-            --data '🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev' \
+            --data '{"text": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
         env:
           URL: ${{ github.event.pull_request.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
