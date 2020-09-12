@@ -9,34 +9,55 @@ jobs:
   deployment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: aws-actions/configure-aws-credentials@v1
+      - name: cofigure aws
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: set $SHA7
+        run: echo ::set-env name=SHA7::$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
       
-      - name: install deps
+      - name: set $PREVIEW_URL
+        run: echo ::set-env name=PREVIEW_URL::"https://"$SHA7".ods.dev"
+
+      - name: get COMMIT_MSG
+        run: |
+          MSG=$(git log --format=%B -n 1 ${{ github.event.after }})
+          echo "::set-env name=COMMIT_MSG::${MSG}"
+
+      # - name: Dump GitHub context
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #   run: echo "$GITHUB_CONTEXT"
+
+      - name: install dependencies
         run: yarn
 
       - name: build docs
         run: yarn workspace @okta/design-docs build
 
-      - name: deploying docs to preview environment
+      - name: 🚀deploy preview
         run: | 
-          SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
-          aws s3 sync ./packages/docs/dist/ s3://ods.dev/$SHA --delete
+          aws s3 sync ./packages/docs/dist/ s3://ods.dev/$SHA7 --delete
 
-      - name: notify (github)
-        run: |
-          SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
-          curl -X POST -H "Content-Type: application/json" -H "Authorization: token $GITHUB_TOKEN" --data '{ "body": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev" }' $URL
+      - name: notify GitHub
+        run: sh ./scripts/notify-gh.sh
         env:
-          URL: ${{ github.event.pull_request.comments_url }}
+          INCOMING_WEBHOOK_URL: ${{ github.event.pull_request.comments_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: notify (slack)
-        run: |
-          SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
-          curl -X POST -H "Content-Type: application/json" --data '{"text": "🤖 The latest preview of this branch is now available here: https://'"$SHA"'.ods.dev"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: notify Slack
+        run: sh ./scripts/notify-slack.sh
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          AUTHOR_NAME: ${{github.actor}}
+          BRANCH_NAME: ${{github.head_ref}}
+          PULL_REQUEST_ID: ${{github.event.pull_request.number}}
+           
