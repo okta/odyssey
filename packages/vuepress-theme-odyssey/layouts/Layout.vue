@@ -21,11 +21,13 @@
     </odo-sidebar>
 
     <main class="odo-main" id="main">
+
       <odo-template-home v-if="$page.frontmatter.template === 'home'" />
       <odo-template-component v-else-if="$page.frontmatter.template === 'component'" />
       <odo-template-index v-else-if="$page.frontmatter.template === 'index'" />
       <odo-template-plain v-else-if="$page.frontmatter.template === 'plain'" />
       <Content v-else />
+          
     </main>
   </div>
 </template>

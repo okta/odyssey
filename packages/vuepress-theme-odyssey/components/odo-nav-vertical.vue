@@ -21,14 +21,14 @@
             'odo-nav--item-content': item.children,
           }"
         >
-          <a 
+          <odo-link
             :id="'nav-subhead-' + index" 
             :href="item.link"
             :role="item.children ? 'button' : false"
             :aria-expanded="selected.includes(index)"
           >
             {{item.title}}
-          </a>
+          </odo-link>
           <button
             @click="(event) => toggleSublist(event, index, item)"
             class="odo-nav--action-button"
