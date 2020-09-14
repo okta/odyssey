@@ -6,7 +6,7 @@
       </div>
       <div :class='{
         "odo-sidebar--main": true,
-        "is-overflowing": isIntersecting,
+        "is-overflowing": isOverflowing,
       }'>
         <slot name="main"></slot>
       </div>
@@ -71,21 +71,23 @@ export default {
     'odo-link': () => import('./odo-link.vue'),
   },
   data: () => ({
-    isIntersecting: null,
+    isOverflowing: null,
   }),
   mounted () {
     // TODO: this has to be re-thought out.
     if('IntersectionObserver' in window) {
       const el = this.$el.querySelector('.odo-sidebar--content');
-      // TODO: setTimeout is a hack, figure out how to do this the right way
+      // TODO: setTimeout is a hack, since the child vue component 
+      // hasnt yet mounted. Figure out how to do this right way.
+      // perhaps using emit?
       setTimeout(() => {
         let observer = new IntersectionObserver((entries, observer) => { 
             entries.forEach(entry => {
                 if(entry.intersectionRatio !== 1){
-                 this.isIntersecting = true
+                 this.isOverflowing = true
                 }
                 else {
-                  this.isIntersecting = false
+                  this.isOverflowing = false
                 }
             });
         }, { threshold: 1 });

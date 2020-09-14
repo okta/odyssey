@@ -3,6 +3,7 @@
     v-if="isInternal"
     :to="link"
     :exact="exact"
+    :role="role"
   >
     <slot></slot>
   </RouterLink>
@@ -11,6 +12,7 @@
     :href="link"
     :target="hasTarget"
     :rel="hasRel"
+    :role="role"
   >
     <slot></slot>
   </a>
@@ -24,6 +26,9 @@ export default {
   props: {
     href: {
       required: true
+    },
+    role: {
+      required: false
     }
   },
   computed: {
