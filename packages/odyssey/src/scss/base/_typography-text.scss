@@ -56,9 +56,19 @@ p {
   margin-bottom: $spacing-s;
   font-size: $size-body-sentence;
 
+  details & {
+    font-size: ms(0);
+  }
+
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+pre {
+  font-family: $mono-font-family;
+  white-space: pre-wrap;
+  tab-size: 2;
 }
 
 cite {
@@ -111,6 +121,21 @@ s {
 
 small {
   font-size: $size-body-caption;
+}
+
+details {
+  font-size: ms(0);
+}
+
+summary {
+  border-radius: $base-border-radius;
+  font-size: ms(1);
+  font-weight: 600;
+  cursor: default;
+
+  &:focus {
+    @include outline;
+  }
 }
 
 kbd {
