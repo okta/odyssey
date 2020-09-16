@@ -1,8 +1,11 @@
 @import '~@okta/odyssey';
 @import '~@okta/prism-theme-odyssey';
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
-@import 'fonts';
-@import 'grid';
+@import 'base/fonts';
+@import 'base/grid';
+@import 'components/odo-card';
+@import 'components/odo-link';
+@import 'components/odo-nav';
+@import 'components/odo-sidebar';
 
 .header-anchor {
   display: none;
@@ -107,4 +110,61 @@ h6 {
 .odo-button-icon {
   margin-left: 6px;
   line-height: 1;
+}
+
+
+a,
+a:visited {
+  &:focus {
+    @include outline;
+  }
+}
+
+a.odo-skip-content {
+  position: absolute;
+  top: -3rem;
+  left: $spacing-xs;
+  padding: $spacing-xs $spacing-s;
+  overflow: hidden;
+  transition: 0.15s ease-in-out;
+  background: $white;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus {
+    top: $spacing-xs;
+    width: auto;
+    height: auto;
+  }
+}
+
+.odo-site--title,
+.odo-site--title:visited {
+  display: block;
+  padding: $spacing-xs;
+  color: $text-heading;
+  font-size: $size-title-4;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.odo-main--content {
+  max-width: calc(960px + #{$spacing-l});
+  margin: $spacing-xl auto;
+  padding: 0 $spacing-m;
+}
+
+.odo-card {
+  &.odo-card--index {
+    padding: $spacing-m;
+
+    .odo-card--index-icon,
+    .odo-card--index-description {
+      margin-bottom: $spacing-l;
+    }
+
+    .odo-card--index-cta {
+      font-size: $size-body-sentence;
+    }
+  }
 }

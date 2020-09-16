@@ -4,6 +4,7 @@
     :to="link"
     :exact="exact"
     :role="role"
+    class="odo-link"
   >
     <slot></slot>
   </RouterLink>
@@ -13,6 +14,7 @@
     :target="hasTarget"
     :rel="hasRel"
     :role="role"
+    class="odo-link"
   >
     <slot></slot>
   </a>

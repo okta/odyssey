@@ -19,26 +19,6 @@
   </article>
 </template>
 
-<style lang="scss">
-@import '@okta/odyssey';
-
-.odo-card {
-  &.odo-card--index {
-    padding: $spacing-m;
-
-    .odo-card--index-icon,
-    .odo-card--index-description {
-      margin-bottom: $spacing-l;
-    }
-
-    .odo-card--index-cta {
-      font-size: $size-body-sentence;
-    }
-  }
-}
-
-</style>
-
 <script>
 export default {
   name: 'odo-template-index',
