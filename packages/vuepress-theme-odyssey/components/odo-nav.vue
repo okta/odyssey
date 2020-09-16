@@ -27,7 +27,7 @@
               'is-odo-nav-link--active': isCurrentRoute(item.link)
             }"
             :href="item.link"
-            :aria-expanded="isExapandedSubmenu(index)"
+            :aria-expanded="isSubmenuExpanded(index)"
             @click.native="() => resetSubmenus(index)"
           >
             {{item.title}}
@@ -37,7 +37,7 @@
             :class="{
               'ods-button is-ods-button-clear with-odo-subnav-indicator': true,
               'with-odo-subnav-indicator--expanded': 
-                isExapandedSubmenu(index),
+                isSubmenuExpanded(index),
             }"
             v-if="item.children"
           />
@@ -47,7 +47,7 @@
           :id="'nav-subhead-' + index" 
           :class="{
             'odo-nav--subnav': true, 
-            'is-visible': isExapandedSubmenu(index)
+            'is-visible': isSubmenuExpanded(index)
           }"
         >
           <li 
@@ -93,7 +93,7 @@ export default {
     }
   },
   methods: {
-    isExapandedSubmenu: function (index) {
+    isSubmenuExpanded: function (index) {
       return this.selected.includes(index)
     },
     isCurrentRoute: function (path) {
@@ -101,7 +101,7 @@ export default {
     },
     toggleSubmenu: function (event, index, { children: subList }) {
       const sublistActive = this.selected.includes(index)
-      if (subList && ! sublistActive) {
+      if (subList && !sublistActive) {
         this.selected.push(index)
       } else {
         this.selected.splice(this.selected.indexOf(index), 1)
@@ -113,8 +113,7 @@ export default {
   },
   components: {
     Fragment,
-    'odo-link': () => import('./odo-link.vue'),
-    'ods-icon': () => import('../global-components/ods-icon.vue'),
+    'odo-link': () => import('./odo-link.vue')
   },
 }
 </script>
