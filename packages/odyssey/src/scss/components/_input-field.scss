@@ -32,15 +32,6 @@
   align-items: center;
   margin-top: $spacing-xs;
   color: $text-danger;
-
-  &::before {
-    content: '';
-    width: $size-body-caption;
-    height: $size-body-caption;
-    margin: 0 $spacing-xs 0 0;
-    background-image: get-icon('alert', $text-danger);
-    background-repeat: no-repeat;
-  }
 }
 
 .ods-fieldset--pair {
