@@ -22,16 +22,16 @@
 }
 
 .ods-tabs--tab {
-  position: relative;
   display: inline-block;
-  padding: $spacing-s $spacing-s;
+  position: relative;
   margin: 0;
-  background: none;
+  padding: $spacing-s $spacing-s;
   border: 0;
-  font-weight: 600;
-  font-family: inherit;
+  background: none;
   color: $text-body;
-  
+  font-family: inherit;
+  font-weight: 600;
+
   &[aria-selected='true'] {
     &::before {
       content: '';
