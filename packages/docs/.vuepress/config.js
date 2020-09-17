@@ -2,6 +2,7 @@
 module.exports = {
   theme: '@okta/vuepress-theme-nimatron',
   dest: 'dist',
+  title: 'Odyssey Design System',
   head: [
     [
       'meta', { 
