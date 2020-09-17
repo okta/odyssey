@@ -16,6 +16,7 @@
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry"
   },
   "devDependencies": {
+    "eslint": "^7.9.0",
     "lerna": "3.3.2"
   },
   "version": "0.5.0"

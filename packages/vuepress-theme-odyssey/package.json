@@ -5,10 +5,15 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js,.vue",
+    "test": "yarn lint"
+  },
   "devDependencies": {
     "@okta/odyssey": "^0.5.0",
     "@okta/odyssey-icons": "^0.5.0",
     "@okta/prism-theme-odyssey": "^0.5.0",
+    "eslint-config-vuepress": "^2.2.0",
     "html-loader": "^1.1.0",
     "node-sass": "4.13.1",
     "prismjs": "^1.14.0",
