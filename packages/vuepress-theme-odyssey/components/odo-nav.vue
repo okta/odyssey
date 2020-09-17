@@ -111,6 +111,13 @@ export default {
       this.selected = [ index ]
     }
   },
+  mounted() {
+    const currentRoute = this.nav.find((item, index) => {
+      return item.link === this.$route.path || this.$route.path.includes(item.link)
+    })
+
+    this.selected = [ this.nav.indexOf(currentRoute) ]
+  },
   components: {
     Fragment,
     'odo-link': () => import('./odo-link.vue')
