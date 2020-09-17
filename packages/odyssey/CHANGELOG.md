@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2020-09-18
+
+### Added
+- [Docs] Added missing guidance for accessible SVG icon use in Buttons
+
+### Changed
+- [Docs] Field warnings no longer display an "alert" icon as part of invalid messaging guidance
+
+### Fixed
+- [Docs] Type token examples now display correctly
+- [Docs] `title` displays correctly once more ("Odyssey Design System")
+- [Docs] VuePress no longer modifies outbound links automatically
+
 ## [0.5.0] - 2020-09-02
 
 ### Added
