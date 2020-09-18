@@ -18,11 +18,13 @@ Tooltips should be employed for all controls that rely solely on iconography for
 
 This is especially important for distinguishing between visually or contextually similar elements, or when employing rarely-used features or features with variant interpretations.
 
+Our <a href="/components/button/">Button</a> component offers more guidance if needed.
+
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <span class="has-ods-tooltip">
       <button class="ods-button" aria-describedby="edit-label">
-        &#9998;
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.8008 2.78969L11.2103 1.19923C10.9447 0.933589 10.5121 0.933589 10.2465 1.19923L9 2.44572L11.5543 5L12.8007 3.75351C13.0664 3.48787 13.0664 3.05533 12.8008 2.78969ZM3.5 13L10.5 6L8 3.5L1 10.5V13L3.5 13Z" fill="currentColor"/></svg>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         Edit
@@ -33,7 +35,7 @@ This is especially important for distinguishing between visually or contextually
   ```html
   <span class="has-ods-tooltip">
     <button class="ods-button" aria-describedby="edit-label">
-      <svg>...</svg>
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...</svg>
     </button>
     <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
       Edit
@@ -271,19 +273,21 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
 
 ## Accessibility
 
-* The paired element should utilize `aria-describedby` to create a hard association with the tooltip.
-* The tooltip itself should utilize the `role='tooltip'` attribute to distinguish it from other popups.
-* Per <a href="https://www.w3.org/TR/wai-aria-1.1/#tooltip">ARIA guidelines</a>, our tooltips triggered by :hover and :focus employ a short delay (1s) before animating.
+Tooltip use cases may require slightly different markup. In both cases below, the tooltip itself should utilize the `role='tooltip'` attribute to distinguish it from other popups.
+
+Per <a href="https://www.w3.org/TR/wai-aria-1.1/#tooltip">ARIA guidelines</a>, our tooltips triggered by :hover and :focus employ a short delay (1s) before animating.
 
 ### Tooltip as a label
 
-When using tooltips as a label, no further considerations are necessary. Assistive technologies will read the following as "Edit".
+When using tooltips as a label, use the `aria-labelledby` attribute to create an association between the button and tooltip. 
+
+Assistive technologies will read the following as "Edit".
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <span class="has-ods-tooltip">
-      <button class="ods-button" aria-describedby="access-edit-label">
-        &#9998;
+      <button class="ods-button" aria-labelledby="access-edit-label">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.8008 2.78969L11.2103 1.19923C10.9447 0.933589 10.5121 0.933589 10.2465 1.19923L9 2.44572L11.5543 5L12.8007 3.75351C13.0664 3.48787 13.0664 3.05533 12.8008 2.78969ZM3.5 13L10.5 6L8 3.5L1 10.5V13L3.5 13Z" fill="currentColor"/></svg>
       </button>
       <aside id="access-edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         Edit
@@ -293,26 +297,29 @@ When using tooltips as a label, no further considerations are necessary. Assisti
 
   ```html
   <span class="has-ods-tooltip">
-    <button class="ods-button" aria-describedby="access-edit-label">
-      <svg>...</svg>
-    </button>
-    <aside id="access-edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
-      Edit
-    </aside>
-  </span>
+      <button class="ods-button" aria-labelledby="access-edit-label">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...s</svg>
+      </button>
+      <aside id="access-edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+        Edit
+      </aside>
+    </span>
   ```
 </figure>
 
 ### Tooltip as a description
 
-When using tooltips to provide additional information, ensure that the element also includes a visually hidden, accessible label. Assistive technologies will read the following as "Edit. View and manage this profile."
+When using tooltips to provide additional information, you'll need multiple attributes. 
+
+First, make sure the element itself has an accessible label. In the example below, we utilize the `aria-label` attribute to ensure the button is labeled. Next, use `aria-describedby` to create an association with the tooltip for additional context.
+
+Assistive technologies will read the following as "Edit. View and manage this profile."
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
     <span class="has-ods-tooltip">
-      <button class="ods-button" aria-describedby="edit-description">
-        &#9998;
-        <span class="u-visually-hidden">Edit</span>
+      <button class="ods-button" aria-label="Edit" aria-describedby="edit-description">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.8008 2.78969L11.2103 1.19923C10.9447 0.933589 10.5121 0.933589 10.2465 1.19923L9 2.44572L11.5543 5L12.8007 3.75351C13.0664 3.48787 13.0664 3.05533 12.8008 2.78969ZM3.5 13L10.5 6L8 3.5L1 10.5V13L3.5 13Z" fill="currentColor"/></svg>
       </button>
       <aside id="edit-description" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         View and manage this profile.
@@ -322,11 +329,8 @@ When using tooltips to provide additional information, ensure that the element a
 
   ```html
   <span class="has-ods-tooltip">
-    <button class="ods-button" aria-describedby="edit-description">
-      <svg>...</svg>
-      <span class="u-visually-hidden">
-        Edit
-      </span>
+    <button class="ods-button" aria-label="Edit" aria-describedby="edit-description">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...</svg>
     </button>
     <aside id="edit-description" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
       View and manage this profile.
