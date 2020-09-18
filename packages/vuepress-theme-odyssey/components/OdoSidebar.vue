@@ -18,7 +18,7 @@
       <div
         :class="{
           'odo-sidebar--main': true,
-          'is-odo-sidebar-overflowing': isOverflowing
+          'is-odo-sidebar--overflowing': isOverflowing
         }"
       >
         <OdoNav type="primary" :nav="Nav.primary" />
@@ -39,7 +39,6 @@ export default {
     OdoLink: () => import("./OdoLink.vue"),
     OdoNav: () => import("../components/OdoNav.vue")
   },
-  props: ["nav"],
   data: () => ({
     isOverflowing: null
   }),

@@ -2,7 +2,7 @@
   <div
     :class="{
       'odo-card': true,
-      [`is-odo-card-${type}`]: true
+      [`is-odo-card-${theme}`]: true
     }"
   >
     <header v-if="hasSlotHeader" class="odo-card--header">
@@ -21,7 +21,7 @@
 export default {
   name: "OdoCard",
   props: {
-    type: {
+    theme: {
       type: String,
       default: "default",
       validator: value => ["default", "plain"].includes(value)

@@ -1,10 +1,12 @@
 <!-- Usage: <ods-icon icon="complete" /> -->
 
 <template>
+  <!-- eslint-disable -->
   <div
     class="ods-icon"
     v-html="require(`!html-loader!@okta/odyssey-icons/src/${icon}.svg`)"
   />
+  <!-- eslint-enable -->
 </template>
 
 <style lang="scss">

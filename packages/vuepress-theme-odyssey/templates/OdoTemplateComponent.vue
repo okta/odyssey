@@ -10,12 +10,14 @@
           <li v-for="link in $page.frontmatter.links" :key="link.label">
             <a :href="link.href" class="ods-button is-odo-button-shadow">
               {{ link.label }}
+              <!-- eslint-disable -->
               <div
                 class="odo-button-icon"
                 v-html="
                   require(`!html-loader!../../docs/.vuepress/public/images/icon-${link.icon}.svg`)
                 "
               />
+              <!-- eslint-enable -->
             </a>
           </li>
         </ul>

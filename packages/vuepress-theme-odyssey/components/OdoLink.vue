@@ -27,9 +27,12 @@ export default {
   name: "OdoLink",
   props: {
     href: {
+      type: String,
       required: true
     },
     role: {
+      type: String,
+      default: "",
       required: false
     }
   },
