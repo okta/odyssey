@@ -24,7 +24,7 @@ jobs:
         run: ./node_modules/lerna/cli.js run test
         
       - name: build docs
-        run: yarn workspace @okta/design-docs build
+        run: THEME=odyssey yarn workspace @okta/design-docs build
 
       - name: deploying docs to ods.dev
         run: | 
