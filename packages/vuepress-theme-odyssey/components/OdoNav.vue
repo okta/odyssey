@@ -81,7 +81,7 @@ export default {
   name: "OdoNav",
   components: {
     Fragment,
-    "odo-link": () => import("./odo-link.vue")
+    OdoLink: () => import("./OdoLink.vue")
   },
   props: {
     nav: {

@@ -36,8 +36,8 @@ import { resolveNav } from "../utils";
 export default {
   name: "OdoSidebar",
   components: {
-    OdoLink: () => import("./odo-link.vue"),
-    OdoNav: () => import("../components/odo-nav.vue")
+    OdoLink: () => import("./OdoLink.vue"),
+    OdoNav: () => import("../components/OdoNav.vue")
   },
   props: ["nav"],
   data: () => ({

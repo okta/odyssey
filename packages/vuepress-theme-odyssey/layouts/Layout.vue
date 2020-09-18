@@ -19,12 +19,11 @@ import "../styles/index.scss";
 
 export default {
   components: {
-    OdoSidebar: () => import("../components/odo-sidebar.vue"),
-    OdoTemplateHome: () => import("../templates/odo-template-home.vue"),
-    OdoTemplateIndex: () => import("../templates/odo-template-index.vue"),
-    OdoTemplatePlain: () => import("../templates/odo-template-plain.vue"),
-    OdoTemplateComponent: () =>
-      import("../templates/odo-template-component.vue")
+    OdoSidebar: () => import("../components/OdoSidebar.vue"),
+    OdoTemplateHome: () => import("../templates/OdoTemplateHome.vue"),
+    OdoTemplateIndex: () => import("../templates/OdoTemplateIndex.vue"),
+    OdoTemplatePlain: () => import("../templates/OdoTemplatePlain.vue"),
+    OdoTemplateComponent: () => import("../templates/OdoTemplateComponent.vue")
   }
 };
 </script>

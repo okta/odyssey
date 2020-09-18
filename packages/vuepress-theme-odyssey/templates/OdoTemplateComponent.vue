@@ -39,7 +39,7 @@
 export default {
   name: "OdoTemplateComponent",
   components: {
-    OdsTabs: () => import("../global-components/ods-tabs.vue")
+    OdsTabs: () => import("../global-components/OdsTabs.vue")
   }
 };
 </script>

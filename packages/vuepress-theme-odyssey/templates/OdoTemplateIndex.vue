@@ -34,8 +34,8 @@
 export default {
   name: "OdoTemplateIndex",
   components: {
-    OdoLink: () => import("../components/odo-link.vue"),
-    OdoCard: () => import("../components/odo-card.vue")
+    OdoLink: () => import("../components/OdoLink.vue"),
+    OdoCard: () => import("../components/OdoCard.vue")
   },
   computed: {
     content() {
