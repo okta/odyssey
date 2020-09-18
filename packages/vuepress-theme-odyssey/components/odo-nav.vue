@@ -1,27 +1,27 @@
 <template>
-  <nav 
+  <nav
     :class="{
-      'odo-nav': true, 
+      'odo-nav': true,
       [`is-odo-nav-${type}`]: type
     }"
   >
     <ul class="odo-nav--list">
       <li
+        v-for="(item, index) in nav"
+        :key="item.name"
         :class="{
           'odo-nav--item': true,
-          'odo-nav--item-with-subnav': item.children,
+          'odo-nav--item-with-subnav': item.children
         }"
-        v-for="(item, index) in nav" 
-        v-bind:key="item.name"
       >
-        <component 
+        <Component
           :is="item.children ? 'div' : 'fragment'"
           :class="{
-            'odo-nav--item-content': item.children,
+            'odo-nav--item-content': item.children
           }"
         >
-          <odo-link
-            :id="'nav-subhead-' + index" 
+          <OdoLink
+            :id="'nav-subhead-' + index"
             :class="{
               'odo-nav-link': true,
               'is-odo-nav-link--active': isCurrentRoute(item.link)
@@ -30,43 +30,43 @@
             :aria-expanded="isSubmenuExpanded(index)"
             @click.native="() => resetSubmenus(index)"
           >
-            {{item.title}}
-          </odo-link>
+            {{ item.title }}
+          </OdoLink>
           <button
-            @click="(event) => toggleSubmenu(event, index, item)"
+            v-if="item.children"
             :class="{
               'ods-button is-ods-button-clear with-odo-subnav-indicator': true,
-              'with-odo-subnav-indicator--expanded': 
-                isSubmenuExpanded(index),
+              'with-odo-subnav-indicator--expanded': isSubmenuExpanded(index)
             }"
-            v-if="item.children"
+            @click="event => toggleSubmenu(event, index, item)"
           />
-        </component>
+        </Component>
         <ul
           v-if="item.children"
-          :id="'nav-subhead-' + index" 
+          :id="'nav-subhead-' + index"
           :class="{
-            'odo-nav--subnav': true, 
+            'odo-nav--subnav': true,
             'is-visible': isSubmenuExpanded(index)
           }"
         >
-          <li 
-            v-for="subitem in item.children" 
-            v-bind:key="subitem.title"
+          <li
+            v-for="subitem in item.children"
+            :key="subitem.title"
             :class="{
-              'odo-nav--item': true, 
-              'is-odo-nav--item-selected': subitem.title === $page.frontmatter.title,
+              'odo-nav--item': true,
+              'is-odo-nav--item-selected':
+                subitem.title === $page.frontmatter.title
             }"
           >
-            <odo-link 
+            <OdoLink
               :href="subitem.link"
               :class="{
                 'odo-nav-link': true,
                 'is-odo-nav-link--active': isCurrentRoute(subitem.link)
               }"
             >
-              {{subitem.title}}
-            </odo-link>
+              {{ subitem.title }}
+            </OdoLink>
           </li>
         </ul>
       </li>
@@ -75,52 +75,54 @@
 </template>
 
 <script>
-import { Fragment } from 'vue-fragment'
+import { Fragment } from "vue-fragment";
 
 export default {
-  name: 'odo-nav',
-  data: () => ({
-    selected: []
-  }),
+  name: "OdoNav",
+  components: {
+    Fragment,
+    "odo-link": () => import("./odo-link.vue")
+  },
   props: {
     nav: {
       required: true
     },
     type: {
       type: String,
-      default: 'primary',
-      validator: (value) => ['primary', 'secondary'].includes(value)
+      default: "primary",
+      validator: value => ["primary", "secondary"].includes(value)
     }
   },
-  methods: {
-    isSubmenuExpanded: function (index) {
-      return this.selected.includes(index)
-    },
-    isCurrentRoute: function (path) {
-      return this.$route.path.includes(path)
-    },
-    toggleSubmenu: function (event, index, { children: subList }) {
-      const sublistActive = this.selected.includes(index)
-      if (subList && !sublistActive) {
-        this.selected.push(index)
-      } else {
-        this.selected.splice(this.selected.indexOf(index), 1)
-      }
-    },
-    resetSubmenus: function (index) {
-      this.selected = [ index ]
-    }
-  },
+  data: () => ({
+    selected: []
+  }),
   mounted() {
     const currentRoute = this.nav.find((item, index) => {
-      return item.link === this.$route.path || this.$route.path.includes(item.link)
-    })
+      return (
+        item.link === this.$route.path || this.$route.path.includes(item.link)
+      );
+    });
 
-    this.selected = [ this.nav.indexOf(currentRoute) ]
+    this.selected = [this.nav.indexOf(currentRoute)];
   },
-  components: {
-    Fragment,
-    'odo-link': () => import('./odo-link.vue')
-  },
-}
+  methods: {
+    isSubmenuExpanded: function(index) {
+      return this.selected.includes(index);
+    },
+    isCurrentRoute: function(path) {
+      return this.$route.path.includes(path);
+    },
+    toggleSubmenu: function(event, index, { children: subList }) {
+      const sublistActive = this.selected.includes(index);
+      if (subList && !sublistActive) {
+        this.selected.push(index);
+      } else {
+        this.selected.splice(this.selected.indexOf(index), 1);
+      }
+    },
+    resetSubmenus: function(index) {
+      this.selected = [index];
+    }
+  }
+};
 </script>

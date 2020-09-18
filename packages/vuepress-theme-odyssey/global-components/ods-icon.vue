@@ -1,7 +1,10 @@
 <!-- Usage: <ods-icon icon="complete" /> -->
 
 <template>
-  <div class="ods-icon" v-html="require(`!html-loader!@okta/odyssey-icons/src/${icon}.svg`)" />
+  <div
+    class="ods-icon"
+    v-html="require(`!html-loader!@okta/odyssey-icons/src/${icon}.svg`)"
+  />
 </template>
 
 <style lang="scss">
@@ -18,12 +21,12 @@
 
 <script>
 export default {
-  name: 'ods-icon',
+  name: "OdsIcon",
   props: {
     icon: {
       type: String,
       required: true
     }
   }
-}
+};
 </script>

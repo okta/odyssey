@@ -1,15 +1,17 @@
 <template>
-  <div :class='{
-    "odo-card": true,
-    [`is-odo-card-${type}`]: true,
-  }'>
-    <header class="odo-card--header" v-if="hasSlotHeader">
+  <div
+    :class="{
+      'odo-card': true,
+      [`is-odo-card-${type}`]: true
+    }"
+  >
+    <header v-if="hasSlotHeader" class="odo-card--header">
       <slot name="header" />
     </header>
     <div class="odo-card--main">
       <slot></slot>
     </div>
-    <footer class="odo-card--footer" v-if="hasSlotFooter">
+    <footer v-if="hasSlotFooter" class="odo-card--footer">
       <slot name="footer" />
     </footer>
   </div>
@@ -17,21 +19,21 @@
 
 <script>
 export default {
-  name: 'odo-card',
+  name: "OdoCard",
   props: {
     type: {
       type: String,
-      default: 'default',
-      validator: (value) => ['default', 'plain'].includes(value)
+      default: "default",
+      validator: value => ["default", "plain"].includes(value)
     }
   },
   computed: {
     hasSlotHeader() {
-      return this.$slots.header
+      return this.$slots.header;
     },
     hasSlotFooter() {
-      return this.$slots.footer
+      return this.$slots.footer;
     }
   }
-}
+};
 </script>

@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: 'odo-template-home',
-}
+  name: "OdoTemplateHome"
+};
 </script>

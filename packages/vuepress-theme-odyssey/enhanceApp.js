@@ -1,7 +1,1 @@
-export default ({
-  Vue,
-  options,
-  router,
-  siteData
-}) => {
-}
+export default ({ Vue, options, router, siteData }) => {};

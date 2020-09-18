@@ -3,13 +3,13 @@ module.exports = (options, ctx) => {
   return {
     plugins: [
       [
-        'vuepress-plugin-clean-urls',
+        "vuepress-plugin-clean-urls",
         {
-          normalSuffix: '/',
-          indexSuffix: '/',
-          notFoundlink: '/404.html',
-        },
-      ],
-    ],
-  }
-}
+          normalSuffix: "/",
+          indexSuffix: "/",
+          notFoundlink: "/404.html"
+        }
+      ]
+    ]
+  };
+};

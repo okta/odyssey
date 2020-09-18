@@ -1,5 +1,5 @@
 <template>
-   <RouterLink
+  <RouterLink
     v-if="isInternal"
     :to="link"
     :exact="exact"
@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import { isExternal, isMailto, isTel, ensureExt } from '../utils'
+import { isExternal, isMailto, isTel, ensureExt } from "../utils";
 
 export default {
-  name: 'odo-sidebar-link',
+  name: "OdoLink",
   props: {
     href: {
       required: true
@@ -34,42 +34,44 @@ export default {
     }
   },
   computed: {
-    link () {
-      return ensureExt(this.href)
+    link() {
+      return ensureExt(this.href);
     },
-    exact () {
+    exact() {
       if (this.$site.locales) {
-        return Object.keys(this.$site.locales).some(rootLink => rootLink === this.link)
+        return Object.keys(this.$site.locales).some(
+          rootLink => rootLink === this.link
+        );
       }
-      return this.link === '/'
+      return this.link === "/";
     },
-    isNonHttpURI () {
-      return isMailto(this.link) || isTel(this.link)
+    isNonHttpURI() {
+      return isMailto(this.link) || isTel(this.link);
     },
-    isBlankTarget () {
-      return this.target === '_blank'
+    isBlankTarget() {
+      return this.target === "_blank";
     },
-    isInternal () {
-      return !isExternal(this.link) && !this.isBlankTarget
+    isInternal() {
+      return !isExternal(this.link) && !this.isBlankTarget;
     },
-    hasTarget () {
+    hasTarget() {
       if (this.isNonHttpURI) {
-        return null
+        return null;
       }
       if (this.target) {
-        return this.target
+        return this.target;
       }
-      return isExternal(this.link) ? '_blank' : ''
+      return isExternal(this.link) ? "_blank" : "";
     },
-    hasRel () {
+    hasRel() {
       if (this.isNonHttpURI) {
-        return null
+        return null;
       }
       if (this.rel) {
-        return this.rel
+        return this.rel;
       }
-      return this.isBlankTarget ? 'noopener noreferrer' : ''
+      return this.isBlankTarget ? "noopener noreferrer" : "";
     }
   }
-}
+};
 </script>
