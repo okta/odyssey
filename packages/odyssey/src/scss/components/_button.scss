@@ -51,6 +51,12 @@
   }
 }
 
+.ods-button--label {
+  &:not(:only-child) {
+    margin-left: $spacing-xs;
+  }
+}
+
 .is-ods-button-secondary {
   border-color: $color-primary-base;
   background-color: $white;
