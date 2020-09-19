@@ -1,11 +1,37 @@
 .odo-card {
-  padding: $spacing-m $spacing-l;
+  position: relative;
+  padding: $spacing-m;
   border-radius: 0 32px;
   background: cv("gray", "000");
-  padding: $spacing-m;
   font-size: $size-body-sentence;
 
   &.is-odo-card-plain {
     background: transparent;
+  }
+
+  a[href]::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 32px;
+  }
+
+  &:hover,
+  &:focus-within {
+    background: cv("blue", "000");
+  }
+
+  .odo-card--header-image svg {
+    width: $spacing-l;
+    height: $spacing-l;
+    margin-bottom: $spacing-l;
+  }
+
+  .odo-card--main {
+    margin-bottom: $spacing-l;
   }
 }

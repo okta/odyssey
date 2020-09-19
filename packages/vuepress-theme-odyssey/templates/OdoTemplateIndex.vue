@@ -7,23 +7,29 @@
     <ul class="odo-grid--3col">
       <li v-for="(item, index) in content" :key="index">
         <OdoCard theme="plain" class="odo-card--index">
-          <img
-            src="/images/illustration-fpo.svg"
-            class="odo-card--index-icon"
-            aria-hidden="true"
-          />
-          <div class="odo-card--index-description">
+          <template slot="header">
+            <!-- eslint-disable -->
+            <div
+              aria-hidden="true"
+              class="odo-card--header-image"
+              v-html="
+                require(`!html-loader!../../docs/.vuepress/public/images/illustration-fpo.svg`)
+              "
+            />
+            <!-- eslint-enable -->
             <h2>{{ item.title }}</h2>
+          </template>
+          <div class="odo-card--index-description">
             <p>Et morbi eget at consectetur. Elit aenean mi phasellus.</p>
           </div>
-          <div class="odo-card--index-cta">
+          <template slot="footer">
             <OdoLink :href="item.link"
               >Learn more
               <span class="u-visually-hidden"
                 >about {{ item.title }}</span
               ></OdoLink
             >
-          </div>
+          </template>
         </OdoCard>
       </li>
     </ul>

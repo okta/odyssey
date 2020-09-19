@@ -11,17 +11,24 @@
         v-for="(section, index) in $page.frontmatter.contentPrimary"
         :key="index"
       >
-        <OdoCard class="odo-card--index">
-          <img
-            src="/images/illustration-fpo.svg"
-            class="odo-card--index-icon"
-            aria-hidden="true"
-          />
-          <h3>{{ section.title }}</h3>
+        <OdoCard>
+          <template slot="header">
+            <!-- eslint-disable -->
+            <div
+              aria-hidden="true"
+              class="odo-card--header-image"
+              v-html="
+                require(`!html-loader!../../docs/.vuepress/public/images/illustration-fpo.svg`)
+              "
+            />
+            <!-- eslint-enable -->
+
+            <h3>{{ section.title }}</h3>
+          </template>
           <p>{{ section.description }}</p>
-          <div class="odo-card--index-cta">
+          <template slot="footer">
             <OdoLink :href="section.href">{{ section.label }}</OdoLink>
-          </div>
+          </template>
         </OdoCard>
       </li>
     </ul>
@@ -39,16 +46,22 @@
     <ul class="odo-grid--2col">
       <li v-for="(resource, index) in $page.frontmatter.resources" :key="index">
         <OdoCard>
-          <img
-            src="/images/illustration-fpo.svg"
-            class="odo-card--index-icon"
-            aria-hidden="true"
-          />
-          <h3>{{ resource.title }}</h3>
+          <template slot="header">
+            <!-- eslint-disable -->
+            <div
+              aria-hidden="true"
+              class="odo-card--header-image"
+              v-html="
+                require(`!html-loader!../../docs/.vuepress/public/images/icon-${resource.illustration}.svg`)
+              "
+            />
+            <!-- eslint-enable -->
+            <h3>{{ resource.title }}</h3>
+          </template>
           <p>{{ resource.description }}</p>
-          <div class="odo-card--index-cta">
+          <template slot="footer">
             <OdoLink :href="resource.href">{{ resource.label }}</OdoLink>
-          </div>
+          </template>
         </OdoCard>
       </li>
     </ul>

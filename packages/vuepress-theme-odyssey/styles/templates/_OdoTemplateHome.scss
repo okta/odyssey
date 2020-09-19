@@ -5,9 +5,9 @@
   grid-template-rows: 1fr 1fr 1fr;
   height: 466px;
   margin-bottom: $spacing-l;
+  padding: $spacing-xl;
   border-radius: 0 32px;
   background-color: cv("gray", "000");
-  padding: $spacing-xl;
 
   .odo-hero--content {
     grid-column: 7 / span 6;
@@ -20,8 +20,8 @@
   border-radius: 0 32px;
 
   p {
-    font-size: $size-title-1;
     max-width: none;
+    font-size: $size-title-1;
   }
 
   a {

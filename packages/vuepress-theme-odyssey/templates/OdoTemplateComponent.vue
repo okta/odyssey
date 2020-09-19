@@ -17,7 +17,7 @@
                   require(`!html-loader!../../docs/.vuepress/public/images/icon-${link.icon}.svg`)
                 "
               />
-              <!-- eslint-enable -->
+              <!-- eslint-disable -->
             </a>
           </li>
         </ul>
