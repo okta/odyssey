@@ -85,7 +85,7 @@ export default {
   },
   props: {
     nav: {
-      type: Object, // TODO: figure out if theres a way to better type this with vue
+      type: Array, // TODO: figure out if theres a way to better type this with vue
       required: true
     },
     type: {

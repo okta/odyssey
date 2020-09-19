@@ -1,7 +1,11 @@
 <template>
   <div class="theme-odyssey">
     <a class="odo-skip-content" href="#main">Skip to main content</a>
-    <OdoSidebar />
+    <OdoSidebar
+      title="Odyssey Design System"
+      :show-search="$site.themeConfig.flags.hasSearch"
+      :nav="Nav"
+    />
     <main id="main" class="odo-main">
       <OdoTemplateHome v-if="$page.frontmatter.template === 'home'" />
       <OdoTemplateComponent
@@ -16,6 +20,7 @@
 
 <script>
 import "../styles/index.scss";
+import { resolveNav } from "../utils";
 
 export default {
   components: {
@@ -24,6 +29,16 @@ export default {
     OdoTemplateIndex: () => import("../templates/OdoTemplateIndex.vue"),
     OdoTemplatePlain: () => import("../templates/OdoTemplatePlain.vue"),
     OdoTemplateComponent: () => import("../templates/OdoTemplateComponent.vue")
+  },
+  computed: {
+    Nav() {
+      return resolveNav(
+        this.$page,
+        this.$page.regularPath,
+        this.$site,
+        this.$localePath
+      );
+    }
   }
 };
 </script>

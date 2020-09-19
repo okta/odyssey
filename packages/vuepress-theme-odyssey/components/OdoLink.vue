@@ -41,11 +41,6 @@ export default {
       return ensureExt(this.href);
     },
     exact() {
-      if (this.$site.locales) {
-        return Object.keys(this.$site.locales).some(
-          rootLink => rootLink === this.link
-        );
-      }
       return this.link === "/";
     },
     isNonHttpURI() {

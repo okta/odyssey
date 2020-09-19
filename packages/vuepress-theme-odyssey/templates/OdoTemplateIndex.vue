@@ -6,7 +6,7 @@
     </OdoCard>
     <ul class="odo-grid--3col">
       <li v-for="(item, index) in content" :key="index">
-        <OdoCard type="plain" class="odo-card--index">
+        <OdoCard theme="plain" class="odo-card--index">
           <img
             src="/images/illustration-fpo.svg"
             class="odo-card--index-icon"

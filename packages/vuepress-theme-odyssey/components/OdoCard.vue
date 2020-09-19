@@ -8,7 +8,7 @@
     <header v-if="hasSlotHeader" class="odo-card--header">
       <slot name="header" />
     </header>
-    <div class="odo-card--main">
+    <div v-if="hasDefaultSlot" class="odo-card--main">
       <slot></slot>
     </div>
     <footer v-if="hasSlotFooter" class="odo-card--footer">
@@ -30,6 +30,9 @@ export default {
   computed: {
     hasSlotHeader() {
       return this.$slots.header;
+    },
+    hasDefaultSlot() {
+      return this.$slots.default;
     },
     hasSlotFooter() {
       return this.$slots.footer;

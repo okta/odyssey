@@ -1,8 +1,11 @@
 <template>
-  <article class="odo-main--content">
-    <h1>{{ $page.frontmatter.headline }}</h1>
-    <p>{{ $page.frontmatter.lead }}</p>
-
+  <article class="odo-main--content odo-home">
+    <div class="odo-hero">
+      <div class="odo-hero--content">
+        <h1>{{ $page.frontmatter.headline }}</h1>
+        <p>{{ $page.frontmatter.lead }}</p>
+      </div>
+    </div>
     <ul class="odo-grid--3col">
       <li
         v-for="(section, index) in $page.frontmatter.contentPrimary"
@@ -23,9 +26,9 @@
       </li>
     </ul>
 
-    <div>
+    <div class="odo-principle">
       <h1>{{ $page.frontmatter.principle.title }}</h1>
-      <p style="font-size: 2.00001rem; font-weight: normal;">
+      <p>
         {{ $page.frontmatter.principle.description }}
       </p>
       <OdoLink :href="$page.frontmatter.principle.href">{{
