@@ -1,0 +1,12 @@
+.odo-link,
+.odo-link:visited {
+  color: $text-heading;
+  text-decoration-color: $text-heading;
+  text-decoration-thickness: 1px;
+  text-underline-offset: $spacing-xs;
+
+  &:hover {
+    color: cv("blue", "900");
+    text-decoration-color: cv("blue", "900");
+  }
+}
