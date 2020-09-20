@@ -1,3 +1,19 @@
+$breakpoints: (
+  m: 768px,
+  l: 1240px,
+  lg: 1800px
+);
+
+@mixin mq($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+  }
+}
+
 $grid-gap: $spacing-m;
 
 .odo-grid--1col {
@@ -5,6 +21,13 @@ $grid-gap: $spacing-m;
   grid-gap: $grid-gap 0;
   grid-template-columns: 1fr;
   margin-bottom: $grid-gap;
+
+  @include mq(m) {
+    display: block;
+    & > * {
+      margin-bottom: $spacing-l;
+    }
+  }
 }
 
 .odo-grid--2col {
@@ -12,6 +35,13 @@ $grid-gap: $spacing-m;
   grid-gap: $grid-gap $grid-gap;
   grid-template-columns: 1fr 1fr;
   margin-bottom: $grid-gap;
+
+  @include mq(m) {
+    display: block;
+    & > * {
+      margin-bottom: $spacing-l;
+    }
+  }
 }
 
 .odo-grid--3col {
@@ -19,4 +49,11 @@ $grid-gap: $spacing-m;
   grid-gap: $grid-gap $grid-gap;
   grid-template-columns: 1fr 1fr 1fr;
   margin-bottom: $grid-gap;
+
+  @include mq(m) {
+    display: block;
+    & > * {
+      margin-bottom: $spacing-l;
+    }
+  }
 }

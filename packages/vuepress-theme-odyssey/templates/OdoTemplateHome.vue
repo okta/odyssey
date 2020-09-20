@@ -1,11 +1,11 @@
 <template>
   <article class="odo-main--content odo-home">
-    <div class="odo-hero">
+    <header class="odo-hero odo-hero--layout-l">
       <div class="odo-hero--content">
         <h1>{{ $page.frontmatter.headline }}</h1>
         <p>{{ $page.frontmatter.lead }}</p>
       </div>
-    </div>
+    </header>
     <ul class="odo-grid--3col">
       <li
         v-for="(section, index) in $page.frontmatter.contentPrimary"

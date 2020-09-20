@@ -1,9 +1,11 @@
 <template>
   <article class="odo-main--content">
-    <OdoCard class="index-card--header odo-grid--2col">
-      <h1>{{ $page.frontmatter.title }}</h1>
-      <p>{{ $page.frontmatter.lead }}</p>
-    </OdoCard>
+    <header class="odo-hero odo-hero--layout-m">
+      <div class="odo-hero--content">
+        <h1>{{ $page.frontmatter.title }}</h1>
+        <p>{{ $page.frontmatter.lead }}</p>
+      </div>
+    </header>
     <ul class="odo-grid--3col">
       <li v-for="(item, index) in content" :key="index">
         <OdoCard theme="plain" class="odo-card--index">
