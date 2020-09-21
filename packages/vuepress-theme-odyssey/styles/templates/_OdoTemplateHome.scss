@@ -2,11 +2,7 @@
   margin-bottom: $spacing-l;
   padding: $spacing-m;
   border-radius: 0 32px;
-  background-color: cv("gray", "000");
-
-  @include mq(m) {
-    border: 1px solid red;
-  }
+  background-color: var(--odo-card-bg);
 
   &.odo-hero--layout-l {
     display: grid;

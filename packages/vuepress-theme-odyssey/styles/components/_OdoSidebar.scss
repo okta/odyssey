@@ -9,7 +9,7 @@
   .odo-site--title:visited {
     display: block;
     padding: $spacing-xs;
-    color: $text-heading;
+    color: var(--odo-text-heading, #{$text-heading});
     font-size: $size-title-4;
     font-weight: 600;
     text-decoration: none;

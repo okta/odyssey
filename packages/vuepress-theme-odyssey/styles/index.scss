@@ -9,14 +9,52 @@
 @import "templates/OdoTemplateHome";
 @import "templates/OdoTemplateComponent";
 
+html {
+  // Mapped from odyssey
+  --odo-page-bg: #{$white};
+
+  // Mapped from odyssey
+  --odo-text-body: #{$text-body};
+  --odo-text-heading: #{$text-heading};
+  --odo-border-color-display: #{$border-color-display};
+  --odo-border-color-ui: #{$border-color-ui};
+
+  // Component Overrides
+  --odo-card-bg: #{cv("gray", "000")};
+  --odo-card-bg-hover: #{cv("blue", "000")};
+
+  background: var(--odo-page-bg);
+  color: var(--odo-text-body, #{$text-body});
+  font-family: $body-font-family;
+
+  // Theme: Night Mode
+  &[data-odo-theme="night"] {
+    --odo-page-bg: #{cv("gray", "900")};
+    --odo-text-body: #{$white};
+    --odo-text-heading: #{$white};
+    --odo-card-bg: #303033;
+    --odo-card-bg-hover: #{cv("gray", "600")};
+  }
+}
+
+// TODO: high-level element overrides should be in odyssey.
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  &:hover .header-anchor {
-    opacity: 1;
+  color: var(--odo-text-heading, #{$text-body});
+}
+
+p {
+  color: var(--odo-text-heading, #{$text-body});
+}
+
+a,
+a:visited {
+  &:focus {
+    @include outline;
   }
 }
 
@@ -42,13 +80,6 @@ h6 {
     li {
       margin-bottom: $spacing-s;
     }
-  }
-}
-
-a,
-a:visited {
-  &:focus {
-    @include outline;
   }
 }
 
