@@ -31,7 +31,7 @@ Here's a quick overview of the colors available in Odyssey and some guidelines f
           Gray 900
         </td>
         <td>
-          <code>#212126</code>
+          <code>#1d1d21</code>
         </td>
         <td>
           Titles, body copy, icons, shadows, tooltips
