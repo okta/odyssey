@@ -316,3 +316,7 @@ $spacing-units: (
 
 .type-sample--400 { font-weight: 400; }
 .type-sample--600 { font-weight: 600; }
+
+.is-sample-animation-off {
+  animation: none;
+}
