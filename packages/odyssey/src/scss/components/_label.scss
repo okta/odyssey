@@ -23,6 +23,10 @@
   .ods-text-input[readonly] ~ & {
     color: $text-body;
   }
+
+  .ods-text-input[type='search'] ~ & {
+    @include is-visually-hidden;
+  }
 }
 
 .ods-label--optional {
