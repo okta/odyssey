@@ -1,5 +1,22 @@
 @import "~@okta/odyssey";
 @import "~@okta/prism-theme-odyssey";
+
+$breakpoints: (
+  m: 768px,
+  l: 1240px,
+  lg: 1800px
+);
+
+@mixin mq($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+  }
+}
+
 @import "base/fonts";
 @import "base/grid";
 @import "components/OdoCard";
@@ -62,10 +79,6 @@ a:visited {
   display: grid;
   grid-template-columns: 308px auto;
   max-width: 1440px;
-
-  @media screen and (max-width: 800px) {
-    display: block;
-  }
 }
 
 .odo-doc-header {
