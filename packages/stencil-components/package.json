@@ -1,0 +1,17 @@
+{
+  "name": "@okta/stencil.components",
+  "version": "0.0.0",
+  "license": "UNLICENSED",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "components build",
+    "start": "components start",
+    "test": "components test"
+  },
+  "devDependencies": {
+    "@okta/build-tools.components": "*",
+    "@okta/odyssey": "*"
+  }
+}
