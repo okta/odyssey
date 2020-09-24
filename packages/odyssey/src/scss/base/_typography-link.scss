@@ -13,14 +13,16 @@
 // limitations under the License.
 
 a {
-  color: cv('blue');
+  color: cv('blue', '500');
+  text-decoration: none;
 
   &:hover {
-    color: $color-primary-dark;
+    color: cv('blue', '500');
+    text-decoration: underline;
   }
 
   &:visited {
-    color: cv('blue');
+    color: cv('blue', '500');
   }
 
   /* stylelint-disable selector-no-qualifying-type */
