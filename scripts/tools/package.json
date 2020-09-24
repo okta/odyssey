@@ -1,0 +1,12 @@
+{
+  "name": "@okta/build-tools.components",
+  "description": "Tools to build, run, and test components",
+  "private": true,
+  "version": "0.0.0",
+  "bin": {
+    "components": "./bin/components.js"
+  },
+  "dependencies": {
+    "yargs": "^13.3.2"
+  }
+}
