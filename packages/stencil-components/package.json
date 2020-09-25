@@ -2,6 +2,10 @@
   "name": "@okta/stencil.components",
   "version": "0.0.0",
   "license": "UNLICENSED",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/"
   ],
@@ -11,7 +15,18 @@
     "test": "components test"
   },
   "devDependencies": {
+    "@a11y/focus-trap": "^1.0.5",
+    "@applitools/eyes-storybook": "^2.7.31",
     "@okta/build-tools.components": "*",
-    "@okta/odyssey": "*"
+    "@okta/odyssey": "*",
+    "@types/jest": "24.0.25",
+    "axe-puppeteer": "^1.1.0",
+    "choices.js": "9.0.1",
+    "classnames": "^2.2.6",
+    "jest": "24.9.0",
+    "jest-axe": "^3.4.0",
+    "jest-cli": "24.9.0",
+    "jest-config": "24.9.0",
+    "workbox-build": "4.3.1"
   }
 }

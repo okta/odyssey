@@ -1,0 +1,26 @@
+.main {
+  max-width: 600px;
+  margin: 15px;
+  font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+  line-height: 1.4;
+}
+
+.logo {
+  width: 256px;
+  margin: 15px;
+}
+
+.code {
+  padding: 2px 5px;
+  border: 1px solid #eae9e9;
+  border-radius: 4px;
+  background-color: #f3f2f2;
+  color: #3a3a3a;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Temporary to make the components look better */
+.sb-main {
+  font-family: 'Proxima Nova', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+}

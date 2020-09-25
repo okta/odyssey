@@ -1,0 +1,20 @@
+<testsuites name="stencil.components" tests="8" failures="0" time="3.122">
+  <testsuite name="o-button" errors="0" failures="0" skipped="0" timestamp="2020-09-25T23:59:26" time="3.066" tests="8">
+    <testcase classname="o-button type renders a primary button by default" name="o-button type renders a primary button by default" time="0.443">
+    </testcase>
+    <testcase classname="o-button type renders a secondary button" name="o-button type renders a secondary button" time="0.189">
+    </testcase>
+    <testcase classname="o-button type renders a danger button" name="o-button type renders a danger button" time="0.188">
+    </testcase>
+    <testcase classname="o-button type renders a clear button" name="o-button type renders a clear button" time="0.199">
+    </testcase>
+    <testcase classname="o-button type renders an overlay button" name="o-button type renders an overlay button" time="0.198">
+    </testcase>
+    <testcase classname="o-button type renders a primary button by default with icon" name="o-button type renders a primary button by default with icon" time="0.217">
+    </testcase>
+    <testcase classname="o-button disabled renders a disabled button" name="o-button disabled renders a disabled button" time="0.216">
+    </testcase>
+    <testcase classname="o-button a11y has no accessibility violations" name="o-button a11y has no accessibility violations" time="0.398">
+    </testcase>
+  </testsuite>
+</testsuites>
