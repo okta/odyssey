@@ -9,7 +9,7 @@
     "node": ">=12.13"
   },
   "scripts": {
-    "docs": "yarn --cwd packages/docs start",
+    "docs": "yarn --cwd packages/docs start --no-clear-screen",
     "icons": "yarn --cwd packages/odyssey-icons svgo",
     "lerna-version": "lerna version --no-git-tag-version --force-publish",
     "prelerna-publish": "lerna run build",

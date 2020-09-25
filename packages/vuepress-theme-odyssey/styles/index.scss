@@ -26,19 +26,51 @@ $breakpoints: (
 @import "templates/OdoTemplateHome";
 @import "templates/OdoTemplateComponent";
 
+$theme-day: (
+  odo-page-bg: $white,
+  odo-text-body: $text-body,
+  odo-text-heading: $text-heading,
+  odo-border-color-display: $border-color-display,
+  odo-border-color-ui: $border-color-ui,
+  odo-card-bg: cv("gray", "000"),
+  odo-card-bg-hover: cv("blue", "000")
+);
+
+$theme-dark: (
+  odo-page-bg: cv("gray", "900"),
+  odo-text-body: $white,
+  odo-text-heading: $white,
+  odo-card-bg: #303033,
+  odo-card-bg-hover: cv("gray", "600")
+);
+
+@function list-contains($list, $item) {
+  @return index($list, $item) != null;
+}
+
+@mixin setTheme($theme: $theme-day) {
+  $theme-properties: odo-page-bg, odo-text-body, odo-text-heading,
+    odo-border-color-display, odo-border-color-ui, odo-card-bg,
+    odo-card-bg-hover;
+
+  @each $custom-property, $value in $theme {
+    @if list-contains($theme-properties, $custom-property) {
+      --#{$custom-property}: #{$value};
+    } @else {
+      @warn "⚠️ Sorry, but `#{$value}` is not a valid value.";
+    }
+  }
+}
+
 html {
-  // Mapped from odyssey
-  --odo-page-bg: #{$white};
+  &,
+  &[data-odo-theme="day"] {
+    @include setTheme();
+  }
 
-  // Mapped from odyssey
-  --odo-text-body: #{$text-body};
-  --odo-text-heading: #{$text-heading};
-  --odo-border-color-display: #{$border-color-display};
-  --odo-border-color-ui: #{$border-color-ui};
-
-  // Component Overrides
-  --odo-card-bg: #{cv("gray", "000")};
-  --odo-card-bg-hover: #{cv("blue", "000")};
+  @media (prefers-color-scheme: day) {
+    @include setTheme($theme-day);
+  }
 
   background: var(--odo-page-bg);
   color: var(--odo-text-body, #{$text-body});
@@ -46,11 +78,11 @@ html {
 
   // Theme: Night Mode
   &[data-odo-theme="night"] {
-    --odo-page-bg: #{cv("gray", "900")};
-    --odo-text-body: #{$white};
-    --odo-text-heading: #{$white};
-    --odo-card-bg: #303033;
-    --odo-card-bg-hover: #{cv("gray", "600")};
+    @include setTheme($theme-dark);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @include setTheme($theme-dark);
   }
 }
 
