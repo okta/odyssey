@@ -20,16 +20,18 @@ exports.handler = () => {
   const packageDir = process.cwd();
   const pkgJson = require(`${packageDir}/package.json`);
   const suiteName = `${pkgJson.name.replace('@okta/', '')}`;
+  const reportsDir = process.env.REPORTS_DIR || `${packageDir}/test-reports`;
   const jestArgs = process.argv.slice(3).join(' ');
 
-  const cmd = `echo "Testing components using options: ${jestArgs || 'N/A'}"`;
+  const cmd = `stencil test --e2e ${jestArgs}`;
   const execOptions = {
     cwd: packageDir,
     stdio: 'inherit',
     env: {
       ...process.env,
       JEST_SUITE_NAME: suiteName,
-
+      JEST_JUNIT_OUTPUT: `${reportsDir}/e2e/${suiteName}.xml`,
+      REPORTS_DIR: reportsDir,
       // Stencil will parse npm_config_argv to extract jest args, but this
       // doesn't work with yarn (which does not require the run command). Reset
       // this value to clean the slate.
