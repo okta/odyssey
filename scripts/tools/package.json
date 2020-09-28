@@ -7,6 +7,22 @@
     "components": "./bin/components.js"
   },
   "dependencies": {
+    "@babel/core": "^7.11.2",
+    "@babel/runtime": "^7.11.2",
+    "@stencil/core": "1.8.5",
+    "@stencil/sass": "1.1.1",
+    "@stencil/utils": "^0.0.5",
+    "@storybook/addon-a11y": "^6.0.22",
+    "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-centered": "^6.0.0-alpha.30",
+    "@storybook/addon-knobs": "^6.0.21",
+    "@storybook/addon-storysource": "^6.0.21",
+    "@storybook/addon-viewport": "^6.0.21",
+    "@storybook/html": "^6.0.21",
+    "@storybook/source-loader": "^6.0.21",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "webpack": "^4.44.2",
     "yargs": "^13.3.2"
   }
 }

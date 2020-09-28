@@ -1,7 +1,10 @@
 // Map type to component configuration file
 const getConfiguration = (type) => {
   const config = {
-    stencil: 'stencil.config.ts'
+    stencil: {
+      configFile: 'stencil.config.ts',
+      cmd: 'stencil build',
+    }
   };
   return config[type];
 };
