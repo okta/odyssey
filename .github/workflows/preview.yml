@@ -1,4 +1,4 @@
-name: Preview
+name: preview
 on:
   pull_request:
     branches:
@@ -25,12 +25,12 @@ jobs:
         run: echo ::set-env name=SHA7::$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
 
       - name: set $PREVIEW_URL
-        run: echo ::set-env name=PREVIEW_URL::'https://'$SHA7'.ods.dev'
+        run: echo ::set-env name=PREVIEW_URL::"https://"$SHA7".ods.dev"
 
       - name: get COMMIT_MSG
         run: |
           MSG=$(git log --format=%B -n 1 ${{ github.event.after }})
-          echo '::set-env name=COMMIT_MSG::${MSG}'
+          echo "::set-env name=COMMIT_MSG::${MSG}"
 
       - name: install dependencies
         run: yarn
