@@ -60,7 +60,7 @@ module.exports = {
           { title: 'Tag', link: '/components/tag/', isVisible: true },
           { title: 'Table', link: '/components/table', isVisible: true },
           { title: 'Text Input', link: '/components/text-input', isVisible: true },
-          { title: 'Toast', link: '/components/toast', isVisible: false },
+          { title: 'Toast', link: '/components/toast', isVisible: true },
           { title: 'Tooltip', link: '/components/tooltip', isVisible: true },
           { title: 'Top Bar', link: '/components/top-bar', isVisible: false },
         ],
