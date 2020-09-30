@@ -1,6 +1,8 @@
 #!/bin/bash
 
-curl -X POST -H "Content-Type: application/json"
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
   --data '
   {
     "blocks": [
@@ -40,7 +42,5 @@ curl -X POST -H "Content-Type: application/json"
       }
     ]
   }
-  ' $INCOMING_WEBHOOK_URL
-            
-
-            
+  ' \
+  $INCOMING_WEBHOOK_URL
