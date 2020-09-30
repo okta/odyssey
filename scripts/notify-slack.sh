@@ -27,7 +27,7 @@ curl \
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "<https://github.com/okta/odyssey/pull/'"$PULL_REQUEST_ID"'|Pull Request '"$PULL_REQUEST_ID"'> ∙ *<'"$PREVIEW_URL"'|View Deployment>*"
+          "text": "<https://github.com/okta/odyssey/pull/'"$PULL_REQUEST_ID"'|Pull Request #'"$PULL_REQUEST_ID"'> ∙ *<'"$PREVIEW_URL"'|View Preview>*"
         }
       },
       {
