@@ -27,7 +27,7 @@ curl \
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "<https://github.com/okta/odyssey/pull/'"$PULL_REQUEST_ID"'|Pull Request #'"$PULL_REQUEST_ID"'> ∙ *<'"$PREVIEW_URL"'|View Preview>*"
+          "text": "<https://github.com/okta/odyssey/pull/'"$PULL_REQUEST_ID"'|PR #'"$PULL_REQUEST_ID"'> ∙ *<'"$PREVIEW_URL"'|View Preview>*"
         }
       },
       {
@@ -50,4 +50,3 @@ curl \
   }
   ' \
   $INCOMING_WEBHOOK_URL \
-
