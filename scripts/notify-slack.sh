@@ -1,8 +1,6 @@
 #!/bin/bash
 
-curl \
-  -X POST \
-  -H "Content-Type: application/json" \
+curl -X POST -H "Content-Type: application/json"
   --data '
   {
     "blocks": [
@@ -15,11 +13,11 @@ curl \
           },
           {
             "type": "mrkdwn",
-            "text": ""'$AUTHOR_NAME@$SHA7'""
+            "text": "'"$AUTHOR_NAME"'@'"$SHA7"'"
           },
           {
             "type": "mrkdwn",
-            "text": ""'$BRANCH_NAME'""
+            "text": "'"$BRANCH_NAME"'"
           }
         ]
       },
@@ -27,14 +25,14 @@ curl \
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "> "'$COMMIT_MSG'""
+          "text": "> '"$COMMIT_MSG"'"
         }
       },
       {
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "<https://github.com/okta/odyssey/pull/"'$PULL_REQUEST_ID'"|PR #"'$PULL_REQUEST_ID'"> ∙ *<"'$PREVIEW_URL'"|View Preview>*"
+          "text": "<https://github.com/okta/odyssey/pull/'"$PULL_REQUEST_ID"'|PR #'"$PULL_REQUEST_ID"'> ∙ *<'"$PREVIEW_URL"'|View Preview>*"
         }
       },
       {
@@ -42,5 +40,7 @@ curl \
       }
     ]
   }
-  ' \
-  $INCOMING_WEBHOOK_URL \
+  ' $INCOMING_WEBHOOK_URL
+            
+
+            

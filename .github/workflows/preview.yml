@@ -4,7 +4,7 @@ on:
     branches:
       - master
       - develop
-      - "release/**"
+      - 'release/**'
 jobs:
   deployment:
     runs-on: ubuntu-latest
@@ -25,17 +25,12 @@ jobs:
         run: echo ::set-env name=SHA7::$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
 
       - name: set $PREVIEW_URL
-        run: echo ::set-env name=PREVIEW_URL::"https://"$SHA7".ods.dev"
+        run: echo ::set-env name=PREVIEW_URL::'https://'$SHA7'.ods.dev'
 
       - name: get COMMIT_MSG
         run: |
           MSG=$(git log --format=%B -n 1 ${{ github.event.after }})
-          echo "::set-env name=COMMIT_MSG::${MSG}"
-
-      # - name: Dump GitHub context
-      #   env:
-      #     GITHUB_CONTEXT: ${{ toJson(github) }}
-      #   run: echo "$GITHUB_CONTEXT"
+          echo '::set-env name=COMMIT_MSG::${MSG}'
 
       - name: install dependencies
         run: yarn
@@ -46,8 +41,8 @@ jobs:
       - name: build docs
         run: yarn workspace @okta/design-docs build
 
-      - name: "deploy: create"
-        uses: bobheadxi/deployments@master
+      - name: 'deploy: create'
+        uses: bobheadxi/deployments@v0.4.2
         id: deployment
         with:
           step: start
@@ -55,12 +50,12 @@ jobs:
           env: preview
           ref: ${{ github.head_ref }}
 
-      - name: "deploy: 🚀 start"
+      - name: 'deploy: 🚀 start'
         run: |
           aws s3 sync ./packages/docs/dist/ s3://ods.dev/$SHA7 --delete
 
-      - name: "deploy: update status"
-        uses: bobheadxi/deployments@master
+      - name: 'deploy: update status'
+        uses: bobheadxi/deployments@v0.4.2
         if: always()
         with:
           step: finish
@@ -69,7 +64,7 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: ${{ env.PREVIEW_URL }}
 
-      - name: "notify: slack"
+      - name: 'notify: slack'
         run: sh ./scripts/notify-slack.sh
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
