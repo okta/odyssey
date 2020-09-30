@@ -4,7 +4,6 @@ curl \
   -X POST \
   -H "Content-Type: application/json" \
   --data '
-
   {
     "blocks": [
       {
@@ -13,35 +12,30 @@ curl \
           {
             "type": "mrkdwn",
             "text": ":rocket: *Preview Deployed*"
-          }
-        ]
-      },
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-            "text": "> '"$COMMIT_MSG"'"
-        }
-      },
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "<https://github.com/okta/odyssey/pull/'"$PULL_REQUEST_ID"'|PR #'"$PULL_REQUEST_ID"'> ∙ *<'"$PREVIEW_URL"'|View Preview>*"
-        }
-      },
-      {
-        "type": "context",
-        "elements": [
-          {
-            "type": "mrkdwn",
-            "text": "'"$AUTHOR_NAME"'@'"$SHA7"'"
           },
           {
             "type": "mrkdwn",
-            "text": "'"$BRANCH_NAME"'"
+            "text": ""'$AUTHOR_NAME@$SHA7'""
+          },
+          {
+            "type": "mrkdwn",
+            "text": ""'$BRANCH_NAME'""
           }
         ]
+      },
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "> "'$COMMIT_MSG'""
+        }
+      },
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "<https://github.com/okta/odyssey/pull/"'$PULL_REQUEST_ID'"|PR #"'$PULL_REQUEST_ID'"> ∙ *<"'$PREVIEW_URL'"|View Preview>*"
+        }
       },
       {
         "type": "divider"
