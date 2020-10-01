@@ -35,7 +35,7 @@ Here's a quick overview of the colors available in Odyssey and some guidelines f
           Gray 900
         </td>
         <td>
-          <code>#212126</code>
+          <code>#1d1d21</code>
         </td>
         <td>
           Titles, body copy, icons, shadows, tooltips
@@ -235,7 +235,7 @@ Here's a quick overview of the colors available in Odyssey and some guidelines f
         </td>
       </tr>
       <tr>
-        <th scope="row" rowspan="4">
+        <th scope="row" rowspan="5">
           Green
         </th>
         <td class="is-sample-table-swatch">
@@ -252,6 +252,23 @@ Here's a quick overview of the colors available in Odyssey and some guidelines f
         </td>
         <td>
           N/A
+        </td>
+      </tr>
+      <tr>
+        <td class="is-sample-table-swatch">
+          <span class="sample-color sample-color--green-600"></span>
+        </td>
+        <td class="is-sample-table-token">
+          Green 600
+        </td>
+        <td>
+          <code>#008055</code>
+        </td>
+        <td>
+          Background color for success messaging
+        </td>
+        <td>
+          Headlines, body copy, fail states, buttons
         </td>
       </tr>
       <tr>

@@ -181,6 +181,77 @@ Note, when indicating a validation error, please use a `.ods-field--error` to in
 
 ## Additional types
 
+### Standalone Search
+
+> `<input>` elements of type search are text fields designed for the user to enter search queries into. These are functionally identical to text inputs, but may be styled differently by the user agent. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/search">MDN</a></cite>
+
+Odyssey's standalone search is styled to provide minimal UI while maintaining accessibility when searching outside of normal form contexts. Inputs with `type="search"` will render with the "Search" <a href="/base/iconography#ui-indicators-vs-icons">UI indicator</a> as well as a visually hidden label.
+
+Unlike other inputs, we recommend using the `placeholder` attribute to indicate the scope of your search input. This text should match the hidden label.
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="search" name="search" id="search" autocomplete="search" spellcheck="false" placeholder="Search people" required>
+        <label class="ods-label" for="search">Search people</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="search" name="search" id="search" autocomplete="search" spellcheck="false" placeholder="Search people" required>
+      <label class="ods-label" for="search">Search people</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+We also provide a variant with an attached button for in-page searching or when placeholder text is undesirable. Please follow our <a href="/components/button/">Button guidelines</a> when using these variants.
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input class="ods-text-input" type="search" name="search" id="button-search" autocomplete="search" spellcheck="false" aria-labelledby="search-button" required>
+        <button class="ods-button" id="search-button">Search people</button>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset--attached">
+      <input class="ods-text-input" type="search" name="search" id="button-search" autocomplete="search" spellcheck="false" aria-labelledby="search-button" required>
+      <button class="ods-button" id="search-button">Search people</button>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input class="ods-text-input" type="search" name="search" id="button-search-sec" autocomplete="search" spellcheck="false" aria-labelledby="search-button" required>
+        <button class="ods-button is-ods-button-secondary" id="search-button">Find user</button>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset--attached">
+      <input class="ods-text-input" type="search" name="search" id="button-search-sec" autocomplete="search" spellcheck="false" aria-labelledby="search-button" required>
+      <button class="ods-button is-ods-button-secondary" id="search-button">Find user</button>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
 ### Text area
 
 > The HTML `<textarea>` element represents a multi-line plain-text editing control, useful when you want to allow users to enter a sizeable amount of free-form text, for example a comment on a review or feedback form. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea">MDN</a></cite>

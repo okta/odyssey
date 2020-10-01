@@ -32,15 +32,6 @@
   align-items: center;
   margin-top: $spacing-xs;
   color: $text-danger;
-
-  &::before {
-    content: '';
-    width: $size-body-caption;
-    height: $size-body-caption;
-    margin: 0 $spacing-xs 0 0;
-    background-image: get-icon('alert', $text-danger);
-    background-repeat: no-repeat;
-  }
 }
 
 .ods-fieldset--pair {
@@ -90,6 +81,24 @@
 
   .ods-field--error {
     order: 4;
+  }
+}
+
+.ods-fieldset--attached {
+  display: flex;
+  max-width: $max-line-length;
+
+  .ods-button {
+    border-radius: 0 $base-border-radius $base-border-radius 0;
+  }
+
+  .ods-text-input {
+    border-right: 0;
+    border-radius: $base-border-radius 0 0 $base-border-radius;
+
+    &:focus {
+      z-index: 1;
+    }
   }
 }
 

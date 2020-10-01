@@ -493,21 +493,45 @@ They also pair well with Primary and Secondary buttons.
 
 ### Button with icon
 
-Icons can be added to any of our button variants to increase clarity or add flair.
+Icons can be added to any of our button variants to increase clarity or add flair. To ensure proper layout, please wrap any visual labels with `.ods-button--label` as below.
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
-    <button class="ods-button is-ods-button-primary"><svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C6 12.5523 6.44772 13 7 13C7.55228 13 8 12.5523 8 12V8L12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6L8 6V2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2V6L2 6C1.44772 6 1 6.44771 1 7C1 7.55228 1.44772 8 2 8L6 8V12Z" fill="currentColor"/></svg></svg>Add User</button>
-    <button class="ods-button is-ods-button-secondary"><svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C6 12.5523 6.44772 13 7 13C7.55228 13 8 12.5523 8 12V8L12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6L8 6V2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2V6L2 6C1.44772 6 1 6.44771 1 7C1 7.55228 1.44772 8 2 8L6 8V12Z" fill="currentColor"/></svg></svg>Add User</button>
-    <button class="ods-button is-ods-button-danger"><svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C6 12.5523 6.44772 13 7 13C7.55228 13 8 12.5523 8 12V8L12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6L8 6V2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2V6L2 6C1.44772 6 1 6.44771 1 7C1 7.55228 1.44772 8 2 8L6 8V12Z" fill="currentColor"/></svg></svg>Add User</button>
-    <button class="ods-button is-ods-button-clear"><svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C6 12.5523 6.44772 13 7 13C7.55228 13 8 12.5523 8 12V8L12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6L8 6V2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2V6L2 6C1.44772 6 1 6.44771 1 7C1 7.55228 1.44772 8 2 8L6 8V12Z" fill="currentColor"/></svg></svg>Add User</button>
+    <button class="ods-button is-ods-button-primary" aria-label="Add User"><svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C6 12.5523 6.44772 13 7 13C7.55228 13 8 12.5523 8 12V8L12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6L8 6V2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2V6L2 6C1.44772 6 1 6.44771 1 7C1 7.55228 1.44772 8 2 8L6 8V12Z" fill="currentColor"/></svg></button>
+    <button class="ods-button is-ods-button-secondary" aria-label="Add User"><svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C6 12.5523 6.44772 13 7 13C7.55228 13 8 12.5523 8 12V8L12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6L8 6V2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2V6L2 6C1.44772 6 1 6.44771 1 7C1 7.55228 1.44772 8 2 8L6 8V12Z" fill="currentColor"/></svg><span class="ods-button--label">Add User</span></button>
+    <button class="ods-button is-ods-button-danger" aria-label="Add User"><svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C6 12.5523 6.44772 13 7 13C7.55228 13 8 12.5523 8 12V8L12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6L8 6V2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2V6L2 6C1.44772 6 1 6.44771 1 7C1 7.55228 1.44772 8 2 8L6 8V12Z" fill="currentColor"/></svg></button>
+    <button class="ods-button is-ods-button-clear" aria-label="Add User"><svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 12C6 12.5523 6.44772 13 7 13C7.55228 13 8 12.5523 8 12V8L12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6L8 6V2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2V6L2 6C1.44772 6 1 6.44771 1 7C1 7.55228 1.44772 8 2 8L6 8V12Z" fill="currentColor"/></svg><span class="ods-button--label">Add User</span></button>
   </div>
 
   ```html
-  <button class="ods-button is-ods-button-clear">Clear</button>
-  <button class="ods-button is-ods-button-clear" disabled>Clear</button>
+  <button class="ods-button is-ods-button-primary" aria-label="Add User">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...</svg>
+  </button>
+  <button class="ods-button is-ods-button-secondary" aria-label="Add User">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...</svg>
+    <span class="ods-button--label">Add User</span>
+  </button>
+  <button class="ods-button is-ods-button-danger" aria-label="Add User">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...</svg>
+  </button>
+  <button class="ods-button is-ods-button-clear" aria-label="Add User">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...</svg>
+    <span class="ods-button--label">Add User</span>
+  </button>
   ```
 </figure>
+
+#### Accessibility
+
+When using icons within a button, be sure to add `focusable="false"` to the `svg`; this will prevent browsers (IE, specifically) from incorrectly focusing on the icon instead of the button. Similarly, the `aria-hidden` attribute will ensure screen readers do not unnecessarily announce iconography.
+
+Whether your button has a visual label or not, be sure to use the `aria-label` attribute to ensure screen readers will correctly identify your button, rather than extraneous content inside of it. Remember, if your button does contain a visual label, the text within `aria-label` should match exactly. This is a <a href="https://www.w3.org/WAI/WCAG21/quickref/#label-in-name">WCAG 2.1</a> requirement and will ensure that sighted users of screen readers are not confused by a mismatch.
+
+This enables decorative icons to be ignored by screen readers without compromising the accessibility of informative icons - all with the same markup.
+
+#### Icon-only usability
+
+We recommend pairing icon-only buttons with our <a href="/components/tooltip/">Tooltip</a>. While this is not required, it will increase clarity for sighted users.
 
 ## Guidelines
 
@@ -571,5 +595,20 @@ Semantic states can be combined to produce Secondary Danger styles.
     </tbody>
   </table>
 </figure>
+
+## Further reading
+
+<ul>
+  <li>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button">
+      MDN - &lt;button&gt;
+    </a>
+  </li>
+  <li>
+    <a href="https://www.sarasoueidan.com/blog/accessible-icon-buttons/">
+      Sara Soueidan - Accessible Icon Buttons
+    </a>
+  </li>
+</ul>
 
 :::

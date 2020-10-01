@@ -207,21 +207,8 @@ $spacing-units: (
   margin-bottom: $spacing-xl;
 }
 
-.nimatron--rendered .is-link-default {
-  color: $color-primary-base;
-}
-
-.nimatron--rendered .is-link-default:hover,
-.nimatron--rendered .is-link-hover {
-  color: $color-primary-dark;
-}
-
 .is-rendered-success {
   background: cv('green', '500');
-}
-
-.is-link-visited {
-  color: cv('purple');
 }
 
 .sample--external-link-icon {
@@ -329,3 +316,7 @@ $spacing-units: (
 
 .type-sample--400 { font-weight: 400; }
 .type-sample--600 { font-weight: 600; }
+
+.is-sample-animation-off {
+  animation: none;
+}

@@ -95,22 +95,22 @@ title: Design Tokens
     <tbody>
       <tr>
         <td><code>$text-body</code></td>
-        <td><span class="sample-token sample-token--text-body">Aa</span></td>
+        <td><span class="sample-token--text-body">Aa</span></td>
         <td>gray, 900</td>
       </tr>
       <tr>
         <td><code>$text-danger</code></td>
-        <td><span class="sample-token sample-token--text-danger">Aa</span></td>
+        <td><span class="sample-token--text-danger">Aa</span></td>
         <td>red, 500</td>
       </tr>
       <tr>
         <td><code>$text-heading</code></td>
-        <td><span class="sample-token sample-token--text-heading">Aa</span></td>
+        <td><span class="sample-token--text-heading">Aa</span></td>
         <td>gray, 900</td>
       </tr>
       <tr>
         <td><code>$text-sub</code></td>
-        <td><span class="sample-token sample-token--text-sub">Aa</span></td>
+        <td><span class="sample-token--text-sub">Aa</span></td>
         <td>gray, 600</td>
       </tr>
     </tbody>
