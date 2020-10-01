@@ -32,10 +32,10 @@ module.exports = {
           title: 'Base',
           link: '/base/',
           children: [
-            { title: 'Color', link: '/base/color' },
-            { title: 'Design Tokens', link: '/base/tokens' },
-            { title: 'Elements', link: '/base/elements' },
-            { title: 'Typography', link: '/base/typography' },
+            { title: 'Color', link: '/base/color/' },
+            { title: 'Design Tokens', link: '/base/tokens/' },
+            { title: 'Elements', link: '/base/elements/' },
+            { title: 'Typography', link: '/base/typography/' },
           ]
         },
         {
@@ -48,9 +48,9 @@ module.exports = {
             { title: 'Modal', link: '/components/modal/' },
             { title: 'Radio Button', link: '/components/radio-button/' },
             { title: 'Select', link: '/components/select/' },
-            { title: 'Status', link: '/components/status//' },
-            { title: 'Tab', link: '/components/tab//' },
-            { title: 'Tag', link: '/components/tag//' },
+            { title: 'Status', link: '/components/status/' },
+            { title: 'Tab', link: '/components/tab/' },
+            { title: 'Tag', link: '/components/tag/' },
             { title: 'Table', link: '/components/table/' },
             { title: 'Text Input', link: '/components/text-input/' },
             { title: 'Tooltip', link: '/components/tooltip/' },

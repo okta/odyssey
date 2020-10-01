@@ -63,27 +63,19 @@ $theme-dark: (
 }
 
 html {
-  &,
-  &[data-odo-theme="day"] {
-    @include setTheme();
-  }
-
-  @media (prefers-color-scheme: day) {
-    @include setTheme($theme-day);
-  }
-
+  @include setTheme($theme-day);
   background: var(--odo-page-bg);
   color: var(--odo-text-body, #{$text-body});
   font-family: $body-font-family;
 
   // Theme: Night Mode
-  &[data-odo-theme="night"] {
-    @include setTheme($theme-dark);
-  }
+  // &[data-odo-theme="night"] {
+  //   @include setTheme($theme-dark);
+  // }
 
-  @media (prefers-color-scheme: dark) {
-    @include setTheme($theme-dark);
-  }
+  // @media (prefers-color-scheme: dark) {
+  //   @include setTheme($theme-dark);
+  // }
 }
 
 // TODO: high-level element overrides should be in odyssey.
@@ -111,20 +103,9 @@ a:visited {
   display: grid;
   grid-template-columns: 308px auto;
   max-width: 1440px;
-}
 
-.odo-doc-header {
-  display: grid;
-  grid-gap: $spacing-l $spacing-l;
-  grid-template-columns: 1fr 1fr;
-  margin-bottom: $spacing-l;
-
-  .odo-doc-header--links {
-    float: right;
-
-    li {
-      margin-bottom: $spacing-s;
-    }
+  @include mq(m) {
+    display: block;
   }
 }
 

@@ -7,8 +7,6 @@ tabs:
     id: 'odyssey-overview'
   - label: 'HTML + SCSS'
     id: 'odyssey-html-scss'
-  - label: 'Figma guide'
-    id: 'odyssey-figma-guide'
   - label: 'Legacy docs'
     id: 'nimatron-all'
 links:
@@ -22,23 +20,15 @@ links:
 
 
 ::: slot odyssey-overview
-<section class="odo-grid--2col">
-  <header class="odo-header">
-
   ## Button types
 
   In Odyssey there are 5 different button types; Primary, Secondary, Danger, Clear, and Overlay.
-
-  </header>
-
-  <Example>
 
   ##### Primary
   Our default button is used for primary action on a page or view. For example, “Save”. Use this button sparingly to provide a clear target for users to get to. 
 
   It’s best to use this button on a white background.
 
-  </Example>
 
   <figure class="ods-overview--rendered">
     <button class="ods-button">Default</button>
@@ -47,15 +37,12 @@ links:
     <button disabled="disabled" class="ods-button">Disabled</button>
   </figure>
 
-  <Example>
   
   ##### Secondary
 
   Ideal for a secondary actions to compliment the Primary button. Similar to the Primary button, use this button sparingly to provide focus to the user. 
 
   It’s best to use this button on a white background.
-
-  </Example>
 
   <figure class="ods-overview--rendered">
     <button class="ods-button is-ods-button-secondary">Default</button>
@@ -64,14 +51,10 @@ links:
     <button disabled="disabled" class="ods-button is-ods-button-secondary">Disabled</button>
   </figure>
 
-  <Example>
-
   ##### Danger
   Use this button for scenarios where a user may be deleting information or completing a task that could not be reversed. 
 
   It’s best to use this button on a white background.
-
-  </Example>
 
   <figure class="ods-overview--rendered">
     <button class="ods-button is-ods-button-danger">Default</button>
@@ -80,16 +63,12 @@ links:
     <button disabled="disabled" class="ods-button is-ods-button-danger">Disabled</button>
   </figure>
 
-  <Example>
-
   ##### Clear
   These are used for in-page interactions that modify the visible UI but do not modify data or an ongoing process. For example, hiding or showing a password field. 
 
   They pair well with Primary and Secondary buttons. 
 
   It’s best to use this button on a white background.
-
-  </Example>
 
   <figure class="ods-overview--rendered">
     <button class="ods-button is-ods-button-clear">Default</button>
@@ -98,14 +77,10 @@ links:
     <button disabled="disabled" class="ods-button is-ods-button-clear">Disabled</button>
   </figure>
 
-  <Example>
-
   ##### Overlay
   These buttons may only be used on top of a “Base Color” such as Purple 500 or on top of a colored background, photo, or illustration. They should only be used in the scenario where Primary, Secondary, and regular text links cannot be used.
 
   Lastly, they only exist at the large size.
-
-  </Example>
 
   <figure class="ods-overview--rendered">
     <button class="ods-button is-ods-button-overlay">Default</button>
@@ -113,85 +88,50 @@ links:
     <button class="ods-button is-ods-button-overlay is-ods-button-focus">Focus</button>
     <button disabled="disabled" class="ods-button is-ods-button-overlay">Disabled</button>
   </figure>
-</section>
 
-<section class="odo-grid--1col">
-  <header class="odo-header">
 
   ## Anatomy
 
   Button UI is simple. It consists of typography within a rectangular container.
 
-  </header>
-
   <FigureAnatomy img="/images/button-anatomy.svg" />
-</section>
 
-<section class="odo-grid--2col">
-  <header class="odo-header">
-  
   ## Guidelines
 
   Use buttons to indicate the important actions that a user can take. Don’t use buttons to navigate around the site or product; use links instead
-
-
-  </header>
-
-  <div>
 
   ### Punctuation and copy
 
   ##### Context
   Be as direct as possible with the goal you are trying to get the user to accomplish. Try to avoid dark patterns that require the user to discover what a button does. Be strategic in your button placement so a user has the best context. Consider using buttons at the end of an input form, or by preceding with supporting copy.
 
-  </div>
-
-  <div>
-    <FigureExample type="positive">
-      <button class="ods-button">Download report</button>
-    </FigureExample>
-    <FigureExample type="negative">
-      <button class="ods-button">Download</button>
-    </FigureExample>
-  </div>
-
-  <div>
+  <FigureExample type="positive">
+    <button class="ods-button">Download report</button>
+  </FigureExample>
+  <FigureExample type="negative">
+    <button class="ods-button">Download</button>
+  </FigureExample>
 
   ##### Word count
   Never use more than 3 words inside of a button. If you think you need more words, consider other design solutions on the page.
 
-  </div>
+  <FigureExample type="positive">
+    <button class="ods-button">Download report</button>
+  </FigureExample>
 
-  <div>
-    <FigureExample type="positive">
-      <button class="ods-button">Download report</button>
-    </FigureExample>
-    <FigureExample type="negative">
-      <button class="ods-button">Download most recent report</button>
-    </FigureExample>
-  </div>
-
-  <div>
+  <FigureExample type="negative">
+    <button class="ods-button">Download most recent report</button>
+  </FigureExample>
 
   ##### Capitalization
   If using multiple words, use sentence case. Sentence case means that a captial letter is applied to the first word and all other characters are lower case.
-  
-  </div>
 
-  <div>
-    <FigureExample type="positive">
-      <button class="ods-button">Download report</button>
-    </FigureExample>
-    <FigureExample type="negative">
-      <button class="ods-button">Download Report</button>
-    </FigureExample>
-  </div>
-
-</section>
-
-
-<section class="odo-grid--2col">
-  <div>
+  <FigureExample type="positive">
+    <button class="ods-button">Download report</button>
+  </FigureExample>
+  <FigureExample type="negative">
+    <button class="ods-button">Download Report</button>
+  </FigureExample>
 
   ## Accessibility
     
@@ -200,10 +140,6 @@ links:
   Color is not a clear affordance for all users, please use clear, concise copy to label buttons
 
   User the `<button>` element instead of `<a>` whenever possible. The keyboard and screen reader interaction for these elements is different. Space will trigger a `<button>`; Enter will trigger an `<a>`.
-
-  </div>
-
-</section>
 
 :::
 
@@ -339,52 +275,6 @@ Semantic states can be combined to produce Secondary Danger styles.
     </tbody>
   </table>
 </figure>
-:::
-
-::: slot odyssey-figma-guide
-<section class="odo-grid--2col">
-  <header class="odo-header">
-  
-  ## Find them
-
-  </header>
-
-  <div>
-  
-  ##### Location
-  In the upper left hand corner of of Figma, you’ll see two tabs Layers and Assets. Click on “Assets”.
-
-  From there, you’ll see all of the available components in Odyssey. Find “Buttons”, and click on the button type you need to use.
-
-  </div>
-  
-  <figure>
-    <img src="/images/button-figma-guide-01.png" />
-  </figure>
-
-  <header class="odo-header">
-  
-  ## Use them
-
-  </header>
-  
-  <div>
-  
-  ##### Drag and drop
-  After you follow the steps above, you can just drag and drop the button to your frame.
-  
-  ##### Override text
-  After you follow the steps above, you can just drag and drop the button to your frame.
-  
-  ##### Override button type
-  After you follow the steps above, you can just drag and drop the button to your frame.
-
-  </div>
-
-  <figure>
-    <img src="/images/button-figma-guide-02.png" />
-  </figure>
-</section>
 :::
 
 ::: slot nimatron-all
