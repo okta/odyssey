@@ -29,10 +29,6 @@ module.exports = {
     nav: {
       primary: [
         {
-          title: 'Getting Started',
-          link: '/getting-started/'
-        },
-        {
           title: 'Base',
           link: '/base/',
           children: [
@@ -46,38 +42,26 @@ module.exports = {
           title: 'Components',
           link: '/components/',
           children: [
-            { title: 'Button', link: '/components/button' },
-            { title: 'Checkbox', link: '/components/checkbox' },
-            { title: 'Link', link: '/components/link' },
-            { title: 'Modal', link: '/components/modal' },
-            { title: 'Radio Button', link: '/components/radio-button' },
-            { title: 'Select', link: '/components/select' },
-            { title: 'Status', link: '/components/status/' },
-            { title: 'Tab', link: '/components/tab/' },
-            { title: 'Tag', link: '/components/tag/' },
-            { title: 'Table', link: '/components/table' },
-            { title: 'Text Input', link: '/components/text-input' },
-            { title: 'Tooltip', link: '/components/tooltip' },
+            { title: 'Button', link: '/components/button/' },
+            { title: 'Checkbox', link: '/components/checkbox/' },
+            { title: 'Link', link: '/components/link/' },
+            { title: 'Modal', link: '/components/modal/' },
+            { title: 'Radio Button', link: '/components/radio-button/' },
+            { title: 'Select', link: '/components/select/' },
+            { title: 'Status', link: '/components/status//' },
+            { title: 'Tab', link: '/components/tab//' },
+            { title: 'Tag', link: '/components/tag//' },
+            { title: 'Table', link: '/components/table/' },
+            { title: 'Text Input', link: '/components/text-input/' },
+            { title: 'Tooltip', link: '/components/tooltip/' },
+            { title: 'Form', link: '/components/form/' },
           ],
         },
-        {
-          title: 'Patterns',
-          link: '/patterns/',
-          children: [
-            { title: 'Data list', link: '/patterns/datalist' },
-            { title: 'Form', link: '/components/form' },
-          ],
-        },
-        { title: 'Icons', link: '/base/iconography' },
-        { title: 'Figma Kit', link: '/figma-kit' },
-        { title: 'Updates', link: '/updates' },
-        { title: 'Roadmap', link: '/roadmap' },
-        { title: 'Contributing', link: '/contributing' },
+        { title: 'Icons', link: '/base/iconography/' },
+        { title: 'Figma Kit', link: 'https://www.figma.com/files/676870123940302956/project/2512934/Odyssey-UI' },
       ],
       secondary: [
-        { title: 'How we build', link: '/process' },
-        { title: 'About our team', link: '/about' },
-        { title: 'Help', link: '/help' },
+        { title: 'Help', link: '/help/' },
       ]
     }
   }
