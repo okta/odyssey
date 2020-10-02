@@ -31,6 +31,10 @@
         <Content :key="slot.id" :slot-key="slot.id" />
       </template>
     </OdsTabs>
+
+  <footer class="odo-doc-footer"> 
+    Need help? <a href="#">#odyssey</a>
+  </footer>
   </article>
 </template>
 
