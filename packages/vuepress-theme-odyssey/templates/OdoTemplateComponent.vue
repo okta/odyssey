@@ -6,16 +6,17 @@
       <ul v-if="$page.frontmatter.links" class="odo-doc-header--links">
         <li v-for="link in $page.frontmatter.links" :key="link.label">
           <a :href="link.href">
-            {{ link.label }}
             <!-- eslint-disable -->
-            <div
-              class="odo-button-icon"
+            <span
+              aria-hidden
               v-html="
                 require(`!html-loader!../../docs/.vuepress/public/images/icon-${link.icon}.svg`)
               "
             />
             <!-- eslint-disable -->
+            {{ link.label }}
           </a>
+
         </li>
       </ul>
     </header>

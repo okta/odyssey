@@ -9,6 +9,13 @@ tabs:
     id: 'html-scss'
   - label: 'Legacy Docs'
     id: 'nimatron-all'
+links:
+  - icon: github
+    label: View source
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_status.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/rBPRx3GCZ1DHNmFCwZNJ8f/Status?node-id=25%3A2
 ---
 
 ::: slot overview
@@ -19,21 +26,6 @@ Status should be used to communicate the state of a discrete item, such as a ser
 
 <figure>
   <dl class="ods-status is-ods-status-success">
-    <dt class="ods-status--label">
-      Server status
-    </dt>
-    <dd class="ods-status--value">
-      System operational
-    </dd>
-  </dl>
-</figure>
-
-Labels may be hidden by applying the `.is-ods-status-label-hidden` class. If a label is not visually present, ensure that appropriate context is communicated by the Status itself and close proximity to the content that it’s supporting.
-
-Even if the label is hidden, it must be populated to ensure appropriate context for users of assistive technology.
-
-<figure>
-  <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
     <dt class="ods-status--label">
       Server status
     </dt>

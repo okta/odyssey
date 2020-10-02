@@ -1,9 +1,46 @@
+.odo-doc-header {
+  display: grid;
+  grid-column-gap: $spacing-l;
+  grid-row-gap: $spacing-s;
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
+  justify-content: space-between;
+  margin-bottom: $spacing-m;
+
+  .odo-doc-header--title {
+    grid-column: 1 / 2;
+  }
+
+  .odo-doc-header--lead {
+    grid-column: 1 / 2;
+  }
+
+  .odo-doc-header--links {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    text-align: right;
+
+    a {
+      display: flex;
+      margin-bottom: $spacing-xs;
+      padding: $spacing-xs-em $spacing-s-em;
+      line-height: $base-line-height;
+    }
+
+    span {
+      line-height: 1;
+    }
+
+    svg {
+      margin-right: $spacing-s;
+    }
+  }
+}
+
 .content__overview {
   display: grid;
   grid-column-gap: $spacing-l;
   grid-row-gap: $spacing-s;
   grid-template-columns: 1fr 1fr;
-  align-items: start;
 
   h1,
   h2,
@@ -51,3 +88,4 @@
     border-radius: 0 0 6px 6px;
   }
 }
+

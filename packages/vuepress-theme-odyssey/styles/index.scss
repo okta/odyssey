@@ -102,7 +102,7 @@ a:visited {
 [id='app'] {
   display: grid;
   grid-column-gap: $spacing-xl;
-  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
+  grid-template-columns: minmax(236px, max-content) minmax(min-content, 960px);
   padding: $spacing-l $spacing-l 0 $spacing-l;
 
   main {
