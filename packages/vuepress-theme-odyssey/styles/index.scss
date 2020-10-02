@@ -142,7 +142,8 @@ h6 {
     width: $spacing-m;
     height: $spacing-m;
     opacity: 0;
-    color: $border-color-display;
+    line-height: 1;
+    text-align: center;
   }
 
   &:hover .header-anchor {
