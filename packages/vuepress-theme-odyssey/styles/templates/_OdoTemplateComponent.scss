@@ -1,59 +1,53 @@
-// // Odyssey Button with added custom variants (not shipped)
-// .ods-button {
-//   &.is-odo-button-shadow {
-//     display: inline-flex;
-//     align-items: center;
-//     justify-content: center;
-//     border: 1px solid $border-color-display;
-//     background: transparent;
-//     color: cv("blue", "500");
-//     font-weight: normal;
+.content__overview {
+  display: grid;
+  grid-column-gap: $spacing-l;
+  grid-row-gap: $spacing-s;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
 
-//     span {
-//       margin-left: $spacing-xs;
-//     }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    grid-column: 1/3;
+    // border: 1px solid $color-danger-base;
+  }
 
-//     &:hover,
-//     &:focus {
-//       border-color: $border-color-display;
-//       background-color: cv("gray", "000");
-//     }
-//   }
-// }
+  p {
+    grid-column: 1 / 1;
+  }
+}
 
-// .ods--example {
-//   margin-bottom: $spacing-m;
+.ods-overview--rendered {
+  grid-column: 2 / 3;
+  // border: 1px solid $color-primary-base;
+}
 
-//   .ods--rendered {
-//     padding: $spacing-l;
-//     border: 1px solid $border-color-display;
-//     border-radius: 6px 6px 0 0;
-//   }
+.ods--example {
+  margin-bottom: $spacing-m;
 
-//   pre[class*="language-"] {
-//     margin: 0;
-//     padding: $spacing-m $spacing-l;
-//     border: 1px solid $border-color-display;
-//     background-color: cv("gray", "000");
-//     font-size: $size-body-sentence;
+  .ods--rendered {
+    padding: $spacing-l;
+    border: 1px solid $border-color-display;
+    border-radius: 6px 6px 0 0;
+  }
 
-//     code {
-//       font-family: "Inconsolata", monospace;
-//     }
-//   }
+  pre[class*="language-"] {
+    margin: 0;
+    padding: $spacing-m $spacing-l;
+    border: 1px solid $border-color-display;
+    background-color: cv("gray", "000");
+    font-size: $size-body-sentence;
 
-//   .ods--rendered + div[class*="language-"] pre[class*="language-"] {
-//     border-top: 0;
-//     border-radius: 0 0 6px 6px;
-//   }
-// }
+    code {
+      font-family: "Inconsolata", monospace;
+    }
+  }
 
-// .odo-header {
-//   grid-column: 1 / 3;
-//   padding-right: calc(50% + #{$spacing-l / 2});
-// }
-
-// .odo-button-icon {
-//   margin-left: 6px;
-//   line-height: 1;
-// }
+  .ods--rendered + div[class*="language-"] pre[class*="language-"] {
+    border-top: 0;
+    border-radius: 0 0 6px 6px;
+  }
+}

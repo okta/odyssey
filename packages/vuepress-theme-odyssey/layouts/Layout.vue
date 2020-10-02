@@ -1,5 +1,5 @@
 <template>
-  <div class="theme-odyssey">
+  <Fragment>
     <a class="odo-skip-content" href="#main">Skip to main content</a>
     <OdoSidebar
       title="Odyssey Design System"
@@ -15,15 +15,17 @@
       <OdoTemplatePlain v-else-if="$page.frontmatter.template === 'plain'" />
       <Content v-else />
     </main>
-  </div>
+  </Fragment>
 </template>
 
 <script>
-import "../styles/index.scss";
+import { Fragment } from "vue-fragment";
 import { resolveNav } from "../utils";
+import "../styles/index.scss";
 
 export default {
   components: {
+    Fragment,
     OdoSidebar: () => import("../components/OdoSidebar.vue"),
     OdoTemplateHome: () => import("../templates/OdoTemplateHome.vue"),
     OdoTemplateIndex: () => import("../templates/OdoTemplateIndex.vue"),

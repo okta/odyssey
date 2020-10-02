@@ -2,12 +2,23 @@
 template: component
 title: Checkbox
 tabs:
-  - label: 'Legacy docs'
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
+  - label: 'Legacy Docs'
     id: 'nimatron-all'
 ---
 
-::: slot nimatron-all
+::: slot overview
+## Overview
+:::
 
+::: slot html-scss
+## HTML & CSS
+:::
+
+::: slot nimatron-all
 # Checkbox
 
 > `<input>` elements of type checkbox are rendered by default as square boxes that are checked (ticked) when activated, like you might see in an official government paper form. They allow you to select single values for submission in a form (or not). - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox'>MDN</a></cite>

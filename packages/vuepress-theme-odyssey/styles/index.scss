@@ -1,5 +1,5 @@
-@import "~@okta/odyssey";
-@import "~@okta/prism-theme-odyssey";
+@import '~@okta/odyssey';
+@import '~@okta/prism-theme-odyssey';
 
 $breakpoints: (
   m: 768px,
@@ -17,14 +17,14 @@ $breakpoints: (
   }
 }
 
-@import "base/fonts";
-@import "base/grid";
-@import "components/OdoCard";
-@import "components/OdoLink";
-@import "components/OdoNav";
-@import "components/OdoSidebar";
-@import "templates/OdoTemplateHome";
-@import "templates/OdoTemplateComponent";
+@import 'base/fonts';
+@import 'base/grid';
+@import 'components/OdoCard';
+@import 'components/OdoLink';
+@import 'components/OdoNav';
+@import 'components/OdoSidebar';
+@import 'templates/OdoTemplateHome';
+@import 'templates/OdoTemplateComponent';
 
 $theme-day: (
   odo-page-bg: $white,
@@ -32,16 +32,16 @@ $theme-day: (
   odo-text-heading: $text-heading,
   odo-border-color-display: $border-color-display,
   odo-border-color-ui: $border-color-ui,
-  odo-card-bg: cv("gray", "000"),
-  odo-card-bg-hover: cv("blue", "000")
+  odo-card-bg: cv('gray', '000'),
+  odo-card-bg-hover: cv('blue', '000')
 );
 
 $theme-dark: (
-  odo-page-bg: cv("gray", "900"),
+  odo-page-bg: cv('gray', '900'),
   odo-text-body: $white,
   odo-text-heading: $white,
   odo-card-bg: #303033,
-  odo-card-bg-hover: cv("gray", "600")
+  odo-card-bg-hover: cv('gray', '600')
 );
 
 @function list-contains($list, $item) {
@@ -57,7 +57,7 @@ $theme-dark: (
     @if list-contains($theme-properties, $custom-property) {
       --#{$custom-property}: #{$value};
     } @else {
-      @warn "⚠️ Sorry, but `#{$value}` is not a valid value.";
+      @warn '⚠️ Sorry, but `#{$value}` is not a valid value.';
     }
   }
 }
@@ -69,7 +69,7 @@ html {
   font-family: $body-font-family;
 
   // Theme: Night Mode
-  // &[data-odo-theme="night"] {
+  // &[data-odo-theme='night'] {
   //   @include setTheme($theme-dark);
   // }
 
@@ -99,17 +99,18 @@ a:visited {
   }
 }
 
-.theme-odyssey {
+[id='app'] {
   display: grid;
-  grid-template-columns: 308px auto;
-  max-width: 1440px;
+  grid-column-gap: $spacing-xl;
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
+  padding: $spacing-l $spacing-l 0 $spacing-l;
 
-  @include mq(m) {
-    display: block;
+  main {
+    padding-top: $spacing-l;
   }
 }
 
-a.odo-skip-content {
+.odo-skip-content {
   position: absolute;
   top: -3rem;
   left: $spacing-xs;
@@ -127,8 +128,24 @@ a.odo-skip-content {
   }
 }
 
-.odo-main--content {
-  max-width: calc(960px + #{$spacing-l});
-  margin: $spacing-xl auto;
-  padding: 0 $spacing-m;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+
+  .header-anchor {
+    position: absolute;
+    left: -$spacing-m;
+    width: $spacing-m;
+    height: $spacing-m;
+    opacity: 0;
+    color: $border-color-display;
+  }
+
+  &:hover .header-anchor {
+    opacity: 1;
+  }
 }

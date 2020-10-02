@@ -23,7 +23,7 @@
     <OdsTabs
       id="tabs-doc-sections"
       :label="$page.frontmatter.name + ' documentation sections'"
-      active="odyssey-overview"
+      :active="$page.frontmatter.tabs[0].id"
       :tablist="$page.frontmatter.tabs"
     >
       <template v-for="slot in $page.frontmatter.tabs" :slot="slot.id">

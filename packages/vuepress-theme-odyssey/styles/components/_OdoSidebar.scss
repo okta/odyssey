@@ -1,6 +1,4 @@
 .odo-sidebar {
-  padding: $spacing-l $spacing-m 0 $spacing-l;
-
   @include mq(m) {
     display: none;
   }
@@ -21,9 +19,9 @@
     top: $spacing-l;
     grid-row-gap: $spacing-s;
     grid-template-areas:
-      "header"
-      "main"
-      "footer";
+      'header'
+      'main'
+      'footer';
     grid-template-rows: auto 1fr auto;
     height: 100vh;
     max-height: calc(100vh - #{$spacing-l});

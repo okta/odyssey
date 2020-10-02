@@ -1,3 +1,23 @@
+---
+template: component
+title: Toast
+tabs:
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
+  - label: 'Legacy Docs'
+    id: 'nimatron-all'
+---
+
+::: slot overview
+## Overview
+:::
+
+::: slot html-scss
+## HTML & CSS
+:::
+
 ::: slot nimatron-all
 
 <ToastPen ref="toastBox"/>

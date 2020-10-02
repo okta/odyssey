@@ -3,9 +3,21 @@ template: component
 title: Select
 lead: The Select input is a form element that provides a menu of options for the user to... select.
 tabs:
-  - label: 'Legacy docs'
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
+  - label: 'Legacy Docs'
     id: 'nimatron-all'
 ---
+
+::: slot overview
+## Overview
+:::
+
+::: slot html-scss
+## HTML & CSS
+:::
 
 ::: slot nimatron-all
 
