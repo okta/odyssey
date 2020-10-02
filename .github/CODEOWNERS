@@ -9,7 +9,7 @@
 # Resources
 #  - [CODEOWNERS] https://help.github.com/articles/about-codeowners
 
-*       @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta
+*       @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan 
 
 *.md    @okta/design-system
 *.scss  @okta/design-system
