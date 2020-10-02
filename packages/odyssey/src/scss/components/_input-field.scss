@@ -84,6 +84,24 @@
   }
 }
 
+.ods-fieldset--attached {
+  display: flex;
+  max-width: $max-line-length;
+
+  .ods-button {
+    border-radius: 0 $base-border-radius $base-border-radius 0;
+  }
+
+  .ods-text-input {
+    border-right: 0;
+    border-radius: $base-border-radius 0 0 $base-border-radius;
+
+    &:focus {
+      z-index: 1;
+    }
+  }
+}
+
 /* stylelint-disable-next-line no-descending-specificity  */
 .ods-input-legend {
   margin: 0 0 $spacing-xs;

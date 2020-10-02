@@ -1,0 +1,73 @@
+name: preview
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+      - 'release/**'
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: cofigure aws
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: set $SHA7
+        run: echo ::set-env name=SHA7::$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
+
+      - name: set $PREVIEW_URL
+        run: echo ::set-env name=PREVIEW_URL::"https://"$SHA7".ods.dev"
+
+      - name: get COMMIT_MSG
+        run: |
+          MSG=$(git log --format=%B -n 1 ${{ github.event.after }})
+          echo "::set-env name=COMMIT_MSG::${MSG}"
+
+      - name: install dependencies
+        run: yarn
+
+      - name: test
+        run: ./node_modules/lerna/cli.js run test
+
+      - name: build docs
+        run: yarn workspace @okta/design-docs build
+
+      - name: 'deploy: create'
+        uses: bobheadxi/deployments@v0.4.2
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: preview
+          ref: ${{ github.head_ref }}
+
+      - name: 'deploy: 🚀 start'
+        run: |
+          aws s3 sync ./packages/docs/dist/ s3://ods.dev/$SHA7 --delete
+
+      - name: 'deploy: update status'
+        uses: bobheadxi/deployments@v0.4.2
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: ${{ env.PREVIEW_URL }}
+
+      - name: 'notify: slack'
+        run: sh ./scripts/notify-slack.sh
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          AUTHOR_NAME: ${{github.actor}}
+          BRANCH_NAME: ${{github.head_ref}}
+          PULL_REQUEST_ID: ${{github.event.pull_request.number}}

@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2020-10-01
+
+### Added
+- Toast: a transient messaging component
+- Icons: Caution, Copy, Filter, and Error icons are now available
+- Standalone Search: added a new Text Input variant for search UI
+- Green-600: added as an a11y-compliant background color
+- details/summary: styling and minor guidance for the HTML elements
+- dl/dt/dd: styling and minor guidance for the HTML elements
+- pre: styling and minor guidance for the HTML element
+
+### Changed
+- Gray-900 updated to #1d1d21; all relevant variables/tokens updated
+- Links no longer require an underline; new Gray-900 contrast allows for this
+- Icons: the Complete icon has been updated to differentiate it from a plain check
+
+### Removed
+- [Docs] Extraneous doc styles for deprecated samples have been removed
+
 ## [0.5.1] - 2020-09-18
 
 ### Added
