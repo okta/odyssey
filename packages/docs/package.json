@@ -1,7 +1,7 @@
 {
   "name": "@okta/design-docs",
   "description": "Design System Docs",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "files": [
     "dist"
   ],
@@ -14,7 +14,7 @@
     "last 2 versions"
   ],
   "devDependencies": {
-    "@okta/vuepress-theme-nimatron": "^0.5.1",
+    "@okta/vuepress-theme-nimatron": "^0.6.0",
     "choices.js": "^9.0.1",
     "micromodal": "^0.3.2",
     "prismjs": "^1.14.0",
