@@ -1749,6 +1749,16 @@
   dependencies:
     "@types/node" ">= 8"
 
+"@okta/odyssey-icons@^0.5.0":
+  version "0.5.1"
+  resolved "https://artifacts.aue1d.saasure.com:443/artifactory/api/npm/npm-okta-all/@okta/odyssey-icons/-/@okta/odyssey-icons-0.5.1.tgz#2a60012c4e91c0490bfb11f7d9271bbe3471d7c3"
+  integrity sha1-KmABLE6RwEkL+xH32ScbvjRx18M=
+
+"@okta/odyssey@^0.5.0":
+  version "0.5.1"
+  resolved "https://artifacts.aue1d.saasure.com:443/artifactory/api/npm/npm-okta-all/@okta/odyssey/-/@okta/odyssey-0.5.1.tgz#3132adc623c54d31da2e3527bf7df571cc19999b"
+  integrity sha1-MTKtxiPFTTHaLjUnv331ccwZmZs=
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -8082,7 +8092,7 @@ node-fetch-npm@^2.0.2:
     json-parse-better-errors "^1.0.0"
     safe-buffer "^5.1.1"
 
-node-fetch@^2.3.0, node-fetch@^2.5.0:
+node-fetch@^2.5.0, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
