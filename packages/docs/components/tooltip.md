@@ -7,8 +7,10 @@ tabs:
     id: 'overview'
   - label: 'HTML & SCSS'
     id: 'html-scss'
-  - label: 'Legacy Docs'
-    id: 'nimatron-all'
+links:
+  - icon: github
+    label: Legacy docs
+    href: https://github.com/okta/odyssey/blob/master/packages/docs/components/tooltip.md
 ---
 
 ::: slot overview

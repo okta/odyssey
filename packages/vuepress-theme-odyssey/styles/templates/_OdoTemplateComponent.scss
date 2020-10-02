@@ -36,7 +36,7 @@
   }
 }
 
-.content__overview {
+[class='content__overview'] {
   display: grid;
   grid-column-gap: $spacing-l;
   grid-row-gap: $spacing-s;
