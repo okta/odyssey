@@ -1,6 +1,10 @@
 <template>
   <figure class="odo-figure--anatomy" v-if="img">
-    <img :src="img" />
+    <img :src="img" :alt="alt" />
+    <figcaption>
+      <h4 v-if="figureTitle">{figureTitle}</h4>
+      <h4 v-if="figureMetadata">{figureMetadata}</h4>
+    </figcaption>
   </figure>
 </template>
 
@@ -9,11 +13,13 @@
 
   .odo-figure--anatomy {
     display: flex;
-    width: 100%;
+    grid-column: 1/3;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    margin-bottom: $spacing-l;
     padding: $spacing-l $spacing-l $spacing-xl;
-    border: 1px solid $border-color-ui;
+    border: 1px solid $border-color-display;
     border-radius: $base-border-radius;
 
     img {

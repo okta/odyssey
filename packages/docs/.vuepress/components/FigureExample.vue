@@ -13,6 +13,7 @@
   @import '@okta/odyssey';
 
   .odo-example {
+    grid-column: 2/3;
     margin-bottom: $spacing-m;
 
     .odo-example--title {
@@ -41,9 +42,8 @@
       justify-content: center;
       width: 100%;
       padding: $spacing-l;
-      border: 1px solid $border-color-ui;
+      border: 1px solid $border-color-display;
       border-radius: $base-border-radius;
-      box-shadow: 4px 4px 0 #f5f5f6;
     }
   }
 </style>

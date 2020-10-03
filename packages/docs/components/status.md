@@ -21,11 +21,27 @@ links:
 
 ::: slot overview
 
+## Anatomy
+
+<div class="docskit--desc">
+
+Like other smaller components, Status is quite simple. Below you can see there are two versions. One with a label, and one without. Beyond that, there is a Status and Status Descriptor.
+
+</div>
+
+<FigureAnatomy img="/images/anatomy-status-1.svg" />
+
+<FigureAnatomy img="/images/anatomy-status-2.svg" />
+
 ## Usage
+
+<div class="docskit--desc">
 
 Status should be used to communicate the state of a discrete item, such as a server or individual process. Both labeled and unlabeled variants are acceptable, but should follow the associated guidelines below.
 
-<figure>
+</div>
+
+<figure class="docskit--figure">
   <dl class="ods-status is-ods-status-success">
     <dt class="ods-status--label">
       Server status
@@ -38,15 +54,23 @@ Status should be used to communicate the state of a discrete item, such as a ser
 
 ## Variants
 
+<div class="docskit--desc">
+
 There are four variants of Status available: Neutral, Success, Caution, and Danger.
 
+</div>
+
 ### Neutral
+
+<div class="docskit--desc">
 
 Neutral Statuses are gray and should be used to indicate states like Paused, Not started, or Queued.
 
 This variant is our default.
 
-<figure>
+</div>
+
+<figure class="docskit--figure">
   <dl class="ods-status">
     <dt class="ods-status--label">
       Server status
@@ -59,9 +83,13 @@ This variant is our default.
 
 ### Success
 
+<div class="docskit--desc">
+
 Success Statuses are green and should be used to indicate states like Complete, Active, Available, Service operational.
 
-<figure>
+</div>
+
+<figure class="docskit--figure">
   <dl class="ods-status is-ods-status-success">
     <dt class="ods-status--label">
       Server status
@@ -74,9 +102,13 @@ Success Statuses are green and should be used to indicate states like Complete, 
 
 ### Caution
 
+<div class="docskit--desc">
+
 Caution Statuses are yellow and should be used to indicate states like Attention suggested or Service degradation.
 
-<figure>
+</div>
+
+<figure class="docskit--figure">
   <dl class="ods-status is-ods-status-caution">
     <dt class="ods-status--label">
       Server status
@@ -89,9 +121,13 @@ Caution Statuses are yellow and should be used to indicate states like Attention
 
 ### Danger
 
+<div class="docskit--desc">
+
 Danger Statuses are red and should be used to indicate states like Error, Failure, or Service disruption.
 
-<figure>
+</div>
+
+<figure class="docskit--figure">
   <dl class="ods-status is-ods-status-danger">
     <dt class="ods-status--label">
       Server status
@@ -103,11 +139,115 @@ Danger Statuses are red and should be used to indicate states like Error, Failur
 </figure>
 
 ## Content guidelines
-
+  
 Status is intended to be both succinct and easily understood; limit label and description to one to two words. As with other components, use sentence casing for both.
 :::
 
 ::: slot html-scss
+
+### Neutral
+
+<figure class="odo--example">
+  <div class="odo--rendered">
+    <dl class="ods-status">
+      <dt class="ods-status--label">
+        Server status
+      </dt> 
+      <dd class="ods-status--value">
+        System inactive
+      </dd>
+    </dl>
+  </div>
+
+  ```html
+  <dl class="ods-status">
+    <dt class="ods-status--label">
+      Server status
+    </dt> 
+    <dd class="ods-status--value">
+      System inactive
+    </dd>
+  </dl>
+  ```
+</figure>
+
+### Success
+
+<figure class="odo--example">
+  <div class="odo--rendered">
+    <dl class="ods-status is-ods-status-success">
+      <dt class="ods-status--label">
+        Server status
+      </dt> 
+      <dd class="ods-status--value">
+        System operational
+      </dd>
+    </dl>
+  </div>
+
+  ```html
+  <dl class="ods-status is-ods-status-success">
+    <dt class="ods-status--label">
+      Server status
+    </dt> 
+    <dd class="ods-status--value">
+      System operational
+    </dd>
+  </dl>
+  ```
+</figure>
+
+### Caution
+
+<figure class="odo--example">
+  <div class="odo--rendered">
+    <dl class="ods-status is-ods-status-caution">
+      <dt class="ods-status--label">
+        Server status
+      </dt> 
+      <dd class="ods-status--value">
+        Service degredation
+      </dd>
+    </dl>
+  </div>
+
+  ```html
+  <dl class="ods-status is-ods-status-caution">
+    <dt class="ods-status--label">
+      Server status
+    </dt> 
+    <dd class="ods-status--value">
+      Service degredation
+    </dd>
+  </dl>
+  ```
+</figure>
+
+### Caution
+
+<figure class="odo--example">
+  <div class="odo--rendered">
+    <dl class="ods-status is-ods-status-danger">
+      <dt class="ods-status--label">
+        Server status
+      </dt> 
+      <dd class="ods-status--value">
+        Service disruption
+      </dd>
+    </dl>
+  </div>
+
+  ```html
+  <dl class="ods-status is-ods-status-danger">
+    <dt class="ods-status--label">
+      Server status
+    </dt> 
+    <dd class="ods-status--value">
+      Service disruption
+    </dd>
+  </dl>
+  ```
+</figure>
 
 ## Accessibility
 
@@ -117,8 +257,8 @@ If the current state of Status may change asynchronously while a user is visitin
 
 <strong>Note:</strong> This attribute must be present <em>before</em> the change occurs.
 
-<figure class="ods--example">
-  <div class="ods--rendered">
+<figure class="odo--example">
+  <div class="odo--rendered">
     <dl class="ods-status is-ods-status-danger" role="status">
       <dt class="ods-status--label">
         Server status
@@ -148,8 +288,8 @@ Labels may be hidden by applying the `.is-ods-status-label-hidden` class. If a l
 
 Even if the label is hidden, it must be populated to ensure appropriate context for users of assistive technology.
 
-<figure class="ods--example">
-  <div class="ods--rendered">
+<figure class="odo--example">
+  <div class="odo--rendered">
     <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
       <dt class="ods-status--label">
         Server status
