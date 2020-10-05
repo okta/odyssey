@@ -25,6 +25,8 @@ $breakpoints: (
 @import 'components/OdoSidebar';
 @import 'templates/OdoTemplateHome';
 @import 'templates/OdoTemplateComponent';
+@import 'dockit/FigureAnatomy';
+@import 'dockit/FigureExample';
 
 $theme-day: (
   odo-page-bg: $white,
@@ -152,5 +154,5 @@ h6 {
 }
 
 .fpo {
-  background: cv('yellow', '000');
+  background: cv('yellow', '500');
 }

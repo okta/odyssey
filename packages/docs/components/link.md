@@ -25,7 +25,7 @@ links:
 
 <div class="docskit--desc fpo">
 
-Button UI is simple. It consists of typography within a rectangular container.
+Descriptive content around **anatomy** should go here.
 
 </div>
 

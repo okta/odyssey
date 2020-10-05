@@ -21,17 +21,16 @@
         </li>
       </ul>
     </header>
-
-    <OdsTabs
-      id="tabs-doc-sections"
-      :label="$page.frontmatter.name + ' documentation sections'"
-      :active="$page.frontmatter.tabs[0].id"
-      :tablist="$page.frontmatter.tabs"
-    >
-      <template v-for="slot in $page.frontmatter.tabs" :slot="slot.id">
-        <Content :key="slot.id" :slot-key="slot.id" />
-      </template>
-    </OdsTabs>
+      <OdsTabs
+        id="tabs-doc-sections"
+        :label="$page.frontmatter.name + ' documentation sections'"
+        :active="$page.frontmatter.tabs[0].id"
+        :tablist="$page.frontmatter.tabs"
+      >
+        <template v-for="slot in $page.frontmatter.tabs" :slot="slot.id">
+          <Content :key="slot.id" :slot-key="slot.id" />
+        </template>
+      </OdsTabs>
 
   <footer class="odo-doc-footer"> 
     Need help? <a href="#">#odyssey</a>

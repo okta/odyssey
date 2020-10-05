@@ -3,7 +3,6 @@
   grid-column-gap: $spacing-l;
   grid-row-gap: $spacing-s;
   grid-template-columns: $max-line-length auto;
-  margin-bottom: $spacing-m;
   justify-content: space-between;
 
   .odo-doc-header--title {
@@ -12,6 +11,7 @@
 
   .odo-doc-header--lead {
     grid-column: 1 / 2;
+    margin: 0;
   }
 
   .odo-doc-header--links {
@@ -95,4 +95,12 @@
 
 .docskit--desc {
   margin-bottom: $spacing-l;
+}
+
+.ods-tabs--tablist {
+  position: sticky;
+  background: white;
+  z-index: 2;
+  top: 0;
+  padding-top: $spacing-l;
 }

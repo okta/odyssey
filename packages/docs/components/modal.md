@@ -25,15 +25,16 @@ links:
 
 <div class="docskit--desc fpo">
 
-Button UI is simple. It consists of typography within a rectangular container.
+Descriptive content around **anatomy** should go here.
 
 </div>
 
 <FigureAnatomy img="/images/fpo.svg" />
 
-<div class="docskit--desc">
 
 ## General guidelines
+
+<div class="docskit--desc">
 
 Modal dialogs are a powerful UI element. They are displayed on top of the main content and change the context to a special mode that requires user interaction. That is, they disable all other contexts until the user interacts with the modal itself.
 
