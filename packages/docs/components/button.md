@@ -23,7 +23,11 @@ links:
 
   ## Anatomy
 
+  <div class="docskit--desc">
+
   Button UI is simple. It consists of typography within a rectangular container.
+
+  </div>
 
   <FigureAnatomy img="/images/anatomy-button.svg" />
 
@@ -135,37 +139,50 @@ links:
 
   ### Punctuation and copy
 
-  ##### Context
+  #### Context
   Be as direct as possible with the goal you are trying to get the user to accomplish. Try to avoid dark patterns that require the user to discover what a button does. Be strategic in your button placement so a user has the best context. Consider using buttons at the end of an input form, or by preceding with supporting copy.
   
   <FigureExample type="positive">
-    <button class="ods-button">Download report</button>
+
+  <button class="ods-button">Download report</button>
+
   </FigureExample>
+  
   <FigureExample type="negative">
-    <button class="ods-button">Download</button>
+
+  <button class="ods-button">Download</button>
+
   </FigureExample>
 
-  ##### Word count
+  #### Word count
 
   Never use more than 3 words inside of a button. If you think you need more words, consider other design solutions on the page.
 
   <FigureExample type="positive">
-    <button class="ods-button">Download report</button>
+
+  <button class="ods-button">Download report</button>
+
   </FigureExample>
 
   <FigureExample type="negative">
-    <button class="ods-button">Download most recent report</button>
+
+  <button class="ods-button">Download most recent report</button>
+
   </FigureExample>
 
-  ##### Capitalization
+  #### Capitalization
 
   If using multiple words, use sentence case. Sentence case means that a captial letter is applied to the first word and all other characters are lower case.
 
   <FigureExample type="positive">
-    <button class="ods-button">Download report</button>
+
+  <button class="ods-button">Download report</button>
+
   </FigureExample>
   <FigureExample type="negative">
-    <button class="ods-button">Download Report</button>
+
+  <button class="ods-button">Download Report</button>
+
   </FigureExample>
 
   ## Accessibility
@@ -180,7 +197,7 @@ links:
 
 ::: slot html-scss
 
-### Primary
+## Primary
 
 <figure class="odo--example">
   <div class="odo--rendered">
@@ -196,7 +213,7 @@ links:
   ```
 </figure>
 
-### Secondary
+## Secondary
 
 <figure class="odo--example">
   <div class="odo--rendered">
@@ -212,7 +229,7 @@ links:
   ```
 </figure>
 
-### Danger
+## Danger
 
 <figure class="odo--example">
   <div class="odo--rendered">
@@ -228,7 +245,7 @@ links:
   ```
 </figure>
 
-### Overlay
+## Overlay
 
 <figure class="odo--example">
   <div class="odo--rendered is-rendered-success">
@@ -244,7 +261,7 @@ links:
   ```
 </figure>
 
-### Clear
+## Clear
 
 <figure class="odo--example">
   <div class="odo--rendered">
@@ -260,7 +277,6 @@ links:
   ```
 </figure>
 
----
 
 ## Implementation
 
