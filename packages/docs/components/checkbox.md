@@ -24,7 +24,7 @@ links:
 
 <div class="docskit--desc fpo">
 
-Descriptive content around **anatomy** should go here.
+Descriptive content around **checkbox anatomy** should go here.
 
 </div>
 
@@ -39,19 +39,30 @@ Descriptive content around **anatomy** should go here.
 
 <figure>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field legend label</legend>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="checkbox-example-checked" value="example-checked" checked>
-    <label class="ods-checkbox--label" for="checkbox-example-checked">Label</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="checkbox-example-checked--disabled" value="example-checked--disabled" checked disabled>
-    <label class="ods-checkbox--label" for="checkbox-example-checked--disabled">Checked, disabled</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="checkbox-example-indeterminate" value="example-checked--indeterminate">
-    <label class="ods-checkbox--label" for="checkbox-example-indeterminate">Indeterminate</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="checkbox-example-indeterminate--disabled" value="example-checked--indeterminate--disabled" checked>
-    <label class="ods-checkbox--label" for="checkbox-example-indeterminate--disabled">Indeterminate, disabled</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="checkbox-example-unchecked" value="example-checked--unchecked">
-    <label class="ods-checkbox--label" for="checkbox-example-unchecked">Unchecked</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="checkbox-example-unchecked--disabled" value="example-checked--disabled" disabled>
-    <label class="ods-checkbox--label" for="checkbox-example-unchecked--disabled">Unchecked, disabled</label>
+    <legend class="ods-input-legend">Basic examples</legend>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-0" value="example-0">
+    <label class="ods-checkbox--label" for="example-0">Unchecked</label>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1" checked>
+    <label class="ods-checkbox--label" for="example-1">Checked</label>
+    <input checked class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1" disabled>
+    <label class="ods-checkbox--label" for="example-1">Checked, disabled</label>
+  </fieldset>
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Indeterminate examples</legend>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-2" value="example-2">
+    <label class="ods-checkbox--label" for="example-2">Indeterminate</label>
+    <input disabled class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
+    <label class="ods-checkbox--label" for="example-3">Indeterminate, disabled</label>
+  </fieldset>
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Error examples</legend>
+    <input data-invalid class="ods-checkbox" type="checkbox" name="checkbox" id="example-6" value="example-6">
+    <label class="ods-checkbox--label" for="example-6">Unchecked, with error</label>
+    <input data-invalid checked class="ods-checkbox" type="checkbox" name="checkbox" id="example-7" value="example-7">
+    <label class="ods-checkbox--label" for="example-7">Checked, with error</label>
+    <input data-invalid class="ods-checkbox" type="checkbox" name="checkbox" id="example-8" value="example-8" disabled>
+    <label class="ods-checkbox--label" for="example-8">Unchecked, disabled with error</label>
+    <aside class="ods-field--error" id="checkbox-invalid-error">Validation error message.</aside>
   </fieldset>
 </figure>
 
@@ -243,6 +254,19 @@ export default {
       <label class="ods-checkbox--label" for="label-3">Label 3</label>
     </fieldset>
   </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Field legend label</legend>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="label-1" value="value-1" checked>
+    <label class="ods-checkbox--label" for="label-1">Label 1</label>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="label-2" value="value-2">
+    <label class="ods-checkbox--label" for="label-2">Label 2</label>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="label-3" value="value-3">
+    <label class="ods-checkbox--label" for="label-3">Label 3</label>
+  </fieldset>
+  ```
+
 </figure>
 
 ## <span class="u-visually-hidden">Checkbox</span> Inline
@@ -263,8 +287,43 @@ export default {
   ```
 </figure>
 
-## Inline example
+## <span class="u-visually-hidden">Checkbox</span> State: Disabled
 
-## Basic example
+<figure class="odo--example">
+  <div class="odo--rendered">
+    <fieldset class="ods-fieldset">
+      <input class="ods-checkbox" type="checkbox" name="checkbox-required" id="checkbox-required" value="terms-accepted" disabled>
+      <label class="ods-checkbox--label" for="checkbox-required">I agree to the terms and conditions.</label>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <input class="ods-checkbox" type="checkbox" name="checkbox-required" id="checkbox-required" value="terms-accepted" disabled>
+    <label class="ods-checkbox--label" for="checkbox-required">I agree to the terms and conditions.</label>
+  </fieldset>
+  ```
+</figure>
+
+## <span class="u-visually-hidden">Checkbox</span> State: Error
+
+<figure class="odo--example">
+  <div class="odo--rendered">
+    <fieldset class="ods-fieldset">
+    <input class="ods-checkbox" data-invalid type="checkbox" name="checkbox-required" id="checkbox-required" value="terms-accepted" checked required>
+      <label class="ods-checkbox--label" for="checkbox-required">I agree to the terms and conditions.</label>
+      <aside class="ods-field--error" id="checkbox-invalid-error">This field is required.</aside>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <input class="ods-checkbox" data-invalid type="checkbox" name="checkbox-required" id="checkbox-required" value="terms-accepted" checked required>
+    <label class="ods-checkbox--label" for="checkbox-required">I agree to the terms and conditions.</label>
+
+    <aside class="ods-field--error" id="checkbox-invalid-error">This field is required.</aside>
+  </fieldset>
+  ```
+</figure>
 
 :::

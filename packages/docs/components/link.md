@@ -25,7 +25,7 @@ links:
 
 <div class="docskit--desc fpo">
 
-Descriptive content around **anatomy** should go here.
+Descriptive content around **link anatomy** should go here.
 
 </div>
 

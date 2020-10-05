@@ -32,6 +32,16 @@ export default {
     OdoTemplatePlain: () => import("../templates/OdoTemplatePlain.vue"),
     OdoTemplateComponent: () => import("../templates/OdoTemplateComponent.vue")
   },
+  computed: {
+    Nav() {
+      return resolveNav(
+        this.$page,
+        this.$page.regularPath,
+        this.$site,
+        this.$localePath
+      );
+    }
+  },
   mounted() {
     const query = window.location.search.substring(1);
     const vars = query.split("&");
@@ -45,16 +55,6 @@ export default {
         htmlElement.setAttribute("data-odo-theme", value);
       }
     });
-  },
-  computed: {
-    Nav() {
-      return resolveNav(
-        this.$page,
-        this.$page.regularPath,
-        this.$site,
-        this.$localePath
-      );
-    }
   }
 };
 </script>

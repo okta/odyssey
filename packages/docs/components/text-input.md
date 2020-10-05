@@ -13,7 +13,17 @@ links:
 ---
 
 ::: slot overview
-## Overview
+
+## Anatomy
+
+<div class="docskit--desc fpo">
+
+Descriptive content around **text input anatomy** should go here.
+
+</div>
+
+<FigureAnatomy img="/images/fpo.svg" />
+
 :::
 
 ::: slot html-scss

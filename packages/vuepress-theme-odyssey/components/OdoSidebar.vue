@@ -4,8 +4,19 @@
       <div class="odo-sidebar--header">
         <OdoLink class="odo-site--title" href="/">{{ title }}</OdoLink>
         <fieldset v-if="showSearch" class="ods-fieldset">
-          <input id="search" class="ods-text-input" type="text" name="search" />
-          <label class="ods-label u-visually-hidden" for="name">Name</label>
+          <div class="ods-fieldset-flex">
+            <input
+              id="search"
+              class="ods-text-input"
+              type="search"
+              name="search"
+              autocomplete="search"
+              spellcheck="false"
+              placeholder="Search"
+              required
+            />
+            <label class="ods-label" for="search">Search</label>
+          </div>
         </fieldset>
       </div>
       <div

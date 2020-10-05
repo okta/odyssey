@@ -14,6 +14,7 @@
 
 .ods-tabs--tablist {
   position: relative;
+  border-bottom: 1px solid $border-color-display;
 }
 
 .ods-tabs--tab {
@@ -44,7 +45,6 @@
 
 .ods-tabs--tabpanel [role='tabpanel'] {
   padding: $spacing-l 0;
-  border-top: 1px solid $border-color-display;
 
   &:focus {
     outline: none;

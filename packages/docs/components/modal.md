@@ -20,12 +20,11 @@ links:
 
 ::: slot overview
 
-
 ## Anatomy
 
 <div class="docskit--desc fpo">
 
-Descriptive content around **anatomy** should go here.
+Descriptive content around **modal anatomy** should go here.
 
 </div>
 
