@@ -28,7 +28,7 @@ Descriptive content around **modal anatomy** should go here.
 
 </div>
 
-<FigureAnatomy img="/images/fpo.svg" />
+<Anatomy img="/images/fpo.svg" />
 
 
 ## General guidelines
@@ -53,9 +53,11 @@ Here are a few smells for when a modal dialog may be inappropriate:
 
 </div>
 
-<figure>
-    <button class="ods-button" data-micromodal-trigger="ods-modal-standard">Let me see it already!</button>
-</figure>
+<Example>
+
+  <button class="ods-button" data-micromodal-trigger="ods-modal-standard">Let me see it already!</button>
+
+</Example>
 
 ## Accessibility
 

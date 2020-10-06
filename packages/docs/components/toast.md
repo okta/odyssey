@@ -22,7 +22,7 @@ Descriptive content around **toast anatomy** should go here.
 
 </div>
 
-<FigureAnatomy img="/images/fpo.svg" />
+<Anatomy img="/images/fpo.svg" />
 
 :::
 

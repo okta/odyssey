@@ -23,7 +23,7 @@ Descriptive content around **select anatomy** should go here.
 
 </div>
 
-<FigureAnatomy img="/images/fpo.svg" />
+<Anatomy img="/images/fpo.svg" />
 
 :::
 

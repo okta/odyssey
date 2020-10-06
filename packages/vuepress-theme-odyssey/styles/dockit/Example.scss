@@ -1,8 +1,8 @@
-.odo-example {
+.docskit-example {
   grid-column: 2/3;
   margin-bottom: $spacing-m;
 
-  .odo-example--title {
+  .docskit-example--title {
     display: flex;
     align-items: center;
     font-weight: normal;
@@ -13,15 +13,15 @@
     }
   }
 
-  &.is-odo-example-positive .odo-example--title::before {
-    content: '👍';
+  &.is-docskit-example-positive .docskit-example--title::before {
+    content: '🔔';
   }
 
-  &.is-odo-example-negative .odo-example--title::before {      
-    content: '👎';
+  &.is-docskit-example-negative .docskit-example--title::before {      
+    content: '🚫';
   }
 
-  figure {
+  .docskit-example--figure {
     display: flex;
     position: relative;
     align-items: center;

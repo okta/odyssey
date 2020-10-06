@@ -28,7 +28,7 @@ Descriptive content around **radio button anatomy** should go here.
 
 </div>
 
-<FigureAnatomy img="/images/fpo.svg" />
+<Anatomy img="/images/fpo.svg" />
 
 
 <div class="docskit--desc">
@@ -37,7 +37,7 @@ Descriptive content around **radio button anatomy** should go here.
 
 </div>
 
-<figure>
+<Example>
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Which of the following is the largest?</legend>
     <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
@@ -49,7 +49,7 @@ Descriptive content around **radio button anatomy** should go here.
     <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
     <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
   </fieldset>
-</figure>
+</Example>
 
 ## States
 
@@ -63,31 +63,32 @@ Disabling radio buttons happens on a per-option basis.
 
 </div>
 
-<figure>
-  <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Which of the following is the largest?</legend>
-    <input class="ods-radio" type="radio" name="radio-mix" id="radio-peanut-mix" value="peanut" required checked>
-    <label class="ods-radio--label" for="radio-peanut-mix">A peanut</label>
-    <input class="ods-radio" type="radio" name="radio-mix" id="radio-elephant-mix" value="elephant" required disabled>
-    <label class="ods-radio--label" for="radio-elephant-mix">An elephant</label>
-    <input class="ods-radio" type="radio" name="radio-mix" id="radio-moon-mix" value="moon" required>
-    <label class="ods-radio--label" for="radio-moon-mix">The moon</label>
-    <input class="ods-radio" type="radio" name="radio-mix" id="radio-tennis-ball-mix" value="tennis-ball" required>
-    <label class="ods-radio--label" for="radio-tennis-ball-mix">A tennis ball</label>
-  </fieldset>
-
-  <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Which of the following is the largest?</legend>
-    <input class="ods-radio" type="radio" name="radio-disabled" id="radio-peanut-disabled" value="peanut" required disabled checked>
-    <label class="ods-radio--label" for="radio-peanut-disabled">A peanut</label>
-    <input class="ods-radio" type="radio" name="radio-disabled" id="radio-elephant-disabled" value="elephant" required disabled>
-    <label class="ods-radio--label" for="radio-elephant-disabled">An elephant</label>
-    <input class="ods-radio" type="radio" name="radio-disabled" id="radio-moon-disabled" value="moon" required disabled>
-    <label class="ods-radio--label" for="radio-moon-disabled">The moon</label>
-    <input class="ods-radio" type="radio" name="radio-disabled" id="radio-tennis-ball-disabled" value="tennis-ball" required disabled>
-    <label class="ods-radio--label" for="radio-tennis-ball-disabled">A tennis ball</label>
-  </fieldset>
-</figure>
+<Example>
+  <template>
+    <fieldset class="ods-fieldset">
+      <legend class="ods-input-legend">Which of the following is the largest?</legend>
+      <input class="ods-radio" type="radio" name="radio-mix" id="radio-peanut-mix" value="peanut" required checked>
+      <label class="ods-radio--label" for="radio-peanut-mix">A peanut</label>
+      <input class="ods-radio" type="radio" name="radio-mix" id="radio-elephant-mix" value="elephant" required disabled>
+      <label class="ods-radio--label" for="radio-elephant-mix">An elephant</label>
+      <input class="ods-radio" type="radio" name="radio-mix" id="radio-moon-mix" value="moon" required>
+      <label class="ods-radio--label" for="radio-moon-mix">The moon</label>
+      <input class="ods-radio" type="radio" name="radio-mix" id="radio-tennis-ball-mix" value="tennis-ball" required>
+      <label class="ods-radio--label" for="radio-tennis-ball-mix">A tennis ball</label>
+    </fieldset>
+    <fieldset class="ods-fieldset">
+      <legend class="ods-input-legend">Which of the following is the largest?</legend>
+      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-peanut-disabled" value="peanut" required disabled checked>
+      <label class="ods-radio--label" for="radio-peanut-disabled">A peanut</label>
+      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-elephant-disabled" value="elephant" required disabled>
+      <label class="ods-radio--label" for="radio-elephant-disabled">An elephant</label>
+      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-moon-disabled" value="moon" required disabled>
+      <label class="ods-radio--label" for="radio-moon-disabled">The moon</label>
+      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-tennis-ball-disabled" value="tennis-ball" required disabled>
+      <label class="ods-radio--label" for="radio-tennis-ball-disabled">A tennis ball</label>
+    </fieldset>
+  </template>
+</Example>
 
 ### Invalid
 
@@ -101,7 +102,7 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
 
 </div>
 
-<figure>
+<Example>
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Which of the following is the largest?</legend>
     <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-peanut-invalid" value="peanut" required checked>
@@ -114,7 +115,7 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
     <label class="ods-radio--label" for="radio-tennis-ball-invalid">A tennis ball</label>
     <aside class="ods-field--error" id="radio-invalid-error">This selection is invalid.</aside>
   </fieldset>
-</figure>
+</Example>
 
 ### Optional
 
@@ -130,8 +131,8 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
 
 ## Basic example
 
-<figure class="odo--example">
-  <div class="odo--rendered">
+<figure class="odo-example">
+  <div class="odo-example--rendered">
     <fieldset class="ods-fieldset">
       <legend class="ods-input-legend">Which of the following is the largest?</legend>
       <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
@@ -163,8 +164,8 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
 
 ## <span class="u-visually-hidden">radio</span> State: Disabled
 
-<figure class="odo--example">
-  <div class="odo--rendered">
+<figure class="odo-example">
+  <div class="odo-example--rendered">
     <fieldset class="ods-fieldset">
       <legend class="ods-input-legend">Which of the following is the largest?</legend>
       <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
@@ -195,8 +196,8 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
 
 ## <span class="u-visually-hidden">radio</span> State: Error
 
-<figure class="odo--example">
-  <div class="odo--rendered">
+<figure class="odo-example">
+  <div class="odo-example--rendered">
     <fieldset class="ods-fieldset">
       <legend class="ods-input-legend">Which of the following is the largest?</legend>
       <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>

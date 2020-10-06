@@ -25,8 +25,9 @@ $breakpoints: (
 @import 'components/OdoSidebar';
 @import 'templates/OdoTemplateHome';
 @import 'templates/OdoTemplateComponent';
-@import 'dockit/FigureAnatomy';
-@import 'dockit/FigureExample';
+@import 'dockit/Anatomy';
+@import 'dockit/Example';
+@import 'dockit/Description';
 
 $theme-day: (
   odo-page-bg: $white,

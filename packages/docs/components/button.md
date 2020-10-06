@@ -21,177 +21,188 @@ links:
 
 ::: slot overview
 
-  ## Anatomy
+## Anatomy
 
-  <div class="docskit--desc">
+<div class="docskit--desc">
 
-  Button UI is simple. It consists of typography within a rectangular container.
+Button UI is simple. It consists of typography within a rectangular container.
 
-  </div>
+</div>
 
-  <FigureAnatomy img="/images/anatomy-button.svg" />
+<Anatomy img="/images/anatomy-button.svg" />
 
-  ## Button types
-  
-  <div class="docskit--desc">
-  
-  In Odyssey there are 5 different button types; Primary, Secondary, Danger, Clear, and Overlay.
+## Button types
 
-  </div>
+<div class="docskit--desc">
 
-  ### Primary
+In Odyssey there are 5 different button types; Primary, Secondary, Danger, Clear, and Overlay.
 
-  <div class="docskit--desc">
-  
-  Our default button is used for primary action on a page or view. For example, “Save”. Use this button sparingly to provide a clear target for users to get to. 
+</div>
 
-  It’s best to use this button on a white background.
-  
-  </div>
+### Primary
 
-  <figure class="docskit--figure">
+<div class="docskit--desc">
+
+Our default button is used for primary action on a page or view. For example, “Save”. Use this button sparingly to provide a clear target for users to get to. 
+
+It’s best to use this button on a white background.
+
+</div>
+
+<Example>
+  <template>
     <button class="ods-button">Default</button>
     <button class="ods-button is-ods-button-hover">Hover</button>
     <button class="ods-button is-ods-button-focus">Focus</button>
     <button disabled="disabled" class="ods-button">Disabled</button>
-  </figure>
+  </template>
+</Example>
 
 
-  
-  ### Secondary
 
-  <div class="docskit--desc">
+### Secondary
 
-  Ideal for a secondary actions to compliment the Primary button. Similar to the Primary button, use this button sparingly to provide focus to the user. 
+<div class="docskit--desc">
 
-  It’s best to use this button on a white background.
-  
-  </div>
+Ideal for a secondary actions to compliment the Primary button. Similar to the Primary button, use this button sparingly to provide focus to the user. 
 
-  <figure class="docskit--figure">
+It’s best to use this button on a white background.
+
+</div>
+
+<Example>
+  <template>
     <button class="ods-button is-ods-button-secondary">Default</button>
     <button class="ods-button is-ods-button-secondary is-ods-button-hover">Hover</button>
     <button class="ods-button is-ods-button-secondary is-ods-button-focus">Focus</button>
     <button disabled="disabled" class="ods-button is-ods-button-secondary">Disabled</button>
-  </figure>
+  </template>
+</Example>
 
-  ### Danger
-  
-  <div class="docskit--desc">
-  
-  Use this button for scenarios where a user may be deleting information or completing a task that could not be reversed. 
+### Danger
 
-  It’s best to use this button on a white background.
-  
-  </div>
+<div class="docskit--desc">
 
-  <figure class="docskit--figure">
+Use this button for scenarios where a user may be deleting information or completing a task that could not be reversed. 
+
+It’s best to use this button on a white background.
+
+</div>
+
+<Example>
+  <template>
     <button class="ods-button is-ods-button-danger">Default</button>
     <button class="ods-button is-ods-button-danger is-ods-button-hover">Hover</button>
     <button class="ods-button is-ods-button-danger is-ods-button-focus">Focus</button>
     <button disabled="disabled" class="ods-button is-ods-button-danger">Disabled</button>
-  </figure>
+  </template>
+</Example>
 
-  ### Clear
+### Clear
 
-  <div class="docskit--desc">
-  
-  These are used for in-page interactions that modify the visible UI but do not modify data or an ongoing process. For example, hiding or showing a password field. 
+<div class="docskit--desc">
 
-  They pair well with Primary and Secondary buttons. 
+These are used for in-page interactions that modify the visible UI but do not modify data or an ongoing process. For example, hiding or showing a password field. 
 
-  It’s best to use this button on a white background.
+They pair well with Primary and Secondary buttons. 
 
-  </div>
+It’s best to use this button on a white background.
 
-  <figure class="docskit--figure">
+</div>
+
+<Example>
+  <template>
     <button class="ods-button is-ods-button-clear">Default</button>
     <button class="ods-button is-ods-button-clear is-ods-button-hover">Hover</button>
     <button class="ods-button is-ods-button-clear is-ods-button-focus">Focus</button>
     <button disabled="disabled" class="ods-button is-ods-button-clear">Disabled</button>
-  </figure>
+  </template>
+</Example>
 
 
-  ### Overlay
+### Overlay
 
-  <div class="docskit--desc">
-  
-  These buttons may only be used on top of a “Base Color” such as Purple 500 or on top of a colored background, photo, or illustration. They should only be used in the scenario where Primary, Secondary, and regular text links cannot be used.
+<div class="docskit--desc">
 
-  Lastly, they only exist at the large size.
-  
-  </div>
+These buttons may only be used on top of a “Base Color” such as Purple 500 or on top of a colored background, photo, or illustration. They should only be used in the scenario where Primary, Secondary, and regular text links cannot be used.
 
-  <figure class="docskit--figure">
+Lastly, they only exist at the large size.
+
+</div>
+
+<Example>
+  <template>
     <button class="ods-button is-ods-button-overlay">Default</button>
     <button class="ods-button is-ods-button-overlay is-ods-button-hover">Hover</button>
     <button class="ods-button is-ods-button-overlay is-ods-button-focus">Focus</button>
     <button disabled="disabled" class="ods-button is-ods-button-overlay">Disabled</button>
-  </figure>
+  </template>
+</Example>
 
-  ## Guidelines
-  
-  <div class="docskit--desc">
+## Guidelines
 
-  Use buttons to indicate the important actions that a user can take. Don’t use buttons to navigate around the site or product; use links instead
-  
-  </div>
+<div class="docskit--desc">
 
-  ### Punctuation and copy
+Use buttons to indicate the important actions that a user can take. Don’t use buttons to navigate around the site or product; use links instead
 
-  #### Context
-  Be as direct as possible with the goal you are trying to get the user to accomplish. Try to avoid dark patterns that require the user to discover what a button does. Be strategic in your button placement so a user has the best context. Consider using buttons at the end of an input form, or by preceding with supporting copy.
-  
-  <FigureExample type="positive">
+</div>
 
-  <button class="ods-button">Download report</button>
+### Punctuation and copy
 
-  </FigureExample>
-  
-  <FigureExample type="negative">
+#### Context
+Be as direct as possible with the goal you are trying to get the user to accomplish. Try to avoid dark patterns that require the user to discover what a button does. Be strategic in your button placement so a user has the best context. Consider using buttons at the end of an input form, or by preceding with supporting copy.
 
-  <button class="ods-button">Download</button>
+<Example type="positive">
+  <template>
+    <button class="ods-button">Download report</button>
+  </template>
+</Example>
 
-  </FigureExample>
+<Example type="negative">
+  <template>
+    <button class="ods-button">Download</button>
+  </template>
+</Example>
 
-  #### Word count
+#### Word count
 
-  Never use more than 3 words inside of a button. If you think you need more words, consider other design solutions on the page.
+Never use more than 3 words inside of a button. If you think you need more words, consider other design solutions on the page.
 
-  <FigureExample type="positive">
+<Example type="positive">
+  <template>
+    <button class="ods-button">Download report</button>
+  </template>
+</Example>
 
-  <button class="ods-button">Download report</button>
+<Example type="negative">
+  <template>
+    <button class="ods-button">Download most recent report</button>
+  </template>
+</Example>
 
-  </FigureExample>
+#### Capitalization
 
-  <FigureExample type="negative">
+If using multiple words, use sentence case. Sentence case means that a captial letter is applied to the first word and all other characters are lower case.
 
-  <button class="ods-button">Download most recent report</button>
+<Example type="positive">
+  <template>
+    <button class="ods-button">Download report</button>
+  </template>
+</Example>
 
-  </FigureExample>
+<Example type="negative">
+  <template>
+    <button class="ods-button">Download Report</button>
+  </template>
+</Example>
 
-  #### Capitalization
+## Accessibility
 
-  If using multiple words, use sentence case. Sentence case means that a captial letter is applied to the first word and all other characters are lower case.
+Buttons should display a visible :focus state when users interact with their keyboard.
 
-  <FigureExample type="positive">
+Color is not a clear affordance for all users, please use clear, concise copy to label buttons
 
-  <button class="ods-button">Download report</button>
-
-  </FigureExample>
-  <FigureExample type="negative">
-
-  <button class="ods-button">Download Report</button>
-
-  </FigureExample>
-
-  ## Accessibility
-
-  Buttons should display a visible :focus state when users interact with their keyboard.
-
-  Color is not a clear affordance for all users, please use clear, concise copy to label buttons
-
-  User the `<button>` element instead of `<a>` whenever possible. The keyboard and screen reader interaction for these elements is different. Space will trigger a `<button>`; Enter will trigger an `<a>`.
+User the `<button>` element instead of `<a>` whenever possible. The keyboard and screen reader interaction for these elements is different. Space will trigger a `<button>`; Enter will trigger an `<a>`.
 
 :::
 
@@ -199,8 +210,8 @@ links:
 
 ## Primary
 
-<figure class="odo--example">
-  <div class="odo--rendered">
+<figure class="odo-example">
+  <div class="odo-example--rendered">
     <button class="ods-button">Primary</button>
     <button class="ods-button is-ods-button-hover">Hover</button>
     <button class="ods-button is-ods-button-focus">Focus</button>
@@ -215,8 +226,8 @@ links:
 
 ## Secondary
 
-<figure class="odo--example">
-  <div class="odo--rendered">
+<figure class="odo-example">
+  <div class="odo-example--rendered">
     <button class="ods-button is-ods-button-secondary">Default</button>
     <button class="ods-button is-ods-button-secondary is-ods-button-hover">Hover</button>
     <button class="ods-button is-ods-button-secondary is-ods-button-focus">Focus</button>
@@ -231,8 +242,8 @@ links:
 
 ## Danger
 
-<figure class="odo--example">
-  <div class="odo--rendered">
+<figure class="odo-example">
+  <div class="odo-example--rendered">
     <button class="ods-button is-ods-button-danger">Danger</button>
     <button class="ods-button is-ods-button-danger is-ods-button-hover">Hover</button>
     <button class="ods-button is-ods-button-danger is-ods-button-focus">Focus</button>
@@ -247,7 +258,7 @@ links:
 
 ## Overlay
 
-<figure class="odo--example">
+<figure class="odo-example">
   <div class="odo--rendered is-rendered-success">
     <button class="ods-button is-ods-button-overlay">Overlay</button>
     <button class="ods-button is-ods-button-overlay is-ods-button-hover">Hover</button>
@@ -263,8 +274,8 @@ links:
 
 ## Clear
 
-<figure class="odo--example">
-  <div class="odo--rendered">
+<figure class="odo-example">
+  <div class="odo-example--rendered">
     <button class="ods-button is-ods-button-clear">Clear</button>
     <button class="ods-button is-ods-button-clear is-ods-button-hover">Hover</button>
     <button class="ods-button is-ods-button-clear is-ods-button-focus">Focus</button>

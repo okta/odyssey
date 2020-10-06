@@ -1,5 +1,5 @@
 <template>
-  <figure class="odo-figure--anatomy" v-if="img">
+  <figure class="docskit-figure-anatomy" v-if="img">
     <img :src="img" :alt="alt" />
     <figcaption>
       <h4 v-if="figureTitle">{figureTitle}</h4>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'FigureAnatomy',
+  name: 'Anatomy',
   props: {
     img: {
       type: String,

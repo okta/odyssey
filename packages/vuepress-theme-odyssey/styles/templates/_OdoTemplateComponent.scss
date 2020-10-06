@@ -59,11 +59,11 @@
   grid-column: 2 / 3;
 }
 
-.odo--example {
+.odo-example {
   margin-bottom: $spacing-l;
   max-width: 960px;
 
-  .odo--rendered {
+  .odo-example--rendered {
     padding: $spacing-l;
     border: 1px solid $border-color-display;
     border-radius: 6px 6px 0 0;
@@ -81,7 +81,7 @@
     }
   }
 
-  .odo--rendered + div[class*="language-"] pre[class*="language-"] {
+  .odo-example--rendered + div[class*="language-"] pre[class*="language-"] {
     border-top: 0;
     border-radius: 0 0 6px 6px;
   }
@@ -91,10 +91,6 @@
   padding: $spacing-m;
   border-top: 1px solid $border-color-display;
   text-align: center;
-}
-
-.docskit--desc {
-  margin-bottom: $spacing-l;
 }
 
 .ods-tabs--tablist {

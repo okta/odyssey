@@ -24,7 +24,7 @@ module.exports = {
   // `vuepress-theme-odyssey` and `vuepress-theme-nimatron`
   themeConfig: {
     flags: {
-      hasSearch: true
+      hasSearch: false
     },
     nav: {
       primary: [

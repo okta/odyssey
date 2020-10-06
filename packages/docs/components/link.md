@@ -29,7 +29,7 @@ Descriptive content around **link anatomy** should go here.
 
 </div>
 
-<FigureAnatomy img="/images/fpo.svg" />
+<Anatomy img="/images/fpo.svg" />
 
 ## Specialty cases
 
@@ -41,9 +41,11 @@ If a direct email link is required, display the whole address (e.g. lauren.ipsum
 
 </div>
 
-<figure>
+<Example>
+
   <a href="mailto:lauren.ipsum@okta.com">lauren.ipsum@okta.com</a>
-</figure>
+
+</Example>
 
 ### External links
 
@@ -60,9 +62,11 @@ Use an external link when:
 
 </div>
 
-<figure>
+<Example>
+
   <a href="https://okta.com" target="_blank" rel="noopener">Okta.com</a>
-</figure>
+ 
+</Example>
 
 ## Guidelines
 
@@ -80,17 +84,17 @@ Try to limit a link to at most 3 words.
 
 </div>
 
-<FigureExample type="positive">
+<Example type="positive">
 
   <a href="#">View reports</a>
   
-</FigureExample>
+</Example>
 
-<FigureExample type="negative">
+<Example type="negative">
 
   <a href="#">View all recent reports</a>
   
-</FigureExample>
+</Example>
 
 ### Context
 
@@ -103,17 +107,17 @@ If you must have brief link text, ensure that additional context is provided by 
 
 </div>
 
-<FigureExample type="positive">
+<Example type="positive">
 
   <a href="#">View all reports</a>
   
-</FigureExample>
+</Example>
 
-<FigureExample type="negative">
+<Example type="negative">
 
   <a href="#">View</a>
   
-</FigureExample>
+</Example>
 
 ### Semantics
 
@@ -123,17 +127,17 @@ Avoid using a link <code>&lt;a&gt;</code> for actions; use a button <code>&lt;bu
 
 </div>
 
-<FigureExample type="positive">
+<Example type="positive">
 
   <a href="#">View all reports</a>
   
-</FigureExample>
+</Example>
 
-<FigureExample type="negative">
+<Example type="negative">
 
   <a href="#">View</a>
   
-</FigureExample>
+</Example>
 
 </div>
 
@@ -153,8 +157,8 @@ Links should display a visible `:focus` state when users interact via keyboard. 
 
 ## Basic example
 
-<figure class="odo--example">
-  <div class="odo--rendered">
+<figure class="odo-example">
+  <div class="odo-example--rendered">
     <a href="mailto:lauren.ipsum@okta.com">lauren.ipsum@okta.com</a>
   </div>
 
@@ -165,8 +169,8 @@ Links should display a visible `:focus` state when users interact via keyboard. 
 
 ## External link
 
-<figure class="odo--example">
-  <div class="odo--rendered">
+<figure class="odo-example">
+  <div class="odo-example--rendered">
     <a href="https://okta.com" target="_blank" rel="noopener">Okta.com</a>
   </div>
 
