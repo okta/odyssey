@@ -22,58 +22,53 @@ links:
 
 ## Anatomy
 
-<div class="docskit--desc fpo">
+<Description class="fpo">
 
 Descriptive content around **checkbox anatomy** should go here.
 
-</div>
+</Description>
 
 <Anatomy img="/images/fpo.svg" />
 
+<Description>
 
-<div class="docskit--desc">
+> <span class="fpo negative">`<input>` elements of type checkbox are rendered by default as square boxes that are checked (ticked) when activated, like you might see in an official government paper form. They allow you to select single values for submission in a form (or not). - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox'>MDN</a></cite> </span>
 
-<div class="fpo">
-
-> `<input>` elements of type checkbox are rendered by default as square boxes that are checked (ticked) when activated, like you might see in an official government paper form. They allow you to select single values for submission in a form (or not). - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox'>MDN</a></cite>
-
-</div>
-
-</div>
+</Description>
 
 <Example>
-  <div>
-    <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Donut toppings</legend>
-      <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-2" value="example-2">
-      <label class="ods-checkbox--label" for="example-2">Sprinkles</label>
-      <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
-      <label class="ods-checkbox--label" for="example-3">Peanuts</label>
-      <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
-      <label class="ods-checkbox--label" for="example-3">Shredded coconut</label>
-      <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
-      <label class="ods-checkbox--label" for="example-3">Oreos</label>
-    </fieldset>
-  </div>
+  
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Donut toppings</legend>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-2" value="example-2">
+    <label class="ods-checkbox--label" for="example-2">Sprinkles</label>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
+    <label class="ods-checkbox--label" for="example-3">Peanuts</label>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
+    <label class="ods-checkbox--label" for="example-3">Shredded coconut</label>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
+    <label class="ods-checkbox--label" for="example-3">Oreos</label>
+  </fieldset>
+  
 </Example>
 
 ## States
 
-<div class="docskit--desc fpo">
+<Description class="fpo">
 
 Descriptive content around **states** should go here.
 
-</div>
+</Description>
 
 ### Disabled
 
-<div class="docskit--desc">
+<Description>
 
-> This Boolean attribute prevents the user from interacting with the input. In particular, the `click` event is not dispatched on disabled controls, and disabled controls aren't submitted with their form. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled'>MDN</a></cite>
+> <span class="fpo negative">This Boolean attribute prevents the user from interacting with the input. In particular, the `click` event is not dispatched on disabled controls, and disabled controls aren't submitted with their form. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled'>MDN</a></cite></span>
 
 Disabling checkboxes happens on a per-option basis.
 
-</div>
+</Description>
 
 <Example>
   <fieldset class="ods-fieldset">
@@ -87,9 +82,9 @@ Disabling checkboxes happens on a per-option basis.
 
 ### Invalid
 
-<div class="docskit--desc">
+<Description>
 
->The :invalid CSS pseudo-class represents any `<input>` or other `<form>` element whose contents fail to validate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid'>MDN</a></cite>
+> <span class="fpo negative">The :invalid CSS pseudo-class represents any `<input>` or other `<form>` element whose contents fail to validate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid'>MDN</a></cite></span>
 
 Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
 
@@ -97,7 +92,7 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
 
 Unlike radio buttons, checkboxes validate individually, not as a group.
 
-</div>
+</Description>
 
 <Example>
   <fieldset class="ods-fieldset">
@@ -114,13 +109,13 @@ Unlike radio buttons, checkboxes validate individually, not as a group.
 
 ### Optional/Required
 
-<div class="docskit--desc">
+<Description>
 
 Unlike radio buttons, checkbox groups do not validate as a group. By default, checkbox groups should be treated as `:optional`.
 
 Individually, checkboxes can be set to `required` - most commonly seen when a user confirms they have read terms of service.
 
-</div>
+</Description>
 
 <Example>
   <fieldset class="ods-fieldset">
@@ -131,74 +126,73 @@ Individually, checkboxes can be set to `required` - most commonly seen when a us
 
 ### Indeterminate
 
-<div class="docskit--desc">
+<Description>
 
 In the case of nested checkboxes, an `:indeterminate` state may be required.
 
 Please note that this state must be set via javascript and is not reflected in the DOM - only `checked` and `unchecked` states will be submitted by default.
 
-</div>
+</Description>
 
 <Example>
-<div>
-
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">
-    Best donuts poll results
-  </figcaption>
-  <table class="ods-table">
-    <caption>Results of the most popular donuts poll administered October 2020.</caption>
-    <thead>
-      <tr>
-        <th scope="column" class="is-ods-table-checkbox">
-          <input class="ods-checkbox" type="checkbox" name="row[all]" data-example-indeterminate value="check-all">
-          <label class="ods-checkbox--label" for="checkbox-all">
-            <span class="u-visually-hidden">Select this row</span>
-          </label>
-        </th>
-        <th scope="column" class="is-ods-table-num">Rank</th>
-        <th scope="column">Name</th>
-        <th scope="column">Votes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="is-ods-table-checkbox">
-          <input class="ods-checkbox" type="checkbox" name="row[0]" id="checkbox-0" value="check-0">
-          <label class="ods-checkbox--label" for="checkbox-0">
-            <span class="u-visually-hidden">Select this row</span>
-          </label>
-        </td>
-        <td class="is-ods-table-num">1</td>
-        <td>Glazed</td>
-        <td class="is-ods-table-num">8,514,877</td>
-      </tr>
-      <tr>
-        <td class="is-ods-table-checkbox">
-          <input class="ods-checkbox" type="checkbox" name="row[1]" id="checkbox-1" value="check-1">
-          <label class="ods-checkbox--label" for="checkbox-1">
-            <span class="u-visually-hidden">Select this row</span>
-          </label>
-        </td>
-        <td class="is-ods-table-num">2</td>
-        <td>Chocolate Glazed</td>
-        <td class="is-ods-table-num">2,780,400</td>
-      </tr>
-      <tr>
-        <td class="is-ods-table-checkbox">
-          <input class="ods-checkbox" type="checkbox" name="row[2]" id="checkbox-2" value="check-2">
-          <label class="ods-checkbox--label" for="checkbox-2">
-            <span class="u-visually-hidden">Select this row</span>
-          </label>
-        </td>
-        <td class="is-ods-table-num">3</td>
-        <td>Boston Creme</td>
-        <td class="is-ods-table-num">2,344,858</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-</div>
+  <template>
+    <figure class="ods-table--figure">
+      <figcaption class="ods-table--figcaption">
+        Best donuts poll results
+      </figcaption>
+      <table class="ods-table">
+        <caption>Results of the most popular donuts poll administered October 2020.</caption>
+        <thead>
+          <tr>
+            <th scope="column" class="is-ods-table-checkbox">
+              <input class="ods-checkbox" type="checkbox" name="row[all]" data-example-indeterminate value="check-all">
+              <label class="ods-checkbox--label" for="checkbox-all">
+                <span class="u-visually-hidden">Select this row</span>
+              </label>
+            </th>
+            <th scope="column" class="is-ods-table-num">Rank</th>
+            <th scope="column">Name</th>
+            <th scope="column">Votes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="is-ods-table-checkbox">
+              <input class="ods-checkbox" type="checkbox" name="row[0]" id="checkbox-0" value="check-0">
+              <label class="ods-checkbox--label" for="checkbox-0">
+                <span class="u-visually-hidden">Select this row</span>
+              </label>
+            </td>
+            <td class="is-ods-table-num">1</td>
+            <td>Glazed</td>
+            <td class="is-ods-table-num">8,514,877</td>
+          </tr>
+          <tr>
+            <td class="is-ods-table-checkbox">
+              <input class="ods-checkbox" type="checkbox" name="row[1]" id="checkbox-1" value="check-1">
+              <label class="ods-checkbox--label" for="checkbox-1">
+                <span class="u-visually-hidden">Select this row</span>
+              </label>
+            </td>
+            <td class="is-ods-table-num">2</td>
+            <td>Chocolate Glazed</td>
+            <td class="is-ods-table-num">2,780,400</td>
+          </tr>
+          <tr>
+            <td class="is-ods-table-checkbox">
+              <input class="ods-checkbox" type="checkbox" name="row[2]" id="checkbox-2" value="check-2">
+              <label class="ods-checkbox--label" for="checkbox-2">
+                <span class="u-visually-hidden">Select this row</span>
+              </label>
+            </td>
+            <td class="is-ods-table-num">3</td>
+            <td>Boston Creme</td>
+            <td class="is-ods-table-num">2,344,858</td>
+          </tr>
+        </tbody>
+      </table>
+    </figure>
+  </template>
 </Example>
 
 <script>

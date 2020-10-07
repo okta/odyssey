@@ -17,13 +17,14 @@ links:
 
 ## Anatomy
 
-<div class="docskit--desc fpo">
+<Description>
 
 Descriptive content around **select anatomy** should go here.
 
-</div>
+</Description>
 
 <Anatomy img="/images/fpo.svg" />
+
 
 :::
 

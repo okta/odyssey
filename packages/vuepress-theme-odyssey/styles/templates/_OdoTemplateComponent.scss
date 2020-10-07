@@ -1,7 +1,7 @@
 .odo-doc-header {
   display: grid;
   grid-column-gap: $spacing-l;
-  grid-row-gap: $spacing-s;
+  // grid-row-gap: $spacing-s;
   grid-template-columns: $max-line-length auto;
   justify-content: space-between;
 
@@ -12,6 +12,7 @@
   .odo-doc-header--lead {
     grid-column: 1 / 2;
     margin: 0;
+    font-size: $size-title-4;
   }
 
   .odo-doc-header--links {

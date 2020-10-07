@@ -22,7 +22,7 @@ links:
 
 ## Anatomy
 
-<Description>
+<Description class="fpo">
 
 Descriptive content around **radio button anatomy** should go here.
 
@@ -33,21 +33,21 @@ Descriptive content around **radio button anatomy** should go here.
 
 <Description>
 
-> `<input>` elements of type radio are generally used in radio groups—collections of radio buttons describing a set of related options. Only one radio button in a given group can be selected at the same time. Radio buttons are typically rendered as small circles, which are filled or highlighted when selected. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio'>MDN</a></cite>
+> <span class="fpo negative">`<input>` elements of type radio are generally used in radio groups—collections of radio buttons describing a set of related options. Only one radio button in a given group can be selected at the same time. Radio buttons are typically rendered as small circles, which are filled or highlighted when selected. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio'>MDN</a></cite></span>
 
 </Description>
 
 <Example>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Which of the following is the largest?</legend>
-    <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
-    <label class="ods-radio--label" for="radio-peanut">A peanut</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-elephant" value="elephant" required>
-    <label class="ods-radio--label" for="radio-elephant">An elephant</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-moon" value="moon" required>
-    <label class="ods-radio--label" for="radio-moon">The moon</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
-    <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
+    <legend class="ods-input-legend">Which donut has pink frosting?</legend>
+    <input class="ods-radio" type="radio" name="radio" id="radio-0" value="0" required checked>
+    <label class="ods-radio--label" for="radio-0">Glazed</label>
+    <input class="ods-radio" type="radio" name="radio" id="radio-5" value="3" required>
+    <label class="ods-radio--label" for="radio-5">Boston Cream</label>
+    <input class="ods-radio" type="radio" name="radio" id="radio-5" value="3" required checked>
+    <label class="ods-radio--label" for="radio-5">"The Homer"</label>
+    <input class="ods-radio" type="radio" name="radio" id="radio-5" value="3" required>
+    <label class="ods-radio--label" for="radio-5">Old Fashioned</label>
   </fieldset>
 </Example>
 
@@ -57,14 +57,14 @@ Descriptive content around **radio button anatomy** should go here.
 
 <Description>
 
-> This Boolean attribute prevents the user from interacting with the input. In particular, the `click` event is not dispatched on disabled controls, and disabled controls aren't submitted with their form. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled'>MDN</a></cite>
+> <span class="fpo negative">This Boolean attribute prevents the user from interacting with the input. In particular, the `click` event is not dispatched on disabled controls, and disabled controls aren't submitted with their form. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled'>MDN</a></cite></span>
 
 Disabling radio buttons happens on a per-option basis.
 
 </Description>
 
 <Example>
-  <template>
+  <form>
     <fieldset class="ods-fieldset">
       <legend class="ods-input-legend">Which of the following is the largest?</legend>
       <input class="ods-radio" type="radio" name="radio-mix" id="radio-peanut-mix" value="peanut" required checked>
@@ -87,18 +87,14 @@ Disabling radio buttons happens on a per-option basis.
       <input class="ods-radio" type="radio" name="radio-disabled" id="radio-tennis-ball-disabled" value="tennis-ball" required disabled>
       <label class="ods-radio--label" for="radio-tennis-ball-disabled">A tennis ball</label>
     </fieldset>
-  </template>
+  </form>
 </Example>
 
 ### Invalid
 
 <Description>
 
-<span class="fpo">
-
->The :invalid CSS pseudo-class represents any `<input>` or other `<form>` element whose contents fail to validate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid'>MDN</a></cite>
-
-</span>
+> <span class="fpo negative">The :invalid CSS pseudo-class represents any `<input>` or other `<form>` element whose contents fail to validate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid'>MDN</a></cite></span>
 
 Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
 
@@ -125,7 +121,7 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
 
 <div class="docskit--desc">
 
-> To avoid confusion as to whether a radio button group is required or not, authors are encouraged to specify the attribute on all the radio buttons in a group. - <cite><a href="https://www.w3.org/TR/html5/forms.html#the-required-attribute">W3</a></cite>
+> <span class="fpo negative">To avoid confusion as to whether a radio button group is required or not, authors are encouraged to specify the attribute on all the radio buttons in a group. - <cite><a href="https://www.w3.org/TR/html5/forms.html#the-required-attribute">W3</a></cite></span>
 
 </div>
 
