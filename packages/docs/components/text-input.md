@@ -28,7 +28,11 @@ Text input UI is simple. It consists of a label and a field for users to interac
 
 </Description>
 
-<Anatomy img="/images/anatomy-text-input.svg" />
+<Anatomy 
+  title="title"
+  meta="metadata"
+  img="/images/anatomy-text-input.svg" 
+/>
 
 ## Default
 

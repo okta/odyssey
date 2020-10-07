@@ -135,64 +135,62 @@ Please note that this state must be set via javascript and is not reflected in t
 </Description>
 
 <Example>
-  <template>
-    <figure class="ods-table--figure">
-      <figcaption class="ods-table--figcaption">
-        Best donuts poll results
-      </figcaption>
-      <table class="ods-table">
-        <caption>Results of the most popular donuts poll administered October 2020.</caption>
-        <thead>
-          <tr>
-            <th scope="column" class="is-ods-table-checkbox">
-              <input class="ods-checkbox" type="checkbox" name="row[all]" data-example-indeterminate value="check-all">
-              <label class="ods-checkbox--label" for="checkbox-all">
-                <span class="u-visually-hidden">Select this row</span>
-              </label>
-            </th>
-            <th scope="column" class="is-ods-table-num">Rank</th>
-            <th scope="column">Name</th>
-            <th scope="column">Votes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="is-ods-table-checkbox">
-              <input class="ods-checkbox" type="checkbox" name="row[0]" id="checkbox-0" value="check-0">
-              <label class="ods-checkbox--label" for="checkbox-0">
-                <span class="u-visually-hidden">Select this row</span>
-              </label>
-            </td>
-            <td class="is-ods-table-num">1</td>
-            <td>Glazed</td>
-            <td class="is-ods-table-num">8,514,877</td>
-          </tr>
-          <tr>
-            <td class="is-ods-table-checkbox">
-              <input class="ods-checkbox" type="checkbox" name="row[1]" id="checkbox-1" value="check-1">
-              <label class="ods-checkbox--label" for="checkbox-1">
-                <span class="u-visually-hidden">Select this row</span>
-              </label>
-            </td>
-            <td class="is-ods-table-num">2</td>
-            <td>Chocolate Glazed</td>
-            <td class="is-ods-table-num">2,780,400</td>
-          </tr>
-          <tr>
-            <td class="is-ods-table-checkbox">
-              <input class="ods-checkbox" type="checkbox" name="row[2]" id="checkbox-2" value="check-2">
-              <label class="ods-checkbox--label" for="checkbox-2">
-                <span class="u-visually-hidden">Select this row</span>
-              </label>
-            </td>
-            <td class="is-ods-table-num">3</td>
-            <td>Boston Creme</td>
-            <td class="is-ods-table-num">2,344,858</td>
-          </tr>
-        </tbody>
-      </table>
-    </figure>
-  </template>
+  <figure class="ods-table--figure">
+    <figcaption class="ods-table--figcaption">
+      Best donuts poll results
+    </figcaption>
+    <table class="ods-table">
+      <caption>Results of the most popular donuts poll administered October 2020.</caption>
+      <thead>
+        <tr>
+          <th scope="column" class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[all]" data-example-indeterminate value="check-all">
+            <label class="ods-checkbox--label" for="checkbox-all">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </th>
+          <th scope="column" class="is-ods-table-num">Rank</th>
+          <th scope="column">Name</th>
+          <th scope="column">Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[0]" id="checkbox-0" value="check-0">
+            <label class="ods-checkbox--label" for="checkbox-0">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </td>
+          <td class="is-ods-table-num">1</td>
+          <td>Glazed</td>
+          <td class="is-ods-table-num">8,514,877</td>
+        </tr>
+        <tr>
+          <td class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[1]" id="checkbox-1" value="check-1">
+            <label class="ods-checkbox--label" for="checkbox-1">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </td>
+          <td class="is-ods-table-num">2</td>
+          <td>Chocolate Glazed</td>
+          <td class="is-ods-table-num">2,780,400</td>
+        </tr>
+        <tr>
+          <td class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[2]" id="checkbox-2" value="check-2">
+            <label class="ods-checkbox--label" for="checkbox-2">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </td>
+          <td class="is-ods-table-num">3</td>
+          <td>Boston Creme</td>
+          <td class="is-ods-table-num">2,344,858</td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
 </Example>
 
 <script>

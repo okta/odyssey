@@ -39,8 +39,8 @@
 [class='content__overview'] {
   display: grid;
   grid-column-gap: $spacing-l;
-  font-size: ms(0);
-  grid-template-columns: $max-line-length $max-line-length;
+  font-size: ms(1);
+  grid-template-columns: repeat(2, minmax(min-content, #{$max-line-length}));
 
   h1,
   h2,

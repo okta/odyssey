@@ -2,6 +2,18 @@
   grid-column: 2/3;
   margin-bottom: $spacing-m;
 
+  &.is-docskit-variant-clear {
+    .docskit-example--figure {
+      width: 100%;
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  .docskit-example--layout-full {
+    width: 100%;
+  }
+
   .docskit-example--wide {
     width: 100%;
   }

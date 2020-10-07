@@ -16,13 +16,115 @@ links:
 
 ## Anatomy
 
-<div class="docskit--desc fpo">
+<Description>
 
 Descriptive content around **tag anatomy** should go here.
 
-</div>
+</Description>
 
 <Anatomy img="/images/fpo.svg" />
+
+
+### Headline
+
+<Description>
+
+Descriptive content around **tag anatomy** should go here.
+
+</Description>
+
+<Example>
+
+This is a visual example
+
+</Example>
+
+
+### Headline
+
+<Description>
+
+Descriptive content around **tag anatomy** should go here.
+
+</Description>
+
+<Example>
+
+This is a visual example
+
+</Example>
+
+
+### Headline
+
+<Description>
+
+Descriptive content around **tag anatomy** should go here.
+
+</Description>
+
+<Example>
+
+This is a visual example
+
+</Example>
+
+
+### Headline
+
+<Description>
+
+Descriptive content around **tag anatomy** should go here.
+
+</Description>
+
+<Example>
+
+This is a visual example
+
+</Example>
+
+
+### Headline
+
+<Description>
+
+Descriptive content around **tag anatomy** should go here.
+
+</Description>
+
+<Example>
+
+This is a visual example
+
+</Example>
+
+
+### Guidelines
+
+<Description>
+
+Descriptive content around **tag anatomy** should go here.
+
+</Description>
+
+<Example type="positive">
+
+This is a visual example
+
+</Example>
+
+<Description>
+
+Descriptive content around **tag anatomy** should go here.
+
+</Description>
+
+<Example type="positive">
+
+This is a visual example
+
+</Example>
 
 :::
 

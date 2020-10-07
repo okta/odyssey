@@ -1,5 +1,5 @@
 <template>
-  <div :class="'docskit-example is-docskit-example-' + type">
+  <div :class="'docskit-example is-docskit-variant-' + variant">
     <h6 class="docskit-example--title" v-if=" type === 'positive' || type === 'negative' ">
       {{ type === 'positive' ? 'Do' : `Don't` }}
     </h6>
@@ -13,9 +13,13 @@
 export default {
   name: 'Example',
   props: {
-    type: {
+    variant: {
       type: String,
-      default: 'plain'
+      default: 'default'
+    },
+    layout: {
+      type: String,
+      default: 'default'
     },
   }
 }

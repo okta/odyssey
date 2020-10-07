@@ -23,11 +23,11 @@ links:
 
 ## Anatomy
 
-<div class="docskit--desc fpo">
+<Description class="fpo">
 
 Descriptive content around **link anatomy** should go here.
 
-</div>
+</Description>
 
 <Anatomy img="/images/fpo.svg" />
 
@@ -35,21 +35,21 @@ Descriptive content around **link anatomy** should go here.
 
 ### Mailto
 
-<div class="docskit--desc">
+<Description>
 
 If a direct email link is required, display the whole address (e.g. lauren.ipsum@okta.com). Avoid colloquial text that might obfuscate the presence of a mailto link (e.g., "Contact Us").
 
-</div>
+</Description>
 
 <Example>
-
-  <a href="mailto:lauren.ipsum@okta.com">lauren.ipsum@okta.com</a>
-
+  <template>
+    <a href="mailto:donuts@okta.com">donuts@okta.com</a>
+  </template>
 </Example>
 
 ### External links
 
-<div class="docskit--desc">
+<Description>
 
 An external link opens in a separate tab and can be identified by the <span class="sample--external-link-icon" aria-label="External link icon"></span> icon appended to the link.
 
@@ -60,96 +60,96 @@ Use an external link when:
 
 (See [Google Developer Documentation](https://developers.google.com/web/tools/lighthouse/audits/noopener) for security and performance considerations when using external links)
 
-</div>
+</Description>
 
 <Example>
-
-  <a href="https://okta.com" target="_blank" rel="noopener">Okta.com</a>
- 
+  <template>
+    <a href="https://okta.com" target="_blank" rel="noopener">okta.com/donuts</a>
+  </template>
 </Example>
 
 ## Guidelines
 
-<div class="docskit--desc">
+<Description>
 
 Use a link when the URL is expected to change, either to an internal page (or route), an anchor link to content on the current page or an external site or resource.
 
-</div>
+</Description>
 
 #### Max length
 
-<div class="docskit--desc">
+<Description>
 
 Try to limit a link to at most 3 words.
 
-</div>
+</Description>
 
 <Example type="positive">
-
-  <a href="#">View reports</a>
-  
+  <template>
+    <a href="#">View reports</a>
+  </template>
 </Example>
 
 <Example type="negative">
-
-  <a href="#">View all recent reports</a>
-  
+  <template>
+    <a href="#">View all recent reports</a>
+  </template>
 </Example>
 
 ### Context
 
-<div class="docskit--desc">
+<Description>
 
 Choose link text that describes the destination (e.g. "Settings"), rather than generic text (e.g. "Click here" or a URL)
 . This is particularly important for assistive technologies like screen readers.
 
 If you must have brief link text, ensure that additional context is provided by using the `.u-visually-hidden` class.
 
-</div>
+</Description>
 
 <Example type="positive">
-
-  <a href="#">View all reports</a>
-  
+  <template>
+    <a href="#">View all reports</a>
+  </template>
 </Example>
 
 <Example type="negative">
-
-  <a href="#">View</a>
-  
+  <template>
+    <a href="#">View</a>
+  </template>
 </Example>
 
 ### Semantics
 
-<div class="docskit--desc">
+<Description>
 
 Avoid using a link <code>&lt;a&gt;</code> for actions; use a button <code>&lt;button&gt;</code> instead
 
-</div>
+</Description>
 
 <Example type="positive">
-
-  <a href="#">View all reports</a>
-  
+  <template>
+    <a href="#">View all reports</a>
+  </template>
 </Example>
 
 <Example type="negative">
-
-  <a href="#">View</a>
-  
+  <template>
+    <a href="#">View</a>
+  </template>
 </Example>
 
-</div>
+</Description>
 
 ### Accessibility
 
-<div class="docskit--desc">
+<Description>
 
 Links in Odyssey are not underlined, but do maintain a minimum 3:1 contrast ratio with our body text color and a 4.5:1 contrast ratio with our available background colors. If you deviate from these standards via overrides, please ensure that your links have a non-color indicator, e.g. an underline.
 
 Links should display a visible `:focus` state when users interact via keyboard. Odyssey preserves the default `:focus` state for each browser.
 
-</div>
+</Description>
 
 :::
 
