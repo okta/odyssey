@@ -259,7 +259,7 @@ User the `<button>` element instead of `<a>` whenever possible. The keyboard and
 ## Overlay
 
 <figure class="odo-example">
-  <div class="odo--rendered is-rendered-success">
+  <div class="odo-example--rendered is-rendered-success">
     <button class="ods-button is-ods-button-overlay">Overlay</button>
     <button class="ods-button is-ods-button-overlay is-ods-button-hover">Hover</button>
     <button class="ods-button is-ods-button-overlay is-ods-button-focus">Focus</button>

@@ -63,6 +63,7 @@ export default {
   mounted() {
     if ("IntersectionObserver" in window) {
       const el = this.$refs.mainContent;
+
       const observer = new IntersectionObserver(
         (entries, observer) => {
           entries.forEach(entry => {
@@ -75,6 +76,7 @@ export default {
         },
         { threshold: 1 }
       );
+
       observer.observe(el);
     }
   }

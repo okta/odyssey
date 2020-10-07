@@ -2,6 +2,10 @@
   grid-column: 2/3;
   margin-bottom: $spacing-m;
 
+  .docskit-example--wide {
+    width: 100%;
+  }
+
   .docskit-example--title {
     display: flex;
     align-items: center;
@@ -17,7 +21,7 @@
     content: '🔔';
   }
 
-  &.is-docskit-example-negative .docskit-example--title::before {      
+  &.is-docskit-example-negative .docskit-example--title::before {
     content: '🚫';
   }
 

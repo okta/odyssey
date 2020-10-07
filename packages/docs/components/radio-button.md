@@ -22,20 +22,20 @@ links:
 
 ## Anatomy
 
-<div class="docskit--desc fpo">
+<Description>
 
 Descriptive content around **radio button anatomy** should go here.
 
-</div>
+</Description>
 
 <Anatomy img="/images/fpo.svg" />
 
 
-<div class="docskit--desc">
+<Description>
 
 > `<input>` elements of type radio are generally used in radio groups—collections of radio buttons describing a set of related options. Only one radio button in a given group can be selected at the same time. Radio buttons are typically rendered as small circles, which are filled or highlighted when selected. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio'>MDN</a></cite>
 
-</div>
+</Description>
 
 <Example>
   <fieldset class="ods-fieldset">
@@ -55,13 +55,13 @@ Descriptive content around **radio button anatomy** should go here.
 
 ### Disabled
 
-<div class="docskit--desc">
+<Description>
 
 > This Boolean attribute prevents the user from interacting with the input. In particular, the `click` event is not dispatched on disabled controls, and disabled controls aren't submitted with their form. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled'>MDN</a></cite>
 
 Disabling radio buttons happens on a per-option basis.
 
-</div>
+</Description>
 
 <Example>
   <template>
@@ -92,15 +92,19 @@ Disabling radio buttons happens on a per-option basis.
 
 ### Invalid
 
-<div class="docskit--desc">
+<Description>
+
+<span class="fpo">
 
 >The :invalid CSS pseudo-class represents any `<input>` or other `<form>` element whose contents fail to validate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid'>MDN</a></cite>
+
+</span>
 
 Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
 
 Note, when indicating a validation error, please use an `.ods-field--error` to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
 
-</div>
+</Description>
 
 <Example>
   <fieldset class="ods-fieldset">

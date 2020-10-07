@@ -74,10 +74,10 @@
     padding: $spacing-m $spacing-l;
     border: 1px solid $border-color-display;
     background-color: cv("gray", "000");
-    font-size: $size-body-sentence;
+    font-size: $size-body-base;
 
     code {
-      font-family: "Inconsolata", monospace;
+      font-family: "Andale Mono", monospace;
     }
   }
 

@@ -136,8 +136,8 @@ Tooltips are intended to provide short, clear descriptions. If your content requ
     <button class="ods-button" aria-describedby="download-description-image" disabled>
       Download
     </button>
-    <aside id="download-description-image" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
-      <img src="https://media.giphy.com/media/uOAXDA7ZeJJzW/giphy.gif" alt="An animated gif of an animated gif of Newman wagging his finger." style="width: 150px;">
+    <aside id="download-description-image" class="ods-tooltip is-ods-tooltip-top" role="tooltip" style="width: 150px;">
+      <img src="https://media.tenor.com/images/7ad30bad07a80b195d13a7119014207e/tenor.gif" alt="An animated gif of an animated gif of Newman wagging his finger." style="width: 150px;">
     </aside>
   </span>
 </Example>
