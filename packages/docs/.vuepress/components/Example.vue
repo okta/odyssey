@@ -1,5 +1,5 @@
 <template>
-<div :class="'docskit-example is-docskit-example-' + type">
+  <div :class="'docskit-example is-docskit-example-' + type' is-docskit-layout-' + type" >
     <h6 class="docskit-example--title" v-if=" type === 'positive' || type === 'negative' ">
       {{ type === 'positive' ? 'Do' : `Don't` }}
     </h6>

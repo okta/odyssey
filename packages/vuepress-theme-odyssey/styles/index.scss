@@ -82,6 +82,13 @@ html {
   // }
 }
 
+a,
+a:visited {
+  &:focus {
+    @include outline;
+  }
+}
+
 [id='app'] {
   display: grid;
   grid-column-gap: $spacing-xl;

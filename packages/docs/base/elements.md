@@ -1,13 +1,13 @@
 ---
-template: component
 title: Elements
-lead: Odyssey takes care to provide additional style to the following HTML elements by default.
-tabs:
-  - label: 'Overview'
-    id: 'overview'
 ---
 
-::: slot overview
+::: slot nimatron-all
+
+# Elements
+
+Odyssey takes care to provide additional style to the following HTML elements by default.
+
 
 ## abbr <a name="abbr"></a> 
 > The HTML `<abbr>` element represents an abbreviation or acronym; the optional title attribute can provide an expansion or description for the abbreviation. If present, title must contain this full description and nothing else. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr'>MDN</a></cite>
