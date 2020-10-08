@@ -295,6 +295,10 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 ```
 </figure>
 
+### Usage
+
+When combined with <a href="#samp">`<samp>`</a>, the background of this element will swap to white for better contrast.
+
 ## mark <a name="mark"></a>
 > The HTML Mark Text element (`<mark>`) represents text which is marked or highlighted for reference or notation purposes, due to the marked passage's relevance or importance in the enclosing context. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark'>MDN</a></cite>
 
@@ -374,6 +378,19 @@ Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quot
 ```html
 <p><s>Ramen with white "Paitan" Broth  (Limited: 15 servings per day).</s></p>
 <p><strong>This dish is now SOLD OUT!</strong></p>
+```
+</figure>
+
+## samp <a name="samp"></a>
+> The HTML Sample Element (`<samp>`) is used to enclose inline text which represents sample (or quoted) output from a computer program. Its contents are typically rendered using the browser's default monospaced font (such as Courier or Lucida Console). - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp">MDN</a></cite>
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <p>When iDonut crashed, it told me <samp>Press <kbd>F5</kbd> to refresh bakery</samp>.</p>
+  </div>
+
+```html
+<p>When iDonut crashed, it told me <samp>Press <kbd>F5</kbd> to refresh bakery</samp>.</p>
 ```
 </figure>
 
