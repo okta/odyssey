@@ -5,7 +5,7 @@
 Odyssey takes care to provide additional style to the following HTML elements by default.
 
 
-## abbr <a name="abbr"></a> 
+## abbr <a name="abbr"></a>
 > The HTML `<abbr>` element represents an abbreviation or acronym; the optional title attribute can provide an expansion or description for the abbreviation. If present, title must contain this full description and nothing else. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr'>MDN</a></cite>
 
 <figure class="nimatron--example">
@@ -18,7 +18,7 @@ Odyssey takes care to provide additional style to the following HTML elements by
 ```
 </figure>
 
-## address <a name="address"></a> 
+## address <a name="address"></a>
 > The HTML `<address>` element indicates that the enclosed HTML provides contact information for a person or people, or for an organization. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address'>MDN</a></cite>
 
 <figure class="nimatron--example">
@@ -81,7 +81,7 @@ Odyssey takes care to provide additional style to the following HTML elements by
 ```
 </figure>
 
-## code <a name="code"></a> 
+## code <a name="code"></a>
 > The HTML `<code>` element displays its contents styled in a fashion intended to indicate that the text is a short fragment of computer code. By default, the content text is displayed using the user agent's default monospace font. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code'>MDN</a></cite>
 
 <figure class="nimatron--example">
@@ -155,7 +155,7 @@ For most terms, the content of `<dfn>` should be term you are defining:
 ```
 </figure>
 
-If you're referencing an acronym or abbreviation, you may also combine it with `<abbr>`: 
+If you're referencing an acronym or abbreviation, you may also combine it with `<abbr>`:
 
 <figure class="nimatron--example">
   <div class="nimatron--rendered">
@@ -191,7 +191,7 @@ Screen readers announce `<dl>` content differently - some may not indicate that 
       <dd>loves garlic</dd>
       <dt>Waluigi</dt>
       <dd>purple hat, not a twin, pointy mustache</dd>
-    </dl> 
+    </dl>
   </div>
 
 ```html
@@ -236,7 +236,7 @@ You can also nest `em` tags to provide an added level of emphasis. Doing so will
 </figure>
 
 
-## hr <a name="hr"></a> 
+## hr <a name="hr"></a>
 > The HTML `<hr>` element represents a thematic break between paragraph-level elements: for example, a change of scene in a story, or a shift of topic within a section. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr'>MDN</a></cite>
 
 <figure class="nimatron--example">
@@ -253,7 +253,7 @@ You can also nest `em` tags to provide an added level of emphasis. Doing so will
 ```
 </figure>
 
-## ins <a name="ins"></a> 
+## ins <a name="ins"></a>
 > The HTML `<ins>` element represents a range of text that has been added to a document. You can use the `<del>` element to similarly represent a range of text that has been deleted from the document. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins'>MDN</a></cite>
 
 ### Accessibility
@@ -278,11 +278,11 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 </del>
 <ins cite="../howtobeawizard.html" datetime="2018-05">
     <p>“A wizard is never late &hellip;”</p>
-</ins>  
+</ins>
 ```
 </figure>
 
-## kbd <a name="kbd"></a> 
+## kbd <a name="kbd"></a>
 > The HTML Keyboard Input element (`<kbd>`) represents a span of inline text denoting textual user input from a keyboard, voice input, or any other text entry device. By convention, the user agent defaults to rendering the contents of a `<kbd>` element using its default monospace font, although this is not mandated by the HTML standard. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd'>MDN</a></cite>
 
 <figure class="nimatron--example">
@@ -341,6 +341,27 @@ Since the `pre` tag preserves all whitespace, it's best to begin and end your co
 ```
 </figure>
 
+## q <a href="q"></a>
+> The HTML `<q>` element indicates that the enclosed text is a short inline quotation. Most modern browsers implement this by surrounding the text in quotation marks. This element is intended for short quotations that don't require paragraph breaks; for long quotations use the `<blockquote>` element. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q">MDN</a></cite>
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <p>While Marge was fighting the monorail, Homer wondered, <q cite="https://www.imdb.com/title/tt0701173/quotes/qt0245595">Donuts - is there anything they can't do?</q></p>
+  </div>
+
+```html
+  <p>While Marge was fighting the monorail, Homer wondered, <q cite="https://www.imdb.com/title/tt0701173/quotes/qt0245595">Donuts - is there anything they can't do?</q></p>
+```
+</figure>
+
+### Usage
+
+Only use the `<q>` element when you're quoting a person or text. Don't use this element for sarcasm, scare quotes, or similar - simply use quotes as you "normally" would.
+
+### Smart quotes
+
+Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quotes (“”). Instead, they rely on content authors to determine which type to use. Since we cannot ensure broad consistency, Odyssey does not apply smart quotes to `<q>`.
+
 ## s <a name="s"></a>
 > The HTML `<s>` element renders text with a strikethrough, or a line through it. Use the `<s>` element to represent things that are no longer relevant or no longer accurate. However, `<s>` is not appropriate when indicating document edits; for that, use the `<del>` and `<ins>` elements, as appropriate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s'>MDN</a></cite>
 
@@ -367,7 +388,7 @@ Since the `pre` tag preserves all whitespace, it's best to begin and end your co
 ```html
 <p><small>&copy; 2020 Atko, Inc. All Rights Reserved.</small></p>
 ```
-</figure>   
+</figure>
 
 ## strong <a name="strong"></a>
 > The HTML Strong Importance Element (`<strong>`) indicates that its contents have strong importance, seriousness, or urgency. Browsers typically render the contents in bold type. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong'>MDN</a></cite>
@@ -439,7 +460,7 @@ See <a href="#details">`details`</a> for example.
 ```
 </figure>
 
-## var <a name="var"></a> 
+## var <a name="var"></a>
 > The HTML `<var>` element represents the name of a variable in a mathematical expression or a programming context. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var'>MDN</a></cite>
 
 <figure class="nimatron--example">
