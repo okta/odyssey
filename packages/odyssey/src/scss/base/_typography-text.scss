@@ -119,6 +119,18 @@ mark {
   background: cv('yellow', '000');
 }
 
+q {
+  quotes: '"' '"' "'" "'";
+
+  &::before {
+    content: open-quote;
+  }
+
+  &::after {
+    content: close-quote;
+  }
+}
+
 s {
   text-decoration: line-through;
 }
