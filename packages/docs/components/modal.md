@@ -15,14 +15,14 @@ links:
     href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_modal.scss
   - icon: figma
     label: View designs
-    href: https://www.figma.com/file/pULYhG6KIhBsnQTFjkpTFv/Buttons?node-id=2660%3A365
+    href: https://www.figma.com/file/qqAGCkxl8lfUJKNGsgdoUG/Modal
 ---
 
 ::: slot overview
 
 ## Anatomy
 
-<Description>
+<Description class="fpo">
 
 Descriptive content around **modal anatomy** should go here.
 

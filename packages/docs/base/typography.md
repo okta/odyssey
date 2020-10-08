@@ -1,8 +1,12 @@
 ---
+template: component
 title: Typography
+tabs:
+  - label: 'Overview'
+    id: 'overview'
 ---
 
-::: slot nimatron-all
+::: slot overview
 
 # Typography
 

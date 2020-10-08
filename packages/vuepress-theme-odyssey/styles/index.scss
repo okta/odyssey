@@ -67,6 +67,7 @@ $theme-dark: (
 
 html {
   @include setTheme($theme-day);
+
   background: var(--odo-page-bg);
   color: var(--odo-text-body, #{$text-body});
   font-family: $body-font-family;
@@ -81,31 +82,10 @@ html {
   // }
 }
 
-// TODO: high-level element overrides should be in odyssey.
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--odo-text-heading, #{$text-body});
-}
-
-p {
-  color: var(--odo-text-heading, #{$text-body});
-}
-
-a,
-a:visited {
-  &:focus {
-    @include outline;
-  }
-}
-
 [id='app'] {
   display: grid;
   grid-column-gap: $spacing-xl;
-  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
+  grid-template-columns: minmax(237px, max-content) minmax(min-content, max-content);
   padding: $spacing-l $spacing-l 0 $spacing-l;
 
   main {

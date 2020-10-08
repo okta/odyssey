@@ -1,8 +1,12 @@
 ---
+template: component
 title: Design Tokens
+tabs:
+  - label: 'Overview'
+    id: 'overview'
 ---
 
-::: slot nimatron-all
+::: slot overview
 
 # Design Tokens
 

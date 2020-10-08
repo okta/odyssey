@@ -25,8 +25,8 @@
         />
       </svg>
     </span>
-    <h1 class="ods-toast--title">{{ title }}</h1>
-    <p class="ods-toast--body">{{ body }}</p>
+    <h1 v-if="title" class="ods-toast--title">{{ title }}</h1>
+    <p v-if="body" class="ods-toast--body">{{ body }}</p>
     <button
       class="ods-toast--dismiss"
       aria-label="Dismiss toast"

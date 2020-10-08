@@ -10,6 +10,12 @@ links:
   - icon: github
     label: Legacy docs
     href: https://github.com/okta/odyssey/blob/master/packages/docs/components/tab.md
+  - icon: github
+    label: View source
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_tab.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/fz2Agv32E0RNaJ5cKVUe2i/Tab?node-id=519%3A0
 ---
 
 ::: slot overview
@@ -18,7 +24,7 @@ links:
 
 <Description>
 
-Descriptive content around **tab anatomy** should go here.
+<span class="fpo">Descriptive content around **tab anatomy** should go here.</span>
 
 </Description>
 

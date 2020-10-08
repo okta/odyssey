@@ -11,6 +11,12 @@ links:
   - icon: github
     label: Legacy docs
     href: https://github.com/okta/odyssey/blob/master/packages/docs/components/tooltip.md
+  - icon: github
+    label: View source
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_tooltip.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/9wQUMt72muf6mEGuHhHRZM/Tooltips?node-id=25%3A2
 ---
 
 ::: slot overview
@@ -19,7 +25,7 @@ links:
 
 <Description>
 
-Descriptive content around **tooltip anatomy** should go here.
+<span class="fpo">Descriptive content around **tooltip anatomy** should go here.</span>
 
 </Description>
 

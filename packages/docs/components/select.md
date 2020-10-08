@@ -11,6 +11,12 @@ links:
   - icon: github
     label: Legacy docs
     href: https://github.com/okta/odyssey/blob/master/packages/docs/components/select.md
+  - icon: github
+    label: View source
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_select.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/tVkWsXwnWICeguWhzX6Vwl/Inputs?node-id=476%3A3423
 ---
 
 ::: slot overview
@@ -19,12 +25,13 @@ links:
 
 <Description>
 
-Descriptive content around **select anatomy** should go here.
+<span class="fpo">Descriptive content around **select anatomy** should go here.</span>
 
 </Description>
 
-<Anatomy img="/images/fpo.svg" />
-
+<Anatomy 
+  img="/images/fpo.svg" 
+/>
 
 :::
 

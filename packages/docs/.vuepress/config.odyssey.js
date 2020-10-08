@@ -24,7 +24,7 @@ module.exports = {
   // `vuepress-theme-odyssey` and `vuepress-theme-nimatron`
   themeConfig: {
     flags: {
-      hasSearch: true
+      hasSearch: false
     },
     nav: {
       primary: [
@@ -53,6 +53,7 @@ module.exports = {
             { title: 'Tag', link: '/components/tag/' },
             { title: 'Table', link: '/components/table/' },
             { title: 'Text Input', link: '/components/text-input/' },
+            { title: 'Toast', link: '/components/toast/' },
             { title: 'Tooltip', link: '/components/tooltip/' },
             { title: 'Form', link: '/components/form/' },
           ],
