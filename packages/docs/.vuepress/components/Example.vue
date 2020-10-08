@@ -1,5 +1,11 @@
 <template>
-  <div :class="'docskit-example is-docskit-example-' + type' is-docskit-layout-' + type" >
+  <div 
+    :class="{
+      'docskit-example': true,
+      [`is-docskit-example-${type}`]: type, 
+      [`is-docskit-layout-${layout}`]: layout 
+    }"
+  >
     <h6 class="docskit-example--title" v-if=" type === 'positive' || type === 'negative' ">
       {{ type === 'positive' ? 'Do' : `Don't` }}
     </h6>
