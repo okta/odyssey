@@ -138,6 +138,39 @@ IE 11 incorrectly renders the `summary` element as "always open". Other than thi
 ```
 </figure>
 
+## dfn <a name="dfn"></a>
+> The HTML Definition element (`<dfn>)` is used to indicate the term being defined within the context of a definition phrase or sentence. The `<p>` element, the `<dt>`/`<dd>` pairing, or the `<section>` element which is the nearest ancestor of the `<dfn>` is considered to be the definition of the term.
+
+There are multiple, valid ways to use `<dfn>`. For the sake of usability, Odyssey recommends you follow one of two formats.
+
+For most terms, the content of `<dfn>` should be term you are defining:
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <p>A <dfn id="def-cruller">cruller</dfn> is a small, braided torpedo of fried dough.</p>
+  </div>
+
+```html
+  <p>A <dfn id="def-cruller">cruller</dfn> is a small, braided torpedo of fried dough.</p>
+```
+</figure>
+
+If you're referencing an acronym or abbreviation, you may also combine it with `<abbr>`: 
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <p><dfn id="def-apf"><abbr title="All Purpose Flour">APF</abbr></dfn> is general-use, unbleached wheat flour.</p>
+  </div>
+
+```html
+  <p><dfn id="def-apf"><abbr title="All Purpose Flour">APF</abbr></dfn> is general-use, unbleached wheat flour.</p>
+```
+</figure>
+
+In this example, the browser can correctly identify "All Purpose Flour" as the defined term, even though "APF" is the visible acronym.
+
+In both cases, utilizing the `id` attribute allows you to deep link to the definition, providing users with quick access.
+
 ## dl <a name="dl"></a>
 > The HTML `<dl>` element represents a description list. The element encloses a list of groups of terms (specified using the `<dt>` element) and descriptions (provided by `<dd>` elements). Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs).  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl'>MDN</a></cite>
 

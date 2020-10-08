@@ -93,6 +93,10 @@ del::after {
   content: attr(data-a11y-end);
 }
 
+dfn {
+  font-style: italic;
+}
+
 ins {
   display: inline-block;
   background: cv('green', '000');
