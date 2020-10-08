@@ -312,48 +312,52 @@ User the `<button>` element instead of `<a>` whenever possible. The keyboard and
 
 ### SCSS
 
-Styles related to buttons can be found in `/components/_button.scss`.
+<Description>
 
-Semantic states can be combined to produce Secondary Danger styles.
+  Styles related to buttons can be found in `/components/_button.scss`.
 
-<figure class="ods-table--figure">
-  <table class="ods-table">
-    <thead>
-      <tr>
-        <th scope="column">
-          Selector
-        </th>
-        <th scope="column">
-          Purpose
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <code>.ods-button</code>
-        </td>
-        <td>
-          Applies primary & general button styles
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <code>.is-ods-button-secondary</code>
-        </td>
-        <td>
-          Applies Secondary button styles
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <code>.is-ods-button-danger</code>
-        </td>
-        <td>
-          Applies Danger button styles
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
+  Semantic states can be combined to produce Secondary Danger styles.
+
+  <figure class="ods-table--figure">
+    <table class="ods-table">
+      <thead>
+        <tr>
+          <th scope="column">
+            Selector
+          </th>
+          <th scope="column">
+            Purpose
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <code>.ods-button</code>
+          </td>
+          <td>
+            Applies primary & general button styles
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code>.is-ods-button-secondary</code>
+          </td>
+          <td>
+            Applies Secondary button styles
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <code>.is-ods-button-danger</code>
+          </td>
+          <td>
+            Applies Danger button styles
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+
+</Description>
 :::

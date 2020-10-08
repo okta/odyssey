@@ -86,13 +86,13 @@ Try to limit a link to at most 3 words.
 
 <Example type="positive">
   <template>
-    <a href="#">View reports</a>
+    <a href="#">View menu</a>
   </template>
 </Example>
 
 <Example type="negative">
   <template>
-    <a href="#">View all recent reports</a>
+    <a href="#">View all available donuts</a>
   </template>
 </Example>
 

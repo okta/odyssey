@@ -40,14 +40,14 @@ Descriptive content around **radio button anatomy** should go here.
 <Example>
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Which donut has pink frosting?</legend>
-    <input class="ods-radio" type="radio" name="radio" id="radio-0" value="0" required checked>
-    <label class="ods-radio--label" for="radio-0">Glazed</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-5" value="3" required>
-    <label class="ods-radio--label" for="radio-5">Boston Cream</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-5" value="3" required checked>
-    <label class="ods-radio--label" for="radio-5">"The Homer"</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-5" value="3" required>
-    <label class="ods-radio--label" for="radio-5">Old Fashioned</label>
+    <input class="ods-radio" type="radio" name="question-0" id="radio-0-glazed" value="0" required checked>
+    <label class="ods-radio--label" for="radio-0-glazed">Glazed</label>
+    <input class="ods-radio" type="radio" name="question-0" id="radio-0-boston-cream" value="3" required>
+    <label class="ods-radio--label" for="radio-0-boston-cream">Boston Cream</label>
+    <input class="ods-radio" type="radio" name="question-0" id="radio-0-homer" value="3" required checked>
+    <label class="ods-radio--label" for="radio-0-homer">"The Homer"</label>
+    <input class="ods-radio" type="radio" name="question-0" id="radio-0-old-fashioned" value="3" required>
+    <label class="ods-radio--label" for="radio-0-old-fashioned">Old Fashioned</label>
   </fieldset>
 </Example>
 
@@ -64,30 +64,13 @@ Disabling radio buttons happens on a per-option basis.
 </Description>
 
 <Example>
-  <form>
-    <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Which of the following is the largest?</legend>
-      <input class="ods-radio" type="radio" name="radio-mix" id="radio-peanut-mix" value="peanut" required checked>
-      <label class="ods-radio--label" for="radio-peanut-mix">A peanut</label>
-      <input class="ods-radio" type="radio" name="radio-mix" id="radio-elephant-mix" value="elephant" required disabled>
-      <label class="ods-radio--label" for="radio-elephant-mix">An elephant</label>
-      <input class="ods-radio" type="radio" name="radio-mix" id="radio-moon-mix" value="moon" required>
-      <label class="ods-radio--label" for="radio-moon-mix">The moon</label>
-      <input class="ods-radio" type="radio" name="radio-mix" id="radio-tennis-ball-mix" value="tennis-ball" required>
-      <label class="ods-radio--label" for="radio-tennis-ball-mix">A tennis ball</label>
-    </fieldset>
-    <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Which of the following is the largest?</legend>
-      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-peanut-disabled" value="peanut" required disabled checked>
-      <label class="ods-radio--label" for="radio-peanut-disabled">A peanut</label>
-      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-elephant-disabled" value="elephant" required disabled>
-      <label class="ods-radio--label" for="radio-elephant-disabled">An elephant</label>
-      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-moon-disabled" value="moon" required disabled>
-      <label class="ods-radio--label" for="radio-moon-disabled">The moon</label>
-      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-tennis-ball-disabled" value="tennis-ball" required disabled>
-      <label class="ods-radio--label" for="radio-tennis-ball-disabled">A tennis ball</label>
-    </fieldset>
-  </form>
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Disabled examples</legend>
+    <input class="ods-radio" type="radio" name="question-1" id="radio-1-unchecked" value="0" disabled >
+    <label class="ods-radio--label" for="radio-1-unchecked">Unchecked</label>
+    <input class="ods-radio" type="radio" name="question-1" id="radio-1-checked" value="1"  disabled checked>
+    <label class="ods-radio--label" for="radio-1-checked">Checked</label>
+  </fieldset>
 </Example>
 
 ### Invalid
@@ -104,26 +87,22 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
 
 <Example>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Which of the following is the largest?</legend>
-    <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-peanut-invalid" value="peanut" required checked>
-    <label class="ods-radio--label" for="radio-peanut-invalid">A peanut</label>
-    <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-elephant-invalid" value="elephant" required>
-    <label class="ods-radio--label" for="radio-elephant-invalid">An elephant</label>
-    <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-moon-invalid" value="moon" required disabled>
-    <label class="ods-radio--label" for="radio-moon">The moon</label>
-    <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-tennis-ball-invalid" value="tennis-ball" required>
-    <label class="ods-radio--label" for="radio-tennis-ball-invalid">A tennis ball</label>
-    <aside class="ods-field--error" id="radio-invalid-error">This selection is invalid.</aside>
+    <legend class="ods-input-legend">Invalid examples</legend>
+    <input class="ods-radio" type="radio" name="question-2" id="radio-2-unchecked" value="0" data-invalid>
+    <label class="ods-radio--label" for="radio-2-unchecked">Unchecked</label>
+    <input class="ods-radio" type="radio" name="question-2" id="radio-2-checked" value="1"  data-invalid checked>
+    <label class="ods-radio--label" for="radio-2-checked">Checked</label>
+    <aside class="ods-field--error" id="checkbox-invalid-error">Validation error message.</aside>
   </fieldset>
 </Example>
 
 ### Optional
 
-<div class="docskit--desc">
+<Description>
 
 > <span class="fpo negative">To avoid confusion as to whether a radio button group is required or not, authors are encouraged to specify the attribute on all the radio buttons in a group. - <cite><a href="https://www.w3.org/TR/html5/forms.html#the-required-attribute">W3</a></cite></span>
 
-</div>
+</Description>
 
 :::
 

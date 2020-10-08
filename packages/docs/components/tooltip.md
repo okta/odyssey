@@ -17,11 +17,11 @@ links:
 
 ## Anatomy
 
-<div class="docskit--desc fpo">
+<Description>
 
 Descriptive content around **tooltip anatomy** should go here.
 
-</div>
+</Description>
 
 <Anatomy img="/images/anatomy-tooltip.svg" />
 
@@ -37,7 +37,12 @@ Good tooltips provide info only when needed, require minimal user effort to trig
 
 <Example>
   <template>
-    <span class="fpo">TODO</span>
+    <span class="has-ods-tooltip sample--tip">
+      <a href=""></a>
+      <aside id="download-description" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
+        Downloads are disabled during an import.
+      </aside>
+    </span>
   </template>
 </Example>
 

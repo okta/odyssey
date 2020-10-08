@@ -22,18 +22,18 @@ links:
 
 ## Anatomy
 
-<div class="docskit--desc fpo">
+<Description>
 
 Descriptive content around **modal anatomy** should go here.
 
-</div>
+</Description>
 
 <Anatomy img="/images/fpo.svg" />
 
 
 ## General guidelines
 
-<div class="docskit--desc">
+<Description>
 
 Modal dialogs are a powerful UI element. They are displayed on top of the main content and change the context to a special mode that requires user interaction. That is, they disable all other contexts until the user interacts with the modal itself.
 
@@ -51,7 +51,7 @@ Here are a few smells for when a modal dialog may be inappropriate:
 - Additional context may be required or helpful
 - The dialog content is long-form
 
-</div>
+</Description>
 
 <Example>
 
@@ -61,15 +61,15 @@ Here are a few smells for when a modal dialog may be inappropriate:
 
 ## Accessibility
 
-<div class="docskit--desc">
+<Description>
 
 Modal dialogs are notorious for their accessibility issues, but don't worry! We've got your back.
 
-</div>
+</Description>
 
 ### Accessible attributes
 
-<div class="docskit--desc">
+<Description>
 
 The modal components makes use of several ARIA attributes in order to give assistive technologies (AT) as much information as possible.
 
@@ -79,11 +79,11 @@ The modal components makes use of several ARIA attributes in order to give assis
 - `aria-labelledby="ods-modal--title-id"` - This attribute informs ATs which other element can be treated as the label for this dialog. Please use the unique `id` associated with the dialog's title.
 - `aria-label="Close"` - Please use this tag on any `button` that allows the user to exit the dialog. By default, this is included on the modal's exit "X".
 
-</div>
+</Description>
 
 ### Accessible behavior
 
-<div class="docskit--desc">
+<Description>
 
 When a modal dialog is opened, interaction is limited to the new context. While this may seem expected, it can surprise users - and is even worse for users requiring assistive technologies.
 
@@ -97,7 +97,7 @@ For convenience, users can exit the modal in a few ways:
 
 For users happy with their new context, we ensure their attention won't be misdirected. Scrolling on the main content becomes locked, and we inform the browser to lock the `tabindex` to the modal context. This way, regardless of input method, a user's interactions are limited to their new scope.
 
-</div>
+</Description>
 
 ## Further reading
 

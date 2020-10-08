@@ -23,11 +23,11 @@ links:
 
 ## Anatomy
 
-<div class="docskit--desc">
+<Description>
 
 Like other smaller components, Status is quite simple. Below you can see there are two versions. One with a label, and one without. Beyond that, there is a Status and Status Descriptor.
 
-</div>
+</Description>
 
 <Anatomy img="/images/anatomy-status-1.svg" />
 
@@ -35,11 +35,11 @@ Like other smaller components, Status is quite simple. Below you can see there a
 
 ## Usage
 
-<div class="docskit--desc">
+<Description>
 
 Status should be used to communicate the state of a discrete item, such as a server or individual process. Both labeled and unlabeled variants are acceptable, but should follow the associated guidelines below.
 
-</div>
+</Description>
 
 <Example>
   <dl class="ods-status is-ods-status-success">
@@ -54,21 +54,21 @@ Status should be used to communicate the state of a discrete item, such as a ser
 
 ## Variants
 
-<div class="docskit--desc">
+<Description>
 
 There are four variants of Status available: Neutral, Success, Caution, and Danger.
 
-</div>
+</Description>
 
 ### Neutral
 
-<div class="docskit--desc">
+<Description>
 
 Neutral Statuses are gray and should be used to indicate states like Paused, Not started, or Queued.
 
 This variant is our default.
 
-</div>
+</Description>
 
 <Example>
   <dl class="ods-status">
@@ -83,11 +83,11 @@ This variant is our default.
 
 ### Success
 
-<div class="docskit--desc">
+<Description>
 
 Success Statuses are green and should be used to indicate states like Complete, Active, Available, Service operational.
 
-</div>
+</Description>
 
 <Example>
   <dl class="ods-status is-ods-status-success">
@@ -102,11 +102,11 @@ Success Statuses are green and should be used to indicate states like Complete, 
 
 ### Caution
 
-<div class="docskit--desc">
+<Description>
 
 Caution Statuses are yellow and should be used to indicate states like Attention suggested or Service degradation.
 
-</div>
+</Description>
 
 <Example>
   <dl class="ods-status is-ods-status-caution">
@@ -121,11 +121,11 @@ Caution Statuses are yellow and should be used to indicate states like Attention
 
 ### Danger
 
-<div class="docskit--desc">
+<Description>
 
 Danger Statuses are red and should be used to indicate states like Error, Failure, or Service disruption.
 
-</div>
+</Description>
 
 <Example>
   <dl class="ods-status is-ods-status-danger">

@@ -1,6 +1,7 @@
 .docskit-example {
   grid-column: 2/3;
   margin-bottom: $spacing-m;
+  font-size: ms(0);
 
   &.is-docskit-variant-clear {
     .docskit-example--figure {
