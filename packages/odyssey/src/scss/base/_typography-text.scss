@@ -115,6 +115,17 @@ ins::after {
   content: attr(data-a11y-end);
 }
 
+kbd {
+  display: inline-block;
+  padding: 0 $spacing-xs;
+  border: 1px solid cv('gray', '200');
+  border-radius: $base-border-radius;
+  background: cv('gray', '000');
+  box-shadow: 0 2px 0 cv('gray', '000'), 0 3px 0 cv('gray', '200');
+  font-weight: 400;
+  line-height: $title-line-height;
+}
+
 mark {
   background: cv('yellow', '000');
 }
@@ -135,6 +146,18 @@ s {
   text-decoration: line-through;
 }
 
+samp {
+  padding: 0 0.5ch;
+  background-color: cv('gray', '000');
+  box-shadow: 0 1px 0 cv('gray', '200');
+  font-family: $mono-font-family;
+  font-size: ms(0);
+
+  kbd {
+    background: $white;
+  }
+}
+
 small {
   font-size: $size-body-caption;
 }
@@ -152,17 +175,6 @@ summary {
   &:focus {
     @include outline;
   }
-}
-
-kbd {
-  display: inline-block;
-  padding: 0 $spacing-xs;
-  border: 1px solid cv('gray', '200');
-  border-radius: $base-border-radius;
-  background: cv('gray', '000');
-  box-shadow: 0 2px 0 cv('gray', '000'), 0 3px 0 cv('gray', '200');
-  font-weight: 400;
-  line-height: $title-line-height;
 }
 
 hr {
