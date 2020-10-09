@@ -1,0 +1,49 @@
+.odo-sidebar {
+  @include mq(m) {
+    display: none;
+  }
+
+  .odo-site--title,
+  .odo-site--title:visited {
+    display: block;
+    padding: $spacing-xs;
+    color: var(--odo-text-heading, #{$text-heading});
+    font-size: $size-title-4;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .odo-sidebar--content {
+    display: grid;
+    position: sticky;
+    top: $spacing-l;
+    grid-row-gap: $spacing-s;
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    max-height: calc(100vh - #{$spacing-l});
+  }
+
+  .odo-sidebar--header {
+    grid-area: header;
+    padding: 0 $spacing-xs 0;
+  }
+
+  .odo-sidebar--main {
+    grid-area: main;
+    padding: $spacing-xs $spacing-xs 0;
+    overflow: scroll;
+
+    &.is-odo-sidebar--overflowing {
+      border-bottom: 1px solid $border-color-display;
+    }
+  }
+
+  .odo-sidebar--footer {
+    grid-area: footer;
+    padding: $spacing-xs $spacing-xs $spacing-m;
+  }
+}

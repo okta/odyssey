@@ -1,0 +1,150 @@
+@import '~@okta/odyssey';
+@import '~@okta/prism-theme-odyssey';
+
+$breakpoints: (
+  m: 768px,
+  l: 1240px,
+  lg: 1800px
+);
+
+@mixin mq($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+  }
+}
+
+@import 'base/fonts';
+@import 'base/grid';
+@import 'components/OdoCard';
+@import 'components/OdoLink';
+@import 'components/OdoNav';
+@import 'components/OdoSidebar';
+@import 'templates/OdoTemplateHome';
+@import 'templates/OdoTemplateComponent';
+@import 'dockit/Anatomy';
+@import 'dockit/Example';
+@import 'dockit/Description';
+
+$theme-day: (
+  odo-page-bg: $white,
+  odo-text-body: $text-body,
+  odo-text-heading: $text-heading,
+  odo-border-color-display: $border-color-display,
+  odo-border-color-ui: $border-color-ui,
+  odo-card-bg: cv('gray', '000'),
+  odo-card-bg-hover: cv('blue', '000')
+);
+
+$theme-dark: (
+  odo-page-bg: cv('gray', '900'),
+  odo-text-body: $white,
+  odo-text-heading: $white,
+  odo-card-bg: #303033,
+  odo-card-bg-hover: cv('gray', '600')
+);
+
+@function list-contains($list, $item) {
+  @return index($list, $item) != null;
+}
+
+@mixin setTheme($theme: $theme-day) {
+  $theme-properties: odo-page-bg, odo-text-body, odo-text-heading,
+    odo-border-color-display, odo-border-color-ui, odo-card-bg,
+    odo-card-bg-hover;
+
+  @each $custom-property, $value in $theme {
+    @if list-contains($theme-properties, $custom-property) {
+      --#{$custom-property}: #{$value};
+    } @else {
+      @warn '⚠️ Sorry, but `#{$value}` is not a valid value.';
+    }
+  }
+}
+
+html {
+  @include setTheme($theme-day);
+
+  background: var(--odo-page-bg);
+  color: var(--odo-text-body, #{$text-body});
+  font-family: $body-font-family;
+
+  // Theme: Night Mode
+  // &[data-odo-theme='night'] {
+  //   @include setTheme($theme-dark);
+  // }
+
+  // @media (prefers-color-scheme: dark) {
+  //   @include setTheme($theme-dark);
+  // }
+}
+
+a,
+a:visited {
+  &:focus {
+    @include outline;
+  }
+}
+
+[id='app'] {
+  display: grid;
+  grid-column-gap: $spacing-xl;
+  grid-template-columns: minmax(237px, max-content) minmax(min-content, max-content);
+  padding: $spacing-l $spacing-l 0 $spacing-l;
+
+  main {
+    padding-top: $spacing-l;
+  }
+}
+
+.odo-skip-content {
+  position: absolute;
+  top: -3rem;
+  left: $spacing-xs;
+  padding: $spacing-xs $spacing-s;
+  overflow: hidden;
+  transition: 0.15s ease-in-out;
+  background: $white;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus {
+    top: $spacing-xs;
+    width: auto;
+    height: auto;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+
+  .header-anchor {
+    position: absolute;
+    left: -$spacing-m;
+    width: $spacing-m;
+    height: $spacing-m;
+    opacity: 0;
+    line-height: 1;
+    text-align: center;
+  }
+
+  &:hover .header-anchor {
+    opacity: 0;
+  }
+}
+
+.fpo {
+  background: cv('yellow', '000');
+
+  &.negative {
+    background: cv('red', '000');
+  }
+}

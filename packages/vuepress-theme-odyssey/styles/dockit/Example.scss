@@ -1,0 +1,51 @@
+.docskit-example {
+  grid-column: 2/3;
+  margin-bottom: $spacing-m;
+  font-size: ms(0);
+
+  &.is-docskit-variant-clear {
+    .docskit-example--figure {
+      width: 100%;
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  .docskit-example--layout-full {
+    width: 100%;
+  }
+
+  .docskit-example--wide {
+    width: 100%;
+  }
+
+  .docskit-example--title {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+
+    &::before {
+      margin-right: $spacing-xs;
+      font-size: $size-title-5;
+    }
+  }
+
+  &.is-docskit-example-positive .docskit-example--title::before {
+    content: '🔔';
+  }
+
+  &.is-docskit-example-negative .docskit-example--title::before {
+    content: '🚫';
+  }
+
+  .docskit-example--figure {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: $spacing-l;
+    border: 1px solid $border-color-display;
+    border-radius: $base-border-radius;
+  }
+}

@@ -1,0 +1,45 @@
+.odo-hero {
+  margin-bottom: $spacing-l;
+  padding: $spacing-m;
+  border-radius: 0 32px;
+  background-color: var(--odo-card-bg);
+
+  &.odo-hero--layout-l {
+    display: grid;
+    grid-column-gap: $spacing-l $spacing-l;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 466px;
+    padding: $spacing-xl;
+  }
+
+  .odo-hero--content {
+    grid-column: 7 / span 6;
+    grid-row: 2;
+  }
+}
+
+.odo-principle {
+  margin: $spacing-xl 0;
+  border-radius: 0 32px;
+
+  p {
+    max-width: none;
+    font-size: $size-title-1;
+  }
+
+  a {
+    font-size: $size-title-5;
+  }
+}
+
+.odo-home {
+  .odo-grid--2col,
+  .odo-grid--3col {
+    margin-bottom: $spacing-xl;
+
+    .odo-link {
+      font-size: $size-title-5;
+    }
+  }
+}

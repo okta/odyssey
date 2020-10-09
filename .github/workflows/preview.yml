@@ -39,7 +39,7 @@ jobs:
         run: ./node_modules/lerna/cli.js run test
 
       - name: build docs
-        run: yarn workspace @okta/design-docs build
+        run: THEME=odyssey yarn workspace @okta/design-docs build
 
       - name: 'deploy: create'
         uses: bobheadxi/deployments@v0.4.2

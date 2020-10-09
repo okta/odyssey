@@ -1,4 +1,13 @@
-::: slot nimatron-all
+---
+template: component
+title: Iconography
+lead: An icon is a graphic that represents an idea or concept, independent of any particular language, and specific words or phrases. Below are icons that can be used for design projects at Okta.
+tabs:
+  - label: 'Overview'
+    id: 'overview'
+---
+
+::: slot overview
 
 # Iconography
 
@@ -262,3 +271,4 @@ By default, all icons are Grey 900. If using an icon on top of a solid color, fo
 As an example, if you have a “Delete policy” button, do not colorize the delete button or trashcan icon with Green 400.
 
 :::
+

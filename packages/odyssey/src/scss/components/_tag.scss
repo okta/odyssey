@@ -22,6 +22,8 @@
 }
 
 .ods-tag--list {
+  display: inline-block;
   margin-bottom: -$spacing-xs;
+  margin-left: $spacing-xs;
   list-style-type: none;
 }

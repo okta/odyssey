@@ -9,13 +9,14 @@
     "node": ">=12.13"
   },
   "scripts": {
-    "docs": "yarn --cwd packages/docs start",
+    "docs": "yarn --cwd packages/docs start --no-clear-screen",
     "icons": "yarn --cwd packages/odyssey-icons svgo",
     "lerna-version": "lerna version --no-git-tag-version --force-publish",
     "prelerna-publish": "lerna run build",
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry"
   },
   "devDependencies": {
+    "eslint": "^7.9.0",
     "lerna": "3.3.2"
   },
   "version": "0.5.0"

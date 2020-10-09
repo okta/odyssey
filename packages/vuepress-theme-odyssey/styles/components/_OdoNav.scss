@@ -1,0 +1,84 @@
+.with-odo-subnav-indicator {
+  transition: none;
+  border-radius: 0;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 1em;
+    height: 1em;
+    transition: all 0.16s ease-in-out;
+    background-image: get-icon("caret", $text-body);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1em;
+  }
+
+  &.with-odo-subnav-indicator--expanded::before {
+    transform: rotate(180deg);
+  }
+}
+
+.odo-nav {
+  a,
+  a:visited {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-xs;
+    font-size: $size-body-sentence;
+    text-decoration: none;
+  }
+
+  &.is-odo-nav-secondary {
+    font-weight: 600;
+
+    a {
+      font-size: $size-body-base;
+    }
+  }
+}
+
+.odo-nav--item {
+  margin-bottom: $spacing-xs;
+
+  &.odo-nav--item-with-subnav {
+    .odo-nav--item-content {
+      display: flex;
+      margin-bottom: $spacing-xs;
+
+      a {
+        flex: 1;
+        align-items: center;
+      }
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.odo-nav-link {
+  &.is-odo-nav-link--active {
+    font-weight: 600;
+  }
+}
+
+.odo-nav--subnav {
+  display: none;
+  margin-bottom: $spacing-s;
+
+  a {
+    padding: 0 $spacing-s;
+    padding-left: $spacing-s;
+  }
+
+  &.is-visible {
+    display: block;
+  }
+
+  .is-odo-nav-link--active {
+    background: cv("gray", "000");
+  }
+}
