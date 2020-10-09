@@ -97,6 +97,19 @@ dfn {
   font-style: italic;
 }
 
+figure:not([class]) {
+  display: grid;
+  grid-gap: $spacing-s;
+  grid-template-columns: minmax(min-content, max-content);
+  justify-content: center;
+  justify-items: center;
+
+  figcaption:not([class]) {
+    color: $text-sub;
+    font-size: ms(0);
+  }
+}
+
 ins {
   display: inline-block;
   background: cv('green', '000');
