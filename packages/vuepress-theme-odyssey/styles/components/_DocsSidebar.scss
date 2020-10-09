@@ -1,0 +1,103 @@
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+$sidebar-width: 20.625rem + $spacing-l;
+
+@include mq(l) {
+  [id='app'] {
+    transform: translateX(-#{$sidebar-width});
+    transition: 0.33s all ease-in-out;
+
+    .main--container {
+      min-width: 100vw;
+    }
+  }
+
+  .is-sidebar-expanded {
+    overflow: hidden;
+
+    [id='app'] {
+      transform: translateX(0);
+      transition: 0.33s all ease-in-out;
+
+      // Modal Overlay
+      &::after {
+        content: '';
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        min-width: #{$sidebar-width};
+        transform: translateX(#{$sidebar-width});
+        background: rgba(cv('gray', '900'), 0.75);
+      }
+    }
+  }
+}
+
+.sidebar-trigger {
+  position: fixed;
+  z-index: 10;
+  top: $spacing-m;
+  left: $sidebar-width + $spacing-m;
+}
+
+.docs-sidebar {
+  .docs-site--title,
+  .docs-site--title:visited {
+    display: block;
+    padding: $spacing-xs;
+    color: var(--docs-text-heading, #{$text-heading});
+    font-size: $size-title-4;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .docs-sidebar--content {
+    display: grid;
+    position: sticky;
+    z-index: 4;
+    top: 0;
+    grid-row-gap: $spacing-s;
+    grid-template-areas: 'header' 'main' 'footer';
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    max-height: 100vh;
+    padding: $spacing-l;
+    background: $white;
+  }
+
+  .docs-sidebar--header {
+    grid-area: header;
+    padding: 0 $spacing-xs 0;
+  }
+
+  .docs-sidebar--main {
+    grid-area: main;
+    width: #{20.625rem - $spacing-l};
+    padding: $spacing-xs $spacing-xs 0;
+    overflow: scroll;
+
+    &.is-docs-sidebar--overflowing {
+      border-bottom: 1px solid $border-color-display;
+    }
+  }
+
+  .docs-sidebar--footer {
+    grid-area: footer;
+    padding: $spacing-xs $spacing-xs $spacing-m;
+  }
+}

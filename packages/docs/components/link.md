@@ -1,28 +1,164 @@
-::: slot nimatron-all
+---
+template: component
+title: Link
+lead: Links are navigation elements displayed as text. A link can open another page or jump to a section of a page.
+tabs:
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
+links:
+  - icon: github
+    label: Legacy docs
+    href: https://github.com/okta/odyssey/blob/master/packages/docs/components/checkbox.md
+  - icon: github
+    label: View code
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/base/_typography-link.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/JW50oK4VDmN6M8cQcx5dPh6g/Typography?node-id=4124%3A15
+---
 
-# Link
+::: slot overview
 
-Links are navigation elements displayed as text. A link can open another page or jump to a section of a page.
+## Anatomy
 
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <p>If you need more info, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link" class="is-link-default">view the spec on MDN</a>.</p>
-  </div>
+<Description class="is-fpo">
 
-  ```html
-  If you need more info, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link" class="is-link-default">view the spec on MDN</a>.
-  ```
+Descriptive content around **link anatomy** should go here.
 
-</figure>
+</Description>
+
+<Anatomy img="/images/fpo.svg" />
 
 ## Specialty cases
 
 ### Mailto
 
+<Description>
+
 If a direct email link is required, display the whole address (e.g. lauren.ipsum@okta.com). Avoid colloquial text that might obfuscate the presence of a mailto link (e.g., "Contact Us").
 
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+</Description>
+
+<Visual>
+  <template>
+    <a href="mailto:donuts@okta.com">donuts@okta.com</a>
+  </template>
+</Visual>
+
+### External links
+
+<Description>
+
+An external link opens in a separate tab and can be identified by the <span class="sample--external-link-icon" aria-label="External link icon"></span> icon appended to the link.
+
+Use an external link when:
+
+- The destination of the link aids in the completion of a task on the current tab (e.g. additional information such as help documentation)
+- Opening the link in the current tab would result in a significant loss of data or interruption of flow (e.g. while filling out a long form)
+
+(See [Google Developer Documentation](https://developers.google.com/web/tools/lighthouse/audits/noopener) for security and performance considerations when using external links)
+
+</Description>
+
+<Visual>
+  <template>
+    <a href="https://okta.com" target="_blank" rel="noopener">okta.com/donuts</a>
+  </template>
+</Visual>
+
+## Guidelines
+
+<Description>
+
+Use a link when the URL is expected to change, either to an internal page (or route), an anchor link to content on the current page or an external site or resource.
+
+</Description>
+
+#### Max length
+
+<Description>
+
+Try to limit a link to at most 3 words.
+
+</Description>
+
+<Visual variant="positive">
+  <template>
+    <a href="#">View menu</a>
+  </template>
+</Visual>
+
+<Visual variant="negative">
+  <template>
+    <a href="#">View all available donuts</a>
+  </template>
+</Visual>
+
+### Context
+
+<Description>
+
+Choose link text that describes the destination (e.g. "Settings"), rather than generic text (e.g. "Click here" or a URL)
+. This is particularly important for assistive technologies like screen readers.
+
+If you must have brief link text, ensure that additional context is provided by using the `.u-visually-hidden` class.
+
+</Description>
+
+<Visual variant="positive">
+  <template>
+    <a href="#">View all reports</a>
+  </template>
+</Visual>
+
+<Visual variant="negative">
+  <template>
+    <a href="#">View</a>
+  </template>
+</Visual>
+
+### Semantics
+
+<Description>
+
+Avoid using a link <code>&lt;a&gt;</code> for actions; use a button <code>&lt;button&gt;</code> instead
+
+</Description>
+
+<Visual variant="positive">
+  <template>
+    <a href="#">View all reports</a>
+  </template>
+</Visual>
+
+<Visual variant="negative">
+  <template>
+    <a href="#">View</a>
+  </template>
+</Visual>
+
+</Description>
+
+### Accessibility
+
+<Description>
+
+Links in Odyssey are not underlined, but do maintain a minimum 3:1 contrast ratio with our body text color and a 4.5:1 contrast ratio with our available background colors. If you deviate from these standards via overrides, please ensure that your links have a non-color indicator, e.g. an underline.
+
+Links should display a visible `:focus` state when users interact via keyboard. Odyssey preserves the default `:focus` state for each browser.
+
+</Description>
+
+:::
+
+::: slot html-scss
+
+## Basic example
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <a href="mailto:lauren.ipsum@okta.com">lauren.ipsum@okta.com</a>
   </div>
 
@@ -31,21 +167,10 @@ If a direct email link is required, display the whole address (e.g. lauren.ipsum
   ```
 </figure>
 
-### External links
+## External link
 
-An external link opens in a separate tab and can be identified by the <span class="sample--external-link-icon" aria-label="External link icon"></span> icon appended to the link.
-
-Use an external link when:
-
-<ul>
-  <li>The destination of the link aids in the completion of a task on the current tab (e.g. additional information such as help documentation)</li>
-  <li>Opening the link in the current tab would result in a significant loss of data or interruption of flow (e.g. while filling out a long form)</li>
-</ul>
-
-(See <a href="https://developers.google.com/web/tools/lighthouse/audits/noopener">Google Developer Documentation</a> for security and performance considerations when using external links)
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <a href="https://okta.com" target="_blank" rel="noopener">Okta.com</a>
   </div>
 
@@ -54,28 +179,8 @@ Use an external link when:
   ```
 </figure>
 
-### Visited Links
+## Visited Links
 
 Odyssey has removed unique styling for `:visited` links. This is an intentional compromise that preferences user security and ease of maintenance over the `:visited` affordance.
-
-## Guidelines
-
-### Best practices
-
-<ul>
-  <li>Try to limit a link to at most 3 words</li>
-  <li>Choose link text that describes the destination (e.g. "Settings"), rather than generic text (e.g. "Click here" or a URL)</li>
-  <li>Avoid using a link <code>&lt;a&gt;</code> for actions; use a button <code>&lt;button&gt;</code> instead</li>
-</ul>
-
-### Accessibility
-
-Links in Odyssey are not underlined, but do maintain a minimum 3:1 contrast ratio with our body text color and a 4.5:1 contrast ratio with our available background colors. If you deviate from these standards via overrides, please ensure that your links have a non-color indicator, e.g. an underline.
-
-Links should display a visible <code>:focus</code> state when users interact via keyboard. Odyssey preserves the default `:focus` state for each browser.
-
-### Localization
-
-When localizing links, avoid putting the text through a translator and applying the markup. Instead, consider the language's nuances and grammar to make the link and its surrounding messaging feel natural.
 
 :::

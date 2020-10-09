@@ -1,0 +1,68 @@
+@import '~@okta/odyssey';
+@import '~@okta/prism-theme-odyssey';
+
+// Internal
+@import 'abstracts/theming';
+@import 'abstracts/mixins';
+@import 'base/fonts';
+@import 'components/DocsCard';
+@import 'components/DocsCardGroup';
+@import 'components/DocsLink';
+@import 'components/DocsNav';
+@import 'components/DocsSidebar';
+@import 'templates/DocsTemplateHome';
+@import 'templates/DocsTemplateComponent';
+@import 'docskit/utility-classes';
+@import 'docskit/Anatomy';
+@import 'docskit/Visual';
+@import 'docskit/Description';
+
+html {
+  @include set-theme($theme-day);  // Set base theme
+
+  background: var(--docs-page-bg);
+  color: var(--docs-text-body, #{$text-body});
+  font-family: $body-font-family;
+
+  // Theme: Night Mode
+  // @media (prefers-color-scheme: dark) {
+  //   @include set-theme($theme-night);
+  // }
+}
+
+a,
+a:visited {
+  &:focus {
+    @include outline;
+  }
+}
+
+[id='app'] {
+  display: flex;
+
+  .main--container {
+    padding: $spacing-l * 2 $spacing-l 0;
+
+    @include mq(m) {
+      padding: $spacing-m * 2 $spacing-m 0;
+    }
+  }
+}
+
+.docs-skip-content {
+  position: absolute;
+  top: -3rem;
+  left: $spacing-xs;
+  padding: $spacing-xs $spacing-s;
+  overflow: hidden;
+  transition: 0.15s ease-in-out;
+  background: $white;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus {
+    top: $spacing-xs;
+    width: auto;
+    height: auto;
+  }
+}

@@ -1,4 +1,12 @@
-::: slot nimatron-all
+---
+template: component
+title: Color
+tabs:
+  - label: 'Overview'
+    id: 'overview'
+---
+
+::: slot overview
 
 # Color
 

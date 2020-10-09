@@ -1,4 +1,13 @@
-::: slot nimatron-all
+---
+template: component
+title: Design Tokens
+lead: Okta’s typography system is designed for clarity in readability and hierarchy.
+tabs:
+  - label: 'Overview'
+    id: 'overview'
+---
+
+::: slot overview
 
 # Design Tokens
 

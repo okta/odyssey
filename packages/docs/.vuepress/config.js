@@ -1,7 +1,8 @@
-// .vuepress/config.js
+
 module.exports = {
-  theme: '@okta/vuepress-theme-nimatron',
+  theme: `@okta/vuepress-theme-odyssey`,
   dest: 'dist',
+  name: 'Odyssey Design System',
   title: 'Odyssey Design System',
   head: [
     [
@@ -18,58 +19,48 @@ module.exports = {
     require('./plugins/plugin-choices/index.js'),
     require('./plugins/plugin-micromodal/index.js')
   ],
-  markdown: {
-    externalLinks: {
-      target: '',
-      rel: ''
-    }
-  },
   themeConfig: {
-    nav: [
-      {
-        title: 'Base',
-        children: [
-          { title: 'Color', link: '/base/color', isVisible: true },
-          { title: 'Design Tokens', link: '/base/Tokens', isVisible: true },
-          { title: 'Elements', link: '/base/elements', isVisible: true },
-          { title: 'Grid', link: '/base/grid', isVisible: false },
-          { title: 'Iconography', link: '/base/iconography', isVisible: true },
-          { title: 'Typography', link: '/base/typography', isVisible: true },
-        ]
-      },
-      {
-        title: 'Components',
-        children: [
-          { title: 'Banner', link: '/components/banner', isVisible: false },
-          { title: 'Button', link: '/components/button', isVisible: true },
-          { title: 'Callout', link: '/components/callout', isVisible: false },
-          { title: 'Card', link: '/components/card', isVisible: false },
-          { title: 'Checkbox', link: '/components/checkbox', isVisible: true },
-          { title: 'Dropdown', link: '/components/dropdown', isVisible: false },
-          { title: 'Form', link: '/components/form', isVisible: true },
-          { title: 'Link', link: '/components/link', isVisible: true },
-          { title: 'Meter', link: '/components/meter', isVisible: false },
-          { title: 'Modal', link: '/components/modal', isVisible: true },
-          { title: 'Navigation', link: '/components/navigation', isVisible: false },
-          { title: 'Number Input', link: '/components/number-input', isVisible: false },
-          { title: 'Radio Button', link: '/components/radio-button', isVisible: true },
-          { title: 'Select', link: '/components/select', isVisible: true },
-          { title: 'Status', link: '/components/status/', isVisible: true  },
-          { title: 'Switch', link: '/components/switch/', isVisible: false },
-          { title: 'Tab', link: '/components/tab/', isVisible: true},
-          { title: 'Tag', link: '/components/tag/', isVisible: true },
-          { title: 'Table', link: '/components/table', isVisible: true },
-          { title: 'Text Input', link: '/components/text-input', isVisible: true },
-          { title: 'Toast', link: '/components/toast', isVisible: true },
-          { title: 'Tooltip', link: '/components/tooltip', isVisible: true },
-          { title: 'Top Bar', link: '/components/top-bar', isVisible: false },
-        ],
-      },
-      {
-        children: [
-          { title: 'Changelog', link: 'https://github.com/okta/odyssey/blob/master/packages/odyssey/CHANGELOG.md', isVisible: true},
-        ]
-      },
-    ]
+    flags: {
+      hasSearch: false
+    },
+    nav: {
+      primary: [
+        {
+          title: 'Base',
+          link: '/base/',
+          children: [
+            { title: 'Color', link: '/base/color/' },
+            { title: 'Design Tokens', link: '/base/tokens/' },
+            { title: 'Elements', link: '/base/elements/' },
+            { title: 'Typography', link: '/base/typography/' },
+          ]
+        },
+        {
+          title: 'Components',
+          link: '/components/',
+          children: [
+            { title: 'Button', link: '/components/button/' },
+            { title: 'Checkbox', link: '/components/checkbox/' },
+            { title: 'Link', link: '/components/link/' },
+            { title: 'Modal', link: '/components/modal/' },
+            { title: 'Radio Button', link: '/components/radio-button/' },
+            { title: 'Select', link: '/components/select/' },
+            { title: 'Status', link: '/components/status/' },
+            { title: 'Tab', link: '/components/tab/' },
+            { title: 'Tag', link: '/components/tag/' },
+            { title: 'Table', link: '/components/table/' },
+            { title: 'Text Input', link: '/components/text-input/' },
+            { title: 'Toast', link: '/components/toast/' },
+            { title: 'Tooltip', link: '/components/tooltip/' }
+          ],
+        },
+        { title: 'Icons', link: '/base/iconography/' },
+        { title: 'Figma Kit', link: 'https://www.figma.com/files/676870123940302956/project/2512934/Odyssey-UI' },
+        { title: 'Updates', link: '/updates/' }
+      ],
+      secondary: [
+        { title: 'Help', link: '/help/' },
+      ]
+    }
   }
 }

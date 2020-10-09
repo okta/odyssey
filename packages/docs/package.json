@@ -14,10 +14,9 @@
     "last 2 versions"
   ],
   "devDependencies": {
-    "@okta/vuepress-theme-nimatron": "^0.6.0",
+    "@okta/vuepress-theme-odyssey": "^0.6.0",
     "choices.js": "^9.0.1",
     "micromodal": "^0.3.2",
-    "prismjs": "^1.14.0",
     "vuepress": "^1.4.1"
   }
 }
