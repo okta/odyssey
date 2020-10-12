@@ -1,12 +1,23 @@
 <template>
   <Fragment>
-    <!-- <button class="sidebar-trigger" @click="setSidebarState">Show/Hide Sidebar</button> -->
+    <button
+      class="sidebar-trigger ods-button is-ods-button-clear"
+      @click="setSidebarState"
+    >
+      🍔 <span class="u-visually-hidden">Open navigation</span>
+    </button>
     <header
       :class="{
         'docs-sidebar': true
       }"
     >
       <div class="docs-sidebar--content">
+        <button
+          class="sidebar-trigger ods-button is-ods-button-clear"
+          @click="setSidebarState"
+        >
+          <OdsIcon icon="close" />
+        </button>
         <div class="docs-sidebar--header">
           <DocsLink class="docs-site--title" href="/">{{ title }}</DocsLink>
           <fieldset v-if="showSearch" class="ods-fieldset">

@@ -2,7 +2,7 @@
 
 <template>
   <!-- eslint-disable -->
-  <div
+  <svg
     class="ods-icon"
     v-html="require(`!html-loader!@okta/odyssey-icons/src/${icon}.svg`)"
   />

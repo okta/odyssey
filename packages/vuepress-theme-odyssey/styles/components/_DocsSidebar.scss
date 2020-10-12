@@ -49,13 +49,26 @@ $sidebar-width: 20.625rem + $spacing-l;
 }
 
 .sidebar-trigger {
+  display: none;
   position: fixed;
-  z-index: 10;
   top: $spacing-m;
   left: $sidebar-width + $spacing-m;
+
+  @include mq(l) {
+    display: block;
+  }
 }
 
 .docs-sidebar {
+  position: relative;
+
+  .sidebar-trigger {
+    position: absolute;
+    left: auto;
+    z-index: 10;
+    right: $spacing-m;
+  }
+
   .docs-site--title,
   .docs-site--title:visited {
     display: block;
