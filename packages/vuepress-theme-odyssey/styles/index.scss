@@ -40,7 +40,14 @@ a:visited {
 [id='app'] {
   display: flex;
 
+  .ods-sidebar {
+    flex-grow: 0;
+  }
+
   .main--container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
     padding: $spacing-l * 2 $spacing-l 0;
 
     @include mq(m) {
