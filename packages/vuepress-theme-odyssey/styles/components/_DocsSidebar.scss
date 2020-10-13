@@ -12,71 +12,81 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-$sidebar-width: 20.625rem + $spacing-l;
+.docs-header {
+  display: flex;
+  position: fixed;
+  z-index: 9;
+  width: 100vw;
+  padding: $spacing-xs;
+  border-bottom: 1px solid $border-color-display;
+  background: $white;
+
+  .is-icon-close {
+    display: none;
+  }
+
+  @include mq(m) {
+    z-index: 11;
+    bottom: 0;
+    border-top: 1px solid $border-color-display;
+
+    .is-sidebar-expanded & .is-icon-open,
+    .is-icon-close {
+      display: none;
+    }
+
+    .is-sidebar-expanded & .is-icon-close {
+      display: block;
+    }
+  }
+}
 
 @include mq(l) {
-  [id='app'] {
-    transform: translateX(-#{$sidebar-width});
-    transition: 0.33s all ease-in-out;
-
-    .main--container {
-      min-width: 100vw;
-    }
+  .docs-sidebar {
+    display: block;
+    position: fixed;
+    z-index: 10;
+    transform: translateX(-100%);
+    transition: all 0.33s ease-in-out;
   }
 
   .is-sidebar-expanded {
-    overflow: hidden;
+    [id='app']::after {
+      content: '';
+      position: fixed;
+      z-index: 9;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(cv('gray', '900'), 0.75);
+    }
 
-    [id='app'] {
-      transform: translateX(0);
-      transition: 0.33s all ease-in-out;
-
-      // Modal Overlay
-      &::after {
-        content: '';
-        position: absolute;
-        z-index: 3;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        min-width: #{$sidebar-width};
-        transform: translateX(#{$sidebar-width});
-        background: rgba(cv('gray', '900'), 0.75);
-      }
+    .docs-sidebar {
+      transform: translateX(0%);
     }
   }
 }
 
-.sidebar-trigger {
-  display: none;
-  position: fixed;
-  top: $spacing-m;
-  left: $sidebar-width + $spacing-m;
-
-  @include mq(l) {
-    display: block;
-  }
+.docs-site-title,
+.docs-site-title:visited {
+  display: block;
+  padding: $spacing-xs;
+  color: var(--docs-text-heading, #{$text-heading});
+  font-size: $size-title-4;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .docs-sidebar {
-  position: relative;
-
-  .sidebar-trigger {
+  .docs-sidebar--action {
     position: absolute;
-    left: auto;
-    z-index: 10;
+    top: $spacing-m;
     right: $spacing-m;
-  }
-
-  .docs-site--title,
-  .docs-site--title:visited {
-    display: block;
-    padding: $spacing-xs;
-    color: var(--docs-text-heading, #{$text-heading});
-    font-size: $size-title-4;
-    font-weight: 600;
-    text-decoration: none;
+    
+    @include mq(m) {
+      display: none;
+    }
   }
 
   .docs-sidebar--content {

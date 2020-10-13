@@ -1,25 +1,23 @@
 <template>
   <Fragment>
-    <button
-      class="sidebar-trigger ods-button is-ods-button-clear"
-      @click="setSidebarState"
-    >
-      🍔 <span class="u-visually-hidden">Open navigation</span>
-    </button>
-    <header
-      :class="{
-        'docs-sidebar': true
-      }"
-    >
+    <header class="docs-header">
+      <button class="docs-header--action" @click="setSidebarState">
+        <span class="is-icon-open">🍔</span>
+        <OdsIcon class="docs-header--action-icon is-icon-close" icon="close" />
+      </button>
+      <DocsLink class="docs-site-title" href="/">{{ title }}</DocsLink>
+    </header>
+    <div class="docs-sidebar">
       <div class="docs-sidebar--content">
         <button
-          class="sidebar-trigger ods-button is-ods-button-clear"
+          class="docs-sidebar--action"
+          aria-label="Close Navigation"
           @click="setSidebarState"
         >
           <OdsIcon icon="close" />
         </button>
         <div class="docs-sidebar--header">
-          <DocsLink class="docs-site--title" href="/">{{ title }}</DocsLink>
+          <DocsLink class="docs-site-title" href="/">{{ title }}</DocsLink>
           <fieldset v-if="showSearch" class="ods-fieldset">
             <div class="ods-fieldset-flex">
               <input
@@ -50,7 +48,7 @@
           <DocsNav variant="secondary" :nav="nav.secondary" />
         </div>
       </div>
-    </header>
+    </div>
   </Fragment>
 </template>
 
@@ -103,7 +101,7 @@ export default {
   },
   methods: {
     setSidebarState() {
-      const el = document.body;
+      const el = document.documentElement;
       const className = "is-sidebar-expanded";
       const isExpanded = el.classList.contains(className);
 
