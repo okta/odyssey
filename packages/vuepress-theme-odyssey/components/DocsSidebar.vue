@@ -1,16 +1,19 @@
 <template>
   <Fragment>
     <header class="docs-header">
-      <button class="docs-header--action" @click="setSidebarState">
-        <span class="is-icon-open">🍔</span>
-        <OdsIcon class="docs-header--action-icon is-icon-close" icon="close" />
+      <button
+        class="docs-header--action ods-button is-ods-button-overlay"
+        @click="setSidebarState"
+      >
+        🍔
       </button>
       <DocsLink class="docs-site-title" href="/">{{ title }}</DocsLink>
     </header>
+
     <div class="docs-sidebar">
       <div class="docs-sidebar--content">
         <button
-          class="docs-sidebar--action"
+          class="docs-sidebar--action ods-button is-ods-button-clear"
           aria-label="Close Navigation"
           @click="setSidebarState"
         >

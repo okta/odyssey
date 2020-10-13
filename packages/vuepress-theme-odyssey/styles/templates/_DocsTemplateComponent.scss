@@ -148,6 +148,6 @@
   background: var(--docs-page-bg);
 
   @include mq(l) {
-    padding-top: $spacing-m;
+    padding-top: $spacing-l + $spacing-m;
   }
 }
