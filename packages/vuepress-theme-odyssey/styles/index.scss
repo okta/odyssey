@@ -49,6 +49,10 @@ a:visited {
     flex: 1;
     justify-content: center;
     padding: $spacing-l * 2 $spacing-l 0;
+
+    @include mq(m) {
+      padding: $spacing-l * 2 $spacing-m 0;
+    }
   }
 }
 

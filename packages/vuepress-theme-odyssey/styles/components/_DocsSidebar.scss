@@ -21,6 +21,10 @@
   border-bottom: 1px solid $border-color-display;
   background: $white;
 
+  @include mq(m) {
+    padding: $spacing-xs $spacing-m;
+  }
+
   .docs-header--action {
     display: flex;
     align-content: center;
