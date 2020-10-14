@@ -113,7 +113,18 @@ export default {
       observer.observe(el);
     }
   },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+  },
   methods: {
+    handleResize() {
+      const el = document.documentElement;
+      el.classList.add("is-animation-stopped");
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => {
+        el.classList.remove("is-animation-stopped");
+      }, 400);
+    },
     setSidebarState() {
       const el = document.documentElement;
       const className = "is-sidebar-expanded";

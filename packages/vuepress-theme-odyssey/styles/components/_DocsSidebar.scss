@@ -25,20 +25,21 @@
     padding: $spacing-xs $spacing-m;
   }
 
+  @include mq(l) {
+    display: flex;
+  }
+
   .docs-header--action {
     display: flex;
     align-content: center;
     justify-content: center;
-    font-size: 1.3rem;
+    margin-left: -$spacing-xs;
     padding: $spacing-xs;
+    font-size: 1.3rem;
 
     svg {
       margin-top: $spacing-xs / 2;
     }
-  }
-
-  @include mq(l) {
-    display: flex;
   }
 }
 
@@ -81,16 +82,16 @@
 
 .docs-sidebar {
   .docs-sidebar--action {
+    display: none;
     position: absolute;
     top: $spacing-m;
     right: $spacing-m;
-    display: none;
 
     @include mq(l) {
       display: block;
     }
   }
-  
+
   .docs-site-title,
   .docs-site-title:visited {
     @include mq(l) {
@@ -132,4 +133,11 @@
     grid-area: footer;
     padding: $spacing-xs $spacing-xs $spacing-m;
   }
+}
+
+.is-animation-stopped * {
+  /* stylelint-disable */
+  transition: none !important;
+  animation: none !important;
+  /* stylelint-enable */
 }
