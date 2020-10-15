@@ -1,13 +1,9 @@
 ---
-template: component
+template: plain
 title: Typography
+headline: Typography
 lead: Okta’s typography system is designed for clarity in readability and hierarchy.
-tabs:
-  - label: 'Overview'
-    id: 'overview'
 ---
-
-::: slot overview
 
 ## Hierarchy
 
@@ -216,5 +212,3 @@ Following these guidelines will ensure a clean document outline, which will incr
 - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height">"line-height" on MDN</a>
 
 </Description>
-
-:::

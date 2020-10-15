@@ -13,6 +13,7 @@
 @import 'components/DocsSidebar';
 @import 'templates/DocsTemplateHome';
 @import 'templates/DocsTemplateComponent';
+@import 'templates/DocsTemplatePlain';
 @import 'docskit/utility-classes';
 @import 'docskit/Anatomy';
 @import 'docskit/Visual';
@@ -54,6 +55,14 @@ a:visited {
     @include mq(m) {
       padding: $spacing-l * 2 $spacing-m 0;
     }
+
+    // TODO: We would like to remove this in the future
+    // so that the grid width is determined by the content
+    // as opposed to a max-width.
+    main {
+      width: 100%;
+      max-width: calc((#{$max-line-length} * 2) + #{$spacing-l});
+    }
   }
 }
 
@@ -73,5 +82,33 @@ a:visited {
     top: $spacing-xs;
     width: auto;
     height: auto;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  .header-anchor {
+    display: inline-block;
+    position: absolute;
+    width: $spacing-s-em;
+    height: $spacing-s-em;
+    margin-top: $spacing-xs-em /2;
+    margin-left: -$spacing-m;
+    transition: 0.33s opacity  ease-in-out;
+    opacity: 0;
+    background-image: get-icon('anchor', $border-color-ui);
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-indent: -9999em;
+    vertical-align: middle;
+  }
+
+  &:hover .header-anchor,
+  &:focus-within .header-anchor {
+    opacity: 1;
   }
 }

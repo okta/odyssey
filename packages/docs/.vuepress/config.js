@@ -54,13 +54,13 @@ module.exports = {
             { title: 'Tooltip', link: '/components/tooltip/' }
           ],
         },
-        { title: 'Icons', link: '/base/iconography/' },
+        { title: 'Icons', link: '/icons/' },
         { title: 'Figma Kit', link: 'https://www.figma.com/files/676870123940302956/project/2512934/Odyssey-UI' },
       ],
       secondary: [
-        { title: 'Help', link: '/help/' },
-        { title: 'Status', link: '/status/' },
         { title: 'Updates', link: '/updates/' },
+        { title: 'Status', link: '/status/' },
+        { title: 'Help', link: '/help/' },
       ]
     }
   }

@@ -9,8 +9,6 @@ lead: We're here for ya!
 
 <Description>
 
-<img aria-hidden="true" src="/images/icon-slack.svg">
-
 ## Slack
 
 If you’re wondering if we already have a solution for a design or development issue or would like assistance figuring out a problem, reach out to @ds-help in #odyssey.
@@ -20,8 +18,6 @@ If you’re wondering if we already have a solution for a design or development 
 </Description>
 
 <Description>
-
-<img aria-hidden="true" src="/images/icon-github.svg">
 
 ## Github
 

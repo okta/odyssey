@@ -1,5 +1,5 @@
 <template>
-  <article class="docs-main--content">
+  <article class="docs-main--content is-template-plain">
     <header class="docs-doc-header">
       <div>
         <h1 class="docs-doc-header--title">{{ $page.frontmatter.headline }}</h1>

@@ -4,7 +4,7 @@
       <template v-slot:left>
         <!-- eslint-disable -->
         <button
-          class="docs-topbar--action ods-button is-ods-button-overlay"
+          class="docs-topbar--action ods-button is-ods-button-clear"
           @click="setSidebarState(true)"
           v-html="require(`!html-loader!../public/images/icon-hamburger.svg`)"
         />
@@ -22,7 +22,7 @@
         <div class="docs-sidebar--content">
           <button
             ref="closeButton"
-            class="docs-sidebar--action ods-button is-ods-button-overlay"
+            class="docs-sidebar--action ods-button is-ods-button-clear"
             aria-label="Close Navigation"
             @click="setSidebarState(false)"
           >

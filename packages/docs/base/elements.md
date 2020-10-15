@@ -1,13 +1,9 @@
 ---
-title: Elements
+template: plain
+title: HTML Elements
+headline: Elements
+lead: Odyssey takes care to provide additional style to the following HTML elements by default.
 ---
-
-::: slot nimatron-all
-
-# Elements
-
-Odyssey takes care to provide additional style to the following HTML elements by default.
-
 
 ## abbr <a name="abbr"></a>
 > The HTML `<abbr>` element represents an abbreviation or acronym; the optional title attribute can provide an expansion or description for the abbreviation. If present, title must contain this full description and nothing else. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr'>MDN</a></cite>
@@ -540,5 +536,3 @@ See <a href="#details">`details`</a> for example.
 <p>2<sup>2</sup>(<var>x</var>+3)+9-5=32</p>
 ```
 </figure>
-
-:::

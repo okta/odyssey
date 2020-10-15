@@ -1,16 +1,9 @@
 ---
-template: component
+template: plain
 title: Color
-tabs:
-  - label: 'Overview'
-    id: 'overview'
+headline: Color
+lead: Here's a quick overview of the colors available in Odyssey and some guidelines for their use.
 ---
-
-::: slot overview
-
-# Color
-
-Here's a quick overview of the colors available in Odyssey and some guidelines for their use.
 
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
@@ -537,5 +530,3 @@ Here's a quick overview of the colors available in Odyssey and some guidelines f
   <li class="sample--color is-sample-turquoise-500"></li>
   <li class="sample--color is-sample-orange-500"></li>
 </ul>
-
-:::
