@@ -10,9 +10,7 @@
             <span
               aria-hidden
               v-if="link.icon"
-              v-html="
-                require(`!html-loader!../../docs/.vuepress/public/images/icon-${link.icon}.svg`)
-              "
+              v-html="require(`!html-loader!../public/images/icon-${link.icon}.svg`)"
             />
             <!-- eslint-disable -->
             {{ link.label }}

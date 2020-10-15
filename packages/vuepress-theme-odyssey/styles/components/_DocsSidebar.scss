@@ -12,90 +12,60 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.docs-header {
-  display: none;
-  position: fixed;
-  z-index: 9;
-  width: 100vw;
-  padding: $spacing-xs $spacing-l;
-  border-bottom: 1px solid $border-color-display;
-  background: $white;
-
-  @include mq(m) {
-    padding: $spacing-xs $spacing-m;
-  }
-
-  @include mq(l) {
-    display: flex;
-  }
-
-  .docs-header--action {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    margin-left: -$spacing-xs;
-    padding: $spacing-xs;
-    font-size: 1.3rem;
-
-    svg {
-      margin-top: $spacing-xs / 2;
-    }
-  }
-}
-
-@include mq(l) {
-  .docs-sidebar {
-    // display: none;
-    position: fixed;
-    z-index: 10;
-    transform: translateX(-100%);
-    transition: all 0.33s ease-in-out;
-  }
-
-  .is-sidebar-expanded {
-    [id='app']::after {
-      content: '';
-      position: fixed;
-      z-index: 9;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background: rgba(cv('gray', '900'), 0.75);
-    }
-
-    .docs-sidebar {
-      display: block;
-      transform: translateX(0%);
-      transition: all 0.33s ease-in-out;
-    }
-  }
-}
-
 .docs-site-title,
 .docs-site-title:visited {
   display: block;
-  padding: $spacing-xs;
+  padding: $spacing-xs $spacing-xs;
   color: var(--docs-text-heading, #{$text-heading});
   font-size: $size-title-4;
   font-weight: 600;
   text-decoration: none;
 }
 
+@include mq(l) {
+  .is-sidebar-expanded {
+
+    html, body {
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      z-index: 10; 
+      width: 100vw;
+      height: 100vh;
+      background: rgba(cv('gray', '900'), 0.75);
+    }
+  }
+}
 .docs-sidebar {
+  @include mq(l) {
+    visibility: hidden;
+    position: fixed;
+    z-index: 10;
+    transform: translateX(-100%);
+    transition: all 0.33s ease-in-out;
+
+    .is-sidebar-expanded & {
+      visibility: visible;
+      transform: translateX(0%);
+      transition: all 0.33s ease-in-out;
+    }
+  }
+
   .docs-sidebar--action {
     display: none;
     position: absolute;
-    top: $spacing-m;
-    right: $spacing-m;
+    top: $spacing-s;
+    right: $spacing-s;
 
     @include mq(l) {
       display: block;
     }
   }
 
-  .docs-site-title,
-  .docs-site-title:visited {
+  .docs-site-title {
     @include mq(l) {
       display: none;
     }
@@ -114,7 +84,7 @@
     padding: $spacing-l;
     background: $white;
   }
-
+  
   .docs-sidebar--header {
     grid-area: header;
     padding: 0 $spacing-xs 0;
@@ -123,10 +93,10 @@
   .docs-sidebar--main {
     grid-area: main;
     width: #{20.625rem - $spacing-l};
-    padding: $spacing-xs $spacing-xs 0;
+    padding: $spacing-xs $spacing-xs $spacing-s;
     overflow: scroll;
 
-    &.is-docs-sidebar--overflowing {
+    &.is-overflowing {
       border-bottom: 1px solid $border-color-display;
     }
   }

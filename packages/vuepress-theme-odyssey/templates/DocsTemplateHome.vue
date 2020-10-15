@@ -54,9 +54,7 @@
           <div
             aria-hidden="true"
             class="docs-card--header-image"
-            v-html="
-              require(`!html-loader!../../docs/.vuepress/public/images/icon-${resource.illustration}.svg`)
-            "
+            v-html="require(`!html-loader!../public/images/icon-${resource.illustration}.svg`)"
           />
           <!-- eslint-enable -->
           <h3>{{ resource.title }}</h3>

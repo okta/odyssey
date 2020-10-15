@@ -1,25 +1,17 @@
 <template>
   <Fragment>
-    <header class="docs-header">
-      <button
-        class="docs-header--action ods-button is-ods-button-overlay"
-        @click="setSidebarState(true)"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="24" height="24" />
-          <rect x="3" y="10" width="18" height="3" rx="1.5" fill="#1D1D21" />
-          <rect x="3" y="4" width="18" height="3" rx="1.5" fill="#1D1D21" />
-          <rect x="3" y="16" width="18" height="3" rx="1.5" fill="#1D1D21" />
-        </svg>
-      </button>
-      <DocsLink class="docs-site-title" href="/">{{ title }}</DocsLink>
-    </header>
+    <DocsTopbar :title="title">
+      <template v-slot:left>
+        <!-- eslint-disable -->
+        <button
+          class="docs-topbar--action ods-button is-ods-button-overlay"
+          @click="setSidebarState(true)"
+          v-html="require(`!html-loader!../public/images/icon-hamburger.svg`)"
+        />
+        <!-- eslint-enable -->
+      </template>
+    </DocsTopbar>
+
     <FocusTrap
       v-model="isExpanded"
       :return-focus-on-deactivate="true"
@@ -30,7 +22,7 @@
         <div class="docs-sidebar--content">
           <button
             ref="closeButton"
-            class="docs-sidebar--action ods-button is-ods-button-clear"
+            class="docs-sidebar--action ods-button is-ods-button-overlay"
             aria-label="Close Navigation"
             @click="setSidebarState(false)"
           >
@@ -58,7 +50,7 @@
           <div
             :class="{
               'docs-sidebar--main': true,
-              'is-docs-sidebar--overflowing': isOverflowing
+              'is-overflowing': isOverflowing
             }"
           >
             <div ref="mainContent" class="docs-sidebar--main-content">
@@ -84,7 +76,8 @@ export default {
     Fragment,
     FocusTrap,
     DocsLink: () => import("./DocsLink.vue"),
-    DocsNav: () => import("../components/DocsNav.vue")
+    DocsNav: () => import("../components/DocsNav.vue"),
+    DocsTopbar: () => import("../components/DocsTopbar.vue")
   },
   props: {
     showSearch: {
@@ -111,6 +104,12 @@ export default {
 
       if (isExpanded) {
         el.classList.add(className);
+
+        // TODO: Figure out a better solution here, this
+        // is required because focus isnt always applied to
+        // the close button when the element is expanded due to
+        // `visibility:hidden;` being applied previously.
+        setTimeout(() => this.$refs.closeButton.focus(), 100);
       } else {
         el.classList.remove(className);
       }
