@@ -3,7 +3,7 @@
     <header class="docs-header">
       <button
         class="docs-header--action ods-button is-ods-button-overlay"
-        @click="setSidebarState"
+        @click="setSidebarState(true)"
       >
         <svg
           width="24"
@@ -20,59 +20,69 @@
       </button>
       <DocsLink class="docs-site-title" href="/">{{ title }}</DocsLink>
     </header>
+    <FocusTrap
+      v-model="isExpanded"
+      :return-focus-on-deactivate="true"
+      :click-outside-deactivates="true"
+      :initial-focus="() => $refs.closeButton"
+    >
+      <div class="docs-sidebar">
+        <div class="docs-sidebar--content">
+          <button
+            ref="closeButton"
+            class="docs-sidebar--action ods-button is-ods-button-clear"
+            aria-label="Close Navigation"
+            @click="setSidebarState(false)"
+          >
+            <OdsIcon icon="close" />
+          </button>
 
-    <div class="docs-sidebar">
-      <div class="docs-sidebar--content">
-        <button
-          class="docs-sidebar--action ods-button is-ods-button-clear"
-          aria-label="Close Navigation"
-          @click="setSidebarState"
-        >
-          <OdsIcon icon="close" />
-        </button>
-        <div class="docs-sidebar--header">
-          <DocsLink class="docs-site-title" href="/">{{ title }}</DocsLink>
-          <fieldset v-if="showSearch" class="ods-fieldset">
-            <div class="ods-fieldset-flex">
-              <input
-                id="search"
-                class="ods-text-input"
-                type="search"
-                name="search"
-                autocomplete="search"
-                spellcheck="false"
-                placeholder="Search"
-                required
-              />
-              <label class="ods-label" for="search">Search</label>
+          <div class="docs-sidebar--header">
+            <DocsLink class="docs-site-title" href="/">{{ title }}</DocsLink>
+            <fieldset v-if="showSearch" class="ods-fieldset">
+              <div class="ods-fieldset-flex">
+                <input
+                  id="search"
+                  class="ods-text-input"
+                  type="search"
+                  name="search"
+                  autocomplete="search"
+                  spellcheck="false"
+                  placeholder="Search"
+                  required
+                />
+                <label class="ods-label" for="search">Search</label>
+              </div>
+            </fieldset>
+          </div>
+          <div
+            :class="{
+              'docs-sidebar--main': true,
+              'is-docs-sidebar--overflowing': isOverflowing
+            }"
+          >
+            <div ref="mainContent" class="docs-sidebar--main-content">
+              <DocsNav variant="primary" :nav="nav.primary" />
             </div>
-          </fieldset>
-        </div>
-        <div
-          :class="{
-            'docs-sidebar--main': true,
-            'is-docs-sidebar--overflowing': isOverflowing
-          }"
-        >
-          <div ref="mainContent" class="docs-sidebar--main-content">
-            <DocsNav variant="primary" :nav="nav.primary" />
+          </div>
+          <div class="docs-sidebar--footer">
+            <DocsNav variant="secondary" :nav="nav.secondary" />
           </div>
         </div>
-        <div class="docs-sidebar--footer">
-          <DocsNav variant="secondary" :nav="nav.secondary" />
-        </div>
       </div>
-    </div>
+    </FocusTrap>
   </Fragment>
 </template>
 
 <script>
 import { Fragment } from "vue-fragment";
+import { FocusTrap } from "focus-trap-vue";
 
 export default {
   name: "DocsSidebar",
   components: {
     Fragment,
+    FocusTrap,
     DocsLink: () => import("./DocsLink.vue"),
     DocsNav: () => import("../components/DocsNav.vue")
   },
@@ -91,8 +101,27 @@ export default {
     }
   },
   data: () => ({
-    isOverflowing: null
+    isOverflowing: null,
+    isExpanded: false
   }),
+  watch: {
+    isExpanded: function(isExpanded) {
+      const el = document.documentElement;
+      const className = "is-sidebar-expanded";
+
+      if (isExpanded) {
+        el.classList.add(className);
+      } else {
+        el.classList.remove(className);
+      }
+    },
+    $route: function(to, from) {
+      this.setSidebarState(false);
+    }
+  },
+  beforeMount() {
+    this.setSidebarState(false);
+  },
   mounted() {
     if ("IntersectionObserver" in window) {
       const el = this.$refs.mainContent;
@@ -113,28 +142,9 @@ export default {
       observer.observe(el);
     }
   },
-  created() {
-    window.addEventListener("resize", this.handleResize);
-  },
   methods: {
-    handleResize() {
-      const el = document.documentElement;
-      el.classList.add("is-animation-stopped");
-      clearTimeout(this.resizeTimer);
-      this.resizeTimer = setTimeout(() => {
-        el.classList.remove("is-animation-stopped");
-      }, 400);
-    },
-    setSidebarState() {
-      const el = document.documentElement;
-      const className = "is-sidebar-expanded";
-      const isExpanded = el.classList.contains(className);
-
-      if (isExpanded) {
-        el.classList.remove(className);
-      } else {
-        el.classList.add(className);
-      }
+    setSidebarState(isExpanded) {
+      this.isExpanded = isExpanded;
     }
   }
 };

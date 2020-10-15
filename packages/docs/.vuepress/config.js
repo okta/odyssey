@@ -56,10 +56,11 @@ module.exports = {
         },
         { title: 'Icons', link: '/base/iconography/' },
         { title: 'Figma Kit', link: 'https://www.figma.com/files/676870123940302956/project/2512934/Odyssey-UI' },
-        { title: 'Updates', link: '/updates/' }
       ],
       secondary: [
         { title: 'Help', link: '/help/' },
+        { title: 'Status', link: '/status/' },
+        { title: 'Updates', link: '/updates/' },
       ]
     }
   }

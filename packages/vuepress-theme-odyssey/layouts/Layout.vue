@@ -44,6 +44,22 @@ export default {
         this.$localePath
       );
     }
+  },
+  mounted() {
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforedestroy() {
+    window.removeEventListener("resize", this.onResize);
+  },
+  methods: {
+    handleResize() {
+      const el = document.documentElement;
+      el.classList.add("is-animation-stopped");
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => {
+        el.classList.remove("is-animation-stopped");
+      }, 400);
+    }
   }
 };
 </script>
