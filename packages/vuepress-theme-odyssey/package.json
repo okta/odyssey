@@ -30,6 +30,6 @@
   },
   "dependencies": {
     "focus-trap": "^6.1.3",
-    "focus-trap-vue": "ssh://git@github.com:arnoldsandoval-okta/focus-trap-vue#with-build"
+    "focus-trap-vue": "https://github.com/arnoldsandoval-okta/focus-trap-vue.git#with-build"
   }
 }

@@ -5453,9 +5453,9 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-"focus-trap-vue@ssh://git@github.com:arnoldsandoval-okta/focus-trap-vue#with-build":
+"focus-trap-vue@https://github.com/arnoldsandoval-okta/focus-trap-vue.git#with-build":
   version "1.0.0"
-  resolved "ssh://git@github.com:arnoldsandoval-okta/focus-trap-vue#898615d7cf2410ff48d4d7ad7be174f40a712ce6"
+  resolved "https://github.com/arnoldsandoval-okta/focus-trap-vue.git#898615d7cf2410ff48d4d7ad7be174f40a712ce6"
 
 focus-trap@^6.1.3:
   version "6.1.3"
