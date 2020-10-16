@@ -367,6 +367,67 @@ When combined with <a href="#samp">`<samp>`</a>, the background of this element 
 ```
 </figure>
 
+## output <a name="output"></a>
+> The HTML Output element (`<output>`) is a container element into which a site or app can inject the results of a calculation or the outcome of a user action. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output'>MDN</a></cite>
+
+### Usage
+
+Odyssey does not currently provide styling for `<output>`, but using it correctly will help improve accessibility for your users.
+
+The most common use case is for diplaying computed values in a form:
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <form oninput="outputTotal.value=parseInt(outputJD.value)+parseInt(outputOF.value)">
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="number" name="outputJD" id="outputJD" autocomplete="name" spellcheck="false" value="12" required>
+          <label class="ods-label" for="outputJD">Jelly Donuts (Amount)</label>
+        </div>
+      </fieldset>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="number" name="outputOF" id="outputOF" autocomplete="name" spellcheck="false" value="12" required>
+          <label class="ods-label" for="outputOF">Old Fashioned Donuts (Amount)</label>
+        </div>
+      </fieldset>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <label class="ods-label" for="outputTotal">Total Donuts</label>
+          <output aria-live="polite" id="outputTotal" name="outputTotal" for="outputJD outputoldfashioneds">24</output>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+```html
+<form oninput="outputTotal.value=parseInt(outputJD.value)+parseInt(outputOF.value)">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="number" name="outputJD" id="outputJD" autocomplete="name" spellcheck="false" value="12" required>
+      <label class="ods-label" for="outputJD">Jelly Donuts (Amount)</label>
+    </div>
+  </fieldset>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="number" name="outputOF" id="outputOF" autocomplete="name" spellcheck="false" value="12" required>
+      <label class="ods-label" for="outputOF">Old Fashioned Donuts (Amount)</label>
+    </div>
+  </fieldset>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <label class="ods-label" for="outputTotal">Total Donuts</label>
+      <output aria-live="polite" id="outputTotal" name="outputTotal" for="outputJD outputoldfashioneds">24</output>
+    </div>
+  </fieldset>
+</form>
+```
+</figure>
+
+### Accessibility
+
+While many browsers automatically treat `<output>` as a "live" region, it's best to include `aria-live="polite"` to ensure best-case functionality. Though it is not well documented, `<output>` can and should utilize a paired `<label>`.
+
 ## pre <a name="pre"></a>
 > The HTML `<pre>` element represents preformatted text which is to be presented exactly as written in the HTML file. The text is typically rendered using a non-proportional ("monospace") font. Whitespace inside this element is displayed as written. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre">MDN</a></cite>
 
