@@ -1,6 +1,8 @@
 ---
 template: component
+id: radio-button
 title: Radio Button
+description: Allows a user to make decisions and opt in to single attributes of a product.
 tabs:
   - label: 'Overview'
     id: 'overview'

@@ -1,6 +1,8 @@
 ---
 template: component
 title: Number Input
+description: "TODO: This one was hidden away in our existing docs site. Need to figure out what to do with this."
+lead: TODO
 tabs:
   - label: 'Overview'
     id: 'overview'

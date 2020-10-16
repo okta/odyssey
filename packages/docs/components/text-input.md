@@ -1,6 +1,9 @@
 ---
 template: component
+id: text-input
 title: Text Input
+description: TODO
+lead: TODO
 tabs:
   - label: 'Overview'
     id: 'overview'

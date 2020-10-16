@@ -1,6 +1,8 @@
 ---
 template: component
+id: button
 title: Checkbox
+description: Allows a user to make decisions and opt in to multiple attributes of a product.
 tabs:
   - label: 'Overview'
     id: 'overview'

@@ -1,6 +1,8 @@
 ---
 template: component
+id: tooltip
 title: Tooltip
+description: TODO
 lead: A contextual pop-up that provides a label for or description of an element.
 tabs:
   - label: 'Overview'

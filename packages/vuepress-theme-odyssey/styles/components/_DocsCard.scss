@@ -13,15 +13,17 @@
 // limitations under the License.
 
 .docs-card {
+  display: flex;
   position: relative;
-  // max-width: $max-line-length;
-  padding: $spacing-m;
+  flex-direction: column;
+  padding: $spacing-l $spacing-m;
   border-radius: 0 32px;
   background-color: var(--docs-card-bg);
   font-size: $size-body-sentence;
 
   &.is-docs-card-plain {
     background: transparent;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
   }
 
   a::after {
@@ -37,18 +39,22 @@
     border-radius: 0 32px;
   }
 
+  transition: 0.33s ease-in-out all;
+
   &:hover,
   &:focus-within {
-    background-color: var(--docs-card-bg-hover);
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
   }
 
   .docs-card--header-image svg {
     width: $spacing-l;
     height: $spacing-l;
-    margin-bottom: $spacing-l;
+    margin-bottom: $spacing-m;
   }
 
   .docs-card--main {
+    flex: 1;
     margin-bottom: $spacing-l;
+    font-size: $size-body-sentence;
   }
 }

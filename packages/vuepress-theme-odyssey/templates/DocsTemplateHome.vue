@@ -19,7 +19,7 @@
             aria-hidden="true"
             class="docs-card--header-image"
             v-html="
-              require(`!html-loader!../../docs/.vuepress/public/images/illustration-fpo.svg`)
+              require(`!html-loader!../../docs/.vuepress/public/images/coin-component-fpo.svg`)
             "
           />
           <!-- eslint-enable -->
@@ -74,9 +74,7 @@
       >
         <h3>{{ section.title }}</h3>
         <p>{{ section.description }}</p>
-        <div class="docs-card--index-cta">
-          <DocsLink :href="section.href">{{ section.label }}</DocsLink>
-        </div>
+        <DocsLink :href="section.href">{{ section.label }}</DocsLink>
       </DocsCard>
     </DocsCardGroup>
   </article>

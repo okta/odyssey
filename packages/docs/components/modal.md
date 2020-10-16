@@ -1,5 +1,7 @@
 ---
 template: component
+id: modal
+description: UI inserted overlaying the main content and change the context to a special mode that requires user interaction.
 title: Modal
 tabs:
   - label: 'Overview'

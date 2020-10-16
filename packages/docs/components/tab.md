@@ -1,6 +1,9 @@
 ---
 template: component
+id: tab
 title: Tab
+description: TODO
+lead: TODO
 tabs:
   - label: 'Overview'
     id: 'overview'

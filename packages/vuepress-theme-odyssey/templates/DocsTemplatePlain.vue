@@ -1,11 +1,9 @@
 <template>
   <article class="docs-main--content is-template-plain">
-    <header class="docs-doc-header">
-      <div>
-        <h1 class="docs-doc-header--title">{{ $page.frontmatter.headline }}</h1>
-        <p class="docs-doc-header--lead">{{ $page.frontmatter.lead }}</p>
-      </div>
-    </header>
+    <DocsPageHeader
+      :title="$page.frontmatter.title"
+      :lead="$page.frontmatter.lead"
+    />
     <hr />
     <Content />
   </article>
@@ -13,6 +11,9 @@
 
 <script>
 export default {
-  name: "DocsTemplatePlain"
+  name: "DocsTemplatePlain",
+  components: {
+    DocsPageHeader: () => import("../components/DocsPageHeader.vue")
+  }
 };
 </script>

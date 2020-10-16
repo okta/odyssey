@@ -1,6 +1,8 @@
 ---
 template: component
+id: link
 title: Link
+description: Links are navigation elements displayed as text. A link can open another page or jump to a section of a page.
 lead: Links are navigation elements displayed as text. A link can open another page or jump to a section of a page.
 tabs:
   - label: 'Overview'

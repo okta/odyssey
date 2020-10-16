@@ -12,10 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.docs-card--group {
+.docs-page-header {
   display: grid;
-  grid-column-gap: $spacing-m;
-  grid-row-gap: $spacing-l;
-  grid-template-columns: repeat(auto-fit, minmax($max-line-length / 2, 1fr));
+  position: relative;
+  z-index: 2;
+  grid-column-gap: $spacing-l;
+  grid-row-gap: $spacing-s;
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
+  justify-content: space-between;
+  font-size: $size-title-4;
   margin-bottom: $spacing-l;
+
+  @include mq(m) {
+    display: block;
+  }
+
+  .docs-page-header--lead {
+    grid-column: 1 / 2;
+    font-size: $size-title-4;
+
+    @include mq(l) {
+      font-size: $size-body-sentence;
+    }
+  }
+
 }

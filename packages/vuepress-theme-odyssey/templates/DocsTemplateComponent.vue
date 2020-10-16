@@ -1,24 +1,27 @@
 <template>
   <article class="docs-main--content">
-    <header class="docs-doc-header">
-      <h1 class="docs-doc-header--title">{{ $page.frontmatter.title }}</h1>
-      <p class="docs-doc-header--lead">{{ $page.frontmatter.lead }}</p>
-      <ul v-if="$page.frontmatter.links" class="docs-doc-header--links">
-        <li v-for="link in $page.frontmatter.links" :key="link.label">
-          <a :href="link.href">
-            <!-- eslint-disable -->
-            <span
+    <DocsPageHeader
+      :title="$page.frontmatter.title"
+      :lead="$page.frontmatter.lead"
+    >
+      <template v-slot:right>
+        <ul v-if="$page.frontmatter.links" class="docs-page-header--links">
+          <li v-for="link in $page.frontmatter.links" :key="link.label">
+            <a :href="link.href">
+              <!-- eslint-disable -->
+              <span
               aria-hidden
               v-if="link.icon"
               v-html="require(`!html-loader!../public/images/icon-${link.icon}.svg`)"
-            />
-            <!-- eslint-disable -->
-            {{ link.label }}
-          </a>
+              />
+              <!-- eslint-disable -->
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+      </template>
+    </DocsPageHeader>
 
-        </li>
-      </ul>
-    </header>
     <OdsTabs
       id="tabs-doc-sections"
       :label="$page.frontmatter.name + ' documentation sections'"
@@ -39,6 +42,7 @@
 export default {
   name: "DocsTemplateComponent",
   components: {
+    DocsPageHeader: () => import("../components/DocsPageHeader.vue"),
     OdsTabs: () => import("../global-components/OdsTabs.vue")
   }
 };
