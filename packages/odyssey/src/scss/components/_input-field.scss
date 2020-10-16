@@ -61,7 +61,8 @@
   .ods-text-input,
   .ods-select,
   .ods-input--unavailable,
-  .ods-fieldset--pair {
+  .ods-fieldset--pair,
+  output:not([class]) {
     order: 3;
   }
 
