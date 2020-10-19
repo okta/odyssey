@@ -21,7 +21,7 @@
   background-color: var(--docs-card-bg);
   font-size: $size-body-sentence;
 
-  &.is-docs-card-plain {
+  &.is-docs-card-shadow {
     background: transparent;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
   }

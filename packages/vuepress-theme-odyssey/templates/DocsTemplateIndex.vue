@@ -3,13 +3,13 @@
     <DocsPageHeader
       :title="$page.frontmatter.title"
       :lead="$page.frontmatter.lead"
+      :variant="$page.frontmatter.id"
     />
-
     <DocsCardGroup>
       <DocsCard
         v-for="(page, index) in content"
         :key="index"
-        variant="plain"
+        variant="shadow"
         class="docs-index--card"
       >
         <template slot="header">

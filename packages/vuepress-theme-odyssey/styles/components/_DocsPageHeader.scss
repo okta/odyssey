@@ -36,4 +36,22 @@
     }
   }
 
+  &.is-page-header-base,
+  &.is-page-header-components,
+  &.is-page-header-icon {
+    padding: $spacing-l;
+    border-radius: 0 32px;
+  }
+
+  &.is-page-header-base {
+    background: var(--docs-accent-base-bg);
+  }
+
+  &.is-page-header-components {
+    background: var(--docs-accent-component-bg);
+  }
+
+  &.is-page-header-icon {
+    background: var(--docs-accent-icon-bg);
+  }
 }

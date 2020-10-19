@@ -24,7 +24,7 @@ export default {
     variant: {
       type: String,
       default: "default",
-      validator: value => ["default", "plain"].includes(value)
+      validator: value => ["default", "shadow"].includes(value)
     }
   },
   computed: {

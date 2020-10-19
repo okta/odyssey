@@ -1,13 +1,8 @@
 ---
-template: component
+template: plain
 title: Design Tokens
-lead: Okta’s typography system is designed for clarity in readability and hierarchy.
-tabs:
-  - label: 'Overview'
-    id: 'overview'
+lead: TODO
 ---
-
-::: slot overview
 
 # Design Tokens
 
@@ -217,5 +212,3 @@ tabs:
     </tbody>
   </table>
 </figure>
-
-:::

@@ -1,5 +1,6 @@
 ---
 template: plain
+id: icons
 title: Icons
 headline: Icons
 lead:  An icon is a graphic that represents an idea or concept, independent of any particular language, specific words, or phrases. Below are icons that can be used for design projects in Odyssey.

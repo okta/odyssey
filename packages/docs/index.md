@@ -3,15 +3,18 @@ template: home
 headline: Odyssey Design System
 lead: Odyssey is Okta’s design system which consists of UI’s, guides, and resources to build products.
 contentPrimary:
-  - title: Base
+  - coin: base
+    title: Base
     description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
     label: See them
     href: /base/
-  - title: Components
+  - coin: component
+    title: Components
     description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
     label: See them
     href: /components/
-  - title: Icons
+  - coin: icon
+    title: Icons
     description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
     label: See them
     href: /icons/

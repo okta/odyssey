@@ -12,6 +12,7 @@
       <DocsCard
         v-for="(section, index) in $page.frontmatter.contentPrimary"
         :key="index"
+        variant="shadow"
       >
         <template slot="header">
           <!-- eslint-disable -->
@@ -19,7 +20,7 @@
             aria-hidden="true"
             class="docs-card--header-image"
             v-html="
-              require(`!html-loader!../../docs/.vuepress/public/images/coin-component-fpo.svg`)
+              require(`!html-loader!../../docs/.vuepress/public/images/coin-${section.coin || 'fpo'}.svg`)
             "
           />
           <!-- eslint-enable -->
@@ -48,6 +49,7 @@
       <DocsCard
         v-for="(resource, index) in $page.frontmatter.resources"
         :key="index"
+        variant="shadow"
       >
         <template slot="header">
           <!-- eslint-disable -->
@@ -70,7 +72,7 @@
       <DocsCard
         v-for="(section, index) in $page.frontmatter.contentSecondary"
         :key="index"
-        variant="plain"
+        variant="shadow"
       >
         <h3>{{ section.title }}</h3>
         <p>{{ section.description }}</p>

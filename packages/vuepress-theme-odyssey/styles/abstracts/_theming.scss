@@ -28,7 +28,10 @@
     docs-card-bg,
     docs-card-bg-hover,
     docs-sidebar-bg,
-    docs-nav-selected-bg;
+    docs-nav-selected-bg,
+    docs-accent-base-bg,
+    docs-accent-component-bg,
+    docs-accent-icon-bg;
 
   @each $custom-property, $value in $theme {
     @if list-contains($theme-properties, $custom-property) {
@@ -45,10 +48,13 @@ $theme-day: (
   docs-text-heading: $text-heading,
   docs-border-color-display: $border-color-display,
   docs-border-color-ui: $border-color-ui,
-  docs-card-bg: cv('gray', '000'),
+  docs-card-bg: transparent,
   docs-card-bg-hover: cv('blue', '000'),
   docs-sidebar-bg: $white,
-  docs-nav-selected-bg: cv('gray', '000')
+  docs-nav-selected-bg: cv('gray', '000'),
+  docs-accent-base-bg: cv('yellow', '500'),
+  docs-accent-component-bg: cv('turquoise', '400'),
+  docs-accent-icon-bg: cv('orange', '500'),
 );
 
 $theme-night: (
