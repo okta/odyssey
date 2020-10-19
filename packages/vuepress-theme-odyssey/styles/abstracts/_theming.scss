@@ -19,9 +19,16 @@
 }
 
 @mixin set-theme($theme: $theme-day) {
-  $theme-properties: docs-page-bg, docs-text-body, docs-text-heading,
-    docs-border-color-display, docs-border-color-ui, docs-card-bg,
-    docs-card-bg-hover;
+  $theme-properties:
+    docs-page-bg,
+    docs-text-body,
+    docs-text-heading,
+    docs-border-color-display,
+    docs-border-color-ui,
+    docs-card-bg,
+    docs-card-bg-hover,
+    docs-sidebar-bg,
+    docs-nav-selected-bg;
 
   @each $custom-property, $value in $theme {
     @if list-contains($theme-properties, $custom-property) {
@@ -39,7 +46,9 @@ $theme-day: (
   docs-border-color-display: $border-color-display,
   docs-border-color-ui: $border-color-ui,
   docs-card-bg: cv('gray', '000'),
-  docs-card-bg-hover: cv('blue', '000')
+  docs-card-bg-hover: cv('blue', '000'),
+  docs-sidebar-bg: $white,
+  docs-nav-selected-bg: cv('gray', '000')
 );
 
 $theme-night: (
@@ -47,5 +56,22 @@ $theme-night: (
   docs-text-body: $white,
   docs-text-heading: $white,
   docs-card-bg: #303033,
-  docs-card-bg-hover: cv('gray', '600')
+  docs-card-bg-hover: cv('gray', '600'),
+  docs-sidebar-bg: #303033,
+  docs-nav-selected-bg: cv('gray', '600')
 );
+
+// The following is required for theming demo.
+
+body {
+  color: var(--docs-text-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--docs-text-heading);
+}

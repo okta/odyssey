@@ -20,8 +20,8 @@
   grid-row-gap: $spacing-s;
   grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
   justify-content: space-between;
-  font-size: $size-title-4;
   margin-bottom: $spacing-l;
+  font-size: $size-title-4;
 
   @include mq(m) {
     display: block;

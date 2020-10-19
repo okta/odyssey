@@ -39,6 +39,7 @@
     }
   }
 }
+
 .docs-sidebar {
   @include mq(l) {
     visibility: hidden;
@@ -82,9 +83,9 @@
     height: 100vh;
     max-height: 100vh;
     padding: $spacing-l;
-    background: $white;
+    background: var(--docs-sidebar-bg);
   }
-  
+
   .docs-sidebar--header {
     grid-area: header;
     padding: 0 $spacing-xs 0;

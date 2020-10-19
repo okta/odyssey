@@ -69,7 +69,7 @@
   }
 
   .is-docs-nav-link--active {
-    background: cv('gray', '000');
+    background: var(--docs-nav-selected-bg);
   }
 }
 
