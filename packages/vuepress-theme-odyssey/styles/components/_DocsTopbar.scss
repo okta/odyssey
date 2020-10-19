@@ -3,9 +3,9 @@
   position: fixed;
   z-index: 9;
   width: 100vw;
+  padding: $spacing-xs $spacing-m;
   border-bottom: 1px solid $border-color-display;
   background: var(--docs-sidebar-bg);
-  padding: $spacing-xs $spacing-m;
 
   @include mq(l) {
     display: flex;
@@ -21,9 +21,7 @@
 
   .docs-topbar--action {
     margin-right: $spacing-xs;
-
-    @include mq(l) { margin-left: $spacing-s; }
-    @include mq(m) { margin-left: -$spacing-xs; }
+    margin-left: -$spacing-s;
 
     svg {
       position: relative;
