@@ -1,6 +1,6 @@
 ---
 template: component
-id: select
+id: component-select
 title: Select
 description: TODO
 lead: The Select input is a form element that provides a menu of options for the user to... select.

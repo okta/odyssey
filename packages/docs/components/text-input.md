@@ -1,6 +1,6 @@
 ---
 template: component
-id: text-input
+id: component-text-input
 title: Text Input
 description: TODO
 lead: TODO

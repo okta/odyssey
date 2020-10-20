@@ -18,7 +18,7 @@
           aria-hidden
           class="docs-card--header-image"
           v-html="
-            require(`!html-loader!../../docs/.vuepress/public/images/coin-component-${page.id || 'fpo'}.svg`)
+            require(`!html-loader!../../docs/.vuepress/public/images/coin-${page.id || 'fpo'}.svg`)
           "
         />
           <!-- eslint-enable -->

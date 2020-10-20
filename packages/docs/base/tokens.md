@@ -1,10 +1,10 @@
 ---
 template: plain
+id: base-tokens
 title: Design Tokens
 lead: TODO
+description: Odyssey's glossary of styled baseline HTML elements
 ---
-
-# Design Tokens
 
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">

@@ -1,6 +1,7 @@
 ---
-template: plain
 id: icons
+template: plain
+pageHeaderVariant: icon
 title: Icons
 headline: Icons
 lead:  An icon is a graphic that represents an idea or concept, independent of any particular language, specific words, or phrases. Below are icons that can be used for design projects in Odyssey.
@@ -8,6 +9,8 @@ tabs:
   - label: 'Overview'
     id: 'overview'
 ---
+
+<div class="docskit-container">
 
  <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
@@ -224,44 +227,79 @@ tabs:
   </table>
 </figure>
 
+
 ## Built on a grid
 
-Every icon is built on a grid at a specific size. This ensures not only visual consistency, but allows us to easily swap icons in various applications.
+<Description>
+
+  Every icon is built on a grid at a specific size. This ensures not only visual consistency, but allows us to easily swap icons in various applications.
+
+</Description>
 
 ### Design your own
 
+<Description>
+
 This grid is also included as a component in Figma. If you need to create something new, just drag out an instance and start drawing.
+
+</Description>
 
 ## Guidelines
 
 ### Page structure first
 
+<Description>
+
 Once your structure is solid, and you get to the point where icons, delight & Co. can come into play, follow this simple rule: Use as few icons as necessary—but not fewer.
 
 Add icons at the very end of the design process, do not play with icons while working on your wireframes.
 
+</Description>
+
 ### UI indicators vs. icons
+
+<Description>
 
 UI indicators are visual indicators that are baked into UIs like the radio circle, checkbox check, and select caret. In some cases we can override these indicators to match our overall aesthetics and style which can make it seem like they <em>are</em> icons.
 
+</Description>
+
 ### When to use an icon
+
+<Description>
 
 If you want to call attention to an action you want a user to take, icons make good targets and break up text.
 
+</Description>
+
 ### Use words
+
+<Description>
 
 Almost all icons should be accompanied by copy. By doing so, you won't leave users guessing what an icon represents.
 
 As best practice, use a verb to suggest an action. For more clarity use a verb + noun.
 
+</Description>
+
 ### Choosing the right icon
+
+<Description>
 
 It’s recommended to use a word to accompany an icon. Like the previous example shows, icons should call attention to the action and the icon should follow suit. Depending on the situation, some icons are better for clicking, where others are better suited as static.
 
 As a result, this will drastically reduce the amount of icons we have, increase understanding and clarity in our actions.
 
+</Description>
+
 ### Color
+
+<Description>
 
 By default, all icons are Grey 900. If using an icon on top of a solid color, for example in a primary button, it should be White. As a general guideline, icons should be the same color as their accompanying text.
 
 As an example, if you have a “Delete policy” button, do not colorize the delete button or trashcan icon with Green 400.
+
+</Description>
+
+</div>

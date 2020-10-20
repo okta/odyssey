@@ -1,6 +1,6 @@
 ---
 template: component
-id: toast
+id: component-toast
 title: Toast
 lead: Toasts are non-disruptive messaging UIs that appear at the bottom right of the interface to provide quick, at-a-glance feedback on the outcome of an action.
 description: TODO

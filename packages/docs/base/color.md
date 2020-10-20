@@ -1,8 +1,10 @@
 ---
 template: plain
+id: base-color
 title: Color
 headline: Color
 lead: Here's a quick overview of the colors available in Odyssey and some guidelines for their use.
+description: Et morbi eget at consectetur. Elit aenean mi phasellus.
 ---
 
 <figure class="ods-table--figure">
@@ -16,8 +18,8 @@ lead: Here's a quick overview of the colors available in Odyssey and some guidel
         <th scope="column">Swatch</th>
         <th scope="column">Name</th>
         <th scope="column">Hex</th>
-        <th scope="column"><span class="sample--emoji">🛎️</span>Do</th>
-        <th scope="column"><span class="sample--emoji">🚫</span>Don't Do</th>
+        <th scope="column"><span class="sample--emoji">🛎️</span> Do</th>
+        <th scope="column"><span class="sample--emoji">🚫</span> Don't Do</th>
       </tr>
     </thead>
     <tbody>

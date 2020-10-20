@@ -1,6 +1,6 @@
 ---
 template: component
-id: tab
+id: component-tab
 title: Tab
 description: TODO
 lead: TODO

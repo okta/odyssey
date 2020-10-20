@@ -51,6 +51,7 @@ a:visited {
     display: flex;
     flex: 1;
     justify-content: center;
+    margin-bottom: $spacing-xl;
     padding: $spacing-l * 2 $spacing-m 0;
 
     // TODO: We would like to remove this in the future
@@ -107,5 +108,235 @@ h6 {
   &:hover .header-anchor,
   &:focus-within .header-anchor {
     opacity: 1;
+  }
+}
+
+// Component Samples
+
+.sample-color {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
+  border-radius: $base-border-radius;
+  vertical-align: middle;
+}
+
+@each $hue, $variants in $colors {
+  @each $variant, $color in $variants {
+    .sample-color--#{$hue}-#{$variant} {
+      background: cv($hue, $variant);
+    }
+  }
+}
+
+// Design Token Examples
+
+.sample-token {
+  display: block;
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
+  border-radius: $base-border-radius;
+}
+
+// Token Examples: Color
+.sample-token--color-primary-light {
+  background: $color-primary-light;
+}
+
+.sample-token--color-primary-base {
+  background: $color-primary-base;
+}
+
+.sample-token--color-primary-dark {
+  background: $color-primary-dark;
+}
+
+.sample-token--color-danger-light {
+  background: $color-danger-light;
+}
+
+.sample-token--color-danger-base {
+  background: $color-danger-base;
+}
+
+.sample-token--color-danger-dark {
+  background: $color-danger-dark;
+}
+
+.sample-token--color-primary-bg {
+  background: $color-primary-base;
+}
+
+// Token Examples: Background
+.sample-token--color-primary-bg-disabled {
+  background: $color-primary-light;
+}
+
+.sample-token--color-danger-bg {
+  background: $color-danger-base;
+}
+
+.sample-token--color-danger-bg-disabled {
+  background: $color-danger-light;
+}
+
+// Token Examples: Outline
+.sample-token--color-primary-outline {
+  background: $focus-ring-primary;
+}
+
+.sample-token--color-danger-outline {
+  background: $focus-ring-danger;
+}
+
+// Token Examples: Shadow
+.sample-token--box-shadow-default {
+  box-shadow: $box-shadow-default;
+}
+
+.sample-token--text-body {
+  color: $text-body;
+}
+
+.sample-token--text-heading {
+  color: $text-heading;
+}
+
+.sample-token--text-sub {
+  color: $text-sub;
+}
+
+.sample-token--text-danger {
+  color: $text-danger;
+}
+
+.type-body-sample--table {
+  white-space: nowrap;
+}
+
+.type-title-sample--table {
+  white-space: nowrap;
+
+  .type-sample--example {
+    font-weight: 600;
+  }
+}
+
+
+.sample--list {
+  list-style-type: none;
+}
+
+$spacing-units: (
+  'spacing-xl': $spacing-xl,
+  'spacing-l': $spacing-l,
+  'spacing-m': $spacing-m,
+  'spacing-s': $spacing-s,
+  'spacing-xs': $spacing-xs,
+);
+
+.type-sample--wrap {
+  max-width: $max-line-length;
+  overflow-x: scroll;
+}
+
+.type-sample--table {
+  white-space: nowrap;
+}
+
+@for $i from 7 through 1 {
+  $x: $i - 1;
+  $n: 7 - $i;
+
+  .type-sample:nth-of-type(#{$n}) {
+    .type-sample--rem {
+      $rem: ms($x);
+      $rem: inspect($rem);
+      $rem: str-slice($rem, 1, -4);
+      $rem: str-slice($rem, 1, 4);
+      $rem: $rem + 'rem';
+
+      &::before {
+        content: '#{$rem}';
+      }
+    }
+
+    .type-sample--px {
+      &::before {
+        content: '#{round(rem-to-px(ms($x))))}';
+      }
+    }
+
+    .type-sample--example {
+      font-size: ms($x);
+    }
+  }
+}
+
+@for $i from 4 through 1 {
+  $x: $i - 2;
+  $n: 4 - $i;
+
+  .type-sample-body:nth-of-type(#{$n}) {
+    .type-sample-body--rem {
+      $rem: ms($x);
+      $rem: inspect($rem);
+      $rem: str-slice($rem, 1, -4);
+      $rem: str-slice($rem, 1, 4);
+      $rem: $rem + 'rem';
+
+      &::before {
+        content: '#{$rem}';
+      }
+    }
+
+    .type-sample-body--px {
+      &::before {
+        content: '#{round(rem-to-px(ms($x)))}';
+      }
+    }
+
+    .type-sample-body--example {
+      font-size: ms($x);
+    }
+  }
+}
+
+@each $name, $value in $spacing-units {
+  .conversion--#{$name}-actual {
+    &::before {
+      content: '#{$value}';
+    }
+  }
+
+  .conversion--#{$name}-px {
+    &::before {
+      content: '#{round(rem-to-px($value))}';
+    }
+  }
+
+  .sample--type-#{$name} {
+    position: relative;
+    min-height: $base-font-size;
+    margin-bottom: $spacing-m;
+    padding: 0 0 0 $spacing-l;
+    font-size: $value;
+
+    &::before {
+      content: 'ms(#{str-slice($name, 4)})';
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: $size-body-caption;
+    }
+  }
+
+  .sample--spacing-#{$name} {
+    position: relative;
+    width: $value;
+    height: $value;
+    background: $color-danger-light;
   }
 }

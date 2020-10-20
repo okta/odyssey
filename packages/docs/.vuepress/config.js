@@ -59,7 +59,6 @@ module.exports = {
       ],
       secondary: [
         { title: 'Updates', link: '/updates/' },
-        { title: 'Status', link: '/status/' },
         { title: 'Help', link: '/help/' },
       ]
     }
