@@ -5,10 +5,14 @@
       :lead="$page.frontmatter.lead"
       :variant="$page.frontmatter.id"
     />
-    <DocsCardGroup :variant="$page.frontmatter.id === 'base' && '2col'">
+    <DocsCardGroup
+      tag="ul"
+      :variant="$page.frontmatter.id === 'base' && '2col'"
+    >
       <DocsCard
         v-for="(page, index) in content"
         :key="index"
+        tag="li"
         variant="shadow"
         class="docs-index--card"
       >

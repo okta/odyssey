@@ -1,5 +1,6 @@
 <template>
-  <div
+  <Component
+    :is="tag"
     :class="{
       'docs-card': true,
       [`is-docs-card-${variant}`]: true
@@ -14,13 +15,17 @@
     <footer v-if="hasSlotFooter" class="docs-card--footer">
       <slot name="footer" />
     </footer>
-  </div>
+  </Component>
 </template>
 
 <script>
 export default {
   name: "DocsCard",
   props: {
+    tag: {
+      default: "div",
+      type: String
+    },
     variant: {
       type: String,
       default: "default",

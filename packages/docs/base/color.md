@@ -537,7 +537,7 @@ description: Et morbi eget at consectetur. Elit aenean mi phasellus.
           <code>#65adb7</code>
         </td>
         <td>
-          Brand moments
+          Background Color
         </td>
         <td>
           Headlines, body copy, links, buttons

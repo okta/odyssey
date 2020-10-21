@@ -8,10 +8,11 @@
       </div>
     </header>
 
-    <DocsCardGroup>
+    <DocsCardGroup tag="ul">
       <DocsCard
         v-for="(section, index) in $page.frontmatter.contentPrimary"
         :key="index"
+        tag="li"
         variant="shadow"
       >
         <template slot="header">
@@ -45,10 +46,11 @@
       }}</DocsLink>
     </div>
 
-    <DocsCardGroup>
+    <DocsCardGroup tag="ul">
       <DocsCard
         v-for="(resource, index) in $page.frontmatter.resources"
         :key="index"
+        tag="li"
         variant="shadow"
       >
         <template slot="header">
@@ -68,10 +70,11 @@
       </DocsCard>
     </DocsCardGroup>
 
-    <DocsCardGroup>
+    <DocsCardGroup tag="ul">
       <DocsCard
         v-for="(section, index) in $page.frontmatter.contentSecondary"
         :key="index"
+        tag="li"
         variant="shadow"
       >
         <h3>{{ section.title }}</h3>
