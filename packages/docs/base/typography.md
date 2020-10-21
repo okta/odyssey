@@ -32,7 +32,7 @@ Titles are used to describe the main idea of a page, a section, or content that 
 
 </Description>
 
-<Visual>
+<Description>
   <figure class="ods-table--figure">
     <table class="ods-table type-title-sample--table">
       <thead>
@@ -91,7 +91,7 @@ Titles are used to describe the main idea of a page, a section, or content that 
       </tbody>
     </table>
   </figure>
-</Visual>
+</Description>
 
 ### Body
 
@@ -101,7 +101,7 @@ Odyssey ships with a base font of `14px`. However there are times when different
 
 </Description>
 
-<Visual>
+<Description>
   <figure class="ods-table--figure">
     <table class="ods-table type-body-sample--table">
       <thead>
@@ -142,7 +142,7 @@ Odyssey ships with a base font of `14px`. However there are times when different
       </tbody>
     </table>
   </figure>
-</Visual>
+</Description>
 
 ## Weight
 
@@ -152,7 +152,7 @@ In order to maintain consistency across browsers and typefaces, we specify weigh
 
 </Description>
 
-<Visual>
+<Description>
   <figure class="ods-table--figure">
     <table class="ods-table">
       <thead>
@@ -168,7 +168,7 @@ In order to maintain consistency across browsers and typefaces, we specify weigh
       <tbody>
         <tr>
           <td>
-            <code>font-weight: 400</code>
+            <code>400</code>
           </td>
           <td class="type-sample--400">
             Normal (Book) 400
@@ -176,7 +176,7 @@ In order to maintain consistency across browsers and typefaces, we specify weigh
         </tr>
         <tr>
           <td>
-            <code>font-weight: 600</code>
+            <code>600</code>
           </td>
           <td class="type-sample--600">
             Bold (Medium) 600
@@ -185,7 +185,7 @@ In order to maintain consistency across browsers and typefaces, we specify weigh
       </tbody>
     </table>
   </figure>
-</Visual>
+</Description>
 
 ## Line length
 

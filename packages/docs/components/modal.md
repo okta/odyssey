@@ -75,7 +75,7 @@ Modal dialogs are notorious for their accessibility issues, but don't worry! We'
 
 The modal components makes use of several ARIA attributes in order to give assistive technologies (AT) as much information as possible.
 
-- `aria-hidden</code> - This indicates whether or not the modal is visible and should be automatically set to `true` or `false` by our companion Javascript.
+- `aria-hidden` - This indicates whether or not the modal is visible and should be automatically set to `true` or `false` by our companion Javascript.
 - `role="dialog"` - Until the `role` element is widely supported, this attribute indicates the semantic status of the modal to the browser. Please use `"alertdialog"` instead if your modal represents a dangerous action or error.
 - `aria-modal="true"` - This indicates that the rest of the workflow is stopped while this element is present.
 - `aria-labelledby="ods-modal--title-id"` - This attribute informs ATs which other element can be treated as the label for this dialog. Please use the unique `id` associated with the dialog's title.
