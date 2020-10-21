@@ -523,6 +523,26 @@ description: Et morbi eget at consectetur. Elit aenean mi phasellus.
           Headlines, body copy, links, buttons
         </td>
       </tr>
+      <tr>
+        <th scope="row" rowspan="1">
+          Turquoise
+        </th>
+        <td class="is-sample-table-swatch">
+          <span class="sample-color sample-color--turquoise-400"></span>
+        </td>
+        <td class="is-sample-table-token">
+          Turquoise 400
+        </td>
+        <td>
+          <code>#65adb7</code>
+        </td>
+        <td>
+          Brand moments
+        </td>
+        <td>
+          Headlines, body copy, links, buttons
+        </td>
+      </tr>
     </tbody>
   </table>
 </figure>

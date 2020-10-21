@@ -1,6 +1,6 @@
 
 module.exports = {
-  theme: `@okta/vuepress-theme-odyssey`,
+  theme: '@okta/vuepress-theme-odyssey',
   dest: 'dist',
   name: 'Odyssey Design System',
   title: 'Odyssey Design System',
@@ -47,8 +47,8 @@ module.exports = {
             { title: 'Select', link: '/components/select/' },
             { title: 'Status', link: '/components/status/' },
             { title: 'Tab', link: '/components/tab/' },
-            { title: 'Tag', link: '/components/tag/' },
             { title: 'Table', link: '/components/table/' },
+            { title: 'Tag', link: '/components/tag/' },
             { title: 'Text Input', link: '/components/text-input/' },
             { title: 'Toast', link: '/components/toast/' },
             { title: 'Tooltip', link: '/components/tooltip/' }
