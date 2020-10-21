@@ -1,7 +1,8 @@
 <template>
   <div
     :class="{
-      'docs-card--group': true
+      'docs-card--group': true,
+      'is-2col': variant === '2col'
     }"
   >
     <slot></slot>
@@ -10,6 +11,13 @@
 
 <script>
 export default {
-  name: "DocsCardGroup"
+  name: "DocsCardGroup",
+  props: {
+    variant: {
+      type: String,
+      default: null,
+      validator: value => ["2col"].includes(value)
+    }
+  }
 };
 </script>

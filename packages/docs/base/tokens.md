@@ -3,7 +3,7 @@ template: plain
 id: base-tokens
 title: Design Tokens
 lead: TODO
-description: Odyssey's glossary of styled baseline HTML elements
+description: Et morbi eget at consectetur. Elit aenean mi phasellus.
 ---
 
 <figure class="ods-table--figure">

@@ -18,4 +18,12 @@
   grid-row-gap: $spacing-l;
   grid-template-columns: repeat(auto-fit, minmax($max-line-length / 2, 1fr));
   margin-bottom: $spacing-l;
+
+  &.is-2col {
+    grid-template-columns: 1fr 1fr;
+
+    @include mq('m') {
+      grid-template-columns: 1fr;
+    }
+  }
 }

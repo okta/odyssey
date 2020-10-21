@@ -16,7 +16,7 @@
   display: grid;
   grid-column-gap: $spacing-l;
   grid-template-columns: minmax(min-content, max-content) minmax(min-content, #{$max-line-length});
-  font-size: ms(1);
+  // font-size: ms(1);
 
   @include mq(m) {
     display: block;
@@ -92,10 +92,6 @@
     background-color: cv('gray', '000');
     font-size: $size-body-base;
     overflow: scroll;
-
-    code {
-      font-family: 'Andale Mono', monospace;
-    }
   }
 
   .docs-example--rendered + div[class*='language-'] pre[class*='language-'] {
