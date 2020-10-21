@@ -1,21 +1,25 @@
+@import '@okta/odyssey/src/scss/abstracts/_functions';
+@import '@okta/odyssey/src/scss/abstracts/_colors';
+@import '@okta/odyssey/src/scss/abstracts/_tokens';
+
 :root {
-  --font-size: 1rem;
-  --inlineCodeColor: #8D6E97;
-  --inlineCodeBackground: DD4A68;
-  --blockBackground: #f5f5f6;
-  --baseColor: #212126;
-  --selectedColor: #b3d4fc;
-  --highlightBackground: #faf5dc;
-  --highlightAccent: #f9dc77;
-  --commentColor: #93A1A1;
-  --punctuationColor: #999999;
-  --propertyColor: #8D6E97;
-  --selectorColor: #2D8C9E;
-  --operatorColor: #a67f59;
+  --font-size: #{$size-body-sentence};
+  --inlineCodeColor: #{cv('purple', '500')};
+  --inlineCodeBackground: #{cv('red', '300')};
+  --blockBackground: #{cv('gray', '000')};
+  --baseColor: #{cv('gray', '900')};
+  --selectedColor: #{cv('blue', '300')};
+  --highlightBackground:  #{cv('yellow', '000')};
+  --highlightAccent:  #{cv('yellow', '300')};
+  --commentColor: #{cv('gray', '500')};
+  --punctuationColor: #{cv('gray', '200')};
+  --propertyColor: #{cv('purple', '500')};
+  --selectorColor: #{cv('turquoise', '500')};
+  --operatorColor: #{cv('yellow', '900')};
   --operatorBg: transparent;
-  --variableColor: #00503c;
-  --functionColor: #DD4A68;
-  --keywordColor: #1662DD;
+  --variableColor: #{cv('green', '900')};
+  --functionColor: #{cv('red', '500')};
+  --keywordColor: #{cv('blue', '500')};
 }
 
 /*********************************************************
@@ -24,14 +28,14 @@
 pre[class*="language-"],
 code[class*="language-"] {
   color: var(--baseColor);
+  font-family: 'Inconsolata', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: var(--font-size);
-  text-shadow: none;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  direction: ltr;
   text-align: left;
+  text-shadow: none;
+  word-break: normal;
   white-space: pre;
   word-spacing: normal;
-  word-break: normal;
+  direction: ltr;
   line-height: 1.5;
   -moz-tab-size: 4;
   -o-tab-size: 4;
