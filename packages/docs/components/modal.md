@@ -30,7 +30,7 @@ Descriptive content around **modal anatomy** should go here.
 
 </Description>
 
-<Anatomy img="/images/fpo.svg" />
+<Anatomy img="/images/anatomy-modal.svg" />
 
 
 ## General guidelines

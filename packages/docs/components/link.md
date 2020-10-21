@@ -31,7 +31,7 @@ Descriptive content around **link anatomy** should go here.
 
 </Description>
 
-<Anatomy img="/images/fpo.svg" />
+<Anatomy img="/images/anatomy-link.svg" />
 
 ## Specialty cases
 
