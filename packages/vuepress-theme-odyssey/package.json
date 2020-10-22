@@ -6,9 +6,14 @@
   "license": "Apache-2.0",
   "private": true,
   "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js,.vue && stylelint ./*.scss",
+    "test": "yarn lint"
+  },
   "devDependencies": {
     "@okta/odyssey": "^0.6.0",
     "@okta/odyssey-icons": "^0.6.0",
+    "eslint-config-vuepress": "^2.2.0",
     "html-loader": "^1.1.0",
     "node-sass": "4.13.1",
     "sass-loader": "8.0.2",
