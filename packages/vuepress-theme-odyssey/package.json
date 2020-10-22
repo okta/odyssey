@@ -6,6 +6,10 @@
   "license": "Apache-2.0",
   "private": true,
   "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js,.vue && stylelint ./*.scss",
+    "test": "yarn lint"
+  },
   "devDependencies": {
     "@okta/odyssey": "^0.6.0",
     "@okta/odyssey-icons": "^0.6.0",
