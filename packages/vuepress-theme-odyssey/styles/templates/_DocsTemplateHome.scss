@@ -1,0 +1,40 @@
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// TODO: This is used to display/fill a large graphic
+// or space and should be moved in to its own component
+
+.docs-hero {
+  margin-bottom: $spacing-l;
+  padding: $spacing-m;
+  border-radius: 0 32px;
+  background-color: var(--docs-card-bg);
+}
+
+// TODO: This is used to display a large statement or principle
+// and should be moved in to its own component if we find a need 
+// for it in more than once place
+
+.docs-principle {
+  margin: $spacing-xl 0;
+  border-radius: 0 32px;
+
+  p {
+    font-size: $size-title-1;
+  }
+
+  a {
+    font-size: $size-title-5;
+  }
+}

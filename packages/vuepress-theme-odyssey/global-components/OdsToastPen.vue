@@ -1,7 +1,8 @@
 <template>
   <div class="ods-toast-pen">
-    <Toast
-      v-for="toast in toasts"
+    <OdsToast
+      v-for="(toast, index) in toasts"
+      :key="index"
       :variant="toast.variant"
       :title="'This is the ' + toast.variant + ' toast title'"
       body="This is supplemental information."
@@ -11,7 +12,7 @@
 
 <script>
 export default {
-  components: { Toast: () => import("./Toast.vue") },
+  components: { OdsToast: () => import("./OdsToast.vue") },
   data: () => ({
     toasts: []
   }),

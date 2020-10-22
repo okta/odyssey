@@ -1,0 +1,57 @@
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+.docs-page-header {
+  display: grid;
+  position: relative;
+  z-index: 2;
+  grid-column-gap: $spacing-l;
+  grid-row-gap: $spacing-s;
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
+  justify-content: space-between;
+  margin-bottom: $spacing-l;
+  font-size: $size-title-4;
+
+  @include mq(m) {
+    display: block;
+  }
+
+  .docs-page-header--lead {
+    grid-column: 1 / 2;
+    font-size: $size-title-4;
+
+    @include mq(l) {
+      font-size: $size-body-sentence;
+    }
+  }
+
+  &.is-page-header-base,
+  &.is-page-header-components,
+  &.is-page-header-icon {
+    padding: $spacing-l;
+    border-radius: 0 32px;
+  }
+
+  &.is-page-header-base {
+    background: var(--docs-accent-base-bg);
+  }
+
+  &.is-page-header-components {
+    background: var(--docs-accent-component-bg);
+  }
+
+  &.is-page-header-icon {
+    background: var(--docs-accent-icon-bg);
+  }
+}
