@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "build": "vuepress build",
-    "start": "yarn build && vuepress dev",
+    "start": "yarn build && vuepress dev --no-clear-screen",
     "test": "echo \"Tests have not been implemented for ${npm_package_name}\" && exit 0"
   },
   "browserslist": [
