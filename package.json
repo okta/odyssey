@@ -13,7 +13,9 @@
     "icons": "yarn --cwd packages/odyssey-icons svgo",
     "lerna-version": "lerna version --no-git-tag-version --force-publish",
     "prelerna-publish": "lerna run build",
-    "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry"
+    "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry",
+    "lint": "eslint '**/*.@(js|vue)' --ignore-pattern node_modules/ && stylelint ./*.scss", 
+    "test": "yarn lint" 
   },
   "devDependencies": {
     "eslint": "^7.9.0",
