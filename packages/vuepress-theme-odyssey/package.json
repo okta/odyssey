@@ -12,6 +12,7 @@
     "@okta/prism-theme-odyssey": "^0.6.0",
     "html-loader": "^1.1.0",
     "node-sass": "4.13.1",
+    "prismjs": "^1.14.0",
     "sass-loader": "8.0.2",
     "stylelint": "^9.3.0",
     "stylelint-checkstyle-formatter": "^0.1.1",
