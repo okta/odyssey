@@ -12,13 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-.ods-tabs {
-  --ods-tabs-indicator-width: 0;
-  --ods-tabs-indicator-pos-x: 0;
-}
-
 .ods-tabs--tablist {
   position: relative;
+  border-bottom: 1px solid $border-color-display;
 }
 
 .ods-tabs--tab {
@@ -30,6 +26,7 @@
   background: none;
   color: $text-body;
   font-family: inherit;
+  font-size: $size-body-sentence;
   font-weight: 600;
 
   &[aria-selected='true'] {
@@ -47,8 +44,7 @@
 }
 
 .ods-tabs--tabpanel [role='tabpanel'] {
-  padding: $spacing-m 0;
-  border-top: 1px solid $border-color-display;
+  padding: $spacing-l 0;
 
   &:focus {
     outline: none;
