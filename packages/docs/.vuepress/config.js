@@ -1,4 +1,3 @@
-
 module.exports = {
   theme: '@okta/vuepress-theme-odyssey',
   dest: 'dist',
