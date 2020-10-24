@@ -11,11 +11,6 @@ lead: Odyssey takes care to provide additional style to the following HTML eleme
 
 <Description>
 
-<<<<<<< HEAD
-
-## abbr <a name="abbr"></a>
-=======
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 > The HTML `<abbr>` element represents an abbreviation or acronym; the optional title attribute can provide an expansion or description for the abbreviation. If present, title must contain this full description and nothing else. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr'>MDN</a></cite>
 
 </Description>
@@ -31,12 +26,9 @@ lead: Odyssey takes care to provide additional style to the following HTML eleme
 </figure>
 
 ## address <a name="address"></a>
-<<<<<<< HEAD
-=======
 
 <Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 > The HTML `<address>` element indicates that the enclosed HTML provides contact information for a person or people, or for an organization. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address'>MDN</a></cite>
 
 </Description>
@@ -112,12 +104,9 @@ lead: Odyssey takes care to provide additional style to the following HTML eleme
 </figure>
 
 ## code <a name="code"></a>
-<<<<<<< HEAD
-=======
 
 <Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 > The HTML `<code>` element displays its contents styled in a fashion intended to indicate that the text is a short fragment of computer code. By default, the content text is displayed using the user agent's default monospace font. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code'>MDN</a></cite>
 
 </Description>
@@ -188,27 +177,19 @@ IE 11 incorrectly renders the `summary` element as "always open". Other than thi
 </figure>
 
 ## dfn <a name="dfn"></a>
-<<<<<<< HEAD
-=======
 
 <Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 > The HTML Definition element (`<dfn>)` is used to indicate the term being defined within the context of a definition phrase or sentence. The `<p>` element, the `<dt>`/`<dd>` pairing, or the `<section>` element which is the nearest ancestor of the `<dfn>` is considered to be the definition of the term.
 
 There are multiple, valid ways to use `<dfn>`. For the sake of usability, Odyssey recommends you follow one of two formats.
 
 For most terms, the content of `<dfn>` should be term you are defining:
 
-<<<<<<< HEAD
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-=======
 </Description>
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
     <p>A <dfn id="def-cruller">cruller</dfn> is a small, braided torpedo of fried dough.</p>
   </div>
 
@@ -217,12 +198,6 @@ For most terms, the content of `<dfn>` should be term you are defining:
 ```
 </figure>
 
-<<<<<<< HEAD
-If you're referencing an acronym or abbreviation, you may also combine it with `<abbr>`:
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-=======
 <Description>
 
 If you're referencing an acronym or abbreviation, you may also combine it with `<abbr>`:
@@ -231,7 +206,6 @@ If you're referencing an acronym or abbreviation, you may also combine it with `
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
     <p><dfn id="def-apf"><abbr title="All Purpose Flour">APF</abbr></dfn> is general-use, unbleached wheat flour.</p>
   </div>
 
@@ -240,20 +214,14 @@ If you're referencing an acronym or abbreviation, you may also combine it with `
 ```
 </figure>
 
-<<<<<<< HEAD
-=======
 <Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 In this example, the browser can correctly identify "All Purpose Flour" as the defined term, even though "APF" is the visible acronym.
 
 In both cases, utilizing the `id` attribute allows you to deep link to the definition, providing users with quick access.
 
-<<<<<<< HEAD
-=======
 </Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 ## dl <a name="dl"></a>
 
 <Description>
@@ -387,10 +355,6 @@ You can also nest `em` tags to provide an added level of emphasis. Doing so will
 
 <Description>
 
-<<<<<<< HEAD
-## hr <a name="hr"></a>
-=======
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 > The HTML `<hr>` element represents a thematic break between paragraph-level elements: for example, a change of scene in a story, or a shift of topic within a section. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr'>MDN</a></cite>
 
 </Description>
@@ -410,12 +374,9 @@ You can also nest `em` tags to provide an added level of emphasis. Doing so will
 </figure>
 
 ## ins <a name="ins"></a>
-<<<<<<< HEAD
-=======
 
 <Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 > The HTML `<ins>` element represents a range of text that has been added to a document. You can use the `<del>` element to similarly represent a range of text that has been deleted from the document. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins'>MDN</a></cite>
 
 ### Accessibility
@@ -447,12 +408,9 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 </figure>
 
 ## kbd <a name="kbd"></a>
-<<<<<<< HEAD
-=======
 
 <Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 > The HTML Keyboard Input element (`<kbd>`) represents a span of inline text denoting textual user input from a keyboard, voice input, or any other text entry device. By convention, the user agent defaults to rendering the contents of a `<kbd>` element using its default monospace font, although this is not mandated by the HTML standard. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd'>MDN</a></cite>
 
 <figure class="docs-example">
@@ -469,11 +427,8 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 
 When combined with <a href="#samp">`<samp>`</a>, the background of this element will swap to white for better contrast.
 
-<<<<<<< HEAD
-=======
 </Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 ## mark <a name="mark"></a>
 
 <Description>
@@ -531,12 +486,6 @@ Since the `pre` tag preserves all whitespace, it's best to begin and end your co
 </figure>
 
 ## q <a href="q"></a>
-<<<<<<< HEAD
-> The HTML `<q>` element indicates that the enclosed text is a short inline quotation. Most modern browsers implement this by surrounding the text in quotation marks. This element is intended for short quotations that don't require paragraph breaks; for long quotations use the `<blockquote>` element. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q">MDN</a></cite>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-=======
 
 <Description>
 
@@ -546,7 +495,6 @@ Since the `pre` tag preserves all whitespace, it's best to begin and end your co
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
     <p>While Marge was fighting the monorail, Homer wondered, <q cite="https://www.imdb.com/title/tt0701173/quotes/qt0245595">Donuts - is there anything they can't do?</q></p>
   </div>
 
@@ -557,22 +505,16 @@ Since the `pre` tag preserves all whitespace, it's best to begin and end your co
 
 ### Usage
 
-<<<<<<< HEAD
-=======
 <Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 Only use the `<q>` element when you're quoting a person or text. Don't use this element for sarcasm, scare quotes, or similar - simply use quotes as you "normally" would.
 
 ### Smart quotes
 
 Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quotes (“”). Instead, they rely on content authors to determine which type to use. Since we cannot ensure broad consistency, Odyssey does not apply smart quotes to `<q>`.
 
-<<<<<<< HEAD
-=======
 </Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 ## s <a name="s"></a>
 
 <Description>
@@ -594,12 +536,6 @@ Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quot
 </figure>
 
 ## samp <a name="samp"></a>
-<<<<<<< HEAD
-> The HTML Sample Element (`<samp>`) is used to enclose inline text which represents sample (or quoted) output from a computer program. Its contents are typically rendered using the browser's default monospaced font (such as Courier or Lucida Console). - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp">MDN</a></cite>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-=======
 
 <Description>
 
@@ -609,7 +545,6 @@ Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quot
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
     <p>When iDonut crashed, it told me <samp>Press <kbd>F5</kbd> to refresh bakery</samp>.</p>
   </div>
 
@@ -731,12 +666,9 @@ See <a href="#details">`details`</a> for example.
 </figure>
 
 ## var <a name="var"></a>
-<<<<<<< HEAD
-=======
 
 <Description>
 
->>>>>>> 58abccb... Bump node-fetch from 2.6.0 to 2.6.1
 > The HTML `<var>` element represents the name of a variable in a mathematical expression or a programming context. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var'>MDN</a></cite>
 
 </Description>
