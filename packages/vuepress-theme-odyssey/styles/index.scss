@@ -223,7 +223,6 @@ h6 {
   }
 }
 
-
 .sample--list {
   list-style-type: none;
 }
@@ -338,4 +337,9 @@ $spacing-units: (
     height: $value;
     background: $color-danger-light;
   }
+}
+
+.sample--tip {
+  display: inline-block;
+  margin: 0 $spacing-xs;
 }
