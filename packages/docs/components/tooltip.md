@@ -31,9 +31,7 @@ links:
 
 <Description>
 
-Tooltips activate when a cursor hovers over an element, or an element receives focus.
-
-Tooltips can be triggered both by the shared parent container or the paired sibling. If you are describing an element that can have focus, no more work is necessary.
+Tooltips activate when a cursor hovers over an element, or an element receives focus. They can be triggered both by a parent container or a paired sibling.
 
 Tooltips vanish when a user stops hovering or changes focus. To maintain parity with the browser's tooltip behavior, they will not disappear otherwise.
 
@@ -212,7 +210,7 @@ The content should be new information. Tooltips should not repeat copy from visi
 
 Tooltips should contain static content. Users don't expect, and are unlikely to notice, dynamic changes to Tooltip contents.
 
-<strong>Exception:</strong> Tooltips may contain dynamic content if two requirements are met:
+**Exception:** Tooltips may contain dynamic content if two requirements are met:
 
 * The tooltip is present at all times during the content change
 * The tooltip is reporting real-time change (e.g. "Copy" changes to "Copied!" on a click-to-copy button)
