@@ -25,19 +25,66 @@
   &.is-page-header-base,
   &.is-page-header-components,
   &.is-page-header-icon {
+    grid-template-columns: minmax(min-content, 50%) minmax(min-content, max-content);
     padding: $spacing-l;
     border-radius: 0 32px;
+
+    @include mq(l) {
+      grid-template-columns: minmax(min-content, 45%) minmax(min-content, max-content);
+    }
   }
 
   &.is-page-header-base {
-    background: var(--docs-accent-base-bg);
+    background: var(--docs-accent-base-bg) url("/images/index-base.png") no-repeat 80% bottom;
+
+    @include mq(m) {
+      background: var(--docs-accent-base-bg);
+
+      &::before {
+        content: '';
+        display: block;
+        width: 50px;
+        height: 116px;
+        margin-bottom: $spacing-s;
+        background-image: url("/images/index-base-m.svg");
+        background-size: contain;
+      }
+    }
   }
 
   &.is-page-header-components {
-    background: var(--docs-accent-component-bg);
+    background: var(--docs-accent-component-bg) url("/images/index-components.png") no-repeat 92% 40%;
+
+    @include mq(m) {
+      background: var(--docs-accent-component-bg);
+
+      &::before {
+        content: '';
+        display: block;
+        width: 90px;
+        height: 116px;
+        margin-bottom: $spacing-s;
+        background-image: url("/images/index-components-m.svg");
+        background-size: contain;
+      }
+    }
   }
 
   &.is-page-header-icon {
-    background: var(--docs-accent-icon-bg);
+    background: var(--docs-accent-icon-bg) url("/images/index-icons.png") no-repeat 92% bottom;
+
+    @include mq(m) {
+      background: var(--docs-accent-icon-bg);
+
+      &::before {
+        content: '';
+        display: block;
+        width: 90px;
+        height: 116px;
+        margin-bottom: $spacing-s;
+        background-image: url("/images/index-icons-m.svg");
+        background-size: contain;
+      }
+    }
   }
 }

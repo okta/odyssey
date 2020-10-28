@@ -17,7 +17,7 @@
     body::before {
       content: '';
       position: fixed;
-      z-index: 10; 
+      z-index: 10;
       width: 100vw;
       height: 100vh;
       background: rgba(cv('gray', '900'), 0.75);
