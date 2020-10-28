@@ -11,9 +11,6 @@ tabs:
     id: 'html-scss'
 links:
   - icon: github
-    label: Legacy docs
-    href: https://github.com/okta/odyssey/blob/master/packages/docs/components/toast.md
-  - icon: github
     label: View source
     href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_toast.scss
   - icon: figma
@@ -55,7 +52,7 @@ Each Toast is made up of up to four parts: Icon & Color, Title, Body, and a Dism
   <div class="ods-toast-pen is-sample-static">
     <OdsToast
       class="is-sample-animation-off"
-      title="Shuttle 16 has reached the hangar"
+      title="Shuttle Endeavour has reached the hangar"
       body="No further action is necessary at this time."
     />
   </div>
@@ -83,7 +80,7 @@ Use Info Toasts to surface neutral information to users.
 
 This is the default variant for this component.
 
-<button class="ods-button is-ods-button-secondary" v-on:click="addToast('info')">See it live</button>
+<button class="ods-button" v-on:click="addToast('info')">Launch Toast</button>
 
 </Description>
 
@@ -92,11 +89,11 @@ This is the default variant for this component.
   <div class="ods-toast-pen is-sample-static">
     <OdsToast
       class="is-sample-animation-off"
-      title="Shuttle 16 has reached the hangar"
+      title="Shuttle Endeavour has reached the hangar"
     />
     <OdsToast
       class="is-sample-animation-off"
-      title="Shuttle 16 has reached the hangar"
+      title="Shuttle Endeavour has reached the hangar"
       body="No further action is necessary at this time."
     />
   </div>
@@ -108,7 +105,7 @@ This is the default variant for this component.
 
 Use Success Toasts to inform users of successful or completed processes.
 
-<button class="ods-button is-ods-button-secondary" v-on:click="addToast('success')">See it live</button>
+<button class="ods-button" v-on:click="addToast('success')">Launch Toast</button>
 
 </Description>
 
@@ -136,7 +133,7 @@ Use Caution Toasts to inform users of tasks or processes that may need their att
 
 When using the Caution variant, ensure the user does not need more context than you can give in the space available.
 
-<button class="ods-button is-ods-button-secondary" v-on:click="addToast('caution')">See it live</button>
+<button class="ods-button" v-on:click="addToast('caution')">Launch Toast</button>
 
 </Description>
 
@@ -145,12 +142,12 @@ When using the Caution variant, ensure the user does not need more context than 
     <OdsToast
       class="is-sample-animation-off"
       variant="caution"
-      title="Thirty minutes to launch"
+      title="T-minus thirty minutes til launch"
     />
     <OdsToast
       class="is-sample-animation-off"
       variant="caution"
-      title="Thirty minutes to launch"
+      title="T-minus thirty minutes til launch"
       body="Please proceed to Mission Control."
     />
   </div>
@@ -166,7 +163,7 @@ When using a Danger Toast, be sure that the error is also logged elsewhere, so a
 
 Do not use Danger Toasts for in-page errors such as invalid form fields. Instead, use static messaging the user can refer to while addressing their error.
 
-<button class="ods-button is-ods-button-secondary" v-on:click="addToast('danger')">See it live</button>
+<button class="ods-button" v-on:click="addToast('danger')">Launch Toast</button>
 
 </Description>
 
