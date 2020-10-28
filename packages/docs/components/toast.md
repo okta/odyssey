@@ -2,8 +2,8 @@
 template: component
 id: component-toast
 title: Toast
-lead: Toasts are non-disruptive messaging UIs that appear at the bottom right of the interface to provide quick, at-a-glance feedback on the outcome of an action.
-description: TODO
+lead: Toasts are transient, non-disruptive messages that provide at-a-glance, asynchronous feedback or updates.
+description: Toasts are transient bits of messaging that provide quick, at-a-glance feedback.
 tabs:
   - label: 'Overview'
     id: 'overview'
@@ -27,7 +27,7 @@ links:
 
 <Description>
 
-<span class="is-fpo">Descriptive content around **toast anatomy** should go here.</span>
+Each Toast is made up of up to four parts: Icon & Color, Title, Body, and a Dismiss Button.
 
 </Description>
 
@@ -36,24 +36,17 @@ links:
 
 <OdsToastPen ref="toastBox"/>
 
-
-## <span class="is-fpo">Anatomy</span>
-
-<Description class="is-fpo">
-
-<span class="is-fpo is-fpo-negative">This section is closely related to the above. Sort out how to best handle detailed anatomy.</span>
-
-Each Toast is made of up to four components:
+<Description>
 
 <dl>
-  <dt>Icon &amp; color</dt>
-  <dd>These are mapped to the different variants of Toast and shouldn't be mixed. See below for more details.</dd>
-  <dt>Dismiss "X"</dt>
-  <dd>Included to ensure users are able to dismiss Toasts manually. Placement is handled automatically based on content.</dd>
+  <dt>Icon &amp; Color</dt>
+  <dd>These are mapped to the different variants of Toast and shouldn't be mixed.</dd>
   <dt>Title</dt>
   <dd>Provides quick context; one line max</dd>
   <dt>Body (Optional)</dt>
   <dd>Supplemental information. Be concise - less than three lines of content - as your Toast will soon vanish!</dd>
+  <dt>Dismiss "X"</dt>
+  <dd>Included to ensure users are able to dismiss Toasts manually. Placement is handled automatically based on content.</dd>
 </dl>
 
 </Description>
@@ -62,8 +55,8 @@ Each Toast is made of up to four components:
   <div class="ods-toast-pen is-sample-static">
     <OdsToast
       class="is-sample-animation-off"
-      title="This is an info toast"
-      body="This is the default variant. It provides the user with neutral information."
+      title="Shuttle 16 has reached the hangar"
+      body="No further action is necessary at this time."
     />
   </div>
 </Visual>
@@ -72,29 +65,23 @@ Each Toast is made of up to four components:
 
 <Description>
 
-Toasts may be triggered by many different kinds of events, but they are always transient (self-dismissing). With this in mind, Toasts should not include any interactive or long-form content.
+Toasts may be triggered by different types of events, but they are always transient. With this in mind, Toasts should not include any interactive or long-form content.
 
-The Toast pen, `.ods-toast-pen`, will take care of positioning and layout automatically. Toasts will appear in the bottom-right corner of the viewport in the topmost content layer. 
+The Toast pen will take care of positioning and layout automatically. Toasts will appear in the bottom-right corner above all other content.
 
-If multiple Toasts are triggered at once, they will stack in order of appearance. In addition, when multiple Toasts are present, they will resize to match the largest Toast onscreen, ensuring visual consistency.
+If multiple Toasts are triggered in a short time, they will stack in order of appearance. For visual consistency, Toasts will resize to match the largest Toast visible.
 
 </Description>
 
 ## Variants
 
-<Description>
-
-<span class="is-fpo">Descriptive content around **toast variants** should go here.</span>
-
-</Description>
-
 ### Info
 
 <Description>
 
-Info Toasts should be used to surface neutral information to users. 
+Use Info Toasts to surface neutral information to users.
 
-This is the fallback variant for this component.
+This is the default variant for this component.
 
 <button class="ods-button is-ods-button-secondary" v-on:click="addToast('info')">See it live</button>
 
@@ -105,12 +92,12 @@ This is the fallback variant for this component.
   <div class="ods-toast-pen is-sample-static">
     <OdsToast
       class="is-sample-animation-off"
-      title="This is an info toast"
+      title="Shuttle 16 has reached the hangar"
     />
     <OdsToast
       class="is-sample-animation-off"
-      title="This is an info toast"
-      body="This is the default variant. It provides the user with neutral information."
+      title="Shuttle 16 has reached the hangar"
+      body="No further action is necessary at this time."
     />
   </div>
 </Visual>
@@ -119,7 +106,7 @@ This is the fallback variant for this component.
 
 <Description>
 
-Success Toasts should be used to inform users of successful or completed processes.
+Use Success Toasts to inform users of successful or completed processes.
 
 <button class="ods-button is-ods-button-secondary" v-on:click="addToast('success')">See it live</button>
 
@@ -130,13 +117,13 @@ Success Toasts should be used to inform users of successful or completed process
     <OdsToast
       class="is-sample-animation-off"
       variant="success"
-      title="This is a success toast"
+      title="The lander has successfully docked"
     />
     <OdsToast
       class="is-sample-animation-off"
       variant="success"
-      title="This is a success toast"
-      body="It informs the user of an async success state."
+      title="The lander has successfully docked"
+      body="Operation was completed at 18:01 PST."
     />
   </div>
 </Visual>
@@ -145,9 +132,9 @@ Success Toasts should be used to inform users of successful or completed process
 
 <Description>
 
-Caution Toasts should be used to inform users of tasks or processes that may require their attention.
+Use Caution Toasts to inform users of tasks or processes that may need their attention.
 
-When using a Caution Toast, be sure the user does not require more context or guidance than you can comfortable give.
+When using the Caution variant, ensure the user does not need more context than you can give in the space available.
 
 <button class="ods-button is-ods-button-secondary" v-on:click="addToast('caution')">See it live</button>
 
@@ -158,13 +145,13 @@ When using a Caution Toast, be sure the user does not require more context or gu
     <OdsToast
       class="is-sample-animation-off"
       variant="caution"
-      title="This is a caution toast"
+      title="Thirty minutes to launch"
     />
     <OdsToast
       class="is-sample-animation-off"
       variant="caution"
-      title="This is a caution toast"
-      body="It informs the user about a crucial decision-point."
+      title="Thirty minutes to launch"
+      body="Please proceed to Mission Control."
     />
   </div>
 </Visual>
@@ -173,7 +160,7 @@ When using a Caution Toast, be sure the user does not require more context or gu
 
 <Description>
 
-Danger Toasts should be used to inform users that an error has occurred.
+Use Danger Toasts to inform users that an error has occurred.
 
 When using a Danger Toast, be sure that the error is also logged elsewhere, so a user can refer to it later.
 
@@ -188,13 +175,13 @@ Do not use Danger Toasts for in-page errors such as invalid form fields. Instead
     <OdsToast
       class="is-sample-animation-off"
       variant="danger"
-      title="This is a danger toast"
+      title="Primary ignition cell is disconnected"
     />
     <OdsToast
       class="is-sample-animation-off"
       variant="danger"
-      title="This is a danger toast"
-      body="It warns the user about an async, or other error."
+      title="Primary ignition cell is disconnected"
+      body="Shuttle is inoperable until repaired."
     />
   </div>
 </Visual>
