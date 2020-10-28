@@ -2,8 +2,8 @@
 template: component
 id: component-tooltip
 title: Tooltip
-description: TODO
-lead: A contextual pop-up that provides a label for or description of an element.
+description: A contextual pop-up that provides a label for or description of an element.
+lead: A transient element that provides additional context for an element when it receives hover or focus.
 tabs:
   - label: 'Overview'
     id: 'overview'
@@ -25,44 +25,54 @@ links:
 
 ## Anatomy
 
+<Anatomy img="/images/anatomy-tooltip.svg" />
+
+## Behavior
+
 <Description>
 
-<span class="is-fpo">Descriptive content around **tooltip anatomy** should go here.</span>
+Tooltips activate when a cursor hovers over an element, or an element receives focus.
+
+Tooltips can be triggered both by the shared parent container or the paired sibling. If you are describing an element that can have focus, no more work is necessary.
+
+Tooltips vanish when a user stops hovering or changes focus. To maintain parity with the browser's tooltip behavior, they will not disappear otherwise.
+
+The cursor displayed when hovering UI is determined by the element, not the Tooltip.
 
 </Description>
 
-<Anatomy img="/images/anatomy-tooltip.svg" />
+<Visual>
+  <p>
+    Be sure to check the
+    <span class="has-ods-tooltip">
+      <abbr tabindex="0" aria-describedby="aocs-tip">AOCS</abbr>
+      <span id="aocs-tip" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+        Attitude and Orbit Control System
+      </span>
+    </span>
+    before liftoff.
+  </p>
+</Visual>
 
 ## Usage
 
 <Description>
 
-Tooltips should be employed to help users understand unknown or unfamiliar objects or states that aren't described by the visible UI.
+Use Tooltips to help users understand unfamiliar objects or states that aren’t described by the visible UI.
 
-Good tooltips provide info only when needed, require minimal user effort to trigger, are easily discoverable, and reduce screen clutter.
+Well-placed tooltips provide info when needed and need minimal user effort to trigger.
 
 </Description>
 
-<Visual>
-  <template>
-    <span class="has-ods-tooltip sample--tip">
-      <a href=""></a>
-      <aside id="download-description" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
-        Downloads are disabled during an import.
-      </aside>
-    </span>
-  </template>
-</Visual>
-
 ### Use When
 
-#### A control doesn't have a text label
+#### No text label is present
 
 <Description>
 
-Tooltips should be employed for all controls that rely solely on iconography for communicating meaning.
+Use Tooltips with all controls that rely solely on iconography for communicating meaning.
 
-This is especially important for distinguishing between visually or contextually similar elements, or when employing rarely-used features or features with variant interpretations.
+This is especially important to distinguish between visually or contextually similar UI. Tooltips are also helpful with rarely-used features or features with variant interpretations.
 
 Our <a href="/components/button/">Button</a> component offers more guidance if needed.
 
@@ -92,27 +102,14 @@ This may be the case for disabled controls or inline content like abbreviations.
 <Visual variant="positive">
   <template>
     <span class="has-ods-tooltip sample--tip">
-      <button class="ods-button" aria-describedby="download-description" disabled>
-        Download
+      <button class="ods-button" aria-describedby="launch-description" disabled>
+        Launch
       </button>
-      <aside id="download-description" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
-        Downloads are disabled during an import.
+      <aside id="launch-description" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
+        Unable to launch before countdown completes.
       </aside>
     </span>
   </template>
-</Visual>
-
-<Visual variant="positive">
-  <p>
-    The reintroduction of
-    <span class="has-ods-tooltip">
-      <abbr tabindex="0" aria-describedby="pups-tip">PUPS</abbr>
-      <span id="pups-tip" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
-        Puppy Uniform Protection and Safety Act
-      </span>
-    </span>
-    helps keep our furry friends safe.
-  </p>
 </Visual>
 
 ### Don't use
@@ -121,17 +118,17 @@ This may be the case for disabled controls or inline content like abbreviations.
 
 <Description>
 
-Tooltips are transient by design, which makes them a bad candidate for interactive content. Do not include links, buttons, or other controls within a tooltip.
+Tooltips are transient by design, which makes them a bad candidate for interactive content. Do not include links, buttons, or other controls within a Tooltip.
 
 </Description>
 
 <Visual variant="negative">
   <span class="has-ods-tooltip sample--tip">
     <button class="ods-button" aria-describedby="download-description-link" disabled>
-      Download
+      Launch
     </button>
     <aside id="download-description-link" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
-      Find out why by <a href="#">visiting the docs</a>.
+      Enable launch by <a href="#">initiating the countdown</a>.
     </aside>
   </span>
 </Visual>
@@ -140,58 +137,31 @@ Tooltips are transient by design, which makes them a bad candidate for interacti
 
 <Description>
 
-Tooltips are intended to provide short, clear descriptions. If your content requires rich formatting or imagery, users may have difficulty parsing them in this form factor.
+Tooltips should provide simple, textual descriptions. If your content requires formatting or imagery, users may have difficulty parsing them.
 
 </Description>
 
 <Visual variant="negative">
   <span class="has-ods-tooltip sample--tip">
     <button class="ods-button" aria-describedby="download-description-image" disabled>
-      Download
+      Launch
     </button>
-    <aside id="download-description-image" class="ods-tooltip is-ods-tooltip-top" role="tooltip" style="width: 150px;">
-      <img src="https://media.tenor.com/images/7ad30bad07a80b195d13a7119014207e/tenor.gif" alt="An animated gif of an animated gif of Newman wagging his finger." style="width: 150px;">
+    <aside id="download-description-image" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+      There is <del data-a11y-start=" [deletion start] "  data-a11y-end=" [deletion end] ">nothing</del> <ins data-a11y-start=" [insertion start] "  data-a11y-end=" [insertion end] ">a serious issue</ins> preventing the launch.
     </aside>
   </span>
 </Visual>
 
-## Content
-
-### Succinct
+### Positioning Tooltips
 
 <Description>
 
-Tooltips should contain short, descriptive text. A single sentence or even a sentence fragment is ideal.
+When positioning a Tooltip, ensure:
 
-The content should be new information. Tooltips should not repeat copy from visible UI.
-
-</Description>
-
-### Static
-
-<Description>
-
-Tooltips should contain static content. Users don't expect, and are unlikely to notice, dynamic changes to tooltip contents.
-
-<strong>Exception:</strong> Tooltips may contain dynamic content if:
-
-* The tooltip is present at all times during the content change <em>and</em>...
-* The tooltip is reporting real-time change (e.g. "Copy" changes to "Copied!" on a click-to-copy button)
-
-</Description>
-
-## Position
-
-<Description>
-
-When positioning a tooltip, ensure:
-
-* The tooltip is paired with the element being described.
-* You anticipate responsive web design concerns.
+* The Tooltip is paired with the element being described.
+* You plan for responsive web design concerns.
 * Placement doesn't interfere with the object of interest or relevant information.
-* The tooltip is always visible when activated, not cropped or off-page.
-
-The following positional classes are available:
+* The Tooltip is always visible when activated, not cropped or off-page.
 
 </Description>
 
@@ -224,56 +194,38 @@ The following positional classes are available:
   </div>
 </Visual>
 
-## Behavior
+## Content
+
+### Succinct
 
 <Description>
 
-Tooltips activate on `:hover` or `:focus`.
+Tooltips should contain short, descriptive text. A single sentence or even a sentence fragment is ideal.
 
-In the case of `:hover` or `:focus`, tooltips support being triggered both by the shared parent container (`.has-ods-tip`) or the paired sibling. If you are describing an element that already supports the `:focus` state, no additional work is necessary.
-
-If you would like the tooltip to trigger via the parent container or a non-interactive element like `<abbr>` or a disabled `<button>`, include the `tabindex="0"` attribute on the parent or sibling:
-
-This will ensure that the tooltip is accessible via keyboard navigation or other assistive technology.
-
-Tooltips are hidden when losing `:hover` or `:focus`. In order to maintain parity with the browser's tooltip behavior, they will not disappear automatically.
-
-The cursor displayed when hovering a tooltipped item will be determined by the item itself, not the tip.
+The content should be new information. Tooltips should not repeat copy from visible UI.
 
 </Description>
 
-<Visual>
-  <p>
-    The reintroduction of
-    <span class="has-ods-tooltip">
-      <abbr tabindex="0" aria-describedby="pups-tip">PUPS</abbr>
-      <span id="pups-tip" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
-        Puppy Uniform Protection and Safety Act
-      </span>
-    </span>
-    helps keep our furry friends safe.
-  </p>
-</Visual>
-
-## Responsive considerations
+### Static
 
 <Description>
 
-With few exceptions, `:focus` and `:hover` interactions are typically unavailable on touchscreen devices, or trigger `:active` at the same time. (Android's <a href="https://material.io/design/interaction/gestures.html#types-of-gestures">long press action gesture</a> is one such exception.) This means tooltips on controls may be completely invisible for users of these devices.
+Tooltips should contain static content. Users don't expect, and are unlikely to notice, dynamic changes to Tooltip contents.
 
-Because no single touchscreen solution satisfies all tooltip usage types, consider fallback alternatives on a case-by-case basis.
+<strong>Exception:</strong> Tooltips may contain dynamic content if two requirements are met:
 
-When possible, provide inline text that becomes visible on touchscreen devices. Otherwise, a fixed-position fallback has been provided for mobile devices. Your mileage may vary.
+* The tooltip is present at all times during the content change
+* The tooltip is reporting real-time change (e.g. "Copy" changes to "Copied!" on a click-to-copy button)
 
 </Description>
 
 ## Accessibility
 
+### Animation
+
 <Description>
 
-Tooltip use cases may require slightly different markup. In both cases below, the tooltip itself should utilize the `role='tooltip'` attribute to distinguish it from other popups.
-
-Per <a href="https://www.w3.org/TR/wai-aria-1.1/#tooltip">ARIA guidelines</a>, our tooltips triggered by :hover and :focus employ a short delay (1s) before animating.
+Per <a href="https://www.w3.org/TR/wai-aria-1.1/#tooltip">ARIA guidelines</a>, our tooltips triggered by hovering or focusing UI and employ a short delay before animating.
 
 </Description>
 
@@ -281,9 +233,9 @@ Per <a href="https://www.w3.org/TR/wai-aria-1.1/#tooltip">ARIA guidelines</a>, o
 
 <Description>
 
-When using tooltips as a label, use the `aria-labelledby` attribute to create an association between the button and tooltip. 
+When using tooltips as a label, assistive technologies will treat the Tooltip content as a name.
 
-Assistive technologies will read the following as "Edit".
+Assistive technologies will read out this example as "Edit".
 
 </Description>
 
@@ -298,28 +250,17 @@ Assistive technologies will read the following as "Edit".
   </span>
 </Visual>
 
-### Tooltip as a description
+## Responsive considerations
 
 <Description>
 
-When using tooltips to provide additional information, you'll need multiple attributes. 
+Focusing and hovering are typically unavailable on touchscreen devices. Some devices may also trigger a "click" at the same time. For this reason, Tooltips may be completely invisible for users of these devices.
 
-First, make sure the element itself has an accessible label. In the example below, we utilize the `aria-label` attribute to ensure the button is labeled. Next, use `aria-describedby` to create an association with the tooltip for additional context.
+Consider fallback alternatives on a case-by-case basis.
 
-Assistive technologies will read the following as "Edit. View and manage this profile."
+When possible, provide inline text that becomes visible on touchscreen devices. Otherwise, a fixed-position fallback is provided for mobile devices.
 
 </Description>
-
-<Visual>
-  <span class="has-ods-tooltip">
-    <button class="ods-button" aria-label="Edit" aria-describedby="edit-description">
-      <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.8008 2.78969L11.2103 1.19923C10.9447 0.933589 10.5121 0.933589 10.2465 1.19923L9 2.44572L11.5543 5L12.8007 3.75351C13.0664 3.48787 13.0664 3.05533 12.8008 2.78969ZM3.5 13L10.5 6L8 3.5L1 10.5V13L3.5 13Z" fill="currentColor"/></svg>
-    </button>
-    <aside id="edit-description" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
-      View and manage this profile.
-    </aside>
-  </span>
-</Visual>
 
 :::
 
