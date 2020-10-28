@@ -7,7 +7,8 @@
     font-size: ms(0);
   }
 
-  .docskit-visual--wide {
+  &.docskit-visual--wide {
+    grid-column: 1 / 3;
     width: 100%;
   }
 
@@ -36,7 +37,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: $spacing-l 0;
+    padding: $spacing-l;
     border: 1px solid $border-color-display;
     border-radius: $base-border-radius;
   }

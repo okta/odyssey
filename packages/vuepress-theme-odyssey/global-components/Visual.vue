@@ -2,6 +2,7 @@
   <div
     :class="{
       'docskit-visual': true,
+      'docskit-visual--wide': wide,
       [`is-docskit-visual-${variant}`]: variant
     }"
   >
@@ -25,6 +26,11 @@ export default {
       type: String,
       required: false,
       default: null
+    },
+    wide: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   }
 };
