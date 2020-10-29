@@ -62,7 +62,7 @@ Well-placed tooltips provide info when needed and need minimal user effort to tr
 
 </Description>
 
-### Use When
+### Use when...
 
 #### No text label is present
 
@@ -110,9 +110,9 @@ This may be the case for disabled controls or inline content like abbreviations.
   </template>
 </Visual>
 
-### Don't use
+### Don't use when...
 
-#### When users need to interact with the content
+#### Users need to interact with the content
 
 <Description>
 
@@ -131,7 +131,7 @@ Tooltips are transient by design, which makes them a bad candidate for interacti
   </span>
 </Visual>
 
-#### If rich content or imagery is required
+#### Rich content or imagery is required
 
 <Description>
 
