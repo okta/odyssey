@@ -36,8 +36,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    padding: $spacing-l;
+    padding: $spacing-l $spacing-l;
     border: 1px solid var(--border-color-display, #{$border-color-display});
     border-radius: $base-border-radius;
   }

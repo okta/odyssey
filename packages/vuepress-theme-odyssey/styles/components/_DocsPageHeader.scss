@@ -53,10 +53,10 @@
   }
 
   &.is-page-header-components {
-    background: var(--docs-accent-component-bg, #{cv('turquoise', '500')}) url("/images/index-components.png") no-repeat 92% 40%;
+    background: var(--docs-accent-component-bg, #{cv('turquoise', '400')}) url("/images/index-components.png") no-repeat 92% 40%;
 
     @include mq(m) {
-      background: var(--docs-accent-component-bg, #{cv('turquoise', '500')});
+      background: var(--docs-accent-component-bg, #{cv('turquoise', '400')});
 
       &::before {
         content: '';

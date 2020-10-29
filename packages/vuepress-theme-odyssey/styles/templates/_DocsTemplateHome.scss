@@ -9,9 +9,9 @@
 
   .docs-hero--content {
     z-index: 1;
+    grid-column: 3 / 5;
     margin-right: $spacing-m;
 
-    grid-column: 3 / 5;
     .docs-hero--title { font-size: ms(7); }
     .docs-hero--desc { font-size: ms(2); }
 
@@ -32,7 +32,6 @@
     top: -$spacing-l;
     left: -$spacing-l;
     max-width: 840px;
-    transform: rotate(30deg);
 
     circle {
       fill: var(--docs-home-hero-moon, #{cv('gray', '000')});
