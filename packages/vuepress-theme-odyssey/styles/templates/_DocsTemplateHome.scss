@@ -1,22 +1,27 @@
 .docs-hero {
   display: grid;
   position: relative;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: end;
-  height: 600px;
+  height: 500px;
 
   @include mq(m) { height: 440px; }
 
   .docs-hero--content {
     z-index: 1;
-    max-width: 456px;
-    margin-top: ms(13);
+    margin-right: $spacing-m;
 
+    grid-column: 3 / 5;
     .docs-hero--title { font-size: ms(7); }
     .docs-hero--desc { font-size: ms(2); }
 
+    @include mq(l) {
+      margin: 0;
+    }
+
     @include mq(m) { 
       margin-top: $spacing-m;
-
+      grid-column: 2 / 5;
       .docs-hero--title { font-size: $size-title-1; }
     }
 
@@ -24,7 +29,7 @@
 
   .home-hero-moon {
     position: absolute;
-    top: -50px;
+    top: -$spacing-l;
     left: -$spacing-l;
     max-width: 840px;
     transform: rotate(30deg);
@@ -36,8 +41,8 @@
 
   .home-hero-rocket {
     position: absolute;
-    top: $spacing-m;
-    left: 0;
+    top: 0;
+    right: -$spacing-m;
 
     @include mq(m) { top: 0; }
 
