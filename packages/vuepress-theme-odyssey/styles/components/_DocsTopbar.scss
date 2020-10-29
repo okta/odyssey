@@ -4,8 +4,8 @@
   z-index: 9;
   width: 100vw;
   padding: $spacing-xs $spacing-m;
-  border-bottom: 1px solid $border-color-display;
-  background: var(--docs-sidebar-bg);
+  border-bottom: 1px solid var(--border-color-display, #{$border-color-display});
+  background: var(--docs-sidebar-bg, #{$white});
 
   @include mq(l) {
     display: flex;

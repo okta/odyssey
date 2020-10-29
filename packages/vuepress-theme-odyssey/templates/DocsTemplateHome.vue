@@ -1,13 +1,15 @@
 <template>
   <article class="docs-main--home">
     <!-- TODO: Componentize "Hero" (large layout) -->
-    <header class="docs-hero docs-hero--layout-l">
+    <header class="docs-hero">
       <div class="docs-hero--content">
-        <h1>{{ $page.frontmatter.headline }}</h1>
-        <p>{{ $page.frontmatter.lead }}</p>
+        <h1 class="docs-hero--title">{{ $page.frontmatter.headline }}</h1>
+        <p  class="docs-hero--desc">{{ $page.frontmatter.lead }}</p>
       </div>
+      <div v-html="require(`!html-loader!../../docs/.vuepress/public/images/home-hero-moon.svg`)"></div>
+      <div v-html="require(`!html-loader!../../docs/.vuepress/public/images/home-hero-rocket.svg`)"></div>
     </header>
-
+  
     <DocsCardGroup tag="ul">
       <DocsCard
         v-for="(section, index) in $page.frontmatter.contentPrimary"
@@ -75,11 +77,13 @@
         v-for="(section, index) in $page.frontmatter.contentSecondary"
         :key="index"
         tag="li"
-        variant="shadow"
+        variant="transparent"
       >
         <h3>{{ section.title }}</h3>
         <p>{{ section.description }}</p>
-        <DocsLink :href="section.href">{{ section.label }}</DocsLink>
+        <template slot="footer">
+          <DocsLink :href="section.href">{{ section.label }}</DocsLink>
+        </template>
       </DocsCard>
     </DocsCardGroup>
   </article>

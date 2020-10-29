@@ -29,7 +29,7 @@ export default {
     variant: {
       type: String,
       default: "default",
-      validator: value => ["default", "shadow"].includes(value)
+      validator: value => ["default", "shadow", "transparent"].includes(value)
     }
   },
   computed: {

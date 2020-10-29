@@ -1,15 +1,54 @@
-// TODO: This is used to display/fill a large graphic
-// or space and should be moved in to its own component
-
 .docs-hero {
-  margin-bottom: $spacing-l;
-  padding: $spacing-m;
-  border-radius: 0 32px;
-  background-color: var(--docs-card-bg);
+  display: grid;
+  position: relative;
+  justify-content: end;
+  height: 600px;
+
+  @include mq(m) { height: 440px; }
+
+  .docs-hero--content {
+    z-index: 1;
+    max-width: 456px;
+    margin-top: ms(13);
+
+    .docs-hero--title { font-size: ms(7); }
+    .docs-hero--desc { font-size: ms(2); }
+
+    @include mq(m) { 
+      margin-top: $spacing-m;
+
+      .docs-hero--title { font-size: $size-title-1; }
+    }
+
+  }
+
+  .home-hero-moon {
+    position: absolute;
+    top: -50px;
+    left: -$spacing-l;
+    max-width: 840px;
+    transform: rotate(30deg);
+
+    circle {
+      fill: var(--docs-home-hero-moon, #{cv('gray', '000')});
+    }
+  }
+
+  .home-hero-rocket {
+    position: absolute;
+    top: $spacing-m;
+    left: 0;
+
+    @include mq(m) { top: 0; }
+
+    .home-hero-rocket--rocket {
+      fill: var(--docs-home-hero-rocket, #{cv('gray', '900')});
+    }
+  }
 }
 
 // TODO: This is used to display a large statement or principle
-// and should be moved in to its own component if we find a need 
+// and should be moved in to its own component if we find a need
 // for it in more than once place
 
 .docs-principle {

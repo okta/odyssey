@@ -55,7 +55,7 @@
   }
 
   .is-docs-nav-link--active {
-    background: var(--docs-nav-selected-bg);
+    background: var(--docs-nav-selected-bg, cv('gray', '000'));
   }
 }
 

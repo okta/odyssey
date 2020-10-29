@@ -68,7 +68,7 @@
     height: 100vh;
     max-height: 100vh;
     padding: $spacing-l;
-    background: var(--docs-sidebar-bg);
+    background: var(--docs-sidebar-bg, #{$white});
   }
 
   .docs-sidebar--header {
@@ -83,7 +83,7 @@
     overflow: scroll;
 
     &.is-overflowing {
-      border-bottom: 1px solid $border-color-display;
+      border-bottom: 1px solid var(--border-color-display, #{$border-color-display});
     }
   }
 

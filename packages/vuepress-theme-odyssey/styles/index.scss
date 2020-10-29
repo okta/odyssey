@@ -20,16 +20,16 @@
 @import 'docskit/Description';
 
 html {
-  @include set-theme($theme-day);  // Set base theme
+  @include set-theme($theme-default);
 
-  background: var(--docs-page-bg);
+  background: var(--docs-page-bg, #{$white});
   color: var(--docs-text-body, #{$text-body});
   font-family: $body-font-family;
 
   // Theme: Night Mode
-  // @media (prefers-color-scheme: dark) {
-  //   @include set-theme($theme-night);
-  // }
+  @media (prefers-color-scheme: dark) {
+    @include set-theme($theme-night);
+  }
 }
 
 a,
@@ -97,7 +97,7 @@ h6 {
     margin-left: -$spacing-m;
     transition: 0.33s opacity  ease-in-out;
     opacity: 0;
-    background-image: get-icon('anchor', $border-color-ui);
+    background-image: get-icon('anchor', var(--border-color-io, #{$border-color-ui}));
     background-repeat: no-repeat;
     background-size: contain;
     text-indent: -9999em;

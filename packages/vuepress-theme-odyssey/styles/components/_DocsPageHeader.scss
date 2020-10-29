@@ -35,10 +35,10 @@
   }
 
   &.is-page-header-base {
-    background: var(--docs-accent-base-bg) url("/images/index-base.png") no-repeat 80% bottom;
+    background: var(--docs-accent-base-bg, #{cv('yellow', '500')}) url("/images/index-base.png") no-repeat 80% bottom;
 
     @include mq(m) {
-      background: var(--docs-accent-base-bg);
+      background: var(--docs-accent-base-bg, #{cv('yellow', '500')});
 
       &::before {
         content: '';
@@ -53,10 +53,10 @@
   }
 
   &.is-page-header-components {
-    background: var(--docs-accent-component-bg) url("/images/index-components.png") no-repeat 92% 40%;
+    background: var(--docs-accent-component-bg, #{cv('turquoise', '500')}) url("/images/index-components.png") no-repeat 92% 40%;
 
     @include mq(m) {
-      background: var(--docs-accent-component-bg);
+      background: var(--docs-accent-component-bg, #{cv('turquoise', '500')});
 
       &::before {
         content: '';
@@ -71,10 +71,10 @@
   }
 
   &.is-page-header-icon {
-    background: var(--docs-accent-icon-bg) url("/images/index-icons.png") no-repeat 92% bottom;
+    background: var(--docs-accent-icon-bg, #{cv('orange', '500')}) url("/images/index-icons.png") no-repeat 92% bottom;
 
     @include mq(m) {
-      background: var(--docs-accent-icon-bg);
+      background: var(--docs-accent-icon-bg, #{cv('orange', '500')});
 
       &::before {
         content: '';
