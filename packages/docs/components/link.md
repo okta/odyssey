@@ -3,7 +3,7 @@ template: component
 id: component-link
 title: Link
 description: Links are navigation elements displayed as text.
-lead: Links are navigation elements displayed as text. A link can be used to bring a user to another page or initiate a download.
+lead: Links are navigation elements displayed as text. Use a Link to bring a user to another page or start a download.
 tabs:
   - label: 'Overview'
     id: 'overview'
@@ -30,12 +30,12 @@ links:
 
 <Description>
 
-An external link opens in a separate tab and can be identified by the <span class="sample--external-link-icon" aria-label="External link icon"></span> icon appended to the link.
+External links open in a separate tab and are identified by the <span class="sample--external-link-icon" aria-label="External link icon"></span> icon appended to the link.
 
 Use an external link when:
 
-- The destination of the link aids in the completion of a task on the current tab (e.g. additional information such as help documentation)
-- Opening the link in the current tab would result in a significant loss of data or interruption of flow (e.g. while filling out a long form)
+- The destination of the link aids in the completion of a task on the current tab (e.g. help documentation)
+- Opening the link in the current tab would result in loss of data or task interruption (e.g. completing a long form)
 
 </Description>
 
@@ -49,7 +49,7 @@ Use an external link when:
 
 ### Visited Links
 
-Odyssey disables special styling for visited links. This is an intentional compromise that preferences user security and ease of maintenance over the `:visited` affordance.
+Odyssey disables special styling for visited links. This is an  intentional compromise that preferences user security and ease of  maintenance.
 
 ## Usage
 
@@ -93,7 +93,9 @@ Keep in mind that all users may not have the same visual context due to their de
 
 <Description>
 
-Icons may be included in standalone links, but are not supported within paragraph content or longer copy. Icon layout is automatic, based on language direction.
+Icons may be included in standalone links. They are not supported within paragraph content or longer copy.
+
+Icon layout is automatic, based on language direction.
 
 </Description>
 
@@ -107,7 +109,9 @@ Icons may be included in standalone links, but are not supported within paragrap
 
 <Description>
 
-If a direct email link is required, display the whole address (e.g. lauren.ipsum@okta.com). Avoid colloquial text that might obfuscate the associated email address (e.g., "Contact Us").
+If you need a direct email link, display the whole address (e.g. lauren.ipsum@okta.com).
+
+Avoid colloquial text that hides the associated email (e.g. "Contact Us").
 
 </Description>
 
@@ -121,7 +125,7 @@ If a direct email link is required, display the whole address (e.g. lauren.ipsum
 
 <Description>
 
-Links in Odyssey are not underlined, but do maintain a minimum 3:1 contrast ratio with our body text color and a 4.5:1 contrast ratio with our available background colors. If you deviate from these standards via overrides, please ensure that your links have a non-color indicator, e.g. an underline.
+Links in Odyssey are not underlined. They maintain a minimum 3:1 contrast ratio with our body text colors and a 4.5:1 ratio with our available background colors. If you  deviate from these standards via overrides, ensure that your links have a non-color indicator like an underline.
 
 Links should display a visible affordance when users interact via keyboard. Odyssey preserves the default `:focus` state for each browser.
 
