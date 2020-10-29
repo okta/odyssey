@@ -5,17 +5,17 @@ lead: Odyssey is Okta’s design system which consists of UI’s, guides, and re
 contentPrimary:
   - coin: base
     title: Base
-    description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
+    description: Odyssey Base consists of Color, Design Tokens, HTML Elements, Iconography, and Typography.
     label: See them
     href: /base/
   - coin: component
     title: Components
-    description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
+    description: Odyssey components consist of Base elements assembled together to make basic components.
     label: See them
     href: /components/
   - coin: icon
     title: Icons
-    description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
+    description: Odyssey Icons are graphics that represent an idea or concept, independent of any particular language, specific words, or phrases.
     label: See them
     href: /icons/
 principle:
