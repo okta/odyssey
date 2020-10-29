@@ -1,11 +1,12 @@
-.docs-site-title,
-.docs-site-title:visited {
+a.docs-site-title,
+a.docs-site-title:visited {
   display: block;
   padding: $spacing-xs $spacing-xs;
   color: var(--docs-text-heading, #{$text-heading});
   font-size: $size-title-4;
   font-weight: 600;
   text-decoration: none;
+  border: none;
 }
 
 @include mq(l) {
