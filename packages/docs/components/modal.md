@@ -60,7 +60,7 @@ How modals arrive on the screen is as important as the content they contain. Ani
 
 ### Dismissing
 
-Users may close modals by clicking on the "x" in the upper right hand corner of the container. They may also click anywhere outside of the container, within the "curtain".
+Users may close modals by clicking on the button in the upper right-hand corner of the container. They may also click anywhere outside of the container, within the "curtain".
 
 ### Autofocus
 
@@ -176,7 +176,7 @@ The modal components makes use of several ARIA attributes in order to give assis
 - `role="dialog"` - Until the `role` element is widely supported, this attribute indicates the semantic status of the modal to the browser. Please use `"alertdialog"` instead if your modal represents a dangerous action or error.
 - `aria-modal="true"` - This indicates that the rest of the workflow is stopped while this element is present.
 - `aria-labelledby="ods-modal--title-id"` - This attribute informs ATs which other element can be treated as the label for this dialog. Please use the unique `id` associated with the dialog's title.
-- `aria-label="Close"` - Please use this tag on any `button` that allows the user to exit the dialog. By default, this is included on the modal's exit "X".
+- `aria-label="Close"` - Please use this tag on any `button` that allows the user to exit the dialog. By default, this is included on the modal's exit button.
 
 </Description>
 :::
