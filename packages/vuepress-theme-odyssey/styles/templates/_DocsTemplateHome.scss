@@ -2,17 +2,16 @@
   display: grid;
   position: relative;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  justify-content: end;
-  height: 500px;
-
-  @include mq(m) { height: 440px; }
+  height: 360px;
+  margin-bottom: $spacing-l;
 
   .docs-hero--content {
     z-index: 1;
-    grid-column: 3 / 5;
+    grid-column: 1 / 3;
     margin-right: $spacing-m;
+    padding: $spacing-m $spacing-m;
 
-    .docs-hero--title { font-size: ms(7); }
+    .docs-hero--title { font-size: ms(6); }
     .docs-hero--desc { font-size: ms(2); }
 
     @include mq(l) {
@@ -20,17 +19,16 @@
     }
 
     @include mq(m) { 
+      grid-column: 1 / 4;
       margin-top: $spacing-m;
-      grid-column: 2 / 5;
       .docs-hero--title { font-size: $size-title-1; }
     }
-
   }
 
-  .home-hero-moon {
-    position: absolute;
-    top: -$spacing-l;
-    left: -$spacing-l;
+  .docs-hero-moon {
+    position: fixed;
+    right: -25%;
+    width: 100%;
     max-width: 840px;
 
     circle {
@@ -38,14 +36,23 @@
     }
   }
 
-  .home-hero-rocket {
+  .docs-hero-rocket {
     position: absolute;
     top: 0;
-    right: -$spacing-m;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    border-radius: 0 0 0 32px;
 
-    @include mq(m) { top: 0; }
+    svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: auto;
+    }
 
-    .home-hero-rocket--rocket {
+    .docs-hero-rocket--rocket {
       fill: var(--docs-home-hero-rocket, #{cv('gray', '900')});
     }
   }
@@ -56,8 +63,8 @@
 // for it in more than once place
 
 .docs-principle {
+  position: relative;
   margin: $spacing-xl 0;
-  border-radius: 0 32px;
 
   p {
     font-size: $size-title-1;

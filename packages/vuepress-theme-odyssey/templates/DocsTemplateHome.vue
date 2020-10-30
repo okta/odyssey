@@ -6,8 +6,8 @@
         <h1 class="docs-hero--title">{{ $page.frontmatter.headline }}</h1>
         <p  class="docs-hero--desc">{{ $page.frontmatter.lead }}</p>
       </div>
-      <div v-html="require(`!html-loader!../../docs/.vuepress/public/images/home-hero-moon.svg`)"></div>
-      <div v-html="require(`!html-loader!../../docs/.vuepress/public/images/home-hero-rocket.svg`)"></div>
+      <div class="docs-hero-moon" v-html="require(`!html-loader!../../docs/.vuepress/public/images/home-hero-moon.svg`)"></div>
+      <div class="docs-hero-rocket" v-html="require(`!html-loader!../../docs/.vuepress/public/images/home-hero-rocket.svg`)"></div>
     </header>
   
     <DocsCardGroup tag="ul">
