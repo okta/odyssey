@@ -34,12 +34,9 @@
           </p>
         </div>
         <template slot="footer">
-          <DocsLink :href="page.link"
-            >Learn more
-            <span class="u-visually-hidden"
-              >about {{ page.title }}</span
-            ></DocsLink
-          >
+          <DocsLink :href="page.link">
+            Learn more <span class="u-visually-hidden">about {{ page.title }}</span>
+          </DocsLink>
         </template>
       </DocsCard>
     </DocsCardGroup>
