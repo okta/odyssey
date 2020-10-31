@@ -47,7 +47,12 @@
   a, 
   a:visited {
     padding: 0 $spacing-s;
-    padding-left: $spacing-s;
+    padding-left: $spacing-m;
+  }
+
+  a:hover {
+    background: cv('blue', '000');
+    color: cv('blue', '900');
   }
 
   &.is-visible {
