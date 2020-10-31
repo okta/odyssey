@@ -24,50 +24,6 @@ links:
 
 <Anatomy img="/images/anatomy-modal.svg" />
 
-<Description>
-
-### Curtain
-
-Covers the main content to provide focus to the information served in the dialog.
-
-### Dialog
-
-The Modal itself; interactions are limited to this space.
-
-### Title
-
-Reinforces context from the in-page trigger while providing an overview of the modal.
-
-### Content area
-
-This is where the content of the modal dialog is held. Keep it simple; the need for Tabs or navigation is a warning sign.
-
-### Action bar
-
-Contains the primary action of the modal. All modals must have a primary CTA, and support secondary CTAs as well. Action labels should clarify the task users are being asked to complete.
-
-</Description>
-
-## Behavior
-
-<Description>
-
-Modals are inserted above the main content as a blocking mechanism to ask for user input or confirm an action. They disable all other contexts until the user interacts with the modal itself.
-
-### Arrival
-
-How modals arrive on the screen is as important as the content they contain. Animation does more than provide a pleasing experience. It contextualizes the new UI the user is being presented.
-
-### Dismissing
-
-Users may close modals by clicking on the button in the upper right-hand corner of the container. They may also click anywhere outside of the container, within the "curtain".
-
-### Autofocus
-
-Focus is placed on the first item a user can select, allowing them to immediately exit or submit the modal when possible. Focus is limited to the scope of the dialog while the modal is open.
-
-</Description>
-
 ## Usage
 
 <Description>
@@ -78,7 +34,7 @@ The default modal allows users to interact with and alter the experience it is c
 
 <Visual>
 
-  <button class="ods-button" data-micromodal-trigger="ods-modal-standard">Let me see it already!</button>
+  <button class="ods-button" data-micromodal-trigger="ods-modal-standard">Launch modal</button>
 
 </Visual>
 
@@ -108,13 +64,17 @@ The default modal allows users to interact with and alter the experience it is c
 
 ## Content guidelines
 
+<Description>
+
 Context is key. There needs to be a direct connection between the trigger (i.e. a button or link) and the modal that follows. Repeating the trigger's copy within the modal can help reinforce this connection. Providing a sense of connection between the trigger and modal is important to ensure a consistent user experience.
+
+</Description>
 
 ## Accessibility
 
-### Accessible behavior
-
 <Description>
+
+### Accessible behavior
 
 When a user opens a modal, interaction is limited to the new context. While this may seem expected, it can surprise users. This is heightened for users requiring assistive technologies.
 
