@@ -24,30 +24,6 @@ links:
 
 <Anatomy img="/images/anatomy-modal.svg" />
 
-<Description>
-
-### Curtain
-
-Covers the main content to provide focus to the information served in the dialog.
-
-### Dialog
-
-The Modal itself; interactions are limited to this space.
-
-### Title
-
-Reinforces context from the in-page trigger while providing an overview of the modal.
-
-### Content area
-
-This is where the content of the modal dialog is held. Keep it simple; the need for Tabs or navigation is a warning sign.
-
-### Action bar
-
-Contains the primary action of the modal. All modals must have a primary CTA, and support secondary CTAs as well. Action labels should clarify the task users are being asked to complete.
-
-</Description>
-
 ## Behavior
 
 <Description>
@@ -68,6 +44,13 @@ Focus is placed on the first item a user can select, allowing them to immediatel
 
 </Description>
 
+
+<Visual>
+
+  <button class="ods-button" data-micromodal-trigger="ods-modal-standard">Launch modal</button>
+
+</Visual>
+
 ## Usage
 
 <Description>
@@ -75,12 +58,6 @@ Focus is placed on the first item a user can select, allowing them to immediatel
 The default modal allows users to interact with and alter the experience it is currently interrupting. Modals interrupt a user’s experience. This may be bothersome, and modals should be used with discretion. If a modal is becoming complicated or claustrophobic, another solution may be needed.
 
 </Description>
-
-<Visual>
-
-  <button class="ods-button" data-micromodal-trigger="ods-modal-standard">Let me see it already!</button>
-
-</Visual>
 
 ### Use when...
 
@@ -108,7 +85,11 @@ The default modal allows users to interact with and alter the experience it is c
 
 ## Content guidelines
 
+<Description>
+
 Context is key. There needs to be a direct connection between the trigger (i.e. a button or link) and the modal that follows. Repeating the trigger's copy within the modal can help reinforce this connection. Providing a sense of connection between the trigger and modal is important to ensure a consistent user experience.
+
+</Description>
 
 ## Accessibility
 

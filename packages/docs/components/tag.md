@@ -76,7 +76,17 @@ Use Tags as descriptors paired with a particular object. These descriptors may b
           <td>
             Soyuz
             <ul class="ods-tag--list">
-                <li class="ods-tag">Roscosmos</li>
+                <li class="ods-tag">USSR</li>
+                <li class="ods-tag">3-person</li>
+            </ul>
+          </td>
+          <td class="is-ods-table-num">1966</td>
+        </tr>
+        <tr>
+          <td>
+            Saturn V
+            <ul class="ods-tag--list">
+                <li class="ods-tag">USA</li>
                 <li class="ods-tag">3-person</li>
             </ul>
           </td>
@@ -84,27 +94,13 @@ Use Tags as descriptors paired with a particular object. These descriptors may b
         </tr>
         <tr>
           <td>
-            Shenzhou
+            CZ-2F
             <ul class="ods-tag--list">
-                <li class="ods-tag">CNSA</li>
+                <li class="ods-tag">CN</li>
                 <li class="ods-tag">3-person</li>
             </ul>
           </td>
-          <td class="is-ods-table-num">
-            2003
-          </td>
-        </tr>
-        <tr>
-          <td>
-            SpaceShipTwo
-            <ul class="ods-tag--list">
-                <li class="ods-tag">Virgin Galactic</li>
-                <li class="ods-tag">8-person</li>
-            </ul>
-          </td>
-          <td class="is-ods-table-num">
-            2018
-          </td>
+          <td class="is-ods-table-num">1999</td>
         </tr>
       </tbody>
     </table>
