@@ -1,10 +1,5 @@
 name: preview
-on:
-  pull_request:
-    branches:
-      - master
-      - develop
-      - 'release/**'
+on: [push, pull_request]
 jobs:
   deployment:
     runs-on: ubuntu-latest

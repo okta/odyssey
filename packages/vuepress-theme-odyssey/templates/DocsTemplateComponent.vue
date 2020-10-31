@@ -1,0 +1,49 @@
+<template>
+  <article class="docs-main--content">
+    <DocsPageHeader
+      :title="$page.frontmatter.title"
+      :lead="$page.frontmatter.lead"
+    >
+      <template v-slot:right>
+        <ul v-if="$page.frontmatter.links" class="docs-page-header--links">
+          <li v-for="link in $page.frontmatter.links" :key="link.label">
+            <a :href="link.href">
+              <!-- eslint-disable -->
+              <span
+              aria-hidden
+              v-if="link.icon"
+              v-html="require(`!html-loader!../public/images/icon-${link.icon}.svg`)"
+              />
+              <!-- eslint-disable -->
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+      </template>
+    </DocsPageHeader>
+
+    <OdsTabs
+      id="tabs-doc-sections"
+      :label="$page.frontmatter.name + ' documentation sections'"
+      :active="$page.frontmatter.tabs[0].id"
+      :tablist="$page.frontmatter.tabs"
+    >
+      <template v-for="slot in $page.frontmatter.tabs" :slot="slot.id">
+        <Content :key="slot.id" :slot-key="slot.id" class="docskit-container" />
+      </template>
+    </OdsTabs>
+    <footer class="docs-doc-footer"> 
+      Need help? <a href="#">#odyssey</a>
+    </footer>
+  </article>
+</template>
+
+<script>
+export default {
+  name: "DocsTemplateComponent",
+  components: {
+    DocsPageHeader: () => import("../components/DocsPageHeader.vue"),
+    OdsTabs: () => import("../global-components/OdsTabs.vue")
+  }
+};
+</script>
