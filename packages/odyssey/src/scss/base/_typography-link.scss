@@ -39,3 +39,11 @@ a {
 
   /* stylelint-enable */
 }
+
+.ods-link--has-icon {
+  display: inline-grid;
+  grid-auto-columns: minmax(min-content, max-content);
+  grid-auto-flow: column;
+  grid-gap: $spacing-xs;
+  align-items: center;
+}

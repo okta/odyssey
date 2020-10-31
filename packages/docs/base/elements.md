@@ -297,7 +297,6 @@ You can also nest `em` tags to provide an added level of emphasis. Doing so will
 </figure>
 
 ## figure & figcaption <a name="figure"></a>
-
 <Description>
 
 > The HTML `<figure>` (Figure With Optional Caption) element represents self-contained content, potentially with an optional caption, which is specified using the (`<figcaption>`) element. The figure, its caption, and its contents are referenced as a single unit. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure'>MDN</a></cite>
@@ -456,6 +455,67 @@ When combined with <a href="#samp">`<samp>`</a>, the background of this element 
 </ul>
 ```
 </figure>
+
+## output <a name="output"></a>
+> The HTML Output element (`<output>`) is a container element into which a site or app can inject the results of a calculation or the outcome of a user action. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output'>MDN</a></cite>
+
+### Usage
+
+Odyssey does not currently provide styling for `<output>`, but using it correctly will help improve accessibility for your users.
+
+The most common use case is for diplaying computed values in a form:
+
+<figure class="nimatron--example">
+  <div class="nimatron--rendered">
+    <form oninput="outputTotal.value=parseInt(outputJD.value)+parseInt(outputOF.value)">
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="number" name="outputJD" id="outputJD" autocomplete="name" spellcheck="false" value="12" required>
+          <label class="ods-label" for="outputJD">Jelly Donuts (Amount)</label>
+        </div>
+      </fieldset>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <input class="ods-text-input" type="number" name="outputOF" id="outputOF" autocomplete="name" spellcheck="false" value="12" required>
+          <label class="ods-label" for="outputOF">Old Fashioned Donuts (Amount)</label>
+        </div>
+      </fieldset>
+      <fieldset class="ods-fieldset">
+        <div class="ods-fieldset-flex">
+          <label class="ods-label" for="outputTotal">Total Donuts</label>
+          <output aria-live="polite" id="outputTotal" name="outputTotal" for="outputJD outputoldfashioneds">24</output>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+```html
+<form oninput="outputTotal.value=parseInt(outputJD.value)+parseInt(outputOF.value)">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="number" name="outputJD" id="outputJD" autocomplete="name" spellcheck="false" value="12" required>
+      <label class="ods-label" for="outputJD">Jelly Donuts (Amount)</label>
+    </div>
+  </fieldset>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="number" name="outputOF" id="outputOF" autocomplete="name" spellcheck="false" value="12" required>
+      <label class="ods-label" for="outputOF">Old Fashioned Donuts (Amount)</label>
+    </div>
+  </fieldset>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <label class="ods-label" for="outputTotal">Total Donuts</label>
+      <output aria-live="polite" id="outputTotal" name="outputTotal" for="outputJD outputoldfashioneds">24</output>
+    </div>
+  </fieldset>
+</form>
+```
+</figure>
+
+### Accessibility
+
+While many browsers automatically treat `<output>` as a "live" region, it's best to include `aria-live="polite"` to ensure best-case functionality. Though it is not well documented, `<output>` can and should utilize a paired `<label>`.
 
 ## pre <a name="pre"></a>
 
