@@ -1,6 +1,10 @@
-::: slot nimatron-all
-
-# Design Tokens
+---
+template: plain
+id: base-tokens
+title: Design Tokens
+lead: TODO
+description: Et morbi eget at consectetur. Elit aenean mi phasellus.
+---
 
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
@@ -208,5 +212,3 @@
     </tbody>
   </table>
 </figure>
-
-:::

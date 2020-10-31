@@ -1,8 +1,11 @@
-::: slot nimatron-all
-
-# Color
-
-Here's a quick overview of the colors available in Odyssey and some guidelines for their use.
+---
+template: plain
+id: base-color
+title: Color
+headline: Color
+lead: Here's a quick overview of the colors available in Odyssey and some guidelines for their use.
+description: Et morbi eget at consectetur. Elit aenean mi phasellus.
+---
 
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
@@ -15,8 +18,8 @@ Here's a quick overview of the colors available in Odyssey and some guidelines f
         <th scope="column">Swatch</th>
         <th scope="column">Name</th>
         <th scope="column">Hex</th>
-        <th scope="column"><span class="sample--emoji">🛎️</span>Do</th>
-        <th scope="column"><span class="sample--emoji">🚫</span>Don't Do</th>
+        <th scope="column"><span class="sample--emoji">🛎️</span> Do</th>
+        <th scope="column"><span class="sample--emoji">🚫</span> Don't Do</th>
       </tr>
     </thead>
     <tbody>
@@ -520,6 +523,26 @@ Here's a quick overview of the colors available in Odyssey and some guidelines f
           Headlines, body copy, links, buttons
         </td>
       </tr>
+      <tr>
+        <th scope="row" rowspan="1">
+          Turquoise
+        </th>
+        <td class="is-sample-table-swatch">
+          <span class="sample-color sample-color--turquoise-400"></span>
+        </td>
+        <td class="is-sample-table-token">
+          Turquoise 400
+        </td>
+        <td>
+          <code>#65adb7</code>
+        </td>
+        <td>
+          Background Color
+        </td>
+        <td>
+          Headlines, body copy, links, buttons
+        </td>
+      </tr>
     </tbody>
   </table>
 </figure>
@@ -529,5 +552,3 @@ Here's a quick overview of the colors available in Odyssey and some guidelines f
   <li class="sample--color is-sample-turquoise-500"></li>
   <li class="sample--color is-sample-orange-500"></li>
 </ul>
-
-:::

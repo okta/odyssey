@@ -1,0 +1,16 @@
+.is-sample-animation-off {
+  animation: none;
+}
+
+.is-sample-static {
+  position: static;
+  z-index: 0;
+}
+
+.is-fpo {
+  background: cv('yellow', '000');
+
+  &.is-fpo-negative {
+    background: cv('red', '000');
+  }
+}
