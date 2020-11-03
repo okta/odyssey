@@ -33,7 +33,7 @@ resources:
     illustration: figma
     description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
     label: Learn more
-    href: /components/
+    href: https://www.figma.com/files/676870123940302956/project/2512934/Odyssey-UI
 contentSecondary:
   - title: Principles
     description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
