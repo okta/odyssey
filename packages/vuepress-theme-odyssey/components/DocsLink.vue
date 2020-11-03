@@ -41,7 +41,7 @@ export default {
     variant: {
       type: String,
       default: "underlined",
-      required: true
+      required: false
     }
   },
   computed: {

@@ -15,8 +15,7 @@ export default {
   name: "DocsCardGroup",
   props: {
     variant: {
-      type: String,
-      default: null
+      type: String
     },
     tag: {
       type: String,
