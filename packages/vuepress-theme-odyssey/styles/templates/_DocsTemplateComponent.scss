@@ -87,12 +87,6 @@
   /* stylelint-enable */
 }
 
-.docs-doc-footer {
-  padding: $spacing-m;
-  border-top: 1px solid var(--border-color-display, #{$border-color-display});
-  text-align: center;
-}
-
 .ods-tabs--tablist {
   position: sticky;
   z-index: 1;
