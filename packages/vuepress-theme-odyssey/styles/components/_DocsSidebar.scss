@@ -2,11 +2,11 @@ a.docs-site-title,
 a.docs-site-title:visited {
   display: block;
   padding: $spacing-xs $spacing-xs;
+  border: 0;
   color: var(--docs-text-heading, #{$text-heading});
   font-size: $size-title-4;
   font-weight: 600;
   text-decoration: none;
-  border: none;
 }
 
 @include mq(l) {
@@ -42,7 +42,12 @@ a.docs-site-title:visited {
   }
 
   .docs-link {
-    border: none;
+    border: 0;
+    color: var(--docs-text-heading, #{$text-heading});
+
+    &[target='_blank']:not([href^='mailto:'])::after {
+      background-image: get-icon('external', cv('gray', '900'));
+    }
   }
 
   .docs-sidebar--action {
@@ -83,7 +88,6 @@ a.docs-site-title:visited {
 
   .docs-sidebar--main {
     grid-area: main;
-    width: #{20.625rem - $spacing-l};
     padding: $spacing-xs $spacing-xs $spacing-s;
     overflow: scroll;
 

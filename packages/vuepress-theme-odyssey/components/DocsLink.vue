@@ -4,7 +4,10 @@
     :to="link"
     :exact="exact"
     :role="role"
-    class="docs-link"
+    :class="{
+      'docs-link': true,
+      [`docs-link--${variant}`]: variant
+    }"
   >
     <slot></slot>
   </RouterLink>
@@ -34,6 +37,11 @@ export default {
       type: String,
       default: "",
       required: false
+    },
+    variant: {
+      type: String,
+      default: "underlined",
+      required: true
     }
   },
   computed: {
