@@ -27,9 +27,9 @@ html {
   font-family: $body-font-family;
 
   // Theme: Night Mode
-  @media (prefers-color-scheme: dark) {
-    @include set-theme($theme-night);
-  }
+  // @media (prefers-color-scheme: dark) {
+  //   @include set-theme($theme-night);
+  // }
 }
 
 a,
