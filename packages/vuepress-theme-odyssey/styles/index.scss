@@ -343,3 +343,9 @@ $spacing-units: (
   display: inline-block;
   margin: 0 $spacing-xs;
 }
+
+.help-icon {
+  width: $spacing-l;
+  height: $spacing-l;
+  margin-bottom: $spacing-m;
+}

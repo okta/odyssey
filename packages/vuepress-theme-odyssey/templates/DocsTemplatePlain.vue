@@ -2,7 +2,7 @@
   <article class="docs-main--content is-template-plain">
     <DocsPageHeader
       :variant="$page.frontmatter.pageHeaderVariant || 'default'"
-      :title="$page.frontmatter.title"
+      :title="$page.frontmatter.headline"
       :lead="$page.frontmatter.lead"
     />
 
