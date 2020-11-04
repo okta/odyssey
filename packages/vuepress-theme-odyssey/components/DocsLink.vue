@@ -17,7 +17,10 @@
     :target="hasTarget"
     :rel="hasRel"
     :role="role"
-    class="docs-link"
+    :class="{
+      'docs-link': true,
+      [`docs-link--${variant}`]: variant
+    }"
   >
     <slot></slot>
   </a>

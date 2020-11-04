@@ -2,6 +2,7 @@
 template: plain
 id: base-tokens
 title: Design Tokens
+headline: Design Tokens
 lead: TODO
 description: Et morbi eget at consectetur. Elit aenean mi phasellus.
 ---

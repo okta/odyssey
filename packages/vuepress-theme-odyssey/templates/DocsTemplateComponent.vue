@@ -35,9 +35,9 @@
     <footer>
       <DocsPagination :sidebarItems="$site.themeConfig.nav">
         Have questions? <span class="u-visually-hidden">Ask us on slack!</span>
-        <div  class="has-ods-tooltip">
-          <a href="https://okta.slack.com/archives/C7T2H3KNJ" target="_blank" aria-describedby="slack-channel">#odyssey</a>
-          <aside id="slack-channel" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+        <div class="has-ods-tooltip">
+          <a :href="$site.themeConfig.links.slack" target="_blank" aria-describedby="component-slack">#odyssey</a>
+          <aside id="component-slack" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
             Oktanauts-only for now
           </aside>
         </div>

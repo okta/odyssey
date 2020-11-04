@@ -23,7 +23,7 @@
   }
 
   a {
-    &::after {
+    &::before {
       content: '';
       display: block;
       position: absolute;
@@ -31,6 +31,7 @@
       right: 0;
       bottom: 0;
       left: 0;
+
       // NOTE: 32px is sort of an arbitrary value,
       // and only used within this component.
       border-radius: 0 32px;
