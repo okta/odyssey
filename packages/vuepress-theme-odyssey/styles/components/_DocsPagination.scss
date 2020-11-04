@@ -8,10 +8,10 @@
   display: flex;
   justify-content: space-between;
 
-  .pagination--prev { order: 1;}
-  .pagination--next { order: 3;}
+  .pagination--prev { order: 1; }
+  .pagination--next { order: 3; }
 
   .pagination--slot {
-    order: 1;
+    order: 2;
   }
 }
