@@ -50,9 +50,10 @@ a:visited {
     display: flex;
     flex: 1;
     justify-content: center;
+    max-width: 100%;
     margin-bottom: $spacing-xl;
     padding: $spacing-l * 2 $spacing-m 0;
-    max-width: 100%;
+
     // TODO: We would like to remove this in the future
     // so that the grid width is determined by the content
     // as opposed to a max-width.

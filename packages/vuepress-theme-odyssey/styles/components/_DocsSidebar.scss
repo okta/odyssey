@@ -50,6 +50,7 @@ a.docs-site-title:visited {
     position: absolute;
     top: $spacing-s;
     right: $spacing-s;
+    color: var(--docs-text-heading, #{$text-heading});
 
     @include mq(l) {
       display: block;
