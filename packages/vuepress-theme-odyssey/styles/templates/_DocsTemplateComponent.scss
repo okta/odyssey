@@ -37,7 +37,7 @@
 
   a {
     display: flex;
-    padding: $spacing-xs-em $spacing-s-em;
+    padding: $spacing-xs-em $spacing-s-em $spacing-xs-em 0;
     line-height: $base-line-height;
 
     &:focus {
@@ -53,7 +53,7 @@
   svg {
     width: $spacing-m;
     height: $spacing-m;
-    margin-right: $spacing-s;
+    margin-right: $spacing-xs;
   }
 }
 
