@@ -22,6 +22,11 @@ module.exports = {
     flags: {
       hasSearch: false
     },
+    links: {
+      officeHours: 'https://oktawiki.atlassian.net/wiki/spaces/UX/pages/880512140/Odyssey+Office+Hours',
+      slack: 'https://okta.slack.com/archives/C7T2H3KNJ',
+      github: 'https://github.com/okta/odyssey'
+    },
     nav: {
       primary: [
         {
