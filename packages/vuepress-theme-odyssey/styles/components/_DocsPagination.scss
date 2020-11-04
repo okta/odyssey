@@ -1,0 +1,17 @@
+.page-nav {
+  padding: $spacing-m 0;
+  border-top: 2px solid var(--border-color-display, #{$border-color-display});
+
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+
+  .pagination--prev { order: 1; }
+  .pagination--next { order: 3; }
+
+  .pagination--slot {
+    order: 2;
+  }
+}
