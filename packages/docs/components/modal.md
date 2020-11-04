@@ -30,26 +30,37 @@ links:
 
 Modals are inserted above the main content as a blocking mechanism to ask for user input or confirm an action. They disable all other contexts until the user interacts with the modal itself.
 
-### Arrival
-
-How modals arrive on the screen is as important as the content they contain. Animation does more than provide a pleasing experience. It contextualizes the new UI the user is being presented.
-
-### Dismissing
-
-Users may close modals by clicking on the button in the upper right-hand corner of the container. They may also click anywhere outside of the container, within the "curtain".
-
-### Autofocus
-
-Focus is placed on the first item a user can select, allowing them to immediately exit or submit the modal when possible. Focus is limited to the scope of the dialog while the modal is open.
-
 </Description>
-
 
 <Visual>
 
   <button class="ods-button" data-micromodal-trigger="ods-modal-standard">Launch modal</button>
 
 </Visual>
+
+### Arrival
+
+<Description>
+
+How modals arrive on the screen is as important as the content they contain. Animation does more than provide a pleasing experience. It contextualizes the new UI the user is being presented.
+
+</Description>
+
+### Dismissing
+
+<Description>
+
+Users may close modals by clicking on the button in the upper right-hand corner of the container. They may also click anywhere outside of the container, within the "curtain".
+
+</Description>
+
+### Autofocus
+
+<Description>
+
+Focus is placed on the first item a user can select, allowing them to immediately exit or submit the modal when possible. Focus is limited to the scope of the dialog while the modal is open.
+
+</Description>
 
 ## Usage
 
