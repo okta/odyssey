@@ -32,8 +32,16 @@
         <Content :key="slot.id" :slot-key="slot.id" class="docskit-container" />
       </template>
     </OdsTabs>
-    <footer class="docs-doc-footer"> 
-      Need help? <a href="#">#odyssey</a>
+    <footer>
+      <DocsPagination :sidebarItems="$site.themeConfig.nav">
+        Have questions? <span class="u-visually-hidden">Ask us on slack!</span>
+        <div  class="has-ods-tooltip">
+          <a href="https://okta.slack.com/archives/C7T2H3KNJ" target="_blank" aria-describedby="slack-channel">#odyssey</a>
+          <aside id="slack-channel" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+            Oktanauts-only for now
+          </aside>
+        </div>
+      </DocsPagination>
     </footer>
   </article>
 </template>
@@ -43,6 +51,7 @@ export default {
   name: "DocsTemplateComponent",
   components: {
     DocsPageHeader: () => import("../components/DocsPageHeader.vue"),
+    DocsPagination: () => import("../components/DocsPagination.vue"),
     OdsTabs: () => import("../global-components/OdsTabs.vue")
   }
 };
