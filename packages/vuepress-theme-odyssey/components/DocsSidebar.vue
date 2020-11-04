@@ -4,7 +4,7 @@
       <template v-slot:left>
         <!-- eslint-disable -->
         <button
-          class="docs-topbar--action ods-button is-ods-button-clear"
+          class="docs-topbar--action ods-button is-ods-button-clear docs-sidebar--action"
           @click="setSidebarState(true)"
           v-html="require(`!html-loader!../public/images/icon-hamburger.svg`)"
         />
@@ -54,7 +54,7 @@
             }"
           >
             <div ref="mainContent" class="docs-sidebar--main-content">
-              <DocsNav variant="primary" :nav="nav.primary" />
+              <DocsNav :forceExpand="true" variant="primary" :nav="nav.primary" />
             </div>
           </div>
           <div class="docs-sidebar--footer">

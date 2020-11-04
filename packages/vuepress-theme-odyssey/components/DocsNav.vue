@@ -33,7 +33,7 @@
             {{ item.title }}
           </DocsLink>
           <button
-            v-if="item.children"
+            v-if="item.children && !forceExpand"
             :class="{
               'ods-button is-ods-button-clear with-docs-subnav-indicator': true,
               'with-docs-subnav-indicator--expanded': isSubmenuExpanded(index)
@@ -46,7 +46,7 @@
           :id="'nav-subhead-' + index"
           :class="{
             'docs-nav--subnav': true,
-            'is-visible': isSubmenuExpanded(index)
+            'is-visible': forceExpand || isSubmenuExpanded(index)
           }"
         >
           <li
@@ -88,8 +88,12 @@ export default {
       type: Array, // TODO: figure out if theres a way to better 'type' this with vue
       required: true
     },
+    forceExpand: {
+      type: Boolean,
+      default: false
+    },
     variant: {
-      variant: String,
+      type: String,
       default: "primary",
       validator: value => ["primary", "secondary"].includes(value)
     }
