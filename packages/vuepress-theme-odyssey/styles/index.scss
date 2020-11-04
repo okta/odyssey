@@ -19,6 +19,9 @@
 @import 'docskit/Visual';
 @import 'docskit/Description';
 
+// Shame file for known hacks
+@import 'shame';
+
 html {
   @include set-theme($theme-default);
 
