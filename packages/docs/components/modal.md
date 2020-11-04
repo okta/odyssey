@@ -125,17 +125,17 @@ For users happy with their new context, we ensure their attention isn't misdirec
         <header class="ods-modal--header">
           <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
           <h1 class="ods-modal--title" id="ods-modal-standard-title">
-            This is a Modal
+            Launch Safety Confirmation
           </h1>
         </header>
         <main class="ods-modal--content" id="ods-modal-standard-content">
           <p>
-            Try hitting the <kbd>tab</kbd> key and notice how the focus stays within the modal itself. Also, <kbd>esc</kbd> to close modal.
+            Please confirm that Launchpad DS-21A is cleared of personnel and debris to proceed with countdown.
           </p>
         </main>
         <footer class="ods-modal--footer">
           <button class="ods-button is-ods-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
-          <button class="ods-button">Continue</button>
+          <button class="ods-button">Confirm</button>
         </footer>
       </div>
     </div>

@@ -1,0 +1,6 @@
+// Manually adjust spacing between these elements.
+// Can be removed when type scale / heading margins are fixed.
+
+h2 + .docskit-figure-anatomy {
+  margin-top: $spacing-xs;
+}
