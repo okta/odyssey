@@ -7,7 +7,7 @@
       <template v-slot:right>
         <ul v-if="$page.frontmatter.links" class="docs-page-header--links">
           <li v-for="link in $page.frontmatter.links" :key="link.label">
-            <a :href="link.href">
+            <a :href="link.href" target="_blank">
               <!-- eslint-disable -->
               <span
               aria-hidden
