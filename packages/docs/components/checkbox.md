@@ -10,9 +10,6 @@ tabs:
     id: 'html-scss'
 links:
   - icon: github
-    label: Legacy docs
-    href: https://github.com/okta/odyssey/blob/master/packages/docs/components/checkbox.md
-  - icon: github
     label: View source
     href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_checkbox.scss
   - icon: figma
@@ -30,8 +27,8 @@ Descriptive content around **checkbox anatomy** should go here.
 
 </Description>
 
-<Anatomy 
-  img="/images/anatomy-checkbox.svg" 
+<Anatomy
+  img="/images/anatomy-checkbox.svg"
 />
 
 <Description>
@@ -41,7 +38,7 @@ Descriptive content around **checkbox anatomy** should go here.
 </Description>
 
 <Visual>
-  
+
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Donut toppings</legend>
     <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-2" value="example-2">
@@ -53,7 +50,7 @@ Descriptive content around **checkbox anatomy** should go here.
     <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
     <label class="ods-checkbox--label" for="example-3">Oreos</label>
   </fieldset>
-  
+
 </Visual>
 
 ## States
@@ -199,7 +196,7 @@ Please note that this state must be set via javascript and is not reflected in t
 
 <script>
 export default {
-  mounted () { 
+  mounted () {
     let checkbox = this.$el.querySelectorAll("[data-example-indeterminate]");
 
     checkbox.forEach((input) => {
