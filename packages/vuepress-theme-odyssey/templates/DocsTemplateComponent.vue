@@ -7,7 +7,7 @@
       <template v-slot:right>
         <ul v-if="$page.frontmatter.links" class="docs-page-header--links">
           <li v-for="link in $page.frontmatter.links" :key="link.label">
-            <a :href="link.href" target="_blank">
+            <a :href="link.href">
               <!-- eslint-disable -->
               <span
               aria-hidden
@@ -36,7 +36,7 @@
       <DocsPagination :sidebarItems="$site.themeConfig.nav">
         Have questions? <span class="u-visually-hidden">Ask us on slack!</span>
         <div class="has-ods-tooltip">
-          <a :href="$site.themeConfig.links.slack" aria-describedby="component-slack">#odyssey</a>
+          <a :href="$site.themeConfig.links.slack" target="_blank" aria-describedby="component-slack">#odyssey</a>
           <aside id="component-slack" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
             Oktanauts-only for now
           </aside>
