@@ -18,7 +18,7 @@ a.docs-site-title:visited {
     body::before {
       content: '';
       position: fixed;
-      z-index: z-index(400);
+      z-index: z-index(sidebar);
       width: 100vw;
       height: 100vh;
       background: rgba(cv('gray', '900'), 0.75);
@@ -30,7 +30,7 @@ a.docs-site-title:visited {
   @include mq(l) {
     visibility: hidden;
     position: fixed;
-    z-index: z-index(400);
+    z-index: z-index(sidebar);
     transform: translateX(-100%);
     transition: all 0.33s ease-in-out;
 
@@ -102,7 +102,7 @@ a.docs-site-title:visited {
   }
 }
 
-.is-animation-stopped * {
+.is-animation-stopped *:not(.ods-modal) {
   /* stylelint-disable */
   transition: none !important;
   animation: none !important;

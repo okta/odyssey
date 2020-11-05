@@ -89,7 +89,7 @@
 
 .ods-tabs--tablist {
   position: sticky;
-  z-index: z-index(100);
+  z-index: z-index(base);
   top: 0;
   margin-top: -$spacing-l;
   padding-top: $spacing-l;

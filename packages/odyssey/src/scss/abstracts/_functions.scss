@@ -130,17 +130,3 @@ $icons: (
 
   @return url('data:image/svg+xml,#{$encoded}');
 }
-
-$z-index: (
-  top: 9999,
-  500: 500,
-  400: 400,
-  300: 300,
-  200: 200,
-  100: 100,
-  btm: -100
-);
-
-@function z-index($key) {
-  @return map-get($z-index, $key);
-}
