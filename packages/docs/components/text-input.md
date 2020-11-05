@@ -58,7 +58,7 @@ In this case, we recommend using the placeholder attribute to state the scope of
 </Description>
 
 <Visual>
-  <fieldset class="ods-fieldset docskit-visual--wide">
+  <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="search" name="search" id="search" autocomplete="search" spellcheck="false" placeholder="Search planets" required>
       <label class="ods-label" for="search">Search planets</label>
@@ -76,7 +76,7 @@ We also provide an attached button for in-page searching or avoiding placeholder
 
 <Visual>
   <form>
-    <fieldset class="ods-fieldset docskit-visual--wide">
+    <fieldset class="ods-fieldset">
       <div class="ods-fieldset--attached">
         <input class="ods-text-input" type="search" name="search" id="button-search" autocomplete="search" spellcheck="false" aria-labelledby="search-button" required>
         <button class="ods-button" id="search-button">Search planets</button>
@@ -181,7 +181,7 @@ The values of disabled inputs will not be submitted.
 </Description>
 
 <Visual>
-  <fieldset class="ods-fieldset docskit-visual--wide">
+  <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input disabled class="ods-text-input" type="text" required disabled>
       <label class="ods-label" for="email">Destination</label>
@@ -202,7 +202,7 @@ The values of read-only inputs will be submitted.
 </Description>
 
 <Visual>
-  <fieldset class="ods-fieldset docskit-visual--wide">
+  <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="text" name="name-readonly" id="name-readonly" value="Jupiter" autocomplete="name" spellcheck="false" required readonly>
       <label class="ods-label" for="email">Destination</label>
@@ -238,7 +238,7 @@ When indicating a validation error, please use a Field Error label to indicate t
 </Description>
 
 <Visual>
-  <fieldset class="ods-fieldset docskit-visual--wide">
+  <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input data-invalid class="ods-text-input" type="text" value="4.76 miles/s" required>
       <label class="ods-label" for="email">Destination</label>
@@ -359,8 +359,7 @@ Finally, Users with low digital literacy may not understand the purpose or behav
 
 ### Invalid
 
-The :invalid CSS pseudo-class represents any <input> or other <form> element whose contents fail to validate. - MDN
-Because of the current inability to ensure consistent validation behavior across browsers, we're using the [data-invalid] attribute to indicate this state.
-
+The `:invalid` CSS pseudo-class represents any `<input>` or other `<form>` element whose contents fail to validate. - MDN
+Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
 
 :::
