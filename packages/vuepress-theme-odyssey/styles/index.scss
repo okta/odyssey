@@ -229,6 +229,11 @@ h6 {
   }
 }
 
+.sample--emoji {
+  display: inline-block;
+  margin-right: $spacing-xs;
+}
+
 .sample--list {
   list-style-type: none;
 }
