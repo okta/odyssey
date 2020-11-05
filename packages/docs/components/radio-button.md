@@ -10,9 +10,6 @@ tabs:
     id: 'html-scss'
 links:
   - icon: github
-    label: Legacy docs
-    href: https://github.com/okta/odyssey/blob/master/packages/docs/components/modal.md
-  - icon: github
     label: View source
     href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_radio-button.scss
   - icon: figma
@@ -30,8 +27,8 @@ Descriptive content around **radio button anatomy** should go here.
 
 </Description>
 
-<Anatomy 
-  img="/images/anatomy-radio-button.svg" 
+<Anatomy
+  img="/images/anatomy-radio-button.svg"
 />
 
 <Description>
@@ -205,7 +202,7 @@ Note, when indicating a validation error, please use an `.ods-field--error` to i
     <label class="ods-radio--label" for="radio-moon">The moon</label>
     <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
     <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
-    
+
     <aside class="ods-field--error" id="radio-invalid-error">This field is required.</aside>
   </fieldset>
   ```
