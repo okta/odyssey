@@ -18,8 +18,8 @@ description: Et morbi eget at consectetur. Elit aenean mi phasellus.
         <th scope="column">Swatch</th>
         <th scope="column">Name</th>
         <th scope="column">Hex</th>
-        <th scope="column"><span class="sample--emoji">🛎️</span> Do</th>
-        <th scope="column"><span class="sample--emoji">🚫</span> Don't Do</th>
+        <th scope="column"><span class="sample--emoji" aria-hidden="true">🛎️</span>Do</th>
+        <th scope="column"><span class="sample--emoji" aria-hidden="true">🚫</span>Don't</th>
       </tr>
     </thead>
     <tbody>
