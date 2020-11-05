@@ -105,21 +105,6 @@ Icon layout is automatic, based on language direction.
 
 </Visual>
 
-### Icons
-
-Icons may be included in standalone links, but are not supported within paragraph content or longer copy. Add the `.ods-link--has-icon` class to ensure proper layout.
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <a href="#icons" class="ods-link--has-icon"><svg aria-hidden viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13ZM8 4C8 4.55228 7.55228 5 7 5C6.44772 5 6 4.55228 6 4C6 3.44772 6.44772 3 7 3C7.55228 3 8 3.44772 8 4ZM8 6V11H6V6H8Z" fill="currentColor"/></svg>Visit our Link docs</a>
-  </div>
-
-  ```html
-  <a href="#icons" class="ods-link--has-icon"><svg aria-hidden>...</svg>Visit our Link docs</a>
-  ```
-
-</figure>
-
 ### Mailto
 
 <Description>
