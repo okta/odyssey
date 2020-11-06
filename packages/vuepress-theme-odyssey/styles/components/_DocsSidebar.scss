@@ -18,7 +18,7 @@ a.docs-site-title:visited {
     body::before {
       content: '';
       position: fixed;
-      z-index: 10;
+      z-index: z-index(sidebar);
       width: 100vw;
       height: 100vh;
       background: rgba(cv('gray', '900'), 0.75);
@@ -30,7 +30,7 @@ a.docs-site-title:visited {
   @include mq(l) {
     visibility: hidden;
     position: fixed;
-    z-index: 10;
+    z-index: z-index(sidebar);
     transform: translateX(-100%);
     transition: all 0.33s ease-in-out;
 
@@ -71,7 +71,6 @@ a.docs-site-title:visited {
   .docs-sidebar--content {
     display: grid;
     position: sticky;
-    z-index: 4;
     top: 0;
     grid-row-gap: $spacing-s;
     grid-template-areas: 'header' 'main' 'footer';
@@ -103,7 +102,7 @@ a.docs-site-title:visited {
   }
 }
 
-.is-animation-stopped * {
+.is-animation-stopped *:not(.ods-modal) {
   /* stylelint-disable */
   transition: none !important;
   animation: none !important;
