@@ -33,12 +33,12 @@ links:
 ### Default
 
 <Description>
-
+s
 This default serves as the basis for our Text Inputs. A shown here, they required paired with a paired Label.
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="text" id="overview-default" required>
@@ -57,7 +57,7 @@ In this case, we recommend using the placeholder attribute to state the scope of
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="search" name="overview-search" id="overview-search" autocomplete="search" spellcheck="false" placeholder="Search planets" required>
@@ -74,7 +74,7 @@ We also provide an attached button for in-page searching or avoiding placeholder
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <form>
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset--attached">
@@ -99,12 +99,12 @@ Textareas should be used for multi-line text inputs. As the user types the field
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <textarea class="ods-text-input ods-text-area" name="overview-textarea" id="overview-textarea" rows='4' cols='50' spellcheck="true" required></textarea>
       <aside class="ods-field--hint">
-        Please describe your perfect planet in as many words as you need.
+        Describe your perfect planet in as many words as you need.
       </aside>
       <label class="ods-label" for="overview-textarea">The perfect planet</label>
     </div>
@@ -127,7 +127,7 @@ Text inputs in their "normal" state are considered enabled. They are ready for u
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="text" name="overview-enabled" id="overview-enabled" required>
@@ -144,7 +144,7 @@ Hover states are activated when the user pauses their pointer over the input.
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input is-ods-input-hover" name="overview-hover" type="text" id="overview-hover" required>
@@ -161,7 +161,7 @@ The focus state is a visual affordance that the user has highlighted the input w
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input is-ods-input-focus" name="overview-focus" type="text" id="overview-focus" required>
@@ -180,7 +180,7 @@ The values of disabled inputs will not be submitted.
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input disabled class="ods-text-input" type="text" name="overview-disabled" id="overview-disabled" required disabled>
@@ -201,7 +201,7 @@ The values of read-only inputs will be submitted.
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="text" name="overview-readonly" id="overview-readonly" value="Jupiter" required readonly spellcheck="false">
@@ -218,7 +218,7 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="text" name="overview-optional" id="overview-optional" spellcheck="false">
@@ -237,7 +237,7 @@ When indicating a validation error, please use a Field Error label to indicate t
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input data-invalid class="ods-text-input" type="text" name="overview-invalid" aria-describedby="overview-invalid-error" id="overview-invalid" spellcheck="false" value="4.76 miles/s" required>
@@ -265,7 +265,7 @@ There are no specific UI changes for email addresses, but inputs of this type wi
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="email" name="overview-email" id="overview-email" autocomplete="email" spellcheck="false" value="homer@okta.com" required>
@@ -282,7 +282,7 @@ Unlike email fields, tel inputs are not automatically validated because global f
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="phone" name="overview-tel" id="overview-tel" autocomplete="tel" spellcheck="false" value="555-555-1212" required>
@@ -299,7 +299,7 @@ Passwords inputs ensure that sensitive content is safely obscured.
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="password" name="overview-password" id="overview-password" autocomplete="password" spellcheck="false" value="Big Gas Giants" required>
