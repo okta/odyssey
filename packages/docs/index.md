@@ -15,7 +15,7 @@ contentPrimary:
     href: /components/
   - coin: icon
     title: Icons
-    description: Graphics that represent an idea or concept and are independent of any particular language, specific words, or phrases.
+    description: Our icon system establishes a visual language that anyone can easily understand regardless of age, tongue, or culture.
     label: Explore Icons
     href: /icons/
 principle:

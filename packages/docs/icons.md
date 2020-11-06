@@ -4,7 +4,7 @@ template: plain
 pageHeaderVariant: icon
 title: Icons
 headline: Icons
-lead: Graphics that represent an idea or concept and are independent of any particular language, specific words, or phrases.
+lead: The icon system within Odyssey establishes a visual language that anyone can easily understand regardless of age, tongue, or culture.
 tabs:
   - label: 'Overview'
     id: 'overview'
@@ -235,6 +235,8 @@ tabs:
   Every icon is built on a grid at a specific size. This ensures not only visual consistency, but allows us to easily swap icons in various applications.
 
 </Description>
+
+<Visual>x</Visual>
 
 ### Design your own
 
