@@ -38,7 +38,7 @@
     </DocsCardGroup>
 
     <div class="docs-principle">
-      <h1>{{ $page.frontmatter.principle.title }}</h1>
+      <h1 class="docs-principle--title">{{ $page.frontmatter.principle.title }}</h1>
       <p>
         {{ $page.frontmatter.principle.description }}
       </p>
