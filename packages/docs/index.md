@@ -19,32 +19,30 @@ contentPrimary:
     label: See them
     href: /icons/
 principle:
-  title: How we build
-  description: We welcome all feedback, designs, or ideas in order to produce the best possible experience for our users. If you’re interested in contributing, check out our contributing guidelines to get started.
-  label: Learn more
-  href: /base/
+  title: Purpose
+  description: Odyssey is Okta’s official design system built for use across all Okta products and sites. We aim to enable designers and developers to build efficiently and consistently while optimizing for user experience and accessibility.
 resources:
   - title: GitHub
     illustration: github
-    description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
-    label: Learn more
+    description: View our most up to date code, releases, file issues, propose changes on Github.
+    label: Explore repo
     href: /base/
   - title: Figma kit
     illustration: figma
-    description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
-    label: Learn more
+    description: Our design tool of choice. Odyssey is designed in Figma, which also houses our UI Kit.
+    label: Explore kit
     href: https://www.figma.com/files/676870123940302956/project/2512934/Odyssey-UI
 contentSecondary:
   - title: Principles
-    description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
-    label: Learn more
-    href: /base/
-  - title: Our team
-    description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
-    label: Learn more
-    href: /components/
-  - title: Get help
-    description: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
-    label: Learn more
-    href: /icons/
+    description: Our principles derive from Oktas design principles and guide us in making critical decisions as a team.
+    label: Explore principles
+    href: /principles/
+  - title: Roadmap
+    description: Follow along with Odyssey development, planning and our long term roadmap on ZenHub.
+    label: Explore roadmap
+    href: https://app.zenhub.com/workspaces/odyssey-5ef0ab09504e9d002794ba2e/roadmap
+  - title: Need help?
+    description: The Odyssey team is always available to help solve problems and improve the system.
+    label: Reach out
+    href: /help/
 ---
