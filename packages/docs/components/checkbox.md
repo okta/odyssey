@@ -2,8 +2,8 @@
 template: component
 id: component-checkbox
 title: Checkbox
-description: Typically shown in sets, Checkboxes appear as a square shaped UI accompanied by a caption.
-lead: Typically shown in sets, Checkboxes appear as a square shaped UI accompanied by a caption. Checkboxes can be found in tables, forms, or in and around text inputs.
+description: Radio Buttons appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
+lead: Radio Buttons appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
 tabs:
   - label: 'Overview'
     id: 'overview'
@@ -54,9 +54,54 @@ Users can click a Checkbox to make a choice and click it again to deselect an op
 
 <Description>
 
-There are six Checkbox states: Checked, unchecked, disabled, invalid, optional/required, and indeterminate.
+Checkboxex support several states: enabled, hover, focus, disabled, invalid, required, and indeterminate.
 
 </Description>
+
+### Enabled
+
+<Description>
+
+Checkboxes in their "unchecked" state are considered enabled. They are ready for user interaction.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
+    <label class="ods-checkbox--label" for="example-1">Enable auto-docking</label>
+  </fieldset>
+</Visual>
+
+### Hover
+
+<Description>
+
+Hover states are activated when the user pauses their pointer over the input.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
+    <label class="ods-checkbox--label is-ods-checkbox-hover" for="example-1">Enable auto-docking</label>
+  </fieldset>
+</Visual>
+
+### Focus
+
+<Description>
+
+The focus state is a visual affordance that the user has highlighted the input with a pointer, keyboard, or voice.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <input class="ods-checkbox is-ods-checkbox-focus" type="checkbox" name="checkbox" id="example-1" value="example-1">
+    <label class="ods-checkbox--label is-ods-checkbox-focus" for="example-1">Enable auto-docking</label>
+  </fieldset>
+</Visual>
 
 ### Checked
 
@@ -73,21 +118,6 @@ Checked Checkboxes, sometimes referred to as "ticked", display a check to indica
   </fieldset>
 </Visual>
 
-### Unchecked
-
-<Description>
-
-Unchecked Checkboxes appear as stated above as a rounded rectangle with white fill. This indicates that the Checkbox is not selected.
-
-</Description>
-
-<Visual>
-  <fieldset class="ods-fieldset">
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
-    <label class="ods-checkbox--label" for="example-1">Allow low-oxygen mix</label>
-  </fieldset>
-</Visual>
-
 ### Disabled
 
 <Description>
@@ -100,8 +130,8 @@ Checkboxes are disabled individually. The values of disabled inputs will not be 
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-0" value="example-0" disabled>
-    <label class="ods-checkbox--label" for="example-0">Open pod bay doors</label>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1" disabled>
+    <label class="ods-checkbox--label" for="example-1">Enable auto-docking</label>
   </fieldset>
 </Visual>
 
@@ -109,11 +139,11 @@ Checkboxes are disabled individually. The values of disabled inputs will not be 
 
 <Description>
 
-Checkboxes present as invalid when a required input is left unchecked or some other criteria isn’t met.
+Checkboxes present as invalid when a required input is left unchecked or an incompatible choice has been made.
+
+When indicating a validation error, please use a Field Error label to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
 
 Unlike Radio Buttons, Checkboxes validate individually, not as a group.
-
-Visually, they appear in an error red color.
 
 </Description>
 
@@ -125,8 +155,10 @@ Visually, they appear in an error red color.
     <input checked class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
     <label class="ods-checkbox--label" for="example-1">Disengage maglock</label>
     <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1" data-invalid checked>
-    <label class="ods-checkbox--label" for="example-1">Release docking clamps</label>
-    <aside class="ods-field--error" id="checkbox-invalid-error">Clamp C is still engaged.</aside>
+    <label class="ods-checkbox--label" for="example-1">Open the pod bay doors</label>
+    <aside class="ods-field--error" id="checkbox-invalid-error">
+      <span class="u-visually-hidden">Error:</span> I'm afraid I can't do that, Dave.
+    </aside>
   </fieldset>
 </Visual>
 
@@ -184,7 +216,7 @@ Note that this state is visual-only and will be submitted as either "checked" or
               <span class="u-visually-hidden">Select this row</span>
             </label>
           </td>
-          <td>Hermetic seals</td>
+          <td>Tribbles</td>
           <td class="is-ods-table-num">8,514,877</td>
         </tr>
         <tr>

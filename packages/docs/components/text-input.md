@@ -115,7 +115,7 @@ Textareas should be used for multi-line text inputs. As the user types the field
 
 <Description>
 
-Text inputs support the following states: Enabled, Focus, Hover, Disabled, Read-only, Optional, and Invalid.
+Text inputs support the following states: enabled, hover, focus, disabled, read-only, optional, and invalid.
 
 </Description>
 
@@ -136,23 +136,6 @@ Text inputs in their "normal" state are considered enabled. They are ready for u
   </fieldset>
 </Visual>
 
-### Focus
-
-<Description>
-
-The focus state is a visual affordance that the user has highlighted the input with a pointer, keyboard, or voice.
-
-</Description>
-
-<Visual>
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <input class="ods-text-input is-ods-input-focus" type="text" id="focus" required>
-      <label class="ods-label" for="focus">Destination</label>
-    </div>
-  </fieldset>
-</Visual>
-
 ### Hover
 
 <Description>
@@ -165,6 +148,23 @@ Hover states are activated when the user pauses their pointer over the input.
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input is-ods-input-hover" type="text" id="focus" required>
+      <label class="ods-label" for="focus">Destination</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Focus
+
+<Description>
+
+The focus state is a visual affordance that the user has highlighted the input with a pointer, keyboard, or voice.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input is-ods-input-focus" type="text" id="focus" required>
       <label class="ods-label" for="focus">Destination</label>
     </div>
   </fieldset>

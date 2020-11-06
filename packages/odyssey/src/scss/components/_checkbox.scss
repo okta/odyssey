@@ -47,7 +47,8 @@ $size-checkbox: 1em / 0.875;
     }
   }
 
-  &:focus {
+  &:focus,
+  &.is-ods-checkbox-focus {
     + .ods-checkbox--label {
       &::before {
         @include outline($focus-ring-primary, 2px);
@@ -201,7 +202,8 @@ $size-checkbox: 1em / 0.875;
     background-position: center;
   }
 
-  &:hover {
+  &:hover,
+  &.is-ods-checkbox-hover {
     &::before {
       border-color: $color-primary-base;
     }
