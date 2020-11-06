@@ -34,6 +34,12 @@
     border-radius: $base-border-radius;
   }
 
+  &.is-docskit-visual-full {
+    .docskit-visual--figure {
+      grid-auto-columns: 1fr;
+    }
+  }
+
   &.is-docskit-visual-background {
     .docskit-visual--figure {
       border-color: transparent;

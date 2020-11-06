@@ -12,7 +12,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   font-size: $size-body-base;
 
   &:focus,
-  &.is-ods-select-focused {
+  &.is-ods-select-focused,
+  .is-ods-select-focus & {
     border-radius: $base-border-radius;
     outline: none;
     box-shadow: 0 0 0 4px $color-primary-light;
@@ -219,7 +220,9 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 
   &:hover,
   .is-ods-select-focused &,
-  .is-ods-select-open & {
+  .is-ods-select-open &,
+  .is-ods-select-focus &,
+  .is-ods-select-hover & {
     border-color: $color-primary-base;
   }
 

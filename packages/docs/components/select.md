@@ -38,7 +38,7 @@ To support expected functionality and behaviors, Select relies on the Choices.js
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-behavior" name="overview-behavior" required>
@@ -51,7 +51,7 @@ To support expected functionality and behaviors, Select relies on the Choices.js
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-behavior">Wormhole destination</label>
+      <label class="ods-label" for="overview-behavior">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -72,7 +72,7 @@ The default Select allows users to choose a single value from a list of options.
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-single" name="overview-single" required>
@@ -85,7 +85,7 @@ The default Select allows users to choose a single value from a list of options.
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-single">Wormhole destination</label>
+      <label class="ods-label" for="overview-single">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -98,10 +98,10 @@ The Multi-Select variant allows users to choose more than one value from the lis
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="overview-multi" name="overview-multi" required>
+      <select class="ods-select" data-js-choices id="overview-multi" name="overview-multi" multiple required>
         <option></option>
         <option value="proxima">Proxima Centauri</option>
         <option value="barnards">Barnard's Star</option>
@@ -111,7 +111,7 @@ The Multi-Select variant allows users to choose more than one value from the lis
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-multi">Wormhole destination</label>
+      <label class="ods-label" for="overview-multi">Destination star(s)</label>
     </div>
   </fieldset>
 </Visual>
@@ -132,7 +132,7 @@ Select inputs in their "normal" state are considered enabled. They are ready for
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-enabled" name="overview-enabled" required>
@@ -145,7 +145,7 @@ Select inputs in their "normal" state are considered enabled. They are ready for
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-enabled">Wormhole destination</label>
+      <label class="ods-label" for="overview-enabled">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -158,10 +158,10 @@ Hover states are activated when the user pauses their pointer over the input.
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="overview-hover" name="overview-hover" required>
+    <div class="ods-fieldset-flex is-ods-select-hover">
+      <select class="ods-select is-ods-input-hover" data-js-choices id="overview-hover" name="overview-hover" required>
         <option></option>
         <option value="proxima">Proxima Centauri</option>
         <option value="barnards">Barnard's Star</option>
@@ -171,7 +171,7 @@ Hover states are activated when the user pauses their pointer over the input.
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-hover">Wormhole destination</label>
+      <label class="ods-label" for="overview-hover">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -184,9 +184,9 @@ The focus state is a visual affordance that the user has highlighted the input w
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-fieldset-flex is-ods-select-focus">
       <select class="ods-select" data-js-choices id="overview-focus" name="overview-focus" required>
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -197,7 +197,7 @@ The focus state is a visual affordance that the user has highlighted the input w
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-focus">Wormhole destination</label>
+      <label class="ods-label" for="overview-focus">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -212,7 +212,7 @@ The values of disabled inputs will not be submitted.
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-disabled" name="overview-disabled" required disabled>
@@ -225,7 +225,7 @@ The values of disabled inputs will not be submitted.
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-disabled">Wormhole destination</label>
+      <label class="ods-label" for="overview-disabled">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -238,7 +238,7 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-optional" name="overview-optional">
@@ -251,7 +251,7 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-optional">Wormhole destination <span class="ods-label--optional">Optional</span></label>
+      <label class="ods-label" for="overview-optional">Destination star <span class="ods-label--optional">Optional</span></label>
     </div>
   </fieldset>
 </Visual>
@@ -266,7 +266,7 @@ When indicating a validation error, please use a Field Error label to indicate t
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset" data-invalid>
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-invalid" name="overview-invalid" required data-invalid aria-describedby="overview-invalid-error">
@@ -279,9 +279,9 @@ When indicating a validation error, please use a Field Error label to indicate t
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-invalid">Wormhole destination</label>
+      <label class="ods-label" for="overview-invalid">Destination star</label>
       <aside class="ods-field--error" id="overview-invalid-error">
-        <span class="u-visually-hidden">Error:</span>This does not appear to be a valid planetoid.
+        <span class="u-visually-hidden">Error:</span>This does not appear to be a valid stellar object.
       </aside>
     </div>
   </fieldset>
@@ -299,7 +299,7 @@ Select inputs should not have a default selected unless a majority of users will
 
 </Description>
 
-<Visual>
+<Visual variant="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-groups" name="overview-groups" required>
@@ -318,7 +318,7 @@ Select inputs should not have a default selected unless a majority of users will
           <option value="sirius-b">Sirius B</option>
         </optgroup>
       </select>
-      <label class="ods-label" for="overview-groups">Wormhole destination</label>
+      <label class="ods-label" for="overview-groups">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -334,6 +334,8 @@ Options may be grouped within the Select list to help guide users.
 ## References
 
 ### Further Reading
+
+- <a href="https://joshuajohnson.co.uk/Choices/">Choices.js documentation</a>
 
 :::
 
