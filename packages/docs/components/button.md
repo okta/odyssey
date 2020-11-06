@@ -11,9 +11,6 @@ tabs:
     id: 'html-scss'
 links:
   - icon: github
-    label: Legacy docs
-    href: https://github.com/okta/odyssey/blob/master/packages/docs/components/button.md
-  - icon: github
     label: View source
     href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_button.scss
   - icon: figma
@@ -124,7 +121,7 @@ Use Overlay Buttons when Primary or Secondary variants aren't visually suitable.
 
 <Description>
 
-Odyssey provides visual affordances for all standard button states.
+Odyssey provides visual affordances these states: Enabled, Focus, Hover, and Disabled.
 
 </Description>
 

@@ -11,7 +11,7 @@ tabs:
     id: 'html-scss'
 links:
   - icon: github
-    label: View code
+    label: View Source
     href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/base/_typography-link.scss
   - icon: figma
     label: View designs
