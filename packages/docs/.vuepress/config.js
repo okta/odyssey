@@ -63,6 +63,7 @@ module.exports = {
       ],
       secondary: [
         { title: 'Updates', link: '/updates/' },
+        { title: 'Roadmap', link: 'https://app.zenhub.com/workspaces/odyssey-5ef0ab09504e9d002794ba2e/roadmap' },
         { title: 'Help', link: '/help/' },
       ]
     }
