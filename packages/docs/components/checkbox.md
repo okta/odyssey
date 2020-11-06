@@ -54,7 +54,7 @@ Users can click a Checkbox to make a choice and click it again to deselect an op
 
 <Description>
 
-Checkboxex support several states: enabled, hover, focus, disabled, invalid, required, and indeterminate.
+Checkboxes support several states: enabled, hover, focus, disabled, invalid, required, and indeterminate.
 
 </Description>
 
