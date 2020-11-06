@@ -3,7 +3,7 @@ template: component
 id: component-radio-button
 title: Radio Button
 description: Radios appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
-lead:
+lead: Radios appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
 tabs:
   - label: 'Overview'
     id: 'overview'
