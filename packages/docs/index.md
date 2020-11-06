@@ -1,22 +1,22 @@
 ---
 template: home
 headline: Odyssey Design System
-lead: Odyssey is Okta’s design system which consists of UI’s, guides, and resources to build products.
+lead: Build and design consistent, efficient, and accessible UIs for everybody.
 contentPrimary:
   - coin: base
     title: Base
-    description: Odyssey Base consists of Color, Design Tokens, HTML Elements, Iconography, and Typography.
-    label: See them
+    description: Base is the foundation of Odyssey, it consists of Color, Design Tokens, HTML Elements, Iconography, and Typography.
+    label: Explore Base
     href: /base/
   - coin: component
     title: Components
-    description: Odyssey components consist of Base elements assembled together to make basic components.
-    label: See them
+    description: A set of commonly found, pre-assembled UI objects built from the Odyssey Base and organized by function and form.
+    label: Explore Components
     href: /components/
   - coin: icon
     title: Icons
-    description: Odyssey Icons are graphics that represent an idea or concept, independent of any particular language, specific words, or phrases.
-    label: See them
+    description: Graphics that represent an idea or concept and are independent of any particular language, specific words, or phrases.
+    label: Explore Icons
     href: /icons/
 principle:
   title: Purpose
@@ -34,12 +34,12 @@ resources:
     href: https://www.figma.com/files/676870123940302956/project/2512934/Odyssey-UI
 contentSecondary:
   - title: Principles
-    description: Our principles derive from Oktas design principles and guide us in making critical decisions as a team.
-    label: Explore principles
+    description: Okta's design principles are our north star, they guide us in making critical decisions as a team.
+    label: Explore Principles
     href: /principles/
   - title: Roadmap
     description: Follow along with Odyssey development, planning and our long term roadmap on ZenHub.
-    label: Explore roadmap
+    label: Explore Roadmap
     href: https://app.zenhub.com/workspaces/odyssey-5ef0ab09504e9d002794ba2e/roadmap
   - title: Need help?
     description: The Odyssey team is always available to help solve problems and improve the system.
