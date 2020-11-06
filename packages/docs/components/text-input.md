@@ -286,7 +286,7 @@ Unlike email fields, tel inputs are not automatically validated because global f
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="phone" name="tel" id="tel" autocomplete="tel" spellcheck="false" value="555-555-1212" required>
-      <label class="ods-label" for="tel">Tel</label>
+      <label class="ods-label" for="tel">Telephone number</label>
     </div>
   </fieldset>
 </Visual>
@@ -303,7 +303,7 @@ Passwords inputs ensure that sensitive content is safely obscured.
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <input class="ods-text-input" type="password" name="password" id="password" autocomplete="password" spellcheck="false" value="Big Gas Giants" required>
-      <label class="ods-label" for="password">Password</label>
+      <label class="ods-label" for="password">Authorization code</label>
     </div>
   </fieldset>
 </Visual>
