@@ -23,21 +23,29 @@
     }
   }
 
+  .docskit-visual--figure {
+    display: grid;
+    position: relative;
+    grid-auto-columns: max-content;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-l $spacing-l;
+    border: 1px solid var(--border-color-display, #{$border-color-display});
+    border-radius: $base-border-radius;
+  }
+
+  &.is-docskit-visual-background {
+    .docskit-visual--figure {
+      border-color: transparent;
+      background-image: linear-gradient(135deg, cv('blue', '900'), cv('blue', '500'));
+    }
+  }
+
   &.is-docskit-visual-positive .docskit-visual--title::before {
     content: '🛎️';
   }
 
   &.is-docskit-visual-negative .docskit-visual--title::before {
     content: '🚫';
-  }
-
-  .docskit-visual--figure {
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    padding: $spacing-l $spacing-l;
-    border: 1px solid var(--border-color-display, #{$border-color-display});
-    border-radius: $base-border-radius;
   }
 }
