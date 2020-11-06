@@ -37,12 +37,12 @@ Radio Buttons allow users to select one option from a set. Users can click a Rad
 <Visual>
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Select speed</legend>
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-glazed" value="0" required>
-    <label class="ods-radio--label" for="radio-0-glazed">Lightspeed</label>
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-boston-cream" value="3" required checked>
-    <label class="ods-radio--label" for="radio-0-boston-cream">Warp Speed</label>
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-homer" value="3" required>
-    <label class="ods-radio--label" for="radio-0-homer">Ludicrous Speed</label>
+    <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-1" value="1" required>
+    <label class="ods-radio--label" for="overview-behavior-1">Lightspeed</label>
+    <input class="ods-radio" type="radio" name="overview-behavior" id="roverview-behavior-2" value="2" required checked>
+    <label class="ods-radio--label" for="overview-behavior-2">Warp Speed</label>
+    <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-3" value="3" required>
+    <label class="ods-radio--label" for="overview-behavior-3">Ludicrous Speed</label>
   </fieldset>
 </Visual>
 
@@ -64,8 +64,8 @@ Radio Buttons in their "unchecked" state are considered enabled. They are ready 
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-glazed" value="0" required>
-    <label class="ods-radio--label" for="radio-0-glazed">Warp speed</label>
+    <input class="ods-radio" type="radio" name="overview-enabled" id="overview-enabled" value="0" required>
+    <label class="ods-radio--label" for="overview-enabled">Warp speed</label>
   </fieldset>
 </Visual>
 
@@ -79,8 +79,8 @@ Hover states are activated when the user pauses their pointer over the input.
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-glazed" value="0" required>
-    <label class="ods-radio--label is-ods-radio-hover" for="radio-0-glazed">Warp speed</label>
+    <input class="ods-radio" type="radio" name="overview-hover" id="overview-hover" value="0" required>
+    <label class="ods-radio--label is-ods-radio-hover" for="overview-hover">Warp speed</label>
   </fieldset>
 </Visual>
 
@@ -94,8 +94,8 @@ The focus state is a visual affordance that the user has highlighted the input w
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-radio is-ods-radio-focus" type="radio" name="question-0" id="radio-0-glazed" value="0" required>
-    <label class="ods-radio--label" for="radio-0-glazed">Warp speed</label>
+    <input class="ods-radio is-ods-radio-focus" type="radio" name="overview-focus" id="overview-focus" value="0" required>
+    <label class="ods-radio--label" for="overview-focus">Warp speed</label>
   </fieldset>
 </Visual>
 
@@ -109,8 +109,8 @@ Checked Radios display a blue fill to indicate the they are selected.
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-glazed" value="0" required checked>
-    <label class="ods-radio--label" for="radio-0-glazed">Warp speed</label>
+    <input class="ods-radio" type="radio" name="overview-checked" id="overview-checked" value="0" required checked>
+    <label class="ods-radio--label" for="overview-checked">Warp speed</label>
   </fieldset>
 </Visual>
 
@@ -126,8 +126,8 @@ Radios are disabled by option.
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-glazed" value="0" required disabled>
-    <label class="ods-radio--label" for="radio-0-glazed">Warp speed</label>
+    <input class="ods-radio" type="radio" name="overview-disabled" id="overview-disabled" value="0" required disabled>
+    <label class="ods-radio--label" for="overview-disabled">Warp speed</label>
   </fieldset>
 </Visual>
 
@@ -142,12 +142,12 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
 <Visual>
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Select speed  <span class="ods-label--optional">Optional</span></legend>
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-glazed" value="0">
-    <label class="ods-radio--label" for="radio-0-glazed">Lightspeed</label>
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-boston-cream" value="3" checked>
-    <label class="ods-radio--label" for="radio-0-boston-cream">Warp Speed</label>
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-homer" value="3">
-    <label class="ods-radio--label" for="radio-0-homer">Ludicrous Speed</label>
+    <input class="ods-radio" type="radio" name="overview-optional[]" id="overview-optional-1" value="1">
+    <label class="ods-radio--label" for="overview-optional-1">Lightspeed</label>
+    <input class="ods-radio" type="radio" name="overview-optional[]" id="overview-optional-2" value="2" checked>
+    <label class="ods-radio--label" for="overview-optional-2">Warp Speed</label>
+    <input class="ods-radio" type="radio" name="overview-optional[]" id="overview-optional-3" value="3">
+    <label class="ods-radio--label" for="overview-optional-3">Ludicrous Speed</label>
   </fieldset>
 </Visual>
 
@@ -166,13 +166,13 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 <Visual>
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Select speed</legend>
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-glazed" value="0" required data-invalid checked>
-    <label class="ods-radio--label" for="radio-0-glazed">Lightspeed</label>
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-boston-cream" value="3" required data-invalid>
-    <label class="ods-radio--label" for="radio-0-boston-cream">Warp Speed</label>
-    <input class="ods-radio" type="radio" name="question-0" id="radio-0-homer" value="3" required data-invalid>
-    <label class="ods-radio--label" for="radio-0-homer">Ludicrous Speed</label>
-    <aside class="ods-field--error" id="checkbox-invalid-error">The general theory of relativity forbids it.</aside>
+    <input class="ods-radio" type="radio" name="overview-invalid[]" id="overview-invalid-1" value="1" required data-invalid checked>
+    <label class="ods-radio--label" for="overview-invalid-1">Lightspeed</label>
+    <input class="ods-radio" type="radio" name="overview-invalid[]" id="overview-invalid-2" value="2" required data-invalid>
+    <label class="ods-radio--label" for="overview-invalid-2">Warp Speed</label>
+    <input class="ods-radio" type="radio" name="overview-invalid[]" id="overview-invalid-3" value="3" aria-describedby="overview-invalid-error" required data-invalid>
+    <label class="ods-radio--label" for="overview-invalid-3">Ludicrous Speed</label>
+    <aside class="ods-field--error" id="overview-invalid-error">General relativity forbids it.</aside>
   </fieldset>
 </Visual>
 

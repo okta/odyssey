@@ -2,8 +2,8 @@
 template: component
 id: component-checkbox
 title: Checkbox
-description: Radio Buttons appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
-lead: Radio Buttons appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
+description: Checkboxes appear as a square shaped UI accompanied by a caption.
+lead: Checkboxes appear as a square shaped UI accompanied by a caption. Checkboxes can be found in tables, forms, or in and around text inputs.
 tabs:
   - label: 'Overview'
     id: 'overview'
@@ -38,14 +38,14 @@ Users can click a Checkbox to make a choice and click it again to deselect an op
 
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Payload includes</legend>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-2" value="example-2" checked>
-    <label class="ods-checkbox--label" for="example-2">Tungsten rods</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3" checked>
-    <label class="ods-checkbox--label" for="example-3">Oxygen filters</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
-    <label class="ods-checkbox--label" for="example-3">Liquid fuel</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
-    <label class="ods-checkbox--label" for="example-3">Replacement crew</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-behavior[]" id="overview-behavior-1" value="tungsten" checked>
+    <label class="ods-checkbox--label" for="overview-behavior-1">Tungsten rods</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-behavior[]" id="overview-behavior-2" value="filters" checked>
+    <label class="ods-checkbox--label" for="overview-behavior-2">Oxygen filters</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-behavior[]" id="overview-behavior-3" value="fuel">
+    <label class="ods-checkbox--label" for="overview-behavior-3">Liquid fuel</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-behavior[]" id="overview-behavior-4" value="crew">
+    <label class="ods-checkbox--label" for="overview-behavior-4">Replacement crew</label>
   </fieldset>
 
 </Visual>
@@ -68,8 +68,8 @@ Checkboxes in their "unchecked" state are considered enabled. They are ready for
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
-    <label class="ods-checkbox--label" for="example-1">Enable auto-docking</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-enabled" id="overview-enabled" value="overview-enabled">
+    <label class="ods-checkbox--label" for="overview-enabled">Enable auto-docking</label>
   </fieldset>
 </Visual>
 
@@ -83,8 +83,8 @@ Hover states are activated when the user pauses their pointer over the input.
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
-    <label class="ods-checkbox--label is-ods-checkbox-hover" for="example-1">Enable auto-docking</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-hover" id="overview-hover" value="overview-hover">
+    <label class="ods-checkbox--label is-ods-checkbox-hover" for="overview-hover">Enable auto-docking</label>
   </fieldset>
 </Visual>
 
@@ -98,8 +98,8 @@ The focus state is a visual affordance that the user has highlighted the input w
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-checkbox is-ods-checkbox-focus" type="checkbox" name="checkbox" id="example-1" value="example-1">
-    <label class="ods-checkbox--label is-ods-checkbox-focus" for="example-1">Enable auto-docking</label>
+    <input class="ods-checkbox is-ods-checkbox-focus" type="checkbox" name="overview-focus" id="overview-focus" value="overview-focus">
+    <label class="ods-checkbox--label is-ods-checkbox-focus" for="overview-focus">Enable auto-docking</label>
   </fieldset>
 </Visual>
 
@@ -113,8 +113,8 @@ Checked Checkboxes, sometimes referred to as "ticked", display a check to indica
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input checked class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
-    <label class="ods-checkbox--label" for="example-1">Enable auto-docking</label>
+    <input checked class="ods-checkbox" type="checkbox" name="overview-checked" id="overview-checked" value="overview-checked">
+    <label class="ods-checkbox--label" for="overview-checked">Enable auto-docking</label>
   </fieldset>
 </Visual>
 
@@ -130,8 +130,8 @@ Checkboxes are disabled individually. The values of disabled inputs will not be 
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1" disabled>
-    <label class="ods-checkbox--label" for="example-1">Enable auto-docking</label>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="overview-disabled" value="overview-disabled" disabled>
+    <label class="ods-checkbox--label" for="overview-disabled">Enable auto-docking</label>
   </fieldset>
 </Visual>
 
@@ -150,13 +150,13 @@ Unlike Radio Buttons, Checkboxes validate individually, not as a group.
 <Visual>
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Undocking Procedure</legend>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-0" value="example-0" checked>
-    <label class="ods-checkbox--label" for="example-0">Cycle airlock</label>
-    <input checked class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
-    <label class="ods-checkbox--label" for="example-1">Disengage maglock</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1" data-invalid checked>
-    <label class="ods-checkbox--label" for="example-1">Open the pod bay doors</label>
-    <aside class="ods-field--error" id="checkbox-invalid-error">
+    <input class="ods-checkbox" type="checkbox" name="overview-invalid[]" id="overview-invalid-1" value="overview-invalid-1" checked>
+    <label class="ods-checkbox--label" for="overview-invalid-1">Cycle airlock</label>
+    <input checked class="ods-checkbox" type="checkbox" name="overview-invalid[]" id="overview-invalid-2" value="overview-invalid-2">
+    <label class="ods-checkbox--label" for="overview-invalid-2">Disengage maglock</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-invalid[]" id="overview-invalid-3" value="overview-invalid-3" aria-describedby="overview-invalid-3-error" data-invalid checked>
+    <label class="ods-checkbox--label" for="overview-invalid-3">Open the pod bay doors</label>
+    <aside class="ods-field--error" id="overview-invalid-3-error">
       <span class="u-visually-hidden">Error:</span> I'm afraid I can't do that, Dave.
     </aside>
   </fieldset>
@@ -174,8 +174,8 @@ Individual checkboxes can be set to required. This is useful when a user confirm
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-checkbox" type="checkbox" name="checkbox-required" id="checkbox-required" value="terms-accepted" checked required>
-    <label class="ods-checkbox--label" for="checkbox-required">I understand the risks of space travel.</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-required" id="overview-required" value="terms-accepted" checked required>
+    <label class="ods-checkbox--label" for="overview-required">I understand the risks of space travel.</label>
   </fieldset>
 </Visual>
 
