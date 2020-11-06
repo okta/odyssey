@@ -41,17 +41,17 @@ To support expected functionality and behaviors, Select relies on the Choices.js
 <Visual>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
+      <select class="ods-select" data-js-choices id="overview-behavior" name="overview-behavior" required>
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      <label class="ods-label" for="overview-behavior">Wormhole destination</label>
     </div>
   </fieldset>
 </Visual>
@@ -75,17 +75,17 @@ The default Select allows users to choose a single value from a list of options.
 <Visual>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
+      <select class="ods-select" data-js-choices id="overview-single" name="overview-single" required>
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      <label class="ods-label" for="overview-single">Wormhole destination</label>
     </div>
   </fieldset>
 </Visual>
@@ -101,16 +101,17 @@ The Multi-Select variant allows users to choose more than one value from the lis
 <Visual>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+      <select class="ods-select" data-js-choices id="overview-multi" name="overview-multi" required>
+        <option></option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      <label class="ods-label" for="overview-multi">Wormhole destination</label>
     </div>
   </fieldset>
 </Visual>
@@ -134,17 +135,17 @@ Select inputs in their "normal" state are considered enabled. They are ready for
 <Visual>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
+      <select class="ods-select" data-js-choices id="overview-enabled" name="overview-enabled" required>
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      <label class="ods-label" for="overview-enabled">Wormhole destination</label>
     </div>
   </fieldset>
 </Visual>
@@ -160,17 +161,17 @@ Hover states are activated when the user pauses their pointer over the input.
 <Visual>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
+      <select class="ods-select" data-js-choices id="overview-hover" name="overview-hover" required>
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      <label class="ods-label" for="overview-hover">Wormhole destination</label>
     </div>
   </fieldset>
 </Visual>
@@ -186,17 +187,17 @@ The focus state is a visual affordance that the user has highlighted the input w
 <Visual>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
+      <select class="ods-select" data-js-choices id="overview-focus" name="overview-focus" required>
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      <label class="ods-label" for="overview-focus">Wormhole destination</label>
     </div>
   </fieldset>
 </Visual>
@@ -214,17 +215,17 @@ The values of disabled inputs will not be submitted.
 <Visual>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required disabled>
+      <select class="ods-select" data-js-choices id="overview-disabled" name="overview-disabled" required disabled>
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      <label class="ods-label" for="overview-disabled">Wormhole destination</label>
     </div>
   </fieldset>
 </Visual>
@@ -240,17 +241,17 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
 <Visual>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color">
+      <select class="ods-select" data-js-choices id="overview-optional" name="overview-optional">
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color <span class="ods-label--optional">Optional</span></label>
+      <label class="ods-label" for="overview-optional">Wormhole destination <span class="ods-label--optional">Optional</span></label>
     </div>
   </fieldset>
 </Visual>
@@ -268,17 +269,17 @@ When indicating a validation error, please use a Field Error label to indicate t
 <Visual>
   <fieldset class="ods-fieldset" data-invalid>
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" data-invalid>
+      <select class="ods-select" data-js-choices id="overview-invalid" name="overview-invalid" required data-invalid aria-describedby="overview-invalid-error">
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      <label class="ods-label" for="overview-invalid">Wormhole destination</label>
       <aside class="ods-field--error" id="overview-invalid-error">
         <span class="u-visually-hidden">Error:</span>This does not appear to be a valid planetoid.
       </aside>
@@ -301,17 +302,23 @@ Select inputs should not have a default selected unless a majority of users will
 <Visual>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
+      <select class="ods-select" data-js-choices id="overview-groups" name="overview-groups" required>
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <optgroup label="Alpha Centauri system">
+          <option value="proxima">Proxima Centauri</option>
+          <option value="alpha-a">Alpha Centauri A</option>
+          <option value="alpha-a">Alpha Centauri B</option>
+        </optgroup>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <optgroup label="Sirius system">
+          <option value="sirius-a">Sirius A</option>
+          <option value="sirius-b">Sirius B</option>
+        </optgroup>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      <label class="ods-label" for="overview-groups">Wormhole destination</label>
     </div>
   </fieldset>
 </Visual>
