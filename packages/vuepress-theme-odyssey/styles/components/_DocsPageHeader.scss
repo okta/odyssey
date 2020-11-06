@@ -1,7 +1,6 @@
 .docs-page-header {
   display: grid;
   position: relative;
-  z-index: 2;
   grid-column-gap: $spacing-m;
   grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
   justify-content: space-between;
