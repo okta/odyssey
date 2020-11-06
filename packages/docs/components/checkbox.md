@@ -2,7 +2,8 @@
 template: component
 id: component-checkbox
 title: Checkbox
-description: Allows a user to make decisions and opt in to multiple attributes of a product.
+description: Typically shown in sets, Checkboxes appear as a square shaped UI accompanied by a caption.
+lead: Typically shown in sets, Checkboxes appear as a square shaped UI accompanied by a caption. Checkboxes can be found in tables, forms, or in and around text inputs.
 tabs:
   - label: 'Overview'
     id: 'overview'
@@ -21,63 +22,86 @@ links:
 
 ## Anatomy
 
-<Description class="is-fpo">
-
-Descriptive content around **checkbox anatomy** should go here.
-
-</Description>
-
 <Anatomy
   img="/images/anatomy-checkbox.svg"
 />
 
+## Behavior
+
 <Description>
 
-> <span class="is-fpo is-fpo-negative">`<input>` elements of type checkbox are rendered by default as square boxes that are checked (ticked) when activated, like you might see in an official government paper form. They allow you to select single values for submission in a form (or not). - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox'>MDN</a></cite> </span>
+Users can click a Checkbox to make a choice and click it again to deselect an option. They allow users to select one or more options of something.
 
 </Description>
 
 <Visual>
 
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Donut toppings</legend>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-2" value="example-2">
-    <label class="ods-checkbox--label" for="example-2">Sprinkles</label>
+    <legend class="ods-input-legend">Payload includes</legend>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-2" value="example-2" checked>
+    <label class="ods-checkbox--label" for="example-2">Tungsten rods</label>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3" checked>
+    <label class="ods-checkbox--label" for="example-3">Oxygen filters</label>
     <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
-    <label class="ods-checkbox--label" for="example-3">Peanuts</label>
+    <label class="ods-checkbox--label" for="example-3">Liquid fuel</label>
     <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
-    <label class="ods-checkbox--label" for="example-3">Shredded coconut</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-3" value="example-3">
-    <label class="ods-checkbox--label" for="example-3">Oreos</label>
+    <label class="ods-checkbox--label" for="example-3">Replacement crew</label>
   </fieldset>
 
 </Visual>
 
 ## States
 
-<Description class="is-fpo">
+<Description>
 
-Descriptive content around **states** should go here.
+There are six Checkbox states: Checked, unchecked, disabled, invalid, optional/required, and indeterminate.
 
 </Description>
 
-### Disabled
+### Checked
 
 <Description>
 
-> <span class="is-fpo is-fpo-negative">This Boolean attribute prevents the user from interacting with the input. In particular, the `click` event is not dispatched on disabled controls, and disabled controls aren't submitted with their form. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled'>MDN</a></cite></span>
-
-Disabling checkboxes happens on a per-option basis.
+Checked Checkboxes, sometimes referred to as "ticked", display a check to indicate the they are selected.
 
 </Description>
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Disabled examples</legend>
+    <input checked class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
+    <label class="ods-checkbox--label" for="example-1">Enable auto-docking</label>
+  </fieldset>
+</Visual>
+
+### Unchecked
+
+<Description>
+
+Unchecked Checkboxes appear as stated above as a rounded rectangle with white fill. This indicates that the Checkbox is not selected.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
+    <label class="ods-checkbox--label" for="example-1">Allow low-oxygen mix</label>
+  </fieldset>
+</Visual>
+
+### Disabled
+
+<Description>
+
+Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
+
+Checkboxes are disabled individually. The values of disabled inputs will not be submitted.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
     <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-0" value="example-0" disabled>
-    <label class="ods-checkbox--label" for="example-0">Unchecked</label>
-    <input checked class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1" disabled>
-    <label class="ods-checkbox--label" for="example-1">Checked</label>
+    <label class="ods-checkbox--label" for="example-0">Open pod bay doors</label>
   </fieldset>
 </Visual>
 
@@ -85,43 +109,41 @@ Disabling checkboxes happens on a per-option basis.
 
 <Description>
 
-> <span class="is-fpo is-fpo-negative">The :invalid CSS pseudo-class represents any `<input>` or other `<form>` element whose contents fail to validate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid'>MDN</a></cite></span>
+Checkboxes present as invalid when a required input is left unchecked or some other criteria isn’t met.
 
-Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
+Unlike Radio Buttons, Checkboxes validate individually, not as a group.
 
-Note, when indicating a validation error, please use an `.ods-field--error` to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
-
-Unlike radio buttons, checkboxes validate individually, not as a group.
+Visually, they appear in an error red color.
 
 </Description>
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Invalid examples</legend>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-0" value="example-0" data-invalid>
-    <label class="ods-checkbox--label" for="example-0">Unchecked</label>
-    <input checked class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1" data-invalid>
-    <label class="ods-checkbox--label" for="example-1">Checked</label>
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1" data-invalid data-example-indeterminate>
-    <label class="ods-checkbox--label" for="example-1">Indeterminate</label>
-    <aside class="ods-field--error" id="checkbox-invalid-error">Validation error message.</aside>
+    <legend class="ods-input-legend">Undocking Procedure</legend>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-0" value="example-0" checked>
+    <label class="ods-checkbox--label" for="example-0">Cycle airlock</label>
+    <input checked class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1">
+    <label class="ods-checkbox--label" for="example-1">Disengage maglock</label>
+    <input class="ods-checkbox" type="checkbox" name="checkbox" id="example-1" value="example-1" data-invalid checked>
+    <label class="ods-checkbox--label" for="example-1">Release docking clamps</label>
+    <aside class="ods-field--error" id="checkbox-invalid-error">Clamp C is still engaged.</aside>
   </fieldset>
 </Visual>
 
-### Optional/Required
+### Required
 
 <Description>
 
-Unlike radio buttons, checkbox groups do not validate as a group. By default, checkbox groups should be treated as `:optional`.
+Unlike other inputs, Odyssey assumes Checkboxes are optional by default.
 
-Individually, checkboxes can be set to `required` - most commonly seen when a user confirms they have read terms of service.
+Individual checkboxes can be set to required. This is useful when a user confirms they have read the terms of service.
 
 </Description>
 
 <Visual>
   <fieldset class="ods-fieldset">
     <input class="ods-checkbox" type="checkbox" name="checkbox-required" id="checkbox-required" value="terms-accepted" checked required>
-    <label class="ods-checkbox--label" for="checkbox-required">I agree to share the donut assortment.</label>
+    <label class="ods-checkbox--label" for="checkbox-required">I understand the risks of space travel.</label>
   </fieldset>
 </Visual>
 
@@ -129,19 +151,19 @@ Individually, checkboxes can be set to `required` - most commonly seen when a us
 
 <Description>
 
-In the case of nested checkboxes, an `:indeterminate` state may be required.
+In the case of nested checkboxes, an indeterminate state may be required.
 
-Please note that this state must be set via javascript and is not reflected in the DOM - only `checked` and `unchecked` states will be submitted by default.
+Note that this state is visual-only and will be submitted as either "checked" or "unchecked" depending on the design of your UI.
 
 </Description>
 
 <Visual>
   <figure class="ods-table--figure">
     <figcaption class="ods-table--figcaption">
-      Best donuts poll results
+      Hangar 18 inventory
     </figcaption>
     <table class="ods-table">
-      <caption>Results of the most popular donuts poll administered October 2020.</caption>
+      <caption>A checklist for auditing facility storage.</caption>
       <thead>
         <tr>
           <th scope="column" class="is-ods-table-checkbox">
@@ -150,32 +172,29 @@ Please note that this state must be set via javascript and is not reflected in t
               <span class="u-visually-hidden">Select this row</span>
             </label>
           </th>
-          <th scope="column" class="is-ods-table-num">Rank</th>
-          <th scope="column">Name</th>
-          <th scope="column">Votes</th>
+          <th scope="column">Item</th>
+          <th scope="column" class="is-ods-table-num">Count</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="is-ods-table-checkbox">
-            <input class="ods-checkbox" type="checkbox" name="row[0]" id="checkbox-0" value="check-0">
+            <input class="ods-checkbox" type="checkbox" name="row[0]" id="checkbox-0" value="check-0" checked>
             <label class="ods-checkbox--label" for="checkbox-0">
               <span class="u-visually-hidden">Select this row</span>
             </label>
           </td>
-          <td class="is-ods-table-num">1</td>
-          <td>Glazed</td>
+          <td>Hermetic seals</td>
           <td class="is-ods-table-num">8,514,877</td>
         </tr>
         <tr>
           <td class="is-ods-table-checkbox">
-            <input class="ods-checkbox" type="checkbox" name="row[1]" id="checkbox-1" value="check-1">
+            <input class="ods-checkbox" type="checkbox" name="row[1]" id="checkbox-1" value="check-1" checked>
             <label class="ods-checkbox--label" for="checkbox-1">
               <span class="u-visually-hidden">Select this row</span>
             </label>
           </td>
-          <td class="is-ods-table-num">2</td>
-          <td>Chocolate Glazed</td>
+          <td>Tiny flags</td>
           <td class="is-ods-table-num">2,780,400</td>
         </tr>
         <tr>
@@ -185,8 +204,7 @@ Please note that this state must be set via javascript and is not reflected in t
               <span class="u-visually-hidden">Select this row</span>
             </label>
           </td>
-          <td class="is-ods-table-num">3</td>
-          <td>Boston Creme</td>
+          <td>Moon rocks</td>
           <td class="is-ods-table-num">2,344,858</td>
         </tr>
       </tbody>
