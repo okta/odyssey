@@ -111,7 +111,7 @@ Use Overlay Buttons when Primary or Secondary variants aren't visually suitable.
 
 </Description>
 
-<Visual>
+<Visual variant="background">
   <template>
     <button class="ods-button is-ods-button-overlay">Register for Spacecamp</button>
   </template>
