@@ -2,17 +2,14 @@
 template: component
 id: component-status
 title: Status
-description: TODO
-lead: Status is used to keep users informed, by providing appropriate feedback on particular concepts or entities. For Okta, status can be used to display overall operational status all the way down to very granular concepts, like user status.
+description: Status is used to inform users by providing feedback on system states.
+lead: Status is used to inform users by providing feedback on system states. Status can display broad operational states as well as granular states like user status.
 tabs:
   - label: 'Overview'
     id: 'overview'
   - label: 'HTML & SCSS'
     id: 'html-scss'
 links:
-  - icon: github
-    label: Legacy docs
-    href: https://github.com/okta/odyssey/blob/master/packages/docs/components/radio-button.md
   - icon: github
     label: View source
     href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_status.scss
@@ -25,32 +22,15 @@ links:
 
 ## Anatomy
 
-<Description>
-
-Like other smaller components, Status is quite simple. Below you can see there are two versions. One with a label, and one without. Beyond that, there is a Status and Status Descriptor.
-
-</Description>
-
 <Anatomy img="/images/anatomy-status.svg" />
 
-## Usage
+## Behavior
 
 <Description>
 
-Status should be used to communicate the state of a discrete item, such as a server or individual process. Both labeled and unlabeled variants are acceptable, but should follow the associated guidelines below.
+Status is not an interactive element. It is only intended to inform. If a Status indicates that a user should take action, be sure to provide the appropriate controls.
 
 </Description>
-
-<Visual>
-  <dl class="ods-status is-ods-status-success">
-    <dt class="ods-status--label">
-      Server status
-    </dt>
-    <dd class="ods-status--value">
-      System operational
-    </dd>
-  </dl>
-</Visual>
 
 ## Variants
 
@@ -64,9 +44,9 @@ There are four variants of Status available: Neutral, Success, Caution, and Dang
 
 <Description>
 
-Neutral Statuses are gray and should be used to indicate states like Paused, Not started, or Queued.
+Neutral Statuses are gray and should be used to indicate states like "Paused", "Not started", or "Queued".
 
-This variant is our default.
+This is the default variant.
 
 </Description>
 
@@ -138,8 +118,27 @@ Danger Statuses are red and should be used to indicate states like Error, Failur
   </dl>
 </Visual>
 
+## Usage
+
+<Description>
+
+Status should be used to communicate the state of a discrete item, such as a server or individual process. Both labeled and unlabeled variants are acceptable, but should follow the associated guidelines below.
+
+</Description>
+
+<Visual>
+  <dl class="ods-status is-ods-status-success">
+    <dt class="ods-status--label">
+      Server status
+    </dt>
+    <dd class="ods-status--value">
+      System operational
+    </dd>
+  </dl>
+</Visual>
+
 ## Content guidelines
-  
+
 Status is intended to be both succinct and easily understood; limit label and description to one to two words. As with other components, use sentence casing for both.
 :::
 
@@ -152,7 +151,7 @@ Status is intended to be both succinct and easily understood; limit label and de
     <dl class="ods-status">
       <dt class="ods-status--label">
         Server status
-      </dt> 
+      </dt>
       <dd class="ods-status--value">
         System inactive
       </dd>
@@ -163,7 +162,7 @@ Status is intended to be both succinct and easily understood; limit label and de
   <dl class="ods-status">
     <dt class="ods-status--label">
       Server status
-    </dt> 
+    </dt>
     <dd class="ods-status--value">
       System inactive
     </dd>
@@ -178,7 +177,7 @@ Status is intended to be both succinct and easily understood; limit label and de
     <dl class="ods-status is-ods-status-success">
       <dt class="ods-status--label">
         Server status
-      </dt> 
+      </dt>
       <dd class="ods-status--value">
         System operational
       </dd>
@@ -189,7 +188,7 @@ Status is intended to be both succinct and easily understood; limit label and de
   <dl class="ods-status is-ods-status-success">
     <dt class="ods-status--label">
       Server status
-    </dt> 
+    </dt>
     <dd class="ods-status--value">
       System operational
     </dd>
@@ -204,7 +203,7 @@ Status is intended to be both succinct and easily understood; limit label and de
     <dl class="ods-status is-ods-status-caution">
       <dt class="ods-status--label">
         Server status
-      </dt> 
+      </dt>
       <dd class="ods-status--value">
         Service degredation
       </dd>
@@ -215,7 +214,7 @@ Status is intended to be both succinct and easily understood; limit label and de
   <dl class="ods-status is-ods-status-caution">
     <dt class="ods-status--label">
       Server status
-    </dt> 
+    </dt>
     <dd class="ods-status--value">
       Service degredation
     </dd>
@@ -230,7 +229,7 @@ Status is intended to be both succinct and easily understood; limit label and de
     <dl class="ods-status is-ods-status-danger">
       <dt class="ods-status--label">
         Server status
-      </dt> 
+      </dt>
       <dd class="ods-status--value">
         Service disruption
       </dd>
@@ -241,7 +240,7 @@ Status is intended to be both succinct and easily understood; limit label and de
   <dl class="ods-status is-ods-status-danger">
     <dt class="ods-status--label">
       Server status
-    </dt> 
+    </dt>
     <dd class="ods-status--value">
       Service disruption
     </dd>
