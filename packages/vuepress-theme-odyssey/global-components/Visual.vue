@@ -2,7 +2,9 @@
   <div
     :class="{
       'docskit-visual': true,
-      'docskit-visual--wide': wide,
+      'with-fade': fade,
+      [`layout-${layout}`]: layout,
+      [`theme-${theme}`]: theme,
       [`is-docskit-visual-${variant}`]: variant
     }"
   >
@@ -24,13 +26,19 @@ export default {
   props: {
     variant: {
       type: String,
-      required: false,
-      default: null
+      required: false
     },
-    wide: {
+    layout: {
+      type: String,
+      required: false
+    },
+    theme: {
+      type: String,
+      required: false
+    },
+    fade: {
       type: Boolean,
-      required: false,
-      default: false
+      required: false
     }
   }
 };
