@@ -37,15 +37,11 @@
       </DocsCard>
     </DocsCardGroup>
 
-    <!-- TODO: Componentize Principle -->
     <div class="docs-principle">
-      <h1>{{ $page.frontmatter.principle.title }}</h1>
+      <h1 class="docs-principle--title">{{ $page.frontmatter.principle.title }}</h1>
       <p>
         {{ $page.frontmatter.principle.description }}
       </p>
-      <DocsLink :href="$page.frontmatter.principle.href">{{
-        $page.frontmatter.principle.label
-      }}</DocsLink>
     </div>
 
     <DocsCardGroup tag="ul">

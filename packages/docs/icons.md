@@ -4,7 +4,7 @@ template: plain
 pageHeaderVariant: icon
 title: Icons
 headline: Icons
-lead:  An icon is a graphic that represents an idea or concept, independent of any particular language, specific words, or phrases. Below are icons that can be used for design projects in Odyssey.
+lead: The icon system within Odyssey establishes a visual language that anyone can easily understand regardless of age, tongue, or culture.
 tabs:
   - label: 'Overview'
     id: 'overview'
@@ -235,6 +235,8 @@ tabs:
   Every icon is built on a grid at a specific size. This ensures not only visual consistency, but allows us to easily swap icons in various applications.
 
 </Description>
+
+<Visual>x</Visual>
 
 ### Design your own
 

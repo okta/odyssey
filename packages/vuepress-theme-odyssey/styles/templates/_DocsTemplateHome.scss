@@ -68,6 +68,10 @@
   position: relative;
   margin: $spacing-xl 0;
 
+  .docs-principle--title {
+    @include is-visually-hidden;
+  }
+
   p {
     font-size: $size-title-1;
   }
