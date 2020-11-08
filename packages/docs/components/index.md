@@ -2,5 +2,5 @@
 template: index
 id: components
 title: Components
-lead: Et morbi eget at consectetur. Elit aenean mi phasellus. Et iusto odio atque dignissimos ducimus qui blanditiis praesentium voluptatum deleniti animi.
+lead: A set of commonly found, pre-assembled UI objects built from the Odyssey Base and organized by function and form.
 ---
