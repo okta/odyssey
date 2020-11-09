@@ -38,7 +38,7 @@ Additionally, the tab element is keyboard-navigable (See [Accessibility: Keyboar
 
 <Visual layout="wide" content="full" fade>
   <template>
-    <header class="is-sample-unimportant">
+    <header>
       <h1>Terrestrial Planets</h1>
       <p>Terrestrial planets are planets that are composed primarily of silicate rocks or metals.</p>
     </header>
