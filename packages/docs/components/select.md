@@ -436,7 +436,7 @@ Options may be grouped within the Select list to help guide users.
             <option value="value-2-2">Option 2</option>
           </optgroup>
         </select>
-        <label class="ods-label" for="example-3">Destination star</label>
+        <label class="ods-label" for="example-3">Field label</label>
       </div>
     </fieldset>
   </div>
@@ -541,6 +541,12 @@ Options may be grouped within the Select list to help guide users.
 </figure>
 
 ### Invalid
+
+<Description>
+
+Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
+
+</Description>
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
