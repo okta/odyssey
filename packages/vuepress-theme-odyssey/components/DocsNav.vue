@@ -26,6 +26,7 @@
               'docs-nav-link': true,
               'is-docs-nav-link--active': isCurrentRoute(item.link)
             }"
+            target="_self"
             :href="item.link"
             :aria-expanded="isSubmenuExpanded(index)"
             @click.native="() => resetSubmenus(index)"
@@ -60,6 +61,7 @@
           >
             <DocsLink
               :href="subitem.link"
+              target="_self"
               :class="{
                 'docs-nav-link': true,
                 'is-docs-nav-link--active': isCurrentRoute(subitem.link)

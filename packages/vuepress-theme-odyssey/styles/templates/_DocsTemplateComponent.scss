@@ -37,13 +37,9 @@
 
   a {
     display: flex;
-    padding: $spacing-xs-em $spacing-s-em $spacing-xs-em 0;
+    align-items: center;
+    padding: $spacing-xs-em;
     line-height: $base-line-height;
-
-    &:focus {
-      box-shadow: none;
-      text-decoration: underline;
-    }
   }
 
   span {
