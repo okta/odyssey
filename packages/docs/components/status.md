@@ -189,16 +189,18 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
 
 ::: slot html-scss
 
+## Variants
+
 ### Neutral
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <dl class="ods-status">
       <dt class="ods-status--label">
-        Server status
+        Propulsion systems
       </dt>
       <dd class="ods-status--value">
-        System inactive
+        Engines offline
       </dd>
     </dl>
   </div>
@@ -206,10 +208,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   ```html
   <dl class="ods-status">
     <dt class="ods-status--label">
-      Server status
+      Propulsion systems
     </dt>
     <dd class="ods-status--value">
-      System inactive
+      Engines offline
     </dd>
   </dl>
   ```
@@ -221,10 +223,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   <div class="docs-example--rendered">
     <dl class="ods-status is-ods-status-success">
       <dt class="ods-status--label">
-        Server status
+        Propulsion systems
       </dt>
       <dd class="ods-status--value">
-        System operational
+        Online
       </dd>
     </dl>
   </div>
@@ -232,10 +234,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   ```html
   <dl class="ods-status is-ods-status-success">
     <dt class="ods-status--label">
-      Server status
+      Propulsion systems
     </dt>
     <dd class="ods-status--value">
-      System operational
+      Online
     </dd>
   </dl>
   ```
@@ -247,10 +249,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   <div class="docs-example--rendered">
     <dl class="ods-status is-ods-status-caution">
       <dt class="ods-status--label">
-        Server status
+        Propulsion systems
       </dt>
       <dd class="ods-status--value">
-        Service degredation
+        Check engine
       </dd>
     </dl>
   </div>
@@ -258,25 +260,25 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   ```html
   <dl class="ods-status is-ods-status-caution">
     <dt class="ods-status--label">
-      Server status
+      Propulsion systems
     </dt>
     <dd class="ods-status--value">
-      Service degredation
+      Check engine
     </dd>
   </dl>
   ```
 </figure>
 
-### Caution
+### Danger
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <dl class="ods-status is-ods-status-danger">
       <dt class="ods-status--label">
-        Server status
+        Propulsion systems
       </dt>
       <dd class="ods-status--value">
-        Service disruption
+        Warp core disruption
       </dd>
     </dl>
   </div>
@@ -284,62 +286,33 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   ```html
   <dl class="ods-status is-ods-status-danger">
     <dt class="ods-status--label">
-      Server status
+      Propulsion systems
     </dt>
     <dd class="ods-status--value">
-      Service disruption
+      Warp core disruption
     </dd>
   </dl>
   ```
 </figure>
 
-## Accessibility
+## Hiding labels
 
-In addition to including copy for assistive technologies, consider whether your Status may change while the user is on the page.
+<Description>
 
-If the current state of Status may change asynchronously while a user is visiting the page, utilize the `role="status"` attribute to ensure that assistive technologies correctly indicate this change.
-
-<strong>Note:</strong> This attribute must be present <em>before</em> the change occurs.
-
-<figure class="docs-example">
-  <div class="docs-example--rendered">
-    <dl class="ods-status is-ods-status-danger" role="status">
-      <dt class="ods-status--label">
-        Server status
-      </dt>
-      <dd class="ods-status--value">
-        Service disruption
-      </dd>
-    </dl>
-  </div>
-
-  ```html
-    <dl class="ods-status is-ods-status-danger" role="status">
-      <dt class="ods-status--label">
-        Server status
-      </dt>
-      <dd class="ods-status--value">
-        Service disruption
-      </dd>
-    </dl>
-  ```
-</figure>
-
-
-### Assistive labels
-
-Labels may be hidden by applying the `.is-ods-status-label-hidden` class. If a label is not visually present, ensure that appropriate context is communicated by the Status itself and close proximity to the content that it’s supporting.
+Labels may be hidden by applying the `.is-ods-status-label-hidden` class.
 
 Even if the label is hidden, it must be populated to ensure appropriate context for users of assistive technology.
+
+</Description>
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
       <dt class="ods-status--label">
-        Server status
+        Warp drive status
       </dt>
       <dd class="ods-status--value">
-        System operational
+        Warp drive engaged
       </dd>
     </dl>
   </div>
@@ -347,10 +320,44 @@ Even if the label is hidden, it must be populated to ensure appropriate context 
   ```html
   <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
     <dt class="ods-status--label">
-      Server status
+      Warp drive status
     </dt>
     <dd class="ods-status--value">
-      System operational
+      Warp drive engaged
+    </dd>
+  </dl>
+  ```
+</figure>
+
+## Accessibility
+
+<Description>
+
+If the current state of Status may change asynchronously while a user is visiting the page, utilize the `role="status"` attribute to ensure that assistive technologies correctly indicate this change.
+
+<strong>Note:</strong> This attribute must be present <em>before</em> the change occurs.
+
+</Description>
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <dl class="ods-status is-ods-status-caution" role="status">
+      <dt class="ods-status--label">
+        Propulsion systems
+      </dt>
+      <dd class="ods-status--value">
+        Warmup initiated
+      </dd>
+    </dl>
+  </div>
+
+  ```html
+  <dl class="ods-status is-ods-status-caution" role="status">
+    <dt class="ods-status--label">
+      Propulsion systems
+    </dt>
+    <dd class="ods-status--value">
+      Warmup initiated
     </dd>
   </dl>
   ```
