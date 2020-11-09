@@ -18,6 +18,12 @@ module.exports = {
     require('./plugins/plugin-choices/index.js'),
     require('./plugins/plugin-micromodal/index.js')
   ],
+  markdown: {
+    externalLinks: {
+      target: '',
+      rel: ''
+    }
+  },
   themeConfig: {
     flags: {
       hasSearch: false
