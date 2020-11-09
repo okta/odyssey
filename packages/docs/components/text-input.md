@@ -355,11 +355,182 @@ Finally, Users with low digital literacy may not understand the purpose or behav
 :::
 
 ::: slot html-scss
-## HTML & CSS
 
-### Invalid
 
-The `:invalid` CSS pseudo-class represents any `<input>` or other `<form>` element whose contents fail to validate. - MDN
-Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
+## Types
+
+<Description>
+
+Out of the box, Odyssey supports input types for `text`, `email`, `tel`, and `password` with more coming soon.
+
+</Description>
+
+## Text
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="example-1" id="example-1" spellcheck="false" value="Input value" required>
+        <label class="ods-label" for="example-1">Field label</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="example-1" id="example-1" spellcheck="false" value="Input value" required>
+      <label class="ods-label" for="example-1">Field label</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+### Email
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="email" name="example-2" id="example-2" autocomplete="email" spellcheck="false" value="name@okta.design" required>
+        <label class="ods-label" for="example-2">Email</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="email" name="example-2" id="example-2" autocomplete="email" spellcheck="false" value="name@okta.design" required>
+      <label class="ods-label" for="example-2">Email</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+### Telephone
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="tel" name="example-3" id="example-3" spellcheck="false" value="888-722-7871" required>
+        <label class="ods-label" for="example-2">Telephone number</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="tel" name="example-3" id="example-3" spellcheck="false" value="888-722-7871" required>
+      <label class="ods-label" for="example-2">Telephone number</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+### Password
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="password" name="example-4" id="example-4" spellcheck="false" value="fake-password-value" required>
+        <label class="ods-label" for="example-4">Password</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="password" name="example-4" id="example-4" spellcheck="false" value="fake-password-value" required>
+      <label class="ods-label" for="example-4">Password</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+## States
+
+### Disabled
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="example-5" id="example-5" spellcheck="false" value="Disabled input value" disabled required>
+        <label class="ods-label" for="example-5">Field label</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="example-5" id="example-5" spellcheck="false" value="Disabled input value" disabled required>
+      <label class="ods-label" for="example-5">Field label</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+### Optional label
+
+<figure class="docs-example" data-optional>
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="example-6" id="example-6" spellcheck="false" value="" required>
+        <label class="ods-label" for="example-6">Field label <span class="ods-label--optional">Optional</span></label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="example-6" id="example-6" spellcheck="false" value="" required>
+      <label class="ods-label" for="example-6">Field label <span class="ods-label--optional">Optional</span></label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+### Invalid label
+
+<Description>
+  
+  Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
+
+</Description>
+
+<figure class="docs-example" data-invalid>
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="text" name="example-6" id="example-6" spellcheck="false" value="" data-invalid required>
+        <label class="ods-label" for="example-6">Field label</label>
+        <aside class="ods-field--error" id="overview-invalid-error">
+          <span class="u-visually-hidden">Error:</span> Invalid error description
+        </aside>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="example-7" id="example-7" spellcheck="false" value="" data-invalid required>
+      <label class="ods-label" for="example-7">Field label</label>
+      <aside class="ods-field--error" id="overview-invalid-error">
+        <span class="u-visually-hidden">Error:</span> Invalid error description
+      </aside>
+    </div>
+  </fieldset>
+  ```
+</figure>
 
 :::

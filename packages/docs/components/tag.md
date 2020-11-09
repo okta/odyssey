@@ -159,5 +159,25 @@ Use Tags as descriptors paired with a particular object. These descriptors may b
 :::
 
 ::: slot html-scss
-## HTML & CSS
+
+## Basic example
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <ul class="ods-tag--list">
+      <li class="ods-tag">Tag 1</li>
+      <li class="ods-tag">Tag 2</li>
+      <li class="ods-tag">Tag 3</li>
+    </ul>
+  </div>
+
+  ```html
+  <ul class="ods-tag--list">
+    <li class="ods-tag">Tag 1</li>
+    <li class="ods-tag">Tag 2</li>
+    <li class="ods-tag">Tag 3</li>
+  </ul>
+  ```
+</figure>
+
 :::
