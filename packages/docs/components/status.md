@@ -53,10 +53,10 @@ This is the default variant.
 <Visual>
   <dl class="ods-status">
     <dt class="ods-status--label">
-      Server status
+      Propulsion systems
     </dt>
     <dd class="ods-status--value">
-      System inactive
+      Engines offline
     </dd>
   </dl>
 </Visual>
@@ -65,17 +65,17 @@ This is the default variant.
 
 <Description>
 
-Success Statuses are green and should be used to indicate states like Complete, Active, Available, Service operational.
+Success Statuses are green and should be used to indicate states like "Complete", "Active", or "Service operational".
 
 </Description>
 
 <Visual>
   <dl class="ods-status is-ods-status-success">
     <dt class="ods-status--label">
-      Server status
+      Propulsion systems
     </dt>
     <dd class="ods-status--value">
-      System operational
+      Online
     </dd>
   </dl>
 </Visual>
@@ -84,17 +84,17 @@ Success Statuses are green and should be used to indicate states like Complete, 
 
 <Description>
 
-Caution Statuses are yellow and should be used to indicate states like Attention suggested or Service degradation.
+Caution Statuses are yellow and should be used to indicate states like "Attention suggested" or "Service degradation".
 
 </Description>
 
 <Visual>
   <dl class="ods-status is-ods-status-caution">
     <dt class="ods-status--label">
-      Server status
+      Propulsion systems
     </dt>
     <dd class="ods-status--value">
-      Service degradation
+      Check engines soon
     </dd>
   </dl>
 </Visual>
@@ -103,17 +103,17 @@ Caution Statuses are yellow and should be used to indicate states like Attention
 
 <Description>
 
-Danger Statuses are red and should be used to indicate states like Error, Failure, or Service disruption.
+Danger Statuses are red and should be used to indicate states like "Error", "Failure", or "Service disruption".
 
 </Description>
 
 <Visual>
   <dl class="ods-status is-ods-status-danger">
     <dt class="ods-status--label">
-      Server status
+      Propulsion systems
     </dt>
     <dd class="ods-status--value">
-      Service disruption
+      Warp core disruption
     </dd>
   </dl>
 </Visual>
@@ -122,24 +122,69 @@ Danger Statuses are red and should be used to indicate states like Error, Failur
 
 <Description>
 
-Status should be used to communicate the state of a discrete item, such as a server or individual process. Both labeled and unlabeled variants are acceptable, but should follow the associated guidelines below.
+Use Status to communicate the state of a discrete item, such as a server or individual process. Both labeled and unlabeled variants are acceptable, but should follow the associated guidelines.
 
 </Description>
 
 <Visual>
   <dl class="ods-status is-ods-status-success">
     <dt class="ods-status--label">
-      Server status
+      Engine performance
     </dt>
     <dd class="ods-status--value">
-      System operational
+      Nominal
     </dd>
   </dl>
 </Visual>
 
+### Within Table
+
+<Description>
+
+Table supports Status as a content type. Status requires a distinct column and should not be mixed with other content types.
+
+In this case the column heading acts as the Status label.
+
+</Description>
+
 ## Content guidelines
 
-Status is intended to be both succinct and easily understood; limit label and description to one to two words. As with other components, use sentence casing for both.
+<Description>
+
+Statuses content should provide a quick overview. Limit Status descriptor and label text to three words or less. Use sentence casing for both.
+
+</Description>
+
+<Visual>
+  <dl class="ods-status is-ods-status-success">
+    <dt class="ods-status--label">
+      Warp drive status
+    </dt>
+    <dd class="ods-status--value">
+      Engaged
+    </dd>
+  </dl>
+</Visual>
+
+### Statuses without labels
+
+<Description>
+
+Where necessary, labels may be hidden. If a label is not present, ensure the Status copy communicates appropriate context. Even if the label is hidden, it must be populated to ensure context for users of assistive technology.
+
+</Description>
+
+<Visual>
+  <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
+    <dt class="ods-status--label">
+      Warp drive status
+    </dt>
+    <dd class="ods-status--value">
+      Warp drive engaged
+    </dd>
+  </dl>
+</Visual>
+
 :::
 
 ::: slot html-scss
