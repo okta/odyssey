@@ -3,8 +3,8 @@ template: plain
 id: base-type
 title: Typography
 headline: Typography
-lead: Okta’s typography system is designed for clarity in readability and hierarchy.
-description: Et morbi eget at consectetur. Elit aenean mi phasellus.
+lead: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
+description: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 ---
 
 ## Hierarchy

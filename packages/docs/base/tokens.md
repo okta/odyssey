@@ -3,8 +3,9 @@ template: plain
 id: base-tokens
 title: Design Tokens
 headline: Design Tokens
-lead: TODO
-description: Et morbi eget at consectetur. Elit aenean mi phasellus.
+lead: Design Tokens abstract Base elements into names that are commonly understood. They are then used together to build components.
+description: Design Tokens abstract Base elements into names that are commonly understood. They are then used together to build components.
+
 ---
 
 <figure class="ods-table--figure">
