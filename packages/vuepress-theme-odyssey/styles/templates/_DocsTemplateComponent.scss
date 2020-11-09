@@ -57,17 +57,21 @@
 // Overview and should be moved in to its own component
 
 .docs-example {
-  grid-column: 1 / 3;
-  max-width: 100%;
-  margin-bottom: $spacing-l;
   position: relative;
+  grid-column: 1 / 3;
   width: 100%;
   max-width: calc((#{$max-line-length} * 2) + #{$spacing-l});
+  margin-bottom: $spacing-l;
 
   .docs-example--rendered {
+    position: relative;
     padding: $spacing-l;
     border: 1px solid var(--border-color-display, #{$border-color-display});
     border-radius: 6px 6px 0 0;
+
+    &.is-docs-example--rendered-tall {
+      min-height: #{$spacing-l * 6};
+    }
   }
 
   /* stylelint-disable */
