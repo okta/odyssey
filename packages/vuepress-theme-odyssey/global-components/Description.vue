@@ -1,11 +1,26 @@
 <template>
-  <div class="docskit--desc">
+  <Component
+    :is="tag"
+    :class="{
+      'docskit--desc': true,
+      [`is-docskit-desc-${variant}`]: variant,
+    }"
+  >
     <slot />
-  </div>
+  </Component>
 </template>
-
 <script>
 export default {
-  name: "Description"
+  name: "Description",
+  props: {
+    variant: {
+      type: String,
+      required: false
+    },
+    tag: {
+      default: "div",
+      type: String
+    },
+  }
 };
 </script>

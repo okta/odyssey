@@ -4,4 +4,29 @@
   p {
     grid-column: 1 / 1;
   }
+
+  &.is-docskit-desc-counter {
+    display: grid;
+    grid-column: 1 / 3;
+    grid-gap: $spacing-l $spacing-m;
+    grid-template-columns: repeat(3, 1fr);
+    list-style-position: inside;
+    list-style-type: decimal;
+
+    .desc-counter--item {
+      &::marker {
+        color: $text-heading;
+        font-family: $body-font-family;
+        font-style: normal;
+        font-weight: 600;
+        line-height: $title-line-height;
+        font-variant-numeric: proportional-nums;
+      }
+    }
+
+    .desc-counter--title {
+      display: inline-block;
+      font-size: ms(1);
+    }
+  }
 }

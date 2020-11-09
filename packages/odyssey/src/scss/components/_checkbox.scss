@@ -38,7 +38,8 @@ $size-checkbox: 1em / 0.875;
     }
   }
 
-  &:indeterminate {
+  &:indeterminate,
+  &.is-ods-checkbox-indeterminate {
     + .ods-checkbox--label {
       &::after {
         transform: translateY(-50%) scale(0.9);
@@ -70,7 +71,8 @@ $size-checkbox: 1em / 0.875;
     }
 
     &:checked,
-    &:indeterminate {
+    &:indeterminate,
+    &.is-ods-checkbox-indeterminate {
       + .ods-checkbox--label {
         &::before {
           border-color: $color-primary-light;
@@ -87,7 +89,8 @@ $size-checkbox: 1em / 0.875;
       }
     }
 
-    &:indeterminate {
+    &:indeterminate,
+    &.is-ods-checkbox-indeterminate {
       + .ods-checkbox--label {
         &::after {
           background-image: get-icon('dash', $white);
