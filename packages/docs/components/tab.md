@@ -36,121 +36,32 @@ Additionally, the tab element is keyboard-navigable (See [Accessibility: Keyboar
 
 </Description>
 
-<Visual layout="wide" variant="content-full" fade>
+<Visual layout="wide" content="full" fade>
   <template>
-    <h1 class="is-sample-unimportant">NASA's Mars Missions</h1>
-    <p class="is-sample-unimportant">To date, NASA has had 49 missions involving rovers, orbiters and other spacecraft.</p>
-    <OdsTabs label="User profile options" :active="tabs.active" :tablist="tabs.tablist" :id="tabs.id">
-      <template slot="tab-orbiter">
-        <figure class="ods-table--figure is-sample-unimportant">
-          <figcaption class="ods-table--figcaption">
-            Orbiter Missions
-          </figcaption>
-          <table class="ods-table">
-            <caption>When implementing this component you should consider the following keyboard behaviors.</caption>
-            <thead>
-              <tr>
-                <th scope="column">Spacecraft</th>
-                <th scope="column">Launch vehicle</th>
-                <th scope="column">Launch date</th>
-                <th scope="column">Orbit insertion</th>
-                <th scope="column">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">2001 Mars Odyssey</th>
-                <td>Delta II</td>
-                <td class="is-ods-table-date">4/7/01</td>
-                <td class="is-ods-table-date">10/24/01</td>
-                <td>
-                  <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
-                    <dt class="ods-status--label">
-                      Result
-                    </dt>
-                    <dd class="ods-status--value">
-                      Still operating
-                    </dd>
-                  </dl>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
+    <header class="is-sample-unimportant">
+      <h1>Terrestrial Planets</h1>
+      <p>Terrestrial planets are planets that are composed primarily of silicate rocks or metals.</p>
+    </header>
+    <OdsTabs aria-label="Types of terrestrial planets" :active="tabsPlanets.active" :tablist="tabsPlanets.tablist" id="example-1">
+      <template slot="tab-mercury">
+        <blockquote class="is-sample-unimportant">
+          <p>Mercury is the smallest and innermost planet in the Solar System. Its orbit around the Sun takes 87.97 Earth days, the shortest of all the planets in the Solar System.</p>
+        </blockquote>
       </template>
-      <template slot="tab-atmospheric">
-        <figure class="ods-table--figure is-sample-unimportant">
-          <figcaption class="ods-table--figcaption">
-            Atmospheric Missions
-          </figcaption>
-          <table class="ods-table">
-            <caption>When implementing this component you should consider the following keyboard behaviors.</caption>
-            <thead>
-              <tr>
-                <th scope="column">Mission type</th>
-                <th scope="column">Launched</th>
-                <th scope="column">Landing</th>
-                <th scope="column">Mission duration</th>
-                <th scope="column">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">2001 Mars Odyssey</th>
-                <td>Delta II</td>
-                <td class="is-ods-table-date">4/7/01</td>
-                <td class="is-ods-table-date">10/24/01</td>
-                <td>
-                  <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
-                    <dt class="ods-status--label">
-                      Result
-                    </dt>
-                    <dd class="ods-status--value">
-                      Still operating
-                    </dd>
-                  </dl>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
+      <template slot="tab-venus">
+        <blockquote class="is-sample-unimportant">
+          <p>Venus is the second planet from the Sun. It is named after the Roman goddess of love and beauty. As the second-brightest natural object in the night sky after the Moon, Venus can cast shadows and can be, on rare occasion, visible to the naked eye in broad daylight.</p>
+        </blockquote>
       </template>
-      <template slot="tab-lander">
-        <figure class="ods-table--figure is-sample-unimportant">
-          <figcaption class="ods-table--figcaption">
-            Lander Missions
-          </figcaption>
-          <table class="ods-table">
-            <caption>When implementing this component you should consider the following keyboard behaviors.</caption>
-            <thead>
-              <tr>
-                <th scope="column">Mission type</th>
-                <th scope="column">Launched</th>
-                <th scope="column">Landing</th>
-                <th scope="column">Mission duration</th>
-                <th scope="column">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">2001 Mars Odyssey</th>
-                <td>Delta II</td>
-                <td class="is-ods-table-date">4/7/01</td>
-                <td class="is-ods-table-date">10/24/01</td>
-                <td>
-                  <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
-                    <dt class="ods-status--label">
-                      Result
-                    </dt>
-                    <dd class="ods-status--value">
-                      Still operating
-                    </dd>
-                  </dl>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </figure>
+      <template slot="tab-earth">
+        <blockquote class="is-sample-unimportant">
+          <p>Earth is the third planet from the Sun and the only astronomical object known to harbor life. About 29% of Earth's surface is land consisting of continents and islands.</p>
+        </blockquote>
+      </template>
+      <template slot="tab-mars">
+        <blockquote class="is-sample-unimportant">
+          <p>Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, being larger than only Mercury. In English, Mars carries the name of the Roman god of war and is often referred to as the "Red Planet".</p>
+        </blockquote>
       </template>
     </OdsTabs>
   </template>
@@ -174,8 +85,21 @@ Tabs are NOT navigation. Meaning they don’t take you from place to place. Rath
 
 </Description>
 
-<Visual variant="positive">Positive</Visual>
-<Visual variant="negative">Negative</Visual>
+<Visual variant="positive" content="no-end" class="is-tab-small-sample">
+  <header>
+    <h2>Terrestrial Planets</h2>
+    <p>Terrestrial planets are planets that are composed primarily of silicate rocks or metals.</p>
+  </header>
+  <OdsTabs aria-label="Types of terrestrial planets" :active="tabsPlanets.active" :tablist="tabsPlanets.tablist" id="example-2"></OdsTabs>
+</Visual>
+
+<Visual variant="negative" content="no-end" class="is-tab-small-sample">
+  <header>
+    <h2>Terrestrial Planets</h2>
+    <p>Terrestrial planets are planets that are composed primarily of silicate rocks or metals.</p>
+  </header>
+  <OdsTabs aria-label="Famous constellations" :active="tabsConstellations.active" :tablist="tabsConstellations.tablist" id="example-3"></OdsTabs>
+</Visual>
 
 ### Position above major content
 
@@ -185,8 +109,37 @@ Tabs are best used at the top of the page or situated above the content it’s r
 
 </Description>
 
-<Visual variant="positive">Positive</Visual>
-<Visual variant="negative">Negative</Visual>
+
+<Visual variant="positive" content="no-end" class="is-tab-small-sample">
+  <header>
+    <h2>Missions</h2>
+    <p>There have been 49 missions involving various types of spacecraft.</p>
+  </header>
+  <OdsTabs aria-label="Missions by type" :active="tabs.active" :tablist="tabs.tablist" id="example-4"></OdsTabs>
+</Visual>
+
+<Visual variant="negative"  content="no-end" class="is-tab-small-sample">
+  <OdsTabs aria-label="Missions by type" :active="tabs.active" :tablist="tabs.tablist" id="example-5">
+  <template slot="tab-orbiter">
+    <header>
+      <h2>Missions</h2>
+      <p>There have been 8 missions involving orbiters.</p>
+    </header>
+  </template>
+  <template slot="tab-atmospheric">
+    <header>
+      <h2>Missions</h2>
+      <p>There have been 12 missions involving atmospheric vehicles.</p>
+    </header>
+  </template>
+  <template slot="tab-lander">
+    <header>
+      <h2>Missions</h2>
+      <p>There have been 4 missions involving lander vehicles.</p>
+    </header>
+  </template>
+  </OdsTabs>
+</Visual>
 
 ### Don't stack tabs
 
@@ -194,11 +147,14 @@ Tabs are best used at the top of the page or situated above the content it’s r
 
 In fact, it’s really impossible to do because we include the tab panel with the tabs themselves. We’re calling this out to designers because the component doesn’t include the tab panel and shouldn’t be presented to an engineer.
 
-keuyUltimately this is bad practice because is will result in overloading users with information and reduce comprehension.
+Ultimately this is bad practice because is will result in overloading users with information and reduce comprehension.
 
 </Description>
 
-<Visual variant="negative">Negative</Visual>
+<Visual variant="negative" class="is-tab-stacked-example" content="no-end">
+  <OdsTabs aria-label="Missions by type" :active="tabs.active" :tablist="tabs.tablist" :id="tabs.id"></OdsTabs>
+  <OdsTabs aria-label="Missions by year" :active="tabsYears.active" :tablist="tabsYears.tablist" id="example-6"></OdsTabs>
+</Visual>
 
 ## Content Guidelines
 
@@ -261,24 +217,6 @@ keuyUltimately this is bad practice because is will result in overloading users 
   </table>
 </figure>
 
-<script>
-export default {
-  data () {
-    return {
-      tabs: {
-        id: 'example-0',
-        active: "tab-orbiter",
-        tablist: [
-          { id: "tab-orbiter", label: 'Orbiter' },
-          { id: "tab-atmospheric", label: 'Atmospheric' },
-          { id: "tab-lander", label: 'Lander' }
-        ]
-      }
-    }
-  }
-}
-</script>
-
 ## References
 
 ### Further Reading
@@ -288,6 +226,47 @@ export default {
 :::
 
 ::: slot html-scss
+
+
+## Basic example
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <OdsTabs aria-label="Describes the purpose of this set of tabs" :active="tabsPlain.active" :tablist="tabsPlain.tablist" id="example">
+      <template slot="tab-1">
+        <p>Tabpanel 1 content&hellip;</p>
+      </template>
+      <template slot="tab-2">
+        <p>Tabpanel 2 content&hellip;</p>
+      </template>
+      <template slot="tab-3">
+        <p>Tabpanel 3 content&hellip;</p>
+      </template>
+    </OdsTabs>
+  </div>
+
+  ```html
+  <div id="example" class="ods-tabs" aria-label="Describes the purpose of this set of tabs">
+    <div role="tablist" aria-label="label" class="ods-tabs--tablist">
+      <button id="tab-1" role="tab" tabindex="0" aria-controls="tab-1-tabpanel" class="ods-tabs--tab" aria-selected="true">Tab 1</button>
+      <button id="tab-2" role="tab" tabindex="-1" aria-controls="tab-2-tabpanel" class="ods-tabs--tab">Tab 2</button>
+      <button id="tab-3" role="tab" tabindex="-1" aria-controls="tab-3-tabpanel" class="ods-tabs--tab">Tab 3</button>
+    </div>
+    <div class="ods-tabs--tabpanel">
+        <div id="tab-1-tabpanel" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
+          <p>Tabpanel 1 content…</p>
+        </div>
+        <div id="tab-2-tabpanel" role="tabpanel" aria-labelledby="tab-2" tabindex="0" hidden="hidden">
+          <p>Tabpanel 2 content…</p>
+        </div>
+        <div id="tab-3-tabpanel" role="tabpanel" aria-labelledby="tab-3" tabindex="0" hidden="hidden">
+          <p>Tabpanel 3 content…</p>
+        </div>
+    </div>
+  </div>
+  ```
+
+</figure>
 
 ## Switching tabs
 
@@ -301,3 +280,54 @@ The JS included in the `@okta/odyssey` package is for demo purposes only. For th
 </Description>
 
 :::
+
+
+<script>
+export default {
+  data () {
+    return {
+      tabs: {
+        active: "tab-orbiter",
+        tablist: [
+          { id: "tab-orbiter", label: 'Orbiter' },
+          { id: "tab-atmospheric", label: 'Atmospheric' },
+          { id: "tab-lander", label: 'Lander' }
+        ]
+      },
+      tabsYears: {
+        active: "tab-1990s",
+        tablist: [
+          { id: "tab-1990s", label: '1990s' },
+          { id: "tab-2000s", label: '2000s' },
+          { id: "tab-2010s", label: '2010s' }
+        ]
+      },
+      tabsPlanets: {
+        active: "tab-mercury",
+        tablist: [
+          { id: "tab-mercury", label: 'Mercury' },
+          { id: "tab-venus", label: 'Venus' },
+          { id: "tab-earth", label: 'Earth' },
+          { id: "tab-mars", label: 'Mars' }
+        ]
+      },
+      tabsConstellations: {
+        active: "tab-aquarius",
+        tablist: [
+          { id: "tab-aquarius", label: 'Aquarius' },
+          { id: "tab-leo", label: 'Leo' },
+          { id: "tab-pisces", label: 'Pisces' }
+        ]
+      },
+      tabsPlain: {
+        active: "tab-1",
+        tablist: [
+          { id: "tab-1", label: 'Tab 1' },
+          { id: "tab-2", label: 'Tab 2' },
+          { id: "tab-3", label: 'Tab 3' }
+        ]
+      }
+    }
+  }
+}
+</script>
