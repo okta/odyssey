@@ -197,10 +197,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   <div class="docs-example--rendered">
     <dl class="ods-status">
       <dt class="ods-status--label">
-        Propulsion systems
+        Status label
       </dt>
       <dd class="ods-status--value">
-        Engines offline
+        Neutral descriptor
       </dd>
     </dl>
   </div>
@@ -208,10 +208,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   ```html
   <dl class="ods-status">
     <dt class="ods-status--label">
-      Propulsion systems
+      Status label
     </dt>
     <dd class="ods-status--value">
-      Engines offline
+      Neutral descriptor
     </dd>
   </dl>
   ```
@@ -223,10 +223,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   <div class="docs-example--rendered">
     <dl class="ods-status is-ods-status-success">
       <dt class="ods-status--label">
-        Propulsion systems
+        Status label
       </dt>
       <dd class="ods-status--value">
-        Online
+        Success descriptor
       </dd>
     </dl>
   </div>
@@ -234,10 +234,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   ```html
   <dl class="ods-status is-ods-status-success">
     <dt class="ods-status--label">
-      Propulsion systems
+      Status label
     </dt>
     <dd class="ods-status--value">
-      Online
+      Success descriptor
     </dd>
   </dl>
   ```
@@ -249,10 +249,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   <div class="docs-example--rendered">
     <dl class="ods-status is-ods-status-caution">
       <dt class="ods-status--label">
-        Propulsion systems
+        Status label
       </dt>
       <dd class="ods-status--value">
-        Check engine
+        Caution descriptor
       </dd>
     </dl>
   </div>
@@ -260,10 +260,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   ```html
   <dl class="ods-status is-ods-status-caution">
     <dt class="ods-status--label">
-      Propulsion systems
+      Status label
     </dt>
     <dd class="ods-status--value">
-      Check engine
+      Caution descriptor
     </dd>
   </dl>
   ```
@@ -275,10 +275,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   <div class="docs-example--rendered">
     <dl class="ods-status is-ods-status-danger">
       <dt class="ods-status--label">
-        Propulsion systems
+        Status label
       </dt>
       <dd class="ods-status--value">
-        Warp core disruption
+        Danger descriptor
       </dd>
     </dl>
   </div>
@@ -286,10 +286,10 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
   ```html
   <dl class="ods-status is-ods-status-danger">
     <dt class="ods-status--label">
-      Propulsion systems
+      Status label
     </dt>
     <dd class="ods-status--value">
-      Warp core disruption
+      Danger descriptor
     </dd>
   </dl>
   ```
@@ -309,10 +309,10 @@ Even if the label is hidden, it must be populated to ensure appropriate context 
   <div class="docs-example--rendered">
     <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
       <dt class="ods-status--label">
-        Warp drive status
+        Status label
       </dt>
       <dd class="ods-status--value">
-        Warp drive engaged
+        Status descriptor
       </dd>
     </dl>
   </div>
@@ -320,16 +320,16 @@ Even if the label is hidden, it must be populated to ensure appropriate context 
   ```html
   <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
     <dt class="ods-status--label">
-      Warp drive status
+      Status label
     </dt>
     <dd class="ods-status--value">
-      Warp drive engaged
+      Status descriptor
     </dd>
   </dl>
   ```
 </figure>
 
-## Accessibility
+## Async Status changes
 
 <Description>
 
@@ -343,10 +343,10 @@ If the current state of Status may change asynchronously while a user is visitin
   <div class="docs-example--rendered">
     <dl class="ods-status is-ods-status-caution" role="status">
       <dt class="ods-status--label">
-        Propulsion systems
+        Status label
       </dt>
       <dd class="ods-status--value">
-        Warmup initiated
+        Live Status descriptor
       </dd>
     </dl>
   </div>
@@ -354,10 +354,10 @@ If the current state of Status may change asynchronously while a user is visitin
   ```html
   <dl class="ods-status is-ods-status-caution" role="status">
     <dt class="ods-status--label">
-      Propulsion systems
+      Status label
     </dt>
     <dd class="ods-status--value">
-      Warmup initiated
+      Live Status descriptor
     </dd>
   </dl>
   ```
