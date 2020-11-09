@@ -94,7 +94,7 @@ Caution Statuses are yellow and should be used to indicate states like "Attentio
       Propulsion systems
     </dt>
     <dd class="ods-status--value">
-      Check engines soon
+      Check engine
     </dd>
   </dl>
 </Visual>
