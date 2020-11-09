@@ -5,7 +5,8 @@
       'with-fade': fade,
       [`layout-${layout}`]: layout,
       [`theme-${theme}`]: theme,
-      [`is-docskit-visual-${variant}`]: variant
+      [`is-docskit-visual-${variant}`]: variant,
+      [`is-docskit-visual-content-${content}`]: content
     }"
   >
     <h6
@@ -33,6 +34,10 @@ export default {
       required: false
     },
     theme: {
+      type: String,
+      required: false
+    },
+    content: {
       type: String,
       required: false
     },
