@@ -156,7 +156,52 @@ For users happy with their new context, we ensure their attention isn't misdirec
 :::
 
 ::: slot html-scss
-## HTML & CSS
+
+<figure class="docs-example">
+  <div class="ods-modal is-open is-animation-stopped" id="ods-modal-standard" aria-hidden="true">
+    <div class="ods-modal--overlay" tabindex="-1">
+      <div class="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title">
+        <header class="ods-modal--header">
+          <button class="ods-modal--close" aria-label="Close modal"></button>
+          <h1 class="ods-modal--title" id="ods-modal-standard-title">
+            Modal Title
+          </h1>
+        </header>
+        <main class="ods-modal--content" id="ods-modal-standard-content">
+          <p>This is the modal content area. It's width is determined based on the amount of content within it.</p>
+        </main>
+        <footer class="ods-modal--footer">
+          <button class="ods-button is-ods-button-clear" aria-label="Close this dialog window">Cancel</button>
+          <button class="ods-button">Continue</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  ```html
+  <div class="ods-modal" id="ods-modal-standard" aria-hidden="true">
+    <div class="ods-modal--overlay" tabindex="-1" data-micromodal-close>
+      <div class="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title">
+        <header class="ods-modal--header">
+          <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
+          <h1 class="ods-modal--title" id="ods-modal-standard-title">
+            Modal Title
+          </h1>
+        </header>
+        <main class="ods-modal--content" id="ods-modal-standard-content">
+          <p>
+            Modal content
+          </p>
+        </main>
+        <footer class="ods-modal--footer">
+          <button class="ods-button is-ods-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
+          <button class="ods-button">Continue</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+  ```
+</figure>
 
 ### Accessible attributes
 

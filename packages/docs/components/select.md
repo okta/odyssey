@@ -340,5 +340,248 @@ Options may be grouped within the Select list to help guide users.
 :::
 
 ::: slot html-scss
-## HTML & CSS
+
+## Basic example
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <select class="ods-select" data-js-choices id="example-1" name="example-1" required>
+          <option></option>
+          <option value="value-1">Option 1</option>
+          <option value="value-2">Option 2</option>
+          <option value="value-3">Option 3</option>
+          <option value="value-4">Option 4</option>
+          <option value="value-5">Option 5</option>
+          <option value="value-6">Option 6</option>
+        </select>
+        <label class="ods-label" for="example-1">Field label</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="example-1" name="example-1" required>
+        <option></option>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3">Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
+      </select>
+      <label class="ods-label" for="example-1">Field label</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+## Multi-Select example
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <select class="ods-select" data-js-choices id="example-2" name="example-2" multiple required>
+          <option></option>
+          <option value="value-1">Option 1</option>
+          <option value="value-2">Option 2</option>
+          <option value="value-3">Option 3</option>
+          <option value="value-4">Option 4</option>
+          <option value="value-5">Option 5</option>
+          <option value="value-6">Option 6</option>
+        </select>
+        <label class="ods-label" for="example-2">Field label</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="example-2" name="example-2" multiple required>
+        <option></option>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3">Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
+      </select>
+      <label class="ods-label" for="example-2">Field label</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+## Option groups example
+
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <select class="ods-select" data-js-choices id="example-3" name="example-3" required>
+          <option></option>
+          <optgroup label="Group 1">
+            <option value="value-1-1">Option 1</option>
+            <option value="value-1-2">Option 2</option>
+            <option value="value-1-3">Option 3</option>
+          </optgroup>
+          <optgroup label="Group 2">
+            <option value="value-2-1">Option 1</option>
+            <option value="value-2-2">Option 2</option>
+          </optgroup>
+        </select>
+        <label class="ods-label" for="example-3">Destination star</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="example-3" name="example-3" required>
+        <option></option>
+        <optgroup label="Group 1">
+          <option value="value-1-1">Option 1</option>
+          <option value="value-1-2">Option 2</option>
+          <option value="value-1-3">Option 3</option>
+        </optgroup>
+        <optgroup label="Group 2">
+          <option value="value-2-1">Option 1</option>
+          <option value="value-2-2">Option 2</option>
+        </optgroup>
+      </select>
+      <label class="ods-label" for="example-3">Destination star</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+## States
+
+### Disabled
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <select class="ods-select" data-js-choices id="example-4" name="example-4" disabled required>
+          <option></option>
+          <option value="value-1">Option 1</option>
+          <option value="value-2">Option 2</option>
+          <option value="value-3" selected>Option 3</option>
+          <option value="value-4">Option 4</option>
+          <option value="value-5">Option 5</option>
+          <option value="value-6">Option 6</option>
+        </select>
+        <label class="ods-label" for="example-4">Field label</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="example-4" name="example-4" disabled required>
+        <option></option>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3" selected>Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
+      </select>
+      <label class="ods-label" for="example-4">Field label</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+### Optional label
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset" data-optional>
+      <div class="ods-fieldset-flex">
+        <select class="ods-select" data-js-choices id="example-5" name="example-5" required>
+          <option></option>
+          <option value="value-1">Option 1</option>
+          <option value="value-2">Option 2</option>
+          <option value="value-3" selected>Option 3</option>
+          <option value="value-4">Option 4</option>
+          <option value="value-5">Option 5</option>
+          <option value="value-6">Option 6</option>
+        </select>
+        <label class="ods-label" for="example-5">Field label <span class="ods-label--optional">Optional</span></label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset" data-optional>
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="example-5" name="example-5" required>
+        <option></option>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3" selected>Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
+      </select>
+      <label class="ods-label" for="example-5">Field label <span class="ods-label--optional">Optional</span></label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+### Invalid
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset" data-invalid>
+      <div class="ods-fieldset-flex">
+        <select class="ods-select" data-js-choices id="example-6" name="example-6" data-invalid required>
+          <option></option>
+          <option value="value-1">Option 1</option>
+          <option value="value-2">Option 2</option>
+          <option value="value-3" selected>Option 3</option>
+          <option value="value-4">Option 4</option>
+          <option value="value-5">Option 5</option>
+          <option value="value-6">Option 6</option>
+        </select>
+        <label class="ods-label" for="example-6">Field label</label>
+        <aside class="ods-field--error" id="overview-invalid-error">
+          <span class="u-visually-hidden">Error:</span> Invalid error description
+        </aside>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset" data-invalid>
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="example-6" name="example-6" data-invalid required>
+        <option></option>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3" selected>Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
+      </select>
+      <label class="ods-label" for="example-6">Field label</label>
+      <aside class="ods-field--error" id="overview-invalid-error">
+        <span class="u-visually-hidden">Error:</span> Invalid error description
+      </aside>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
 :::
