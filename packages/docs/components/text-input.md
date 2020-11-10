@@ -23,9 +23,7 @@ links:
 ## Anatomy
 
 <Anatomy
-  title="title"
-  meta="metadata"
-  img="/images/anatomy-text-input.svg"
+  img="images/anatomy-text-input.svg"
 />
 
 ## Variants

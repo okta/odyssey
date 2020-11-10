@@ -23,7 +23,7 @@ links:
 ## Anatomy
 
 <Anatomy
-  img="/images/anatomy-select.svg"
+  img="images/anatomy-select.svg"
 />
 
 ## Behavior
