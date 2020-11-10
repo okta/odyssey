@@ -13,6 +13,13 @@ module.exports = {
       },
     ],
   ],
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@alias': 'path/to/some/dir'
+      }
+    }
+  },
   // These plugins include vendor libraries which are required by Odyssey docs. 
   plugins: [
     require('./plugins/plugin-choices/index.js'),
