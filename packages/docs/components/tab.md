@@ -144,7 +144,7 @@ Tabs are best used at the top of the page or situated above the content it’s r
 
 <Description>
 
-Use tabs sparingly. Limit Tabs to one per page, and refrain from including a second set of Tabs within a tabpanel.
+Use Tab sparingly. Limit the Tab component to one per page, and refrain from including a second set of Tabs within a tabpanel.
 
 </Description>
 
