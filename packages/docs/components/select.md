@@ -38,7 +38,7 @@ To support expected functionality and behaviors, Select relies on the Choices.js
 
 </Description>
 
-<Visual variant="content-full">
+<Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-behavior" name="overview-behavior" required>
@@ -72,7 +72,7 @@ The default Select allows users to choose a single value from a list of options.
 
 </Description>
 
-<Visual variant="content-full">
+<Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-single" name="overview-single" required>
@@ -98,7 +98,7 @@ The Multi-Select variant allows users to choose more than one value from the lis
 
 </Description>
 
-<Visual variant="content-full">
+<Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-multi" name="overview-multi" multiple required>
@@ -132,7 +132,7 @@ Select inputs in their "normal" state are considered enabled. They are ready for
 
 </Description>
 
-<Visual variant="content-full">
+<Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-enabled" name="overview-enabled" required>
@@ -158,7 +158,7 @@ Hover states are activated when the user pauses their pointer over the input.
 
 </Description>
 
-<Visual variant="content-full">
+<Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex is-ods-select-hover">
       <select class="ods-select is-ods-input-hover" data-js-choices id="overview-hover" name="overview-hover" required>
@@ -184,7 +184,7 @@ The focus state is a visual affordance that the user has highlighted the input w
 
 </Description>
 
-<Visual variant="content-full">
+<Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex is-ods-select-focus">
       <select class="ods-select" data-js-choices id="overview-focus" name="overview-focus" required>
@@ -212,7 +212,7 @@ The values of disabled inputs will not be submitted.
 
 </Description>
 
-<Visual variant="content-full">
+<Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-disabled" name="overview-disabled" required disabled>
@@ -238,7 +238,7 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
 
 </Description>
 
-<Visual variant="content-full">
+<Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-optional" name="overview-optional">
@@ -266,7 +266,7 @@ When indicating a validation error, please use a Field Error label to indicate t
 
 </Description>
 
-<Visual variant="content-full">
+<Visual content="full">
   <fieldset class="ods-fieldset" data-invalid>
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-invalid" name="overview-invalid" required data-invalid aria-describedby="overview-invalid-error">
@@ -299,7 +299,7 @@ Select inputs should not have a default selected unless a majority of users will
 
 </Description>
 
-<Visual variant="content-full">
+<Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-groups" name="overview-groups" required>

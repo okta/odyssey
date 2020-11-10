@@ -2,8 +2,11 @@
   <div
     :class="{
       'docskit-visual': true,
-      'docskit-visual--wide': wide,
-      [`is-docskit-visual-${variant}`]: variant
+      'with-fade': fade,
+      [`layout-${layout}`]: layout,
+      [`theme-${theme}`]: theme,
+      [`is-docskit-visual-${variant}`]: variant,
+      [`is-docskit-visual-content-${content}`]: content
     }"
   >
     <h6
@@ -24,13 +27,23 @@ export default {
   props: {
     variant: {
       type: String,
-      required: false,
-      default: null
+      required: false
     },
-    wide: {
+    layout: {
+      type: String,
+      required: false
+    },
+    theme: {
+      type: String,
+      required: false
+    },
+    content: {
+      type: String,
+      required: false
+    },
+    fade: {
       type: Boolean,
-      required: false,
-      default: false
+      required: false
     }
   }
 };

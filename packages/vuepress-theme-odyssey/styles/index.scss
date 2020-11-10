@@ -119,6 +119,26 @@ h6 {
 
 // Component Samples
 
+.is-sample-unimportant {
+  opacity: 0.33;
+}
+
+.is-tab-small-sample {
+  .ods-tabs--tabpanel [role='tabpanel'] {
+    padding-bottom: $spacing-s;
+  }
+}
+
+.is-tab-stacked-example {
+  .ods-tabs [role='tabpanel'] {
+    padding: $spacing-l;
+  }
+
+  .ods-tabs:first-child [role='tabpanel'] {
+    padding: $spacing-xs;
+  }
+}
+
 .sample-color {
   display: inline-block;
   width: 1em;
