@@ -385,3 +385,7 @@ $spacing-units: (
 .is-sample-absolute {
   position: absolute;
 }
+
+.is-sample-color-green {
+  color: cv('green', '500');
+}
