@@ -22,7 +22,7 @@ links:
 
 ## Anatomy
 
-<Anatomy img="/images/anatomy-status.svg" />
+<Anatomy img="images/anatomy-status.svg" />
 
 ## Behavior
 
