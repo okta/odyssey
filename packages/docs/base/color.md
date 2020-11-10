@@ -3,8 +3,8 @@ template: plain
 id: base-color
 title: Color
 headline: Color
-lead: Here's a quick overview of the colors available in Odyssey and some guidelines for their use.
-description: Et morbi eget at consectetur. Elit aenean mi phasellus.
+lead: Odyssey colors consist of a variety of neutral, semantic, and brand values used in all UIs for utmost clarity and readability.
+description: Odyssey colors consist of a variety of neutral, semantic, and brand values used in all UIs for utmost clarity and readability.
 ---
 
 <figure class="ods-table--figure">

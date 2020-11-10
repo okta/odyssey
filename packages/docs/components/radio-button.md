@@ -172,7 +172,7 @@ Unlike Checkboxes, Radios validate as a group, not individually.
     <label class="ods-radio--label" for="overview-invalid-2">Warp Speed</label>
     <input class="ods-radio" type="radio" name="overview-invalid[]" id="overview-invalid-3" value="3" aria-describedby="overview-invalid-error" required data-invalid>
     <label class="ods-radio--label" for="overview-invalid-3">Ludicrous Speed</label>
-    <aside class="ods-field--error" id="overview-invalid-error">General relativity forbids it.</aside>
+    <aside class="ods-field--error" id="overview-invalid-error"><span class="u-visually-hidden">Error:</span> General relativity forbids it.</aside>
   </fieldset>
 </Visual>
 
@@ -185,29 +185,25 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Which of the following is the largest?</legend>
-      <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
-      <label class="ods-radio--label" for="radio-peanut">A peanut</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-elephant" value="elephant" required>
-      <label class="ods-radio--label" for="radio-elephant">An elephant</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-moon" value="moon" required>
-      <label class="ods-radio--label" for="radio-moon">The moon</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
-      <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
+      <legend class="ods-input-legend">Field label</legend>
+      <input class="ods-radio" type="radio" name="example-0" id="example-0-0" value="value-0" required checked>
+      <label class="ods-radio--label" for="example-0-0">Label 1</label>
+      <input class="ods-radio" type="radio" name="example-0" id="example-0-1" value="value-1" required>
+      <label class="ods-radio--label" for="example-0-1">Label 2</label>
+      <input class="ods-radio" type="radio" name="example-0" id="example-0-2" value="value-2" required>
+      <label class="ods-radio--label" for="example-0-2">Label 3</label>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Which of the following is the largest?</legend>
-    <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
-    <label class="ods-radio--label" for="radio-peanut">A peanut</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-elephant" value="elephant" required>
-    <label class="ods-radio--label" for="radio-elephant">An elephant</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-moon" value="moon" required>
-    <label class="ods-radio--label" for="radio-moon">The moon</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
-    <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
+    <legend class="ods-input-legend">Field label</legend>
+    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" required checked>
+    <label class="ods-radio--label" for="input-0">Label 1</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" required>
+    <label class="ods-radio--label" for="input-1">Label 2</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" required>
+    <label class="ods-radio--label" for="input-2">Label 3</label>
   </fieldset>
   ```
 
@@ -218,29 +214,25 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Which of the following is the largest?</legend>
-      <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
-      <label class="ods-radio--label" for="radio-peanut">A peanut</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-elephant" value="elephant" required>
-      <label class="ods-radio--label" for="radio-elephant">An elephant</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-moon" value="moon" required>
-      <label class="ods-radio--label" for="radio-moon">The moon</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
-      <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
+      <legend class="ods-input-legend">Field label</legend>
+      <input class="ods-radio" type="radio" name="example-1" id="example-1-0" value="value-0" disabled required checked>
+      <label class="ods-radio--label" for="example-1-0">Label 1</label>
+      <input class="ods-radio" type="radio" name="example-1" id="example-1-1" value="value-1" disabled required>
+      <label class="ods-radio--label" for="example-1-1">Label 2</label>
+      <input class="ods-radio" type="radio" name="example-1" id="example-1-2" value="value-2" disabled required>
+      <label class="ods-radio--label" for="example-1-2">Label 3</label>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Which of the following is the largest?</legend>
-      <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
-      <label class="ods-radio--label" for="radio-peanut">A peanut</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-elephant" value="elephant" required>
-      <label class="ods-radio--label" for="radio-elephant">An elephant</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-moon" value="moon" required>
-      <label class="ods-radio--label" for="radio-moon">The moon</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
-      <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
+    <legend class="ods-input-legend">Field label</legend>
+    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" disabled required checked>
+    <label class="ods-radio--label" for="input-0">Label 1</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" disabled required>
+    <label class="ods-radio--label" for="input-1">Label 2</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" disabled required>
+    <label class="ods-radio--label" for="input-2">Label 3</label>
   </fieldset>
   ```
 </figure>
@@ -250,32 +242,25 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Which of the following is the largest?</legend>
-      <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
-      <label class="ods-radio--label" for="radio-peanut">A peanut</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-elephant" value="elephant" required>
-      <label class="ods-radio--label" for="radio-elephant">An elephant</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-moon" value="moon" required>
-      <label class="ods-radio--label" for="radio-moon">The moon</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
-      <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
-      <aside class="ods-field--error" id="radio-invalid-error">This field is required.</aside>
+      <legend class="ods-input-legend">Field label</legend>
+      <input class="ods-radio" type="radio" name="example-2" id="example-2-0" value="value-0" data-invalid required checked>
+      <label class="ods-radio--label" for="example-2-0">Label 1</label>
+      <input class="ods-radio" type="radio" name="example-2" id="example-2-1" value="value-1" data-invalid required>
+      <label class="ods-radio--label" for="example-2-1">Label 2</label>
+      <input class="ods-radio" type="radio" name="example-2" id="example-2-2" value="value-2" data-invalid required>
+      <label class="ods-radio--label" for="example-2-2">Label 3</label>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Which of the following is the largest?</legend>
-    <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
-    <label class="ods-radio--label" for="radio-peanut">A peanut</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-elephant" value="elephant" required>
-    <label class="ods-radio--label" for="radio-elephant">An elephant</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-moon" value="moon" required>
-    <label class="ods-radio--label" for="radio-moon">The moon</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
-    <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
-
-    <aside class="ods-field--error" id="radio-invalid-error">This field is required.</aside>
+    <legend class="ods-input-legend">Field label</legend>
+    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" data-invalid required checked>
+    <label class="ods-radio--label" for="input-0">Label 1</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" data-invalid required>
+    <label class="ods-radio--label" for="input-1">Label 2</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" data-invalid required>
+    <label class="ods-radio--label" for="input-2">Label 3</label>
   </fieldset>
   ```
 </figure>

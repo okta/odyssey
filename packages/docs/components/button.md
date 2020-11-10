@@ -336,13 +336,21 @@ Color is not a clear affordance for all users, please use clear, concise copy to
 
 ### Related components
 
+<Description>
+
 - <a href="/components/link">Link</a>
 - <a href="/components/tooltip">Tooltip</a>
 
+</Description>
+
 ### Further reading
+
+<Description>
 
 - <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button">Button</a> - MDN
 - <a href="https://www.sarasoueidan.com/blog/accessible-icon-buttons/">Accessibile Icon Buttons</a> - Sara Soueidan
+
+</Description>
 
 :::
 
@@ -428,75 +436,64 @@ Color is not a clear affordance for all users, please use clear, concise copy to
   ```
 </figure>
 
-
-## Implementation
-
-### SCSS
+## Icon Buttons
 
 <Description>
 
-  Styles related to buttons can be found in `/components/_button.scss`.
-
-  Semantic states can be combined to produce Secondary Danger styles.
-
-  <figure class="ods-table--figure">
-    <table class="ods-table">
-      <thead>
-        <tr>
-          <th scope="column">
-            Selector
-          </th>
-          <th scope="column">
-            Purpose
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <code>.ods-button</code>
-          </td>
-          <td>
-            Applies primary & general button styles
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <code>.is-ods-button-secondary</code>
-          </td>
-          <td>
-            Applies Secondary button styles
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <code>.is-ods-button-danger</code>
-          </td>
-          <td>
-            Applies Danger button styles
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </figure>
+When using icons within a button, be sure to add `focusable="false"` to the SVG; this will prevent browsers (IE, specifically) from incorrectly focusing on the icon instead of the button. Similarly, the `[role="presentation"]` attribute on the icon SVG will ensure screen readers do not unnecessarily announce iconography.
 
 </Description>
+
+### Icon with label
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <button class="ods-button">
+      <OdsIcon role="presentation" icon="get-info" focusable="false" />
+      Button label
+    </button>
+  </div>  
+
+  ```html
+  <div class="docs-example--rendered">
+    <button class="ods-button">
+      <svg class="ods-icon" role="presentation" focusable="false">...</svg>
+      Button label
+    </button>
+  </div>
+  ```
+</figure>
+
+
+### Icon-only
+
+<Description>
+
+If your button does not have a visual label, be sure to use the `aria-label` attribute to ensure screen readers will correctly identify it. Additionally, the use of the presentation role on the icon SVG enables decorative icons to be ignored by screen readers without compromising the accessibility of informative icons.
+
+</Description>
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <button aria-label="Button label" class="ods-button">
+      <OdsIcon role="presentation" icon="edit" focusable="false" />
+    </button>
+  </div>
+
+  ```html
+  <div class="docs-example--rendered">
+    <button aria-label="Button label" class="ods-button">
+      <svg class="ods-icon" role="presentation" focusable="false">...</svg>
+    </button>
+  </div>
+  ```
+</figure>
 
 ## Accessibility
 
 <Description>
 
-Buttons should display a visible :focus state when users interact with their keyboard.
-
-Color is not a clear affordance for all users, please use clear, concise copy to label buttons
-
-User the `<button>` element instead of `<a>` whenever possible. The keyboard and screen reader interaction for these elements is different. Space will trigger a `<button>`; Enter will trigger an `<a>`.
-
-When using icons within a button, be sure to add focusable="false" to the svg; this will prevent browsers (IE, specifically) from incorrectly focusing on the icon instead of the button. Similarly, the aria-hidden attribute will ensure screen readers do not unnecessarily announce iconography.
-
-Whether your button has a visual label or not, be sure to use the aria-label attribute to ensure screen readers will correctly identify your button, rather than extraneous content inside of it. Remember, if your button does contain a visual label, the text within aria-label should match exactly. This is a WCAG 2.1 requirement and will ensure that sighted users of screen readers are not confused by a mismatch.
-
-This enables decorative icons to be ignored by screen readers without compromising the accessibility of informative icons - all with the same markup.
+In addition to the above use-cases for Icon, consider using the `<button>` element instead of `<a>` whenever possible. The keyboard and screen reader interaction for these elements is different. Space will trigger a `<button>`; Enter will trigger an `<a>`.
 
 </Description>
 :::

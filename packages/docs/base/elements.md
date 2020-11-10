@@ -3,8 +3,8 @@ template: plain
 id: base-elements
 title: Elements
 headline: Elements
-description: Odyssey's glossary of styled baseline HTML elements
-lead: Odyssey takes care to provide additional style to the following HTML elements by default.
+description: A glossary of standard HTML elements styled using the Odyssey Base.
+lead: A glossary of standard HTML elements styled using the Odyssey Base.
 ---
 
 ## abbr <a name="abbr"></a>
