@@ -361,7 +361,7 @@ Finally, Users with low digital literacy may not understand the purpose or behav
 
 <Description>
 
-Out of the box, Odyssey supports input types for `text`, `email`, `tel`, and `password` with more coming soon.
+Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel`, and `password` with more coming soon.
 
 </Description>
 
@@ -453,6 +453,94 @@ Out of the box, Odyssey supports input types for `text`, `email`, `tel`, and `pa
   ```
 </figure>
 
+### Search
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <input type="search" name="example-5" id="example-5" autocomplete="search" placeholder="Placeholder value" spellcheck="false" aria-labelledby="example-5" required="required" class="ods-text-input">
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <input type="search" name="example-5" id="example-5" autocomplete="search" placeholder="Placeholder value" spellcheck="false" aria-labelledby="example-5" required="required" class="ods-text-input">
+  </fieldset>
+  ```
+</figure>
+
+### Search with attached primary button
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input type="search" name="example-6" id="example-6" autocomplete="search" spellcheck="false" aria-labelledby="example-6" required="required" class="ods-text-input">
+        <button id="example-6" class="ods-button">Button label</button>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input type="search" name="example-6" id="example-6" autocomplete="search" spellcheck="false" aria-labelledby="example-6" required="required" class="ods-text-input">
+        <button id="example-6" class="ods-button">Button label</button>
+      </div>
+    </fieldset>
+  ```
+</figure>
+
+### Search with attached secondary button
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input type="search" name="example-7" id="example-7" autocomplete="search" spellcheck="false" aria-labelledby="example-7" required="required" class="ods-text-input">
+        <button id="example-7" class="ods-button is-ods-button-secondary">Button label</button>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input type="search" name="example-7" id="example-7" autocomplete="search" spellcheck="false" aria-labelledby="example-7" required="required" class="ods-text-input">
+        <button id="example-7" class="ods-button is-ods-button-secondary">Button label</button>
+      </div>
+    </fieldset>
+  ```
+</figure>
+
+## Textarea
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <textarea class="ods-text-input ods-text-area" name="example-8" id="example-8" rows='4' cols='50' spellcheck="true" required></textarea>
+        <aside class="ods-field--hint">
+          Descriptive field hint
+        </aside>
+        <label class="ods-label" for="example-8">Field label</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <textarea class="ods-text-input ods-text-area" name="example-8" id="example-8" rows='4' cols='50' spellcheck="true" required></textarea>
+      <aside class="ods-field--hint">
+        Descriptive field hint
+      </aside>
+      <label class="ods-label" for="example-8">Field label</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
 ## States
 
 ### Disabled
@@ -461,8 +549,8 @@ Out of the box, Odyssey supports input types for `text`, `email`, `tel`, and `pa
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="example-5" id="example-5" spellcheck="false" value="Disabled input value" disabled required>
-        <label class="ods-label" for="example-5">Field label</label>
+        <input class="ods-text-input" type="text" name="example-9" id="example-9" spellcheck="false" value="Disabled input value" disabled required>
+        <label class="ods-label" for="example-9">Field label</label>
       </div>
     </fieldset>
   </div>
@@ -470,8 +558,8 @@ Out of the box, Odyssey supports input types for `text`, `email`, `tel`, and `pa
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="text" name="example-5" id="example-5" spellcheck="false" value="Disabled input value" disabled required>
-      <label class="ods-label" for="example-5">Field label</label>
+      <input class="ods-text-input" type="text" name="example-9" id="example-9" spellcheck="false" value="Disabled input value" disabled required>
+      <label class="ods-label" for="example-9">Field label</label>
     </div>
   </fieldset>
   ```
@@ -479,12 +567,12 @@ Out of the box, Odyssey supports input types for `text`, `email`, `tel`, and `pa
 
 ### Optional label
 
-<figure class="docs-example" data-optional>
+<figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="example-6" id="example-6" spellcheck="false" value="" required>
-        <label class="ods-label" for="example-6">Field label <span class="ods-label--optional">Optional</span></label>
+        <input class="ods-text-input" type="text" name="example-10" id="example-10" spellcheck="false" value="">
+        <label class="ods-label" for="example-10">Field label <span class="ods-label--optional">Optional</span></label>
       </div>
     </fieldset>
   </div>
@@ -492,8 +580,8 @@ Out of the box, Odyssey supports input types for `text`, `email`, `tel`, and `pa
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="text" name="example-6" id="example-6" spellcheck="false" value="" required>
-      <label class="ods-label" for="example-6">Field label <span class="ods-label--optional">Optional</span></label>
+      <input class="ods-text-input" type="text" name="example-10" id="example-10" spellcheck="false" value="">
+      <label class="ods-label" for="example-10">Field label <span class="ods-label--optional">Optional</span></label>
     </div>
   </fieldset>
   ```
@@ -511,8 +599,8 @@ Out of the box, Odyssey supports input types for `text`, `email`, `tel`, and `pa
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="example-6" id="example-6" spellcheck="false" value="" data-invalid required>
-        <label class="ods-label" for="example-6">Field label</label>
+        <input class="ods-text-input" type="text" name="example-11" id="example-11" spellcheck="false" value="" data-invalid required>
+        <label class="ods-label" for="example-11">Field label</label>
         <aside class="ods-field--error" id="overview-invalid-error">
           <span class="u-visually-hidden">Error:</span> Invalid error description
         </aside>
@@ -523,8 +611,8 @@ Out of the box, Odyssey supports input types for `text`, `email`, `tel`, and `pa
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="text" name="example-7" id="example-7" spellcheck="false" value="" data-invalid required>
-      <label class="ods-label" for="example-7">Field label</label>
+      <input class="ods-text-input" type="text" name="example-11" id="example-11" spellcheck="false" value="" data-invalid required>
+      <label class="ods-label" for="example-11">Field label</label>
       <aside class="ods-field--error" id="overview-invalid-error">
         <span class="u-visually-hidden">Error:</span> Invalid error description
       </aside>
