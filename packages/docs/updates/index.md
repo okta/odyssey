@@ -2,8 +2,8 @@
 template: plain
 title: Odyssey Updates
 headline: Updates
-lead: Here’s a list of all our most recent updates. Updates can vary from component changes to team updates and contribution.
-description: Odyssey colors consist of a variety of neutral, semantic, and brand values used in all UIs for utmost clarity and readability.
+lead: Here’s a list of all our most recent updates. Updates can vary from component changes to team updates and contributions.
+description: Here’s a list of all our most recent updates. Updates can vary from component changes to team updates and contributions.
 links:
   - icon: github
     label: Changelog
