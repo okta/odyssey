@@ -29,8 +29,7 @@ links:
 
 <Description>
 
-Users interact with Tab as they would a button, the main difference is the outcome. By default, the first tab from the left is active and the associated content 
-displayed in the tab panel. Upon selecting a different tab, the tab indicator appears on the selected tab. The tab panel will then update to show the new content. 
+Users interact with Tab as they would a button, the main difference is the outcome. By default, the first tab from the left is active and the associated content displayed in the tab panel. Upon selecting a different tab, the tab indicator appears on the selected tab. The tab panel will then update to show the new content. 
 
 Additionally, the tab element is keyboard-navigable (See [Accessibility: Keyboard Support](#keyboard-support))
 
@@ -81,7 +80,7 @@ see what could be grouped together. Those themes should become your Tabs.
 
 <Description>
 
-Tabs are NOT navigation. Meaning they don’t take you from place to place. Rather, they are meant for context switching related to the page.
+**Tabs are not navigation**. Meaning they don’t take you from place to place. Rather, they are meant for context switching related to the page.
 
 </Description>
 
@@ -145,9 +144,7 @@ Tabs are best used at the top of the page or situated above the content it’s r
 
 <Description>
 
-In fact, it’s really impossible to do because we include the tab panel with the tabs themselves. We’re calling this out to designers because the component doesn’t include the tab panel and shouldn’t be presented to an engineer.
-
-Ultimately this is bad practice because is will result in overloading users with information and reduce comprehension.
+Use tabs sparingly. Limit Tabs to one per page, and refrain from including a second set of Tabs within a tabpanel.
 
 </Description>
 
@@ -160,9 +157,9 @@ Ultimately this is bad practice because is will result in overloading users with
 
 <Description>
 
-- Don't from using tabs without tabpanels.
+- Refrain from using tabs without tabpanels.
 - Don't have more than 8 tabs in a tablist.
-- Don't Add an icon to a tab. Icons should be reserved for very specific things. It can be hard to maintain consistency with use of icons as it pertains to their semantic meanings and meaning to Okta.
+- Don't add an icon to a tab. Icons should be reserved for very specific things. It can be hard to maintain consistency with use of icons as it pertains to their semantic meanings and meaning to Okta.
 
 </Description>
 
