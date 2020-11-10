@@ -11,4 +11,8 @@
   img {
     user-select: none;
   }
+
+  &.is-figure-anatomy-filled {
+    background: cv('gray', '100');
+  }
 }
