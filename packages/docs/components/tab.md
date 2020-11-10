@@ -71,7 +71,7 @@ Additionally, the tab element is keyboard-navigable (See [Accessibility: Keyboar
 <Description>
 
 Tabs were created to shorten long pages. Before you use these, we’d recommend laying 
-out all of the content on your page out first. From there figure out common themes and 
+out all of the content on your page out first. From there, figure out common themes and 
 see what could be grouped together. Those themes should become your Tabs.
 
 </Description>
