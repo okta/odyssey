@@ -1,12 +1,12 @@
 <template>
   <figure v-if="img" 
-      :class="{
+    :class="{
       'docskit-figure-anatomy': true,
       [`is-figure-anatomy-filled`]: fill
     }"
   >
     <div
-      v-html="require(`!html-loader!../../docs/.vuepress/public${img}`)"
+      v-html="require(`!html-loader!../../docs/.vuepress/public/${img}`)"
     />
     <figcaption>
       <h4 v-if="metadata">{{ metadata }}</h4>
