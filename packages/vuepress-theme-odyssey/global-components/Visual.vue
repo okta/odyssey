@@ -7,10 +7,10 @@
     }"
   >
     <h6
-      v-if="variant === 'positive' || variant === 'negative'"
+      v-if="variant"
       class="docskit-visual--title"
     >
-      {{ variant === "positive" ? "Do" : `Don't` }}
+      {{labels[variant]}}
     </h6>
     <figure class="docskit-visual--figure">
       <slot />
@@ -24,14 +24,24 @@ export default {
   props: {
     variant: {
       type: String,
-      required: false,
-      default: null
+      required: false
     },
     wide: {
       type: Boolean,
       required: false,
       default: false
     }
-  }
+  },
+  data: function () {
+    return {
+      labels: {
+        'positive': 'Do',
+        'negative': `Don't`,
+        'smiley-positive': 'Best!',
+        'smiley-neutral': 'Good',
+        'smiley-negative': 'Bad'
+      }
+    }
+  },
 };
 </script>

@@ -54,4 +54,16 @@
   &.is-docskit-visual-negative .docskit-visual--title::before {
     content: '🚫';
   }
+
+  &.is-docskit-visual-smiley-positive .docskit-visual--title::before {
+    content: '😄';
+  }
+
+  &.is-docskit-visual-smiley-neutral .docskit-visual--title::before {
+    content: '🙄';
+  }
+
+  &.is-docskit-visual-smiley-negative .docskit-visual--title::before {
+    content: '😔';
+  }
 }
