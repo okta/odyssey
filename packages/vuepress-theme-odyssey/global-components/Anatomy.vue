@@ -8,7 +8,6 @@
     <div
       v-html="require(`!html-loader!../../docs/.vuepress/public${img}`)"
     />
-
     <figcaption>
       <h4 v-if="metadata">{{ metadata }}</h4>
     </figcaption>
