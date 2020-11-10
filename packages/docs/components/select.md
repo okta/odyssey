@@ -327,7 +327,7 @@ Select inputs should not have a default selected unless a majority of users will
 
 <Description>
 
-Options may be grouped within the Select list to help guide users.
+Options may be grouped within the Select list to help guide users. When doing this, consider that Choices will ignore any ungrouped items.
 
 </Description>
 
