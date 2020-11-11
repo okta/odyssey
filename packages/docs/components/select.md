@@ -456,7 +456,7 @@ Options may be grouped within the Select list to help guide users. When doing th
           <option value="value-2-2">Option 2</option>
         </optgroup>
       </select>
-      <label class="ods-label" for="example-3">Destination star</label>
+      <label class="ods-label" for="example-3">Field label</label>
     </div>
   </fieldset>
   ```
@@ -502,13 +502,13 @@ Options may be grouped within the Select list to help guide users. When doing th
   ```
 </figure>
 
-### Optional label
+### Optional
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset" data-optional>
       <div class="ods-fieldset-flex">
-        <select class="ods-select" data-js-choices id="example-5" name="example-5" required>
+        <select class="ods-select" data-js-choices id="example-5" name="example-5">
           <option></option>
           <option value="value-1">Option 1</option>
           <option value="value-2">Option 2</option>
@@ -525,7 +525,7 @@ Options may be grouped within the Select list to help guide users. When doing th
   ```html
   <fieldset class="ods-fieldset" data-optional>
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="example-5" name="example-5" required>
+      <select class="ods-select" data-js-choices id="example-5" name="example-5">
         <option></option>
         <option value="value-1">Option 1</option>
         <option value="value-2">Option 2</option>
