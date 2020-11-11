@@ -11,9 +11,6 @@ tabs:
     id: 'html-scss'
 links:
   - icon: github
-    label: Legacy docs
-    href: https://github.com/okta/odyssey/blob/master/packages/docs/components/tooltip.md
-  - icon: github
     label: View source
     href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_tooltip.scss
   - icon: figma

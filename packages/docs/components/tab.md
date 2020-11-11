@@ -167,6 +167,8 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
 
 ### Keyboard Support
 
+<Description>
+
 <figure class="ods-table--figure">
   <table class="ods-table">
     <caption>When implementing this component you should consider the following keyboard behaviors.</caption>
@@ -213,6 +215,8 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
     </tbody>
   </table>
 </figure>
+
+</Description>
 
 ## References
 
