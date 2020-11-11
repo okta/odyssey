@@ -24,32 +24,32 @@ description: Design Tokens abstract Base elements into names that are commonly u
       <tr>
         <td class="is-ods-table-checkbox"><div><code>$color-primary-light</code></div></td>
         <td><span class="sample-token sample-token--color-primary-light"></span></td>
-        <td>blue, 300</td>
+        <td>Blue 300</td>
       </tr>
       <tr>
         <td><code>$color-primary-base</code></td>
         <td><span class="sample-token sample-token--color-primary-base"></span></td>
-        <td>blue, 500</td>
+        <td>Blue 500</td>
       </tr>
       <tr>
         <td><code>$color-primary-dark</code></td>
         <td><span class="sample-token sample-token--color-primary-dark"></span></td>
-        <td>blue, 900</td>
+        <td>Blue 900</td>
       </tr>
       <tr>
         <td><code>$color-danger-light</code></td>
         <td><span class="sample-token sample-token--color-danger-light"></span></td>
-        <td>blue, 300</td>
+        <td>Red 300</td>
       </tr>
       <tr>
         <td><code>$color-danger-base</code></td>
         <td><span class="sample-token sample-token--color-danger-base"></span></td>
-        <td>blue, 500</td>
+        <td>Red 500</td>
       </tr>
       <tr>
         <td><code>$color-danger-dark</code></td>
         <td><span class="sample-token sample-token--color-danger-dark"></span></td>
-        <td>blue, 900</td>
+        <td>Red 900</td>
       </tr>
     </tbody>
   </table>
@@ -71,12 +71,12 @@ description: Design Tokens abstract Base elements into names that are commonly u
       <tr>
         <td><code>$focus-ring-primary</code></td>
         <td><span class="sample-token sample-token--color-primary-outline"></span></td>
-        <td>red, 300</td>
+        <td>Blue 300</td>
       </tr>
       <tr>
         <td><code>$focus-ring-danger</code></td>
         <td><span class="sample-token sample-token--color-danger-outline"></span></td>
-        <td>red, 300</td>
+        <td>Red 300</td>
       </tr>
     </tbody>
   </table>
@@ -98,22 +98,22 @@ description: Design Tokens abstract Base elements into names that are commonly u
       <tr>
         <td><code>$text-body</code></td>
         <td><span class="sample-token--text-body">Aa</span></td>
-        <td>gray, 900</td>
+        <td>Gray 900</td>
       </tr>
       <tr>
         <td><code>$text-danger</code></td>
         <td><span class="sample-token--text-danger">Aa</span></td>
-        <td>red, 500</td>
+        <td>Red 500</td>
       </tr>
       <tr>
         <td><code>$text-heading</code></td>
         <td><span class="sample-token--text-heading">Aa</span></td>
-        <td>gray, 900</td>
+        <td>Gray 900</td>
       </tr>
       <tr>
         <td><code>$text-sub</code></td>
         <td><span class="sample-token--text-sub">Aa</span></td>
-        <td>gray, 600</td>
+        <td>Gray 600</td>
       </tr>
     </tbody>
   </table>
