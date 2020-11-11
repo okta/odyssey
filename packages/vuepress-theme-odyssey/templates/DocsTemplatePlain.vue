@@ -9,6 +9,18 @@
     <hr />
 
     <Content />
+
+    <footer class="page-footer">
+      <p>
+        Have questions? <span class="u-visually-hidden">Ask us on slack!</span>
+        <span class="has-ods-tooltip">
+          <a :href="$site.themeConfig.links.slack" target="_blank" aria-describedby="component-slack">#odyssey</a>
+          <aside id="component-slack" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+            Oktanauts-only for now
+          </aside>
+        </span>
+      </p>
+    </footer>
   </article>
 </template>
 
