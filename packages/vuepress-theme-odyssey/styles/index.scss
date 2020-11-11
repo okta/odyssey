@@ -57,7 +57,7 @@ a:visited {
     flex: 1;
     justify-content: center;
     max-width: 100%;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-l;
     padding: $spacing-l * 2 $spacing-m 0;
 
     // TODO: We would like to remove this in the future
@@ -384,4 +384,8 @@ $spacing-units: (
 
 .is-sample-absolute {
   position: absolute;
+}
+
+.is-sample-color-green {
+  color: cv('green', '500');
 }

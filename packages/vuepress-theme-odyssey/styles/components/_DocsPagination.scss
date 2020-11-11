@@ -1,7 +1,14 @@
-.page-nav {
+.page-footer {
+  margin-top: $spacing-xl;
   padding: $spacing-m 0;
   border-top: 2px solid var(--border-color-display, #{$border-color-display});
+  text-align: center;
 
+  &,
+  p {
+    max-width: 100%;
+    font-size: $size-body-base;
+  }
 }
 
 .pagination {

@@ -14,4 +14,8 @@
 
 .docs-main--content.is-template-plain {
   hr { margin: $spacing-m 0 $spacing-l; }
+
+  .docs-page-header.is-page-header-icon + hr {
+    display: none;
+  }
 }
