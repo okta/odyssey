@@ -6,6 +6,7 @@ contentPrimary:
   - coin: base
     title: Base
     description: Base is the foundation of Odyssey, consisting of Color, Design Tokens, HTML Elements, Iconography and Typography
+    label: Explore Base
     href: /base/
   - coin: component
     title: Components
