@@ -12,113 +12,114 @@ tabs:
 
 <div class="docskit-container">
 
- <figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">
-    Icons
-  </figcaption>
-  <table class="ods-table">
-    <thead>
-      <tr>
-        <th scope="column">Icon</th>
-        <th scope="column">Name</th>
-        <th scope="column">Use</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><OdsIcon icon="caution"></OdsIcon></td>
-        <td>Caution</td>
-        <td>To indicate a crucial decision</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="search"></OdsIcon></td>
-        <td>Search</td>
-        <td>To search for something</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="get-info"></OdsIcon></td>
-        <td>Get info</td>
-        <td>To get information</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="user"></OdsIcon></td>
-        <td>User</td>
-        <td>To support a user name</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="copy"></OdsIcon></td>
-        <td>Copy</td>
-        <td>To copy text</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="delete"></OdsIcon></td>
-        <td>Delete</td>
-        <td>To delete something</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="download"></OdsIcon></td>
-        <td>Download</td>
-        <td>To download</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="notification"></OdsIcon></td>
-        <td>Notification</td>
-        <td>To notify the user of something</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="close"></OdsIcon></td>
-        <td>Close</td>
-        <td>To close a modal or other UI</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="complete"></OdsIcon></td>
-        <td>Complete</td>
-        <td>To show a completed process</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="error"></OdsIcon></td>
-        <td>Error</td>
-        <td>To indicate an error</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="go-forward"></OdsIcon></td>
-        <td>Go forward</td>
-        <td>To navigate forward</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="go-backward"></OdsIcon></td>
-        <td>Go backward</td>
-        <td>To navigate backward</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="edit"></OdsIcon></td>
-        <td>Edit</td>
-        <td>To edit something</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="settings"></OdsIcon></td>
-        <td>Settings</td>
-        <td>To edit user or app settings</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="plus"></OdsIcon></td>
-        <td>Plus</td>
-        <td>To add</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="minus"></OdsIcon></td>
-        <td>Minus</td>
-        <td>To subtract or remove</td>
-      </tr>
-      <tr>
-        <td><OdsIcon icon="filter"></OdsIcon></td>
-        <td>Filter</td>
-        <td>To filter results</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-
+<Description>
+  <figure class="ods-table--figure">
+    <figcaption class="ods-table--figcaption">
+      Library
+    </figcaption>
+    <table class="ods-table">
+      <thead>
+        <tr>
+          <th scope="column">Icon</th>
+          <th scope="column">Name</th>
+          <th scope="column">Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><OdsIcon icon="caution"></OdsIcon></td>
+          <td>Caution</td>
+          <td>To indicate a crucial decision</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="search"></OdsIcon></td>
+          <td>Search</td>
+          <td>To search for something</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="get-info"></OdsIcon></td>
+          <td>Get info</td>
+          <td>To get information</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="user"></OdsIcon></td>
+          <td>User</td>
+          <td>To support a user name</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="copy"></OdsIcon></td>
+          <td>Copy</td>
+          <td>To copy text</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="delete"></OdsIcon></td>
+          <td>Delete</td>
+          <td>To delete something</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="download"></OdsIcon></td>
+          <td>Download</td>
+          <td>To download</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="notification"></OdsIcon></td>
+          <td>Notification</td>
+          <td>To notify the user of something</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="close"></OdsIcon></td>
+          <td>Close</td>
+          <td>To close a modal or other UI</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="complete"></OdsIcon></td>
+          <td>Complete</td>
+          <td>To show a completed process</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="error"></OdsIcon></td>
+          <td>Error</td>
+          <td>To indicate an error</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="go-forward"></OdsIcon></td>
+          <td>Go forward</td>
+          <td>To navigate forward</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="go-backward"></OdsIcon></td>
+          <td>Go backward</td>
+          <td>To navigate backward</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="edit"></OdsIcon></td>
+          <td>Edit</td>
+          <td>To edit something</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="settings"></OdsIcon></td>
+          <td>Settings</td>
+          <td>To edit user or app settings</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="plus"></OdsIcon></td>
+          <td>Plus</td>
+          <td>To add</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="minus"></OdsIcon></td>
+          <td>Minus</td>
+          <td>To subtract or remove</td>
+        </tr>
+        <tr>
+          <td><OdsIcon icon="filter"></OdsIcon></td>
+          <td>Filter</td>
+          <td>To filter results</td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+</Description>
 
 ## Built on a grid
 
