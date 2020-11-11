@@ -80,7 +80,7 @@ Keep in mind that all users may not have the same visual context due to their de
 
 <Visual variant="smiley-neutral">
   <template>
-    <a href="#">View solar</a>
+    <a href="#">View system</a>
   </template>
 </Visual>
 
