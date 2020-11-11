@@ -80,7 +80,7 @@ Our <a href="/components/button/">Button</a> component offers more guidance if n
   <template>
     <span class="has-ods-tooltip">
       <button class="ods-button" aria-describedby="edit-label">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.8008 2.78969L11.2103 1.19923C10.9447 0.933589 10.5121 0.933589 10.2465 1.19923L9 2.44572L11.5543 5L12.8007 3.75351C13.0664 3.48787 13.0664 3.05533 12.8008 2.78969ZM3.5 13L10.5 6L8 3.5L1 10.5V13L3.5 13Z" fill="currentColor"/></svg>
+        <OdsIcon icon="edit"></OdsIcon>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         Edit
@@ -240,7 +240,7 @@ Assistive technologies will read out this example as "Edit".
 <Visual>
   <span class="has-ods-tooltip">
     <button class="ods-button" aria-labelledby="access-edit-label">
-      <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.8008 2.78969L11.2103 1.19923C10.9447 0.933589 10.5121 0.933589 10.2465 1.19923L9 2.44572L11.5543 5L12.8007 3.75351C13.0664 3.48787 13.0664 3.05533 12.8008 2.78969ZM3.5 13L10.5 6L8 3.5L1 10.5V13L3.5 13Z" fill="currentColor"/></svg>
+      <OdsIcon icon="edit"></OdsIcon>
     </button>
     <aside id="access-edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
       Edit
@@ -271,10 +271,10 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
   <div class="docs-example--rendered">
     <span class="has-ods-tooltip">
       <button class="ods-button" aria-describedby="edit-label">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13ZM8 4C8 4.55228 7.55228 5 7 5C6.44772 5 6 4.55228 6 4C6 3.44772 6.44772 3 7 3C7.55228 3 8 3.44772 8 4ZM8 6V11H6V6H8Z" fill="currentColor"></path></svg>
+        <OdsIcon icon="edit"></OdsIcon>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
-        Tooltip label
+        <OdsIcon icon="edit"></OdsIcon>
       </aside>
     </span>
   </div>
@@ -282,7 +282,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
   ```html
     <span class="has-ods-tooltip">
       <button class="ods-button" aria-describedby="edit-label">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...</svg>
+        <svg role="presentation" focusable="false" class="ods-icon">...</svg>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
         Tooltip label
@@ -297,7 +297,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
   <div class="docs-example--rendered">
     <span class="has-ods-tooltip">
       <button class="ods-button" aria-describedby="edit-label">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13ZM8 4C8 4.55228 7.55228 5 7 5C6.44772 5 6 4.55228 6 4C6 3.44772 6.44772 3 7 3C7.55228 3 8 3.44772 8 4ZM8 6V11H6V6H8Z" fill="currentColor"></path></svg>
+        <OdsIcon icon="edit"></OdsIcon>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
         Tooltip label
@@ -308,7 +308,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
   ```html
     <span class="has-ods-tooltip">
       <button class="ods-button" aria-describedby="edit-label">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...</svg>
+        <svg role="presentation" focusable="false" class="ods-icon">...</svg>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
         Tooltip label
@@ -323,7 +323,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
   <div class="docs-example--rendered">
     <span class="has-ods-tooltip">
       <button class="ods-button" aria-describedby="edit-label">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13ZM8 4C8 4.55228 7.55228 5 7 5C6.44772 5 6 4.55228 6 4C6 3.44772 6.44772 3 7 3C7.55228 3 8 3.44772 8 4ZM8 6V11H6V6H8Z" fill="currentColor"></path></svg>
+        <OdsIcon icon="edit"></OdsIcon>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-bottom" role="tooltip">
         Tooltip label
@@ -334,7 +334,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
   ```html
     <span class="has-ods-tooltip">
       <button class="ods-button" aria-describedby="edit-label">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...</svg>
+        <svg role="presentation" focusable="false" class="ods-icon">...</svg>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-bottom" role="tooltip">
         Tooltip label
@@ -349,7 +349,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
   <div class="docs-example--rendered">
     <span class="has-ods-tooltip">
       <button class="ods-button" aria-describedby="edit-label">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13ZM8 4C8 4.55228 7.55228 5 7 5C6.44772 5 6 4.55228 6 4C6 3.44772 6.44772 3 7 3C7.55228 3 8 3.44772 8 4ZM8 6V11H6V6H8Z" fill="currentColor"></path></svg>
+        <OdsIcon icon="edit"></OdsIcon>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
         Tooltip label
@@ -360,7 +360,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
   ```html
     <span class="has-ods-tooltip">
       <button class="ods-button" aria-describedby="edit-label">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 14 14" fill="none" class="ods-icon">...</svg>
+        <svg role="presentation" focusable="false" class="ods-icon">...</svg>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
         Tooltip label
