@@ -352,7 +352,7 @@ description: Odyssey colors consist of a variety of neutral, semantic, and brand
           <code>#da372c</code>
         </td>
         <td>
-          System errors, danger buttons, error states, status dot 
+          System errors, danger buttons, error states, status dot
         </td>
         <td>
           N/A
@@ -423,7 +423,7 @@ description: Odyssey colors consist of a variety of neutral, semantic, and brand
           <code>#ffc61c</code>
         </td>
         <td>
-          Moments of caution, status dot 
+          Moments of caution, status dot
         </td>
         <td>
           Headlines, body copy, links, buttons
@@ -504,7 +504,7 @@ description: Odyssey colors consist of a variety of neutral, semantic, and brand
         </td>
       </tr>
       <tr>
-        <th scope="row" rowspan="1">
+        <th scope="row" rowspan="2">
           Turquoise
         </th>
         <td class="is-sample-table-swatch">
@@ -524,9 +524,6 @@ description: Odyssey colors consist of a variety of neutral, semantic, and brand
         </td>
       </tr>
       <tr>
-        <th scope="row" rowspan="1">
-          Turquoise
-        </th>
         <td class="is-sample-table-swatch">
           <span class="sample-color sample-color--turquoise-400"></span>
         </td>
