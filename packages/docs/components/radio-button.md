@@ -243,24 +243,26 @@ Unlike Checkboxes, Radios validate as a group, not individually.
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <legend class="ods-input-legend">Field label</legend>
-      <input class="ods-radio" type="radio" name="example-2" id="example-2-0" value="value-0" data-invalid required checked>
+      <input class="ods-radio" type="radio" name="example-2" id="example-2-0" value="value-0" aria-describedby="group-name-error" data-invalid required checked>
       <label class="ods-radio--label" for="example-2-0">Label 1</label>
       <input class="ods-radio" type="radio" name="example-2" id="example-2-1" value="value-1" data-invalid required>
       <label class="ods-radio--label" for="example-2-1">Label 2</label>
       <input class="ods-radio" type="radio" name="example-2" id="example-2-2" value="value-2" data-invalid required>
       <label class="ods-radio--label" for="example-2-2">Label 3</label>
+      <aside class="ods-field--error" id="group-name-error"><span class="u-visually-hidden">Error:</span> This is an invalid selection.</aside>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Field label</legend>
-    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" data-invalid required checked>
+    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" aria-describedby="group-name-error" data-invalid required checked>
     <label class="ods-radio--label" for="input-0">Label 1</label>
     <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" data-invalid required>
     <label class="ods-radio--label" for="input-1">Label 2</label>
     <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" data-invalid required>
     <label class="ods-radio--label" for="input-2">Label 3</label>
+    <aside class="ods-field--error" id="group-name-error"><span class="u-visually-hidden">Error:</span> This is an invalid selection.</aside>
   </fieldset>
   ```
 </figure>
