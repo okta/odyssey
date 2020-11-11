@@ -44,7 +44,7 @@ When any column becomes sorted, the previously active column should return to an
 
 </Description>
 
-<Visual content="no-end">
+<Visual>
   <figure class="ods-table--figure">
     <figcaption class="ods-table--figcaption">
       Big and small planets
@@ -96,7 +96,7 @@ The data-null attribute will ensure the table styling is adjusted.
 
 </Description>
 
-<Visual content="no-end">
+<Visual>
   <figure class="ods-table--figure">
     <figcaption class="ods-table--figcaption">
       Big and small planets
@@ -141,7 +141,7 @@ Be sure to identify your row heading column as well. That is, don't leave a blan
 
 </Description>
 
-<Visual content="no-end">
+<Visual>
   <figure class="ods-table--figure">
     <figcaption class="ods-table--figcaption">
       Big and small planets
@@ -153,6 +153,7 @@ Be sure to identify your row heading column as well. That is, don't leave a blan
           <th scope="column">Planet</th>
           <th scope="column" class="is-ods-table-num">Radius (km)</th>
           <th scope="column">Type</th>
+          <th scope="column">Descriptor</th>
         </tr>
       </thead>
       <tbody>
@@ -160,16 +161,19 @@ Be sure to identify your row heading column as well. That is, don't leave a blan
           <th scope="row">Jupiter</th>
           <td class="is-ods-table-num">69,911</td>
           <td>Gas giant</td>
+          <td>Jovian</td>
         </tr>
         <tr>
           <th scope="row">Earth</th>
           <td class="is-ods-table-num">6,371</td>
           <td>Terrestrial</td>
+          <td>Terran</td>
         </tr>
         <tr>
           <th scope="row">Mercury</th>
           <td class="is-ods-table-num">1,737</td>
           <td>Terrestrial</td>
+          <td>Mercurial</td>
         </tr>
       </tbody>
     </table>
@@ -186,7 +190,7 @@ Note: spanning multiple rows or columns may cause issues for assistive technolog
 
 </Description>
 
-<Visual content="no-end">
+<Visual>
   <figure class="ods-table--figure">
     <figcaption class="ods-table--figcaption">
       Big and small planets
