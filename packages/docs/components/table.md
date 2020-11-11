@@ -377,11 +377,9 @@ Currently, we provide extra support for numerical data, dates, Buttons, Statuses
 
 <h4 class="desc-counter--title">Checkboxes</h4>
 
-Include checkboxes in the first column if row selection is necessary.
+Include checkboxes in the first column. The heading checkbox should check/uncheck all rows when clicked.
 
-The heading checkbox should check/uncheck all rows when clicked.
-
-In a mixed selection, the heading checkbox should be set to Indeterminate.
+If mixed, the heading checkbox should be set to Indeterminate.
 
 </li>
 <li class="desc-counter--item">
