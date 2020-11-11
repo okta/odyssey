@@ -19,6 +19,7 @@ links:
 
 ## Anatomy
 
+<Anatomy img="/images/anatomy-field-label.svg" />
 
 ## Usage
 
@@ -126,7 +127,11 @@ Odyssey assumes inputs are required by default. Optional labels should be used t
 
 ## Usage
 
+<Description>
+
 Please refer to individual components for complete documentation. These examples are provided for quick illustration.
+
+</Description>
 
 ### Label
 
