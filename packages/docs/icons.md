@@ -222,8 +222,6 @@ As best practice, use a verb to suggest an action. For more clarity use a verb +
 
 It’s recommended to use a word to accompany an icon. Like the previous example shows, icons should call attention to the action and the icon should follow suit. Depending on the situation, some icons are better for clicking, where others are better suited as static.
 
-As a result, this will drastically reduce the amount of icons we have, increase understanding and clarity in our actions.
-
 </Description>
 
 <Visual variant="positive">
@@ -232,6 +230,12 @@ As a result, this will drastically reduce the amount of icons we have, increase 
     Add user
   </button>
 </Visual>
+
+<Description>
+
+As a result, this will drastically reduce the amount of icons we have, increase understanding and clarity in our actions.
+
+</Description>
 
 <Visual variant="negative">
   <button class="ods-button is-ods-button-secondary">
@@ -246,8 +250,6 @@ As a result, this will drastically reduce the amount of icons we have, increase 
 
 By default, all icons are Grey 900. If using an icon on top of a solid color, for example in a primary button, it should be White. As a general guideline, icons should be the same color as their accompanying text.
 
-As an example, if you have a “Delete policy” button, do not colorize the delete button or trashcan icon with Green 400.
-
 </Description>
 
 <Visual variant="positive">
@@ -256,6 +258,12 @@ As an example, if you have a “Delete policy” button, do not colorize the del
     Delete policy
   </button>
 </Visual>
+
+<Description>
+
+As an example, if you have a “Delete policy” button, do not colorize the delete button or trashcan icon with Green 400.
+
+</Description>
 
 <Visual variant="negative">
   <button class="ods-button is-ods-button-secondary">
