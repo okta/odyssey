@@ -13,14 +13,24 @@ links:
   - icon: github
     label: View source
     href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_label.scss
-  - icon: figma
-    label: View designs
-    href: https://www.figma.com/file/tVkWsXwnWICeguWhzX6Vwl/Inputs?node-id=476%3A3848
 ---
 
 ::: slot overview
 
-## Label
+## Anatomy
+
+
+## Usage
+
+<Description>
+
+Field labels provide textual affordances and context for Odyssey's various inputs. Our UI Kit provides these labels alongside each component.
+
+Please refer to individual components for complete documentation. These examples are provided for quick illustration.
+
+</Description>
+
+### Label
 
 <Description>
 
@@ -41,7 +51,7 @@ Keep labels to a word or two so users can quickly scan the form. Always use sent
   </form>
 </Visual>
 
-## Field hint
+### Field hint
 
 <Description>
 
@@ -66,7 +76,7 @@ Limit hints to a short sentence. If additional context is required, it should be
   </fieldset>
 </Visual>
 
-## Error messages
+### Error messages
 
 <Description>
 
@@ -84,7 +94,7 @@ If possible, describe how the error may be resolved.
   </fieldset>
 </Visual>
 
-## Optional fields
+### Optional fields
 
 <Description>
 
