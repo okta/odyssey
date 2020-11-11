@@ -39,7 +39,7 @@ Radio Buttons allow users to select one option from a set. Users can click a Rad
     <legend class="ods-input-legend">Select speed</legend>
     <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-1" value="1" required>
     <label class="ods-radio--label" for="overview-behavior-1">Lightspeed</label>
-    <input class="ods-radio" type="radio" name="overview-behavior" id="roverview-behavior-2" value="2" required checked>
+    <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-2" value="2" required checked>
     <label class="ods-radio--label" for="overview-behavior-2">Warp Speed</label>
     <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-3" value="3" required>
     <label class="ods-radio--label" for="overview-behavior-3">Ludicrous Speed</label>

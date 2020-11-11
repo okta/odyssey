@@ -239,7 +239,7 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
 </Description>
 
 <Visual content="full">
-  <fieldset class="ods-fieldset">
+  <fieldset class="ods-fieldset" data-optional>
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-optional" name="overview-optional">
         <option></option>

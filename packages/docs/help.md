@@ -2,7 +2,8 @@
 template: plain
 title: Help
 headline: Need Help?
-lead: We're here for ya!
+lead: The Odyssey team is here to help as best we can. Don't hesitate to reach out!
+description: The Odyssey team is here to help as best we can. Don't hesitate to reach out!
 ---
 
 <section class="overview__help">
