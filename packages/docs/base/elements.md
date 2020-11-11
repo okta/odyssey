@@ -720,7 +720,7 @@ See <a href="#details">`details`</a> for example.
   </div>
 
 ```html
-<p> </p>
+<p>The <b>Pythagorean theorem</b> is often expressed as the following equation:</p>
 <p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>
 ```
 </figure>
