@@ -80,7 +80,7 @@ see what could be grouped together. Those themes should become your Tabs.
 
 <Description>
 
-**Tabs are not navigation**. Meaning they don’t take you from place to place. Rather, they are meant for context switching related to the page.
+_Tabs are not navigation_. Meaning they don’t take you from place to place. Rather, they are meant for context switching related to the page.
 
 </Description>
 

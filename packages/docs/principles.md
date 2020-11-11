@@ -2,7 +2,7 @@
 template: plain
 title: Principles 
 headline: Principles 
-# lead: New Components, Icons, Color and Previews! 
+lead: Okta's design principles are Odyssey's north star. They guide us in making critical decisions as a team.
 ---
 
 <Description>
