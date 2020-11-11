@@ -176,10 +176,10 @@ If you want to call attention to an action you want a user to take, icons make g
 <Visual>
   <template>
     <div>
-      <button class="ods-button">Add user</button>
+      <button class="ods-button">Add astronaut</button>
       <button class="ods-button">
         <OdsIcon icon="plus" />
-        Add user
+        Add astronaut
       </button>
     </div>
   </template>
@@ -198,7 +198,7 @@ As best practice, use a verb to suggest an action. For more clarity use a verb +
 <Visual variant="smiley-positive">
   <button class="ods-button">
     <OdsIcon icon="plus" />
-    Add user
+    Add astronaut
   </button>
 </Visual>
 
@@ -227,7 +227,7 @@ It’s recommended to use a word to accompany an icon. Like the previous example
 <Visual variant="positive">
   <button class="ods-button is-ods-button-clear">
     <OdsIcon icon="user" />
-    Add user
+    Add astronaut
   </button>
 </Visual>
 
@@ -240,7 +240,7 @@ As a result, this will drastically reduce the amount of icons we have, increase 
 <Visual variant="negative">
   <button class="ods-button is-ods-button-secondary">
     <OdsIcon icon="user" />
-    Add user
+    Add astronaut
   </button>
 </Visual>
 
@@ -255,20 +255,20 @@ By default, all icons are Grey 900. If using an icon on top of a solid color, fo
 <Visual variant="positive">
   <button class="ods-button is-ods-button-danger">
     <OdsIcon icon="delete" />
-    Delete policy
+    Abort mission
   </button>
 </Visual>
 
 <Description>
 
-As an example, if you have a “Delete policy” button, do not colorize the delete button or trashcan icon with Green 400.
+As an example, if you have a “Abort mission” button, do not colorize the delete button or trashcan icon with Green 400.
 
 </Description>
 
 <Visual variant="negative">
   <button class="ods-button is-ods-button-secondary">
     <OdsIcon icon="delete" class="is-sample-color-green" />
-    Delete policy
+    Abort mission
   </button>
 </Visual>
 
