@@ -444,7 +444,6 @@ Try to refrain from using complicated table layouts that rely on colspan or rows
 This same advice applies to nested tables or hidden rows as well. They can introduce problems that make your table inaccessible for some users.
 
 </Description>
->>>>>>> f0c0aad (- Adds content for Table Overview)
 
 :::
 
