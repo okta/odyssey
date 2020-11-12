@@ -1,0 +1,27 @@
+.docs-banner {
+  display: flex;
+  padding: $spacing-s  $spacing-xs;
+  background: cv('blue', '000');
+  text-align: center;
+
+  .docs-banner--content {
+    flex: 1;
+    align-self: center;
+  }
+
+  &.is-docs-banner-dismissed {
+    animation-name: docs-banner-out;
+    animation-duration: 333ms;
+  }
+}
+
+@keyframes docs-banner-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}

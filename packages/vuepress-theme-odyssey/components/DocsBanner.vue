@@ -1,0 +1,52 @@
+<template>
+  <aside
+    role="alert"
+    v-if="visible"
+    :class="[
+      'docs-banner',
+      dismissed && 'is-docs-banner-dismissed'
+    ]"
+  >
+    <div class="docs-banner--content">
+      <OdsIcon icon="get-info"></OdsIcon> Odyssey is currently in Beta. Learn more about beta <a href="#">here</a>.
+    </div>
+    <button v-if="onDismiss" @click="dismiss" aria-label="Dismiss alert" class="ods-button is-ods-button-clear">
+      <OdsIcon icon="close"></OdsIcon>
+    </button>
+  </aside>
+</template>
+
+<script>
+export default {
+  name: "DocsBanner",
+  props: {
+    onDismiss: {
+      type: Function,
+      required: false
+    },
+    visible: {
+      type: Function,
+      required: false,
+      default: true
+    }
+  },
+  data: () => ({
+    dismissed: false,
+    visible: true
+  }),
+  mounted() {
+    this.$el.addEventListener("animationend", ({ animationName }) => {
+      if (animationName === "docs-banner-out") {
+        this.visible = false;
+      }
+    });
+  },
+  methods: {
+    dismiss() {
+      this.dismissed = true;
+
+      this.onDismiss();
+    }
+  }
+};
+</script>
