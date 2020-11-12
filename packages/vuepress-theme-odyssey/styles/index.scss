@@ -47,22 +47,8 @@ a:visited {
   }
 }
 
-.docs-banner--beta {
-  display: none;
-  flex-basis: 100%;
-
-  .has-beta-banner & {
-    display: flex;
-  }
-
-  @include mq(l) {
-    margin-top: 56px;
-  }
-}
-
-[id='app'] {
+.docs-layout {
   display: flex;
-  flex-wrap: wrap;
 
   .main--container {
     display: flex;
@@ -98,6 +84,16 @@ a:visited {
     top: $spacing-xs;
     width: auto;
     height: auto;
+  }
+}
+
+.docs-banner--beta {
+  flex-basis: 100%;
+
+  @include mq(l) {
+    position: sticky;
+    z-index: z-index(topbar);
+    top: 0;
   }
 }
 

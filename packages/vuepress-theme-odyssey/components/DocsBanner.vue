@@ -1,10 +1,11 @@
 <template>
   <aside
     role="alert"
-    v-if="visible"
-    :class="[
-      'docs-banner'
-    ]"
+    v-if="visible && !dismissed"
+    :class="{
+      'docs-banner': true,
+      'is-docs-banner-visible': visible
+    }"
   >
     <div class="docs-banner--content">
       <slot></slot>
@@ -24,22 +25,14 @@ export default {
       required: false
     },
     visible: {
-      type: Function,
+      type: Boolean,
       required: false,
       default: true
     }
   },
   data: () => ({
-    dismissed: false,
-    visible: true
+    dismissed: false
   }),
-  mounted() {
-    this.$el.addEventListener("animationend", ({ animationName }) => {
-      if (animationName === "docs-banner-out") {
-        this.visible = false;
-      }
-    });
-  },
   methods: {
     dismiss() {
       this.dismissed = true;

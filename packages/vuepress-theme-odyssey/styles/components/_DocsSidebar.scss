@@ -31,6 +31,7 @@ a.docs-site-title:visited {
     visibility: hidden;
     position: fixed;
     z-index: z-index(sidebar);
+    top: 0;
     transform: translateX(-100%);
     transition: all 0.33s ease-in-out;
 

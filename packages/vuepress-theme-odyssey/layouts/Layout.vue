@@ -1,24 +1,30 @@
 <template>
   <Fragment>
     <a class="docs-skip-content" href="#main">Skip to main content</a>
-    <DocsBanner class="docs-banner--beta" :visible="showBetaBanner && this.$route.path !== '/beta/'" :onDismiss="onBetaBannerDismiss">
+    <DocsBanner
+      class="docs-banner--beta"
+      :visible="showBanner" 
+      :onDismiss="onBetaBannerDismiss"
+    >
       <OdsIcon icon="get-info"></OdsIcon> Odyssey is currently in Beta. <DocsLink href="/beta">Learn more</DocsLink>
     </DocsBanner>
-    <DocsSidebar
-      title="Odyssey Design System"
-      :show-search="$site.themeConfig.flags.hasSearch"
-      :nav="Nav"
-    />
-    <div class="main--container">
-      <main id="main">
-        <DocsTemplateHome v-if="$page.frontmatter.template === 'home'" />
-        <DocsTemplateComponent
-          v-else-if="$page.frontmatter.template === 'component'"
-        />
-        <DocsTemplateIndex v-else-if="$page.frontmatter.template === 'index'" />
-        <DocsTemplatePlain v-else-if="$page.frontmatter.template === 'plain'" />
-        <Content v-else />
-      </main>
+    <div class="docs-layout">
+      <DocsSidebar
+        title="Odyssey Design System"
+        :show-search="$site.themeConfig.flags.hasSearch"
+        :nav="Nav"
+      />
+      <div class="main--container">
+        <main id="main">
+          <DocsTemplateHome v-if="$page.frontmatter.template === 'home'" />
+          <DocsTemplateComponent
+            v-else-if="$page.frontmatter.template === 'component'"
+          />
+          <DocsTemplateIndex v-else-if="$page.frontmatter.template === 'index'" />
+          <DocsTemplatePlain v-else-if="$page.frontmatter.template === 'plain'" />
+          <Content v-else />
+        </main>
+      </div>
     </div>
   </Fragment>
 </template>
@@ -27,6 +33,8 @@
 import { Fragment } from "vue-fragment";
 import { resolveNav } from "../utils";
 import "../styles/index.scss";
+
+const BANNER_ID = 'ods-beta-banner';
 
 export default {
   components: {
@@ -41,7 +49,7 @@ export default {
       import("../templates/DocsTemplateComponent.vue")
   },
   data: () => ({
-    showBetaBanner: true,
+    showBanner: true,
   }),
   computed: {
     Nav() {
@@ -54,22 +62,17 @@ export default {
     }
   },
   beforeMount () {
-    const betaFlagSeen = window.localStorage.getItem('ods-beta-banner') === 'false';
+    const showBanner =  window.localStorage.getItem(BANNER_ID) !== 'false';
 
-    if (!betaFlagSeen) {
-      window.localStorage.setItem('ods-beta-banner', 'true')
+    if (showBanner) {
+      window.localStorage.setItem(BANNER_ID, 'true')
     }
-
-    this.showBetaBanner = window.localStorage.getItem('ods-beta-banner') === 'true'
   },
   updated () {
     const el = document.documentElement;
+    const showBanner =  window.localStorage.getItem(BANNER_ID) !== 'false';
 
-    if (this.showBetaBanner) {
-      el.classList.add("has-beta-banner");
-    } else {
-      el.classList.remove("has-beta-banner");
-    }
+    this.showBanner = showBanner && this.$route.path !== '/beta/'
   },
   mounted() {
     window.addEventListener("resize", this.handleResize);
@@ -79,8 +82,8 @@ export default {
   },
   methods: {
     onBetaBannerDismiss () {
-      window.localStorage.setItem('ods-beta-banner', 'false');
-      this.showBetaBanner = false
+      window.localStorage.setItem(BANNER_ID, 'false');
+      this.showBanner = false;
     },
     handleResize() {
       const el = document.documentElement;
