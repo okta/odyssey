@@ -1,7 +1,7 @@
 <template>
   <Fragment>
     <a class="docs-skip-content" href="#main">Skip to main content</a>
-    <DocsBanner :visible="showBetaBanner && this.$route.path !== '/beta/'" :onDismiss="onBetaBannerDismiss">
+    <DocsBanner class="docs-banner--beta" :visible="showBetaBanner && this.$route.path !== '/beta/'" :onDismiss="onBetaBannerDismiss">
       <OdsIcon icon="get-info"></OdsIcon> Odyssey is currently in Beta. <DocsLink href="/beta">Learn more</DocsLink>
     </DocsBanner>
     <DocsSidebar

@@ -47,14 +47,16 @@ a:visited {
   }
 }
 
-.has-beta-banner {
-  .docs-banner {
-    left: 200px;
-    flex-basis: 100%;
+.docs-banner--beta {
+  display: none;
+  flex-basis: 100%;
 
-    @include mq(l) {
-      margin-top: 56px;
-    }
+  .has-beta-banner & {
+    display: flex;
+  }
+
+  @include mq(l) {
+    margin-top: 56px;
   }
 }
 
