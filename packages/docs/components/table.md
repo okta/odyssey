@@ -295,7 +295,7 @@ Currently, we provide extra support for numerical data, dates, Buttons, Statuses
             </label>
           </td>
           <td>Jupiter</td>
-          <td class="is-ods-table-num"><span class="docskit-coin" data-coin-count="2">69,911</span></td>
+          <td class="is-ods-table-num"><span class="docskit-marker" data-marker-count="2">69,911</span></td>
           <td>Gas giant</td>
           <td class="is-ods-table-num">27.94</td>
           <td class="is-ods-table-date">January 21, 2023</td>
@@ -305,7 +305,7 @@ Currently, we provide extra support for numerical data, dates, Buttons, Statuses
                 Base status
               </dt>
               <dd class="ods-status--value">
-                <span class="docskit-coin" data-coin-count="3">Storm approaching</span>
+                <span class="docskit-marker" data-marker-count="3">Storm approaching</span>
               </dd>
             </dl>
           </td>
@@ -315,7 +315,7 @@ Currently, we provide extra support for numerical data, dates, Buttons, Statuses
         </tr>
         <tr>
           <td class="is-ods-table-checkbox">
-            <span class="docskit-coin" data-coin-count="1">
+            <span class="docskit-marker" data-marker-count="1">
               <input class="ods-checkbox" type="checkbox" name="row[1]" id="checkbox-1" value="check-1">
               <label class="ods-checkbox--label" for="checkbox-1">
                 <span class="u-visually-hidden">Select this row</span>
@@ -326,7 +326,7 @@ Currently, we provide extra support for numerical data, dates, Buttons, Statuses
           <td class="is-ods-table-num">6,371</td>
           <td>Terrestrial</td>
           <td class="is-ods-table-num">1.00</td>
-          <td class="is-ods-table-date"><span class="docskit-coin" data-coin-count="4">January 2, 2021</span></td>
+          <td class="is-ods-table-date"><span class="docskit-marker" data-marker-count="4">January 2, 2021</span></td>
           <td>
             <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
               <dt class="ods-status--label">
@@ -352,7 +352,7 @@ Currently, we provide extra support for numerical data, dates, Buttons, Statuses
           <td class="is-ods-table-num">1,737</td>
           <td>Terrestrial</td>
           <td class="is-ods-table-num">0.37</td>
-          <td class="is-ods-table-date"><span class="docskit-coin" data-coin-count="5">&ndash;</span></td>
+          <td class="is-ods-table-date"><span class="docskit-marker" data-marker-count="5">&ndash;</span></td>
           <td>
             <dl class="ods-status is-ods-status-neutral is-ods-status-label-hidden">
               <dt class="ods-status--label">
@@ -364,7 +364,7 @@ Currently, we provide extra support for numerical data, dates, Buttons, Statuses
             </dl>
           </td>
           <td>
-            <span class="docskit-coin" data-coin-count="6"><button class="ods-button is-ods-button-secondary">Plot course</button></span>
+            <span class="docskit-marker" data-marker-count="6"><button class="ods-button is-ods-button-secondary">Plot course</button></span>
           </td>
         </tr>
       </tbody>
