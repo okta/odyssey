@@ -1,7 +1,9 @@
 <template>
   <Fragment>
     <a class="docs-skip-content" href="#main">Skip to main content</a>
-    <DocsBanner :visible="showBetaBanner" :onDismiss="onBetaBannerDismiss" />
+    <DocsBanner :visible="showBetaBanner" :onDismiss="onBetaBannerDismiss">
+      <OdsIcon icon="get-info"></OdsIcon> Odyssey is currently in Beta. <DocsLink href="/beta">Learn more</DocsLink>
+    </DocsBanner>
     <DocsSidebar
       title="Odyssey Design System"
       :show-search="$site.themeConfig.flags.hasSearch"
@@ -31,6 +33,7 @@ export default {
     Fragment,
     DocsBanner: () => import("../components/DocsBanner.vue"),
     DocsSidebar: () => import("../components/DocsSidebar.vue"),
+    DocsLink: () => import("../components/DocsLink.vue"),
     DocsTemplateHome: () => import("../templates/DocsTemplateHome.vue"),
     DocsTemplateIndex: () => import("../templates/DocsTemplateIndex.vue"),
     DocsTemplatePlain: () => import("../templates/DocsTemplatePlain.vue"),

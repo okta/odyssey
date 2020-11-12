@@ -8,7 +8,7 @@
     ]"
   >
     <div class="docs-banner--content">
-      <OdsIcon icon="get-info"></OdsIcon> Odyssey is currently in Beta. Learn more about beta <a href="#">here</a>.
+      <slot></slot>
     </div>
     <button v-if="onDismiss" @click="dismiss" aria-label="Dismiss alert" class="ods-button is-ods-button-clear">
       <OdsIcon icon="close"></OdsIcon>
