@@ -19,7 +19,7 @@ links:
 
 ## Anatomy
 
-<Anatomy img="/images/anatomy-field-label.svg" />
+<Anatomy img="images/anatomy-field-label.svg" />
 
 ## Usage
 
