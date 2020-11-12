@@ -22,9 +22,7 @@ links:
 
 ## Anatomy
 
-<Anatomy
-  img="/images/anatomy-checkbox.svg"
-/>
+<Anatomy img="images/anatomy-checkbox.svg"/>
 
 ## Behavior
 

@@ -23,7 +23,7 @@ links:
 ## Anatomy
 
 <Anatomy
-  img="/images/anatomy-radio-button.svg"
+  img="images/anatomy-radio-button.svg"
 />
 
 ## Behavior
