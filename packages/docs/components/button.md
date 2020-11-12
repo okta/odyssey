@@ -22,9 +22,9 @@ links:
 
 ## Anatomy
 
-<Anatomy img="/images/anatomy-button-1.svg" />
+<Anatomy img="images/anatomy-button-1.svg" />
 
-<Anatomy img="/images/anatomy-button-2.svg" />
+<Anatomy img="images/anatomy-button-2.svg" />
 
 ## Behavior
 

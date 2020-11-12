@@ -31,7 +31,7 @@ links:
 
 </Description>
 
-<Anatomy img="/images/anatomy-table.svg" />
+<Anatomy img="images/anatomy-table.svg" />
 
 :::
 

@@ -22,7 +22,7 @@ links:
 
 ## Anatomy
 
-<Anatomy img="/images/anatomy-link.svg" />
+<Anatomy img="images/anatomy-link.svg" />
 
 ## Variants
 

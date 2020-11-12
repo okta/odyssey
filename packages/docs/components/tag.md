@@ -28,7 +28,7 @@ Tag UI is simple. It consists of typography and spacing within a neutral contain
 
 </Description>
 
-<Anatomy img="/images/anatomy-tag.svg" />
+<Anatomy img="images/anatomy-tag.svg" />
 
 ## Usage
 

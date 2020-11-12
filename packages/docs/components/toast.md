@@ -28,7 +28,7 @@ Each Toast is made up of up to four parts: Icon & Color, Title, Body, and a Dism
 
 </Description>
 
-<Anatomy img="/images/anatomy-toast.svg" />
+<Anatomy img="images/anatomy-toast.svg" />
 
 
 <OdsToastPen ref="toastBox"/>
