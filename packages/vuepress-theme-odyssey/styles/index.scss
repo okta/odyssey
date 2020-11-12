@@ -6,6 +6,7 @@
 @import 'abstracts/mixins';
 @import 'abstracts/functions';
 @import 'base/fonts';
+@import 'components/DocsBanner';
 @import 'components/DocsCard';
 @import 'components/DocsCardGroup';
 @import 'components/DocsLink';
@@ -48,9 +49,10 @@ a:visited {
 
 [id='app'] {
   display: flex;
+  flex-wrap: wrap;
 
-  .ods-sidebar {
-    flex-grow: 0;
+  .docs-banner {
+    flex-basis: 100%;
   }
 
   .main--container {

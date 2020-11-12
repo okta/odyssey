@@ -1,6 +1,7 @@
 <template>
   <Fragment>
     <a class="docs-skip-content" href="#main">Skip to main content</a>
+    <DocsBanner :visible="showBetaBanner" :onDismiss="onBetaBannerDismiss" />
     <DocsSidebar
       title="Odyssey Design System"
       :show-search="$site.themeConfig.flags.hasSearch"
@@ -28,6 +29,7 @@ import "../styles/index.scss";
 export default {
   components: {
     Fragment,
+    DocsBanner: () => import("../components/DocsBanner.vue"),
     DocsSidebar: () => import("../components/DocsSidebar.vue"),
     DocsTemplateHome: () => import("../templates/DocsTemplateHome.vue"),
     DocsTemplateIndex: () => import("../templates/DocsTemplateIndex.vue"),
@@ -36,6 +38,9 @@ export default {
       import("../templates/DocsTemplateComponent.vue")
   },
   computed: {
+    showBetaBanner () {
+      return window.localStorage.getItem('ods-beta-banner') === 'true'
+    },
     Nav() {
       return resolveNav(
         this.$page,
@@ -45,6 +50,13 @@ export default {
       );
     }
   },
+  beforeMount () {
+    const betaFlagSeen = window.localStorage.getItem('ods-beta-banner') === 'false';
+
+    if (!betaFlagSeen) {
+      window.localStorage.setItem('ods-beta-banner', 'true')
+    }
+  },
   mounted() {
     window.addEventListener("resize", this.handleResize);
   },
@@ -52,6 +64,9 @@ export default {
     window.removeEventListener("resize", this.onResize);
   },
   methods: {
+    onBetaBannerDismiss () {
+      window.localStorage.setItem('ods-beta-banner', 'false');
+    },
     handleResize() {
       const el = document.documentElement;
       el.classList.add("is-animation-stopped");
