@@ -1,6 +1,6 @@
 .docskit-visual {
   grid-column: 2 / 3;
-  min-width: $max-line-length;
+  min-width: 420px;
   margin-bottom: $spacing-m;
 
   .docskit-visual--title {
@@ -46,9 +46,9 @@
       right: 1px;
       bottom: 1px;
       left: 1px;
-      height: 33%;
+      height: 50%;
       border-radius: 0 0 $base-border-radius $base-border-radius;
-      background: linear-gradient(to top, rgba(255, 255, 255, 1) 33.33%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(to top, rgba(255, 255, 255, 1) 33.33%, rgba(255, 255, 255, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     }
   }
 
@@ -78,17 +78,5 @@
 
   &.is-docskit-visual-negative .docskit-visual--title::before {
     content: '🚫';
-  }
-
-  &.is-docskit-visual-smiley-positive .docskit-visual--title::before {
-    content: '😄';
-  }
-
-  &.is-docskit-visual-smiley-neutral .docskit-visual--title::before {
-    content: '🙄';
-  }
-
-  &.is-docskit-visual-smiley-negative .docskit-visual--title::before {
-    content: '😔';
   }
 }

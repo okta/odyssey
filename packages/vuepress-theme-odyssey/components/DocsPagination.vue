@@ -1,7 +1,7 @@
 <template>
   <nav
     v-if="prev || next"
-    class="page-nav"
+    class="page-footer"
   >
   <ul class="pagination">
     <li v-if="prev" class="pagination--prev">

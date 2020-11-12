@@ -145,8 +145,8 @@ For users happy with their new context, we ensure their attention isn't misdirec
           </p>
         </main>
         <footer class="ods-modal--footer">
-          <button class="ods-button is-ods-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
-          <button class="ods-button">Confirm</button>
+          <button class="ods-button is-ods-button-clear" aria-label="Close this dialog window" data-micromodal-close>Cancel</button>
+          <button class="ods-button" data-micromodal-close>Confirm</button>
         </footer>
       </div>
     </div>

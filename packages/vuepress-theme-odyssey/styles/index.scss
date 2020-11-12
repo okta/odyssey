@@ -57,7 +57,7 @@ a:visited {
     flex: 1;
     justify-content: center;
     max-width: 100%;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-l;
     padding: $spacing-l * 2 $spacing-m 0;
 
     // TODO: We would like to remove this in the future
@@ -118,6 +118,26 @@ h6 {
 }
 
 // Component Samples
+
+.is-sample-unimportant {
+  opacity: 0.33;
+}
+
+.is-tab-small-sample {
+  .ods-tabs--tabpanel [role='tabpanel'] {
+    padding-bottom: $spacing-s;
+  }
+}
+
+.is-tab-stacked-example {
+  .ods-tabs [role='tabpanel'] {
+    padding: $spacing-l;
+  }
+
+  .ods-tabs:first-child [role='tabpanel'] {
+    padding: $spacing-xs;
+  }
+}
 
 .sample-color {
   display: inline-block;
@@ -364,4 +384,8 @@ $spacing-units: (
 
 .is-sample-absolute {
   position: absolute;
+}
+
+.is-sample-color-green {
+  color: cv('green', '500');
 }

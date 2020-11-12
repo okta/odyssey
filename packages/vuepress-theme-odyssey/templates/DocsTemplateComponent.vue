@@ -24,6 +24,7 @@
 
     <OdsTabs
       id="tabs-doc-sections"
+      class="docs-main--content-tabs"
       :label="$page.frontmatter.name + ' documentation sections'"
       :active="$page.frontmatter.tabs[0].id"
       :tablist="$page.frontmatter.tabs"

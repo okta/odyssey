@@ -2,15 +2,18 @@
   <div
     :class="{
       'docskit-visual': true,
-      'docskit-visual--wide': wide,
-      [`is-docskit-visual-${variant}`]: variant
+      'with-fade': fade,
+      [`layout-${layout}`]: layout,
+      [`theme-${theme}`]: theme,
+      [`is-docskit-visual-${variant}`]: variant,
+      [`is-docskit-visual-content-${content}`]: content
     }"
   >
     <h6
-      v-if="variant === 'positive' || variant === 'negative'"
+      v-if="variant"
       class="docskit-visual--title"
     >
-      {{ variant === "positive" ? "Do" : `Don't` }}
+      {{labels[variant]}}
     </h6>
     <figure class="docskit-visual--figure">
       <slot />
@@ -24,14 +27,35 @@ export default {
   props: {
     variant: {
       type: String,
-      required: false,
-      default: null
+      required: false
     },
-    wide: {
+    layout: {
+      type: String,
+      required: false
+    },
+    theme: {
+      type: String,
+      required: false
+    },
+    content: {
+      type: String,
+      required: false
+    },
+    fade: {
       type: Boolean,
-      required: false,
-      default: false
+      required: false
     }
-  }
+  },
+  data: function () {
+    return {
+      labels: {
+        'positive': 'Do',
+        'negative': `Don't`,
+        'smiley-positive': 'Best!',
+        'smiley-neutral': 'Good',
+        'smiley-negative': 'Bad'
+      }
+    }
+  },
 };
 </script>
