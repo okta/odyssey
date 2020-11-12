@@ -7,7 +7,10 @@
     }"
   >
     <!-- eslint-disable vue/no-v-html -->
-    <div v-html="require(`!html-loader!../../docs/.vuepress/public/${img}`)" />
+    <div
+      v-html="require(`!html-loader!../../docs/.vuepress/public/${img}`)"
+      class="docskit-figure-anatomy--shrinkwrap"
+    />
     <!-- eslint-enable vue/no-v-html -->
     <figcaption>
       <h4 v-if="metadata">{{ metadata }}</h4>
