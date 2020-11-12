@@ -1,7 +1,7 @@
 <template>
   <Fragment>
     <a class="docs-skip-content" href="#main">Skip to main content</a>
-    <DocsBanner :visible="showBetaBanner" :onDismiss="onBetaBannerDismiss">
+    <DocsBanner :visible="showBetaBanner && this.$route.path !== '/beta/'" :onDismiss="onBetaBannerDismiss">
       <OdsIcon icon="get-info"></OdsIcon> Odyssey is currently in Beta. <DocsLink href="/beta">Learn more</DocsLink>
     </DocsBanner>
     <DocsSidebar
@@ -40,10 +40,10 @@ export default {
     DocsTemplateComponent: () =>
       import("../templates/DocsTemplateComponent.vue")
   },
+  data: () => ({
+    showBetaBanner: true,
+  }),
   computed: {
-    showBetaBanner () {
-      return window.localStorage.getItem('ods-beta-banner') === 'true'
-    },
     Nav() {
       return resolveNav(
         this.$page,
@@ -59,6 +59,8 @@ export default {
     if (!betaFlagSeen) {
       window.localStorage.setItem('ods-beta-banner', 'true')
     }
+
+    this.showBetaBanner = window.localStorage.getItem('ods-beta-banner') === 'true'
   },
   mounted() {
     window.addEventListener("resize", this.handleResize);

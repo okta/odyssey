@@ -53,6 +53,10 @@ a:visited {
 
   .docs-banner {
     flex-basis: 100%;
+
+    @include mq(l) {
+      margin-top: 56px;
+    }
   }
 
   .main--container {
