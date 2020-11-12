@@ -42,7 +42,6 @@
     margin-bottom: $spacing-m;
 
     svg {
-      max-width: $spacing-l;
       height: auto;
     }
   }
@@ -51,5 +50,17 @@
     flex: 1;
     margin-bottom: $spacing-l;
     font-size: $size-body-sentence;
+  }
+
+  &.is-docs-card-coin-medium {
+    svg {
+      max-width: $spacing-l;
+    }
+  }
+
+  &.is-docs-card-coin-large {
+    svg {
+      max-width: $spacing-xl;
+    }
   }
 }
