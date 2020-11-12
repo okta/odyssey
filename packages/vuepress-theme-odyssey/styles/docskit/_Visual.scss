@@ -13,7 +13,6 @@
   .docskit-visual--figure {
     display: grid;
     position: relative;
-    grid-auto-columns: max-content;
     justify-content: center;
     padding: $spacing-l $spacing-l;
     border: 1px solid var(--border-color-display, #{$border-color-display});
