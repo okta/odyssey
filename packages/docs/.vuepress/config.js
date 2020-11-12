@@ -5,7 +5,7 @@ module.exports = {
   title: 'Odyssey Design System',
   head: [
     [
-      'meta', { 
+      'meta', {
         'og:title': 'Odyssey, the Okta design system',
         'og:type': 'article',
         'og:url': 'https://design-docs.trexcloud.com',
@@ -13,7 +13,7 @@ module.exports = {
       },
     ],
   ],
-  // These plugins include vendor libraries which are required by Odyssey docs. 
+  // These plugins include vendor libraries which are required by Odyssey docs.
   plugins: [
     require('./plugins/plugin-choices/index.js'),
     require('./plugins/plugin-micromodal/index.js')
@@ -51,6 +51,7 @@ module.exports = {
           children: [
             { title: 'Button', link: '/components/button/' },
             { title: 'Checkbox', link: '/components/checkbox/' },
+            { title: 'Field Labels', link: '/components/field-labels/' },
             { title: 'Link', link: '/components/link/' },
             { title: 'Modal', link: '/components/modal/' },
             { title: 'Radio Button', link: '/components/radio-button/' },
