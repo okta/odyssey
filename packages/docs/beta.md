@@ -35,6 +35,6 @@ There are two main reasons we regard Odyssey as a product in Beta.
 
 <Description>
 
-Don’t hesitate to <a href="/help">reach out</a>
+Don’t hesitate to [reach out](/help).
 
 </Description>
