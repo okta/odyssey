@@ -3,8 +3,7 @@
     role="alert"
     v-if="visible"
     :class="[
-      'docs-banner',
-      dismissed && 'is-docs-banner-dismissed'
+      'docs-banner'
     ]"
   >
     <div class="docs-banner--content">

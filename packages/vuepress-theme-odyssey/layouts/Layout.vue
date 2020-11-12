@@ -62,6 +62,15 @@ export default {
 
     this.showBetaBanner = window.localStorage.getItem('ods-beta-banner') === 'true'
   },
+  updated () {
+    const el = document.documentElement;
+
+    if (this.showBetaBanner) {
+      el.classList.add("has-beta-banner");
+    } else {
+      el.classList.remove("has-beta-banner");
+    }
+  },
   mounted() {
     window.addEventListener("resize", this.handleResize);
   },
@@ -71,6 +80,7 @@ export default {
   methods: {
     onBetaBannerDismiss () {
       window.localStorage.setItem('ods-beta-banner', 'false');
+      this.showBetaBanner = false
     },
     handleResize() {
       const el = document.documentElement;

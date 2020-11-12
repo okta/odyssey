@@ -47,17 +47,20 @@ a:visited {
   }
 }
 
-[id='app'] {
-  display: flex;
-  flex-wrap: wrap;
-
+.has-beta-banner {
   .docs-banner {
+    left: 200px;
     flex-basis: 100%;
 
     @include mq(l) {
       margin-top: 56px;
     }
   }
+}
+
+[id='app'] {
+  display: flex;
+  flex-wrap: wrap;
 
   .main--container {
     display: flex;
