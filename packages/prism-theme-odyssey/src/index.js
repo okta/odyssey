@@ -1,3 +1,3 @@
-import '@okta/odyssey'
-import 'prismjs'
-import './theme.scss'
+import '@okta/odyssey';
+import 'prismjs';
+import './theme.scss';

@@ -7,8 +7,6 @@
   "private": true,
   "main": "index.js",
   "devDependencies": {
-    "@okta/odyssey": "^0.6.0",
-    "@okta/odyssey-icons": "^0.6.0",
     "eslint-config-vuepress": "^2.2.0",
     "html-loader": "^1.1.0",
     "node-sass": "4.13.1",

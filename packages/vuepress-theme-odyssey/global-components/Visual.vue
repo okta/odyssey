@@ -9,11 +9,8 @@
       [`is-docskit-visual-content-${content}`]: content
     }"
   >
-    <h6
-      v-if="variant"
-      class="docskit-visual--title"
-    >
-      {{labels[variant]}}
+    <h6 v-if="variant" class="docskit-visual--title">
+      {{ labels[variant] }}
     </h6>
     <figure class="docskit-visual--figure">
       <slot />
@@ -27,35 +24,39 @@ export default {
   props: {
     variant: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     layout: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     theme: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     content: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     fade: {
       type: Boolean,
       required: false
     }
   },
-  data: function () {
+  data: function() {
     return {
       labels: {
-        'positive': 'Do',
-        'negative': `Don't`,
-        'smiley-positive': 'Best!',
-        'smiley-neutral': 'Good',
-        'smiley-negative': 'Bad'
+        positive: "Do",
+        negative: `Don't`,
+        "smiley-positive": "Best!",
+        "smiley-neutral": "Good",
+        "smiley-negative": "Bad"
       }
-    }
-  },
+    };
+  }
 };
 </script>
