@@ -28,7 +28,7 @@
         :key="index"
         tag="li"
         variant="shadow"
-        coinSize="large"
+        imageSize="large"
       >
         <template slot="header">
           <!-- eslint-disable -->

@@ -4,7 +4,7 @@
     :class="{
       'docs-card': true,
       [`is-docs-card-${variant}`]: true,
-      [`is-docs-card-coin-${coinSize}`]: true
+      [`is-docs-card-image-${imageSize}`]: true
     }"
   >
     <header v-if="hasSlotHeader" class="docs-card--header">
@@ -32,7 +32,7 @@ export default {
       default: "default",
       validator: value => ["default", "shadow", "transparent"].includes(value)
     },
-    coinSize: {
+    imageSize: {
       type: String,
       default: "medium",
       validator: value => ["medium", "large"].includes(value)
