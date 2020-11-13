@@ -7,6 +7,7 @@
   "private": true,
   "main": "index.js",
   "devDependencies": {
+    "eslint-config-vuepress": "^2.2.0",
     "html-loader": "^1.1.0",
     "node-sass": "4.13.1",
     "sass-loader": "8.0.2",

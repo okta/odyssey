@@ -4,12 +4,24 @@
     <header class="docs-hero">
       <div class="docs-hero--content">
         <h1 class="docs-hero--title">{{ $page.frontmatter.headline }}</h1>
-        <p  class="docs-hero--desc">{{ $page.frontmatter.lead }}</p>
+        <p class="docs-hero--desc">{{ $page.frontmatter.lead }}</p>
       </div>
-      <div class="docs-hero-moon" v-html="require(`!html-loader!../../docs/.vuepress/public/images/home-hero-moon.svg`)"></div>
-      <div class="docs-hero-rocket" v-html="require(`!html-loader!../../docs/.vuepress/public/images/home-hero-rocket.svg`)"></div>
+      <!-- eslint-disable vue/no-v-html -->
+      <div
+        class="docs-hero-moon"
+        v-html="
+          require(`!html-loader!../../docs/.vuepress/public/images/home-hero-moon.svg`)
+        "
+      ></div>
+      <div
+        class="docs-hero-rocket"
+        v-html="
+          require(`!html-loader!../../docs/.vuepress/public/images/home-hero-rocket.svg`)
+        "
+      ></div>
+      <!-- eslint-enable vue/no-v-html -->
     </header>
-  
+
     <DocsCardGroup tag="ul">
       <DocsCard
         v-for="(section, index) in $page.frontmatter.contentPrimary"
@@ -38,7 +50,9 @@
     </DocsCardGroup>
 
     <div class="docs-principle">
-      <h1 class="docs-principle--title">{{ $page.frontmatter.principle.title }}</h1>
+      <h1 class="docs-principle--title">
+        {{ $page.frontmatter.principle.title }}
+      </h1>
       <p>
         {{ $page.frontmatter.principle.description }}
       </p>

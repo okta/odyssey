@@ -54,7 +54,11 @@
             }"
           >
             <div ref="mainContent" class="docs-sidebar--main-content">
-              <DocsNav :forceExpand="true" variant="primary" :nav="nav.primary" />
+              <DocsNav
+                :force-expand="true"
+                variant="primary"
+                :nav="nav.primary"
+              />
             </div>
           </div>
           <div class="docs-sidebar--footer">
