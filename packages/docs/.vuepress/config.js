@@ -8,15 +8,34 @@ module.exports = {
       'meta', {
         'og:title': 'Odyssey, the Okta design system',
         'og:type': 'article',
-        'og:url': 'https://design-docs.trexcloud.com',
+        'og:url': 'https://odyssey.okta.design',
         'og:image': '/images/og-logo.png',
       },
     ],
+    [
+      'script', {
+        async: true,
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-JEY5NQ4B63'
+      }
+    ],
+    [
+      'script', {}, `
+        var isProduction = window.location.hostname === 'odyssey.okta.design';
+
+        if (isProduction) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-JEY5NQ4B63');
+        }
+      `
+    ]
   ],
   // These plugins include vendor libraries which are required by Odyssey docs.
   plugins: [
     require('./plugins/plugin-choices/index.js'),
-    require('./plugins/plugin-micromodal/index.js')
+    require('./plugins/plugin-micromodal/index.js'),
   ],
   markdown: {
     externalLinks: {
