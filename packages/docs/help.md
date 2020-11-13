@@ -9,11 +9,13 @@ lead: We're here for ya!
 
 <Description>
 
+<!-- eslint-disable vue/no-v-html -->
 <figure
   aria-hidden="true"
   class="help-icon"
   v-html="require(`!html-loader!../vuepress-theme-odyssey/public/images/icon-slack.svg`)"
 ></figure>
+<!-- eslint-enable vue/no-v-html -->
 
 ## Slack
 
@@ -30,11 +32,15 @@ If you’re wondering if we already have a solution for a design or development 
 
 <Description>
 
+<!-- eslint-enable vue/no-v-html -->
+
 <figure
   aria-hidden="true"
   class="help-icon"
   v-html="require(`!html-loader!../vuepress-theme-odyssey/public/images/icon-github.svg`)"
 ></figure>
+
+<!-- eslint-disable vue/no-v-html -->
 
 ## Github
 
