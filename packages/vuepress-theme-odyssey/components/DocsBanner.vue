@@ -1,7 +1,7 @@
 <template>
   <aside
-    role="alert"
     v-if="visible && !dismissed"
+    role="alert"
     :class="{
       'docs-banner': true,
       'is-docs-banner-visible': visible
@@ -10,7 +10,12 @@
     <div class="docs-banner--content">
       <slot></slot>
     </div>
-    <button v-if="onDismiss" @click="dismiss" aria-label="Dismiss alert" class="ods-button is-ods-button-clear">
+    <button
+      v-if="onDismiss"
+      aria-label="Dismiss alert"
+      class="ods-button is-ods-button-clear"
+      @click="dismiss"
+    >
       <OdsIcon icon="close"></OdsIcon>
     </button>
   </aside>
@@ -22,7 +27,8 @@ export default {
   props: {
     onDismiss: {
       type: Function,
-      required: false
+      required: false,
+      default: () => undefined
     },
     visible: {
       type: Boolean,

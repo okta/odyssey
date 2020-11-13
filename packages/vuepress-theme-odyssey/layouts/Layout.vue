@@ -3,10 +3,11 @@
     <a class="docs-skip-content" href="#main">Skip to main content</a>
     <DocsBanner
       class="docs-banner--beta"
-      :visible="showBanner" 
-      :onDismiss="onBetaBannerDismiss"
+      :visible="showBanner"
+      :on-dismiss="onBetaBannerDismiss"
     >
-      <OdsIcon icon="get-info"></OdsIcon> Odyssey is currently in Beta. <DocsLink href="/beta">Learn more</DocsLink>
+      <OdsIcon icon="get-info"></OdsIcon> Odyssey is currently in Beta.
+      <DocsLink href="/beta">Learn more</DocsLink>
     </DocsBanner>
     <div class="docs-layout">
       <DocsSidebar
@@ -20,8 +21,12 @@
           <DocsTemplateComponent
             v-else-if="$page.frontmatter.template === 'component'"
           />
-          <DocsTemplateIndex v-else-if="$page.frontmatter.template === 'index'" />
-          <DocsTemplatePlain v-else-if="$page.frontmatter.template === 'plain'" />
+          <DocsTemplateIndex
+            v-else-if="$page.frontmatter.template === 'index'"
+          />
+          <DocsTemplatePlain
+            v-else-if="$page.frontmatter.template === 'plain'"
+          />
           <Content v-else />
         </main>
       </div>
@@ -34,7 +39,7 @@ import { Fragment } from "vue-fragment";
 import { resolveNav } from "../utils";
 import "../styles/index.scss";
 
-const BANNER_ID = 'ods-beta-banner';
+const BANNER_ID = "ods-beta-banner";
 
 export default {
   components: {
@@ -49,7 +54,7 @@ export default {
       import("../templates/DocsTemplateComponent.vue")
   },
   data: () => ({
-    showBanner: true,
+    showBanner: true
   }),
   computed: {
     Nav() {
@@ -61,18 +66,17 @@ export default {
       );
     }
   },
-  beforeMount () {
-    const showBanner =  window.localStorage.getItem(BANNER_ID) !== 'false';
+  beforeMount() {
+    const showBanner = window.localStorage.getItem(BANNER_ID) !== "false";
 
     if (showBanner) {
-      window.localStorage.setItem(BANNER_ID, 'true')
+      window.localStorage.setItem(BANNER_ID, "true");
     }
   },
-  updated () {
-    const el = document.documentElement;
-    const showBanner =  window.localStorage.getItem(BANNER_ID) !== 'false';
+  updated() {
+    const showBanner = window.localStorage.getItem(BANNER_ID) !== "false";
 
-    this.showBanner = showBanner && this.$route.path !== '/beta/'
+    this.showBanner = showBanner && this.$route.path !== "/beta/";
   },
   mounted() {
     window.addEventListener("resize", this.handleResize);
@@ -81,8 +85,8 @@ export default {
     window.removeEventListener("resize", this.onResize);
   },
   methods: {
-    onBetaBannerDismiss () {
-      window.localStorage.setItem(BANNER_ID, 'false');
+    onBetaBannerDismiss() {
+      window.localStorage.setItem(BANNER_ID, "false");
       this.showBanner = false;
     },
     handleResize() {
