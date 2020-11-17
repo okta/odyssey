@@ -6,6 +6,7 @@
 @import 'abstracts/mixins';
 @import 'abstracts/functions';
 @import 'base/fonts';
+@import 'components/DocsBanner';
 @import 'components/DocsCard';
 @import 'components/DocsCardGroup';
 @import 'components/DocsLink';
@@ -46,12 +47,8 @@ a:visited {
   }
 }
 
-[id='app'] {
+.docs-layout {
   display: flex;
-
-  .ods-sidebar {
-    flex-grow: 0;
-  }
 
   .main--container {
     display: flex;
@@ -87,6 +84,16 @@ a:visited {
     top: $spacing-xs;
     width: auto;
     height: auto;
+  }
+}
+
+.docs-banner--beta {
+  flex-basis: 100%;
+
+  @include mq(l) {
+    position: sticky;
+    z-index: z-index(topbar);
+    top: 0;
   }
 }
 
