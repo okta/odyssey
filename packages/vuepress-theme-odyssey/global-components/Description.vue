@@ -3,7 +3,7 @@
     :is="tag"
     :class="{
       'docskit--desc': true,
-      [`is-docskit-desc-${variant}`]: variant,
+      [`is-docskit-desc-${variant}`]: variant
     }"
   >
     <slot />
@@ -15,12 +15,13 @@ export default {
   props: {
     variant: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     tag: {
       default: "div",
       type: String
-    },
+    }
   }
 };
 </script>

@@ -1,21 +1,21 @@
 ---
 template: home
 headline: Odyssey Design System
-lead: Build and design consistent, efficient, and accessible UIs for everybody.
+lead: Build and design consistent, efficient, and accessible UIs for all Okta users.
 contentPrimary:
   - coin: base
     title: Base
-    description: Base is the foundation of Odyssey, it consists of Color, Design Tokens, HTML Elements, Iconography, and Typography.
+    description: Base is the foundation of Odyssey, consisting of Color, Design Tokens, HTML Elements, Iconography and Typography
     label: Explore Base
     href: /base/
   - coin: component
     title: Components
-    description: A set of commonly found, pre-assembled UI objects built from the Odyssey Base and organized by function and form.
+    description: Components are commonly found, pre-assembled UI Objects built from Odyssey's Base and organized by form and function.
     label: Explore Components
     href: /components/
   - coin: icon
     title: Icons
-    description: Our icon system establishes a visual language that anyone can easily understand regardless of age, tongue, or culture.
+    description: A system of icons which establishes a visual language that can be easily understood regardless of age, language or culture.
     label: Explore Icons
     href: /icons/
 principle:
@@ -24,17 +24,17 @@ principle:
 resources:
   - title: GitHub
     illustration: github
-    description: View our most up to date code, releases, file issues, propose changes on Github.
+    description: View up to date code and releases, file issues and propose changes.
     label: Explore repo
-    href: /base/
+    href: https://github.com/okta/odyssey
   - title: Figma kit
     illustration: figma
-    description: Our design tool of choice. Odyssey is designed in Figma, which also houses our UI Kit.
+    description: Odyssey is designed in Figma. Here, you can leverage the latest UIs in your design projects.
     label: Explore kit
     href: https://www.figma.com/files/676870123940302956/project/2512934/Odyssey-UI
 contentSecondary:
   - title: Principles
-    description: Okta's design principles are our north star, they guide us in making critical decisions as a team.
+    description: Okta's design principles are Odyssey's north star. They guide us in making critical decisions as a team.
     label: Explore Principles
     href: /principles/
   - title: Roadmap
