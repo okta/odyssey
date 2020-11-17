@@ -3,7 +3,8 @@
     :is="tag"
     :class="{
       'docs-card': true,
-      [`is-docs-card-${variant}`]: true
+      [`is-docs-card-${variant}`]: true,
+      [`is-docs-card-image-${imageSize}`]: true
     }"
   >
     <header v-if="hasSlotHeader" class="docs-card--header">
@@ -30,6 +31,11 @@ export default {
       type: String,
       default: "default",
       validator: value => ["default", "shadow", "transparent"].includes(value)
+    },
+    imageSize: {
+      type: String,
+      default: "medium",
+      validator: value => ["medium", "large"].includes(value)
     }
   },
   computed: {

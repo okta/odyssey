@@ -38,13 +38,29 @@
     }
   }
 
-  .docs-card--header-image svg {
+  .docs-card--header-image {
     margin-bottom: $spacing-m;
+
+    svg {
+      height: auto;
+    }
   }
 
   .docs-card--main {
     flex: 1;
     margin-bottom: $spacing-l;
     font-size: $size-body-sentence;
+  }
+
+  &.is-docs-card-image-medium {
+    svg {
+      max-width: $spacing-l;
+    }
+  }
+
+  &.is-docs-card-image-large {
+    svg {
+      max-width: $spacing-xl;
+    }
   }
 }

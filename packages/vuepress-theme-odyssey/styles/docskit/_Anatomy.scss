@@ -16,3 +16,13 @@
     background: cv('gray', '100');
   }
 }
+
+.docskit-figure-anatomy--shrinkwrap {
+  flex-grow: 1;
+  font-size: 0;
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
