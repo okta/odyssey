@@ -54,7 +54,7 @@ export default {
       import("../templates/DocsTemplateComponent.vue")
   },
   data: () => ({
-    showBanner: true
+    showBanner: false
   }),
   computed: {
     Nav() {
@@ -67,7 +67,7 @@ export default {
     }
   },
   beforeMount() {
-    const showBanner = !!window.localStorage.getItem(BANNER_ID);
+    const showBanner = !window.localStorage.getItem(BANNER_ID);
 
     if (showBanner) {
       window.localStorage.setItem(BANNER_ID, "true");

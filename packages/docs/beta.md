@@ -6,11 +6,6 @@ lead: Odyssey is currently in Beta. This can mean different things for different
 description: Odyssey is currently in Beta. This can mean different things for different teams, so we’d like to offer some clarity of what it means for the Odyssey Design System. 
 ---
 
-<Description>
-
-
-</Description>
-
 ## What does this mean?
 
 <Description>
