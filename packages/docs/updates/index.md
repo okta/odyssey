@@ -2,8 +2,8 @@
 template: plain
 title: Odyssey Updates
 headline: Updates
-lead: Here’s a list of all our most recent updates. Updates can vary from component changes to team updates and contributions.
-description: Here’s a list of all our most recent updates. Updates can vary from component changes to team updates and contributions.
+lead: Here is a list of all our most recent updates. These can vary from component changes to team updates and contributions.
+description: Here is a list of all our most recent updates. These can vary from component changes to team updates and contributions.
 links:
   - icon: github
     label: Changelog

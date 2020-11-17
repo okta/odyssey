@@ -4,7 +4,7 @@ template: plain
 pageHeaderVariant: icon
 title: Icons
 headline: Icons
-lead: The icon system within Odyssey establishes a visual language that anyone can easily understand regardless of age, tongue, or culture.
+lead: A system of icons which establishes a visual language that can be easily understood regardless of age, language or culture.
 tabs:
   - label: 'Overview'
     id: 'overview'
