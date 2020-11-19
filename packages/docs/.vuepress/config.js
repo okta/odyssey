@@ -8,7 +8,7 @@ module.exports = {
       'meta', {
         'og:title': 'Odyssey, the Okta design system',
         'og:type': 'article',
-        'og:url': 'https://design-docs.trexcloud.com',
+        'og:url': 'https://odyssey.okta.design',
         'og:image': '/images/og-logo.png',
       },
     ],
