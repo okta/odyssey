@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.7.0] - 2020-11-18
 
 ### Added
-- `vuepress-theme-odyssey` is a new private package containing our brand new docs theme
-- adds `prism-theme-odyssey` package for styling code blocks
 - ESLint has been added to our test suite
 - Turquoise 400 has been added to the color map
 - Links: added support for Links with Icons
@@ -18,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - output: styling and minor guidance for the HTML element
 - q: styling and minor guidance for the HTML element
 - samp: styling and minor guidance for the HTML element
+- `vuepress-theme-odyssey` is a new private package containing our brand new docs theme
+- adds `prism-theme-odyssey` package for styling code blocks
 - [Docs] Field Labels: replaces Form documentation and guidelines
 
 ### Changed
@@ -34,8 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Docs] Content and examples for all components have been rewritten
 
 ### Removed
-- `vuepress-theme-nimatron` has been removed in favor of `vuepress-theme-odyssey`
 - Tabs: unused CSS custom properties that were used for moving tab indicator implementation have been removed
+- `vuepress-theme-nimatron` has been removed in favor of `vuepress-theme-odyssey`
 - [Docs] Form docs have been removed in favor of Field Labels
 
 ### Fixed
