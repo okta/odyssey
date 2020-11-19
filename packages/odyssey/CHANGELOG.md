@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Docs] Content and examples for all components have been rewritten
 - Incosolata is now the default monospace font for Odyssey
 - External link indicator updated
-- Modal: z-index has been updated
+- [Breaking Change] Modal: `z-index` has been updated from `1` to `10`
 - Tabs: now uses 16px base font instead of 14px
 - Tabs: Border now lives on the tablist, rather than the tabpanel
 - Tabs: `tabpanel` padding updated to match the design
