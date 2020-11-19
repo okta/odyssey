@@ -1,7 +1,7 @@
 {
   "name": "@okta/design-docs",
   "description": "Design System Docs",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "files": [
     "dist"
   ],
@@ -14,7 +14,7 @@
     "last 2 versions"
   ],
   "devDependencies": {
-    "@okta/vuepress-theme-odyssey": "^0.6.0",
+    "@okta/vuepress-theme-odyssey": "^0.7.0",
     "choices.js": "^9.0.1",
     "micromodal": "^0.3.2",
     "vuepress": "^1.4.1"
