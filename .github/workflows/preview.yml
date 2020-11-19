@@ -1,5 +1,10 @@
 name: preview
-on: [push, pull_request]
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+      - "release/**"
 jobs:
   deployment:
     runs-on: ubuntu-latest
@@ -15,17 +20,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-
       - name: set $SHA7
-        run: echo ::set-env name=SHA7::$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
-
+        run: echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
       - name: set $PREVIEW_URL
-        run: echo ::set-env name=PREVIEW_URL::"https://"$SHA7".ods.dev"
+        run: echo "PREVIEW_URL="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
 
       - name: get COMMIT_MSG
-        run: |
-          MSG=$(git log --format=%B -n 1 ${{ github.event.after }})
-          echo "::set-env name=COMMIT_MSG::${MSG}"
+        run: echo "COMMIT_MSG=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV
 
       - name: install dependencies
         run: yarn
