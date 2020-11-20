@@ -21,7 +21,7 @@
           }"
         >
           <DocsLink
-            :id="'nav-subhead-' + index"
+            :id="'nav-' + variant + '-subhead-' + index"
             :class="{
               'docs-nav-link': true,
               'is-docs-nav-link--active': isCurrentRoute(item.link)
@@ -43,7 +43,7 @@
         </Component>
         <ul
           v-if="item.children"
-          :id="'nav-subhead-' + index"
+          :id="'nav-' + variant + '-subhead-' + index"
           :class="{
             'docs-nav--subnav': true,
             'is-visible': forceExpand || isSubmenuExpanded(index)
