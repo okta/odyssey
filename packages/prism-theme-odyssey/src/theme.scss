@@ -1,0 +1,158 @@
+@import '@okta/odyssey/src/scss/abstracts/_functions';
+@import '@okta/odyssey/src/scss/abstracts/_colors';
+@import '@okta/odyssey/src/scss/abstracts/_tokens';
+
+:root {
+  --font-size: #{$size-body-sentence};
+  --inlineCodeColor: #{cv('purple', '500')};
+  --inlineCodeBackground: #{cv('red', '300')};
+  --blockBackground: #{cv('gray', '000')};
+  --baseColor: #{cv('gray', '900')};
+  --selectedColor: #{cv('blue', '300')};
+  --highlightBackground:  #{cv('yellow', '000')};
+  --highlightAccent:  #{cv('yellow', '300')};
+  --commentColor: #{cv('gray', '500')};
+  --punctuationColor: #{cv('gray', '200')};
+  --propertyColor: #{cv('purple', '500')};
+  --selectorColor: #{cv('turquoise', '500')};
+  --operatorColor: #{cv('yellow', '900')};
+  --operatorBg: transparent;
+  --variableColor: #{cv('green', '900')};
+  --functionColor: #{cv('red', '500')};
+  --keywordColor: #{cv('blue', '500')};
+}
+
+/*********************************************************
+* General
+*/
+pre[class*="language-"],
+code[class*="language-"] {
+  color: var(--baseColor);
+  font-family: 'Inconsolata', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: var(--font-size);
+  text-align: left;
+  text-shadow: none;
+  word-break: normal;
+  white-space: pre;
+  word-spacing: normal;
+  direction: ltr;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection,
+pre[class*="language-"]::mozselection,
+code[class*="language-"]::mozselection {
+  text-shadow: none;
+  background: var(--selectedColor);
+}
+@media print {
+  pre[class*="language-"],
+  code[class*="language-"] {
+    text-shadow: none;
+  }
+}
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  background: var(--blockBackground);
+}
+:not(pre) > code[class*="language-"] {
+  padding: .1em .3em;
+  border-radius: .3em;
+  color: var(--inlineCodeColor);
+  background: var(--inlineCodeBackground);
+}
+/*********************************************************
+* Tokens
+*/
+.namespace {
+  opacity: .7;
+}
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--commentColor);
+}
+.token.punctuation {
+  color: var(--punctuationColor);
+}
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--propertyColor);
+}
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--selectorColor);
+}
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: var(--operatorColor);
+  background: var(--operatorBg);
+}
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--keywordColor);
+}
+.token.function {
+  color: var(--functionColor);
+}
+.token.regex,
+.token.important,
+.token.variable {
+  color: var(--variableColor);
+}
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+.token.entity {
+  cursor: help;
+}
+/*********************************************************
+* Line highlighting
+*/
+pre[data-line] {
+  position: relative;
+}
+pre[class*="language-"] > code[class*="language-"] {
+  position: relative;
+  z-index: 1;
+}
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: var(--highlightBackground);
+  box-shadow: inset 5px 0 0 var(--highlightAccent);
+  z-index: 0;
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}

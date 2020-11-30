@@ -48,11 +48,14 @@
   line-height: $base-line-height;
 
   &:hover,
-  &:focus {
+  &:focus,
+  &.is-ods-input-hover,
+  &.is-ods-input-focus {
     border-color: cv('blue');
   }
 
-  &:focus {
+  &:focus,
+  &.is-ods-input-focus {
     @include outline;
   }
 

@@ -1,0 +1,36 @@
+.docskit--desc {
+  margin-bottom: $spacing-l;
+
+  p {
+    grid-column: 1 / 1;
+  }
+
+  &.is-docskit-desc-counter {
+    display: grid;
+    grid-column: 1 / 3;
+    grid-gap: $spacing-l $spacing-m;
+    // Grid template math to achieve min size:
+    // max width ($max-line-length * 2)
+    // less grid-gap (2 x $spacing-m)
+    // divided by desired count (3)
+    grid-template-columns: repeat(auto-fill, minmax(calc(((#{$max-line-length} * 2) - (#{$spacing-m} * 2) ) / 3), 1fr));
+    list-style-position: inside;
+    list-style-type: decimal;
+
+    .desc-counter--item {
+      &::marker {
+        color: $text-heading;
+        font-family: $body-font-family;
+        font-style: normal;
+        font-weight: 600;
+        line-height: $title-line-height;
+        font-variant-numeric: proportional-nums;
+      }
+    }
+
+    .desc-counter--title {
+      display: inline-block;
+      font-size: ms(1);
+    }
+  }
+}

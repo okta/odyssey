@@ -1,0 +1,36 @@
+.docs-topbar {
+  display: none;
+  position: fixed;
+  z-index: z-index(topbar);
+  width: 100vw;
+  padding: $spacing-xs $spacing-m;
+  border-bottom: 1px solid var(--border-color-display, #{$border-color-display});
+  background: var(--docs-sidebar-bg, #{$white});
+
+  @include mq(l) {
+    display: flex;
+  }
+
+  @include mq(l) {
+    display: flex;
+  }
+
+  .docs-site-title {
+    padding: $spacing-xs;
+  }
+
+  .docs-topbar--action {
+    margin-right: $spacing-xs;
+    margin-left: -$spacing-s;
+
+    svg {
+      position: relative;
+      top: -0.1em;
+      width: 1em;
+      height: 1em;
+      transform: scale(1.6);
+      font-size: 1em;
+      vertical-align: middle;
+    }
+  }
+}

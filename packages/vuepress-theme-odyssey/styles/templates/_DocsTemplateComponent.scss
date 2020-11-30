@@ -1,0 +1,121 @@
+.docskit-container {
+  display: grid;
+  grid-column-gap: $spacing-l;
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, #{$max-line-length});
+
+  @include mq(m) {
+    display: block;
+  }
+
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    grid-column: 1/3;
+  }
+}
+
+.docs-page-header--links {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  font-size: ms(0);
+
+  @include mq(m) {
+    margin: $spacing-m 0;
+
+    li {
+      display: inline-block;
+    }
+
+    a {
+      margin-right: $spacing-s-em;
+      padding: 0;
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    padding: $spacing-xs-em;
+    line-height: $base-line-height;
+  }
+
+  span {
+    line-height: 1;
+  }
+
+  svg {
+    width: $spacing-m;
+    height: $spacing-m;
+    margin-right: $spacing-xs;
+  }
+}
+
+// TODO: This is used for code examples in tabs other than
+// Overview and should be moved in to its own component
+
+.docs-example {
+  position: relative;
+  grid-column: 1 / 3;
+  width: 100%;
+  max-width: calc((#{$max-line-length} * 2) + #{$spacing-l});
+  margin-bottom: $spacing-l;
+
+  .docs-example--rendered {
+    position: relative;
+    padding: $spacing-l;
+    border: 1px solid var(--border-color-display, #{$border-color-display});
+    border-radius: 6px 6px 0 0;
+
+    &.is-docs-example--rendered-tall {
+      min-height: #{$spacing-l * 6};
+    }
+  }
+
+  /* stylelint-disable */
+  pre[class*='language-'] {
+    margin: 0;
+    padding: $spacing-m;
+    border: 1px solid var(--border-color-display, #{$border-color-display});
+    background-color: cv('gray', '000');
+    overflow: scroll;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .docs-example--rendered + div[class*='language-'] pre[class*='language-'] {
+    border-top: 0;
+    border-radius: 0 0 6px 6px;
+  }
+  /* stylelint-enable */
+}
+
+.docs-main--content-tabs > .ods-tabs--tablist {
+  position: sticky;
+  z-index: z-index(base);
+  top: 0;
+  margin-top: -$spacing-l;
+  padding-top: $spacing-l;
+  background: var(--docs-page-bg, #{$white});
+
+  @include mq(l) {
+    margin-top: -$spacing-m;
+    padding-top: $spacing-m;
+
+    .has-ods-beta-banner & {
+      top: ms(14);
+    }
+  }
+}
+
+// Component specific examples
+
+.docs-example {
+  .ods-modal--overlay {
+    z-index: auto;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+    padding: $spacing-xl $spacing-m;
+  }
+}

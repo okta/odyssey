@@ -1,0 +1,88 @@
+.docs-page-header {
+  display: grid;
+  position: relative;
+  grid-column-gap: $spacing-m;
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
+  justify-content: space-between;
+  margin-bottom: $spacing-l;
+  font-size: $size-title-4;
+
+  @include mq(m) {
+    display: block;
+  }
+
+  .docs-page-header--lead {
+    grid-column: 1 / 2;
+    font-size: $size-title-4;
+
+    @include mq(l) {
+      font-size: $size-body-sentence;
+    }
+  }
+
+  &.is-page-header-base,
+  &.is-page-header-components,
+  &.is-page-header-icon {
+    grid-template-columns: minmax(min-content, 50%) minmax(min-content, max-content);
+    padding: $spacing-l;
+    border-radius: 0 32px;
+
+    @include mq(l) {
+      grid-template-columns: minmax(min-content, 45%) minmax(min-content, max-content);
+    }
+  }
+
+  &.is-page-header-base {
+    background: var(--docs-accent-base-bg, #{cv('yellow', '500')}) url("/images/index-base.png") no-repeat 80% bottom;
+
+    @include mq(m) {
+      background: var(--docs-accent-base-bg, #{cv('yellow', '500')});
+
+      &::before {
+        content: '';
+        display: block;
+        width: 50px;
+        height: 116px;
+        margin-bottom: $spacing-s;
+        background-image: url("/images/index-base-m.svg");
+        background-size: contain;
+      }
+    }
+  }
+
+  &.is-page-header-components {
+    background: var(--docs-accent-component-bg, #{cv('turquoise', '400')}) url("/images/index-components.png") no-repeat 92% 40%;
+
+    @include mq(m) {
+      background: var(--docs-accent-component-bg, #{cv('turquoise', '400')});
+
+      &::before {
+        content: '';
+        display: block;
+        width: 90px;
+        height: 116px;
+        margin-bottom: $spacing-s;
+        background-image: url("/images/index-components-m.svg");
+        background-size: contain;
+      }
+    }
+  }
+
+  &.is-page-header-icon {
+    background: var(--docs-accent-icon-bg, #{cv('orange', '500')}) url("/images/index-icons.png") no-repeat 92% bottom;
+
+    @include mq(m) {
+      background: var(--docs-accent-icon-bg, #{cv('orange', '500')});
+
+      &::before {
+        content: '';
+        display: block;
+        width: 90px;
+        height: 116px;
+        margin-bottom: $spacing-s;
+        background-image: url("/images/index-icons-m.svg");
+        background-size: contain;
+      }
+    }
+  }
+}

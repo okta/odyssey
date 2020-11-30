@@ -1,0 +1,28 @@
+.docskit-figure-anatomy {
+  display: flex;
+  grid-column: 1 / 3;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: $spacing-l;
+  border: 1px solid var(--border-color-display, #{$border-color-display});
+  border-radius: $base-border-radius;
+
+  img {
+    user-select: none;
+  }
+
+  &.is-figure-anatomy-filled {
+    background: cv('gray', '100');
+  }
+}
+
+.docskit-figure-anatomy--shrinkwrap {
+  flex-grow: 1;
+  font-size: 0;
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}

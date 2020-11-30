@@ -1,0 +1,111 @@
+a.docs-site-title,
+a.docs-site-title:visited {
+  display: block;
+  padding: $spacing-xs $spacing-xs;
+  border: 0;
+  color: var(--docs-text-heading, #{$text-heading});
+  font-size: $size-title-4;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@include mq(l) {
+  .is-sidebar-expanded {
+    html, body {
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      z-index: z-index(sidebar);
+      width: 100vw;
+      height: 100vh;
+      background: rgba(cv('gray', '900'), 0.75);
+    }
+  }
+}
+
+.docs-sidebar {
+  @include mq(l) {
+    visibility: hidden;
+    position: fixed;
+    z-index: z-index(sidebar);
+    top: 0;
+    transform: translateX(-100%);
+    transition: all 0.33s ease-in-out;
+
+    .is-sidebar-expanded & {
+      visibility: visible;
+      transform: translateX(0%);
+      transition: all 0.33s ease-in-out;
+    }
+  }
+
+  .docs-link {
+    border: 0;
+    color: var(--docs-text-heading, #{$text-heading});
+
+    &[target='_blank']:not([href^='mailto:'])::after {
+      background-image: get-icon('external', cv('gray', '900'));
+    }
+  }
+
+  .docs-sidebar--action {
+    display: none;
+    position: absolute;
+    top: $spacing-s;
+    right: $spacing-s;
+    color: var(--docs-text-heading, #{$text-heading});
+
+    @include mq(l) {
+      display: block;
+    }
+  }
+
+  .docs-site-title {
+    @include mq(l) {
+      display: none;
+    }
+  }
+
+  .docs-sidebar--content {
+    display: grid;
+    position: sticky;
+    top: 0;
+    grid-row-gap: $spacing-s;
+    grid-template-areas: 'header' 'main' 'footer';
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    max-height: 100vh;
+    padding: $spacing-l;
+    background: var(--docs-sidebar-bg, #{$white});
+  }
+
+  .docs-sidebar--header {
+    grid-area: header;
+    padding: 0 $spacing-xs 0;
+  }
+
+  .docs-sidebar--main {
+    grid-area: main;
+    padding: $spacing-xs $spacing-xs $spacing-s;
+    overflow: scroll;
+
+    &.is-overflowing {
+      border-bottom: 1px solid var(--border-color-display, #{$border-color-display});
+    }
+  }
+
+  .docs-sidebar--footer {
+    grid-area: footer;
+    padding: $spacing-xs $spacing-xs 0;
+  }
+}
+
+.is-animation-stopped *:not(.ods-modal) {
+  /* stylelint-disable */
+  transition: none !important;
+  animation: none !important;
+  /* stylelint-enable */
+}

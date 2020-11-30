@@ -1,0 +1,62 @@
+// Note: Theming stuff is a proof of concept.
+
+@function list-contains($list, $item) {
+  @return index($list, $item) != null;
+}
+
+@mixin set-theme($theme: $theme-day) {
+  $theme-properties:
+    docs-page-bg,
+    docs-text-body,
+    docs-text-heading,
+    docs-border-color-display,
+    docs-card-bg,
+    docs-sidebar-bg,
+    docs-nav-selected-bg,
+    docs-accent-base-bg,
+    docs-accent-component-bg,
+    docs-accent-icon-bg,
+    docs-home-hero-moon,
+    docs-home-hero-rocket,
+    border-color-display,
+    border-color-ui;
+
+  @each $custom-property, $value in $theme {
+    @if list-contains($theme-properties, $custom-property) {
+      --#{$custom-property}: #{$value};
+    } @else {
+      @warn '⚠️ Sorry, but `#{$value}` is not a valid value.';
+    }
+  }
+}
+
+$theme-default: (
+  docs-home-hero-rocket: cv('gray', '900'),
+);
+
+$theme-night: (
+  docs-page-bg: cv('gray', '900'),
+  docs-text-body: $white,
+  docs-text-heading: $white,
+  docs-card-bg: #41414B,
+  docs-sidebar-bg: cv('gray', '900'),
+  docs-nav-selected-bg: cv('gray', '600'),
+  docs-home-hero-moon: #242427,
+  docs-home-hero-rocket: $white,
+  border-color-display: cv('gray', '600')
+);
+
+// The following is required for theming demo.
+
+body {
+  color: var(--docs-text-body, #{$text-body});
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--docs-text-heading, #{$text-heading});
+}

@@ -171,6 +171,10 @@
   margin: 0 0 $spacing-m;
   overflow-x: auto;
 
+  &:last-child {
+    margin: 0;
+  }
+
   .ods-table--figcaption {
     margin-bottom: $spacing-s;
     color: $text-heading;

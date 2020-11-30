@@ -1,81 +1,48 @@
-::: slot nimatron-all
-
-# Odyssey - the Okta design system
-
-This is the home for Okta's Design System "Odyssey". Here you will find assets to build high quality UIs along with documentation to guide you along the way.
-
-## Contributing
-
-### Grab all the things
-
-These docs are maintained in the `docs` package, which exists to document `@okta/odyssey`.
-
-1. You'll need the `odyssey` repo.
-
-    ```bash
-    [okta]$ git clone git@github.com:okta/odyssey.git
-    ```
-
-2. Make sure you are on a supported node version: `>=12.13.0`.
-
-3. Change directory to the `docs` package.
-
-    ```bash
-    [okta]$ cd odyssey/packages/docs
-    ```
-
-4. Run a [yarn install](https://yarnpkg.com/en/docs/cli/install)
-
-    ```bash
-    [okta/odyssey/packages/docs]$ yarn install
-    ```
-
-You may need to [install yarn](https://yarnpkg.com/en/docs/install) if it's not available.
-
-### Serving the Docs
-
-1. Start up Hexo:
-
-    ```bash
-     [okta/odyssey/packages/docs]$ yarn start
-    ```
-
-    This will generate a fresh set of docs and then start a webserver to view them.
-
-2. Go to <http://localhost:4000/>
-
-### Odyssey development
-
-In order to see your changes to the `@okta/odyssey` package reflected here during development, you'll need to link that package locally.
-
-1. Change directory to the `@okta/odyssey` package.
-
-    ```bash
-    [okta/odyssey]$ cd packages/odyssey
-    ```
-
-2. Create a yarn link.
-
-    ```bash
-    [okta/odyssey/packages/odyssey]$ yarn link
-    ```
-
-3. Change directory to the `docs` package.
-
-    ```bash
-    [okta/odyssey/packages/odyssey]$ cd ../docs
-    ```
-
-4. Tell `yarn` to utilize the linked package instead of the published one.
-
-    ```bash
-    [okta/odyssey/packages/docs]$ yarn link @okta/odyssey
-    ```
-
-Now any changes you make in your local version of `@okta/odyssey` should be reflected in your local server.
-
-## Questions?
-
-Stop by [#odyssey](https://okta.slack.com/messages/C7T2H3KNJ) and say hello (Oktanauts-only for now).
-
-:::
+---
+template: home
+headline: Odyssey Design System
+lead: Build and design consistent, efficient, and accessible UIs for all Okta users.
+contentPrimary:
+  - coin: base
+    title: Base
+    description: Base is the foundation of Odyssey, consisting of Color, Design Tokens, HTML Elements, Iconography and Typography
+    label: Explore Base
+    href: /base/
+  - coin: component
+    title: Components
+    description: Components are commonly found, pre-assembled UI Objects built from Odyssey's Base and organized by form and function.
+    label: Explore Components
+    href: /components/
+  - coin: icon
+    title: Icons
+    description: A system of icons which establishes a visual language that can be easily understood regardless of age, language or culture.
+    label: Explore Icons
+    href: /icons/
+principle:
+  title: Purpose
+  description: Odyssey is Okta’s official design system built for use across all Okta products and sites. We aim to enable designers and developers to build efficiently and consistently while optimizing for user experience and accessibility.
+resources:
+  - title: GitHub
+    illustration: github
+    description: View up to date code and releases, file issues and propose changes.
+    label: Explore repo
+    href: https://github.com/okta/odyssey
+  - title: Figma kit
+    illustration: figma
+    description: Odyssey is designed in Figma. Here, you can leverage the latest UIs in your design projects.
+    label: Explore kit
+    href: https://www.figma.com/files/676870123940302956/project/2512934/Odyssey-UI
+contentSecondary:
+  - title: Principles
+    description: Okta's design principles are Odyssey's north star. They guide us in making critical decisions as a team.
+    label: Explore Principles
+    href: /principles/
+  - title: Roadmap
+    description: Follow along with Odyssey development, planning and our long term roadmap on ZenHub.
+    label: Explore Roadmap
+    href: https://app.zenhub.com/workspaces/odyssey-5ef0ab09504e9d002794ba2e/roadmap
+  - title: Need help?
+    description: The Odyssey team is always available to help solve problems and improve the system.
+    label: Reach out
+    href: /help/
+---

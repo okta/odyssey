@@ -1,0 +1,20 @@
+.docskit-marker {
+  position: relative;
+
+  &::after {
+    content: attr(data-marker-count);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: $spacing-m-em;
+    height: $spacing-m-em;
+    transform: translateY(-75%) translateX(-50%);
+    border-radius: 50%;
+    background-color: cv('turquoise', '500');
+    color: $white;
+    font-size: ms(-1);
+    font-weight: 600;
+    line-height: $base-line-height;
+    text-align: center;
+  }
+}

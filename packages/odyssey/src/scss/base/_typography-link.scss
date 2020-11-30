@@ -29,6 +29,8 @@ a {
   &[target='_blank']:not([href^='mailto:'])::after {
     content: '';
     display: inline-block;
+    position: relative;
+    top: -0.1em;
     width: 1em;
     height: 1em;
     margin-left: 0.2em;
@@ -38,4 +40,12 @@ a {
   }
 
   /* stylelint-enable */
+}
+
+.ods-link--has-icon {
+  display: inline-grid;
+  grid-auto-columns: minmax(min-content, max-content);
+  grid-auto-flow: column;
+  grid-gap: $spacing-xs;
+  align-items: center;
 }

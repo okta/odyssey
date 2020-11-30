@@ -1,0 +1,15 @@
+.docs-banner {
+  display: none;
+  padding: $spacing-s  $spacing-xs;
+  background: cv('blue', '000');
+  text-align: center;
+
+  &.is-docs-banner-visible {
+    display: flex;
+  }
+
+  .docs-banner--content {
+    flex: 1;
+    align-self: center;
+  }
+}
