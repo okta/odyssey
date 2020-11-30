@@ -1,0 +1,82 @@
+.docs-hero {
+  display: grid;
+  position: relative;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 360px;
+  margin-bottom: $spacing-l;
+
+  .docs-hero--content {
+    z-index: z-index(base);
+    grid-column: 1 / 3;
+    margin-right: $spacing-m;
+    padding: $spacing-m $spacing-m;
+
+    .docs-hero--title { font-size: ms(6); }
+    .docs-hero--desc { font-size: ms(2); }
+
+    @include mq(l) {
+      margin: 0;
+    }
+
+    @include mq(m) {
+      grid-column: 1 / 4;
+      margin-top: $spacing-m;
+      .docs-hero--title { font-size: $size-title-1; }
+    }
+  }
+
+  .docs-hero-moon {
+    position: fixed;
+    z-index: z-index(btm);
+    right: -25%;
+    width: 100%;
+    max-width: 840px;
+
+    circle {
+      fill: var(--docs-home-hero-moon, #{cv('gray', '000')});
+    }
+  }
+
+  .docs-hero-rocket {
+    position: absolute;
+    z-index: z-index(btm);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    border-radius: 0 0 0 32px;
+
+    svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: auto;
+    }
+
+    .docs-hero-rocket--rocket {
+      fill: var(--docs-home-hero-rocket, #{cv('gray', '900')});
+    }
+  }
+}
+
+// TODO: This is used to display a large statement or principle
+// and should be moved in to its own component if we find a need
+// for it in more than once place
+
+.docs-principle {
+  position: relative;
+  margin: $spacing-xl 0;
+
+  .docs-principle--title {
+    @include is-visually-hidden;
+  }
+
+  p {
+    font-size: $size-title-1;
+  }
+
+  a {
+    font-size: $size-title-5;
+  }
+}

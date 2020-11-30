@@ -1,0 +1,92 @@
+.docskit-visual {
+  grid-column: 2 / 3;
+  margin-bottom: $spacing-m;
+
+  .docskit-visual--title {
+    &::before {
+      margin-right: $spacing-xs;
+      font-size: $size-title-5;
+    }
+  }
+
+  .docskit-visual--figure {
+    display: grid;
+    position: relative;
+    justify-content: center;
+    padding: $spacing-l $spacing-l;
+    border: 1px solid var(--border-color-display, #{$border-color-display});
+    border-radius: $base-border-radius;
+  }
+
+  &.layout-wide {
+    grid-column: 1 / 3;
+  }
+
+  &.theme-transparent {
+    .docskit-visual--figure {
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  &.with-fade {
+    display: block;
+    position: relative;
+
+    .docskit-visual--figure {
+      padding-bottom: 0;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      right: 1px;
+      bottom: 1px;
+      left: 1px;
+      height: 33%;
+      border-radius: 0 0 $base-border-radius $base-border-radius;
+      background: linear-gradient(to top, rgba(255, 255, 255, 1) 33.33%, rgba(255, 255, 255, 0) 100%);
+    }
+  }
+
+  &.is-docskit-visual-content-full {
+    .docskit-visual--figure {
+      grid-auto-columns: 1fr;
+    }
+  }
+
+  &.is-docskit-visual-content-no-end {
+    .docskit-visual--figure {
+      grid-auto-columns: 1fr;
+      padding: $spacing-l 0 0 $spacing-l;
+    }
+  }
+
+  &.is-docskit-visual-background {
+    .docskit-visual--figure {
+      border-color: transparent;
+      background-image: linear-gradient(135deg, cv('blue', '900'), cv('blue', '500'));
+    }
+  }
+
+  &.is-docskit-visual-positive .docskit-visual--title::before {
+    content: '🛎️';
+  }
+
+  &.is-docskit-visual-negative .docskit-visual--title::before {
+    content: '🚫';
+  }
+
+  &.is-docskit-visual-smiley-positive .docskit-visual--title::before {
+    content: '😄';
+  }
+
+  &.is-docskit-visual-smiley-neutral .docskit-visual--title::before {
+    content: '🙄';
+  }
+
+  &.is-docskit-visual-smiley-negative .docskit-visual--title::before {
+    content: '😔';
+  }
+}

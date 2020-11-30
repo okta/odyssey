@@ -1,0 +1,91 @@
+// This selector is applied to the nav when it is overflowing
+.with-docs-subnav-indicator {
+  transition: none;
+  border-radius: 0;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 1em;
+    height: 1em;
+    transition: all 0.16s ease-in-out;
+    background-image: get-icon('caret', $text-body);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1em;
+  }
+
+  &.with-docs-subnav-indicator--expanded::before {
+    transform: rotate(180deg);
+  }
+}
+
+.docs-nav {
+  a,
+  a:visited {
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-xs;
+    font-size: $size-body-sentence;
+    text-decoration: none;
+  }
+
+  &.is-docs-nav-secondary {
+    font-weight: 600;
+
+    a {
+      font-size: $size-body-base;
+    }
+  }
+}
+
+.docs-nav--subnav {
+  display: none;
+  margin-bottom: $spacing-s;
+
+  a, 
+  a:visited {
+    padding: 0 $spacing-s;
+    padding-left: $spacing-m;
+  }
+
+  a:hover {
+    background: cv('blue', '000');
+    color: cv('blue', '900');
+  }
+
+  &.is-visible {
+    display: block;
+  }
+
+  .is-docs-nav-link--active {
+    background: var(--docs-nav-selected-bg, cv('gray', '000'));
+  }
+}
+
+.docs-nav--item {
+  margin-bottom: $spacing-xs;
+
+  &.docs-nav--item-with-subnav {
+    .docs-nav--item-content {
+      display: flex;
+      margin-bottom: $spacing-xs;
+
+      a {
+        flex: 1;
+        align-items: center;
+      }
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.docs-nav-link {
+  &.is-docs-nav-link--active {
+    font-weight: 600;
+  }
+}

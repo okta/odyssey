@@ -1,0 +1,24 @@
+.page-footer {
+  margin-top: $spacing-xl;
+  padding: $spacing-m 0;
+  border-top: 2px solid var(--border-color-display, #{$border-color-display});
+  text-align: center;
+
+  &,
+  p {
+    max-width: 100%;
+    font-size: $size-body-base;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+
+  .pagination--prev { order: 1; }
+  .pagination--next { order: 3; }
+
+  .pagination--slot {
+    order: 2;
+  }
+}

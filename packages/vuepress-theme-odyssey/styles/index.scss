@@ -1,0 +1,399 @@
+@import '~@okta/odyssey';
+@import '~@okta/prism-theme-odyssey';
+
+// Internal
+@import 'abstracts/theming';
+@import 'abstracts/mixins';
+@import 'abstracts/functions';
+@import 'base/fonts';
+@import 'components/DocsBanner';
+@import 'components/DocsCard';
+@import 'components/DocsCardGroup';
+@import 'components/DocsLink';
+@import 'components/DocsNav';
+@import 'components/DocsTopbar';
+@import 'components/DocsSidebar';
+@import 'components/DocsPageHeader';
+@import 'components/DocsPagination';
+@import 'templates/DocsTemplateHome';
+@import 'templates/DocsTemplateComponent';
+@import 'templates/DocsTemplatePlain';
+@import 'docskit/utility-classes';
+@import 'docskit/Anatomy';
+@import 'docskit/marker';
+@import 'docskit/Visual';
+@import 'docskit/Description';
+
+// Shame file for known hacks
+@import 'shame';
+
+html {
+  @include set-theme($theme-default);
+
+  background: var(--docs-page-bg, #{$white});
+  color: var(--docs-text-body, #{$text-body});
+  font-family: $body-font-family;
+
+  // Theme: Night Mode
+  // @media (prefers-color-scheme: dark) {
+  //   @include set-theme($theme-night);
+  // }
+}
+
+a,
+a:visited {
+  &:focus {
+    @include outline;
+  }
+}
+
+.docs-layout {
+  display: flex;
+
+  .main--container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    max-width: 100%;
+    margin-bottom: $spacing-l;
+    padding: $spacing-l * 2 $spacing-m 0;
+
+    // TODO: We would like to remove this in the future
+    // so that the grid width is determined by the content
+    // as opposed to a max-width.
+    main {
+      width: 100%;
+      max-width: calc((#{$max-line-length} * 2) + #{$spacing-l});
+    }
+  }
+}
+
+.docs-skip-content {
+  position: absolute;
+  z-index: 20;
+  top: -3rem;
+  left: $spacing-xs;
+  padding: $spacing-xs $spacing-s;
+  overflow: hidden;
+  transition: 0.15s ease-in-out;
+  background: $white;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:focus {
+    top: $spacing-xs;
+    width: auto;
+    height: auto;
+  }
+}
+
+.docs-banner--beta {
+  flex-basis: 100%;
+
+  @include mq(l) {
+    position: sticky;
+    z-index: z-index(topbar);
+    top: 0;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  .header-anchor {
+    display: none;
+    position: absolute;
+    width: $spacing-s-em;
+    height: $spacing-s-em;
+    margin-top: $spacing-xs-em /2;
+    margin-left: -$spacing-m;
+    transition: 0.33s opacity  ease-in-out;
+    opacity: 0;
+    background-image: get-icon('anchor', var(--border-color-ui, #{$border-color-ui}));
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-indent: -9999em;
+    vertical-align: middle;
+  }
+
+  &:hover .header-anchor,
+  &:focus-within .header-anchor {
+    opacity: 1;
+  }
+}
+
+// Component Samples
+
+.is-sample-unimportant {
+  opacity: 0.33;
+}
+
+.is-tab-small-sample {
+  .ods-tabs--tabpanel [role='tabpanel'] {
+    padding-bottom: $spacing-s;
+  }
+}
+
+.is-tab-stacked-example {
+  .ods-tabs [role='tabpanel'] {
+    padding: $spacing-l;
+  }
+
+  .ods-tabs:first-child [role='tabpanel'] {
+    padding: $spacing-xs;
+  }
+}
+
+.sample-color {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
+  border-radius: $base-border-radius;
+  vertical-align: middle;
+}
+
+@each $hue, $variants in $colors {
+  @each $variant, $color in $variants {
+    .sample-color--#{$hue}-#{$variant} {
+      background: cv($hue, $variant);
+    }
+  }
+}
+
+// Design Token Examples
+
+.sample-token {
+  display: block;
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
+  border-radius: $base-border-radius;
+}
+
+// Token Examples: Color
+.sample-token--color-primary-light {
+  background: $color-primary-light;
+}
+
+.sample-token--color-primary-base {
+  background: $color-primary-base;
+}
+
+.sample-token--color-primary-dark {
+  background: $color-primary-dark;
+}
+
+.sample-token--color-danger-light {
+  background: $color-danger-light;
+}
+
+.sample-token--color-danger-base {
+  background: $color-danger-base;
+}
+
+.sample-token--color-danger-dark {
+  background: $color-danger-dark;
+}
+
+.sample-token--color-primary-bg {
+  background: $color-primary-base;
+}
+
+// Token Examples: Background
+.sample-token--color-primary-bg-disabled {
+  background: $color-primary-light;
+}
+
+.sample-token--color-danger-bg {
+  background: $color-danger-base;
+}
+
+.sample-token--color-danger-bg-disabled {
+  background: $color-danger-light;
+}
+
+// Token Examples: Outline
+.sample-token--color-primary-outline {
+  background: $focus-ring-primary;
+}
+
+.sample-token--color-danger-outline {
+  background: $focus-ring-danger;
+}
+
+// Token Examples: Shadow
+.sample-token--box-shadow-default {
+  box-shadow: $box-shadow-default;
+}
+
+.sample-token--text-body {
+  color: $text-body;
+}
+
+.sample-token--text-heading {
+  color: $text-heading;
+}
+
+.sample-token--text-sub {
+  color: $text-sub;
+}
+
+.sample-token--text-danger {
+  color: $text-danger;
+}
+
+.type-body-sample--table {
+  white-space: nowrap;
+}
+
+.type-title-sample--table {
+  white-space: nowrap;
+
+  .type-sample--example {
+    font-weight: 600;
+  }
+}
+
+.sample--emoji {
+  display: inline-block;
+  margin-right: $spacing-xs;
+}
+
+.sample--list {
+  list-style-type: none;
+}
+
+$spacing-units: (
+  'spacing-xl': $spacing-xl,
+  'spacing-l': $spacing-l,
+  'spacing-m': $spacing-m,
+  'spacing-s': $spacing-s,
+  'spacing-xs': $spacing-xs,
+);
+
+.type-sample--wrap {
+  max-width: $max-line-length;
+  overflow-x: scroll;
+}
+
+.type-sample--table {
+  white-space: nowrap;
+}
+
+@for $i from 7 through 1 {
+  $x: $i - 1;
+  $n: 7 - $i;
+
+  .type-sample:nth-of-type(#{$n}) {
+    .type-sample--rem {
+      $rem: ms($x);
+      $rem: inspect($rem);
+      $rem: str-slice($rem, 1, -4);
+      $rem: str-slice($rem, 1, 4);
+      $rem: $rem + 'rem';
+
+      &::before {
+        content: '#{$rem}';
+      }
+    }
+
+    .type-sample--px {
+      &::before {
+        content: '#{round(rem-to-px(ms($x))))}';
+      }
+    }
+
+    .type-sample--example {
+      font-size: ms($x);
+    }
+  }
+}
+
+@for $i from 4 through 1 {
+  $x: $i - 2;
+  $n: 4 - $i;
+
+  .type-sample-body:nth-of-type(#{$n}) {
+    .type-sample-body--rem {
+      $rem: ms($x);
+      $rem: inspect($rem);
+      $rem: str-slice($rem, 1, -4);
+      $rem: str-slice($rem, 1, 4);
+      $rem: $rem + 'rem';
+
+      &::before {
+        content: '#{$rem}';
+      }
+    }
+
+    .type-sample-body--px {
+      &::before {
+        content: '#{round(rem-to-px(ms($x)))}';
+      }
+    }
+
+    .type-sample-body--example {
+      font-size: ms($x);
+    }
+  }
+}
+
+@each $name, $value in $spacing-units {
+  .conversion--#{$name}-actual {
+    &::before {
+      content: '#{$value}';
+    }
+  }
+
+  .conversion--#{$name}-px {
+    &::before {
+      content: '#{round(rem-to-px($value))}';
+    }
+  }
+
+  .sample--type-#{$name} {
+    position: relative;
+    min-height: $base-font-size;
+    margin-bottom: $spacing-m;
+    padding: 0 0 0 $spacing-l;
+    font-size: $value;
+
+    &::before {
+      content: 'ms(#{str-slice($name, 4)})';
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: $size-body-caption;
+    }
+  }
+
+  .sample--spacing-#{$name} {
+    position: relative;
+    width: $value;
+    height: $value;
+    background: $color-danger-light;
+  }
+}
+
+.sample--tip {
+  display: inline-block;
+  margin: 0 $spacing-xs;
+}
+
+.help-icon {
+  width: $spacing-l;
+  height: $spacing-l;
+  margin-bottom: $spacing-m;
+}
+
+.is-sample-absolute {
+  position: absolute;
+}
+
+.is-sample-color-green {
+  color: cv('green', '500');
+}

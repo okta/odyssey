@@ -1,77 +1,362 @@
-::: slot nimatron-all
+---
+template: component
+id: component-select
+title: Select
+description: Often referred to as a “dropdown menu” this input triggers a menu of options a user can select.
+lead: Often referred to as a “dropdown menu” this input triggers a menu of options a user can select. Country and state Selects are common examples.
+tabs:
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
+links:
+  - icon: github
+    label: View source
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_select.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/tVkWsXwnWICeguWhzX6Vwl/Inputs?node-id=476%3A3423
+---
 
-# Select
+::: slot overview
 
-The Select input is a form element that provides a menu of options for the user to... select.
+## Anatomy
+
+<Anatomy
+  img="images/anatomy-select.svg"
+/>
+
+## Behavior
+
+<Description>
+
+Interacting with a Select displays a list of values to choose from. Choosing a value will override any previous selection and close the Select.
+
+Odyssey also supports a Multi-Select variant that allows users to select many values.
+
+To support expected functionality and behaviors, Select relies on the Choices.js library. Odyssey provides fallback styling when Choices.js isn't available.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="overview-behavior" name="overview-behavior" required>
+        <option></option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
+      </select>
+      <label class="ods-label" for="overview-behavior">Destination star</label>
+    </div>
+  </fieldset>
+</Visual>
+
+## Variants
+
+<Description>
+
+Odyssey provides support for both single and multi-value Selects.
+
+</Description>
+
+### Single Select
+
+<Description>
+
+The default Select allows users to choose a single value from a list of options. Selecting another option will replace the first.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="overview-single" name="overview-single" required>
+        <option></option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
+      </select>
+      <label class="ods-label" for="overview-single">Destination star</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Multi-Select
+
+<Description>
+
+The Multi-Select variant allows users to choose more than one value from the list of options.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="overview-multi" name="overview-multi" multiple required>
+        <option></option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
+      </select>
+      <label class="ods-label" for="overview-multi">Destination star(s)</label>
+    </div>
+  </fieldset>
+</Visual>
+
+## States
+
+<Description>
+
+Select inputs support the following states: enabled, hover, focus, disabled, optional, and invalid.
+
+</Description>
+
+### Enabled
+
+<Description>
+
+Select inputs in their "normal" state are considered enabled. They are ready for user interaction.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="overview-enabled" name="overview-enabled" required>
+        <option></option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
+      </select>
+      <label class="ods-label" for="overview-enabled">Destination star</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Hover
+
+<Description>
+
+Hover states are activated when the user pauses their pointer over the input.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex is-ods-select-hover">
+      <select class="ods-select is-ods-input-hover" data-js-choices id="overview-hover" name="overview-hover" required>
+        <option></option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
+      </select>
+      <label class="ods-label" for="overview-hover">Destination star</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Focus
+
+<Description>
+
+The focus state is a visual affordance that the user has highlighted the input with a pointer, keyboard, or voice.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex is-ods-select-focus">
+      <select class="ods-select" data-js-choices id="overview-focus" name="overview-focus" required>
+        <option></option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
+      </select>
+      <label class="ods-label" for="overview-focus">Destination star</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Disabled
+
+<Description>
+
+Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
+
+The values of disabled inputs will not be submitted.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="overview-disabled" name="overview-disabled" required disabled>
+        <option></option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
+      </select>
+      <label class="ods-label" for="overview-disabled">Destination star</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Optional
+
+<Description>
+
+Odyssey assumes inputs are required by default. Optional inputs should be used to indicate when data is not required for the user to complete a task.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset" data-optional>
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="overview-optional" name="overview-optional">
+        <option></option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
+      </select>
+      <label class="ods-label" for="overview-optional">Destination star <span class="ods-label--optional">Optional</span></label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Invalid
+
+<Description>
+
+The invalid state is for inputs with incorrect values or values of the wrong format.
+
+When indicating a validation error, please use a Field Error label to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset" data-invalid>
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="overview-invalid" name="overview-invalid" required data-invalid aria-describedby="overview-invalid-error">
+        <option></option>
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
+      </select>
+      <label class="ods-label" for="overview-invalid">Destination star</label>
+      <aside class="ods-field--error" id="overview-invalid-error">
+        <span class="u-visually-hidden">Error:</span>This does not appear to be a valid stellar object.
+      </aside>
+    </div>
+  </fieldset>
+</Visual>
 
 ## Usage
 
-Selects are most useful when users have between 7 and 15 options to choose from. With a smaller number of options, Radio Buttons may be a better choice. When facing a larger set of options, a Text Input with autocompletion may be a better fit.
+<Description>
 
-Selects also perform better when the options are familiar to the user. If a user may be unfamiliar with their options or need to compare them, Radio Buttons may be more useful.
+Selects are most useful when users are  choosing between 7-15 options. For smaller sets, Radio Buttons are more  effective. For larger sets, a Text Input with autocompletion may be a  better fit.
 
-Finally, Select inputs should not have a set default choice unless a supermajority of users will be choosing it.
+Selects perform better when the options are familiar  to the user. If a user may be unfamiliar with their options or need to compare them, use Radio Buttons.
 
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <select class="ods-select" id="fav-color" name="fav-color" required>
-          <option></option>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-          <option value="indigo">Indigo</option>
-          <option value="violet">Violet</option>
-        </select>
-        <label class="ods-label" for="fav-color">Favorite color</label>
-      </div>
-    </fieldset>
-  </div>
+Select inputs should not have a default selected unless a majority of users will be choosing it.
 
-  ```html
+</Description>
+
+<Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" id="fav-color" name="fav-color" required>
+      <select class="ods-select" data-js-choices id="overview-groups" name="overview-groups" required>
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <optgroup label="Alpha Centauri system">
+          <option value="proxima">Proxima Centauri</option>
+          <option value="alpha-a">Alpha Centauri A</option>
+          <option value="alpha-a">Alpha Centauri B</option>
+        </optgroup>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <optgroup label="Sirius system">
+          <option value="sirius-a">Sirius A</option>
+          <option value="sirius-b">Sirius B</option>
+        </optgroup>
       </select>
-      <label class="ods-label" for="fav-color">Favorite color</label>
+      <label class="ods-label" for="overview-groups">Destination star</label>
     </div>
   </fieldset>
-  ```
-</figure>
+</Visual>
 
 ### Option groups
 
-Options may also be grouped within the Select dropdown list to help guide users.
+<Description>
 
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+Options may be grouped within the Select list to help guide users. When doing this, consider that Choices will ignore any ungrouped items.
+
+</Description>
+
+## References
+
+### Further Reading
+
+- <a href="https://joshuajohnson.co.uk/Choices/">Choices.js documentation</a>
+
+:::
+
+::: slot html-scss
+
+## Basic example
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <select class="ods-select" id="fav-animal" name="fav-animal" required>
+        <select class="ods-select" data-js-choices id="example-1" name="example-1" required>
           <option></option>
-          <optgroup label="Mammals">
-            <option value="cat">Cat</option>
-            <option value="dog">Dog</option>
-            <option value="otter">Otter</option>
-          </optgroup>
-          <optgroup label="Birds">
-            <option value="pigeon">Pigeon</option>
-            <option value="robin">Robin</option>
-            <option value="sparrow">Sparrow</option>
-          </optgroup>
+          <option value="value-1">Option 1</option>
+          <option value="value-2">Option 2</option>
+          <option value="value-3">Option 3</option>
+          <option value="value-4">Option 4</option>
+          <option value="value-5">Option 5</option>
+          <option value="value-6">Option 6</option>
         </select>
-        <label class="ods-label" for="fav-animal">Favorite animal</label>
+        <label class="ods-label" for="example-1">Field label</label>
       </div>
     </fieldset>
   </div>
@@ -79,85 +364,37 @@ Options may also be grouped within the Select dropdown list to help guide users.
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" id="fav-animal" name="fav-animal" required>
+      <select class="ods-select" data-js-choices id="example-1" name="example-1" required>
         <option></option>
-        <optgroup label="Mammals">
-          <option value="cat">Cat</option>
-          <option value="dog">Dog</option>
-          <option value="otter">Otter</option>
-        </optgroup>
-        <optgroup label="Birds">
-          <option value="pigeon">Pigeon</option>
-          <option value="robin">Robin</option>
-          <option value="sparrow">Sparrow</option>
-        </optgroup>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3">Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
       </select>
-      <label class="ods-label" for="fav-animal">Favorite animal</label>
+      <label class="ods-label" for="example-1">Field label</label>
     </div>
   </fieldset>
   ```
 </figure>
 
-## Choices.js
+## Multi-Select example
 
-Odyssey provides styling and guidelines for both plain HTML `select` elements, as well as those using the <a href="https://github.com/jshjohnson/Choices">Choices.js</a> library. Demos beyond this section will provide examples of both implementations.
-
-We recommend using the Choices.js variant to enable more consistent UI. If you're disallowed from utilizing third-party libraries, we also supply an HTML-only variant.
-
-We use the following configuration as a baseline to ensure proper class names are applied:
-
-```javascript
-new Choices(element, {
-  searchEnabled: false,
-  shouldSort: false,
-  itemSelectText: '',
-  removeItemButton: true,
-  classNames: {
-    containerOuter: 'ods-select',
-    containerInner: 'ods-select--inner',
-    input: 'ods-select--input',
-    inputCloned: 'ods-select--input--cloned',
-    list: 'ods-select--list',
-    listItems: 'ods-select--list--multiple',
-    listSingle: 'ods-select--list--single',
-    listDropdown: 'ods-select--list--dropdown',
-    item: 'ods-select--item',
-    itemSelectable: 'ods-select--item--selectable',
-    itemDisabled: 'ods-select--item--disabled',
-    itemChoice: 'ods-select--item--choice',
-    placeholder: 'ods-select--placeholder',
-    group: 'ods-select--group',
-    groupHeading: 'ods-select--heading',
-    button: 'ods-select--button',
-    activeState: 'is-ods-select-active',
-    focusState: 'is-ods-select-focused',
-    openState: 'is-ods-select-open',
-    disabledState: 'is-ods-select-disabled',
-    highlightedState: 'is-ods-select-highlighted',
-    selectedState: 'is-ods-select-selected',
-    flippedState: 'is-ods-select-flipped',
-    loadingState: 'is-ods-select-loading',
-    noResults: 'has-no-ods-select-results',
-    noChoices: 'has-no-ods-select-choices'
-  },
-});
-```
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
+        <select class="ods-select" data-js-choices id="example-2" name="example-2" multiple required>
           <option></option>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-          <option value="indigo">Indigo</option>
-          <option value="violet">Violet</option>
+          <option value="value-1">Option 1</option>
+          <option value="value-2">Option 2</option>
+          <option value="value-3">Option 3</option>
+          <option value="value-4">Option 4</option>
+          <option value="value-5">Option 5</option>
+          <option value="value-6">Option 6</option>
         </select>
-        <label class="ods-label" for="fav-color-choices">Favorite color</label>
+        <label class="ods-label" for="example-2">Field label</label>
       </div>
     </fieldset>
   </div>
@@ -165,40 +402,41 @@ new Choices(element, {
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
+      <select class="ods-select" data-js-choices id="example-2" name="example-2" multiple required>
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3">Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
       </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
+      <label class="ods-label" for="example-2">Field label</label>
     </div>
   </fieldset>
   ```
 </figure>
 
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+## Option groups example
+
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <select class="ods-select" data-js-choices  id="fav-animal-choices" name="fav-animal" required>
+        <select class="ods-select" data-js-choices id="example-3" name="example-3" required>
           <option></option>
-          <optgroup label="Mammals">
-            <option value="cat">Cat</option>
-            <option value="dog">Dog</option>
-            <option value="otter">Otter</option>
+          <optgroup label="Group 1">
+            <option value="value-1-1">Option 1</option>
+            <option value="value-1-2">Option 2</option>
+            <option value="value-1-3">Option 3</option>
           </optgroup>
-          <optgroup label="Birds">
-            <option value="pigeon">Pigeon</option>
-            <option value="robin">Robin</option>
-            <option value="sparrow">Sparrow</option>
+          <optgroup label="Group 2">
+            <option value="value-2-1">Option 1</option>
+            <option value="value-2-2">Option 2</option>
           </optgroup>
         </select>
-        <label class="ods-label" for="fav-animal-choices">Favorite animal</label>
+        <label class="ods-label" for="example-3">Field label</label>
       </div>
     </fieldset>
   </div>
@@ -206,20 +444,19 @@ new Choices(element, {
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices  id="fav-animal-choices" name="fav-animal" required>
+      <select class="ods-select" data-js-choices id="example-3" name="example-3" required>
         <option></option>
-        <optgroup label="Mammals">
-          <option value="cat">Cat</option>
-          <option value="dog">Dog</option>
-          <option value="otter">Otter</option>
+        <optgroup label="Group 1">
+          <option value="value-1-1">Option 1</option>
+          <option value="value-1-2">Option 2</option>
+          <option value="value-1-3">Option 3</option>
         </optgroup>
-        <optgroup label="Birds">
-          <option value="pigeon">Pigeon</option>
-          <option value="robin">Robin</option>
-          <option value="sparrow">Sparrow</option>
+        <optgroup label="Group 2">
+          <option value="value-2-1">Option 1</option>
+          <option value="value-2-2">Option 2</option>
         </optgroup>
       </select>
-      <label class="ods-label" for="fav-animal-choices">Favorite animal</label>
+      <label class="ods-label" for="example-3">Field label</label>
     </div>
   </fieldset>
   ```
@@ -229,64 +466,20 @@ new Choices(element, {
 
 ### Disabled
 
-#### Vanilla
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <select class="ods-select" id="fav-color-disabled" name="fav-color" required disabled>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-          <option value="indigo">Indigo</option>
-          <option value="violet">Violet</option>
-        </select>
-        <label class="ods-label" for="fav-color-disabled">Favorite color</label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <select class="ods-select" id="fav-color-disabled" name="fav-color" required disabled>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
-      </select>
-      <label class="ods-label" for="fav-color-disabled">Favorite color</label>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-You may also disable individual options or entire groups:
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <select class="ods-select" id="fav-animal-disabled" name="fav-animal" required>
+        <select class="ods-select" data-js-choices id="example-4" name="example-4" disabled required>
           <option></option>
-          <optgroup label="Mammals" disabled>
-            <option value="cat">Cat</option>
-            <option value="dog">Dog</option>
-            <option value="otter">Otter</option>
-          </optgroup>
-          <optgroup label="Birds">
-            <option value="pigeon">Pigeon</option>
-            <option value="robin" disabled>Robin</option>
-            <option value="sparrow">Sparrow</option>
-          </optgroup>
+          <option value="value-1">Option 1</option>
+          <option value="value-2">Option 2</option>
+          <option value="value-3" selected>Option 3</option>
+          <option value="value-4">Option 4</option>
+          <option value="value-5">Option 5</option>
+          <option value="value-6">Option 6</option>
         </select>
-        <label class="ods-label" for="fav-animal-disabled">Favorite animal</label>
+        <label class="ods-label" for="example-4">Field label</label>
       </div>
     </fieldset>
   </div>
@@ -294,106 +487,16 @@ You may also disable individual options or entire groups:
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" id="fav-animal-disabled" name="fav-animal" required>
+      <select class="ods-select" data-js-choices id="example-4" name="example-4" disabled required>
         <option></option>
-        <optgroup label="Mammals" disabled>
-          <option value="cat">Cat</option>
-          <option value="dog">Dog</option>
-          <option value="otter">Otter</option>
-        </optgroup>
-        <optgroup label="Birds">
-          <option value="pigeon">Pigeon</option>
-          <option value="robin" disabled>Robin</option>
-          <option value="sparrow">Sparrow</option>
-        </optgroup>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3" selected>Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
       </select>
-      <label class="ods-label" for="fav-animal-disabled">Favorite animal</label>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-#### Choices.js
-
-Choices.js leverages the `disabled` attribute as normal.
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <select class="ods-select" data-js-choices id="fav-color-disabled-choices" name="fav-color" required disabled>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-          <option value="indigo">Indigo</option>
-          <option value="violet">Violet</option>
-        </select>
-        <label class="ods-label" for="fav-color-disabled-choices">Favorite color</label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-disabled-choices" name="fav-color" required disabled>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
-      </select>
-      <label class="ods-label" for="fav-color-disabled-choices">Favorite color</label>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-You may also disable individual options or entire groups. Note that when an entire option group is disabled while using Choices.js, it will be hidden entirely.
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <select class="ods-select" data-js-choices id="fav-animal-disabled-choices" name="fav-animal" required>
-          <option></option>
-          <optgroup label="Mammals" disabled>
-            <option value="cat">Cat</option>
-            <option value="dog">Dog</option>
-            <option value="otter">Otter</option>
-          </optgroup>
-          <optgroup label="Birds">
-            <option value="pigeon">Pigeon</option>
-            <option value="robin" disabled>Robin</option>
-            <option value="sparrow">Sparrow</option>
-          </optgroup>
-        </select>
-        <label class="ods-label" for="fav-animal-disabled-choices">Favorite animal</label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-animal-disabled-choices" name="fav-animal" required>
-        <option></option>
-        <optgroup label="Mammals" disabled>
-          <option value="cat">Cat</option>
-          <option value="dog">Dog</option>
-          <option value="otter">Otter</option>
-        </optgroup>
-        <optgroup label="Birds">
-          <option value="pigeon">Pigeon</option>
-          <option value="robin" disabled>Robin</option>
-          <option value="sparrow">Sparrow</option>
-        </optgroup>
-      </select>
-      <label class="ods-label" for="fav-animal-disabled-choices">Favorite animal</label>
+      <label class="ods-label" for="example-4">Field label</label>
     </div>
   </fieldset>
   ```
@@ -401,65 +504,20 @@ You may also disable individual options or entire groups. Note that when an enti
 
 ### Optional
 
-#### Vanilla HTML
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <select class="ods-select" id="fav-color-optional" name="fav-color">
-          <option></option>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-          <option value="indigo">Indigo</option>
-          <option value="violet">Violet</option>
-        </select>
-        <label class="ods-label" for="fav-color-optional">Favorite color <span class="ods-label--optional">Optional</span></label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <select class="ods-select" id="fav-color-optional" name="fav-color">
-        <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
-      </select>
-      <label class="ods-label" for="fav-color-optional">Favorite color <span class="ods-label--optional">Optional</span></label>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-#### Choices.js
-
-Choice.js does not support or reproduce the `:required`/`:optional` pseudo-selectors, so optional fields should be marked with the `data-optional` attribute on their parent `fieldset`.
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset" data-optional>
       <div class="ods-fieldset-flex">
-        <select class="ods-select" data-js-choices id="fav-color-choices-optional" name="fav-color">
+        <select class="ods-select" data-js-choices id="example-5" name="example-5">
           <option></option>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-          <option value="indigo">Indigo</option>
-          <option value="violet">Violet</option>
+          <option value="value-1">Option 1</option>
+          <option value="value-2">Option 2</option>
+          <option value="value-3" selected>Option 3</option>
+          <option value="value-4">Option 4</option>
+          <option value="value-5">Option 5</option>
+          <option value="value-6">Option 6</option>
         </select>
-      <label class="ods-label" for="fav-color-choices-optional">Favorite color <span class="ods-label--optional">Optional</span></label>
+        <label class="ods-label" for="example-5">Field label <span class="ods-label--optional">Optional</span></label>
       </div>
     </fieldset>
   </div>
@@ -467,17 +525,16 @@ Choice.js does not support or reproduce the `:required`/`:optional` pseudo-selec
   ```html
   <fieldset class="ods-fieldset" data-optional>
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices-optional" name="fav-color">
+      <select class="ods-select" data-js-choices id="example-5" name="example-5">
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3" selected>Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
       </select>
-    <label class="ods-label" for="fav-color-choices-optional">Favorite color <span class="ods-label--optional">Optional</span></label>
+      <label class="ods-label" for="example-5">Field label <span class="ods-label--optional">Optional</span></label>
     </div>
   </fieldset>
   ```
@@ -485,65 +542,29 @@ Choice.js does not support or reproduce the `:required`/`:optional` pseudo-selec
 
 ### Invalid
 
-#### Vanilla HTML
+<Description>
 
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <select class="ods-select" id="fav-color-invalid" name="fav-color" required data-invalid>
-          <option></option>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-          <option value="indigo">Indigo</option>
-          <option value="violet">Violet</option>
-        </select>
-        <label class="ods-label" for="fav-color-invalid">Favorite color <span class="ods-label--optional">Optional</span></label>
-      </div>
-    </fieldset>
-  </div>
+Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
 
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <select class="ods-select" id="fav-color-invalid" name="fav-color" required data-invalid>
-        <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
-      </select>
-      <label class="ods-label" for="fav-color-invalid">Favorite color <span class="ods-label--optional">Optional</span></label>
-    </div>
-  </fieldset>
-  ```
-</figure>
+</Description>
 
-#### Choices.js
-
-Choices.js doesn't pass along unknown `data-*` attributes, so `data-invalid` should be placed on the parent `fieldset` instead of the `select`.
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset" data-invalid>
       <div class="ods-fieldset-flex">
-        <select class="ods-select" data-js-choices id="fav-color-invalid-choices" name="fav-color" required>
+        <select class="ods-select" data-js-choices id="example-6" name="example-6" data-invalid required>
           <option></option>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-          <option value="indigo">Indigo</option>
-          <option value="violet">Violet</option>
+          <option value="value-1">Option 1</option>
+          <option value="value-2">Option 2</option>
+          <option value="value-3" selected>Option 3</option>
+          <option value="value-4">Option 4</option>
+          <option value="value-5">Option 5</option>
+          <option value="value-6">Option 6</option>
         </select>
-        <label class="ods-label" for="fav-color-invalid-choices">Favorite color <span class="ods-label--optional">Optional</span></label>
+        <label class="ods-label" for="example-6">Field label</label>
+        <aside class="ods-field--error" id="overview-invalid-error">
+          <span class="u-visually-hidden">Error:</span> Invalid error description
+        </aside>
       </div>
     </fieldset>
   </div>
@@ -551,103 +572,22 @@ Choices.js doesn't pass along unknown `data-*` attributes, so `data-invalid` sho
   ```html
   <fieldset class="ods-fieldset" data-invalid>
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-invalid-choices" name="fav-color" required>
+      <select class="ods-select" data-js-choices id="example-6" name="example-6" data-invalid required>
         <option></option>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3" selected>Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
       </select>
-      <label class="ods-label" for="fav-color-invalid-choices">Favorite color <span class="ods-label--optional">Optional</span></label>
+      <label class="ods-label" for="example-6">Field label</label>
+      <aside class="ods-field--error" id="overview-invalid-error">
+        <span class="u-visually-hidden">Error:</span> Invalid error description
+      </aside>
     </div>
   </fieldset>
   ```
 </figure>
 
-## Variants
-
-### Multi-Select
-
-If the user can select more than one option, you can use the `multiple` attribute to enable multi-select behavior.
-
-By default, the Choices.js variant will allow users to type to filter their available options. 
-
-#### Choices.js
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" multiple required>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-          <option value="indigo">Indigo</option>
-          <option value="violet">Violet</option>
-        </select>
-        <label class="ods-label" for="fav-color-choices">Favorite color</label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="fav-color-choices" name="fav-color" required>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
-      </select>
-      <label class="ods-label" for="fav-color-choices">Favorite color</label>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-#### Vanilla HTML
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <select class="ods-select" id="fav-color" name="fav-color" multiple required>
-          <option value="red">Red</option>
-          <option value="orange">Orange</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="blue">Blue</option>
-          <option value="indigo">Indigo</option>
-          <option value="violet">Violet</option>
-        </select>
-        <label class="ods-label" for="fav-color">Favorite color</label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <select class="ods-select" id="fav-color" name="fav-color" required>
-        <option value="red">Red</option>
-        <option value="orange">Orange</option>
-        <option value="yellow">Yellow</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-        <option value="indigo">Indigo</option>
-        <option value="violet">Violet</option>
-      </select>
-      <label class="ods-label" for="fav-color">Favorite color</label>
-    </div>
-  </fieldset>
-  ```
-</figure>
 :::

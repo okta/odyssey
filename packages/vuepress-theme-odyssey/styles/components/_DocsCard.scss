@@ -1,0 +1,66 @@
+.docs-card {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding: $spacing-l $spacing-m;
+  transition: 0.33s ease-in-out box-shadow;
+  border-radius: 0 32px;
+  background-color: var(--docs-card-bg, $white);
+  font-size: $size-body-sentence;
+
+  &.is-docs-card-shadow {
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+
+    &:hover,
+    &:focus-within {
+      box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &.is-docs-card-transparent {
+    padding: 0;
+    background: transparent;
+  }
+
+  a {
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      // NOTE: 32px is sort of an arbitrary value,
+      // and only used within this component.
+      border-radius: 0 32px;
+    }
+  }
+
+  .docs-card--header-image {
+    margin-bottom: $spacing-m;
+
+    svg {
+      height: auto;
+    }
+  }
+
+  .docs-card--main {
+    flex: 1;
+    margin-bottom: $spacing-l;
+    font-size: $size-body-sentence;
+  }
+
+  &.is-docs-card-image-medium {
+    svg {
+      max-width: $spacing-l;
+    }
+  }
+
+  &.is-docs-card-image-large {
+    svg {
+      max-width: $spacing-xl;
+    }
+  }
+}

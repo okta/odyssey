@@ -1,0 +1,16 @@
+a.docs-link--underlined,
+a.docs-link--underlined:visited {
+  border-bottom: 1px solid var(--docs-text-heading, #{$text-heading});
+  color: var(--docs-text-heading, #{$text-heading});
+  text-decoration-color: var(--docs-text-heading, #{$text-heading});
+  text-underline-offset: $spacing-xs;
+
+  /* stylelint-disable selector-no-qualifying-type */
+  &[target='_blank']:not([href^='mailto:'])::after {
+    background-image: get-icon('external', cv('gray', '900'));
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}

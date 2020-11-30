@@ -1,15 +1,374 @@
-::: slot nimatron-all
+---
+template: component
+id: component-text-input
+title: Text Input
+description: Text inputs allow users to edit and input data.
+lead: Text inputs allow users to edit and input data. They can range from simple search boxes to long-form text areas.
+tabs:
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
+links:
+  - icon: github
+    label: View source
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_text-input.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/tVkWsXwnWICeguWhzX6Vwl/Inputs?node-id=476%3A3848
+---
 
-# Text Input
+::: slot overview
 
->`<input>` elements of type "text" create basic single-line text fields. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/text'>MDN</a></cite>
+## Anatomy
 
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+<Anatomy img="images/anatomy-text-input.svg" />
+
+## Variants
+
+### Default
+
+<Description>
+
+This default serves as the basis for our Text Inputs. A shown here, they required paired with a paired Label.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" id="overview-default" required>
+      <label class="ods-label" for="overview-default">Destination</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Search
+
+<Description>
+
+Standalone Search provides minimal UI for searching outside of normal form contexts. Search inputs will render with the "Search" UI indicator as well as a visually hidden label.
+
+In this case, we recommend using the placeholder attribute to state the scope of your search. This text should match the hidden label.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="search" name="overview-search" id="overview-search" autocomplete="search" spellcheck="false" placeholder="Search planets" required>
+      <label class="ods-label" for="overview-search">Search planets</label>
+    </div>
+  </fieldset>
+</Visual>
+
+#### Button variant
+
+<Description>
+
+We also provide an attached button for in-page searching or avoiding placeholder text. Please follow our [Button guidelines](/components/button) when using these variants.
+
+</Description>
+
+<Visual content="full">
+  <form>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input class="ods-text-input" type="search" name="overview-search-button" id="overview-search-button" autocomplete="search" spellcheck="false" aria-labelledby="overview-search-button" required>
+        <button class="ods-button" id="overview-search-button">Search planets</button>
+      </div>
+    </fieldset>
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input class="ods-text-input" type="search" name="overview-search-button-sec" id="overview-search-button-sec" autocomplete="search" spellcheck="false" aria-labelledby="overview-search-button-sec" required>
+        <button class="ods-button is-ods-button-secondary" id="overview-search-button-sec">Find cosmonaut</button>
+      </div>
+    </fieldset>
+  </form>
+</Visual>
+
+### Textarea
+
+<Description>
+
+Textareas should be used for multi-line text inputs. As the user types the field will grow vertically to accommodate the new lines.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <textarea class="ods-text-input ods-text-area" name="overview-textarea" id="overview-textarea" rows='4' cols='50' spellcheck="true" required></textarea>
+      <aside class="ods-field--hint">
+        Describe your perfect planet in as many words as you need.
+      </aside>
+      <label class="ods-label" for="overview-textarea">The perfect planet</label>
+    </div>
+  </fieldset>
+</Visual>
+
+## States
+
+<Description>
+
+Text inputs support the following states: enabled, hover, focus, disabled, read-only, optional, and invalid.
+
+</Description>
+
+### Enabled
+
+<Description>
+
+Text inputs in their "normal" state are considered enabled. They are ready for user interaction.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="overview-enabled" id="overview-enabled" required>
+      <label class="ods-label" for="overview-enabled">Destination</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Hover
+
+<Description>
+
+Hover states are activated when the user pauses their pointer over the input.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input is-ods-input-hover" name="overview-hover" type="text" id="overview-hover" required>
+      <label class="ods-label" for="overview-hover">Destination</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Focus
+
+<Description>
+
+The focus state is a visual affordance that the user has highlighted the input with a pointer, keyboard, or voice.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input is-ods-input-focus" name="overview-focus" type="text" id="overview-focus" required>
+      <label class="ods-label" for="overview-focus">Destination</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Disabled
+
+<Description>
+
+Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
+
+The values of disabled inputs will not be submitted.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input disabled class="ods-text-input" type="text" name="overview-disabled" id="overview-disabled" required disabled>
+      <label class="ods-label" for="overview-disabled">Destination</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Read-only
+
+<Description>
+
+Similar to disabled inputs, users cannot modify the values of read-only inputs. However, users can otherwise interact with read-only inputs and select their values for copying.
+
+This state can be helpful when displaying computed or third-party values, or when a submitted form is being processed.
+
+The values of read-only inputs will be submitted.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="overview-readonly" id="overview-readonly" value="Jupiter" required readonly spellcheck="false">
+      <label class="ods-label" for="overview-readonly">Destination</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Optional
+
+<Description>
+
+Odyssey assumes inputs are required by default. Optional inputs should be used to indicate when data is not required for the user to complete a task.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="overview-optional" id="overview-optional" spellcheck="false">
+      <label class="ods-label" for="overview-optional">Destination <span class="ods-label--optional">Optional</span></label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Invalid
+
+<Description>
+
+The invalid state is for inputs with incorrect values or values of the wrong format.
+
+When indicating a validation error, please use a Field Error label to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input data-invalid class="ods-text-input" type="text" name="overview-invalid" aria-describedby="overview-invalid-error" id="overview-invalid" spellcheck="false" value="4.76 miles/s" required>
+      <label class="ods-label" for="overview-invalid">Destination</label>
+      <aside class="ods-field--error" id="overview-invalid-error">
+        <span class="u-visually-hidden">Error:</span>This does not appear to be a valid planetoid.
+      </aside>
+    </div>
+  </fieldset>
+</Visual>
+
+## Content Guidelines
+
+<Description>
+
+Text inputs support most free-form content, but we offer specific support for email, telephone numbers, and passwords.
+
+</Description>
+
+### Email
+
+<Description>
+
+There are no specific UI changes for email addresses, but inputs of this type will validate that the address is properly formatted.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="email" name="overview-email" id="overview-email" autocomplete="email" spellcheck="false" value="homer@okta.com" required>
+      <label class="ods-label" for="overview-email">Email</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Tel
+
+<Description>
+
+Unlike email fields, tel inputs are not automatically validated because global formats are so varied.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="phone" name="overview-tel" id="overview-tel" autocomplete="tel" spellcheck="false" value="555-555-1212" required>
+      <label class="ods-label" for="overview-tel">Telephone number</label>
+    </div>
+  </fieldset>
+</Visual>
+
+### Password
+
+<Description>
+
+Passwords inputs ensure that sensitive content is safely obscured.
+
+</Description>
+
+<Visual content="full">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="password" name="overview-password" id="overview-password" autocomplete="password" spellcheck="false" value="Big Gas Giants" required>
+      <label class="ods-label" for="overview-password">Authorization code</label>
+    </div>
+  </fieldset>
+</Visual>
+
+## Accessibility
+
+### Placeholders
+
+<Description>
+
+Except for Search inputs, we advise against using placeholder text for inputs.
+
+</Description>
+
+#### Translation
+
+<Description>
+
+To prevent triggering a change in page layout, browsers don't translate certain attributes. Because of this, users will see untranslated placeholder text.
+
+</Description>
+
+#### Recall
+
+<Description>
+
+Placeholder text disappears when a field is interacted with. For this reason, it's not suitable for formatting guidelines or necessary context.
+
+</Description>
+
+#### Utility
+
+<Description>
+
+Placeholder content is limited to static text. Additionally, placeholder text is truncated beyond the width of its input.
+
+</Description>
+
+#### Field value confusion
+
+<Description>
+
+Low-contrast placeholders may be illegible for some users. Yet, placeholders with compliant contrast can be mistaken for field values. High Contrast Mode will make placeholders and values appear identical.
+
+Finally, Users with low digital literacy may not understand the purpose or behavior of placeholder text.
+
+</Description>
+
+:::
+
+::: slot html-scss
+
+
+## Types
+
+<Description>
+
+Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel`, and `password` with more coming soon.
+
+</Description>
+
+## Text
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="name" id="name" autocomplete="name" spellcheck="false" required>
-        <label class="ods-label" for="name">Name</label>
+        <input class="ods-text-input" type="text" name="example-1" id="example-1" spellcheck="false" value="Input value" required>
+        <label class="ods-label" for="example-1">Field label</label>
       </div>
     </fieldset>
   </div>
@@ -17,23 +376,21 @@
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="text" name="name" id="name" autocomplete="name" spellcheck="false" required>
-      <label class="ods-label" for="name">Name</label>
+      <input class="ods-text-input" type="text" name="example-1" id="example-1" spellcheck="false" value="Input value" required>
+      <label class="ods-label" for="example-1">Field label</label>
     </div>
   </fieldset>
   ```
 </figure>
 
+### Email
 
-They can also be combined with an `.ods-field--hint` to provide greater context:
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" aria-describedby="name-hinted-hint" name="name-hinted" id="name-hinted" autocomplete="name-hinted" spellcheck="false" required>
-        <aside class="ods-field--hint" id="name-hinted-hint">Your full name, please.</aside>
-        <label class="ods-label" for="name">Name</label>
+        <input class="ods-text-input" type="email" name="example-2" id="example-2" autocomplete="email" spellcheck="false" value="name@okta.design" required>
+        <label class="ods-label" for="example-2">Email</label>
       </div>
     </fieldset>
   </div>
@@ -41,9 +398,140 @@ They can also be combined with an `.ods-field--hint` to provide greater context:
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="text" aria-describedby="name-hinted-hint" name="name-hinted" id="name-hinted" autocomplete="name-hinted" spellcheck="false" required>
-      <aside class="ods-field--hint" id="name-hinted-hint">Your full name, please.</aside>
-      <label class="ods-label" for="name">Name</label>
+      <input class="ods-text-input" type="email" name="example-2" id="example-2" autocomplete="email" spellcheck="false" value="name@okta.design" required>
+      <label class="ods-label" for="example-2">Email</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+### Telephone
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="tel" name="example-3" id="example-3" spellcheck="false" value="888-722-7871" required>
+        <label class="ods-label" for="example-2">Telephone number</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="tel" name="example-3" id="example-3" spellcheck="false" value="888-722-7871" required>
+      <label class="ods-label" for="example-2">Telephone number</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+### Password
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <input class="ods-text-input" type="password" name="example-4" id="example-4" spellcheck="false" value="fake-password-value" required>
+        <label class="ods-label" for="example-4">Password</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="password" name="example-4" id="example-4" spellcheck="false" value="fake-password-value" required>
+      <label class="ods-label" for="example-4">Password</label>
+    </div>
+  </fieldset>
+  ```
+</figure>
+
+### Search
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <input type="search" name="example-5" id="example-5" autocomplete="search" placeholder="Placeholder value" spellcheck="false" aria-labelledby="example-5" required="required" class="ods-text-input">
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <input type="search" name="example-5" id="example-5" autocomplete="search" placeholder="Placeholder value" spellcheck="false" aria-labelledby="example-5" required="required" class="ods-text-input">
+  </fieldset>
+  ```
+</figure>
+
+### Search with attached primary button
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input type="search" name="example-6" id="example-6" autocomplete="search" spellcheck="false" aria-labelledby="example-6" required="required" class="ods-text-input">
+        <button id="example-6" class="ods-button">Button label</button>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input type="search" name="example-6" id="example-6" autocomplete="search" spellcheck="false" aria-labelledby="example-6" required="required" class="ods-text-input">
+        <button id="example-6" class="ods-button">Button label</button>
+      </div>
+    </fieldset>
+  ```
+</figure>
+
+### Search with attached secondary button
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input type="search" name="example-7" id="example-7" autocomplete="search" spellcheck="false" aria-labelledby="example-7" required="required" class="ods-text-input">
+        <button id="example-7" class="ods-button is-ods-button-secondary">Button label</button>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset--attached">
+        <input type="search" name="example-7" id="example-7" autocomplete="search" spellcheck="false" aria-labelledby="example-7" required="required" class="ods-text-input">
+        <button id="example-7" class="ods-button is-ods-button-secondary">Button label</button>
+      </div>
+    </fieldset>
+  ```
+</figure>
+
+## Textarea
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <div class="ods-fieldset-flex">
+        <textarea class="ods-text-input ods-text-area" name="example-8" id="example-8" rows='4' cols='50' spellcheck="true" required></textarea>
+        <aside class="ods-field--hint">
+          Descriptive field hint
+        </aside>
+        <label class="ods-label" for="example-8">Field label</label>
+      </div>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <textarea class="ods-text-input ods-text-area" name="example-8" id="example-8" rows='4' cols='50' spellcheck="true" required></textarea>
+      <aside class="ods-field--hint">
+        Descriptive field hint
+      </aside>
+      <label class="ods-label" for="example-8">Field label</label>
     </div>
   </fieldset>
   ```
@@ -53,20 +541,12 @@ They can also be combined with an `.ods-field--hint` to provide greater context:
 
 ### Disabled
 
-> This Boolean attribute prevents the user from interacting with the input. In particular, the `click` event is not dispatched on disabled controls, and disabled controls aren't submitted with their form. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled'>MDN</a></cite>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="name-disabled" id="name-disabled" autocomplete="name" spellcheck="false" required disabled>
-        <label class="ods-label" for="name-disabled">Name</label>
-      </div>
-    </fieldset>
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="name-disabled" id="name-disabled" autocomplete="name" spellcheck="false" value="Diana Prince" required disabled>
-        <label class="ods-label" for="name-disabled">Name</label>
+        <input class="ods-text-input" type="text" name="example-9" id="example-9" spellcheck="false" value="Disabled input value" disabled required>
+        <label class="ods-label" for="example-9">Field label</label>
       </div>
     </fieldset>
   </div>
@@ -74,29 +554,21 @@ They can also be combined with an `.ods-field--hint` to provide greater context:
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="text" name="name-disabled" id="name-disabled" autocomplete="name" spellcheck="false" required disabled>
-      <label class="ods-label" for="name-disabled">Name</label>
+      <input class="ods-text-input" type="text" name="example-9" id="example-9" spellcheck="false" value="Disabled input value" disabled required>
+      <label class="ods-label" for="example-9">Field label</label>
     </div>
   </fieldset>
   ```
 </figure>
 
-### Read only
+### Optional label
 
-> This Boolean attribute prevents the user from modifying the value of the input. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly'>MDN</a></cite>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+<figure class="docs-example">
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="name-readonly" id="name-readonly" autocomplete="name" spellcheck="false" required readonly>
-        <label class="ods-label" for="name-readonly">Name</label>
-      </div>
-    </fieldset>
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="name-filled-readonly" id="name-filled-readonly" autocomplete="name" spellcheck="false" value="Diana Prince" required readonly>
-        <label class="ods-label" for="name-filled-readonly">Name</label>
+        <input class="ods-text-input" type="text" name="example-10" id="example-10" spellcheck="false" value="">
+        <label class="ods-label" for="example-10">Field label <span class="ods-label--optional">Optional</span></label>
       </div>
     </fieldset>
   </div>
@@ -104,55 +576,29 @@ They can also be combined with an `.ods-field--hint` to provide greater context:
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="text" name="name-readonly" id="name-readonly" autocomplete="name" spellcheck="false" required readonly>
-      <label class="ods-label" for="name-readonly">Name</label>
+      <input class="ods-text-input" type="text" name="example-10" id="example-10" spellcheck="false" value="">
+      <label class="ods-label" for="example-10">Field label <span class="ods-label--optional">Optional</span></label>
     </div>
   </fieldset>
   ```
 </figure>
 
-### Optional
+### Invalid label
 
-> The `:optional` CSS pseudo-class represents any `<input>`, `<select>`, or `<textarea>` element that does not have the required attribute set on it. [...] This pseudo-class is useful for styling fields that are not required to submit a form. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/CSS/:optional'>MDN</a></cite>
+<Description>
+  
+  Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
 
-Based on our use cases, it's a better affordance to treat `:required` as our default form behavior and signal `:optional` forms instead.
+</Description>
 
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
+<figure class="docs-example" data-invalid>
+  <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" name="name-optional" id="name-optional" autocomplete="name" spellcheck="false">
-        <label class="ods-label" for="name-optional">Name <span class="ods-label--optional">Optional</span></label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="text" name="name-optional" id="name-optional" autocomplete="name" spellcheck="false">
-      <label class="ods-label" for="name-optional">Name <span class="ods-label--optional">Optional</span></label>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-### Invalid
-
->The :invalid CSS pseudo-class represents any `<input>` or other `<form>` element whose contents fail to validate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid'>MDN</a></cite>
-
-Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
-
-Note, when indicating a validation error, please use a `.ods-field--error` to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" aria-describedby="name-invalid-hint" name="name-invalid" id="name-invalid" autocomplete="name" spellcheck="false" required data-invalid>
-        <label class="ods-label" for="name-invalid">Name</label>
-        <aside class="ods-field--error" id="name-invalid-hint">
-          This field is required and cannot be left empty.
+        <input class="ods-text-input" type="text" name="example-11" id="example-11" spellcheck="false" value="" data-invalid required>
+        <label class="ods-label" for="example-11">Field label</label>
+        <aside class="ods-field--error" id="overview-invalid-error">
+          <span class="u-visually-hidden">Error:</span> Invalid error description
         </aside>
       </div>
     </fieldset>
@@ -161,187 +607,11 @@ Note, when indicating a validation error, please use a `.ods-field--error` to in
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="text" aria-describedby="name-invalid-hint" name="name-invalid" id="name-invalid" autocomplete="name" spellcheck="false" required data-invalid>
-      <label class="ods-label" for="name-invalid">Name</label>
-      <aside class="ods-field--error" id="name-invalid-hint">
-        This field is required and cannot be left empty.
+      <input class="ods-text-input" type="text" name="example-11" id="example-11" spellcheck="false" value="" data-invalid required>
+      <label class="ods-label" for="example-11">Field label</label>
+      <aside class="ods-field--error" id="overview-invalid-error">
+        <span class="u-visually-hidden">Error:</span> Invalid error description
       </aside>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-## Additional types
-
-### Standalone Search
-
-> `<input>` elements of type search are text fields designed for the user to enter search queries into. These are functionally identical to text inputs, but may be styled differently by the user agent. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/search">MDN</a></cite>
-
-Odyssey's standalone search is styled to provide minimal UI while maintaining accessibility when searching outside of normal form contexts. Inputs with `type="search"` will render with the "Search" <a href="/base/iconography#ui-indicators-vs-icons">UI indicator</a> as well as a visually hidden label.
-
-Unlike other inputs, we recommend using the `placeholder` attribute to indicate the scope of your search input. This text should match the hidden label.
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="search" name="search" id="search" autocomplete="search" spellcheck="false" placeholder="Search people" required>
-        <label class="ods-label" for="search">Search people</label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="search" name="search" id="search" autocomplete="search" spellcheck="false" placeholder="Search people" required>
-      <label class="ods-label" for="search">Search people</label>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-We also provide a variant with an attached button for in-page searching or when placeholder text is undesirable. Please follow our <a href="/components/button/">Button guidelines</a> when using these variants.
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset--attached">
-        <input class="ods-text-input" type="search" name="search" id="button-search" autocomplete="search" spellcheck="false" aria-labelledby="search-button" required>
-        <button class="ods-button" id="search-button">Search people</button>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset--attached">
-      <input class="ods-text-input" type="search" name="search" id="button-search" autocomplete="search" spellcheck="false" aria-labelledby="search-button" required>
-      <button class="ods-button" id="search-button">Search people</button>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset--attached">
-        <input class="ods-text-input" type="search" name="search" id="button-search-sec" autocomplete="search" spellcheck="false" aria-labelledby="search-button" required>
-        <button class="ods-button is-ods-button-secondary" id="search-button">Find user</button>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset--attached">
-      <input class="ods-text-input" type="search" name="search" id="button-search-sec" autocomplete="search" spellcheck="false" aria-labelledby="search-button" required>
-      <button class="ods-button is-ods-button-secondary" id="search-button">Find user</button>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-### Text area
-
-> The HTML `<textarea>` element represents a multi-line plain-text editing control, useful when you want to allow users to enter a sizeable amount of free-form text, for example a comment on a review or feedback form. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea">MDN</a></cite>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <textarea class="ods-text-input ods-text-area" name="description" id="description" rows='4' cols='50' spellcheck="true" required></textarea>
-        <aside class="ods-field--hint">
-          Please describe your perfect Saturday in as many words as you need.
-        </aside>
-        <label class="ods-label" for="description">Your Perfect Saturday</label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <textarea class="ods-text-input ods-text-area" name="description" id="description" rows='4' cols='50' spellcheck="true" required></textarea>
-      <aside class="ods-field--hint">
-        Please describe your perfect Saturday in as many words as you need.
-      </aside>
-      <label class="ods-label" for="description">Your Perfect Saturday</label>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-### Email
-
->`<input>` elements of type "email" are used to let the user enter and edit an email address, or, if the multiple attribute is specified, a list of email addresses. The input value is automatically validated to ensure that it's either empty or a properly-formatted email address (or list of addresses) before the form can be submitted. The `:valid` and `:invalid` CSS pseudo-classes are automatically applied as appropriate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email'>MDN</a></cite>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="email" name="email" id="email" autocomplete="email" spellcheck="false" required>
-        <label class="ods-label" for="email">Email</label>
-      </div>
-    </fieldset>
-  </div>
-
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="email" name="email" id="email" autocomplete="email" spellcheck="false" required>
-      <label class="ods-label" for="email">Email</label>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-### Password
-
->`<input>` elements of type "password" provide a way for the user to securely enter a password. The element is presented as a one-line plain text editor control in which the text is obscured so that it cannot be read, usually by replacing each character with a symbol such as the asterisk ("*") or a dot ("•"). This character will vary depending on the user agent and OS. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password">MDN</a></cite>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="password" name="password" id="password" autocomplete="new-password" spellcheck="false" required>
-        <label class="ods-label" for="password">Password</label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="password" name="password" id="password" autocomplete="new-password" spellcheck="false" required>
-      <label class="ods-label" for="password">Password</label>
-    </div>
-  </fieldset>
-  ```
-</figure>
-
-### Telephone number
-
->`<input>` elements of type "tel" are used to let the user enter and edit a telephone number. Unlike `<input type="email">` and `<input type="url">`, the input value is not automatically validated to a particular format before the form can be submitted, because formats for telephone numbers vary so much around the world. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel'>MDN</a></cite>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="tel" name="tel" id="tel" autocomplete="tel-national" spellcheck="false" required>
-        <label class="ods-label" for="tel">Telephone Number</label>
-      </div>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="tel" name="tel" id="tel" autocomplete="tel-national" spellcheck="false" required>
-      <label class="ods-label" for="tel">Telephone Number</label>
     </div>
   </fieldset>
   ```

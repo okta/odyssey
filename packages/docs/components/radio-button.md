@@ -1,149 +1,270 @@
-::: slot nimatron-all
+---
+template: component
+id: component-radio-button
+title: Radio Button
+description: Radios appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
+lead: Radios appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
+tabs:
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
+links:
+  - icon: github
+    label: View source
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_radio-button.scss
+  - icon: figma
+    label: View designs
+    href: https://www.figma.com/file/tVkWsXwnWICeguWhzX6Vwl/Inputs?node-id=476%3A4173
+---
 
-# Radio Button
+::: slot overview
 
-> `<input>` elements of type radio are generally used in radio groups—collections of radio buttons describing a set of related options. Only one radio button in a given group can be selected at the same time. Radio buttons are typically rendered as small circles, which are filled or highlighted when selected. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio'>MDN</a></cite>
+## Anatomy
 
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Which of the following is the largest?</legend>
-      <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
-      <label class="ods-radio--label" for="radio-peanut">A peanut</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-elephant" value="elephant" required>
-      <label class="ods-radio--label" for="radio-elephant">An elephant</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-moon" value="moon" required>
-      <label class="ods-radio--label" for="radio-moon">The moon</label>
-      <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
-      <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
-    </fieldset>
-  </div>
+<Anatomy
+  img="images/anatomy-radio-button.svg"
+/>
 
-  ```html
+## Behavior
+
+<Description>
+
+Radio Buttons allow users to select one option from a set. Users can click a Radio to make a choice; selecting another will deselect the last.
+
+</Description>
+
+<Visual>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Which of the following is the largest?</legend>
-    <input class="ods-radio" type="radio" name="radio" id="radio-peanut" value="peanut" required checked>
-    <label class="ods-radio--label" for="radio-peanut">A peanut</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-elephant" value="elephant" required>
-    <label class="ods-radio--label" for="radio-elephant">An elephant</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-moon" value="moon" required>
-    <label class="ods-radio--label" for="radio-moon">The moon</label>
-    <input class="ods-radio" type="radio" name="radio" id="radio-tennis-ball" value="tennis-ball" required>
-    <label class="ods-radio--label" for="radio-tennis-ball">A tennis ball</label>
+    <legend class="ods-input-legend">Select speed</legend>
+    <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-1" value="1" required>
+    <label class="ods-radio--label" for="overview-behavior-1">Lightspeed</label>
+    <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-2" value="2" required checked>
+    <label class="ods-radio--label" for="overview-behavior-2">Warp Speed</label>
+    <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-3" value="3" required>
+    <label class="ods-radio--label" for="overview-behavior-3">Ludicrous Speed</label>
   </fieldset>
-  ```
-</figure>
+</Visual>
 
 ## States
 
+<Description>
+
+There are fives Checkbox states: enabled, hover, focus, disabled, invalid, and optional.
+
+</Description>
+
+### Enabled
+
+<Description>
+
+Radio Buttons in their "unchecked" state are considered enabled. They are ready for user interaction.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <input class="ods-radio" type="radio" name="overview-enabled" id="overview-enabled" value="0" required>
+    <label class="ods-radio--label" for="overview-enabled">Warp speed</label>
+  </fieldset>
+</Visual>
+
+### Hover
+
+<Description>
+
+Hover states are activated when the user pauses their pointer over the input.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <input class="ods-radio" type="radio" name="overview-hover" id="overview-hover" value="0" required>
+    <label class="ods-radio--label is-ods-radio-hover" for="overview-hover">Warp speed</label>
+  </fieldset>
+</Visual>
+
+### Focus
+
+<Description>
+
+The focus state is a visual affordance that the user has highlighted the input with a pointer, keyboard, or voice.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <input class="ods-radio is-ods-radio-focus" type="radio" name="overview-focus" id="overview-focus" value="0" required>
+    <label class="ods-radio--label" for="overview-focus">Warp speed</label>
+  </fieldset>
+</Visual>
+
+### Checked
+
+<Description>
+
+Checked Radios display a blue fill to indicate the they are selected.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <input class="ods-radio" type="radio" name="overview-checked" id="overview-checked" value="0" required checked>
+    <label class="ods-radio--label" for="overview-checked">Warp speed</label>
+  </fieldset>
+</Visual>
+
 ### Disabled
 
-> This Boolean attribute prevents the user from interacting with the input. In particular, the `click` event is not dispatched on disabled controls, and disabled controls aren't submitted with their form. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled'>MDN</a></cite>
+<Description>
 
-Disabling radio buttons happens on a per-option basis.
+Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
 
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Which of the following is the largest?</legend>
-      <input class="ods-radio" type="radio" name="radio-mix" id="radio-peanut-mix" value="peanut" required checked>
-      <label class="ods-radio--label" for="radio-peanut-mix">A peanut</label>
-      <input class="ods-radio" type="radio" name="radio-mix" id="radio-elephant-mix" value="elephant" required disabled>
-      <label class="ods-radio--label" for="radio-elephant-mix">An elephant</label>
-      <input class="ods-radio" type="radio" name="radio-mix" id="radio-moon-mix" value="moon" required>
-      <label class="ods-radio--label" for="radio-moon-mix">The moon</label>
-      <input class="ods-radio" type="radio" name="radio-mix" id="radio-tennis-ball-mix" value="tennis-ball" required>
-      <label class="ods-radio--label" for="radio-tennis-ball-mix">A tennis ball</label>
-    </fieldset>
-  </div>
+Radios are disabled by option.
 
-  ```html
+</Description>
+
+<Visual>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Which of the following is the largest?</legend>
-    <input class="ods-radio" type="radio" name="radio-mix" id="radio-peanut-mix" value="peanut" required checked>
-    <label class="ods-radio--label" for="radio-peanut-mix">A peanut</label>
-    <input class="ods-radio" type="radio" name="radio-mix" id="radio-elephant-mix" value="elephant" required disabled>
-    <label class="ods-radio--label" for="radio-elephant-mix">An elephant</label>
-    <input class="ods-radio" type="radio" name="radio-mix" id="radio-moon-mix" value="moon" required>
-    <label class="ods-radio--label" for="radio-moon-mix">The moon</label>
-    <input class="ods-radio" type="radio" name="radio-mix" id="radio-tennis-ball-mix" value="tennis-ball" required>
-    <label class="ods-radio--label" for="radio-tennis-ball-mix">A tennis ball</label>
+    <input class="ods-radio" type="radio" name="overview-disabled" id="overview-disabled" value="0" required disabled>
+    <label class="ods-radio--label" for="overview-disabled">Warp speed</label>
   </fieldset>
-  ```
-</figure>
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Which of the following is the largest?</legend>
-      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-peanut-disabled" value="peanut" required disabled checked>
-      <label class="ods-radio--label" for="radio-peanut-disabled">A peanut</label>
-      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-elephant-disabled" value="elephant" required disabled>
-      <label class="ods-radio--label" for="radio-elephant-disabled">An elephant</label>
-      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-moon-disabled" value="moon" required disabled>
-      <label class="ods-radio--label" for="radio-moon-disabled">The moon</label>
-      <input class="ods-radio" type="radio" name="radio-disabled" id="radio-tennis-ball-disabled" value="tennis-ball" required disabled>
-      <label class="ods-radio--label" for="radio-tennis-ball-disabled">A tennis ball</label>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Which of the following is the largest?</legend>
-    <input class="ods-radio" type="radio" name="radio-disabled" id="radio-peanut-disabled" value="peanut" required disabled checked>
-    <label class="ods-radio--label" for="radio-peanut-disabled">A peanut</label>
-    <input class="ods-radio" type="radio" name="radio-disabled" id="radio-elephant-disabled" value="elephant" required disabled>
-    <label class="ods-radio--label" for="radio-elephant-disabled">An elephant</label>
-    <input class="ods-radio" type="radio" name="radio-disabled" id="radio-moon-disabled" value="moon" required disabled>
-    <label class="ods-radio--label" for="radio-moon-disabled">The moon</label>
-    <input class="ods-radio" type="radio" name="radio-disabled" id="radio-tennis-ball-disabled" value="tennis-ball" required disabled>
-    <label class="ods-radio--label" for="radio-tennis-ball-disabled">A tennis ball</label>
-  </fieldset>
-  ```
-</figure>
-
-### Invalid
-
->The :invalid CSS pseudo-class represents any `<input>` or other `<form>` element whose contents fail to validate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid'>MDN</a></cite>
-
-Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
-
-Note, when indicating a validation error, please use an `.ods-field--error` to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
-
-<figure class="nimatron--example">
-  <div class="nimatron--rendered">
-    <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Which of the following is the largest?</legend>
-      <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-peanut-invalid" value="peanut" required checked>
-      <label class="ods-radio--label" for="radio-peanut-invalid">A peanut</label>
-      <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-elephant-invalid" value="elephant" required>
-      <label class="ods-radio--label" for="radio-elephant-invalid">An elephant</label>
-      <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-moon-invalid" value="moon" required disabled>
-      <label class="ods-radio--label" for="radio-moon">The moon</label>
-      <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-tennis-ball-invalid" value="tennis-ball" required>
-      <label class="ods-radio--label" for="radio-tennis-ball-invalid">A tennis ball</label>
-      <aside class="ods-field--error" id="radio-invalid-error">This selection is invalid.</aside>
-    </fieldset>
-  </div>
-
-  ```html
-  <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Which of the following is the largest?</legend>
-    <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-peanut-invalid" value="peanut" required checked>
-    <label class="ods-radio--label" for="radio-peanut-invalid">A peanut</label>
-    <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-elephant-invalid" value="elephant" required>
-    <label class="ods-radio--label" for="radio-elephant-invalid">An elephant</label>
-    <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-moon-invalid" value="moon" required disabled>
-    <label class="ods-radio--label" for="radio-moon">The moon</label>
-    <input data-invalid class="ods-radio" type="radio" aria-describedby="radio-invalid-error" name="radio-invalid" id="radio-tennis-ball-invalid" value="tennis-ball" required>
-    <label class="ods-radio--label" for="radio-tennis-ball-invalid">A tennis ball</label>
-    <aside class="ods-field--error" id="radio-invalid-error">This selection is invalid.</aside>
-  </fieldset>
-  ```
-</figure>
+</Visual>
 
 ### Optional
 
-> To avoid confusion as to whether a radio button group is required or not, authors are encouraged to specify the attribute on all the radio buttons in a group. - <cite><a href="https://www.w3.org/TR/html5/forms.html#the-required-attribute">W3</a></cite>
+<Description>
+
+Odyssey assumes inputs are required by default. Optional inputs should be used to indicate when data is not required for the user to complete a task.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Select speed  <span class="ods-label--optional">Optional</span></legend>
+    <input class="ods-radio" type="radio" name="overview-optional[]" id="overview-optional-1" value="1">
+    <label class="ods-radio--label" for="overview-optional-1">Lightspeed</label>
+    <input class="ods-radio" type="radio" name="overview-optional[]" id="overview-optional-2" value="2" checked>
+    <label class="ods-radio--label" for="overview-optional-2">Warp Speed</label>
+    <input class="ods-radio" type="radio" name="overview-optional[]" id="overview-optional-3" value="3">
+    <label class="ods-radio--label" for="overview-optional-3">Ludicrous Speed</label>
+  </fieldset>
+</Visual>
+
+### Invalid
+
+<Description>
+
+Radios present as invalid when a required input is left unchecked or an incompatible choice has been made.
+
+When indicating a validation error, please use a Field Error label to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
+
+Unlike Checkboxes, Radios validate as a group, not individually.
+
+</Description>
+
+<Visual>
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Select speed</legend>
+    <input class="ods-radio" type="radio" name="overview-invalid[]" id="overview-invalid-1" value="1" required data-invalid checked>
+    <label class="ods-radio--label" for="overview-invalid-1">Lightspeed</label>
+    <input class="ods-radio" type="radio" name="overview-invalid[]" id="overview-invalid-2" value="2" required data-invalid>
+    <label class="ods-radio--label" for="overview-invalid-2">Warp Speed</label>
+    <input class="ods-radio" type="radio" name="overview-invalid[]" id="overview-invalid-3" value="3" aria-describedby="overview-invalid-error" required data-invalid>
+    <label class="ods-radio--label" for="overview-invalid-3">Ludicrous Speed</label>
+    <aside class="ods-field--error" id="overview-invalid-error"><span class="u-visually-hidden">Error:</span> General relativity forbids it.</aside>
+  </fieldset>
+</Visual>
+
+:::
+
+::: slot html-scss
+
+## Basic example
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <legend class="ods-input-legend">Field label</legend>
+      <input class="ods-radio" type="radio" name="example-0" id="example-0-0" value="value-0" required checked>
+      <label class="ods-radio--label" for="example-0-0">Label 1</label>
+      <input class="ods-radio" type="radio" name="example-0" id="example-0-1" value="value-1" required>
+      <label class="ods-radio--label" for="example-0-1">Label 2</label>
+      <input class="ods-radio" type="radio" name="example-0" id="example-0-2" value="value-2" required>
+      <label class="ods-radio--label" for="example-0-2">Label 3</label>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Field label</legend>
+    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" required checked>
+    <label class="ods-radio--label" for="input-0">Label 1</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" required>
+    <label class="ods-radio--label" for="input-1">Label 2</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" required>
+    <label class="ods-radio--label" for="input-2">Label 3</label>
+  </fieldset>
+  ```
+
+</figure>
+
+## <span class="u-visually-hidden">radio</span> State: Disabled
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <legend class="ods-input-legend">Field label</legend>
+      <input class="ods-radio" type="radio" name="example-1" id="example-1-0" value="value-0" disabled required checked>
+      <label class="ods-radio--label" for="example-1-0">Label 1</label>
+      <input class="ods-radio" type="radio" name="example-1" id="example-1-1" value="value-1" disabled required>
+      <label class="ods-radio--label" for="example-1-1">Label 2</label>
+      <input class="ods-radio" type="radio" name="example-1" id="example-1-2" value="value-2" disabled required>
+      <label class="ods-radio--label" for="example-1-2">Label 3</label>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Field label</legend>
+    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" disabled required checked>
+    <label class="ods-radio--label" for="input-0">Label 1</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" disabled required>
+    <label class="ods-radio--label" for="input-1">Label 2</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" disabled required>
+    <label class="ods-radio--label" for="input-2">Label 3</label>
+  </fieldset>
+  ```
+</figure>
+
+## <span class="u-visually-hidden">radio</span> State: Error
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <fieldset class="ods-fieldset">
+      <legend class="ods-input-legend">Field label</legend>
+      <input class="ods-radio" type="radio" name="example-2" id="example-2-0" value="value-0" aria-describedby="group-name-error" data-invalid required checked>
+      <label class="ods-radio--label" for="example-2-0">Label 1</label>
+      <input class="ods-radio" type="radio" name="example-2" id="example-2-1" value="value-1" data-invalid required>
+      <label class="ods-radio--label" for="example-2-1">Label 2</label>
+      <input class="ods-radio" type="radio" name="example-2" id="example-2-2" value="value-2" data-invalid required>
+      <label class="ods-radio--label" for="example-2-2">Label 3</label>
+      <aside class="ods-field--error" id="group-name-error"><span class="u-visually-hidden">Error:</span> This is an invalid selection.</aside>
+    </fieldset>
+  </div>
+
+  ```html
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Field label</legend>
+    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" aria-describedby="group-name-error" data-invalid required checked>
+    <label class="ods-radio--label" for="input-0">Label 1</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" data-invalid required>
+    <label class="ods-radio--label" for="input-1">Label 2</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" data-invalid required>
+    <label class="ods-radio--label" for="input-2">Label 3</label>
+    <aside class="ods-field--error" id="group-name-error"><span class="u-visually-hidden">Error:</span> This is an invalid selection.</aside>
+  </fieldset>
+  ```
+</figure>
 
 :::
