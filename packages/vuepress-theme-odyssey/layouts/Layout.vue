@@ -74,9 +74,16 @@ export default {
     }
   },
   updated() {
+    const el = document.documentElement;
     const showBanner = window.localStorage.getItem(BANNER_ID) !== "false";
 
     this.showBanner = showBanner && this.$route.path !== "/beta/";
+
+    if (this.showBanner) {
+      el.classList.add("has-ods-beta-banner");
+    } else {
+      el.classList.remove("has-ods-beta-banner");
+    }
   },
   mounted() {
     window.addEventListener("resize", this.handleResize);

@@ -1,6 +1,6 @@
 {
   "name": "@okta/prism-theme-odyssey",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "A Prism.js theme built for Odyssey's documentation site.",
   "private": true,
   "author": "Okta, Inc.",
@@ -10,7 +10,7 @@
     "dev": "webpack-dev-server"
   },
   "dependencies": {
-    "@okta/odyssey": "^0.6.0",
+    "@okta/odyssey": "^0.7.0",
     "prismjs": "^1.14.0"
   },
   "devDependencies": {

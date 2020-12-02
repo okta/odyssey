@@ -100,7 +100,12 @@
   background: var(--docs-page-bg, #{$white});
 
   @include mq(l) {
-    padding-top: $spacing-l + $spacing-m;
+    margin-top: -$spacing-m;
+    padding-top: $spacing-m;
+
+    .has-ods-beta-banner & {
+      top: ms(14);
+    }
   }
 }
 

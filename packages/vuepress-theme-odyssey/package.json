@@ -1,6 +1,6 @@
 {
   "name": "@okta/vuepress-theme-odyssey",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "VuePress theme for Odyssey Documentation",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -20,9 +20,9 @@
     "stylelint-scss": "^3.2.0"
   },
   "dependencies": {
-    "@okta/odyssey": "^0.6.0",
-    "@okta/odyssey-icons": "^0.6.0",
-    "@okta/prism-theme-odyssey": "^0.6.0",
+    "@okta/odyssey": "^0.7.0",
+    "@okta/odyssey-icons": "^0.7.0",
+    "@okta/prism-theme-odyssey": "^0.7.0",
     "focus-trap": "^6.1.3",
     "focus-trap-vue": "https://github.com/arnoldsandoval-okta/focus-trap-vue.git#with-build",
     "vue-fragment": "^1.5.1",
