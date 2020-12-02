@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2020-11-18
+
+### Added
+- ESLint has been added to our test suite
+- Turquoise 400 has been added to the color map
+- Links: added support for Links with Icons
+- dfn: styling and minor guidance for the HTML element
+- figure/figcaption: styling and minor guidance for the HTML element
+- output: styling and minor guidance for the HTML element
+- q: styling and minor guidance for the HTML element
+- samp: styling and minor guidance for the HTML element
+- `vuepress-theme-odyssey` is a new private package containing our brand new docs theme
+- adds `prism-theme-odyssey` package for styling code blocks
+- [Docs] Field Labels: replaces Form documentation and guidelines
+
+### Changed
+- Incosolata is now the default monospace font for Odyssey
+- External link indicator updated
+- [Breaking Change] Modal: `z-index` has been updated from `1` to `10`
+- Tabs: now uses 16px base font instead of 14px
+- Tabs: Border now lives on the tablist, rather than the tabpanel
+- Tabs: `tabpanel` padding updated to match the design
+- Tabs: removed unnecessary `z-index` declaration
+- Tag: `tag--list` now inline-block by default
+- Tag: Background color updated to Gray 100
+- Toast/Modal: Close UI indicator updated to use variant from odyssey-icons
+- [Docs] Content and examples for all components have been rewritten
+
+### Removed
+- Tabs: unused CSS custom properties that were used for moving tab indicator implementation have been removed
+- `vuepress-theme-nimatron` has been removed in favor of `vuepress-theme-odyssey`
+- [Docs] Form docs have been removed in favor of Field Labels
+
+### Fixed
+- Tables and Table wrappers now correctly remove margin if they are the last or only child
+
 ## [0.6.0] - 2020-10-02
 
 ### Added
