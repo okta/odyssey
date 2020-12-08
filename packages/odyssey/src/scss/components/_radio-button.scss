@@ -15,6 +15,8 @@
 /* stylelint-disable no-descending-specificity, max-nesting-depth */
 $size-checkbox: 1em / 0.875;
 
+// OQ: AS, this ^ seems like a variable we could toss / may not be necessary in the new single-baseline world.
+
 .ods-radio {
   @include is-visually-hidden;
 

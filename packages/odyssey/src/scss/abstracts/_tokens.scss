@@ -17,10 +17,12 @@ $body-font-family: 'Whyte', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 
 $mono-font-family: 'Inconsolata', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
 $base-font-size: 14px; // 1rem @ 14px
-$scale-ratio: 1.1487;
+$scale-ratio: 1.1942;
 $base-line-height: 1.7142857;
 $title-line-height: 1.3;
 $max-line-length: 32em;
+
+$type-margin: 1.5em;
 
 // Establish Type Scale
 $size-title-1: ms(5);
@@ -30,7 +32,7 @@ $size-title-4: ms(2);
 $size-title-5: ms(1);
 $size-title-6: ms(0);
 
-$size-body-sentence: ms(1);
+$size-body-sentence: ms(0);
 $size-body-base: ms(0);
 $size-body-caption: ms(-1);
 

@@ -6,7 +6,6 @@ headline: Typography
 lead: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 description: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 ---
-
 ## Hierarchy
 
 <Description>

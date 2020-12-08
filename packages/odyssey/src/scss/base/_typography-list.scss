@@ -16,7 +16,7 @@ ol,
 ul {
   &:not([class]) {
     max-width: $max-line-length;
-    margin: 0 0 $spacing-s 0;
+    margin: 0 0 $type-margin 0;
     padding: 0 0 0 $spacing-m;
     list-style-position: outside;
     font-size: $size-body-sentence;
@@ -48,7 +48,7 @@ dl:not([class]) {
   grid-gap: $spacing-xs $spacing-m;
   grid-template-columns: repeat(2, minmax(min-content, max-content));
   max-width: $max-line-length;
-  margin: 0 0 $spacing-s 0;
+  margin: 0 0 $type-margin 0;
   padding: 0;
   font-size: $size-body-sentence;
 

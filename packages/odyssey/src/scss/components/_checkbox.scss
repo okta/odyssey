@@ -16,6 +16,8 @@
 
 $size-checkbox: 1em / 0.875;
 
+// OQ: AS, this ^ seems like a variable we could toss / may not be necessary in the new single-baseline world.
+
 .ods-checkbox {
   @include is-visually-hidden;
 

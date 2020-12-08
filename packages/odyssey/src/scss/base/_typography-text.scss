@@ -17,6 +17,15 @@ abbr {
   text-decoration: none;
 }
 
+address {
+  max-width: $max-line-length;
+  margin: 0 0 $type-margin;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 em {
   font-style: italic;
 
@@ -46,14 +55,19 @@ sub {
 }
 
 blockquote {
-  margin: 0 0 $spacing-s;
+  max-width: $max-line-length;
+  margin: 0 0 $type-margin;
   padding: 0 0 0 $spacing-s;
   border-left: 3px solid $border-color-display;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 p {
   max-width: $max-line-length;
-  margin-bottom: $spacing-s;
+  margin: 0 0 $type-margin;
   font-size: $size-body-sentence;
 
   details & {
@@ -66,9 +80,14 @@ p {
 }
 
 pre {
+  margin: 0 0 $type-margin;
   font-family: $mono-font-family;
   white-space: pre-wrap;
   tab-size: 2;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 cite {

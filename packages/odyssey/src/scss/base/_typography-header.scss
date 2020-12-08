@@ -18,39 +18,45 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 $spacing-xs 0;
+  margin: 0 0 $spacing-xs-em;
   color: $text-heading;
   font-weight: 600;
+}
+
+h1,
+h2,
+h3 {
   line-height: $title-line-height;
 }
 
-h1 {
-  font-size: ms(5);
-}
-
-h2 {
-  font-size: ms(4);
-}
-
-h3 {
-  font-size: ms(3);
-}
-
-h4 {
-  font-size: ms(2);
-}
-
-h5 {
-  font-size: ms(1);
-}
-
-h6 {
-  font-size: $base-font-size;
-}
-
+h4,
 h5,
 h6 {
   line-height: $base-line-height;
+}
+
+h1 {
+  font-size: $size-title-1;
+}
+
+h2 {
+  font-size: $size-title-2;
+}
+
+h3 {
+  font-size: $size-title-3;
+}
+
+h4 {
+  font-size: $size-title-4;
+}
+
+h5 {
+  font-size: $size-title-5;
+}
+
+h6 {
+  font-size: $size-title-6;
 }
 
 .legalese {
