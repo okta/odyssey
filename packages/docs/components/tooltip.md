@@ -271,7 +271,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
         <OdsIcon icon="edit"></OdsIcon>
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
-        <OdsIcon icon="edit"></OdsIcon>
+        Tooltip label
       </aside>
     </span>
   </div>
