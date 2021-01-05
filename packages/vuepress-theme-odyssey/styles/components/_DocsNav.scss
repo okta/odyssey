@@ -27,7 +27,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 $spacing-xs;
-    font-size: $size-body-sentence;
+    font-size: $size-body-base;
     text-decoration: none;
   }
 
@@ -44,7 +44,7 @@
   display: none;
   margin-bottom: $spacing-s;
 
-  a, 
+  a,
   a:visited {
     padding: 0 $spacing-s;
     padding-left: $spacing-m;

@@ -121,12 +121,6 @@ Odyssey ships with a base font of `14px`. However there are times when different
       </thead>
       <tbody>
         <tr class="type-sample-body">
-          <td class="type-sample-body--token"><code>$size-body-sentence</code></td>
-          <td class="type-sample-body--rem"></td>
-          <td class="type-sample-body--px"></td>
-          <td class="type-sample-body--example">Waltz, bad nymph, for quick jigs vex!</td>
-        </tr>
-        <tr class="type-sample-body">
           <td class="type-sample-body--token"><code>$size-body-base</code></td>
           <td class="type-sample-body--rem"></td>
           <td class="type-sample-body--px"></td>

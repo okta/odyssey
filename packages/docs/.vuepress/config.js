@@ -70,7 +70,7 @@ module.exports = {
       ],
       secondary: [
         { title: 'Updates', link: '/updates/' },
-        { title: 'Roadmap', link: 'https://app.zenhub.com/workspaces/odyssey-5ef0ab09504e9d002794ba2e/roadmap' },
+        { title: 'Roadmap', link: 'https://oktainc.atlassian.net/jira/software/c/projects/OKTA/boards/1104/roadmap' },
         { title: 'Help', link: '/help/' },
       ]
     }

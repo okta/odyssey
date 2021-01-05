@@ -6,7 +6,7 @@
   transition: 0.33s ease-in-out box-shadow;
   border-radius: 0 32px;
   background-color: var(--docs-card-bg, $white);
-  font-size: $size-body-sentence;
+  font-size: $size-body-base;
 
   &.is-docs-card-shadow {
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
@@ -49,7 +49,7 @@
   .docs-card--main {
     flex: 1;
     margin-bottom: $spacing-l;
-    font-size: $size-body-sentence;
+    font-size: $size-body-base;
   }
 
   &.is-docs-card-image-medium {
