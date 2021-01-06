@@ -5506,16 +5506,17 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-"focus-trap-vue@https://github.com/arnoldsandoval-okta/focus-trap-vue.git#with-build":
-  version "1.0.0"
-  resolved "https://github.com/arnoldsandoval-okta/focus-trap-vue.git#898615d7cf2410ff48d4d7ad7be174f40a712ce6"
+focus-trap-vue@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/focus-trap-vue/-/focus-trap-vue-1.1.0.tgz#706c4aaa0f3461f632fbbf04cbe67c89de202d62"
+  integrity sha512-W5ZwxPRNmNB6Vx8gqKR/6SUYhLnpYBzN9yW5xjFj+QD79zA12xkriatq5iHQ8L0PzoCQ9BbfO4Rv313h3PKwiQ==
 
-focus-trap@^6.1.3:
-  version "6.1.3"
-  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-6.1.3.tgz#38b79099bec42b9efa9ee47b646a21033dd030fd"
-  integrity sha512-UXrRlMIZVwLRt4t/fdhExuD3nanc2oHlyJrjbUl01iR2Z59/uPOAj4V9A6k2aelLb/aKb3YKJG+S4HBTrnTWHA==
+focus-trap@^6.2.3:
+  version "6.2.3"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-6.2.3.tgz#1f1443063f08241020d4ffb269bab9847ada97b7"
+  integrity sha512-87orNbj6UqKEDxmqDfYBDLBbqgxNIA5cXUBvHCt7dZ8/L0KTuzkjKoI0xXHU+5TyI9fImqfOJyvEkXYmZeClZA==
   dependencies:
-    tabbable "^5.1.2"
+    tabbable "^5.1.4"
 
 follow-redirects@^1.0.0:
   version "1.13.0"
@@ -11335,10 +11336,10 @@ symbol-observable@^1.2.0:
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
-tabbable@^5.1.2:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-5.1.2.tgz#3c4eac2901d0000913d13ce147229eb1405b59ca"
-  integrity sha512-DNmnX4XgkjK7kxDnQ5IbyYoNke2izMk5b62All0qxzoCF3wE7H9CuZ2IPdfAN8v79E0rpjv2k78uWuIXupGa9g==
+tabbable@^5.1.4:
+  version "5.1.5"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-5.1.5.tgz#efec48ede268d511c261e3b81facbb4782a35147"
+  integrity sha512-oVAPrWgLLqrbvQE8XqcU7CVBq6SQbaIbHkhOca3u7/jzuQvyZycrUKPCGr04qpEIUslmUlULbSeN+m3QrKEykA==
 
 table@^5.0.0, table@^5.2.3:
   version "5.4.6"
