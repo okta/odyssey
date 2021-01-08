@@ -54,7 +54,9 @@ It's ideal to have one Primary Button per view. However, it's okay to have more 
 
 <Visual>
   <template>
-    <button class="ods-button">Launch</button>
+    <button class="ods-button">
+      <span class="ods-button--label">Launch</span>
+    </button>
   </template>
 </Visual>
 
@@ -68,7 +70,9 @@ This is ideal for a secondary actions to compliment the Primary Button. Like the
 
 <Visual>
   <template>
-    <button class="ods-button is-ods-button-secondary">Reschedule launch</button>
+    <button class="ods-button is-ods-button-secondary">
+      <span class="ods-button--label">Reschedule launch</span>
+    </button>
   </template>
 </Visual>
 
@@ -82,7 +86,9 @@ Use Danger Buttons for scenarios where a user may be deleting information or mak
 
 <Visual>
   <template>
-    <button class="ods-button is-ods-button-danger">Jettison oxygen</button>
+    <button class="ods-button is-ods-button-danger">
+      <span class="ods-button--label">Jettison oxygen</span>
+    </button>
   </template>
 </Visual>
 
@@ -98,7 +104,9 @@ They pair well with Primary and Secondary buttons.
 
 <Visual>
   <template>
-    <button class="ods-button is-ods-button-clear">Dismiss</button>
+    <button class="ods-button is-ods-button-clear">
+      <span class="ods-button--label">Dismiss</span>
+    </button>
   </template>
 </Visual>
 
@@ -113,7 +121,9 @@ Use Overlay Buttons when Primary or Secondary variants aren't visually suitable.
 
 <Visual variant="background">
   <template>
-    <button class="ods-button is-ods-button-overlay">Register for Spacecamp</button>
+    <button class="ods-button is-ods-button-overlay">
+      <span class="ods-button--label">Register for Spacecamp</span>
+    </button>
   </template>
 </Visual>
 
@@ -135,7 +145,9 @@ Buttons in their "normal" state are considered enabled. They are ready for user 
 
 <Visual>
   <template>
-    <button class="ods-button">Launch</button>
+    <button class="ods-button">
+      <span class="ods-button--label">Launch</span>
+    </button>
   </template>
 </Visual>
 
@@ -149,7 +161,9 @@ The focus state is a visual affordance that the user has highlighted the Button 
 
 <Visual>
   <template>
-    <button class="ods-button is-ods-button-focus">Launch</button>
+    <button class="ods-button is-ods-button-focus">
+      <span class="ods-button--label">Launch</span>
+    </button>
   </template>
 </Visual>
 
@@ -163,7 +177,9 @@ Hover states are activated when the user pauses their pointer over the Button.
 
 <Visual>
   <template>
-    <button class="ods-button is-ods-button-hover">Launch</button>
+    <button class="ods-button is-ods-button-hover">
+      <span class="ods-button--label">Launch</span>
+    </button>
   </template>
 </Visual>
 
@@ -181,7 +197,7 @@ You should pair Disabled Buttons with a Tooltip if the user would benefit from a
   <template>
     <span class="has-ods-tooltip sample--tip">
       <button class="ods-button" aria-describedby="launch-description" disabled>
-        Launch
+        <span class="ods-button--label">Launch</span>
       </button>
       <aside id="launch-description" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
         Unable to launch before countdown completes.
@@ -200,7 +216,7 @@ Use buttons to indicate the in-page actions a user can take.
 
 <Visual variant="positive">
   <button class="ods-button">
-    Dock shuttle
+    <span class="ods-button--label">Dock shuttle</span>
   </button>
 </Visual>
 
@@ -212,7 +228,7 @@ Don't use buttons to navigate users around the site or product; use links instea
 
 <Visual variant="negative">
   <button class="ods-button is-ods-button-secondary">
-    Visit space FAQ
+    <span class="ods-button--label">Visit space FAQ</span>
   </button>
 </Visual>
 
@@ -230,7 +246,9 @@ Be as direct as possible with the goal you are trying to get the user to do. Avo
 
 <Visual variant="positive">
   <template>
-    <button class="ods-button">Initiate docking</button>
+    <button class="ods-button">
+      <span class="ods-button--label">Initiate docking</span>
+    </button>
   </template>
 </Visual>
 
@@ -242,7 +260,9 @@ Be strategic in your button placement so a user has the best context. For exampl
 
 <Visual variant="negative">
   <template>
-    <button class="ods-button">Go</button>
+    <button class="ods-button">
+      <span class="ods-button--label">Go</span>
+    </button>
   </template>
 </Visual>
 
@@ -256,13 +276,17 @@ Don't use more than three words inside of a button. If a user needs more context
 
 <Visual variant="positive">
   <template>
-    <button class="ods-button">Initiate docking</button>
+    <button class="ods-button">
+      <span class="ods-button--label">Initiate docking</span>
+    </button>
   </template>
 </Visual>
 
 <Visual variant="negative">
   <template>
-    <button class="ods-button">Initiate standard docking procedure</button>
+    <button class="ods-button">
+      <span class="ods-button--label">Initiate standard docking procedure</span>
+    </button>
   </template>
 </Visual>
 
@@ -276,13 +300,17 @@ When using multiple words, use sentence case. Capitalize only the first letter a
 
 <Visual variant="positive">
   <template>
-    <button class="ods-button">Initiate docking</button>
+    <button class="ods-button">
+      <span class="ods-button--label">Initiate docking</span>
+    </button>
   </template>
 </Visual>
 
 <Visual variant="negative">
   <template>
-    <button class="ods-button">Initiate Docking</button>
+    <button class="ods-button">
+      <span class="ods-button--label">Initiate Docking</span>
+    </button>
   </template>
 </Visual>
 
@@ -298,7 +326,7 @@ Icons can be added to any of our button variants to increase clarity or add flai
   <template>
     <button class="ods-button">
       <OdsIcon icon="settings" />
-      Configure console
+      <span class="ods-button--label">Configure console</span>
     </button>
   </template>
 </Visual>
@@ -318,7 +346,7 @@ We recommend pairing icon-only buttons with our Tooltip. While this is not requi
         <OdsIcon icon="settings" />
       </button>
       <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
-        Configure console
+        <span class="ods-button--label">Configure console</span>
       </aside>
     </span>
   </template>
@@ -360,15 +388,27 @@ Color is not a clear affordance for all users, please use clear, concise copy to
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <button class="ods-button">Primary</button>
-    <button class="ods-button is-ods-button-hover">Hover</button>
-    <button class="ods-button is-ods-button-focus">Focus</button>
-    <button class="ods-button" disabled>Disabled</button>
+    <button class="ods-button">
+      <span class="ods-button--label">Primary</span>
+    </button>
+    <button class="ods-button is-ods-button-hover">
+      <span class="ods-button--label">Hover</span>
+    </button>
+    <button class="ods-button is-ods-button-focus">
+      <span class="ods-button--label">Focus</span>
+    </button>
+    <button class="ods-button" disabled>
+      <span class="ods-button--label">Disabled</span>
+    </button>
   </div>
 
   ```html
-  <button class="ods-button">Primary</button>
-  <button class="ods-button" disabled>Primary</button>
+  <button class="ods-button">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button" disabled>
+    <span class="ods-button--label">Primary</span>
+  </button>
   ```
 </figure>
 
@@ -376,15 +416,27 @@ Color is not a clear affordance for all users, please use clear, concise copy to
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <button class="ods-button is-ods-button-secondary">Default</button>
-    <button class="ods-button is-ods-button-secondary is-ods-button-hover">Hover</button>
-    <button class="ods-button is-ods-button-secondary is-ods-button-focus">Focus</button>
-    <button class="ods-button is-ods-button-secondary" disabled>Disabled</button>
+    <button class="ods-button is-ods-button-secondary">
+      <span class="ods-button--label">Default</span>
+    </button>
+    <button class="ods-button is-ods-button-secondary is-ods-button-hover">
+      <span class="ods-button--label">Hover</span>
+    </button>
+    <button class="ods-button is-ods-button-secondary is-ods-button-focus">
+      <span class="ods-button--label">Focus</span>
+    </button>
+    <button class="ods-button is-ods-button-secondary" disabled>
+      <span class="ods-button--label">Disabled</span>
+    </button>
   </div>
 
   ```html
-  <button class="ods-button is-ods-button-secondary">Default</button>
-  <button class="ods-button is-ods-button-secondary" disabled>Default</button>
+  <button class="ods-button is-ods-button-secondary">
+    <span class="ods-button--label">Default</span>
+  </button>
+  <button class="ods-button is-ods-button-secondary" disabled>
+    <span class="ods-button--label">Default</span>
+  </button>
   ```
 </figure>
 
@@ -392,15 +444,27 @@ Color is not a clear affordance for all users, please use clear, concise copy to
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <button class="ods-button is-ods-button-danger">Danger</button>
-    <button class="ods-button is-ods-button-danger is-ods-button-hover">Hover</button>
-    <button class="ods-button is-ods-button-danger is-ods-button-focus">Focus</button>
-    <button class="ods-button is-ods-button-danger" disabled>Disabled</button>
+    <button class="ods-button is-ods-button-danger">
+      <span class="ods-button--label">Danger</span>
+    </button>
+    <button class="ods-button is-ods-button-danger is-ods-button-hover">
+      <span class="ods-button--label">Hover</span>
+    </button>
+    <button class="ods-button is-ods-button-danger is-ods-button-focus">
+      <span class="ods-button--label">Focus</span>
+    </button>
+    <button class="ods-button is-ods-button-danger" disabled>
+      <span class="ods-button--label">Disabled</span>
+    </button>
   </div>
 
   ```html
-  <button class="ods-button is-ods-button-danger">Danger</button>
-  <button class="ods-button is-ods-button-danger" disabled>Danger</button>
+  <button class="ods-button is-ods-button-danger">
+    <span class="ods-button--label">Danger</span>
+  </button>
+  <button class="ods-button is-ods-button-danger" disabled>
+    <span class="ods-button--label">Danger</span>
+  </button>
   ```
 </figure>
 
@@ -408,15 +472,27 @@ Color is not a clear affordance for all users, please use clear, concise copy to
 
 <figure class="docs-example">
   <div class="docs-example--rendered is-rendered-success">
-    <button class="ods-button is-ods-button-overlay">Overlay</button>
-    <button class="ods-button is-ods-button-overlay is-ods-button-hover">Hover</button>
-    <button class="ods-button is-ods-button-overlay is-ods-button-focus">Focus</button>
-    <button class="ods-button is-ods-button-overlay" disabled>Disabled</button>
+    <button class="ods-button is-ods-button-overlay">
+      <span class="ods-button--label">Overlay</span>
+    </button>
+    <button class="ods-button is-ods-button-overlay is-ods-button-hover">
+      <span class="ods-button--label">Hover</span>
+    </button>
+    <button class="ods-button is-ods-button-overlay is-ods-button-focus">
+      <span class="ods-button--label">Focus</span>
+    </button>
+    <button class="ods-button is-ods-button-overlay" disabled>
+      <span class="ods-button--label">Disabled</span>
+    </button>
   </div>
 
   ```html
-  <button class="ods-button is-ods-button-overlay">Overlay</button>
-  <button class="ods-button is-ods-button-overlay" disabled>Overlay</button>
+  <button class="ods-button is-ods-button-overlay">
+    <span class="ods-button--label">Overlay</span>
+  </button>
+  <button class="ods-button is-ods-button-overlay" disabled>
+    <span class="ods-button--label">Overlay</span>
+  </button>
   ```
 </figure>
 
@@ -424,15 +500,27 @@ Color is not a clear affordance for all users, please use clear, concise copy to
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <button class="ods-button is-ods-button-clear">Clear</button>
-    <button class="ods-button is-ods-button-clear is-ods-button-hover">Hover</button>
-    <button class="ods-button is-ods-button-clear is-ods-button-focus">Focus</button>
-    <button class="ods-button is-ods-button-clear" disabled>Disabled</button>
+    <button class="ods-button is-ods-button-clear">
+      <span class="ods-button--label">Clear</span>
+    </button>
+    <button class="ods-button is-ods-button-clear is-ods-button-hover">
+      <span class="ods-button--label">Hover</span>   
+    </button>
+    <button class="ods-button is-ods-button-clear is-ods-button-focus">
+      <span class="ods-button--label">Focus</span>   
+    </button>
+    <button class="ods-button is-ods-button-clear" disabled>
+      <span class="ods-button--label">Disabled</span>   
+    </button>
   </div>
 
   ```html
-  <button class="ods-button is-ods-button-clear">Clear</button>
-  <button class="ods-button is-ods-button-clear" disabled>Clear</button>
+  <button class="ods-button is-ods-button-clear">
+    <span class="ods-button--label">Clear</span>
+  </button>
+  <button class="ods-button is-ods-button-clear" disabled>
+    <span class="ods-button--label">Clear</span>
+  </button>
   ```
 </figure>
 
@@ -450,7 +538,7 @@ When using icons within a button, be sure to add `focusable="false"` to the SVG;
   <div class="docs-example--rendered">
     <button class="ods-button">
       <OdsIcon role="presentation" icon="get-info" focusable="false" />
-      Button label
+      <span class="ods-button--label">Button label</span>
     </button>
   </div>  
 
@@ -458,7 +546,7 @@ When using icons within a button, be sure to add `focusable="false"` to the SVG;
   <div class="docs-example--rendered">
     <button class="ods-button">
       <svg class="ods-icon" role="presentation" focusable="false">...</svg>
-      Button label
+      <span class="ods-button--label">Button label</span>
     </button>
   </div>
   ```
@@ -469,14 +557,15 @@ When using icons within a button, be sure to add `focusable="false"` to the SVG;
 
 <Description>
 
-If your button does not have a visual label, be sure to use the `aria-label` attribute to ensure screen readers will correctly identify it. Additionally, the use of the presentation role on the icon SVG enables decorative icons to be ignored by screen readers without compromising the accessibility of informative icons.
+If your button does not have a visual label, be sure to apply the `u-visually-hidden` utility class to ensure screen readers can provide the necessary context to a user. Additionally, the use of the `presentation` role on the icon SVG enables decorative icons to be ignored by screen readers without compromising the accessibility of informative icons.
 
 </Description>
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <button aria-label="Button label" class="ods-button">
+    <button class="ods-button">
       <OdsIcon role="presentation" icon="edit" focusable="false" />
+      <span class="ods-button--label u-visually-hidden">Button label</span>
     </button>
   </div>
 
@@ -484,6 +573,7 @@ If your button does not have a visual label, be sure to use the `aria-label` att
   <div class="docs-example--rendered">
     <button aria-label="Button label" class="ods-button">
       <svg class="ods-icon" role="presentation" focusable="false">...</svg>
+      <span class="ods-button--label u-visually-hidden">Button label</span>
     </button>
   </div>
   ```
