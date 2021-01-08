@@ -6,7 +6,6 @@ headline: Typography
 lead: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 description: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 ---
-
 ## Hierarchy
 
 <Description>
@@ -121,12 +120,6 @@ Odyssey ships with a base font of `14px`. However there are times when different
         </tr>
       </thead>
       <tbody>
-        <tr class="type-sample-body">
-          <td class="type-sample-body--token"><code>$size-body-sentence</code></td>
-          <td class="type-sample-body--rem"></td>
-          <td class="type-sample-body--px"></td>
-          <td class="type-sample-body--example">Waltz, bad nymph, for quick jigs vex!</td>
-        </tr>
         <tr class="type-sample-body">
           <td class="type-sample-body--token"><code>$size-body-base</code></td>
           <td class="type-sample-body--rem"></td>

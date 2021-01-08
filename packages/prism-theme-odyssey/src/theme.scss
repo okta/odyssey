@@ -3,7 +3,7 @@
 @import '@okta/odyssey/src/scss/abstracts/_tokens';
 
 :root {
-  --font-size: #{$size-body-sentence};
+  --font-size: #{$size-body-base};
   --inlineCodeColor: #{cv('purple', '500')};
   --inlineCodeBackground: #{cv('red', '300')};
   --blockBackground: #{cv('gray', '000')};

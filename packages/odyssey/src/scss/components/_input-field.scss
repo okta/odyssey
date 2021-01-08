@@ -105,15 +105,15 @@
 
 /* stylelint-disable-next-line no-descending-specificity  */
 .ods-input-legend {
-  margin: 0 0 $spacing-xs;
+  margin: 0 0 $spacing-xs-em;
   color: $text-heading;
   font-size: $size-body-base;
   font-weight: 600;
 }
 
 .ods-group-legend {
-  margin: 0 0 $spacing-s;
+  margin: 0 0 $spacing-xs-em;
   color: $text-heading;
-  font-size: $size-body-sentence;
+  font-size: $size-title-5;
   font-weight: 600;
 }
