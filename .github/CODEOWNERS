@@ -9,8 +9,9 @@
 # Resources
 #  - [CODEOWNERS] https://help.github.com/articles/about-codeowners
 
-*               @okta/design-system
+*                      @okta/design-system
 
-package.json    @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan @nikhilvenkatraman-okta
-lerna.json      @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan @nikhilvenkatraman-okta
-yarn.lock       @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan @nikhilvenkatraman-okta
+package.json           @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan @nikhilvenkatraman-okta
+lerna.json             @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan @nikhilvenkatraman-okta
+yarn.lock              @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan @nikhilvenkatraman-okta
+/.github/workflows/    @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan @nikhilvenkatraman-okta
