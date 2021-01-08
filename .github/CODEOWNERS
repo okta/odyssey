@@ -11,6 +11,6 @@
 
 *               @okta/design-system
 
-package.json    @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan
-lerna.json      @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan
-yarn.lock       @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan
+package.json    @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan @nikhilvenkatraman-okta
+lerna.json      @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan @nikhilvenkatraman-okta
+yarn.lock       @rajaguruduraisamy-okta @ganeshsomasundaram-okta @jmelberg-okta @jeffbelser-okta @santhoshbalakrishnan @nikhilvenkatraman-okta
