@@ -20,7 +20,7 @@
 .docs-page-header--links {
   grid-column: 2 / 3;
   grid-row: 1 / 3;
-  font-size: ms(0);
+  font-size: $size-body-base;
 
   @include mq(m) {
     margin: $spacing-m 0;

@@ -14,9 +14,14 @@
 
 .ods-form {
   max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m} + 2px);
+  margin: 0 0 $spacing-m;
   padding: $spacing-m;
   border: 1px solid $border-color-display;
   border-radius: $base-border-radius;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .ods-form--header {
@@ -27,7 +32,7 @@
 }
 
 .ods-form--title {
-  margin: 0;
+  margin: $spacing-xs-em;
   padding: 0;
   color: $text-heading;
   font-size: $size-title-4;

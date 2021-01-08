@@ -168,7 +168,8 @@
 
 .ods-table--figure {
   max-width: 100%;
-  margin: 0 0 $spacing-m;
+  margin: 0 0 $type-margin;
+  // OQ: Type margin or fixed margin?
   overflow-x: auto;
 
   &:last-child {
@@ -176,7 +177,7 @@
   }
 
   .ods-table--figcaption {
-    margin-bottom: $spacing-s;
+    margin-bottom: $spacing-xs-em;
     color: $text-heading;
     font-size: $size-title-4;
     font-weight: 600;

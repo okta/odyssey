@@ -13,7 +13,6 @@
 // limitations under the License.
 
 /* stylelint-disable no-descending-specificity, max-nesting-depth */
-$size-checkbox: 1em / 0.875;
 
 .ods-radio {
   @include is-visually-hidden;
@@ -129,7 +128,7 @@ $size-checkbox: 1em / 0.875;
   display: block;
   position: relative;
   margin-bottom: $spacing-xs;
-  padding-left: $size-checkbox + $spacing-s-em;
+  padding-left: 1em + $spacing-s-em;
   font-size: $size-body-base;
   font-weight: 400;
   text-align: left;
@@ -141,8 +140,8 @@ $size-checkbox: 1em / 0.875;
     position: absolute;
     top: 50%;
     left: 0;
-    width: $size-checkbox;
-    height: $size-checkbox;
+    width: 1em;
+    height: 1em;
     transition-property: border-color, background, opacity, box-shadow;
     transition-duration: $base-duration;
     transition-timing-function: $base-timing;
