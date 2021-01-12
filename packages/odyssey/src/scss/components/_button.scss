@@ -177,3 +177,8 @@
 .is-ods-button-small {
   @extend %button-small;
 }
+
+.is-ods-button-full-width {
+  display: block;
+  width: 100%;
+}

@@ -127,6 +127,24 @@ Use Overlay Buttons when Primary or Secondary variants aren't visually suitable.
   </template>
 </Visual>
 
+### Full-width
+
+<Description>
+
+Full-width buttons are intended for single-interaction UIs. These are often widgets like "Sign In" or "Sign Up".
+
+Use this variant when you desire the Button to be full-width regardless of screen size.
+
+</Description>
+
+<Visual content="full">
+  <template>
+    <button class="ods-button is-ods-button-full-width">
+      <span class="ods-button--label">Sign up for Space Camp</span>
+    </button>
+  </template>
+</Visual>
+
 ## States
 
 <Description>
@@ -504,13 +522,13 @@ Color is not a clear affordance for all users, please use clear, concise copy to
       <span class="ods-button--label">Clear</span>
     </button>
     <button class="ods-button is-ods-button-clear is-ods-button-hover">
-      <span class="ods-button--label">Hover</span>   
+      <span class="ods-button--label">Hover</span>
     </button>
     <button class="ods-button is-ods-button-clear is-ods-button-focus">
-      <span class="ods-button--label">Focus</span>   
+      <span class="ods-button--label">Focus</span>
     </button>
     <button class="ods-button is-ods-button-clear" disabled>
-      <span class="ods-button--label">Disabled</span>   
+      <span class="ods-button--label">Disabled</span>
     </button>
   </div>
 
@@ -520,6 +538,22 @@ Color is not a clear affordance for all users, please use clear, concise copy to
   </button>
   <button class="ods-button is-ods-button-clear" disabled>
     <span class="ods-button--label">Clear</span>
+  </button>
+  ```
+</figure>
+
+## Full-width
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <button class="ods-button is-ods-button-full-width">
+      <span class="ods-button--label">Sign up for Space Camp</span>
+    </button>
+  </div>
+
+  ```html
+  <button class="ods-button is-ods-button-full-width">
+    <span class="ods-button--label">Sign up for Space Camp</span>
   </button>
   ```
 </figure>
@@ -540,7 +574,7 @@ When using icons within a button, be sure to add `focusable="false"` to the SVG;
       <OdsIcon role="presentation" icon="get-info" focusable="false" />
       <span class="ods-button--label">Button label</span>
     </button>
-  </div>  
+  </div>
 
   ```html
   <div class="docs-example--rendered">
