@@ -17,4 +17,12 @@
   & + & {
     margin-left: $spacing-s;
   }
+
+  &.is-ods-button-full-width {
+    margin: 0;
+
+    &:not(:last-child) {
+      margin-bottom: $spacing-s;
+    }
+  }
 }
