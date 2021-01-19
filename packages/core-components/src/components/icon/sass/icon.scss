@@ -1,0 +1,42 @@
+@import '../../../../../odyssey/src/scss/base/reset';
+@import 'variables-icon-unicode';
+
+$icon-sizes: (
+  x-small:  14px,
+  small:    16px,
+  medium:   24px,
+  large:    32px,
+  x-large:  48px
+);
+
+@import 'classes';
+
+  // Size classes
+  @each $name, $value in $icon-sizes {
+    .o-icon-size-#{$name} {
+      height: $value;
+      width: $value;
+      font-size: $value;
+    }
+  }
+
+  .o-icon {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    box-sizing: border-box;
+
+    &::before, &::after {
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      display: block;
+      font-family: 'okticon';
+      font-smoothing: antialiased;
+      font-style: normal !important;
+      font-weight: 300 !important;
+      position: absolute;
+      speak: none;
+      text-indent: 0;
+      white-space: normal;
+    }
+  }

@@ -1,0 +1,34 @@
+{
+  "name": "@okta/core.components",
+  "version": "0.0.1",
+  "license": "UNLICENSED",
+  "module": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "stencil-component build",
+    "e2e": "stencil-component e2e",
+    "stencil-e2e-report": "stencil-component e2e --coverage --verbose",
+    "start": "PORT=9002 stencil-component start",
+    "eyes": "eyes-storybook --storybookUrl http://localhost:9002/ --waitBeforeScreenshot 2000"
+  },
+  "devDependencies": {
+    "@a11y/focus-trap": "^1.0.5",
+    "@applitools/eyes-storybook": "^2.7.31",
+    "@okta/build-profiles.stencil-component": "0.0.0",
+    "@okta/font": "0.1.0-beta.4322.g65a2415",
+    "@okta/odyssey": "*",
+    "@types/jest": "^26.0.15",
+    "axe-puppeteer": "^1.1.0",
+    "choices.js": "9.0.1",
+    "classnames": "^2.2.6",
+    "jest": "24.9.0",
+    "jest-axe": "^3.4.0",
+    "jest-cli": "24.9.0",
+    "jest-config": "24.9.0"
+  }
+}

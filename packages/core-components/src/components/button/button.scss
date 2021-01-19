@@ -1,0 +1,9 @@
+@import '../../../../odyssey/src/scss/base/reset';
+@import '../../../../odyssey/src/scss/base/typography-link';
+@import '../../../../odyssey/src/scss/components/button';
+
+// Adding width to inherit from parent to support @okta/admin-app
+// search bar which is created using o-button to span whole width
+.ods-button {
+  width: inherit;
+}

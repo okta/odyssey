@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`o-icon Props defaults defaults to size=small 1`] = `
+<o-icon class="hydrated" name="info">
+  <mock:shadow-root>
+    <span class="o-icon o-icon-info o-icon-size-small" data-se="icon"></span>
+  </mock:shadow-root>
+</o-icon>
+`;
+
+exports[`o-icon Props name uses name to generate the className 1`] = `
+<o-icon class="hydrated" name="warning">
+  <mock:shadow-root>
+    <span class="o-icon o-icon-size-small o-icon-warning" data-se="icon"></span>
+  </mock:shadow-root>
+</o-icon>
+`;
+
+exports[`o-icon Props size can be "large" 1`] = `
+<o-icon class="hydrated" name="info" size="large">
+  <mock:shadow-root>
+    <span class="o-icon o-icon-info o-icon-size-large" data-se="icon"></span>
+  </mock:shadow-root>
+</o-icon>
+`;
+
+exports[`o-icon Props size can be "medium" 1`] = `
+<o-icon class="hydrated" name="info" size="medium">
+  <mock:shadow-root>
+    <span class="o-icon o-icon-info o-icon-size-medium" data-se="icon"></span>
+  </mock:shadow-root>
+</o-icon>
+`;
+
+exports[`o-icon Props size can be "small" 1`] = `
+<o-icon class="hydrated" name="info" size="small">
+  <mock:shadow-root>
+    <span class="o-icon o-icon-info o-icon-size-small" data-se="icon"></span>
+  </mock:shadow-root>
+</o-icon>
+`;
+
+exports[`o-icon Props size can be "x-large" 1`] = `
+<o-icon class="hydrated" name="info" size="x-large">
+  <mock:shadow-root>
+    <span class="o-icon o-icon-info o-icon-size-x-large" data-se="icon"></span>
+  </mock:shadow-root>
+</o-icon>
+`;
+
+exports[`o-icon Props size can be "x-small" 1`] = `
+<o-icon class="hydrated" name="info" size="x-small">
+  <mock:shadow-root>
+    <span class="o-icon o-icon-info o-icon-size-x-small" data-se="icon"></span>
+  </mock:shadow-root>
+</o-icon>
+`;

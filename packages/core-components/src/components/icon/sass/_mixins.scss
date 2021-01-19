@@ -1,0 +1,8 @@
+@mixin icon($position, $icon, $rotation: 0) {
+  &::#{$position} {
+    content: map-get($icon-unicode, $icon);
+    @if $rotation != 0 {
+      transform: rotate(#{$rotation}deg);
+    }
+  }
+}
