@@ -58,7 +58,7 @@
   margin: 0;
   padding-right: $spacing-m;
   color: $white;
-  font-size: ms(1);
+  font-size: $size-body-base;
   font-weight: 600;
   line-height: $base-line-height;
 }
@@ -87,7 +87,7 @@
 .ods-toast--body {
   grid-column: 2;
   margin-bottom: 0;
-  font-size: ms(1);
+  font-size: $size-body-base;
 }
 
 .is-ods-toast-success {

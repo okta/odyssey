@@ -55,6 +55,7 @@ module.exports = {
             { title: 'Link', link: '/components/link/' },
             { title: 'Modal', link: '/components/modal/' },
             { title: 'Radio Button', link: '/components/radio-button/' },
+            { title: 'Section Message', link: '/components/section-message/' },
             { title: 'Select', link: '/components/select/' },
             { title: 'Status', link: '/components/status/' },
             { title: 'Tab', link: '/components/tab/' },
