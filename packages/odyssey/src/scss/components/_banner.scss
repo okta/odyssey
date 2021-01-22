@@ -60,15 +60,15 @@
 }
 
 .is-ods-banner-success {
-  background-color: cv('green', '500');
-  color: $text-body;
+  background-color: cv('green', '600');
+  color: $white;
 
   .ods-banner--title {
-    color: $text-body;
+    color: $white;
   }
 
   a {
-    color: $text-body;
+    color: $white;
   }
 }
 
