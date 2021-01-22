@@ -24,6 +24,12 @@ links:
 
 ## Behavior
 
+<Description>
+
+This component may be present on load or triggered by different types of events, but they are not transient or dismissable. These messages are best used when additional in-page context is required.
+
+</Description>
+
 ## Variants
 
 ### Success
@@ -244,7 +250,13 @@ Use Danger messages to inform users that an error has occurred. This showcases i
 
 ## Usage
 
+These messages are designed for use both on page load and dynamically. For instance, a Form may include a Caution message if the user should be aware of specific context up front. Alternately, the Danger variant may be used on Form submission to surface an error.
+
+Section messages allow for both inline and sectioned links. In order to preserve clarity for users, please do not combine them.
+
 ## Content Guidelines
+
+These messages may be used for longer content than Toast or Banner, but shouldn't go beyond two paragraphs. When including an inline link or action, be sure the link text clearly indicates where it leads.
 
 ## Accessibility
 
@@ -254,6 +266,7 @@ Use Danger messages to inform users that an error has occurred. This showcases i
 
 <Description>
 
+- <a href="/components/banner">Banner</a>
 - <a href="/components/toast">Toast</a>
 
 </Description>
