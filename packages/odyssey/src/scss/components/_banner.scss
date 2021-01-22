@@ -14,14 +14,19 @@
 
 .ods-banner {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: $spacing-s;
+  padding: $spacing-s $spacing-m;
 
   a {
     text-decoration: underline;
   }
+}
+
+.is-ods-banner-dismissable {
+  padding: $spacing-s $spacing-l $spacing-s $spacing-m;
 }
 
 .ods-banner--icon {
@@ -31,8 +36,7 @@
 }
 
 .ods-banner--title {
-  display: none;
-  margin: 0;
+  margin: 0 $spacing-xs 0 0;
   font-size: $size-title-6;
 }
 
@@ -46,38 +50,63 @@
   justify-content: end;
 }
 
+.ods-banner--dismiss {
+  position: absolute;
+  right: $spacing-m;
+  width: $base-font-size;
+  height: $base-font-size;
+  margin: 0 0 0 $spacing-m;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .is-ods-banner-info {
-  background-color: cv('blue', '500');
-  color: $white;
-
-  .ods-banner--title {
-    color: $white;
-  }
-
-  a {
-    color: $white;
-  }
-}
-
-.is-ods-banner-success {
-  background-color: cv('green', '600');
-  color: $white;
-
-  .ods-banner--title {
-    color: $white;
-  }
-
-  a {
-    color: $white;
-  }
-}
-
-.is-ods-banner-caution {
-  background-color: cv('yellow', '500');
+  background-color: cv('blue', '300');
   color: $text-body;
 
   .ods-banner--title {
     color: $text-body;
+  }
+
+  .ods-banner--dismiss {
+    background-image: get-icon('close', $text-body);
+  }
+
+  a {
+    color: $text-body;
+  }
+}
+
+.is-ods-banner-success {
+  background-color: cv('green', '300');
+  color: $text-body;
+
+  .ods-banner--title {
+    color: $text-body;
+  }
+
+  .ods-banner--dismiss {
+    background-image: get-icon('close', $text-body);
+  }
+
+  a {
+    color: $text-body;
+  }
+}
+
+.is-ods-banner-caution {
+  background-color: cv('yellow', '300');
+  color: $text-body;
+
+  .ods-banner--title {
+    color: $text-body;
+  }
+
+  .ods-banner--dismiss {
+    background-image: get-icon('close', $text-body);
   }
 
   a {
@@ -86,14 +115,18 @@
 }
 
 .is-ods-banner-danger {
-  background-color: cv('red', '500');
-  color: $white;
+  background-color: cv('red', '300');
+  color: $text-body;
 
   .ods-banner--title {
-    color: $white;
+    color: $text-body;
+  }
+
+  .ods-banner--dismiss {
+    background-image: get-icon('close', $text-body);
   }
 
   a {
-    color: $white;
+    color: $text-body;
   }
 }

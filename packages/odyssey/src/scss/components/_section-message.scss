@@ -22,6 +22,11 @@
   width: 100%;
   padding: $spacing-s;
   column-gap: $spacing-s;
+
+  a {
+    color: $text-body;
+    text-decoration: underline;
+  }
 }
 
 .ods-section-message--icon {
@@ -34,7 +39,7 @@
 
 .ods-section-message--title {
   grid-area: title;
-  font-size: $size-title-5;
+  font-size: $size-title-6;
 }
 
 .ods-section-message--content {
@@ -77,13 +82,6 @@
 
   .ods-section-message--icon {
     color: cv('red', '500');
-  }
-}
-
-.is-ods-section-message-blv {
-  a {
-    color: $text-body;
-    text-decoration: underline;
   }
 }
 

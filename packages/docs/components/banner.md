@@ -38,7 +38,42 @@ Use Info Banners to surface neutral information to users.
   <template>
     <aside class="ods-banner is-ods-banner-info">
       <span class="ods-banner--icon">
-        <OdsIcon icon="complete"></OdsIcon>
+        <OdsIcon icon="get-info"></OdsIcon>
+      </span>
+      <h1 class="ods-banner--title">New launch scheduled</h1>
+      <p class="ods-banner--content">
+        The mission to Sagitarius A has been set for January 7.
+      </p>
+      <section class="ods-banner--actions">
+        <a href="#">View itinerary</a>
+      </section>
+      <button class="ods-banner--dismiss" aria-label="Dismiss banner"></button>
+    </aside>
+  </template>
+</Visual>
+
+<Visual layout="wide" content="full">
+  <template>
+    <aside class="ods-banner is-ods-banner-info">
+      <span class="ods-banner--icon">
+        <OdsIcon icon="get-info"></OdsIcon>
+      </span>
+      <p class="ods-banner--content">
+        The mission to Sagitarius A has been set for January 7.
+      </p>
+      <section class="ods-banner--actions">
+        <a href="#">View itinerary</a>
+      </section>
+      <button class="ods-banner--dismiss" aria-label="Dismiss banner"></button>
+    </aside>
+  </template>
+</Visual>
+
+<Visual layout="wide" content="full">
+  <template>
+    <aside class="ods-banner is-ods-banner-info">
+      <span class="ods-banner--icon">
+        <OdsIcon icon="get-info"></OdsIcon>
       </span>
       <h1 class="ods-banner--title">New launch scheduled</h1>
       <p class="ods-banner--content">
@@ -51,26 +86,17 @@ Use Info Banners to surface neutral information to users.
   </template>
 </Visual>
 
-### Success
-
-<Description>
-
-Used for reporting successful actions, results, or states to the user.
-
-</Description>
-
 <Visual layout="wide" content="full">
   <template>
-    <aside class="ods-banner is-ods-banner-success">
+    <aside class="ods-banner is-ods-banner-info">
       <span class="ods-banner--icon">
-        <OdsIcon icon="complete"></OdsIcon>
+        <OdsIcon icon="get-info"></OdsIcon>
       </span>
-      <h1 class="ods-banner--title">Ready for lift-off</h1>
       <p class="ods-banner--content">
-        The Galactica is prepped for departure at your leisure.
+        The mission to Sagitarius A has been set for January 7.
       </p>
       <section class="ods-banner--actions">
-        <a href="#">View hangar controls</a>
+        <a href="#">View itinerary</a>
       </section>
     </aside>
   </template>
@@ -84,9 +110,42 @@ Used to inform users of tasks or processes that may need their attention.
 
 When using the Caution variant, ensure the user does not need more context than you can give in the space available.
 
-
-
 </Description>
+
+<Visual layout="wide" content="full">
+  <template>
+    <aside class="ods-banner is-ods-banner-caution is-ods-banner-dismissable">
+      <span class="ods-banner--icon">
+        <OdsIcon icon="caution"></OdsIcon>
+      </span>
+      <h1 class="ods-banner--title">Safety checks incomplete</h1>
+      <p class="ods-banner--content">
+        Severe solar winds detected. Local system flights may be delayed.
+      </p>
+      <section class="ods-banner--actions">
+        <a href="#">View reports</a>
+      </section>
+      <button class="ods-banner--dismiss" aria-label="Dismiss banner"></button>
+    </aside>
+  </template>
+</Visual>
+
+<Visual layout="wide" content="full">
+  <template>
+    <aside class="ods-banner is-ods-banner-caution is-ods-banner-dimissable">
+      <span class="ods-banner--icon">
+        <OdsIcon icon="caution"></OdsIcon>
+      </span>
+      <p class="ods-banner--content">
+        Severe solar winds detected. Local system flights may be delayed.
+      </p>
+      <section class="ods-banner--actions">
+        <a href="#">View reports</a>
+      </section>
+      <button class="ods-banner--dismiss" aria-label="Dismiss banner"></button>
+    </aside>
+  </template>
+</Visual>
 
 <Visual layout="wide" content="full">
   <template>
@@ -95,6 +154,22 @@ When using the Caution variant, ensure the user does not need more context than 
         <OdsIcon icon="caution"></OdsIcon>
       </span>
       <h1 class="ods-banner--title">Safety checks incomplete</h1>
+      <p class="ods-banner--content">
+        Severe solar winds detected. Local system flights may be delayed.
+      </p>
+      <section class="ods-banner--actions">
+        <a href="#">View reports</a>
+      </section>
+    </aside>
+  </template>
+</Visual>
+
+<Visual layout="wide" content="full">
+  <template>
+    <aside class="ods-banner is-ods-banner-caution">
+      <span class="ods-banner--icon">
+        <OdsIcon icon="caution"></OdsIcon>
+      </span>
       <p class="ods-banner--content">
         Severe solar winds detected. Local system flights may be delayed.
       </p>
@@ -126,6 +201,57 @@ Use Danger messages to inform users that an error has occurred.
       <section class="ods-banner--actions">
         <a href="#">Seal bulkhead doors</a>
       </section>
+      <button class="ods-banner--dismiss" aria-label="Dismiss banner"></button>
+    </aside>
+  </template>
+</Visual>
+
+<Visual layout="wide" content="full">
+  <template>
+    <aside class="ods-banner is-ods-banner-danger">
+      <span class="ods-banner--icon">
+        <OdsIcon icon="error"></OdsIcon>
+      </span>
+      <p class="ods-banner--content">
+        Hangar 18 has been compromised.
+      </p>
+      <section class="ods-banner--actions">
+        <a href="#">Seal bulkhead doors</a>
+      </section>
+      <button class="ods-banner--dismiss" aria-label="Dismiss banner"></button>
+    </aside>
+  </template>
+</Visual>
+
+<Visual layout="wide" content="full">
+  <template>
+    <aside class="ods-banner is-ods-banner-danger">
+      <span class="ods-banner--icon">
+        <OdsIcon icon="error"></OdsIcon>
+      </span>
+      <h1 class="ods-banner--title">Safety checks have failed</h1>
+      <p class="ods-banner--content">
+        Hangar 18 has been compromised.
+      </p>
+      <section class="ods-banner--actions">
+        <a href="#">Seal bulkhead doors</a>
+      </section>
+    </aside>
+  </template>
+</Visual>
+
+<Visual layout="wide" content="full">
+  <template>
+    <aside class="ods-banner is-ods-banner-danger">
+      <span class="ods-banner--icon">
+        <OdsIcon icon="error"></OdsIcon>
+      </span>
+      <p class="ods-banner--content">
+        Hangar 18 has been compromised.
+      </p>
+      <section class="ods-banner--actions">
+        <a href="#">Seal bulkhead doors</a>
+      </section>
     </aside>
   </template>
 </Visual>
@@ -139,6 +265,51 @@ Use Danger messages to inform users that an error has occurred.
 ## References
 
 ### Related components
+
+<figure class="ods-table--figure">
+  <figcaption class="ods-table--figcaption">
+    Odyssey Alerts
+  </figcaption>
+  <table class="ods-table">
+    <caption>Differences between the available alert components</caption>
+    <thead>
+      <tr>
+        <th scope="column">Component</th>
+        <th scope="column">Variants</th>
+        <th scope="column">Async/Dynamic</th>
+        <th scope="column">Transient</th>
+        <th scope="column">Dismissable</th>
+        <th scope="column">Actionable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Banner</th>
+        <td>Info, Caution, Danger</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <th scope="row">Infobox</th>
+        <td>Success, Caution, Danger</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <th scope="row">Toast</th>
+        <td>Info, Success, Caution, Danger</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
 <Description>
 

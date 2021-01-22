@@ -36,36 +36,13 @@ This component may be present on load or triggered by different types of events,
 
 <Description>
 
-Used for reporting successful actions, results, or states to the user. This variant utilizes an alternate link style to satisfy contrast requirements for on-color backgrounds.
-
-</Description>
-
-<Visual content="full">
-  <template>
-    <aside class="ods-section-message is-ods-section-message-success is-ods-section-message-blv">
-      <span class="ods-section-message--icon">
-        <OdsIcon icon="complete"></OdsIcon>
-      </span>
-      <h1 class="ods-section-message--title">Ready for lift-off</h1>
-      <section class="ods-section-message--content">
-        <p>Safety checks are complete, and this mission as been approved for launch.</p>
-      </section>
-      <section class="ods-section-message--actions">
-        <a href="#">View countdown</a>
-      </section>
-    </aside>
-  </template>
-</Visual>
-
-<Description>
-
 Used for reporting successful actions, results, or states to the user. This alternate style maintains a white background.
 
 </Description>
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-success is-ods-section-message-alt">
+    <aside class="ods-section-message is-ods-section-message-success">
       <span class="ods-section-message--icon">
         <OdsIcon icon="complete"></OdsIcon>
       </span>
@@ -88,7 +65,7 @@ Used for reporting successful actions, results, or states to the user. This show
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-success is-ods-section-message-alt">
+    <aside class="ods-section-message is-ods-section-message-success">
       <span class="ods-section-message--icon">
         <OdsIcon icon="complete"></OdsIcon>
       </span>
@@ -108,40 +85,13 @@ Used to inform users of tasks or processes that may need their attention.
 
 When using the Caution variant, ensure the user does not need more context than you can give in the space available.
 
-This variant utilizes an alternate link style to satisfy contrast requirements for on-color backgrounds.
-
-</Description>
-
-<Visual content="full">
-  <template>
-    <aside class="ods-section-message is-ods-section-message-caution is-ods-section-message-blv">
-      <span class="ods-section-message--icon">
-        <OdsIcon icon="caution"></OdsIcon>
-      </span>
-      <h1 class="ods-section-message--title">Safety checks incomplete</h1>
-      <section class="ods-section-message--content">
-        <p>Safety checks must be completed before this mission as been approved for launch.</p>
-      </section>
-      <section class="ods-section-message--actions">
-        <a href="#">Begin safety checks</a>
-      </section>
-    </aside>
-  </template>
-</Visual>
-
-<Description>
-
-Used to inform users of tasks or processes that may need their attention.
-
-When using the Caution variant, ensure the user does not need more context than you can give in the space available.
-
 This alternate style maintains a white background.
 
 </Description>
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-caution is-ods-section-message-alt">
+    <aside class="ods-section-message is-ods-section-message-caution">
       <span class="ods-section-message--icon">
         <OdsIcon icon="caution"></OdsIcon>
       </span>
@@ -168,7 +118,7 @@ This showcases inline linking.
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-caution is-ods-section-message-alt">
+    <aside class="ods-section-message is-ods-section-message-caution">
       <span class="ods-section-message--icon">
         <OdsIcon icon="caution"></OdsIcon>
       </span>
@@ -184,36 +134,13 @@ This showcases inline linking.
 
 <Description>
 
-Use Danger messages to inform users that an error has occurred. This variant utilizes an alternate link style to satisfy contrast requirements for on-color backgrounds.
-
-</Description>
-
-<Visual content="full">
-  <template>
-    <aside class="ods-section-message is-ods-section-message-danger is-ods-section-message-blv">
-      <span class="ods-section-message--icon">
-        <OdsIcon icon="error"></OdsIcon>
-      </span>
-      <h1 class="ods-section-message--title">Safety checks have failed</h1>
-      <section class="ods-section-message--content">
-        <p>An issue has been discovered with your fuel mixture ratios. Please correct this and perform safety checks again.</p>
-      </section>
-      <section class="ods-section-message--actions">
-        <a href="#">Configure fuel mixture</a>
-      </section>
-    </aside>
-  </template>
-</Visual>
-
-<Description>
-
 Use Danger messages to inform users that an error has occurred. This alternate style maintains a white background.
 
 </Description>
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-danger is-ods-section-message-alt">
+    <aside class="ods-section-message is-ods-section-message-danger">
       <span class="ods-section-message--icon">
         <OdsIcon icon="error"></OdsIcon>
       </span>
@@ -233,7 +160,7 @@ Use Danger messages to inform users that an error has occurred. This showcases i
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-danger is-ods-section-message-alt">
+    <aside class="ods-section-message is-ods-section-message-danger">
       <span class="ods-section-message--icon">
         <OdsIcon icon="error"></OdsIcon>
       </span>
