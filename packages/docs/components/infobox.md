@@ -1,7 +1,7 @@
 ---
 template: component
-id: component-section-message
-title: Section Message
+id: component-infobox
+title: Infobox
 description:
 lead:
 tabs:
@@ -12,7 +12,7 @@ tabs:
 links:
   - icon: github
     label: View source
-    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_section-message.scss
+    href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_infobox.scss
   - icon: figma
     label: View designs
     href:
@@ -42,15 +42,15 @@ Used for reporting successful actions, results, or states to the user. This alte
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-success">
-      <span class="ods-section-message--icon">
+    <aside class="ods-infobox is-ods-infobox-success">
+      <span class="ods-infobox--icon">
         <OdsIcon icon="complete"></OdsIcon>
       </span>
-      <h1 class="ods-section-message--title">Ready for lift-off</h1>
-      <section class="ods-section-message--content">
+      <h1 class="ods-infobox--title">Ready for lift-off</h1>
+      <section class="ods-infobox--content">
         <p>Safety checks are complete, and this mission as been approved for launch.</p>
       </section>
-      <section class="ods-section-message--actions">
+      <section class="ods-infobox--actions">
         <a href="#">View countdown</a>
       </section>
     </aside>
@@ -65,12 +65,12 @@ Used for reporting successful actions, results, or states to the user. This show
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-success">
-      <span class="ods-section-message--icon">
+    <aside class="ods-infobox is-ods-infobox-success">
+      <span class="ods-infobox--icon">
         <OdsIcon icon="complete"></OdsIcon>
       </span>
-      <h1 class="ods-section-message--title">Ready for lift-off</h1>
-      <section class="ods-section-message--content">
+      <h1 class="ods-infobox--title">Ready for lift-off</h1>
+      <section class="ods-infobox--content">
         <p>Safety checks are complete, and this mission as been approved for launch. You may <a href="#">view the countdown</a> prior to lift-off.</p>
       </section>
     </aside>
@@ -91,15 +91,15 @@ This alternate style maintains a white background.
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-caution">
-      <span class="ods-section-message--icon">
+    <aside class="ods-infobox is-ods-infobox-caution">
+      <span class="ods-infobox--icon">
         <OdsIcon icon="caution"></OdsIcon>
       </span>
-      <h1 class="ods-section-message--title">Safety checks incomplete</h1>
-      <section class="ods-section-message--content">
+      <h1 class="ods-infobox--title">Safety checks incomplete</h1>
+      <section class="ods-infobox--content">
         <p>Safety checks must be completed before this mission as been approved for launch.</p>
       </section>
-      <section class="ods-section-message--actions">
+      <section class="ods-infobox--actions">
         <a href="#">Begin safety checks</a>
       </section>
     </aside>
@@ -118,12 +118,12 @@ This showcases inline linking.
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-caution">
-      <span class="ods-section-message--icon">
+    <aside class="ods-infobox is-ods-infobox-caution">
+      <span class="ods-infobox--icon">
         <OdsIcon icon="caution"></OdsIcon>
       </span>
-      <h1 class="ods-section-message--title">Safety checks incomplete</h1>
-      <section class="ods-section-message--content">
+      <h1 class="ods-infobox--title">Safety checks incomplete</h1>
+      <section class="ods-infobox--content">
         <p>You'll need to <a href="#">complete safety checks</a> before this mission as been approved for launch.</p>
       </section>
     </aside>
@@ -140,12 +140,12 @@ Use Danger messages to inform users that an error has occurred. This alternate s
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-danger">
-      <span class="ods-section-message--icon">
+    <aside class="ods-infobox is-ods-infobox-danger">
+      <span class="ods-infobox--icon">
         <OdsIcon icon="error"></OdsIcon>
       </span>
-      <h1 class="ods-section-message--title">Safety checks have failed</h1>
-      <section class="ods-section-message--content">
+      <h1 class="ods-infobox--title">Safety checks have failed</h1>
+      <section class="ods-infobox--content">
         <p>An issue has been discovered with your fuel mixture ratios. Please <a href="#">reconfigure your fuel mixture</a> and perform safety checks again.</p>
       </section>
     </aside>
@@ -160,15 +160,15 @@ Use Danger messages to inform users that an error has occurred. This showcases i
 
 <Visual content="full">
   <template>
-    <aside class="ods-section-message is-ods-section-message-danger">
-      <span class="ods-section-message--icon">
+    <aside class="ods-infobox is-ods-infobox-danger">
+      <span class="ods-infobox--icon">
         <OdsIcon icon="error"></OdsIcon>
       </span>
-      <h1 class="ods-section-message--title">Safety checks have failed</h1>
-      <section class="ods-section-message--content">
+      <h1 class="ods-infobox--title">Safety checks have failed</h1>
+      <section class="ods-infobox--content">
         <p>An issue has been discovered with your fuel mixture ratios. Please correct this and perform safety checks again.</p>
       </section>
-      <section class="ods-section-message--actions">
+      <section class="ods-infobox--actions">
         <a href="#">Configure fuel mixture</a>
       </section>
     </aside>
@@ -179,7 +179,7 @@ Use Danger messages to inform users that an error has occurred. This showcases i
 
 These messages are designed for use both on page load and dynamically. For instance, a Form may include a Caution message if the user should be aware of specific context up front. Alternately, the Danger variant may be used on Form submission to surface an error.
 
-Section messages allow for both inline and sectioned links. In order to preserve clarity for users, please do not combine them.
+Infoboxs allow for both inline and sectioned links. In order to preserve clarity for users, please do not combine them.
 
 ## Content Guidelines
 
