@@ -1,0 +1,208 @@
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+abbr {
+  border-bottom: 1px dashed $color-primary-dark;
+  text-decoration: none;
+}
+
+em {
+  font-style: italic;
+
+  > em {
+    text-decoration: underline;
+  }
+}
+
+strong {
+  font-weight: 600;
+
+  > strong {
+    text-decoration: underline;
+  }
+}
+
+sup {
+  font-size: ms(-2);
+  line-height: 1;
+  vertical-align: super;
+}
+
+sub {
+  font-size: ms(-2);
+  line-height: 1;
+  vertical-align: sub;
+}
+
+blockquote {
+  margin: 0 0 $spacing-s;
+  padding: 0 0 0 $spacing-s;
+  border-left: 3px solid $border-color-display;
+}
+
+p {
+  max-width: $max-line-length;
+  margin-bottom: $spacing-s;
+  font-size: $size-body-sentence;
+
+  details & {
+    font-size: ms(0);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+pre {
+  font-family: $mono-font-family;
+  white-space: pre-wrap;
+  tab-size: 2;
+}
+
+cite {
+  font-style: italic;
+}
+
+del {
+  display: inline-block;
+  background: $color-danger-light;
+}
+
+del::before,
+del::after {
+  @include is-visually-hidden;
+}
+
+del::before {
+  content: attr(data-a11y-start);
+}
+
+del::after {
+  content: attr(data-a11y-end);
+}
+
+dfn {
+  font-style: italic;
+}
+
+figure:not([class]) {
+  display: grid;
+  grid-gap: $spacing-s;
+  grid-template-columns: minmax(min-content, max-content);
+  justify-content: center;
+  justify-items: center;
+
+  figcaption:not([class]) {
+    color: $text-sub;
+    font-size: ms(0);
+  }
+}
+
+ins {
+  display: inline-block;
+  background: cv('green', '000');
+}
+
+ins::before,
+ins::after {
+  @include is-visually-hidden;
+}
+
+ins::before {
+  content: attr(data-a11y-start);
+}
+
+ins::after {
+  content: attr(data-a11y-end);
+}
+
+kbd {
+  display: inline-block;
+  padding: 0 $spacing-xs;
+  border: 1px solid cv('gray', '200');
+  border-radius: $base-border-radius;
+  background: cv('gray', '000');
+  box-shadow: 0 2px 0 cv('gray', '000'), 0 3px 0 cv('gray', '200');
+  font-weight: 400;
+  line-height: $title-line-height;
+}
+
+mark {
+  background: cv('yellow', '000');
+}
+
+q {
+  quotes: '"' '"' "'" "'";
+
+  &::before {
+    content: open-quote;
+  }
+
+  &::after {
+    content: close-quote;
+  }
+}
+
+s {
+  text-decoration: line-through;
+}
+
+samp {
+  padding: 0 0.5ch;
+  background-color: cv('gray', '000');
+  box-shadow: 0 1px 0 cv('gray', '200');
+  font-family: $mono-font-family;
+  font-size: ms(0);
+
+  kbd {
+    background: $white;
+  }
+}
+
+small {
+  font-size: $size-body-caption;
+}
+
+details {
+  font-size: ms(0);
+}
+
+summary {
+  border-radius: $base-border-radius;
+  font-size: ms(1);
+  font-weight: 600;
+  cursor: default;
+
+  &:focus {
+    @include outline;
+  }
+}
+
+hr {
+  margin: $spacing-s 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: cv('gray', '200');
+}
+
+code {
+  color: $text-code;
+  font-family: $mono-font-family;
+}
+
+var {
+  font-style: italic;
+  font-weight: 600;
+}

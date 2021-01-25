@@ -1,0 +1,12 @@
+.ods-icon {
+  position: relative;
+  top: -0.1em;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+
+  // Prelim RTL styles
+  .ods-rtl & {
+    order: 1;
+  }
+}

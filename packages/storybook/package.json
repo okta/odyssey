@@ -1,0 +1,28 @@
+{
+  "name": "@okta/odyssey-storybook",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@storybook/addon-actions": "next",
+    "@storybook/addon-essentials": "next",
+    "@storybook/addon-links": "next",
+    "@storybook/components": "^6.1.14",
+    "@storybook/preset-scss": "^1.0.3",
+    "@storybook/react": "next",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^3.2.0",
+    "markdown-to-jsx": "^7.1.1",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 6006 -s ../../node_modules/@okta",
+    "build": "build-storybook -output-dir ./dist"
+  }
+}

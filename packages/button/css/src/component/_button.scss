@@ -1,0 +1,179 @@
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+.ods-button {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: $spacing-xs-em $spacing-s-em;
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 100ms;
+  transition-timing-function: linear;
+  border: 1px solid transparent;
+  border-radius: $base-border-radius;
+  background-color: $color-primary-base;
+  box-shadow: 0 0 0 0 $color-primary-light;
+  color: $white;
+  font-family: $body-font-family;
+  font-size: ms(0);
+  font-weight: 600;
+  line-height: $base-line-height;
+  white-space: nowrap;
+
+  &:hover,
+  &.is-ods-button-hover {
+    border-color: $color-primary-dark;
+    background-color: $color-primary-dark;
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    @include outline;
+
+    background-color: $color-primary-dark;
+  }
+
+  &:disabled {
+    border-color: transparent;
+    background-color: $color-primary-light;
+    cursor: not-allowed;
+  }
+}
+
+.ods-button--label {
+  &:not(:only-child) {
+    margin-left: $spacing-xs;
+  }
+}
+
+.is-ods-button-secondary {
+  border-color: $color-primary-base;
+  background-color: $white;
+  color: $color-primary-base;
+
+  &:hover,
+  &.is-ods-button-hover {
+    border-color: $color-primary-base;
+    background-color: $color-primary-base;
+    color: $white;
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    border-color: $color-primary-base;
+    background-color: $white;
+    color: $color-primary-base;
+  }
+
+  &:disabled {
+    border-color: $color-primary-light;
+    background-color: $white;
+    color: $color-primary-light;
+  }
+}
+
+.is-ods-button-danger {
+  background-color: $color-danger-base;
+
+  &:hover,
+  &.is-ods-button-hover {
+    border-color: $color-danger-dark;
+    background-color: $color-danger-dark;
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    @include outline($focus-ring-danger);
+
+    background-color: $color-danger-dark;
+  }
+
+  &:disabled {
+    border-color: $color-danger-light;
+    background-color: $color-danger-light;
+  }
+
+  &.is-ods-button-secondary {
+    border-color: $color-danger-base;
+    background-color: $white;
+    color: $color-danger-base;
+
+    &:focus,
+    &.is-ods-button-focus {
+      border-color: $color-danger-dark;
+      background-color: $color-danger-light;
+      color: $color-danger-dark;
+    }
+
+    &:disabled {
+      border-color: $color-danger-light;
+      background-color: $white;
+      color: $color-danger-light;
+    }
+  }
+}
+
+.is-ods-button-overlay {
+  background-color: $white;
+  color: $text-body;
+
+  &:hover,
+  &.is-ods-button-hover {
+    border-color: transparent;
+    background-color: cv('gray', '100');
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    outline: 0;
+    background-color: cv('gray', '100');
+  }
+
+  &:disabled {
+    background-color: transparentize(cv('gray', '100'), 0.5);
+    color: cv('gray', '600');
+  }
+}
+
+.is-ods-button-clear {
+  background-color: transparent;
+  color: $color-primary-base;
+
+  &:hover,
+  &.is-ods-button-hover {
+    border-color: transparent;
+    background-color: cv('blue', '000');
+    color: $color-primary-dark;
+  }
+
+  &:focus,
+  &.is-ods-button-focus {
+    background-color: $white;
+    color: $color-primary-base;
+  }
+
+  &:disabled {
+    background-color: transparent;
+    color: $color-primary-light;
+  }
+}
+
+%button-small {
+  font-size: ms(-1);
+  line-height: $title-line-height;
+}
+
+.is-ods-button-small {
+  @extend %button-small;
+}

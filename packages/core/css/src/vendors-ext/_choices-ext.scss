@@ -1,0 +1,464 @@
+/* stylelint-disable color-no-hex, declaration-no-important, selector-class-pattern, max-nesting-depth, selector-max-compound-selectors, selector-no-qualifying-type, no-descending-specificity */
+
+$choices-button-dimension: 8px !default;
+$choices-button-offset: 8px !default;
+$choices-icon-cross: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==') !default;
+$choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==') !default;
+
+.ods-select {
+  position: relative;
+  max-width: $max-line-length;
+  overflow: hidden;
+  font-size: $size-body-base;
+
+  &:focus,
+  &.is-ods-select-focused,
+  .is-ods-select-focus & {
+    border-radius: $base-border-radius;
+    outline: none;
+    box-shadow: 0 0 0 4px $color-primary-light;
+
+    &.is-ods-select-open {
+      box-shadow: 0 0 0 4px $color-primary-light, 0 2px 0 4px $color-primary-light;
+
+      &.is-ods-select-flipped {
+        box-shadow: 0 0 0 4px $color-primary-light, 0 -2px 0 4px $color-primary-light;
+      }
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &.is-ods-select-open {
+    overflow: initial;
+  }
+
+  &.is-ods-select-disabled {
+    .ods-select--inner,
+    .ods-select--input {
+      border: 1px solid $border-input-disabled;
+      background-color: $bg-input-disabled;
+      color: $text-sub;
+      cursor: not-allowed;
+      user-select: none;
+
+      &:hover {
+        border-color: $border-color-ui;
+      }
+    }
+
+    &:focus,
+    &.is-ods-select-focused {
+      box-shadow: none;
+    }
+
+    .ods-select--item {
+      cursor: not-allowed;
+    }
+  }
+
+  [data-invalid] & {
+    &:focus,
+    &.is-ods-select-focused {
+      @include outline($focus-ring-danger);
+
+      border-radius: $base-border-radius;
+      outline: none;
+
+      &.is-ods-select-open {
+        box-shadow: 0 0 0 4px $color-danger-light, 0 2px 0 4px $color-danger-light;
+
+        &.is-ods-select-flipped {
+          box-shadow: 0 0 0 4px $color-danger-light, 0 -2px 0 4px $color-danger-light;
+        }
+      }
+    }
+
+    .ods-select--inner,
+    .ods-select--input {
+      border-color: $color-danger-base;
+    }
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+.ods-select[data-type*='select-one'],
+.ods-select[data-type*='select-multiple'] {
+  .ods-select--input {
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 $spacing-xs;
+    padding: 0;
+    border-bottom: 0;
+    background-color: transparent;
+    vertical-align: top;
+  }
+
+  .ods-select--button {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: -$spacing-s;
+    margin-right: 25px;
+    padding: 0;
+    border-radius: 10em;
+    opacity: 0.25;
+    background-image: $choices-icon-cross-inverse;
+    background-size: 8px;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+
+    &:focus {
+      @include outline($focus-ring-primary);
+    }
+  }
+
+  .ods-select--item[data-value=''] .ods-select--button {
+    display: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: $spacing-s-em;
+    width: $size-body-caption;
+    height: $size-body-caption;
+    transform: translateY(-50%);
+    background-image: get-icon('caret', $text-body);
+    background-repeat: no-repeat;
+    background-size: $size-body-caption;
+    pointer-events: none;
+  }
+
+  &.is-ods-select-open {
+    &::after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+  }
+
+  &[dir='rtl'] {
+    &::after {
+      right: auto;
+      left: 11.5px;
+    }
+
+    .ods-select--button {
+      right: auto;
+      left: 0;
+      margin-right: 0;
+      margin-left: 25px;
+    }
+  }
+}
+
+.ods-select[data-type*='select-one'] {
+  .ods-select--button {
+    display: none; // remove this functionality for Single Select, unavailable via JS
+  }
+}
+
+.ods-select[data-type*='select-multiple'],
+.ods-select[data-type*='text'] {
+  .ods-select--inner {
+    padding-bottom: 0;
+    cursor: text;
+  }
+
+  .ods-select--button {
+    display: inline-block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: $spacing-s;
+    padding: 0;
+    border-radius: 100%;
+    opacity: 1;
+    background-color: cv('blue', '400');
+    background-image: get-icon('close', $white);
+    background-position: center;
+    background-size: ($base-line-height * 1em) - 1em; // funky math to evade half-pixel rounding errors
+    line-height: 1;
+
+    &:hover,
+    &:focus {
+      background-color: $color-primary-base;
+    }
+  }
+}
+
+.ods-select--inner {
+  display: inline-block;
+  width: 100%;
+  padding: $spacing-xs-em $spacing-s-em;
+  overflow: hidden;
+  transition-property: border-color, background-color, box-shadow;
+  transition-duration: $base-duration;
+  transition-timing-function: $base-timing;
+  border: 1px solid $border-color-ui;
+  border-radius: $base-border-radius;
+  background-color: $white;
+  box-shadow: 0 0 0 0 $color-primary-light;
+  color: $text-body;
+  font-family: $body-font-family;
+  font-size: $size-body-base;
+  line-height: $base-line-height;
+  vertical-align: top;
+
+  &:hover,
+  .is-ods-select-focused &,
+  .is-ods-select-open &,
+  .is-ods-select-focus &,
+  .is-ods-select-hover & {
+    border-color: $color-primary-base;
+  }
+
+  .is-ods-select-open &,
+  [data-invalid] .is-ods-select-open & {
+    border-radius: $base-border-radius $base-border-radius 0 0;
+    border-bottom-color: $border-color-ui;
+  }
+
+  .is-ods-select-flipped.is-ods-select-open &,
+  [data-invalid] .is-ods-select-flipped.is-ods-select-open & {
+    border-radius: 0 0 $base-border-radius $base-border-radius;
+    border-top-color: $border-color-ui;
+    border-bottom-color: $color-primary-base;
+  }
+}
+
+.ods-select--list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.ods-select--list--single {
+  display: inline-block;
+  width: 100%;
+
+  [dir='rtl'] & {
+    //padding-right: 4px;
+    //padding-left: 16px;
+  }
+
+  .ods-select--item {
+    width: 100%;
+  }
+}
+
+.ods-select--list--multiple {
+  display: inline;
+
+  .ods-select--item {
+    display: inline-block;
+    margin-right: $spacing-xs;
+    margin-bottom: $spacing-xs;
+    padding: 0 $spacing-s;
+    border: 1px solid $color-primary-light;
+    border-radius: 1em;
+    background-color: cv('blue', '000');
+    color: $text-body;
+    font-size: $size-body-base;
+    font-weight: 400;
+    line-height: calc((#{$base-line-height} * 1em) - 2px); // Adjust for pill border
+    word-break: break-all;
+    vertical-align: middle;
+
+    &[data-deletable] {
+      padding-right: $spacing-xs;
+    }
+
+    [dir='rtl'] & {
+      margin-right: 0;
+      margin-left: $spacing-xs;
+    }
+
+    &.is-ods-select-highlighted {
+      background-color: $color-primary-light;
+    }
+
+    .is-ods-select-disabled & {
+      border: 1px solid $border-input-disabled;
+      background-color: $bg-input-disabled;
+    }
+  }
+}
+
+.ods-select--list--dropdown {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid $border-color-ui;
+  border-top-width: 0;
+  border-bottom-right-radius: $base-border-radius;
+  border-bottom-left-radius: $base-border-radius;
+  background-color: $white;
+  word-break: break-all;
+  will-change: visibility;
+
+  &.is-ods-select-active {
+    visibility: visible;
+  }
+
+  .is-ods-select-focused & {
+    @include outline($focus-ring-primary);
+
+    clip-path: inset(0 -4px -4px -4px);
+  }
+
+  .is-ods-select-open & {
+    border-color: $color-primary-base;
+  }
+
+  .is-ods-select-flipped & {
+    top: auto;
+    bottom: 100%;
+    border-bottom: 0;
+    border-top-width: 1px;
+    border-radius: $base-border-radius $base-border-radius 0 0;
+  }
+
+  .is-ods-select-flipped.is-ods-select-focused & {
+    clip-path: inset(-4px -4px 0 -4px);
+  }
+
+  .ods-select--list {
+    position: relative;
+    max-height: 300px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
+  }
+
+  .ods-select--item {
+    position: relative;
+    padding: $spacing-xs	$spacing-s;
+    font-size: $size-body-base;
+
+    [dir='rtl'] & {
+      text-align: right;
+    }
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .ods-select--item--selectable {
+    @media (min-width: 640px) {
+      padding-right: 100px;
+
+      &::after {
+        content: attr(data-select-text);
+        position: absolute;
+        top: 50%;
+        right: $spacing-s;
+        transform: translateY(-50%);
+        opacity: 0;
+        font-size: $size-body-caption;
+      }
+
+      [dir='rtl'] & {
+        padding-right: $spacing-s;
+        padding-left: 100px;
+        text-align: right;
+
+        &::after {
+          right: auto;
+          left: $spacing-s;
+        }
+      }
+    }
+
+    &.is-ods-select-highlighted {
+      background-color: cv('blue', '000');
+
+      &::after {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  [data-invalid] .is-ods-select-focused & {
+    @include outline($focus-ring-danger);
+  }
+
+  [data-invalid] .is-ods-select-open & {
+    border-color: $color-danger-base;
+  }
+}
+
+.ods-select--item {
+  cursor: default;
+}
+
+.ods-select--item--selectable {
+  //cursor: pointer;
+}
+
+.ods-select--item--disabled {
+  color: $text-sub;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.ods-select--heading {
+  padding: $spacing-s $spacing-s 0;
+  color: $text-sub;
+  font-size: $size-body-caption;
+  font-weight: 600;
+}
+
+.ods-select--button {
+  border: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999px;
+  appearance: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.ods-select--input {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  padding: 4px 0 4px 2px;
+  border: 0;
+  border-radius: 0;
+  background-color: $white;
+  vertical-align: baseline;
+
+  &:focus {
+    outline: 0;
+  }
+
+  [dir='rtl'] & {
+    padding-right: 2px;
+    padding-left: 0;
+  }
+}
+
+.ods-select--placeholder {
+  opacity: 0.5;
+}

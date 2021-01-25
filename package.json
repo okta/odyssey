@@ -2,13 +2,17 @@
   "name": "odyssey",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/*/*",
+    "packages/btn",
+    "scripts/*"
   ],
   "engines": {
     "yarn": "^1.15.2",
     "node": ">=12.13"
   },
   "scripts": {
+    "start": "node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c packages/storybook/.storybook",
     "docs": "yarn --cwd packages/docs start",
     "icons": "yarn --cwd packages/odyssey-icons svgo",
     "lerna-version": "lerna version --no-git-tag-version --force-publish",

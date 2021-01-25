@@ -1,0 +1,88 @@
+/* stylelint-disable color-no-hex  */
+
+// Copyright 2018-Present Okta, Inc.
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Color Variants
+
+$colors: (
+  'gray': (
+    '000': #f5f5f6,
+    '100': #ebebed,
+    '200': #d7d7dc,
+    '500': #8c8c96,
+    '600': #6e6e78,
+    '900': #1d1d21,
+  ),
+  'blue': (
+    '000': #f2f5ff,
+    '300': #a7b5ec,
+    '400': #788ee2,
+    '500': #1662dd,
+    '900': #00297a,
+  ),
+  'green': (
+    '000': #e5faf3,
+    '300': #84d2b1,
+    '500': #00b478,
+    '600': #008055,
+    '900': #00503c,
+  ),
+  'red': (
+    '000': #ffdfe2,
+    '300': #f88c90,
+    '500': #da372c,
+    '900': #640019,
+  ),
+  'yellow': (
+    '000': #faf5dc,
+    '300': #f9dc77,
+    '500': #ffc61c,
+    '900': #663800,
+  ),
+  'orange': (
+    '500': #e97107
+  ),
+  'turquoise': (
+    '400': #65adb7,
+    '500': #2d8c9e
+  ),
+  'purple': (
+    '500': #8d6e97
+  ),
+);
+
+$black: #000000;
+$white: #ffffff;
+
+/**
+ * Retrieves color variants from variation map.
+ * color: cv(action, light); // color: #96bafa;
+ */
+
+@function cv($color, $variation: '500') {
+  @if not map-has-key($colors, $color) {
+    @error 'Invalid color name: `#{$color}`.';
+  }
+
+  $variant: map-deep-get($colors, $color, $variation);
+
+  @if not $variant {
+    @error 'Invalid variation: `#{$variation}`.';
+  }
+
+  @return $variant;
+}
+
+$box-shadow-default: 0 2px 0 rgba(175, 175, 175, 0.12);

@@ -1,0 +1,18 @@
+<testsuites name="odyssey-wc-button" tests="7" failures="0" time="2.879">
+  <testsuite name="ods-button" errors="0" failures="0" skipped="0" timestamp="2021-01-25T03:17:13" time="2.839" tests="7">
+    <testcase classname="ods-button type renders a primary button by default" name="ods-button type renders a primary button by default" time="0.258">
+    </testcase>
+    <testcase classname="ods-button type renders a secondary button" name="ods-button type renders a secondary button" time="0.187">
+    </testcase>
+    <testcase classname="ods-button type renders a danger button" name="ods-button type renders a danger button" time="0.2">
+    </testcase>
+    <testcase classname="ods-button type renders a clear button" name="ods-button type renders a clear button" time="0.193">
+    </testcase>
+    <testcase classname="ods-button type renders an overlay button" name="ods-button type renders an overlay button" time="0.2">
+    </testcase>
+    <testcase classname="ods-button disabled renders a disabled button" name="ods-button disabled renders a disabled button" time="0.212">
+    </testcase>
+    <testcase classname="ods-button a11y has no accessibility violations" name="ods-button a11y has no accessibility violations" time="0.316">
+    </testcase>
+  </testsuite>
+</testsuites>
