@@ -1,7 +1,7 @@
 import { Component, Prop, Element, Event, EventEmitter, h } from '@stencil/core';
 import classNames from 'classnames';
-import { ButtonInterface } from '../../interfaces';
-import { ButtonTypes, ButtonActionTypes, ButtonSizes } from '../../types';
+import { ButtonInterface } from './interface';
+import { ButtonTypes, ButtonActionTypes, ButtonSizes } from './types';
 
 @Component({ tag: 'ods-button', styleUrl: 'button.scss', shadow: true })
 export class Button implements ButtonInterface {

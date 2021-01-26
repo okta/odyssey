@@ -1,4 +1,4 @@
-import { setupComponent, setupComponentType, performAccessibilityCheck } from '../../utils/test-utils';
+import { setupComponent, setupComponentType, performAccessibilityCheck } from './utils/test-utils';
 
 async function setup(html: string) : setupComponentType {
   return await setupComponent(html, 'ods-button');

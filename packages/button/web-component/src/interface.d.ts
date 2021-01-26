@@ -1,5 +1,5 @@
 import { ComponentInterface } from '@stencil/core';
-import { ButtonTypes, ButtonSizes } from '../../types';
+import { ButtonTypes, ButtonSizes } from './types';
 
 export interface ButtonInterface extends ComponentInterface {
   type: ButtonTypes;

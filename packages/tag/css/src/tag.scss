@@ -20,6 +20,18 @@
 @import '@okta/odyssey-css-core/src/abstracts/mixins';
 @import '@okta/odyssey-css-core/src/abstracts/tokens';
 
-@import './button-base';
-@import './button-context';
-@import './button-layout';
+.ods-tag {
+  display: inline-block;
+  margin: 0 $spacing-xs $spacing-xs 0;
+  padding: 0 $spacing-xs-em;
+  border-radius: $base-border-radius;
+  background: cv('gray', '100');
+  color: $text-body;
+}
+
+.ods-tag--list {
+  display: inline-block;
+  margin-bottom: -$spacing-xs;
+  margin-left: $spacing-xs;
+  list-style-type: none;
+}

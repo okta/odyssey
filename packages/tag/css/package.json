@@ -1,0 +1,30 @@
+{
+  "name": "@okta/odyssey-css-tag",
+  "version": "0.7.0",
+  "description": "Okta's css-tag based on odyssey design system",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "src/tag.scss",
+  "style": "src/tag.scss",
+  "scripts": {
+    "prepare": "yarn build",    
+    "build": "node ../../../scripts/css-build.js src/tag.scss",
+    "lint": "stylelint src/",
+    "test": "yarn lint"
+  },
+  "devDependencies": {
+    "@okta/odyssey-css-core": "*",
+    "node-sass": "^4.9.4",
+    "stylelint": "^9.3.0",
+    "stylelint-checkstyle-formatter": "^0.1.1",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-config-sass-guidelines": "^5.0.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-order": "^0.8.1",
+    "stylelint-scss": "^3.2.0"
+  }
+}

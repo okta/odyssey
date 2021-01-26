@@ -1,5 +1,5 @@
 import React from "react";
-import { capitalize } from '../../../../storybook/.storybook/utils';
+import { capitalize } from '../../../storybook/.storybook/utils';
 import classNames from "classnames" 
 
 const COMPONENT_NAME = "Button"
