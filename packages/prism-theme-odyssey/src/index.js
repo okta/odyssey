@@ -14,6 +14,7 @@ import 'prismjs/components/prism-markup-templating';
 import "prismjs/components/prism-php";
 import "prismjs/components/prism-swift";
 
+import './demo.scss';
 import './theme.scss';
 
 import CustomPropertyInspector from './utils/CustomPropertyInspector.js'
