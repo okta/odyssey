@@ -1,5 +1,21 @@
 import '@okta/odyssey';
-import 'prismjs';
+
+import "prismjs";
+import "prismjs/components/prism-csharp";
+import "prismjs/components/prism-clike";
+
+
+import "prismjs/components/prism-c";
+import "prismjs/components/prism-go";
+import "prismjs/components/prism-http";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-markdown";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-objectivec";
+import 'prismjs/components/prism-markup-templating';
+import "prismjs/components/prism-php";
+import "prismjs/components/prism-swift";
+
 import './theme.scss';
 
 const Storage = window.localStorage;
@@ -28,7 +44,6 @@ class CustomPropertyInspector {
         document.documentElement.style.setProperty(name, value);
       }
     }
-
     return properties
   }
 
@@ -40,11 +55,17 @@ class CustomPropertyInspector {
     inspector.style = `
       position: sticky;
       top: 0;
-      background: #f5f5f6;
+      border-right: 5px solid #f5f5f6;
       padding:  3.42857rem 1.71429rem;
       max-height: 100vh;
       overflow: scroll;
+      min-width: 16rem;
     `
+
+    const inspectorTitle = document.createElement('h5');
+    inspectorTitle.innerHTML = "Custom Properties Inspector";
+    inspectorTitle.style="margin-bottom: 2rem;"
+    inspector.appendChild(inspectorTitle)
 
     const inspectorReset = document.createElement('button');
     inspectorReset.classList.add('ods-button', 'is-ods-button-danger', 'is-ods-button-full-width');
@@ -82,6 +103,18 @@ class CustomPropertyInspector {
       inspector.appendChild(inspectorReset)
     }
 
+    if (Object.keys(properties).length === 0 && properties.constructor === Object) {
+      const errorNotice = document.createElement('div');
+      errorNotice.innerHTML = `
+        <div>
+          <div style="font-size: 6rem; text-align: center;" aria-label="No good">⚠️</div>
+          <p>The Custom Property Inspector has nothing to show. This is probably because you are <a href="https://github.com/w3c/csswg-drafts/issues/1316">using Google Chrome.</a></p>
+          <p>Try this page on Safari or Firefox!</p>
+        </div>
+      `
+      inspector.appendChild(errorNotice)
+    }
+
     // Prepend the inspector
     document.body.prepend(inspector);
 
@@ -89,6 +122,7 @@ class CustomPropertyInspector {
       Storage.clear();
       this.setCustomProperties();
     })
+
     inspector.addEventListener('keyup', (e)=> {
       let name = e.target.name
       let value = e.target.value;
