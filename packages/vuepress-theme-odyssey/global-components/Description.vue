@@ -3,6 +3,7 @@
     :is="tag"
     :class="{
       'docskit--desc': true,
+      [`layout-${layout}`]: layout,
       [`is-docskit-desc-${variant}`]: variant
     }"
   >
@@ -21,7 +22,12 @@ export default {
     tag: {
       default: "div",
       type: String
-    }
+    },
+    layout: {
+      type: String,
+      required: false,
+      default: null
+    },
   }
 };
 </script>

@@ -46,7 +46,7 @@ Include guidance to make sure users know what steps to take to address the error
 
 <Visual content="full">
   <template>
-    <aside class="ods-infobox is-ods-infobox-danger">
+    <aside class="ods-infobox is-ods-infobox-danger" role="alert">
       <span class="ods-infobox--icon">
         <OdsIcon icon="error"></OdsIcon>
       </span>
@@ -70,7 +70,7 @@ When using the Caution variant, ensure the user does not need more context than 
 
 <Visual content="full">
   <template>
-    <aside class="ods-infobox is-ods-infobox-caution">
+    <aside class="ods-infobox is-ods-infobox-caution" role="status">
       <span class="ods-infobox--icon">
         <OdsIcon icon="caution"></OdsIcon>
       </span>
@@ -92,7 +92,7 @@ Use Success Infoboxes for reporting successful actions, processes, or states to 
 
 <Visual content="full">
   <template>
-    <aside class="ods-infobox is-ods-infobox-success">
+    <aside class="ods-infobox is-ods-infobox-success" role="status">
       <span class="ods-infobox--icon">
         <OdsIcon icon="complete"></OdsIcon>
       </span>
@@ -122,7 +122,7 @@ It's often useful to direct users toward an appropriate action, especially for f
 
 <Visual content="full">
   <template>
-    <aside class="ods-infobox is-ods-infobox-danger">
+    <aside class="ods-infobox is-ods-infobox-danger" role="alert">
       <span class="ods-infobox--icon">
         <OdsIcon icon="error"></OdsIcon>
       </span>
@@ -142,7 +142,7 @@ The actions section is limited to links. If it's necessary to provide the user w
 
 <Visual content="full">
   <template>
-    <aside class="ods-infobox is-ods-infobox-danger">
+    <aside class="ods-infobox is-ods-infobox-danger" role="alert">
       <span class="ods-infobox--icon">
         <OdsIcon icon="error"></OdsIcon>
       </span>
@@ -171,7 +171,7 @@ For example, a Form error should be displayed above all Fieldsets, but below the
   <template>
     <form>
       <h1 class="ods-form--title">Sign In</h1>
-      <aside class="ods-infobox is-ods-infobox-danger">
+      <aside class="ods-infobox is-ods-infobox-danger" role="alert">
         <span class="ods-infobox--icon">
           <OdsIcon icon="error"></OdsIcon>
         </span>
@@ -222,7 +222,7 @@ Stay away from nesting Infoboxes within information-dense UI like Tables. If you
           <tr>
             <td>
               <span>Pluto</span>
-              <aside class="ods-infobox is-ods-infobox-danger">
+              <aside class="ods-infobox is-ods-infobox-danger" role="alert">
                 <span class="ods-infobox--icon">
                   <OdsIcon icon="error"></OdsIcon>
                 </span>
@@ -256,26 +256,53 @@ These messages may be used for longer content than Toast or Banner, but shouldn'
 
 ## Accessibility
 
+When deploying Infoboxes, two `role`s may apply. Danger variants should utilize the `alert` role, as their contents represent immediate risk or failure. Success and Caution variants are better suited to the `status` role, which provides a less urgent announcement on appearance.
 ## References
 
-### Related components
-
-<Visual layout="wide">
+<Description layout="wide">
 
 <figure class="ods-table--figure">
   <figcaption class="ods-table--figcaption">
-    Odyssey Alerts
+    Related Components
   </figcaption>
   <table class="ods-table">
     <caption>Differences between the available alert components</caption>
     <thead>
       <tr>
         <th scope="column">Component</th>
-        <th scope="column">Variants</th>
-        <th scope="column">Async/Dynamic</th>
-        <th scope="column">Transient</th>
-        <th scope="column">Dismissable</th>
-        <th scope="column">Actionable</th>
+        <th scope="column">Available Variants</th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            Dynamic
+            <aside class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+              May be inserted after page load
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            Transient
+            <aside class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+              Disappears without user interaction
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            Dismissable
+            <aside class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+              May be dismissed by the user
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            Actionable
+            <aside class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+              May include actions or links
+            </aside>
+          </span>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -307,9 +334,7 @@ These messages may be used for longer content than Toast or Banner, but shouldn'
   </table>
 </figure>
 
-</Visual>
-
-### Further reading
+</Description>
 
 :::
 
