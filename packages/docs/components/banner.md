@@ -22,6 +22,8 @@ links:
 
 ## Anatomy
 
+<Anatomy img="images/anatomy-banner.svg" />
+
 ## Behavior
 
 ## Variants

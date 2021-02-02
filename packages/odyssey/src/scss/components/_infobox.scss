@@ -27,6 +27,10 @@
     color: $text-body;
     text-decoration: underline;
   }
+
+  &:not(:last-child) {
+    margin-bottom: $spacing-m;
+  }
 }
 
 .ods-infobox--icon {
