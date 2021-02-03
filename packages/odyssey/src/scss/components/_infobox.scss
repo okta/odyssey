@@ -43,18 +43,22 @@
 
 .ods-infobox--title {
   grid-area: title;
+  margin-bottom: 0;
   font-size: $size-title-6;
 }
 
 .ods-infobox--content {
   grid-area: content;
-  margin-bottom: $spacing-s;
+
+  &:not(:last-child) {
+    margin-bottom: $spacing-s;
+  }
 }
 
 .ods-infobox--actions {
   display: flex;
   grid-area: actions;
-  justify-content: end;
+  justify-content: start;
 }
 
 .is-ods-infobox-info {

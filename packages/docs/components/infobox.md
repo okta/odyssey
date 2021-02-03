@@ -28,7 +28,7 @@ links:
 
 <Description>
 
-This component may be present on load or triggered by different types of events, but they are not transient or dismissable. These messages are best used when additional in-page context is required.
+This component may be present on load or triggered by different types of events, but they are not transient or dismissable.
 
 </Description>
 
@@ -62,7 +62,7 @@ Include guidance to make sure users know what steps to take to address the error
 
 <Description>
 
-Use Caution Infoboxes to inform users of tasks or processes that may need their attention.
+Use Caution Infoboxes to inform users of tasks or processes that need their attention.
 
 When using the Caution variant, ensure the user does not need more context than you can give in the space available.
 
@@ -108,7 +108,9 @@ Use Success Infoboxes for reporting successful actions, processes, or states to 
 
 <Description>
 
-These messages are designed for use both on page load and dynamically. For instance, a Form may include a Caution message if the user should be aware of specific context up front. Alternately, the Danger variant may be used on Form submission to surface an error.
+Infoboxes can be present when the page loads or appear dynamically. For instance, a Form may include a Caution message if the user should be aware of particular requirements up front. Alternately, the Danger variant may be used on Form submission to surface an error.
+
+Avoid overusing Infobox within the same view. They are intended to draw the eye, and multiple visible Infoboxes may overwhelm users.
 
 </Description>
 
@@ -116,7 +118,7 @@ These messages are designed for use both on page load and dynamically. For insta
 
 <Description>
 
-It's often useful to direct users toward an appropriate action, especially for fixing errors. Infoboxs allow for both inline and sectioned links. In order to preserve clarity for users, please do not combine them.
+It is ideal to direct users toward an appropriate action, especially for addressing errors. Infoboxes allow for both inline and separated actions. To preserve clarity, limit Infoboxes to one link.
 
 </Description>
 
@@ -192,7 +194,7 @@ For example, a Form error should be displayed above all Fieldsets, but below the
 
 <Description>
 
-Stay away from nesting Infoboxes within information-dense UI like Tables. If you need to convey something about an individual data point, consider the <a href="/components/status/">Status</a> component instead.
+Stay away from nesting Infoboxes within information-dense UI like Tables. If you need to convey something about an individual data point, consider another design solution.
 
 </Description>
 
@@ -252,7 +254,24 @@ Stay away from nesting Infoboxes within information-dense UI like Tables. If you
 
 These messages may be used for longer content than Toast or Banner, but shouldn't go beyond two paragraphs. When including an inline link or action, be sure the link text clearly indicates where it leads.
 
+Do not include images or other UIs within Infobox.
+
 </Description>
+
+<Visual content="full" variant="negative">
+  <template>
+    <aside class="ods-infobox is-ods-infobox-caution" role="alert">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="caution"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Solar winds are high today</h1>
+      <section class="ods-infobox--content">
+        <p>Solar winds may be affecting real time communications between Shuttle 14 and launch control.</p>
+        <button class="ods-button">Warn them!</button>
+      </section>
+    </aside>
+  </template>
+</Visual>
 
 ## Accessibility
 
@@ -273,32 +292,32 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
         <th scope="column">Available Variants</th>
         <th scope="column">
           <span class="has-ods-tooltip">
-            Dynamic
-            <aside class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+            <abbr aria-describedby="tip-dynamic">Dynamic</abbr>
+            <aside class="ods-tooltip is-ods-tooltip-top" id="tip-dynamic" role="tooltip">
               May be inserted after page load
             </aside>
           </span>
         </th>
         <th scope="column">
           <span class="has-ods-tooltip">
-            Transient
-            <aside class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+            <abbr aria-describedby="tip-transient">Transient</abbr>
+            <aside class="ods-tooltip is-ods-tooltip-top" id="tip-transient" role="tooltip">
               Disappears without user interaction
             </aside>
           </span>
         </th>
         <th scope="column">
           <span class="has-ods-tooltip">
-            Dismissable
-            <aside class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+            <abbr aria-describedby="tip-dismissable">Dismissable</abbr>
+            <aside class="ods-tooltip is-ods-tooltip-top" id="tip-dismissable" role="tooltip">
               May be dismissed by the user
             </aside>
           </span>
         </th>
         <th scope="column">
           <span class="has-ods-tooltip">
-            Actionable
-            <aside class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+            <abbr aria-describedby="tip-actionable">Actionable</abbr>
+            <aside class="ods-tooltip is-ods-tooltip-top" id="tip-actionable" role="tooltip">
               May include actions or links
             </aside>
           </span>
