@@ -57,7 +57,11 @@ Use Info Banners to surface neutral information or broad announcements to users.
       <section class="ods-banner--actions">
         <a href="#">View itinerary</a>
       </section>
-      <button class="ods-banner--dismiss" aria-label="Dismiss banner"></button>
+      <span class="ods-banner--dismiss">
+        <button class="ods-button is-ods-button-overlay" aria-label="Dismiss banner">
+          <OdsIcon icon="close" />
+        </button>
+      </span>
     </aside>
   </template>
 </Visual>
@@ -85,7 +89,11 @@ Include guidance to make sure users know what steps to take to address the error
       <section class="ods-banner--actions">
         <a href="#">Seal bulkhead doors</a>
       </section>
-      <button class="ods-banner--dismiss" aria-label="Dismiss banner"></button>
+      <span class="ods-banner--dismiss">
+        <button class="ods-button is-ods-button-overlay" aria-label="Dismiss banner">
+          <OdsIcon icon="close" />
+        </button>
+      </span>
     </aside>
   </template>
 </Visual>
@@ -113,7 +121,11 @@ When using the Caution variant, ensure the user does not need more context than 
       <section class="ods-banner--actions">
         <a href="#">View reports</a>
       </section>
-      <button class="ods-banner--dismiss" aria-label="Dismiss banner"></button>
+      <span class="ods-banner--dismiss">
+        <button class="ods-button is-ods-button-overlay" aria-label="Dismiss banner">
+          <OdsIcon icon="close" />
+        </button>
+      </span>
     </aside>
   </template>
 </Visual>
@@ -211,7 +223,11 @@ Banners support dismissal for messages that do not persist or only require a one
       <p class="ods-banner--content">
         Severe solar winds detected. Local system flights may be delayed.
       </p>
-      <button class="ods-banner--dismiss" aria-label="Dismiss banner"></button>
+      <span class="ods-banner--dismiss">
+        <button class="ods-button is-ods-button-overlay" aria-label="Dismiss banner">
+          <OdsIcon icon="close" />
+        </button>
+      </span>
     </aside>
   </template>
 </Visual>

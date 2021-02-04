@@ -125,19 +125,22 @@
 }
 
 .is-ods-button-overlay {
-  background-color: $white;
-  color: $text-body;
+  padding: $spacing-xs-em;
+  background-color: transparent;
+  color: inherit;
+  font-size: ms(-1);
+  line-height: 1;
 
   &:hover,
   &.is-ods-button-hover {
     border-color: transparent;
-    background-color: cv('gray', '100');
+    background-color: transparentize($white, 0.75);
   }
 
   &:focus,
   &.is-ods-button-focus {
     outline: 0;
-    background-color: cv('gray', '100');
+    background-color: transparentize($white, 0.75);
   }
 
   &:disabled {

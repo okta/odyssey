@@ -67,16 +67,9 @@
   position: absolute;
   top: 50%;
   right: $spacing-s;
-  width: ms(4);
-  height: ms(4);
   margin-bottom: 0;
   transform: translateY(-50%);
   border: 0;
-  background-color: transparent;
-  background-image: get-icon('close', $white);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: ms(1);
 
   .ods-toast--body + & {
     top: $spacing-s;
@@ -104,10 +97,6 @@
 
   .ods-toast--title {
     color: $text-heading;
-  }
-
-  .ods-toast--dismiss {
-    background-image: get-icon('close', $text-body);
   }
 }
 

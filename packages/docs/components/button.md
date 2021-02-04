@@ -111,18 +111,20 @@ They pair well with Primary and Secondary buttons.
 </Visual>
 
 
-### Overlay
+### Dismiss
 
 <Description>
 
-Use Overlay Buttons when Primary or Secondary variants aren't visually suitable. These Buttons may only be used on top of a base-variant background color, a photo, or an illustration.
+The Dismiss Button is used for one thing, and you'll never guess what.
 
 </Description>
 
 <Visual variant="background">
   <template>
     <button class="ods-button is-ods-button-overlay">
-      <span class="ods-button--label">Register for Spacecamp</span>
+      <span class="ods-button--label">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path d="M2.32289 10.1181C1.89237 10.5486 1.89237 11.2466 2.32289 11.6771C2.7534 12.1076 3.45141 12.1076 3.88192 11.6771L7 8.55904L10.1181 11.6771C10.5486 12.1076 11.2466 12.1076 11.6771 11.6771C12.1076 11.2466 12.1076 10.5486 11.6771 10.1181L8.55904 7L11.6771 3.88193C12.1076 3.45141 12.1076 2.7534 11.6771 2.32289C11.2466 1.89237 10.5486 1.89237 10.1181 2.32289L7 5.44096L3.88193 2.32289C3.45141 1.89237 2.7534 1.89237 2.32289 2.32289C1.89237 2.7534 1.89237 3.45141 2.32289 3.88192L5.44096 7L2.32289 10.1181Z" fill="currentColor"/></svg>
+      </span>
     </button>
   </template>
 </Visual>

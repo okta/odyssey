@@ -53,14 +53,7 @@
 .ods-banner--dismiss {
   position: absolute;
   right: $spacing-m;
-  width: $base-font-size;
-  height: $base-font-size;
   margin: 0 0 0 $spacing-m;
-  padding: 0;
-  border: 0;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .is-ods-banner-info {
@@ -69,10 +62,6 @@
 
   .ods-banner--title {
     color: $text-body;
-  }
-
-  .ods-banner--dismiss {
-    background-image: get-icon('close', $text-body);
   }
 
   a {
@@ -88,10 +77,6 @@
     color: $text-body;
   }
 
-  .ods-banner--dismiss {
-    background-image: get-icon('close', $text-body);
-  }
-
   a {
     color: $text-body;
   }
@@ -105,10 +90,6 @@
     color: $text-body;
   }
 
-  .ods-banner--dismiss {
-    background-image: get-icon('close', $text-body);
-  }
-
   a {
     color: $text-body;
   }
@@ -120,10 +101,6 @@
 
   .ods-banner--title {
     color: $text-body;
-  }
-
-  .ods-banner--dismiss {
-    background-image: get-icon('close', $text-body);
   }
 
   a {
