@@ -104,6 +104,28 @@ Use Success Infoboxes for reporting successful actions, processes, or states to 
   </template>
 </Visual>
 
+### Info
+
+<Description>
+
+Use Success Infoboxes for reporting successful actions, processes, or states to the user.
+
+</Description>
+
+<Visual content="full">
+  <template>
+    <aside class="ods-infobox is-ods-infobox-info" role="status">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="get-info"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Moonbase Alpha-6</h1>
+      <section class="ods-infobox--content">
+        <p>You are currently logged in from Moonbase Alpha-6, located on Luna.</p>
+      </section>
+    </aside>
+  </template>
+</Visual>
+
 ## Usage
 
 <Description>
@@ -272,6 +294,10 @@ Do not include images or other UIs within Infobox.
     </aside>
   </template>
 </Visual>
+
+### Content Areas
+
+Both Title and Content are optional, but at least one of them is required.
 
 ## Accessibility
 

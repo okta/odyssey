@@ -38,7 +38,7 @@ Visually, a Button is a rounded rectangle with a descriptive caption at its cent
 
 <Description>
 
-In Odyssey there are five Button variants: Primary, Secondary, Danger, Clear, and Overlay.
+In Odyssey there are five Button variants: Primary, Secondary, Danger, Clear, and Dismiss.
 
 </Description>
 
@@ -115,13 +115,15 @@ They pair well with Primary and Secondary buttons.
 
 <Description>
 
-The Dismiss Button is used for one thing, and you'll never guess what.
+The Dismiss Button should only be used for dismissing UI. Typically, this Button is included as part of a larger Odyssey component, but may be useful when constructing unique UIs.
+
+The Dismiss Button has unique padding and will inherit the text color of it's parent UI.
 
 </Description>
 
 <Visual variant="background">
   <template>
-    <button class="ods-button is-ods-button-overlay">
+    <button class="ods-button is-ods-button-dismiss">
       <span class="ods-button--label">
         <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="ods-icon"><path d="M2.32289 10.1181C1.89237 10.5486 1.89237 11.2466 2.32289 11.6771C2.7534 12.1076 3.45141 12.1076 3.88192 11.6771L7 8.55904L10.1181 11.6771C10.5486 12.1076 11.2466 12.1076 11.6771 11.6771C12.1076 11.2466 12.1076 10.5486 11.6771 10.1181L8.55904 7L11.6771 3.88193C12.1076 3.45141 12.1076 2.7534 11.6771 2.32289C11.2466 1.89237 10.5486 1.89237 10.1181 2.32289L7 5.44096L3.88193 2.32289C3.45141 1.89237 2.7534 1.89237 2.32289 2.32289C1.89237 2.7534 1.89237 3.45141 2.32289 3.88192L5.44096 7L2.32289 10.1181Z" fill="currentColor"/></svg>
       </span>
@@ -488,30 +490,30 @@ Color is not a clear affordance for all users, please use clear, concise copy to
   ```
 </figure>
 
-## Overlay
+## Dismiss
 
 <figure class="docs-example">
   <div class="docs-example--rendered is-rendered-success">
-    <button class="ods-button is-ods-button-overlay">
-      <span class="ods-button--label">Overlay</span>
+    <button class="ods-button is-ods-button-dismiss">
+      <span class="ods-button--label">Dismiss</span>
     </button>
-    <button class="ods-button is-ods-button-overlay is-ods-button-hover">
+    <button class="ods-button is-ods-button-dismiss is-ods-button-hover">
       <span class="ods-button--label">Hover</span>
     </button>
-    <button class="ods-button is-ods-button-overlay is-ods-button-focus">
+    <button class="ods-button is-ods-button-dismiss is-ods-button-focus">
       <span class="ods-button--label">Focus</span>
     </button>
-    <button class="ods-button is-ods-button-overlay" disabled>
+    <button class="ods-button is-ods-button-dismiss" disabled>
       <span class="ods-button--label">Disabled</span>
     </button>
   </div>
 
   ```html
-  <button class="ods-button is-ods-button-overlay">
-    <span class="ods-button--label">Overlay</span>
+  <button class="ods-button is-ods-button-dismiss">
+    <span class="ods-button--label">Dismiss</span>
   </button>
-  <button class="ods-button is-ods-button-overlay" disabled>
-    <span class="ods-button--label">Overlay</span>
+  <button class="ods-button is-ods-button-dismiss" disabled>
+    <span class="ods-button--label">Dismiss</span>
   </button>
   ```
 </figure>

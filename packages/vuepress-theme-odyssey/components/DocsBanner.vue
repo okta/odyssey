@@ -3,21 +3,29 @@
     v-if="visible && !dismissed"
     role="alert"
     :class="{
-      'docs-banner': true,
+      'ods-banner is-ods-banner-info is-ods-banner-dismissable': true,
       'is-docs-banner-visible': visible
     }"
   >
-    <div class="docs-banner--content">
+    <span class="ods-banner--icon">
+      <OdsIcon icon="get-info"></OdsIcon>
+    </span>
+    <p class="ods-banner--content">
       <slot></slot>
-    </div>
-    <button
-      v-if="onDismiss"
-      aria-label="Dismiss alert"
-      class="ods-button is-ods-button-clear"
-      @click="dismiss"
-    >
-      <OdsIcon icon="close"></OdsIcon>
-    </button>
+    </p>
+    <section class="ods-banner--actions">
+      <a href="/beta">Learn more</a>
+    </section>
+    <span class="ods-banner--dismiss">
+      <button
+        v-if="onDismiss"
+        aria-label="Dismiss alert"
+        class="ods-button is-ods-button-dismiss"
+        @click="dismiss"
+      >
+        <OdsIcon icon="close"></OdsIcon>
+      </button>
+    </span>
   </aside>
 </template>
 
