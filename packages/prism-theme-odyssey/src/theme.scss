@@ -14,12 +14,12 @@
   --commentColor: #{cv('gray', '500')};
   --punctuationColor: #{cv('blue', '000')};
   --propertyColor: #{cv('turquoise', '400')};
-  --selectorColor: #{cv('green', '000')}; // validate with nick
+  --selectorColor: #{cv('green', '000')};
   --operatorColor: #{cv('blue', '000')};
   --operatorBg: transparent;
-  --variableColor: #{cv('blue', '400')}; // validate with nick
-  --functionColor: #cfb1c1; // validate with nick, not in ODS
-  --keywordColor: #{cv('blue', '300')}; // validate with nick
+  --variableColor: #{cv('blue', '400')};
+  --functionColor: #cfb1c1;
+  --keywordColor: #{cv('blue', '300')};
 }
 
 /*********************************************************
