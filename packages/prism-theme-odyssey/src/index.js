@@ -20,6 +20,11 @@ import './theme.scss';
 import CustomPropertyInspector from './utils/CustomPropertyInspector.js'
 
 
-new CustomPropertyInspector({
-  propertiesElement: document.body
-});
+const urlParams = new URLSearchParams(window.location.search);
+const showInspector = urlParams.get('inspector');
+
+if (showInspector) {
+  new CustomPropertyInspector({
+    propertiesElement: document.body
+  });
+}

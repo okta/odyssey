@@ -2,25 +2,24 @@
 @import '@okta/odyssey/src/scss/abstracts/_colors';
 @import '@okta/odyssey/src/scss/abstracts/_tokens';
 
-// START THEME
 :root {
   --font-size: #{$size-body-base};
-  --inlineCodeColor: #{cv('purple', '500')};
+  --inlineCodeColor: #{cv('blue', '000')};
   --inlineCodeBackground: #{cv('red', '300')};
-  --blockBackground: #{cv('gray', '000')};
-  --baseColor: #{cv('gray', '900')};
-  --selectedColor: #{cv('blue', '300')};
-  --highlightBackground:  #{cv('yellow', '000')};
-  --highlightAccent:  #{cv('yellow', '300')};
+  --blockBackground: #{cv('gray', '900')};
+  --baseColor: #{cv('blue', '000')};
+  --selectedColor: #{cv('turquoise', '500')};
+  --highlightBackground: #{cv('yellow', '000')};
+  --highlightAccent: #{cv('yellow', '300')};
   --commentColor: #{cv('gray', '500')};
-  --punctuationColor: #{cv('gray', '200')};
-  --propertyColor: #{cv('purple', '500')};
-  --selectorColor: #{cv('turquoise', '500')};
-  --operatorColor: #{cv('yellow', '900')};
+  --punctuationColor: #{cv('blue', '000')};
+  --propertyColor: #{cv('turquoise', '400')};
+  --selectorColor: #{cv('green', '000')}; // validate with nick
+  --operatorColor: #{cv('blue', '000')};
   --operatorBg: transparent;
-  --variableColor: #{cv('green', '900')};
-  --functionColor: #{cv('red', '500')};
-  --keywordColor: #{cv('blue', '500')};
+  --variableColor: #{cv('blue', '400')}; // validate with nick
+  --functionColor: #cfb1c1; // validate with nick, not in ODS
+  --keywordColor: #{cv('blue', '300')}; // validate with nick
 }
 
 /*********************************************************
