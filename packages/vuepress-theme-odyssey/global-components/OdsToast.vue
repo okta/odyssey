@@ -28,7 +28,7 @@
     <h1 v-if="title" class="ods-toast--title">{{ title }}</h1>
     <p v-if="body" class="ods-toast--body">{{ body }}</p>
     <span class="ods-toast--dismiss">
-      <button class="ods-button is-ods-button-overlay" aria-label="Dismiss toast" @click="dismiss()">
+      <button class="ods-button is-ods-button-dismiss" aria-label="Dismiss toast" @click="dismiss()">
         <OdsIcon icon="close" />
       </button>
     </span>

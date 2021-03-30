@@ -58,7 +58,7 @@ Use Info Banners to surface neutral information or broad announcements to users.
         <a href="#">View itinerary</a>
       </section>
       <span class="ods-banner--dismiss">
-        <button class="ods-button is-ods-button-overlay" aria-label="Dismiss banner">
+        <button class="ods-button is-ods-button-dismiss" aria-label="Dismiss banner">
           <OdsIcon icon="close" />
         </button>
       </span>
@@ -90,7 +90,7 @@ Include guidance to make sure users know what steps to take to address the error
         <a href="#">Seal bulkhead doors</a>
       </section>
       <span class="ods-banner--dismiss">
-        <button class="ods-button is-ods-button-overlay" aria-label="Dismiss banner">
+        <button class="ods-button is-ods-button-dismiss" aria-label="Dismiss banner">
           <OdsIcon icon="close" />
         </button>
       </span>
@@ -122,7 +122,7 @@ When using the Caution variant, ensure the user does not need more context than 
         <a href="#">View reports</a>
       </section>
       <span class="ods-banner--dismiss">
-        <button class="ods-button is-ods-button-overlay" aria-label="Dismiss banner">
+        <button class="ods-button is-ods-button-dismiss" aria-label="Dismiss banner">
           <OdsIcon icon="close" />
         </button>
       </span>
@@ -224,7 +224,7 @@ Banners support dismissal for messages that do not persist or only require a one
         Severe solar winds detected. Local system flights may be delayed.
       </p>
       <span class="ods-banner--dismiss">
-        <button class="ods-button is-ods-button-overlay" aria-label="Dismiss banner">
+        <button class="ods-button is-ods-button-dismiss" aria-label="Dismiss banner">
           <OdsIcon icon="close" />
         </button>
       </span>

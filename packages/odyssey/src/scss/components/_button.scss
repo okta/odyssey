@@ -134,13 +134,13 @@
   &:hover,
   &.is-ods-button-hover {
     border-color: transparent;
-    background-color: transparentize($white, 0.75);
+    background-color: transparentize($white, 0.5);
   }
 
   &:focus,
   &.is-ods-button-focus {
     outline: 0;
-    background-color: transparentize($white, 0.75);
+    background-color: transparentize($white, 0.5);
   }
 
   &:disabled {
