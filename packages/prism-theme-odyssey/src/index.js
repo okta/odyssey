@@ -21,9 +21,9 @@ import CustomPropertyInspector from './utils/CustomPropertyInspector.js'
 
 
 const urlParams = new URLSearchParams(window.location.search);
-const showInspector = urlParams.get('inspector');
+const hasInspector = urlParams.get('inspector');
 
-if (showInspector) {
+if (hasInspector) {
   new CustomPropertyInspector({
     propertiesElement: document.body
   });

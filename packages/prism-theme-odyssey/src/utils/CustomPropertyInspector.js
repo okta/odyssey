@@ -1,26 +1,28 @@
 const Storage = window.localStorage;
-
+const LOCALSTORAGE_ID = "ods-prism-theme";
 class CustomPropertyInspector {
-  constructor({propertiesElement, inspectorElement}) {
-    this.properties = this.setCustomProperties(propertiesElement);
+  constructor(args) {
+    this.args = args
+    const properties = this.setCustomProperties(args.propertiesElement);
 
-    this.renderInspector()
+    this.renderInspector(properties)
   }
 
   setCustomProperties(element) {
     let prop
-    const styles = getComputedStyle(element)
+    const styles = window.getComputedStyle(element)
     const properties = {}
+    const userStoredTheme = JSON.parse(Storage.getItem(LOCALSTORAGE_ID)) || {};
 
     for (prop in styles) {
       const name = styles[prop];
-      const value = Storage.getItem(name) || styles.getPropertyValue(name);        
+      const value = userStoredTheme[name] || styles.getPropertyValue(name);
 
       if (styles.hasOwnProperty(prop) && styles[prop].includes('--')) { 
         properties[name] = value
       }
 
-      if (Storage.getItem(name)) {
+      if (userStoredTheme[name]) {
         document.documentElement.style.setProperty(name, value);
       }
     }
@@ -28,8 +30,7 @@ class CustomPropertyInspector {
   }
 
 
-  renderInspector() {
-    const { properties } = this
+  renderInspector(properties) {
     const inspector = document.createElement('form');
     inspector.classList.add('custom-properties-inspector');
     inspector.style = `
@@ -99,20 +100,23 @@ class CustomPropertyInspector {
     document.body.prepend(inspector);
 
     inspectorReset.addEventListener('click', () => {
-      Storage.clear();
-      this.setCustomProperties();
+      Storage.removeItem(LOCALSTORAGE_ID);
+      this.setCustomProperties(args.propertiesElement);
     })
 
-    inspector.addEventListener('keyup', (e)=> {
-      let name = e.target.name
-      let value = e.target.value;
+    // TODO: Consider listening only input element events 
+    // which are explicitly concerned with the value of the
+    // custom properties.
+    inspector.addEventListener('keyup', (e) => {
+      const name = e.target.name
+      const value = e.target.value;
 
       this.properties = {
         ...this.properties,
         [name]: value
       }
       
-      Storage.setItem(name, value);
+      Storage.setItem(LOCALSTORAGE_ID, JSON.stringify(this.properties));
 
       document.documentElement.style.setProperty(name, value);
     })
