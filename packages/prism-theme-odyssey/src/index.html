@@ -6,7 +6,7 @@
       <style>
         main {
           max-width: 960px;
-          margin: 48px auto;
+          margin: 48px;
         }
 
         section {
@@ -17,57 +17,105 @@
    <body>
     <main>
       <h1>Prism Theme Odyssey</h1>
+      <p>A <a href="https://prismjs.com/">Prism.js</a> a theme purpose built for <a href="https://okta.design/">Odyssey</a>, Okta's design system.</p>
+
+      <p>Currently this package is not currently being distributed. If you are interested in using this for your project <a href="https://okta.design/">reach out</a> to the Odyssey team!</p>
+      
+      <ul>
+        <li><a href="#csharp">C#</a></li>
+        <li><a href="#go">Go</a></li>
+        <li><a href="#http">HTTP</a></li>
+        <li><a href="#java">Java</a></li>
+        <li><a href="#js">JavaScript</a></li>
+        <li><a href="#json">JSON</a></li>
+        <li><a href="#markdown">Markdown</a></li>
+        <li><a href="#objectivec">Objective-C</a></li>
+        <li><a href="#php">PHP</a></li>
+        <li><a href="#python">Python</a></li>
+        <li><a href="#python-repl">Python REPL</a></li>
+        <li><a href="#swift">Swift</a></li>
+      </ul>
+
       <section>
-        <h2>HTML</h2>
-        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
-  &lt;html lang="en"&gt;
-    &lt;head&gt;
-      &lt;meta charset="utf-8"&gt;
-      &lt;title&gt;Hello world&lt;/title&gt;
-      &lt;link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'&gt;
-      &lt;link rel="stylesheet" href="index.css" /&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-      &lt;div id="app"&gt;&lt;/div&gt;
-      &lt;script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"&gt;&lt;/script&gt;
-      &lt;script src="vendor/prism.js"&gt;&lt;/script&gt;
-      &lt;script src="examples.bundle.js"&gt;&lt;/script&gt;
-    &lt;/body&gt;
-  &lt;/html&gt;
+        <h2><a name="csharp"></a>C#</h2>
+        <pre><code class="language-csharp">using System.IO.Compression;
+
+  #pragma warning disable 414, 3021
+  
+  namespace MyApplication
+  {
+      [Obsolete("...")]
+      class Program : IInterface
+      {
+          public static List<int> JustDoIt(int count)
+          {
+              Span<int> numbers = stackalloc int[length];
+              Console.WriteLine($"Hello {Name}!");
+              return new List<int>(new int[] { 1, 2, 3 })
+          }
+      }
+  }</code></pre>
+      </section>
+      
+      <section>
+        <h2><a name="go"></a> Go</h2>
+        <pre><code class="language-go">import "fmt"
+
+func main() {
+    ch := make(chan float64)
+    ch <- 1.0e10    // magic number
+    x, ok := <- ch
+    defer fmt.Println(`exitting now\`)
+    go println(len("hello world!"))
+    return
+}
 </code></pre>
       </section>
+      
       <section>
-        <h2>CSS</h2>
-<pre><code class="language-css">.ods-label {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  color: $text-heading;
-  font-weight: 600;
+        <h2><a name="http"></a>HTTP</h2>
+        <pre><code class="language-http">HTTP/1.1 200 OK
+Server: GitHub.com
+Date: Mon, 22 Dec 2014 18:25:30 GMT
+Content-Type: text/html; charset=utf-8
+Last-Modified: Sun, 21 Dec 2014 20:29:48 GMT
+Transfer-Encoding: chunked
+Expires: Mon, 22 Dec 2014 18:35:30 GMT
+Cache-Control: max-age=600
+Vary: Accept-Encoding
+Content-Encoding: gzip
 
-  .ods-text-input:disabled ~ &,
-  .ods-text-input[readonly] ~ & {
-    color: $text-sub;
-  }
-}
-
-.ods-label--optional {
-  display: none;
-  color: $text-sub;
-  font-size: $size-body-caption;
-  font-weight: 400;
-  line-height: $spacing-m; // Helps optically match line-height above
-
-  [data-optional] &,
-  :optional ~ .ods-label & {
-    display: block;
-  }
-}</code></pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;</code></pre>
       </section>
 
       <section>
-        <h2>JavaScript</h2>
-<pre><code class="language-js">import {x, y} as p from 'point';
+        <h2><a name="java"></a>Java</h2>
+        <pre><code class="language-java">/**
+  * @author John Smith <john.smith@example.com>
+  */
+
+package l2f.gameserver.model;
+
+public abstract strictfp class L2Char extends L2Object {
+  public static final Short ERROR = 0x0001;
+
+  public void moveTo(int x, int y, int z) {
+    _ai = null;
+    log("Should not be called");
+    if (1 > 5) { // wtf!?
+      return;
+    }
+  }
+}</code></pre>        
+      </section>
+
+      <section>
+        <h2><a name="js"></a>JavaScript</h2>
+        <pre><code class="language-js">import {x, y} as p from 'point';
   const ANSWER = 42;
   
   class Car extends Vehicle {
@@ -104,8 +152,232 @@
     console.log(Array.every(classes, Boolean));
   }
   
-  export  $initHighlight;</code></pre>
+  export $initHighlight;</code></pre>
       </section>
+
+      <section>
+        <h2><a name="json"></a>JSON</h2>
+        <pre><code class="language-js">[
+  {
+    "title": "apples",
+    "count": [12000, 20000],
+    "description": {"text": "...", "sensitive": false}
+  },
+  {
+    "title": "oranges",
+    "count": [17500, null],
+    "description": {"text": "...", "sensitive": false}
+  }
+]</code></pre>
+      </section>
+
+
+      <section>
+        <h2><a name="markdown"></a>Markdown</h2>
+        <pre><code class="language-markdown"># Markdown Example
+
+you can write text [with links](http://example.com) inline or [link references][1].
+
+* one _thing_ has *em*phasis
+* two __things__ are **bold**
+
+[1]: http://example.com
+
+---
+
+hello world
+===========
+
+<this_is inline="xml"></this_is>
+
+> markdown is so cool
+
+    so are code segments
+
+1. one thing (yeah!)
+2. two thing `i can write code`, and `more` wipee!</code></pre>
+      </section>
+
+      <section>
+        <h2><a name="objectivec"></a>Objective-C</h2>
+        <pre><code class="language-objectivec">using System.IO.Compression;
+
+  #pragma warning disable 414, 3021
+  
+  namespace MyApplication
+  {
+      [Obsolete("...")]
+      class Program : IInterface
+      {
+          public static List<int> JustDoIt(int count)
+          {
+              Span<int> numbers = stackalloc int[length];
+              Console.WriteLine($"Hello {Name}!");
+              return new List<int>(new int[] { 1, 2, 3 })
+          }
+      }
+  }</code></pre>
+      </section>
+
+      <section>
+        <h2><a name="php"></a>PHP</h2>
+        <pre><code class="language-php">require_once 'Zend/Uri/Http.php';
+
+  namespace Location\Web;
+  
+  interface Factory
+  {
+      static function _factory();
+  }
+  
+  abstract class URI extends BaseURI implements Factory
+  {
+      abstract function test();
+  
+      public static $st1 = 1;
+      const ME = "Yo";
+      var $list = NULL;
+      private $var;
+  
+      /**
+       * Returns a URI
+       *
+       * @return URI
+       */
+      static public function _factory($stats = array(), $uri = 'http')
+      {
+          echo __METHOD__;
+          $uri = explode(':', $uri, 0b10);
+          $schemeSpecific = isset($uri[1]) ? $uri[1] : '';
+          $desc = 'Multi
+  line description';
+  
+          // Security check
+          if (!ctype_alnum($scheme)) {
+              throw new Zend_Uri_Exception('Illegal scheme');
+          }
+  
+          $this->var = 0 - self::$st;
+          $this->list = list(Array("1"=> 2, 2=>self::ME, 3 => \Location\Web\URI::class));
+  
+          return [
+              'uri'   => $uri,
+              'value' => null,
+          ];
+      }
+  }
+  
+  echo URI::ME . URI::$st1;
+  
+  __halt_compiler () ; datahere
+  datahere
+  datahere */
+  datahere</code></pre>
+      </section>
+
+      <section>
+        <h2><a name="html"></a>HTML</h2>
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+  &lt;html lang="en"&gt;
+    &lt;head&gt;
+      &lt;meta charset="utf-8"&gt;
+      &lt;title&gt;Hello world&lt;/title&gt;
+      &lt;link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'&gt;
+      &lt;link rel="stylesheet" href="index.css" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;div id="app"&gt;&lt;/div&gt;
+      &lt;script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"&gt;&lt;/script&gt;
+      &lt;script src="vendor/prism.js"&gt;&lt;/script&gt;
+      &lt;script src="examples.bundle.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre>
+      </section>
+
+      <section>
+        <h2><a name="css"></a>CSS</h2>
+        <pre><code class="language-css">.ods-label {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  color: $text-heading;
+  font-weight: 600;
+
+  .ods-text-input:disabled ~ &,
+  .ods-text-input[readonly] ~ & {
+    color: $text-sub;
+  }
+}
+
+.ods-label--optional {
+  display: none;
+  color: $text-sub;
+  font-size: $size-body-caption;
+  font-weight: 400;
+  line-height: $spacing-m; // Helps optically match line-height above
+
+  [data-optional] &,
+  :optional ~ .ods-label & {
+    display: block;
+  }
+}</code></pre>
+      </section>
+
+      <section>
+        <h2><a name="python"></a>Python</h2>
+        <pre><code class="language-python">@requires_authorization(roles=["ADMIN"])
+def somefunc(param1='', param2=0):
+    r'''A docstring'''
+    if param1 > param2: # interesting
+        print 'Gre\'ater'
+    return (param2 - param1 + 1 + 0b10l) or None
+
+class SomeClass:
+    pass
+
+>>> message = '''interpreter
+... prompt'''</code></pre>        
+      </section>
+
+      <section>
+        <h2><a name="python-repl"></a>Python REPL</h2>
+        <pre><code class="language-python">>>> v = "foo = 42"
+>>> v
+"foo = 42"
+>>> print(v)
+foo = 42
+>>> print(repr(v).rstrip('"'))
+"foo = 42
+>>> print(repr(v).lstrip('"'))
+foo = 42"
+
+>>> """
+... abc
+... """
+>>> def test():
+...     pass</code></pre>        
+      </section>
+
+      <section>
+        <h2><a name="swift"></a>Swift</h2>
+        <pre><code class="language-swift">import Foundation
+
+@objc class Person: Entity {
+  var name: String!
+  var age:  Int!
+
+  init(name: String, age: Int) {
+    /* /* ... */ */
+  }
+
+  // Return a descriptive string for this person
+  func description(offset: Int = 0) -> String {
+    return "\(name) is \(age + offset) years old"
+  }
+}</code></pre>        
+      </section>
+
     </main>
    </body>
 </html>

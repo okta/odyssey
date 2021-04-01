@@ -7,7 +7,8 @@
   "license": "Apache-2.0",
   "main": "src/theme.scss",
   "scripts": {
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "build": "webpack"
   },
   "dependencies": {
     "@okta/odyssey": "^0.7.0",

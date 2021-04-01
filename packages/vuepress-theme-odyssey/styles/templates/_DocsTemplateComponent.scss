@@ -79,7 +79,6 @@
     margin: 0;
     padding: $spacing-m;
     border: 1px solid var(--border-color-display, #{$border-color-display});
-    background-color: cv('gray', '000');
     overflow: scroll;
     border-radius: 0 0 6px 6px;
   }
