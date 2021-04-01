@@ -18,7 +18,7 @@ class CustomPropertyInspector {
       const name = styles[prop];
       const value = userStoredTheme[name] || styles.getPropertyValue(name);
 
-      if (styles.hasOwnProperty(prop) && styles[prop].includes('--')) { 
+      if (styles.hasOwnProperty(prop) && styles[prop].startsWith('--')) { 
         properties[name] = value
       }
 
