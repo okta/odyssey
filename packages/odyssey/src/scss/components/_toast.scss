@@ -17,7 +17,7 @@
   position: relative;
   grid-gap: 0 $spacing-s;
   grid-template-columns: min-content 1fr min-content;
-  align-items: center;
+  align-items: start;
   max-width: $max-line-length;
   padding: $spacing-m $spacing-s;
   animation-name: ods-toast-in, ods-toast-out;
@@ -65,16 +65,10 @@
 
 .ods-toast--dismiss {
   position: absolute;
-  top: 50%;
-  right: $spacing-s;
+  top: $spacing-xs;
+  right: $spacing-xs;
   margin-bottom: 0;
-  transform: translateY(-50%);
   border: 0;
-
-  .ods-toast--body + & {
-    top: $spacing-s;
-    transform: translateY(0);
-  }
 }
 
 .ods-toast--body {

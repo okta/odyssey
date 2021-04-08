@@ -289,6 +289,8 @@ Do not include images or other UIs within Infobox.
       <h1 class="ods-infobox--title">Solar winds are high today</h1>
       <section class="ods-infobox--content">
         <p>Solar winds may be affecting real time communications between Shuttle 14 and launch control.</p>
+      </section>
+      <section class="ods-infobox--actions">
         <button class="ods-button">Warn them!</button>
       </section>
     </aside>

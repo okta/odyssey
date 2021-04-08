@@ -13,12 +13,15 @@
 // limitations under the License.
 
 .ods-banner {
-  display: flex;
+  display: grid;
   position: relative;
+  grid-template-areas: 'icon title content actions';
+  grid-template-columns: repeat(4, minmax(min-content, max-content));
+  grid-template-rows: 1fr;
   align-items: center;
-  justify-content: center;
   width: 100%;
   padding: $spacing-s $spacing-m;
+  justify-items: center;
 
   a {
     text-decoration: underline;
@@ -30,30 +33,36 @@
 }
 
 .ods-banner--icon {
-  margin-right: $spacing-s;
+  grid-area: icon;
+  margin: 0 $spacing-s 0 0;
   font-size: $size-title-5;
   line-height: 1;
 }
 
 .ods-banner--title {
+  grid-area: title;
   margin: 0 $spacing-xs 0 0;
   font-size: $size-title-6;
 }
 
 .ods-banner--content {
+  grid-area: content;
   max-width: 100%;
   margin: 0 $spacing-m 0 0;
 }
 
 .ods-banner--actions {
   display: flex;
+  grid-area: actions;
   justify-content: end;
 }
 
 .ods-banner--dismiss {
   position: absolute;
+  top: 50%;
   right: $spacing-m;
   margin: 0 0 0 $spacing-m;
+  transform: translateY(-50%);
 }
 
 .is-ods-banner-info {
@@ -105,5 +114,18 @@
 
   a {
     color: $text-body;
+  }
+}
+
+@media screen and (max-width: ($max-line-length * 1.5)) {
+  .ods-banner {
+    grid-template-areas:
+      'icon title'
+      '. content'
+      '. actions';
+    grid-template-columns: repeat(4, minmax(min-content, max-content));
+    grid-template-rows: 1fr;
+    align-items: start;
+    justify-items: start;
   }
 }

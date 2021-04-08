@@ -46,7 +46,7 @@ Use Info Banners to surface neutral information or broad announcements to users.
 
 <Visual layout="wide" content="full">
   <template>
-    <aside class="ods-banner is-ods-banner-info">
+    <aside class="ods-banner is-ods-banner-info is-ods-banner-dismissable">
       <span class="ods-banner--icon">
         <OdsIcon icon="get-info"></OdsIcon>
       </span>
@@ -78,7 +78,7 @@ Include guidance to make sure users know what steps to take to address the error
 
 <Visual layout="wide" content="full">
   <template>
-    <aside class="ods-banner is-ods-banner-danger">
+    <aside class="ods-banner is-ods-banner-danger is-ods-banner-dismissable">
       <span class="ods-banner--icon">
         <OdsIcon icon="error"></OdsIcon>
       </span>
@@ -148,7 +148,7 @@ Banners can utilize an optional Title to give an at-a-glance lede.
 
 <Visual layout="wide" content="full">
   <template>
-    <aside class="ods-banner is-ods-banner-caution is-ods-banner-dismissable">
+    <aside class="ods-banner is-ods-banner-caution">
       <span class="ods-banner--icon">
         <OdsIcon icon="caution"></OdsIcon>
       </span>
