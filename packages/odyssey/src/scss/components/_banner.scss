@@ -19,9 +19,9 @@
   grid-template-columns: repeat(4, minmax(min-content, max-content));
   grid-template-rows: 1fr;
   align-items: center;
+  justify-content: center;
   width: 100%;
   padding: $spacing-s $spacing-m;
-  justify-items: center;
 
   a {
     text-decoration: underline;
@@ -119,13 +119,23 @@
 
 @media screen and (max-width: ($max-line-length * 1.5)) {
   .ods-banner {
-    grid-template-areas:
-      'icon title'
-      '. content'
-      '. actions';
-    grid-template-columns: repeat(4, minmax(min-content, max-content));
-    grid-template-rows: 1fr;
-    align-items: start;
+    grid-template-areas: initial;
+    grid-template-columns: repeat(2, minmax(min-content, max-content));
+    grid-template-rows: unset;
+    justify-content: start;
     justify-items: start;
+  }
+
+  .ods-banner--icon,
+  .ods-banner--title,
+  .ods-banner--content,
+  .ods-banner--actions {
+    grid-area: initial;
+  }
+
+  .ods-banner--title,
+  .ods-banner--content,
+  .ods-banner--actions {
+    grid-column: 2;
   }
 }
