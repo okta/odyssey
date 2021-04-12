@@ -20,6 +20,7 @@
     '. actions';
   grid-template-columns: max-content 1fr;
   width: 100%;
+  max-width: calc(#{$max-line-length} + #{$spacing-s} + #{$spacing-s});
   padding: $spacing-s;
   column-gap: $spacing-s;
 
