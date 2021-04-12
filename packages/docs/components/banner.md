@@ -290,7 +290,7 @@ Banner content should be succinct and direct. When including an action, be sure 
     </thead>
     <tbody>
       <tr>
-        <th scope="row"><a href="/components/banner">Banner</a></th>
+        <th scope="row">Banner</th>
         <td>Info, Caution, Danger</td>
         <td>No</td>
         <td>No</td>
@@ -298,7 +298,7 @@ Banner content should be succinct and direct. When including an action, be sure 
         <td>Yes</td>
       </tr>
       <tr>
-        <th scope="row">Infobox</th>
+        <th scope="row"><a href="/components/banner">Infobox</a></th>
         <td>Success, Caution, Danger</td>
         <td>Yes</td>
         <td>No</td>

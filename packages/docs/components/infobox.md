@@ -299,11 +299,20 @@ Do not include images or other UIs within Infobox.
 
 ### Content Areas
 
+<Description>
+
 Both Title and Content are optional, but at least one of them is required.
+
+</Description>
 
 ## Accessibility
 
+<Description>
+
 When deploying Infoboxes, two `role`s may apply. Danger variants should utilize the `alert` role, as their contents represent immediate risk or failure. Success and Caution variants are better suited to the `status` role, which provides a less urgent announcement on appearance.
+
+</Description>
+
 ## References
 
 <Description layout="wide">
