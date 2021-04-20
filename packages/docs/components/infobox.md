@@ -34,6 +34,28 @@ This component may be present on load or triggered by different types of events,
 
 ## Variants
 
+### Info
+
+<Description>
+
+Use Infoboxes for communicating important guidance to the user. When using the Info variant, consider if plain copy will suffice on the page itself first. Reserve this component for "can’t miss" instructions.
+
+</Description>
+
+<Visual content="full">
+  <template>
+    <aside class="ods-infobox is-ods-infobox-info" role="status">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="get-info"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Moonbase Alpha-6</h1>
+      <section class="ods-infobox--content">
+        <p>You are currently logged in from Moonbase Alpha-6, located on Luna.</p>
+      </section>
+    </aside>
+  </template>
+</Visual>
+
 ### Danger
 
 <Description>
@@ -99,28 +121,6 @@ Use Success Infoboxes for reporting successful actions, processes, or states to 
       <h1 class="ods-infobox--title">Ready for lift-off</h1>
       <section class="ods-infobox--content">
         <p>Safety checks are complete, and this mission as been approved for launch.</p>
-      </section>
-    </aside>
-  </template>
-</Visual>
-
-### Info
-
-<Description>
-
-Use Success Infoboxes for reporting successful actions, processes, or states to the user.
-
-</Description>
-
-<Visual content="full">
-  <template>
-    <aside class="ods-infobox is-ods-infobox-info" role="status">
-      <span class="ods-infobox--icon">
-        <OdsIcon icon="get-info"></OdsIcon>
-      </span>
-      <h1 class="ods-infobox--title">Moonbase Alpha-6</h1>
-      <section class="ods-infobox--content">
-        <p>You are currently logged in from Moonbase Alpha-6, located on Luna.</p>
       </section>
     </aside>
   </template>
@@ -309,7 +309,7 @@ Both Title and Content are optional, but at least one of them is required.
 
 <Description>
 
-When deploying Infoboxes, two `role`s may apply. Danger variants should utilize the `alert` role, as their contents represent immediate risk or failure. Success and Caution variants are better suited to the `status` role, which provides a less urgent announcement on appearance.
+When deploying Infoboxes, two `role`s may apply. Danger variants should utilize the `alert` role, as their contents represent immediate risk or failure. Success and Caution variants are better suited to the `status` role, which provides a less urgent announcement on appearance. The Info variant does not require a `role`, as it represents plain content.
 
 </Description>
 
@@ -372,7 +372,7 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
       </tr>
       <tr>
         <th scope="row">Infobox</th>
-        <td>Success, Caution, Danger</td>
+        <td>Info, Success, Caution, Danger</td>
         <td>Yes</td>
         <td>No</td>
         <td>No</td>
@@ -396,39 +396,178 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
 
 ::: slot html-scss
 
-## Primary
+## Info
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <button class="ods-button">
-      <span class="ods-button--label">Primary</span>
-    </button>
-    <button class="ods-button is-ods-button-hover">
-      <span class="ods-button--label">Hover</span>
-    </button>
-    <button class="ods-button is-ods-button-focus">
-      <span class="ods-button--label">Focus</span>
-    </button>
-    <button class="ods-button" disabled>
-      <span class="ods-button--label">Disabled</span>
-    </button>
+    <aside class="ods-infobox is-ods-infobox-info">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="get-info"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Moonbase Alpha-6</h1>
+      <section class="ods-infobox--content">
+        <p>You are currently logged in from Moonbase Alpha-6, located on Luna.</p>
+      </section>
+    </aside>
   </div>
 
   ```html
-  <button class="ods-button">
-    <span class="ods-button--label">Primary</span>
-  </button>
-  <button class="ods-button" disabled>
-    <span class="ods-button--label">Primary</span>
-  </button>
+  <aside class="ods-infobox is-ods-infobox-info" role="status">
+    <span class="ods-infobox--icon">
+      <svg class="ods-icon">[...]</svg>
+    </span>
+    <h1 class="ods-infobox--title">Moonbase Alpha-6</h1>
+    <section class="ods-infobox--content">
+      <p>You are currently logged in from Moonbase Alpha-6, located on Luna.</p>
+    </section>
+  </aside>
   ```
 </figure>
 
-## Accessibility
+## Danger
 
-<Description>
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="error"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Safety checks have failed</h1>
+      <section class="ods-infobox--content">
+        <p>An issue has been discovered with your fuel mixture ratios. Please reconfigure your fuel mixture and perform safety checks again.</p>
+      </section>
+    </aside>
+  </div>
 
-In addition to the above use-cases for Icon, consider using the `<button>` element instead of `<a>` whenever possible. The keyboard and screen reader interaction for these elements is different. Space will trigger a `<button>`; Enter will trigger an `<a>`.
+  ```html
+  <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+    <span class="ods-infobox--icon">
+      <svg class="ods-icon">[...]</svg>
+    </span>
+    <h1 class="ods-infobox--title">Safety checks have failed</h1>
+    <section class="ods-infobox--content">
+      <p>An issue has been discovered with your fuel mixture ratios. Please reconfigure your fuel mixture and perform safety checks again.</p>
+    </section>
+  </aside>
+  ```
+</figure>
 
-</Description>
+## Caution
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <aside class="ods-infobox is-ods-infobox-caution" role="status">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="caution"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Safety checks incomplete</h1>
+      <section class="ods-infobox--content">
+        <p>Safety checks must be completed before this mission as been approved for launch.</p>
+      </section>
+    </aside>
+  </div>
+
+  ```html
+  <aside class="ods-infobox is-ods-infobox-caution" role="status">
+    <span class="ods-infobox--icon">
+      <svg class="ods-icon">[...]</svg>
+    </span>
+    <h1 class="ods-infobox--title">Safety checks incomplete</h1>
+    <section class="ods-infobox--content">
+      <p>Safety checks must be completed before this mission as been approved for launch.</p>
+    </section>
+  </aside>
+  ```
+</figure>
+
+## Success
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <aside class="ods-infobox is-ods-infobox-success" role="status">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="complete"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Ready for lift-off</h1>
+      <section class="ods-infobox--content">
+        <p>Safety checks are complete, and this mission as been approved for launch.</p>
+      </section>
+    </aside>
+  </div>
+
+  ```html
+  <aside class="ods-infobox is-ods-infobox-success" role="status">
+    <span class="ods-infobox--icon">
+      <svg class="ods-icon">[...]</svg>
+    </span>
+    <h1 class="ods-infobox--title">Ready for lift-off</h1>
+    <section class="ods-infobox--content">
+      <p>Safety checks are complete, and this mission as been approved for launch.</p>
+    </section>
+  </aside>
+  ```
+</figure>
+
+## Inline Actions
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="error"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Safety checks have failed</h1>
+      <section class="ods-infobox--content">
+        <p>An issue has been discovered with your fuel mixture ratios. Please <a href="#">reconfigure your fuel mixture</a> and perform safety checks again.</p>
+      </section>
+    </aside>
+  </div>
+
+  ```html
+  <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+    <span class="ods-infobox--icon">
+      <svg class="ods-icon">[...]</svg>
+    </span>
+    <h1 class="ods-infobox--title">Safety checks have failed</h1>
+    <section class="ods-infobox--content">
+      <p>An issue has been discovered with your fuel mixture ratios. Please <a href="#">reconfigure your fuel mixture</a> and perform safety checks again.</p>
+    </section>
+  </aside>
+  ```
+</figure>
+
+## Block Actions
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="error"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Safety checks have failed</h1>
+      <section class="ods-infobox--content">
+        <p>An issue has been discovered with your fuel mixture ratios. Please reconfigure your fuel mixture and perform safety checks again.</p>
+      </section>
+      <section class="ods-infobox--actions">
+        <a href="#">Visit fueling console</a>
+      </section>
+    </aside>
+  </div>
+
+  ```html
+  <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+    <span class="ods-infobox--icon">
+      <svg class="ods-icon">[...]</svg>
+    </span>
+    <h1 class="ods-infobox--title">Safety checks have failed</h1>
+    <section class="ods-infobox--content">
+      <p>An issue has been discovered with your fuel mixture ratios. Please reconfigure your fuel mixture and perform safety checks again.</p>
+    </section>
+    <section class="ods-infobox--actions">
+      <a href="#">Visit fueling console</a>
+    </section>
+  </aside>
+  ```
+</figure>
+
 :::

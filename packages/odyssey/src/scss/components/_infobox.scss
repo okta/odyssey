@@ -23,6 +23,7 @@
   max-width: calc(#{$max-line-length} + #{$spacing-s} + #{$spacing-s});
   padding: $spacing-s;
   column-gap: $spacing-s;
+  border-radius: $base-border-radius;
 
   a {
     color: $text-body;
