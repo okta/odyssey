@@ -298,7 +298,7 @@ Passwords inputs ensure that sensitive content is safely obscured.
 <Visual content="full">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="password" name="overview-password" id="overview-password" autocomplete="password" spellcheck="false" value="Big Gas Giants" required>
+      <input class="ods-text-input" type="password" name="overview-password" id="overview-password" autocomplete="current-password" spellcheck="false" value="Big Gas Giants" required>
       <label class="ods-label" for="overview-password">Authorization code</label>
     </div>
   </fieldset>
@@ -311,6 +311,14 @@ Passwords inputs ensure that sensitive content is safely obscured.
 <Description>
 
 Except for Search inputs, we advise against using placeholder text for inputs.
+
+</Description>
+
+### Purpose
+
+<Description>
+
+When collecting an individual's personal data, you must define the input's purpose via the `autocomplete` attribute. This allows users to automate the filling of fields and ensures the purpose is known, regardless of the label. A complete list of fields this is required for may be found <a href="https://www.w3.org/TR/WCAG21/#input-purposes">in the WCAG spec</a>.
 
 </Description>
 
@@ -411,7 +419,7 @@ Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="tel" name="example-3" id="example-3" spellcheck="false" value="888-722-7871" required>
+        <input class="ods-text-input" type="tel" name="example-3" id="example-3" autocomplete="tel" spellcheck="false" value="888-722-7871" required>
         <label class="ods-label" for="example-2">Telephone number</label>
       </div>
     </fieldset>
@@ -420,7 +428,7 @@ Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="tel" name="example-3" id="example-3" spellcheck="false" value="888-722-7871" required>
+      <input class="ods-text-input" type="tel" name="example-3" id="example-3" autocomplete="tel" spellcheck="false" value="888-722-7871" required>
       <label class="ods-label" for="example-2">Telephone number</label>
     </div>
   </fieldset>
@@ -433,7 +441,7 @@ Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="password" name="example-4" id="example-4" spellcheck="false" value="fake-password-value" required>
+        <input class="ods-text-input" type="password" name="example-4" id="example-4" autocomplete="current-password" spellcheck="false" value="fake-password-value" required>
         <label class="ods-label" for="example-4">Password</label>
       </div>
     </fieldset>
@@ -442,7 +450,7 @@ Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel
   ```html
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input class="ods-text-input" type="password" name="example-4" id="example-4" spellcheck="false" value="fake-password-value" required>
+      <input class="ods-text-input" type="password" name="example-4" id="example-4" autocomplete="current-password" spellcheck="false" value="fake-password-value" required>
       <label class="ods-label" for="example-4">Password</label>
     </div>
   </fieldset>
@@ -586,7 +594,7 @@ Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel
 ### Invalid label
 
 <Description>
-  
+
   Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
 
 </Description>
