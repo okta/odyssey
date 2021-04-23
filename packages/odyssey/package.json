@@ -13,8 +13,7 @@
   "scripts": {
     "prepare": "yarn build",
     "build": "node-sass src/scss/odyssey.scss dist/odyssey.css",
-    "lint": "stylelint src/",
-    "test": "yarn lint"
+    "stylelint": "stylelint src/"
   },
   "devDependencies": {
     "node-sass": "^4.9.4",
