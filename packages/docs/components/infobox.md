@@ -2,8 +2,8 @@
 template: component
 id: component-infobox
 title: Infobox
-description:
-lead:
+description: An infobox is a type of alert that provides feedback in response to a user action or system activity.
+lead: An infobox is a type of alert that provides feedback in response to a user action or system activity.
 tabs:
   - label: 'Overview'
     id: 'overview'
