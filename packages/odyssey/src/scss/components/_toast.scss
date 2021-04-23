@@ -136,3 +136,17 @@
     opacity: 0;
   }
 }
+
+@media (prefers-reduced-motion) {
+  .ods-toast {
+    animation-name: ods-toast-in;
+    animation-duration: 300ms;
+    animation-delay: 0s;
+
+    &.is-toast-dismissed {
+      animation-name: ods-toast-out;
+      animation-duration: 300ms;
+      animation-delay: 0s;
+    }
+  }
+}
