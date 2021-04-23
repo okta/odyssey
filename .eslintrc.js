@@ -2,7 +2,7 @@ const { pattern, template, header } = require('./header');
 
 module.exports = {
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2018,
     sourceType: 'module'
   },
   overrides: [
