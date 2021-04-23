@@ -93,3 +93,9 @@ Before publishing a new version, ensure the following steps are performed:
 3. Commit your changes and submit the `CHANGELOG` for approval. Once approved, merge into `master`.
 
 4. (*Internal use only*) Reach out in the `#odyssey` slack channel to promote the package to public NPM.
+
+## Support Disclaimer
+
+This library is community supported and is maintained by members of the Okta team for developers and IT professionals.
+This library is not an official Okta product and does not qualify for any Okta support. Anyone who chooses to use this
+library must ensure that their implementation meets any applicable legal obligations including any Okta terms and conditions.
