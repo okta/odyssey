@@ -88,8 +88,6 @@ a:visited {
 }
 
 .docs-banner--beta {
-  flex-basis: 100%;
-
   @include mq(l) {
     position: sticky;
     z-index: z-index(topbar);

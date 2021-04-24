@@ -134,7 +134,11 @@ For users happy with their new context, we ensure their attention isn't misdirec
     <div class="ods-modal--overlay" tabindex="-1" data-micromodal-close>
       <div class="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title">
         <header class="ods-modal--header">
-          <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
+          <span class="ods-modal--dismiss">
+            <button class="ods-button is-ods-button-dismiss" aria-label="Dismiss modal" data-micromodal-close>
+              <OdsIcon icon="close" />
+            </button>
+          </span>
           <h1 class="ods-modal--title" id="ods-modal-standard-title">
             Launch Safety Confirmation
           </h1>
