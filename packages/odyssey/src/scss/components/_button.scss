@@ -124,24 +124,27 @@
   }
 }
 
-.is-ods-button-overlay {
-  background-color: $white;
-  color: $text-body;
+.is-ods-button-dismiss {
+  padding: $spacing-xs-em / 2;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  line-height: 1;
 
   &:hover,
   &.is-ods-button-hover {
     border-color: transparent;
-    background-color: cv('gray', '100');
+    background-color: transparentize($white, 0.6);
   }
 
   &:focus,
   &.is-ods-button-focus {
     outline: 0;
-    background-color: cv('gray', '100');
+    background-color: transparentize($white, 0.6);
   }
 
   &:disabled {
-    background-color: transparentize(cv('gray', '100'), 0.5);
+    background-color: transparentize(cv('gray', '100'), 0.6);
     color: cv('gray', '600');
   }
 }

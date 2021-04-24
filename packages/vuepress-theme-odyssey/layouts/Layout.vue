@@ -6,8 +6,7 @@
       :visible="showBanner"
       :on-dismiss="onBetaBannerDismiss"
     >
-      <OdsIcon icon="get-info"></OdsIcon> Odyssey is currently in Beta.
-      <DocsLink href="/beta">Learn more</DocsLink>
+      Odyssey is currently in Beta.
     </DocsBanner>
     <div class="docs-layout">
       <DocsSidebar

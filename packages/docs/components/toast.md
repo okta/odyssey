@@ -183,6 +183,85 @@ Do not use Danger Toasts for in-page errors such as invalid form fields. Instead
   </div>
 </Visual>
 
+## References
+
+<Description layout="wide">
+
+<figure class="ods-table--figure">
+  <figcaption class="ods-table--figcaption">
+    Related Components
+  </figcaption>
+  <table class="ods-table">
+    <caption>Differences between the available alert components</caption>
+    <thead>
+      <tr>
+        <th scope="column">Component</th>
+        <th scope="column">Available Variants</th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-dynamic">Dynamic</abbr>
+            <aside class="ods-tooltip is-ods-tooltip-top" id="tip-dynamic" role="tooltip">
+              May be inserted after page load
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-transient">Transient</abbr>
+            <aside class="ods-tooltip is-ods-tooltip-top" id="tip-transient" role="tooltip">
+              Disappears without user interaction
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-dismissable">Dismissable</abbr>
+            <aside class="ods-tooltip is-ods-tooltip-top" id="tip-dismissable" role="tooltip">
+              May be dismissed by the user
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-actionable">Actionable</abbr>
+            <aside class="ods-tooltip is-ods-tooltip-top" id="tip-actionable" role="tooltip">
+              May include actions or links
+            </aside>
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><a href="/components/banner">Banner</a></th>
+        <td>Info, Caution, Danger</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <th scope="row"><a href="/components/infobox">Infobox</a></th>
+        <td>Success, Caution, Danger</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <th scope="row">Toast</th>
+        <td>Info, Success, Caution, Danger</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+</Description>
+
 :::
 
 ::: slot html-scss

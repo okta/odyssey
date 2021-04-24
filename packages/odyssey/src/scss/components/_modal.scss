@@ -40,17 +40,9 @@
   flex-direction: column;
 }
 
-.ods-modal--close {
+.ods-modal--dismiss {
   align-self: flex-end;
-  width: $base-font-size;
-  height: $base-font-size;
   margin-bottom: $spacing-xs;
-  padding: 0;
-  border: 0;
-  background-color: transparent;
-  background-image: get-icon('close', $text-body);
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .ods-modal--title {

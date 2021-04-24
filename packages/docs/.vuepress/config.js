@@ -49,9 +49,11 @@ module.exports = {
           title: 'Components',
           link: '/components/',
           children: [
+            { title: 'Banner', link: '/components/banner/' },
             { title: 'Button', link: '/components/button/' },
             { title: 'Checkbox', link: '/components/checkbox/' },
             { title: 'Field Labels', link: '/components/field-labels/' },
+            { title: 'Infobox', link: '/components/infobox/' },
             { title: 'Link', link: '/components/link/' },
             { title: 'Modal', link: '/components/modal/' },
             { title: 'Radio Button', link: '/components/radio-button/' },
