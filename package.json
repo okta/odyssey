@@ -1,5 +1,7 @@
 {
   "name": "odyssey",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -14,11 +16,14 @@
     "lerna-version": "lerna version --no-git-tag-version --force-publish",
     "prelerna-publish": "lerna run build",
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry",
-    "lint": "eslint . --ext .js,.vue && stylelint ./*.scss", 
-    "test": "yarn lint" 
+    "lint": "yarn eslint && yarn stylelint",
+    "eslint": "eslint .",
+    "stylelint": "lerna run stylelint",
+    "test": "lerna run test"
   },
   "devDependencies": {
     "eslint": "^7.9.0",
+    "eslint-plugin-header": "^3.1.1",
     "lerna": "3.3.2"
   },
   "version": "0.5.0"

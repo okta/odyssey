@@ -1,3 +1,8 @@
 module.exports = {
-  extends: ["vuepress"]
+  overrides: [
+    {
+      files: ["*.js", "*.vue"],
+      extends: ["vuepress"]
+    }
+  ]
 };
