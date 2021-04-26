@@ -1,5 +1,10 @@
-/*!
- * Copyright (c) 2020-present, Okta, Inc. and/or its affiliates. All rights reserved.
+const getYear = () => new Date().getUTCFullYear().toString().slice(-2);
+
+exports.pattern = `\\* Copyright \\(c\\) 20\\d{2}-present, Okta, Inc\\. and\\/or its affiliates\\. All rights reserved\\.`
+
+exports.template= ` * Copyright (c) 20${getYear()}-present, Okta, Inc. and/or its affiliates. All rights reserved.`
+
+exports.header = `\
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -8,20 +13,4 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *
  * See the License for the specific language governing permissions and limitations under the License.
- */
-
-// Theme API.
-module.exports = (options, ctx) => {
-  return {
-    plugins: [
-      [
-        "vuepress-plugin-clean-urls",
-        {
-          normalSuffix: "/",
-          indexSuffix: "/",
-          notFoundlink: "/404.html"
-        }
-      ]
-    ]
-  };
-};
+ `
