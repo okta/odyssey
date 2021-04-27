@@ -4,7 +4,7 @@
     :class="{
       'docs-card': true,
       [`is-docs-card-${variant}`]: true,
-      [`is-docs-card-image-${image - size}`]: true
+      [`is-docs-card-image-${imageSize}`]: true
     }"
   >
     <header v-if="hasSlotHeader" class="docs-card--header">
