@@ -8,8 +8,8 @@
   >
     <!-- eslint-disable vue/no-v-html -->
     <div
-      v-html="require(`!html-loader!../../docs/.vuepress/public/${img}`)"
       class="docskit-figure-anatomy--shrinkwrap"
+      v-html="require(`!html-loader!../../docs/.vuepress/public/${img}`)"
     />
     <!-- eslint-enable vue/no-v-html -->
     <figcaption>
