@@ -28,7 +28,7 @@
         :key="index"
         tag="li"
         variant="shadow"
-        imageSize="large"
+        image-size="large"
       >
         <template slot="header">
           <!-- eslint-disable -->

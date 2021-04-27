@@ -45,7 +45,6 @@ export default {
     Fragment,
     DocsBanner: () => import("../components/DocsBanner.vue"),
     DocsSidebar: () => import("../components/DocsSidebar.vue"),
-    DocsLink: () => import("../components/DocsLink.vue"),
     DocsTemplateHome: () => import("../templates/DocsTemplateHome.vue"),
     DocsTemplateIndex: () => import("../templates/DocsTemplateIndex.vue"),
     DocsTemplatePlain: () => import("../templates/DocsTemplatePlain.vue"),
