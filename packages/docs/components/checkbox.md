@@ -128,8 +128,14 @@ Checkboxes are disabled individually. The values of disabled inputs will not be 
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-checkbox" type="checkbox" name="checkbox" id="overview-disabled" value="overview-disabled" disabled>
+    <input class="ods-checkbox" type="checkbox" name="overview-disabled[]" id="overview-disabled-checked" value="overview-disabled" checked disabled>
+    <label class="ods-checkbox--label" for="overview-disabled-checked">Enable auto-docking</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-disabled[]" id="overview-disabled" value="overview-disabled" disabled>
     <label class="ods-checkbox--label" for="overview-disabled">Enable auto-docking</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-disabled[]" id="overview-disabled-invalid-checked" value="overview-disabled" checked disabled data-invalid>
+    <label class="ods-checkbox--label" for="overview-disabled-invalid-checked">Enable auto-docking</label>
+    <input class="ods-checkbox" type="checkbox" name="overview-disabled[]" id="overview-disabled-invalid" value="overview-disabled" disabled data-invalid>
+    <label class="ods-checkbox--label" for="overview-disabled-invalid">Enable auto-docking</label>
   </fieldset>
 </Visual>
 
@@ -315,8 +321,10 @@ export default {
       <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
       <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-2" value="value-2" disabled>
       <label class="ods-checkbox--label" for="example-2-2">Label 2</label>
-      <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-3" value="value-3" disabled>
+      <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-3" value="value-3" checked disabled data-invalid>
       <label class="ods-checkbox--label" for="example-2-3">Label 3</label>
+      <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-4" value="value-4" disabled data-invalid>
+      <label class="ods-checkbox--label" for="example-2-4">Label 4</label>
     </fieldset>
   </div>
 
