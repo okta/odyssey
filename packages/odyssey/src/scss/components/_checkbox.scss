@@ -36,6 +36,17 @@
     }
   }
 
+  &:not(:checked) {
+    + .ods-checkbox--label {
+      &:hover,
+      &.is-ods-checkbox-hover {
+        &::before {
+          border-color: $color-primary-base;
+        }
+      }
+    }
+  }
+
   &:indeterminate,
   &.is-ods-checkbox-indeterminate {
     + .ods-checkbox--label {
@@ -58,7 +69,8 @@
   }
 
   &:disabled {
-    + .ods-checkbox--label {
+    + .ods-checkbox--label,
+    + .ods-checkbox--label:hover {
       color: $text-body;
       cursor: not-allowed;
 
@@ -115,9 +127,14 @@
       }
     }
 
-    &:hover:not(:checked) {
-      + .ods-checkbox--label::before {
-        border-color: $color-danger-dark;
+    &:not(:checked) {
+      + .ods-checkbox--label {
+        &:hover,
+        &.is-ods-checkbox-hover {
+          &::before {
+            border-color: $color-danger-dark;
+          }
+        }
       }
     }
 
@@ -136,7 +153,7 @@
         color: $text-danger;
 
         &::before {
-          background-color: $color-danger-light;
+          border-color: $color-danger-light;
         }
 
         &::after {
@@ -144,7 +161,16 @@
         }
       }
 
+      &:checked {
+        + .ods-checkbox--label {
+          &::before {
+            background-color: $color-danger-light;
+          }
+        }
+      }
+
       &:checked,
+      &:not(:checked),
       &:indeterminate {
         + .ods-checkbox--label {
           &::before {
@@ -201,12 +227,5 @@
     background-image: get-icon('check', transparent);
     background-repeat: no-repeat;
     background-position: center;
-  }
-
-  &:hover,
-  &.is-ods-checkbox-hover {
-    &::before {
-      border-color: $color-primary-base;
-    }
   }
 }
