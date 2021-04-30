@@ -12,8 +12,7 @@
   "style": "src/scss/odyssey.scss",
   "scripts": {
     "prepare": "yarn build",
-    "build": "node-sass src/scss/odyssey.scss dist/odyssey.css",
-    "stylelint": "stylelint src/"
+    "build": "node-sass src/scss/odyssey.scss dist/odyssey.css"
   },
   "devDependencies": {
     "node-sass": "^4.9.4"
