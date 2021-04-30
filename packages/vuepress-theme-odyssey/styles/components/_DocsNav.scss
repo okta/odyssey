@@ -44,7 +44,9 @@
   display: none;
   margin-bottom: $spacing-s;
 
+  /* stylelint-disable no-descending-specificity */
   a,
+  /* stylelint-enable no-descending-specificity */
   a:visited {
     padding: 0 $spacing-s;
     padding-left: $spacing-m;

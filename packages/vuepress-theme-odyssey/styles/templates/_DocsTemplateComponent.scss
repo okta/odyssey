@@ -110,7 +110,9 @@
 
 // Component specific examples
 
+/* stylelint-disable no-duplicate-selectors */
 .docs-example {
+  /* stylelint-enable no-duplicate-selectors */
   .ods-modal--overlay {
     position: relative;
     z-index: auto;
