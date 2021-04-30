@@ -1,5 +1,7 @@
+/* stylelint-disable selector-no-qualifying-type */
 a.docs-site-title,
 a.docs-site-title:visited {
+  /* stylelint-enable selector-no-qualifying-type */
   display: block;
   padding: $spacing-xs $spacing-xs;
   border: 0;
