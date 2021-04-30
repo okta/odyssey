@@ -78,8 +78,8 @@
   pre[class*='language-'] {
     margin: 0;
     padding: $spacing-m;
-    border: 1px solid var(--border-color-display, #{$border-color-display});
     overflow: scroll;
+    border: 1px solid var(--border-color-display, #{$border-color-display});
     border-radius: 0 0 6px 6px;
   }
 
@@ -112,9 +112,9 @@
 
 .docs-example {
   .ods-modal--overlay {
-    z-index: auto;
-    border-radius: 6px 6px 0 0;
     position: relative;
+    z-index: auto;
     padding: $spacing-xl $spacing-m;
+    border-radius: 6px 6px 0 0;
   }
 }
