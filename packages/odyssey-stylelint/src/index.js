@@ -11,13 +11,18 @@
  */
 
 module.exports = {
-  plugins: [ 'stylelint-order', 'stylelint-scss' ],
+  plugins: [
+    require.resolve('./rules'),
+    'stylelint-order',
+    'stylelint-scss'
+  ],
   extends: [
     'stylelint-config-recommended',
     'stylelint-config-standard',
     'stylelint-config-sass-guidelines'
   ],
   rules: {
+    'odyssey/header': true,
     'at-rule-empty-line-before': [
       'always',
       {
