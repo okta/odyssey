@@ -11,7 +11,8 @@ a.docs-site-title:visited {
 
 @include mq(l) {
   .is-sidebar-expanded {
-    html, body {
+    html,
+    body {
       overflow-x: hidden;
     }
 

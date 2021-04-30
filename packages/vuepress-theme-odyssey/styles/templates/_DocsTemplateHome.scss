@@ -11,9 +11,6 @@
     margin-right: $spacing-m;
     padding: $spacing-m $spacing-m;
 
-    .docs-hero--title { font-size: $size-title-1; }
-    .docs-hero--desc { font-size: $size-title-4; }
-
     @include mq(l) {
       margin: 0;
     }
@@ -23,6 +20,9 @@
       margin-top: $spacing-m;
       .docs-hero--title { font-size: $size-title-1; }
     }
+
+    .docs-hero--title { font-size: $size-title-1; }
+    .docs-hero--desc { font-size: $size-title-4; }
   }
 
   .docs-hero-moon {

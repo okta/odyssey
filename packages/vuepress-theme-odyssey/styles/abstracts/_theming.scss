@@ -5,8 +5,7 @@
 }
 
 @mixin set-theme($theme: $theme-day) {
-  $theme-properties:
-    docs-page-bg,
+  $theme-properties: docs-page-bg,
     docs-text-body,
     docs-text-heading,
     docs-border-color-display,
@@ -38,7 +37,7 @@ $theme-night: (
   docs-page-bg: cv('gray', '900'),
   docs-text-body: $white,
   docs-text-heading: $white,
-  docs-card-bg: #41414B,
+  docs-card-bg: #41414b,
   docs-sidebar-bg: cv('gray', '900'),
   docs-nav-selected-bg: cv('gray', '600'),
   docs-home-hero-moon: #242427,
