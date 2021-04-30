@@ -1,6 +1,8 @@
+/* stylelint-disable scss/at-import-no-partial-leading-underscore */
 @import '@okta/odyssey/src/scss/abstracts/_functions';
 @import '@okta/odyssey/src/scss/abstracts/_colors';
 @import '@okta/odyssey/src/scss/abstracts/_tokens';
+/* stylelint-enable scss/at-import-no-partial-leading-underscore */
 
 :root {
   --font-size: #{$size-body-base};
@@ -25,8 +27,11 @@
 /*********************************************************
 * General
 */
+
+/* stylelint-disable selector-no-qualifying-type */
 pre[class*='language-'],
 code[class*='language-'] {
+  /* stylelint-enable selector-no-qualifying-type */
   color: var(--baseColor);
   font-family: 'Inconsolata', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: var(--font-size);
@@ -36,39 +41,49 @@ code[class*='language-'] {
   word-break: normal;
   white-space: pre;
   word-spacing: normal;
+  /* stylelint-disable property-no-vendor-prefix */
   -webkit-hyphens: none;
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
   -moz-tab-size: 4;
   -o-tab-size: 4;
+  /* stylelint-enable property-no-vendor-prefix */
   tab-size: 4;
   direction: ltr;
 }
 
+/* stylelint-disable selector-no-qualifying-type, selector-pseudo-element-no-unknown */
 pre[class*='language-']::selection,
 code[class*='language-']::selection,
 pre[class*='language-']::mozselection,
 code[class*='language-']::mozselection {
+  /* stylelint-enable selector-no-qualifying-type, selector-pseudo-element-no-unknown */
   background: var(--selectedColor);
   text-shadow: none;
 }
 
 @media print {
+  /* stylelint-disable selector-no-qualifying-type */
   pre[class*='language-'],
   code[class*='language-'] {
+    /* stylelint-enable selector-no-qualifying-type */
     text-shadow: none;
   }
 }
 
+/* stylelint-disable selector-no-qualifying-type, no-descending-specificity */
 pre[class*='language-'] {
+  /* stylelint-enable selector-no-qualifying-type, no-descending-specificity */
   margin: 0.5em 0;
   padding: 1em;
   overflow: auto;
   background: var(--blockBackground);
 }
 
+/* stylelint-disable selector-no-qualifying-type */
 :not(pre) > code[class*='language-'] {
+  /* stylelint-enable selector-no-qualifying-type */
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
   background: var(--inlineCodeBackground);
@@ -153,11 +168,16 @@ pre[class*='language-'] {
 /*********************************************************
 * Line highlighting
 */
+
+/* stylelint-disable selector-no-qualifying-type */
 pre[data-line] {
+  /* stylelint-enable selector-no-qualifying-type */
   position: relative;
 }
 
+/* stylelint-disable selector-no-qualifying-type */
 pre[class*='language-'] > code[class*='language-'] {
+  /* stylelint-enable selector-no-qualifying-type */
   position: relative;
   z-index: 1;
 }
