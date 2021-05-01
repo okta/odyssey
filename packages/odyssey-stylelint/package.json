@@ -5,6 +5,9 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "stylelint": "^9.3.0",
     "stylelint-checkstyle-formatter": "^0.1.1",
@@ -13,5 +16,9 @@
     "stylelint-config-standard": "^18.2.0",
     "stylelint-order": "^0.8.1",
     "stylelint-scss": "^3.2.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "jest-preset-stylelint": "^3.0.0"
   }
 }
