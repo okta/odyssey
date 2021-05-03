@@ -18,7 +18,7 @@
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry",
     "lint": "yarn eslint && yarn stylelint",
     "eslint": "eslint .",
-    "stylelint": "lerna run stylelint",
+    "stylelint": "stylelint **/*.scss",
     "test": "lerna run test"
   },
   "devDependencies": {

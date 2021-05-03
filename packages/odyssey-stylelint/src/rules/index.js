@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,12 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// Rem-based modular scale for type
-// Not ready for general use.
+const { readdirSync } = require('fs');
+const { join } = require('path');
+const dir = __dirname;
 
-// Visually Hidden - use this for text that should be hidden from sighted
-// users, but available to ATs.
-
-.u-visually-hidden {
-  @include is-visually-hidden;
-}
+module.exports = readdirSync(dir).reduce(
+  (memo, path) => path.endsWith('index.js') ? memo : memo.concat(require(join(dir, path))),
+  []
+);
