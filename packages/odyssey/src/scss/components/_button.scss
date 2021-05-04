@@ -137,8 +137,8 @@
 
   &:focus,
   &.is-ods-button-focus {
-    outline: 0;
     background-color: transparentize($white, 0.6);
+    box-shadow: 0 0 0 2px;
   }
 
   &:disabled {
