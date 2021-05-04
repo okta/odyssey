@@ -29,7 +29,7 @@ links:
 
 <Description>
 
-Users interact with Tab as they would a button, the main difference is the outcome. By default, the first tab from the left is active and the associated content displayed in the tab panel. Upon selecting a different tab, the tab indicator appears on the selected tab. The tab panel will then update to show the new content. 
+Users interact with Tab as they would a button, the main difference is the outcome. By default, the first tab from the left is active and the associated content displayed in the tab panel. Upon selecting a different tab, the tab indicator appears on the selected tab. The tab panel will then update to show the new content.
 
 Additionally, the tab element is keyboard-navigable (See [Accessibility: Keyboard Support](#keyboard-support))
 
@@ -37,10 +37,8 @@ Additionally, the tab element is keyboard-navigable (See [Accessibility: Keyboar
 
 <Visual layout="wide" content="full" fade>
   <template>
-    <header>
-      <h1>Terrestrial Planets</h1>
-      <p>Terrestrial planets are planets that are composed primarily of silicate rocks or metals.</p>
-    </header>
+    <h1>Terrestrial Planets</h1>
+    <p>Terrestrial planets are planets that are composed primarily of silicate rocks or metals.</p>
     <OdsTabs aria-label="Types of terrestrial planets" :active="tabsPlanets.active" :tablist="tabsPlanets.tablist" id="example-1">
       <template slot="tab-mercury">
         <blockquote class="is-sample-unimportant">
@@ -70,8 +68,8 @@ Additionally, the tab element is keyboard-navigable (See [Accessibility: Keyboar
 
 <Description>
 
-Tabs were created to shorten long pages. Before you use these, we’d recommend laying 
-out all of the content on your page out first. From there, figure out common themes and 
+Tabs were created to shorten long pages. Before you use these, we’d recommend laying
+out all of the content on your page out first. From there, figure out common themes and
 see what could be grouped together. Those themes should become your Tabs.
 
 </Description>
@@ -85,18 +83,14 @@ Tabs are not navigation. Meaning they don’t take you from place to place. Rath
 </Description>
 
 <Visual variant="positive" content="no-end" class="is-tab-small-sample">
-  <header>
-    <h2>Terrestrial Planets</h2>
-    <p>Terrestrial planets are planets that are composed primarily of silicate rocks or metals.</p>
-  </header>
+  <h2>Terrestrial Planets</h2>
+  <p>Terrestrial planets are planets that are composed primarily of silicate rocks or metals.</p>
   <OdsTabs aria-label="Types of terrestrial planets" :active="tabsPlanets.active" :tablist="tabsPlanets.tablist" id="example-2"></OdsTabs>
 </Visual>
 
 <Visual variant="negative" content="no-end" class="is-tab-small-sample">
-  <header>
-    <h2>Terrestrial Planets</h2>
-    <p>Terrestrial planets are planets that are composed primarily of silicate rocks or metals.</p>
-  </header>
+  <h2>Terrestrial Planets</h2>
+  <p>Terrestrial planets are planets that are composed primarily of silicate rocks or metals.</p>
   <OdsTabs aria-label="Famous constellations" :active="tabsConstellations.active" :tablist="tabsConstellations.tablist" id="example-3"></OdsTabs>
 </Visual>
 
@@ -110,32 +104,24 @@ Tabs are best used at the top of the page or situated above the content it’s r
 
 
 <Visual variant="positive" content="no-end" class="is-tab-small-sample">
-  <header>
-    <h2>Missions</h2>
-    <p>There have been 49 missions involving various types of spacecraft.</p>
-  </header>
+  <h2>Missions</h2>
+  <p>There have been 49 missions involving various types of spacecraft.</p>
   <OdsTabs aria-label="Missions by type" :active="tabs.active" :tablist="tabs.tablist" id="example-4"></OdsTabs>
 </Visual>
 
 <Visual variant="negative"  content="no-end" class="is-tab-small-sample">
   <OdsTabs aria-label="Missions by type" :active="tabs.active" :tablist="tabs.tablist" id="example-5">
   <template slot="tab-orbiter">
-    <header>
-      <h2>Missions</h2>
-      <p>There have been 8 missions involving orbiters.</p>
-    </header>
+    <h2>Missions</h2>
+    <p>There have been 8 missions involving orbiters.</p>
   </template>
   <template slot="tab-atmospheric">
-    <header>
-      <h2>Missions</h2>
-      <p>There have been 12 missions involving atmospheric vehicles.</p>
-    </header>
+    <h2>Missions</h2>
+    <p>There have been 12 missions involving atmospheric vehicles.</p>
   </template>
   <template slot="tab-lander">
-    <header>
-      <h2>Missions</h2>
-      <p>There have been 4 missions involving lander vehicles.</p>
-    </header>
+    <h2>Missions</h2>
+    <p>There have been 4 missions involving lander vehicles.</p>
   </template>
   </OdsTabs>
 </Visual>

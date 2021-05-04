@@ -18,8 +18,8 @@
     '. actions';
   grid-template-columns: max-content 1fr;
   width: 100%;
-  max-width: calc(#{$max-line-length} + #{$spacing-s} + #{$spacing-s});
-  padding: $spacing-s;
+  max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
+  padding: $spacing-m;
   column-gap: $spacing-s;
   border-radius: $base-border-radius;
 
@@ -43,7 +43,6 @@
 
 .ods-infobox--title {
   grid-area: title;
-  margin-bottom: 0;
   font-size: $size-title-6;
 }
 
