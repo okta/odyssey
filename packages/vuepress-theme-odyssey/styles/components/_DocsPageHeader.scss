@@ -25,6 +25,7 @@
 
   .docs-page-header--lead {
     grid-column: 1 / 2;
+    margin: 0;
     font-size: $size-title-4;
 
     @include mq(l) {
