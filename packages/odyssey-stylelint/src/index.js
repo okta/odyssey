@@ -16,7 +16,6 @@ module.exports = {
     'stylelint-scss'
   ],
   extends: [
-    'stylelint-config-recommended',
     'stylelint-config-standard',
     'stylelint-config-sass-guidelines',
     'stylelint-config-property-sort-order-smacss'
