@@ -13,7 +13,6 @@
 module.exports = {
   plugins: [
     require.resolve('./rules'),
-    'stylelint-order',
     'stylelint-scss'
   ],
   extends: [
