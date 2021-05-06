@@ -29,7 +29,7 @@ jobs:
         run: echo "COMMIT_MSG=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV
 
       - name: install dependencies
-        run: yarn
+        run: yarn install --frozen-lockfile
 
       - name: lint
         run: yarn lint
