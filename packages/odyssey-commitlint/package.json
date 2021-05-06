@@ -8,6 +8,7 @@
   "dependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
-    "@commitlint/config-lerna-scopes": "^12.1.1"
+    "@commitlint/config-lerna-scopes": "^12.1.1",
+    "husky": "^6.0.0"
   }
 }
