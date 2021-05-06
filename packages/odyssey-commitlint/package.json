@@ -4,5 +4,10 @@
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "@commitlint/config-lerna-scopes": "^12.1.1"
+  }
 }
