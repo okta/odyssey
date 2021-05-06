@@ -74,14 +74,14 @@ We also provide an attached button for in-page searching or avoiding placeholder
   <form>
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset--attached">
-        <input class="ods-text-input" type="search" name="overview-search-button" id="overview-search-button" autocomplete="search" spellcheck="false" aria-labelledby="overview-search-button" required>
-        <button class="ods-button" id="overview-search-button">Search planets</button>
+        <input class="ods-text-input" type="search" name="overview-search-button" id="overview-search-button" autocomplete="search" spellcheck="false" aria-labelledby="overview-search-button-label" required>
+        <button class="ods-button" id="overview-search-button-label">Search planets</button>
       </div>
     </fieldset>
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset--attached">
-        <input class="ods-text-input" type="search" name="overview-search-button-sec" id="overview-search-button-sec" autocomplete="search" spellcheck="false" aria-labelledby="overview-search-button-sec" required>
-        <button class="ods-button is-ods-button-secondary" id="overview-search-button-sec">Find cosmonaut</button>
+        <input class="ods-text-input" type="search" name="overview-search-button-sec" id="overview-search-button-sec" autocomplete="search" spellcheck="false" aria-labelledby="overview-search-button-sec-label" required>
+        <button class="ods-button is-ods-button-secondary" id="overview-search-button-sec-label">Find cosmonaut</button>
       </div>
     </fieldset>
   </form>
