@@ -462,13 +462,15 @@ Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <input type="search" name="example-5" id="example-5" autocomplete="search" placeholder="Placeholder value" spellcheck="false" aria-labelledby="example-5" required="required" class="ods-text-input">
+      <input type="search" name="example-5" id="example-5" autocomplete="search" placeholder="Placeholder value" spellcheck="false" required="required" class="ods-text-input">
+      <label class="ods-label" for="example-5">Search</label>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset">
-    <input type="search" name="example-5" id="example-5" autocomplete="search" placeholder="Placeholder value" spellcheck="false" aria-labelledby="example-5" required="required" class="ods-text-input">
+    <input type="search" name="example-5" id="example-5" autocomplete="search" placeholder="Placeholder value" spellcheck="false" required="required" class="ods-text-input">
+    <label class="ods-label" for="example-5">Search</label>
   </fieldset>
   ```
 </figure>
@@ -479,8 +481,8 @@ Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset--attached">
-        <input type="search" name="example-6" id="example-6" autocomplete="search" spellcheck="false" aria-labelledby="example-6" required="required" class="ods-text-input">
-        <button id="example-6" class="ods-button">Button label</button>
+        <input type="search" name="example-6" id="example-6" autocomplete="search" spellcheck="false" aria-labelledby="example-6-button" required="required" class="ods-text-input">
+        <button id="example-6-button" class="ods-button">Button label</button>
       </div>
     </fieldset>
   </div>
@@ -488,8 +490,8 @@ Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel
   ```html
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset--attached">
-        <input type="search" name="example-6" id="example-6" autocomplete="search" spellcheck="false" aria-labelledby="example-6" required="required" class="ods-text-input">
-        <button id="example-6" class="ods-button">Button label</button>
+        <input type="search" name="example-6" id="example-6" autocomplete="search" spellcheck="false" aria-labelledby="example-6-button" required="required" class="ods-text-input">
+        <button id="example-6-button" class="ods-button">Button label</button>
       </div>
     </fieldset>
   ```
@@ -501,8 +503,8 @@ Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset--attached">
-        <input type="search" name="example-7" id="example-7" autocomplete="search" spellcheck="false" aria-labelledby="example-7" required="required" class="ods-text-input">
-        <button id="example-7" class="ods-button is-ods-button-secondary">Button label</button>
+        <input type="search" name="example-7" id="example-7" autocomplete="search" spellcheck="false" aria-labelledby="example-7-button" required="required" class="ods-text-input">
+        <button id="example-7-button" class="ods-button is-ods-button-secondary">Button label</button>
       </div>
     </fieldset>
   </div>
@@ -510,8 +512,8 @@ Out of the box, Odyssey supports input types for `text`, `email`, `search`, `tel
   ```html
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset--attached">
-        <input type="search" name="example-7" id="example-7" autocomplete="search" spellcheck="false" aria-labelledby="example-7" required="required" class="ods-text-input">
-        <button id="example-7" class="ods-button is-ods-button-secondary">Button label</button>
+        <input type="search" name="example-7" id="example-7" autocomplete="search" spellcheck="false" aria-labelledby="example-7-button" required="required" class="ods-text-input">
+        <button id="example-7-button" class="ods-button is-ods-button-secondary">Button label</button>
       </div>
     </fieldset>
   ```
