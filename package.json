@@ -19,7 +19,8 @@
     "lint": "yarn eslint && yarn stylelint",
     "eslint": "eslint .",
     "stylelint": "stylelint **/*.scss",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "commitlint": "commitlint --verbose --edit"
   },
   "devDependencies": {
     "eslint": "^7.9.0",
