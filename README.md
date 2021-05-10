@@ -43,6 +43,15 @@ yarn docs
 
 Once the website is built, visit <http://localhost:8080/> in your browser.
 
+### Making a commit
+
+Odyssey uses the [conventional commits](https://www.conventionalcommits.org)
+standard for formating commit messages. After you commit work locally with
+`git` your commit message wil be linted to ensure it adheres to the
+configuration setup within the `@okta/odyssey-commitlint` package.
+In case of emergencies, break the glass and use an invalid commit message
+by providing the `--no-verify` flag to `git commit`.
+
 ## Packages
 
 ### Monorepo

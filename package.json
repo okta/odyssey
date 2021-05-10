@@ -19,7 +19,9 @@
     "lint": "yarn eslint && yarn stylelint",
     "eslint": "eslint .",
     "stylelint": "stylelint **/*.scss",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "commitlint": "commitlint --verbose --edit",
+    "prepare": "[ -n $CI ] && exit 0 || husky install"
   },
   "devDependencies": {
     "eslint": "^7.9.0",
