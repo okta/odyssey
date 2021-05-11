@@ -1,0 +1,56 @@
+@import '@okta/odyssey';
+
+@font-face {
+  font-family: 'Whyte';
+  font-style: normal;
+  font-weight: normal;
+  src: url('https://ok3static.oktacdn.com/font/ABCWhyte-Book.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Whyte';
+  font-style: italic;
+  font-weight: normal;
+  src: url('https://ok3static.oktacdn.com/font/ABCWhyte-BookItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Whyte';
+  font-style: normal;
+  font-weight: 600;
+  src: url('https://ok3static.oktacdn.com/font/ABCWhyte-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Whyte';
+  font-style: normal;
+  font-weight: 600;
+  src: url('https://ok3static.oktacdn.com/font/ABCWhyte-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Whyte';
+  font-style: italic;
+  font-weight: 600;
+  src: url('https://ok3static.oktacdn.com/font/ABCWhyte-MediumItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Whyte';
+  font-style: italic;
+  font-weight: 600;
+  src: url('https://ok3static.oktacdn.com/font/ABCWhyte-MediumItalic.woff') format('woff');
+}
+
+// TODO: Inconsolata was just selected by our brand team as
+// Okta's font of choice. Work to ensure it gets put in the
+// CDN like Whyte has.
+
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
+
+.sbdocs {
+  &.sbdocs-ul {
+    max-width: $max-line-length;
+  }
+}

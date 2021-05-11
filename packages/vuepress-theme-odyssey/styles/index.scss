@@ -107,34 +107,6 @@ a:visited {
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  .header-anchor {
-    display: none;
-    position: absolute;
-    width: $spacing-s-em;
-    height: $spacing-s-em;
-    margin-top: $spacing-xs-em /2;
-    margin-left: -$spacing-m;
-    transition: 0.33s opacity  ease-in-out;
-    opacity: 0;
-    background-image: get-icon('anchor', var(--border-color-ui, #{$border-color-ui}));
-    background-repeat: no-repeat;
-    background-size: contain;
-    text-indent: -9999em;
-    vertical-align: middle;
-  }
-
-  &:hover .header-anchor,
-  &:focus-within .header-anchor {
-    opacity: 1;
-  }
-}
-
 // Component Samples
 
 .is-sample-unimportant {
@@ -313,7 +285,7 @@ $spacing-units: (
 
     .type-sample--px {
       &::before {
-        content: '#{round(rem-to-px(ms($x))))}';
+        content: '#{round(rem-to-px(ms($x)))}';
       }
     }
 

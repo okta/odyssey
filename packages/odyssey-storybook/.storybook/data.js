@@ -1,0 +1,20 @@
+export const icons = [
+  {id: "caution", name: "Caution", desc: "To indicate a crucial decision"},
+  {id: "search", name: "Search", desc: "To search for something"},
+  {id: "get-info", name: "Get info",  desc: "To get information"},
+  {id: "user", name: "User", desc: "To support a user name"},
+  {id: "copy", name: "Copy", desc: "To copy text"},
+  {id: "delete", name: "Delete", desc: "To delete something"},
+  {id: "download", name: "Download", desc: "To download"},
+  {id: "notification", name: "Notification", desc: "To notify the user of something"},
+  {id: "close", name: "Close", desc: "To close a modal or other UI"},
+  {id: "complete", name: "Complete", desc: "To show a completed process"},
+  {id: "error", name: "Error", desc: "To indicate an error"},
+  {id: "go-forward", name: "Go forward",  desc: "	To navigate forward"},
+  {id: "go-backward", name: "Go backward",  desc: "backward	To navigate backward"},
+  {id: "edit", name: "Edit", desc: "To edit something"},
+  {id: "settings", name: "Settings", desc: "To edit user or app settings"},
+  {id: "plus", name: "Plus", desc: "To add"},
+  {id: "minus", name: "Minus", desc: "To subtract or remove"},
+  {id: "filter", name: "Filter", desc: "To filter results"}
+]

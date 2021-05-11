@@ -46,7 +46,7 @@ jobs:
         run: yarn test
 
       - name: Build docs
-        run: yarn workspace @okta/design-docs build
+        run: yarn workspace @okta/odyssey-docs build
 
       - name: Create GitHub deployment
         uses: bobheadxi/deployments@v0.4.2
