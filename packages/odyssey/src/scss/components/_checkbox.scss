@@ -153,10 +153,6 @@
         &::before {
           border-color: $color-danger-light;
         }
-
-        &::after {
-          background-image: get-icon('check', $white);
-        }
       }
 
       &:checked {
