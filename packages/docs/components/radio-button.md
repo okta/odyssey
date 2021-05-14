@@ -128,6 +128,8 @@ Radios are disabled by option.
   <fieldset class="ods-fieldset">
     <input class="ods-radio" type="radio" name="overview-disabled" id="overview-disabled" value="0" required disabled>
     <label class="ods-radio--label" for="overview-disabled">Warp speed</label>
+    <input class="ods-radio" type="radio" name="overview-disabled-invalid" id="overview-disabled-invalid" value="1" required disabled data-invalid>
+    <label class="ods-radio--label" for="overview-disabled-invalid">Warp speed</label>
   </fieldset>
 </Visual>
 
