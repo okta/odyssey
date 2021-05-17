@@ -105,6 +105,14 @@
         }
       }
 
+      &:hover {
+        + .ods-radio--label {
+          &::before {
+            border-color: $color-danger-base-disabled;
+          }
+        }
+      }
+
       &:checked {
         + .ods-radio--label {
           &::before {
