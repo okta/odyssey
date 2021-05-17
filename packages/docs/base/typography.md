@@ -6,6 +6,20 @@ headline: Typography
 lead: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 description: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 ---
+## Font family
+
+<p> Odyssey offers separate font stacks for UI, copy, and code:
+
+```scss
+$body-font-family: 'Public Sans', 'Noto Sans', 'Whyte', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+
+$mono-font-family: 'Inconsolata', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+```
+
+</p>
+
+UI and copy both utilize our `$body-font-family`. This stack prioritizes Public Sans. This is followed by Noto Sans to support internationalization, then Whyte for Okta-branded pages. Finally, we utilize a system font-stack to enable device-standard typography when our preferred families aren't available.
+
 ## Hierarchy
 
 <Description>
@@ -14,7 +28,7 @@ Typographical hierarchy indicates importance of content. Through size and weight
 
 </Description>
 
-## Type Styles
+## Type styles
 
 <Description>
 
