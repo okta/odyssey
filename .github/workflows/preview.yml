@@ -31,6 +31,14 @@ jobs:
       - name: get COMMIT_MSG
         run: echo "COMMIT_MSG=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV
 
+      - name: cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
       - name: install dependencies
         run: yarn install --frozen-lockfile
 
