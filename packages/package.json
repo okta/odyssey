@@ -1,0 +1,9 @@
+{
+  "name": "odyssey-react",
+  "version": "0.7.0",
+  "description": "React components for Odyssey, Okta's design system",
+  "main": "src/index.js",
+  "repository": "https://github.com/okta/odyssey",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0"
+}
