@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@okta/odyssey-react";
+import Button from "../components/Button";
 
 export default {
   title: `Components/Button`
@@ -14,7 +14,7 @@ const Template = ({ variant, onClick }) => (
   </>
 )
 
-export const Primary = Template.bind({ x: 'xx' });
+export const Primary = Template.bind({});
 Primary.storyName = "Primary"
 Primary.args = {
   variant: "primary"

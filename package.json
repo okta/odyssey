@@ -12,7 +12,7 @@
   },
   "scripts": {
     "docs": "yarn workspace @okta/odyssey-docs start",
-    "storybook": "yarn workspace @okta/odyssey-storybook start",
+    "storybook": "yarn workspace @okta/odyssey-react start",
     "icons": "yarn workspace @okta/odyssey-icons svgo",
     "lerna-version": "lerna version --no-git-tag-version --force-publish",
     "prelerna-publish": "lerna run build",
