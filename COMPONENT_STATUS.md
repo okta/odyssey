@@ -8,36 +8,37 @@ across Figma, component packages, and documentation with each release.
 If you have questions, please reach out in the [#odyssey](https://okta.slack.com/archives/C7T2H3KNJ) Slack channel.
 
 
-| Symbol            | Description    |
-| ----------------- | -------------- |
-| 🟢                | Done/Available |
-| 🟡                | In Progress    |
-| ⭕                | To-do          |
-| 🔴                | Deprecated     |
-| ⚪                | Not Applicable |
+| Symbol            | Description         |
+| ----------------- | ------------------- |
+| 🟢                | Done/Available      |
+| 🟡                | In Progress         |
+| ⭕                | To-do               |
+| 🔴                | Deprecated          |
+| ⚪                | Not Applicable      |
 
 
 ## Base/Tokens
 
-| Syntax       | Figma Kit  | SCSS        | Web Component  | React | Documentation  |
-| ------------ | ---------- | ----------- | -------------- | ----- | -------------- |
-| Icons        | 🟢         | ⭕          | ⭕             | ⭕     | ⭕             |
+| Syntax       | Figma Kit  | SCSS        | React          | Documentation  |
+| ------------ | ---------- | ----------- | -------------- | -------------- |
+| Icons        | 🟢         | ⭕          | ⭕             | ⭕             |
 
 ## Components
 
-| Syntax       | Figma Kit  | SCSS        | Web Component  | React | Documentation  |
-| ------------ | ---------- | ----------- | -------------- | ----- | -------------- |
-| Button       | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
-| Checkbox     | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
-| Field Labels | 🟢         | ⭕          | ⭕             | ⭕     | ⭕             |
-| Link         | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
-| Modal        | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
-| Radio Button | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
-| Select       | 🟢         | ⭕          | ⭕             | ⭕     | ⭕             |
-| Status       | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
-| Tab          | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
-| Table        | 🟢         | ⭕          | ⭕             | ⭕     | ⭕             |
-| Tag          | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
-| Text Input   | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
-| Toast        | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
-| Tooltip      | 🟢         | 🟢          | ⭕             | ⭕     | ⭕             |
+| Syntax       | Figma Kit  | SCSS        | React          | Documentation  |
+| ------------ | ---------- | ----------- | -------------- | -------------- |
+| Banner       | 🟢         | 🟢          | ⭕             | ⭕             |
+| Button       | 🟢         | 🟢          | ⭕             | ⭕             |
+| Checkbox     | 🟢         | 🟢          | ⭕             | ⭕             |
+| Field Labels | 🟢         | ⭕          | ⭕             | ⭕             |
+| Link         | 🟢         | 🟢          | ⭕             | ⭕             |
+| Modal        | 🟢         | 🟢          | ⭕             | ⭕             |
+| Radio Button | 🟢         | 🟢          | ⭕             | ⭕             |
+| Select       | 🟢         | ⭕          | ⭕             | ⭕             |
+| Status       | 🟢         | 🟢          | ⭕             | ⭕             |
+| Tab          | 🟢         | 🟢          | ⭕             | ⭕             |
+| Table        | 🟢         | ⭕          | ⭕             | ⭕             |
+| Tag          | 🟢         | 🟢          | ⭕             | ⭕             |
+| Text Input   | 🟢         | 🟢          | ⭕             | ⭕             |
+| Toast        | 🟢         | 🟢          | ⭕             | ⭕             |
+| Tooltip      | 🟢         | 🟢          | ⭕             | ⭕             |

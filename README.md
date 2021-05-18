@@ -5,16 +5,16 @@
 
 # Odyssey Design System
 
-This repository contains the code for Okta's Design System Odyssey. It includes SCSS, Icons, Web, and React Components used to build products and experiences at Okta.
+This repository contains the code for Okta's Design System Odyssey. It includes Icons, SCSS, and React Components used to build products and experiences at Okta.
 
 ## Packages
 
 | Package/README                                                                                                        | Description                                                              |
 | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| [@okta/odyssey](https://github.com/okta/odyssey/tree/master/packages/odyssey/README.md)                               | Odyssey SCSS, includes components, includes base and reset styles.       |
+| [@okta/odyssey-scss](https://github.com/okta/odyssey/tree/master/packages/odyssey-scss/README.md)                               | Odyssey SCSS, includes components, includes base and reset styles.       |
 | [@okta/odyssey-icons](https://github.com/okta/odyssey/tree/master/packages/odyssey-icons/README.md)                   | Odyssey SVG icons.                                                       |
-| [@okta/odyssey-web-components](https://github.com/okta/odyssey/tree/master/packages/odyssey-web-components/README.md) | Odyssey web components built using [Stencil.js](https://stenciljs.com/). |
-| [@okta/odyssey-react](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/README.md)                   | Odyssey react built using [React](https://reactjs.org/).                 |
+| [@okta/odyssey-scss](https://github.com/okta/odyssey/tree/master/packages/odyssey-scss/README.md) | Odyssey SCSS used across the system |
+| [@okta/odyssey-react](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/README.md)                   | Odyssey components for [React](https://reactjs.org/).                 |
 
 ## Git Workflow
 This project takes care to use standard gitflow workflow with minor exceptions.
@@ -56,9 +56,6 @@ Odyssey browser support mirrors Okta's [Supported platforms, browsers, and opera
 | Chrome               | Latest public version supported.                                                                                        |
 | Safari               | Latest public version supported.                                                                                        |
 | Firefox              | Latest public version for Rapid Release supported. <br /> Latest public version for Extended Support Release supported. |
-
-## Contributing
-
 ## Licenses
 
 All source code, imagery, and icons fall under the [Apache Version 2.0 License](https://github.com/okta/odyssey/blob/master/LICENSE).
