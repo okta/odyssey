@@ -93,7 +93,7 @@ color: $text-body;
 
 #### Declaration Sorting
 
-Properties should be sorted by type. Rougly, this means properties related to box, border, background, text, then others. Specifically, we refer to the <a href="https://github.com/brandon-rhodes/Concentric-CSS/blob/master/style3.css">Concentric CSS</a> standard.
+Properties should be sorted by type. Roughly, this means properties related to box, border, background, text, then others. Specifically, we refer to the <a href="https://github.com/cahamilton/stylelint-config-property-sort-order-smacss#readme">SMACSS</a> standard.
 
 #### Nesting
 
