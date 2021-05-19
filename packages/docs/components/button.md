@@ -256,13 +256,17 @@ Don't use buttons to navigate users around the site or product; use links instea
 
 ## Content Guidelines
 
-### Punctuation and copy
+<Description>
 
-#### Context
+Consider the following when writing content for buttons. By doing so, it will ensure users can easily navigate the page and complete the task at hand efficiently.
+
+</Description>
+
+### Context
 
 <Description>
 
-Be as direct as possible with the goal you are trying to get the user to do. Avoid patterns that need the user to discover what a button does.
+Provide enough context to ensure the user is aware what the interaction will achieve. Avoid patterns that require the user to discover what a button does.
 
 </Description>
 
@@ -288,7 +292,7 @@ Be strategic in your button placement so a user has the best context. For exampl
   </template>
 </Visual>
 
-#### Word count
+### Word count
 
 <Description>
 
@@ -312,7 +316,7 @@ Don't use more than three words inside of a button. If a user needs more context
   </template>
 </Visual>
 
-#### Capitalization
+### Capitalization
 
 <Description>
 

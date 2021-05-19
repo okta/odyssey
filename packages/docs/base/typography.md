@@ -6,9 +6,10 @@ headline: Typography
 lead: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 description: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 ---
+
 ## Font family
 
-<p> Odyssey offers separate font stacks for UI, copy, and code:
+<p>Odyssey offers separate font stacks for UI, copy, and code:
 
 ```scss
 $body-font-family: 'Public Sans', 'Noto Sans', 'Whyte', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
@@ -110,7 +111,7 @@ Titles are used to describe the main idea of a page, a section, or content that 
 
 <Description>
 
-Odyssey ships with a base font of `14px`. However there are times when different sizes are required.
+Odyssey ships with a base font-size of `16px`. However there are times when different sizes are required.
 
 </Description>
 
