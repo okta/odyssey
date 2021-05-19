@@ -81,13 +81,15 @@ If no other solution can be found, please include a comment to inform the next c
 
 #### Colors
 
-Color literals should not be used in property delcarations. Instead, use a known color variable or design token.
+Color literals should not be used in property declarations. Instead, use a known design token to ensure proper theming and forward compatibility.
 
 ```scss
-color: cv('red', '500');
+// Don't
+color: #ff0000;
+color: red;
 
+// Do
 color: $text-body;
-```
 
 #### Declaration Sorting
 
