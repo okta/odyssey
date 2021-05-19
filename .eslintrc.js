@@ -7,7 +7,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: '*.js',
+      files: '*.@(js|jsx|ts|tsx)',
       excludedFiles: [".eslintrc.js", "header.js"],
       plugins: [
         'header'

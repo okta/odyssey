@@ -18,10 +18,15 @@
     "@storybook/addon-links": "^6.2.9",
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/react": "^6.2.9",
-    "babel-loader": "^8.2.2"
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.26.0",
+    "typescript": "^4.2.4"
   },
   "scripts": {
     "start": "start-storybook -p 6006",
+    "lint": "eslint .",
     "build-storybook": "build-storybook"
   }
 }
