@@ -10,13 +10,13 @@
       <div
         class="docs-hero-moon"
         v-html="
-          require(`!html-loader!../../odyssey-docs/.vuepress/public/images/home-hero-moon.svg`)
+          require(`!html-loader!../../docs/.vuepress/public/images/home-hero-moon.svg`)
         "
       ></div>
       <div
         class="docs-hero-rocket"
         v-html="
-          require(`!html-loader!../../odyssey-docs/.vuepress/public/images/home-hero-rocket.svg`)
+          require(`!html-loader!../../docs/.vuepress/public/images/home-hero-rocket.svg`)
         "
       ></div>
       <!-- eslint-enable vue/no-v-html -->
@@ -36,7 +36,7 @@
             aria-hidden="true"
             class="docs-card--header-image"
             v-html="
-              require(`!html-loader!../../odyssey-docs/.vuepress/public/images/coin-${section.coin || 'fpo'}.svg`)
+              require(`!html-loader!../../docs/.vuepress/public/images/coin-${section.coin || 'fpo'}.svg`)
             "
           />
           <!-- eslint-enable -->

@@ -9,7 +9,7 @@
     <!-- eslint-disable vue/no-v-html -->
     <div
       class="docskit-figure-anatomy--shrinkwrap"
-      v-html="require(`!html-loader!../../odyssey-docs/.vuepress/public/${img}`)"
+      v-html="require(`!html-loader!../../docs/.vuepress/public/${img}`)"
     />
     <!-- eslint-enable vue/no-v-html -->
     <figcaption>
