@@ -23,13 +23,13 @@
     display: block;
   }
 
-  .docs-page-header--lead {
+  .docs-page-header--lede {
     grid-column: 1 / 2;
     margin: 0;
-    font-size: $size-title-4;
+    font-size: $size-body-lede;
 
     @include mq(l) {
-      font-size: $size-title-5;
+      font-size: $size-body-lede;
     }
   }
 

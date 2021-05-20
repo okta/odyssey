@@ -4,7 +4,7 @@ template: plain
 pageHeaderVariant: icon
 title: Icons
 headline: Icons
-lead: A system of icons which establishes a visual language that can be easily understood regardless of age, language or culture.
+lede: A system of icons which establishes a visual language that can be easily understood regardless of age, language or culture.
 tabs:
   - label: 'Overview'
     id: 'overview'

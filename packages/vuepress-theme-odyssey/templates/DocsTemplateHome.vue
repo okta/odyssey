@@ -4,7 +4,7 @@
     <header class="docs-hero">
       <div class="docs-hero--content">
         <h1 class="docs-hero--title">{{ $page.frontmatter.headline }}</h1>
-        <p class="docs-hero--desc">{{ $page.frontmatter.lead }}</p>
+        <p class="docs-hero--desc">{{ $page.frontmatter.lede }}</p>
       </div>
       <!-- eslint-disable vue/no-v-html -->
       <div

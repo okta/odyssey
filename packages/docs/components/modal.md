@@ -2,7 +2,7 @@
 template: component
 id: component-modal
 description: UI that appears on top of the main content and moves the system into a mode requiring user interaction.
-lead: UI that appears on top of the main content and moves the system into a mode requiring user interaction. This dialog disables the main content until the user interacts with the modal dialog.
+lede: UI that appears on top of the main content and moves the system into a mode requiring user interaction. This dialog disables the main content until the user interacts with the modal dialog.
 title: Modal
 tabs:
   - label: 'Overview'

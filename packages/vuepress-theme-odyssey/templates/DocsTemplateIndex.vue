@@ -2,7 +2,7 @@
   <article class="docs-index">
     <DocsPageHeader
       :title="$page.frontmatter.title"
-      :lead="$page.frontmatter.lead"
+      :lede="$page.frontmatter.lede"
       :variant="$page.frontmatter.id"
     />
     <DocsCardGroup

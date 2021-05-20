@@ -3,7 +3,7 @@ template: component
 id: component-button
 title: Button
 description: Buttons are used for in-page interactions like form submissions.
-lead: A clickable button used for form submissions and most in-page interactions.
+lede: A clickable button used for form submissions and most in-page interactions.
 tabs:
   - label: 'Overview'
     id: 'overview'

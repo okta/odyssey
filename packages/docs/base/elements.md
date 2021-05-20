@@ -4,7 +4,7 @@ id: base-elements
 title: Elements
 headline: Elements
 description: A glossary of standard HTML elements provided by Odyssey.
-lead: A glossary of standard HTML elements provided by Odyssey.
+lede: A glossary of standard HTML elements provided by Odyssey.
 ---
 
 ## abbr <a name="abbr"></a>

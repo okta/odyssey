@@ -1,7 +1,7 @@
 ---
 template: home
 headline: Odyssey Design System
-lead: Build and design consistent, efficient, and accessible UIs for all Okta users.
+lede: Build and design consistent, efficient, and accessible UIs for all Okta users.
 contentPrimary:
   - coin: base
     title: Base

@@ -3,7 +3,7 @@ template: component
 id: component-tag
 title: Tag
 description: Tags are used to help describe and differentiate an entity or object.
-lead: Use Tags to help describe and differentiate an entity or object. Think of them as “adjectives” in your UI toolbox that make navigating  and parsing content easier.
+lede: Use Tags to help describe and differentiate an entity or object. Think of them as “adjectives” in your UI toolbox that make navigating  and parsing content easier.
 tabs:
   - label: 'Overview'
     id: 'overview'

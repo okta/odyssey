@@ -3,7 +3,7 @@ template: component
 id: component-select
 title: Select
 description: Often referred to as a “dropdown menu” this input triggers a menu of options a user can select.
-lead: Often referred to as a “dropdown menu” this input triggers a menu of options a user can select. Country and state Selects are common examples.
+lede: Often referred to as a “dropdown menu” this input triggers a menu of options a user can select. Country and state Selects are common examples.
 tabs:
   - label: 'Overview'
     id: 'overview'

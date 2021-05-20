@@ -3,7 +3,7 @@ template: plain
 id: base-type
 title: Typography
 headline: Typography
-lead: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
+lede: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 description: A set of pre-defined text styles for headers, body copy, & links designed for clarity in readability and hierarchy.
 ---
 
@@ -135,6 +135,12 @@ Odyssey ships with a base font-size of `16px`. However there are times when diff
         </tr>
       </thead>
       <tbody>
+        <tr class="type-sample-body">
+          <td class="type-sample-body--token"><code>$size-body-lede</code></td>
+          <td class="type-sample-body--rem"></td>
+          <td class="type-sample-body--px"></td>
+          <td class="type-sample-body--example">Waltz, bad nymph, for quick jigs vex!</td>
+        </tr>
         <tr class="type-sample-body">
           <td class="type-sample-body--token"><code>$size-body-base</code></td>
           <td class="type-sample-body--rem"></td>
