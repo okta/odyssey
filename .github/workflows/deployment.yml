@@ -1,5 +1,4 @@
-name: 'Preview Deployment'
-
+name: Preview Deployment
 on:
   pull_request:
     branches:
@@ -7,7 +6,7 @@ on:
       - develop
       - "release/**"
 jobs:
-  deployment:
+  docs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -15,7 +14,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: cofigure aws
+      - name: Cofigure AWS
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -28,28 +27,28 @@ jobs:
       - name: set $PREVIEW_URL
         run: echo "PREVIEW_URL="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
 
-      - name: get COMMIT_MSG
+      - name: get $COMMIT_MSG
         run: echo "COMMIT_MSG=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV
 
-      - name: cache dependencies
+      - name: Cache dependencies
         uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
-      - name: install dependencies
+      - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: lint
+      - name: Run lint
         run: yarn lint
 
-      - name: test
+      - name: Run test
         run: yarn test
 
-      - name: build docs
+      - name: Build docs
         run: yarn workspace @okta/design-docs build
 
-      - name: 'deploy: create'
+      - name: Create GitHub deployment
         uses: bobheadxi/deployments@v0.4.2
         id: deployment
         with:
@@ -58,11 +57,11 @@ jobs:
           env: preview
           ref: ${{ github.head_ref }}
 
-      - name: 'deploy: 🚀 start'
+      - name: Deploy to S3
         run: |
           aws s3 sync ./packages/docs/dist/ s3://ods.dev/$SHA7 --delete
 
-      - name: 'deploy: update status'
+      - name: Update GitHub deployment status
         uses: bobheadxi/deployments@v0.4.2
         if: always()
         with:
@@ -72,7 +71,7 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: ${{ env.PREVIEW_URL }}
 
-      - name: 'notify: slack'
+      - name: 'Send workflow status to Slack (#odyssey-deployments)'
         run: sh ./scripts/notify-slack.sh
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
