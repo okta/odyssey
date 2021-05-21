@@ -15,27 +15,6 @@ This repository contains the code for Okta's Design System Odyssey. It includes 
 | [@okta/odyssey-react](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/README.md) | Odyssey components for [React](https://reactjs.org/).              |
 | [@okta/odyssey-scss](https://github.com/okta/odyssey/tree/master/packages/odyssey-scss/README.md)   | Odyssey SCSS, includes components, includes base and reset styles. |
 
-## Git Workflow
-This project takes care to use standard gitflow workflow with minor exceptions.
-
-### Branches
-- `master` contains code for the latest version of Odyssey. The code in here is tagged with a semver and release notes. This is a protected branch.
-- `develop` is a working branch which contains the latest working code from different branches. This is a protected branch.
-- `feature/${branch-name}` the feature prefix is reserved for new feature work
-- `bugfix/${branch-name}` the bugfix prefix is reserved for existing features that have bugfixes
-
-Additionally, `refactor` and `hotfix` branch prefixes may be necessary in certain instances. Use at your discression.
-
-```
-
-           -▸ develop --▸ feature/branch-name --▸ | --▸ commit #1
-                 ▲                                | --▸ commit #2
-                 |                                | --▸ commit #3
-  Squash & Merge |                                | --▸ commit #4
-                 |                                ▼
-                 ╰--------- Pull Request ---------╯
-
-```
 ### Making a commit
 
 Odyssey uses the [conventional commits](https://www.conventionalcommits.org)
