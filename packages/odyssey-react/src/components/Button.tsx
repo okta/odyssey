@@ -25,7 +25,6 @@ export type ButtonProps = {
 
 const Button: FunctionComponent<ButtonProps> = (props) => {
   const { 
-    ariaLabel,
     children,
     className,
     disabled,
@@ -39,18 +38,13 @@ const Button: FunctionComponent<ButtonProps> = (props) => {
     [`is-ods-button-${variant}`]: variant,
   }, className);
 
-  const labelClass = classNames("ods-button--label", {
-    "u-visually-hidden": ariaLabel
-  });
-
   return (
     <button
       className={componentClass}
-      aria-label={ariaLabel}
       disabled={disabled}
       onClick={onClick}
     >
-      {children && <span className={labelClass}>{children}</span>}
+      <span className="ods-button--label">{children}</span>
     </button>
   )
 };
