@@ -9,9 +9,9 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-
+import { Story } from "@storybook/react";
 import React from "react";
-import Button from "./Button";
+import Button, { ButtonProps } from "./Button";
 
 export default {
   title: `Components/Button`,
@@ -38,7 +38,7 @@ export default {
   }
 };
 
-const Template = ({ variant, className, disabled, onClick, wide }) => (
+const Template: Story<ButtonProps> = ({ variant, className, disabled, onClick, wide }) => (
   <>
     <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className={className}>Default</Button>
     <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className="is-ods-button-focus">Focus</Button>
@@ -47,7 +47,7 @@ const Template = ({ variant, className, disabled, onClick, wide }) => (
   </>
 )
 
-const TemplateWide = ({variant, wide, onClick }) => (
+const TemplateWide: Story<ButtonProps> = ({variant, wide, onClick }) => (
   <>
     <Button variant={variant} onClick={onClick} wide={wide}>Primary, wide</Button>
     <Button variant="secondary" onClick={onClick} wide={wide}>Secondary, wide</Button>

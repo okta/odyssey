@@ -28,6 +28,7 @@
   "scripts": {
     "start": "start-storybook -p 6006",
     "lint": "eslint .",
+    "test": "tsc --noEmit",
     "build-storybook": "build-storybook"
   }
 }

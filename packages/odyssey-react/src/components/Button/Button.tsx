@@ -43,7 +43,7 @@ export type ButtonProps = {
   /**
    * Extends the width of the button to that of it's parent.
    */
-  wide?: boolean
+  wide: boolean
 }
 
 /**
@@ -56,11 +56,9 @@ const Button: FunctionComponent<ButtonProps> = (props) => {
     disabled,
     onClick,
     variant = "primary",
-    wide
   } = props;
 
   const componentClass = classNames("ods-button", {
-    "is-ods-button-full-width": wide,
     [`is-ods-button-${variant}`]: variant,
   }, className);
 
