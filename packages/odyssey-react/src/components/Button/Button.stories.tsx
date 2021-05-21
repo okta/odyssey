@@ -11,18 +11,39 @@
  */
 
 import React from "react";
-import Button from "../components/Button";
+import Button from "./Button";
 
 export default {
-  title: `Components/Button`
+  title: `Components/Button`,
+  component: Button,
+  argTypes: {
+    children: {
+      control: { type: null }
+    },
+    variant: {
+      control: { type: "select" }
+    },
+    className: {
+      control: { type: null }
+    },
+    disabled: {
+      control: { type: "boolean" }
+    },
+    onClick: {
+      control: { type: null }
+    },
+    wide: {
+      control: { type: "boolean" }
+    },
+  }
 };
 
-const Template = ({ variant, onClick }) => (
+const Template = ({ variant, className, disabled, onClick, wide }) => (
   <>
-    <Button onClick={onClick} variant={variant}>Default</Button>
-    <Button onClick={onClick} variant={variant} className="is-ods-button-focus">Focus</Button>
-    <Button onClick={onClick} variant={variant} className="is-ods-button-hover">Hover</Button>
-    <Button onClick={onClick} variant={variant} disabled>Disabled</Button>
+    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide}>Default</Button>
+    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className="is-ods-button-focus">Focus</Button>
+    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className="is-ods-button-hover">Hover</Button>
+    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide}>Disabled</Button>
   </>
 )
 
@@ -42,7 +63,6 @@ Secondary.args = {
 };
 Secondary.argTypes = {
   onClick: { action: 'clicked button/secondary' },
-  variant: { table: { disable: true } }
 };
 
 export const Danger = Template.bind({});

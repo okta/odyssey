@@ -14,15 +14,41 @@ import React, { FunctionComponent, MouseEventHandler, ReactNode } from 'react'
 import classNames from "classnames";
 
 export type ButtonProps = {
-  ariaLabel?: string,
+  /**
+   * Content to be rendered within the buttons, usualy label text.
+   */
   children: ReactNode,
+
+  /**
+   * Additional className's to be applied to the button element.
+   */
   className?: string,
+
+  /**
+   * Makes the button element unusable.
+   */
   disabled?: boolean,
+
+  /**
+   * Button click handler.
+   */
   onClick: MouseEventHandler<HTMLButtonElement>,
+
+  /**
+   * The visual variant to be displayed to the user.
+   * @default primary
+   */
   variant: 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear',
+
+  /**
+   * Extends the width of the button to that of it's parent.
+   */
   wide?: boolean
 }
 
+/**
+ * The world's most _basic_ button
+ */
 const Button: FunctionComponent<ButtonProps> = (props) => {
   const { 
     children,
