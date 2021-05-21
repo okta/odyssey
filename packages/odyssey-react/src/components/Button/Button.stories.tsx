@@ -40,10 +40,19 @@ export default {
 
 const Template = ({ variant, className, disabled, onClick, wide }) => (
   <>
-    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide}>Default</Button>
+    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className={className}>Default</Button>
     <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className="is-ods-button-focus">Focus</Button>
     <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className="is-ods-button-hover">Hover</Button>
-    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide}>Disabled</Button>
+    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className={className}>Disabled</Button>
+  </>
+)
+
+const TemplateWide = ({variant, wide, onClick }) => (
+  <>
+    <Button variant={variant} onClick={onClick} wide={wide}>Primary, wide</Button>
+    <Button variant="secondary" onClick={onClick} wide={wide}>Secondary, wide</Button>
+    <Button variant="danger" onClick={onClick} wide={wide}>Danger, wide</Button>
+    <Button variant="clear" onClick={onClick} wide={wide}>Clear, wide</Button>
   </>
 )
 
@@ -91,16 +100,6 @@ Dismiss.args = {
 Dismiss.argTypes = {
   onClick: { action: 'clicked button/dismiss' },
 }
-
-
-const TemplateWide = ({ wide, onClick }) => (
-  <>
-    <Button onClick={onClick} wide={wide}>Primary, wide</Button>
-    <Button onClick={onClick} variant="secondary" wide={wide}>Secondary, wide</Button>
-    <Button onClick={onClick} variant="danger" wide={wide}>Danger, wide</Button>
-    <Button onClick={onClick} variant="clear" wide={wide}>Clear, wide</Button>
-  </>
-)
 
 export const Wide =  TemplateWide.bind({});
 Wide.storyName = "Wide"
