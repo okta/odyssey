@@ -1,0 +1,34 @@
+{
+  "name": "@okta/odyssey-react",
+  "version": "0.7.0",
+  "description": "React components for Odyssey, Okta's design system",
+  "main": "src/index.js",
+  "repository": "https://github.com/okta/odyssey",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "classnames": "^2.3.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/preset-scss": "^1.0.3",
+    "@storybook/react": "^6.2.9",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.26.0",
+    "typescript": "^4.2.4"
+  },
+  "scripts": {
+    "start": "start-storybook -p 6006",
+    "lint": "eslint .",
+    "test": "tsc --noEmit",
+    "build-storybook": "build-storybook"
+  }
+}

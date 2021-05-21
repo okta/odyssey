@@ -11,8 +11,9 @@
     "node": ">=12.13"
   },
   "scripts": {
-    "docs": "yarn --cwd packages/docs start",
-    "icons": "yarn --cwd packages/odyssey-icons svgo",
+    "docs": "yarn workspace @okta/design-docs start",
+    "icons": "yarn workspace @okta/odyssey-icons svgo",
+    "storybook": "yarn workspace @okta/odyssey-react start",
     "lerna-version": "lerna version --no-git-tag-version --force-publish",
     "prelerna-publish": "lerna run build",
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry",

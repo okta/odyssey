@@ -2,7 +2,10 @@ module.exports = {
   overrides: [
     {
       files: ["*.js", "*.vue"],
-      extends: ["vuepress"]
+      extends: ["vuepress"],
+      rules: {
+        "prettier/prettier": 0
+      }
     }
   ]
 };
