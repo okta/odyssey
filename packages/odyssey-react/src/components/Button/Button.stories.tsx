@@ -38,21 +38,10 @@ export default {
   }
 };
 
-const Template: Story<ButtonProps> = ({ variant, className, disabled, onClick, wide }) => (
+const Template: Story<ButtonProps> = ({ variant, disabled, onClick, wide }) => (
   <>
-    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className={className}>Default</Button>
-    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className="is-ods-button-focus">Focus</Button>
-    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className="is-ods-button-hover">Hover</Button>
-    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} className={className}>Disabled</Button>
-  </>
-)
-
-const TemplateWide: Story<ButtonProps> = ({variant, wide, onClick }) => (
-  <>
-    <Button variant={variant} onClick={onClick} wide={wide}>Primary, wide</Button>
-    <Button variant="secondary" onClick={onClick} wide={wide}>Secondary, wide</Button>
-    <Button variant="danger" onClick={onClick} wide={wide}>Danger, wide</Button>
-    <Button variant="clear" onClick={onClick} wide={wide}>Clear, wide</Button>
+    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide}>Default</Button>
+    <Button variant={variant} onClick={onClick} disabled="true" wide={wide}>Disabled</Button>
   </>
 )
 
@@ -101,10 +90,9 @@ Dismiss.argTypes = {
   onClick: { action: 'clicked button/dismiss' },
 }
 
-export const Wide =  TemplateWide.bind({});
+export const Wide =  Template.bind({});
 Wide.storyName = "Wide"
 Wide.args = {
-  variant: 'secondary',
   wide: true
 };
 Wide.argTypes = {

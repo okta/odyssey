@@ -20,11 +20,6 @@ export type ButtonProps = {
   children: ReactNode,
 
   /**
-   * Additional className's to be applied to the button element.
-   */
-  className?: string,
-
-  /**
    * Makes the button element unusable.
    */
   disabled?: boolean,
@@ -52,15 +47,16 @@ export type ButtonProps = {
 const Button: FunctionComponent<ButtonProps> = (props) => {
   const { 
     children,
-    className,
     disabled,
     onClick,
+    wide,
     variant = "primary",
   } = props;
 
   const componentClass = classNames("ods-button", {
     [`is-ods-button-${variant}`]: variant,
-  }, className);
+    "is-ods-button-full-width": wide
+  });
 
   return (
     <button
