@@ -55,7 +55,7 @@ const Button: FunctionComponent<ButtonProps> = (props) => {
     className,
     disabled,
     onClick,
-    variant,
+    variant = "primary",
     wide
   } = props;
 
