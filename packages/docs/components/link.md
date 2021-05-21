@@ -3,7 +3,7 @@ template: component
 id: component-link
 title: Link
 description: Links are navigation elements displayed as text.
-lead: Links are navigation elements displayed as text. Use a Link to bring a user to another page or start a download.
+lede: Links are navigation elements displayed as text. Use a Link to bring a user to another page or start a download.
 tabs:
   - label: 'Overview'
     id: 'overview'

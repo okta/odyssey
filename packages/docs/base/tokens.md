@@ -3,7 +3,7 @@ template: plain
 id: base-tokens
 title: Design Tokens
 headline: Design Tokens
-lead: Design Tokens abstract Base elements into names that are commonly understood. They are then used together to build components.
+lede: Design Tokens abstract Base elements into names that are commonly understood. They are then used together to build components.
 description: Design Tokens abstract Base elements into names that are commonly understood. They are then used together to build components.
 
 ---

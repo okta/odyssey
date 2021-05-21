@@ -3,7 +3,7 @@ template: component
 id: component-tab
 title: Tab
 description: Tabs are a navigational component used to organize content by grouping similar information on the same page.
-lead: Navigation component used to organize content by grouping similar information on the same page. They allow content to be viewed without having to navigate away from that page or route.
+lede: Navigation component used to organize content by grouping similar information on the same page. They allow content to be viewed without having to navigate away from that page or route.
 tabs:
   - label: 'Overview'
     id: 'overview'

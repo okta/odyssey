@@ -6,7 +6,7 @@
     }"
   >
     <h1 class="docs-page-header--title">{{ title }}</h1>
-    <p v-if="lead" class="docs-page-header--lead">{{ lead }}</p>
+    <p v-if="lede" class="docs-page-header--lede">{{ lede }}</p>
     <slot name="right"></slot>
   </header>
 </template>
@@ -19,7 +19,7 @@ export default {
       type: String,
       default: "default"
     },
-    lead: {
+    lede: {
       type: String,
       required: false,
       default: null

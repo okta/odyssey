@@ -2,7 +2,7 @@
   <article class="docs-main--content">
     <DocsPageHeader
       :title="$page.frontmatter.title"
-      :lead="$page.frontmatter.lead"
+      :lede="$page.frontmatter.lede"
     >
       <template v-slot:right>
         <ul v-if="$page.frontmatter.links" class="docs-page-header--links">

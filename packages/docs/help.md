@@ -2,7 +2,7 @@
 template: plain
 title: Help
 headline: Need Help?
-lead: The Odyssey team is here to help as best we can. Don't hesitate to reach out!
+lede: The Odyssey team is here to help as best we can. Don't hesitate to reach out!
 description: The Odyssey team is here to help as best we can. Don't hesitate to reach out!
 ---
 

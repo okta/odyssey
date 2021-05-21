@@ -3,7 +3,7 @@ template: component
 id: component-text-input
 title: Text Input
 description: Text inputs allow users to edit and input data.
-lead: Text inputs allow users to edit and input data. They can range from simple search boxes to long-form text areas.
+lede: Text inputs allow users to edit and input data. They can range from simple search boxes to long-form text areas.
 tabs:
   - label: 'Overview'
     id: 'overview'

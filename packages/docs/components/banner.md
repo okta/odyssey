@@ -3,7 +3,7 @@ template: component
 id: component-banner
 title: Banner
 description: Banners let users know important messages related to their overall experience on the website.
-lead: Banners let users know important messages related to their overall experience on the website. They can be purely informational messages or critical errors to act upon.
+lede: Banners let users know important messages related to their overall experience on the website. They can be purely informational messages or critical errors to act upon.
 tabs:
   - label: 'Overview'
     id: 'overview'

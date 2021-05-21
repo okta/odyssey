@@ -3,7 +3,7 @@ template: component
 id: component-table
 title: Table
 description: Tables provide structure for displaying sets of data across rows and columns.
-lead: Tables provide structure for displaying sets of data across rows and columns. They support multiple content types and some internal actions.
+lede: Tables provide structure for displaying sets of data across rows and columns. They support multiple content types and some internal actions.
 tabs:
   - label: 'Overview'
     id: 'overview'

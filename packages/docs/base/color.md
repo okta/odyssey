@@ -3,7 +3,7 @@ template: plain
 id: base-color
 title: Color
 headline: Color
-lead: Odyssey colors consist of a variety of neutral, semantic, and brand values used in all UIs for utmost clarity and readability.
+lede: Odyssey colors consist of a variety of neutral, semantic, and brand values used in all UIs for utmost clarity and readability.
 description: Odyssey colors consist of a variety of neutral, semantic, and brand values used in all UIs for utmost clarity and readability.
 ---
 

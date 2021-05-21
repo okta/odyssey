@@ -3,7 +3,7 @@ template: component
 id: component-field-labels
 title: Field Labels
 description: These captions help make forms more accessible.
-lead: These captions help make forms more accessible by providing context to the user. They can be used with all Odyssey inputs.
+lede: These captions help make forms more accessible by providing context to the user. They can be used with all Odyssey inputs.
 tabs:
   - label: 'Overview'
     id: 'overview'

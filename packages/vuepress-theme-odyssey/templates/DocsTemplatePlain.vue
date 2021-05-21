@@ -3,7 +3,7 @@
     <DocsPageHeader
       :variant="$page.frontmatter.pageHeaderVariant || 'default'"
       :title="$page.frontmatter.headline"
-      :lead="$page.frontmatter.lead"
+      :lede="$page.frontmatter.lede"
     />
 
     <hr />
