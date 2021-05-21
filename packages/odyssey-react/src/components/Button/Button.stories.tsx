@@ -9,6 +9,7 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
+
 import { Story } from "@storybook/react";
 import React from "react";
 import Button, { ButtonProps } from "./Button";
@@ -41,7 +42,7 @@ export default {
 const Template: Story<ButtonProps> = ({ variant, disabled, onClick, wide }) => (
   <>
     <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide}>Default</Button>
-    <Button variant={variant} onClick={onClick} disabled="true" wide={wide}>Disabled</Button>
+    <Button variant={variant} onClick={onClick} disabled={true} wide={wide}>Disabled</Button>
   </>
 )
 
