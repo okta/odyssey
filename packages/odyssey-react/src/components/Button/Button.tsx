@@ -13,6 +13,7 @@
 import React, { FunctionComponent, MouseEventHandler, ReactNode } from 'react'
 import classNames from "classnames";
 
+export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
 export type ButtonProps = {
   /**
    * Content to be rendered within the buttons, usualy label text.
@@ -33,7 +34,7 @@ export type ButtonProps = {
    * The visual variant to be displayed to the user.
    * @default primary
    */
-  variant: 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear',
+  variant: ButtonVariants,
 
   /**
    * Extends the width of the button to that of it's parent.
