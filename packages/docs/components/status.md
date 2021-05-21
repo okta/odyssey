@@ -3,7 +3,7 @@ template: component
 id: component-status
 title: Status
 description: Status is used to inform users by providing feedback on system states.
-lead: Status is used to inform users by providing feedback on system states. Status can display broad operational states as well as granular states like user status.
+lede: Status is used to inform users by providing feedback on system states. Status can display broad operational states as well as granular states like user status.
 tabs:
   - label: 'Overview'
     id: 'overview'

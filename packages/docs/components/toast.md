@@ -2,7 +2,7 @@
 template: component
 id: component-toast
 title: Toast
-lead: Toasts are transient, non-disruptive messages that provide at-a-glance, asynchronous feedback or updates.
+lede: Toasts are transient, non-disruptive messages that provide at-a-glance, asynchronous feedback or updates.
 description: Toasts are transient bits of messaging that provide quick, at-a-glance feedback.
 tabs:
   - label: 'Overview'

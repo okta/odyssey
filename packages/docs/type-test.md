@@ -3,7 +3,7 @@ template: plain
 id: base-type
 title: Type Test
 headline: Projoesal w relative margins
-lead:
+lede:
 description:
 ---
 

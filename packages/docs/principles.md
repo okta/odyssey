@@ -1,8 +1,8 @@
 ---
 template: plain
-title: Principles 
-headline: Principles 
-lead: Okta's design principles are Odyssey's north star. They guide us in making critical decisions as a team.
+title: Principles
+headline: Principles
+lede: Okta's design principles are Odyssey's north star. They guide us in making critical decisions as a team.
 ---
 
 <Description>

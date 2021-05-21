@@ -3,7 +3,7 @@ template: component
 id: component-tooltip
 title: Tooltip
 description: A contextual pop-up that provides a label for or description of an element.
-lead: A transient element that provides additional context for an element when it receives hover or focus.
+lede: A transient element that provides additional context for an element when it receives hover or focus.
 tabs:
   - label: 'Overview'
     id: 'overview'

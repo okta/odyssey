@@ -3,7 +3,7 @@ template: component
 id: component-checkbox
 title: Checkbox
 description: Checkboxes appear as a square shaped UI accompanied by a caption.
-lead: Checkboxes appear as a square shaped UI accompanied by a caption. Checkboxes can be found in tables, forms, or in and around text inputs.
+lede: Checkboxes appear as a square shaped UI accompanied by a caption. Checkboxes can be found in tables, forms, or in and around text inputs.
 tabs:
   - label: 'Overview'
     id: 'overview'
