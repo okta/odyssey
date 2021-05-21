@@ -9,12 +9,11 @@ This repository contains the code for Okta's Design System Odyssey. It includes 
 
 ## Packages
 
-| Package/README                                                                                                        | Description                                                              |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| [@okta/odyssey-scss](https://github.com/okta/odyssey/tree/master/packages/odyssey-scss/README.md)                               | Odyssey SCSS, includes components, includes base and reset styles.       |
-| [@okta/odyssey-icons](https://github.com/okta/odyssey/tree/master/packages/odyssey-icons/README.md)                   | Odyssey SVG icons.                                                       |
-| [@okta/odyssey-scss](https://github.com/okta/odyssey/tree/master/packages/odyssey-scss/README.md) | Odyssey SCSS used across the system |
-| [@okta/odyssey-react](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/README.md)                   | Odyssey components for [React](https://reactjs.org/).                 |
+| Package/README                                                                                      | Description                                                        |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [@okta/odyssey-icons](https://github.com/okta/odyssey/tree/master/packages/odyssey-icons/README.md) | Odyssey SVG icons.                                                 |
+| [@okta/odyssey-react](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/README.md) | Odyssey components for [React](https://reactjs.org/).              |
+| [@okta/odyssey-scss](https://github.com/okta/odyssey/tree/master/packages/odyssey-scss/README.md)   | Odyssey SCSS, includes components, includes base and reset styles. |
 
 ## Git Workflow
 This project takes care to use standard gitflow workflow with minor exceptions.
