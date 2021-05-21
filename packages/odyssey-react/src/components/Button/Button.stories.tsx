@@ -24,9 +24,6 @@ export default {
     variant: {
       control: { type: "select" }
     },
-    className: {
-      control: { type: null }
-    },
     disabled: {
       control: { type: "boolean" }
     },

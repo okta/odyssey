@@ -42,7 +42,7 @@ export type ButtonProps = {
 }
 
 /**
- * The world's most _basic_ button
+ * Odyssey Button: A clickable button used for form submissions and most in-page interactions.
  */
 const Button: FunctionComponent<ButtonProps> = (props) => {
   const { 
