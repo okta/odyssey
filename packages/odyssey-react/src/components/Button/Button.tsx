@@ -38,7 +38,7 @@ export type ButtonProps = {
   /**
    * Extends the width of the button to that of it's parent.
    */
-  wide: boolean
+  wide?: boolean
 }
 
 /**
@@ -63,6 +63,7 @@ const Button: FunctionComponent<ButtonProps> = (props) => {
       className={componentClass}
       disabled={disabled}
       onClick={onClick}
+      data-testid="ods-button"
     >
       <span className="ods-button--label">{children}</span>
     </button>
