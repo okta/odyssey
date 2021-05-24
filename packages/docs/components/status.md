@@ -51,14 +51,14 @@ This is the default variant.
 </Description>
 
 <Visual>
-  <dl class="ods-status">
-    <dt class="ods-status--label">
+  <div class="ods-status">
+    <span class="ods-status--label">
       Propulsion systems
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Engines offline
-    </dd>
-  </dl>
+    </span>
+  </div>
 </Visual>
 
 ### Success
@@ -70,14 +70,14 @@ Success Statuses are green and should be used to indicate states like "Complete"
 </Description>
 
 <Visual>
-  <dl class="ods-status is-ods-status-success">
-    <dt class="ods-status--label">
+  <div class="ods-status is-ods-status-success">
+    <span class="ods-status--label">
       Propulsion systems
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Online
-    </dd>
-  </dl>
+    </span>
+  </div>
 </Visual>
 
 ### Caution
@@ -89,14 +89,14 @@ Caution Statuses are yellow and should be used to indicate states like "Attentio
 </Description>
 
 <Visual>
-  <dl class="ods-status is-ods-status-caution">
-    <dt class="ods-status--label">
+  <div class="ods-status is-ods-status-caution">
+    <span class="ods-status--label">
       Propulsion systems
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Check engine
-    </dd>
-  </dl>
+    </span>
+  </div>
 </Visual>
 
 ### Danger
@@ -108,14 +108,14 @@ Danger Statuses are red and should be used to indicate states like "Error", "Fai
 </Description>
 
 <Visual>
-  <dl class="ods-status is-ods-status-danger">
-    <dt class="ods-status--label">
+  <div class="ods-status is-ods-status-danger">
+    <span class="ods-status--label">
       Propulsion systems
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Warp core disruption
-    </dd>
-  </dl>
+    </span>
+  </div>
 </Visual>
 
 ## Usage
@@ -127,14 +127,14 @@ Use Status to communicate the state of a discrete item, such as a server or indi
 </Description>
 
 <Visual>
-  <dl class="ods-status is-ods-status-success">
-    <dt class="ods-status--label">
+  <div class="ods-status is-ods-status-success">
+    <span class="ods-status--label">
       Engine performance
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Nominal
-    </dd>
-  </dl>
+    </span>
+  </div>
 </Visual>
 
 ### Within Table
@@ -156,14 +156,14 @@ Statuses content should provide a quick overview. Limit Status descriptor and la
 </Description>
 
 <Visual>
-  <dl class="ods-status is-ods-status-success">
-    <dt class="ods-status--label">
+  <div class="ods-status is-ods-status-success">
+    <span class="ods-status--label">
       Warp drive status
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Engaged
-    </dd>
-  </dl>
+    </span>
+  </div>
 </Visual>
 
 ### Statuses without labels
@@ -175,14 +175,14 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
 </Description>
 
 <Visual>
-  <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
-    <dt class="ods-status--label">
+  <div class="ods-status is-ods-status-success is-ods-status-label-hidden">
+    <span class="ods-status--label">
       Warp drive status
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Warp drive engaged
-    </dd>
-  </dl>
+    </span>
+  </div>
 </Visual>
 
 :::
@@ -195,25 +195,25 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <dl class="ods-status">
-      <dt class="ods-status--label">
+    <div class="ods-status">
+      <span class="ods-status--label">
         Status label
-      </dt>
-      <dd class="ods-status--value">
+      </span>
+      <span class="ods-status--value">
         Neutral descriptor
-      </dd>
-    </dl>
+      </span>
+    </div>
   </div>
 
   ```html
-  <dl class="ods-status">
-    <dt class="ods-status--label">
+  <div class="ods-status">
+    <span class="ods-status--label">
       Status label
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Neutral descriptor
-    </dd>
-  </dl>
+    </span>
+  </div>
   ```
 </figure>
 
@@ -221,25 +221,25 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <dl class="ods-status is-ods-status-success">
-      <dt class="ods-status--label">
+    <div class="ods-status is-ods-status-success">
+      <span class="ods-status--label">
         Status label
-      </dt>
-      <dd class="ods-status--value">
+      </span>
+      <span class="ods-status--value">
         Success descriptor
-      </dd>
-    </dl>
+      </span>
+    </div>
   </div>
 
   ```html
-  <dl class="ods-status is-ods-status-success">
-    <dt class="ods-status--label">
+  <div class="ods-status is-ods-status-success">
+    <span class="ods-status--label">
       Status label
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Success descriptor
-    </dd>
-  </dl>
+    </span>
+  </div>
   ```
 </figure>
 
@@ -247,25 +247,25 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <dl class="ods-status is-ods-status-caution">
-      <dt class="ods-status--label">
+    <div class="ods-status is-ods-status-caution">
+      <span class="ods-status--label">
         Status label
-      </dt>
-      <dd class="ods-status--value">
+      </span>
+      <span class="ods-status--value">
         Caution descriptor
-      </dd>
-    </dl>
+      </span>
+    </div>
   </div>
 
   ```html
-  <dl class="ods-status is-ods-status-caution">
-    <dt class="ods-status--label">
+  <div class="ods-status is-ods-status-caution">
+    <span class="ods-status--label">
       Status label
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Caution descriptor
-    </dd>
-  </dl>
+    </span>
+  </div>
   ```
 </figure>
 
@@ -273,25 +273,25 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <dl class="ods-status is-ods-status-danger">
-      <dt class="ods-status--label">
+    <div class="ods-status is-ods-status-danger">
+      <span class="ods-status--label">
         Status label
-      </dt>
-      <dd class="ods-status--value">
+      </span>
+      <span class="ods-status--value">
         Danger descriptor
-      </dd>
-    </dl>
+      </span>
+    </div>
   </div>
 
   ```html
-  <dl class="ods-status is-ods-status-danger">
-    <dt class="ods-status--label">
+  <div class="ods-status is-ods-status-danger">
+    <span class="ods-status--label">
       Status label
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Danger descriptor
-    </dd>
-  </dl>
+    </span>
+  </div>
   ```
 </figure>
 
@@ -307,59 +307,25 @@ Even if the label is hidden, it must be populated to ensure appropriate context 
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
-      <dt class="ods-status--label">
+    <div class="ods-status is-ods-status-success is-ods-status-label-hidden">
+      <span class="ods-status--label">
         Status label
-      </dt>
-      <dd class="ods-status--value">
+      </span>
+      <span class="ods-status--value">
         Status descriptor
-      </dd>
-    </dl>
+      </span>
+    </div>
   </div>
 
   ```html
-  <dl class="ods-status is-ods-status-success is-ods-status-label-hidden">
-    <dt class="ods-status--label">
+  <div class="ods-status is-ods-status-success is-ods-status-label-hidden">
+    <span class="ods-status--label">
       Status label
-    </dt>
-    <dd class="ods-status--value">
+    </span>
+    <span class="ods-status--value">
       Status descriptor
-    </dd>
-  </dl>
-  ```
-</figure>
-
-## Async Status changes
-
-<Description>
-
-If the current state of Status may change asynchronously while a user is visiting the page, utilize the `role="status"` attribute to ensure that assistive technologies correctly indicate this change.
-
-<strong>Note:</strong> This attribute must be present <em>before</em> the change occurs.
-
-</Description>
-
-<figure class="docs-example">
-  <div class="docs-example--rendered">
-    <dl class="ods-status is-ods-status-caution" role="status">
-      <dt class="ods-status--label">
-        Status label
-      </dt>
-      <dd class="ods-status--value">
-        Live Status descriptor
-      </dd>
-    </dl>
+    </span>
   </div>
-
-  ```html
-  <dl class="ods-status is-ods-status-caution" role="status">
-    <dt class="ods-status--label">
-      Status label
-    </dt>
-    <dd class="ods-status--value">
-      Live Status descriptor
-    </dd>
-  </dl>
   ```
 </figure>
 
