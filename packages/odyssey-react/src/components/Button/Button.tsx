@@ -43,7 +43,11 @@ export type ButtonProps = {
 }
 
 /**
- * Odyssey Button: A clickable button used for form submissions and most in-page interactions.
+ * A clickable button used for form submissions and most in-page interactions.
+ *
+ * @component
+ * @example
+ * <Button variant="primary" onClick={() => {}}>Button label</Button>
  */
 const Button: FunctionComponent<ButtonProps> = (props) => {
   const { 

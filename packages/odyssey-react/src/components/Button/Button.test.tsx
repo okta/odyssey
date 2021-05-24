@@ -83,5 +83,4 @@ describe("Button", () => {
     fireEvent.click(getByTestId('ods-button'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
-
 });
