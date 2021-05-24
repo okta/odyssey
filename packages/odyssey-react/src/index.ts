@@ -11,5 +11,6 @@
  */
 
 import Button from './components/Button/Button';
+import Tooltip from './components/Tooltip/Tooltip';
 
-export { Button };
+export { Button, Tooltip };
