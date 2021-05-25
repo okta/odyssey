@@ -132,9 +132,9 @@ Checkboxes are disabled individually. The values of disabled inputs will not be 
     <label class="ods-checkbox--label" for="overview-disabled-checked">Enable auto-docking</label>
     <input class="ods-checkbox" type="checkbox" name="overview-disabled[]" id="overview-disabled" value="overview-disabled" disabled>
     <label class="ods-checkbox--label" for="overview-disabled">Enable auto-docking</label>
-    <input class="ods-checkbox" type="checkbox" name="overview-disabled[]" id="overview-disabled-invalid-checked" value="overview-disabled" checked disabled data-invalid>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="overview-disabled[]" id="overview-disabled-invalid-checked" value="overview-disabled" checked disabled>
     <label class="ods-checkbox--label" for="overview-disabled-invalid-checked">Enable auto-docking</label>
-    <input class="ods-checkbox" type="checkbox" name="overview-disabled[]" id="overview-disabled-invalid" value="overview-disabled" disabled data-invalid>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="overview-disabled[]" id="overview-disabled-invalid" value="overview-disabled" disabled>
     <label class="ods-checkbox--label" for="overview-disabled-invalid">Enable auto-docking</label>
   </fieldset>
 </Visual>
@@ -158,7 +158,7 @@ Unlike Radio Buttons, Checkboxes validate individually, not as a group.
     <label class="ods-checkbox--label" for="overview-invalid-1">Cycle airlock</label>
     <input checked class="ods-checkbox" type="checkbox" name="overview-invalid[]" id="overview-invalid-2" value="overview-invalid-2">
     <label class="ods-checkbox--label" for="overview-invalid-2">Disengage maglock</label>
-    <input class="ods-checkbox" type="checkbox" name="overview-invalid[]" id="overview-invalid-3" value="overview-invalid-3" aria-describedby="overview-invalid-3-error" data-invalid checked>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="overview-invalid[]" id="overview-invalid-3" value="overview-invalid-3" aria-describedby="overview-invalid-3-error" checked>
     <label class="ods-checkbox--label" for="overview-invalid-3">Open the pod bay doors</label>
     <aside class="ods-field--error" id="overview-invalid-3-error">
       <span class="u-visually-hidden">Error:</span> I'm afraid I can't do that, Dave.
@@ -321,9 +321,9 @@ export default {
       <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
       <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-2" value="value-2" disabled>
       <label class="ods-checkbox--label" for="example-2-2">Label 2</label>
-      <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-3" value="value-3" checked disabled data-invalid>
+      <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-3" value="value-3" checked disabled>
       <label class="ods-checkbox--label" for="example-2-3">Label 3</label>
-      <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-4" value="value-4" disabled data-invalid>
+      <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-4" value="value-4" disabled>
       <label class="ods-checkbox--label" for="example-2-4">Label 4</label>
     </fieldset>
   </div>
@@ -335,8 +335,10 @@ export default {
     <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
     <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-2" value="value-2" disabled>
     <label class="ods-checkbox--label" for="example-2-2">Label 2</label>
-    <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-3" value="value-3" disabled>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-3" value="value-3" checked disabled>
     <label class="ods-checkbox--label" for="example-2-3">Label 3</label>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-4" value="value-4" disabled>
+    <label class="ods-checkbox--label" for="example-2-4">Label 4</label>
   </fieldset>
   ```
 </figure>
@@ -347,11 +349,11 @@ export default {
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <legend class="ods-input-legend">Field legend label</legend>
-      <input class="ods-checkbox" type="checkbox" name="example-3" id="example-3-1" value="value-1" checked data-invalid>
+      <input class="ods-checkbox is-ods-checkbox-valid" type="checkbox" name="example-3" id="example-3-1" value="value-1" checked>
       <label class="ods-checkbox--label" for="example-3-1">Label 1</label>
-      <input class="ods-checkbox" type="checkbox" name="example-3" id="example-3-2" value="value-2" data-invalid>
+      <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-3" id="example-3-2" value="value-2">
       <label class="ods-checkbox--label" for="example-3-2">Label 2</label>
-      <input class="ods-checkbox" type="checkbox" name="example-3" id="example-3-3" value="value-3" data-invalid>
+      <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-3" id="example-3-3" value="value-3">
       <label class="ods-checkbox--label" for="example-3-3">Label 3</label>
       <aside class="ods-field--error" id="checkbox-invalid-error">Invalid error description</aside>
     </fieldset>
@@ -360,11 +362,11 @@ export default {
   ```html
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Field legend label</legend>
-    <input class="ods-checkbox" type="checkbox" name="example-3" id="example-3-1" value="value-1" checked data-invalid>
+    <input class="ods-checkbox is-ods-checkbox-valid" type="checkbox" name="example-3" id="example-3-1" value="value-1" checked>
     <label class="ods-checkbox--label" for="example-3-1">Label 1</label>
-    <input class="ods-checkbox" type="checkbox" name="example-3" id="example-3-2" value="value-2" data-invalid>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-3" id="example-3-2" value="value-2">
     <label class="ods-checkbox--label" for="example-3-2">Label 2</label>
-    <input class="ods-checkbox" type="checkbox" name="example-3" id="example-3-3" value="value-3" data-invalid>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-3" id="example-3-3" value="value-3">
     <label class="ods-checkbox--label" for="example-3-3">Label 3</label>
     <aside class="ods-field--error" id="checkbox-invalid-error">Invalid error description</aside>
   </fieldset>

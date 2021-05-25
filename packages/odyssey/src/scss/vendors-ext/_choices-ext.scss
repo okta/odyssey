@@ -71,7 +71,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
   }
 
-  [data-invalid] & {
+  .is-ods-select-invalid & {
     &:focus,
     &.is-ods-select-focused {
       @include outline($focus-ring-danger);
@@ -239,13 +239,13 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 
   .is-ods-select-open &,
-  [data-invalid] .is-ods-select-open & {
+  .is-ods-select-invalid .is-ods-select-open & {
     border-radius: $base-border-radius $base-border-radius 0 0;
     border-bottom-color: $border-color-ui;
   }
 
   .is-ods-select-flipped.is-ods-select-open &,
-  [data-invalid] .is-ods-select-flipped.is-ods-select-open & {
+  .is-ods-select-invalid .is-ods-select-flipped.is-ods-select-open & {
     border-radius: 0 0 $base-border-radius $base-border-radius;
     border-top-color: $border-color-ui;
     border-bottom-color: $color-primary-base;
@@ -408,11 +408,11 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     }
   }
 
-  [data-invalid] .is-ods-select-focused & {
+  .is-ods-select-invalid .is-ods-select-focused & {
     @include outline($focus-ring-danger);
   }
 
-  [data-invalid] .is-ods-select-open & {
+  .is-ods-select-invalid .is-ods-select-open & {
     border-color: $color-danger-base;
   }
 }
