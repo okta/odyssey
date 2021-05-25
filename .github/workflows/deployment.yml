@@ -28,7 +28,10 @@ jobs:
         run: echo "PREVIEW_URL="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
 
       - name: get $COMMIT_MSG
-        run: echo "COMMIT_MSG=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV
+        run: |
+          echo "COMMIT_MSG<<EOF" >> $GITHUB_ENV
+          git log --format=%B -n 1 ${{ github.event.after }} >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
 
       - name: Cache dependencies
         uses: actions/cache@v2
