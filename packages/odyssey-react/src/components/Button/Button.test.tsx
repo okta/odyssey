@@ -24,9 +24,9 @@ describe("Button", () => {
   });
 
   it('should be disabled', () => {
-    const { container } = render(<Button onClick={jest.fn()} variant="primary" disabled={true}>{buttonLabel}</Button>);
+    const { getByRole } = render(<Button onClick={jest.fn()} variant="primary" disabled={true}>{buttonLabel}</Button>);
     
-    expect(container.querySelector('.ods-button')).toHaveAttribute('disabled')
+    expect(getByRole('button')).toHaveAttribute('disabled')
   });
 
   it('should call onClick when clicked', () => {
