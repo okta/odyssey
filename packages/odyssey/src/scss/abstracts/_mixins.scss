@@ -26,6 +26,8 @@
   box-shadow: 0 0 0 $radius $outline-cv;
 }
 
+/* stylelint-disable no-descending-specificity */
+
 @mixin input-baseline {
   display: block;
   position: relative;
@@ -73,7 +75,8 @@
     }
   }
 
-  &[data-invalid] {
+  &:invalid,
+  &.is-ods-input-invalid {
     border-color: $color-danger-base;
 
     &:focus {

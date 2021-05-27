@@ -267,9 +267,9 @@ When indicating a validation error, please use a Field Error label to indicate t
 </Description>
 
 <Visual content="full">
-  <fieldset class="ods-fieldset" data-invalid>
+  <fieldset class="ods-fieldset is-ods-select-invalid">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="overview-invalid" name="overview-invalid" required data-invalid aria-describedby="overview-invalid-error">
+      <select class="ods-select is-ods-select-invalid" data-js-choices id="overview-invalid" name="overview-invalid" required aria-describedby="overview-invalid-error">
         <option></option>
         <option value="proxima">Proxima Centauri</option>
         <option value="barnards">Barnard's Star</option>
@@ -544,15 +544,15 @@ Options may be grouped within the Select list to help guide users. When doing th
 
 <Description>
 
-Because of the current inability to ensure consistent validation behavior across browsers, we're using the `[data-invalid]` attribute to indicate this state.
+Because of the current inability to ensure consistent validation behavior across browsers, we're using the `.is-ods-select-invalid` class to indicate this state.
 
 </Description>
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <fieldset class="ods-fieldset" data-invalid>
+    <fieldset class="ods-fieldset is-ods-select-invalid">
       <div class="ods-fieldset-flex">
-        <select class="ods-select" data-js-choices id="example-6" name="example-6" data-invalid required>
+        <select class="ods-select is-ods-select-invalid" data-js-choices id="example-6" name="example-6" required>
           <option></option>
           <option value="value-1">Option 1</option>
           <option value="value-2">Option 2</option>
@@ -570,9 +570,9 @@ Because of the current inability to ensure consistent validation behavior across
   </div>
 
   ```html
-  <fieldset class="ods-fieldset" data-invalid>
+  <fieldset class="ods-fieldset is-ods-select-invalid">
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="example-6" name="example-6" data-invalid required>
+      <select class="ods-select is-ods-select-invalid" data-js-choices id="example-6" name="example-6" required>
         <option></option>
         <option value="value-1">Option 1</option>
         <option value="value-2">Option 2</option>

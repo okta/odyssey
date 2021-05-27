@@ -64,7 +64,8 @@
     }
   }
 
-  &[data-invalid] {
+  &:invalid,
+  &.is-ods-radio-invalid {
     &:hover:not(:checked) + .ods-radio--label::before {
       border-color: $color-danger-dark;
     }
