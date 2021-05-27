@@ -13,6 +13,7 @@
 import React, { FunctionComponent, MouseEventHandler, ReactNode } from 'react'
 import classNames from "classnames";
 
+export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
 export type ButtonProps = {
   /**
    * Content to be rendered within the buttons, usualy label text.
@@ -22,7 +23,7 @@ export type ButtonProps = {
   /**
    * Makes the button element unusable.
    */
-  disabled?: boolean,
+  disabled?: true,
 
   /**
    * Button click handler.
@@ -33,16 +34,20 @@ export type ButtonProps = {
    * The visual variant to be displayed to the user.
    * @default primary
    */
-  variant: 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear',
+  variant: ButtonVariants,
 
   /**
    * Extends the width of the button to that of it's parent.
    */
-  wide: boolean
+  wide?: boolean
 }
 
 /**
- * The world's most _basic_ button
+ * A clickable button used for form submissions and most in-page interactions.
+ *
+ * @component
+ * @example
+ * <Button variant="primary" onClick={() => {}}>Button label</Button>
  */
 const Button: FunctionComponent<ButtonProps> = (props) => {
   const { 
