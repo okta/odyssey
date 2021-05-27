@@ -21,12 +21,6 @@ export default {
     children: {
       control: { type: null }
     },
-    variant: {
-      control: { type: "select" }
-    },
-    className: {
-      control: { type: null }
-    },
     disabled: {
       control: { type: "boolean" }
     },
@@ -47,7 +41,6 @@ const Template: Story<ButtonProps> = ({ variant, disabled, onClick, wide }) => (
 )
 
 export const Primary = Template.bind({});
-Primary.storyName = "Primary"
 Primary.args = {
   variant: "primary"
 };
@@ -56,7 +49,6 @@ Primary.argTypes = {
 }
 
 export const Secondary = Template.bind({});
-Secondary.storyName = "Secondary";
 Secondary.args = {
   variant: "secondary"
 };
@@ -65,7 +57,6 @@ Secondary.argTypes = {
 };
 
 export const Danger = Template.bind({});
-Danger.storyName = "Danger"
 Danger.args = {
   variant: "danger"
 };
@@ -74,7 +65,6 @@ Danger.argTypes = {
 }
 
 export const Clear = Template.bind({});
-Clear.storyName = "Clear"
 Clear.args = {
   variant: "clear"
 };
@@ -83,7 +73,6 @@ Clear.argTypes = {
 }
 
 export const Dismiss = Template.bind({});
-Dismiss.storyName = "Dismiss"
 Dismiss.args = {
   variant: "dismiss"
 };
@@ -92,7 +81,6 @@ Dismiss.argTypes = {
 }
 
 export const Wide =  Template.bind({});
-Wide.storyName = "Wide"
 Wide.args = {
   wide: true
 };
