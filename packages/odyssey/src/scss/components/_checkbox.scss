@@ -107,7 +107,8 @@
     }
   }
 
-  &[data-invalid] {
+  &:invalid,
+  &.is-ods-checkbox-invalid {
     + .ods-checkbox--label {
       color: $text-danger;
 

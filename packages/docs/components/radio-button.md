@@ -64,7 +64,7 @@ Radio Buttons in their "unchecked" state are considered enabled. They are ready 
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-radio" type="radio" name="overview-enabled" id="overview-enabled" value="0" required>
+    <input class="ods-radio" type="radio" name="overview-enabled" id="overview-enabled" value="0">
     <label class="ods-radio--label" for="overview-enabled">Warp speed</label>
   </fieldset>
 </Visual>
@@ -79,7 +79,7 @@ Hover states are activated when the user pauses their pointer over the input.
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-radio" type="radio" name="overview-hover" id="overview-hover" value="0" required>
+    <input class="ods-radio" type="radio" name="overview-hover" id="overview-hover" value="0">
     <label class="ods-radio--label is-ods-radio-hover" for="overview-hover">Warp speed</label>
   </fieldset>
 </Visual>
@@ -94,7 +94,7 @@ The focus state is a visual affordance that the user has highlighted the input w
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-radio is-ods-radio-focus" type="radio" name="overview-focus" id="overview-focus" value="0" required>
+    <input class="ods-radio is-ods-radio-focus" type="radio" name="overview-focus" id="overview-focus" value="0">
     <label class="ods-radio--label" for="overview-focus">Warp speed</label>
   </fieldset>
 </Visual>
@@ -130,9 +130,9 @@ Radios are disabled by option.
     <label class="ods-radio--label" for="overview-disabled">Warp speed</label>
     <input class="ods-radio" type="radio" name="overview-disabled-checked" id="overview-disabled-checked" value="0" required disabled checked>
     <label class="ods-radio--label" for="overview-disabled-checked">Warp speed</label>
-    <input class="ods-radio" type="radio" name="overview-disabled-invalid" id="overview-disabled-invalid" value="1" required disabled data-invalid>
+    <input class="ods-radio is-ods-radio-invalid" type="radio" name="overview-disabled-invalid" id="overview-disabled-invalid" value="1" required disabled>
     <label class="ods-radio--label" for="overview-disabled-invalid">Warp speed</label>
-    <input class="ods-radio" type="radio" name="overview-disabled-invalid-checked" id="overview-disabled-invalid-checked" value="1" required disabled data-invalid checked>
+    <input class="ods-radio is-ods-radio-invalid" type="radio" name="overview-disabled-invalid-checked" id="overview-disabled-invalid-checked" value="1" required disabled checked>
     <label class="ods-radio--label" for="overview-disabled-invalid-checked">Warp speed</label>
   </fieldset>
 </Visual>
@@ -172,11 +172,11 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 <Visual>
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Select speed</legend>
-    <input class="ods-radio" type="radio" name="overview-invalid[]" id="overview-invalid-1" value="1" required data-invalid checked>
+    <input class="ods-radio is-ods-radio-invalid" type="radio" name="overview-invalid[]" id="overview-invalid-1" value="1" required checked>
     <label class="ods-radio--label" for="overview-invalid-1">Lightspeed</label>
-    <input class="ods-radio" type="radio" name="overview-invalid[]" id="overview-invalid-2" value="2" required data-invalid>
+    <input class="ods-radio is-ods-radio-invalid" type="radio" name="overview-invalid[]" id="overview-invalid-2" value="2" required>
     <label class="ods-radio--label" for="overview-invalid-2">Warp Speed</label>
-    <input class="ods-radio" type="radio" name="overview-invalid[]" id="overview-invalid-3" value="3" aria-describedby="overview-invalid-error" required data-invalid>
+    <input class="ods-radio is-ods-radio-invalid" type="radio" name="overview-invalid[]" id="overview-invalid-3" value="3" aria-describedby="overview-invalid-error" required>
     <label class="ods-radio--label" for="overview-invalid-3">Ludicrous Speed</label>
     <aside class="ods-field--error" id="overview-invalid-error"><span class="u-visually-hidden">Error:</span> General relativity forbids it.</aside>
   </fieldset>
@@ -249,11 +249,11 @@ Unlike Checkboxes, Radios validate as a group, not individually.
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <legend class="ods-input-legend">Field label</legend>
-      <input class="ods-radio" type="radio" name="example-2" id="example-2-0" value="value-0" aria-describedby="group-name-error" data-invalid required checked>
+      <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-0" value="value-0" aria-describedby="group-name-error" required checked>
       <label class="ods-radio--label" for="example-2-0">Label 1</label>
-      <input class="ods-radio" type="radio" name="example-2" id="example-2-1" value="value-1" data-invalid required>
+      <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-1" value="value-1" required>
       <label class="ods-radio--label" for="example-2-1">Label 2</label>
-      <input class="ods-radio" type="radio" name="example-2" id="example-2-2" value="value-2" data-invalid required>
+      <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-2" value="value-2" required>
       <label class="ods-radio--label" for="example-2-2">Label 3</label>
       <aside class="ods-field--error" id="group-name-error"><span class="u-visually-hidden">Error:</span> This is an invalid selection.</aside>
     </fieldset>
@@ -262,12 +262,12 @@ Unlike Checkboxes, Radios validate as a group, not individually.
   ```html
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Field label</legend>
-    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" aria-describedby="group-name-error" data-invalid required checked>
-    <label class="ods-radio--label" for="input-0">Label 1</label>
-    <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" data-invalid required>
-    <label class="ods-radio--label" for="input-1">Label 2</label>
-    <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" data-invalid required>
-    <label class="ods-radio--label" for="input-2">Label 3</label>
+    <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-0" value="value-0" aria-describedby="group-name-error" required checked>
+    <label class="ods-radio--label" for="example-2-0">Label 1</label>
+    <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-1" value="value-1" required>
+    <label class="ods-radio--label" for="example-2-1">Label 2</label>
+    <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-2" value="value-2" required>
+    <label class="ods-radio--label" for="example-2-2">Label 3</label>
     <aside class="ods-field--error" id="group-name-error"><span class="u-visually-hidden">Error:</span> This is an invalid selection.</aside>
   </fieldset>
   ```

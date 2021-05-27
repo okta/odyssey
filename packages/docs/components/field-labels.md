@@ -45,7 +45,7 @@ Keep labels to a word or two so users can quickly scan the form. Always use sent
   <form>
     <fieldset class="ods-fieldset">
       <div class="ods-fieldset-flex">
-        <input class="ods-text-input" type="text" id="overview-label" required>
+        <input class="ods-text-input" type="text" id="overview-label">
         <label class="ods-label" for="overview-label">Destination</label>
       </div>
     </fieldset>
@@ -89,7 +89,7 @@ If possible, describe how the error may be resolved.
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <input class="ods-checkbox" type="checkbox" name="overview-error" id="overview-error" value="terms-accepted" aria-describedby="checkbox-invalid-error" required data-invalid>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="overview-error" id="overview-error" value="terms-accepted" aria-describedby="checkbox-invalid-error" required>
     <label class="ods-checkbox--label" for="overview-error">I understand the risks of space travel.</label>
     <aside class="ods-field--error" id="checkbox-invalid-error">You must acknowledge the dangers before proceeding.</aside>
   </fieldset>
@@ -104,7 +104,7 @@ Odyssey assumes inputs are required by default. Optional labels should be used t
 </Description>
 
 <Visual content="full">
-  <fieldset class="ods-fieldset">
+  <fieldset class="ods-fieldset" data-optional>
     <div class="ods-fieldset-flex">
       <select class="ods-select" data-js-choices id="overview-optional" name="overview-optional">
         <option></option>
@@ -196,11 +196,11 @@ Please refer to individual components for complete documentation. These examples
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
       <legend class="ods-input-legend">Field legend label</legend>
-      <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-1" value="value-1" checked data-invalid>
+      <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-1" value="value-1" checked>
       <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
-      <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-2" value="value-2" data-invalid>
+      <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-2" value="value-2">
       <label class="ods-checkbox--label" for="example-2-2">Label 2</label>
-      <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-3" value="value-3" data-invalid>
+      <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-3" value="value-3">
       <label class="ods-checkbox--label" for="example-2-3">Label 3</label>
       <aside class="ods-field--error" id="checkbox-invalid-error"><span class="u-visually-hidden">Error:</span> Invalid error description</aside>
     </fieldset>
@@ -209,11 +209,11 @@ Please refer to individual components for complete documentation. These examples
   ```html
   <fieldset class="ods-fieldset">
     <legend class="ods-input-legend">Field legend label</legend>
-    <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-1" value="value-1" checked data-invalid>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-1" value="value-1" checked>
     <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
-    <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-2" value="value-2" data-invalid>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-2" value="value-2">
     <label class="ods-checkbox--label" for="example-2-2">Label 2</label>
-    <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-3" value="value-3" data-invalid>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-3" value="value-3">
     <label class="ods-checkbox--label" for="example-2-3">Label 3</label>
     <aside class="ods-field--error" id="checkbox-invalid-error"><span class="u-visually-hidden">Error:</span> Invalid error description</aside>
   </fieldset>
@@ -226,7 +226,7 @@ Please refer to individual components for complete documentation. These examples
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset" data-optional>
       <div class="ods-fieldset-flex">
-        <select class="ods-select" data-js-choices id="example-3" name="example-3" required>
+        <select class="ods-select" data-js-choices id="example-3" name="example-3">
           <option></option>
           <option value="value-1">Option 1</option>
           <option value="value-2">Option 2</option>
@@ -243,7 +243,7 @@ Please refer to individual components for complete documentation. These examples
   ```html
   <fieldset class="ods-fieldset" data-optional>
     <div class="ods-fieldset-flex">
-      <select class="ods-select" data-js-choices id="example-3" name="example-3" required>
+      <select class="ods-select" data-js-choices id="example-3" name="example-3">
         <option></option>
         <option value="value-1">Option 1</option>
         <option value="value-2">Option 2</option>
