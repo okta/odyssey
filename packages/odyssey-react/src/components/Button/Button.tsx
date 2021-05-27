@@ -23,7 +23,7 @@ export type ButtonProps = {
   /**
    * Makes the button element unusable.
    */
-  disabled?: boolean,
+  disabled?: true,
 
   /**
    * Button click handler.
@@ -68,7 +68,6 @@ const Button: FunctionComponent<ButtonProps> = (props) => {
       className={componentClass}
       disabled={disabled}
       onClick={onClick}
-      data-testid="ods-button"
     >
       <span className="ods-button--label">{children}</span>
     </button>
