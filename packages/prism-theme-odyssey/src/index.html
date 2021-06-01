@@ -3,6 +3,8 @@
    <head>
       <meta charset="UTF-8">
       <title>Prism Theme Odyssey</title>
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
       <style>
         main {
           max-width: 960px;
@@ -20,7 +22,7 @@
       <p>A <a href="https://prismjs.com/">Prism.js</a> a theme purpose built for <a href="https://okta.design/">Odyssey</a>, Okta's design system.</p>
 
       <p>Currently this package is not currently being distributed. If you are interested in using this for your project <a href="https://okta.design/">reach out</a> to the Odyssey team!</p>
-      
+
       <ul>
         <li><a href="#csharp">C#</a></li>
         <li><a href="#go">Go</a></li>
@@ -41,7 +43,7 @@
         <pre><code class="language-csharp">using System.IO.Compression;
 
   #pragma warning disable 414, 3021
-  
+
   namespace MyApplication
   {
       [Obsolete("...")]
@@ -56,7 +58,7 @@
       }
   }</code></pre>
       </section>
-      
+
       <section>
         <h2><a name="go"></a> Go</h2>
         <pre><code class="language-go">import "fmt"
@@ -71,7 +73,7 @@ func main() {
 }
 </code></pre>
       </section>
-      
+
       <section>
         <h2><a name="http"></a>HTTP</h2>
         <pre><code class="language-http">HTTP/1.1 200 OK
@@ -110,30 +112,30 @@ public abstract strictfp class L2Char extends L2Object {
       return;
     }
   }
-}</code></pre>        
+}</code></pre>
       </section>
 
       <section>
         <h2><a name="js"></a>JavaScript</h2>
         <pre><code class="language-js">import {x, y} as p from 'point';
   const ANSWER = 42;
-  
+
   class Car extends Vehicle {
     constructor(speed, cost) {
       super(speed);
-  
+
       var c = Symbol('cost');
       this[c] = cost;
-  
+
       this.intro = `This is a car runs at
         ${speed}.`;
     }
   }
-  
+
   for (let num of [1, 2, 3]) {
     console.log(num + 0b111110111);
   }
-  
+
   function $initHighlight(block, flags) {
     try {
       if (block.className.search(/\bno\-highlight\b/) != -1)
@@ -151,7 +153,7 @@ public abstract strictfp class L2Char extends L2Object {
     }
     console.log(Array.every(classes, Boolean));
   }
-  
+
   export $initHighlight;</code></pre>
       </section>
 
@@ -203,7 +205,7 @@ hello world
         <pre><code class="language-objectivec">using System.IO.Compression;
 
   #pragma warning disable 414, 3021
-  
+
   namespace MyApplication
   {
       [Obsolete("...")]
@@ -224,21 +226,21 @@ hello world
         <pre><code class="language-php">require_once 'Zend/Uri/Http.php';
 
   namespace Location\Web;
-  
+
   interface Factory
   {
       static function _factory();
   }
-  
+
   abstract class URI extends BaseURI implements Factory
   {
       abstract function test();
-  
+
       public static $st1 = 1;
       const ME = "Yo";
       var $list = NULL;
       private $var;
-  
+
       /**
        * Returns a URI
        *
@@ -251,24 +253,24 @@ hello world
           $schemeSpecific = isset($uri[1]) ? $uri[1] : '';
           $desc = 'Multi
   line description';
-  
+
           // Security check
           if (!ctype_alnum($scheme)) {
               throw new Zend_Uri_Exception('Illegal scheme');
           }
-  
+
           $this->var = 0 - self::$st;
           $this->list = list(Array("1"=> 2, 2=>self::ME, 3 => \Location\Web\URI::class));
-  
+
           return [
               'uri'   => $uri,
               'value' => null,
           ];
       }
   }
-  
+
   echo URI::ME . URI::$st1;
-  
+
   __halt_compiler () ; datahere
   datahere
   datahere */
@@ -337,7 +339,7 @@ class SomeClass:
     pass
 
 >>> message = '''interpreter
-... prompt'''</code></pre>        
+... prompt'''</code></pre>
       </section>
 
       <section>
@@ -356,7 +358,7 @@ foo = 42"
 ... abc
 ... """
 >>> def test():
-...     pass</code></pre>        
+...     pass</code></pre>
       </section>
 
       <section>
@@ -375,7 +377,7 @@ foo = 42"
   func description(offset: Int = 0) -> String {
     return "\(name) is \(age + offset) years old"
   }
-}</code></pre>        
+}</code></pre>
       </section>
 
     </main>
