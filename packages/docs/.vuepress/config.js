@@ -12,6 +12,24 @@ module.exports = {
         'og:image': '/images/og-logo.png',
       },
     ],
+    [
+      'link', {
+        'rel': 'preconnect',
+        'href': 'https://fonts.gstatic.com',
+      },
+    ],
+    [
+      'link', {
+        'rel': 'stylesheet',
+        'href': 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap',
+      },
+    ],
+    [
+      'link', {
+        'rel': 'stylesheet',
+        'href': 'https://fonts.googleapis.com/css2?family=Inconsolata&display=swap',
+      },
+    ],
   ],
   // These plugins include vendor libraries which are required by Odyssey docs.
   plugins: [

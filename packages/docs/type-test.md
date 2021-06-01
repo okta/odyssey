@@ -1,31 +1,31 @@
 ---
 template: plain
 id: base-type
-title: Type Test
-headline: Projoesal w relative margins
-lede:
+title: Type Examples
+headline: Type Examples
+lede: A comprehensive set of in-situ type specimens.
 description:
 ---
 
-This is our current proposal. It features a **14px** base font-size with a scale ratio of **1.1942**. This targets a **34px** `h1`. Our base line-height is locked at **1.7142857** in order to generate the spacing units desired by Product Design. Line height for large titles (`h1` through `h3`) is set to **1.3**. Margins for headers are set to **$spacing-xs-em**.
+This is our current typography setup. It features a **16px** base font-size with a scale ratio of **1.1487**. This targets a **32px** `h1`. Our base line-height is **1.5**. Line height for large titles (`h1` through `h3`) is set to **1.3**. Margins for headers are set to **$spacing-xs-em**.
 
 Available sizes can be seen <a href="/base/typography/">here</a>.
 
-Available spacing units (unchanged) can be seen <a href="/base/tokens/">here</a>.
+Available spacing units can be seen <a href="/base/tokens/">here</a>.
 
 Our full config is below:
 
 ```scss
-$body-font-family: 'Whyte', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+$body-font-family: 'Public Sans', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
 $mono-font-family: 'Inconsolata', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
-$base-font-size: 14px; // 1rem @ 14px
-$scale-ratio: 1.1942;
-$base-line-height: 1.7142857;
+$base-font-size: 16px;
+$scale-ratio: 1.1487;
+$base-line-height: 1.5;
 $title-line-height: 1.3;
 $max-line-length: 32em;
+$type-margin: 1.5em;
 
-// Establish Type Scale
 $size-title-1: ms(5);
 $size-title-2: ms(4);
 $size-title-3: ms(3);
@@ -33,6 +33,7 @@ $size-title-4: ms(2);
 $size-title-5: ms(1);
 $size-title-6: ms(0);
 
+$size-body-lede: ms(1);
 $size-body-base: ms(0);
 $size-body-caption: ms(-1);
 ```
