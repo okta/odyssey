@@ -20,8 +20,8 @@ const statusDescriptor = "Status Descriptor";
 describe("Status", () => {
   it("should render the status component", () => {
     const { getByTestId } = render(
-      <Status 
-        variant="neutral" 
+      <Status
+        variant="neutral"
         label={statusLabel}
         descriptor={statusDescriptor}
       />
@@ -29,11 +29,11 @@ describe("Status", () => {
 
     expect(getByTestId('ods-status')).toBeInTheDocument();
   });
-    
+
   it('should visually hide the label, but keep it in the DOM for assistive purposes', () => {
     const { getByTestId } = render(
-      <Status 
-        variant="danger" 
+      <Status
+        variant="danger"
         label={statusLabel}
         descriptor={statusDescriptor}
         labelHidden={true}
@@ -45,18 +45,5 @@ describe("Status", () => {
     expect(statusElement).toHaveClass("is-ods-status-label-hidden");
     expect(labelElement).toHaveTextContent(statusLabel)
     expect(labelElement).toBeVisible();
-  });
-
-  it('should apply an aria role of `status` when the `prop.role` is set', () => {
-    const { getByTestId } = render(
-      <Status 
-        label={statusLabel}
-        descriptor={statusDescriptor}
-        role="status"
-      />
-    );
-    const statusElement = getByTestId('ods-status');
-
-    expect(statusElement).toHaveAttribute('role', 'status');
   });
 });

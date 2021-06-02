@@ -20,25 +20,20 @@ export default {
   argTypes: {
     labelHidden: {
       control: { type: "boolean" }
-    },
-    role: {
-      control: { type: "text" }
     }
   }
 };
 
-const Template: Story<StatusProps> = ({ 
+const Template: Story<StatusProps> = ({
   label,
   descriptor,
   labelHidden,
-  role,
-  variant 
+  variant
 }) => (
-  <Status 
+  <Status
     label={label}
     descriptor={descriptor}
     labelHidden={labelHidden}
-    role={role}
     variant={variant}
   />
 )

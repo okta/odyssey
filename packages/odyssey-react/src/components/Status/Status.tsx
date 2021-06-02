@@ -19,7 +19,7 @@ export type StatusProps = {
    * The status label.
    */
   label: string,
-  
+
   /**
    * Visually hides the status label.
    */
@@ -31,11 +31,6 @@ export type StatusProps = {
   descriptor: string,
 
   /**
-   * aria-role to be applied to the status element when it's descriptor is expected to change asynchronously.
-   */
-  role?: 'status',
-
-  /**
    * The visual variant to be displayed to the user.
    * @default neutral
    */
@@ -43,20 +38,17 @@ export type StatusProps = {
 }
 
 /**
- * Status is used to inform users by providing feedback on system states. Status can display broad 
+ * Status is used to inform users by providing feedback on system states. Status can display broad
  * operational states as well as granular states like user status.
- * 
+ *
  * @component
- * @todo [OKTA-398175](https://oktainc.atlassian.net/browse/OKTA-398175) - Move away from definition 
- * lists Status component HTML
  * @example <Status label={label} descriptor={descriptor} />
  */
 const Status: FunctionComponent<StatusProps> = (props) => {
-  const { 
+  const {
     label,
     descriptor,
     labelHidden = false,
-    role,
     variant = "neutral",
   } = props;
 
@@ -66,14 +58,14 @@ const Status: FunctionComponent<StatusProps> = (props) => {
   });
 
   return (
-    <dl className={componentClass} role={role} data-testid="ods-status">
-      <dt className="ods-status--label">
+    <div className={componentClass} role="status" data-testid="ods-status">
+      <span className="ods-status--label">
         {label}
-      </dt>
-      <dd className="ods-status--value">
+      </span>
+      <span className="ods-status--value">
         {descriptor}
-      </dd>
-    </dl>
+      </span>
+    </div>
   )
 };
 
