@@ -37,6 +37,14 @@ describe("TextInput", () => {
     expect(getByText(label)).toHaveAttribute('for', 'foo');
   });
 
+  it('renders a generated id associating the input and label', () => {
+    const { getByLabelText } = render(
+      <TextInput label={label} />
+    );
+
+    expect(getByLabelText(label)).toBe;
+  });
+
   it('renders a provided name for the input', () => {
     const { getByRole } = render(
       <TextInput label={label} name="bar" />

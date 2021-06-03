@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { useMemo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import type {
   FunctionComponent,
   FocusEventHandler,
@@ -18,7 +18,7 @@ import type {
   RefCallback,
   ReactNode
 } from 'react';
-import { oid } from '../../utils';
+import { useOid } from '../../utils';
 
 export type Props = {
   /**
@@ -135,7 +135,7 @@ const TextInput: FunctionComponent<Props> = (props) => {
   const {
     defaultValue,
     disabled = false,
-    id = useMemo(oid, []),
+    id,
     inputRef,
     label,
     name,
@@ -150,6 +150,8 @@ const TextInput: FunctionComponent<Props> = (props) => {
     value,
   } = props;
 
+  const oid = useOid(id);
+
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       onChange?.(event, event.target.value);
@@ -163,7 +165,7 @@ const TextInput: FunctionComponent<Props> = (props) => {
         <input
           className="ods-text-input"
           disabled={disabled}
-          id={id}
+          id={oid}
           name={name}
           onChange={handleChange}
           onBlur={onBlur}
@@ -179,7 +181,7 @@ const TextInput: FunctionComponent<Props> = (props) => {
         <label
           children={renderLabel(label, required, optionalLabel)}
           className="ods-label"
-          htmlFor={id}
+          htmlFor={oid}
         />
       </div>
     </fieldset>

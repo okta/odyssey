@@ -17,7 +17,7 @@ import type {
   ChangeEvent,
   RefCallback,
 } from 'react';
-import { oid } from '../../utils';
+import { useOid } from '../../utils';
 
 export type Props = {
   /**
@@ -122,6 +122,8 @@ const TextArea: FunctionComponent<Props> = (props) => {
     value,
   } = props;
 
+  const oid = useOid(id);
+
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement>) => {
       onChange?.(event, event.target.value);
@@ -135,7 +137,7 @@ const TextArea: FunctionComponent<Props> = (props) => {
         <textarea
           className="ods-text-input ods-text-area"
           disabled={disabled}
-          id={id || oid()}
+          id={oid}
           name={name}
           onChange={handleChange}
           onBlur={onBlur}
@@ -153,7 +155,7 @@ const TextArea: FunctionComponent<Props> = (props) => {
         <label
           children={label}
           className="ods-label"
-          htmlFor={id}
+          htmlFor={oid}
         />
       </div>
     </fieldset>
