@@ -30,6 +30,18 @@ describe("Status", () => {
     expect(getByTestId('ods-status')).toBeInTheDocument();
   });
 
+  it('renders the appropriate role of "status"', () => {
+    const { getByRole } = render(
+      <Status
+        variant="success"
+        label={statusLabel}
+        descriptor={statusDescriptor}
+      />
+    );
+
+    expect(getByRole("status")).toBeInTheDocument;
+  });
+
   it('should visually hide the label, but keep it in the DOM for assistive purposes', () => {
     const { getByTestId } = render(
       <Status
