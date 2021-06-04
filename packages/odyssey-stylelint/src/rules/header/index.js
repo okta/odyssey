@@ -11,8 +11,7 @@
  */
 
 const stylelint = require('stylelint');
-const addEmptyLineAfter = require('stylelint/lib/utils/addEmptyLineAfter');
-const { pattern, template, licenseLines, licenseText, licenseComment } = require('./license');
+const { pattern, licenseLines, licenseComment } = require('./license');
 
 const ruleName = 'odyssey/header';
 const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -20,7 +19,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
   incorrect: 'incorrect header'
 });
 
-function isLicenseHeader (text) {
+function isLicenseHeader(text) {
   const textLines = text.split('\n');
 
   return licenseLines.every((line, idx) => {
@@ -31,18 +30,18 @@ function isLicenseHeader (text) {
     }
 
     return candidate === line;
-  })
+  });
 }
 
-function rule (actual, options = {}, context = {}) {
-  return function ruleBody (root, result) {
-    const fix = context.fix && !(options.disableFix || false)
+function rule(_, options = {}, context = {}) {
+  return function ruleBody(root, result) {
+    const fix = context.fix && !(options.disableFix || false);
     const first = root.first;
     const rootComment = first.type === 'comment';
 
     if (fix && !rootComment) {
       root.prepend(licenseComment);
-      return
+      return;
     }
 
     if (!rootComment) {
@@ -53,16 +52,16 @@ function rule (actual, options = {}, context = {}) {
         ruleName,
       });
 
-      return
+      return;
     }
 
     if (isLicenseHeader(first.text)) {
-      return
+      return;
     }
 
     if (fix) {
       root.prepend(licenseComment);
-      return
+      return;
     }
 
     stylelint.utils.report({
@@ -71,7 +70,7 @@ function rule (actual, options = {}, context = {}) {
       result,
       ruleName,
     });
-  }
+  };
 }
 
 module.exports = Object.assign(
