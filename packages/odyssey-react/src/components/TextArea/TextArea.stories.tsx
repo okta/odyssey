@@ -29,6 +29,7 @@ export default {
     readonly: { control: 'boolean' },
     defaultValue: { control: 'text' },
     hint: { control: 'text' },
+    optionalLabel: { control: 'text' },
     placeholder: { control: 'text' },
     value: { control: 'text' },
     id: { control: 'text' },
