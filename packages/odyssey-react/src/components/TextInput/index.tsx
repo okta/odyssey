@@ -16,7 +16,6 @@ import type {
   FocusEventHandler,
   ChangeEvent,
   RefCallback,
-  ReactNode
 } from 'react';
 import { useOid } from '../../utils';
 
@@ -108,26 +107,6 @@ export type Props = {
 };
 
 
-function renderLabel(
-  label: string,
-  required: boolean,
-  optionalLabel?: string
-): ReactNode {
-  if (required || !optionalLabel) {
-    return <>{label}</>;
-  }
-  return (
-    <>
-      {label}
-      <span
-        className="ods-label--optional"
-        children={optionalLabel}
-      />
-    </>
-  );
-}
-
-
 /**
  * Text inputs allow users to edit and input data.
  */
@@ -159,6 +138,16 @@ const TextInput: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
+  const labelChildren = <>
+    {label}
+    { !required && optionalLabel &&
+      <span
+        className="ods-label--optional"
+        children={optionalLabel}
+      />
+    }
+  </>;
+
   return (
     <fieldset className="ods-fieldset">
       <div className="ods-fieldset-flex">
@@ -179,7 +168,7 @@ const TextInput: FunctionComponent<Props> = (props) => {
           value={value}
         />
         <label
-          children={renderLabel(label, required, optionalLabel)}
+          children={labelChildren}
           className="ods-label"
           htmlFor={oid}
         />
