@@ -10,22 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
+import type { Story } from "@storybook/react";
 import { action } from '@storybook/addon-actions';
 import React from "react";
-import Tooltip, { TooltipProps } from "./Tooltip";
+import Tooltip from ".";
+import type { Props } from ".";
 
 import { Button } from '../../';
 
 export default {
   title: `Components/Tooltip`,
   component: Tooltip,
-  parameters:{
-    layout:'centered',
+  parameters: {
+    layout: 'centered',
+    controls: {
+      sort: 'requiredFirst'
+    },
   }
 };
 
-const Template: Story<TooltipProps> = () => (
+const Template: Story<Props> = () => (
   <>
     <Tooltip label="Top tooltip label" position="top">
       <Button variant="primary" onClick={action('Top button clicked')}>Top</Button>
@@ -40,6 +44,6 @@ const Template: Story<TooltipProps> = () => (
       <Button onClick={action('Left button clicked')} variant="clear">Left</Button>
     </Tooltip>
   </>
-)
+);
 
 export const Default = Template.bind({});

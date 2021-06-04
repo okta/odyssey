@@ -10,43 +10,44 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ReactNode, FunctionComponent } from 'react'
+import React from 'react';
+import type { ReactNode, FunctionComponent } from 'react';
 import className from 'classnames';
 
-export type TooltipProps = {
+export type Props = {
+  /**
+   * Content to be rendered that needs a tooltip label
+   */
   children: ReactNode,
 
   /**
-   * The position the tooltip will be displayed.
+   * The position the tooltip will be displayed
    * @default top
    */
   position: 'top' | 'right' | 'bottom' | 'left',
 
   /**
-   * The position the tooltip will be displayed.
+   * The position the tooltip will be displayed
    */
-  label: string
-}
+  label: string;
+};
 
 /**
  * A transient element that provides additional context for an element when it receives hover or focus.
- * 
- * @component
- * @example <Tooltip position="top" label="The tooltip text content">...</Tooltip>
  */
-const Tooltip: FunctionComponent<TooltipProps> = ({ position = 'top', label, children }) => {
+const Tooltip: FunctionComponent<Props> = ({ position = 'top', label, children }) => {
   const componentClass = className('ods-tooltip', {
     [`is-ods-tooltip-${position}`]: position
   });
 
   return (
-    <span className="has-ods-tooltip" data-testid="ods-tooltip">
+    <span className="has-ods-tooltip">
       {children}
-      <aside id="edit-label" className={componentClass} role="tooltip">
+      <aside className={componentClass} role="tooltip">
         {label}
       </aside>
     </span>
-  )
+  );
 };
 
 export default Tooltip;

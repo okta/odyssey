@@ -12,28 +12,37 @@
 
 import React from "react";
 import { render } from "@testing-library/react";
-import Tooltip from "./Tooltip";
+import Tooltip from ".";
 
-const tooltipLabel = "Tooltip label"
+const label = "label";
+const tooltip = "tooltip";
 
 describe("Tooltip", () => {
-  it("should render the tooltip", () => {
-    const { getByTestId } = render(
-      <Tooltip label={tooltipLabel} position="top">
+  it("renders the tooltip", () => {
+    const { getByRole } = render(
+      <Tooltip label={label} position="top">
         <button>Top</button>
       </Tooltip>
     );
 
-    expect(getByTestId('ods-tooltip')).toBeInTheDocument();
+    expect(getByRole(tooltip)).toBeInTheDocument();
   });
 
-  it("should render the tooltip label", () => {
-    const { getByTestId } = render(
-      <Tooltip label={tooltipLabel} position="top">
+  it("renders the tooltip label", () => {
+    const { getByRole } = render(
+      <Tooltip label={label} position="top">
         <button>Top</button>
       </Tooltip>
     );
-    const label = getByTestId('ods-tooltip').querySelector('[role="tooltip"]');
-    expect(label).toHaveTextContent(tooltipLabel)
+    expect(getByRole(tooltip)).toHaveTextContent(label);
+  });
+
+  it("renders children as expected", () => {
+    const child = "foo";
+    const { getByText } = render(
+      <Tooltip label={label} position="top" children={child} />
+    );
+
+    expect(getByText(child)).toBeInTheDocument();
   });
 });
