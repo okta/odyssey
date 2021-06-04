@@ -66,6 +66,11 @@ export type Props = {
   hint?: string,
 
   /**
+   * Text to display when the form is optional, i.e. required prop is false
+   */
+  optionalLabel?: string,
+
+  /**
    * The underlying textarea element placeholder attribute
    */
   placeholder?: string,
@@ -115,6 +120,7 @@ const TextArea: FunctionComponent<Props> = (props) => {
     onBlur,
     onChange,
     onFocus,
+    optionalLabel,
     placeholder,
     readonly = false,
     required = true,
@@ -130,6 +136,16 @@ const TextArea: FunctionComponent<Props> = (props) => {
     },
     [onChange]
   );
+
+  const labelChildren = <>
+    {label}
+    { !required && optionalLabel &&
+      <span
+        className="ods-label--optional"
+        children={optionalLabel}
+      />
+    }
+  </>;
 
   return (
     <fieldset className="ods-fieldset">
@@ -153,7 +169,7 @@ const TextArea: FunctionComponent<Props> = (props) => {
           children={hint}
         />
         <label
-          children={label}
+          children={labelChildren}
           className="ods-label"
           htmlFor={oid}
         />
