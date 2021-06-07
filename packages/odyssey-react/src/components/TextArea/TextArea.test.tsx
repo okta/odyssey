@@ -11,18 +11,17 @@
  */
 
 import React from "react";
-import { render, fireEvent, within } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
-import TextInput from ".";
-import type { Props } from ".";
+import TextArea from ".";
 
 const textBox = 'textbox';
 const label = 'Destination';
 
-describe("TextInput", () => {
+describe("TextArea", () => {
   it('renders into the document', () => {
     const { getByRole } = render(
-      <TextInput label={label} />
+      <TextArea label={label} />
     );
 
     expect(getByRole(textBox)).toBeInTheDocument();
@@ -30,7 +29,7 @@ describe("TextInput", () => {
 
   it('renders a provided id associating the input and label', () => {
     const { getByRole, getByText } = render(
-      <TextInput label={label} id="foo" />
+      <TextArea label={label} id="foo" />
     );
 
     expect(getByRole(textBox)).toHaveAttribute('id', 'foo');
@@ -39,7 +38,7 @@ describe("TextInput", () => {
 
   it('renders a generated id associating the input and label', () => {
     const { getByLabelText } = render(
-      <TextInput label={label} />
+      <TextArea label={label} />
     );
 
     expect(getByLabelText(label)).toBe;
@@ -47,24 +46,20 @@ describe("TextInput", () => {
 
   it('renders a provided name for the input', () => {
     const { getByRole } = render(
-      <TextInput label={label} name="bar" />
+      <TextArea label={label} name="bar" />
     );
 
     expect(getByRole(textBox)).toHaveAttribute('name', 'bar');
   });
 
-  it('renders the optionalLabel when input is not required', () => {
-    const optionalLabel = 'Optional';
+  it('renders a provided hint', () => {
+    const hint = 'Look here';
 
-    const { container } = render(
-      <TextInput label={label} optionalLabel={optionalLabel} required={false} />
+    const { getByText } = render(
+      <TextArea label={label} hint={hint} />
     );
 
-    expect(
-      within(container.querySelector('label') as HTMLElement).getByText(
-        optionalLabel
-      )
-    ).toBeInTheDocument();
+    expect(getByText(hint)).toBeInTheDocument();
   });
 
   it.each([
@@ -73,33 +68,17 @@ describe("TextInput", () => {
     ['required']
   ])('renders %s attribute', (attr: string) => {
     const { getByRole } = render(
-      <TextInput label={label} {...{ [attr]: true }} />
+      <TextArea label={label} {...{ [attr]: true }} />
     );
 
     expect(getByRole(textBox)).toHaveAttribute(attr);
-  });
-
-  it.each<[Props['type']]>([
-    [undefined],
-    ['text'],
-    ['email'],
-    ['url'],
-    ['tel'],
-    ['search'],
-    ['password']
-  ])('renders %s input type', (type) => {
-    const { getByLabelText } = render(
-      <TextInput label={label} type={type} />
-    );
-
-    expect(getByLabelText(label)).toHaveAttribute('type', type ?? 'text');
   });
 
   it('invokes onChange with expected args when change input event fires', () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
-      <TextInput onChange={handle} label={label} />
+      <TextArea onChange={handle} label={label} />
     );
 
     fireEvent.change(
@@ -121,7 +100,7 @@ describe("TextInput", () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
-      <TextInput {...{ [prop]: handle }} label={label} />
+      <TextArea {...{ [prop]: handle }} label={label} />
     );
 
     fireEvent[type].call(
@@ -135,11 +114,11 @@ describe("TextInput", () => {
     );
   });
 
-  it('invokes inputRef with expected args after render', () => {
+  it('invokes textareaRef with expected args after render', () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
-      <TextInput inputRef={handle} label={label} />
+      <TextArea textareaRef={handle} label={label} />
     );
 
     expect(handle).toHaveBeenCalledTimes(1);
