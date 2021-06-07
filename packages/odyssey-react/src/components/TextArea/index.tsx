@@ -21,15 +21,9 @@ import { useOid } from '../../utils';
 
 export type Props = {
   /**
-   * The underlying input element id attribute. Automatically generated if not provided
+   * The underlying textarea element id attribute. Automatically generated if not provided
    */
   id?: string,
-
-  /**
-   * The underlying input element type
-   * @default text
-   */
-  type?: 'text' | 'email' | 'url' | 'tel' | 'search' | 'password',
 
   /**
    * The form field label
@@ -37,34 +31,39 @@ export type Props = {
   label: string,
 
   /**
-   * Callback to provide a reference to the underlying input element
-   * @param {Object} instance the input element or null
+   * Callback to provide a reference to the underlying textarea element
+   * @param {Object} instance the textarea element or null
    */
-  inputRef?: RefCallback<HTMLInputElement>,
+  textareaRef?: RefCallback<HTMLTextAreaElement>,
 
 
   /**
-   * The underlying input element name attribute
+   * The underlying textarea element name attribute
    */
   name?: string,
 
   /**
-   * The underlying input element required attribute
+   * The underlying textarea element required attribute
    * @default true
    */
   required?: boolean,
 
   /**
-   * The underlying input element disabled attribute
+   * The underlying textarea element disabled attribute
    * @default false
    */
   disabled?: boolean,
 
   /**
-   * The underlying input element readonly attribute
+   * The underlying textarea element readonly attribute
    * @default false
    */
   readonly?: boolean,
+
+  /**
+   * Text to display as a hint
+   */
+  hint?: string,
 
   /**
    * Text to display when the form is optional, i.e. required prop is false
@@ -72,50 +71,50 @@ export type Props = {
   optionalLabel?: string,
 
   /**
-   * The underlying input element placeholder attribute
+   * The underlying textarea element placeholder attribute
    */
   placeholder?: string,
 
   /**
-   * The input element value for controlled components
+   * The textarea element value for controlled components
    */
   value?: string,
 
   /**
-   * The initial input element value for uncontrolled components
+   * The initial textarea element value for uncontrolled components
    */
   defaultValue?: string,
 
   /**
-   * Callback executed when the input fires a blur event
+   * Callback executed when the textarea fires a blur event
    * @param {Object} event the event object
    */
-  onBlur?: FocusEventHandler<HTMLInputElement>,
+  onBlur?: FocusEventHandler<HTMLTextAreaElement>,
 
   /**
-   * Callback executed when the input fires a change event
+   * Callback executed when the textarea fires a change event
    * @param {Object} event the event object
-   * @param {string} value the string value of the input
+   * @param {string} value the string value of the textarea
    */
-  onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void,
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>, value: string) => void,
 
   /**
-  * Callback executed when the input fires a focus event
+  * Callback executed when the textarea fires a focus event
   * @param {Object} event the event object
   */
-  onFocus?: FocusEventHandler<HTMLInputElement>,
+  onFocus?: FocusEventHandler<HTMLTextAreaElement>,
 };
 
 
 /**
- * Text inputs allow users to edit and input data.
+ * TextArea allows users to edit and input data.
  */
-const TextInput: FunctionComponent<Props> = (props) => {
+const TextArea: FunctionComponent<Props> = (props) => {
   const {
     defaultValue,
     disabled = false,
+    hint,
     id,
-    inputRef,
     label,
     name,
     onBlur,
@@ -125,14 +124,14 @@ const TextInput: FunctionComponent<Props> = (props) => {
     placeholder,
     readonly = false,
     required = true,
-    type = 'text',
+    textareaRef,
     value,
   } = props;
 
   const oid = useOid(id);
 
   const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
+    (event: ChangeEvent<HTMLTextAreaElement>) => {
       onChange?.(event, event.target.value);
     },
     [onChange]
@@ -151,8 +150,8 @@ const TextInput: FunctionComponent<Props> = (props) => {
   return (
     <fieldset className="ods-fieldset">
       <div className="ods-fieldset-flex">
-        <input
-          className="ods-text-input"
+        <textarea
+          className="ods-text-input ods-text-area"
           disabled={disabled}
           id={oid}
           name={name}
@@ -161,11 +160,13 @@ const TextInput: FunctionComponent<Props> = (props) => {
           onFocus={onFocus}
           placeholder={placeholder}
           readOnly={readonly}
-          ref={inputRef}
+          ref={textareaRef}
           required={required}
-          type={type}
           defaultValue={defaultValue}
           value={value}
+        />
+        <aside className="ods-field--hint"
+          children={hint}
         />
         <label
           children={labelChildren}
@@ -177,4 +178,4 @@ const TextInput: FunctionComponent<Props> = (props) => {
   );
 };
 
-export default TextInput;
+export default TextArea;

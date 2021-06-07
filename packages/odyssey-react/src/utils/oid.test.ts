@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import oid from "./oid";
+import { oid, length } from "./oid";
 
 describe("oid", () => {
   it(`returns a nice id string`, () => {
-    expect(oid()).toHaveLength(6);
+    expect(oid()).toHaveLength(length);
   });
 });

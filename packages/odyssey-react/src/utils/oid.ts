@@ -10,6 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-type oid = () => string;
-const oid: oid = () => Math.random().toString(36).slice(2, 8);
-export default oid;
+import { useMemo } from 'react';
+
+export const length = 6;
+
+export const oid = (): string => Math.random().toString(36).slice(-length);
+
+export const useOid = (id?: string): string => {
+  const _oid = useMemo(oid, [oid]);
+  return id || _oid;
+};
