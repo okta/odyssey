@@ -14,25 +14,32 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import Button from "./Button";
 
+const button = "button";
 const buttonLabel = "Button Label";
 
 describe("Button", () => {
   it("render the button", () => {
-    const { getByText } = render(<Button onClick={jest.fn()} variant="primary">{buttonLabel}</Button>);
-    
+    const { getByText } = render(<Button children={buttonLabel} />);
+
     expect(getByText(buttonLabel)).toBeInTheDocument();
   });
 
+  it('renders aria attrs via omit rest props', () => {
+    const { getByRole } = render(<Button aria-describedby="foo" children="bar" />);
+
+    expect(getByRole(button)).toHaveAttribute('aria-describedby', 'foo');
+  });
+
   it('should be disabled', () => {
-    const { getByRole } = render(<Button onClick={jest.fn()} variant="primary" disabled={true}>{buttonLabel}</Button>);
-    
-    expect(getByRole('button')).toHaveAttribute('disabled')
+    const { getByRole } = render(<Button disabled={true}>{buttonLabel}</Button>);
+
+    expect(getByRole('button')).toHaveAttribute('disabled');
   });
 
   it('should call onClick when clicked', () => {
     const handleClick = jest.fn();
-    const { getByRole } = render(<Button variant="primary" onClick={handleClick}>My Button</Button>);
-    
+    const { getByRole } = render(<Button onClick={handleClick} children="foo" />);
+
     fireEvent.click(getByRole('button'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
