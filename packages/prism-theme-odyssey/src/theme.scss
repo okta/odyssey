@@ -198,7 +198,7 @@ pre[class*='language-'] > code[class*='language-'] {
   position: absolute;
   z-index: 0;
   inset-inline-end: 0;
-  left: 0;
+  inset-inline-start: 0;
   margin-block-start: 1em;
   padding: inherit 0;
   background: var(--highlightBackground);
