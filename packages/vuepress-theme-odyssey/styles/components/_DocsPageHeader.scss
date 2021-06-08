@@ -16,7 +16,7 @@
   grid-column-gap: $spacing-m;
   grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
   justify-content: space-between;
-  margin-bottom: $spacing-l;
+  margin-block-end: $spacing-l;
   font-size: $size-title-4;
 
   @include mq(m) {
@@ -56,7 +56,7 @@
         display: block;
         width: 50px;
         height: 116px;
-        margin-bottom: $spacing-s;
+        margin-block-end: $spacing-s;
         background-image: url('/images/index-base-m.svg');
         background-size: contain;
       }
@@ -74,7 +74,7 @@
         display: block;
         width: 90px;
         height: 116px;
-        margin-bottom: $spacing-s;
+        margin-block-end: $spacing-s;
         background-image: url('/images/index-components-m.svg');
         background-size: contain;
       }
@@ -92,7 +92,7 @@
         display: block;
         width: 90px;
         height: 116px;
-        margin-bottom: $spacing-s;
+        margin-block-end: $spacing-s;
         background-image: url('/images/index-icons-m.svg');
         background-size: contain;
       }

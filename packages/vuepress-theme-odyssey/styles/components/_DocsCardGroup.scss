@@ -15,7 +15,7 @@
   grid-column-gap: $spacing-m;
   grid-row-gap: $spacing-l;
   grid-template-columns: repeat(auto-fit, minmax($max-line-length / 2, 1fr));
-  margin-bottom: $spacing-xl;
+  margin-block-end: $spacing-xl;
 
   &.is-2col {
     grid-template-columns: 1fr 1fr;

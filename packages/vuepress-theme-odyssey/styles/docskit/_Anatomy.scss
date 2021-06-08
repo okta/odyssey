@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: $spacing-l;
+  margin-block-end: $spacing-l;
   border: 1px solid var(--border-color-display, #{$border-color-display});
   border-radius: $base-border-radius;
 

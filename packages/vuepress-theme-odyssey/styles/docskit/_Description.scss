@@ -11,7 +11,7 @@
  */
 
 .docskit--desc {
-  margin-bottom: 2em;
+  margin-block-end: 2em;
 
   p {
     grid-column: 1 / 1;
@@ -37,7 +37,7 @@
 
     .desc-counter--item {
       @include mq(m) {
-        margin-bottom: $spacing-m;
+        margin-block-end: $spacing-m;
       }
 
       &::marker {

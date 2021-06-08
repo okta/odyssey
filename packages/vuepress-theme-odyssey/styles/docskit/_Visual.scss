@@ -12,11 +12,11 @@
 
 .docskit-visual {
   grid-column: 2 / 3;
-  margin-bottom: $spacing-m;
+  margin-block-end: $spacing-m;
 
   .docskit-visual--title {
     &::before {
-      margin-right: $spacing-xs;
+      margin-inline-end: $spacing-xs;
       font-size: $size-title-5;
     }
   }
@@ -46,16 +46,16 @@
     position: relative;
 
     .docskit-visual--figure {
-      padding-bottom: 0;
+      padding-block-end: 0;
     }
 
     &::after {
       content: '';
       display: block;
       position: absolute;
-      right: 1px;
-      bottom: 1px;
-      left: 1px;
+      inset-inline-end: 1px;
+      inset-block-end: 1px;
+      inset-inline-start: 1px;
       height: 33%;
       border-radius: 0 0 $base-border-radius $base-border-radius;
       background: linear-gradient(to top, rgba(255, 255, 255, 1) 33.33%, rgba(255, 255, 255, 0) 100%);

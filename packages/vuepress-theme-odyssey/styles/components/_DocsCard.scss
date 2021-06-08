@@ -39,10 +39,10 @@
       content: '';
       display: block;
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      inset-block-end: 0;
+      inset-inline-start: 0;
 
       // NOTE: 32px is sort of an arbitrary value,
       // and only used within this component.
@@ -51,7 +51,7 @@
   }
 
   .docs-card--header-image {
-    margin-bottom: $spacing-m;
+    margin-block-end: $spacing-m;
 
     svg {
       height: auto;
@@ -60,7 +60,7 @@
 
   .docs-card--main {
     flex: 1;
-    margin-bottom: $spacing-l;
+    margin-block-end: $spacing-l;
     font-size: $size-body-base;
   }
 

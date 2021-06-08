@@ -46,7 +46,7 @@ a.docs-site-title:visited {
     visibility: hidden;
     position: fixed;
     z-index: z-index(sidebar);
-    top: 0;
+    inset-block-start: 0;
     transform: translateX(-100%);
     transition: all 0.33s ease-in-out;
 
@@ -69,8 +69,8 @@ a.docs-site-title:visited {
   .docs-sidebar--action {
     display: none;
     position: absolute;
-    top: $spacing-s;
-    right: $spacing-s;
+    inset-block-start: $spacing-s;
+    inset-inline-end: $spacing-s;
     color: var(--docs-text-heading, #{$text-heading});
 
     @include mq(l) {
@@ -87,7 +87,7 @@ a.docs-site-title:visited {
   .docs-sidebar--content {
     display: grid;
     position: sticky;
-    top: 0;
+    inset-block-start: 0;
     grid-row-gap: $spacing-s;
     grid-template-areas: 'header' 'main' 'footer';
     grid-template-rows: auto 1fr auto;
@@ -108,7 +108,7 @@ a.docs-site-title:visited {
     overflow: scroll;
 
     &.is-overflowing {
-      border-bottom: 1px solid var(--border-color-display, #{$border-color-display});
+      border-block-end: 1px solid var(--border-color-display, #{$border-color-display});
     }
   }
 
