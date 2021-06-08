@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import Button from './components/Button/Button';
+import Button from './components/Button';
 import Tooltip from './components/Tooltip';
 
 export { Button, Tooltip };

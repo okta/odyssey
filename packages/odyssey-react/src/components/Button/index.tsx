@@ -10,12 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { FunctionComponent, MouseEventHandler, ReactNode } from 'react';
+import React from 'react';
+import type { FunctionComponent, MouseEventHandler, ReactNode } from 'react';
 import { useOmit } from '../../utils';
 import classNames from "classnames";
 
 export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
-export type ButtonProps = {
+export type Props = {
   /**
    * Content to be rendered within the buttons, usualy label text.
    */
@@ -50,7 +51,7 @@ export type ButtonProps = {
  * @example
  * <Button variant="primary" onClick={() => {}}>Button label</Button>
  */
-const Button: FunctionComponent<ButtonProps> = (props) => {
+const Button: FunctionComponent<Props> = (props) => {
   const {
     children,
     disabled,
