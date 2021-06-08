@@ -13,7 +13,8 @@
 module.exports = {
   plugins: [
     require.resolve('./rules'),
-    'stylelint-scss'
+    'stylelint-scss',
+    'stylelint-use-logical'
   ],
   extends: [
     'stylelint-config-standard',
@@ -41,6 +42,7 @@ module.exports = {
     'scss/at-else-empty-line-before': 'never',
     'scss/at-if-closing-brace-newline-after': 'always-last-in-chain',
     'scss/at-if-closing-brace-space-after': 'always-intermediate',
-    'selector-type-no-unknown': [ true, { ignore: [ 'custom-elements' ] } ]
+    'selector-type-no-unknown': [ true, { ignore: [ 'custom-elements' ], } ],
+    "csstools/use-logical": true
   }
 }
