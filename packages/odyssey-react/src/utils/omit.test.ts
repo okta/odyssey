@@ -10,5 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { oid, useOid } from './oid';
-export { omit, useOmit } from './omit';
+import { omit } from "./omit";
+
+describe("omit", () => {
+  it(`returns an object with default keys omitted`, () => {
+    const obj = Object.freeze({ className: 'foo bar baz', children: 'Hello World' });
+    expect(omit(obj)).toEqual({});
+  });
+
+  it(`returns an object with specified keys omitted`, () => {
+    const obj = Object.freeze({ foo: true });
+    expect(omit(obj, 'foo')).toEqual({});
+  });
+
+  it(`returns an object with no specified keys included`, () => {
+    const obj = Object.freeze({ foo: true });
+    expect(omit(obj)).toEqual(obj);
+  });
+});
