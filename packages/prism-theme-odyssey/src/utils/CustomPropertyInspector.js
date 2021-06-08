@@ -48,8 +48,8 @@ class CustomPropertyInspector {
     inspector.classList.add('custom-properties-inspector');
     inspector.style = `
       position: sticky;
-      top: 0;
-      border-right: 5px solid #f5f5f6;
+      inset-block-start: 0;
+      border-inline-end: 5px solid #f5f5f6;
       padding:  3.42857rem 1.71429rem;
       max-height: 100vh;
       overflow: scroll;
@@ -58,7 +58,7 @@ class CustomPropertyInspector {
 
     const inspectorTitle = document.createElement('h5');
     inspectorTitle.innerHTML = "Custom Properties Inspector";
-    inspectorTitle.style = "margin-bottom: 2rem;";
+    inspectorTitle.style = "margin-block-end: 2rem;";
     inspector.appendChild(inspectorTitle);
 
     const inspectorReset = document.createElement('button');
