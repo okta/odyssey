@@ -41,7 +41,7 @@
   }
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
@@ -54,7 +54,7 @@
 
 .ods-toast--title {
   margin: 0;
-  padding-right: $spacing-m;
+  padding-inline-end: $spacing-m;
   color: $white;
   font-size: $size-body-base;
   font-weight: 600;
@@ -63,15 +63,15 @@
 
 .ods-toast--dismiss {
   position: absolute;
-  top: $spacing-xs;
-  right: $spacing-xs;
-  margin-bottom: 0;
+  inset-block-start: $spacing-xs;
+  inset-inline-end: $spacing-xs;
+  margin-block-end: 0;
   border: 0;
 }
 
 .ods-toast--body {
   grid-column: 2;
-  margin-bottom: 0;
+  margin-block-end: 0;
   font-size: $size-body-base;
 }
 

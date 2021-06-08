@@ -20,12 +20,12 @@ ul {
 
     li {
       &:last-child {
-        margin-bottom: 0;
+        margin-block-end: 0;
       }
     }
 
     &:last-child {
-      margin-bottom: 0;
+      margin-block-end: 0;
     }
   }
 }
@@ -49,7 +49,7 @@ dl:not([class]) {
   padding: 0;
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 
   dt {

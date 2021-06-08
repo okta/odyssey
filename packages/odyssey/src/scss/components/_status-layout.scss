@@ -11,9 +11,9 @@
  */
 
 .ods-status {
-  margin-bottom: $spacing-m;
+  margin-block-end: $spacing-m;
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }

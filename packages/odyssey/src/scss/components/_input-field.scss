@@ -16,7 +16,7 @@
 }
 
 .ods-field--hint {
-  margin-bottom: $spacing-xs;
+  margin-block-end: $spacing-xs;
   color: $text-body;
 
   .ods-text-input:disabled ~ &,
@@ -28,7 +28,7 @@
 .ods-field--error {
   display: flex;
   align-items: center;
-  margin-top: $spacing-xs;
+  margin-block-start: $spacing-xs;
   color: $text-danger;
 }
 
@@ -52,7 +52,7 @@
   .ods-label,
   .ods-input-legend {
     order: 1;
-    margin-bottom: $spacing-xs;
+    margin-block-end: $spacing-xs;
   }
 
   .ods-number-input,
@@ -71,10 +71,10 @@
   /* stylelint-disable-next-line no-descending-specificity  */
   .ods-field--hint {
     order: 2;
-    margin-bottom: $spacing-xs;
+    margin-block-end: $spacing-xs;
 
     + .ods-label {
-      margin-bottom: 0;
+      margin-block-end: 0;
     }
   }
 
@@ -92,7 +92,7 @@
   }
 
   .ods-text-input {
-    border-right: 0;
+    border-inline-end: 0;
     border-radius: $base-border-radius 0 0 $base-border-radius;
 
     &:focus {

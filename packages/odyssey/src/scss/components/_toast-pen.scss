@@ -14,8 +14,8 @@
   display: grid;
   position: fixed;
   z-index: 1;
-  right: $spacing-m;
-  bottom: $spacing-m;
+  inset-inline-end: $spacing-m;
+  inset-block-end: $spacing-m;
   grid-gap: $spacing-s 0;
   grid-template-columns: minmax(min-content, max-content);
   max-height: 100vh;

@@ -14,7 +14,7 @@
   @include input-baseline;
 
   &[type='search'] {
-    padding-left: ms(1) + $spacing-s + $spacing-xs;
+    padding-inline-start: ms(1) + $spacing-s + $spacing-xs;
     background-image: get-icon('search', $text-body);
     background-repeat: no-repeat;
     background-position: left $spacing-s center;

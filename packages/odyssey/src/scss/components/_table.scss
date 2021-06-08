@@ -20,7 +20,7 @@
   line-height: $title-line-height;
 
   &:only-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 
   caption {
@@ -43,25 +43,25 @@
 
   thead {
     th {
-      border-top: 1px solid $border-color-display;
-      border-bottom: 1px solid $border-color-display;
+      border-block-start: 1px solid $border-color-display;
+      border-block-end: 1px solid $border-color-display;
     }
   }
 
   tbody {
     [rowspan] {
-      border-bottom: 1px solid $border-color-display;
+      border-block-end: 1px solid $border-color-display;
     }
 
     tr {
       td,
       th {
-        border-bottom: 1px solid $border-color-display;
+        border-block-end: 1px solid $border-color-display;
       }
 
       &:first-child {
         [rowspan] {
-          border-top: 0;
+          border-block-start: 0;
         }
       }
     }
@@ -107,8 +107,8 @@
     &::after {
       content: '';
       position: absolute;
-      top: 50%;
-      right: 0;
+      inset-block-start: 50%;
+      inset-inline-end: 0;
       width: 1em;
       height: 1em;
       margin: 0 0 0 $spacing-s;
@@ -153,7 +153,7 @@
   }
 
   .is-ods-table-checkbox {
-    padding-right: 0;
+    padding-inline-end: 0;
 
     .u-visually-hidden {
       display: inline-block;
@@ -175,7 +175,7 @@
   }
 
   .ods-table--figcaption {
-    margin-bottom: $spacing-xs-em;
+    margin-block-end: $spacing-xs-em;
     color: $text-heading;
     font-size: $size-title-4;
     font-weight: 600;

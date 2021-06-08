@@ -13,14 +13,14 @@
 /* stylelint-disable-next-line no-descending-specificity */
 .ods-button {
   & + & {
-    margin-left: $spacing-s;
+    margin-inline-start: $spacing-s;
   }
 
   &.is-ods-button-full-width {
     margin: 0;
 
     &:not(:last-child) {
-      margin-bottom: $spacing-s;
+      margin-block-end: $spacing-s;
     }
   }
 }

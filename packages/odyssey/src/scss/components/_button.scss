@@ -51,7 +51,7 @@
 
 .ods-button--label {
   &:not(:only-child) {
-    margin-left: $spacing-xs;
+    margin-inline-start: $spacing-xs;
   }
 }
 

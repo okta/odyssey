@@ -29,7 +29,7 @@
   }
 
   &:not(:last-child) {
-    margin-bottom: $spacing-m;
+    margin-block-end: $spacing-m;
   }
 }
 
@@ -50,7 +50,7 @@
   grid-area: content;
 
   &:not(:last-child) {
-    margin-bottom: $spacing-xs;
+    margin-block-end: $spacing-xs;
   }
 }
 

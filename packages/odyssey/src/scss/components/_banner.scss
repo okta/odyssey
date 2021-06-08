@@ -57,8 +57,8 @@
 
 .ods-banner--dismiss {
   position: absolute;
-  top: 50%;
-  right: $spacing-m;
+  inset-block-start: 50%;
+  inset-inline-end: $spacing-m;
   margin: 0 0 0 $spacing-m;
   transform: translateY(-50%);
 }
