@@ -365,7 +365,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     font-size: $size-body-base;
 
     [dir='rtl'] & {
-      text-align: right;
+      text-align: end;
     }
 
     &:empty {
@@ -390,7 +390,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
       [dir='rtl'] & {
         padding-inline-end: $spacing-s;
         padding-inline-start: 100px;
-        text-align: right;
+        text-align: end;
 
         &::after {
           inset-inline-end: auto;

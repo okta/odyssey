@@ -31,7 +31,7 @@
   th {
     max-width: $max-line-length;
     padding: $spacing-s;
-    text-align: left;
+    text-align: start;
     vertical-align: baseline;
     overflow-wrap: break-word;
   }
@@ -144,7 +144,7 @@
   }
 
   .is-ods-table-num {
-    text-align: right;
+    text-align: end;
     font-feature-settings: 'lnum', 'tnum';
   }
 
@@ -179,7 +179,7 @@
     color: $text-heading;
     font-size: $size-title-4;
     font-weight: 600;
-    text-align: left;
+    text-align: start;
   }
 }
 
