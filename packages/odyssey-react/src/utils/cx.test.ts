@@ -10,6 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { oid, useOid } from './oid';
-export { omit, useOmit } from './omit';
-export { cx, useCx } from './cx';
+import { cx } from './cx';
+
+describe('cx', () => {
+  it('returns a string with variadic arguments joined', () => {
+    expect(cx('foo', 'bar', 'baz')).toEqual('foo bar baz');
+  });
+
+  it('returns a string with falsy and non string variadic arguments excluded', () => {
+    expect(
+      cx('foo', false && 'bar', true, false, undefined)
+    ).toEqual('foo');
+  });
+
+  it('returns a string with object variadic arguments evaluated correctly', () => {
+    expect(
+      cx('foo', { bar: true, baz: false }, { qux: true, quux: undefined })
+    ).toEqual('foo bar qux');
+  });
+});
