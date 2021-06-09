@@ -50,4 +50,3 @@ const Template: Story<Props> = (props) => (
 );
 
 export const Default = Template.bind({});
-Default.storyName = 'TextArea';
