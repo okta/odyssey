@@ -10,12 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import Button from './components/Button';
-import Tag from './components/Tag';
-import Tooltip from './components/Tooltip';
+import type { Story } from "@storybook/react";
+import React from "react";
+import Tag from ".";
+import type { Props } from ".";
 
-export {
-  Button,
-  Tag,
-  Tooltip
+export default {
+  title: `Components/Tag`,
+  component: Tag,
+  parameters: {
+    controls: {
+      sort: 'requiredFirst'
+    }
+  }
+};
+
+const Template: Story<Props> = ({ tags }) => (
+  <Tag tags={tags} />
+)
+
+export const Default = Template.bind({});
+Default.args = {
+  tags: ["Item one", "Item two", "Item three"]
 };
