@@ -12,8 +12,7 @@
 
 import React from 'react';
 import type { FunctionComponent, MouseEventHandler, ReactNode } from 'react';
-import { useOmit } from '../../utils';
-import classNames from "classnames";
+import { useCx, useOmit } from '../../utils';
 
 export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
 export type Props = {
@@ -61,10 +60,11 @@ const Button: FunctionComponent<Props> = (props) => {
     ...rest
   } = props;
 
-  const componentClass = classNames("ods-button", {
-    [`is-ods-button-${variant}`]: variant,
-    "is-ods-button-full-width": wide
-  });
+  const componentClass = useCx(
+    "ods-button",
+    `is-ods-button-${variant}`,
+    { "is-ods-button-full-width": wide }
+  );
 
   const omitProps = useOmit(rest);
 
