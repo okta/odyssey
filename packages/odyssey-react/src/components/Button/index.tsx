@@ -10,11 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { FunctionComponent, MouseEventHandler, ReactNode } from 'react'
+import React from 'react';
+import type { FunctionComponent, MouseEventHandler, ReactNode } from 'react';
+import { useOmit } from '../../utils';
 import classNames from "classnames";
 
 export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
-export type ButtonProps = {
+export type Props = {
   /**
    * Content to be rendered within the buttons, usualy label text.
    */
@@ -28,19 +30,19 @@ export type ButtonProps = {
   /**
    * Button click handler.
    */
-  onClick: MouseEventHandler<HTMLButtonElement>,
+  onClick?: MouseEventHandler<HTMLButtonElement>,
 
   /**
    * The visual variant to be displayed to the user.
    * @default primary
    */
-  variant: ButtonVariants,
+  variant?: ButtonVariants,
 
   /**
    * Extends the width of the button to that of it's parent.
    */
-  wide?: boolean
-}
+  wide?: boolean;
+};
 
 /**
  * A clickable button used for form submissions and most in-page interactions.
@@ -49,13 +51,14 @@ export type ButtonProps = {
  * @example
  * <Button variant="primary" onClick={() => {}}>Button label</Button>
  */
-const Button: FunctionComponent<ButtonProps> = (props) => {
-  const { 
+const Button: FunctionComponent<Props> = (props) => {
+  const {
     children,
     disabled,
     onClick,
-    wide,
     variant = "primary",
+    wide,
+    ...rest
   } = props;
 
   const componentClass = classNames("ods-button", {
@@ -63,15 +66,18 @@ const Button: FunctionComponent<ButtonProps> = (props) => {
     "is-ods-button-full-width": wide
   });
 
+  const omitProps = useOmit(rest);
+
   return (
     <button
+      {...omitProps}
       className={componentClass}
       disabled={disabled}
       onClick={onClick}
     >
       <span className="ods-button--label">{children}</span>
     </button>
-  )
+  );
 };
 
 export default Button;
