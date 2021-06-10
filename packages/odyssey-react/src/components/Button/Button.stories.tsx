@@ -31,6 +31,11 @@ export default {
     wide: {
       control: { type: "boolean" }
     },
+  },
+  parameters: {
+    controls: {
+      sort: 'requiredFirst'
+    }
   }
 };
 
