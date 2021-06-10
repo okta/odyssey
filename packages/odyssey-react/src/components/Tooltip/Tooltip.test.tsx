@@ -40,4 +40,6 @@ describe("Tooltip", () => {
     expect(getByRole(button)).toHaveAttribute('aria-describedby', 'foo');
     expect(getByRole(tooltip)).toHaveAttribute('id', 'foo');
   });
+
+  a11yCheck(() => render(<Tooltip label="foo" children={<span>"bar"</span>}/>))
 });

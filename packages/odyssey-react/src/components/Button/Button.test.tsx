@@ -43,4 +43,6 @@ describe("Button", () => {
     fireEvent.click(getByRole('button'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
+
+  a11yCheck(() => render(<Button children="baz" />))
 });

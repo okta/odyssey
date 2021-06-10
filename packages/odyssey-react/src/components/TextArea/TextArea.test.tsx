@@ -124,4 +124,6 @@ describe("TextArea", () => {
     expect(handle).toHaveBeenCalledTimes(1);
     expect(handle).toHaveBeenLastCalledWith(getByRole(textBox));
   });
+
+  a11yCheck(() => render(<TextArea label="foo" />))
 });
