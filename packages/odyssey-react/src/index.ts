@@ -11,11 +11,17 @@
  */
 
 import Button from './components/Button';
+import Status from './components/Status';
 import Tag from './components/Tag';
+import TextArea from './components/TextArea';
+import TextInput from './components/TextInput';
 import Tooltip from './components/Tooltip';
 
 export {
   Button,
+  Status,
   Tag,
+  TextArea,
+  TextInput,
   Tooltip
 };
