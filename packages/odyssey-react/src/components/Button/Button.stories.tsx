@@ -12,7 +12,8 @@
 
 import { Story } from "@storybook/react";
 import React from "react";
-import Button, { ButtonProps } from "./Button";
+import Button from ".";
+import type { Props } from ".";
 
 export default {
   title: `Components/Button`,
@@ -33,12 +34,12 @@ export default {
   }
 };
 
-const Template: Story<ButtonProps> = ({ variant, disabled, onClick, wide }) => (
+const Template: Story<Props> = ({ variant, disabled, onClick, wide }) => (
   <>
     <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide}>Default</Button>
     <Button variant={variant} onClick={onClick} disabled={true} wide={wide}>Disabled</Button>
   </>
-)
+);
 
 export const Primary = Template.bind({});
 Primary.args = {
@@ -46,7 +47,7 @@ Primary.args = {
 };
 Primary.argTypes = {
   onClick: { action: 'clicked button/primary (default)' },
-}
+};
 
 export const Secondary = Template.bind({});
 Secondary.args = {
@@ -62,7 +63,7 @@ Danger.args = {
 };
 Danger.argTypes = {
   onClick: { action: 'clicked button/danger' },
-}
+};
 
 export const Clear = Template.bind({});
 Clear.args = {
@@ -70,7 +71,7 @@ Clear.args = {
 };
 Clear.argTypes = {
   onClick: { action: 'clicked button/clear' },
-}
+};
 
 export const Dismiss = Template.bind({});
 Dismiss.args = {
@@ -78,12 +79,12 @@ Dismiss.args = {
 };
 Dismiss.argTypes = {
   onClick: { action: 'clicked button/dismiss' },
-}
+};
 
-export const Wide =  Template.bind({});
+export const Wide = Template.bind({});
 Wide.args = {
   wide: true
 };
 Wide.argTypes = {
   onClick: { action: 'clicked button/wide' },
-}
+};

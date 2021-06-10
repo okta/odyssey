@@ -11,3 +11,4 @@
  */
 
 export { oid, useOid } from './oid';
+export { omit, useOmit } from './omit';
