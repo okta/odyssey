@@ -10,12 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import Button from './components/Button';
-import Tag from './components/Tag';
-import Tooltip from './components/Tooltip';
+import React from 'react'
+import type { FunctionComponent } from 'react'
 
-export {
-  Button,
-  Tag,
-  Tooltip
-};
+export type Props = {
+  /**
+   * Text content to be rendered within the tag, it should describe an entity.
+  */
+  tags: string[]
+}
+
+/**
+ * Use Tags to help describe and differentiate an entity or object.
+ * Think of them as “adjectives” in your UI toolbox that make navigating
+ * and parsing content easier.
+ */
+const Tag: FunctionComponent<Props> = ({ tags }) => (
+  <ul className="ods-tag--list">
+    {tags.map((item) => (
+        <li className="ods-tag" key={item}>{item}</li>
+    ))}
+  </ul>
+)
+export default Tag;
