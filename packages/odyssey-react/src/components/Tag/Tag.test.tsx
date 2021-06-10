@@ -35,4 +35,6 @@ describe("Tag", () => {
     const tags = getAllByRole(listitem).map(el => el.textContent);
     expect(tags).toEqual(tagList);
   });
+
+  a11yCheck(() => render(<Tag tags={["foo"]} />))
 });

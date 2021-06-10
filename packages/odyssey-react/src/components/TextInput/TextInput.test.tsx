@@ -145,4 +145,6 @@ describe("TextInput", () => {
     expect(handle).toHaveBeenCalledTimes(1);
     expect(handle).toHaveBeenLastCalledWith(getByRole(textBox));
   });
+
+  a11yCheck(() => render(<TextInput label="foo" />))
 });
