@@ -31,6 +31,10 @@
     &::-ms-reveal {
       display: none;
     }
+
+    [dir='rtl'] & {
+      background-position: right $spacing-s center;
+    }
   }
 }
 
@@ -38,5 +42,7 @@
   min-width: $spacing-m;
   max-width: $max-line-length;
   min-height: $spacing-m * 2;
-  padding: $spacing-xs-em $spacing-s-em $spacing-s-em;
+  padding-block-start: $spacing-xs-em;
+  padding-block-end: $spacing-s-em;
+  padding-inline: $spacing-s-em;
 }

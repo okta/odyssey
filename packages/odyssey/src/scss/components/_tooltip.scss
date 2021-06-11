@@ -18,7 +18,8 @@
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  padding: $spacing-xs $spacing-s;
+  padding-block: $spacing-xs;
+  padding-inline: $spacing-s;
   transition: opacity $base-duration $base-timing 1s;
   border: 1px solid cv('gray', '900');
   border-radius: $base-border-radius;
@@ -75,6 +76,15 @@
   &::before {
     border-block-start-color: cv('gray', '900');
   }
+
+  [dir='rtl'] & {
+    transform: translateX(50%);
+
+    &::after,
+    &::before {
+      transform: translateX(50%);
+    }
+  }
 }
 
 .is-ods-tooltip-right {
@@ -116,6 +126,15 @@
 
   &::before {
     border-block-end-color: cv('gray', '900');
+  }
+
+  [dir='rtl'] & {
+    transform: translateX(50%);
+
+    &::after,
+    &::before {
+      transform: translateX(50%);
+    }
   }
 }
 
@@ -194,6 +213,10 @@
       inset-inline-start: 50%;
       transform: translateX(-50%);
       border: 0;
+
+      [dir='rtl'] & {
+        transform: translateX(50%);
+      }
     }
   }
 }

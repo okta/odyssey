@@ -88,12 +88,18 @@
   max-width: $max-line-length;
 
   .ods-button {
-    border-radius: 0 $base-border-radius $base-border-radius 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: $base-border-radius;
+    border-end-start-radius: 0;
+    border-end-end-radius: $base-border-radius;
   }
 
   .ods-text-input {
     border-inline-end: 0;
-    border-radius: $base-border-radius 0 0 $base-border-radius;
+    border-start-start-radius: $base-border-radius;
+    border-start-end-radius: 0;
+    border-end-start-radius: $base-border-radius;
+    border-end-end-radius: 0;
 
     &:focus {
       z-index: 1;
@@ -110,7 +116,9 @@
 }
 
 .ods-group-legend {
-  margin: 0 0 $spacing-xs-em;
+  margin-block-start: 0;
+  margin-block-end: $spacing-xs-em;
+  margin-inline: 0;
   color: $text-heading;
   font-size: $size-title-5;
   font-weight: 600;

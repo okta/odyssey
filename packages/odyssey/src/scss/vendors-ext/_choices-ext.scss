@@ -215,7 +215,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 .ods-select--inner {
   display: inline-block;
   width: 100%;
-  padding: $spacing-xs-em $spacing-s-em;
+  padding-block: $spacing-xs-em;
+  padding-inline: $spacing-s-em;
   overflow: hidden;
   transition-property: border-color, background-color, box-shadow;
   transition-duration: $base-duration;
@@ -240,13 +241,19 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 
   .is-ods-select-open &,
   .is-ods-select-invalid .is-ods-select-open & {
-    border-radius: $base-border-radius $base-border-radius 0 0;
+    border-start-start-radius: $base-border-radius;
+    border-start-end-radius: $base-border-radius;
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
     border-block-end-color: $border-color-ui;
   }
 
   .is-ods-select-flipped.is-ods-select-open &,
   .is-ods-select-invalid .is-ods-select-flipped.is-ods-select-open & {
-    border-radius: 0 0 $base-border-radius $base-border-radius;
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+    border-end-start-radius: $base-border-radius;
+    border-end-end-radius: $base-border-radius;
     border-block-start-color: $border-color-ui;
     border-block-end-color: $color-primary-base;
   }
@@ -279,7 +286,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     display: inline-block;
     margin-inline-end: $spacing-xs;
     margin-block-end: $spacing-xs;
-    padding: 0 $spacing-s;
+    padding-block: 0;
+    padding-inline: $spacing-s;
     border: 1px solid $color-primary-light;
     border-radius: 1em;
     background-color: cv('blue', '000');
@@ -319,8 +327,10 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   overflow: hidden;
   border: 1px solid $border-color-ui;
   border-block-start-width: 0;
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  border-end-start-radius: $base-border-radius;
   border-end-end-radius: $base-border-radius;
-  border-start-end-radius: $base-border-radius;
   background-color: $white;
   word-break: break-all;
   will-change: visibility;
@@ -344,7 +354,10 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     inset-block-end: 100%;
     border-block-end: 0;
     border-block-start-width: 1px;
-    border-radius: $base-border-radius $base-border-radius 0 0;
+    border-start-start-radius: $base-border-radius;
+    border-start-end-radius: $base-border-radius;
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
   }
 
   .is-ods-select-flipped.is-ods-select-focused & {
@@ -361,7 +374,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 
   .ods-select--item {
     position: relative;
-    padding: $spacing-xs	$spacing-s;
+    padding-block: $spacing-xs;
+    padding-inline: $spacing-s;
     font-size: $size-body-base;
 
     [dir='rtl'] & {
@@ -432,7 +446,9 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 }
 
 .ods-select--heading {
-  padding: $spacing-s $spacing-s 0;
+  padding-block-start: $spacing-s;
+  padding-block-end: 0;
+  padding-inline: $spacing-s;
   color: $text-sub;
   font-size: $size-body-caption;
   font-weight: 600;
@@ -455,7 +471,9 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   display: inline-block;
   max-width: 100%;
   margin-block-end: 5px;
-  padding: 4px 0 4px 2px;
+  padding-block: 4px;
+  padding-inline-start: 2px;
+  padding-inline-end: 0;
   border: 0;
   border-radius: 0;
   background-color: $white;

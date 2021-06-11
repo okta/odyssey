@@ -76,7 +76,8 @@
       tr {
         td {
           max-width: 100%;
-          padding: $spacing-l $spacing-xl;
+          padding-block: $spacing-l;
+          padding-inline: $spacing-xl;
           background: cv('gray', '000');
           color: $text-sub;
           text-align: center;
@@ -102,7 +103,9 @@
   .is-ods-table-unsorted,
   .is-ods-table-asc,
   .is-ods-table-desc {
-    padding: 0 calc(1em + #{$spacing-s}) 0 0;
+    padding-block: 0;
+    padding-inline-start: 0;
+    padding-inline-end: calc(1em + #{$spacing-s});
 
     &::after {
       content: '';
@@ -111,7 +114,9 @@
       inset-inline-end: 0;
       width: 1em;
       height: 1em;
-      margin: 0 0 0 $spacing-s;
+      margin-block: 0;
+      margin-inline-start: $spacing-s;
+      margin-inline-end: 0;
       transform: translateY(-50%) scale(0.75);
       background-repeat: no-repeat;
       background-position: center;
@@ -166,7 +171,9 @@
 
 .ods-table--figure {
   max-width: 100%;
-  margin: 0 0 $type-margin;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
   // OQ: Type margin or fixed margin?
   overflow-x: auto;
 
