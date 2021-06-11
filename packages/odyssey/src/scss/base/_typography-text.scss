@@ -17,7 +17,9 @@ abbr {
 
 address {
   max-width: $max-line-length;
-  margin: 0 0 $type-margin;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
 
   &:last-child {
     margin-block-end: 0;
@@ -54,8 +56,12 @@ sub {
 
 blockquote {
   max-width: $max-line-length;
-  margin: 0 0 $type-margin;
-  padding: 0 0 0 $spacing-s;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline-end: 0;
+  padding-inline-start: $spacing-s;
   border-inline-start: 3px solid $border-color-display;
 
   &:last-child {
@@ -65,7 +71,9 @@ blockquote {
 
 p {
   max-width: $max-line-length;
-  margin: 0 0 $type-margin;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
 
   details & {
     font-size: ms(0);
@@ -77,7 +85,9 @@ p {
 }
 
 pre {
-  margin: 0 0 $type-margin;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
   font-family: $mono-font-family;
   white-space: pre-wrap;
   tab-size: 2;
@@ -146,7 +156,8 @@ ins::after {
 
 kbd {
   display: inline-block;
-  padding: 0 $spacing-xs;
+  padding-block: 0;
+  padding-inline: $spacing-xs;
   border: 1px solid cv('gray', '200');
   border-radius: $base-border-radius;
   background: cv('gray', '000');
@@ -176,7 +187,8 @@ s {
 }
 
 samp {
-  padding: 0 0.5ch;
+  padding-block: 0;
+  padding-inline: 0.5ch;
   background-color: cv('gray', '000');
   box-shadow: 0 1px 0 cv('gray', '200');
   font-family: $mono-font-family;
@@ -207,7 +219,8 @@ summary {
 }
 
 hr {
-  margin: $spacing-s 0;
+  margin-block: $spacing-s;
+  margin-inline: 0;
   border-width: 1px;
   border-style: solid;
   border-color: cv('gray', '200');
