@@ -43,6 +43,6 @@ module.exports = {
     'scss/at-if-closing-brace-newline-after': 'always-last-in-chain',
     'scss/at-if-closing-brace-space-after': 'always-intermediate',
     'selector-type-no-unknown': [ true, { ignore: [ 'custom-elements' ], } ],
-    'liberty/use-logical-spec': true
+    'liberty/use-logical-spec': [ true, { except: ['height', 'min-height', 'max-height', 'width', 'min-width', 'max-width'] } ]
   }
 }
