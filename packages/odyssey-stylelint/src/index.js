@@ -14,7 +14,7 @@ module.exports = {
   plugins: [
     require.resolve('./rules'),
     'stylelint-scss',
-    'stylelint-use-logical'
+    'stylelint-use-logical-spec'
   ],
   extends: [
     'stylelint-config-standard',
@@ -43,6 +43,6 @@ module.exports = {
     'scss/at-if-closing-brace-newline-after': 'always-last-in-chain',
     'scss/at-if-closing-brace-space-after': 'always-intermediate',
     'selector-type-no-unknown': [ true, { ignore: [ 'custom-elements' ], } ],
-    "csstools/use-logical": true
+    'liberty/use-logical-spec': true
   }
 }
