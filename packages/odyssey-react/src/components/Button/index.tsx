@@ -11,15 +11,15 @@
  */
 
 import React from 'react';
-import type { FunctionComponent, MouseEventHandler, ReactNode } from 'react';
+import type { FunctionComponent, MouseEventHandler, ReactText } from 'react';
 import { useCx, useOmit } from '../../utils';
 
 export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
 export type Props = {
   /**
-   * Content to be rendered within the buttons, usualy label text.
+   * Text content to be rendered within the button, usualy label text.
    */
-  children: ReactNode,
+  children: ReactText,
 
   /**
    * Makes the button element unusable.
