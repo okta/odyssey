@@ -61,6 +61,20 @@ module.exports = {
       env: {
         jest: true
       }
-    }
+    },
+    {
+      files: ['*.jsx', '*.tsx'],
+      extends: [
+        'plugin:jsx-a11y/recommended',
+      ],
+      rules: {
+        'jsx-a11y/label-has-associated-control': [
+          2,
+          {
+            labelAttributes: ['children'],
+          }
+        ]
+      }
+    },
   ],
 };
