@@ -10,16 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo } from 'react';
-
 // eslint-disable-next-line @typescript-eslint/ban-types
-type omit = <T extends {}, U extends (keyof T)[]>(obj: T, ...rest: U) => Omit<T, U[number]>;
+const notOwnProperty = (obj: object, prop: string) => !{}.hasOwnProperty.call(obj, prop);
+const omitList = `children className style`.split(` `);
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-const notOwnProperty = (obj: {}, prop: string) => !{}.hasOwnProperty.call(obj, prop);
-const omitList = `children className`.split(` `);
-
-export const omit: omit = (obj, ...rest) => {
+function omit<
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  T extends object,
+  U extends (keyof T)[]
+>(obj: T, ...rest: U): Omit<T, U[number]> {
   const omitted = Object.create(null);
 
   for (const key in obj) {
@@ -31,8 +30,6 @@ export const omit: omit = (obj, ...rest) => {
   }
 
   return omitted;
-};
+}
 
-export const useOmit: omit = (obj, ...rest) => {
-  return useMemo(() => omit(obj, ...rest), [omit, obj, rest]);
-};
+export { omit, omit as useOmit };
