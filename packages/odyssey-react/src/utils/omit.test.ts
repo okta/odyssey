@@ -12,14 +12,22 @@
 
 import { omit } from "./omit";
 
-describe("omit", () => {
-  it(`returns an object with default keys omitted`, () => {
-    const obj = Object.freeze({
-      className: 'foo bar baz',
-      children: 'Hello World',
-      style: { color: 'plum' }
+describe(`omit`, () => {
+  describe(`enforcing design consistency`, () => {
+    it(`returns an object with default style override keys omitted`, () => {
+      const obj = Object.freeze({
+        className: 'foo bar baz',
+        style: { color: 'plum' }
+      });
+      expect(omit(obj)).toEqual({});
     });
-    expect(omit(obj)).toEqual({});
+  });
+
+  describe(`preventing unexpected behavior`, () => {
+    it(`returns an object with default children key omitted`, () => {
+      const obj = Object.freeze({ children: 'Hello World' });
+      expect(omit(obj)).toEqual({});
+    });
   });
 
   it(`returns an object with specified keys omitted`, () => {
