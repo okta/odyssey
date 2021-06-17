@@ -19,8 +19,8 @@ describe('cx', () => {
 
   it('returns a string with falsy and non string variadic arguments excluded', () => {
     expect(
-      cx('foo', false && 'bar', true, false, undefined)
-    ).toEqual('foo');
+      cx(false && 'foo', true && 'bar', '', false, undefined)
+    ).toEqual('bar');
   });
 
   it('returns a string with object variadic arguments evaluated correctly', () => {
