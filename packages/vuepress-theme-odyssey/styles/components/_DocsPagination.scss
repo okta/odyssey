@@ -12,7 +12,8 @@
 
 .page-footer {
   margin-block-start: $spacing-xl;
-  padding: $spacing-m 0;
+  padding-block: $spacing-m;
+  padding-inline: 0;
   border-block-start: 2px solid var(--border-color-display, #{$border-color-display});
   text-align: center;
 

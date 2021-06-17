@@ -12,8 +12,9 @@
 
 // This selector is applied to the nav when it is overflowing
 .with-docs-subnav-indicator {
+  @include border-radius( 0 );
+
   transition: none;
-  border-radius: 0;
 
   &::before {
     content: '';
@@ -38,7 +39,8 @@
     display: block;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $spacing-xs;
+    padding-block: 0;
+    padding-inline: $spacing-xs;
     font-size: $size-body-base;
     text-decoration: none;
   }
@@ -60,8 +62,9 @@
   a,
   /* stylelint-enable no-descending-specificity */
   a:visited {
-    padding: 0 $spacing-s;
+    padding-block: 0;
     padding-inline-start: $spacing-m;
+    padding-inline-end: $spacing-s;
   }
 
   a:hover {

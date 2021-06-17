@@ -21,10 +21,12 @@
     z-index: z-index(base);
     grid-column: 1 / 3;
     margin-inline-end: $spacing-m;
-    padding: $spacing-m $spacing-m;
+    padding-block: $spacing-m;
+    padding-inline: $spacing-m;
 
     @include mq(l) {
-      margin: 0;
+      margin-block: 0;
+      margin-inline: 0;
     }
 
     @include mq(m) {
@@ -50,6 +52,8 @@
   }
 
   .docs-hero-rocket {
+    @include border-radius(0, 0, 0, 32px);
+
     position: absolute;
     z-index: z-index(btm);
     inset-block-start: 0;
@@ -57,7 +61,6 @@
     inset-block-end: 0;
     inset-inline-start: 0;
     overflow: hidden;
-    border-radius: 0 0 0 32px;
 
     svg {
       position: absolute;
@@ -78,7 +81,8 @@
 
 .docs-principle {
   position: relative;
-  margin: $spacing-xl 0;
+  margin-block: $spacing-xl;
+  margin-inline: 0;
 
   .docs-principle--title {
     @include is-visually-hidden;

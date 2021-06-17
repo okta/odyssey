@@ -67,7 +67,9 @@ a:visited {
     justify-content: center;
     max-width: 100%;
     margin-block-end: $spacing-l;
-    padding: $spacing-l * 2 $spacing-m 0;
+    padding-block-start: ($spacing-l * 2);
+    padding-block-end: 0;
+    padding-inline: $spacing-m;
 
     // TODO: We would like to remove this in the future
     // so that the grid width is determined by the content
@@ -84,7 +86,8 @@ a:visited {
   z-index: 20;
   inset-block-start: -3rem;
   inset-inline-start: $spacing-xs;
-  padding: $spacing-xs $spacing-s;
+  padding-block: $spacing-xs;
+  padding-inline: $spacing-s;
   overflow: hidden;
   transition: 0.15s ease-in-out;
   background: $white;
@@ -148,20 +151,24 @@ h6 {
 
 .is-tab-stacked-example {
   .ods-tabs [role='tabpanel'] {
-    padding: $spacing-l;
+    padding-block: $spacing-l;
+    padding-inline: $spacing-l;
   }
 
   .ods-tabs:first-child [role='tabpanel'] {
-    padding: $spacing-xs;
+    padding-block: $spacing-xs;
+    padding-inline: $spacing-xs;
   }
 }
 
 .sample-color {
+  @include border-radius($base-border-radius);
+
   display: inline-block;
   width: 1em;
   height: 1em;
-  margin: 0 auto;
-  border-radius: $base-border-radius;
+  margin-block: 0;
+  margin-inline: auto;
   vertical-align: middle;
 }
 
@@ -176,11 +183,13 @@ h6 {
 // Design Token Examples
 
 .sample-token {
+  @include border-radius($base-border-radius);
+
   display: block;
   width: 1em;
   height: 1em;
-  margin: 0 auto;
-  border-radius: $base-border-radius;
+  margin-block: 0;
+  margin-inline: auto;
 }
 
 // Token Examples: Color
@@ -368,7 +377,9 @@ $spacing-units: (
     position: relative;
     min-height: $base-font-size;
     margin-block-end: $spacing-m;
-    padding: 0 0 0 $spacing-l;
+    padding-block: 0;
+    padding-inline-start: $spacing-l;
+    padding-inline-end: 0;
     font-size: $value;
 
     &::before {
@@ -390,7 +401,8 @@ $spacing-units: (
 
 .sample--tip {
   display: inline-block;
-  margin: 0 $spacing-xs;
+  margin-block: 0;
+  margin-inline: $spacing-xs;
 }
 
 .help-icon {

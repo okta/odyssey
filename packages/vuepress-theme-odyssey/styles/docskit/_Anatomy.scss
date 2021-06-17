@@ -11,6 +11,8 @@
  */
 
 .docskit-figure-anatomy {
+  @include border-radius( $base-border-radius );
+
   display: flex;
   grid-column: 1 / 3;
   align-items: center;
@@ -18,7 +20,6 @@
   width: 100%;
   margin-block-end: $spacing-l;
   border: 1px solid var(--border-color-display, #{$border-color-display});
-  border-radius: $base-border-radius;
 
   img {
     user-select: none;

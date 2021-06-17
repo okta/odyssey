@@ -15,7 +15,8 @@
   position: fixed;
   z-index: z-index(topbar);
   width: 100vw;
-  padding: $spacing-xs $spacing-m;
+  padding-block: $spacing-xs;
+  padding-inline: $spacing-m;
   border-block-end: 1px solid var(--border-color-display, #{$border-color-display});
   background: var(--docs-sidebar-bg, #{$white});
 
@@ -28,7 +29,8 @@
   }
 
   .docs-site-title {
-    padding: $spacing-xs;
+    padding-block: $spacing-xs;
+    padding-inline: $spacing-xs;
   }
 
   .docs-topbar--action {

@@ -14,6 +14,8 @@
   position: relative;
 
   &::after {
+    @include border-radius(50%);
+
     content: attr(data-marker-count);
     position: absolute;
     inset-block-start: 0;
@@ -21,7 +23,6 @@
     width: $spacing-m-em;
     height: $spacing-m-em;
     transform: translateY(-75%) translateX(-50%);
-    border-radius: 50%;
     background-color: cv('turquoise', '500');
     color: $white;
     font-size: $size-body-caption;

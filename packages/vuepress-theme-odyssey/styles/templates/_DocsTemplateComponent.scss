@@ -35,7 +35,8 @@
   font-size: $size-body-base;
 
   @include mq(m) {
-    margin: $spacing-m 0;
+    margin-block: $spacing-m;
+    margin-inline: 0;
 
     li {
       display: inline-block;
@@ -43,14 +44,16 @@
 
     a {
       margin-inline-end: $spacing-s-em;
-      padding: 0;
+      padding-block: 0;
+      padding-inline: 0;
     }
   }
 
   a {
     display: flex;
     align-items: center;
-    padding: $spacing-xs-em;
+    padding-block: $spacing-xs-em;
+    padding-inline: $spacing-xs-em;
     line-height: $base-line-height;
   }
 
@@ -76,10 +79,12 @@
   margin-block-end: $spacing-l;
 
   .docs-example--rendered {
+    @include border-radius(6px, 6px, 0, 0);
+
     position: relative;
-    padding: $spacing-l;
+    padding-block: $spacing-l;
+    padding-inline: $spacing-l;
     border: 1px solid var(--border-color-display, #{$border-color-display});
-    border-radius: 6px 6px 0 0;
 
     &.is-docs-example--rendered-tall {
       min-height: #{$spacing-l * 6};
@@ -88,8 +93,10 @@
 
   /* stylelint-disable */
   pre[class*='language-'] {
-    margin: 0;
-    padding: $spacing-m;
+    margin-block: 0;
+    margin-inline: 0;
+    padding-block: $spacing-m;
+    padding-inline: $spacing-m;
     overflow: scroll;
     border: 1px solid var(--border-color-display, #{$border-color-display});
     border-radius: 0 0 6px 6px;
@@ -126,9 +133,11 @@
 .docs-example {
   /* stylelint-enable no-duplicate-selectors */
   .ods-modal--overlay {
+    @include border-radius(6px, 6px, 0, 0);
+
     position: relative;
     z-index: auto;
-    padding: $spacing-xl $spacing-m;
-    border-radius: 6px 6px 0 0;
+    padding-block: $spacing-xl;
+    padding-inline: $spacing-m;
   }
 }

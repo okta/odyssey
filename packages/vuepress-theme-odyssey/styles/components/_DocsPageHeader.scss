@@ -25,7 +25,8 @@
 
   .docs-page-header--lede {
     grid-column: 1 / 2;
-    margin: 0;
+    margin-block: 0;
+    margin-inline: 0;
     font-size: $size-body-lede;
 
     @include mq(l) {
@@ -36,9 +37,11 @@
   &.is-page-header-base,
   &.is-page-header-components,
   &.is-page-header-icon {
+    @include border-radius(0, 0, 32px, 32px);
+
     grid-template-columns: minmax(min-content, 50%) minmax(min-content, max-content);
-    padding: $spacing-l;
-    border-radius: 0 32px;
+    padding-block: $spacing-l;
+    padding-inline: $spacing-l;
 
     @include mq(l) {
       grid-template-columns: minmax(min-content, 45%) minmax(min-content, max-content);
