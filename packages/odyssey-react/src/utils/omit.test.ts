@@ -14,7 +14,11 @@ import { omit } from "./omit";
 
 describe("omit", () => {
   it(`returns an object with default keys omitted`, () => {
-    const obj = Object.freeze({ className: 'foo bar baz', children: 'Hello World' });
+    const obj = Object.freeze({
+      className: 'foo bar baz',
+      children: 'Hello World',
+      style: { color: 'plum' }
+    });
     expect(omit(obj)).toEqual({});
   });
 
