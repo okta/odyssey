@@ -24,12 +24,15 @@
 }
 
 .ods-modal--dialog {
+  @include border-radius($base-border-radius);
+
   position: relative;
   max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
   max-height: calc(100vh - #{$spacing-m});
-  padding: $spacing-m  $spacing-m 0;
+  padding-block-start: $spacing-m;
+  padding-block-end: 0;
+  padding-inline: $spacing-m;
   overflow-y: auto;
-  border-radius: $base-border-radius;
   background-color: $white;
 }
 
@@ -53,7 +56,9 @@
 }
 
 .ods-modal--content {
-  padding: $spacing-xs 0 $spacing-l;
+  padding-block-start: $spacing-xs;
+  padding-block-end: $spacing-l;
+  padding-inline: 0;
   font-size: $size-body-base;
 }
 

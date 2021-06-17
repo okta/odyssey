@@ -25,6 +25,8 @@ $status-indicator-size: 1em / 2;
   color: $text-body;
 
   &::before {
+    @include border-radius(1em);
+
     content: '';
     position: absolute;
     inset-block-start: 50%;
@@ -33,7 +35,6 @@ $status-indicator-size: 1em / 2;
     height: $status-indicator-size;
     margin-inline-end: $spacing-xs;
     transform: translateY(-50%);
-    border-radius: 1em;
     background-color: cv('gray', '600');
   }
 }

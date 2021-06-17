@@ -17,7 +17,8 @@
   }
 
   &.is-ods-button-full-width {
-    margin: 0;
+    margin-block: 0;
+    margin-inline: 0;
 
     &:not(:last-child) {
       margin-block-end: $spacing-s;

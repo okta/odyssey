@@ -18,8 +18,10 @@
 .ods-tabs--tab {
   display: inline-block;
   position: relative;
-  margin: 0;
-  padding: $spacing-s $spacing-s;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: $spacing-s;
+  padding-inline: $spacing-s;
   border: 0;
   background: none;
   color: $text-body;
@@ -41,7 +43,8 @@
 }
 
 .ods-tabs--tabpanel [role='tabpanel'] {
-  padding: $spacing-l 0;
+  padding-block: $spacing-l;
+  padding-inline: 0;
 
   &:focus {
     outline: none;

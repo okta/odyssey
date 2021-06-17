@@ -14,6 +14,8 @@
 // Not ready for general use.
 
 .ods-tooltip {
+  @include border-radius($base-border-radius);
+
   display: block;
   visibility: hidden;
   position: absolute;
@@ -22,7 +24,6 @@
   padding-inline: $spacing-s;
   transition: opacity $base-duration $base-timing 1s;
   border: 1px solid cv('gray', '900');
-  border-radius: $base-border-radius;
   opacity: 0;
   background: cv('gray', '900');
   color: cv('gray', '000');
@@ -166,6 +167,8 @@
 
 @media only screen and (max-width: 40rem) {
   .ods-tooltip {
+    @include border-radius(0);
+
     display: block;
     visibility: hidden;
     position: fixed;
@@ -173,7 +176,6 @@
     inset-block-end: 0;
     width: 100vw;
     border: 0;
-    border-radius: 0;
     opacity: 0;
     font-size: $size-body-caption;
     white-space: wrap;

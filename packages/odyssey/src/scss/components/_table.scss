@@ -14,7 +14,8 @@
 
 .ods-table {
   width: auto;
-  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
   border-spacing: 0;
   border-collapse: collapse;
   line-height: $title-line-height;
@@ -30,7 +31,8 @@
   td,
   th {
     max-width: $max-line-length;
-    padding: $spacing-s;
+    padding-block: $spacing-s;
+    padding-inline: $spacing-s;
     text-align: start;
     vertical-align: baseline;
     overflow-wrap: break-word;
@@ -90,7 +92,8 @@
     position: relative;
     align-items: center;
     width: 100%;
-    padding: 0;
+    padding-block: 0;
+    padding-inline: 0;
     border: 0;
     background: none;
     font-family: inherit;
@@ -178,7 +181,8 @@
   overflow-x: auto;
 
   &:last-child {
-    margin: 0;
+    margin-block: 0;
+    margin-inline: 0;
   }
 
   .ods-table--figcaption {

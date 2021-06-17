@@ -26,7 +26,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   &:focus,
   &.is-ods-select-focused,
   .is-ods-select-focus & {
-    border-radius: $base-border-radius;
+    @include border-radius($base-border-radius);
+
     outline: none;
     box-shadow: 0 0 0 4px $color-primary-light;
 
@@ -75,8 +76,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     &:focus,
     &.is-ods-select-focused {
       @include outline($focus-ring-danger);
+      @include border-radius($base-border-radius);
 
-      border-radius: $base-border-radius;
       outline: none;
 
       &.is-ods-select-open {
@@ -104,14 +105,19 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   .ods-select--input {
     display: inline-block;
     width: 100%;
-    margin: 0 0 $spacing-xs;
-    padding: 0;
+    margin-block-start: 0;
+    margin-block-end: $spacing-xs;
+    margin-inline: 0;
+    padding-block: 0;
+    padding-inline: 0;
     border-block-end: 0;
     background-color: transparent;
     vertical-align: top;
   }
 
   .ods-select--button {
+    @include border-radius(10em);
+
     position: absolute;
     inset-block-start: 50%;
     inset-inline-end: 0;
@@ -119,8 +125,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     height: 20px;
     margin-block-start: -$spacing-s;
     margin-inline-end: 25px;
-    padding: 0;
-    border-radius: 10em;
+    padding-block: 0;
+    padding-inline: 0;
     opacity: 0.25;
     background-image: $choices-icon-cross-inverse;
     background-size: 8px;
@@ -188,6 +194,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 
   .ods-select--button {
+    @include border-radius(100%);
+
     display: inline-block;
     position: relative;
     width: 1em;
@@ -196,8 +204,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     margin-inline-end: 0;
     margin-block-end: 0;
     margin-inline-start: $spacing-s;
-    padding: 0;
-    border-radius: 100%;
+    padding-block: 0;
+    padding-inline: 0;
     opacity: 1;
     background-color: cv('blue', '400');
     background-image: get-icon('close', $white);
@@ -213,6 +221,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 }
 
 .ods-select--inner {
+  @include border-radius($base-border-radius);
+
   display: inline-block;
   width: 100%;
   padding-block: $spacing-xs-em;
@@ -222,7 +232,6 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   transition-duration: $base-duration;
   transition-timing-function: $base-timing;
   border: 1px solid $border-color-ui;
-  border-radius: $base-border-radius;
   background-color: $white;
   box-shadow: 0 0 0 0 $color-primary-light;
   color: $text-body;
@@ -260,7 +269,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 }
 
 .ods-select--list {
-  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
   padding-inline-start: 0;
   list-style: none;
 }
@@ -283,13 +293,14 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   display: inline;
 
   .ods-select--item {
+    @include border-radius(1em);
+
     display: inline-block;
     margin-inline-end: $spacing-xs;
     margin-block-end: $spacing-xs;
     padding-block: 0;
     padding-inline: $spacing-s;
     border: 1px solid $color-primary-light;
-    border-radius: 1em;
     background-color: cv('blue', '000');
     color: $text-body;
     font-size: $size-body-base;
@@ -468,6 +479,8 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
 }
 
 .ods-select--input {
+  @include border-radius(0);
+
   display: inline-block;
   max-width: 100%;
   margin-block-end: 5px;
@@ -475,7 +488,6 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   padding-inline-start: 2px;
   padding-inline-end: 0;
   border: 0;
-  border-radius: 0;
   background-color: $white;
   vertical-align: baseline;
 

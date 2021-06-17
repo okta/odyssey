@@ -11,11 +11,15 @@
  */
 
 .ods-form {
+  @include border-radius($base-border-radius);
+
   max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m} + 2px);
-  margin: 0 0 $spacing-m;
-  padding: $spacing-m;
+  margin-block-start: 0;
+  margin-block-end: $spacing-m;
+  margin-inline: 0;
+  padding-block: $spacing-m;
+  padding-inline: $spacing-m;
   border: 1px solid $border-color-display;
-  border-radius: $base-border-radius;
 
   &:last-child {
     margin-block-end: 0;
@@ -26,12 +30,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 0 $spacing-s;
+  margin-block-start: 0;
+  margin-block-end: $spacing-s;
+  margin-inline: 0;
 }
 
 .ods-form--title {
-  margin: $spacing-xs-em;
-  padding: 0;
+  margin-block: $spacing-xs-em;
+  margin-inline: $spacing-xs-em;
+  padding-block: 0;
+  padding-inline: 0;
   color: $text-heading;
   font-size: $size-title-4;
   font-weight: 600;

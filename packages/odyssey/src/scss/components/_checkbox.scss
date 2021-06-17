@@ -196,6 +196,8 @@
 
   &::before,
   &::after {
+    @include border-radius($base-border-radius);
+
     content: '';
     display: block;
     position: absolute;
@@ -207,7 +209,6 @@
     transition-duration: $base-duration;
     transition-timing-function: $base-timing;
     border: 2px solid transparent;
-    border-radius: $base-border-radius;
   }
 
   // Box

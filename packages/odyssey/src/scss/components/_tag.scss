@@ -11,10 +11,15 @@
  */
 
 .ods-tag {
+  @include border-radius($base-border-radius);
+
   display: inline-block;
-  margin: 0 $spacing-xs $spacing-xs 0;
-  padding: 0 $spacing-xs-em;
-  border-radius: $base-border-radius;
+  margin-block-start: 0;
+  margin-block-end: $spacing-xs;
+  margin-inline-start: 0;
+  margin-inline-end: $spacing-xs;
+  padding-block: 0;
+  padding-inline: $spacing-xs-em;
   background: cv('gray', '100');
   color: $text-body;
 }

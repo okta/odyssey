@@ -11,15 +11,18 @@
  */
 
 .ods-button {
+  @include border-radius($base-border-radius);
+
   display: inline-block;
   position: relative;
-  margin: 0;
-  padding: $spacing-xs-em $spacing-s-em;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: $spacing-xs-em;
+  padding-inline: $spacing-s-em;
   transition-property: color, background-color, border-color, box-shadow;
   transition-duration: 100ms;
   transition-timing-function: linear;
   border: 1px solid transparent;
-  border-radius: $base-border-radius;
   background-color: $color-primary-base;
   box-shadow: 0 0 0 0 $color-primary-light;
   color: $white;
@@ -123,7 +126,8 @@
 }
 
 .is-ods-button-dismiss {
-  padding: $spacing-xs-em / 2;
+  padding-block: ($spacing-xs-em / 2);
+  padding-inline: ($spacing-xs-em / 2);
   border: 0;
   background-color: transparent;
   color: inherit;
