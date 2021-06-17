@@ -37,7 +37,7 @@
   &.is-page-header-base,
   &.is-page-header-components,
   &.is-page-header-icon {
-    @include border-radius(0, 0, 32px, 32px);
+    @include border-radius(0, 32px, 0, 32px);
 
     grid-template-columns: minmax(min-content, 50%) minmax(min-content, max-content);
     padding-block: $spacing-l;

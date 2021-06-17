@@ -11,7 +11,7 @@
  */
 
 .docs-card {
-  @include border-radius(0, 0, 32px, 32px);
+  @include border-radius(0, 32px, 0, 32px);
 
   display: flex;
   position: relative;
@@ -41,7 +41,7 @@
     &::before {
       // NOTE: 32px is sort of an arbitrary value,
       // and only used within this component.
-      @include border-radius(0, 0, 32px, 32px);
+      @include border-radius(0, 32px, 0, 32px);
 
       content: '';
       display: block;
