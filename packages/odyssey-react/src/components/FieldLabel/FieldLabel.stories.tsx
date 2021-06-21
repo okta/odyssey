@@ -22,11 +22,6 @@ export default {
     children: { control: 'text' },
     id: { control: 'text' },
   },
-  parameters: {
-    controls: {
-      sort: 'requiredFirst'
-    }
-  }
 };
 
 const Template: Story<Props> = (props) => (
