@@ -18,11 +18,6 @@ import type { Props } from ".";
 export default {
   title: `Components/Tag`,
   component: Tag,
-  parameters: {
-    controls: {
-      sort: 'requiredFirst'
-    }
-  }
 };
 
 const Template: Story<Props> = ({ tags }) => (

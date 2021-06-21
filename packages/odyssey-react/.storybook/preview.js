@@ -1,7 +1,10 @@
 import "./preview.scss";
 
 export const parameters = {
-  controls: { expanded: true },
+  controls: {
+    expanded: true,
+    sort: 'requiredFirst'
+  },
   grid: {
     cellSize: 10
   },
