@@ -21,13 +21,13 @@ export const cx: cx = (...args) => {
   let lead = ''
 
   for (const arg of args) {
-    if (typeof arg === 'string') { classNames += `${lead}${arg}` }
+    if (typeof arg === 'string') { arg && (classNames += `${lead}${arg}`) }
     if (typeof arg === 'object') {
       Object.entries(arg).forEach(
         ([k, v]) => v && (classNames +=`${lead}${k}`)
       )
     }
-    if (!lead) { lead = ' ' }
+    if (!lead && classNames) { lead = ' ' }
   }
 
   return classNames;
