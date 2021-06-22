@@ -16,6 +16,7 @@ const { licenseComment, getYear } = require('../license');
 testRule({
   ruleName,
   syntax: 'scss',
+  config: true,
   fix: true,
 
   accept: [
