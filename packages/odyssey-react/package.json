@@ -21,6 +21,7 @@
     "@storybook/addon-actions": "^6.2.9",
     "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
+    "@storybook/addon-toolbars": "^6.2.9",
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/react": "^6.2.9",
     "@testing-library/jest-dom": "^5.12.0",
