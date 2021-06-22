@@ -22,9 +22,6 @@ export default {
   component: Tooltip,
   parameters: {
     layout: 'centered',
-    controls: {
-      sort: 'requiredFirst'
-    },
   }
 };
 

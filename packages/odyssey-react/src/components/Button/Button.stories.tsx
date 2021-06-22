@@ -32,11 +32,6 @@ export default {
       control: { type: "boolean" }
     },
   },
-  parameters: {
-    controls: {
-      sort: 'requiredFirst'
-    }
-  }
 };
 
 const Template: Story<Props> = ({ variant, disabled, onClick, wide }) => (

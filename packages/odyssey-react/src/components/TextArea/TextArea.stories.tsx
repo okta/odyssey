@@ -38,11 +38,6 @@ export default {
     onBlur: { control: false },
     onFocus: { control: false }
   },
-  parameters: {
-    controls: {
-      sort: 'requiredFirst'
-    }
-  }
 };
 
 const Template: Story<Props> = (props) => (
