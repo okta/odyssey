@@ -66,8 +66,10 @@ a:visited {
     flex: 1;
     justify-content: center;
     max-width: 100%;
-    margin-bottom: $spacing-l;
-    padding: $spacing-l * 2 $spacing-m 0;
+    margin-block-end: $spacing-l;
+    padding-block-start: ($spacing-l * 2);
+    padding-block-end: 0;
+    padding-inline: $spacing-m;
 
     // TODO: We would like to remove this in the future
     // so that the grid width is determined by the content
@@ -82,9 +84,10 @@ a:visited {
 .docs-skip-content {
   position: absolute;
   z-index: 20;
-  top: -3rem;
-  left: $spacing-xs;
-  padding: $spacing-xs $spacing-s;
+  inset-block-start: -3rem;
+  inset-inline-start: $spacing-xs;
+  padding-block: $spacing-xs;
+  padding-inline: $spacing-s;
   overflow: hidden;
   transition: 0.15s ease-in-out;
   background: $white;
@@ -92,7 +95,7 @@ a:visited {
   text-decoration: none;
 
   &:focus {
-    top: $spacing-xs;
+    inset-block-start: $spacing-xs;
     width: auto;
     height: auto;
   }
@@ -102,7 +105,7 @@ a:visited {
   @include mq(l) {
     position: sticky;
     z-index: z-index(topbar);
-    top: 0;
+    inset-block-start: 0;
   }
 }
 
@@ -117,8 +120,8 @@ h6 {
     position: absolute;
     width: $spacing-s-em;
     height: $spacing-s-em;
-    margin-top: $spacing-xs-em /2;
-    margin-left: -$spacing-m;
+    margin-block-start: $spacing-xs-em /2;
+    margin-inline-start: -$spacing-m;
     transition: 0.33s opacity  ease-in-out;
     opacity: 0;
     background-image: get-icon('anchor', var(--border-color-ui, #{$border-color-ui}));
@@ -142,26 +145,30 @@ h6 {
 
 .is-tab-small-sample {
   .ods-tabs--tabpanel [role='tabpanel'] {
-    padding-bottom: $spacing-s;
+    padding-block-end: $spacing-s;
   }
 }
 
 .is-tab-stacked-example {
   .ods-tabs [role='tabpanel'] {
-    padding: $spacing-l;
+    padding-block: $spacing-l;
+    padding-inline: $spacing-l;
   }
 
   .ods-tabs:first-child [role='tabpanel'] {
-    padding: $spacing-xs;
+    padding-block: $spacing-xs;
+    padding-inline: $spacing-xs;
   }
 }
 
 .sample-color {
+  @include border-radius($base-border-radius);
+
   display: inline-block;
   width: 1em;
   height: 1em;
-  margin: 0 auto;
-  border-radius: $base-border-radius;
+  margin-block: 0;
+  margin-inline: auto;
   vertical-align: middle;
 }
 
@@ -176,11 +183,13 @@ h6 {
 // Design Token Examples
 
 .sample-token {
+  @include border-radius($base-border-radius);
+
   display: block;
   width: 1em;
   height: 1em;
-  margin: 0 auto;
-  border-radius: $base-border-radius;
+  margin-block: 0;
+  margin-inline: auto;
 }
 
 // Token Examples: Color
@@ -269,7 +278,7 @@ h6 {
 
 .sample--emoji {
   display: inline-block;
-  margin-right: $spacing-xs;
+  margin-inline-end: $spacing-xs;
 }
 
 .sample--list {
@@ -367,15 +376,17 @@ $spacing-units: (
   .sample--type-#{$name} {
     position: relative;
     min-height: $base-font-size;
-    margin-bottom: $spacing-m;
-    padding: 0 0 0 $spacing-l;
+    margin-block-end: $spacing-m;
+    padding-block: 0;
+    padding-inline-start: $spacing-l;
+    padding-inline-end: 0;
     font-size: $value;
 
     &::before {
       content: 'ms(#{str-slice($name, 4)})';
       position: absolute;
-      top: 0;
-      left: 0;
+      inset-block-start: 0;
+      inset-inline-start: 0;
       font-size: $size-body-caption;
     }
   }
@@ -390,13 +401,14 @@ $spacing-units: (
 
 .sample--tip {
   display: inline-block;
-  margin: 0 $spacing-xs;
+  margin-block: 0;
+  margin-inline: $spacing-xs;
 }
 
 .help-icon {
   width: $spacing-l;
   height: $spacing-l;
-  margin-bottom: $spacing-m;
+  margin-block-end: $spacing-m;
 }
 
 .is-sample-absolute {

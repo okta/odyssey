@@ -14,13 +14,14 @@
 
 .ods-table {
   width: auto;
-  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
   border-spacing: 0;
   border-collapse: collapse;
   line-height: $title-line-height;
 
   &:only-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 
   caption {
@@ -30,8 +31,9 @@
   td,
   th {
     max-width: $max-line-length;
-    padding: $spacing-s;
-    text-align: left;
+    padding-block: $spacing-s;
+    padding-inline: $spacing-s;
+    text-align: start;
     vertical-align: baseline;
     overflow-wrap: break-word;
   }
@@ -43,25 +45,25 @@
 
   thead {
     th {
-      border-top: 1px solid $border-color-display;
-      border-bottom: 1px solid $border-color-display;
+      border-block-start: 1px solid $border-color-display;
+      border-block-end: 1px solid $border-color-display;
     }
   }
 
   tbody {
     [rowspan] {
-      border-bottom: 1px solid $border-color-display;
+      border-block-end: 1px solid $border-color-display;
     }
 
     tr {
       td,
       th {
-        border-bottom: 1px solid $border-color-display;
+        border-block-end: 1px solid $border-color-display;
       }
 
       &:first-child {
         [rowspan] {
-          border-top: 0;
+          border-block-start: 0;
         }
       }
     }
@@ -76,7 +78,8 @@
       tr {
         td {
           max-width: 100%;
-          padding: $spacing-l $spacing-xl;
+          padding-block: $spacing-l;
+          padding-inline: $spacing-xl;
           background: cv('gray', '000');
           color: $text-sub;
           text-align: center;
@@ -89,7 +92,8 @@
     position: relative;
     align-items: center;
     width: 100%;
-    padding: 0;
+    padding-block: 0;
+    padding-inline: 0;
     border: 0;
     background: none;
     font-family: inherit;
@@ -102,16 +106,20 @@
   .is-ods-table-unsorted,
   .is-ods-table-asc,
   .is-ods-table-desc {
-    padding: 0 calc(1em + #{$spacing-s}) 0 0;
+    padding-block: 0;
+    padding-inline-start: 0;
+    padding-inline-end: calc(1em + #{$spacing-s});
 
     &::after {
       content: '';
       position: absolute;
-      top: 50%;
-      right: 0;
+      inset-block-start: 50%;
+      inset-inline-end: 0;
       width: 1em;
       height: 1em;
-      margin: 0 0 0 $spacing-s;
+      margin-block: 0;
+      margin-inline-start: $spacing-s;
+      margin-inline-end: 0;
       transform: translateY(-50%) scale(0.75);
       background-repeat: no-repeat;
       background-position: center;
@@ -144,7 +152,7 @@
   }
 
   .is-ods-table-num {
-    text-align: right;
+    text-align: end;
     font-feature-settings: 'lnum', 'tnum';
   }
 
@@ -153,7 +161,7 @@
   }
 
   .is-ods-table-checkbox {
-    padding-right: 0;
+    padding-inline-end: 0;
 
     .u-visually-hidden {
       display: inline-block;
@@ -166,20 +174,23 @@
 
 .ods-table--figure {
   max-width: 100%;
-  margin: 0 0 $type-margin;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
   // OQ: Type margin or fixed margin?
   overflow-x: auto;
 
   &:last-child {
-    margin: 0;
+    margin-block: 0;
+    margin-inline: 0;
   }
 
   .ods-table--figcaption {
-    margin-bottom: $spacing-xs-em;
+    margin-block-end: $spacing-xs-em;
     color: $text-heading;
     font-size: $size-title-4;
     font-weight: 600;
-    text-align: left;
+    text-align: start;
   }
 }
 

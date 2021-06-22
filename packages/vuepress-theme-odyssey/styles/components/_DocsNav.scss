@@ -12,8 +12,9 @@
 
 // This selector is applied to the nav when it is overflowing
 .with-docs-subnav-indicator {
+  @include border-radius( 0 );
+
   transition: none;
-  border-radius: 0;
 
   &::before {
     content: '';
@@ -38,7 +39,8 @@
     display: block;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $spacing-xs;
+    padding-block: 0;
+    padding-inline: $spacing-xs;
     font-size: $size-body-base;
     text-decoration: none;
   }
@@ -54,14 +56,15 @@
 
 .docs-nav--subnav {
   display: none;
-  margin-bottom: $spacing-s;
+  margin-block-end: $spacing-s;
 
   /* stylelint-disable no-descending-specificity */
   a,
   /* stylelint-enable no-descending-specificity */
   a:visited {
-    padding: 0 $spacing-s;
-    padding-left: $spacing-m;
+    padding-block: 0;
+    padding-inline-start: $spacing-m;
+    padding-inline-end: $spacing-s;
   }
 
   a:hover {
@@ -79,12 +82,12 @@
 }
 
 .docs-nav--item {
-  margin-bottom: $spacing-xs;
+  margin-block-end: $spacing-xs;
 
   &.docs-nav--item-with-subnav {
     .docs-nav--item-content {
       display: flex;
-      margin-bottom: $spacing-xs;
+      margin-block-end: $spacing-xs;
 
       a {
         flex: 1;
@@ -94,7 +97,7 @@
   }
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 

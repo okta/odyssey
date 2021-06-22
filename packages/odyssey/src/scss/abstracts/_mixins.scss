@@ -14,12 +14,39 @@
   position: absolute;
   width: 1px;
   height: 1px;
-  margin: -1px;
-  padding: 0;
+  margin-block: -1px;
+  margin-inline: -1px;
+  padding-block: 0;
+  padding-inline: 0;
   overflow: hidden;
   clip: rect(0 0 0 0);
   border: 0;
 }
+
+/* stylelint-disable liberty/use-logical-spec */
+
+@mixin border-radius( $all, $top-right: $all, $bottom-right: $all, $bottom-left: $all, $top-left: $all ) {
+  border-start-start-radius: $top-left;
+  border-start-end-radius: $top-right;
+  border-end-end-radius: $bottom-right;
+  border-end-start-radius: $bottom-left;
+
+  @supports not (border-end-end-radius: 1px) {
+    border-top-left-radius: $top-left;
+    border-top-right-radius: $top-right;
+    border-bottom-right-radius: $bottom-right;
+    border-bottom-left-radius: $bottom-left;
+
+    [dir='rtl'] & {
+      border-top-left-radius: $top-right;
+      border-top-right-radius: $top-left;
+      border-bottom-right-radius: $bottom-left;
+      border-bottom-left-radius: $bottom-right;
+    }
+  }
+}
+
+/* stylelint-enable liberty/use-logical-spec */
 
 @mixin outline($outline-cv: $focus-ring-primary, $radius: 4px) {
   outline: 0;
@@ -29,17 +56,20 @@
 /* stylelint-disable no-descending-specificity */
 
 @mixin input-baseline {
+  @include border-radius($base-border-radius);
+
   display: block;
   position: relative;
   width: 100%;
   max-width: $max-line-length;
-  margin: 0;
-  padding: $spacing-xs-em $spacing-s-em;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: $spacing-xs-em;
+  padding-inline: $spacing-s-em;
   transition-property: border-color, background-color, box-shadow;
   transition-duration: $base-duration;
   transition-timing-function: $base-timing;
   border: 1px solid $border-color-ui;
-  border-radius: $base-border-radius;
   background-color: $white;
   box-shadow: 0 0 0 0 cv('blue', '000');
   color: $text-body;

@@ -48,7 +48,7 @@ code[class*='language-'] {
   font-family: 'Inconsolata', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: var(--font-size);
   line-height: 1.5;
-  text-align: left;
+  text-align: start;
   text-shadow: none;
   word-break: normal;
   white-space: pre;
@@ -87,8 +87,10 @@ code[class*='language-']::mozselection {
 /* stylelint-disable selector-no-qualifying-type, no-descending-specificity */
 pre[class*='language-'] {
   /* stylelint-enable selector-no-qualifying-type, no-descending-specificity */
-  margin: 0.5em 0;
-  padding: 1em;
+  margin-block: 0.5em;
+  margin-inline: 0;
+  padding-block: 1em;
+  padding-inline: 1em;
   overflow: auto;
   background: var(--blockBackground);
 }
@@ -96,8 +98,10 @@ pre[class*='language-'] {
 /* stylelint-disable selector-no-qualifying-type */
 :not(pre) > code[class*='language-'] {
   /* stylelint-enable selector-no-qualifying-type */
-  padding: 0.1em 0.3em;
-  border-radius: 0.3em;
+  @include border-radius(0.3em);
+
+  padding-block: 0.1em;
+  padding-inline: 0.3em;
   background: var(--inlineCodeBackground);
   color: var(--inlineCodeColor);
 }
@@ -197,10 +201,11 @@ pre[class*='language-'] > code[class*='language-'] {
 .line-highlight {
   position: absolute;
   z-index: 0;
-  right: 0;
-  left: 0;
-  margin-top: 1em;
-  padding: inherit 0;
+  inset-inline-end: 0;
+  inset-inline-start: 0;
+  margin-block-start: 1em;
+  padding-block: inherit;
+  padding-inline: 0;
   background: var(--highlightBackground);
   box-shadow: inset 5px 0 0 var(--highlightAccent);
   line-height: inherit;

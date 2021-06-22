@@ -16,7 +16,9 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 $spacing-xs-em;
+  margin-block-start: 0;
+  margin-block-end: $spacing-xs-em;
+  margin-inline: 0;
   color: $text-heading;
   font-weight: 600;
 }

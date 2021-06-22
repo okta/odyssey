@@ -28,10 +28,10 @@ a {
     content: '';
     display: inline-block;
     position: relative;
-    top: -0.1em;
+    inset-block-start: -0.1em;
     width: 1em;
     height: 1em;
-    margin-left: 0.2em;
+    margin-inline-start: 0.2em;
     background-image: get-icon('external', $color-primary-base);
     background-repeat: no-repeat;
     vertical-align: middle;
