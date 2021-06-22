@@ -26,20 +26,4 @@ export const parameters = {
       locales: '',
     },
   },
-  previewTabs: {
-    docs: { hidden: true },
-  },
-  backgrounds: {
-    default: 'white',
-    values: [
-      {
-        name: 'white',
-        value: '#ffffff',
-      },
-      {
-        name: 'gradient',
-        value: 'linear-gradient(135deg,#00297a,#1662dd) no-repeat',
-      },
-    ],
-  },
 };
