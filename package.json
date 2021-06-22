@@ -8,7 +8,7 @@
   ],
   "engines": {
     "yarn": "^1.15.2",
-    "node": ">=12.13"
+    "node": ">=12.20.0"
   },
   "scripts": {
     "docs": "yarn workspace @okta/design-docs start",
