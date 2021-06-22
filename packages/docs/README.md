@@ -14,7 +14,7 @@ These docs are maintained in the `docs` package, which exists to document `@okta
     [okta]$ git clone git@github.com:okta/odyssey.git
     ```
 
-2. Make sure you are on a supported node version: `>=12.13.0`.
+2. Make sure you are on a supported node version: `>=12.20.0`.
 
 3. Change directory to the `docs` package.
 
