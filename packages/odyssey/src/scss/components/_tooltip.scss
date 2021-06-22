@@ -14,14 +14,16 @@
 // Not ready for general use.
 
 .ods-tooltip {
+  @include border-radius($base-border-radius);
+
   display: block;
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  padding: $spacing-xs $spacing-s;
+  padding-block: $spacing-xs;
+  padding-inline: $spacing-s;
   transition: opacity $base-duration $base-timing 1s;
   border: 1px solid cv('gray', '900');
-  border-radius: $base-border-radius;
   opacity: 0;
   background: cv('gray', '900');
   color: cv('gray', '000');
@@ -57,86 +59,104 @@
 }
 
 .is-ods-tooltip-top {
-  bottom: calc(100% + #{$spacing-s});
-  left: 50%;
+  inset-block-end: calc(100% + #{$spacing-s});
+  inset-inline-start: 50%;
   transform: translateX(-50%);
 
   &::after,
   &::before {
-    top: 100%;
-    left: 50%;
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
     transform: translateX(-50%);
   }
 
   &::after {
-    border-top-color: cv('gray', '900');
+    border-block-start-color: cv('gray', '900');
   }
 
   &::before {
-    border-top-color: cv('gray', '900');
+    border-block-start-color: cv('gray', '900');
+  }
+
+  [dir='rtl'] & {
+    transform: translateX(50%);
+
+    &::after,
+    &::before {
+      transform: translateX(50%);
+    }
   }
 }
 
 .is-ods-tooltip-right {
-  top: 50%;
-  left: calc(100% + #{$spacing-s});
+  inset-block-start: 50%;
+  inset-inline-start: calc(100% + #{$spacing-s});
   transform: translateY(-50%);
 
   &::after,
   &::before {
-    top: 50%;
-    right: 100%;
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
     transform: translateY(-50%);
   }
 
   &::after {
-    border-right-color: cv('gray', '900');
+    border-inline-end-color: cv('gray', '900');
   }
 
   &::before {
-    border-right-color: cv('gray', '900');
+    border-inline-end-color: cv('gray', '900');
   }
 }
 
 .is-ods-tooltip-bottom {
-  top: calc(100% + #{$spacing-s});
-  left: 50%;
+  inset-block-start: calc(100% + #{$spacing-s});
+  inset-inline-start: 50%;
   transform: translateX(-50%);
 
   &::after,
   &::before {
-    bottom: 100%;
-    left: 50%;
+    inset-block-end: 100%;
+    inset-inline-start: 50%;
     transform: translateX(-50%);
   }
 
   &::after {
-    border-bottom-color: cv('gray', '900');
+    border-block-end-color: cv('gray', '900');
   }
 
   &::before {
-    border-bottom-color: cv('gray', '900');
+    border-block-end-color: cv('gray', '900');
+  }
+
+  [dir='rtl'] & {
+    transform: translateX(50%);
+
+    &::after,
+    &::before {
+      transform: translateX(50%);
+    }
   }
 }
 
 .is-ods-tooltip-left {
-  top: 50%;
-  right: calc(100% + #{$spacing-s});
+  inset-block-start: 50%;
+  inset-inline-end: calc(100% + #{$spacing-s});
   transform: translateY(-50%);
 
   &::after,
   &::before {
-    top: 50%;
-    left: 100%;
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
     transform: translateY(-50%);
   }
 
   &::after {
-    border-left-color: cv('gray', '900');
+    border-inline-start-color: cv('gray', '900');
   }
 
   &::before {
-    border-left-color: cv('gray', '900');
+    border-inline-start-color: cv('gray', '900');
   }
 }
 
@@ -147,14 +167,15 @@
 
 @media only screen and (max-width: 40rem) {
   .ods-tooltip {
+    @include border-radius(0);
+
     display: block;
     visibility: hidden;
     position: fixed;
     z-index: 1;
-    bottom: 0;
+    inset-block-end: 0;
     width: 100vw;
     border: 0;
-    border-radius: 0;
     opacity: 0;
     font-size: $size-body-caption;
     white-space: wrap;
@@ -182,18 +203,22 @@
   .is-ods-tooltip-right,
   .is-ods-tooltip-bottom,
   .is-ods-tooltip-left {
-    top: 0;
-    right: unset;
-    bottom: unset;
-    left: 0;
+    inset-block-start: 0;
+    inset-inline-end: unset;
+    inset-block-end: unset;
+    inset-inline-start: 0;
     transform: none;
 
     &::after,
     &::before {
-      top: 100%;
-      left: 50%;
+      inset-block-start: 100%;
+      inset-inline-start: 50%;
       transform: translateX(-50%);
       border: 0;
+
+      [dir='rtl'] & {
+        transform: translateX(50%);
+      }
     }
   }
 }

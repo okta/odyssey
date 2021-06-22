@@ -16,7 +16,7 @@
   grid-column-gap: $spacing-m;
   grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
   justify-content: space-between;
-  margin-bottom: $spacing-l;
+  margin-block-end: $spacing-l;
   font-size: $size-title-4;
 
   @include mq(m) {
@@ -25,7 +25,8 @@
 
   .docs-page-header--lede {
     grid-column: 1 / 2;
-    margin: 0;
+    margin-block: 0;
+    margin-inline: 0;
     font-size: $size-body-lede;
 
     @include mq(l) {
@@ -36,9 +37,11 @@
   &.is-page-header-base,
   &.is-page-header-components,
   &.is-page-header-icon {
+    @include border-radius(0, 32px, 0, 32px);
+
     grid-template-columns: minmax(min-content, 50%) minmax(min-content, max-content);
-    padding: $spacing-l;
-    border-radius: 0 32px;
+    padding-block: $spacing-l;
+    padding-inline: $spacing-l;
 
     @include mq(l) {
       grid-template-columns: minmax(min-content, 45%) minmax(min-content, max-content);
@@ -56,7 +59,7 @@
         display: block;
         width: 50px;
         height: 116px;
-        margin-bottom: $spacing-s;
+        margin-block-end: $spacing-s;
         background-image: url('/images/index-base-m.svg');
         background-size: contain;
       }
@@ -74,7 +77,7 @@
         display: block;
         width: 90px;
         height: 116px;
-        margin-bottom: $spacing-s;
+        margin-block-end: $spacing-s;
         background-image: url('/images/index-components-m.svg');
         background-size: contain;
       }
@@ -92,7 +95,7 @@
         display: block;
         width: 90px;
         height: 116px;
-        margin-bottom: $spacing-s;
+        margin-block-end: $spacing-s;
         background-image: url('/images/index-icons-m.svg');
         background-size: contain;
       }

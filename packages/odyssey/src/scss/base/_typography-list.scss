@@ -14,18 +14,22 @@ ol,
 ul {
   &:not([class]) {
     max-width: $max-line-length;
-    margin: 0 0 $type-margin 0;
-    padding: 0 0 0 $spacing-m;
+    margin-block-start: 0;
+    margin-block-end: $type-margin;
+    margin-inline: 0;
+    padding-block: 0;
+    padding-inline-start: $spacing-m;
+    padding-inline-end: 0;
     list-style-position: outside;
 
     li {
       &:last-child {
-        margin-bottom: 0;
+        margin-block-end: 0;
       }
     }
 
     &:last-child {
-      margin-bottom: 0;
+      margin-block-end: 0;
     }
   }
 }
@@ -45,11 +49,14 @@ dl:not([class]) {
   grid-gap: $spacing-xs $spacing-m;
   grid-template-columns: repeat(2, minmax(min-content, max-content));
   max-width: $max-line-length;
-  margin: 0 0 $type-margin 0;
-  padding: 0;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 
   dt {

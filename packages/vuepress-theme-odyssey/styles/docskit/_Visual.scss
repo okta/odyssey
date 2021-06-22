@@ -12,22 +12,24 @@
 
 .docskit-visual {
   grid-column: 2 / 3;
-  margin-bottom: $spacing-m;
+  margin-block-end: $spacing-m;
 
   .docskit-visual--title {
     &::before {
-      margin-right: $spacing-xs;
+      margin-inline-end: $spacing-xs;
       font-size: $size-title-5;
     }
   }
 
   .docskit-visual--figure {
+    @include border-radius($base-border-radius);
+
     display: grid;
     position: relative;
     justify-content: center;
-    padding: $spacing-l $spacing-l;
+    padding-block: $spacing-l;
+    padding-inline: $spacing-l;
     border: 1px solid var(--border-color-display, #{$border-color-display});
-    border-radius: $base-border-radius;
   }
 
   &.layout-wide {
@@ -36,7 +38,8 @@
 
   &.theme-transparent {
     .docskit-visual--figure {
-      padding: 0;
+      padding-block: 0;
+      padding-inline: 0;
       border: 0;
     }
   }
@@ -46,18 +49,19 @@
     position: relative;
 
     .docskit-visual--figure {
-      padding-bottom: 0;
+      padding-block-end: 0;
     }
 
     &::after {
+      @include border-radius(0, 0, $base-border-radius, $base-border-radius);
+
       content: '';
       display: block;
       position: absolute;
-      right: 1px;
-      bottom: 1px;
-      left: 1px;
+      inset-inline-end: 1px;
+      inset-block-end: 1px;
+      inset-inline-start: 1px;
       height: 33%;
-      border-radius: 0 0 $base-border-radius $base-border-radius;
       background: linear-gradient(to top, rgba(255, 255, 255, 1) 33.33%, rgba(255, 255, 255, 0) 100%);
     }
   }
@@ -71,7 +75,10 @@
   &.is-docskit-visual-content-no-end {
     .docskit-visual--figure {
       grid-auto-columns: 1fr;
-      padding: $spacing-l 0 0 $spacing-l;
+      padding-block-start: $spacing-l;
+      padding-block-end: 0;
+      padding-inline-start: $spacing-l;
+      padding-inline-end: 0;
     }
   }
 

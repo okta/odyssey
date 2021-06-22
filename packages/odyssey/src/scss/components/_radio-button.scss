@@ -134,26 +134,27 @@
 .ods-radio--label {
   display: block;
   position: relative;
-  margin-bottom: $spacing-xs;
-  padding-left: 1em + $spacing-s-em;
+  margin-block-end: $spacing-xs;
+  padding-inline-start: 1em + $spacing-s-em;
   font-size: $size-body-base;
   font-weight: 400;
-  text-align: left;
+  text-align: start;
 
   &::before,
   &::after {
+    @include border-radius(1.125rem);
+
     content: '';
     display: block;
     position: absolute;
-    top: 50%;
-    left: 0;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
     width: 1em;
     height: 1em;
     transition-property: border-color, background, opacity, box-shadow;
     transition-duration: $base-duration;
     transition-timing-function: $base-timing;
     border: 2px solid transparent;
-    border-radius: 1.125rem;
   }
 
   // Box

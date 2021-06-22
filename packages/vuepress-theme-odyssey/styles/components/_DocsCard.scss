@@ -11,12 +11,14 @@
  */
 
 .docs-card {
+  @include border-radius(0, 32px, 0, 32px);
+
   display: flex;
   position: relative;
   flex-direction: column;
-  padding: $spacing-l $spacing-m;
+  padding-block: $spacing-l;
+  padding-inline: $spacing-m;
   transition: 0.33s ease-in-out box-shadow;
-  border-radius: 0 32px;
   background-color: var(--docs-card-bg, $white);
   font-size: $size-body-base;
 
@@ -30,28 +32,29 @@
   }
 
   &.is-docs-card-transparent {
-    padding: 0;
+    padding-block: 0;
+    padding-inline: 0;
     background: transparent;
   }
 
   a {
     &::before {
+      // NOTE: 32px is sort of an arbitrary value,
+      // and only used within this component.
+      @include border-radius(0, 32px, 0, 32px);
+
       content: '';
       display: block;
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-
-      // NOTE: 32px is sort of an arbitrary value,
-      // and only used within this component.
-      border-radius: 0 32px;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      inset-block-end: 0;
+      inset-inline-start: 0;
     }
   }
 
   .docs-card--header-image {
-    margin-bottom: $spacing-m;
+    margin-block-end: $spacing-m;
 
     svg {
       height: auto;
@@ -60,7 +63,7 @@
 
   .docs-card--main {
     flex: 1;
-    margin-bottom: $spacing-l;
+    margin-block-end: $spacing-l;
     font-size: $size-body-base;
   }
 

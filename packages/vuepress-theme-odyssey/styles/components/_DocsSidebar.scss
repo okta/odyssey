@@ -15,7 +15,8 @@ a.docs-site-title,
 a.docs-site-title:visited {
   /* stylelint-enable selector-no-qualifying-type */
   display: block;
-  padding: $spacing-xs $spacing-xs;
+  padding-block: $spacing-xs;
+  padding-inline: $spacing-xs;
   border: 0;
   color: var(--docs-text-heading, #{$text-heading});
   font-size: $size-title-4;
@@ -46,7 +47,7 @@ a.docs-site-title:visited {
     visibility: hidden;
     position: fixed;
     z-index: z-index(sidebar);
-    top: 0;
+    inset-block-start: 0;
     transform: translateX(-100%);
     transition: all 0.33s ease-in-out;
 
@@ -69,8 +70,8 @@ a.docs-site-title:visited {
   .docs-sidebar--action {
     display: none;
     position: absolute;
-    top: $spacing-s;
-    right: $spacing-s;
+    inset-block-start: $spacing-s;
+    inset-inline-end: $spacing-s;
     color: var(--docs-text-heading, #{$text-heading});
 
     @include mq(l) {
@@ -87,34 +88,40 @@ a.docs-site-title:visited {
   .docs-sidebar--content {
     display: grid;
     position: sticky;
-    top: 0;
+    inset-block-start: 0;
     grid-row-gap: $spacing-s;
     grid-template-areas: 'header' 'main' 'footer';
     grid-template-rows: auto 1fr auto;
     height: 100vh;
     max-height: 100vh;
-    padding: $spacing-l;
+    padding-block: $spacing-l;
+    padding-inline: $spacing-l;
     background: var(--docs-sidebar-bg, #{$white});
   }
 
   .docs-sidebar--header {
     grid-area: header;
-    padding: 0 $spacing-xs 0;
+    padding-block: 0;
+    padding-inline: $spacing-xs;
   }
 
   .docs-sidebar--main {
     grid-area: main;
-    padding: $spacing-xs $spacing-xs $spacing-s;
+    padding-block-start: $spacing-xs;
+    padding-block-end: $spacing-s;
+    padding-inline: $spacing-xs;
     overflow: scroll;
 
     &.is-overflowing {
-      border-bottom: 1px solid var(--border-color-display, #{$border-color-display});
+      border-block-end: 1px solid var(--border-color-display, #{$border-color-display});
     }
   }
 
   .docs-sidebar--footer {
     grid-area: footer;
-    padding: $spacing-xs $spacing-xs 0;
+    padding-block-start: $spacing-xs;
+    padding-block-end: 0;
+    padding-inline: $spacing-xs;
   }
 }
 

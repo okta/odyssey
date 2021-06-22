@@ -13,7 +13,8 @@
 module.exports = {
   plugins: [
     require.resolve('./rules'),
-    'stylelint-scss'
+    'stylelint-scss',
+    'stylelint-use-logical-spec'
   ],
   extends: [
     'stylelint-config-standard',
@@ -35,12 +36,14 @@ module.exports = {
     'color-hex-length': 'long',
     'declaration-no-important': true,
     'max-nesting-depth': [ 3, { ignoreAtRules: [ 'media', 'supports', 'include' ] } ],
+    'property-blacklist': ['border-radius', 'margin', 'padding'],
     'order/properties-alphabetical-order': null,
     'scss/at-else-closing-brace-newline-after': 'always-last-in-chain',
     'scss/at-else-closing-brace-space-after': 'always-intermediate',
     'scss/at-else-empty-line-before': 'never',
     'scss/at-if-closing-brace-newline-after': 'always-last-in-chain',
     'scss/at-if-closing-brace-space-after': 'always-intermediate',
-    'selector-type-no-unknown': [ true, { ignore: [ 'custom-elements' ] } ]
+    'selector-type-no-unknown': [ true, { ignore: [ 'custom-elements' ], } ],
+    'liberty/use-logical-spec': [ true, { except: ['height', 'min-height', 'max-height', 'width', 'min-width', 'max-width'] } ]
   }
 }

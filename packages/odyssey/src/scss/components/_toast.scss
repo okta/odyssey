@@ -11,18 +11,20 @@
  */
 
 .ods-toast {
+  @include border-radius($base-border-radius);
+
   display: grid;
   position: relative;
   grid-gap: 0 $spacing-s;
   grid-template-columns: min-content 1fr min-content;
   align-items: start;
   max-width: $max-line-length;
-  padding: $spacing-m $spacing-s;
+  padding-block: $spacing-m;
+  padding-inline: $spacing-s;
   animation-name: ods-toast-in, ods-toast-out;
   animation-duration: 300ms, 1000ms;
   animation-delay: 0s, 5300ms;
   border: 0;
-  border-radius: $base-border-radius;
   background-color: cv('blue', '900');
   box-shadow: 0 8px 12px rgba(cv('gray', '900'), 0.12);
   color: $white;
@@ -41,7 +43,7 @@
   }
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
@@ -53,8 +55,9 @@
 }
 
 .ods-toast--title {
-  margin: 0;
-  padding-right: $spacing-m;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-inline-end: $spacing-m;
   color: $white;
   font-size: $size-body-base;
   font-weight: 600;
@@ -63,15 +66,15 @@
 
 .ods-toast--dismiss {
   position: absolute;
-  top: $spacing-xs;
-  right: $spacing-xs;
-  margin-bottom: 0;
+  inset-block-start: $spacing-xs;
+  inset-inline-end: $spacing-xs;
+  margin-block-end: 0;
   border: 0;
 }
 
 .ods-toast--body {
   grid-column: 2;
-  margin-bottom: 0;
+  margin-block-end: 0;
   font-size: $size-body-base;
 }
 

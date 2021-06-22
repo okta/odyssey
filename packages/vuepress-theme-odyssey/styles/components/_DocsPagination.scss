@@ -11,9 +11,10 @@
  */
 
 .page-footer {
-  margin-top: $spacing-xl;
-  padding: $spacing-m 0;
-  border-top: 2px solid var(--border-color-display, #{$border-color-display});
+  margin-block-start: $spacing-xl;
+  padding-block: $spacing-m;
+  padding-inline: 0;
+  border-block-start: 2px solid var(--border-color-display, #{$border-color-display});
   text-align: center;
 
   &,

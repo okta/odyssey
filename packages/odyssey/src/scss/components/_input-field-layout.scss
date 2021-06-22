@@ -11,9 +11,12 @@
  */
 
 .ods-fieldset {
-  margin: 0 0 $spacing-s;
+  margin-block-start: 0;
+  margin-block-end: $spacing-s;
+  margin-inline: 0;
 
   &:last-child {
-    margin: 0;
+    margin-block: 0;
+    margin-inline: 0;
   }
 }

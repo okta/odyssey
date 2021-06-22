@@ -11,16 +11,18 @@
  */
 
 abbr {
-  border-bottom: 1px dashed $color-primary-dark;
+  border-block-end: 1px dashed $color-primary-dark;
   text-decoration: none;
 }
 
 address {
   max-width: $max-line-length;
-  margin: 0 0 $type-margin;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
@@ -54,36 +56,44 @@ sub {
 
 blockquote {
   max-width: $max-line-length;
-  margin: 0 0 $type-margin;
-  padding: 0 0 0 $spacing-s;
-  border-left: 3px solid $border-color-display;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline-end: 0;
+  padding-inline-start: $spacing-s;
+  border-inline-start: 3px solid $border-color-display;
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
 p {
   max-width: $max-line-length;
-  margin: 0 0 $type-margin;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
 
   details & {
     font-size: ms(0);
   }
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
 pre {
-  margin: 0 0 $type-margin;
+  margin-block-start: 0;
+  margin-block-end: $type-margin;
+  margin-inline: 0;
   font-family: $mono-font-family;
   white-space: pre-wrap;
   tab-size: 2;
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
@@ -145,10 +155,12 @@ ins::after {
 }
 
 kbd {
+  @include border-radius($base-border-radius);
+
   display: inline-block;
-  padding: 0 $spacing-xs;
+  padding-block: 0;
+  padding-inline: $spacing-xs;
   border: 1px solid cv('gray', '200');
-  border-radius: $base-border-radius;
   background: cv('gray', '000');
   box-shadow: 0 2px 0 cv('gray', '000'), 0 3px 0 cv('gray', '200');
   font-weight: 400;
@@ -176,7 +188,8 @@ s {
 }
 
 samp {
-  padding: 0 0.5ch;
+  padding-block: 0;
+  padding-inline: 0.5ch;
   background-color: cv('gray', '000');
   box-shadow: 0 1px 0 cv('gray', '200');
   font-family: $mono-font-family;
@@ -196,7 +209,8 @@ details {
 }
 
 summary {
-  border-radius: $base-border-radius;
+  @include border-radius($base-border-radius);
+
   font-size: ms(1);
   font-weight: 600;
   cursor: default;
@@ -207,7 +221,8 @@ summary {
 }
 
 hr {
-  margin: $spacing-s 0;
+  margin-block: $spacing-s;
+  margin-inline: 0;
   border-width: 1px;
   border-style: solid;
   border-color: cv('gray', '200');
