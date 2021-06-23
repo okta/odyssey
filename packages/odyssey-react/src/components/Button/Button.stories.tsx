@@ -38,7 +38,7 @@ export default {
 
 const Template: Story<Props> = ({ variant = "primary", disabled, onClick, wide }) => {
   const { messages } = useIntl()
-  const label = messages[`variants.${variant}`] as ReactText;
+  const label = messages[`variant.${variant}`] as ReactText;
 
   return (
     <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} children={label} />
