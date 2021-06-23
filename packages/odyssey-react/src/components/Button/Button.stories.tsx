@@ -10,8 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
 import React from "react";
+import type { ReactText } from "react";
+import { Story } from "@storybook/react";
+import { useIntl } from "react-intl";
 import Button from ".";
 import type { Props } from ".";
 
@@ -34,17 +36,20 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({ variant, disabled, onClick, size, wide }) => (
-  <>
-    <Button variant={variant} onClick={onClick} disabled={disabled} size={size} wide={wide}>Default</Button>
-    <Button variant={variant} onClick={onClick} disabled={true} size={size} wide={wide}>Disabled</Button>
-  </>
-);
+const Template: Story<Props> = ({ variant = "primary", disabled, onClick, wide }) => {
+  const { messages } = useIntl()
+  const label = messages[`variants.${variant}`] as ReactText;
+
+  return (
+    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} children={label} />
+  )
+};
 
 export const Primary = Template.bind({});
 Primary.args = {
   variant: "primary"
 };
+
 Primary.argTypes = {
   onClick: { action: 'clicked button/primary (default)' },
 };
@@ -107,7 +112,7 @@ Large.argTypes = {
 
 export const Wide = Template.bind({});
 Wide.args = {
-  wide: true
+  wide: true,
 };
 Wide.argTypes = {
   onClick: { action: 'clicked button/wide' },
