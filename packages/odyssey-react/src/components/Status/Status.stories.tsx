@@ -12,6 +12,7 @@
 
 import type { Story } from "@storybook/react";
 import React from "react";
+import { useIntl } from "react-intl";
 import Status from ".";
 import type { Props } from ".";
 
@@ -30,48 +31,42 @@ const Template: Story<Props> = ({
   descriptor,
   labelHidden,
   variant
-}) => (
-  <Status
-    label={label}
-    descriptor={descriptor}
-    labelHidden={labelHidden}
-    variant={variant}
-  />
-)
+}) => {
+  const { messages } = useIntl()
+
+  return (
+    <Status
+      label={label || messages[`label.statusLabel`] as string}
+      descriptor={descriptor || messages[`label.descriptor`] as string}
+      labelHidden={labelHidden}
+      variant={variant}
+    />
+  )
+}
 
 export const Neutral = Template.bind({});
 Neutral.args = {
-  variant: "neutral",
-  label: "Status Label",
-  descriptor: "Neutral Descriptor"
+  variant: "neutral"
 };
 
 export const Success = Template.bind({});
 Success.args = {
-  variant: "success",
-  label: "Status Label",
-  descriptor: "Success Descriptor"
+  variant: "success"
 };
 
 export const Caution = Template.bind({});
 Caution.args = {
-  variant: "caution",
-  label: "Status Label",
-  descriptor: "Caution Descriptor"
+  variant: "caution"
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
-  variant: "danger",
-  label: "Status Label",
-  descriptor: "Danger Descriptor"
+  variant: "danger"
 };
 
 export const WithLabelHidden = Template.bind({});
 WithLabelHidden.storyName = "with label hidden"
 WithLabelHidden.args = {
   labelHidden: true,
-  variant: "danger",
-  label: "Status Label",
-  descriptor: "Danger Descriptor"
+  variant: "danger"
 };
