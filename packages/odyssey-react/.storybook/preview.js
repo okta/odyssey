@@ -56,7 +56,7 @@ const setDir = (locale = 'en') => {
 const withLocaleProvider = (Story, context) => {
   const locale = context.globals.locale;
   
-  setDir(locale)
+  setDir(locale);
 
   return (
     <IntlProvider locale={locale} messages={translations[locale]}>
@@ -64,4 +64,5 @@ const withLocaleProvider = (Story, context) => {
     </IntlProvider>
   )
 }
+
 export const decorators = [ withLocaleProvider ];

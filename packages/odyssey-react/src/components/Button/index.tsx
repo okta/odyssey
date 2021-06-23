@@ -11,7 +11,7 @@
  */
 
 import React from 'react';
-import type { FunctionComponent, MouseEventHandler, ReactText } from 'react';
+import type { FunctionComponent, MouseEventHandler, ReactText, ReactElement } from 'react';
 import { useCx, useOmit } from '../../utils';
 
 export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
