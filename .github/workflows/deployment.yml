@@ -24,8 +24,11 @@ jobs:
       - name: set $SHA7
         run: echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
 
-      - name: set $PREVIEW_URL
-        run: echo "PREVIEW_URL="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
+      - name: set $URL_DOCS_SITE
+        run: echo "URL_DOCS_SITE="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
+
+      - name: set $URL_STORYBOOK
+        run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev/sb/index.html"" >> $GITHUB_ENV
 
       - name: get $COMMIT_MSG
         run: |
@@ -75,7 +78,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-          env_url: ${{ env.PREVIEW_URL }}
+          env_url: ${{ env.URL_STORYBOOK }}
 
       - name: 'Send workflow status to Slack (#odyssey-deployments)'
         run: sh ./scripts/notify-slack.sh
