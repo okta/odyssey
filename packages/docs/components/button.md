@@ -221,7 +221,7 @@ You should pair Disabled Buttons with a Tooltip if the user would benefit from a
       <button class="ods-button" aria-describedby="launch-description" disabled>
         <span class="ods-button--label">Launch</span>
       </button>
-      <aside id="launch-description" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
+      <aside id="launch-description" class="ods-tooltip is-ods-tooltip-start" role="tooltip">
         Unable to launch before countdown completes.
       </aside>
     </span>
