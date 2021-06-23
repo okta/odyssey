@@ -5,7 +5,7 @@
     "strict": true,
     "lib": [
       "dom",
-      "es2018"
+      "esnext"
     ],
     "moduleResolution": "node",
     "module": "esnext",
