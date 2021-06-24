@@ -15,8 +15,9 @@ const { licenseComment, getYear } = require('../license');
 
 testRule({
   ruleName,
-  syntax: 'scss',
+  config: true,
   fix: true,
+  customSyntax: 'postcss-scss',
 
   accept: [
     {
@@ -45,12 +46,12 @@ testRule({
       fixed: `${licenseComment}\na { color: red; }\n${licenseComment}`
     },
     {
-      code: `// a comment that is not a header\na { color: red; }`,
+      code: `// a comment that is not a header\na { color: rgb(100 0 0); }`,
       description: 'Incorrect header - SCSS style comment',
       message: messages.incorrect,
       line: 1,
       fixed:
-        `${licenseComment}\n// a comment that is not a header\na { color: red; }`
+        `${licenseComment}\n// a comment that is not a header\na { color: rgb(100 0 0); }`
     },
     {
       code:
