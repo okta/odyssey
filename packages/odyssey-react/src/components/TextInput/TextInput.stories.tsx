@@ -44,13 +44,11 @@ const Template: Story<Props> = (props) => (
 );
 
 export const Text = Template.bind({});
-Text.storyName = 'Text';
 Text.args = {
   defaultValue: 'Jupiter',
 };
 
 export const Search = Template.bind({});
-Search.storyName = 'Search';
 Search.args = {
   defaultValue: 'Search Planets',
   type: 'search'
