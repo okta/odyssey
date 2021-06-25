@@ -216,7 +216,7 @@ Large Buttons incease their padding, but not their font size. They're intended f
 
 <Visual>
   <template>
-    <button class="ods-button is-ods-button-l">
+    <button class="ods-button is-ods-button-size-l">
       <span class="ods-button--label">Log in to your console</span>
     </button>
   </template>
@@ -645,25 +645,25 @@ Color is not a clear affordance for all users, please use clear, concise copy to
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <button class="ods-button is-ods-button-s">
+    <button class="ods-button is-ods-button-size-s">
       <span class="ods-button--label">Primary</span>
     </button>
-    <button class="ods-button is-ods-button-hover is-ods-button-s">
+    <button class="ods-button is-ods-button-hover is-ods-button-size-s">
       <span class="ods-button--label">Hover</span>
     </button>
-    <button class="ods-button is-ods-button-focus is-ods-button-s">
+    <button class="ods-button is-ods-button-focus is-ods-button-size-s">
       <span class="ods-button--label">Focus</span>
     </button>
-    <button class="ods-button is-ods-button-s" disabled>
+    <button class="ods-button is-ods-button-size-s" disabled>
       <span class="ods-button--label">Disabled</span>
     </button>
   </div>
 
   ```html
-  <button class="ods-button is-ods-button-s">
+  <button class="ods-button is-ods-button-size-s">
     <span class="ods-button--label">Primary</span>
   </button>
-  <button class="ods-button is-ods-button-s" disabled>
+  <button class="ods-button is-ods-button-size-s" disabled>
     <span class="ods-button--label">Primary</span>
   </button>
   ```
@@ -701,25 +701,25 @@ Color is not a clear affordance for all users, please use clear, concise copy to
 
 <figure class="docs-example">
   <div class="docs-example--rendered">
-    <button class="ods-button is-ods-button-l">
+    <button class="ods-button is-ods-button-size-l">
       <span class="ods-button--label">Primary</span>
     </button>
-    <button class="ods-button is-ods-button-l is-ods-button-hover">
+    <button class="ods-button is-ods-button-size-l is-ods-button-hover">
       <span class="ods-button--label">Hover</span>
     </button>
-    <button class="ods-button is-ods-button-l is-ods-button-focus">
+    <button class="ods-button is-ods-button-size-l is-ods-button-focus">
       <span class="ods-button--label">Focus</span>
     </button>
-    <button class="ods-button is-ods-button-l" disabled>
+    <button class="ods-button is-ods-button-size-l" disabled>
       <span class="ods-button--label">Disabled</span>
     </button>
   </div>
 
   ```html
-  <button class="ods-button is-ods-button-l">
+  <button class="ods-button is-ods-button-size-l">
     <span class="ods-button--label">Primary</span>
   </button>
-  <button class="ods-button is-ods-button-l" disabled>
+  <button class="ods-button is-ods-button-size-l" disabled>
     <span class="ods-button--label">Primary</span>
   </button>
   ```

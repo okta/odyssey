@@ -71,7 +71,7 @@ const Button: FunctionComponent<Props> = (props) => {
   const componentClass = useCx(
     "ods-button",
     `is-ods-button-${variant}`,
-    `is-ods-button-${size}`,
+    `is-ods-button-size-${size}`,
     { "is-ods-button-full-width": wide }
   );
 
