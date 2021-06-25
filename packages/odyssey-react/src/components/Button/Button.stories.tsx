@@ -83,7 +83,7 @@ Dismiss.argTypes = {
 
 export const Small = Template.bind({});
 Small.args = {
-  size: "small"
+  size: "s"
 };
 Small.argTypes = {
   onClick: { action: 'clicked button/small' },
@@ -91,7 +91,7 @@ Small.argTypes = {
 
 export const Medium = Template.bind({});
 Medium.args = {
-  size: "medium"
+  size: "m"
 };
 Medium.argTypes = {
   onClick: { action: 'clicked button/medium' },
@@ -99,7 +99,7 @@ Medium.argTypes = {
 
 export const Large = Template.bind({});
 Large.args = {
-  size: "large"
+  size: "l"
 };
 Large.argTypes = {
   onClick: { action: 'clicked button/large' },

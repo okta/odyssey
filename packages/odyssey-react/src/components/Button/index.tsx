@@ -15,7 +15,7 @@ import type { FunctionComponent, MouseEventHandler, ReactText } from 'react';
 import { useCx, useOmit } from '../../utils';
 
 export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
-export type ButtonSizes = 'small' | 'medium' | 'large';
+export type ButtonSizes = 's' | 'm' | 'l';
 export type Props = {
   /**
    * Text content to be rendered within the button, usualy label text.
@@ -62,7 +62,7 @@ const Button: FunctionComponent<Props> = (props) => {
     children,
     disabled,
     onClick,
-    size = "medium",
+    size = "m",
     variant = "primary",
     wide,
     ...rest
