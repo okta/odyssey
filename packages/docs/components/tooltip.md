@@ -100,7 +100,7 @@ This may be the case for disabled controls or inline content like abbreviations.
       <button class="ods-button" aria-describedby="launch-description" disabled>
         Launch
       </button>
-      <aside id="launch-description" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
+      <aside id="launch-description" class="ods-tooltip is-ods-tooltip-start" role="tooltip">
         Unable to launch before countdown completes.
       </aside>
     </span>
@@ -122,7 +122,7 @@ Tooltips are transient by design, which makes them a bad candidate for interacti
     <button class="ods-button" aria-describedby="download-description-link" disabled>
       Launch
     </button>
-    <aside id="download-description-link" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
+    <aside id="download-description-link" class="ods-tooltip is-ods-tooltip-end" role="tooltip">
       Enable launch by <a href="#">initiating the countdown</a>.
     </aside>
   </span>
@@ -169,9 +169,9 @@ When positioning a Tooltip, ensure:
       </aside>
     </span>
     <span class="has-ods-tooltip sample--tip">
-      <abbr tabindex="0" aria-describedby="tip-right">Right</abbr>
-      <aside id="tip-right" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
-        A right-hand tip.
+      <abbr tabindex="0" aria-describedby="tip-end">End</abbr>
+      <aside id="tip-end" class="ods-tooltip is-ods-tooltip-end" role="tooltip">
+        An ending tip.
       </aside>
     </span>
     <span class="has-ods-tooltip sample--tip">
@@ -181,9 +181,9 @@ When positioning a Tooltip, ensure:
       </aside>
     </span>
     <span class="has-ods-tooltip sample--tip">
-      <abbr tabindex="0" aria-describedby="tip-left">Left</abbr>
-      <aside id="tip-left" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
-        A left-hand tip.
+      <abbr tabindex="0" aria-describedby="tip-start">Start</abbr>
+      <aside id="tip-start" class="ods-tooltip is-ods-tooltip-start" role="tooltip">
+        A start-hand tip.
       </aside>
     </span>
   </div>
@@ -262,7 +262,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
 ::: slot html-scss
 
 
-## Position top
+## Position: Top
 
 <figure class="docs-example" data-optional>
   <div class="docs-example--rendered">
@@ -288,7 +288,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
   ```
 </figure>
 
-## Position right
+## Position: End
 
 <figure class="docs-example" data-optional>
   <div class="docs-example--rendered">
@@ -296,7 +296,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
       <button class="ods-button" aria-describedby="edit-label">
         <OdsIcon icon="edit"></OdsIcon>
       </button>
-      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
+      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-end" role="tooltip">
         Tooltip label
       </aside>
     </span>
@@ -307,14 +307,14 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
       <button class="ods-button" aria-describedby="edit-label">
         <svg role="presentation" focusable="false" class="ods-icon">...</svg>
       </button>
-      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-right" role="tooltip">
+      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-end" role="tooltip">
         Tooltip label
       </aside>
     </span>
   ```
 </figure>
 
-## Position bottom
+## Position: Bottom
 
 <figure class="docs-example" data-optional>
   <div class="docs-example--rendered">
@@ -340,7 +340,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
   ```
 </figure>
 
-## Position left
+## Position: Start
 
 <figure class="docs-example" data-optional>
   <div class="docs-example--rendered">
@@ -348,7 +348,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
       <button class="ods-button" aria-describedby="edit-label">
         <OdsIcon icon="edit"></OdsIcon>
       </button>
-      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
+      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-start" role="tooltip">
         Tooltip label
       </aside>
     </span>
@@ -359,7 +359,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
       <button class="ods-button" aria-describedby="edit-label">
         <svg role="presentation" focusable="false" class="ods-icon">...</svg>
       </button>
-      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-left" role="tooltip">
+      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-start" role="tooltip">
         Tooltip label
       </aside>
     </span>

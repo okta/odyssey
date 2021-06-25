@@ -88,7 +88,7 @@
   }
 }
 
-.is-ods-tooltip-right {
+.is-ods-tooltip-end {
   inset-block-start: 50%;
   inset-inline-start: calc(100% + #{$spacing-s});
   transform: translateY(-50%);
@@ -139,7 +139,7 @@
   }
 }
 
-.is-ods-tooltip-left {
+.is-ods-tooltip-start {
   inset-block-start: 50%;
   inset-inline-end: calc(100% + #{$spacing-s});
   transform: translateY(-50%);
@@ -200,9 +200,9 @@
   }
 
   .is-ods-tooltip-top,
-  .is-ods-tooltip-right,
+  .is-ods-tooltip-end,
   .is-ods-tooltip-bottom,
-  .is-ods-tooltip-left {
+  .is-ods-tooltip-start {
     inset-block-start: 0;
     inset-inline-end: unset;
     inset-block-end: unset;

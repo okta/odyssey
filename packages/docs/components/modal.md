@@ -50,7 +50,7 @@ How modals arrive on the screen is as important as the content they contain. Ani
 
 <Description>
 
-Users may close modals by clicking on the button in the upper right-hand corner of the container. They may also click anywhere outside of the container, within the "curtain".
+Users may close modals by clicking on the button in the upper, ending corner of the container. They may also click anywhere outside of the container, within the "curtain".
 
 </Description>
 

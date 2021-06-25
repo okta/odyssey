@@ -30,14 +30,14 @@ const Template: Story<Props> = () => (
     <Tooltip label="Top tooltip label" position="top">
       <Button variant="primary" onClick={action('Top button clicked')}>Top</Button>
     </Tooltip>
-    <Tooltip label="Right tooltip label" position="right">
-      <Button onClick={action('Right button clicked')} variant="clear">Right</Button>
+    <Tooltip label="Ending tooltip label" position="end">
+      <Button onClick={action('Ending button clicked')} variant="clear">End</Button>
     </Tooltip>
     <Tooltip label="Bottom tooltip label" position="bottom">
       <Button onClick={action('Bottom button clicked')} variant="clear">Bottom</Button>
     </Tooltip>
-    <Tooltip label="Left tooltip label" position="left">
-      <Button onClick={action('Left button clicked')} variant="clear">Left</Button>
+    <Tooltip label="Starting tooltip label" position="start">
+      <Button onClick={action('Starting button clicked')} variant="clear">Start</Button>
     </Tooltip>
   </>
 );
