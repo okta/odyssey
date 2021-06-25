@@ -216,7 +216,7 @@ Large Buttons incease their padding, but not their font size. They're intended f
 
 <Visual>
   <template>
-    <button class="ods-button is-ods-button-large">
+    <button class="ods-button is-ods-button-l">
       <span class="ods-button--label">Log in to your console</span>
     </button>
   </template>
@@ -637,6 +637,90 @@ Color is not a clear affordance for all users, please use clear, concise copy to
   </button>
   <button class="ods-button is-ods-button-clear" disabled>
     <span class="ods-button--label">Clear</span>
+  </button>
+  ```
+</figure>
+
+## Size: Small
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <button class="ods-button is-ods-button-s">
+      <span class="ods-button--label">Primary</span>
+    </button>
+    <button class="ods-button is-ods-button-hover is-ods-button-s">
+      <span class="ods-button--label">Hover</span>
+    </button>
+    <button class="ods-button is-ods-button-focus is-ods-button-s">
+      <span class="ods-button--label">Focus</span>
+    </button>
+    <button class="ods-button is-ods-button-s" disabled>
+      <span class="ods-button--label">Disabled</span>
+    </button>
+  </div>
+
+  ```html
+  <button class="ods-button is-ods-button-s">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button is-ods-button-s" disabled>
+    <span class="ods-button--label">Primary</span>
+  </button>
+  ```
+</figure>
+
+## Size: Medium
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <button class="ods-button">
+      <span class="ods-button--label">Primary</span>
+    </button>
+    <button class="ods-button is-ods-button-hover">
+      <span class="ods-button--label">Hover</span>
+    </button>
+    <button class="ods-button is-ods-button-focus">
+      <span class="ods-button--label">Focus</span>
+    </button>
+    <button class="ods-button" disabled>
+      <span class="ods-button--label">Disabled</span>
+    </button>
+  </div>
+
+  ```html
+  <button class="ods-button">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button" disabled>
+    <span class="ods-button--label">Primary</span>
+  </button>
+  ```
+</figure>
+
+## Size: Large
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <button class="ods-button is-ods-button-l">
+      <span class="ods-button--label">Primary</span>
+    </button>
+    <button class="ods-button is-ods-button-l is-ods-button-hover">
+      <span class="ods-button--label">Hover</span>
+    </button>
+    <button class="ods-button is-ods-button-l is-ods-button-focus">
+      <span class="ods-button--label">Focus</span>
+    </button>
+    <button class="ods-button is-ods-button-l" disabled>
+      <span class="ods-button--label">Disabled</span>
+    </button>
+  </div>
+
+  ```html
+  <button class="ods-button is-ods-button-l">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button is-ods-button-l" disabled>
+    <span class="ods-button--label">Primary</span>
   </button>
   ```
 </figure>
