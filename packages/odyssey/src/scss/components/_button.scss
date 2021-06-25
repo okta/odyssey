@@ -182,7 +182,7 @@
   line-height: $title-line-height;
 }
 
-.is-ods-button-small {
+.is-ods-button-s {
   @extend %button-small;
 }
 
@@ -191,7 +191,7 @@
   width: 100%;
 }
 
-.is-ods-button-large {
+.is-ods-button-l {
   padding-block: $spacing-s-em;
   padding-inline: $spacing-m-em;
 }
