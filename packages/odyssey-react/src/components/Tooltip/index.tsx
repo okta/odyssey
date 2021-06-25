@@ -30,7 +30,7 @@ export type Props = {
    * The position the tooltip will be displayed
    * @default top
    */
-  position?: 'top' | 'right' | 'bottom' | 'left',
+  position?: 'top' | 'end' | 'bottom' | 'start',
 
   /**
    * The position the tooltip will be displayed

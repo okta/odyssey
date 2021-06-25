@@ -135,9 +135,9 @@ Note that tables should not have a fixed width, nor should their columns. Browse
 
 <Description>
 
-If your data set has keys on two axes, we also support setting the left-most column as a row heading. This is helpful when you expect the user tuseze a known value for data lookup (e.g. "Which missions went to Mars?").
+If your data set has keys on two axes, we also support setting the starting column as a row heading. This is helpful when you expect the user tuseze a known value for data lookup (e.g. "Which missions went to Mars?").
 
-Be sure to identify your row heading column as well. That is, don't leave a blank cell in the upper left. Our secondary headings need context too!
+Be sure to identify your row heading column as well. That is, don't leave a blank cell in the starting header column. Our secondary headings need context too!
 
 </Description>
 
@@ -244,7 +244,7 @@ Note: spanning multiple rows or columns may cause issues for assistive technolog
 
 Titles & captions should describe the table the user is viewing. They are not abstractions.
 
-Reserve the left-hand column for your most important data. Cascade lower priority data to the right.
+Reserve the starting column for your most important data. Cascade lower priority data toward the end.
 
 Don't use long column headings. Try to keep them as short as or shorter than your column content.
 
@@ -386,7 +386,7 @@ If mixed, the heading checkbox should be set to Indeterminate.
 
 <h4 class="desc-counter--title">Numerical data</h4>
 
-We use tabular numbers and right-align figures for quick scanning.
+We use tabular numbers and end-align figures for quick scanning.
 
 Leave off any units. Instead, specify them in the column's header.
 

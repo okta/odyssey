@@ -162,7 +162,7 @@ UI indicators are visual indicators that are baked into UIs like the radio circl
 </Description>
 
 <Visual>
-  <img alt="An illustration of a select input. On right side, arrow points at a down-arrow glyph which is an example of a UI indicator." src="/images/icons-indicator-example.svg">
+  <img alt="An illustration of a select input. On the ending side, an arrow points at a down-arrow glyph which is an example of a UI indicator." src="/images/icons-indicator-example.svg">
 </Visual>
 
 ### When to use an icon
@@ -216,7 +216,7 @@ As best practice, use a verb to suggest an action. For more clarity use a verb +
   </button>
 </Visual>
 
-### Choosing the right icon
+### Choosing an icon
 
 <Description>
 
