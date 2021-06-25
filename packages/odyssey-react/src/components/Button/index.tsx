@@ -32,6 +32,11 @@ export type Props = {
   onClick?: MouseEventHandler<HTMLButtonElement>,
 
   /**
+   * Increases the block padding and height of the button.
+   */
+  large?: boolean;
+
+  /**
    * The visual variant to be displayed to the user.
    * @default primary
    */
@@ -55,6 +60,7 @@ const Button: FunctionComponent<Props> = (props) => {
     children,
     disabled,
     onClick,
+    large,
     variant = "primary",
     wide,
     ...rest
@@ -63,6 +69,7 @@ const Button: FunctionComponent<Props> = (props) => {
   const componentClass = useCx(
     "ods-button",
     `is-ods-button-${variant}`,
+    { "is-ods-button-large": large},
     { "is-ods-button-full-width": wide }
   );
 

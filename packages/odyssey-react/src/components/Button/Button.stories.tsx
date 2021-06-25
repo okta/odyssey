@@ -28,16 +28,19 @@ export default {
     onClick: {
       control: { type: null }
     },
+    large: {
+      control: { type: "boolean" }
+    },
     wide: {
       control: { type: "boolean" }
     },
   },
 };
 
-const Template: Story<Props> = ({ variant, disabled, onClick, wide }) => (
+const Template: Story<Props> = ({ variant, disabled, onClick, large, wide }) => (
   <>
-    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide}>Default</Button>
-    <Button variant={variant} onClick={onClick} disabled={true} wide={wide}>Disabled</Button>
+    <Button variant={variant} onClick={onClick} disabled={disabled} large={large} wide={wide}>Default</Button>
+    <Button variant={variant} onClick={onClick} disabled={true} large={large} wide={wide}>Disabled</Button>
   </>
 );
 
@@ -79,6 +82,14 @@ Dismiss.args = {
 };
 Dismiss.argTypes = {
   onClick: { action: 'clicked button/dismiss' },
+};
+
+export const Large = Template.bind({});
+Large.args = {
+  large: true
+};
+Large.argTypes = {
+  onClick: { action: 'clicked button/large' },
 };
 
 export const Wide = Template.bind({});
