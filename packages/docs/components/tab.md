@@ -29,7 +29,7 @@ links:
 
 <Description>
 
-Users interact with Tab as they would a button, the main difference is the outcome. By default, the first tab from the left is active and the associated content displayed in the tab panel. Upon selecting a different tab, the tab indicator appears on the selected tab. The tab panel will then update to show the new content.
+Users interact with Tab as they would a button, the main difference is the outcome. By default, the first tab is active and the associated content displayed in the tab panel. Upon selecting a different tab, the tab indicator appears on the selected tab. The tab panel will then update to show the new content.
 
 Additionally, the tab element is keyboard-navigable (See [Accessibility: Keyboard Support](#keyboard-support))
 

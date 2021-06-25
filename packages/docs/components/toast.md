@@ -64,7 +64,7 @@ Each Toast is made up of up to four parts: Icon & Color, Title, Body, and a Dism
 
 Toasts may be triggered by different types of events, but they are always transient. With this in mind, Toasts should not include any interactive or long-form content.
 
-The Toast pen will take care of positioning and layout automatically. Toasts will appear in the bottom-right corner above all other content.
+The Toast pen will take care of positioning and layout automatically. Toasts will appear in the bottom, ending corner above all other content.
 
 If multiple Toasts are triggered in a short time, they will stack in order of appearance. For visual consistency, Toasts will resize to match the largest Toast visible.
 
@@ -374,7 +374,7 @@ Do not use Danger Toasts for in-page errors such as invalid form fields. Instead
 
 <Description>
 
-`.ods-toast-pen` provides a container which is positioned fixed to the bottom right hand corner of a page. When a toast element is appended to it, motion is automatically handled for you using CSS animation.
+`.ods-toast-pen` provides a container which is positioned fixed to the bottom, ending corner of a page. When a toast element is appended to it, motion is automatically handled for you using CSS animation.
 
 </Description>
 
