@@ -46,7 +46,7 @@ In Odyssey there are five Button variants: Primary, Secondary, Danger, Clear, an
 
 <Description>
 
-Use our default button for primary actions in a view. For example, “Save”.
+Use our default Button for primary actions in a view. For example, “Save”.
 
 It's ideal to have one Primary Button per view. However, it's okay to have more than one Primary Button as long that they are equal in priority.
 
@@ -64,7 +64,7 @@ It's ideal to have one Primary Button per view. However, it's okay to have more 
 
 <Description>
 
-This is ideal for a secondary actions to compliment the Primary Button. Like the Primary Button, use this button sparingly to provide focus to the user.
+This is ideal for a secondary actions to compliment the Primary Button. Like the Primary Button, use this Button sparingly to provide focus to the user.
 
 </Description>
 
@@ -98,7 +98,7 @@ Use Danger Buttons for scenarios where a user may be deleting information or mak
 
 Use Clear Buttons for interactions that change visible UI but don't submit data. For example, showing a password field or dismissing a modal.
 
-They pair well with Primary and Secondary buttons.
+They pair well with Primary and Secondary Buttons.
 
 </Description>
 
@@ -131,11 +131,102 @@ The Dismiss Button has unique padding and will inherit the text color of it's pa
   </template>
 </Visual>
 
+## Sizes
+
+<Description>
+
+We offer three sizes of Buttons for use: Small, Medium, and Large. Full-width buttons are also available.
+
+In order to provide a sufficient click area, all Button labels have a minimum width equal to twice the line-height.
+
+</Description>
+
+### Small
+
+<Description>
+
+Small Buttons are best used for actions within Table rows. Their font-size is descreased while keeping padding proportional to our medium size.
+
+</Description>
+
+<Visual>
+  <figure class="ods-table--figure">
+    <figcaption class="ods-table--figcaption">
+      Near and far planets
+    </figcaption>
+    <table class="ods-table">
+      <caption>Information about the nearest and farthest planets.</caption>
+      <thead>
+        <tr>
+          <th scope="column">
+            Planet
+          </th>
+          <th scope="column" class="is-ods-table-num">
+            Distance (AU)
+          </th>
+          <th scope="column">
+            Travel
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mars</td>
+          <td class="is-ods-table-num">0.52</td>
+          <td><button class="ods-button is-ods-button-secondary">Travel</button></td>
+        </tr>
+        <tr>
+          <td>Saturn</td>
+          <td class="is-ods-table-num">8.52</td>
+          <td><button class="ods-button is-ods-button-secondary">Travel</button></td>
+        </tr>
+        <tr>
+          <td>Neptune</td>
+          <td class="is-ods-table-num">29.09</td>
+          <td><button class="ods-button is-ods-button-secondary">Travel</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+</Visual>
+
+### Medium
+
+<Description>
+
+Our default size, medium Buttons are built for use in most contexts.
+
+</Description>
+
+<Visual>
+  <template>
+    <button class="ods-button">
+      <span class="ods-button--label">Activate thrusters</span>
+    </button>
+  </template>
+</Visual>
+
+### Large
+
+<Description>
+
+Large Buttons incease their padding, but not their font size. They're intended for single-interaction UIs like logging in.
+
+</Description>
+
+<Visual>
+  <template>
+    <button class="ods-button is-ods-button-size-l">
+      <span class="ods-button--label">Log in to your console</span>
+    </button>
+  </template>
+</Visual>
+
 ### Full-width
 
 <Description>
 
-Full-width buttons are intended for single-interaction UIs. These are often widgets like "Sign In" or "Sign Up".
+Full-width Buttons are intended for single-interaction UIs. These are often widgets like "Sign In" or "Sign Up".
 
 Use this variant when you desire the Button to be full-width regardless of screen size.
 
@@ -232,7 +323,7 @@ You should pair Disabled Buttons with a Tooltip if the user would benefit from a
 
 <Description>
 
-Use buttons to indicate the in-page actions a user can take.
+Use Buttons to indicate the in-page actions a user can take.
 
 </Description>
 
@@ -244,7 +335,7 @@ Use buttons to indicate the in-page actions a user can take.
 
 <Description>
 
-Don't use buttons to navigate users around the site or product; use links instead.
+Don't use Buttons to navigate users around the site or product; use links instead.
 
 </Description>
 
@@ -258,7 +349,7 @@ Don't use buttons to navigate users around the site or product; use links instea
 
 <Description>
 
-Consider the following when writing content for buttons. By doing so, it will ensure users can easily navigate the page and complete the task at hand efficiently.
+Consider the following when writing content for Buttons. By doing so, it will ensure users can easily navigate the page and complete the task at hand efficiently.
 
 </Description>
 
@@ -266,7 +357,7 @@ Consider the following when writing content for buttons. By doing so, it will en
 
 <Description>
 
-Provide enough context to ensure the user is aware what the interaction will achieve. Avoid patterns that require the user to discover what a button does.
+Provide enough context to ensure the user is aware what the interaction will achieve. Avoid patterns that require the user to discover what a Button does.
 
 </Description>
 
@@ -280,7 +371,7 @@ Provide enough context to ensure the user is aware what the interaction will ach
 
 <Description>
 
-Be strategic in your button placement so a user has the best context. For example, consider using Buttons at the end of a form or preceding them with supporting copy.
+Be strategic in your Button placement so a user has the best context. For example, consider using Buttons at the end of a form or preceding them with supporting copy.
 
 </Description>
 
@@ -296,7 +387,7 @@ Be strategic in your button placement so a user has the best context. For exampl
 
 <Description>
 
-Don't use more than three words inside of a button. If a user needs more context, consider other design solutions.
+Don't use more than three words inside of a Button. If a user needs more context, consider other design solutions.
 
 </Description>
 
@@ -344,7 +435,7 @@ When using multiple words, use sentence case. Capitalize only the first letter a
 
 <Description>
 
-Icons can be added to any of our button variants to increase clarity or add flair. Icons will be laid out automatically based on language direction.
+Icons can be added to any of our Button variants to increase clarity or add flair. Icons will be laid out automatically based on language direction.
 
 </Description>
 
@@ -361,7 +452,7 @@ Icons can be added to any of our button variants to increase clarity or add flai
 
 <Description>
 
-We recommend pairing icon-only buttons with our Tooltip. While this is not required, it will increase clarity for sighted users.
+We recommend pairing icon-only Buttons with our Tooltip. While this is not required, it will increase clarity for sighted users.
 
 </Description>
 
@@ -382,7 +473,7 @@ We recommend pairing icon-only buttons with our Tooltip. While this is not requi
 
 <Description>
 
-Color is not a clear affordance for all users, please use clear, concise copy to label buttons. Good rules of thumb: use three or less words to describe your action and start your label with a verb (e.g. "Access report" vs "Report PDF").
+Color is not a clear affordance for all users, please use clear, concise copy to label Buttons. Good rules of thumb: use three or less words to describe your action and start your label with a verb (e.g. "Access report" vs "Report PDF").
 
 </Description>
 
@@ -546,6 +637,90 @@ Color is not a clear affordance for all users, please use clear, concise copy to
   </button>
   <button class="ods-button is-ods-button-clear" disabled>
     <span class="ods-button--label">Clear</span>
+  </button>
+  ```
+</figure>
+
+## Size: Small
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <button class="ods-button is-ods-button-size-s">
+      <span class="ods-button--label">Primary</span>
+    </button>
+    <button class="ods-button is-ods-button-hover is-ods-button-size-s">
+      <span class="ods-button--label">Hover</span>
+    </button>
+    <button class="ods-button is-ods-button-focus is-ods-button-size-s">
+      <span class="ods-button--label">Focus</span>
+    </button>
+    <button class="ods-button is-ods-button-size-s" disabled>
+      <span class="ods-button--label">Disabled</span>
+    </button>
+  </div>
+
+  ```html
+  <button class="ods-button is-ods-button-size-s">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button is-ods-button-size-s" disabled>
+    <span class="ods-button--label">Primary</span>
+  </button>
+  ```
+</figure>
+
+## Size: Medium
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <button class="ods-button">
+      <span class="ods-button--label">Primary</span>
+    </button>
+    <button class="ods-button is-ods-button-hover">
+      <span class="ods-button--label">Hover</span>
+    </button>
+    <button class="ods-button is-ods-button-focus">
+      <span class="ods-button--label">Focus</span>
+    </button>
+    <button class="ods-button" disabled>
+      <span class="ods-button--label">Disabled</span>
+    </button>
+  </div>
+
+  ```html
+  <button class="ods-button">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button" disabled>
+    <span class="ods-button--label">Primary</span>
+  </button>
+  ```
+</figure>
+
+## Size: Large
+
+<figure class="docs-example">
+  <div class="docs-example--rendered">
+    <button class="ods-button is-ods-button-size-l">
+      <span class="ods-button--label">Primary</span>
+    </button>
+    <button class="ods-button is-ods-button-size-l is-ods-button-hover">
+      <span class="ods-button--label">Hover</span>
+    </button>
+    <button class="ods-button is-ods-button-size-l is-ods-button-focus">
+      <span class="ods-button--label">Focus</span>
+    </button>
+    <button class="ods-button is-ods-button-size-l" disabled>
+      <span class="ods-button--label">Disabled</span>
+    </button>
+  </div>
+
+  ```html
+  <button class="ods-button is-ods-button-size-l">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button is-ods-button-size-l" disabled>
+    <span class="ods-button--label">Primary</span>
   </button>
   ```
 </figure>

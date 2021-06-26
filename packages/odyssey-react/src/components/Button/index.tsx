@@ -15,6 +15,7 @@ import type { FunctionComponent, MouseEventHandler, ReactText } from 'react';
 import { useCx, useOmit } from '../../utils';
 
 export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
+export type ButtonSizes = 's' | 'm' | 'l';
 export type Props = {
   /**
    * Text content to be rendered within the button, usualy label text.
@@ -30,6 +31,12 @@ export type Props = {
    * Button click handler.
    */
   onClick?: MouseEventHandler<HTMLButtonElement>,
+
+  /**
+   * The size to be displayed to the user.
+   * @default medium
+   */
+  size?: ButtonSizes;
 
   /**
    * The visual variant to be displayed to the user.
@@ -55,6 +62,7 @@ const Button: FunctionComponent<Props> = (props) => {
     children,
     disabled,
     onClick,
+    size = "m",
     variant = "primary",
     wide,
     ...rest
@@ -63,6 +71,7 @@ const Button: FunctionComponent<Props> = (props) => {
   const componentClass = useCx(
     "ods-button",
     `is-ods-button-${variant}`,
+    `is-ods-button-size-${size}`,
     { "is-ods-button-full-width": wide }
   );
 

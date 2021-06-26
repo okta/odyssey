@@ -53,6 +53,9 @@
 }
 
 .ods-button--label {
+  display: inline-block;
+  min-width: $spacing-l-em;
+
   &:not(:only-child) {
     margin-inline-start: $spacing-xs;
   }
@@ -179,11 +182,16 @@
   line-height: $title-line-height;
 }
 
-.is-ods-button-small {
+.is-ods-button-size-s {
   @extend %button-small;
 }
 
 .is-ods-button-full-width {
   display: block;
   width: 100%;
+}
+
+.is-ods-button-size-l {
+  padding-block: $spacing-s-em;
+  padding-inline: $spacing-m-em;
 }
