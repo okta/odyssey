@@ -34,10 +34,10 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({ variant, disabled, onClick, wide }) => (
+const Template: Story<Props> = ({ variant, disabled, onClick, size, wide }) => (
   <>
-    <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide}>Default</Button>
-    <Button variant={variant} onClick={onClick} disabled={true} wide={wide}>Disabled</Button>
+    <Button variant={variant} onClick={onClick} disabled={disabled} size={size} wide={wide}>Default</Button>
+    <Button variant={variant} onClick={onClick} disabled={true} size={size} wide={wide}>Disabled</Button>
   </>
 );
 
@@ -79,6 +79,30 @@ Dismiss.args = {
 };
 Dismiss.argTypes = {
   onClick: { action: 'clicked button/dismiss' },
+};
+
+export const Small = Template.bind({});
+Small.args = {
+  size: "s"
+};
+Small.argTypes = {
+  onClick: { action: 'clicked button/small' },
+};
+
+export const Medium = Template.bind({});
+Medium.args = {
+  size: "m"
+};
+Medium.argTypes = {
+  onClick: { action: 'clicked button/medium' },
+};
+
+export const Large = Template.bind({});
+Large.args = {
+  size: "l"
+};
+Large.argTypes = {
+  onClick: { action: 'clicked button/large' },
 };
 
 export const Wide = Template.bind({});
