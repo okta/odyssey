@@ -1,0 +1,297 @@
+---
+template: plain
+id: base-type
+title: Type Examples
+headline: Type Examples
+lede: A comprehensive set of mixed-content, in-situ type specimens for Arabic.
+description:
+---
+<div dir="rtl">
+
+# هذا هو عنوان المستوى الأول
+
+يقوم Vangelis بإشعال الطاقة المخبأة في المادة النجمية tesseract التي تحصد ضوء النجوم وتحافظ على تلك المستعمرات ذات النقاط الزرقاء الباهتة وتعتز بها. مواطنون محدودون ولكن غير مقيدون من عصور بعيدة ، مواطنون من حقب بعيدة ، أثارهم مواطنو النجوم من عصور بعيدة بقصص جميلة لا يوجد دليل جيد عليها.
+
+غنية بالذرات الثقيلة ، رماد شبكة الكيمياء النجمية من الثقوب الدودية التي تدعونا السماء بشيء لا يصدق ينتظر أن نعرفه هو مخلوقات الكون.
+
+## هذا هو عنوان المستوى الثاني
+
+مليار تريليون دهشة تحافظ وتعتز بهذه الشجاعة ذات النقطة الزرقاء الباهتة لأسئلتنا هيباتيا التي ننطلق منها. قهر قلوب النجوم في المحيط الكوني المستحيل مرحلة صغيرة جدًا في ساحة كونية واسعة قهر المستحيل يخترع الكون.
+
+ذرة من الغبار معلقة في شعاع الشمس ، يحلم الكربون الموجود في فطائر التفاح لدينا بشيء لا يصدق ينتظر أن يُعرف اتساعه لا يمكن تحمله إلا من خلال مجموعة النجوم الكروية المحببة؟
+
+### هذا هو عنوان المستوى الثالث
+
+المغامرة بشيء لا يصدق ينتظر أن يعرف عن حلقات كوكب أورانوس خارج الكوكب ذرة من الغبار معلقة في شعاع الشمس كائنات ذكية؟ تجمع النجوم الكروية الكربون في فطائر التفاح على مر القرون ، المنزل الوحيد الذي عرفناه في مستعمرات Apollonius of Perga.
+
+شبكة من الثقوب الدودية لا يزال فجرًا مجيدًا ينتظر شبكة من الثقوب الدودية. شبكة من الثقوب الدودية تخترع الكون عالمًا آخر بقصص جميلة لا يوجد دليل جيد لها على أن ذرات الهيدروجين هي مرحلة صغيرة جدًا في ساحة كونية واسعة.
+
+#### هذا هو عنوان المستوى الرابع
+
+إلى أي مدى بعيد حلم عين العقل لا يزال الفجر المجيد ينتظر استكشافات Tunguska Event Encyclopaedia galactica. من خلالها نخرج مواطنين من عصور بعيدة الكربون في فطائر التفاح الخاصة بنا إقليدس مراقب خارج كوكب الأرض شيء لا يصدق ينتظر أن يعرف.
+
+يحركه نجم قزم أبيض شيء لا يصدق ينتظر أن يعرف مئات الآلاف من الفلكيين الذين ينحدرون من أجزاء من الزغب المتحرك. قلوب النجوم شيء لا يصدق ينتظر أن يكون معروفًا قزمًا أبيض رماد الخيمياء النجمية غير الواضحة من الصخور والغاز المواطنين في العصور البعيدة.
+
+##### هذا هو عنوان المستوى الخامس
+
+احلم بعين العقل بعالم آخر بقصص جميلة لا يوجد دليل جيد على Apollonius of Perga بشيء لا يصدق ينتظر أن يُعرف بنوبة الموت العالمية. السماء تدعونا إلى الأرض المسطحة تتطلب الادعاءات غير العادية أدلة غير عادية تتطلب الادعاءات غير العادية أدلة غير عادية. ذهول الدماغ هو بذرة الذكاء.
+
+تتطلب قلوب النجوم في بحر الهدوء ادعاءات غير عادية من الأدلة غير العادية لشبكة من الثقوب الدودية لقلوب مراقبين خارج كوكب الأرض للنجوم.
+
+###### هذا هو عنوان المستوى السادس
+
+ثقافة استكشافات القزم الأبيض بحر الهدوء نواتج غير واضحة من الصخور والغازات من الزغب المتحرك. باعتبارها بقعة ضوء كوزموس تريليون غنية بسفينة الخيال الغامضة جان فرانسوا شامبليون.
+
+لا يمكن تحمل الاتساع إلا من خلال وخز الحب في العمود الفقري لذرات الهيدروجين التي تم جمعها بواسطة الجاذبية سيف أوريون المنزل الوحيد الذي عرفناه على الإطلاق. هناك شيء لا يصدق ينتظر أن يُعرف برماد الكيمياء النجمية التي تنادينا بها السماء تنادينا بشجاعة من أسئلتنا المنزل الوحيد الذي عرفناه على الإطلاق؟
+
+<hr>
+
+# هذا هو العنوان الأول المكدس
+
+## هذا هو العنوان الثاني المكدس
+
+### هذا هو العنوان الثالث المكدس
+
+#### هذا هو العنوان الرابع المكدس
+
+##### هذا هو العنوان الخامس المكدس
+
+###### هذا هو العنوان السادس المكدس
+
+<hr>
+
+# هذه مجموعة من الأكوام المتناوبة
+
+## هذا هو العنوان الثاني المختلط
+
+يقوم Vangelis بإشعال الطاقة المخبأة في المادة النجمية tesseract التي تحصد ضوء النجوم وتحافظ على تلك المستعمرات ذات النقاط الزرقاء الباهتة. مواطنون محدودون ولكن غير مقيدون من عصور بعيدة ، مواطنون من حقب بعيدة ، أثارهم مواطنو النجوم من عصور بعيدة بقصص جميلة لا يوجد دليل جيد عليها.
+
+### هذا هو العنوان الثالث المختلط
+
+#### هذا هو العنوان الرابع المختلط
+
+مليار تريليون دهشة تحافظ وتعتز بهذه الشجاعة ذات النقطة الزرقاء الباهتة لأسئلتنا هيباتيا التي ننطلق منها. قهر قلوب النجوم في المحيط الكوني المستحيل مرحلة صغيرة جدًا في ساحة كونية واسعة قهر المستحيل يخترع الكون.
+
+##### هذا هو العنوان الخامس المختلط
+
+###### هذا هو العنوان السادس المختلط
+
+لا يمكن تحمل الاتساع إلا من خلال وخز الحب في العمود الفقري لذرات الهيدروجين التي تم جمعها بواسطة الجاذبية سيف أوريون المنزل الوحيد الذي عرفناه على الإطلاق. هناك شيء لا يصدق ينتظر أن يُعرف برماد الكيمياء النجمية التي تنادينا بها السماء تنادينا بشجاعة من أسئلتنا المنزل الوحيد الذي عرفناه على الإطلاق؟
+
+<hr>
+
+# هذا عنوان من المستوى الأول
+
+يقوم Vangelis بإشعال الطاقة المخفية في المادة النجمية التي تحصد ضوء النجوم وتحافظ على تلك المستعمرات ذات النقاط الزرقاء الباهتة. مواطنون محدودون ولكن غير مقيدون من عصور بعيدة ، مواطنون من حقب بعيدة ، أثارهم مواطنو النجوم من عصور بعيدة بقصص جميلة لا يوجد دليل جيد عليها.
+
+<blockquote cite="https://books.google.com/books?id=dlYEAAAAMBAJ&lpg=PP1&dq=Life,+2+May+1955&pg=PA61&hl=en#v=onepage&q=Life%2C%202%20May%201955&f=false">
+  <p>المهم ألا تتوقف عن الاستجواب. الفضول له سبب وجوده.</p>
+  <footer>البرت اينشتاين, <cite>نصيحة الرجل العجوز للشباب: "لا تفقد أبدًا فضولًا مقدسًا" ، مجلة لايف (2 مايو 1955) تصريح لوليام ميلر ، ص. 64.</cite></footer>
+</blockquote>
+
+غنية بالذرات الثقيلة ، رماد شبكة الكيمياء النجمية من الثقوب الدودية التي تدعونا السماء بشيء لا يصدق ينتظر أن نعرفه هو مخلوقات الكون.
+
+## هذا هو عنوان المستوى الثاني
+
+مليار تريليون دهشة تحافظ وتعتز بهذه الشجاعة ذات النقطة الزرقاء الباهتة لأسئلتنا هيباتيا التي ننطلق منها. قهر قلوب النجوم في المحيط الكوني المستحيل مرحلة صغيرة جدًا في ساحة كونية واسعة قهر المستحيل يخترع الكون.
+
+<figure class="ods-table--figure">
+  <figcaption class="ods-table--figcaption">
+    الكواكب الكبيرة والصغيرة
+  </figcaption>
+  <table class="ods-table">
+    <caption>معلومات عن أكبر وأصغر الكواكب.</caption>
+    <thead>
+      <tr>
+        <th scope="column">كوكب</th>
+        <th scope="column" class="is-ods-table-num">نصف القطر (كم)</th>
+        <th scope="column">يكتب</th>
+        <th scope="column" class="is-ods-table-date">تاريخ الحضيض</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">كوكب المشتري</th>
+        <td class="is-ods-table-num">69,911</td>
+        <td>عملاق الغاز</td>
+        <td class="is-ods-table-date">21 يناير 2023</td>
+      </tr>
+      <tr>
+        <th scope="row">أرض</th>
+        <td class="is-ods-table-num">6,371</td>
+        <td>ساكن الأرض</td>
+        <td class="is-ods-table-date">2 يناير 2021</td>
+      </tr>
+      <tr>
+        <th scope="row">الزئبق</th>
+        <td class="is-ods-table-num">1,737</td>
+        <td>ساكن الأرض</td>
+        <td class="is-ods-table-date">&ndash;</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+ذرة من الغبار معلقة في شعاع الشمس ، يحلم الكربون الموجود في فطائر التفاح لدينا بشيء لا يصدق ينتظر أن يُعرف اتساعه لا يمكن تحمله إلا من خلال مجموعة النجوم الكروية المحببة؟
+
+### هذا هو عنوان المستوى الثالث
+
+المغامرة بشيء لا يصدق ينتظر أن يعرف عن حلقات كوكب أورانوس خارج الكوكب ذرة من الغبار معلقة في شعاع الشمس كائنات ذكية؟ تجمع النجوم الكروية الكربون في فطائر التفاح على مر القرون ، المنزل الوحيد الذي عرفناه في مستعمرات Apollonius of Perga.
+
+<dl>
+  <dt>ماريو</dt>
+  <dd>قبعة حمراء ، شقيق توأم أكبر ، شارب كلاسيكي</dd>
+  <dt>لويجي</dt>
+  <dd>قبعة خضراء ، شقيق توأم أصغر ، شارب كلاسيكي</dd>
+  <dt>واريو</dt>
+  <dd>قبعة صفراء ، وليست توأم ، شارب متعرج</dd>
+  <dd>يحب الثوم</dd>
+  <dt>Waluigi</dt>
+  <dd>قبعة أرجوانية ، وليس التوأم ، شارب مدبب</dd>
+</dl>
+
+شبكة من الثقوب الدودية لا يزال فجرًا مجيدًا ينتظر شبكة من الثقوب الدودية. شبكة من الثقوب الدودية تخترع الكون عالمًا آخر بقصص جميلة لا يوجد دليل جيد لها على أن ذرات الهيدروجين هي مرحلة صغيرة جدًا في ساحة كونية واسعة.
+
+#### هذا هو عنوان المستوى الرابع
+
+إلى أي مدى بعيد حلم عين العقل لا يزال الفجر المجيد ينتظر استكشافات Tunguska Event Encyclopaedia galactica. من خلالها نخرج مواطنين من عصور بعيدة الكربون في فطائر التفاح الخاصة بنا إقليدس مراقب خارج كوكب الأرض شيء لا يصدق ينتظر أن يعرف.
+
+<ul>
+  <li>شمس</li>
+  <li>الكواكب الداخلية</li>
+  <li>حزام الكويكبات</li>
+  <li>الكواكب الخارجية</li>
+  <li>القنطور</li>
+  <li>حزام كويبر</li>
+  <li>سحابة أورت</li>
+</ul>
+
+يحركه نجم قزم أبيض شيء لا يصدق ينتظر أن يعرف مئات الآلاف من الفلكيين الذين ينحدرون من أجزاء من الزغب المتحرك. قلوب النجوم شيء لا يصدق ينتظر أن يكون معروفًا قزمًا أبيض رماد الخيمياء النجمية غير الواضحة من الصخور والغاز المواطنين في العصور البعيدة.
+
+##### هذا هو عنوان المستوى الخامس
+
+احلم بعيون العقل <a href="#">عالم آخر</a> بقصص جميلة لا يوجد لها سوى القليل من الأدلة <kbd>الدليل</kbd> Apollonius of Perga شيء لا يصدق ينتظر أن يُعرف بنوبة الموت العالمي. السماء تدعونا <code>$المسطحة</code> تتطلب الادعاءات غير العادية أدلة غير عادية <del>غير عادية</del> تتطلب ادعاءات غير عادية أن دهشة الدماغ هي بذرة الذكاء.
+
+<address>
+  <a href="mailto:press@okta.com">press@okta.com</a><br>
+  <a href="tel:+18887227871">(888) 722-7871</a>
+</address>
+
+تتطلب قلوب Sea of Tranquility لـ <em>النجوم</em> الادعاءات غير العادية شبكة أدلة غير عادية من <ins>الثقوب الدودية النزيهة</ins> قلوب المراقبين خارج كوكب الأرض للنجوم.
+
+###### هذا هو عنوان المستوى السادس
+
+<pre>ثقافة استكشافات القزم الأبيض بحر الهدوء نواتج غير واضحة من الصخور والغازات من الزغب المتحرك. باعتبارها بقعة ضوء كوزموس تريليون غنية بسفينة الخيال الغامضة جان فرانسوا شامبليون.</pre>
+
+<p><pre>ثقافة استكشافات القزم الأبيض بحر الهدوء نواتج غير واضحة من الصخور والغازات من الزغب المتحرك. باعتبارها بقعة ضوء كوزموس تريليون غنية بسفينة الخيال الغامضة جان فرانسوا شامبليون.</pre></p>
+
+الاتساع يمكن تحمله فقط <s>من خلال</s> وخز الحب في العمود الفقري لذرات الهيدروجين التي تم جمعها بواسطة <strong>الجاذبية</strong> سيف أوريون الوحيد <sub>المنزل</sub> الذي عرفناه <sup>على الإطلاق</sup>. هناك شيء لا يصدق ينتظر أن يعرف <var>رماد</var> الكيمياء النجمية التي تنادينا <abbr>السماء</abbr> بشجاعة أسئلتنا المنزل الوحيد الذي عرفناه على الإطلاق؟
+
+<hr>
+
+# This is the 1st heading with block
+
+<div class="ods-form">This is just some copy.</div>
+
+## This is the 2nd heading with block
+
+<div class="ods-form">
+  <fieldset class="ods-fieldset">
+    <input class="ods-checkbox" type="checkbox" name="example-1" id="example-1" value="terms-accepted" checked required>
+    <label class="ods-checkbox--label" for="example-1">Inline label</label>
+  </fieldset>
+</div>
+
+### This is the 3rd heading with block
+
+<div class="ods-form">
+  <dl class="ods-status">
+    <dt class="ods-status--label">Status label</dt>
+    <dd class="ods-status--value">Neutral descriptor</dd>
+  </dl>
+</div>
+
+#### This is the 4th heading with block
+
+<div class="ods-form">
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset--attached">
+      <input type="search" name="example-6" id="example-6" autocomplete="search" spellcheck="false" aria-labelledby="example-6" required="required" class="ods-text-input">
+      <button id="example-6" class="ods-button">Button label</button>
+    </div>
+  </fieldset>
+</div>
+
+##### This is the 5th heading with block
+
+<div class="ods-form">
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Field label</legend>
+    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" required checked>
+    <label class="ods-radio--label" for="input-0">Label 1</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" required>
+    <label class="ods-radio--label" for="input-1">Label 2</label>
+    <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" required>
+    <label class="ods-radio--label" for="input-2">Label 3</label>
+  </fieldset>
+</div>
+
+###### This is the 6th heading with block
+
+<div class="ods-form">This is just some copy.</div>
+
+<hr>
+
+# This is a 1st level heading w images
+
+<p><img src="https://www.fillmurray.com/500/300"></p>
+
+Vangelis kindling the energy hidden in matter tesseract star stuff harvesting star light preserve and cherish that pale blue dot colonies. Finite but unbounded citizens of distant epochs citizens of distant epochs stirred by starlight citizens of distant epochs with pretty stories for which there's little good evidence.
+
+Rich in heavy atoms the ash of stellar alchemy network of wormholes the sky calls to us something incredible is waiting to be known are creatures of the cosmos.
+
+## This is 2nd level heading w images
+
+<p><img src="https://www.fillmurray.com/g/500/300"></p>
+
+A billion trillion astonishment preserve and cherish that pale blue dot courage of our questions Hypatia from which we spring. Vanquish the impossible cosmic ocean hearts of the stars a very small stage in a vast cosmic arena vanquish the impossible invent the universe.
+
+A mote of dust suspended in a sunbeam the carbon in our apple pies dream of the mind's eye something incredible is waiting to be known vastness is bearable only through love globular star cluster?
+
+### This is 3rd level heading w images
+
+Venture something incredible is waiting to be known extraplanetary rings of Uranus a mote of dust suspended in a sunbeam intelligent beings? Globular star cluster the carbon in our apple pies across the centuries the only home we've ever known colonies Apollonius of Perga.
+
+<p><img src="https://placekitten.com/500/300"></p>
+
+Network of wormholes a still more glorious dawn awaits network of wormholes extraordinary claims require extraordinary evidence the sky calls to us Euclid. Network of wormholes invent the universe another world with pretty stories for which there's little good evidence hydrogen atoms a very small stage in a vast cosmic arena.
+
+<p><img src="https://placekitten.com/g/500/300"></p>
+
+#### This is 4th level heading w images
+
+<p><img src="http://placebeard.it/500/300"></p>
+
+How far away dream of the mind's eye a still more glorious dawn awaits explorations Tunguska event encyclopaedia galactica. From which we spring citizens of distant epochs the carbon in our apple pies Euclid dispassionate extraterrestrial observer something incredible is waiting to be known.
+
+<p><img src="http://placebeard.it/g/500/300"></p>
+
+Stirred by starlight white dwarf something incredible is waiting to be known hundreds of thousands descended from astronomers bits of moving fluff. Hearts of the stars something incredible is waiting to be known white dwarf the ash of stellar alchemy inconspicuous motes of rock and gas citizens of distant epochs.
+
+##### This is 5th level heading w images
+
+Dream of the mind's eye another world with pretty stories for which there's little good evidence Apollonius of Perga something incredible is waiting to be known paroxysm of global death. The sky calls to us Flatland extraordinary claims require extraordinary evidence extraordinary claims require extraordinary evidence astonishment brain is the seed of intelligence.
+
+<p><img src="https://www.placecage.com/500/300"></p>
+
+Sea of Tranquility hearts of the stars extraordinary claims require extraordinary evidence network of wormholes dispassionate extraterrestrial observer hearts of the stars.
+
+###### This is 6th level heading w images
+
+<p><img src="https://www.placecage.com/g/500/300"></p>
+
+White dwarf explorations culture Sea of Tranquility inconspicuous motes of rock and gas bits of moving fluff. As a patch of light cosmos trillion rich in mystery ship of the imagination Jean-François Champollion.
+
+Vastness is bearable only through love tingling of the spine hydrogen atoms gathered by gravity Orion's sword the only home we've ever known. Something incredible is waiting to be known the ash of stellar alchemy the sky calls to us the sky calls to us courage of our questions the only home we've ever known?
+
+</div>
