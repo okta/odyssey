@@ -116,7 +116,7 @@ const Checkbox: FunctionComponent<Props> = (props) => {
   );
 
   return (
-    <div className="ods-fieldset-flex">
+    <>
       <input
         className="ods-checkbox"
         checked={checked}
@@ -136,7 +136,7 @@ const Checkbox: FunctionComponent<Props> = (props) => {
         className="ods-checkbox--label"
         htmlFor={oid}
       />
-    </div>
+    </>
   );
 };
 
