@@ -189,55 +189,55 @@ description:
 
 <hr>
 
-# This is the 1st heading with block
+# هذا هو العنوان الأول الذي يحتوي على كتلة
 
-<div class="ods-form">This is just some copy.</div>
+<div class="ods-form">هذه مجرد نسخة.</div>
 
-## This is the 2nd heading with block
+## هذا هو العنوان الثاني مع الكتلة
 
 <div class="ods-form">
   <fieldset class="ods-fieldset">
     <input class="ods-checkbox" type="checkbox" name="example-1" id="example-1" value="terms-accepted" checked required>
-    <label class="ods-checkbox--label" for="example-1">Inline label</label>
+    <label class="ods-checkbox--label" for="example-1">التسمية المضمنة</label>
   </fieldset>
 </div>
 
-### This is the 3rd heading with block
+### هذا هو العنوان الثالث مع الكتلة
 
 <div class="ods-form">
   <dl class="ods-status">
-    <dt class="ods-status--label">Status label</dt>
-    <dd class="ods-status--value">Neutral descriptor</dd>
+    <dt class="ods-status--label">تسمية الحالة</dt>
+    <dd class="ods-status--value">واصف محايد</dd>
   </dl>
 </div>
 
-#### This is the 4th heading with block
+#### هذا هو العنوان الرابع مع الكتلة
 
 <div class="ods-form">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset--attached">
       <input type="search" name="example-6" id="example-6" autocomplete="search" spellcheck="false" aria-labelledby="example-6" required="required" class="ods-text-input">
-      <button id="example-6" class="ods-button">Button label</button>
+      <button id="example-6" class="ods-button">تسمية الزر</button>
     </div>
   </fieldset>
 </div>
 
-##### This is the 5th heading with block
+##### هذا هو العنوان الخامس مع الكتلة
 
 <div class="ods-form">
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field label</legend>
+    <legend class="ods-input-legend">تسمية الميدان</legend>
     <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" required checked>
-    <label class="ods-radio--label" for="input-0">Label 1</label>
+    <label class="ods-radio--label" for="input-0">التسمية واحد</label>
     <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" required>
-    <label class="ods-radio--label" for="input-1">Label 2</label>
+    <label class="ods-radio--label" for="input-1">التسمية الثانية</label>
     <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" required>
-    <label class="ods-radio--label" for="input-2">Label 3</label>
+    <label class="ods-radio--label" for="input-2">تسمية ثلاثة</label>
   </fieldset>
 </div>
 
-###### This is the 6th heading with block
+###### هذا هو العنوان السادس مع الكتلة
 
-<div class="ods-form">This is just some copy.</div>
+<div class="ods-form">هذه مجرد نسخة.</div>
 
 </div>
