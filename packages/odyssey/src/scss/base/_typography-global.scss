@@ -19,6 +19,7 @@ body {
   font-family: $body-font-family;
   font-style: normal;
   font-weight: 400;
+  letter-spacing: 0;
   line-height: $base-line-height;
   font-feature-settings: 'lnum', 'pnum';
 }
