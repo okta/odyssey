@@ -10,20 +10,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import Button from './components/Button';
-import Link from './components/Link';
-import Status from './components/Status';
-import Tag from './components/Tag';
-import TextArea from './components/TextArea';
-import TextInput from './components/TextInput';
-import Tooltip from './components/Tooltip';
+import type { Story } from "@storybook/react";
+import React from "react";
+import Link from ".";
+import type { Props } from ".";
 
-export {
-  Button,
-  Link,
-  Status,
-  Tag,
-  TextArea,
-  TextInput,
-  Tooltip
+export default {
+  title: `Components/Link`,
+  component: Link
+};
+
+const Template: Story<Props> = ({
+  children, href, target, rel
+}) => (
+  <Link href={href} target={target} rel={rel}>{children}</Link>
+)
+
+export const Default = Template.bind({});
+Default.args = {
+  href: "#anchor",
+  children: "Anchor link",
+};
+
+export const External = Template.bind({});
+External.args = {
+  href: "https://www.okta.com",
+  children: "Visit okta.com",
+  rel: "noopener",
+  target: "_blank"
 };
