@@ -22,4 +22,5 @@ body {
   letter-spacing: 0;
   line-height: $base-line-height;
   font-feature-settings: 'lnum', 'pnum';
+  text-decoration-skip-ink: all;
 }
