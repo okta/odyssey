@@ -30,7 +30,7 @@ describe("Title", () => {
     expect(getByRole(title).tagName).toBe('H3');
   });
 
-  it('changes the semantic tag based on the visualLevel prop', () => {
+  it('changes the visual appearance based on the visualLevel prop', () => {
     const { getByRole } = render(<Title level={3} visualLevel={6} children={titleText} />);
     const component = getByRole(title);
 
