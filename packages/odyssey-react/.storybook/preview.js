@@ -60,7 +60,8 @@ const withLocaleProvider = (Story, context) => {
 
   formatMessage.setup({
     locale,
-    translations
+    translations,
+    missingReplacement: '!!NOT TRANSLATED!!'
   })
 
   return (
