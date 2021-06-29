@@ -11,8 +11,8 @@
  */
 
 import type { Story } from "@storybook/react";
+import formatMessage from 'format-message';
 import React from "react";
-import { useIntl } from "react-intl";
 import Status from ".";
 import type { Props } from ".";
 
@@ -32,12 +32,10 @@ const Template: Story<Props> = ({
   labelHidden,
   variant
 }) => {
-  const { messages } = useIntl()
-
   return (
     <Status
-      label={label || messages[`label.statusLabel`] as string}
-      descriptor={descriptor || messages[`label.descriptor`] as string}
+      label={label || formatMessage("label.statusLabel")}
+      descriptor={descriptor || formatMessage("label.descriptor")}
       labelHidden={labelHidden}
       variant={variant}
     />

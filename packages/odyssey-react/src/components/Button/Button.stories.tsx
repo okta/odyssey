@@ -13,7 +13,7 @@
 import React from "react";
 import type { ReactText } from "react";
 import { Story } from "@storybook/react";
-import { useIntl } from "react-intl";
+import formatMessage from "format-message";
 import Button from ".";
 import type { Props } from ".";
 
@@ -22,7 +22,7 @@ export default {
   component: Button,
   argTypes: {
     children: {
-      control: { type: null }
+      control: { type: "text" }
     },
     disabled: {
       control: { type: "boolean" }
@@ -36,9 +36,9 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({ variant = "primary", disabled, onClick, wide }) => {
-  const { messages } = useIntl()
-  const label = messages[`variant.${variant}`] as ReactText;
+const Template: Story<Props> = ({children = "Button label", variant = "primary", disabled, onClick, wide }) => {
+  const label = formatMessage(`variant.${variant}`);
+  // const label = messages[`variant.${variant}`] as ReactText;
 
   return (
     <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} children={label} />

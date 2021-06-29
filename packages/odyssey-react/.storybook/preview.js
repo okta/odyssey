@@ -1,6 +1,6 @@
 import "./preview.scss";
 import translations from "./translations";
-import { IntlProvider } from "react-intl";
+import formatMessage from 'format-message';
 
 export const parameters = {
   controls: {
@@ -55,13 +55,16 @@ const setDir = (locale = 'en') => {
 
 const withLocaleProvider = (Story, context) => {
   const locale = context.globals.locale;
-  
+
   setDir(locale);
 
+  formatMessage.setup({
+    locale,
+    translations
+  })
+
   return (
-    <IntlProvider locale={locale} messages={translations[locale]}>
-      <Story {...context} />
-    </IntlProvider>
+    <Story {...context} />
   )
 }
 
