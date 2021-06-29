@@ -15,7 +15,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.ods-title {
   margin-block-start: 0;
   margin-block-end: $spacing-xs-em;
   margin-inline: 0;
@@ -24,38 +25,50 @@ h6 {
 }
 
 h1,
+.is-ods-title-1,
 h2,
-h3 {
+.is-ods-title-2,
+h3,
+.is-ods-title-3 {
   line-height: $title-line-height;
 }
 
 h4,
+.is-ods-title-4,
 h5,
-h6 {
+.is-ods-title-5,
+h6,
+.is-ods-title-6 {
   line-height: $base-line-height;
 }
 
-h1 {
+h1,
+.is-ods-title-1 {
   font-size: $size-title-1;
 }
 
-h2 {
+h2,
+.is-ods-title-2 {
   font-size: $size-title-2;
 }
 
-h3 {
+h3,
+.is-ods-title-3 {
   font-size: $size-title-3;
 }
 
-h4 {
+h4,
+.is-ods-title-4 {
   font-size: $size-title-4;
 }
 
-h5 {
+h5,
+.is-ods-title-5 {
   font-size: $size-title-5;
 }
 
-h6 {
+h6,
+.is-ods-title-6 {
   font-size: $size-title-6;
 }
 
