@@ -40,7 +40,7 @@ export type Props = {
   /**
    * The underlying input element name attribute
    */
-  name: string,
+  name?: string,
 
   /**
    * The underlying input element required attribute
@@ -87,9 +87,9 @@ export type Props = {
 
 
 /**
- * Text inputs allow users to edit and input data.
+ * Radio appears as a ring-shaped UI accompanied by a label.
  */
-const RadioInput: FunctionComponent<Props> = (props) => {
+const Radio: FunctionComponent<Props> = (props) => {
   const {
     disabled = false,
     id,
@@ -114,30 +114,28 @@ const RadioInput: FunctionComponent<Props> = (props) => {
   );
 
   return (
-    <fieldset className="ods-fieldset">
-      <div className="ods-fieldset-flex">
-        <input
-          className="ods-radio"
-          checked={checked}
-          disabled={disabled}
-          id={oid}
-          name={name}
-          onChange={handleChange}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          ref={inputRef}
-          required={required}
-          type="radio"
-          value={value}
-        />
-        <label
-          children={label}
-          className="ods-radio--label"
-          htmlFor={oid}
-        />
-      </div>
-    </fieldset>
+    <>
+      <input
+        className="ods-radio"
+        checked={ checked }
+        disabled={ disabled }
+        id={ oid }
+        name={ name }
+        onChange={ handleChange }
+        onBlur={ onBlur }
+        onFocus={ onFocus }
+        ref={ inputRef }
+        required={ required }
+        type="radio"
+        value={ value }
+      />
+      <label
+        children={ label }
+        className="ods-radio--label"
+        htmlFor={ oid }
+      />
+    </>
   );
 };
 
-export default RadioInput;
+export default Radio;

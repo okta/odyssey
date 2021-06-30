@@ -12,12 +12,12 @@
 
 import type { Story } from "@storybook/react";
 import React, { useEffect } from "react";
-import RadioInput from ".";
+import Radio from ".";
 import type { Props } from ".";
 
 export default {
-  title: `Components/RadioInput`,
-  component: RadioInput,
+  title: `Components/Radio`,
+  component: Radio,
   args: {
     label: 'Lightspeed',
     value: '1',
@@ -36,7 +36,7 @@ export default {
 };
 
 const Template: Story<Props> = (args) => (
-  <RadioInput {...args} />
+  <Radio { ...args } />
 );
 
 export const Default = Template.bind({});
@@ -44,12 +44,12 @@ export const Default = Template.bind({});
 export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true
-}
+};
 
 export const Invalid = Template.bind({});
 Invalid.decorators = [
   (Story) => {
-    useEffect(() => window.document.querySelector('input')?.setCustomValidity('oops'))
-    return <Story />
+    useEffect(() => window.document.querySelector('input')?.setCustomValidity('oops'));
+    return <Story />;
   }
-]
+];

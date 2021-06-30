@@ -13,17 +13,17 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
-import RadioInput from ".";
+import Radio from ".";
 
 const radio = 'radio';
 const label = 'Select speed';
 const value = 'Lightspeed';
-const name = 'speed'
+const name = 'speed';
 
-describe("RadioInput", () => {
+describe("Radio", () => {
   it('renders visibly into the document', () => {
     const { getByRole } = render(
-      <RadioInput label={label} name={name} value={value} />
+      <Radio label={ label } name={ name } value={ value } />
     );
 
     expect(getByRole(radio)).toBeVisible();
@@ -31,7 +31,7 @@ describe("RadioInput", () => {
 
   it('renders value attributed as expected for input', () => {
     const { getByRole } = render(
-      <RadioInput label={label} name={name} value={value} />
+      <Radio label={ label } name={ name } value={ value } />
     );
 
     expect(getByRole(radio)).toHaveAttribute('value', value);
@@ -39,7 +39,7 @@ describe("RadioInput", () => {
 
   it('renders name attribute as expected for input', () => {
     const { getByRole } = render(
-      <RadioInput label={label} name={name} value={value} />
+      <Radio label={ label } name={ name } value={ value } />
     );
 
     expect(getByRole(radio)).toHaveAttribute('name', name);
@@ -47,7 +47,7 @@ describe("RadioInput", () => {
 
   it('renders a provided id associating the input and label', () => {
     const { getByRole, getByText } = render(
-      <RadioInput label={label} name={name} value={value} id="foo" />
+      <Radio label={ label } name={ name } value={ value } id="foo" />
     );
 
     expect(getByRole(radio)).toHaveAttribute('id', 'foo');
@@ -56,7 +56,7 @@ describe("RadioInput", () => {
 
   it('renders a generated id associating the input and label', () => {
     const { getByLabelText } = render(
-      <RadioInput label={label} name={name} value={value} />
+      <Radio label={ label } name={ name } value={ value } />
     );
 
     expect(getByLabelText(label)).toBeTruthy();
@@ -68,7 +68,7 @@ describe("RadioInput", () => {
     ['required']
   ])('renders %s attribute', (attr: string) => {
     const { getByRole } = render(
-      <RadioInput label={label} value={value} name={name} {...{ [attr]: true }} />
+      <Radio label={ label } value={ value } name={ name } { ...{ [attr]: true } } />
     );
 
     expect(getByRole(radio)).toHaveAttribute(attr);
@@ -78,7 +78,7 @@ describe("RadioInput", () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
-      <RadioInput onChange={handle} label={label} value={value} name={name} />
+      <Radio onChange={ handle } label={ label } value={ value } name={ name } />
     );
 
     fireEvent.click(getByRole(radio));
@@ -97,7 +97,7 @@ describe("RadioInput", () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
-      <RadioInput {...{ [prop]: handle }} label={label} value={value} name={name} />
+      <Radio { ...{ [prop]: handle } } label={ label } value={ value } name={ name } />
     );
 
     fireEvent[type].call(
@@ -115,12 +115,12 @@ describe("RadioInput", () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
-      <RadioInput inputRef={handle} label={label} value={value} name={name} />
+      <Radio inputRef={ handle } label={ label } value={ value } name={ name } />
     );
 
     expect(handle).toHaveBeenCalledTimes(1);
     expect(handle).toHaveBeenLastCalledWith(getByRole(radio));
   });
 
-  a11yCheck(() => render(<RadioInput label={label} value={value} name={name}/>))
+  a11yCheck(() => render(<Radio label={ label } value={ value } name={ name } />));
 });
