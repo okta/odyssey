@@ -34,9 +34,9 @@ export type Props = {
   children: JSX.Element | JSX.Element[],
 
   /**
-   * The form field aside
+   * The form field hint
    */
-  aside?: string,
+  hint?: string,
 
   /**
    * The form field legend
@@ -91,7 +91,7 @@ export type Props = {
  */
 const RadioGroup: FunctionComponent<Props> = (props) => {
   const {
-    aside,
+    hint,
     children,
     disabled = false,
     legend,
@@ -110,7 +110,7 @@ const RadioGroup: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
-  const legendElement = (
+  const legendElement  = (
     <legend
       className="ods-input-legend"
       children={ legend }
@@ -142,10 +142,10 @@ const RadioGroup: FunctionComponent<Props> = (props) => {
     />
   );
 
-  const asideElement = (
+  const hintElement = (
     <aside
       className="ods-field--hint"
-      children={ aside }
+      children={ hint }
     />
   );
 
@@ -153,7 +153,7 @@ const RadioGroup: FunctionComponent<Props> = (props) => {
     <fieldset className="ods-fieldset">
       { legendElement }
       { inputElements }
-      { asideElement }
+      { hint && hintElement }
     </fieldset>
   );
 };

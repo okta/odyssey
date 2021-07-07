@@ -24,7 +24,7 @@ export default {
     name: 'speed',
   },
   argTypes: {
-    aside: { control: 'text' },
+    hint: { control: 'text' },
     legend: { control: 'text' },
     required: { control: 'boolean' },
     disabled: { control: 'boolean' },
