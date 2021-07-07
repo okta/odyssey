@@ -164,7 +164,7 @@ A billion trillion astonishment preserve and cherish that pale blue dot courage 
   </table>
 </figure>
 
-A mote of dust suspended in a sunbeam the carbon in our apple pies dream of the mind's eye something incredible is waiting to be known vastness is bearable only through love globular star cluster? </p>
+A mote of dust suspended in a sunbeam the carbon in our apple pies dream of the mind's eye something incredible is waiting to be known vastness is bearable only through love globular star cluster?
 
 ### This is 3rd level heading
 
@@ -202,7 +202,7 @@ Stirred by starlight white dwarf something incredible is waiting to be known hun
 
 ##### This is 5th level heading
 
-Dream of the mind's eye <a href="#">another world</a> with pretty stories for which there's little good <kbd>evidence</kbd> Apollonius of Perga something incredible is waiting to be known paroxysm of global death. The sky calls to us <code>Flatland</code> extraordinary claims require extraordinary evidence <del>extraordinary</del> claims require extraordinary evidence astonishment brain is the seed of intelligence.
+Dream of the mind's eye <a href="#">another world</a> with pretty stories for which there's little good <kbd>evidence</kbd> Apollonius of Perga something incredible is waiting to be known paroxysm of global death. The sky calls to us <code>$Flatland</code> extraordinary claims require extraordinary evidence <del>extraordinary</del> claims require extraordinary evidence astonishment brain is the seed of intelligence.
 
 <address>
   <a href="mailto:press@okta.com">press@okta.com</a><br>

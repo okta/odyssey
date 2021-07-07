@@ -37,6 +37,7 @@ module.exports = {
     'declaration-no-important': true,
     'max-nesting-depth': [ 3, { ignoreAtRules: [ 'media', 'supports', 'include' ] } ],
     'property-disallowed-list': ['border-radius', 'margin', 'padding'],
+    'declaration-property-value-disallowed-list': { 'word-break': ['/^break/'] },
     'order/properties-alphabetical-order': null,
     'scss/at-else-closing-brace-newline-after': 'always-last-in-chain',
     'scss/at-else-closing-brace-space-after': 'always-intermediate',
