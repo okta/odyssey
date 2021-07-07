@@ -12,12 +12,12 @@
 
 import type { Story } from "@storybook/react";
 import React, { useEffect } from "react";
-import Radio from ".";
+import RadioButton from ".";
 import type { Props } from ".";
 
 export default {
-  title: `Components/Radio`,
-  component: Radio,
+  title: `Components/RadioButton`,
+  component: RadioButton,
   args: {
     label: 'Lightspeed',
     value: '1',
@@ -36,7 +36,7 @@ export default {
 };
 
 const Template: Story<Props> = (args) => (
-  <Radio { ...args } />
+  <RadioButton { ...args } />
 );
 
 export const Default = Template.bind({});

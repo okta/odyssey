@@ -87,9 +87,9 @@ export type Props = {
 
 
 /**
- * Radio appears as a ring-shaped UI accompanied by a label.
+ * RadioButton appears as a ring-shaped UI accompanied by a label.
  */
-const Radio: FunctionComponent<Props> = (props) => {
+const RadioButton: FunctionComponent<Props> = (props) => {
   const {
     disabled = false,
     id,
@@ -138,4 +138,4 @@ const Radio: FunctionComponent<Props> = (props) => {
   );
 };
 
-export default Radio;
+export default RadioButton;

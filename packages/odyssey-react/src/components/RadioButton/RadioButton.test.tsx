@@ -13,9 +13,9 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
-import Radio from ".";
+import RadioButton from ".";
 
-const radio = 'radio';
+const role = 'radio';
 const label = 'Select speed';
 const value = 'Lightspeed';
 const name = 'speed';
@@ -23,40 +23,40 @@ const name = 'speed';
 describe("Radio", () => {
   it('renders visibly into the document', () => {
     const { getByRole } = render(
-      <Radio label={ label } name={ name } value={ value } />
+      <RadioButton label={ label } name={ name } value={ value } />
     );
 
-    expect(getByRole(radio)).toBeVisible();
+    expect(getByRole(role)).toBeVisible();
   });
 
   it('renders value attributed as expected for input', () => {
     const { getByRole } = render(
-      <Radio label={ label } name={ name } value={ value } />
+      <RadioButton label={ label } name={ name } value={ value } />
     );
 
-    expect(getByRole(radio)).toHaveAttribute('value', value);
+    expect(getByRole(role)).toHaveAttribute('value', value);
   });
 
   it('renders name attribute as expected for input', () => {
     const { getByRole } = render(
-      <Radio label={ label } name={ name } value={ value } />
+      <RadioButton label={ label } name={ name } value={ value } />
     );
 
-    expect(getByRole(radio)).toHaveAttribute('name', name);
+    expect(getByRole(role)).toHaveAttribute('name', name);
   });
 
   it('renders a provided id associating the input and label', () => {
     const { getByRole, getByText } = render(
-      <Radio label={ label } name={ name } value={ value } id="foo" />
+      <RadioButton label={ label } name={ name } value={ value } id="foo" />
     );
 
-    expect(getByRole(radio)).toHaveAttribute('id', 'foo');
+    expect(getByRole(role)).toHaveAttribute('id', 'foo');
     expect(getByText(label)).toHaveAttribute('for', 'foo');
   });
 
   it('renders a generated id associating the input and label', () => {
     const { getByLabelText } = render(
-      <Radio label={ label } name={ name } value={ value } />
+      <RadioButton label={ label } name={ name } value={ value } />
     );
 
     expect(getByLabelText(label)).toBeTruthy();
@@ -68,20 +68,20 @@ describe("Radio", () => {
     ['required']
   ])('renders %s attribute', (attr: string) => {
     const { getByRole } = render(
-      <Radio label={ label } value={ value } name={ name } { ...{ [attr]: true } } />
+      <RadioButton label={ label } value={ value } name={ name } { ...{ [attr]: true } } />
     );
 
-    expect(getByRole(radio)).toHaveAttribute(attr);
+    expect(getByRole(role)).toHaveAttribute(attr);
   });
 
   it('invokes onChange with expected args when change input event fires', () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
-      <Radio onChange={ handle } label={ label } value={ value } name={ name } />
+      <RadioButton onChange={ handle } label={ label } value={ value } name={ name } />
     );
 
-    fireEvent.click(getByRole(radio));
+    fireEvent.click(getByRole(role));
 
     expect(handle).toHaveBeenCalledTimes(1);
     expect(handle).toHaveBeenLastCalledWith(
@@ -97,12 +97,12 @@ describe("Radio", () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
-      <Radio { ...{ [prop]: handle } } label={ label } value={ value } name={ name } />
+      <RadioButton { ...{ [prop]: handle } } label={ label } value={ value } name={ name } />
     );
 
     fireEvent[type].call(
       fireEvent,
-      getByRole(radio),
+      getByRole(role),
     );
 
     expect(handle).toHaveBeenCalledTimes(1);
@@ -115,12 +115,12 @@ describe("Radio", () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
-      <Radio inputRef={ handle } label={ label } value={ value } name={ name } />
+      <RadioButton inputRef={ handle } label={ label } value={ value } name={ name } />
     );
 
     expect(handle).toHaveBeenCalledTimes(1);
-    expect(handle).toHaveBeenLastCalledWith(getByRole(radio));
+    expect(handle).toHaveBeenLastCalledWith(getByRole(role));
   });
 
-  a11yCheck(() => render(<Radio label={ label } value={ value } name={ name } />));
+  a11yCheck(() => render(<RadioButton label={ label } value={ value } name={ name } />));
 });
