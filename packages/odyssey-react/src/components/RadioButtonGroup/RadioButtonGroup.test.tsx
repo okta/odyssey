@@ -13,7 +13,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import RadioGroup from ".";
-import Radio from "../Radio";
+import RadioButton from "../RadioButton";
 
 const group = 'group';
 const legend = 'Select speed';
@@ -24,9 +24,9 @@ const tree = (
     legend={ legend }
     name={ name }
   >
-    <Radio label="Lightspeed" value="light" />
-    <Radio label="Warp speed" value="warp" />
-    <Radio label="Ludicrous speed" value="ludicrous" />
+    <RadioButton label="Lightspeed" value="light" />
+    <RadioButton label="Warp speed" value="warp" />
+    <RadioButton label="Ludicrous speed" value="ludicrous" />
   </RadioGroup>
 );
 

@@ -12,13 +12,13 @@
 
 import type { Story } from "@storybook/react";
 import React from "react";
-import RadioGroup from ".";
-import Radio from "../Radio";
+import RadioButtonGroup from ".";
+import RadioButton from "../RadioButton";
 import type { Props } from ".";
 
 export default {
-  title: `Components/RadioGroup`,
-  component: RadioGroup,
+  title: `Components/RadioButtonGroup`,
+  component: RadioButtonGroup,
   args: {
     legend: 'Select speed',
     name: 'speed',
@@ -37,11 +37,11 @@ export default {
 };
 
 const Template: Story<Props> = (args) => (
-  <RadioGroup { ...args } >
-    <Radio label="Lightspeed" value="light" />
-    <Radio label="Warp speed" value="warp" />
-    <Radio label="Ludicrous speed" value="ludicrous" />
-  </RadioGroup>
+  <RadioButtonGroup { ...args } >
+    <RadioButton label="Lightspeed" value="light" />
+    <RadioButton label="Warp speed" value="warp" />
+    <RadioButton label="Ludicrous speed" value="ludicrous" />
+  </RadioButtonGroup>
 );
 
 export const Default = Template.bind({});

@@ -19,13 +19,12 @@ import type {
   ReactElement,
   ComponentProps
 } from 'react';
-import Radio from '../Radio';
-//import { useCx } from '../../utils';
+import RadioButton from '../RadioButton';
 
-type RadioType = ReactElement<ComponentProps<typeof Radio>>;
+type RadioType = ReactElement<ComponentProps<typeof RadioButton>>;
 
 function isRadio(node: ReactNode | RadioType): node is RadioType {
-  return (node as RadioType)?.type === Radio;
+  return (node as RadioType)?.type === RadioButton;
 }
 
 export type Props = {
