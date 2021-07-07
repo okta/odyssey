@@ -11,25 +11,21 @@
  */
 
 import type { Story } from "@storybook/react";
-import React from "react";
-import TextInput from ".";
+import React, { useEffect } from "react";
+import RadioButton from ".";
 import type { Props } from ".";
 
 export default {
-  title: `Components/TextInput`,
-  component: TextInput,
+  title: `Components/RadioButton`,
+  component: RadioButton,
   args: {
-    label: 'Destination',
-    optionalLabel: 'Optional'
+    label: 'Lightspeed',
+    value: '1',
   },
   argTypes: {
     required: { control: 'boolean' },
     disabled: { control: 'boolean' },
-    readonly: { control: 'boolean' },
-    defaultValue: { control: 'text' },
-    optionalLabel: { control: 'text' },
-    placeholder: { control: 'text' },
-    type: { control: 'radio' },
+    checked: { control: 'boolean' },
     value: { control: 'text' },
     id: { control: 'text' },
     name: { control: 'text' },
@@ -39,17 +35,21 @@ export default {
   },
 };
 
-const Template: Story<Props> = (props) => (
-  <TextInput {...props} />
+const Template: Story<Props> = (args) => (
+  <RadioButton { ...args } />
 );
 
-export const Text = Template.bind({});
-Text.args = {
-  defaultValue: 'Jupiter',
+export const Default = Template.bind({});
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true
 };
 
-export const Search = Template.bind({});
-Search.args = {
-  defaultValue: 'Search Planets',
-  type: 'search'
-};
+export const Invalid = Template.bind({});
+Invalid.decorators = [
+  (Story) => {
+    useEffect(() => window.document.querySelector('input')?.setCustomValidity('oops'));
+    return <Story />;
+  }
+];
