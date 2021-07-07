@@ -11,7 +11,6 @@
  */
 
 import React from "react";
-import type { ReactText } from "react";
 import { Story } from "@storybook/react";
 import formatMessage from "format-message";
 import Button from ".";
@@ -36,9 +35,8 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({children = "Button label", variant = "primary", disabled, onClick, wide }) => {
+const Template: Story<Props> = ({variant = "primary", disabled, onClick, wide }) => {
   const label = formatMessage(`variant.${variant}`);
-  // const label = messages[`variant.${variant}`] as ReactText;
 
   return (
     <Button variant={variant} onClick={onClick} disabled={disabled} wide={wide} children={label} />
