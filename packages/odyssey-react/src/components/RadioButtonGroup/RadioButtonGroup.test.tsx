@@ -12,7 +12,7 @@
 
 import React from "react";
 import { render } from "@testing-library/react";
-import RadioGroup from ".";
+import RadioButtonGroup from ".";
 import RadioButton from "../RadioButton";
 
 const group = 'group';
@@ -20,17 +20,17 @@ const legend = 'Select speed';
 const name = 'speed';
 
 const tree = (
-  <RadioGroup
+  <RadioButtonGroup
     legend={ legend }
     name={ name }
   >
     <RadioButton label="Lightspeed" value="light" />
     <RadioButton label="Warp speed" value="warp" />
     <RadioButton label="Ludicrous speed" value="ludicrous" />
-  </RadioGroup>
+  </RadioButtonGroup>
 );
 
-describe("RadioGroup", () => {
+describe("RadioButtonGroup", () => {
   it('renders visibly into the document', () => {
     const { getByRole } = render(tree);
 
@@ -39,10 +39,10 @@ describe("RadioGroup", () => {
 
   it('renders through children that are not expected Radio components', () => {
     const { getByRole } = render(
-      // @ts-expect-error 'RadioGroup' components don't accept text as child elements.
-      <RadioGroup legend={ legend } name={ name }>
+      // @ts-expect-error 'RadioButtonGroup' components don't accept text as child elements.
+      <RadioButtonGroup legend={ legend } name={ name }>
         oops
-      </RadioGroup>
+      </RadioButtonGroup>
     );
 
     expect(getByRole(group)).toContainHTML('oops');
