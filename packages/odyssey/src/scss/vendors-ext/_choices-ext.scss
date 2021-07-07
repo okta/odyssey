@@ -306,7 +306,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     font-size: $size-body-base;
     font-weight: 400;
     line-height: calc((#{$base-line-height} * 1em) - 2px); // Adjust for pill border
-    word-break: break-all;
+    overflow-wrap: break-word;
     vertical-align: middle;
 
     &[data-deletable] {
@@ -343,7 +343,7 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   border-end-start-radius: $base-border-radius;
   border-end-end-radius: $base-border-radius;
   background-color: $white;
-  word-break: break-all;
+  overflow-wrap: break-word;
   will-change: visibility;
 
   &.is-ods-select-active {
