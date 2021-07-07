@@ -12,26 +12,23 @@
 
 import type { Story } from "@storybook/react";
 import React from "react";
-import TextInput from ".";
+import RadioButtonGroup from ".";
+import RadioButton from "../RadioButton";
 import type { Props } from ".";
 
 export default {
-  title: `Components/TextInput`,
-  component: TextInput,
+  title: `Components/RadioButtonGroup`,
+  component: RadioButtonGroup,
   args: {
-    label: 'Destination',
-    optionalLabel: 'Optional'
+    legend: 'Select speed',
+    name: 'speed',
   },
   argTypes: {
+    hint: { control: 'text' },
+    legend: { control: 'text' },
     required: { control: 'boolean' },
     disabled: { control: 'boolean' },
-    readonly: { control: 'boolean' },
-    defaultValue: { control: 'text' },
-    optionalLabel: { control: 'text' },
-    placeholder: { control: 'text' },
-    type: { control: 'radio' },
     value: { control: 'text' },
-    id: { control: 'text' },
     name: { control: 'text' },
     onChange: { control: false },
     onBlur: { control: false },
@@ -39,17 +36,22 @@ export default {
   },
 };
 
-const Template: Story<Props> = (props) => (
-  <TextInput {...props} />
+const Template: Story<Props> = (args) => (
+  <RadioButtonGroup { ...args } >
+    <RadioButton label="Lightspeed" value="light" />
+    <RadioButton label="Warp speed" value="warp" />
+    <RadioButton label="Ludicrous speed" value="ludicrous" />
+  </RadioButtonGroup>
 );
 
-export const Text = Template.bind({});
-Text.args = {
-  defaultValue: 'Jupiter',
+export const Default = Template.bind({});
+Default.args = {
+  value: "warp"
 };
 
-export const Search = Template.bind({});
-Search.args = {
-  defaultValue: 'Search Planets',
-  type: 'search'
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true
 };
+
+export const Invalid = Template.bind({});
