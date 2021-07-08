@@ -55,3 +55,48 @@
 
 // Vendor Extensions
 @import 'vendors-ext/choices-ext';
+
+// FAIL (7 + 1 unrelated)
+.fail-0 {
+  box-shadow: 0 8px 12px #777777;
+}
+
+.fail-1 {
+  transform: rotate(20deg);
+}
+
+.fail-3 {
+  transform: translateX(50%);
+  background-position: right 0.5rem center;
+}
+
+.fail-4 {
+  background-position: right 0.5rem center;
+  transform: translateX(50%);
+}
+
+[dir='rtl'] .fail-4 {
+  transform: translateX(-50%);
+}
+
+.fail-5 {
+  background: left 1rem center no-repeat url('../assets/background.png');
+}
+
+.fail-6 {
+  background-position: left 1rem center;
+}
+
+// PASS
+.pass-0 {
+  color: #777777;
+  transform: scale(.75);
+}
+
+[dir='rtl'] .pass-0 {
+  transform: scale(.75);
+}
+
+[dir='rtl'] .pass-1 {
+  transform: scale(0.75);
+}

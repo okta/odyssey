@@ -1,4 +1,4 @@
-# property-rtl-selector
+# odyssey/property-rtl-selector
 
 Specify physcial CSS properties that require an additional `[dir='rtl']` selector for RTL support.
 
