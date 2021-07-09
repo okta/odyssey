@@ -10,34 +10,42 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+const _ = require('lodash');
 const stylelint = require('stylelint');
-const { validateOptions, report } = stylelint.utils;
+const { matchesStringOrRegExp, report, ruleMessages, validateOptions, vendor } = stylelint.utils;
+
 const ruleName = 'odyssey/property-rtl-selector';
-const messages = stylelint.utils.ruleMessages(ruleName, {
-  error: 'error: odyssey/property-rtl-selector',
+
+const messages = ruleMessages(ruleName, {
+  error: (prop, value) => `Expected ${prop}: ${value} combination to have RTL fallback`,
 });
 
-function rule(_, options = {}, context = {}) {
+function rule(list) {
   return function ruleBody(root, result) {
-    const validOptions = validateOptions(
-      root,
-      ruleName,
-      {
-          //No options for now...
-      }
-    );
+    const validOptions = validateOptions(result, ruleName, { // Expects format of `{ 'transform': ['/translateX/'] }`
+			actual: list,
+			possible: [_.isObject],
+		});
 
     if (!validOptions) { // If the options are invalid, don't lint
       return;
     }
 
     root.walkDecls(decl => {
+      const prop = decl.prop;
+			const value = decl.value;
+
+			const unprefixedProp = vendor.unprefixed(prop);
+			const propList = _.find(list, (values, propIdentifier) =>
+				matchesStringOrRegExp(unprefixedProp, propIdentifier),
+			);
+
       const hasProperty = (() => (
         [/^box-shadow$/, /^transform$/, /^background/]
           .filter((property) => property.test(decl.prop)).length
       ))()
         const hasDirRtl = decl.parent.selector.includes(`[dir='rtl']`) || decl.parent.selector.includes(`[dir="rtl"]`);
-      
+
       if (!hasProperty && hasDirRtl) {
           return; // Nothing to do with this node - continue
       }
@@ -46,7 +54,7 @@ function rule(_, options = {}, context = {}) {
         report({
             ruleName,
             result: result,
-            message: messages.error, // Build the reported message
+            message: messages.error(prop, value), // Build the reported message
             node: decl, // Specify the reported node
             word: decl.parent.selector, // Which exact word caused the error? This positions the error properly
         });

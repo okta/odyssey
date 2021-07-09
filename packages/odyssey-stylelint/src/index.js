@@ -23,7 +23,7 @@ module.exports = {
   ],
   rules: {
     'odyssey/header': true,
-    'odyssey/property-rtl-selector': true,
+    'odyssey/property-rtl-selector': { 'box-shadow': ['/./'], 'transform': ['/./'], '/^background/': ['/./'] },
     'at-rule-empty-line-before': [
       'always',
       {
