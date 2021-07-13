@@ -1,6 +1,6 @@
 # odyssey/property-rtl-selector
 
-Specify physcial CSS properties that require an additional `[dir='rtl']` selector for RTL support.
+Specify physical CSS property/value combinations that require an additional `[dir='rtl']` selector for RTL support.
 
 ```css
 .foo {
@@ -14,14 +14,14 @@ Specify physcial CSS properties that require an additional `[dir='rtl']` selecto
 
 ## Options
 
-`array|string`: `["array", "of", "unprefixed", "properties", or "/regex/"]|"property"|"/regex/"`
+`object: { "unprefixed-property-name": ["array", "of", "values"], "unprefixed-property-name": ["/regex/", "non-regex", /regex/] }`
 
-A string surrounded with `"/"` is interpreted as a regular expression. This allows easy targeting of shorthands. For example: `/^background/` will match `background`, `background-size`, `background-color`, etc.
+A string surrounded by `"/"` is interpreted as a regular expression. This allows easy targeting of shorthands. For example: `/^background/` will match `background`, `background-size`, `background-color`, etc.
 
 Given:
 
 ```
-["box-shadow", "transform", "/^background/"]
+'odyssey/property-rtl-selector': { 'box-shadow': ['/./'], 'transform': ['/./'], '/^background/': ['/./'] },
 ```
 
 The following patterns **are** considered violations:
