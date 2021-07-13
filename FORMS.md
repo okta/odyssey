@@ -10,28 +10,23 @@ A container component that controls form behavior and provides layout slots.
 
 Form-specific HTML attributes we may need props for.
 
-- `accept-charset`: Space-separated character encodings the server accepts. The browser uses them in the order in which they are listed. The default value means the same encoding as the page.
-- `action`: The URL that processes the form submission. This value can be overridden by a formaction attribute on a `<button>`, `<input type="submit">`, or `<input type="image">` element.
-- `autocomplete`: Indicates whether input elements can by default have their values automatically completed by the browser. autocomplete attributes on form elements override it on `<form>`. Possible values:
-  - `off`: The browser may not automatically complete entries. (Browsers tend to ignore this for suspected login forms; see The autocomplete attribute and login fields.)
-  - `on`: The browser may automatically complete entries.
-- `enctype`: If the value of the method attribute is post, enctype is the MIME type of the form submission. This value can be overridden by formenctype attributes on `<button>`, `<input type="submit">`, or `<input type="image">` elements. Possible values:
-  - `application/x-www-form-urlencoded`: The default value.
-  - `multipart/form-data`: Use this if the form contains `<input>` elements with type=file.
-  - `text/plain`: Introduced by HTML5 for debugging purposes.
-- `method`: The HTTP method to submit the form with. This value is overridden by formmethod attributes on `<button>`, `<input type="submit">`, or `<input type="image">` elements. Possible (case insensitive) values:
-  - `post`: The POST method; form data sent as the request body.
-  - `get`: The GET method; form data appended to the action URL with a ? separator. Use this method when the form has no side-effects.
-  - `dialog`: When the form is inside a `<dialog>`, closes the dialog on submission.
-- `name`: The name of the form. The value must not be the empty string, and must be unique among the `form` elements in the forms collection that it is in, if any.
-- `novalidate`: This Boolean attribute indicates that the form shouldn't be validated when submitted. If this attribute is not set (and therefore the form is validated), it can be overridden by a formnovalidate attribute on a `<button>`, `<input type="submit">`, or `<input type="image">` element belonging to the form.
-- `rel`: Creates a hyperlink or annotation depending on the value, see the rel attribute for details.
-- `target`: Indicates where to display the response after submitting the form. In HTML 4, this is the name/keyword for a frame. In HTML5, it is a name/keyword for a browsing context (for example, tab, window, or iframe). This value can be overridden by a formtarget attribute on a `<button>`, `<input type="submit">`, or `<input type="image">` element. The following keywords have special meanings:
-  - `_self` (default): Load into the same browsing context as the current one.
-  - `_blank`: Load into a new unnamed browsing context.
-  - `_parent`: Load into the parent browsing context of the current one. If no parent, behaves the same as `_self`.
-  - `_top`: Load into the top-level browsing context (i.e., the browsing context that is an ancestor of the current one and has no parent). If no parent, behaves the same as `_self`.
+#### Submission-related
 
+These values can be overridden by a `formaction` attribute on a `<button>`, `<input type="submit">`, or `<input type="image">` element.
+
+- `action`: The URL that processes the form submission.
+- `enctype`: If the value of the method attribute is post, enctype is the MIME type of the form submission. Possible values: `application/x-www-form-urlencoded` (default), `multipart/form-data` (use when form contains `<input type='file'>` elements), `text/plain` (debugging).
+- `method`: The HTTP method to submit the form with. Possible (case insensitive) values: `get`, `post`, `dialog`.
+- `novalidate`: This Boolean attribute indicates that the form shouldn't be validated when submitted.
+- `target`: Indicates where to display the response after submitting the form. The following values have special meanings: `_self` (default), `_blank`, `_parent`, `_top`.
+
+#### Likely unnec
+
+- `accept-charset`: Space-separated character encodings the server accepts. The default value means the same encoding as the page.
+- `autocomplete`: Indicates whether input elements can by default have their values automatically completed by the browser. autocomplete attributes on form elements override it on `<form>`. Possible values: `off`, `on`.
+  - WCAG requires that we specify this attribute on individual inputs that collect data about the user.
+- `name`: The name of the form. The value must not be the empty string, and must be unique among the `form` elements in the forms collection that it is in, if any.
+- `rel`: Creates a hyperlink or annotation depending on the value, see the rel attribute for details.
 
 ### Content areas
 
@@ -66,9 +61,9 @@ Form-specific HTML attributes we may need props for.
 
 Fieldset-specific HTML attributes we may need props for.
 
-- disabled
-- form
-- name
+- `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled. Note that form elements inside the `<legend>` element won't be disabled.
+- `form`: This attribute takes the value of the `id` attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements. You can check which elements are associated with a form via JavaScript, using `HTMLFormElement.elements`.
+- `name`: The name associated with the group.
 
 ### Content areas
 
@@ -90,9 +85,9 @@ Fieldset-specific HTML attributes we may need props for.
 
 Fieldset-specific HTML attributes we may need props for.
 
-- disabled
-- form
-- name
+- `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled, meaning they are not editable and won't be submitted along with the `<form>`. They won't receive any browsing events, like mouse clicks or focus-related events. By default browsers display such controls grayed out. Note that form elements inside the `<legend>` element won't be disabled.
+- `form`: This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements. You can check which elements are associated with a form via JavaScript, using `HTMLFormElement.elements`.
+- `name`: The name associated with the group.
 
 ### Content areas
 
