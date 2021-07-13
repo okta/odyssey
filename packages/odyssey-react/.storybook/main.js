@@ -14,7 +14,23 @@ module.exports = {
   "addons": [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
+    "@storybook/addon-a11y",
     "@storybook/preset-scss",
-    "@storybook/addon-a11y"
+    {
+      name: "@storybook/addon-postcss",
+      options: {
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
+        cssLoaderOptions: {
+          modules: {
+            getLocalIdent ({ resourcePath }, _, local) {
+              const folder = resourcePath.split('/').slice(-2,-1).pop();
+              return `ods-${folder}-${local}`.toLowerCase();
+            }
+          }
+        }
+      }
+    },
   ]
-}
+};
