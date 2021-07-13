@@ -55,6 +55,34 @@ These values can be overridden by a `formaction` attribute on a `<button>`, `<in
 </form>
 ```
 
+```react
+<Form>
+  <Form.Header>
+    <Heading>/<Form.Title>Form Title</Form.Title>/</Heading>
+    <Form.Desc>This is a caption for the form.</Form.Desc>
+  </Form.Header>
+  <Form.Error>
+    <Infobox variant="error" />
+  </Form.Error>
+  <Form.Main>
+    <FieldGroup title="Field Group">
+      <Field label="A Field" type="text" hint="whatever" required/>
+      <Field>
+        <Field.Label>A Field</Field.Label>
+        <Field.Hint>A field hint.</Field.Hint>
+        <Input type="text" name="whatever" value="dog"/>
+      </Field>
+    </FieldGroup>
+  </Form.Main>
+  <Form.Footer>
+    <ButtonGroup>
+      <Button>Reset</Button>
+      <Button>Submit</Button>
+    </ButtonGroup>
+  </Form.Footer>
+</Form>
+```
+
 ## FieldGroup
 
 ### Non-global attrs
@@ -106,3 +134,4 @@ Fieldset-specific HTML attributes we may need props for.
   <span class="ods-field--error">[...]</span>
 </fieldset>
 ```
+
