@@ -2,6 +2,103 @@
 
 # Form Components
 
+The purpose of this document is to outline the spectrum of components required to make up a complete Form.
+
+## Inputs
+
+Inputs are the atomic units around which the following components are built. Inputs represent unique controls and are not covered in this document, which seeks to outline the ubiquitous aspects of Forms.
+
+For the sake of clarity, when an Input component is referenced below, it includes only the concerns that make it unique. For example, an Input of the type RadioButtonGroup includes a set of RadioButtons, but not their associated Label, Hint, or Error. Those components belong to Field.
+
+## Field
+
+Field is the primary component for assembling forms. It includes all of the supporting context required by the Input.
+
+Because the requirements for both behavior and display of fields are stringent, I recommend that authors not rely on composition to assemble their fields if possible.
+
+### Non-global attrs
+
+Fieldset-specific HTML attributes/behaviors:
+
+- `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled.
+  - Form elements inside the `<legend>` element won't be disabled, but this doesn't seem like a valid use case for Odyssey.
+- `name`: The name associated with the group.
+- `form`: This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements.
+
+### Content
+
+- FieldLabel: a text label for the field (element may be `<label>` or `<legend>` depending on Field input)
+  - The Label also indicates the Field's optional/required status
+- FieldHint: context for the field
+- Input: the UI control
+- FieldValidation: any error or success state messaging for the field
+
+### Psuedo-structure
+
+```html
+// via props
+
+<Field
+  label="A field"
+  hint="This is a field you should fill in."
+  type="text"
+  name="a-field"
+  optional
+  disabled
+  autocomplete="fname"
+/>
+
+
+// via composition
+
+<Field>
+  <Field.Label>A field</Field.Label>
+  <Field.Hint>This is a field you should fill in.</Field.Hint>
+  <Input/>
+  <Field.Validation type="error">This is an error message.</Field.Validation>
+</Field>
+```
+
+### HTML
+
+```html
+<fieldset class="ods-field">
+  <label class="ods-field--label" for="first-name">
+    First name
+    <span class="ods-field--optional">Optional</span>
+  </label>
+  <aside class="ods-field--hint" id="first-name-hint">
+    Please enter your first name.
+  </aside>
+  <input class="ods-text-input" type="text" name="first-name" id="first-name" spellcheck="false" value="" autocomplete="fname" aria-describedby="first-name-hint first-name-error">
+  <aside class="ods-field--error" id="first-name-error"><span class="ods-u-visually-hidden">Error:</span> Numbers are disallowed.</aside>
+</fieldset>
+```
+
+## FieldGroup
+
+### Non-global attrs
+
+Fieldset-specific HTML attributes we may need props for.
+
+- `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled. Note that form elements inside the `<legend>` element won't be disabled.
+- `form`: This attribute takes the value of the `id` attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements. You can check which elements are associated with a form via JavaScript, using `HTMLFormElement.elements`.
+- `name`: The name associated with the group.
+
+### Content areas
+
+- Title: contains legend for FieldGroup
+- Slot: contains Fields
+
+### Component markup
+
+```html
+<fieldset class="ods-field-group">
+  <legend class="ods-field-group--title">[...]</legend>
+  [...]
+</fieldset>
+```
+
 ## Form
 
 A container component that controls form behavior and provides layout slots.
@@ -82,56 +179,3 @@ These values can be overridden by a `formaction` attribute on a `<button>`, `<in
   </Form.Footer>
 </Form>
 ```
-
-## FieldGroup
-
-### Non-global attrs
-
-Fieldset-specific HTML attributes we may need props for.
-
-- `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled. Note that form elements inside the `<legend>` element won't be disabled.
-- `form`: This attribute takes the value of the `id` attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements. You can check which elements are associated with a form via JavaScript, using `HTMLFormElement.elements`.
-- `name`: The name associated with the group.
-
-### Content areas
-
-- Title: contains legend for FieldGroup
-- Slot: contains Fields
-
-### Component markup
-
-```html
-<fieldset class="ods-field-group">
-  <legend class="ods-field-group--title">[...]</legend>
-  [...]
-</fieldset>
-```
-
-## Field
-
-### Non-global attrs
-
-Fieldset-specific HTML attributes we may need props for.
-
-- `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled, meaning they are not editable and won't be submitted along with the `<form>`. They won't receive any browsing events, like mouse clicks or focus-related events. By default browsers display such controls grayed out. Note that form elements inside the `<legend>` element won't be disabled.
-- `form`: This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements. You can check which elements are associated with a form via JavaScript, using `HTMLFormElement.elements`.
-- `name`: The name associated with the group.
-
-### Content areas
-
-- Label: a text label for the field (element may be `<label>` or `<legend>` depending on Field input, Optional status
-- Hint: context for the field
-- Slot: an Input or InputGroup
-- Error: any errors for the field
-
-### Component markup
-
-```html
-<fieldset class="ods-field">
-  <label>/<legend>[...]</label>/</legend>
-  <span class="ods-field--hint">[...]</span>
-  [...]
-  <span class="ods-field--error">[...]</span>
-</fieldset>
-```
-
