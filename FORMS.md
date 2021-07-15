@@ -4,15 +4,17 @@
 
 The purpose of this document is to outline the spectrum of components required to make up a complete Form.
 
+**Note:** All code examples are for illustrative purposes only. Structure and behavior may change based on subsequent designs for these components. There are also opportunities for re-use across components; for example, Form.Title extending from Title.
+
 ## Inputs
 
 Inputs are the atomic units around which the following components are built. Inputs represent unique controls and are not covered in this document, which seeks to outline the ubiquitous aspects of Forms.
 
-For the sake of clarity, when an Input component is referenced below, it includes only the concerns that make it unique. For example, an Input of the type RadioButtonGroup includes a set of RadioButtons, but not their associated Label, Hint, or Error. Those components belong to Field.
+For the sake of clarity, when an Input component is referenced below, it includes only the concerns that make it unique. For example, an Input of the type RadioButtonGroup includes a set of RadioButtons, but *not* their associated Label, Hint, or Error. Those components belong to Field.
 
 ## Field
 
-Field is the primary component for assembling forms. It includes all of the supporting context required by the Input.
+Field is the primary component for assembling forms. It includes all of the supporting context required by the Input. This component would also be responsible for managing the appropriate application of `aria-` attributes and `id` associations between Inputs and their associated elements.
 
 Because the requirements for both behavior and display of fields are stringent, I recommend that authors not rely on composition to assemble their fields if possible.
 
@@ -21,9 +23,10 @@ Because the requirements for both behavior and display of fields are stringent, 
 Fieldset-specific HTML attributes/behaviors:
 
 - `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled.
+  - In the case of Field, putting this on the `fieldset` would have the desired behavior, but passing `disabled` to the Input itself would be less brittle.
 - `name`: The name associated with the group.
 - `form`: This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements.
-  - In the case of Field, this attribute could be passed to Input instead of the containing `fieldset` to create the ideal behavior here.
+  - In the case of Field, this attribute should be passed to Input instead of the containing `fieldset` to create the ideal behavior here.
 
 ### Content
 
@@ -83,20 +86,30 @@ Fieldset-specific HTML attributes/behaviors:
 
 - `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled.
   - Form elements inside the `<legend>` element won't be disabled, but this doesn't seem like a valid use case for Odyssey.
+  - In the case of FieldGroup, `disabled` could be passed to the child Fields (or their Inputs). Disabling whole FieldGroups on the parent `fieldset` is also viable.
 - `name`: The name associated with the group.
 - `form`: This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements.
-  - Because of the unintuitive behavior of this attribute, I recommend that this be relegated to use on Field or we provide a way to cascade this attribute to all child elements.
+  - Because of the unintuitive behavior of this attribute, I recommend that this be relegated to use on Field or we provide a way to cascade this attribute to all child Inputs.
 
 ### Content areas
 
 - Title: contains legend for FieldGroup
 - Slot: contains Fields
 
-### Component markup
+### Pseudo-Structure
+
+```html
+<FieldGroup>
+  <FieldGroup.Title>A Group of Fields</FieldGroup>
+  [...]
+</FieldGroup>
+```
+
+### HTML
 
 ```html
 <fieldset class="ods-field-group">
-  <legend class="ods-field-group--title">[...]</legend>
+  <legend class="ods-field-group--title">A Group of Fields</legend>
   [...]
 </fieldset>
 ```
@@ -134,6 +147,32 @@ These values can be overridden by a `formaction` attribute on a `<button>`, `<in
 - Error: contains an Infobox displaying Form-level errors
 - Footer: contains Form actions or action containers like ButtonGroup, also legalese
 
+### Pseudo-Structure
+
+```html
+<Form>
+  <Form.Header>
+    <Form.Title>Form Title</Form.Title>
+    <Form.Desc>This is a caption for the form.</Form.Desc>
+  </Form.Header>
+  <Form.Error>
+    <Infobox variant="error" />
+  </Form.Error>
+  <Form.Main>
+    <FieldGroup title="Field Group">
+      <Field label="First name" type="text" hint="Please input your first name." required/>
+      <Field label="Last name" type="number" hint="Please input your last name." required/>
+    </FieldGroup>
+  </Form.Main>
+  <Form.Footer>
+    <ButtonGroup>
+      <Button>Reset</Button>
+      <Button>Submit</Button>
+    </ButtonGroup>
+  </Form.Footer>
+</Form>
+```
+
 ### Component markup
 
 ```html
@@ -154,30 +193,3 @@ These values can be overridden by a `formaction` attribute on a `<button>`, `<in
 </form>
 ```
 
-```react
-<Form>
-  <Form.Header>
-    <Heading>/<Form.Title>Form Title</Form.Title>/</Heading>
-    <Form.Desc>This is a caption for the form.</Form.Desc>
-  </Form.Header>
-  <Form.Error>
-    <Infobox variant="error" />
-  </Form.Error>
-  <Form.Main>
-    <FieldGroup title="Field Group">
-      <Field label="A Field" type="text" hint="whatever" required/>
-      <Field>
-        <Field.Label>A Field</Field.Label>
-        <Field.Hint>A field hint.</Field.Hint>
-        <Input type="text" name="whatever" value="dog"/>
-      </Field>
-    </FieldGroup>
-  </Form.Main>
-  <Form.Footer>
-    <ButtonGroup>
-      <Button>Reset</Button>
-      <Button>Submit</Button>
-    </ButtonGroup>
-  </Form.Footer>
-</Form>
-```
