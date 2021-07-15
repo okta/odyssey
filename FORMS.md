@@ -2,9 +2,9 @@
 
 # Form Components
 
-The purpose of this document is to outline the spectrum of components required to make up a complete Form.
+The purpose of this document is to outline the spectrum of components required to make up a complete Form. This includes: Input, Field, FieldGroup, and Form.
 
-Each component below includes a list of attributes present in HTML that represent possible semantic states or behaviors. Design should review these lists to ensure that any attribute values that require user affordances are accounted for. For example: `disabled` or `:invalid`.
+Along with a general description and suggested structure, each component below includes a list of possible attributes and states. Design should review these lists to ensure that any values that require user affordances are accounted for. For example: `disabled` or `:invalid`.
 
 **Note:** All code examples are for illustrative purposes only. Structure and behavior may change based on subsequent designs for these components. There are also opportunities for re-use across components; for example, Form.Title extending from Title.
 
@@ -22,7 +22,7 @@ Because the requirements for both behavior and display of fields are stringent, 
 
 ### Non-global attrs
 
-#### Fieldset-specific HTML attributes/behaviors
+#### Fieldset-specific HTML attributes
 
 - `disabled`: If this Boolean attribute is set, all Inputs that are descendants of the `<fieldset>` are disabled.
   - In the case of Field, putting this on the `fieldset` would have the desired behavior, but passing `disabled` to the Input itself would be less brittle.
@@ -30,7 +30,7 @@ Because the requirements for both behavior and display of fields are stringent, 
 - `form`: This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements.
   - In the case of Field, this attribute should be passed to Input instead of the containing `fieldset` to create the ideal behavior here.
 
-#### Input-specific HTML attributes/behaviors
+#### Input-specific HTML attributes
 
 Inputs surface a huge list of attributes; these are the most relevant and global.
 
@@ -44,6 +44,34 @@ Inputs surface a huge list of attributes; these are the most relevant and global
 - `value`: Initial value of the Input.
 
 There are specific attributes that will need to be passed to individual Input types as well. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">This chart from MDN</a> provides an excellent breakdown.
+
+### States
+
+Many of these states are assigned or applicable to the `<input>` element. However, those Input states may be better reflected at the Field level. For example: dimming Field.Label for `disabled` elements; showing Field.Error only when an Input is `invalid`.
+
+- `active`: When the Input is activated by the user.
+- `autofill`: When an Input has been auto-filled by the browser.
+- `blank`: When an Input is empty.
+- `checked`: When Inputs like Radio and Checkbox are checked.
+- `dir`: The reading direction currently applied.
+- `disabled`: When an Input is disabled.
+- `enabled`: When an Input is enabled (rather than disabled). This is the default state.
+- `focus-within` When a child has `focus`.
+- `focus`: When the Input has focus.
+- `hover`: When the Input is hovered by a pointing device.
+- `in-range` When an Input is within the range constrictions. e.g. a slider.
+- `indeterminate`: When Inputs are in an indeterminate state. e.g. A "parent" checkbox for a group of mixed checked/unchecked Inputs.
+- `invalid`: When an Input has invalid contents/values.
+- `optional`: When an Input is optional.
+- `out-of-range`: When an Input is outside of range constrictions.
+- `placeholder-shown`: When placeholder text is visible.
+- `read-only`: When an Input cannot be changed by the user.
+- `read-wrate`: When an Input is user-editable (rather than read-only). This is the default state.
+- `required`: When an Input is required.
+- `target-within`: When a child is a `target`.
+- `target`: When the component is the target of a URL. e.g. `site.com/form#firstname`
+- `user-invalid`: When an Input is invalid, but only after a user has interacted with it.
+- `valid`: When an Input has valid contents/values.
 
 ### Content
 
@@ -99,7 +127,7 @@ There are specific attributes that will need to be passed to individual Input ty
 
 ### Non-global attrs
 
-Fieldset-specific HTML attributes/behaviors:
+Fieldset-specific HTML attributes:
 
 - `disabled`: If this Boolean attribute is set, all Inputs that are descendants of the `<fieldset>` are disabled.
   - Form elements inside the `<legend>` element won't be disabled, but this doesn't seem like a valid use case for Odyssey.
