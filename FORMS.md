@@ -4,6 +4,8 @@
 
 The purpose of this document is to outline the spectrum of components required to make up a complete Form.
 
+Each component below includes a list of attributes present in HTML that represent possible semantic states or behaviors. Design should review these lists to ensure that any attribute values that require user affordances are accounted for. For example: `disabled` or `:invalid`.
+
 **Note:** All code examples are for illustrative purposes only. Structure and behavior may change based on subsequent designs for these components. There are also opportunities for re-use across components; for example, Form.Title extending from Title.
 
 ## Inputs
@@ -20,13 +22,28 @@ Because the requirements for both behavior and display of fields are stringent, 
 
 ### Non-global attrs
 
-Fieldset-specific HTML attributes/behaviors:
+#### Fieldset-specific HTML attributes/behaviors
 
-- `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled.
+- `disabled`: If this Boolean attribute is set, all Inputs that are descendants of the `<fieldset>` are disabled.
   - In the case of Field, putting this on the `fieldset` would have the desired behavior, but passing `disabled` to the Input itself would be less brittle.
 - `name`: The name associated with the group.
 - `form`: This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements.
   - In the case of Field, this attribute should be passed to Input instead of the containing `fieldset` to create the ideal behavior here.
+
+#### Input-specific HTML attributes/behaviors
+
+Inputs surface a huge list of attributes; these are the most relevant and global.
+
+- `autocomplete`: The autocomplete attribute takes as its value a space-separated string that describes what, if any, type of autocomplete functionality the Input should provide. In cases where we are collecting information about a user, WCAG requires specifying this attribute to set the Field's purpose.
+- `disabled`: Whether the Input is disabled. Disabled Inputs do not receive click events and are not submitted with the Form. See above.
+- `form`: Associates the Input with a form element. See above.
+- `name`: Name of the Input. Submitted with the form as part of a name/value pair.
+- `readonly`: Value is not editable.
+- `required`: A value is required.
+- `type`: Type of Input.
+- `value`: Initial value of the Input.
+
+There are specific attributes that will need to be passed to individual Input types as well. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">This chart from MDN</a> provides an excellent breakdown.
 
 ### Content
 
@@ -84,7 +101,7 @@ Fieldset-specific HTML attributes/behaviors:
 
 Fieldset-specific HTML attributes/behaviors:
 
-- `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled.
+- `disabled`: If this Boolean attribute is set, all Inputs that are descendants of the `<fieldset>` are disabled.
   - Form elements inside the `<legend>` element won't be disabled, but this doesn't seem like a valid use case for Odyssey.
   - In the case of FieldGroup, `disabled` could be passed to the child Fields (or their Inputs). Disabling whole FieldGroups on the parent `fieldset` is also viable.
 - `name`: The name associated with the group.
