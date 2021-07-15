@@ -66,7 +66,7 @@ Many of these states are assigned or applicable to the `<input>` element. Howeve
 - `out-of-range`: When an Input is outside of range constrictions.
 - `placeholder-shown`: When placeholder text is visible.
 - `read-only`: When an Input cannot be changed by the user.
-- `read-wrate`: When an Input is user-editable (rather than read-only). This is the default state.
+- `read-write`: When an Input is user-editable (rather than read-only). This is the default state.
 - `required`: When an Input is required.
 - `target-within`: When a child is a `target`.
 - `target`: When the component is the target of a URL. e.g. `site.com/form#firstname`
@@ -139,13 +139,15 @@ Fieldset-specific HTML attributes:
 ### Content areas
 
 - Title: contains legend for FieldGroup
+- Descr: contains a description for a FieldGroup
 - Slot: contains Fields
 
 ### Pseudo-Structure
 
 ```html
 <FieldGroup>
-  <FieldGroup.Title>A Group of Fields</FieldGroup>
+  <FieldGroup.Title>A Group of Fields</FieldGroup.Title>
+  <FieldGroup.Desc>This is a description of the FieldGroup.</FieldGroup.Desc>
   [...]
 </FieldGroup>
 ```
@@ -155,6 +157,7 @@ Fieldset-specific HTML attributes:
 ```html
 <fieldset class="ods-field-group">
   <legend class="ods-field-group--title">A Group of Fields</legend>
+  <p class="ods-field-group--desc">This is a description of the FieldGroup.</p>
   [...]
 </fieldset>
 ```
