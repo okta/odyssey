@@ -21,9 +21,9 @@ Because the requirements for both behavior and display of fields are stringent, 
 Fieldset-specific HTML attributes/behaviors:
 
 - `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled.
-  - Form elements inside the `<legend>` element won't be disabled, but this doesn't seem like a valid use case for Odyssey.
 - `name`: The name associated with the group.
 - `form`: This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements.
+  - In the case of Field, this attribute could be passed to Input instead of the containing `fieldset` to create the ideal behavior here.
 
 ### Content
 
@@ -79,11 +79,13 @@ Fieldset-specific HTML attributes/behaviors:
 
 ### Non-global attrs
 
-Fieldset-specific HTML attributes we may need props for.
+Fieldset-specific HTML attributes/behaviors:
 
-- `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled. Note that form elements inside the `<legend>` element won't be disabled.
-- `form`: This attribute takes the value of the `id` attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements. You can check which elements are associated with a form via JavaScript, using `HTMLFormElement.elements`.
+- `disabled`: If this Boolean attribute is set, all form controls that are descendants of the `<fieldset>` are disabled.
+  - Form elements inside the `<legend>` element won't be disabled, but this doesn't seem like a valid use case for Odyssey.
 - `name`: The name associated with the group.
+- `form`: This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements.
+  - Because of the unintuitive behavior of this attribute, I recommend that this be relegated to use on Field or we provide a way to cascade this attribute to all child elements.
 
 ### Content areas
 
