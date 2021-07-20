@@ -24,7 +24,8 @@ export default {
       control: { type: null }
     },
     title: {
-      control: { type: "text", }
+      defaultValue: "Infobox title",
+      control: { type: "text" }
     }
   }
 };
@@ -42,25 +43,21 @@ const Template: Story<Props> = ({title, variant}) => (
 
 export const Info = Template.bind({});
 Info.args = {
-  title: "Title",
   variant: "info"
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
-  title: "Title",
   variant: "danger"
 };
 
 export const Caution = Template.bind({});
 Caution.args = {
-  title: "Title",
   variant: "caution"
 };
 
 export const Success = Template.bind({});
 Success.args = {
-  title: "Title",
   variant: "success"
 };
 

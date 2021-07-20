@@ -87,7 +87,7 @@ export type StaticComponents = {
     >
       <span className="ods-infobox--icon">
         {/* @todo Insert <Icon> component */}
-        !!!
+        ‽
       </span>
       {title && <h1 className="ods-infobox--title">{title}</h1>}
       {children && children}
