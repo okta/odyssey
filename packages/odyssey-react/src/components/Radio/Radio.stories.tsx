@@ -12,13 +12,12 @@
 
 import type { Story } from "@storybook/react";
 import React from "react";
-import RadioButtonGroup from ".";
-import RadioButton from "../RadioButton";
-import type { Props } from ".";
+import Radio from ".";
+import type { Props } from "./RadioGroup";
 
 export default {
-  title: `Components/RadioButtonGroup`,
-  component: RadioButtonGroup,
+  title: `Components/Radio`,
+  component: Radio.Group,
   args: {
     legend: 'Select speed',
     name: 'speed',
@@ -28,20 +27,21 @@ export default {
     legend: { control: 'text' },
     required: { control: 'boolean' },
     disabled: { control: 'boolean' },
-    value: { control: 'text' },
+    value: {
+      control: 'radio',
+      options: ['light', 'warp', 'ludicrous']
+    },
     name: { control: 'text' },
     onChange: { control: false },
-    onBlur: { control: false },
-    onFocus: { control: false }
   },
 };
 
 const Template: Story<Props> = (args) => (
-  <RadioButtonGroup { ...args } >
-    <RadioButton label="Lightspeed" value="light" />
-    <RadioButton label="Warp speed" value="warp" />
-    <RadioButton label="Ludicrous speed" value="ludicrous" />
-  </RadioButtonGroup>
+  <Radio.Group {...args} >
+    <Radio.Button label="Lightspeed" value="light" />
+    <Radio.Button label="Warp speed" value="warp" />
+    <Radio.Button label="Ludicrous speed" value="ludicrous" />
+  </Radio.Group>
 );
 
 export const Default = Template.bind({});
