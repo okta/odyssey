@@ -11,7 +11,7 @@
  */
 
 import React from 'react';
-import type { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { useCx, useOmit } from '../../utils';
 
 export type InfoboxVariants = 'info' | 'danger' | 'caution' | 'success';
@@ -21,7 +21,7 @@ export type Props = {
    * Content to be rendered within the infobox. Avoid using direct children, put child content
    * within the provided Infobox static components (Infobox.Content and Infobox.Actions)
    */
-  children: ReactNode,
+  children: ReactElement | ReactElement[],
   
   /**
    * The visual variant to be displayed to the user.
@@ -81,16 +81,16 @@ export type StaticComponents = {
 
   return (
     <aside
+    {...omitProps}
       className={componentClass}
       role="status"
-      {...omitProps}
     >
       <span className="ods-infobox--icon">
         {/* @todo Insert <Icon> component */}
         ‽
       </span>
       {title && <h1 className="ods-infobox--title">{title}</h1>}
-      {children && children}
+      {children}
     </aside>
   );
 };
