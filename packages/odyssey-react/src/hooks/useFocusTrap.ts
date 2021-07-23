@@ -32,7 +32,6 @@ type focusTrapOptions = {
 const useFocusTrap = (ref: any, options: focusTrapOptions) => {
     const {
       active,
-      withArrowKeys,
       onActivate,
       onActivateFocusFirst,
       onDeactivate

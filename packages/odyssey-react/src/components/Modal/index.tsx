@@ -17,12 +17,13 @@ import Button from "../Button";
 import type { ButtonVariants } from "../Button";
 import { useOid, useCx } from "../../utils";
 import { useKeypress, useOutsideClick } from '../../hooks';
-import useFocusTrap, { focusableElementsSelector } from '../../hooks/useFocusTrap'
+import useFocusTrap from '../../hooks/useFocusTrap';
+
 export type PropsModal = {
   /**
    * The modal content, should use the Static components provided by Modal (Modal.Header, Modal.Body and Modal.Footer)
    */
-  children: ReactElement,
+  children: ReactElement | ReactElement[],
 
   /**
    * The modal id attribute. Automatically generated if not provided.
@@ -44,10 +45,6 @@ export type PropsModal = {
    */
   onClose: () => void,
 }
-
-// useKeypress([
-//   ['Escape', onClose]
-// ]);
   
 export type PropsModalHeader = { 
   children: ReactText
@@ -99,11 +96,10 @@ export const ModalContext = createContext<{ onClose: () => void}>({ onClose: () 
  * </Modal>
  */
 const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
-  const { children, id, open = false, onClose, onOpen, title } = props
+  const { children, id, open = false, onClose, onOpen } = props
   const context = useMemo(() => ({ onClose, onOpen }), [onClose, onOpen]);
   const oid = useOid(id);
-  const modalDialog = useRef();
-  const modalCloseButton = useRef();
+  const modalDialog = useRef<HTMLDivElement>(null);
   const componentClass = useCx(
     'ods-modal',
     { "is-open": open }
@@ -111,9 +107,7 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
   
   useFocusTrap(modalDialog, {
     active: open,
-    onActivateFocusFirst: true,
-    onActivate: () => { console.log('oA') },
-    onDeactivate: () => { console.log('oD') }
+    onActivateFocusFirst: true
   });
 
   useOutsideClick(modalDialog, onClose, open)

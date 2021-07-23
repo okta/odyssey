@@ -19,7 +19,7 @@ import { useEffect } from 'react';
  * @param {boolean} [condition] - A condition which if true instantiates the click event listener
  */
 
-const useOutsideClick = (ref: any, callback: Function, condition = true) => {
+const useOutsideClick = (ref: any, callback: (event: MouseEvent) => void, condition = true) => {
     const handleClick = (event: MouseEvent) => {
         if (ref.current && !ref.current.contains(event.target)) {
             callback(event);

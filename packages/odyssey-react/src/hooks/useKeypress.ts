@@ -11,32 +11,25 @@
  */
 
 import { useEffect } from 'react';
-import type { KeyboardEvent } from 'react';
 
 type KeyPressMap = Array<[string, (event: KeyboardEvent) => void]>;
-
-/**
- * useKeyPress
- * @param {string} key - the name of the key to respond to, compared against event.key
- * @param {function} action - the action to perform on key press
- */
 
 const useKeypress = (keyMap: KeyPressMap, condition = true) => {
   useEffect(() => {
     const map = keyMap;
     const keyListenersMap = new Map(map);
-    
-    function keyListener(event: KeyboardEvent) {
+
+    const handler = (event: KeyboardEvent) => {
       const listener = keyListenersMap.get(event.code);
       return (listener) && listener(event);
     }
-    
+
     if (condition) {
-      window.addEventListener('keyup', keyListener);
+      window.addEventListener('keyup', handler);
     }
 
-    return () => window.removeEventListener('keyup', keyListener);
+    return () => window.removeEventListener('keyup', handler);
   }, [keyMap, condition]);
 }
 
-export default useKeypress
+export default useKeypress;
