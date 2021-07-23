@@ -85,7 +85,7 @@ const useFocusTrap = (ref: any, options: focusTrapOptions) => {
         }
 
         return () => element.removeEventListener("keydown", handler);
-    }, [ref.current]);
+    }, [ref.current, active]);
 
 }
 

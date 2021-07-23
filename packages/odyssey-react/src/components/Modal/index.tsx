@@ -10,13 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { createContext, useContext, useMemo } from "react";
+import React, { createContext, useContext, useMemo, useRef } from "react";
 import type { FunctionComponent, ReactElement, ReactNode, ReactText } from "react";
 import { createPortal } from "react-dom";
 import Button from "../Button";
 import type { ButtonVariants } from "../Button";
-import { useOid, useCx } from "../../utils"
-
+import { useOid, useCx } from "../../utils";
+import { useKeypress, useOutsideClick } from '../../hooks';
+import useFocusTrap, { focusableElementsSelector } from '../../hooks/useFocusTrap'
 export type PropsModal = {
   /**
    * The modal content, should use the Static components provided by Modal (Modal.Header, Modal.Body and Modal.Footer)
@@ -34,16 +35,20 @@ export type PropsModal = {
   open: boolean,
 
   /**
-   * Function invocation when the modal is opened.
+   * Callback when the modal is opened.
    */
    onOpen?: () => void,
 
   /**
-   * Function invocation when the modal is closed.
+   * Callback when the modal is closed.
    */
   onClose: () => void,
 }
 
+// useKeypress([
+//   ['Escape', onClose]
+// ]);
+  
 export type PropsModalHeader = { 
   children: ReactText
 }
@@ -70,6 +75,8 @@ export type StaticComponents = {
   Button: FunctionComponent<PropsModalButton>
 }
 
+export const ModalContext = createContext<{ onClose: () => void}>({ onClose: () => void 0 });
+
 /**
  * UI that appears on top of the main content and moves the system into a mode 
  * requiring user interaction. This dialog disables the main content until the 
@@ -91,28 +98,35 @@ export type StaticComponents = {
  *  </Modal.Footer>
  * </Modal>
  */
-
-export const ModalContext = createContext<{ onClose: () => void}>({ onClose: () => void 0 });
-
 const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
-  const { children, id, open = false, onClose, onOpen } = props
+  const { children, id, open = false, onClose, onOpen, title } = props
   const context = useMemo(() => ({ onClose, onOpen }), [onClose, onOpen]);
   const oid = useOid(id);
-
+  const modalDialog = useRef();
+  const modalCloseButton = useRef();
   const componentClass = useCx(
     'ods-modal',
     { "is-open": open }
   );
+  
+  useFocusTrap(modalDialog, {
+    active: open,
+    onActivateFocusFirst: true,
+    onActivate: () => { console.log('oA') },
+    onDeactivate: () => { console.log('oD') }
+  });
 
-  if (open && onOpen) {
-    onOpen();
-  }
+  useOutsideClick(modalDialog, onClose, open)
+
+  useKeypress([
+    ['Escape', onClose],
+  ], open);
 
   return createPortal(
     <ModalContext.Provider value={context}>
       <div className={componentClass} id={oid} aria-hidden={!open}>
         <div className="ods-modal--overlay" tabIndex={-1}>
-          <div className="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title">
+          <div className="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title" ref={modalDialog}> 
             {children}
           </div>
         </div>
@@ -131,7 +145,7 @@ Modal.Header = ({ children }) => (
       {children}
     </h1>
   </header>
-);
+)
 
 Modal.Body = ({ children }) => (
   <main className="ods-modal--content" id="ods-modal-standard-content">
@@ -147,7 +161,6 @@ Modal.Footer = ({ children }) => (
 
 Modal.Button = ({ children, variant, close, onClick }) => {
   const { onClose } = useContext(ModalContext);
-
   return <Button variant={variant} onClick={close ? () => onClose() : onClick}>{children}</Button>
 };
 

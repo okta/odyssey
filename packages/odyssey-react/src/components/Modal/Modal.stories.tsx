@@ -15,6 +15,7 @@ import { Story } from "@storybook/react";
 import { useArgs } from '@storybook/client-api';
 import { action } from '@storybook/addon-actions';
 import Modal from ".";
+import Button from "../Button";
 import type { PropsModal } from ".";
 
 export default {
@@ -38,7 +39,8 @@ const Template: Story<PropsModal> = () => {
   };
 
   return (
-    <Modal open={open} onOpen={handleOpen} onClose={handleClose}>
+    <>
+    <Modal open={open} onClose={handleClose}>
       <Modal.Header>Modal Title</Modal.Header>
       <Modal.Body>
         <p>This is the modal content area. It's width is determined based on the amount of content within it.</p>
@@ -48,6 +50,7 @@ const Template: Story<PropsModal> = () => {
         <Modal.Button close>Continue</Modal.Button>
       </Modal.Footer>
     </Modal>
+    </>
   )
 };
 
