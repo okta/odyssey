@@ -16,8 +16,6 @@ import { createPortal } from "react-dom";
 import Button from "../Button";
 import type { ButtonVariants } from "../Button";
 import { useOid, useCx } from "../../utils";
-import { useKeypress, useOutsideClick } from '../../hooks';
-import useFocusTrap from '../../hooks/useFocusTrap';
 
 export type PropsModal = {
   /**
@@ -104,21 +102,14 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
     'ods-modal',
     { "is-open": open }
   );
-  
-  useFocusTrap(modalDialog, {
-    active: open,
-    onActivateFocusFirst: true
-  });
 
-  useOutsideClick(modalDialog, onClose, open)
-
-  useKeypress([
-    ['Escape', onClose],
-  ], open);
+  if (open && onOpen) {
+    onOpen();
+  }
 
   return createPortal(
     <ModalContext.Provider value={context}>
-      <div className={componentClass} id={oid} aria-hidden={!open}>
+      <div className={componentClass} id={oid} aria-hidden={!open} data-testid="ods-modal">
         <div className="ods-modal--overlay" tabIndex={-1}>
           <div className="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title" ref={modalDialog}> 
             {children}
