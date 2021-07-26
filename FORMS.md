@@ -49,31 +49,58 @@ There are specific attributes that will need to be passed to individual Input ty
 
 ### States
 
-Many of these states are assigned or applicable to the `<input>` element. However, those Input states may be better reflected at the Field level. For example: dimming Field.Label for `disabled` elements; showing Field.Error only when an Input is `invalid`.
+Many of these states are assigned or applicable to the `<input>` element. However, those Input states may be better reflected at the Field level.
 
-- `active`: When the Input is activated by the user.
-- `autofill`: When an Input has been auto-filled by the browser.
+For example: dimming Field.Label for `disabled` elements; showing Field.Error only when an Input is `invalid`. Both of these cases reflect Input states that require affordances on Field.
+
+#### Defaults
+
+These states represent "default" UI states. While these states may technically apply, it's unlikely that they will be set manually and will not require additional affordances.
+
 - `blank`: When an Input is empty.
-- `checked`: When Inputs like Radio and Checkbox are checked.
 - `dir`: The reading direction currently applied.
-- `disabled`: When an Input is disabled.
 - `enabled`: When an Input is enabled (rather than disabled). This is the default state.
-- `focus-within` When a child has `focus`.
-- `focus`: When the Input has focus.
-- `hover`: When the Input is hovered by a pointing device.
 - `in-range` When an Input is within the range constrictions. e.g. a slider.
-- `indeterminate`: When Inputs are in an indeterminate state. e.g. A "parent" checkbox for a group of mixed checked/unchecked Inputs.
-- `invalid`: When an Input has invalid contents/values.
-- `optional`: When an Input is optional.
-- `out-of-range`: When an Input is outside of range constrictions.
 - `placeholder-shown`: When placeholder text is visible.
-- `read-only`: When an Input cannot be changed by the user.
 - `read-write`: When an Input is user-editable (rather than read-only). This is the default state.
 - `required`: When an Input is required.
-- `target-within`: When a child is a `target`.
-- `target`: When the component is the target of a URL. e.g. `site.com/form#firstname`
-- `user-invalid`: When an Input is invalid, but only after a user has interacted with it.
 - `valid`: When an Input has valid contents/values.
+
+#### Unstyled states
+
+These states represent non-defaults that do not currently require unique affordances.
+
+- `active`: When the Input is activated by the user. Not often applicable.
+- `autofill`: When an Input has been auto-filled by the browser.
+  - Browsers and plugins provide bespoke styling to indicate when a field has been auto-filled. To preserve consistency of user-experience, it's best to leave these unstyled.
+- `target`: When the component is the target of a URL. e.g. `site.com/form#firstname`
+- `target-within`: When a child is a `target`.
+
+#### Styled states
+
+These states require affordances to indicate their status to the user. In some cases, styles will be shared across states. For ex: `invalid` and `out-of-range`.
+
+- `checked`: When Inputs like Radio and Checkbox are checked.
+- `indeterminate`: When Inputs are in an indeterminate state. e.g. A "parent" checkbox for a group of mixed checked/unchecked Inputs.
+
+- `disabled`: When an Input is disabled.
+
+- `read-only`: When an Input cannot be changed by the user.
+
+- `focus`: When the Input has focus.
+- `focus-within` When a child has `focus`.
+  - Should be the same as `:focus` unless input-specific
+
+- `hover`: When the Input is hovered by a pointing device.
+
+- `invalid`: When an Input has invalid contents/values.
+- `user-invalid`: When an Input is invalid, but only after a user has interacted with it.
+  - Identical to invalid
+- `out-of-range`: When an Input is outside of range constrictions.
+  - Unnec until shipping range inputs, would mimic invalid
+
+- `optional`: When an Input is optional.
+  - "Optional" label becomes present/visible
 
 ### Content
 
@@ -198,6 +225,7 @@ As noted above, it may be beneficial to pass these attributes directly to the ch
 
 - Title: contains legend for FieldGroup
 - Descr: contains a description for a FieldGroup
+- Error: contains an Infobox describing FieldGroup-level errors ("Two valid options you have selected are incompatible.")
 - Slot: contains Fields
 
 ### Pseudo-Structure
@@ -206,6 +234,9 @@ As noted above, it may be beneficial to pass these attributes directly to the ch
 <FieldGroup>
   <FieldGroup.Title>A Group of Fields</FieldGroup.Title>
   <FieldGroup.Desc>This is a description of the FieldGroup.</FieldGroup.Desc>
+  <FieldGroup.Error>
+    <Infobox variant="error" />
+  </FieldGroup.Error>
   [...]
 </FieldGroup>
 ```
@@ -216,6 +247,9 @@ As noted above, it may be beneficial to pass these attributes directly to the ch
 <fieldset class="ods-field-group">
   <legend class="ods-field-group--title">A Group of Fields</legend>
   <p class="ods-field-group--desc">This is a description of the FieldGroup.</p>
+  <section class="ods-form--error">
+    [...]
+  </section>
   [...]
 </fieldset>
 ```
@@ -265,7 +299,9 @@ These values can be overridden by a `formaction` attribute on a `<button>`, `<in
     <Infobox variant="error" />
   </Form.Error>
   <Form.Main>
-    <FieldGroup title="Field Group">
+    <FieldGroup>
+      <FieldGroup.Title>A Group of Fields</FieldGroup.Title>
+      <FieldGroup.Desc>This is a description of the FieldGroup.</FieldGroup.Desc>
       <Field label="First name" type="text" hint="Please input your first name." required/>
       <Field label="Last name" type="number" hint="Please input your last name." required/>
     </FieldGroup>
