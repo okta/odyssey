@@ -24,6 +24,8 @@ Because the requirements for both behavior and display of fields are stringent, 
 
 #### Fieldset-specific HTML attributes
 
+Regarding Field, these attributes would only be available/apply when utilizing a "grouped" Input type like Radio or Checkbox. While they can be applied to the containing `fieldset`, it would be less brittle to apply them to the individual Input tags associated with the Field.
+
 - `disabled`: If this Boolean attribute is set, all Inputs that are descendants of the `<fieldset>` are disabled.
   - In the case of Field, putting this on the `fieldset` would have the desired behavior, but passing `disabled` to the Input itself would be less brittle.
 - `name`: The name associated with the group.
@@ -109,19 +111,73 @@ Many of these states are assigned or applicable to the `<input>` element. Howeve
 
 ### HTML
 
+Different Field types will require different rendered HTML based on their associated Input.
+
+#### Single-Input Field
+
 ```html
-<fieldset class="ods-field">
+<div class="ods-field">
   <label class="ods-field--label" for="first-name">
     First name
     <span class="ods-field--optional">Optional</span>
   </label>
-  <aside class="ods-field--hint" id="first-name-hint">
+  <p class="ods-field--hint" id="first-name-hint">
     Please enter your first name.
-  </aside>
+  </p>
   <input class="ods-text-input" type="text" name="first-name" id="first-name" spellcheck="false" value="" autocomplete="fname" aria-describedby="first-name-hint first-name-error">
-  <aside class="ods-field--error" id="first-name-error"><span class="ods-u-visually-hidden">Error:</span> Numbers are disallowed.</aside>
+  <p class="ods-field--error" id="first-name-error"><span class="ods-u-visually-hidden">Error:</span> Numbers are disallowed.</p>
+</div>
+```
+
+#### Grouped-Input Field
+
+Support for Hint and Error association is more limited for Grouped Inputs. Based on cross-browser testing, two options follow.
+
+First, setting the associations on the first input:
+
+```html
+<fieldset class="ods-field">
+  <legend class="ods-field--label">
+    Select your speed
+    <span class="ods-field--optional">Optional</span>
+  </legend>
+  <p class="ods-field--hint" id="speed-hint">
+    Please select the desired speed of your craft.
+  </p>
+  <input class="ods-radio" type="radio" name="speed" id="speed-1" aria-describedby="speed-hint speed-error" value="1" required>
+  <label class="ods-radio--label" for="speed-1">Lightspeed</label>
+  <input class="ods-radio" type="radio" name="speed" id="speed-2" value="2" required checked>
+  <label class="ods-radio--label" for="speed-2">Warp Speed</label>
+  <input class="ods-radio" type="radio" name="speed" id="speed-3" value="3" required>
+  <label class="ods-radio--label" for="speed-3">Ludicrous Speed</label>
+  <p class="ods-field--error" id="speed-error"><span class="ods-u-visually-hidden">Error:</span> You must set a speed before continuing.</p>
 </fieldset>
 ```
+
+As a second option, we could dynamically insert/remove the appropriate hint/error into the `legend` as SR-only and turn off voice-over for the visible messaging. Note the SR-only classes within the label and addition of `aria-hidden` on the visible messaging.
+
+```html
+<fieldset class="ods-field">
+  <legend class="ods-field--label">
+    Select your speed
+    <span class="ods-field--optional">Optional</span>
+    <span class="ods-visually-hidden">Please select the desired speed of your craft.</span>
+    <span class="ods-visually-hidden">Error: You must set a speed before continuing.</p>
+  </legend>
+  <p class="ods-field--hint" id="speed-hint" aria-hidden>
+    Please select the desired speed of your craft.
+  </p>
+  <input class="ods-radio" type="radio" name="speed" id="speed-1" value="1" required>
+  <label class="ods-radio--label" for="speed-1">Lightspeed</label>
+  <input class="ods-radio" type="radio" name="speed" id="speed-2" value="2" required checked>
+  <label class="ods-radio--label" for="speed-2">Warp Speed</label>
+  <input class="ods-radio" type="radio" name="speed" id="speed-3" value="3" required>
+  <label class="ods-radio--label" for="speed-3">Ludicrous Speed</label>
+  <p class="ods-field--error" id="speed-error" aria-hidden><span class="ods-u-visually-hidden">Error:</span> You must set a speed before continuing.</p>
+</fieldset>
+```
+
+<a href="https://blog.tenon.io/accessible-validation-of-checkbox-and-radiobutton-groups/">This article</a> provides more detailed results of both implementations as well as alternatives.
 
 ## FieldGroup
 
@@ -135,6 +191,8 @@ Fieldset-specific HTML attributes:
 - `name`: The name associated with the group.
 - `form`: This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements.
   - Because of the unintuitive behavior of this attribute, I recommend that this be relegated to use on Field or we provide a way to cascade this attribute to all child Inputs.
+
+As noted above, it may be beneficial to pass these attributes directly to the child Inputs rather than applying them to the parent `fieldset`.
 
 ### Content areas
 
