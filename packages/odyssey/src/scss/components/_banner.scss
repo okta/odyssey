@@ -21,6 +21,11 @@
   width: 100%;
   padding-block: $spacing-s;
   padding-inline: $spacing-m;
+  background-color: cv('blue', '300');
+
+  &.is-ods-banner-dismissed {
+    display: none;
+  }
 
   a {
     text-decoration: underline;
