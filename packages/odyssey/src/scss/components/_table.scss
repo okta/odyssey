@@ -152,7 +152,9 @@
   }
 
   .is-ods-table-num {
-    text-align: end;
+    /* Numerical data display should not swap for RTL languages. */
+    /* stylelint-disable-next-line liberty/use-logical-spec */
+    text-align: right;
     font-feature-settings: 'lnum', 'tnum';
   }
 
