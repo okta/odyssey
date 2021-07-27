@@ -14,6 +14,7 @@ import React from 'react';
 import type { ReactNode, DetailedHTMLProps, HTMLAttributes } from 'react';
 
 import { tableClass } from './Table';
+import { useCx } from '../../utils';
 
 export type Props = {
   /**
@@ -36,11 +37,13 @@ const TableContainer = React.forwardRef<Ref, Props>((props, ref) => {
     ...rest
   } = props;
 
-  const containerClass = `${tableClass}--figure`;
-  const combinedClassName = className ? `${className} ${containerClass}` : containerClass;
+  const componentClass = useCx(
+    `${tableClass}--figure`,
+    className && className,
+  );
 
   return (
-    <figure ref={ref} className={combinedClassName} {...rest}>
+    <figure ref={ref} className={componentClass} {...rest}>
       <figcaption className={`${tableClass}--figcaption`}>{title}</figcaption>
       {children}
     </figure>
