@@ -46,6 +46,9 @@ This form provides a "kitchen sink" example while defining styles and component 
         </section>
         <fieldset class="ods-field">
           <legend class="ods-field--label">Payload includes</legend>
+          <p class="ods-field--hint">
+            Describe your perfect planet in as many words as you need.
+          </p>
           <input class="ods-checkbox" type="checkbox" name="overview-behavior[]" id="overview-behavior-1" value="tungsten" checked>
           <label class="ods-checkbox--label" for="overview-behavior-1">Tungsten rods</label>
           <input class="ods-checkbox" type="checkbox" name="overview-behavior[]" id="overview-behavior-2" value="filters" checked>
@@ -57,6 +60,9 @@ This form provides a "kitchen sink" example while defining styles and component 
         </fieldset>
         <fieldset class="ods-field">
           <legend class="ods-field--label">Select speed</legend>
+          <p class="ods-field--hint">
+            Describe your perfect planet in as many words as you need.
+          </p>
           <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-1" value="1" required>
           <label class="ods-radio--label" for="overview-behavior-1">Lightspeed</label>
           <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-2" value="2" required checked>
@@ -80,6 +86,10 @@ This form provides a "kitchen sink" example while defining styles and component 
           </aside>
         </section>
         <div class="ods-field">
+          <label class="ods-field--label" for="overview-behavior">Destination star</label>
+          <p class="ods-field--hint">
+            Describe your perfect planet in as many words as you need.
+          </p>
           <select class="ods-select" data-js-choices id="overview-behavior" name="overview-behavior" required>
             <option></option>
             <option value="proxima">Proxima Centauri</option>
@@ -90,11 +100,13 @@ This form provides a "kitchen sink" example while defining styles and component 
             <option value="sirius-a">Sirius A</option>
             <option value="sirius-b">Sirius B</option>
           </select>
-          <label class="ods-field--label" for="overview-behavior">Destination star</label>
         </div>
         <div class="ods-field">
-          <input class="ods-text-input" type="text" id="overview-default">
           <label class="ods-field--label" for="overview-default">Destination</label>
+          <p class="ods-field--hint">
+            Describe your perfect planet in as many words as you need.
+          </p>
+          <input class="ods-text-input" type="text" id="overview-default">
         </div>
       </fieldset>
     </section>

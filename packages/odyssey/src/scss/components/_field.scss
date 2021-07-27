@@ -21,38 +21,6 @@
   &:last-child {
     margin-block-end: 0;
   }
-
-  .ods-field--label {
-    order: 1;
-    margin-block-end: $spacing-xs;
-  }
-
-  .ods-number-input,
-  .ods-text-input,
-  .ods-select,
-  .ods-input--unavailable,
-  .ods-fieldset--pair,
-  output:not([class]) {
-    order: 3;
-  }
-
-  .ods-input--unavailable {
-    margin-block: 0;
-    margin-inline: 0;
-  }
-
-  .ods-field--hint {
-    order: 2;
-    margin-block-end: $spacing-xs;
-
-    + .ods-field--label {
-      margin-block-end: 0;
-    }
-  }
-
-  .ods-field--error {
-    order: 4;
-  }
 }
 
 .ods-field--label {
@@ -64,15 +32,6 @@
   margin-inline: 0;
   color: $text-heading;
   font-weight: 600;
-
-  .ods-text-input:disabled ~ &,
-  .ods-text-input[readonly] ~ & {
-    color: $text-body;
-  }
-
-  .ods-text-input[type='search'] ~ & {
-    @include is-visually-hidden;
-  }
 }
 
 .ods-field--label--optional {
@@ -81,26 +40,12 @@
   font-size: $size-body-caption;
   font-weight: 400;
   line-height: $spacing-m; // Helps optically match line-height above
-
-  [data-optional] &,
-  :optional ~ .ods-field--label & {
-    display: block;
-  }
-}
-
-.ods-field--hint,
-.ods-field--error {
-  font-size: $size-body-caption;
 }
 
 .ods-field--hint {
   margin-block-end: $spacing-xs;
   color: $text-body;
-
-  .ods-text-input:disabled ~ &,
-  .ods-text-input[readonly] ~ & {
-    color: $text-sub;
-  }
+  font-size: $size-body-caption;
 }
 
 .ods-field--error {
@@ -108,6 +53,7 @@
   align-items: center;
   margin-block-start: $spacing-xs;
   color: $text-danger;
+  font-size: $size-body-caption;
 }
 
 .ods-fieldset--pair {
@@ -144,13 +90,4 @@
       z-index: 1;
     }
   }
-}
-
-.ods-group-legend {
-  margin-block-start: 0;
-  margin-block-end: $spacing-xs-em;
-  margin-inline: 0;
-  color: $text-heading;
-  font-size: $size-title-5;
-  font-weight: 600;
 }
