@@ -13,6 +13,7 @@
 import React from 'react';
 import type { ReactNode, DetailedHTMLProps, TableHTMLAttributes } from 'react';
 
+import { useCx } from '../../utils';
 import TableContainer from './TableContainer';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
@@ -21,6 +22,7 @@ import TableRow from './TableRow';
 import TableDataCell from './TableDataCell';
 import TableHeaderCell from './TableHeaderCell';
 import TableSortButton from './TableSortButton';
+
 
 export type Props = {
   /**
@@ -60,10 +62,13 @@ const Table = React.forwardRef<Ref, Props>((props, ref) => {
     ...rest
   } = props;
 
-  const combinedClassName = className ? `${className} ${tableClass}` : tableClass;
+  const componentClass = useCx(
+    tableClass,
+    className && className,
+  );
 
   return (
-    <table ref={ref} className={combinedClassName} {...rest}>
+    <table ref={ref} className={componentClass} {...rest}>
       <caption>{caption}</caption>
       {children}
     </table>

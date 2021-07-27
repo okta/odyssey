@@ -12,7 +12,7 @@
 
 import React from 'react';
 import type { ReactNode, DetailedHTMLProps, TdHTMLAttributes } from 'react';
-import { CellTextFormats } from './Table';
+import { CellTextFormats, tableClass } from './Table';
 import { useCx } from '../../utils';
 
 export type Props = {
@@ -33,11 +33,13 @@ const TableDataCell = React.forwardRef<Ref, Props>((props, ref) => {
     ...rest
   } = props;
 
-  const formatClass = format && useCx(`is-ods-table-${format}`,);
-  const combinedClassName = className ? `${className} ${formatClass}` : formatClass;
+  const componentClass = useCx(
+    format && `is-${tableClass}-${format}`,
+    className && className
+  );
 
   return (
-    <td ref={ref} className={combinedClassName} {...rest}>
+    <td ref={ref} className={componentClass} {...rest}>
       {children}
     </td>
   );
