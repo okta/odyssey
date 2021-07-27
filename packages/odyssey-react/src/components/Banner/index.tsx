@@ -16,19 +16,18 @@ import { useCx, useOmit } from '../../utils';
 import Button from '../Button';
 
 export type BannerVariants = 'info' | 'danger' | 'caution';
-
-type ComponentProps = {
+interface ComponentProps {
   /**
    * Actions, or links to be rendered on the right side of 
    * the component.
    */
-  children: ReactNode,
+  children: ReactNode;
   
   /**
    * The visual variant to be displayed to the user.
    * @default info
    */
-  variant?: BannerVariants,
+  variant?: BannerVariants;
 
   /**
    * Human-readable title for the banner.
@@ -43,21 +42,15 @@ type ComponentProps = {
   /**
    * Determines whether the banner should be displayed to the user.
    */
-  visible: boolean,
+  open: boolean;
+}
 
-  /**
-   * function callback which enables the display of the dismiss button.
-   */
-  onDismiss?: () => void,
+type DismissableComponentProps =
+| { onDismiss?: never; dismissButtonLabel?: never }
+| { onDismiss: () => void; dismissButtonLabel: string }
 
-  /**
-   * Applies an aria-label to the dismiss button. This is required if an 
-   * onDismiss callback is provided.
-   */
-  dismissButtonLabel?: string
-};
 
-export type Props = ComponentProps;
+export type Props = ComponentProps & DismissableComponentProps;
 
 /**
  * Banners let users know important messages related to their overall experience
@@ -68,7 +61,7 @@ export type Props = ComponentProps;
  * @example
  * <Banner 
  *  variant="primary"
- *  visible={isVisible}
+ *  open={isOpen}
  *  title="New launch scheduled"
  *  content="The mission to Sagitarius A has been set for January 7."
  *  onDismiss={handleBannerDismiss}
@@ -82,7 +75,7 @@ export type Props = ComponentProps;
     children,
     title,
     content,
-    visible,
+    open,
     variant = "info",
     onDismiss,
     dismissButtonLabel,
@@ -92,7 +85,7 @@ export type Props = ComponentProps;
   const componentClass = useCx(
     "ods-banner",
     variant && `is-ods-banner-${variant}`,
-    !visible && "is-ods-banner-dismissed",
+    !open && "is-ods-banner-dismissed",
     onDismiss && "is-ods-banner-dismissable"
   );
 
@@ -100,13 +93,13 @@ export type Props = ComponentProps;
 
   return (
     <aside
+      {...omitProps}
       className={componentClass}
       role="status"
-      {...omitProps}
     >
       <span className="ods-banner--icon">
         {/* @todo Insert <Icon> component */}
-        ‽
+        &#8253;
       </span>
       {title && <h1 className="ods-banner--title">{title}</h1>}
       {content && <p className="ods-banner--content">{content}</p>}
@@ -115,7 +108,7 @@ export type Props = ComponentProps;
         <span className="ods-banner--dismiss">
           <Button variant="dismiss" onClick={onDismiss} aria-label={dismissButtonLabel}>
             {/* @todo Insert <Icon> component, dismiss variant */}
-            ‽
+            &#8253;
           </Button>
         </span>
       }

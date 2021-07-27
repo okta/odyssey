@@ -17,13 +17,13 @@ import Banner from ".";
 const role = "status";
 const bannerTitle = "Banner title";
 const bannerContent = "Banner content";
-const bannerActions = "Banner.Children, <a href='https://www.okta.com'>with a link</a>";
+const bannerActions = "Banner actions <a href='https://www.okta.com'>with a link</a>";
 const bannerDismissButtonLabel = "Dismiss message";
 
 describe("Banner", () => {
   it('renders the Banner', () => {
     const { getByRole } = render(
-      <Banner visible={true} title={bannerTitle} content={bannerContent}>
+      <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
@@ -33,7 +33,7 @@ describe("Banner", () => {
 
   it('renders the Banner title', () => {
     const { getByText } = render(
-      <Banner visible={true} title={bannerTitle} content={bannerContent}>
+      <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
@@ -43,7 +43,7 @@ describe("Banner", () => {
 
   it('renders the content', () => {
     const { getByText } = render(
-      <Banner visible={true} title={bannerTitle} content={bannerContent}>
+      <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
@@ -52,7 +52,7 @@ describe("Banner", () => {
 
   it('renders the action (children) content', () => {
     const { getByText } = render(
-      <Banner visible={true} title={bannerTitle} content={bannerContent}>
+      <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
@@ -62,7 +62,7 @@ describe("Banner", () => {
 
   it('hides the banner if visible prop is set to false', () => {
     const { getByRole } = render(
-      <Banner visible={false} title={bannerTitle} content={bannerContent}>
+      <Banner open={false} title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
@@ -72,18 +72,18 @@ describe("Banner", () => {
 
   it('should NOT display the dismiss button when the onDismiss callback fn is NOT provided', () => {
     const { queryByRole } = render(
-      <Banner visible={true} title={bannerTitle} content={bannerContent}>
+      <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
-    console.log(queryByRole)
+
     expect(queryByRole('button')).toBeNull();
   });
   
   it('should display the dismiss button when the onDismiss callback fn is provided', () => {
     const handleDismiss = jest.fn();
     const { getByRole } = render(
-      <Banner visible={true} title={bannerTitle} content={bannerContent} onDismiss={handleDismiss}>
+      <Banner open title={bannerTitle} content={bannerContent} onDismiss={handleDismiss} dismissButtonLabel={bannerDismissButtonLabel}>
         {bannerActions}
       </Banner>
     );
@@ -93,7 +93,7 @@ describe("Banner", () => {
   it('should call onDismiss when the dismiss button is clicked', () => {
     const handleDismiss = jest.fn();
     const { getByRole } = render(
-      <Banner visible={true} title={bannerTitle} content={bannerContent} onDismiss={handleDismiss}>
+      <Banner open title={bannerTitle} content={bannerContent} onDismiss={handleDismiss} dismissButtonLabel={bannerDismissButtonLabel}>
         {bannerActions}
       </Banner>
     );
@@ -107,7 +107,7 @@ describe("Banner", () => {
     const { getByRole } = render(
       <Banner 
         dismissButtonLabel={bannerDismissButtonLabel} 
-        visible={true} 
+        open 
         title={bannerTitle} 
         content={bannerContent} 
         onDismiss={handleDismiss}
@@ -120,7 +120,7 @@ describe("Banner", () => {
   });
 
   a11yCheck(() => render(
-    <Banner visible={true} title={bannerTitle} content={bannerContent}>
+    <Banner open title={bannerTitle} content={bannerContent}>
       {bannerActions}
      </Banner>
     ))

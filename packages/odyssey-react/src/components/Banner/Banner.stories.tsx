@@ -36,7 +36,7 @@ export default {
       defaultValue: "Additional string related to the title.",
       control: { type: "text" }
     },
-    visible: {
+    open: {
       defaultValue: true
     }
   }
@@ -47,26 +47,22 @@ const Template: Story<Props> = ({
   variant,
   content,
   dismissButtonLabel,
-  visible,
+  open,
   onDismiss
 }) => {
   const [, updateArgs] = useArgs();
-  let handleDismiss;
-
-  if (onDismiss) {
-    handleDismiss = () => {
-      if (onDismiss) { onDismiss() }
-      updateArgs({ visible: false })
-    }
-  }
+  const handleDismiss = () => {
+    if (onDismiss) { onDismiss() }
+    updateArgs({ open: false });
+  };
 
   return (
     <Banner
-      visible={visible}
+      open={open}
       title={title}
       variant={variant}
       content={content}
-      onDismiss={handleDismiss}
+      onDismiss={onDismiss ? handleDismiss : undefined}
       dismissButtonLabel={dismissButtonLabel}
     >
       <Link href="https://www.okta.com">Action Link</Link>
@@ -94,5 +90,5 @@ Caution.args = {
 
 export const Dismissable = Template.bind({});
 Dismissable.args = {
-  onDismiss: () => { console.log('x') }
+  onDismiss: () => { console.log('Banner: onDismiss!') }
 };
