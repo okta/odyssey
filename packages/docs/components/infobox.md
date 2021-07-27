@@ -205,9 +205,9 @@ For example, a Form error should be displayed above all Fieldsets, but below the
         </section>
       </aside>
       <fieldset class="ods-fieldset">
-        <div class="ods-fieldset-flex">
+        <div class="ods-field">
           <input class="ods-text-input" type="text" name="form-example-user" id="form-example-user" spellcheck="false" value="" required>
-          <label class="ods-label" for="form-example-user">Codename</label>
+          <label class="ods-field--label" for="form-example-user">Codename</label>
         </div>
       </fieldset>
     </form>

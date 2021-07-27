@@ -147,7 +147,7 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <legend class="ods-field--label">Select speed  <span class="ods-label--optional">Optional</span></legend>
+    <legend class="ods-field--label">Select speed  <span class="ods-field--label--optional">Optional</span></legend>
     <input class="ods-radio" type="radio" name="overview-optional[]" id="overview-optional-1" value="1">
     <label class="ods-radio--label" for="overview-optional-1">Lightspeed</label>
     <input class="ods-radio" type="radio" name="overview-optional[]" id="overview-optional-2" value="2" checked>

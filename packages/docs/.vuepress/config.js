@@ -71,6 +71,7 @@ module.exports = {
             { title: 'Button', link: '/components/button/' },
             { title: 'Checkbox', link: '/components/checkbox/' },
             { title: 'Field Labels', link: '/components/field-labels/' },
+            { title: 'Form', link: '/components/form/' },
             { title: 'Infobox', link: '/components/infobox/' },
             { title: 'Link', link: '/components/link/' },
             { title: 'Modal', link: '/components/modal/' },

@@ -44,9 +44,9 @@ Keep labels to a word or two so users can quickly scan the form. Always use sent
 <Visual content="full">
   <form>
     <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
+      <div class="ods-field">
         <input class="ods-text-input" type="text" id="overview-label">
-        <label class="ods-label" for="overview-label">Destination</label>
+        <label class="ods-field--label" for="overview-label">Destination</label>
       </div>
     </fieldset>
   </form>
@@ -105,7 +105,7 @@ Odyssey assumes inputs are required by default. Optional labels should be used t
 
 <Visual content="full">
   <fieldset class="ods-fieldset" data-optional>
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="overview-optional" name="overview-optional">
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -116,7 +116,7 @@ Odyssey assumes inputs are required by default. Optional labels should be used t
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-optional">Destination star <span class="ods-label--optional">Optional</span></label>
+      <label class="ods-field--label" for="overview-optional">Destination star <span class="ods-field--label--optional">Optional</span></label>
     </div>
   </fieldset>
 </Visual>
@@ -138,18 +138,18 @@ Please refer to individual components for complete documentation. These examples
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
+      <div class="ods-field">
         <input class="ods-text-input" type="text" name="example-0" id="example-0" spellcheck="false" value="Input value" required>
-        <label class="ods-label" for="example-0">Field label</label>
+        <label class="ods-field--label" for="example-0">Field label</label>
       </div>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <input class="ods-text-input" type="text" name="example-0" id="example-0" spellcheck="false" value="Input value" required>
-      <label class="ods-label" for="example-0">Field label</label>
+      <label class="ods-field--label" for="example-0">Field label</label>
     </div>
   </fieldset>
   ```
@@ -225,7 +225,7 @@ Please refer to individual components for complete documentation. These examples
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset" data-optional>
-      <div class="ods-fieldset-flex">
+      <div class="ods-field">
         <select class="ods-select" data-js-choices id="example-3" name="example-3">
           <option></option>
           <option value="value-1">Option 1</option>
@@ -235,14 +235,14 @@ Please refer to individual components for complete documentation. These examples
           <option value="value-5">Option 5</option>
           <option value="value-6">Option 6</option>
         </select>
-        <label class="ods-label" for="example-3">Field label <span class="ods-label--optional">Optional</span></label>
+        <label class="ods-field--label" for="example-3">Field label <span class="ods-field--label--optional">Optional</span></label>
       </div>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset" data-optional>
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="example-3" name="example-3">
         <option></option>
         <option value="value-1">Option 1</option>
@@ -252,7 +252,7 @@ Please refer to individual components for complete documentation. These examples
         <option value="value-5">Option 5</option>
         <option value="value-6">Option 6</option>
       </select>
-      <label class="ods-label" for="example-3">Field label <span class="ods-label--optional">Optional</span></label>
+      <label class="ods-field--label" for="example-3">Field label <span class="ods-field--label--optional">Optional</span></label>
     </div>
   </fieldset>
   ```

@@ -77,12 +77,16 @@
   }
 }
 
-.ods-fieldset-flex {
+.ods-field {
   display: flex;
   flex-direction: column;
   max-width: $max-line-length;
+  margin-block-end: $spacing-m;
 
-  .ods-field--label,
+  &:last-child {
+    margin-block-end: 0;
+  }
+
   .ods-field--label {
     order: 1;
     margin-block-end: $spacing-xs;
@@ -140,7 +144,6 @@
     }
   }
 }
-
 
 .ods-group-legend {
   margin-block-start: 0;

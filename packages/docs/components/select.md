@@ -40,7 +40,7 @@ To support expected functionality and behaviors, Select relies on the Choices.js
 
 <Visual content="full">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="overview-behavior" name="overview-behavior" required>
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -51,7 +51,7 @@ To support expected functionality and behaviors, Select relies on the Choices.js
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-behavior">Destination star</label>
+      <label class="ods-field--label" for="overview-behavior">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -74,7 +74,7 @@ The default Select allows users to choose a single value from a list of options.
 
 <Visual content="full">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="overview-single" name="overview-single" required>
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -85,7 +85,7 @@ The default Select allows users to choose a single value from a list of options.
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-single">Destination star</label>
+      <label class="ods-field--label" for="overview-single">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -100,7 +100,7 @@ The Multi-Select variant allows users to choose more than one value from the lis
 
 <Visual content="full">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="overview-multi" name="overview-multi" multiple required>
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -111,7 +111,7 @@ The Multi-Select variant allows users to choose more than one value from the lis
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-multi">Destination star(s)</label>
+      <label class="ods-field--label" for="overview-multi">Destination star(s)</label>
     </div>
   </fieldset>
 </Visual>
@@ -134,7 +134,7 @@ Select inputs in their "normal" state are considered enabled. They are ready for
 
 <Visual content="full">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="overview-enabled" name="overview-enabled" required>
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -145,7 +145,7 @@ Select inputs in their "normal" state are considered enabled. They are ready for
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-enabled">Destination star</label>
+      <label class="ods-field--label" for="overview-enabled">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -160,7 +160,7 @@ Hover states are activated when the user pauses their pointer over the input.
 
 <Visual content="full">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex is-ods-select-hover">
+    <div class="ods-field is-ods-select-hover">
       <select class="ods-select is-ods-input-hover" data-js-choices id="overview-hover" name="overview-hover" required>
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -171,7 +171,7 @@ Hover states are activated when the user pauses their pointer over the input.
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-hover">Destination star</label>
+      <label class="ods-field--label" for="overview-hover">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -186,7 +186,7 @@ The focus state is a visual affordance that the user has highlighted the input w
 
 <Visual content="full">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex is-ods-select-focus">
+    <div class="ods-field is-ods-select-focus">
       <select class="ods-select" data-js-choices id="overview-focus" name="overview-focus" required>
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -197,7 +197,7 @@ The focus state is a visual affordance that the user has highlighted the input w
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-focus">Destination star</label>
+      <label class="ods-field--label" for="overview-focus">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -214,7 +214,7 @@ The values of disabled inputs will not be submitted.
 
 <Visual content="full">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="overview-disabled" name="overview-disabled" required disabled>
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -225,7 +225,7 @@ The values of disabled inputs will not be submitted.
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-disabled">Destination star</label>
+      <label class="ods-field--label" for="overview-disabled">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -240,7 +240,7 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
 
 <Visual content="full">
   <fieldset class="ods-fieldset" data-optional>
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="overview-optional" name="overview-optional">
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -251,7 +251,7 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-optional">Destination star <span class="ods-label--optional">Optional</span></label>
+      <label class="ods-field--label" for="overview-optional">Destination star <span class="ods-field--label--optional">Optional</span></label>
     </div>
   </fieldset>
 </Visual>
@@ -268,7 +268,7 @@ When indicating a validation error, please use a Field Error label to indicate t
 
 <Visual content="full">
   <fieldset class="ods-fieldset is-ods-select-invalid">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select is-ods-select-invalid" data-js-choices id="overview-invalid" name="overview-invalid" required aria-describedby="overview-invalid-error">
         <option></option>
         <option value="proxima">Proxima Centauri</option>
@@ -279,7 +279,7 @@ When indicating a validation error, please use a Field Error label to indicate t
         <option value="sirius-a">Sirius A</option>
         <option value="sirius-b">Sirius B</option>
       </select>
-      <label class="ods-label" for="overview-invalid">Destination star</label>
+      <label class="ods-field--label" for="overview-invalid">Destination star</label>
       <aside class="ods-field--error" id="overview-invalid-error">
         <span class="u-visually-hidden">Error:</span>This does not appear to be a valid stellar object.
       </aside>
@@ -301,7 +301,7 @@ Select inputs should not have a default selected unless a majority of users will
 
 <Visual content="full">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="overview-groups" name="overview-groups" required>
         <option></option>
         <optgroup label="Alpha Centauri system">
@@ -318,7 +318,7 @@ Select inputs should not have a default selected unless a majority of users will
           <option value="sirius-b">Sirius B</option>
         </optgroup>
       </select>
-      <label class="ods-label" for="overview-groups">Destination star</label>
+      <label class="ods-field--label" for="overview-groups">Destination star</label>
     </div>
   </fieldset>
 </Visual>
@@ -346,7 +346,7 @@ Options may be grouped within the Select list to help guide users. When doing th
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
+      <div class="ods-field">
         <select class="ods-select" data-js-choices id="example-1" name="example-1" required>
           <option></option>
           <option value="value-1">Option 1</option>
@@ -356,14 +356,14 @@ Options may be grouped within the Select list to help guide users. When doing th
           <option value="value-5">Option 5</option>
           <option value="value-6">Option 6</option>
         </select>
-        <label class="ods-label" for="example-1">Field label</label>
+        <label class="ods-field--label" for="example-1">Field label</label>
       </div>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="example-1" name="example-1" required>
         <option></option>
         <option value="value-1">Option 1</option>
@@ -373,7 +373,7 @@ Options may be grouped within the Select list to help guide users. When doing th
         <option value="value-5">Option 5</option>
         <option value="value-6">Option 6</option>
       </select>
-      <label class="ods-label" for="example-1">Field label</label>
+      <label class="ods-field--label" for="example-1">Field label</label>
     </div>
   </fieldset>
   ```
@@ -384,7 +384,7 @@ Options may be grouped within the Select list to help guide users. When doing th
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
+      <div class="ods-field">
         <select class="ods-select" data-js-choices id="example-2" name="example-2" multiple required>
           <option></option>
           <option value="value-1">Option 1</option>
@@ -394,14 +394,14 @@ Options may be grouped within the Select list to help guide users. When doing th
           <option value="value-5">Option 5</option>
           <option value="value-6">Option 6</option>
         </select>
-        <label class="ods-label" for="example-2">Field label</label>
+        <label class="ods-field--label" for="example-2">Field label</label>
       </div>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="example-2" name="example-2" multiple required>
         <option></option>
         <option value="value-1">Option 1</option>
@@ -411,7 +411,7 @@ Options may be grouped within the Select list to help guide users. When doing th
         <option value="value-5">Option 5</option>
         <option value="value-6">Option 6</option>
       </select>
-      <label class="ods-label" for="example-2">Field label</label>
+      <label class="ods-field--label" for="example-2">Field label</label>
     </div>
   </fieldset>
   ```
@@ -423,7 +423,7 @@ Options may be grouped within the Select list to help guide users. When doing th
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
+      <div class="ods-field">
         <select class="ods-select" data-js-choices id="example-3" name="example-3" required>
           <option></option>
           <optgroup label="Group 1">
@@ -436,14 +436,14 @@ Options may be grouped within the Select list to help guide users. When doing th
             <option value="value-2-2">Option 2</option>
           </optgroup>
         </select>
-        <label class="ods-label" for="example-3">Field label</label>
+        <label class="ods-field--label" for="example-3">Field label</label>
       </div>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="example-3" name="example-3" required>
         <option></option>
         <optgroup label="Group 1">
@@ -456,7 +456,7 @@ Options may be grouped within the Select list to help guide users. When doing th
           <option value="value-2-2">Option 2</option>
         </optgroup>
       </select>
-      <label class="ods-label" for="example-3">Field label</label>
+      <label class="ods-field--label" for="example-3">Field label</label>
     </div>
   </fieldset>
   ```
@@ -469,7 +469,7 @@ Options may be grouped within the Select list to help guide users. When doing th
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <div class="ods-fieldset-flex">
+      <div class="ods-field">
         <select class="ods-select" data-js-choices id="example-4" name="example-4" disabled required>
           <option></option>
           <option value="value-1">Option 1</option>
@@ -479,14 +479,14 @@ Options may be grouped within the Select list to help guide users. When doing th
           <option value="value-5">Option 5</option>
           <option value="value-6">Option 6</option>
         </select>
-        <label class="ods-label" for="example-4">Field label</label>
+        <label class="ods-field--label" for="example-4">Field label</label>
       </div>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="example-4" name="example-4" disabled required>
         <option></option>
         <option value="value-1">Option 1</option>
@@ -496,7 +496,7 @@ Options may be grouped within the Select list to help guide users. When doing th
         <option value="value-5">Option 5</option>
         <option value="value-6">Option 6</option>
       </select>
-      <label class="ods-label" for="example-4">Field label</label>
+      <label class="ods-field--label" for="example-4">Field label</label>
     </div>
   </fieldset>
   ```
@@ -507,7 +507,7 @@ Options may be grouped within the Select list to help guide users. When doing th
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset" data-optional>
-      <div class="ods-fieldset-flex">
+      <div class="ods-field">
         <select class="ods-select" data-js-choices id="example-5" name="example-5">
           <option></option>
           <option value="value-1">Option 1</option>
@@ -517,14 +517,14 @@ Options may be grouped within the Select list to help guide users. When doing th
           <option value="value-5">Option 5</option>
           <option value="value-6">Option 6</option>
         </select>
-        <label class="ods-label" for="example-5">Field label <span class="ods-label--optional">Optional</span></label>
+        <label class="ods-field--label" for="example-5">Field label <span class="ods-field--label--optional">Optional</span></label>
       </div>
     </fieldset>
   </div>
 
   ```html
   <fieldset class="ods-fieldset" data-optional>
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select" data-js-choices id="example-5" name="example-5">
         <option></option>
         <option value="value-1">Option 1</option>
@@ -534,7 +534,7 @@ Options may be grouped within the Select list to help guide users. When doing th
         <option value="value-5">Option 5</option>
         <option value="value-6">Option 6</option>
       </select>
-      <label class="ods-label" for="example-5">Field label <span class="ods-label--optional">Optional</span></label>
+      <label class="ods-field--label" for="example-5">Field label <span class="ods-field--label--optional">Optional</span></label>
     </div>
   </fieldset>
   ```
@@ -551,7 +551,7 @@ Because of the current inability to ensure consistent validation behavior across
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset is-ods-select-invalid">
-      <div class="ods-fieldset-flex">
+      <div class="ods-field">
         <select class="ods-select is-ods-select-invalid" data-js-choices id="example-6" name="example-6" required>
           <option></option>
           <option value="value-1">Option 1</option>
@@ -561,7 +561,7 @@ Because of the current inability to ensure consistent validation behavior across
           <option value="value-5">Option 5</option>
           <option value="value-6">Option 6</option>
         </select>
-        <label class="ods-label" for="example-6">Field label</label>
+        <label class="ods-field--label" for="example-6">Field label</label>
         <aside class="ods-field--error" id="overview-invalid-error">
           <span class="u-visually-hidden">Error:</span> Invalid error description
         </aside>
@@ -571,7 +571,7 @@ Because of the current inability to ensure consistent validation behavior across
 
   ```html
   <fieldset class="ods-fieldset is-ods-select-invalid">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <select class="ods-select is-ods-select-invalid" data-js-choices id="example-6" name="example-6" required>
         <option></option>
         <option value="value-1">Option 1</option>
@@ -581,7 +581,7 @@ Because of the current inability to ensure consistent validation behavior across
         <option value="value-5">Option 5</option>
         <option value="value-6">Option 6</option>
       </select>
-      <label class="ods-label" for="example-6">Field label</label>
+      <label class="ods-field--label" for="example-6">Field label</label>
       <aside class="ods-field--error" id="overview-invalid-error">
         <span class="u-visually-hidden">Error:</span> Invalid error description
       </aside>

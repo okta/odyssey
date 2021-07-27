@@ -469,20 +469,20 @@ The most common use case is for diplaying computed values in a form:
   <div class="nimatron--rendered">
     <form oninput="outputTotal.value=parseInt(outputJD.value)+parseInt(outputOF.value)">
       <fieldset class="ods-fieldset">
-        <div class="ods-fieldset-flex">
+        <div class="ods-field">
           <input class="ods-text-input" type="number" name="outputJD" id="outputJD" autocomplete="name" spellcheck="false" value="12" required>
-          <label class="ods-label" for="outputJD">Jelly Donuts (Amount)</label>
+          <label class="ods-field--label" for="outputJD">Jelly Donuts (Amount)</label>
         </div>
       </fieldset>
       <fieldset class="ods-fieldset">
-        <div class="ods-fieldset-flex">
+        <div class="ods-field">
           <input class="ods-text-input" type="number" name="outputOF" id="outputOF" autocomplete="name" spellcheck="false" value="12" required>
-          <label class="ods-label" for="outputOF">Old Fashioned Donuts (Amount)</label>
+          <label class="ods-field--label" for="outputOF">Old Fashioned Donuts (Amount)</label>
         </div>
       </fieldset>
       <fieldset class="ods-fieldset">
-        <div class="ods-fieldset-flex">
-          <label class="ods-label" for="outputTotal">Total Donuts</label>
+        <div class="ods-field">
+          <label class="ods-field--label" for="outputTotal">Total Donuts</label>
           <output aria-live="polite" id="outputTotal" name="outputTotal" for="outputJD outputoldfashioneds">24</output>
         </div>
       </fieldset>
@@ -492,20 +492,20 @@ The most common use case is for diplaying computed values in a form:
 ```html
 <form oninput="outputTotal.value=parseInt(outputJD.value)+parseInt(outputOF.value)">
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <input class="ods-text-input" type="number" name="outputJD" id="outputJD" autocomplete="name" spellcheck="false" value="12" required>
-      <label class="ods-label" for="outputJD">Jelly Donuts (Amount)</label>
+      <label class="ods-field--label" for="outputJD">Jelly Donuts (Amount)</label>
     </div>
   </fieldset>
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
+    <div class="ods-field">
       <input class="ods-text-input" type="number" name="outputOF" id="outputOF" autocomplete="name" spellcheck="false" value="12" required>
-      <label class="ods-label" for="outputOF">Old Fashioned Donuts (Amount)</label>
+      <label class="ods-field--label" for="outputOF">Old Fashioned Donuts (Amount)</label>
     </div>
   </fieldset>
   <fieldset class="ods-fieldset">
-    <div class="ods-fieldset-flex">
-      <label class="ods-label" for="outputTotal">Total Donuts</label>
+    <div class="ods-field">
+      <label class="ods-field--label" for="outputTotal">Total Donuts</label>
       <output aria-live="polite" id="outputTotal" name="outputTotal" for="outputJD outputoldfashioneds">24</output>
     </div>
   </fieldset>
