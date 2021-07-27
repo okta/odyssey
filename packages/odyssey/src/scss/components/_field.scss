@@ -10,6 +10,51 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+/* stylelint-disable no-descending-specificity */
+
+.ods-field {
+  display: flex;
+  flex-direction: column;
+  max-width: $max-line-length;
+  margin-block-end: $spacing-m;
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+
+  .ods-field--label {
+    order: 1;
+    margin-block-end: $spacing-xs;
+  }
+
+  .ods-number-input,
+  .ods-text-input,
+  .ods-select,
+  .ods-input--unavailable,
+  .ods-fieldset--pair,
+  output:not([class]) {
+    order: 3;
+  }
+
+  .ods-input--unavailable {
+    margin-block: 0;
+    margin-inline: 0;
+  }
+
+  .ods-field--hint {
+    order: 2;
+    margin-block-end: $spacing-xs;
+
+    + .ods-field--label {
+      margin-block-end: 0;
+    }
+  }
+
+  .ods-field--error {
+    order: 4;
+  }
+}
+
 .ods-field--label {
   display: flex;
   align-items: flex-end;
@@ -74,50 +119,6 @@
   .ods-text-input,
   .ods-select {
     width: calc(50% - #{$spacing-s});
-  }
-}
-
-.ods-field {
-  display: flex;
-  flex-direction: column;
-  max-width: $max-line-length;
-  margin-block-end: $spacing-m;
-
-  &:last-child {
-    margin-block-end: 0;
-  }
-
-  .ods-field--label {
-    order: 1;
-    margin-block-end: $spacing-xs;
-  }
-
-  .ods-number-input,
-  .ods-text-input,
-  .ods-select,
-  .ods-input--unavailable,
-  .ods-fieldset--pair,
-  output:not([class]) {
-    order: 3;
-  }
-
-  .ods-input--unavailable {
-    margin-block: 0;
-    margin-inline: 0;
-  }
-
-  /* stylelint-disable-next-line no-descending-specificity  */
-  .ods-field--hint {
-    order: 2;
-    margin-block-end: $spacing-xs;
-
-    + .ods-field--label {
-      margin-block-end: 0;
-    }
-  }
-
-  .ods-field--error {
-    order: 4;
   }
 }
 
