@@ -34,7 +34,11 @@ export default {
     },
     content: {
       defaultValue: "Additional string related to the title.",
-      control: { type: "text" }
+      control: { disable: true}
+    },
+    dismissButtonLabel: {
+      defaultValue: "Dismiss banner",
+      control: { disable: true }
     },
     open: {
       defaultValue: true
@@ -51,10 +55,17 @@ const Template: Story<Props> = ({
   onDismiss
 }) => {
   const [, updateArgs] = useArgs();
-  const handleDismiss = () => {
-    if (onDismiss) { onDismiss() }
-    updateArgs({ open: false });
-  };
+  let dismissableComponentProps = {};
+
+  if (onDismiss) {
+    dismissableComponentProps = {
+      onDismiss: () => {
+        if (onDismiss) { onDismiss() }
+        updateArgs({ visible: false })
+      },
+      dismissButtonLabel
+    }
+  }
 
   return (
     <Banner
@@ -62,8 +73,7 @@ const Template: Story<Props> = ({
       title={title}
       variant={variant}
       content={content}
-      onDismiss={onDismiss ? handleDismiss : undefined}
-      dismissButtonLabel={dismissButtonLabel}
+      {...dismissableComponentProps}
     >
       <Link href="https://www.okta.com">Action Link</Link>
     </Banner>
@@ -73,22 +83,33 @@ const Template: Story<Props> = ({
 export const Info = Template.bind({});
 Info.args = {
   variant: "info",
+  dismissButtonLabel: undefined,
   onDismiss: undefined
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
   variant: "danger",
+  dismissButtonLabel: undefined,
   onDismiss: undefined
 };
 
 export const Caution = Template.bind({});
 Caution.args = {
   variant: "caution",
+  dismissButtonLabel: undefined,
   onDismiss: undefined
 };
 
 export const Dismissable = Template.bind({});
 Dismissable.args = {
   onDismiss: () => { console.log('Banner: onDismiss!') }
+};
+Dismissable.argTypes = {
+  onDismiss: {
+    control: { disable: false }
+  },
+  dismissButtonLabel: {
+    control: { disable: false, type: "text" }
+  }
 };
