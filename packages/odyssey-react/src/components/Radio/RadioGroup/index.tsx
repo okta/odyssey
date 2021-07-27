@@ -87,7 +87,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
 
   const legendElement = (
     <legend
-      className="ods-input-legend"
+      className="ods-field--label"
       children={legend}
     />
   );

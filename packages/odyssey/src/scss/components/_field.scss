@@ -10,6 +10,39 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+.ods-field--label {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-block-start: 0;
+  margin-block-end: $spacing-xs-em;
+  margin-inline: 0;
+  color: $text-heading;
+  font-weight: 600;
+
+  .ods-text-input:disabled ~ &,
+  .ods-text-input[readonly] ~ & {
+    color: $text-body;
+  }
+
+  .ods-text-input[type='search'] ~ & {
+    @include is-visually-hidden;
+  }
+}
+
+.ods-field--label--optional {
+  display: none;
+  color: $text-sub;
+  font-size: $size-body-caption;
+  font-weight: 400;
+  line-height: $spacing-m; // Helps optically match line-height above
+
+  [data-optional] &,
+  :optional ~ .ods-field--label & {
+    display: block;
+  }
+}
+
 .ods-field--hint,
 .ods-field--error {
   font-size: $size-body-caption;
@@ -49,8 +82,8 @@
   flex-direction: column;
   max-width: $max-line-length;
 
-  .ods-label,
-  .ods-input-legend {
+  .ods-field--label,
+  .ods-field--label {
     order: 1;
     margin-block-end: $spacing-xs;
   }
@@ -74,7 +107,7 @@
     order: 2;
     margin-block-end: $spacing-xs;
 
-    + .ods-label {
+    + .ods-field--label {
       margin-block-end: 0;
     }
   }
@@ -108,15 +141,6 @@
   }
 }
 
-/* stylelint-disable-next-line no-descending-specificity  */
-.ods-input-legend {
-  margin-block-start: 0;
-  margin-block-end: $spacing-xs-em;
-  margin-inline: 0;
-  color: $text-heading;
-  font-size: $size-body-base;
-  font-weight: 600;
-}
 
 .ods-group-legend {
   margin-block-start: 0;

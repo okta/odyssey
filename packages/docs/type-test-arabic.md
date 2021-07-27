@@ -226,7 +226,7 @@ description:
 
 <div class="ods-form">
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">تسمية الميدان</legend>
+    <legend class="ods-field--label">تسمية الميدان</legend>
     <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" required checked>
     <label class="ods-radio--label" for="input-0">التسمية واحد</label>
     <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" required>

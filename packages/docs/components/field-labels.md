@@ -64,7 +64,7 @@ Limit hints to a short sentence. If additional context is required, it should be
 
 <Visual>
   <fieldset class="ods-fieldset" aria-describedby="field-hint">
-    <legend class="ods-input-legend">Select speed</legend>
+    <legend class="ods-field--label">Select speed</legend>
     <aside class="ods-field--hint" id="field-hint">
       None of these are achievable... yet.
     </aside>
@@ -160,7 +160,7 @@ Please refer to individual components for complete documentation. These examples
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset" aria-describedby="ods-field-hint">
-      <legend class="ods-input-legend">Field label</legend>
+      <legend class="ods-field--label">Field label</legend>
       <aside class="ods-field--hint" id="field-hint">
         This is a field hint.
       </aside>
@@ -175,7 +175,7 @@ Please refer to individual components for complete documentation. These examples
 
   ```html
   <fieldset class="ods-fieldset"  aria-describedby="ods-field-hint">
-    <legend class="ods-input-legend">Field label</legend>
+    <legend class="ods-field--label">Field label</legend>
     <aside class="ods-field--hint" id="field-hint">
       This is a field hint.
     </aside>
@@ -195,7 +195,7 @@ Please refer to individual components for complete documentation. These examples
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Field legend label</legend>
+      <legend class="ods-field--label">Field legend label</legend>
       <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-1" value="value-1" checked>
       <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
       <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-2" value="value-2">
@@ -208,7 +208,7 @@ Please refer to individual components for complete documentation. These examples
 
   ```html
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field legend label</legend>
+    <legend class="ods-field--label">Field legend label</legend>
     <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-1" value="value-1" checked>
     <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
     <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-2" value="value-2">

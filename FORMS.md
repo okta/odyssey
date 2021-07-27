@@ -247,7 +247,7 @@ As noted above, it may be beneficial to pass these attributes directly to the ch
 <fieldset class="ods-field-group">
   <legend class="ods-field-group--title">A Group of Fields</legend>
   <p class="ods-field-group--desc">This is a description of the FieldGroup.</p>
-  <section class="ods-form--error">
+  <section class="ods-field-group--error">
     [...]
   </section>
   [...]

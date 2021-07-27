@@ -258,7 +258,7 @@ Vastness is bearable only <s>through</s> love tingling of the spine hydrogen ato
 
 <div class="ods-form">
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field label</legend>
+    <legend class="ods-field--label">Field label</legend>
     <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" required checked>
     <label class="ods-radio--label" for="input-0">Label 1</label>
     <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" required>

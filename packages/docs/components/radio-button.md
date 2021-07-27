@@ -36,7 +36,7 @@ Radio Buttons allow users to select one option from a set. Users can click a Rad
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Select speed</legend>
+    <legend class="ods-field--label">Select speed</legend>
     <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-1" value="1" required>
     <label class="ods-radio--label" for="overview-behavior-1">Lightspeed</label>
     <input class="ods-radio" type="radio" name="overview-behavior" id="overview-behavior-2" value="2" required checked>
@@ -147,7 +147,7 @@ Odyssey assumes inputs are required by default. Optional inputs should be used t
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Select speed  <span class="ods-label--optional">Optional</span></legend>
+    <legend class="ods-field--label">Select speed  <span class="ods-label--optional">Optional</span></legend>
     <input class="ods-radio" type="radio" name="overview-optional[]" id="overview-optional-1" value="1">
     <label class="ods-radio--label" for="overview-optional-1">Lightspeed</label>
     <input class="ods-radio" type="radio" name="overview-optional[]" id="overview-optional-2" value="2" checked>
@@ -171,7 +171,7 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Select speed</legend>
+    <legend class="ods-field--label">Select speed</legend>
     <input class="ods-radio is-ods-radio-invalid" type="radio" name="overview-invalid[]" id="overview-invalid-1" value="1" required checked>
     <label class="ods-radio--label" for="overview-invalid-1">Lightspeed</label>
     <input class="ods-radio is-ods-radio-invalid" type="radio" name="overview-invalid[]" id="overview-invalid-2" value="2" required>
@@ -191,7 +191,7 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Field label</legend>
+      <legend class="ods-field--label">Field label</legend>
       <input class="ods-radio" type="radio" name="example-0" id="example-0-0" value="value-0" required checked>
       <label class="ods-radio--label" for="example-0-0">Label 1</label>
       <input class="ods-radio" type="radio" name="example-0" id="example-0-1" value="value-1" required>
@@ -203,7 +203,7 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 
   ```html
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field label</legend>
+    <legend class="ods-field--label">Field label</legend>
     <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" required checked>
     <label class="ods-radio--label" for="input-0">Label 1</label>
     <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" required>
@@ -220,7 +220,7 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Field label</legend>
+      <legend class="ods-field--label">Field label</legend>
       <input class="ods-radio" type="radio" name="example-1" id="example-1-0" value="value-0" disabled required checked>
       <label class="ods-radio--label" for="example-1-0">Label 1</label>
       <input class="ods-radio" type="radio" name="example-1" id="example-1-1" value="value-1" disabled required>
@@ -232,7 +232,7 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 
   ```html
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field label</legend>
+    <legend class="ods-field--label">Field label</legend>
     <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" disabled required checked>
     <label class="ods-radio--label" for="input-0">Label 1</label>
     <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" disabled required>
@@ -248,7 +248,7 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Field label</legend>
+      <legend class="ods-field--label">Field label</legend>
       <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-0" value="value-0" aria-describedby="group-name-error" required checked>
       <label class="ods-radio--label" for="example-2-0">Label 1</label>
       <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-1" value="value-1" required>
@@ -261,7 +261,7 @@ Unlike Checkboxes, Radios validate as a group, not individually.
 
   ```html
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field label</legend>
+    <legend class="ods-field--label">Field label</legend>
     <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-0" value="value-0" aria-describedby="group-name-error" required checked>
     <label class="ods-radio--label" for="example-2-0">Label 1</label>
     <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-1" value="value-1" required>

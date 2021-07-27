@@ -35,7 +35,7 @@ Users can click a Checkbox to make a choice and click it again to deselect an op
 <Visual>
 
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Payload includes</legend>
+    <legend class="ods-field--label">Payload includes</legend>
     <input class="ods-checkbox" type="checkbox" name="overview-behavior[]" id="overview-behavior-1" value="tungsten" checked>
     <label class="ods-checkbox--label" for="overview-behavior-1">Tungsten rods</label>
     <input class="ods-checkbox" type="checkbox" name="overview-behavior[]" id="overview-behavior-2" value="filters" checked>
@@ -153,7 +153,7 @@ Unlike Radio Buttons, Checkboxes validate individually, not as a group.
 
 <Visual>
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Undocking Procedure</legend>
+    <legend class="ods-field--label">Undocking Procedure</legend>
     <input class="ods-checkbox" type="checkbox" name="overview-invalid[]" id="overview-invalid-1" value="overview-invalid-1" checked>
     <label class="ods-checkbox--label" for="overview-invalid-1">Cycle airlock</label>
     <input checked class="ods-checkbox" type="checkbox" name="overview-invalid[]" id="overview-invalid-2" value="overview-invalid-2">
@@ -269,7 +269,7 @@ export default {
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Field legend label</legend>
+      <legend class="ods-field--label">Field legend label</legend>
       <input class="ods-checkbox" type="checkbox" name="example-0" id="example-0-1" value="value-1" checked>
       <label class="ods-checkbox--label" for="example-0-1">Label 1</label>
       <input class="ods-checkbox" type="checkbox" name="example-0" id="example-0-2" value="value-2">
@@ -281,7 +281,7 @@ export default {
 
   ```html
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field legend label</legend>
+    <legend class="ods-field--label">Field legend label</legend>
     <input class="ods-checkbox" type="checkbox" name="example-0" id="label-1" value="value-1" checked>
     <label class="ods-checkbox--label" for="label-1">Label 1</label>
     <input class="ods-checkbox" type="checkbox" name="example-0" id="label-2" value="value-2">
@@ -316,7 +316,7 @@ export default {
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Field legend label</legend>
+      <legend class="ods-field--label">Field legend label</legend>
       <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-1" value="value-1" checked disabled>
       <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
       <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-2" value="value-2" disabled>
@@ -330,7 +330,7 @@ export default {
 
   ```html
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field legend label</legend>
+    <legend class="ods-field--label">Field legend label</legend>
     <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-1" value="value-1" checked disabled>
     <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
     <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-2" value="value-2" disabled>
@@ -348,7 +348,7 @@ export default {
 <figure class="docs-example">
   <div class="docs-example--rendered">
     <fieldset class="ods-fieldset">
-      <legend class="ods-input-legend">Field legend label</legend>
+      <legend class="ods-field--label">Field legend label</legend>
       <input class="ods-checkbox is-ods-checkbox-valid" type="checkbox" name="example-3" id="example-3-1" value="value-1" checked>
       <label class="ods-checkbox--label" for="example-3-1">Label 1</label>
       <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-3" id="example-3-2" value="value-2">
@@ -361,7 +361,7 @@ export default {
 
   ```html
   <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field legend label</legend>
+    <legend class="ods-field--label">Field legend label</legend>
     <input class="ods-checkbox is-ods-checkbox-valid" type="checkbox" name="example-3" id="example-3-1" value="value-1" checked>
     <label class="ods-checkbox--label" for="example-3-1">Label 1</label>
     <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-3" id="example-3-2" value="value-2">
