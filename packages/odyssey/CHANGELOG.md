@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2021-07-27
+
+- Arabic-safe typography (#993)
+- feat(odyssey-react): add Title component (#991)
+- Update available Button sizes (#985)
+- Refactor: RTL Naming (#984)
+- Cross-package RTL Support via Logical CSS Properties & Values (#968)
+- refactor: removes refs to Whyte, prefers link to import (#960)
+- refactor(odyssey)!: prefer `:invalid` to data attr (#957)
+  - BREAKING CHANGE: inputs now rely on :invalid or .is-x-invalid to indicate invalid input state
+- Docs: Minor cleanup items from the Typography audit (#949)
+- fix: radio button disabled no longer reacts to hover (#948)
+- fix(checkbox): ui invalid+disabled+unchecked state (#943)
+- Type Scale 4.0 (#931)
+- update focus state for dismiss button
+- Fix header stylelint errors
+- Allow stylelint to be invoked from workspace root
+- Move stylelint dependencies into odyssey-stylelint package
+- fix: invalid checkbox disabled state (#933)
+- Legal updates for OSS
+- "Alert" components group (#913)
+- respect prefers-reduced-motion (#928)
+- Refactor workspace scripts to be more granular
+- Updates Odyssey Prism theme (#919)
+- add contextual styles for full width buttons (#911)
+- Add full-width button variant (#910)
+- Foundations: Update Type Scale (#903)
+
 ## [0.7.0] - 2020-11-18
 
 ### Added
