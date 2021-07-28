@@ -58,6 +58,13 @@ This form provides a "kitchen sink" example while defining styles and component 
           <input class="ods-checkbox" type="checkbox" name="overview-behavior[]" id="overview-behavior-4" value="crew">
           <label class="ods-checkbox--label" for="overview-behavior-4">Replacement crew</label>
         </fieldset>
+        <div class="ods-field">
+          <label class="ods-field--label" for="overview-default">Starting system</label>
+          <p class="ods-field--hint">
+            Describe your perfect planet in as many words as you need.
+          </p>
+          <input class="ods-text-input" type="text" id="overview-default" readonly>
+        </div>
         <fieldset class="ods-field">
           <legend class="ods-field--label">Select speed</legend>
           <p class="ods-field--hint">
@@ -100,13 +107,18 @@ This form provides a "kitchen sink" example while defining styles and component 
             <option value="sirius-a">Sirius A</option>
             <option value="sirius-b">Sirius B</option>
           </select>
+          <p class="ods-field--error" id="speed-error" aria-hidden><span class="u-visually-hidden">Error:</span> You must set a speed before continuing.</p>
         </div>
         <div class="ods-field">
-          <label class="ods-field--label" for="overview-default">Destination</label>
+          <label for="overview-optional" class="ods-field--label">Destination <span class="ods-field--label--optional">Optional</span></label>
+          <input class="ods-text-input" type="text" id="overview-default">
+        </div>
+        <div class="ods-field">
+          <label class="ods-field--label" for="overview-default">Starting system</label>
           <p class="ods-field--hint">
             Describe your perfect planet in as many words as you need.
           </p>
-          <input class="ods-text-input" type="text" id="overview-default">
+          <input class="ods-text-input" type="text" id="overview-default" disabled>
         </div>
       </fieldset>
     </section>
