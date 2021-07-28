@@ -24,6 +24,7 @@
   padding-block: $spacing-m;
   padding-inline: $spacing-m;
   column-gap: $spacing-s;
+  background-color: cv('blue', '000');
 
   a {
     color: $text-body;
@@ -60,10 +61,6 @@
   display: flex;
   grid-area: actions;
   justify-content: start;
-}
-
-.is-ods-infobox-info {
-  background-color: cv('blue', '000');
 }
 
 .is-ods-infobox-success {
