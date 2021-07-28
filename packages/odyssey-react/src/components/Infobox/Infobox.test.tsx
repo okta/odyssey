@@ -11,7 +11,7 @@
  */
 
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Infobox from ".";
 
 const role = "status";
@@ -56,6 +56,17 @@ describe("Infobox", () => {
       </Infobox>
     );
     expect(getByText(infoboxActions)).toBeInTheDocument();
+  });
+
+  it('renders through children that are not expected', () => {
+    render(
+      // @ts-expect-error Infobox does not accept text as children
+      <Infobox>
+        oops
+      </Infobox>
+    );
+
+    expect(screen.getByRole(role)).toContainHTML('oops');
   });
 
   a11yCheck(() => render(
