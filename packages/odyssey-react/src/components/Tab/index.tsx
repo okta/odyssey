@@ -10,14 +10,34 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import type { FunctionComponent, ReactElement, ReactText } from "react";
 
 export type PropsTabs = {
+  /**
+   * A collection of Tab.Panels to be rendered
+   */
   children: ReactElement[],
+
+  /**
+   * The tab id attribute. Automatically generated if not provided.
+   */
   id: string,
+
+  /**
+   * An aria label to be placed on the tab component. It
+   * should describe the purpose of the tabs.
+   */
   ariaLabel: string,
+
+  /**
+   * Specifes which Tabs.Panel should be selected on mount
+   */
   selectedId?: string,
+  
+  /**
+   * Callback when the selected tab is changed.
+   */
   onTabChange?: (newId: string) => void
 }
 
