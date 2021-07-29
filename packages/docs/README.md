@@ -6,7 +6,7 @@ This is the home for Odyssey, Okta's design system. Here you will find assets to
 
 ### Grab all the things
 
-These docs are maintained in the `docs` package, which exists to document `@okta/odyssey-scss-scss`.
+These docs are maintained in the `docs` package, which exists to document `@okta/odyssey-scss`.
 
 1. You'll need the `odyssey` repo.
 
