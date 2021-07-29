@@ -11,11 +11,12 @@
  */
 
 import React from 'react';
-import type { ReactNode, DetailedHTMLProps, HTMLAttributes } from 'react';
+import type { ReactElement, ComponentProps } from 'react';
+import { useOmit } from '../../utils';
 
 export type Props = {
-  children?: ReactNode,
-} & DetailedHTMLProps<HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>
+  children?: ReactElement | ReactElement[],
+} & ComponentProps<'thead'>
 
 type Ref = HTMLTableSectionElement;
 
@@ -25,8 +26,10 @@ const TableHeader = React.forwardRef<Ref, Props>((props, ref) => {
     ...rest
   } = props;
 
+  const omitProps = useOmit(rest);
+
   return (
-    <thead ref={ref} {...rest}>
+    <thead ref={ref} {...omitProps}>
       {children}
     </thead>
   );
