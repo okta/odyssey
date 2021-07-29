@@ -1,4 +1,4 @@
-# @okta/odyssey
+# @okta/odyssey-scss
 
 This package provides the necessary SCSS and fonts to utilize Odyssey, Okta's design system.
 
@@ -18,11 +18,11 @@ For guidance on how and when to implement individual components, please see our 
 
 Using yarn:
 
-`$ yarn add @okta/odyssey`
+`$ yarn add @okta/odyssey-scss`
 
 If you prefer npm, use the following command instead:
 
-`$ npm install --save @okta/odyssey`
+`$ npm install --save @okta/odyssey-scss`
 
 ### SCSS
 

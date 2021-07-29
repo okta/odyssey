@@ -6,7 +6,7 @@ This is the home for Odyssey, Okta's design system. Here you will find assets to
 
 ### Grab all the things
 
-These docs are maintained in the `docs` package, which exists to document `@okta/odyssey`.
+These docs are maintained in the `docs` package, which exists to document `@okta/odyssey-scss-scss`.
 
 1. You'll need the `odyssey` repo.
 
@@ -44,33 +44,33 @@ You may need to [install yarn](https://yarnpkg.com/en/docs/install) if it's not 
 
 ### Odyssey development
 
-In order to see your changes to the `@okta/odyssey` package reflected here during development, you'll need to link that package locally.
+In order to see your changes to the `@okta/odyssey-scss` package reflected here during development, you'll need to link that package locally.
 
-1. Change directory to the `@okta/odyssey` package.
+1. Change directory to the `@okta/odyssey-scss` package.
 
     ```bash
-    [okta/odyssey]$ cd packages/odyssey
+    [okta/odyssey]$ cd packages/odyssey-scss
     ```
 
 2. Create a yarn link.
 
     ```bash
-    [okta/odyssey/packages/odyssey]$ yarn link
+    [okta/odyssey/packages/odyssey-scss]$ yarn link
     ```
 
 3. Change directory to the `docs` package.
 
     ```bash
-    [okta/odyssey/packages/odyssey]$ cd ../docs
+    [okta/odyssey/packages/odyssey-scss]$ cd ../docs
     ```
 
 4. Tell `yarn` to utilize the linked package instead of the published one.
 
     ```bash
-    [okta/odyssey/packages/docs]$ yarn link @okta/odyssey
+    [okta/odyssey/packages/docs]$ yarn link @okta/odyssey-scss
     ```
 
-Now any changes you make in your local version of `@okta/odyssey` should be reflected in your local server.
+Now any changes you make in your local version of `@okta/odyssey-scss` should be reflected in your local server.
 
 ## Questions?
 

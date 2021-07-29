@@ -259,7 +259,7 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
 
 <Description>
 
-The JS included in the `@okta/odyssey` package is for demo purposes only. For those implementing the Tab component from scratch, be sure to implement the behavior as follows:
+The JS included in the docs package is for demo purposes only. For those implementing the Tab component from scratch, be sure to implement the behavior as follows:
 
 1. Set the select tab button's aria-selected attribute to true. If a different tab was previously selected, that tab button's aria-selected attribute must be set to false.
 2. The tabpanel corresponding to the tab button is shown. This is done by removing the hidden attribute on the tabpanel. If a different tabpanel was previously visible, the hidden attribute is applied to it.

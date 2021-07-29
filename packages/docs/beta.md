@@ -12,7 +12,7 @@ description: Odyssey is currently in Beta. This can mean different things for di
 
 Designers - the UI Kit and guidelines you are presented with today have been vetted by our team. You should feel safe using them to design features as long as you are comfortable with change. Radical changes may occur, but they will not be implemented without consideration and communication.
 
-Engineers - the @okta/odyssey package will see major changes between now and 1.0. These resources we deliver are ready for early adopters, but breaking changes should be expected. An estimated 1.0 release date is still TBD.
+Engineers - the @okta/odysse-scss package will see major changes between now and 1.0. These resources we deliver are ready for early adopters, but breaking changes should be expected. An estimated 1.0 release date is still TBD.
 
 </Description>
 

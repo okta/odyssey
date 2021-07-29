@@ -11,7 +11,7 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@okta/odyssey": "^0.7.0",
+    "@okta/odyssey-scss": "^0.7.0",
     "prismjs": "^1.14.0"
   },
   "devDependencies": {

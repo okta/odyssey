@@ -13,7 +13,7 @@
     "sass-loader": "8.0.2"
   },
   "dependencies": {
-    "@okta/odyssey": "^0.7.0",
+    "@okta/odyssey-scss": "^0.7.0",
     "@okta/odyssey-icons": "^0.7.0",
     "@okta/prism-theme-odyssey": "^0.7.0",
     "focus-trap": "^6.2.3",
