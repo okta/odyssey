@@ -58,8 +58,6 @@ export type StaticComponents = {
   Tab: FunctionComponent<PropsTab>
 }
 
-export const TabsContext = createContext<{ setTab: () => void}>({ setTab: () => void 0 });
-
 /**
  * Navigation component used to organize content by grouping similar information on the 
  * same page. They allow content to be viewed without having to navigate away from that page 
