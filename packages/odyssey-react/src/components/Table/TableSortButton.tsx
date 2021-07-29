@@ -11,35 +11,35 @@
  */
 
 import React from 'react';
-import type { ReactNode, DetailedHTMLProps, ButtonHTMLAttributes } from 'react';
+import type { ReactNode, ComponentProps } from 'react';
 import { tableClass } from './Table';
-import { useCx } from '../../utils';
+import { useCx, useOmit } from '../../utils';
 
 export type TableSortDirections = 'asc' | 'desc' | 'unsorted' ;
 
 export type Props = {
   children?: ReactNode,
   direction: TableSortDirections,
-} & DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+} & ComponentProps<'button'>
 
 type Ref = HTMLButtonElement;
 
 const TableSortButton = React.forwardRef<Ref, Props>((props, ref) => {
   const {
     children,
-    className,
     direction,
     ...rest
   } = props;
 
   const componentClass = useCx(
-    className && className,
     `${tableClass}--sort`,
     `is-ods-table-${direction}`,
   );
 
+  const omitProps = useOmit(rest);
+
   return (
-    <button ref={ref} className={componentClass} {...rest}>
+    <button ref={ref} className={componentClass} {...omitProps}>
       {children}
     </button>
   );

@@ -11,9 +11,10 @@
  */
 
 import React from 'react';
-import type { ReactNode, DetailedHTMLProps, ThHTMLAttributes } from 'react';
-import { CellTextFormats, tableClass } from './Table';
-import { useCx } from '../../utils';
+import type { ReactNode, ComponentProps} from 'react';
+import { tableClass } from './Table';
+import type { CellTextFormats } from './Table';
+import { useCx, useOmit } from '../../utils';
 
 export type Props = {
   children?: ReactNode,
@@ -21,25 +22,25 @@ export type Props = {
    * The basic text format for the cell.
    */
    format?: CellTextFormats,
-} & DetailedHTMLProps<ThHTMLAttributes<HTMLTableHeaderCellElement>, HTMLTableHeaderCellElement>
+} & ComponentProps<'th'>
 
 type Ref = HTMLTableHeaderCellElement;
 
 const TableHeaderCell = React.forwardRef<Ref, Props>((props, ref) => {
   const {
     children,
-    className,
     format,
     ...rest
   } = props;
 
   const componentClass = useCx(
     format && `is-${tableClass}-${format}`,
-    className && className
   );
 
+  const omitProps = useOmit(rest);
+
   return (
-    <th ref={ref} className={componentClass} {...rest}>
+    <th ref={ref} className={componentClass} {...omitProps}>
       {children}
     </th>
   );

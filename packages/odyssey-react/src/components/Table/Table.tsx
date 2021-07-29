@@ -11,9 +11,10 @@
  */
 
 import React from 'react';
-import type { ReactNode, DetailedHTMLProps, TableHTMLAttributes } from 'react';
+import type { ReactElement, ComponentProps} from 'react';
 
-import { useCx } from '../../utils';
+import { useOmit } from '../../utils';
+
 import TableContainer from './TableContainer';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
@@ -28,12 +29,12 @@ export type Props = {
   /**
   * Valid Table child elements including Head, Body, and Foot 
   */
-  children?: ReactNode,
+  children?: ReactElement | ReactElement[],
   /**
   * Provides users of assistive technologies context
   */
   caption: string
-} & DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>
+} & ComponentProps<'table'>
 
 export type Ref = HTMLTableElement;
 
@@ -58,17 +59,13 @@ const Table = React.forwardRef<Ref, Props>((props, ref) => {
   const {
     children,
     caption,
-    className,
     ...rest
   } = props;
 
-  const componentClass = useCx(
-    tableClass,
-    className && className,
-  );
+  const omitProps = useOmit(rest);
 
   return (
-    <table ref={ref} className={componentClass} {...rest}>
+    <table ref={ref} className={tableClass} {...omitProps}>
       <caption>{caption}</caption>
       {children}
     </table>

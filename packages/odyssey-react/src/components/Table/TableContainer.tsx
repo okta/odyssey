@@ -11,39 +11,39 @@
  */
 
 import React from 'react';
-import type { ReactNode, DetailedHTMLProps, HTMLAttributes } from 'react';
+import type { ReactNode, ReactElement, ComponentProps } from 'react';
 
 import { tableClass } from './Table';
-import { useCx } from '../../utils';
+import { useCx, useOmit } from '../../utils';
 
 export type Props = {
   /**
   * The table for this container
   */
-  children?: ReactNode,
+  children?: ReactElement | ReactElement[],
   /**
   * The visible heading for your table
   */
   title: ReactNode,
-} & DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
+} & ComponentProps<'figure'>
 
 type Ref = HTMLElement;
 
 const TableContainer = React.forwardRef<Ref, Props>((props, ref) => {
   const {
     children,
-    className,
     title,
     ...rest
   } = props;
 
   const componentClass = useCx(
-    `${tableClass}--figure`,
-    className && className,
+    `${tableClass}--figure`
   );
 
+  const omitProps = useOmit(rest);
+
   return (
-    <figure ref={ref} className={componentClass} {...rest}>
+    <figure ref={ref} className={componentClass} {...omitProps}>
       <figcaption className={`${tableClass}--figcaption`}>{title}</figcaption>
       {children}
     </figure>

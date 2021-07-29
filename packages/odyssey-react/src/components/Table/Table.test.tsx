@@ -16,6 +16,8 @@ import Table from ".";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import TableFooter from "./TableFooter";
+import TableRow from "./TableRow";
+import TableHeaderCell from "./TableHeaderCell";
 
 const caption = 'test table'
 
@@ -39,15 +41,6 @@ describe("Table", () => {
 
     expect(getByRole('table', { name: caption })).toBeTruthy();
   });
-
-  it('adds a custom class', () => {
-    const className = 'my-class';
-    const { getByRole } = render(
-      <Table caption={caption} className={className}/>
-    );
-
-    expect(getByRole('table').classList.contains(className)).toBeTruthy();
-  });
 });
 
 const title="test title";
@@ -65,13 +58,6 @@ describe("Table Container", () => {
       <Table.Container title={title} />
     );
     expect(getByText(title).tagName.toLowerCase()).toEqual('figcaption');
-  });
-
-  it("adds a custom class", () => {
-    const { getByRole } = render(
-      <Table.Container title={title} className="my-class" />
-    );
-    expect(getByRole('figure').classList.contains('my-class')).toBeTruthy();
   });
 });
 
@@ -102,21 +88,6 @@ describe("Table Data Cell", () => {
     );
     expect(getByText('1').classList.contains('is-ods-table-num')).toBeTruthy();
   });
-
-  it("adds a custom class", () => {
-    const { getByText } = render(
-      <Table caption={caption}>
-        <Table.Body>
-          <Table.Row>
-            <Table.DataCell className="my-class">data</Table.DataCell>
-          </Table.Row>
-        </Table.Body>
-      </Table>
-      
-    );
-    expect(getByText('data').classList.contains('my-class')).toBeTruthy();
-  });
-
 });
 
 describe("Table Header Cell", () => {
@@ -146,21 +117,6 @@ describe("Table Header Cell", () => {
     );
     expect(getByText('number').classList.contains('is-ods-table-num')).toBeTruthy();
   });
-
-  it("adds a custom class", () => {
-    const { getByText } = render(
-      <Table caption={caption}>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell className="my-class">data</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-      </Table>
-      
-    );
-    expect(getByText('data').classList.contains('my-class')).toBeTruthy();
-  });
-
 });
 
 describe("Table Sort Button", () => {
@@ -171,7 +127,7 @@ describe("Table Sort Button", () => {
 
     expect(getByRole('button')).toBeInTheDocument();
   });
-  
+
   it("uses direction prop to set class", () => {
     const { getByRole } = render(
       <Table.SortButton direction="asc" />
@@ -179,13 +135,26 @@ describe("Table Sort Button", () => {
 
     expect(getByRole('button').classList.contains('is-ods-table-asc')).toBeTruthy();
   });
-
-  it("uses a custom class", () => {
-    const { getByRole } = render(
-      <Table.SortButton direction="unsorted" className="my-class" />
-    );
-
-    expect(getByRole('button').classList.contains('my-class')).toBeTruthy();
-  });
 });
 
+a11yCheck(() => render(
+  <Table.Container title={title}>
+    <Table caption={caption}>
+      <TableHeader>
+        <TableRow>
+          <TableHeaderCell></TableHeaderCell>
+        </TableRow>
+      </TableHeader>
+      <Table.Body>
+        <Table.Row>
+          <Table.DataCell></Table.DataCell>
+        </Table.Row>
+      </Table.Body>
+      <TableFooter>
+        <Table.Row>
+          <Table.DataCell></Table.DataCell>
+        </Table.Row>
+      </TableFooter>
+    </Table>
+  </Table.Container>
+))
