@@ -17,9 +17,9 @@ links:
 
 ::: slot overview
 
-<Description>
-
 # Form Components
+
+<Description>
 
 The purpose of this document is to outline the spectrum of components required to make up a complete Form. This includes: Input, Field, FieldGroup, and Form.
 
@@ -27,13 +27,40 @@ Along with a general description and suggested structure, each component below i
 
 **Note:** All code examples are for illustrative purposes only. Structure and behavior may change based on subsequent designs for these components. There are also opportunities for re-use across components; for example, Form.Title extending from Title.
 
+</Description>
+
 ## Inputs
+
+<Description>
 
 Inputs are the atomic units around which the following components are built. Inputs represent unique controls and are not covered in this document, which seeks to outline the ubiquitous aspects of Forms.
 
 For the sake of clarity, when an Input component is referenced below, it includes only the concerns that make it unique. For example, an Input of the type RadioButtonGroup includes a set of RadioButtons, but *not* their associated Label, Hint, or Error. Those components belong to Field.
 
+</Description>
+
+<Visual>
+  <fieldset class="ods-field">
+    <input type="checkbox" name="input-checkbox" id="input-checkbox" value="input-checkbox-enabled" class="ods-checkbox">
+    <label for="overview-enabled" class="ods-checkbox--label">Enable auto-docking</label>
+  </fieldset>
+  <fieldset class="ods-field">
+    <input class="ods-radio" type="radio" name="input-radio" id="input-radio-0" value="value-0" required checked>
+    <label class="ods-radio--label" for="input-radio-0">Astronaut</label>
+    <input class="ods-radio" type="radio" name="input-radio" id="input-radio-1" value="value-1" required>
+    <label class="ods-radio--label" for="input-radio-1">Cosmonaut</label>
+    <input class="ods-radio" type="radio" name="input-radio" id="input-radio-2" value="value-2" required>
+    <label class="ods-radio--label" for="input-radio-2">Taikonaut</label>
+  </fieldset>
+  <div class="ods-field">
+    <input class="ods-text-input" type="text" name="input-text" id="input-text" spellcheck="false" value="Cassiopeia">
+  </div>
+</Visual>
+
+
 ## Field
+
+<Description>
 
 Field is the primary component for assembling forms. It includes all of the supporting context required by the Input. This component would also be responsible for managing the appropriate application of `aria-` attributes and `id` associations between Inputs and their associated elements.
 
@@ -210,7 +237,107 @@ As a second option, we could dynamically insert/remove the appropriate hint/erro
 
 <a href="https://blog.tenon.io/accessible-validation-of-checkbox-and-radiobutton-groups/">This article</a> provides more detailed results of both implementations as well as alternatives.
 
+</Description>
+
+<Visual>
+  <div class="ods-field">
+    <label class="ods-field--label" for="field-0">Destination</label>
+    <input class="ods-text-input" type="text" id="field-0">
+  </div>
+  <div class="ods-field">
+    <label for="field-1" class="ods-field--label">
+      Destination
+      <span class="ods-field--label--optional">Optional</span>
+    </label>
+    <input class="ods-text-input" type="text" id="field-1">
+  </div>
+  <div class="ods-field">
+    <label class="ods-field--label" for="field-2">Destination</label>
+    <p class="ods-field--hint" id="field-2-hint">Your planetary destination.</p>
+    <input class="ods-text-input" type="text" id="field-2" aria-describedby="field-2-hint">
+  </div>
+  <div class="ods-field">
+    <label class="ods-field--label" for="field-3">Destination</label>
+    <input class="ods-text-input" type="text" id="field-3" aria-describedby="field-3-error" required>
+    <p class="ods-field--error" id="field-3-error"><span class="u-visually-hidden">Error:</span> This field may not be left blank.</p>
+  </div>
+  <div class="ods-field">
+    <label class="ods-field--label" for="field-4">Destination (Disabled)</label>
+    <input class="ods-text-input" type="text" id="field-4" disabled>
+  </div>
+  <div class="ods-field">
+    <label class="ods-field--label" for="field-5">Destination (Read-Only)</label>
+    <input class="ods-text-input" type="text" id="field-5" value="Mercury" readonly>
+  </div>
+  <hr>
+  <fieldset class="ods-field">
+    <legend class="ods-field--label">Select Destination</legend>
+    <input class="ods-radio" type="radio" name="grouped-field" id="grouped-field-a" value="Mercury" required checked>
+    <label class="ods-radio--label" for="grouped-field-a">Mercury</label>
+    <input class="ods-radio" type="radio" name="grouped-field" id="grouped-field-b" value="Mars" required>
+    <label class="ods-radio--label" for="grouped-field-b">Mars</label>
+    <input class="ods-radio" type="radio" name="grouped-field" id="grouped-field-c" value="Venus" required>
+    <label class="ods-radio--label" for="grouped-field-c">Venus</label>
+  </fieldset>
+  <fieldset class="ods-field">
+    <legend class="ods-field--label">
+      Select Destination
+      <span class="ods-field--label--optional">Optional</span>
+    </legend>
+    <input class="ods-radio" type="radio" name="grouped-field" id="grouped-field-a" value="Mercury">
+    <label class="ods-radio--label" for="grouped-field-a">Mercury</label>
+    <input class="ods-radio" type="radio" name="grouped-field" id="grouped-field-b" value="Mars">
+    <label class="ods-radio--label" for="grouped-field-b">Mars</label>
+    <input class="ods-radio" type="radio" name="grouped-field" id="grouped-field-c" value="Venus">
+    <label class="ods-radio--label" for="grouped-field-c">Venus</label>
+  </fieldset>
+  <fieldset class="ods-field">
+    <legend class="ods-field--label">
+      Select Destination
+    </legend>
+    <p class="ods-field--hint" id="grouped-field-1-hint">Select your planetary destination.</p>
+    <input class="ods-radio" type="radio" name="grouped-field-1" id="grouped-field-1-a" value="Mercury" aria-describedby="grouped-field-1-hint" required checked>
+    <label class="ods-radio--label" for="grouped-field-1-a">Mercury</label>
+    <input class="ods-radio" type="radio" name="grouped-field-1" id="grouped-field-1-b" value="Mars" required>
+    <label class="ods-radio--label" for="grouped-field-1-b">Mars</label>
+    <input class="ods-radio" type="radio" name="grouped-field-1" id="grouped-field-1-c" value="Venus" required>
+    <label class="ods-radio--label" for="grouped-field-1-c">Venus</label>
+  </fieldset>
+  <fieldset class="ods-field">
+    <legend class="ods-field--label">
+      Select Destination
+    </legend>
+    <input class="ods-radio" type="radio" name="grouped-field-2" id="grouped-field-2-a" value="Mercury" aria-describedby="grouped-field-2-error" required>
+    <label class="ods-radio--label" for="grouped-field-2-a">Mercury</label>
+    <input class="ods-radio" type="radio" name="grouped-field-2" id="grouped-field-2-b" value="Mars" required>
+    <label class="ods-radio--label" for="grouped-field-2-b">Mars</label>
+    <input class="ods-radio" type="radio" name="grouped-field-2" id="grouped-field-2-c" value="Venus" required>
+    <label class="ods-radio--label" for="grouped-field-2-c">Venus</label>
+    <p class="ods-field--error" id="grouped-field-2-error"><span class="u-visually-hidden">Error:</span> A destination must be selected before continuing.</p>
+  </fieldset>
+  <fieldset class="ods-field">
+    <legend class="ods-field--label">Select Destination (Disabled)</legend>
+    <input class="ods-radio" type="radio" name="grouped-field-3" id="grouped-field-3-a" value="Mercury" required disabled>
+    <label class="ods-radio--label" for="grouped-field-3-a">Mercury</label>
+    <input class="ods-radio" type="radio" name="grouped-field-3" id="grouped-field-3-b" value="Mars" required disabled>
+    <label class="ods-radio--label" for="grouped-field-3-b">Mars</label>
+    <input class="ods-radio" type="radio" name="grouped-field-3" id="grouped-field-3-c" value="Venus" required disabled>
+    <label class="ods-radio--label" for="grouped-field-3-c">Venus</label>
+  </fieldset>
+  <fieldset class="ods-field">
+    <legend class="ods-field--label">Select Destination (Read-Only)</legend>
+    <input class="ods-radio" type="radio" name="grouped-field-4" id="grouped-field-4-a" value="Mercury" required readonly>
+    <label class="ods-radio--label" for="grouped-field-4-a">Mercury</label>
+    <input class="ods-radio" type="radio" name="grouped-field-4" id="grouped-field-4-b" value="Mars" required readonly>
+    <label class="ods-radio--label" for="grouped-field-4-b">Mars</label>
+    <input class="ods-radio" type="radio" name="grouped-field-4" id="grouped-field-4-c" value="Venus" required readonly>
+    <label class="ods-radio--label" for="grouped-field-4-c">Venus</label>
+  </fieldset>
+</Visual>
+
 ## FieldGroup
+
+<Description>
 
 ### Non-global attrs
 
@@ -258,7 +385,53 @@ As noted above, it may be beneficial to pass these attributes directly to the ch
 </fieldset>
 ```
 
+</Description>
+
+<Visual>
+  <fieldset class="ods-field-group">
+    <legend class="ods-field-group--title">Origination logistics</legend>
+    <p class="ods-field-group--desc">This information is required for your craft to leave the starport.</p>
+    <section class="ods-field-group--error">
+      <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+        <span class="ods-infobox--icon">
+          <OdsIcon icon="error"></OdsIcon>
+        </span>
+        <h1 class="ods-infobox--title">Disallowed combination</h1>
+        <section class="ods-infobox--content">
+          <p>This destination cannot be reached utilizing your current speed selection.</p>
+        </section>
+      </aside>
+    </section>
+    <div class="ods-field">
+      <label class="ods-field--label" for="fieldgroup-destination-star">Destination star</label>
+      <p class="ods-field--hint" id="fieldgroup-destination-star-hint">
+        The stellar object you are traveling to.
+      </p>
+      <select class="ods-select" data-js-choices id="fieldgroup-destination-star" name="fieldgroup-destination-star" required aria-describedby="fieldgroup-destination-star-hint">
+        <option value="proxima">Proxima Centauri</option>
+        <option value="barnards">Barnard's Star</option>
+        <option value="wise">WISE 1049-5319</option>
+        <option value="wolf">Wolf 359</option>
+        <option value="lalande">Lalande 21185</option>
+        <option value="sirius-a">Sirius A</option>
+        <option value="sirius-b">Sirius B</option>
+      </select>
+    </div>
+    <fieldset class="ods-field">
+      <legend class="ods-field--label">Traveling speed</legend>
+      <input class="ods-radio" type="radio" name="fieldgroup-speed" id="fieldgroup-speed-1" value="1" required>
+      <label class="ods-radio--label" for="fieldgroup-speed-1">Lightspeed</label>
+      <input class="ods-radio" type="radio" name="fieldgroup-speed" id="fieldgroup-speed-2" value="2" required>
+      <label class="ods-radio--label" for="fieldgroup-speed-2">Warp Speed</label>
+      <input class="ods-radio" type="radio" name="fieldgroup-speed" id="fieldgroup-speed-3" value="3" required checked>
+      <label class="ods-radio--label" for="fieldgroup-speed-3">Ludicrous Speed</label>
+    </fieldset>
+  </fieldset>
+</Visual>
+
 ## Form
+
+<Description>
 
 A container component that controls form behavior and provides layout slots.
 
@@ -354,7 +527,7 @@ These values can be overridden by a `formaction` attribute on a `<button>`, `<in
         </span>
         <h1 class="ods-infobox--title">Signal interrupted</h1>
         <section class="ods-infobox--content">
-          <p><span class="u-visually-hidden">Error:</span>Solar flare activity has caused your submission to fail. Please try again.</p>
+          <p>Solar flare activity has caused your submission to fail. Please try again.</p>
         </section>
       </aside>
     </section>
@@ -406,7 +579,7 @@ These values can be overridden by a `formaction` attribute on a `<button>`, `<in
             </span>
             <h1 class="ods-infobox--title">Passcode rejected</h1>
             <section class="ods-infobox--content">
-              <p><span class="u-visually-hidden">Error:</span> Your destination passcode has been rejected. Please re-enter passcode or select a new destination.</p>
+              <p>Your destination passcode has been rejected. Please re-enter passcode or select a new destination.</p>
             </section>
           </aside>
         </section>
