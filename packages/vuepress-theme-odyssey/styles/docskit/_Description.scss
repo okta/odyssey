@@ -55,4 +55,8 @@
       font-size: $size-title-6;
     }
   }
+
+  [class*='language-'] {
+    max-width: $max-line-length;
+  }
 }

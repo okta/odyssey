@@ -82,6 +82,16 @@
     }
   }
 
+  &.is-docskit-visual-content-no-padding {
+    .docskit-visual--figure {
+      grid-auto-columns: 1fr;
+      padding-block-start: 0;
+      padding-block-end: 0;
+      padding-inline-start: 0;
+      padding-inline-end: 0;
+    }
+  }
+
   &.is-docskit-visual-background {
     .docskit-visual--figure {
       border-color: transparent;

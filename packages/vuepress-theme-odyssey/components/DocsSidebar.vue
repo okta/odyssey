@@ -32,7 +32,7 @@
           <div class="docs-sidebar--header">
             <DocsLink class="docs-site-title" href="/">{{ title }}</DocsLink>
             <fieldset v-if="showSearch" class="ods-fieldset">
-              <div class="ods-fieldset-flex">
+              <div class="ods-field">
                 <input
                   id="search"
                   class="ods-text-input"
@@ -43,7 +43,7 @@
                   placeholder="Search"
                   required
                 />
-                <label class="ods-label" for="search">Search</label>
+                <label class="ods-field--label" for="search">Search</label>
               </div>
             </fieldset>
           </div>
