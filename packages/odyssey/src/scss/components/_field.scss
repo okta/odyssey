@@ -28,7 +28,7 @@
   align-items: flex-end;
   justify-content: space-between;
   margin-block-start: 0;
-  margin-block-end: $spacing-xs-em;
+  margin-block-end: $spacing-xs;
   margin-inline: 0;
   color: $text-heading;
   font-weight: 600;
@@ -42,14 +42,13 @@
 }
 
 .ods-field--hint {
+  margin-block-start: -$spacing-xs; // Hug label
   margin-block-end: $spacing-xs;
   color: $text-body;
   font-size: $size-body-caption;
 }
 
 .ods-field--error {
-  display: flex;
-  align-items: center;
   margin-block-start: $spacing-xs;
   color: $text-danger;
   font-size: $size-body-caption;

@@ -92,12 +92,12 @@ This form provides a "kitchen sink" example while defining styles and component 
             </section>
           </aside>
         </section>
-        <div class="ods-field">
+        <div class="ods-field is-ods-select-invalid">
           <label class="ods-field--label" for="overview-behavior">Destination star</label>
           <p class="ods-field--hint">
             Describe your perfect planet in as many words as you need.
           </p>
-          <select class="ods-select" data-js-choices id="overview-behavior" name="overview-behavior" required>
+          <select class="ods-select" data-js-choices id="overview-behavior" name="overview-behavior" required invalid>
             <option></option>
             <option value="proxima">Proxima Centauri</option>
             <option value="barnards">Barnard's Star</option>

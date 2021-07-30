@@ -113,21 +113,6 @@ These states require affordances to indicate their status to the user. In some c
 ### Psuedo-structure
 
 ```html
-// via props
-
-<Field
-  label="A field"
-  hint="This is a field you should fill in."
-  type="text"
-  name="a-field"
-  optional
-  disabled
-  autocomplete="fname"
-/>
-
-
-// via composition
-
 <Field>
   <Field.Label>A field</Field.Label>
   <Field.Hint>This is a field you should fill in.</Field.Hint>
