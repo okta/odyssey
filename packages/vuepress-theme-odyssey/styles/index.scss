@@ -321,7 +321,7 @@ $spacing-units: (
 
     .type-sample--px {
       &::before {
-        content: '#{round(rem-to-px(ms($x))))}';
+        content: '#{round(rem-to-px(ms($x)))}';
       }
     }
 
