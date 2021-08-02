@@ -10,9 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
-  setupFilesAfterEnv: ["./jest.setup.js"],
-  moduleNameMapper: {
-    "\\.scss$": "identity-obj-proxy"
-  }
-};
+declare module '*.module.scss' {
+  const styles: Record<string, string>;
+  export default styles;
+}
+

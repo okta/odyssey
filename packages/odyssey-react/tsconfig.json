@@ -16,7 +16,8 @@
   },
   "include": [
     "src",
-    "jest.d.ts"
+    "jest.d.ts",
+    "styles.d.ts"
   ],
   "exclude": [
     "node_modules"
