@@ -9,8 +9,8 @@
   "devDependencies": {
     "eslint-config-vuepress": "^2.2.0",
     "html-loader": "^1.1.0",
-    "node-sass": "4.13.1",
-    "sass-loader": "8.0.2"
+    "node-sass": "^4.0.0",
+    "sass-loader": "^9.0.0"
   },
   "dependencies": {
     "@okta/odyssey": "^0.7.0",
