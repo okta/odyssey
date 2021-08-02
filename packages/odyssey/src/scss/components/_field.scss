@@ -36,6 +36,7 @@
 }
 
 .ods-field--label--optional {
+  padding-inline-start: $spacing-s;
   color: $text-sub;
   font-size: $size-body-caption;
   font-weight: 400;

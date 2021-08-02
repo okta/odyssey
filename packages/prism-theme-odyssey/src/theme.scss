@@ -87,7 +87,8 @@ code[class*='language-']::mozselection {
 /* stylelint-disable selector-no-qualifying-type, no-descending-specificity */
 pre[class*='language-'] {
   /* stylelint-enable selector-no-qualifying-type, no-descending-specificity */
-  margin-block: 0.5em;
+  margin-block-start: 0;
+  margin-block-end: 1.5em;
   margin-inline: 0;
   padding-block: 1em;
   padding-inline: 1em;
