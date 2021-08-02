@@ -10,9 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
-  setupFilesAfterEnv: ["./jest.setup.js"],
-  moduleNameMapper: {
-    "\\.scss$": "identity-obj-proxy"
-  }
-};
+.list {
+  display: inline-block;
+  margin-block-end: -$spacing-xs;
+  margin-inline-start: $spacing-xs;
+  list-style-type: none;
+}
+
+.tag {
+  @include border-radius($base-border-radius);
+
+  display: inline-block;
+  margin-block-start: 0;
+  margin-block-end: $spacing-xs;
+  margin-inline-start: 0;
+  margin-inline-end: $spacing-xs;
+  padding-block: 0;
+  padding-inline: $spacing-xs-em;
+  background: cv('gray', '100');
+  color: $text-body;
+}

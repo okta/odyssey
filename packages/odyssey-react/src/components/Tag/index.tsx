@@ -10,15 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import type { FunctionComponent } from 'react'
+import React from 'react';
+import type { FunctionComponent } from 'react';
+import styles from './Tag.module.scss';
 
 export type Props = {
   /**
    * Text content to be rendered within the tag, it should describe an entity.
   */
-  tags: string[]
-}
+  tags: string[];
+};
 
 /**
  * Use Tags to help describe and differentiate an entity or object.
@@ -26,10 +27,10 @@ export type Props = {
  * and parsing content easier.
  */
 const Tag: FunctionComponent<Props> = ({ tags }) => (
-  <ul className="ods-tag--list">
+  <ul className={styles.list}>
     {tags.map((item) => (
-        <li className="ods-tag" key={item}>{item}</li>
+      <li className={styles.tag} key={item}>{item}</li>
     ))}
   </ul>
-)
+);
 export default Tag;
