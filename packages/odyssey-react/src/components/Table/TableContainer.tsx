@@ -22,9 +22,9 @@ export type Props = {
   */
   children?: ReactElement | ReactElement[],
   /**
-  * The visible heading for your table
+  * The visible heading for the table
   */
-  title: ReactNode,
+  title?: ReactNode,
 } & ComponentProps<'figure'>
 
 type Ref = HTMLElement;

@@ -24,16 +24,23 @@ import TableDataCell from './TableDataCell';
 import TableHeaderCell from './TableHeaderCell';
 import TableSortButton from './TableSortButton';
 
-
 export type Props = {
   /**
   * Valid Table child elements including Head, Body, and Foot 
   */
   children?: ReactElement | ReactElement[],
   /**
-  * Provides users of assistive technologies context
+  * Provides users of assistive technologies with context for the table contents
   */
-  caption: string
+  caption?: string
+  /**
+  * The visible heading for the table
+  */
+  title?: React.ReactNode
+  /**
+   * Whether to use a Table.Container around the Table
+   */
+  withContainer?: boolean
 } & ComponentProps<'table'>
 
 export type Ref = HTMLTableElement;
@@ -59,18 +66,35 @@ const Table = React.forwardRef<Ref, Props>((props, ref) => {
   const {
     children,
     caption,
+    title,
+    withContainer = true,
     ...rest
   } = props;
 
   const omitProps = useOmit(rest);
 
-  return (
+  const TableEl = () => (
     <table ref={ref} className={tableClass} {...omitProps}>
       <caption>{caption}</caption>
       {children}
     </table>
+  );
+
+  return (
+    <>
+      {withContainer ? (
+        <TableContainer title={title}>
+          <TableEl />
+        </TableContainer>
+      ):(
+        <table ref={ref} className={tableClass} {...omitProps}>
+          <caption>{caption}</caption>
+          {children}
+        </table>
+      )}
+    </>
   )
-  }) as OdysseyTable;
+}) as OdysseyTable;
 
 Table.Container = TableContainer;
 Table.Header = TableHeader;
