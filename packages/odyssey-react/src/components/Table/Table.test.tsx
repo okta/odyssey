@@ -41,6 +41,13 @@ describe("Table", () => {
 
     expect(getByRole('table', { name: caption })).toBeTruthy();
   });
+
+  it('condontinally uses a container', () => {
+    const { getByRole } = render(
+      <Table caption={caption} withContainer={false} />
+    );
+    expect(getByRole('table').parentElement?.classList.contains('ods-table--figure')).toBeFalsy();
+  });
 });
 
 const title="test title";
