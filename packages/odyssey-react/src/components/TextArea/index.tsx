@@ -17,7 +17,8 @@ import type {
   ChangeEvent,
   RefCallback,
 } from 'react';
-import { useOid } from '../../utils';
+import styles from './TextArea.module.scss';
+import { useCx, useOid } from '../../utils';
 
 export type Props = {
   /**
@@ -141,17 +142,29 @@ const TextArea: FunctionComponent<Props> = (props) => {
     {label}
     { !required && optionalLabel &&
       <span
-        className="ods-label--optional"
+        className={styles.optionalLabel}
         children={optionalLabel}
       />
     }
   </>;
 
   return (
-    <fieldset className="ods-fieldset">
-      <div className="ods-fieldset-flex">
+    <fieldset className={styles.fieldset}>
+      <div className={styles.fieldsetFlex}>
+        <label
+          children={labelChildren}
+          className={
+            useCx(disabled || readonly ? styles.labelDisabled : styles.label)
+          }
+          htmlFor={oid}
+        />
+        <aside className={
+          useCx(disabled || readonly ? styles.hintDisabled : styles.hint)
+        }
+          children={hint}
+        />
         <textarea
-          className="ods-text-input ods-text-area"
+          className={styles.textArea}
           disabled={disabled}
           id={oid}
           name={name}
@@ -164,14 +177,6 @@ const TextArea: FunctionComponent<Props> = (props) => {
           required={required}
           defaultValue={defaultValue}
           value={value}
-        />
-        <aside className="ods-field--hint"
-          children={hint}
-        />
-        <label
-          children={labelChildren}
-          className="ods-label"
-          htmlFor={oid}
         />
       </div>
     </fieldset>
