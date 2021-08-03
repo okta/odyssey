@@ -24,7 +24,7 @@ export type Props = {
   /**
   * The visible heading for the table
   */
-  title?: ReactNode,
+  title: ReactNode,
 } & ComponentProps<'figure'>
 
 type Ref = HTMLElement;
