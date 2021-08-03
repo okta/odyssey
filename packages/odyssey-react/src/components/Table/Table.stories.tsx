@@ -30,44 +30,43 @@ export default {
 };
 
 const Template: Story = ({title, caption, direction}) => (
-  <Table.Container title={title}>
-    <Table 
-      caption={caption}
-    >
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell scope="col">
-            <Table.SortButton direction={direction}>
-              Planet
-            </Table.SortButton>
-          </Table.HeaderCell>
-          <Table.HeaderCell scope="col" className="is-ods-table-num">Radius (km)</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Type</Table.HeaderCell>
-          <Table.HeaderCell scope="col" className="is-ods-table-date">Perihelion date</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        <Table.Row>
-          <Table.DataCell>Jupiter</Table.DataCell>
-          <Table.DataCell className="is-ods-table-num">69,911</Table.DataCell>
-          <Table.DataCell>Gas giant</Table.DataCell>
-          <Table.DataCell className="is-ods-table-date">January 21, 2023</Table.DataCell>
-        </Table.Row>
-        <Table.Row>
-          <Table.DataCell>Earth</Table.DataCell>
-          <Table.DataCell className="is-ods-table-num">6,371</Table.DataCell>
-          <Table.DataCell>Terrestrial</Table.DataCell>
-          <Table.DataCell className="is-ods-table-date">January 2, 2021</Table.DataCell>
-        </Table.Row>
-        <Table.Row>
-          <Table.DataCell>Mercury</Table.DataCell>
-          <Table.DataCell className="is-ods-table-num">1,737</Table.DataCell>
-          <Table.DataCell>Terrestrial</Table.DataCell>
-          <Table.DataCell className="is-ods-table-date">&ndash;</Table.DataCell>
-        </Table.Row>
-      </Table.Body>
-    </Table>
-  </Table.Container>
+  <Table 
+    caption={caption}
+    title={title}
+  >
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell scope="col">
+          <Table.SortButton direction={direction}>
+            Planet
+          </Table.SortButton>
+        </Table.HeaderCell>
+        <Table.HeaderCell scope="col" className="is-ods-table-num">Radius (km)</Table.HeaderCell>
+        <Table.HeaderCell scope="col">Type</Table.HeaderCell>
+        <Table.HeaderCell scope="col" className="is-ods-table-date">Perihelion date</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      <Table.Row>
+        <Table.DataCell>Jupiter</Table.DataCell>
+        <Table.DataCell className="is-ods-table-num">69,911</Table.DataCell>
+        <Table.DataCell>Gas giant</Table.DataCell>
+        <Table.DataCell className="is-ods-table-date">January 21, 2023</Table.DataCell>
+      </Table.Row>
+      <Table.Row>
+        <Table.DataCell>Earth</Table.DataCell>
+        <Table.DataCell className="is-ods-table-num">6,371</Table.DataCell>
+        <Table.DataCell>Terrestrial</Table.DataCell>
+        <Table.DataCell className="is-ods-table-date">January 2, 2021</Table.DataCell>
+      </Table.Row>
+      <Table.Row>
+        <Table.DataCell>Mercury</Table.DataCell>
+        <Table.DataCell className="is-ods-table-num">1,737</Table.DataCell>
+        <Table.DataCell>Terrestrial</Table.DataCell>
+        <Table.DataCell className="is-ods-table-date">&ndash;</Table.DataCell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
 )
 
 export const Default = Template.bind({});
