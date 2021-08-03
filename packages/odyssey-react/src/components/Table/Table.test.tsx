@@ -19,12 +19,13 @@ import TableFooter from "./TableFooter";
 import TableRow from "./TableRow";
 import TableHeaderCell from "./TableHeaderCell";
 
-const caption = 'test table'
+const caption = 'test table';
+const tableTitle = 'test table';
 
 describe("Table", () => {
   it("renders the table", () => {
     const { getByRole } = render(
-      <Table caption={caption}>
+      <Table caption={caption} title={tableTitle}>
         <TableHeader />
         <TableBody />
         <TableFooter />
@@ -36,13 +37,13 @@ describe("Table", () => {
 
   it('renders the caption prop in the caption element', () => {
     const { getByRole } = render(
-      <Table caption={caption} />
+      <Table caption={caption} title={tableTitle} />
     );
 
     expect(getByRole('table', { name: caption })).toBeTruthy();
   });
 
-  it('condontinally uses a container', () => {
+  it('conditionally uses a container', () => {
     const { getByRole } = render(
       <Table caption={caption} withContainer={false} />
     );
@@ -71,7 +72,7 @@ describe("Table Container", () => {
 describe("Table Data Cell", () => {
   it("renders the cell", () => {
     const { getByText } = render(
-      <Table caption={caption}>
+      <Table caption={caption} title={tableTitle}>
         <Table.Body>
           <Table.Row>
             <Table.DataCell>data</Table.DataCell>
@@ -85,7 +86,7 @@ describe("Table Data Cell", () => {
 
   it("adds the proper class for format prop", () => {
     const { getByText } = render(
-      <Table caption={caption}>
+      <Table caption={caption} title={tableTitle}>
         <Table.Body>
           <Table.Row>
             <Table.DataCell format="num">1</Table.DataCell>
@@ -100,7 +101,7 @@ describe("Table Data Cell", () => {
 describe("Table Header Cell", () => {
   it("renders the cell", () => {
     const { getByText } = render(
-      <Table caption={caption}>
+      <Table caption={caption} title={tableTitle}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>heading</Table.HeaderCell>
@@ -114,7 +115,7 @@ describe("Table Header Cell", () => {
 
   it("adds the proper class for format prop", () => {
     const { getByText } = render(
-      <Table caption={caption}>
+      <Table caption={caption} title={tableTitle}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell format="num">number</Table.HeaderCell>
@@ -146,7 +147,7 @@ describe("Table Sort Button", () => {
 
 a11yCheck(() => render(
   <Table.Container title={title}>
-    <Table caption={caption}>
+    <Table caption={caption} title={tableTitle}>
       <TableHeader>
         <TableRow>
           <TableHeaderCell></TableHeaderCell>

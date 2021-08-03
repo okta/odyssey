@@ -24,6 +24,20 @@ import TableDataCell from './TableDataCell';
 import TableHeaderCell from './TableHeaderCell';
 import TableSortButton from './TableSortButton';
 
+
+type ContainerProps =
+  | { withContainer: false; title?: never }
+  | { 
+    /**
+    * Whether to use a Table.Container around the Table
+    */
+    withContainer?: true;
+    /**
+    * The visible heading for the table
+    */ 
+    title: React.ReactNode 
+  }
+
 export type Props = {
   /**
   * Valid Table child elements including Head, Body, and Foot 
@@ -32,16 +46,8 @@ export type Props = {
   /**
   * Provides users of assistive technologies with context for the table contents
   */
-  caption?: string
-  /**
-  * The visible heading for the table
-  */
-  title?: React.ReactNode
-  /**
-   * Whether to use a Table.Container around the Table
-   */
-  withContainer?: boolean
-} & ComponentProps<'table'>
+  caption: string
+} & ContainerProps & ComponentProps<'table'>
 
 export type Ref = HTMLTableElement;
 
