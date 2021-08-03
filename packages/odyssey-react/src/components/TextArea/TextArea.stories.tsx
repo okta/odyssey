@@ -45,3 +45,14 @@ const Template: Story<Props> = (props) => (
 );
 
 export const Default = Template.bind({});
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true
+};
+
+export const Optional = Template.bind({});
+Optional.args = {
+  required: false,
+  optionalLabel: 'Optional'
+};
