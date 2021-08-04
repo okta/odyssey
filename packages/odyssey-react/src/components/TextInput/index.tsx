@@ -17,6 +17,7 @@ import type {
   ChangeEvent,
   RefCallback,
 } from 'react';
+import styles from './TextInput.module.scss';
 import { useOid } from '../../utils';
 
 export type Props = {
@@ -142,17 +143,28 @@ const TextInput: FunctionComponent<Props> = (props) => {
     {label}
     { !required && optionalLabel &&
       <span
-        className="ods-label--optional"
+        className={styles.optionalLabel}
         children={optionalLabel}
       />
     }
   </>;
 
+  const labelClass = (() => {
+    if (type === 'search') return styles.labelSearch;
+    if (disabled || readonly) return styles.labelDisabled;
+    return styles.label;
+  })();
+
   return (
-    <fieldset className="ods-fieldset">
-      <div className="ods-fieldset-flex">
+    <fieldset className={styles.fieldset}>
+      <div className={styles.fieldsetFlex}>
+        <label
+          children={labelChildren}
+          className={labelClass}
+          htmlFor={oid}
+        />
         <input
-          className="ods-text-input"
+          className={styles.textInput}
           disabled={disabled}
           id={oid}
           name={name}
@@ -167,13 +179,8 @@ const TextInput: FunctionComponent<Props> = (props) => {
           defaultValue={defaultValue}
           value={value}
         />
-        <label
-          children={labelChildren}
-          className="ods-label"
-          htmlFor={oid}
-        />
-      </div>
-    </fieldset>
+      </div >
+    </fieldset >
   );
 };
 
