@@ -29,7 +29,7 @@ module.exports = {
               sourceMap: true,
               modules: {
                 auto: true,
-                localIdentName: "[folder]__[local]__[hash:base64:5]",
+                localIdentName: 'ods-[folder]-[local]-[hash:base64:5]',
               }
             }
           },
