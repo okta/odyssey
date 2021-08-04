@@ -17,6 +17,7 @@ import type {
   ChangeEvent,
   RefCallback,
 } from 'react';
+import styles from './Checkbox.module.scss';
 import { useOid } from '../../utils';
 
 export type Props = {
@@ -118,7 +119,7 @@ const Checkbox: FunctionComponent<Props> = (props) => {
   return (
     <>
       <input
-        className="ods-checkbox"
+        className={styles.checkbox}
         checked={checked}
         disabled={disabled}
         id={oid}
@@ -133,7 +134,7 @@ const Checkbox: FunctionComponent<Props> = (props) => {
       />
       <label
         children={label}
-        className="ods-checkbox--label"
+        className={styles.label}
         htmlFor={oid}
       />
     </>
