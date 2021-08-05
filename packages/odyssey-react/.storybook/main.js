@@ -72,7 +72,6 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/components/status-layout';
                 @import '@okta/odyssey/src/scss/components/tab';
                 @import '@okta/odyssey/src/scss/components/table';
-                @import '@okta/odyssey/src/scss/components/tag';
                 @import '@okta/odyssey/src/scss/components/text-input';
                 @import '@okta/odyssey/src/scss/components/toast';
                 @import '@okta/odyssey/src/scss/components/toast-pen';
