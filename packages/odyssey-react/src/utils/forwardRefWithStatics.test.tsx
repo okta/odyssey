@@ -13,7 +13,7 @@
 import React from 'react';
 import type { ComponentPropsWithRef, FC } from 'react';
 import { screen, render } from '@testing-library/react';
-import { forwardRefWithStatics } from './forward-ref-with-statics';
+import { forwardRefWithStatics } from '.';
 
 describe('forwardRefWithStatics', () => {
   type Props = ComponentPropsWithRef<'div'>;
