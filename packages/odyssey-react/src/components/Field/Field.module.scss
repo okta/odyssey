@@ -10,9 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-/* stylelint-disable no-descending-specificity */
-
-.ods-field {
+.root {
   display: flex;
   flex-direction: column;
   max-width: $max-line-length;
@@ -23,7 +21,7 @@
   }
 }
 
-.ods-field--label {
+.label {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -35,7 +33,7 @@
   font-weight: 600;
 }
 
-.ods-field--label--optional {
+.optional-label {
   padding-inline-start: $spacing-s;
   color: $text-sub;
   font-size: $size-body-caption;
@@ -43,27 +41,15 @@
   line-height: $spacing-m; // Helps optically match line-height above
 }
 
-.ods-field--hint {
+.hint {
   margin-block-start: -$spacing-xs; // Hug label
   margin-block-end: $spacing-xs;
   color: $text-body;
   font-size: $size-body-caption;
 }
 
-.ods-field--error {
+.error {
   margin-block-start: $spacing-xs;
   color: $text-danger;
   font-size: $size-body-caption;
-}
-
-.ods-fieldset--pair {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  .ods-number-input,
-  .ods-text-input,
-  .ods-select {
-    width: calc(50% - #{$spacing-s});
-  }
 }
