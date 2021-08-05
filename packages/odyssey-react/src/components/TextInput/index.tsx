@@ -179,8 +179,8 @@ const TextInput: FunctionComponent<Props> = (props) => {
           defaultValue={defaultValue}
           value={value}
         />
-      </div >
-    </fieldset >
+      </div>
+    </fieldset>
   );
 };
 
