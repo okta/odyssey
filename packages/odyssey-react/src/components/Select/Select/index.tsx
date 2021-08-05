@@ -18,7 +18,7 @@ import type {
 } from 'react';
 import SelectOption from '../SelectOption';
 import SelectOptionGroup from '../SelectOptionGroup';
-import useChoices from './use-choices';
+import useChoices from './useChoices';
 import { forwardRefWithStatics, useOid, useOmit } from '../../../utils';
 
 export interface Props extends Omit<

@@ -13,4 +13,4 @@
 export { oid, useOid } from './oid';
 export { omit, useOmit } from './omit';
 export { cx, useCx } from './cx';
-export { forwardRefWithStatics } from './forward-ref-with-statics';
+export { forwardRefWithStatics } from './forwardRefWithStatics';
