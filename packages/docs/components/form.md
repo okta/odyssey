@@ -74,13 +74,13 @@ Field is the primary component for assembling forms. It includes all of the supp
 
 </Description>
 
-### Component Parts
+### Component parts
 
 #### Field.Label
 
 <Description>
 
-A text label for the Field. The associate element may be `<label>` or `<legend>` depending on Field's Input type.
+A text label for the Field. The associated element may be `<label>` or `<legend>` depending on Field's Input type.
 
 The Label also indicates the Field's optional/required status to ensure screen readers properly announce the state.
 
@@ -446,45 +446,111 @@ As a second option, we could dynamically insert/remove the appropriate hint/erro
 
 <Description>
 
-### Non-global attrs
+FieldGroup is essentially a `fieldset` for grouping multiple Fields. The component parts are limited to a Legend, Description, a slot for an Infobox, and a slot for Fields.
 
-Fieldset-specific HTML attributes:
+</Description>
 
-- `disabled` - If this Boolean attribute is set, all Inputs that are descendants of the `<fieldset>` are disabled.
-  - Form elements inside the `<legend>` element won't be disabled, but this doesn't seem like a valid use case for Odyssey.
-  - In the case of FieldGroup, `disabled` could be passed to the child Fields (or their Inputs). Disabling whole FieldGroups on the parent `fieldset` is also viable.
-- `name` - The name associated with the group.
-- `form` - This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements.
-  - Because of the unintuitive behavior of this attribute, I recommend that this be relegated to use on Field or we provide a way to cascade this attribute to all child Inputs.
+### Component parts
 
-As noted above, it may be beneficial to pass these attributes directly to the child Inputs rather than applying them to the parent `fieldset`.
+#### FieldGroup.Title
 
-### Content areas
+<Description>
 
-- Title: contains legend for FieldGroup
-- Descr: contains a description for a FieldGroup
-- Error: contains an Infobox describing FieldGroup-level errors ("Two valid options you have selected are incompatible.")
-- Slot: contains Fields
+A `legend` for the FieldGroup.
+
+```html
+<legend class="ods-field-group--title">Crew Information</legend>
+```
+
+</Description>
+
+<Visual>
+  <legend class="ods-field-group--title">Crew Information</legend>
+</Visual>
+
+#### FieldGroup.Description
+
+<Description>
+
+This provides any additional context for the FieldGroup, but is entirely optional. Content should not extend beyond a single paragraph.
+
+```html
+<p class="ods-field-group--desc">List all crew members and provide their relevant details.</p>
+```
+
+</Description>
+
+<Visual>
+  <p class="ods-field-group--desc">List all crew members and provide their relevant details.</p>
+</Visual>
+
+#### Infobox (Error)
+
+<Description>
+
+Contains an Infobox describing FieldGroup-level errors. Ex: if two different Field values are valid but incompatible with each other.
+
+A slot may be sufficient; final designs will indicate if some sort of additional styling wrapper is needed.
+
+```html
+<section class="ods-field-group--error">
+  <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+    <span class="ods-infobox--icon">
+      <OdsIcon icon="error"></OdsIcon>
+    </span>
+    <h1 class="ods-infobox--title">Disallowed combination</h1>
+    <section class="ods-infobox--content">
+      <p>This destination cannot be reached utilizing your current speed selection.</p>
+    </section>
+  </aside>
+</section>
+```
+
+</Description>
+
+<Visual>
+  <section class="ods-field-group--error">
+    <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="error"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Disallowed combination</h1>
+      <section class="ods-infobox--content">
+        <p>This destination cannot be reached utilizing your current speed selection.</p>
+      </section>
+    </aside>
+  </section>
+</Visual>
+
+#### Fields
+
+<Description>
+
+Contains Fields. As with Infobox above, the designs will determine if any sort of styled container is necessary.
+
+</Description>
 
 ### Pseudo-Structure
 
+<Description>
+
+A FieldGroup utilizing all children would resemble the following structure:
+
 ```html
+<!-- Pseudo-React -->
 <FieldGroup>
-  <FieldGroup.Title>A Group of Fields</FieldGroup.Title>
-  <FieldGroup.Desc>This is a description of the FieldGroup.</FieldGroup.Desc>
+  <FieldGroup.Title>Origination Logistics</FieldGroup.Title>
+  <FieldGroup.Desc>This information is required for your craft to leave the starport.</FieldGroup.Desc>
   <FieldGroup.Error>
     <Infobox variant="error" />
   </FieldGroup.Error>
   [...]
 </FieldGroup>
-```
 
-### HTML
-
-```html
+<!-- HTML -->
 <fieldset class="ods-field-group">
-  <legend class="ods-field-group--title">A Group of Fields</legend>
-  <p class="ods-field-group--desc">This is a description of the FieldGroup.</p>
+  <legend class="ods-field-group--title">Origination Logistics</legend>
+  <p class="ods-field-group--desc">This information is required for your craft to leave the starport.</p>
   <section class="ods-field-group--error">
     [...]
   </section>
@@ -536,44 +602,127 @@ As noted above, it may be beneficial to pass these attributes directly to the ch
   </fieldset>
 </Visual>
 
+### Non-global attrs
+
+<Description>
+
+Fieldset-specific HTML attributes:
+
+- `disabled` - If this Boolean attribute is set, all Inputs that are descendants of the `<fieldset>` are disabled.
+  - Form elements inside the `<legend>` element won't be disabled, but this doesn't seem like a valid use case for Odyssey.
+  - In the case of FieldGroup, `disabled` could be passed to the child Fields (or their Inputs). Disabling whole FieldGroups on the parent `fieldset` is also viable.
+- `name` - The name associated with the group.
+- `form` - This attribute takes the value of the id attribute of a `<form>` element you want the `<fieldset>` to be part of, even if it is not inside the form. Please note that usage of this is confusing — if you want the `<input>` elements inside the `<fieldset>` to be associated with the form, you need to use the form attribute directly on those elements.
+  - Because of the unintuitive behavior of this attribute, I recommend that this be relegated to use on Field or we provide a way to cascade this attribute to all child Inputs.
+
+As noted above, it may be beneficial to pass these attributes directly to the child Inputs rather than applying them to the parent `fieldset`.
+
+</Description>
+
 ## Form
 
 <Description>
 
 A container component that controls form behavior and provides layout slots.
 
-### Non-global attrs
+</Description>
 
-Form-specific HTML attributes we may need props for.
+### Component Parts
 
-#### Submission-related
+#### Form.Title
 
-These values can be overridden by a `formaction` attribute on a `<button>`, `<input type="submit">`, or `<input type="image">` element.
+<Description>
 
-- `action` - The URL that processes the form submission.
-- `enctype` - If the value of the method attribute is post, enctype is the MIME type of the form submission. Possible values: `application/x-www-form-urlencoded` (default), `multipart/form-data` (use when form contains `<input type='file'>` elements), `text/plain` (debugging).
-- `method` - The HTTP method to submit the form with. Possible (case insensitive) values: `get`, `post`, `dialog`.
-- `novalidate` - This Boolean attribute indicates that the form shouldn't be validated when submitted.
-- `target` - Indicates where to display the response after submitting the form. The following values have special meanings: `_self` (default), `_blank`, `_parent`, `_top`.
+A heading for the Form.
 
-#### Likely unnec
+```html
+<h1 class="ods-form--title">Interplanetary flight registration</h1>
+```
 
-- `accept-charset` - Space-separated character encodings the server accepts. The default value means the same encoding as the page.
-- `autocomplete` - Indicates whether input elements can by default have their values automatically completed by the browser. autocomplete attributes on form elements override it on `<form>`. Possible values: `off`, `on`.
-  - WCAG requires that we specify this attribute on individual inputs that collect data about the user.
-- `name` - The name of the form. The value must not be the empty string, and must be unique among the `form` elements in the forms collection that it is in, if any.
-- `rel` - Creates a hyperlink or annotation depending on the value, see the rel attribute for details.
+</Description>
 
-### Content areas
+<Visual>
+  <h1 class="ods-form--title">Interplanetary flight registration</h1>
+</Visual>
 
-- Header: contains Title, Description
-- Main: contains FieldGroups, Fields
-- Error: contains an Infobox displaying Form-level errors
-- Footer: contains Form actions or action containers like ButtonGroup, also legalese
+#### Form.Description
+
+<Description>
+
+This provides any additional context for the Form, but is entirely optional. Content should not extend beyond a single paragraph.
+
+```html
+<p class="ods-field-group--desc">Complete this form in order to register for your interplanetary transfer.</p>
+```
+
+</Description>
+
+<Visual>
+  <p class="ods-field-group--desc">Complete this form in order to register for your interplanetary transfer.</p>
+</Visual>
+
+#### Form.Main
+
+<Description>
+
+A slot for FieldGroups, Fields.
+
+</Description>
+
+#### Form.Error
+
+<Description>
+
+Contains an Infobox describing Form-level errors. Ex: a server error; if config has disallowed something.
+
+As above, slot may be sufficient; final designs will indicate if some sort of additional styling wrapper is needed.
+
+```html
+<section class="ods-form--error">
+  <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+    <span class="ods-infobox--icon">
+      <OdsIcon icon="error"></OdsIcon>
+    </span>
+    <h1 class="ods-infobox--title">Signal interrupted</h1>
+    <section class="ods-infobox--content">
+      <p>Solar flare activity has caused your submission to fail. Please try again.</p>
+    </section>
+  </aside>
+</section>
+```
+
+</Description>
+
+<Visual>
+  <section class="ods-form--error">
+    <aside class="ods-infobox is-ods-infobox-danger" role="alert">
+      <span class="ods-infobox--icon">
+        <OdsIcon icon="error"></OdsIcon>
+      </span>
+      <h1 class="ods-infobox--title">Signal interrupted</h1>
+      <section class="ods-infobox--content">
+        <p>Solar flare activity has caused your submission to fail. Please try again.</p>
+      </section>
+    </aside>
+  </section>
+</Visual>
+
+#### Form.Footer
+
+<Description>
+
+This is a container for Form actions like Buttons or ButtonGroups. It may also contain legalese, TBD.
+
+</Description>
 
 ### Pseudo-Structure
 
+<Description>
+
+A simple pseudo-structure example is below, with a "kitchen sink" example rendered to the right.
+
 ```html
+<!-- Pseudo-React -->
 <Form>
   <Form.Header>
     <Form.Title>Form Title</Form.Title>
@@ -597,11 +746,8 @@ These values can be overridden by a `formaction` attribute on a `<button>`, `<in
     </ButtonGroup>
   </Form.Footer>
 </Form>
-```
 
-### Component markup
-
-```html
+<!-- HTML -->
 <form class="ods-form">
   <header class="ods-form--header">
     <h1 class="ods-form--title">[...]</h1>
@@ -726,6 +872,33 @@ These values can be overridden by a `formaction` attribute on a `<button>`, `<in
     </footer>
   </form>
 </Visual>
+
+### Non-global attrs
+
+<Description>
+
+Form-specific HTML attributes we may need props for.
+
+#### Submission-related
+
+These values can be overridden by a `formaction` attribute on a `<button>`, `<input type="submit">`, or `<input type="image">` element.
+
+- `action` - The URL that processes the form submission.
+- `enctype` - If the value of the method attribute is post, enctype is the MIME type of the form submission. Possible values: `application/x-www-form-urlencoded` (default), `multipart/form-data` (use when form contains `<input type='file'>` elements), `text/plain` (debugging).
+- `method` - The HTTP method to submit the form with. Possible (case insensitive) values: `get`, `post`, `dialog`.
+- `novalidate` - This Boolean attribute indicates that the form shouldn't be validated when submitted.
+- `target` - Indicates where to display the response after submitting the form. The following values have special meanings: `_self` (default), `_blank`, `_parent`, `_top`.
+
+#### Likely unnec
+
+- `accept-charset` - Space-separated character encodings the server accepts. The default value means the same encoding as the page.
+- `autocomplete` - Indicates whether input elements can by default have their values automatically completed by the browser. autocomplete attributes on form elements override it on `<form>`. Possible values: `off`, `on`.
+  - WCAG requires that we specify this attribute on individual inputs that collect data about the user.
+- `name` - The name of the form. The value must not be the empty string, and must be unique among the `form` elements in the forms collection that it is in, if any.
+- `rel` - Creates a hyperlink or annotation depending on the value, see the rel attribute for details.
+
+</Description>
+
 
 :::
 
