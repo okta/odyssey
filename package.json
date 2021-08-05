@@ -25,7 +25,7 @@
     "prepare": "[ -z \"$CI\" ] && husky install || exit 0"
   },
   "devDependencies": {
-    "lerna": "3.3.2"
+    "lerna": "4.0.0"
   },
   "version": "0.5.0"
 }
