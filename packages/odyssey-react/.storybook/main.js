@@ -25,7 +25,6 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 2,
               sourceMap: true,
               modules: {
                 auto: true,
@@ -38,10 +37,49 @@ module.exports = {
             options: {
               sourceMap: true,
               additionalData: `
-                @import '~@okta/odyssey/src/scss/abstracts/functions';
-                @import '~@okta/odyssey/src/scss/abstracts/colors';
-                @import '~@okta/odyssey/src/scss/abstracts/mixins';
-                @import '~@okta/odyssey/src/scss/abstracts/tokens';
+                // Abstracts
+                @import '@okta/odyssey/src/scss/abstracts/functions';
+                @import '@okta/odyssey/src/scss/abstracts/colors';
+                @import '@okta/odyssey/src/scss/abstracts/mixins';
+                @import '@okta/odyssey/src/scss/abstracts/tokens';
+
+                // Base
+                @import '@okta/odyssey/src/scss/base/reset';
+                @import '@okta/odyssey/src/scss/base/accessibility';
+                @import '@okta/odyssey/src/scss/base/iconography';
+                @import '@okta/odyssey/src/scss/base/typography';
+
+                // Components
+                @import '@okta/odyssey/src/scss/components/banner';
+                @import '@okta/odyssey/src/scss/components/button';
+                @import '@okta/odyssey/src/scss/components/button-context';
+                @import '@okta/odyssey/src/scss/components/button-layout';
+                @import '@okta/odyssey/src/scss/components/checkbox';
+                @import '@okta/odyssey/src/scss/components/checkbox-context';
+                @import '@okta/odyssey/src/scss/components/checkbox-layout';
+                @import '@okta/odyssey/src/scss/components/forms';
+                @import '@okta/odyssey/src/scss/components/forms-context';
+                @import '@okta/odyssey/src/scss/components/input-field';
+                @import '@okta/odyssey/src/scss/components/input-field-layout';
+                @import '@okta/odyssey/src/scss/components/label';
+                @import '@okta/odyssey/src/scss/components/modal';
+                @import '@okta/odyssey/src/scss/components/number-input';
+                @import '@okta/odyssey/src/scss/components/radio-button';
+                @import '@okta/odyssey/src/scss/components/radio-button-layout';
+                @import '@okta/odyssey/src/scss/components/infobox';
+                @import '@okta/odyssey/src/scss/components/select';
+                @import '@okta/odyssey/src/scss/components/status';
+                @import '@okta/odyssey/src/scss/components/status-layout';
+                @import '@okta/odyssey/src/scss/components/tab';
+                @import '@okta/odyssey/src/scss/components/table';
+                @import '@okta/odyssey/src/scss/components/tag';
+                @import '@okta/odyssey/src/scss/components/text-input';
+                @import '@okta/odyssey/src/scss/components/toast';
+                @import '@okta/odyssey/src/scss/components/toast-pen';
+                @import '@okta/odyssey/src/scss/components/tooltip';
+
+                // Vendor Extensions
+                @import '@okta/odyssey/src/scss/vendors-ext/choices-ext';
               `
             }
           }
