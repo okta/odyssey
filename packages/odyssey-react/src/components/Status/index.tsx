@@ -55,7 +55,7 @@ const Status: FunctionComponent<Props> = (props) => {
 
   return (
     <div className={styles.status} role="status">
-      <span className={labelHidden ? styles['label-visually-hidden'] : styles.label}>
+      <span className={labelHidden ? styles.labelVisuallyHidden : styles.label}>
         {label}
       </span>
       <span className={`${styles.value} ${styles[variant]}`}>
