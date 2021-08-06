@@ -13,7 +13,7 @@
 import React from 'react'
 import type { FunctionComponent, ReactText } from 'react'
 import { useOmit } from '../../utils';
-
+import styles from './Link.module.scss'
 export type Props = {
   /**
    * The URL that the hyperlink points to. Links are not restricted to HTTP-based URLs — they can use any URL scheme supported by browsers.
@@ -59,7 +59,7 @@ const Link: FunctionComponent<Props> = (props) => {
       target={target}
       rel={rel}
       href={href}
-      className="ods-link"
+      className={styles.link}
     >
       {children}
     </a>
