@@ -35,7 +35,7 @@ describe("Title", () => {
     const component = getByRole(title);
 
     expect(component.tagName).toBe('H3');
-    expect(component.classList).toContain('is-ods-title-6');
+    expect(component.classList).toContain('level6');
   });
 
   a11yCheck(() => render(<Title level={1} children={titleText} />))
