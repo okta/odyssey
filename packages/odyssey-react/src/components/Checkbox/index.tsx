@@ -17,6 +17,7 @@ import type {
   ChangeEvent,
   RefCallback,
 } from 'react';
+import styles from './Checkbox.module.scss';
 import { useOid } from '../../utils';
 
 export type Props = {
@@ -39,50 +40,50 @@ export type Props = {
   /**
    * The underlying input element name attribute
    */
-   name: string,
+  name: string,
 
   /**
    * The underlying input element required attribute
    * @default true
    */
-   required?: boolean,
+  required?: boolean,
 
   /**
    * The underlying input element disabled attribute
    * @default false
    */
-   disabled?: boolean,
+  disabled?: boolean,
 
-   /**
-    * The underlying input element value attribute
-    */
-   value: string,
- 
-   /**
-    * The input element checked state for controlled components
-    * @default false
-    */
-   checked?: boolean,
- 
-   /**
-    * Callback executed when the input fires a blur event
-    * @param {Object} event the event object
-    */
-   onBlur?: FocusEventHandler<HTMLInputElement>,
- 
-   /**
-    * Callback executed when the input fires a change event
-    * @param {Object} event the event object
-    * @param {string} value the string value of the input
-    */
-   onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void,
- 
-   /**
-   * Callback executed when the input fires a focus event
+  /**
+   * The underlying input element value attribute
+   */
+  value: string,
+
+  /**
+   * The input element checked state for controlled components
+   * @default false
+   */
+  checked?: boolean,
+
+  /**
+   * Callback executed when the input fires a blur event
    * @param {Object} event the event object
    */
-   onFocus?: FocusEventHandler<HTMLInputElement>,
- };
+  onBlur?: FocusEventHandler<HTMLInputElement>,
+
+  /**
+   * Callback executed when the input fires a change event
+   * @param {Object} event the event object
+   * @param {string} value the string value of the input
+   */
+  onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void,
+
+  /**
+  * Callback executed when the input fires a focus event
+  * @param {Object} event the event object
+  */
+  onFocus?: FocusEventHandler<HTMLInputElement>,
+};
 
 /**
  * A clickable Checkbox used for form submissions and most in-page interactions.
@@ -118,7 +119,7 @@ const Checkbox: FunctionComponent<Props> = (props) => {
   return (
     <>
       <input
-        className="ods-checkbox"
+        className={styles.checkbox}
         checked={checked}
         disabled={disabled}
         id={oid}
@@ -133,7 +134,7 @@ const Checkbox: FunctionComponent<Props> = (props) => {
       />
       <label
         children={label}
-        className="ods-checkbox--label"
+        className={styles.label}
         htmlFor={oid}
       />
     </>
