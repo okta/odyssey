@@ -54,9 +54,6 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/components/button';
                 @import '@okta/odyssey/src/scss/components/button-context';
                 @import '@okta/odyssey/src/scss/components/button-layout';
-                @import '@okta/odyssey/src/scss/components/checkbox';
-                @import '@okta/odyssey/src/scss/components/checkbox-context';
-                @import '@okta/odyssey/src/scss/components/checkbox-layout';
                 @import '@okta/odyssey/src/scss/components/forms';
                 @import '@okta/odyssey/src/scss/components/forms-context';
                 @import '@okta/odyssey/src/scss/components/input-field';
