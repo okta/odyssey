@@ -44,18 +44,24 @@ $status-indicator-size: 1em / 2;
 }
 
 .success {
+  composes: value;
+
   &::before {
     background-color: $color-success-base;
   }
 }
 
 .caution {
+  composes: value;
+
   &::before {
     background-color: $color-caution-base;
   }
 }
 
 .danger {
+  composes: value;
+
   &::before {
     background-color: $color-danger-base;
   }
