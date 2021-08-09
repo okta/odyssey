@@ -54,10 +54,11 @@ const Status: FunctionComponent<Props> = (props) => {
   } = props;
 
   const valueClass = variant && (variant !== 'neutral') ? styles[variant] : styles.value;
-
+  const labelClass = labelHidden ? styles.labelVisuallyHidden : styles.label;
+  
   return (
     <div className={styles.status} role="status">
-      <span className={labelHidden ? styles.labelVisuallyHidden : styles.label}>
+      <span className={labelClass}>
         {label}
       </span>
       <span className={valueClass}>
