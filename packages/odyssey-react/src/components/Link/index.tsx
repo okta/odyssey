@@ -53,13 +53,19 @@ const Link: FunctionComponent<Props> = (props) => {
 
   const omitProps = useOmit(rest);
 
+  const componentClass = (() => {
+    const classes = [styles.link]
+    if (target === '_blank') classes.push(styles.linkExternal);
+    return classes.join(' ');
+  })();
+
   return (
     <a 
       {...omitProps}
       target={target}
       rel={rel}
       href={href}
-      className={styles.link}
+      className={componentClass}
     >
       {children}
     </a>
