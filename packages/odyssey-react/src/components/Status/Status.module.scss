@@ -1,0 +1,68 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+$status-indicator-size: 1em / 2;
+
+.label {
+  display: block;
+  margin-block-end: $spacing-xs;
+  font-weight: 600;
+}
+
+.labelVisuallyHidden {
+  @include is-visually-hidden;
+}
+
+.value {
+  position: relative;
+  padding-inline-start: $status-indicator-size + $spacing-xs-em;
+  background-color: transparent;
+  color: $text-body;
+
+  &::before {
+    @include border-radius(1em);
+
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    width: $status-indicator-size;
+    height: $status-indicator-size;
+    margin-inline-end: $spacing-xs;
+    transform: translateY(-50%);
+    background-color: cv('gray', '600');
+  }
+}
+
+.success {
+  composes: value;
+
+  &::before {
+    background-color: $color-success-base;
+  }
+}
+
+.caution {
+  composes: value;
+
+  &::before {
+    background-color: $color-caution-base;
+  }
+}
+
+.danger {
+  composes: value;
+
+  &::before {
+    background-color: $color-danger-base;
+  }
+}
