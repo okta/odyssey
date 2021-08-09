@@ -46,8 +46,6 @@ export type Props = {
 const Title: FunctionComponent<Props> = ({ level = '1', visualLevel, children, ...rest }) => {
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
 
-  console.log(styles.heading);
-
   const componentClass = useCx(
     styles.heading,
     visualLevel && styles[`level${visualLevel}`]
