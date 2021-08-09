@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+@value link from '../Link/Link.module.scss';
+
 .infobox {
   @include border-radius($base-border-radius);
 
@@ -25,7 +27,7 @@
   padding-inline: $spacing-m;
   column-gap: $spacing-s;
 
-  a {
+  .link {
     color: $text-body;
     text-decoration: underline;
   }
