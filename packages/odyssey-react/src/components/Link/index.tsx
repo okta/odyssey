@@ -13,7 +13,7 @@
 import React from 'react'
 import type { FunctionComponent, ReactText } from 'react'
 import { useOmit } from '../../utils';
-
+import styles from './Link.module.scss'
 export type Props = {
   /**
    * The URL that the hyperlink points to. Links are not restricted to HTTP-based URLs — they can use any URL scheme supported by browsers.
@@ -53,13 +53,19 @@ const Link: FunctionComponent<Props> = (props) => {
 
   const omitProps = useOmit(rest);
 
+  const componentClass = (() => {
+    const classes = [styles.link]
+    if (target === '_blank') classes.push(styles.linkExternal);
+    return classes.join(' ');
+  })();
+
   return (
     <a 
       {...omitProps}
       target={target}
       rel={rel}
       href={href}
-      className="ods-link"
+      className={componentClass}
     >
       {children}
     </a>
