@@ -54,11 +54,9 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/components/button';
                 @import '@okta/odyssey/src/scss/components/button-context';
                 @import '@okta/odyssey/src/scss/components/button-layout';
-                @import '@okta/odyssey/src/scss/components/forms';
-                @import '@okta/odyssey/src/scss/components/forms-context';
-                @import '@okta/odyssey/src/scss/components/input-field';
-                @import '@okta/odyssey/src/scss/components/input-field-layout';
-                @import '@okta/odyssey/src/scss/components/label';
+                @import '@okta/odyssey/src/scss/components/field';
+                @import '@okta/odyssey/src/scss/components/field-group';
+                @import '@okta/odyssey/src/scss/components/form';
                 @import '@okta/odyssey/src/scss/components/modal';
                 @import '@okta/odyssey/src/scss/components/number-input';
                 @import '@okta/odyssey/src/scss/components/radio-button';
