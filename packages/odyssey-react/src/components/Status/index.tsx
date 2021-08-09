@@ -11,8 +11,8 @@
  */
 
 import React from 'react'
-import type { FunctionComponent } from 'react'
-import { useCx } from '../../utils';
+import type { FunctionComponent } from 'react';
+import styles from './Status.module.scss';
 
 export type StatusVariants = 'neutral' | 'success' | 'caution' | 'danger';
 export type Props = {
@@ -53,18 +53,15 @@ const Status: FunctionComponent<Props> = (props) => {
     variant = "neutral",
   } = props;
 
-  const componentClass = useCx(
-    "ods-status",
-    `is-ods-status-${variant}`,
-    { "is-ods-status-label-hidden": labelHidden }
-  );
-
+  const valueClass = variant && (variant !== 'neutral') ? styles[variant] : styles.value;
+  const labelClass = labelHidden ? styles.labelVisuallyHidden : styles.label;
+  
   return (
-    <div className={componentClass} role="status">
-      <span className="ods-status--label">
+    <div className={styles.status} role="status">
+      <span className={labelClass}>
         {label}
       </span>
-      <span className="ods-status--value">
+      <span className={valueClass}>
         {descriptor}
       </span>
     </div>
