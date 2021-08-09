@@ -51,12 +51,9 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/base/typography-text';
                 @import '@okta/odyssey/src/scss/base/typography-list';
                 @import '@okta/odyssey/src/scss/base/typography-header';
-                
+
                 // Components
                 @import '@okta/odyssey/src/scss/components/banner';
-                @import '@okta/odyssey/src/scss/components/button';
-                @import '@okta/odyssey/src/scss/components/button-context';
-                @import '@okta/odyssey/src/scss/components/button-layout';
                 @import '@okta/odyssey/src/scss/components/forms';
                 @import '@okta/odyssey/src/scss/components/forms-context';
                 @import '@okta/odyssey/src/scss/components/input-field';

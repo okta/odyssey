@@ -35,10 +35,7 @@ export default {
 };
 
 const Template: Story<Props> = ({ variant, disabled, onClick, size, wide }) => (
-  <>
-    <Button variant={variant} onClick={onClick} disabled={disabled} size={size} wide={wide}>Default</Button>
-    <Button variant={variant} onClick={onClick} disabled={true} size={size} wide={wide}>Disabled</Button>
-  </>
+  <Button variant={variant} onClick={onClick} disabled={disabled} size={size} wide={wide}>Button label</Button>
 );
 
 export const Primary = Template.bind({});
