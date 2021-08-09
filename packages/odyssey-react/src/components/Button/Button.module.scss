@@ -33,13 +33,13 @@
   white-space: nowrap;
 
   &:hover,
-  &.buttonHover {
+  &.stateHover {
     border-color: $color-primary-dark;
     background-color: $color-primary-dark;
   }
 
   &:focus,
-  &.buttonFocus {
+  &.stateFocus {
     @include outline;
 
     background-color: $color-primary-dark;
@@ -75,14 +75,14 @@
   color: $color-primary-base;
 
   &:hover,
-  &.buttonHover {
+  &.stateHover {
     border-color: $color-primary-base;
     background-color: $color-primary-base;
     color: $white;
   }
 
   &:focus,
-  &.buttonFocus {
+  &.stateFocus {
     border-color: $color-primary-base;
     background-color: $white;
     color: $color-primary-base;
@@ -99,13 +99,13 @@
   background-color: $color-danger-base;
 
   &:hover,
-  &.buttonHover {
+  &.stateHover {
     border-color: $color-danger-dark;
     background-color: $color-danger-dark;
   }
 
   &:focus,
-  &.buttonFocus {
+  &.stateFocus {
     @include outline($focus-ring-danger);
 
     background-color: $color-danger-dark;
@@ -122,7 +122,7 @@
     color: $color-danger-base;
 
     &:focus,
-    &.buttonFocus {
+    &.stateFocus {
       border-color: $color-danger-dark;
       background-color: $color-danger-light;
       color: $color-danger-dark;
@@ -145,13 +145,13 @@
   line-height: 1;
 
   &:hover,
-  &.buttonHover {
+  &.stateHover {
     border-color: transparent;
     background-color: transparentize($white, 0.6);
   }
 
   &:focus,
-  &.buttonFocus {
+  &.stateFocus {
     background-color: transparentize($white, 0.6);
     box-shadow: 0 0 0 2px;
   }
@@ -167,14 +167,14 @@
   color: $color-primary-base;
 
   &:hover,
-  &.buttonHover {
+  &.stateHover {
     border-color: transparent;
     background-color: cv('blue', '000');
     color: $color-primary-dark;
   }
 
   &:focus,
-  &.buttonFocus {
+  &.stateFocus {
     background-color: $white;
     color: $color-primary-base;
   }
