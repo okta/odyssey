@@ -38,27 +38,3 @@
 .error {
   margin-block-end: $spacing-m;
 }
-
-.attached {
-  display: flex;
-  max-width: $max-line-length;
-
-  .ods-button {
-    border-start-start-radius: 0;
-    border-start-end-radius: $base-border-radius;
-    border-end-start-radius: 0;
-    border-end-end-radius: $base-border-radius;
-  }
-
-  .ods-text-input {
-    border-inline-end: 0;
-    border-start-start-radius: $base-border-radius;
-    border-start-end-radius: 0;
-    border-end-start-radius: $base-border-radius;
-    border-end-end-radius: 0;
-
-    &:focus {
-      z-index: 1;
-    }
-  }
-}
