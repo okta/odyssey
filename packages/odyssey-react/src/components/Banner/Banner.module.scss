@@ -24,16 +24,6 @@
   background-color: cv('blue', '300');
 }
 
-.isBannerDismissed {
-  display: none;
-}
-
-.isBannerDismissable {
-  padding-block: $spacing-s;
-  padding-inline-start: $spacing-m;
-  padding-inline-end: $spacing-l;
-}
-
 .bannerIcon {
   grid-area: icon;
   margin-inline-end: $spacing-s;
@@ -68,6 +58,16 @@
   inset-inline-end: $spacing-m;
   margin-inline-start: $spacing-m;
   transform: translateY(-50%);
+}
+
+.isBannerDismissed {
+  display: none;
+}
+
+.isBannerDismissable {
+  padding-block: $spacing-s;
+  padding-inline-start: $spacing-m;
+  padding-inline-end: $spacing-l;
 }
 
 .variantInfo {
