@@ -16,6 +16,7 @@ import { createPortal } from "react-dom";
 import Button from "../Button";
 import type { ButtonVariants } from "../Button";
 import { useOid, useCx } from "../../utils";
+import styles from './Modal.module.scss';
 
 export type PropsModal = {
   /**
@@ -77,8 +78,10 @@ export const ModalContext = createContext<{ onClose: () => void}>({ onClose: () 
  * requiring user interaction. This dialog disables the main content until the 
  * user interacts with the modal dialog.
  * 
- * @todo OKTA-00000: [React] Modal: Use proper close icon
- * @todo Determine how to enforce use of only Modal static components as children using TS
+ * @todo OKTA-419301 - (odyssey-react) Modal: Implement close icon from odyssey-icons 
+ * @todo OKTA-419312 - (odyssey-react) Modal: Add missing keyboard/focus lock support
+ * @todo OKTA-419313 - (odyssey-react) Modal: Add missing "click outside" functionality
+ * @todo OKTA-419315 - (odyssey-react) Modal: Animation-out not working as expected
  * 
  * @component
  * @example
@@ -99,8 +102,8 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
   const oid = useOid(id);
   const modalDialog = useRef<HTMLDivElement>(null);
   const componentClass = useCx(
-    'ods-modal',
-    { "is-open": open }
+    styles.root,
+    { [styles.isOpen]: open }
   );
 
   if (open && onOpen) {
@@ -110,8 +113,8 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
   return createPortal(
     <ModalContext.Provider value={context}>
       <div className={componentClass} id={oid} aria-hidden={!open} data-testid="ods-modal">
-        <div className="ods-modal--overlay" tabIndex={-1}>
-          <div className="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title" ref={modalDialog}> 
+        <div className={styles.overlay} tabIndex={-1}>
+          <div className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title" ref={modalDialog}> 
             {children}
           </div>
         </div>
@@ -122,24 +125,27 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
 };
 
 Modal.Header = ({ children }) => (
-  <header className="ods-modal--header">
-    <span className="ods-modal--dismiss">
-      <Modal.Button close variant="dismiss">&#x2716;</Modal.Button>
+  <header className={styles.header}>
+    <span className={styles.dismiss}>
+      <Modal.Button close variant="dismiss">
+        {/* @todo Insert <Icon> component */}
+        &#8253;
+      </Modal.Button>
     </span>
-    <h1 className="ods-modal--title" id="ods-modal-standard-title">
+    <h1 className={styles.title} id="ods-modal-standard-title">
       {children}
     </h1>
   </header>
-)
+);
 
 Modal.Body = ({ children }) => (
-  <main className="ods-modal--content" id="ods-modal-standard-content">
+  <main className={styles.content} id="ods-modal-standard-content">
     {children}
   </main>
 );
 
 Modal.Footer = ({ children }) => (
-  <footer className="ods-modal--footer">
+  <footer className={styles.footer}>
     {children}
   </footer>
 );
