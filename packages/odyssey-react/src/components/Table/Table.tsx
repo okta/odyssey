@@ -13,7 +13,7 @@
 import React from 'react';
 import type { ReactElement, ComponentProps} from 'react';
 
-import { useOmit } from '../../utils';
+import { forwardRefWithStatics, useOmit } from '../../utils';
 
 import TableContainer from './TableContainer';
 import TableHeader from './TableHeader';
@@ -24,6 +24,7 @@ import TableDataCell from './TableDataCell';
 import TableHeaderCell from './TableHeaderCell';
 import TableSortButton from './TableSortButton';
 
+import styles from './Table.module.scss';
 
 type ContainerProps =
   | { withContainer: false; title?: never }
@@ -49,9 +50,9 @@ export type Props = {
   caption: string
 } & ContainerProps & ComponentProps<'table'>
 
-export type Ref = HTMLTableElement;
+type Ref = HTMLTableElement;
 
-type OdysseyTable = {
+type Statics = {
   Container: typeof TableContainer,
   Header: typeof TableHeader,
   Body: typeof TableBody,
@@ -60,15 +61,14 @@ type OdysseyTable = {
   DataCell: typeof TableDataCell,
   HeaderCell: typeof TableHeaderCell,
   SortButton: typeof TableSortButton,
-} & React.ForwardRefExoticComponent<Props & React.RefAttributes<Ref>>
+}
 
-export const tableClass = 'ods-table';
 export type CellTextFormats = 'num' | 'date' ;
 
 /*
 * Tables provide structure for displaying sets of data across rows and columns.
 */
-const Table = React.forwardRef<Ref, Props>((props, ref) => {
+const Table = forwardRefWithStatics<Ref, Props, Statics>((props, ref) => {
   const {
     children,
     caption,
@@ -80,8 +80,8 @@ const Table = React.forwardRef<Ref, Props>((props, ref) => {
   const omitProps = useOmit(rest);
 
   const TableEl = () => (
-    <table ref={ref} className={tableClass} {...omitProps}>
-      <caption>{caption}</caption>
+    <table ref={ref} className={styles.table} {...omitProps}>
+      <caption className={styles.caption}>{caption}</caption>
       {children}
     </table>
   );
@@ -93,14 +93,11 @@ const Table = React.forwardRef<Ref, Props>((props, ref) => {
           <TableEl />
         </TableContainer>
       ):(
-        <table ref={ref} className={tableClass} {...omitProps}>
-          <caption>{caption}</caption>
-          {children}
-        </table>
+        <TableEl />
       )}
     </>
   )
-}) as OdysseyTable;
+});
 
 Table.Container = TableContainer;
 Table.Header = TableHeader;

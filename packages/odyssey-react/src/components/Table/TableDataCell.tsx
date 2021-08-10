@@ -12,9 +12,10 @@
 
 import React from 'react';
 import type { ReactNode, ComponentProps } from 'react';
-import { tableClass } from './Table';
 import type { CellTextFormats } from './Table';
 import { useCx, useOmit } from '../../utils';
+
+import styles from './Table.module.scss';
 
 export type Props = {
   children?: ReactNode,
@@ -22,6 +23,7 @@ export type Props = {
    * The basic text format for the cell.
    */
    format?: CellTextFormats,
+   empty?: boolean,
 } & ComponentProps<'td'>
 
 type Ref = HTMLTableDataCellElement;
@@ -30,11 +32,14 @@ const TableDataCell = React.forwardRef<Ref, Props>((props, ref) => {
   const {
     children,
     format,
+    empty,
     ...rest
   } = props;
 
   const componentClass = useCx(
-    format && `is-${tableClass}-${format}`,
+    styles.cell,
+    format && styles[format],
+    empty && styles.empty,
   );
 
   const omitProps = useOmit(rest);
