@@ -9,6 +9,7 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
+@value infobox from '../Infobox/Infobox.module.scss';
 
 .link {
   color: cv('blue', '500');
@@ -43,4 +44,9 @@
   grid-auto-flow: column;
   grid-gap: $spacing-xs;
   align-items: center;
+}
+
+.infobox .link {
+  color: $text-body;
+  text-decoration: underline;
 }

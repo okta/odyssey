@@ -12,7 +12,8 @@
 
 import React from 'react';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
-import { useCx, useOmit } from '../../utils';
+import { useOmit } from '../../utils';
+import styles from './Infobox.module.scss';
 
 export type InfoboxVariants = 'info' | 'danger' | 'caution' | 'success';
 
@@ -72,10 +73,12 @@ export type StaticComponents = {
     ...rest
   } = props;
 
-  const componentClass = useCx(
-    "ods-infobox",
-    variant && `is-ods-infobox-${variant}`
-  );
+  const componentClass = (() => {
+    if (variant === 'caution') return styles.isInfoboxCaution;
+    if (variant === 'danger') return styles.isInfoboxDanger;
+    if (variant === 'success') return styles.isInfoboxSuccess;
+    return styles.isInfoboxInfo;
+  })();
 
   const omitProps = useOmit(rest);
 
@@ -85,24 +88,24 @@ export type StaticComponents = {
       className={componentClass}
       role="status"
     >
-      <span className="ods-infobox--icon">
+      <span className={styles.infoboxIcon}>
         {/* @todo Insert <Icon> component */}
         ‽
       </span>
-      {title && <h1 className="ods-infobox--title">{title}</h1>}
+      {title && <h1 className={styles.infoboxTitle}>{title}</h1>}
       {children}
     </aside>
   );
 };
 
 Infobox.Content = ({ children }) => (
-  <section className="ods-infobox--content">
+  <section className={styles.infoboxContent}>
     {children}
   </section>
 );
 
 Infobox.Actions = ({ children }) => (
-  <section className="ods-infobox--actions">
+  <section className={styles.infoboxActions}>
     {children}
   </section>
 );
