@@ -35,7 +35,7 @@ describe("Title", () => {
     const component = getByRole(title);
 
     expect(component.tagName).toBe('H3');
-    expect(component.classList).toContain('is-ods-title-6');
+    expect(component.classList).toContain('level6');
   });
 
   it('enforces types for polymorphic rest props', () => {
