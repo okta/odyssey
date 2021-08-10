@@ -1,0 +1,182 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+.root {
+  @include border-radius($base-border-radius);
+
+  display: inline-block;
+  position: relative;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: $spacing-xs-em;
+  padding-inline: $spacing-s-em;
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 100ms;
+  transition-timing-function: linear;
+  border: 1px solid transparent;
+  background-color: $color-primary-base;
+  box-shadow: 0 0 0 0 $color-primary-light;
+  color: $white;
+  font-family: $body-font-family;
+  font-size: ms(0);
+  font-weight: 600;
+  line-height: $base-line-height;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: $color-primary-dark;
+    background-color: $color-primary-dark;
+  }
+
+  &:focus {
+    @include outline;
+
+    background-color: $color-primary-dark;
+  }
+
+  &:disabled {
+    border-color: transparent;
+    background-color: $color-primary-light;
+    cursor: not-allowed;
+  }
+
+  & + & {
+    margin-inline-start: $spacing-s;
+  }
+}
+
+// Parts
+
+.label {
+  display: inline-block;
+  min-width: $spacing-l-em;
+
+  &:not(:only-child) {
+    margin-inline-start: $spacing-xs;
+  }
+}
+
+// Variants
+
+.variantSecondary {
+  border-color: $color-primary-base;
+  background-color: $white;
+  color: $color-primary-base;
+
+  &:hover {
+    border-color: $color-primary-base;
+    background-color: $color-primary-base;
+    color: $white;
+  }
+
+  &:focus {
+    border-color: $color-primary-base;
+    background-color: $white;
+    color: $color-primary-base;
+  }
+
+  &:disabled {
+    border-color: $color-primary-light;
+    background-color: $white;
+    color: $color-primary-light;
+  }
+}
+
+.variantDanger {
+  background-color: $color-danger-base;
+
+  &:hover {
+    border-color: $color-danger-dark;
+    background-color: $color-danger-dark;
+  }
+
+  &:focus {
+    @include outline($focus-ring-danger);
+
+    background-color: $color-danger-dark;
+  }
+
+  &:disabled {
+    border-color: $color-danger-light;
+    background-color: $color-danger-light;
+  }
+}
+
+.variantDismiss {
+  padding-block: ($spacing-xs-em / 2);
+  padding-inline: ($spacing-xs-em / 2);
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  line-height: 1;
+
+  &:hover {
+    border-color: transparent;
+    background-color: transparentize($white, 0.6);
+  }
+
+  &:focus {
+    background-color: transparentize($white, 0.6);
+    box-shadow: 0 0 0 2px;
+  }
+
+  &:disabled {
+    background-color: transparentize(cv('gray', '100'), 0.6);
+    color: cv('gray', '600');
+  }
+}
+
+.variantClear {
+  background-color: transparent;
+  color: $color-primary-base;
+
+  &:hover {
+    border-color: transparent;
+    background-color: cv('blue', '000');
+    color: $color-primary-dark;
+  }
+
+  &:focus {
+    background-color: $white;
+    color: $color-primary-base;
+  }
+
+  &:disabled {
+    background-color: transparent;
+    color: $color-primary-light;
+  }
+}
+
+// Layouts
+
+.layoutWide {
+  display: block;
+  width: 100%;
+  margin-block: 0;
+  margin-inline: 0;
+
+  &:not(:last-child) {
+    margin-block-end: $spacing-s;
+  }
+}
+
+// Sizes
+
+.sizeSmall {
+  font-size: ms(-1);
+  line-height: $title-line-height;
+}
+
+.sizeLarge {
+  padding-block: $spacing-s-em;
+  padding-inline: $spacing-m-em;
+}
