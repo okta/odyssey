@@ -13,6 +13,7 @@
 import React from 'react'
 import type { FunctionComponent, ReactText } from 'react'
 import { useCx, useOmit } from '../../utils';
+import styles from './Title.module.scss';
 
 type Levels = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -48,8 +49,8 @@ const Title: FunctionComponent<Props> = (
   const Tag = `h${level}` as const;
 
   const componentClass = useCx(
-    "ods-title",
-    visualLevel && `is-ods-title-${visualLevel}`
+    styles.heading,
+    visualLevel && styles[`level${visualLevel}`]
   );
 
   const omitProps = useOmit(rest);
