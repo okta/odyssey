@@ -32,14 +32,12 @@
   line-height: $base-line-height;
   white-space: nowrap;
 
-  &:hover,
-  &.stateHover {
+  &:hover {
     border-color: $color-primary-dark;
     background-color: $color-primary-dark;
   }
 
-  &:focus,
-  &.stateFocus {
+  &:focus {
     @include outline;
 
     background-color: $color-primary-dark;
@@ -74,15 +72,13 @@
   background-color: $white;
   color: $color-primary-base;
 
-  &:hover,
-  &.stateHover {
+  &:hover {
     border-color: $color-primary-base;
     background-color: $color-primary-base;
     color: $white;
   }
 
-  &:focus,
-  &.stateFocus {
+  &:focus {
     border-color: $color-primary-base;
     background-color: $white;
     color: $color-primary-base;
@@ -98,14 +94,12 @@
 .variantDanger {
   background-color: $color-danger-base;
 
-  &:hover,
-  &.stateHover {
+  &:hover {
     border-color: $color-danger-dark;
     background-color: $color-danger-dark;
   }
 
-  &:focus,
-  &.stateFocus {
+  &:focus {
     @include outline($focus-ring-danger);
 
     background-color: $color-danger-dark;
@@ -114,25 +108,6 @@
   &:disabled {
     border-color: $color-danger-light;
     background-color: $color-danger-light;
-  }
-
-  &.variantSecondary {
-    border-color: $color-danger-base;
-    background-color: $white;
-    color: $color-danger-base;
-
-    &:focus,
-    &.stateFocus {
-      border-color: $color-danger-dark;
-      background-color: $color-danger-light;
-      color: $color-danger-dark;
-    }
-
-    &:disabled {
-      border-color: $color-danger-light;
-      background-color: $white;
-      color: $color-danger-light;
-    }
   }
 }
 
@@ -144,14 +119,12 @@
   color: inherit;
   line-height: 1;
 
-  &:hover,
-  &.stateHover {
+  &:hover {
     border-color: transparent;
     background-color: transparentize($white, 0.6);
   }
 
-  &:focus,
-  &.stateFocus {
+  &:focus {
     background-color: transparentize($white, 0.6);
     box-shadow: 0 0 0 2px;
   }
@@ -166,15 +139,13 @@
   background-color: transparent;
   color: $color-primary-base;
 
-  &:hover,
-  &.stateHover {
+  &:hover {
     border-color: transparent;
     background-color: cv('blue', '000');
     color: $color-primary-dark;
   }
 
-  &:focus,
-  &.stateFocus {
+  &:focus {
     background-color: $white;
     color: $color-primary-base;
   }
