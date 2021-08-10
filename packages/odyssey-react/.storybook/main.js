@@ -67,7 +67,6 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/components/radio-button';
                 @import '@okta/odyssey/src/scss/components/radio-button-layout';
                 @import '@okta/odyssey/src/scss/components/select';
-                @import '@okta/odyssey/src/scss/components/tab';
                 @import '@okta/odyssey/src/scss/components/table';
                 @import '@okta/odyssey/src/scss/components/toast';
                 @import '@okta/odyssey/src/scss/components/toast-pen';
