@@ -42,8 +42,10 @@ export type Props = {
  * @component
  * @example <Title level={1}>Section title</Title>
  */
-const Title: FunctionComponent<Props> = ({ level = '1', visualLevel, children, ...rest }) => {
-  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+const Title: FunctionComponent<Props> = (
+  { level = 1, visualLevel, children, ...rest }
+) => {
+  const Tag = `h${level}` as const;
 
   const componentClass = useCx(
     "ods-title",
