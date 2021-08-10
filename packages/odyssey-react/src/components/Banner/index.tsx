@@ -85,10 +85,10 @@ export type Props = ComponentProps & DismissableComponentProps;
 
   const variantClass = `variant${variant[0].toUpperCase()}${variant.slice(1)}`
   const componentClass = useCx(
-    styles.banner,
+    styles.root,
     variant && styles[variantClass],
-    !open && styles.isBannerDismissed,
-    onDismiss && styles.isBannerDismissable
+    !open && styles.isDismissed,
+    onDismiss && styles.isDismissable
   );
   const omitProps = useOmit(rest);
 
@@ -98,15 +98,15 @@ export type Props = ComponentProps & DismissableComponentProps;
       className={componentClass}
       role="status"
     >
-      <span className={styles.bannerIcon}>
+      <span className={styles.icon}>
         {/* @todo Insert <Icon> component */}
         &#8253;
       </span>
-      {title && <div className="ods-banner--title"><Title visualLevel="6" lineHeight="title" noEndMargin children={title} /></div> }
+      {title && <div className={styles.title}><Title visualLevel="6" lineHeight="title" noEndMargin children={title} /></div> }
       {content && <p className={styles.bannerContent}>{content}</p>}
       {children && <section className={styles.bannerActions}>{children}</section>}
       {onDismiss &&
-        <span className={styles.bannerDismiss}>
+        <span className={styles.dismiss}>
           <Button variant="dismiss" onClick={onDismiss} aria-label={dismissButtonLabel}>
             {/* @todo Insert <Icon> component, dismiss variant */}
             &#8253;
