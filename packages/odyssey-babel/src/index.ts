@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
+const config = {
   presets: [
     '@babel/preset-env',
     '@babel/preset-typescript',
@@ -22,4 +22,6 @@ module.exports = {
     ]
   ],
 };
+
+export { config as default };
 

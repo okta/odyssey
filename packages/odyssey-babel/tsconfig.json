@@ -1,0 +1,9 @@
+{
+  "extends": "@okta/odyssey-typescript",
+  "include": [ "src" ],
+  "compilerOptions": {
+    "module": "CommonJS",
+    "noEmit": false,
+    "outDir": "dist"
+  }
+}
