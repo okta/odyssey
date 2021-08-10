@@ -94,7 +94,7 @@ describe("Table Data Cell", () => {
         </Table.Body>
       </Table>
     );
-    expect(getByText('1').classList.contains('is-ods-table-num')).toBeTruthy();
+    expect(getByText('1').classList.contains('num')).toBeTruthy();
   });
 });
 
@@ -123,7 +123,7 @@ describe("Table Header Cell", () => {
         </Table.Header>
       </Table>
     );
-    expect(getByText('number').classList.contains('is-ods-table-num')).toBeTruthy();
+    expect(getByText('number').classList.contains('num')).toBeTruthy();
   });
 });
 
@@ -141,7 +141,7 @@ describe("Table Sort Button", () => {
       <Table.SortButton direction="asc" />
     );
 
-    expect(getByRole('button').classList.contains('is-ods-table-asc')).toBeTruthy();
+    expect(getByRole('button').classList.contains('asc')).toBeTruthy();
   });
 });
 

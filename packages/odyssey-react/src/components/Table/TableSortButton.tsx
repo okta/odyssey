@@ -12,8 +12,9 @@
 
 import React from 'react';
 import type { ReactNode, ComponentProps } from 'react';
-import { tableClass } from './Table';
-import { useCx, useOmit } from '../../utils';
+import { useOmit } from '../../utils';
+
+import styles from './Table.module.scss';
 
 export type TableSortDirections = 'asc' | 'desc' | 'unsorted' ;
 
@@ -27,14 +28,11 @@ type Ref = HTMLButtonElement;
 const TableSortButton = React.forwardRef<Ref, Props>((props, ref) => {
   const {
     children,
-    direction,
+    direction = 'unsorted',
     ...rest
   } = props;
 
-  const componentClass = useCx(
-    `${tableClass}--sort`,
-    `is-ods-table-${direction}`,
-  );
+  const componentClass = styles[direction];
 
   const omitProps = useOmit(rest);
 
