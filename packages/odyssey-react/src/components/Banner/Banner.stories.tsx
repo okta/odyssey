@@ -60,7 +60,7 @@ const Template: Story<Props> = ({
     dismissableComponentProps = {
       onDismiss: () => {
         if (onDismiss) { onDismiss() }
-        updateArgs({ visible: false })
+        updateArgs({ open: false })
       },
       dismissButtonLabel
     }
