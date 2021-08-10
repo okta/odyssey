@@ -1,25 +1,3 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "strict": true,
-    "lib": [
-      "dom",
-      "es2018"
-    ],
-    "moduleResolution": "node",
-    "module": "esnext",
-    "target": "es2017",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "jsx": "react"
-  },
-  "include": [
-    "src",
-    "jest.d.ts",
-    "styles.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "extends": "@okta/odyssey-typescript"
 }
