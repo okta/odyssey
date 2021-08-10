@@ -12,7 +12,6 @@
 
 import type { Story } from "@storybook/react";
 import { action } from '@storybook/addon-actions';
-import React from "react";
 import { Button } from '../../';
 import Tooltip from ".";
 import type { Props } from ".";

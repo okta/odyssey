@@ -10,8 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import type { FunctionComponent, ReactText } from 'react'
+import type { FunctionComponent, ReactText } from 'react';
 import { useCx, useOmit } from '../../utils';
 
 type Levels = 1 | 2 | 3 | 4 | 5 | 6;
