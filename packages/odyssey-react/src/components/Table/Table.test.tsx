@@ -39,7 +39,7 @@ describe("Table", () => {
       <Table caption={caption} title={tableTitle} />
     );
 
-    expect(getByRole('table', { name: caption })).toBe(true);
+    expect(getByRole('table', { name: caption })).toBeTruthy();
   });
 
   it('conditionally uses a container', () => {
