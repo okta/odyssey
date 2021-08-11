@@ -10,12 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useState
-} from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 import type { ReactElement } from 'react';
 import type { Props } from './RadioGroup';
 

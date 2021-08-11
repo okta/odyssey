@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
 import TextArea from ".";
