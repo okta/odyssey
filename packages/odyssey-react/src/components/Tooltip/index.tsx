@@ -12,8 +12,7 @@
 
 import { cloneElement } from 'react';
 import type { ReactElement, FunctionComponent } from 'react';
-import { useOid } from '../../utils';
-import className from 'classnames';
+import { useCx, useOid } from '../../utils';
 
 export type Props = {
   /**
@@ -52,14 +51,15 @@ const Tooltip: FunctionComponent<Props> = (props) => {
   const oid = useOid(id);
   const clone = cloneElement(children, { 'aria-describedby': oid });
 
-  const componentClass = className('ods-tooltip', {
-    [`is-ods-tooltip-${position}`]: position
-  });
+  const tooltipClasses = useCx(
+    'ods-tooltip',
+    `is-ods-tooltip-${position}`
+  );
 
   return (
     <span className="has-ods-tooltip">
       {clone}
-      <aside id={oid} className={componentClass} role="tooltip">
+      <aside id={oid} className={tooltipClasses} role="tooltip">
         {label}
       </aside>
     </span>
