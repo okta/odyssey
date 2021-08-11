@@ -1,0 +1,23 @@
+{
+  "name": "@okta/odyssey-storybook",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "prepare": "tsc"
+  },
+  "dependencies": {
+    "@pxblue/storybook-rtl-addon": "^1.0.1",
+    "@storybook/addon-a11y": "^6.3.7",
+    "@storybook/addon-actions": "^6.3.7",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-links": "^6.3.7",
+    "@storybook/react": "^6.3.7"
+  },
+  "devDependencies": {
+    "@okta/odyssey": "^0.7.0",
+    "@okta/odyssey-typescript": "^0.0.0"
+  }
+}
