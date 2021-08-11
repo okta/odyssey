@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@okta/odyssey-babel": "^0.0.0",
+    "@okta/odyssey-eslint": "^0.0.0",
     "@okta/odyssey-typescript": "^0.0.0",
     "@storybook/addon-a11y": "^6.2.9",
     "@storybook/addon-actions": "^6.2.9",
