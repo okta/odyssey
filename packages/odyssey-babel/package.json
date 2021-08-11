@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "prepare": "tsc"
   },
   "dependencies": {
     "@babel/core": "^7.15.0",

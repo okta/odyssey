@@ -22,7 +22,8 @@
     "stylelint": "stylelint **/*.scss",
     "test": "lerna run test",
     "commitlint": "commitlint --verbose --edit",
-    "prepare": "[ -z \"$CI\" ] && husky install || exit 0"
+    "prepare": "lerna run prepare",
+    "postprepare": "[ -z \"$CI\" ] && husky install || exit 0"
   },
   "devDependencies": {
     "lerna": "4.0.0"
