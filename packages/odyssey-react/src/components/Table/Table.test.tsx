@@ -39,14 +39,14 @@ describe("Table", () => {
       <Table caption={caption} title={tableTitle} />
     );
 
-    expect(getByRole('table', { name: caption })).toBeTruthy();
+    expect(getByRole('table', { name: caption })).toBe(true);
   });
 
   it('conditionally uses a container', () => {
     const { getByRole } = render(
       <Table caption={caption} withContainer={false} />
     );
-    expect(getByRole('table').parentElement?.classList.contains('ods-table--figure')).toBeFalsy();
+    expect(getByRole('table').parentElement?.classList.contains('figure')).toBe(false);
   });
 });
 
@@ -93,7 +93,7 @@ describe("Table Data Cell", () => {
         </Table.Body>
       </Table>
     );
-    expect(getByText('1').classList.contains('num')).toBeTruthy();
+    expect(getByText('1').classList.contains('num')).toBe(true);
   });
 });
 
@@ -122,7 +122,7 @@ describe("Table Header Cell", () => {
         </Table.Header>
       </Table>
     );
-    expect(getByText('number').classList.contains('num')).toBeTruthy();
+    expect(getByText('number').classList.contains('num')).toBe(true);
   });
 });
 
@@ -140,7 +140,7 @@ describe("Table Sort Button", () => {
       <Table.SortButton direction="asc" />
     );
 
-    expect(getByRole('button').classList.contains('asc')).toBeTruthy();
+    expect(getByRole('button').classList.contains('asc')).toBe(true);
   });
 });
 
