@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import type { FunctionComponent, ReactText } from 'react'
+import type { FunctionComponent, ReactText } from 'react';
 import { useCx, useOmit } from '../../utils';
+import styles from './Title.module.scss';
 
 type Levels = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -42,12 +42,14 @@ export type Props = {
  * @component
  * @example <Title level={1}>Section title</Title>
  */
-const Title: FunctionComponent<Props> = ({ level = '1', visualLevel, children, ...rest }) => {
-  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+const Title: FunctionComponent<Props> = (
+  { level = 1, visualLevel, children, ...rest }
+) => {
+  const Tag = `h${level}` as const;
 
   const componentClass = useCx(
-    "ods-title",
-    visualLevel && `is-ods-title-${visualLevel}`
+    styles.heading,
+    visualLevel && styles[`level${visualLevel}`]
   );
 
   const omitProps = useOmit(rest);

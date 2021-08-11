@@ -10,10 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from 'react';
-import type { ReactElement, ComponentProps} from 'react';
+import type {
+  ReactNode,
+  ReactElement,
+  ComponentPropsWithRef
+} from 'react';
 
-import { forwardRefWithStatics, useOmit } from '../../utils';
+import {
+  useOmit,
+  forwardRefWithStatics
+} from '../../utils';
 
 import TableContainer from './TableContainer';
 import TableHeader from './TableHeader';
@@ -35,8 +41,8 @@ type ContainerProps =
     withContainer?: true;
     /**
     * The visible heading for the table
-    */ 
-    title: React.ReactNode 
+    */
+    title: ReactNode
   }
 
 export type Props = {
@@ -48,9 +54,7 @@ export type Props = {
   * Provides users of assistive technologies with context for the table contents
   */
   caption: string
-} & ContainerProps & ComponentProps<'table'>
-
-type Ref = HTMLTableElement;
+} & ContainerProps & ComponentPropsWithRef<'table'>
 
 type Statics = {
   Container: typeof TableContainer,
@@ -68,7 +72,11 @@ export type CellTextFormats = 'num' | 'date' ;
 /*
 * Tables provide structure for displaying sets of data across rows and columns.
 */
-const Table = forwardRefWithStatics<Ref, Props, Statics>((props, ref) => {
+const Table = forwardRefWithStatics<
+  HTMLTableElement,
+  Props,
+  Statics
+>((props, ref) => {
   const {
     children,
     caption,
@@ -97,7 +105,7 @@ const Table = forwardRefWithStatics<Ref, Props, Statics>((props, ref) => {
       )}
     </>
   )
-});
+}) as OdysseyTable;
 
 Table.Container = TableContainer;
 Table.Header = TableHeader;

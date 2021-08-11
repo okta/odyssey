@@ -10,10 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
-  presets: [
-    '@babel/preset-env',
-    '@babel/preset-typescript',
-    '@babel/preset-react'
-  ],
-};
+module.exports = require('@okta/odyssey-babel');

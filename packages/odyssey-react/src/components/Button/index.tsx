@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from 'react';
 import type { FunctionComponent, MouseEventHandler, ReactText } from 'react';
 import { useCx, useOmit } from '../../utils';
+import styles from './Button.module.scss';
 
 export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
 export type ButtonSizes = 's' | 'm' | 'l';
@@ -69,10 +69,18 @@ const Button: FunctionComponent<Props> = (props) => {
   } = props;
 
   const componentClass = useCx(
-    "ods-button",
-    `is-ods-button-${variant}`,
-    `is-ods-button-size-${size}`,
-    { "is-ods-button-full-width": wide }
+    styles.root,
+    {
+      [styles.variantSecondary]: variant === 'secondary',
+      [styles.variantDanger]: variant === 'danger',
+      [styles.variantDismiss]: variant === 'dismiss',
+      [styles.variantClear]: variant === 'clear',
+
+      [styles.sizeSmall]: size === 's',
+      [styles.sizeLarge]: size === 'l',
+
+      [styles.layoutWide]: wide
+    },
   );
 
   const omitProps = useOmit(rest);
@@ -84,7 +92,7 @@ const Button: FunctionComponent<Props> = (props) => {
       disabled={disabled}
       onClick={onClick}
     >
-      <span className="ods-button--label">{children}</span>
+      <span className={styles.label}>{children}</span>
     </button>
   );
 };

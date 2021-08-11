@@ -24,6 +24,12 @@ module.exports = {
       {
         ignoreProperties: ['composes']
       }
+    ],
+    'scss/at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: ['value']
+      }
     ]
   }
 };

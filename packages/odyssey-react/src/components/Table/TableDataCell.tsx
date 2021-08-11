@@ -10,8 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from 'react';
 import type { ReactNode, ComponentProps } from 'react';
+import { forwardRef } from 'react';
+import { tableClass } from './Table';
 import type { CellTextFormats } from './Table';
 import { useCx, useOmit } from '../../utils';
 
@@ -28,7 +29,7 @@ export type Props = {
 
 type Ref = HTMLTableDataCellElement;
 
-const TableDataCell = React.forwardRef<Ref, Props>((props, ref) => {
+const TableDataCell = forwardRef<Ref, Props>((props, ref) => {
   const {
     children,
     format,

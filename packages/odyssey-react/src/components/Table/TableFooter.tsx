@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from 'react';
-import type { ReactElement, ComponentProps} from 'react';
+import type { ReactElement, ComponentProps } from 'react';
+import { forwardRef } from 'react';
 import { useOmit } from '../../utils';
 
 export type Props = {
@@ -20,7 +20,7 @@ export type Props = {
 
 type Ref = HTMLTableSectionElement;
 
-const TableFooter = React.forwardRef<Ref, Props>((props, ref) => {
+const TableFooter = forwardRef<Ref, Props>((props, ref) => {
   const {
     children,
     ...rest

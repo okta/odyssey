@@ -10,8 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Title from ".";
 
 const title = "heading";
@@ -35,8 +34,17 @@ describe("Title", () => {
     const component = getByRole(title);
 
     expect(component.tagName).toBe('H3');
-    expect(component.classList).toContain('is-ods-title-6');
+    expect(component.classList).toContain('level6');
   });
 
-  a11yCheck(() => render(<Title level={1} children={titleText} />))
+  it('enforces types for polymorphic rest props', () => {
+    render(
+      // @ts-expect-error heading element does not have href attribute
+      <Title href="/foo/bar.baz" children={titleText} />
+    );
+    const component = screen.getByRole(title);
+    expect(component).toHaveAttribute('href');
+  });
+
+  a11yCheck(() => render(<Title level={1} children={titleText} />));
 });
