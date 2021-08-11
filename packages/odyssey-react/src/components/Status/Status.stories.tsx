@@ -11,7 +11,6 @@
  */
 
 import type { Story } from "@storybook/react";
-import React from "react";
 import Status from ".";
 import type { Props } from ".";
 

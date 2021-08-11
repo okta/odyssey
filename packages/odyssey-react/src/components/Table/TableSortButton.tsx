@@ -10,9 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from 'react';
 import type { ReactNode, ComponentProps } from 'react';
-import { useOmit } from '../../utils';
+import { forwardRef } from 'react';
+
+import { useCx, useOmit } from '../../utils';
 
 import styles from './Table.module.scss';
 
@@ -25,7 +26,7 @@ export type Props = {
 
 type Ref = HTMLButtonElement;
 
-const TableSortButton = React.forwardRef<Ref, Props>((props, ref) => {
+const TableSortButton = forwardRef<Ref, Props>((props, ref) => {
   const {
     children,
     direction = 'unsorted',

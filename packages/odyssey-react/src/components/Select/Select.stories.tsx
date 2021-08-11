@@ -11,7 +11,6 @@
  */
 
 import type { Story } from "@storybook/react";
-import React from "react";
 import type { ReactElement } from "react";
 import Select from ".";
 import type { Props } from "./Select";

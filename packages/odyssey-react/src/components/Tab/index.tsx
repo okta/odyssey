@@ -10,8 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { useState } from "react";
+import { useState } from "react";
 import type { FunctionComponent, ReactElement, ReactText } from "react";
+import styles from './Tab.module.scss';
+import { useCx } from '../../utils';
 
 export type PropsTabs = {
   /**
@@ -106,7 +108,7 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({ children, id, s
 
   return (
     <Tabs.Container id={id} ariaLabel={ariaLabel}>
-      <Tabs.List> 
+      <Tabs.List>
         {children.map(({props: { label, id }}) => (
           <Tabs.Tab 
             id={id + '-tab'}
@@ -136,28 +138,33 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({ children, id, s
 };
 
 Tabs.Container = ({ children, id, ariaLabel }) => (
-  <div id={id} className="ods-tabs" aria-label={ariaLabel} data-testid="ods-tabs">
+  <div id={id} aria-label={ariaLabel} data-testid="ods-tabs">
     {children}
   </div>
 )
 
 Tabs.List = ({ children }) => (
-  <div role="tablist" aria-label="label" className="ods-tabs--tablist">{children}</div>
+  <div role="tablist" aria-label="label" className={styles.tablist}>{children}</div>
 )
 
-Tabs.Tab = ({ children, id, ariaControls, selected, onClick }) => (
-  <button 
-    id={id}
-    role="tab"
-    tabIndex={selected ? 0 : -1}
-    aria-controls={ariaControls}
-    aria-selected={selected}
-    className="ods-tabs--tab"
-    onClick={onClick}
-  >
+Tabs.Tab = ({ children, id, ariaControls, selected, onClick }) => {
+  const componentClass = useCx(styles.tab, {
+    [styles.isTabSelected]: selected
+  })
+  return (
+    <button 
+      id={id}
+      role="tab"
+      tabIndex={selected ? 0 : -1}
+      aria-controls={ariaControls}
+      aria-selected={selected}
+      className={componentClass}
+      onClick={onClick}
+    >
       {children}
     </button>
-)
+  )
+}
 
 Tabs.PanelContainer = ({ children }) => (<div className="ods-tabs--tabpanel">{children}</div>)
 
@@ -165,6 +172,7 @@ Tabs.Panel = ({ children, id, selected }) => (
   <div
     id={id}
     role="tabpanel"
+    className={styles.tabpanel}
     aria-labelledby={id + '-tab'}
     tabIndex={selected ? 0 : -1} 
     hidden={!selected}
