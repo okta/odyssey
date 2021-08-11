@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.strict.json",
+
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "module": "esnext",
+    "target": "es5",
+
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "noEmit": true
+  }
+}
