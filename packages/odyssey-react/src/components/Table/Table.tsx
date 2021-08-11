@@ -105,7 +105,7 @@ const Table = forwardRefWithStatics<
       )}
     </>
   )
-}) as OdysseyTable;
+});
 
 Table.Container = TableContainer;
 Table.Header = TableHeader;
