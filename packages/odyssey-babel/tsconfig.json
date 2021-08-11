@@ -1,9 +1,6 @@
 {
-  "extends": "@okta/odyssey-typescript",
-  "include": [ "src" ],
+  "extends": "@okta/odyssey-typescript/tsconfig.node12.json",
   "compilerOptions": {
-    "module": "CommonJS",
-    "noEmit": false,
     "outDir": "dist"
   }
 }
