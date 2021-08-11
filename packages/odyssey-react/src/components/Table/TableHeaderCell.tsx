@@ -12,7 +12,6 @@
 
 import type { ReactNode, ComponentProps } from 'react';
 import { forwardRef } from 'react';
-import { tableClass } from './Table';
 import type { CellTextFormats } from './Table';
 import { useCx, useOmit } from '../../utils';
 

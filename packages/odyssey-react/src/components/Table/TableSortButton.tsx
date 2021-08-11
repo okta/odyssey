@@ -13,7 +13,7 @@
 import type { ReactNode, ComponentProps } from 'react';
 import { forwardRef } from 'react';
 
-import { useCx, useOmit } from '../../utils';
+import { useOmit } from '../../utils';
 
 import styles from './Table.module.scss';
 
