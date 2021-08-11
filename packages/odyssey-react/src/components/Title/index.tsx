@@ -14,14 +14,14 @@ import type { FunctionComponent, ReactText } from 'react';
 import { useCx, useOmit } from '../../utils';
 import styles from './Title.module.scss';
 
-type Levels = 1 | 2 | 3 | 4 | 5 | 6;
+type Levels = '1' | '2' | '3' | '4' | '5' | '6';
 
 export type Props = {
   /**
    * The semantic level for the underlying heading tag
    * @default 1
    */
-  level: Levels,
+  level?: Levels,
 
   /**
    * The visual level level for the underlying heading tag
@@ -43,7 +43,7 @@ export type Props = {
  * @example <Title level={1}>Section title</Title>
  */
 const Title: FunctionComponent<Props> = (
-  { level = 1, visualLevel, children, ...rest }
+  { level = '1', visualLevel, children, ...rest }
 ) => {
   const Tag = `h${level}` as const;
 

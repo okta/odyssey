@@ -11,6 +11,7 @@
  */
 
 import type { FunctionComponent, ReactNode } from 'react';
+import Title from '../Title';
 import { useCx, useOmit } from '../../utils';
 import Button from '../Button';
 
@@ -100,10 +101,10 @@ export type Props = ComponentProps & DismissableComponentProps;
         {/* @todo Insert <Icon> component */}
         &#8253;
       </span>
-      {title && <h1 className="ods-banner--title">{title}</h1>}
-      {content && <p className="ods-banner--content">{content}</p>}
-      {children && <section className="ods-banner--actions">{children}</section>}
-      {onDismiss &&
+      { title && <span className="ods-banner--title"><Title visualLevel="6" children={ title } /></span> }
+      { content && <p className="ods-banner--content">{ content }</p> }
+      { children && <section className="ods-banner--actions">{ children }</section> }
+      { onDismiss &&
         <span className="ods-banner--dismiss">
           <Button variant="dismiss" onClick={onDismiss} aria-label={dismissButtonLabel}>
             {/* @todo Insert <Icon> component, dismiss variant */}
