@@ -15,6 +15,7 @@ import type { FunctionComponent, ReactElement, ReactNode, ReactText } from "reac
 import { createPortal } from "react-dom";
 import Button from "../Button";
 import type { ButtonVariants } from "../Button";
+import Title from '../Title';
 import { useOid, useCx } from "../../utils";
 import styles from './Modal.module.scss';
 
@@ -132,15 +133,13 @@ Modal.Header = ({ children }) => (
         &#8253;
       </Modal.Button>
     </span>
-    <h1 className={styles.title} id="ods-modal-standard-title">
-      {children}
-    </h1>
+    <Title visualLevel="4" children={ children } />
   </header>
 );
 
 Modal.Body = ({ children }) => (
-  <main className={styles.content} id="ods-modal-standard-content">
-    {children}
+  <main className={ styles.content }>
+    { children }
   </main>
 );
 
