@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { cloneElement } from 'react';
+import { cloneElement } from 'react';
 import type { ReactElement, FunctionComponent } from 'react';
 import { useOid } from '../../utils';
 import className from 'classnames';

@@ -10,8 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from 'react'
-import type { FunctionComponent, ReactText } from 'react'
+import type { FunctionComponent, ReactText } from 'react';
 import { useOmit } from '../../utils';
 import styles from './Link.module.scss'
 export type Props = {

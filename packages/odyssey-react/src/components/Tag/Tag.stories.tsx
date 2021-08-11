@@ -11,7 +11,6 @@
  */
 
 import type { Story } from "@storybook/react";
-import React from "react";
 import Tag from ".";
 import type { Props } from ".";
 

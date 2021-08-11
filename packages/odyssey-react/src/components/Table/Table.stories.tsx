@@ -11,7 +11,6 @@
  */
 
 import type { Story } from "@storybook/react";
-import React from "react";
 import Table from ".";
 
 export default {

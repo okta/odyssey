@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { createContext, useContext, useMemo, useRef } from "react";
+import { createContext, useContext, useMemo, useRef } from "react";
 import type { FunctionComponent, ReactElement, ReactNode, ReactText } from "react";
 import { createPortal } from "react-dom";
 import Button from "../Button";

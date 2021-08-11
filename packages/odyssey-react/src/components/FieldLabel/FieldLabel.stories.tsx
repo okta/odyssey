@@ -11,7 +11,6 @@
  */
 
 import type { Story } from "@storybook/react";
-import React from "react";
 import FieldLabel from ".";
 import type { Props } from ".";
 
