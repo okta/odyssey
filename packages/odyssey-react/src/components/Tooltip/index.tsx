@@ -13,6 +13,7 @@
 import { cloneElement } from 'react';
 import type { ReactElement, FunctionComponent } from 'react';
 import { useCx, useOid } from '../../utils';
+import styles from './Tooltip.module.scss';
 
 export type Props = {
   /**
@@ -52,12 +53,17 @@ const Tooltip: FunctionComponent<Props> = (props) => {
   const clone = cloneElement(children, { 'aria-describedby': oid });
 
   const tooltipClasses = useCx(
-    'ods-tooltip',
-    `is-ods-tooltip-${position}`
+    styles.root,
+    {
+      [styles.positionTop]: position === 'top',
+      [styles.positionEnd]: position === 'end',
+      [styles.positionBottom]: position === 'bottom',
+      [styles.positionStart]: position === 'start',
+    },
   );
 
   return (
-    <span className="has-ods-tooltip">
+    <span className={styles.hasTooltip}>
       {clone}
       <aside id={oid} className={tooltipClasses} role="tooltip">
         {label}
