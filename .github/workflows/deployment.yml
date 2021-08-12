@@ -37,14 +37,28 @@ jobs:
           git log --format=%B -n 1 ${{ github.event.after }} >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
+      - name: set $NODE_VERSION
+        run: echo "NODE_VERSION=$(node --version)" >> $GITHUB_ENV
+
       - name: Cache dependencies
         uses: actions/cache@v2
+        id: cache
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            node_modules
+            **/node_modules
+          key: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}
 
-      - name: Install dependencies
+      - name: Install & prepare dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+
+      - name: Prepare dependencies
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: yarn prepare
 
       - name: Run lint
         run: yarn lint
