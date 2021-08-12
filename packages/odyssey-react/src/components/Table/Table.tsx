@@ -30,6 +30,7 @@ import TableDataCell from './TableDataCell';
 import TableHeaderCell from './TableHeaderCell';
 import TableSortButton from './TableSortButton';
 
+import styles from './Table.module.scss';
 
 type ContainerProps =
   | { withContainer: false; title?: never }
@@ -66,7 +67,6 @@ type Statics = {
   SortButton: typeof TableSortButton,
 }
 
-export const tableClass = 'ods-table';
 export type CellTextFormats = 'num' | 'date' ;
 
 /*
@@ -88,8 +88,8 @@ const Table = forwardRefWithStatics<
   const omitProps = useOmit(rest);
 
   const TableEl = () => (
-    <table ref={ref} className={tableClass} {...omitProps}>
-      <caption>{caption}</caption>
+    <table ref={ref} className={styles.table} {...omitProps}>
+      <caption className={styles.caption}>{caption}</caption>
       {children}
     </table>
   );
@@ -101,14 +101,11 @@ const Table = forwardRefWithStatics<
           <TableEl />
         </TableContainer>
       ):(
-        <table ref={ref} className={tableClass} {...omitProps}>
-          <caption>{caption}</caption>
-          {children}
-        </table>
+        <TableEl />
       )}
     </>
   )
-})
+});
 
 Table.Container = TableContainer;
 Table.Header = TableHeader;

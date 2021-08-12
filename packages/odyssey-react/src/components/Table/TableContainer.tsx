@@ -13,8 +13,9 @@
 import type { ReactNode, ReactElement, ComponentProps } from 'react';
 import { forwardRef } from 'react';
 
-import { tableClass } from './Table';
-import { useCx, useOmit } from '../../utils';
+import { useOmit } from '../../utils';
+
+import styles from './Table.module.scss';
 
 export type Props = {
   /**
@@ -36,15 +37,11 @@ const TableContainer = forwardRef<Ref, Props>((props, ref) => {
     ...rest
   } = props;
 
-  const componentClass = useCx(
-    `${tableClass}--figure`
-  );
-
   const omitProps = useOmit(rest);
 
   return (
-    <figure ref={ref} className={componentClass} {...omitProps}>
-      <figcaption className={`${tableClass}--figcaption`}>{title}</figcaption>
+    <figure ref={ref} className={styles.container} {...omitProps}>
+      <figcaption className={styles.title}>{title}</figcaption>
       {children}
     </figure>
   );
