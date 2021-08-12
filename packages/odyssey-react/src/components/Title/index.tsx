@@ -10,13 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactText } from 'react';
+import type {
+  ComponentPropsWithoutRef,
+  FunctionComponent,
+  ReactText
+} from 'react';
 import { useCx, useOmit } from '../../utils';
 import styles from './Title.module.scss';
 
 type Levels = '1' | '2' | '3' | '4' | '5' | '6';
 
-export type Props = {
+export interface Props extends Omit<
+  ComponentPropsWithoutRef<'h1'>,
+  'style' | 'className'
+> {
   /**
    * The semantic level for the underlying heading tag
    * @default 1
@@ -43,7 +50,7 @@ export type Props = {
    * Specify explicit line height spacing
    */
   lineHeight?: 'base' | 'title';
-};
+}
 
 /**
  * Titles are used to describe the main idea of a page, a section, 
