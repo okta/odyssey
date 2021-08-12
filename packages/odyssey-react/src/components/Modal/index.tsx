@@ -72,7 +72,11 @@ export type StaticComponents = {
   Button: FunctionComponent<PropsModalButton>
 }
 
-export const ModalContext = createContext<{ onClose: () => void}>({ onClose: () => void 0 });
+export interface ModalContext {
+  onClose?: () => void,
+  modalTitleId?: string;
+}
+export const ModalContext = createContext<ModalContext>({});
 
 /**
  * UI that appears on top of the main content and moves the system into a mode 
@@ -98,8 +102,9 @@ export const ModalContext = createContext<{ onClose: () => void}>({ onClose: () 
  * </Modal>
  */
 const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
-  const { children, id, open = false, onClose, onOpen } = props
-  const context = useMemo(() => ({ onClose, onOpen }), [onClose, onOpen]);
+  const { children, id, open = false, onClose, onOpen } = props;
+  const modalTitleId = useOid();
+  const context = useMemo(() => ({ onClose, modalTitleId }), [onClose, modalTitleId]);
   const oid = useOid(id);
   const modalDialog = useRef<HTMLDivElement>(null);
   const componentClass = useCx(
@@ -115,7 +120,7 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
     <ModalContext.Provider value={context}>
       <div className={componentClass} id={oid} aria-hidden={!open} data-testid="ods-modal">
         <div className={styles.overlay} tabIndex={-1}>
-          <div className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title" ref={modalDialog}> 
+          <div className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby={modalTitleId} ref={modalDialog}>
             {children}
           </div>
         </div>
@@ -125,17 +130,26 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
   )
 };
 
-Modal.Header = ({ children }) => (
-  <header className={styles.header}>
-    <span className={styles.dismiss}>
-      <Modal.Button close variant="dismiss">
-        {/* @todo Insert <Icon> component */}
-        &#8253;
-      </Modal.Button>
-    </span>
-    <Title visualLevel="4" noEndMargin lineHeight="title" children={children} />
-  </header>
-);
+Modal.Header = ({ children }) => {
+  const { modalTitleId } = useContext(ModalContext);
+  return (
+    <header className={styles.header}>
+      <span className={styles.dismiss}>
+        <Modal.Button close variant="dismiss">
+          {/* @todo Insert <Icon> component */}
+          &#8253;
+        </Modal.Button>
+      </span>
+      <Title
+        id={modalTitleId}
+        visualLevel="4"
+        noEndMargin
+        lineHeight="title"
+        children={children}
+      />
+    </header>
+  );
+};
 
 Modal.Body = ({ children }) => (
   <main className={ styles.content }>
@@ -151,7 +165,7 @@ Modal.Footer = ({ children }) => (
 
 Modal.Button = ({ children, variant, close, onClick }) => {
   const { onClose } = useContext(ModalContext);
-  return <Button variant={variant} onClick={close ? () => onClose() : onClick}>{children}</Button>
+  return <Button variant={variant} onClick={close ? onClose : onClick}>{children}</Button>;
 };
 
 export default Modal
