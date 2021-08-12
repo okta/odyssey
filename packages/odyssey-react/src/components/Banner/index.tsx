@@ -101,7 +101,7 @@ export type Props = ComponentProps & DismissableComponentProps;
         {/* @todo Insert <Icon> component */}
         &#8253;
       </span>
-      { title && <div className="ods-banner--title"><Title visualLevel="6" children={ title } /></div> }
+      { title && <div className="ods-banner--title"><Title visualLevel="6" lineHeight="title" noEndMargin children={ title } /></div> }
       { content && <p className="ods-banner--content">{ content }</p> }
       { children && <section className="ods-banner--actions">{ children }</section> }
       { onDismiss &&
