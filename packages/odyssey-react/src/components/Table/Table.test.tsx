@@ -39,7 +39,7 @@ describe("Table", () => {
       <Table caption={caption} title={tableTitle} />
     );
 
-    expect(getByRole('table', { name: caption })).toBeTruthy();
+    expect(getByRole('table', { name: caption })).toBeInTheDocument();
   });
 
   it('conditionally uses a container', () => {
@@ -145,23 +145,21 @@ describe("Table Sort Button", () => {
 });
 
 a11yCheck(() => render(
-  <Table.Container title={title}>
-    <Table caption={caption} title={tableTitle}>
-      <TableHeader>
-        <TableRow>
-          <TableHeaderCell></TableHeaderCell>
-        </TableRow>
-      </TableHeader>
-      <Table.Body>
-        <Table.Row>
-          <Table.DataCell></Table.DataCell>
-        </Table.Row>
-      </Table.Body>
-      <TableFooter>
-        <Table.Row>
-          <Table.DataCell></Table.DataCell>
-        </Table.Row>
-      </TableFooter>
-    </Table>
-  </Table.Container>
+  <Table caption={caption} title={tableTitle}>
+    <TableHeader>
+      <TableRow>
+        <TableHeaderCell></TableHeaderCell>
+      </TableRow>
+    </TableHeader>
+    <Table.Body>
+      <Table.Row>
+        <Table.DataCell></Table.DataCell>
+      </Table.Row>
+    </Table.Body>
+    <TableFooter>
+      <Table.Row>
+        <Table.DataCell></Table.DataCell>
+      </Table.Row>
+    </TableFooter>
+  </Table>
 ))
