@@ -12,9 +12,10 @@
 
 import type { ReactNode, ComponentProps } from 'react';
 import { forwardRef } from 'react';
-import { tableClass } from './Table';
 import type { CellTextFormats } from './Table';
 import { useCx, useOmit } from '../../utils';
+
+import styles from './Table.module.scss';
 
 export type Props = {
   children?: ReactNode,
@@ -34,7 +35,8 @@ const TableHeaderCell = forwardRef<Ref, Props>((props, ref) => {
   } = props;
 
   const componentClass = useCx(
-    format && `is-${tableClass}-${format}`,
+    props.scope === 'col' ? styles.headerCellCol : styles.headerCell,
+    format && styles[format],
   );
 
   const omitProps = useOmit(rest);
