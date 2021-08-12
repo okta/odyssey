@@ -93,7 +93,7 @@ export type StaticComponents = {
         ‽
       </span>
 
-      { title && <span className={ styles.infoboxTitle }><Title visualLevel="6" children={ title } /></span> }
+      { title && <div className={ styles.infoboxTitle }><Title visualLevel="6" children={ title } /></div> }
       { children }
     </aside>
   );
