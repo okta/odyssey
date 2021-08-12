@@ -31,8 +31,19 @@ export type Props = {
   /**
    * The human readable section title to be visually displayed
    */
-  children: ReactText
-}
+  children: ReactText,
+
+  /**
+   * Remove default block end margin
+   * @default false
+   */
+  noEndMargin?: boolean;
+
+  /*
+   * Specify explicit line height spacing
+   */
+  lineHeight?: 'base' | 'title';
+};
 
 /**
  * Titles are used to describe the main idea of a page, a section, 
@@ -40,23 +51,31 @@ export type Props = {
  * use the corresponding title size.
  * 
  * @component
- * @example <Title level={1}>Section title</Title>
  */
-const Title: FunctionComponent<Props> = (
-  { level = '1', visualLevel, children, ...rest }
-) => {
+const Title: FunctionComponent<Props> = (props) => {
+  const {
+    level = '1',
+    visualLevel,
+    children,
+    noEndMargin = false,
+    lineHeight,
+    ...rest
+  } = props;
+
   const Tag = `h${level}` as const;
 
   const componentClass = useCx(
     styles.heading,
-    visualLevel && styles[`level${visualLevel}`]
+    visualLevel && styles[`level${visualLevel}`],
+    noEndMargin && styles.noEndMargin,
+    lineHeight && styles[`${lineHeight}LineHeight`]
   );
 
   const omitProps = useOmit(rest);
 
   return (
     <Tag {...omitProps} className={componentClass}>{children}</Tag>
-  )
-}
+  );
+};
 
 export default Title;

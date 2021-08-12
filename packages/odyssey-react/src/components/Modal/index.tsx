@@ -133,7 +133,7 @@ Modal.Header = ({ children }) => (
         &#8253;
       </Modal.Button>
     </span>
-    <Title visualLevel="4" children={ children } />
+    <Title visualLevel="4" noEndMargin lineHeight="title" children={children} />
   </header>
 );
 
