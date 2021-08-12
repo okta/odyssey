@@ -16,7 +16,7 @@ fi
 
 cd ${OKTA_HOME}/odyssey
 
-if ! yarn install; then
+if ! yarn install --frozen-lockfile; then
   echo "yarn install command failed! Exiting..."
   exit ${FAILED_SETUP}
 fi
