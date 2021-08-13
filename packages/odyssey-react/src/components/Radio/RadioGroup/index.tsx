@@ -19,6 +19,8 @@ import type {
 import { RadioGroupProvider } from '../context';
 import { useOmit } from '../../../utils';
 
+import styles from '../RadioGroup.module.scss';
+
 export interface Props extends Omit<
   ComponentPropsWithRef<'fieldset'>,
   'onChange' | 'style' | 'className'
@@ -87,13 +89,13 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
 
   const legendElement = (
     <legend
-      className="ods-input-legend"
+      className={styles.legend}
       children={legend}
     />
   );
 
   const inputElements = (
-    <div className="ods-fieldset-flex">
+    <div className={styles.fieldsetFlex}>
       <RadioGroupProvider
         value={{
           disabled,
@@ -109,7 +111,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
 
   const hintElement = (
     <aside
-      className="ods-field--hint"
+      className={styles.hint}
       children={hint}
     />
   );
@@ -117,7 +119,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
   const omitProps = useOmit(rest);
 
   return (
-    <fieldset className="ods-fieldset" ref={ref} {...omitProps}>
+    <fieldset className={styles.fieldset} ref={ref} {...omitProps}>
       { legendElement}
       { inputElements}
       { hint && hintElement}
