@@ -1,0 +1,221 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+.root {
+  @include border-radius($base-border-radius);
+
+  display: block;
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  padding-block: $spacing-xs;
+  padding-inline: $spacing-s;
+  transition: opacity $base-duration $base-timing 1s;
+  border: 1px solid cv('gray', '900');
+  opacity: 0;
+  background: cv('gray', '900');
+  color: cv('gray', '000');
+  font-size: $size-body-caption;
+  font-weight: 600;
+  line-height: $title-line-height;
+  white-space: nowrap;
+  pointer-events: none;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+  }
+
+  &::after {
+    border-width: calc(#{$spacing-xs} - 2px);
+  }
+
+  &::before {
+    border-width: $spacing-xs;
+  }
+
+  .hasTooltip *:focus + &,
+  .hasTooltip:hover &,
+  .hasTooltip:focus & {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.topPosition {
+  inset-block-end: calc(100% + #{$spacing-s});
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+
+  &::after,
+  &::before {
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+  }
+
+  &::after {
+    border-block-start-color: cv('gray', '900');
+  }
+
+  &::before {
+    border-block-start-color: cv('gray', '900');
+  }
+
+  [dir='rtl'] & {
+    transform: translateX(50%);
+
+    &::after,
+    &::before {
+      transform: translateX(50%);
+    }
+  }
+}
+
+.endPosition {
+  inset-block-start: 50%;
+  inset-inline-start: calc(100% + #{$spacing-s});
+  transform: translateY(-50%);
+
+  &::after,
+  &::before {
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    border-inline-end-color: cv('gray', '900');
+  }
+
+  &::before {
+    border-inline-end-color: cv('gray', '900');
+  }
+}
+
+.bottomPosition {
+  inset-block-start: calc(100% + #{$spacing-s});
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+
+  &::after,
+  &::before {
+    inset-block-end: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+  }
+
+  &::after {
+    border-block-end-color: cv('gray', '900');
+  }
+
+  &::before {
+    border-block-end-color: cv('gray', '900');
+  }
+
+  [dir='rtl'] & {
+    transform: translateX(50%);
+
+    &::after,
+    &::before {
+      transform: translateX(50%);
+    }
+  }
+}
+
+.startPosition {
+  inset-block-start: 50%;
+  inset-inline-end: calc(100% + #{$spacing-s});
+  transform: translateY(-50%);
+
+  &::after,
+  &::before {
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    border-inline-start-color: cv('gray', '900');
+  }
+
+  &::before {
+    border-inline-start-color: cv('gray', '900');
+  }
+}
+
+.hasTooltip {
+  display: inline-block;
+  position: relative;
+}
+
+@media only screen and (max-width: 40rem) {
+  .root {
+    @include border-radius(0);
+
+    display: block;
+    visibility: hidden;
+    position: fixed;
+    z-index: 1;
+    inset-block-end: 0;
+    width: 100vw;
+    border: 0;
+    opacity: 0;
+    font-size: $size-body-caption;
+    white-space: wrap;
+    pointer-events: none;
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: solid transparent;
+    }
+
+    &::after {
+      border-width: calc(#{$spacing-xs} - 2px);
+    }
+
+    &::before {
+      border-width: $spacing-xs;
+    }
+  }
+
+  .topPosition,
+  .endPosition,
+  .bottomPosition,
+  .startPosition {
+    inset-block-start: 0;
+    inset-inline-end: unset;
+    inset-block-end: unset;
+    inset-inline-start: 0;
+    transform: none;
+
+    &::after,
+    &::before {
+      inset-block-start: 100%;
+      inset-inline-start: 50%;
+      transform: translateX(-50%);
+      border: 0;
+
+      [dir='rtl'] & {
+        transform: translateX(50%);
+      }
+    }
+  }
+}
