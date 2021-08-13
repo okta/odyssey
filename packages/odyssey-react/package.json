@@ -35,6 +35,7 @@
     "lint": "eslint .",
     "test": "jest",
     "posttest": "tsc",
+    "build": "babel src --out-dir dist -x '.js,.ts,.jsx,.tsx,.module.scss'",
     "build-storybook": "build-storybook"
   }
 }
