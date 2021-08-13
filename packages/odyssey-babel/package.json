@@ -1,7 +1,7 @@
 {
   "name": "@okta/odyssey-babel",
   "version": "0.0.0",
-  "main": "dist/index.js",
+  "main": "dist/preset/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
