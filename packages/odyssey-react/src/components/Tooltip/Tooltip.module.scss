@@ -47,7 +47,7 @@
     border-width: $spacing-xs;
   }
 
-  *:focus + &,
+  .hasTooltip *:focus + &,
   .hasTooltip:hover &,
   .hasTooltip:focus & {
     visibility: visible;
@@ -55,7 +55,7 @@
   }
 }
 
-.positionTop {
+.topPosition {
   inset-block-end: calc(100% + #{$spacing-s});
   inset-inline-start: 50%;
   transform: translateX(-50%);
@@ -85,7 +85,7 @@
   }
 }
 
-.positionEnd {
+.endPosition {
   inset-block-start: 50%;
   inset-inline-start: calc(100% + #{$spacing-s});
   transform: translateY(-50%);
@@ -106,7 +106,7 @@
   }
 }
 
-.positionBottom {
+.bottomPosition {
   inset-block-start: calc(100% + #{$spacing-s});
   inset-inline-start: 50%;
   transform: translateX(-50%);
@@ -136,7 +136,7 @@
   }
 }
 
-.positionStart {
+.startPosition {
   inset-block-start: 50%;
   inset-inline-end: calc(100% + #{$spacing-s});
   transform: translateY(-50%);
@@ -196,10 +196,10 @@
     }
   }
 
-  .positionTop,
-  .positionEnd,
-  .positionBottom,
-  .positionStart {
+  .topPosition,
+  .endPosition,
+  .bottomPosition,
+  .startPosition {
     inset-block-start: 0;
     inset-inline-end: unset;
     inset-block-end: unset;

@@ -54,12 +54,7 @@ const Tooltip: FunctionComponent<Props> = (props) => {
 
   const tooltipClasses = useCx(
     styles.root,
-    {
-      [styles.positionTop]: position === 'top',
-      [styles.positionEnd]: position === 'end',
-      [styles.positionBottom]: position === 'bottom',
-      [styles.positionStart]: position === 'start',
-    },
+    styles[`${position}Position`],
   );
 
   return (
