@@ -15,6 +15,8 @@ import type { ComponentPropsWithRef } from 'react';
 import { useRadioGroup } from '../context';
 import { useOid, useOmit } from '../../../utils';
 
+import styles from '../RadioButton.module.scss'
+
 export interface Props extends Omit<
   ComponentPropsWithRef<'input'>,
   'style' | 'className'
@@ -65,7 +67,7 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
     <>
       <input
         {...omitProps}
-        className="ods-radio"
+        className={styles.radio}
         checked={checked}
         disabled={disabled}
         id={oid}
@@ -78,7 +80,7 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
       />
       <label
         children={label}
-        className="ods-radio--label"
+        className={styles.label}
         htmlFor={oid}
       />
     </>
