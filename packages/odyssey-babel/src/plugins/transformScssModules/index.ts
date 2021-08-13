@@ -10,17 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const config = {
-  presets: [
-    '@babel/preset-env',
-    '@babel/preset-typescript',
-    [
-      '@babel/preset-react',
-      {
-        runtime: 'automatic'
-      }
-    ]
-  ],
-};
-
-export { config as default };
+export { default } from './transformScssModules';
