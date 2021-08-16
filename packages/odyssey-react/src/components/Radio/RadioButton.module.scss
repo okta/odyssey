@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-/* stylelint-disable no-descending-specificity, max-nesting-depth */
+/* stylelint-disable no-descending-specificity, max-nesting-depth, selector-max-class */
 
 .radio {
   @include is-visually-hidden;

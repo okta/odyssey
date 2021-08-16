@@ -47,6 +47,7 @@
     border-width: $spacing-xs;
   }
 
+  /* stylelint-disable-next-line selector-max-universal */
   .hasTooltip *:focus + &,
   .hasTooltip:hover &,
   .hasTooltip:focus & {
