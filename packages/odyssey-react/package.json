@@ -8,15 +8,19 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
+    "change-case": "^4.1.2",
     "choices.js": "^9.0.1",
+    "nanoid": "^3.1.25",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@okta/odyssey-babel": "^0.0.0",
     "@okta/odyssey-eslint": "^0.0.0",
+    "@okta/odyssey-icons": "^0.7.0",
     "@okta/odyssey-storybook": "^0.0.0",
     "@okta/odyssey-typescript": "^0.0.0",
+    "@svgr/cli": "^5.5.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@types/jest-axe": "^3.5.1",
@@ -35,6 +39,7 @@
     "lint": "eslint .",
     "test": "jest",
     "posttest": "tsc",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "build-icons": "svgr -d ./src/components/Icon ../../node_modules/@okta/odyssey-icons/src --config-file ./src/components/Icon/_icon-config.js"
   }
 }
