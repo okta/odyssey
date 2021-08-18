@@ -1,0 +1,64 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+import { useMemo } from "react";
+import type { SVGProps, CSSProperties } from "react";
+import { nanoid } from "nanoid";
+import styles from "./Icon.module.scss";
+interface Props {
+  title?: string;
+  titleId?: string;
+  size?: string;
+  color?: string;
+}
+
+function SvgClose({
+  title = "Close",
+  titleId,
+  size,
+  color,
+  ...props
+}: SVGProps<SVGSVGElement> & Props): JSX.Element {
+  if (!titleId) {
+    titleId = useMemo(() => "icon_" + nanoid(6), [titleId]);
+  }
+
+  const sizeAndColor: CSSProperties = new Object();
+
+  if (size) {
+    sizeAndColor.fontSize = size;
+  }
+
+  if (color) {
+    sizeAndColor.color = color;
+  }
+
+  return (
+    <svg
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={styles.icon}
+      style={sizeAndColor}
+      aria-labelledby={titleId}
+      {...props}
+    >
+      {title ? <title id={titleId}>{title}</title> : null}
+      <path
+        d="M2.32289 10.1181C1.89237 10.5486 1.89237 11.2466 2.32289 11.6771C2.7534 12.1076 3.45141 12.1076 3.88192 11.6771L7 8.55904L10.1181 11.6771C10.5486 12.1076 11.2466 12.1076 11.6771 11.6771C12.1076 11.2466 12.1076 10.5486 11.6771 10.1181L8.55904 7L11.6771 3.88193C12.1076 3.45141 12.1076 2.7534 11.6771 2.32289C11.2466 1.89237 10.5486 1.89237 10.1181 2.32289L7 5.44096L3.88193 2.32289C3.45141 1.89237 2.7534 1.89237 2.32289 2.32289C1.89237 2.7534 1.89237 3.45141 2.32289 3.88192L5.44096 7L2.32289 10.1181Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export default SvgClose;
