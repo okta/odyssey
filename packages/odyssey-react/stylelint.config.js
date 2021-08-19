@@ -19,7 +19,6 @@ module.exports = {
         ignoreProperties: [ 'composes' ]
       }
     ],
-    'no-invalid-double-slash-comments': true,
     'scss/at-rule-no-unknown': [
       true,
       {
