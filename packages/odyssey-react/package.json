@@ -40,6 +40,6 @@
     "test": "jest",
     "posttest": "tsc",
     "build-storybook": "build-storybook",
-    "build-icons": "svgr -d ./src/components/Icon ../../node_modules/@okta/odyssey-icons/src --config-file ./src/components/Icon/_icon-config.js"
+    "build-icons": "svgr ../../node_modules/@okta/odyssey-icons/src --config-file ./src/components/Icon/_icon-config.js"
   }
 }
