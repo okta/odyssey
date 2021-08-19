@@ -9,7 +9,7 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-@value infobox from '../Infobox/Infobox.module.scss';
+@value root as infobox from '../Infobox/Infobox.module.scss';
 
 .root {
   color: cv('blue', '500');
@@ -40,7 +40,7 @@
   }
 }
 
-.infobox .link {
+.infobox .root {
   color: $text-body;
   text-decoration: underline;
 }
