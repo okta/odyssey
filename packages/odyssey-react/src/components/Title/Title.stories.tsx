@@ -24,10 +24,12 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({ level, visualLevel, children }) => <Title level={level} visualLevel={visualLevel} children={children} />;
+const Template: Story<Props> = ({ level, visualLevel, children }) => (
+  <Title level={ level } visualLevel={ visualLevel } children={ children } />
+);
 
 export const Primary = Template.bind({});
 Primary.args = {
-  level: 1,
+  level: "1",
   children: "Section title"
 };

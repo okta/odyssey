@@ -34,13 +34,12 @@
   grid-area: icon;
   align-self: start;
   font-size: $size-title-5;
-  line-height: 1;
+  line-height: $title-line-height;
   justify-self: start;
 }
 
 .infoboxTitle {
   grid-area: title;
-  font-size: $size-title-6;
 }
 
 .infoboxContent {
