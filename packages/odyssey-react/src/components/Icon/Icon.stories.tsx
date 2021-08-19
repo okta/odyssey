@@ -12,12 +12,16 @@
 
 import { Story } from "@storybook/react";
 import Caution from "./Caution";
-import * as Icon from "./";
+import * as IconIndex from "./";
+import Icon from "./_Icon";
 import type { ReactElement } from "react";
 import Table from "../Table";
 
+
+
 export default {
-  title: `Components/Icon`
+  title: `Components/Icon`,
+  component: Icon
 };
 
 const Template: Story = ({...args}) => (<Caution {...args} />);
@@ -66,21 +70,7 @@ const meta = [
   { "name": "Sort",  "use": "UI indicator - Data is sortable" },
   { "name": "SortAsc",  "use": "UI indicator - Data is sorted ascending" },
   { "name": "SortDesc",  "use": "UI indicator - Data is sorted descending" },
-  { "name": "User",  "use": "To support a user name" }, 
-  
-  
-    
-  
-   
-   
-   
-   
-   
-   
-  
-  
-  
-  
+  { "name": "User",  "use": "To support a user name" }
 ];
 
 export const Library = ():ReactElement => {
@@ -98,7 +88,7 @@ export const Library = ():ReactElement => {
           meta.map((row) => {
             // eslint-disable-next-line
             // @ts-ignore
-            const CurrentIcon = Icon[row.name];
+            const CurrentIcon = IconIndex[row.name];
             return (
               <Table.Row>
                 <Table.DataCell>
