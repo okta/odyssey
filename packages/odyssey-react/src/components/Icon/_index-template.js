@@ -33,7 +33,8 @@ function odysseyIconIndexTemplate(filePaths) {
     file => path.extname(file).toLowerCase() === '.tsx' && 
     !filePaths.includes(`${__dirname}/${file}`) &&
     !file.includes('.stories') &&
-    file !== 'index.tsx'
+    file !== 'index.tsx' &&
+    file !== '_Icon.tsx'
   ).map( file => `${__dirname}/${file}`);
 
   const allFilePaths = [...filePaths, ...otherFilePaths].sort();
