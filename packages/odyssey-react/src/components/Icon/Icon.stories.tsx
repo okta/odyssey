@@ -42,24 +42,45 @@ Default.argTypes = {
 }
 
 const meta = [
-  {  "name": "Caution",  "use": "To indicate a crucial decision" }, 
-  {  "name": "Search",  "use": "To search for something" }, 
-  {  "name": "GetInfo",  "use": "To get information" }, 
-  {  "name": "User",  "use": "To support a user name" }, 
-  {  "name": "Copy",  "use": "To copy text" }, 
-  {  "name": "Delete",  "use": "To delete something" }, 
-  {  "name": "Download",  "use": "To download" }, 
-  {  "name": "Notification",  "use": "To notify the user of something" }, 
-  {  "name": "Close",  "use": "To close a modal or other UI" }, 
-  {  "name": "Complete",  "use": "To show a completed process" }, 
-  {  "name": "Error",  "use": "To indicate an error" }, 
-  {  "name": "GoForward",  "use": "To navigate forward" }, 
-  {  "name": "GoBackward",  "use": "To navigate backward" }, 
-  {  "name": "Edit",  "use": "To edit something" }, 
-  {  "name": "Settings",  "use": "To edit user or app settings" }, 
-  {  "name": "Plus",  "use": "To add" }, 
-  {  "name": "Minus",  "use": "To subtract or remove" }, 
-  {  "name": "Filter",  "use": "To filter results" }
+  { "name": "Anchor",  "use": "UI indicator - element contains in page anchor link" },
+  { "name": "Caret",  "use": "UI indicator - element triggers expand" },
+  { "name": "Caution",  "use": "To indicate a crucial decision" },
+  { "name": "Check",  "use": "UI indicator - custom checkbox" },
+  { "name": "Close",  "use": "To close a modal or other UI" },
+  { "name": "Complete",  "use": "To show a completed process" },
+  { "name": "Copy",  "use": "To copy text" }, 
+  { "name": "Delete",  "use": "To delete something" },
+  { "name": "Download",  "use": "To download" },
+  { "name": "Edit",  "use": "To edit something" },
+  { "name": "Error",  "use": "To indicate an error" },
+  { "name": "External",  "use": "UI indicator - external link" },
+  { "name": "Filter",  "use": "To filter results" },
+  { "name": "GetInfo",  "use": "To get information" },
+  { "name": "GoBackward",  "use": "To navigate backward" },
+  { "name": "GoForward",  "use": "To navigate forward" },
+  { "name": "Minus",  "use": "To subtract or remove" },
+  { "name": "Notification",  "use": "To notify the user of something" },
+  { "name": "Plus",  "use": "To add" }, 
+  { "name": "Search",  "use": "To search for something" }, 
+  { "name": "Settings",  "use": "To edit user or app settings" }, 
+  { "name": "Sort",  "use": "UI indicator - Data is sortable" },
+  { "name": "SortAsc",  "use": "UI indicator - Data is sorted ascending" },
+  { "name": "SortDesc",  "use": "UI indicator - Data is sorted descending" },
+  { "name": "User",  "use": "To support a user name" }, 
+  
+  
+    
+  
+   
+   
+   
+   
+   
+   
+  
+  
+  
+  
 ];
 
 export const Library = ():ReactElement => {

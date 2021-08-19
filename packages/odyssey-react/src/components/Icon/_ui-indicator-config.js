@@ -13,11 +13,10 @@
 module.exports = {
   "ignoreExisting": true,
   "typescript": true,
-  "replaceAttrValues": {
-    "ods-icon": "{styles.icon}"
-  },
-  "svgProps": { "style": "{sizeAndColor}" },
+  "svgProps": { "style": "{sizeAndColor}", "className": "{styles.icon}" },
+  "replaceAttrValues": { "#000": 'currentColor' },
   "titleProp": true,
+  "dimensions": false,
   "template": require('./_icon-template.js'),
   "indexTemplate": require('./_index-template.js')
 }

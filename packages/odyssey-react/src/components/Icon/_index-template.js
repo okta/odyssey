@@ -10,7 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const path = require('path')
+const path = require('path');
+const fs = require('fs');
 
 const headerComment = `/*!
  * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
@@ -28,7 +29,16 @@ const headerComment = `/*!
 
 function odysseyIconIndexTemplate(filePaths) {
 
-  const exportEntries = filePaths.map(filePath => {
+  const otherFilePaths = fs.readdirSync(__dirname).filter(
+    file => path.extname(file).toLowerCase() === '.tsx' && 
+    !filePaths.includes(`${__dirname}/${file}`) &&
+    !file.includes('.stories') &&
+    file !== 'index.tsx'
+  ).map( file => `${__dirname}/${file}`);
+
+  const allFilePaths = [...filePaths, ...otherFilePaths].sort();
+
+  const exportEntries = allFilePaths.map(filePath => {
     const basename = path.basename(filePath, path.extname(filePath));
     const exportName = /^\d/.test(basename) ? `Svg${basename}` : basename;
     return `export { default as ${exportName} } from './${basename}'`;
