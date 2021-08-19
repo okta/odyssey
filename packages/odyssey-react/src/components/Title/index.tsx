@@ -10,18 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactText } from 'react';
+import type {
+  ComponentPropsWithoutRef,
+  FunctionComponent,
+  ReactText
+} from 'react';
 import { useCx, useOmit } from '../../utils';
 import styles from './Title.module.scss';
 
-type Levels = 1 | 2 | 3 | 4 | 5 | 6;
+type Levels = '1' | '2' | '3' | '4' | '5' | '6';
 
-export type Props = {
+export interface Props extends Omit<
+  ComponentPropsWithoutRef<'h1'>,
+  'style' | 'className'
+> {
   /**
    * The semantic level for the underlying heading tag
    * @default 1
    */
-  level: Levels,
+  level?: Levels,
 
   /**
    * The visual level level for the underlying heading tag
@@ -31,7 +38,18 @@ export type Props = {
   /**
    * The human readable section title to be visually displayed
    */
-  children: ReactText
+  children: ReactText,
+
+  /**
+   * Remove default block end margin
+   * @default false
+   */
+  noEndMargin?: boolean;
+
+  /*
+   * Specify explicit line height spacing
+   */
+  lineHeight?: 'base' | 'title';
 }
 
 /**
@@ -40,23 +58,31 @@ export type Props = {
  * use the corresponding title size.
  * 
  * @component
- * @example <Title level={1}>Section title</Title>
  */
-const Title: FunctionComponent<Props> = (
-  { level = 1, visualLevel, children, ...rest }
-) => {
+const Title: FunctionComponent<Props> = (props) => {
+  const {
+    level = '1',
+    visualLevel,
+    children,
+    noEndMargin = false,
+    lineHeight,
+    ...rest
+  } = props;
+
   const Tag = `h${level}` as const;
 
   const componentClass = useCx(
     styles.heading,
-    visualLevel && styles[`level${visualLevel}`]
+    visualLevel && styles[`level${visualLevel}`],
+    noEndMargin && styles.noEndMargin,
+    lineHeight && styles[`${lineHeight}LineHeight`]
   );
 
   const omitProps = useOmit(rest);
 
   return (
     <Tag {...omitProps} className={componentClass}>{children}</Tag>
-  )
-}
+  );
+};
 
 export default Title;

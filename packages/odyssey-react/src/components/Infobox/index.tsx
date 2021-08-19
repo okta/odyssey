@@ -12,6 +12,7 @@
 
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { useOmit } from '../../utils';
+import Title from '../Title';
 import styles from './Infobox.module.scss';
 
 export type InfoboxVariants = 'info' | 'danger' | 'caution' | 'success';
@@ -91,8 +92,9 @@ export type StaticComponents = {
         {/* @todo Insert <Icon> component */}
         ‽
       </span>
-      {title && <h1 className={styles.infoboxTitle}>{title}</h1>}
-      {children}
+
+      { title && <div className={ styles.infoboxTitle }><Title visualLevel="6" children={ title } /></div> }
+      { children }
     </aside>
   );
 };
