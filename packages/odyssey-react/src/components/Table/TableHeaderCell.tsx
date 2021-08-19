@@ -36,7 +36,7 @@ const TableHeaderCell = forwardRef<Ref, Props>((props, ref) => {
 
   const componentClass = useCx(
     props.scope === 'col' ? styles.headerCellCol : styles.headerCell,
-    format && styles[format],
+    format && styles[`${format}Format`],
   );
 
   const omitProps = useOmit(rest);

@@ -38,8 +38,8 @@ const TableDataCell = forwardRef<Ref, Props>((props, ref) => {
 
   const componentClass = useCx(
     styles.cell,
-    format && styles[format],
-    empty && styles.empty,
+    format && styles[`${format}Format`],
+    empty && styles[`${empty}State`],
   );
 
   const omitProps = useOmit(rest);

@@ -11,6 +11,7 @@
  */
 
 import type { FunctionComponent } from 'react';
+import { useCx } from '../../utils';
 import styles from './Status.module.scss';
 
 export type StatusVariants = 'neutral' | 'success' | 'caution' | 'danger';
@@ -52,9 +53,13 @@ const Status: FunctionComponent<Props> = (props) => {
     variant = "neutral",
   } = props;
 
-  const valueClass = variant && (variant !== 'neutral') ? styles[variant] : styles.value;
+  const valueClass = useCx(
+    styles.value,
+    styles[`${variant}Variant`],
+  );
+
   const labelClass = labelHidden ? styles.labelVisuallyHidden : styles.label;
-  
+
   return (
     <div className={styles.status} role="status">
       <span className={labelClass}>

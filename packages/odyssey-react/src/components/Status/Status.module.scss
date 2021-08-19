@@ -43,25 +43,21 @@ $status-indicator-size: 1em / 2;
   }
 }
 
-.success {
-  composes: value;
+// Value variants
 
+.successVariant {
   &::before {
     background-color: $color-success-base;
   }
 }
 
-.caution {
-  composes: value;
-
+.cautionVariant {
   &::before {
     background-color: $color-caution-base;
   }
 }
 
-.danger {
-  composes: value;
-
+.dangerVariant {
   &::before {
     background-color: $color-danger-base;
   }

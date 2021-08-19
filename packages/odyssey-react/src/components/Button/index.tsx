@@ -34,7 +34,7 @@ export type Props = {
 
   /**
    * The size to be displayed to the user.
-   * @default medium
+   * @default m
    */
   size?: ButtonSizes;
 
@@ -70,16 +70,10 @@ const Button: FunctionComponent<Props> = (props) => {
 
   const componentClass = useCx(
     styles.root,
+    styles[`${variant}Variant`],
+    styles[`${size}Size`],
     {
-      [styles.variantSecondary]: variant === 'secondary',
-      [styles.variantDanger]: variant === 'danger',
-      [styles.variantDismiss]: variant === 'dismiss',
-      [styles.variantClear]: variant === 'clear',
-
-      [styles.sizeSmall]: size === 's',
-      [styles.sizeLarge]: size === 'l',
-
-      [styles.layoutWide]: wide
+      [styles.wideLayout]: wide
     },
   );
 

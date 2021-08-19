@@ -30,21 +30,25 @@
   font-weight: 600;
 }
 
-.isTabSelected::before {
-  content: '';
-  position: absolute;
-  inset-block-end: -1px;
-  inset-inline-start: 0;
-  width: 100%;
-  height: 3px;
-  background: $color-primary-base;
-}
-
 .tabpanel {
   padding-block: $spacing-l;
   padding-inline: 0;
 
   &:focus {
     outline: none;
+  }
+}
+
+// Tab states
+
+.selectedState {
+  &::before {
+    content: '';
+    position: absolute;
+    inset-block-end: -1px;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 3px;
+    background: $color-primary-base;
   }
 }

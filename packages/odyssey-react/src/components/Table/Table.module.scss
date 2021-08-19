@@ -10,6 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+.root {
+  width: auto;
+  margin-block: 0;
+  margin-inline: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+  line-height: $title-line-height;
+
+  &:only-child {
+    margin-block-end: 0;
+  }
+}
+
 .container {
   max-width: 100%;
   margin-block-start: 0;
@@ -29,19 +42,6 @@
   font-size: $size-title-4;
   font-weight: 600;
   text-align: start;
-}
-
-.table {
-  width: auto;
-  margin-block: 0;
-  margin-inline: 0;
-  border-spacing: 0;
-  border-collapse: collapse;
-  line-height: $title-line-height;
-
-  &:only-child {
-    margin-block-end: 0;
-  }
 }
 
 .caption {
@@ -68,26 +68,6 @@
   /* stylelint-disable-next-line value-keyword-case */
   composes: headerCell;
   border-block-start: 1px solid $border-color-display;
-}
-
-.num {
-  /* Numerical data display should not swap for RTL languages. */
-  /* stylelint-disable-next-line liberty/use-logical-spec */
-  text-align: right;
-  font-feature-settings: 'lnum', 'tnum';
-}
-
-.date {
-  white-space: nowrap;
-}
-
-.empty {
-  max-width: 100%;
-  padding-block: $spacing-l;
-  padding-inline: $spacing-xl;
-  background: cv('gray', '000');
-  color: $text-sub;
-  text-align: center;
 }
 
 .sort {
@@ -121,9 +101,33 @@
   }
 }
 
-.unsorted {
-  composes: sort;
+// Table states
 
+.emptyState {
+  max-width: 100%;
+  padding-block: $spacing-l;
+  padding-inline: $spacing-xl;
+  background: cv('gray', '000');
+  color: $text-sub;
+  text-align: center;
+}
+
+// Data formats
+
+.numFormat {
+  /* Numerical data display should not swap for RTL languages. */
+  /* stylelint-disable-next-line liberty/use-logical-spec */
+  text-align: right;
+  font-feature-settings: 'lnum', 'tnum';
+}
+
+.dateFormat {
+  white-space: nowrap;
+}
+
+// Sort directions
+
+.unsortedDirection {
   &::after {
     background-image: get-icon('double-arrow', $text-sub);
   }
@@ -135,17 +139,13 @@
   }
 }
 
-.asc {
-  composes: sort;
-
+.ascDirection {
   &::after {
     background-image: get-icon('arrow', $text-heading);
   }
 }
 
-.desc {
-  composes: sort;
-
+.descDirection {
   &::after {
     transform: translateY(-50%) rotate(180deg) scale(0.75);
     background-image: get-icon('arrow', $text-heading);

@@ -34,7 +34,7 @@ import styles from './Table.module.scss';
 
 type ContainerProps =
   | { withContainer: false; title?: never }
-  | { 
+  | {
     /**
     * Whether to use a Table.Container around the Table
     */
@@ -47,7 +47,7 @@ type ContainerProps =
 
 export type Props = {
   /**
-  * Valid Table child elements including Head, Body, and Foot 
+  * Valid Table child elements including Head, Body, and Foot
   */
   children?: ReactElement | ReactElement[],
   /**
@@ -88,7 +88,7 @@ const Table = forwardRefWithStatics<
   const omitProps = useOmit(rest);
 
   const TableEl = () => (
-    <table ref={ref} className={styles.table} {...omitProps}>
+    <table ref={ref} className={styles.root} {...omitProps}>
       <caption className={styles.caption}>{caption}</caption>
       {children}
     </table>

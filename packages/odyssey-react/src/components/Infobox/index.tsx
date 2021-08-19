@@ -11,7 +11,7 @@
  */
 
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
-import { useOmit } from '../../utils';
+import { useCx, useOmit } from '../../utils';
 import Title from '../Title';
 import styles from './Infobox.module.scss';
 
@@ -23,7 +23,7 @@ export type Props = {
    * within the provided Infobox static components (Infobox.Content and Infobox.Actions)
    */
   children: ReactElement | ReactElement[],
-  
+
   /**
    * The visual variant to be displayed to the user.
    * @default info
@@ -36,11 +36,11 @@ export type Props = {
   title?: string;
 };
 
-type PropsInfoboxContent = {  
+type PropsInfoboxContent = {
   children: ReactNode
 }
 
-type PropsInfoboxActions = {  
+type PropsInfoboxActions = {
   children: ReactNode
 }
 
@@ -50,7 +50,7 @@ export type StaticComponents = {
 }
 
 /**
- * An infobox is a type of alert that provides feedback in response to a 
+ * An infobox is a type of alert that provides feedback in response to a
  * user action or system activity.
  *
  * @component
@@ -73,12 +73,10 @@ export type StaticComponents = {
     ...rest
   } = props;
 
-  const componentClass = (() => {
-    if (variant === 'caution') return styles.isInfoboxCaution;
-    if (variant === 'danger') return styles.isInfoboxDanger;
-    if (variant === 'success') return styles.isInfoboxSuccess;
-    return styles.isInfoboxInfo;
-  })();
+  const componentClass = useCx(
+    styles.root,
+    styles[`${variant}Variant`],
+  );
 
   const omitProps = useOmit(rest);
 
@@ -88,25 +86,24 @@ export type StaticComponents = {
       className={componentClass}
       role="status"
     >
-      <span className={styles.infoboxIcon}>
+      <span className={styles.icon}>
         {/* @todo Insert <Icon> component */}
         ‽
       </span>
-
-      { title && <div className={ styles.infoboxTitle }><Title visualLevel="6" children={ title } /></div> }
+      { title && <div className={ styles.title }><Title visualLevel="6" children={ title } /></div> }
       { children }
     </aside>
   );
 };
 
 Infobox.Content = ({ children }) => (
-  <section className={styles.infoboxContent}>
+  <section className={styles.content}>
     {children}
   </section>
 );
 
 Infobox.Actions = ({ children }) => (
-  <section className={styles.infoboxActions}>
+  <section className={styles.actions}>
     {children}
   </section>
 );

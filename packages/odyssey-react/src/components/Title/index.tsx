@@ -53,10 +53,10 @@ export interface Props extends Omit<
 }
 
 /**
- * Titles are used to describe the main idea of a page, a section, 
+ * Titles are used to describe the main idea of a page, a section,
  * or content that follows it. By default, header tags (h1 through h6)
  * use the corresponding title size.
- * 
+ *
  * @component
  */
 const Title: FunctionComponent<Props> = (props) => {
@@ -72,7 +72,7 @@ const Title: FunctionComponent<Props> = (props) => {
   const Tag = `h${level}` as const;
 
   const componentClass = useCx(
-    styles.heading,
+    styles.root,
     visualLevel && styles[`level${visualLevel}`],
     noEndMargin && styles.noEndMargin,
     lineHeight && styles[`${lineHeight}LineHeight`]
