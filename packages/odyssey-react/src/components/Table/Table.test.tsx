@@ -78,7 +78,7 @@ describe("Table Data Cell", () => {
           </Table.Row>
         </Table.Body>
       </Table>
-      
+
     );
     expect(getByText('data')).toBeInTheDocument();
   });
@@ -93,7 +93,7 @@ describe("Table Data Cell", () => {
         </Table.Body>
       </Table>
     );
-    expect(getByText('1').classList.contains('num')).toBe(true);
+    expect(getByText('1').classList.contains('numFormat')).toBe(true);
   });
 });
 
@@ -107,7 +107,7 @@ describe("Table Header Cell", () => {
           </Table.Row>
         </Table.Header>
       </Table>
-      
+
     );
     expect(getByText('heading')).toBeInTheDocument();
   });
@@ -122,7 +122,7 @@ describe("Table Header Cell", () => {
         </Table.Header>
       </Table>
     );
-    expect(getByText('number').classList.contains('num')).toBe(true);
+    expect(getByText('number').classList.contains('numFormat')).toBe(true);
   });
 });
 
@@ -140,7 +140,7 @@ describe("Table Sort Button", () => {
       <Table.SortButton direction="asc" />
     );
 
-    expect(getByRole('button').classList.contains('asc')).toBe(true);
+    expect(getByRole('button').classList.contains('ascDirection')).toBe(true);
   });
 });
 
