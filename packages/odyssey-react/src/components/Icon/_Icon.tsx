@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { SVGProps } from "react";
+
 export type Props = {
   /**
    * Title text used by screen readers
@@ -36,17 +38,18 @@ export type Props = {
   color?: string;
 }
 
+/** 
+ * A system of icons which establishes a visual language
+ * that can be easily understood regardless of age, language or culture.
+ */
 function Icon({
   title,
   titleId,
   size,
   color
-}:Props): JSX.Element {
-  /*
-   * Empty functional component used to document all Icons
-   */
+}:SVGProps<SVGSVGElement> & Props): JSX.Element {
   return (
-    <span>{title}{titleId}{size}{color}</span>
+    <svg xmlns="http://www.w3.org/2000/svg">{title}{titleId}{size}{color}</svg>
   );
 }
 
