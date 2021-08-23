@@ -13,6 +13,8 @@
 import { useEffect, useRef } from 'react';
 import Choices from 'choices.js';
 
+import styles from '../Select.module.scss';
+
 const useChoices = (id: string, value?: string): void => {
   const choices = useRef<undefined | Choices>();
 
@@ -25,32 +27,32 @@ const useChoices = (id: string, value?: string): void => {
       itemSelectText: '',
       removeItemButton: true,
       classNames: {
-        containerOuter: 'ods-select',
-        containerInner: 'ods-select--inner',
-        input: 'ods-select--input',
-        inputCloned: 'ods-select--input--cloned',
-        list: 'ods-select--list',
-        listItems: 'ods-select--list--multiple',
-        listSingle: 'ods-select--list--single',
-        listDropdown: 'ods-select--list--dropdown',
-        item: 'ods-select--item',
-        itemSelectable: 'ods-select--item--selectable',
-        itemDisabled: 'ods-select--item--disabled',
-        itemChoice: 'ods-select--item--choice',
-        placeholder: 'ods-select--placeholder',
-        group: 'ods-select--group',
-        groupHeading: 'ods-select--heading',
-        button: 'ods-select--button',
-        activeState: 'is-ods-select-active',
-        focusState: 'is-ods-select-focused',
-        openState: 'is-ods-select-open',
-        disabledState: 'is-ods-select-disabled',
-        highlightedState: 'is-ods-select-highlighted',
-        selectedState: 'is-ods-select-selected',
-        flippedState: 'is-ods-select-flipped',
-        loadingState: 'is-ods-select-loading',
-        noResults: 'has-no-ods-select-results',
-        noChoices: 'has-no-ods-select-choices'
+        containerOuter: styles.root,
+        containerInner: styles.inner,
+        input: styles.input,
+        inputCloned: styles.inputCloned,
+        list: styles.list,
+        listItems: styles.listMultiple,
+        listSingle: styles.listSingle,
+        listDropdown: styles.listDropdown,
+        item: styles.item,
+        itemSelectable: styles.itemSelectable,
+        itemDisabled: styles.itemDisabled,
+        itemChoice: styles.itemChoice,
+        placeholder: styles.placeholder,
+        group: styles.group,
+        groupHeading: styles.heading,
+        button: styles.button,
+        activeState: styles.active,
+        focusState: styles.focused,
+        openState: styles.open,
+        disabledState: styles.disabled,
+        highlightedState: styles.highlighted,
+        selectedState: styles.selected,
+        flippedState: styles.flipped,
+        loadingState: styles.loading,
+        noResults: styles.noResults,
+        noChoices: styles.noChoices
 
         // TODO: fix english leaks for these properties
         // loadingText: 'Loading...',

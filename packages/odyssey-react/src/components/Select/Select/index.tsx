@@ -19,7 +19,9 @@ import type {
 import SelectOption from '../SelectOption';
 import SelectOptionGroup from '../SelectOptionGroup';
 import useChoices from './useChoices';
-import { forwardRefWithStatics, useOid, useOmit } from '../../../utils';
+import { forwardRefWithStatics, useCx, useOid, useOmit } from '../../../utils';
+
+import styles from '../Select.module.scss';
 
 export interface Props extends Omit<
   ComponentPropsWithRef<'select'>,
@@ -111,14 +113,19 @@ const Select = forwardRefWithStatics<
 
   const isOptional = (!required && optionalLabel) ? true : null;
 
+  const labelClass = useCx(
+    styles.label,
+    disabled && styles.labelDisabled
+  );
+
   const labelElement = (
     <label
-      className="ods-label"
+      className={labelClass}
       htmlFor={oid}
     >
       {label}
       { isOptional && <span
-        className="ods-label--optional"
+        className={styles.optionalLabel}
         children={optionalLabel}
       />}
     </label>
@@ -151,16 +158,16 @@ const Select = forwardRefWithStatics<
 
   const hintElement = hint && (
     <aside
-      className="ods-field--hint"
+      className={styles.hint}
       children={hint}
     />
   );
 
   return (
-    <fieldset data-optional={isOptional} className="ods-fieldset">
-      <div className="ods-fieldset-flex">
-        {selectElement}
+    <fieldset data-optional={isOptional} className={styles.fieldset}>
+      <div className={styles.fieldsetFlex}>
         {labelElement}
+        {selectElement}
         {hintElement}
       </div>
     </fieldset>
