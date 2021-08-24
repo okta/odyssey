@@ -66,14 +66,16 @@
 }
 
 .labelDisabled {
-  composes: label;
+  /* stylelint-disable-next-line property-no-unknown  */
+  composes: label; /* to be removed during Forms refactor */
   color: $text-body;
 }
 
 .labelSearch {
   @include is-visually-hidden;
 
-  composes: label;
+  /* stylelint-disable-next-line property-no-unknown  */
+  composes: label; /* to be removed during Forms refactor */
 }
 
 .fieldsetFlex {
