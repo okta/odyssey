@@ -58,14 +58,11 @@
 }
 
 .headerCell {
-  composes: cell;
   color: $text-heading;
   font-weight: 600;
 }
 
 .headerCellCol {
-  /* stylelint-disable-next-line value-keyword-case */
-  composes: headerCell;
   border-block-start: 1px solid $border-color-display;
 }
 
