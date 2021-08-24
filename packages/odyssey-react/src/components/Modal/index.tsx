@@ -45,20 +45,20 @@ export type PropsModal = {
    */
   onClose: () => void,
 }
-  
-export type PropsModalHeader = { 
+
+export type PropsModalHeader = {
   children: ReactText
 }
 
-export type PropsModalBody = { 
+export type PropsModalBody = {
   children: ReactNode
 }
 
-export type PropsModalFooter = { 
+export type PropsModalFooter = {
   children: ReactNode
 }
 
-export type PropsModalButton = { 
+export type PropsModalButton = {
   close?: boolean,
   children: ReactText,
   variant?: ButtonVariants,
@@ -79,15 +79,15 @@ export interface ModalContext {
 export const ModalContext = createContext<ModalContext>({});
 
 /**
- * UI that appears on top of the main content and moves the system into a mode 
- * requiring user interaction. This dialog disables the main content until the 
+ * UI that appears on top of the main content and moves the system into a mode
+ * requiring user interaction. This dialog disables the main content until the
  * user interacts with the modal dialog.
- * 
- * @todo OKTA-419301 - (odyssey-react) Modal: Implement close icon from odyssey-icons 
+ *
+ * @todo OKTA-419301 - (odyssey-react) Modal: Implement close icon from odyssey-icons
  * @todo OKTA-419312 - (odyssey-react) Modal: Add missing keyboard/focus lock support
  * @todo OKTA-419313 - (odyssey-react) Modal: Add missing "click outside" functionality
  * @todo OKTA-419315 - (odyssey-react) Modal: Animation-out not working as expected
- * 
+ *
  * @component
  * @example
  * <Modal open={true} onOpen={()=>{}} onClose={()=>{}}>
@@ -109,7 +109,7 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
   const modalDialog = useRef<HTMLDivElement>(null);
   const componentClass = useCx(
     styles.root,
-    { [styles.isOpen]: open }
+    { [styles.openState]: open }
   );
 
   if (open && onOpen) {
@@ -125,7 +125,7 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
           </div>
         </div>
       </div>
-    </ModalContext.Provider>,    
+    </ModalContext.Provider>,
     document.body
   )
 };

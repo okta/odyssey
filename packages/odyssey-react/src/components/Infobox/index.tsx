@@ -73,12 +73,10 @@ export type StaticComponents = {
     ...rest
   } = props;
 
-  const componentClass = (() => {
-    if (variant === 'caution') return styles.isInfoboxCaution;
-    if (variant === 'danger') return styles.isInfoboxDanger;
-    if (variant === 'success') return styles.isInfoboxSuccess;
-    return styles.isInfoboxInfo;
-  })();
+  const componentClass = useCx(
+    styles.root,
+    styles[`${variant}Variant`],
+  );
 
   const omitProps = useOmit(rest);
 
@@ -88,7 +86,7 @@ export type StaticComponents = {
       className={componentClass}
       role="status"
     >
-      <span className={styles.infoboxIcon}>
+      <span className={styles.icon}>
         {/* @todo Insert <Icon> component */}
         ‽
       </span>
@@ -99,13 +97,13 @@ export type StaticComponents = {
 };
 
 Infobox.Content = ({ children }) => (
-  <section className={styles.infoboxContent}>
+  <section className={styles.content}>
     {children}
   </section>
 );
 
 Infobox.Actions = ({ children }) => (
-  <section className={styles.infoboxActions}>
+  <section className={styles.actions}>
     {children}
   </section>
 );
