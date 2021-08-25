@@ -161,7 +161,7 @@ const TextArea: FunctionComponent<Props> = (props) => {
           children={hint}
         />
         <textarea
-          className={styles.textArea}
+          className={styles.root}
           disabled={disabled}
           id={oid}
           name={name}
