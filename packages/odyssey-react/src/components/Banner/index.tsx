@@ -103,8 +103,8 @@ export type Props = ComponentProps & DismissableComponentProps;
         &#8253;
       </span>
       {title && <div className={styles.title}><Title visualLevel="6" lineHeight="title" noEndMargin children={title} /></div> }
-      {content && <p className={styles.bannerContent}>{content}</p>}
-      {children && <section className={styles.bannerActions}>{children}</section>}
+      {content && <p className={styles.content}>{content}</p>}
+      {children && <section className={styles.actions}>{children}</section>}
       {onDismiss &&
         <span className={styles.dismiss}>
           <Button variant="dismiss" onClick={onDismiss} aria-label={dismissButtonLabel}>

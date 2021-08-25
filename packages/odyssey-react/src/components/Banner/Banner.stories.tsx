@@ -74,7 +74,7 @@ const Template: Story<Props> = ({
       content={content}
       {...dismissableComponentProps}
     >
-      <Link href="https://www.okta.com">Action Link</Link>
+      <Link variant="secondary" href="https://www.okta.com">Action Link</Link>
     </Banner>
   )
 };
