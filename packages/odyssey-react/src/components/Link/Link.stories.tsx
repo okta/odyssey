@@ -35,7 +35,7 @@ export const Accessible = Template.bind({});
 Accessible.args = {
   href: "#anchor",
   children: "Accessible link",
-  variant: "a11y",
+  variant: "secondary",
 };
 
 export const External = Template.bind({});

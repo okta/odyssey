@@ -14,7 +14,7 @@ import type { FunctionComponent, ReactText } from 'react';
 import { useCx, useOmit } from '../../utils';
 import styles from './Link.module.scss'
 
-export type LinkVariants = 'default' | 'a11y';
+export type LinkVariants = 'primary' | 'secondary';
 export type Props = {
   /**
    * The URL that the hyperlink points to. Links are not restricted to HTTP-based URLs — they can use any URL scheme supported by browsers.
@@ -33,7 +33,7 @@ export type Props = {
 
   /**
    * The visual variant to be displayed to the user.
-   * @default default
+   * @default primary
    */
   variant?: LinkVariants,
 
@@ -55,7 +55,7 @@ const Link: FunctionComponent<Props> = (props) => {
     target,
     rel,
     href,
-    variant = "default",
+    variant = "primary",
     ...rest
   } = props;
 
