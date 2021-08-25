@@ -1,0 +1,3 @@
+{
+  "extends": "@okta/odyssey-babel"
+}

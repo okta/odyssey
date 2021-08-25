@@ -10,31 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const lowerCamel = /^[a-z][a-zA-Z0-9]+$/;
-const lowerCamelMessage = (type) => (
-  `${ type } should be written in lower camel case (e.g. fooBarBaz)`
-);
+declare module "cssnano-preset-*" {
+  type Opts = Record<string, unknown>
+  type Preset = <T extends Opts>(opts?: T) => { plugins: Array<postcss.Plugin<T>> }
+  const advancedPreset: Preset;
+  export default advancedPreset;
+}
 
-module.exports = {
-  extends: '@okta/odyssey-stylelint',
-  rules: {
-    'selector-max-class': 2,
-    'selector-max-id': 0,
-    'selector-max-type': 0,
-    'selector-max-universal': 0,
-    'selector-no-vendor-prefix': true,
-    'selector-class-pattern': [
-      lowerCamel,
-      {
-        message: lowerCamelMessage('Selector')
-      }
-    ],
-    'keyframes-name-pattern': [
-      lowerCamel,
-      {
-        message: lowerCamelMessage('Keyframes')
-      }
-    ]
-
-  }
-};
+declare module "autoprefixer"

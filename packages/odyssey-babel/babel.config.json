@@ -1,0 +1,4 @@
+{
+  "extends": "@okta/odyssey-babel",
+  "plugins": [ "@okta/odyssey-babel/dist/plugins/transformScssModules" ]
+}

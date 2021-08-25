@@ -10,4 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = require('@okta/odyssey-babel');
+.root {
+  @include border-radius($base-border-radius);
+
+  display: inline-block;
+  margin-block-start: 0;
+  margin-block-end: $spacing-xs;
+  margin-inline-start: 0;
+  margin-inline-end: $spacing-xs;
+  padding-block: 0;
+  padding-inline: $spacing-xs-em;
+  background: cv('gray', '100');
+  color: $text-body;
+}
