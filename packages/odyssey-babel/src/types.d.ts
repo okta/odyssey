@@ -16,3 +16,5 @@ declare module "cssnano-preset-*" {
   const advancedPreset: Preset;
   export default advancedPreset;
 }
+
+declare module "autoprefixer"

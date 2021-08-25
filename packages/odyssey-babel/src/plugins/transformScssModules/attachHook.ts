@@ -16,6 +16,7 @@ import hook from 'css-modules-require-hook';
 import crypto from 'crypto';
 import sass from 'node-sass';
 import cssnanoPreset from 'cssnano-preset-default';
+import autoprefixer from 'autoprefixer';
 
 const partials = `functions colors mixins tokens`.split(' ');
 const importDir = resolve(require.resolve('@okta/odyssey'), '../abstracts');
@@ -40,7 +41,8 @@ export default function attachHook (
         discardComments: { removeAll: true },
       }).plugins
         .filter(([, pluginOpts = {} ]) => !pluginOpts.__omit)
-        .map(plugin => plugin[ 0 ](plugin[ 1 ]))
+        .map(plugin => plugin[ 0 ](plugin[ 1 ])),
+      autoprefixer
     ],
     preprocessCss (styles: string, file: string) {
       return sass.renderSync({
