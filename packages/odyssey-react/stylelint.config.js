@@ -18,11 +18,7 @@ module.exports = {
     ],
     'scss/at-rule-no-unknown': [
       true,
-      {
-        ignoreAtRules: [ 'value' ]
-      }
     ],
-
     'selector-max-class': 2,
     'selector-max-id': 0,
     'selector-max-type': 0,
