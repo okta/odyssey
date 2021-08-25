@@ -18,7 +18,7 @@ export type Props = {
    * The URL that the hyperlink points to. Links are not restricted to HTTP-based URLs — they can use any URL scheme supported by browsers.
    */
   href: string,
-  
+
   /**
    * Where to display the linked URL, as the name for a browsing context (a tab, window, or iframe).
    */
@@ -29,7 +29,7 @@ export type Props = {
    */
   rel?: 'noopener' | 'noreferrer'
 
-  /** 
+  /**
    * The human readable/percievable value shown to the user
   */
   children: ReactText
@@ -45,7 +45,7 @@ const Link: FunctionComponent<Props> = (props) => {
   const {
     children,
     target,
-    rel, 
+    rel,
     href,
     ...rest
   } = props;
@@ -53,13 +53,13 @@ const Link: FunctionComponent<Props> = (props) => {
   const omitProps = useOmit(rest);
 
   const componentClass = (() => {
-    const classes = [styles.link]
-    if (target === '_blank') classes.push(styles.linkExternal);
+    const classes = [styles.root]
+    if (target === '_blank') classes.push(styles.external);
     return classes.join(' ');
   })();
 
   return (
-    <a 
+    <a
       {...omitProps}
       target={target}
       rel={rel}

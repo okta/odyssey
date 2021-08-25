@@ -164,7 +164,7 @@ const TextInput: FunctionComponent<Props> = (props) => {
           htmlFor={oid}
         />
         <input
-          className={styles.textInput}
+          className={styles.root}
           disabled={disabled}
           id={oid}
           name={name}

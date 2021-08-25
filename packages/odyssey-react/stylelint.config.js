@@ -15,9 +15,6 @@ module.exports = {
   rules: {
     'property-no-unknown': [
       true,
-      {
-        ignoreProperties: [ 'composes' ]
-      }
     ],
     'scss/at-rule-no-unknown': [
       true,
