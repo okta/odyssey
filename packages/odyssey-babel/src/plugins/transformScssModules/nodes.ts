@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import * as t from '@babel/types'
+import * as t from '@babel/types';
 
 export type Tokens = Record<string, string>;
 export interface ObjectExpressionArgs {
@@ -34,10 +34,10 @@ export function variableDeclaration (
         objectExpression({ tokens, styles, digest })
       )
     ]
-  )
+  );
 }
 
-export function objectExpression(
+export function objectExpression (
   { tokens, styles, digest }: ObjectExpressionArgs
 ): t.ObjectExpression {
   const body = t.blockStatement([
@@ -45,17 +45,17 @@ export function objectExpression(
   ]);
 
   return t.objectExpression([
-    t.objectProperty(t.identifier('digest'), t.stringLiteral(digest)),
-    t.objectProperty(t.identifier('template'), t.functionExpression(null, [], body)),
+    t.objectProperty(t.identifier('__digest'), t.stringLiteral(digest)),
+    t.objectProperty(t.identifier('__template'), t.functionExpression(null, [], body)),
     ...tokenObjectProperties(tokens)
-  ])
+  ]);
 }
 
 function tokenObjectProperties (
   tokens: Tokens
 ): t.ObjectProperty[] {
-  return Object.entries(tokens).map(([key, value]) => t.objectProperty(
-    t.identifier(key),
+  return Object.entries(tokens).map(([ key, value ]) => t.objectProperty(
+    t.stringLiteral(key),
     t.stringLiteral(value)
-  ))
+  ));
 }
