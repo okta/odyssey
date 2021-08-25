@@ -20,7 +20,7 @@ describe('plugins/transformScssModules', () => {
     });
 
     it('transforms import template as expected', () => {
-      expect(importStyles.template()).toMatchSnapshot();
+      expect(importStyles.__template()).toMatchSnapshot();
     });
   });
 
@@ -30,7 +30,7 @@ describe('plugins/transformScssModules', () => {
     });
 
     it('transforms require template as expected', () => {
-      expect(requireStyles.template()).toMatchSnapshot();
+      expect(requireStyles.__template()).toMatchSnapshot();
     });
   });
 });

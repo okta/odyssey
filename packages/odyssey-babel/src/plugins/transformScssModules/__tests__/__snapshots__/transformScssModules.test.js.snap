@@ -2,9 +2,9 @@
 
 exports[`plugins/transformScssModules import visitor transforms import as expected 1`] = `
 Object {
-  "digest": "042956",
+  "__digest": "042956",
+  "__template": [Function],
   "root": "ods-d092b3",
-  "template": [Function],
 }
 `;
 
@@ -12,9 +12,9 @@ exports[`plugins/transformScssModules import visitor transforms import template 
 
 exports[`plugins/transformScssModules require visitor transforms require as expected 1`] = `
 Object {
-  "digest": "042956",
+  "__digest": "042956",
+  "__template": [Function],
   "root": "ods-d092b3",
-  "template": [Function],
 }
 `;
 
