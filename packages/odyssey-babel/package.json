@@ -1,20 +1,31 @@
 {
   "name": "@okta/odyssey-babel",
   "version": "0.0.0",
-  "main": "dist/index.js",
+  "main": "dist/preset/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "prepare": "tsc"
+    "prepare": "tsc",
+    "test": "jest"
   },
   "dependencies": {
+    "@babel/cli": "^7.14.8",
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
-    "@babel/preset-typescript": "^7.15.0"
+    "@babel/preset-typescript": "^7.15.0",
+    "@okta/odyssey": "^0.7.0",
+    "autoprefixer": "^9.8.6",
+    "css-modules-require-hook": "^4.2.3",
+    "cssnano-preset-default": "^4.0.8",
+    "node-sass": "^4.0.0"
   },
   "devDependencies": {
-    "@okta/odyssey-typescript": "^0.0.0"
+    "@okta/odyssey-typescript": "^0.0.0",
+    "@types/babel__core": "^7.1.15",
+    "@types/css-modules-require-hook": "^4.0.3",
+    "@types/node-sass": "^4.11.2",
+    "jest": "^26.6.3"
   }
 }

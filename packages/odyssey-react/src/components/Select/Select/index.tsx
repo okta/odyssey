@@ -174,7 +174,7 @@ const Select = forwardRefWithStatics<
   );
 });
 
-interface Statics {
+export interface Statics {
   Option: typeof SelectOption;
   OptionGroup: typeof SelectOptionGroup;
 }
