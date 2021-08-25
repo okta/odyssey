@@ -53,5 +53,5 @@ describe("Checkbox", () => {
   });
 
   a11yCheck(() => render(<Link href={href}>{label}</Link>))
-  a11yCheck(() => render(<Link href={href} variant="a11y">{label}</Link>))
+  a11yCheck(() => render(<Link href={href} variant="secondary">{label}</Link>))
 });
