@@ -20,9 +20,9 @@ export default {
 };
 
 const Template: Story<Props> = ({
-  children, href, target, rel
+  children, variant, href, target, rel
 }) => (
-  <Link href={href} target={target} rel={rel}>{children}</Link>
+  <Link href={href} target={target} rel={rel} variant={variant}>{children}</Link>
 )
 
 export const Default = Template.bind({});
@@ -34,8 +34,8 @@ Default.args = {
 export const Accessible = Template.bind({});
 Accessible.args = {
   href: "#anchor",
-  children: "Accessible link",
   variant: "secondary",
+  children: "Accessible link",
 };
 
 export const External = Template.bind({});
