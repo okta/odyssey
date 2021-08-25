@@ -17,6 +17,7 @@
     "@babel/preset-typescript": "^7.15.0",
     "@okta/odyssey": "^0.7.0",
     "css-modules-require-hook": "^4.2.3",
+    "cssnano-preset-default": "^4.0.8",
     "node-sass": "^4.0.0"
   },
   "devDependencies": {
