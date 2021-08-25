@@ -83,10 +83,9 @@ export type Props = ComponentProps & DismissableComponentProps;
     ...rest
   } = props;
 
-  const variantClass = `variant${variant[0].toUpperCase()}${variant.slice(1)}`
   const componentClass = useCx(
     styles.root,
-    variant && styles[variantClass],
+    styles[`${variant}Variant`],
     !open && styles.isDismissed,
     onDismiss && styles.isDismissable
   );

@@ -67,22 +67,22 @@
   padding-inline-end: $spacing-l;
 }
 
-.variantInfo {
+.infoVariant {
   background-color: cv('blue', '300');
   color: $text-body;
 }
 
-.variantSuccess {
+.successVariant {
   background-color: cv('green', '300');
   color: $text-body;
 }
 
-.variantCaution {
+.cautionVariant {
   background-color: cv('yellow', '300');
   color: $text-body;
 }
 
-.variantDanger {
+.dangerVariant {
   background-color: cv('red', '300');
   color: $text-body;
 }
