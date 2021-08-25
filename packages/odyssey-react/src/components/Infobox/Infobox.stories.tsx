@@ -35,7 +35,7 @@ const Template: Story<Props> = ({title, variant}) => (
       An infobox is a type of alert that provides feedback in response to a user action or system activity.
    </Infobox.Content>
     <Infobox.Actions>
-      <Link href="https://www.okta.com">Link to an associated action.</Link>
+      <Link href="https://www.okta.com" variant="a11y">Link to an associated action.</Link>
     </Infobox.Actions>
   </Infobox>
 );

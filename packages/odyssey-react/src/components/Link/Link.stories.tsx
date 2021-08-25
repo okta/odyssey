@@ -31,6 +31,13 @@ Default.args = {
   children: "Anchor link",
 };
 
+export const Accessible = Template.bind({});
+Accessible.args = {
+  href: "#anchor",
+  children: "Accessible link",
+  variant: "a11y",
+};
+
 export const External = Template.bind({});
 External.args = {
   href: "https://www.okta.com",
