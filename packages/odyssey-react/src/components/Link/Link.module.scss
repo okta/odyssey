@@ -52,4 +52,10 @@
   &:visited {
     color: $text-body;
   }
+
+  &.external {
+    &::after {
+      background-image: get-icon('external', $text-body);
+    }
+  }
 }

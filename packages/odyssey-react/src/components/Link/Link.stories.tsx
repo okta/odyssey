@@ -31,11 +31,11 @@ Default.args = {
   children: "Anchor link",
 };
 
-export const Accessible = Template.bind({});
-Accessible.args = {
+export const Secondary = Template.bind({});
+Secondary.args = {
   href: "#anchor",
   variant: "secondary",
-  children: "Accessible link",
+  children: "Secondary link",
 };
 
 export const External = Template.bind({});
