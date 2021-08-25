@@ -65,7 +65,6 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/base/typography-list';
 
                 // Components
-                @import '@okta/odyssey/src/scss/components/banner';
                 @import '@okta/odyssey/src/scss/components/forms';
                 @import '@okta/odyssey/src/scss/components/input-field';
                 @import '@okta/odyssey/src/scss/components/input-field-layout';

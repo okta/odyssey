@@ -14,6 +14,7 @@ import type { FunctionComponent, ReactNode } from 'react';
 import Title from '../Title';
 import { useCx, useOmit } from '../../utils';
 import Button from '../Button';
+import styles from './Banner.module.scss';
 
 export type BannerVariants = 'info' | 'danger' | 'caution';
 interface ComponentProps {
@@ -83,12 +84,11 @@ export type Props = ComponentProps & DismissableComponentProps;
   } = props;
 
   const componentClass = useCx(
-    "ods-banner",
-    variant && `is-ods-banner-${variant}`,
-    !open && "is-ods-banner-dismissed",
-    onDismiss && "is-ods-banner-dismissable"
+    styles.root,
+    styles[`${variant}Variant`],
+    !open && styles.isDismissed,
+    onDismiss && styles.isDismissable
   );
-
   const omitProps = useOmit(rest);
 
   return (
@@ -97,15 +97,15 @@ export type Props = ComponentProps & DismissableComponentProps;
       className={componentClass}
       role="status"
     >
-      <span className="ods-banner--icon">
+      <span className={styles.icon}>
         {/* @todo Insert <Icon> component */}
         &#8253;
       </span>
-      { title && <div className="ods-banner--title"><Title visualLevel="6" lineHeight="title" noEndMargin children={ title } /></div> }
-      { content && <p className="ods-banner--content">{ content }</p> }
-      { children && <section className="ods-banner--actions">{ children }</section> }
-      { onDismiss &&
-        <span className="ods-banner--dismiss">
+      {title && <div className={styles.title}><Title visualLevel="6" lineHeight="title" noEndMargin children={title} /></div> }
+      {content && <p className={styles.content}>{content}</p>}
+      {children && <section className={styles.actions}>{children}</section>}
+      {onDismiss &&
+        <span className={styles.dismiss}>
           <Button variant="dismiss" onClick={onDismiss} aria-label={dismissButtonLabel}>
             {/* @todo Insert <Icon> component, dismiss variant */}
             &#8253;
