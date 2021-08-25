@@ -60,7 +60,7 @@ const Template: Story<Props> = ({
     dismissableComponentProps = {
       onDismiss: () => {
         if (onDismiss) { onDismiss() }
-        updateArgs({ visible: false })
+        updateArgs({ open: false })
       },
       dismissButtonLabel
     }
@@ -74,7 +74,7 @@ const Template: Story<Props> = ({
       content={content}
       {...dismissableComponentProps}
     >
-      <Link href="https://www.okta.com">Action Link</Link>
+      <Link variant="secondary" href="https://www.okta.com">Action Link</Link>
     </Banner>
   )
 };
