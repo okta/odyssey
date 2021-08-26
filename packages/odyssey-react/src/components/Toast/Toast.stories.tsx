@@ -11,7 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import React, { FormEventHandler } from "react";
+import { FormEventHandler } from "react";
 import Toast, { useToast } from ".";
 import type { PropsToast, ToastVariants } from ".";
 
@@ -35,7 +35,7 @@ export default {
 const Template: Story<PropsToast> = (args) => <Toast {...args} />;
 const TemplateProvider: Story<PropsToast> = () => {
   return (
-    <Toast.Provider>
+    <Toast.Provider onToastExit={(id) => { console.log(`toastExited: ${id}`)}}>
       <DemoApp />
     </Toast.Provider>
   )

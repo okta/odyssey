@@ -49,7 +49,12 @@ export type PropsToastProvider = {
   /**
    * Child react nodes which leverage the toast context. This is typically an entire app. 
    */
-  children?: ReactElement | ReactElement[]
+  children?: ReactElement | ReactElement[],
+
+  /**
+   * Callback function invoked when a toast exits the toast provider.
+   */
+  onToastExit?: (id: string) => void
 }
 
 export type StaticComponents = {
@@ -108,25 +113,33 @@ const Toast: FunctionComponent<PropsToast> & StaticComponents = ({ title, body, 
  * </ToastProvider>
  */
 
-Toast.Provider = React.memo(({ children }) => {
+Toast.Provider = React.memo(({ children, onToastExit }) => {
   const [toasts, setToasts] = useState<ToastObject[]>([]);
   
   const addToast = (toast: ToastObject) => {
     const id = toast.id || oid();
     setToasts([...toasts, {...toast, id}])
   }
+  
+  const handleDismiss = (id: string) => {
+    if (typeof(onToastExit) === 'function') onToastExit(id);
+
+    removeToast(id);
+  }
 
   const removeToast = (id: string) => {
-    setToasts([...toasts.filter(toast => toast.id !== id)])
+    setToasts([...toasts.filter(toast => toast.id !== id)]);
   }
-
+  
   const handleAnimationEnd = (event: AnimationEvent) => {
     const { animationName, currentTarget } = event;
-
+    
     if (animationName === "ods-toast-out") {
-      removeToast(currentTarget.id)
+      handleDismiss(currentTarget.id);
     }
   }
+
+
 
   return (
     <ToastContext.Provider value={addToast}>
@@ -139,7 +152,7 @@ Toast.Provider = React.memo(({ children }) => {
             title={title}
             body={body}
             variant={variant}
-            onDismiss={() => removeToast(id)}
+            onDismiss={() => handleDismiss(id)}
             onAnimationEnd={handleAnimationEnd}
           />
         ))}

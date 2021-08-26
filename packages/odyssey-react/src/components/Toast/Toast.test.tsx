@@ -10,8 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
-import { act, render, fireEvent, screen, within, waitForElementToBeRemoved } from "@testing-library/react";
+import { act, render, fireEvent, screen, within } from "@testing-library/react";
 import Toast, { useToast } from ".";
 import type { ToastObject } from ".";
 
@@ -20,6 +19,7 @@ const title = 'Toast';
 const body = 'Descriptive body content (optional)';
 const id = 'my-toast';
 const handleDismiss = jest.fn();
+const handleToastExit = jest.fn();
 
 describe("Toast", () => {
   it("renders the toast", () => {
@@ -82,7 +82,7 @@ function setup() {
   }
 
   render(
-    <Toast.Provider>
+    <Toast.Provider onToastExit={handleToastExit}>
       <Component />
     </Toast.Provider>
   )
@@ -91,11 +91,6 @@ function setup() {
 }
 
 describe("Toast.Provider", () => {
-  
-  beforeEach(() => {
-    jest.setTimeout(10000);
-  });
-
   it('should add a toast', () => {
     const addToast = setup()
     act(() => { addToast?.({ title, body }) })
@@ -104,15 +99,11 @@ describe("Toast.Provider", () => {
     expect(within(toastNode).getByText(body)).toBeVisible();
   })
 
-  // @todo: figure out why this times out, the element is not removed.
-  // something to do with setup?
-  // it('toast should be removed ', async () => {
-  //   const addToast = setup()
-  //   act(() => { addToast?.({ title, body }) })
-  //   const toastNode = screen.getByRole(role)
+  it('should invoke onToastExit when the toast exits', () => {
+    const addToast = setup()
+    act(() => { addToast?.({ title, body }) })
 
-  //   await waitForElementToBeRemoved(toastNode, { timeout: 10000 });
-
-  //   expect(toastNode).toBeNull();
-  // })
+    fireEvent.click(screen.getByRole('button'));
+    expect(handleToastExit).toHaveBeenCalledTimes(1);
+  })
 });
