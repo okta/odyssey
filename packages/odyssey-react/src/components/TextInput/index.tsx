@@ -10,18 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback } from "react";
+import { forwardRef } from 'react';
 import type {
-  FunctionComponent,
-  FocusEventHandler,
-  ChangeEvent,
   RefCallback,
 } from "react";
 import styles from "./TextInput.module.scss";
 import { useOid } from "../../utils";
 import SearchIcon from "../Icon/Search";
 
-export type Props = {
+import { useField } from '../Field/context';
+
+import styles from './TextInput.module.scss';
+import { useOid } from '../../utils';
+import { Search } from '../Icon';
+
+export interface Props extends Omit<
+  ComponentPropsWithRef<'input'>,
+  'style' | 'className'
+> {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
@@ -32,11 +38,6 @@ export type Props = {
    * @default text
    */
   type?: "text" | "email" | "url" | "tel" | "search" | "password";
-
-  /**
-   * The form field label
-   */
-  label: string;
 
   /**
    * Callback to provide a reference to the underlying input element
@@ -68,11 +69,6 @@ export type Props = {
   readonly?: boolean;
 
   /**
-   * Text to display when the form is optional, i.e. required prop is false
-   */
-  optionalLabel?: string;
-
-  /**
    * The underlying input element placeholder attribute
    */
   placeholder?: string;
@@ -85,73 +81,35 @@ export type Props = {
   /**
    * The initial input element value for uncontrolled components
    */
-  defaultValue?: string;
-
-  /**
-   * Callback executed when the input fires a blur event
-   * @param {Object} event the event object
-   */
-  onBlur?: FocusEventHandler<HTMLInputElement>;
-
-  /**
-   * Callback executed when the input fires a change event
-   * @param {Object} event the event object
-   * @param {string} value the string value of the input
-   */
-  onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
-
-  /**
-   * Callback executed when the input fires a focus event
-   * @param {Object} event the event object
-   */
-  onFocus?: FocusEventHandler<HTMLInputElement>;
-};
+  defaultValue?: string,
+}
 
 /**
  * Text inputs allow users to edit and input data.
  */
-const TextInput: FunctionComponent<Props> = (props) => {
+const TextInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const {
     defaultValue,
-    disabled = false,
-    id,
-    inputRef,
-    label,
-    name,
     onBlur,
-    onChange,
     onFocus,
-    optionalLabel,
     placeholder,
-    readonly = false,
-    required = true,
-    type = "text",
-    value,
+    type = 'text',
+    ...rest
   } = props;
+
+  const {
+    id,
+    onChange,
+    disabled = false,
+    required = true,
+    readonly = false,
+    value,
+    name
+  } = useField();
 
   const oid = useOid(id);
 
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      onChange?.(event, event.target.value);
-    },
-    [onChange]
-  );
-
-  const labelChildren = (
-    <>
-      {label}
-      {!required && optionalLabel && (
-        <span className={styles.optionalLabel} children={optionalLabel} />
-      )}
-    </>
-  );
-
-  const labelClass = (() => {
-    if (type === "search") return styles.labelSearch;
-    if (disabled || readonly) return styles.labelDisabled;
-    return styles.label;
-  })();
+  const omitProps = useOmit(rest);
 
   const input = (
     <input
@@ -189,6 +147,6 @@ const TextInput: FunctionComponent<Props> = (props) => {
       </div>
     </fieldset>
   );
-};
+});
 
 export default TextInput;
