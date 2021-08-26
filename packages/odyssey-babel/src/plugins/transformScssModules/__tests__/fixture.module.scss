@@ -23,3 +23,9 @@
   background: cv('gray', '100');
   color: $text-body;
 }
+
+.autoprefixed {
+  ::placeholder {
+    color: #bada55;
+  }
+}
