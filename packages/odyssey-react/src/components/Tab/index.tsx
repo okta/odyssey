@@ -147,7 +147,7 @@ Tabs.List = ({ children }) => (
   <div role="tablist" aria-label="label" className={styles.tablist}>{children}</div>
 )
 
-Tabs.Tab = ({ children, id, ariaControls, selected, onClick }) => {
+Tabs.Tab = function TabsTab ({ children, id, ariaControls, selected, onClick }) {
   const componentClass = useCx(styles.tab, {
     [styles.selectedState]: selected
   })
