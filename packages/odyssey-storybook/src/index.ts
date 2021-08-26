@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import type { TransformOptions } from '@babel/core';
 import type { Configuration } from 'webpack';
 import type { PropItem } from 'react-docgen-typescript';
 
@@ -29,7 +30,14 @@ module.exports = {
     '@storybook/addon-a11y',
     '@pxblue/storybook-rtl-addon',
   ],
-  webpackFinal(config: Configuration = {}) {
+  babel (config: TransformOptions) {
+    return {
+      ...config,
+      babelrc: false,
+      configFile: false
+    };
+  },
+  webpackFinal (config: Configuration = {}) {
     config.module?.rules?.push(
       {
         test: /\.scss$/,
