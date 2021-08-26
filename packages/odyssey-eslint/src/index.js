@@ -44,34 +44,35 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.js', '*.jsx'],
+      files: [ '*.js', '*.jsx' ],
       extends: [
         'eslint:recommended'
       ],
     },
     {
-      files: ['*.ts', '*.tsx'],
+      files: [ '*.ts', '*.tsx' ],
       extends: [
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended'
       ],
     },
     {
-      files: ['jest.setup.js', '*.test.*'],
+      files: [ 'jest.setup.js', '*.test.*' ],
       env: {
         jest: true
       }
     },
     {
-      files: ['*.jsx', '*.tsx'],
+      files: [ '*.jsx', '*.tsx' ],
       extends: [
         'plugin:jsx-a11y/recommended',
+        'plugin:react-hooks/recommended',
       ],
       rules: {
         'jsx-a11y/label-has-associated-control': [
           2,
           {
-            labelAttributes: ['children'],
+            labelAttributes: [ 'children' ],
           }
         ]
       }
