@@ -11,6 +11,7 @@
  */
 
 import type { Story } from "@storybook/react";
+import Field from "../Field";
 import TextInput from ".";
 import type { Props } from ".";
 
@@ -38,7 +39,11 @@ export default {
   },
 };
 
-const Template: Story<Props> = (props) => <TextInput {...props} />;
+const Template: Story<Props> = (props) => (
+  <Field label="A label" name="test">
+    <TextInput {...props} />
+  </Field>
+);
 
 export const Text = Template.bind({});
 Text.args = {
