@@ -130,7 +130,7 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
   )
 };
 
-Modal.Header = ({ children }) => {
+Modal.Header = function ModalHeader ({ children }) {
   const { modalTitleId } = useContext(ModalContext);
   return (
     <header className={styles.header}>
@@ -163,7 +163,7 @@ Modal.Footer = ({ children }) => (
   </footer>
 );
 
-Modal.Button = ({ children, variant, close, onClick }) => {
+Modal.Button = function ModalButton ({ children, variant, close, onClick }) {
   const { onClose } = useContext(ModalContext);
   return <Button variant={variant} onClick={close ? onClose : onClick}>{children}</Button>;
 };
