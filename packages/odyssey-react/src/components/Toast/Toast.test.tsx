@@ -12,19 +12,17 @@
 
 import { act, render, fireEvent, screen, within } from "@testing-library/react";
 import Toast, { useToast } from ".";
-import type { ToastObject } from ".";
+import type { Context } from ".";
 
 const role = 'status';
 const title = 'Toast';    
 const body = 'Descriptive body content (optional)';
 const id = 'my-toast';
-const handleDismiss = jest.fn();
-const handleToastExit = jest.fn();
 
 describe("Toast", () => {
   it("renders the toast", () => {
     const { getByRole } = render(
-      <Toast title={title} body={body} onDismiss={handleDismiss} />
+      <Toast title={title} body={body} onDismiss={() => void 0} />
     );
 
     expect(getByRole(role)).toBeInTheDocument();
@@ -32,7 +30,7 @@ describe("Toast", () => {
 
   it("renders the toast title", () => {
     const { queryByText } = render(
-      <Toast title={title} body={body} onDismiss={handleDismiss} />
+      <Toast title={title} body={body} onDismiss={() => void 0} />
     );
 
     expect(queryByText(title)).toBeInTheDocument();
@@ -40,7 +38,7 @@ describe("Toast", () => {
 
   it("renders the toast body", () => {
     const { queryByText } = render(
-      <Toast title={title} body={body} onDismiss={handleDismiss} />
+      <Toast title={title} body={body} onDismiss={() => void 0} />
     );
 
     expect(queryByText(title)).toBeInTheDocument();
@@ -48,13 +46,15 @@ describe("Toast", () => {
   
   it("does NOT render the toast body if the title prop is not present", () => {
     const { queryByText } = render(
-      <Toast title={title} onDismiss={handleDismiss} />
+      <Toast title={title} onDismiss={() => void 0} />
     );
 
     expect(queryByText(body)).toBeNull();
   });
   
   it("dismisses the toast when the dismiss button is pressed", () => {
+    const handleDismiss = jest.fn();
+    
     const { getByRole } = render(
       <Toast title={title} body={body} onDismiss={handleDismiss} />
     );
@@ -68,40 +68,43 @@ describe("Toast", () => {
       id={id}
       title={title} 
       body={body}
-      onDismiss={handleDismiss}
+      onDismiss={() => void 0}
     />
   ))
 });
 
-function setup() {
-  let addToast: undefined | ((t: ToastObject) => void)
-
-  const Component = () => {
-    addToast = useToast()
-    return null
-  }
-
-  render(
-    <Toast.Provider onToastExit={handleToastExit}>
-      <Component />
-    </Toast.Provider>
-  )
-
-  return addToast
-}
 
 describe("Toast.Provider", () => {
+  const handleToastExit = jest.fn();
+  
+  function setup() {
+    let toaster!: Context
+  
+    const Component = () => {
+      toaster = useToast()
+      return null
+    }
+  
+    render(
+      <Toast.Provider onToastExit={handleToastExit}>
+        <Component />
+      </Toast.Provider>
+    )
+  
+    return toaster
+  }
+
   it('should add a toast', () => {
-    const addToast = setup()
-    act(() => { addToast?.({ title, body }) })
+    const { addToast } = setup()
+    act(() => { addToast({ title, body }) })
     const toastNode = screen.getByRole(role)
 
     expect(within(toastNode).getByText(body)).toBeVisible();
   })
 
   it('should invoke onToastExit when the toast exits', () => {
-    const addToast = setup()
-    act(() => { addToast?.({ title, body }) })
+    const { addToast } = setup()
+    act(() => { addToast({ title, body }) })
 
     fireEvent.click(screen.getByRole('button'));
     expect(handleToastExit).toHaveBeenCalledTimes(1);

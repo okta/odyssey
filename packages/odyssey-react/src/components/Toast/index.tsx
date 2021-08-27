@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import type { FunctionComponent, ReactElement, AnimationEvent } from "react";
-import { useCx, oid } from '../../utils';
+import { useCx, useOid, oid } from '../../utils';
 import Button from '../Button';
 
 export type ToastVariants = 'info' | 'success' | 'caution' | 'danger';
 
-export type PropsToast = {
+export interface PropsToast {
   /**
    * The title to be displayed on the toast. Provides quick context; one line max.
    */
@@ -68,7 +68,14 @@ export type ToastObject = {
   variant?: ToastVariants
 }
 
-export const ToastContext = createContext<(obj: ToastObject) => void>(() => void 0 );
+export type AddToastType = (toastObj: ToastObject) => void
+export interface Context {
+  addToast: AddToastType
+}
+
+export const ToastContext = createContext<Context>({
+  addToast: () => void 0
+});
 
 /**
  * Toasts are transient, non-disruptive messages that provide at-a-glance, 
@@ -78,13 +85,14 @@ export const ToastContext = createContext<(obj: ToastObject) => void>(() => void
  * @example  
  * <Toast>...</Toast>
  */
-const Toast: FunctionComponent<PropsToast> & StaticComponents = ({ title, body, variant = 'info', id, onDismiss, ...rest }) => {
+const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
+  const { title, body, variant = 'info', id, onDismiss, ...rest } = props
   const componentClass = useCx(
     "ods-toast",
     `is-ods-toast-${variant}`
   );
 
-  const xid = id || oid();
+  const xid = useOid(id);
 
   return (
     <aside role="status" id={xid} className={componentClass} {...rest}>
@@ -113,7 +121,7 @@ const Toast: FunctionComponent<PropsToast> & StaticComponents = ({ title, body, 
  * </ToastProvider>
  */
 
-Toast.Provider = React.memo(({ children, onToastExit }) => {
+Toast.Provider = ({ children, onToastExit }) => {
   const [toasts, setToasts] = useState<ToastObject[]>([]);
   
   const addToast = (toast: ToastObject) => {
@@ -139,10 +147,8 @@ Toast.Provider = React.memo(({ children, onToastExit }) => {
     }
   }
 
-
-
   return (
-    <ToastContext.Provider value={addToast}>
+    <ToastContext.Provider value={{ addToast }}>
       {children}
       <div className="ods-toast-pen" data-testid="ods-toast-pen">
         {toasts.map(({ title, body, variant = 'info', id = oid() }) => (
@@ -152,15 +158,23 @@ Toast.Provider = React.memo(({ children, onToastExit }) => {
             title={title}
             body={body}
             variant={variant}
-            onDismiss={() => handleDismiss(id)}
+            onDismiss={() => { handleDismiss(id); }}
             onAnimationEnd={handleAnimationEnd}
           />
         ))}
       </div>
     </ToastContext.Provider>
   )
-})
+}
 
-export const useToast = () => useContext(ToastContext)
+export const useToast = (): Context => {
+  const context = useContext(ToastContext)
+
+  if (Object.keys(context).length === 0) {
+    throw new Error('useToast must be used within a Toast.Provider');
+  }
+
+  return context
+}
 
 export default Toast

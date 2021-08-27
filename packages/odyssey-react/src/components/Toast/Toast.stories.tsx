@@ -48,7 +48,7 @@ const TemplateProvider: Story<PropsToast> = () => {
  * @todo Replace vanilla HTML with Odyssey form components once finalized
  */
 const DemoApp = () => {
-  const addToast = useToast();
+  const { addToast } = useToast();
   
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
