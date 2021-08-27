@@ -13,8 +13,10 @@
 import { createContext, useContext, useState, ComponentPropsWithoutRef } from "react";
 import type { FunctionComponent, ReactNode, AnimationEvent } from "react";
 import { useCx, useOmit, useOid, oid } from '../../utils';
+import styles from './Toast.module.scss';
 import Button from '../Button';
 import type { Props as ButtonProps } from '../Button';
+
 export type ToastVariants = 'info' | 'success' | 'caution' | 'danger';
 
 export interface PropsToast extends Omit<
@@ -91,20 +93,20 @@ export const ToastContext = createContext<Context>({
 const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
   const { title, body, variant = 'info', id, onDismiss, ...rest } = props
   const componentClass = useCx(
-    "ods-toast",
-    `is-ods-toast-${variant}`
+    styles.root,
+    styles[`${variant}Variant`],
   );
   const xid = useOid(id);
   const omitProps = useOmit(rest);
 
   return (
     <aside {...omitProps} role="status" id={xid} className={componentClass}>
-      <span className="ods-toast--icon">
+      <span className={styles.icon}>
         {/* @todo Insert <Icon> component */} &#8253;
       </span>
-      <h1 className="ods-toast--title">{title}</h1>
-      {body && <p className="ods-toast--body">{body}</p>}
-      <span className="ods-toast--dismiss">
+      <h1 className={styles.title}>{title}</h1>
+      {body && <p className={styles.body}>{body}</p>}
+      <span className={styles.dismiss}>
         <Button variant="dismiss" onClick={onDismiss} aria-label="Dismiss toast"> 
           {/* @todo Insert <Icon> component */} &#8253;
         </Button>
@@ -144,8 +146,7 @@ const ToastProvider = ({ children, onToastExit }: PropsToastProvider) => {
   
   const handleAnimationEnd = (event: AnimationEvent) => {
     const { animationName, currentTarget } = event;
-    
-    if (animationName === "ods-toast-out") {
+    if (animationName === styles.toastOut) {
       handleDismiss(currentTarget.id);
     }
   }
@@ -153,7 +154,7 @@ const ToastProvider = ({ children, onToastExit }: PropsToastProvider) => {
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
-      <div className="ods-toast-pen" data-testid="ods-toast-pen">
+      <div className={styles.toastPen} data-testid="ods-toast-pen">
         {toasts.map(({ title, body, variant = 'info', id = oid() }) => (
           <Toast
             id={id}
