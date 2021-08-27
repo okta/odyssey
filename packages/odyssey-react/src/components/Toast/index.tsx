@@ -150,7 +150,7 @@ Toast.Provider = ({ children, onToastExit }) => {
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
-      <div className="ods-toast-pen" data-testid="ods-toast-pen">
+      <div className="ods-toast-pen" aria-live="polite" data-testid="ods-toast-pen">
         {toasts.map(({ title, body, variant = 'info', id = oid() }) => (
           <Toast
             id={id}
