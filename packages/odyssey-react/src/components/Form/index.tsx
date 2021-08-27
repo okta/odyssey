@@ -54,21 +54,6 @@ export type StaticComponents = {
   Actions: FunctionComponent<PropsFormActions>,
 }
 
-/**
- * A Form contains interactive controls for submitting information.
- *
- * @component
- * @example
- * <Form title="Interplanetary flight registration" desc="Complete this form in order to register for your interplanetary transfer.">
- *  <Form.Error>
- *  </Form.Error>
- *  <Form.Main>
- *  </Form.Main>
- *  <Form.Actions>
- *  </Form.Actions>
- * </Form>
- */
-
 const Form: FunctionComponent<Props> & StaticComponents = (props) => {
   const {
     children,

@@ -71,8 +71,6 @@ export type Props = {
 
   /**
    * Callback executed when the input group fires a change event
-   * @param {Object} event the event object
-   * @param {string} value the string value of the input
    */
   onChange?: (event?: ChangeEvent<HTMLInputElement>, value?: string) => void,
 };
@@ -139,7 +137,9 @@ const Field: FunctionComponent<Props> = (props) => {
   );
 
   return (
-    <div className={styles.root}>
+    <div // This should swap to `fieldset` for grouped inputs like RadioGroup/CheckboxGroup
+      className={styles.root}
+    >
       { labelElement }
       { hint && hintElement }
       { inputElement }

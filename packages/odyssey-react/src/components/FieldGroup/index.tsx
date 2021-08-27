@@ -17,18 +17,17 @@ import styles from './FieldGroup.module.scss';
 
 export type Props = {
   /**
-   * Content to be rendered within the Form. Avoid using direct children, put child content
-   * within the provided Form static components (Form.Error, Form.Main, and Form.Actions)
+   * Content to be rendered within the FieldGroup.
    */
   children: ReactElement | ReactElement[],
 
   /**
-   * The title of the Form.
+   * The title of the FieldGroup.
    */
   title?: string;
 
   /**
-   * A short description of the form.
+   * A short description of the FieldGroup.
    */
   desc?: string;
 
@@ -41,21 +40,6 @@ type PropsFieldGroupError = {
 export type StaticComponents = {
   Error: FunctionComponent<PropsFieldGroupError>,
 }
-
-/**
- * A Form contains interactive controls for submitting information.
- *
- * @component
- * @example
- * <Form title="Interplanetary flight registration" desc="Complete this form in order to register for your interplanetary transfer.">
- *  <Form.Error>
- *  </Form.Error>
- *  <Form.Main>
- *  </Form.Main>
- *  <Form.Actions>
- *  </Form.Actions>
- * </Form>
- */
 
 const FieldGroup: FunctionComponent<Props> & StaticComponents = (props) => {
   const {

@@ -38,11 +38,11 @@
   color: $text-sub;
   font-size: $size-body-caption;
   font-weight: 400;
-  line-height: $spacing-m; // Helps optically match line-height above
+  line-height: $spacing-m;
 }
 
 .hint {
-  margin-block-start: -$spacing-xs; // Hug label
+  margin-block-start: -$spacing-xs;
   margin-block-end: $spacing-xs;
   color: $text-body;
   font-size: $size-body-caption;
