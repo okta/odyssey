@@ -13,7 +13,7 @@
 .root {
   display: none;
 
-  &.isOpen {
+  &.openState {
     display: block;
   }
 }
@@ -31,11 +31,11 @@
   background: rgba(cv('gray', '900'), 0.75);
 
   .root[aria-hidden='false'] & {
-    animation: overlay-in $base-duration $base-timing;
+    animation: overlayIn $base-duration $base-timing;
   }
 
   .root[aria-hidden='true'] & {
-    animation: overlay-out $base-duration $base-timing;
+    animation: overlayOut $base-duration $base-timing;
   }
 }
 
@@ -52,11 +52,11 @@
   background-color: $white;
 
   .root[aria-hidden='false'] & {
-    animation: dialog-in $base-duration $base-timing;
+    animation: dialogIn $base-duration $base-timing;
   }
 
   .root[aria-hidden='true'] & {
-    animation: dialog-out $base-duration $base-timing;
+    animation: dialogOut $base-duration $base-timing;
   }
 }
 
@@ -68,15 +68,6 @@
 .dismiss {
   align-self: flex-end;
   margin-block-end: $spacing-xs;
-}
-
-.title {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  color: $text-heading;
-  font-size: $size-title-4;
-  font-weight: 600;
-  line-height: $title-line-height;
 }
 
 .content {
@@ -92,7 +83,7 @@
   padding-block-end: $spacing-m;
 }
 
-@keyframes overlay-in {
+@keyframes overlayIn {
   from {
     opacity: 0;
   }
@@ -102,7 +93,7 @@
   }
 }
 
-@keyframes overlay-out {
+@keyframes overlayOut {
   from {
     opacity: 1;
   }
@@ -112,7 +103,7 @@
   }
 }
 
-@keyframes dialog-in {
+@keyframes dialogIn {
   from {
     transform: scale(0.7);
     opacity: 0;
@@ -124,7 +115,7 @@
   }
 }
 
-@keyframes dialog-out {
+@keyframes dialogOut {
   from {
     transform: scale(1);
     opacity: 1;

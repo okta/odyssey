@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import type { TransformOptions } from '@babel/core';
 import type { Configuration } from 'webpack';
 import type { PropItem } from 'react-docgen-typescript';
 
@@ -29,7 +30,14 @@ module.exports = {
     '@storybook/addon-a11y',
     '@pxblue/storybook-rtl-addon',
   ],
-  webpackFinal(config: Configuration = {}) {
+  babel (config: TransformOptions) {
+    return {
+      ...config,
+      babelrc: false,
+      configFile: false
+    };
+  },
+  webpackFinal (config: Configuration = {}) {
     config.module?.rules?.push(
       {
         test: /\.scss$/,
@@ -63,18 +71,13 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/base/typography-global';
                 @import '@okta/odyssey/src/scss/base/typography-text';
                 @import '@okta/odyssey/src/scss/base/typography-list';
-                @import '@okta/odyssey/src/scss/base/typography-header';
 
                 // Components
-                @import '@okta/odyssey/src/scss/components/banner';
                 @import '@okta/odyssey/src/scss/components/forms';
                 @import '@okta/odyssey/src/scss/components/input-field';
                 @import '@okta/odyssey/src/scss/components/input-field-layout';
                 @import '@okta/odyssey/src/scss/components/label';
                 @import '@okta/odyssey/src/scss/components/number-input';
-                @import '@okta/odyssey/src/scss/components/select';
-                @import '@okta/odyssey/src/scss/components/toast';
-                @import '@okta/odyssey/src/scss/components/toast-pen';
               `
             }
           }

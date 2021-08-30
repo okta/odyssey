@@ -157,13 +157,15 @@
     border: 2px solid transparent;
   }
 
-  // Box
+  /* Box */
+
   &::before {
     transform: translateY(-50%);
     border-color: $border-color-ui;
   }
 
-  // Check
+  /* Check */
+
   &::after {
     transform: translateY(-50%) scale(0.4);
     background-color: transparent;

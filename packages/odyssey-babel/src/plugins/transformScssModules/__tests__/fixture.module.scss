@@ -10,17 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const config = {
-  presets: [
-    '@babel/preset-env',
-    '@babel/preset-typescript',
-    [
-      '@babel/preset-react',
-      {
-        runtime: 'automatic'
-      }
-    ]
-  ],
-};
+.root {
+  @include border-radius($base-border-radius);
 
-export { config as default };
+  display: inline-block;
+  margin-block-start: 0;
+  margin-block-end: $spacing-xs;
+  margin-inline-start: 0;
+  margin-inline-end: $spacing-xs;
+  padding-block: 0;
+  padding-inline: $spacing-xs-em;
+  background: cv('gray', '100');
+  color: $text-body;
+}
+
+.autoprefixed {
+  ::placeholder {
+    color: #bada55;
+  }
+}

@@ -12,6 +12,7 @@
 
 import { render, fireEvent } from "@testing-library/react";
 import Banner from ".";
+import styles from "./Banner.module.scss";
 
 const role = "status";
 const bannerTitle = "Banner title";
@@ -66,7 +67,7 @@ describe("Banner", () => {
       </Banner>
     );
 
-    expect(getByRole(role)).toHaveClass('is-ods-banner-dismissed');
+    expect(getByRole(role)).toHaveClass(styles.isDismissed);
   });
 
   it('should NOT display the dismiss button when the onDismiss callback fn is NOT provided', () => {

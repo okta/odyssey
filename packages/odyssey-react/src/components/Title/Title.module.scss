@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.heading {
+.root {
   margin-block-start: 0;
   margin-block-end: $spacing-xs-em;
   margin-inline: 0;
@@ -52,4 +52,16 @@
 .level5,
 .level6 {
   line-height: $base-line-height;
+}
+
+.noEndMargin {
+  margin-block-end: 0;
+}
+
+.baseLineHeight {
+  line-height: $base-line-height;
+}
+
+.titleLineHeight {
+  line-height: $title-line-height;
 }

@@ -10,33 +10,31 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
-  extends: '../../stylelint.config.js',
-  rules: {
-    'property-no-unknown': [
-      true,
-      {
-        ignoreProperties: [ 'composes' ]
-      }
-    ],
-    'scss/at-rule-no-unknown': [
-      true,
-      {
-        ignoreAtRules: [ 'value' ]
-      }
-    ],
+const lowerCamel = /^[a-z][a-zA-Z0-9]+$/;
+const lowerCamelMessage = (type) => (
+  `${ type } should be written in lower camel case (e.g. fooBarBaz)`
+);
 
+module.exports = {
+  extends: '@okta/odyssey-stylelint',
+  rules: {
     'selector-max-class': 2,
     'selector-max-id': 0,
     'selector-max-type': 0,
     'selector-max-universal': 0,
     'selector-no-vendor-prefix': true,
     'selector-class-pattern': [
-      /^[a-z][a-zA-Z0-9]+$/,
+      lowerCamel,
       {
-        message: 'Selector should be written in lower camel case (e.g. fooBarBaz)'
+        message: lowerCamelMessage('Selector')
       }
     ],
+    'keyframes-name-pattern': [
+      lowerCamel,
+      {
+        message: lowerCamelMessage('Keyframes')
+      }
+    ]
 
   }
 };

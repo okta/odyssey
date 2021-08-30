@@ -36,8 +36,7 @@
 
   &:not(:checked) {
     + .label {
-      &:hover,
-      &.checkboxHover {
+      &:hover {
         &::before {
           border-color: $color-primary-base;
         }
@@ -45,8 +44,7 @@
     }
   }
 
-  &:indeterminate,
-  &.checkboxIndeterminate {
+  &:indeterminate {
     + .label {
       &::after {
         transform: translateY(-50%) scale(0.9);
@@ -55,8 +53,7 @@
     }
   }
 
-  &:focus,
-  &.checkboxFocus {
+  &:focus {
     + .label {
       &::before {
         @include outline($focus-ring-primary, 2px);
@@ -79,8 +76,7 @@
     }
 
     &:checked,
-    &:indeterminate,
-    &.checkboxIndeterminate {
+    &:indeterminate {
       + .label {
         &::before {
           border-color: $color-primary-light;
@@ -97,8 +93,7 @@
       }
     }
 
-    &:indeterminate,
-    &.checkboxIndeterminate {
+    &:indeterminate {
       + .label {
         &::after {
           background-image: get-icon('dash', $white);
@@ -107,8 +102,7 @@
     }
   }
 
-  &:invalid,
-  &.checkboxInvalid {
+  &:invalid {
     + .label {
       color: $text-danger;
 
@@ -128,8 +122,7 @@
 
     &:not(:checked) {
       + .label {
-        &:hover,
-        &.checkboxHover {
+        &:hover {
           &::before {
             border-color: $color-danger-dark;
           }
@@ -211,13 +204,15 @@
     border: 2px solid transparent;
   }
 
-  // Box
+  /* Box */
+
   &::before {
     transform: translateY(-50%);
     border-color: $border-color-ui;
   }
 
-  // Check
+  /* Check */
+
   &::after {
     transform: translateY(-50%) scale(0.9);
     background-image: get-icon('check', transparent);
