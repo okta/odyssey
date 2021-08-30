@@ -48,18 +48,20 @@ export type Props = {
  */
 
 const Icon = forwardRef<SVGSVGElement, Props>((
-    {
-      title,
-      titleId,
-      size,
-      color,
-      children
-    }, 
-    ref 
-  ) => {
+  {
+    title,
+    titleId,
+    size,
+    color,
+    children
+  }, 
+  ref 
+) => {
+  
+  const memoId = useMemo(() => ('icon_'+nanoid(6)), []);
 
   if(!titleId){
-    titleId = useMemo(() => ('icon_'+nanoid(6)), [titleId]);
+    titleId = memoId
   }
 
   const sizeAndColor:CSSProperties = new Object();
