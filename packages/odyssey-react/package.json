@@ -8,6 +8,7 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
+    "@babel/generator": "^7.15.0",
     "change-case": "^4.1.2",
     "choices.js": "^9.0.1",
     "nanoid": "^3.1.25",
@@ -40,7 +41,6 @@
     "test": "jest",
     "posttest": "tsc",
     "build-storybook": "build-storybook",
-    "build-icons": "svgr ../../node_modules/@okta/odyssey-icons/src --config-file ./src/components/Icon/_icon-config.js --out-dir ./src/components/Icon/",
-    "build-ui-indicators": "svgr ./src/svg --config-file ./src/components/Icon/_ui-indicator-config.js --out-dir ./src/components/Icon/"
+    "build-icons": "svgr ../../node_modules/@okta/odyssey-icons/src --config-file ./src/components/Icon/_icon-config.js --out-dir ./src/components/Icon/"
   }
 }

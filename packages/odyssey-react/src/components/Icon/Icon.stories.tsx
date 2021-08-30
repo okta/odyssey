@@ -13,8 +13,8 @@
 import { Story } from "@storybook/react";
 import Caution from "./Caution";
 import * as IconIndex from "./";
-import Icon from "./_Icon";
-import type { ReactElement } from "react";
+import Icon from "./Icon";
+import { ReactElement } from "react";
 import Table from "../Table";
 
 

@@ -10,55 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo } from "react";
-import type { SVGProps, CSSProperties } from "react";
-import { nanoid } from "nanoid";
-import styles from "./Icon.module.scss";
-interface Props {
+import { forwardRef } from "react";
+import type { ComponentPropsWithRef } from "react";
+import Icon from "./Icon";
+export type Props = {
   title?: string;
   titleId?: string;
   size?: string;
   color?: string;
-}
-
-function SvgGoForward({
-  title = "Go Forward",
-  titleId,
-  size,
-  color,
-  ...props
-}: SVGProps<SVGSVGElement> & Props): JSX.Element {
-  if (!titleId) {
-    titleId = useMemo(() => "icon_" + nanoid(6), [titleId]);
-  }
-
-  const sizeAndColor: CSSProperties = new Object();
-
-  if (size) {
-    sizeAndColor.fontSize = size;
-  }
-
-  if (color) {
-    sizeAndColor.color = color;
-  }
-
-  return (
-    <svg
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={styles.icon}
-      style={sizeAndColor}
-      aria-labelledby={titleId}
-      {...props}
-    >
-      {title ? <title id={titleId}>{title}</title> : null}
+} & ComponentPropsWithRef<"svg">;
+const GoForward = forwardRef<SVGSVGElement, Props>((props, ref) => (
+  <Icon title="Go Forward" ref={ref} {...props}>
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M9.48941 6.00121L7.07204 3.72595C6.65428 3.33275 6.65868 2.67278 7.07644 2.27958C7.47872 1.90095 8.12048 1.90683 8.5105 2.29763L12.8546 6.65043C13.0484 6.84461 13.0484 7.15539 12.8546 7.34957L8.5105 11.7024C8.12048 12.0932 7.47872 12.099 7.07644 11.7204C6.65868 11.3272 6.65428 10.6672 7.07204 10.274L9.48941 7.99879H1.50848C1.22765 7.99879 1 7.7752 1 7.4994V6.5006C1 6.2248 1.22765 6.00121 1.50848 6.00121H9.48941Z"
         fill="currentColor"
       />
     </svg>
-  );
-}
-
-export default SvgGoForward;
+  </Icon>
+));
+export default GoForward;
