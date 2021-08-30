@@ -20,15 +20,22 @@ export default {
 };
 
 const Template: Story<Props> = ({
-  children, href, target, rel
+  children, variant, href, target, rel
 }) => (
-  <Link href={href} target={target} rel={rel}>{children}</Link>
+  <Link href={href} target={target} rel={rel} variant={variant}>{children}</Link>
 )
 
 export const Default = Template.bind({});
 Default.args = {
   href: "#anchor",
   children: "Anchor link",
+};
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+  href: "#anchor",
+  variant: "secondary",
+  children: "Secondary link",
 };
 
 export const External = Template.bind({});

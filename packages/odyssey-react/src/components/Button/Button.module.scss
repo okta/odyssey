@@ -54,7 +54,7 @@
   }
 }
 
-// Parts
+/* Parts */
 
 .label {
   display: inline-block;
@@ -65,9 +65,9 @@
   }
 }
 
-// Variants
+/* Variants */
 
-.variantSecondary {
+.secondaryVariant {
   border-color: $color-primary-base;
   background-color: $white;
   color: $color-primary-base;
@@ -91,7 +91,7 @@
   }
 }
 
-.variantDanger {
+.dangerVariant {
   background-color: $color-danger-base;
 
   &:hover {
@@ -111,7 +111,7 @@
   }
 }
 
-.variantDismiss {
+.dismissVariant {
   padding-block: ($spacing-xs-em / 2);
   padding-inline: ($spacing-xs-em / 2);
   border: 0;
@@ -135,7 +135,7 @@
   }
 }
 
-.variantClear {
+.clearVariant {
   background-color: transparent;
   color: $color-primary-base;
 
@@ -156,9 +156,9 @@
   }
 }
 
-// Layouts
+/* Layouts */
 
-.layoutWide {
+.wideLayout {
   display: block;
   width: 100%;
   margin-block: 0;
@@ -169,14 +169,14 @@
   }
 }
 
-// Sizes
+/* Sizes */
 
-.sizeSmall {
+.sSize {
   font-size: ms(-1);
   line-height: $title-line-height;
 }
 
-.sizeLarge {
+.lSize {
   padding-block: $spacing-s-em;
   padding-inline: $spacing-m-em;
 }

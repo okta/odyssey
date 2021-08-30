@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.infobox {
+.root {
   @include border-radius($base-border-radius);
 
   display: grid;
@@ -30,20 +30,19 @@
   }
 }
 
-.infoboxIcon {
+.icon {
   grid-area: icon;
   align-self: start;
   font-size: $size-title-5;
-  line-height: 1;
+  line-height: $title-line-height;
   justify-self: start;
 }
 
-.infoboxTitle {
+.title {
   grid-area: title;
-  font-size: $size-title-6;
 }
 
-.infoboxContent {
+.content {
   grid-area: content;
 
   &:not(:last-child) {
@@ -51,28 +50,26 @@
   }
 }
 
-.infoboxActions {
+.actions {
   display: flex;
   grid-area: actions;
   justify-content: start;
 }
 
-.isInfoboxInfo {
-  composes: infobox;
+/* Variants */
+
+.infoVariant {
   background-color: cv('blue', '000');
 }
 
-.isInfoboxSuccess {
-  composes: infobox;
+.successVariant {
   background-color: cv('green', '000');
 }
 
-.isInfoboxCaution {
-  composes: infobox;
+.cautionVariant {
   background-color: cv('yellow', '000');
 }
 
-.isInfoboxDanger {
-  composes: infobox;
+.dangerVariant {
   background-color: cv('red', '000');
 }

@@ -36,35 +36,35 @@ export type PropsTabs = {
    * Specifes which Tabs.Panel should be selected on mount
    */
   selectedId?: string,
-  
+
   /**
    * Callback when the selected tab is changed.
    */
   onTabChange?: (newId: string) => void
 }
 
-export type PropsTabsContainer = { 
+export type PropsTabsContainer = {
   children: ReactElement | ReactElement[],
   id: string,
   ariaLabel: string
 }
 
-export type PropsTabsPanelContainer = { 
+export type PropsTabsPanelContainer = {
   children: ReactElement | ReactElement[]
 }
 
-export type PropsTabsPanel = { 
+export type PropsTabsPanel = {
   children: ReactText | ReactElement | ReactElement[],
   label: string,
   id?: string,
   selected?: boolean
 }
 
-export type PropsTabsList = { 
+export type PropsTabsList = {
   children: ReactElement | ReactElement[],
 }
 
-export type PropsTab = { 
+export type PropsTab = {
   children: ReactText,
   id: string,
   ariaControls: string,
@@ -81,10 +81,10 @@ export type StaticComponents = {
 }
 
 /**
- * Navigation component used to organize content by grouping similar information on the 
- * same page. They allow content to be viewed without having to navigate away from that page 
+ * Navigation component used to organize content by grouping similar information on the
+ * same page. They allow content to be viewed without having to navigate away from that page
  * or route.
- * 
+ *
  * @component
  * @example
  * <Tabs id="example-tabs" selectedId="tab-2" ariaLabel="Describes the purpose of the tabs.">
@@ -110,7 +110,7 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({ children, id, s
     <Tabs.Container id={id} ariaLabel={ariaLabel}>
       <Tabs.List>
         {children.map(({props: { label, id }}) => (
-          <Tabs.Tab 
+          <Tabs.Tab
             id={id + '-tab'}
             key={id + '-tab'}
             ariaControls={id}
@@ -147,12 +147,12 @@ Tabs.List = ({ children }) => (
   <div role="tablist" aria-label="label" className={styles.tablist}>{children}</div>
 )
 
-Tabs.Tab = ({ children, id, ariaControls, selected, onClick }) => {
+Tabs.Tab = function TabsTab ({ children, id, ariaControls, selected, onClick }) {
   const componentClass = useCx(styles.tab, {
-    [styles.isTabSelected]: selected
+    [styles.selectedState]: selected
   })
   return (
-    <button 
+    <button
       id={id}
       role="tab"
       tabIndex={selected ? 0 : -1}
@@ -174,7 +174,7 @@ Tabs.Panel = ({ children, id, selected }) => (
     role="tabpanel"
     className={styles.tabpanel}
     aria-labelledby={id + '-tab'}
-    tabIndex={selected ? 0 : -1} 
+    tabIndex={selected ? 0 : -1}
     hidden={!selected}
   >
     {children}

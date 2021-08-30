@@ -1,5 +1,6 @@
 name: Preview Deployment
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - master
@@ -36,11 +37,11 @@ jobs:
           git log --format=%B -n 1 ${{ github.event.after }} >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
+      - name: setup node
+        uses: actions/setup-node@v2
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          node-version: v12.20.0
+          cache: yarn
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile

@@ -1,0 +1,111 @@
+/*!
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+.root {
+  display: grid;
+  position: relative;
+  grid-template-areas: 'icon title content actions';
+  grid-template-columns: repeat(4, minmax(min-content, max-content));
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-block: $spacing-s;
+  padding-inline: $spacing-m;
+  background-color: cv('blue', '300');
+}
+
+.icon {
+  grid-area: icon;
+  margin-inline-end: $spacing-s;
+  font-size: $size-title-5;
+  line-height: 1;
+}
+
+.title {
+  grid-area: title;
+  margin-inline-end: $spacing-xs;
+}
+
+.content {
+  grid-area: content;
+  max-width: 100%;
+  margin-block-end: 0;
+  margin-inline-end: $spacing-m;
+}
+
+.actions {
+  display: flex;
+  grid-area: actions;
+  justify-content: end;
+}
+
+.dismiss {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: $spacing-m;
+  margin-inline-start: $spacing-m;
+  transform: translateY(-50%);
+}
+
+.isDismissed {
+  display: none;
+}
+
+.isDismissable {
+  padding-block: $spacing-s;
+  padding-inline-start: $spacing-m;
+  padding-inline-end: $spacing-l;
+}
+
+.infoVariant {
+  background-color: cv('blue', '300');
+  color: $text-body;
+}
+
+.successVariant {
+  background-color: cv('green', '300');
+  color: $text-body;
+}
+
+.cautionVariant {
+  background-color: cv('yellow', '300');
+  color: $text-body;
+}
+
+.dangerVariant {
+  background-color: cv('red', '300');
+  color: $text-body;
+}
+
+@media screen and (max-width: ($max-line-length * 1.5)) {
+  .root {
+    grid-template-areas: initial;
+    grid-template-columns: repeat(2, minmax(min-content, max-content));
+    grid-template-rows: unset;
+    justify-content: start;
+    justify-items: start;
+  }
+
+  .icon,
+  .title,
+  .content,
+  .actions {
+    grid-area: initial;
+  }
+
+  .title,
+  .content,
+  .actions {
+    grid-column: 2;
+  }
+}

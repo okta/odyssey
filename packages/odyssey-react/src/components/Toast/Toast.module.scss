@@ -1,0 +1,146 @@
+/*!
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+.root {
+  @include border-radius($base-border-radius);
+
+  display: grid;
+  position: relative;
+  grid-gap: 0 $spacing-s;
+  grid-template-columns: min-content 1fr min-content;
+  align-items: start;
+  max-width: $max-line-length;
+  padding-block: $spacing-m;
+  padding-inline: $spacing-s;
+  animation-name: toastIn, toastOut;
+  animation-duration: 300ms, 1000ms;
+  animation-delay: 0s, 5300ms;
+  border: 0;
+  background-color: cv('blue', '900');
+  box-shadow: 0 8px 12px rgba(cv('gray', '900'), 0.12);
+  color: $white;
+
+  &:hover,
+  &:focus-within {
+    animation-delay: 0s, 300s;
+  }
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+
+  // TODO: We should create default vars (e.g. $durationOut) since it is
+  // used here and on line 55.
+  @media (prefers-reduced-motion) {
+    animation-name: toastIn;
+    animation-duration: 300ms;
+    animation-delay: 0s;
+  }
+}
+
+.dismissed {
+  animation-name: toastOut;
+  animation-duration: 1000ms;
+  animation-delay: 1000ms; // TODO: play around with the timing here.
+
+  @media (prefers-reduced-motion) {
+    animation-name: toastOut;
+    animation-duration: 300ms;
+    animation-delay: 0s;
+  }
+}
+
+.icon {
+  width: $size-title-4;
+  color: $white;
+  font-size: $size-title-4;
+  line-height: 1;
+}
+
+.title {
+  margin-block: 0;
+  margin-inline: 0;
+  padding-inline-end: $spacing-m;
+  color: $white;
+  font-size: $size-body-base;
+  font-weight: 600;
+  line-height: $base-line-height;
+}
+
+.dismiss {
+  position: absolute;
+  inset-block-start: $spacing-xs;
+  inset-inline-end: $spacing-xs;
+  margin-block-end: 0;
+  border: 0;
+}
+
+.body {
+  grid-column: 2;
+  margin-block-end: 0;
+  font-size: $size-body-base;
+}
+
+.successVariant {
+  background-color: cv('green', '600');
+}
+
+.cautionVariant {
+  background-color: cv('yellow', '500');
+  color: $text-body;
+
+  .icon {
+    color: $text-body;
+  }
+
+  .title {
+    color: $text-heading;
+  }
+}
+
+.dangerVariant {
+  background-color: cv('red', '500');
+}
+
+@keyframes toastIn {
+  0% {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.toastPen {
+  display: grid;
+  position: fixed;
+  z-index: 1;
+  inset-inline-end: $spacing-m;
+  inset-block-end: $spacing-m;
+  grid-gap: $spacing-s 0;
+  grid-template-columns: minmax(min-content, max-content);
+  max-height: 100vh;
+  overflow: visible;
+}

@@ -13,7 +13,7 @@
 import type { ReactNode, ComponentProps } from 'react';
 import { forwardRef } from 'react';
 
-import { useOmit } from '../../utils';
+import { useCx, useOmit } from '../../utils';
 
 import styles from './Table.module.scss';
 
@@ -33,7 +33,10 @@ const TableSortButton = forwardRef<Ref, Props>((props, ref) => {
     ...rest
   } = props;
 
-  const componentClass = styles[direction];
+  const componentClass = useCx(
+    styles.sort,
+    styles[`${direction}Direction`],
+  );
 
   const omitProps = useOmit(rest);
 

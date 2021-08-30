@@ -4,13 +4,12 @@
   "compilerOptions": {
     "lib": [
       "dom",
-      "esnext"
+      "es2020"
     ],
-    "module": "esnext",
-    "target": "es5",
-
+    "noEmit": true,
+    "module": "es2020",
+    "target": "es2020",
     "isolatedModules": true,
-    "jsx": "react-jsx",
-    "noEmit": true
+    "jsx": "react-jsx"
   }
 }

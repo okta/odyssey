@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.textArea {
+.root {
   @include input-baseline;
 
   min-width: $spacing-m;
@@ -50,7 +50,8 @@
 }
 
 .labelDisabled {
-  composes: label;
+  /* stylelint-disable-next-line property-no-unknown  */
+  composes: label; /* to be removed during Forms refactor */
   color: $text-body;
 }
 
@@ -62,7 +63,8 @@
 }
 
 .hintDisabled {
-  composes: hint;
+  /* stylelint-disable-next-line property-no-unknown  */
+  composes: hint; /* to be removed during Forms refactor */
   color: $text-sub;
 }
 
