@@ -70,8 +70,6 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/components/input-field-layout';
                 @import '@okta/odyssey/src/scss/components/label';
                 @import '@okta/odyssey/src/scss/components/number-input';
-                @import '@okta/odyssey/src/scss/components/toast';
-                @import '@okta/odyssey/src/scss/components/toast-pen';
               `
             }
           }
