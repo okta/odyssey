@@ -10,16 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, useContext, useState } from "react";
-import type { FunctionComponent, ReactElement, AnimationEvent } from "react";
-import { useCx, useOid, oid } from '../../utils';
+import { createContext, useContext, useState, ComponentPropsWithoutRef } from "react";
+import type { FunctionComponent, ReactNode, AnimationEvent } from "react";
+import { useCx, useOmit, useOid, oid } from '../../utils';
 import Button from '../Button';
-
+import type { Props as ButtonProps } from '../Button';
 export type ToastVariants = 'info' | 'success' | 'caution' | 'danger';
 
-export interface PropsToast {
+export interface PropsToast extends Omit<
+  ComponentPropsWithoutRef<'aside'>,
+  'children' | 'style' | 'className'
+> {
   /**
-   * The title to be displayed on the toast. Provides quick context; one line max.
+   * The title to be displayed on the toast.
    */
   title: string,
   
@@ -42,14 +45,14 @@ export interface PropsToast {
   
   onAnimationEnd?: (event: AnimationEvent) => void,
 
-  onDismiss: () => void
+  onDismiss?: ButtonProps['onClick']
 }
 
 export type PropsToastProvider = { 
   /**
    * Child react nodes which leverage the toast context. This is typically an entire app. 
    */
-  children?: ReactElement | ReactElement[],
+  children?: ReactNode | ReactNode[],
 
   /**
    * Callback function invoked when a toast exits the toast provider.
@@ -58,7 +61,7 @@ export type PropsToastProvider = {
 }
 
 export type StaticComponents = {
-  Provider: FunctionComponent<PropsToastProvider>
+  Provider: typeof ToastProvider
 }
 
 export type ToastObject = {
@@ -91,11 +94,11 @@ const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
     "ods-toast",
     `is-ods-toast-${variant}`
   );
-
   const xid = useOid(id);
+  const omitProps = useOmit(rest);
 
   return (
-    <aside role="status" id={xid} className={componentClass} {...rest}>
+    <aside {...omitProps} role="status" id={xid} className={componentClass}>
       <span className="ods-toast--icon">
         {/* @todo Insert <Icon> component */} &#8253;
       </span>
@@ -121,7 +124,7 @@ const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
  * </ToastProvider>
  */
 
-Toast.Provider = ({ children, onToastExit }) => {
+const ToastProvider = ({ children, onToastExit }: PropsToastProvider) => {
   const [toasts, setToasts] = useState<ToastObject[]>([]);
   
   const addToast = (toast: ToastObject) => {
@@ -176,5 +179,7 @@ export const useToast = (): Context => {
 
   return context
 }
+
+Toast.Provider = ToastProvider;
 
 export default Toast

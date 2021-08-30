@@ -22,7 +22,7 @@ const id = 'my-toast';
 describe("Toast", () => {
   it("renders the toast", () => {
     const { getByRole } = render(
-      <Toast title={title} body={body} onDismiss={() => void 0} />
+      <Toast title={title} body={body} />
     );
 
     expect(getByRole(role)).toBeInTheDocument();
@@ -30,7 +30,7 @@ describe("Toast", () => {
 
   it("renders the toast title", () => {
     const { queryByText } = render(
-      <Toast title={title} body={body} onDismiss={() => void 0} />
+      <Toast title={title} body={body} />
     );
 
     expect(queryByText(title)).toBeInTheDocument();
@@ -38,7 +38,7 @@ describe("Toast", () => {
 
   it("renders the toast body", () => {
     const { queryByText } = render(
-      <Toast title={title} body={body} onDismiss={() => void 0} />
+      <Toast title={title} body={body} />
     );
 
     expect(queryByText(title)).toBeInTheDocument();
@@ -46,7 +46,7 @@ describe("Toast", () => {
   
   it("does NOT render the toast body if the title prop is not present", () => {
     const { queryByText } = render(
-      <Toast title={title} onDismiss={() => void 0} />
+      <Toast title={title} />
     );
 
     expect(queryByText(body)).toBeNull();
