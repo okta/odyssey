@@ -10,57 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo } from "react";
-import type { SVGProps, CSSProperties } from "react";
-import { nanoid } from "nanoid";
-import styles from "./Icon.module.scss";
-interface Props {
+import { forwardRef } from "react";
+import type { ComponentPropsWithRef } from "react";
+import Icon from "./Icon";
+export type Props = {
   title?: string;
   titleId?: string;
   size?: string;
   color?: string;
-}
-
-function SvgCaret({
-  title = "Caret",
-  titleId,
-  size,
-  color,
-  ...props
-}: SVGProps<SVGSVGElement> & Props): JSX.Element {
-  if (!titleId) {
-    titleId = useMemo(() => "icon_" + nanoid(6), [titleId]);
-  }
-
-  const sizeAndColor: CSSProperties = new Object();
-
-  if (size) {
-    sizeAndColor.fontSize = size;
-  }
-
-  if (color) {
-    sizeAndColor.color = color;
-  }
-
-  return (
-    <svg
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={sizeAndColor}
-      className={styles.icon}
-      aria-labelledby={titleId}
-      {...props}
-    >
-      {title ? <title id={titleId}>{title}</title> : null}
+} & ComponentPropsWithRef<"svg">;
+const Caret = forwardRef<SVGSVGElement, Props>((props, ref) => (
+  <Icon title="Caret" ref={ref} {...props}>
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M7.64 8.065a.875.875 0 01-1.28 0l-3.62-3.88a.875.875 0 00-1.28 0l-.028.03a.875.875 0 000 1.195l4.924 5.275a.875.875 0 001.283-.005l4.921-5.346a.867.867 0 00-1.271-1.179l-3.65 3.91z"
+        d="M7.63967 8.06464C7.29376 8.43526 6.70625 8.43526 6.36032 8.06464L2.73967 4.18536C2.39376 3.81474 1.80625 3.81474 1.46032 4.18536L1.43223 4.21547C1.11846 4.55165 1.11846 5.07335 1.43223 5.40953L6.35589 10.6849C6.70344 11.0573 7.29436 11.0552 7.63934 10.6804L12.5605 5.33417C12.8759 4.99164 12.8644 4.46128 12.5347 4.13263C12.1876 3.78665 11.623 3.79684 11.2886 4.15514L7.63967 8.06464Z"
         fill="currentColor"
       />
     </svg>
-  );
-}
-
-export default SvgCaret;
+  </Icon>
+));
+export default Caret;

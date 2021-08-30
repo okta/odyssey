@@ -10,57 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo } from "react";
-import type { SVGProps, CSSProperties } from "react";
-import { nanoid } from "nanoid";
-import styles from "./Icon.module.scss";
-interface Props {
+import { forwardRef } from "react";
+import type { ComponentPropsWithRef } from "react";
+import Icon from "./Icon";
+export type Props = {
   title?: string;
   titleId?: string;
   size?: string;
   color?: string;
-}
-
-function SvgSortDesc({
-  title = "Sort Desc",
-  titleId,
-  size,
-  color,
-  ...props
-}: SVGProps<SVGSVGElement> & Props): JSX.Element {
-  if (!titleId) {
-    titleId = useMemo(() => "icon_" + nanoid(6), [titleId]);
-  }
-
-  const sizeAndColor: CSSProperties = new Object();
-
-  if (size) {
-    sizeAndColor.fontSize = size;
-  }
-
-  if (color) {
-    sizeAndColor.color = color;
-  }
-
-  return (
-    <svg
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={sizeAndColor}
-      className={styles.icon}
-      aria-labelledby={titleId}
-      {...props}
-    >
-      {title ? <title id={titleId}>{title}</title> : null}
+} & ComponentPropsWithRef<"svg">;
+const SortDesc = forwardRef<SVGSVGElement, Props>((props, ref) => (
+  <Icon title="Sort Desc" ref={ref} {...props}>
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M6.293 12.707a1 1 0 001.414 0l4-4a1 1 0 00-1.414-1.414L8 9.586V2a1 1 0 10-2 0v7.586L3.707 7.293a1 1 0 00-1.414 1.414l4 4z"
+        d="M6.2929 12.7071C6.68343 13.0976 7.31659 13.0976 7.70712 12.7071L11.7071 8.70711C12.0976 8.31658 12.0976 7.68342 11.7071 7.29289C11.3166 6.90237 10.6834 6.90237 10.2929 7.29289L8.00001 9.58579V2C8.00001 1.4477 7.55229 1 7.00001 1C6.44773 1 6.00001 1.4477 6.00001 2V9.58579L3.70711 7.29289C3.31658 6.90237 2.68342 6.90237 2.29289 7.29289C1.90237 7.68342 1.90237 8.31658 2.29289 8.70711L6.2929 12.7071Z"
         fill="currentColor"
       />
     </svg>
-  );
-}
-
-export default SvgSortDesc;
+  </Icon>
+));
+export default SortDesc;

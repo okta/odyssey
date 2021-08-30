@@ -10,49 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo } from "react";
-import type { SVGProps, CSSProperties } from "react";
-import { nanoid } from "nanoid";
-import styles from "./Icon.module.scss";
-interface Props {
+import { forwardRef } from "react";
+import type { ComponentPropsWithRef } from "react";
+import Icon from "./Icon";
+export type Props = {
   title?: string;
   titleId?: string;
   size?: string;
   color?: string;
-}
-
-function SvgError({
-  title = "Error",
-  titleId,
-  size,
-  color,
-  ...props
-}: SVGProps<SVGSVGElement> & Props): JSX.Element {
-  if (!titleId) {
-    titleId = useMemo(() => "icon_" + nanoid(6), [titleId]);
-  }
-
-  const sizeAndColor: CSSProperties = new Object();
-
-  if (size) {
-    sizeAndColor.fontSize = size;
-  }
-
-  if (color) {
-    sizeAndColor.color = color;
-  }
-
-  return (
-    <svg
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={styles.icon}
-      style={sizeAndColor}
-      aria-labelledby={titleId}
-      {...props}
-    >
-      {title ? <title id={titleId}>{title}</title> : null}
+} & ComponentPropsWithRef<"svg">;
+const Error = forwardRef<SVGSVGElement, Props>((props, ref) => (
+  <Icon title="Error" ref={ref} {...props}>
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -60,7 +29,6 @@ function SvgError({
         fill="currentColor"
       />
     </svg>
-  );
-}
-
-export default SvgError;
+  </Icon>
+));
+export default Error;

@@ -13,11 +13,9 @@
 module.exports = {
   "ignoreExisting": true,
   "typescript": true,
-  "replaceAttrValues": {
-    "ods-icon": "{styles.icon}"
+  "prettierConfig": {
+    "parser": "typescript",
   },
-  "svgProps": { "style": "{sizeAndColor}" },
-  "titleProp": true,
   "template": require('./_icon-template.js'),
-  "indexTemplate": require('./_index-template.js')
+  "indexTemplate": require('./_index-template.js'),
 }

@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { SVGProps } from "react";
+import { Children, isValidElement, cloneElement, useMemo, CSSProperties, ComponentPropsWithRef, forwardRef } from "react";
+import type { ReactNode } from "react";
+import { nanoid } from 'nanoid';
+
+import styles from "./Icon.module.scss";
 
 export type Props = {
   /**
@@ -36,21 +40,61 @@ export type Props = {
    * @default current text color
    */
   color?: string;
-}
+} & ComponentPropsWithRef<'svg'>;
 
 /** 
  * A system of icons which establishes a visual language
  * that can be easily understood regardless of age, language or culture.
  */
-function Icon({
-  title,
-  titleId,
-  size,
-  color
-}:SVGProps<SVGSVGElement> & Props): JSX.Element {
+
+const Icon = forwardRef<SVGSVGElement, Props>((
+    {
+      title,
+      titleId,
+      size,
+      color,
+      children
+    }, 
+    ref 
+  ) => {
+
+  if(!titleId){
+    titleId = useMemo(() => ('icon_'+nanoid(6)), [titleId]);
+  }
+
+  const sizeAndColor:CSSProperties = new Object();
+
+  if (size) {
+    sizeAndColor.fontSize = size;
+  }
+
+  if (color) {
+    sizeAndColor.color = color;
+  }
+
   return (
-    <svg xmlns="http://www.w3.org/2000/svg">{title}{titleId}{size}{color}</svg>
+    <>
+      { 
+        Children.map<ReactNode, ReactNode>(children, child => {
+          if(isValidElement(child)) {
+            return cloneElement(
+              child, 
+              {
+                "aria-labelledby": titleId,
+                className: styles.icon,
+                style: sizeAndColor,
+                ref: ref
+              }, 
+              [
+                <title id={titleId}>{title}</title>, 
+                child.props.children
+              ]
+            );
+          }
+        })
+      }
+    </>
   );
-}
+});
 
 export default Icon;

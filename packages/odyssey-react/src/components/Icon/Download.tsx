@@ -10,49 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo } from "react";
-import type { SVGProps, CSSProperties } from "react";
-import { nanoid } from "nanoid";
-import styles from "./Icon.module.scss";
-interface Props {
+import { forwardRef } from "react";
+import type { ComponentPropsWithRef } from "react";
+import Icon from "./Icon";
+export type Props = {
   title?: string;
   titleId?: string;
   size?: string;
   color?: string;
-}
-
-function SvgDownload({
-  title = "Download",
-  titleId,
-  size,
-  color,
-  ...props
-}: SVGProps<SVGSVGElement> & Props): JSX.Element {
-  if (!titleId) {
-    titleId = useMemo(() => "icon_" + nanoid(6), [titleId]);
-  }
-
-  const sizeAndColor: CSSProperties = new Object();
-
-  if (size) {
-    sizeAndColor.fontSize = size;
-  }
-
-  if (color) {
-    sizeAndColor.color = color;
-  }
-
-  return (
-    <svg
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={styles.icon}
-      style={sizeAndColor}
-      aria-labelledby={titleId}
-      {...props}
-    >
-      {title ? <title id={titleId}>{title}</title> : null}
+} & ComponentPropsWithRef<"svg">;
+const Download = forwardRef<SVGSVGElement, Props>((props, ref) => (
+  <Icon title="Download" ref={ref} {...props}>
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M8 2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2L5.99928 6.58577L3.91421 4.08579C3.52369 3.69526 2.89052 3.69526 2.5 4.08579C2.10948 4.47631 2.10948 5.10948 2.5 5.5L6.29218 9.70709C6.6827 10.0976 7.31587 10.0976 7.70639 9.70709L11.5 5.5C11.8905 5.10948 11.8905 4.47631 11.5 4.08579C11.1095 3.69526 10.4763 3.69526 10.0858 4.08579L7.99928 6.58577L8 2Z"
         fill="currentColor"
@@ -62,7 +31,6 @@ function SvgDownload({
         fill="currentColor"
       />
     </svg>
-  );
-}
-
-export default SvgDownload;
+  </Icon>
+));
+export default Download;
