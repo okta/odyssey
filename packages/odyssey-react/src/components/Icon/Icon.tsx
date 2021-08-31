@@ -83,7 +83,7 @@ const Icon = forwardRef<SVGSVGElement, Props>((
               child, 
               {
                 "aria-labelledby": titleId,
-                className: styles.icon,
+                className: styles.root,
                 style: sizeAndColor,
                 ref: ref
               }, 
