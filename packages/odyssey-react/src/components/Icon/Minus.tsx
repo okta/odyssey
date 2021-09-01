@@ -12,23 +12,29 @@
 
 import { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
+import { useOmit } from "../../utils";
 import Icon from "./Icon";
-export type Props = {
+
+export interface Props
+  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   title?: string;
   titleId?: string;
-  size?: string;
-  color?: string;
-} & ComponentPropsWithRef<"svg">;
-const Minus = forwardRef<SVGSVGElement, Props>((props, ref) => (
-  <Icon title="Minus" ref={ref} {...props}>
-    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M1 7C1 6.44771 1.44772 6 2 6L12 6C12.5523 6 13 6.44772 13 7V7C13 7.55228 12.5523 8 12 8L2 8C1.44772 8 1 7.55228 1 7V7Z"
-        fill="currentColor"
-      />
-    </svg>
-  </Icon>
-));
+}
+
+const Minus = forwardRef<SVGSVGElement, Props>((props, ref) => {
+  const omitProps = useOmit(props);
+  return (
+    <Icon ref={ref} {...omitProps}>
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M1 7C1 6.44771 1.44772 6 2 6L12 6C12.5523 6 13 6.44772 13 7V7C13 7.55228 12.5523 8 12 8L2 8C1.44772 8 1 7.55228 1 7V7Z"
+          fill="currentColor"
+        />
+      </svg>
+    </Icon>
+  );
+});
+
 export default Minus;

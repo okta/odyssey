@@ -28,19 +28,5 @@ describe("Icon", () => {
     expect(titleElement.id).toEqual('my-id');
   });
 
-  it('set a custom color', () => {
-    const testColor = "rgb(255, 0, 255)";
-    const { getByTitle } = render(<Icon title={iconTitle} color={testColor}><svg></svg></Icon>);
-    const svgElement = getByTitle(iconTitle).parentElement;
-    expect(svgElement?.style.color).toEqual(testColor);
-  });
-
-  it('set a custom size', () => {
-    const testSize = "16px";
-    const { getByTitle } = render(<Icon title={iconTitle} size={testSize}><svg></svg></Icon>);
-    const svgElement = getByTitle(iconTitle).parentElement;
-    expect(svgElement?.style.fontSize).toEqual(testSize);
-  });
-
   a11yCheck(() => render(<Icon><svg></svg></Icon>));
 });

@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const changeCase = require('change-case');
 const generate = require('@babel/generator').default;
 
 function odysseyIconTemplate(
@@ -39,40 +38,54 @@ function odysseyIconTemplate(
 
 `;
 
-const compName = componentName.name.substring(3);
-const title = changeCase.capitalCase(compName);
+  const compName = componentName.name.substring(3);
 
-const attrs = jsx.openingElement.attributes;
-const classNameIndex = attrs.findIndex((att) => att.name.name === 'className');
-jsx.openingElement.attributes = [
-  ...attrs.slice(0, classNameIndex), 
-  ...attrs.slice(classNameIndex + 1)
-];
+  const attrs = jsx.openingElement.attributes;
+  const classNameIndex = attrs.findIndex((att) => att.name.name === 'className');
+  jsx.openingElement.attributes = [
+    ...attrs.slice(0, classNameIndex),
+    ...attrs.slice(classNameIndex + 1)
+  ];
 
-const icon = `<Icon
-  title="${title}"
+  const icon = `<Icon
   ref={ref}
-  {...props}
+  {...omitProps}
 >
   ${generate(jsx).code}
 </Icon>`;
 
+  const newLine = `
+  `;
+
   return typeScriptTpl.ast`
 ${headerComment}
+
 import { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
+import { useOmit } from '../../utils';
 import Icon from './Icon';
 
-export type Props = {
+${newLine}
+
+export interface Props extends Omit<
+  ComponentPropsWithRef<'svg'>,
+  'style' | 'className'
+> {
   title?: string;
   titleId?: string;
-  size?: string;
-  color?: string;
-} & ComponentPropsWithRef<'svg'>;
+}
 
-const ${compName} = forwardRef<SVGSVGElement, Props>((props, ref) => (
-  ${icon}
-));
+${newLine}
+
+const ${compName} = forwardRef<SVGSVGElement, Props>((props, ref) => {
+  const omitProps = useOmit(props);
+  return (
+    ${icon}
+  )
+}
+);
+
+${newLine}
 
 export default ${compName}
   `

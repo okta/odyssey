@@ -9,9 +9,7 @@
   "private": true,
   "dependencies": {
     "@babel/generator": "^7.15.0",
-    "change-case": "^4.1.2",
     "choices.js": "^9.0.1",
-    "nanoid": "^3.1.25",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
@@ -45,7 +43,7 @@
     "build:clean": "rm -rf dist",
     "build:types": "tsc --project tsconfig.production.json",
     "build:source": "NODE_ENV=production babel src --out-dir dist --source-maps --extensions '.js,.ts,.jsx,.tsx,.module.scss'",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
     "build-icons": "svgr ../../node_modules/@okta/odyssey-icons/src --config-file ./src/components/Icon/_icon-config.js --out-dir ./src/components/Icon/"
   }
 }

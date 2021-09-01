@@ -12,23 +12,29 @@
 
 import { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
+import { useOmit } from "../../utils";
 import Icon from "./Icon";
-export type Props = {
+
+export interface Props
+  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   title?: string;
   titleId?: string;
-  size?: string;
-  color?: string;
-} & ComponentPropsWithRef<"svg">;
-const Plus = forwardRef<SVGSVGElement, Props>((props, ref) => (
-  <Icon title="Plus" ref={ref} {...props}>
-    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M6 12C6 12.5523 6.44772 13 7 13C7.55228 13 8 12.5523 8 12V8L12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6L8 6V2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2V6L2 6C1.44772 6 1 6.44771 1 7C1 7.55228 1.44772 8 2 8L6 8V12Z"
-        fill="currentColor"
-      />
-    </svg>
-  </Icon>
-));
+}
+
+const Plus = forwardRef<SVGSVGElement, Props>((props, ref) => {
+  const omitProps = useOmit(props);
+  return (
+    <Icon ref={ref} {...omitProps}>
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M6 12C6 12.5523 6.44772 13 7 13C7.55228 13 8 12.5523 8 12V8L12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6L8 6V2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2V6L2 6C1.44772 6 1 6.44771 1 7C1 7.55228 1.44772 8 2 8L6 8V12Z"
+          fill="currentColor"
+        />
+      </svg>
+    </Icon>
+  );
+});
+
 export default Plus;

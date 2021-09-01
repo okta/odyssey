@@ -10,37 +10,29 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Children, isValidElement, cloneElement, useMemo, CSSProperties, ComponentPropsWithRef, forwardRef } from "react";
-import type { ReactNode } from "react";
-import { nanoid } from 'nanoid';
+import { Children, cloneElement, ComponentPropsWithRef, forwardRef } from "react";
+import type { ReactElement  } from "react";
+import { useOid, useOmit } from '../../utils'
 
 import styles from "./Icon.module.scss";
 
-export type Props = {
+export interface Props extends Omit<
+  ComponentPropsWithRef<'svg'>,
+  'style' | 'className'
+> {
   /**
    * Title text used by screen readers
-   * @default the name of the icon
    */
   title?: string;
 
   /**
    * Id used to link title and svg elements, used by screen readers
-   * @default a randomly generated id
+   * @default randomly generated id, when title is passed
    */
   titleId?: string;
 
-  /**
-   * Size in any valid css unit, `px`, `em`, `%`, etc...
-   * @default 1em
-   */
-  size?: string;
-
-  /**
-   * Color of the icon fill in hex format, eg: #000000
-   * @default current text color
-   */
-  color?: string;
-} & ComponentPropsWithRef<'svg'>;
+  children: ReactElement;
+}
 
 /** 
  * A system of icons which establishes a visual language
@@ -51,51 +43,35 @@ const Icon = forwardRef<SVGSVGElement, Props>((
   {
     title,
     titleId,
-    size,
-    color,
-    children
+    children,
+    ...rest
   }, 
   ref 
 ) => {
   
-  const memoId = useMemo(() => ('icon_'+nanoid(6)), []);
-
-  if(!titleId){
-    titleId = memoId
+  const autoId = 'icon_' + useOid();
+  if(title && !titleId){
+    titleId = autoId;
   }
-
-  const sizeAndColor:CSSProperties = new Object();
-
-  if (size) {
-    sizeAndColor.fontSize = size;
-  }
-
-  if (color) {
-    sizeAndColor.color = color;
-  }
+  const omitProps = useOmit(rest);
 
   return (
-    <>
-      { 
-        Children.map<ReactNode, ReactNode>(children, child => {
-          if(isValidElement(child)) {
-            return cloneElement(
-              child, 
-              {
-                "aria-labelledby": titleId,
-                className: styles.root,
-                style: sizeAndColor,
-                ref: ref
-              }, 
-              [
-                <title id={titleId}>{title}</title>, 
-                child.props.children
-              ]
-            );
-          }
-        })
-      }
-    </>
+    Children.only(
+      cloneElement(
+        children, 
+        {
+          ...omitProps,
+          'aria-labelledby': titleId,
+          className: styles.root,
+          ref: ref,
+          role: title ? 'img' : 'presentation'
+        }, 
+        [
+          title && <title id={titleId}>{title}</title>, 
+          children.props.children
+        ]
+      )
+    )
   );
 });
 

@@ -12,21 +12,27 @@
 
 import { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
+import { useOmit } from "../../utils";
 import Icon from "./Icon";
-export type Props = {
+
+export interface Props
+  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   title?: string;
   titleId?: string;
-  size?: string;
-  color?: string;
-} & ComponentPropsWithRef<"svg">;
-const Check = forwardRef<SVGSVGElement, Props>((props, ref) => (
-  <Icon title="Check" ref={ref} {...props}>
-    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M0 6.53333L1.86667 4.66667L5.6 8.51667L12.1333 1.86667L14 3.61667L5.6 12.25L0 6.53333Z"
-        fill="currentColor"
-      />
-    </svg>
-  </Icon>
-));
+}
+
+const Check = forwardRef<SVGSVGElement, Props>((props, ref) => {
+  const omitProps = useOmit(props);
+  return (
+    <Icon ref={ref} {...omitProps}>
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M0 6.53333L1.86667 4.66667L5.6 8.51667L12.1333 1.86667L14 3.61667L5.6 12.25L0 6.53333Z"
+          fill="currentColor"
+        />
+      </svg>
+    </Icon>
+  );
+});
+
 export default Check;
