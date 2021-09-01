@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// Catch-all border-box bad boy
+/* Catch-all border-box bad boy */
 
 * {
   box-sizing: border-box;
@@ -21,7 +21,7 @@
   }
 }
 
-// Huge selector list layout reset
+/* Huge selector list layout reset */
 
 html,
 body,
@@ -120,7 +120,7 @@ input {
   font-size: 100%;
 }
 
-// HTML5 display-role reset for older browsers
+/* HTML5 display-role reset for older browsers */
 
 article,
 aside,
@@ -136,7 +136,7 @@ section {
   display: block;
 }
 
-// Element Specific Resets
+/* Element Specific Resets */
 
 img,
 svg {
