@@ -11,19 +11,19 @@
  */
 
 import { render } from "@testing-library/react";
-import VisuallyHidden from ".";
+import ScreenReaderText from ".";
 
 const content = "This string is visually hidden, but screen-reader accessible.";
 
-describe("VisuallyHidden", () => {
+describe("ScreenReaderText", () => {
   it("renders invisibly into the document", () => {
     const { getByText } = render(
-      <VisuallyHidden>{content}</VisuallyHidden>
+      <ScreenReaderText>{content}</ScreenReaderText>
     );
 
     expect(getByText(content)).toBeVisible();
     expect(getByText(content)).toHaveStyle(`clip: rect(0 0 0 0)`);
   });
 
-  a11yCheck(() => render(<VisuallyHidden>{content}</VisuallyHidden>))
+  a11yCheck(() => render(<ScreenReaderText>{content}</ScreenReaderText>))
 });

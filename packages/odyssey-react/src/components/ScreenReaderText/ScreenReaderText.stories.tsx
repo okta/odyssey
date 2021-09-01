@@ -10,32 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactText } from 'react';
-import { useOmit } from '../../utils';
-import styles from './VisuallyHidden.module.scss';
+import type { Story } from "@storybook/react";
+import ScreenReaderText from ".";
+import type { Props } from ".";
 
-export type Props = {
-  /**
-   * Text content to be read only to screen readers
-   */
-  children: ReactText,
+export default {
+  title: `Utilities/ScreenReaderText`,
+  component: ScreenReaderText
 };
 
-const VisuallyHidden: FunctionComponent<Props> = (props) => {
-  const {
-    children,
-    ...rest
-  } = props;
+const Template: Story<Props> = ({
+  children
+}) => (
+  <p>The following content is visually hidden: <ScreenReaderText>{children}</ScreenReaderText></p>
+);
 
-  const omitProps = useOmit(rest);
-
-  return (
-    <span
-      {...omitProps}
-      className={styles.root}
-    >
-      {children}
-    </span>
-  );
+export const Default = Template.bind({});
+Default.args = {
+  children: "Hi! I'm accessible to screen readers!",
 };
-export default VisuallyHidden;

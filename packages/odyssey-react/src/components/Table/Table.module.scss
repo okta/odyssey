@@ -43,10 +43,6 @@
   text-align: start;
 }
 
-.caption {
-  @include is-visually-hidden;
-}
-
 .cell {
   border-block-end: 1px solid $border-color-display;
   max-width: $max-line-length;
