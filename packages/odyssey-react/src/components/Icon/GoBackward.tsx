@@ -12,21 +12,27 @@
 
 import { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
+import { useOmit } from "../../utils";
 import Icon from "./Icon";
-export type Props = {
+
+export interface Props
+  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   title?: string;
   titleId?: string;
-  size?: string;
-  color?: string;
-} & ComponentPropsWithRef<"svg">;
-const GoBackward = forwardRef<SVGSVGElement, Props>((props, ref) => (
-  <Icon title="Go Backward" ref={ref} {...props}>
-    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M4.51059 6.00121L6.92796 3.72595C7.34572 3.33275 7.34132 2.67278 6.92356 2.27958C6.52128 1.90095 5.87952 1.90683 5.4895 2.29763L1.14535 6.65043C0.95155 6.84461 0.95155 7.15539 1.14535 7.34957L5.4895 11.7024C5.87952 12.0932 6.52128 12.099 6.92356 11.7204C7.34132 11.3272 7.34572 10.6672 6.92796 10.274L4.51059 7.99879H12.4915C12.7723 7.99879 13 7.7752 13 7.49939V6.50061C13 6.2248 12.7723 6.00121 12.4915 6.00121H4.51059Z"
-        fill="currentColor"
-      />
-    </svg>
-  </Icon>
-));
+}
+
+const GoBackward = forwardRef<SVGSVGElement, Props>((props, ref) => {
+  const omitProps = useOmit(props);
+  return (
+    <Icon ref={ref} {...omitProps}>
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M4.51059 6.00121L6.92796 3.72595C7.34572 3.33275 7.34132 2.67278 6.92356 2.27958C6.52128 1.90095 5.87952 1.90683 5.4895 2.29763L1.14535 6.65043C0.95155 6.84461 0.95155 7.15539 1.14535 7.34957L5.4895 11.7024C5.87952 12.0932 6.52128 12.099 6.92356 11.7204C7.34132 11.3272 7.34572 10.6672 6.92796 10.274L4.51059 7.99879H12.4915C12.7723 7.99879 13 7.7752 13 7.49939V6.50061C13 6.2248 12.7723 6.00121 12.4915 6.00121H4.51059Z"
+          fill="currentColor"
+        />
+      </svg>
+    </Icon>
+  );
+});
+
 export default GoBackward;
