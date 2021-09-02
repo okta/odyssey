@@ -19,6 +19,7 @@
     "@okta/odyssey-icons": "^0.7.0",
     "@okta/odyssey-storybook": "^0.0.0",
     "@okta/odyssey-stylelint": "^0.0.0",
+    "@okta/odyssey-svgr": "^0.0.0",
     "@okta/odyssey-typescript": "^0.0.0",
     "@svgr/cli": "^5.5.0",
     "@testing-library/jest-dom": "^5.12.0",
@@ -44,6 +45,6 @@
     "build:types": "tsc --project tsconfig.production.json",
     "build:source": "NODE_ENV=production babel src --out-dir dist --source-maps --extensions '.js,.ts,.jsx,.tsx,.module.scss'",
     "build-storybook": "build-storybook",
-    "build-icons": "svgr ../../node_modules/@okta/odyssey-icons/src --config-file ./src/components/Icon/_icon-config.js --out-dir ./src/components/Icon/"
+    "build-icons": "svgr $(node resolveIconSrcPath.js) --out-dir ./src/components/Icon/"
   }
 }

@@ -1,0 +1,9 @@
+{
+  "name": "@okta/odyssey-svgr",
+  "version": "0.0.0",
+  "description": "Configuration files for svgr icon conversion",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "private": true,
+  "main": "src/config.js"
+}

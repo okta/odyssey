@@ -25,12 +25,6 @@ export interface Props extends Omit<
    */
   title?: string;
 
-  /**
-   * Id used to link title and svg elements, used by screen readers
-   * @default randomly generated id, when title is passed
-   */
-  titleId?: string;
-
   children: ReactElement;
 }
 
@@ -42,7 +36,6 @@ export interface Props extends Omit<
 const Icon = forwardRef<SVGSVGElement, Props>((
   {
     title,
-    titleId,
     children,
     ...rest
   }, 
@@ -50,9 +43,6 @@ const Icon = forwardRef<SVGSVGElement, Props>((
 ) => {
   
   const autoId = 'icon_' + useOid();
-  if(title && !titleId){
-    titleId = autoId;
-  }
   const omitProps = useOmit(rest);
 
   return (
@@ -61,13 +51,13 @@ const Icon = forwardRef<SVGSVGElement, Props>((
         children, 
         {
           ...omitProps,
-          'aria-labelledby': titleId,
+          'aria-labelledby': autoId,
           className: styles.root,
           ref: ref,
           role: title ? 'img' : 'presentation'
         }, 
         [
-          title && <title id={titleId}>{title}</title>, 
+          title && <title id={autoId}>{title}</title>, 
           children.props.children
         ]
       )

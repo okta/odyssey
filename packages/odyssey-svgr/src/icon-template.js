@@ -11,6 +11,7 @@
  */
 
 const generate = require('@babel/generator').default;
+const headerComment = require('./header-comment');
 
 function odysseyIconTemplate(
   { template },
@@ -22,21 +23,6 @@ function odysseyIconTemplate(
     plugins.push('typescript')
   }
   const typeScriptTpl = template.smart({ plugins, preserveComments: true })
-
-  const currentYear = new Date().getFullYear();
-  const headerComment = `/*!
- * Copyright (c) ${currentYear}-present, Okta, Inc. and/or its affiliates. All rights reserved.
- * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
- *
- * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *
- * See the License for the specific language governing permissions and limitations under the License.
- */
-
-`;
 
   const compName = componentName.name.substring(3);
 
@@ -72,7 +58,6 @@ export interface Props extends Omit<
   'style' | 'className'
 > {
   title?: string;
-  titleId?: string;
 }
 
 ${newLine}

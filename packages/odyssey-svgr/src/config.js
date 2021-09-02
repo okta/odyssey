@@ -16,6 +16,6 @@ module.exports = {
   "prettierConfig": {
     "parser": "typescript",
   },
-  "template": require('./_icon-template.js'),
-  "indexTemplate": require('./_index-template.js'),
+  "template": require('./icon-template.js'),
+  "indexTemplate": require('./index-template.js'),
 }
