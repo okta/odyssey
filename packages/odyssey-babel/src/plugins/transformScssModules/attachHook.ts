@@ -42,7 +42,7 @@ export default function attachHook (
       }).plugins
         .filter(([, pluginOpts = {} ]) => !pluginOpts.__omit)
         .map(plugin => plugin[ 0 ](plugin[ 1 ])),
-      autoprefixer
+      autoprefixer({ env: 'ie11' })
     ],
     preprocessCss (styles: string, file: string) {
       return sass.renderSync({
