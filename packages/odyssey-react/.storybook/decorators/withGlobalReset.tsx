@@ -12,7 +12,7 @@
 
 import type { ComponentType } from 'react';
 
-function withGlobalReset(Story: ComponentType) {
+export function withGlobalReset(Story: ComponentType) {
   return (
     <>
       <style>{require('!to-string-loader!css-loader!@okta/odyssey/src/scss/base/_reset.scss')}</style>
@@ -20,5 +20,3 @@ function withGlobalReset(Story: ComponentType) {
     </>
   )
 }
-
-export default withGlobalReset
