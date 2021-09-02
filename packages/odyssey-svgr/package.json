@@ -5,5 +5,8 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
-  "main": "src/config.js"
+  "main": "src/config.js",
+  "dependencies": {
+    "@babel/generator": "^7.15.0"
+  }
 }
