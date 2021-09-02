@@ -11,4 +11,4 @@ contact_links:
     about: Found an accessibility issue? Help us improve our accessibility.
   - name: Feature enhancement/request (Oktanauts only)
     url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&summary=request%3A%20%5BBrief%20Issue%20Summary%5D&description=%5BPlease%20replace%20this%20with%20a%20description%20of%20your%20request%20in%20a%20sentence%20or%20two.%20What%20functionality%20would%20be%20required%20for%20an%20initial%20release%3F%20Is%20this%20request%20related%20to%20an%20upcoming%20release%20or%20project%3F%5D&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_request
-    about: Suggest a new feature or change to existing designs.
+    about: Suggest a new feature or change to existing design or code.
