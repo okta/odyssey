@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Bug Report (Oktanauts only)
+    url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_bug
+    about: Oops, all berries? Let us know.
+  - name: Accessibility Issue (Oktanauts only)
+    url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_accessibility
+    about: Help us improve our accessibility.
+  - name: Feature enhancement/request (Oktanauts only)
+    url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_request
+    about: Suggest a new feature or change to existing designs.
