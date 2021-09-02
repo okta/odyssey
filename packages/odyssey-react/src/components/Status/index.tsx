@@ -14,6 +14,8 @@ import type { FunctionComponent } from 'react';
 import { useCx } from '../../utils';
 import styles from './Status.module.scss';
 
+import ScreenReaderText from '../ScreenReaderText';
+
 export type StatusVariants = 'neutral' | 'success' | 'caution' | 'danger';
 export type Props = {
   /**
@@ -58,13 +60,10 @@ const Status: FunctionComponent<Props> = (props) => {
     styles[`${variant}Variant`],
   );
 
-  const labelClass = labelHidden ? styles.labelVisuallyHidden : styles.label;
-
   return (
     <div className={styles.status} role="status">
-      <span className={labelClass}>
-        {label}
-      </span>
+      { !labelHidden && <span className={styles.label}>{label}</span> }
+      { labelHidden && <ScreenReaderText>{label}</ScreenReaderText> }
       <span className={valueClass}>
         {descriptor}
       </span>

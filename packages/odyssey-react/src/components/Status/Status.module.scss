@@ -18,10 +18,6 @@ $status-indicator-size: 1em / 2;
   font-weight: 600;
 }
 
-.labelVisuallyHidden {
-  @include is-visually-hidden;
-}
-
 .value {
   position: relative;
   padding-inline-start: $status-indicator-size + $spacing-xs-em;
