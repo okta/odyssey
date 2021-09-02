@@ -20,14 +20,7 @@ export default function configuration (
 
   return {
     presets: [
-      [
-        '@babel/preset-env',
-        {
-          targets: {
-            esmodules: true
-          },
-        }
-      ],
+      '@babel/preset-env',
       [
         '@babel/preset-react',
         {
@@ -46,10 +39,7 @@ export default function configuration (
           [
             '@babel/preset-env',
             {
-              targets: {
-                esmodules: true
-              },
-              modules: false
+              modules: false,
             }
           ],
         ],
