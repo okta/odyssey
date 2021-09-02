@@ -30,6 +30,8 @@ import TableDataCell from './TableDataCell';
 import TableHeaderCell from './TableHeaderCell';
 import TableSortButton from './TableSortButton';
 
+import ScreenReaderText from '../ScreenReaderText';
+
 import styles from './Table.module.scss';
 
 type ContainerProps =
@@ -89,7 +91,11 @@ const Table = forwardRefWithStatics<
 
   const TableEl = () => (
     <table ref={ref} className={styles.root} {...omitProps}>
-      <caption className={styles.caption}>{caption}</caption>
+        <caption>
+          <ScreenReaderText>
+            {caption}
+          </ScreenReaderText>
+        </caption>
       {children}
     </table>
   );
