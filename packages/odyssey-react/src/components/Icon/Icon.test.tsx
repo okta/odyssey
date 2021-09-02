@@ -20,12 +20,13 @@ describe("Icon", () => {
     const { getByTitle } = render(<Icon title={iconTitle}><svg></svg></Icon>);
     const svgElement = getByTitle(iconTitle).parentElement;
     expect(svgElement).toBeVisible();
+    expect(svgElement).toHaveAttribute('role', 'img');
   });
 
-  it('set a titleId', () => {
-    const { getByTitle } = render(<Icon title={iconTitle} titleId="my-id"><svg></svg></Icon>);
-    const titleElement = getByTitle(iconTitle);
-    expect(titleElement.id).toEqual('my-id');
+  it("has presentation role without title", () => {
+    const { getByRole } = render(<Icon><svg></svg></Icon>);
+    const svgElement = getByRole('presentation');
+    expect(svgElement).toBeVisible();
   });
 
   a11yCheck(() => render(<Icon><svg></svg></Icon>));
