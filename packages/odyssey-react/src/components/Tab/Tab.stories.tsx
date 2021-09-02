@@ -13,10 +13,12 @@
 import { Story } from "@storybook/react";
 import Tabs from ".";
 import type { PropsTabs } from ".";
+import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Tabs`,
-  component: Tabs
+  component: Tabs,
+  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<PropsTabs> = ({ariaLabel, selectedId}) => {

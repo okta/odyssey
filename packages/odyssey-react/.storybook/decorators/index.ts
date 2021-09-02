@@ -10,8 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import withGlobalReset from './withGlobalReset';
-
-export {
-  withGlobalReset
-}
+export { withGlobalReset } from './withGlobalReset'

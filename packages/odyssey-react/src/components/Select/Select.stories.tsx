@@ -14,6 +14,7 @@ import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
 import Select from ".";
 import type { Props } from "./Select";
+import { withGlobalReset } from '../../../.storybook/decorators';
 
 const options = [
   'Proxima Centauri',
@@ -46,6 +47,7 @@ export default {
       control: 'select'
     },
   },
+  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = (args) => (

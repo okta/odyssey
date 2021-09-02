@@ -14,11 +14,11 @@
 
 * {
   box-sizing: border-box;
+}
 
-  &::before,
-  &::after {
-    box-sizing: inherit;
-  }
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 /* Huge selector list layout reset */
@@ -151,12 +151,18 @@ ul {
 blockquote,
 q {
   quotes: none;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    content: none;
-  }
+blockquote::before,
+blockquote::after {
+  content: '';
+  content: none;
+}
+
+q::before,
+q::after {
+  content: '';
+  content: none;
 }
 
 table {
