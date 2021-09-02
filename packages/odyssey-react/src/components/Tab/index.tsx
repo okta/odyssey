@@ -10,10 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState } from "react";
-import type { FunctionComponent, ReactElement, ReactText } from "react";
+import { useState, useRef, forwardRef } from "react";
+import type {
+  FunctionComponent,
+  ReactElement,
+  ReactText,
+  ComponentPropsWithRef,
+} from "react";
 import styles from "./Tab.module.scss";
-import { useCx } from "../../utils";
+import { useCx, useKeypress } from "../../utils";
 
 export type PropsTabs = {
   /**
@@ -59,10 +64,10 @@ export type PropsTabsPanel = {
   id?: string;
   selected?: boolean;
 };
-
-export type PropsTabsList = {
+export interface PropsTabsList
+  extends Omit<ComponentPropsWithRef<"div">, "style" | "className"> {
   children: ReactElement | ReactElement[];
-};
+}
 
 export type PropsTab = {
   children: ReactText;
@@ -103,6 +108,7 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({
 }) => {
   const defaultSelectedTabId = selectedId || children[0].props.id;
   const [selectedTabId, setSelectedTabId] = useState(defaultSelectedTabId);
+  const tabElement = useRef<HTMLDivElement>(null);
 
   const handleTabChange = (newSelectedId: string) => {
     setSelectedTabId(newSelectedId);
@@ -112,9 +118,56 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({
     }
   };
 
+  const handleTabFocus = (event: KeyboardEvent) => {
+    if (tabElement.current) {
+      const focusableSelector = `
+      a[href],
+      button,
+      textarea,
+      input[type="text"],
+      input[type="radio"],
+      input[type="checkbox"],
+      select
+      `;
+      const tabs = tabElement.current.querySelectorAll(focusableSelector);
+      const tabsArr = Array.prototype.slice.call(tabs);
+      const tabCount = tabs.length;
+      const focusableElFirst = tabs[0] as HTMLElement;
+      const focusableElLast = tabs[tabCount - 1] as HTMLElement;
+      const focusableIndexActive = tabsArr.indexOf(document.activeElement);
+      const focusableIndexLast = tabsArr.indexOf(focusableElLast);
+      const focusableElNext = tabs[focusableIndexActive + 1] as HTMLElement;
+      const focusableElPrev = tabs[focusableIndexActive - 1] as HTMLElement;
+      const isFirstFocused = focusableIndexActive === 0;
+      const isLastFocused = focusableIndexActive === focusableIndexLast;
+      const focusFirst = () => focusableElFirst.focus();
+      const focusLast = () => focusableElLast.focus();
+      const keyPressed = (key: string) => key === event.key;
+
+      if (keyPressed("Home")) focusFirst();
+      else if (keyPressed("End")) focusLast();
+      else if (keyPressed("ArrowLeft") && !isFirstFocused)
+        focusableElPrev.focus();
+      else if (keyPressed("ArrowLeft") && isFirstFocused) focusLast();
+      else if (keyPressed("ArrowRight") && !isLastFocused)
+        focusableElNext.focus();
+      else if (keyPressed("ArrowRight") && isLastFocused) focusFirst();
+    }
+  };
+
+  useKeypress(
+    [
+      ["ArrowLeft", handleTabFocus],
+      ["ArrowRight", handleTabFocus],
+      ["Home", handleTabFocus],
+      ["End", handleTabFocus],
+    ],
+    tabElement
+  );
+
   return (
     <Tabs.Container id={id} ariaLabel={ariaLabel}>
-      <Tabs.List>
+      <Tabs.List ref={tabElement}>
         {children.map(({ props: { label, id } }) => (
           <Tabs.Tab
             id={id + "-tab"}
@@ -151,11 +204,11 @@ Tabs.Container = ({ children, id, ariaLabel }) => (
   </div>
 );
 
-Tabs.List = ({ children }) => (
-  <div role="tablist" aria-label="label" className={styles.tablist}>
+Tabs.List = forwardRef<HTMLDivElement, PropsTabsList>(({ children }, ref) => (
+  <div ref={ref} role="tablist" aria-label="label" className={styles.tablist}>
     {children}
   </div>
-);
+));
 
 Tabs.Tab = function TabsTab({ children, id, ariaControls, selected, onClick }) {
   const componentClass = useCx(styles.tab, {
