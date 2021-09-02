@@ -1,11 +1,14 @@
 blank_issues_enabled: false
 contact_links:
   - name: Bug Report (Oktanauts only)
-    url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_bug
-    about: Oops, all berries? Let us know.
+    url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&summary=bug%3A%20%5BBrief%20Issue%20Summary%5D&description=%5BPlease%20replace%20this%20with%20a%20detailed%20description%20of%20your%20bug.%20For%20example%3A%20Is%20this%20issue%20related%20to%20a%20specific%20UI%20component%3F%20What%20did%20you%20expect%20to%20happen%3F%20What%20happened%20instead%3F%20What%20browser%20%26%20version%20are%20you%20experiencing%20this%20in%3F%5D&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_bug
+    about: Found an issue in our code? Let us know.
+  - name: Figma Kit Issue (Oktanauts only)
+    url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&summary=figma%3A%20%5BBrief%20Issue%20Summary%5D&description=%5BPlease%20include%20a%20detailed%20description%20of%20your%20issue.%20For%20example%3A%20Is%20this%20issue%20related%20to%20a%20specific%20component%3F%20Has%20a%20particular%20Figma%20feature%20stopped%20working%3F%5D&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_bug&labels=odyssey_design&labels=odyssey_figma
+    about: Found an issue in our Figma Kit? Let us know.
   - name: Accessibility Issue (Oktanauts only)
-    url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_accessibility
-    about: Help us improve our accessibility.
+    url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&summary=accessibility%3A%20%5BBrief%20Issue%20Summary%5D&description=%5BPlease%20replace%20this%20a%20detailed%20description%20of%20the%20problem.%20For%20example%3A%20Is%20this%20issue%20related%20to%20a%20specific%20UI%20component%3F%20Is%20there%20a%20specific%20WCAG%20checkpoint%20or%20ARIA%20guideline%20being%20violated%3F%20Is%20this%20issue%20related%20to%20a%20specific%20assistive%20technology%3F%5D&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_accessibility
+    about: Found an accessibility issue? Help us improve our accessibility.
   - name: Feature enhancement/request (Oktanauts only)
-    url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_request
+    url: https://oktainc.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10011&issuetype=16&components=31551&summary=request%3A%20%5BBrief%20Issue%20Summary%5D&description=%5BPlease%20replace%20this%20with%20a%20description%20of%20your%20request%20in%20a%20sentence%20or%20two.%20What%20functionality%20would%20be%20required%20for%20an%20initial%20release%3F%20Is%20this%20request%20related%20to%20an%20upcoming%20release%20or%20project%3F%5D&assignee=5fee4c80dd5eb501089c7639&labels=odyssey_user_reported&labels=odyssey_request
     about: Suggest a new feature or change to existing designs.
