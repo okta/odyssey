@@ -11,5 +11,5 @@
  */
 
 const path = require('path');
-const iconSrc = path.dirname(require.resolve('@okta/odyssey-icons/package.json')) + '/src';
+const iconSrc = path.join(path.dirname(require.resolve('@okta/odyssey-icons/package.json')), 'src');
 process.stdout.write(iconSrc);
