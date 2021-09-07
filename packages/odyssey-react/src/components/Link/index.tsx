@@ -11,6 +11,7 @@
  */
 
 import type { FunctionComponent, ReactText } from 'react';
+import { External } from '../Icon';
 import { useCx, useOmit } from '../../utils';
 import styles from './Link.module.scss'
 
@@ -62,12 +63,10 @@ const Link: FunctionComponent<Props> = (props) => {
   const componentClass = useCx(
     styles.root,
     styles[`${variant}Variant`],
-    {
-      [styles.external]: target === `_blank`
-    },
   );
 
   const omitProps = useOmit(rest);
+  const external = target === `_blank`;
 
   return (
     <a
@@ -78,6 +77,7 @@ const Link: FunctionComponent<Props> = (props) => {
       className={componentClass}
     >
       {children}
+      {external && <span className={styles.icon} role="presentation"><External /></span>}
     </a>
   )
 };
