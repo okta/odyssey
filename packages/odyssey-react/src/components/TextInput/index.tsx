@@ -127,7 +127,7 @@ const TextInput: FunctionComponent<Props> = (props) => {
     onBlur,
     onChange,
     onFocus,
-    //optionalLabel,
+    optionalLabel,
     placeholder,
     readonly = false,
     required = true,
