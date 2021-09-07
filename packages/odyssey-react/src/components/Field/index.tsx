@@ -12,7 +12,6 @@
 
 import type { ChangeEvent, FunctionComponent, ReactElement } from 'react';
 import { useOid } from '../../utils';
-import { FieldProvider } from './context';
 
 import styles from './Field.module.scss';
 
@@ -31,11 +30,6 @@ export type Props = {
    * the form field label
    */
   label: string,
-
-  /**
-   * The underlying input element name attribute for the group
-   */
-  name: string,
 
   /**
    * Text to display when the field is optional, i.e. required prop is false
@@ -78,9 +72,6 @@ export type Props = {
 const Field: FunctionComponent<Props> = (props) => {
   const {
     children,
-    disabled = false,
-    name,
-    value,
     error,
     hint,
     id,
@@ -108,19 +99,6 @@ const Field: FunctionComponent<Props> = (props) => {
     </label>
   );
 
-  const inputElement = (
-    <FieldProvider
-      value={{
-        disabled,
-        required,
-        name,
-        value,
-        id
-      }}
-      children={children}
-    />
-  );
-
   const hintElement = (
     <p
       className={styles.hint}
@@ -142,7 +120,7 @@ const Field: FunctionComponent<Props> = (props) => {
     >
       { labelElement }
       { hint && hintElement }
-      { inputElement }
+      { children }
       { error && errorElement }
     </div>
   );
