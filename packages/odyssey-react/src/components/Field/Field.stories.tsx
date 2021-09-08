@@ -10,9 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from 'react'
 import { Story } from "@storybook/react";
 import Field from ".";
 import TextInput from "../TextInput";
+import Radio from "../Radio";
+import TextArea from "../TextArea";
+import Select from "../Select";
+import Checkbox from "../Checkbox";
+
 import type { Props } from ".";
 
 export default {
@@ -38,11 +44,44 @@ export default {
   }
 };
 
-const Template: Story<Props> = ({label, hint, error, name}) => (
-  <Field label={label} hint={hint} error={error} name={name}>
-    <TextInput/>
-  </Field>
-);
+const Template: Story<Props> = ({label, hint, error, name, as, children}) => 
+  React.cloneElement(children, {label, hint, error, name, as});
 
-export const Default = Template.bind({});
+export const WithTextInput = Template.bind({});
+WithTextInput.storyName = 'with TextInput'
+WithTextInput.args = {
+  children: <TextInput />
+}
 
+export const withRadioGroup = Template.bind({});
+withRadioGroup.storyName = 'with RadioGroup'
+withRadioGroup.args = {
+  label: 'Select speed',
+  hint: 'A hint.',
+  error: 'An error has occured my guy',
+  children: (
+    <Radio.Group>
+      <Radio.Button label="Lightspeed" value="light" />
+      <Radio.Button label="Warp speed" value="warp" />
+      <Radio.Button label="Ludicrous speed" value="ludicrous" />
+    </Radio.Group>
+  )
+}
+
+export const withTextArea = Template.bind({});
+withTextArea.storyName = 'with TextArea'
+withTextArea.args = {
+  children: <TextArea label="foo" />
+}
+
+export const withCheckbox = Template.bind({});
+withCheckbox.storyName = 'with Checkbox'
+withCheckbox.args = {
+  children: <Checkbox label="foo" name="name" value="value" />
+}
+
+export const withSelect = Template.bind({});
+withSelect.storyName = 'with Select'
+withSelect.args = {
+  children: <Select label="foo" />
+}

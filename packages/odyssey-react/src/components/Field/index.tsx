@@ -10,10 +10,41 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ChangeEvent, FunctionComponent, ReactElement } from 'react';
-import { useOid } from '../../utils';
+import type { ChangeEvent, FunctionComponent, ReactElement, ReactText } from 'react';
+import ScreenReaderText from '../ScreenReaderText';
 
 import styles from './Field.module.scss';
+
+/**
+* @todo Import this type  in to specific input components for nicer reuse.
+*/
+export type SharedFieldTypes = {
+  /**
+   * the form field label
+   */
+  label: string,
+
+  /**
+  * Text to display when the field is optional, i.e. required prop is false
+  */
+  optionalLabel?: string,
+  
+  /**
+   * the form field error
+   */
+  error?: string,
+  
+  /**
+   * the form field hint
+   */
+  hint?: string,
+
+  /**
+   * The underlying input element required attribute
+   * @default true
+   */
+   required?: boolean,
+}
 
 export type Props = {
   /**
@@ -24,107 +55,113 @@ export type Props = {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
-  id?: string,
+  inputId: string,
 
   /**
-   * the form field label
+   * The underlying parent semantic HTML element.
+   * @default div
    */
-  label: string,
-
-  /**
-   * Text to display when the field is optional, i.e. required prop is false
-   */
-  optionalLabel?: string,
-
-  /**
-   * the form field error
-   */
-  error?: string,
-
-  /**
-   * the form field hint
-   */
-  hint?: string,
-
-  /**
-   * The underlying input element required attribute
-   * @default true
-   */
-  required?: boolean,
-
-  /**
-   * The underlying input element disabled attribute
-   * @default false
-   */
-  disabled?: boolean,
-
-  /**
-   * The value of the Field's input
-   */
-  value?: string,
-
-  /**
-   * Callback executed when the input group fires a change event
-   */
-  onChange?: (event?: ChangeEvent<HTMLInputElement>, value?: string) => void,
+  as?: 'div' | 'fieldset'
 };
 
-const Field: FunctionComponent<Props> = (props) => {
+interface PropsLabel {
+  inputId: string
+  optionalLabel?: string
+  required: boolean,
+  children: ReactText
+  as?: 'label' | 'legend'
+}
+interface PropsHint { 
+  id: string, 
+  children: ReactText
+}
+interface PropsError {
+  id: string
+  children: ReactText
+  errorPrefix?: string
+}
+
+export type StaticComponents = {
+  Label: typeof Label,
+  Hint: typeof Hint,
+  Error: typeof Error,
+}
+
+const Field: FunctionComponent<Props> & StaticComponents = (props) => {
   const {
-    children,
     error,
     hint,
-    id,
+    inputId,
     label,
     optionalLabel,
     required = true,
+    children,
+    as = 'div'
   } = props;
 
-  const oid = useOid(id);
+  const Tag = as;
 
-  const labelElement = (
-    <label
-      // This should swap to legend for Radio and Checkbox Groups
+  return (
+    <Tag className={styles.root}>
+      <Field.Label
+        inputId={inputId}
+        required={required}
+        optionalLabel={optionalLabel}
+      >
+        {label}
+      </Field.Label>
+      { hint && <Field.Hint id={inputId}>{hint}</Field.Hint> }
+      { children }
+      { error && <Field.Error id={inputId}>{error}</Field.Error> }
+    </Tag>
+  );
+};
+
+const Label = (props: PropsLabel) => {
+  const {
+    inputId,
+    optionalLabel = "Optional",
+    required,
+    children,
+    as = 'label'
+  } = props;
+
+  const Tag = as;
+
+  return (
+    <Tag
       // We'll also need the ability to hide or reposition this label for UI like Search
       className={styles.label}
-      htmlFor={oid}
+      htmlFor={inputId}
     >
-      {label}
+      {children}
       { !required && optionalLabel &&
         <span
           className={styles.optionalLabel}
           children={optionalLabel}
         />
       }
-    </label>
+    </Tag>
   );
+}
 
-  const hintElement = (
-    <p
-      className={styles.hint}
-      id={`${oid}-hint`}
-      children={hint}
-    />
-  );
+const Hint = ({ id, children }: PropsHint) => (
+  <p
+    className={styles.hint}
+    id={`${id}-hint`}
+    children={children}
+  />
+)
 
-  const errorElement = (
-    <p className={styles.error} id={`${oid}-error`}>
-      <span className="u-visually-hidden">Error:</span>
-      { error }
-    </p>
-  );
+const Error = ({ id, children, errorPrefix = "Error:" }: PropsError) => (
+  <p className={styles.error} id={`${id}-error`}>
+    <ScreenReaderText>{errorPrefix}</ScreenReaderText>
+    {children}
+  </p>
+)
 
-  return (
-    <div // This should swap to `fieldset` for grouped inputs like RadioGroup/CheckboxGroup
-      className={styles.root}
-    >
-      { labelElement }
-      { hint && hintElement }
-      { children }
-      { error && errorElement }
-    </div>
-  );
-};
+Field.Label = Label;
+Field.Hint = Hint;
+Field.Error = Error;
 
 export default Field;
-

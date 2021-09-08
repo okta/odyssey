@@ -22,7 +22,6 @@ import { useOid } from "../../utils";
 import SearchIcon from "../Icon/Search";
 
 import Field from '../Field';
-
 import styles from './TextInput.module.scss';
 import { useOid } from '../../utils';
 import { Search } from '../Icon';
@@ -40,15 +39,10 @@ export type Props = {
   type?: "text" | "email" | "url" | "tel" | "search" | "password";
 
   /**
-   * The form field label
-   */
-  label: string,
-
-  /**
    * Callback to provide a reference to the underlying input element
    * @param {Object} instance the input element or null
    */
-  inputRef?: RefCallback<HTMLInputElement>;
+  inputRef?: RefCallback<HTMLInputElement>,
 
   /**
    * The underlying input element name attribute
@@ -72,11 +66,6 @@ export type Props = {
    * @default false
    */
   readonly?: boolean;
-
-  /**
-   * Text to display when the form is optional, i.e. required prop is false
-   */
-  optionalLabel?: string,
 
   /**
    * The underlying input element placeholder attribute
@@ -122,17 +111,20 @@ const TextInput: FunctionComponent<Props> = (props) => {
     disabled = false,
     id,
     inputRef,
-    label,
     name,
     onBlur,
     onChange,
     onFocus,
-    optionalLabel,
     placeholder,
     readonly = false,
     required = true,
     type = 'text',
     value,
+    error,
+    hint,
+    oid,
+    label,
+    optionalLabel
   } = props;
 
   const oid = useOid(id);
