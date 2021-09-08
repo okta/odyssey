@@ -9,6 +9,11 @@
       "es2020.string"
     ],
     "module": "commonjs",
-    "target": "es2019"
+    "target": "es2019",
+
+    "noEmit": false,
+    "emitDeclarationOnly": false,
+    "declaration": true,
+    "declarationMap": true
   }
 }
