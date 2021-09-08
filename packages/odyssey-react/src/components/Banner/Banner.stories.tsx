@@ -45,6 +45,8 @@ export default {
   },
 };
 
+type OnDismissEvent = Parameters<NonNullable<Props["onDismiss"]>>[number];
+
 const Template: Story<Props> = ({
   title = "Banner title",
   variant,
@@ -58,9 +60,9 @@ const Template: Story<Props> = ({
 
   if (onDismiss) {
     dismissableComponentProps = {
-      onDismiss: () => {
+      onDismiss: (event: OnDismissEvent) => {
         if (onDismiss) {
-          onDismiss();
+          onDismiss(event);
         }
         updateArgs({ open: false });
       },
