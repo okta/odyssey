@@ -1,0 +1,23 @@
+{
+  "name": "@okta/odyssey-babel-preset",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "prepare": "tsc"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.15.0",
+    "@okta/odyssey-transform-styles-babel-plugin": "^0.0.0"
+  },
+  "devDependencies": {
+    "@okta/odyssey-typescript": "^0.0.0",
+    "@types/babel__core": "^7.1.15"
+  }
+}

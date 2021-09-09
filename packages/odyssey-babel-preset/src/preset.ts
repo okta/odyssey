@@ -11,46 +11,41 @@
  */
 
 import type * as Babel from '@babel/core';
+import type { StyleOpts } from '@okta/odyssey-transform-styles-babel-plugin';
 import assertEnv from './assertEnv';
 
-export default function configuration (
-  api: Babel.ConfigAPI
+interface Opts {
+  styles?: StyleOpts;
+}
+
+function preset (
+  api: Babel.ConfigAPI,
+  _opts: Opts = {}
 ): Babel.TransformOptions {
   assertEnv(api.env());
+  const opts = Object.assign(
+    {
+      env: {},
+      react: {},
+      styles: {},
+      typescript: {}
+    },
+    _opts
+  );
 
   return {
-    presets: [
-      '@babel/preset-env',
-      [
-        '@babel/preset-react',
-        {
-          runtime: 'automatic',
-        }
-      ],
-      '@babel/preset-typescript',
+    plugins: [
+      [ '@okta/odyssey-transform-styles-babel-plugin', opts.styles ]
     ],
-
-    env: {
-      production: {
-        plugins: [
-          '../plugins/transformScssModules',
-        ],
-        presets: [
-          [
-            '@babel/preset-env',
-            {
-              modules: false,
-            }
-          ],
-        ],
-        ignore: [
-          /\.test\.|\.stories\./i
-        ],
-        comments: false,
-        shouldPrintComment: (val: string) => {
-          return /Okta, Inc\.|@license|@preserve/.test(val);
-        }
-      }
-    }
+    presets: [
+      [ '@babel/preset-env', opts.env ],
+      [ '@babel/preset-react', opts.react ],
+      [ '@babel/preset-typescript', opts.typescript ]
+    ]
   };
 }
+
+export {
+  assertEnv,
+  preset as default
+};

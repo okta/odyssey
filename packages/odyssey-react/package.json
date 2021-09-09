@@ -15,7 +15,7 @@
   "devDependencies": {
     "@babel/cli": "*",
     "@okta/browserslist-config-odyssey": "^0.0.0",
-    "@okta/odyssey-babel": "^0.0.0",
+    "@okta/odyssey-babel-preset": "^0.0.0",
     "@okta/odyssey-eslint": "^0.0.0",
     "@okta/odyssey-icons": "^0.7.0",
     "@okta/odyssey-storybook": "^0.0.0",
@@ -29,7 +29,6 @@
     "@types/react-dom": "^17.0.5",
     "babel-jest": "^26.6.3",
     "css-loader": "^3.0.0",
-    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "jest-axe": "^5.0.1",
     "node-sass": "^4.0.0",
