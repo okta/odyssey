@@ -13,7 +13,7 @@
 import importStyles from './fixture.module.scss';
 const requireStyles = require('./fixture.module.scss');
 
-describe('plugins/transformScssModules', () => {
+describe('transformStyles', () => {
   describe('import visitor', () => {
     it('transforms import as expected', () => {
       expect(importStyles).toMatchSnapshot();

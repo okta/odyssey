@@ -1,0 +1,9 @@
+{
+  "env": {
+    "test": {
+      "plugins": [
+        "@okta/odyssey-transform-styles-babel-plugin"
+      ]
+    }
+  }
+}

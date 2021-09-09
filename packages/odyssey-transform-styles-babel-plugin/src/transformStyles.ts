@@ -15,23 +15,24 @@ import type {
   VariableDeclaration,
   ObjectExpression
 } from '@babel/traverse/node_modules/@babel/types';
-import { resolve, dirname } from 'path';
+export type { StyleOpts } from './attachHook';
 import attachHook from './attachHook';
 import { objectExpression, variableDeclaration } from './nodes';
+import { resolve, dirname } from 'path';
 
-export type FileMap = Map<string, { digest: string, styles: string }>
+export type FileMap = Map<string, { digest: string, styles: string; }>;
 
-export default function transformScssModules (
+export default function transformStyles (
   { types: t }: typeof Babel
 ): Babel.PluginObj {
 
   const fileMap: FileMap = new Map();
 
   return {
-    name: 'transform-scss-modules',
+    name: 'transform-styles',
 
     pre () {
-      attachHook({ fileMap });
+      attachHook({ fileMap, opts: this.opts || {} });
     },
 
     visitor: {
@@ -39,10 +40,10 @@ export default function transformScssModules (
         const importer = state?.file?.opts?.filename;
         if (typeof importer !== 'string') { return; }
 
-        const specifier = path.node.specifiers[0]
+        const specifier = path.node.specifiers[ 0 ];
         if (!t.isImportDefaultSpecifier(specifier)) { return; }
 
-        const importee = path.node.source.value
+        const importee = path.node.source.value;
         if (!isScssModule(importee)) { return; }
 
         const resolvedPath = resolve(dirname(importer), importee);
@@ -50,7 +51,7 @@ export default function transformScssModules (
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const tokens = require(resolvedPath);
         const file = fileMap.get(resolvedPath);
-        if (!file) { return }
+        if (!file) { return; }
 
         path.replaceWith(
           variableDeclaration({
@@ -65,33 +66,33 @@ export default function transformScssModules (
         const importer = state?.file?.opts?.filename;
         if (typeof importer !== 'string') { return; }
 
-        const callee = path.node.callee
-        if (!t.isIdentifier(callee)) { return }
-        if (callee.name !== 'require') { return }
+        const callee = path.node.callee;
+        if (!t.isIdentifier(callee)) { return; }
+        if (callee.name !== 'require') { return; }
 
-        const argument = path.node.arguments[0]
-        if (!t.isStringLiteral(argument)) { return }
-        const importee = argument.value
-        if (!isScssModule(importee)) { return }
+        const argument = path.node.arguments[ 0 ];
+        if (!t.isStringLiteral(argument)) { return; }
+        const importee = argument.value;
+        if (!isScssModule(importee)) { return; }
 
         const resolvedPath = resolve(dirname(importer), importee);
 
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const tokens = require(resolvedPath);
         const file = fileMap.get(resolvedPath);
-        if (!file) { return }
+        if (!file) { return; }
 
         path.replaceWith(
           objectExpression({
             ...file,
             tokens
           }) as ObjectExpression
-        )
+        );
       }
     }
   };
 }
 
 function isScssModule (candidate: string) {
-  return /\.module\.scss$/i.test(candidate)
+  return /\.module\.scss$/i.test(candidate);
 }
