@@ -11,7 +11,9 @@
  */
 
 import { useEffect, useRef } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import Choices from 'choices.js';
+import { Close } from '../../Icon';
 
 import styles from '../Select.module.scss';
 
@@ -59,7 +61,22 @@ const useChoices = (id: string, value?: string): void => {
         // noResultsText: 'No results found',
         // noChoicesText: 'No choices to choose from',
         // itemSelectText: 'Press to select',
-      }
+      },
+      callbackOnCreateTemplates: () => ({
+        item: (...args) => {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const item = Choices.defaults.templates.item.call(this!, ...args);
+          const btn = item.querySelector('button');
+          if(btn){
+            const indicator = document.createElement('span');
+            indicator.classList.add(styles.buttonIndicator);
+            indicator.setAttribute('role', 'presentation');
+            indicator.insertAdjacentHTML('afterbegin', ReactDOMServer.renderToString(<Close />));
+            btn?.appendChild(indicator);
+          }
+          return item
+        }
+      }),
     });
 
     return () => choices?.current?.destroy();

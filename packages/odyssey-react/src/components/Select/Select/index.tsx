@@ -22,6 +22,7 @@ import useChoices from './useChoices';
 import { forwardRefWithStatics, useCx, useOid, useOmit } from '../../../utils';
 
 import styles from '../Select.module.scss';
+import { Caret } from '../../Icon';
 
 export interface Props extends Omit<
   ComponentPropsWithRef<'select'>,
@@ -141,19 +142,22 @@ const Select = forwardRefWithStatics<
 
 
   const selectElement = (
-    // eslint-disable-next-line jsx-a11y/no-onchange
-    <select
-      {...omitProps}
-      id={oid}
-      name={name}
-      disabled={disabled}
-      required={required}
-      onChange={handleChange}
-      value={value}
-      ref={ref}
-    >
-      {children}
-    </select>
+    <div className={styles.outer}>
+      {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+      <select
+        {...omitProps}
+        id={oid}
+        name={name}
+        disabled={disabled}
+        required={required}
+        onChange={handleChange}
+        value={value}
+        ref={ref}
+      >
+        {children}
+      </select>
+      <span className={styles.indicator} role="presentation"><Caret /></span>
+    </div>
   );
 
   const hintElement = hint && (

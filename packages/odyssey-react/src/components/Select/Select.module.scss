@@ -17,10 +17,6 @@
 .root:not([data-type]) {
   @include input-baseline;
 
-  background-image: get-icon('caret', $text-body);
-  background-repeat: no-repeat;
-  background-position: right $spacing-s-em center;
-  background-size: $size-body-caption;
   appearance: none;
 
   option {
@@ -37,8 +33,6 @@
 
 $choices-button-dimension: 8px !default;
 $choices-button-offset: 8px !default;
-$choices-icon-cross: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==') !default;
-$choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==') !default;
 
 .root {
   position: relative;
@@ -123,6 +117,10 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
   }
 }
 
+.outer {
+  position: relative;
+}
+
 .root[data-type*='select-one'],
 .root[data-type*='select-multiple'] {
   .input {
@@ -151,8 +149,6 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     padding-block: 0;
     padding-inline: 0;
     opacity: 0.25;
-    background-image: $choices-icon-cross-inverse;
-    background-size: 8px;
 
     &:hover,
     &:focus {
@@ -168,28 +164,21 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     display: none;
   }
 
-  &::after {
-    content: '';
+  + .indicator {
     position: absolute;
     inset-block-start: 50%;
     inset-inline-end: $spacing-s-em;
-    width: $size-body-caption;
-    height: $size-body-caption;
     transform: translateY(-50%);
-    background-image: get-icon('caret', $text-body);
-    background-repeat: no-repeat;
-    background-size: $size-body-caption;
+    font-size: 0.95em;
     pointer-events: none;
   }
 
-  &.open {
-    &::after {
-      transform: translateY(-50%) rotate(180deg);
-    }
+  &.open + .indicator {
+    transform: translateY(-50%) rotate(180deg);
   }
 
   &[dir='rtl'] {
-    &::after {
+    .indicator {
       inset-inline-end: auto;
       inset-inline-start: 11.5px;
     }
@@ -231,15 +220,26 @@ $choices-icon-cross-inverse: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     padding-inline: 0;
     opacity: 1;
     background-color: cv('blue', '400');
-    background-image: get-icon('close', $white);
-    background-position: center;
-    background-size: ($base-line-height * 1em) - 1em; // funky math to evade half-pixel rounding errors
     line-height: 1;
 
     &:hover,
     &:focus {
       background-color: $color-primary-base;
     }
+  }
+
+  .buttonIndicator {
+    display: block;
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    width: 8px;
+    height: 8px;
+    transform: translate(-50%, -50%);
+    color: $white;
+    font-size: 0.5em;
+    text-indent: 0;
+    pointer-events: none;
   }
 }
 
