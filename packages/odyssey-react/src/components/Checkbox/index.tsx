@@ -10,13 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback } from 'react';
+import { useCallback, useRef, useEffect } from 'react';
 import type {
   FunctionComponent,
   FocusEventHandler,
   ChangeEvent,
   RefCallback,
 } from 'react';
+import { Check, Minus } from '../Icon';
 import styles from './Checkbox.module.scss';
 import { useOid } from '../../utils';
 
@@ -66,6 +67,12 @@ export type Props = {
   checked?: boolean,
 
   /**
+   * The input element indeterminate state for controlled components
+   * @default false
+   */
+  indeterminate?:boolean,
+
+  /**
    * Callback executed when the input fires a blur event
    * @param {Object} event the event object
    */
@@ -105,9 +112,28 @@ const Checkbox: FunctionComponent<Props> = (props) => {
     onFocus,
     required = true,
     value,
+    indeterminate = false,
   } = props;
 
   const oid = useOid(id);
+
+  const internalRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (inputRef) {
+      inputRef(internalRef.current);
+    }
+  }, [internalRef, inputRef]);
+
+  useEffect(() => {
+    if (internalRef.current) {
+      if (indeterminate) {
+        internalRef.current.indeterminate = true;
+      }
+      else {
+        internalRef.current.indeterminate = false;
+      }
+    }
+  }, [indeterminate, internalRef]);
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -127,16 +153,27 @@ const Checkbox: FunctionComponent<Props> = (props) => {
         onChange={handleChange}
         onBlur={onBlur}
         onFocus={onFocus}
-        ref={inputRef}
+        ref={internalRef}
         required={required}
         type="checkbox"
         value={value}
       />
       <label
-        children={label}
         className={styles.label}
         htmlFor={oid}
-      />
+      >
+        <span className={styles.box} role="presentation">
+          <span className={styles.indicator}>
+            { indeterminate ? (
+              <Minus />
+            ):(
+              <Check />
+            )}
+          </span>
+        </span>
+
+        {label}
+      </label>
     </>
   );
 };

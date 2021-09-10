@@ -19,6 +19,7 @@ import type {
 } from 'react';
 import styles from './TextInput.module.scss';
 import { useOid } from '../../utils';
+import { Search } from '../Icon';
 
 export type Props = {
   /**
@@ -155,6 +156,23 @@ const TextInput: FunctionComponent<Props> = (props) => {
     return styles.label;
   })();
 
+  const input = <input
+    className={styles.root}
+    disabled={disabled}
+    id={oid}
+    name={name}
+    onChange={handleChange}
+    onBlur={onBlur}
+    onFocus={onFocus}
+    placeholder={placeholder}
+    readOnly={readonly}
+    ref={inputRef}
+    required={required}
+    type={type}
+    defaultValue={defaultValue}
+    value={value}
+  />;
+
   return (
     <fieldset className={styles.fieldset}>
       <div className={styles.fieldsetFlex}>
@@ -163,22 +181,16 @@ const TextInput: FunctionComponent<Props> = (props) => {
           className={labelClass}
           htmlFor={oid}
         />
-        <input
-          className={styles.root}
-          disabled={disabled}
-          id={oid}
-          name={name}
-          onChange={handleChange}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          placeholder={placeholder}
-          readOnly={readonly}
-          ref={inputRef}
-          required={required}
-          type={type}
-          defaultValue={defaultValue}
-          value={value}
-        />
+        {type === 'search' ? (
+          <span className={styles.outer}>
+            <span className={styles.indicator} role="presentation">
+              <Search />
+            </span>
+            {input}
+          </span>
+        ):(
+          <>{input}</>
+        )}
       </div>
     </fieldset>
   );

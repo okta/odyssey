@@ -77,7 +77,7 @@ const Link: FunctionComponent<Props> = (props) => {
       className={componentClass}
     >
       {children}
-      {external && <span className={styles.icon} role="presentation"><External /></span>}
+      {external && <span className={styles.indicator} role="presentation"><External /></span>}
     </a>
   )
 };

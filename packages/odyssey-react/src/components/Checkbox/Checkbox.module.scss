@@ -18,7 +18,7 @@
   &:checked,
   &:indeterminate {
     + .label {
-      &::before {
+      .box {
         border-color: $color-primary-base;
         background-color: $color-primary-base;
       }
@@ -27,9 +27,8 @@
 
   &:checked {
     + .label {
-      &::after {
-        transform: translateY(-50%) scale(0.9);
-        background-image: get-icon('check', $white);
+      .indicator {
+        color: $white;
       }
     }
   }
@@ -37,7 +36,7 @@
   &:not(:checked) {
     + .label {
       &:hover {
-        &::before {
+        .box {
           border-color: $color-primary-base;
         }
       }
@@ -46,16 +45,15 @@
 
   &:indeterminate {
     + .label {
-      &::after {
-        transform: translateY(-50%) scale(0.9);
-        background-image: get-icon('dash', $white);
+      .indicator {
+        color: $white;
       }
     }
   }
 
   &:focus {
     + .label {
-      &::before {
+      .box {
         @include outline($focus-ring-primary, 2px);
 
         border-color: $color-primary-base;
@@ -69,7 +67,7 @@
       color: $text-body;
       cursor: not-allowed;
 
-      &::before {
+      .box {
         border-color: $border-input-disabled;
         background-color: $bg-input-disabled;
       }
@@ -78,25 +76,9 @@
     &:checked,
     &:indeterminate {
       + .label {
-        &::before {
+        .box {
           border-color: $color-primary-light;
           background-color: $color-primary-light;
-        }
-      }
-    }
-
-    &:checked {
-      + .label {
-        &::after {
-          background-image: get-icon('check', $white);
-        }
-      }
-    }
-
-    &:indeterminate {
-      + .label {
-        &::after {
-          background-image: get-icon('dash', $white);
         }
       }
     }
@@ -106,7 +88,7 @@
     + .label {
       color: $text-danger;
 
-      &::before {
+      .box {
         border-color: $color-danger-base;
       }
     }
@@ -114,7 +96,7 @@
     &:checked,
     &:indeterminate {
       + .label {
-        &::before {
+        .box {
           background-color: $color-danger-base;
         }
       }
@@ -123,7 +105,7 @@
     &:not(:checked) {
       + .label {
         &:hover {
-          &::before {
+          .box {
             border-color: $color-danger-dark;
           }
         }
@@ -132,7 +114,7 @@
 
     &:focus {
       + .label {
-        &::before {
+        .box {
           @include outline($focus-ring-danger, 2px);
 
           border-color: $color-danger-base;
@@ -151,7 +133,7 @@
 
       &:checked {
         + .label {
-          &::before {
+          .box {
             background-color: $color-danger-light;
           }
         }
@@ -161,16 +143,8 @@
       &:not(:checked),
       &:indeterminate {
         + .label {
-          &::before {
+          .box {
             border-color: $color-danger-light;
-          }
-        }
-      }
-
-      &:indeterminate {
-        + .label {
-          &::after {
-            background-image: get-icon('dash', $white);
           }
         }
       }
@@ -187,37 +161,34 @@
   font-weight: 400;
   text-align: start;
 
-  &::before,
-  &::after {
+  .box,
+  .indicator {
     @include border-radius($base-border-radius);
 
-    content: '';
     display: block;
     position: absolute;
     inset-block-start: 50%;
     inset-inline-start: 0;
-    width: 1em;
-    height: 1em;
-    transition-property: border-color, background, opacity, box-shadow;
+    transform: translateY(-50%);
+    transition-property: border-color, color, opacity, box-shadow;
     transition-duration: $base-duration;
     transition-timing-function: $base-timing;
-    border: 2px solid transparent;
   }
 
   /* Box */
 
-  &::before {
-    transform: translateY(-50%);
-    border-color: $border-color-ui;
+  .box {
+    width: 1em;
+    height: 1em;
+    border: 2px solid $border-color-ui;
   }
 
   /* Check */
 
-  &::after {
-    transform: translateY(-50%) scale(0.9);
-    background-image: get-icon('check', transparent);
-    background-repeat: no-repeat;
-    background-position: center;
+  .indicator {
+    z-index: 1;
+    color: transparent;
+    font-size: 0.75em;
   }
 
   &:last-child {
