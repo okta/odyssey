@@ -22,6 +22,7 @@ import { useOid } from "../../utils";
 import SearchIcon from "../Icon/Search";
 
 import Field from '../Field';
+import type { SharedFieldTypes } from '../Field';
 import styles from './TextInput.module.scss';
 import { useOid } from '../../utils';
 import { Search } from '../Icon';
@@ -99,8 +100,8 @@ export type Props = {
   * Callback executed when the input fires a focus event
   * @param {Object} event the event object
   */
-  onFocus?: FocusEventHandler<HTMLInputElement>,
-};
+  onFocus?: FocusEventHandler<HTMLInputElement>
+}
 
 /**
  * Text inputs allow users to edit and input data.
@@ -122,7 +123,6 @@ const TextInput: FunctionComponent<Props> = (props) => {
     value,
     error,
     hint,
-    oid,
     label,
     optionalLabel
   } = props;

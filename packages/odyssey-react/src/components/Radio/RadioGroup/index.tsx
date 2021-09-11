@@ -37,11 +37,6 @@ export interface Props
   hint?: string;
 
   /**
-   * The form field legend
-   */
-  legend: string;
-
-  /**
    * The underlying input element name attribute for the group
    */
   name: string;
@@ -77,21 +72,30 @@ export interface Props
  */
 const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
   const {
-    hint,
     children,
     disabled = false,
-    legend,
+    id,
     name,
     onChange,
     required = true,
     value,
-    ...rest
+    error,
+    hint,
+    label,
+    optionalLabel
   } = props;
 
-  const legendElement = <legend className={styles.legend} children={legend} />;
+  const oid = useOid(id);
 
-  const inputElements = (
-    <div className={styles.fieldsetFlex}>
+  return (
+    <Field
+      error={error}
+      hint={hint}
+      inputId={oid}
+      label={label}
+      optionalLabel={optionalLabel}
+      required={required}
+    >
       <RadioGroupProvider
         value={{
           disabled,
@@ -102,19 +106,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
         }}
         children={children}
       />
-    </div>
-  );
-
-  const hintElement = <aside className={styles.hint} children={hint} />;
-
-  const omitProps = useOmit(rest);
-
-  return (
-    <fieldset className={styles.fieldset} ref={ref} {...omitProps}>
-      {legendElement}
-      {inputElements}
-      {hint && hintElement}
-    </fieldset>
+    </Field>
   );
 });
 

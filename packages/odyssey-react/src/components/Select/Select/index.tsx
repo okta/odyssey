@@ -149,23 +149,10 @@ const Select = forwardRefWithStatics<HTMLSelectElement, Props, Statics>(
           <CaretDownIcon />
         </span>
       </div>
-    );
-
-    const hintElement = hint && (
-      <aside className={styles.hint} children={hint} />
-    );
-
-    return (
-      <fieldset data-optional={isOptional} className={styles.fieldset}>
-        <div className={styles.fieldsetFlex}>
-          {labelElement}
-          {selectElement}
-          {hintElement}
-        </div>
-      </fieldset>
-    );
-  }
-);
+    </fieldset>
+  );
+  /* eslint-enable jsx-a11y/no-onchange */
+});
 
 export interface Statics {
   Option: typeof SelectOption;

@@ -16,11 +16,12 @@ import type {
   FocusEventHandler,
   ChangeEvent,
   RefCallback,
-} from "react";
-import styles from "./TextArea.module.scss";
-import { useOid } from "../../utils";
-
-export type Props = {
+} from 'react';
+import styles from './TextArea.module.scss';
+import { useOid } from '../../utils';
+import Field from '../Field'
+import type { SharedFieldTypes } from '../Field'
+export interface Props extends SharedFieldTypes {
   /**
    * The underlying textarea element id attribute. Automatically generated if not provided
    */
@@ -99,11 +100,11 @@ export type Props = {
   onChange?: (event: ChangeEvent<HTMLTextAreaElement>, value: string) => void;
 
   /**
-   * Callback executed when the textarea fires a focus event
-   * @param {Object} event the event object
-   */
-  onFocus?: FocusEventHandler<HTMLTextAreaElement>;
-};
+  * Callback executed when the textarea fires a focus event
+  * @param {Object} event the event object
+  */
+  onFocus?: FocusEventHandler<HTMLTextAreaElement>,
+}
 
 /**
  * TextArea allows users to edit and input data.
@@ -112,19 +113,20 @@ const TextArea: FunctionComponent<Props> = (props) => {
   const {
     defaultValue,
     disabled = false,
-    hint,
     id,
-    label,
     name,
     onBlur,
     onChange,
     onFocus,
-    optionalLabel,
     placeholder,
     readonly = false,
     required = true,
     textareaRef,
     value,
+    error,
+    hint,
+    label,
+    optionalLabel
   } = props;
 
   const oid = useOid(id);
@@ -136,44 +138,30 @@ const TextArea: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
-  const labelChildren = (
-    <>
-      {label}
-      {!required && optionalLabel && (
-        <span className={styles.optionalLabel} children={optionalLabel} />
-      )}
-    </>
-  );
-
   return (
-    <fieldset className={styles.fieldset}>
-      <div className={styles.fieldsetFlex}>
-        <label
-          children={labelChildren}
-          className={disabled || readonly ? styles.labelDisabled : styles.label}
-          htmlFor={oid}
-        />
-        <aside
-          className={disabled || readonly ? styles.hintDisabled : styles.hint}
-          children={hint}
-        />
-        <textarea
-          className={styles.root}
-          disabled={disabled}
-          id={oid}
-          name={name}
-          onChange={handleChange}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          placeholder={placeholder}
-          readOnly={readonly}
-          ref={textareaRef}
-          required={required}
-          defaultValue={defaultValue}
-          value={value}
-        />
-      </div>
-    </fieldset>
+    <Field
+      inputId={oid}
+      error={error}
+      hint={hint}
+      label={label}
+      optionalLabel={optionalLabel}
+    >
+      <textarea
+        className={styles.root}
+        disabled={disabled}
+        id={oid}
+        name={name}
+        onChange={handleChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        placeholder={placeholder}
+        readOnly={readonly}
+        ref={textareaRef}
+        required={required}
+        defaultValue={defaultValue}
+        value={value}
+      />
+    </Field>
   );
 };
 

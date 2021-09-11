@@ -10,15 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ChangeEvent, FunctionComponent, ReactElement, ReactText } from 'react';
+import type { FunctionComponent, ReactElement, ReactText } from 'react';
 import ScreenReaderText from '../ScreenReaderText';
 
 import styles from './Field.module.scss';
 
-/**
-* @todo Import this type  in to specific input components for nicer reuse.
-*/
-export type SharedFieldTypes = {
+
+export interface SharedFieldTypes {
   /**
    * the form field label
    */
@@ -46,7 +44,7 @@ export type SharedFieldTypes = {
    required?: boolean,
 }
 
-export type Props = {
+export interface Props extends SharedFieldTypes {
   /**
    * Input to be rendered within the Field
    */
@@ -62,7 +60,7 @@ export type Props = {
    * @default div
    */
   as?: 'div' | 'fieldset'
-};
+}
 
 interface PropsLabel {
   inputId: string
