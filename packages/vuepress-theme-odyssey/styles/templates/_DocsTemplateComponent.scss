@@ -13,7 +13,10 @@
 .docskit-container {
   display: grid;
   grid-column-gap: $spacing-l;
-  grid-template-columns: minmax(min-content, max-content) minmax(min-content, #{$max-line-length});
+  grid-template-columns: minmax(min-content, max-content) minmax(
+      min-content,
+      #{$max-line-length}
+    );
 
   @include mq(m) {
     display: block;

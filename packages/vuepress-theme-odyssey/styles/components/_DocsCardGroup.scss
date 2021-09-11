@@ -20,7 +20,7 @@
   &.is-2col {
     grid-template-columns: 1fr 1fr;
 
-    @include mq('m') {
+    @include mq("m") {
       grid-template-columns: 1fr;
     }
   }

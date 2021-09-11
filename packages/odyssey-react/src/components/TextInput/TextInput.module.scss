@@ -13,9 +13,9 @@
 .root {
   @include input-baseline;
 
-  &[type='search'] {
+  &[type="search"] {
     padding-inline-start: ms(1) + $spacing-s + $spacing-xs;
-    background-image: get-icon('search', $text-body);
+    background-image: get-icon("search", $text-body);
     background-repeat: no-repeat;
     background-position: left $spacing-s center;
     background-size: ms(1);
@@ -32,7 +32,7 @@
       display: none;
     }
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       background-position: right $spacing-s center;
     }
   }
