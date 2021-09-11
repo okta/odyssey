@@ -10,88 +10,107 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type * as Babel from '@babel/core';
+import type * as Babel from "@babel/core";
 import type {
   VariableDeclaration,
-  ObjectExpression
-} from '@babel/traverse/node_modules/@babel/types';
-import { resolve, dirname } from 'path';
-import attachHook from './attachHook';
-import { objectExpression, variableDeclaration } from './nodes';
+  ObjectExpression,
+} from "@babel/traverse/node_modules/@babel/types";
+import { resolve, dirname } from "path";
+import attachHook from "./attachHook";
+import { objectExpression, variableDeclaration } from "./nodes";
 
-export type FileMap = Map<string, { digest: string, styles: string }>
+export type FileMap = Map<string, { digest: string; styles: string }>;
 
-export default function transformScssModules (
-  { types: t }: typeof Babel
-): Babel.PluginObj {
-
+export default function transformScssModules({
+  types: t,
+}: typeof Babel): Babel.PluginObj {
   const fileMap: FileMap = new Map();
 
   return {
-    name: 'transform-scss-modules',
+    name: "transform-scss-modules",
 
-    pre () {
+    pre() {
       attachHook({ fileMap });
     },
 
     visitor: {
-      ImportDeclaration (path, state) {
+      ImportDeclaration(path, state) {
         const importer = state?.file?.opts?.filename;
-        if (typeof importer !== 'string') { return; }
+        if (typeof importer !== "string") {
+          return;
+        }
 
-        const specifier = path.node.specifiers[0]
-        if (!t.isImportDefaultSpecifier(specifier)) { return; }
+        const specifier = path.node.specifiers[0];
+        if (!t.isImportDefaultSpecifier(specifier)) {
+          return;
+        }
 
-        const importee = path.node.source.value
-        if (!isScssModule(importee)) { return; }
+        const importee = path.node.source.value;
+        if (!isScssModule(importee)) {
+          return;
+        }
 
         const resolvedPath = resolve(dirname(importer), importee);
 
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const tokens = require(resolvedPath);
         const file = fileMap.get(resolvedPath);
-        if (!file) { return }
+        if (!file) {
+          return;
+        }
 
         path.replaceWith(
           variableDeclaration({
             ...file,
             name: specifier.local.name,
-            tokens
+            tokens,
           }) as VariableDeclaration
         );
       },
 
-      CallExpression (path, state) {
+      CallExpression(path, state) {
         const importer = state?.file?.opts?.filename;
-        if (typeof importer !== 'string') { return; }
+        if (typeof importer !== "string") {
+          return;
+        }
 
-        const callee = path.node.callee
-        if (!t.isIdentifier(callee)) { return }
-        if (callee.name !== 'require') { return }
+        const callee = path.node.callee;
+        if (!t.isIdentifier(callee)) {
+          return;
+        }
+        if (callee.name !== "require") {
+          return;
+        }
 
-        const argument = path.node.arguments[0]
-        if (!t.isStringLiteral(argument)) { return }
-        const importee = argument.value
-        if (!isScssModule(importee)) { return }
+        const argument = path.node.arguments[0];
+        if (!t.isStringLiteral(argument)) {
+          return;
+        }
+        const importee = argument.value;
+        if (!isScssModule(importee)) {
+          return;
+        }
 
         const resolvedPath = resolve(dirname(importer), importee);
 
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const tokens = require(resolvedPath);
         const file = fileMap.get(resolvedPath);
-        if (!file) { return }
+        if (!file) {
+          return;
+        }
 
         path.replaceWith(
           objectExpression({
             ...file,
-            tokens
+            tokens,
           }) as ObjectExpression
-        )
-      }
-    }
+        );
+      },
+    },
   };
 }
 
-function isScssModule (candidate: string) {
-  return /\.module\.scss$/i.test(candidate)
+function isScssModule(candidate: string) {
+  return /\.module\.scss$/i.test(candidate);
 }

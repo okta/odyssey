@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import '@okta/odyssey';
+import "@okta/odyssey";
 
 import "prismjs";
 import "prismjs/components/prism-csharp";
@@ -22,20 +22,19 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-markdown";
 import "prismjs/components/prism-python";
 import "prismjs/components/prism-objectivec";
-import 'prismjs/components/prism-markup-templating';
+import "prismjs/components/prism-markup-templating";
 import "prismjs/components/prism-php";
 import "prismjs/components/prism-swift";
 
-import './theme.scss';
+import "./theme.scss";
 
-import CustomPropertyInspector from './utils/CustomPropertyInspector.js'
-
+import CustomPropertyInspector from "./utils/CustomPropertyInspector.js";
 
 const urlParams = new URLSearchParams(window.location.search);
-const hasInspector = urlParams.get('inspector');
+const hasInspector = urlParams.get("inspector");
 
 if (hasInspector) {
   new CustomPropertyInspector({
-    propertiesElement: document.body
+    propertiesElement: document.body,
   });
 }

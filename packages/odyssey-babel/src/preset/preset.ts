@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type * as Babel from '@babel/core';
-import assertEnv from './assertEnv';
+import type * as Babel from "@babel/core";
+import assertEnv from "./assertEnv";
 
-export default function configuration (
+export default function configuration(
   api: Babel.ConfigAPI
 ): Babel.TransformOptions {
   assertEnv(api.env());
@@ -21,46 +21,42 @@ export default function configuration (
   return {
     presets: [
       [
-        '@babel/preset-env',
+        "@babel/preset-env",
         {
           targets: {
-            esmodules: true
+            esmodules: true,
           },
-        }
+        },
       ],
       [
-        '@babel/preset-react',
+        "@babel/preset-react",
         {
-          runtime: 'automatic',
-        }
+          runtime: "automatic",
+        },
       ],
-      '@babel/preset-typescript',
+      "@babel/preset-typescript",
     ],
 
     env: {
       production: {
-        plugins: [
-          '../plugins/transformScssModules',
-        ],
+        plugins: ["../plugins/transformScssModules"],
         presets: [
           [
-            '@babel/preset-env',
+            "@babel/preset-env",
             {
               targets: {
-                esmodules: true
+                esmodules: true,
               },
-              modules: false
-            }
+              modules: false,
+            },
           ],
         ],
-        ignore: [
-          /\.test\.|\.stories\./i
-        ],
+        ignore: [/\.test\.|\.stories\./i],
         comments: false,
         shouldPrintComment: (val: string) => {
           return /Okta, Inc\.|@license|@preserve/.test(val);
-        }
-      }
-    }
+        },
+      },
+    },
   };
 }

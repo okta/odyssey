@@ -10,32 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ReactElement, ComponentProps } from 'react';
-import { forwardRef } from 'react';
+import type { ReactNode, ReactElement, ComponentProps } from "react";
+import { forwardRef } from "react";
 
-import { useOmit } from '../../utils';
+import { useOmit } from "../../utils";
 
-import styles from './Table.module.scss';
+import styles from "./Table.module.scss";
 
 export type Props = {
   /**
-  * The table for this container
-  */
-  children?: ReactElement | ReactElement[],
+   * The table for this container
+   */
+  children?: ReactElement | ReactElement[];
   /**
-  * The visible heading for the table
-  */
-  title: ReactNode,
-} & ComponentProps<'figure'>
+   * The visible heading for the table
+   */
+  title: ReactNode;
+} & ComponentProps<"figure">;
 
 type Ref = HTMLElement;
 
 const TableContainer = forwardRef<Ref, Props>((props, ref) => {
-  const {
-    children,
-    title,
-    ...rest
-  } = props;
+  const { children, title, ...rest } = props;
 
   const omitProps = useOmit(rest);
 

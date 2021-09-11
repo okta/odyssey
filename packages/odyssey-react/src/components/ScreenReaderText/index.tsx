@@ -10,30 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithoutRef, FunctionComponent, ReactText } from 'react';
-import { useOmit } from '../../utils';
-import styles from './ScreenReaderText.module.scss';
+import type {
+  ComponentPropsWithoutRef,
+  FunctionComponent,
+  ReactText,
+} from "react";
+import { useOmit } from "../../utils";
+import styles from "./ScreenReaderText.module.scss";
 
-export interface Props extends Omit<
-  ComponentPropsWithoutRef<'span'>,
-  'style' | 'className'
-> {
-    children: ReactText
+export interface Props
+  extends Omit<ComponentPropsWithoutRef<"span">, "style" | "className"> {
+  children: ReactText;
 }
 
 const ScreenReaderText: FunctionComponent<Props> = (props) => {
-  const {
-    children,
-    ...rest
-  } = props;
+  const { children, ...rest } = props;
 
   const omitProps = useOmit(rest);
 
   return (
-    <span
-      {...omitProps}
-      className={styles.root}
-    >
+    <span {...omitProps} className={styles.root}>
       {children}
     </span>
   );

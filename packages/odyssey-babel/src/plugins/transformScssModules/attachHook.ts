@@ -10,17 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FileMap } from './transformScssModules';
-import { resolve } from 'path';
-import hook from 'css-modules-require-hook';
-import crypto from 'crypto';
-import sass from 'node-sass';
-import cssnanoPreset from 'cssnano-preset-default';
-import autoprefixer from 'autoprefixer';
+import type { FileMap } from "./transformScssModules";
+import { resolve } from "path";
+import hook from "css-modules-require-hook";
+import crypto from "crypto";
+import sass from "node-sass";
+import cssnanoPreset from "cssnano-preset-default";
+import autoprefixer from "autoprefixer";
 
-const partials = `functions colors mixins tokens`.split(' ');
-const importDir = resolve(require.resolve('@okta/odyssey'), '../abstracts');
-const importData = partials.map(partial => `@import '${ importDir }/${ partial }';`).join('\n');
+const partials = `functions colors mixins tokens`.split(" ");
+const importDir = resolve(require.resolve("@okta/odyssey"), "../abstracts");
+const importData = partials
+  .map((partial) => `@import '${importDir}/${partial}';`)
+  .join("\n");
 
 let shouldHook = true;
 
@@ -28,34 +30,41 @@ export interface AttachHookArgs {
   fileMap: FileMap;
 }
 
-export default function attachHook (
-  { fileMap }: AttachHookArgs
-): void {
-  shouldHook && hook({
-    ignore: '**/node_modules/**/*',
-    extensions: '.module.scss',
-    generateScopedName: 'ods-[hash:hex:6]',
-    append: [
-      ...cssnanoPreset({
-        svgo: { __omit: true },
-        discardComments: { removeAll: true },
-      }).plugins
-        .filter(([, pluginOpts = {} ]) => !pluginOpts.__omit)
-        .map(plugin => plugin[ 0 ](plugin[ 1 ])),
-      autoprefixer
-    ],
-    preprocessCss (styles: string, file: string) {
-      return sass.renderSync({
-        data: `${ importData }\n${ styles }`,
-        file
-      }).css.toString('utf8');
-    },
-    processCss (styles: string, file: string) {
-      if (fileMap.has(file)) { return; }
+export default function attachHook({ fileMap }: AttachHookArgs): void {
+  shouldHook &&
+    hook({
+      ignore: "**/node_modules/**/*",
+      extensions: ".module.scss",
+      generateScopedName: "ods-[hash:hex:6]",
+      append: [
+        ...cssnanoPreset({
+          svgo: { __omit: true },
+          discardComments: { removeAll: true },
+        })
+          .plugins.filter(([, pluginOpts = {}]) => !pluginOpts.__omit)
+          .map((plugin) => plugin[0](plugin[1])),
+        autoprefixer,
+      ],
+      preprocessCss(styles: string, file: string) {
+        return sass
+          .renderSync({
+            data: `${importData}\n${styles}`,
+            file,
+          })
+          .css.toString("utf8");
+      },
+      processCss(styles: string, file: string) {
+        if (fileMap.has(file)) {
+          return;
+        }
 
-      const digest = crypto.createHash('md5').update(styles).digest('hex').substr(0, 6);
-      fileMap.set(file, { digest, styles });
-    }
-  });
+        const digest = crypto
+          .createHash("md5")
+          .update(styles)
+          .digest("hex")
+          .substr(0, 6);
+        fileMap.set(file, { digest, styles });
+      },
+    });
   shouldHook = false;
 }

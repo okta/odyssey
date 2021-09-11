@@ -13,6 +13,6 @@
 module.exports = {
   setupFilesAfterEnv: ["./jest.setup.js"],
   moduleNameMapper: {
-    "\\.scss$": "identity-obj-proxy"
-  }
+    "\\.scss$": "identity-obj-proxy",
+  },
 };

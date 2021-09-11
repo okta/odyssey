@@ -11,7 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import { useArgs } from '@storybook/client-api';
+import { useArgs } from "@storybook/client-api";
 import Modal from ".";
 import Button from "../Button";
 import type { PropsModal } from ".";
@@ -20,29 +20,38 @@ export default {
   title: `Components/Modal`,
   component: Modal,
   argTypes: {
-    open: { control: { type: 'boolean' } }
-  }
+    open: { control: { type: "boolean" } },
+  },
 };
 
 const Template: Story<PropsModal> = () => {
   const [{ open }, updateArgs] = useArgs();
 
   const handleOpen = () => {
-    console.log('modal/onOpen');
+    console.log("modal/onOpen");
   };
 
   const handleClose = () => {
-    console.log('modal/onClose');
+    console.log("modal/onClose");
     updateArgs({ open: false });
   };
 
   return (
     <>
-     <Button onClick={() => { updateArgs({ open: true }); }}>Open modal</Button>
+      <Button
+        onClick={() => {
+          updateArgs({ open: true });
+        }}
+      >
+        Open modal
+      </Button>
       <Modal open={open} onOpen={handleOpen} onClose={handleClose}>
         <Modal.Header>Modal Title</Modal.Header>
         <Modal.Body>
-          <p>This is the modal content area. It's width is determined based on the amount of content within it.</p>
+          <p>
+            This is the modal content area. It's width is determined based on
+            the amount of content within it.
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <Modal.Button variant="clear">Cancel</Modal.Button>
@@ -50,7 +59,7 @@ const Template: Story<PropsModal> = () => {
         </Modal.Footer>
       </Modal>
     </>
-  )
+  );
 };
 
 export const Default = Template.bind({});
@@ -58,6 +67,6 @@ Default.args = {
   open: true,
 };
 Default.argTypes = {
-  onOpen: { action: 'modal/onOpen' },
-  onClose: { action: 'modal/onClose' }
+  onOpen: { action: "modal/onOpen" },
+  onClose: { action: "modal/onClose" },
 };

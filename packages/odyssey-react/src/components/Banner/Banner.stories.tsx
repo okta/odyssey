@@ -11,38 +11,38 @@
  */
 
 import { Story } from "@storybook/react";
-import { useArgs } from '@storybook/client-api';
+import { useArgs } from "@storybook/client-api";
 import Banner from ".";
-import Link from '../Link';
+import Link from "../Link";
 import type { Props } from ".";
 
 export default {
   title: `Components/Banner`,
   component: Banner,
-  parameters:{
-    layout: 'fullscreen',
+  parameters: {
+    layout: "fullscreen",
   },
   argTypes: {
     children: {
-      control: { type: null }
+      control: { type: null },
     },
 
     title: {
       defaultValue: "Banner title",
-      control: { type: "text" }
+      control: { type: "text" },
     },
     content: {
       defaultValue: "Additional string related to the title.",
-      control: { disable: true}
+      control: { disable: true },
     },
     dismissButtonLabel: {
       defaultValue: "Dismiss banner",
-      control: { disable: true }
+      control: { disable: true },
     },
     open: {
-      defaultValue: true
-    }
-  }
+      defaultValue: true,
+    },
+  },
 };
 
 const Template: Story<Props> = ({
@@ -51,7 +51,7 @@ const Template: Story<Props> = ({
   content,
   dismissButtonLabel,
   open,
-  onDismiss
+  onDismiss,
 }) => {
   const [, updateArgs] = useArgs();
   let dismissableComponentProps = {};
@@ -59,11 +59,13 @@ const Template: Story<Props> = ({
   if (onDismiss) {
     dismissableComponentProps = {
       onDismiss: () => {
-        if (onDismiss) { onDismiss() }
-        updateArgs({ open: false })
+        if (onDismiss) {
+          onDismiss();
+        }
+        updateArgs({ open: false });
       },
-      dismissButtonLabel
-    }
+      dismissButtonLabel,
+    };
   }
 
   return (
@@ -74,41 +76,45 @@ const Template: Story<Props> = ({
       content={content}
       {...dismissableComponentProps}
     >
-      <Link variant="secondary" href="https://www.okta.com">Action Link</Link>
+      <Link variant="secondary" href="https://www.okta.com">
+        Action Link
+      </Link>
     </Banner>
-  )
+  );
 };
 
 export const Info = Template.bind({});
 Info.args = {
   variant: "info",
   dismissButtonLabel: undefined,
-  onDismiss: undefined
+  onDismiss: undefined,
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
   variant: "danger",
   dismissButtonLabel: undefined,
-  onDismiss: undefined
+  onDismiss: undefined,
 };
 
 export const Caution = Template.bind({});
 Caution.args = {
   variant: "caution",
   dismissButtonLabel: undefined,
-  onDismiss: undefined
+  onDismiss: undefined,
 };
 
 export const Dismissable = Template.bind({});
 Dismissable.args = {
-  onDismiss: () => { console.log('Banner: onDismiss!') }
+  onDismiss: () => {
+    console.log("Banner: onDismiss!");
+  },
 };
 Dismissable.argTypes = {
   onDismiss: {
-    control: { disable: false }
+    control: { disable: false },
   },
   dismissButtonLabel: {
-    control: { disable: false, type: "text" }
-  }
+    control: { disable: false, type: "text" },
+  },
 };

@@ -43,5 +43,5 @@ describe("Status", () => {
     expect(getByText(statusLabel)).toBeVisible();
   });
 
-  a11yCheck(() => render(<Status label="foo" descriptor="bar" />))
+  a11yCheck(() => render(<Status label="foo" descriptor="bar" />));
 });

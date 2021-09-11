@@ -18,35 +18,35 @@ const titleText = "This is a title.";
 
 describe("Title", () => {
   it("render the title", () => {
-    render(<Title children={ titleText } />);
+    render(<Title children={titleText} />);
 
     const headingElement = screen.getByRole(heading);
     expect(headingElement).toBeVisible();
-    expect(headingElement.tagName).toBe('H1');
+    expect(headingElement.tagName).toBe("H1");
   });
 
-  it('changes the semantic tag based on the level prop', () => {
-    render(<Title level="3" children={ titleText } />);
+  it("changes the semantic tag based on the level prop", () => {
+    render(<Title level="3" children={titleText} />);
 
-    expect(screen.getByRole(heading).tagName).toBe('H3');
+    expect(screen.getByRole(heading).tagName).toBe("H3");
   });
 
-  it('changes the visual appearance based on the visualLevel prop', () => {
-    render(<Title level="3" visualLevel="6" children={ titleText } />);
+  it("changes the visual appearance based on the visualLevel prop", () => {
+    render(<Title level="3" visualLevel="6" children={titleText} />);
     const component = screen.getByRole(heading);
 
-    expect(component.tagName).toBe('H3');
-    expect(component.classList).toContain('level6');
+    expect(component.tagName).toBe("H3");
+    expect(component.classList).toContain("level6");
   });
 
-  it('enforces types for polymorphic rest props', () => {
+  it("enforces types for polymorphic rest props", () => {
     render(
       // @ts-expect-error heading element does not have href attribute
-      <Title href="/foo/bar.baz" children={ titleText } />
+      <Title href="/foo/bar.baz" children={titleText} />
     );
     const component = screen.getByRole(heading);
-    expect(component).toHaveAttribute('href');
+    expect(component).toHaveAttribute("href");
   });
 
-  a11yCheck(() => render(<Title level="1" children={ titleText } />));
+  a11yCheck(() => render(<Title level="1" children={titleText} />));
 });

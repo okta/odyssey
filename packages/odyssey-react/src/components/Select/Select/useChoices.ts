@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useRef } from 'react';
-import Choices from 'choices.js';
+import { useEffect, useRef } from "react";
+import Choices from "choices.js";
 
-import styles from '../Select.module.scss';
+import styles from "../Select.module.scss";
 
 const useChoices = (id: string, value?: string): void => {
   const choices = useRef<undefined | Choices>();
@@ -24,7 +24,7 @@ const useChoices = (id: string, value?: string): void => {
     choices.current = new Choices(select, {
       searchEnabled: false,
       shouldSort: false,
-      itemSelectText: '',
+      itemSelectText: "",
       removeItemButton: true,
       classNames: {
         containerOuter: styles.root,
@@ -52,19 +52,18 @@ const useChoices = (id: string, value?: string): void => {
         flippedState: styles.flipped,
         loadingState: styles.loading,
         noResults: styles.noResults,
-        noChoices: styles.noChoices
+        noChoices: styles.noChoices,
 
         // TODO: fix english leaks for these properties
         // loadingText: 'Loading...',
         // noResultsText: 'No results found',
         // noChoicesText: 'No choices to choose from',
         // itemSelectText: 'Press to select',
-      }
+      },
     });
 
     return () => choices?.current?.destroy();
   }, [id]);
-
 
   useEffect(() => {
     const forceValue = () => value && choices?.current?.setChoiceByValue(value);
@@ -72,9 +71,9 @@ const useChoices = (id: string, value?: string): void => {
 
     if (value && node) {
       forceValue();
-      node.addEventListener('change', forceValue);
+      node.addEventListener("change", forceValue);
     } else if (!value && node) {
-      node.removeEventListener('change', forceValue);
+      node.removeEventListener("change", forceValue);
     }
   }, [value]);
 };

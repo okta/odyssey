@@ -10,5 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-declare const a11yCheck: (renderFn: () => unknown) => void
-
+declare const a11yCheck: (renderFn: () => unknown) => void;

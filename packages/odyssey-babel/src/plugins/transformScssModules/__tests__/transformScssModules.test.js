@@ -10,26 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import importStyles from './fixture.module.scss';
-const requireStyles = require('./fixture.module.scss');
+import importStyles from "./fixture.module.scss";
+const requireStyles = require("./fixture.module.scss");
 
-describe('plugins/transformScssModules', () => {
-  describe('import visitor', () => {
-    it('transforms import as expected', () => {
+describe("plugins/transformScssModules", () => {
+  describe("import visitor", () => {
+    it("transforms import as expected", () => {
       expect(importStyles).toMatchSnapshot();
     });
 
-    it('transforms import template as expected', () => {
+    it("transforms import template as expected", () => {
       expect(importStyles.__template()).toMatchSnapshot();
     });
   });
 
-  describe('require visitor', () => {
-    it('transforms require as expected', () => {
+  describe("require visitor", () => {
+    it("transforms require as expected", () => {
       expect(requireStyles).toMatchSnapshot();
     });
 
-    it('transforms require template as expected', () => {
+    it("transforms require template as expected", () => {
       expect(requireStyles.__template()).toMatchSnapshot();
     });
   });

@@ -10,16 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Children, cloneElement, ComponentPropsWithRef, forwardRef } from "react";
-import type { ReactElement  } from "react";
-import { useOid, useOmit } from '../../utils'
+import {
+  Children,
+  cloneElement,
+  ComponentPropsWithRef,
+  forwardRef,
+} from "react";
+import type { ReactElement } from "react";
+import { useOid, useOmit } from "../../utils";
 
 import styles from "./Icon.module.scss";
 
-export interface Props extends Omit<
-  ComponentPropsWithRef<'svg'>,
-  'style' | 'className'
-> {
+export interface Props
+  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   /**
    * Title text used by screen readers
    */
@@ -28,41 +31,30 @@ export interface Props extends Omit<
   children: ReactElement;
 }
 
-/** 
+/**
  * A system of icons which establishes a visual language
  * that can be easily understood regardless of age, language or culture.
  */
 
-const Icon = forwardRef<SVGSVGElement, Props>((
-  {
-    title,
-    children,
-    ...rest
-  }, 
-  ref 
-) => {
-  
-  const autoId = 'icon_' + useOid();
-  const omitProps = useOmit(rest);
+const Icon = forwardRef<SVGSVGElement, Props>(
+  ({ title, children, ...rest }, ref) => {
+    const autoId = "icon_" + useOid();
+    const omitProps = useOmit(rest);
 
-  return (
-    Children.only(
+    return Children.only(
       cloneElement(
-        children, 
+        children,
         {
           ...omitProps,
-          'aria-labelledby': autoId,
+          "aria-labelledby": autoId,
           className: styles.root,
           ref: ref,
-          role: title ? 'img' : 'presentation'
-        }, 
-        [
-          title && <title id={autoId}>{title}</title>, 
-          children.props.children
-        ]
+          role: title ? "img" : "presentation",
+        },
+        [title && <title id={autoId}>{title}</title>, children.props.children]
       )
-    )
-  );
-});
+    );
+  }
+);
 
 export default Icon;
