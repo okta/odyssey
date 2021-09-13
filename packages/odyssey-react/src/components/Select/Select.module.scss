@@ -29,11 +29,6 @@
   }
 }
 
-/* - styles from _choices-ext.scss - */
-
-$choices-button-dimension: 8px !default;
-$choices-button-offset: 8px !default;
-
 .root {
   position: relative;
   max-width: $max-line-length;
@@ -233,8 +228,8 @@ $choices-button-offset: 8px !default;
     position: absolute;
     inset-block-start: 50%;
     inset-inline-start: 50%;
-    width: 8px;
-    height: 8px;
+    width: 1em;
+    height: 1em;
     transform: translate(-50%, -50%);
     color: $white;
     font-size: 0.5em;
