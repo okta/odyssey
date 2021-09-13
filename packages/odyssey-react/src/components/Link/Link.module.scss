@@ -24,19 +24,9 @@
   }
 }
 
-.external {
-  &::after {
-    content: '';
-    display: inline-block;
-    position: relative;
-    inset-block-start: -0.1em;
-    width: 1em;
-    height: 1em;
-    margin-inline-start: 0.2em;
-    background-image: get-icon('external', $color-primary-base);
-    background-repeat: no-repeat;
-    vertical-align: middle;
-  }
+.indicator {
+  display: inline-block;
+  margin-inline-start: 0.2em;
 }
 
 /* Variant */
@@ -51,11 +41,5 @@
 
   &:visited {
     color: $text-body;
-  }
-
-  &.external {
-    &::after {
-      background-image: get-icon('external', $text-body);
-    }
   }
 }
