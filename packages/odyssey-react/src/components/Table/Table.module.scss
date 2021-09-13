@@ -104,7 +104,7 @@
 
 /* Sort directions */
 
-.indicator {
+.sortIndicator {
   position: absolute;
   inset-block-start: 50%;
   inset-inline-end: 0;
@@ -117,12 +117,12 @@
 }
 
 .unsortedDirection {
-  .indicator {
+  .sortIndicator {
     color: $text-sub;
   }
 
   &:hover {
-    .indicator {
+    .sortIndicator {
       color: $text-heading;
     }
   }

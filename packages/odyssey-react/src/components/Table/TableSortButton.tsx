@@ -44,7 +44,7 @@ const TableSortButton = forwardRef<Ref, Props>((props, ref) => {
   return (
     <button ref={ref} className={componentClass} {...omitProps}>
       {children}
-      <span className={styles.indicator} role="presentation">
+      <span className={styles.sortIndicator} role="presentation">
         { direction === 'unsorted' && <Sort /> }
         { direction === 'asc' && <SortAsc /> }
         { direction === 'desc' && <SortDesc /> }
