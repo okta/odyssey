@@ -15,10 +15,6 @@
 
   &[type='search'] {
     padding-inline-start: ms(1) + $spacing-s + $spacing-xs;
-    background-image: get-icon('search', $text-body);
-    background-repeat: no-repeat;
-    background-position: left $spacing-s center;
-    background-size: ms(1);
 
     &::-webkit-search-decoration,
     &::-webkit-search-cancel-button,
@@ -36,6 +32,21 @@
       background-position: right $spacing-s center;
     }
   }
+}
+
+.outer {
+  position: relative;
+}
+
+.indicator {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: $spacing-s;
+  z-index: 1;
+  transform: translateY(-50%);
+  font-size: ms(1);
+  line-height: 1;
+  pointer-events: none;
 }
 
 .optionalLabel {

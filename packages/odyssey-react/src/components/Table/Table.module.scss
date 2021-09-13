@@ -76,21 +76,6 @@
   font-weight: inherit;
   text-align: inherit;
   white-space: nowrap;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-end: 0;
-    width: 1em;
-    height: 1em;
-    margin-block: 0;
-    margin-inline-start: $spacing-s;
-    margin-inline-end: 0;
-    transform: translateY(-50%) scale(0.75);
-    background-repeat: no-repeat;
-    background-position: center;
-  }
 }
 
 /* Table states */
@@ -119,27 +104,26 @@
 
 /* Sort directions */
 
+.sortIndicator {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 0;
+  margin-block: 0;
+  margin-inline-start: $spacing-s;
+  margin-inline-end: 0;
+  transform: translateY(-50%);
+  color: $text-heading;
+  font-size: 0.75em;
+}
+
 .unsortedDirection {
-  &::after {
-    background-image: get-icon('double-arrow', $text-sub);
+  .sortIndicator {
+    color: $text-sub;
   }
 
   &:hover {
-    &::after {
-      background-image: get-icon('double-arrow', $text-heading);
+    .sortIndicator {
+      color: $text-heading;
     }
-  }
-}
-
-.ascDirection {
-  &::after {
-    background-image: get-icon('arrow', $text-heading);
-  }
-}
-
-.descDirection {
-  &::after {
-    transform: translateY(-50%) rotate(180deg) scale(0.75);
-    background-image: get-icon('arrow', $text-heading);
   }
 }

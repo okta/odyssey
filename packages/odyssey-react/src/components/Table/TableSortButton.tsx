@@ -14,6 +14,7 @@ import type { ReactNode, ComponentProps } from 'react';
 import { forwardRef } from 'react';
 
 import { useCx, useOmit } from '../../utils';
+import { Sort, SortAsc, SortDesc } from '../Icon';
 
 import styles from './Table.module.scss';
 
@@ -43,6 +44,11 @@ const TableSortButton = forwardRef<Ref, Props>((props, ref) => {
   return (
     <button ref={ref} className={componentClass} {...omitProps}>
       {children}
+      <span className={styles.sortIndicator} role="presentation">
+        { direction === 'unsorted' && <Sort /> }
+        { direction === 'asc' && <SortAsc /> }
+        { direction === 'desc' && <SortDesc /> }
+      </span>
     </button>
   );
 });
