@@ -1,7 +1,7 @@
 {
-  "name": "@okta/odyssey-babel",
+  "name": "@okta/odyssey-transform-styles-babel-plugin",
   "version": "0.0.0",
-  "main": "dist/preset/index.js",
+  "main": "dist/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
@@ -10,11 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
-    "@babel/preset-react": "^7.14.5",
-    "@babel/preset-typescript": "^7.15.0",
+    "@babel/types": "^7.15.6",
     "@okta/odyssey": "^0.7.0",
     "autoprefixer": "^9.8.6",
     "css-modules-require-hook": "^4.2.3",
@@ -23,9 +19,9 @@
   },
   "devDependencies": {
     "@okta/odyssey-typescript": "^0.0.0",
-    "@types/babel__core": "^7.1.15",
     "@types/css-modules-require-hook": "^4.0.3",
     "@types/node-sass": "^4.11.2",
+    "babel-jest": "^26.6.3",
     "jest": "^26.6.3"
   }
 }

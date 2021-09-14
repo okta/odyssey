@@ -10,13 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FileMap } from './transformScssModules';
+import type { FileMap } from './transformStyles';
 import { resolve } from 'path';
 import hook from 'css-modules-require-hook';
 import crypto from 'crypto';
 import sass from 'node-sass';
 import cssnanoPreset from 'cssnano-preset-default';
 import autoprefixer from 'autoprefixer';
+
+export interface StyleOpts extends Exclude<
+  NonNullable<Parameters<typeof hook>[ number ]>,
+  'processCss' | 'preprocessCss'
+> {
+  autoprefixer?: Record<string, unknown>;
+}
 
 const partials = `functions colors mixins tokens`.split(' ');
 const importDir = resolve(require.resolve('@okta/odyssey'), '../abstracts');
@@ -25,25 +32,33 @@ const importData = partials.map(partial => `@import '${ importDir }/${ partial }
 let shouldHook = true;
 
 export interface AttachHookArgs {
-  fileMap: FileMap;
+  fileMap: FileMap,
+  opts: StyleOpts;
 }
 
 export default function attachHook (
-  { fileMap }: AttachHookArgs
+  { fileMap, opts }: AttachHookArgs,
 ): void {
+  const { autoprefixer: autoprefixerOpts = {}, append = [], ...rest } = opts;
+
   shouldHook && hook({
     ignore: '**/node_modules/**/*',
     extensions: '.module.scss',
     generateScopedName: 'ods-[hash:hex:6]',
+
+    ...rest,
+
     append: [
+      ...append,
       ...cssnanoPreset({
         svgo: { __omit: true },
         discardComments: { removeAll: true },
       }).plugins
-        .filter(([, pluginOpts = {} ]) => !pluginOpts.__omit)
+        .filter(([ , pluginOpts = {} ]) => !pluginOpts.__omit)
         .map(plugin => plugin[ 0 ](plugin[ 1 ])),
-      autoprefixer
+      autoprefixer(autoprefixerOpts)
     ],
+
     preprocessCss (styles: string, file: string) {
       return sass.renderSync({
         data: `${ importData }\n${ styles }`,
