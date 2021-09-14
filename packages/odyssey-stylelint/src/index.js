@@ -17,9 +17,10 @@ module.exports = {
     'stylelint-use-logical-spec'
   ],
   extends: [
-    'stylelint-config-standard',
-    'stylelint-config-sass-guidelines',
-    'stylelint-config-property-sort-order-smacss'
+    "stylelint-config-standard",
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-property-sort-order-smacss",
+    "stylelint-config-prettier",
   ],
   rules: {
     'odyssey/header': true,
@@ -31,20 +32,48 @@ module.exports = {
         ignoreAtRules: [ 'else' ]
       }
     ],
-    'at-rule-no-unknown': null,
-    'block-closing-brace-newline-after': [ 'always', { ignoreAtRules: [ 'if', 'else' ] } ],
-    'color-hex-length': 'long',
-    'declaration-no-important': true,
-    'declaration-property-value-disallowed-list': { 'word-break': ['/^break/'] },
-    'max-nesting-depth': [ 3, { ignoreAtRules: [ 'media', 'supports', 'include' ] } ],
-    'property-disallowed-list': ['border-radius', 'margin', 'padding'],
-    'order/properties-alphabetical-order': null,
-    'scss/at-else-closing-brace-newline-after': 'always-last-in-chain',
-    'scss/at-else-closing-brace-space-after': 'always-intermediate',
-    'scss/at-else-empty-line-before': 'never',
-    'scss/at-if-closing-brace-newline-after': 'always-last-in-chain',
-    'scss/at-if-closing-brace-space-after': 'always-intermediate',
-    'selector-type-no-unknown': [ true, { ignore: [ 'custom-elements' ], } ],
-    'liberty/use-logical-spec': [ true, { except: ['height', 'min-height', 'max-height', 'width', 'min-width', 'max-width'] } ]
-  }
-}
+    "at-rule-no-unknown": null,
+    "block-closing-brace-newline-after": [
+      "always",
+      { ignoreAtRules: ["if", "else"] },
+    ],
+    "declaration-empty-line-before": [
+      "always",
+      {
+        except: ["after-declaration"],
+        ignore: ["after-comment", "first-nested", "inside-single-line-block"],
+        severity: "warning",
+      },
+    ],
+    "color-hex-length": "long",
+    "declaration-no-important": true,
+    "max-nesting-depth": [
+      3,
+      { ignoreAtRules: ["media", "supports", "include"] },
+    ],
+    "property-disallowed-list": ["border-radius", "margin", "padding"],
+    "declaration-property-value-disallowed-list": {
+      "word-break": ["/^break/"],
+    },
+    "order/properties-alphabetical-order": null,
+    "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
+    "scss/at-else-closing-brace-space-after": "always-intermediate",
+    "scss/at-else-empty-line-before": "never",
+    "scss/at-if-closing-brace-newline-after": "always-last-in-chain",
+    "scss/at-if-closing-brace-space-after": "always-intermediate",
+    "selector-type-no-unknown": [true, { ignore: ["custom-elements"] }],
+    "liberty/use-logical-spec": [
+      true,
+      {
+        except: [
+          "height",
+          "min-height",
+          "max-height",
+          "width",
+          "min-width",
+          "max-width",
+        ],
+      },
+    ],
+  },
+};

@@ -44,16 +44,15 @@ module.exports = {
   },
   overrides: [
     {
-      files: [ '*.js', '*.jsx' ],
-      extends: [
-        'eslint:recommended'
-      ],
+      files: ["*.js", "*.jsx"],
+      extends: ["eslint:recommended", "prettier"],
     },
     {
       files: [ '*.ts', '*.tsx' ],
       extends: [
-        'plugin:@typescript-eslint/eslint-recommended',
-        'plugin:@typescript-eslint/recommended'
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
       ],
     },
     {
@@ -65,8 +64,9 @@ module.exports = {
     {
       files: [ '*.jsx', '*.tsx' ],
       extends: [
-        'plugin:jsx-a11y/recommended',
-        'plugin:react-hooks/recommended',
+        "plugin:jsx-a11y/recommended",
+        "plugin:react-hooks/recommended",
+        "prettier",
       ],
       rules: {
         'jsx-a11y/label-has-associated-control': [
