@@ -15,28 +15,31 @@ import type {
   VariableDeclaration,
   ObjectExpression
 } from '@babel/traverse/node_modules/@babel/types';
-export type { StyleOpts } from './attachHook';
-import attachHook from './attachHook';
-import { objectExpression, variableDeclaration } from './nodes';
+import type { File } from './compile';
 import { resolve, dirname } from 'path';
+import compileFactory from './compileFactory';
+import { objectExpression, variableDeclaration } from './nodes';
+import normalizeOpts, { isTargetExtension } from './normalizeOpts';
 
-export type FileMap = Map<string, { digest: string, styles: string; }>;
+export interface TransformStylesOpts {
+  extensions?: Array<string | RegExp>;
+}
 
 export default function transformStyles (
   { types: t }: typeof Babel
 ): Babel.PluginObj {
 
-  const fileMap: FileMap = new Map();
+  const fileMap = new Map<string, File>();
+  const compile = compileFactory();
 
   return {
-    name: 'transform-styles',
-
-    pre () {
-      attachHook({ fileMap, opts: this.opts || {} });
-    },
+    name: 'odyssey-transform-styles',
 
     visitor: {
       ImportDeclaration (path, state) {
+        if (state.opts === false) { return }
+        const opts = normalizeOpts(state.opts)
+
         const importer = state?.file?.opts?.filename;
         if (typeof importer !== 'string') { return; }
 
@@ -44,25 +47,28 @@ export default function transformStyles (
         if (!t.isImportDefaultSpecifier(specifier)) { return; }
 
         const importee = path.node.source.value;
-        if (!isScssModule(importee)) { return; }
+        if (!isTargetExtension(importee, opts.extensions)) { return; }
 
-        const resolvedPath = resolve(dirname(importer), importee);
+        const filePath = resolve(dirname(importer), importee);
+        let file = fileMap.get(filePath);
 
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const tokens = require(resolvedPath);
-        const file = fileMap.get(resolvedPath);
-        if (!file) { return; }
+        if (!file) {
+          file = compile({ filePath });
+          fileMap.set(filePath, file);
+        }
 
         path.replaceWith(
           variableDeclaration({
-            ...file,
             name: specifier.local.name,
-            tokens
+            ...file,
           }) as VariableDeclaration
         );
       },
 
       CallExpression (path, state) {
+        if (state.opts === false) { return }
+        const opts = normalizeOpts(state.opts)
+
         const importer = state?.file?.opts?.filename;
         if (typeof importer !== 'string') { return; }
 
@@ -73,26 +79,20 @@ export default function transformStyles (
         const argument = path.node.arguments[ 0 ];
         if (!t.isStringLiteral(argument)) { return; }
         const importee = argument.value;
-        if (!isScssModule(importee)) { return; }
+        if (!isTargetExtension(importee, opts.extensions)) { return; }
 
-        const resolvedPath = resolve(dirname(importer), importee);
+        const filePath = resolve(dirname(importer), importee);
+        let file = fileMap.get(filePath);
 
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const tokens = require(resolvedPath);
-        const file = fileMap.get(resolvedPath);
-        if (!file) { return; }
+        if (!file) {
+          file = compile({ filePath });
+          fileMap.set(filePath, file);
+        }
 
         path.replaceWith(
-          objectExpression({
-            ...file,
-            tokens
-          }) as ObjectExpression
+          objectExpression(file) as ObjectExpression
         );
       }
     }
   };
-}
-
-function isScssModule (candidate: string) {
-  return /\.module\.scss$/i.test(candidate);
 }
