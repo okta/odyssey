@@ -18,24 +18,36 @@ export interface Props extends Omit<
   ComponentPropsWithoutRef<'span'>,
   'style' | 'className'
 > {
-    children: ReactText
+    /**
+     * Visibly hidden / SR-only text
+     */
+    children: ReactText,
+
+    /**
+     * The underlying parent semantic HTML element.
+     * @default span
+     */
+    as?: 'span' | 'em' | 'strong'
 }
 
 const ScreenReaderText: FunctionComponent<Props> = (props) => {
   const {
     children,
+    as = 'span',
     ...rest
   } = props;
+
+  const Tag = as;
 
   const omitProps = useOmit(rest);
 
   return (
-    <span
+    <Tag
       {...omitProps}
       className={styles.root}
     >
       {children}
-    </span>
+    </Tag>
   );
 };
 export default ScreenReaderText;
