@@ -15,19 +15,19 @@ import type { RefObject } from 'react';
 
 type KeyPressMap = Array<[string, (event: KeyboardEvent) => void]>;
 
-export const useKeypress = (keyMap: KeyPressMap, ref?: RefObject<HTMLElement>): any => {
+export const useKeypress = (keyMap: KeyPressMap, ref?: RefObject<HTMLElement>): void => {
   useEffect(() => {
-    const element = ref?.current ? ref.current : window;
+    const element = ref?.current ? ref.current : document.body;
 
-    const handler = (event: KeyboardEvent<Element>) => {
+    const handler = (event: KeyboardEvent) => {
       const map = keyMap;
       const keyListenersMap = new Map(map);
       const listener = keyListenersMap.get(event.code);
       return (listener) && listener(event);
     }
     
-    element?.addEventListener('keyup', handler);
+    element.addEventListener('keyup', handler);
 
-    return () => element?.removeEventListener('keyup', handler);
+    return () => element.removeEventListener('keyup', handler);
   }, [keyMap]);
 }
