@@ -135,12 +135,12 @@ describe("Table Sort Button", () => {
     expect(getByRole('button')).toBeInTheDocument();
   });
 
-  it("uses direction prop to set class", () => {
-    const { getByRole } = render(
+  it("uses direction prop to display an icon", () => {
+    const { getByTitle } = render(
       <Table.SortButton direction="asc" />
     );
-
-    expect(getByRole('button').classList.contains('ascDirection')).toBe(true);
+    const sortIcon = getByTitle('Ascending').parentElement;
+    expect(sortIcon).toBeVisible();
   });
 });
 
