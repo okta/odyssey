@@ -51,7 +51,7 @@ const Icon = forwardRef<SVGSVGElement, Props>((
         children, 
         {
           ...omitProps,
-          'aria-labelledby': autoId,
+          'aria-labelledby': title && autoId,
           className: styles.root,
           ref: ref,
           role: title ? 'img' : 'presentation'

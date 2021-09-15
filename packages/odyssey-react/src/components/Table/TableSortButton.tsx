@@ -15,6 +15,7 @@ import { forwardRef } from 'react';
 
 import { useCx, useOmit } from '../../utils';
 import { Sort, SortAsc, SortDesc } from '../Icon';
+import ScreenReaderText from '../ScreenReaderText';
 
 import styles from './Table.module.scss';
 
@@ -44,11 +45,12 @@ const TableSortButton = forwardRef<Ref, Props>((props, ref) => {
   return (
     <button ref={ref} className={componentClass} {...omitProps}>
       {children}
-      <span className={styles.sortIndicator} role="presentation">
-        { direction === 'unsorted' && <Sort /> }
-        { direction === 'asc' && <SortAsc /> }
-        { direction === 'desc' && <SortDesc /> }
+      <span className={styles.sortIndicator}>
+        { direction === 'unsorted' && <Sort title="Unsorted" /> }
+        { direction === 'asc' && <SortAsc title="Ascending" /> }
+        { direction === 'desc' && <SortDesc title="Descending" /> }
       </span>
+      <ScreenReaderText>click to sort</ScreenReaderText>
     </button>
   );
 });
