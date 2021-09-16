@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import type { ReactElement } from "react"
 import type { Story } from "@storybook/react";
 import type { Props } from "./List";
 import List from ".";
@@ -20,11 +21,28 @@ export default {
 };
 
 const Template: Story<Props> = () => (
-  <List>
-    <li>Item 1</li>
+  <List unstyled={true}>
+    <List.Item>Item 1</List.Item>
+    <List.Item>Item 2</List.Item>
   </List>
 )
 
 export const Default = Template.bind({});
 Default.args = {};
 
+export const OrderedList = ():ReactElement=> (
+  <List listType="ordered">
+    <List.Item>Item 1</List.Item>
+    <List.Item>Item 2</List.Item>
+  </List>
+);
+
+export const DescriptionList = ():ReactElement=> (
+  <List listType="description">
+    <List.Term>Term 1</List.Term>
+    <List.Details>Detail 1.1</List.Details>
+    <List.Details>Detail 1.2</List.Details>
+    <List.Term>Term 2</List.Term>
+    <List.Details>Detail 2.1</List.Details>
+  </List>
+);
