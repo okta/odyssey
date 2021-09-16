@@ -1,0 +1,658 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { Markdown } from '../../.storybook/components';
+import content from '../../../../README.md'
+
+<Meta title="Guidelines/RTL" />
+
+# Right-to-Left (RTL) Language Support
+
+This document outlines the process and constraints of moving from physical CSS properties (`margin-left`) to logical CSS properties (`margin-inline-start`) as an effort to provide RTL support. Folks may recognize this syntax from CSS Grid or Flexbox.
+
+These property variants key off of the `dir="rtl|ltr"` property on the HTML element. This allows for a single declaration to provide LTR and RTL support.
+
+## Property and Value Translations
+
+This table documents the related equivalents in physical and logical CSS, their linter support, and any relevant notes.
+
+For a quick visualization of how these properties are related, you can view this CodePen.
+
+<table>
+  <thead>
+    <tr>
+      <th scope="column">
+        Type
+      </th>
+      <th scope="column">
+        Physical CSS
+      </th>
+      <th scope="column">
+        Logical CSS
+      </th>
+      <th scope="column">
+        Lint status
+      </th>
+      <th scope="column">
+        Notes
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row" rowspan="7">
+        Margin
+      </th>
+      <td>
+        <code>margin</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        no auto-fix
+      </td>
+      <td>
+        See Note 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>margin-top</code>
+      </td>
+      <td>
+        <code>margin-block-start</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        See Note 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>margin-bottom</code>
+      </td>
+      <td>
+        <code>margin-block-end</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        See Note 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>margin-left</code>
+      </td>
+      <td>
+        <code>margin-inline-start</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        See Note 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>margin-right</code>
+      </td>
+      <td>
+        <code>margin-inline-end</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        See Note 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <code>margin-block</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        Sets both block margins
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <code>margin-inline</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        Sets both inline margins
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" rowspan="7">
+        Padding
+      </th>
+      <td>
+        <code>padding</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        no auto-fix
+      </td>
+      <td>
+        See Note 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>padding-top</code>
+      </td>
+      <td>
+        <code>padding-block-start</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        See Note 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>padding-bottom</code>
+      </td>
+      <td>
+        <code>padding-block-end</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        See Note 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>padding-left</code>
+      </td>
+      <td>
+        <code>padding-inline-start</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        See Note 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>padding-right</code>
+      </td>
+      <td>
+        <code>padding-inline-end</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        See Note 1
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <code>padding-block</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        Sets both block paddings
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <code>padding-inline</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        Sets both inline paddings
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" rowspan="11">
+        Borders
+      </th>
+      <td>
+        <code>border-top</code>
+      </td>
+      <td>
+        <code>border-block-start</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        Also applies to <code>*-size|style|color</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>border-bottom</code>
+      </td>
+      <td>
+        <code>border-block-end</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        Also applies to <code>*-size|style|color</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>border-left</code>
+      </td>
+      <td>
+        <code>border-inline-start</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        Also applies to <code>*-size|style|color</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>border-right</code>
+      </td>
+      <td>
+        <code>border-inline-end</code>
+      </td>
+      <td>
+         auto-fixed
+      </td>
+      <td>
+        Also applies to <code>*-size|style|color</code>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <code>border-block</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        Sets both block borders
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <code>border-inline</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        Sets both inline borders
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>border-radius</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        no auto-fix
+      </td>
+      <td>
+        4-value shorthand has no RTL equivalent
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>border-top-left-radius</code>
+      </td>
+      <td>
+        <code>border-start-start-radius</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>border-top-right-radius</code>
+      </td>
+      <td>
+        <code>border-start-end-radius</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>border-bottom-left-radius</code>
+      </td>
+      <td>
+        <code>border-end-start-radius</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>border-bottom-right-radius</code>
+      </td>
+      <td>
+        <code>border-end-end-radius</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" rowspan="7">
+        Position
+      </th>
+      <td>
+        <code>top</code>
+      </td>
+      <td>
+        <code>inset-block-start</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>bottom</code>
+      </td>
+      <td>
+        <code>inset-block-end</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>left</code>
+      </td>
+      <td>
+        <code>inset-inline-start</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>right</code>
+      </td>
+      <td>
+        <code>inset-inline-end</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <code>inset</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        Sets all inset values
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <code>inset-block</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        Sets block inset values
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <code>inset-inline</code>
+      </td>
+      <td>
+      </td>
+      <td>
+        Sets inline inset values
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" rowspan="7">
+        Layout
+      </th>
+      <td>
+        <code>text-align: left</code>
+      </td>
+      <td>
+        <code>text-align: start</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>text-align: right</code>
+      </td>
+      <td>
+        <code>text-align: end</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>float: left</code>
+      </td>
+      <td>
+        <code>float: inline-start</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+        Prefer Grid or Flex instead
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>float: right</code>
+      </td>
+      <td>
+        <code>float: inline-end</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+        Prefer Grid or Flex instead
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>clear: left</code>
+      </td>
+      <td>
+        <code>clear: inline-start</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+        Prefer Grid or Flex instead
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>clear: right</code>
+      </td>
+      <td>
+        <code>clear: inline-end</code>
+      </td>
+      <td>
+        auto-fixed
+      </td>
+      <td>
+        Prefer Grid or Flex instead
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+### Linting Notes
+
+Stylelint-use-logical-spec has a few gaps:
+When four properties are present, Margin and Padding are collapsed into two forms of shorthand:
+When all values are the same: `margin: x;`. This is safe, but not ideal.
+When all values are different: `margin: logical p q x y;`. This is aligned with the W3C proposed syntax, but it is not supported in most browsers without a flag.
+Border-radius properties are not collapsed into shorthand, but `border-radius` itself goes undetected. This is safe when the values are the same, but unsafe if they are ever different.
+
+### Unused Logical Properties and Values
+This POC has focused on providing "automatic" RTL support with the least amount of overhead. For this reason, I’ve eschewed implementing properties related to vertical reading/writing. For completeness, those properties are inventoried here:
+
+Logical CSS
+Physical CSS
+inline-size
+width
+min-inline-size
+min-width
+max-inline-size
+max-width
+block-size
+height
+min-block-size
+min-height
+max-block-size
+max-height
+resize: inline
+resize: horizontal
+resize: block
+resize: vertical
+overflow-block
+overflow-y
+overflow-inline
+overflow-x
+overscroll-behavior-block
+overscroll-behavior-y
+overscroll-behavior-inline
+overscroll-behavior-x
+
+
+Note: There are no additional caveats to utilizing these properties today. They are supported as well as those above. However, they are not required for RTL support. They are also not correctly detected or fixed by stylelint-use-logical. PostCSS does support detection and fallback generation for these properties.
+
+### Unsupported Properties
+Of note, Transformations, Shadows, and Backgrounds do not have logical equivalents.
+
+Currently, Transformations and Backgrounds are always physical. Since the `:rtl` selector doesn’t have broad support, the recommended solution is to add your overrides via `[dirl=’rtl’] &`.
+
+.foo {
+  transformation: translateX(50%);
+
+  [dir="rtl"] & {
+    transformation: translateX(-50%);
+  }
+}
+
+Shadow behavior still needs to be tested.
+
+#### Browser Support
+
+IE11 does not support logical CSS, so any products requiring IE11 support would need to use PostCSS to generate fallbacks or utilize a different approach.
+
+Firefox and Chrome both have full support for the new properties and values.
+
+Safari is currently missing support for logical border-radius properties, so fallbacks would need to be generated by PostCSS or authored inline. Support is currently available via a feature flag, so we can expect production support soon.
+
+### 4-value Shorthand
+
+Using standard 4-value shorthands (margin: 4px 3px 2px 1px) will currently be parsed as physical CSS by the browser. Until CSS WG reaches an agreement, 4-value shorthands would need to be avoided. We can add linting to ensure that shorthands are disallowed. We may also wish to create a mixin for allowing shorthand authoring that generates the correct properties.
+
+The most used proposal today is for this syntax: `margin: logical 4px 3px 2px 1px`. It’s unclear which browsers have implemented support, but PostCSS does detect and generate fallbacks.
+
+## Non-Logical, RTL Typography Concerns
+
+/type-test-arabic/ now exists to help test these concerns
+`letter-spacing` is now set to 0 to ensure non-English scripts are properly ligatured
+`text-decoration-skip-ink` is now set to `all` for maximum non-English script support
+Odyssey does not currently utilize transparency in text and should advise against it
+word-break is disallowed since not all languages support intra-word breakage
+Tables do not swap layout or ordering of numerical data
+Noto Sans Arabic is preferred / expected
+Addresses, email addresses, and phone numbers should not swap their display
+
+## Guidance and Documentation Changes
+
+Property translations, support, and suggested solutions
+
+### Naming
+
+In both documentation and code, we have replaced and will strive to continue using logical, RTL-friendly names in place of physical ones.
+
+For classes, preferring `.is-tooltip-start` to `.is-tooltip-left`. In documentation, referring to the "upper, ending corner" instead of the "upper, right-hand corner".
+
+### RTL Work Remaining
+
+All unsupported cases (translations, background) need linting to ensure appropriate RTL declarations
+
+Bi-directional icon support
+Shadow behavior needs to be tested
+Document RTL Design concerns
+
