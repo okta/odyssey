@@ -15,16 +15,13 @@ import { action } from '@storybook/addon-actions';
 import { Button } from '../../';
 import Tooltip from ".";
 import type { Props } from ".";
-import { withGlobalReset } from '../../../.storybook/decorators';
-
 
 export default {
   title: `Components/Tooltip`,
   component: Tooltip,
   parameters: {
     layout: 'centered',
-  },
-  decorators: [ withGlobalReset ]
+  }
 };
 
 const Template: Story<Props> = () => (

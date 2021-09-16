@@ -65,6 +65,7 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/abstracts/tokens';
 
                 // Base
+                @import '@okta/odyssey/src/scss/base/reset';
                 @import '@okta/odyssey/src/scss/base/accessibility';
                 @import '@okta/odyssey/src/scss/base/iconography';
                 @import '@okta/odyssey/src/scss/base/typography-global';

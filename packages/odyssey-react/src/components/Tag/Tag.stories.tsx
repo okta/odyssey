@@ -13,12 +13,10 @@
 import type { Story } from "@storybook/react";
 import Tag from ".";
 import type { Props } from ".";
-import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Tag`,
   component: Tag,
-  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = ({ tags }) => (

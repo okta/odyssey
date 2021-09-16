@@ -13,7 +13,6 @@
 import type { Story } from "@storybook/react";
 import TextArea from ".";
 import type { Props } from ".";
-import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/TextArea`,
@@ -38,7 +37,6 @@ export default {
     onBlur: { control: false },
     onFocus: { control: false }
   },
-  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = (props) => (
