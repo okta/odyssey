@@ -14,7 +14,6 @@ import { Story } from "@storybook/react";
 import { FormEventHandler } from "react";
 import Toast, { useToast } from ".";
 import type { PropsToast, ToastVariants } from ".";
-import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Toast`,
@@ -31,7 +30,6 @@ export default {
       control: { type: "text" }
     }
   },
-  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<PropsToast> = (args) => <Toast {...args} />;

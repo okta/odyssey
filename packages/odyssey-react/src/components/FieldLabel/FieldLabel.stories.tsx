@@ -13,7 +13,6 @@
 import type { Story } from "@storybook/react";
 import FieldLabel from ".";
 import type { Props } from ".";
-import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/FieldLabel`,
@@ -22,7 +21,6 @@ export default {
     children: { control: 'text' },
     id: { control: 'text' },
   },
-  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = (props) => (

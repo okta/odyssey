@@ -13,7 +13,6 @@
 import type { Story } from "@storybook/react";
 import Radio from ".";
 import type { Props } from "./RadioGroup";
-import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Radio`,
@@ -34,7 +33,6 @@ export default {
     name: { control: 'text' },
     onChange: { control: false },
   },
-  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = (args) => (
