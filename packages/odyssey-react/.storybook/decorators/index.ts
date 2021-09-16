@@ -10,22 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Story } from "@storybook/react";
-import Tag from ".";
-import type { Props } from ".";
-import { withGlobalReset } from '../../../.storybook/decorators';
-
-export default {
-  title: `Components/Tag`,
-  component: Tag,
-  decorators: [ withGlobalReset ]
-};
-
-const Template: Story<Props> = ({ tags }) => (
-  <Tag tags={tags} />
-)
-
-export const Default = Template.bind({});
-Default.args = {
-  tags: ["Item one", "Item two", "Item three"]
-};
+export { withGlobalReset } from './withGlobalReset'

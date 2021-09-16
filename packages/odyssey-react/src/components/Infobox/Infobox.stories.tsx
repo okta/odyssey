@@ -14,6 +14,7 @@ import { Story } from "@storybook/react";
 import Infobox from ".";
 import Link from '../Link';
 import type { Props } from ".";
+import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Infobox`,
@@ -26,7 +27,8 @@ export default {
       defaultValue: "Infobox title",
       control: { type: "text" }
     }
-  }
+  },
+  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = ({title, variant}) => (

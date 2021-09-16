@@ -10,18 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// Catch-all border-box bad boy
+/* Catch-all border-box bad boy */
 
 * {
   box-sizing: border-box;
-
-  &::before,
-  &::after {
-    box-sizing: inherit;
-  }
 }
 
-// Huge selector list layout reset
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Huge selector list layout reset */
 
 html,
 body,
@@ -120,7 +120,7 @@ input {
   font-size: 100%;
 }
 
-// HTML5 display-role reset for older browsers
+/* HTML5 display-role reset for older browsers */
 
 article,
 aside,
@@ -136,7 +136,7 @@ section {
   display: block;
 }
 
-// Element Specific Resets
+/* Element Specific Resets */
 
 img,
 svg {
@@ -151,12 +151,18 @@ ul {
 blockquote,
 q {
   quotes: none;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    content: none;
-  }
+blockquote::before,
+blockquote::after {
+  content: '';
+  content: none;
+}
+
+q::before,
+q::after {
+  content: '';
+  content: none;
 }
 
 table {

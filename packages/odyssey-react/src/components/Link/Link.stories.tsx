@@ -13,10 +13,12 @@
 import type { Story } from "@storybook/react";
 import Link from ".";
 import type { Props } from ".";
+import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Link`,
-  component: Link
+  component: Link,
+  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = ({

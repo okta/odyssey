@@ -10,22 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Story } from "@storybook/react";
-import Tag from ".";
-import type { Props } from ".";
-import { withGlobalReset } from '../../../.storybook/decorators';
+import type { ComponentType } from 'react';
 
-export default {
-  title: `Components/Tag`,
-  component: Tag,
-  decorators: [ withGlobalReset ]
-};
-
-const Template: Story<Props> = ({ tags }) => (
-  <Tag tags={tags} />
-)
-
-export const Default = Template.bind({});
-Default.args = {
-  tags: ["Item one", "Item two", "Item three"]
-};
+export function withGlobalReset(Story: ComponentType) {
+  return (
+    <>
+      <style>{require('!to-string-loader!css-loader!@okta/odyssey/src/scss/base/_reset.scss')}</style>
+      <Story />
+    </>
+  )
+}
