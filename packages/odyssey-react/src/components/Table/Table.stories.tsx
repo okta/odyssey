@@ -14,6 +14,7 @@ import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
 import Table from ".";
 import type { Props } from "./Table";
+import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Table`,
@@ -25,7 +26,8 @@ export default {
   argTypes: {
     title: { control: 'text' },
     caption: { control: 'text' },
-  }
+  },
+  decorators: [ withGlobalReset ]
 };
 
 const Template: Story = ({title, caption, withContainer, direction}) => (

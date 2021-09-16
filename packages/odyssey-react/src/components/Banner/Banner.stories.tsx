@@ -15,6 +15,7 @@ import { useArgs } from '@storybook/client-api';
 import Banner from ".";
 import Link from '../Link';
 import type { Props } from ".";
+import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Banner`,
@@ -26,7 +27,7 @@ export default {
     children: {
       control: { type: null }
     },
-
+    
     title: {
       defaultValue: "Banner title",
       control: { type: "text" }
@@ -42,7 +43,8 @@ export default {
     open: {
       defaultValue: true
     }
-  }
+  },
+  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = ({

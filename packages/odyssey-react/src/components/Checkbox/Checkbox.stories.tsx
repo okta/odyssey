@@ -14,6 +14,7 @@ import type { Story } from "@storybook/react";
 import { useEffect } from "react";
 import Checkbox from ".";
 import type { Props } from ".";
+import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Checkbox`,
@@ -33,6 +34,7 @@ export default {
     onBlur: { control: false },
     onFocus: { control: false }
   },
+  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = (args) => (
