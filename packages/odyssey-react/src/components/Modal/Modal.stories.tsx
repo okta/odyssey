@@ -15,15 +15,13 @@ import { useArgs } from '@storybook/client-api';
 import Modal from ".";
 import Button from "../Button";
 import type { PropsModal } from ".";
-import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Modal`,
   component: Modal,
   argTypes: {
     open: { control: { type: 'boolean' } }
-  },
-  decorators: [ withGlobalReset ]
+  }
 };
 
 const Template: Story<PropsModal> = () => {

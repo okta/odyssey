@@ -18,7 +18,6 @@
   },
   "devDependencies": {
     "@okta/odyssey": "^0.7.0",
-    "@okta/odyssey-typescript": "^0.0.0",
-    "to-string-loader": "^1.1.6"
+    "@okta/odyssey-typescript": "^0.0.0"
   }
 }

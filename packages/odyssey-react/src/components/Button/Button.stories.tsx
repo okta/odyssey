@@ -13,7 +13,6 @@
 import { Story } from "@storybook/react";
 import Button from ".";
 import type { Props } from ".";
-import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Button`,
@@ -32,7 +31,6 @@ export default {
       control: { type: "boolean" }
     },
   },
-  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = ({ variant, disabled, onClick, size, wide }) => (

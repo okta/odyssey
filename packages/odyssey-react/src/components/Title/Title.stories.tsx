@@ -13,7 +13,6 @@
 import { Story } from "@storybook/react";
 import Title from ".";
 import type { Props } from ".";
-import { withGlobalReset } from '../../../.storybook/decorators';
 
 export default {
   title: `Components/Title`,
@@ -23,7 +22,6 @@ export default {
       control: { type: "string" }
     }
   },
-  decorators: [ withGlobalReset ]
 };
 
 const Template: Story<Props> = ({ level, visualLevel, children }) => (
