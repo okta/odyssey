@@ -24,7 +24,6 @@
     "@okta/odyssey-transform-styles-postcss-preset": "^0.0.0",
     "@okta/odyssey-typescript": "^0.0.0",
     "@svgr/cli": "^5.5.0",
-    "@testing-library/dom": "^8.5.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/react-hooks": "^7.0.2",
