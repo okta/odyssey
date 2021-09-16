@@ -230,9 +230,7 @@ Tabs.Tab = function TabsTab({ children, id, ariaControls, selected, onClick }) {
 };
 
 Tabs.PanelContainer = ({ children }) => (
-  <div className="ods-tabs--tabpanel" data-testid="ods-panel-container">
-    {children}
-  </div>
+  <div className="ods-tabs--tabpanel">{children}</div>
 );
 
 Tabs.Panel = ({ children, id, selected }) => (

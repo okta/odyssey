@@ -118,15 +118,15 @@ describe("Tabs", () => {
       </Tabs>
     );
 
-    fireEvent.keyUp(getByRole("tablist"), { key: "Tab", code: "Tab" });
-    fireEvent.keyUp(getByRole("tablist"), { key: "End", code: "End" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Tab", code: "Tab" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "End", code: "End" });
 
     await waitFor(() => {
       expect(getByText("Tab 3")).toHaveFocus();
     });
   });
 
-  it("should focus the last element when the home key is pressed", async () => {
+  it("should focus the first element when the home key is pressed", async () => {
     const { getByText, getByRole } = render(
       <Tabs id={id} selectedId="sb-tabs-example-2" ariaLabel={ariaLabel}>
         <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">
@@ -141,8 +141,8 @@ describe("Tabs", () => {
       </Tabs>
     );
 
-    fireEvent.keyUp(getByRole("tablist"), { key: "Tab", code: "Tab" });
-    fireEvent.keyUp(getByRole("tablist"), { key: "Home", code: "Home" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Tab", code: "Tab" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Home", code: "Home" });
 
     await waitFor(() => {
       expect(getByText("Tab 1")).toHaveFocus();
@@ -164,9 +164,9 @@ describe("Tabs", () => {
       </Tabs>
     );
 
-    fireEvent.keyUp(getByRole("tablist"), { key: "Tab", code: "Tab" });
-    fireEvent.keyUp(getByRole("tablist"), { key: "End", code: "End" });
-    fireEvent.keyUp(getByRole("tablist"), {
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Tab", code: "Tab" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "End", code: "End" });
+    fireEvent.keyUp(getByRole(roleTabList), {
       key: "ArrowRight",
       code: "ArrowRight",
     });
@@ -191,9 +191,9 @@ describe("Tabs", () => {
       </Tabs>
     );
 
-    fireEvent.keyUp(getByRole("tablist"), { key: "Tab", code: "Tab" });
-    fireEvent.keyUp(getByRole("tablist"), { key: "Home", code: "Home" });
-    fireEvent.keyUp(getByRole("tablist"), {
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Tab", code: "Tab" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Home", code: "Home" });
+    fireEvent.keyUp(getByRole(roleTabList), {
       key: "ArrowLeft",
       code: "ArrowLeft",
     });
