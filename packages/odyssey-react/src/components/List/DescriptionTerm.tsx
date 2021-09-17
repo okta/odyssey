@@ -21,6 +21,7 @@ export type Props = {
 } & ComponentPropsWithRef<'dt'>
 
 const DescriptionTerm = forwardRef<HTMLElement, Props>((props, ref) => {
+
   const {
     children,
     ...rest

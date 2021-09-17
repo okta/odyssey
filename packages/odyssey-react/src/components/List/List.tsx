@@ -10,13 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { FC } from 'react';
 import type {
   ReactElement,
-  ComponentProps
+  ComponentPropsWithRef,
+  ForwardedRef
 } from 'react';
 
 import {
+  forwardRefWithStatics,
   useOmit,
   useCx
 } from '../../utils';
@@ -32,22 +33,22 @@ export type Props = {
   */
   children?: ReactElement | ReactElement[],
   /**
-   * List type
+   * List element used 
    */
    listType?: 'unordered' | 'ordered' | 'description',
    /**
     * Remove default styling
     */
    unstyled?: boolean,
-} & ComponentProps<'ul'> & ComponentProps<'ol'> & ComponentProps<'dl'>;
+} & ComponentPropsWithRef<'ul'> & ComponentPropsWithRef<'ol'> & ComponentPropsWithRef<'dl'>;
 
-type StaticComponents = {
+type Statics = {
   Item: typeof ListItem,
   Term: typeof DescriptionTerm,
   Details: typeof DescriptionDetails,
 }
 
-const List: FC<Props> & StaticComponents = (props:Props):ReactElement => {
+const List = forwardRefWithStatics<HTMLElement, Props, Statics>((props, ref) => {
   const {
     children,
     listType = 'unordered',
@@ -62,22 +63,32 @@ const List: FC<Props> & StaticComponents = (props:Props):ReactElement => {
     unstyled ? styles.unstyled : styles[listType ],
   );
 
-  type ListTag = 'ul' | 'ol' | 'dl';
-  let ListElement: ListTag = 'ul';
-  
-  if(listType === 'ordered'){
-    ListElement = 'ol';
-  }
-  else if(listType === 'description'){
-    ListElement = 'dl';
+  function ListElement() {
+    if (listType === 'ordered') {
+      return (
+        <ol className={componentClass} ref={ref as ForwardedRef<HTMLOListElement>} {...omitProps}>
+          {children}
+        </ol >
+      );
+    }
+    else if (listType === 'description'){
+      return (
+        <dl className={componentClass} ref={ref as ForwardedRef<HTMLDListElement>} {...omitProps}>
+          {children}
+        </dl >
+      );
+    }
+    return (
+      <ul className={componentClass} ref={ref as ForwardedRef<HTMLUListElement>} {...omitProps}>
+        {children}
+      </ul >
+    );
   }
 
   return (
-    <ListElement className={componentClass} {...omitProps}>
-      {children}
-    </ListElement >
+    <ListElement />
   )
-}
+})
 
 List.Item = ListItem;
 List.Term = DescriptionTerm;

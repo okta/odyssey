@@ -20,7 +20,7 @@ export type Props = {
   children?: ReactNode,
 } & ComponentPropsWithRef<'dd'>
 
-const ListItem = forwardRef<HTMLElement, Props>((props, ref) => {
+const DescriptionDetails = forwardRef<HTMLElement, Props>((props, ref) => {
   const {
     children,
     ...rest
@@ -35,4 +35,4 @@ const ListItem = forwardRef<HTMLElement, Props>((props, ref) => {
   );
 });
 
-export default ListItem;
+export default DescriptionDetails;
