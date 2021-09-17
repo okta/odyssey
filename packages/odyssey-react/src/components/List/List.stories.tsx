@@ -20,15 +20,18 @@ export default {
   component: List
 };
 
-const Template: Story<Props> = () => (
-  <List unstyled={true}>
+const Template: Story<Props> = ({listType, unstyled}) => (
+  <List listType={listType} unstyled={unstyled}>
     <List.Item>Item 1</List.Item>
     <List.Item>Item 2</List.Item>
   </List>
 )
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  listType: 'unordered',
+  unstyled: false
+};
 
 export const OrderedList = ():ReactElement=> (
   <List listType="ordered">
@@ -44,5 +47,12 @@ export const DescriptionList = ():ReactElement=> (
     <List.Details>Detail 1.2</List.Details>
     <List.Term>Term 2</List.Term>
     <List.Details>Detail 2.1</List.Details>
+  </List>
+);
+
+export const UnstyledList = ():ReactElement=> (
+  <List unstyled={true}>
+    <List.Item>Item 1</List.Item>
+    <List.Item>Item 2</List.Item>
   </List>
 );
