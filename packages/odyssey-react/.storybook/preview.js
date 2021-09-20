@@ -14,14 +14,9 @@ export const parameters = {
       method: '',
       order: [
         "Welcome",
-        [
-          "Introduction (README)",
-          "Code Style & Conventions",
-          "Component Status"
-        ],
-        "Base",
+        "Guidelines",
         "Components",
-        "Patterns"
+        "Utilities"
       ],
       locales: '',
     },

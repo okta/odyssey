@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import { Markdown } from '../../.storybook/components';
-import content from '../../../../README.md'
+import Table from '../components/Table';
 
 <Meta title="Guidelines/RTL" />
 
@@ -16,545 +16,545 @@ This table documents the related equivalents in physical and logical CSS, their 
 
 For a quick visualization of how these properties are related, see <a href="https://codepen.io/aardrian/full/bGGxrvM">this CodePen</a>.
 
-<table>
-  <thead>
-    <tr>
-      <th scope="column">
+<Table caption="property and value translations">
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell scope="column">
         Type
-      </th>
-      <th scope="column">
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
         Physical CSS
-      </th>
-      <th scope="column">
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
         Logical CSS
-      </th>
-      <th scope="column">
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
         Lint status
-      </th>
-      <th scope="column">
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
         Notes
-      </th>
-    </tr>
-  </thead>
+      </Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
   <tbody>
-    <tr>
-      <th scope="row" rowspan="7">
+    <Table.Row>
+      <Table.HeaderCell scope="row" rowspan="7">
         Margin
-      </th>
-      <td>
+      </Table.HeaderCell>
+      <Table.DataCell>
         <code>margin</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         no auto-fix
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>margin-top</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>margin-block-start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>margin-bottom</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>margin-block-end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>margin-left</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>margin-inline-start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>margin-right</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>margin-inline-end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>margin-block</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         Sets both block margins
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>margin-inline</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         Sets both inline margins
-      </td>
-    </tr>
-    <tr>
-      <th scope="row" rowspan="7">
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.HeaderCell scope="row" rowspan="7">
         Padding
-      </th>
-      <td>
+      </Table.HeaderCell>
+      <Table.DataCell>
         <code>padding</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         no auto-fix
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>padding-top</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>padding-block-start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>padding-bottom</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>padding-block-end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>padding-left</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>padding-inline-start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>padding-right</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>padding-inline-end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>padding-block</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         Sets both block paddings
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>padding-inline</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         Sets both inline paddings
-      </td>
-    </tr>
-    <tr>
-      <th scope="row" rowspan="11">
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.HeaderCell scope="row" rowspan="11">
         Borders
-      </th>
-      <td>
+      </Table.HeaderCell>
+      <Table.DataCell>
         <code>border-top</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>border-block-start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         Also applies to <code>*-size|style|color</code>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>border-bottom</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>border-block-end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         Also applies to <code>*-size|style|color</code>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>border-left</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>border-inline-start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         Also applies to <code>*-size|style|color</code>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>border-right</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>border-inline-end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
          auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         Also applies to <code>*-size|style|color</code>
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>border-block</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         Sets both block borders
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>border-inline</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         Sets both inline borders
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>border-radius</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         no auto-fix
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>border-top-left-radius</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>border-start-start-radius</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>border-top-right-radius</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>border-start-end-radius</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>border-bottom-left-radius</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>border-end-start-radius</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>border-bottom-right-radius</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>border-end-end-radius</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row" rowspan="7">
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.HeaderCell scope="row" rowspan="7">
         Position
-      </th>
-      <td>
+      </Table.HeaderCell>
+      <Table.DataCell>
         <code>top</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>inset-block-start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>bottom</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>inset-block-end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>left</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>inset-inline-start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>right</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>inset-inline-end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>inset</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         Sets all inset values
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>inset-block</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         Sets block inset values
-      </td>
-    </tr>
-    <tr>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>inset-inline</code>
-      </td>
-      <td>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
         Sets inline inset values
-      </td>
-    </tr>
-    <tr>
-      <th scope="row" rowspan="6">
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.HeaderCell scope="row" rowspan="6">
         Layout
-      </th>
-      <td>
+      </Table.HeaderCell>
+      <Table.DataCell>
         <code>text-align: left</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>text-align: start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>text-align: right</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>text-align: end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>float: left</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>float: inline-start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         Prefer Grid or Flex instead
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>float: right</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>float: inline-end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         Prefer Grid or Flex instead
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>clear: left</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>clear: inline-start</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         Prefer Grid or Flex instead
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>clear: right</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>clear: inline-end</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fixed
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         Prefer Grid or Flex instead
-      </td>
-    </tr>
+      </Table.DataCell>
+    </Table.Row>
   </tbody>
-</table>
+</Table>
 
 
 ### Linting notes
@@ -599,164 +599,164 @@ For teams requiring broader support, <a href="https://github.com/csstools/postcs
 
 Our current implementation focuses on providing "automatic" RTL support with the least amount of overhead. For this reason, we haven't implemented properties related to vertical reading/writing. For completeness, the remaining Logical CSS properties are inventoried here:
 
-<table>
-  <thead>
-    <tr>
-      <th scope="column">
+<Table caption="unused logical properties and values">
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell scope="column">
         Type
-      </th>
-      <th scope="column">
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
         Physical CSS
-      </th>
-      <th scope="column">
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
         Logical CSS
-      </th>
-      <th scope="column">
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
         Lint status
-      </th>
-    </tr>
-  </thead>
+      </Table.HeaderCell>
+    </Table.Row>
+  </Table.Header>
   <tbody>
-    <tr>
-      <th scope="row" rowspan="6">
+    <Table.Row>
+      <Table.HeaderCell scope="row" rowspan="6">
         Box
-      </th>
-      <td>
+      </Table.HeaderCell>
+      <Table.DataCell>
         <code>width</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>inline-size</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fix available
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>min-width</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>min-inline-size</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fix available
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>max-width</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>max-inline-size</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fix available
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>height</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>block-size</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fix available
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>min-height</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>min-block-size</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fix available
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>max-height</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>max-block-size</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         auto-fix available
-      </td>
-    </tr>
-    <tr>
-      <th scope="row" rowspan="6">
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.HeaderCell scope="row" rowspan="6">
         Overflow
-      </th>
-      <td>
+      </Table.HeaderCell>
+      <Table.DataCell>
         <code>overflow-y</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>overflow-block</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         undetected
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>overflow-x</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>overflow-inline</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         undetected
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>overscroll-behavior-y</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>overscroll-behavior-block</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         undetected
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>overscroll-behavior-x</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>overscroll-behavior-inline</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         undetected
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>resize: horizontal</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>resize: inline</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         undetected
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </Table.DataCell>
+    </Table.Row>
+    <Table.Row>
+      <Table.DataCell>
         <code>resize: vertical</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         <code>resize: block</code>
-      </td>
-      <td>
+      </Table.DataCell>
+      <Table.DataCell>
         undetected
-      </td>
-    </tr>
+      </Table.DataCell>
+    </Table.Row>
   </tbody>
-</table>
+</Table>
 
 There are limited caveats to utilizing these properties today. However, they are not required for RTL support.
 
