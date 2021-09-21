@@ -14,6 +14,8 @@ import type { TransformOptions } from '@babel/core';
 import type { Configuration } from 'webpack';
 import type { PropItem } from 'react-docgen-typescript';
 
+import postcss from 'postcss';
+
 module.exports = {
   typescript: {
     check: false,
@@ -28,6 +30,14 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
+    {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+          implementation: postcss,
+        },
+      },
+    },
     '@pxblue/storybook-rtl-addon',
   ],
   babel (config: TransformOptions) {
