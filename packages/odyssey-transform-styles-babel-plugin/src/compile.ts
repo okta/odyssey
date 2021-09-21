@@ -17,7 +17,7 @@ import postcssrc from 'postcss-load-config';
 import { createHash } from 'crypto';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { renderSync } from 'node-sass';
+import { renderSync } from 'sass';
 import formatWarnings from './formatWarnings';
 
 export interface File {
