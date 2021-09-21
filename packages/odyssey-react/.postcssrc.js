@@ -10,40 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
-  presets: [
-    [
-      '@okta/odyssey-babel-preset',
-      {
-        react: {
-          runtime: 'automatic'
-        },
-      }
-    ]
-  ],
+const { default: transformStyles } = require('@okta/odyssey-transform-styles-postcss-preset');
 
-  env: {
-    production: {
-      presets: [
-        [
-          '@okta/odyssey-babel-preset',
-          {
-            env: {
-              modules: false
-            },
-            react: {
-              runtime: 'automatic'
-            },
-          }
-        ]
-      ],
-      comments: false,
-      shouldPrintComment: (val) => {
-        return /Okta, Inc\.|@license|@preserve/.test(val);
-      },
-      ignore: [
-        /\.test\.|\.stories\./i
-      ]
-    }
-  }
+module.exports = (ctx) => {
+  if (!ctx.transformStyles) { return {}; }
+
+  const options = Object.assign(
+    ctx.transformStyles,
+    ctx.env === 'test' && { modules: { ...ctx.transformStyles.modules, generateScopedName: '[local]' } }
+  );
+
+  return {
+    plugins: [
+      transformStyles(options)
+    ]
+  };
 };

@@ -11,11 +11,11 @@
  */
 
 import type * as Babel from '@babel/core';
-import type { StyleOpts } from '@okta/odyssey-transform-styles-babel-plugin';
+import type { TransformStylesOpts } from '@okta/odyssey-transform-styles-babel-plugin'
 import assertEnv from './assertEnv';
 
 interface Opts {
-  styles?: StyleOpts;
+  transformStyles?: TransformStylesOpts,
 }
 
 function preset (
@@ -27,7 +27,7 @@ function preset (
     {
       env: {},
       react: {},
-      styles: {},
+      transformStyles: {},
       typescript: {}
     },
     _opts
@@ -35,7 +35,7 @@ function preset (
 
   return {
     plugins: [
-      [ '@okta/odyssey-transform-styles-babel-plugin', opts.styles ]
+      [ '@okta/odyssey-transform-styles-babel-plugin', opts.transformStyles ]
     ],
     presets: [
       [ '@babel/preset-env', opts.env ],

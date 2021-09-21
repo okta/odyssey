@@ -10,40 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
-  presets: [
-    [
-      '@okta/odyssey-babel-preset',
-      {
-        react: {
-          runtime: 'automatic'
-        },
-      }
-    ]
-  ],
+import styles from './fixture.module.scss';
 
-  env: {
-    production: {
-      presets: [
-        [
-          '@okta/odyssey-babel-preset',
-          {
-            env: {
-              modules: false
-            },
-            react: {
-              runtime: 'automatic'
-            },
-          }
-        ]
-      ],
-      comments: false,
-      shouldPrintComment: (val) => {
-        return /Okta, Inc\.|@license|@preserve/.test(val);
-      },
-      ignore: [
-        /\.test\.|\.stories\./i
-      ]
-    }
-  }
-};
+describe('transformStyles', () => {
+  describe('import visitor', () => {
+    it('transforms styles as expected', () => {
+      expect(styles).toMatchSnapshot();
+    });
+
+    it('transforms styles template as expected', () => {
+      expect(styles.__template()).toMatchSnapshot();
+    });
+  });
+});
