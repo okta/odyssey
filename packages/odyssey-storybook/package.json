@@ -16,10 +16,15 @@
     "@storybook/addon-links": "^6.3.7",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/react": "^6.3.7",
-    "postcss": "^8.3.6"
+    "css-loader": "^3.6.0",
+    "postcss": "^8.3.6",
+    "sass": "^1.42.0",
+    "sass-loader": "^9.0.0",
+    "style-loader": "^1.0.0"
   },
   "devDependencies": {
     "@okta/odyssey": "^0.7.0",
-    "@okta/odyssey-typescript": "^0.0.0"
+    "@okta/odyssey-typescript": "^0.0.0",
+    "@types/sass": "^1.16.1"
   }
 }

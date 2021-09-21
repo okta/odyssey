@@ -13,7 +13,7 @@
 import type { TransformOptions } from '@babel/core';
 import type { Configuration } from 'webpack';
 import type { PropItem } from 'react-docgen-typescript';
-
+import sass from 'sass';
 import postcss from 'postcss';
 
 module.exports = {
@@ -66,6 +66,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
+              implementation: sass,
               sourceMap: true,
               additionalData: `
                 // Abstracts
