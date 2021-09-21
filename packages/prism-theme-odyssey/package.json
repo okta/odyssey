@@ -17,7 +17,7 @@
   "devDependencies": {
     "capture-website": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
-    "sass": "^1.26.10",
+    "sass": "^1.42.0",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
