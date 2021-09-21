@@ -10,17 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { default: transformStyles } = require('@okta/odyssey-transform-styles-postcss-preset')
+const { default: transformStyles } = require('@okta/odyssey-transform-styles-postcss-preset');
 
 module.exports = (ctx) => {
+  if (!ctx.transformStyles) { return {}; }
+
   const options = Object.assign(
     ctx.transformStyles,
     ctx.env === 'test' && { modules: { ...ctx.transformStyles.modules, generateScopedName: '[local]' } }
-  )
+  );
 
   return {
     plugins: [
       transformStyles(options)
     ]
-  }
-}
+  };
+};
