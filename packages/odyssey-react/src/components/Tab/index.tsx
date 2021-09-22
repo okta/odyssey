@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState, useRef, forwardRef } from "react";
+import { useState, useRef, forwardRef, useCallback } from "react";
 import type {
   FunctionComponent,
   ReactElement,
@@ -85,6 +85,16 @@ export type StaticComponents = {
   Tab: FunctionComponent<PropsTab>;
 };
 
+const focusableSelector = `
+a[href],
+button,
+textarea,
+input[type="text"],
+input[type="radio"],
+input[type="checkbox"],
+select
+`;
+
 /**
  * Navigation component used to organize content by grouping similar information on the
  * same page. They allow content to be viewed without having to navigate away from that page
@@ -108,7 +118,43 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({
 }) => {
   const defaultSelectedTabId = selectedId || children[0].props.id;
   const [selectedTabId, setSelectedTabId] = useState(defaultSelectedTabId);
-  const tabElement = useRef<HTMLDivElement>(null);
+  const tabRef = useRef<null>(null);
+
+  const tabs = tabRef.current.querySelectorAll<HTMLButtonElement>(
+    focusableSelector
+  );
+  const tabsArr = Array.prototype.slice.call(tabs);
+  const tabCount = tabs.length;
+  const focusableElFirst = tabs[0];
+  const focusableElLast = tabs[tabCount - 1];
+  const focusableIndexActive = tabsArr.indexOf(document.activeElement);
+  const focusableIndexLast = tabsArr.indexOf(focusableElLast);
+  const focusableElNext = tabs[focusableIndexActive + 1];
+  const focusableElPrev = tabs[focusableIndexActive - 1];
+  const isFirstFocused = focusableIndexActive === 0;
+  const isLastFocused = focusableIndexActive === focusableIndexLast;
+  const focusFirst = () => focusableElFirst.focus();
+  const focusLast = () => focusableElLast.focus();
+
+  const handleArrowLeftKeypress = () => {
+    if (!isFirstFocused) focusableElPrev.focus();
+    else if (isFirstFocused) focusLast();
+  };
+
+  const handleArrowRightKeypress = () => {
+    if (!isLastFocused) focusableElNext.focus();
+    else if (isLastFocused) focusFirst();
+  };
+
+  useKeypress(
+    [
+      ["ArrowLeft", handleArrowLeftKeypress],
+      ["ArrowRight", handleArrowRightKeypress],
+      ["Home", focusFirst],
+      ["End", focusLast],
+    ],
+    tabRef
+  );
 
   const handleTabChange = (newSelectedId: string) => {
     setSelectedTabId(newSelectedId);
@@ -118,56 +164,9 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({
     }
   };
 
-  const handleTabFocus = (event: KeyboardEvent) => {
-    if (tabElement.current) {
-      const focusableSelector = `
-      a[href],
-      button,
-      textarea,
-      input[type="text"],
-      input[type="radio"],
-      input[type="checkbox"],
-      select
-      `;
-      const tabs = tabElement.current.querySelectorAll(focusableSelector);
-      const tabsArr = Array.prototype.slice.call(tabs);
-      const tabCount = tabs.length;
-      const focusableElFirst = tabs[0] as HTMLElement;
-      const focusableElLast = tabs[tabCount - 1] as HTMLElement;
-      const focusableIndexActive = tabsArr.indexOf(document.activeElement);
-      const focusableIndexLast = tabsArr.indexOf(focusableElLast);
-      const focusableElNext = tabs[focusableIndexActive + 1] as HTMLElement;
-      const focusableElPrev = tabs[focusableIndexActive - 1] as HTMLElement;
-      const isFirstFocused = focusableIndexActive === 0;
-      const isLastFocused = focusableIndexActive === focusableIndexLast;
-      const focusFirst = () => focusableElFirst.focus();
-      const focusLast = () => focusableElLast.focus();
-      const keyPressed = (key: string) => key === event.key;
-
-      if (keyPressed("Home")) focusFirst();
-      else if (keyPressed("End")) focusLast();
-      else if (keyPressed("ArrowLeft") && !isFirstFocused)
-        focusableElPrev.focus();
-      else if (keyPressed("ArrowLeft") && isFirstFocused) focusLast();
-      else if (keyPressed("ArrowRight") && !isLastFocused)
-        focusableElNext.focus();
-      else if (keyPressed("ArrowRight") && isLastFocused) focusFirst();
-    }
-  };
-
-  useKeypress(
-    [
-      ["ArrowLeft", handleTabFocus],
-      ["ArrowRight", handleTabFocus],
-      ["Home", handleTabFocus],
-      ["End", handleTabFocus],
-    ],
-    tabElement
-  );
-
   return (
     <Tabs.Container id={id} ariaLabel={ariaLabel}>
-      <Tabs.List ref={tabElement}>
+      <Tabs.List ref={tabRef}>
         {children.map(({ props: { label, id } }) => (
           <Tabs.Tab
             id={id + "-tab"}

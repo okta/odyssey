@@ -15,17 +15,19 @@ import { fireEvent } from '@testing-library/react';
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useKeypress } from "./useKeypress";
 
-test('should fire callback when key in map is pressed', () => {
-  const handleKeypress = jest.fn()
+describe('useKeyPress', () => {
+  test('should fire callback when key in map is pressed', () => {
+    const handleKeypress = jest.fn()
 
-  renderHook(() => useKeypress([
-    ['ArrowLeft', handleKeypress]
-  ]))
+    renderHook(() => useKeypress([
+      ['ArrowLeft', handleKeypress]
+    ]))
 
-  act(() => {
-    fireEvent.keyUp(document.body, {key: 'ArrowLeft', code: 'ArrowLeft'})
-    fireEvent.keyUp(document.body, {key: 'ArrowRight', code: 'ArrowRight'})
+    act(() => {
+      fireEvent.keyUp(document.body, {key: 'ArrowLeft', code: 'ArrowLeft'})
+      fireEvent.keyUp(document.body, {key: 'ArrowRight', code: 'ArrowRight'})
+    })
+
+    expect(handleKeypress).toHaveBeenCalledTimes(1);
   })
-
-  expect(handleKeypress).toHaveBeenCalledTimes(1);
-})
+}
