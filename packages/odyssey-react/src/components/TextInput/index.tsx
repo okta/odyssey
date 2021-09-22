@@ -120,10 +120,11 @@ const TextInput: FunctionComponent<Props> = (props) => {
     required = true,
     type = 'text',
     value,
-    error,
-    hint,
-    label,
-    optionalLabel
+    // @todo pass the following in to field
+    // error,
+    // hint,
+    // label,
+    // optionalLabel
   } = props;
 
   const oid = useOid(id);
@@ -135,30 +136,22 @@ const TextInput: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
-  //const labelClass = (() => {
-    //if (type === 'search') return styles.labelSearch;
-    //if (disabled || readonly) return styles.labelDisabled;
-    //return styles.label;
-  //})();
-
-  const input = (
-    <input
-      className={styles.root}
-      disabled={disabled}
-      id={oid}
-      name={name}
-      onChange={handleChange}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      placeholder={placeholder}
-      readOnly={readonly}
-      ref={inputRef}
-      required={required}
-      type={type}
-      defaultValue={defaultValue}
-      value={value}
-    />
-  );
+  const input = <input
+    className={styles.root}
+    disabled={disabled}
+    id={oid}
+    name={name}
+    onChange={handleChange}
+    onBlur={onBlur}
+    onFocus={onFocus}
+    placeholder={placeholder}
+    readOnly={readonly}
+    ref={inputRef}
+    required={required}
+    type={type}
+    defaultValue={defaultValue}
+    value={value}
+  />;
 
   return (
     <fieldset className={styles.fieldset}>
@@ -171,12 +164,11 @@ const TextInput: FunctionComponent<Props> = (props) => {
             </span>
             {input}
           </span>
-        ) : (
-          <>{input}</>
-        )}
-      </div>
-    </fieldset>
-  );
+          {input}
+        </span>
+      ): input}
+    </>
+  )
 };
 
 export default TextInput;
