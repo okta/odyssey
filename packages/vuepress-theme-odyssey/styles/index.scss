@@ -120,7 +120,7 @@ h6 {
     position: absolute;
     width: $spacing-s-em;
     height: $spacing-s-em;
-    margin-block-start: $spacing-xs-em /2;
+    margin-block-start: $spacing-xs-em * 0.5;
     margin-inline-start: -$spacing-m;
     transition: 0.33s opacity  ease-in-out;
     opacity: 0;

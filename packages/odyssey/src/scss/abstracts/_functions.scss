@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+@use "sass:math";
+
 @function ms($step) {
   $value: 1rem;
 
@@ -21,7 +23,7 @@
 
   @if $step < 0 {
     @for $i from $step through -1 {
-      $value: ($value / $scale-ratio);
+      $value: math.div($value, $scale-ratio);
     }
   }
 
@@ -31,7 +33,7 @@
 // TODO: get rid of this
 @function rem-to-px($value) {
   @if variable-exists('base-font-size') {
-    @return ($value / 1rem) * $base-font-size;
+    @return math.div($value, 1rem) * $base-font-size;
   }
 }
 
@@ -108,7 +110,7 @@ $icons: (
   $encoded: '';
   $slice: 2000;
   $index: 0;
-  $loops: ceil(str-length($icon)/$slice);
+  $loops: ceil(math.div(str-length($icon), $slice));
 
   @for $i from 1 through $loops {
     $chunk: str-slice($icon, $index, $index + $slice - 1);
