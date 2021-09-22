@@ -149,7 +149,7 @@ const Select = forwardRefWithStatics<HTMLSelectElement, Props, Statics>(
           <CaretDownIcon />
         </span>
       </div>
-    </fieldset>
+    </Field>
   );
   /* eslint-enable jsx-a11y/no-onchange */
 });
