@@ -49,11 +49,11 @@
       [Obsolete("...")]
       class Program : IInterface
       {
-          public static List<int> JustDoIt(int count)
+          public static List&lt;int&gt; JustDoIt(int count)
           {
-              Span<int> numbers = stackalloc int[length];
+              Span&lt;int&gt; numbers = stackalloc int[length];
               Console.WriteLine($"Hello {Name}!");
-              return new List<int>(new int[] { 1, 2, 3 })
+              return new List&lt;int&gt;(new int[] { 1, 2, 3 })
           }
       }
   }</code></pre>
@@ -97,7 +97,7 @@ Content-Encoding: gzip
       <section>
         <h2><a name="java"></a>Java</h2>
         <pre><code class="language-java">/**
-  * @author John Smith <john.smith@example.com>
+  * @author John Smith &lt;john.smith@example.com&gt;
   */
 
 package l2f.gameserver.model;
@@ -143,10 +143,10 @@ public abstract strictfp class L2Char extends L2Object {
     } catch (e) {
       /* handle exception */
       var e4x =
-          <div>Example
-              <p>1234</p></div>;
+          &lt;div&gt;Example
+              &lt;p&gt;1234&lt;/p&gt;&lt;/div&gt;
     }
-    for (var i = 0 / 2; i < classes.length; i++) {
+    for (var i = 0 / 2; i &lt; classes.length; i++) {
     // "0 / 2" should not be parsed as regexp
       if (checkCondition(classes[i]) === undefined)
         return /\d+[\s/]/g;
@@ -211,11 +211,11 @@ hello world
       [Obsolete("...")]
       class Program : IInterface
       {
-          public static List<int> JustDoIt(int count)
+          public static List&lt;int&gt; JustDoIt(int count)
           {
-              Span<int> numbers = stackalloc int[length];
+              Span&lt;int&gt; numbers = stackalloc int[length];
               Console.WriteLine($"Hello {Name}!");
-              return new List<int>(new int[] { 1, 2, 3 })
+              return new List&lt;int&gt;(new int[] { 1, 2, 3 })
           }
       }
   }</code></pre>

@@ -12,9 +12,9 @@
 
 module.exports = {
   plugins: [
-    require.resolve('./rules'),
-    'stylelint-scss',
-    'stylelint-use-logical-spec'
+    require.resolve("./rules"),
+    "stylelint-scss",
+    "stylelint-use-logical-spec",
   ],
   extends: [
     "stylelint-config-standard",
@@ -23,38 +23,30 @@ module.exports = {
     "stylelint-config-prettier",
   ],
   rules: {
-    'odyssey/header': true,
-    'at-rule-empty-line-before': [
-      'always',
+    "odyssey/header": true,
+    "at-rule-empty-line-before": [
+      "always",
       {
-        except: [ 'blockless-after-same-name-blockless', 'first-nested' ],
-        ignore: [ 'after-comment' ],
-        ignoreAtRules: [ 'else' ]
-      }
+        except: ["blockless-after-same-name-blockless", "first-nested"],
+        ignore: ["after-comment"],
+        ignoreAtRules: ["else"],
+      },
     ],
     "at-rule-no-unknown": null,
     "block-closing-brace-newline-after": [
       "always",
       { ignoreAtRules: ["if", "else"] },
     ],
-    "declaration-empty-line-before": [
-      "always",
-      {
-        except: ["after-declaration"],
-        ignore: ["after-comment", "first-nested", "inside-single-line-block"],
-        severity: "warning",
-      },
-    ],
     "color-hex-length": "long",
     "declaration-no-important": true,
+    "declaration-property-value-disallowed-list": {
+      "word-break": ["/^break/"],
+    },
     "max-nesting-depth": [
       3,
       { ignoreAtRules: ["media", "supports", "include"] },
     ],
     "property-disallowed-list": ["border-radius", "margin", "padding"],
-    "declaration-property-value-disallowed-list": {
-      "word-break": ["/^break/"],
-    },
     "order/properties-alphabetical-order": null,
     "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
     "scss/at-else-closing-brace-space-after": "always-intermediate",
