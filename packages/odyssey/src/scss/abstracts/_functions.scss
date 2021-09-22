@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-@use "sass:math";
+@use 'sass:math';
 
 @function ms($step) {
   $value: 1rem;
