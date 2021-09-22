@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState, useRef, forwardRef, useCallback } from "react";
+import { useState, useRef, forwardRef } from "react";
 import type {
   FunctionComponent,
   ReactElement,
@@ -19,6 +19,7 @@ import type {
 } from "react";
 import styles from "./Tab.module.scss";
 import { useCx, useKeypress } from "../../utils";
+import type { KeyPressMap } from "../../utils/useKeypress";
 
 export type PropsTabs = {
   /**
@@ -85,6 +86,8 @@ export type StaticComponents = {
   Tab: FunctionComponent<PropsTab>;
 };
 
+type ButtonRef = HTMLDivElement | null;
+
 const focusableSelector = `
 a[href],
 button,
@@ -94,6 +97,44 @@ input[type="radio"],
 input[type="checkbox"],
 select
 `;
+
+const useTabsKeypress = (node: ButtonRef) => {
+  const keyMap: KeyPressMap = [];
+  if (node) {
+    const tabs = node.querySelectorAll<HTMLButtonElement>(focusableSelector);
+    const tabsArr = Array.prototype.slice.call(tabs);
+    const tabCount = tabs.length;
+    const focusableElFirst = tabs[0];
+    const focusableElLast = tabs[tabCount - 1];
+    const focusableIndexActive = tabsArr.indexOf(document.activeElement);
+    const focusableIndexLast = tabsArr.indexOf(focusableElLast);
+    const focusableElNext = tabs[focusableIndexActive + 1];
+    const focusableElPrev = tabs[focusableIndexActive - 1];
+    const isFirstFocused = focusableIndexActive === 0;
+    const isLastFocused = focusableIndexActive === focusableIndexLast;
+    const focusFirst = () => focusableElFirst.focus();
+    const focusLast = () => focusableElLast.focus();
+
+    const handleArrowLeftKeypress = () => {
+      if (!isFirstFocused) focusableElPrev.focus();
+      else if (isFirstFocused) focusLast();
+    };
+
+    const handleArrowRightKeypress = () => {
+      if (!isLastFocused) focusableElNext.focus();
+      else if (isLastFocused) focusFirst();
+    };
+
+    keyMap.push(
+      ["ArrowLeft", handleArrowLeftKeypress],
+      ["ArrowRight", handleArrowRightKeypress],
+      ["Home", focusFirst],
+      ["End", focusLast]
+    );
+  }
+
+  useKeypress(keyMap, node);
+};
 
 /**
  * Navigation component used to organize content by grouping similar information on the
@@ -118,43 +159,10 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({
 }) => {
   const defaultSelectedTabId = selectedId || children[0].props.id;
   const [selectedTabId, setSelectedTabId] = useState(defaultSelectedTabId);
-  const tabRef = useRef<null>(null);
 
-  const tabs = tabRef.current.querySelectorAll<HTMLButtonElement>(
-    focusableSelector
-  );
-  const tabsArr = Array.prototype.slice.call(tabs);
-  const tabCount = tabs.length;
-  const focusableElFirst = tabs[0];
-  const focusableElLast = tabs[tabCount - 1];
-  const focusableIndexActive = tabsArr.indexOf(document.activeElement);
-  const focusableIndexLast = tabsArr.indexOf(focusableElLast);
-  const focusableElNext = tabs[focusableIndexActive + 1];
-  const focusableElPrev = tabs[focusableIndexActive - 1];
-  const isFirstFocused = focusableIndexActive === 0;
-  const isLastFocused = focusableIndexActive === focusableIndexLast;
-  const focusFirst = () => focusableElFirst.focus();
-  const focusLast = () => focusableElLast.focus();
+  const tabRef = useRef<ButtonRef>(null);
 
-  const handleArrowLeftKeypress = () => {
-    if (!isFirstFocused) focusableElPrev.focus();
-    else if (isFirstFocused) focusLast();
-  };
-
-  const handleArrowRightKeypress = () => {
-    if (!isLastFocused) focusableElNext.focus();
-    else if (isLastFocused) focusFirst();
-  };
-
-  useKeypress(
-    [
-      ["ArrowLeft", handleArrowLeftKeypress],
-      ["ArrowRight", handleArrowRightKeypress],
-      ["Home", focusFirst],
-      ["End", focusLast],
-    ],
-    tabRef
-  );
+  useTabsKeypress(tabRef.current);
 
   const handleTabChange = (newSelectedId: string) => {
     setSelectedTabId(newSelectedId);

@@ -11,13 +11,13 @@
  */
 
 import { useEffect } from 'react';
-import type { RefObject } from 'react';
 
-type KeyPressMap = Array<[string, (event: KeyboardEvent) => void]>;
+export type KeyPressMap = Array<[string, (event: KeyboardEvent) => void]>;
+type Node<T> = T extends HTMLElement ? T : null
 
-export const useKeypress = (keyMap: KeyPressMap, ref?: RefObject<HTMLElement>): void => {
+export const useKeypress = <T>(keyMap: KeyPressMap, node: Node<T>): void => {
   useEffect(() => {
-    const element = ref?.current ? ref.current : document.body;
+    if (!node) return;
 
     const handler = (event: KeyboardEvent) => {
       const map = keyMap;
@@ -26,8 +26,8 @@ export const useKeypress = (keyMap: KeyPressMap, ref?: RefObject<HTMLElement>): 
       return (listener) && listener(event);
     }
     
-    element.addEventListener('keyup', handler);
+    node.addEventListener('keyup', handler);
 
-    return () => element.removeEventListener('keyup', handler);
-  }, [keyMap]);
+    return () => node.removeEventListener('keyup', handler);
+  }, [keyMap, node]);
 }
