@@ -25,6 +25,7 @@ import Field from '../Field';
 import type { SharedFieldTypes } from '../Field';
 import styles from './TextInput.module.scss';
 import { Search } from '../Icon';
+import Field from '../Field';
 
 export type Props = {
   /**
@@ -121,10 +122,10 @@ const TextInput: FunctionComponent<Props> = (props) => {
     type = 'text',
     value,
     // @todo pass the following in to field
-    // error,
-    // hint,
-    // label,
-    // optionalLabel
+    error,
+    hint,
+    label,
+    optionalLabel
   } = props;
 
   const oid = useOid(id);
@@ -136,7 +137,13 @@ const TextInput: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
+  const ariaDescribedBy = useCx(
+    hint && `${oid}-hint`,
+    error && `${oid}-error`
+  )
+
   const input = <input
+    aria-describedby={ariaDescribedBy}
     className={styles.root}
     disabled={disabled}
     id={oid}
@@ -167,7 +174,7 @@ const TextInput: FunctionComponent<Props> = (props) => {
           {input}
         </span>
       ): input}
-    </>
+    </Field>
   )
 };
 
