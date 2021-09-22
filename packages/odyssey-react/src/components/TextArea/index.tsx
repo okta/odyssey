@@ -18,7 +18,7 @@ import type {
   RefCallback,
 } from 'react';
 import styles from './TextArea.module.scss';
-import { useOid } from '../../utils';
+import { useOid, useCx } from '../../utils';
 import Field from '../Field'
 import type { SharedFieldTypes } from '../Field'
 export interface Props extends SharedFieldTypes {
@@ -138,6 +138,11 @@ const TextArea: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
+  const ariaDescribedBy = useCx(
+    hint && `${oid}-hint`,
+    error && `${oid}-error`
+  )
+
   return (
     <Field
       inputId={oid}
@@ -147,6 +152,7 @@ const TextArea: FunctionComponent<Props> = (props) => {
       optionalLabel={optionalLabel}
     >
       <textarea
+        aria-describedby={ariaDescribedBy}
         className={styles.root}
         disabled={disabled}
         id={oid}
