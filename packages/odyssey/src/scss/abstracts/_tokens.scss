@@ -65,8 +65,8 @@ $text-danger-disabled: $color-danger-light;
 $spacing-m: ms(0) * $base-line-height;
 $spacing-l: $spacing-m * 2;
 $spacing-xl: $spacing-l * 2;
-$spacing-s: $spacing-m / 2;
-$spacing-xs: $spacing-s / 2;
+$spacing-s: $spacing-m * 0.5;
+$spacing-xs: $spacing-s * 0.5;
 
 // Input disabled
 $bg-input-disabled: cv('gray', '000');
@@ -79,8 +79,8 @@ $border-input-disabled: cv('gray', '200');
 $spacing-m-em: 1em * $base-line-height;
 $spacing-l-em: $spacing-m-em * 2;
 $spacing-xl-em: $spacing-l-em * 2;
-$spacing-s-em: $spacing-m-em / 2;
-$spacing-xs-em: $spacing-s-em / 2;
+$spacing-s-em: $spacing-m-em * 0.5;
+$spacing-xs-em: $spacing-s-em * 0.5;
 
 // Animation/Transition Baselines
 
