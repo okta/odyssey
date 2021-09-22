@@ -24,7 +24,6 @@ import SearchIcon from "../Icon/Search";
 import Field from '../Field';
 import type { SharedFieldTypes } from '../Field';
 import styles from './TextInput.module.scss';
-import { useOid } from '../../utils';
 import { Search } from '../Icon';
 
 export type Props = {
