@@ -112,8 +112,8 @@
 }
 
 .dismissVariant {
-  padding-block: ($spacing-xs-em / 2);
-  padding-inline: ($spacing-xs-em / 2);
+  padding-block: ($spacing-xs-em * 0.5);
+  padding-inline: ($spacing-xs-em * 0.5);
   border: 0;
   background-color: transparent;
   color: inherit;
