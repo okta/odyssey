@@ -18,13 +18,15 @@
       >
         <template slot="header">
           <!-- eslint-disable -->
-        <div
-          aria-hidden
-          class="docs-card--header-image"
-          v-html="
-            require(`!html-loader!../../docs/.vuepress/public/images/coin-${page.id || 'fpo'}.svg`)
-          "
-        />
+          <div
+            aria-hidden
+            class="docs-card--header-image"
+            v-html="
+              require(`!html-loader!../../docs/.vuepress/public/images/coin-${
+                page.id || 'fpo'
+              }.svg`)
+            "
+          />
           <!-- eslint-enable -->
           <h2>{{ page.title }}</h2>
         </template>
@@ -51,7 +53,7 @@ export default {
     DocsPageHeader: () => import("../components/DocsPageHeader.vue"),
     DocsLink: () => import("../components/DocsLink.vue"),
     DocsCard: () => import("../components/DocsCard.vue"),
-    DocsCardGroup: () => import("../components/DocsCardGroup.vue")
+    DocsCardGroup: () => import("../components/DocsCardGroup.vue"),
   },
   computed: {
     content() {
@@ -65,7 +67,7 @@ export default {
         ) {
           result.push({
             ...page.frontmatter,
-            link: page.path
+            link: page.path,
           });
         }
 
@@ -73,7 +75,7 @@ export default {
       }, []);
 
       return content;
-    }
-  }
+    },
+  },
 };
 </script>

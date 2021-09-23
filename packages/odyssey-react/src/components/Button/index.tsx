@@ -10,27 +10,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, MouseEventHandler, ReactText } from 'react';
-import { useCx, useOmit } from '../../utils';
-import styles from './Button.module.scss';
+import type { FunctionComponent, MouseEventHandler, ReactText } from "react";
+import { useCx, useOmit } from "../../utils";
+import styles from "./Button.module.scss";
 
-export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'dismiss' | 'clear';
-export type ButtonSizes = 's' | 'm' | 'l';
+export type ButtonVariants =
+  | "primary"
+  | "secondary"
+  | "danger"
+  | "dismiss"
+  | "clear";
+export type ButtonSizes = "s" | "m" | "l";
 export type Props = {
   /**
    * Text content to be rendered within the button, usualy label text.
    */
-  children: ReactText,
+  children: ReactText;
 
   /**
    * Makes the button element unusable.
    */
-  disabled?: true,
+  disabled?: true;
 
   /**
    * Button click handler.
    */
-  onClick?: MouseEventHandler<HTMLButtonElement>,
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 
   /**
    * The size to be displayed to the user.
@@ -42,7 +47,7 @@ export type Props = {
    * The visual variant to be displayed to the user.
    * @default primary
    */
-  variant?: ButtonVariants,
+  variant?: ButtonVariants;
 
   /**
    * Extends the width of the button to that of it's parent.
@@ -73,8 +78,8 @@ const Button: FunctionComponent<Props> = (props) => {
     styles[`${variant}Variant`],
     styles[`${size}Size`],
     {
-      [styles.wideLayout]: wide
-    },
+      [styles.wideLayout]: wide,
+    }
   );
 
   const omitProps = useOmit(rest);

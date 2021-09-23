@@ -16,14 +16,14 @@ import type { Props } from ".";
 
 export default {
   title: `Components/Link`,
-  component: Link
+  component: Link,
 };
 
-const Template: Story<Props> = ({
-  children, variant, href, target, rel
-}) => (
-  <Link href={href} target={target} rel={rel} variant={variant}>{children}</Link>
-)
+const Template: Story<Props> = ({ children, variant, href, target, rel }) => (
+  <Link href={href} target={target} rel={rel} variant={variant}>
+    {children}
+  </Link>
+);
 
 export const Default = Template.bind({});
 Default.args = {
@@ -43,5 +43,5 @@ External.args = {
   href: "https://www.okta.com",
   children: "Visit okta.com",
   rel: "noopener",
-  target: "_blank"
+  target: "_blank",
 };

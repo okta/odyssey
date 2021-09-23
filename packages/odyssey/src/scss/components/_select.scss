@@ -13,7 +13,7 @@
 .ods-select:not([data-type]) {
   @include input-baseline;
 
-  background-image: get-icon('caret', $text-body);
+  background-image: get-icon("caret", $text-body);
   background-repeat: no-repeat;
   background-position: right $spacing-s-em center;
   background-size: $size-body-caption;

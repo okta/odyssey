@@ -18,8 +18,8 @@ import TableFooter from "./TableFooter";
 import TableRow from "./TableRow";
 import TableHeaderCell from "./TableHeaderCell";
 
-const caption = 'test table';
-const tableTitle = 'test table';
+const caption = "test table";
+const tableTitle = "test table";
 
 describe("Table", () => {
   it("renders the table", () => {
@@ -31,40 +31,38 @@ describe("Table", () => {
       </Table>
     );
 
-    expect(getByRole('table')).toBeInTheDocument();
+    expect(getByRole("table")).toBeInTheDocument();
   });
 
-  it('renders the caption prop in the caption element', () => {
+  it("renders the caption prop in the caption element", () => {
     const { getByRole } = render(
       <Table caption={caption} title={tableTitle} />
     );
 
-    expect(getByRole('table', { name: caption })).toBeVisible();
+    expect(getByRole("table", { name: caption })).toBeVisible();
   });
 
-  it('conditionally uses a container', () => {
+  it("conditionally uses a container", () => {
     const { getByRole } = render(
       <Table caption={caption} withContainer={false} />
     );
-    expect(getByRole('table').parentElement?.classList.contains('figure')).toBe(false);
+    expect(getByRole("table").parentElement?.classList.contains("figure")).toBe(
+      false
+    );
   });
 });
 
-const title="test title";
+const title = "test title";
 
 describe("Table Container", () => {
   it("renders the container", () => {
-    const { getByRole } = render(
-      <Table.Container title={title} />
-    );
-    expect(getByRole('figure')).toBeInTheDocument();
+    const { getByRole } = render(<Table.Container title={title} />);
+    expect(getByRole("figure")).toBeInTheDocument();
   });
 
   it("renders the title", () => {
-    const { getByText } = render(
-      <Table.Container title={title} />
-    );
-    expect(getByText(title).tagName.toLowerCase()).toEqual('figcaption');
+    const { getByText } = render(<Table.Container title={title} />);
+    expect(getByText(title).tagName.toLowerCase()).toEqual("figcaption");
   });
 });
 
@@ -78,9 +76,8 @@ describe("Table Data Cell", () => {
           </Table.Row>
         </Table.Body>
       </Table>
-
     );
-    expect(getByText('data')).toBeInTheDocument();
+    expect(getByText("data")).toBeInTheDocument();
   });
 
   it("adds the proper class for format prop", () => {
@@ -93,7 +90,7 @@ describe("Table Data Cell", () => {
         </Table.Body>
       </Table>
     );
-    expect(getByText('1').classList.contains('numFormat')).toBe(true);
+    expect(getByText("1").classList.contains("numFormat")).toBe(true);
   });
 });
 
@@ -107,9 +104,8 @@ describe("Table Header Cell", () => {
           </Table.Row>
         </Table.Header>
       </Table>
-
     );
-    expect(getByText('heading')).toBeInTheDocument();
+    expect(getByText("heading")).toBeInTheDocument();
   });
 
   it("adds the proper class for format prop", () => {
@@ -122,44 +118,42 @@ describe("Table Header Cell", () => {
         </Table.Header>
       </Table>
     );
-    expect(getByText('number').classList.contains('numFormat')).toBe(true);
+    expect(getByText("number").classList.contains("numFormat")).toBe(true);
   });
 });
 
 describe("Table Sort Button", () => {
   it("renders the button", () => {
-    const { getByRole } = render(
-      <Table.SortButton direction="unsorted" />
-    );
+    const { getByRole } = render(<Table.SortButton direction="unsorted" />);
 
-    expect(getByRole('button')).toBeInTheDocument();
+    expect(getByRole("button")).toBeInTheDocument();
   });
 
   it("uses direction prop to display an icon", () => {
-    const { getByTitle } = render(
-      <Table.SortButton direction="asc" />
-    );
-    const sortIcon = getByTitle('Ascending').parentElement;
+    const { getByTitle } = render(<Table.SortButton direction="asc" />);
+    const sortIcon = getByTitle("Ascending").parentElement;
     expect(sortIcon).toBeVisible();
   });
 });
 
-a11yCheck(() => render(
-  <Table caption={caption} title={tableTitle}>
-    <TableHeader>
-      <TableRow>
-        <TableHeaderCell></TableHeaderCell>
-      </TableRow>
-    </TableHeader>
-    <Table.Body>
-      <Table.Row>
-        <Table.DataCell></Table.DataCell>
-      </Table.Row>
-    </Table.Body>
-    <TableFooter>
-      <Table.Row>
-        <Table.DataCell></Table.DataCell>
-      </Table.Row>
-    </TableFooter>
-  </Table>
-))
+a11yCheck(() =>
+  render(
+    <Table caption={caption} title={tableTitle}>
+      <TableHeader>
+        <TableRow>
+          <TableHeaderCell></TableHeaderCell>
+        </TableRow>
+      </TableHeader>
+      <Table.Body>
+        <Table.Row>
+          <Table.DataCell></Table.DataCell>
+        </Table.Row>
+      </Table.Body>
+      <TableFooter>
+        <Table.Row>
+          <Table.DataCell></Table.DataCell>
+        </Table.Row>
+      </TableFooter>
+    </Table>
+  )
+);

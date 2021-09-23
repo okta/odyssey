@@ -10,27 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const generate = require('@babel/generator').default;
-const headerComment = require('./header-comment');
+const generate = require("@babel/generator").default;
+const headerComment = require("./header-comment");
 
-function odysseyIconTemplate(
-  { template },
-  opts,
-  { componentName, jsx },
-) {
-  const plugins = ['jsx']
+function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
+  const plugins = ["jsx"];
   if (opts.typescript) {
-    plugins.push('typescript')
+    plugins.push("typescript");
   }
-  const typeScriptTpl = template.smart({ plugins, preserveComments: true })
+  const typeScriptTpl = template.smart({ plugins, preserveComments: true });
 
   const compName = componentName.name.substring(3);
 
   const attrs = jsx.openingElement.attributes;
-  const classNameIndex = attrs.findIndex((att) => att.name.name === 'className');
+  const classNameIndex = attrs.findIndex(
+    (att) => att.name.name === "className"
+  );
   jsx.openingElement.attributes = [
     ...attrs.slice(0, classNameIndex),
-    ...attrs.slice(classNameIndex + 1)
+    ...attrs.slice(classNameIndex + 1),
   ];
 
   const icon = `<Icon
@@ -73,6 +71,6 @@ const ${compName} = forwardRef<SVGSVGElement, Props>((props, ref) => {
 ${newLine}
 
 export default ${compName}
-  `
+  `;
 }
-module.exports = odysseyIconTemplate
+module.exports = odysseyIconTemplate;

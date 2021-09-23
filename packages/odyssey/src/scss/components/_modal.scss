@@ -20,7 +20,7 @@
   inset-inline-start: 0;
   align-items: center;
   justify-content: center;
-  background: rgba(cv('gray', '900'), 0.75);
+  background: rgba(cv("gray", "900"), 0.75);
 }
 
 .ods-modal--dialog {
@@ -121,7 +121,7 @@
     display: block;
   }
 
-  &[aria-hidden='false'] {
+  &[aria-hidden="false"] {
     .ods-modal--overlay {
       animation: overlay-in $base-duration $base-timing;
     }
@@ -131,12 +131,12 @@
     }
   }
 
-  &[aria-hidden='true'] {
+  &[aria-hidden="true"] {
     .ods-modal--overlay {
       animation: overlay-out $base-duration $base-timing;
     }
 
-    &[aria-hidden='true'] .ods-modal--dialog {
+    &[aria-hidden="true"] .ods-modal--dialog {
       animation: dialog-out $base-duration $base-timing;
     }
   }

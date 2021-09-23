@@ -81,7 +81,7 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: ${{ env.URL_STORYBOOK }}
 
-      - name: 'Send workflow status to Slack (#odyssey-deployments)'
+      - name: "Send workflow status to Slack (#odyssey-deployments)"
         run: sh ./scripts/notify-slack.sh
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

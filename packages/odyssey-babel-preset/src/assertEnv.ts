@@ -11,29 +11,32 @@
  */
 
 export interface AssertEnvReturn {
-  isTest: boolean,
-  isDev: boolean,
-  isProd: boolean
+  isTest: boolean;
+  isDev: boolean;
+  isProd: boolean;
 }
 
 export default function assertEnv(env: string): AssertEnvReturn {
   const result = {
     isTest: false,
     isDev: false,
-    isProd: false
-  }
+    isProd: false,
+  };
 
   switch (env) {
-    case 'test':
-      return Object.assign(result, { isTest: true })
-    case 'development':
-      return Object.assign(result, { isDev: true })
-    case 'production':
-      return Object.assign(result, { isProd: true })
+    case "test":
+      return Object.assign(result, { isTest: true });
+    case "development":
+      return Object.assign(result, { isDev: true });
+    case "production":
+      return Object.assign(result, { isProd: true });
     default:
       throw new Error(
         `@okta/odyssey-babel must be run with an explicit NODE_ENV environment variable set.
-        Valid environments are 'test', 'development' and 'production'`.replace(/\n\s+/, '\n')
-      )
+        Valid environments are 'test', 'development' and 'production'`.replace(
+          /\n\s+/,
+          "\n"
+        )
+      );
   }
 }

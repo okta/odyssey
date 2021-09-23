@@ -10,28 +10,36 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-type arg = string | boolean | undefined | { [key: string]: boolean | undefined }
+type arg =
+  | string
+  | boolean
+  | undefined
+  | { [key: string]: boolean | undefined };
 
 type cx = (...args: arg[]) => string;
 
 export const cx: cx = (...args) => {
-  let classNames = ''
-  let lead = ''
+  let classNames = "";
+  let lead = "";
 
   for (const arg of args) {
-    if (typeof arg === 'string') { arg && (classNames += `${lead}${arg}`) }
-    if (typeof arg === 'object') {
-      Object.entries(arg).forEach(
-        ([k, v]) => v && (classNames +=`${lead}${k}`)
-      )
+    if (typeof arg === "string") {
+      arg && (classNames += `${lead}${arg}`);
     }
-    if (!lead && classNames) { lead = ' ' }
+    if (typeof arg === "object") {
+      Object.entries(arg).forEach(
+        ([k, v]) => v && (classNames += `${lead}${k}`)
+      );
+    }
+    if (!lead && classNames) {
+      lead = " ";
+    }
   }
 
   return classNames;
-}
+};
 
 export const useCx: cx = (...args) => {
   return useMemo(() => cx(...args), [cx, args]);

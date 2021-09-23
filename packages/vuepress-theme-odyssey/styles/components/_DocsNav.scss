@@ -12,17 +12,17 @@
 
 // This selector is applied to the nav when it is overflowing
 .with-docs-subnav-indicator {
-  @include border-radius( 0 );
+  @include border-radius(0);
 
   transition: none;
 
   &::before {
-    content: '';
+    content: "";
     display: block;
     width: 1em;
     height: 1em;
     transition: all 0.16s ease-in-out;
-    background-image: get-icon('caret', $text-body);
+    background-image: get-icon("caret", $text-body);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 1em;
@@ -68,8 +68,8 @@
   }
 
   a:hover {
-    background: cv('blue', '000');
-    color: cv('blue', '900');
+    background: cv("blue", "000");
+    color: cv("blue", "900");
   }
 
   &.is-visible {
@@ -77,7 +77,7 @@
   }
 
   .is-docs-nav-link--active {
-    background: var(--docs-nav-selected-bg, cv('gray', '000'));
+    background: var(--docs-nav-selected-bg, cv("gray", "000"));
   }
 }
 

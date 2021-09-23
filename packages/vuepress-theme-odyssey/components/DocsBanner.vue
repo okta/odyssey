@@ -4,7 +4,7 @@
     role="alert"
     :class="{
       'ods-banner is-ods-banner-info is-ods-banner-dismissable': true,
-      'is-docs-banner-visible': visible
+      'is-docs-banner-visible': visible,
     }"
   >
     <span class="ods-banner--icon">
@@ -36,23 +36,23 @@ export default {
     onDismiss: {
       type: Function,
       required: false,
-      default: () => undefined
+      default: () => undefined,
     },
     visible: {
       type: Boolean,
       required: false,
-      default: true
-    }
+      default: true,
+    },
   },
   data: () => ({
-    dismissed: false
+    dismissed: false,
   }),
   methods: {
     dismiss() {
       this.dismissed = true;
 
       this.onDismiss();
-    }
-  }
+    },
+  },
 };
 </script>
