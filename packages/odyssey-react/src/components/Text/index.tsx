@@ -10,12 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactText, ReactNode } from "react";
+import type {
+  FunctionComponent,
+  ReactText,
+  ReactNode,
+  HTMLAttributes,
+} from "react";
 import { useCx, useOmit } from "../../utils";
 import styles from "./Text.module.scss";
 import ScreenReaderText from "../ScreenReaderText";
 
-export type Props = {
+export interface Props extends HTMLAttributes<HTMLElement> {
   /**
    * Text content to be rendered
    */
@@ -36,7 +41,9 @@ export type Props = {
    * @default span
    */
   as?:
+    | "address"
     | "span"
+    | "dfn"
     | "p"
     | "abbr"
     | "em"
@@ -46,28 +53,37 @@ export type Props = {
     | "blockquote"
     | "cite"
     | "del"
-    | "pre";
+    | "pre"
+    | "var"
+    | "q"
+    | "s"
+    | "samp"
+    | "small"
+    | "kbd"
+    | "ins"
+    | "mark"
+    | "code";
 
   /**
-   * @todo
+   * The text color style for the text content.
    * @default body
    */
   color?: "body" | "bodyInverse" | "code" | "danger" | "dangerDisabled" | "sub";
 
   /**
-   * @todo
+   * The font weight for the text content.
    * @default regular
    */
   weight?: "regular" | "bold";
 
   /**
-   * @todo
+   * The font style (normal or italic) for the text content.
    * @default normal
    */
-  style?: "normal" | "italic";
+  fontStyle?: "normal" | "italic";
 
   /**
-   * @todo
+   * The text-transform for the text content.
    * @default none
    */
   transform?:
@@ -79,23 +95,26 @@ export type Props = {
     | "fullSizeKana";
 
   /**
-   * @todo
+   * The font-size for the text content.
    * @default normal
    */
   size?: "lede" | "base" | "caption";
 
   /**
-   * @todo
+   * The line-height for the text content.
    * @default normal
    */
   lineHeight?: "normal" | "title" | "font";
 
   /**
-   * @todo
+   * The overflow wrapping behavior for the text content.
    * @default normal
    */
   wrap?: "normal" | "breakWord" | "anywhere";
-};
+
+  /** @todo This should be an inherited HTML type, need to fix prior to merge */
+  cite?: any;
+}
 
 /**
  * A component which provides style for visible text elements.
@@ -110,7 +129,7 @@ const Text: FunctionComponent<Props> = (props) => {
     as = "p",
     color = "body",
     weight = "regular",
-    style = "normal",
+    fontStyle = "normal",
     transform = "none",
     size = "base",
     wrap = "normal",
@@ -127,7 +146,7 @@ const Text: FunctionComponent<Props> = (props) => {
     styles[as],
     styles[color + "Color"],
     styles[weight + "Weight"],
-    styles[style + "Style"],
+    styles[fontStyle + "Style"],
     styles[transform + "Transform"],
     styles[size + "Size"],
     styles[wrap + "Wrap"],

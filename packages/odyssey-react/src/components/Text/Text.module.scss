@@ -21,7 +21,7 @@
   font-feature-settings: "lnum", "pnum";
   text-decoration-skip-ink: all;
 
-  // Semantic Elements
+  /* stylelint-disable selector-max-type, selector-max-class, selector-class-pattern */
   abbr,
   &.abbr {
     border-block-end: 1px dashed $color-primary-dark;
@@ -264,6 +264,7 @@
     font-style: italic;
     font-weight: 600;
   }
+  /* stylelint-enable */
 }
 
 // Color
