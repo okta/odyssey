@@ -10,86 +10,86 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useRef, useEffect } from "react";
 import type {
   FunctionComponent,
   FocusEventHandler,
   ChangeEvent,
   RefCallback,
-} from 'react';
-import { Check, Minus } from '../Icon';
-import styles from './Checkbox.module.scss';
-import { useOid } from '../../utils';
+} from "react";
+import { Check, Minus } from "../Icon";
+import styles from "./Checkbox.module.scss";
+import { useOid } from "../../utils";
 
 export type Props = {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
-  id?: string,
+  id?: string;
 
   /**
    * The form field label
    */
-  label: string,
+  label: string;
 
   /**
    * Callback to provide a reference to the underlying input element
    * @param {Object} instance the input element or null
    */
-  inputRef?: RefCallback<HTMLInputElement>,
+  inputRef?: RefCallback<HTMLInputElement>;
 
   /**
    * The underlying input element name attribute
    */
-  name: string,
+  name: string;
 
   /**
    * The underlying input element required attribute
    * @default true
    */
-  required?: boolean,
+  required?: boolean;
 
   /**
    * The underlying input element disabled attribute
    * @default false
    */
-  disabled?: boolean,
+  disabled?: boolean;
 
   /**
    * The underlying input element value attribute
    */
-  value: string,
+  value: string;
 
   /**
    * The input element checked state for controlled components
    * @default false
    */
-  checked?: boolean,
+  checked?: boolean;
 
   /**
    * The input element indeterminate state for controlled components
    * @default false
    */
-  indeterminate?:boolean,
+  indeterminate?: boolean;
 
   /**
    * Callback executed when the input fires a blur event
    * @param {Object} event the event object
    */
-  onBlur?: FocusEventHandler<HTMLInputElement>,
+  onBlur?: FocusEventHandler<HTMLInputElement>;
 
   /**
    * Callback executed when the input fires a change event
    * @param {Object} event the event object
    * @param {string} value the string value of the input
    */
-  onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void,
+  onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
 
   /**
-  * Callback executed when the input fires a focus event
-  * @param {Object} event the event object
-  */
-  onFocus?: FocusEventHandler<HTMLInputElement>,
+   * Callback executed when the input fires a focus event
+   * @param {Object} event the event object
+   */
+  onFocus?: FocusEventHandler<HTMLInputElement>;
 };
 
 /**
@@ -128,8 +128,7 @@ const Checkbox: FunctionComponent<Props> = (props) => {
     if (internalRef.current) {
       if (indeterminate) {
         internalRef.current.indeterminate = true;
-      }
-      else {
+      } else {
         internalRef.current.indeterminate = false;
       }
     }
@@ -158,17 +157,10 @@ const Checkbox: FunctionComponent<Props> = (props) => {
         type="checkbox"
         value={value}
       />
-      <label
-        className={styles.label}
-        htmlFor={oid}
-      >
+      <label className={styles.label} htmlFor={oid}>
         <span className={styles.box} role="presentation">
           <span className={styles.indicator}>
-            { indeterminate ? (
-              <Minus />
-            ):(
-              <Check />
-            )}
+            {indeterminate ? <Minus /> : <Check />}
           </span>
         </span>
 

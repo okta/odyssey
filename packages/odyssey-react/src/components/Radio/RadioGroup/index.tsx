@@ -10,21 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef } from 'react';
-import type {
-  ChangeEvent,
-  ReactElement,
-  ComponentPropsWithRef
-} from 'react';
-import { RadioGroupProvider } from '../context';
-import { useOmit } from '../../../utils';
+import { forwardRef } from "react";
+import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
+import { RadioGroupProvider } from "../context";
+import { useOmit } from "../../../utils";
 
-import styles from '../RadioGroup.module.scss';
+import styles from "../RadioGroup.module.scss";
 
-export interface Props extends Omit<
-  ComponentPropsWithRef<'fieldset'>,
-  'onChange' | 'style' | 'className'
-> {
+export interface Props
+  extends Omit<
+    ComponentPropsWithRef<"fieldset">,
+    "onChange" | "style" | "className"
+  > {
   /**
    * One or more Radio.Button to be used together as a group
    */
@@ -33,41 +30,41 @@ export interface Props extends Omit<
   /**
    * The form field hint
    */
-  hint?: string,
+  hint?: string;
 
   /**
    * The form field legend
    */
-  legend: string,
+  legend: string;
 
   /**
    * The underlying input element name attribute for the group
    */
-  name: string,
+  name: string;
 
   /**
    * The underlying input element required attribute for the group
    * @default true
    */
-  required?: boolean,
+  required?: boolean;
 
   /**
    * The underlying input element disabled attribute for the group
    * @default false
    */
-  disabled?: boolean,
+  disabled?: boolean;
 
   /**
    * The checked Radio.Button value attribute for a controlled group.
    */
-  value?: string,
+  value?: string;
 
   /**
    * Callback executed when the input group fires a change event
    * @param {Object} event the event object
    * @param {string} value the string value of the input
    */
-  onChange?: (event?: ChangeEvent<HTMLInputElement>, value?: string) => void,
+  onChange?: (event?: ChangeEvent<HTMLInputElement>, value?: string) => void;
 }
 
 /**
@@ -87,12 +84,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
     ...rest
   } = props;
 
-  const legendElement = (
-    <legend
-      className={styles.legend}
-      children={legend}
-    />
-  );
+  const legendElement = <legend className={styles.legend} children={legend} />;
 
   const inputElements = (
     <div className={styles.fieldsetFlex}>
@@ -102,27 +94,22 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
           required,
           name,
           onChange,
-          value
+          value,
         }}
         children={children}
       />
     </div>
   );
 
-  const hintElement = (
-    <aside
-      className={styles.hint}
-      children={hint}
-    />
-  );
+  const hintElement = <aside className={styles.hint} children={hint} />;
 
   const omitProps = useOmit(rest);
 
   return (
     <fieldset className={styles.fieldset} ref={ref} {...omitProps}>
-      { legendElement}
-      { inputElements}
-      { hint && hintElement}
+      {legendElement}
+      {inputElements}
+      {hint && hintElement}
     </fieldset>
   );
 });

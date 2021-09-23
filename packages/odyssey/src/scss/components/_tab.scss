@@ -29,9 +29,9 @@
   font-size: $size-title-6;
   font-weight: 600;
 
-  &[aria-selected='true'] {
+  &[aria-selected="true"] {
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       inset-block-end: -1px;
       inset-inline-start: 0;
@@ -42,7 +42,7 @@
   }
 }
 
-.ods-tabs--tabpanel [role='tabpanel'] {
+.ods-tabs--tabpanel [role="tabpanel"] {
   padding-block: $spacing-l;
   padding-inline: 0;
 

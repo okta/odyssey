@@ -18,40 +18,38 @@ export default {
   title: `Components/TextArea`,
   component: TextArea,
   args: {
-    label: 'Field Label',
-    defaultValue: ' ',
-    hint: 'Descriptive field hint'
+    label: "Field Label",
+    defaultValue: " ",
+    hint: "Descriptive field hint",
   },
   argTypes: {
-    required: { control: 'boolean' },
-    disabled: { control: 'boolean' },
-    readonly: { control: 'boolean' },
-    defaultValue: { control: 'text' },
-    hint: { control: 'text' },
-    optionalLabel: { control: 'text' },
-    placeholder: { control: 'text' },
-    value: { control: 'text' },
-    id: { control: 'text' },
-    name: { control: 'text' },
+    required: { control: "boolean" },
+    disabled: { control: "boolean" },
+    readonly: { control: "boolean" },
+    defaultValue: { control: "text" },
+    hint: { control: "text" },
+    optionalLabel: { control: "text" },
+    placeholder: { control: "text" },
+    value: { control: "text" },
+    id: { control: "text" },
+    name: { control: "text" },
     onChange: { control: false },
     onBlur: { control: false },
-    onFocus: { control: false }
+    onFocus: { control: false },
   },
 };
 
-const Template: Story<Props> = (props) => (
-  <TextArea {...props} />
-);
+const Template: Story<Props> = (props) => <TextArea {...props} />;
 
 export const Default = Template.bind({});
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  disabled: true
+  disabled: true,
 };
 
 export const Optional = Template.bind({});
 Optional.args = {
   required: false,
-  optionalLabel: 'Optional'
+  optionalLabel: "Optional",
 };

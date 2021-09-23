@@ -2,10 +2,7 @@
   "extends": "./tsconfig.strict.json",
 
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "es2020"
-    ],
+    "lib": ["dom", "es2020"],
     "noEmit": true,
     "module": "es2020",
     "target": "es2020",

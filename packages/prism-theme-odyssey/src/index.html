@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <title>Prism Theme Odyssey</title>
-      <link rel="preconnect" href="https://fonts.gstatic.com">
-      <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
-      <style>
-        main {
-          max-width: 960px;
-          margin: 48px;
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Prism Theme Odyssey</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      main {
+        max-width: 960px;
+        margin: 48px;
+      }
 
-        section {
-          padding: 48px 0 !important;
-        }
-      </style>
-   </head>
-   <body>
+      section {
+        padding: 48px 0 !important;
+      }
+    </style>
+  </head>
+  <body>
     <main>
       <h1>Prism Theme Odyssey</h1>
-      <p>A <a href="https://prismjs.com/">Prism.js</a> a theme purpose built for <a href="https://okta.design/">Odyssey</a>, Okta's design system.</p>
+      <p>
+        A <a href="https://prismjs.com/">Prism.js</a> a theme purpose built for
+        <a href="https://okta.design/">Odyssey</a>, Okta's design system.
+      </p>
 
-      <p>Currently this package is not currently being distributed. If you are interested in using this for your project <a href="https://okta.design/">reach out</a> to the Odyssey team!</p>
+      <p>
+        Currently this package is not currently being distributed. If you are
+        interested in using this for your project
+        <a href="https://okta.design/">reach out</a> to the Odyssey team!
+      </p>
 
       <ul>
         <li><a href="#csharp">C#</a></li>
@@ -49,11 +59,11 @@
       [Obsolete("...")]
       class Program : IInterface
       {
-          public static List<int> JustDoIt(int count)
+          public static List&lt;int&gt; JustDoIt(int count)
           {
-              Span<int> numbers = stackalloc int[length];
+              Span&lt;int&gt; numbers = stackalloc int[length];
               Console.WriteLine($"Hello {Name}!");
-              return new List<int>(new int[] { 1, 2, 3 })
+              return new List&lt;int&gt;(new int[] { 1, 2, 3 })
           }
       }
   }</code></pre>
@@ -97,7 +107,7 @@ Content-Encoding: gzip
       <section>
         <h2><a name="java"></a>Java</h2>
         <pre><code class="language-java">/**
-  * @author John Smith <john.smith@example.com>
+  * @author John Smith &lt;john.smith@example.com&gt;
   */
 
 package l2f.gameserver.model;
@@ -143,10 +153,10 @@ public abstract strictfp class L2Char extends L2Object {
     } catch (e) {
       /* handle exception */
       var e4x =
-          <div>Example
-              <p>1234</p></div>;
+          &lt;div&gt;Example
+              &lt;p&gt;1234&lt;/p&gt;&lt;/div&gt;
     }
-    for (var i = 0 / 2; i < classes.length; i++) {
+    for (var i = 0 / 2; i &lt; classes.length; i++) {
     // "0 / 2" should not be parsed as regexp
       if (checkCondition(classes[i]) === undefined)
         return /\d+[\s/]/g;
@@ -172,7 +182,6 @@ public abstract strictfp class L2Char extends L2Object {
   }
 ]</code></pre>
       </section>
-
 
       <section>
         <h2><a name="markdown"></a>Markdown</h2>
@@ -211,11 +220,11 @@ hello world
       [Obsolete("...")]
       class Program : IInterface
       {
-          public static List<int> JustDoIt(int count)
+          public static List&lt;int&gt; JustDoIt(int count)
           {
-              Span<int> numbers = stackalloc int[length];
+              Span&lt;int&gt; numbers = stackalloc int[length];
               Console.WriteLine($"Hello {Name}!");
-              return new List<int>(new int[] { 1, 2, 3 })
+              return new List&lt;int&gt;(new int[] { 1, 2, 3 })
           }
       }
   }</code></pre>
@@ -379,7 +388,6 @@ foo = 42"
   }
 }</code></pre>
       </section>
-
     </main>
-   </body>
+  </body>
 </html>

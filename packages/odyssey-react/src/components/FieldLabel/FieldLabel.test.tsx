@@ -18,17 +18,13 @@ const labelText = "Field Label";
 
 describe("FieldLabel", () => {
   it("renders visibly into the document", () => {
-    const { getByText } = render(
-      <FieldLabel children={labelText} />
-    );
+    const { getByText } = render(<FieldLabel children={labelText} />);
 
     expect(getByText(labelText)).toBeVisible();
   });
 
   it("renders a provided id", () => {
-    const { getByText } = render(
-      <FieldLabel children={labelText} id="foo" />
-    );
+    const { getByText } = render(<FieldLabel children={labelText} id="foo" />);
 
     expect(getByText(labelText)).toHaveAttribute("id", "foo");
   });
@@ -37,7 +33,7 @@ describe("FieldLabel", () => {
     ["label", "label"],
     ["hint", "aside"],
     ["error", "aside"],
-    ["optional", "aside"]
+    ["optional", "aside"],
   ])("renders %s variant with %s node type", (variant, tagName) => {
     const { getByText } = render(
       <FieldLabel variant={variant} children="foo" />
