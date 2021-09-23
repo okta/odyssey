@@ -56,7 +56,6 @@ module.exports = {
       extends: [
         "plugin:jsx-a11y/recommended",
         "plugin:react-hooks/recommended",
-        "prettier",
       ],
       rules: {
         "jsx-a11y/label-has-associated-control": [
