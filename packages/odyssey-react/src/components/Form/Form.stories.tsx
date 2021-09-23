@@ -24,35 +24,53 @@ export default {
   component: Form,
   argTypes: {
     children: {
-      control: { type: null }
+      control: { type: null },
     },
     title: {
       defaultValue: "Interplanetary flight registration",
-      control: { type: "text" }
+      control: { type: "text" },
     },
     desc: {
-      defaultValue: "Complete this form in order to register for your interplanetary transfer.",
-      control: { type: "text" }
-    }
-  }
+      defaultValue:
+        "Complete this form in order to register for your interplanetary transfer.",
+      control: { type: "text" },
+    },
+  },
 };
 
-const Template: Story<Props> = ({title, desc}) => (
+const Template: Story<Props> = ({ title, desc }) => (
   <Form title={title} desc={desc}>
     <Form.Error>
       <Infobox title="Signal interrupted" variant="danger">
         <Infobox.Content>
-          <p>Solar flare activity has caused your submission to fail. Please try again.</p>
+          <p>
+            Solar flare activity has caused your submission to fail. Please try
+            again.
+          </p>
         </Infobox.Content>
       </Infobox>
     </Form.Error>
     <Form.Main>
-      <FieldGroup title="Origination logistics" desc="This information is required for your craft to leave the starport.">
-        <Field label="Departure system" hint="Your origin system has been prepopulated." name="departure" value="Sol" disabled>
-          <TextInput/>
+      <FieldGroup
+        title="Origination logistics"
+        desc="This information is required for your craft to leave the starport."
+      >
+        <Field
+          label="Departure system"
+          hint="Your origin system has been prepopulated."
+          name="departure"
+          value="Sol"
+          disabled
+        >
+          <TextInput />
         </Field>
-        <Field label="Destination star" hint="The stellar object you are traveling to." name="destination" error="This field cannot be left blank.">
-          <TextInput/>
+        <Field
+          label="Destination star"
+          hint="The stellar object you are traveling to."
+          name="destination"
+          error="This field cannot be left blank."
+        >
+          <TextInput />
         </Field>
       </FieldGroup>
     </Form.Main>

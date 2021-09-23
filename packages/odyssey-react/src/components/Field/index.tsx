@@ -10,80 +10,79 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactElement, ReactText } from 'react';
-import ScreenReaderText from '../ScreenReaderText';
+import type { FunctionComponent, ReactElement, ReactText } from "react";
+import ScreenReaderText from "../ScreenReaderText";
 
-import styles from './Field.module.scss';
-
+import styles from "./Field.module.scss";
 
 export interface SharedFieldTypes {
   /**
    * the form field label
    */
-  label: string,
+  label: string;
 
   /**
-  * Text to display when the field is optional, i.e. required prop is false
-  */
-  optionalLabel?: string,
-  
+   * Text to display when the field is optional, i.e. required prop is false
+   */
+  optionalLabel?: string;
+
   /**
    * the form field error
    */
-  error?: string,
-  
+  error?: string;
+
   /**
    * the form field hint
    */
-  hint?: string,
+  hint?: string;
 
   /**
    * The underlying input element required attribute
    * @default true
    */
-   required?: boolean,
+  required?: boolean;
 }
 
 export interface Props extends SharedFieldTypes {
   /**
    * Input to be rendered within the Field
    */
-  children: ReactElement | ReactElement[],
+  children: ReactElement | ReactElement[];
 
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
-  inputId: string,
+  inputId: string;
 
   /**
    * The underlying parent semantic HTML element.
    * @default div
    */
-  as?: 'div' | 'fieldset'
+  as?: "div" | "fieldset";
 }
 
 interface PropsLabel {
-  inputId: string
-  optionalLabel?: string
-  required: boolean,
-  children: ReactText
-  as?: 'label' | 'legend'
+  inputId: string;
+  optionalLabel?: string;
+  required: boolean;
+  children: ReactText;
+  as?: "label" | "legend";
 }
-interface PropsHint { 
-  id: string, 
-  children: ReactText
+interface PropsHint {
+  id: string;
+  children: ReactText;
 }
 interface PropsError {
-  id: string
-  children: ReactText
-  errorPrefix?: string
+  id: string;
+  children: ReactText;
+  errorPrefix?: string;
 }
 
 export type StaticComponents = {
-  Label: typeof Label,
-  Hint: typeof Hint,
-  Error: typeof Error,
-}
+  Label: typeof Label;
+  Hint: typeof Hint;
+  Error: typeof Error;
+};
 
 const Field: FunctionComponent<Props> & StaticComponents = (props) => {
   const {
@@ -94,10 +93,11 @@ const Field: FunctionComponent<Props> & StaticComponents = (props) => {
     optionalLabel,
     required = true,
     children,
-    as = 'div'
+    as = "div",
   } = props;
 
   const Tag = as;
+  const TagLabel = as === "fieldset" ? "legend" : "label";
 
   return (
     <Tag className={styles.root}>
@@ -105,12 +105,13 @@ const Field: FunctionComponent<Props> & StaticComponents = (props) => {
         inputId={inputId}
         required={required}
         optionalLabel={optionalLabel}
+        as={TagLabel}
       >
         {label}
       </Field.Label>
-      { hint && <Field.Hint id={inputId}>{hint}</Field.Hint> }
-      { children }
-      { error && <Field.Error id={inputId}>{error}</Field.Error> }
+      {hint && <Field.Hint id={inputId}>{hint}</Field.Hint>}
+      {children}
+      {error && <Field.Error id={inputId}>{error}</Field.Error>}
     </Tag>
   );
 };
@@ -121,7 +122,7 @@ const Label = (props: PropsLabel) => {
     optionalLabel = "Optional",
     required,
     children,
-    as = 'label'
+    as = "label",
   } = props;
 
   const Tag = as;
@@ -133,30 +134,23 @@ const Label = (props: PropsLabel) => {
       htmlFor={inputId}
     >
       {children}
-      { !required && optionalLabel &&
-        <span
-          className={styles.optionalLabel}
-          children={optionalLabel}
-        />
-      }
+      {!required && optionalLabel && (
+        <span className={styles.optionalLabel} children={optionalLabel} />
+      )}
     </Tag>
   );
-}
+};
 
 const Hint = ({ id, children }: PropsHint) => (
-  <p
-    className={styles.hint}
-    id={`${id}-hint`}
-    children={children}
-  />
-)
+  <p className={styles.hint} id={`${id}-hint`} children={children} />
+);
 
 const Error = ({ id, children, errorPrefix = "Error:" }: PropsError) => (
   <p className={styles.error} id={`${id}-error`}>
     <ScreenReaderText>{errorPrefix}</ScreenReaderText>
     {children}
   </p>
-)
+);
 
 Field.Label = Label;
 Field.Hint = Hint;

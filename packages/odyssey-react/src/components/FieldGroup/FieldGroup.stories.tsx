@@ -22,36 +22,50 @@ export default {
   component: FieldGroup,
   argTypes: {
     children: {
-      control: { type: null }
+      control: { type: null },
     },
     title: {
       defaultValue: "Origination logistics",
-      control: { type: "text" }
+      control: { type: "text" },
     },
     desc: {
-      defaultValue: "This information is required for your craft to leave the starport.",
-      control: { type: "text" }
-    }
-  }
+      defaultValue:
+        "This information is required for your craft to leave the starport.",
+      control: { type: "text" },
+    },
+  },
 };
 
-const Template: Story<Props> = ({title, desc}) => (
+const Template: Story<Props> = ({ title, desc }) => (
   <FieldGroup title={title} desc={desc}>
     <FieldGroup.Error>
       <Infobox title="Route impossible" variant="danger">
         <Infobox.Content>
-          <p>Travel is impossible between these locations. Please select a new destination.</p>
+          <p>
+            Travel is impossible between these locations. Please select a new
+            destination.
+          </p>
         </Infobox.Content>
       </Infobox>
     </FieldGroup.Error>
-    <Field label="Departure system" hint="Your origin system has been prepopulated." name="departure" value="Sol" disabled>
-      <TextInput/>
+    <Field
+      label="Departure system"
+      hint="Your origin system has been prepopulated."
+      name="departure"
+      value="Sol"
+      disabled
+    >
+      <TextInput />
     </Field>
-    <Field label="Destination star" hint="The stellar object you are traveling to." name="destination" error="This field cannot be left blank.">
-      <TextInput/>
+    <Field
+      label="Destination star"
+      hint="The stellar object you are traveling to."
+      name="destination"
+      error="This field cannot be left blank."
+    >
+      <TextInput />
     </Field>
   </FieldGroup>
 );
 
 export const Default = Template.bind({});
-

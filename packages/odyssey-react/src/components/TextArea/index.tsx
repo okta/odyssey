@@ -16,21 +16,17 @@ import type {
   FocusEventHandler,
   ChangeEvent,
   RefCallback,
-} from 'react';
-import styles from './TextArea.module.scss';
-import { useOid, useCx } from '../../utils';
-import Field from '../Field'
-import type { SharedFieldTypes } from '../Field'
+} from "react";
+import styles from "./TextArea.module.scss";
+import { useOid, useCx } from "../../utils";
+import Field from "../Field";
+import type { SharedFieldTypes } from "../Field";
+
 export interface Props extends SharedFieldTypes {
   /**
    * The underlying textarea element id attribute. Automatically generated if not provided
    */
   id?: string;
-
-  /**
-   * The form field label
-   */
-  label: string;
 
   /**
    * Callback to provide a reference to the underlying textarea element
@@ -62,16 +58,6 @@ export interface Props extends SharedFieldTypes {
   readonly?: boolean;
 
   /**
-   * Text to display as a hint
-   */
-  hint?: string;
-
-  /**
-   * Text to display when the form is optional, i.e. required prop is false
-   */
-  optionalLabel?: string;
-
-  /**
    * The underlying textarea element placeholder attribute
    */
   placeholder?: string;
@@ -100,10 +86,10 @@ export interface Props extends SharedFieldTypes {
   onChange?: (event: ChangeEvent<HTMLTextAreaElement>, value: string) => void;
 
   /**
-  * Callback executed when the textarea fires a focus event
-  * @param {Object} event the event object
-  */
-  onFocus?: FocusEventHandler<HTMLTextAreaElement>,
+   * Callback executed when the textarea fires a focus event
+   * @param {Object} event the event object
+   */
+  onFocus?: FocusEventHandler<HTMLTextAreaElement>;
 }
 
 /**
@@ -126,7 +112,7 @@ const TextArea: FunctionComponent<Props> = (props) => {
     error,
     hint,
     label,
-    optionalLabel
+    optionalLabel,
   } = props;
 
   const oid = useOid(id);
@@ -138,10 +124,7 @@ const TextArea: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
-  const ariaDescribedBy = useCx(
-    hint && `${oid}-hint`,
-    error && `${oid}-error`
-  )
+  const ariaDescribedBy = useCx(hint && `${oid}-hint`, error && `${oid}-error`);
 
   return (
     <Field

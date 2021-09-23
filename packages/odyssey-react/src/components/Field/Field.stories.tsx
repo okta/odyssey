@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 import { Story } from "@storybook/react";
 import Field from ".";
 import TextInput from "../TextInput";
@@ -27,61 +27,61 @@ export default {
   argTypes: {
     label: {
       defaultValue: "Destination star",
-      control: { type: "text" }
+      control: { type: "text" },
     },
     hint: {
       defaultValue: "The stellar object you are traveling to",
-      control: { type: "text" }
+      control: { type: "text" },
     },
     error: {
       defaultValue: "This field cannot be left blank.",
-      control: { type: "text" }
+      control: { type: "text" },
     },
     name: {
       defaultValue: "destination",
-      control: { type: "text" }
-    }
-  }
+      control: { type: "text" },
+    },
+  },
 };
 
-const Template: Story<Props> = ({label, hint, error, name, as, children}) => 
-  React.cloneElement(children, {label, hint, error, name, as});
+const Template: Story<Props> = ({ label, hint, error, name, as, children }) =>
+  React.cloneElement(children, { label, hint, error, name, as });
 
 export const WithTextInput = Template.bind({});
-WithTextInput.storyName = 'with TextInput'
+WithTextInput.storyName = "with TextInput";
 WithTextInput.args = {
-  children: <TextInput />
-}
+  children: <TextInput />,
+};
 
 export const withRadioGroup = Template.bind({});
-withRadioGroup.storyName = 'with RadioGroup'
+withRadioGroup.storyName = "with RadioGroup";
 withRadioGroup.args = {
-  label: 'Select speed',
-  hint: 'A hint.',
-  error: 'An error has occured my guy',
+  label: "Select speed",
+  hint: "A hint.",
+  error: "An error has occured my guy",
   children: (
     <Radio.Group>
       <Radio.Button label="Lightspeed" value="light" />
       <Radio.Button label="Warp speed" value="warp" />
       <Radio.Button label="Ludicrous speed" value="ludicrous" />
     </Radio.Group>
-  )
-}
+  ),
+};
 
 export const withTextArea = Template.bind({});
-withTextArea.storyName = 'with TextArea'
+withTextArea.storyName = "with TextArea";
 withTextArea.args = {
-  children: <TextArea label="foo" />
-}
+  children: <TextArea label="foo" />,
+};
 
 export const withCheckbox = Template.bind({});
-withCheckbox.storyName = 'with Checkbox'
+withCheckbox.storyName = "with Checkbox";
 withCheckbox.args = {
-  children: <Checkbox label="foo" name="name" value="value" />
-}
+  children: <Checkbox label="foo" name="name" value="value" />,
+};
 
 export const withSelect = Template.bind({});
-withSelect.storyName = 'with Select'
+withSelect.storyName = "with Select";
 withSelect.args = {
-  children: <Select label="foo" />
-}
+  children: <Select label="foo" />,
+};

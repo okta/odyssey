@@ -10,19 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactNode, ReactElement } from 'react';
-import { useOmit } from '../../utils';
+import type { FunctionComponent, ReactNode, ReactElement } from "react";
+import { useOmit } from "../../utils";
 
-import Title from '../Title';
+import Title from "../Title";
 
-import styles from './Form.module.scss';
+import styles from "./Form.module.scss";
 
 export type Props = {
   /**
    * Content to be rendered within the Form. Avoid using direct children, put child content
    * within the provided Form static components (Form.Error, Form.Main, and Form.Actions)
    */
-  children: ReactElement | ReactElement[],
+  children: ReactElement | ReactElement[];
 
   /**
    * The title of the Form.
@@ -33,67 +33,52 @@ export type Props = {
    * A short description of the form.
    */
   desc?: string;
-
 };
 
 type PropsFormError = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 type PropsFormMain = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 type PropsFormActions = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type StaticComponents = {
-  Error: FunctionComponent<PropsFormError>,
-  Main: FunctionComponent<PropsFormMain>,
-  Actions: FunctionComponent<PropsFormActions>,
-}
+  Error: FunctionComponent<PropsFormError>;
+  Main: FunctionComponent<PropsFormMain>;
+  Actions: FunctionComponent<PropsFormActions>;
+};
 
 const Form: FunctionComponent<Props> & StaticComponents = (props) => {
-  const {
-    children,
-    title,
-    desc,
-    ...rest
-  } = props;
+  const { children, title, desc, ...rest } = props;
 
   const omitProps = useOmit(rest);
 
   return (
-    <form
-      {...omitProps}
-      className={styles.root}
-    >
+    <form {...omitProps} className={styles.root}>
       <header className={styles.header}>
-        { title && <Title visualLevel="3" children={ title } /> }
-        { desc && <p>{ desc }</p> }
+        {title && <Title visualLevel="3" children={title} />}
+        {desc && <p>{desc}</p>}
       </header>
-      { children }
+      {children}
     </form>
   );
 };
 
 Form.Error = ({ children }) => (
-  <section className={styles.error}>
-    {children}
-  </section>
+  <section className={styles.error}>{children}</section>
 );
 
 Form.Main = ({ children }) => (
-  <section className={styles.main}>
-    {children}
-  </section>
+  <section className={styles.main}>{children}</section>
 );
 
 Form.Actions = ({ children }) => (
-  <section className={styles.actions}>
-    {children}
-  </section>
+  <section className={styles.actions}>{children}</section>
 );
 
 export default Form;

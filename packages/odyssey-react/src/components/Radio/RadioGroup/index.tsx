@@ -32,11 +32,6 @@ export interface Props
   children: ReactElement | ReactElement[];
 
   /**
-   * The form field hint
-   */
-  hint?: string;
-
-  /**
    * The underlying input element name attribute for the group
    */
   name: string;
@@ -82,7 +77,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
     error,
     hint,
     label,
-    optionalLabel
+    optionalLabel,
   } = props;
 
   const oid = useOid(id);
@@ -95,6 +90,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
       label={label}
       optionalLabel={optionalLabel}
       required={required}
+      as="fieldset"
     >
       <RadioGroupProvider
         value={{

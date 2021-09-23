@@ -38,9 +38,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = (props) => (
-  <TextInput {...props} />
-);
+const Template: Story<Props> = (props) => <TextInput {...props} />;
 
 export const Text = Template.bind({});
 Text.args = {

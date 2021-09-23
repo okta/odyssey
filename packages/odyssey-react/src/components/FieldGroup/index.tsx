@@ -10,16 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactNode, ReactElement } from 'react';
-import { useOmit } from '../../utils';
+import type { FunctionComponent, ReactNode, ReactElement } from "react";
+import { useOmit } from "../../utils";
 
-import styles from './FieldGroup.module.scss';
+import styles from "./FieldGroup.module.scss";
 
 export type Props = {
   /**
    * Content to be rendered within the FieldGroup.
    */
-  children: ReactElement | ReactElement[],
+  children: ReactElement | ReactElement[];
 
   /**
    * The title of the FieldGroup.
@@ -30,44 +30,32 @@ export type Props = {
    * A short description of the FieldGroup.
    */
   desc?: string;
-
 };
 
 type PropsFieldGroupError = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type StaticComponents = {
-  Error: FunctionComponent<PropsFieldGroupError>,
-}
+  Error: FunctionComponent<PropsFieldGroupError>;
+};
 
 const FieldGroup: FunctionComponent<Props> & StaticComponents = (props) => {
-  const {
-    children,
-    title,
-    desc,
-    ...rest
-  } = props;
+  const { children, title, desc, ...rest } = props;
 
   const omitProps = useOmit(rest);
 
   return (
-    <fieldset
-      {...omitProps}
-      className={styles.root}
-    >
-      { title && <legend className={styles.title}>{ title }</legend> }
-      { desc && <p>{ desc }</p> }
-      { children }
+    <fieldset {...omitProps} className={styles.root}>
+      {title && <legend className={styles.title}>{title}</legend>}
+      {desc && <p>{desc}</p>}
+      {children}
     </fieldset>
   );
 };
 
 FieldGroup.Error = ({ children }) => (
-  <section className={styles.error}>
-    {children}
-  </section>
+  <section className={styles.error}>{children}</section>
 );
 
 export default FieldGroup;
-

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback } from 'react';
+import { useCallback } from "react";
 import type {
   FunctionComponent,
   FocusEventHandler,
@@ -43,7 +43,7 @@ export type Props = {
    * Callback to provide a reference to the underlying input element
    * @param {Object} instance the input element or null
    */
-  inputRef?: RefCallback<HTMLInputElement>,
+  inputRef?: RefCallback<HTMLInputElement>;
 
   /**
    * The underlying input element name attribute
@@ -81,26 +81,26 @@ export type Props = {
   /**
    * The initial input element value for uncontrolled components
    */
-  defaultValue?: string,
+  defaultValue?: string;
 
   /**
    * Callback executed when the input fires a blur event
    * @param {Object} event the event object
    */
-  onBlur?: FocusEventHandler<HTMLInputElement>,
+  onBlur?: FocusEventHandler<HTMLInputElement>;
 
   /**
    * Callback executed when the input fires a change event
    * @param {Object} event the event object
    * @param {string} value the string value of the input
    */
-  onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void,
+  onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
 
   /**
-  * Callback executed when the input fires a focus event
-  * @param {Object} event the event object
-  */
-  onFocus?: FocusEventHandler<HTMLInputElement>
+   * Callback executed when the input fires a focus event
+   * @param {Object} event the event object
+   */
+  onFocus?: FocusEventHandler<HTMLInputElement>;
 }
 
 /**
@@ -119,13 +119,13 @@ const TextInput: FunctionComponent<Props> = (props) => {
     placeholder,
     readonly = false,
     required = true,
-    type = 'text',
+    type = "text",
     value,
     // @todo pass the following in to field
     error,
     hint,
     label,
-    optionalLabel
+    optionalLabel,
   } = props;
 
   const oid = useOid(id);
@@ -137,28 +137,27 @@ const TextInput: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
-  const ariaDescribedBy = useCx(
-    hint && `${oid}-hint`,
-    error && `${oid}-error`
-  )
+  const ariaDescribedBy = useCx(hint && `${oid}-hint`, error && `${oid}-error`);
 
-  const input = <input
-    aria-describedby={ariaDescribedBy}
-    className={styles.root}
-    disabled={disabled}
-    id={oid}
-    name={name}
-    onChange={handleChange}
-    onBlur={onBlur}
-    onFocus={onFocus}
-    placeholder={placeholder}
-    readOnly={readonly}
-    ref={inputRef}
-    required={required}
-    type={type}
-    defaultValue={defaultValue}
-    value={value}
-  />;
+  const input = (
+    <input
+      aria-describedby={ariaDescribedBy}
+      className={styles.root}
+      disabled={disabled}
+      id={oid}
+      name={name}
+      onChange={handleChange}
+      onBlur={onBlur}
+      onFocus={onFocus}
+      placeholder={placeholder}
+      readOnly={readonly}
+      ref={inputRef}
+      required={required}
+      type={type}
+      defaultValue={defaultValue}
+      value={value}
+    />
+  );
 
   return (
     <fieldset className={styles.fieldset}>
@@ -173,9 +172,11 @@ const TextInput: FunctionComponent<Props> = (props) => {
           </span>
           {input}
         </span>
-      ): input}
+      ) : (
+        input
+      )}
     </Field>
-  )
+  );
 };
 
 export default TextInput;

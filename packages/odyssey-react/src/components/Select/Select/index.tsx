@@ -35,25 +35,9 @@ export interface Props
   children: ReactElement | ReactElement[];
 
   /**
-   * The form field hint
-   */
-  hint?: string;
-
-  /**
-   * The form field label
-   */
-  label: string;
-
-  /**
    * The underlying select element id attribute. Automatically generated if not provided
    */
   id?: string;
-
-  /**
-   * Text to display when the select is optional, i.e. required prop is false
-   */
-  optionalLabel?: string;
-
   /**
    * The underlying select element name attribute for the group
    */

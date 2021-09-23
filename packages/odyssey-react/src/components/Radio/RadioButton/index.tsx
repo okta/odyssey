@@ -40,14 +40,7 @@ export interface Props
  * the user to choose only one option at a time.
  */
 const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const {
-    id,
-    label,
-    value,
-    hint,
-    error,
-    ...rest
-  } = props;
+  const { id, label, value, hint, error, ...rest } = props;
 
   const {
     value: controlledValue,
@@ -63,10 +56,7 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
   const checked = value === controlledValue;
 
-  const ariaDescribedBy = useCx(
-    hint && `${oid}-hint`,
-    error && `${oid}-error`
-  )
+  const ariaDescribedBy = useCx(hint && `${oid}-hint`, error && `${oid}-error`);
 
   return (
     <>
