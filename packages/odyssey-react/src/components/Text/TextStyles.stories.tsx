@@ -27,7 +27,6 @@ export default {
 const Template: Story<Props> = ({ children, ...rest }) => (
   <Text {...rest}>{children}</Text>
 );
-
 const TemplateWithContainer: Story<Props> = ({ children, ...rest }) => (
   <div
     style={{
@@ -35,7 +34,8 @@ const TemplateWithContainer: Story<Props> = ({ children, ...rest }) => (
       width: "min-content",
       maxWidth: "8em",
       height: "200px",
-      padding: "1rem",
+      paddingBlock: "1rem",
+      paddingInline: "1rem",
     }}
   >
     <Text {...rest}>{children}</Text>
@@ -103,17 +103,17 @@ WeightBold.args = {
 
 // Style
 export const StyleNormal = Template.bind({});
-StyleNormal.storyName = "Style: Normal (default)";
+StyleNormal.storyName = "Font style: Normal (default)";
 StyleNormal.args = {
   children: "Normal text Style",
-  style: "normal",
+  fontStyle: "normal",
 };
 
 export const StyleItalic = Template.bind({});
-StyleItalic.storyName = "Style: Italic";
+StyleItalic.storyName = "Font style: Italic";
 StyleItalic.args = {
   children: "Italic text Style",
-  style: "italic",
+  fontStyle: "italic",
 };
 
 // Transform
@@ -195,7 +195,7 @@ WrapNormal.args = {
 };
 
 export const WrapBreakWord = TemplateWithContainer.bind({});
-WrapBreakWord.storyName = "Wrap: BreakWord (default)";
+WrapBreakWord.storyName = "Wrap: Break word (default)";
 WrapBreakWord.args = {
   children: (
     <>
