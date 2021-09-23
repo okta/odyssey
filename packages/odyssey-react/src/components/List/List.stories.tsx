@@ -10,37 +10,37 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactElement } from "react"
+import type { ReactElement } from "react";
 import type { Story } from "@storybook/react";
 import type { Props } from "./List";
 import List from ".";
 
 export default {
   title: `Components/List`,
-  component: List
+  component: List,
 };
 
-const Template: Story<Props> = ({listType, unstyled}) => (
+const Template: Story<Props> = ({ listType, unstyled }) => (
   <List listType={listType} unstyled={unstyled}>
     <List.Item>Item 1</List.Item>
     <List.Item>Item 2</List.Item>
   </List>
-)
+);
 
 export const Default = Template.bind({});
 Default.args = {
-  listType: 'unordered',
-  unstyled: false
+  listType: "unordered",
+  unstyled: false,
 };
 
-export const OrderedList = ():ReactElement=> (
+export const OrderedList = (): ReactElement => (
   <List listType="ordered">
     <List.Item>Item 1</List.Item>
     <List.Item>Item 2</List.Item>
   </List>
 );
 
-export const DescriptionList = ():ReactElement=> (
+export const DescriptionList = (): ReactElement => (
   <List listType="description">
     <List.Term>Term 1</List.Term>
     <List.Details>Detail 1.1</List.Details>
@@ -50,7 +50,7 @@ export const DescriptionList = ():ReactElement=> (
   </List>
 );
 
-export const UnstyledList = ():ReactElement=> (
+export const UnstyledList = (): ReactElement => (
   <List unstyled={true}>
     <List.Item>Item 1</List.Item>
     <List.Item>Item 2</List.Item>
