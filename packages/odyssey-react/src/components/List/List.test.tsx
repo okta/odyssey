@@ -14,65 +14,57 @@ import { render } from "@testing-library/react";
 import List from "./List";
 
 describe("List", () => {
-  it('renders visibly into the document', () => {
-    const { getByRole } = render(
-      <List />
-    );
+  it("renders visibly into the document", () => {
+    const { getByRole } = render(<List />);
 
-    expect(getByRole('list')).toBeVisible();
+    expect(getByRole("list")).toBeVisible();
   });
 
   it("displays as an ordered list", () => {
-    const { getByRole } = render(
-      <List listType="ordered" />
-    );
-    expect(getByRole('list').tagName.toLowerCase() === 'ol').toBe(true);
+    const { getByRole } = render(<List listType="ordered" />);
+    expect(getByRole("list").tagName.toLowerCase() === "ol").toBe(true);
   });
 
   it("displays as a description list", () => {
-    const { getByRole } = render(
-      <List listType="description" role="list" />
-    );
-    expect(getByRole('list').tagName.toLowerCase() === 'dl').toBe(true);
+    const { getByRole } = render(<List listType="description" role="list" />);
+    expect(getByRole("list").tagName.toLowerCase() === "dl").toBe(true);
   });
 
   it("adds the proper class for unstyled prop", () => {
-    const { getByRole } = render(
-      <List unstyled={true} />
-    );
-    expect(getByRole('list').classList.contains('unstyled')).toBe(true);
+    const { getByRole } = render(<List unstyled={true} />);
+    expect(getByRole("list").classList.contains("unstyled")).toBe(true);
   });
 });
 
 describe("ListItem", () => {
-  it('renders visibly into the document', () => {
+  it("renders visibly into the document", () => {
     const { getByRole } = render(
       <List>
         <List.Item>item</List.Item>
       </List>
     );
 
-    expect(getByRole('listitem')).toBeVisible();
+    expect(getByRole("listitem")).toBeVisible();
   });
 });
 
 describe("DescriptionTerm", () => {
-  it('renders visibly into the document', () => {
+  it("renders visibly into the document", () => {
     const { getByText } = render(
       <List listType="description">
         <List.Term>term</List.Term>
         <List.Details>details</List.Details>
       </List>
     );
-    
+
     // TODO :: Change to getByRole("term") when bug is resolved upstream
     // https://github.com/testing-library/dom-testing-library/issues/703
-    expect(getByText('term')).toBeVisible();
+    expect(getByText("term")).toBeVisible();
   });
 });
 
 describe("DescriptionDetails", () => {
-  it('renders visibly into the document', () => {
+  it("renders visibly into the document", () => {
     const { getByRole } = render(
       <List listType="description">
         <List.Term>term</List.Term>
@@ -80,6 +72,6 @@ describe("DescriptionDetails", () => {
       </List>
     );
 
-    expect(getByRole('definition')).toBeVisible();
+    expect(getByRole("definition")).toBeVisible();
   });
 });
