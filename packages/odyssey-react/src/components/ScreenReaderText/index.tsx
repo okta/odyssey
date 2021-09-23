@@ -10,42 +10,37 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithoutRef, FunctionComponent, ReactText } from 'react';
-import { useOmit } from '../../utils';
-import styles from './ScreenReaderText.module.scss';
+import type {
+  ComponentPropsWithoutRef,
+  FunctionComponent,
+  ReactText,
+} from "react";
+import { useOmit } from "../../utils";
+import styles from "./ScreenReaderText.module.scss";
 
-export interface Props extends Omit<
-  ComponentPropsWithoutRef<'span'>,
-  'style' | 'className'
-> {
-    /**
-     * Visibly hidden / SR-only text
-     */
-    children: ReactText,
+export interface Props
+  extends Omit<ComponentPropsWithoutRef<"span">, "style" | "className"> {
+  /**
+   * Visibly hidden / SR-only text
+   */
+  children: ReactText;
 
-    /**
-     * The underlying parent semantic HTML element.
-     * @default span
-     */
-    as?: 'span' | 'em' | 'strong'
+  /**
+   * The underlying parent semantic HTML element.
+   * @default span
+   */
+  as?: "span" | "em" | "strong";
 }
 
 const ScreenReaderText: FunctionComponent<Props> = (props) => {
-  const {
-    children,
-    as = 'span',
-    ...rest
-  } = props;
+  const { children, as = "span", ...rest } = props;
 
   const Tag = as;
 
   const omitProps = useOmit(rest);
 
   return (
-    <Tag
-      {...omitProps}
-      className={styles.root}
-    >
+    <Tag {...omitProps} className={styles.root}>
       {children}
     </Tag>
   );

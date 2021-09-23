@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Warning } from 'postcss';
+import type { Warning } from "postcss";
 
 export default function formatWarnings(warnings: Warning[]): string {
   return warnings
     .map((warning) => `POSTCSS WARNING: [${warning.plugin}]: ${warning.text}`)
-    .join("\n")
+    .join("\n");
 }

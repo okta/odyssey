@@ -10,49 +10,49 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { PluginCreator } from 'postcss'
-import type { CssNanoOptions } from 'cssnano';
-import type { Options as AutoPrefixerOptions } from 'autoprefixer';
-import type PostcssModulesPlugin from 'postcss-modules';
-import postcss from 'postcss';
-import postcssModules from 'postcss-modules';
-import cssnano from 'cssnano';
-import autoprefixer from 'autoprefixer';
+import type { PluginCreator } from "postcss";
+import type { CssNanoOptions } from "cssnano";
+import type { Options as AutoPrefixerOptions } from "autoprefixer";
+import type PostcssModulesPlugin from "postcss-modules";
+import postcss from "postcss";
+import postcssModules from "postcss-modules";
+import cssnano from "cssnano";
+import autoprefixer from "autoprefixer";
 
 interface PluginOptions {
-  cssnano?: CssNanoOptions,
-  autoprefixer?: AutoPrefixerOptions,
-  modules?: Parameters<PostcssModulesPlugin>[number]
+  cssnano?: CssNanoOptions;
+  autoprefixer?: AutoPrefixerOptions;
+  modules?: Parameters<PostcssModulesPlugin>[number];
 }
 
 const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
   const opts: Required<PluginOptions> = {
     modules: {
-      generateScopedName: 'ods-[hash:hex:6]',
-      ...optsArgs.modules
+      generateScopedName: "ods-[hash:hex:6]",
+      ...optsArgs.modules,
     },
     cssnano: {
       preset: [
-        'default',
+        "default",
         {
           discardComments: {
             removeAll: true,
           },
-        }
+        },
       ],
-      ...optsArgs.cssnano
+      ...optsArgs.cssnano,
     },
     autoprefixer: {
-      ...optsArgs.autoprefixer
-    }
-  }
+      ...optsArgs.autoprefixer,
+    },
+  };
 
   return postcss([
     postcssModules(opts.modules),
     cssnano(opts.cssnano) as PluginCreator<CssNanoOptions>,
-    autoprefixer(opts.autoprefixer)
-  ])
-}
+    autoprefixer(opts.autoprefixer),
+  ]);
+};
 
-plugin.postcss = true
-export { plugin as default }
+plugin.postcss = true;
+export { plugin as default };

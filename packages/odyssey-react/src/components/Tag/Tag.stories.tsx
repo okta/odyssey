@@ -19,11 +19,9 @@ export default {
   component: Tag,
 };
 
-const Template: Story<Props> = ({ tags }) => (
-  <Tag tags={tags} />
-)
+const Template: Story<Props> = ({ tags }) => <Tag tags={tags} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  tags: ["Item one", "Item two", "Item three"]
+  tags: ["Item one", "Item two", "Item three"],
 };

@@ -11,8 +11,11 @@
  */
 
 // Typography
-$body-font-family: 'Public Sans', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif;
-$mono-font-family: 'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace;
+$body-font-family: "Public Sans", "-apple-system", "BlinkMacSystemFont",
+  "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue",
+  "Noto Sans Arabic", sans-serif;
+$mono-font-family: "Inconsolata", "SFMono-Regular", "Consolas",
+  "Liberation Mono", "Menlo", "Courier", monospace;
 
 $base-font-size: 16px;
 $scale-ratio: 1.1487;
@@ -34,30 +37,30 @@ $size-body-base: ms(0);
 $size-body-caption: ms(-1);
 
 // Semantic Variables
-$color-primary-light: cv('blue', '300');
-$color-primary-base: cv('blue', '500');
-$color-primary-dark: cv('blue', '900');
+$color-primary-light: cv("blue", "300");
+$color-primary-base: cv("blue", "500");
+$color-primary-dark: cv("blue", "900");
 
-$color-danger-light: cv('red', '300');
-$color-danger-base: cv('red', '500');
-$color-danger-dark: cv('red', '900');
+$color-danger-light: cv("red", "300");
+$color-danger-base: cv("red", "500");
+$color-danger-dark: cv("red", "900");
 
 // TODO: color-caution-base and color-success-base not documented
-$color-caution-base: cv('yellow', '500');
-$color-success-base: cv('green', '500');
+$color-caution-base: cv("yellow", "500");
+$color-success-base: cv("green", "500");
 
 // Background
-$color-danger-base-disabled: cv('red', '300');
+$color-danger-base-disabled: cv("red", "300");
 
 // Outlines
 $focus-ring-primary: $color-primary-light;
 $focus-ring-danger: $color-danger-light;
 
 // Text Color
-$text-body: cv('gray', '900');
-$text-heading: cv('gray', '900');
-$text-sub: cv('gray', '600');
-$text-code: cv('gray', '900');
+$text-body: cv("gray", "900");
+$text-heading: cv("gray", "900");
+$text-sub: cv("gray", "600");
+$text-code: cv("gray", "900");
 $text-danger: $color-danger-base;
 $text-danger-disabled: $color-danger-light;
 
@@ -69,8 +72,8 @@ $spacing-s: $spacing-m * 0.5;
 $spacing-xs: $spacing-s * 0.5;
 
 // Input disabled
-$bg-input-disabled: cv('gray', '000');
-$border-input-disabled: cv('gray', '200');
+$bg-input-disabled: cv("gray", "000");
+$border-input-disabled: cv("gray", "200");
 
 // TODO: Sort the rest out, these come from a now defunct variables.scss file.
 //       need to be documented
@@ -88,6 +91,6 @@ $base-duration: 100ms;
 $base-timing: linear;
 
 // Borders
-$border-color-ui: cv('gray', '500');
-$border-color-display: cv('gray', '200');
+$border-color-ui: cv("gray", "500");
+$border-color-display: cv("gray", "200");
 $base-border-radius: 4px;

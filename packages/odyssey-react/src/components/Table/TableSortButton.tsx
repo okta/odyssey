@@ -10,35 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ComponentProps } from 'react';
-import { forwardRef } from 'react';
+import type { ReactNode, ComponentProps } from "react";
+import { forwardRef } from "react";
 
-import { useCx, useOmit } from '../../utils';
-import { Sort, SortAsc, SortDesc } from '../Icon';
-import ScreenReaderText from '../ScreenReaderText';
+import { useCx, useOmit } from "../../utils";
+import { Sort, SortAsc, SortDesc } from "../Icon";
+import ScreenReaderText from "../ScreenReaderText";
 
-import styles from './Table.module.scss';
+import styles from "./Table.module.scss";
 
-export type TableSortDirections = 'asc' | 'desc' | 'unsorted' ;
+export type TableSortDirections = "asc" | "desc" | "unsorted";
 
 export type Props = {
-  children?: ReactNode,
-  direction: TableSortDirections,
-} & ComponentProps<'button'>
+  children?: ReactNode;
+  direction: TableSortDirections;
+} & ComponentProps<"button">;
 
 type Ref = HTMLButtonElement;
 
 const TableSortButton = forwardRef<Ref, Props>((props, ref) => {
-  const {
-    children,
-    direction = 'unsorted',
-    ...rest
-  } = props;
+  const { children, direction = "unsorted", ...rest } = props;
 
-  const componentClass = useCx(
-    styles.sort,
-    styles[`${direction}Direction`],
-  );
+  const componentClass = useCx(styles.sort, styles[`${direction}Direction`]);
 
   const omitProps = useOmit(rest);
 
@@ -46,9 +39,9 @@ const TableSortButton = forwardRef<Ref, Props>((props, ref) => {
     <button ref={ref} className={componentClass} {...omitProps}>
       {children}
       <span className={styles.sortIndicator}>
-        { direction === 'unsorted' && <Sort title="Unsorted" /> }
-        { direction === 'asc' && <SortAsc title="Ascending" /> }
-        { direction === 'desc' && <SortDesc title="Descending" /> }
+        {direction === "unsorted" && <Sort title="Unsorted" />}
+        {direction === "asc" && <SortAsc title="Ascending" />}
+        {direction === "desc" && <SortDesc title="Descending" />}
       </span>
       <ScreenReaderText>click to sort</ScreenReaderText>
     </button>

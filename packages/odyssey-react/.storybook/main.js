@@ -11,6 +11,6 @@
  */
 
 module.exports = {
-  presets: ['@okta/odyssey-storybook'],
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)']
+  presets: ["@okta/odyssey-storybook"],
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
 };

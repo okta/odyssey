@@ -10,31 +10,29 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef } from 'react';
-import type { ComponentPropsWithRef } from 'react';
-import { useRadioGroup } from '../context';
-import { useOid, useOmit } from '../../../utils';
+import { forwardRef } from "react";
+import type { ComponentPropsWithRef } from "react";
+import { useRadioGroup } from "../context";
+import { useOid, useOmit } from "../../../utils";
 
-import styles from '../RadioButton.module.scss'
+import styles from "../RadioButton.module.scss";
 
-export interface Props extends Omit<
-  ComponentPropsWithRef<'input'>,
-  'style' | 'className'
-> {
+export interface Props
+  extends Omit<ComponentPropsWithRef<"input">, "style" | "className"> {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
-  id?: string,
+  id?: string;
 
   /**
    * The form field label
    */
-  label: string,
+  label: string;
 
   /**
    * The underlying input element value attribute
    */
-  value: string,
+  value: string;
 }
 
 /**
@@ -42,19 +40,14 @@ export interface Props extends Omit<
  * the user to choose only one option at a time.
  */
 const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const {
-    id,
-    label,
-    value,
-    ...rest
-  } = props;
+  const { id, label, value, ...rest } = props;
 
   const {
     value: controlledValue,
     onChange,
     disabled,
     required,
-    name
+    name,
   } = useRadioGroup();
 
   const oid = useOid(id);
@@ -78,11 +71,7 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
         type="radio"
         value={value}
       />
-      <label
-        children={label}
-        className={styles.label}
-        htmlFor={oid}
-      />
+      <label children={label} className={styles.label} htmlFor={oid} />
     </>
   );
 });

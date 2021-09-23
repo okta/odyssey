@@ -11,69 +11,74 @@
  */
 
 import { createContext, useContext, useMemo, useRef } from "react";
-import type { FunctionComponent, ReactElement, ReactNode, ReactText } from "react";
+import type {
+  FunctionComponent,
+  ReactElement,
+  ReactNode,
+  ReactText,
+} from "react";
 import { createPortal } from "react-dom";
 import Button from "../Button";
 import type { ButtonVariants } from "../Button";
-import Title from '../Title';
+import Title from "../Title";
 import { useOid, useCx } from "../../utils";
-import styles from './Modal.module.scss';
+import styles from "./Modal.module.scss";
 
 export type PropsModal = {
   /**
    * The modal content, should use the Static components provided by Modal (Modal.Header, Modal.Body and Modal.Footer)
    */
-  children: ReactElement | ReactElement[],
+  children: ReactElement | ReactElement[];
 
   /**
    * The modal id attribute. Automatically generated if not provided.
    */
-  id?: string,
+  id?: string;
 
   /**
    * Determines whether or not the modal is visible.
    */
-  open: boolean,
+  open: boolean;
 
   /**
    * Callback when the modal is opened.
    */
-   onOpen?: () => void,
+  onOpen?: () => void;
 
   /**
    * Callback when the modal is closed.
    */
-  onClose: () => void,
-}
+  onClose: () => void;
+};
 
 export type PropsModalHeader = {
-  children: ReactText
-}
+  children: ReactText;
+};
 
 export type PropsModalBody = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type PropsModalFooter = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type PropsModalButton = {
-  close?: boolean,
-  children: ReactText,
-  variant?: ButtonVariants,
-  onClick?: () => void
-}
+  close?: boolean;
+  children: ReactText;
+  variant?: ButtonVariants;
+  onClick?: () => void;
+};
 
 export type StaticComponents = {
-  Header: FunctionComponent<PropsModalHeader>,
-  Body: FunctionComponent<PropsModalBody>,
-  Footer: FunctionComponent<PropsModalFooter>,
-  Button: FunctionComponent<PropsModalButton>
-}
+  Header: FunctionComponent<PropsModalHeader>;
+  Body: FunctionComponent<PropsModalBody>;
+  Footer: FunctionComponent<PropsModalFooter>;
+  Button: FunctionComponent<PropsModalButton>;
+};
 
 export interface ModalContext {
-  onClose?: () => void,
+  onClose?: () => void;
   modalTitleId?: string;
 }
 export const ModalContext = createContext<ModalContext>({});
@@ -104,13 +109,13 @@ export const ModalContext = createContext<ModalContext>({});
 const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
   const { children, id, open = false, onClose, onOpen } = props;
   const modalTitleId = useOid();
-  const context = useMemo(() => ({ onClose, modalTitleId }), [onClose, modalTitleId]);
+  const context = useMemo(
+    () => ({ onClose, modalTitleId }),
+    [onClose, modalTitleId]
+  );
   const oid = useOid(id);
   const modalDialog = useRef<HTMLDivElement>(null);
-  const componentClass = useCx(
-    styles.root,
-    { [styles.openState]: open }
-  );
+  const componentClass = useCx(styles.root, { [styles.openState]: open });
 
   if (open && onOpen) {
     onOpen();
@@ -118,19 +123,30 @@ const Modal: FunctionComponent<PropsModal> & StaticComponents = (props) => {
 
   return createPortal(
     <ModalContext.Provider value={context}>
-      <div className={componentClass} id={oid} aria-hidden={!open} data-testid="ods-modal">
+      <div
+        className={componentClass}
+        id={oid}
+        aria-hidden={!open}
+        data-testid="ods-modal"
+      >
         <div className={styles.overlay} tabIndex={-1}>
-          <div className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby={modalTitleId} ref={modalDialog}>
+          <div
+            className={styles.dialog}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={modalTitleId}
+            ref={modalDialog}
+          >
             {children}
           </div>
         </div>
       </div>
     </ModalContext.Provider>,
     document.body
-  )
+  );
 };
 
-Modal.Header = function ModalHeader ({ children }) {
+Modal.Header = function ModalHeader({ children }) {
   const { modalTitleId } = useContext(ModalContext);
   return (
     <header className={styles.header}>
@@ -152,20 +168,20 @@ Modal.Header = function ModalHeader ({ children }) {
 };
 
 Modal.Body = ({ children }) => (
-  <main className={ styles.content }>
-    { children }
-  </main>
+  <main className={styles.content}>{children}</main>
 );
 
 Modal.Footer = ({ children }) => (
-  <footer className={styles.footer}>
-    {children}
-  </footer>
+  <footer className={styles.footer}>{children}</footer>
 );
 
-Modal.Button = function ModalButton ({ children, variant, close, onClick }) {
+Modal.Button = function ModalButton({ children, variant, close, onClick }) {
   const { onClose } = useContext(ModalContext);
-  return <Button variant={variant} onClick={close ? onClose : onClick}>{children}</Button>;
+  return (
+    <Button variant={variant} onClick={close ? onClose : onClick}>
+      {children}
+    </Button>
+  );
 };
 
-export default Modal
+export default Modal;

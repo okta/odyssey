@@ -11,7 +11,7 @@
  */
 
 module.exports = {
-  "*": "yarn prettier --write . --ignore-path .gitignore",
+  "*": "yarn prettier --check . --ignore-path .gitignore",
   ".scss": "stylelint",
   ".js,.jsx,.ts,.tsx": "eslint .",
 };

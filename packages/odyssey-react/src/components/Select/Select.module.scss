@@ -44,10 +44,12 @@
     box-shadow: 0 0 0 4px $color-primary-light;
 
     &.open {
-      box-shadow: 0 0 0 4px $color-primary-light, 0 2px 0 4px $color-primary-light;
+      box-shadow: 0 0 0 4px $color-primary-light,
+        0 2px 0 4px $color-primary-light;
 
       &.flipped {
-        box-shadow: 0 0 0 4px $color-primary-light, 0 -2px 0 4px $color-primary-light;
+        box-shadow: 0 0 0 4px $color-primary-light,
+          0 -2px 0 4px $color-primary-light;
       }
     }
   }
@@ -93,10 +95,12 @@
       outline: none;
 
       &.open {
-        box-shadow: 0 0 0 4px $color-danger-light, 0 2px 0 4px $color-danger-light;
+        box-shadow: 0 0 0 4px $color-danger-light,
+          0 2px 0 4px $color-danger-light;
 
         &.flipped {
-          box-shadow: 0 0 0 4px $color-danger-light, 0 -2px 0 4px $color-danger-light;
+          box-shadow: 0 0 0 4px $color-danger-light,
+            0 -2px 0 4px $color-danger-light;
         }
       }
     }
@@ -116,8 +120,8 @@
   position: relative;
 }
 
-.root[data-type*='select-one'],
-.root[data-type*='select-multiple'] {
+.root[data-type*="select-one"],
+.root[data-type*="select-multiple"] {
   .input {
     display: inline-block;
     width: 100%;
@@ -155,7 +159,7 @@
     }
   }
 
-  .item[data-value=''] .button {
+  .item[data-value=""] .button {
     display: none;
   }
 
@@ -172,7 +176,7 @@
     transform: translateY(-50%) rotate(180deg);
   }
 
-  &[dir='rtl'] {
+  &[dir="rtl"] {
     .indicator {
       inset-inline-end: auto;
       inset-inline-start: 11.5px;
@@ -187,14 +191,14 @@
   }
 }
 
-.root[data-type*='select-one'] {
+.root[data-type*="select-one"] {
   .button {
     display: none; // remove this functionality for Single Select, unavailable via JS
   }
 }
 
-.root[data-type*='select-multiple'],
-.root[data-type*='text'] {
+.root[data-type*="select-multiple"],
+.root[data-type*="text"] {
   .inner {
     padding-block-end: 0;
     cursor: text;
@@ -214,7 +218,7 @@
     padding-block: 0;
     padding-inline: 0;
     opacity: 1;
-    background-color: cv('blue', '400');
+    background-color: cv("blue", "400");
     line-height: 1;
 
     &:hover,
@@ -314,11 +318,13 @@
     padding-block: 0;
     padding-inline: $spacing-s;
     border: 1px solid $color-primary-light;
-    background-color: cv('blue', '000');
+    background-color: cv("blue", "000");
     color: $text-body;
     font-size: $size-body-base;
     font-weight: 400;
-    line-height: calc((#{$base-line-height} * 1em) - 2px); // Adjust for pill border
+    line-height: calc(
+      (#{$base-line-height} * 1em) - 2px
+    ); // Adjust for pill border
     overflow-wrap: break-word;
     vertical-align: middle;
 
@@ -326,7 +332,7 @@
       padding-inline-end: $spacing-xs;
     }
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       margin-inline-end: 0;
       margin-inline-start: $spacing-xs;
     }
@@ -402,7 +408,7 @@
     padding-inline: $spacing-s;
     font-size: $size-body-base;
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       text-align: end;
     }
 
@@ -425,7 +431,7 @@
         font-size: $size-body-caption;
       }
 
-      [dir='rtl'] & {
+      [dir="rtl"] & {
         padding-inline-end: $spacing-s;
         padding-inline-start: 100px;
         text-align: end;
@@ -438,7 +444,7 @@
     }
 
     &.highlighted {
-      background-color: cv('blue', '000');
+      background-color: cv("blue", "000");
 
       &::after {
         opacity: 0.5;
@@ -504,7 +510,7 @@
     outline: 0;
   }
 
-  [dir='rtl'] & {
+  [dir="rtl"] & {
     padding-inline-end: 2px;
     padding-inline-start: 0;
   }

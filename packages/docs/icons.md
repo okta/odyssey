@@ -6,8 +6,8 @@ title: Icons
 headline: Icons
 lede: A system of icons which establishes a visual language that can be easily understood regardless of age, language or culture.
 tabs:
-  - label: 'Overview'
-    id: 'overview'
+  - label: "Overview"
+    id: "overview"
 ---
 
 <div class="docskit-container">
