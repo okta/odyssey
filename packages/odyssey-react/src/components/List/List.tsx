@@ -27,20 +27,28 @@ import ListItem from './ListItem';
 import DescriptionTerm from './DescriptionTerm';
 import DescriptionDetails from './DescriptionDetails';
 
-export type Props = {
+type ListProps = {
   /**
   * List Items
   */
-  children?: ReactElement | ReactElement[],
+   children?: ReactElement | ReactElement[],
   /**
-   * List element used 
+  * List element used 
+  * @default unordered
+  */
+  listType?: 'unordered' | 'ordered' | 'description',
+  /**
+   * Remove default styling
+   * @default false
    */
-   listType?: 'unordered' | 'ordered' | 'description',
-   /**
-    * Remove default styling
-    */
-   unstyled?: boolean,
-} & ComponentPropsWithRef<'ul'> & ComponentPropsWithRef<'ol'> & ComponentPropsWithRef<'dl'>;
+  unstyled?: boolean,
+}
+
+type UnorderedProps = ListProps & ComponentPropsWithRef<'ul'>;
+type OrderedProps = ListProps & ComponentPropsWithRef<'ol'>;
+type DescriptionProps = ListProps & ComponentPropsWithRef<'dl'>;
+
+export type Props = UnorderedProps | OrderedProps | DescriptionProps;
 
 type Statics = {
   Item: typeof ListItem,
@@ -66,20 +74,20 @@ const List = forwardRefWithStatics<HTMLElement, Props, Statics>((props, ref) => 
   function ListElement() {
     if (listType === 'ordered') {
       return (
-        <ol className={componentClass} ref={ref as ForwardedRef<HTMLOListElement>} {...omitProps}>
+        <ol {...omitProps} className={componentClass} ref={ref as ForwardedRef<HTMLOListElement>}>
           {children}
         </ol >
       );
     }
     else if (listType === 'description'){
       return (
-        <dl className={componentClass} ref={ref as ForwardedRef<HTMLDListElement>} {...omitProps}>
+        <dl {...omitProps} className={componentClass} ref={ref as ForwardedRef<HTMLDListElement>}>
           {children}
         </dl >
       );
     }
     return (
-      <ul className={componentClass} ref={ref as ForwardedRef<HTMLUListElement>} {...omitProps}>
+      <ul {...omitProps} className={componentClass} ref={ref as ForwardedRef<HTMLUListElement>}>
         {children}
       </ul >
     );
