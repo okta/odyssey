@@ -13,30 +13,32 @@
 import type {
   ComponentPropsWithoutRef,
   FunctionComponent,
-  ReactText,
-} from "react";
-import { useCx, useOmit } from "../../utils";
-import styles from "./Title.module.scss";
+  ReactText
+} from 'react';
+import { useCx, useOmit } from '../../utils';
+import styles from './Title.module.scss';
 
-type Levels = "1" | "2" | "3" | "4" | "5" | "6";
+type Levels = '1' | '2' | '3' | '4' | '5' | '6';
 
-export interface Props
-  extends Omit<ComponentPropsWithoutRef<"h1">, "style" | "className"> {
+export interface Props extends Omit<
+  ComponentPropsWithoutRef<'h1'>,
+  'style' | 'className'
+> {
   /**
    * The semantic level for the underlying heading tag
    * @default 1
    */
-  level?: Levels;
+  level?: Levels,
 
   /**
    * The visual level level for the underlying heading tag
    */
-  visualLevel?: Levels;
+  visualLevel?: Levels,
 
   /**
    * The human readable section title to be visually displayed
    */
-  children: ReactText;
+  children: ReactText,
 
   /**
    * Remove default block end margin
@@ -47,7 +49,7 @@ export interface Props
   /*
    * Specify explicit line height spacing
    */
-  lineHeight?: "base" | "title";
+  lineHeight?: 'base' | 'title';
 }
 
 /**
@@ -59,7 +61,7 @@ export interface Props
  */
 const Title: FunctionComponent<Props> = (props) => {
   const {
-    level = "1",
+    level = '1',
     visualLevel,
     children,
     noEndMargin = false,
@@ -79,9 +81,7 @@ const Title: FunctionComponent<Props> = (props) => {
   const omitProps = useOmit(rest);
 
   return (
-    <Tag {...omitProps} className={componentClass}>
-      {children}
-    </Tag>
+    <Tag {...omitProps} className={componentClass}>{children}</Tag>
   );
 };
 

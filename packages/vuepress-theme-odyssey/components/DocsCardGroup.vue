@@ -3,7 +3,7 @@
     :is="tag"
     :class="{
       'docs-card--group': true,
-      'is-2col': variant === '2col',
+      'is-2col': variant === '2col'
     }"
   >
     <slot></slot>
@@ -17,12 +17,12 @@ export default {
     variant: {
       type: String,
       required: false,
-      default: null,
+      default: null
     },
     tag: {
       type: String,
-      default: "div",
-    },
-  },
+      default: "div"
+    }
+  }
 };
 </script>

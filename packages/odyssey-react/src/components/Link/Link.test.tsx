@@ -14,49 +14,44 @@ import { render } from "@testing-library/react";
 // import type { EventType } from "@testing-library/dom";
 import Link from ".";
 
-const link = "link";
+const link = 'link';
 const href = `#anchor`;
 const label = `Link label`;
 
+
 describe("Checkbox", () => {
-  it("renders visibly into the document", () => {
-    const { getByRole } = render(<Link href={href}>{label}</Link>);
+  it('renders visibly into the document', () => {
+    const { getByRole } = render(
+      <Link href={href}>{label}</Link>
+    );
 
     expect(getByRole(link)).toBeVisible();
   });
 
-  it("renders href attributed as expected for link", () => {
-    const { getByRole } = render(<Link href={href}>{label}</Link>);
-
-    expect(getByRole(link)).toHaveAttribute("href", href);
-  });
-
-  it("renders target attributed as expected for link", () => {
+  it('renders href attributed as expected for link', () => {
     const { getByRole } = render(
-      <Link href={href} target="_blank">
-        {label}
-      </Link>
+      <Link href={href}>{label}</Link>
     );
 
-    expect(getByRole(link)).toHaveAttribute("target", "_blank");
+    expect(getByRole(link)).toHaveAttribute('href', href);
   });
 
-  it("renders rel attributed as expected for link", () => {
+  it('renders target attributed as expected for link', () => {
     const { getByRole } = render(
-      <Link href={href} rel="noopener">
-        {label}
-      </Link>
+      <Link href={href} target="_blank">{label}</Link>
     );
 
-    expect(getByRole(link)).toHaveAttribute("rel", "noopener");
+    expect(getByRole(link)).toHaveAttribute('target', '_blank');
   });
 
-  a11yCheck(() => render(<Link href={href}>{label}</Link>));
-  a11yCheck(() =>
-    render(
-      <Link href={href} variant="secondary">
-        {label}
-      </Link>
-    )
-  );
+  it('renders rel attributed as expected for link', () => {
+    const { getByRole } = render(
+      <Link href={href} rel="noopener">{label}</Link>
+    );
+
+    expect(getByRole(link)).toHaveAttribute('rel', 'noopener');
+  });
+
+  a11yCheck(() => render(<Link href={href}>{label}</Link>))
+  a11yCheck(() => render(<Link href={href} variant="secondary">{label}</Link>))
 });

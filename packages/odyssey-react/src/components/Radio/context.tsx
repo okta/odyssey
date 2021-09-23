@@ -10,16 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, useCallback, useContext, useState } from "react";
-import type { ReactElement } from "react";
-import type { Props } from "./RadioGroup";
+import { createContext, useCallback, useContext, useState } from 'react';
+import type { ReactElement } from 'react';
+import type { Props } from './RadioGroup';
 
 interface Context {
   value?: string;
   disabled?: boolean;
   name?: string;
   required?: boolean;
-  onChange?: Props["onChange"];
+  onChange?: Props['onChange'];
 }
 
 interface ProviderProps {
@@ -43,26 +43,33 @@ const useValue = ({ value, onChange, ...rest }: Context) => {
   return {
     ...rest,
     value: value ?? valueState,
-    onChange: onChangeWithState,
+    onChange: onChangeWithState
   };
 };
 
 const RadioGroupProvider = (props: ProviderProps): ReactElement => {
-  const { children, value = {} } = props;
+  const {
+    children,
+    value = {}
+  } = props;
 
-  return (
-    <RadioGroupContext.Provider value={useValue(value)} children={children} />
-  );
+  return <RadioGroupContext.Provider
+    value={useValue(value)}
+    children={children}
+  />;
 };
 
 const useRadioGroup = (): Context => {
   const context = useContext(RadioGroupContext);
 
   if (Object.keys(context).length === 0) {
-    throw new Error("useRadioGroup must be used within a RadioGroupProvider");
+    throw new Error('useRadioGroup must be used within a RadioGroupProvider');
   }
 
   return context;
 };
 
-export { RadioGroupProvider, useRadioGroup };
+export {
+  RadioGroupProvider,
+  useRadioGroup
+};

@@ -4,12 +4,7 @@
       <template v-slot:left>
         <!-- eslint-disable -->
         <button
-          class="
-            docs-topbar--action
-            ods-button
-            is-ods-button-clear
-            docs-sidebar--action
-          "
+          class="docs-topbar--action ods-button is-ods-button-clear docs-sidebar--action"
           @click="setSidebarState(true)"
           v-html="require(`!html-loader!../public/images/icon-hamburger.svg`)"
         />
@@ -55,7 +50,7 @@
           <div
             :class="{
               'docs-sidebar--main': true,
-              'is-overflowing': isOverflowing,
+              'is-overflowing': isOverflowing
             }"
           >
             <div ref="mainContent" class="docs-sidebar--main-content">
@@ -86,28 +81,28 @@ export default {
     FocusTrap,
     DocsLink: () => import("./DocsLink.vue"),
     DocsNav: () => import("../components/DocsNav.vue"),
-    DocsTopbar: () => import("../components/DocsTopbar.vue"),
+    DocsTopbar: () => import("../components/DocsTopbar.vue")
   },
   props: {
     showSearch: {
       type: Boolean,
-      default: false,
+      default: false
     },
     title: {
       type: String,
-      default: "default",
+      default: "default"
     },
     nav: {
       type: Object,
-      default: () => ({}),
-    },
+      default: () => ({})
+    }
   },
   data: () => ({
     isOverflowing: null,
-    isExpanded: false,
+    isExpanded: false
   }),
   watch: {
-    isExpanded: function (isExpanded) {
+    isExpanded: function(isExpanded) {
       const el = document.documentElement;
       const className = "is-sidebar-expanded";
 
@@ -123,9 +118,9 @@ export default {
         el.classList.remove(className);
       }
     },
-    $route: function (to, from) {
+    $route: function(to, from) {
       this.setSidebarState(false);
-    },
+    }
   },
   beforeMount() {
     this.setSidebarState(false);
@@ -136,7 +131,7 @@ export default {
 
       const observer = new IntersectionObserver(
         (entries, observer) => {
-          entries.forEach((entry) => {
+          entries.forEach(entry => {
             if (entry.intersectionRatio !== 1) {
               this.isOverflowing = true;
             } else {
@@ -153,7 +148,7 @@ export default {
   methods: {
     setSidebarState(isExpanded) {
       this.isExpanded = isExpanded;
-    },
-  },
+    }
+  }
 };
 </script>

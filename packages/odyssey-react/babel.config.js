@@ -13,35 +13,37 @@
 module.exports = {
   presets: [
     [
-      "@okta/odyssey-babel-preset",
+      '@okta/odyssey-babel-preset',
       {
         react: {
-          runtime: "automatic",
+          runtime: 'automatic'
         },
-      },
-    ],
+      }
+    ]
   ],
 
   env: {
     production: {
       presets: [
         [
-          "@okta/odyssey-babel-preset",
+          '@okta/odyssey-babel-preset',
           {
             env: {
-              modules: false,
+              modules: false
             },
             react: {
-              runtime: "automatic",
+              runtime: 'automatic'
             },
-          },
-        ],
+          }
+        ]
       ],
       comments: false,
       shouldPrintComment: (val) => {
         return /Okta, Inc\.|@license|@preserve/.test(val);
       },
-      ignore: [/\.test\.|\.stories\./i],
-    },
-  },
+      ignore: [
+        /\.test\.|\.stories\./i
+      ]
+    }
+  }
 };

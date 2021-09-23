@@ -10,12 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef } from "react";
-import type { ReactElement, ComponentPropsWithRef } from "react";
-import { useOmit } from "../../../utils";
+import { forwardRef } from 'react';
+import type {
+  ReactElement,
+  ComponentPropsWithRef
+} from 'react';
+import { useOmit } from '../../../utils';
 
-export interface Props
-  extends Omit<ComponentPropsWithRef<"optgroup">, "style" | "className"> {
+export interface Props extends Omit<
+  ComponentPropsWithRef<'optgroup'>,
+  'style' | 'className'
+> {
   /**
    * One or more option to be used together as a group
    */
@@ -24,25 +29,26 @@ export interface Props
   /**
    * The underlying option group element label attribute.
    */
-  label: string;
+  label: string,
 }
 
 /**
  * Often referred to as a "dropdown menu" this input triggers a menu of
  * options a user can select.
  */
-const SelectOptionGroup = forwardRef<HTMLOptGroupElement, Props>(
-  (props, ref) => {
-    const { children, ...rest } = props;
+const SelectOptionGroup = forwardRef<HTMLOptGroupElement, Props>((props, ref) => {
+  const {
+    children,
+    ...rest
+  } = props;
 
-    const omitProps = useOmit(rest);
+  const omitProps = useOmit(rest);
 
-    return (
-      <optgroup {...omitProps} ref={ref}>
-        {children}
-      </optgroup>
-    );
-  }
-);
+  return (
+    <optgroup {...omitProps} ref={ref}>
+      {children}
+    </optgroup>
+  );
+});
 
 export default SelectOptionGroup;

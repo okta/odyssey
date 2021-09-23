@@ -10,7 +10,7 @@ links:
     href: https://github.com/okta/odyssey/blob/master/packages/odyssey/src/scss/components/_text-input.scss
 ---
 
-## 2020
+ ## 2020
 
 <Description>
 

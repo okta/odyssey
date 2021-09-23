@@ -25,7 +25,6 @@ In case of emergencies, break the glass and use an invalid commit message
 by providing the `--no-verify` flag to `git commit`.
 
 ## Browser Support
-
 Odyssey browser support mirrors Okta's [Supported platforms, browsers, and operating systems](https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm) and is as follows:
 
 | Browser              | Support Policy                                                                                                          |
@@ -35,7 +34,6 @@ Odyssey browser support mirrors Okta's [Supported platforms, browsers, and opera
 | Chrome               | Latest public version supported.                                                                                        |
 | Safari               | Latest public version supported.                                                                                        |
 | Firefox              | Latest public version for Rapid Release supported. <br /> Latest public version for Extended Support Release supported. |
-
 ## Licenses
 
 All source code, imagery, and icons fall under the [Apache Version 2.0 License](https://github.com/okta/odyssey/blob/master/LICENSE).
@@ -43,7 +41,6 @@ All source code, imagery, and icons fall under the [Apache Version 2.0 License](
 ## Feature Requests, Bugs & Feedback
 
 ### Oktanauts
-
 - Log an issue in in JIRA, use the `OKTA` project, and be sure to apply the `Team: UICore Odyssey` component and the apropriate issue type.
 - Reach out to us directly in the [#odyssey](https://okta.slack.com/archives/C7T2H3KNJ) Slack channel.
 - All other users please open a [GitHub issue](https://github.com/okta/odyssey/issues/new/choose).

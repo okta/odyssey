@@ -13,23 +13,27 @@
 import { render } from "@testing-library/react";
 import Tag from ".";
 
-const tagList = ["Item one", "Item two", "Item three"];
-const list = "list";
-const listitem = "listitem";
+const tagList = ['Item one', 'Item two', 'Item three'];
+const list = 'list';
+const listitem = 'listitem';
 
 describe("Tag", () => {
   it("renders the tags as a list", () => {
-    const { getByRole } = render(<Tag tags={tagList} />);
+    const { getByRole } = render(
+      <Tag tags={tagList} />
+    );
 
     expect(getByRole(list)).toBeInTheDocument();
   });
 
   it("renders the tags in the correct order as list items", () => {
-    const { getAllByRole } = render(<Tag tags={tagList} />);
+    const { getAllByRole } = render(
+      <Tag tags={tagList} />
+    );
 
-    const tags = getAllByRole(listitem).map((el) => el.textContent);
+    const tags = getAllByRole(listitem).map(el => el.textContent);
     expect(tags).toEqual(tagList);
   });
 
-  a11yCheck(() => render(<Tag tags={["foo"]} />));
+  a11yCheck(() => render(<Tag tags={["foo"]} />))
 });

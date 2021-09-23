@@ -11,11 +11,11 @@
  */
 
 module.exports = {
-  ignoreExisting: true,
-  typescript: true,
-  prettierConfig: {
-    parser: "typescript",
+  "ignoreExisting": true,
+  "typescript": true,
+  "prettierConfig": {
+    "parser": "typescript",
   },
-  template: require("./icon-template.js"),
-  indexTemplate: require("./index-template.js"),
-};
+  "template": require('./icon-template.js'),
+  "indexTemplate": require('./index-template.js'),
+}

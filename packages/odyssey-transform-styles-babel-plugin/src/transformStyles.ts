@@ -10,51 +10,44 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type * as Babel from "@babel/core";
+import type * as Babel from '@babel/core';
 import type {
   VariableDeclaration,
-  ObjectExpression,
-} from "@babel/traverse/node_modules/@babel/types";
-import type { File } from "./compile";
-import { resolve, dirname } from "path";
-import compileFactory from "./compileFactory";
-import { objectExpression, variableDeclaration } from "./nodes";
-import normalizeOpts, { isTargetExtension } from "./normalizeOpts";
+  ObjectExpression
+} from '@babel/traverse/node_modules/@babel/types';
+import type { File } from './compile';
+import { resolve, dirname } from 'path';
+import compileFactory from './compileFactory';
+import { objectExpression, variableDeclaration } from './nodes';
+import normalizeOpts, { isTargetExtension } from './normalizeOpts';
 
 export interface TransformStylesOpts {
   extensions?: Array<string | RegExp>;
 }
 
-export default function transformStyles({
-  types: t,
-}: typeof Babel): Babel.PluginObj {
+export default function transformStyles (
+  { types: t }: typeof Babel
+): Babel.PluginObj {
+
   const fileMap = new Map<string, File>();
   const compile = compileFactory();
 
   return {
-    name: "odyssey-transform-styles",
+    name: 'odyssey-transform-styles',
 
     visitor: {
-      ImportDeclaration(path, state) {
-        if (state.opts === false) {
-          return;
-        }
-        const opts = normalizeOpts(state.opts);
+      ImportDeclaration (path, state) {
+        if (state.opts === false) { return }
+        const opts = normalizeOpts(state.opts)
 
         const importer = state?.file?.opts?.filename;
-        if (typeof importer !== "string") {
-          return;
-        }
+        if (typeof importer !== 'string') { return; }
 
-        const specifier = path.node.specifiers[0];
-        if (!t.isImportDefaultSpecifier(specifier)) {
-          return;
-        }
+        const specifier = path.node.specifiers[ 0 ];
+        if (!t.isImportDefaultSpecifier(specifier)) { return; }
 
         const importee = path.node.source.value;
-        if (!isTargetExtension(importee, opts.extensions)) {
-          return;
-        }
+        if (!isTargetExtension(importee, opts.extensions)) { return; }
 
         const filePath = resolve(dirname(importer), importee);
         let file = fileMap.get(filePath);
@@ -72,33 +65,21 @@ export default function transformStyles({
         );
       },
 
-      CallExpression(path, state) {
-        if (state.opts === false) {
-          return;
-        }
-        const opts = normalizeOpts(state.opts);
+      CallExpression (path, state) {
+        if (state.opts === false) { return }
+        const opts = normalizeOpts(state.opts)
 
         const importer = state?.file?.opts?.filename;
-        if (typeof importer !== "string") {
-          return;
-        }
+        if (typeof importer !== 'string') { return; }
 
         const callee = path.node.callee;
-        if (!t.isIdentifier(callee)) {
-          return;
-        }
-        if (callee.name !== "require") {
-          return;
-        }
+        if (!t.isIdentifier(callee)) { return; }
+        if (callee.name !== 'require') { return; }
 
-        const argument = path.node.arguments[0];
-        if (!t.isStringLiteral(argument)) {
-          return;
-        }
+        const argument = path.node.arguments[ 0 ];
+        if (!t.isStringLiteral(argument)) { return; }
         const importee = argument.value;
-        if (!isTargetExtension(importee, opts.extensions)) {
-          return;
-        }
+        if (!isTargetExtension(importee, opts.extensions)) { return; }
 
         const filePath = resolve(dirname(importer), importee);
         let file = fileMap.get(filePath);
@@ -108,8 +89,10 @@ export default function transformStyles({
           fileMap.set(filePath, file);
         }
 
-        path.replaceWith(objectExpression(file) as ObjectExpression);
-      },
-    },
+        path.replaceWith(
+          objectExpression(file) as ObjectExpression
+        );
+      }
+    }
   };
 }

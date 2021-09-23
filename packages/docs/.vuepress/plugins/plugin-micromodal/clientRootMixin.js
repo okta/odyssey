@@ -1,14 +1,14 @@
 module.exports = {
   updated() {
-    import("micromodal").then((module) => {
+    import('micromodal').then((module) => {
       const MicroModal = module.default;
-      setTimeout(() => {
+      setTimeout(()=> {
         MicroModal.init({
           awaitCloseAnimation: true,
           disableScroll: true,
-          disableFocus: true,
+          disableFocus: true
         });
       }, 500);
-    });
+    })
   },
-};
+}

@@ -16,8 +16,8 @@ module.exports = {
       files: ["*.js", "*.vue"],
       extends: ["vuepress"],
       rules: {
-        "prettier/prettier": 0,
-      },
-    },
-  ],
+        "prettier/prettier": 0
+      }
+    }
+  ]
 };

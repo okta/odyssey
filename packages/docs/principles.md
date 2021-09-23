@@ -17,6 +17,7 @@ Okta is a technical product. It’s the role of Design to simplify unfamiliar an
 - Do I have enough domain knowledge and information to make decisions with confidence and back them up with the broader team?
 - Do I understand the constraints (technical, budget, time)?
 
+
 </Description>
 
 <Description>

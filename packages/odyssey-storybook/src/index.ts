@@ -10,65 +10,65 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { TransformOptions } from "@babel/core";
-import type { Configuration } from "webpack";
-import type { PropItem } from "react-docgen-typescript";
-import sass from "sass";
-import postcss from "postcss";
+import type { TransformOptions } from '@babel/core';
+import type { Configuration } from 'webpack';
+import type { PropItem } from 'react-docgen-typescript';
+import sass from 'sass';
+import postcss from 'postcss';
 
 module.exports = {
   typescript: {
     check: false,
     checkOptions: {},
-    reactDocgen: "react-docgen-typescript",
+    reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop: PropItem) =>
-        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+      propFilter: (prop: PropItem) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
     },
   },
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-a11y",
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-a11y',
     {
-      name: "@storybook/addon-postcss",
+      name: '@storybook/addon-postcss',
       options: {
         postcssLoaderOptions: {
           implementation: postcss,
         },
       },
     },
-    "@pxblue/storybook-rtl-addon",
+    '@pxblue/storybook-rtl-addon',
   ],
-  babel(config: TransformOptions) {
+  babel (config: TransformOptions) {
     return {
       ...config,
       babelrc: false,
-      configFile: false,
+      configFile: false
     };
   },
-  webpackFinal(config: Configuration = {}) {
-    config.module?.rules?.push({
-      test: /\.scss$/,
-      use: [
-        "style-loader",
-        {
-          loader: "css-loader",
-          options: {
-            sourceMap: true,
-            modules: {
-              auto: true,
-              localIdentName: "ods-[folder]-[local]-[hash:base64:5]",
-            },
+  webpackFinal (config: Configuration = {}) {
+    config.module?.rules?.push(
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: {
+                auto: true,
+                localIdentName: 'ods-[folder]-[local]-[hash:base64:5]',
+              }
+            }
           },
-        },
-        {
-          loader: "sass-loader",
-          options: {
-            implementation: sass,
-            sourceMap: true,
-            additionalData: `
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: sass,
+              sourceMap: true,
+              additionalData: `
                 // Abstracts
                 @import '@okta/odyssey/src/scss/abstracts/functions';
                 @import '@okta/odyssey/src/scss/abstracts/colors';
@@ -89,12 +89,13 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/components/input-field-layout';
                 @import '@okta/odyssey/src/scss/components/label';
                 @import '@okta/odyssey/src/scss/components/number-input';
-              `,
-          },
-        },
-      ],
-    });
+              `
+            }
+          }
+        ],
+      }
+    );
 
     return config;
-  },
+  }
 };

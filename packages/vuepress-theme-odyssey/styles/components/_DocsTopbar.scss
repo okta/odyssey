@@ -17,8 +17,7 @@
   width: 100vw;
   padding-block: $spacing-xs;
   padding-inline: $spacing-m;
-  border-block-end: 1px solid
-    var(--border-color-display, #{$border-color-display});
+  border-block-end: 1px solid var(--border-color-display, #{$border-color-display});
   background: var(--docs-sidebar-bg, #{$white});
 
   @include mq(l) {

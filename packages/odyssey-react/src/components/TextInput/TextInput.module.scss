@@ -13,7 +13,7 @@
 .root {
   @include input-baseline;
 
-  &[type="search"] {
+  &[type='search'] {
     padding-inline-start: ms(1) + $spacing-s + $spacing-xs;
 
     &::-webkit-search-decoration,
@@ -28,7 +28,7 @@
       display: none;
     }
 
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       background-position: right $spacing-s center;
     }
   }

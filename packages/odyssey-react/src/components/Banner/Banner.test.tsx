@@ -17,12 +17,11 @@ import styles from "./Banner.module.scss";
 const role = "status";
 const bannerTitle = "Banner title";
 const bannerContent = "Banner content";
-const bannerActions =
-  "Banner actions <a href='https://www.okta.com'>with a link</a>";
+const bannerActions = "Banner actions <a href='https://www.okta.com'>with a link</a>";
 const bannerDismissButtonLabel = "Dismiss message";
 
 describe("Banner", () => {
-  it("renders the Banner", () => {
+  it('renders the Banner', () => {
     const { getByRole } = render(
       <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
@@ -32,7 +31,7 @@ describe("Banner", () => {
     expect(getByRole(role)).toBeInTheDocument();
   });
 
-  it("renders the Banner title", () => {
+  it('renders the Banner title', () => {
     const { getByText } = render(
       <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
@@ -42,7 +41,7 @@ describe("Banner", () => {
     expect(getByText(bannerTitle)).toBeInTheDocument();
   });
 
-  it("renders the content", () => {
+  it('renders the content', () => {
     const { getByText } = render(
       <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
@@ -51,7 +50,7 @@ describe("Banner", () => {
     expect(getByText(bannerContent)).toBeInTheDocument();
   });
 
-  it("renders the action (children) content", () => {
+  it('renders the action (children) content', () => {
     const { getByText } = render(
       <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
@@ -60,7 +59,8 @@ describe("Banner", () => {
     expect(getByText(bannerActions)).toBeInTheDocument();
   });
 
-  it("hides the banner if visible prop is set to false", () => {
+
+  it('hides the banner if visible prop is set to false', () => {
     const { getByRole } = render(
       <Banner open={false} title={bannerTitle} content={bannerContent}>
         {bannerActions}
@@ -70,75 +70,58 @@ describe("Banner", () => {
     expect(getByRole(role)).toHaveClass(styles.isDismissed);
   });
 
-  it("should NOT display the dismiss button when the onDismiss callback fn is NOT provided", () => {
+  it('should NOT display the dismiss button when the onDismiss callback fn is NOT provided', () => {
     const { queryByRole } = render(
       <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
 
-    expect(queryByRole("button")).toBeNull();
+    expect(queryByRole('button')).toBeNull();
   });
-
-  it("should display the dismiss button when the onDismiss callback fn is provided", () => {
+  
+  it('should display the dismiss button when the onDismiss callback fn is provided', () => {
     const handleDismiss = jest.fn();
     const { getByRole } = render(
-      <Banner
-        open
-        title={bannerTitle}
-        content={bannerContent}
-        onDismiss={handleDismiss}
-        dismissButtonLabel={bannerDismissButtonLabel}
-      >
+      <Banner open title={bannerTitle} content={bannerContent} onDismiss={handleDismiss} dismissButtonLabel={bannerDismissButtonLabel}>
         {bannerActions}
       </Banner>
     );
-    expect(getByRole("button")).toBeInTheDocument();
+    expect(getByRole('button')).toBeInTheDocument();
   });
-
-  it("should call onDismiss when the dismiss button is clicked", () => {
+  
+  it('should call onDismiss when the dismiss button is clicked', () => {
     const handleDismiss = jest.fn();
     const { getByRole } = render(
-      <Banner
-        open
-        title={bannerTitle}
-        content={bannerContent}
-        onDismiss={handleDismiss}
-        dismissButtonLabel={bannerDismissButtonLabel}
-      >
+      <Banner open title={bannerTitle} content={bannerContent} onDismiss={handleDismiss} dismissButtonLabel={bannerDismissButtonLabel}>
         {bannerActions}
       </Banner>
     );
 
-    fireEvent.click(getByRole("button"));
+    fireEvent.click(getByRole('button'));
     expect(handleDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it("should update the aria-label attribute on the dismiss button if dismissButtonLabel is provided", () => {
+  it('should update the aria-label attribute on the dismiss button if dismissButtonLabel is provided', () => {
     const handleDismiss = jest.fn();
     const { getByRole } = render(
-      <Banner
-        dismissButtonLabel={bannerDismissButtonLabel}
-        open
-        title={bannerTitle}
-        content={bannerContent}
+      <Banner 
+        dismissButtonLabel={bannerDismissButtonLabel} 
+        open 
+        title={bannerTitle} 
+        content={bannerContent} 
         onDismiss={handleDismiss}
       >
         {bannerActions}
       </Banner>
     );
 
-    expect(getByRole("button")).toHaveAttribute(
-      "aria-label",
-      bannerDismissButtonLabel
-    );
+    expect(getByRole('button')).toHaveAttribute('aria-label', bannerDismissButtonLabel);
   });
 
-  a11yCheck(() =>
-    render(
-      <Banner open title={bannerTitle} content={bannerContent}>
-        {bannerActions}
-      </Banner>
-    )
-  );
+  a11yCheck(() => render(
+    <Banner open title={bannerTitle} content={bannerContent}>
+      {bannerActions}
+     </Banner>
+    ))
 });

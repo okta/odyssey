@@ -13,10 +13,10 @@
 module.exports = {
   overrides: [
     {
-      files: ["*.test.*"],
+      files: ["*.test.*",],
       globals: {
-        testRule: true,
+        testRule: true
       },
-    },
-  ],
+    }
+  ]
 };

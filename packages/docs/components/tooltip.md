@@ -5,10 +5,10 @@ title: Tooltip
 description: A contextual pop-up that provides a label for or description of an element.
 lede: A transient element that provides additional context for an element when it receives hover or focus.
 tabs:
-  - label: "Overview"
-    id: "overview"
-  - label: "HTML & SCSS"
-    id: "html-scss"
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
 links:
   - icon: github
     label: View source
@@ -153,10 +153,10 @@ Tooltips should provide simple, textual descriptions. If your content requires f
 
 When positioning a Tooltip, ensure:
 
-- The Tooltip is paired with the element being described.
-- You plan for responsive web design concerns.
-- Placement doesn't interfere with the object of interest or relevant information.
-- The Tooltip is always visible when activated, not cropped or off-page.
+* The Tooltip is paired with the element being described.
+* You plan for responsive web design concerns.
+* Placement doesn't interfere with the object of interest or relevant information.
+* The Tooltip is always visible when activated, not cropped or off-page.
 
 </Description>
 
@@ -209,8 +209,8 @@ Tooltips should contain static content. Users don't expect, and are unlikely to 
 
 **Exception:** Tooltips may contain dynamic content if two requirements are met:
 
-- The tooltip is present at all times during the content change
-- The tooltip is reporting real-time change (e.g. "Copy" changes to "Copied!" on a click-to-copy button)
+* The tooltip is present at all times during the content change
+* The tooltip is reporting real-time change (e.g. "Copy" changes to "Copied!" on a click-to-copy button)
 
 </Description>
 
@@ -261,6 +261,7 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
 
 ::: slot html-scss
 
+
 ## Position: Top
 
 <figure class="docs-example" data-optional>
@@ -275,17 +276,16 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
     </span>
   </div>
 
-```html
-<span class="has-ods-tooltip">
-  <button class="ods-button" aria-describedby="edit-label">
-    <svg role="presentation" focusable="false" class="ods-icon">...</svg>
-  </button>
-  <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
-    Tooltip label
-  </aside>
-</span>
-```
-
+  ```html
+    <span class="has-ods-tooltip">
+      <button class="ods-button" aria-describedby="edit-label">
+        <svg role="presentation" focusable="false" class="ods-icon">...</svg>
+      </button>
+      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
+        Tooltip label
+      </aside>
+    </span>
+  ```
 </figure>
 
 ## Position: End
@@ -302,17 +302,16 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
     </span>
   </div>
 
-```html
-<span class="has-ods-tooltip">
-  <button class="ods-button" aria-describedby="edit-label">
-    <svg role="presentation" focusable="false" class="ods-icon">...</svg>
-  </button>
-  <aside id="edit-label" class="ods-tooltip is-ods-tooltip-end" role="tooltip">
-    Tooltip label
-  </aside>
-</span>
-```
-
+  ```html
+    <span class="has-ods-tooltip">
+      <button class="ods-button" aria-describedby="edit-label">
+        <svg role="presentation" focusable="false" class="ods-icon">...</svg>
+      </button>
+      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-end" role="tooltip">
+        Tooltip label
+      </aside>
+    </span>
+  ```
 </figure>
 
 ## Position: Bottom
@@ -329,21 +328,16 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
     </span>
   </div>
 
-```html
-<span class="has-ods-tooltip">
-  <button class="ods-button" aria-describedby="edit-label">
-    <svg role="presentation" focusable="false" class="ods-icon">...</svg>
-  </button>
-  <aside
-    id="edit-label"
-    class="ods-tooltip is-ods-tooltip-bottom"
-    role="tooltip"
-  >
-    Tooltip label
-  </aside>
-</span>
-```
-
+  ```html
+    <span class="has-ods-tooltip">
+      <button class="ods-button" aria-describedby="edit-label">
+        <svg role="presentation" focusable="false" class="ods-icon">...</svg>
+      </button>
+      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-bottom" role="tooltip">
+        Tooltip label
+      </aside>
+    </span>
+  ```
 </figure>
 
 ## Position: Start
@@ -360,21 +354,16 @@ When possible, provide inline text that becomes visible on touchscreen devices. 
     </span>
   </div>
 
-```html
-<span class="has-ods-tooltip">
-  <button class="ods-button" aria-describedby="edit-label">
-    <svg role="presentation" focusable="false" class="ods-icon">...</svg>
-  </button>
-  <aside
-    id="edit-label"
-    class="ods-tooltip is-ods-tooltip-start"
-    role="tooltip"
-  >
-    Tooltip label
-  </aside>
-</span>
-```
-
+  ```html
+    <span class="has-ods-tooltip">
+      <button class="ods-button" aria-describedby="edit-label">
+        <svg role="presentation" focusable="false" class="ods-icon">...</svg>
+      </button>
+      <aside id="edit-label" class="ods-tooltip is-ods-tooltip-start" role="tooltip">
+        Tooltip label
+      </aside>
+    </span>
+  ```
 </figure>
 
 :::

@@ -16,42 +16,49 @@ import Select from ".";
 import type { Props } from "./Select";
 
 const options = [
-  "Proxima Centauri",
-  "Barnard's Star",
-  "WISE 1049-5319",
-  "Wolf 359",
-  "Lalande 21185",
-  "Sirius A",
-  "Sirius B",
+  'Proxima Centauri',
+  'Barnard\'s Star',
+  'WISE 1049-5319',
+  'Wolf 359',
+  'Lalande 21185',
+  'Sirius A',
+  'Sirius B'
 ];
+
 
 export default {
   title: `Components/Select`,
   component: Select,
   args: {
-    label: "Destination Star",
-    name: "star",
+    label: 'Destination Star',
+    name: 'star',
   },
   argTypes: {
-    hint: { control: "text" },
-    label: { control: "text" },
-    optionalLabel: { control: "text" },
-    required: { control: "boolean" },
-    disabled: { control: "boolean" },
-    name: { control: "text" },
+    hint: { control: 'text' },
+    label: { control: 'text' },
+    optionalLabel: { control: 'text' },
+    required: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    name: { control: 'text' },
     onChange: { control: false },
     value: {
       options: options,
-      control: "select",
+      control: 'select'
     },
   },
 };
 
 const Template: Story<Props> = (args) => (
   <Select {...args}>
-    {options.map((option) => (
-      <Select.Option key={option} children={option} value={option} />
-    ))}
+    {
+      options.map(option => (
+        <Select.Option
+          key={option}
+          children={option}
+          value={option}
+        />
+      ))
+    }
   </Select>
 );
 
@@ -60,18 +67,18 @@ Default.args = {};
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  disabled: true,
+  disabled: true
 };
 
 export const Optional = Template.bind({});
 Optional.args = {
   required: false,
-  optionalLabel: "Optional",
+  optionalLabel: 'Optional'
 };
 
 export const Controlled = Template.bind({});
 Controlled.args = {
-  value: options[3],
+  value: options[3]
 };
 
 export const Multiple = Template.bind({});
@@ -80,7 +87,7 @@ Multiple.args = {
 };
 
 export const Group = (args: Props): ReactElement => (
-  <Select {...args}>
+  <Select {...args} >
     <Select.OptionGroup label="Group A">
       <Select.Option children="Option 1" />
       <Select.Option children="Option 2" />

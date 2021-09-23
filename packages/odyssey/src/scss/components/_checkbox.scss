@@ -29,7 +29,7 @@
     + .ods-checkbox--label {
       &::after {
         transform: translateY(-50%) scale(0.9);
-        background-image: get-icon("check", $white);
+        background-image: get-icon('check', $white);
       }
     }
   }
@@ -50,7 +50,7 @@
     + .ods-checkbox--label {
       &::after {
         transform: translateY(-50%) scale(0.9);
-        background-image: get-icon("dash", $white);
+        background-image: get-icon('dash', $white);
       }
     }
   }
@@ -92,7 +92,7 @@
     &:checked {
       + .ods-checkbox--label {
         &::after {
-          background-image: get-icon("check", $white);
+          background-image: get-icon('check', $white);
         }
       }
     }
@@ -101,7 +101,7 @@
     &.is-ods-checkbox-indeterminate {
       + .ods-checkbox--label {
         &::after {
-          background-image: get-icon("dash", $white);
+          background-image: get-icon('dash', $white);
         }
       }
     }
@@ -177,7 +177,7 @@
       &:indeterminate {
         + .ods-checkbox--label {
           &::after {
-            background-image: get-icon("dash", $white);
+            background-image: get-icon('dash', $white);
           }
         }
       }
@@ -198,7 +198,7 @@
   &::after {
     @include border-radius($base-border-radius);
 
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     inset-block-start: 50%;
@@ -220,7 +220,7 @@
   // Check
   &::after {
     transform: translateY(-50%) scale(0.9);
-    background-image: get-icon("check", transparent);
+    background-image: get-icon('check', transparent);
     background-repeat: no-repeat;
     background-position: center;
   }

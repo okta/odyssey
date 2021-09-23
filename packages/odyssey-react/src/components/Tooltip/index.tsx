@@ -10,27 +10,27 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { cloneElement } from "react";
-import type { ReactElement, FunctionComponent } from "react";
-import { useCx, useOid } from "../../utils";
-import styles from "./Tooltip.module.scss";
+import { cloneElement } from 'react';
+import type { ReactElement, FunctionComponent } from 'react';
+import { useCx, useOid } from '../../utils';
+import styles from './Tooltip.module.scss';
 
 export type Props = {
   /**
    * Content to be rendered that needs a tooltip label
    */
-  children: ReactElement;
+  children: ReactElement,
 
   /**
    * The underlying tooltip id attribute. Automatically generated if not provided
    */
-  id?: string;
+  id?: string,
 
   /**
    * The position the tooltip will be displayed
    * @default top
    */
-  position?: "top" | "end" | "bottom" | "start";
+  position?: 'top' | 'end' | 'bottom' | 'start',
 
   /**
    * The position the tooltip will be displayed
@@ -42,12 +42,20 @@ export type Props = {
  * A transient element that provides additional context for an element when it receives hover or focus.
  */
 const Tooltip: FunctionComponent<Props> = (props) => {
-  const { children, id, label, position = "top" } = props;
+  const {
+    children,
+    id,
+    label,
+    position = 'top',
+  } = props;
 
   const oid = useOid(id);
-  const clone = cloneElement(children, { "aria-describedby": oid });
+  const clone = cloneElement(children, { 'aria-describedby': oid });
 
-  const tooltipClasses = useCx(styles.root, styles[`${position}Position`]);
+  const tooltipClasses = useCx(
+    styles.root,
+    styles[`${position}Position`],
+  );
 
   return (
     <span className={styles.hasTooltip}>

@@ -19,37 +19,37 @@ export default {
   title: `Components/Checkbox`,
   component: Checkbox,
   args: {
-    label: "Checkbox label",
-    value: "checkbox_value",
+    label: 'Checkbox label',
+    value: 'checkbox_value',
   },
   argTypes: {
-    required: { control: "boolean" },
-    disabled: { control: "boolean" },
-    checked: { control: "boolean" },
-    value: { control: "text" },
-    id: { control: "text" },
-    name: { control: "text" },
+    required: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    checked: { control: 'boolean' },
+    value: { control: 'text' },
+    id: { control: 'text' },
+    name: { control: 'text' },
     onChange: { control: false },
     onBlur: { control: false },
-    onFocus: { control: false },
+    onFocus: { control: false }
   },
 };
 
-const Template: Story<Props> = (args) => <Checkbox {...args} />;
+const Template: Story<Props> = (args) => (
+  <Checkbox {...args} />
+);
 
 export const Default = Template.bind({});
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  disabled: true,
-};
+  disabled: true
+}
 
 export const Invalid = Template.bind({});
 Invalid.decorators = [
   (Story) => {
-    useEffect(() =>
-      window.document.querySelector("input")?.setCustomValidity("oops")
-    );
-    return <Story />;
-  },
-];
+    useEffect(() => window.document.querySelector('input')?.setCustomValidity('oops'))
+    return <Story />
+  }
+]

@@ -21,12 +21,8 @@ lede: A glossary of standard HTML elements provided by Odyssey.
   </div>
 
 ```html
-<p>
-  If you're a <abbr title="Backend">BE</abbr> or
-  <abbr title="Frontend">FE</abbr> developer, you should checkout our dev docs.
-</p>
+<p>If you're a <abbr title="Backend">BE</abbr> or <abbr title="Frontend">FE</abbr> developer, you should checkout our dev docs.</p>
 ```
-
 </figure>
 
 ## address <a name="address"></a>
@@ -49,11 +45,10 @@ lede: A glossary of standard HTML elements provided by Odyssey.
 ```html
 <p>Okta Headquarters</p>
 <address>
-  <a href="mailto:press@okta.com">press@okta.com</a><br />
+  <a href="mailto:press@okta.com">press@okta.com</a><br>
   <a href="tel:+18887227871">(888) 722-7871</a>
 </address>
 ```
-
 </figure>
 
 ## blockquote <a name="blockquote"></a>
@@ -73,23 +68,11 @@ lede: A glossary of standard HTML elements provided by Odyssey.
   </div>
 
 ```html
-<blockquote
-  cite="https://books.google.com/books?id=dlYEAAAAMBAJ&lpg=PP1&dq=Life,+2+May+1955&pg=PA61&hl=en#v=onepage&q=Life%2C%202%20May%201955&f=false"
->
-  <p>
-    The important thing is not to stop questioning. Curiosity has its own reason
-    for existence.
-  </p>
-  <footer>
-    Albert Einstein,
-    <cite
-      >Old Man's Advice to Youth: "Never Lose a Holy Curiosity," LIFE magazine
-      (2 May 1955) statement to William Miller, p. 64.</cite
-    >
-  </footer>
-</blockquote>
+  <blockquote cite="https://books.google.com/books?id=dlYEAAAAMBAJ&lpg=PP1&dq=Life,+2+May+1955&pg=PA61&hl=en#v=onepage&q=Life%2C%202%20May%201955&f=false">
+    <p>The important thing is not to stop questioning. Curiosity has its own reason for existence.</p>
+    <footer>Albert Einstein, <cite>Old Man's Advice to Youth: "Never Lose a Holy Curiosity," LIFE magazine (2 May 1955) statement to William Miller, p. 64.</cite></footer>
+  </blockquote>
 ```
-
 </figure>
 
 ## cite <a name="cite"></a>
@@ -111,23 +94,13 @@ lede: A glossary of standard HTML elements provided by Odyssey.
   </div>
 
 ```html
-<blockquote>
-  <p>
-    Tell me, O Muse, of that ingenious hero who travelled far and wide after he
-    had sacked the famous town of Troy.
-  </p>
-  <footer>
-    First sentence in
-    <cite
-      ><a href="https://www.gutenberg.org/files/1727/1727-h/1727-h.htm#chap01"
-        >The Odyssey</a
-      ></cite
-    >
-    by Homer (Book I).
-  </footer>
-</blockquote>
+  <blockquote>
+    <p>Tell me, O Muse, of that ingenious hero who travelled far and wide after he had sacked the famous town of Troy.</p>
+    <footer>
+        First sentence in <cite><a href="https://www.gutenberg.org/files/1727/1727-h/1727-h.htm#chap01">The Odyssey</a></cite> by Homer (Book I).
+    </footer>
+  </blockquote>
 ```
-
 </figure>
 
 ## code <a name="code"></a>
@@ -144,13 +117,10 @@ lede: A glossary of standard HTML elements provided by Odyssey.
   </div>
 
 ```html
-<p>
-  The <code>pop()</code> array method removes the last element of an array and
-  returns that element.
-</p>
+<p>The <code>pop()</code> array method removes the last element of an array and returns that element.</p>
 ```
-
 </figure>
+
 
 ## del <a name="del"></a>
 
@@ -172,25 +142,17 @@ Many screen readers do not let users know of the presence of `del`. To fix this,
   </div>
 
 ```html
-<blockquote>
-  There is
-  <del data-a11y-start=" [deletion start] " data-a11y-end=" [deletion end] "
-    >nothing</del
-  >
-  <ins data-a11y-start=" [insertion start] " data-a11y-end=" [insertion end] "
-    >no code</ins
-  >
-  either good or bad, but running it makes it so.
-</blockquote>
+  <blockquote>
+      There is <del data-a11y-start=" [deletion start] "  data-a11y-end=" [deletion end] ">nothing</del> <ins data-a11y-start=" [insertion start] "  data-a11y-end=" [insertion end] ">no code</ins> either good or bad, but running it makes it so.
+  </blockquote>
 ```
-
 </figure>
 
 ## details <a name="details"></a>
 
 <Description>
 
-> The HTML Details Element (`<details>`) creates a disclosure widget in which information is visible only when the widget is toggled into an "open" state. A summary or label can be provided using the `<summary>` element. [...] If the first child of the `<details>` element is a `<summary>`, the contents of the `<summary>` element are used as the label for the disclosure widget. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details'>MDN</a></cite>
+> The HTML Details Element (`<details>`) creates a disclosure widget in which information is visible only when the widget is toggled into an "open" state. A summary or label can be provided using the `<summary>` element. [...] If the first child of the `<details>` element is a `<summary>`, the contents of the `<summary>` element are used as the label for the disclosure widget.  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details'>MDN</a></cite>
 
 ### IE11 support
 
@@ -207,16 +169,11 @@ IE 11 incorrectly renders the `summary` element as "always open". Other than thi
   </div>
 
 ```html
-<details>
-  <summary>What is Okta?</summary>
-  <p>
-    Okta is the foundation for secure connections between people and technology.
-    It’s a service that gives employees, customers, and partners secure access
-    to the tools they need to do their most important work.
-  </p>
-</details>
+  <details>
+    <summary>What is Okta?</summary>
+    <p>Okta is the foundation for secure connections between people and technology. It’s a service that gives employees, customers, and partners secure access to the tools they need to do their most important work.</p>
+  </details>
 ```
-
 </figure>
 
 ## dfn <a name="dfn"></a>
@@ -237,12 +194,8 @@ For most terms, the content of `<dfn>` should be term you are defining:
   </div>
 
 ```html
-<p>
-  A <dfn id="def-cruller">cruller</dfn> is a small, braided torpedo of fried
-  dough.
-</p>
+  <p>A <dfn id="def-cruller">cruller</dfn> is a small, braided torpedo of fried dough.</p>
 ```
-
 </figure>
 
 <Description>
@@ -257,12 +210,8 @@ If you're referencing an acronym or abbreviation, you may also combine it with `
   </div>
 
 ```html
-<p>
-  <dfn id="def-apf"><abbr title="All Purpose Flour">APF</abbr></dfn> is
-  general-use, unbleached wheat flour.
-</p>
+  <p><dfn id="def-apf"><abbr title="All Purpose Flour">APF</abbr></dfn> is general-use, unbleached wheat flour.</p>
 ```
-
 </figure>
 
 <Description>
@@ -277,7 +226,7 @@ In both cases, utilizing the `id` attribute allows you to deep link to the defin
 
 <Description>
 
-> The HTML `<dl>` element represents a description list. The element encloses a list of groups of terms (specified using the `<dt>` element) and descriptions (provided by `<dd>` elements). Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs). - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl'>MDN</a></cite>
+> The HTML `<dl>` element represents a description list. The element encloses a list of groups of terms (specified using the `<dt>` element) and descriptions (provided by `<dd>` elements). Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs).  - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl'>MDN</a></cite>
 
 ### Accessibility
 
@@ -302,20 +251,19 @@ Screen readers announce `<dl>` content differently - some may not indicate that 
   </div>
 
 ```html
-<h4>Gentlemen of the Mushroom Kingdon</h4>
-<dl>
-  <dt>Mario</dt>
-  <dd>red hat, older twin brother, classic mustache</dd>
-  <dt>Luigi</dt>
-  <dd>green hat, younger twin brother, classic mustache</dd>
-  <dt>Wario</dt>
-  <dd>yellow hat, not a twin, kinked mustache</dd>
-  <dd>loves garlic</dd>
-  <dt>Waluigi</dt>
-  <dd>purple hat, not a twin, pointy mustache</dd>
-</dl>
+  <h4>Gentlemen of the Mushroom Kingdon</h4>
+  <dl>
+      <dt>Mario</dt>
+      <dd>red hat, older twin brother, classic mustache</dd>
+      <dt>Luigi</dt>
+      <dd>green hat, younger twin brother, classic mustache</dd>
+      <dt>Wario</dt>
+      <dd>yellow hat, not a twin, kinked mustache</dd>
+      <dd>loves garlic</dd>
+      <dt>Waluigi</dt>
+      <dd>purple hat, not a twin, pointy mustache</dd>
+    </dl>
 ```
-
 </figure>
 
 ## em <a name="em"></a>
@@ -334,7 +282,6 @@ Screen readers announce `<dl>` content differently - some may not indicate that 
 ```html
 <p>Do you <em>really</em> want to see that movie?</p>
 ```
-
 </figure>
 
 You can also nest `em` tags to provide an added level of emphasis. Doing so will provide additional style.
@@ -345,15 +292,11 @@ You can also nest `em` tags to provide an added level of emphasis. Doing so will
   </div>
 
 ```html
-<p>
-  Do you <em>really, <em>really</em></em> want to see that movie?
-</p>
+<p>Do you <em>really, <em>really</em></em> want to see that movie?</p>
 ```
-
 </figure>
 
 ## figure & figcaption <a name="figure"></a>
-
 <Description>
 
 > The HTML `<figure>` (Figure With Optional Caption) element represents self-contained content, potentially with an optional caption, which is specified using the (`<figcaption>`) element. The figure, its caption, and its contents are referenced as a single unit. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure'>MDN</a></cite>
@@ -397,7 +340,6 @@ You can also nest `em` tags to provide an added level of emphasis. Doing so will
   <figcaption>"Homer" by Joe Jezowski. California, 2020</figcaption>
 </figure>
 ```
-
 </figure>
 
 ### Usage
@@ -425,10 +367,9 @@ You can also nest `em` tags to provide an added level of emphasis. Doing so will
 
 ```html
 <p>This is the first paragraph.</p>
-<hr />
+<hr>
 <p>This is the second paragraph.</p>
 ```
-
 </figure>
 
 ## ins <a name="ins"></a>
@@ -457,13 +398,12 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 ```html
 <p>“You're late!”</p>
 <del>
-  <p>“I apologize for the delay.”</p>
+    <p>“I apologize for the delay.”</p>
 </del>
 <ins cite="../howtobeawizard.html" datetime="2018-05">
-  <p>“A wizard is never late &hellip;”</p>
+    <p>“A wizard is never late &hellip;”</p>
 </ins>
 ```
-
 </figure>
 
 ## kbd <a name="kbd"></a>
@@ -478,12 +418,8 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
   </div>
 
 ```html
-<p>
-  Pressing <kbd>tab</kbd> will take you to the next focusable element on the
-  page.
-</p>
+    <p>Pressing <kbd>tab</kbd> will take you to the next focusable element on the page.</p>
 ```
-
 </figure>
 
 ### Usage
@@ -512,22 +448,15 @@ When combined with <a href="#samp">`<samp>`</a>, the background of this element 
 
 ```html
 <p>Search results for "Button":</p>
-<hr />
+<hr>
 <ul>
-  <li>
-    <mark>Button</mark> labels should clearly indicate what action the user is
-    taking, e.g. "Add User" instead of "Submit".
-  </li>
-  <li>
-    Please follow normal <mark>Button</mark> variant guidelines within tables.
-  </li>
+  <li><mark>Button</mark> labels should clearly indicate what action the user is taking, e.g. "Add User" instead of "Submit".</li>
+  <li>Please follow normal <mark>Button</mark> variant guidelines within tables.</li>
 </ul>
 ```
-
 </figure>
 
 ## output <a name="output"></a>
-
 > The HTML Output element (`<output>`) is a container element into which a site or app can inject the results of a calculation or the outcome of a user action. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output'>MDN</a></cite>
 
 ### Usage
@@ -561,56 +490,27 @@ The most common use case is for diplaying computed values in a form:
   </div>
 
 ```html
-<form
-  oninput="outputTotal.value=parseInt(outputJD.value)+parseInt(outputOF.value)"
->
+<form oninput="outputTotal.value=parseInt(outputJD.value)+parseInt(outputOF.value)">
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input
-        class="ods-text-input"
-        type="number"
-        name="outputJD"
-        id="outputJD"
-        autocomplete="name"
-        spellcheck="false"
-        value="12"
-        required
-      />
+      <input class="ods-text-input" type="number" name="outputJD" id="outputJD" autocomplete="name" spellcheck="false" value="12" required>
       <label class="ods-label" for="outputJD">Jelly Donuts (Amount)</label>
     </div>
   </fieldset>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
-      <input
-        class="ods-text-input"
-        type="number"
-        name="outputOF"
-        id="outputOF"
-        autocomplete="name"
-        spellcheck="false"
-        value="12"
-        required
-      />
-      <label class="ods-label" for="outputOF"
-        >Old Fashioned Donuts (Amount)</label
-      >
+      <input class="ods-text-input" type="number" name="outputOF" id="outputOF" autocomplete="name" spellcheck="false" value="12" required>
+      <label class="ods-label" for="outputOF">Old Fashioned Donuts (Amount)</label>
     </div>
   </fieldset>
   <fieldset class="ods-fieldset">
     <div class="ods-fieldset-flex">
       <label class="ods-label" for="outputTotal">Total Donuts</label>
-      <output
-        aria-live="polite"
-        id="outputTotal"
-        name="outputTotal"
-        for="outputJD outputoldfashioneds"
-        >24</output
-      >
+      <output aria-live="polite" id="outputTotal" name="outputTotal" for="outputJD outputoldfashioneds">24</output>
     </div>
   </fieldset>
 </form>
 ```
-
 </figure>
 
 ### Accessibility
@@ -643,7 +543,6 @@ Since the `pre` tag preserves all whitespace, it's best to begin and end your co
   banana: 'yellow'
 }</code></pre>
 ```
-
 </figure>
 
 ## q <a href="q"></a>
@@ -660,14 +559,8 @@ Since the `pre` tag preserves all whitespace, it's best to begin and end your co
   </div>
 
 ```html
-<p>
-  While Marge was fighting the monorail, Homer wondered,
-  <q cite="https://www.imdb.com/title/tt0701173/quotes/qt0245595"
-    >Donuts - is there anything they can't do?</q
-  >
-</p>
+  <p>While Marge was fighting the monorail, Homer wondered, <q cite="https://www.imdb.com/title/tt0701173/quotes/qt0245595">Donuts - is there anything they can't do?</q></p>
 ```
-
 </figure>
 
 ### Usage
@@ -697,10 +590,9 @@ Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quot
   </div>
 
 ```html
-<p><s>Ramen with white "Paitan" Broth (Limited: 15 servings per day).</s></p>
+<p><s>Ramen with white "Paitan" Broth  (Limited: 15 servings per day).</s></p>
 <p><strong>This dish is now SOLD OUT!</strong></p>
 ```
-
 </figure>
 
 ## samp <a name="samp"></a>
@@ -717,12 +609,8 @@ Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quot
   </div>
 
 ```html
-<p>
-  When iDonut crashed, it told me
-  <samp>Press <kbd>F5</kbd> to refresh bakery</samp>.
-</p>
+<p>When iDonut crashed, it told me <samp>Press <kbd>F5</kbd> to refresh bakery</samp>.</p>
 ```
-
 </figure>
 
 ## small <a name="small"></a>
@@ -741,7 +629,6 @@ Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quot
 ```html
 <p><small>&copy; 2020 Atko, Inc. All Rights Reserved.</small></p>
 ```
-
 </figure>
 
 ## strong <a name="strong"></a>
@@ -764,7 +651,6 @@ Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quot
   For your safety and the safety of others, <strong>please don't run.</strong>
 </p>
 ```
-
 </figure>
 
 <Description>
@@ -782,13 +668,9 @@ You can also nest `strong`. Doing so will provide additional style.
 
 ```html
 <p>
-  <strong
-    >For your safety and the safety of others,
-    <strong>please don't run.</strong></strong
-  >
+  <strong>For your safety and the safety of others, <strong>please don't run.</strong></strong>
 </p>
 ```
-
 </figure>
 
 ## sub <a name="sub"></a>
@@ -808,11 +690,9 @@ You can also nest `strong`. Doing so will provide additional style.
 
 ```html
 <p>
-  Penicillin (R-C<sub>9</sub>H<sub>11</sub>N<sub>2</sub>O<sub>4</sub>S) was
-  discovered by Alexander Fleming in 1928.
+  Penicillin (R-C<sub>9</sub>H<sub>11</sub>N<sub>2</sub>O<sub>4</sub>S) was discovered by Alexander Fleming in 1928.
 </p>
 ```
-
 </figure>
 
 ## summary <a name="summary"></a>
@@ -840,14 +720,9 @@ See <a href="#details">`details`</a> for example.
   </div>
 
 ```html
-<p>
-  The <b>Pythagorean theorem</b> is often expressed as the following equation:
-</p>
-<p>
-  <var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var>
-</p>
+<p>The <b>Pythagorean theorem</b> is often expressed as the following equation:</p>
+<p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>
 ```
-
 </figure>
 
 ## var <a name="var"></a>
@@ -868,5 +743,4 @@ See <a href="#details">`details`</a> for example.
 <h3>Solve for <var>x</var></h3>
 <p>2<sup>2</sup>(<var>x</var>+3)+9-5=32</p>
 ```
-
 </figure>

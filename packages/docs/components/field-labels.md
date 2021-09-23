@@ -5,10 +5,10 @@ title: Field Labels
 description: These captions help make forms more accessible.
 lede: These captions help make forms more accessible by providing context to the user. They can be used with all Odyssey inputs.
 tabs:
-  - label: "Overview"
-    id: "overview"
-  - label: "HTML & SCSS"
-    id: "html-scss"
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
 links:
   - icon: github
     label: View source
@@ -145,23 +145,14 @@ Please refer to individual components for complete documentation. These examples
     </fieldset>
   </div>
 
-```html
-<fieldset class="ods-fieldset">
-  <div class="ods-fieldset-flex">
-    <input
-      class="ods-text-input"
-      type="text"
-      name="example-0"
-      id="example-0"
-      spellcheck="false"
-      value="Input value"
-      required
-    />
-    <label class="ods-label" for="example-0">Field label</label>
-  </div>
-</fieldset>
-```
-
+  ```html
+  <fieldset class="ods-fieldset">
+    <div class="ods-fieldset-flex">
+      <input class="ods-text-input" type="text" name="example-0" id="example-0" spellcheck="false" value="Input value" required>
+      <label class="ods-label" for="example-0">Field label</label>
+    </div>
+  </fieldset>
+  ```
 </figure>
 
 ### Field hint
@@ -182,40 +173,20 @@ Please refer to individual components for complete documentation. These examples
     </fieldset>
   </div>
 
-```html
-<fieldset class="ods-fieldset" aria-describedby="ods-field-hint">
-  <legend class="ods-input-legend">Field label</legend>
-  <aside class="ods-field--hint" id="field-hint">This is a field hint.</aside>
-  <input
-    class="ods-radio"
-    type="radio"
-    name="example-1"
-    id="example-1-0"
-    value="value-0"
-    required
-    checked
-  />
-  <label class="ods-radio--label" for="example-1-0">Label 1</label>
-  <input
-    class="ods-radio"
-    type="radio"
-    name="example-1"
-    id="example-1-1"
-    value="value-1"
-    required
-  />
-  <label class="ods-radio--label" for="example-1-1">Label 2</label>
-  <input
-    class="ods-radio"
-    type="radio"
-    name="example-1"
-    id="example-1-2"
-    value="value-2"
-    required
-  />
-  <label class="ods-radio--label" for="example-1-2">Label 3</label>
-</fieldset>
-```
+  ```html
+  <fieldset class="ods-fieldset"  aria-describedby="ods-field-hint">
+    <legend class="ods-input-legend">Field label</legend>
+    <aside class="ods-field--hint" id="field-hint">
+      This is a field hint.
+    </aside>
+    <input class="ods-radio" type="radio" name="example-1" id="example-1-0" value="value-0" required checked>
+      <label class="ods-radio--label" for="example-1-0">Label 1</label>
+      <input class="ods-radio" type="radio" name="example-1" id="example-1-1" value="value-1" required>
+      <label class="ods-radio--label" for="example-1-1">Label 2</label>
+      <input class="ods-radio" type="radio" name="example-1" id="example-1-2" value="value-2" required>
+      <label class="ods-radio--label" for="example-1-2">Label 3</label>
+  </fieldset>
+  ```
 
 </figure>
 
@@ -235,40 +206,18 @@ Please refer to individual components for complete documentation. These examples
     </fieldset>
   </div>
 
-```html
-<fieldset class="ods-fieldset">
-  <legend class="ods-input-legend">Field legend label</legend>
-  <input
-    class="ods-checkbox is-ods-checkbox-invalid"
-    type="checkbox"
-    name="example-2"
-    id="example-2-1"
-    value="value-1"
-    checked
-  />
-  <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
-  <input
-    class="ods-checkbox is-ods-checkbox-invalid"
-    type="checkbox"
-    name="example-2"
-    id="example-2-2"
-    value="value-2"
-  />
-  <label class="ods-checkbox--label" for="example-2-2">Label 2</label>
-  <input
-    class="ods-checkbox is-ods-checkbox-invalid"
-    type="checkbox"
-    name="example-2"
-    id="example-2-3"
-    value="value-3"
-  />
-  <label class="ods-checkbox--label" for="example-2-3">Label 3</label>
-  <aside class="ods-field--error" id="checkbox-invalid-error">
-    <span class="u-visually-hidden">Error:</span> Invalid error description
-  </aside>
-</fieldset>
-```
-
+  ```html
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Field legend label</legend>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-1" value="value-1" checked>
+    <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-2" value="value-2">
+    <label class="ods-checkbox--label" for="example-2-2">Label 2</label>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-3" value="value-3">
+    <label class="ods-checkbox--label" for="example-2-3">Label 3</label>
+    <aside class="ods-field--error" id="checkbox-invalid-error"><span class="u-visually-hidden">Error:</span> Invalid error description</aside>
+  </fieldset>
+  ```
 </figure>
 
 ### Optional fields
@@ -291,23 +240,20 @@ Please refer to individual components for complete documentation. These examples
     </fieldset>
   </div>
 
-```html
-<fieldset class="ods-fieldset" data-optional>
-  <div class="ods-fieldset-flex">
-    <select class="ods-select" data-js-choices id="example-3" name="example-3">
-      <option></option>
-      <option value="value-1">Option 1</option>
-      <option value="value-2">Option 2</option>
-      <option value="value-3" selected>Option 3</option>
-      <option value="value-4">Option 4</option>
-      <option value="value-5">Option 5</option>
-      <option value="value-6">Option 6</option>
-    </select>
-    <label class="ods-label" for="example-3"
-      >Field label <span class="ods-label--optional">Optional</span></label
-    >
-  </div>
-</fieldset>
-```
-
+  ```html
+  <fieldset class="ods-fieldset" data-optional>
+    <div class="ods-fieldset-flex">
+      <select class="ods-select" data-js-choices id="example-3" name="example-3">
+        <option></option>
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3" selected>Option 3</option>
+        <option value="value-4">Option 4</option>
+        <option value="value-5">Option 5</option>
+        <option value="value-6">Option 6</option>
+      </select>
+      <label class="ods-label" for="example-3">Field label <span class="ods-label--optional">Optional</span></label>
+    </div>
+  </fieldset>
+  ```
 </figure>

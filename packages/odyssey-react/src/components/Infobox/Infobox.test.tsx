@@ -16,11 +16,10 @@ import Infobox from ".";
 const role = "status";
 const infoboxTitle = "Infobox title";
 const infoboxContent = "Infobox.Content container.";
-const infoboxActions =
-  "Infobox.Actions container, <a href='https://www.okta.com'>with a link</a>.";
+const infoboxActions = "Infobox.Actions container, <a href='https://www.okta.com'>with a link</a>.";
 
 describe("Infobox", () => {
-  it("renders the Infobox", () => {
+  it('renders the Infobox', () => {
     const { getByRole } = render(
       <Infobox title={infoboxTitle}>
         <Infobox.Content>{infoboxContent}</Infobox.Content>
@@ -30,7 +29,7 @@ describe("Infobox", () => {
     expect(getByRole(role)).toBeInTheDocument();
   });
 
-  it("renders the Infobox title", () => {
+  it('renders the Infobox title', () => {
     const { getByText } = render(
       <Infobox title={infoboxTitle}>
         <Infobox.Content>{infoboxContent}</Infobox.Content>
@@ -40,7 +39,7 @@ describe("Infobox", () => {
     expect(getByText(infoboxTitle)).toBeInTheDocument();
   });
 
-  it("renders the Infobox.Content", () => {
+  it('renders the Infobox.Content', () => {
     const { getByText } = render(
       <Infobox>
         <Infobox.Content>{infoboxContent}</Infobox.Content>
@@ -49,7 +48,7 @@ describe("Infobox", () => {
     expect(getByText(infoboxContent)).toBeInTheDocument();
   });
 
-  it("renders the Infobox.Actions", () => {
+  it('renders the Infobox.Actions', () => {
     const { getByText } = render(
       <Infobox>
         <Infobox.Actions>{infoboxActions}</Infobox.Actions>
@@ -58,21 +57,21 @@ describe("Infobox", () => {
     expect(getByText(infoboxActions)).toBeInTheDocument();
   });
 
-  it("renders through children that are not expected", () => {
+  it('renders through children that are not expected', () => {
     render(
       // @ts-expect-error Infobox does not accept text as children
-      <Infobox>oops</Infobox>
+      <Infobox>
+        oops
+      </Infobox>
     );
 
-    expect(screen.getByRole(role)).toContainHTML("oops");
+    expect(screen.getByRole(role)).toContainHTML('oops');
   });
 
-  a11yCheck(() =>
-    render(
+  a11yCheck(() => render(
       <Infobox title={infoboxTitle}>
         <Infobox.Content>{infoboxContent}</Infobox.Content>
         <Infobox.Actions>{infoboxActions}</Infobox.Actions>
       </Infobox>
-    )
-  );
+    ))
 });

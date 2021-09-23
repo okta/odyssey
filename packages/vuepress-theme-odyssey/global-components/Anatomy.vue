@@ -3,7 +3,7 @@
     v-if="img"
     :class="{
       'docskit-figure-anatomy': true,
-      [`is-figure-anatomy-filled`]: fill,
+      [`is-figure-anatomy-filled`]: fill
     }"
   >
     <!-- eslint-disable vue/no-v-html -->
@@ -25,16 +25,16 @@ export default {
     metadata: {
       type: String,
       required: false,
-      default: null,
+      default: null
     },
     fill: {
       type: Boolean,
-      required: false,
+      required: false
     },
     img: {
       type: String,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 };
 </script>

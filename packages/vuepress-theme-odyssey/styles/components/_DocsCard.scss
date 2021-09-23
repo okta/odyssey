@@ -43,7 +43,7 @@
       // and only used within this component.
       @include border-radius(0, 32px, 0, 32px);
 
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       inset-block-start: 0;

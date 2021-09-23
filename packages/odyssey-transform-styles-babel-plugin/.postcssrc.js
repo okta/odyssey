@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const {
-  default: transformStyles,
-} = require("@okta/odyssey-transform-styles-postcss-preset");
+const { default: transformStyles } = require('@okta/odyssey-transform-styles-postcss-preset')
 
 module.exports = (ctx) => {
   return {
-    plugins: [transformStyles(ctx.transformStyles)],
-  };
-};
+    plugins: [
+      transformStyles(ctx.transformStyles)
+    ]
+  }
+}

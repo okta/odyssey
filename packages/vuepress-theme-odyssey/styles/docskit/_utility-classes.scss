@@ -20,9 +20,9 @@
 }
 
 .is-fpo {
-  background: cv("yellow", "000");
+  background: cv('yellow', '000');
 
   &.is-fpo-negative {
-    background: cv("red", "000");
+    background: cv('red', '000');
   }
 }

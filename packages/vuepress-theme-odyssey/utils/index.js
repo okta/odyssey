@@ -16,7 +16,9 @@ export const endingSlashRE = /\/$/;
 export const outboundRE = /^[a-z]+:/i;
 
 export function normalize(path) {
-  return decodeURI(path).replace(hashRE, "").replace(extRE, "");
+  return decodeURI(path)
+    .replace(hashRE, "")
+    .replace(extRE, "");
 }
 
 export function isExternal(path) {

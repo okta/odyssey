@@ -10,6 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const getTestRule = require("jest-preset-stylelint/getTestRule");
+const getTestRule = require('jest-preset-stylelint/getTestRule');
 
-global.testRule = getTestRule({ plugins: ["./src/rules"] });
+global.testRule = getTestRule({ plugins: ['./src/rules'] });

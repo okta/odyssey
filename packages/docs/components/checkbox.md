@@ -5,10 +5,10 @@ title: Checkbox
 description: Checkboxes appear as a square shaped UI accompanied by a caption.
 lede: Checkboxes appear as a square shaped UI accompanied by a caption. Checkboxes can be found in tables, forms, or in and around text inputs.
 tabs:
-  - label: "Overview"
-    id: "overview"
-  - label: "HTML & SCSS"
-    id: "html-scss"
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
 links:
   - icon: github
     label: View source
@@ -279,36 +279,17 @@ export default {
     </fieldset>
   </div>
 
-```html
-<fieldset class="ods-fieldset">
-  <legend class="ods-input-legend">Field legend label</legend>
-  <input
-    class="ods-checkbox"
-    type="checkbox"
-    name="example-0"
-    id="label-1"
-    value="value-1"
-    checked
-  />
-  <label class="ods-checkbox--label" for="label-1">Label 1</label>
-  <input
-    class="ods-checkbox"
-    type="checkbox"
-    name="example-0"
-    id="label-2"
-    value="value-2"
-  />
-  <label class="ods-checkbox--label" for="label-2">Label 2</label>
-  <input
-    class="ods-checkbox"
-    type="checkbox"
-    name="example-0"
-    id="label-3"
-    value="value-3"
-  />
-  <label class="ods-checkbox--label" for="label-3">Label 3</label>
-</fieldset>
-```
+  ```html
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Field legend label</legend>
+    <input class="ods-checkbox" type="checkbox" name="example-0" id="label-1" value="value-1" checked>
+    <label class="ods-checkbox--label" for="label-1">Label 1</label>
+    <input class="ods-checkbox" type="checkbox" name="example-0" id="label-2" value="value-2">
+    <label class="ods-checkbox--label" for="label-2">Label 2</label>
+    <input class="ods-checkbox" type="checkbox" name="example-0" id="label-3" value="value-3">
+    <label class="ods-checkbox--label" for="label-3">Label 3</label>
+  </fieldset>
+  ```
 
 </figure>
 
@@ -322,21 +303,12 @@ export default {
     </fieldset>
   </div>
 
-```html
-<fieldset class="ods-fieldset">
-  <input
-    class="ods-checkbox"
-    type="checkbox"
-    name="example-1"
-    id="example-1"
-    value="terms-accepted"
-    checked
-    required
-  />
-  <label class="ods-checkbox--label" for="example-1">Inline label</label>
-</fieldset>
-```
-
+  ```html
+  <fieldset class="ods-fieldset">
+    <input class="ods-checkbox" type="checkbox" name="example-1" id="example-1" value="terms-accepted" checked required>
+    <label class="ods-checkbox--label" for="example-1">Inline label</label>
+  </fieldset>
+  ```
 </figure>
 
 ### <span class="u-visually-hidden">Checkbox</span> State: Disabled
@@ -356,50 +328,19 @@ export default {
     </fieldset>
   </div>
 
-```html
-<fieldset class="ods-fieldset">
-  <legend class="ods-input-legend">Field legend label</legend>
-  <input
-    class="ods-checkbox"
-    type="checkbox"
-    name="example-2"
-    id="example-2-1"
-    value="value-1"
-    checked
-    disabled
-  />
-  <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
-  <input
-    class="ods-checkbox"
-    type="checkbox"
-    name="example-2"
-    id="example-2-2"
-    value="value-2"
-    disabled
-  />
-  <label class="ods-checkbox--label" for="example-2-2">Label 2</label>
-  <input
-    class="ods-checkbox is-ods-checkbox-invalid"
-    type="checkbox"
-    name="example-2"
-    id="example-2-3"
-    value="value-3"
-    checked
-    disabled
-  />
-  <label class="ods-checkbox--label" for="example-2-3">Label 3</label>
-  <input
-    class="ods-checkbox is-ods-checkbox-invalid"
-    type="checkbox"
-    name="example-2"
-    id="example-2-4"
-    value="value-4"
-    disabled
-  />
-  <label class="ods-checkbox--label" for="example-2-4">Label 4</label>
-</fieldset>
-```
-
+  ```html
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Field legend label</legend>
+    <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-1" value="value-1" checked disabled>
+    <label class="ods-checkbox--label" for="example-2-1">Label 1</label>
+    <input class="ods-checkbox" type="checkbox" name="example-2" id="example-2-2" value="value-2" disabled>
+    <label class="ods-checkbox--label" for="example-2-2">Label 2</label>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-3" value="value-3" checked disabled>
+    <label class="ods-checkbox--label" for="example-2-3">Label 3</label>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-2" id="example-2-4" value="value-4" disabled>
+    <label class="ods-checkbox--label" for="example-2-4">Label 4</label>
+  </fieldset>
+  ```
 </figure>
 
 ### <span class="u-visually-hidden">Checkbox</span> State: Error
@@ -418,40 +359,18 @@ export default {
     </fieldset>
   </div>
 
-```html
-<fieldset class="ods-fieldset">
-  <legend class="ods-input-legend">Field legend label</legend>
-  <input
-    class="ods-checkbox is-ods-checkbox-valid"
-    type="checkbox"
-    name="example-3"
-    id="example-3-1"
-    value="value-1"
-    checked
-  />
-  <label class="ods-checkbox--label" for="example-3-1">Label 1</label>
-  <input
-    class="ods-checkbox is-ods-checkbox-invalid"
-    type="checkbox"
-    name="example-3"
-    id="example-3-2"
-    value="value-2"
-  />
-  <label class="ods-checkbox--label" for="example-3-2">Label 2</label>
-  <input
-    class="ods-checkbox is-ods-checkbox-invalid"
-    type="checkbox"
-    name="example-3"
-    id="example-3-3"
-    value="value-3"
-  />
-  <label class="ods-checkbox--label" for="example-3-3">Label 3</label>
-  <aside class="ods-field--error" id="checkbox-invalid-error">
-    Invalid error description
-  </aside>
-</fieldset>
-```
-
+  ```html
+  <fieldset class="ods-fieldset">
+    <legend class="ods-input-legend">Field legend label</legend>
+    <input class="ods-checkbox is-ods-checkbox-valid" type="checkbox" name="example-3" id="example-3-1" value="value-1" checked>
+    <label class="ods-checkbox--label" for="example-3-1">Label 1</label>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-3" id="example-3-2" value="value-2">
+    <label class="ods-checkbox--label" for="example-3-2">Label 2</label>
+    <input class="ods-checkbox is-ods-checkbox-invalid" type="checkbox" name="example-3" id="example-3-3" value="value-3">
+    <label class="ods-checkbox--label" for="example-3-3">Label 3</label>
+    <aside class="ods-field--error" id="checkbox-invalid-error">Invalid error description</aside>
+  </fieldset>
+  ```
 </figure>
 
 :::

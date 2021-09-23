@@ -10,9 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const path = require("path");
-const iconSrc = path.join(
-  path.dirname(require.resolve("@okta/odyssey-icons/package.json")),
-  "src"
-);
+const path = require('path');
+const iconSrc = path.join(path.dirname(require.resolve('@okta/odyssey-icons/package.json')), 'src');
 process.stdout.write(iconSrc);

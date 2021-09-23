@@ -12,7 +12,7 @@
 
 import { Story } from "@storybook/react";
 import Infobox from ".";
-import Link from "../Link";
+import Link from '../Link';
 import type { Props } from ".";
 
 export default {
@@ -20,45 +20,43 @@ export default {
   component: Infobox,
   argTypes: {
     children: {
-      control: { type: null },
+      control: { type: null }
     },
     title: {
       defaultValue: "Infobox title",
-      control: { type: "text" },
-    },
-  },
+      control: { type: "text" }
+    }
+  }
 };
 
-const Template: Story<Props> = ({ title, variant }) => (
+const Template: Story<Props> = ({title, variant}) => (
   <Infobox title={title} variant={variant}>
     <Infobox.Content>
-      An infobox is a type of alert that provides feedback in response to a user
-      action or system activity.
-    </Infobox.Content>
+      An infobox is a type of alert that provides feedback in response to a user action or system activity.
+   </Infobox.Content>
     <Infobox.Actions>
-      <Link href="https://www.okta.com" variant="secondary">
-        Link to an associated action.
-      </Link>
+      <Link href="https://www.okta.com" variant="secondary">Link to an associated action.</Link>
     </Infobox.Actions>
   </Infobox>
 );
 
 export const Info = Template.bind({});
 Info.args = {
-  variant: "info",
+  variant: "info"
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
-  variant: "danger",
+  variant: "danger"
 };
 
 export const Caution = Template.bind({});
 Caution.args = {
-  variant: "caution",
+  variant: "caution"
 };
 
 export const Success = Template.bind({});
 Success.args = {
-  variant: "success",
+  variant: "success"
 };
+

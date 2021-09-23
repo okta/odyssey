@@ -1,7 +1,10 @@
 {
   "extends": "@okta/odyssey-typescript/tsconfig.react.types.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
   },
-  "exclude": ["**/*.test.**", "**/*.stories.**"]
+  "exclude": [
+    "**/*.test.**",
+    "**/*.stories.**"
+  ]
 }

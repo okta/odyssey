@@ -21,97 +21,83 @@ export default {
   argTypes: {
     title: {
       defaultValue: "Title",
-      control: {
+      control: { 
         type: "text",
-      },
+      }
     },
     body: {
       defaultValue: "Toast body text.",
-      control: { type: "text" },
-    },
+      control: { type: "text" }
+    }
   },
 };
 
 const Template: Story<PropsToast> = (args) => <Toast {...args} />;
 const TemplateProvider: Story<PropsToast> = () => {
   return (
-    <Toast.Provider
-      onToastExit={(id) => {
-        console.log(`toastExited: ${id}`);
-      }}
-    >
+    <Toast.Provider onToastExit={(id) => { console.log(`toastExited: ${id}`)}}>
       <DemoApp />
     </Toast.Provider>
-  );
+  )
 };
 
 /**
  * A simple demo application which shows how to implement
  * the Toast.Provider in your own app.
- *
+ * 
  * @todo Replace vanilla HTML with Odyssey form components once finalized
  */
 const DemoApp = () => {
   const { addToast } = useToast();
-
+  
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-
+    
     const formData = new FormData(event.currentTarget);
 
     addToast({
-      title: formData.get("title") as string,
-      body: formData.get("body") as string,
-      variant: formData.get("variant") as ToastVariants,
-    });
-  };
+      title: formData.get('title') as string,
+      body: formData.get('body') as string,
+      variant: formData.get('variant') as ToastVariants
+    })
+  }
 
   return (
-    <form id="form-toast-demo" onSubmit={handleSubmit}>
-      <label htmlFor="variant">Variant</label>
-      <select id="variant" name="variant">
-        <option>info</option>
-        <option>success</option>
-        <option>caution</option>
-        <option>danger</option>
-      </select>
-      <label htmlFor="title">Title</label>
-      <input
-        id="title"
-        name="title"
-        type="text"
-        defaultValue="Title"
-        required
-      />
-      <label htmlFor="body">Body</label>
-      <input
-        id="body"
-        name="body"
-        defaultValue="Descriptive body content (optional)"
-      />
-      <input type="submit" defaultValue="Emit toast" />
+    <form id="form-toast-demo" onSubmit={handleSubmit}> 
+        <label htmlFor="variant">Variant</label>
+        <select id="variant" name="variant">
+          <option>info</option>
+          <option>success</option>
+          <option>caution</option>
+          <option>danger</option>
+        </select>
+        <label htmlFor="title">Title</label>
+        <input id="title" name="title" type="text" defaultValue="Title" required/>
+        <label htmlFor="body">Body</label>
+        <input id="body" name="body" defaultValue="Descriptive body content (optional)"/>
+        <input type="submit" defaultValue="Emit toast" />
     </form>
-  );
-};
+  )
+}
 
 export const Info = Template.bind({});
 Info.args = {
-  variant: "info",
+  variant: "info"
 };
 
 export const Success = Template.bind({});
 Success.args = {
-  variant: "success",
+  variant: "success"
 };
 
 export const Caution = Template.bind({});
 Caution.args = {
-  variant: "caution",
+  variant: "caution"
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
-  variant: "danger",
+  variant: "danger"
 };
 
 export const ToastProvider = TemplateProvider.bind({});

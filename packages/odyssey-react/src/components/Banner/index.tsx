@@ -10,20 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactNode } from "react";
-import Title from "../Title";
-import { useCx, useOmit } from "../../utils";
-import Button from "../Button";
-import styles from "./Banner.module.scss";
+import type { FunctionComponent, ReactNode } from 'react';
+import Title from '../Title';
+import { useCx, useOmit } from '../../utils';
+import Button from '../Button';
+import styles from './Banner.module.scss';
 
-export type BannerVariants = "info" | "danger" | "caution";
+export type BannerVariants = 'info' | 'danger' | 'caution';
 interface ComponentProps {
   /**
-   * Actions, or links to be rendered on the right side of
+   * Actions, or links to be rendered on the right side of 
    * the component.
    */
   children: ReactNode;
-
+  
   /**
    * The visual variant to be displayed to the user.
    * @default info
@@ -47,19 +47,20 @@ interface ComponentProps {
 }
 
 type DismissableComponentProps =
-  | { onDismiss?: never; dismissButtonLabel?: never }
-  | { onDismiss: () => void; dismissButtonLabel: string };
+| { onDismiss?: never; dismissButtonLabel?: never }
+| { onDismiss: () => void; dismissButtonLabel: string }
+
 
 export type Props = ComponentProps & DismissableComponentProps;
 
 /**
  * Banners let users know important messages related to their overall experience
- * on the website. They can be purely informational messages or critical errors
+ * on the website. They can be purely informational messages or critical errors 
  * to act upon.
  *
  * @component
  * @example
- * <Banner
+ * <Banner 
  *  variant="primary"
  *  open={isOpen}
  *  title="New launch scheduled"
@@ -70,7 +71,7 @@ export type Props = ComponentProps & DismissableComponentProps;
  * </Banner>
  */
 
-const Banner: FunctionComponent<Props> = (props) => {
+ const Banner: FunctionComponent<Props> = (props) => {
   const {
     children,
     title,
@@ -91,35 +92,26 @@ const Banner: FunctionComponent<Props> = (props) => {
   const omitProps = useOmit(rest);
 
   return (
-    <aside {...omitProps} className={componentClass} role="status">
+    <aside
+      {...omitProps}
+      className={componentClass}
+      role="status"
+    >
       <span className={styles.icon}>
         {/* @todo Insert <Icon> component */}
         &#8253;
       </span>
-      {title && (
-        <div className={styles.title}>
-          <Title
-            visualLevel="6"
-            lineHeight="title"
-            noEndMargin
-            children={title}
-          />
-        </div>
-      )}
+      {title && <div className={styles.title}><Title visualLevel="6" lineHeight="title" noEndMargin children={title} /></div> }
       {content && <p className={styles.content}>{content}</p>}
       {children && <section className={styles.actions}>{children}</section>}
-      {onDismiss && (
+      {onDismiss &&
         <span className={styles.dismiss}>
-          <Button
-            variant="dismiss"
-            onClick={onDismiss}
-            aria-label={dismissButtonLabel}
-          >
+          <Button variant="dismiss" onClick={onDismiss} aria-label={dismissButtonLabel}>
             {/* @todo Insert <Icon> component, dismiss variant */}
             &#8253;
           </Button>
         </span>
-      )}
+      }
     </aside>
   );
 };

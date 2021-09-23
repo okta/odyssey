@@ -18,37 +18,39 @@ export default {
   title: `Components/FieldLabel`,
   component: FieldLabel,
   argTypes: {
-    children: { control: "text" },
-    id: { control: "text" },
+    children: { control: 'text' },
+    id: { control: 'text' },
   },
 };
 
-const Template: Story<Props> = (props) => <FieldLabel {...props} />;
+const Template: Story<Props> = (props) => (
+  <FieldLabel {...props} />
+);
 
 export const Label = Template.bind({});
 Label.args = {
   variant: "label",
-  children: "Destination",
+  children: "Destination"
 };
 
 export const Hint = Template.bind({});
 Hint.args = {
   variant: "hint",
-  children: "None of these are achievable... yet.",
+  children: "None of these are achievable... yet."
 };
 
 export const _Error = Template.bind({});
 _Error.args = {
   variant: "error",
-  children: "You must acknowledge the dangers before proceeding.",
+  children: "You must acknowledge the dangers before proceeding."
 };
 
-export const Optional: Story<Props> = (props) => (
+export const Optional: Story<Props> = (props) =>  (
   <span data-optional>
     <FieldLabel {...props} />
   </span>
-);
+)
 Optional.args = {
   variant: "optional",
-  children: "Optional",
+  children: "Optional"
 };

@@ -32,17 +32,11 @@
     @include mq(m) {
       grid-column: 1 / 4;
       margin-block-start: $spacing-m;
-      .docs-hero--title {
-        font-size: $size-title-1;
-      }
+      .docs-hero--title { font-size: $size-title-1; }
     }
 
-    .docs-hero--title {
-      font-size: $size-title-1;
-    }
-    .docs-hero--desc {
-      font-size: $size-title-4;
-    }
+    .docs-hero--title { font-size: $size-title-1; }
+    .docs-hero--desc { font-size: $size-title-4; }
   }
 
   .docs-hero-moon {
@@ -53,7 +47,7 @@
     max-width: 840px;
 
     circle {
-      fill: var(--docs-home-hero-moon, #{cv("gray", "000")});
+      fill: var(--docs-home-hero-moon, #{cv('gray', '000')});
     }
   }
 
@@ -76,7 +70,7 @@
     }
 
     .docs-hero-rocket--rocket {
-      fill: var(--docs-home-hero-rocket, #{cv("gray", "900")});
+      fill: var(--docs-home-hero-rocket, #{cv('gray', '900')});
     }
   }
 }

@@ -10,31 +10,35 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ComponentProps } from "react";
-import { forwardRef } from "react";
-import type { CellTextFormats } from "./Table";
-import { useCx, useOmit } from "../../utils";
+import type { ReactNode, ComponentProps } from 'react';
+import { forwardRef } from 'react';
+import type { CellTextFormats } from './Table';
+import { useCx, useOmit } from '../../utils';
 
-import styles from "./Table.module.scss";
+import styles from './Table.module.scss';
 
 export type Props = {
-  children?: ReactNode;
+  children?: ReactNode,
   /**
    * The basic text format for the cell.
    */
-  format?: CellTextFormats;
-} & ComponentProps<"th">;
+   format?: CellTextFormats,
+} & ComponentProps<'th'>
 
 type Ref = HTMLTableHeaderCellElement;
 
 const TableHeaderCell = forwardRef<Ref, Props>((props, ref) => {
-  const { children, format, ...rest } = props;
+  const {
+    children,
+    format,
+    ...rest
+  } = props;
 
   const componentClass = useCx(
     styles.cell,
     styles.headerCell,
-    props.scope === "col" && styles.headerCellCol,
-    format && styles[`${format}Format`]
+    props.scope === 'col' && styles.headerCellCol,
+    format && styles[`${format}Format`],
   );
 
   const omitProps = useOmit(rest);

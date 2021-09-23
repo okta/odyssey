@@ -10,15 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-var path = require("path");
+var path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  devServer: {
-    index: "index.html",
-    contentBase: path.join(__dirname, "dist"),
+   devServer: {
+    index: 'index.html',
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9000,
+    port: 9000
   },
   module: {
     rules: [
@@ -26,11 +26,11 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
-          "style-loader",
+          'style-loader',
           // Translates CSS into CommonJS
-          "css-loader",
+          'css-loader',
           // Compiles Sass to CSS
-          "sass-loader",
+          'sass-loader',
         ],
       },
     ],
@@ -38,7 +38,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       minify: false,
-      template: path.resolve(__dirname, "src", "index.html"),
-    }),
-  ],
+      template: path.resolve(__dirname, "src", "index.html")
+    })
+  ]
 };

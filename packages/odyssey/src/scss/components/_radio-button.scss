@@ -144,7 +144,7 @@
   &::after {
     @include border-radius(1.125rem);
 
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     inset-block-start: 50%;

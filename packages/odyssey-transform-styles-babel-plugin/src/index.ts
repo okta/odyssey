@@ -10,5 +10,5 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./transformStyles";
-export { default } from "./transformStyles";
+export * from './transformStyles';
+export { default } from './transformStyles';

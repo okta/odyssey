@@ -19,8 +19,8 @@ export default {
   component: Status,
   argTypes: {
     labelHidden: {
-      control: { type: "boolean" },
-    },
+      control: { type: "boolean" }
+    }
   },
 };
 
@@ -28,7 +28,7 @@ const Template: Story<Props> = ({
   label,
   descriptor,
   labelHidden,
-  variant,
+  variant
 }) => (
   <Status
     label={label}
@@ -36,41 +36,41 @@ const Template: Story<Props> = ({
     labelHidden={labelHidden}
     variant={variant}
   />
-);
+)
 
 export const Neutral = Template.bind({});
 Neutral.args = {
   variant: "neutral",
   label: "Status Label",
-  descriptor: "Neutral Descriptor",
+  descriptor: "Neutral Descriptor"
 };
 
 export const Success = Template.bind({});
 Success.args = {
   variant: "success",
   label: "Status Label",
-  descriptor: "Success Descriptor",
+  descriptor: "Success Descriptor"
 };
 
 export const Caution = Template.bind({});
 Caution.args = {
   variant: "caution",
   label: "Status Label",
-  descriptor: "Caution Descriptor",
+  descriptor: "Caution Descriptor"
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
   variant: "danger",
   label: "Status Label",
-  descriptor: "Danger Descriptor",
+  descriptor: "Danger Descriptor"
 };
 
 export const WithLabelHidden = Template.bind({});
-WithLabelHidden.storyName = "with label hidden";
+WithLabelHidden.storyName = "with label hidden"
 WithLabelHidden.args = {
   labelHidden: true,
   variant: "danger",
   label: "Status Label",
-  descriptor: "Danger Descriptor",
+  descriptor: "Danger Descriptor"
 };

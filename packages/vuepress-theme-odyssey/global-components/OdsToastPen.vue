@@ -14,14 +14,14 @@
 export default {
   components: { OdsToast: () => import("./OdsToast.vue") },
   data: () => ({
-    toasts: [],
+    toasts: []
   }),
   methods: {
     addToast(variant) {
       this.toasts.push({
-        variant,
+        variant
       });
-    },
-  },
+    }
+  }
 };
 </script>

@@ -28,13 +28,13 @@
   inset-inline-start: 0;
   align-items: center;
   justify-content: center;
-  background: rgba(cv("gray", "900"), 0.75);
+  background: rgba(cv('gray', '900'), 0.75);
 
-  .root[aria-hidden="false"] & {
+  .root[aria-hidden='false'] & {
     animation: overlayIn $base-duration $base-timing;
   }
 
-  .root[aria-hidden="true"] & {
+  .root[aria-hidden='true'] & {
     animation: overlayOut $base-duration $base-timing;
   }
 }
@@ -51,11 +51,11 @@
   overflow-y: auto;
   background-color: $white;
 
-  .root[aria-hidden="false"] & {
+  .root[aria-hidden='false'] & {
     animation: dialogIn $base-duration $base-timing;
   }
 
-  .root[aria-hidden="true"] & {
+  .root[aria-hidden='true'] & {
     animation: dialogOut $base-duration $base-timing;
   }
 }

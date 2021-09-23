@@ -9,13 +9,13 @@
 export default {
   name: "DocsTopbar",
   components: {
-    DocsLink: () => import("./DocsLink.vue"),
+    DocsLink: () => import("./DocsLink.vue")
   },
   props: {
     title: {
       type: String,
-      default: "default",
-    },
-  },
+      default: "default"
+    }
+  }
 };
 </script>

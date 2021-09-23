@@ -13,10 +13,7 @@
 .docskit-container {
   display: grid;
   grid-column-gap: $spacing-l;
-  grid-template-columns: minmax(min-content, max-content) minmax(
-      min-content,
-      #{$max-line-length}
-    );
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, #{$max-line-length});
 
   @include mq(m) {
     display: block;
@@ -95,7 +92,7 @@
   }
 
   /* stylelint-disable */
-  pre[class*="language-"] {
+  pre[class*='language-'] {
     margin-block: 0;
     margin-inline: 0;
     padding-block: $spacing-m;
@@ -105,7 +102,7 @@
     border-radius: 0 0 6px 6px;
   }
 
-  .docs-example--rendered + div[class*="language-"] pre[class*="language-"] {
+  .docs-example--rendered + div[class*='language-'] pre[class*='language-'] {
     border-block-start: 0;
     border-radius: 0 0 6px 6px;
   }

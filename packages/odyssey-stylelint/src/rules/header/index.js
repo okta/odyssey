@@ -10,23 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const stylelint = require("stylelint");
-const { pattern, licenseLines, licenseComment } = require("./license");
+const stylelint = require('stylelint');
+const { pattern, licenseLines, licenseComment } = require('./license');
 
-const ruleName = "odyssey/header";
+const ruleName = 'odyssey/header';
 const messages = stylelint.utils.ruleMessages(ruleName, {
-  missing: "missing header",
-  incorrect: "incorrect header",
+  missing: 'missing header',
+  incorrect: 'incorrect header'
 });
 
 function isLicenseHeader(text) {
-  const textLines = text.split("\n");
+  const textLines = text.split('\n');
 
   return licenseLines.every((line, idx) => {
     const candidate = textLines[idx];
 
-    if (idx === 1) {
-      // copyright line with dynamic year value
+    if (idx === 1) { // copyright line with dynamic year value
       return pattern.test(candidate);
     }
 
@@ -38,7 +37,7 @@ function rule(_, options = {}, context = {}) {
   return function ruleBody(root, result) {
     const fix = context.fix && !(options.disableFix || false);
     const first = root.first;
-    const rootComment = first.type === "comment";
+    const rootComment = first.type === 'comment';
 
     if (fix && !rootComment) {
       root.prepend(licenseComment);
@@ -74,7 +73,7 @@ function rule(_, options = {}, context = {}) {
   };
 }
 
-module.exports = Object.assign(stylelint.createPlugin(ruleName, rule), {
-  ruleName,
-  messages,
-});
+module.exports = Object.assign(
+  stylelint.createPlugin(ruleName, rule),
+  { ruleName, messages }
+);

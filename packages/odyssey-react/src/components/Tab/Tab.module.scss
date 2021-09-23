@@ -43,7 +43,7 @@
 
 .selectedState {
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     inset-block-end: -1px;
     inset-inline-start: 0;

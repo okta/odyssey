@@ -14,8 +14,7 @@
   margin-block-start: $spacing-xl;
   padding-block: $spacing-m;
   padding-inline: 0;
-  border-block-start: 2px solid
-    var(--border-color-display, #{$border-color-display});
+  border-block-start: 2px solid var(--border-color-display, #{$border-color-display});
   text-align: center;
 
   &,
@@ -29,12 +28,8 @@
   display: flex;
   justify-content: space-between;
 
-  .pagination--prev {
-    order: 1;
-  }
-  .pagination--next {
-    order: 3;
-  }
+  .pagination--prev { order: 1; }
+  .pagination--next { order: 3; }
 
   .pagination--slot {
     order: 2;

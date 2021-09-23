@@ -14,13 +14,13 @@ import { render, fireEvent } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
 import Checkbox from ".";
 
-const checkbox = "checkbox";
+const checkbox = 'checkbox';
 const label = `${checkbox}_label`;
 const value = `${checkbox}_value`;
 const name = `${checkbox}_name`;
 
 describe("Checkbox", () => {
-  it("renders visibly into the document", () => {
+  it('renders visibly into the document', () => {
     const { getByRole } = render(
       <Checkbox label={label} name={name} value={value} />
     );
@@ -28,32 +28,32 @@ describe("Checkbox", () => {
     expect(getByRole(checkbox)).toBeVisible();
   });
 
-  it("renders value attributed as expected for input", () => {
+  it('renders value attributed as expected for input', () => {
     const { getByRole } = render(
       <Checkbox label={label} name={name} value={value} />
     );
 
-    expect(getByRole(checkbox)).toHaveAttribute("value", value);
+    expect(getByRole(checkbox)).toHaveAttribute('value', value);
   });
 
-  it("renders name attribute as expected for input", () => {
+  it('renders name attribute as expected for input', () => {
     const { getByRole } = render(
       <Checkbox label={label} name={name} value={value} />
     );
 
-    expect(getByRole(checkbox)).toHaveAttribute("name", name);
+    expect(getByRole(checkbox)).toHaveAttribute('name', name);
   });
 
-  it("renders a provided id associating the input and label", () => {
+  it('renders a provided id associating the input and label', () => {
     const { getByRole, getByText } = render(
       <Checkbox label={label} name={name} value={value} id="foo" />
     );
 
-    expect(getByRole(checkbox)).toHaveAttribute("id", "foo");
-    expect(getByText(label)).toHaveAttribute("for", "foo");
+    expect(getByRole(checkbox)).toHaveAttribute('id', 'foo');
+    expect(getByText(label)).toHaveAttribute('for', 'foo');
   });
 
-  it("renders a generated id associating the input and label", () => {
+  it('renders a generated id associating the input and label', () => {
     const { getByLabelText } = render(
       <Checkbox label={label} name={name} value={value} />
     );
@@ -61,23 +61,19 @@ describe("Checkbox", () => {
     expect(getByLabelText(label)).toBeTruthy();
   });
 
-  it.each([["disabled"], ["checked"], ["required"]])(
-    "renders %s attribute",
-    (attr: string) => {
-      const { getByRole } = render(
-        <Checkbox
-          label={label}
-          value={value}
-          name={name}
-          {...{ [attr]: true }}
-        />
-      );
+  it.each([
+    ['disabled'],
+    ['checked'],
+    ['required']
+  ])('renders %s attribute', (attr: string) => {
+    const { getByRole } = render(
+      <Checkbox label={label} value={value} name={name} {...{ [attr]: true }} />
+    );
 
-      expect(getByRole(checkbox)).toHaveAttribute(attr);
-    }
-  );
+    expect(getByRole(checkbox)).toHaveAttribute(attr);
+  });
 
-  it("invokes onChange with expected args when change input event fires", () => {
+  it('invokes onChange with expected args when change input event fires', () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
@@ -88,38 +84,33 @@ describe("Checkbox", () => {
 
     expect(handle).toHaveBeenCalledTimes(1);
     expect(handle).toHaveBeenLastCalledWith(
-      expect.objectContaining({ type: "change" }),
+      expect.objectContaining({ type: 'change' }),
       value
     );
   });
 
   it.each<[string, EventType]>([
-    ["onBlur", "blur"],
-    ["onFocus", "focus"],
-  ])(
-    "invokes %s with expected args when %s input event fires",
-    (prop, type) => {
-      const handle = jest.fn();
+    ['onBlur', 'blur'],
+    ['onFocus', 'focus'],
+  ])('invokes %s with expected args when %s input event fires', (prop, type) => {
+    const handle = jest.fn();
 
-      const { getByRole } = render(
-        <Checkbox
-          {...{ [prop]: handle }}
-          label={label}
-          value={value}
-          name={name}
-        />
-      );
+    const { getByRole } = render(
+      <Checkbox {...{ [prop]: handle }} label={label} value={value} name={name} />
+    );
 
-      fireEvent[type].call(fireEvent, getByRole(checkbox));
+    fireEvent[type].call(
+      fireEvent,
+      getByRole(checkbox),
+    );
 
-      expect(handle).toHaveBeenCalledTimes(1);
-      expect(handle).toHaveBeenLastCalledWith(
-        expect.objectContaining({ type })
-      );
-    }
-  );
+    expect(handle).toHaveBeenCalledTimes(1);
+    expect(handle).toHaveBeenLastCalledWith(
+      expect.objectContaining({ type }),
+    );
+  });
 
-  it("invokes inputRef with expected args after render", () => {
+  it('invokes inputRef with expected args after render', () => {
     const handle = jest.fn();
 
     const { getByRole } = render(
@@ -130,5 +121,5 @@ describe("Checkbox", () => {
     expect(handle).toHaveBeenLastCalledWith(getByRole(checkbox));
   });
 
-  a11yCheck(() => render(<Checkbox label={label} value={value} name={name} />));
+  a11yCheck(() => render(<Checkbox label={label} value={value} name={name}/>))
 });

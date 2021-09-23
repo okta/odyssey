@@ -37,7 +37,7 @@ Make sure your asset pipeline utilizes <a href="https://github.com/postcss/autop
 To add a Odyssey to your build, import the compilation sheet directly.
 
 ```scss
-@import "node_modules/odyssey/src/scss/odyssey";
+@import 'node_modules/odyssey/src/scss/odyssey';
 ```
 
 This will import all functions, mixins, abstracts, components, and layouts into your build.

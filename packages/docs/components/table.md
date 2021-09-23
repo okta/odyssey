@@ -5,10 +5,10 @@ title: Table
 description: Tables provide structure for displaying sets of data across rows and columns.
 lede: Tables provide structure for displaying sets of data across rows and columns. They support multiple content types and some internal actions.
 tabs:
-  - label: "Overview"
-    id: "overview"
-  - label: "HTML & SCSS"
-    id: "html-scss"
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
 links:
   - icon: github
     label: View source
@@ -491,45 +491,44 @@ This same advice applies to nested tables or hidden rows as well. They can intro
     </figure>
   </div>
 
-```html
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Big and small planets</figcaption>
-  <table class="ods-table">
-    <caption>
-      Information about the largest and smallest planets.
-    </caption>
-    <thead>
-      <tr>
-        <th scope="column">Planet</th>
-        <th scope="column" class="is-ods-table-num">Radius (km)</th>
-        <th scope="column">Type</th>
-        <th scope="column" class="is-ods-table-date">Perihelion date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Jupiter</td>
-        <td class="is-ods-table-num">69,911</td>
-        <td>Gas giant</td>
-        <td class="is-ods-table-date">January 21, 2023</td>
-      </tr>
-      <tr>
-        <td>Earth</td>
-        <td class="is-ods-table-num">6,371</td>
-        <td>Terrestrial</td>
-        <td class="is-ods-table-date">January 2, 2021</td>
-      </tr>
-      <tr>
-        <td>Mercury</td>
-        <td class="is-ods-table-num">1,737</td>
-        <td>Terrestrial</td>
-        <td class="is-ods-table-date">&ndash;</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-```
-
+  ```html
+  <figure class="ods-table--figure">
+    <figcaption class="ods-table--figcaption">
+      Big and small planets
+    </figcaption>
+    <table class="ods-table">
+      <caption>Information about the largest and smallest planets.</caption>
+      <thead>
+        <tr>
+          <th scope="column">Planet</th>
+          <th scope="column" class="is-ods-table-num">Radius (km)</th>
+          <th scope="column">Type</th>
+          <th scope="column" class="is-ods-table-date">Perihelion date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jupiter</td>
+          <td class="is-ods-table-num">69,911</td>
+          <td>Gas giant</td>
+          <td class="is-ods-table-date">January 21, 2023</td>
+        </tr>
+        <tr>
+          <td>Earth</td>
+          <td class="is-ods-table-num">6,371</td>
+          <td>Terrestrial</td>
+          <td class="is-ods-table-date">January 2, 2021</td>
+        </tr>
+        <tr>
+          <td>Mercury</td>
+          <td class="is-ods-table-num">1,737</td>
+          <td>Terrestrial</td>
+          <td class="is-ods-table-date">&ndash;</td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+  ```
 </figure>
 
 ## Row headings
@@ -574,45 +573,44 @@ This same advice applies to nested tables or hidden rows as well. They can intro
     </figure>
   </div>
 
-```html
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Big and small planets</figcaption>
-  <table class="ods-table">
-    <caption>
-      Information about the largest and smallest planets.
-    </caption>
-    <thead>
-      <tr>
-        <th scope="column">Planet</th>
-        <th scope="column" class="is-ods-table-num">Radius (km)</th>
-        <th scope="column">Type</th>
-        <th scope="column" class="is-ods-table-date">Perihelion date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">Jupiter</th>
-        <td class="is-ods-table-num">69,911</td>
-        <td>Gas giant</td>
-        <td class="is-ods-table-date">January 21, 2023</td>
-      </tr>
-      <tr>
-        <th scope="row">Earth</th>
-        <td class="is-ods-table-num">6,371</td>
-        <td>Terrestrial</td>
-        <td class="is-ods-table-date">January 2, 2021</td>
-      </tr>
-      <tr>
-        <th scope="row">Mercury</th>
-        <td class="is-ods-table-num">1,737</td>
-        <td>Terrestrial</td>
-        <td class="is-ods-table-date">&ndash;</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-```
-
+  ```html
+  <figure class="ods-table--figure">
+    <figcaption class="ods-table--figcaption">
+      Big and small planets
+    </figcaption>
+    <table class="ods-table">
+      <caption>Information about the largest and smallest planets.</caption>
+      <thead>
+        <tr>
+          <th scope="column">Planet</th>
+          <th scope="column" class="is-ods-table-num">Radius (km)</th>
+          <th scope="column">Type</th>
+          <th scope="column" class="is-ods-table-date">Perihelion date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Jupiter</th>
+          <td class="is-ods-table-num">69,911</td>
+          <td>Gas giant</td>
+          <td class="is-ods-table-date">January 21, 2023</td>
+        </tr>
+        <tr>
+          <th scope="row">Earth</th>
+          <td class="is-ods-table-num">6,371</td>
+          <td>Terrestrial</td>
+          <td class="is-ods-table-date">January 2, 2021</td>
+        </tr>
+        <tr>
+          <th scope="row">Mercury</th>
+          <td class="is-ods-table-num">1,737</td>
+          <td>Terrestrial</td>
+          <td class="is-ods-table-date">&ndash;</td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+  ```
 </figure>
 
 ## Row grouping
@@ -672,60 +670,59 @@ This same advice applies to nested tables or hidden rows as well. They can intro
     </figure>
   </div>
 
-```html
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Big and small planets</figcaption>
-  <table class="ods-table">
-    <caption>
-      Information about some of the largest and smallest planets.
-    </caption>
-    <thead>
-      <tr>
-        <th scope="column">Type</th>
-        <th scope="column">Planet</th>
-        <th scope="column" class="is-ods-table-num">Radius (km)</th>
-        <th scope="column">Descriptor</th>
-        <th scope="column" class="is-ods-table-date">Perihelion date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row" rowspan="2">Gas giants</th>
-        <td>Jupiter</td>
-        <td class="is-ods-table-num">69,991</td>
-        <td>Jovian</td>
-        <td class="is-ods-table-date">January 21, 2023</td>
-      </tr>
-      <tr>
-        <td>Saturn</td>
-        <td class="is-ods-table-num">58,232</td>
-        <td>Saturnian</td>
-        <td class="is-ods-table-date">November 29, 2032</td>
-      </tr>
-      <tr>
-        <th scope="row" rowspan="3">Terrestrial</th>
-        <td>Earth</td>
-        <td class="is-ods-table-num">6,371</td>
-        <td>Terran</td>
-        <td class="is-ods-table-date">January 2, 2021</td>
-      </tr>
-      <tr>
-        <td>Venus</td>
-        <td class="is-ods-table-num">6,052</td>
-        <td>Venusian</td>
-        <td class="is-ods-table-date">&ndash;</td>
-      </tr>
-      <tr>
-        <td>Mars</td>
-        <td class="is-ods-table-num">3,389</td>
-        <td>Martian</td>
-        <td class="is-ods-table-date">August 3, 2020</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-```
-
+  ```html
+  <figure class="ods-table--figure">
+    <figcaption class="ods-table--figcaption">
+      Big and small planets
+    </figcaption>
+    <table class="ods-table">
+      <caption>Information about some of the largest and smallest planets.</caption>
+      <thead>
+        <tr>
+          <th scope="column">Type</th>
+          <th scope="column">Planet</th>
+          <th scope="column" class="is-ods-table-num">Radius (km)</th>
+          <th scope="column">Descriptor</th>
+          <th scope="column" class="is-ods-table-date">Perihelion date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row" rowspan="2">Gas giants</th>
+          <td>Jupiter</td>
+          <td class="is-ods-table-num">69,991</td>
+          <td>Jovian</td>
+          <td class="is-ods-table-date">January 21, 2023</td>
+        </tr>
+        <tr>
+          <td>Saturn</td>
+          <td class="is-ods-table-num">58,232</td>
+          <td>Saturnian</td>
+          <td class="is-ods-table-date">November 29, 2032</td>
+        </tr>
+        <tr>
+          <th scope="row" rowspan="3">Terrestrial</th>
+          <td>Earth</td>
+          <td class="is-ods-table-num">6,371</td>
+          <td>Terran</td>
+          <td class="is-ods-table-date">January 2, 2021</td>
+        </tr>
+        <tr>
+          <td>Venus</td>
+          <td class="is-ods-table-num">6,052</td>
+          <td>Venusian</td>
+          <td class="is-ods-table-date">&ndash;</td>
+        </tr>
+        <tr>
+          <td>Mars</td>
+          <td class="is-ods-table-num">3,389</td>
+          <td>Martian</td>
+          <td class="is-ods-table-date">August 3, 2020</td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+  ```
 </figure>
 
 ## Empty tables
@@ -759,33 +756,33 @@ This same advice applies to nested tables or hidden rows as well. They can intro
     </figure>
   </div>
 
-```html
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Big and small planets</figcaption>
-  <table class="ods-table" data-null>
-    <caption>
-      Information about the largest and smallest planets.
-    </caption>
-    <thead>
-      <tr>
-        <th scope="column">Planet</th>
-        <th scope="column" class="is-ods-table-num">Radius (km)</th>
-        <th scope="column">Type</th>
-        <th scope="column" class="is-ods-table-date">Perihelion date</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-    <tfoot>
-      <tr>
-        <td colspan="4">
-          Aw beans. This set of filters didn't return any results.
-        </td>
-      </tr>
-    </tfoot>
-  </table>
-</figure>
-```
-
+  ```html
+  <figure class="ods-table--figure">
+    <figcaption class="ods-table--figcaption">
+      Big and small planets
+    </figcaption>
+    <table class="ods-table" data-null>
+      <caption>Information about the largest and smallest planets.</caption>
+      <thead>
+        <tr>
+          <th scope="column">Planet</th>
+          <th scope="column" class="is-ods-table-num">Radius (km)</th>
+          <th scope="column">Type</th>
+          <th scope="column" class="is-ods-table-date">Perihelion date</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">
+            Aw beans. This set of filters didn't return any results.
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </figure>
+  ```
 </figure>
 
 ## Checkboxes
@@ -854,96 +851,68 @@ This same advice applies to nested tables or hidden rows as well. They can intro
     </figure>
   </div>
 
-```html
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Big and small planets</figcaption>
-  <table class="ods-table">
-    <caption>
-      Information about the largest and smallest planets.
-    </caption>
-    <thead>
-      <tr>
-        <th scope="column" class="is-ods-table-checkbox">
-          <input
-            class="ods-checkbox is-ods-checkbox-indeterminate"
-            type="checkbox"
-            name="row[all]"
-            id="checkbox-all"
-            value="check-all"
-            checked
-          />
-          <label class="ods-checkbox--label" for="checkbox-all">
-            <span class="u-visually-hidden">Select all rows</span>
-          </label>
-        </th>
-        <th scope="column">Planet</th>
-        <th scope="column" class="is-ods-table-num">Radius (km)</th>
-        <th scope="column">Type</th>
-        <th scope="column" class="is-ods-table-date">Perihelion date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="is-ods-table-checkbox">
-          <input
-            class="ods-checkbox"
-            type="checkbox"
-            name="row[0]"
-            id="checkbox-0"
-            value="check-0"
-            checked
-          />
-          <label class="ods-checkbox--label" for="checkbox-0">
-            <span class="u-visually-hidden">Select this row</span>
-          </label>
-        </td>
-        <td>Jupiter</td>
-        <td class="is-ods-table-num">69,911</td>
-        <td>Gas giant</td>
-        <td class="is-ods-table-date">January 21, 2023</td>
-      </tr>
-      <tr>
-        <td class="is-ods-table-checkbox">
-          <input
-            class="ods-checkbox"
-            type="checkbox"
-            name="row[1]"
-            id="checkbox-1"
-            value="check-1"
-          />
-          <label class="ods-checkbox--label" for="checkbox-1">
-            <span class="u-visually-hidden">Select this row</span>
-          </label>
-        </td>
-        <td>Earth</td>
-        <td class="is-ods-table-num">6,371</td>
-        <td>Terrestrial</td>
-        <td class="is-ods-table-date">January 2, 2021</td>
-      </tr>
-      <tr>
-        <td class="is-ods-table-checkbox">
-          <input
-            class="ods-checkbox"
-            type="checkbox"
-            name="row[2]"
-            id="checkbox-2"
-            value="check-2"
-            checked
-          />
-          <label class="ods-checkbox--label" for="checkbox-2">
-            <span class="u-visually-hidden">Select this row</span>
-          </label>
-        </td>
-        <td>Mercury</td>
-        <td class="is-ods-table-num">1,737</td>
-        <td>Terrestrial</td>
-        <td class="is-ods-table-date">&ndash;</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-```
-
+  ```html
+  <figure class="ods-table--figure">
+    <figcaption class="ods-table--figcaption">
+      Big and small planets
+    </figcaption>
+    <table class="ods-table">
+      <caption>Information about the largest and smallest planets.</caption>
+      <thead>
+        <tr>
+          <th scope="column" class="is-ods-table-checkbox">
+            <input class="ods-checkbox is-ods-checkbox-indeterminate" type="checkbox" name="row[all]" id="checkbox-all" value="check-all" checked>
+            <label class="ods-checkbox--label" for="checkbox-all">
+              <span class="u-visually-hidden">Select all rows</span>
+            </label>
+          </th>
+          <th scope="column">Planet</th>
+          <th scope="column" class="is-ods-table-num">Radius (km)</th>
+          <th scope="column">Type</th>
+          <th scope="column" class="is-ods-table-date">Perihelion date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[0]" id="checkbox-0" value="check-0" checked>
+            <label class="ods-checkbox--label" for="checkbox-0">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </td>
+          <td>Jupiter</td>
+          <td class="is-ods-table-num">69,911</td>
+          <td>Gas giant</td>
+          <td class="is-ods-table-date">January 21, 2023</td>
+        </tr>
+        <tr>
+          <td class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[1]" id="checkbox-1" value="check-1">
+            <label class="ods-checkbox--label" for="checkbox-1">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </td>
+          <td>Earth</td>
+          <td class="is-ods-table-num">6,371</td>
+          <td>Terrestrial</td>
+          <td class="is-ods-table-date">January 2, 2021</td>
+        </tr>
+        <tr>
+          <td class="is-ods-table-checkbox">
+            <input class="ods-checkbox" type="checkbox" name="row[2]" id="checkbox-2" value="check-2" checked>
+            <label class="ods-checkbox--label" for="checkbox-2">
+              <span class="u-visually-hidden">Select this row</span>
+            </label>
+          </td>
+          <td>Mercury</td>
+          <td class="is-ods-table-num">1,737</td>
+          <td>Terrestrial</td>
+          <td class="is-ods-table-date">&ndash;</td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+  ```
 </figure>
 
 ## Sorting Table
@@ -996,55 +965,52 @@ This same advice applies to nested tables or hidden rows as well. They can intro
     </figure>
   </div>
 
-```html
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Big and small planets</figcaption>
-  <table class="ods-table">
-    <caption>
-      Information about the largest and smallest planets.
-    </caption>
-    <thead>
-      <tr>
-        <th scope="column">
-          <button class="ods-table--sort is-ods-table-unsorted">Planet</button>
-        </th>
-        <th scope="column" class="is-ods-table-num">
-          <button class="ods-table--sort is-ods-table-desc">Radius (km)</button>
-        </th>
-        <th scope="column">
-          <button class="ods-table--sort is-ods-table-unsorted">Type</button>
-        </th>
-        <th scope="column" class="is-ods-table-num">
-          <button class="ods-table--sort is-ods-table-unsorted">
-            Perihelion date
-          </button>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Jupiter</td>
-        <td class="is-ods-table-num">69,911</td>
-        <td>Gas giant</td>
-        <td class="is-ods-table-date">January 21, 2023</td>
-      </tr>
-      <tr>
-        <td>Earth</td>
-        <td class="is-ods-table-num">6,371</td>
-        <td>Terrestrial</td>
-        <td class="is-ods-table-date">January 2, 2021</td>
-      </tr>
-      <tr>
-        <td>Mercury</td>
-        <td class="is-ods-table-num">1,737</td>
-        <td>Terrestrial</td>
-        <td class="is-ods-table-date">&ndash;</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
-```
-
+  ```html
+  <figure class="ods-table--figure">
+    <figcaption class="ods-table--figcaption">
+      Big and small planets
+    </figcaption>
+    <table class="ods-table">
+      <caption>Information about the largest and smallest planets.</caption>
+      <thead>
+        <tr>
+          <th scope="column">
+            <button class="ods-table--sort is-ods-table-unsorted">Planet</button>
+          </th>
+          <th scope="column" class="is-ods-table-num">
+            <button class="ods-table--sort is-ods-table-desc">Radius (km)</button>
+          </th>
+          <th scope="column">
+            <button class="ods-table--sort is-ods-table-unsorted">Type</button>
+          </th>
+          <th scope="column" class="is-ods-table-num">
+            <button class="ods-table--sort is-ods-table-unsorted">Perihelion date</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jupiter</td>
+          <td class="is-ods-table-num">69,911</td>
+          <td>Gas giant</td>
+          <td class="is-ods-table-date">January 21, 2023</td>
+        </tr>
+        <tr>
+          <td>Earth</td>
+          <td class="is-ods-table-num">6,371</td>
+          <td>Terrestrial</td>
+          <td class="is-ods-table-date">January 2, 2021</td>
+        </tr>
+        <tr>
+          <td>Mercury</td>
+          <td class="is-ods-table-num">1,737</td>
+          <td>Terrestrial</td>
+          <td class="is-ods-table-date">&ndash;</td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+  ```
 </figure>
 
 :::

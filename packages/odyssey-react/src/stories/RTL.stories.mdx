@@ -1,6 +1,6 @@
-import { Meta } from "@storybook/addon-docs/blocks";
-import { Markdown } from "../../.storybook/components";
-import Table from "../components/Table";
+import { Meta } from '@storybook/addon-docs/blocks';
+import { Markdown } from '../../.storybook/components';
+import Table from '../components/Table';
 
 <Meta title="Guidelines/RTL" />
 
@@ -19,11 +19,21 @@ For a quick visualization of how these properties are related, see <a href="http
 <Table caption="property and value translations">
   <Table.Header>
     <Table.Row>
-      <Table.HeaderCell scope="column">Type</Table.HeaderCell>
-      <Table.HeaderCell scope="column">Physical CSS</Table.HeaderCell>
-      <Table.HeaderCell scope="column">Logical CSS</Table.HeaderCell>
-      <Table.HeaderCell scope="column">Lint status</Table.HeaderCell>
-      <Table.HeaderCell scope="column">Notes</Table.HeaderCell>
+      <Table.HeaderCell scope="column">
+        Type
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
+        Physical CSS
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
+        Logical CSS
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
+        Lint status
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
+        Notes
+      </Table.HeaderCell>
     </Table.Row>
   </Table.Header>
   <tbody>
@@ -34,8 +44,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>margin</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>no auto-fix</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        no auto-fix
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
@@ -47,7 +60,9 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>margin-block-start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
@@ -59,7 +74,9 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>margin-block-end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
@@ -71,7 +88,9 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>margin-inline-start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
@@ -83,26 +102,36 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>margin-inline-end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
     </Table.Row>
     <Table.Row>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
       <Table.DataCell>
         <code>margin-block</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>Sets both block margins</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        Sets both block margins
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
       <Table.DataCell>
         <code>margin-inline</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>Sets both inline margins</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        Sets both inline margins
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.HeaderCell scope="row" rowspan="7">
@@ -111,8 +140,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>padding</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>no auto-fix</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        no auto-fix
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
@@ -124,7 +156,9 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>padding-block-start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
@@ -136,7 +170,9 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>padding-block-end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
@@ -148,7 +184,9 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>padding-inline-start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
@@ -160,26 +198,36 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>padding-inline-end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
     </Table.Row>
     <Table.Row>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
       <Table.DataCell>
         <code>padding-block</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>Sets both block paddings</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        Sets both block paddings
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
       <Table.DataCell>
         <code>padding-inline</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>Sets both inline paddings</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        Sets both inline paddings
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.HeaderCell scope="row" rowspan="11">
@@ -191,7 +239,9 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>border-block-start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         Also applies to <code>*-size|style|color</code>
       </Table.DataCell>
@@ -203,7 +253,9 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>border-block-end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         Also applies to <code>*-size|style|color</code>
       </Table.DataCell>
@@ -215,7 +267,9 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>border-inline-start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         Also applies to <code>*-size|style|color</code>
       </Table.DataCell>
@@ -227,33 +281,46 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>border-inline-end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
+      <Table.DataCell>
+         auto-fixed
+      </Table.DataCell>
       <Table.DataCell>
         Also applies to <code>*-size|style|color</code>
       </Table.DataCell>
     </Table.Row>
     <Table.Row>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
       <Table.DataCell>
         <code>border-block</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>Sets both block borders</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        Sets both block borders
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
       <Table.DataCell>
         <code>border-inline</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>Sets both inline borders</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        Sets both inline borders
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
         <code>border-radius</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>no auto-fix</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        no auto-fix
+      </Table.DataCell>
       <Table.DataCell>
         See <a href="#linting-notes">Linting notes</a>
       </Table.DataCell>
@@ -265,8 +332,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>border-start-start-radius</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -275,8 +345,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>border-start-end-radius</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -285,8 +358,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>border-end-start-radius</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -295,8 +371,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>border-end-end-radius</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.HeaderCell scope="row" rowspan="7">
@@ -308,8 +387,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>inset-block-start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -318,8 +400,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>inset-block-end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -328,8 +413,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>inset-inline-start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -338,32 +426,47 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>inset-inline-end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
       <Table.DataCell>
         <code>inset</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>Sets all inset values</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        Sets all inset values
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
       <Table.DataCell>
         <code>inset-block</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>Sets block inset values</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        Sets block inset values
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
       <Table.DataCell>
         <code>inset-inline</code>
       </Table.DataCell>
-      <Table.DataCell></Table.DataCell>
-      <Table.DataCell>Sets inline inset values</Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
+      <Table.DataCell>
+        Sets inline inset values
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.HeaderCell scope="row" rowspan="6">
@@ -375,8 +478,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>text-align: start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -385,8 +491,11 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>text-align: end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell></Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -395,8 +504,12 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>float: inline-start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell>Prefer Grid or Flex instead</Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+        Prefer Grid or Flex instead
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -405,8 +518,12 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>float: inline-end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell>Prefer Grid or Flex instead</Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+        Prefer Grid or Flex instead
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -415,8 +532,12 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>clear: inline-start</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell>Prefer Grid or Flex instead</Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+        Prefer Grid or Flex instead
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -425,11 +546,16 @@ For a quick visualization of how these properties are related, see <a href="http
       <Table.DataCell>
         <code>clear: inline-end</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fixed</Table.DataCell>
-      <Table.DataCell>Prefer Grid or Flex instead</Table.DataCell>
+      <Table.DataCell>
+        auto-fixed
+      </Table.DataCell>
+      <Table.DataCell>
+        Prefer Grid or Flex instead
+      </Table.DataCell>
     </Table.Row>
   </tbody>
 </Table>
+
 
 ### Linting notes
 
@@ -476,10 +602,18 @@ Our current implementation focuses on providing "automatic" RTL support with the
 <Table caption="unused logical properties and values">
   <Table.Header>
     <Table.Row>
-      <Table.HeaderCell scope="column">Type</Table.HeaderCell>
-      <Table.HeaderCell scope="column">Physical CSS</Table.HeaderCell>
-      <Table.HeaderCell scope="column">Logical CSS</Table.HeaderCell>
-      <Table.HeaderCell scope="column">Lint status</Table.HeaderCell>
+      <Table.HeaderCell scope="column">
+        Type
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
+        Physical CSS
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
+        Logical CSS
+      </Table.HeaderCell>
+      <Table.HeaderCell scope="column">
+        Lint status
+      </Table.HeaderCell>
     </Table.Row>
   </Table.Header>
   <tbody>
@@ -493,7 +627,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>inline-size</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fix available</Table.DataCell>
+      <Table.DataCell>
+        auto-fix available
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -502,7 +638,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>min-inline-size</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fix available</Table.DataCell>
+      <Table.DataCell>
+        auto-fix available
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -511,7 +649,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>max-inline-size</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fix available</Table.DataCell>
+      <Table.DataCell>
+        auto-fix available
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -520,7 +660,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>block-size</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fix available</Table.DataCell>
+      <Table.DataCell>
+        auto-fix available
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -529,7 +671,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>min-block-size</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fix available</Table.DataCell>
+      <Table.DataCell>
+        auto-fix available
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -538,7 +682,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>max-block-size</code>
       </Table.DataCell>
-      <Table.DataCell>auto-fix available</Table.DataCell>
+      <Table.DataCell>
+        auto-fix available
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.HeaderCell scope="row" rowspan="6">
@@ -550,7 +696,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>overflow-block</code>
       </Table.DataCell>
-      <Table.DataCell>undetected</Table.DataCell>
+      <Table.DataCell>
+        undetected
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -559,7 +707,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>overflow-inline</code>
       </Table.DataCell>
-      <Table.DataCell>undetected</Table.DataCell>
+      <Table.DataCell>
+        undetected
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -568,7 +718,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>overscroll-behavior-block</code>
       </Table.DataCell>
-      <Table.DataCell>undetected</Table.DataCell>
+      <Table.DataCell>
+        undetected
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -577,7 +729,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>overscroll-behavior-inline</code>
       </Table.DataCell>
-      <Table.DataCell>undetected</Table.DataCell>
+      <Table.DataCell>
+        undetected
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -586,7 +740,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>resize: inline</code>
       </Table.DataCell>
-      <Table.DataCell>undetected</Table.DataCell>
+      <Table.DataCell>
+        undetected
+      </Table.DataCell>
     </Table.Row>
     <Table.Row>
       <Table.DataCell>
@@ -595,7 +751,9 @@ Our current implementation focuses on providing "automatic" RTL support with the
       <Table.DataCell>
         <code>resize: block</code>
       </Table.DataCell>
-      <Table.DataCell>undetected</Table.DataCell>
+      <Table.DataCell>
+        undetected
+      </Table.DataCell>
     </Table.Row>
   </tbody>
 </Table>
@@ -630,3 +788,4 @@ For classes, this means preferring `.is-tooltip-start` to `.is-tooltip-left`. In
 
 - All unsupported cases (`transform`, `background`, and `shadow`) need linting to ensure appropriate RTL declarations.
 - Icons require bi-directional support
+

@@ -11,12 +11,10 @@
  */
 
 declare module "cssnano-preset-*" {
-  type Opts = Record<string, unknown>;
-  type Preset = <T extends Opts>(
-    opts?: T
-  ) => { plugins: Array<postcss.Plugin<T>> };
+  type Opts = Record<string, unknown>
+  type Preset = <T extends Opts>(opts?: T) => { plugins: Array<postcss.Plugin<T>> }
   const advancedPreset: Preset;
   export default advancedPreset;
 }
 
-declare module "autoprefixer";
+declare module "autoprefixer"

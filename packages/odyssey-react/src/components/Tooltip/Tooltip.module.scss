@@ -20,10 +20,10 @@
   padding-block: $spacing-xs;
   padding-inline: $spacing-s;
   transition: opacity $base-duration $base-timing 1s;
-  border: 1px solid cv("gray", "900");
+  border: 1px solid cv('gray', '900');
   opacity: 0;
-  background: cv("gray", "900");
-  color: cv("gray", "000");
+  background: cv('gray', '900');
+  color: cv('gray', '000');
   font-size: $size-body-caption;
   font-weight: 600;
   line-height: $title-line-height;
@@ -32,7 +32,7 @@
 
   &::after,
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 0;
     height: 0;
@@ -69,14 +69,14 @@
   }
 
   &::after {
-    border-block-start-color: cv("gray", "900");
+    border-block-start-color: cv('gray', '900');
   }
 
   &::before {
-    border-block-start-color: cv("gray", "900");
+    border-block-start-color: cv('gray', '900');
   }
 
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     transform: translateX(50%);
 
     &::after,
@@ -99,11 +99,11 @@
   }
 
   &::after {
-    border-inline-end-color: cv("gray", "900");
+    border-inline-end-color: cv('gray', '900');
   }
 
   &::before {
-    border-inline-end-color: cv("gray", "900");
+    border-inline-end-color: cv('gray', '900');
   }
 }
 
@@ -120,14 +120,14 @@
   }
 
   &::after {
-    border-block-end-color: cv("gray", "900");
+    border-block-end-color: cv('gray', '900');
   }
 
   &::before {
-    border-block-end-color: cv("gray", "900");
+    border-block-end-color: cv('gray', '900');
   }
 
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     transform: translateX(50%);
 
     &::after,
@@ -150,11 +150,11 @@
   }
 
   &::after {
-    border-inline-start-color: cv("gray", "900");
+    border-inline-start-color: cv('gray', '900');
   }
 
   &::before {
-    border-inline-start-color: cv("gray", "900");
+    border-inline-start-color: cv('gray', '900');
   }
 }
 
@@ -181,7 +181,7 @@
 
     &::after,
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       width: 0;
       height: 0;
@@ -214,7 +214,7 @@
       transform: translateX(-50%);
       border: 0;
 
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         transform: translateX(50%);
       }
     }

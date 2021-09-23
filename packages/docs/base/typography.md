@@ -12,12 +12,9 @@ description: A set of pre-defined text styles for headers, body copy, & links de
 <p>Odyssey offers separate font stacks for UI, copy, and code:
 
 ```scss
-$body-font-family: "Public Sans", "-apple-system", "BlinkMacSystemFont",
-  "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue",
-  sans-serif;
+$body-font-family: 'Public Sans', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
 
-$mono-font-family: "Inconsolata", "SFMono-Regular", Consolas, "Liberation Mono",
-  Menlo, Courier, monospace;
+$mono-font-family: 'Inconsolata', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 ```
 
 </p>
@@ -39,6 +36,7 @@ Typographical hierarchy indicates importance of content. Through size and weight
 To ensure consistency in typography sizes throughout Okta touchpoints, we’ve created a custom type scale paired with appropriate weights and line-heights.
 
 </Description>
+
 
 ### Titles
 

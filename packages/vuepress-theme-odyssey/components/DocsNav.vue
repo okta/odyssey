@@ -2,7 +2,7 @@
   <nav
     :class="{
       'docs-nav': true,
-      [`is-docs-nav-${variant}`]: variant,
+      [`is-docs-nav-${variant}`]: variant
     }"
   >
     <ul class="docs-nav--list">
@@ -11,20 +11,20 @@
         :key="item.name"
         :class="{
           'docs-nav--item': true,
-          'docs-nav--item-with-subnav': item.children,
+          'docs-nav--item-with-subnav': item.children
         }"
       >
         <Component
           :is="item.children ? 'div' : 'fragment'"
           :class="{
-            'docs-nav--item-content': item.children,
+            'docs-nav--item-content': item.children
           }"
         >
           <DocsLink
             :id="'nav-' + variant + '-subhead-' + index"
             :class="{
               'docs-nav-link': true,
-              'is-docs-nav-link--active': isCurrentRoute(item.link),
+              'is-docs-nav-link--active': isCurrentRoute(item.link)
             }"
             :href="item.link"
             :aria-expanded="isSubmenuExpanded(index)"
@@ -36,9 +36,9 @@
             v-if="item.children && !forceExpand"
             :class="{
               'ods-button is-ods-button-clear with-docs-subnav-indicator': true,
-              'with-docs-subnav-indicator--expanded': isSubmenuExpanded(index),
+              'with-docs-subnav-indicator--expanded': isSubmenuExpanded(index)
             }"
-            @click="(event) => toggleSubmenu(event, index, item)"
+            @click="event => toggleSubmenu(event, index, item)"
           />
         </Component>
         <ul
@@ -46,7 +46,7 @@
           :id="'nav-' + variant + '-subhead-' + index"
           :class="{
             'docs-nav--subnav': true,
-            'is-visible': forceExpand || isSubmenuExpanded(index),
+            'is-visible': forceExpand || isSubmenuExpanded(index)
           }"
         >
           <li
@@ -55,14 +55,14 @@
             :class="{
               'docs-nav--item': true,
               'is-docs-nav--item-selected':
-                subitem.title === $page.frontmatter.title,
+                subitem.title === $page.frontmatter.title
             }"
           >
             <DocsLink
               :href="subitem.link"
               :class="{
                 'docs-nav-link': true,
-                'is-docs-nav-link--active': isCurrentRoute(subitem.link),
+                'is-docs-nav-link--active': isCurrentRoute(subitem.link)
               }"
             >
               {{ subitem.title }}
@@ -81,25 +81,25 @@ export default {
   name: "DocsNav",
   components: {
     Fragment,
-    DocsLink: () => import("./DocsLink.vue"),
+    DocsLink: () => import("./DocsLink.vue")
   },
   props: {
     nav: {
       type: Array, // TODO: figure out if theres a way to better 'type' this with vue
-      required: true,
+      required: true
     },
     forceExpand: {
       type: Boolean,
-      default: false,
+      default: false
     },
     variant: {
       type: String,
       default: "primary",
-      validator: (value) => ["primary", "secondary"].includes(value),
-    },
+      validator: value => ["primary", "secondary"].includes(value)
+    }
   },
   data: () => ({
-    selected: [],
+    selected: []
   }),
   mounted() {
     const currentRoute = this.nav.find((item, index) => {
@@ -111,13 +111,13 @@ export default {
     this.selected = [this.nav.indexOf(currentRoute)];
   },
   methods: {
-    isSubmenuExpanded: function (index) {
+    isSubmenuExpanded: function(index) {
       return this.selected.includes(index);
     },
-    isCurrentRoute: function (path) {
+    isCurrentRoute: function(path) {
       return this.$route.path.includes(path);
     },
-    toggleSubmenu: function (event, index, { children: subList }) {
+    toggleSubmenu: function(event, index, { children: subList }) {
       const sublistActive = this.selected.includes(index);
       if (subList && !sublistActive) {
         this.selected.push(index);
@@ -125,9 +125,9 @@ export default {
         this.selected.splice(this.selected.indexOf(index), 1);
       }
     },
-    resetSubmenus: function (index) {
+    resetSubmenus: function(index) {
       this.selected = [index];
-    },
-  },
+    }
+  }
 };
 </script>

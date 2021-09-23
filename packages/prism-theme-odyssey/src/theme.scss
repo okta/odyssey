@@ -11,30 +11,30 @@
  */
 
 /* stylelint-disable scss/at-import-no-partial-leading-underscore */
-@import "@okta/odyssey/src/scss/abstracts/_functions";
-@import "@okta/odyssey/src/scss/abstracts/_colors";
-@import "@okta/odyssey/src/scss/abstracts/_tokens";
-@import "@okta/odyssey/src/scss/abstracts/_mixins";
+@import '@okta/odyssey/src/scss/abstracts/_functions';
+@import '@okta/odyssey/src/scss/abstracts/_colors';
+@import '@okta/odyssey/src/scss/abstracts/_tokens';
+@import '@okta/odyssey/src/scss/abstracts/_mixins';
 /* stylelint-enable scss/at-import-no-partial-leading-underscore */
 
 :root {
   --font-size: #{$size-body-base};
-  --inlineCodeColor: #{cv("blue", "000")};
-  --inlineCodeBackground: #{cv("red", "300")};
-  --blockBackground: #{cv("gray", "900")};
-  --baseColor: #{cv("blue", "000")};
-  --selectedColor: #{cv("turquoise", "500")};
-  --highlightBackground: #{cv("yellow", "000")};
-  --highlightAccent: #{cv("yellow", "300")};
-  --commentColor: #{cv("gray", "500")};
-  --punctuationColor: #{cv("blue", "000")};
-  --propertyColor: #{cv("turquoise", "400")};
+  --inlineCodeColor: #{cv('blue', '000')};
+  --inlineCodeBackground: #{cv('red', '300')};
+  --blockBackground: #{cv('gray', '900')};
+  --baseColor: #{cv('blue', '000')};
+  --selectedColor: #{cv('turquoise', '500')};
+  --highlightBackground: #{cv('yellow', '000')};
+  --highlightAccent: #{cv('yellow', '300')};
+  --commentColor: #{cv('gray', '500')};
+  --punctuationColor: #{cv('blue', '000')};
+  --propertyColor: #{cv('turquoise', '400')};
   --selectorColor: #a0dcc3;
-  --operatorColor: #{cv("blue", "000")};
+  --operatorColor: #{cv('blue', '000')};
   --operatorBg: transparent;
-  --variableColor: #{cv("blue", "400")};
+  --variableColor: #{cv('blue', '400')};
   --functionColor: #cfb1c1;
-  --keywordColor: #{cv("blue", "300")};
+  --keywordColor: #{cv('blue', '300')};
 }
 
 /*********************************************************
@@ -42,12 +42,11 @@
 */
 
 /* stylelint-disable selector-no-qualifying-type */
-pre[class*="language-"],
-code[class*="language-"] {
+pre[class*='language-'],
+code[class*='language-'] {
   /* stylelint-enable selector-no-qualifying-type */
   color: var(--baseColor);
-  font-family: "Inconsolata", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
-    monospace;
+  font-family: 'Inconsolata', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: var(--font-size);
   line-height: 1.5;
   text-align: start;
@@ -68,10 +67,10 @@ code[class*="language-"] {
 }
 
 /* stylelint-disable selector-no-qualifying-type, selector-pseudo-element-no-unknown */
-pre[class*="language-"]::selection,
-code[class*="language-"]::selection,
-pre[class*="language-"]::mozselection,
-code[class*="language-"]::mozselection {
+pre[class*='language-']::selection,
+code[class*='language-']::selection,
+pre[class*='language-']::mozselection,
+code[class*='language-']::mozselection {
   /* stylelint-enable selector-no-qualifying-type, selector-pseudo-element-no-unknown */
   background: var(--selectedColor);
   text-shadow: none;
@@ -79,15 +78,15 @@ code[class*="language-"]::mozselection {
 
 @media print {
   /* stylelint-disable selector-no-qualifying-type */
-  pre[class*="language-"],
-  code[class*="language-"] {
+  pre[class*='language-'],
+  code[class*='language-'] {
     /* stylelint-enable selector-no-qualifying-type */
     text-shadow: none;
   }
 }
 
 /* stylelint-disable selector-no-qualifying-type, no-descending-specificity */
-pre[class*="language-"] {
+pre[class*='language-'] {
   /* stylelint-enable selector-no-qualifying-type, no-descending-specificity */
   margin-block: 0.5em;
   margin-inline: 0;
@@ -98,7 +97,7 @@ pre[class*="language-"] {
 }
 
 /* stylelint-disable selector-no-qualifying-type */
-:not(pre) > code[class*="language-"] {
+:not(pre) > code[class*='language-'] {
   /* stylelint-enable selector-no-qualifying-type */
   @include border-radius(0.3em);
 
@@ -194,7 +193,7 @@ pre[data-line] {
 }
 
 /* stylelint-disable selector-no-qualifying-type */
-pre[class*="language-"] > code[class*="language-"] {
+pre[class*='language-'] > code[class*='language-'] {
   /* stylelint-enable selector-no-qualifying-type */
   position: relative;
   z-index: 1;

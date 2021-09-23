@@ -10,12 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { readdirSync } = require("fs");
-const { join } = require("path");
+const { readdirSync } = require('fs');
+const { join } = require('path');
 const dir = __dirname;
 
 module.exports = readdirSync(dir).reduce(
-  (memo, path) =>
-    path.endsWith("index.js") ? memo : memo.concat(require(join(dir, path))),
+  (memo, path) => path.endsWith('index.js') ? memo : memo.concat(require(join(dir, path))),
   []
 );

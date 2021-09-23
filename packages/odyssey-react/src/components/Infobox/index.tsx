@@ -10,25 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactElement, ReactNode } from "react";
-import { useCx, useOmit } from "../../utils";
-import Title from "../Title";
-import styles from "./Infobox.module.scss";
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
+import { useCx, useOmit } from '../../utils';
+import Title from '../Title';
+import styles from './Infobox.module.scss';
 
-export type InfoboxVariants = "info" | "danger" | "caution" | "success";
+export type InfoboxVariants = 'info' | 'danger' | 'caution' | 'success';
 
 export type Props = {
   /**
    * Content to be rendered within the infobox. Avoid using direct children, put child content
    * within the provided Infobox static components (Infobox.Content and Infobox.Actions)
    */
-  children: ReactElement | ReactElement[];
+  children: ReactElement | ReactElement[],
 
   /**
    * The visual variant to be displayed to the user.
    * @default info
    */
-  variant?: InfoboxVariants;
+  variant?: InfoboxVariants,
 
   /**
    * The title or headline of the Infobox. If Infobox.Content is not present it is required.
@@ -37,17 +37,17 @@ export type Props = {
 };
 
 type PropsInfoboxContent = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 type PropsInfoboxActions = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export type StaticComponents = {
-  Content: FunctionComponent<PropsInfoboxContent>;
-  Actions: FunctionComponent<PropsInfoboxActions>;
-};
+  Content: FunctionComponent<PropsInfoboxContent>,
+  Actions: FunctionComponent<PropsInfoboxActions>,
+}
 
 /**
  * An infobox is a type of alert that provides feedback in response to a
@@ -65,34 +65,47 @@ export type StaticComponents = {
  * </Infobox>
  */
 
-const Infobox: FunctionComponent<Props> & StaticComponents = (props) => {
-  const { children, title, variant = "info", ...rest } = props;
+ const Infobox: FunctionComponent<Props> & StaticComponents = (props) => {
+  const {
+    children,
+    title,
+    variant = "info",
+    ...rest
+  } = props;
 
-  const componentClass = useCx(styles.root, styles[`${variant}Variant`]);
+  const componentClass = useCx(
+    styles.root,
+    styles[`${variant}Variant`],
+  );
 
   const omitProps = useOmit(rest);
 
   return (
-    <aside {...omitProps} className={componentClass} role="status">
+    <aside
+    {...omitProps}
+      className={componentClass}
+      role="status"
+    >
       <span className={styles.icon}>
-        {/* @todo Insert <Icon> component */}‽
+        {/* @todo Insert <Icon> component */}
+        ‽
       </span>
-      {title && (
-        <div className={styles.title}>
-          <Title visualLevel="6" children={title} />
-        </div>
-      )}
-      {children}
+      { title && <div className={ styles.title }><Title visualLevel="6" children={ title } /></div> }
+      { children }
     </aside>
   );
 };
 
 Infobox.Content = ({ children }) => (
-  <section className={styles.content}>{children}</section>
+  <section className={styles.content}>
+    {children}
+  </section>
 );
 
 Infobox.Actions = ({ children }) => (
-  <section className={styles.actions}>{children}</section>
+  <section className={styles.actions}>
+    {children}
+  </section>
 );
 
 export default Infobox;

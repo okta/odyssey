@@ -13,11 +13,11 @@
 import { render, fireEvent, screen, within } from "@testing-library/react";
 import Select from ".";
 
-const listboxRole = "listbox";
-const optionRole = "option";
-const label = "Select speed";
-const name = "speed";
-const warpValue = "Warp speed";
+const listboxRole = 'listbox';
+const optionRole = 'option';
+const label = 'Select speed';
+const name = 'speed';
+const warpValue = 'Warp speed';
 
 const tree = (props: Record<string, unknown> = {}) => (
   <Select {...props} label={label} name={name}>
@@ -27,11 +27,10 @@ const tree = (props: Record<string, unknown> = {}) => (
   </Select>
 );
 
-const getSelectViaQuery = () =>
-  window.document.querySelector("select") as HTMLSelectElement;
+const getSelectViaQuery = () => window.document.querySelector('select') as HTMLSelectElement;
 
 describe("Select", () => {
-  it("renders hidden select UI into the document", () => {
+  it('renders hidden select UI into the document', () => {
     render(tree());
 
     const select = getSelectViaQuery();
@@ -39,7 +38,7 @@ describe("Select", () => {
     expect(select).not.toBeVisible();
   });
 
-  it("renders visible listbox UI into the document", () => {
+  it('renders visible listbox UI into the document', () => {
     expect.assertions(4);
     render(tree());
 
@@ -52,14 +51,15 @@ describe("Select", () => {
     });
   });
 
-  it("renders controlled when provided with a value", () => {
+
+  it('renders controlled when provided with a value', () => {
     render(tree({ value: warpValue }));
 
     const select = getSelectViaQuery();
     expect(select).toHaveValue(warpValue);
   });
 
-  it("renders uncontrolled when not provided with a value", () => {
+  it('renders uncontrolled when not provided with a value', () => {
     render(tree());
 
     const select = getSelectViaQuery();
@@ -67,23 +67,21 @@ describe("Select", () => {
 
     const listbox = screen.getAllByRole(listboxRole)[0];
     fireEvent.mouseDown(listbox);
-    const option = screen.getByText(warpValue, {
-      selector: `div[data-value="${warpValue}"]`,
-    });
+    const option = screen.getByText(warpValue, { selector: `div[data-value="${warpValue}"]` });
     fireEvent.mouseDown(option);
 
     expect(select).toHaveValue(warpValue);
   });
 
-  it("renders hint text when provided", () => {
-    const hint = "Time is relative";
+  it('renders hint text when provided', () => {
+    const hint = 'Time is relative';
     render(tree({ hint }));
 
     const hintElement = screen.getByText(hint);
     expect(hintElement).toBeVisible();
   });
 
-  it("invokes ref with expected args after render", () => {
+  it('invokes ref with expected args after render', () => {
     const ref = jest.fn();
 
     render(tree({ ref }));
@@ -94,20 +92,18 @@ describe("Select", () => {
     expect(ref).toHaveBeenLastCalledWith(select);
   });
 
-  it("invokes onChange with expected args when change event fires", () => {
+  it('invokes onChange with expected args when change event fires', () => {
     const onChange = jest.fn();
     render(tree({ onChange }));
 
     const listbox = screen.getAllByRole(listboxRole)[0];
     fireEvent.mouseDown(listbox);
-    const option = screen.getByText(warpValue, {
-      selector: `div[data-value="${warpValue}"]`,
-    });
+    const option = screen.getByText(warpValue, { selector: `div[data-value="${warpValue}"]` });
     fireEvent.mouseDown(option);
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenLastCalledWith(
-      expect.objectContaining({ type: "change" }),
+      expect.objectContaining({ type: 'change' }),
       warpValue
     );
   });

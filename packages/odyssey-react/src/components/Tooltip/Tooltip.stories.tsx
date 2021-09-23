@@ -11,8 +11,8 @@
  */
 
 import type { Story } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { Button } from "../../";
+import { action } from '@storybook/addon-actions';
+import { Button } from '../../';
 import Tooltip from ".";
 import type { Props } from ".";
 
@@ -20,31 +20,23 @@ export default {
   title: `Components/Tooltip`,
   component: Tooltip,
   parameters: {
-    layout: "centered",
-  },
+    layout: 'centered',
+  }
 };
 
 const Template: Story<Props> = () => (
   <>
     <Tooltip label="Top tooltip label" position="top">
-      <Button variant="primary" onClick={action("Top button clicked")}>
-        Top
-      </Button>
+      <Button variant="primary" onClick={action('Top button clicked')}>Top</Button>
     </Tooltip>
     <Tooltip label="Ending tooltip label" position="end">
-      <Button onClick={action("Ending button clicked")} variant="clear">
-        End
-      </Button>
+      <Button onClick={action('Ending button clicked')} variant="clear">End</Button>
     </Tooltip>
     <Tooltip label="Bottom tooltip label" position="bottom">
-      <Button onClick={action("Bottom button clicked")} variant="clear">
-        Bottom
-      </Button>
+      <Button onClick={action('Bottom button clicked')} variant="clear">Bottom</Button>
     </Tooltip>
     <Tooltip label="Starting tooltip label" position="start">
-      <Button onClick={action("Starting button clicked")} variant="clear">
-        Start
-      </Button>
+      <Button onClick={action('Starting button clicked')} variant="clear">Start</Button>
     </Tooltip>
   </>
 );

@@ -10,17 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import "regenerator-runtime/runtime";
-import "@testing-library/jest-dom";
-import "jest-axe/extend-expect";
-import { axe } from "jest-axe";
+import 'regenerator-runtime/runtime';
+import '@testing-library/jest-dom';
+import 'jest-axe/extend-expect';
+import { axe } from 'jest-axe';
 
 global.a11yCheck = (renderFn) => {
-  describe("accessibility", () => {
-    it("meets WCAG 2.1 AA criteria", async () => {
+  describe('accessibility', () => {
+    it('meets WCAG 2.1 AA criteria', async () => {
       const { container } = renderFn();
       const results = await axe(container, {
-        runOnly: ["section508", "wcag21a", "wcag21aa"],
+        runOnly: ['section508', 'wcag21a', 'wcag21aa']
       });
 
       expect(results).toHaveNoViolations();
@@ -29,9 +29,9 @@ global.a11yCheck = (renderFn) => {
 };
 
 // mocked for Choices.js in Select
-Object.defineProperty(window, "matchMedia", {
+Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: jest.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,

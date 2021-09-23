@@ -18,35 +18,37 @@ export default {
   title: `Components/TextInput`,
   component: TextInput,
   args: {
-    label: "Destination",
-    optionalLabel: "Optional",
+    label: 'Destination',
+    optionalLabel: 'Optional'
   },
   argTypes: {
-    required: { control: "boolean" },
-    disabled: { control: "boolean" },
-    readonly: { control: "boolean" },
-    defaultValue: { control: "text" },
-    optionalLabel: { control: "text" },
-    placeholder: { control: "text" },
-    type: { control: "radio" },
-    value: { control: "text" },
-    id: { control: "text" },
-    name: { control: "text" },
+    required: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    readonly: { control: 'boolean' },
+    defaultValue: { control: 'text' },
+    optionalLabel: { control: 'text' },
+    placeholder: { control: 'text' },
+    type: { control: 'radio' },
+    value: { control: 'text' },
+    id: { control: 'text' },
+    name: { control: 'text' },
     onChange: { control: false },
     onBlur: { control: false },
-    onFocus: { control: false },
+    onFocus: { control: false }
   },
 };
 
-const Template: Story<Props> = (props) => <TextInput {...props} />;
+const Template: Story<Props> = (props) => (
+  <TextInput {...props} />
+);
 
 export const Text = Template.bind({});
 Text.args = {
-  defaultValue: "Jupiter",
+  defaultValue: 'Jupiter',
 };
 
 export const Search = Template.bind({});
 Search.args = {
-  defaultValue: "Search Planets",
-  type: "search",
+  defaultValue: 'Search Planets',
+  type: 'search'
 };

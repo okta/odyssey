@@ -10,17 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const path = require("path");
-const headerComment = require("./header-comment");
+const path = require('path');
+const headerComment = require('./header-comment');
 
 function odysseyIconIndexTemplate(filePaths) {
-  const exportEntries = filePaths.map((filePath) => {
+
+  const exportEntries = filePaths.map(filePath => {
     const basename = path.basename(filePath, path.extname(filePath));
     const exportName = /^\d/.test(basename) ? `Svg${basename}` : basename;
     return `export { default as ${exportName} } from './${basename}'`;
   });
 
-  return headerComment + exportEntries.join("\n");
+  return headerComment + exportEntries.join('\n');
 }
 
 module.exports = odysseyIconIndexTemplate;

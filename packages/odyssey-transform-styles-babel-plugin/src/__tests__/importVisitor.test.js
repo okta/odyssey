@@ -10,15 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styles from "./fixture.module.scss";
+import styles from './fixture.module.scss';
 
-describe("transformStyles", () => {
-  describe("import visitor", () => {
-    it("transforms styles as expected", () => {
+describe('transformStyles', () => {
+  describe('import visitor', () => {
+    it('transforms styles as expected', () => {
       expect(styles).toMatchSnapshot();
     });
 
-    it("transforms styles template as expected", () => {
+    it('transforms styles template as expected', () => {
       expect(styles.__template()).toMatchSnapshot();
     });
   });

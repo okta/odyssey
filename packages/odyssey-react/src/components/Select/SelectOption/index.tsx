@@ -10,19 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef } from "react";
-import type { ComponentPropsWithRef } from "react";
-import { useOmit } from "../../../utils";
+import { forwardRef } from 'react';
+import type {
+  ComponentPropsWithRef
+} from 'react';
+import { useOmit } from '../../../utils';
 
-export interface Props
-  extends Omit<
-    ComponentPropsWithRef<"option">,
-    "style" | "className" | "selected"
-  > {
+export interface Props extends Omit<
+  ComponentPropsWithRef<'option'>,
+  'style' | 'className' | 'selected'
+> {
   /**
    * The underlying option element value attribute.
    */
-  value?: string;
+  value?: string,
 }
 
 /**
@@ -30,7 +31,10 @@ export interface Props
  * options a user can select.
  */
 const SelectOption = forwardRef<HTMLOptionElement, Props>((props, ref) => {
-  const { children, ...rest } = props;
+  const {
+    children,
+    ...rest
+  } = props;
 
   const omitProps = useOmit(rest);
 

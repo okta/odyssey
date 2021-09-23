@@ -5,10 +5,10 @@ title: Banner
 description: Banners let users know important messages related to their overall experience on the website.
 lede: Banners let users know important messages related to their overall experience on the website. They can be purely informational messages or critical errors to act upon.
 tabs:
-  - label: "Overview"
-    id: "overview"
-  - label: "HTML & SCSS"
-    id: "html-scss"
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
 links:
   - icon: github
     label: View source
@@ -341,21 +341,20 @@ Banner content should be succinct and direct. When including an action, be sure 
     </aside>
   </div>
 
-```html
-<aside class="ods-banner is-ods-banner-info is-ods-banner-dismissable">
-  <span class="ods-banner--icon">
-    <svg class="ods-icon">[...]</svg>
-  </span>
-  <h1 class="ods-banner--title">New launch scheduled</h1>
-  <p class="ods-banner--content">
-    The mission to Sagitarius A has been set for January 7.
-  </p>
-  <section class="ods-banner--actions">
-    <a href="#">View itinerary</a>
-  </section>
-</aside>
-```
-
+  ```html
+  <aside class="ods-banner is-ods-banner-info is-ods-banner-dismissable">
+    <span class="ods-banner--icon">
+      <svg class="ods-icon">[...]</svg>
+    </span>
+    <h1 class="ods-banner--title">New launch scheduled</h1>
+    <p class="ods-banner--content">
+      The mission to Sagitarius A has been set for January 7.
+    </p>
+    <section class="ods-banner--actions">
+      <a href="#">View itinerary</a>
+    </section>
+  </aside>
+  ```
 </figure>
 
 ## Danger
@@ -376,19 +375,20 @@ Banner content should be succinct and direct. When including an action, be sure 
     </aside>
   </div>
 
-```html
-<aside class="ods-banner is-ods-banner-danger is-ods-banner-dismissable">
-  <span class="ods-banner--icon">
-    <svg class="ods-icon">[...]</svg>
-  </span>
-  <h1 class="ods-banner--title">Safety checks have failed</h1>
-  <p class="ods-banner--content">Hangar 18 has been compromised.</p>
-  <section class="ods-banner--actions">
-    <a href="#">Seal bulkhead doors</a>
-  </section>
-</aside>
-```
-
+  ```html
+  <aside class="ods-banner is-ods-banner-danger is-ods-banner-dismissable">
+    <span class="ods-banner--icon">
+      <svg class="ods-icon">[...]</svg>
+    </span>
+    <h1 class="ods-banner--title">Safety checks have failed</h1>
+    <p class="ods-banner--content">
+      Hangar 18 has been compromised.
+    </p>
+    <section class="ods-banner--actions">
+      <a href="#">Seal bulkhead doors</a>
+    </section>
+  </aside>
+  ```
 </figure>
 
 ## Caution
@@ -409,21 +409,20 @@ Banner content should be succinct and direct. When including an action, be sure 
     </aside>
   </div>
 
-```html
-<aside class="ods-banner is-ods-banner-caution is-ods-banner-dismissable">
-  <span class="ods-banner--icon">
-    <svg class="ods-icon">[...]</svg>
-  </span>
-  <h1 class="ods-banner--title">Safety checks incomplete</h1>
-  <p class="ods-banner--content">
-    Severe solar winds detected. Local system flights may be delayed.
-  </p>
-  <section class="ods-banner--actions">
-    <a href="#">View reports</a>
-  </section>
-</aside>
-```
-
+  ```html
+  <aside class="ods-banner is-ods-banner-caution is-ods-banner-dismissable">
+    <span class="ods-banner--icon">
+      <svg class="ods-icon">[...]</svg>
+    </span>
+    <h1 class="ods-banner--title">Safety checks incomplete</h1>
+    <p class="ods-banner--content">
+      Severe solar winds detected. Local system flights may be delayed.
+    </p>
+    <section class="ods-banner--actions">
+      <a href="#">View reports</a>
+    </section>
+  </aside>
+  ```
 </figure>
 
 ## Dismissable
@@ -449,20 +448,19 @@ Banner content should be succinct and direct. When including an action, be sure 
     </aside>
   </div>
 
-```html
-<aside class="ods-banner is-ods-banner-info is-ods-banner-dismissable">
-  <span class="ods-banner--icon">
-    <svg class="ods-icon">[...]</svg>
-  </span>
-  <h1 class="ods-banner--title">New launch scheduled</h1>
-  <p class="ods-banner--content">
-    The mission to Sagitarius A has been set for January 7.
-  </p>
-  <section class="ods-banner--actions">
-    <a href="#">View itinerary</a>
-  </section>
-</aside>
-```
-
+  ```html
+  <aside class="ods-banner is-ods-banner-info is-ods-banner-dismissable">
+    <span class="ods-banner--icon">
+      <svg class="ods-icon">[...]</svg>
+    </span>
+    <h1 class="ods-banner--title">New launch scheduled</h1>
+    <p class="ods-banner--content">
+      The mission to Sagitarius A has been set for January 7.
+    </p>
+    <section class="ods-banner--actions">
+      <a href="#">View itinerary</a>
+    </section>
+  </aside>
+  ```
 </figure>
 :::

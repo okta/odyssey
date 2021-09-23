@@ -6,7 +6,7 @@
       [`layout-${layout}`]: layout,
       [`theme-${theme}`]: theme,
       [`is-docskit-visual-${variant}`]: variant,
-      [`is-docskit-visual-content-${content}`]: content,
+      [`is-docskit-visual-content-${content}`]: content
     }"
   >
     <h6 v-if="variant" class="docskit-visual--title">
@@ -25,38 +25,38 @@ export default {
     variant: {
       type: String,
       required: false,
-      default: null,
+      default: null
     },
     layout: {
       type: String,
       required: false,
-      default: null,
+      default: null
     },
     theme: {
       type: String,
       required: false,
-      default: null,
+      default: null
     },
     content: {
       type: String,
       required: false,
-      default: null,
+      default: null
     },
     fade: {
       type: Boolean,
-      required: false,
-    },
+      required: false
+    }
   },
-  data: function () {
+  data: function() {
     return {
       labels: {
         positive: "Do",
         negative: `Don't`,
         "smiley-positive": "Best!",
         "smiley-neutral": "Good",
-        "smiley-negative": "Bad",
-      },
+        "smiley-negative": "Bad"
+      }
     };
-  },
+  }
 };
 </script>

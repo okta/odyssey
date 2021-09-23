@@ -10,92 +10,108 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
+import type {
+  ReactNode,
+  ReactElement,
+  ComponentPropsWithRef
+} from 'react';
 
-import { useOmit, forwardRefWithStatics } from "../../utils";
+import {
+  useOmit,
+  forwardRefWithStatics
+} from '../../utils';
 
-import TableContainer from "./TableContainer";
-import TableHeader from "./TableHeader";
-import TableBody from "./TableBody";
-import TableFooter from "./TableFooter";
-import TableRow from "./TableRow";
-import TableDataCell from "./TableDataCell";
-import TableHeaderCell from "./TableHeaderCell";
-import TableSortButton from "./TableSortButton";
+import TableContainer from './TableContainer';
+import TableHeader from './TableHeader';
+import TableBody from './TableBody';
+import TableFooter from './TableFooter';
+import TableRow from './TableRow';
+import TableDataCell from './TableDataCell';
+import TableHeaderCell from './TableHeaderCell';
+import TableSortButton from './TableSortButton';
 
-import ScreenReaderText from "../ScreenReaderText";
+import ScreenReaderText from '../ScreenReaderText';
 
-import styles from "./Table.module.scss";
+import styles from './Table.module.scss';
 
 type ContainerProps =
   | { withContainer: false; title?: never }
   | {
-      /**
-       * Whether to use a Table.Container around the Table
-       */
-      withContainer?: true;
-      /**
-       * The visible heading for the table
-       */
-      title: ReactNode;
-    };
+    /**
+    * Whether to use a Table.Container around the Table
+    */
+    withContainer?: true;
+    /**
+    * The visible heading for the table
+    */
+    title: ReactNode
+  }
 
 export type Props = {
   /**
-   * Valid Table child elements including Head, Body, and Foot
-   */
-  children?: ReactElement | ReactElement[];
+  * Valid Table child elements including Head, Body, and Foot
+  */
+  children?: ReactElement | ReactElement[],
   /**
-   * Provides users of assistive technologies with context for the table contents
-   */
-  caption: string;
-} & ContainerProps &
-  ComponentPropsWithRef<"table">;
+  * Provides users of assistive technologies with context for the table contents
+  */
+  caption: string
+} & ContainerProps & ComponentPropsWithRef<'table'>
 
 type Statics = {
-  Container: typeof TableContainer;
-  Header: typeof TableHeader;
-  Body: typeof TableBody;
-  Footer: typeof TableFooter;
-  Row: typeof TableRow;
-  DataCell: typeof TableDataCell;
-  HeaderCell: typeof TableHeaderCell;
-  SortButton: typeof TableSortButton;
-};
+  Container: typeof TableContainer,
+  Header: typeof TableHeader,
+  Body: typeof TableBody,
+  Footer: typeof TableFooter,
+  Row: typeof TableRow,
+  DataCell: typeof TableDataCell,
+  HeaderCell: typeof TableHeaderCell,
+  SortButton: typeof TableSortButton,
+}
 
-export type CellTextFormats = "num" | "date";
+export type CellTextFormats = 'num' | 'date' ;
 
 /*
- * Tables provide structure for displaying sets of data across rows and columns.
- */
-const Table = forwardRefWithStatics<HTMLTableElement, Props, Statics>(
-  (props, ref) => {
-    const { children, caption, title, withContainer = true, ...rest } = props;
+* Tables provide structure for displaying sets of data across rows and columns.
+*/
+const Table = forwardRefWithStatics<
+  HTMLTableElement,
+  Props,
+  Statics
+>((props, ref) => {
+  const {
+    children,
+    caption,
+    title,
+    withContainer = true,
+    ...rest
+  } = props;
 
-    const omitProps = useOmit(rest);
+  const omitProps = useOmit(rest);
 
-    const TableEl = () => (
-      <table ref={ref} className={styles.root} {...omitProps}>
+  const TableEl = () => (
+    <table ref={ref} className={styles.root} {...omitProps}>
         <caption>
-          <ScreenReaderText>{caption}</ScreenReaderText>
+          <ScreenReaderText>
+            {caption}
+          </ScreenReaderText>
         </caption>
-        {children}
-      </table>
-    );
+      {children}
+    </table>
+  );
 
-    return (
-      <>
-        {withContainer ? (
-          <TableContainer title={title}>
-            <TableEl />
-          </TableContainer>
-        ) : (
+  return (
+    <>
+      {withContainer ? (
+        <TableContainer title={title}>
           <TableEl />
-        )}
-      </>
-    );
-  }
-);
+        </TableContainer>
+      ):(
+        <TableEl />
+      )}
+    </>
+  )
+});
 
 Table.Container = TableContainer;
 Table.Header = TableHeader;

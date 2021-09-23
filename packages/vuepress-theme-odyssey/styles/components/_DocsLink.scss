@@ -20,8 +20,8 @@ a.docs-link--underlined:visited {
   text-underline-offset: $spacing-xs;
 
   /* stylelint-disable selector-no-qualifying-type */
-  &[target="_blank"]:not([href^="mailto:"])::after {
-    background-image: get-icon("external", cv("gray", "900"));
+  &[target='_blank']:not([href^='mailto:'])::after {
+    background-image: get-icon('external', cv('gray', '900'));
   }
 
   &:hover {

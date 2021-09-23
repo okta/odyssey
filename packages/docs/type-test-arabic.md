@@ -6,7 +6,6 @@ headline: Type Examples
 lede: A comprehensive set of mixed-content, in-situ type specimens for Arabic.
 description:
 ---
-
 <div dir="rtl">
 
 # هذا هو عنوان المستوى الأول

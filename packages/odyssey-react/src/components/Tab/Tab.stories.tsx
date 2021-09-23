@@ -16,36 +16,29 @@ import type { PropsTabs } from ".";
 
 export default {
   title: `Components/Tabs`,
-  component: Tabs,
+  component: Tabs
 };
 
-const Template: Story<PropsTabs> = ({ ariaLabel, selectedId }) => {
+const Template: Story<PropsTabs> = ({ariaLabel, selectedId}) => {
   return (
     <Tabs id="sb-tabs-example" selectedId={selectedId} ariaLabel={ariaLabel}>
-      <Tabs.Panel id="sb-tabs-example-1" label="Tab One">
-        TabPanel One Content
-      </Tabs.Panel>
-      <Tabs.Panel id="sb-tabs-example-2" label="Tab Two">
-        TabPanel Two Content
-      </Tabs.Panel>
-      <Tabs.Panel id="sb-tabs-example-3" label="Tab Three">
-        TabPanel Three Content
-      </Tabs.Panel>
-      <Tabs.Panel id="sb-tabs-example-4" label="Tab Four">
-        TabPanel Four Content
-      </Tabs.Panel>
+      <Tabs.Panel id="sb-tabs-example-1" label="Tab One">TabPanel One Content</Tabs.Panel>
+      <Tabs.Panel id="sb-tabs-example-2" label="Tab Two">TabPanel Two Content</Tabs.Panel>
+      <Tabs.Panel id="sb-tabs-example-3" label="Tab Three">TabPanel Three Content</Tabs.Panel>
+      <Tabs.Panel id="sb-tabs-example-4" label="Tab Four">TabPanel Four Content</Tabs.Panel>
     </Tabs>
-  );
+  )
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  ariaLabel: "Describes the purpose of this set of tabs.",
+  ariaLabel: "Describes the purpose of this set of tabs."
 };
 
 export const PreSelected = Template.bind({});
-PreSelected.storyName = "with pre-selected tab id";
+PreSelected.storyName = "with pre-selected tab id"
 PreSelected.args = {
   selectedId: "sb-tabs-example-2",
-  ariaLabel: "Describes the purpose of this set of tabs.",
+  ariaLabel: "Describes the purpose of this set of tabs."
 };
+

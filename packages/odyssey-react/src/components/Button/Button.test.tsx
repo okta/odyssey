@@ -23,31 +23,25 @@ describe("Button", () => {
     expect(getByText(buttonLabel)).toBeInTheDocument();
   });
 
-  it("renders aria attrs via omit rest props", () => {
-    const { getByRole } = render(
-      <Button aria-describedby="foo" children="bar" />
-    );
+  it('renders aria attrs via omit rest props', () => {
+    const { getByRole } = render(<Button aria-describedby="foo" children="bar" />);
 
-    expect(getByRole(button)).toHaveAttribute("aria-describedby", "foo");
+    expect(getByRole(button)).toHaveAttribute('aria-describedby', 'foo');
   });
 
-  it("should be disabled", () => {
-    const { getByRole } = render(
-      <Button disabled={true}>{buttonLabel}</Button>
-    );
+  it('should be disabled', () => {
+    const { getByRole } = render(<Button disabled={true}>{buttonLabel}</Button>);
 
-    expect(getByRole("button")).toHaveAttribute("disabled");
+    expect(getByRole('button')).toHaveAttribute('disabled');
   });
 
-  it("should call onClick when clicked", () => {
+  it('should call onClick when clicked', () => {
     const handleClick = jest.fn();
-    const { getByRole } = render(
-      <Button onClick={handleClick} children="foo" />
-    );
+    const { getByRole } = render(<Button onClick={handleClick} children="foo" />);
 
-    fireEvent.click(getByRole("button"));
+    fireEvent.click(getByRole('button'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  a11yCheck(() => render(<Button children="baz" />));
+  a11yCheck(() => render(<Button children="baz" />))
 });

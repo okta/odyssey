@@ -10,61 +10,64 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { messages, ruleName } = require("..");
-const { licenseComment, getYear } = require("../license");
+const { messages, ruleName } = require('..');
+const { licenseComment, getYear } = require('../license');
 
 testRule({
   ruleName,
   config: true,
   fix: true,
-  customSyntax: "postcss-scss",
+  customSyntax: 'postcss-scss',
 
   accept: [
     {
       code: licenseComment,
-      description: "Valid header",
+      description: 'Valid header',
     },
     {
-      code: licenseComment.replace(getYear(), "00"),
-      description: "Valid header - valid copyright year",
+      code: licenseComment.replace(getYear(), '00'),
+      description: 'Valid header - valid copyright year',
     },
   ],
 
   reject: [
     {
       code: `a { color: red; }`,
-      description: "Missing header",
+      description: 'Missing header',
       message: messages.missing,
       line: 1,
       fixed: `${licenseComment}\na { color: red; }`,
     },
     {
       code: `a { color: red; }\n${licenseComment}`,
-      description: "Missing header - with license comment in wrong location",
+      description: 'Missing header - with license comment in wrong location',
       message: messages.missing,
       line: 1,
-      fixed: `${licenseComment}\na { color: red; }\n${licenseComment}`,
+      fixed: `${licenseComment}\na { color: red; }\n${licenseComment}`
     },
     {
       code: `// a comment that is not a header\na { color: rgb(100 0 0); }`,
-      description: "Incorrect header - SCSS style comment",
+      description: 'Incorrect header - SCSS style comment',
       message: messages.incorrect,
       line: 1,
-      fixed: `${licenseComment}\n// a comment that is not a header\na { color: rgb(100 0 0); }`,
+      fixed:
+        `${licenseComment}\n// a comment that is not a header\na { color: rgb(100 0 0); }`
     },
     {
-      code: `/* a comment that is not a header */\na { color: red; }`,
-      description: "Incorrect header - CSS style comment",
+      code:
+        `/* a comment that is not a header */\na { color: red; }`,
+      description: 'Incorrect header - CSS style comment',
       message: messages.incorrect,
       line: 1,
-      fixed: `${licenseComment}\n/* a comment that is not a header */\na { color: red; }`,
+      fixed:
+        `${licenseComment}\n/* a comment that is not a header */\na { color: red; }`,
     },
     {
-      code: licenseComment.replace("20", "19"),
-      description: "Incorrect header - invalid copyright year",
+      code: licenseComment.replace('20', '19'),
+      description: 'Incorrect header - invalid copyright year',
       message: messages.incorrect,
       line: 1,
-      fixed: `${licenseComment}${licenseComment.replace("20", "19")}`,
+      fixed: `${licenseComment}${licenseComment.replace('20', '19')}`,
     },
-  ],
+  ]
 });

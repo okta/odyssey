@@ -13,13 +13,13 @@
 import { render, fireEvent, screen, within } from "@testing-library/react";
 import Radio from ".";
 
-const radioRole = "radio";
-const groupRole = "group";
-const legend = "Select speed";
-const name = "speed";
+const radioRole = 'radio';
+const groupRole = 'group';
+const legend = 'Select speed';
+const name = 'speed';
 
-const warpLabel = "Warp speed";
-const warpValue = "warp";
+const warpLabel = 'Warp speed';
+const warpValue = 'warp';
 
 const tree = (props: Record<string, unknown> = {}) => (
   <Radio.Group {...props} legend={legend} name={name}>
@@ -30,7 +30,7 @@ const tree = (props: Record<string, unknown> = {}) => (
 );
 
 describe("Radio", () => {
-  it("renders visibly into the document", () => {
+  it('renders visibly into the document', () => {
     expect.assertions(4);
     render(tree());
 
@@ -43,7 +43,7 @@ describe("Radio", () => {
     });
   });
 
-  it("renders through children that are not expected Radio.Button", () => {
+  it('renders through children that are not expected Radio.Button', () => {
     render(
       // @ts-expect-error Radio.Group does not accept text as children
       <Radio.Group legend={legend} name={name}>
@@ -51,17 +51,17 @@ describe("Radio", () => {
       </Radio.Group>
     );
 
-    expect(screen.getByRole(groupRole)).toContainHTML("oops");
+    expect(screen.getByRole(groupRole)).toContainHTML('oops');
   });
 
-  it("renders a controlled checked input when provided with a valid value", () => {
+  it('renders a controlled checked input when provided with a valid value', () => {
     render(tree({ value: warpValue }));
 
     const radio = screen.getByLabelText(warpLabel);
     expect(radio).toBeChecked();
   });
 
-  it("renders a uncontrolled checked input when a Radio.Button is checked", () => {
+  it('renders a uncontrolled checked input when a Radio.Button is checked', () => {
     render(tree());
 
     const radio = screen.getByLabelText(warpLabel);
@@ -70,15 +70,15 @@ describe("Radio", () => {
     expect(radio).toBeChecked();
   });
 
-  it("renders hint text when provided", () => {
-    const hint = "Time is relative";
+  it('renders hint text when provided', () => {
+    const hint = 'Time is relative';
     render(tree({ hint }));
 
     const hintElement = screen.getByText(hint);
     expect(hintElement).toBeVisible();
   });
 
-  it("invokes ref with expected args after render", () => {
+  it('invokes ref with expected args after render', () => {
     const ref = jest.fn();
 
     render(tree({ ref }));
@@ -87,7 +87,7 @@ describe("Radio", () => {
     expect(ref).toHaveBeenLastCalledWith(screen.getByRole(groupRole));
   });
 
-  it("invokes onChange with expected args when change input event fires", () => {
+  it('invokes onChange with expected args when change input event fires', () => {
     const onChange = jest.fn();
     render(tree({ onChange }));
 
@@ -96,29 +96,28 @@ describe("Radio", () => {
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenLastCalledWith(
-      expect.objectContaining({ type: "change" }),
+      expect.objectContaining({ type: 'change' }),
       warpValue
     );
   });
 
-  describe("propagation to Radio.Button children", () => {
+  describe('propagation to Radio.Button children', () => {
     it.each([
-      ["name", name],
-      ["disabled", undefined],
-      ["required", undefined],
-    ])(
-      "renders %s attribute as expected",
-      (attr: string, attrValue: string | undefined) => {
-        expect.assertions(3);
-        render(tree({ [attr]: attrValue ?? true }));
+      ['name', name],
+      ['disabled', undefined],
+      ['required', undefined]
+    ])('renders %s attribute as expected', (
+      attr: string, attrValue: string | undefined
+    ) => {
+      expect.assertions(3);
+      render(tree({ [attr]: attrValue ?? true }));
 
-        const radios = screen.getAllByRole(radioRole);
+      const radios = screen.getAllByRole(radioRole);
 
-        radios.forEach((radio) => {
-          expect(radio).toHaveAttribute(attr, attrValue);
-        });
-      }
-    );
+      radios.forEach((radio) => {
+        expect(radio).toHaveAttribute(attr, attrValue);
+      });
+    });
   });
 
   a11yCheck(() => render(tree()));

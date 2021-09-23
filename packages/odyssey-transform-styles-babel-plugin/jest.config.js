@@ -12,6 +12,6 @@
 
 module.exports = {
   transform: {
-    "\\.([jt]sx?|module\\.scss)$": "babel-jest",
-  },
+    "\\.([jt]sx?|module\\.scss)$": "babel-jest"
+  }
 };

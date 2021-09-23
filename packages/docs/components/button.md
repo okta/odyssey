@@ -5,10 +5,10 @@ title: Button
 description: Buttons are used for in-page interactions like form submissions.
 lede: A clickable button used for form submissions and most in-page interactions.
 tabs:
-  - label: "Overview"
-    id: "overview"
-  - label: "HTML & SCSS"
-    id: "html-scss"
+  - label: 'Overview'
+    id: 'overview'
+  - label: 'HTML & SCSS'
+    id: 'html-scss'
 links:
   - icon: github
     label: View source
@@ -109,6 +109,7 @@ They pair well with Primary and Secondary Buttons.
     </button>
   </template>
 </Visual>
+
 
 ### Dismiss
 
@@ -518,15 +519,14 @@ Color is not a clear affordance for all users, please use clear, concise copy to
     </button>
   </div>
 
-```html
-<button class="ods-button">
-  <span class="ods-button--label">Primary</span>
-</button>
-<button class="ods-button" disabled>
-  <span class="ods-button--label">Primary</span>
-</button>
-```
-
+  ```html
+  <button class="ods-button">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button" disabled>
+    <span class="ods-button--label">Primary</span>
+  </button>
+  ```
 </figure>
 
 ## Secondary
@@ -547,15 +547,14 @@ Color is not a clear affordance for all users, please use clear, concise copy to
     </button>
   </div>
 
-```html
-<button class="ods-button is-ods-button-secondary">
-  <span class="ods-button--label">Default</span>
-</button>
-<button class="ods-button is-ods-button-secondary" disabled>
-  <span class="ods-button--label">Default</span>
-</button>
-```
-
+  ```html
+  <button class="ods-button is-ods-button-secondary">
+    <span class="ods-button--label">Default</span>
+  </button>
+  <button class="ods-button is-ods-button-secondary" disabled>
+    <span class="ods-button--label">Default</span>
+  </button>
+  ```
 </figure>
 
 ## Danger
@@ -576,15 +575,14 @@ Color is not a clear affordance for all users, please use clear, concise copy to
     </button>
   </div>
 
-```html
-<button class="ods-button is-ods-button-danger">
-  <span class="ods-button--label">Danger</span>
-</button>
-<button class="ods-button is-ods-button-danger" disabled>
-  <span class="ods-button--label">Danger</span>
-</button>
-```
-
+  ```html
+  <button class="ods-button is-ods-button-danger">
+    <span class="ods-button--label">Danger</span>
+  </button>
+  <button class="ods-button is-ods-button-danger" disabled>
+    <span class="ods-button--label">Danger</span>
+  </button>
+  ```
 </figure>
 
 ## Dismiss
@@ -605,15 +603,14 @@ Color is not a clear affordance for all users, please use clear, concise copy to
     </button>
   </div>
 
-```html
-<button class="ods-button is-ods-button-dismiss">
-  <span class="ods-button--label">Dismiss</span>
-</button>
-<button class="ods-button is-ods-button-dismiss" disabled>
-  <span class="ods-button--label">Dismiss</span>
-</button>
-```
-
+  ```html
+  <button class="ods-button is-ods-button-dismiss">
+    <span class="ods-button--label">Dismiss</span>
+  </button>
+  <button class="ods-button is-ods-button-dismiss" disabled>
+    <span class="ods-button--label">Dismiss</span>
+  </button>
+  ```
 </figure>
 
 ## Clear
@@ -634,15 +631,14 @@ Color is not a clear affordance for all users, please use clear, concise copy to
     </button>
   </div>
 
-```html
-<button class="ods-button is-ods-button-clear">
-  <span class="ods-button--label">Clear</span>
-</button>
-<button class="ods-button is-ods-button-clear" disabled>
-  <span class="ods-button--label">Clear</span>
-</button>
-```
-
+  ```html
+  <button class="ods-button is-ods-button-clear">
+    <span class="ods-button--label">Clear</span>
+  </button>
+  <button class="ods-button is-ods-button-clear" disabled>
+    <span class="ods-button--label">Clear</span>
+  </button>
+  ```
 </figure>
 
 ## Size: Small
@@ -663,15 +659,14 @@ Color is not a clear affordance for all users, please use clear, concise copy to
     </button>
   </div>
 
-```html
-<button class="ods-button is-ods-button-size-s">
-  <span class="ods-button--label">Primary</span>
-</button>
-<button class="ods-button is-ods-button-size-s" disabled>
-  <span class="ods-button--label">Primary</span>
-</button>
-```
-
+  ```html
+  <button class="ods-button is-ods-button-size-s">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button is-ods-button-size-s" disabled>
+    <span class="ods-button--label">Primary</span>
+  </button>
+  ```
 </figure>
 
 ## Size: Medium
@@ -692,15 +687,14 @@ Color is not a clear affordance for all users, please use clear, concise copy to
     </button>
   </div>
 
-```html
-<button class="ods-button">
-  <span class="ods-button--label">Primary</span>
-</button>
-<button class="ods-button" disabled>
-  <span class="ods-button--label">Primary</span>
-</button>
-```
-
+  ```html
+  <button class="ods-button">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button" disabled>
+    <span class="ods-button--label">Primary</span>
+  </button>
+  ```
 </figure>
 
 ## Size: Large
@@ -721,15 +715,14 @@ Color is not a clear affordance for all users, please use clear, concise copy to
     </button>
   </div>
 
-```html
-<button class="ods-button is-ods-button-size-l">
-  <span class="ods-button--label">Primary</span>
-</button>
-<button class="ods-button is-ods-button-size-l" disabled>
-  <span class="ods-button--label">Primary</span>
-</button>
-```
-
+  ```html
+  <button class="ods-button is-ods-button-size-l">
+    <span class="ods-button--label">Primary</span>
+  </button>
+  <button class="ods-button is-ods-button-size-l" disabled>
+    <span class="ods-button--label">Primary</span>
+  </button>
+  ```
 </figure>
 
 ## Full-width
@@ -741,12 +734,11 @@ Color is not a clear affordance for all users, please use clear, concise copy to
     </button>
   </div>
 
-```html
-<button class="ods-button is-ods-button-full-width">
-  <span class="ods-button--label">Sign up for Space Camp</span>
-</button>
-```
-
+  ```html
+  <button class="ods-button is-ods-button-full-width">
+    <span class="ods-button--label">Sign up for Space Camp</span>
+  </button>
+  ```
 </figure>
 
 ## Icon Buttons
@@ -767,16 +759,16 @@ When using icons within a button, be sure to add `focusable="false"` to the SVG;
     </button>
   </div>
 
-```html
-<div class="docs-example--rendered">
-  <button class="ods-button">
-    <svg class="ods-icon" role="presentation" focusable="false">...</svg>
-    <span class="ods-button--label">Button label</span>
-  </button>
-</div>
-```
-
+  ```html
+  <div class="docs-example--rendered">
+    <button class="ods-button">
+      <svg class="ods-icon" role="presentation" focusable="false">...</svg>
+      <span class="ods-button--label">Button label</span>
+    </button>
+  </div>
+  ```
 </figure>
+
 
 ### Icon-only
 
@@ -794,15 +786,14 @@ If your button does not have a visual label, be sure to apply the `u-visually-hi
     </button>
   </div>
 
-```html
-<div class="docs-example--rendered">
-  <button aria-label="Button label" class="ods-button">
-    <svg class="ods-icon" role="presentation" focusable="false">...</svg>
-    <span class="ods-button--label u-visually-hidden">Button label</span>
-  </button>
-</div>
-```
-
+  ```html
+  <div class="docs-example--rendered">
+    <button aria-label="Button label" class="ods-button">
+      <svg class="ods-icon" role="presentation" focusable="false">...</svg>
+      <span class="ods-button--label u-visually-hidden">Button label</span>
+    </button>
+  </div>
+  ```
 </figure>
 
 ## Accessibility

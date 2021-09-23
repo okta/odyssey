@@ -15,16 +15,16 @@
 
   display: grid;
   grid-template-areas:
-    "icon title"
-    ". content"
-    ". actions";
+    'icon title'
+    '. content'
+    '. actions';
   grid-template-columns: max-content 1fr;
   width: 100%;
   max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
   padding-block: $spacing-m;
   padding-inline: $spacing-m;
   column-gap: $spacing-s;
-  background-color: cv("blue", "000");
+  background-color: cv('blue', '000');
 
   a {
     color: $text-body;
@@ -64,13 +64,13 @@
 }
 
 .is-ods-infobox-success {
-  background-color: cv("green", "000");
+  background-color: cv('green', '000');
 }
 
 .is-ods-infobox-caution {
-  background-color: cv("yellow", "000");
+  background-color: cv('yellow', '000');
 }
 
 .is-ods-infobox-danger {
-  background-color: cv("red", "000");
+  background-color: cv('red', '000');
 }

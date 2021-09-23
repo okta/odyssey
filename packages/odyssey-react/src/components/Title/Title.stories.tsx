@@ -19,17 +19,17 @@ export default {
   component: Title,
   argTypes: {
     children: {
-      control: { type: "string" },
-    },
+      control: { type: "string" }
+    }
   },
 };
 
 const Template: Story<Props> = ({ level, visualLevel, children }) => (
-  <Title level={level} visualLevel={visualLevel} children={children} />
+  <Title level={ level } visualLevel={ visualLevel } children={ children } />
 );
 
 export const Primary = Template.bind({});
 Primary.args = {
   level: "1",
-  children: "Section title",
+  children: "Section title"
 };

@@ -10,32 +10,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { MessageArgs, File, CompileResponse } from "./compile";
-import { resolve } from "path";
-import { MessageChannel, Worker, receiveMessageOnPort } from "worker_threads";
+import type { MessageArgs, File, CompileResponse } from './compile';
+import { resolve } from 'path';
+import { MessageChannel, Worker, receiveMessageOnPort } from 'worker_threads';
 
-type Message = Required<Pick<CompileResponse, keyof File>> & CompileResponse;
-type Result = { message: Message } | undefined;
+type Message = Required<Pick<CompileResponse, keyof File>> & CompileResponse
+type Result = { message: Message; } | undefined;
 type Compile = (args: { filePath: string }) => File;
 
-export default function compileFactory(): Compile {
-  const worker = new Worker(resolve(__dirname, "./compile.js"));
+export default function compileFactory (): Compile {
+  const worker = new Worker(resolve(__dirname, './compile.js'));
   const signal = new Int32Array(new SharedArrayBuffer(4));
   const compile: Compile = ({ filePath }) => {
-    signal[0] = 0;
+    signal[ 0 ] = 0;
 
     const { port1, port2 } = new MessageChannel();
 
     const message: MessageArgs = { signal, port: port1, filePath };
 
-    worker.postMessage(message, [port1]);
+    worker.postMessage(message, [ port1 ]);
 
     Atomics.wait(signal, 0, 0, 5000);
 
     const result: Result = receiveMessageOnPort(port2);
 
     if (!result) {
-      throw new Error("Cannot serialize worker response");
+      throw new Error('Cannot serialize worker response');
     }
 
     if (result.message.error) {
@@ -44,7 +44,7 @@ export default function compileFactory(): Compile {
 
     if (result.message.warning) {
       console.warn(result.message.warning);
-      delete result.message.warning;
+      delete result.message.warning
     }
 
     return result.message;

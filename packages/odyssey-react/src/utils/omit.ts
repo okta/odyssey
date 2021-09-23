@@ -11,8 +11,7 @@
  */
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-const notOwnProperty = (obj: object, prop: string) =>
-  !{}.hasOwnProperty.call(obj, prop);
+const notOwnProperty = (obj: object, prop: string) => !{}.hasOwnProperty.call(obj, prop);
 const omitList = `children className style`.split(` `);
 
 function omit<
@@ -24,11 +23,8 @@ function omit<
 
   for (const key in obj) {
     if (
-      omitList.includes(key) ||
-      rest.includes(key) ||
-      notOwnProperty(obj, key)
-    )
-      continue;
+      omitList.includes(key) || rest.includes(key) || notOwnProperty(obj, key)
+    ) continue;
 
     omitted[key] = obj[key];
   }

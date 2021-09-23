@@ -10,95 +10,92 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  createContext,
-  useContext,
-  useState,
-  ComponentPropsWithoutRef,
-} from "react";
+import { createContext, useContext, useState, ComponentPropsWithoutRef } from "react";
 import type { FunctionComponent, ReactNode, AnimationEvent } from "react";
-import { useCx, useOmit, useOid, oid } from "../../utils";
-import styles from "./Toast.module.scss";
-import Button from "../Button";
-import type { Props as ButtonProps } from "../Button";
+import { useCx, useOmit, useOid, oid } from '../../utils';
+import styles from './Toast.module.scss';
+import Button from '../Button';
+import type { Props as ButtonProps } from '../Button';
 
-export type ToastVariants = "info" | "success" | "caution" | "danger";
+export type ToastVariants = 'info' | 'success' | 'caution' | 'danger';
 
-export interface PropsToast
-  extends Omit<
-    ComponentPropsWithoutRef<"aside">,
-    "children" | "style" | "className"
-  > {
+export interface PropsToast extends Omit<
+  ComponentPropsWithoutRef<'aside'>,
+  'children' | 'style' | 'className'
+> {
   /**
    * The title to be displayed on the toast.
    */
-  title: string;
-
+  title: string,
+  
   /**
    * Supplemental information. Be concise - less than three lines of content - as your Toast will soon vanish!
    */
-  body?: string;
+  body?: string,
 
-  /**
+ /**
    * The visual variant to be displayed to the user.
    * @default info
    */
-  variant?: ToastVariants;
-
-  /**
+  variant?: ToastVariants,
+  
+ /**
    * The visual variant to be displayed to the user.
    * @default info
    */
-  id?: string;
+  id?: string,
+  
+  onAnimationEnd?: (event: AnimationEvent) => void,
 
-  onAnimationEnd?: (event: AnimationEvent) => void;
-
-  onDismiss?: ButtonProps["onClick"];
+  onDismiss?: ButtonProps['onClick']
 }
 
-export type PropsToastProvider = {
+export type PropsToastProvider = { 
   /**
-   * Child react nodes which leverage the toast context. This is typically an entire app.
+   * Child react nodes which leverage the toast context. This is typically an entire app. 
    */
-  children?: ReactNode | ReactNode[];
+  children?: ReactNode | ReactNode[],
 
   /**
    * Callback function invoked when a toast exits the toast provider.
    */
-  onToastExit?: (id: string) => void;
-};
+  onToastExit?: (id: string) => void
+}
 
 export type StaticComponents = {
-  Provider: typeof ToastProvider;
-};
+  Provider: typeof ToastProvider
+}
 
 export type ToastObject = {
-  id?: string;
-  title: string;
-  body?: string;
-  variant?: ToastVariants;
-};
+  id?: string,
+  title: string,
+  body?: string,
+  variant?: ToastVariants
+}
 
-export type AddToastType = (toastObj: ToastObject) => void;
+export type AddToastType = (toastObj: ToastObject) => void
 export interface Context {
-  addToast: AddToastType;
+  addToast: AddToastType
 }
 
 export const ToastContext = createContext<Context>({
-  addToast: () => void 0,
+  addToast: () => void 0
 });
 
 /**
- * Toasts are transient, non-disruptive messages that provide at-a-glance,
+ * Toasts are transient, non-disruptive messages that provide at-a-glance, 
  * asynchronous feedback or updates.
- *
+ * 
  * @component
- * @example
+ * @example  
  * <Toast>...</Toast>
  */
 const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
-  const { title, body, variant = "info", id, onDismiss, ...rest } = props;
-  const componentClass = useCx(styles.root, styles[`${variant}Variant`]);
+  const { title, body, variant = 'info', id, onDismiss, ...rest } = props
+  const componentClass = useCx(
+    styles.root,
+    styles[`${variant}Variant`],
+  );
   const xid = useOid(id);
   const omitProps = useOmit(rest);
 
@@ -110,22 +107,18 @@ const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
       <h1 className={styles.title}>{title}</h1>
       {body && <p className={styles.body}>{body}</p>}
       <span className={styles.dismiss}>
-        <Button
-          variant="dismiss"
-          onClick={onDismiss}
-          aria-label="Dismiss toast"
-        >
+        <Button variant="dismiss" onClick={onDismiss} aria-label="Dismiss toast"> 
           {/* @todo Insert <Icon> component */} &#8253;
         </Button>
       </span>
     </aside>
-  );
+  )
 };
 
 /**
- * Provides applications a way to add Toasts to their app
+ * Provides applications a way to add Toasts to their app 
  * via React's Context API.
- *
+ * 
  * @component
  * @example
  * <Toast.Provider>
@@ -135,61 +128,59 @@ const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
 
 const ToastProvider = ({ children, onToastExit }: PropsToastProvider) => {
   const [toasts, setToasts] = useState<ToastObject[]>([]);
-
+  
   const addToast = (toast: ToastObject) => {
     const id = toast.id || oid();
-    setToasts([...toasts, { ...toast, id }]);
-  };
-
+    setToasts([...toasts, {...toast, id}])
+  }
+  
   const handleDismiss = (id: string) => {
-    if (typeof onToastExit === "function") onToastExit(id);
+    if (typeof(onToastExit) === 'function') onToastExit(id);
 
     removeToast(id);
-  };
+  }
 
   const removeToast = (id: string) => {
-    setToasts([...toasts.filter((toast) => toast.id !== id)]);
-  };
-
+    setToasts([...toasts.filter(toast => toast.id !== id)]);
+  }
+  
   const handleAnimationEnd = (event: AnimationEvent) => {
     const { animationName, currentTarget } = event;
     if (animationName === styles.toastOut) {
       handleDismiss(currentTarget.id);
     }
-  };
+  }
 
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
       <div className={styles.toastPen} data-testid="ods-toast-pen">
-        {toasts.map(({ title, body, variant = "info", id = oid() }) => (
+        {toasts.map(({ title, body, variant = 'info', id = oid() }) => (
           <Toast
             id={id}
             key={id}
             title={title}
             body={body}
             variant={variant}
-            onDismiss={() => {
-              handleDismiss(id);
-            }}
+            onDismiss={() => { handleDismiss(id); }}
             onAnimationEnd={handleAnimationEnd}
           />
         ))}
       </div>
     </ToastContext.Provider>
-  );
-};
+  )
+}
 
 export const useToast = (): Context => {
-  const context = useContext(ToastContext);
+  const context = useContext(ToastContext)
 
   if (Object.keys(context).length === 0) {
-    throw new Error("useToast must be used within a Toast.Provider");
+    throw new Error('useToast must be used within a Toast.Provider');
   }
 
-  return context;
-};
+  return context
+}
 
 Toast.Provider = ToastProvider;
 
-export default Toast;
+export default Toast

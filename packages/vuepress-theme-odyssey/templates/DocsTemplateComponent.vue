@@ -10,11 +10,9 @@
             <a :href="link.href">
               <!-- eslint-disable -->
               <span
-                aria-hidden
-                v-if="link.icon"
-                v-html="
-                  require(`!html-loader!../public/images/icon-${link.icon}.svg`)
-                "
+              aria-hidden
+              v-if="link.icon"
+              v-html="require(`!html-loader!../public/images/icon-${link.icon}.svg`)"
               />
               <!-- eslint-disable -->
               {{ link.label }}
@@ -39,17 +37,8 @@
       <DocsPagination :sidebarItems="$site.themeConfig.nav">
         Have questions? <span class="u-visually-hidden">Ask us on slack!</span>
         <div class="has-ods-tooltip">
-          <a
-            :href="$site.themeConfig.links.slack"
-            target="_blank"
-            aria-describedby="component-slack"
-            >#odyssey</a
-          >
-          <aside
-            id="component-slack"
-            class="ods-tooltip is-ods-tooltip-top"
-            role="tooltip"
-          >
+          <a :href="$site.themeConfig.links.slack" target="_blank" aria-describedby="component-slack">#odyssey</a>
+          <aside id="component-slack" class="ods-tooltip is-ods-tooltip-top" role="tooltip">
             Oktanauts-only for now
           </aside>
         </div>
@@ -64,7 +53,7 @@ export default {
   components: {
     DocsPageHeader: () => import("../components/DocsPageHeader.vue"),
     DocsPagination: () => import("../components/DocsPagination.vue"),
-    OdsTabs: () => import("../global-components/OdsTabs.vue"),
-  },
+    OdsTabs: () => import("../global-components/OdsTabs.vue")
+  }
 };
 </script>

@@ -80,7 +80,7 @@
           max-width: 100%;
           padding-block: $spacing-l;
           padding-inline: $spacing-xl;
-          background: cv("gray", "000");
+          background: cv('gray', '000');
           color: $text-sub;
           text-align: center;
         }
@@ -111,7 +111,7 @@
     padding-inline-end: calc(1em + #{$spacing-s});
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       inset-block-start: 50%;
       inset-inline-end: 0;
@@ -128,26 +128,26 @@
 
   .is-ods-table-unsorted {
     &::after {
-      background-image: get-icon("double-arrow", $text-sub);
+      background-image: get-icon('double-arrow', $text-sub);
     }
 
     &:hover {
       &::after {
-        background-image: get-icon("double-arrow", $text-heading);
+        background-image: get-icon('double-arrow', $text-heading);
       }
     }
   }
 
   .is-ods-table-asc {
     &::after {
-      background-image: get-icon("arrow", $text-heading);
+      background-image: get-icon('arrow', $text-heading);
     }
   }
 
   .is-ods-table-desc {
     &::after {
       transform: translateY(-50%) rotate(180deg) scale(0.75);
-      background-image: get-icon("arrow", $text-heading);
+      background-image: get-icon('arrow', $text-heading);
     }
   }
 
@@ -155,7 +155,7 @@
     /* Numerical data display should not swap for RTL languages. */
     /* stylelint-disable-next-line liberty/use-logical-spec */
     text-align: right;
-    font-feature-settings: "lnum", "tnum";
+    font-feature-settings: 'lnum', 'tnum';
   }
 
   .is-ods-table-date {

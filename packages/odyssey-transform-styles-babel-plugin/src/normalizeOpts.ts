@@ -10,31 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type * as Babel from "@babel/core";
-import type { TransformStylesOpts } from "./transformStyles";
+import type * as Babel from '@babel/core';
+import type { TransformStylesOpts } from './transformStyles';
 
 interface NormalizedOpts extends TransformStylesOpts {
   extensions: RegExp[];
 }
 
-export default function normalizeOpts(
-  babelOpts: Babel.PluginPass["opts"]
+export default function normalizeOpts (
+  babelOpts: Babel.PluginPass[ 'opts' ]
 ): NormalizedOpts {
   const opts = babelOpts || Object.create(null);
-  const normalized = { extensions: [/\.module\.scss$/i] };
+  const normalized = { extensions: [ /\.module\.scss$/i ] };
 
   if (Array.isArray(opts.extensions)) {
-    normalized.extensions = opts.extensions.map((ext: string | RegExp) =>
+    normalized.extensions = opts.extensions.map((ext: string | RegExp) => (
       ext instanceof RegExp ? ext : new RegExp(ext)
-    );
+    ));
   }
 
   return normalized;
 }
 
-export function isTargetExtension(
-  candidate: string,
-  extensions: RegExp[]
-): boolean {
+export function isTargetExtension (candidate: string, extensions: RegExp[]): boolean {
   return extensions.some((extension) => extension.test(candidate));
 }

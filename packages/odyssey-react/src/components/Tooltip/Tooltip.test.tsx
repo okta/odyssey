@@ -29,18 +29,16 @@ describe("Tooltip", () => {
     expect(getByRole(button)).toBeInTheDocument();
   });
 
-  it("renders a provided id associating the tooltip and child", () => {
+  it('renders a provided id associating the tooltip and child', () => {
     const { getByRole } = render(
       <Tooltip label={label} position="bottom" id="foo">
         <button>Bottom</button>
       </Tooltip>
     );
 
-    expect(getByRole(button)).toHaveAttribute("aria-describedby", "foo");
-    expect(getByRole(tooltip)).toHaveAttribute("id", "foo");
+    expect(getByRole(button)).toHaveAttribute('aria-describedby', 'foo');
+    expect(getByRole(tooltip)).toHaveAttribute('id', 'foo');
   });
 
-  a11yCheck(() =>
-    render(<Tooltip label="foo" children={<span>"bar"</span>} />)
-  );
+  a11yCheck(() => render(<Tooltip label="foo" children={<span>"bar"</span>}/>))
 });

@@ -15,7 +15,7 @@ $z-index: (
   sidebar: 3,
   topbar: 2,
   base: 1,
-  btm: -1,
+  btm: -1
 );
 
 @function z-index($key) {

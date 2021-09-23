@@ -6,7 +6,7 @@
     :role="role"
     :class="{
       'docs-link': true,
-      [`docs-link--${variant}`]: variant,
+      [`docs-link--${variant}`]: variant
     }"
   >
     <slot></slot>
@@ -19,7 +19,7 @@
     :role="role"
     :class="{
       'docs-link': true,
-      [`docs-link--${variant}`]: variant,
+      [`docs-link--${variant}`]: variant
     }"
   >
     <slot></slot>
@@ -34,18 +34,18 @@ export default {
   props: {
     href: {
       type: String,
-      required: true,
+      required: true
     },
     role: {
       type: String,
       default: "",
-      required: false,
+      required: false
     },
     variant: {
       type: String,
       default: "underlined",
-      required: false,
-    },
+      required: false
+    }
   },
   computed: {
     link() {
@@ -80,7 +80,7 @@ export default {
         return this.rel;
       }
       return this.isBlankTarget ? "noopener noreferrer" : "";
-    },
-  },
+    }
+  }
 };
 </script>
