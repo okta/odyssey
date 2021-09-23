@@ -10,26 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactText } from 'react';
-import { useCx } from '../../utils';
+import type { FunctionComponent, ReactText } from "react";
+import { useCx } from "../../utils";
 
-export type FieldLabelVariant = 'label' | 'hint' | 'error' | 'optional';
+export type FieldLabelVariant = "label" | "hint" | "error" | "optional";
 export type Props = {
   /**
    * The text content to be displayed to the user.
    */
-  children: ReactText,
+  children: ReactText;
 
   /**
    * The underlying element id attribute.
    */
-  id?: string,
+  id?: string;
 
   /**
    * The visual variant to be displayed to the user.
    * @default label
    */
-  variant?: FieldLabelVariant,
+  variant?: FieldLabelVariant;
 };
 
 /**
@@ -37,26 +37,19 @@ export type Props = {
  * They can be used with all Odyssey inputs.
  */
 const FieldLabel: FunctionComponent<Props> = (props) => {
-  const {
-    children,
-    id,
-    variant = 'label'
-  } = props;
+  const { children, id, variant = "label" } = props;
 
-  const Component = variant === 'label' ? 'label' : 'aside';
+  const Component = variant === "label" ? "label" : "aside";
 
   const className = useCx(
-    variant === 'error' && 'ods-field--error',
-    variant === 'hint' && 'ods-field--hint',
-    variant === 'label' && 'ods-label',
-    variant === 'optional' && 'ods-label--optional'
+    variant === "error" && "ods-field--error",
+    variant === "hint" && "ods-field--hint",
+    variant === "label" && "ods-label",
+    variant === "optional" && "ods-label--optional"
   );
 
   return (
-    <Component
-      className={className}
-      id={id}
-    >
+    <Component className={className} id={id}>
       {children}
     </Component>
   );

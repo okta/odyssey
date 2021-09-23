@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useRef } from 'react';
-import ReactDOMServer from 'react-dom/server';
-import Choices from 'choices.js';
-import { Close } from '../../Icon';
+import { useEffect, useRef } from "react";
+import ReactDOMServer from "react-dom/server";
+import Choices from "choices.js";
+import { Close } from "../../Icon";
 
-import styles from '../Select.module.scss';
+import styles from "../Select.module.scss";
 
 const useChoices = (id: string, value?: string): void => {
   const choices = useRef<undefined | Choices>();
@@ -26,7 +26,7 @@ const useChoices = (id: string, value?: string): void => {
     choices.current = new Choices(select, {
       searchEnabled: false,
       shouldSort: false,
-      itemSelectText: '',
+      itemSelectText: "",
       removeItemButton: true,
       classNames: {
         containerOuter: styles.root,
@@ -54,7 +54,7 @@ const useChoices = (id: string, value?: string): void => {
         flippedState: styles.flipped,
         loadingState: styles.loading,
         noResults: styles.noResults,
-        noChoices: styles.noChoices
+        noChoices: styles.noChoices,
 
         // TODO: fix english leaks for these properties
         // loadingText: 'Loading...',
@@ -66,22 +66,24 @@ const useChoices = (id: string, value?: string): void => {
         item: (...args) => {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           const item = Choices.defaults.templates.item.call(this!, ...args);
-          const btn = item.querySelector('button');
-          if(btn){
-            const indicator = document.createElement('span');
+          const btn = item.querySelector("button");
+          if (btn) {
+            const indicator = document.createElement("span");
             indicator.classList.add(styles.buttonIndicator);
-            indicator.setAttribute('role', 'presentation');
-            indicator.insertAdjacentHTML('afterbegin', ReactDOMServer.renderToString(<Close />));
+            indicator.setAttribute("role", "presentation");
+            indicator.insertAdjacentHTML(
+              "afterbegin",
+              ReactDOMServer.renderToString(<Close />)
+            );
             btn?.appendChild(indicator);
           }
-          return item
-        }
+          return item;
+        },
       }),
     });
 
     return () => choices?.current?.destroy();
   }, [id]);
-
 
   useEffect(() => {
     const forceValue = () => value && choices?.current?.setChoiceByValue(value);
@@ -89,9 +91,9 @@ const useChoices = (id: string, value?: string): void => {
 
     if (value && node) {
       forceValue();
-      node.addEventListener('change', forceValue);
+      node.addEventListener("change", forceValue);
     } else if (!value && node) {
-      node.removeEventListener('change', forceValue);
+      node.removeEventListener("change", forceValue);
     }
   }, [value]);
 };

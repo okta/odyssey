@@ -44,12 +44,12 @@ export default {
     active: {
       type: String,
       required: false,
-      default: "tab-0"
+      default: "tab-0",
     },
     id: {
       type: String,
       required: true,
-      default: "component-tabs-0"
+      default: "component-tabs-0",
     },
     tablist: {
       type: Array,
@@ -57,14 +57,14 @@ export default {
       default: () => [
         { id: "tab-0", label: "Tab 0" },
         { id: "tab-1", label: "Tab 1" },
-        { id: "tab-2", label: "Tab 2" }
-      ]
-    }
+        { id: "tab-2", label: "Tab 2" },
+      ],
+    },
   },
   data() {
     return {
       focusIndex: 0,
-      focusCount: 0
+      focusCount: 0,
     };
   },
   mounted() {
@@ -131,7 +131,7 @@ export default {
     },
     focusItem() {
       this.$refs.tablist.children[this.focusIndex].focus();
-    }
-  }
+    },
+  },
 };
 </script>

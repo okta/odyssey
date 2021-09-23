@@ -5,10 +5,10 @@ title: Link
 description: Links are navigation elements displayed as text.
 lede: Links are navigation elements displayed as text. Use a Link to bring a user to another page or start a download.
 tabs:
-  - label: 'Overview'
-    id: 'overview'
-  - label: 'HTML & SCSS'
-    id: 'html-scss'
+  - label: "Overview"
+    id: "overview"
+  - label: "HTML & SCSS"
+    id: "html-scss"
 links:
   - icon: github
     label: View source
@@ -49,7 +49,7 @@ Use an external link when:
 
 ### Visited Links
 
-Odyssey disables special styling for visited links. This is an  intentional compromise that preferences user security and ease of  maintenance.
+Odyssey disables special styling for visited links. This is an intentional compromise that preferences user security and ease of maintenance.
 
 ## Usage
 
@@ -65,8 +65,7 @@ Avoid using Links for actions, preferring Buttons instead.
 
 <Description>
 
-Choose Link copy that describes the destination (e.g. "Settings"), rather than generic text (e.g. "Click here" or a URL).  Aim to keep this copy concise, three words at most.
-
+Choose Link copy that describes the destination (e.g. "Settings"), rather than generic text (e.g. "Click here" or a URL). Aim to keep this copy concise, three words at most.
 
 Keep in mind that all users may not have the same visual context due to their device or other constraints.
 
@@ -83,7 +82,6 @@ Keep in mind that all users may not have the same visual context due to their de
     <a href="#">View system</a>
   </template>
 </Visual>
-
 
 <Visual variant="smiley-negative">
   <template>
@@ -127,7 +125,7 @@ Avoid colloquial text that hides the associated email (e.g. "Contact Us").
 
 <Description>
 
-Links in Odyssey are not underlined. They maintain a minimum 3:1 contrast ratio with our body text colors and a 4.5:1 ratio with our available background colors. If you  deviate from these standards via overrides, ensure that your links have a non-color indicator like an underline.
+Links in Odyssey are not underlined. They maintain a minimum 3:1 contrast ratio with our body text colors and a 4.5:1 ratio with our available background colors. If you deviate from these standards via overrides, ensure that your links have a non-color indicator like an underline.
 
 Links should display a visible affordance when users interact via keyboard. Odyssey preserves the default `:focus` state for each browser.
 
@@ -150,9 +148,10 @@ Links should display a visible affordance when users interact via keyboard. Odys
     <a href="mailto:lauren.ipsum@okta.com">lauren.ipsum@okta.com</a>
   </div>
 
-  ```html
-  <a href="mailto:lauren.ipsum@okta.com">lauren.ipsum@okta.com</a>
-  ```
+```html
+<a href="mailto:lauren.ipsum@okta.com">lauren.ipsum@okta.com</a>
+```
+
 </figure>
 
 ## External link
@@ -162,9 +161,10 @@ Links should display a visible affordance when users interact via keyboard. Odys
     <a href="https://okta.com" target="_blank" rel="noopener">Okta.com</a>
   </div>
 
-  ```html
-  <a href="https://okta.com" target="_blank" rel="noopener">Okta.com</a>
-  ```
+```html
+<a href="https://okta.com" target="_blank" rel="noopener">Okta.com</a>
+```
+
 </figure>
 
 ## Visited Links

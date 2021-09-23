@@ -11,16 +11,16 @@
  */
 
 .root {
-  color: cv('blue', '500');
+  color: cv("blue", "500");
   text-decoration: none;
 
   &:hover {
-    color: cv('blue', '500');
+    color: cv("blue", "500");
     text-decoration: underline;
   }
 
   &:visited {
-    color: cv('blue', '500');
+    color: cv("blue", "500");
   }
 }
 

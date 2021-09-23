@@ -5,10 +5,10 @@ title: Infobox
 description: An infobox is a type of alert that provides feedback in response to a user action or system activity.
 lede: An infobox is a type of alert that provides feedback in response to a user action or system activity.
 tabs:
-  - label: 'Overview'
-    id: 'overview'
-  - label: 'HTML & SCSS'
-    id: 'html-scss'
+  - label: "Overview"
+    id: "overview"
+  - label: "HTML & SCSS"
+    id: "html-scss"
 links:
   - icon: github
     label: View source
@@ -411,17 +411,18 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
     </aside>
   </div>
 
-  ```html
-  <aside class="ods-infobox is-ods-infobox-info" role="status">
-    <span class="ods-infobox--icon">
-      <svg class="ods-icon">[...]</svg>
-    </span>
-    <h1 class="ods-infobox--title">Moonbase Alpha-6</h1>
-    <section class="ods-infobox--content">
-      <p>You are currently logged in from Moonbase Alpha-6, located on Luna.</p>
-    </section>
-  </aside>
-  ```
+```html
+<aside class="ods-infobox is-ods-infobox-info" role="status">
+  <span class="ods-infobox--icon">
+    <svg class="ods-icon">[...]</svg>
+  </span>
+  <h1 class="ods-infobox--title">Moonbase Alpha-6</h1>
+  <section class="ods-infobox--content">
+    <p>You are currently logged in from Moonbase Alpha-6, located on Luna.</p>
+  </section>
+</aside>
+```
+
 </figure>
 
 ## Danger
@@ -439,17 +440,21 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
     </aside>
   </div>
 
-  ```html
-  <aside class="ods-infobox is-ods-infobox-danger" role="alert">
-    <span class="ods-infobox--icon">
-      <svg class="ods-icon">[...]</svg>
-    </span>
-    <h1 class="ods-infobox--title">Safety checks have failed</h1>
-    <section class="ods-infobox--content">
-      <p>An issue has been discovered with your fuel mixture ratios. Please reconfigure your fuel mixture and perform safety checks again.</p>
-    </section>
-  </aside>
-  ```
+```html
+<aside class="ods-infobox is-ods-infobox-danger" role="alert">
+  <span class="ods-infobox--icon">
+    <svg class="ods-icon">[...]</svg>
+  </span>
+  <h1 class="ods-infobox--title">Safety checks have failed</h1>
+  <section class="ods-infobox--content">
+    <p>
+      An issue has been discovered with your fuel mixture ratios. Please
+      reconfigure your fuel mixture and perform safety checks again.
+    </p>
+  </section>
+</aside>
+```
+
 </figure>
 
 ## Caution
@@ -467,17 +472,21 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
     </aside>
   </div>
 
-  ```html
-  <aside class="ods-infobox is-ods-infobox-caution" role="status">
-    <span class="ods-infobox--icon">
-      <svg class="ods-icon">[...]</svg>
-    </span>
-    <h1 class="ods-infobox--title">Safety checks incomplete</h1>
-    <section class="ods-infobox--content">
-      <p>Safety checks must be completed before this mission as been approved for launch.</p>
-    </section>
-  </aside>
-  ```
+```html
+<aside class="ods-infobox is-ods-infobox-caution" role="status">
+  <span class="ods-infobox--icon">
+    <svg class="ods-icon">[...]</svg>
+  </span>
+  <h1 class="ods-infobox--title">Safety checks incomplete</h1>
+  <section class="ods-infobox--content">
+    <p>
+      Safety checks must be completed before this mission as been approved for
+      launch.
+    </p>
+  </section>
+</aside>
+```
+
 </figure>
 
 ## Success
@@ -495,17 +504,20 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
     </aside>
   </div>
 
-  ```html
-  <aside class="ods-infobox is-ods-infobox-success" role="status">
-    <span class="ods-infobox--icon">
-      <svg class="ods-icon">[...]</svg>
-    </span>
-    <h1 class="ods-infobox--title">Ready for lift-off</h1>
-    <section class="ods-infobox--content">
-      <p>Safety checks are complete, and this mission as been approved for launch.</p>
-    </section>
-  </aside>
-  ```
+```html
+<aside class="ods-infobox is-ods-infobox-success" role="status">
+  <span class="ods-infobox--icon">
+    <svg class="ods-icon">[...]</svg>
+  </span>
+  <h1 class="ods-infobox--title">Ready for lift-off</h1>
+  <section class="ods-infobox--content">
+    <p>
+      Safety checks are complete, and this mission as been approved for launch.
+    </p>
+  </section>
+</aside>
+```
+
 </figure>
 
 ## Inline Actions
@@ -523,17 +535,22 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
     </aside>
   </div>
 
-  ```html
-  <aside class="ods-infobox is-ods-infobox-danger" role="alert">
-    <span class="ods-infobox--icon">
-      <svg class="ods-icon">[...]</svg>
-    </span>
-    <h1 class="ods-infobox--title">Safety checks have failed</h1>
-    <section class="ods-infobox--content">
-      <p>An issue has been discovered with your fuel mixture ratios. Please <a href="#">reconfigure your fuel mixture</a> and perform safety checks again.</p>
-    </section>
-  </aside>
-  ```
+```html
+<aside class="ods-infobox is-ods-infobox-danger" role="alert">
+  <span class="ods-infobox--icon">
+    <svg class="ods-icon">[...]</svg>
+  </span>
+  <h1 class="ods-infobox--title">Safety checks have failed</h1>
+  <section class="ods-infobox--content">
+    <p>
+      An issue has been discovered with your fuel mixture ratios. Please
+      <a href="#">reconfigure your fuel mixture</a> and perform safety checks
+      again.
+    </p>
+  </section>
+</aside>
+```
+
 </figure>
 
 ## Block Actions
@@ -554,20 +571,24 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
     </aside>
   </div>
 
-  ```html
-  <aside class="ods-infobox is-ods-infobox-danger" role="alert">
-    <span class="ods-infobox--icon">
-      <svg class="ods-icon">[...]</svg>
-    </span>
-    <h1 class="ods-infobox--title">Safety checks have failed</h1>
-    <section class="ods-infobox--content">
-      <p>An issue has been discovered with your fuel mixture ratios. Please reconfigure your fuel mixture and perform safety checks again.</p>
-    </section>
-    <section class="ods-infobox--actions">
-      <a href="#">Visit fueling console</a>
-    </section>
-  </aside>
-  ```
+```html
+<aside class="ods-infobox is-ods-infobox-danger" role="alert">
+  <span class="ods-infobox--icon">
+    <svg class="ods-icon">[...]</svg>
+  </span>
+  <h1 class="ods-infobox--title">Safety checks have failed</h1>
+  <section class="ods-infobox--content">
+    <p>
+      An issue has been discovered with your fuel mixture ratios. Please
+      reconfigure your fuel mixture and perform safety checks again.
+    </p>
+  </section>
+  <section class="ods-infobox--actions">
+    <a href="#">Visit fueling console</a>
+  </section>
+</aside>
+```
+
 </figure>
 
 :::

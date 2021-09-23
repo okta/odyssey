@@ -5,10 +5,10 @@ title: Tag
 description: Tags are used to help describe and differentiate an entity or object.
 lede: Use Tags to help describe and differentiate an entity or object. Think of them as “adjectives” in your UI toolbox that make navigating  and parsing content easier.
 tabs:
-  - label: 'Overview'
-    id: 'overview'
-  - label: 'HTML & SCSS'
-    id: 'html-scss'
+  - label: "Overview"
+    id: "overview"
+  - label: "HTML & SCSS"
+    id: "html-scss"
 links:
   - icon: github
     label: View source
@@ -171,13 +171,14 @@ Use Tags as descriptors paired with a particular object. These descriptors may b
     </ul>
   </div>
 
-  ```html
-  <ul class="ods-tag--list">
-    <li class="ods-tag">Tag 1</li>
-    <li class="ods-tag">Tag 2</li>
-    <li class="ods-tag">Tag 3</li>
-  </ul>
-  ```
+```html
+<ul class="ods-tag--list">
+  <li class="ods-tag">Tag 1</li>
+  <li class="ods-tag">Tag 2</li>
+  <li class="ods-tag">Tag 3</li>
+</ul>
+```
+
 </figure>
 
 :::

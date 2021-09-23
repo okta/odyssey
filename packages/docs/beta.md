@@ -21,6 +21,7 @@ Engineers - the @okta/odyssey package will see major changes between now and 1.0
 <Description>
 
 There are two main reasons we regard Odyssey as a product in Beta.
+
 1. Odyssey has not been tested, end-to-end, on enough platforms. We like to believe our UI is strong enough to support the needs of Okta and our customers, but that belief has not been validated. Indeed, there are known gaps! In this way, the Beta flag is an acknowledgement that we know your needs may not be met yet but we are working hard to get there.
 2. Our foundations are still emerging. Whether it’s visual foundations or technical architecture, the most basic structures of the system are being actively tested and rewritten. You should always expect improvement from Odyssey. Beta is a period where most improvements may introduce breaking changes.
 

@@ -13,7 +13,7 @@
 .ods-banner {
   display: grid;
   position: relative;
-  grid-template-areas: 'icon title content actions';
+  grid-template-areas: "icon title content actions";
   grid-template-columns: repeat(4, minmax(min-content, max-content));
   grid-template-rows: 1fr;
   align-items: center;
@@ -21,7 +21,7 @@
   width: 100%;
   padding-block: $spacing-s;
   padding-inline: $spacing-m;
-  background-color: cv('blue', '300');
+  background-color: cv("blue", "300");
 
   &.is-ods-banner-dismissed {
     display: none;
@@ -74,7 +74,7 @@
 }
 
 .is-ods-banner-info {
-  background-color: cv('blue', '300');
+  background-color: cv("blue", "300");
   color: $text-body;
 
   .ods-banner--title {
@@ -87,7 +87,7 @@
 }
 
 .is-ods-banner-success {
-  background-color: cv('green', '300');
+  background-color: cv("green", "300");
   color: $text-body;
 
   .ods-banner--title {
@@ -100,7 +100,7 @@
 }
 
 .is-ods-banner-caution {
-  background-color: cv('yellow', '300');
+  background-color: cv("yellow", "300");
   color: $text-body;
 
   .ods-banner--title {
@@ -113,7 +113,7 @@
 }
 
 .is-ods-banner-danger {
-  background-color: cv('red', '300');
+  background-color: cv("red", "300");
   color: $text-body;
 
   .ods-banner--title {

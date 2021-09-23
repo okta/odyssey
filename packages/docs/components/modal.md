@@ -5,10 +5,10 @@ description: UI that appears on top of the main content and moves the system int
 lede: UI that appears on top of the main content and moves the system into a mode requiring user interaction. This dialog disables the main content until the user interacts with the modal dialog.
 title: Modal
 tabs:
-  - label: 'Overview'
-    id: 'overview'
-  - label: 'HTML & SCSS'
-    id: 'html-scss'
+  - label: "Overview"
+    id: "overview"
+  - label: "HTML & SCSS"
+    id: "html-scss"
 links:
   - icon: github
     label: View source
@@ -34,7 +34,7 @@ Modals are inserted above the main content as a blocking mechanism to ask for us
 
 <Visual>
 
-  <button class="ods-button" data-micromodal-trigger="ods-modal-standard">Launch modal</button>
+<button class="ods-button" data-micromodal-trigger="ods-modal-standard">Launch modal</button>
 
 </Visual>
 
@@ -182,29 +182,43 @@ For users happy with their new context, we ensure their attention isn't misdirec
     </div>
   </div>
 
-  ```html
-  <div class="ods-modal" id="ods-modal-standard" aria-hidden="true">
-    <div class="ods-modal--overlay" tabindex="-1" data-micromodal-close>
-      <div class="ods-modal--dialog" role="dialog" aria-modal="true" aria-labelledby="ods-modal-standard-title">
-        <header class="ods-modal--header">
-          <button class="ods-modal--close" aria-label="Close modal" data-micromodal-close></button>
-          <h1 class="ods-modal--title" id="ods-modal-standard-title">
-            Modal Title
-          </h1>
-        </header>
-        <main class="ods-modal--content" id="ods-modal-standard-content">
-          <p>
-            Modal content
-          </p>
-        </main>
-        <footer class="ods-modal--footer">
-          <button class="ods-button is-ods-button-clear" data-micromodal-close aria-label="Close this dialog window">Cancel</button>
-          <button class="ods-button">Continue</button>
-        </footer>
-      </div>
+```html
+<div class="ods-modal" id="ods-modal-standard" aria-hidden="true">
+  <div class="ods-modal--overlay" tabindex="-1" data-micromodal-close>
+    <div
+      class="ods-modal--dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="ods-modal-standard-title"
+    >
+      <header class="ods-modal--header">
+        <button
+          class="ods-modal--close"
+          aria-label="Close modal"
+          data-micromodal-close
+        ></button>
+        <h1 class="ods-modal--title" id="ods-modal-standard-title">
+          Modal Title
+        </h1>
+      </header>
+      <main class="ods-modal--content" id="ods-modal-standard-content">
+        <p>Modal content</p>
+      </main>
+      <footer class="ods-modal--footer">
+        <button
+          class="ods-button is-ods-button-clear"
+          data-micromodal-close
+          aria-label="Close this dialog window"
+        >
+          Cancel
+        </button>
+        <button class="ods-button">Continue</button>
+      </footer>
     </div>
   </div>
-  ```
+</div>
+```
+
 </figure>
 
 ### Accessible attributes

@@ -112,8 +112,8 @@
 }
 
 .dismissVariant {
-  padding-block: ($spacing-xs-em / 2);
-  padding-inline: ($spacing-xs-em / 2);
+  padding-block: ($spacing-xs-em * 0.5);
+  padding-inline: ($spacing-xs-em * 0.5);
   border: 0;
   background-color: transparent;
   color: inherit;
@@ -130,8 +130,8 @@
   }
 
   &:disabled {
-    background-color: transparentize(cv('gray', '100'), 0.6);
-    color: cv('gray', '600');
+    background-color: transparentize(cv("gray", "100"), 0.6);
+    color: cv("gray", "600");
   }
 }
 
@@ -141,7 +141,7 @@
 
   &:hover {
     border-color: transparent;
-    background-color: cv('blue', '000');
+    background-color: cv("blue", "000");
     color: $color-primary-dark;
   }
 

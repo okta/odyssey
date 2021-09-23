@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transformStyles import visitor transforms styles as expected 1`] = `
+Object {
+  "__digest": "a90bc8",
+  "__template": [Function],
+  "autoprefixed": "ods-322606",
+  "root": "ods-c0f206",
+}
+`;
+
+exports[`transformStyles import visitor transforms styles template as expected 1`] = `".ods-c0f206{background:#ebebed;border-end-end-radius:4px;border-end-start-radius:4px;border-start-end-radius:4px;border-start-start-radius:4px;color:#1d1d21;display:inline-block;-webkit-margin-after:.375rem;margin-block-end:.375rem;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-end:.375rem;margin-inline-end:.375rem;-webkit-margin-start:0;margin-inline-start:0;padding-block:0;padding-inline:.375em}@supports not (border-end-end-radius:1px){.ods-c0f206,[dir=rtl] .ods-c0f206{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-top-left-radius:4px;border-top-right-radius:4px}}.ods-322606 ::-moz-placeholder{color:#bada55}.ods-322606 :-ms-input-placeholder{color:#bada55}.ods-322606 ::placeholder{color:#bada55}"`;

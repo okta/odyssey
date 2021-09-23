@@ -25,8 +25,8 @@
   animation-duration: 300ms, 1000ms;
   animation-delay: 0s, 5300ms;
   border: 0;
-  background-color: cv('blue', '900');
-  box-shadow: 0 8px 12px rgba(cv('gray', '900'), 0.12);
+  background-color: cv("blue", "900");
+  box-shadow: 0 8px 12px rgba(cv("gray", "900"), 0.12);
   color: $white;
 
   &:hover,
@@ -79,11 +79,11 @@
 }
 
 .is-ods-toast-success {
-  background-color: cv('green', '600');
+  background-color: cv("green", "600");
 }
 
 .is-ods-toast-caution {
-  background-color: cv('yellow', '500');
+  background-color: cv("yellow", "500");
   color: $text-body;
 
   .ods-toast--icon {
@@ -96,7 +96,7 @@
 }
 
 .is-ods-toast-danger {
-  background-color: cv('red', '500');
+  background-color: cv("red", "500");
 }
 
 @keyframes ods-toast-in {

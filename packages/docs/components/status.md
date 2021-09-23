@@ -5,10 +5,10 @@ title: Status
 description: Status is used to inform users by providing feedback on system states.
 lede: Status is used to inform users by providing feedback on system states. Status can display broad operational states as well as granular states like user status.
 tabs:
-  - label: 'Overview'
-    id: 'overview'
-  - label: 'HTML & SCSS'
-    id: 'html-scss'
+  - label: "Overview"
+    id: "overview"
+  - label: "HTML & SCSS"
+    id: "html-scss"
 links:
   - icon: github
     label: View source
@@ -205,16 +205,13 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
     </div>
   </div>
 
-  ```html
-  <div class="ods-status">
-    <span class="ods-status--label">
-      Status label
-    </span>
-    <span class="ods-status--value">
-      Neutral descriptor
-    </span>
-  </div>
-  ```
+```html
+<div class="ods-status">
+  <span class="ods-status--label"> Status label </span>
+  <span class="ods-status--value"> Neutral descriptor </span>
+</div>
+```
+
 </figure>
 
 ### Success
@@ -231,16 +228,13 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
     </div>
   </div>
 
-  ```html
-  <div class="ods-status is-ods-status-success">
-    <span class="ods-status--label">
-      Status label
-    </span>
-    <span class="ods-status--value">
-      Success descriptor
-    </span>
-  </div>
-  ```
+```html
+<div class="ods-status is-ods-status-success">
+  <span class="ods-status--label"> Status label </span>
+  <span class="ods-status--value"> Success descriptor </span>
+</div>
+```
+
 </figure>
 
 ### Caution
@@ -257,16 +251,13 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
     </div>
   </div>
 
-  ```html
-  <div class="ods-status is-ods-status-caution">
-    <span class="ods-status--label">
-      Status label
-    </span>
-    <span class="ods-status--value">
-      Caution descriptor
-    </span>
-  </div>
-  ```
+```html
+<div class="ods-status is-ods-status-caution">
+  <span class="ods-status--label"> Status label </span>
+  <span class="ods-status--value"> Caution descriptor </span>
+</div>
+```
+
 </figure>
 
 ### Danger
@@ -283,16 +274,13 @@ Where necessary, labels may be hidden. If a label is not present, ensure the Sta
     </div>
   </div>
 
-  ```html
-  <div class="ods-status is-ods-status-danger">
-    <span class="ods-status--label">
-      Status label
-    </span>
-    <span class="ods-status--value">
-      Danger descriptor
-    </span>
-  </div>
-  ```
+```html
+<div class="ods-status is-ods-status-danger">
+  <span class="ods-status--label"> Status label </span>
+  <span class="ods-status--value"> Danger descriptor </span>
+</div>
+```
+
 </figure>
 
 ## Hiding labels
@@ -317,16 +305,13 @@ Even if the label is hidden, it must be populated to ensure appropriate context 
     </div>
   </div>
 
-  ```html
-  <div class="ods-status is-ods-status-success is-ods-status-label-hidden">
-    <span class="ods-status--label">
-      Status label
-    </span>
-    <span class="ods-status--value">
-      Status descriptor
-    </span>
-  </div>
-  ```
+```html
+<div class="ods-status is-ods-status-success is-ods-status-label-hidden">
+  <span class="ods-status--label"> Status label </span>
+  <span class="ods-status--value"> Status descriptor </span>
+</div>
+```
+
 </figure>
 
 :::

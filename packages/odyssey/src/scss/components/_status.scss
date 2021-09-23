@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-$status-indicator-size: 1em / 2;
+$status-indicator-size: 1em * 0.5;
 
 .ods-status--label {
   display: block;
@@ -27,7 +27,7 @@ $status-indicator-size: 1em / 2;
   &::before {
     @include border-radius(1em);
 
-    content: '';
+    content: "";
     position: absolute;
     inset-block-start: 50%;
     inset-inline-start: 0;
@@ -35,7 +35,7 @@ $status-indicator-size: 1em / 2;
     height: $status-indicator-size;
     margin-inline-end: $spacing-xs;
     transform: translateY(-50%);
-    background-color: cv('gray', '600');
+    background-color: cv("gray", "600");
   }
 }
 

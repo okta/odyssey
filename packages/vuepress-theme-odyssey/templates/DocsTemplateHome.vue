@@ -36,7 +36,9 @@
             aria-hidden="true"
             class="docs-card--header-image"
             v-html="
-              require(`!html-loader!../../docs/.vuepress/public/images/coin-${section.coin || 'fpo'}.svg`)
+              require(`!html-loader!../../docs/.vuepress/public/images/coin-${
+                section.coin || 'fpo'
+              }.svg`)
             "
           />
           <!-- eslint-enable -->
@@ -71,7 +73,9 @@
           <div
             aria-hidden="true"
             class="docs-card--header-image"
-            v-html="require(`!html-loader!../public/images/icon-${resource.illustration}.svg`)"
+            v-html="
+              require(`!html-loader!../public/images/icon-${resource.illustration}.svg`)
+            "
           />
           <!-- eslint-enable -->
           <h3>{{ resource.title }}</h3>
@@ -106,7 +110,7 @@ export default {
   components: {
     DocsLink: () => import("../components/DocsLink.vue"),
     DocsCard: () => import("../components/DocsCard.vue"),
-    DocsCardGroup: () => import("../components/DocsCardGroup.vue")
-  }
+    DocsCardGroup: () => import("../components/DocsCardGroup.vue"),
+  },
 };
 </script>

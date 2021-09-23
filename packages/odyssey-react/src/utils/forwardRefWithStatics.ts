@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 import type {
   ForwardRefRenderFunction,
   ForwardRefExoticComponent,
-} from 'react';
+} from "react";
 
 type BaseShape = Record<string, unknown>;
 
@@ -23,8 +23,6 @@ export function forwardRefWithStatics<
   Props = BaseShape,
   Statics = BaseShape,
   Exotic = ForwardRefExoticComponent<Props> & Statics
->(
-  render: ForwardRefRenderFunction<IntrinsicElement, Props>
-): Exotic {
+>(render: ForwardRefRenderFunction<IntrinsicElement, Props>): Exotic {
   return forwardRef(render) as unknown as Exotic;
 }
