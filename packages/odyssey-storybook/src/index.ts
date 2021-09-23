@@ -81,7 +81,6 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/base/iconography';
                 @import '@okta/odyssey/src/scss/base/typography-global';
                 @import '@okta/odyssey/src/scss/base/typography-text';
-                @import '@okta/odyssey/src/scss/base/typography-list';
 
                 // Components
                 @import '@okta/odyssey/src/scss/components/forms';
