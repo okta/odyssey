@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import Button from './RadioButton';
-import Group from './RadioGroup';
+import Button from "./RadioButton";
+import Group from "./RadioGroup";
 
 export default {
   Button,
-  Group
+  Group,
 };

@@ -10,5 +10,5 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const config = require('@okta/odyssey-svgr');
+const config = require("@okta/odyssey-svgr");
 module.exports = config;

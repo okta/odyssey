@@ -25,5 +25,5 @@ describe("ScreenReaderText", () => {
     expect(getByText(content)).toHaveStyle(`clip: rect(0 0 0 0)`);
   });
 
-  a11yCheck(() => render(<ScreenReaderText>{content}</ScreenReaderText>))
+  a11yCheck(() => render(<ScreenReaderText>{content}</ScreenReaderText>));
 });

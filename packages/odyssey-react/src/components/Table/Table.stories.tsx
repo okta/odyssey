@@ -19,82 +19,88 @@ export default {
   title: `Components/Table`,
   component: Table,
   args: {
-    title: 'Big and small planets',
-    caption: 'Information about the largest and smallest planets.',
+    title: "Big and small planets",
+    caption: "Information about the largest and smallest planets.",
   },
   argTypes: {
-    title: { control: 'text' },
-    caption: { control: 'text' },
-  }
+    title: { control: "text" },
+    caption: { control: "text" },
+  },
 };
 
-const Template: Story = ({title, caption, withContainer, direction}) => (
-  <Table 
-    caption={caption}
-    title={title}
-    withContainer={withContainer}
-  >
+const Template: Story = ({ title, caption, withContainer, direction }) => (
+  <Table caption={caption} title={title} withContainer={withContainer}>
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell scope="col">
-          <Table.SortButton direction={direction}>
-            Planet
-          </Table.SortButton>
+          <Table.SortButton direction={direction}>Planet</Table.SortButton>
         </Table.HeaderCell>
-        <Table.HeaderCell scope="col" format={'num'}>Radius (km)</Table.HeaderCell>
+        <Table.HeaderCell scope="col" format={"num"}>
+          Radius (km)
+        </Table.HeaderCell>
         <Table.HeaderCell scope="col">Type</Table.HeaderCell>
-        <Table.HeaderCell scope="col" format={'date'}>Perihelion date</Table.HeaderCell>
+        <Table.HeaderCell scope="col" format={"date"}>
+          Perihelion date
+        </Table.HeaderCell>
       </Table.Row>
     </Table.Header>
     <Table.Body>
       <Table.Row>
         <Table.DataCell>Jupiter</Table.DataCell>
-        <Table.DataCell format={'num'}>69,911</Table.DataCell>
+        <Table.DataCell format={"num"}>69,911</Table.DataCell>
         <Table.DataCell>Gas giant</Table.DataCell>
-        <Table.DataCell format={'date'}>January 21, 2023</Table.DataCell>
+        <Table.DataCell format={"date"}>January 21, 2023</Table.DataCell>
       </Table.Row>
       <Table.Row>
         <Table.DataCell>Earth</Table.DataCell>
-        <Table.DataCell format={'num'}>6,371</Table.DataCell>
+        <Table.DataCell format={"num"}>6,371</Table.DataCell>
         <Table.DataCell>Terrestrial</Table.DataCell>
-        <Table.DataCell format={'date'}>January 2, 2021</Table.DataCell>
+        <Table.DataCell format={"date"}>January 2, 2021</Table.DataCell>
       </Table.Row>
       <Table.Row>
         <Table.DataCell>Mercury</Table.DataCell>
-        <Table.DataCell format={'num'}>1,737</Table.DataCell>
+        <Table.DataCell format={"num"}>1,737</Table.DataCell>
         <Table.DataCell>Terrestrial</Table.DataCell>
-        <Table.DataCell format={'date'}>&ndash;</Table.DataCell>
+        <Table.DataCell format={"date"}>&ndash;</Table.DataCell>
       </Table.Row>
     </Table.Body>
   </Table>
-)
+);
 
 export const Default = Template.bind({});
 
-Default.args = {
-  direction: 'unsorted',
-  withContainer: true
-},
+(Default.args = {
+  direction: "unsorted",
+  withContainer: true,
+}),
+  (Default.argTypes = {
+    direction: {
+      control: { type: "select" },
+      options: ["asc", "desc", "unsorted"],
+    },
+    withContainer: { control: { type: "boolean" } },
+  });
 
-Default.argTypes = {
-  direction: {control: { type: "select"}, options: ['asc', 'desc', 'unsorted']},
-  withContainer: {control: { type: 'boolean' }}
-}
-
-export const RowGrouping = (args:Props):ReactElement=> (
+export const RowGrouping = (args: Props): ReactElement => (
   <Table {...args}>
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell scope="col">Type</Table.HeaderCell>
         <Table.HeaderCell scope="col">Planet</Table.HeaderCell>
-        <Table.HeaderCell scope="col" format="num">Radius (km)</Table.HeaderCell>
+        <Table.HeaderCell scope="col" format="num">
+          Radius (km)
+        </Table.HeaderCell>
         <Table.HeaderCell scope="col">Descriptor</Table.HeaderCell>
-        <Table.HeaderCell scope="col" format="date">Perihelion date</Table.HeaderCell>
+        <Table.HeaderCell scope="col" format="date">
+          Perihelion date
+        </Table.HeaderCell>
       </Table.Row>
     </Table.Header>
     <Table.Body>
       <Table.Row>
-        <Table.HeaderCell scope="row" rowSpan={2}>Gas giants</Table.HeaderCell>
+        <Table.HeaderCell scope="row" rowSpan={2}>
+          Gas giants
+        </Table.HeaderCell>
         <Table.DataCell>Jupiter</Table.DataCell>
         <Table.DataCell format="num">69,991</Table.DataCell>
         <Table.DataCell>Jovian</Table.DataCell>
@@ -107,7 +113,9 @@ export const RowGrouping = (args:Props):ReactElement=> (
         <Table.DataCell format="date">November 29, 2032</Table.DataCell>
       </Table.Row>
       <Table.Row>
-        <Table.HeaderCell scope="row" rowSpan={3}>Terrestrial</Table.HeaderCell>
+        <Table.HeaderCell scope="row" rowSpan={3}>
+          Terrestrial
+        </Table.HeaderCell>
         <Table.DataCell>Earth</Table.DataCell>
         <Table.DataCell format="num">6,371</Table.DataCell>
         <Table.DataCell>Terran</Table.DataCell>
@@ -129,14 +137,18 @@ export const RowGrouping = (args:Props):ReactElement=> (
   </Table>
 );
 
-export const EmptyTable= (args:Props):ReactElement=> (
+export const EmptyTable = (args: Props): ReactElement => (
   <Table {...args}>
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell scope="col">Planet</Table.HeaderCell>
-        <Table.HeaderCell scope="col" format="num">Radius (km)</Table.HeaderCell>
+        <Table.HeaderCell scope="col" format="num">
+          Radius (km)
+        </Table.HeaderCell>
         <Table.HeaderCell scope="col">Type</Table.HeaderCell>
-        <Table.HeaderCell scope="col" format="date">Perihelion date</Table.HeaderCell>
+        <Table.HeaderCell scope="col" format="date">
+          Perihelion date
+        </Table.HeaderCell>
       </Table.Row>
     </Table.Header>
     <Table.Footer>

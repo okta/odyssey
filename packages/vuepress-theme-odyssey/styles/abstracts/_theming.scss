@@ -17,20 +17,11 @@
 }
 
 @mixin set-theme($theme: $theme-day) {
-  $theme-properties: docs-page-bg,
-    docs-text-body,
-    docs-text-heading,
-    docs-border-color-display,
-    docs-card-bg,
-    docs-sidebar-bg,
-    docs-nav-selected-bg,
-    docs-accent-base-bg,
-    docs-accent-component-bg,
-    docs-accent-icon-bg,
-    docs-home-hero-moon,
-    docs-home-hero-rocket,
-    border-color-display,
-    border-color-ui;
+  $theme-properties: docs-page-bg, docs-text-body, docs-text-heading,
+    docs-border-color-display, docs-card-bg, docs-sidebar-bg,
+    docs-nav-selected-bg, docs-accent-base-bg, docs-accent-component-bg,
+    docs-accent-icon-bg, docs-home-hero-moon, docs-home-hero-rocket,
+    border-color-display, border-color-ui;
 
   @each $custom-property, $value in $theme {
     @if list-contains($theme-properties, $custom-property) {
@@ -42,19 +33,19 @@
 }
 
 $theme-default: (
-  docs-home-hero-rocket: cv('gray', '900'),
+  docs-home-hero-rocket: cv("gray", "900"),
 );
 
 $theme-night: (
-  docs-page-bg: cv('gray', '900'),
+  docs-page-bg: cv("gray", "900"),
   docs-text-body: $white,
   docs-text-heading: $white,
   docs-card-bg: #41414b,
-  docs-sidebar-bg: cv('gray', '900'),
-  docs-nav-selected-bg: cv('gray', '600'),
+  docs-sidebar-bg: cv("gray", "900"),
+  docs-nav-selected-bg: cv("gray", "600"),
   docs-home-hero-moon: #242427,
   docs-home-hero-rocket: $white,
-  border-color-display: cv('gray', '600')
+  border-color-display: cv("gray", "600"),
 );
 
 // The following is required for theming demo.

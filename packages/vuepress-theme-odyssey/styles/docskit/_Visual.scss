@@ -55,14 +55,18 @@
     &::after {
       @include border-radius(0, 0, $base-border-radius, $base-border-radius);
 
-      content: '';
+      content: "";
       display: block;
       position: absolute;
       inset-inline-end: 1px;
       inset-block-end: 1px;
       inset-inline-start: 1px;
       height: 33%;
-      background: linear-gradient(to top, rgba(255, 255, 255, 1) 33.33%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(
+        to top,
+        rgba(255, 255, 255, 1) 33.33%,
+        rgba(255, 255, 255, 0) 100%
+      );
     }
   }
 
@@ -85,27 +89,27 @@
   &.is-docskit-visual-background {
     .docskit-visual--figure {
       border-color: transparent;
-      background-color: cv('blue', '300');
+      background-color: cv("blue", "300");
     }
   }
 
   &.is-docskit-visual-positive .docskit-visual--title::before {
-    content: '🛎️';
+    content: "🛎️";
   }
 
   &.is-docskit-visual-negative .docskit-visual--title::before {
-    content: '🚫';
+    content: "🚫";
   }
 
   &.is-docskit-visual-smiley-positive .docskit-visual--title::before {
-    content: '😄';
+    content: "😄";
   }
 
   &.is-docskit-visual-smiley-neutral .docskit-visual--title::before {
-    content: '🙄';
+    content: "🙄";
   }
 
   &.is-docskit-visual-smiley-negative .docskit-visual--title::before {
-    content: '😔';
+    content: "😔";
   }
 }

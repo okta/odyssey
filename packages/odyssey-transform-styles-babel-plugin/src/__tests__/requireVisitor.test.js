@@ -10,15 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const styles = require('./fixture.module.scss');
+const styles = require("./fixture.module.scss");
 
-describe('transformStyles', () => {
-  describe('require visitor', () => {
-    it('transforms styles as expected', () => {
+describe("transformStyles", () => {
+  describe("require visitor", () => {
+    it("transforms styles as expected", () => {
       expect(styles).toMatchSnapshot();
     });
 
-    it('transforms styles template as expected', () => {
+    it("transforms styles template as expected", () => {
       expect(styles.__template()).toMatchSnapshot();
     });
   });

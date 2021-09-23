@@ -16,8 +16,11 @@ Available spacing units can be seen <a href="/base/tokens/">here</a>.
 Our full config is below:
 
 ```scss
-$body-font-family: 'Public Sans', '-apple-system',  'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
-$mono-font-family: 'Inconsolata', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+$body-font-family: "Public Sans", "-apple-system", "BlinkMacSystemFont",
+  "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue",
+  sans-serif;
+$mono-font-family: "Inconsolata", "SFMono-Regular", Consolas, "Liberation Mono",
+  Menlo, Courier, monospace;
 
 $base-font-size: 16px;
 $scale-ratio: 1.1487;

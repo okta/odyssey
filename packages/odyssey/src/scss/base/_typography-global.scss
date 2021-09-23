@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-@use 'sass:math';
+@use "sass:math";
 
 html {
   font-size: math.div($base-font-size, 16px) * 100%; // converts px value to % of browser default
@@ -23,6 +23,6 @@ body {
   font-weight: 400;
   letter-spacing: 0;
   line-height: $base-line-height;
-  font-feature-settings: 'lnum', 'pnum';
+  font-feature-settings: "lnum", "pnum";
   text-decoration-skip-ink: all;
 }

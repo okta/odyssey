@@ -13,7 +13,7 @@
 .root {
   display: grid;
   position: relative;
-  grid-template-areas: 'icon title content actions';
+  grid-template-areas: "icon title content actions";
   grid-template-columns: repeat(4, minmax(min-content, max-content));
   grid-template-rows: 1fr;
   align-items: center;
@@ -21,7 +21,7 @@
   width: 100%;
   padding-block: $spacing-s;
   padding-inline: $spacing-m;
-  background-color: cv('blue', '300');
+  background-color: cv("blue", "300");
 }
 
 .icon {
@@ -68,22 +68,22 @@
 }
 
 .infoVariant {
-  background-color: cv('blue', '300');
+  background-color: cv("blue", "300");
   color: $text-body;
 }
 
 .successVariant {
-  background-color: cv('green', '300');
+  background-color: cv("green", "300");
   color: $text-body;
 }
 
 .cautionVariant {
-  background-color: cv('yellow', '300');
+  background-color: cv("yellow", "300");
   color: $text-body;
 }
 
 .dangerVariant {
-  background-color: cv('red', '300');
+  background-color: cv("red", "300");
   color: $text-body;
 }
 

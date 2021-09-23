@@ -18,25 +18,25 @@ export default {
   title: `Components/Radio`,
   component: Radio.Group,
   args: {
-    legend: 'Select speed',
-    name: 'speed',
+    legend: "Select speed",
+    name: "speed",
   },
   argTypes: {
-    hint: { control: 'text' },
-    legend: { control: 'text' },
-    required: { control: 'boolean' },
-    disabled: { control: 'boolean' },
+    hint: { control: "text" },
+    legend: { control: "text" },
+    required: { control: "boolean" },
+    disabled: { control: "boolean" },
     value: {
-      control: 'radio',
-      options: ['light', 'warp', 'ludicrous']
+      control: "radio",
+      options: ["light", "warp", "ludicrous"],
     },
-    name: { control: 'text' },
+    name: { control: "text" },
     onChange: { control: false },
   },
 };
 
 const Template: Story<Props> = (args) => (
-  <Radio.Group {...args} >
+  <Radio.Group {...args}>
     <Radio.Button label="Lightspeed" value="light" />
     <Radio.Button label="Warp speed" value="warp" />
     <Radio.Button label="Ludicrous speed" value="ludicrous" />
@@ -45,12 +45,12 @@ const Template: Story<Props> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  value: "warp"
+  value: "warp",
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  disabled: true
+  disabled: true,
 };
 
 export const Invalid = Template.bind({});

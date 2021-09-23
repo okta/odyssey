@@ -10,37 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { pattern, template, header } = require('./utils/header');
+const { pattern, template, header } = require("./utils/header");
 
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   env: {
     browser: true,
     node: true,
   },
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: "module",
   },
-  ignorePatterns: [
-    'node_modules',
-    'dist'
-  ],
-  plugins: [
-    'header',
-  ],
+  ignorePatterns: ["node_modules", "dist"],
+  plugins: ["header"],
   rules: {
-    'header/header': [
-      'error',
-      'block',
-      [
-        '!',
-        { pattern, template },
-        ...header.split('\n')
-      ],
+    "header/header": [
+      "error",
+      "block",
+      ["!", { pattern, template }, ...header.split("\n")],
       2,
-    ]
+    ],
   },
   overrides: [
     {
@@ -48,7 +39,7 @@ module.exports = {
       extends: ["eslint:recommended", "prettier"],
     },
     {
-      files: [ '*.ts', '*.tsx' ],
+      files: ["*.ts", "*.tsx"],
       extends: [
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
@@ -56,26 +47,26 @@ module.exports = {
       ],
     },
     {
-      files: [ 'jest.setup.js', '*.test.*' ],
+      files: ["jest.setup.js", "*.test.*"],
       env: {
-        jest: true
-      }
+        jest: true,
+      },
     },
     {
-      files: [ '*.jsx', '*.tsx' ],
+      files: ["*.jsx", "*.tsx"],
       extends: [
         "plugin:jsx-a11y/recommended",
         "plugin:react-hooks/recommended",
         "prettier",
       ],
       rules: {
-        'jsx-a11y/label-has-associated-control': [
+        "jsx-a11y/label-has-associated-control": [
           2,
           {
-            labelAttributes: [ 'children' ],
-          }
-        ]
-      }
+            labelAttributes: ["children"],
+          },
+        ],
+      },
     },
   ],
 };
