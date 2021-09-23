@@ -12,9 +12,6 @@
 
 import { render } from "@testing-library/react";
 import List from "./List";
-import ListItem from "./ListItem";
-import DescriptionTerm from "./DescriptionTerm";
-import DescriptionDetails from "./DescriptionDetails";
 
 describe("List", () => {
   it('renders visibly into the document', () => {
@@ -27,14 +24,14 @@ describe("List", () => {
 
   it("displays as an ordered list", () => {
     const { getByRole } = render(
-      <List listType={'ordered'} />
+      <List listType="ordered" />
     );
     expect(getByRole('list').tagName.toLowerCase() === 'ol').toBe(true);
   });
 
   it("displays as a description list", () => {
     const { getByRole } = render(
-      <List listType={'description'} role="list" />
+      <List listType="description" role="list" />
     );
     expect(getByRole('list').tagName.toLowerCase() === 'dl').toBe(true);
   });
@@ -51,7 +48,7 @@ describe("ListItem", () => {
   it('renders visibly into the document', () => {
     const { getByRole } = render(
       <List>
-        <ListItem>item</ListItem>
+        <List.Item>item</List.Item>
       </List>
     );
 
@@ -63,8 +60,8 @@ describe("DescriptionTerm", () => {
   it('renders visibly into the document', () => {
     const { getByText } = render(
       <List listType="description">
-        <DescriptionTerm>term</DescriptionTerm>
-        <DescriptionDetails>details</DescriptionDetails>
+        <List.Term>term</List.Term>
+        <List.Details>details</List.Details>
       </List>
     );
     
@@ -78,8 +75,8 @@ describe("DescriptionDetails", () => {
   it('renders visibly into the document', () => {
     const { getByRole } = render(
       <List listType="description">
-        <DescriptionTerm>term</DescriptionTerm>
-        <DescriptionDetails>details</DescriptionDetails>
+        <List.Term>term</List.Term>
+        <List.Details>details</List.Details>
       </List>
     );
 

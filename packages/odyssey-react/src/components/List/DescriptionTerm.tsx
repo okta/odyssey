@@ -10,15 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ComponentPropsWithRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { forwardRef } from 'react';
 import { useOmit } from '../../utils';
 
 import styles from './List.module.scss';
 
-export type Props = {
-  children?: ReactNode,
-} & ComponentPropsWithRef<'dt'>
+export type Props = Omit<ComponentPropsWithRef<"li">, "style" | "className">
 
 const DescriptionTerm = forwardRef<HTMLElement, Props>((props, ref) => {
 
@@ -30,7 +28,7 @@ const DescriptionTerm = forwardRef<HTMLElement, Props>((props, ref) => {
   const omitProps = useOmit(rest);
 
   return (
-    <dt ref={ref} className={styles.term} {...omitProps}>
+    <dt {...omitProps} ref={ref} className={styles.term}>
       {children}
     </dt>
   );
