@@ -37,16 +37,16 @@
 export default {
   name: "DocsTemplatePlain",
   components: {
-    DocsPageHeader: () => import("../components/DocsPageHeader.vue")
+    DocsPageHeader: () => import("../components/DocsPageHeader.vue"),
   },
   props: {
     docsHeaderVariant: {
       type: String,
       required: false,
       default: "default",
-      validator: value =>
-        ["default", "base", "components", "icon"].includes(value)
-    }
-  }
+      validator: (value) =>
+        ["default", "base", "components", "icon"].includes(value),
+    },
+  },
 };
 </script>

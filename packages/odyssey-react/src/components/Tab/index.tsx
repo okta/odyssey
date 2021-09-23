@@ -12,73 +12,73 @@
 
 import { useState } from "react";
 import type { FunctionComponent, ReactElement, ReactText } from "react";
-import styles from './Tab.module.scss';
-import { useCx } from '../../utils';
+import styles from "./Tab.module.scss";
+import { useCx } from "../../utils";
 
 export type PropsTabs = {
   /**
    * A collection of Tab.Panels to be rendered
    */
-  children: ReactElement[],
+  children: ReactElement[];
 
   /**
    * The tab id attribute. Automatically generated if not provided.
    */
-  id: string,
+  id: string;
 
   /**
    * An aria label to be placed on the tab component. It
    * should describe the purpose of the tabs.
    */
-  ariaLabel: string,
+  ariaLabel: string;
 
   /**
    * Specifes which Tabs.Panel should be selected on mount
    */
-  selectedId?: string,
+  selectedId?: string;
 
   /**
    * Callback when the selected tab is changed.
    */
-  onTabChange?: (newId: string) => void
-}
+  onTabChange?: (newId: string) => void;
+};
 
 export type PropsTabsContainer = {
-  children: ReactElement | ReactElement[],
-  id: string,
-  ariaLabel: string
-}
+  children: ReactElement | ReactElement[];
+  id: string;
+  ariaLabel: string;
+};
 
 export type PropsTabsPanelContainer = {
-  children: ReactElement | ReactElement[]
-}
+  children: ReactElement | ReactElement[];
+};
 
 export type PropsTabsPanel = {
-  children: ReactText | ReactElement | ReactElement[],
-  label: string,
-  id?: string,
-  selected?: boolean
-}
+  children: ReactText | ReactElement | ReactElement[];
+  label: string;
+  id?: string;
+  selected?: boolean;
+};
 
 export type PropsTabsList = {
-  children: ReactElement | ReactElement[],
-}
+  children: ReactElement | ReactElement[];
+};
 
 export type PropsTab = {
-  children: ReactText,
-  id: string,
-  ariaControls: string,
-  selected?: boolean,
-  onClick: () => void
-}
+  children: ReactText;
+  id: string;
+  ariaControls: string;
+  selected?: boolean;
+  onClick: () => void;
+};
 
 export type StaticComponents = {
-  Container: FunctionComponent<PropsTabsContainer>,
-  PanelContainer: FunctionComponent<PropsTabsPanelContainer>,
-  Panel: FunctionComponent<PropsTabsPanel>,
-  List: FunctionComponent<PropsTabsList>,
-  Tab: FunctionComponent<PropsTab>
-}
+  Container: FunctionComponent<PropsTabsContainer>;
+  PanelContainer: FunctionComponent<PropsTabsPanelContainer>;
+  Panel: FunctionComponent<PropsTabsPanel>;
+  List: FunctionComponent<PropsTabsList>;
+  Tab: FunctionComponent<PropsTab>;
+};
 
 /**
  * Navigation component used to organize content by grouping similar information on the
@@ -94,25 +94,31 @@ export type StaticComponents = {
  *   <Tabs.Panel id="tab-4" label="Tab Four">TabPanel Four Content</Tabs.Panel>
  * </Tabs>
  */
-const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({ children, id, selectedId, ariaLabel, onTabChange }) => {
-  const defaultSelectedTabId = selectedId || children[0].props.id
+const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({
+  children,
+  id,
+  selectedId,
+  ariaLabel,
+  onTabChange,
+}) => {
+  const defaultSelectedTabId = selectedId || children[0].props.id;
   const [selectedTabId, setSelectedTabId] = useState(defaultSelectedTabId);
 
   const handleTabChange = (newSelectedId: string) => {
-    setSelectedTabId(newSelectedId)
+    setSelectedTabId(newSelectedId);
 
     if (onTabChange) {
       onTabChange(newSelectedId);
     }
-  }
+  };
 
   return (
     <Tabs.Container id={id} ariaLabel={ariaLabel}>
       <Tabs.List>
-        {children.map(({props: { label, id }}) => (
+        {children.map(({ props: { label, id } }) => (
           <Tabs.Tab
-            id={id + '-tab'}
-            key={id + '-tab'}
+            id={id + "-tab"}
+            key={id + "-tab"}
             ariaControls={id}
             selected={id === selectedTabId}
             onClick={() => handleTabChange(id)}
@@ -122,35 +128,39 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({ children, id, s
         ))}
       </Tabs.List>
       <Tabs.PanelContainer>
-        {children.map(({ props: { label, id, children: tabPabelChildren } }) => (
-          <Tabs.Panel
-            label={label}
-            id={id}
-            key={id}
-            selected={id === selectedTabId}
-          >
-            {tabPabelChildren}
-          </Tabs.Panel>
-        ))}
+        {children.map(
+          ({ props: { label, id, children: tabPabelChildren } }) => (
+            <Tabs.Panel
+              label={label}
+              id={id}
+              key={id}
+              selected={id === selectedTabId}
+            >
+              {tabPabelChildren}
+            </Tabs.Panel>
+          )
+        )}
       </Tabs.PanelContainer>
     </Tabs.Container>
-  )
+  );
 };
 
 Tabs.Container = ({ children, id, ariaLabel }) => (
   <div id={id} aria-label={ariaLabel} data-testid="ods-tabs">
     {children}
   </div>
-)
+);
 
 Tabs.List = ({ children }) => (
-  <div role="tablist" aria-label="label" className={styles.tablist}>{children}</div>
-)
+  <div role="tablist" aria-label="label" className={styles.tablist}>
+    {children}
+  </div>
+);
 
-Tabs.Tab = function TabsTab ({ children, id, ariaControls, selected, onClick }) {
+Tabs.Tab = function TabsTab({ children, id, ariaControls, selected, onClick }) {
   const componentClass = useCx(styles.tab, {
-    [styles.selectedState]: selected
-  })
+    [styles.selectedState]: selected,
+  });
   return (
     <button
       id={id}
@@ -163,22 +173,24 @@ Tabs.Tab = function TabsTab ({ children, id, ariaControls, selected, onClick }) 
     >
       {children}
     </button>
-  )
-}
+  );
+};
 
-Tabs.PanelContainer = ({ children }) => (<div className="ods-tabs--tabpanel">{children}</div>)
+Tabs.PanelContainer = ({ children }) => (
+  <div className="ods-tabs--tabpanel">{children}</div>
+);
 
 Tabs.Panel = ({ children, id, selected }) => (
   <div
     id={id}
     role="tabpanel"
     className={styles.tabpanel}
-    aria-labelledby={id + '-tab'}
+    aria-labelledby={id + "-tab"}
     tabIndex={selected ? 0 : -1}
     hidden={!selected}
   >
     {children}
   </div>
-)
+);
 
-export default Tabs
+export default Tabs;

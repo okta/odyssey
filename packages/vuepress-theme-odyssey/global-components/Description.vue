@@ -4,7 +4,7 @@
     :class="{
       'docskit--desc': true,
       [`layout-${layout}`]: layout,
-      [`is-docskit-desc-${variant}`]: variant
+      [`is-docskit-desc-${variant}`]: variant,
     }"
   >
     <slot />
@@ -17,17 +17,17 @@ export default {
     variant: {
       type: String,
       required: false,
-      default: null
+      default: null,
     },
     tag: {
       default: "div",
-      type: String
+      type: String,
     },
     layout: {
       type: String,
       required: false,
-      default: null
-    }
-  }
+      default: null,
+    },
+  },
 };
 </script>

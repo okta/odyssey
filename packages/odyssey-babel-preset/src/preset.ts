@@ -10,15 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type * as Babel from '@babel/core';
-import type { StyleOpts } from '@okta/odyssey-transform-styles-babel-plugin';
-import assertEnv from './assertEnv';
+import type * as Babel from "@babel/core";
+import type { TransformStylesOpts } from "@okta/odyssey-transform-styles-babel-plugin";
+import assertEnv from "./assertEnv";
 
 interface Opts {
-  styles?: StyleOpts;
+  transformStyles?: TransformStylesOpts;
 }
 
-function preset (
+function preset(
   api: Babel.ConfigAPI,
   _opts: Opts = {}
 ): Babel.TransformOptions {
@@ -27,25 +27,22 @@ function preset (
     {
       env: {},
       react: {},
-      styles: {},
-      typescript: {}
+      transformStyles: {},
+      typescript: {},
     },
     _opts
   );
 
   return {
     plugins: [
-      [ '@okta/odyssey-transform-styles-babel-plugin', opts.styles ]
+      ["@okta/odyssey-transform-styles-babel-plugin", opts.transformStyles],
     ],
     presets: [
-      [ '@babel/preset-env', opts.env ],
-      [ '@babel/preset-react', opts.react ],
-      [ '@babel/preset-typescript', opts.typescript ]
-    ]
+      ["@babel/preset-env", opts.env],
+      ["@babel/preset-react", opts.react],
+      ["@babel/preset-typescript", opts.typescript],
+    ],
   };
 }
 
-export {
-  assertEnv,
-  preset as default
-};
+export { assertEnv, preset as default };

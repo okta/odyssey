@@ -2,7 +2,7 @@
   <header
     :class="{
       'docs-page-header': true,
-      [`is-page-header-${variant}`]: true
+      [`is-page-header-${variant}`]: true,
     }"
   >
     <h1 class="docs-page-header--title">{{ title }}</h1>
@@ -17,20 +17,20 @@ export default {
   props: {
     title: {
       type: String,
-      default: "default"
+      default: "default",
     },
     lede: {
       type: String,
       required: false,
-      default: null
+      default: null,
     },
     variant: {
       type: String,
       required: false,
       default: "default",
-      validator: value =>
-        ["default", "base", "components", "icon"].includes(value)
-    }
-  }
+      validator: (value) =>
+        ["default", "base", "components", "icon"].includes(value),
+    },
+  },
 };
 </script>

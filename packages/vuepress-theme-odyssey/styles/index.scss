@@ -10,33 +10,33 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-@import '~@okta/odyssey';
-@import '~@okta/prism-theme-odyssey';
+@import "~@okta/odyssey";
+@import "~@okta/prism-theme-odyssey";
 
 // Internal
-@import 'abstracts/theming';
-@import 'abstracts/mixins';
-@import 'abstracts/functions';
-@import 'components/DocsBanner';
-@import 'components/DocsCard';
-@import 'components/DocsCardGroup';
-@import 'components/DocsLink';
-@import 'components/DocsNav';
-@import 'components/DocsTopbar';
-@import 'components/DocsSidebar';
-@import 'components/DocsPageHeader';
-@import 'components/DocsPagination';
-@import 'templates/DocsTemplateHome';
-@import 'templates/DocsTemplateComponent';
-@import 'templates/DocsTemplatePlain';
-@import 'docskit/utility-classes';
-@import 'docskit/Anatomy';
-@import 'docskit/marker';
-@import 'docskit/Visual';
-@import 'docskit/Description';
+@import "abstracts/theming";
+@import "abstracts/mixins";
+@import "abstracts/functions";
+@import "components/DocsBanner";
+@import "components/DocsCard";
+@import "components/DocsCardGroup";
+@import "components/DocsLink";
+@import "components/DocsNav";
+@import "components/DocsTopbar";
+@import "components/DocsSidebar";
+@import "components/DocsPageHeader";
+@import "components/DocsPagination";
+@import "templates/DocsTemplateHome";
+@import "templates/DocsTemplateComponent";
+@import "templates/DocsTemplatePlain";
+@import "docskit/utility-classes";
+@import "docskit/Anatomy";
+@import "docskit/marker";
+@import "docskit/Visual";
+@import "docskit/Description";
 
 // Shame file for known hacks
-@import 'shame';
+@import "shame";
 
 html {
   @include set-theme($theme-default);
@@ -120,11 +120,14 @@ h6 {
     position: absolute;
     width: $spacing-s-em;
     height: $spacing-s-em;
-    margin-block-start: $spacing-xs-em /2;
+    margin-block-start: $spacing-xs-em * 0.5;
     margin-inline-start: -$spacing-m;
-    transition: 0.33s opacity  ease-in-out;
+    transition: 0.33s opacity ease-in-out;
     opacity: 0;
-    background-image: get-icon('anchor', var(--border-color-ui, #{$border-color-ui}));
+    background-image: get-icon(
+      "anchor",
+      var(--border-color-ui, #{$border-color-ui})
+    );
     background-repeat: no-repeat;
     background-size: contain;
     text-indent: -9999em;
@@ -144,18 +147,18 @@ h6 {
 }
 
 .is-tab-small-sample {
-  .ods-tabs--tabpanel [role='tabpanel'] {
+  .ods-tabs--tabpanel [role="tabpanel"] {
     padding-block-end: $spacing-s;
   }
 }
 
 .is-tab-stacked-example {
-  .ods-tabs [role='tabpanel'] {
+  .ods-tabs [role="tabpanel"] {
     padding-block: $spacing-l;
     padding-inline: $spacing-l;
   }
 
-  .ods-tabs:first-child [role='tabpanel'] {
+  .ods-tabs:first-child [role="tabpanel"] {
     padding-block: $spacing-xs;
     padding-inline: $spacing-xs;
   }
@@ -286,11 +289,11 @@ h6 {
 }
 
 $spacing-units: (
-  'spacing-xl': $spacing-xl,
-  'spacing-l': $spacing-l,
-  'spacing-m': $spacing-m,
-  'spacing-s': $spacing-s,
-  'spacing-xs': $spacing-xs,
+  "spacing-xl": $spacing-xl,
+  "spacing-l": $spacing-l,
+  "spacing-m": $spacing-m,
+  "spacing-s": $spacing-s,
+  "spacing-xs": $spacing-xs,
 );
 
 .type-sample--wrap {
@@ -312,16 +315,16 @@ $spacing-units: (
       $rem: inspect($rem);
       $rem: str-slice($rem, 1, -4);
       $rem: str-slice($rem, 1, 4);
-      $rem: $rem + 'rem';
+      $rem: $rem + "rem";
 
       &::before {
-        content: '#{$rem}';
+        content: "#{$rem}";
       }
     }
 
     .type-sample--px {
       &::before {
-        content: '#{round(rem-to-px(ms($x)))}';
+        content: "#{round(rem-to-px(ms($x)))}";
       }
     }
 
@@ -341,16 +344,16 @@ $spacing-units: (
       $rem: inspect($rem);
       $rem: str-slice($rem, 1, -4);
       $rem: str-slice($rem, 1, 4);
-      $rem: $rem + 'rem';
+      $rem: $rem + "rem";
 
       &::before {
-        content: '#{$rem}';
+        content: "#{$rem}";
       }
     }
 
     .type-sample-body--px {
       &::before {
-        content: '#{round(rem-to-px(ms($x)))}';
+        content: "#{round(rem-to-px(ms($x)))}";
       }
     }
 
@@ -363,13 +366,13 @@ $spacing-units: (
 @each $name, $value in $spacing-units {
   .conversion--#{$name}-actual {
     &::before {
-      content: '#{$value}';
+      content: "#{$value}";
     }
   }
 
   .conversion--#{$name}-px {
     &::before {
-      content: '#{round(rem-to-px($value))}';
+      content: "#{round(rem-to-px($value))}";
     }
   }
 
@@ -383,7 +386,7 @@ $spacing-units: (
     font-size: $value;
 
     &::before {
-      content: 'ms(#{str-slice($name, 4)})';
+      content: "ms(#{str-slice($name, 4)})";
       position: absolute;
       inset-block-start: 0;
       inset-inline-start: 0;
@@ -416,5 +419,5 @@ $spacing-units: (
 }
 
 .is-sample-color-green {
-  color: cv('green', '500');
+  color: cv("green", "500");
 }

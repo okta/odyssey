@@ -10,11 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-declare module "cssnano-preset-*" {
-  type Opts = Record<string, unknown>
-  type Preset = <T extends Opts>(opts?: T) => { plugins: Array<postcss.Plugin<T>> }
-  const advancedPreset: Preset;
-  export default advancedPreset;
-}
-
-declare module "autoprefixer"
+module.exports = require("@okta/odyssey-lint-staged");

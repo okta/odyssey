@@ -23,7 +23,7 @@ const licenseText = `!
  *
  * See the License for the specific language governing permissions and limitations under the License.`;
 
-const licenseLines = licenseText.split('\n');
+const licenseLines = licenseText.split("\n");
 
 module.exports = {
   getYear,
@@ -31,5 +31,6 @@ module.exports = {
   licenseComment: `/*${licenseText}\n */`,
   licenseLines,
   template: licenseLines[1],
-  pattern: /\* Copyright \(c\) 20\d{2}-present, Okta, Inc\. and\/or its affiliates\. All rights reserved\./
-}
+  pattern:
+    /\* Copyright \(c\) 20\d{2}-present, Okta, Inc\. and\/or its affiliates\. All rights reserved\./,
+};

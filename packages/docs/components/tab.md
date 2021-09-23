@@ -5,10 +5,10 @@ title: Tab
 description: Tabs are a navigational component used to organize content by grouping similar information on the same page.
 lede: Navigation component used to organize content by grouping similar information on the same page. They allow content to be viewed without having to navigate away from that page or route.
 tabs:
-  - label: 'Overview'
-    id: 'overview'
-  - label: 'HTML & SCSS'
-    id: 'html-scss'
+  - label: "Overview"
+    id: "overview"
+  - label: "HTML & SCSS"
+    id: "html-scss"
 links:
   - icon: github
     label: View source
@@ -21,7 +21,6 @@ links:
 ::: slot overview
 
 ## Anatomy
-
 
 <Anatomy img="images/anatomy-tab.svg" />
 
@@ -101,7 +100,6 @@ Tabs are not navigation. Meaning they don’t take you from place to place. Rath
 Tabs are best used at the top of the page or situated above the content it’s related to. This will help establish hierarchy.
 
 </Description>
-
 
 <Visual variant="positive" content="no-end" class="is-tab-small-sample">
   <h2>Missions</h2>
@@ -214,7 +212,6 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
 
 ::: slot html-scss
 
-
 ## Basic example
 
 <figure class="docs-example">
@@ -232,26 +229,72 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
     </OdsTabs>
   </div>
 
-  ```html
-  <div id="example" class="ods-tabs" aria-label="Describes the purpose of this set of tabs">
-    <div role="tablist" aria-label="label" class="ods-tabs--tablist">
-      <button id="tab-1" role="tab" tabindex="0" aria-controls="tab-1-tabpanel" class="ods-tabs--tab" aria-selected="true">Tab 1</button>
-      <button id="tab-2" role="tab" tabindex="-1" aria-controls="tab-2-tabpanel" class="ods-tabs--tab">Tab 2</button>
-      <button id="tab-3" role="tab" tabindex="-1" aria-controls="tab-3-tabpanel" class="ods-tabs--tab">Tab 3</button>
+```html
+<div
+  id="example"
+  class="ods-tabs"
+  aria-label="Describes the purpose of this set of tabs"
+>
+  <div role="tablist" aria-label="label" class="ods-tabs--tablist">
+    <button
+      id="tab-1"
+      role="tab"
+      tabindex="0"
+      aria-controls="tab-1-tabpanel"
+      class="ods-tabs--tab"
+      aria-selected="true"
+    >
+      Tab 1
+    </button>
+    <button
+      id="tab-2"
+      role="tab"
+      tabindex="-1"
+      aria-controls="tab-2-tabpanel"
+      class="ods-tabs--tab"
+    >
+      Tab 2
+    </button>
+    <button
+      id="tab-3"
+      role="tab"
+      tabindex="-1"
+      aria-controls="tab-3-tabpanel"
+      class="ods-tabs--tab"
+    >
+      Tab 3
+    </button>
+  </div>
+  <div class="ods-tabs--tabpanel">
+    <div
+      id="tab-1-tabpanel"
+      role="tabpanel"
+      aria-labelledby="tab-1"
+      tabindex="0"
+    >
+      <p>Tabpanel 1 content…</p>
     </div>
-    <div class="ods-tabs--tabpanel">
-        <div id="tab-1-tabpanel" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
-          <p>Tabpanel 1 content…</p>
-        </div>
-        <div id="tab-2-tabpanel" role="tabpanel" aria-labelledby="tab-2" tabindex="0" hidden="hidden">
-          <p>Tabpanel 2 content…</p>
-        </div>
-        <div id="tab-3-tabpanel" role="tabpanel" aria-labelledby="tab-3" tabindex="0" hidden="hidden">
-          <p>Tabpanel 3 content…</p>
-        </div>
+    <div
+      id="tab-2-tabpanel"
+      role="tabpanel"
+      aria-labelledby="tab-2"
+      tabindex="0"
+      hidden="hidden"
+    >
+      <p>Tabpanel 2 content…</p>
+    </div>
+    <div
+      id="tab-3-tabpanel"
+      role="tabpanel"
+      aria-labelledby="tab-3"
+      tabindex="0"
+      hidden="hidden"
+    >
+      <p>Tabpanel 3 content…</p>
     </div>
   </div>
-  ```
+</div>
+```
 
 </figure>
 
@@ -267,7 +310,6 @@ The JS included in the `@okta/odyssey` package is for demo purposes only. For th
 </Description>
 
 :::
-
 
 <script>
 export default {

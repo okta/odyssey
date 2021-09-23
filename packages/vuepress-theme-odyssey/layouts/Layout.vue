@@ -49,10 +49,10 @@ export default {
     DocsTemplateIndex: () => import("../templates/DocsTemplateIndex.vue"),
     DocsTemplatePlain: () => import("../templates/DocsTemplatePlain.vue"),
     DocsTemplateComponent: () =>
-      import("../templates/DocsTemplateComponent.vue")
+      import("../templates/DocsTemplateComponent.vue"),
   },
   data: () => ({
-    showBanner: false
+    showBanner: false,
   }),
   computed: {
     Nav() {
@@ -62,7 +62,7 @@ export default {
         this.$site,
         this.$localePath
       );
-    }
+    },
   },
   beforeMount() {
     const showBanner = !window.localStorage.getItem(BANNER_ID);
@@ -101,7 +101,7 @@ export default {
       this.resizeTimer = setTimeout(() => {
         el.classList.remove("is-animation-stopped");
       }, 400);
-    }
-  }
+    },
+  },
 };
 </script>

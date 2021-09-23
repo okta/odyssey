@@ -19,9 +19,9 @@ module.exports = (options, ctx) => {
         {
           normalSuffix: "/",
           indexSuffix: "/",
-          notFoundlink: "/404.html"
-        }
-      ]
-    ]
+          notFoundlink: "/404.html",
+        },
+      ],
+    ],
   };
 };

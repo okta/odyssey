@@ -16,13 +16,14 @@ import type { Props } from ".";
 
 export default {
   title: `Utilities/ScreenReaderText`,
-  component: ScreenReaderText
+  component: ScreenReaderText,
 };
 
-const Template: Story<Props> = ({
-  children
-}) => (
-  <p>The following content is visually hidden: <ScreenReaderText>{children}</ScreenReaderText></p>
+const Template: Story<Props> = ({ children }) => (
+  <p>
+    The following content is visually hidden:{" "}
+    <ScreenReaderText>{children}</ScreenReaderText>
+  </p>
 );
 
 export const Default = Template.bind({});

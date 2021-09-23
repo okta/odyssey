@@ -32,7 +32,7 @@
 export default {
   name: "DocsPagination",
   components: {
-    DocsLink: () => import("./DocsLink.vue")
+    DocsLink: () => import("./DocsLink.vue"),
   },
   props: {
     sidebarItems: {
@@ -44,12 +44,12 @@ export default {
           {
             title: "Item with Children",
             link: "#",
-            children: [{ title: "Child Item", link: "#" }]
-          }
+            children: [{ title: "Child Item", link: "#" }],
+          },
         ],
-        secondary: [{ title: "Updates", link: "/updates/" }]
-      })
-    }
+        secondary: [{ title: "Updates", link: "/updates/" }],
+      }),
+    },
   },
   computed: {
     prev() {
@@ -57,8 +57,8 @@ export default {
     },
     next() {
       return resolvePageLink(this).next;
-    }
-  }
+    },
+  },
 };
 
 function resolvePrev(page, items) {
@@ -72,7 +72,7 @@ function resolveNext(page, items) {
 function resolvePageLink({ $page, sidebarItems }) {
   return {
     next: resolveNext($page, sidebarItems.primary[1].children),
-    prev: resolvePrev($page, sidebarItems.primary[1].children)
+    prev: resolvePrev($page, sidebarItems.primary[1].children),
   };
 }
 

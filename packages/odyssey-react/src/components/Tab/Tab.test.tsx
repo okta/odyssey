@@ -15,77 +15,107 @@ import Tabs from ".";
 
 const roleTabList = "tablist";
 const roleTabPanel = "tabpanel";
-const ariaLabel = "Describes the tab instance to assistive technology."
+const ariaLabel = "Describes the tab instance to assistive technology.";
 const id = "sb-tabs-example";
 
 describe("Tabs", () => {
-  it('renders into the document with the first tab/tabpanel selected', () => {
+  it("renders into the document with the first tab/tabpanel selected", () => {
     const { getByRole, getByText } = render(
       <Tabs id={id} ariaLabel={ariaLabel}>
-        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">TabPanel 1</Tabs.Panel>
-        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">TabPanel 2</Tabs.Panel>
-        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">TabPanel 3</Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">
+          TabPanel 1
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">
+          TabPanel 2
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">
+          TabPanel 3
+        </Tabs.Panel>
       </Tabs>
     );
 
-    expect(getByText('TabPanel 1')).toBeVisible();
-    expect(getByText('Tab 1')).toHaveAttribute('aria-selected', 'true');
+    expect(getByText("TabPanel 1")).toBeVisible();
+    expect(getByText("Tab 1")).toHaveAttribute("aria-selected", "true");
     expect(getByRole(roleTabList)).toBeInTheDocument();
     expect(getByRole(roleTabPanel)).toBeInTheDocument();
   });
 
-  it('shows the pre-selected tabpanel on mount', () => {
+  it("shows the pre-selected tabpanel on mount", () => {
     const { getByText } = render(
       <Tabs id={id} selectedId="sb-tabs-example-2" ariaLabel={ariaLabel}>
-        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">TabPanel 1</Tabs.Panel>
-        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">TabPanel 2</Tabs.Panel>
-        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">TabPanel 3</Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">
+          TabPanel 1
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">
+          TabPanel 2
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">
+          TabPanel 3
+        </Tabs.Panel>
       </Tabs>
     );
-    
-    expect(getByText('TabPanel 2')).toBeVisible();
-    expect(getByText('Tab 2')).toHaveAttribute('aria-selected', 'true');
+
+    expect(getByText("TabPanel 2")).toBeVisible();
+    expect(getByText("Tab 2")).toHaveAttribute("aria-selected", "true");
   });
 
-
-  it('changes the selected tabpanel when a tab is clicked', () => {
+  it("changes the selected tabpanel when a tab is clicked", () => {
     const { getByText } = render(
       <Tabs id={id} ariaLabel={ariaLabel}>
-        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">TabPanel 1</Tabs.Panel>
-        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">TabPanel 2</Tabs.Panel>
-        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">TabPanel 3</Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">
+          TabPanel 1
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">
+          TabPanel 2
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">
+          TabPanel 3
+        </Tabs.Panel>
       </Tabs>
     );
-    
-    fireEvent.click(getByText('Tab 3'));
 
-    expect(getByText('TabPanel 3')).toBeVisible();
-    expect(getByText('Tab 3')).toHaveAttribute('aria-selected', 'true');
-    expect(getByText('Tab 1')).toHaveAttribute('aria-selected', 'false');
+    fireEvent.click(getByText("Tab 3"));
 
+    expect(getByText("TabPanel 3")).toBeVisible();
+    expect(getByText("Tab 3")).toHaveAttribute("aria-selected", "true");
+    expect(getByText("Tab 1")).toHaveAttribute("aria-selected", "false");
   });
 
-  it('should invoke the onTabChange callback when a different tab is selected', () => {
+  it("should invoke the onTabChange callback when a different tab is selected", () => {
     const handleTabChange = jest.fn();
 
     const { getByText } = render(
       <Tabs id={id} ariaLabel={ariaLabel} onTabChange={handleTabChange}>
-        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">TabPanel 1</Tabs.Panel>
-        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">TabPanel 2</Tabs.Panel>
-        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">TabPanel 3</Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">
+          TabPanel 1
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">
+          TabPanel 2
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">
+          TabPanel 3
+        </Tabs.Panel>
       </Tabs>
     );
 
-    fireEvent.click(getByText('Tab 2'));
+    fireEvent.click(getByText("Tab 2"));
 
     expect(handleTabChange).toHaveBeenCalledTimes(1);
   });
 
-  a11yCheck(() => render(
-    <Tabs id={id} ariaLabel={ariaLabel}>
-      <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">TabPanel 1</Tabs.Panel>
-      <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">TabPanel 2</Tabs.Panel>
-      <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">TabPanel 3</Tabs.Panel>
-    </Tabs>
-   ))
+  a11yCheck(() =>
+    render(
+      <Tabs id={id} ariaLabel={ariaLabel}>
+        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">
+          TabPanel 1
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">
+          TabPanel 2
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">
+          TabPanel 3
+        </Tabs.Panel>
+      </Tabs>
+    )
+  );
 });

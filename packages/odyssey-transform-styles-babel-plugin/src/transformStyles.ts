@@ -10,89 +10,106 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type * as Babel from '@babel/core';
+import type * as Babel from "@babel/core";
 import type {
   VariableDeclaration,
-  ObjectExpression
-} from '@babel/traverse/node_modules/@babel/types';
-export type { StyleOpts } from './attachHook';
-import attachHook from './attachHook';
-import { objectExpression, variableDeclaration } from './nodes';
-import { resolve, dirname } from 'path';
+  ObjectExpression,
+} from "@babel/traverse/node_modules/@babel/types";
+import type { File } from "./compile";
+import { resolve, dirname } from "path";
+import compileFactory from "./compileFactory";
+import { objectExpression, variableDeclaration } from "./nodes";
+import normalizeOpts, { isTargetExtension } from "./normalizeOpts";
 
-export type FileMap = Map<string, { digest: string, styles: string; }>;
+export interface TransformStylesOpts {
+  extensions?: Array<string | RegExp>;
+}
 
-export default function transformStyles (
-  { types: t }: typeof Babel
-): Babel.PluginObj {
-
-  const fileMap: FileMap = new Map();
+export default function transformStyles({
+  types: t,
+}: typeof Babel): Babel.PluginObj {
+  const fileMap = new Map<string, File>();
+  const compile = compileFactory();
 
   return {
-    name: 'transform-styles',
-
-    pre () {
-      attachHook({ fileMap, opts: this.opts || {} });
-    },
+    name: "odyssey-transform-styles",
 
     visitor: {
-      ImportDeclaration (path, state) {
-        const importer = state?.file?.opts?.filename;
-        if (typeof importer !== 'string') { return; }
+      ImportDeclaration(path, state) {
+        if (state.opts === false) {
+          return;
+        }
+        const opts = normalizeOpts(state.opts);
 
-        const specifier = path.node.specifiers[ 0 ];
-        if (!t.isImportDefaultSpecifier(specifier)) { return; }
+        const importer = state?.file?.opts?.filename;
+        if (typeof importer !== "string") {
+          return;
+        }
+
+        const specifier = path.node.specifiers[0];
+        if (!t.isImportDefaultSpecifier(specifier)) {
+          return;
+        }
 
         const importee = path.node.source.value;
-        if (!isScssModule(importee)) { return; }
+        if (!isTargetExtension(importee, opts.extensions)) {
+          return;
+        }
 
-        const resolvedPath = resolve(dirname(importer), importee);
+        const filePath = resolve(dirname(importer), importee);
+        let file = fileMap.get(filePath);
 
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const tokens = require(resolvedPath);
-        const file = fileMap.get(resolvedPath);
-        if (!file) { return; }
+        if (!file) {
+          file = compile({ filePath });
+          fileMap.set(filePath, file);
+        }
 
         path.replaceWith(
           variableDeclaration({
-            ...file,
             name: specifier.local.name,
-            tokens
+            ...file,
           }) as VariableDeclaration
         );
       },
 
-      CallExpression (path, state) {
+      CallExpression(path, state) {
+        if (state.opts === false) {
+          return;
+        }
+        const opts = normalizeOpts(state.opts);
+
         const importer = state?.file?.opts?.filename;
-        if (typeof importer !== 'string') { return; }
+        if (typeof importer !== "string") {
+          return;
+        }
 
         const callee = path.node.callee;
-        if (!t.isIdentifier(callee)) { return; }
-        if (callee.name !== 'require') { return; }
+        if (!t.isIdentifier(callee)) {
+          return;
+        }
+        if (callee.name !== "require") {
+          return;
+        }
 
-        const argument = path.node.arguments[ 0 ];
-        if (!t.isStringLiteral(argument)) { return; }
+        const argument = path.node.arguments[0];
+        if (!t.isStringLiteral(argument)) {
+          return;
+        }
         const importee = argument.value;
-        if (!isScssModule(importee)) { return; }
+        if (!isTargetExtension(importee, opts.extensions)) {
+          return;
+        }
 
-        const resolvedPath = resolve(dirname(importer), importee);
+        const filePath = resolve(dirname(importer), importee);
+        let file = fileMap.get(filePath);
 
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const tokens = require(resolvedPath);
-        const file = fileMap.get(resolvedPath);
-        if (!file) { return; }
+        if (!file) {
+          file = compile({ filePath });
+          fileMap.set(filePath, file);
+        }
 
-        path.replaceWith(
-          objectExpression({
-            ...file,
-            tokens
-          }) as ObjectExpression
-        );
-      }
-    }
+        path.replaceWith(objectExpression(file) as ObjectExpression);
+      },
+    },
   };
-}
-
-function isScssModule (candidate: string) {
-  return /\.module\.scss$/i.test(candidate);
 }

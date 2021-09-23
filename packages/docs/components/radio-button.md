@@ -5,10 +5,10 @@ title: Radio Button
 description: Radios appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
 lede: Radios appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
 tabs:
-  - label: 'Overview'
-    id: 'overview'
-  - label: 'HTML & SCSS'
-    id: 'html-scss'
+  - label: "Overview"
+    id: "overview"
+  - label: "HTML & SCSS"
+    id: "html-scss"
 links:
   - icon: github
     label: View source
@@ -201,17 +201,39 @@ Unlike Checkboxes, Radios validate as a group, not individually.
     </fieldset>
   </div>
 
-  ```html
-  <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field label</legend>
-    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" required checked>
-    <label class="ods-radio--label" for="input-0">Label 1</label>
-    <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" required>
-    <label class="ods-radio--label" for="input-1">Label 2</label>
-    <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" required>
-    <label class="ods-radio--label" for="input-2">Label 3</label>
-  </fieldset>
-  ```
+```html
+<fieldset class="ods-fieldset">
+  <legend class="ods-input-legend">Field label</legend>
+  <input
+    class="ods-radio"
+    type="radio"
+    name="group-name"
+    id="input-0"
+    value="value-0"
+    required
+    checked
+  />
+  <label class="ods-radio--label" for="input-0">Label 1</label>
+  <input
+    class="ods-radio"
+    type="radio"
+    name="group-name"
+    id="input-1"
+    value="value-1"
+    required
+  />
+  <label class="ods-radio--label" for="input-1">Label 2</label>
+  <input
+    class="ods-radio"
+    type="radio"
+    name="group-name"
+    id="input-2"
+    value="value-2"
+    required
+  />
+  <label class="ods-radio--label" for="input-2">Label 3</label>
+</fieldset>
+```
 
 </figure>
 
@@ -230,17 +252,43 @@ Unlike Checkboxes, Radios validate as a group, not individually.
     </fieldset>
   </div>
 
-  ```html
-  <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field label</legend>
-    <input class="ods-radio" type="radio" name="group-name" id="input-0" value="value-0" disabled required checked>
-    <label class="ods-radio--label" for="input-0">Label 1</label>
-    <input class="ods-radio" type="radio" name="group-name" id="input-1" value="value-1" disabled required>
-    <label class="ods-radio--label" for="input-1">Label 2</label>
-    <input class="ods-radio" type="radio" name="group-name" id="input-2" value="value-2" disabled required>
-    <label class="ods-radio--label" for="input-2">Label 3</label>
-  </fieldset>
-  ```
+```html
+<fieldset class="ods-fieldset">
+  <legend class="ods-input-legend">Field label</legend>
+  <input
+    class="ods-radio"
+    type="radio"
+    name="group-name"
+    id="input-0"
+    value="value-0"
+    disabled
+    required
+    checked
+  />
+  <label class="ods-radio--label" for="input-0">Label 1</label>
+  <input
+    class="ods-radio"
+    type="radio"
+    name="group-name"
+    id="input-1"
+    value="value-1"
+    disabled
+    required
+  />
+  <label class="ods-radio--label" for="input-1">Label 2</label>
+  <input
+    class="ods-radio"
+    type="radio"
+    name="group-name"
+    id="input-2"
+    value="value-2"
+    disabled
+    required
+  />
+  <label class="ods-radio--label" for="input-2">Label 3</label>
+</fieldset>
+```
+
 </figure>
 
 ## <span class="u-visually-hidden">radio</span> State: Error
@@ -259,18 +307,44 @@ Unlike Checkboxes, Radios validate as a group, not individually.
     </fieldset>
   </div>
 
-  ```html
-  <fieldset class="ods-fieldset">
-    <legend class="ods-input-legend">Field label</legend>
-    <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-0" value="value-0" aria-describedby="group-name-error" required checked>
-    <label class="ods-radio--label" for="example-2-0">Label 1</label>
-    <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-1" value="value-1" required>
-    <label class="ods-radio--label" for="example-2-1">Label 2</label>
-    <input class="ods-radio is-ods-radio-invalid" type="radio" name="example-2" id="example-2-2" value="value-2" required>
-    <label class="ods-radio--label" for="example-2-2">Label 3</label>
-    <aside class="ods-field--error" id="group-name-error"><span class="u-visually-hidden">Error:</span> This is an invalid selection.</aside>
-  </fieldset>
-  ```
+```html
+<fieldset class="ods-fieldset">
+  <legend class="ods-input-legend">Field label</legend>
+  <input
+    class="ods-radio is-ods-radio-invalid"
+    type="radio"
+    name="example-2"
+    id="example-2-0"
+    value="value-0"
+    aria-describedby="group-name-error"
+    required
+    checked
+  />
+  <label class="ods-radio--label" for="example-2-0">Label 1</label>
+  <input
+    class="ods-radio is-ods-radio-invalid"
+    type="radio"
+    name="example-2"
+    id="example-2-1"
+    value="value-1"
+    required
+  />
+  <label class="ods-radio--label" for="example-2-1">Label 2</label>
+  <input
+    class="ods-radio is-ods-radio-invalid"
+    type="radio"
+    name="example-2"
+    id="example-2-2"
+    value="value-2"
+    required
+  />
+  <label class="ods-radio--label" for="example-2-2">Label 3</label>
+  <aside class="ods-field--error" id="group-name-error">
+    <span class="u-visually-hidden">Error:</span> This is an invalid selection.
+  </aside>
+</fieldset>
+```
+
 </figure>
 
 :::

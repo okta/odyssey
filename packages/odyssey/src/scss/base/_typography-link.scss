@@ -11,28 +11,28 @@
  */
 
 a {
-  color: cv('blue', '500');
+  color: cv("blue", "500");
   text-decoration: none;
 
   &:hover {
-    color: cv('blue', '500');
+    color: cv("blue", "500");
     text-decoration: underline;
   }
 
   &:visited {
-    color: cv('blue', '500');
+    color: cv("blue", "500");
   }
 
   /* stylelint-disable selector-no-qualifying-type */
-  &[target='_blank']:not([href^='mailto:'])::after {
-    content: '';
+  &[target="_blank"]:not([href^="mailto:"])::after {
+    content: "";
     display: inline-block;
     position: relative;
     inset-block-start: -0.1em;
     width: 1em;
     height: 1em;
     margin-inline-start: 0.2em;
-    background-image: get-icon('external', $color-primary-base);
+    background-image: get-icon("external", $color-primary-base);
     background-repeat: no-repeat;
     vertical-align: middle;
   }
