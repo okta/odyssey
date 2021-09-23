@@ -309,9 +309,8 @@ $choices-icon-cross-inverse: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEi
     color: $text-body;
     font-size: $size-body-base;
     font-weight: 400;
-    line-height: calc(
-      (#{$base-line-height} * 1em) - 2px
-    ); // Adjust for pill border
+    line-height: calc((#{$base-line-height} * 1em) - 2px);
+    // Adjust for pill border
     overflow-wrap: break-word;
     vertical-align: middle;
 
