@@ -58,9 +58,20 @@ abbr.parameters = {
   },
 };
 abbr.args = {
-  children: "abbr",
+  children: (
+    <Text as="p">
+      If you are a
+      <Text as="abbr" title="Back-end">
+        BE
+      </Text>
+      or
+      <Text as="abbr" title="Front-end">
+        FE
+      </Text>
+      developer, you should checkout our dev docs.
+    </Text>
+  ),
   as: "abbr",
-  title: "Represents an abbreviation or acronym",
 };
 
 export const address = Template.bind({});
