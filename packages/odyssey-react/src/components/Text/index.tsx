@@ -18,7 +18,6 @@ import type {
 } from "react";
 import { useCx, useOmit } from "../../utils";
 import styles from "./Text.module.scss";
-import ScreenReaderText from "../ScreenReaderText";
 
 export interface Props extends HTMLAttributes<HTMLElement> {
   /**
@@ -27,22 +26,13 @@ export interface Props extends HTMLAttributes<HTMLElement> {
   children: ReactText | ReactNode;
 
   /**
-   * Prepends visually hidden assistive text to the child contents
-   */
-  a11yStart?: ReactText;
-
-  /**
-   * Appends visually hidden assistive text to the child contents
-   */
-  a11yEnd?: ReactText;
-
-  /**
    * The semantic element to be rendered in to the DOM
    * @default span
    */
   as?:
     | "address"
     | "span"
+    | "div"
     | "dfn"
     | "p"
     | "abbr"
@@ -134,8 +124,6 @@ const Text: FunctionComponent<Props> = (props) => {
     size = "base",
     wrap = "normal",
     lineHeight = "normal",
-    a11yStart,
-    a11yEnd,
     ...rest
   } = props;
 
@@ -157,9 +145,7 @@ const Text: FunctionComponent<Props> = (props) => {
 
   return (
     <Tag {...omitProps} className={componentClass}>
-      {a11yStart && <ScreenReaderText>{a11yStart}</ScreenReaderText>}
       {children}
-      {a11yEnd && <ScreenReaderText>{a11yEnd}</ScreenReaderText>}
     </Tag>
   );
 };
