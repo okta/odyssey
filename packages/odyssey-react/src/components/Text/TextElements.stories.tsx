@@ -15,6 +15,7 @@ import Text from ".";
 import Title from "../Title";
 import Link from "../Link";
 import type { Props } from ".";
+import ScreenReaderText from "../ScreenReaderText";
 
 export default {
   title: `Utilities/Text/Elements`,
@@ -167,7 +168,7 @@ del.parameters = {
 
 ### Accessibility
 
-Many screen readers do not let users know of the presence of &lt;del&gt;. To fix this, you should consider using **a11yStart** and **a11yEnd** props to 
+Many screen readers do not let users know of the presence of &lt;del&gt;. To fix this, you should consider using the ScreenReaderText component to 
 prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text,
 this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.`,
     },
@@ -177,15 +178,14 @@ del.args = {
   children: (
     <Text>
       There is{" "}
-      <Text as="del" a11yStart=" [deletion start] " a11yEnd=" [deletion end] ">
+      <Text as="del">
+        <ScreenReaderText>[deletion start]</ScreenReaderText>
         nothing
+        <ScreenReaderText>[deletion end]</ScreenReaderText>
       </Text>{" "}
-      <Text
-        as="del"
-        a11yStart=" [insertion start] "
-        a11yEnd=" [insertion end] "
-      >
-        no code
+      <Text as="del">
+        <ScreenReaderText>[insertion start]</ScreenReaderText>
+        no code <ScreenReaderText>[insertion start]</ScreenReaderText>
       </Text>{" "}
       either good or bad, but running it makes it so.
     </Text>
@@ -243,7 +243,7 @@ ins.parameters = {
 
 ### Accessibility
 
-Many screen readers do not let users know of the presence of ins. To fix this, you should consider using **data-a11y-start** and **data-a11y-end**, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.`,
+Many screen readers do not let users know of the presence of ins. To fix this, you should consider using the ScreenReaderText component, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.`,
     },
   },
 };
