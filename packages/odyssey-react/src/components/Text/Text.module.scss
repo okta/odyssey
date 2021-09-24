@@ -28,17 +28,6 @@
     text-decoration: none;
   }
 
-  // address {
-  //   max-width: $max-line-length;
-  //   margin-block-start: 0;
-  //   margin-block-end: $type-margin;
-  //   margin-inline: 0;
-
-  //   &:last-child {
-  //     margin-block-end: 0;
-  //   }
-  // }
-
   em,
   &.em {
     font-style: italic;
@@ -134,19 +123,6 @@
   &.dfn {
     font-style: italic;
   }
-
-  // figure:not([class]) {
-  //   display: grid;
-  //   grid-gap: $spacing-s;
-  //   grid-template-columns: minmax(min-content, max-content);
-  //   justify-content: center;
-  //   justify-items: center;
-
-  //   figcaption:not([class]) {
-  //     color: $text-sub;
-  //     font-size: ms(0);
-  //   }
-  // }
 
   ins,
   &.ins {
@@ -245,14 +221,6 @@
       @include outline;
     }
   }
-
-  // hr {
-  //   margin-block: $spacing-s;
-  //   margin-inline: 0;
-  //   border-width: 1px;
-  //   border-style: solid;
-  //   border-color: cv('gray', '200');
-  // }
 
   code,
   .code {
