@@ -10,16 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  FunctionComponent,
-  ReactText,
-  ReactNode,
-  HTMLAttributes,
-} from "react";
+import type { FunctionComponent, ReactText, ReactNode } from "react";
 import { useCx, useOmit } from "../../utils";
 import styles from "./Text.module.scss";
 
-export interface Props extends HTMLAttributes<HTMLElement> {
+export interface Props {
   /**
    * Text content to be rendered
    */
@@ -102,8 +97,15 @@ export interface Props extends HTMLAttributes<HTMLElement> {
    */
   wrap?: "normal" | "breakWord" | "anywhere";
 
-  /** @todo This should be an inherited HTML type, need to fix prior to merge */
-  cite?: any;
+  id?: string;
+}
+
+interface PropsCite extends Props {
+  cite?: string;
+}
+
+interface PropsAbbr extends Props {
+  title: string;
 }
 
 /**
@@ -113,7 +115,7 @@ export interface Props extends HTMLAttributes<HTMLElement> {
  * @example
  * <Text>Text label</Text>
  */
-const Text: FunctionComponent<Props> = (props) => {
+const Text: FunctionComponent<Props | PropsCite | PropsAbbr> = (props) => {
   const {
     children,
     as = "p",
