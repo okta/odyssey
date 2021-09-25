@@ -22,5 +22,12 @@ describe("Text", () => {
     expect(getByText(children)).toBeInTheDocument();
   });
 
+  it("it allows the user to change the tagName using the as prop", () => {
+    const tagName = "abbr";
+    const { container } = render(<Text as={tagName} children={children} />);
+
+    expect(container.querySelector(tagName)).toBeInTheDocument();
+  });
+
   a11yCheck(() => render(<Text children={children} />));
 });
