@@ -191,10 +191,8 @@ describe("Tabs", () => {
       </Tabs>
     );
 
-    await expect(getByText("Tab 2")).toHaveFocus();
-
-    fireEvent.keyUp(getByRole(roleTabList), { key: "Tab", code: "Tab" });
-    fireEvent.keyUp(getByRole(roleTabList), { key: "Home", code: "Home" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Tab" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Home" });
     fireEvent.keyUp(getByRole(roleTabList), {
       key: "ArrowLeft",
       code: "ArrowLeft",
