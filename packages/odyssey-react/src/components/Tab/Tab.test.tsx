@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, fireEvent } from "@testing-library/react";
+import { render, waitFor, fireEvent } from "@testing-library/react";
 import Tabs from ".";
 
 const roleTabList = "tablist";
@@ -101,6 +101,106 @@ describe("Tabs", () => {
     fireEvent.click(getByText("Tab 2"));
 
     expect(handleTabChange).toHaveBeenCalledTimes(1);
+  });
+
+  it("should focus the last element when the end key is pressed", async () => {
+    const { getByText, getByRole } = render(
+      <Tabs id={id} selectedId="sb-tabs-example-2" ariaLabel={ariaLabel}>
+        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">
+          TabPanel 1
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">
+          TabPanel 2
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">
+          TabPanel 3
+        </Tabs.Panel>
+      </Tabs>
+    );
+
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Tab", code: "Tab" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "End", code: "End" });
+
+    await waitFor(() => {
+      expect(getByText("Tab 3")).toHaveFocus();
+    });
+  });
+
+  it("should focus the first element when the home key is pressed", async () => {
+    const { getByText, getByRole } = render(
+      <Tabs id={id} selectedId="sb-tabs-example-2" ariaLabel={ariaLabel}>
+        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">
+          TabPanel 1
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">
+          TabPanel 2
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">
+          TabPanel 3
+        </Tabs.Panel>
+      </Tabs>
+    );
+
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Tab", code: "Tab" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Home", code: "Home" });
+
+    await waitFor(() => {
+      expect(getByText("Tab 1")).toHaveFocus();
+    });
+  });
+
+  it("should focus the first element when the focus is on the last tab and the right arrow key is pressed", async () => {
+    const { getByText, getByRole } = render(
+      <Tabs id={id} selectedId="sb-tabs-example-2" ariaLabel={ariaLabel}>
+        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">
+          TabPanel 1
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">
+          TabPanel 2
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">
+          TabPanel 3
+        </Tabs.Panel>
+      </Tabs>
+    );
+
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Tab", code: "Tab" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "End", code: "End" });
+    fireEvent.keyUp(getByRole(roleTabList), {
+      key: "ArrowRight",
+      code: "ArrowRight",
+    });
+
+    await waitFor(() => {
+      expect(getByText("Tab 1")).toHaveFocus();
+    });
+  });
+
+  it("should focus the last element when the focus is on the first tab and the left arrow key is pressed", async () => {
+    const { getByText, getByRole } = render(
+      <Tabs id={id} selectedId="sb-tabs-example-2" ariaLabel={ariaLabel}>
+        <Tabs.Panel id="sb-tabs-example-1" label="Tab 1">
+          TabPanel 1
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-2" label="Tab 2">
+          TabPanel 2
+        </Tabs.Panel>
+        <Tabs.Panel id="sb-tabs-example-3" label="Tab 3">
+          TabPanel 3
+        </Tabs.Panel>
+      </Tabs>
+    );
+
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Tab" });
+    fireEvent.keyUp(getByRole(roleTabList), { key: "Home" });
+    fireEvent.keyUp(getByRole(roleTabList), {
+      key: "ArrowLeft",
+      code: "ArrowLeft",
+    });
+
+    await waitFor(() => {
+      expect(getByText("Tab 3")).toHaveFocus();
+    });
   });
 
   a11yCheck(() =>
