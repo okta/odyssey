@@ -51,7 +51,14 @@ const Icon = forwardRef<SVGSVGElement, Props>(
           ref: ref,
           role: title ? "img" : "presentation",
         },
-        [title && <title id={autoId}>{title}</title>, children.props.children]
+        [
+          title && (
+            <title id={autoId} key={autoId}>
+              {title}
+            </title>
+          ),
+          children.props.children,
+        ]
       )
     );
   }

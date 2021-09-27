@@ -22,15 +22,13 @@ export interface Props
   title?: string;
 }
 
-const Caret = forwardRef<SVGSVGElement, Props>((props, ref) => {
+const CaretDown = forwardRef<SVGSVGElement, Props>((props, ref) => {
   const omitProps = useOmit(props);
   return (
     <Icon ref={ref} {...omitProps}>
       <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M7.63967 8.06464C7.29376 8.43526 6.70625 8.43526 6.36032 8.06464L2.73967 4.18536C2.39376 3.81474 1.80625 3.81474 1.46032 4.18536L1.43223 4.21547C1.11846 4.55165 1.11846 5.07335 1.43223 5.40953L6.35589 10.6849C6.70344 11.0573 7.29436 11.0552 7.63934 10.6804L12.5605 5.33417C12.8759 4.99164 12.8644 4.46128 12.5347 4.13263C12.1876 3.78665 11.623 3.79684 11.2886 4.15514L7.63967 8.06464Z"
+          d="M3.72595 4.31113L6.00121 6.7285L7 7.73909L7.99879 6.7285L10.274 4.31113C10.6672 3.89337 11.3272 3.89777 11.7204 4.31553C12.099 4.71781 12.0932 5.35957 11.7024 5.74959L7.34957 10.0937C7.15539 10.2875 6.84461 10.2875 6.65043 10.0937L2.29763 5.74959C1.90683 5.35957 1.90095 4.71781 2.27958 4.31553C2.67278 3.89777 3.33275 3.89337 3.72595 4.31113Z"
           fill="currentColor"
         />
       </svg>
@@ -38,4 +36,4 @@ const Caret = forwardRef<SVGSVGElement, Props>((props, ref) => {
   );
 });
 
-export default Caret;
+export default CaretDown;

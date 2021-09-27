@@ -48,7 +48,10 @@ const meta = [
     name: "Anchor",
     use: "UI indicator - element contains in page anchor link",
   },
-  { name: "Caret", use: "UI indicator - element triggers expand" },
+  { name: "ArrowDown", use: "UI indicator - element triggers collapse" },
+  { name: "ArrowRight", use: "UI indicator - element triggers expand" },
+  { name: "CaretDown", use: "UI indicator - element triggers open" },
+  { name: "CaretUp", use: "UI indicator - element triggers close" },
   { name: "Caution", use: "To indicate a crucial decision" },
   { name: "Check", use: "UI indicator - custom checkbox" },
   { name: "Close", use: "To close a modal or other UI" },
@@ -90,7 +93,7 @@ export const Library = (): ReactElement => {
           // @ts-ignore
           const CurrentIcon = IconIndex[row.name];
           return (
-            <Table.Row>
+            <Table.Row key={`${row.name}_row`}>
               <Table.DataCell>
                 <CurrentIcon />
               </Table.DataCell>

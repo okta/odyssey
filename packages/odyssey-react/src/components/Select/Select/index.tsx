@@ -18,7 +18,7 @@ import useChoices from "./useChoices";
 import { forwardRefWithStatics, useCx, useOid, useOmit } from "../../../utils";
 
 import styles from "../Select.module.scss";
-import { Caret } from "../../Icon";
+import { CaretDown } from "../../Icon";
 
 export interface Props
   extends Omit<
@@ -142,7 +142,7 @@ const Select = forwardRefWithStatics<HTMLSelectElement, Props, Statics>(
           {children}
         </select>
         <span className={styles.indicator} role="presentation">
-          <Caret />
+          <CaretDown />
         </span>
       </div>
     );
