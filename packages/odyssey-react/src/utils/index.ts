@@ -14,4 +14,3 @@ export { oid, useOid } from "./oid";
 export { omit, useOmit } from "./omit";
 export { cx, useCx } from "./cx";
 export { forwardRefWithStatics } from "./forwardRefWithStatics";
-export * from "./useKeypress";
