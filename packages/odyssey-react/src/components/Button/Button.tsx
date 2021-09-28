@@ -10,68 +10,36 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, MouseEventHandler, ReactText } from "react";
-import { useCx, useOmit } from "../../utils";
+import type { ComponentPropsWithRef } from "react";
+import { forwardRef } from "react";
+import { withStyles, useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
 
-export type ButtonVariants =
-  | "primary"
-  | "secondary"
-  | "danger"
-  | "dismiss"
-  | "clear";
-export type ButtonSizes = "s" | "m" | "l";
-export type Props = {
-  /**
-   * Text content to be rendered within the button, usualy label text.
-   */
-  children: ReactText;
-
-  /**
-   * Makes the button element unusable.
-   */
-  disabled?: true;
-
-  /**
-   * Button click handler.
-   */
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-
+export interface Props
+  extends Omit<ComponentPropsWithRef<"button">, "style" | "className"> {
   /**
    * The size to be displayed to the user.
    * @default m
    */
-  size?: ButtonSizes;
+  size?: "s" | "m" | "l";
 
   /**
    * The visual variant to be displayed to the user.
    * @default primary
    */
-  variant?: ButtonVariants;
+  variant?: "primary" | "secondary" | "danger" | "dismiss" | "clear";
 
   /**
-   * Extends the width of the button to that of it's parent.
+   * Extends the width of the button to that of its' parent.
    */
   wide?: boolean;
-};
+}
 
 /**
  * A clickable button used for form submissions and most in-page interactions.
- *
- * @component
- * @example
- * <Button variant="primary" onClick={() => {}}>Button label</Button>
  */
-const Button: FunctionComponent<Props> = (props) => {
-  const {
-    children,
-    disabled,
-    onClick,
-    size = "m",
-    variant = "primary",
-    wide,
-    ...rest
-  } = props;
+const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
+  const { children, size = "m", variant = "primary", wide, ...rest } = props;
 
   const componentClass = useCx(
     styles.root,
@@ -85,15 +53,12 @@ const Button: FunctionComponent<Props> = (props) => {
   const omitProps = useOmit(rest);
 
   return (
-    <button
-      {...omitProps}
-      className={componentClass}
-      disabled={disabled}
-      onClick={onClick}
-    >
+    <button {...omitProps} ref={ref} className={componentClass}>
       <span className={styles.label}>{children}</span>
     </button>
   );
-};
+});
 
-export default Button;
+Button.displayName = "Button";
+
+export default withStyles(styles)(Button);
