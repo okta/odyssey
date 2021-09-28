@@ -16,7 +16,8 @@
   @include is-visually-hidden;
 
   &:checked,
-  &:indeterminate {
+  &:indeterminate,
+  &[aria-checked="mixed"] {
     + .label {
       .box {
         border-color: $color-primary-base;
@@ -43,7 +44,8 @@
     }
   }
 
-  &:indeterminate {
+  &:indeterminate,
+  &[aria-checked="mixed"] {
     + .label {
       .indicator {
         color: $white;
@@ -74,7 +76,8 @@
     }
 
     &:checked,
-    &:indeterminate {
+    &:indeterminate,
+    &[aria-checked="mixed"] {
       + .label {
         .box {
           border-color: $color-primary-light;
@@ -94,7 +97,8 @@
     }
 
     &:checked,
-    &:indeterminate {
+    &:indeterminate,
+    &[aria-checked="mixed"] {
       + .label {
         .box {
           background-color: $color-danger-base;
@@ -141,7 +145,8 @@
 
       &:checked,
       &:not(:checked),
-      &:indeterminate {
+      &:indeterminate,
+      &[aria-checked="mixed"] {
         + .label {
           .box {
             border-color: $color-danger-light;
