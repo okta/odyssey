@@ -19,7 +19,7 @@ import type {
 } from "react";
 import { createPortal } from "react-dom";
 import Button from "../Button";
-import type { ButtonVariants } from "../Button";
+import type { Props as ButtonProps } from "../Button";
 import Title from "../Title";
 import { useOid, useCx } from "../../utils";
 import styles from "./Modal.module.scss";
@@ -66,7 +66,7 @@ export type PropsModalFooter = {
 export type PropsModalButton = {
   close?: boolean;
   children: ReactText;
-  variant?: ButtonVariants;
+  variant?: ButtonProps["variant"];
   onClick?: () => void;
 };
 
