@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
 import Checkbox from ".";
 
@@ -21,27 +21,30 @@ const name = `${checkbox}_name`;
 
 describe("Checkbox", () => {
   it("renders visibly into the document", () => {
-    const { getByRole } = render(
-      <Checkbox label={label} name={name} value={value} />
+    render(<Checkbox label={label} name={name} value={value} />);
+
+    expect(screen.getByRole(checkbox)).toBeVisible();
+  });
+
+  it("does not accept children via types or render them", () => {
+    render(
+      // @ts-expect-error Checkbox has a never type for children
+      <Checkbox label={label} children="child" />
     );
 
-    expect(getByRole(checkbox)).toBeVisible();
+    expect(screen.queryByText("child")).toBeNull;
   });
 
   it("renders value attributed as expected for input", () => {
-    const { getByRole } = render(
-      <Checkbox label={label} name={name} value={value} />
-    );
+    render(<Checkbox label={label} name={name} value={value} />);
 
-    expect(getByRole(checkbox)).toHaveAttribute("value", value);
+    expect(screen.getByRole(checkbox)).toHaveAttribute("value", value);
   });
 
   it("renders name attribute as expected for input", () => {
-    const { getByRole } = render(
-      <Checkbox label={label} name={name} value={value} />
-    );
+    render(<Checkbox label={label} name={name} value={value} />);
 
-    expect(getByRole(checkbox)).toHaveAttribute("name", name);
+    expect(screen.getByRole(checkbox)).toHaveAttribute("name", name);
   });
 
   it("renders a provided id associating the input and label", () => {
@@ -54,17 +57,17 @@ describe("Checkbox", () => {
   });
 
   it("renders a generated id associating the input and label", () => {
-    const { getByLabelText } = render(
-      <Checkbox label={label} name={name} value={value} />
-    );
+    render(<Checkbox label={label} name={name} value={value} />);
 
-    expect(getByLabelText(label)).toBeTruthy();
+    const result = screen.getByLabelText(label);
+    expect(result).toBeInstanceOf(HTMLInputElement);
+    expect(result).toHaveAttribute("name", name);
   });
 
   it.each([["disabled"], ["checked"], ["required"]])(
     "renders %s attribute",
     (attr: string) => {
-      const { getByRole } = render(
+      render(
         <Checkbox
           label={label}
           value={value}
@@ -73,22 +76,28 @@ describe("Checkbox", () => {
         />
       );
 
-      expect(getByRole(checkbox)).toHaveAttribute(attr);
+      expect(screen.getByRole(checkbox)).toHaveAttribute(attr);
     }
   );
+
+  it("renders indeterminate", () => {
+    render(<Checkbox label={label} name={name} value={value} indeterminate />);
+    expect(screen.getByRole(checkbox)).toBePartiallyChecked();
+  });
 
   it("invokes onChange with expected args when change input event fires", () => {
     const handle = jest.fn();
 
-    const { getByRole } = render(
+    render(
       <Checkbox onChange={handle} label={label} value={value} name={name} />
     );
 
-    fireEvent.click(getByRole(checkbox));
+    const target = screen.getByRole(checkbox);
+    fireEvent.click(target);
 
     expect(handle).toHaveBeenCalledTimes(1);
     expect(handle).toHaveBeenLastCalledWith(
-      expect.objectContaining({ type: "change" }),
+      expect.objectContaining({ type: "change", target }),
       value
     );
   });
@@ -101,7 +110,7 @@ describe("Checkbox", () => {
     (prop, type) => {
       const handle = jest.fn();
 
-      const { getByRole } = render(
+      render(
         <Checkbox
           {...{ [prop]: handle }}
           label={label}
@@ -110,24 +119,23 @@ describe("Checkbox", () => {
         />
       );
 
-      fireEvent[type].call(fireEvent, getByRole(checkbox));
+      const target = screen.getByRole(checkbox);
+      fireEvent[type].call(fireEvent, target);
 
       expect(handle).toHaveBeenCalledTimes(1);
       expect(handle).toHaveBeenLastCalledWith(
-        expect.objectContaining({ type })
+        expect.objectContaining({ type, target })
       );
     }
   );
 
-  it("invokes inputRef with expected args after render", () => {
+  it("invokes ref with expected args after render", () => {
     const handle = jest.fn();
 
-    const { getByRole } = render(
-      <Checkbox inputRef={handle} label={label} value={value} name={name} />
-    );
+    render(<Checkbox ref={handle} label={label} value={value} name={name} />);
 
     expect(handle).toHaveBeenCalledTimes(1);
-    expect(handle).toHaveBeenLastCalledWith(getByRole(checkbox));
+    expect(handle).toHaveBeenLastCalledWith(screen.getByRole(checkbox));
   });
 
   a11yCheck(() => render(<Checkbox label={label} value={value} name={name} />));
