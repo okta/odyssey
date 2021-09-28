@@ -17,7 +17,7 @@ import sass from "sass";
 import postcss from "postcss";
 
 const isProduction = process.env.NODE_ENV === "production";
-const withStyles = /\/(Banner|Button)\.module\.scss$/;
+const withStyles = /\/(Banner|Button|Checkbox)\.module\.scss$/;
 
 module.exports = {
   typescript: {
