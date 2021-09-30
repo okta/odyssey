@@ -13,7 +13,7 @@
 import { useEffect, useRef } from "react";
 import ReactDOMServer from "react-dom/server";
 import Choices from "choices.js";
-import { Close } from "../../Icon";
+import CloseIcon from "../../Icon/Close";
 
 import styles from "../Select.module.scss";
 
@@ -73,7 +73,7 @@ const useChoices = (id: string, value?: string): void => {
             indicator.setAttribute("role", "presentation");
             indicator.insertAdjacentHTML(
               "afterbegin",
-              ReactDOMServer.renderToString(<Close />)
+              ReactDOMServer.renderToString(<CloseIcon />)
             );
             btn?.appendChild(indicator);
           }

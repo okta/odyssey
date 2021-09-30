@@ -15,25 +15,27 @@
 import { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useOmit } from "../../utils";
-import Icon from "./Icon";
+import SvgIcon from "./SvgIcon";
 
 export interface Props
   extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   title?: string;
 }
 
-const ArrowDown = forwardRef<SVGSVGElement, Props>((props, ref) => {
+const ArrowDownIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
   const omitProps = useOmit(props);
   return (
-    <Icon ref={ref} {...omitProps}>
+    <SvgIcon ref={ref} {...omitProps}>
       <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M10.5908 4.91005L7.19206 8.98851C7.09211 9.10845 6.90789 9.10845 6.80794 8.98851L3.40922 4.91004C3.27353 4.74721 3.38932 4.5 3.60128 4.5L10.3987 4.5C10.6107 4.5 10.7265 4.74721 10.5908 4.91005Z"
           fill="currentColor"
         />
       </svg>
-    </Icon>
+    </SvgIcon>
   );
 });
 
-export default ArrowDown;
+ArrowDownIcon.displayName = "ArrowDownIcon";
+
+export default ArrowDownIcon;

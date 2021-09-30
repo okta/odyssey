@@ -11,7 +11,6 @@
  */
 
 import { Story } from "@storybook/react";
-import Caution from "./Caution";
 import * as IconIndex from "./";
 import Icon from "./Icon";
 import { ReactElement } from "react";
@@ -22,59 +21,120 @@ export default {
   component: Icon,
 };
 
-const Template: Story = ({ ...args }) => <Caution {...args} />;
+const Template: Story = ({ ...args }) => (
+  <Icon name={args.name} title={args.title} />
+);
 
 export const Default = Template.bind({});
 
 Default.argTypes = {
+  name: {
+    defaultValue: "caution",
+    control: { type: "select" },
+  },
   title: {
     defaultValue: "Caution",
     control: { type: "text" },
-  },
-  titleId: {
-    control: { type: "text" },
-  },
-  size: {
-    control: { type: "text" },
-  },
-  color: {
-    defaultValue: "#000000",
-    control: { type: "color" },
   },
 };
 
 const meta = [
   {
-    name: "Anchor",
+    name: "anchor",
+    classname: "AnchorIcon",
     use: "UI indicator - element contains in page anchor link",
   },
-  { name: "ArrowDown", use: "UI indicator - element triggers collapse" },
-  { name: "ArrowRight", use: "UI indicator - element triggers expand" },
-  { name: "CaretDown", use: "UI indicator - element triggers open" },
-  { name: "CaretUp", use: "UI indicator - element triggers close" },
-  { name: "Caution", use: "To indicate a crucial decision" },
-  { name: "Check", use: "UI indicator - custom checkbox" },
-  { name: "Close", use: "To close a modal or other UI" },
-  { name: "Complete", use: "To show a completed process" },
-  { name: "Copy", use: "To copy text" },
-  { name: "Delete", use: "To delete something" },
-  { name: "Download", use: "To download" },
-  { name: "Edit", use: "To edit something" },
-  { name: "Error", use: "To indicate an error" },
-  { name: "External", use: "UI indicator - external link" },
-  { name: "Filter", use: "To filter results" },
-  { name: "GetInfo", use: "To get information" },
-  { name: "GoBackward", use: "To navigate backward" },
-  { name: "GoForward", use: "To navigate forward" },
-  { name: "Minus", use: "To subtract or remove" },
-  { name: "Notification", use: "To notify the user of something" },
-  { name: "Plus", use: "To add" },
-  { name: "Search", use: "To search for something" },
-  { name: "Settings", use: "To edit user or app settings" },
-  { name: "Sort", use: "UI indicator - Data is sortable" },
-  { name: "SortAsc", use: "UI indicator - Data is sorted ascending" },
-  { name: "SortDesc", use: "UI indicator - Data is sorted descending" },
-  { name: "User", use: "To support a user name" },
+  {
+    name: "arrow-down",
+    classname: "ArrowDownIcon",
+    use: "UI indicator - element triggers collapse",
+  },
+  {
+    name: "arrow-right",
+    classname: "ArrowRightIcon",
+    use: "UI indicator - element triggers expand",
+  },
+  {
+    name: "caret-down",
+    classname: "CaretDownIcon",
+    use: "UI indicator - element triggers open",
+  },
+  {
+    name: "caret-up",
+    classname: "CaretUpIcon",
+    use: "UI indicator - element triggers close",
+  },
+  {
+    name: "caution",
+    classname: "CautionIcon",
+    use: "To indicate a crucial decision",
+  },
+  {
+    name: "check",
+    classname: "CheckIcon",
+    use: "UI indicator - custom checkbox",
+  },
+  {
+    name: "close",
+    classname: "CloseIcon",
+    use: "To close a modal or other UI",
+  },
+  {
+    name: "complete",
+    classname: "CompleteIcon",
+    use: "To show a completed process",
+  },
+  { name: "copy", classname: "CopyIcon", use: "To copy text" },
+  { name: "delete", classname: "DeleteIcon", use: "To delete something" },
+  { name: "download", classname: "DownloadIcon", use: "To download" },
+  { name: "edit", classname: "EditIcon", use: "To edit something" },
+  { name: "error", classname: "ErrorIcon", use: "To indicate an error" },
+  {
+    name: "external",
+    classname: "ExternalIcon",
+    use: "UI indicator - external link",
+  },
+  { name: "filter", classname: "FilterIcon", use: "To filter results" },
+  { name: "get-info", classname: "GetInfoIcon", use: "To get information" },
+  {
+    name: "go-backward",
+    classname: "GoBackwardIcon",
+    use: "To navigate backward",
+  },
+  {
+    name: "go-forward",
+    classname: "GoForwardIcon",
+    use: "To navigate forward",
+  },
+  { name: "minus", classname: "MinusIcon", use: "To subtract or remove" },
+  {
+    name: "notification",
+    classname: "NotificationIcon",
+    use: "To notify the user of something",
+  },
+  { name: "plus", classname: "PlusIcon", use: "To add" },
+  { name: "search", classname: "SearchIcon", use: "To search for something" },
+  {
+    name: "settings",
+    classname: "SettingsIcon",
+    use: "To edit user or app settings",
+  },
+  {
+    name: "sort",
+    classname: "SortIcon",
+    use: "UI indicator - Data is sortable",
+  },
+  {
+    name: "sort-asc",
+    classname: "SortAscIcon",
+    use: "UI indicator - Data is sorted ascending",
+  },
+  {
+    name: "sort-desc",
+    classname: "SortDescIcon",
+    use: "UI indicator - Data is sorted descending",
+  },
+  { name: "user", classname: "UserIcon", use: "To support a user name" },
 ];
 
 export const Library = (): ReactElement => {
@@ -84,6 +144,7 @@ export const Library = (): ReactElement => {
         <Table.Row>
           <Table.HeaderCell>Icon</Table.HeaderCell>
           <Table.HeaderCell>Name</Table.HeaderCell>
+          <Table.HeaderCell>Class Name</Table.HeaderCell>
           <Table.HeaderCell>Use</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -91,13 +152,14 @@ export const Library = (): ReactElement => {
         {meta.map((row) => {
           // eslint-disable-next-line
           // @ts-ignore
-          const CurrentIcon = IconIndex[row.name];
+          const CurrentIcon = IconIndex[row.classname];
           return (
             <Table.Row key={`${row.name}_row`}>
               <Table.DataCell>
                 <CurrentIcon />
               </Table.DataCell>
               <Table.DataCell>{row.name}</Table.DataCell>
+              <Table.DataCell>{row.classname}</Table.DataCell>
               <Table.DataCell>{row.use}</Table.DataCell>
             </Table.Row>
           );

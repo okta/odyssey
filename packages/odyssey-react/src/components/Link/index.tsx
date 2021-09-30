@@ -11,7 +11,7 @@
  */
 
 import type { FunctionComponent, ReactText } from "react";
-import { External } from "../Icon";
+import ExternalIcon from "../Icon/External";
 import { useCx, useOmit } from "../../utils";
 import styles from "./Link.module.scss";
 
@@ -69,7 +69,7 @@ const Link: FunctionComponent<Props> = (props) => {
       {children}
       {external && (
         <span className={styles.indicator} role="presentation">
-          <External />
+          <ExternalIcon />
         </span>
       )}
     </a>
