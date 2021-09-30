@@ -19,7 +19,7 @@ import type {
 } from "react";
 import styles from "./TextInput.module.scss";
 import { useOid } from "../../utils";
-import { Search } from "../Icon";
+import SearchIcon from "../Icon/Search";
 
 export type Props = {
   /**
@@ -179,7 +179,7 @@ const TextInput: FunctionComponent<Props> = (props) => {
         {type === "search" ? (
           <span className={styles.outer}>
             <span className={styles.indicator} role="presentation">
-              <Search />
+              <SearchIcon />
             </span>
             {input}
           </span>

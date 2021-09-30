@@ -13,14 +13,64 @@
 const path = require("path");
 const headerComment = require("./header-comment");
 
+const getBaseName = (filePath) =>
+  path.basename(filePath, path.extname(filePath));
+
+const getExportName = (basename) => `${basename}Icon`;
+
+function toKebabCase(string) {
+  return string
+    .split("")
+    .map((letter) => {
+      if (/[A-Z]/.test(letter)) {
+        return ` ${letter.toLowerCase()}`;
+      }
+      return letter;
+    })
+    .join("")
+    .trim()
+    .replace(/[_\s]+/g, "-");
+}
+
 function odysseyIconIndexTemplate(filePaths) {
+  const defaultExport = `export * from "./Icon";
+export { default } from "./Icon";
+`;
+
   const exportEntries = filePaths.map((filePath) => {
-    const basename = path.basename(filePath, path.extname(filePath));
-    const exportName = /^\d/.test(basename) ? `Svg${basename}` : basename;
-    return `export { default as ${exportName} } from './${basename}'`;
+    const basename = getBaseName(filePath);
+    const exportName = getExportName(basename);
+    return `export { default as ${exportName} } from './${basename}';`;
   });
 
-  return headerComment + exportEntries.join("\n");
+  const names = filePaths.map((filePath) => {
+    const exportName = getExportName(getBaseName(filePath));
+    return [
+      toKebabCase(exportName.substring(0, exportName.length - 4)),
+      exportName,
+    ];
+  });
+
+  const iconNames = names.reduce((prev, curr, i) => {
+    return prev + ` "${curr[0]}"${i < names.length - 1 ? "\n|" : ";"}`;
+  }, "\n\nexport type IconNames =\n|");
+
+  const iconDict = names.reduce((prev, curr, i) => {
+    return (
+      prev +
+      `\n  ${curr[0].includes("-") ? `"${curr[0]}"` : curr[0]}: "${curr[1]}"${
+        i < names.length - 1 ? "," : ",\n};\n"
+      }`
+    );
+  }, "\n\nexport const iconNameToClassName = {");
+
+  return (
+    headerComment +
+    defaultExport +
+    exportEntries.join("\n") +
+    iconNames +
+    iconDict
+  );
 }
 
 module.exports = odysseyIconIndexTemplate;

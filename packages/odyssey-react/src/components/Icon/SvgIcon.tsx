@@ -11,16 +11,15 @@
  */
 
 import {
+  Children,
+  cloneElement,
   ComponentPropsWithRef,
   forwardRef,
-  ForwardRefExoticComponent,
 } from "react";
-import { useOmit } from "../../utils";
-import type { IconNames } from "./";
-import { iconNameToClassName } from "./";
-import * as Icons from "./";
+import type { ReactElement } from "react";
+import { useOid, useOmit } from "../../utils";
 
-type IconIndexType = keyof typeof Icons;
+import styles from "./Icon.module.scss";
 
 export interface Props
   extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
@@ -28,30 +27,40 @@ export interface Props
    * Title text used by screen readers
    */
   title?: string;
-  /**
-   * Name of icon to render
-   */
-  name: IconNames;
+
+  children: ReactElement;
 }
 
-type NamedIconProps = Omit<Props, "name">;
-
 /**
- * A system of icons which establishes a visual language
- * that can be easily understood regardless of age, language or culture.
+ * A thin wrapper to augment icon svgs with proper attributes and accessibility features
  */
 
-const Icon = forwardRef<SVGSVGElement, Props>(
-  ({ name, title, ...rest }, ref) => {
+const SvgIcon = forwardRef<SVGSVGElement, Props>(
+  ({ title, children, ...rest }, ref) => {
+    const autoId = "icon_" + useOid();
     const omitProps = useOmit(rest);
 
-    const className = iconNameToClassName[name];
-    const NamedIcon = Icons[
-      className as IconIndexType
-    ] as ForwardRefExoticComponent<NamedIconProps>;
-
-    return <NamedIcon {...omitProps} title={title} ref={ref} />;
+    return Children.only(
+      cloneElement(
+        children,
+        {
+          ...omitProps,
+          "aria-labelledby": title && autoId,
+          className: styles.root,
+          ref: ref,
+          role: title ? "img" : "presentation",
+        },
+        [
+          title && (
+            <title id={autoId} key={autoId}>
+              {title}
+            </title>
+          ),
+          children.props.children,
+        ]
+      )
+    );
   }
 );
 
-export default Icon;
+export default SvgIcon;

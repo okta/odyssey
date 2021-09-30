@@ -17,7 +17,8 @@ import type {
   ChangeEvent,
   RefCallback,
 } from "react";
-import { Check, Minus } from "../Icon";
+import CheckIcon from "../Icon/Check";
+import MinusIcon from "../Icon/Minus";
 import styles from "./Checkbox.module.scss";
 import { useOid } from "../../utils";
 
@@ -160,7 +161,7 @@ const Checkbox: FunctionComponent<Props> = (props) => {
       <label className={styles.label} htmlFor={oid}>
         <span className={styles.box} role="presentation">
           <span className={styles.indicator}>
-            {indeterminate ? <Minus /> : <Check />}
+            {indeterminate ? <MinusIcon /> : <CheckIcon />}
           </span>
         </span>
 
