@@ -29,12 +29,8 @@ const useStyles = (styles: Styles) => {
   const { __digest: digest, __template: template } = styles;
 
   useLayoutEffect(() => {
-    if (cache.has(digest)) {
-      return;
-    }
-    if (typeof template !== "function") {
-      return;
-    }
+    if (cache.has(digest)) return;
+    if (typeof template !== "function") return;
 
     const sheet = new OStyleSheet({ digest, template }).inject();
     cache.set(digest, sheet);
@@ -51,7 +47,7 @@ function withStyles(styles: Styles) {
           return <Composed ref={ref} {...props} />;
         }),
         {
-          displayName: `withStyle(${
+          displayName: `withStyles(${
             Composed.displayName || Composed.name || "Component"
           })`,
         }
