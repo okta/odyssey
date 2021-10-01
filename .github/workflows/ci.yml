@@ -91,6 +91,13 @@ jobs:
       - name: deploy
         run: |
           aws s3 sync ./packages/odyssey-react/storybook-static/ s3://ods.dev/$SHA7 --delete
+      - name: "inform slack of deployment (#odyssey-deployments)"
+        run: bash ./scripts/notify-slack.sh
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          AUTHOR_NAME: ${{github.actor}}
+          BRANCH_NAME: ${{github.head_ref}}
+          PULL_REQUEST_ID: ${{github.event.pull_request.number}}
       - name: update deployment status
         uses: bobheadxi/deployments@v0.4.3
         if: always()
@@ -128,40 +135,7 @@ jobs:
         run: yarn install --frozen-lockfile --prefer-offline
       - name: eyes-storybook (applitools)
         run: yarn workspace @okta/odyssey-react eyes-storybook
-  notify-applitools:
-    needs: vrt
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
       - name: Update Applitools batch status
         uses: wei/curl@v1.1.1
         with:
           args: -d "" -X POST https://eyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-  notify-slack:
-    needs: deploy
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Logging
-        run: |
-          echo "${{toJSON(github.event)}}"
-      - name: set $SHA7
-        run: echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
-      - name: set $URL_STORYBOOK
-        run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
-      - name: set $COMMIT_MSG
-        run: |
-          echo "COMMIT_MSG<<EOF" >> $GITHUB_ENV
-          git log --format=%B -n 1 ${{ github.event.after }} >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-      - name: "inform slack of deployment (#odyssey-deployments)"
-        run: bash ./scripts/notify-slack.sh
-        env:
-          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          AUTHOR_NAME: ${{github.actor}}
-          BRANCH_NAME: ${{github.head_ref}}
-          PULL_REQUEST_ID: ${{github.event.pull_request.number}}
