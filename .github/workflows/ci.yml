@@ -19,7 +19,8 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v2
         with:
-          node-version: v12.20.0
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
       - uses: actions/cache@v2
         id: yarn-cache
         with:
@@ -50,7 +51,8 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v2
         with:
-          node-version: v12.20.0
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
       - uses: actions/cache@v2
         id: yarn-cache
         with:
@@ -75,8 +77,8 @@ jobs:
       - name: set $SHA7
         run: echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
       - name: set $URL_STORYBOOK
-        run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev/sb/index.html"" >> $GITHUB_ENV
-      - name: build docs
+        run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
+      - name: build storybook
         run: |
           yarn workspace @okta/odyssey-react build-storybook
       - name: create deployment
@@ -107,7 +109,8 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v2
         with:
-          node-version: v12.20.0
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
       - uses: actions/cache@v2
         id: yarn-cache
         with:
@@ -149,7 +152,7 @@ jobs:
       - name: set $SHA7
         run: echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
       - name: set $URL_STORYBOOK
-        run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev/sb/index.html"" >> $GITHUB_ENV
+        run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
       - name: set $COMMIT_MSG
         run: |
           echo "COMMIT_MSG<<EOF" >> $GITHUB_ENV
