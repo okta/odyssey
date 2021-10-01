@@ -34,7 +34,7 @@ curl \
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "<https://github.com/okta/odyssey/pull/'"$PULL_REQUEST_ID"'|PR #'"$PULL_REQUEST_ID"'> ∙ *<'"$URL_STORYBOOK"'|View Storybook Preview>*"
+          "text": "<https://github.com/okta/odyssey/pull/'"$PULL_REQUEST_ID"'|PR #'"$PULL_REQUEST_ID"'> ∙ *<'"$URL_STORYBOOK"'|View Storybook>*"
         }
       },
       {
