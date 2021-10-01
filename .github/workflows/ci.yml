@@ -129,7 +129,7 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile --prefer-offline
       - name: eyes-storybook (applitools)
-        run: npx eyes-storybook
+        run: yarn workspace @okta/odyssey-react eyes-storybook
   notify-applitools:
     needs: vrt
     if: always()

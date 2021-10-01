@@ -49,6 +49,6 @@
     "build:source": "./scripts/buildSource",
     "build-storybook": "build-storybook",
     "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.js) --out-dir ./src/components/Icon/",
-    "eyes-storybook": "npx eyes-storybook"
+    "eyes-storybook": "npx eyes-storybook --showStorybookOutput"
   }
 }
