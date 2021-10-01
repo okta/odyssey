@@ -38,6 +38,12 @@ Secondary.args = {
   children: "Secondary link",
 };
 
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  href: "#anchor",
+  children: "Secondary link",
+};
+
 export const External = Template.bind({});
 External.args = {
   href: "https://www.okta.com",
