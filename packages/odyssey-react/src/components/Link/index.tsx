@@ -10,8 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactText } from "react";
+import type { FunctionComponent, ReactNode } from "react";
 import { External } from "../Icon";
+import * as IconIndex from "../Icon";
 import { useCx, useOmit } from "../../utils";
 import styles from "./Link.module.scss";
 
@@ -41,7 +42,12 @@ export type Props = {
   /**
    * The human readable/percievable value shown to the user
    */
-  children: ReactText;
+  children: ReactNode;
+
+  /**
+   * The Icon to be inserted into the Link.
+   */
+  icon: keyof IconIndex;
 };
 
 /**
@@ -57,6 +63,8 @@ const Link: FunctionComponent<Props> = (props) => {
 
   const omitProps = useOmit(rest);
   const external = target === `_blank`;
+
+  console.log(IconIndex);
 
   return (
     <a

@@ -13,6 +13,7 @@
 import type { FunctionComponent, ReactElement, ReactNode } from "react";
 import { useCx, useOmit } from "../../utils";
 import Title from "../Title";
+import { Caution, Complete, Error, GetInfo } from "../Icon";
 import styles from "./Infobox.module.scss";
 
 export type InfoboxVariants = "info" | "danger" | "caution" | "success";
@@ -72,10 +73,17 @@ const Infobox: FunctionComponent<Props> & StaticComponents = (props) => {
 
   const omitProps = useOmit(rest);
 
+  const icon = {
+    caution: <Caution />,
+    danger: <Error />,
+    info: <GetInfo />,
+    success: <Complete />
+  }
+
   return (
     <aside {...omitProps} className={componentClass} role="status">
       <span className={styles.icon}>
-        {/* @todo Insert <Icon> component */}‽
+        { icon[variant] }
       </span>
       {title && (
         <div className={styles.title}>

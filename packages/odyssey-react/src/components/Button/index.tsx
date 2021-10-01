@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, MouseEventHandler, ReactText } from "react";
+import type { FunctionComponent, MouseEventHandler, ReactNode } from "react";
 import { useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
 
@@ -25,7 +25,7 @@ export type Props = {
   /**
    * Text content to be rendered within the button, usualy label text.
    */
-  children: ReactText;
+  children: ReactNode;
 
   /**
    * Makes the button element unusable.

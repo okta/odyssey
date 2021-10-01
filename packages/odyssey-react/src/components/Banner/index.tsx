@@ -14,6 +14,7 @@ import type { FunctionComponent, ReactNode } from "react";
 import Title from "../Title";
 import { useCx, useOmit } from "../../utils";
 import Button from "../Button";
+import { Caution, Close, Error, GetInfo } from "../Icon";
 import styles from "./Banner.module.scss";
 
 export type BannerVariants = "info" | "danger" | "caution";
@@ -88,13 +89,19 @@ const Banner: FunctionComponent<Props> = (props) => {
     !open && styles.isDismissed,
     onDismiss && styles.isDismissable
   );
+
   const omitProps = useOmit(rest);
+
+  const icon = {
+    caution: <Caution />,
+    danger: <Error />,
+    info: <GetInfo />,
+  }
 
   return (
     <aside {...omitProps} className={componentClass} role="status">
       <span className={styles.icon}>
-        {/* @todo Insert <Icon> component */}
-        &#8253;
+        { icon[variant] }
       </span>
       {title && (
         <div className={styles.title}>
@@ -115,8 +122,7 @@ const Banner: FunctionComponent<Props> = (props) => {
             onClick={onDismiss}
             aria-label={dismissButtonLabel}
           >
-            {/* @todo Insert <Icon> component, dismiss variant */}
-            &#8253;
+            <Close />
           </Button>
         </span>
       )}
