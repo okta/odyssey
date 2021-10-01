@@ -11,141 +11,153 @@ env:
   APPLITOOLS_BATCH_ID: ${{ github.sha }}
   APPLITOOLS_BATCH_NAME: ${{ github.head_ref }}
 jobs:
-  test:
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: checkout
+  #       uses: actions/checkout@v2
+  #     - name: setup node
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: v12.20.0
+  #     - uses: actions/cache@v2
+  #       id: yarn-cache
+  #       with:
+  #         path: |
+  #           **/node_modules
+  #           ${{ steps.yarn-cache-dir-path.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
+  #     - name: lerna prepare
+  #       if: steps.yarn-cache.outputs.cache-hit == 'true'
+  #       run: lerna run prepare
+  #     - name: install dependencies
+  #       if: steps.yarn-cache.outputs.cache-hit != 'true'
+  #       run: yarn install --frozen-lockfile --prefer-offline
+  #     - name: lint (eslint, stylelint & prettier)
+  #       run: yarn lint
+  #     - name: unit tests (jest & tsc)
+  #       run: yarn test
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: test
+  #   steps:
+  #     - name: checkout
+  #       uses: actions/checkout@v2
+  #       with:
+  #         ref: ${{ github.event.pull_request.head.sha }}
+  #     - name: setup node
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: v12.20.0
+  #     - uses: actions/cache@v2
+  #       id: yarn-cache
+  #       with:
+  #         path: |
+  #           **/node_modules
+  #           ${{ steps.yarn-cache-dir-path.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
+  #     - name: lerna prepare
+  #       if: steps.yarn-cache.outputs.cache-hit == 'true'
+  #       run: lerna run prepare
+  #     - name: install dependencies
+  #       if: steps.yarn-cache.outputs.cache-hit != 'true'
+  #       run: yarn install --frozen-lockfile --prefer-offline
+  #     - name: setup AWS
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: ${{ secrets.AWS_REGION }}
+  #     - name: set $SHA7
+  #       run: echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
+  #     - name: set $URL_STORYBOOK
+  #       run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev/sb/index.html"" >> $GITHUB_ENV
+  #     - name: build docs
+  #       run: |
+  #         yarn workspace @okta/odyssey-react build-storybook
+  #     - name: create deployment
+  #       uses: bobheadxi/deployments@v0.4.3
+  #       id: deployment
+  #       with:
+  #         step: start
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         env: preview
+  #     - name: deploy
+  #       run: |
+  #         aws s3 sync ./packages/odyssey-react/storybook-static/ s3://ods.dev/$SHA7 --delete
+  #     - name: update deployment status
+  #       uses: bobheadxi/deployments@v0.4.3
+  #       if: always()
+  #       with:
+  #         step: finish
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         status: ${{ job.status }}
+  #         deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+  #         env_url: ${{ env.URL_STORYBOOK }}
+  # vrt:
+  #   needs: [test, deploy]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: checkout
+  #       uses: actions/checkout@v2
+  #     - name: setup node
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: v12.20.0
+  #     - uses: actions/cache@v2
+  #       id: yarn-cache
+  #       with:
+  #         path: |
+  #           **/node_modules
+  #           ${{ steps.yarn-cache-dir-path.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
+  #     - name: lerna prepare
+  #       if: steps.yarn-cache.outputs.cache-hit == 'true'
+  #       run: lerna run prepare
+  #     - name: install dependencies
+  #       if: steps.yarn-cache.outputs.cache-hit != 'true'
+  #       run: yarn install --frozen-lockfile --prefer-offline
+  #     - name: eyes-storybook (applitools)
+  #       run: yarn workspace @okta/odyssey-react eyes-storybook
+  # notify-applitools:
+  #   needs: vrt
+  #   if: always()
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Update Applitools batch status
+  #       uses: wei/curl@v1.1.1
+  #       with:
+  #         args: -d "" -X POST https://eyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+  notify-slack:
+    # needs: deploy
+    if: always()
     runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: v12.20.0
-      - uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: lerna prepare
-        if: steps.yarn-cache.outputs.cache-hit == 'true'
-        run: lerna run prepare
-      - name: install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile --prefer-offline
-      - name: lint (eslint, stylelint & prettier)
-        run: yarn lint
-      - name: unit tests (jest & tsc)
-        run: yarn test
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test
     steps:
       - name: checkout
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: v12.20.0
-      - uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: lerna prepare
-        if: steps.yarn-cache.outputs.cache-hit == 'true'
-        run: lerna run prepare
-      - name: install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile --prefer-offline
-      - name: setup AWS
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Logging
+        run: |
+          echo "${{toJSON(github.event)}}"
       - name: set $SHA7
         run: echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
       - name: set $URL_STORYBOOK
         run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev/sb/index.html"" >> $GITHUB_ENV
-      - name: get $COMMIT_MSG
+      - name: set $COMMIT_MSG
         run: |
           echo "COMMIT_MSG<<EOF" >> $GITHUB_ENV
           git log --format=%B -n 1 ${{ github.event.after }} >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-      - name: build docs
-        run: |
-          yarn workspace @okta/odyssey-react build-storybook
-      - name: create deployment
-        uses: bobheadxi/deployments@v0.4.3
-        id: deployment
-        with:
-          step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
-          env: preview
-      - name: deploy
-        run: |
-          aws s3 sync ./packages/odyssey-react/storybook-static/ s3://ods.dev/$SHA7 --delete
-      - name: update deployment status
-        uses: bobheadxi/deployments@v0.4.3
-        if: always()
-        with:
-          step: finish
-          token: ${{ secrets.GITHUB_TOKEN }}
-          status: ${{ job.status }}
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-          env_url: ${{ env.URL_STORYBOOK }}
-  vrt:
-    needs: [test, deploy]
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: v12.20.0
-      - uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: lerna prepare
-        if: steps.yarn-cache.outputs.cache-hit == 'true'
-        run: lerna run prepare
-      - name: install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile --prefer-offline
-      - name: eyes-storybook (applitools)
-        run: yarn workspace @okta/odyssey-react eyes-storybook
-  notify-applitools:
-    needs: vrt
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Update Applitools batch status
-        uses: wei/curl@v1.1.1
-        with:
-          args: -d "" -X POST https://eyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-  notify-slack:
-    needs: deploy
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
       - name: "inform slack of deployment (#odyssey-deployments)"
-        run: sh ./scripts/notify-slack.sh
+        # run: bash ./scripts/notify-slack.sh
+        run: echo $COMMIT_MSG
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           AUTHOR_NAME: ${{github.actor}}
