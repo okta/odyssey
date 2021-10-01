@@ -11,6 +11,9 @@
  */
 
 module.exports = {
+  testConcurrency: 10,
+  apiKey: process.env.APPLITOOLS_API_KEY,
+  batchId: process.env.APPLITOOLS_BATCH_ID,
   browser: [
     { width: 1024, height: 768, name: "ie11" },
     { width: 1024, height: 768, name: "edgechromium" },
@@ -23,5 +26,4 @@ module.exports = {
     guidelinesVersion: "WCAG_2_1",
   },
   matchLevel: "Strict",
-  testConcurrency: 10,
 };
