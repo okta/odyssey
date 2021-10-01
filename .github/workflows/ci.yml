@@ -11,6 +11,20 @@ env:
   APPLITOOLS_BATCH_ID: ${{ github.sha }}
   APPLITOOLS_BATCH_NAME: ${{ github.head_ref }}
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.filter.outputs.deploy }}
+      vrt: ${{ steps.filter.outputs.vrt }}
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            deploy:
+              - './packages/odyssey-react/**'
+            vrt:
+              - './packages/odyssey-react/src/**'
   test:
     runs-on: ubuntu-latest
     steps:
@@ -42,7 +56,8 @@ jobs:
         run: yarn test
   deploy:
     runs-on: ubuntu-latest
-    needs: test
+    needs: [test, prepare]
+    if: ${{ needs.prepare.outputs.deploy == 'true' }}
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -113,8 +128,9 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: ${{ env.URL_STORYBOOK }}
   vrt:
-    needs: [test, deploy]
+    needs: [prepare, test, deploy]
     runs-on: ubuntu-latest
+    if: ${{ needs.prepare.outputs.vrt == 'true' }}
     steps:
       - name: checkout
         uses: actions/checkout@v2
