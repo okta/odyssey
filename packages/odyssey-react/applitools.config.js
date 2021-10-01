@@ -11,13 +11,7 @@
  */
 
 module.exports = {
-  browser: [
-    { width: 1024, height: 768, name: "ie11" },
-    { width: 1024, height: 768, name: "edgechromium" },
-    { width: 1024, height: 768, name: "chrome" },
-    { width: 1024, height: 768, name: "safari" },
-    { width: 1024, height: 768, name: "firefox" },
-  ],
+  browser: [{ width: 1024, height: 768, name: "chrome" }],
   accessibilityValidation: {
     level: "AA",
     guidelinesVersion: "WCAG_2_1",
