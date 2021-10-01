@@ -17,4 +17,5 @@ module.exports = {
     guidelinesVersion: "WCAG_2_1",
   },
   matchLevel: "Strict",
+  testConcurrency: 10,
 };
