@@ -25,6 +25,7 @@ jobs:
               - './packages/odyssey-react/**'
             vrt:
               - './packages/odyssey-react/src/**'
+              - './packages/odyssey-icons/src/**'
   test:
     runs-on: ubuntu-latest
     steps:
