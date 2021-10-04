@@ -130,7 +130,7 @@ jobs:
   vrt:
     needs: [prepare, test, deploy]
     runs-on: ubuntu-latest
-    if: ${{ needs.prepare.outputs.vrt == 'true' }}
+    # if: ${{ needs.prepare.outputs.vrt == 'true' }}
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -156,7 +156,3 @@ jobs:
         run: yarn install --frozen-lockfile --prefer-offline
       - name: eyes-storybook (applitools)
         run: yarn workspace @okta/odyssey-react eyes-storybook
-      # - name: inform applitools of batch status
-      #   uses: wei/curl@v1.1.1
-      #   with:
-      #     args: -d "" -X POST https://eyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
