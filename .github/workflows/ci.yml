@@ -8,8 +8,7 @@ on:
       - "release/**"
 env:
   APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-  APPLITOOLS_BATCH_ID: ${{ github.sha }}
-  APPLITOOLS_BATCH_NAME: ${{ github.head_ref }}
+  APPLITOOLS_BATCH_ID: ${{ github.event.pull_request.head.sha }}
 jobs:
   prepare:
     runs-on: ubuntu-latest
@@ -157,7 +156,7 @@ jobs:
         run: yarn install --frozen-lockfile --prefer-offline
       - name: eyes-storybook (applitools)
         run: yarn workspace @okta/odyssey-react eyes-storybook
-      - name: inform applitools of batch status
-        uses: wei/curl@v1.1.1
-        with:
-          args: -d "" -X POST https://eyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+      # - name: inform applitools of batch status
+      #   uses: wei/curl@v1.1.1
+      #   with:
+      #     args: -d "" -X POST https://eyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
