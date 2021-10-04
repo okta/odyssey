@@ -155,4 +155,4 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile --prefer-offline
       - name: eyes-storybook (applitools)
-        run: yarn workspace @okta/odyssey-react eyes-storybook --exitcode
+        run: yarn workspace @okta/odyssey-react eyes-storybook --exitcode=false
