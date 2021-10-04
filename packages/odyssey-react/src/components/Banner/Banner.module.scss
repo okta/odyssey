@@ -12,6 +12,16 @@
 
 .root {
   display: grid;
+  position: relative;
+  grid-template-areas: "icon title content actions";
+  grid-template-columns: repeat(4, minmax(min-content, max-content));
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-block: $spacing-s;
+  padding-inline: $spacing-m;
+  background-color: cv("blue", "300");
 }
 
 .icon {
