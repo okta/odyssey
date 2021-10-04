@@ -130,7 +130,7 @@ jobs:
   vrt:
     needs: [prepare, test, deploy]
     runs-on: ubuntu-latest
-    # if: ${{ needs.prepare.outputs.vrt == 'true' }}
+    if: ${{ needs.prepare.outputs.vrt == 'true' }}
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -155,4 +155,4 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile --prefer-offline
       - name: eyes-storybook (applitools)
-        run: yarn workspace @okta/odyssey-react eyes-storybook
+        run: yarn workspace @okta/odyssey-react eyes-storybook --exitcode
