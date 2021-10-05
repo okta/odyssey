@@ -22,10 +22,10 @@ jobs:
           filters: |
             deploy:
               - './packages/odyssey-react/**'
-              - './packages/odyssey-icons/src/**'
+              - './packages/odyssey/src/**'
             vrt:
               - './packages/odyssey-react/src/**'
-              - './packages/odyssey-icons/src/**'
+              - './packages/odyssey/src/**'
   test:
     runs-on: ubuntu-latest
     steps:
