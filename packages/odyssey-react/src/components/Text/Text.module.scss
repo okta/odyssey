@@ -21,7 +21,7 @@
   font-feature-settings: "lnum", "pnum";
   text-decoration-skip-ink: all;
 
-  /* stylelint-disable selector-max-type, selector-max-class, selector-class-pattern */
+  /* stylelint-disable selector-max-type */
   abbr,
   &.abbr {
     border-block-end: 1px dashed $color-primary-dark;
@@ -31,8 +31,9 @@
   em,
   &.em {
     font-style: italic;
-
-    > em {
+    /* stylelint-disable-next-line selector-max-class */
+    > em,
+    > .em {
       text-decoration: underline;
     }
   }
@@ -40,7 +41,7 @@
   strong,
   &.strong {
     font-weight: 600;
-
+    /* stylelint-disable-next-line selector-max-class */
     > strong,
     > .strong {
       text-decoration: underline;
@@ -77,13 +78,15 @@
     }
   }
 
+  /* stylelint-disable selector-class-pattern */
   p,
   &.p {
+    /* stylelint-enable selector-class-pattern */
     max-width: $max-line-length;
     margin-block-start: 0;
     margin-block-end: $type-margin;
     margin-inline: 0;
-
+    /* stylelint-disable-next-line selector-max-class */
     details &,
     .details & {
       font-size: ms(0);
@@ -137,16 +140,6 @@
     @include is-visually-hidden;
   }
 
-  ins::before,
-  &.ins::before {
-    content: attr(data-a11y-start);
-  }
-
-  ins::after,
-  &.ins::after {
-    content: attr(data-a11y-end);
-  }
-
   kbd,
   &.kbd {
     @include border-radius($base-border-radius);
@@ -165,6 +158,7 @@
   &.mark {
     background: cv("yellow", "000");
   }
+  /* stylelint-disable selector-class-pattern */
 
   q,
   &.q {
@@ -192,7 +186,7 @@
     box-shadow: 0 1px 0 cv("gray", "200");
     font-family: $mono-font-family;
     font-size: ms(0);
-
+    /* stylelint-disable-next-line selector-max-class */
     kbd,
     .kbd {
       background: $white;
