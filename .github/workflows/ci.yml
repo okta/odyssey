@@ -1,0 +1,111 @@
+name: CI
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+      - develop
+      - "release/**"
+env:
+  APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+  APPLITOOLS_BATCH_ID: ${{ github.event.pull_request.head.sha }}
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.filter.outputs.deploy }}
+      vrt: ${{ steps.filter.outputs.vrt }}
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            deploy:
+              - './packages/odyssey-react/**'
+              - './packages/odyssey/src/**'
+            vrt:
+              - './packages/odyssey-react/src/**'
+              - './packages/odyssey/src/**'
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v2
+      - name: install dependencies
+        run: yarn install --frozen-lockfile --prefer-offline
+      - name: lint (eslint, stylelint & prettier)
+        run: yarn lint
+      - name: unit tests (jest & tsc)
+        run: yarn test
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [test, prepare]
+    if: ${{ needs.prepare.outputs.deploy == 'true' }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: setup node
+        uses: actions/setup-node@v2
+      - name: install dependencies
+        run: yarn install --frozen-lockfile --prefer-offline
+      - name: setup AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: set $SHA7
+        run: echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
+      - name: set $URL_STORYBOOK
+        run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
+      - name: set $COMMIT_MSG
+        run: |
+          echo "COMMIT_MSG<<EOF" >> $GITHUB_ENV
+          git log --format=%B -n 1 ${{ github.event.after }} >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+      - name: build storybook
+        run: |
+          yarn workspace @okta/odyssey-react build-storybook
+      - name: create deployment
+        uses: bobheadxi/deployments@v0.4.3
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: preview
+      - name: deploy
+        run: |
+          aws s3 sync ./packages/odyssey-react/storybook-static/ s3://ods.dev/$SHA7 --delete
+      - name: "inform slack of deployment (#odyssey-deployments)"
+        run: bash ./scripts/notify-slack.sh
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          AUTHOR_NAME: ${{github.actor}}
+          BRANCH_NAME: ${{github.head_ref}}
+          PULL_REQUEST_ID: ${{github.event.pull_request.number}}
+      - name: update deployment status
+        uses: bobheadxi/deployments@v0.4.3
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: ${{ env.URL_STORYBOOK }}
+  vrt:
+    needs: [prepare, test, deploy]
+    runs-on: ubuntu-latest
+    if: ${{ needs.prepare.outputs.vrt == 'true' }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v2
+      - name: install dependencies
+        run: yarn install --frozen-lockfile --prefer-offline
+      - name: eyes-storybook (applitools)
+        run: yarn workspace @okta/odyssey-react eyes-storybook --exitcode=false
