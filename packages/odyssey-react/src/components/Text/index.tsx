@@ -10,44 +10,48 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactText, ReactNode } from "react";
+import type { ReactNode, ComponentPropsWithRef } from "react";
+import { forwardRef } from "react";
 import { useCx, useOmit } from "../../utils";
 import styles from "./Text.module.scss";
 
-export interface Props {
+type TagProps =
+  | "address"
+  | "span"
+  | "div"
+  | "dfn"
+  | "p"
+  | "abbr"
+  | "em"
+  | "strong"
+  | "sup"
+  | "sub"
+  | "blockquote"
+  | "cite"
+  | "del"
+  | "pre"
+  | "var"
+  | "q"
+  | "s"
+  | "samp"
+  | "small"
+  | "kbd"
+  | "ins"
+  | "mark"
+  | "code";
+
+export interface Props
+  extends Omit<ComponentPropsWithRef<TagProps>, "style" | "className"> {
   /**
    * Text content to be rendered
    */
-  children: ReactText | ReactNode;
+  children: ReactNode;
 
   /**
    * The semantic element to be rendered in to the DOM
    * @default span
    */
-  as?:
-    | "address"
-    | "span"
-    | "div"
-    | "dfn"
-    | "p"
-    | "abbr"
-    | "em"
-    | "strong"
-    | "sup"
-    | "sub"
-    | "blockquote"
-    | "cite"
-    | "del"
-    | "pre"
-    | "var"
-    | "q"
-    | "s"
-    | "samp"
-    | "small"
-    | "kbd"
-    | "ins"
-    | "mark"
-    | "code";
+  as?: TagProps;
 
   /**
    * The text color style for the text content.
@@ -96,8 +100,6 @@ export interface Props {
    * @default normal
    */
   wrap?: "normal" | "breakWord" | "anywhere";
-
-  id?: string;
 }
 
 interface PropsCite extends Props {
@@ -110,46 +112,44 @@ interface PropsAbbr extends Props {
 
 /**
  * A component which provides style for visible text elements.
- *
- * @component
- * @example
- * <Text>Text label</Text>
  */
-const Text: FunctionComponent<Props | PropsCite | PropsAbbr> = (props) => {
-  const {
-    children,
-    as = "p",
-    color = "body",
-    weight = "regular",
-    fontStyle = "normal",
-    transform = "none",
-    size = "base",
-    wrap = "normal",
-    lineHeight = "normal",
-    ...rest
-  } = props;
+const Text = forwardRef<HTMLElement, Props | PropsCite | PropsAbbr>(
+  (props, ref) => {
+    const {
+      children,
+      as = "p",
+      color = "body",
+      weight = "regular",
+      fontStyle = "normal",
+      transform = "none",
+      size = "base",
+      wrap = "normal",
+      lineHeight = "normal",
+      ...rest
+    } = props;
 
-  const Tag = as;
+    const Tag = as;
 
-  const componentClass = useCx(
-    styles.root,
-    styles[as],
-    styles[color + "Color"],
-    styles[weight + "Weight"],
-    styles[fontStyle + "Style"],
-    styles[transform + "Transform"],
-    styles[size + "Size"],
-    styles[wrap + "Wrap"],
-    styles[lineHeight + "LineHeight"]
-  );
+    const componentClass = useCx(
+      styles.root,
+      styles[as],
+      styles[color + "Color"],
+      styles[weight + "Weight"],
+      styles[fontStyle + "Style"],
+      styles[transform + "Transform"],
+      styles[size + "Size"],
+      styles[wrap + "Wrap"],
+      styles[lineHeight + "LineHeight"]
+    );
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <Tag {...omitProps} className={componentClass}>
-      {children}
-    </Tag>
-  );
-};
+    return (
+      <Tag ref={ref} {...omitProps} className={componentClass}>
+        {children}
+      </Tag>
+    );
+  }
+);
 
 export default Text;
