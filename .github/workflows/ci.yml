@@ -22,6 +22,7 @@ jobs:
           filters: |
             deploy:
               - './packages/odyssey-react/**'
+              - './packages/odyssey-icons/src/**'
             vrt:
               - './packages/odyssey-react/src/**'
               - './packages/odyssey-icons/src/**'
@@ -44,11 +45,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: lerna prepare
-        if: steps.yarn-cache.outputs.cache-hit == 'true'
-        run: lerna run prepare
       - name: install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile --prefer-offline
       - name: lint (eslint, stylelint & prettier)
         run: yarn lint
@@ -77,11 +74,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: lerna prepare
-        if: steps.yarn-cache.outputs.cache-hit == 'true'
-        run: lerna run prepare
       - name: install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile --prefer-offline
       - name: setup AWS
         uses: aws-actions/configure-aws-credentials@v1
@@ -148,11 +141,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: lerna prepare
-        if: steps.yarn-cache.outputs.cache-hit == 'true'
-        run: lerna run prepare
       - name: install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile --prefer-offline
       - name: eyes-storybook (applitools)
         run: yarn workspace @okta/odyssey-react eyes-storybook --exitcode=false
