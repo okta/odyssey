@@ -27,20 +27,24 @@ export default {
 const Template: Story<Props> = ({ children, ...rest }) => (
   <Text {...rest}>{children}</Text>
 );
-const TemplateWithContainer: Story<Props> = ({ children, ...rest }) => (
-  <div
-    style={{
-      background: "#faf5dc",
-      width: "min-content",
-      maxWidth: "8em",
-      height: "200px",
-      paddingBlock: "1rem",
-      paddingInline: "1rem",
-    }}
-  >
-    <Text {...rest}>{children}</Text>
-  </div>
-);
+
+const TemplateWithContainer: Story<Props> = ({ children, ...rest }) => {
+  /* prettier-ignore */
+  const style = {  /* stylelint-disable-line */
+    background: "#faf5dc",
+    width: "min-content",
+    maxWidth: "8em",
+    height: "200px",
+    paddingBlock: "1rem",
+    paddingInline: "1rem",
+  };
+
+  return (
+    <div style={style}>
+      <Text {...rest}>{children}</Text>
+    </div>
+  );
+};
 
 export const ColorBody = Template.bind({});
 ColorBody.storyName = "Color: Body (default)";
