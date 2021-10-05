@@ -15,7 +15,7 @@ import { useOmit } from "../../utils";
 
 import styles from "./FieldGroup.module.scss";
 
-export type Props = {
+export interface Props {
   /**
    * Content to be rendered within the FieldGroup.
    */
@@ -30,14 +30,14 @@ export type Props = {
    * A short description of the FieldGroup.
    */
   desc?: string;
-};
+}
 
-type PropsFieldGroupError = {
+interface PropsError {
   children: ReactNode;
-};
+}
 
 export type StaticComponents = {
-  Error: FunctionComponent<PropsFieldGroupError>;
+  Error: typeof Error;
 };
 
 const FieldGroup: FunctionComponent<Props> & StaticComponents = (props) => {
@@ -54,8 +54,12 @@ const FieldGroup: FunctionComponent<Props> & StaticComponents = (props) => {
   );
 };
 
-FieldGroup.Error = ({ children }) => (
-  <section className={styles.error}>{children}</section>
+const Error = ({ children }: PropsError) => (
+  <section className={styles.error}>
+    {children}
+  </section>
 );
+
+FieldGroup.Error = Error;
 
 export default FieldGroup;

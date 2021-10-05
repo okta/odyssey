@@ -12,7 +12,6 @@
 
 import { Story } from "@storybook/react";
 import FieldGroup from ".";
-import Field from "../Field";
 import TextInput from "../TextInput";
 import Infobox from "../Infobox";
 import type { Props } from ".";
@@ -48,23 +47,7 @@ const Template: Story<Props> = ({ title, desc }) => (
         </Infobox.Content>
       </Infobox>
     </FieldGroup.Error>
-    <Field
-      label="Departure system"
-      hint="Your origin system has been prepopulated."
-      name="departure"
-      value="Sol"
-      disabled
-    >
-      <TextInput />
-    </Field>
-    <Field
-      label="Destination star"
-      hint="The stellar object you are traveling to."
-      name="destination"
-      error="This field cannot be left blank."
-    >
-      <TextInput />
-    </Field>
+    <TextInput label="Foo" hint="Bar"/>
   </FieldGroup>
 );
 

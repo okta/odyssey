@@ -17,10 +17,10 @@ import Title from "../Title";
 
 import styles from "./Form.module.scss";
 
-export type Props = {
+export interface Props {
   /**
    * Content to be rendered within the Form. Avoid using direct children, put child content
-   * within the provided Form static components (Form.Error, Form.Main, and Form.Actions)
+   * within the provided Form static components (Form.Error and Form.Actions)
    */
   children: ReactElement | ReactElement[];
 
@@ -33,24 +33,24 @@ export type Props = {
    * A short description of the form.
    */
   desc?: string;
-};
+}
 
-type PropsFormError = {
+interface PropsError {
   children: ReactNode;
-};
+}
 
-type PropsFormMain = {
+interface PropsMain {
   children: ReactNode;
-};
+}
 
-type PropsFormActions = {
+interface PropsActions {
   children: ReactNode;
-};
+}
 
 export type StaticComponents = {
-  Error: FunctionComponent<PropsFormError>;
-  Main: FunctionComponent<PropsFormMain>;
-  Actions: FunctionComponent<PropsFormActions>;
+  Error: typeof Error;
+  Main: typeof Main;
+  Actions: typeof Actions;
 };
 
 const Form: FunctionComponent<Props> & StaticComponents = (props) => {
@@ -69,16 +69,26 @@ const Form: FunctionComponent<Props> & StaticComponents = (props) => {
   );
 };
 
-Form.Error = ({ children }) => (
-  <section className={styles.error}>{children}</section>
+const Error = ({ children }: PropsError) => (
+  <section className={styles.error}>
+    {children}
+  </section>
 );
 
-Form.Main = ({ children }) => (
-  <section className={styles.main}>{children}</section>
+const Main = ({ children }: PropsMain) => (
+  <section className={styles.main}>
+    {children}
+  </section>
 );
 
-Form.Actions = ({ children }) => (
-  <section className={styles.actions}>{children}</section>
+const Actions = ({ children }: PropsActions) => (
+  <section className={styles.actions}>
+    {children}
+  </section>
 );
+
+Form.Error = Error;
+Form.Main = Main;
+Form.Actions = Actions;
 
 export default Form;

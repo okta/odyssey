@@ -13,7 +13,6 @@
 import { Story } from "@storybook/react";
 import Form from ".";
 import FieldGroup from "../FieldGroup";
-import Field from "../Field";
 import TextInput from "../TextInput";
 import Infobox from "../Infobox";
 import Button from "../Button";
@@ -55,23 +54,7 @@ const Template: Story<Props> = ({ title, desc }) => (
         title="Origination logistics"
         desc="This information is required for your craft to leave the starport."
       >
-        <Field
-          label="Departure system"
-          hint="Your origin system has been prepopulated."
-          name="departure"
-          value="Sol"
-          disabled
-        >
-          <TextInput />
-        </Field>
-        <Field
-          label="Destination star"
-          hint="The stellar object you are traveling to."
-          name="destination"
-          error="This field cannot be left blank."
-        >
-          <TextInput />
-        </Field>
+        <TextInput label="Foo" hint="Bar" error="Baz"/>
       </FieldGroup>
     </Form.Main>
     <Form.Actions>
