@@ -15,7 +15,9 @@ import type { ComponentPropsWithoutRef, ChangeEvent } from "react";
 import CheckIcon from "../Icon/Check";
 import MinusIcon from "../Icon/Minus";
 import styles from "./Checkbox.module.scss";
-import { useOid, useOmit, withStyles } from "../../utils";
+import { useCx, useOid, useOmit, withStyles } from "../../utils";
+import Field from "../Field";
+import type { SharedFieldTypes } from "../Field";
 
 export interface Props
   extends Omit<
@@ -52,6 +54,7 @@ const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
     onChange,
     required = true,
     indeterminate = false,
+    error,
     ...rest
   } = props;
 
@@ -79,12 +82,15 @@ const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
     internalRef.current.indeterminate = indeterminate;
   }, [indeterminate, internalRef]);
 
+  const ariaDescribedBy = useCx(error && `${oid}-error`);
+
   return (
     <>
       <input
         {...omitProps}
         className={styles.checkbox}
         id={oid}
+        aria-describedby={ariaDescribedBy}
         onChange={handleChange}
         ref={internalRef}
         required={required}
@@ -99,6 +105,7 @@ const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
         {label}
       </label>
+      {error && <Field.Error id={oid}>{error}</Field.Error>}
     </>
   );
 });
