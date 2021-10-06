@@ -33,6 +33,9 @@ jobs:
         uses: actions/checkout@v2
       - name: setup node
         uses: actions/setup-node@v2
+        with:
+          node-version: v12.20.0
+          cache: yarn
       - name: install dependencies
         run: yarn install --frozen-lockfile --prefer-offline
       - name: lint (eslint, stylelint & prettier)
@@ -50,8 +53,11 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: setup node
         uses: actions/setup-node@v2
+        with:
+          node-version: v12.20.0
+          cache: yarn
       - name: install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: yarn install --frozen-lockfile --offline
       - name: setup AWS
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -68,8 +74,7 @@ jobs:
           git log --format=%B -n 1 ${{ github.event.after }} >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
       - name: build storybook
-        run: |
-          yarn workspace @okta/odyssey-react build-storybook
+        run: yarn workspace @okta/odyssey-react build-storybook --quiet
       - name: create deployment
         uses: bobheadxi/deployments@v0.4.3
         id: deployment
@@ -78,8 +83,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           env: preview
       - name: deploy
-        run: |
-          aws s3 sync ./packages/odyssey-react/storybook-static/ s3://ods.dev/$SHA7 --delete
+        run: aws s3 sync ./packages/odyssey-react/storybook-static/ s3://ods.dev/$SHA7 --delete
       - name: "inform slack of deployment (#odyssey-deployments)"
         run: bash ./scripts/notify-slack.sh
         env:
@@ -105,7 +109,10 @@ jobs:
         uses: actions/checkout@v2
       - name: setup node
         uses: actions/setup-node@v2
+        with:
+          node-version: v12.20.0
+          cache: yarn
       - name: install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: yarn install --frozen-lockfile --offline
       - name: eyes-storybook (applitools)
         run: yarn workspace @okta/odyssey-react eyes-storybook --exitcode=false
