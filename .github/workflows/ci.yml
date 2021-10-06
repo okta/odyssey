@@ -32,7 +32,8 @@ jobs:
       - name: unit tests
         run: yarn test
 
-      - uses: dorny/paths-filter@v2
+      - name: output change conditionals
+        uses: dorny/paths-filter@v2
         id: changes
         with:
           filters: |
