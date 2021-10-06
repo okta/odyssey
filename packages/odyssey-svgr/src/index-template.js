@@ -40,7 +40,10 @@ export { default } from "./Icon";
   const exportEntries = filePaths.map((filePath) => {
     const basename = getBaseName(filePath);
     const exportName = getExportName(basename);
-    return `export { default as ${exportName} } from './${basename}';`;
+    return [
+      `import { default as ${exportName} } from './${basename}';`,
+      `export { ${exportName} }`,
+    ].join("\n");
   });
 
   const names = filePaths.map((filePath) => {
@@ -58,11 +61,11 @@ export { default } from "./Icon";
   const iconDict = names.reduce((prev, curr, i) => {
     return (
       prev +
-      `\n  ${curr[0].includes("-") ? `"${curr[0]}"` : curr[0]}: "${curr[1]}"${
+      `\n  ${curr[0].includes("-") ? `"${curr[0]}"` : curr[0]}: ${curr[1]}${
         i < names.length - 1 ? "," : ",\n};\n"
       }`
     );
-  }, "\n\nexport const iconNameToClassName = {");
+  }, "\n\nexport const iconDictionary = {");
 
   return (
     headerComment +
