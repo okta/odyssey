@@ -36,6 +36,12 @@ jobs:
         with:
           node-version: v12.20.0
           cache: yarn
+      - name: node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-node-modules-cache-
       - name: install dependencies
         run: yarn install --frozen-lockfile --prefer-offline
       - name: lint (eslint, stylelint & prettier)
@@ -56,6 +62,12 @@ jobs:
         with:
           node-version: v12.20.0
           cache: yarn
+      - name: node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-node-modules-cache-
       - name: install dependencies
         run: yarn install --frozen-lockfile --offline
       - name: setup AWS
@@ -112,6 +124,12 @@ jobs:
         with:
           node-version: v12.20.0
           cache: yarn
+      - name: node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-node-modules-cache-
       - name: install dependencies
         run: yarn install --frozen-lockfile --offline
       - name: eyes-storybook (applitools)
