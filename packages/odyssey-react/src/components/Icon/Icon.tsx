@@ -10,17 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  ComponentPropsWithRef,
-  forwardRef,
-  ForwardRefExoticComponent,
-} from "react";
+import { ComponentPropsWithRef, forwardRef } from "react";
 import { useOmit } from "../../utils";
-import type { IconNames } from "./";
-import { iconNameToClassName } from "./";
-import * as Icons from "./";
-
-type IconIndexType = keyof typeof Icons;
+import { iconDictionary } from "./";
 
 export interface Props
   extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
@@ -31,10 +23,8 @@ export interface Props
   /**
    * Name of icon to render
    */
-  name: IconNames;
+  name: keyof typeof iconDictionary;
 }
-
-type NamedIconProps = Omit<Props, "name">;
 
 /**
  * A system of icons which establishes a visual language
@@ -45,10 +35,7 @@ const Icon = forwardRef<SVGSVGElement, Props>(
   ({ name, title, ...rest }, ref) => {
     const omitProps = useOmit(rest);
 
-    const className = iconNameToClassName[name];
-    const NamedIcon = Icons[
-      className as IconIndexType
-    ] as ForwardRefExoticComponent<NamedIconProps>;
+    const NamedIcon = iconDictionary[name];
 
     return <NamedIcon {...omitProps} title={title} ref={ref} />;
   }
