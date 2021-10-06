@@ -11,6 +11,7 @@
  */
 
 module.exports = {
+  showStorybookOutput: true,
   testConcurrency: 10,
   browser: [
     { width: 1024, height: 768, name: "ie11" },
