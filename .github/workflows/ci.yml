@@ -44,9 +44,11 @@ jobs:
           restore-keys: ${{ runner.os }}-node-modules-cache-
       - name: install dependencies
         run: yarn install --frozen-lockfile --prefer-offline
-      - name: lint (eslint, stylelint & prettier)
+      - name: lint
         run: yarn lint
-      - name: unit tests (jest & tsc)
+      - name: type check
+        run: yarn typecheck
+      - name: unit tests
         run: yarn test
   deploy:
     runs-on: ubuntu-latest
