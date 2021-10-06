@@ -14,34 +14,62 @@
 
 export * from "./Icon";
 export { default } from "./Icon";
-export { default as AnchorIcon } from "./Anchor";
-export { default as ArrowDownIcon } from "./ArrowDown";
-export { default as ArrowRightIcon } from "./ArrowRight";
-export { default as CaretDownIcon } from "./CaretDown";
-export { default as CaretUpIcon } from "./CaretUp";
-export { default as CautionIcon } from "./Caution";
-export { default as CheckIcon } from "./Check";
-export { default as CloseIcon } from "./Close";
-export { default as CompleteIcon } from "./Complete";
-export { default as CopyIcon } from "./Copy";
-export { default as DeleteIcon } from "./Delete";
-export { default as DownloadIcon } from "./Download";
-export { default as EditIcon } from "./Edit";
-export { default as ErrorIcon } from "./Error";
-export { default as ExternalIcon } from "./External";
-export { default as FilterIcon } from "./Filter";
-export { default as GetInfoIcon } from "./GetInfo";
-export { default as GoBackwardIcon } from "./GoBackward";
-export { default as GoForwardIcon } from "./GoForward";
-export { default as MinusIcon } from "./Minus";
-export { default as NotificationIcon } from "./Notification";
-export { default as PlusIcon } from "./Plus";
-export { default as SearchIcon } from "./Search";
-export { default as SettingsIcon } from "./Settings";
-export { default as SortAscIcon } from "./SortAsc";
-export { default as SortDescIcon } from "./SortDesc";
-export { default as SortIcon } from "./Sort";
-export { default as UserIcon } from "./User";
+import { default as AnchorIcon } from "./Anchor";
+export { AnchorIcon };
+import { default as ArrowDownIcon } from "./ArrowDown";
+export { ArrowDownIcon };
+import { default as ArrowRightIcon } from "./ArrowRight";
+export { ArrowRightIcon };
+import { default as CaretDownIcon } from "./CaretDown";
+export { CaretDownIcon };
+import { default as CaretUpIcon } from "./CaretUp";
+export { CaretUpIcon };
+import { default as CautionIcon } from "./Caution";
+export { CautionIcon };
+import { default as CheckIcon } from "./Check";
+export { CheckIcon };
+import { default as CloseIcon } from "./Close";
+export { CloseIcon };
+import { default as CompleteIcon } from "./Complete";
+export { CompleteIcon };
+import { default as CopyIcon } from "./Copy";
+export { CopyIcon };
+import { default as DeleteIcon } from "./Delete";
+export { DeleteIcon };
+import { default as DownloadIcon } from "./Download";
+export { DownloadIcon };
+import { default as EditIcon } from "./Edit";
+export { EditIcon };
+import { default as ErrorIcon } from "./Error";
+export { ErrorIcon };
+import { default as ExternalIcon } from "./External";
+export { ExternalIcon };
+import { default as FilterIcon } from "./Filter";
+export { FilterIcon };
+import { default as GetInfoIcon } from "./GetInfo";
+export { GetInfoIcon };
+import { default as GoBackwardIcon } from "./GoBackward";
+export { GoBackwardIcon };
+import { default as GoForwardIcon } from "./GoForward";
+export { GoForwardIcon };
+import { default as MinusIcon } from "./Minus";
+export { MinusIcon };
+import { default as NotificationIcon } from "./Notification";
+export { NotificationIcon };
+import { default as PlusIcon } from "./Plus";
+export { PlusIcon };
+import { default as SearchIcon } from "./Search";
+export { SearchIcon };
+import { default as SettingsIcon } from "./Settings";
+export { SettingsIcon };
+import { default as SortAscIcon } from "./SortAsc";
+export { SortAscIcon };
+import { default as SortDescIcon } from "./SortDesc";
+export { SortDescIcon };
+import { default as SortIcon } from "./Sort";
+export { SortIcon };
+import { default as UserIcon } from "./User";
+export { UserIcon };
 
 export type IconNames =
   | "anchor"
@@ -73,33 +101,33 @@ export type IconNames =
   | "sort"
   | "user";
 
-export const iconNameToClassName = {
-  anchor: "AnchorIcon",
-  "arrow-down": "ArrowDownIcon",
-  "arrow-right": "ArrowRightIcon",
-  "caret-down": "CaretDownIcon",
-  "caret-up": "CaretUpIcon",
-  caution: "CautionIcon",
-  check: "CheckIcon",
-  close: "CloseIcon",
-  complete: "CompleteIcon",
-  copy: "CopyIcon",
-  delete: "DeleteIcon",
-  download: "DownloadIcon",
-  edit: "EditIcon",
-  error: "ErrorIcon",
-  external: "ExternalIcon",
-  filter: "FilterIcon",
-  "get-info": "GetInfoIcon",
-  "go-backward": "GoBackwardIcon",
-  "go-forward": "GoForwardIcon",
-  minus: "MinusIcon",
-  notification: "NotificationIcon",
-  plus: "PlusIcon",
-  search: "SearchIcon",
-  settings: "SettingsIcon",
-  "sort-asc": "SortAscIcon",
-  "sort-desc": "SortDescIcon",
-  sort: "SortIcon",
-  user: "UserIcon",
+export const iconDictionary = {
+  anchor: AnchorIcon,
+  "arrow-down": ArrowDownIcon,
+  "arrow-right": ArrowRightIcon,
+  "caret-down": CaretDownIcon,
+  "caret-up": CaretUpIcon,
+  caution: CautionIcon,
+  check: CheckIcon,
+  close: CloseIcon,
+  complete: CompleteIcon,
+  copy: CopyIcon,
+  delete: DeleteIcon,
+  download: DownloadIcon,
+  edit: EditIcon,
+  error: ErrorIcon,
+  external: ExternalIcon,
+  filter: FilterIcon,
+  "get-info": GetInfoIcon,
+  "go-backward": GoBackwardIcon,
+  "go-forward": GoForwardIcon,
+  minus: MinusIcon,
+  notification: NotificationIcon,
+  plus: PlusIcon,
+  search: SearchIcon,
+  settings: SettingsIcon,
+  "sort-asc": SortAscIcon,
+  "sort-desc": SortDescIcon,
+  sort: SortIcon,
+  user: UserIcon,
 };
