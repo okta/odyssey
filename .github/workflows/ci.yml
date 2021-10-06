@@ -29,7 +29,7 @@ jobs:
         run: yarn lint
       - name: type check
         run: yarn typecheck
-      - name: unit tests
+      - name: unit test
         run: yarn test
 
       - name: output change conditionals
@@ -59,10 +59,7 @@ jobs:
         run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
       - name: set $COMMIT_MSG
         if: steps.changes.outputs.deploy == 'true'
-        run: |
-          echo "COMMIT_MSG<<EOF" >> $GITHUB_ENV
-          git log --format=%B -n 1 ${{ github.event.after }} >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
+        run: echo "COMMIT_MSG=${{ github.event.head_commit.message || github.event.pull_request.title }}" >> $GITHUB_ENV
       - name: build storybook
         if: steps.changes.outputs.deploy == 'true'
         run: yarn workspace @okta/odyssey-react build-storybook --quiet
