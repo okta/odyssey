@@ -7,23 +7,7 @@ on:
       - develop
       - "release/**"
 jobs:
-  prepare:
-    runs-on: ubuntu-latest
-    outputs:
-      deploy: ${{ steps.filter.outputs.deploy }}
-      vrt: ${{ steps.filter.outputs.vrt }}
-    steps:
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            deploy:
-              - './packages/odyssey-react/**'
-              - './packages/odyssey/src/**'
-            vrt:
-              - './packages/odyssey-react/src/**'
-              - './packages/odyssey/src/**'
-  test:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -47,46 +31,42 @@ jobs:
         run: yarn typecheck
       - name: unit tests
         run: yarn test
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [test, prepare]
-    if: ${{ needs.prepare.outputs.deploy == 'true' }}
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
+
+      - uses: dorny/paths-filter@v2
+        id: changes
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: v12.20.0
-          cache: yarn
-      - name: node_modules cache
-        uses: actions/cache@v2
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-node-modules-cache-
-      - name: install dependencies
-        run: yarn install --frozen-lockfile --offline
+          filters: |
+            deploy:
+              - './packages/odyssey-react/**'
+              - './packages/odyssey/src/**'
+            vrt:
+              - './packages/odyssey-react/src/**'
+              - './packages/odyssey/src/**'
+
       - name: setup AWS
+        if: steps.changes.outputs.deploy == 'true'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: set $SHA7
+        if: steps.changes.outputs.deploy == 'true'
         run: echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
       - name: set $URL_STORYBOOK
+        if: steps.changes.outputs.deploy == 'true'
         run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
       - name: set $COMMIT_MSG
+        if: steps.changes.outputs.deploy == 'true'
         run: |
           echo "COMMIT_MSG<<EOF" >> $GITHUB_ENV
           git log --format=%B -n 1 ${{ github.event.after }} >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
       - name: build storybook
+        if: steps.changes.outputs.deploy == 'true'
         run: yarn workspace @okta/odyssey-react build-storybook --quiet
       - name: create deployment
+        if: steps.changes.outputs.deploy == 'true'
         uses: bobheadxi/deployments@v0.4.3
         id: deployment
         with:
@@ -94,8 +74,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           env: preview
       - name: deploy
+        if: steps.changes.outputs.deploy == 'true'
         run: aws s3 sync ./packages/odyssey-react/storybook-static/ s3://ods.dev/$SHA7 --delete
       - name: "inform slack of deployment (#odyssey-deployments)"
+        if: steps.changes.outputs.deploy == 'true'
         run: bash ./scripts/notify-slack.sh
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -103,16 +85,17 @@ jobs:
           BRANCH_NAME: ${{github.head_ref}}
           PULL_REQUEST_ID: ${{github.event.pull_request.number}}
       - name: update deployment status
+        if: steps.changes.outputs.deploy == 'true'
         uses: bobheadxi/deployments@v0.4.3
-        if: always()
         with:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: ${{ env.URL_STORYBOOK }}
+
       - name: visual regression test
-        if: ${{ needs.prepare.outputs.vrt == 'true' }}
+        if: steps.changes.outputs.vrt == 'true'
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
           APPLITOOLS_BATCH_ID: ${{ github.event.pull_request.head.sha }}
