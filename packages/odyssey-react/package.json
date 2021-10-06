@@ -42,7 +42,7 @@
     "start": "start-storybook -p 6006",
     "lint": "eslint .",
     "test": "jest",
-    "posttest": "tsc",
+    "typecheck": "tsc",
     "build": "yarn build:clean && yarn build:types && yarn build:source",
     "build:clean": "rm -rf dist",
     "build:types": "tsc --project tsconfig.production.json",
