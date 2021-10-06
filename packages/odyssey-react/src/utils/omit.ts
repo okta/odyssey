@@ -10,23 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-const notOwnProperty = (obj: object, prop: string) =>
-  !{}.hasOwnProperty.call(obj, prop);
 const omitList = `children className style`.split(` `);
 
-function omit<
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  T extends object,
-  U extends (keyof T)[]
->(obj: T, ...rest: U): Omit<T, U[number]> {
+// eslint-disable-next-line @typescript-eslint/ban-types
+function omit<T extends object, U extends (keyof T)[]>(
+  obj: T,
+  ...rest: U
+): Omit<T, U[number]> {
   const omitted = Object.create(null);
 
   for (const key in obj) {
     if (
       omitList.includes(key) ||
       rest.includes(key) ||
-      notOwnProperty(obj, key)
+      !{}.hasOwnProperty.call(obj, key)
     )
       continue;
 
