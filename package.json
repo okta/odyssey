@@ -23,6 +23,7 @@
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "stylelint": "stylelint **/*.scss",
     "test": "lerna run test",
+    "typecheck": "lerna run typecheck",
     "commitlint": "commitlint --verbose --edit",
     "prepare": "lerna run prepare",
     "postprepare": "[ -z \"$CI\" ] && husky install || exit 0"
