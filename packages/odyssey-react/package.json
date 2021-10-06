@@ -47,7 +47,6 @@
     "build:clean": "rm -rf dist",
     "build:types": "tsc --project tsconfig.production.json",
     "build:source": "./scripts/buildSource",
-    "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.js) --out-dir ./src/components/Icon/",
-    "eyes-storybook": "npx eyes-storybook --showStorybookOutput"
+    "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.js) --out-dir ./src/components/Icon/"
   }
 }
