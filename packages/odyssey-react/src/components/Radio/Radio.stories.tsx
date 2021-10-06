@@ -18,12 +18,14 @@ export default {
   title: `Components/Radio`,
   component: Radio.Group,
   args: {
-    legend: "Select speed",
+    label: "Select speed",
     name: "speed",
+    hint: "Something",
+    error: "Something else"
   },
   argTypes: {
     hint: { control: "text" },
-    legend: { control: "text" },
+    label: { control: "text" },
     required: { control: "boolean" },
     disabled: { control: "boolean" },
     value: {

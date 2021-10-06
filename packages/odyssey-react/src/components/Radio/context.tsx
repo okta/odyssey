@@ -18,6 +18,9 @@ interface Context {
   value?: string;
   disabled?: boolean;
   name?: string;
+  groupid?: string;
+  hint?: string;
+  error?: string;
   required?: boolean;
   onChange?: Props["onChange"];
 }
