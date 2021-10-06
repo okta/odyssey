@@ -35,44 +35,45 @@ function toKebabCase(string) {
 function odysseyIconIndexTemplate(filePaths) {
   const defaultExport = `export * from "./Icon";
 export { default } from "./Icon";
+
 `;
 
-  const exportEntries = filePaths.map((filePath) => {
-    const basename = getBaseName(filePath);
-    const exportName = getExportName(basename);
-    return [
-      `import { default as ${exportName} } from './${basename}';`,
-      `export { ${exportName} }`,
-    ].join("\n");
-  });
+  const importEntries =
+    filePaths
+      .map((filePath) => {
+        const basename = getBaseName(filePath);
+        const exportName = getExportName(basename);
+        return `import ${exportName} from "./${basename}";`;
+      })
+      .join("\n") + `\n\n`;
 
-  const names = filePaths.map((filePath) => {
-    const exportName = getExportName(getBaseName(filePath));
-    return [
-      toKebabCase(exportName.substring(0, exportName.length - 4)),
-      exportName,
-    ];
-  });
+  const exportEntries = filePaths
+    .map((filePath) => {
+      return getExportName(getBaseName(filePath));
+    })
+    .reduce((prev, curr, i) => {
+      return prev + `  ${curr}${i < filePaths.length - 1 ? ",\n" : "\n};"}`;
+    }, "export {\n");
 
-  const iconNames = names.reduce((prev, curr, i) => {
-    return prev + ` "${curr[0]}"${i < names.length - 1 ? "\n|" : ";"}`;
-  }, "\n\nexport type IconNames =\n|");
-
-  const iconDict = names.reduce((prev, curr, i) => {
-    return (
-      prev +
-      `\n  ${curr[0].includes("-") ? `"${curr[0]}"` : curr[0]}: ${curr[1]}${
-        i < names.length - 1 ? "," : ",\n};\n"
-      }`
-    );
-  }, "\n\nexport const iconDictionary = {");
+  const iconDict = filePaths
+    .map((filePath) => {
+      const exportName = getExportName(getBaseName(filePath));
+      return [
+        toKebabCase(exportName.substring(0, exportName.length - 4)),
+        exportName,
+      ];
+    })
+    .reduce((prev, curr, i) => {
+      return (
+        prev +
+        `\n  ${curr[0].includes("-") ? `"${curr[0]}"` : curr[0]}: ${curr[1]}${
+          i < filePaths.length - 1 ? "," : ",\n};\n"
+        }`
+      );
+    }, "\n\nexport const iconDictionary = {");
 
   return (
-    headerComment +
-    defaultExport +
-    exportEntries.join("\n") +
-    iconNames +
-    iconDict
+    headerComment + defaultExport + importEntries + exportEntries + iconDict
   );
 }
 
