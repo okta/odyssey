@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback, forwardRef } from "react";
+import { useCallback, useRef, useEffect, forwardRef } from "react";
 import type { ComponentPropsWithRef, ChangeEvent } from "react";
 import { Check, Minus } from "../Icon";
 import styles from "./Checkbox.module.scss";
@@ -64,11 +64,19 @@ const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
     [onChange]
   );
 
-  const ariaChecked = props.indeterminate
-    ? "mixed"
-    : props.checked
-    ? "true"
-    : "false";
+  const internalRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!ref) return;
+    typeof ref === "function"
+      ? ref(internalRef.current)
+      : (ref.current = internalRef.current);
+  }, [ref, internalRef]);
+
+  useEffect(() => {
+    if (!internalRef.current) return;
+    internalRef.current.indeterminate = indeterminate;
+  }, [indeterminate, internalRef]);
 
   return (
     <>
@@ -77,8 +85,7 @@ const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
         className={styles.checkbox}
         id={oid}
         onChange={handleChange}
-        ref={ref}
-        aria-checked={ariaChecked}
+        ref={internalRef}
         required={required}
         type="checkbox"
       />
