@@ -16,6 +16,9 @@ import type { PropItem } from "react-docgen-typescript";
 import sass from "sass";
 import postcss from "postcss";
 
+const isProduction = process.env.NODE_ENV === "production";
+const withStyles = /\/(Banner|Button|Checkbox)\.module\.scss$/;
+
 module.exports = {
   typescript: {
     check: false,
@@ -42,15 +45,33 @@ module.exports = {
     "@pxblue/storybook-rtl-addon",
   ],
   babel(config: TransformOptions) {
+    const overrides = isProduction
+      ? {
+          plugins: [
+            [
+              require.resolve("@okta/odyssey-transform-styles-babel-plugin"),
+              {
+                extensions: [withStyles],
+              },
+            ],
+            ...(config.plugins || []),
+          ],
+        }
+      : {};
+
     return {
       ...config,
+      ...overrides,
       babelrc: false,
       configFile: false,
     };
   },
   webpackFinal(config: Configuration = {}) {
+    const exclude = isProduction ? [withStyles] : [];
+
     config.module?.rules?.push({
       test: /\.scss$/,
+      exclude,
       use: [
         "style-loader",
         {

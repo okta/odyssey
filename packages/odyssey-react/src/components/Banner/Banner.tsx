@@ -10,25 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactNode } from "react";
+import type { ComponentPropsWithRef, MouseEventHandler } from "react";
+import { forwardRef } from "react";
+import { useCx, useOmit, withStyles } from "../../utils";
 import Title from "../Title";
-import { useCx, useOmit } from "../../utils";
 import Button from "../Button";
 import styles from "./Banner.module.scss";
 
-export type BannerVariants = "info" | "danger" | "caution";
-interface ComponentProps {
-  /**
-   * Actions, or links to be rendered on the right side of
-   * the component.
-   */
-  children: ReactNode;
-
+interface CommonProps
+  extends Omit<ComponentPropsWithRef<"div">, "style" | "className"> {
   /**
    * The visual variant to be displayed to the user.
    * @default info
    */
-  variant?: BannerVariants;
+  variant?: "info" | "danger" | "caution";
 
   /**
    * Human-readable title for the banner.
@@ -46,31 +41,22 @@ interface ComponentProps {
   open: boolean;
 }
 
-type DismissableComponentProps =
+type DismissProps =
   | { onDismiss?: never; dismissButtonLabel?: never }
-  | { onDismiss: () => void; dismissButtonLabel: string };
+  | {
+      onDismiss: MouseEventHandler<HTMLButtonElement>;
+      dismissButtonLabel: string;
+    };
 
-export type Props = ComponentProps & DismissableComponentProps;
+export type Props = CommonProps & DismissProps;
 
 /**
  * Banners let users know important messages related to their overall experience
  * on the website. They can be purely informational messages or critical errors
  * to act upon.
  *
- * @component
- * @example
- * <Banner
- *  variant="primary"
- *  open={isOpen}
- *  title="New launch scheduled"
- *  content="The mission to Sagitarius A has been set for January 7."
- *  onDismiss={handleBannerDismiss}
- * >
- *    <Link href="/fuel">Visit fueling console</Link>
- * </Banner>
  */
-
-const Banner: FunctionComponent<Props> = (props) => {
+const Banner = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const {
     children,
     title,
@@ -91,7 +77,7 @@ const Banner: FunctionComponent<Props> = (props) => {
   const omitProps = useOmit(rest);
 
   return (
-    <aside {...omitProps} className={componentClass} role="status">
+    <div {...omitProps} ref={ref} className={componentClass} role="status">
       <span className={styles.icon}>
         {/* @todo Insert <Icon> component */}
         &#8253;
@@ -120,8 +106,10 @@ const Banner: FunctionComponent<Props> = (props) => {
           </Button>
         </span>
       )}
-    </aside>
+    </div>
   );
-};
+});
 
-export default Banner;
+Banner.displayName = "Banner";
+
+export default withStyles(styles)(Banner);

@@ -10,12 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState } from "react";
-import type { FunctionComponent, ReactElement, ReactText } from "react";
+import React, { useState, useRef, forwardRef } from "react";
+import type {
+  FunctionComponent,
+  ReactElement,
+  ReactText,
+  ComponentPropsWithRef,
+} from "react";
 import styles from "./Tab.module.scss";
-import { useCx } from "../../utils";
+import { useCx, useOid } from "../../utils";
 
-export type PropsTabs = {
+export type Props = {
   /**
    * A collection of Tab.Panels to be rendered
    */
@@ -59,10 +64,10 @@ export type PropsTabsPanel = {
   id?: string;
   selected?: boolean;
 };
-
-export type PropsTabsList = {
+export interface PropsTabsList
+  extends Omit<ComponentPropsWithRef<"div">, "style" | "className"> {
   children: ReactElement | ReactElement[];
-};
+}
 
 export type PropsTab = {
   children: ReactText;
@@ -79,6 +84,7 @@ export type StaticComponents = {
   List: FunctionComponent<PropsTabsList>;
   Tab: FunctionComponent<PropsTab>;
 };
+type TabListRef = HTMLDivElement | null;
 
 /**
  * Navigation component used to organize content by grouping similar information on the
@@ -94,7 +100,7 @@ export type StaticComponents = {
  *   <Tabs.Panel id="tab-4" label="Tab Four">TabPanel Four Content</Tabs.Panel>
  * </Tabs>
  */
-const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({
+const Tabs: FunctionComponent<Props> & StaticComponents = ({
   children,
   id,
   selectedId,
@@ -104,6 +110,34 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({
   const defaultSelectedTabId = selectedId || children[0].props.id;
   const [selectedTabId, setSelectedTabId] = useState(defaultSelectedTabId);
 
+  const tabListRef = useRef<TabListRef>(null);
+
+  const handleTabListKeyUp = (event: React.KeyboardEvent) => {
+    if (!tabListRef.current) return;
+    const tabs =
+      tabListRef.current.querySelectorAll<HTMLButtonElement>("button");
+    const tabsArr = Array.prototype.slice.call(tabs);
+    const focusableElLast = tabs[tabs.length - 1];
+    const focusableIndexActive = tabsArr.indexOf(document.activeElement);
+    const isFirstFocused = focusableIndexActive === 0;
+    const isLastFocused =
+      focusableIndexActive === tabsArr.indexOf(focusableElLast);
+    const focusFirst = () => tabs[0].focus();
+    const focusLast = () => focusableElLast.focus();
+
+    if (event.key === "ArrowLeft") {
+      if (!isFirstFocused) tabs[focusableIndexActive - 1].focus();
+      else if (isFirstFocused) focusLast();
+    } else if (event.key === "ArrowRight") {
+      if (!isLastFocused) tabs[focusableIndexActive + 1].focus();
+      else if (isLastFocused) focusFirst();
+    } else if (event.key === "Home") {
+      focusFirst();
+    } else if (event.key === "End") {
+      focusLast();
+    }
+  };
+
   const handleTabChange = (newSelectedId: string) => {
     setSelectedTabId(newSelectedId);
 
@@ -112,9 +146,11 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({
     }
   };
 
+  const oid = useOid(id);
+
   return (
-    <Tabs.Container id={id} ariaLabel={ariaLabel}>
-      <Tabs.List>
+    <Tabs.Container id={oid} ariaLabel={ariaLabel}>
+      <Tabs.List ref={tabListRef} onKeyUp={handleTabListKeyUp}>
         {children.map(({ props: { label, id } }) => (
           <Tabs.Tab
             id={id + "-tab"}
@@ -129,14 +165,14 @@ const Tabs: FunctionComponent<PropsTabs> & StaticComponents = ({
       </Tabs.List>
       <Tabs.PanelContainer>
         {children.map(
-          ({ props: { label, id, children: tabPabelChildren } }) => (
+          ({ props: { label, id, children: tabLabelChildren } }) => (
             <Tabs.Panel
               label={label}
               id={id}
               key={id}
               selected={id === selectedTabId}
             >
-              {tabPabelChildren}
+              {tabLabelChildren}
             </Tabs.Panel>
           )
         )}
@@ -151,16 +187,26 @@ Tabs.Container = ({ children, id, ariaLabel }) => (
   </div>
 );
 
-Tabs.List = ({ children }) => (
-  <div role="tablist" aria-label="label" className={styles.tablist}>
-    {children}
-  </div>
+Tabs.List = forwardRef<HTMLDivElement, PropsTabsList>(
+  ({ children, onKeyUp }, ref) => (
+    <div
+      tabIndex={-1}
+      role="tablist"
+      aria-label="label"
+      className={styles.tablist}
+      onKeyUp={onKeyUp}
+      ref={ref}
+    >
+      {children}
+    </div>
+  )
 );
 
 Tabs.Tab = function TabsTab({ children, id, ariaControls, selected, onClick }) {
   const componentClass = useCx(styles.tab, {
     [styles.selectedState]: selected,
   });
+
   return (
     <button
       id={id}

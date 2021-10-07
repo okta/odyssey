@@ -23,15 +23,14 @@ export default {
     value: "checkbox_value",
   },
   argTypes: {
-    required: { control: "boolean" },
-    disabled: { control: "boolean" },
     checked: { control: "boolean" },
-    value: { control: "text" },
+    disabled: { control: "boolean" },
     id: { control: "text" },
+    indeterminate: { control: "boolean" },
     name: { control: "text" },
     onChange: { control: false },
-    onBlur: { control: false },
-    onFocus: { control: false },
+    required: { control: "boolean" },
+    value: { control: "text" },
   },
 };
 
@@ -42,6 +41,11 @@ export const Default = Template.bind({});
 export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true,
+};
+
+export const Indeterminate = Template.bind({});
+Indeterminate.args = {
+  indeterminate: true,
 };
 
 export const Invalid = Template.bind({});

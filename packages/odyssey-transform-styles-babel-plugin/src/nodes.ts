@@ -11,15 +11,15 @@
  */
 
 import * as t from "@babel/types";
+import type { Tokens } from "./compile";
 
-export type Tokens = Record<string, string>;
-export interface ObjectExpressionArgs {
+interface ObjectExpressionArgs {
   tokens: Tokens;
   styles: string;
   digest: string;
 }
 
-export interface VariableDeclarationArgs extends ObjectExpressionArgs {
+interface VariableDeclarationArgs extends ObjectExpressionArgs {
   name: string;
 }
 
