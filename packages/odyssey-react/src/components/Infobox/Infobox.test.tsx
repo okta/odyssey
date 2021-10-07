@@ -14,65 +14,30 @@ import { render, screen } from "@testing-library/react";
 import Infobox from ".";
 
 const role = "status";
-const infoboxTitle = "Infobox title";
-const infoboxContent = "Infobox.Content container.";
-const infoboxActions =
-  "Infobox.Actions container, <a href='https://www.okta.com'>with a link</a>.";
+const title = "Infobox title";
+const content = "Infobox Content";
+const actions = "<a href='https://www.okta.com'>click me</a>";
 
 describe("Infobox", () => {
-  it("renders the Infobox", () => {
-    const { getByRole } = render(
-      <Infobox title={infoboxTitle}>
-        <Infobox.Content>{infoboxContent}</Infobox.Content>
-      </Infobox>
-    );
+  it("renders visibly", () => {
+    render(<Infobox title={title} content={content} actions={actions} />);
 
-    expect(getByRole(role)).toBeInTheDocument();
+    expect(screen.getByRole(role)).toBeVisible();
+    expect(screen.getByText(title)).toBeVisible();
+    expect(screen.getByText(content)).toBeVisible();
+    expect(screen.getByText(actions)).toBeVisible();
   });
 
-  it("renders the Infobox title", () => {
-    const { getByText } = render(
-      <Infobox title={infoboxTitle}>
-        <Infobox.Content>{infoboxContent}</Infobox.Content>
-      </Infobox>
-    );
-
-    expect(getByText(infoboxTitle)).toBeInTheDocument();
-  });
-
-  it("renders the Infobox.Content", () => {
-    const { getByText } = render(
-      <Infobox>
-        <Infobox.Content>{infoboxContent}</Infobox.Content>
-      </Infobox>
-    );
-    expect(getByText(infoboxContent)).toBeInTheDocument();
-  });
-
-  it("renders the Infobox.Actions", () => {
-    const { getByText } = render(
-      <Infobox>
-        <Infobox.Actions>{infoboxActions}</Infobox.Actions>
-      </Infobox>
-    );
-    expect(getByText(infoboxActions)).toBeInTheDocument();
-  });
-
-  it("renders through children that are not expected", () => {
+  it("restricts children prop via types and does not render them", () => {
     render(
-      // @ts-expect-error Infobox does not accept text as children
-      <Infobox>oops</Infobox>
+      // @ts-expect-error never type for children
+      <Infobox title={title} children="child" />
     );
 
-    expect(screen.getByRole(role)).toContainHTML("oops");
+    expect(screen.queryByText("child")).toBeNull;
   });
 
   a11yCheck(() =>
-    render(
-      <Infobox title={infoboxTitle}>
-        <Infobox.Content>{infoboxContent}</Infobox.Content>
-        <Infobox.Actions>{infoboxActions}</Infobox.Actions>
-      </Infobox>
-    )
+    render(<Infobox title={title} content={content} actions={actions} />)
   );
 });

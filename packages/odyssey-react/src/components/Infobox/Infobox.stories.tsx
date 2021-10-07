@@ -29,18 +29,21 @@ export default {
   },
 };
 
+const content =
+  "An infobox is a type of alert that provides feedback in response to a user action or system activity.";
+const actions = (
+  <Link href="https://ww.okta.com" variant="secondary">
+    Link to associated action
+  </Link>
+);
+
 const Template: Story<Props> = ({ title, variant }) => (
-  <Infobox title={title} variant={variant}>
-    <Infobox.Content>
-      An infobox is a type of alert that provides feedback in response to a user
-      action or system activity.
-    </Infobox.Content>
-    <Infobox.Actions>
-      <Link href="https://www.okta.com" variant="secondary">
-        Link to an associated action.
-      </Link>
-    </Infobox.Actions>
-  </Infobox>
+  <Infobox
+    title={title}
+    variant={variant}
+    content={content}
+    actions={actions}
+  />
 );
 
 export const Info = Template.bind({});
