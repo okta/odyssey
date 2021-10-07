@@ -11,6 +11,13 @@
  */
 
 module.exports = {
+  // NOTE: the docs for this exitcode config are incorrect as of this
+  // writing. An explicit `false` value here allows a failed VRT run to
+  // exit non zero and our larger CI build to pass as we intend.
+  // Validating VRT results is then handled through a separate applitools
+  // github integration.
+  exitcode: false,
+
   showStorybookOutput: true,
   testConcurrency: 10,
   browser: [
