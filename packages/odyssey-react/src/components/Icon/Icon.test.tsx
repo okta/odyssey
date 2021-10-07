@@ -17,31 +17,17 @@ const iconTitle = "Icon";
 
 describe("Icon", () => {
   it("render the icon", () => {
-    const { getByTitle } = render(
-      <Icon title={iconTitle}>
-        <svg></svg>
-      </Icon>
-    );
+    const { getByTitle } = render(<Icon name="check" title={iconTitle} />);
     const svgElement = getByTitle(iconTitle).parentElement;
     expect(svgElement).toBeVisible();
     expect(svgElement).toHaveAttribute("role", "img");
   });
 
   it("has presentation role without title", () => {
-    const { getByRole } = render(
-      <Icon>
-        <svg></svg>
-      </Icon>
-    );
+    const { getByRole } = render(<Icon name="check" />);
     const svgElement = getByRole("presentation");
     expect(svgElement).toBeVisible();
   });
 
-  a11yCheck(() =>
-    render(
-      <Icon>
-        <svg></svg>
-      </Icon>
-    )
-  );
+  a11yCheck(() => render(<Icon name="check" title="test" />));
 });

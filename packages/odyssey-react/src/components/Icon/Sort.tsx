@@ -15,17 +15,17 @@
 import { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useOmit } from "../../utils";
-import Icon from "./Icon";
+import SvgIcon from "./SvgIcon";
 
 export interface Props
   extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   title?: string;
 }
 
-const Sort = forwardRef<SVGSVGElement, Props>((props, ref) => {
+const SortIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
   const omitProps = useOmit(props);
   return (
-    <Icon ref={ref} {...omitProps}>
+    <SvgIcon ref={ref} {...omitProps}>
       <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g
           clipPath="url(#clip0)"
@@ -41,8 +41,10 @@ const Sort = forwardRef<SVGSVGElement, Props>((props, ref) => {
           </clipPath>
         </defs>
       </svg>
-    </Icon>
+    </SvgIcon>
   );
 });
 
-export default Sort;
+SortIcon.displayName = "SortIcon";
+
+export default SortIcon;

@@ -13,14 +13,68 @@
 const path = require("path");
 const headerComment = require("./header-comment");
 
-function odysseyIconIndexTemplate(filePaths) {
-  const exportEntries = filePaths.map((filePath) => {
-    const basename = path.basename(filePath, path.extname(filePath));
-    const exportName = /^\d/.test(basename) ? `Svg${basename}` : basename;
-    return `export { default as ${exportName} } from './${basename}'`;
-  });
+const getBaseName = (filePath) =>
+  path.basename(filePath, path.extname(filePath));
 
-  return headerComment + exportEntries.join("\n");
+const getExportName = (basename) => `${basename}Icon`;
+
+function toKebabCase(string) {
+  return string
+    .split("")
+    .map((letter) => {
+      if (/[A-Z]/.test(letter)) {
+        return ` ${letter.toLowerCase()}`;
+      }
+      return letter;
+    })
+    .join("")
+    .trim()
+    .replace(/[_\s]+/g, "-");
+}
+
+function odysseyIconIndexTemplate(filePaths) {
+  const defaultExport = `export * from "./Icon";
+export { default } from "./Icon";
+
+`;
+
+  const importEntries =
+    filePaths
+      .map((filePath) => {
+        const basename = getBaseName(filePath);
+        const exportName = getExportName(basename);
+        return `import ${exportName} from "./${basename}";`;
+      })
+      .join("\n") + `\n\n`;
+
+  const exportEntries = filePaths
+    .map((filePath) => {
+      return getExportName(getBaseName(filePath));
+    })
+    .reduce((prev, curr, i) => {
+      return prev + `  ${curr}${i < filePaths.length - 1 ? ",\n" : "\n};"}`;
+    }, "export {\n");
+
+  const iconDict = filePaths
+    .map((filePath) => {
+      const exportName = getExportName(getBaseName(filePath));
+      return [
+        toKebabCase(exportName.substring(0, exportName.length - 4)),
+        exportName,
+      ];
+    })
+    .reduce((prev, curr, i) => {
+      return (
+        prev +
+        `\n  ${curr[0].includes("-") ? `"${curr[0]}"` : curr[0]}: ${curr[1]}${
+          i < filePaths.length - 1 ? "," : ",\n};\n"
+        }`
+      );
+    }, "\n\nexport const iconDictionary = {");
+
+  return (
+    headerComment + defaultExport + importEntries + exportEntries + iconDict
+  );
 }
 
 module.exports = odysseyIconIndexTemplate;

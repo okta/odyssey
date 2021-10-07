@@ -10,16 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  Children,
-  cloneElement,
-  ComponentPropsWithRef,
-  forwardRef,
-} from "react";
-import type { ReactElement } from "react";
-import { useOid, useOmit } from "../../utils";
-
-import styles from "./Icon.module.scss";
+import { ComponentPropsWithRef, forwardRef } from "react";
+import { useOmit } from "../../utils";
+import { iconDictionary } from "./";
 
 export interface Props
   extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
@@ -27,8 +20,10 @@ export interface Props
    * Title text used by screen readers
    */
   title?: string;
-
-  children: ReactElement;
+  /**
+   * Name of icon to render
+   */
+  name: keyof typeof iconDictionary;
 }
 
 /**
@@ -37,23 +32,12 @@ export interface Props
  */
 
 const Icon = forwardRef<SVGSVGElement, Props>(
-  ({ title, children, ...rest }, ref) => {
-    const autoId = "icon_" + useOid();
+  ({ name, title, ...rest }, ref) => {
     const omitProps = useOmit(rest);
 
-    return Children.only(
-      cloneElement(
-        children,
-        {
-          ...omitProps,
-          "aria-labelledby": title && autoId,
-          className: styles.root,
-          ref: ref,
-          role: title ? "img" : "presentation",
-        },
-        [title && <title id={autoId}>{title}</title>, children.props.children]
-      )
-    );
+    const NamedIcon = iconDictionary[name];
+
+    return <NamedIcon {...omitProps} title={title} ref={ref} />;
   }
 );
 
