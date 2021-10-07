@@ -12,6 +12,7 @@
 
 import { forwardRef } from "react";
 import type {
+  ComponentType,
   ForwardRefRenderFunction,
   ForwardRefExoticComponent,
 } from "react";
@@ -21,11 +22,9 @@ type BaseShape = object;
 type Exotic<Props, Statics> = ForwardRefExoticComponent<Props> & Statics;
 
 export function forwardRefWithStatics<
-  IntrinsicElement extends HTMLElement = HTMLDivElement,
-  Props extends BaseShape = BaseShape,
-  Statics extends BaseShape = BaseShape
->(
-  render: ForwardRefRenderFunction<IntrinsicElement, Props>
-): Exotic<Props, Statics> {
-  return forwardRef<IntrinsicElement, Props>(render) as Exotic<Props, Statics>;
+  Ref extends Element | ComponentType<Props>,
+  Props extends BaseShape,
+  Statics extends BaseShape
+>(render: ForwardRefRenderFunction<Ref, Props>): Exotic<Props, Statics> {
+  return forwardRef<Ref, Props>(render) as Exotic<Props, Statics>;
 }
