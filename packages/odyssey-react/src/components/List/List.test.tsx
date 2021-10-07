@@ -10,47 +10,89 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import List from "./List";
 
 describe("List", () => {
   it("renders visibly into the document", () => {
-    const { getByRole } = render(<List />);
-
-    expect(getByRole("list")).toBeVisible();
+    render(<List />);
+    expect(screen.getByRole("list")).toBeVisible();
   });
 
   it("displays as an ordered list", () => {
-    const { getByRole } = render(<List listType="ordered" />);
-    expect(getByRole("list").tagName.toLowerCase() === "ol").toBe(true);
+    render(<List listType="ordered" />);
+    expect(screen.getByRole("list").tagName.toLowerCase() === "ol").toBe(true);
   });
 
   it("displays as a description list", () => {
-    const { getByRole } = render(<List listType="description" role="list" />);
-    expect(getByRole("list").tagName.toLowerCase() === "dl").toBe(true);
+    render(<List listType="description" role="list" />);
+    expect(screen.getByRole("list").tagName.toLowerCase() === "dl").toBe(true);
   });
 
   it("adds the proper class for unstyled prop", () => {
-    const { getByRole } = render(<List unstyled={true} />);
-    expect(getByRole("list").classList.contains("unstyled")).toBe(true);
+    render(<List unstyled={true} />);
+    expect(screen.getByRole("list").classList.contains("unstyled")).toBe(true);
   });
+
+  it("restricts children prop via types", () => {
+    // @ts-expect-error ReactElement type for children
+    <List children="child" />;
+  });
+
+  it("restricts style prop via types", () => {
+    // @ts-expect-error style is omitted
+    <List style={{ color: "#BADA55" }} />;
+  });
+
+  it("restricts className prop via types", () => {
+    // @ts-expect-error className is omitted
+    <List className="foo" />;
+  });
+
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(<List ref={ref} />);
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole("list"));
+  });
+
+  a11yCheck(() =>
+    render(
+      <List>
+        <List.Item>Foo</List.Item>
+        <List.Item>Bar</List.Item>
+        <List.Item>Baz</List.Item>
+      </List>
+    )
+  );
 });
 
 describe("ListItem", () => {
   it("renders visibly into the document", () => {
-    const { getByRole } = render(
+    render(
       <List>
         <List.Item>item</List.Item>
       </List>
     );
 
-    expect(getByRole("listitem")).toBeVisible();
+    expect(screen.getByRole("listitem")).toBeVisible();
+  });
+
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(<List.Item ref={ref} children="item" />);
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole("listitem"));
   });
 });
 
 describe("DescriptionTerm", () => {
   it("renders visibly into the document", () => {
-    const { getByText } = render(
+    render(
       <List listType="description">
         <List.Term>term</List.Term>
         <List.Details>details</List.Details>
@@ -59,19 +101,37 @@ describe("DescriptionTerm", () => {
 
     // TODO :: Change to getByRole("term") when bug is resolved upstream
     // https://github.com/testing-library/dom-testing-library/issues/703
-    expect(getByText("term")).toBeVisible();
+    expect(screen.getByText("term")).toBeVisible();
+  });
+
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(<List.Term ref={ref} children="term" />);
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByText("term"));
   });
 });
 
 describe("DescriptionDetails", () => {
   it("renders visibly into the document", () => {
-    const { getByRole } = render(
+    render(
       <List listType="description">
         <List.Term>term</List.Term>
         <List.Details>details</List.Details>
       </List>
     );
 
-    expect(getByRole("definition")).toBeVisible();
+    expect(screen.getByRole("definition")).toBeVisible();
+  });
+
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(<List.Details ref={ref} />);
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole("definition"));
   });
 });

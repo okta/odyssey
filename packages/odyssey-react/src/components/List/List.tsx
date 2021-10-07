@@ -11,9 +11,7 @@
  */
 
 import type { ReactElement, ComponentPropsWithRef, ForwardedRef } from "react";
-
-import { forwardRefWithStatics, useOmit, useCx } from "../../utils";
-
+import { forwardRefWithStatics, useOmit, useCx, withStyles } from "../../utils";
 import styles from "./List.module.scss";
 import ListItem from "./ListItem";
 import DescriptionTerm from "./DescriptionTerm";
@@ -40,7 +38,10 @@ type UnorderedProps = ListProps & ComponentPropsWithRef<"ul">;
 type OrderedProps = ListProps & ComponentPropsWithRef<"ol">;
 type DescriptionProps = ListProps & ComponentPropsWithRef<"dl">;
 
-export type Props = UnorderedProps | OrderedProps | DescriptionProps;
+export type Props = Omit<
+  UnorderedProps | OrderedProps | DescriptionProps,
+  "style" | "className"
+>;
 
 type Statics = {
   Item: typeof ListItem;
@@ -105,4 +106,4 @@ List.Item = ListItem;
 List.Term = DescriptionTerm;
 List.Details = DescriptionDetails;
 
-export default List;
+export default withStyles(styles)(List);
