@@ -26,9 +26,9 @@ describe("Checkbox", () => {
     expect(screen.getByRole(checkbox)).toBeVisible();
   });
 
-  it("does not accept children via types or render them", () => {
+  it("restricts children via types and does not render them", () => {
     render(
-      // @ts-expect-error Checkbox has a never type for children
+      // @ts-expect-error never type for children
       <Checkbox label={label} children="child" />
     );
 
