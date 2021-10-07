@@ -20,7 +20,7 @@ function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
   }
   const typeScriptTpl = template.smart({ plugins, preserveComments: true });
 
-  const compName = componentName.name.substring(3);
+  const compName = componentName.name.substring(3) + "Icon";
 
   const attrs = jsx.openingElement.attributes;
   const classNameIndex = attrs.findIndex(
@@ -31,12 +31,12 @@ function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
     ...attrs.slice(classNameIndex + 1),
   ];
 
-  const icon = `<Icon
+  const icon = `<SvgIcon
   ref={ref}
   {...omitProps}
 >
   ${generate(jsx).code}
-</Icon>`;
+</SvgIcon>`;
 
   const newLine = `
   `;
@@ -47,7 +47,7 @@ ${headerComment}
 import { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useOmit } from '../../utils';
-import Icon from './Icon';
+import SvgIcon from './SvgIcon';
 
 ${newLine}
 
@@ -67,6 +67,10 @@ const ${compName} = forwardRef<SVGSVGElement, Props>((props, ref) => {
   )
 }
 );
+
+${newLine}
+
+${compName}.displayName = "${compName}";
 
 ${newLine}
 

@@ -14,7 +14,9 @@ import type { ReactNode, ComponentProps } from "react";
 import { forwardRef } from "react";
 
 import { useCx, useOmit } from "../../utils";
-import { Sort, SortAsc, SortDesc } from "../Icon";
+import SortIcon from "../Icon/Sort";
+import SortAscIcon from "../Icon/SortAsc";
+import SortDescIcon from "../Icon/SortDesc";
 import ScreenReaderText from "../ScreenReaderText";
 
 import styles from "./Table.module.scss";
@@ -39,9 +41,9 @@ const TableSortButton = forwardRef<Ref, Props>((props, ref) => {
     <button ref={ref} className={componentClass} {...omitProps}>
       {children}
       <span className={styles.sortIndicator}>
-        {direction === "unsorted" && <Sort title="Unsorted" />}
-        {direction === "asc" && <SortAsc title="Ascending" />}
-        {direction === "desc" && <SortDesc title="Descending" />}
+        {direction === "unsorted" && <SortIcon title="Unsorted" />}
+        {direction === "asc" && <SortAscIcon title="Ascending" />}
+        {direction === "desc" && <SortDescIcon title="Descending" />}
       </span>
       <ScreenReaderText>click to sort</ScreenReaderText>
     </button>

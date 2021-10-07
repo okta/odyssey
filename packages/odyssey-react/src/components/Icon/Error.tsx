@@ -15,17 +15,17 @@
 import { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useOmit } from "../../utils";
-import Icon from "./Icon";
+import SvgIcon from "./SvgIcon";
 
 export interface Props
   extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   title?: string;
 }
 
-const Error = forwardRef<SVGSVGElement, Props>((props, ref) => {
+const ErrorIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
   const omitProps = useOmit(props);
   return (
-    <Icon ref={ref} {...omitProps}>
+    <SvgIcon ref={ref} {...omitProps}>
       <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           fillRule="evenodd"
@@ -34,8 +34,10 @@ const Error = forwardRef<SVGSVGElement, Props>((props, ref) => {
           fill="currentColor"
         />
       </svg>
-    </Icon>
+    </SvgIcon>
   );
 });
 
-export default Error;
+ErrorIcon.displayName = "ErrorIcon";
+
+export default ErrorIcon;

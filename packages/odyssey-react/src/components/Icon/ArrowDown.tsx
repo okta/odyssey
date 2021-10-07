@@ -22,15 +22,13 @@ export interface Props
   title?: string;
 }
 
-const SearchIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
+const ArrowDownIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
   const omitProps = useOmit(props);
   return (
     <SvgIcon ref={ref} {...omitProps}>
       <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M8.75739 10.1716C7.96696 10.6951 7.01908 11 6 11C3.23858 11 1 8.76142 1 6C1 3.23858 3.23858 1 6 1C8.76142 1 11 3.23858 11 6C11 7.01908 10.6951 7.96696 10.1716 8.75739L12.6908 11.2766C13.0813 11.6671 13.0813 12.3003 12.6908 12.6908C12.3003 13.0813 11.6671 13.0813 11.2766 12.6908L8.75739 10.1716ZM9 6C9 7.65685 7.65685 9 6 9C4.34315 9 3 7.65685 3 6C3 4.34315 4.34315 3 6 3C7.65685 3 9 4.34315 9 6Z"
+          d="M10.5908 4.91005L7.19206 8.98851C7.09211 9.10845 6.90789 9.10845 6.80794 8.98851L3.40922 4.91004C3.27353 4.74721 3.38932 4.5 3.60128 4.5L10.3987 4.5C10.6107 4.5 10.7265 4.74721 10.5908 4.91005Z"
           fill="currentColor"
         />
       </svg>
@@ -38,6 +36,6 @@ const SearchIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
   );
 });
 
-SearchIcon.displayName = "SearchIcon";
+ArrowDownIcon.displayName = "ArrowDownIcon";
 
-export default SearchIcon;
+export default ArrowDownIcon;

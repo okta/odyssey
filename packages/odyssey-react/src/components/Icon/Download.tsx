@@ -15,17 +15,17 @@
 import { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useOmit } from "../../utils";
-import Icon from "./Icon";
+import SvgIcon from "./SvgIcon";
 
 export interface Props
   extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   title?: string;
 }
 
-const Download = forwardRef<SVGSVGElement, Props>((props, ref) => {
+const DownloadIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
   const omitProps = useOmit(props);
   return (
-    <Icon ref={ref} {...omitProps}>
+    <SvgIcon ref={ref} {...omitProps}>
       <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M8 2C8 1.44772 7.55228 1 7 1C6.44772 1 6 1.44772 6 2L5.99928 6.58577L3.91421 4.08579C3.52369 3.69526 2.89052 3.69526 2.5 4.08579C2.10948 4.47631 2.10948 5.10948 2.5 5.5L6.29218 9.70709C6.6827 10.0976 7.31587 10.0976 7.70639 9.70709L11.5 5.5C11.8905 5.10948 11.8905 4.47631 11.5 4.08579C11.1095 3.69526 10.4763 3.69526 10.0858 4.08579L7.99928 6.58577L8 2Z"
@@ -36,8 +36,10 @@ const Download = forwardRef<SVGSVGElement, Props>((props, ref) => {
           fill="currentColor"
         />
       </svg>
-    </Icon>
+    </SvgIcon>
   );
 });
 
-export default Download;
+DownloadIcon.displayName = "DownloadIcon";
+
+export default DownloadIcon;
