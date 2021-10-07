@@ -13,7 +13,7 @@
 import { render, screen } from "@testing-library/react";
 import Infobox from ".";
 
-const role = "status";
+const statusRole = "status";
 const title = "Infobox title";
 const content = "Infobox Content";
 const actions = "<a href='https://www.okta.com'>click me</a>";
@@ -22,7 +22,7 @@ describe("Infobox", () => {
   it("renders visibly", () => {
     render(<Infobox title={title} content={content} actions={actions} />);
 
-    expect(screen.getByRole(role)).toBeVisible();
+    expect(screen.getByRole(statusRole)).toBeVisible();
     expect(screen.getByText(title)).toBeVisible();
     expect(screen.getByText(content)).toBeVisible();
     expect(screen.getByText(actions)).toBeVisible();
@@ -35,6 +35,15 @@ describe("Infobox", () => {
     );
 
     expect(screen.queryByText("child")).toBeNull;
+  });
+
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(<Infobox ref={ref} title={title} actions={actions} />);
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(statusRole));
   });
 
   a11yCheck(() =>
