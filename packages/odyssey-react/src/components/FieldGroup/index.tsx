@@ -55,9 +55,7 @@ const FieldGroup: FunctionComponent<Props> & StaticComponents = (props) => {
 };
 
 const Error = ({ children }: PropsError) => (
-  <section className={styles.error}>
-    {children}
-  </section>
+  <section className={styles.error}>{children}</section>
 );
 
 FieldGroup.Error = Error;

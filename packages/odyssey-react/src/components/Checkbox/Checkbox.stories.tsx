@@ -31,7 +31,7 @@ export default {
     onChange: { control: false },
     required: { control: "boolean" },
     value: { control: "text" },
-    error: { control: "text" }
+    error: { control: "text" },
   },
 };
 

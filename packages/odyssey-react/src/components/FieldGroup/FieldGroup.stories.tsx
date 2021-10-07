@@ -47,7 +47,7 @@ const Template: Story<Props> = ({ title, desc }) => (
         </Infobox.Content>
       </Infobox>
     </FieldGroup.Error>
-    <TextInput label="Foo" hint="Bar"/>
+    <TextInput label="Foo" hint="Bar" />
   </FieldGroup>
 );
 

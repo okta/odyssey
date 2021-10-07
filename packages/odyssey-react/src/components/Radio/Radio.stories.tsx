@@ -21,7 +21,7 @@ export default {
     label: "Select speed",
     name: "speed",
     hint: "Something",
-    error: "Something else"
+    error: "Something else",
   },
   argTypes: {
     hint: { control: "text" },

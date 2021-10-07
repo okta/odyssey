@@ -51,7 +51,7 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
     name,
     groupid,
     hint,
-    error
+    error,
   } = useRadioGroup();
 
   const oid = useOid(id);
@@ -63,7 +63,10 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
   console.log(hint);
   console.log(error);
 
-  const ariaDescribedBy = useCx(hint && `${groupid}-hint`, error && `${groupid}-error`);
+  const ariaDescribedBy = useCx(
+    hint && `${groupid}-hint`,
+    error && `${groupid}-error`
+  );
 
   return (
     <>

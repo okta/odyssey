@@ -70,21 +70,15 @@ const Form: FunctionComponent<Props> & StaticComponents = (props) => {
 };
 
 const Error = ({ children }: PropsError) => (
-  <section className={styles.error}>
-    {children}
-  </section>
+  <section className={styles.error}>{children}</section>
 );
 
 const Main = ({ children }: PropsMain) => (
-  <section className={styles.main}>
-    {children}
-  </section>
+  <section className={styles.main}>{children}</section>
 );
 
 const Actions = ({ children }: PropsActions) => (
-  <section className={styles.actions}>
-    {children}
-  </section>
+  <section className={styles.actions}>{children}</section>
 );
 
 Form.Error = Error;
