@@ -10,9 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import Banner from ".";
-import styles from "./Banner.module.scss";
 
 const role = "status";
 const bannerTitle = "Banner title";
@@ -22,42 +21,42 @@ const bannerActions =
 const bannerDismissButtonLabel = "Dismiss message";
 
 describe("Banner", () => {
-  it("renders the Banner", () => {
+  it("renders the Banner visibly into document", () => {
     const { getByRole } = render(
       <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
 
-    expect(getByRole(role)).toBeInTheDocument();
+    expect(getByRole(role)).toBeVisible();
   });
 
-  it("renders the Banner title", () => {
+  it("renders the Banner title visibly into document", () => {
     const { getByText } = render(
       <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
 
-    expect(getByText(bannerTitle)).toBeInTheDocument();
+    expect(getByText(bannerTitle)).toBeVisible();
   });
 
-  it("renders the content", () => {
+  it("renders the content visibly into document", () => {
     const { getByText } = render(
       <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
-    expect(getByText(bannerContent)).toBeInTheDocument();
+    expect(getByText(bannerContent)).toBeVisible();
   });
 
-  it("renders the action (children) content", () => {
+  it("renders the action (children) visibly into document", () => {
     const { getByText } = render(
       <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
-    expect(getByText(bannerActions)).toBeInTheDocument();
+    expect(getByText(bannerActions)).toBeVisible();
   });
 
   it("hides the banner if visible prop is set to false", () => {
@@ -67,10 +66,10 @@ describe("Banner", () => {
       </Banner>
     );
 
-    expect(getByRole(role)).toHaveClass(styles.isDismissed);
+    expect(getByRole(role, { hidden: true })).not.toBeVisible();
   });
 
-  it("should NOT display the dismiss button when the onDismiss callback fn is NOT provided", () => {
+  it("does not render the dismiss button when the onDismiss callback is omitted", () => {
     const { queryByRole } = render(
       <Banner open title={bannerTitle} content={bannerContent}>
         {bannerActions}
@@ -80,7 +79,7 @@ describe("Banner", () => {
     expect(queryByRole("button")).toBeNull();
   });
 
-  it("should display the dismiss button when the onDismiss callback fn is provided", () => {
+  it("renders the dismiss button when the onDismiss callback is provided", () => {
     const handleDismiss = jest.fn();
     const { getByRole } = render(
       <Banner
@@ -110,8 +109,15 @@ describe("Banner", () => {
       </Banner>
     );
 
-    fireEvent.click(getByRole("button"));
+    const buttonTarget = getByRole("button");
+    fireEvent.click(buttonTarget);
     expect(handleDismiss).toHaveBeenCalledTimes(1);
+    expect(handleDismiss).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        type: "click",
+        target: buttonTarget,
+      })
+    );
   });
 
   it("should update the aria-label attribute on the dismiss button if dismissButtonLabel is provided", () => {
@@ -132,6 +138,17 @@ describe("Banner", () => {
       "aria-label",
       bannerDismissButtonLabel
     );
+  });
+
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(
+      <Banner ref={ref} open title={bannerTitle} content={bannerContent} />
+    );
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(role));
   });
 
   a11yCheck(() =>

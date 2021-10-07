@@ -12,14 +12,14 @@
 
 import { Story } from "@storybook/react";
 import Tabs from ".";
-import type { PropsTabs } from ".";
+import type { Props } from ".";
 
 export default {
   title: `Components/Tabs`,
   component: Tabs,
 };
 
-const Template: Story<PropsTabs> = ({ ariaLabel, selectedId }) => {
+const Template: Story<Props> = ({ ariaLabel, selectedId }) => {
   return (
     <Tabs id="sb-tabs-example" selectedId={selectedId} ariaLabel={ariaLabel}>
       <Tabs.Panel id="sb-tabs-example-1" label="Tab One">

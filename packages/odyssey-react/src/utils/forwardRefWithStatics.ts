@@ -16,13 +16,16 @@ import type {
   ForwardRefExoticComponent,
 } from "react";
 
-type BaseShape = Record<string, unknown>;
+/* eslint-disable-next-line @typescript-eslint/ban-types */
+type BaseShape = object;
+type Exotic<Props, Statics> = ForwardRefExoticComponent<Props> & Statics;
 
 export function forwardRefWithStatics<
-  IntrinsicElement = HTMLDivElement,
-  Props = BaseShape,
-  Statics = BaseShape,
-  Exotic = ForwardRefExoticComponent<Props> & Statics
->(render: ForwardRefRenderFunction<IntrinsicElement, Props>): Exotic {
-  return forwardRef(render) as unknown as Exotic;
+  IntrinsicElement extends HTMLElement = HTMLDivElement,
+  Props extends BaseShape = BaseShape,
+  Statics extends BaseShape = BaseShape
+>(
+  render: ForwardRefRenderFunction<IntrinsicElement, Props>
+): Exotic<Props, Statics> {
+  return forwardRef<IntrinsicElement, Props>(render) as Exotic<Props, Statics>;
 }

@@ -10,17 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import Button from ".";
 
 const button = "button";
 const buttonLabel = "Button Label";
 
 describe("Button", () => {
-  it("render the button", () => {
+  it("renders visibly into document", () => {
     const { getByText } = render(<Button children={buttonLabel} />);
 
-    expect(getByText(buttonLabel)).toBeInTheDocument();
+    expect(getByText(buttonLabel)).toBeVisible();
   });
 
   it("renders aria attrs via omit rest props", () => {
@@ -36,7 +36,7 @@ describe("Button", () => {
       <Button disabled={true}>{buttonLabel}</Button>
     );
 
-    expect(getByRole("button")).toHaveAttribute("disabled");
+    expect(getByRole(button)).toHaveAttribute("disabled");
   });
 
   it("should call onClick when clicked", () => {
@@ -45,8 +45,24 @@ describe("Button", () => {
       <Button onClick={handleClick} children="foo" />
     );
 
-    fireEvent.click(getByRole("button"));
+    const buttonTarget = getByRole(button);
+    fireEvent.click(getByRole(button));
     expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(handleClick).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        type: "click",
+        target: buttonTarget,
+      })
+    );
+  });
+
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(<Button ref={ref} children={buttonLabel} />);
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(button));
   });
 
   a11yCheck(() => render(<Button children="baz" />));
