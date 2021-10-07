@@ -8,6 +8,10 @@ jobs:
   warm-cache:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: develop
       - name: setup node
         uses: actions/setup-node@v2
         with:
