@@ -12,7 +12,8 @@
 
 import { useCallback, useRef, useEffect, forwardRef } from "react";
 import type { ComponentPropsWithRef, ChangeEvent } from "react";
-import { Check, Minus } from "../Icon";
+import CheckIcon from "../Icon/Check";
+import MinusIcon from "../Icon/Minus";
 import styles from "./Checkbox.module.scss";
 import { useOid, useOmit, withStyles } from "../../utils";
 
@@ -92,7 +93,7 @@ const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
       <label className={styles.label} htmlFor={oid}>
         <span className={styles.box} role="presentation">
           <span className={styles.indicator}>
-            {indeterminate ? <Minus /> : <Check />}
+            {indeterminate ? <MinusIcon /> : <CheckIcon />}
           </span>
         </span>
 
