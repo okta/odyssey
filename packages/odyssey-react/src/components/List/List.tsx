@@ -106,4 +106,4 @@ List.Item = ListItem;
 List.Term = DescriptionTerm;
 List.Details = DescriptionDetails;
 
-export default withStyles(styles)<Props, Statics>(List);
+export default withStyles(styles)(List);
