@@ -40,7 +40,7 @@ describe("Button", () => {
   });
 
   it("renders an icon", () => {
-    const { getByTitle } = render(
+    render(
       <Button
         icon={
           <svg>
@@ -50,7 +50,7 @@ describe("Button", () => {
       />
     );
 
-    expect(getByTitle("test").parentElement).toBeVisible();
+    expect(screen.getByTitle("test").parentElement).toBeVisible();
   });
 
   it("should call onClick when clicked", () => {
