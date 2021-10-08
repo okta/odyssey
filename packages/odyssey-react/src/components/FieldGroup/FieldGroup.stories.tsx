@@ -38,14 +38,11 @@ export default {
 const Template: Story<Props> = ({ title, desc }) => (
   <FieldGroup title={title} desc={desc}>
     <FieldGroup.Error>
-      <Infobox title="Route impossible" variant="danger">
-        <Infobox.Content>
-          <p>
-            Travel is impossible between these locations. Please select a new
-            destination.
-          </p>
-        </Infobox.Content>
-      </Infobox>
+      <Infobox
+        title="Route impossible"
+        variant="danger"
+        content="this is an error"
+      />
     </FieldGroup.Error>
     <TextInput label="Foo" hint="Bar" />
   </FieldGroup>

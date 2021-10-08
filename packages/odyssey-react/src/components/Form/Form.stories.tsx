@@ -40,14 +40,11 @@ export default {
 const Template: Story<Props> = ({ title, desc }) => (
   <Form title={title} desc={desc}>
     <Form.Error>
-      <Infobox title="Signal interrupted" variant="danger">
-        <Infobox.Content>
-          <p>
-            Solar flare activity has caused your submission to fail. Please try
-            again.
-          </p>
-        </Infobox.Content>
-      </Infobox>
+      <Infobox
+        title="Signal interrupted"
+        variant="danger"
+        content="This is an error."
+      />
     </Form.Error>
     <Form.Main>
       <FieldGroup
