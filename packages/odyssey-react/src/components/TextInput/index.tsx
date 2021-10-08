@@ -17,17 +17,14 @@ import type {
   ChangeEvent,
   RefCallback,
 } from "react";
-import styles from "./TextInput.module.scss";
-import { useOid } from "../../utils";
+import { useOid, useCx } from "../../utils";
 import SearchIcon from "../Icon/Search";
+import styles from "./TextInput.module.scss";
 
-import Field from '../Field';
-import type { SharedFieldTypes } from '../Field';
-import styles from './TextInput.module.scss';
-import { Search } from '../Icon';
-import Field from '../Field';
+import Field from "../Field";
+import type { SharedFieldTypes } from "../Field";
 
-export type Props = {
+export interface Props extends SharedFieldTypes {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
@@ -121,7 +118,6 @@ const TextInput: FunctionComponent<Props> = (props) => {
     required = true,
     type = "text",
     value,
-    // @todo pass the following in to field
     error,
     hint,
     label,
@@ -160,15 +156,18 @@ const TextInput: FunctionComponent<Props> = (props) => {
   );
 
   return (
-    <fieldset className={styles.fieldset}>
-      <div className={styles.fieldsetFlex}>
-        <label children={labelChildren} className={labelClass} htmlFor={oid} />
-        {type === "search" ? (
-          <span className={styles.outer}>
-            <span className={styles.indicator} role="presentation">
-              <SearchIcon />
-            </span>
-            {input}
+    <Field
+      error={error}
+      hint={hint}
+      inputId={oid}
+      label={label}
+      optionalLabel={optionalLabel}
+      required={required}
+    >
+      {type === "search" ? (
+        <span className={styles.outer}>
+          <span className={styles.indicator} role="presentation">
+            <SearchIcon />
           </span>
           {input}
         </span>
