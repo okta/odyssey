@@ -27,6 +27,11 @@ export interface SharedFieldTypes {
   optionalLabel?: string;
 
   /**
+   * Prefix to be read by SRs before announcing an error.
+   */
+  errorPrefix?: string;
+
+  /**
    * the form field error
    */
   error?: string;
@@ -91,6 +96,7 @@ const Field: FunctionComponent<Props> & StaticComponents = (props) => {
     inputId,
     label,
     optionalLabel,
+    errorPrefix,
     required = true,
     children,
     as = "div",
@@ -111,7 +117,11 @@ const Field: FunctionComponent<Props> & StaticComponents = (props) => {
       </Field.Label>
       {hint && <Field.Hint id={inputId}>{hint}</Field.Hint>}
       {children}
-      {error && <Field.Error id={inputId}>{error}</Field.Error>}
+      {error && (
+        <Field.Error id={inputId} errorPrefix={errorPrefix}>
+          {error}
+        </Field.Error>
+      )}
     </Tag>
   );
 };

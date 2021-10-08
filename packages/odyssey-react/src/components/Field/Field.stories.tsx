@@ -21,6 +21,7 @@ export default {
   args: {
     label: "Destination",
     optionalLabel: "Optional",
+    errorPrefix: "Error:",
   },
   argTypes: {
     error: { control: "text" },
