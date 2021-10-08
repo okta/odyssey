@@ -10,16 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithRef, ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import Title from "../Title";
 import { CautionIcon, CompleteIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Infobox.module.scss";
 
-export interface Props
+interface CommonProps
   extends Omit<
-    ComponentPropsWithRef<"aside">,
+    ComponentPropsWithoutRef<"aside">,
     "style" | "className" | "children" | "title" | "content"
   > {
   children?: never;
@@ -30,6 +30,11 @@ export interface Props
   variant?: "info" | "danger" | "caution" | "success";
 
   /**
+   * The title or headline of the Infobox. If Infobox.Content is not present it is required.
+   */
+  title?: string;
+
+  /**
    * Content to be rendered within the infobox.
    */
   content?: ReactNode;
@@ -38,12 +43,17 @@ export interface Props
    * Actions to be rendered within the infobox.
    */
   actions?: ReactNode;
-
-  /**
-   * The title or headline of the Infobox. If Infobox.Content is not present it is required.
-   */
-  title?: string;
 }
+
+interface TitleProps extends CommonProps {
+  title: string;
+}
+
+interface ContentProps extends CommonProps {
+  content: ReactNode;
+}
+
+export type Props = TitleProps | ContentProps;
 
 /**
  * An infobox is a type of alert that provides feedback in response to a
