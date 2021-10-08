@@ -13,7 +13,7 @@
 import type { Story } from "@storybook/react";
 import Link from ".";
 import type { Props } from ".";
-import Icon, { GetInfoIcon, iconDictionary } from "../Icon";
+import Icon, { GetInfoIcon } from "../Icon";
 
 export default {
   title: `Components/Link`,
