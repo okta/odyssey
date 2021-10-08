@@ -80,6 +80,23 @@ describe("Link", () => {
     expect(screen.getByRole(link)).toHaveAttribute("rel", "noopener");
   });
 
+  it("renders an icon", () => {
+    const { getByTitle } = render(
+      <Link
+        icon={
+          <svg>
+            <title>test</title>
+          </svg>
+        }
+        href={href}
+      >
+        {children}
+      </Link>
+    );
+
+    expect(getByTitle("test").parentElement).toBeVisible();
+  });
+
   it("invokes ref with expected args after render", () => {
     const ref = jest.fn();
 
