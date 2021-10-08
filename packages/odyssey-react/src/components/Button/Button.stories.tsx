@@ -13,6 +13,7 @@
 import { Story } from "@storybook/react";
 import Button from ".";
 import type { Props } from ".";
+import { CloseIcon, SettingsIcon } from "../Icon";
 
 export default {
   title: `Components/Button`,
@@ -33,15 +34,24 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({ variant, disabled, onClick, size, wide }) => (
+const Template: Story<Props> = ({
+  variant,
+  disabled,
+  onClick,
+  size,
+  wide,
+  icon,
+  children = "Button label",
+}) => (
   <Button
     variant={variant}
     onClick={onClick}
     disabled={disabled}
     size={size}
     wide={wide}
+    icon={icon}
   >
-    Button label
+    {children}
   </Button>
 );
 
@@ -80,6 +90,8 @@ Clear.argTypes = {
 export const Dismiss = Template.bind({});
 Dismiss.args = {
   variant: "dismiss",
+  icon: <CloseIcon />,
+  children: null,
 };
 Dismiss.argTypes = {
   onClick: { action: "clicked button/dismiss" },
@@ -115,4 +127,21 @@ Wide.args = {
 };
 Wide.argTypes = {
   onClick: { action: "clicked button/wide" },
+};
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  icon: <SettingsIcon />,
+};
+WithIcon.argTypes = {
+  onClick: { action: "clicked button/icon" },
+};
+
+export const IconOnly = Template.bind({});
+IconOnly.args = {
+  icon: <SettingsIcon />,
+  children: null,
+};
+IconOnly.argTypes = {
+  onClick: { action: "clicked button/justicon" },
 };

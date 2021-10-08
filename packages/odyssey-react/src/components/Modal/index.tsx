@@ -23,6 +23,7 @@ import type { Props as ButtonProps } from "../Button";
 import Title from "../Title";
 import { useOid, useCx } from "../../utils";
 import styles from "./Modal.module.scss";
+import { CloseIcon } from "../Icon";
 
 export type PropsModal = {
   /**
@@ -65,8 +66,9 @@ export type PropsModalFooter = {
 
 export type PropsModalButton = {
   close?: boolean;
-  children: ReactText;
+  children?: ReactText;
   variant?: ButtonProps["variant"];
+  icon?: ReactElement;
   onClick?: () => void;
 };
 
@@ -151,10 +153,7 @@ Modal.Header = function ModalHeader({ children }) {
   return (
     <header className={styles.header}>
       <span className={styles.dismiss}>
-        <Modal.Button close variant="dismiss">
-          {/* @todo Insert <Icon> component */}
-          &#8253;
-        </Modal.Button>
+        <Modal.Button close variant="dismiss" icon={<CloseIcon />} />
       </span>
       <Title
         id={modalTitleId}
@@ -175,10 +174,16 @@ Modal.Footer = ({ children }) => (
   <footer className={styles.footer}>{children}</footer>
 );
 
-Modal.Button = function ModalButton({ children, variant, close, onClick }) {
+Modal.Button = function ModalButton({
+  children,
+  variant,
+  close,
+  icon,
+  onClick,
+}) {
   const { onClose } = useContext(ModalContext);
   return (
-    <Button variant={variant} onClick={close ? onClose : onClick}>
+    <Button variant={variant} onClick={close ? onClose : onClick} icon={icon}>
       {children}
     </Button>
   );
