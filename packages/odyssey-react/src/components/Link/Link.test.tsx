@@ -81,7 +81,7 @@ describe("Link", () => {
   });
 
   it("renders an icon", () => {
-    const { getByTitle } = render(
+    render(
       <Link
         icon={
           <svg>
@@ -94,7 +94,7 @@ describe("Link", () => {
       </Link>
     );
 
-    expect(getByTitle("test").parentElement).toBeVisible();
+    expect(screen.getByTitle("test").parentElement).toBeVisible();
   });
 
   it("invokes ref with expected args after render", () => {
