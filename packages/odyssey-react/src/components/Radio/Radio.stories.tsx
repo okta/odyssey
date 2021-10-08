@@ -18,13 +18,13 @@ export default {
   title: `Components/Radio`,
   component: Radio.Group,
   args: {
-    label: "Select speed",
+    label: "Speed",
     name: "speed",
-    hint: "Something",
-    error: "Something else",
+    hint: "Select the speed at which you expect to travel.",
   },
   argTypes: {
     hint: { control: "text" },
+    error: { control: "text" },
     label: { control: "text" },
     required: { control: "boolean" },
     disabled: { control: "boolean" },
@@ -37,8 +37,8 @@ export default {
   },
 };
 
-const Template: Story<Props> = (args) => (
-  <Radio.Group {...args}>
+const Template: Story<Props> = (props) => (
+  <Radio.Group {...props}>
     <Radio.Button label="Lightspeed" value="light" />
     <Radio.Button label="Warp speed" value="warp" />
     <Radio.Button label="Ludicrous speed" value="ludicrous" />
@@ -46,9 +46,7 @@ const Template: Story<Props> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {
-  value: "warp",
-};
+Default.args = {};
 
 export const Disabled = Template.bind({});
 Disabled.args = {
@@ -56,3 +54,6 @@ Disabled.args = {
 };
 
 export const Invalid = Template.bind({});
+Invalid.args = {
+  error: "This field is required.",
+};
