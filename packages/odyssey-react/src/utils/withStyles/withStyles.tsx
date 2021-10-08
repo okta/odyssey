@@ -10,10 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef, useLayoutEffect } from "react";
+import type { ComponentType } from "react";
+import { useLayoutEffect } from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import OStyleSheet from "./stylesheet";
-import type { ComponentType, ElementRef } from "react";
+import { forwardRefWithStatics } from "../";
 
 export type Template = () => string;
 type SourceStyles = Record<string, string>;
@@ -37,15 +38,22 @@ const useStyles = (styles: Styles) => {
   }, [digest, template]);
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-types
+type BaseShape = object;
+
 function withStyles(styles: Styles) {
-  // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/explicit-module-boundary-types
-  return <Props extends object>(Composed: ComponentType<Props>) => {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  return <Props extends BaseShape, Statics extends BaseShape = BaseShape>(
+    Composed: ComponentType<Props>
+  ) => {
     return hoistNonReactStatics(
       Object.assign(
-        forwardRef<ElementRef<ComponentType<Props>>, Props>((props, ref) => {
-          useStyles(styles);
-          return <Composed ref={ref} {...props} />;
-        }),
+        forwardRefWithStatics<ComponentType<Props>, Props, Statics>(
+          (props, ref) => {
+            useStyles(styles);
+            return <Composed ref={ref} {...props} />;
+          }
+        ),
         {
           displayName: `withStyles(${
             Composed.displayName || Composed.name || "Component"
