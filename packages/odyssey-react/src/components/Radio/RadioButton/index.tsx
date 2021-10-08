@@ -60,9 +60,6 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
   const checked = value === controlledValue;
 
-  console.log(hint);
-  console.log(error);
-
   const ariaDescribedBy = useCx(
     hint && `${groupid}-hint`,
     error && `${groupid}-error`

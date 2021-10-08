@@ -78,15 +78,6 @@ describe("Radio", () => {
     expect(hintElement).toBeVisible();
   });
 
-  //it("invokes ref with expected args after render", () => {
-  //const ref = jest.fn();
-
-  //render(tree({ ref }));
-
-  //expect(ref).toHaveBeenCalledTimes(1);
-  //expect(ref).toHaveBeenLastCalledWith(screen.getByRole(groupRole));
-  //});
-
   it("invokes onChange with expected args when change input event fires", () => {
     const onChange = jest.fn();
     render(tree({ onChange }));
