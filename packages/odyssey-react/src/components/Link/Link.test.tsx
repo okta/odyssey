@@ -10,52 +10,90 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render } from "@testing-library/react";
-// import type { EventType } from "@testing-library/dom";
+import { render, screen } from "@testing-library/react";
 import Link from ".";
 
 const link = "link";
 const href = `#anchor`;
-const label = `Link label`;
+const children = `Link label`;
 
-describe("Checkbox", () => {
+describe("Link", () => {
   it("renders visibly into the document", () => {
-    const { getByRole } = render(<Link href={href}>{label}</Link>);
+    render(<Link href={href}>{children}</Link>);
 
-    expect(getByRole(link)).toBeVisible();
+    expect(screen.getByRole(link)).toBeVisible();
+    expect(screen.getByText(children)).toBeVisible();
+  });
+
+  it("requires href via types", () => {
+    // @ts-expect-error href is required
+    <Link children={children} />;
+
+    <Link href={href} children={children} />;
+  });
+
+  it("requires children via types", () => {
+    // @ts-expect-error children is required
+    <Link href={href} />;
+
+    <Link href={href} children={children} />;
+  });
+
+  it("restricts children via types", () => {
+    // @ts-expect-error children are typed as ReactText
+    <Link href={href} children={<div>"child"</div>} />;
+  });
+
+  it("restricts style prop via types", () => {
+    // @ts-expect-error style is omitted
+    <Link href={href} style={{ color: "#BADA55" }} />;
+  });
+
+  it("restricts className prop via types", () => {
+    // @ts-expect-error className is omitted
+    <Link href={href} className="foo" />;
   });
 
   it("renders href attributed as expected for link", () => {
-    const { getByRole } = render(<Link href={href}>{label}</Link>);
+    render(<Link href={href}>{children}</Link>);
 
-    expect(getByRole(link)).toHaveAttribute("href", href);
+    expect(screen.getByRole(link)).toHaveAttribute("href", href);
   });
 
   it("renders target attributed as expected for link", () => {
-    const { getByRole } = render(
+    render(
       <Link href={href} target="_blank">
-        {label}
+        {children}
       </Link>
     );
 
-    expect(getByRole(link)).toHaveAttribute("target", "_blank");
+    expect(screen.getByRole(link)).toHaveAttribute("target", "_blank");
   });
 
   it("renders rel attributed as expected for link", () => {
-    const { getByRole } = render(
+    render(
       <Link href={href} rel="noopener">
-        {label}
+        {children}
       </Link>
     );
 
-    expect(getByRole(link)).toHaveAttribute("rel", "noopener");
+    expect(screen.getByRole(link)).toHaveAttribute("rel", "noopener");
   });
 
-  a11yCheck(() => render(<Link href={href}>{label}</Link>));
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(<Link ref={ref} href={href} children={children} />);
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(link));
+  });
+
+  a11yCheck(() => render(<Link href={href}>{children}</Link>));
   a11yCheck(() =>
     render(
       <Link href={href} variant="secondary">
-        {label}
+        {children}
       </Link>
     )
   );
