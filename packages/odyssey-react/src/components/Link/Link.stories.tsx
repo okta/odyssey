@@ -13,17 +13,30 @@
 import type { Story } from "@storybook/react";
 import Link from ".";
 import type { Props } from ".";
+import Icon, { GetInfoIcon } from "../Icon";
 
 export default {
   title: `Components/Link`,
   component: Link,
 };
 
-const Template: Story<Props> = ({ children, variant, href, target, rel }) => (
-  <Link href={href} target={target} rel={rel} variant={variant}>
-    {children}
-  </Link>
-);
+const Template: Story<Props> = ({
+  children,
+  variant,
+  href,
+  target,
+  rel,
+  icon,
+}) => {
+  if (typeof icon === "string") {
+    icon = <Icon name={icon} />;
+  }
+  return (
+    <Link href={href} target={target} rel={rel} variant={variant} icon={icon}>
+      {children}
+    </Link>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {
@@ -36,6 +49,13 @@ Secondary.args = {
   href: "#anchor",
   variant: "secondary",
   children: "Secondary link",
+};
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  href: "#anchor",
+  children: "Secondary link",
+  icon: <GetInfoIcon />,
 };
 
 export const External = Template.bind({});

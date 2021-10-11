@@ -15,6 +15,7 @@ import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import Title from "../Title";
 import Button from "../Button";
+import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
 
 interface CommonProps
@@ -74,14 +75,18 @@ const Banner = forwardRef<HTMLDivElement, Props>((props, ref) => {
     !open && styles.isDismissed,
     onDismiss && styles.isDismissable
   );
+
   const omitProps = useOmit(rest);
+
+  const icon = {
+    caution: <CautionIcon />,
+    danger: <ErrorIcon />,
+    info: <GetInfoIcon />,
+  };
 
   return (
     <div {...omitProps} ref={ref} className={componentClass} role="status">
-      <span className={styles.icon}>
-        {/* @todo Insert <Icon> component */}
-        &#8253;
-      </span>
+      <span className={styles.icon}>{icon[variant]}</span>
       {title && (
         <div className={styles.title}>
           <Title
@@ -100,10 +105,8 @@ const Banner = forwardRef<HTMLDivElement, Props>((props, ref) => {
             variant="dismiss"
             onClick={onDismiss}
             aria-label={dismissButtonLabel}
-          >
-            {/* @todo Insert <Icon> component, dismiss variant */}
-            &#8253;
-          </Button>
+            icon={<CloseIcon />}
+          />
         </span>
       )}
     </div>

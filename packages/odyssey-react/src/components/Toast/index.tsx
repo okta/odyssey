@@ -20,6 +20,13 @@ import type { FunctionComponent, ReactNode, AnimationEvent } from "react";
 import { useCx, useOmit, useOid, oid } from "../../utils";
 import styles from "./Toast.module.scss";
 import Button from "../Button";
+import {
+  GetInfoIcon,
+  ErrorIcon,
+  CautionIcon,
+  CompleteIcon,
+  CloseIcon,
+} from "../Icon";
 import type { Props as ButtonProps } from "../Button";
 
 export type ToastVariants = "info" | "success" | "caution" | "danger";
@@ -88,6 +95,13 @@ export const ToastContext = createContext<Context>({
   addToast: () => void 0,
 });
 
+const icon = {
+  info: <GetInfoIcon />,
+  danger: <ErrorIcon />,
+  caution: <CautionIcon />,
+  success: <CompleteIcon />,
+};
+
 /**
  * Toasts are transient, non-disruptive messages that provide at-a-glance,
  * asynchronous feedback or updates.
@@ -104,9 +118,7 @@ const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
 
   return (
     <aside {...omitProps} role="status" id={xid} className={componentClass}>
-      <span className={styles.icon}>
-        {/* @todo Insert <Icon> component */} &#8253;
-      </span>
+      <span className={styles.icon}>{icon[variant]}</span>
       <h1 className={styles.title}>{title}</h1>
       {body && <p className={styles.body}>{body}</p>}
       <span className={styles.dismiss}>
@@ -114,9 +126,8 @@ const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
           variant="dismiss"
           onClick={onDismiss}
           aria-label="Dismiss toast"
-        >
-          {/* @todo Insert <Icon> component */} &#8253;
-        </Button>
+          icon={<CloseIcon />}
+        />
       </span>
     </aside>
   );
