@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactElement, ComponentPropsWithRef, ForwardedRef } from "react";
+import type {
+  ReactElement,
+  ComponentPropsWithoutRef,
+  ForwardedRef,
+} from "react";
 import { forwardRefWithStatics, useOmit, useCx, withStyles } from "../../utils";
 import styles from "./List.module.scss";
 import ListItem from "./ListItem";
@@ -34,9 +38,9 @@ type ListProps = {
   unstyled?: boolean;
 };
 
-type UnorderedProps = ListProps & ComponentPropsWithRef<"ul">;
-type OrderedProps = ListProps & ComponentPropsWithRef<"ol">;
-type DescriptionProps = ListProps & ComponentPropsWithRef<"dl">;
+type UnorderedProps = ListProps & ComponentPropsWithoutRef<"ul">;
+type OrderedProps = ListProps & ComponentPropsWithoutRef<"ol">;
+type DescriptionProps = ListProps & ComponentPropsWithoutRef<"dl">;
 
 export type Props = Omit<
   UnorderedProps | OrderedProps | DescriptionProps,
@@ -106,4 +110,4 @@ List.Item = ListItem;
 List.Term = DescriptionTerm;
 List.Details = DescriptionDetails;
 
-export default withStyles(styles)<Props, Statics>(List);
+export default withStyles(styles)(List);

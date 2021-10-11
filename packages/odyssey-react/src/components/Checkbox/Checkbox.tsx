@@ -11,7 +11,7 @@
  */
 
 import { useCallback, useRef, useEffect, forwardRef } from "react";
-import type { ComponentPropsWithRef, ChangeEvent } from "react";
+import type { ComponentPropsWithoutRef, ChangeEvent } from "react";
 import CheckIcon from "../Icon/Check";
 import MinusIcon from "../Icon/Minus";
 import styles from "./Checkbox.module.scss";
@@ -19,7 +19,7 @@ import { useOid, useOmit, withStyles } from "../../utils";
 
 export interface Props
   extends Omit<
-    ComponentPropsWithRef<"input">,
+    ComponentPropsWithoutRef<"input">,
     "onChange" | "style" | "className" | "type" | "children"
   > {
   children?: never;

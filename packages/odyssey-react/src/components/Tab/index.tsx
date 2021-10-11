@@ -65,6 +65,7 @@ export type PropsTabsPanel = {
   selected?: boolean;
 };
 export interface PropsTabsList
+  // eslint-disable-next-line @typescript-eslint/ban-types
   extends Omit<ComponentPropsWithRef<"div">, "style" | "className"> {
   children: ReactElement | ReactElement[];
 }

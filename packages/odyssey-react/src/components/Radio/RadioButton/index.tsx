@@ -11,14 +11,14 @@
  */
 
 import { forwardRef } from "react";
-import type { ComponentPropsWithRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import { useRadioGroup } from "../context";
 import { useOid, useOmit } from "../../../utils";
 
 import styles from "../RadioButton.module.scss";
 
 export interface Props
-  extends Omit<ComponentPropsWithRef<"input">, "style" | "className"> {
+  extends Omit<ComponentPropsWithoutRef<"input">, "style" | "className"> {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
