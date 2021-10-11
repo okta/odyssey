@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ComponentPropsWithRef, forwardRef } from "react";
+import { ComponentPropsWithoutRef, forwardRef } from "react";
 import { useOmit } from "../../utils";
 import { iconDictionary } from "./";
 
 export interface Props
-  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
+  extends Omit<ComponentPropsWithoutRef<"svg">, "style" | "className"> {
   /**
    * Title text used by screen readers
    */

@@ -44,6 +44,22 @@ module.exports = {
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
       ],
+      rules: {
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            extendDefaults: true,
+            types: {
+              ComponentPropsWithRef: {
+                // NOTE: https://git.io/JoNWA
+                message:
+                  "Use ComponentPropsWithoutRef instead to allow for distributive union props",
+                fixWith: "ComponentPropsWithoutRef",
+              },
+            },
+          },
+        ],
+      },
     },
     {
       files: ["jest.setup.js", "*.test.*"],

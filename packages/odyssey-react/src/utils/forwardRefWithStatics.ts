@@ -11,20 +11,17 @@
  */
 
 import { forwardRef } from "react";
-import type {
-  ComponentType,
-  ForwardRefRenderFunction,
-  ForwardRefExoticComponent,
-} from "react";
+import type { ForwardRefRenderFunction } from "react";
 
 /* eslint-disable-next-line @typescript-eslint/ban-types */
 type BaseShape = object;
-type Exotic<Props, Statics> = ForwardRefExoticComponent<Props> & Statics;
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function forwardRefWithStatics<
-  Ref extends Element | ComponentType<Props>,
+  Ref,
   Props extends BaseShape,
   Statics extends BaseShape
->(render: ForwardRefRenderFunction<Ref, Props>): Exotic<Props, Statics> {
-  return forwardRef<Ref, Props>(render) as Exotic<Props, Statics>;
+>(render: ForwardRefRenderFunction<Ref, Props>) {
+  const Forwarded = forwardRef<Ref, Props>(render);
+  return Forwarded as typeof Forwarded & Statics;
 }

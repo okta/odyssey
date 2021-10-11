@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
+import type { ReactNode, ReactElement, ComponentPropsWithoutRef } from "react";
 
 import { useOmit, forwardRefWithStatics } from "../../utils";
 
@@ -50,7 +50,7 @@ export type Props = {
    */
   caption: string;
 } & ContainerProps &
-  ComponentPropsWithRef<"table">;
+  ComponentPropsWithoutRef<"table">;
 
 type Statics = {
   Container: typeof TableContainer;

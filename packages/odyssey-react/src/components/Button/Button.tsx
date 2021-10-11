@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithRef, ReactElement } from "react";
+import type { ComponentPropsWithoutRef, ReactElement } from "react";
 import { forwardRef } from "react";
 import { withStyles, useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
 
 export interface Props
-  extends Omit<ComponentPropsWithRef<"button">, "style" | "className"> {
+  extends Omit<ComponentPropsWithoutRef<"button">, "style" | "className"> {
   /**
    * Icon to display
    */

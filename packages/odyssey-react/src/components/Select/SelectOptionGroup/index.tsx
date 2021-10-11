@@ -11,11 +11,11 @@
  */
 
 import { forwardRef } from "react";
-import type { ReactElement, ComponentPropsWithRef } from "react";
+import type { ReactElement, ComponentPropsWithoutRef } from "react";
 import { useOmit } from "../../../utils";
 
 export interface Props
-  extends Omit<ComponentPropsWithRef<"optgroup">, "style" | "className"> {
+  extends Omit<ComponentPropsWithoutRef<"optgroup">, "style" | "className"> {
   /**
    * One or more option to be used together as a group
    */

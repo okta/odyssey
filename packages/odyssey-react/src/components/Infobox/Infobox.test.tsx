@@ -28,6 +28,15 @@ describe("Infobox", () => {
     expect(screen.getByText(actions)).toBeVisible();
   });
 
+  it("restricts title and content props via types", () => {
+    // @ts-expect-error requires title or content prop
+    <Infobox />;
+
+    <Infobox title={title} />;
+    <Infobox content={content} />;
+    <Infobox title={title} content={content} />;
+  });
+
   it("restricts children prop via types and does not render them", () => {
     render(
       // @ts-expect-error never type for children
