@@ -17,8 +17,17 @@ import sass from "sass";
 import postcss from "postcss";
 
 const isProduction = process.env.NODE_ENV === "production";
-const withStyles =
-  /\/(Banner|Button|Checkbox|Infobox|List|Link)\.module\.scss$/;
+const withStyles = new RegExp(
+  `\/(${[
+    "Banner",
+    "Button",
+    "Checkbox",
+    "Infobox",
+    "List",
+    "Link",
+    "ScreenReaderText",
+  ].join("|")})\\.module\\.scss$`
+);
 
 module.exports = {
   typescript: {
