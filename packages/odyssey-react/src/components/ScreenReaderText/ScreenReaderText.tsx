@@ -15,10 +15,10 @@ import type {
   FunctionComponent,
   ReactText,
 } from "react";
-import { useOmit } from "../../utils";
+import { withStyles, useOmit } from "../../utils";
 import styles from "./ScreenReaderText.module.scss";
 
-export interface Props
+interface Props
   extends Omit<ComponentPropsWithoutRef<"span">, "style" | "className"> {
   /**
    * Visibly hidden / SR-only text
@@ -45,4 +45,7 @@ const ScreenReaderText: FunctionComponent<Props> = (props) => {
     </Tag>
   );
 };
-export default ScreenReaderText;
+
+ScreenReaderText.displayName = "ScreenReaderText";
+
+export default withStyles(styles)(ScreenReaderText);
