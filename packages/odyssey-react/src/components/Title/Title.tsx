@@ -10,28 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ComponentPropsWithoutRef,
-  FunctionComponent,
-  ReactText,
-} from "react";
-import { useCx, useOmit } from "../../utils";
+import type { ComponentPropsWithoutRef, ReactText } from "react";
+import { forwardRef } from "react";
+import { useCx, useOmit, withStyles } from "../../utils";
 import styles from "./Title.module.scss";
 
-type Levels = "1" | "2" | "3" | "4" | "5" | "6";
-
-export interface Props
+interface Props
   extends Omit<ComponentPropsWithoutRef<"h1">, "style" | "className"> {
   /**
    * The semantic level for the underlying heading tag
    * @default 1
    */
-  level?: Levels;
+  level?: "1" | "2" | "3" | "4" | "5" | "6";
 
   /**
    * The visual level level for the underlying heading tag
    */
-  visualLevel?: Levels;
+  visualLevel?: Props["level"];
 
   /**
    * The human readable section title to be visually displayed
@@ -44,20 +39,18 @@ export interface Props
    */
   noEndMargin?: boolean;
 
-  /*
+  /**
    * Specify explicit line height spacing
    */
   lineHeight?: "base" | "title";
 }
 
 /**
- * Titles are used to describe the main idea of a page, a section,
+ * Title are used to describe the main idea of a page, a section,
  * or content that follows it. By default, header tags (h1 through h6)
- * use the corresponding title size.
- *
- * @component
+ * use the corresponding visual size.
  */
-const Title: FunctionComponent<Props> = (props) => {
+const Title = forwardRef<HTMLHeadingElement, Props>((props, ref) => {
   const {
     level = "1",
     visualLevel,
@@ -79,10 +72,12 @@ const Title: FunctionComponent<Props> = (props) => {
   const omitProps = useOmit(rest);
 
   return (
-    <Tag {...omitProps} className={componentClass}>
+    <Tag {...omitProps} ref={ref} className={componentClass}>
       {children}
     </Tag>
   );
-};
+});
 
-export default Title;
+Title.displayName = "Title";
+
+export default withStyles(styles)(Title);
