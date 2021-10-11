@@ -26,6 +26,7 @@ const withStyles = new RegExp(
     "List",
     "Link",
     "ScreenReaderText",
+    "Title",
   ].join("|")})\\.module\\.scss$`
 );
 
