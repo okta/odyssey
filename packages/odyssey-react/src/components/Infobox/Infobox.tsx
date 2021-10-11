@@ -14,6 +14,7 @@ import type { ComponentPropsWithRef, ReactNode } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import Title from "../Title";
+import { CautionIcon, CompleteIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Infobox.module.scss";
 
 export interface Props
@@ -54,11 +55,16 @@ const Infobox = forwardRef<HTMLElement, Props>((props, ref) => {
   const classNames = useCx(styles.root, styles[`${variant}Variant`]);
   const omitProps = useOmit(rest);
 
+  const icon = {
+    caution: <CautionIcon />,
+    danger: <ErrorIcon />,
+    info: <GetInfoIcon />,
+    success: <CompleteIcon />,
+  };
+
   return (
     <aside {...omitProps} ref={ref} className={classNames} role="status">
-      <span className={styles.icon}>
-        {/* @todo Insert <Icon> component */}‽
-      </span>
+      <span className={styles.icon}>{icon[variant]}</span>
       {title && (
         <div className={styles.title}>
           <Title visualLevel="6" children={title} />

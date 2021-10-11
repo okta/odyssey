@@ -39,6 +39,20 @@ describe("Button", () => {
     expect(getByRole(button)).toHaveAttribute("disabled");
   });
 
+  it("renders an icon", () => {
+    render(
+      <Button
+        icon={
+          <svg>
+            <title>test</title>
+          </svg>
+        }
+      />
+    );
+
+    expect(screen.getByTitle("test").parentElement).toBeVisible();
+  });
+
   it("should call onClick when clicked", () => {
     const handleClick = jest.fn();
     const { getByRole } = render(

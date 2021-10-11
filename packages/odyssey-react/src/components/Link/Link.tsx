@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithRef, ReactText } from "react";
+import type { ComponentPropsWithRef, ReactText, ReactElement } from "react";
 import { forwardRef } from "react";
 import { ExternalIcon } from "../Icon";
 import { useCx, useOmit, withStyles } from "../../utils";
@@ -36,19 +36,25 @@ export interface Props
    * The human readable/percievable value shown to the user
    */
   children: ReactText;
+
+  /**
+   * An icon component to be inserted into the Link.
+   */
+  icon?: ReactElement;
 }
 
 /**
  * Links are navigation elements displayed as text. Use a Link to bring a user to another page or start a download.
  */
 const Link = forwardRef<HTMLAnchorElement, Props>((props, ref) => {
-  const { children, variant = "primary", ...rest } = props;
+  const { children, variant = "primary", icon, ...rest } = props;
   const classNames = useCx(styles.root, styles[`${variant}Variant`]);
   const omitProps = useOmit(rest);
   const external = rest.target === `_blank`;
 
   return (
     <a {...omitProps} ref={ref} className={classNames}>
+      {icon && <span className={styles.icon}>{icon}</span>}
       {children}
       {external && (
         <span className={styles.indicator} role="presentation">

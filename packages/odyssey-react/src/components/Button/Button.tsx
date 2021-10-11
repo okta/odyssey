@@ -10,13 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithRef } from "react";
+import type { ComponentPropsWithRef, ReactElement } from "react";
 import { forwardRef } from "react";
 import { withStyles, useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
 
 export interface Props
   extends Omit<ComponentPropsWithRef<"button">, "style" | "className"> {
+  /**
+   * Icon to display
+   */
+  icon?: ReactElement;
+
   /**
    * The size to be displayed to the user.
    * @default m
@@ -39,7 +44,14 @@ export interface Props
  * A clickable button used for form submissions and most in-page interactions.
  */
 const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
-  const { children, size = "m", variant = "primary", wide, ...rest } = props;
+  const {
+    children,
+    size = "m",
+    variant = "primary",
+    wide,
+    icon,
+    ...rest
+  } = props;
 
   const componentClass = useCx(
     styles.root,
@@ -54,7 +66,8 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
 
   return (
     <button {...omitProps} ref={ref} className={componentClass}>
-      <span className={styles.label}>{children}</span>
+      {icon && <span className={styles.icon}>{icon}</span>}
+      {children && <span className={styles.label}>{children}</span>}
     </button>
   );
 });
