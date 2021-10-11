@@ -11,12 +11,12 @@
  */
 
 import { forwardRef } from "react";
-import type { ComponentPropsWithRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import { useOmit } from "../../../utils";
 
 export interface Props
   extends Omit<
-    ComponentPropsWithRef<"option">,
+    ComponentPropsWithoutRef<"option">,
     "style" | "className" | "selected"
   > {
   /**

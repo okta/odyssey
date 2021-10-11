@@ -11,7 +11,11 @@
  */
 
 import { forwardRef } from "react";
-import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
+import type {
+  ChangeEvent,
+  ReactElement,
+  ComponentPropsWithoutRef,
+} from "react";
 import { RadioGroupProvider } from "../context";
 import { useOmit } from "../../../utils";
 
@@ -19,7 +23,7 @@ import styles from "../RadioGroup.module.scss";
 
 export interface Props
   extends Omit<
-    ComponentPropsWithRef<"fieldset">,
+    ComponentPropsWithoutRef<"fieldset">,
     "onChange" | "style" | "className"
   > {
   /**

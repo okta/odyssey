@@ -11,7 +11,11 @@
  */
 
 import { useCallback } from "react";
-import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
+import type {
+  ChangeEvent,
+  ReactElement,
+  ComponentPropsWithoutRef,
+} from "react";
 import SelectOption from "../SelectOption";
 import SelectOptionGroup from "../SelectOptionGroup";
 import useChoices from "./useChoices";
@@ -22,7 +26,7 @@ import CaretDownIcon from "../../Icon/CaretDown";
 
 export interface Props
   extends Omit<
-    ComponentPropsWithRef<"select">,
+    ComponentPropsWithoutRef<"select">,
     "onChange" | "style" | "className"
   > {
   /**
