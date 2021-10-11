@@ -10,18 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { screen, render } from "@testing-library/react";
-import ScreenReaderText from ".";
-
-const content = "This string is visually hidden, but screen-reader accessible.";
-
-describe("ScreenReaderText", () => {
-  it("renders visible only to screen readers", () => {
-    render(<ScreenReaderText>{content}</ScreenReaderText>);
-
-    expect(screen.getByText(content)).toBeVisible();
-    expect(screen.getByText(content)).toHaveStyle(`clip: rect(0 0 0 0)`);
-  });
-
-  a11yCheck(() => render(<ScreenReaderText>{content}</ScreenReaderText>));
-});
+export { default } from "./ScreenReaderText";
