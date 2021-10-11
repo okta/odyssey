@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithRef, MouseEventHandler } from "react";
+import type { ComponentPropsWithoutRef, MouseEventHandler } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import Title from "../Title";
@@ -19,7 +19,7 @@ import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
 
 interface CommonProps
-  extends Omit<ComponentPropsWithRef<"div">, "style" | "className"> {
+  extends Omit<ComponentPropsWithoutRef<"div">, "style" | "className"> {
   /**
    * The visual variant to be displayed to the user.
    * @default info

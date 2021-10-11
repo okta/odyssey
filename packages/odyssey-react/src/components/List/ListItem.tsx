@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import { forwardRef } from "react";
 import { useOmit } from "../../utils";
 
 import styles from "./List.module.scss";
 
-export type Props = Omit<ComponentPropsWithRef<"li">, "style" | "className">;
+export type Props = Omit<ComponentPropsWithoutRef<"li">, "style" | "className">;
 
 const ListItem = forwardRef<HTMLLIElement, Props>((props, ref) => {
   const { children, ...rest } = props;

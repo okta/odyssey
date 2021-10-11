@@ -13,7 +13,7 @@
 import {
   Children,
   cloneElement,
-  ComponentPropsWithRef,
+  ComponentPropsWithoutRef,
   forwardRef,
 } from "react";
 import type { ReactElement } from "react";
@@ -22,7 +22,7 @@ import { useOid, useOmit } from "../../utils";
 import styles from "./Icon.module.scss";
 
 export interface Props
-  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
+  extends Omit<ComponentPropsWithoutRef<"svg">, "style" | "className"> {
   /**
    * Title text used by screen readers
    */
