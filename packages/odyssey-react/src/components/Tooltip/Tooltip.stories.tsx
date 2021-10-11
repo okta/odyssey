@@ -11,10 +11,10 @@
  */
 
 import type { Story } from "@storybook/react";
+import type { ComponentProps } from "react";
 import { action } from "@storybook/addon-actions";
 import { Button } from "../../";
 import Tooltip from ".";
-import type { Props } from ".";
 
 export default {
   title: `Components/Tooltip`,
@@ -24,7 +24,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = () => (
+const Template: Story<ComponentProps<typeof Tooltip>> = () => (
   <>
     <Tooltip label="Top tooltip label" position="top">
       <Button variant="primary" onClick={action("Top button clicked")}>
