@@ -11,15 +11,17 @@
  */
 
 import type { Story } from "@storybook/react";
+import type { ComponentProps } from "react";
 import ScreenReaderText from ".";
-import type { Props } from ".";
 
 export default {
   title: `Utilities/ScreenReaderText`,
   component: ScreenReaderText,
 };
 
-const Template: Story<Props> = ({ children }) => (
+const Template: Story<ComponentProps<typeof ScreenReaderText>> = ({
+  children,
+}) => (
   <p>
     The following content is visually hidden:{" "}
     <ScreenReaderText>{children}</ScreenReaderText>
