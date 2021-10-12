@@ -14,7 +14,6 @@ import type {
   ChangeEvent,
   ReactElement,
   ComponentPropsWithoutRef,
-  FunctionComponent,
 } from "react";
 import { RadioGroupProvider } from "../context";
 
@@ -72,7 +71,7 @@ export interface Props
  * Radios appear as a ring shaped UI accompanied by a caption that allows
  * the user to choose only one option at a time.
  */
-const RadioGroup: FunctionComponent<Props> = (props) => {
+const RadioGroup = (props: Props): JSX.Element => {
   const {
     children,
     disabled = false,
