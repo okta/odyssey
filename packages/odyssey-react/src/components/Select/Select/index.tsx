@@ -27,10 +27,11 @@ import styles from "../Select.module.scss";
 import CaretDownIcon from "../../Icon/CaretDown";
 
 export interface Props
-  extends Omit<
-    ComponentPropsWithoutRef<"select">,
-    "onChange" | "style" | "className"
-  > {
+  extends SharedFieldTypes,
+    Omit<
+      ComponentPropsWithoutRef<"select">,
+      "onChange" | "style" | "className"
+    > {
   /**
    * One or more options or option groups to be used together as a group
    */
