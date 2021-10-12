@@ -20,11 +20,10 @@ import Field from "../Field";
 import type { SharedFieldTypes } from "../Field";
 
 export interface Props
-  extends Pick<SharedFieldTypes, "error">,
-    Omit<
-      ComponentPropsWithoutRef<"input">,
-      "onChange" | "style" | "className" | "type" | "children"
-    > {
+  extends Omit<
+    ComponentPropsWithoutRef<"input">,
+    "onChange" | "style" | "className" | "type" | "children"
+  > {
   children?: never;
   /**
    * The form field label
@@ -43,6 +42,8 @@ export interface Props
    * @param {string} value the string value of the input
    */
   onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
+
+  error: SharedFieldTypes["error"];
 }
 
 /**
