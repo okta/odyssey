@@ -43,7 +43,7 @@ export interface Props
    */
   onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
 
-  error: SharedFieldTypes["error"];
+  error?: SharedFieldTypes["error"];
 }
 
 /**
