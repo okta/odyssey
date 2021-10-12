@@ -155,6 +155,15 @@ const TextInput: FunctionComponent<Props> = (props) => {
     />
   );
 
+  const search = (
+    <span className={styles.outer}>
+      <span className={styles.indicator} role="presentation">
+        <SearchIcon />
+      </span>
+      {input}
+    </span>
+  );
+
   return (
     <Field
       error={error}
@@ -164,16 +173,7 @@ const TextInput: FunctionComponent<Props> = (props) => {
       optionalLabel={optionalLabel}
       required={required}
     >
-      {type === "search" ? (
-        <span className={styles.outer}>
-          <span className={styles.indicator} role="presentation">
-            <SearchIcon />
-          </span>
-          {input}
-        </span>
-      ) : (
-        input
-      )}
+      {type === "search" ? search : input}
     </Field>
   );
 };
