@@ -20,7 +20,7 @@ import Field from "../Field";
 import type { SharedFieldTypes } from "../Field";
 
 export interface Props
-  extends SharedFieldTypes,
+  extends Pick<SharedFieldTypes, "error">,
     Omit<
       ComponentPropsWithoutRef<"input">,
       "onChange" | "style" | "className" | "type" | "children"
