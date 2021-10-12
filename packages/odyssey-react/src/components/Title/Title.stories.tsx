@@ -11,8 +11,8 @@
  */
 
 import { Story } from "@storybook/react";
-import type { ComponentProps } from "react";
 import Title from ".";
+import type { Props } from ".";
 
 export default {
   title: `Components/Title`,
@@ -24,11 +24,9 @@ export default {
   },
 };
 
-const Template: Story<ComponentProps<typeof Title>> = ({
-  level,
-  visualLevel,
-  children,
-}) => <Title level={level} visualLevel={visualLevel} children={children} />;
+const Template: Story<Props> = ({ level, visualLevel, children }) => (
+  <Title level={level} visualLevel={visualLevel} children={children} />
+);
 
 export const Primary = Template.bind({});
 Primary.args = {

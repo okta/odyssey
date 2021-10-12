@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithoutRef, ReactText } from "react";
+import type {
+  ComponentProps,
+  ComponentPropsWithoutRef,
+  ReactText,
+} from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import styles from "./Title.module.scss";
@@ -50,7 +54,7 @@ interface Props
  * or content that follows it. By default, header tags (h1 through h6)
  * use the corresponding visual size.
  */
-const Title = forwardRef<HTMLHeadingElement, Props>((props, ref) => {
+let Title = forwardRef<HTMLHeadingElement, Props>((props, ref) => {
   const {
     level = "1",
     visualLevel,
@@ -80,4 +84,9 @@ const Title = forwardRef<HTMLHeadingElement, Props>((props, ref) => {
 
 Title.displayName = "Title";
 
-export default withStyles(styles)(Title);
+Title = withStyles(styles)(Title);
+
+type TitleProps = ComponentProps<typeof Title>;
+export type { TitleProps as Props };
+
+export default Title;
