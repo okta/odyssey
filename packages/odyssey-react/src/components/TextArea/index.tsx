@@ -18,7 +18,7 @@ import type {
   RefCallback,
 } from "react";
 import styles from "./TextArea.module.scss";
-import { useOid, useCx } from "../../utils";
+import { useOid, useCx, withStyles } from "../../utils";
 import Field from "../Field";
 import type { SharedFieldTypes } from "../Field";
 
@@ -154,4 +154,4 @@ const TextArea: FunctionComponent<Props> = (props) => {
   );
 };
 
-export default TextArea;
+export default withStyles(styles)(TextArea);

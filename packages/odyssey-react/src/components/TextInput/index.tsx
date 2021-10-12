@@ -17,7 +17,7 @@ import type {
   ChangeEvent,
   RefCallback,
 } from "react";
-import { useOid, useCx } from "../../utils";
+import { useOid, useCx, withStyles } from "../../utils";
 import SearchIcon from "../Icon/Search";
 import styles from "./TextInput.module.scss";
 
@@ -178,4 +178,4 @@ const TextInput: FunctionComponent<Props> = (props) => {
   );
 };
 
-export default TextInput;
+export default withStyles(styles)(TextInput);

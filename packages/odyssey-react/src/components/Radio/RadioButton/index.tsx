@@ -13,7 +13,7 @@
 import { forwardRef } from "react";
 import type { ComponentPropsWithoutRef } from "react";
 import { useRadioGroup } from "../context";
-import { useCx, useOid, useOmit } from "../../../utils";
+import { useCx, useOid, useOmit, withStyles } from "../../../utils";
 
 import styles from "../RadioButton.module.scss";
 
@@ -88,4 +88,4 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
   );
 });
 
-export default RadioButton;
+export default withStyles(styles)(RadioButton);

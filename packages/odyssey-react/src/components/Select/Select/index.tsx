@@ -19,7 +19,12 @@ import type {
 import SelectOption from "../SelectOption";
 import SelectOptionGroup from "../SelectOptionGroup";
 import useChoices from "./useChoices";
-import { forwardRefWithStatics, useOid, useOmit } from "../../../utils";
+import {
+  forwardRefWithStatics,
+  useOid,
+  useOmit,
+  withStyles,
+} from "../../../utils";
 import Field from "../../Field";
 import type { SharedFieldTypes } from "../../Field";
 
@@ -146,4 +151,4 @@ export interface Statics {
 Select.Option = SelectOption;
 Select.OptionGroup = SelectOptionGroup;
 
-export default Select;
+export default withStyles(styles)(Select);
