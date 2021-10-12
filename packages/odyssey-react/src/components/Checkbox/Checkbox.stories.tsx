@@ -21,6 +21,7 @@ export default {
   args: {
     label: "Checkbox label",
     value: "checkbox_value",
+    errorPrefix: "Error:",
   },
   argTypes: {
     checked: { control: "boolean" },
@@ -32,6 +33,7 @@ export default {
     required: { control: "boolean" },
     value: { control: "text" },
     error: { control: "text" },
+    errorPrefix: { control: "text" },
   },
 };
 

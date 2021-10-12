@@ -133,6 +133,7 @@ const TextArea: FunctionComponent<Props> = (props) => {
       hint={hint}
       label={label}
       optionalLabel={optionalLabel}
+      required={required}
     >
       <textarea
         aria-describedby={ariaDescribedBy}
