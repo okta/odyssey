@@ -12,6 +12,7 @@
 
 import type { FunctionComponent, ReactElement, ReactText } from "react";
 import ScreenReaderText from "../ScreenReaderText";
+import { withStyles } from "../../utils";
 
 import styles from "./Field.module.scss";
 
@@ -166,4 +167,4 @@ Field.Label = Label;
 Field.Hint = Hint;
 Field.Error = Error;
 
-export default Field;
+export default withStyles(styles)(Field);

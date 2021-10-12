@@ -11,7 +11,7 @@
  */
 
 import type { FunctionComponent, ReactNode, ReactElement } from "react";
-import { useOmit } from "../../utils";
+import { useOmit, withStyles } from "../../utils";
 
 import styles from "./FieldGroup.module.scss";
 
@@ -60,4 +60,4 @@ const Error = ({ children }: PropsError) => (
 
 FieldGroup.Error = Error;
 
-export default FieldGroup;
+export default withStyles(styles)(FieldGroup);

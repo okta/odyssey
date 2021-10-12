@@ -11,7 +11,7 @@
  */
 
 import type { FunctionComponent, ReactNode, ReactElement } from "react";
-import { useOmit } from "../../utils";
+import { useOmit, withStyles } from "../../utils";
 
 import Title from "../Title";
 
@@ -85,4 +85,4 @@ Form.Error = Error;
 Form.Main = Main;
 Form.Actions = Actions;
 
-export default Form;
+export default withStyles(styles)(Form);
