@@ -133,7 +133,10 @@ const TextInput: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
-  const ariaDescribedBy = useCx(hint && `${oid}-hint`, error && `${oid}-error`);
+  const ariaDescribedBy = useCx(
+    hint && `${oid}-hint`,
+    typeof error !== "undefined" && `${oid}-error`
+  );
 
   const input = (
     <input
@@ -170,6 +173,7 @@ const TextInput: FunctionComponent<Props> = (props) => {
       hint={hint}
       inputId={oid}
       label={label}
+      labelHidden={type === "search" ? true : false}
       optionalLabel={optionalLabel}
       required={required}
     >

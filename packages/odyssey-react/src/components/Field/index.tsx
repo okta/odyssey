@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactElement, ReactText } from "react";
+import type {
+  FunctionComponent,
+  ReactElement,
+  ReactNode,
+  ReactText,
+} from "react";
+import ScreenReaderText from "../ScreenReaderText";
 import { withStyles } from "../../utils";
 
 import styles from "./Field.module.scss";
@@ -27,9 +33,14 @@ export interface SharedFieldTypes {
   optionalLabel?: string;
 
   /**
+   * Visually hides the label. This can be used in scenarios where you want a label for assistive user agents, but not have it be visible.
+   */
+  labelHidden?: boolean;
+
+  /**
    * the form field error
    */
-  error?: string;
+  error?: ReactNode;
 
   /**
    * the form field hint
@@ -65,7 +76,8 @@ interface PropsLabel {
   inputId: string;
   optionalLabel?: string;
   required: boolean;
-  children: ReactText;
+  labelHidden?: boolean;
+  children: ReactNode;
   as?: "label" | "legend";
 }
 interface PropsHint {
@@ -74,7 +86,7 @@ interface PropsHint {
 }
 interface PropsError {
   id: string;
-  children: ReactText;
+  children: ReactNode;
 }
 
 export type StaticComponents = {
@@ -92,6 +104,7 @@ const Field: FunctionComponent<Props> & StaticComponents = (props) => {
     optionalLabel,
     required = true,
     children,
+    labelHidden,
     as = "div",
   } = props;
 
@@ -104,6 +117,7 @@ const Field: FunctionComponent<Props> & StaticComponents = (props) => {
         inputId={inputId}
         required={required}
         optionalLabel={optionalLabel}
+        labelHidden={labelHidden}
         as={TagLabel}
       >
         {label}
@@ -121,23 +135,31 @@ const Label = (props: PropsLabel) => {
     optionalLabel = "Optional",
     required,
     children,
+    labelHidden,
     as = "label",
   } = props;
 
   const Tag = as;
 
-  return (
-    <Tag
-      // We'll also need the ability to hide or reposition this label for UI like Search
-      className={styles.label}
-      htmlFor={inputId}
-    >
+  const label = (
+    <Tag className={styles.label} htmlFor={inputId}>
       {children}
       {!required && optionalLabel && (
         <span className={styles.optionalLabel} children={optionalLabel} />
       )}
     </Tag>
   );
+
+  const labelVisuallyHidden = (
+    <ScreenReaderText>
+      <Tag htmlFor={inputId}>
+        {children}
+        {!required && optionalLabel && <span children={optionalLabel} />}
+      </Tag>
+    </ScreenReaderText>
+  );
+
+  return labelHidden ? labelVisuallyHidden : label;
 };
 
 const Hint = ({ id, children }: PropsHint) => (

@@ -124,7 +124,10 @@ const TextArea: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
-  const ariaDescribedBy = useCx(hint && `${oid}-hint`, error && `${oid}-error`);
+  const ariaDescribedBy = useCx(
+    hint && `${oid}-hint`,
+    typeof error !== "undefined" && `${oid}-error`
+  );
 
   return (
     <Field

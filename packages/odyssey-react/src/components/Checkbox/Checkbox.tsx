@@ -84,7 +84,7 @@ const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
     internalRef.current.indeterminate = indeterminate;
   }, [indeterminate, internalRef]);
 
-  const ariaDescribedBy = useCx(error && `${oid}-error`);
+  const ariaDescribedBy = useCx(typeof error !== "undefined" && `${oid}-error`);
 
   return (
     <>
