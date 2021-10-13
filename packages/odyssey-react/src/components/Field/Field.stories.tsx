@@ -15,26 +15,22 @@ import Field from ".";
 
 import type { Props } from ".";
 
-export const sharedFieldArgs = {
-  label: "Destination",
-  optionalLabel: "Optional",
-  errorPrefix: "Error:",
-};
-
-export const sharedFieldArgTypes = {
-  error: { control: "text" },
-  hint: { control: "text" },
-  required: { control: "boolean" },
-  children: { control: false },
-  inputId: { control: false },
-  as: { control: "radio" },
-};
-
 export default {
   title: `Components/Field`,
   component: Field,
-  args: sharedFieldArgs,
-  argTypes: sharedFieldArgTypes,
+  args: {
+    label: "Destination",
+    optionalLabel: "Optional",
+    errorPrefix: "Error:",
+  },
+  argTypes: {
+    error: { control: "text" },
+    hint: { control: "text" },
+    required: { control: "boolean" },
+    children: { control: false },
+    inputId: { control: false },
+    as: { control: "radio" },
+  },
 };
 
 const Template: Story<Props> = (props) => <Field {...props} />;
