@@ -110,13 +110,6 @@ module.exports = {
                 @import '@okta/odyssey/src/scss/base/reset';
                 @import '@okta/odyssey/src/scss/base/typography-global';
                 @import '@okta/odyssey/src/scss/base/typography-text';
-
-                // Components
-                @import '@okta/odyssey/src/scss/components/forms';
-                @import '@okta/odyssey/src/scss/components/input-field';
-                @import '@okta/odyssey/src/scss/components/input-field-layout';
-                @import '@okta/odyssey/src/scss/components/label';
-                @import '@okta/odyssey/src/scss/components/number-input';
               `,
           },
         },
