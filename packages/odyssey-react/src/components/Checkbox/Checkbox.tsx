@@ -44,7 +44,6 @@ export interface Props
   onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
 
   error?: SharedFieldTypes["error"];
-  errorPrefix?: SharedFieldTypes["errorPrefix"];
 }
 
 /**
@@ -58,7 +57,6 @@ const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
     required = true,
     indeterminate = false,
     error,
-    errorPrefix = "Error:",
     ...rest
   } = props;
 
@@ -109,11 +107,7 @@ const Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
         {label}
       </label>
-      {error && (
-        <Field.Error id={oid} errorPrefix={errorPrefix}>
-          {error}
-        </Field.Error>
-      )}
+      {error && <Field.Error id={oid}>{error}</Field.Error>}
     </>
   );
 });

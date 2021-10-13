@@ -11,7 +11,6 @@
  */
 
 import type { FunctionComponent, ReactElement, ReactText } from "react";
-import ScreenReaderText from "../ScreenReaderText";
 import { withStyles } from "../../utils";
 
 import styles from "./Field.module.scss";
@@ -26,11 +25,6 @@ export interface SharedFieldTypes {
    * Text to display when the field is optional, i.e. required prop is false
    */
   optionalLabel?: string;
-
-  /**
-   * Prefix to be read by SRs before announcing an error.
-   */
-  errorPrefix?: string;
 
   /**
    * the form field error
@@ -81,7 +75,6 @@ interface PropsHint {
 interface PropsError {
   id: string;
   children: ReactText;
-  errorPrefix?: string;
 }
 
 export type StaticComponents = {
@@ -97,7 +90,6 @@ const Field: FunctionComponent<Props> & StaticComponents = (props) => {
     inputId,
     label,
     optionalLabel,
-    errorPrefix,
     required = true,
     children,
     as = "div",
@@ -118,11 +110,7 @@ const Field: FunctionComponent<Props> & StaticComponents = (props) => {
       </Field.Label>
       {hint && <Field.Hint id={inputId}>{hint}</Field.Hint>}
       {children}
-      {error && (
-        <Field.Error id={inputId} errorPrefix={errorPrefix}>
-          {error}
-        </Field.Error>
-      )}
+      {error && <Field.Error id={inputId}>{error}</Field.Error>}
     </Tag>
   );
 };
@@ -156,9 +144,8 @@ const Hint = ({ id, children }: PropsHint) => (
   <p className={styles.hint} id={`${id}-hint`} children={children} />
 );
 
-const Error = ({ id, children, errorPrefix = "Error:" }: PropsError) => (
+const Error = ({ id, children }: PropsError) => (
   <p className={styles.error} id={`${id}-error`}>
-    <ScreenReaderText>{errorPrefix}</ScreenReaderText>
     {children}
   </p>
 );

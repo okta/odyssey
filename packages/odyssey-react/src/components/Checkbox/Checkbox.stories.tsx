@@ -14,6 +14,7 @@ import type { Story } from "@storybook/react";
 import { useEffect } from "react";
 import Checkbox from ".";
 import type { Props } from ".";
+import ScreenReaderText from "../ScreenReaderText";
 
 export default {
   title: `Components/Checkbox`,
@@ -21,7 +22,11 @@ export default {
   args: {
     label: "Checkbox label",
     value: "checkbox_value",
-    errorPrefix: "Error:",
+    error: (
+      <>
+        <ScreenReaderText>Error:</ScreenReaderText> Descriptive error text.
+      </>
+    ),
   },
   argTypes: {
     checked: { control: "boolean" },
@@ -33,7 +38,6 @@ export default {
     required: { control: "boolean" },
     value: { control: "text" },
     error: { control: "text" },
-    errorPrefix: { control: "text" },
   },
 };
 

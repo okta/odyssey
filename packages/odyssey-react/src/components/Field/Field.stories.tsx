@@ -12,6 +12,7 @@
 
 import { Story } from "@storybook/react";
 import Field from ".";
+import ScreenReaderText from "../ScreenReaderText";
 
 import type { Props } from ".";
 
@@ -21,7 +22,11 @@ export default {
   args: {
     label: "Destination",
     optionalLabel: "Optional",
-    errorPrefix: "Error:",
+    error: (
+      <>
+        <ScreenReaderText>Error:</ScreenReaderText> Descriptive error text.
+      </>
+    ),
   },
   argTypes: {
     error: { control: "text" },
