@@ -56,6 +56,7 @@ export interface Props extends Omit<
   'style' | 'className'
 > {
   title?: string;
+  insetBlockStart?: "initial" | "auto";
 }
 
 ${newLine}

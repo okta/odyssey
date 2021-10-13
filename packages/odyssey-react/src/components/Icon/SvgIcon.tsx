@@ -18,7 +18,7 @@ import {
   forwardRef,
 } from "react";
 import type { ReactElement } from "react";
-import { useOid, useOmit, withStyles } from "../../utils";
+import { useOid, useOmit, useCx, withStyles } from "../../utils";
 
 import styles from "./Icon.module.scss";
 
@@ -29,6 +29,11 @@ interface Props
    */
   title?: string;
 
+  /**
+   * Inset used for optical alignment of icon with text
+   */
+  insetBlockStart?: "initial" | "auto";
+
   children: ReactElement;
 }
 
@@ -37,9 +42,16 @@ interface Props
  */
 
 let SvgIcon = forwardRef<SVGSVGElement, Props>(
-  ({ title, children, ...rest }, ref) => {
+  ({ title, children, insetBlockStart, ...rest }, ref) => {
     const autoId = "icon_" + useOid();
     const omitProps = useOmit(rest);
+
+    let insetBlockStartClass;
+    if (insetBlockStart !== "auto") {
+      insetBlockStartClass = styles.initialInsetBlockStart;
+    }
+
+    const componentClass = useCx(styles.root, insetBlockStartClass);
 
     return Children.only(
       cloneElement(
@@ -47,7 +59,7 @@ let SvgIcon = forwardRef<SVGSVGElement, Props>(
         {
           ...omitProps,
           "aria-labelledby": title && autoId,
-          className: styles.root,
+          className: componentClass,
           ref: ref,
           role: title ? "img" : "presentation",
         },
@@ -71,4 +83,4 @@ SvgIcon = withStyles(styles)(SvgIcon);
 type SvgProps = ComponentProps<typeof SvgIcon>;
 export type { SvgProps as Props };
 
-export default SvgIcon;
+export default withStyles(styles)(SvgIcon);

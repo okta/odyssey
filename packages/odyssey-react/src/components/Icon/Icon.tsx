@@ -24,6 +24,10 @@ export interface Props
    * Name of icon to render
    */
   name: keyof typeof iconDictionary;
+  /**
+   * Inset used for optical alignment of icon with text
+   */
+  insetBlockStart?: "initial" | "auto";
 }
 
 /**

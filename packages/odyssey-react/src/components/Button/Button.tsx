@@ -11,7 +11,7 @@
  */
 
 import type { ComponentPropsWithoutRef, ReactElement } from "react";
-import { forwardRef } from "react";
+import { forwardRef, cloneElement } from "react";
 import { withStyles, useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
 
@@ -66,7 +66,13 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
 
   return (
     <button {...omitProps} ref={ref} className={componentClass}>
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {icon && (
+        <span className={styles.icon}>
+          {variant === "dismiss"
+            ? cloneElement(icon, { insetBlockStart: "auto" })
+            : icon}
+        </span>
+      )}
       {children && <span className={styles.label}>{children}</span>}
     </button>
   );

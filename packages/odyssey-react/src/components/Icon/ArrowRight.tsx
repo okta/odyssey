@@ -20,6 +20,7 @@ import SvgIcon from "./SvgIcon";
 export interface Props
   extends Omit<ComponentPropsWithoutRef<"svg">, "style" | "className"> {
   title?: string;
+  insetBlockStart?: "initial" | "auto";
 }
 
 const ArrowRightIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {

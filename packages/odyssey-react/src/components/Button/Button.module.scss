@@ -135,10 +135,7 @@
   }
 
   .icon {
-    display: block;
-    margin-block-start: 0.0625em;
-    margin-block-end: -0.0625em;
-    line-height: 0.9;
+    display: flex;
   }
 }
 
