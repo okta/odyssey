@@ -134,7 +134,6 @@ const Select = forwardRefWithStatics<HTMLSelectElement, Props, Statics>(
         </div>
       </Field>
     );
-    /* eslint-enable jsx-a11y/no-onchange */
   }
 );
 
