@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, useCallback, useContext, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+  ReactNode,
+} from "react";
 import type { ReactElement } from "react";
 import type { Props } from "./RadioGroup";
 
@@ -20,7 +26,7 @@ interface Context {
   name?: string;
   groupid?: string;
   hint?: string;
-  error?: string;
+  error?: ReactNode;
   required?: boolean;
   onChange?: Props["onChange"];
 }

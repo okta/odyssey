@@ -64,7 +64,7 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
   const ariaDescribedBy = useCx(
     hint && `${groupid}-hint`,
-    error && `${groupid}-error`
+    typeof error === "undefined" && `${groupid}-error`
   );
 
   return (
