@@ -16,16 +16,9 @@ import Icon from "./Icon";
 const iconTitle = "Icon";
 
 describe("Icon", () => {
-  it("render the icon", () => {
+  it("render the named icon", () => {
     const { getByTitle } = render(<Icon name="check" title={iconTitle} />);
     const svgElement = getByTitle(iconTitle).parentElement;
-    expect(svgElement).toBeVisible();
-    expect(svgElement).toHaveAttribute("role", "img");
-  });
-
-  it("has presentation role without title", () => {
-    const { getByRole } = render(<Icon name="check" />);
-    const svgElement = getByRole("presentation");
     expect(svgElement).toBeVisible();
   });
 
