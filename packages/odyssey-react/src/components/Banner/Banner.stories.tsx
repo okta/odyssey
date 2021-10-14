@@ -24,20 +24,19 @@ export default {
   },
   argTypes: {
     children: {
-      control: { type: null },
+      control: null,
     },
-
     title: {
       defaultValue: "Banner title",
-      control: { type: "text" },
+      control: "text",
     },
     content: {
       defaultValue: "Additional string related to the title.",
-      control: { disable: true },
+      control: null,
     },
     dismissButtonLabel: {
       defaultValue: "Dismiss banner",
-      control: { disable: true },
+      control: "text",
     },
     open: {
       defaultValue: true,
@@ -47,37 +46,23 @@ export default {
 
 type OnDismissEvent = Parameters<NonNullable<Props["onDismiss"]>>[number];
 
-const Template: Story<Props> = ({
-  title = "Banner title",
-  variant,
-  content,
-  dismissButtonLabel,
-  open,
-  onDismiss,
-}) => {
+const Template: Story<Props> = (props) => {
   const [, updateArgs] = useArgs();
-  let dismissableComponentProps = {};
+  let dismissProps = {};
 
-  if (onDismiss) {
-    dismissableComponentProps = {
+  if (props.onDismiss) {
+    dismissProps = {
       onDismiss: (event: OnDismissEvent) => {
-        if (onDismiss) {
-          onDismiss(event);
+        if (typeof props.onDismiss === "function") {
+          props.onDismiss(event);
         }
         updateArgs({ open: false });
       },
-      dismissButtonLabel,
     };
   }
 
   return (
-    <Banner
-      open={open}
-      title={title}
-      variant={variant}
-      content={content}
-      {...dismissableComponentProps}
-    >
+    <Banner {...props} {...dismissProps}>
       <Link variant="secondary" href="https://www.okta.com">
         Action Link
       </Link>
