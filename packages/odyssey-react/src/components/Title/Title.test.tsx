@@ -40,12 +40,17 @@ describe("Title", () => {
   });
 
   it("enforces types for polymorphic rest props", () => {
-    render(
-      // @ts-expect-error heading element does not have href attribute
-      <Title href="/foo/bar.baz" children={titleText} />
-    );
-    const component = screen.getByRole(heading);
-    expect(component).toHaveAttribute("href");
+    // @ts-expect-error heading element does not have href attribute
+    <Title href="/foo/bar.baz" children={titleText} />;
+  });
+
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(<Title ref={ref} children={titleText} />);
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(heading));
   });
 
   a11yCheck(() => render(<Title level="1" children={titleText} />));

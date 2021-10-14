@@ -11,6 +11,7 @@
  */
 
 import type {
+  ComponentProps,
   ComponentPropsWithoutRef,
   FunctionComponent,
   ReactText,
@@ -32,7 +33,7 @@ interface Props
   as?: "span" | "em" | "strong";
 }
 
-const ScreenReaderText: FunctionComponent<Props> = (props) => {
+let ScreenReaderText: FunctionComponent<Props> = (props) => {
   const { children, as = "span", ...rest } = props;
 
   const Tag = as;
@@ -48,4 +49,9 @@ const ScreenReaderText: FunctionComponent<Props> = (props) => {
 
 ScreenReaderText.displayName = "ScreenReaderText";
 
-export default withStyles(styles)(ScreenReaderText);
+ScreenReaderText = withStyles(styles)(ScreenReaderText);
+
+type SRProps = ComponentProps<typeof ScreenReaderText>;
+export type { SRProps as Props };
+
+export default ScreenReaderText;
