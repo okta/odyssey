@@ -10,13 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithoutRef, ReactElement } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  ComponentProps,
+  ReactElement,
+  ReactText,
+} from "react";
 import { forwardRef } from "react";
 import { withStyles, useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
 
-export interface Props
+interface CommonProps
   extends Omit<ComponentPropsWithoutRef<"button">, "style" | "className"> {
+  /**
+   * Text content to be rendered within the button, usualy label text.
+   */
+  children?: ReactText;
+
   /**
    * Icon to display
    */
@@ -40,10 +50,20 @@ export interface Props
   wide?: boolean;
 }
 
+interface ChildrenProps extends CommonProps {
+  children: ReactText;
+}
+
+interface IconProps extends CommonProps {
+  icon: ReactElement;
+}
+
+type Props = IconProps | ChildrenProps;
+
 /**
  * A clickable button used for form submissions and most in-page interactions.
  */
-const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
+let Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
   const {
     children,
     size = "m",
@@ -57,9 +77,7 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
     styles.root,
     styles[`${variant}Variant`],
     styles[`${size}Size`],
-    {
-      [styles.wideLayout]: wide,
-    }
+    wide && styles.wideLayout
   );
 
   const omitProps = useOmit(rest);
@@ -74,4 +92,9 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
 
 Button.displayName = "Button";
 
-export default withStyles(styles)(Button);
+Button = withStyles(styles)(Button);
+
+type ButtonProps = ComponentProps<typeof Button>;
+export type { ButtonProps as Props };
+
+export default Button;

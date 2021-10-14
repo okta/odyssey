@@ -20,128 +20,74 @@ export default {
   component: Button,
   argTypes: {
     children: {
-      control: { type: null },
+      control: "text",
+      defaultValue: "Button label",
     },
     disabled: {
-      control: { type: "boolean" },
-    },
-    onClick: {
-      control: { type: null },
+      control: "boolean",
     },
     wide: {
-      control: { type: "boolean" },
+      control: "boolean",
     },
   },
 };
 
-const Template: Story<Props> = ({
-  variant,
-  disabled,
-  onClick,
-  size,
-  wide,
-  icon,
-  children = "Button label",
-}) => (
-  <Button
-    variant={variant}
-    onClick={onClick}
-    disabled={disabled}
-    size={size}
-    wide={wide}
-    icon={icon}
-  >
-    {children}
-  </Button>
-);
+const Template: Story<Props> = (props) => <Button {...props} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
   variant: "primary",
-};
-Primary.argTypes = {
-  onClick: { action: "clicked button/primary (default)" },
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
   variant: "secondary",
 };
-Secondary.argTypes = {
-  onClick: { action: "clicked button/secondary" },
-};
 
 export const Danger = Template.bind({});
 Danger.args = {
   variant: "danger",
-};
-Danger.argTypes = {
-  onClick: { action: "clicked button/danger" },
 };
 
 export const Clear = Template.bind({});
 Clear.args = {
   variant: "clear",
 };
-Clear.argTypes = {
-  onClick: { action: "clicked button/clear" },
-};
 
 export const Dismiss = Template.bind({});
 Dismiss.args = {
   variant: "dismiss",
   icon: <CloseIcon />,
-  children: null,
-};
-Dismiss.argTypes = {
-  onClick: { action: "clicked button/dismiss" },
+  children: undefined,
 };
 
 export const Small = Template.bind({});
 Small.args = {
   size: "s",
 };
-Small.argTypes = {
-  onClick: { action: "clicked button/small" },
-};
 
 export const Medium = Template.bind({});
 Medium.args = {
   size: "m",
-};
-Medium.argTypes = {
-  onClick: { action: "clicked button/medium" },
 };
 
 export const Large = Template.bind({});
 Large.args = {
   size: "l",
 };
-Large.argTypes = {
-  onClick: { action: "clicked button/large" },
-};
 
 export const Wide = Template.bind({});
 Wide.args = {
   wide: true,
-};
-Wide.argTypes = {
-  onClick: { action: "clicked button/wide" },
 };
 
 export const WithIcon = Template.bind({});
 WithIcon.args = {
   icon: <SettingsIcon />,
 };
-WithIcon.argTypes = {
-  onClick: { action: "clicked button/icon" },
-};
 
 export const IconOnly = Template.bind({});
 IconOnly.args = {
   icon: <SettingsIcon />,
-  children: null,
-};
-IconOnly.argTypes = {
-  onClick: { action: "clicked button/justicon" },
+  children: undefined,
 };
