@@ -14,7 +14,7 @@ import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import Modal from ".";
 import Button from "../Button";
-import type { PropsModal } from ".";
+import type { Props } from ".";
 
 export default {
   title: `Components/Modal`,
@@ -24,7 +24,7 @@ export default {
   },
 };
 
-const Template: Story<PropsModal> = () => {
+const Template: Story<Props> = () => {
   const [{ open }, updateArgs] = useArgs();
 
   const handleOpen = () => {
