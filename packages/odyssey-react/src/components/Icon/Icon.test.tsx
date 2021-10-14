@@ -10,15 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Icon from "./Icon";
 
 const iconTitle = "Icon";
 
 describe("Icon", () => {
   it("render the named icon", () => {
-    const { getByTitle } = render(<Icon name="check" title={iconTitle} />);
-    const svgElement = getByTitle(iconTitle).parentElement;
+    render(<Icon name="check" title={iconTitle} />);
+    const svgElement = screen.getByTitle(iconTitle).parentElement;
     expect(svgElement).toBeVisible();
   });
 
