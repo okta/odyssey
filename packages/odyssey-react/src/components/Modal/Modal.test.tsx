@@ -10,42 +10,48 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import Modal from ".";
 
 const role = "dialog";
-const testid = "ods-modal";
 const modalTitle = "Modal Title";
+const message = "Close modal";
 
 describe("Modal", () => {
-  it("renders into the document", () => {
+  it("renders visibly into the document", () => {
     const handleClose = jest.fn();
-    const { getByRole, getByTestId } = render(
-      <Modal open={true} onClose={handleClose}>
+    render(
+      <Modal open={true} onClose={handleClose} closeMessage={message}>
         <Modal.Header>{modalTitle}</Modal.Header>
       </Modal>
     );
 
-    expect(getByRole(role)).toBeInTheDocument();
-    expect(getByTestId(testid)).toHaveAttribute("aria-hidden", "false");
+    expect(screen.getByRole(role)).toBeVisible();
   });
 
   it("should be hidden when open prop is set to `false`", () => {
     const handleClose = jest.fn();
-    const { getByTestId } = render(
-      <Modal open={false} onClose={handleClose}>
+    render(
+      <Modal open={false} onClose={handleClose} closeMessage={message}>
         <Modal.Header>{modalTitle}</Modal.Header>
       </Modal>
     );
 
-    expect(getByTestId(testid)).toHaveAttribute("aria-hidden", "true");
+    const modal = screen.getByRole(role, { hidden: true });
+    expect(modal).toBeInTheDocument();
+    expect(modal).not.toBeVisible();
   });
 
   it("should invoke onOpen callback when open", () => {
     const handleClose = jest.fn();
     const handleOpen = jest.fn();
     render(
-      <Modal open={true} onOpen={handleOpen} onClose={handleClose}>
+      <Modal
+        open
+        onOpen={handleOpen}
+        onClose={handleClose}
+        closeMessage={message}
+      >
         <Modal.Header>{modalTitle}</Modal.Header>
       </Modal>
     );
@@ -55,21 +61,21 @@ describe("Modal", () => {
 
   it("should invoke onClose callback when dismiss button is clicked", () => {
     const handleClose = jest.fn();
-    const { getByRole } = render(
-      <Modal open={true} onClose={handleClose}>
+    render(
+      <Modal open onClose={handleClose} closeMessage={message}>
         <Modal.Header>{modalTitle}</Modal.Header>
       </Modal>
     );
 
-    fireEvent.click(getByRole("button"));
+    fireEvent.click(screen.getByRole("button", { hidden: true }));
 
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
   it("should NOT invoke onClose callback when Modal.Button without close prop is clicked", () => {
     const handleClose = jest.fn();
-    const { getByText } = render(
-      <Modal open={true} onClose={handleClose}>
+    render(
+      <Modal open={true} onClose={handleClose} closeMessage={message}>
         <Modal.Header>{modalTitle}</Modal.Header>
         <Modal.Footer>
           <Modal.Button variant="clear">Cancel</Modal.Button>
@@ -78,15 +84,15 @@ describe("Modal", () => {
       </Modal>
     );
 
-    fireEvent.click(getByText("Cancel"));
+    fireEvent.click(screen.getByText("Cancel"));
 
     expect(handleClose).toHaveBeenCalledTimes(0);
   });
 
   it("should invoke onClose callback when Modal.Button with prop close is clicked", () => {
     const handleClose = jest.fn();
-    const { getByText } = render(
-      <Modal open={true} onClose={handleClose}>
+    render(
+      <Modal open={true} onClose={handleClose} closeMessage={message}>
         <Modal.Header>{modalTitle}</Modal.Header>
         <Modal.Footer>
           <Modal.Button variant="clear">Cancel</Modal.Button>
@@ -95,7 +101,7 @@ describe("Modal", () => {
       </Modal>
     );
 
-    fireEvent.click(getByText("Continue"));
+    fireEvent.click(screen.getByText("Continue"));
 
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
@@ -104,6 +110,7 @@ describe("Modal", () => {
     render(
       <Modal
         open={true}
+        closeMessage={message}
         onClose={() => {
           console.log("onClose");
         }}
