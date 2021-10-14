@@ -20,7 +20,6 @@ import SvgIcon from "./SvgIcon";
 export interface Props
   extends Omit<ComponentPropsWithoutRef<"svg">, "style" | "className"> {
   title?: string;
-  insetBlockStart?: "initial" | "auto";
 }
 
 const SortDescIcon = forwardRef<SVGSVGElement, Props>((props, ref) => {
