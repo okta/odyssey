@@ -17,11 +17,14 @@ import type {
   ChangeEvent,
   RefCallback,
 } from "react";
-import styles from "./TextInput.module.scss";
-import { useOid } from "../../utils";
+import { useOid, useCx, withStyles } from "../../utils";
 import SearchIcon from "../Icon/Search";
+import styles from "./TextInput.module.scss";
 
-export type Props = {
+import Field from "../Field";
+import type { SharedFieldTypes } from "../Field";
+
+export interface Props extends SharedFieldTypes {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
@@ -32,11 +35,6 @@ export type Props = {
    * @default text
    */
   type?: "text" | "email" | "url" | "tel" | "search" | "password";
-
-  /**
-   * The form field label
-   */
-  label: string;
 
   /**
    * Callback to provide a reference to the underlying input element
@@ -66,11 +64,6 @@ export type Props = {
    * @default false
    */
   readonly?: boolean;
-
-  /**
-   * Text to display when the form is optional, i.e. required prop is false
-   */
-  optionalLabel?: string;
 
   /**
    * The underlying input element placeholder attribute
@@ -105,7 +98,7 @@ export type Props = {
    * @param {Object} event the event object
    */
   onFocus?: FocusEventHandler<HTMLInputElement>;
-};
+}
 
 /**
  * Text inputs allow users to edit and input data.
@@ -116,17 +109,19 @@ const TextInput: FunctionComponent<Props> = (props) => {
     disabled = false,
     id,
     inputRef,
-    label,
     name,
     onBlur,
     onChange,
     onFocus,
-    optionalLabel,
     placeholder,
     readonly = false,
     required = true,
     type = "text",
     value,
+    error,
+    hint,
+    label,
+    optionalLabel,
   } = props;
 
   const oid = useOid(id);
@@ -138,23 +133,14 @@ const TextInput: FunctionComponent<Props> = (props) => {
     [onChange]
   );
 
-  const labelChildren = (
-    <>
-      {label}
-      {!required && optionalLabel && (
-        <span className={styles.optionalLabel} children={optionalLabel} />
-      )}
-    </>
+  const ariaDescribedBy = useCx(
+    hint && `${oid}-hint`,
+    typeof error !== "undefined" && `${oid}-error`
   );
-
-  const labelClass = (() => {
-    if (type === "search") return styles.labelSearch;
-    if (disabled || readonly) return styles.labelDisabled;
-    return styles.label;
-  })();
 
   const input = (
     <input
+      aria-describedby={ariaDescribedBy}
       className={styles.root}
       disabled={disabled}
       id={oid}
@@ -172,23 +158,28 @@ const TextInput: FunctionComponent<Props> = (props) => {
     />
   );
 
+  const search = (
+    <span className={styles.outer}>
+      <span className={styles.indicator} role="presentation">
+        <SearchIcon />
+      </span>
+      {input}
+    </span>
+  );
+
   return (
-    <fieldset className={styles.fieldset}>
-      <div className={styles.fieldsetFlex}>
-        <label children={labelChildren} className={labelClass} htmlFor={oid} />
-        {type === "search" ? (
-          <span className={styles.outer}>
-            <span className={styles.indicator} role="presentation">
-              <SearchIcon />
-            </span>
-            {input}
-          </span>
-        ) : (
-          <>{input}</>
-        )}
-      </div>
-    </fieldset>
+    <Field
+      error={error}
+      hint={hint}
+      inputId={oid}
+      label={label}
+      labelHidden={type === "search" ? true : false}
+      optionalLabel={optionalLabel}
+      required={required}
+    >
+      {type === "search" ? search : input}
+    </Field>
   );
 };
 
-export default TextInput;
+export default withStyles(styles)(TextInput);

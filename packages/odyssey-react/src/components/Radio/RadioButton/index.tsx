@@ -13,12 +13,15 @@
 import { forwardRef } from "react";
 import type { ComponentPropsWithoutRef } from "react";
 import { useRadioGroup } from "../context";
-import { useOid, useOmit } from "../../../utils";
+import { useCx, useOid, useOmit, withStyles } from "../../../utils";
 
 import styles from "../RadioButton.module.scss";
 
+import type { SharedFieldTypes } from "../../Field";
+
 export interface Props
-  extends Omit<ComponentPropsWithoutRef<"input">, "style" | "className"> {
+  extends Pick<SharedFieldTypes, "hint" | "error">,
+    Omit<ComponentPropsWithoutRef<"input">, "style" | "className"> {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
@@ -48,6 +51,9 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
     disabled,
     required,
     name,
+    groupid,
+    hint,
+    error,
   } = useRadioGroup();
 
   const oid = useOid(id);
@@ -56,10 +62,16 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
   const checked = value === controlledValue;
 
+  const ariaDescribedBy = useCx(
+    hint && `${groupid}-hint`,
+    typeof error === "undefined" && `${groupid}-error`
+  );
+
   return (
     <>
       <input
         {...omitProps}
+        aria-describedby={ariaDescribedBy}
         className={styles.radio}
         checked={checked}
         disabled={disabled}
@@ -76,4 +88,4 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
   );
 });
 
-export default RadioButton;
+export default withStyles(styles)(RadioButton);
