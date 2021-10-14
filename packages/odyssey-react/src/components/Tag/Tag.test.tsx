@@ -31,5 +31,14 @@ describe("Tag", () => {
     expect(tags).toEqual(tagList);
   });
 
+  it("restricts children prop via types and does not render them", () => {
+    render(
+      // @ts-expect-error never type for children
+      <Tag tags={tagList} children="child" />
+    );
+
+    expect(screen.queryByText("child")).toBeNull;
+  });
+
   a11yCheck(() => render(<Tag tags={["foo"]} />));
 });
