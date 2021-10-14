@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Tooltip from ".";
 
 const label = "label";
@@ -19,25 +19,38 @@ const button = "button";
 
 describe("Tooltip", () => {
   it("renders the tooltip and children as expected", () => {
-    const { getByRole } = render(
+    render(
       <Tooltip label={label} position="top">
         <button>Top</button>
       </Tooltip>
     );
 
-    expect(getByRole(tooltip)).toBeInTheDocument();
-    expect(getByRole(button)).toBeInTheDocument();
+    expect(screen.getByRole(tooltip)).toBeInTheDocument();
+    expect(screen.getByRole(button)).toBeInTheDocument();
   });
 
   it("renders a provided id associating the tooltip and child", () => {
-    const { getByRole } = render(
+    render(
       <Tooltip label={label} position="bottom" id="foo">
         <button>Bottom</button>
       </Tooltip>
     );
 
-    expect(getByRole(button)).toHaveAttribute("aria-describedby", "foo");
-    expect(getByRole(tooltip)).toHaveAttribute("id", "foo");
+    expect(screen.getByRole(button)).toHaveAttribute("aria-describedby", "foo");
+    expect(screen.getByRole(tooltip)).toHaveAttribute("id", "foo");
+  });
+
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(
+      <Tooltip ref={ref} label={label}>
+        <div>children</div>
+      </Tooltip>
+    );
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(tooltip));
   });
 
   a11yCheck(() =>

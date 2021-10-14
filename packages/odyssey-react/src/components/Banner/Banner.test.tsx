@@ -151,6 +151,30 @@ describe("Banner", () => {
     expect(ref).toHaveBeenLastCalledWith(screen.getByRole(role));
   });
 
+  it("restricts onDismiss and dismissButtonLabel via types", () => {
+    // @ts-expect-error requires dismissButtonLabel prop with onDismiss prop
+    <Banner
+      onDismiss={jest.fn()}
+      title={bannerTitle}
+      content={bannerContent}
+    />;
+
+    // @ts-expect-error requires onDismiss prop with dismissButtonLabel prop
+    <Banner
+      dismissButtonLabel={bannerDismissButtonLabel}
+      title={bannerTitle}
+      content={bannerContent}
+    />;
+
+    <Banner
+      onDismiss={jest.fn()}
+      dismissButtonLabel={bannerDismissButtonLabel}
+      title={bannerTitle}
+      content={bannerContent}
+    />;
+    <Banner title={bannerTitle} content={bannerContent} />;
+  });
+
   a11yCheck(() =>
     render(
       <Banner open title={bannerTitle} content={bannerContent}>
