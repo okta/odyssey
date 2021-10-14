@@ -12,7 +12,6 @@
 
 import { act, render, fireEvent, screen, within } from "@testing-library/react";
 import Toast, { useToast } from ".";
-import type { Context } from ".";
 
 const role = "status";
 const title = "Toast";
@@ -20,39 +19,57 @@ const body = "Descriptive body content (optional)";
 const id = "my-toast";
 
 describe("Toast", () => {
-  it("renders the toast", () => {
-    const { getByRole } = render(<Toast title={title} body={body} />);
+  it("renders the toast visibly", () => {
+    render(<Toast title={title} body={body} />);
 
-    expect(getByRole(role)).toBeInTheDocument();
+    expect(screen.getByRole(role)).toBeVisible();
   });
 
-  it("renders the toast title", () => {
-    const { queryByText } = render(<Toast title={title} body={body} />);
+  it("renders the toast title visibly", () => {
+    render(<Toast title={title} body={body} />);
 
-    expect(queryByText(title)).toBeInTheDocument();
+    expect(screen.getByText(title)).toBeVisible();
   });
 
-  it("renders the toast body", () => {
-    const { queryByText } = render(<Toast title={title} body={body} />);
+  it("renders the toast body visibly", () => {
+    render(<Toast title={title} body={body} />);
 
-    expect(queryByText(title)).toBeInTheDocument();
-  });
-
-  it("does NOT render the toast body if the title prop is not present", () => {
-    const { queryByText } = render(<Toast title={title} />);
-
-    expect(queryByText(body)).toBeNull();
+    expect(screen.getByText(body)).toBeVisible();
   });
 
   it("dismisses the toast when the dismiss button is pressed", () => {
     const handleDismiss = jest.fn();
 
-    const { getByRole } = render(
-      <Toast title={title} body={body} onDismiss={handleDismiss} />
+    render(<Toast title={title} body={body} onDismiss={handleDismiss} />);
+
+    const target = screen.getByRole("button");
+    fireEvent.click(target);
+
+    expect(handleDismiss).toHaveBeenCalledTimes(1);
+    expect(handleDismiss).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        type: "click",
+        target,
+      })
+    );
+  });
+
+  it("restricts children prop via types and does not render them", () => {
+    render(
+      // @ts-expect-error never type for children
+      <Toast title={title} children="child" />
     );
 
-    fireEvent.click(getByRole("button"));
-    expect(handleDismiss).toHaveBeenCalledTimes(1);
+    expect(screen.queryByText("child")).toBeNull;
+  });
+
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
+
+    render(<Toast ref={ref} title={title} />);
+
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(role));
   });
 
   a11yCheck(() =>
@@ -64,7 +81,7 @@ describe("Toast.Provider", () => {
   const handleToastExit = jest.fn();
 
   function setup() {
-    let toaster!: Context;
+    let toaster!: ReturnType<typeof useToast>;
 
     const Component = () => {
       toaster = useToast();
