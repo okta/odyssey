@@ -8,11 +8,8 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "@storybook/react": "^6.3.8",
     "choices.js": "^9.0.1",
-    "hoist-non-react-statics": "^3.3.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
     "@applitools/eyes-storybook": "^3.24.0",
@@ -36,7 +33,13 @@
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
     "jest-axe": "^5.0.1",
-    "postcss": "^8.3.6"
+    "postcss": "^8.3.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.14",
+    "react-dom": ">=16.14"
   },
   "scripts": {
     "start": "start-storybook -p 6006",
