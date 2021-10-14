@@ -10,17 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactElement, ComponentProps } from "react";
+import type { ReactElement, ComponentPropsWithoutRef } from "react";
 import { forwardRef } from "react";
 import { useOmit } from "../../utils";
 
-export type Props = {
+export interface Props
+  extends Omit<ComponentPropsWithoutRef<"tfoot">, "style" | "className"> {
   children?: ReactElement | ReactElement[];
-} & ComponentProps<"tfoot">;
+}
 
-type Ref = HTMLTableSectionElement;
-
-const TableFooter = forwardRef<Ref, Props>((props, ref) => {
+const TableFooter = forwardRef<HTMLTableSectionElement, Props>((props, ref) => {
   const { children, ...rest } = props;
 
   const omitProps = useOmit(rest);

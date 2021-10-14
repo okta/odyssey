@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Table from ".";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
@@ -23,7 +23,7 @@ const tableTitle = "test table";
 
 describe("Table", () => {
   it("renders the table", () => {
-    const { getByRole } = render(
+    render(
       <Table caption={caption} title={tableTitle}>
         <TableHeader />
         <TableBody />
@@ -31,24 +31,20 @@ describe("Table", () => {
       </Table>
     );
 
-    expect(getByRole("table")).toBeInTheDocument();
+    expect(screen.getByRole("table")).toBeInTheDocument();
   });
 
   it("renders the caption prop in the caption element", () => {
-    const { getByRole } = render(
-      <Table caption={caption} title={tableTitle} />
-    );
+    render(<Table caption={caption} title={tableTitle} />);
 
-    expect(getByRole("table", { name: caption })).toBeVisible();
+    expect(screen.getByRole("table", { name: caption })).toBeVisible();
   });
 
   it("conditionally uses a container", () => {
-    const { getByRole } = render(
-      <Table caption={caption} withContainer={false} />
-    );
-    expect(getByRole("table").parentElement?.classList.contains("figure")).toBe(
-      false
-    );
+    render(<Table caption={caption} withContainer={false} />);
+    expect(
+      screen.getByRole("table").parentElement?.classList.contains("figure")
+    ).toBe(false);
   });
 });
 
@@ -56,19 +52,19 @@ const title = "test title";
 
 describe("Table Container", () => {
   it("renders the container", () => {
-    const { getByRole } = render(<Table.Container title={title} />);
-    expect(getByRole("figure")).toBeInTheDocument();
+    render(<Table.Container title={title} />);
+    expect(screen.getByRole("figure")).toBeInTheDocument();
   });
 
   it("renders the title", () => {
-    const { getByText } = render(<Table.Container title={title} />);
-    expect(getByText(title).tagName.toLowerCase()).toEqual("figcaption");
+    render(<Table.Container title={title} />);
+    expect(screen.getByText(title).tagName.toLowerCase()).toEqual("figcaption");
   });
 });
 
 describe("Table Data Cell", () => {
   it("renders the cell", () => {
-    const { getByText } = render(
+    render(
       <Table caption={caption} title={tableTitle}>
         <Table.Body>
           <Table.Row>
@@ -77,11 +73,11 @@ describe("Table Data Cell", () => {
         </Table.Body>
       </Table>
     );
-    expect(getByText("data")).toBeInTheDocument();
+    expect(screen.getByText("data")).toBeInTheDocument();
   });
 
   it("adds the proper class for format prop", () => {
-    const { getByText } = render(
+    render(
       <Table caption={caption} title={tableTitle}>
         <Table.Body>
           <Table.Row>
@@ -90,13 +86,13 @@ describe("Table Data Cell", () => {
         </Table.Body>
       </Table>
     );
-    expect(getByText("1").classList.contains("numFormat")).toBe(true);
+    expect(screen.getByText("1").classList.contains("numFormat")).toBe(true);
   });
 });
 
 describe("Table Header Cell", () => {
   it("renders the cell", () => {
-    const { getByText } = render(
+    render(
       <Table caption={caption} title={tableTitle}>
         <Table.Header>
           <Table.Row>
@@ -105,11 +101,11 @@ describe("Table Header Cell", () => {
         </Table.Header>
       </Table>
     );
-    expect(getByText("heading")).toBeInTheDocument();
+    expect(screen.getByText("heading")).toBeInTheDocument();
   });
 
   it("adds the proper class for format prop", () => {
-    const { getByText } = render(
+    render(
       <Table caption={caption} title={tableTitle}>
         <Table.Header>
           <Table.Row>
@@ -118,20 +114,22 @@ describe("Table Header Cell", () => {
         </Table.Header>
       </Table>
     );
-    expect(getByText("number").classList.contains("numFormat")).toBe(true);
+    expect(screen.getByText("number").classList.contains("numFormat")).toBe(
+      true
+    );
   });
 });
 
 describe("Table Sort Button", () => {
   it("renders the button", () => {
-    const { getByRole } = render(<Table.SortButton direction="unsorted" />);
+    render(<Table.SortButton direction="unsorted" />);
 
-    expect(getByRole("button")).toBeInTheDocument();
+    expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
   it("uses direction prop to display an icon", () => {
-    const { getByTitle } = render(<Table.SortButton direction="asc" />);
-    const sortIcon = getByTitle("Ascending").parentElement;
+    render(<Table.SortButton direction="asc" />);
+    const sortIcon = screen.getByTitle("Ascending").parentElement;
     expect(sortIcon).toBeVisible();
   });
 });
