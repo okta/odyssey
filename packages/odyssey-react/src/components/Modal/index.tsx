@@ -51,6 +51,11 @@ type Props = {
    * Callback when the modal is closed.
    */
   onClose: () => void;
+
+  /**
+   * Screen reader label for close button.
+   */
+  closeMessage: string;
 };
 
 type PropsModalHeader = {
@@ -70,10 +75,11 @@ type PropsModalButton = {
 } & CoreButtonProps;
 
 interface ModalContext {
-  onClose?: () => void;
-  modalTitleId?: string;
+  onClose: () => void;
+  modalTitleId: string;
+  closeMessage: string;
 }
-const ModalContext = createContext<ModalContext>({});
+const ModalContext = createContext({} as ModalContext);
 
 /**
  * UI that appears on top of the main content and moves the system into a mode
@@ -82,11 +88,11 @@ const ModalContext = createContext<ModalContext>({});
  */
 let Modal = forwardRefWithStatics<HTMLDivElement, Props, Statics>(
   (props, ref) => {
-    const { children, id, open = false, onClose, onOpen } = props;
+    const { children, id, open = false, onClose, closeMessage, onOpen } = props;
     const modalTitleId = useOid();
     const context = useMemo(
-      () => ({ onClose, modalTitleId }),
-      [onClose, modalTitleId]
+      () => ({ onClose, closeMessage, modalTitleId }),
+      [onClose, closeMessage, modalTitleId]
     );
     const oid = useOid(id);
     const modalDialog = useRef<HTMLDivElement>(null);
@@ -98,13 +104,7 @@ let Modal = forwardRefWithStatics<HTMLDivElement, Props, Statics>(
 
     return createPortal(
       <ModalContext.Provider value={context}>
-        <div
-          ref={ref}
-          className={componentClass}
-          id={oid}
-          aria-hidden={!open}
-          data-testid="ods-modal"
-        >
+        <div ref={ref} className={componentClass} id={oid} aria-hidden={!open}>
           <div className={styles.overlay} tabIndex={-1}>
             <div
               className={styles.dialog}
@@ -124,11 +124,15 @@ let Modal = forwardRefWithStatics<HTMLDivElement, Props, Statics>(
 );
 
 const Header = ({ children }: PropsModalHeader) => {
-  const { modalTitleId } = useContext(ModalContext);
+  const { modalTitleId, closeMessage } = useContext(ModalContext);
   return (
     <header className={styles.header}>
       <span className={styles.dismiss}>
-        <Modal.Button close variant="dismiss" icon={<CloseIcon />} />
+        <Modal.Button
+          close
+          variant="dismiss"
+          icon={<CloseIcon title={closeMessage} />}
+        />
       </span>
       <Title
         id={modalTitleId}

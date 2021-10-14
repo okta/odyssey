@@ -45,7 +45,12 @@ const Template: Story<Props> = () => {
       >
         Open modal
       </Button>
-      <Modal open={open} onOpen={handleOpen} onClose={handleClose}>
+      <Modal
+        open={open}
+        onOpen={handleOpen}
+        onClose={handleClose}
+        closeMessage="close"
+      >
         <Modal.Header>Modal Title</Modal.Header>
         <Modal.Body>
           <p>
