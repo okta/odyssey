@@ -10,25 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ComponentProps } from "react";
+import type {
+  ReactNode,
+  ComponentProps,
+  ComponentPropsWithoutRef,
+} from "react";
 import { forwardRef } from "react";
 import type { CellTextFormats } from "./Table";
-import { useCx, useOmit } from "../../utils";
+import { useCx, useOmit, withStyles } from "../../utils";
 
 import styles from "./Table.module.scss";
 
-export type Props = {
+interface Props
+  extends Omit<ComponentPropsWithoutRef<"td">, "style" | "className"> {
   children?: ReactNode;
   /**
    * The basic text format for the cell.
    */
   format?: CellTextFormats;
   empty?: boolean;
-} & ComponentProps<"td">;
+}
 
-type Ref = HTMLTableDataCellElement;
-
-const TableDataCell = forwardRef<Ref, Props>((props, ref) => {
+let TableDataCell = forwardRef<HTMLTableCellElement, Props>((props, ref) => {
   const { children, format, empty, ...rest } = props;
 
   const componentClass = useCx(
@@ -45,5 +48,12 @@ const TableDataCell = forwardRef<Ref, Props>((props, ref) => {
     </td>
   );
 });
+
+TableDataCell.displayName = "TableDataCell";
+
+TableDataCell = withStyles(styles)(TableDataCell);
+
+type TableDataCellProps = ComponentProps<typeof TableDataCell>;
+export type { TableDataCellProps as Props };
 
 export default TableDataCell;

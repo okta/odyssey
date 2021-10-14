@@ -10,24 +10,27 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ComponentProps } from "react";
+import type {
+  ReactNode,
+  ComponentProps,
+  ComponentPropsWithoutRef,
+} from "react";
 import { forwardRef } from "react";
 import type { CellTextFormats } from "./Table";
-import { useCx, useOmit } from "../../utils";
+import { useCx, useOmit, withStyles } from "../../utils";
 
 import styles from "./Table.module.scss";
 
-export type Props = {
+interface Props
+  extends Omit<ComponentPropsWithoutRef<"th">, "style" | "className"> {
   children?: ReactNode;
   /**
    * The basic text format for the cell.
    */
   format?: CellTextFormats;
-} & ComponentProps<"th">;
+}
 
-type Ref = HTMLTableHeaderCellElement;
-
-const TableHeaderCell = forwardRef<Ref, Props>((props, ref) => {
+let TableHeaderCell = forwardRef<HTMLTableCellElement, Props>((props, ref) => {
   const { children, format, ...rest } = props;
 
   const componentClass = useCx(
@@ -45,5 +48,12 @@ const TableHeaderCell = forwardRef<Ref, Props>((props, ref) => {
     </th>
   );
 });
+
+TableHeaderCell.displayName = "TableHeaderCell";
+
+TableHeaderCell = withStyles(styles)(TableHeaderCell);
+
+type TableHeaderCellProps = ComponentProps<typeof TableHeaderCell>;
+export type { TableHeaderCellProps as Props };
 
 export default TableHeaderCell;
