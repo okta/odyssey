@@ -39,6 +39,15 @@ describe("Button", () => {
     expect(getByRole(button)).toHaveAttribute("disabled");
   });
 
+  it("restricts children and icon props via types", () => {
+    // @ts-expect-error requires children or icon prop
+    <Button />;
+
+    <Button icon={<svg />} />;
+    <Button children={buttonLabel} />;
+    <Button icon={<svg />} children={buttonLabel} />;
+  });
+
   it("renders an icon", () => {
     render(
       <Button

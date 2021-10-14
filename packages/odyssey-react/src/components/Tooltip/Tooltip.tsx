@@ -10,21 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { cloneElement } from "react";
-import type { ReactElement, FunctionComponent } from "react";
-import { useCx, useOid } from "../../utils";
+import { cloneElement, forwardRef } from "react";
+import type {
+  ComponentProps,
+  ReactElement,
+  ComponentPropsWithoutRef,
+} from "react";
+import { useCx, useOid, useOmit, withStyles } from "../../utils";
 import styles from "./Tooltip.module.scss";
 
-export type Props = {
+interface Props
+  extends Omit<
+    ComponentPropsWithoutRef<"aside">,
+    "style" | "className" | "role"
+  > {
   /**
    * Content to be rendered that needs a tooltip label
    */
   children: ReactElement;
-
-  /**
-   * The underlying tooltip id attribute. Automatically generated if not provided
-   */
-  id?: string;
 
   /**
    * The position the tooltip will be displayed
@@ -33,30 +36,43 @@ export type Props = {
   position?: "top" | "end" | "bottom" | "start";
 
   /**
-   * The position the tooltip will be displayed
+   * The tooltip content itself
    */
   label: string;
-};
+}
 
 /**
  * A transient element that provides additional context for an element when it receives hover or focus.
  */
-const Tooltip: FunctionComponent<Props> = (props) => {
-  const { children, id, label, position = "top" } = props;
+let Tooltip = forwardRef<HTMLElement, Props>((props, ref) => {
+  const { children, id, label, position = "top", ...rest } = props;
 
   const oid = useOid(id);
-  const clone = cloneElement(children, { "aria-describedby": oid });
-
+  const omitProps = useOmit(rest);
   const tooltipClasses = useCx(styles.root, styles[`${position}Position`]);
+  const clone = cloneElement(children, { "aria-describedby": oid });
 
   return (
     <span className={styles.hasTooltip}>
       {clone}
-      <aside id={oid} className={tooltipClasses} role="tooltip">
+      <aside
+        {...omitProps}
+        ref={ref}
+        id={oid}
+        className={tooltipClasses}
+        role="tooltip"
+      >
         {label}
       </aside>
     </span>
   );
-};
+});
+
+Tooltip.displayName = "Tooltip";
+
+Tooltip = withStyles(styles)(Tooltip);
+
+type TooltipProps = ComponentProps<typeof Tooltip>;
+export type { TooltipProps as Props };
 
 export default Tooltip;

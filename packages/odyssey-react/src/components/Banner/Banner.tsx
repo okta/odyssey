@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithoutRef, MouseEventHandler } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  ComponentProps,
+  MouseEventHandler,
+} from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import Title from "../Title";
@@ -19,7 +23,10 @@ import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
 
 interface CommonProps
-  extends Omit<ComponentPropsWithoutRef<"div">, "style" | "className"> {
+  extends Omit<
+    ComponentPropsWithoutRef<"div">,
+    "style" | "className" | "role"
+  > {
   /**
    * The visual variant to be displayed to the user.
    * @default info
@@ -39,7 +46,7 @@ interface CommonProps
   /**
    * Determines whether the banner should be displayed to the user.
    */
-  open: boolean;
+  open?: boolean;
 }
 
 type DismissProps =
@@ -49,15 +56,14 @@ type DismissProps =
       dismissButtonLabel: string;
     };
 
-export type Props = CommonProps & DismissProps;
+type Props = CommonProps & DismissProps;
 
 /**
  * Banners let users know important messages related to their overall experience
  * on the website. They can be purely informational messages or critical errors
  * to act upon.
- *
  */
-const Banner = forwardRef<HTMLDivElement, Props>((props, ref) => {
+let Banner = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const {
     children,
     title,
@@ -115,4 +121,9 @@ const Banner = forwardRef<HTMLDivElement, Props>((props, ref) => {
 
 Banner.displayName = "Banner";
 
-export default withStyles(styles)(Banner);
+Banner = withStyles(styles)(Banner);
+
+type BannerProps = ComponentProps<typeof Banner>;
+export type { BannerProps as Props };
+
+export default Banner;
