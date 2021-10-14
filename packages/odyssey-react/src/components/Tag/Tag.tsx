@@ -10,28 +10,48 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent } from "react";
+import type { ComponentProps, ComponentPropsWithoutRef } from "react";
+import { forwardRef } from "react";
+import { useOmit, withStyles } from "../../utils";
 import styles from "./Tag.module.scss";
 
-export type Props = {
+interface Props
+  extends Omit<
+    ComponentPropsWithoutRef<"ul">,
+    "style" | "className" | "children"
+  > {
+  children?: never;
   /**
    * Text content to be rendered within the tag, it should describe an entity.
    */
   tags: string[];
-};
+}
 
 /**
  * Use Tags to help describe and differentiate an entity or object.
  * Think of them as “adjectives” in your UI toolbox that make navigating
  * and parsing content easier.
  */
-const Tag: FunctionComponent<Props> = ({ tags }) => (
-  <ul className={styles.list}>
-    {tags.map((item) => (
-      <li className={styles.tag} key={item}>
-        {item}
-      </li>
-    ))}
-  </ul>
-);
+let Tag = forwardRef<HTMLUListElement, Props>((props, ref) => {
+  const { tags, ...rest } = props;
+  const omitProps = useOmit(rest);
+
+  return (
+    <ul {...omitProps} ref={ref} className={styles.list}>
+      {tags.map((item) => (
+        <li className={styles.tag} key={item}>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+});
+
+Tag.displayName = "Tag";
+
+Tag = withStyles(styles)(Tag);
+
+type TagProps = ComponentProps<typeof Tag>;
+export type { TagProps as Props };
+
 export default Tag;
