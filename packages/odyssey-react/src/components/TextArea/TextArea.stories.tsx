@@ -33,6 +33,7 @@ export default {
     value: { control: "text" },
     id: { control: "text" },
     name: { control: "text" },
+    error: { control: "text" },
     onChange: { control: false },
     onBlur: { control: false },
     onFocus: { control: false },

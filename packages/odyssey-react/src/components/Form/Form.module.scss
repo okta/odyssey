@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,29 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.fieldset {
+.root {
+  max-width: calc(#{$max-line-length} + (2 * #{$spacing-m}));
   margin-block-start: 0;
-  margin-block-end: $spacing-s;
+  margin-block-end: $spacing-m;
   margin-inline: 0;
+  padding-block: $spacing-m;
+  padding-inline: $spacing-m;
+
+  &:last-child {
+    margin-block-end: 0;
+  }
 }
 
-.legend {
-  margin-block-start: 0;
-  margin-block-end: $spacing-xs-em;
-  margin-inline: 0;
-  color: $text-heading;
-  font-size: $size-body-base;
-  font-weight: 600;
+.header,
+.error,
+.main {
+  margin-block-end: $spacing-m;
 }
 
-.hint {
-  color: $text-body;
-  font-size: $size-body-caption;
-  margin-block-end: $spacing-xs;
-}
-
-.fieldsetFlex {
+.actions {
   display: flex;
-  flex-direction: column;
-  max-width: $max-line-length;
+  justify-content: flex-end;
 }

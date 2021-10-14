@@ -14,7 +14,7 @@ import type {
   ComponentProps,
   ComponentPropsWithoutRef,
   FunctionComponent,
-  ReactText,
+  ReactNode,
 } from "react";
 import { withStyles, useOmit } from "../../utils";
 import styles from "./ScreenReaderText.module.scss";
@@ -24,7 +24,7 @@ interface Props
   /**
    * Visibly hidden / SR-only text
    */
-  children: ReactText;
+  children: ReactNode;
 
   /**
    * The underlying parent semantic HTML element.

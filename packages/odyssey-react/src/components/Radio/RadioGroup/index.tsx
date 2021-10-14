@@ -10,41 +10,37 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef } from "react";
 import type {
   ChangeEvent,
   ReactElement,
   ComponentPropsWithoutRef,
 } from "react";
 import { RadioGroupProvider } from "../context";
-import { useOmit } from "../../../utils";
 
-import styles from "../RadioGroup.module.scss";
+import { useOid } from "../../../utils";
+import Field from "../../Field";
+import type { SharedFieldTypes } from "../../Field";
 
 export interface Props
-  extends Omit<
-    ComponentPropsWithoutRef<"fieldset">,
-    "onChange" | "style" | "className"
-  > {
+  extends SharedFieldTypes,
+    Omit<
+      ComponentPropsWithoutRef<"fieldset">,
+      "onChange" | "style" | "className"
+    > {
   /**
    * One or more Radio.Button to be used together as a group
    */
   children: ReactElement | ReactElement[];
 
   /**
-   * The form field hint
-   */
-  hint?: string;
-
-  /**
-   * The form field legend
-   */
-  legend: string;
-
-  /**
    * The underlying input element name attribute for the group
    */
   name: string;
+
+  /**
+   * The underlying RadioGroup id
+   */
+  id?: string;
 
   /**
    * The underlying input element required attribute for the group
@@ -75,47 +71,48 @@ export interface Props
  * Radios appear as a ring shaped UI accompanied by a caption that allows
  * the user to choose only one option at a time.
  */
-const RadioGroup = forwardRef<HTMLFieldSetElement, Props>((props, ref) => {
+const RadioGroup = (props: Props): JSX.Element => {
   const {
-    hint,
     children,
     disabled = false,
-    legend,
     name,
+    id,
     onChange,
     required = true,
     value,
-    ...rest
+    error,
+    hint,
+    label,
+    optionalLabel,
   } = props;
 
-  const legendElement = <legend className={styles.legend} children={legend} />;
+  const groupid = useOid(id);
 
-  const inputElements = (
-    <div className={styles.fieldsetFlex}>
+  return (
+    <Field
+      error={error}
+      hint={hint}
+      inputId={groupid}
+      label={label}
+      optionalLabel={optionalLabel}
+      required={required}
+      as="fieldset"
+    >
       <RadioGroupProvider
         value={{
           disabled,
           required,
           name,
+          groupid,
           onChange,
           value,
+          hint,
+          error,
         }}
         children={children}
       />
-    </div>
+    </Field>
   );
-
-  const hintElement = <aside className={styles.hint} children={hint} />;
-
-  const omitProps = useOmit(rest);
-
-  return (
-    <fieldset className={styles.fieldset} ref={ref} {...omitProps}>
-      {legendElement}
-      {inputElements}
-      {hint && hintElement}
-    </fieldset>
-  );
-});
+};
 
 export default RadioGroup;
