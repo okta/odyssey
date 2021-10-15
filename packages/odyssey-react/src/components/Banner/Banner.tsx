@@ -123,7 +123,5 @@ Banner.displayName = "Banner";
 
 Banner = withStyles(styles)(Banner);
 
-type BannerProps = ComponentProps<typeof Banner>;
-export type { BannerProps as Props };
-
-export default Banner;
+export type BannerProps = ComponentProps<typeof Banner>;
+export { Banner };

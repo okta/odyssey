@@ -12,9 +12,9 @@
 
 import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import Banner from ".";
+import { Banner } from ".";
 import Link from "../Link";
-import type { Props } from ".";
+import type { BannerProps } from ".";
 
 export default {
   title: `Components/Banner`,
@@ -44,9 +44,9 @@ export default {
   },
 };
 
-type OnDismissEvent = Parameters<NonNullable<Props["onDismiss"]>>[number];
+type OnDismissEvent = Parameters<NonNullable<BannerProps["onDismiss"]>>[number];
 
-const Template: Story<Props> = (props) => {
+const Template: Story<BannerProps> = (props) => {
   const [, updateArgs] = useArgs();
   let dismissProps = {};
 
