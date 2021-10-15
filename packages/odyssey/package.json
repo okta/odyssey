@@ -1,5 +1,6 @@
 {
   "name": "@okta/odyssey",
+  "private": true,
   "version": "0.7.0",
   "description": "Okta's design system",
   "author": "Okta, Inc.",
