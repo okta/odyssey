@@ -11,10 +11,11 @@
  */
 
 import { ComponentPropsWithoutRef, forwardRef } from "react";
+import type { ComponentProps } from "react";
 import { useOmit } from "../../utils";
 import { iconDictionary } from "./";
 
-export interface Props
+interface Props
   extends Omit<ComponentPropsWithoutRef<"svg">, "style" | "className"> {
   /**
    * Title text used by screen readers
@@ -30,8 +31,7 @@ export interface Props
  * A system of icons which establishes a visual language
  * that can be easily understood regardless of age, language or culture.
  */
-
-const Icon = forwardRef<SVGSVGElement, Props>(
+const IconDictionary = forwardRef<SVGSVGElement, Props>(
   ({ name, title, ...rest }, ref) => {
     const omitProps = useOmit(rest);
 
@@ -41,4 +41,5 @@ const Icon = forwardRef<SVGSVGElement, Props>(
   }
 );
 
-export default Icon;
+export type IconDictionaryProps = ComponentProps<typeof IconDictionary>;
+export { IconDictionary };
