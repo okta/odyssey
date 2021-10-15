@@ -12,7 +12,7 @@
 
 import type { ComponentProps, ComponentPropsWithoutRef } from "react";
 import { forwardRef } from "react";
-import { useCx, withStyles } from "../../utils";
+import { useCx, useOmit, withStyles } from "../../utils";
 import styles from "./Status.module.scss";
 
 import ScreenReaderText from "../ScreenReaderText";
@@ -20,7 +20,10 @@ import ScreenReaderText from "../ScreenReaderText";
 export type StatusVariants = "neutral" | "success" | "caution" | "danger";
 
 interface Props
-  extends Omit<ComponentPropsWithoutRef<"div">, "style" | "className"> {
+  extends Omit<
+    ComponentPropsWithoutRef<"div">,
+    "style" | "className" | "role"
+  > {
   /**
    * The status label.
    */
@@ -28,6 +31,7 @@ interface Props
 
   /**
    * Visually hides the status label.
+   * @default false
    */
   labelHidden?: boolean;
 
@@ -51,14 +55,25 @@ interface Props
  * @example <Status label={label} descriptor={descriptor} />
  */
 let Status = forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const { label, descriptor, labelHidden = false, variant = "neutral" } = props;
+  const {
+    label,
+    descriptor,
+    labelHidden = false,
+    variant = "neutral",
+    ...rest
+  } = props;
 
+  const omitProps = useOmit(rest);
   const valueClass = useCx(styles.value, styles[`${variant}Variant`]);
+  const labelElement = labelHidden ? (
+    <span className={styles.label} children={label} />
+  ) : (
+    <ScreenReaderText children={label} />
+  );
 
   return (
-    <div className={styles.status} role="status" ref={ref}>
-      {!labelHidden && <span className={styles.label}>{label}</span>}
-      {labelHidden && <ScreenReaderText>{label}</ScreenReaderText>}
+    <div {...omitProps} className={styles.status} role="status" ref={ref}>
+      {labelElement}
       <span className={valueClass}>{descriptor}</span>
     </div>
   );
