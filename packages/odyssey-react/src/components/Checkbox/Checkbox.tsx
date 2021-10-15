@@ -16,8 +16,8 @@ import type {
   ComponentProps,
   ChangeEvent,
 } from "react";
-import CheckIcon from "../Icon/Check";
-import MinusIcon from "../Icon/Minus";
+import { CheckIcon } from "../Icon/Check";
+import { MinusIcon } from "../Icon/Minus";
 import styles from "./Checkbox.module.scss";
 import { useCx, useOid, useOmit, withStyles } from "../../utils";
 import Field from "../Field";
@@ -120,7 +120,5 @@ Checkbox.displayName = "Checkbox";
 
 Checkbox = withStyles(styles)(Checkbox);
 
-type CheckboxProps = ComponentProps<typeof Checkbox>;
-export type { CheckboxProps as Props };
-
-export default Checkbox;
+export type CheckboxProps = ComponentProps<typeof Checkbox>;
+export { Checkbox };
