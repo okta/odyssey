@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  ComponentProps,
+  ReactNode,
+} from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import Title from "../Title";
@@ -53,13 +57,13 @@ interface ContentProps extends CommonProps {
   content: ReactNode;
 }
 
-export type Props = TitleProps | ContentProps;
+type Props = TitleProps | ContentProps;
 
 /**
  * An infobox is a type of alert that provides feedback in response to a
  * user action or system activity.
  */
-const Infobox = forwardRef<HTMLElement, Props>((props, ref) => {
+let Infobox = forwardRef<HTMLElement, Props>((props, ref) => {
   const { content, actions, title, variant = "info", ...rest } = props;
 
   const classNames = useCx(styles.root, styles[`${variant}Variant`]);
@@ -88,4 +92,9 @@ const Infobox = forwardRef<HTMLElement, Props>((props, ref) => {
 
 Infobox.displayName = "Infobox";
 
-export default withStyles(styles)(Infobox);
+Infobox = withStyles(styles)(Infobox);
+
+type InfoboxProps = ComponentProps<typeof Infobox>;
+export type { InfoboxProps as Props };
+
+export default Infobox;

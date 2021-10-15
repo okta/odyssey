@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Tag from ".";
 
 const tagList = ["Item one", "Item two", "Item three"];
@@ -19,16 +19,25 @@ const listitem = "listitem";
 
 describe("Tag", () => {
   it("renders the tags as a list", () => {
-    const { getByRole } = render(<Tag tags={tagList} />);
+    render(<Tag tags={tagList} />);
 
-    expect(getByRole(list)).toBeInTheDocument();
+    expect(screen.getByRole(list)).toBeInTheDocument();
   });
 
   it("renders the tags in the correct order as list items", () => {
-    const { getAllByRole } = render(<Tag tags={tagList} />);
+    render(<Tag tags={tagList} />);
 
-    const tags = getAllByRole(listitem).map((el) => el.textContent);
+    const tags = screen.getAllByRole(listitem).map((el) => el.textContent);
     expect(tags).toEqual(tagList);
+  });
+
+  it("restricts children prop via types and does not render them", () => {
+    render(
+      // @ts-expect-error never type for children
+      <Tag tags={tagList} children="child" />
+    );
+
+    expect(screen.queryByText("child")).toBeNull;
   });
 
   a11yCheck(() => render(<Tag tags={["foo"]} />));

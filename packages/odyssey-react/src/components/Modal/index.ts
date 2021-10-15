@@ -10,26 +10,5 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithoutRef } from "react";
-import { forwardRef } from "react";
-import { useOmit } from "../../utils";
-
-import styles from "./List.module.scss";
-
-type Props = Omit<ComponentPropsWithoutRef<"li">, "style" | "className">;
-
-const DescriptionTerm = forwardRef<HTMLElement, Props>((props, ref) => {
-  const { children, ...rest } = props;
-
-  const omitProps = useOmit(rest);
-
-  return (
-    <dt {...omitProps} ref={ref} className={styles.term}>
-      {children}
-    </dt>
-  );
-});
-
-DescriptionTerm.displayName = "DescriptionTerm";
-
-export default DescriptionTerm;
+export * from "./Modal";
+export { default } from "./Modal";
