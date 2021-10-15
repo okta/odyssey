@@ -16,7 +16,7 @@ import { useOmit } from "../../utils";
 
 import styles from "./List.module.scss";
 
-export type Props = Omit<ComponentPropsWithoutRef<"li">, "style" | "className">;
+type Props = Omit<ComponentPropsWithoutRef<"li">, "style" | "className">;
 
 const DescriptionDetails = forwardRef<HTMLElement, Props>((props, ref) => {
   const { children, ...rest } = props;
@@ -29,5 +29,7 @@ const DescriptionDetails = forwardRef<HTMLElement, Props>((props, ref) => {
     </dd>
   );
 });
+
+DescriptionDetails.displayName = "DescriptionDetails";
 
 export default DescriptionDetails;

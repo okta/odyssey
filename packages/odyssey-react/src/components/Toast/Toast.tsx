@@ -16,8 +16,15 @@ import {
   useState,
   ComponentPropsWithoutRef,
 } from "react";
-import type { FunctionComponent, ReactNode, AnimationEvent } from "react";
-import { useCx, useOmit, useOid, oid } from "../../utils";
+import type { ComponentProps, ReactNode, AnimationEvent } from "react";
+import {
+  useCx,
+  useOmit,
+  useOid,
+  oid,
+  withStyles,
+  forwardRefWithStatics,
+} from "../../utils";
 import styles from "./Toast.module.scss";
 import Button from "../Button";
 import {
@@ -29,13 +36,12 @@ import {
 } from "../Icon";
 import type { Props as ButtonProps } from "../Button";
 
-export type ToastVariants = "info" | "success" | "caution" | "danger";
-
-export interface PropsToast
+interface Props
   extends Omit<
     ComponentPropsWithoutRef<"aside">,
-    "children" | "style" | "className"
+    "children" | "style" | "className" | "role"
   > {
+  children?: never;
   /**
    * The title to be displayed on the toast.
    */
@@ -50,20 +56,14 @@ export interface PropsToast
    * The visual variant to be displayed to the user.
    * @default info
    */
-  variant?: ToastVariants;
-
-  /**
-   * The visual variant to be displayed to the user.
-   * @default info
-   */
-  id?: string;
+  variant?: "info" | "success" | "caution" | "danger";
 
   onAnimationEnd?: (event: AnimationEvent) => void;
 
   onDismiss?: ButtonProps["onClick"];
 }
 
-export type PropsToastProvider = {
+interface PropsToastProvider {
   /**
    * Child react nodes which leverage the toast context. This is typically an entire app.
    */
@@ -73,25 +73,25 @@ export type PropsToastProvider = {
    * Callback function invoked when a toast exits the toast provider.
    */
   onToastExit?: (id: string) => void;
-};
+}
 
-export type StaticComponents = {
+interface Statics {
   Provider: typeof ToastProvider;
-};
+}
 
-export type ToastObject = {
+interface ToastObject {
   id?: string;
   title: string;
   body?: string;
-  variant?: ToastVariants;
-};
+  variant?: Props["variant"];
+}
 
-export type AddToastType = (toastObj: ToastObject) => void;
-export interface Context {
+type AddToastType = (toastObj: ToastObject) => void;
+interface Context {
   addToast: AddToastType;
 }
 
-export const ToastContext = createContext<Context>({
+const ToastContext = createContext<Context>({
   addToast: () => void 0,
 });
 
@@ -105,19 +105,21 @@ const icon = {
 /**
  * Toasts are transient, non-disruptive messages that provide at-a-glance,
  * asynchronous feedback or updates.
- *
- * @component
- * @example
- * <Toast>...</Toast>
  */
-const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
+let Toast = forwardRefWithStatics<HTMLElement, Props, Statics>((props, ref) => {
   const { title, body, variant = "info", id, onDismiss, ...rest } = props;
   const componentClass = useCx(styles.root, styles[`${variant}Variant`]);
   const xid = useOid(id);
   const omitProps = useOmit(rest);
 
   return (
-    <aside {...omitProps} role="status" id={xid} className={componentClass}>
+    <aside
+      {...omitProps}
+      ref={ref}
+      role="status"
+      id={xid}
+      className={componentClass}
+    >
       <span className={styles.icon}>{icon[variant]}</span>
       <h1 className={styles.title}>{title}</h1>
       {body && <p className={styles.body}>{body}</p>}
@@ -131,19 +133,11 @@ const Toast: FunctionComponent<PropsToast> & StaticComponents = (props) => {
       </span>
     </aside>
   );
-};
+});
 
 /**
  * Provides applications a way to add Toasts to their app
- * via React's Context API.
- *
- * @component
- * @example
- * <Toast.Provider>
- *  App with toast context.
- * </ToastProvider>
  */
-
 const ToastProvider = ({ children, onToastExit }: PropsToastProvider) => {
   const [toasts, setToasts] = useState<ToastObject[]>([]);
 
@@ -201,6 +195,14 @@ export const useToast = (): Context => {
   return context;
 };
 
+Toast.displayName = "Toast";
+
+ToastProvider.displayName = "ToastProvider";
 Toast.Provider = ToastProvider;
+
+Toast = withStyles(styles)(Toast);
+
+type ToastProps = ComponentProps<typeof Toast>;
+export type { ToastProps as Props };
 
 export default Toast;
