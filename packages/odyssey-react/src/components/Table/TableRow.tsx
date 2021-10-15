@@ -25,10 +25,12 @@ const TableRow = forwardRef<HTMLTableRowElement, Props>((props, ref) => {
   const omitProps = useOmit(rest);
 
   return (
-    <tr ref={ref} {...omitProps}>
+    <tr {...omitProps} ref={ref}>
       {children}
     </tr>
   );
 });
+
+TableRow.displayName = "TableRow";
 
 export default TableRow;

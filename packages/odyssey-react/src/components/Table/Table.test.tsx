@@ -122,13 +122,29 @@ describe("Table Header Cell", () => {
 
 describe("Table Sort Button", () => {
   it("renders the button", () => {
-    render(<Table.SortButton direction="unsorted" />);
+    render(
+      <Table.SortButton
+        direction="unsorted"
+        unsortedIconTitle="Unsorted"
+        ascendingIconTitle="Ascending"
+        descendingIconTitle="Descending"
+        screenReaderCallToAction="click to sort"
+      />
+    );
 
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
   it("uses direction prop to display an icon", () => {
-    render(<Table.SortButton direction="asc" />);
+    render(
+      <Table.SortButton
+        direction="asc"
+        unsortedIconTitle="Unsorted"
+        ascendingIconTitle="Ascending"
+        descendingIconTitle="Descending"
+        screenReaderCallToAction="click to sort"
+      />
+    );
     const sortIcon = screen.getByTitle("Ascending").parentElement;
     expect(sortIcon).toBeVisible();
   });

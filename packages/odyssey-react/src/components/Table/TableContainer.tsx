@@ -37,15 +37,13 @@ interface Props
   title: ReactNode;
 }
 
-type Ref = HTMLElement;
-
-let TableContainer = forwardRef<Ref, Props>((props, ref) => {
+let TableContainer = forwardRef<HTMLElement, Props>((props, ref) => {
   const { children, title, ...rest } = props;
 
   const omitProps = useOmit(rest);
 
   return (
-    <figure ref={ref} className={styles.container} {...omitProps}>
+    <figure {...omitProps} ref={ref} className={styles.container}>
       <figcaption className={styles.title}>{title}</figcaption>
       {children}
     </figure>

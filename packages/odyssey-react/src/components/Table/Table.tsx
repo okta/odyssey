@@ -82,7 +82,7 @@ let Table = forwardRefWithStatics<HTMLTableElement, Props, Statics>(
     const omitProps = useOmit(rest);
 
     const TableEl = () => (
-      <table ref={ref} className={styles.root} {...omitProps}>
+      <table {...omitProps} ref={ref} className={styles.root}>
         <caption>
           <ScreenReaderText>{caption}</ScreenReaderText>
         </caption>
