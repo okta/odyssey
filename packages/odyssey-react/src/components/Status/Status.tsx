@@ -66,9 +66,9 @@ let Status = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const omitProps = useOmit(rest);
   const valueClass = useCx(styles.value, styles[`${variant}Variant`]);
   const labelElement = labelHidden ? (
-    <span className={styles.label} children={label} />
-  ) : (
     <ScreenReaderText children={label} />
+  ) : (
+    <span className={styles.label} children={label} />
   );
 
   return (
