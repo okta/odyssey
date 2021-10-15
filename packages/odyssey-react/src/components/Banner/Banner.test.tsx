@@ -11,7 +11,7 @@
  */
 
 import { render, fireEvent, screen } from "@testing-library/react";
-import Banner from ".";
+import { Banner } from ".";
 
 const role = "status";
 const bannerTitle = "Banner title";
