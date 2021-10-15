@@ -13,7 +13,7 @@
 import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import Modal from ".";
-import Button from "../Button";
+import { Button } from "../Button";
 import type { Props } from ".";
 
 export default {

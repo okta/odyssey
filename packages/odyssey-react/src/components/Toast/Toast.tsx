@@ -26,7 +26,7 @@ import {
   forwardRefWithStatics,
 } from "../../utils";
 import styles from "./Toast.module.scss";
-import Button from "../Button";
+import { Button } from "../Button";
 import {
   GetInfoIcon,
   ErrorIcon,
@@ -34,7 +34,7 @@ import {
   CompleteIcon,
   CloseIcon,
 } from "../Icon";
-import type { Props as ButtonProps } from "../Button";
+import type { ButtonProps } from "../Button";
 
 interface Props
   extends Omit<

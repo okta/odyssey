@@ -11,7 +11,7 @@
  */
 
 import { render, fireEvent, screen } from "@testing-library/react";
-import Button from ".";
+import { Button } from ".";
 
 const button = "button";
 const buttonLabel = "Button Label";
