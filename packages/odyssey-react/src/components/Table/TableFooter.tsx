@@ -25,10 +25,12 @@ const TableFooter = forwardRef<HTMLTableSectionElement, Props>((props, ref) => {
   const omitProps = useOmit(rest);
 
   return (
-    <tfoot ref={ref} {...omitProps}>
+    <tfoot {...omitProps} ref={ref}>
       {children}
     </tfoot>
   );
 });
+
+TableFooter.displayName = "TableFooter";
 
 export default TableFooter;

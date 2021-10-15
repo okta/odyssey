@@ -37,33 +37,29 @@ interface Props
   direction: TableSortDirections;
   /**
    * Title for the unsorted icon
-   * @default Unsorted
    */
-  unsortedIconTitle?: string;
+  unsortedIconTitle: string;
   /**
    * Title for the ascending sort icon
-   * @default Ascending
    */
-  ascendingIconTitle?: string;
+  ascendingIconTitle: string;
   /**
    * Title for the descending sort icon
-   * @default Descending
    */
-  descendingIconTitle?: string;
+  descendingIconTitle: string;
   /**
    * Screen read only text used as the call to action for the button
-   * @default click to sort
    */
-  screenReaderCallToAction?: string;
+  screenReaderCallToAction: string;
 }
 
 let TableSortButton = forwardRef<HTMLButtonElement, Props>((props, ref) => {
   const {
     children,
     direction = "unsorted",
-    unsortedIconTitle = "Unsorted",
-    ascendingIconTitle = "Ascending",
-    descendingIconTitle = "Descending",
+    unsortedIconTitle,
+    ascendingIconTitle,
+    descendingIconTitle,
     screenReaderCallToAction = "click to sort",
     ...rest
   } = props;
@@ -73,7 +69,7 @@ let TableSortButton = forwardRef<HTMLButtonElement, Props>((props, ref) => {
   const omitProps = useOmit(rest);
 
   return (
-    <button ref={ref} className={componentClass} {...omitProps}>
+    <button {...omitProps} ref={ref} className={componentClass}>
       {children}
       <span className={styles.sortIndicator}>
         {direction === "unsorted" && <SortIcon title={unsortedIconTitle} />}

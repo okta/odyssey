@@ -25,10 +25,12 @@ const TableBody = forwardRef<HTMLTableSectionElement, Props>((props, ref) => {
   const omitProps = useOmit(rest);
 
   return (
-    <tbody ref={ref} {...omitProps}>
+    <tbody {...omitProps} ref={ref}>
       {children}
     </tbody>
   );
 });
+
+TableBody.displayName = "TableBody";
 
 export default TableBody;

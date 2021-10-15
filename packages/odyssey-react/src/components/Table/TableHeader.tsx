@@ -25,10 +25,12 @@ const TableHeader = forwardRef<HTMLTableSectionElement, Props>((props, ref) => {
   const omitProps = useOmit(rest);
 
   return (
-    <thead ref={ref} {...omitProps}>
+    <thead {...omitProps} ref={ref}>
       {children}
     </thead>
   );
 });
+
+TableHeader.displayName = "TableHeader";
 
 export default TableHeader;

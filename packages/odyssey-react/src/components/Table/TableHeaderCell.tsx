@@ -43,7 +43,7 @@ let TableHeaderCell = forwardRef<HTMLTableCellElement, Props>((props, ref) => {
   const omitProps = useOmit(rest);
 
   return (
-    <th ref={ref} className={componentClass} {...omitProps}>
+    <th {...omitProps} ref={ref} className={componentClass}>
       {children}
     </th>
   );
