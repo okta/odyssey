@@ -10,13 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithoutRef, ReactText, ReactElement } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  ComponentProps,
+  ReactText,
+  ReactElement,
+} from "react";
 import { forwardRef } from "react";
 import { ExternalIcon } from "../Icon";
 import { useCx, useOmit, withStyles } from "../../utils";
 import styles from "./Link.module.scss";
 
-export interface Props
+interface Props
   extends Omit<
     ComponentPropsWithoutRef<"a">,
     "style" | "className" | "children" | "href"
@@ -46,7 +51,7 @@ export interface Props
 /**
  * Links are navigation elements displayed as text. Use a Link to bring a user to another page or start a download.
  */
-const Link = forwardRef<HTMLAnchorElement, Props>((props, ref) => {
+let Link = forwardRef<HTMLAnchorElement, Props>((props, ref) => {
   const { children, variant = "primary", icon, ...rest } = props;
   const classNames = useCx(styles.root, styles[`${variant}Variant`]);
   const omitProps = useOmit(rest);
@@ -65,4 +70,11 @@ const Link = forwardRef<HTMLAnchorElement, Props>((props, ref) => {
   );
 });
 
-export default withStyles(styles)(Link);
+Link.displayName = "Link";
+
+Link = withStyles(styles)(Link);
+
+type LinkProps = ComponentProps<typeof Link>;
+export type { LinkProps as Props };
+
+export default Link;
