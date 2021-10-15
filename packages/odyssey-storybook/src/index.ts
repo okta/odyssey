@@ -27,6 +27,7 @@ const withStyles = new RegExp(
     "List",
     "Link",
     "ScreenReaderText",
+    "Status",
     "Title",
     "Tooltip",
     "Modal",
