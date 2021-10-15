@@ -19,8 +19,8 @@ import type {
   ReactText,
 } from "react";
 import { createPortal } from "react-dom";
-import CoreButton from "../Button";
-import type { Props as CoreButtonProps } from "../Button";
+import { Button as CoreButton } from "../Button";
+import type { ButtonProps as CoreButtonProps } from "../Button";
 import Title from "../Title";
 import { forwardRefWithStatics, useOid, useCx, withStyles } from "../../utils";
 import styles from "./Modal.module.scss";

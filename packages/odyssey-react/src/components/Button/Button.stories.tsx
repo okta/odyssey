@@ -11,8 +11,8 @@
  */
 
 import { Story } from "@storybook/react";
-import Button from ".";
-import type { Props } from ".";
+import { Button } from ".";
+import type { ButtonProps } from ".";
 import { CloseIcon, SettingsIcon } from "../Icon";
 
 export default {
@@ -32,7 +32,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = (props) => <Button {...props} />;
+const Template: Story<ButtonProps> = (props) => <Button {...props} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

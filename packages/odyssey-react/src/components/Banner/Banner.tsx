@@ -18,7 +18,7 @@ import type {
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import Title from "../Title";
-import Button from "../Button";
+import { Button } from "../Button";
 import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
 

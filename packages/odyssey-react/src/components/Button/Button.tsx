@@ -94,7 +94,5 @@ Button.displayName = "Button";
 
 Button = withStyles(styles)(Button);
 
-type ButtonProps = ComponentProps<typeof Button>;
-export type { ButtonProps as Props };
-
-export default Button;
+export type ButtonProps = ComponentProps<typeof Button>;
+export { Button };
