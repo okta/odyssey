@@ -30,6 +30,7 @@ const withStyles = new RegExp(
     "Tooltip",
     "Modal",
     "Tag",
+    "Toast",
   ].join("|")})\\.module\\.scss$`
 );
 
