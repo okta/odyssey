@@ -13,7 +13,7 @@
 import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
 import Select from ".";
-import type { Props } from "./Select";
+import type { Props } from ".";
 
 const options = [
   "Proxima Centauri",

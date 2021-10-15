@@ -22,14 +22,18 @@ const withStyles = new RegExp(
     "Banner",
     "Button",
     "Checkbox",
+    "Icon",
     "Infobox",
     "List",
     "Link",
     "ScreenReaderText",
+    "Status",
     "Table",
     "Title",
     "Tooltip",
     "Modal",
+    "Tag",
+    "Toast",
   ].join("|")})\\.module\\.scss$`
 );
 

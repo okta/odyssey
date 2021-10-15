@@ -10,28 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent } from "react";
-import styles from "./Tag.module.scss";
+const { writeFileSync } = require("fs");
+const { resolve } = require("path");
 
-export type Props = {
-  /**
-   * Text content to be rendered within the tag, it should describe an entity.
-   */
-  tags: string[];
-};
+const pkgPath = resolve(__dirname, "../package.json");
 
-/**
- * Use Tags to help describe and differentiate an entity or object.
- * Think of them as “adjectives” in your UI toolbox that make navigating
- * and parsing content easier.
- */
-const Tag: FunctionComponent<Props> = ({ tags }) => (
-  <ul className={styles.list}>
-    {tags.map((item) => (
-      <li className={styles.tag} key={item}>
-        {item}
-      </li>
-    ))}
-  </ul>
-);
-export default Tag;
+// eslint-disable-next-line no-unused-vars
+const { scripts, ...pkgNoScripts } = require(pkgPath);
+
+writeFileSync(pkgPath, JSON.stringify(pkgNoScripts, null, 2) + "\n");

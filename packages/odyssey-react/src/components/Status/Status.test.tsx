@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Status from ".";
 
 const status = "status";
@@ -19,7 +19,7 @@ const statusDescriptor = "Status Descriptor";
 
 describe("Status", () => {
   it('renders the appropriate role of "status"', () => {
-    const { getByRole } = render(
+    render(
       <Status
         variant="success"
         label={statusLabel}
@@ -27,11 +27,11 @@ describe("Status", () => {
       />
     );
 
-    expect(getByRole(status)).toBeVisible();
+    expect(screen.getByRole(status)).toBeVisible();
   });
 
   it('renders visible screen reader content with "labelHidden" true', () => {
-    const { getByText } = render(
+    render(
       <Status
         variant="danger"
         label={statusLabel}
@@ -40,7 +40,7 @@ describe("Status", () => {
       />
     );
 
-    expect(getByText(statusLabel)).toBeVisible();
+    expect(screen.getByText(statusLabel)).toBeVisible();
   });
 
   a11yCheck(() => render(<Status label="foo" descriptor="bar" />));

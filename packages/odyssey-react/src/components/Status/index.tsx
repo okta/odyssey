@@ -10,55 +10,5 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent } from "react";
-import { useCx } from "../../utils";
-import styles from "./Status.module.scss";
-
-import ScreenReaderText from "../ScreenReaderText";
-
-export type StatusVariants = "neutral" | "success" | "caution" | "danger";
-export type Props = {
-  /**
-   * The status label.
-   */
-  label: string;
-
-  /**
-   * Visually hides the status label.
-   */
-  labelHidden?: boolean;
-
-  /**
-   * The description of the present state/status.
-   */
-  descriptor: string;
-
-  /**
-   * The visual variant to be displayed to the user.
-   * @default neutral
-   */
-  variant?: StatusVariants;
-};
-
-/**
- * Status is used to inform users by providing feedback on system states. Status can display broad
- * operational states as well as granular states like user status.
- *
- * @component
- * @example <Status label={label} descriptor={descriptor} />
- */
-const Status: FunctionComponent<Props> = (props) => {
-  const { label, descriptor, labelHidden = false, variant = "neutral" } = props;
-
-  const valueClass = useCx(styles.value, styles[`${variant}Variant`]);
-
-  return (
-    <div className={styles.status} role="status">
-      {!labelHidden && <span className={styles.label}>{label}</span>}
-      {labelHidden && <ScreenReaderText>{label}</ScreenReaderText>}
-      <span className={valueClass}>{descriptor}</span>
-    </div>
-  );
-};
-
-export default Status;
+export * from "./Status";
+export { default } from "./Status";
