@@ -45,13 +45,13 @@ function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
 ${headerComment}
 
 import { forwardRef } from "react";
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef, ComponentProps } from "react";
 import { useOmit } from '../../utils';
-import SvgIcon from './SvgIcon';
+import { SvgIcon } from './SvgIcon';
 
 ${newLine}
 
-export interface Props extends Omit<
+interface Props extends Omit<
   ComponentPropsWithoutRef<'svg'>,
   'style' | 'className'
 > {
@@ -65,8 +65,7 @@ const ${compName} = forwardRef<SVGSVGElement, Props>((props, ref) => {
   return (
     ${icon}
   )
-}
-);
+});
 
 ${newLine}
 
@@ -74,7 +73,12 @@ ${compName}.displayName = "${compName}";
 
 ${newLine}
 
-export default ${compName}
-  `;
+export type ${compName + "Props"} = ComponentProps<typeof ${compName}>
+
+${newLine}
+
+export { ${compName} as ${compName} }
+`;
 }
+
 module.exports = odysseyIconTemplate;
