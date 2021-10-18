@@ -11,15 +11,15 @@
  */
 
 import type { Story } from "@storybook/react";
-import Tag from ".";
-import type { Props } from ".";
+import { Tag } from ".";
+import type { TagProps } from ".";
 
 export default {
   title: `Components/Tag`,
   component: Tag,
 };
 
-const Template: Story<Props> = ({ tags }) => <Tag tags={tags} />;
+const Template: Story<TagProps> = ({ tags }) => <Tag tags={tags} />;
 
 export const Default = Template.bind({});
 Default.args = {

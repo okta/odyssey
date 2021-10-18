@@ -51,7 +51,5 @@ Tag.displayName = "Tag";
 
 Tag = withStyles(styles)(Tag);
 
-type TagProps = ComponentProps<typeof Tag>;
-export type { TagProps as Props };
-
-export default Tag;
+export type TagProps = ComponentProps<typeof Tag>;
+export { Tag };
