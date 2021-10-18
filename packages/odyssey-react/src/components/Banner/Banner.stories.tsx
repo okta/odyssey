@@ -13,7 +13,7 @@
 import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { Banner } from ".";
-import Link from "../Link";
+import { Link } from "../Link";
 import type { BannerProps } from ".";
 
 export default {

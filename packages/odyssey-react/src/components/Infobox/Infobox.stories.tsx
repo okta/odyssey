@@ -11,7 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import Link from "../Link";
+import { Link } from "../Link";
 import { Infobox } from ".";
 import type { InfoboxProps } from ".";
 
