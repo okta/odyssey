@@ -10,14 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ReactElement, ComponentProps } from "react";
+import type {
+  ReactNode,
+  ReactElement,
+  ComponentProps,
+  ComponentPropsWithoutRef,
+} from "react";
 import { forwardRef } from "react";
 
-import { useOmit } from "../../utils";
+import { useOmit, withStyles } from "../../utils";
 
 import styles from "./Table.module.scss";
 
-export type Props = {
+interface Props
+  extends Omit<
+    ComponentPropsWithoutRef<"figure">,
+    "style" | "className" | "title"
+  > {
   /**
    * The table for this container
    */
@@ -26,21 +35,26 @@ export type Props = {
    * The visible heading for the table
    */
   title: ReactNode;
-} & ComponentProps<"figure">;
+}
 
-type Ref = HTMLElement;
-
-const TableContainer = forwardRef<Ref, Props>((props, ref) => {
+let TableContainer = forwardRef<HTMLElement, Props>((props, ref) => {
   const { children, title, ...rest } = props;
 
   const omitProps = useOmit(rest);
 
   return (
-    <figure ref={ref} className={styles.container} {...omitProps}>
+    <figure {...omitProps} ref={ref} className={styles.container}>
       <figcaption className={styles.title}>{title}</figcaption>
       {children}
     </figure>
   );
 });
+
+TableContainer.displayName = "TableContainer";
+
+TableContainer = withStyles(styles)(TableContainer);
+
+type TableContainerProps = ComponentProps<typeof TableContainer>;
+export type { TableContainerProps as Props };
 
 export default TableContainer;

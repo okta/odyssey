@@ -33,7 +33,15 @@ const Template: Story = ({ title, caption, withContainer, direction }) => (
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell scope="col">
-          <Table.SortButton direction={direction}>Planet</Table.SortButton>
+          <Table.SortButton
+            direction={direction}
+            unsortedIconTitle="Unsorted"
+            ascendingIconTitle="Ascending"
+            descendingIconTitle="Descending"
+            screenReaderCallToAction="click to sort"
+          >
+            Planet
+          </Table.SortButton>
         </Table.HeaderCell>
         <Table.HeaderCell scope="col" format={"num"}>
           Radius (km)
