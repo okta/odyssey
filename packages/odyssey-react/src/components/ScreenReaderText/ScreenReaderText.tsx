@@ -54,4 +54,4 @@ ScreenReaderText = withStyles(styles)(ScreenReaderText);
 type SRProps = ComponentProps<typeof ScreenReaderText>;
 export type { SRProps as Props };
 
-export default ScreenReaderText;
+export { ScreenReaderText };

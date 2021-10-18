@@ -13,9 +13,8 @@
 import type { ComponentProps, ComponentPropsWithoutRef } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
+import { ScreenReaderText } from "../ScreenReaderText";
 import styles from "./Status.module.scss";
-
-import ScreenReaderText from "../ScreenReaderText";
 
 export type StatusVariants = "neutral" | "success" | "caution" | "danger";
 

@@ -19,7 +19,7 @@ import { forwardRef } from "react";
 
 import { useCx, useOmit, withStyles } from "../../utils";
 import { SortIcon, SortAscIcon, SortDescIcon } from "../Icon";
-import ScreenReaderText from "../ScreenReaderText";
+import { ScreenReaderText } from "../ScreenReaderText";
 
 import styles from "./Table.module.scss";
 
