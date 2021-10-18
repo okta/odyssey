@@ -11,7 +11,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import Status from ".";
+import { Status } from ".";
 
 const status = "status";
 const statusLabel = "Status Label";

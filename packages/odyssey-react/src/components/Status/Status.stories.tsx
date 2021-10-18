@@ -11,8 +11,8 @@
  */
 
 import type { Story } from "@storybook/react";
-import Status from ".";
-import type { Props } from ".";
+import { Status } from ".";
+import type { StatusProps } from ".";
 
 export default {
   title: `Components/Status`,
@@ -24,7 +24,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({
+const Template: Story<StatusProps> = ({
   label,
   descriptor,
   labelHidden,
