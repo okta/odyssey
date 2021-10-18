@@ -74,7 +74,5 @@ Link.displayName = "Link";
 
 Link = withStyles(styles)(Link);
 
-type LinkProps = ComponentProps<typeof Link>;
-export type { LinkProps as Props };
-
-export default Link;
+export type LinkProps = ComponentProps<typeof Link>;
+export { Link };

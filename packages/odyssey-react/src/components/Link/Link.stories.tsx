@@ -11,8 +11,8 @@
  */
 
 import type { Story } from "@storybook/react";
-import Link from ".";
-import type { Props } from ".";
+import { Link } from ".";
+import type { LinkProps } from ".";
 import { IconDictionary, GetInfoIcon } from "../Icon";
 
 export default {
@@ -20,7 +20,7 @@ export default {
   component: Link,
 };
 
-const Template: Story<Props> = ({
+const Template: Story<LinkProps> = ({
   children,
   variant,
   href,
