@@ -14,7 +14,7 @@ import { Story } from "@storybook/react";
 import { Form } from ".";
 import { FieldGroup } from "../FieldGroup";
 import { TextInput } from "../TextInput";
-import Infobox from "../Infobox";
+import { Infobox } from "../Infobox";
 import { Button } from "../Button";
 import type { FormProps } from ".";
 

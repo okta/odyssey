@@ -11,4 +11,3 @@
  */
 
 export * from "./Infobox";
-export { default } from "./Infobox";

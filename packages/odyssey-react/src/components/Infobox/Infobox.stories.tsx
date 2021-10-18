@@ -11,9 +11,9 @@
  */
 
 import { Story } from "@storybook/react";
-import Infobox from ".";
 import Link from "../Link";
-import type { Props } from ".";
+import { Infobox } from ".";
+import type { InfoboxProps } from ".";
 
 export default {
   title: `Components/Infobox`,
@@ -37,7 +37,7 @@ const actions = (
   </Link>
 );
 
-const Template: Story<Props> = ({ title, variant }) => (
+const Template: Story<InfoboxProps> = ({ title, variant }) => (
   <Infobox
     title={title}
     variant={variant}

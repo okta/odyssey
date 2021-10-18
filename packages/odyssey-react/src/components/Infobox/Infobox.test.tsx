@@ -11,7 +11,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import Infobox from ".";
+import { Infobox } from ".";
 
 const statusRole = "status";
 const title = "Infobox title";
