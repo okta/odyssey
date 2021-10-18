@@ -10,12 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactNode, ReactElement } from "react";
+import type {
+  ComponentProps,
+  FunctionComponent,
+  ReactNode,
+  ReactElement,
+} from "react";
 import { useOmit, withStyles } from "../../utils";
 
 import styles from "./FieldGroup.module.scss";
 
-export interface Props {
+interface Props {
   /**
    * Content to be rendered within the FieldGroup.
    */
@@ -36,28 +41,39 @@ interface PropsError {
   children: ReactNode;
 }
 
-export type StaticComponents = {
+type Statics = {
   Error: typeof Error;
 };
 
-const FieldGroup: FunctionComponent<Props> & StaticComponents = (props) => {
-  const { children, title, desc, ...rest } = props;
+let FieldGroup: FunctionComponent<Props> & Statics = Object.assign(
+  (props: Props) => {
+    const { children, title, desc, ...rest } = props;
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <fieldset {...omitProps} className={styles.root}>
-      {title && <legend className={styles.title}>{title}</legend>}
-      {desc && <p>{desc}</p>}
-      {children}
-    </fieldset>
-  );
-};
-
-const Error = ({ children }: PropsError) => (
-  <section className={styles.error}>{children}</section>
+    return (
+      <fieldset {...omitProps} className={styles.root}>
+        {title && <legend className={styles.title}>{title}</legend>}
+        {desc && <p>{desc}</p>}
+        {children}
+      </fieldset>
+    );
+  },
+  {
+    Error,
+  }
 );
+
+function Error({ children }: PropsError) {
+  return <section className={styles.error}>{children}</section>;
+}
+
+FieldGroup.displayName = "FieldGroup";
+Error.displayName = "FieldGroupError";
 
 FieldGroup.Error = Error;
 
-export default withStyles(styles)(FieldGroup);
+FieldGroup = withStyles(styles)(FieldGroup);
+
+export type FieldGroupProps = ComponentProps<typeof FieldGroup>;
+export { FieldGroup };
