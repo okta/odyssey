@@ -98,4 +98,4 @@ const useChoices = (id: string, value?: string): void => {
   }, [value]);
 };
 
-export { useChoices as default };
+export { useChoices };

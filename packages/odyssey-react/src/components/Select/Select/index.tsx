@@ -17,9 +17,9 @@ import type {
   ReactElement,
   ComponentPropsWithoutRef,
 } from "react";
-import SelectOption from "../SelectOption";
-import SelectOptionGroup from "../SelectOptionGroup";
-import useChoices from "./useChoices";
+import { SelectOption } from "../SelectOption";
+import { SelectOptionGroup } from "../SelectOptionGroup";
+import { useChoices } from "./useChoices";
 import {
   forwardRefWithStatics,
   useOid,
@@ -143,7 +143,9 @@ let Select = forwardRefWithStatics<HTMLSelectElement, Props, Statics>(
   }
 );
 
-export interface Statics {
+Select.displayName = "Select";
+
+interface Statics {
   Option: typeof SelectOption;
   OptionGroup: typeof SelectOptionGroup;
 }
@@ -151,9 +153,7 @@ export interface Statics {
 Select.Option = SelectOption;
 Select.OptionGroup = SelectOptionGroup;
 
-type SelectProps = ComponentProps<typeof Select>;
-export type { SelectProps as Props };
-
 Select = withStyles(styles)(Select);
 
-export default Select;
+export type SelectProps = ComponentProps<typeof Select>;
+export { Select };

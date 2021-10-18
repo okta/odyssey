@@ -11,10 +11,14 @@
  */
 
 import { forwardRef } from "react";
-import type { ReactElement, ComponentPropsWithoutRef } from "react";
+import type {
+  ComponentProps,
+  ReactElement,
+  ComponentPropsWithoutRef,
+} from "react";
 import { useOmit } from "../../../utils";
 
-export interface Props
+interface Props
   extends Omit<ComponentPropsWithoutRef<"optgroup">, "style" | "className"> {
   /**
    * One or more option to be used together as a group
@@ -45,4 +49,7 @@ const SelectOptionGroup = forwardRef<HTMLOptGroupElement, Props>(
   }
 );
 
-export default SelectOptionGroup;
+SelectOptionGroup.displayName = "SelectOptionGroup";
+
+export type SelectOptionsGroupProps = ComponentProps<typeof SelectOptionGroup>;
+export { SelectOptionGroup };
