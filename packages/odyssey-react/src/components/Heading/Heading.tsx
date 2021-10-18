@@ -17,7 +17,7 @@ import type {
 } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
-import styles from "./Title.module.scss";
+import styles from "./Heading.module.scss";
 
 interface Props
   extends Omit<ComponentPropsWithoutRef<"h1">, "style" | "className"> {
@@ -50,11 +50,11 @@ interface Props
 }
 
 /**
- * Title are used to describe the main idea of a page, a section,
+ * Heading are used to describe the main idea of a page, a section,
  * or content that follows it. By default, header tags (h1 through h6)
  * use the corresponding visual size.
  */
-let Title = forwardRef<HTMLHeadingElement, Props>((props, ref) => {
+let Heading = forwardRef<HTMLHeadingElement, Props>((props, ref) => {
   const {
     level = "1",
     visualLevel,
@@ -82,11 +82,9 @@ let Title = forwardRef<HTMLHeadingElement, Props>((props, ref) => {
   );
 });
 
-Title.displayName = "Title";
+Heading.displayName = "Heading";
 
-Title = withStyles(styles)(Title);
+Heading = withStyles(styles)(Heading);
 
-type TitleProps = ComponentProps<typeof Title>;
-export type { TitleProps as Props };
-
-export default Title;
+export type HeadingProps = ComponentProps<typeof Heading>;
+export { Heading };

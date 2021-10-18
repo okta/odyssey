@@ -21,7 +21,7 @@ import type {
 import { createPortal } from "react-dom";
 import { Button as CoreButton } from "../Button";
 import type { ButtonProps as CoreButtonProps } from "../Button";
-import Title from "../Title";
+import { Heading } from "../Heading";
 import { forwardRefWithStatics, useOid, useCx, withStyles } from "../../utils";
 import styles from "./Modal.module.scss";
 import { CloseIcon } from "../Icon";
@@ -134,7 +134,7 @@ const Header = ({ children }: PropsModalHeader) => {
           icon={<CloseIcon title={closeMessage} />}
         />
       </span>
-      <Title
+      <Heading
         id={modalTitleId}
         visualLevel="4"
         noEndMargin

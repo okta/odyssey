@@ -11,14 +11,14 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import Title from ".";
+import { Heading } from ".";
 
 const heading = "heading";
-const titleText = "This is a title.";
+const headingText = "This is a heading.";
 
-describe("Title", () => {
-  it("render the title", () => {
-    render(<Title children={titleText} />);
+describe("Heading", () => {
+  it("render the heading", () => {
+    render(<Heading children={headingText} />);
 
     const headingElement = screen.getByRole(heading);
     expect(headingElement).toBeVisible();
@@ -26,13 +26,13 @@ describe("Title", () => {
   });
 
   it("changes the semantic tag based on the level prop", () => {
-    render(<Title level="3" children={titleText} />);
+    render(<Heading level="3" children={headingText} />);
 
     expect(screen.getByRole(heading).tagName).toBe("H3");
   });
 
   it("changes the visual appearance based on the visualLevel prop", () => {
-    render(<Title level="3" visualLevel="6" children={titleText} />);
+    render(<Heading level="3" visualLevel="6" children={headingText} />);
     const component = screen.getByRole(heading);
 
     expect(component.tagName).toBe("H3");
@@ -41,17 +41,17 @@ describe("Title", () => {
 
   it("enforces types for polymorphic rest props", () => {
     // @ts-expect-error heading element does not have href attribute
-    <Title href="/foo/bar.baz" children={titleText} />;
+    <Heading href="/foo/bar.baz" children={headingText} />;
   });
 
   it("invokes ref with expected args after render", () => {
     const ref = jest.fn();
 
-    render(<Title ref={ref} children={titleText} />);
+    render(<Heading ref={ref} children={headingText} />);
 
     expect(ref).toHaveBeenCalledTimes(1);
     expect(ref).toHaveBeenLastCalledWith(screen.getByRole(heading));
   });
 
-  a11yCheck(() => render(<Title level="1" children={titleText} />));
+  a11yCheck(() => render(<Heading level="1" children={headingText} />));
 });

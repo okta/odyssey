@@ -10,26 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import Title from ".";
-import type { Props } from ".";
-
-export default {
-  title: `Components/Title`,
-  component: Title,
-  argTypes: {
-    children: {
-      control: { type: "string" },
-    },
-  },
-};
-
-const Template: Story<Props> = ({ level, visualLevel, children }) => (
-  <Title level={level} visualLevel={visualLevel} children={children} />
-);
-
-export const Primary = Template.bind({});
-Primary.args = {
-  level: "1",
-  children: "Section title",
-};
+export * from "./Heading";

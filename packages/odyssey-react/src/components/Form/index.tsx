@@ -18,7 +18,7 @@ import type {
 } from "react";
 import { useOmit, withStyles } from "../../utils";
 
-import Title from "../Title";
+import { Heading } from "../Heading";
 
 import styles from "./Form.module.scss";
 
@@ -67,7 +67,7 @@ let Form: FunctionComponent<Props> & Statics = Object.assign(
     return (
       <form {...omitProps} className={styles.root}>
         <header className={styles.header}>
-          {title && <Title visualLevel="3" children={title} />}
+          {title && <Heading visualLevel="3" children={title} />}
           {desc && <p>{desc}</p>}
         </header>
         {children}

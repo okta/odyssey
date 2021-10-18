@@ -17,7 +17,7 @@ import type {
 } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
-import Title from "../Title";
+import { Heading } from "../Heading";
 import { CautionIcon, CompleteIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Infobox.module.scss";
 
@@ -81,7 +81,7 @@ let Infobox = forwardRef<HTMLElement, Props>((props, ref) => {
       <span className={styles.icon}>{icon[variant]}</span>
       {title && (
         <div className={styles.title}>
-          <Title visualLevel="6" children={title} />
+          <Heading visualLevel="6" children={title} />
         </div>
       )}
       {content && <section className={styles.content} children={content} />}
