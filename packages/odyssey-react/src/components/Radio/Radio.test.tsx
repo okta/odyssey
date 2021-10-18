@@ -11,7 +11,7 @@
  */
 
 import { render, fireEvent, screen, within } from "@testing-library/react";
-import Radio from ".";
+import { Radio } from ".";
 
 const radioRole = "radio";
 const groupRole = "group";

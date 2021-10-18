@@ -11,7 +11,7 @@
  */
 
 import { forwardRef } from "react";
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentProps, ComponentPropsWithoutRef } from "react";
 import { useRadioGroup } from "../context";
 import { useCx, useOid, useOmit, withStyles } from "../../../utils";
 
@@ -19,7 +19,7 @@ import styles from "../RadioButton.module.scss";
 
 import type { SharedFieldTypes } from "../../Field/types";
 
-export interface Props
+interface Props
   extends Pick<SharedFieldTypes, "hint" | "error">,
     Omit<ComponentPropsWithoutRef<"input">, "style" | "className"> {
   /**
@@ -42,7 +42,7 @@ export interface Props
  * Radios appear as a ring shaped UI accompanied by a caption that allows
  * the user to choose only one option at a time.
  */
-const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
+let RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const { id, label, value, ...rest } = props;
 
   const {
@@ -88,4 +88,9 @@ const RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
   );
 });
 
-export default withStyles(styles)(RadioButton);
+RadioButton = withStyles(styles)(RadioButton);
+
+RadioButton.displayName = "RadioButton";
+
+export type RadioButtonProps = ComponentProps<typeof RadioButton>;
+export { RadioButton };
