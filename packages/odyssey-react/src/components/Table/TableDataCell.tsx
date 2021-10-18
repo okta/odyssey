@@ -16,7 +16,7 @@ import type {
   ComponentPropsWithoutRef,
 } from "react";
 import { forwardRef } from "react";
-import type { CellTextFormats } from "./Table";
+import type { CellTextFormats } from "./types";
 import { useCx, useOmit, withStyles } from "../../utils";
 
 import styles from "./Table.module.scss";
@@ -53,7 +53,5 @@ TableDataCell.displayName = "TableDataCell";
 
 TableDataCell = withStyles(styles)(TableDataCell);
 
-type TableDataCellProps = ComponentProps<typeof TableDataCell>;
-export type { TableDataCellProps as Props };
-
-export default TableDataCell;
+export type TableDataCellProps = ComponentProps<typeof TableDataCell>;
+export { TableDataCell };

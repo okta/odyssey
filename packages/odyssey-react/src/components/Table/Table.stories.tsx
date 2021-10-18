@@ -12,8 +12,8 @@
 
 import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
-import Table from ".";
-import type { Props } from "./Table";
+import { Table } from ".";
+import type { TableProps } from "./Table";
 
 export default {
   title: `Components/Table`,
@@ -89,7 +89,7 @@ export const Default = Template.bind({});
     withContainer: { control: { type: "boolean" } },
   });
 
-export const RowGrouping = (args: Props): ReactElement => (
+export const RowGrouping = (args: TableProps): ReactElement => (
   <Table {...args}>
     <Table.Header>
       <Table.Row>
@@ -145,7 +145,7 @@ export const RowGrouping = (args: Props): ReactElement => (
   </Table>
 );
 
-export const EmptyTable = (args: Props): ReactElement => (
+export const EmptyTable = (args: TableProps): ReactElement => (
   <Table {...args}>
     <Table.Header>
       <Table.Row>

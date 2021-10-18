@@ -23,8 +23,6 @@ import { ScreenReaderText } from "../ScreenReaderText";
 
 import styles from "./Table.module.scss";
 
-export type TableSortDirections = "asc" | "desc" | "unsorted";
-
 interface Props
   extends Omit<ComponentPropsWithoutRef<"button">, "style" | "className"> {
   children?: ReactNode;
@@ -32,7 +30,8 @@ interface Props
    * Current sort direction shown in icon
    * @default unsorted
    */
-  direction: TableSortDirections;
+  direction: "asc" | "desc" | "unsorted";
+
   /**
    * Title for the unsorted icon
    */
@@ -83,7 +82,5 @@ TableSortButton.displayName = "TableSortButton";
 
 TableSortButton = withStyles(styles)(TableSortButton);
 
-type TableSortButtonProps = ComponentProps<typeof TableSortButton>;
-export type { TableSortButtonProps as Props };
-
-export default TableSortButton;
+export type TableSortButtonProps = ComponentProps<typeof TableSortButton>;
+export { TableSortButton };

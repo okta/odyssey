@@ -10,11 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactElement, ComponentPropsWithoutRef } from "react";
+import type {
+  ComponentProps,
+  ReactElement,
+  ComponentPropsWithoutRef,
+} from "react";
 import { forwardRef } from "react";
 import { useOmit } from "../../utils";
 
-export interface Props
+interface Props
   extends Omit<ComponentPropsWithoutRef<"tfoot">, "style" | "className"> {
   children?: ReactElement | ReactElement[];
 }
@@ -33,4 +37,5 @@ const TableFooter = forwardRef<HTMLTableSectionElement, Props>((props, ref) => {
 
 TableFooter.displayName = "TableFooter";
 
-export default TableFooter;
+export type TableFooterProps = ComponentProps<typeof TableFooter>;
+export { TableFooter };

@@ -19,14 +19,14 @@ import type {
 
 import { useOmit, forwardRefWithStatics, withStyles } from "../../utils";
 
-import TableContainer from "./TableContainer";
-import TableHeader from "./TableHeader";
-import TableBody from "./TableBody";
-import TableFooter from "./TableFooter";
-import TableRow from "./TableRow";
-import TableDataCell from "./TableDataCell";
-import TableHeaderCell from "./TableHeaderCell";
-import TableSortButton from "./TableSortButton";
+import { TableContainer } from "./TableContainer";
+import { TableHeader } from "./TableHeader";
+import { TableBody } from "./TableBody";
+import { TableFooter } from "./TableFooter";
+import { TableRow } from "./TableRow";
+import { TableDataCell } from "./TableDataCell";
+import { TableHeaderCell } from "./TableHeaderCell";
+import { TableSortButton } from "./TableSortButton";
 
 import { ScreenReaderText } from "../ScreenReaderText";
 
@@ -70,9 +70,7 @@ type Statics = {
   SortButton: typeof TableSortButton;
 };
 
-export type CellTextFormats = "num" | "date";
-
-/*
+/**
  * Tables provide structure for displaying sets of data across rows and columns.
  */
 let Table = forwardRefWithStatics<HTMLTableElement, Props, Statics>(
@@ -117,7 +115,5 @@ Table.displayName = "Table";
 
 Table = withStyles(styles)(Table);
 
-type TableProps = ComponentProps<typeof Table>;
-export type { TableProps as Props };
-
-export default Table;
+export type TableProps = ComponentProps<typeof Table>;
+export { Table };
