@@ -17,7 +17,7 @@ import type {
 } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
-import Title from "../Title";
+import { Heading } from "../Heading";
 import { Button } from "../Button";
 import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
@@ -95,7 +95,7 @@ let Banner = forwardRef<HTMLDivElement, Props>((props, ref) => {
       <span className={styles.icon}>{icon[variant]}</span>
       {title && (
         <div className={styles.title}>
-          <Title
+          <Heading
             visualLevel="6"
             lineHeight="title"
             noEndMargin
