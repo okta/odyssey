@@ -11,8 +11,8 @@
  */
 
 import type { Story } from "@storybook/react";
-import TextArea from ".";
-import type { Props } from ".";
+import { TextArea } from ".";
+import type { TextAreaProps } from ".";
 
 export default {
   title: `Components/TextArea`,
@@ -40,7 +40,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = (props) => <TextArea {...props} />;
+const Template: Story<TextAreaProps> = (props) => <TextArea {...props} />;
 
 export const Default = Template.bind({});
 

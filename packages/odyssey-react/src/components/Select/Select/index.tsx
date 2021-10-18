@@ -26,8 +26,8 @@ import {
   useOmit,
   withStyles,
 } from "../../../utils";
-import Field from "../../Field";
-import type { SharedFieldTypes } from "../../Field";
+import { Field } from "../../Field";
+import type { SharedFieldTypes } from "../../Field/types";
 
 import styles from "../Select.module.scss";
 import { CaretDownIcon } from "../../Icon";

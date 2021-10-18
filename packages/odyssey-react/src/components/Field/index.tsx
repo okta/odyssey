@@ -12,49 +12,18 @@
 
 import type {
   FunctionComponent,
+  ComponentProps,
   ReactElement,
   ReactNode,
   ReactText,
 } from "react";
-import ScreenReaderText from "../ScreenReaderText";
+import { ScreenReaderText } from "../ScreenReaderText";
 import { withStyles } from "../../utils";
+import { SharedFieldTypes } from "./types";
 
 import styles from "./Field.module.scss";
 
-export interface SharedFieldTypes {
-  /**
-   * the form field label
-   */
-  label: string;
-
-  /**
-   * Text to display when the field is optional, i.e. required prop is false
-   */
-  optionalLabel?: string;
-
-  /**
-   * Visually hides the label. This can be used in scenarios where you want a label for assistive user agents, but not have it be visible.
-   */
-  labelHidden?: boolean;
-
-  /**
-   * the form field error
-   */
-  error?: ReactNode;
-
-  /**
-   * the form field hint
-   */
-  hint?: string;
-
-  /**
-   * The underlying input element required attribute
-   * @default true
-   */
-  required?: boolean;
-}
-
-export interface Props extends SharedFieldTypes {
+interface Props extends SharedFieldTypes {
   /**
    * Input to be rendered within the Field
    */
@@ -89,47 +58,54 @@ interface PropsError {
   children: ReactNode;
 }
 
-export type StaticComponents = {
+interface Statics {
   Label: typeof Label;
   Hint: typeof Hint;
   Error: typeof Error;
-};
+}
 
-const Field: FunctionComponent<Props> & StaticComponents = (props) => {
-  const {
-    error,
-    hint,
-    inputId,
-    label,
-    optionalLabel,
-    required = true,
-    children,
-    labelHidden,
-    as = "div",
-  } = props;
+let Field: FunctionComponent<Props> & Statics = Object.assign(
+  (props: Props) => {
+    const {
+      error,
+      hint,
+      inputId,
+      label,
+      optionalLabel,
+      required = true,
+      children,
+      labelHidden,
+      as = "div",
+    } = props;
 
-  const Tag = as;
-  const TagLabel = as === "fieldset" ? "legend" : "label";
+    const Tag = as;
+    const TagLabel = as === "fieldset" ? "legend" : "label";
 
-  return (
-    <Tag className={styles.root}>
-      <Field.Label
-        inputId={inputId}
-        required={required}
-        optionalLabel={optionalLabel}
-        labelHidden={labelHidden}
-        as={TagLabel}
-      >
-        {label}
-      </Field.Label>
-      {hint && <Field.Hint id={inputId}>{hint}</Field.Hint>}
-      {children}
-      {error && <Field.Error id={inputId}>{error}</Field.Error>}
-    </Tag>
-  );
-};
+    return (
+      <Tag className={styles.root}>
+        <Field.Label
+          inputId={inputId}
+          required={required}
+          optionalLabel={optionalLabel}
+          labelHidden={labelHidden}
+          as={TagLabel}
+        >
+          {label}
+        </Field.Label>
+        {hint && <Field.Hint id={inputId}>{hint}</Field.Hint>}
+        {children}
+        {error && <Field.Error id={inputId}>{error}</Field.Error>}
+      </Tag>
+    );
+  },
+  {
+    Label,
+    Error,
+    Hint,
+  }
+);
 
-const Label = (props: PropsLabel) => {
+function Label(props: PropsLabel) {
   const {
     inputId,
     optionalLabel = "Optional",
@@ -160,20 +136,26 @@ const Label = (props: PropsLabel) => {
   );
 
   return labelHidden ? labelVisuallyHidden : label;
-};
+}
 
-const Hint = ({ id, children }: PropsHint) => (
-  <p className={styles.hint} id={`${id}-hint`} children={children} />
-);
+function Hint({ id, children }: PropsHint) {
+  return <p className={styles.hint} id={`${id}-hint`} children={children} />;
+}
 
-const Error = ({ id, children }: PropsError) => (
-  <p className={styles.error} id={`${id}-error`}>
-    {children}
-  </p>
-);
+function Error({ id, children }: PropsError) {
+  return (
+    <p className={styles.error} id={`${id}-error`}>
+      {children}
+    </p>
+  );
+}
 
-Field.Label = Label;
-Field.Hint = Hint;
-Field.Error = Error;
+Field.displayName = "Field";
+Label.displayName = "FieldLabel";
+Hint.displayName = "FieldHint";
+Error.displayName = "FieldError";
 
-export default withStyles(styles)(Field);
+Field = withStyles(styles)(Field);
+
+export type FieldProps = ComponentProps<typeof Field>;
+export { Field };

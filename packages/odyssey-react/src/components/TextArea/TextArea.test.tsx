@@ -12,7 +12,7 @@
 
 import { render, fireEvent } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
-import TextArea from ".";
+import { TextArea } from ".";
 
 const textBox = "textbox";
 const label = "Destination";

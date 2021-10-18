@@ -18,8 +18,8 @@ import type {
 import { RadioGroupProvider } from "../context";
 
 import { useOid } from "../../../utils";
-import Field from "../../Field";
-import type { SharedFieldTypes } from "../../Field";
+import { Field } from "../../Field";
+import type { SharedFieldTypes } from "../../Field/types";
 
 export interface Props
   extends SharedFieldTypes,

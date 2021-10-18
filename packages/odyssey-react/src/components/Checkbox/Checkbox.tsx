@@ -20,8 +20,8 @@ import { CheckIcon } from "../Icon/Check";
 import { MinusIcon } from "../Icon/Minus";
 import styles from "./Checkbox.module.scss";
 import { useCx, useOid, useOmit, withStyles } from "../../utils";
-import Field from "../Field";
-import type { SharedFieldTypes } from "../Field";
+import { Field } from "../Field";
+import type { SharedFieldTypes } from "../Field/types";
 
 interface Props
   extends Omit<
