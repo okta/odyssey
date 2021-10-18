@@ -178,7 +178,5 @@ Object.assign(Modal, { Header, Body, Footer, Button });
 
 Modal = withStyles(styles)(Modal);
 
-type ModalProps = ComponentProps<typeof Modal>;
-export type { ModalProps as Props };
-
-export default Modal;
+export type ModalProps = ComponentProps<typeof Modal>;
+export { Modal };
