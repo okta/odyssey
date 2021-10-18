@@ -14,7 +14,7 @@ import { Story } from "@storybook/react";
 import * as IconIndex from "./";
 import { IconDictionary } from "./IconDictionary";
 import { ReactElement } from "react";
-import Table from "../Table";
+import { Table } from "../Table";
 
 export default {
   title: `Components/IconDictionary`,

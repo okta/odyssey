@@ -54,7 +54,5 @@ TableContainer.displayName = "TableContainer";
 
 TableContainer = withStyles(styles)(TableContainer);
 
-type TableContainerProps = ComponentProps<typeof TableContainer>;
-export type { TableContainerProps as Props };
-
-export default TableContainer;
+export type TableContainerProps = ComponentProps<typeof TableContainer>;
+export { TableContainer };

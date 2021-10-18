@@ -16,7 +16,7 @@ import type {
   ComponentPropsWithoutRef,
 } from "react";
 import { forwardRef } from "react";
-import type { CellTextFormats } from "./Table";
+import type { CellTextFormats } from "./types";
 import { useCx, useOmit, withStyles } from "../../utils";
 
 import styles from "./Table.module.scss";
@@ -53,7 +53,5 @@ TableHeaderCell.displayName = "TableHeaderCell";
 
 TableHeaderCell = withStyles(styles)(TableHeaderCell);
 
-type TableHeaderCellProps = ComponentProps<typeof TableHeaderCell>;
-export type { TableHeaderCellProps as Props };
-
-export default TableHeaderCell;
+export type TableHeaderCellProps = ComponentProps<typeof TableHeaderCell>;
+export { TableHeaderCell };

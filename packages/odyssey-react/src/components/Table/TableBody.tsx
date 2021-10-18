@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactElement, ComponentPropsWithoutRef } from "react";
+import type {
+  ComponentProps,
+  ReactElement,
+  ComponentPropsWithoutRef,
+} from "react";
 import { forwardRef } from "react";
 import { useOmit } from "../../utils";
 
@@ -33,4 +37,5 @@ const TableBody = forwardRef<HTMLTableSectionElement, Props>((props, ref) => {
 
 TableBody.displayName = "TableBody";
 
-export default TableBody;
+export type TableBodyProps = ComponentProps<typeof TableBody>;
+export { TableBody };
