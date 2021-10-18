@@ -10,10 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ComponentProps } from "react";
+import type {
+  ReactNode,
+  ComponentProps,
+  ComponentPropsWithoutRef,
+} from "react";
 import { forwardRef } from "react";
 
-import { useCx, useOmit } from "../../utils";
+import { useCx, useOmit, withStyles } from "../../utils";
 import SortIcon from "../Icon/Sort";
 import SortAscIcon from "../Icon/SortAsc";
 import SortDescIcon from "../Icon/SortDesc";
@@ -23,31 +27,65 @@ import styles from "./Table.module.scss";
 
 export type TableSortDirections = "asc" | "desc" | "unsorted";
 
-export type Props = {
+interface Props
+  extends Omit<ComponentPropsWithoutRef<"button">, "style" | "className"> {
   children?: ReactNode;
+  /**
+   * Current sort direction shown in icon
+   * @default unsorted
+   */
   direction: TableSortDirections;
-} & ComponentProps<"button">;
+  /**
+   * Title for the unsorted icon
+   */
+  unsortedIconTitle: string;
+  /**
+   * Title for the ascending sort icon
+   */
+  ascendingIconTitle: string;
+  /**
+   * Title for the descending sort icon
+   */
+  descendingIconTitle: string;
+  /**
+   * Screen read only text used as the call to action for the button
+   */
+  screenReaderCallToAction: string;
+}
 
-type Ref = HTMLButtonElement;
-
-const TableSortButton = forwardRef<Ref, Props>((props, ref) => {
-  const { children, direction = "unsorted", ...rest } = props;
+let TableSortButton = forwardRef<HTMLButtonElement, Props>((props, ref) => {
+  const {
+    children,
+    direction = "unsorted",
+    unsortedIconTitle,
+    ascendingIconTitle,
+    descendingIconTitle,
+    screenReaderCallToAction,
+    ...rest
+  } = props;
 
   const componentClass = useCx(styles.sort, styles[`${direction}Direction`]);
 
   const omitProps = useOmit(rest);
 
   return (
-    <button ref={ref} className={componentClass} {...omitProps}>
+    <button {...omitProps} ref={ref} className={componentClass}>
       {children}
       <span className={styles.sortIndicator}>
-        {direction === "unsorted" && <SortIcon title="Unsorted" />}
-        {direction === "asc" && <SortAscIcon title="Ascending" />}
-        {direction === "desc" && <SortDescIcon title="Descending" />}
+        {direction === "unsorted" && <SortIcon title={unsortedIconTitle} />}
+        {direction === "asc" && <SortAscIcon title={ascendingIconTitle} />}
+        {direction === "desc" && <SortDescIcon title={descendingIconTitle} />}
       </span>
-      <ScreenReaderText>click to sort</ScreenReaderText>
+      <ScreenReaderText>{screenReaderCallToAction}</ScreenReaderText>
     </button>
   );
 });
+
+TableSortButton.displayName = "TableSortButton";
+
+TableSortButton = withStyles(styles)(TableSortButton);
+
+type TableSortButtonProps = ComponentProps<typeof TableSortButton>;
+export type { TableSortButtonProps as Props };
 
 export default TableSortButton;

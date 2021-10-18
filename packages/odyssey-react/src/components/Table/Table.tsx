@@ -10,9 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ReactElement, ComponentPropsWithoutRef } from "react";
+import type {
+  ReactNode,
+  ReactElement,
+  ComponentProps,
+  ComponentPropsWithoutRef,
+} from "react";
 
-import { useOmit, forwardRefWithStatics } from "../../utils";
+import { useOmit, forwardRefWithStatics, withStyles } from "../../utils";
 
 import TableContainer from "./TableContainer";
 import TableHeader from "./TableHeader";
@@ -40,7 +45,8 @@ type ContainerProps =
       title: ReactNode;
     };
 
-export type Props = {
+interface ElementProps
+  extends Omit<ComponentPropsWithoutRef<"table">, "style" | "className"> {
   /**
    * Valid Table child elements including Head, Body, and Foot
    */
@@ -49,8 +55,9 @@ export type Props = {
    * Provides users of assistive technologies with context for the table contents
    */
   caption: string;
-} & ContainerProps &
-  ComponentPropsWithoutRef<"table">;
+}
+
+type Props = ContainerProps & ElementProps;
 
 type Statics = {
   Container: typeof TableContainer;
@@ -68,14 +75,14 @@ export type CellTextFormats = "num" | "date";
 /*
  * Tables provide structure for displaying sets of data across rows and columns.
  */
-const Table = forwardRefWithStatics<HTMLTableElement, Props, Statics>(
+let Table = forwardRefWithStatics<HTMLTableElement, Props, Statics>(
   (props, ref) => {
     const { children, caption, title, withContainer = true, ...rest } = props;
 
     const omitProps = useOmit(rest);
 
     const TableEl = () => (
-      <table ref={ref} className={styles.root} {...omitProps}>
+      <table {...omitProps} ref={ref} className={styles.root}>
         <caption>
           <ScreenReaderText>{caption}</ScreenReaderText>
         </caption>
@@ -105,5 +112,12 @@ Table.Row = TableRow;
 Table.DataCell = TableDataCell;
 Table.HeaderCell = TableHeaderCell;
 Table.SortButton = TableSortButton;
+
+Table.displayName = "Table";
+
+Table = withStyles(styles)(Table);
+
+type TableProps = ComponentProps<typeof Table>;
+export type { TableProps as Props };
 
 export default Table;
