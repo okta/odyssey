@@ -16,8 +16,6 @@ import { useCx, useOmit, withStyles } from "../../utils";
 import { ScreenReaderText } from "../ScreenReaderText";
 import styles from "./Status.module.scss";
 
-export type StatusVariants = "neutral" | "success" | "caution" | "danger";
-
 interface Props
   extends Omit<
     ComponentPropsWithoutRef<"div">,
@@ -43,15 +41,12 @@ interface Props
    * The visual variant to be displayed to the user.
    * @default neutral
    */
-  variant?: StatusVariants;
+  variant?: "neutral" | "success" | "caution" | "danger";
 }
 
 /**
  * Status is used to inform users by providing feedback on system states. Status can display broad
  * operational states as well as granular states like user status.
- *
- * @component
- * @example <Status label={label} descriptor={descriptor} />
  */
 let Status = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const {
@@ -82,7 +77,5 @@ Status.displayName = "Status";
 
 Status = withStyles(styles)(Status);
 
-type StatusProps = ComponentProps<typeof Status>;
-export type { StatusProps as Props };
-
-export default Status;
+export type StatusProps = ComponentProps<typeof Status>;
+export { Status };
