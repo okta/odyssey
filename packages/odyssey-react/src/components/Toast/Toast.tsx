@@ -202,7 +202,5 @@ Toast.Provider = ToastProvider;
 
 Toast = withStyles(styles)(Toast);
 
-type ToastProps = ComponentProps<typeof Toast>;
-export type { ToastProps as Props };
-
-export default Toast;
+export type ToastProps = ComponentProps<typeof Toast>;
+export { Toast };

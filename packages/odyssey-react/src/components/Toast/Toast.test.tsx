@@ -11,7 +11,7 @@
  */
 
 import { act, render, fireEvent, screen, within } from "@testing-library/react";
-import Toast, { useToast } from ".";
+import { Toast, useToast } from ".";
 
 const role = "status";
 const title = "Toast";

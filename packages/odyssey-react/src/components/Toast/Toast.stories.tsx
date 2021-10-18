@@ -12,8 +12,8 @@
 
 import { Story } from "@storybook/react";
 import { FormEventHandler } from "react";
-import Toast, { useToast } from ".";
-import type { Props } from ".";
+import { Toast, useToast } from ".";
+import type { ToastProps } from ".";
 
 export default {
   title: `Components/Toast`,
@@ -32,8 +32,8 @@ export default {
   },
 };
 
-const Template: Story<Props> = (args) => <Toast {...args} />;
-const TemplateProvider: Story<Props> = () => {
+const Template: Story<ToastProps> = (args) => <Toast {...args} />;
+const TemplateProvider: Story<ToastProps> = () => {
   return (
     <Toast.Provider
       onToastExit={(id) => {
@@ -62,7 +62,7 @@ const DemoApp = () => {
     addToast({
       title: formData.get("title") as string,
       body: formData.get("body") as string,
-      variant: formData.get("variant") as Props["variant"],
+      variant: formData.get("variant") as ToastProps["variant"],
     });
   };
 
