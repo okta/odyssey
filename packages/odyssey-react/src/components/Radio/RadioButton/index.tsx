@@ -17,7 +17,7 @@ import { useCx, useOid, useOmit, withStyles } from "../../../utils";
 
 import styles from "../RadioButton.module.scss";
 
-import type { SharedFieldTypes } from "../../Field";
+import type { SharedFieldTypes } from "../../Field/types";
 
 export interface Props
   extends Pick<SharedFieldTypes, "hint" | "error">,

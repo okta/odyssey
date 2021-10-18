@@ -11,8 +11,8 @@
  */
 
 import type { Story } from "@storybook/react";
-import TextInput from ".";
-import type { Props } from ".";
+import { TextInput } from ".";
+import type { TextInputProps } from ".";
 
 export default {
   title: `Components/TextInput`,
@@ -39,7 +39,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = (props) => <TextInput {...props} />;
+const Template: Story<TextInputProps> = (props) => <TextInput {...props} />;
 
 export const Text = Template.bind({});
 Text.args = {

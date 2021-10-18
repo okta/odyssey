@@ -12,7 +12,7 @@
 
 import { Story } from "@storybook/react";
 import FieldGroup from ".";
-import TextInput from "../TextInput";
+import { TextInput } from "../TextInput";
 import Infobox from "../Infobox";
 import type { Props } from ".";
 
