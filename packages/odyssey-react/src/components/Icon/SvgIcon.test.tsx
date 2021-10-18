@@ -11,7 +11,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import SvgIcon from "./SvgIcon";
+import { SvgIcon } from "./SvgIcon";
 
 const iconTitle = "Icon";
 

@@ -68,7 +68,5 @@ SvgIcon.displayName = "SvgIcon";
 
 SvgIcon = withStyles(styles)(SvgIcon);
 
-type SvgProps = ComponentProps<typeof SvgIcon>;
-export type { SvgProps as Props };
-
-export default SvgIcon;
+export type SvgIconProps = ComponentProps<typeof SvgIcon>;
+export { SvgIcon };
