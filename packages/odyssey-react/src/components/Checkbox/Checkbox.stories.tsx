@@ -14,7 +14,7 @@ import type { Story } from "@storybook/react";
 import { useEffect } from "react";
 import { Checkbox } from ".";
 import type { CheckboxProps } from ".";
-import ScreenReaderText from "../ScreenReaderText";
+import { ScreenReaderText } from "../ScreenReaderText";
 
 export default {
   title: `Components/Checkbox`,

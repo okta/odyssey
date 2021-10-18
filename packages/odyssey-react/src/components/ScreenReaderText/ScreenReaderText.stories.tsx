@@ -12,7 +12,7 @@
 
 import type { Story } from "@storybook/react";
 import type { ComponentProps } from "react";
-import ScreenReaderText from ".";
+import { ScreenReaderText } from ".";
 
 export default {
   title: `Utilities/ScreenReaderText`,

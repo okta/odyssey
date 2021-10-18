@@ -28,7 +28,7 @@ import TableDataCell from "./TableDataCell";
 import TableHeaderCell from "./TableHeaderCell";
 import TableSortButton from "./TableSortButton";
 
-import ScreenReaderText from "../ScreenReaderText";
+import { ScreenReaderText } from "../ScreenReaderText";
 
 import styles from "./Table.module.scss";
 
