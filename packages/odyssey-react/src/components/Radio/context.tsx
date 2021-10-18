@@ -18,7 +18,7 @@ import {
   ReactNode,
 } from "react";
 import type { ReactElement } from "react";
-import type { Props } from "./RadioGroup";
+import type { RadioGroupProps } from "./RadioGroup";
 
 interface Context {
   value?: string;
@@ -28,7 +28,7 @@ interface Context {
   hint?: string;
   error?: ReactNode;
   required?: boolean;
-  onChange?: Props["onChange"];
+  onChange?: RadioGroupProps["onChange"];
 }
 
 interface ProviderProps {

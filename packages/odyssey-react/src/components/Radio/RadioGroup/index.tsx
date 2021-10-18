@@ -11,6 +11,7 @@
  */
 
 import type {
+  ComponentProps,
   ChangeEvent,
   ReactElement,
   ComponentPropsWithoutRef,
@@ -21,7 +22,7 @@ import { useOid } from "../../../utils";
 import { Field } from "../../Field";
 import type { SharedFieldTypes } from "../../Field/types";
 
-export interface Props
+interface Props
   extends SharedFieldTypes,
     Omit<
       ComponentPropsWithoutRef<"fieldset">,
@@ -115,4 +116,7 @@ const RadioGroup = (props: Props): JSX.Element => {
   );
 };
 
-export default RadioGroup;
+RadioGroup.displayName = "RadioGroup";
+
+export type RadioGroupProps = ComponentProps<typeof RadioGroup>;
+export { RadioGroup };
