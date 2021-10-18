@@ -94,7 +94,5 @@ Infobox.displayName = "Infobox";
 
 Infobox = withStyles(styles)(Infobox);
 
-type InfoboxProps = ComponentProps<typeof Infobox>;
-export type { InfoboxProps as Props };
-
-export default Infobox;
+export type InfoboxProps = ComponentProps<typeof Infobox>;
+export { Infobox };
