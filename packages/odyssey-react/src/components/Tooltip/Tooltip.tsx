@@ -72,7 +72,5 @@ Tooltip.displayName = "Tooltip";
 
 Tooltip = withStyles(styles)(Tooltip);
 
-type TooltipProps = ComponentProps<typeof Tooltip>;
-export type { TooltipProps as Props };
-
-export default Tooltip;
+export type TooltipProps = ComponentProps<typeof Tooltip>;
+export { Tooltip };

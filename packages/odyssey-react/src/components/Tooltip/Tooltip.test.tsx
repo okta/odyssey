@@ -11,7 +11,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import Tooltip from ".";
+import { Tooltip } from ".";
 
 const label = "label";
 const tooltip = "tooltip";
