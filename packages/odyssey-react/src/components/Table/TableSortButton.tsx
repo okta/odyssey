@@ -18,9 +18,7 @@ import type {
 import { forwardRef } from "react";
 
 import { useCx, useOmit, withStyles } from "../../utils";
-import SortIcon from "../Icon/Sort";
-import SortAscIcon from "../Icon/SortAsc";
-import SortDescIcon from "../Icon/SortDesc";
+import { SortIcon, SortAscIcon, SortDescIcon } from "../Icon";
 import ScreenReaderText from "../ScreenReaderText";
 
 import styles from "./Table.module.scss";

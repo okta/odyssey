@@ -13,7 +13,7 @@
 import type { Story } from "@storybook/react";
 import Link from ".";
 import type { Props } from ".";
-import Icon, { GetInfoIcon } from "../Icon";
+import { IconDictionary, GetInfoIcon } from "../Icon";
 
 export default {
   title: `Components/Link`,
@@ -29,7 +29,7 @@ const Template: Story<Props> = ({
   icon,
 }) => {
   if (typeof icon === "string") {
-    icon = <Icon name={icon} />;
+    icon = <IconDictionary name={icon} />;
   }
   return (
     <Link href={href} target={target} rel={rel} variant={variant} icon={icon}>

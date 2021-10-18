@@ -30,7 +30,7 @@ import Field from "../../Field";
 import type { SharedFieldTypes } from "../../Field";
 
 import styles from "../Select.module.scss";
-import CaretDownIcon from "../../Icon/CaretDown";
+import { CaretDownIcon } from "../../Icon";
 
 interface Props
   extends SharedFieldTypes,
