@@ -11,10 +11,10 @@
  */
 
 import { forwardRef } from "react";
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentProps, ComponentPropsWithoutRef } from "react";
 import { useOmit } from "../../../utils";
 
-export interface Props
+interface Props
   extends Omit<
     ComponentPropsWithoutRef<"option">,
     "style" | "className" | "selected"
@@ -41,4 +41,7 @@ const SelectOption = forwardRef<HTMLOptionElement, Props>((props, ref) => {
   );
 });
 
-export default SelectOption;
+SelectOption.displayName = "SelectOption";
+
+export type SelectOptions = ComponentProps<typeof SelectOption>;
+export { SelectOption };
