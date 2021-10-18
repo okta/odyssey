@@ -12,6 +12,7 @@
 
 const { writeFileSync } = require("fs");
 const { resolve } = require("path");
+const { renderSync } = require("sass");
 
 const pkgPath = resolve(__dirname, "../package.json");
 
@@ -19,3 +20,21 @@ const pkgPath = resolve(__dirname, "../package.json");
 const { scripts, ...pkgNoScripts } = require(pkgPath);
 
 writeFileSync(pkgPath, JSON.stringify(pkgNoScripts, null, 2) + "\n");
+
+const scssFiles =
+  `abstracts/functions abstracts/colors abstracts/mixins abstracts/tokens base/reset base/typography-global base/typography-text`.split(
+    " "
+  );
+const importDir = resolve(require.resolve("@okta/odyssey"), "..");
+const scssData = scssFiles
+  .map((scssFile) => `@import '${importDir}/${scssFile}';`)
+  .join("\n");
+
+const { css } = renderSync({ data: scssData });
+const cssFilePath = resolve(
+  __dirname,
+  "../dist",
+  "odyssey-deprecated-global.css"
+);
+
+writeFileSync(cssFilePath, css);
