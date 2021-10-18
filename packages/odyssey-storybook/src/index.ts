@@ -34,6 +34,7 @@ const withStyles = new RegExp(
     "Modal",
     "Tag",
     "Toast",
+    "RadioButton",
   ].join("|")})\\.module\\.scss$`
 );
 

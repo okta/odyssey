@@ -15,7 +15,7 @@ import type { ComponentProps, ComponentPropsWithoutRef } from "react";
 import { useRadioGroup } from "../context";
 import { useCx, useOid, useOmit, withStyles } from "../../../utils";
 
-import styles from "../RadioButton.module.scss";
+import styles from "./RadioButton.module.scss";
 
 import type { SharedFieldTypes } from "../../Field/types";
 
