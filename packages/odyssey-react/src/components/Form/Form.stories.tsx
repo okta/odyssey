@@ -11,12 +11,12 @@
  */
 
 import { Story } from "@storybook/react";
-import Form from ".";
-import FieldGroup from "../FieldGroup";
+import { Form } from ".";
+import { FieldGroup } from "../FieldGroup";
 import { TextInput } from "../TextInput";
 import Infobox from "../Infobox";
 import { Button } from "../Button";
-import type { Props } from ".";
+import type { FormProps } from ".";
 
 export default {
   title: `Components/Form`,
@@ -37,7 +37,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({ title, desc }) => (
+const Template: Story<FormProps> = ({ title, desc }) => (
   <Form title={title} desc={desc}>
     <Form.Error>
       <Infobox
