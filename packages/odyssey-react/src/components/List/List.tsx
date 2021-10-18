@@ -18,9 +18,9 @@ import type {
 } from "react";
 import { forwardRefWithStatics, useOmit, useCx, withStyles } from "../../utils";
 import styles from "./List.module.scss";
-import ListItem from "./ListItem";
-import DescriptionTerm from "./DescriptionTerm";
-import DescriptionDetails from "./DescriptionDetails";
+import { ListItem } from "./ListItem";
+import { DescriptionTerm } from "./DescriptionTerm";
+import { DescriptionDetails } from "./DescriptionDetails";
 
 interface CommonProps {
   /**
@@ -108,7 +108,5 @@ List.Details = DescriptionDetails;
 
 List = withStyles(styles)(List);
 
-type ListProps = ComponentProps<typeof List>;
-export type { ListProps as Props };
-
-export default List;
+export type ListProps = ComponentProps<typeof List>;
+export { List };

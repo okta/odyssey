@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentProps, ComponentPropsWithoutRef } from "react";
 import { forwardRef } from "react";
 import { useOmit } from "../../utils";
 
@@ -32,4 +32,5 @@ const DescriptionDetails = forwardRef<HTMLElement, Props>((props, ref) => {
 
 DescriptionDetails.displayName = "DescriptionDetails";
 
-export default DescriptionDetails;
+export type DescriptionDetailsProps = ComponentProps<typeof DescriptionDetails>;
+export { DescriptionDetails };

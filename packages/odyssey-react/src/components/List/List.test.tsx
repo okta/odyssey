@@ -11,7 +11,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import List from "./List";
+import { List } from "./List";
 
 describe("List", () => {
   it("renders visibly into the document", () => {
