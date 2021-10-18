@@ -60,7 +60,7 @@ let TableSortButton = forwardRef<HTMLButtonElement, Props>((props, ref) => {
     unsortedIconTitle,
     ascendingIconTitle,
     descendingIconTitle,
-    screenReaderCallToAction = "click to sort",
+    screenReaderCallToAction,
     ...rest
   } = props;
 
