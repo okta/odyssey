@@ -21,6 +21,7 @@ function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
   const typeScriptTpl = template.smart({ plugins, preserveComments: true });
 
   const compName = componentName.name.substring(3) + "Icon";
+  const compProps = compName + "Props";
 
   const attrs = jsx.openingElement.attributes;
   const classNameIndex = attrs.findIndex(
@@ -45,14 +46,14 @@ function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
 ${headerComment}
 
 import { forwardRef } from "react";
-import type { ComponentPropsWithoutRef, ComponentProps } from "react";
+import type { ComponentPropsWithRef } from "react";
 import { useOmit } from '../../utils';
 import { SvgIcon } from './SvgIcon';
 
 ${newLine}
 
-interface Props extends Omit<
-  ComponentPropsWithoutRef<'svg'>,
+export interface ${compProps} extends Omit<
+  ComponentPropsWithRef<'svg'>,
   'style' | 'className'
 > {
   title?: string;
@@ -60,7 +61,7 @@ interface Props extends Omit<
 
 ${newLine}
 
-const ${compName} = forwardRef<SVGSVGElement, Props>((props, ref) => {
+const ${compName} = forwardRef<SVGSVGElement, ${compProps}>((props, ref) => {
   const omitProps = useOmit(props);
   return (
     ${icon}
@@ -70,10 +71,6 @@ const ${compName} = forwardRef<SVGSVGElement, Props>((props, ref) => {
 ${newLine}
 
 ${compName}.displayName = "${compName}";
-
-${newLine}
-
-export type ${compName + "Props"} = ComponentProps<typeof ${compName}>
 
 ${newLine}
 

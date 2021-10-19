@@ -10,13 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  createContext,
-  useContext,
-  useState,
-  ComponentPropsWithoutRef,
-} from "react";
-import type { ComponentProps, ReactNode, AnimationEvent } from "react";
+import { createContext, useContext, useState } from "react";
+import type { ComponentPropsWithRef, ReactNode, AnimationEvent } from "react";
 import {
   useCx,
   useOmit,
@@ -36,9 +31,9 @@ import {
 } from "../Icon";
 import type { ButtonProps } from "../Button";
 
-interface Props
+export interface ToastProps
   extends Omit<
-    ComponentPropsWithoutRef<"aside">,
+    ComponentPropsWithRef<"aside">,
     "children" | "style" | "className" | "role"
   > {
   children?: never;
@@ -83,7 +78,7 @@ interface ToastObject {
   id?: string;
   title: string;
   body?: string;
-  variant?: Props["variant"];
+  variant?: ToastProps["variant"];
 }
 
 type AddToastType = (toastObj: ToastObject) => void;
@@ -106,34 +101,36 @@ const icon = {
  * Toasts are transient, non-disruptive messages that provide at-a-glance,
  * asynchronous feedback or updates.
  */
-let Toast = forwardRefWithStatics<HTMLElement, Props, Statics>((props, ref) => {
-  const { title, body, variant = "info", id, onDismiss, ...rest } = props;
-  const componentClass = useCx(styles.root, styles[`${variant}Variant`]);
-  const xid = useOid(id);
-  const omitProps = useOmit(rest);
+let Toast = forwardRefWithStatics<HTMLElement, ToastProps, Statics>(
+  (props, ref) => {
+    const { title, body, variant = "info", id, onDismiss, ...rest } = props;
+    const componentClass = useCx(styles.root, styles[`${variant}Variant`]);
+    const xid = useOid(id);
+    const omitProps = useOmit(rest);
 
-  return (
-    <aside
-      {...omitProps}
-      ref={ref}
-      role="status"
-      id={xid}
-      className={componentClass}
-    >
-      <span className={styles.icon}>{icon[variant]}</span>
-      <h1 className={styles.title}>{title}</h1>
-      {body && <p className={styles.body}>{body}</p>}
-      <span className={styles.dismiss}>
-        <Button
-          variant="dismiss"
-          onClick={onDismiss}
-          aria-label="Dismiss toast"
-          icon={<CloseIcon />}
-        />
-      </span>
-    </aside>
-  );
-});
+    return (
+      <aside
+        {...omitProps}
+        ref={ref}
+        role="status"
+        id={xid}
+        className={componentClass}
+      >
+        <span className={styles.icon}>{icon[variant]}</span>
+        <h1 className={styles.title}>{title}</h1>
+        {body && <p className={styles.body}>{body}</p>}
+        <span className={styles.dismiss}>
+          <Button
+            variant="dismiss"
+            onClick={onDismiss}
+            aria-label="Dismiss toast"
+            icon={<CloseIcon />}
+          />
+        </span>
+      </aside>
+    );
+  }
+);
 
 /**
  * Provides applications a way to add Toasts to their app
@@ -202,5 +199,4 @@ Toast.Provider = ToastProvider;
 
 Toast = withStyles(styles)(Toast);
 
-export type ToastProps = ComponentProps<typeof Toast>;
 export { Toast };

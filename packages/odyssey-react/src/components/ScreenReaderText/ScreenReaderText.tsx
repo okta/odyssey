@@ -11,16 +11,15 @@
  */
 
 import type {
-  ComponentProps,
-  ComponentPropsWithoutRef,
+  ComponentPropsWithRef,
   FunctionComponent,
   ReactNode,
 } from "react";
 import { withStyles, useOmit } from "../../utils";
 import styles from "./ScreenReaderText.module.scss";
 
-interface Props
-  extends Omit<ComponentPropsWithoutRef<"span">, "style" | "className"> {
+export interface ScreenReaderProps
+  extends Omit<ComponentPropsWithRef<"span">, "style" | "className"> {
   /**
    * Visibly hidden / SR-only text
    */
@@ -33,7 +32,7 @@ interface Props
   as?: "span" | "em" | "strong";
 }
 
-let ScreenReaderText: FunctionComponent<Props> = (props) => {
+let ScreenReaderText: FunctionComponent<ScreenReaderProps> = (props) => {
   const { children, as = "span", ...rest } = props;
 
   const Tag = as;
@@ -50,8 +49,5 @@ let ScreenReaderText: FunctionComponent<Props> = (props) => {
 ScreenReaderText.displayName = "ScreenReaderText";
 
 ScreenReaderText = withStyles(styles)(ScreenReaderText);
-
-type SRProps = ComponentProps<typeof ScreenReaderText>;
-export type { SRProps as Props };
 
 export { ScreenReaderText };

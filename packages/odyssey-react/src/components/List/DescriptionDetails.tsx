@@ -10,27 +10,30 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentProps, ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
 import { useOmit } from "../../utils";
-
 import styles from "./List.module.scss";
 
-type Props = Omit<ComponentPropsWithoutRef<"li">, "style" | "className">;
+export type DescriptionDetailsProps = Omit<
+  ComponentPropsWithRef<"li">,
+  "style" | "className"
+>;
 
-const DescriptionDetails = forwardRef<HTMLElement, Props>((props, ref) => {
-  const { children, ...rest } = props;
+const DescriptionDetails = forwardRef<HTMLElement, DescriptionDetailsProps>(
+  (props, ref) => {
+    const { children, ...rest } = props;
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <dd {...omitProps} ref={ref} className={styles.details}>
-      {children}
-    </dd>
-  );
-});
+    return (
+      <dd {...omitProps} ref={ref} className={styles.details}>
+        {children}
+      </dd>
+    );
+  }
+);
 
 DescriptionDetails.displayName = "DescriptionDetails";
 
-export type DescriptionDetailsProps = ComponentProps<typeof DescriptionDetails>;
 export { DescriptionDetails };

@@ -13,8 +13,7 @@
 import {
   Children,
   cloneElement,
-  ComponentProps,
-  ComponentPropsWithoutRef,
+  ComponentPropsWithRef,
   forwardRef,
 } from "react";
 import type { ReactElement } from "react";
@@ -22,8 +21,8 @@ import { useOid, useOmit, withStyles } from "../../utils";
 
 import styles from "./Icon.module.scss";
 
-interface Props
-  extends Omit<ComponentPropsWithoutRef<"svg">, "style" | "className"> {
+export interface SvgIconProps
+  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   /**
    * Title text used by screen readers
    */
@@ -36,7 +35,7 @@ interface Props
  * A thin wrapper to augment icon svgs with proper attributes and accessibility features
  */
 
-let SvgIcon = forwardRef<SVGSVGElement, Props>(
+let SvgIcon = forwardRef<SVGSVGElement, SvgIconProps>(
   ({ title, children, ...rest }, ref) => {
     const autoId = "icon_" + useOid();
     const omitProps = useOmit(rest);
@@ -68,5 +67,4 @@ SvgIcon.displayName = "SvgIcon";
 
 SvgIcon = withStyles(styles)(SvgIcon);
 
-export type SvgIconProps = ComponentProps<typeof SvgIcon>;
 export { SvgIcon };

@@ -10,11 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ComponentPropsWithoutRef,
-  ComponentProps,
-  MouseEventHandler,
-} from "react";
+import type { ComponentPropsWithRef, MouseEventHandler } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import { Heading } from "../Heading";
@@ -23,10 +19,7 @@ import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
 
 interface CommonProps
-  extends Omit<
-    ComponentPropsWithoutRef<"div">,
-    "style" | "className" | "role"
-  > {
+  extends Omit<ComponentPropsWithRef<"div">, "style" | "className" | "role"> {
   /**
    * The visual variant to be displayed to the user.
    * @default info
@@ -56,14 +49,14 @@ type DismissProps =
       dismissButtonLabel: string;
     };
 
-type Props = CommonProps & DismissProps;
+export type BannerProps = CommonProps & DismissProps;
 
 /**
  * Banners let users know important messages related to their overall experience
  * on the website. They can be purely informational messages or critical errors
  * to act upon.
  */
-let Banner = forwardRef<HTMLDivElement, Props>((props, ref) => {
+let Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
   const {
     children,
     title,
@@ -123,5 +116,4 @@ Banner.displayName = "Banner";
 
 Banner = withStyles(styles)(Banner);
 
-export type BannerProps = ComponentProps<typeof Banner>;
 export { Banner };

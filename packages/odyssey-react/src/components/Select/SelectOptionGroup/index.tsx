@@ -11,15 +11,11 @@
  */
 
 import { forwardRef } from "react";
-import type {
-  ComponentProps,
-  ReactElement,
-  ComponentPropsWithoutRef,
-} from "react";
+import type { ReactElement, ComponentPropsWithRef } from "react";
 import { useOmit } from "../../../utils";
 
-interface Props
-  extends Omit<ComponentPropsWithoutRef<"optgroup">, "style" | "className"> {
+export interface SelectOptionGroupProps
+  extends Omit<ComponentPropsWithRef<"optgroup">, "style" | "className"> {
   /**
    * One or more option to be used together as a group
    */
@@ -35,21 +31,21 @@ interface Props
  * Often referred to as a "dropdown menu" this input triggers a menu of
  * options a user can select.
  */
-const SelectOptionGroup = forwardRef<HTMLOptGroupElement, Props>(
-  (props, ref) => {
-    const { children, ...rest } = props;
+const SelectOptionGroup = forwardRef<
+  HTMLOptGroupElement,
+  SelectOptionGroupProps
+>((props, ref) => {
+  const { children, ...rest } = props;
 
-    const omitProps = useOmit(rest);
+  const omitProps = useOmit(rest);
 
-    return (
-      <optgroup {...omitProps} ref={ref}>
-        {children}
-      </optgroup>
-    );
-  }
-);
+  return (
+    <optgroup {...omitProps} ref={ref}>
+      {children}
+    </optgroup>
+  );
+});
 
 SelectOptionGroup.displayName = "SelectOptionGroup";
 
-export type SelectOptionsGroupProps = ComponentProps<typeof SelectOptionGroup>;
 export { SelectOptionGroup };

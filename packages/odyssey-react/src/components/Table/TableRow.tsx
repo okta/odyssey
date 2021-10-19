@@ -10,32 +10,29 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ComponentProps,
-  ReactElement,
-  ComponentPropsWithoutRef,
-} from "react";
+import type { ReactElement, ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
 import { useOmit } from "../../utils";
 
-interface Props
-  extends Omit<ComponentPropsWithoutRef<"tr">, "style" | "className"> {
+export interface TableRowProps
+  extends Omit<ComponentPropsWithRef<"tr">, "style" | "className"> {
   children?: ReactElement | ReactElement[];
 }
 
-const TableRow = forwardRef<HTMLTableRowElement, Props>((props, ref) => {
-  const { children, ...rest } = props;
+const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
+  (props, ref) => {
+    const { children, ...rest } = props;
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <tr {...omitProps} ref={ref}>
-      {children}
-    </tr>
-  );
-});
+    return (
+      <tr {...omitProps} ref={ref}>
+        {children}
+      </tr>
+    );
+  }
+);
 
 TableRow.displayName = "TableRow";
 
-export type TableRowProps = ComponentProps<typeof TableRow>;
 export { TableRow };
