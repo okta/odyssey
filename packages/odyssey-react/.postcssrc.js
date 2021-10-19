@@ -21,6 +21,12 @@ module.exports = (ctx) => {
 
   const options = Object.assign(
     ctx.transformStyles,
+    ctx.env === "production" && {
+      autoprefixer: {
+        grid: "autoplace",
+        env: "production",
+      },
+    },
     ctx.env === "test" && {
       modules: {
         ...ctx.transformStyles.modules,
