@@ -10,12 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { writeFileSync } = require("fs");
-const { resolve } = require("path");
+import type { Story } from "@storybook/react";
+import { Tag, TagProps } from "@okta/odyssey-react";
 
-const pkgPath = resolve(__dirname, "../package.json");
+export default {
+  title: `Components/Tag`,
+  component: Tag,
+};
 
-// eslint-disable-next-line no-unused-vars
-const { scripts, ...pkgNoScripts } = require(pkgPath);
+const Template: Story<TagProps> = ({ tags }) => <Tag tags={tags} />;
 
-writeFileSync(pkgPath, JSON.stringify(pkgNoScripts, null, 2) + "\n");
+export const Default = Template.bind({});
+Default.args = {
+  tags: ["Item one", "Item two", "Item three"],
+};

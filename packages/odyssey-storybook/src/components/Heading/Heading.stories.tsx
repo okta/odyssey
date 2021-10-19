@@ -10,12 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { writeFileSync } = require("fs");
-const { resolve } = require("path");
+import { Story } from "@storybook/react";
+import { Heading, HeadingProps } from "@okta/odyssey-react";
 
-const pkgPath = resolve(__dirname, "../package.json");
+export default {
+  title: `Components/Heading`,
+  component: Heading,
+  argTypes: {
+    children: {
+      control: { type: "string" },
+    },
+  },
+};
 
-// eslint-disable-next-line no-unused-vars
-const { scripts, ...pkgNoScripts } = require(pkgPath);
+const Template: Story<HeadingProps> = ({ level, visualLevel, children }) => (
+  <Heading level={level} visualLevel={visualLevel} children={children} />
+);
 
-writeFileSync(pkgPath, JSON.stringify(pkgNoScripts, null, 2) + "\n");
+export const Primary = Template.bind({});
+Primary.args = {
+  level: "1",
+  children: "Section title",
+};
