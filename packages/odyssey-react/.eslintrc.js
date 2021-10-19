@@ -10,4 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./Status";
+module.exports = {
+  plugins: ["import"],
+  rules: {
+    "import/no-default-export": "error",
+  },
+  overrides: [
+    {
+      files: ["*.stories.*"],
+      rules: {
+        "import/no-default-export": "off",
+      },
+    },
+  ],
+};

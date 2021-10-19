@@ -11,15 +11,16 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import Icon from "./Icon";
+import { Icon } from "./Icon";
 
 const iconTitle = "Icon";
 
 describe("Icon", () => {
-  it("render the named icon", () => {
+  it("render the named icon visibly into document", () => {
     render(<Icon name="check" title={iconTitle} />);
-    const svgElement = screen.getByTitle(iconTitle).parentElement;
+    const svgElement = screen.getByRole("img");
     expect(svgElement).toBeVisible();
+    expect(svgElement.querySelector("title")).toHaveTextContent(iconTitle);
   });
 
   a11yCheck(() => render(<Icon name="check" title="test" />));

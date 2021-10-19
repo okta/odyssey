@@ -12,8 +12,8 @@
 
 import { render, fireEvent, within } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
-import TextInput from ".";
-import type { Props } from ".";
+import { TextInput } from ".";
+import type { TextInputProps } from ".";
 
 const textBox = "textbox";
 const label = "Destination";
@@ -71,7 +71,7 @@ describe("TextInput", () => {
     }
   );
 
-  it.each<[Props["type"]]>([
+  it.each<[TextInputProps["type"]]>([
     [undefined],
     ["text"],
     ["email"],

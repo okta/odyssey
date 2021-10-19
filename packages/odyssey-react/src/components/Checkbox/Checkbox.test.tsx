@@ -12,7 +12,7 @@
 
 import { render, fireEvent, screen } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
-import Checkbox from ".";
+import { Checkbox } from ".";
 
 const checkbox = "checkbox";
 const label = `${checkbox}_label`;

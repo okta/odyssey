@@ -11,7 +11,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import Link from ".";
+import { Link } from ".";
 
 const link = "link";
 const href = `#anchor`;

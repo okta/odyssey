@@ -33,27 +33,15 @@ function toKebabCase(string) {
 }
 
 function odysseyIconIndexTemplate(filePaths) {
-  const defaultExport = `export * from "./Icon";
-export { default } from "./Icon";
+  const iconComponentExport = `export * from "./Icon";\n\n`;
 
-`;
-
-  const importEntries =
-    filePaths
-      .map((filePath) => {
-        const basename = getBaseName(filePath);
-        const exportName = getExportName(basename);
-        return `import ${exportName} from "./${basename}";`;
-      })
-      .join("\n") + `\n\n`;
-
-  const exportEntries = filePaths
+  const importExportEntries = filePaths
     .map((filePath) => {
-      return getExportName(getBaseName(filePath));
+      const basename = getBaseName(filePath);
+      const exportName = getExportName(basename);
+      return `import { ${exportName} } from "./${basename}";\nexport * from "./${basename}";\n`;
     })
-    .reduce((prev, curr, i) => {
-      return prev + `  ${curr}${i < filePaths.length - 1 ? ",\n" : "\n};"}`;
-    }, "export {\n");
+    .join("\n");
 
   const iconDict = filePaths
     .map((filePath) => {
@@ -70,10 +58,10 @@ export { default } from "./Icon";
           i < filePaths.length - 1 ? "," : ",\n};\n"
         }`
       );
-    }, "\n\nexport const iconDictionary = {");
+    }, "export const iconDictionary = {");
 
   return (
-    headerComment + defaultExport + importEntries + exportEntries + iconDict
+    headerComment + iconComponentExport + importExportEntries + `\n` + iconDict
   );
 }
 

@@ -12,6 +12,7 @@
 
 import { useCallback } from "react";
 import type {
+  ComponentProps,
   FunctionComponent,
   FocusEventHandler,
   ChangeEvent,
@@ -19,10 +20,10 @@ import type {
 } from "react";
 import styles from "./TextArea.module.scss";
 import { useOid, useCx, withStyles } from "../../utils";
-import Field from "../Field";
-import type { SharedFieldTypes } from "../Field";
+import { Field } from "../Field";
+import type { SharedFieldTypes } from "../Field/types";
 
-export interface Props extends SharedFieldTypes {
+interface Props extends SharedFieldTypes {
   /**
    * The underlying textarea element id attribute. Automatically generated if not provided
    */
@@ -95,7 +96,7 @@ export interface Props extends SharedFieldTypes {
 /**
  * TextArea allows users to edit and input data.
  */
-const TextArea: FunctionComponent<Props> = (props) => {
+let TextArea: FunctionComponent<Props> = (props) => {
   const {
     defaultValue,
     disabled = false,
@@ -158,4 +159,9 @@ const TextArea: FunctionComponent<Props> = (props) => {
   );
 };
 
-export default withStyles(styles)(TextArea);
+TextArea.displayName = "TextArea";
+
+TextArea = withStyles(styles)(TextArea);
+
+export type TextAreaProps = ComponentProps<typeof TextArea>;
+export { TextArea };

@@ -11,7 +11,7 @@
  */
 
 import { screen, render } from "@testing-library/react";
-import ScreenReaderText from ".";
+import { ScreenReaderText } from ".";
 
 const content = "This string is visually hidden, but screen-reader accessible.";
 

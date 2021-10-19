@@ -11,12 +11,12 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import Table from ".";
-import TableHeader from "./TableHeader";
-import TableBody from "./TableBody";
-import TableFooter from "./TableFooter";
-import TableRow from "./TableRow";
-import TableHeaderCell from "./TableHeaderCell";
+import { Table } from ".";
+import { TableHeader } from "./TableHeader";
+import { TableBody } from "./TableBody";
+import { TableFooter } from "./TableFooter";
+import { TableRow } from "./TableRow";
+import { TableHeaderCell } from "./TableHeaderCell";
 
 const caption = "test table";
 const tableTitle = "test table";

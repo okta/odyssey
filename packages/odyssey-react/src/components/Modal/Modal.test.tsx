@@ -11,7 +11,7 @@
  */
 
 import { render, fireEvent, screen } from "@testing-library/react";
-import Modal from ".";
+import { Modal } from ".";
 
 const role = "dialog";
 const modalTitle = "Modal Title";

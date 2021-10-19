@@ -10,14 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { FunctionComponent, ReactNode, ReactElement } from "react";
+import type {
+  FunctionComponent,
+  ReactNode,
+  ReactElement,
+  ComponentProps,
+} from "react";
 import { useOmit, withStyles } from "../../utils";
 
-import Title from "../Title";
+import { Heading } from "../Heading";
 
 import styles from "./Form.module.scss";
 
-export interface Props {
+interface Props {
   /**
    * Content to be rendered within the Form. Avoid using direct children, put child content
    * within the provided Form static components (Form.Error and Form.Actions)
@@ -47,42 +52,53 @@ interface PropsActions {
   children: ReactNode;
 }
 
-export type StaticComponents = {
+type Statics = {
   Error: typeof Error;
   Main: typeof Main;
   Actions: typeof Actions;
 };
 
-const Form: FunctionComponent<Props> & StaticComponents = (props) => {
-  const { children, title, desc, ...rest } = props;
+let Form: FunctionComponent<Props> & Statics = Object.assign(
+  (props: Props) => {
+    const { children, title, desc, ...rest } = props;
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <form {...omitProps} className={styles.root}>
-      <header className={styles.header}>
-        {title && <Title visualLevel="3" children={title} />}
-        {desc && <p>{desc}</p>}
-      </header>
-      {children}
-    </form>
-  );
-};
-
-const Error = ({ children }: PropsError) => (
-  <section className={styles.error}>{children}</section>
+    return (
+      <form {...omitProps} className={styles.root}>
+        <header className={styles.header}>
+          {title && <Heading visualLevel="3" children={title} />}
+          {desc && <p>{desc}</p>}
+        </header>
+        {children}
+      </form>
+    );
+  },
+  {
+    Error,
+    Main,
+    Actions,
+  }
 );
 
-const Main = ({ children }: PropsMain) => (
-  <section className={styles.main}>{children}</section>
-);
+function Error({ children }: PropsError) {
+  return <section className={styles.error}>{children}</section>;
+}
 
-const Actions = ({ children }: PropsActions) => (
-  <section className={styles.actions}>{children}</section>
-);
+function Main({ children }: PropsMain) {
+  return <section className={styles.main}>{children}</section>;
+}
 
-Form.Error = Error;
-Form.Main = Main;
-Form.Actions = Actions;
+function Actions({ children }: PropsActions) {
+  return <section className={styles.actions}>{children}</section>;
+}
 
-export default withStyles(styles)(Form);
+Form.displayName = "Form";
+Error.displayName = "FormError";
+Main.displayName = "FormMain";
+Actions.displayName = "FormActions";
+
+Form = withStyles(styles)(Form);
+
+export type FormProps = ComponentProps<typeof Form>;
+export { Form };

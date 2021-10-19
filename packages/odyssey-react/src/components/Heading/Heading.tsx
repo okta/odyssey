@@ -10,17 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ComponentProps,
-  ComponentPropsWithoutRef,
-  ReactText,
-} from "react";
+import type { ComponentPropsWithRef, ReactText } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
-import styles from "./Title.module.scss";
+import styles from "./Heading.module.scss";
 
-interface Props
-  extends Omit<ComponentPropsWithoutRef<"h1">, "style" | "className"> {
+export interface HeadingProps
+  extends Omit<ComponentPropsWithRef<"h1">, "style" | "className"> {
   /**
    * The semantic level for the underlying heading tag
    * @default 1
@@ -30,7 +26,7 @@ interface Props
   /**
    * The visual level level for the underlying heading tag
    */
-  visualLevel?: Props["level"];
+  visualLevel?: HeadingProps["level"];
 
   /**
    * The human readable section title to be visually displayed
@@ -50,11 +46,11 @@ interface Props
 }
 
 /**
- * Title are used to describe the main idea of a page, a section,
+ * Heading are used to describe the main idea of a page, a section,
  * or content that follows it. By default, header tags (h1 through h6)
  * use the corresponding visual size.
  */
-let Title = forwardRef<HTMLHeadingElement, Props>((props, ref) => {
+let Heading = forwardRef<HTMLHeadingElement, HeadingProps>((props, ref) => {
   const {
     level = "1",
     visualLevel,
@@ -82,11 +78,8 @@ let Title = forwardRef<HTMLHeadingElement, Props>((props, ref) => {
   );
 });
 
-Title.displayName = "Title";
+Heading.displayName = "Heading";
 
-Title = withStyles(styles)(Title);
+Heading = withStyles(styles)(Heading);
 
-type TitleProps = ComponentProps<typeof Title>;
-export type { TitleProps as Props };
-
-export default Title;
+export { Heading };

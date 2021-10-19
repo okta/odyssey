@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import Button from "./RadioButton";
-import Group from "./RadioGroup";
+import { RadioButton as Button } from "./RadioButton";
+export type { RadioButtonProps } from "./RadioButton";
 
-export default {
-  Button,
-  Group,
-};
+import { RadioGroup as Group } from "./RadioGroup";
+export type { RadioGroupProps } from "./RadioGroup";
+
+export const Radio = { Button, Group };

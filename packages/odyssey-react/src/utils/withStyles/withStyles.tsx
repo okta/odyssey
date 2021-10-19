@@ -18,7 +18,7 @@ import type {
 } from "react";
 import { forwardRef, useLayoutEffect } from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
-import OStyleSheet from "./stylesheet";
+import { OStyleSheet } from "./stylesheet";
 
 export type Template = () => string;
 type SourceStyles = Record<string, string>;

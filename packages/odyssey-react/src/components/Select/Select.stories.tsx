@@ -12,8 +12,8 @@
 
 import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
-import Select from ".";
-import type { Props } from ".";
+import { Select } from ".";
+import type { SelectProps } from ".";
 
 const options = [
   "Proxima Centauri",
@@ -47,7 +47,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = (args) => (
+const Template: Story<SelectProps> = (args) => (
   <Select {...args}>
     {options.map((option) => (
       <Select.Option key={option} children={option} value={option} />
@@ -79,7 +79,7 @@ Multiple.args = {
   multiple: true,
 };
 
-export const Group = (args: Props): ReactElement => (
+export const Group = (args: SelectProps): ReactElement => (
   <Select {...args}>
     <Select.OptionGroup label="Group A">
       <Select.Option children="Option 1" />

@@ -17,7 +17,7 @@ interface Args {
   readonly template: Template;
 }
 
-export default class OStyleSheet {
+export class OStyleSheet {
   private element!: HTMLStyleElement;
   private readonly template: Template;
   private readonly digest: string;

@@ -11,16 +11,16 @@
  */
 
 import type { Story } from "@storybook/react";
-import Link from ".";
-import type { Props } from ".";
-import Icon, { GetInfoIcon } from "../Icon";
+import { Link } from ".";
+import type { LinkProps } from ".";
+import { Icon, GetInfoIcon } from "../Icon";
 
 export default {
   title: `Components/Link`,
   component: Link,
 };
 
-const Template: Story<Props> = ({
+const Template: Story<LinkProps> = ({
   children,
   variant,
   href,

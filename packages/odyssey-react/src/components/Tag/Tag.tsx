@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentProps, ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
 import { useOmit, withStyles } from "../../utils";
 import styles from "./Tag.module.scss";
 
-interface Props
+export interface TagProps
   extends Omit<
-    ComponentPropsWithoutRef<"ul">,
+    ComponentPropsWithRef<"ul">,
     "style" | "className" | "children"
   > {
   children?: never;
@@ -32,7 +32,7 @@ interface Props
  * Think of them as “adjectives” in your UI toolbox that make navigating
  * and parsing content easier.
  */
-let Tag = forwardRef<HTMLUListElement, Props>((props, ref) => {
+let Tag = forwardRef<HTMLUListElement, TagProps>((props, ref) => {
   const { tags, ...rest } = props;
   const omitProps = useOmit(rest);
 
@@ -51,7 +51,4 @@ Tag.displayName = "Tag";
 
 Tag = withStyles(styles)(Tag);
 
-type TagProps = ComponentProps<typeof Tag>;
-export type { TagProps as Props };
-
-export default Tag;
+export { Tag };

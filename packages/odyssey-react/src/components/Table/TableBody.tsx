@@ -10,27 +10,29 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactElement, ComponentPropsWithoutRef } from "react";
+import type { ReactElement, ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
 import { useOmit } from "../../utils";
 
-export interface Props
-  extends Omit<ComponentPropsWithoutRef<"tbody">, "style" | "className"> {
+export interface TableBodyProps
+  extends Omit<ComponentPropsWithRef<"tbody">, "style" | "className"> {
   children?: ReactElement | ReactElement[];
 }
 
-const TableBody = forwardRef<HTMLTableSectionElement, Props>((props, ref) => {
-  const { children, ...rest } = props;
+const TableBody = forwardRef<HTMLTableSectionElement, TableBodyProps>(
+  (props, ref) => {
+    const { children, ...rest } = props;
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <tbody {...omitProps} ref={ref}>
-      {children}
-    </tbody>
-  );
-});
+    return (
+      <tbody {...omitProps} ref={ref}>
+        {children}
+      </tbody>
+    );
+  }
+);
 
 TableBody.displayName = "TableBody";
 
-export default TableBody;
+export { TableBody };

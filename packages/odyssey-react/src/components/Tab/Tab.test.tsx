@@ -11,7 +11,7 @@
  */
 
 import { render, waitFor, fireEvent } from "@testing-library/react";
-import Tabs from ".";
+import { Tabs } from ".";
 
 const roleTabList = "tablist";
 const roleTabPanel = "tabpanel";
