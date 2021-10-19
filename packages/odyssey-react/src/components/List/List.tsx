@@ -10,12 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ReactElement,
-  ComponentProps,
-  ComponentPropsWithoutRef,
-  ForwardedRef,
-} from "react";
+import type { ReactElement, ComponentPropsWithRef, ForwardedRef } from "react";
 import { forwardRefWithStatics, useOmit, useCx, withStyles } from "../../utils";
 import styles from "./List.module.scss";
 import { ListItem } from "./ListItem";
@@ -39,11 +34,11 @@ interface CommonProps {
   unstyled?: boolean;
 }
 
-type UnorderedProps = CommonProps & ComponentPropsWithoutRef<"ul">;
-type OrderedProps = CommonProps & ComponentPropsWithoutRef<"ol">;
-type DescriptionProps = CommonProps & ComponentPropsWithoutRef<"dl">;
+type UnorderedProps = CommonProps & ComponentPropsWithRef<"ul">;
+type OrderedProps = CommonProps & ComponentPropsWithRef<"ol">;
+type DescriptionProps = CommonProps & ComponentPropsWithRef<"dl">;
 
-type Props = Omit<
+export type ListProps = Omit<
   UnorderedProps | OrderedProps | DescriptionProps,
   "style" | "className"
 >;
@@ -54,51 +49,58 @@ type Statics = {
   Details: typeof DescriptionDetails;
 };
 
-let List = forwardRefWithStatics<HTMLElement, Props, Statics>((props, ref) => {
-  const { children, listType = "unordered", unstyled = false, ...rest } = props;
+let List = forwardRefWithStatics<HTMLElement, ListProps, Statics>(
+  (props, ref) => {
+    const {
+      children,
+      listType = "unordered",
+      unstyled = false,
+      ...rest
+    } = props;
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  const componentClass = useCx(
-    !unstyled && styles.root,
-    unstyled ? styles.unstyled : styles[listType]
-  );
+    const componentClass = useCx(
+      !unstyled && styles.root,
+      unstyled ? styles.unstyled : styles[listType]
+    );
 
-  function ListElement() {
-    if (listType === "ordered") {
+    function ListElement() {
+      if (listType === "ordered") {
+        return (
+          <ol
+            {...omitProps}
+            className={componentClass}
+            ref={ref as ForwardedRef<HTMLOListElement>}
+          >
+            {children}
+          </ol>
+        );
+      } else if (listType === "description") {
+        return (
+          <dl
+            {...omitProps}
+            className={componentClass}
+            ref={ref as ForwardedRef<HTMLDListElement>}
+          >
+            {children}
+          </dl>
+        );
+      }
       return (
-        <ol
+        <ul
           {...omitProps}
           className={componentClass}
-          ref={ref as ForwardedRef<HTMLOListElement>}
+          ref={ref as ForwardedRef<HTMLUListElement>}
         >
           {children}
-        </ol>
-      );
-    } else if (listType === "description") {
-      return (
-        <dl
-          {...omitProps}
-          className={componentClass}
-          ref={ref as ForwardedRef<HTMLDListElement>}
-        >
-          {children}
-        </dl>
+        </ul>
       );
     }
-    return (
-      <ul
-        {...omitProps}
-        className={componentClass}
-        ref={ref as ForwardedRef<HTMLUListElement>}
-      >
-        {children}
-      </ul>
-    );
-  }
 
-  return <ListElement />;
-});
+    return <ListElement />;
+  }
+);
 
 List.displayName = "List";
 
@@ -108,5 +110,4 @@ List.Details = DescriptionDetails;
 
 List = withStyles(styles)(List);
 
-export type ListProps = ComponentProps<typeof List>;
 export { List };

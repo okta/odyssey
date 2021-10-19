@@ -11,17 +11,15 @@
  */
 
 import { forwardRef } from "react";
-import type { ComponentProps, ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithRef } from "react";
 import { useRadioGroup } from "../context";
 import { useCx, useOid, useOmit, withStyles } from "../../../utils";
-
 import styles from "./RadioButton.module.scss";
-
 import type { SharedFieldTypes } from "../../Field/types";
 
-interface Props
+export interface RadioButtonProps
   extends Pick<SharedFieldTypes, "hint" | "error">,
-    Omit<ComponentPropsWithoutRef<"input">, "style" | "className"> {
+    Omit<ComponentPropsWithRef<"input">, "style" | "className"> {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
@@ -42,55 +40,56 @@ interface Props
  * Radios appear as a ring shaped UI accompanied by a caption that allows
  * the user to choose only one option at a time.
  */
-let RadioButton = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { id, label, value, ...rest } = props;
+let RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
+  (props, ref) => {
+    const { id, label, value, ...rest } = props;
 
-  const {
-    value: controlledValue,
-    onChange,
-    disabled,
-    required,
-    name,
-    groupid,
-    hint,
-    error,
-  } = useRadioGroup();
+    const {
+      value: controlledValue,
+      onChange,
+      disabled,
+      required,
+      name,
+      groupid,
+      hint,
+      error,
+    } = useRadioGroup();
 
-  const oid = useOid(id);
+    const oid = useOid(id);
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  const checked = value === controlledValue;
+    const checked = value === controlledValue;
 
-  const ariaDescribedBy = useCx(
-    hint && `${groupid}-hint`,
-    typeof error === "undefined" && `${groupid}-error`
-  );
+    const ariaDescribedBy = useCx(
+      hint && `${groupid}-hint`,
+      typeof error === "undefined" && `${groupid}-error`
+    );
 
-  return (
-    <>
-      <input
-        {...omitProps}
-        aria-describedby={ariaDescribedBy}
-        className={styles.radio}
-        checked={checked}
-        disabled={disabled}
-        id={oid}
-        onChange={onChange}
-        name={name}
-        ref={ref}
-        required={required}
-        type="radio"
-        value={value}
-      />
-      <label children={label} className={styles.label} htmlFor={oid} />
-    </>
-  );
-});
-
-RadioButton = withStyles(styles)(RadioButton);
+    return (
+      <>
+        <input
+          {...omitProps}
+          aria-describedby={ariaDescribedBy}
+          className={styles.radio}
+          checked={checked}
+          disabled={disabled}
+          id={oid}
+          onChange={onChange}
+          name={name}
+          ref={ref}
+          required={required}
+          type="radio"
+          value={value}
+        />
+        <label children={label} className={styles.label} htmlFor={oid} />
+      </>
+    );
+  }
+);
 
 RadioButton.displayName = "RadioButton";
 
-export type RadioButtonProps = ComponentProps<typeof RadioButton>;
+RadioButton = withStyles(styles)(RadioButton);
+
 export { RadioButton };

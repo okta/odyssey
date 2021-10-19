@@ -11,12 +11,7 @@
  */
 
 import { useCallback } from "react";
-import type {
-  ComponentProps,
-  ChangeEvent,
-  ReactElement,
-  ComponentPropsWithoutRef,
-} from "react";
+import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
 import { SelectOption } from "../SelectOption";
 import { SelectOptionGroup } from "../SelectOptionGroup";
 import { useChoices } from "./useChoices";
@@ -32,12 +27,9 @@ import type { SharedFieldTypes } from "../../Field/types";
 import styles from "../Select.module.scss";
 import { CaretDownIcon } from "../../Icon";
 
-interface Props
+export interface SelectProps
   extends SharedFieldTypes,
-    Omit<
-      ComponentPropsWithoutRef<"select">,
-      "onChange" | "style" | "className"
-    > {
+    Omit<ComponentPropsWithRef<"select">, "onChange" | "style" | "className"> {
   /**
    * One or more options or option groups to be used together as a group
    */
@@ -81,7 +73,7 @@ interface Props
  * Often referred to as a "dropdown menu" this input triggers a menu of
  * options a user can select.
  */
-let Select = forwardRefWithStatics<HTMLSelectElement, Props, Statics>(
+let Select = forwardRefWithStatics<HTMLSelectElement, SelectProps, Statics>(
   (props, ref) => {
     const {
       id,
@@ -155,5 +147,4 @@ Select.OptionGroup = SelectOptionGroup;
 
 Select = withStyles(styles)(Select);
 
-export type SelectProps = ComponentProps<typeof Select>;
 export { Select };

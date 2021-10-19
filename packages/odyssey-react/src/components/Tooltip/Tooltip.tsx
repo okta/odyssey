@@ -11,19 +11,12 @@
  */
 
 import { cloneElement, forwardRef } from "react";
-import type {
-  ComponentProps,
-  ReactElement,
-  ComponentPropsWithoutRef,
-} from "react";
+import type { ReactElement, ComponentPropsWithRef } from "react";
 import { useCx, useOid, useOmit, withStyles } from "../../utils";
 import styles from "./Tooltip.module.scss";
 
-interface Props
-  extends Omit<
-    ComponentPropsWithoutRef<"aside">,
-    "style" | "className" | "role"
-  > {
+export interface TooltipProps
+  extends Omit<ComponentPropsWithRef<"aside">, "style" | "className" | "role"> {
   /**
    * Content to be rendered that needs a tooltip label
    */
@@ -44,7 +37,7 @@ interface Props
 /**
  * A transient element that provides additional context for an element when it receives hover or focus.
  */
-let Tooltip = forwardRef<HTMLElement, Props>((props, ref) => {
+let Tooltip = forwardRef<HTMLElement, TooltipProps>((props, ref) => {
   const { children, id, label, position = "top", ...rest } = props;
 
   const oid = useOid(id);
@@ -72,5 +65,4 @@ Tooltip.displayName = "Tooltip";
 
 Tooltip = withStyles(styles)(Tooltip);
 
-export type TooltipProps = ComponentProps<typeof Tooltip>;
 export { Tooltip };

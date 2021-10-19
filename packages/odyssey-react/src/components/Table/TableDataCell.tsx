@@ -10,19 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ReactNode,
-  ComponentProps,
-  ComponentPropsWithoutRef,
-} from "react";
+import type { ReactNode, ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
 import type { CellTextFormats } from "./types";
 import { useCx, useOmit, withStyles } from "../../utils";
-
 import styles from "./Table.module.scss";
 
-interface Props
-  extends Omit<ComponentPropsWithoutRef<"td">, "style" | "className"> {
+export interface TableDataCellProps
+  extends Omit<ComponentPropsWithRef<"td">, "style" | "className"> {
   children?: ReactNode;
   /**
    * The basic text format for the cell.
@@ -31,27 +26,28 @@ interface Props
   empty?: boolean;
 }
 
-let TableDataCell = forwardRef<HTMLTableCellElement, Props>((props, ref) => {
-  const { children, format, empty, ...rest } = props;
+let TableDataCell = forwardRef<HTMLTableCellElement, TableDataCellProps>(
+  (props, ref) => {
+    const { children, format, empty, ...rest } = props;
 
-  const componentClass = useCx(
-    styles.cell,
-    format && styles[`${format}Format`],
-    empty && styles[`${empty}State`]
-  );
+    const componentClass = useCx(
+      styles.cell,
+      format && styles[`${format}Format`],
+      empty && styles[`${empty}State`]
+    );
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <td {...omitProps} ref={ref} className={componentClass}>
-      {children}
-    </td>
-  );
-});
+    return (
+      <td {...omitProps} ref={ref} className={componentClass}>
+        {children}
+      </td>
+    );
+  }
+);
 
 TableDataCell.displayName = "TableDataCell";
 
 TableDataCell = withStyles(styles)(TableDataCell);
 
-export type TableDataCellProps = ComponentProps<typeof TableDataCell>;
 export { TableDataCell };

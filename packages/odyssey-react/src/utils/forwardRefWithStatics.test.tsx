@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithoutRef, FC } from "react";
+import type { ComponentPropsWithRef, FC } from "react";
 import { screen, render } from "@testing-library/react";
 import { forwardRefWithStatics } from ".";
 
 describe("forwardRefWithStatics", () => {
-  type Props = ComponentPropsWithoutRef<"div">;
+  type Props = ComponentPropsWithRef<"div">;
   type Statics = { Child: typeof Child };
 
   const Child: FC<Props> = (props) => <div {...props} />;

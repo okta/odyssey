@@ -10,17 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentProps, ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import { ScreenReaderText } from "../ScreenReaderText";
 import styles from "./Status.module.scss";
 
-interface Props
-  extends Omit<
-    ComponentPropsWithoutRef<"div">,
-    "style" | "className" | "role"
-  > {
+export interface StatusProps
+  extends Omit<ComponentPropsWithRef<"div">, "style" | "className" | "role"> {
   /**
    * The status label.
    */
@@ -48,7 +45,7 @@ interface Props
  * Status is used to inform users by providing feedback on system states. Status can display broad
  * operational states as well as granular states like user status.
  */
-let Status = forwardRef<HTMLDivElement, Props>((props, ref) => {
+let Status = forwardRef<HTMLDivElement, StatusProps>((props, ref) => {
   const {
     label,
     descriptor,
@@ -77,5 +74,4 @@ Status.displayName = "Status";
 
 Status = withStyles(styles)(Status);
 
-export type StatusProps = ComponentProps<typeof Status>;
 export { Status };

@@ -10,12 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ReactNode,
-  ReactElement,
-  ComponentProps,
-  ComponentPropsWithoutRef,
-} from "react";
+import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
 
 import { useOmit, forwardRefWithStatics, withStyles } from "../../utils";
 
@@ -46,7 +41,7 @@ type ContainerProps =
     };
 
 interface ElementProps
-  extends Omit<ComponentPropsWithoutRef<"table">, "style" | "className"> {
+  extends Omit<ComponentPropsWithRef<"table">, "style" | "className"> {
   /**
    * Valid Table child elements including Head, Body, and Foot
    */
@@ -57,7 +52,7 @@ interface ElementProps
   caption: string;
 }
 
-type Props = ContainerProps & ElementProps;
+export type TableProps = ContainerProps & ElementProps;
 
 type Statics = {
   Container: typeof TableContainer;
@@ -73,7 +68,7 @@ type Statics = {
 /**
  * Tables provide structure for displaying sets of data across rows and columns.
  */
-let Table = forwardRefWithStatics<HTMLTableElement, Props, Statics>(
+let Table = forwardRefWithStatics<HTMLTableElement, TableProps, Statics>(
   (props, ref) => {
     const { children, caption, title, withContainer = true, ...rest } = props;
 
@@ -115,5 +110,4 @@ Table.displayName = "Table";
 
 Table = withStyles(styles)(Table);
 
-export type TableProps = ComponentProps<typeof Table>;
 export { Table };

@@ -10,22 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ComponentProps,
-  ChangeEvent,
-  ReactElement,
-  ComponentPropsWithoutRef,
-} from "react";
+import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
 import { RadioGroupProvider } from "../context";
-
 import { useOid } from "../../../utils";
 import { Field } from "../../Field";
 import type { SharedFieldTypes } from "../../Field/types";
 
-interface Props
+export interface RadioGroupProps
   extends SharedFieldTypes,
     Omit<
-      ComponentPropsWithoutRef<"fieldset">,
+      ComponentPropsWithRef<"fieldset">,
       "onChange" | "style" | "className"
     > {
   /**
@@ -72,7 +66,7 @@ interface Props
  * Radios appear as a ring shaped UI accompanied by a caption that allows
  * the user to choose only one option at a time.
  */
-const RadioGroup = (props: Props): JSX.Element => {
+const RadioGroup = (props: RadioGroupProps): JSX.Element => {
   const {
     children,
     disabled = false,
@@ -118,5 +112,4 @@ const RadioGroup = (props: Props): JSX.Element => {
 
 RadioGroup.displayName = "RadioGroup";
 
-export type RadioGroupProps = ComponentProps<typeof RadioGroup>;
 export { RadioGroup };

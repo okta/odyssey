@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ComponentPropsWithoutRef, forwardRef } from "react";
-import type { ComponentProps } from "react";
+import { forwardRef } from "react";
+import type { ComponentPropsWithRef } from "react";
 import { useOmit } from "../../utils";
 import { iconDictionary } from "./";
 
-interface Props
-  extends Omit<ComponentPropsWithoutRef<"svg">, "style" | "className"> {
+export interface IconDictionaryProps
+  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   /**
    * Title text used by screen readers
    */
@@ -31,7 +31,7 @@ interface Props
  * A system of icons which establishes a visual language
  * that can be easily understood regardless of age, language or culture.
  */
-const IconDictionary = forwardRef<SVGSVGElement, Props>(
+const IconDictionary = forwardRef<SVGSVGElement, IconDictionaryProps>(
   ({ name, title, ...rest }, ref) => {
     const omitProps = useOmit(rest);
 
@@ -41,5 +41,6 @@ const IconDictionary = forwardRef<SVGSVGElement, Props>(
   }
 );
 
-export type IconDictionaryProps = ComponentProps<typeof IconDictionary>;
+IconDictionary.displayName = "IconDictionary";
+
 export { IconDictionary };
