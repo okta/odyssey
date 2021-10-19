@@ -12,17 +12,17 @@
 
 import { Story } from "@storybook/react";
 import * as IconIndex from "./";
-import { IconDictionary } from "./IconDictionary";
+import { Icon } from "./Icon";
 import { ReactElement } from "react";
 import { Table } from "../Table";
 
 export default {
-  title: `Components/IconDictionary`,
-  component: IconDictionary,
+  title: `Components/Icon`,
+  component: Icon,
 };
 
 const Template: Story = ({ ...args }) => (
-  <IconDictionary name={args.name} title={args.title} />
+  <Icon name={args.name} title={args.title} />
 );
 
 export const Default = Template.bind({});

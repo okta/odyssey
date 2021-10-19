@@ -33,7 +33,7 @@ function toKebabCase(string) {
 }
 
 function odysseyIconIndexTemplate(filePaths) {
-  const iconDictionaryExport = `export * from "./IconDictionary";\n\n`;
+  const iconComponentExport = `export * from "./Icon";\n\n`;
 
   const importExportEntries = filePaths
     .map((filePath) => {
@@ -61,7 +61,7 @@ function odysseyIconIndexTemplate(filePaths) {
     }, "export const iconDictionary = {");
 
   return (
-    headerComment + iconDictionaryExport + importExportEntries + `\n` + iconDict
+    headerComment + iconComponentExport + importExportEntries + `\n` + iconDict
   );
 }
 

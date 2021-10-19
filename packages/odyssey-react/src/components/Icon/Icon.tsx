@@ -15,7 +15,7 @@ import type { ComponentPropsWithRef } from "react";
 import { useOmit } from "../../utils";
 import { iconDictionary } from "./";
 
-export interface IconDictionaryProps
+export interface IconProps
   extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
   /**
    * Title text used by screen readers
@@ -30,8 +30,10 @@ export interface IconDictionaryProps
 /**
  * A system of icons which establishes a visual language
  * that can be easily understood regardless of age, language or culture.
+ * This component includes all icon data as static imports. Favor individual
+ * icon component imports where possible to keep your bundle size smaller.
  */
-const IconDictionary = forwardRef<SVGSVGElement, IconDictionaryProps>(
+const Icon = forwardRef<SVGSVGElement, IconProps>(
   ({ name, title, ...rest }, ref) => {
     const omitProps = useOmit(rest);
 
@@ -41,6 +43,6 @@ const IconDictionary = forwardRef<SVGSVGElement, IconDictionaryProps>(
   }
 );
 
-IconDictionary.displayName = "IconDictionary";
+Icon.displayName = "Icon";
 
-export { IconDictionary };
+export { Icon };
