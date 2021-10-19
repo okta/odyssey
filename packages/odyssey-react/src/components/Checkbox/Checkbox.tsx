@@ -12,8 +12,7 @@
 
 import { useCallback, useRef, useEffect, forwardRef } from "react";
 import type { ComponentPropsWithRef, ChangeEvent } from "react";
-import { CheckIcon } from "../Icon/Check";
-import { MinusIcon } from "../Icon/Minus";
+import { CheckIcon, MinusIcon } from "../Icon";
 import styles from "./Checkbox.module.scss";
 import { useCx, useOid, useOmit, withStyles } from "../../utils";
 import { Field } from "../Field";
