@@ -10,12 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { writeFileSync } = require("fs");
-const { resolve } = require("path");
+import type { Story } from "@storybook/react";
+import {
+  CircularLoadIndicator,
+  CircularLoadIndicatorProps,
+} from "@okta/odyssey-react";
 
-const pkgPath = resolve(__dirname, "../package.json");
+export default {
+  title: `Components/CircularLoadIndicator`,
+  component: CircularLoadIndicator,
+};
 
-// eslint-disable-next-line no-unused-vars
-const { scripts, ...pkgNoScripts } = require(pkgPath);
+const Template: Story<CircularLoadIndicatorProps> = () => (
+  <div aria-describedby="my-loader" aria-busy>
+    <CircularLoadIndicator
+      aria-label="Loader"
+      aria-valuetext="Loading..."
+      id="my-loader"
+    />
+  </div>
+);
 
-writeFileSync(pkgPath, JSON.stringify(pkgNoScripts, null, 2) + "\n");
+export const Default = Template.bind({});
