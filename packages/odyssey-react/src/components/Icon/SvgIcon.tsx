@@ -18,8 +18,7 @@ import {
 } from "react";
 import type { ReactElement } from "react";
 import { useOid, useOmit, withStyles } from "../../utils";
-
-import styles from "./Icon.module.scss";
+import styles from "./SvgIcon.module.scss";
 
 export interface SvgIconProps
   extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {

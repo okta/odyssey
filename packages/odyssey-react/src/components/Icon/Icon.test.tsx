@@ -11,17 +11,17 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import { IconDictionary } from "./IconDictionary";
+import { Icon } from "./Icon";
 
 const iconTitle = "Icon";
 
 describe("Icon", () => {
   it("render the named icon visibly into document", () => {
-    render(<IconDictionary name="check" title={iconTitle} />);
+    render(<Icon name="check" title={iconTitle} />);
     const svgElement = screen.getByRole("img");
     expect(svgElement).toBeVisible();
     expect(svgElement.querySelector("title")).toHaveTextContent(iconTitle);
   });
 
-  a11yCheck(() => render(<IconDictionary name="check" title="test" />));
+  a11yCheck(() => render(<Icon name="check" title="test" />));
 });
