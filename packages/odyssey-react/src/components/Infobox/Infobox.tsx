@@ -10,20 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ComponentPropsWithoutRef,
-  ComponentProps,
-  ReactNode,
-} from "react";
+import type { ComponentPropsWithRef, ReactNode } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
-import Title from "../Title";
+import { Heading } from "../Heading";
 import { CautionIcon, CompleteIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Infobox.module.scss";
 
 interface CommonProps
   extends Omit<
-    ComponentPropsWithoutRef<"aside">,
+    ComponentPropsWithRef<"aside">,
     "style" | "className" | "children" | "title" | "content"
   > {
   children?: never;
@@ -57,13 +53,13 @@ interface ContentProps extends CommonProps {
   content: ReactNode;
 }
 
-type Props = TitleProps | ContentProps;
+export type InfoboxProps = TitleProps | ContentProps;
 
 /**
  * An infobox is a type of alert that provides feedback in response to a
  * user action or system activity.
  */
-let Infobox = forwardRef<HTMLElement, Props>((props, ref) => {
+let Infobox = forwardRef<HTMLElement, InfoboxProps>((props, ref) => {
   const { content, actions, title, variant = "info", ...rest } = props;
 
   const classNames = useCx(styles.root, styles[`${variant}Variant`]);
@@ -81,7 +77,7 @@ let Infobox = forwardRef<HTMLElement, Props>((props, ref) => {
       <span className={styles.icon}>{icon[variant]}</span>
       {title && (
         <div className={styles.title}>
-          <Title visualLevel="6" children={title} />
+          <Heading visualLevel="6" children={title} />
         </div>
       )}
       {content && <section className={styles.content} children={content} />}
@@ -94,7 +90,4 @@ Infobox.displayName = "Infobox";
 
 Infobox = withStyles(styles)(Infobox);
 
-type InfoboxProps = ComponentProps<typeof Infobox>;
-export type { InfoboxProps as Props };
-
-export default Infobox;
+export { Infobox };

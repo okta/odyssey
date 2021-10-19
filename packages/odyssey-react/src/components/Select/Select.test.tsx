@@ -11,7 +11,7 @@
  */
 
 import { render, fireEvent, screen, within } from "@testing-library/react";
-import Select from ".";
+import { Select } from ".";
 
 const listboxRole = "listbox";
 const optionRole = "option";

@@ -11,10 +11,10 @@
  */
 
 import { Story } from "@storybook/react";
-import FieldGroup from ".";
-import TextInput from "../TextInput";
-import Infobox from "../Infobox";
-import type { Props } from ".";
+import { FieldGroup } from ".";
+import { TextInput } from "../TextInput";
+import { Infobox } from "../Infobox";
+import type { FieldGroupProps } from ".";
 
 export default {
   title: `Components/FieldGroup`,
@@ -35,7 +35,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({ title, desc }) => (
+const Template: Story<FieldGroupProps> = ({ title, desc }) => (
   <FieldGroup title={title} desc={desc}>
     <FieldGroup.Error>
       <Infobox

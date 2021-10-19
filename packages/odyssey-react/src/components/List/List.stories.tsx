@@ -12,15 +12,15 @@
 
 import type { ReactElement } from "react";
 import type { Story } from "@storybook/react";
-import type { Props } from "./List";
-import List from ".";
+import type { ListProps } from "./List";
+import { List } from ".";
 
 export default {
   title: `Components/List`,
   component: List,
 };
 
-const Template: Story<Props> = ({ listType, unstyled }) => (
+const Template: Story<ListProps> = ({ listType, unstyled }) => (
   <List listType={listType} unstyled={unstyled}>
     <List.Item>Item 1</List.Item>
     <List.Item>Item 2</List.Item>

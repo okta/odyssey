@@ -11,8 +11,8 @@
  */
 
 import type { Story } from "@storybook/react";
-import Radio from ".";
-import type { Props } from "./RadioGroup";
+import { Radio } from ".";
+import type { RadioGroupProps } from "./RadioGroup";
 
 export default {
   title: `Components/Radio`,
@@ -37,7 +37,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = (props) => (
+const Template: Story<RadioGroupProps> = (props) => (
   <Radio.Group {...props}>
     <Radio.Button label="Lightspeed" value="light" />
     <Radio.Button label="Warp speed" value="warp" />

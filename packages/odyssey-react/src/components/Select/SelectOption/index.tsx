@@ -11,12 +11,12 @@
  */
 
 import { forwardRef } from "react";
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithRef } from "react";
 import { useOmit } from "../../../utils";
 
-export interface Props
+export interface SelectOptionProps
   extends Omit<
-    ComponentPropsWithoutRef<"option">,
+    ComponentPropsWithRef<"option">,
     "style" | "className" | "selected"
   > {
   /**
@@ -29,16 +29,20 @@ export interface Props
  * Often referred to as a "dropdown menu" this input triggers a menu of
  * options a user can select.
  */
-const SelectOption = forwardRef<HTMLOptionElement, Props>((props, ref) => {
-  const { children, ...rest } = props;
+const SelectOption = forwardRef<HTMLOptionElement, SelectOptionProps>(
+  (props, ref) => {
+    const { children, ...rest } = props;
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <option {...omitProps} ref={ref}>
-      {children}
-    </option>
-  );
-});
+    return (
+      <option {...omitProps} ref={ref}>
+        {children}
+      </option>
+    );
+  }
+);
 
-export default SelectOption;
+SelectOption.displayName = "SelectOption";
+
+export { SelectOption };

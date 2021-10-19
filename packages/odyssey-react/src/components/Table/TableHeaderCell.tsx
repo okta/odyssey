@@ -10,19 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ReactNode,
-  ComponentProps,
-  ComponentPropsWithoutRef,
-} from "react";
+import type { ReactNode, ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
-import type { CellTextFormats } from "./Table";
+import type { CellTextFormats } from "./types";
 import { useCx, useOmit, withStyles } from "../../utils";
 
 import styles from "./Table.module.scss";
 
-interface Props
-  extends Omit<ComponentPropsWithoutRef<"th">, "style" | "className"> {
+export interface TableHeaderCellProps
+  extends Omit<ComponentPropsWithRef<"th">, "style" | "className"> {
   children?: ReactNode;
   /**
    * The basic text format for the cell.
@@ -30,30 +26,29 @@ interface Props
   format?: CellTextFormats;
 }
 
-let TableHeaderCell = forwardRef<HTMLTableCellElement, Props>((props, ref) => {
-  const { children, format, ...rest } = props;
+let TableHeaderCell = forwardRef<HTMLTableCellElement, TableHeaderCellProps>(
+  (props, ref) => {
+    const { children, format, ...rest } = props;
 
-  const componentClass = useCx(
-    styles.cell,
-    styles.headerCell,
-    props.scope === "col" && styles.headerCellCol,
-    format && styles[`${format}Format`]
-  );
+    const componentClass = useCx(
+      styles.cell,
+      styles.headerCell,
+      props.scope === "col" && styles.headerCellCol,
+      format && styles[`${format}Format`]
+    );
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <th {...omitProps} ref={ref} className={componentClass}>
-      {children}
-    </th>
-  );
-});
+    return (
+      <th {...omitProps} ref={ref} className={componentClass}>
+        {children}
+      </th>
+    );
+  }
+);
 
 TableHeaderCell.displayName = "TableHeaderCell";
 
 TableHeaderCell = withStyles(styles)(TableHeaderCell);
 
-type TableHeaderCellProps = ComponentProps<typeof TableHeaderCell>;
-export type { TableHeaderCellProps as Props };
-
-export default TableHeaderCell;
+export { TableHeaderCell };

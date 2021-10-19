@@ -11,33 +11,25 @@
  */
 
 import { useCallback } from "react";
-import type {
-  ComponentProps,
-  ChangeEvent,
-  ReactElement,
-  ComponentPropsWithoutRef,
-} from "react";
-import SelectOption from "../SelectOption";
-import SelectOptionGroup from "../SelectOptionGroup";
-import useChoices from "./useChoices";
+import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
+import { SelectOption } from "../SelectOption";
+import { SelectOptionGroup } from "../SelectOptionGroup";
+import { useChoices } from "./useChoices";
 import {
   forwardRefWithStatics,
   useOid,
   useOmit,
   withStyles,
 } from "../../../utils";
-import Field from "../../Field";
-import type { SharedFieldTypes } from "../../Field";
+import { Field } from "../../Field";
+import type { SharedFieldTypes } from "../../Field/types";
 
 import styles from "../Select.module.scss";
-import CaretDownIcon from "../../Icon/CaretDown";
+import { CaretDownIcon } from "../../Icon";
 
-interface Props
+export interface SelectProps
   extends SharedFieldTypes,
-    Omit<
-      ComponentPropsWithoutRef<"select">,
-      "onChange" | "style" | "className"
-    > {
+    Omit<ComponentPropsWithRef<"select">, "onChange" | "style" | "className"> {
   /**
    * One or more options or option groups to be used together as a group
    */
@@ -81,7 +73,7 @@ interface Props
  * Often referred to as a "dropdown menu" this input triggers a menu of
  * options a user can select.
  */
-let Select = forwardRefWithStatics<HTMLSelectElement, Props, Statics>(
+let Select = forwardRefWithStatics<HTMLSelectElement, SelectProps, Statics>(
   (props, ref) => {
     const {
       id,
@@ -143,7 +135,9 @@ let Select = forwardRefWithStatics<HTMLSelectElement, Props, Statics>(
   }
 );
 
-export interface Statics {
+Select.displayName = "Select";
+
+interface Statics {
   Option: typeof SelectOption;
   OptionGroup: typeof SelectOptionGroup;
 }
@@ -151,9 +145,6 @@ export interface Statics {
 Select.Option = SelectOption;
 Select.OptionGroup = SelectOptionGroup;
 
-type SelectProps = ComponentProps<typeof Select>;
-export type { SelectProps as Props };
-
 Select = withStyles(styles)(Select);
 
-export default Select;
+export { Select };

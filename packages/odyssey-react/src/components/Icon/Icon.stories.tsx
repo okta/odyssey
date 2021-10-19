@@ -12,9 +12,9 @@
 
 import { Story } from "@storybook/react";
 import * as IconIndex from "./";
-import Icon from "./Icon";
+import { Icon } from "./Icon";
 import { ReactElement } from "react";
-import Table from "../Table";
+import { Table } from "../Table";
 
 export default {
   title: `Components/Icon`,

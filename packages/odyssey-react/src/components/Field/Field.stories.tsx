@@ -11,10 +11,9 @@
  */
 
 import { Story } from "@storybook/react";
-import Field from ".";
-import ScreenReaderText from "../ScreenReaderText";
-
-import type { Props } from ".";
+import { Field } from ".";
+import { ScreenReaderText } from "../ScreenReaderText";
+import type { FieldProps } from ".";
 
 export default {
   title: `Components/Field`,
@@ -38,7 +37,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = (props) => <Field {...props} />;
+const Template: Story<FieldProps> = (props) => <Field {...props} />;
 
 export const FieldSolo = Template.bind({});
 FieldSolo.args = {};

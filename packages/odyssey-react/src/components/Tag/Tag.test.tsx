@@ -11,7 +11,7 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import Tag from ".";
+import { Tag } from ".";
 
 const tagList = ["Item one", "Item two", "Item three"];
 const list = "list";

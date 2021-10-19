@@ -248,7 +248,5 @@ Tab.displayName = "TabsTab";
 
 Tabs = withStyles(styles)(Tabs);
 
-type TabsProps = ComponentProps<typeof Tabs>;
-export type { TabsProps as Props };
-
-export default Tabs;
+export type TabsProps = ComponentProps<typeof Tabs>;
+export { Tabs };

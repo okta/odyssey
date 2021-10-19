@@ -10,25 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ReactNode,
-  ReactElement,
-  ComponentProps,
-  ComponentPropsWithoutRef,
-} from "react";
+import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
 
 import { useOmit, forwardRefWithStatics, withStyles } from "../../utils";
 
-import TableContainer from "./TableContainer";
-import TableHeader from "./TableHeader";
-import TableBody from "./TableBody";
-import TableFooter from "./TableFooter";
-import TableRow from "./TableRow";
-import TableDataCell from "./TableDataCell";
-import TableHeaderCell from "./TableHeaderCell";
-import TableSortButton from "./TableSortButton";
+import { TableContainer } from "./TableContainer";
+import { TableHeader } from "./TableHeader";
+import { TableBody } from "./TableBody";
+import { TableFooter } from "./TableFooter";
+import { TableRow } from "./TableRow";
+import { TableDataCell } from "./TableDataCell";
+import { TableHeaderCell } from "./TableHeaderCell";
+import { TableSortButton } from "./TableSortButton";
 
-import ScreenReaderText from "../ScreenReaderText";
+import { ScreenReaderText } from "../ScreenReaderText";
 
 import styles from "./Table.module.scss";
 
@@ -46,7 +41,7 @@ type ContainerProps =
     };
 
 interface ElementProps
-  extends Omit<ComponentPropsWithoutRef<"table">, "style" | "className"> {
+  extends Omit<ComponentPropsWithRef<"table">, "style" | "className"> {
   /**
    * Valid Table child elements including Head, Body, and Foot
    */
@@ -57,7 +52,7 @@ interface ElementProps
   caption: string;
 }
 
-type Props = ContainerProps & ElementProps;
+export type TableProps = ContainerProps & ElementProps;
 
 type Statics = {
   Container: typeof TableContainer;
@@ -70,12 +65,10 @@ type Statics = {
   SortButton: typeof TableSortButton;
 };
 
-export type CellTextFormats = "num" | "date";
-
-/*
+/**
  * Tables provide structure for displaying sets of data across rows and columns.
  */
-let Table = forwardRefWithStatics<HTMLTableElement, Props, Statics>(
+let Table = forwardRefWithStatics<HTMLTableElement, TableProps, Statics>(
   (props, ref) => {
     const { children, caption, title, withContainer = true, ...rest } = props;
 
@@ -117,7 +110,4 @@ Table.displayName = "Table";
 
 Table = withStyles(styles)(Table);
 
-type TableProps = ComponentProps<typeof Table>;
-export type { TableProps as Props };
-
-export default Table;
+export { Table };

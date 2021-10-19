@@ -12,9 +12,9 @@
 
 import type { Story } from "@storybook/react";
 import { useEffect } from "react";
-import Checkbox from ".";
-import type { Props } from ".";
-import ScreenReaderText from "../ScreenReaderText";
+import { Checkbox } from ".";
+import type { CheckboxProps } from ".";
+import { ScreenReaderText } from "../ScreenReaderText";
 
 export default {
   title: `Components/Checkbox`,
@@ -41,7 +41,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = (args) => <Checkbox {...args} />;
+const Template: Story<CheckboxProps> = (args) => <Checkbox {...args} />;
 
 export const Default = Template.bind({});
 

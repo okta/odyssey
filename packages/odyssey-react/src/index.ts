@@ -10,12 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import Button from "./components/Button";
-import Link from "./components/Link";
-import Status from "./components/Status";
-import Tag from "./components/Tag";
-import TextArea from "./components/TextArea";
-import TextInput from "./components/TextInput";
-import Tooltip from "./components/Tooltip";
-
-export { Button, Link, Status, Tag, TextArea, TextInput, Tooltip };
+export * from "./components";

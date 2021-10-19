@@ -11,21 +11,17 @@
  */
 
 import { useCallback, useRef, useEffect, forwardRef } from "react";
-import type {
-  ComponentPropsWithoutRef,
-  ComponentProps,
-  ChangeEvent,
-} from "react";
-import CheckIcon from "../Icon/Check";
-import MinusIcon from "../Icon/Minus";
+import type { ComponentPropsWithRef, ChangeEvent } from "react";
+import { CheckIcon } from "../Icon/Check";
+import { MinusIcon } from "../Icon/Minus";
 import styles from "./Checkbox.module.scss";
 import { useCx, useOid, useOmit, withStyles } from "../../utils";
-import Field from "../Field";
-import type { SharedFieldTypes } from "../Field";
+import { Field } from "../Field";
+import type { SharedFieldTypes } from "../Field/types";
 
-interface Props
+export interface CheckboxProps
   extends Omit<
-    ComponentPropsWithoutRef<"input">,
+    ComponentPropsWithRef<"input">,
     "onChange" | "style" | "className" | "type" | "children"
   > {
   children?: never;
@@ -53,7 +49,7 @@ interface Props
 /**
  * A clickable Checkbox used for form submissions and most in-page interactions.
  */
-let Checkbox = forwardRef<HTMLInputElement, Props>((props, ref) => {
+let Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const {
     id,
     label,
@@ -120,7 +116,4 @@ Checkbox.displayName = "Checkbox";
 
 Checkbox = withStyles(styles)(Checkbox);
 
-type CheckboxProps = ComponentProps<typeof Checkbox>;
-export type { CheckboxProps as Props };
-
-export default Checkbox;
+export { Checkbox };
