@@ -43,6 +43,7 @@ const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
       ...optsArgs.cssnano,
     },
     autoprefixer: {
+      grid: "autoplace",
       ...optsArgs.autoprefixer,
     },
   };
