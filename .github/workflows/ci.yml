@@ -63,6 +63,8 @@ jobs:
       - name: build storybook
         if: steps.changes.outputs.deploy == 'true'
         run: yarn workspace @okta/odyssey-react build-storybook --quiet
+        env:
+          NODE_ENV: production
       - name: create deployment
         if: steps.changes.outputs.deploy == 'true'
         uses: bobheadxi/deployments@v0.4.3
