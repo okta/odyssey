@@ -20,5 +20,5 @@ declare module "postcss-logical" {
 
   function postcssLogical(opts: LogicalOptions): AcceptedPlugin;
 
-  export { LogicalOptions, logical as default };
+  export { LogicalOptions, postcssLogical as default };
 }
