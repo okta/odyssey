@@ -13,33 +13,35 @@
 import { render, screen } from "@testing-library/react";
 import { SvgIcon } from "./SvgIcon";
 
-const iconTitle = "Icon";
+const title = "Icon";
 
 describe("SvgIcon", () => {
-  it("render the icon", () => {
+  it("renders a titled image icon visibly into document", () => {
     render(
-      <SvgIcon title={iconTitle}>
+      <SvgIcon title={title}>
         <svg />
       </SvgIcon>
     );
-    const svgElement = screen.getByTitle(iconTitle).parentElement;
+
+    const svgElement = screen.getByRole("img");
     expect(svgElement).toBeVisible();
-    expect(svgElement).toHaveAttribute("role", "img");
+    expect(screen.getByLabelText(title)).toEqual(svgElement);
   });
 
-  it("has presentation role without title", () => {
+  it("renders a presentation icon visibly into document", () => {
     render(
-      <SvgIcon name="check">
+      <SvgIcon>
         <svg />
       </SvgIcon>
     );
+
     const svgElement = screen.getByRole("presentation");
     expect(svgElement).toBeVisible();
   });
 
   a11yCheck(() =>
     render(
-      <SvgIcon name="check" title="test">
+      <SvgIcon title={title}>
         <svg />
       </SvgIcon>
     )

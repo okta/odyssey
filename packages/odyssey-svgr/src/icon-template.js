@@ -46,18 +46,13 @@ function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
 ${headerComment}
 
 import { forwardRef } from "react";
-import type { ComponentPropsWithRef } from "react";
 import { useOmit } from '../../utils';
 import { SvgIcon } from './SvgIcon';
+import type { SvgIconNoChildrenProps } from './types';
 
 ${newLine}
 
-export interface ${compProps} extends Omit<
-  ComponentPropsWithRef<'svg'>,
-  'style' | 'className'
-> {
-  title?: string;
-}
+export type ${compProps} = SvgIconNoChildrenProps
 
 ${newLine}
 
