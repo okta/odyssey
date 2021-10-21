@@ -23,7 +23,8 @@ module.exports = (ctx) => {
     ctx.transformStyles,
     ctx.env === "production" && {
       logical: {
-        preserve: true,
+        dir: "ltr",
+        preserve: false,
       },
       autoprefixer: {
         grid: "autoplace",
