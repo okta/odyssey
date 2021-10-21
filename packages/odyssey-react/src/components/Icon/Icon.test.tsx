@@ -13,15 +13,33 @@
 import { render, screen } from "@testing-library/react";
 import { Icon } from "./Icon";
 
-const iconTitle = "Icon";
+const title = "Icon";
+const name = "check";
 
 describe("Icon", () => {
-  it("render the named icon visibly into document", () => {
-    render(<Icon name="check" title={iconTitle} />);
+  it("renders a titled image icon visibly into document", () => {
+    render(<Icon name={name} title={title} />);
+
     const svgElement = screen.getByRole("img");
     expect(svgElement).toBeVisible();
-    expect(svgElement.querySelector("title")).toHaveTextContent(iconTitle);
+    expect(screen.getByLabelText(title)).toEqual(svgElement);
   });
 
-  a11yCheck(() => render(<Icon name="check" title="test" />));
+  it("renders a presentation icon visibly into document", () => {
+    render(<Icon name={name} />);
+
+    const svgElement = screen.getByRole("presentation");
+    expect(svgElement).toBeVisible();
+  });
+
+  it("restricts children prop via types and does not render them", () => {
+    render(
+      // @ts-expect-error never type for children
+      <Icon name={name} children="child" />
+    );
+
+    expect(screen.queryByText("child")).toBeNull();
+  });
+
+  a11yCheck(() => render(<Icon name={name} title={title} />));
 });

@@ -20,6 +20,9 @@ export interface TagProps
     ComponentPropsWithRef<"ul">,
     "style" | "className" | "children"
   > {
+  /**
+   * Children are never rendered.
+   */
   children?: never;
   /**
    * Text content to be rendered within the tag, it should describe an entity.

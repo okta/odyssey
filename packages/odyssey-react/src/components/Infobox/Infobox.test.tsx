@@ -43,7 +43,7 @@ describe("Infobox", () => {
       <Infobox title={title} children="child" />
     );
 
-    expect(screen.queryByText("child")).toBeNull;
+    expect(screen.queryByText("child")).toBeNull();
   });
 
   it("invokes ref with expected args after render", () => {

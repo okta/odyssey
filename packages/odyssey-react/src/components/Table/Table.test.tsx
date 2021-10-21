@@ -145,7 +145,7 @@ describe("Table Sort Button", () => {
         screenReaderCallToAction="click to sort"
       />
     );
-    const sortIcon = screen.getByTitle("Ascending").parentElement;
+    const sortIcon = screen.getByLabelText("Ascending").parentElement;
     expect(sortIcon).toBeVisible();
   });
 });
