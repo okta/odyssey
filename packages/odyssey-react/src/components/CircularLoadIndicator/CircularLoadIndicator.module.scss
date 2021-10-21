@@ -14,7 +14,7 @@ $circular-load-indicator-size: 1.5em;
 $circular-load-indicator-circle-stroke-width: 17%;
 $circular-load-indicator-circle-color: cv("gray", "100");
 $circular-load-indicator-animated-circle-color: $color-primary-dark;
-$circular-load-indicator-animation-duration: 2.25s;
+$circular-load-indicator-animation-duration: 1.4s;
 $circular-load-indicator-easing: cubic-bezier(0.35, -0.12, 0.09, 0.96);
 
 .root {
@@ -47,6 +47,9 @@ $circular-load-indicator-easing: cubic-bezier(0.35, -0.12, 0.09, 0.96);
 @keyframes rotateClockwise {
   0% {
     transform: rotate(0deg);
+
+    /* Fix IE11 wobbly */
+    transform-origin: 50% 50%;
   }
   100% {
     transform: rotate(360deg);
