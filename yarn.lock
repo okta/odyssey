@@ -14291,6 +14291,11 @@ postcss-loader@^4.2.0:
     schema-utils "^3.0.0"
     semver "^7.3.4"
 
+postcss-logical@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/postcss-logical/-/postcss-logical-5.0.0.tgz#f646ef6a3562890e1123a32e695d14cc271afb21"
+  integrity sha512-fWEWMn/xf6F9SMzAD7OS0GTm8Qh1BlBmEbVT/YZGYhwipQEwOpO7YOOu+qnzLksDg9JjLRj5tLmeN8OW8+ogIA==
+
 postcss-media-query-parser@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/postcss-media-query-parser/-/postcss-media-query-parser-0.2.3.tgz#27b39c6f4d94f81b1a73b8f76351c609e5cef244"
