@@ -10,35 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const {
-  default: transformStyles,
-} = require("@okta/odyssey-transform-styles-postcss-preset");
+/// <reference types="postcss" />
 
-module.exports = (ctx) => {
-  if (!ctx.transformStyles) {
-    return {};
-  }
-
-  const options = Object.assign(
-    ctx.transformStyles,
-    ctx.env === "production" && {
-      logical: {
-        preserve: true,
-      },
-      autoprefixer: {
-        grid: "autoplace",
-        env: "production",
-      },
-    },
-    ctx.env === "test" && {
-      modules: {
-        ...ctx.transformStyles.modules,
-        generateScopedName: "[local]",
-      },
-    }
-  );
-
-  return {
-    plugins: [transformStyles(options)],
+declare module "postcss-logical" {
+  type LogicalOptions = {
+    dir?: "ltr" | "rtl" | boolean;
+    preserve?: boolean;
   };
-};
+
+  function postcssLogical(opts: LogicalOptions): AcceptedPlugin;
+
+  export { LogicalOptions, logical as default };
+}
