@@ -21,7 +21,11 @@ export default {
 
 const Template: Story<CircularLoadIndicatorProps> = () => (
   <div aria-describedby="my-loader" aria-busy>
-    <CircularLoadIndicator aria-label="Loader" aria-valuetext="Loading..." />
+    <CircularLoadIndicator
+      aria-label="Loader"
+      aria-valuetext="Loading..."
+      id="my-loader"
+    />
   </div>
 );
 
