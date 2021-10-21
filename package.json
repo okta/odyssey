@@ -3,9 +3,15 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "@storybook/**/@babel/plugin-transform-typescript",
+      "@storybook/**/@babel/plugin-transform-typescript/**"
+    ]
+  },
   "engines": {
     "yarn": "^1.15.2",
     "node": ">=12.20.0"
