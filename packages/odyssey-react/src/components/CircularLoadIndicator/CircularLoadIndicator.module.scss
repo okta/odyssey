@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-$circular-load-indicator-size: 24px;
-$circular-load-indicator-circle-stroke-width: 4px;
+$circular-load-indicator-size: 1.5em;
+$circular-load-indicator-circle-stroke-width: 17%;
 $circular-load-indicator-circle-color: cv("gray", "100");
 $circular-load-indicator-animated-circle-color: $color-primary-dark;
 $circular-load-indicator-animation-duration: 2.25s;
@@ -36,10 +36,10 @@ $circular-load-indicator-easing: cubic-bezier(0.35, -0.12, 0.09, 0.96);
 }
 
 .animatedCircle {
-  animation: progressStroke $circular-load-indicator-animation-duration
+  animation: indeterminateStroke $circular-load-indicator-animation-duration
     $circular-load-indicator-easing infinite;
   stroke-width: $circular-load-indicator-circle-stroke-width;
-  stroke-dasharray: 40px, 86px;
+  stroke-dasharray: 160%, 360%;
   stroke-dashoffset: 0;
   stroke: $circular-load-indicator-animated-circle-color;
 }
@@ -53,17 +53,17 @@ $circular-load-indicator-easing: cubic-bezier(0.35, -0.12, 0.09, 0.96);
   }
 }
 
-@keyframes progressStroke {
+@keyframes indeterminateStroke {
   0% {
-    stroke-dasharray: 1px, 86px;
+    stroke-dasharray: 1%, 360%;
     stroke-dashoffset: 0;
   }
   50% {
-    stroke-dasharray: 40px, 86px;
-    stroke-dashoffset: -21px;
+    stroke-dasharray: 160%, 360%;
+    stroke-dashoffset: -100%;
   }
   100% {
-    stroke-dasharray: 40px, 86px;
-    stroke-dashoffset: -63px;
+    stroke-dasharray: 160%, 360%;
+    stroke-dashoffset: -260%;
   }
 }

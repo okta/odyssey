@@ -12,7 +12,7 @@
 
 import type { ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
-import { useOmit, withStyles } from "../../utils";
+import { useOid, useOmit, withStyles } from "../../utils";
 import styles from "./CircularLoadIndicator.module.scss";
 
 export interface CircularLoadIndicatorProps
@@ -21,9 +21,10 @@ export interface CircularLoadIndicatorProps
     "style" | "className" | "role" | "aria-valuemin" | "aria-valuemax"
   > {
   /**
-   * id used as reference by loading region
+   * Id used to reference the indicator in loading element's `aria-describedby` attribute
+   * @default a uniquely generated id
    */
-  id: string;
+  id?: string;
   /**
    * Accessible text to communicate current state, eg: "Loading..."
    */
@@ -47,11 +48,12 @@ let CircularLoadIndicator = forwardRef<
   const {
     "aria-label": ariaLabel,
     "aria-valuetext": ariaValuetext,
+    id,
     ...rest
   } = props;
 
   const omitProps = useOmit(rest);
-
+  const internalId = useOid();
   return (
     <span
       {...omitProps}
@@ -62,8 +64,9 @@ let CircularLoadIndicator = forwardRef<
       aria-valuetext={ariaValuetext}
       aria-label={ariaLabel}
       ref={ref}
+      id={id || internalId}
     >
-      <svg className={styles.svg} viewBox="0 0 24 24">
+      <svg className={styles.svg} viewBox="0 0 24 24" role="presentation">
         <circle
           className={styles.circle}
           cx="12"
