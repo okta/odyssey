@@ -1,5 +1,5 @@
 {
-  "name": "@okta/odyssey-tokens",
+  "name": "@okta/odyssey-design-tokens",
   "version": "1.0.0",
   "main": "dist/js/tokens.js",
   "license": "MIT",
