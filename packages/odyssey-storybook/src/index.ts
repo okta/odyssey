@@ -22,6 +22,7 @@ const withStyles = new RegExp(
     "Banner",
     "Button",
     "Checkbox",
+    "CircularLoadIndicator",
     "Field",
     "FieldGroup",
     "Form",
