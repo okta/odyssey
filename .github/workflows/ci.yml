@@ -62,7 +62,7 @@ jobs:
         run: echo "COMMIT_MSG=${{ github.event.head_commit.message || github.event.pull_request.title }}" >> $GITHUB_ENV
       - name: build storybook
         if: steps.changes.outputs.deploy == 'true'
-        run: yarn workspace @okta/odyssey-react build-storybook --quiet
+        run: cd ./packages/odyssey-react && rm -rf ./node_modules/.cache && yarn build-storybook --quiet
       - name: create deployment
         if: steps.changes.outputs.deploy == 'true'
         uses: bobheadxi/deployments@v0.4.3

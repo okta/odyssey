@@ -22,6 +22,10 @@ module.exports = (ctx) => {
   const options = Object.assign(
     ctx.transformStyles,
     ctx.env === "production" && {
+      logical: {
+        dir: "ltr",
+        preserve: false,
+      },
       autoprefixer: {
         grid: "autoplace",
         env: "production",

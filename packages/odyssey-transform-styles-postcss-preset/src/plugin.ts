@@ -16,10 +16,13 @@ import type { Options as AutoPrefixerOptions } from "autoprefixer";
 import type PostcssModulesPlugin from "postcss-modules";
 import postcss from "postcss";
 import postcssModules from "postcss-modules";
+import postcssLogical from "postcss-logical";
+import type { LogicalOptions } from "postcss-logical";
 import cssnano from "cssnano";
 import autoprefixer from "autoprefixer";
 
 interface PluginOptions {
+  logical?: LogicalOptions;
   cssnano?: CssNanoOptions;
   autoprefixer?: AutoPrefixerOptions;
   modules?: Parameters<PostcssModulesPlugin>[number];
@@ -27,6 +30,11 @@ interface PluginOptions {
 
 const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
   const opts: Required<PluginOptions> = {
+    logical: {
+      dir: false,
+      preserve: false,
+      ...optsArgs.logical,
+    },
     modules: {
       generateScopedName: "ods-[hash:hex:6]",
       ...optsArgs.modules,
@@ -48,6 +56,7 @@ const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
   };
 
   return postcss([
+    postcssLogical(opts.logical),
     postcssModules(opts.modules),
     cssnano(opts.cssnano) as PluginCreator<CssNanoOptions>,
     autoprefixer(opts.autoprefixer),
