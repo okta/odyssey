@@ -1,0 +1,72 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+$circular-load-indicator-size: 1.5em;
+$circular-load-indicator-circle-stroke-width: 17%;
+$circular-load-indicator-circle-color: cv("gray", "100");
+$circular-load-indicator-animated-circle-color: $color-primary-dark;
+$circular-load-indicator-animation-duration: 1.4s;
+$circular-load-indicator-easing: cubic-bezier(0.35, -0.12, 0.09, 0.96);
+
+.root {
+  display: inline-block;
+  animation: rotateClockwise $circular-load-indicator-animation-duration linear
+    infinite;
+  color: $color-primary-base;
+}
+
+.svg {
+  display: block;
+  width: $circular-load-indicator-size;
+  height: $circular-load-indicator-size;
+}
+
+.circle {
+  stroke-width: $circular-load-indicator-circle-stroke-width;
+  stroke: $circular-load-indicator-circle-color;
+}
+
+.animatedCircle {
+  animation: indeterminateStroke $circular-load-indicator-animation-duration
+    $circular-load-indicator-easing infinite;
+  stroke-width: $circular-load-indicator-circle-stroke-width;
+  stroke-dasharray: 160%, 360%;
+  stroke-dashoffset: 0;
+  stroke: $circular-load-indicator-animated-circle-color;
+}
+
+@keyframes rotateClockwise {
+  0% {
+    transform: rotate(0deg);
+
+    /* Fix IE11 wobbly */
+    transform-origin: 50% 50%;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes indeterminateStroke {
+  0% {
+    stroke-dasharray: 1%, 360%;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 160%, 360%;
+    stroke-dashoffset: -100%;
+  }
+  100% {
+    stroke-dasharray: 160%, 360%;
+    stroke-dashoffset: -260%;
+  }
+}
