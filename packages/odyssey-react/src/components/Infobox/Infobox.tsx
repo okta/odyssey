@@ -58,6 +58,13 @@ interface ContentProps extends CommonProps {
 
 export type InfoboxProps = TitleProps | ContentProps;
 
+const icon = {
+  caution: <CautionIcon />,
+  danger: <ErrorIcon />,
+  info: <GetInfoIcon />,
+  success: <CompleteIcon />,
+};
+
 /**
  * An infobox is a type of alert that provides feedback in response to a
  * user action or system activity.
@@ -67,13 +74,6 @@ let Infobox = forwardRef<HTMLElement, InfoboxProps>((props, ref) => {
 
   const classNames = useCx(styles.root, styles[`${variant}Variant`]);
   const omitProps = useOmit(rest);
-
-  const icon = {
-    caution: <CautionIcon />,
-    danger: <ErrorIcon />,
-    info: <GetInfoIcon />,
-    success: <CompleteIcon />,
-  };
 
   return (
     <aside {...omitProps} ref={ref} className={classNames} role="status">
