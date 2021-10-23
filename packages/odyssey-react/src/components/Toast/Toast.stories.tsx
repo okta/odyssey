@@ -13,7 +13,7 @@
 import { Story } from "@storybook/react";
 import { FormEventHandler } from "react";
 import { Toast, useToast } from ".";
-import type { ToastProps } from ".";
+import type { ToastProps, ToastObject } from ".";
 
 export default {
   title: `Components/Toast`,
@@ -29,6 +29,10 @@ export default {
       defaultValue: "Toast body text.",
       control: { type: "text" },
     },
+    dismissButtonLabel: {
+      defaultValue: "Close Toast",
+      control: { type: "text" },
+    },
   },
 };
 
@@ -36,6 +40,7 @@ const Template: Story<ToastProps> = (args) => <Toast {...args} />;
 const TemplateProvider: Story<ToastProps> = () => {
   return (
     <Toast.Provider
+      dismissButtonLabel="Close Toast"
       onToastExit={(id) => {
         console.log(`toastExited: ${id}`);
       }}
@@ -48,8 +53,6 @@ const TemplateProvider: Story<ToastProps> = () => {
 /**
  * A simple demo application which shows how to implement
  * the Toast.Provider in your own app.
- *
- * @todo Replace vanilla HTML with Odyssey form components once finalized
  */
 const DemoApp = () => {
   const { addToast } = useToast();
@@ -58,12 +61,13 @@ const DemoApp = () => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
+    const toastObj = {
+      title: formData.get("title"),
+      body: formData.get("body"),
+      variant: formData.get("variant"),
+    } as ToastObject;
 
-    addToast({
-      title: formData.get("title") as string,
-      body: formData.get("body") as string,
-      variant: formData.get("variant") as ToastProps["variant"],
-    });
+    addToast(toastObj);
   };
 
   return (
