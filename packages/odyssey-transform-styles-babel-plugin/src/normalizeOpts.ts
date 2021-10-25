@@ -14,27 +14,31 @@ import type * as Babel from "@babel/core";
 import type { TransformStylesOpts } from "./transformStyles";
 
 interface NormalizedOpts extends TransformStylesOpts {
-  extensions: RegExp[];
+  include: RegExp[];
 }
 
-export default function normalizeOpts(
+export function normalizeOpts(
   babelOpts: Babel.PluginPass["opts"]
 ): NormalizedOpts {
   const opts = babelOpts || Object.create(null);
-  const normalized = { extensions: [/\.module\.scss$/i] };
+  const normalized = {
+    include: [/\.module\.scss$/i],
+    identityObjectProxy: false,
+  };
 
-  if (Array.isArray(opts.extensions)) {
-    normalized.extensions = opts.extensions.map((ext: string | RegExp) =>
-      ext instanceof RegExp ? ext : new RegExp(ext)
+  if (Array.isArray(opts.include)) {
+    normalized.include = opts.include.map((incl: string | RegExp) =>
+      incl instanceof RegExp ? incl : new RegExp(incl)
     );
+  }
+
+  if ([true, false].includes(opts.identityObjectProxy)) {
+    normalized.identityObjectProxy = opts.identityObjectProxy;
   }
 
   return normalized;
 }
 
-export function isTargetExtension(
-  candidate: string,
-  extensions: RegExp[]
-): boolean {
-  return extensions.some((extension) => extension.test(candidate));
+export function shouldInclude(candidate: string, include: RegExp[]): boolean {
+  return include.some((incl) => incl.test(candidate));
 }

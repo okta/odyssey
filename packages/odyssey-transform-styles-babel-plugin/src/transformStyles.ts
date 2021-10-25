@@ -14,15 +14,22 @@ import type * as Babel from "@babel/core";
 import type {
   VariableDeclaration,
   ObjectExpression,
+  NewExpression,
 } from "@babel/traverse/node_modules/@babel/types";
 import type { File } from "./compile";
 import { resolve, dirname } from "path";
 import compileFactory from "./compileFactory";
-import { objectExpression, variableDeclaration } from "./nodes";
-import normalizeOpts, { isTargetExtension } from "./normalizeOpts";
+import {
+  tokenObjectExpression,
+  variableDeclaration,
+  identityObjectProxy,
+  identityObjectProxyVariableDeclaration,
+} from "./nodes";
+import { normalizeOpts, shouldInclude } from "./normalizeOpts";
 
 export interface TransformStylesOpts {
-  extensions?: Array<string | RegExp>;
+  include?: Array<string | RegExp>;
+  identityObjectProxy: boolean;
 }
 
 export default function transformStyles({
@@ -52,7 +59,17 @@ export default function transformStyles({
         }
 
         const importee = path.node.source.value;
-        if (!isTargetExtension(importee, opts.extensions)) {
+        if (!shouldInclude(importee, opts.include)) {
+          return;
+        }
+
+        if (opts.identityObjectProxy) {
+          path.replaceWith(
+            identityObjectProxyVariableDeclaration({
+              name: specifier.local.name,
+            }) as VariableDeclaration
+          );
+
           return;
         }
 
@@ -96,7 +113,13 @@ export default function transformStyles({
           return;
         }
         const importee = argument.value;
-        if (!isTargetExtension(importee, opts.extensions)) {
+        if (!shouldInclude(importee, opts.include)) {
+          return;
+        }
+
+        if (opts.identityObjectProxy) {
+          path.replaceWith(identityObjectProxy() as NewExpression);
+
           return;
         }
 
@@ -108,7 +131,7 @@ export default function transformStyles({
           fileMap.set(filePath, file);
         }
 
-        path.replaceWith(objectExpression(file) as ObjectExpression);
+        path.replaceWith(tokenObjectExpression(file) as ObjectExpression);
       },
     },
   };
