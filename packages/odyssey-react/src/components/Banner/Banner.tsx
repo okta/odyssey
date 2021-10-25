@@ -10,11 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithRef, MouseEventHandler } from "react";
+import type { ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import { Heading } from "../Heading";
 import { Button } from "../Button";
+import type { ButtonProps } from "../Button";
 import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
 
@@ -45,11 +46,17 @@ interface CommonProps
 type DismissProps =
   | { onDismiss?: never; dismissButtonLabel?: never }
   | {
-      onDismiss: MouseEventHandler<HTMLButtonElement>;
+      onDismiss: ButtonProps["onClick"];
       dismissButtonLabel: string;
     };
 
 export type BannerProps = CommonProps & DismissProps;
+
+const icon = {
+  caution: <CautionIcon />,
+  danger: <ErrorIcon />,
+  info: <GetInfoIcon />,
+};
 
 /**
  * Banners let users know important messages related to their overall experience
@@ -76,12 +83,6 @@ let Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
   );
 
   const omitProps = useOmit(rest);
-
-  const icon = {
-    caution: <CautionIcon />,
-    danger: <ErrorIcon />,
-    info: <GetInfoIcon />,
-  };
 
   return (
     <div {...omitProps} ref={ref} className={componentClass} role="status">
