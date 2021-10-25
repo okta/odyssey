@@ -11,18 +11,13 @@
  */
 
 import { forwardRef } from "react";
-import type { ComponentPropsWithRef } from "react";
+import type { SvgIconNoChildrenProps } from "./types";
 import { useOmit } from "../../utils";
 import { iconDictionary } from "./";
 
-export interface IconProps
-  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
+export interface IconProps extends SvgIconNoChildrenProps {
   /**
-   * Title text used by screen readers
-   */
-  title?: string;
-  /**
-   * Name of icon to render
+   * Name of the icon to render
    */
   name: keyof typeof iconDictionary;
 }

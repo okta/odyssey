@@ -32,7 +32,7 @@ describe("Checkbox", () => {
       <Checkbox label={label} children="child" />
     );
 
-    expect(screen.queryByText("child")).toBeNull;
+    expect(screen.queryByText("child")).toBeNull();
   });
 
   it("renders value attributed as expected for input", () => {

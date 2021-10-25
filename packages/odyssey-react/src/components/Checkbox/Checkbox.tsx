@@ -23,6 +23,9 @@ export interface CheckboxProps
     ComponentPropsWithRef<"input">,
     "onChange" | "style" | "className" | "type" | "children"
   > {
+  /**
+   * Children are never rendered.
+   */
   children?: never;
   /**
    * The form field label

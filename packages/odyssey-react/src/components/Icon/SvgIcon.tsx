@@ -21,12 +21,18 @@ import { useOid, useOmit, withStyles } from "../../utils";
 import styles from "./SvgIcon.module.scss";
 
 export interface SvgIconProps
-  extends Omit<ComponentPropsWithRef<"svg">, "style" | "className"> {
+  extends Omit<
+    ComponentPropsWithRef<"svg">,
+    "style" | "className" | "aria-labelledby" | "role"
+  > {
   /**
    * Title text used by screen readers
    */
   title?: string;
 
+  /**
+   * A single SVG icon element
+   */
   children: ReactElement;
 }
 
@@ -36,7 +42,7 @@ export interface SvgIconProps
 
 let SvgIcon = forwardRef<SVGSVGElement, SvgIconProps>(
   ({ title, children, ...rest }, ref) => {
-    const autoId = "icon_" + useOid();
+    const oid = useOid();
     const omitProps = useOmit(rest);
 
     return Children.only(
@@ -44,14 +50,14 @@ let SvgIcon = forwardRef<SVGSVGElement, SvgIconProps>(
         children,
         {
           ...omitProps,
-          "aria-labelledby": title && autoId,
+          "aria-labelledby": oid,
           className: styles.root,
           ref: ref,
           role: title ? "img" : "presentation",
         },
         [
           title && (
-            <title id={autoId} key={autoId}>
+            <title id={oid} key={oid}>
               {title}
             </title>
           ),
