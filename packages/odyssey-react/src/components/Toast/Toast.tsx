@@ -59,6 +59,11 @@ export interface ToastProps
   onAnimationEnd?: (event: AnimationEvent) => void;
 
   onDismiss?: ButtonProps["onClick"];
+
+  /**
+   * Label text used by screen readers
+   */
+  dismissButtonLabel: string;
 }
 
 interface PropsToastProvider {
@@ -71,22 +76,27 @@ interface PropsToastProvider {
    * Callback function invoked when a toast exits the toast provider.
    */
   onToastExit?: (id: string) => void;
+
+  /**
+   * Label text used by screen readers, applied to all Toasts
+   */
+  dismissButtonLabel: string;
 }
 
 interface Statics {
   Provider: typeof ToastProvider;
 }
 
-interface ToastObject {
+export interface ToastObject {
   id?: string;
   title: string;
   body?: string;
   variant?: ToastProps["variant"];
 }
 
-type AddToastType = (toastObj: ToastObject) => void;
+type AddToast = (toastObj: ToastObject) => void;
 interface Context {
-  addToast: AddToastType;
+  addToast: AddToast;
 }
 
 const ToastContext = createContext<Context>({
@@ -106,7 +116,15 @@ const icon = {
  */
 let Toast = forwardRefWithStatics<HTMLElement, ToastProps, Statics>(
   (props, ref) => {
-    const { title, body, variant = "info", id, onDismiss, ...rest } = props;
+    const {
+      title,
+      body,
+      variant = "info",
+      id,
+      onDismiss,
+      dismissButtonLabel,
+      ...rest
+    } = props;
     const componentClass = useCx(styles.root, styles[`${variant}Variant`]);
     const xid = useOid(id);
     const omitProps = useOmit(rest);
@@ -126,8 +144,7 @@ let Toast = forwardRefWithStatics<HTMLElement, ToastProps, Statics>(
           <Button
             variant="dismiss"
             onClick={onDismiss}
-            aria-label="Dismiss toast"
-            icon={<CloseIcon />}
+            icon={<CloseIcon title={dismissButtonLabel} />}
           />
         </span>
       </aside>
@@ -138,10 +155,11 @@ let Toast = forwardRefWithStatics<HTMLElement, ToastProps, Statics>(
 /**
  * Provides applications a way to add Toasts to their app
  */
-const ToastProvider = ({ children, onToastExit }: PropsToastProvider) => {
+const ToastProvider = (props: PropsToastProvider) => {
+  const { children, onToastExit, dismissButtonLabel } = props;
   const [toasts, setToasts] = useState<ToastObject[]>([]);
 
-  const addToast = (toast: ToastObject) => {
+  const addToast: AddToast = (toast) => {
     const id = toast.id || oid();
     setToasts([...toasts, { ...toast, id }]);
   };
@@ -174,6 +192,7 @@ const ToastProvider = ({ children, onToastExit }: PropsToastProvider) => {
             title={title}
             body={body}
             variant={variant}
+            dismissButtonLabel={dismissButtonLabel}
             onDismiss={() => {
               handleDismiss(id);
             }}

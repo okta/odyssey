@@ -16,23 +16,32 @@ import { Toast, useToast } from ".";
 const role = "status";
 const title = "Toast";
 const body = "Descriptive body content (optional)";
-const id = "my-toast";
+const dismissLabel = "Close Toast";
+
+const tree = (props: Record<string, unknown> = {}) => (
+  <Toast
+    title={title}
+    body={body}
+    dismissButtonLabel={dismissLabel}
+    {...props}
+  />
+);
 
 describe("Toast", () => {
   it("renders the toast visibly", () => {
-    render(<Toast title={title} body={body} />);
+    render(tree());
 
     expect(screen.getByRole(role)).toBeVisible();
   });
 
   it("renders the toast title visibly", () => {
-    render(<Toast title={title} body={body} />);
+    render(tree());
 
     expect(screen.getByText(title)).toBeVisible();
   });
 
   it("renders the toast body visibly", () => {
-    render(<Toast title={title} body={body} />);
+    render(tree());
 
     expect(screen.getByText(body)).toBeVisible();
   });
@@ -40,7 +49,7 @@ describe("Toast", () => {
   it("dismisses the toast when the dismiss button is pressed", () => {
     const handleDismiss = jest.fn();
 
-    render(<Toast title={title} body={body} onDismiss={handleDismiss} />);
+    render(tree({ onDismiss: handleDismiss }));
 
     const target = screen.getByRole("button");
     fireEvent.click(target);
@@ -57,7 +66,7 @@ describe("Toast", () => {
   it("restricts children prop via types and does not render them", () => {
     render(
       // @ts-expect-error never type for children
-      <Toast title={title} children="child" />
+      <Toast title={title} dismissButtonLabel={dismissLabel} children="child" />
     );
 
     expect(screen.queryByText("child")).toBeNull();
@@ -66,15 +75,13 @@ describe("Toast", () => {
   it("invokes ref with expected args after render", () => {
     const ref = jest.fn();
 
-    render(<Toast ref={ref} title={title} />);
+    render(tree({ ref }));
 
     expect(ref).toHaveBeenCalledTimes(1);
     expect(ref).toHaveBeenLastCalledWith(screen.getByRole(role));
   });
 
-  a11yCheck(() =>
-    render(<Toast id={id} title={title} body={body} onDismiss={() => void 0} />)
-  );
+  a11yCheck(() => render(tree()));
 });
 
 describe("Toast.Provider", () => {
@@ -89,7 +96,10 @@ describe("Toast.Provider", () => {
     };
 
     render(
-      <Toast.Provider onToastExit={handleToastExit}>
+      <Toast.Provider
+        onToastExit={handleToastExit}
+        dismissButtonLabel={dismissLabel}
+      >
         <Component />
       </Toast.Provider>
     );
