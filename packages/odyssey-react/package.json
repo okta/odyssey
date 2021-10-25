@@ -39,7 +39,7 @@
     "react-dom": ">=16.14 <18"
   },
   "scripts": {
-    "start": "tsc --project tsconfig.production.json --watch",
+    "start": "node ./scripts/start.js",
     "lint": "eslint .",
     "test": "jest",
     "typecheck": "tsc",
