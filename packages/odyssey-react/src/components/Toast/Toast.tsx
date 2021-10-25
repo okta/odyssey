@@ -36,6 +36,9 @@ export interface ToastProps
     ComponentPropsWithRef<"aside">,
     "children" | "style" | "className" | "role"
   > {
+  /**
+   * Children are never rendered.
+   */
   children?: never;
   /**
    * The title to be displayed on the toast.

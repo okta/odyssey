@@ -22,6 +22,9 @@ interface CommonProps
     ComponentPropsWithRef<"aside">,
     "style" | "className" | "children" | "title" | "content"
   > {
+  /**
+   * Children are never rendered.
+   */
   children?: never;
   /**
    * The visual variant to be displayed to the user.
