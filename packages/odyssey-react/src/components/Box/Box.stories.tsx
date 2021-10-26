@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { Story } from "@storybook/react";
 import type { ReactElement } from "react";
 import { Box, BoxProps } from "./";
 import { List } from "../List";
@@ -22,50 +23,77 @@ export default {
   argTypes: { onClick: { action: "clicked" } },
 };
 
-export const Default = (args: BoxProps): ReactElement => (
-  <Box
-    {...args}
-    borderColor="display"
-    hoverBorderColor="interactive"
-    borderRadius="base"
-    boxShadow="default"
-    hoverBoxShadow="default"
-    padding="medium"
-    focusRing="primary"
-    tabIndex={0}
-    role="button"
-  >
-    box
-  </Box>
-);
+const Template: Story<BoxProps> = (args) => <Box {...args}>Box</Box>;
+
+export const Default = Template.bind({});
+
+Default.args = {
+  borderColor: "display",
+  hoverBorderColor: "interactive",
+  borderRadius: "base",
+  boxShadow: "default",
+  hoverBoxShadow: "default",
+  padding: "medium",
+  focusRing: "primary",
+  tabIndex: 0,
+};
 
 export const ActionList = (args: BoxProps): ReactElement => (
-  <List unstyled>
-    <List.Item>
-      <Box
-        {...args}
-        borderColor="display"
-        hoverBorderColor="interactive"
-        borderRadius="base"
-        boxShadow="default"
-        hoverBoxShadow="default"
-        padding="medium"
-        focusRing="primary"
-        tabIndex={0}
-        role="button"
-        display="flex"
-        alignItems="center"
-      >
-        <Box marginRight="medium">
-          <Icon name="user" />
+  <div className="action-list-container">
+    <List unstyled>
+      <List.Item>
+        <Box
+          {...args}
+          borderColor="display"
+          hoverBorderColor="interactive"
+          borderRadius="base"
+          boxShadow="default"
+          hoverBoxShadow="default"
+          padding="medium"
+          focusRing="primary"
+          tabIndex={0}
+          role="button"
+          display="flex"
+          alignItems="center"
+          marginBottom="small"
+        >
+          <Box marginRight="medium">
+            <Icon name="user" />
+          </Box>
+          <Box flexGrow="1">
+            <Heading level="2" visualLevel="6">
+              User
+            </Heading>
+            <p className="action-card-sub">Text related to user</p>
+          </Box>
         </Box>
-        <Box flexGrow="1">
-          <Heading level="2" visualLevel="6">
-            User
-          </Heading>
-          <p>Text related to user</p>
+      </List.Item>
+      <List.Item>
+        <Box
+          {...args}
+          borderColor="display"
+          hoverBorderColor="interactive"
+          borderRadius="base"
+          boxShadow="default"
+          hoverBoxShadow="default"
+          padding="medium"
+          focusRing="primary"
+          tabIndex={0}
+          role="button"
+          display="flex"
+          alignItems="center"
+        >
+          <Box marginRight="medium">
+            <Icon name="settings" />
+          </Box>
+          <Box flexGrow="1">
+            <Heading level="2" visualLevel="6">
+              Settings
+            </Heading>
+            <p className="action-card-sub">Text related to settings</p>
+          </Box>
         </Box>
-      </Box>
-    </List.Item>
-  </List>
+      </List.Item>
+    </List>
+  </div>
 );

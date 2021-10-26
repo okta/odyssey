@@ -10,18 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.root {
-  display: block;
-}
-
 /* stylelint-disable property-disallowed-list */
-
 .paddingXsmall {
   padding: $spacing-xs;
 }
 
 .paddingSmall {
-  padding: $spacing-xs;
+  padding: $spacing-s;
 }
 
 .paddingMedium {
@@ -35,10 +30,12 @@
 .paddingXlarge {
   padding: $spacing-xl;
 }
+/* stylelint-enable property-disallowed-list */
 
 .borderBase {
   border-width: 1px;
   border-style: solid;
+  border-color: transparent;
 }
 
 .borderColorDisplay {
@@ -54,6 +51,7 @@
 }
 
 .borderRadiusBase {
+  /* stylelint-disable-next-line property-disallowed-list */
   border-radius: $base-border-radius;
 }
 
@@ -87,7 +85,7 @@
 }
 
 .marginRightSmall {
-  margin-inline-end: $spacing-xs;
+  margin-inline-end: $spacing-s;
 }
 
 .marginRightMedium {
@@ -100,6 +98,26 @@
 
 .marginRightXlarge {
   margin-inline-end: $spacing-xl;
+}
+
+.marginBottomXsmall {
+  margin-block-end: $spacing-xs;
+}
+
+.marginBottomSmall {
+  margin-block-end: $spacing-xs;
+}
+
+.marginBottomMedium {
+  margin-block-end: $spacing-m;
+}
+
+.marginBottomLarge {
+  margin-block-end: $spacing-l;
+}
+
+.marginBottomXlarge {
+  margin-block-end: $spacing-xl;
 }
 
 .alignItemsCenter {
