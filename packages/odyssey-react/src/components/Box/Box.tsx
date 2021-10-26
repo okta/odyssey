@@ -64,6 +64,10 @@ export interface BoxProps
    * Right margin
    */
   marginRight?: spacing;
+  /**
+   * Bottom margin
+   */
+  marginBottom?: spacing;
 }
 
 function convertProp(prop: string) {
@@ -86,6 +90,7 @@ let Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     alignItems,
     focusRing,
     marginRight,
+    marginBottom,
     padding,
     children,
     ...rest
@@ -93,8 +98,9 @@ let Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
 
   const componentClass = useCx(
     styles.root,
-    borderColor && styles.borderBase,
+    borderColor !== "none" && styles.borderBase,
     borderColor && styles[`borderColor${convertProp(borderColor)}`],
+    hoverBorderColor !== "none" && styles.borderBase,
     hoverBorderColor &&
       styles[`hoverBorderColor${convertProp(hoverBorderColor)}`],
     padding && styles[`padding${convertProp(padding)}`],
@@ -105,7 +111,8 @@ let Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     display && styles[`display${convertProp(display)}`],
     flexGrow && styles[`flexGrow${convertProp(flexGrow)}`],
     marginRight && styles[`marginRight${convertProp(marginRight)}`],
-    alignItems && styles[`alignItems${convertProp(alignItems)}`]
+    alignItems && styles[`alignItems${convertProp(alignItems)}`],
+    marginBottom && styles[`marginBottom${convertProp(marginBottom)}`]
   );
 
   const omitProps = useOmit(rest);
