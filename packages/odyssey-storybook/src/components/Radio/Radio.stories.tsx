@@ -12,10 +12,11 @@
 
 import type { Story } from "@storybook/react";
 import { Radio, RadioGroupProps } from "@okta/odyssey-react";
+import { Radio as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Radio`,
-  component: Radio.Group,
+  component: Source.Group,
   args: {
     label: "Speed",
     name: "speed",
