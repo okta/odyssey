@@ -12,10 +12,11 @@
 
 import type { Story } from "@storybook/react";
 import { Link, LinkProps, Icon, GetInfoIcon } from "@okta/odyssey-react";
+import { Link as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Link`,
-  component: Link,
+  component: Source,
 };
 
 const Template: Story<LinkProps> = ({
