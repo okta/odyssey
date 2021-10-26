@@ -19,10 +19,11 @@ import {
   Infobox,
   Button,
 } from "@okta/odyssey-react";
+import { Form as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Form`,
-  component: Form,
+  component: Source,
   argTypes: {
     children: {
       control: { type: null },
