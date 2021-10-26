@@ -15,6 +15,9 @@ module.exports = {
     [
       "@okta/odyssey-babel-preset",
       {
+        transformStyles: {
+          identityObjectProxy: true,
+        },
         react: {
           runtime: "automatic",
         },

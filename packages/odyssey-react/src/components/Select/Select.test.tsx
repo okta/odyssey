@@ -39,7 +39,7 @@ describe("Select", () => {
     expect(select).not.toBeVisible();
   });
 
-  it.skip("renders visible listbox UI into the document", () => {
+  it("renders visible listbox UI into the document", () => {
     expect.assertions(4);
     render(tree());
 

@@ -85,7 +85,13 @@ let Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
   const omitProps = useOmit(rest);
 
   return (
-    <div {...omitProps} ref={ref} className={componentClass} role="status">
+    <div
+      {...omitProps}
+      ref={ref}
+      className={componentClass}
+      role="status"
+      hidden={!open}
+    >
       <span className={styles.icon}>{icon[variant]}</span>
       {title && (
         <div className={styles.title}>

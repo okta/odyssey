@@ -30,12 +30,6 @@ module.exports = (ctx) => {
         grid: "autoplace",
         env: "production",
       },
-    },
-    ctx.env === "test" && {
-      modules: {
-        ...ctx.transformStyles.modules,
-        generateScopedName: "[local]",
-      },
     }
   );
 
