@@ -13,10 +13,11 @@
 import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { Modal, ModalProps, Button } from "@okta/odyssey-react";
+import { Modal as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Modal`,
-  component: Modal,
+  component: Source,
   argTypes: {
     open: { control: { type: "boolean" } },
   },
