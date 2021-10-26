@@ -27,7 +27,7 @@ import type { SharedFieldTypes } from "../../Field/types";
 import styles from "../Select.module.scss";
 import { CaretDownIcon } from "../../Icon";
 
-export interface SelectProps
+interface CommonProps
   extends SharedFieldTypes,
     Omit<ComponentPropsWithRef<"select">, "onChange" | "style" | "className"> {
   /**
@@ -67,7 +67,33 @@ export interface SelectProps
    * @param {string} value the string value of the select
    */
   onChange?: (event?: ChangeEvent<HTMLSelectElement>, value?: string) => void;
+
+  /**
+   * The text that is shown while choices are being populated.
+   */
+  loadingText?: string;
+
+  /**
+   * The text that is shown when a user's search has returned no results.
+   */
+  noResultsText?: string;
 }
+
+interface MultipleProps extends CommonProps {
+  multiple: true;
+
+  /**
+   * The text that is shown when a user has selected all possible choices.
+   */
+  noChoicesText?: string;
+}
+
+interface SingleProps extends CommonProps {
+  multiple?: false;
+  noChoicesText?: never;
+}
+
+export type SelectProps = MultipleProps | SingleProps;
 
 /**
  * Often referred to as a "dropdown menu" this input triggers a menu of
@@ -87,6 +113,9 @@ let Select = forwardRefWithStatics<HTMLSelectElement, SelectProps, Statics>(
       hint,
       label,
       optionalLabel,
+      loadingText = "",
+      noResultsText = "",
+      noChoicesText = "",
       ...rest
     } = props;
 
@@ -94,7 +123,7 @@ let Select = forwardRefWithStatics<HTMLSelectElement, SelectProps, Statics>(
 
     const oid = useOid(id);
 
-    useChoices(oid, value);
+    useChoices({ id: oid, value, loadingText, noResultsText, noChoicesText });
 
     const handleChange = useCallback(
       (event: ChangeEvent<HTMLSelectElement>) => {

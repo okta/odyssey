@@ -17,16 +17,33 @@ import { CloseIcon } from "../../Icon";
 
 import styles from "../Select.module.scss";
 
-const useChoices = (id: string, value?: string): void => {
+type UseChoices = (args: {
+  id: string;
+  value?: string;
+  loadingText?: string;
+  noResultsText?: string;
+  noChoicesText?: string;
+}) => void;
+
+const useChoices: UseChoices = ({
+  id,
+  value,
+  loadingText,
+  noResultsText,
+  noChoicesText,
+}) => {
   const choices = useRef<undefined | Choices>();
 
   useEffect(() => {
     const select = document.getElementById(id) as HTMLSelectElement;
 
     choices.current = new Choices(select, {
+      loadingText,
+      noResultsText,
+      noChoicesText,
+      itemSelectText: "",
       searchEnabled: false,
       shouldSort: false,
-      itemSelectText: "",
       removeItemButton: true,
       classNames: {
         containerOuter: styles.root,
@@ -55,12 +72,6 @@ const useChoices = (id: string, value?: string): void => {
         loadingState: styles.loading,
         noResults: styles.noResults,
         noChoices: styles.noChoices,
-
-        // TODO: fix english leaks for these properties
-        // loadingText: 'Loading...',
-        // noResultsText: 'No results found',
-        // noChoicesText: 'No choices to choose from',
-        // itemSelectText: 'Press to select',
       },
       callbackOnCreateTemplates: () => ({
         item: (...args) => {
@@ -83,7 +94,7 @@ const useChoices = (id: string, value?: string): void => {
     });
 
     return () => choices?.current?.destroy();
-  }, [id]);
+  }, [id, loadingText, noChoicesText, noResultsText]);
 
   useEffect(() => {
     const forceValue = () => value && choices?.current?.setChoiceByValue(value);
