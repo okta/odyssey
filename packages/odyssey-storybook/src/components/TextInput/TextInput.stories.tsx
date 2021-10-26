@@ -12,10 +12,11 @@
 
 import type { Story } from "@storybook/react";
 import { TextInput, TextInputProps } from "@okta/odyssey-react";
+import { TextInput as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/TextInput`,
-  component: TextInput,
+  component: Source,
   args: {
     label: "Destination",
     optionalLabel: "Optional",
