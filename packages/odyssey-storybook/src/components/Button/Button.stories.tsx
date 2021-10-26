@@ -11,6 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
+import { Button as Source } from "../../../../odyssey-react/src";
 import {
   Button,
   ButtonProps,
@@ -20,7 +21,7 @@ import {
 
 export default {
   title: `Components/Button`,
-  component: Button,
+  component: Source,
   argTypes: {
     children: {
       control: "text",
