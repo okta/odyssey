@@ -13,10 +13,11 @@
 import type { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { Tooltip, TooltipProps, Button } from "@okta/odyssey-react";
+import { Tooltip as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Tooltip`,
-  component: Tooltip,
+  component: Source,
   parameters: {
     layout: "centered",
   },
