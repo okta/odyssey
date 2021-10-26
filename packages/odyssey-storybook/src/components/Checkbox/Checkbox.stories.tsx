@@ -12,11 +12,12 @@
 
 import type { Story } from "@storybook/react";
 import { useEffect } from "react";
+import { Checkbox as Source } from "../../../../odyssey-react/src";
 import { Checkbox, CheckboxProps, ScreenReaderText } from "@okta/odyssey-react";
 
 export default {
   title: `Components/Checkbox`,
-  component: Checkbox,
+  component: Source,
   args: {
     label: "Checkbox label",
     value: "checkbox_value",
