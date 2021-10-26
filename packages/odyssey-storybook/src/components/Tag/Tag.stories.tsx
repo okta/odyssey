@@ -12,10 +12,11 @@
 
 import type { Story } from "@storybook/react";
 import { Tag, TagProps } from "@okta/odyssey-react";
+import { Tag as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Tag`,
-  component: Tag,
+  component: Source,
 };
 
 const Template: Story<TagProps> = ({ tags }) => <Tag tags={tags} />;
