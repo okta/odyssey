@@ -12,10 +12,11 @@
 
 import type { Story } from "@storybook/react";
 import { ScreenReaderText, ScreenReaderTextProps } from "@okta/odyssey-react";
+import { ScreenReaderText as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Utilities/ScreenReaderText`,
-  component: ScreenReaderText,
+  component: Source,
 };
 
 const Template: Story<ScreenReaderTextProps> = ({ children }) => (
