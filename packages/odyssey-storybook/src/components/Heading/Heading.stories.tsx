@@ -12,10 +12,11 @@
 
 import { Story } from "@storybook/react";
 import { Heading, HeadingProps } from "@okta/odyssey-react";
+import { Heading as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Heading`,
-  component: Heading,
+  component: Source,
   argTypes: {
     children: {
       control: { type: "string" },
