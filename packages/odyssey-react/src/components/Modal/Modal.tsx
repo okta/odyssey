@@ -104,7 +104,7 @@ let Modal = forwardRefWithStatics<HTMLDivElement, Props, Statics>(
 
     return createPortal(
       <ModalContext.Provider value={context}>
-        <div ref={ref} className={componentClass} id={oid} aria-hidden={!open}>
+        <div ref={ref} className={componentClass} id={oid} hidden={!open}>
           <div className={styles.overlay} tabIndex={-1}>
             <div
               className={styles.dialog}
