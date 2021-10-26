@@ -13,6 +13,7 @@
 import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
 import { Select, SelectProps } from "@okta/odyssey-react";
+import { Select as Source } from "../../../../odyssey-react/src";
 
 const options = [
   "Proxima Centauri",
@@ -26,7 +27,7 @@ const options = [
 
 export default {
   title: `Components/Select`,
-  component: Select,
+  component: Source,
   args: {
     label: "Destination Star",
     name: "star",
