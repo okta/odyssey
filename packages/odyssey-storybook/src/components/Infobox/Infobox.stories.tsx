@@ -12,10 +12,11 @@
 
 import { Story } from "@storybook/react";
 import { Infobox, InfoboxProps, Link } from "@okta/odyssey-react";
+import { Infobox as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Infobox`,
-  component: Infobox,
+  component: Source,
   argTypes: {
     children: {
       control: { type: null },
