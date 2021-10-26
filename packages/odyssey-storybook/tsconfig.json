@@ -1,6 +1,3 @@
 {
-  "extends": "@okta/odyssey-typescript/tsconfig.node12.json",
-  "compilerOptions": {
-    "outDir": "dist"
-  }
+  "extends": "@okta/odyssey-typescript/tsconfig.react.json"
 }

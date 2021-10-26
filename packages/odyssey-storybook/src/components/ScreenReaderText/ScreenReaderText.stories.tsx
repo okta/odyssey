@@ -10,12 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { writeFileSync } = require("fs");
-const { resolve } = require("path");
+import type { Story } from "@storybook/react";
+import { ScreenReaderText, ScreenReaderTextProps } from "@okta/odyssey-react";
+import { ScreenReaderText as Source } from "../../../../odyssey-react/src";
 
-const pkgPath = resolve(__dirname, "../package.json");
+export default {
+  title: `Utilities/ScreenReaderText`,
+  component: Source,
+};
 
-// eslint-disable-next-line no-unused-vars
-const { scripts, ...pkgNoScripts } = require(pkgPath);
+const Template: Story<ScreenReaderTextProps> = ({ children }) => (
+  <p>
+    The following content is visually hidden:{" "}
+    <ScreenReaderText>{children}</ScreenReaderText>
+  </p>
+);
 
-writeFileSync(pkgPath, JSON.stringify(pkgNoScripts, null, 2) + "\n");
+export const Default = Template.bind({});
+Default.args = {
+  children: "Hi! I'm accessible to screen readers!",
+};
