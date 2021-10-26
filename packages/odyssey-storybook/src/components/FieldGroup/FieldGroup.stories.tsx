@@ -17,10 +17,11 @@ import {
   TextInput,
   Infobox,
 } from "@okta/odyssey-react";
+import { FieldGroup as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/FieldGroup`,
-  component: FieldGroup,
+  component: Source,
   argTypes: {
     children: {
       control: { type: null },
