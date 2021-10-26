@@ -13,10 +13,11 @@
 import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
 import { Table, TableProps } from "@okta/odyssey-react";
+import { Table as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Table`,
-  component: Table,
+  component: Source,
   args: {
     title: "Big and small planets",
     caption: "Information about the largest and smallest planets.",
