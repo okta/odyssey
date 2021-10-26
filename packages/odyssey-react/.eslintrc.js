@@ -15,12 +15,4 @@ module.exports = {
   rules: {
     "import/no-default-export": "error",
   },
-  overrides: [
-    {
-      files: ["*.stories.*"],
-      rules: {
-        "import/no-default-export": "off",
-      },
-    },
-  ],
 };

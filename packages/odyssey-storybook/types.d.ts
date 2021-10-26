@@ -10,12 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { writeFileSync } = require("fs");
-const { resolve } = require("path");
-
-const pkgPath = resolve(__dirname, "../package.json");
-
-// eslint-disable-next-line no-unused-vars
-const { scripts, ...pkgNoScripts } = require(pkgPath);
-
-writeFileSync(pkgPath, JSON.stringify(pkgNoScripts, null, 2) + "\n");
+declare module "*.module.scss";

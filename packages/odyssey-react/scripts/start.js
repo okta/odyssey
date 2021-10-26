@@ -10,12 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { writeFileSync } = require("fs");
-const { resolve } = require("path");
+const { spawn } = require("child_process");
 
-const pkgPath = resolve(__dirname, "../package.json");
+const source = spawn("yarn", ["build:source", "--watch"]);
+const types = spawn("yarn", ["build:types", "--watch"]);
 
-// eslint-disable-next-line no-unused-vars
-const { scripts, ...pkgNoScripts } = require(pkgPath);
+[types, source].forEach((child) => {
+  child.stdout.setEncoding("utf-8");
+  child.stderr.setEncoding("utf-8");
 
-writeFileSync(pkgPath, JSON.stringify(pkgNoScripts, null, 2) + "\n");
+  child.stdout.on("data", console.log.bind(console));
+  child.stderr.on("data", console.error.bind(console));
+
+  child.on("error", console.error.bind(console));
+
+  child.on("close", process.exit.bind(process, 1));
+});

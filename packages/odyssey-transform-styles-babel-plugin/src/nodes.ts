@@ -19,6 +19,10 @@ interface ObjectExpressionArgs {
   digest: string;
 }
 
+interface ProxyVariableDeclarationArgs {
+  name: string;
+}
+
 interface VariableDeclarationArgs extends ObjectExpressionArgs {
   name: string;
 }
@@ -32,12 +36,46 @@ export function variableDeclaration({
   return t.variableDeclaration("const", [
     t.variableDeclarator(
       t.identifier(name),
-      objectExpression({ tokens, styles, digest })
+      tokenObjectExpression({ tokens, styles, digest })
     ),
   ]);
 }
 
-export function objectExpression({
+export function identityObjectProxy(): t.NewExpression {
+  return t.newExpression(t.identifier("Proxy"), [
+    t.objectExpression([]),
+    t.objectExpression([
+      t.objectProperty(
+        t.identifier("get"),
+        t.functionExpression(
+          null,
+          [t.identifier("target"), t.identifier("key")],
+          t.blockStatement([
+            t.ifStatement(
+              t.binaryExpression(
+                "===",
+                t.identifier("key"),
+                t.stringLiteral("__esModule")
+              ),
+              t.blockStatement([t.returnStatement(t.booleanLiteral(false))])
+            ),
+            t.returnStatement(t.identifier("key")),
+          ])
+        )
+      ),
+    ]),
+  ]);
+}
+
+export function identityObjectProxyVariableDeclaration({
+  name,
+}: ProxyVariableDeclarationArgs): t.VariableDeclaration {
+  return t.variableDeclaration("const", [
+    t.variableDeclarator(t.identifier(name), identityObjectProxy()),
+  ]);
+}
+
+export function tokenObjectExpression({
   tokens,
   styles,
   digest,
