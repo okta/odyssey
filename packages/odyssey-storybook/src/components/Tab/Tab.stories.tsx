@@ -12,10 +12,11 @@
 
 import { Story } from "@storybook/react";
 import { Tabs, TabsProps } from "@okta/odyssey-react";
+import { Tabs as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Tabs`,
-  component: Tabs,
+  component: Source,
 };
 
 const Template: Story<TabsProps> = ({ ariaLabel, selectedId }) => {
