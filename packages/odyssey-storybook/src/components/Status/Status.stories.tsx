@@ -12,10 +12,11 @@
 
 import type { Story } from "@storybook/react";
 import { Status, StatusProps } from "@okta/odyssey-react";
+import { Status as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Status`,
-  component: Status,
+  component: Source,
   argTypes: {
     labelHidden: {
       control: { type: "boolean" },
