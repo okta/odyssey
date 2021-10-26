@@ -13,10 +13,11 @@
 import type { ReactElement } from "react";
 import type { Story } from "@storybook/react";
 import { List, ListProps } from "@okta/odyssey-react";
+import { List as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/List`,
-  component: List,
+  component: Source,
 };
 
 const Template: Story<ListProps> = ({ listType, unstyled }) => (
