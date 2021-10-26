@@ -12,11 +12,12 @@
 
 import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
+import { Banner as Source } from "../../../../odyssey-react/src";
 import { Banner, BannerProps, Link } from "@okta/odyssey-react";
 
 export default {
   title: `Components/Banner`,
-  component: Banner,
+  component: Source,
   parameters: {
     layout: "fullscreen",
   },
