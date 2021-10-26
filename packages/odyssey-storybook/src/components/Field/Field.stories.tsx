@@ -12,10 +12,11 @@
 
 import { Story } from "@storybook/react";
 import { Field, FieldProps, ScreenReaderText } from "@okta/odyssey-react";
+import { Field as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Field`,
-  component: Field,
+  component: Source,
   args: {
     label: "Destination",
     optionalLabel: "Optional",
