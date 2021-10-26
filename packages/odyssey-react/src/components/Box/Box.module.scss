@@ -1,0 +1,107 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+.root {
+  display: block;
+}
+
+/* stylelint-disable property-disallowed-list */
+
+.paddingXsmall {
+  padding: $spacing-xs;
+}
+
+.paddingSmall {
+  padding: $spacing-xs;
+}
+
+.paddingMedium {
+  padding: $spacing-m;
+}
+
+.paddingLarge {
+  padding: $spacing-l;
+}
+
+.paddingXlarge {
+  padding: $spacing-xl;
+}
+
+.borderBase {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.borderColorDisplay {
+  border-color: $border-color-display;
+}
+
+.borderColorInteractive {
+  border-color: $border-color-ui;
+}
+
+.hoverBorderColorInteractive:hover {
+  border-color: $border-color-ui;
+}
+
+.borderRadiusBase {
+  border-radius: $base-border-radius;
+}
+
+.boxShadowDefault {
+  box-shadow: $box-shadow-default;
+}
+
+.hoverBoxShadowDefault:hover {
+  box-shadow: 0 8px 12px rgba(cv("gray", "900"), 0.12);
+}
+
+.focusRingPrimary:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px $focus-ring-primary;
+}
+
+.displayFlex {
+  display: flex;
+}
+
+.flexGrow0 {
+  flex-grow: 0;
+}
+
+.flexGrow1 {
+  flex-grow: 1;
+}
+
+.marginRightXsmall {
+  margin-inline-end: $spacing-xs;
+}
+
+.marginRightSmall {
+  margin-inline-end: $spacing-xs;
+}
+
+.marginRightMedium {
+  margin-inline-end: $spacing-m;
+}
+
+.marginRightLarge {
+  margin-inline-end: $spacing-l;
+}
+
+.marginRightXlarge {
+  margin-inline-end: $spacing-xl;
+}
+
+.alignItemsCenter {
+  align-items: center;
+}
