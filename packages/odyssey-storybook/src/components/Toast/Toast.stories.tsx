@@ -13,10 +13,11 @@
 import { Story } from "@storybook/react";
 import { FormEventHandler } from "react";
 import { Toast, ToastProps, ToastObject, useToast } from "@okta/odyssey-react";
+import { Toast as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Toast`,
-  component: Toast,
+  component: Source,
   argTypes: {
     title: {
       defaultValue: "Title",
