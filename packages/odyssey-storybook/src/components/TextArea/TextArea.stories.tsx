@@ -12,10 +12,11 @@
 
 import type { Story } from "@storybook/react";
 import { TextArea, TextAreaProps } from "@okta/odyssey-react";
+import { TextArea as Source } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/TextArea`,
-  component: TextArea,
+  component: Source,
   args: {
     label: "Field Label",
     defaultValue: " ",
