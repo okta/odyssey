@@ -112,5 +112,23 @@ describe("Select", () => {
     );
   });
 
+  it("restricts multiple and noChoicesText via types", () => {
+    // @ts-expect-error requires multiple prop with noChoicesText prop
+    <Select
+      label={label}
+      name={name}
+      children={<div />}
+      noChoicesText="oops"
+    />;
+
+    <Select
+      label={label}
+      name={name}
+      children={<div />}
+      multiple
+      noChoicesText="yay"
+    />;
+  });
+
   a11yCheck(() => render(tree()));
 });
