@@ -10,24 +10,43 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+const { createHash } = require("crypto");
 const { writeFileSync } = require("fs");
 const { resolve } = require("path");
 const { renderSync } = require("sass");
 
-const scssFiles =
-  `abstracts/functions abstracts/colors abstracts/mixins abstracts/tokens base/reset base/typography-global base/typography-text`.split(
-    " "
-  );
+const scssSource = [
+  "abstracts/functions",
+  "abstracts/colors",
+  "abstracts/mixins",
+  "abstracts/tokens",
+  "base/reset",
+  "base/typography-global",
+  "base/typography-text",
+];
+
 const importDir = resolve(require.resolve("@okta/odyssey"), "..");
-const scssData = scssFiles
-  .map((scssFile) => `@import '${importDir}/${scssFile}';`)
+const scssData = scssSource
+  .map((source) => `@import '${importDir}/${source}';`)
   .join("\n");
 
-const { css } = renderSync({ data: scssData });
+const { css } = renderSync({
+  data: scssData,
+  outputStyle: "compressed",
+});
+
+const cssNoComments = css
+  .toString()
+  .replace(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim, "");
+const digest = createHash("md5")
+  .update(cssNoComments)
+  .digest("hex")
+  .substr(0, 6);
+
 const cssFilePath = resolve(
   __dirname,
   "../dist",
-  "odyssey-deprecated-global.css"
+  `odyssey-deprecated-global.${digest}.css`
 );
 
-writeFileSync(cssFilePath, css);
+writeFileSync(cssFilePath, cssNoComments);
