@@ -21,7 +21,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('./package.json') }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-node-modules-cache-
       - name: install dependencies
         run: yarn install --frozen-lockfile --prefer-offline

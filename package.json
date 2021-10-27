@@ -6,6 +6,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "resolutions": {
+    "@babel/plugin-transform-typescript": "^7.15.0"
+  },
   "engines": {
     "yarn": "^1.15.2",
     "node": ">=12.20.0"
