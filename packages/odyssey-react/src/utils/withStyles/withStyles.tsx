@@ -10,55 +10,30 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ComponentProps,
-  ComponentType,
-  ElementRef,
-  NamedExoticComponent,
-} from "react";
-import { forwardRef, useLayoutEffect } from "react";
+import type { ComponentPropsWithoutRef, ElementRef } from "react";
+import { forwardRef } from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
-import { OStyleSheet } from "./stylesheet";
+import { withStylesFactory } from "./factory";
+import type { Composable, Styles } from "./factory";
 
-export type Template = () => string;
-type SourceStyles = Record<string, string>;
-interface TranspiledStyles {
-  __digest: string;
-  __template: Template;
-}
-type Styles = SourceStyles | TranspiledStyles;
-
-const cache = new Map<string, OStyleSheet>();
-
-const useStyles = (styles: Styles) => {
-  const { __digest: digest, __template: template } = styles;
-
-  useLayoutEffect(() => {
-    if (cache.has(digest)) return;
-    if (typeof template !== "function") return;
-
-    const sheet = new OStyleSheet({ digest, template }).inject();
-    cache.set(digest, sheet);
-  }, [digest, template]);
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Composable = ComponentType<any> | NamedExoticComponent<any>;
-
-function withStyles(styles: Styles) {
+/** A HOC to apply styles to a component */
+export function withStyles(styles: Styles) {
   return <C extends Composable>(Composed: C): C => {
     type Ref = ElementRef<C>;
-    type Props = ComponentProps<C>;
+    type Props = ComponentPropsWithoutRef<C>;
+
+    const WithStyles = withStylesFactory<Ref, Props, typeof Composed>(
+      styles,
+      Composed
+    );
 
     return hoistNonReactStatics(
       Object.assign(
         forwardRef<Ref, Props>((props, ref) => {
-          useStyles(styles);
-          const Component: ComponentType = Composed;
-          return <Component ref={ref} {...props} />;
+          return <WithStyles composedRef={ref} {...props} />;
         }),
         {
-          displayName: `withStyles(${
+          displayName: `WithStyles(${
             Composed.displayName || Composed.name || "Component"
           })`,
         }
@@ -67,5 +42,3 @@ function withStyles(styles: Styles) {
     ) as C;
   };
 }
-
-export { withStyles };
