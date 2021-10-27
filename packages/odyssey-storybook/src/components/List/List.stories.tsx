@@ -10,9 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactElement } from "react";
+import type { ReactElement, ReactText } from "react";
 import type { Story } from "@storybook/react";
-import { List, ListProps } from "@okta/odyssey-react";
+import {
+  List,
+  ListProps,
+  Box,
+  Heading,
+  UserIcon,
+  SettingsIcon,
+} from "@okta/odyssey-react";
 import { List as Source } from "../../../../odyssey-react/src";
 
 export default {
@@ -55,4 +62,68 @@ export const UnstyledList = (): ReactElement => (
     <List.Item>Item 1</List.Item>
     <List.Item>Item 2</List.Item>
   </List>
+);
+
+type ActionCardProps = {
+  icon: ReactElement;
+  heading: ReactText;
+  subHeading: ReactText;
+  onClick: () => void;
+};
+const ActionCard = ({
+  icon,
+  heading,
+  subHeading,
+  onClick,
+}: ActionCardProps) => (
+  <Box
+    borderColor="display"
+    hoverBorderColor="interactive"
+    borderRadius="base"
+    boxShadow="default"
+    hoverBoxShadow="default"
+    padding="medium"
+    focusRing="primary"
+    tabIndex={0}
+    role="button"
+    display="flex"
+    alignItems="center"
+    marginBottom="small"
+    onClick={onClick}
+  >
+    <Box marginRight="medium">{icon}</Box>
+    <Box flexGrow="1">
+      <Heading level="2" visualLevel="6">
+        {heading}
+      </Heading>
+      <p className="action-card-sub">{subHeading}</p>
+    </Box>
+  </Box>
+);
+
+export const ActionList = (): ReactElement => (
+  <div className="action-list-container">
+    <List unstyled={true}>
+      <List.Item>
+        <ActionCard
+          icon={<UserIcon />}
+          heading="User"
+          subHeading="Text related to user"
+          onClick={() => {
+            console.log("click user");
+          }}
+        />
+      </List.Item>
+      <List.Item>
+        <ActionCard
+          icon={<SettingsIcon />}
+          heading="Settings"
+          subHeading="Text related to settings"
+          onClick={() => {
+            console.log("click settings");
+          }}
+        />
+      </List.Item>
+    </List>
+  </div>
 );
