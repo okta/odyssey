@@ -14,6 +14,8 @@ const { createHash } = require("crypto");
 const { writeFileSync } = require("fs");
 const { resolve } = require("path");
 const { renderSync } = require("sass");
+const postcss = require("postcss");
+const postcssrc = require("postcss-load-config");
 
 const scssSource = [
   "abstracts/functions",
@@ -30,23 +32,26 @@ const scssData = scssSource
   .map((source) => `@import '${importDir}/${source}';`)
   .join("\n");
 
-const { css } = renderSync({
-  data: scssData,
-  outputStyle: "compressed",
-});
+async function compile() {
+  const { css: intermediate } = renderSync({
+    data: scssData,
+    outputStyle: "compressed",
+  });
 
-const cssNoComments = css
-  .toString()
-  .replace(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim, "");
-const digest = createHash("md5")
-  .update(cssNoComments)
-  .digest("hex")
-  .substr(0, 6);
+  const context = { env: "production", transformStyles: { modules: false } };
+  const { plugins } = await postcssrc(context);
+  const runner = postcss(plugins);
+  const { css } = await runner.process(intermediate, { from: null, to: null });
 
-const cssFilePath = resolve(
-  __dirname,
-  "../dist",
-  `odyssey-deprecated-global.${digest}.css`
-);
+  const digest = createHash("md5").update(css).digest("hex").substr(0, 6);
 
-writeFileSync(cssFilePath, cssNoComments);
+  const cssFilePath = resolve(
+    __dirname,
+    "../dist",
+    `odyssey-deprecated-global.${digest}.css`
+  );
+
+  writeFileSync(cssFilePath, css);
+}
+
+compile();

@@ -55,12 +55,15 @@ const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
     },
   };
 
-  return postcss([
-    postcssLogical(opts.logical),
-    postcssModules(opts.modules),
-    cssnano(opts.cssnano) as PluginCreator<CssNanoOptions>,
-    autoprefixer(opts.autoprefixer),
-  ]);
+  const plugins = [
+    optsArgs.logical !== false && postcssLogical(opts.logical),
+    optsArgs.modules !== false && postcssModules(opts.modules),
+    optsArgs.cssnano !== false &&
+      (cssnano(opts.cssnano) as PluginCreator<CssNanoOptions>),
+    optsArgs.autoprefixer !== false && autoprefixer(opts.autoprefixer),
+  ].filter(Boolean);
+
+  return postcss(plugins);
 };
 
 plugin.postcss = true;
