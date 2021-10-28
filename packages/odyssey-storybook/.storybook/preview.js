@@ -1,4 +1,4 @@
-import "@okta/odyssey-react/dist/odyssey-deprecated-global.17f26a.css";
+import "@okta/odyssey-react/dist/odyssey-deprecated-global.251d01.css";
 
 export const parameters = {
   controls: {
