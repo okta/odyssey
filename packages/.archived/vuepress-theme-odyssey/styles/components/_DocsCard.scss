@@ -1,0 +1,81 @@
+/*!
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+.docs-card {
+  @include border-radius(0, 32px, 0, 32px);
+
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding-block: $spacing-l;
+  padding-inline: $spacing-m;
+  transition: 0.33s ease-in-out box-shadow;
+  background-color: var(--docs-card-bg, $white);
+  font-size: $size-body-base;
+
+  &.is-docs-card-shadow {
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+
+    &:hover,
+    &:focus-within {
+      box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &.is-docs-card-transparent {
+    padding-block: 0;
+    padding-inline: 0;
+    background: transparent;
+  }
+
+  a {
+    &::before {
+      // NOTE: 32px is sort of an arbitrary value,
+      // and only used within this component.
+      @include border-radius(0, 32px, 0, 32px);
+
+      content: "";
+      display: block;
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      inset-block-end: 0;
+      inset-inline-start: 0;
+    }
+  }
+
+  .docs-card--header-image {
+    margin-block-end: $spacing-m;
+
+    svg {
+      height: auto;
+    }
+  }
+
+  .docs-card--main {
+    flex: 1;
+    margin-block-end: $spacing-l;
+    font-size: $size-body-base;
+  }
+
+  &.is-docs-card-image-medium {
+    svg {
+      max-width: $spacing-l;
+    }
+  }
+
+  &.is-docs-card-image-large {
+    svg {
+      max-width: $spacing-xl;
+    }
+  }
+}

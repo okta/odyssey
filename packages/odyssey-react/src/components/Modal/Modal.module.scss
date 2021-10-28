@@ -1,0 +1,128 @@
+/*!
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+.root {
+  display: none;
+
+  &.openState {
+    display: block;
+  }
+}
+
+.overlay {
+  display: flex;
+  position: fixed;
+  z-index: 10;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  align-items: center;
+  justify-content: center;
+  background: rgba(cv("gray", "900"), 0.75);
+
+  .root[aria-hidden="false"] & {
+    animation: overlayIn $base-duration $base-timing;
+  }
+
+  .root[aria-hidden="true"] & {
+    animation: overlayOut $base-duration $base-timing;
+  }
+}
+
+.dialog {
+  @include border-radius($base-border-radius);
+
+  position: relative;
+  max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
+  max-height: calc(100vh - #{$spacing-m});
+  padding-block-start: $spacing-m;
+  padding-block-end: 0;
+  padding-inline: $spacing-m;
+  overflow-y: auto;
+  background-color: $white;
+
+  .root[aria-hidden="false"] & {
+    animation: dialogIn $base-duration $base-timing;
+  }
+
+  .root[aria-hidden="true"] & {
+    animation: dialogOut $base-duration $base-timing;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.dismiss {
+  align-self: flex-end;
+  margin-block-end: $spacing-xs;
+}
+
+.content {
+  padding-block-start: $spacing-xs;
+  padding-block-end: $spacing-l;
+  padding-inline: 0;
+  font-size: $size-body-base;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-block-end: $spacing-m;
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlayOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialogIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dialogOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+}

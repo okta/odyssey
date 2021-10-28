@@ -1,0 +1,216 @@
+/*!
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+/* stylelint-disable scss/at-import-no-partial-leading-underscore */
+@import "@okta/odyssey/src/scss/abstracts/_functions";
+@import "@okta/odyssey/src/scss/abstracts/_colors";
+@import "@okta/odyssey/src/scss/abstracts/_tokens";
+@import "@okta/odyssey/src/scss/abstracts/_mixins";
+/* stylelint-enable scss/at-import-no-partial-leading-underscore */
+
+:root {
+  --font-size: #{$size-body-base};
+  --inlineCodeColor: #{cv("blue", "000")};
+  --inlineCodeBackground: #{cv("red", "300")};
+  --blockBackground: #{cv("gray", "900")};
+  --baseColor: #{cv("blue", "000")};
+  --selectedColor: #{cv("turquoise", "500")};
+  --highlightBackground: #{cv("yellow", "000")};
+  --highlightAccent: #{cv("yellow", "300")};
+  --commentColor: #{cv("gray", "500")};
+  --punctuationColor: #{cv("blue", "000")};
+  --propertyColor: #{cv("turquoise", "400")};
+  --selectorColor: #a0dcc3;
+  --operatorColor: #{cv("blue", "000")};
+  --operatorBg: transparent;
+  --variableColor: #{cv("blue", "400")};
+  --functionColor: #cfb1c1;
+  --keywordColor: #{cv("blue", "300")};
+}
+
+/*********************************************************
+* General
+*/
+
+/* stylelint-disable selector-no-qualifying-type */
+pre[class*="language-"],
+code[class*="language-"] {
+  /* stylelint-enable selector-no-qualifying-type */
+  color: var(--baseColor);
+  font-family: "Inconsolata", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
+    monospace;
+  font-size: var(--font-size);
+  line-height: 1.5;
+  text-align: start;
+  text-shadow: none;
+  word-break: normal;
+  white-space: pre;
+  word-spacing: normal;
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  /* stylelint-enable property-no-vendor-prefix */
+  tab-size: 4;
+  direction: ltr;
+}
+
+/* stylelint-disable selector-no-qualifying-type, selector-pseudo-element-no-unknown */
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection,
+pre[class*="language-"]::mozselection,
+code[class*="language-"]::mozselection {
+  /* stylelint-enable selector-no-qualifying-type, selector-pseudo-element-no-unknown */
+  background: var(--selectedColor);
+  text-shadow: none;
+}
+
+@media print {
+  /* stylelint-disable selector-no-qualifying-type */
+  pre[class*="language-"],
+  code[class*="language-"] {
+    /* stylelint-enable selector-no-qualifying-type */
+    text-shadow: none;
+  }
+}
+
+/* stylelint-disable selector-no-qualifying-type, no-descending-specificity */
+pre[class*="language-"] {
+  /* stylelint-enable selector-no-qualifying-type, no-descending-specificity */
+  margin-block: 0.5em;
+  margin-inline: 0;
+  padding-block: 1em;
+  padding-inline: 1em;
+  overflow: auto;
+  background: var(--blockBackground);
+}
+
+/* stylelint-disable selector-no-qualifying-type */
+:not(pre) > code[class*="language-"] {
+  /* stylelint-enable selector-no-qualifying-type */
+  @include border-radius(0.3em);
+
+  padding-block: 0.1em;
+  padding-inline: 0.3em;
+  background: var(--inlineCodeBackground);
+  color: var(--inlineCodeColor);
+}
+
+/*********************************************************
+* Tokens
+*/
+.namespace {
+  opacity: 0.7;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--commentColor);
+}
+
+.token.punctuation {
+  color: var(--punctuationColor);
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--propertyColor);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--selectorColor);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  background: var(--operatorBg);
+  color: var(--operatorColor);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--keywordColor);
+}
+
+.token.function {
+  color: var(--functionColor);
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: var(--variableColor);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/*********************************************************
+* Line highlighting
+*/
+
+/* stylelint-disable selector-no-qualifying-type */
+pre[data-line] {
+  /* stylelint-enable selector-no-qualifying-type */
+  position: relative;
+}
+
+/* stylelint-disable selector-no-qualifying-type */
+pre[class*="language-"] > code[class*="language-"] {
+  /* stylelint-enable selector-no-qualifying-type */
+  position: relative;
+  z-index: 1;
+}
+
+.line-highlight {
+  position: absolute;
+  z-index: 0;
+  inset-inline-end: 0;
+  inset-inline-start: 0;
+  margin-block-start: 1em;
+  padding-block: inherit;
+  padding-inline: 0;
+  background: var(--highlightBackground);
+  box-shadow: inset 5px 0 0 var(--highlightAccent);
+  line-height: inherit;
+  white-space: pre;
+  pointer-events: none;
+}

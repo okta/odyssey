@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.7.0] - 2020-11-18
 
 ### Added
+
 - ESLint has been added to our test suite
 - Turquoise 400 has been added to the color map
 - Links: added support for Links with Icons
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Docs] Field Labels: replaces Form documentation and guidelines
 
 ### Changed
+
 - Incosolata is now the default monospace font for Odyssey
 - External link indicator updated
 - [Breaking Change] Modal: `z-index` has been updated from `1` to `10`
@@ -34,16 +36,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Docs] Content and examples for all components have been rewritten
 
 ### Removed
+
 - Tabs: unused CSS custom properties that were used for moving tab indicator implementation have been removed
 - `vuepress-theme-nimatron` has been removed in favor of `vuepress-theme-odyssey`
 - [Docs] Form docs have been removed in favor of Field Labels
 
 ### Fixed
+
 - Tables and Table wrappers now correctly remove margin if they are the last or only child
 
 ## [0.6.0] - 2020-10-02
 
 ### Added
+
 - Toast: a transient messaging component
 - Icons: Caution, Copy, Filter, and Error icons are now available
 - Standalone Search: added a new Text Input variant for search UI
@@ -53,22 +58,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - pre: styling and minor guidance for the HTML element
 
 ### Changed
+
 - Gray-900 updated to #1d1d21; all relevant variables/tokens updated
 - Links no longer require an underline; new Gray-900 contrast allows for this
 - Icons: the Complete icon has been updated to differentiate it from a plain check
 
 ### Removed
+
 - [Docs] Extraneous doc styles for deprecated samples have been removed
 
 ## [0.5.1] - 2020-09-18
 
 ### Added
+
 - [Docs] Added missing guidance for accessible SVG icon use in Buttons
 
 ### Changed
+
 - [Docs] Field warnings no longer display an "alert" icon as part of invalid messaging guidance
 
 ### Fixed
+
 - [Docs] Type token examples now display correctly
 - [Docs] `title` displays correctly once more ("Odyssey Design System")
 - [Docs] VuePress no longer modifies outbound links automatically
@@ -76,6 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.5.0] - 2020-09-03
 
 ### Added
+
 - [Docs] Iconography documentation, available at /base/iconography
 - Basic styles for inline Icon display
 - Multi-Select variant for Select (both Choices.js and HTML-only)
@@ -84,6 +95,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Gray, 500 is now available for use via Sass maps (no Token)
 
 ### Changed
+
 - [Docs] Type documentation is now titled "Typography" and located at /base/typography
 - [Docs] Documentation now references this CHANGELOG on GH directly rather than copying over
 - [Docs] Color documentation has been revamped entirely
@@ -95,10 +107,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `blockquote`, Form, Table, and Tab borders now use `$border-color-display` as they are not a11y-constrained
 
 ### Removed
+
 - [Docs] Type test page has been removed from docs
 - [Breaking Change] Grays 300 and 400 have been removed from available use
 
 ### Fixed
+
 - [Docs] Modal examples now work as intended
 - [Docs] `address` example now renders correctly
 - All Icons now use a 14px grid instead of 24px for optimal display
@@ -129,9 +143,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.3.0] - 2020-06-25
 
 ### Added
+
 - Design Tokens
 
 ### Changed
+
 - Color, type and spacing to reflect rebrand
 - [Breaking Change] `_variables.scss` has been renamed to `_tokens.scss`, this introduces design tokens into Odyssey
 - [Breaking Change] Renamed "warning" to "orange"
@@ -140,6 +156,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Breaking Change] Change semantic `cv` arguments (lightest, base, dark) in favor of 000-900
 
 ### Removed
+
 - [Breaking Change] Removed colors: magenta, grays 100, 300, 500, 700, 900
 - [Breaking Change] Removed `fauxpacity` function, preferring "light" color variants
 - [Breaking Change] Removed documentation and Sass styles for unapproved components: Banner, Callout, Card, Dropdown, Meter, Navigation, Switch, Toast, Top Bar
@@ -148,11 +165,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0] - 2020-04-30
 
 ### Added
+
 - Status: New component and documentation
 - Tab: New component and documentation
 - Tag: New component and documentation
 
 ### Changed
+
 - [Breaking Change] Rename `yellow` color variable to `caution`
 - All focus outline instances now use new outline mixin
 - Adds Status content type to Table component
@@ -211,4 +230,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 2019-10-10
 
 ### Added/Changed/Removed
+
 - Migrated former "Nim" repo into Odyssey
