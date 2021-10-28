@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-transform-styles-postcss-preset",
-  "version": "0.0.0",
+  "version": "0.8.0",
   "main": "dist/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -15,7 +15,7 @@
     "postcss-modules": "^4.2.2"
   },
   "devDependencies": {
-    "@okta/odyssey-typescript": "^0.0.0",
+    "@okta/odyssey-typescript": "^0.8.0",
     "@types/cssnano": "^4.0.1",
     "postcss": "^8.3.6"
   },
