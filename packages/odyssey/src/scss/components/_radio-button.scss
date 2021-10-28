@@ -1,19 +1,16 @@
-// Copyright 2018-Present Okta, Inc.
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*!
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
 
 /* stylelint-disable no-descending-specificity, max-nesting-depth */
-$size-checkbox: 1em / 0.875;
 
 .ods-radio {
   @include is-visually-hidden;
@@ -67,7 +64,8 @@ $size-checkbox: 1em / 0.875;
     }
   }
 
-  &[data-invalid] {
+  &:invalid,
+  &.is-ods-radio-invalid {
     &:hover:not(:checked) + .ods-radio--label::before {
       border-color: $color-danger-dark;
     }
@@ -108,6 +106,14 @@ $size-checkbox: 1em / 0.875;
         }
       }
 
+      &:hover {
+        + .ods-radio--label {
+          &::before {
+            border-color: $color-danger-base-disabled;
+          }
+        }
+      }
+
       &:checked {
         + .ods-radio--label {
           &::before {
@@ -128,26 +134,27 @@ $size-checkbox: 1em / 0.875;
 .ods-radio--label {
   display: block;
   position: relative;
-  margin-bottom: $spacing-xs;
-  padding-left: $size-checkbox + $spacing-s-em;
+  margin-block-end: $spacing-xs;
+  padding-inline-start: 1em + $spacing-s-em;
   font-size: $size-body-base;
   font-weight: 400;
-  text-align: left;
+  text-align: start;
 
   &::before,
   &::after {
-    content: '';
+    @include border-radius(1.125rem);
+
+    content: "";
     display: block;
     position: absolute;
-    top: 50%;
-    left: 0;
-    width: $size-checkbox;
-    height: $size-checkbox;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    width: 1em;
+    height: 1em;
     transition-property: border-color, background, opacity, box-shadow;
     transition-duration: $base-duration;
     transition-timing-function: $base-timing;
     border: 2px solid transparent;
-    border-radius: 1.125rem;
   }
 
   // Box

@@ -1,0 +1,25 @@
+{
+  "name": "@okta/odyssey-transform-styles-postcss-preset",
+  "version": "0.8.0",
+  "main": "dist/index.js",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "prepare": "tsc"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.3.4",
+    "cssnano": "^5.0.8",
+    "postcss-logical": "^5.0.0",
+    "postcss-modules": "^4.2.2"
+  },
+  "devDependencies": {
+    "@okta/odyssey-typescript": "^0.8.0",
+    "@types/cssnano": "^4.0.1",
+    "postcss": "^8.3.6"
+  },
+  "peerDependencies": {
+    "postcss": "^8.3.6"
+  }
+}

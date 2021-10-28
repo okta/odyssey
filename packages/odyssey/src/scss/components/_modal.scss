@@ -1,37 +1,38 @@
-// Copyright 2018-Present Okta, Inc.
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*!
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
 
 .ods-modal--overlay {
   display: flex;
   position: fixed;
   z-index: 10;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  inset-block-end: 0;
+  inset-inline-start: 0;
   align-items: center;
   justify-content: center;
-  background: rgba(cv('gray', '900'), 0.75);
+  background: rgba(cv("gray", "900"), 0.75);
 }
 
 .ods-modal--dialog {
+  @include border-radius($base-border-radius);
+
   position: relative;
   max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
   max-height: calc(100vh - #{$spacing-m});
-  padding: $spacing-m  $spacing-m 0;
+  padding-block-start: $spacing-m;
+  padding-block-end: 0;
+  padding-inline: $spacing-m;
   overflow-y: auto;
-  border-radius: $base-border-radius;
   background-color: $white;
 }
 
@@ -40,22 +41,14 @@
   flex-direction: column;
 }
 
-.ods-modal--close {
+.ods-modal--dismiss {
   align-self: flex-end;
-  width: $base-font-size;
-  height: $base-font-size;
-  margin-bottom: $spacing-xs;
-  padding: 0;
-  border: 0;
-  background-color: transparent;
-  background-image: get-icon('close', $text-body);
-  background-repeat: no-repeat;
-  background-position: center;
+  margin-block-end: $spacing-xs;
 }
 
 .ods-modal--title {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
   color: $text-heading;
   font-size: $size-title-4;
   font-weight: 600;
@@ -63,14 +56,16 @@
 }
 
 .ods-modal--content {
-  padding: $spacing-xs 0 $spacing-l;
+  padding-block-start: $spacing-xs;
+  padding-block-end: $spacing-l;
+  padding-inline: 0;
   font-size: $size-body-base;
 }
 
 .ods-modal--footer {
   display: flex;
   justify-content: flex-end;
-  padding-bottom: $spacing-m;
+  padding-block-end: $spacing-m;
 }
 
 // Animations
@@ -126,7 +121,7 @@
     display: block;
   }
 
-  &[aria-hidden='false'] {
+  &[aria-hidden="false"] {
     .ods-modal--overlay {
       animation: overlay-in $base-duration $base-timing;
     }
@@ -136,12 +131,12 @@
     }
   }
 
-  &[aria-hidden='true'] {
+  &[aria-hidden="true"] {
     .ods-modal--overlay {
       animation: overlay-out $base-duration $base-timing;
     }
 
-    &[aria-hidden='true'] .ods-modal--dialog {
+    &[aria-hidden="true"] .ods-modal--dialog {
       animation: dialog-out $base-duration $base-timing;
     }
   }

@@ -1,41 +1,41 @@
-// Copyright 2018-Present Okta, Inc.
+/*!
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
 
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-$status-indicator-size: 1em / 2;
+$status-indicator-size: 1em * 0.5;
 
 .ods-status--label {
   display: block;
-  margin-bottom: $spacing-xs;
+  margin-block-end: $spacing-xs;
   font-weight: 600;
 }
 
 .ods-status--value {
   position: relative;
-  padding-left: $status-indicator-size + $spacing-xs-em;
+  padding-inline-start: $status-indicator-size + $spacing-xs-em;
   background-color: transparent;
   color: $text-body;
 
   &::before {
-    content: '';
+    @include border-radius(1em);
+
+    content: "";
     position: absolute;
-    top: 50%;
-    left: 0;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
     width: $status-indicator-size;
     height: $status-indicator-size;
-    margin-right: $spacing-xs;
+    margin-inline-end: $spacing-xs;
     transform: translateY(-50%);
-    border-radius: 1em;
-    background-color: cv('gray', '600');
+    background-color: cv("gray", "600");
   }
 }
 

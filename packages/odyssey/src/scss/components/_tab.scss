@@ -1,40 +1,40 @@
-// Copyright 2018-Present Okta, Inc.
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*!
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
 
 .ods-tabs--tablist {
   position: relative;
-  border-bottom: 1px solid $border-color-display;
+  border-block-end: 1px solid $border-color-display;
 }
 
 .ods-tabs--tab {
   display: inline-block;
   position: relative;
-  margin: 0;
-  padding: $spacing-s $spacing-s;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: $spacing-s;
+  padding-inline: $spacing-s;
   border: 0;
   background: none;
   color: $text-body;
   font-family: inherit;
-  font-size: $size-body-sentence;
+  font-size: $size-title-6;
   font-weight: 600;
 
-  &[aria-selected='true'] {
+  &[aria-selected="true"] {
     &::before {
-      content: '';
+      content: "";
       position: absolute;
-      bottom: -1px;
-      left: 0;
+      inset-block-end: -1px;
+      inset-inline-start: 0;
       width: 100%;
       height: 3px;
       background: $color-primary-base;
@@ -42,8 +42,9 @@
   }
 }
 
-.ods-tabs--tabpanel [role='tabpanel'] {
-  padding: $spacing-l 0;
+.ods-tabs--tabpanel [role="tabpanel"] {
+  padding-block: $spacing-l;
+  padding-inline: 0;
 
   &:focus {
     outline: none;

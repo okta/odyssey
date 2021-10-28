@@ -1,32 +1,32 @@
-// Copyright 2018-Present Okta, Inc.
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*!
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
 
 .ods-toast {
+  @include border-radius($base-border-radius);
+
   display: grid;
   position: relative;
   grid-gap: 0 $spacing-s;
   grid-template-columns: min-content 1fr min-content;
-  align-items: center;
+  align-items: start;
   max-width: $max-line-length;
-  padding: $spacing-m $spacing-s;
+  padding-block: $spacing-m;
+  padding-inline: $spacing-s;
   animation-name: ods-toast-in, ods-toast-out;
   animation-duration: 300ms, 1000ms;
   animation-delay: 0s, 5300ms;
   border: 0;
-  border-radius: $base-border-radius;
-  background-color: cv('blue', '900');
-  box-shadow: 0 8px 12px rgba(cv('gray', '900'), 0.12);
+  background-color: cv("blue", "900");
+  box-shadow: 0 8px 12px rgba(cv("gray", "900"), 0.12);
   color: $white;
 
   &:hover,
@@ -43,59 +43,47 @@
   }
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
 .ods-toast--icon {
-  width: $spacing-m;
+  width: $size-title-4;
   color: $white;
-  font-size: ms(4);
+  font-size: $size-title-4;
   line-height: 1;
 }
 
 .ods-toast--title {
-  margin: 0;
-  padding-right: $spacing-m;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-inline-end: $spacing-m;
   color: $white;
-  font-size: ms(1);
+  font-size: $size-body-base;
   font-weight: 600;
   line-height: $base-line-height;
 }
 
 .ods-toast--dismiss {
   position: absolute;
-  top: 50%;
-  right: $spacing-s;
-  width: ms(4);
-  height: ms(4);
-  margin-bottom: 0;
-  transform: translateY(-50%);
+  inset-block-start: $spacing-xs;
+  inset-inline-end: $spacing-xs;
+  margin-block-end: 0;
   border: 0;
-  background-color: transparent;
-  background-image: get-icon('close', $white);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: ms(1);
-
-  .ods-toast--body + & {
-    top: $spacing-s;
-    transform: translateY(0);
-  }
 }
 
 .ods-toast--body {
   grid-column: 2;
-  margin-bottom: 0;
-  font-size: ms(1);
+  margin-block-end: 0;
+  font-size: $size-body-base;
 }
 
 .is-ods-toast-success {
-  background-color: cv('green', '600');
+  background-color: cv("green", "600");
 }
 
 .is-ods-toast-caution {
-  background-color: cv('yellow', '500');
+  background-color: cv("yellow", "500");
   color: $text-body;
 
   .ods-toast--icon {
@@ -105,14 +93,10 @@
   .ods-toast--title {
     color: $text-heading;
   }
-
-  .ods-toast--dismiss {
-    background-image: get-icon('close', $text-body);
-  }
 }
 
 .is-ods-toast-danger {
-  background-color: cv('red', '500');
+  background-color: cv("red", "500");
 }
 
 @keyframes ods-toast-in {
@@ -134,5 +118,19 @@
 
   100% {
     opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .ods-toast {
+    animation-name: ods-toast-in;
+    animation-duration: 300ms;
+    animation-delay: 0s;
+
+    &.is-toast-dismissed {
+      animation-name: ods-toast-out;
+      animation-duration: 300ms;
+      animation-delay: 0s;
+    }
   }
 }
