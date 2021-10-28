@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactElement, ReactText } from "react";
+import type { ReactElement, ReactText, KeyboardEvent } from "react";
 import type { Story } from "@storybook/react";
 import {
   List,
@@ -75,55 +75,63 @@ const ActionCard = ({
   heading,
   subHeading,
   onClick,
-}: ActionCardProps) => (
-  <Box
-    borderColor="display"
-    hoverBorderColor="interactive"
-    borderRadius="base"
-    boxShadow="default"
-    hoverBoxShadow="default"
-    padding="medium"
-    focusRing="primary"
-    tabIndex={0}
-    role="button"
-    display="flex"
-    alignItems="center"
-    marginBottom="small"
-    onClick={onClick}
-  >
-    <Box marginRight="medium">{icon}</Box>
-    <Box flexGrow="1">
-      <Heading level="2" visualLevel="6">
-        {heading}
-      </Heading>
-      <p className="action-card-sub">{subHeading}</p>
+}: ActionCardProps) => {
+  function handleKeyPress(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === " " || event.key === "Enter") {
+      onClick();
+    }
+  }
+
+  return (
+    <Box
+      borderColor="display"
+      hoverBorderColor="interactive"
+      borderRadius="base"
+      boxShadow="default"
+      hoverBoxShadow="default"
+      padding="m"
+      focusRing="primary"
+      tabIndex={0}
+      role="button"
+      display="flex"
+      alignItems="center"
+      marginBottom="s"
+      cursor="pointer"
+      onClick={onClick}
+      onKeyPress={handleKeyPress}
+    >
+      <Box marginRight="m">{icon}</Box>
+      <Box flexGrow="1" userSelect="none">
+        <Heading level="2" visualLevel="6">
+          {heading}
+        </Heading>
+        <p className="action-card-sub">{subHeading}</p>
+      </Box>
     </Box>
-  </Box>
-);
+  );
+};
 
 export const ActionList = (): ReactElement => (
-  <div className="action-list-container">
-    <List unstyled={true}>
-      <List.Item>
-        <ActionCard
-          icon={<UserIcon />}
-          heading="User"
-          subHeading="Text related to user"
-          onClick={() => {
-            console.log("click user");
-          }}
-        />
-      </List.Item>
-      <List.Item>
-        <ActionCard
-          icon={<SettingsIcon />}
-          heading="Settings"
-          subHeading="Text related to settings"
-          onClick={() => {
-            console.log("click settings");
-          }}
-        />
-      </List.Item>
-    </List>
-  </div>
+  <List unstyled={true}>
+    <List.Item>
+      <ActionCard
+        icon={<UserIcon />}
+        heading="User"
+        subHeading="Text related to user"
+        onClick={() => {
+          console.log("click user");
+        }}
+      />
+    </List.Item>
+    <List.Item>
+      <ActionCard
+        icon={<SettingsIcon />}
+        heading="Settings"
+        subHeading="Text related to settings"
+        onClick={() => {
+          console.log("click settings");
+        }}
+      />
+    </List.Item>
+  </List>
 );

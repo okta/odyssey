@@ -11,14 +11,12 @@
  */
 
 import { Story } from "@storybook/react";
-import type { ReactElement } from "react";
 import { Box as Source } from "../../../../odyssey-react/src";
-import { Box, BoxProps, List, Heading, Icon } from "@okta/odyssey-react";
+import { Box, BoxProps } from "@okta/odyssey-react";
 
 export default {
   title: `Components/Box`,
   component: Source,
-  argTypes: { onClick: { action: "clicked" } },
 };
 
 const Template: Story<BoxProps> = (args) => <Box {...args}>Box</Box>;
@@ -31,67 +29,7 @@ Default.args = {
   borderRadius: "base",
   boxShadow: "default",
   hoverBoxShadow: "default",
-  padding: "medium",
+  padding: "m",
   focusRing: "primary",
   tabIndex: 0,
 };
-
-export const ActionList = (args: BoxProps): ReactElement => (
-  <div className="action-list-container">
-    <List unstyled>
-      <List.Item>
-        <Box
-          {...args}
-          borderColor="display"
-          hoverBorderColor="interactive"
-          borderRadius="base"
-          boxShadow="default"
-          hoverBoxShadow="default"
-          padding="medium"
-          focusRing="primary"
-          tabIndex={0}
-          role="button"
-          display="flex"
-          alignItems="center"
-          marginBottom="small"
-        >
-          <Box marginRight="medium">
-            <Icon name="user" />
-          </Box>
-          <Box flexGrow="1">
-            <Heading level="2" visualLevel="6">
-              User
-            </Heading>
-            <p className="action-card-sub">Text related to user</p>
-          </Box>
-        </Box>
-      </List.Item>
-      <List.Item>
-        <Box
-          {...args}
-          borderColor="display"
-          hoverBorderColor="interactive"
-          borderRadius="base"
-          boxShadow="default"
-          hoverBoxShadow="default"
-          padding="medium"
-          focusRing="primary"
-          tabIndex={0}
-          role="button"
-          display="flex"
-          alignItems="center"
-        >
-          <Box marginRight="medium">
-            <Icon name="settings" />
-          </Box>
-          <Box flexGrow="1">
-            <Heading level="2" visualLevel="6">
-              Settings
-            </Heading>
-            <p className="action-card-sub">Text related to settings</p>
-          </Box>
-        </Box>
-      </List.Item>
-    </List>
-  </div>
-);

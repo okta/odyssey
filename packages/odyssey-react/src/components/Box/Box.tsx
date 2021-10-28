@@ -15,7 +15,7 @@ import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import styles from "./Box.module.scss";
 
-type spacing = "x-small" | "small" | "medium" | "large" | "x-large";
+type spacing = "xs" | "s" | "m" | "l" | "xl";
 
 export interface BoxProps
   extends Omit<ComponentPropsWithRef<"div">, "style" | "className"> {
@@ -68,11 +68,18 @@ export interface BoxProps
    * Bottom margin
    */
   marginBottom?: spacing;
+  /**
+   * Cursor style
+   */
+  cursor?: "pointer" | "auto";
+  /**
+   * Content selection
+   */
+  userSelect?: "none" | "auto";
 }
 
 function convertProp(prop: string) {
-  const str = prop.replace("-", "");
-  return str.charAt(0).toUpperCase() + str.substring(1).toLowerCase();
+  return prop.charAt(0).toUpperCase() + prop.substring(1).toLowerCase();
 }
 
 /**
@@ -92,6 +99,8 @@ let Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     marginRight,
     marginBottom,
     padding,
+    cursor,
+    userSelect,
     children,
     ...rest
   } = props;
@@ -112,7 +121,9 @@ let Box = forwardRef<HTMLDivElement, BoxProps>((props, ref) => {
     flexGrow && styles[`flexGrow${convertProp(flexGrow)}`],
     marginRight && styles[`marginRight${convertProp(marginRight)}`],
     alignItems && styles[`alignItems${convertProp(alignItems)}`],
-    marginBottom && styles[`marginBottom${convertProp(marginBottom)}`]
+    marginBottom && styles[`marginBottom${convertProp(marginBottom)}`],
+    cursor && styles[`cursor${convertProp(cursor)}`],
+    userSelect && styles[`userSelect${convertProp(userSelect)}`]
   );
 
   const omitProps = useOmit(rest);

@@ -10,24 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+.root {
+  box-sizing: border-box;
+}
+
 /* stylelint-disable property-disallowed-list */
-.paddingXsmall {
+.paddingXs {
   padding: $spacing-xs;
 }
 
-.paddingSmall {
+.paddingS {
   padding: $spacing-s;
 }
 
-.paddingMedium {
+.paddingM {
   padding: $spacing-m;
 }
 
-.paddingLarge {
+.paddingL {
   padding: $spacing-l;
 }
 
-.paddingXlarge {
+.paddingXl {
   padding: $spacing-xl;
 }
 /* stylelint-enable property-disallowed-list */
@@ -80,46 +84,54 @@
   flex-grow: 1;
 }
 
-.marginRightXsmall {
+.marginRightXs {
   margin-inline-end: $spacing-xs;
 }
 
-.marginRightSmall {
+.marginRightS {
   margin-inline-end: $spacing-s;
 }
 
-.marginRightMedium {
+.marginRightM {
   margin-inline-end: $spacing-m;
 }
 
-.marginRightLarge {
+.marginRightL {
   margin-inline-end: $spacing-l;
 }
 
-.marginRightXlarge {
+.marginRightXl {
   margin-inline-end: $spacing-xl;
 }
 
-.marginBottomXsmall {
+.marginBottomXs {
   margin-block-end: $spacing-xs;
 }
 
-.marginBottomSmall {
-  margin-block-end: $spacing-xs;
+.marginBottomS {
+  margin-block-end: $spacing-s;
 }
 
-.marginBottomMedium {
+.marginBottomM {
   margin-block-end: $spacing-m;
 }
 
-.marginBottomLarge {
+.marginBottomL {
   margin-block-end: $spacing-l;
 }
 
-.marginBottomXlarge {
+.marginBottomXl {
   margin-block-end: $spacing-xl;
 }
 
 .alignItemsCenter {
   align-items: center;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
+
+.userSelectNone {
+  user-select: none;
 }
