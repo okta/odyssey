@@ -15,7 +15,7 @@ import { useArgs } from "@storybook/client-api";
 import { Banner as Source } from "../../../../odyssey-react/src";
 import { Banner, BannerProps, Link } from "@okta/odyssey-react";
 
-import mdx from "./Banner.mdx";
+import BannerMdx from "./Banner.mdx";
 
 export default {
   title: `Components/Banner`,
@@ -23,7 +23,7 @@ export default {
   parameters: {
     layout: "fullscreen",
     docs: {
-      page: mdx,
+      page: BannerMdx,
     },
   },
   argTypes: {
