@@ -54,7 +54,10 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
 
 <figure class="ods-table--figure">
   <table class="ods-table">
-    <caption>When implementing this component you should consider the following keyboard behaviors.</caption>
+    <caption>
+      When implementing this component you should consider the following
+      keyboard behaviors.
+    </caption>
     <thead>
       <tr>
         <th scope="column">Key</th>
@@ -63,36 +66,64 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
     </thead>
     <tbody>
       <tr>
-        <th scope="row" rowspan="2"><kbd>Tab</kbd></th>
-        <td>When focus moves in to <code>tablist</code> the focus is placed on the first <code>tab</code> element.</td>
+        <th scope="row" rowspan="2">
+          <kbd>Tab</kbd>
+        </th>
+        <td>
+          When focus moves in to <code>tablist</code> the focus is placed on the
+          first <code>tab</code> element.
+        </td>
       </tr>
       <tr>
-        <td>Unlike the right arrow key, if you tab past the last element, the tab focus continues down the page as normal. In this case, it should set focus in to the active <code>tabpanel</code></td>
+        <td>
+          Unlike the right arrow key, if you tab past the last element, the tab
+          focus continues down the page as normal. In this case, it should set
+          focus in to the active <code>tabpanel</code>
+        </td>
       </tr>
       <tr>
-        <td><kbd>Enter</kbd> <kbd>Space</kbd></td>
-        <td>When focus is placed on a tab, the corresponding <code>tabpanel</code> is activated/displayed.</td>
+        <td>
+          <kbd>Enter</kbd> <kbd>Space</kbd>
+        </td>
+        <td>
+          When focus is placed on a tab, the corresponding <code>tabpanel</code>{" "}
+          is activated/displayed.
+        </td>
       </tr>
       <tr>
-        <th scope="row" rowspan="2"><kbd>Right Arrow</kbd></th>
-        <td>When focus is within the <code>tablist</code> the next tab is selected.</td>
+        <th scope="row" rowspan="2">
+          <kbd>Right Arrow</kbd>
+        </th>
+        <td>
+          When focus is within the <code>tablist</code> the next tab is
+          selected.
+        </td>
       </tr>
       <tr>
         <td>If the last tab is focused the focus is moved to the first tab.</td>
       </tr>
       <tr>
-        <th scope="row" rowspan="2"><kbd>Left Arrow</kbd></th>
-        <td>When focus is within the <code>tablist</code> the previous tab is selected.</td>
+        <th scope="row" rowspan="2">
+          <kbd>Left Arrow</kbd>
+        </th>
+        <td>
+          When focus is within the <code>tablist</code> the previous tab is
+          selected.
+        </td>
       </tr>
       <tr>
         <td>If the first tab is focused the focus is moved to the last tab.</td>
       </tr>
       <tr>
-        <td><kbd>Home</kbd></td>
+        <td>
+          <kbd>Home</kbd>
+        </td>
         <td>If a tab has focus, the focus is moved to the first tab.</td>
       </tr>
       <tr>
-        <td><kbd>End</kbd></td>
+        <td>
+          <kbd>End</kbd>
+        </td>
         <td>If a tab has focus, the focus is moved to the last tab.</td>
       </tr>
     </tbody>
