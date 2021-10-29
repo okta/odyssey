@@ -54,6 +54,6 @@
     "build:source": "./scripts/buildSource",
     "build:css": "node ./scripts/buildCss.js",
     "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.js) --out-dir ./src/components/Icon/",
-    "prepublish": "node ./scripts/prepublish.js"
+    "prepack": "node ./scripts/prepack.js"
   }
 }
