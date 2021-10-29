@@ -3,7 +3,11 @@
   "version": "0.8.0",
   "description": "React components for Odyssey, Okta's design system",
   "main": "dist/index.js",
-  "repository": "https://github.com/okta/odyssey",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/odyssey",
+    "directory": "packages/odyssey-react"
+  },
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "dependencies": {
