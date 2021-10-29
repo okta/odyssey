@@ -15,9 +15,17 @@ import type { ReactElement } from "react";
 import { Table, TableProps } from "@okta/odyssey-react";
 import { Table as Source } from "../../../../odyssey-react/src";
 
+import TableMdx from "./Table.mdx";
+
 export default {
   title: `Components/Table`,
   component: Source,
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      page: TableMdx,
+    },
+  },
   args: {
     title: "Big and small planets",
     caption: "Information about the largest and smallest planets.",

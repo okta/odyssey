@@ -15,6 +15,8 @@ import type { ReactElement } from "react";
 import { Select, SelectProps } from "@okta/odyssey-react";
 import { Select as Source } from "../../../../odyssey-react/src";
 
+import SelectMdx from "./Select.mdx";
+
 const options = [
   "Proxima Centauri",
   "Barnard's Star",
@@ -28,6 +30,12 @@ const options = [
 export default {
   title: `Components/Select`,
   component: Source,
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      page: SelectMdx,
+    },
+  },
   args: {
     label: "Destination Star",
     name: "star",

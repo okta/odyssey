@@ -1,0 +1,139 @@
+# Text Input
+
+Text inputs allow users to edit and input data. They can range from simple search boxes to long-form text areas.
+
+## Anatomy
+
+**STORY MISSING**
+
+## Variants
+
+### Default
+
+This default serves as the basis for our Text Inputs. A shown here, they required paired with a paired Label.
+
+**STORY MISSING**
+
+### Search
+
+Standalone Search provides minimal UI for searching outside of normal form contexts. Search inputs will render with the "Search" UI indicator as well as a visually hidden label.
+
+In this case, we recommend using the placeholder attribute to state the scope of your search. This text should match the hidden label.
+
+**STORY MISSING**
+
+#### Button variant
+
+We also provide an attached button for in-page searching or avoiding placeholder text. Please follow our [Button guidelines](/components/button) when using these variants.
+
+**STORY MISSING**
+
+### Textarea
+
+Textareas should be used for multi-line text inputs. As the user types the field will grow vertically to accommodate the new lines.
+
+**STORY MISSING**
+
+## States
+
+Text inputs support the following states: enabled, hover, focus, disabled, read-only, optional, and invalid.
+
+### Enabled
+
+Text inputs in their "normal" state are considered enabled. They are ready for user interaction.
+
+**STORY MISSING**
+
+### Hover
+
+Hover states are activated when the user pauses their pointer over the input.
+
+**STORY MISSING**
+
+### Focus
+
+The focus state is a visual affordance that the user has highlighted the input with a pointer, keyboard, or voice.
+
+**STORY MISSING**
+
+### Disabled
+
+Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
+
+The values of disabled inputs will not be submitted.
+
+**STORY MISSING**
+
+### Read-only
+
+Similar to disabled inputs, users cannot modify the values of read-only inputs. However, users can otherwise interact with read-only inputs and select their values for copying.
+
+This state can be helpful when displaying computed or third-party values, or when a submitted form is being processed.
+
+The values of read-only inputs will be submitted.
+
+**STORY MISSING**
+
+### Optional
+
+Odyssey assumes inputs are required by default. Optional inputs should be used to indicate when data is not required for the user to complete a task.
+
+**STORY MISSING**
+
+### Invalid
+
+The invalid state is for inputs with incorrect values or values of the wrong format.
+
+When indicating a validation error, please use a Field Error label to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
+
+**STORY MISSING**
+
+## Content Guidelines
+
+Text inputs support most free-form content, but we offer specific support for email, telephone numbers, and passwords.
+
+### Email
+
+There are no specific UI changes for email addresses, but inputs of this type will validate that the address is properly formatted.
+
+**STORY MISSING**
+
+### Tel
+
+Unlike email fields, tel inputs are not automatically validated because global formats are so varied.
+
+**STORY MISSING**
+
+### Password
+
+Passwords inputs ensure that sensitive content is safely obscured.
+
+**STORY MISSING**
+
+## Accessibility
+
+### Placeholders
+
+Except for Search inputs, we advise against using placeholder text for inputs.
+
+### Purpose
+
+When collecting an individual's personal data, you must define the input's purpose via the `autocomplete` attribute. This allows users to automate the filling of fields and ensures the purpose is known, regardless of the label. A complete list of fields this is required for may be found <a href="https://www.w3.org/TR/WCAG21/#input-purposes">in the WCAG spec</a>.
+
+#### Translation
+
+To prevent triggering a change in page layout, browsers don't translate certain attributes. Because of this, users will see untranslated placeholder text.
+
+#### Recall
+
+Placeholder text disappears when a field is interacted with. For this reason, it's not suitable for formatting guidelines or necessary context.
+
+#### Utility
+
+Placeholder content is limited to static text. Additionally, placeholder text is truncated beyond the width of its input.
+
+#### Field value confusion
+
+Low-contrast placeholders may be illegible for some users. Yet, placeholders with compliant contrast can be mistaken for field values. High Contrast Mode will make placeholders and values appear identical.
+
+Finally, Users with low digital literacy may not understand the purpose or behavior of placeholder text.

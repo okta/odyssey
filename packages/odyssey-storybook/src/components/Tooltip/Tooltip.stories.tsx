@@ -15,11 +15,16 @@ import { action } from "@storybook/addon-actions";
 import { Tooltip, TooltipProps, Button } from "@okta/odyssey-react";
 import { Tooltip as Source } from "../../../../odyssey-react/src";
 
+import TooltipMdx from "./Tooltip.mdx";
+
 export default {
   title: `Components/Tooltip`,
   component: Source,
   parameters: {
     layout: "centered",
+    docs: {
+      page: TooltipMdx,
+    },
   },
 };
 
