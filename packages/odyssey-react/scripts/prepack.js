@@ -16,6 +16,6 @@ const { resolve } = require("path");
 const pkgPath = resolve(__dirname, "../package.json");
 
 // eslint-disable-next-line no-unused-vars
-const { scripts, ...pkgNoScripts } = require(pkgPath);
+const { scripts, devDependencies, ...pkg } = require(pkgPath);
 
-writeFileSync(pkgPath, JSON.stringify(pkgNoScripts, null, 2) + "\n");
+writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
