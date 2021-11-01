@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@applitools/eyes-storybook": "^3.24.0",
-    "@okta/odyssey-react": "^0.8.0",
+    "@okta/odyssey-react": "^0.8.1",
     "@pxblue/storybook-rtl-addon": "^1.0.1",
     "@storybook/addon-a11y": "^6.3.7",
     "@storybook/addon-actions": "^6.3.7",
@@ -21,7 +21,7 @@
     "@storybook/react": "^6.3.7"
   },
   "devDependencies": {
-    "@okta/odyssey-typescript": "^0.8.0",
+    "@okta/odyssey-typescript": "^0.8.1",
     "@types/mdx": "^2.0.1",
     "@types/react": "^17.0.30"
   }
