@@ -12,7 +12,7 @@
 
 import type { ReactNode, ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
-import { useCx, useOmit } from "../../utils";
+import { useCx, useOmit, withStyles } from "../../utils";
 import styles from "./Text.module.scss";
 
 type TagProps =
@@ -113,7 +113,7 @@ interface PropsAbbr extends Props {
 /**
  * A component which provides style for visible text elements.
  */
-const Text = forwardRef<HTMLElement, Props | PropsCite | PropsAbbr>(
+let Text = forwardRef<HTMLElement, Props | PropsCite | PropsAbbr>(
   (props, ref) => {
     const {
       children,
@@ -152,4 +152,8 @@ const Text = forwardRef<HTMLElement, Props | PropsCite | PropsAbbr>(
   }
 );
 
-export default Text;
+Text.displayName = "Text";
+
+Text = withStyles(styles)(Text);
+
+export { Text };

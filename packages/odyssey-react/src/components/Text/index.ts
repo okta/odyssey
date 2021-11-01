@@ -10,24 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render } from "@testing-library/react";
-import { Text } from "./";
-
-const children = "Text child content.";
-
-describe("Text", () => {
-  it("renders into the document", () => {
-    const { getByText } = render(<Text children={children} />);
-
-    expect(getByText(children)).toBeInTheDocument();
-  });
-
-  it("it allows the user to change the tagName using the as prop", () => {
-    const tagName = "abbr";
-    const { container } = render(<Text as={tagName} children={children} />);
-
-    expect(container.querySelector(tagName)).toBeInTheDocument();
-  });
-
-  a11yCheck(() => render(<Text children={children} />));
-});
+export * from "./Text";
