@@ -11,12 +11,13 @@
  */
 
 import { Story } from "@storybook/react";
-import Text from ".";
-import type { Props } from ".";
+import { Text } from "@okta/odyssey-react";
+import type { TextProps } from "@okta/odyssey-react";
+import { Text as Source } from "../../../odyssey-react/src";
 
 export default {
   title: `Utilities/Text/Styles`,
-  component: Text,
+  component: Source,
   argTypes: {
     children: {
       control: { type: "string" },
@@ -24,11 +25,11 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({ children, ...rest }) => (
+const Template: Story<TextProps> = ({ children, ...rest }) => (
   <Text {...rest}>{children}</Text>
 );
 
-const TemplateWithContainer: Story<Props> = ({ children, ...rest }) => {
+const TemplateWithContainer: Story<TextProps> = ({ children, ...rest }) => {
   /* prettier-ignore */
   const style = {  /* stylelint-disable-line */
     background: "#faf5dc",
