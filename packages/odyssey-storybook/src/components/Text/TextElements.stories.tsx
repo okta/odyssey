@@ -11,15 +11,13 @@
  */
 
 import { Story } from "@storybook/react";
-import Text from ".";
-import Title from "../Title";
-import Link from "../Link";
-import type { Props } from ".";
-import ScreenReaderText from "../ScreenReaderText";
+import { Text, Heading, Link, ScreenReaderText } from "@okta/odyssey-react";
+import type { TextProps } from "@okta/odyssey-react";
+import { Text as Source } from "../../../../odyssey-react/src";
 
 export default {
-  title: `Utilities/Text/Elements`,
-  component: Text,
+  title: `Components/Text/Elements`,
+  component: Source,
   argTypes: {
     children: {
       control: { type: "string" },
@@ -27,11 +25,7 @@ export default {
   },
 };
 
-const Template: Story<Props> = ({ children, as, ...rest }) => (
-  <Text as={as} {...rest}>
-    {children}
-  </Text>
-);
+const Template: Story<TextProps> = (props) => <Text {...props} />;
 
 export const span = Template.bind({});
 span.storyName = "span (default)";
@@ -173,13 +167,13 @@ del.storyName = "del";
 del.parameters = {
   docs: {
     description: {
-      story: `> The &lt;del&gt; HTML element represents a range of text that has been deleted from a document. This can be used when rendering "track changes" 
-        or source code diff information, for example. The &lt;ins&gt; element can be used for the opposite purpose: to indicate text that has been added 
+      story: `> The &lt;del&gt; HTML element represents a range of text that has been deleted from a document. This can be used when rendering "track changes"
+        or source code diff information, for example. The &lt;ins&gt; element can be used for the opposite purpose: to indicate text that has been added
         to the document. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del)
 
 ### Accessibility
 
-Many screen readers do not let users know of the presence of &lt;del&gt;. To fix this, you should consider using the ScreenReaderText component to 
+Many screen readers do not let users know of the presence of &lt;del&gt;. To fix this, you should consider using the ScreenReaderText component to
 prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text,
 this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.`,
     },
@@ -211,8 +205,8 @@ dfn.parameters = {
   docs: {
     description: {
       story: `> The &lt;dfn&gt; is used to indicate the term being defined within the context of a definition phrase or sentence. The &lt;p&gt; element, the &lt;dt&gt;/&lt;dd&gt; pairing, or the &lt;section&gt; element which is the nearest ancestor of the &lt;dfn&gt; is considered to be the definition of the term. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Eldfnent/dfn)
-        There are multiple, valid ways to use &lt;dfn&gt;. 
-        
+        There are multiple, valid ways to use &lt;dfn&gt;.
+
 For the sake of usability, Odyssey recommends you follow one of two formats.
 For most terms, the content of &lt;dfn&gt; should be term you are defining:`,
     },
@@ -516,9 +510,9 @@ varElement.parameters = {
 varElement.args = {
   children: (
     <>
-      <Title level="3">
+      <Heading level="3">
         Solve for <Text as="var">x</Text>
-      </Title>
+      </Heading>
       <Text as="p">
         2<sup>2</sup>(<var>x</var>+3)+9-5=32
       </Text>
