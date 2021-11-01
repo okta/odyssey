@@ -13,10 +13,10 @@
 import { Story } from "@storybook/react";
 import { Text } from "@okta/odyssey-react";
 import type { TextProps } from "@okta/odyssey-react";
-import { Text as Source } from "../../../odyssey-react/src";
+import { Text as Source } from "../../../../odyssey-react/src";
 
 export default {
-  title: `Utilities/Text/Styles`,
+  title: `Components/Text/Styles`,
   component: Source,
   argTypes: {
     children: {
@@ -25,11 +25,9 @@ export default {
   },
 };
 
-const Template: Story<TextProps> = ({ children, ...rest }) => (
-  <Text {...rest}>{children}</Text>
-);
+const Template: Story = (props) => <Text {...props} />;
 
-const TemplateWithContainer: Story<TextProps> = ({ children, ...rest }) => {
+const TemplateWithContainer: Story<TextProps> = (props) => {
   /* prettier-ignore */
   const style = {  /* stylelint-disable-line */
     background: "#faf5dc",
@@ -42,7 +40,7 @@ const TemplateWithContainer: Story<TextProps> = ({ children, ...rest }) => {
 
   return (
     <div style={style}>
-      <Text {...rest}>{children}</Text>
+      <Text {...props} />
     </div>
   );
 };

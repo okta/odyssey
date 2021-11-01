@@ -30,6 +30,7 @@ export * from "./Status";
 export * from "./Tab";
 export * from "./Table";
 export * from "./Tag";
+export * from "./Text";
 export * from "./TextArea";
 export * from "./TextInput";
 export * from "./Toast";

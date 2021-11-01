@@ -12,6 +12,7 @@
 
 import type { ReactNode, ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
+import type { ReactNode } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import styles from "./Text.module.scss";
 
@@ -46,6 +47,11 @@ export interface Props
    * Text content to be rendered
    */
   children: ReactNode;
+
+  /**
+   * Text content to be rendered
+   */
+  children?: ReactNode;
 
   /**
    * The semantic element to be rendered in to the DOM
