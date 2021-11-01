@@ -14,9 +14,17 @@ import type { Story } from "@storybook/react";
 import { Link, LinkProps, Icon, GetInfoIcon } from "@okta/odyssey-react";
 import { Link as Source } from "../../../../odyssey-react/src";
 
+import LinkMdx from "./Link.mdx";
+
 export default {
   title: `Components/Link`,
   component: Source,
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      page: LinkMdx,
+    },
+  },
 };
 
 const Template: Story<LinkProps> = ({

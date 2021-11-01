@@ -15,9 +15,17 @@ import { useEffect } from "react";
 import { Checkbox as Source } from "../../../../odyssey-react/src";
 import { Checkbox, CheckboxProps, ScreenReaderText } from "@okta/odyssey-react";
 
+import CheckboxMdx from "./Checkbox.mdx";
+
 export default {
   title: `Components/Checkbox`,
   component: Source,
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      page: CheckboxMdx,
+    },
+  },
   args: {
     label: "Checkbox label",
     value: "checkbox_value",

@@ -19,9 +19,17 @@ import {
   SettingsIcon,
 } from "@okta/odyssey-react";
 
+import ButtonMdx from "./Button.mdx";
+
 export default {
   title: `Components/Button`,
   component: Source,
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      page: ButtonMdx,
+    },
+  },
   argTypes: {
     children: {
       control: "text",

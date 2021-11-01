@@ -17,7 +17,7 @@ export const parameters = {
     },
   },
   previewTabs: {
-    docs: { hidden: true },
+    "storybook/docs/panel": { index: -1 },
   },
   backgrounds: {
     default: "white",
