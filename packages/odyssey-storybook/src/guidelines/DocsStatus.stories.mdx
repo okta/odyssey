@@ -1,0 +1,72 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guidelines/Docs Status" />
+
+# Docs Status
+
+This document serves as a scratch pad for the docs migration effort.
+
+"Current Status" provides a glimpse-friendly look at where the migration effort is at.
+
+The "General Items" section below applies to either all stories or Storybook generally.
+
+The "Components" section lists special considerations specific to each story. More often than not, this will entail missing or mismatched stories.
+
+Regarding stories: the "Existing" headings inventory those stories that exist in SB today, along with any caveats. "Assumed" inventories the stories assumed by the previous docs.
+
+## Current Status
+
+Docs content has been migrated as-is and is undergoing an audit for parity and quality.
+
+The result of this audit will be an inventory of items to discuss that can be turned into discrete, actionable tickets.
+
+## General Items
+
+### Missing
+
+- Component Anatomy is missing throughout.
+- Mismatch between SB typography and React typography.
+- All Component docs pages should surface an ArgsTable
+  - Are there any args, per component, that we want to hide?
+
+### Broken
+
+- Links need to be rewritten throughout.
+
+### Open Questions
+
+- How do we want to style internal reference tables? Using `<table>` for SB styling? Using `Table` for React dogfood?
+- How do we author stories for Bad Examples?
+- Should we have stories for all available optional-part combinations?
+  - If not, what do we document and test visually?
+
+## Components
+
+### Banner
+
+#### Stories
+
+The existing Banner stories don't make distinctions regarding the optional and mandatory elements, so all stories currently include all features.
+
+**Recommendation:** Rewrite existing stories to showcase minimal features with additional stories showcasing Title, Dismiss, and Actions.
+
+##### Existing
+
+- Info
+- Danger
+- Caution
+- Dismissable (identical to Info)
+
+##### Assumed
+
+###### Variants
+
+- Info
+- Danger
+- Caution
+
+###### Features
+
+- Title
+- Actions
+- Dismissable
