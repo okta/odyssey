@@ -1,3 +1,5 @@
+# [0.8.1](https://github.com/okta/odyssey/compare/@okta/odyssey_0.8.0...@okta/odyssey-react_0.8.1) (2021-10-29)
+
 # [0.8.0](https://github.com/okta/odyssey/compare/@okta/odyssey_0.7.0...@okta/odyssey-react_0.8.0) (2021-10-28)
 
 ### Bug Fixes
