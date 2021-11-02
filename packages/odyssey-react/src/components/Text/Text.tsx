@@ -10,44 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactNode, ComponentPropsWithRef } from "react";
 import { forwardRef } from "react";
 import type { ReactNode } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
+import type { PolymorphicForwardRef } from "../../utils";
 import styles from "./Text.module.scss";
 
-type TagProps =
-  | "address"
-  | "span"
-  | "div"
-  | "dfn"
-  | "p"
-  | "abbr"
-  | "em"
-  | "strong"
-  | "sup"
-  | "sub"
-  | "blockquote"
-  | "cite"
-  | "del"
-  | "pre"
-  | "var"
-  | "q"
-  | "s"
-  | "samp"
-  | "small"
-  | "kbd"
-  | "ins"
-  | "mark"
-  | "code";
-
-export interface Props
-  extends Omit<ComponentPropsWithRef<TagProps>, "style" | "className"> {
-  /**
-   * Text content to be rendered
-   */
-  children: ReactNode;
-
+export interface TextProps {
   /**
    * Text content to be rendered
    */
@@ -57,7 +26,30 @@ export interface Props
    * The semantic element to be rendered in to the DOM
    * @default span
    */
-  as?: TagProps;
+  as?:
+    | "abbr"
+    | "address"
+    | "blockquote"
+    | "cite"
+    | "code"
+    | "del"
+    | "dfn"
+    | "div"
+    | "em"
+    | "ins"
+    | "kbd"
+    | "mark"
+    | "p"
+    | "pre"
+    | "q"
+    | "s"
+    | "samp"
+    | "small"
+    | "span"
+    | "strong"
+    | "sub"
+    | "sup"
+    | "var";
 
   /**
    * The text color style for the text content.
@@ -91,7 +83,7 @@ export interface Props
 
   /**
    * The font-size for the text content.
-   * @default normal
+   * @default base
    */
   size?: "lede" | "base" | "caption";
 
@@ -108,55 +100,48 @@ export interface Props
   wrap?: "normal" | "breakWord" | "anywhere";
 }
 
-interface PropsCite extends Props {
-  cite?: string;
-}
-
-interface PropsAbbr extends Props {
-  title: string;
-}
-
 /**
  * A component which provides style for visible text elements.
  */
-let Text = forwardRef<HTMLElement, Props | PropsCite | PropsAbbr>(
-  (props, ref) => {
-    const {
-      children,
-      as = "p",
-      color = "body",
-      weight = "regular",
-      fontStyle = "normal",
-      transform = "none",
-      size = "base",
-      wrap = "normal",
-      lineHeight = "normal",
-      ...rest
-    } = props;
+let Text = forwardRef((props, ref) => {
+  const {
+    children,
+    as = "span",
+    color = "body",
+    weight = "regular",
+    fontStyle = "normal",
+    transform = "none",
+    size = "base",
+    wrap = "normal",
+    lineHeight = "normal",
+    ...rest
+  } = props;
 
-    const Tag = as;
+  const Tag = as;
 
-    const componentClass = useCx(
-      styles.root,
-      styles[as],
-      styles[color + "Color"],
-      styles[weight + "Weight"],
-      styles[fontStyle + "Style"],
-      styles[transform + "Transform"],
-      styles[size + "Size"],
-      styles[wrap + "Wrap"],
-      styles[lineHeight + "LineHeight"]
-    );
+  const componentClass = useCx(
+    styles.root,
+    styles[as],
+    styles[color + "Color"],
+    styles[weight + "Weight"],
+    styles[fontStyle + "Style"],
+    styles[transform + "Transform"],
+    styles[size + "Size"],
+    styles[wrap + "Wrap"],
+    styles[lineHeight + "LineHeight"]
+  );
 
-    const omitProps = useOmit(rest);
+  const omitProps = useOmit(rest);
 
-    return (
-      <Tag ref={ref} {...omitProps} className={componentClass}>
-        {children}
-      </Tag>
-    );
-  }
-);
+  return (
+    <Tag
+      {...omitProps}
+      ref={ref}
+      className={componentClass}
+      children={children}
+    />
+  );
+}) as PolymorphicForwardRef<"span", TextProps>;
 
 Text.displayName = "Text";
 

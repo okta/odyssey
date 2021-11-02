@@ -25,7 +25,7 @@ export default {
   },
 };
 
-const Template: Story = (props) => <Text {...props} />;
+const Template: Story<TextProps> = (props) => <Text as="span" {...props} />;
 
 const TemplateWithContainer: Story<TextProps> = (props) => {
   /* prettier-ignore */
@@ -40,7 +40,7 @@ const TemplateWithContainer: Story<TextProps> = (props) => {
 
   return (
     <div style={style}>
-      <Text {...props} />
+      <Text as="span" {...props} />
     </div>
   );
 };
