@@ -10,28 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./Banner";
 export * from "./Box";
-export * from "./Button";
-export * from "./Checkbox";
-export * from "./CircularLoadIndicator";
-export * from "./Field";
-export * from "./FieldGroup";
-export * from "./Form";
-export * from "./Heading";
-export * from "./Icon";
-export * from "./Infobox";
-export * from "./Link";
-export * from "./List";
-export * from "./Modal";
-export * from "./Radio";
-export * from "./ScreenReaderText";
-export * from "./Select";
-export * from "./Status";
-export * from "./Tab";
-export * from "./Table";
-export * from "./Tag";
-export * from "./TextArea";
-export * from "./TextInput";
-export * from "./Toast";
-export * from "./Tooltip";
