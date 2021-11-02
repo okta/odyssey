@@ -29,6 +29,33 @@ The result of this audit will be an inventory of items to discuss that can be tu
 - All Component docs pages should surface an ArgsTable
   - Are there any args, per component, that we want to hide?
 
+#### Components
+
+The following components are missing documentation:
+
+- Circular Load Indicator
+- Field
+- Field Group
+- Form
+- Heading
+- Icon
+- List
+- Screen Reader Text
+- Text Area (previously with Text Input
+
+#### Guidelines
+
+The following guidelines have not been migrated:
+
+- Color
+- Design Tokens
+- Elements
+- Typography
+- Iconography
+- Updates
+- Help
+- Figma link
+
 ### Broken
 
 - Links need to be rewritten throughout.
@@ -39,6 +66,13 @@ The result of this audit will be an inventory of items to discuss that can be tu
 - How do we author stories for Bad Examples?
 - Should we have stories for all available optional-part combinations?
   - If not, what do we document and test visually?
+- What should the default tab be? What should that behavior look like? Test `viewMode: 'docs'`
+- Story style is inconsistent between example content and descriptive content. Rec: example content
+- How do we best document browser states like `:hover` for the user?
+  - Should these require interaction?
+  - What about `:disabled`?
+- Related, how do we best document stories re: grammar or word choice?
+- How should we order content sections?
 
 ## Components
 
@@ -70,3 +104,64 @@ The existing Banner stories don't make distinctions regarding the optional and m
 - Title
 - Actions
 - Dismissable
+
+### Button
+
+#### Stories
+
+We are missing browser-state stories for Button (e.g. `:hover`, `:focus`, `:disabled`).
+
+- Should these examples be provided in the docs for each component with browser states?
+- Are these stories? Something else?
+
+We're missing stories for Good/Bad usage examples as well as content-specific examples (e.g. capitalization, word choice).
+
+### Checkbox
+
+#### Stories
+
+- Checkbox stories always include error text, which is styled incorrectly.
+- Similar issue with Button re: browser state examples.
+- Checkbox stories default to invalid due to styling.
+
+### Field
+
+The docs for Field have been migrated over from Field Label. Field, FieldGroup, and Form all need net new documentation.
+
+This older deployment offers a starting point: https://9d6b542.ods.dev/components/form/
+
+### Icon
+
+Previously, Icon was not a component, so those "guideline" docs have not been migrated.
+
+### Infobox
+
+#### Stories
+
+Similar to Banner, Infobox stories surface all options up front, with no visual examples for optional components like Actions. Nor do they surface alternate approaches for Actions (inline action vs actions section).
+
+We're also missing examples for content guidelines.
+
+### Link
+
+#### Documentation
+
+We're missing documentation for the Secondary link variant.
+
+#### Stories
+
+As above, we're missing examples for content guidelines and content variants (like mailto).
+
+### Modal
+
+#### Stories
+
+The existing Modal story doesn't surface any controls and defaults to open - making them unusable for docs.
+
+### Radio
+
+#### Stories
+
+Like Checkbox, our Radios default to an invalid state since they're required and relying on browser validation.
+
+We're also missing stateful stories as above.

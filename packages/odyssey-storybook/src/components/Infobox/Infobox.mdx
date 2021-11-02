@@ -1,10 +1,12 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
 # Infobox
 
 An infobox is a type of alert that provides feedback in response to a user action or system activity.
 
 ## Anatomy
 
-**STORY MISSING**
+**ANATOMY MISSING**
 
 ## Behavior
 
@@ -16,7 +18,7 @@ This component may be present on load or triggered by different types of events,
 
 Use Infoboxes for communicating important guidance to the user. When using the Info variant, consider if plain copy will suffice on the page itself first. Reserve this component for "can’t miss" instructions.
 
-**STORY MISSING**
+<Story id="components-infobox--info"/>
 
 ### Danger
 
@@ -24,7 +26,7 @@ Use Danger Infoboxes to inform users that an error has occurred. You may also in
 
 Include guidance to make sure users know what steps to take to address the error or avoid data loss.
 
-**STORY MISSING**
+<Story id="components-infobox--danger"/>
 
 ### Caution
 
@@ -32,13 +34,13 @@ Use Caution Infoboxes to inform users of tasks or processes that need their atte
 
 When using the Caution variant, ensure the user does not need more context than you can give in the space available.
 
-**STORY MISSING**
+<Story id="components-infobox--caution"/>
 
 ### Success
 
 Use Success Infoboxes for reporting successful actions, processes, or states to the user.
 
-**STORY MISSING**
+<Story id="components-infobox--success"/>
 
 ## Usage
 
@@ -83,6 +85,10 @@ Both Title and Content are optional, but at least one of them is required.
 ## Accessibility
 
 When deploying Infoboxes, two `role`s may apply. Danger variants should utilize the `alert` role, as their contents represent immediate risk or failure. Success and Caution variants are better suited to the `status` role, which provides a less urgent announcement on appearance. The Info variant does not require a `role`, as it represents plain content.
+
+## Arguments
+
+<ArgsTable/>
 
 ## References
 

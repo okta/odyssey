@@ -1,10 +1,12 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
 # Link
 
 Links are navigation elements displayed as text. Use a Link to bring a user to another page or start a download.
 
 ## Anatomy
 
-**STORY MISSING**
+**ANATOMY MISSING**
 
 ## Variants
 
@@ -17,7 +19,7 @@ Use an external link when:
 - The destination of the link aids in the completion of a task on the current tab (e.g. help documentation)
 - Opening the link in the current tab would result in loss of data or task interruption (e.g. completing a long form)
 
-**STORY MISSING**
+<Story id="components-link--external"/>
 
 ## States
 
@@ -49,7 +51,7 @@ Icons may be included in standalone links. They are not supported within paragra
 
 Icon layout is automatic, based on language direction.
 
-**STORY MISSING**
+<Story id="components-link--with-icon"/>
 
 ### Mailto
 
@@ -64,6 +66,10 @@ Avoid colloquial text that hides the associated email (e.g. "Contact Us").
 Links in Odyssey are not underlined. They maintain a minimum 3:1 contrast ratio with our body text colors and a 4.5:1 ratio with our available background colors. If you deviate from these standards via overrides, ensure that your links have a non-color indicator like an underline.
 
 Links should display a visible affordance when users interact via keyboard. Odyssey preserves the default `:focus` state for each browser.
+
+## Arguments
+
+<ArgsTable/>
 
 ## References
 
