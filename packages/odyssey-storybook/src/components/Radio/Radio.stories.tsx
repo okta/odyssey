@@ -20,7 +20,6 @@ export default {
   title: `Components/Radio`,
   component: Source.Group,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: RadioMdx,
     },

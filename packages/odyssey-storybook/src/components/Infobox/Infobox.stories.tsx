@@ -20,7 +20,6 @@ export default {
   title: `Components/Infobox`,
   component: Source,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: InfoboxMdx,
     },

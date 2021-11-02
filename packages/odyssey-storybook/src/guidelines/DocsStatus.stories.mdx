@@ -165,3 +165,69 @@ The existing Modal story doesn't surface any controls and defaults to open - mak
 Like Checkbox, our Radios default to an invalid state since they're required and relying on browser validation.
 
 We're also missing stateful stories as above.
+
+### Select
+
+- The Select ArgsTable doesn't display any inputs.
+
+#### Stories
+
+- Stateful stories missing
+- Invalid story missing
+- Usage specific example missing
+- Group story not documented
+- Controlled story not documented
+
+### Status
+
+#### Stories
+
+- Missing usage example
+- Missing content example
+
+### Tab
+
+- ArgsTable is showing no inputs
+
+#### Stories
+
+- Tabs are missing all Do/Don't examples
+
+### Table
+
+The large content types example relies on a ton of bespoke styling.
+
+#### Stories
+
+- Default Table is a sorted table, not a plain Table
+- Empty Table has incorrect styling
+- Missing Row Heading story
+- Missing large content types example
+
+### Tag
+
+#### Stories
+
+- Do/Don't examples are missing
+
+### Text Input
+
+#### Stories
+
+Text Input is missing stories for all browser states, as well as stories for alternate `type`s like `email`.
+
+We're also missing stories for variants like "Input with Button".
+
+### Toast
+
+Overall, Toast stories are not built for example use cases.
+
+Likely, we will want to deviate from our previous behavior, instead showcasing pre-rendered Toasts on-page, instead of requiring a button-press for all examples.
+
+However, the provider story may benefit from being rewritten to allow for a more docs-friendly display.
+
+### Tooltip
+
+#### Stories
+
+Tooltip currently provides a single story that surfaces all possible positioning. This precludes us from using that story as a baseline for Context or Do/Don't examples - or even showcasing an individual example of Tooltipped element.

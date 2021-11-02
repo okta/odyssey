@@ -31,7 +31,6 @@ export default {
   title: `Components/Select`,
   component: Source,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: SelectMdx,
     },
