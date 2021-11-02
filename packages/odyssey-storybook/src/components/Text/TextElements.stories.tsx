@@ -25,7 +25,7 @@ export default {
   },
 };
 
-const Template: Story<TextProps> = (props) => <Text {...props} />;
+const Template: Story<TextProps> = (props) => <Text as="span" {...props} />;
 
 export const span = Template.bind({});
 span.storyName = "span (default)";
