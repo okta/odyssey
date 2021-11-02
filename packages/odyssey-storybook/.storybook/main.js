@@ -17,6 +17,7 @@ module.exports = {
     checkOptions: {},
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
+      customComponentTypes: ["PolymorphicForwardRef"],
       shouldExtractLiteralValuesFromEnum: true,
       propFilter: (prop) => {
         if (!prop.parent) return true;
