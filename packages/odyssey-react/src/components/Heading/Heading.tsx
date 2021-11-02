@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ComponentPropsWithRef, ReactText, ReactNode } from "react";
+import type { ComponentPropsWithRef, ReactNode } from "react";
 import { forwardRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import styles from "./Heading.module.scss";
@@ -31,7 +31,7 @@ export interface HeadingProps
   /**
    * The human readable section title to be visually displayed
    */
-  children: ReactText | ReactNode;
+  children: ReactNode;
 
   /**
    * Remove default block end margin
