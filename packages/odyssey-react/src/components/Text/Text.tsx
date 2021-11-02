@@ -20,7 +20,7 @@ export interface TextProps {
   /**
    * Text content to be rendered
    */
-  children?: ReactNode;
+  children: ReactNode;
 
   /**
    * The semantic element to be rendered in to the DOM
