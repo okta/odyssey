@@ -1,31 +1,31 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 
-<Meta title="Guidelines/Docs Status" />
+<Meta title="Welcome/Docs Status" />
 
 # Docs Status
 
-This document serves as a scratch pad for the docs migration effort.
+This document serves as a scratch pad for the ongoing docs migration effort.
 
-"Current Status" provides a glimpse-friendly look at where the migration effort is at.
+**"Current Status"** provides a glimpse-friendly look at where the migration effort is at.
 
-The "General Items" section below applies to either all stories or Storybook generally.
+**"General Items"** section below applies to either all stories or Storybook generally.
 
-The "Components" section lists special considerations specific to each story. More often than not, this will entail missing or mismatched stories.
-
-Regarding stories: the "Existing" headings inventory those stories that exist in SB today, along with any caveats. "Assumed" inventories the stories assumed by the previous docs.
+**"Components"** section lists special considerations specific to each story. More often than not, this will entail missing or mismatched stories.
 
 ## Current Status
 
 Docs content has been migrated as-is and is undergoing an audit for parity and quality.
 
-The result of this audit will be an inventory of items to discuss that can be turned into discrete, actionable tickets.
+This document will be kept up to date as this effort progresses.
 
 ## General Items
 
 ### Missing
 
-- Component Anatomy is missing throughout.
-- SB Theme for visual consistency. (e.g. mismatch between SB typography and component typography)
+- Component Anatomy is missing throughout
+- Examples that require generative CSS no longer work (see: Colors, Typography)
+- Examples that require global CSS no longer work (See: Elements)
+- SB styles differ from Odyssey styles in ways that may cause confusion
 
 #### Components
 
@@ -41,15 +41,10 @@ The following components are missing documentation:
 - Screen Reader Text
 - Text Area (previously with Text Input)
 
-#### Guidelines
+#### Supporting Content
 
-The following guidelines have not been migrated:
+The following supporting content has not been migrated:
 
-- Color
-- Design Tokens
-- Elements
-- Typography
-- Iconography
 - Updates
 - Help
 - Figma link
@@ -57,17 +52,20 @@ The following guidelines have not been migrated:
 ### Open Questions
 
 - How do we want to style internal reference tables? Using `<table>` for SB styling? Using `Table` for React dogfood?
-- How do we author stories for Bad Examples?
 - Should we have stories for all available optional-part combinations?
   - If not, what do we document and test visually?
 - What should the default tab be? What should that behavior look like? Test `viewMode: 'docs'`
-- Story style is inconsistent between example content and descriptive content. Rec: example content
 - Are there any args, per component, that we want to hide from ArgsTable?
 - How do we best document browser states like `:hover` for the user?
   - Should these require interaction?
   - What about `:disabled`?
-- Related, how do we best document stories re: grammar or word choice?
-- How should we order content sections?
+- How should we order content sections within Docs?
+
+### General Proposals
+
+- Provide Good/Bad and copywriting examples via MDX-inline stories rather than CSF
+- Rewrite all story content to be exemplary rather than descriptive ("Launch rocket" rather than "Button label")
+- Rewrite stories to document optional component parts separately (Banners with and without Titles, Actions)
 
 ## Components
 
