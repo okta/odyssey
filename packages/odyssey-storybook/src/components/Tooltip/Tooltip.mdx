@@ -1,10 +1,12 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
 # Tooltip
 
 A transient element that provides additional context for an element when it receives hover or focus.
 
 ## Anatomy
 
-**STORY MISSING**
+**ANATOMY MISSING**
 
 ## Behavior
 
@@ -30,7 +32,7 @@ Use Tooltips with all controls that rely solely on iconography for communicating
 
 This is especially important to distinguish between visually or contextually similar UI. Tooltips are also helpful with rarely-used features or features with variant interpretations.
 
-Our <a href="/components/button/">Button</a> component offers more guidance if needed.
+Our [Button](?path=/docs/components-button--primary#button) component offers more guidance if needed.
 
 **STORY MISSING**
 
@@ -63,7 +65,7 @@ When positioning a Tooltip, ensure:
 - Placement doesn't interfere with the object of interest or relevant information.
 - The Tooltip is always visible when activated, not cropped or off-page.
 
-**STORY MISSING**
+<Story id="components-tooltip--default" />
 
 ## Content
 
@@ -86,7 +88,7 @@ Tooltips should contain static content. Users don't expect, and are unlikely to 
 
 ### Animation
 
-Per <a href="https://www.w3.org/TR/wai-aria-1.1/#tooltip">ARIA guidelines</a>, our tooltips triggered by hovering or focusing UI and employ a short delay before animating.
+Per [ARIA guidelines](https://www.w3.org/TR/wai-aria-1.1/#tooltip), our tooltips triggered by hovering or focusing UI and employ a short delay before animating.
 
 ### Tooltip as a label
 
@@ -103,3 +105,7 @@ Focusing and hovering are typically unavailable on touchscreen devices. Some dev
 Consider fallback alternatives on a case-by-case basis.
 
 When possible, provide inline text that becomes visible on touchscreen devices. Otherwise, a fixed-position fallback is provided for mobile devices.
+
+## Arguments
+
+<ArgsTable />

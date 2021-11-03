@@ -20,7 +20,6 @@ export default {
   title: `Components/Field`,
   component: Source,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: FieldMdx,
     },

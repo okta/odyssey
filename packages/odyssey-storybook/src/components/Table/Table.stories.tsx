@@ -21,7 +21,6 @@ export default {
   title: `Components/Table`,
   component: Source,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: TableMdx,
     },
