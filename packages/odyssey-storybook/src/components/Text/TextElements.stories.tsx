@@ -153,12 +153,7 @@ code.parameters = {
   },
 };
 code.args = {
-  children: (
-    <Text as="p">
-      The <Text as="code">pop()</Text> array method removes the last element of
-      an array and returns that element.
-    </Text>
-  ),
+  children: "console.log(`Hello world`);",
   as: "code",
 };
 
