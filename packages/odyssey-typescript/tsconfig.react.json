@@ -7,6 +7,6 @@
     "module": "es2020",
     "target": "es2020",
     "isolatedModules": true,
-    "jsx": "react-jsx"
+    "jsx": "react"
   }
 }
