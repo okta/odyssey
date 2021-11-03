@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactElement, ReactText } from "react";
-import { forwardRef } from "react";
 import { withStyles, useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
 
