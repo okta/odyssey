@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+const { ProvidePlugin } = require("webpack");
+
 module.exports = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   typescript: {
@@ -41,6 +43,11 @@ module.exports = {
       ],
       babelrc: false,
       configFile: false,
+    });
+  },
+  webpackFinal(config) {
+    return Object.assign(config, {
+      plugins: [...config.plugins, new ProvidePlugin({ React: "react" })],
     });
   },
   addons: [

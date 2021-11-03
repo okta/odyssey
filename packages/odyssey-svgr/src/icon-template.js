@@ -45,7 +45,7 @@ function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
   return typeScriptTpl.ast`
 ${headerComment}
 
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 import { useOmit } from '../../utils';
 import { SvgIcon } from './SvgIcon';
 import type { SvgIconNoChildrenProps } from './types';
