@@ -10,29 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const lowerCamel = /^[a-z][a-zA-Z0-9]*$/;
-const lowerCamelMessage = (type) =>
-  `${type} should be written in lower camel case (e.g. fooBarBaz)`;
-
-module.exports = {
-  extends: "@okta/odyssey-stylelint",
-  rules: {
-    "selector-max-class": 2,
-    "selector-max-id": 0,
-    "selector-max-type": 0,
-    "selector-max-universal": 0,
-    "selector-no-vendor-prefix": true,
-    "selector-class-pattern": [
-      lowerCamel,
-      {
-        message: lowerCamelMessage("Selector"),
-      },
-    ],
-    "keyframes-name-pattern": [
-      lowerCamel,
-      {
-        message: lowerCamelMessage("Keyframes"),
-      },
-    ],
-  },
-};
+export * from "./Text";
