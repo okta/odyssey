@@ -10,13 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, {
-  Children,
-  cloneElement,
-  ComponentPropsWithRef,
-  forwardRef,
-} from "react";
-import type { ReactElement } from "react";
+import React, { Children, cloneElement, forwardRef } from "react";
+import type { ReactElement, ComponentPropsWithRef } from "react";
 import { useOid, useOmit, withStyles } from "../../utils";
 import styles from "./SvgIcon.module.scss";
 
