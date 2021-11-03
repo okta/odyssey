@@ -110,41 +110,17 @@
         }
       }
     },
-    "background": {
-      "primary": {
-        "comment": "Base primary background color",
-        "value": "{color.palette.blue.500.value}"
+    "primary": {
+      "light": { "value": "{color.palette.blue.300.value}" },
+      "base": { "value": "{color.palette.blue.500.value}" },
+      "dark": { "value": "{color.palette.blue.900.value}" }
+    },
+    "danger": {
+      "value": {
+        "light": "{color.palette.red.300.value}"
       },
-      "secondary": {
-        "comment": "Base secondary background color",
-        "value": "{color.palette.neutral.white.value}"
-      },
-      "danger": {
-        "comment": "Base danger background color",
-        "value": "{color.palette.red.500.value}"
-      },
-      "clear": {
-        "comment": "Base clear background color",
-        "value": "transparent"
-      },
-      "button": {
-        "primary": {
-          "comment": "Button primary background color",
-          "value": "{color.background.primary.value}"
-        },
-        "secondary": {
-          "comment": "Button secondary background color",
-          "value": "{color.background.secondary.value}"
-        },
-        "danger": {
-          "comment": "Button danger background color",
-          "value": "{color.background.danger.value}"
-        },
-        "clear": {
-          "comment": "Button clear background color",
-          "value": "{color.background.clear.value}"
-        }
-      }
+      "base": { "value": "{color.palette.red.500.value}" },
+      "dark": { "value": "{color.palette.red.900.value}" }
     },
     "text": {
       "base": {
@@ -158,24 +134,6 @@
       "primary": {
         "comment": "Branded text color, primarily used within button",
         "value": "{color.palette.blue.500.value}"
-      },
-      "button": {
-        "primary": {
-          "comment": "Button primary text color",
-          "value": "{color.text.inverse.value}"
-        },
-        "secondary": {
-          "comment": "Button secondary text color",
-          "value": "{color.text.primary.value}"
-        },
-        "danger": {
-          "comment": "Button danger text color",
-          "value": "{color.text.inverse.value}"
-        },
-        "clear": {
-          "comment": "Button clear text color",
-          "value": "{color.text.inverse.value}"
-        }
       }
     }
   }

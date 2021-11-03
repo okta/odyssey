@@ -1,0 +1,60 @@
+{
+  "button": {
+    "color": {
+      "background": {
+        "primary": {
+          "comment": "Base primary background color",
+          "value": "{color.primary.base}"
+        },
+        "secondary": {
+          "comment": "Base secondary background color",
+          "value": "{color.palette.neutral.white.value}"
+        },
+        "danger": {
+          "comment": "Base danger background color",
+          "value": "{color.danger.base}"
+        },
+        "clear": {
+          "comment": "Base clear background color",
+          "value": "transparent"
+        }
+      },
+      "text": {
+        "primary": {
+          "comment": "Button primary text color",
+          "value": "{color.text.inverse.value}"
+        },
+        "secondary": {
+          "comment": "Button secondary text color",
+          "value": "{color.text.primary.value}"
+        },
+        "danger": {
+          "comment": "Button danger text color",
+          "value": "{color.text.inverse.value}"
+        },
+        "clear": {
+          "comment": "Button clear text color",
+          "value": "{color.text.inverse.value}"
+        }
+      }
+    },
+    "border": {
+      "primary": {
+        "comment": "Base primary background color",
+        "value": "{color.primary.base}"
+      },
+      "secondary": {
+        "comment": "Base secondary background color",
+        "value": "{color.primary.base}"
+      },
+      "danger": {
+        "comment": "Base danger background color",
+        "value": "{color.danger.base}"
+      },
+      "clear": {
+        "comment": "Base clear background color",
+        "value": "transparent"
+      }
+    }
+  }
+}
