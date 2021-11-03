@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import type { Story } from "@storybook/react";
 import { Status, StatusProps } from "@okta/odyssey-react";
 import { Status as Source } from "../../../../odyssey-react/src";
