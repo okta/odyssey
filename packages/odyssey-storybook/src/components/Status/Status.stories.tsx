@@ -20,7 +20,6 @@ export default {
   title: `Components/Status`,
   component: Source,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: StatusMdx,
     },

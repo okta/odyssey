@@ -20,7 +20,6 @@ export default {
   title: `Components/Tag`,
   component: Source,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: TagMdx,
     },

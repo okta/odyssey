@@ -1,10 +1,12 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
 # Table
 
 Tables provide structure for displaying sets of data across rows and columns. They support multiple content types and some internal actions.
 
 ## Anatomy
 
-**STORY MISSING**
+**ANATOMY MISSING**
 
 ## Behavior
 
@@ -22,7 +24,7 @@ Finally, when a descending heading is clicked, it should swap to unsorted.
 
 When any column becomes sorted, the previously active column should return to an unsorted state.
 
-**STORY MISSING**
+<Story id="components-table--default" />
 
 ## States
 
@@ -31,7 +33,7 @@ When any column becomes sorted, the previously active column should return to an
 If no data is returned - whether due to filtering or an empty data set - be sure to provide a null state for your users. If you can detect why no data was returned, make that clear in the tfoot.
 The data-null attribute will ensure the table styling is adjusted.
 
-**STORY MISSING**
+<Story id="components-table--empty-table" />
 
 ## Usage
 
@@ -51,7 +53,7 @@ If you need to group rows by a shared data point, we also support using rowspan 
 
 Note: spanning multiple rows or columns may cause issues for assistive technologies.
 
-**STORY MISSING**
+<Story id="components-table--row-grouping" />
 
 ## Content guidelines
 
@@ -71,6 +73,7 @@ Currently, we provide extra support for numerical data, dates, Buttons, Statuses
 
 **STORY MISSING**
 
+<ul>
 <li class="desc-counter--item">
 
 <h4 class="desc-counter--title">Checkboxes</h4>
@@ -117,6 +120,7 @@ If a cell is empty, use an en dash (–) to indicate this.
 No extra styling is required when adding Buttons to a table. They will resize to the "Small" variant and align to the baseline of other type in the row.
 
 </li>
+</ul>
 
 ## Accessibility
 
@@ -133,3 +137,7 @@ Captions are visually hidden. Providing a caption will give users of assistive t
 Try to refrain from using complicated table layouts that rely on colspan or rowspan.
 
 This same advice applies to nested tables or hidden rows as well. They can introduce problems that make your table inaccessible for some users.
+
+## Arguments
+
+<ArgsTable />

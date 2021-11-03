@@ -25,7 +25,6 @@ export default {
   title: `Components/Button`,
   component: Source,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: ButtonMdx,
     },

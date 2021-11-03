@@ -20,7 +20,6 @@ export default {
   title: `Components/Tabs`,
   component: Source,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: TabMdx,
     },

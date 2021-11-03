@@ -1,10 +1,12 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
 # Modal
 
 UI that appears on top of the main content and moves the system into a mode requiring user interaction. This dialog disables the main content until the user interacts with the modal dialog.
 
 ## Anatomy
 
-**STORY MISSING**
+**ANATOMY MISSING**
 
 ## Behavior
 
@@ -63,6 +65,10 @@ For convenience, users can exit the modal in a few ways:
 - Clicking or navigating to any element tagged with `data-micromodal-close`
 
 For users happy with their new context, we ensure their attention isn't misdirected. Scrolling on the main content becomes locked, and we inform the browser to lock the `tabindex` to the modal context. This way, regardless of input method, a user's interactions are limited to their new scope.
+
+## Arguments
+
+<ArgsTable />
 
 ## Further reading
 

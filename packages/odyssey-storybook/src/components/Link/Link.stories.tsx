@@ -20,7 +20,6 @@ export default {
   title: `Components/Link`,
   component: Source,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: LinkMdx,
     },

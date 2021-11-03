@@ -21,7 +21,6 @@ export default {
   title: `Components/Checkbox`,
   component: Source,
   parameters: {
-    layout: "fullscreen",
     docs: {
       page: CheckboxMdx,
     },
