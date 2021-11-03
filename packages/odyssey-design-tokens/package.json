@@ -4,7 +4,7 @@
   "main": "dist/js/tokens.js",
   "license": "MIT",
   "scripts": {
-    "build": "node ./scripts/build.js"
+    "build": "style-dictionary build"
   },
   "dependencies": {
     "style-dictionary": "^3.0.1"

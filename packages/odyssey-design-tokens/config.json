@@ -1,0 +1,24 @@
+{
+  "source": ["src/*.json"],
+  "platforms": {
+    "js": {
+      "transformGroup": "js",
+      "files": [
+        {
+          "destination": "dist/js/tokens.js",
+          "format": "javascript/module-flat"
+        }
+      ]
+    },
+    "scss": {
+      "transformGroup": "scss",
+      "files": [
+        {
+          "destination": "dist/scss/tokens.scss",
+          "format": "scss/map-deep",
+          "mapName": "ods-tokens"
+        }
+      ]
+    }
+  }
+}

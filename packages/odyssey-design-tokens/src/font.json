@@ -11,20 +11,20 @@
       }
     },
     "size": {
-      "base": { "value": "16", "themeable": true },
-      "scale": { "value": 1.1487, "themeable": true },
+      "base": { "value": "16" },
+      "scale": { "value": 1.1487 },
       "body": {
-        "lede": { "value": "", "themeable": true },
-        "base": { "value": "", "themeable": true },
-        "caption": { "value": "", "themeable": true }
+        "lede": { "value": "" },
+        "base": { "value": "" },
+        "caption": { "value": "" }
       },
       "title": {
-        "level-1": { "value": "", "themeable": true },
-        "level-2": { "value": "", "themeable": true },
-        "level-3": { "value": "", "themeable": true },
-        "level-4": { "value": "", "themeable": true },
-        "level-5": { "value": "", "themeable": true },
-        "level-6": { "value": "", "themeable": true }
+        "level-1": { "value": "" },
+        "level-2": { "value": "" },
+        "level-3": { "value": "" },
+        "level-4": { "value": "" },
+        "level-5": { "value": "" },
+        "level-6": { "value": "" }
       }
     }
   }
