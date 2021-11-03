@@ -12,7 +12,6 @@
   "main": "src/scss/odyssey.scss",
   "style": "src/scss/odyssey.scss",
   "scripts": {
-    "prepare": "yarn build",
     "build": "sass src/scss/odyssey.scss dist/odyssey.css"
   },
   "devDependencies": {
