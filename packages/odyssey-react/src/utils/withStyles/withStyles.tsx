@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React, { forwardRef } from "react";
 import type { ComponentPropsWithoutRef, ElementRef } from "react";
-import { forwardRef } from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import { withStylesFactory } from "./factory";
 import type { Composable, Styles } from "./factory";

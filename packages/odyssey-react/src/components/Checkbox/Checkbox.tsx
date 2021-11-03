@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback, useRef, useEffect, forwardRef } from "react";
+import React, { useCallback, useRef, useEffect, forwardRef } from "react";
 import type { ComponentPropsWithRef, ChangeEvent } from "react";
 import { CheckIcon, MinusIcon } from "../Icon";
 import styles from "./Checkbox.module.scss";

@@ -10,10 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
-
 import { useOmit, forwardRefWithStatics, withStyles } from "../../utils";
-
 import { TableContainer } from "./TableContainer";
 import { TableHeader } from "./TableHeader";
 import { TableBody } from "./TableBody";

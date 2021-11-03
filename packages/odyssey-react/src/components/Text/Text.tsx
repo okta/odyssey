@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 import type { ReactNode } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import type { PolymorphicForwardRef } from "../../utils";
