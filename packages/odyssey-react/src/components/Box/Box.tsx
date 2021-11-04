@@ -11,16 +11,14 @@
  */
 
 import React, { forwardRef } from "react";
-import type { ComponentPropsWithRef } from "react";
-import { useCx, useOmit, withStyles } from "../../utils";
+import { useCx, useOmit, withStyles, PolymorphicForwardRef } from "../../utils";
 import styles from "./Box.module.scss";
 
 type spacing = "xs" | "s" | "m" | "l" | "xl";
 type overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
 type borderRadius = "base" | "outer" | "none";
 
-export interface BoxProps
-  extends Omit<ComponentPropsWithRef<"div">, "style" | "className"> {
+export interface BoxProps {
   /**
    * Display type
    */
@@ -293,9 +291,10 @@ function convertProp(prop: string) {
 /**
  * Low level building block for ui
  */
-let Box = forwardRef<HTMLDivElement, BoxProps>(
+let Box = forwardRef(
   (
     {
+      as: Tag = "div",
       display,
       position,
       flexDirection,
@@ -501,12 +500,12 @@ let Box = forwardRef<HTMLDivElement, BoxProps>(
 
     const omitProps = useOmit(rest);
     return (
-      <div {...omitProps} className={componentClass} ref={ref}>
+      <Tag {...omitProps} className={componentClass} ref={ref}>
         {children}
-      </div>
+      </Tag>
     );
   }
-);
+) as PolymorphicForwardRef<"div", BoxProps>;
 
 Box.displayName = "Box";
 

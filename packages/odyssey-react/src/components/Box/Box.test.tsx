@@ -21,6 +21,12 @@ describe("Box", () => {
     expect(screen.getByText("box")).toBeVisible();
   });
 
+  it("renders as element", () => {
+    render(<Box as="span">box</Box>);
+
+    expect(screen.getByText("box").tagName.toLowerCase() === "span").toBe(true);
+  });
+
   it("uses the display property to attach a class", () => {
     render(<Box display="inline">box</Box>);
 

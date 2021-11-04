@@ -12,7 +12,7 @@
 
 import React, { ReactElement } from "react";
 import { Story } from "@storybook/react";
-import { Box as Source } from "../../../../odyssey-react/src";
+import { Source } from "../../../../odyssey-react/src/components/Box/Source";
 import { Box, BoxProps, Heading, Text } from "@okta/odyssey-react";
 
 export default {
@@ -20,7 +20,11 @@ export default {
   component: Source,
 };
 
-const Template: Story<BoxProps> = (args) => <Box {...args}>Box</Box>;
+const Template: Story<BoxProps> = (args) => (
+  <Box {...args} tabIndex={0}>
+    Box
+  </Box>
+);
 
 export const Default = Template.bind({});
 
@@ -33,7 +37,6 @@ Default.args = {
   padding: "m",
   focusRing: "primary",
   focusBorderColor: "primary",
-  tabIndex: 0,
 };
 
 export const Background = (): ReactElement => (
@@ -525,6 +528,9 @@ Other.args = { userSelect: "none" };
 
 function pickControls(properties: string[]) {
   const props = [
+    "key",
+    "ref",
+    "as",
     "display",
     "position",
     "flexDirection",
