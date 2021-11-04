@@ -1,0 +1,99 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+$color-background-default: $white;
+
+$color-background-disabled: cv("gray", "000");
+
+$color-background-primary-light: cv("blue", "000");
+$color-background-primary-base: cv("blue", "300");
+$color-background-primary-dark: cv("blue", "900");
+
+$color-background-danger-light: cv("red", "000");
+$color-background-danger-base: cv("red", "300");
+$color-background-danger-dark: cv("red", "500");
+
+$color-background-caution-light: cv("yellow", "000");
+$color-background-caution-base: cv("yellow", "300");
+$color-background-caution-dark: cv("yellow", "500");
+
+$color-background-success-light: cv("green", "000");
+$color-background-success-base: cv("green", "300");
+$color-background-success-dark: cv("green", "600");
+
+/*********************************
+ Backgrounds
+*********************************/
+
+.backgroundColorDefault {
+  background-color: $color-background-default;
+}
+
+.backgroundColorDisabled {
+  background-color: $color-background-disabled;
+}
+
+.backgroundColorPrimaryLight {
+  background-color: $color-background-primary-light;
+}
+
+.backgroundColorPrimaryBase {
+  background-color: $color-background-primary-base;
+}
+
+.backgroundColorPrimaryDark {
+  background-color: $color-background-primary-dark;
+}
+
+.backgroundColorDangerLight {
+  background-color: $color-background-danger-light;
+}
+
+.backgroundColorDangerBase {
+  background-color: $color-background-danger-base;
+}
+
+.backgroundColorDangerDark {
+  background-color: $color-background-danger-dark;
+}
+
+.backgroundColorCautionLight {
+  background-color: $color-background-caution-light;
+}
+
+.backgroundColorCautionBase {
+  background-color: $color-background-caution-base;
+}
+
+.backgroundColorCautionDark {
+  background-color: $color-background-caution-dark;
+}
+
+.backgroundColorSuccessLight {
+  background-color: $color-background-success-light;
+}
+
+.backgroundColorSuccessBase {
+  background-color: $color-background-success-base;
+}
+
+.backgroundColorSuccessDark {
+  background-color: $color-background-success-dark;
+}
+
+/*********************************
+ Shadows
+*********************************/
+
+.boxShadowDefault {
+  box-shadow: $box-shadow-default;
+}

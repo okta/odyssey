@@ -1,0 +1,113 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+/* stylelint-disable property-disallowed-list */
+.paddingXs {
+  padding: $spacing-xs;
+}
+
+.paddingS {
+  padding: $spacing-s;
+}
+
+.paddingM {
+  padding: $spacing-m;
+}
+
+.paddingL {
+  padding: $spacing-l;
+}
+
+.paddingXl {
+  padding: $spacing-xl;
+}
+/* stylelint-enable property-disallowed-list */
+
+.paddingTopXs {
+  padding-block-start: $spacing-xs;
+}
+
+.paddingTopS {
+  padding-block-start: $spacing-s;
+}
+
+.paddingTopM {
+  padding-block-start: $spacing-m;
+}
+
+.paddingTopL {
+  padding-block-start: $spacing-l;
+}
+
+.paddingTopXl {
+  padding-block-start: $spacing-xl;
+}
+
+.paddingRightXs {
+  padding-inline-end: $spacing-xs;
+}
+
+.paddingRightS {
+  padding-inline-end: $spacing-s;
+}
+
+.paddingRightM {
+  padding-inline-end: $spacing-m;
+}
+
+.paddingRightL {
+  padding-inline-end: $spacing-l;
+}
+
+.paddingRightXl {
+  padding-inline-end: $spacing-xl;
+}
+
+.paddingBottomXs {
+  padding-block-end: $spacing-xs;
+}
+
+.paddingBottomS {
+  padding-block-end: $spacing-s;
+}
+
+.paddingBottomM {
+  padding-block-end: $spacing-m;
+}
+
+.paddingBottomL {
+  padding-block-end: $spacing-l;
+}
+
+.paddingBottomXl {
+  padding-block-end: $spacing-xl;
+}
+
+.paddingLeftXs {
+  padding-inline-start: $spacing-xs;
+}
+
+.paddingLeftS {
+  padding-inline-start: $spacing-s;
+}
+
+.paddingLeftM {
+  padding-inline-start: $spacing-m;
+}
+
+.paddingLeftL {
+  padding-inline-start: $spacing-l;
+}
+
+.paddingLeftXl {
+  padding-inline-start: $spacing-xl;
+}
