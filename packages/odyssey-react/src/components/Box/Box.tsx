@@ -305,6 +305,9 @@ let Box = forwardRef<HTMLDivElement, BoxProps>(
       flexShrink,
       alignItems,
       justifyContent,
+      gridTemplateColumns,
+      gridColumn,
+      gridRow,
       width,
       maxWidth,
       height,
@@ -324,6 +327,7 @@ let Box = forwardRef<HTMLDivElement, BoxProps>(
       overflowY,
       borderColor,
       hoverBorderColor,
+      focusBorderColor,
       borderRadius,
       borderTopLeftRadius,
       borderTopRightRadius,
@@ -438,6 +442,10 @@ let Box = forwardRef<HTMLDivElement, BoxProps>(
       flexShrink && styles[`flexShrink${convertProp(flexShrink)}`],
       alignItems && styles[`alignItems${convertProp(alignItems)}`],
       justifyContent && styles[`justifyContent${convertProp(justifyContent)}`],
+      gridTemplateColumns &&
+        styles[`gridTemplateColumns${convertProp(gridTemplateColumns)}`],
+      gridColumn && styles[`gridColumn${convertProp(gridColumn)}`],
+      gridRow && styles[`gridRow${convertProp(gridRow)}`],
       width && styles[`width${convertProp(width)}`],
       maxWidth && styles[`maxWidth${convertProp(maxWidth)}`],
       height && styles[`height${convertProp(height)}`],
@@ -466,6 +474,8 @@ let Box = forwardRef<HTMLDivElement, BoxProps>(
       hoverBorderColor !== "none" && styles.borderBase,
       hoverBorderColor &&
         styles[`hoverBorderColor${convertProp(hoverBorderColor)}`],
+      focusBorderColor &&
+        styles[`focusBorderColor${convertProp(focusBorderColor)}`],
       borderRadius &&
         !Array.isArray(borderRadius) &&
         styles[`borderRadius${convertProp(borderRadius)}`],
