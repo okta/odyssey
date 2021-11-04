@@ -86,7 +86,7 @@ const ActionCard = ({
   return (
     <Box
       borderColor="display"
-      hoverBorderColor="interactive"
+      hoverBorderColor="ui"
       borderRadius="base"
       boxShadow="default"
       hoverBoxShadow="default"
