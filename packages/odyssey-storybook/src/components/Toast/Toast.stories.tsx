@@ -10,14 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import { Story } from "@storybook/react";
 import { FormEventHandler } from "react";
 import { Toast, ToastProps, ToastObject, useToast } from "@okta/odyssey-react";
 import { Toast as Source } from "../../../../odyssey-react/src";
 
+import ToastMdx from "./Toast.mdx";
+
 export default {
   title: `Components/Toast`,
   component: Source,
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      page: ToastMdx,
+    },
+  },
   argTypes: {
     title: {
       defaultValue: "Title",

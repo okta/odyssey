@@ -10,13 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import type { Story } from "@storybook/react";
 import { Tag, TagProps } from "@okta/odyssey-react";
 import { Tag as Source } from "../../../../odyssey-react/src";
 
+import TagMdx from "./Tag.mdx";
+
 export default {
   title: `Components/Tag`,
   component: Source,
+  parameters: {
+    docs: {
+      page: TagMdx,
+    },
+  },
 };
 
 const Template: Story<TagProps> = ({ tags }) => <Tag tags={tags} />;

@@ -10,13 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import { Story } from "@storybook/react";
 import { Infobox, InfoboxProps, Link } from "@okta/odyssey-react";
 import { Infobox as Source } from "../../../../odyssey-react/src";
 
+import InfoboxMdx from "./Infobox.mdx";
+
 export default {
   title: `Components/Infobox`,
   component: Source,
+  parameters: {
+    docs: {
+      page: InfoboxMdx,
+    },
+  },
   argTypes: {
     children: {
       control: { type: null },

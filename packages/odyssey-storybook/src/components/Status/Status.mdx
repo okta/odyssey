@@ -1,0 +1,71 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
+# Status
+
+Status is used to inform users by providing feedback on system states. Status can display broad operational states as well as granular states like user status.
+
+## Anatomy
+
+**ANATOMY MISSING**
+
+## Behavior
+
+Status is not an interactive element. It is only intended to inform. If a Status indicates that a user should take action, be sure to provide the appropriate controls.
+
+## Variants
+
+There are four variants of Status available: Neutral, Success, Caution, and Danger.
+
+### Neutral
+
+Neutral Statuses are gray and should be used to indicate states like "Paused", "Not started", or "Queued".
+
+This is the default variant.
+
+<Story id="components-status--neutral" />
+
+### Success
+
+Success Statuses are green and should be used to indicate states like "Complete", "Active", or "Service operational".
+
+<Story id="components-status--success" />
+
+### Caution
+
+Caution Statuses are yellow and should be used to indicate states like "Attention suggested" or "Service degradation".
+
+<Story id="components-status--caution" />
+
+### Danger
+
+Danger Statuses are red and should be used to indicate states like "Error", "Failure", or "Service disruption".
+
+<Story id="components-status--danger" />
+
+## Usage
+
+Use Status to communicate the state of a discrete item, such as a server or individual process. Both labeled and unlabeled variants are acceptable, but should follow the associated guidelines.
+
+**STORY MISSING**
+
+### Within Table
+
+Table supports Status as a content type. Status requires a distinct column and should not be mixed with other content types.
+
+In this case the column heading acts as the Status label.
+
+## Content guidelines
+
+Statuses content should provide a quick overview. Limit Status descriptor and label text to three words or less. Use sentence casing for both.
+
+**STORY MISSING**
+
+### Statuses without labels
+
+Where necessary, labels may be hidden. If a label is not present, ensure the Status copy communicates appropriate context. Even if the label is hidden, it must be populated to ensure context for users of assistive technology.
+
+<Story id="components-status--with-label-hidden" />
+
+## Arguments
+
+<ArgsTable />

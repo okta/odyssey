@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, useContext, useMemo, useRef } from "react";
+import React, { createContext, useContext, useMemo, useRef } from "react";
 import type {
   FunctionComponent,
   ComponentProps,

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 import type { SvgIconNoChildrenProps } from "./types";
 import { useOmit } from "../../utils";
 import { iconDictionary } from "./";

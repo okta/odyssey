@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const lowerCamel = /^[a-z][a-zA-Z0-9]+$/;
+const lowerCamel = /^[a-z][a-zA-Z0-9]*$/;
 const lowerCamelMessage = (type) =>
   `${type} should be written in lower camel case (e.g. fooBarBaz)`;
 

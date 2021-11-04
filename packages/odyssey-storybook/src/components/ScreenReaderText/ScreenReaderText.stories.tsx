@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import type { Story } from "@storybook/react";
 import { ScreenReaderText, ScreenReaderTextProps } from "@okta/odyssey-react";
 import { ScreenReaderText as Source } from "../../../../odyssey-react/src";

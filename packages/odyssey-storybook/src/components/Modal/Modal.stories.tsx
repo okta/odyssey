@@ -10,14 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { Modal, ModalProps, Button } from "@okta/odyssey-react";
 import { Modal as Source } from "../../../../odyssey-react/src";
 
+import ModalMdx from "./Modal.mdx";
+
 export default {
   title: `Components/Modal`,
   component: Source,
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      page: ModalMdx,
+    },
+  },
   argTypes: {
     open: { control: { type: "boolean" } },
   },

@@ -1,0 +1,143 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
+# Tab
+
+Navigation component used to organize content by grouping similar information on the same page. They allow content to be viewed without having to navigate away from that page or route.
+
+## Anatomy
+
+**ANATOMY MISSING**
+
+## Behavior
+
+Users interact with Tab as they would a button, the main difference is the outcome. By default, the first tab is active and the associated content displayed in the tab panel. Upon selecting a different tab, the tab indicator appears on the selected tab. The tab panel will then update to show the new content.
+
+Additionally, the tab element is keyboard-navigable (See [Accessibility: Keyboard Support](#keyboard-support))
+
+<Story id="components-tabs--default" />
+
+## Usage
+
+Tabs were created to shorten long pages. Before you use these, we’d recommend laying
+out all of the content on your page out first. From there, figure out common themes and
+see what could be grouped together. Those themes should become your Tabs.
+
+### Relate to the page title
+
+Tabs are not navigation. Meaning they don’t take you from place to place. Rather, they are meant for context switching related to the page.
+
+**STORY MISSING**
+
+**STORY MISSING**
+
+### Position above major content
+
+Tabs are best used at the top of the page or situated above the content it’s related to. This will help establish hierarchy.
+
+**STORY MISSING**
+
+**STORY MISSING**
+
+### Don't stack tabs
+
+Use Tab sparingly. Limit the Tab component to one per page, and refrain from including a second set of Tabs within a tabpanel.
+
+**STORY MISSING**
+
+## Content Guidelines
+
+- Refrain from using tabs without tabpanels.
+- Don't have more than 8 tabs in a tablist.
+- Don't add an icon to a tab. Icons should be reserved for very specific things. It can be hard to maintain consistency with use of icons as it pertains to their semantic meanings and meaning to Okta.
+
+## Accessibility
+
+### Keyboard Support
+
+<figure class="ods-table--figure">
+  <table class="ods-table">
+    <caption>
+      When implementing this component you should consider the following
+      keyboard behaviors.
+    </caption>
+    <thead>
+      <tr>
+        <th scope="column">Key</th>
+        <th scope="column">Behavior</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" rowspan="2">
+          <kbd>Tab</kbd>
+        </th>
+        <td>
+          When focus moves in to <code>tablist</code> the focus is placed on the
+          first <code>tab</code> element.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Unlike the right arrow key, if you tab past the last element, the tab
+          focus continues down the page as normal. In this case, it should set
+          focus in to the active <code>tabpanel</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <kbd>Enter</kbd> <kbd>Space</kbd>
+        </td>
+        <td>
+          When focus is placed on a tab, the corresponding <code>tabpanel</code>{" "}
+          is activated/displayed.
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" rowspan="2">
+          <kbd>Right Arrow</kbd>
+        </th>
+        <td>
+          When focus is within the <code>tablist</code> the next tab is
+          selected.
+        </td>
+      </tr>
+      <tr>
+        <td>If the last tab is focused the focus is moved to the first tab.</td>
+      </tr>
+      <tr>
+        <th scope="row" rowspan="2">
+          <kbd>Left Arrow</kbd>
+        </th>
+        <td>
+          When focus is within the <code>tablist</code> the previous tab is
+          selected.
+        </td>
+      </tr>
+      <tr>
+        <td>If the first tab is focused the focus is moved to the last tab.</td>
+      </tr>
+      <tr>
+        <td>
+          <kbd>Home</kbd>
+        </td>
+        <td>If a tab has focus, the focus is moved to the first tab.</td>
+      </tr>
+      <tr>
+        <td>
+          <kbd>End</kbd>
+        </td>
+        <td>If a tab has focus, the focus is moved to the last tab.</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+## Arguments
+
+<ArgsTable />
+
+## References
+
+### Further Reading
+
+- [Tabs Design Pattern in WAI-ARIA Authoring Practices 1.1](https://www.w3.org/TR/wai-aria-practices-1.1/#tabpanel)

@@ -1,0 +1,111 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
+# Tooltip
+
+A transient element that provides additional context for an element when it receives hover or focus.
+
+## Anatomy
+
+**ANATOMY MISSING**
+
+## Behavior
+
+Tooltips activate when a cursor hovers over an element, or an element receives focus. They can be triggered both by a parent container or a paired sibling.
+
+Tooltips vanish when a user stops hovering or changes focus. To maintain parity with the browser's tooltip behavior, they will not disappear otherwise.
+
+The cursor displayed when hovering UI is determined by the element, not the Tooltip.
+
+**STORY MISSING**
+
+## Usage
+
+Use Tooltips to help users understand unfamiliar objects or states that aren’t described by the visible UI.
+
+Well-placed tooltips provide info when needed and need minimal user effort to trigger.
+
+### Use when...
+
+#### No text label is present
+
+Use Tooltips with all controls that rely solely on iconography for communicating meaning.
+
+This is especially important to distinguish between visually or contextually similar UI. Tooltips are also helpful with rarely-used features or features with variant interpretations.
+
+Our [Button](?path=/docs/components-button--primary#button) component offers more guidance if needed.
+
+**STORY MISSING**
+
+#### An element benefits from supplemental information
+
+This may be the case for disabled controls or inline content like abbreviations.
+
+**STORY MISSING**
+
+### Don't use when...
+
+#### Users need to interact with the content
+
+Tooltips are transient by design, which makes them a bad candidate for interactive content. Do not include links, buttons, or other controls within a Tooltip.
+
+**STORY MISSING**
+
+#### Rich content or imagery is required
+
+Tooltips should provide simple, textual descriptions. If your content requires formatting or imagery, users may have difficulty parsing them.
+
+**STORY MISSING**
+
+### Positioning Tooltips
+
+When positioning a Tooltip, ensure:
+
+- The Tooltip is paired with the element being described.
+- You plan for responsive web design concerns.
+- Placement doesn't interfere with the object of interest or relevant information.
+- The Tooltip is always visible when activated, not cropped or off-page.
+
+<Story id="components-tooltip--default" />
+
+## Content
+
+### Succinct
+
+Tooltips should contain short, descriptive text. A single sentence or even a sentence fragment is ideal.
+
+The content should be new information. Tooltips should not repeat copy from visible UI.
+
+### Static
+
+Tooltips should contain static content. Users don't expect, and are unlikely to notice, dynamic changes to Tooltip contents.
+
+**Exception:** Tooltips may contain dynamic content if two requirements are met:
+
+- The tooltip is present at all times during the content change
+- The tooltip is reporting real-time change (e.g. "Copy" changes to "Copied!" on a click-to-copy button)
+
+## Accessibility
+
+### Animation
+
+Per [ARIA guidelines](https://www.w3.org/TR/wai-aria-1.1/#tooltip), our tooltips triggered by hovering or focusing UI and employ a short delay before animating.
+
+### Tooltip as a label
+
+When using tooltips as a label, assistive technologies will treat the Tooltip content as a name.
+
+Assistive technologies will read out this example as "Edit".
+
+**STORY MISSING**
+
+## Responsive considerations
+
+Focusing and hovering are typically unavailable on touchscreen devices. Some devices may also trigger a "click" at the same time. For this reason, Tooltips may be completely invisible for users of these devices.
+
+Consider fallback alternatives on a case-by-case basis.
+
+When possible, provide inline text that becomes visible on touchscreen devices. Otherwise, a fixed-position fallback is provided for mobile devices.
+
+## Arguments
+
+<ArgsTable />

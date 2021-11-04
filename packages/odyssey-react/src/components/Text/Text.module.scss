@@ -1,0 +1,351 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+.root {
+  color: $text-body;
+  font-family: $body-font-family;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: $base-line-height;
+  font-feature-settings: "lnum", "pnum";
+  text-decoration-skip-ink: all;
+
+  // stylelint-disable-next-line selector-max-type
+  abbr,
+  &.abbr {
+    border-block-end: 1px dashed $color-primary-dark;
+    text-decoration: none;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  em,
+  &.em {
+    font-style: italic;
+
+    // stylelint-disable-next-line selector-max-type, selector-max-class
+    > em,
+    > .em {
+      text-decoration: underline;
+    }
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  strong,
+  &.strong {
+    font-weight: 600;
+
+    // stylelint-disable-next-line selector-max-type, selector-max-class
+    > strong,
+    > .strong {
+      text-decoration: underline;
+    }
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  sub,
+  &.sup {
+    font-size: ms(-2);
+    line-height: 1;
+    vertical-align: super;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  sub,
+  &.sub {
+    font-size: ms(-2);
+    line-height: 1;
+    vertical-align: sub;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  blockquote,
+  &.blockquote {
+    max-width: $max-line-length;
+    margin-block-start: 0;
+    margin-block-end: $type-margin;
+    margin-inline: 0;
+    padding-block: 0;
+    padding-inline-end: 0;
+    padding-inline-start: $spacing-s;
+    border-inline-start: 3px solid $border-color-display;
+
+    // stylelint-disable-next-line selector-max-type
+    &:last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  p,
+  &.p {
+    max-width: $max-line-length;
+    margin-block-start: 0;
+    margin-block-end: $type-margin;
+    margin-inline: 0;
+
+    // stylelint-disable-next-line selector-max-type
+    &:last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  pre,
+  &.pre {
+    margin-block-start: 0;
+    margin-block-end: $type-margin;
+    margin-inline: 0;
+    font-family: $mono-font-family;
+    white-space: pre-wrap;
+    tab-size: 2;
+
+    // stylelint-disable-next-line selector-max-type
+    &:last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  cite,
+  &.cite {
+    font-style: italic;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  del,
+  &.del {
+    display: inline-block;
+    background: $color-danger-light;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  dfn,
+  &.dfn {
+    font-style: italic;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  ins,
+  &.ins {
+    display: inline-block;
+    background: cv("green", "000");
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  kbd,
+  &.kbd {
+    @include border-radius($base-border-radius);
+
+    display: inline-block;
+    padding-block: 0;
+    padding-inline: $spacing-xs;
+    border: 1px solid cv("gray", "200");
+    background: cv("gray", "000");
+    box-shadow: 0 2px 0 cv("gray", "000"), 0 3px 0 cv("gray", "200");
+    font-weight: 400;
+    line-height: $title-line-height;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  mark,
+  &.mark {
+    background: cv("yellow", "000");
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  q,
+  &.q {
+    quotes: '"' '"' "'" "'";
+
+    // stylelint-disable-next-line selector-max-type
+    &::before {
+      content: open-quote;
+    }
+
+    // stylelint-disable-next-line selector-max-type
+    &::after {
+      content: close-quote;
+    }
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  s,
+  &.s {
+    text-decoration: line-through;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  samp,
+  &.samp {
+    padding-block: 0;
+    padding-inline: 0.5ch;
+    background-color: cv("gray", "000");
+    box-shadow: 0 1px 0 cv("gray", "200");
+    font-family: $mono-font-family;
+    font-size: ms(0);
+
+    // stylelint-disable-next-line selector-max-type, selector-max-class
+    kbd,
+    .kbd {
+      background: $white;
+    }
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  small,
+  &.small {
+    font-size: $size-body-caption;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  details,
+  &.details {
+    font-size: ms(0);
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  summary,
+  &.summary {
+    @include border-radius($base-border-radius);
+
+    font-size: ms(1);
+    font-weight: 600;
+    cursor: default;
+
+    // stylelint-disable-next-line selector-max-type
+    &:focus {
+      @include outline;
+    }
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  code,
+  &.code {
+    font-family: $mono-font-family;
+  }
+
+  // stylelint-disable-next-line selector-max-type
+  var,
+  &.var {
+    font-style: italic;
+    font-weight: 600;
+  }
+}
+
+// Color
+.bodyColor {
+  color: $text-body;
+}
+
+.bodyInverseColor {
+  color: $text-body-inverse;
+}
+
+.subColor {
+  color: $text-sub;
+}
+
+.codeColor {
+  color: $text-code;
+}
+
+.dangerColor {
+  color: $text-danger;
+}
+
+.dangerDisabledColor {
+  color: $text-danger-disabled;
+}
+
+// Weight
+.boldWeight {
+  font-weight: 600;
+}
+
+.regularWeight {
+  font-weight: 400;
+}
+
+// Style
+.normalStyle {
+  font-style: normal;
+}
+
+.italicStyle {
+  font-style: italic;
+}
+
+// Transform
+.noneTransform {
+  text-transform: none;
+}
+
+.capitalizeTransform {
+  text-transform: capitalize;
+}
+
+.uppercaseTransform {
+  text-transform: uppercase;
+}
+
+.lowercaseTransform {
+  text-transform: lowercase;
+}
+
+.fullWidthTransform {
+  text-transform: full-width;
+}
+
+.fullSizeKanaTransform {
+  text-transform: full-size-kana;
+}
+
+// Size
+.ledeSize {
+  font-size: $size-body-lede;
+}
+
+.baseSize {
+  font-size: $size-body-base;
+}
+
+.captionSize {
+  font-size: $size-body-caption;
+}
+
+// Wrap
+.normalWrap {
+  overflow-wrap: normal;
+}
+
+.breakWordWrap {
+  overflow-wrap: break-word;
+}
+
+.anywhereWrap {
+  overflow-wrap: anywhere;
+}
+
+// Line height
+.normalLineHeight {
+  line-height: $base-line-height;
+}
+
+.titleLineHeight {
+  line-height: $title-line-height;
+}
+
+.fontLineHeight {
+  line-height: 1;
+}

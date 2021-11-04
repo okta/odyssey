@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React, { forwardRef, createRef } from "react";
 import type { ForwardedRef } from "react";
-import { forwardRef, createRef } from "react";
 import { render, screen } from "@testing-library/react";
 import { withStyles } from ".";
 

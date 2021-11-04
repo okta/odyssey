@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import { Story } from "@storybook/react";
 import { Button as Source } from "../../../../odyssey-react/src";
 import {
@@ -19,9 +20,16 @@ import {
   SettingsIcon,
 } from "@okta/odyssey-react";
 
+import ButtonMdx from "./Button.mdx";
+
 export default {
   title: `Components/Button`,
   component: Source,
+  parameters: {
+    docs: {
+      page: ButtonMdx,
+    },
+  },
   argTypes: {
     children: {
       control: "text",

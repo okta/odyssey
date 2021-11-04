@@ -10,11 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React, { forwardRef } from "react";
 import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
-import { forwardRef } from "react";
-
 import { useOmit, withStyles } from "../../utils";
-
 import styles from "./Table.module.scss";
 
 export interface TableContainerProps

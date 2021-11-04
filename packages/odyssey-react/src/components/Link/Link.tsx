@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactText, ReactElement } from "react";
-import { forwardRef } from "react";
 import { ExternalIcon } from "../Icon";
 import { useCx, useOmit, withStyles } from "../../utils";
 import styles from "./Link.module.scss";

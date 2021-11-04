@@ -10,13 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import { Story } from "@storybook/react";
 import { Tabs, TabsProps } from "@okta/odyssey-react";
 import { Tabs as Source } from "../../../../odyssey-react/src";
 
+import TabMdx from "./Tab.mdx";
+
 export default {
   title: `Components/Tabs`,
   component: Source,
+  parameters: {
+    docs: {
+      page: TabMdx,
+    },
+  },
 };
 
 const Template: Story<TabsProps> = ({ ariaLabel, selectedId }) => {

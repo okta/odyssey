@@ -1,0 +1,81 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
+# Checkbox
+
+Checkboxes appear as a square shaped UI accompanied by a caption. Checkboxes can be found in tables, forms, or in and around text inputs.
+
+## Anatomy
+
+**ANATOMY MISSING**
+
+## Behavior
+
+Users can click a Checkbox to make a choice and click it again to deselect an option. They allow users to select one or more options of something.
+
+<Story id="components-checkbox--default" />
+
+## States
+
+Checkboxes support several states: enabled, hover, focus, disabled, invalid, required, and indeterminate.
+
+### Enabled
+
+Checkboxes in their "unchecked" state are considered enabled. They are ready for user interaction.
+
+<Story id="components-checkbox--default" />
+
+### Hover
+
+Hover states are activated when the user pauses their pointer over the input.
+
+**STORY MISSING**
+
+### Focus
+
+The focus state is a visual affordance that the user has highlighted the input with a pointer, keyboard, or voice.
+
+**STORY MISSING**
+
+### Checked
+
+Checked Checkboxes, sometimes referred to as "ticked", display a check to indicate the they are selected.
+
+**STORY MISSING**
+
+### Disabled
+
+Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
+
+Checkboxes are disabled individually. The values of disabled inputs will not be submitted.
+
+<Story id="components-checkbox--disabled" />
+
+### Invalid
+
+Checkboxes present as invalid when a required input is left unchecked or an incompatible choice has been made.
+
+When indicating a validation error, please use a Field Error label to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
+
+Unlike Radio Buttons, Checkboxes validate individually, not as a group.
+
+<Story id="components-checkbox--invalid" />
+
+### Required
+
+Unlike other inputs, Odyssey assumes Checkboxes are optional by default.
+
+Individual checkboxes can be set to required. This is useful when a user confirms they have read the terms of service.
+
+**STORY MISSING**
+
+### Indeterminate
+
+In the case of nested checkboxes, an indeterminate state may be required.
+
+Note that this state is visual-only and will be submitted as either "checked" or "unchecked" depending on the design of your UI.
+
+<Story id="components-checkbox--indeterminate" />
+
+## Arguments
+
+<ArgsTable />

@@ -1,0 +1,78 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
+# Modal
+
+UI that appears on top of the main content and moves the system into a mode requiring user interaction. This dialog disables the main content until the user interacts with the modal dialog.
+
+## Anatomy
+
+**ANATOMY MISSING**
+
+## Behavior
+
+Modals are inserted above the main content as a blocking mechanism to ask for user input or confirm an action. They disable all other contexts until the user interacts with the modal itself.
+
+**STORY MISSING**
+
+### Arrival
+
+How modals arrive on the screen is as important as the content they contain. Animation does more than provide a pleasing experience. It contextualizes the new UI the user is being presented.
+
+### Dismissing
+
+Users may close modals by clicking on the button in the upper, ending corner of the container. They may also click anywhere outside of the container, within the "curtain".
+
+### Autofocus
+
+Focus is placed on the first item a user can select, allowing them to immediately exit or submit the modal when possible. Focus is limited to the scope of the dialog while the modal is open.
+
+## Usage
+
+The default modal allows users to interact with and alter the experience it is currently interrupting. Modals interrupt a user’s experience. This may be bothersome, and modals should be used with discretion. If a modal is becoming complicated or claustrophobic, another solution may be needed.
+
+### Use when...
+
+- Blocking user interaction for security reasons - e.g. "Please reenter your password to initiate launch."
+- Gathering immediate information to continue a task - e.g. "A hangar number is required to continue."
+- Confirming user interaction during destructive actions - e.g. "Please confirm the starship name to begin disassembly."
+- Offering an alternative that would lessen the user's required effort - e.g. "Additional security clearance will be required - are you sure you want to continue?"
+
+### Don't use when...
+
+- Immediate action is not required
+- The dialog would interrupt a workflow
+- Additional context may be required or helpful
+- The dialog content is long-form
+- The user has not triggered the modal via interaction (e.g. on page load)
+- There is already a modal being displayed
+
+## Content guidelines
+
+Context is key. There needs to be a direct connection between the trigger (i.e. a button or link) and the modal that follows. Repeating the trigger's copy within the modal can help reinforce this connection. Providing a sense of connection between the trigger and modal is important to ensure a consistent user experience.
+
+## Accessibility
+
+### Accessible behavior
+
+When a user opens a modal, interaction is limited to the new context. While this may seem expected, it can surprise users. This is heightened for users requiring assistive technologies.
+
+For convenience, users can exit the modal in a few ways:
+
+- Clicking on the overlay
+
+- Hitting <kbd>esc</kbd>
+
+- Clicking or navigating to any element tagged with `data-micromodal-close`
+
+For users happy with their new context, we ensure their attention isn't misdirected. Scrolling on the main content becomes locked, and we inform the browser to lock the `tabindex` to the modal context. This way, regardless of input method, a user's interactions are limited to their new scope.
+
+## Arguments
+
+<ArgsTable />
+
+## Further reading
+
+- [How To Make Modal Windows Better For Everyone](https://www.smashingmagazine.com/2014/09/making-modal-windows-better-for-everyone/) - <cite>Scott O'Hara (2014)</cite>
+- [Making Modal Windows Better For Everyone, again...](https://www.scottohara.me/blog/2016/09/07/revised-modal-window.html) - <cite>Scott O'Hara (2016)</cite>
+- [Modal & Nonmodal Dialogs: When (& When Not) to Use Them](https://www.nngroup.com/articles/modal-nonmodal-dialog/) - <cite>Therese Fessenden, Nielsen Norman Group (2017)</cite>
+- [Micromodal.js](https://micromodal.now.sh/) - JS Documentation

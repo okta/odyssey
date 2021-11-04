@@ -10,16 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import type { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { Tooltip, TooltipProps, Button } from "@okta/odyssey-react";
 import { Tooltip as Source } from "../../../../odyssey-react/src";
+
+import TooltipMdx from "./Tooltip.mdx";
 
 export default {
   title: `Components/Tooltip`,
   component: Source,
   parameters: {
     layout: "centered",
+    docs: {
+      page: TooltipMdx,
+    },
   },
 };
 
