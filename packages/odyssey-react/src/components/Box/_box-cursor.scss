@@ -1,0 +1,133 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+/* General */
+.cursorAuto {
+  cursor: auto;
+}
+.cursorDefault {
+  cursor: default;
+}
+.cursorNone {
+  cursor: none;
+}
+
+/* Links & Status */
+.cursorPointer {
+  cursor: pointer;
+}
+.cursorContextMenu {
+  cursor: context-menu;
+}
+.cursorHelp {
+  cursor: help;
+}
+.cursorProgress {
+  cursor: progress;
+}
+.cursorWait {
+  cursor: wait;
+}
+
+/* Selection */
+.cursorCell {
+  cursor: cell;
+}
+.cursorCrosshair {
+  cursor: crosshair;
+}
+.cursorText {
+  cursor: text;
+}
+.cursorVerticalText {
+  cursor: vertical-text;
+}
+
+/* Drag & Drop */
+.cursorAlias {
+  cursor: alias;
+}
+.cursorCopy {
+  cursor: copy;
+}
+.cursorMove {
+  cursor: move;
+}
+.cursorNoDrop {
+  cursor: no-drop;
+}
+.cursorNotAllowed {
+  cursor: not-allowed;
+}
+
+/* Resize & Scrolling */
+.cursorAllScroll {
+  cursor: all-scroll;
+}
+.cursorColResize {
+  cursor: col-resize;
+}
+.cursorRowResize {
+  cursor: row-resize;
+}
+.cursorEResize {
+  cursor: e-resize;
+}
+.cursorNResize {
+  cursor: n-resize;
+}
+.cursorNeResize {
+  cursor: ne-resize;
+}
+.cursorNwResize {
+  cursor: nw-resize;
+}
+.cursorSResize {
+  cursor: s-resize;
+}
+.cursorSeResize {
+  cursor: se-resize;
+}
+.cursorSwResize {
+  cursor: sw-resize;
+}
+.cursorWResize {
+  cursor: w-resize;
+}
+.cursorEwResize {
+  cursor: ew-resize;
+}
+.cursorNsResize {
+  cursor: ns-resize;
+}
+.cursorNeswResize {
+  cursor: nesw-resize;
+}
+.cursorNwseResize {
+  cursor: nwse-resize;
+}
+
+/* Zoom */
+.cursorZoomIn {
+  cursor: zoom-in;
+}
+.cursorZoomOut {
+  cursor: zoom-out;
+}
+
+/* Grab */
+.cursorGrab {
+  cursor: grab;
+}
+.cursorGrabbing {
+  cursor: grabbing;
+}

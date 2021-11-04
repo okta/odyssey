@@ -10,20 +10,62 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-@import "box-display";
-@import "box-position";
-@import "box-grid";
-@import "box-flex";
-@import "box-width-height";
-@import "box-margin";
-@import "box-padding";
-@import "box-overflow";
-@import "box-border";
-@import "box-background";
-@import "box-cursor";
-@import "box-hover-focus";
-@import "box-other";
+.overflowVisible {
+  overflow: visible;
+}
 
-.root {
-  box-sizing: border-box;
+.overflowHidden {
+  overflow: hidden;
+}
+
+.overflowClip {
+  overflow: clip;
+}
+
+.overflowScroll {
+  overflow: scroll;
+}
+
+.overflowAuto {
+  overflow: auto;
+}
+
+.overflowXVisible {
+  overflow-x: visible;
+}
+
+.overflowXHidden {
+  overflow-x: hidden;
+}
+
+.overflowXClip {
+  overflow-x: clip;
+}
+
+.overflowXScroll {
+  overflow-x: scroll;
+}
+
+.overflowXAuto {
+  overflow-x: auto;
+}
+
+.overflowYVisible {
+  overflow-y: visible;
+}
+
+.overflowYHidden {
+  overflow-y: hidden;
+}
+
+.overflowYClip {
+  overflow-y: clip;
+}
+
+.overflowYScroll {
+  overflow-y: scroll;
+}
+
+.overflowYAuto {
+  overflow-y: auto;
 }
