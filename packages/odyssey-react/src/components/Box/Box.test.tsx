@@ -259,9 +259,9 @@ describe("Box", () => {
   });
 
   it("uses the hoverBorderColor property to attach a class", () => {
-    render(<Box hoverBorderColor="interactive">box</Box>);
+    render(<Box hoverBorderColor="primary">box</Box>);
 
-    expect(screen.getByText("box")).toHaveClass("hoverBorderColorInteractive");
+    expect(screen.getByText("box")).toHaveClass("hoverBorderColorPrimary");
   });
 
   it("uses the borderRadius property to attach a class", () => {

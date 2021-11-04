@@ -11,6 +11,7 @@
  */
 
 $outer-border-radius: 6px;
+$border-color-danger: $color-danger-base;
 
 .borderBase {
   border-width: 1px;
@@ -22,8 +23,12 @@ $outer-border-radius: 6px;
   border-color: $border-color-display;
 }
 
-.borderColorInteractive {
+.borderColorUi {
   border-color: $border-color-ui;
+}
+
+.borderColorDanger {
+  border-color: $border-color-danger;
 }
 
 /* Radius */

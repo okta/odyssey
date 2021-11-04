@@ -180,11 +180,15 @@ export interface BoxProps
   /**
    * Border colors
    */
-  borderColor?: "display" | "none";
+  borderColor?: "display" | "ui" | "danger" | "none";
   /**
    * Hover border
    */
-  hoverBorderColor?: "interactive" | "none";
+  hoverBorderColor?: "primary" | "ui" | "none";
+  /**
+   * focus border
+   */
+  focusBorderColor?: "primary" | "danger" | "none";
   /**
    * Border radius
    */
