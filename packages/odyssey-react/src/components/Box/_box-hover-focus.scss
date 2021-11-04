@@ -10,20 +10,36 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.hoverBorderColorInteractive:hover {
+$border-color-primary: cv("blue");
+$box-shadow-hover: 0 8px 12px rgba(cv("gray", "900"), 0.12);
+$focus-width: 2px;
+
+.hoverBorderColorUi:hover {
   border-color: $border-color-ui;
 }
 
+.hoverBorderColorPrimary:hover {
+  border-color: $border-color-primary;
+}
+
 .hoverBoxShadowDefault:hover {
-  box-shadow: 0 8px 12px rgba(cv("gray", "900"), 0.12);
+  box-shadow: $box-shadow-hover;
+}
+
+.focusBorderColorPrimary:focus {
+  border-color: $border-color-primary;
+}
+
+.focusBorderColorDanger:focus {
+  border-color: $border-color-danger;
 }
 
 .focusRingPrimary:focus {
   outline: 0;
-  box-shadow: 0 0 0 2px $focus-ring-primary;
+  box-shadow: 0 0 0 $focus-width $focus-ring-primary;
 }
 
 .focusRingDanger:focus {
   outline: 0;
-  box-shadow: 0 0 0 2px $focus-ring-danger;
+  box-shadow: 0 0 0 $focus-width $focus-ring-danger;
 }
