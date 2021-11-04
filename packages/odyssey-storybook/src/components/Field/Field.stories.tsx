@@ -10,13 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import { Story } from "@storybook/react";
 import { Field, FieldProps, ScreenReaderText } from "@okta/odyssey-react";
 import { Field as Source } from "../../../../odyssey-react/src";
 
+import FieldMdx from "./Field.mdx";
+
 export default {
   title: `Components/Field`,
   component: Source,
+  parameters: {
+    docs: {
+      page: FieldMdx,
+    },
+  },
   args: {
     label: "Destination",
     optionalLabel: "Optional",

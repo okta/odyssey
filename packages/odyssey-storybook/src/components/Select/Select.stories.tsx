@@ -10,10 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
 import { Select, SelectProps } from "@okta/odyssey-react";
 import { Select as Source } from "../../../../odyssey-react/src";
+
+import SelectMdx from "./Select.mdx";
 
 const options = [
   "Proxima Centauri",
@@ -28,6 +31,11 @@ const options = [
 export default {
   title: `Components/Select`,
   component: Source,
+  parameters: {
+    docs: {
+      page: SelectMdx,
+    },
+  },
   args: {
     label: "Destination Star",
     name: "star",

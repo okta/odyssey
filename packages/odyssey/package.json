@@ -1,7 +1,7 @@
 {
   "name": "@okta/odyssey",
   "private": true,
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -12,7 +12,6 @@
   "main": "src/scss/odyssey.scss",
   "style": "src/scss/odyssey.scss",
   "scripts": {
-    "prepare": "yarn build",
     "build": "sass src/scss/odyssey.scss dist/odyssey.css"
   },
   "devDependencies": {

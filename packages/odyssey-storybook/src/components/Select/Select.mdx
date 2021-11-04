@@ -1,0 +1,105 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
+# Select
+
+Often referred to as a “dropdown menu” this input triggers a menu of options a user can select. Country and state Selects are common examples.
+
+## Anatomy
+
+**ANATOMY MISSING**
+
+## Behavior
+
+Interacting with a Select displays a list of values to choose from. Choosing a value will override any previous selection and close the Select.
+
+Odyssey also supports a Multi-Select variant that allows users to select many values.
+
+To support expected functionality and behaviors, Select relies on the Choices.js library. Odyssey provides fallback styling when Choices.js isn't available.
+
+<Story id="components-select--default" />
+
+## Variants
+
+Odyssey provides support for both single and multi-value Selects.
+
+### Single Select
+
+The default Select allows users to choose a single value from a list of options. Selecting another option will replace the first.
+
+<Story id="components-select--default" />
+
+### Multi-Select
+
+The Multi-Select variant allows users to choose more than one value from the list of options.
+
+<Story id="components-select--multiple" />
+
+## States
+
+Select inputs support the following states: enabled, hover, focus, disabled, optional, and invalid.
+
+### Enabled
+
+Select inputs in their "normal" state are considered enabled. They are ready for user interaction.
+
+<Story id="components-select--default" />
+
+### Hover
+
+Hover states are activated when the user pauses their pointer over the input.
+
+**STORY MISSING**
+
+### Focus
+
+The focus state is a visual affordance that the user has highlighted the input with a pointer, keyboard, or voice.
+
+**STORY MISSING**
+
+### Disabled
+
+Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
+
+The values of disabled inputs will not be submitted.
+
+<Story id="components-select--disabled" />
+
+### Optional
+
+Odyssey assumes inputs are required by default. Optional inputs should be used to indicate when data is not required for the user to complete a task.
+
+<Story id="components-select--optional" />
+
+### Invalid
+
+The invalid state is for inputs with incorrect values or values of the wrong format.
+
+When indicating a validation error, please use a Field Error label to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
+
+**STORY MISSING**
+
+## Usage
+
+Selects are most useful when users are choosing between 7-15 options. For smaller sets, Radio Buttons are more effective. For larger sets, a Text Input with autocompletion may be a better fit.
+
+Selects perform better when the options are familiar to the user. If a user may be unfamiliar with their options or need to compare them, use Radio Buttons.
+
+Select inputs should not have a default selected unless a majority of users will be choosing it.
+
+**STORY MISSING**
+
+### Option groups
+
+Options may be grouped within the Select list to help guide users. When doing this, consider that Choices will ignore any ungrouped items.
+
+<Story id="components-select--group" />
+
+## Arguments
+
+<ArgsTable />
+
+## References
+
+### Further Reading
+
+- <a href="https://joshuajohnson.co.uk/Choices/">Choices.js documentation</a>

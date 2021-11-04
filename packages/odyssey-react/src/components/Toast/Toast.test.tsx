@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import { act, render, fireEvent, screen, within } from "@testing-library/react";
 import { Toast, useToast } from ".";
 

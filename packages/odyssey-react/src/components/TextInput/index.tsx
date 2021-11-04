@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import type {
   ComponentProps,
   FunctionComponent,
@@ -21,7 +21,6 @@ import type {
 import { useOid, useCx, withStyles } from "../../utils";
 import { SearchIcon } from "../Icon/Search";
 import styles from "./TextInput.module.scss";
-
 import { Field } from "../Field";
 import type { SharedFieldTypes } from "../Field/types";
 

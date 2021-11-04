@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
 import { SelectOption } from "../SelectOption";
 import { SelectOptionGroup } from "../SelectOptionGroup";

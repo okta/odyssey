@@ -19,7 +19,7 @@ module.exports = {
           identityObjectProxy: true,
         },
         react: {
-          runtime: "automatic",
+          runtime: "classic",
         },
       },
     ],
@@ -35,7 +35,7 @@ module.exports = {
               modules: false,
             },
             react: {
-              runtime: "automatic",
+              runtime: "classic",
             },
           },
         ],

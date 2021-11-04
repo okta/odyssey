@@ -1,0 +1,171 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
+# Toast
+
+Toasts are transient, non-disruptive messages that provide at-a-glance, asynchronous feedback or updates.
+
+## Anatomy
+
+Each Toast is made up of up to four parts: Icon & Color, Title, Body, and a Dismiss Button.
+
+**ANATOMY MISSING**
+
+<dl>
+  <dt>Icon &amp; Color</dt>
+  <dd>
+    These are mapped to the different variants of Toast and shouldn't be mixed.
+  </dd>
+  <dt>Title</dt>
+  <dd>Provides quick context; one line max</dd>
+  <dt>Body (Optional)</dt>
+  <dd>
+    Supplemental information. Be concise - less than three lines of content - as
+    your Toast will soon vanish!
+  </dd>
+  <dt>Dismiss "X"</dt>
+  <dd>
+    Included to ensure users are able to dismiss Toasts manually. Placement is
+    handled automatically based on content.
+  </dd>
+</dl>
+
+**STORY MISSING**
+
+## Behavior
+
+Toasts may be triggered by different types of events, but they are always transient. With this in mind, Toasts should not include any interactive or long-form content.
+
+The Toast pen will take care of positioning and layout automatically. Toasts will appear in the bottom, ending corner above all other content.
+
+If multiple Toasts are triggered in a short time, they will stack in order of appearance. For visual consistency, Toasts will resize to match the largest Toast visible.
+
+## Variants
+
+### Info
+
+Use Info Toasts to surface neutral information to users.
+
+This is the default variant for this component.
+
+**STORY MISSING**
+
+### Success
+
+Use Success Toasts to inform users of successful or completed processes.
+
+**STORY MISSING**
+
+### Caution
+
+Use Caution Toasts to inform users of tasks or processes that may need their attention.
+
+When using the Caution variant, ensure the user does not need more context than you can give in the space available.
+
+**STORY MISSING**
+
+### Danger
+
+Use Danger Toasts to inform users that an error has occurred.
+
+When using a Danger Toast, be sure that the error is also logged elsewhere, so a user can refer to it later.
+
+Do not use Danger Toasts for in-page errors such as invalid form fields. Instead, use static messaging the user can refer to while addressing their error.
+
+**STORY MISSING**
+
+## References
+
+<figure class="ods-table--figure">
+  <figcaption class="ods-table--figcaption">Related Components</figcaption>
+  <table class="ods-table">
+    <caption>Differences between the available alert components</caption>
+    <thead>
+      <tr>
+        <th scope="column">Component</th>
+        <th scope="column">Available Variants</th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-dynamic">Dynamic</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-dynamic"
+              role="tooltip"
+            >
+              May be inserted after page load
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-transient">Transient</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-transient"
+              role="tooltip"
+            >
+              Disappears without user interaction
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-dismissable">Dismissable</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-dismissable"
+              role="tooltip"
+            >
+              May be dismissed by the user
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-actionable">Actionable</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-actionable"
+              role="tooltip"
+            >
+              May include actions or links
+            </aside>
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <a href="?path=/docs/components-banner--info#banner">Banner</a>
+        </th>
+        <td>Info, Caution, Danger</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <a href="?path=/docs/components-infobox--info#infobox">Infobox</a>
+        </th>
+        <td>Success, Caution, Danger</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <th scope="row">Toast</th>
+        <td>Info, Success, Caution, Danger</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+## Arguments
+
+<ArgsTable />

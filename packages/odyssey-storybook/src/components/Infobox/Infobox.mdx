@@ -1,0 +1,184 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
+# Infobox
+
+An infobox is a type of alert that provides feedback in response to a user action or system activity.
+
+## Anatomy
+
+**ANATOMY MISSING**
+
+## Behavior
+
+This component may be present on load or triggered by different types of events, but they are not transient or dismissable.
+
+## Variants
+
+### Info
+
+Use Infoboxes for communicating important guidance to the user. When using the Info variant, consider if plain copy will suffice on the page itself first. Reserve this component for "can’t miss" instructions.
+
+<Story id="components-infobox--info" />
+
+### Danger
+
+Use Danger Infoboxes to inform users that an error has occurred. You may also inform a user when specific processes are particularly destructive.
+
+Include guidance to make sure users know what steps to take to address the error or avoid data loss.
+
+<Story id="components-infobox--danger" />
+
+### Caution
+
+Use Caution Infoboxes to inform users of tasks or processes that need their attention.
+
+When using the Caution variant, ensure the user does not need more context than you can give in the space available.
+
+<Story id="components-infobox--caution" />
+
+### Success
+
+Use Success Infoboxes for reporting successful actions, processes, or states to the user.
+
+<Story id="components-infobox--success" />
+
+## Usage
+
+Infoboxes can be present when the page loads or appear dynamically. For instance, a Form may include a Caution message if the user should be aware of particular requirements up front. Alternately, the Danger variant may be used on Form submission to surface an error.
+
+Avoid overusing Infobox within the same view. They are intended to draw the eye, and multiple visible Infoboxes may overwhelm users.
+
+### Actions
+
+It is ideal to direct users toward an appropriate action, especially for addressing errors. Infoboxes allow for both inline and separated actions. To preserve clarity, limit Infoboxes to one link.
+
+**STORY MISSING**
+
+The actions section is limited to links. If it's necessary to provide the user with an action, please direct them to the appropriate flow instead of beginning a new process inline.
+
+**STORY MISSING**
+
+### Placement
+
+Infoboxes should be displayed above the content they apply to but not higher than their scope.
+
+For example, a Form error should be displayed above all Fieldsets, but below the Form title.
+
+**STORY MISSING**
+
+Stay away from nesting Infoboxes within information-dense UI like Tables. If you need to convey something about an individual data point, consider another design solution.
+
+**STORY MISSING**
+
+## Content Guidelines
+
+These messages may be used for longer content than Toast or Banner, but shouldn't go beyond two paragraphs. When including an inline link or action, be sure the link text clearly indicates where it leads.
+
+Do not include images or other UIs within Infobox.
+
+**STORY MISSING**
+
+### Content Areas
+
+Both Title and Content are optional, but at least one of them is required.
+
+## Accessibility
+
+When deploying Infoboxes, two `role`s may apply. Danger variants should utilize the `alert` role, as their contents represent immediate risk or failure. Success and Caution variants are better suited to the `status` role, which provides a less urgent announcement on appearance. The Info variant does not require a `role`, as it represents plain content.
+
+## Arguments
+
+<ArgsTable />
+
+## References
+
+<figure class="ods-table--figure">
+  <figcaption class="ods-table--figcaption">Related Components</figcaption>
+  <table class="ods-table">
+    <caption>Differences between the available alert components</caption>
+    <thead>
+      <tr>
+        <th scope="column">Component</th>
+        <th scope="column">Available Variants</th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-dynamic">Dynamic</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-dynamic"
+              role="tooltip"
+            >
+              May be inserted after page load
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-transient">Transient</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-transient"
+              role="tooltip"
+            >
+              Disappears without user interaction
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-dismissable">Dismissable</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-dismissable"
+              role="tooltip"
+            >
+              May be dismissed by the user
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-actionable">Actionable</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-actionable"
+              role="tooltip"
+            >
+              May include actions or links
+            </aside>
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <a href="?path=/docs/components-banner--info#banner">Banner</a>
+        </th>
+        <td>Info, Caution, Danger</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <th scope="row">Infobox</th>
+        <td>Info, Success, Caution, Danger</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <a href="?path=/docs/components-toast--info#toast">Toast</a>
+        </th>
+        <td>Info, Success, Caution, Danger</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>

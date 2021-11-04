@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { cloneElement, forwardRef } from "react";
+import React, { cloneElement, forwardRef } from "react";
 import type { ReactElement, ComponentPropsWithRef } from "react";
 import { useCx, useOid, useOmit, withStyles } from "../../utils";
 import styles from "./Tooltip.module.scss";
