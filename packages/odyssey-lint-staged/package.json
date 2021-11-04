@@ -1,12 +1,12 @@
 {
   "name": "@okta/odyssey-lint-staged",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "@okta/odyssey-prettier": "^0.8.1",
+    "@okta/odyssey-prettier": "^0.8.2",
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2"
   }
