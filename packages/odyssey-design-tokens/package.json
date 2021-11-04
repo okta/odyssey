@@ -1,0 +1,13 @@
+{
+  "name": "@okta/odyssey-design-tokens",
+  "version": "0.0.0",
+  "main": "dist/js/tokens.js",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "style-dictionary build"
+  },
+  "dependencies": {
+    "style-dictionary": "^3.0.1"
+  }
+}
