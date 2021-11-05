@@ -15,6 +15,7 @@ import type { ComponentPropsWithRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import { Heading } from "../Heading";
 import { Button } from "../Button";
+import { Text } from "../Text";
 import type { ButtonProps } from "../Button";
 import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
@@ -103,8 +104,16 @@ let Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
           />
         </div>
       )}
-      {content && <p className={styles.content}>{content}</p>}
-      {children && <section className={styles.actions}>{children}</section>}
+      {content && (
+        <span className={styles.content}>
+          <Text as="p" children={content} />
+        </span>
+      )}
+      {children && (
+        <span className={styles.actions}>
+          <Text>{children}</Text>
+        </span>
+      )}
       {onDismiss && (
         <span className={styles.dismiss}>
           <Button
