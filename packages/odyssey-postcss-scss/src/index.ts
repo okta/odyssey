@@ -10,20 +10,5 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.root {
-  display: inline-block;
-  margin-block-start: 0;
-  margin-block-end: 0.375rem;
-  margin-inline-start: 0;
-  margin-inline-end: 0.375rem;
-  padding-block: 0;
-  padding-inline: 0.375em;
-  background: #ebebed;
-  color: #1d1d21;
-}
-
-.autoprefixed {
-  ::placeholder {
-    color: #bada55;
-  }
-}
+export * from "./plugin";
+export { default } from "./plugin";
