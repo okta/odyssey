@@ -1,0 +1,120 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Contributing/Documentation" />
+
+# Documentation
+
+In order to be considered for release, components require documentation. We provide a template for component documentation to make this process easier and ensure consistent docs.
+
+## Doc sections
+
+From top to bottom, component documentation should include these sections. Optional content is marked as such.
+
+<dl>
+  <dt>Overview</dt>
+  <dd>This section should be named after the component and include a short description.</dd>
+  <dt>Anatomy</dt>
+  <dd>There is an Open Question about whether we should supply manually curated Anatomy examples.</dd>
+  <dd>If this section is not included, a "default" story example may be useful to include above. Spacing and outline redlines would be achieved via the Canvas tab.</dd>
+  <dd>If this section is included, the Anatomy diagrams should reference our component part names and utilized design tokens.</dd>
+  <dt>Behavior (Optional)</dt>
+  <dd>While Usage describes guidelines for designers and engineers, Behavior describes default behaviors included with components.</dd>
+  <dd>This section is not required if the component has limited or self-evident behavior.</dd>
+  <dt>Variants (Optional)</dt>
+  <dd>This section decribes the differing configurations available for the component.</dd>
+  <dd>These variants could be global or semantic changes (e.g. "Success" vs "Danger") or different component assemblies (e.g. "With actions")</dd>
+  <dt>States</dt>
+  <dd>This section covers all the states a component can find itself in.</dd>
+  <dd>This includes both HTML-spec states like `:hover` or `:focus` as well as component-specific states like hidden or empty.</dd>
+  <dt>Usage</dt>
+  <dd>This is where we lay out the function of components and how they can be used within a design/view/page.</dd>
+  <dd>DOs and DONTs are appropriate for this section.</dd>
+  <dt>Content Guidelines</dt>
+  <dd>This is where we lay out any requirements around acceptable content for use within the component.</dd>
+  <dd>This includes both what a component may contain as well as how that content should be written.</dd>
+  <dd>DOs and DONTs are appropriate for this section.</dd>
+  <dt>Accessibility</dt>
+  <dd>This section includes any guidelines required for compliance as well as design rationale already leveraged to ensure compliance - both "please do this" and "we do this because".</dd>
+  <dt>Responsive Web Design (optional)</dt>
+  <dd>Any considerations for use or documentation.</dd>
+  <dd>This section is rare today, but should include examples and rationale similar to the Accessibility section.</dd>
+  <dt>Globalization (optional)</dt>
+  <dd>This should include any notes about use or cultural considerations, as well as whether the component is lacking globalization support in some regard.</dd>
+  <dt>Arguments / Props</dt>
+  <dd>This section should be automatically populated by an <code>&lt;ArgsTable/&gt;</code>.</dd>
+  <dt>References (optional)</dt>
+  <dd>This section has two optional children: Related Components and Further Reading</dd>
+  <dt>Related Components (optional)</dt>
+  <dd>Points the user toward any related components, possibly alternate solutions.</dd>
+  <dd>We do this in a few places today and it may be beneficial to include in more places.</dd>
+  <dt>Further Reading (optional)</dt>
+  <dd>Again, included in some places, always optional, but could provide additional rationale or education for our users.</dd>
+  <dd>These have been especially helpful when deviating from common dark patterns or legacy solutions.</dd>
+</dl>
+
+## Docs template
+
+```md
+# Component name
+
+This section should be named after the component and include a short description.
+
+## Anatomy
+
+There is an Open Question about whether we should supply manually curated Anatomy examples.
+
+- If this section is not included, a "default" story example may be useful to include above. Spacing and outline redlines would be achieved via the Canvas tab.
+- If this section is included, the Anatomy diagrams should reference our component part names and utilized design tokens.
+
+## Behavior (optional)
+
+While Usage describes guidelines for designers and engineers, Behavior describes default behaviors included with components.
+
+Ex: "When activated via user action or an asynchronous event, the Toast will be visible in the lower right-hand portion of the screen."
+
+## Variants (optional)
+
+Variants are the "types" of each component we currently offer.
+
+Ex: Buttons have Primary, Secondary, Danger, Overlay, and Clear. Each Variant has its own subheading under this section.
+
+## States (optional)
+
+This section covers all the states a component can find itself in. This includes both HTML-spec states like `:hover` or `:focus` as well as component-specific states like hidden or empty.
+
+Each State has its own subheading under this section.
+
+## Usage
+
+This is where we lay out the function of components and how they can be used within a design/view/page. DOs and DONTs are appropriate for this section.
+
+## Content Guidelines
+
+This is where we lay out any requirements around acceptable content for use within the component. This includes both what a component may contain as well as how that content should be written. DOs and DONTs are appropriate for this section.
+
+Specific content types may have subheadings under this section.
+
+## Accessibility
+
+This section includes any guidelines required for compliance as well as design rationale already leveraged to ensure compliance - both "please do this" and "we do this because".
+
+This section may have subheadings as necessary.
+
+## Responsive Web Design (optional)
+
+Any considerations for use or documentation. This section is rare today, but should include examples and rationale similar to the Accessibility section.
+
+## Globalization (optional)
+
+This should include any notes about use or cultural considerations, as well as whether the component is *lacking* globalization support in some regard.
+
+## References (optional)
+
+### Related Components (optional)
+
+We do this in a few places today and it may be beneficial to include in more places. Ex: Links vs Buttons; Form-related elements
+
+### Further Reading (optional)
+
+Again, included in some places, always optional, but could provide additional rationale or education for our users.
+```
