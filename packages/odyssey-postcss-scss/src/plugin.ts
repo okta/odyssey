@@ -10,20 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.root {
-  display: inline-block;
-  margin-block-start: 0;
-  margin-block-end: 0.375rem;
-  margin-inline-start: 0;
-  margin-inline-end: 0.375rem;
-  padding-block: 0;
-  padding-inline: 0.375em;
-  background: #ebebed;
-  color: #1d1d21;
+import { renderSync } from "sass";
+import type { Plugin } from "postcss";
+
+interface PluginOptions {
+  importData: string;
 }
 
-.autoprefixed {
-  ::placeholder {
-    color: #bada55;
-  }
-}
+const plugin = ({ importData }: PluginOptions): Plugin => ({
+  postcssPlugin: "odyssey-postcss-scss",
+  Once(root, { result, parse }) {
+    const { css: postcss } = root.toResult({ map: false });
+
+    const { css } = renderSync({
+      data: `${importData}\n${postcss}`,
+      file: result.opts.from,
+    });
+
+    result.root = parse(css, { from: result.opts.from });
+  },
+});
+
+plugin.postcss = true;
+export { plugin as default };
