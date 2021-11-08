@@ -11,10 +11,19 @@
  */
 
 import React from "react";
-import { render, fireEvent, screen, within } from "@testing-library/react";
+import {
+  render,
+  fireEvent,
+  screen,
+  within,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Select } from ".";
 
 const listboxRole = "listbox";
+const multipleInputRole = "textbox";
 const optionRole = "option";
 const label = "Select speed";
 const name = "speed";
@@ -141,6 +150,60 @@ describe("Select", () => {
       multiple
       noChoicesText="yay"
     />;
+  });
+
+  /**
+   * WIP
+   */
+  it("passes search text to onSearch if defined for multiple", async () => {
+    const myQuery = "my q";
+    let expectedSubstringEnd = 1;
+
+    const onSearch = async (searchText: string) => {
+      // Called in sequence
+      expect(searchText).toEqual(searchText.substring(0, expectedSubstringEnd));
+      expectedSubstringEnd += 1;
+      return expectedSubstringEnd === myQuery.length + 1;
+    };
+
+    render(tree({ onSearch: onSearch, multiple: true }));
+
+    const input = screen.getByRole(multipleInputRole) as HTMLInputElement;
+
+    await userEvent.type(input, myQuery, {
+      delay: 1,
+    });
+
+    // Called for every character
+    expect(expectedSubstringEnd).toEqual(myQuery.length + 1);
+    // List box not shown because showOptions was not invoked
+    expect(screen.getByText("Lightspeed")).not.toBeVisible();
+  });
+
+  /**
+   * WIP
+   */
+  it("Displays dropdown on search when showOptions is called", async () => {
+    const myQuery = "abc";
+    const loadingText = "Please wait...";
+
+    let searchIndex = 0;
+
+    const onSearch = async (_searchText: string, showOptions: () => void) => {
+      searchIndex += 1;
+      showOptions();
+      return searchIndex === myQuery.length;
+    };
+
+    render(
+      tree({ onSearch: onSearch, multiple: true, loadingText: loadingText })
+    );
+
+    const input = screen.getByRole(multipleInputRole) as HTMLInputElement;
+    await userEvent.type(input, myQuery, {
+      delay: 1,
+    });
+    expect(screen.getByRole(listboxRole)).toBeTruthy();
   });
 
   a11yCheck(() => render(tree()));
