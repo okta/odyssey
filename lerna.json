@@ -1,7 +1,6 @@
 {
   "version": "0.8.2",
   "npmClient": "yarn",
-  "tagVersionPrefix": "_",
   "useWorkspaces": true,
   "packages": ["packages/*"]
 }
