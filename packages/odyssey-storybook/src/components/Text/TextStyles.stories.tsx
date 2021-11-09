@@ -55,7 +55,7 @@ ColorBody.args = {
 export const BodyInverse = Template.bind({});
 BodyInverse.storyName = "Color: Body, inverse";
 BodyInverse.parameters = {
-  backgrounds: { default: "inverse (gray-900)" },
+  backgrounds: { default: "Page Background (dark)" },
 };
 BodyInverse.args = {
   children: "Danger (disabled) text color",
