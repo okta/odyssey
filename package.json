@@ -17,7 +17,7 @@
     "docs": "yarn workspace @okta/design-docs start",
     "icons": "yarn workspace @okta/odyssey-icons svgo",
     "start": "lerna run start --parallel",
-    "lerna-version": "lerna version --no-git-tag-version --force-publish",
+    "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry",
     "lint": "yarn eslint && yarn stylelint && yarn prettier-check",
     "prettier-check": "yarn prettier --check . --ignore-path .gitignore",
