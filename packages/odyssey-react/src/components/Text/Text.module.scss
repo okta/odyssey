@@ -268,6 +268,10 @@
   color: $text-danger-disabled;
 }
 
+.primaryColor {
+  color: $color-primary-base;
+}
+
 // Weight
 .boldWeight {
   font-weight: 600;
@@ -337,6 +341,10 @@
   overflow-wrap: anywhere;
 }
 
+.nowrapWrap {
+  white-space: nowrap;
+}
+
 // Line height
 .normalLineHeight {
   line-height: $base-line-height;
@@ -348,4 +356,55 @@
 
 .fontLineHeight {
   line-height: 1;
+}
+
+// Hover
+:hover > .bodyHoverColor,
+.bodyHoverColor:hover {
+  color: $text-body;
+}
+:hover > .bodyInverseHoverColor,
+.bodyInverseHoverColor:hover {
+  color: $text-body-inverse;
+}
+:hover > .primaryDarkHoverColor,
+.primaryDarkHoverColor:hover {
+  color: $color-primary-dark;
+}
+
+// Focus
+:focus > .bodyFocusColor,
+.bodyFocusColor:focus {
+  color: $text-body;
+}
+
+:focus > .bodyInverseFocusColor,
+.bodyInverseFocusColor:focus {
+  color: $text-body-inverse;
+}
+
+:focus > .primaryFocusColor,
+.primaryFocusColor:focus {
+  color: $color-primary-base;
+}
+
+// Disabled
+:disabled > .bodyInverseDisabledColor,
+.bodyInverseDisabledColor:disabled {
+  color: $text-body-inverse;
+}
+
+:disabled > .primaryLightDisabledColor,
+.primaryLightDisabledColor:disabled {
+  color: $color-primary-light;
+}
+
+:disabled > .subDisabledColor,
+.subDisabledColor:disabled {
+  color: $text-sub;
+}
+
+// Transition
+.inheritTransition {
+  transition: inherit;
 }

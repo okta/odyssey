@@ -12,6 +12,7 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactElement, ReactText } from "react";
+import { Text, TextProps } from "../Text";
 import { withStyles, useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
 
@@ -75,12 +76,44 @@ let Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     wide && styles.wideLayout
   );
 
+  let textColor: TextProps["color"] = "bodyInverse";
+  let hoverColor: TextProps["hoverColor"] = "bodyInverse";
+  let focusColor: TextProps["focusColor"] = "bodyInverse";
+  let disabledColor: TextProps["disabledColor"] = "bodyInverse";
+
+  if (variant === "secondary" || variant === "clear") {
+    textColor = "primary";
+    focusColor = "primary";
+    disabledColor = "primaryLight";
+  }
+
+  if (variant === "clear") {
+    hoverColor = "primaryDark";
+  }
+
+  if (variant === "dismiss") {
+    textColor = "body";
+    hoverColor = "body";
+    focusColor = "body";
+    disabledColor = "sub";
+  }
+
   const omitProps = useOmit(rest);
 
   return (
     <button {...omitProps} ref={ref} className={componentClass}>
-      {icon && <span className={styles.icon}>{icon}</span>}
-      {children && <span className={styles.label}>{children}</span>}
+      <Text
+        color={textColor}
+        hoverColor={hoverColor}
+        focusColor={focusColor}
+        disabledColor={disabledColor}
+        weight="bold"
+        wrap="nowrap"
+        transition="inherit"
+      >
+        {icon && <span className={styles.icon}>{icon}</span>}
+        {children && <span className={styles.label}>{children}</span>}
+      </Text>
     </button>
   );
 });
