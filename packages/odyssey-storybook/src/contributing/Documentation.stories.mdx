@@ -6,6 +6,14 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 In order to be considered for release, components require documentation. We provide a template for component documentation to make this process easier and ensure consistent docs.
 
+## Doc style
+
+Placeholder for guidelines surrounding:
+
+- Writing copy within documentation (e.g. sentence casing, example format)
+- Guide to writing CSF stories vs inline MDX stories
+- Use SB tables unless you are documenting an Odyssey table
+
 ## Doc sections
 
 From top to bottom, component documentation should include these sections. Optional content is marked as such.
@@ -14,26 +22,22 @@ From top to bottom, component documentation should include these sections. Optio
   <dt>Overview</dt>
   <dd>
     This section should be named after the component and include a short
-    description.
+    description as well as links to the Figma files and source code.
   </dd>
   <dt>Anatomy</dt>
   <dd>
-    There is an Open Question about whether we should supply manually curated
-    Anatomy examples.
+    This section houses a figure which provides a visual breakdown of the
+    component parts, layout, and tokens.
   </dd>
+  <dt>Arguments / Props</dt>
   <dd>
-    If this section is not included, a "default" story example may be useful to
-    include above. Spacing and outline redlines would be achieved via the Canvas
-    tab.
-  </dd>
-  <dd>
-    If this section is included, the Anatomy diagrams should reference our
-    component part names and utilized design tokens.
+    This section should be automatically populated by an
+    <code>&lt;ArgsTable/&gt;</code>.
   </dd>
   <dt>Behavior (Optional)</dt>
   <dd>
-    While Usage describes guidelines for designers and engineers, Behavior
-    describes default behaviors included with components.
+    While Usage section below describes guidelines for designers and engineers,
+    Behavior describes default behaviors included with components.
   </dd>
   <dd>
     This section is not required if the component has limited or self-evident
@@ -51,8 +55,9 @@ From top to bottom, component documentation should include these sections. Optio
   <dt>States</dt>
   <dd>This section covers all the states a component can find itself in.</dd>
   <dd>
-    This includes both HTML-spec states like `:hover` or `:focus` as well as
-    component-specific states like hidden or empty.
+    Pseudo-classed states requiring user interaction, specifically `:focus` and
+    `:hover` are not required if those states can be observed via quick user
+    interaction.
   </dd>
   <dt>Usage</dt>
   <dd>
@@ -87,11 +92,6 @@ From top to bottom, component documentation should include these sections. Optio
     This should include any notes about use or cultural considerations, as well
     as whether the component is lacking globalization support in some regard.
   </dd>
-  <dt>Arguments / Props</dt>
-  <dd>
-    This section should be automatically populated by an{" "}
-    <code>&lt;ArgsTable/&gt;</code>.
-  </dd>
   <dt>References (optional)</dt>
   <dd>
     This section has two optional children: Related Components and Further
@@ -119,66 +119,89 @@ From top to bottom, component documentation should include these sections. Optio
 ## Docs template
 
 ```md
-# Component name
+# Landing Gear
 
-This section should be named after the component and include a short description.
+This component provides traction and cushion during take-off and landing.
+
+[Figma](http://figma.com/path/to/my-component) - [Source](http://github.com/okta/odyssey/path/to/source)
 
 ## Anatomy
 
-There is an Open Question about whether we should supply manually curated Anatomy examples.
+**ANATOMY PLACEHOLDER**
 
-- If this section is not included, a "default" story example may be useful to include above. Spacing and outline redlines would be achieved via the Canvas tab.
-- If this section is included, the Anatomy diagrams should reference our component part names and utilized design tokens.
+## Arguments
+
+<ArgsTable/>
 
 ## Behavior (optional)
 
-While Usage describes guidelines for designers and engineers, Behavior describes default behaviors included with components.
-
-Ex: "When activated via user action or an asynchronous event, the Toast will be visible in the lower right-hand portion of the screen."
+Landing Gear deploys through doors in the heat shield. This component cannot be retracted once deployed.
 
 ## Variants (optional)
 
-Variants are the "types" of each component we currently offer.
+Odyssey offers both automatic and manual variants of Landing Gear.
 
-Ex: Buttons have Primary, Secondary, Danger, Overlay, and Clear. Each Variant has its own subheading under this section.
+### Manual
+
+Since Landing Gear is deployed through the heat shield, our default variant is Manual control. Unless automated systems have a sufficient success rate, please utilize this variant.
+
+### Automatic
+
+Automatic Landing Gear is deployed once the orbiter has achieved a set proximity to the ground. If your atmospheric density is variable, we recommend using Manual deployment instead.
 
 ## States (optional)
 
-This section covers all the states a component can find itself in. This includes both HTML-spec states like `:hover` or `:focus` as well as component-specific states like hidden or empty.
+### Retracted
 
-Each State has its own subheading under this section.
+In its retracted state, Landing Gear is not visible, being stored behind the heat shield.
+
+### Deployed
+
+In its deployed state, Landing Gear emerges from behind the heat shield and becomes visible. Landings are only possible in this state.
 
 ## Usage
 
-This is where we lay out the function of components and how they can be used within a design/view/page. DOs and DONTs are appropriate for this section.
+Landing Gear should be used when designing any craft with air-to-ground capability.
+
+For most crafts, three sets of Landing Gear are necessary and sufficient. If you are working with particularly large or small crafts, please reach out to the Odyssey team.
+
+### Do
+
+- Utilize Landing Gear when terrestial excursions are rare but expected.
+- Account for both retracted and deployed states in your designs.
+
+### Don't
+
+- Landing Gear should not be included on any craft that will not make terrestial landings.
+- Do not limit your craft to only Deployed or Retracted states. Landing Gear requires both states for full functionality.
 
 ## Content Guidelines
 
-This is where we lay out any requirements around acceptable content for use within the component. This includes both what a component may contain as well as how that content should be written. DOs and DONTs are appropriate for this section.
+When marking left and right Landing Gear controls, treat the nose of your craft as "forward".
 
-Specific content types may have subheadings under this section.
+Please do not use "port" and "starboard" terminology when referencing controls, as these designations are not useful on some planets.
 
 ## Accessibility
 
-This section includes any guidelines required for compliance as well as design rationale already leveraged to ensure compliance - both "please do this" and "we do this because".
-
-This section may have subheadings as necessary.
+Crafts utilizing Landing Gear are required to utilize a nose wheel steering system. Ensure your individual Landing Gear components are associated with the appropriate rudder pedals.
 
 ## Responsive Web Design (optional)
 
-Any considerations for use or documentation. This section is rare today, but should include examples and rationale similar to the Accessibility section.
+As noted above, craft are expected to utilize three sets of Landing Gear. This configuration should scale for both large and small crafts.
+
+If you encounter issues with the configuration, please reach out, as a more fluid design may be required.
 
 ## Globalization (optional)
 
-This should include any notes about use or cultural considerations, as well as whether the component is _lacking_ globalization support in some regard.
+Some systems disallow Automatic variants of Landing Gear, as failures are catastrophic. Ensure your craft designs are in compliance with local mandates.
 
 ## References (optional)
 
 ### Related Components (optional)
 
-We do this in a few places today and it may be beneficial to include in more places. Ex: Links vs Buttons; Form-related elements
+- [Rudder Pedals](../components/rudder-pedals)
 
 ### Further Reading (optional)
 
-Again, included in some places, always optional, but could provide additional rationale or education for our users.
+For more information, please review the landing and take-off procedures detailed in [The Shadow Proclamation](http://an.external.site)
 ```
