@@ -110,9 +110,9 @@ let Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
         </span>
       )}
       {children && (
-        <span className={styles.actions}>
+        <section className={styles.actions}>
           <Text>{children}</Text>
-        </span>
+        </section>
       )}
       {onDismiss && (
         <span className={styles.dismiss}>
