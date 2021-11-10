@@ -69,22 +69,18 @@
 
 .infoVariant {
   background-color: cv("blue", "300");
-  color: $text-body;
 }
 
 .successVariant {
   background-color: cv("green", "300");
-  color: $text-body;
 }
 
 .cautionVariant {
   background-color: cv("yellow", "300");
-  color: $text-body;
 }
 
 .dangerVariant {
   background-color: cv("red", "300");
-  color: $text-body;
 }
 
 @media screen and (max-width: ($max-line-length * 1.5)) {
