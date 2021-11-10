@@ -23,9 +23,10 @@ import {
   FieldGroup,
   TextInput,
   Button,
+  Form,
 } from "@okta/odyssey-react";
 import { Toast as Source } from "../../../../odyssey-react/src";
-import { Form } from "../../../../odyssey-react/src";
+
 import ToastMdx from "./Toast.mdx";
 
 export default {
