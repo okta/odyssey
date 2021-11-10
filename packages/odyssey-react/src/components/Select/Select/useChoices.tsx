@@ -22,10 +22,6 @@ type UseChoices = (args: {
   loadingText?: string;
   noResultsText?: string;
   noChoicesText?: string;
-  onSearch?: (
-    searchText: string,
-    setOptions: (choices: Record<string, unknown>[]) => void
-  ) => Promise<void>;
 }) => void;
 
 export interface ChoicesHTMLSelectElement extends HTMLSelectElement {
