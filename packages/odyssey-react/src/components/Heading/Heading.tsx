@@ -14,6 +14,7 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import styles from "./Heading.module.scss";
+import { Text, TextProps } from "../Text";
 
 export interface HeadingProps
   extends Omit<ComponentPropsWithRef<"h1">, "style" | "className"> {
@@ -40,9 +41,21 @@ export interface HeadingProps
   noEndMargin?: boolean;
 
   /**
-   * Specify explicit line height spacing
+   * The line-height for the title content.
    */
-  lineHeight?: "base" | "title";
+  lineHeight?: TextProps["lineHeight"];
+
+  /**
+   * The heading color style.
+   * @default heading
+   */
+  color?: TextProps["color"];
+
+  /**
+   * The font weight for the heading.
+   * @default bold
+   */
+  weight?: TextProps["weight"];
 }
 
 /**
@@ -57,23 +70,27 @@ let Heading = forwardRef<HTMLHeadingElement, HeadingProps>((props, ref) => {
     children,
     noEndMargin = false,
     lineHeight,
+    color = "heading",
+    weight = "bold",
     ...rest
   } = props;
-
   const Tag = `h${level}` as const;
-
+  const size = visualLevel
+    ? (`heading${visualLevel}` as const)
+    : (`heading${level}` as const);
   const componentClass = useCx(
     styles.root,
     visualLevel && styles[`level${visualLevel}`],
-    noEndMargin && styles.noEndMargin,
-    lineHeight && styles[`${lineHeight}LineHeight`]
+    noEndMargin && styles.noEndMargin
   );
-
+  const lh = lineHeight ? lineHeight : parseInt(level) > 3 ? "title" : "base";
   const omitProps = useOmit(rest);
 
   return (
     <Tag {...omitProps} ref={ref} className={componentClass}>
-      {children}
+      <Text color={color} weight={weight} size={size} lineHeight={lh}>
+        {children}
+      </Text>
     </Tag>
   );
 });
