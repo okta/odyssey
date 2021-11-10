@@ -13,7 +13,18 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { FormEventHandler } from "react";
-import { Toast, ToastProps, ToastObject, useToast } from "@okta/odyssey-react";
+import {
+  Toast,
+  ToastProps,
+  ToastObject,
+  useToast,
+  Box,
+  Select,
+  FieldGroup,
+  TextInput,
+  Button,
+  Form,
+} from "@okta/odyssey-react";
 import { Toast as Source } from "../../../../odyssey-react/src";
 
 import ToastMdx from "./Toast.mdx";
@@ -80,30 +91,45 @@ const DemoApp = () => {
   };
 
   return (
-    <form id="form-toast-demo" onSubmit={handleSubmit}>
-      <label htmlFor="variant">Variant</label>
-      <select id="variant" name="variant">
-        <option>info</option>
-        <option>success</option>
-        <option>caution</option>
-        <option>danger</option>
-      </select>
-      <label htmlFor="title">Title</label>
-      <input
-        id="title"
-        name="title"
-        type="text"
-        defaultValue="Title"
-        required
-      />
-      <label htmlFor="body">Body</label>
-      <input
-        id="body"
-        name="body"
-        defaultValue="Descriptive body content (optional)"
-      />
-      <input type="submit" defaultValue="Emit toast" />
-    </form>
+    <Box padding="m">
+      <Form onSubmit={handleSubmit}>
+        <Form.Main>
+          <FieldGroup
+            title="Toast Provider Demo"
+            desc="This demo shows you how the toast should appear within an app!"
+          >
+            <Select
+              defaultValue="info"
+              label="The visual variant to be displayed to the user."
+              name="variant"
+              id="variant"
+            >
+              <Select.Option value="info">info</Select.Option>
+              <Select.Option value="success">success</Select.Option>
+              <Select.Option value="caution">caution</Select.Option>
+              <Select.Option value="danger">danger</Select.Option>
+            </Select>
+            <TextInput
+              label="Title"
+              hint="The title to be displayed on the toast."
+              name="title"
+              id="title"
+              defaultValue="Shuttle Endeavour has reached the hangar"
+            />
+            <TextInput
+              label="Body"
+              hint="Supplemental information. Be concise - less than three lines of content - as your Toast will soon vanish!"
+              name="body"
+              id="body"
+              defaultValue="No further action is necessary at this time."
+            />
+          </FieldGroup>
+        </Form.Main>
+        <Form.Actions>
+          <Button type="submit">Emit toast</Button>
+        </Form.Actions>
+      </Form>
+    </Box>
   );
 };
 
