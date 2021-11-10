@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 import ReactDOMServer from "react-dom/server";
 import Choices from "choices.js";
 import { CloseIcon } from "../../Icon";
@@ -28,18 +28,8 @@ type UseChoices = (args: {
   ) => Promise<void>;
 }) => void;
 
-interface ChoicesSearchEventDetail {
-  value: string;
-  resultCount: number;
-}
-interface ChoicesSearch extends EventListener {
-  (event: CustomEvent<ChoicesSearchEventDetail>): void;
-}
-function isChoicesSearchEvent(
-  evt: Event
-): evt is CustomEvent<ChoicesSearchEventDetail> {
-  // eslint-disable-next-line
-  return (evt as CustomEvent<ChoicesSearchEventDetail>).detail !== undefined;
+export interface ChoicesHTMLSelectElement extends HTMLSelectElement {
+  choices?: Choices;
 }
 
 const useChoices: UseChoices = ({
@@ -48,59 +38,13 @@ const useChoices: UseChoices = ({
   loadingText,
   noResultsText,
   noChoicesText,
-  onSearch,
 }) => {
   const choices = useRef<undefined | Choices>();
 
-  /**
-   * A search handler which which informs the composer
-   * that a search was triggered, and shows the dropdown.
-   */
-  const handleSearch: ChoicesSearch = useCallback(
-    async (event: Event) => {
-      if (onSearch !== undefined && isChoicesSearchEvent(event)) {
-        if (choices && choices.current) {
-          // Make sure the only visible 'choice' is loading
-          choices?.current?.setChoices(
-            [
-              {
-                value: "$_disabled",
-                label: loadingText,
-                disabled: true,
-              },
-            ],
-            "value",
-            "label",
-            true
-          );
-
-          try {
-            await onSearch(
-              event.detail.value,
-              (newOptions: Record<string, unknown>[]) => {
-                // Make sure the only visible 'choice' is loading
-                choices?.current?.setChoices(
-                  newOptions,
-                  "value",
-                  "label",
-                  true
-                );
-              }
-            );
-          } catch (ex) {
-            // If composer allows an exception to reach here - indicates they want a choices
-            // compatible error indicator.
-          }
-        }
-      }
-    },
-    [onSearch]
-  );
-
   useEffect(() => {
-    const select = document.getElementById(id) as HTMLSelectElement;
+    const select = document.getElementById(id) as ChoicesHTMLSelectElement;
 
-    choices.current = new Choices(select, {
+    const choicesInstance = new Choices(select, {
       loadingText,
       noResultsText,
       noChoicesText,
@@ -156,18 +100,15 @@ const useChoices: UseChoices = ({
       }),
     });
 
-    if (onSearch && select) {
-      select.addEventListener("search", handleSearch);
-    }
+    select.choices = choicesInstance;
 
     return () => {
-      debugger;
-      if (onSearch && select) {
-        select.removeEventListener("search", handleSearch);
-      }
-      choices?.current?.destroy();
+      const select =
+        choicesInstance.passedElement as unknown as ChoicesHTMLSelectElement;
+      delete select.choices;
+      choicesInstance.destroy();
     };
-  }, [id, loadingText, noChoicesText, noResultsText, onSearch, handleSearch]);
+  }, [id, loadingText, noChoicesText, noResultsText]);
 
   useEffect(() => {
     const forceValue = () => value && choices?.current?.setChoiceByValue(value);
