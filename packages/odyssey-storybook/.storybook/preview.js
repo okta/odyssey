@@ -1,3 +1,5 @@
+import "@okta/odyssey-react/dist/odyssey-deprecated-global.251d01.css";
+
 export const parameters = {
   controls: {
     expanded: true,
