@@ -19,7 +19,7 @@ import styles from "./Button.module.scss";
 interface CommonProps
   extends Omit<ComponentPropsWithRef<"button">, "style" | "className"> {
   /**
-   * Text content to be rendered within the button, usualy label text.
+   * Text content to be rendered within the button, usually label text.
    */
   children?: ReactText;
 
@@ -38,7 +38,13 @@ interface CommonProps
    * The visual variant to be displayed to the user.
    * @default primary
    */
-  variant?: "primary" | "secondary" | "danger" | "dismiss" | "clear";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "dismiss"
+    | "dismissInverted"
+    | "clear";
 
   /**
    * Extends the width of the button to that of its' parent.
@@ -55,6 +61,40 @@ interface IconProps extends CommonProps {
 }
 
 export type ButtonProps = IconProps | ChildrenProps;
+
+function buildColors(variant: ButtonProps["variant"]) {
+  let textColor: TextProps["color"] = "bodyInverse";
+  let parentHoveredColor: TextProps["parentHoveredColor"] = "bodyInverse";
+  let parentFocusedColor: TextProps["parentFocusedColor"] = "bodyInverse";
+  let parentDisabledColor: TextProps["parentDisabledColor"] = "bodyInverse";
+
+  if (variant === "secondary" || variant === "clear") {
+    textColor = "primary";
+    parentFocusedColor = "primary";
+    parentDisabledColor = "primaryLight";
+  }
+
+  if (variant === "clear") {
+    parentHoveredColor = "primaryDark";
+  }
+
+  if (variant === "dismiss" || variant === "dismissInverted") {
+    parentDisabledColor = "sub";
+  }
+
+  if (variant === "dismiss") {
+    textColor = "body";
+    parentHoveredColor = "body";
+    parentFocusedColor = "body";
+  }
+
+  return {
+    textColor,
+    parentHoveredColor,
+    parentFocusedColor,
+    parentDisabledColor,
+  };
+}
 
 /**
  * A clickable button used for form submissions and most in-page interactions.
@@ -76,40 +116,25 @@ let Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     wide && styles.wideLayout
   );
 
-  let textColor: TextProps["color"] = "bodyInverse";
-  let hoverColor: TextProps["hoverColor"] = "bodyInverse";
-  let focusColor: TextProps["focusColor"] = "bodyInverse";
-  let disabledColor: TextProps["disabledColor"] = "bodyInverse";
-
-  if (variant === "secondary" || variant === "clear") {
-    textColor = "primary";
-    focusColor = "primary";
-    disabledColor = "primaryLight";
-  }
-
-  if (variant === "clear") {
-    hoverColor = "primaryDark";
-  }
-
-  if (variant === "dismiss") {
-    textColor = "body";
-    hoverColor = "body";
-    focusColor = "body";
-    disabledColor = "sub";
-  }
-
+  const {
+    textColor,
+    parentHoveredColor,
+    parentFocusedColor,
+    parentDisabledColor,
+  } = buildColors(variant);
   const omitProps = useOmit(rest);
-
   return (
     <button {...omitProps} ref={ref} className={componentClass}>
       <Text
         color={textColor}
-        hoverColor={hoverColor}
-        focusColor={focusColor}
-        disabledColor={disabledColor}
+        parentHoveredColor={parentHoveredColor}
+        parentFocusedColor={parentFocusedColor}
+        parentDisabledColor={parentDisabledColor}
         weight="bold"
         wrap="nowrap"
         transition="inherit"
+        size={size === "s" ? "caption" : "base"}
+        lineHeight={size === "s" ? "title" : "normal"}
       >
         {icon && <span className={styles.icon}>{icon}</span>}
         {children && <span className={styles.label}>{children}</span>}

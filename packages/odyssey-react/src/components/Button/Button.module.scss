@@ -101,7 +101,8 @@
   }
 }
 
-.dismissVariant {
+.dismissVariant,
+.dismissInvertedVariant {
   padding-block: ($spacing-xs-em * 0.5);
   padding-inline: ($spacing-xs-em * 0.5);
   border: 0;
@@ -128,6 +129,10 @@
     margin-block-end: -0.0625em;
     line-height: 0.9;
   }
+}
+
+.dismissInvertedVariant:focus {
+  box-shadow: 0 0 0 2px $white;
 }
 
 .clearVariant {
