@@ -1,13 +1,22 @@
-# [0.8.2](https://github.com/okta/odyssey/compare/@okta/odyssey-react_0.8.1...@okta/odyssey-react_0.8.2) (2021-11-04)
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.8.3](https://github.com/okta/odyssey/compare/v0.8.2...v0.8.3) (2021-11-10)
+
+**Note:** Version bump only for package @okta/odyssey-react
+
+# [0.8.2](https://github.com/okta/odyssey/compare/v0.8.1...v0.8.2) (2021-11-04)
 
 ### Features
 
 - **odyssey-react:** add Text component ([afea2917](https://github.com/okta/odyssey/commit/afea29175d75da3afbe078b1e001b1a20df5aed4))
 - **odyssey-react:** add Box component ([507c7d62](https://github.com/okta/odyssey/commit/507c7d6207195e95087a62c746f23b4af8c8d85e))
 
-# [0.8.1](https://github.com/okta/odyssey/compare/@okta/odyssey-react_0.8.0...@okta/odyssey-react_0.8.1) (2021-10-29)
+# [0.8.1](https://github.com/okta/odyssey/compare/v0.8.0...v0.8.1) (2021-10-29)
 
-# [0.8.0](https://github.com/okta/odyssey/compare/@okta/odyssey_0.7.0...@okta/odyssey-react_0.8.0) (2021-10-28)
+# [0.8.0](https://github.com/okta/odyssey/compare/@okta/odyssey_0.7.0...v0.8.0) (2021-10-28)
 
 ### Bug Fixes
 
