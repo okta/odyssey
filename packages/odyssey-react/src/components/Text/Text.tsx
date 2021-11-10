@@ -63,6 +63,8 @@ export interface TextProps {
     | "dangerDisabled"
     | "sub"
     | "heading"
+    | "headingInverse"
+    | "dangerDisabled"
     | "primary";
 
   /**
@@ -93,13 +95,22 @@ export interface TextProps {
    * The font-size for the text content.
    * @default base
    */
-  size?: "lede" | "base" | "caption";
+  size?:
+    | "lede"
+    | "base"
+    | "caption"
+    | "heading1"
+    | "heading2"
+    | "heading3"
+    | "heading4"
+    | "heading5"
+    | "heading6";
 
   /**
    * The line-height for the text content.
    * @default normal
    */
-  lineHeight?: "normal" | "title" | "font";
+  lineHeight?: "base" | "title" | "font";
 
   /**
    * The overflow wrapping behavior for the text content.

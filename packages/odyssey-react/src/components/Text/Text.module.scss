@@ -252,6 +252,14 @@
   color: $text-body-inverse;
 }
 
+.headingColor {
+  color: $text-heading;
+}
+
+.headingInverseColor {
+  color: $text-heading-inverse;
+}
+
 .subColor {
   color: $text-sub;
 }
@@ -330,6 +338,30 @@
 
 .captionSize {
   font-size: $size-body-caption;
+}
+
+.heading1Size {
+  font-size: $size-title-1;
+}
+
+.heading2Size {
+  font-size: $size-title-2;
+}
+
+.heading3Size {
+  font-size: $size-title-3;
+}
+
+.heading4Size {
+  font-size: $size-title-4;
+}
+
+.heading5Size {
+  font-size: $size-title-5;
+}
+
+.heading6Size {
+  font-size: $size-title-6;
 }
 
 // Wrap
