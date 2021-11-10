@@ -14,6 +14,7 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useOmit, withStyles } from "../../utils";
 import styles from "./Tag.module.scss";
+import { Text } from "../Text";
 
 export interface TagProps
   extends Omit<
@@ -43,7 +44,7 @@ let Tag = forwardRef<HTMLUListElement, TagProps>((props, ref) => {
     <ul {...omitProps} ref={ref} className={styles.list}>
       {tags.map((item) => (
         <li className={styles.tag} key={item}>
-          {item}
+          <Text>{item}</Text>
         </li>
       ))}
     </ul>
