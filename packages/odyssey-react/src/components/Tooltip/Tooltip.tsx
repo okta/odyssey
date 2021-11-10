@@ -55,7 +55,12 @@ let Tooltip = forwardRef<HTMLElement, TooltipProps>((props, ref) => {
         className={tooltipClasses}
         role="tooltip"
       >
-        <Text color="bodyInverse" size="caption" weight="bold">
+        <Text
+          color="bodyInverse"
+          size="caption"
+          weight="bold"
+          lineHeight="title"
+        >
           {label}
         </Text>
       </aside>
