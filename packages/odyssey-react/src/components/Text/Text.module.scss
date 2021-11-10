@@ -359,47 +359,49 @@
 }
 
 // Hover
-:hover > .bodyHoverColor,
+:hover > .bodyParentHoveredColor,
 .bodyHoverColor:hover {
   color: $text-body;
 }
-:hover > .bodyInverseHoverColor,
+
+:hover > .bodyInverseParentHoveredColor,
 .bodyInverseHoverColor:hover {
   color: $text-body-inverse;
 }
-:hover > .primaryDarkHoverColor,
+
+:hover > .primaryDarkParentHoveredColor,
 .primaryDarkHoverColor:hover {
   color: $color-primary-dark;
 }
 
 // Focus
-:focus > .bodyFocusColor,
+:focus > .bodyParentFocusedColor,
 .bodyFocusColor:focus {
   color: $text-body;
 }
 
-:focus > .bodyInverseFocusColor,
+:focus > .bodyInverseParentFocusedColor,
 .bodyInverseFocusColor:focus {
   color: $text-body-inverse;
 }
 
-:focus > .primaryFocusColor,
+:focus > .primaryParentFocusedColor,
 .primaryFocusColor:focus {
   color: $color-primary-base;
 }
 
 // Disabled
-:disabled > .bodyInverseDisabledColor,
+:disabled > .bodyInverseParentDisabledColor,
 .bodyInverseDisabledColor:disabled {
   color: $text-body-inverse;
 }
 
-:disabled > .primaryLightDisabledColor,
+:disabled > .primaryLightParentDisabledColor,
 .primaryLightDisabledColor:disabled {
   color: $color-primary-light;
 }
 
-:disabled > .subDisabledColor,
+:disabled > .subParentDisabledColor,
 .subDisabledColor:disabled {
   color: $text-sub;
 }

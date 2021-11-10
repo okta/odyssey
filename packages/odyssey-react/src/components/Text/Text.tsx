@@ -112,14 +112,29 @@ export interface TextProps {
   hoverColor?: "body" | "bodyInverse" | "primaryDark";
 
   /**
-   * The text color style on hover.
+   * The text color style on focus.
    */
   focusColor?: "body" | "bodyInverse" | "primary";
 
   /**
-   * The text color style on hover.
+   * The text color style when disabled.
    */
   disabledColor?: "bodyInverse" | "primaryLight" | "sub";
+
+  /**
+   * The text color style when the parent element is hovered.
+   */
+  parentHoveredColor?: "body" | "bodyInverse" | "primaryDark";
+
+  /**
+   * The text color style when the parent element has focus.
+   */
+  parentFocusedColor?: "body" | "bodyInverse" | "primary";
+
+  /**
+   * The text color style when the parent element is disabled.
+   */
+  parentDisabledColor?: "bodyInverse" | "primaryLight" | "sub";
 
   /**
    * Transitions
@@ -144,6 +159,9 @@ let Text = forwardRef((props, ref) => {
     hoverColor,
     focusColor,
     disabledColor,
+    parentHoveredColor,
+    parentFocusedColor,
+    parentDisabledColor,
     transition,
     ...rest
   } = props;
@@ -163,9 +181,12 @@ let Text = forwardRef((props, ref) => {
     styles[hoverColor + "HoverColor"],
     styles[focusColor + "FocusColor"],
     styles[disabledColor + "DisabledColor"],
+    styles[parentHoveredColor + "ParentHoveredColor"],
+    styles[parentFocusedColor + "ParentFocusedColor"],
+    styles[parentDisabledColor + "ParentDisabledColor"],
     styles[transition + "Transition"]
   );
-
+  console.log(componentClass);
   const omitProps = useOmit(rest);
 
   return (
