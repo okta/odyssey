@@ -10,20 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   render,
   fireEvent,
   screen,
   within,
   waitFor,
-  waitForElementToBeRemoved,
 } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { Select } from ".";
+import { Select, ChoicesHTMLSelectElement } from ".";
 
 const listboxRole = "listbox";
-const multipleInputRole = "textbox";
 const optionRole = "option";
 const label = "Select speed";
 const name = "speed";
@@ -36,6 +33,27 @@ const tree = (props: Record<string, unknown> = {}) => (
     <Select.Option children="Ludicrous speed" />
   </Select>
 );
+
+const RefTree = (props: Record<string, unknown> = {}) => {
+  const selectRef = useRef<ChoicesHTMLSelectElement>(null);
+
+  useEffect(() => {
+    if (selectRef?.current?.choices) {
+      selectRef?.current?.choices.setChoices([
+        {
+          value: "ref",
+          label: "Choices!",
+        },
+      ]);
+    }
+  }, [selectRef]);
+
+  return (
+    <Select ref={selectRef} {...props} label={label} name={name}>
+      <Select.Option children={"No choices"} />
+    </Select>
+  );
+};
 
 const getSelectViaQuery = () =>
   window.document.querySelector("select") as HTMLSelectElement;
@@ -152,58 +170,17 @@ describe("Select", () => {
     />;
   });
 
-  /**
-   * WIP
-   */
-  it("passes search text to onSearch if defined for multiple", async () => {
-    const myQuery = "my q";
-    let expectedSubstringEnd = 1;
-
-    const onSearch = async (searchText: string) => {
-      // Called in sequence
-      expect(searchText).toEqual(searchText.substring(0, expectedSubstringEnd));
-      expectedSubstringEnd += 1;
-      return expectedSubstringEnd === myQuery.length + 1;
-    };
-
-    render(tree({ onSearch: onSearch, multiple: true }));
-
-    const input = screen.getByRole(multipleInputRole) as HTMLInputElement;
-
-    await userEvent.type(input, myQuery, {
-      delay: 1,
-    });
-
-    // Called for every character
-    expect(expectedSubstringEnd).toEqual(myQuery.length + 1);
-    // List box not shown because showOptions was not invoked
-    expect(screen.getByText("Lightspeed")).not.toBeVisible();
-  });
-
-  /**
-   * WIP
-   */
-  it("Displays dropdown on search when showOptions is called", async () => {
-    const myQuery = "abc";
-    const loadingText = "Please wait...";
-
-    let searchIndex = 0;
-
-    const onSearch = async (_searchText: string, showOptions: () => void) => {
-      searchIndex += 1;
-      showOptions();
-      return searchIndex === myQuery.length;
-    };
-
-    render(
-      tree({ onSearch: onSearch, multiple: true, loadingText: loadingText })
+  it("Composer can use choices ref from dom", async () => {
+    const { getByText } = render(
+      <RefTree label={label} name={name} children={<div />} />
     );
 
-    const input = screen.getByRole(multipleInputRole) as HTMLInputElement;
-    await userEvent.type(input, myQuery, {
-      delay: 1,
+    const listbox = screen.getAllByRole(listboxRole)[0];
+    fireEvent.mouseDown(listbox);
+
+    await waitFor(() => {
+      return getByText("Choices!");
     });
-    expect(screen.getByRole(listboxRole)).toBeTruthy();
   });
 
   a11yCheck(() => render(tree()));

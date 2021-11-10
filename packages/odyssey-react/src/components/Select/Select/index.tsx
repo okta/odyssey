@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
 import { SelectOption } from "../SelectOption";
 import { SelectOptionGroup } from "../SelectOptionGroup";
-import { useChoices } from "./useChoices";
+import { ChoicesHTMLSelectElement, useChoices } from "./useChoices";
 import {
   forwardRefWithStatics,
   useOid,
@@ -26,30 +26,6 @@ import type { SharedFieldTypes } from "../../Field/types";
 
 import styles from "../Select.module.scss";
 import { CaretDownIcon } from "../../Icon";
-import { CircularLoadIndicator } from "../..";
-
-/**
- * For discussion - not implemented.
- *
- * Concept would be Select controlling what props are passed to VisibleComponent
- * when the visibleOptions are rendered.
- *
- * Meets requirement of significantly customized visible options which is currently
- * not achieveable given hiding of choices callbackOnCreateTemplates
- */
-
-type VisibleOptionProps<U extends Record<string, unknown>> = {
-  label: string;
-  value: string;
-  data: U;
-};
-
-type OnSearchHandler<U> = U extends Record<string, unknown>
-  ? (
-      searchText: string,
-      setVisibleOptions: (options: VisibleOptionProps<U>[]) => void
-    ) => Promise<void>
-  : never;
 
 interface CommonProps
   extends SharedFieldTypes,
@@ -93,14 +69,19 @@ interface CommonProps
   onChange?: (event?: ChangeEvent<HTMLSelectElement>, value?: string) => void;
 
   /**
-   * The text that is shown when all options are already selected,
-   * or a user's search has returned no results.
+   * The text that is shown while choices are being populated.
+   */
+  loadingText?: string;
+
+  /**
+   * The text that is shown when a user's search has returned no results.
    */
   noResultsText?: string;
 }
 
 interface MultipleProps extends CommonProps {
   multiple: true;
+
   /**
    * The text that is shown when a user has selected all possible choices.
    */
@@ -112,134 +93,78 @@ interface SingleProps extends CommonProps {
   noChoicesText?: never;
 }
 
-interface SearchMultipleProps extends MultipleProps {
-  /**
-   * Callback executed when the select fires a search event.
-   * Loading state will be displayed until the promise resolves with true.
-   * @param {string} The user entered text
-   * @param {Function} A callback that can be used to show visible options which are
-   *                   out of sync with the children of the Select.
-   * @returns {boolean} Whether
-   */
-  onSearch: OnSearchHandler<Record<string, unknown>>;
-  loadingText: string;
-}
-
-function isSearchMultiple(props: SelectProps): props is SearchMultipleProps {
-  const searchMultiple = props as SearchMultipleProps;
-  return (
-    searchMultiple.onSearch !== undefined &&
-    searchMultiple.loadingText !== undefined
-  );
-}
-
-export type SelectProps = MultipleProps | SingleProps | SearchMultipleProps;
+export type SelectProps = MultipleProps | SingleProps;
 
 /**
  * Often referred to as a "dropdown menu" this input triggers a menu of
  * options a user can select.
  */
-let Select = forwardRefWithStatics<HTMLSelectElement, SelectProps, Statics>(
-  (props, ref) => {
-    const {
-      id,
-      children,
-      disabled = false,
-      name,
-      onChange,
-      required = true,
-      value,
-      error,
-      hint,
-      label,
-      optionalLabel,
-      noResultsText = "",
-      noChoicesText = "",
-      ...rest
-    } = props;
+let Select = forwardRefWithStatics<
+  ChoicesHTMLSelectElement,
+  SelectProps,
+  Statics
+>((props, ref) => {
+  const {
+    id,
+    children,
+    disabled = false,
+    name,
+    onChange,
+    required = true,
+    value,
+    error,
+    hint,
+    label,
+    optionalLabel,
+    loadingText = "",
+    noResultsText = "",
+    noChoicesText = "",
+    ...rest
+  } = props;
 
-    const [loading, setLoading] = useState<boolean>(false);
+  const omitProps = useOmit(rest);
 
-    const omitProps = useOmit(rest);
+  const oid = useOid(id);
 
-    const oid = useOid(id);
+  useChoices({ id: oid, value, loadingText, noResultsText, noChoicesText });
 
-    const loadingText = isSearchMultiple(props) ? props.loadingText : "";
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      onChange?.(event, event.target.value);
+    },
+    [onChange]
+  );
 
-    const baseUseChoicesProps = {
-      id: oid,
-      value,
-      noResultsText,
-      noChoicesText,
-    };
-
-    let useChoicesProps;
-
-    if (isSearchMultiple(props)) {
-      const { onSearch: composerSearch } = props;
-      useChoicesProps = {
-        ...baseUseChoicesProps,
-        onSearch: useCallback(
-          async (...args: Parameters<typeof composerSearch>) => {
-            setLoading(true);
-            // TBD - debounce?
-            await composerSearch(...args);
-            setLoading(false);
-          },
-          [composerSearch]
-        ),
-        loadingText: loadingText,
-      };
-    } else {
-      useChoicesProps = baseUseChoicesProps;
-    }
-
-    useChoices(useChoicesProps);
-
-    const handleChange = useCallback(
-      (event: ChangeEvent<HTMLSelectElement>) => {
-        onChange?.(event, event.target.value);
-      },
-      [onChange]
-    );
-
-    return (
-      <Field
-        error={error}
-        hint={hint}
-        inputId={oid}
-        label={label}
-        optionalLabel={optionalLabel}
-        required={required}
-      >
-        <div className={styles.outer}>
-          {/* eslint-disable-next-line jsx-a11y/no-onchange */}
-          <select
-            {...omitProps}
-            id={oid}
-            name={name}
-            disabled={disabled}
-            required={required}
-            onChange={handleChange}
-            value={value}
-            ref={ref}
-          >
-            {children}
-          </select>
-          <span className={styles.indicator} role="presentation">
-            {loading ? (
-              <CircularLoadIndicator
-                aria-label={loadingText}
-                aria-valuetext={loadingText}
-              />
-            ) : null}
-            <CaretDownIcon />
-          </span>
-        </div>
-      </Field>
-    );
-  }
-);
+  return (
+    <Field
+      error={error}
+      hint={hint}
+      inputId={oid}
+      label={label}
+      optionalLabel={optionalLabel}
+      required={required}
+    >
+      <div className={styles.outer}>
+        {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+        <select
+          {...omitProps}
+          id={oid}
+          name={name}
+          disabled={disabled}
+          required={required}
+          onChange={handleChange}
+          value={value}
+          ref={ref}
+        >
+          {children}
+        </select>
+        <span className={styles.indicator} role="presentation">
+          <CaretDownIcon />
+        </span>
+      </div>
+    </Field>
+  );
+});
 
 Select.displayName = "Select";
 
@@ -253,4 +178,5 @@ Select.OptionGroup = SelectOptionGroup;
 
 Select = withStyles(styles)(Select);
 
+export type { ChoicesHTMLSelectElement };
 export { Select };
