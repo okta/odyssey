@@ -14,6 +14,7 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import { Heading } from "../Heading";
+import { Text } from "../Text";
 import { CautionIcon, CompleteIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Infobox.module.scss";
 
@@ -83,8 +84,16 @@ let Infobox = forwardRef<HTMLElement, InfoboxProps>((props, ref) => {
           <Heading visualLevel="6" children={title} />
         </div>
       )}
-      {content && <section className={styles.content} children={content} />}
-      {actions && <section className={styles.actions} children={actions} />}
+      {content && (
+        <section className={styles.content}>
+          <Text>{content}</Text>
+        </section>
+      )}
+      {actions && (
+        <section className={styles.actions}>
+          <Text>{actions}</Text>
+        </section>
+      )}
     </aside>
   );
 });
