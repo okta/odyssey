@@ -144,7 +144,7 @@ describe("Select", () => {
   });
 
   it("Composer can use choices ref from dom", async () => {
-    let selectRef: ChoicesHTMLSelectElement | null = null;
+    let selectRef = null as ChoicesHTMLSelectElement | null;
 
     const RefTree = ({
       onRefAvailable,
@@ -165,15 +165,17 @@ describe("Select", () => {
       );
     };
 
-    const onRefAvailable = (select: ChoicesHTMLSelectElement) => {
-      selectRef = select;
-    };
-
-    render(<RefTree onRefAvailable={onRefAvailable} />);
+    render(
+      <RefTree
+        onRefAvailable={(select: ChoicesHTMLSelectElement) => {
+          selectRef = select;
+        }}
+      />
+    );
 
     expect(selectRef).not.toBeNull();
     expect(selectRef?.choices).toBeDefined();
-    expect(selectRef?.choices.setChoices).toBeDefined();
+    expect(selectRef?.choices?.setChoices).toBeDefined();
   });
 
   a11yCheck(() => render(tree()));
