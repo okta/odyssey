@@ -25,12 +25,26 @@ export default {
   },
 };
 
-const Template: Story<HeadingProps> = ({ level, visualLevel, children }) => (
-  <Heading level={level} visualLevel={visualLevel} children={children} />
-);
+const Template: Story<HeadingProps> = ({ ...args }) => <Heading {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
   level: "1",
-  children: "Section title",
+  children: "Section heading",
+};
+
+const AllHeadingsTemplate: Story<HeadingProps> = ({ children }) => (
+  <>
+    <Heading level="1">h1. {children}</Heading>
+    <Heading level="2">h2. {children}</Heading>
+    <Heading level="3">h3. {children}</Heading>
+    <Heading level="4">h4. {children}</Heading>
+    <Heading level="5">h5. {children}</Heading>
+    <Heading level="6">h6. {children}</Heading>
+  </>
+);
+
+export const AllHeadings = AllHeadingsTemplate.bind({});
+AllHeadings.args = {
+  children: "Section heading",
 };
