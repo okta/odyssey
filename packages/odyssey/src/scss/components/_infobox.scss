@@ -39,14 +39,14 @@
 .ods-infobox--icon {
   grid-area: icon;
   align-self: start;
-  font-size: $size-title-5;
+  font-size: $size-heading-5;
   line-height: 1;
   justify-self: start;
 }
 
 .ods-infobox--title {
   grid-area: title;
-  font-size: $size-title-6;
+  font-size: $size-heading-6;
 }
 
 .ods-infobox--content {

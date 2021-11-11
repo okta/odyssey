@@ -41,7 +41,7 @@
 .ods-banner--icon {
   grid-area: icon;
   margin-inline-end: $spacing-s;
-  font-size: $size-title-5;
+  font-size: $size-heading-5;
   line-height: 1;
 }
 
@@ -49,7 +49,7 @@
   grid-area: title;
   margin-block-end: 0;
   margin-inline-end: $spacing-xs;
-  font-size: $size-title-6;
+  font-size: $size-heading-6;
 }
 
 .ods-banner--content {
