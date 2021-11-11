@@ -25,7 +25,7 @@ $mono-font-family: "Inconsolata", "SFMono-Regular", Consolas, "Liberation Mono",
 $base-font-size: 16px;
 $scale-ratio: 1.1487;
 $base-line-height: 1.5;
-$title-line-height: 1.3;
+$heading-line-height: 1.3;
 $max-line-length: 32em;
 $type-margin: 1.5em;
 

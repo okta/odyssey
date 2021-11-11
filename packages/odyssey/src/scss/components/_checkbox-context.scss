@@ -13,7 +13,7 @@
 .ods-table {
   .ods-checkbox--label {
     &:empty {
-      height: calc(1em * #{$title-line-height});
+      height: calc(1em * #{$heading-line-height});
     }
   }
 }
