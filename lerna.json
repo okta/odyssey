@@ -1,7 +1,7 @@
 {
-  "version": "0.8.2",
+  "version": "0.8.3",
   "npmClient": "yarn",
-  "tagVersionPrefix": "_",
+  "changelogPreset": "@okta/conventional-changelog-odyssey",
   "useWorkspaces": true,
   "packages": ["packages/*"]
 }

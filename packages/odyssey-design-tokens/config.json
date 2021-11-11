@@ -1,0 +1,37 @@
+{
+  "source": ["src/**/*.json"],
+  "platforms": {
+    "js": {
+      "transformGroup": "js",
+      "files": [
+        {
+          "format": "javascript/es6",
+          "destination": "dist/js/tokens.js"
+        },
+        {
+          "format": "typescript/es6-declarations",
+          "destination": "dist/js/tokens.d.ts"
+        }
+      ]
+    },
+    "css": {
+      "transformGroup": "css",
+      "files": [
+        {
+          "format": "css/variables",
+          "destination": "dist/css/tokens.css"
+        }
+      ]
+    },
+    "scss": {
+      "transformGroup": "scss",
+      "files": [
+        {
+          "destination": "dist/scss/tokens.scss",
+          "format": "scss/map-deep",
+          "mapName": "ods-tokens"
+        }
+      ]
+    }
+  }
+}

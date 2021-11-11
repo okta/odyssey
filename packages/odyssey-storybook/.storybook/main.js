@@ -45,11 +45,6 @@ module.exports = {
       configFile: false,
     });
   },
-  webpackFinal(config) {
-    return Object.assign(config, {
-      plugins: [...config.plugins, new ProvidePlugin({ React: "react" })],
-    });
-  },
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
