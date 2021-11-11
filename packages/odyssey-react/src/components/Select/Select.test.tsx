@@ -10,14 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { useRef, useEffect } from "react";
-import {
-  render,
-  fireEvent,
-  screen,
-  within,
-  waitFor,
-} from "@testing-library/react";
+import React, { useCallback } from "react";
+import { render, fireEvent, screen, within } from "@testing-library/react";
 import { Select, ChoicesHTMLSelectElement } from ".";
 
 const listboxRole = "listbox";
@@ -33,27 +27,6 @@ const tree = (props: Record<string, unknown> = {}) => (
     <Select.Option children="Ludicrous speed" />
   </Select>
 );
-
-const RefTree = (props: Record<string, unknown> = {}) => {
-  const selectRef = useRef<ChoicesHTMLSelectElement>(null);
-
-  useEffect(() => {
-    if (selectRef?.current?.choices) {
-      selectRef?.current?.choices.setChoices([
-        {
-          value: "ref",
-          label: "Choices!",
-        },
-      ]);
-    }
-  }, [selectRef]);
-
-  return (
-    <Select ref={selectRef} {...props} label={label} name={name}>
-      <Select.Option children={"No choices"} />
-    </Select>
-  );
-};
 
 const getSelectViaQuery = () =>
   window.document.querySelector("select") as HTMLSelectElement;
@@ -171,16 +144,36 @@ describe("Select", () => {
   });
 
   it("Composer can use choices ref from dom", async () => {
-    const { getByText } = render(
-      <RefTree label={label} name={name} children={<div />} />
-    );
+    let selectRef: ChoicesHTMLSelectElement | null = null;
 
-    const listbox = screen.getAllByRole(listboxRole)[0];
-    fireEvent.mouseDown(listbox);
+    const RefTree = ({
+      onRefAvailable,
+    }: {
+      onRefAvailable: (select: ChoicesHTMLSelectElement) => void;
+    }) => {
+      const selectRef = useCallback(
+        (select: ChoicesHTMLSelectElement) => {
+          onRefAvailable(select);
+        },
+        [onRefAvailable]
+      );
 
-    await waitFor(() => {
-      return getByText("Choices!");
-    });
+      return (
+        <Select ref={selectRef} label={label} name={name}>
+          <Select.Option children={"No choices"} />
+        </Select>
+      );
+    };
+
+    const onRefAvailable = (select: ChoicesHTMLSelectElement) => {
+      selectRef = select;
+    };
+
+    render(<RefTree onRefAvailable={onRefAvailable} />);
+
+    expect(selectRef).not.toBeNull();
+    expect(selectRef?.choices).toBeDefined();
+    expect(selectRef?.choices.setChoices).toBeDefined();
   });
 
   a11yCheck(() => render(tree()));
