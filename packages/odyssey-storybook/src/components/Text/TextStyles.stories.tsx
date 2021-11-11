@@ -223,11 +223,11 @@ WrapAnywhere.args = {
 };
 
 // Line Height
-export const LineHeightNormal = TemplateWithContainer.bind({});
-LineHeightNormal.storyName = "Line height: Normal (default)";
-LineHeightNormal.args = {
-  children: "Normal text LineHeight style",
-  lineHeight: "normal",
+export const LineHeightBase = TemplateWithContainer.bind({});
+LineHeightBase.storyName = "Line height: Base (default)";
+LineHeightBase.args = {
+  children: "Base text LineHeight style",
+  lineHeight: "base",
 };
 
 export const LineHeightTitle = TemplateWithContainer.bind({});
