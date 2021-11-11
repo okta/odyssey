@@ -14,7 +14,8 @@ import React, { useCallback } from "react";
 import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
 import { SelectOption } from "../SelectOption";
 import { SelectOptionGroup } from "../SelectOptionGroup";
-import { ChoicesHTMLSelectElement, useChoices } from "./useChoices";
+import { useChoices } from "./useChoices";
+import type { ChoicesHTMLSelectElement } from "./useChoices.types";
 import {
   forwardRefWithStatics,
   useOid,
