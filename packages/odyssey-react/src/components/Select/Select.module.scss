@@ -193,7 +193,7 @@
 
 .root[data-type*="select-one"] {
   .button {
-    display: none; // remove this functionality for Single Select, unavailable via JS
+    display: none; /* remove this functionality for Single Select, unavailable via JS */
   }
 }
 
@@ -323,7 +323,8 @@
     font-size: $size-body-base;
     font-weight: 400;
     line-height: calc((#{$base-line-height} * 1em) - 2px);
-    // Adjust for pill border
+
+    /* Adjust for pill border */
     overflow-wrap: break-word;
     vertical-align: middle;
 

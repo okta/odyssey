@@ -1,0 +1,11 @@
+{
+  "name": "@okta/conventional-changelog-odyssey",
+  "version": "0.8.3",
+  "main": "index.js",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "conventional-changelog-angular": "^5.0.12"
+  }
+}
