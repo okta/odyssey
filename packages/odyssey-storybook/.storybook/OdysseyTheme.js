@@ -7,7 +7,7 @@ export default create({
   colorSecondary: "#00297a",
 
   // UI
-  appBg: "#ffffff",
+  appBg: "#f5f5f6",
   appContentBg: "#ffffff",
   appBorderColor: "#d7d7dc",
   appBorderRadius: 4,
@@ -25,7 +25,7 @@ export default create({
   // Toolbar default and active colors
   barTextColor: "#1662dd",
   barSelectedColor: "#1d1d21",
-  barBg: "#f5f5f6",
+  barBg: "#ffffff",
 
   // Form colors
   inputBg: "#ffffff",
