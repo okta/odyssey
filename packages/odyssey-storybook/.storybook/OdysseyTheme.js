@@ -1,5 +1,17 @@
 import { create } from "@storybook/theming";
-import { ColorPrimaryBase, ColorPrimaryDark, ColorPaletteNeutral000, ColorPaletteNeutralWhite, ColorPaletteNeutral200, FontFamilyBase, FontFamilyMono, ColorTextBody, ColorTextBodyInverse, ColorPaletteNeutral600, ColorPaletteNeutral500 } from "@okta/odyssey-design-tokens";
+import {
+  ColorPrimaryBase,
+  ColorPrimaryDark,
+  ColorPaletteNeutral000,
+  ColorPaletteNeutralWhite,
+  ColorPaletteNeutral200,
+  FontFamilyBase,
+  FontFamilyMono,
+  ColorTextBody,
+  ColorTextBodyInverse,
+  ColorPaletteNeutral600,
+  ColorPaletteNeutral500,
+} from "@okta/odyssey-design-tokens";
 
 export default create({
   base: "light",
