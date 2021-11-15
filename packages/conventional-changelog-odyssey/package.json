@@ -6,6 +6,6 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "conventional-changelog-angular": "^5.0.12"
+    "conventional-changelog-conventionalcommits": "^4.6.1"
   }
 }
