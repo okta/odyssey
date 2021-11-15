@@ -29,27 +29,17 @@
   margin-block-start: 0;
   margin-block-end: $spacing-xs;
   margin-inline: 0;
-  color: $text-heading;
-  font-weight: 600;
 }
 
 .optionalLabel {
   padding-inline-start: $spacing-s;
-  color: $text-sub;
-  font-size: $size-body-caption;
-  font-weight: 400;
-  line-height: $spacing-m;
 }
 
 .hint {
   margin-block-start: -$spacing-xs;
   margin-block-end: $spacing-xs;
-  color: $text-body;
-  font-size: $size-body-caption;
 }
 
 .error {
   margin-block-start: $spacing-xs;
-  color: $text-danger;
-  font-size: $size-body-caption;
 }

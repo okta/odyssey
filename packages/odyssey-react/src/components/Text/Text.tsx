@@ -55,7 +55,14 @@ export interface TextProps {
    * The text color style for the text content.
    * @default body
    */
-  color?: "body" | "bodyInverse" | "code" | "danger" | "dangerDisabled" | "sub";
+  color?:
+    | "body"
+    | "bodyInverse"
+    | "code"
+    | "danger"
+    | "dangerDisabled"
+    | "sub"
+    | "heading";
 
   /**
    * The font weight for the text content.
