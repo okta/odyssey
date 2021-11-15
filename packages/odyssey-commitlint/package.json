@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "@commitlint/cli": "^14.0.0",
-    "@commitlint/config-angular": "^14.0.0",
+    "@commitlint/config-conventional": "^14.0.0",
     "@commitlint/config-lerna-scopes": "^14.0.0",
     "husky": "^6.0.0"
   }
