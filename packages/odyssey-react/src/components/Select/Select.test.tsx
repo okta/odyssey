@@ -54,9 +54,21 @@ describe("Select", () => {
   });
 
   it("renders controlled when provided with a value", () => {
+    const lightValue = "Lightspeed";
     render(tree({ value: warpValue }));
 
     const select = getSelectViaQuery();
+    expect(select).toHaveValue(warpValue);
+
+    // attempt to change via user interaction
+    const listbox = screen.getAllByRole(listboxRole)[0];
+    fireEvent.mouseDown(listbox);
+    const option = screen.getByText(lightValue, {
+      selector: `div[data-value=${lightValue}]`,
+    });
+    fireEvent.mouseDown(option);
+
+    // no change as input value is controlled
     expect(select).toHaveValue(warpValue);
   });
 
