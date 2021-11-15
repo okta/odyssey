@@ -10,19 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const angular = require("conventional-changelog-angular");
+const conventional = require("conventional-changelog-conventionalcommits");
 
-module.exports = angular.then((config) => ({
-  ...config,
-  recommendedBumpOpts: {
-    ...config.recommendedBumpOpts,
-    whatBump(...args) {
-      const result = config.recommendedBumpOpts.whatBump(...args);
-      // NOTE: Our 0.x.x versioning scheme calls for new features to be
-      // patch level bumps. Once we reach 1.0.0 this package can be
-      // removed in favor of the using the angular defaults directly!
-      result.level = Math.min(result.level + 1, 2);
-      return result;
-    },
-  },
-}));
+// NOTE: Our 0.x.x (preMajor) versioning scheme calls for new features
+// to be patch level bumps. Once we reach 1.0.0 this package can be
+// removed in favor of the using the conventional defaults directly!
+module.exports = conventional({ preMajor: true });
