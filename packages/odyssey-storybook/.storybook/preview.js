@@ -12,7 +12,7 @@ export const parameters = {
   options: {
     storySort: {
       method: "",
-      order: ["Welcome", "Guidelines", "Components", "Utilities"],
+      order: ["Welcome", "Contributing", "Guidelines", "Components", "Utilities"],
       locales: "",
     },
   },
