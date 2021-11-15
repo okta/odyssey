@@ -1,6 +1,6 @@
 import { addons } from "@storybook/addons";
-import OdysseyTheme from "./OdysseyTheme";
+import theme from "./OdysseyTheme";
 
 addons.setConfig({
-  theme: OdysseyTheme,
+  theme,
 });
