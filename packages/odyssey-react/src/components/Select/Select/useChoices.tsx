@@ -94,6 +94,7 @@ const useChoices: UseChoices = ({
     });
 
     select.choices = choicesInstance;
+    choices.current = choicesInstance;
 
     return () => {
       delete select.choices;
