@@ -186,7 +186,6 @@ let Text = forwardRef((props, ref) => {
     styles[parentDisabledColor + "ParentDisabledColor"],
     styles[transition + "Transition"]
   );
-  console.log(componentClass);
   const omitProps = useOmit(rest);
 
   return (
