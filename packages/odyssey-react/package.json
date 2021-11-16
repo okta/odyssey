@@ -12,6 +12,7 @@
     "directory": "packages/odyssey-react"
   },
   "dependencies": {
+    "@okta/odyssey-design-tokens": "^0.8.4",
     "choices.js": "^9.0.1",
     "hoist-non-react-statics": "^3.3.2"
   },
