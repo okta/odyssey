@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@applitools/eyes-storybook": "^3.24.0",
+    "@okta/odyssey-design-tokens": "^0.8.3",
     "@okta/odyssey-react": "^0.8.3",
     "@pxblue/storybook-rtl-addon": "^1.0.1",
     "@storybook/addon-a11y": "^6.3.7",
@@ -23,7 +24,6 @@
     "@storybook/theming": "^6.3.12"
   },
   "devDependencies": {
-    "@okta/odyssey-design-tokens": "^0.8.3",
     "@okta/odyssey-typescript": "^0.8.3",
     "@types/mdx": "^2.0.1",
     "@types/react": "^17.0.30"
