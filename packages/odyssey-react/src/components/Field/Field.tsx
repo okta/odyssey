@@ -127,7 +127,7 @@ function Label(props: PropsLabel) {
       {!required && optionalLabel && (
         <span className={styles.optionalLabel}>
           <Text color="sub" size="caption" weight="regular" lineHeight="normal">
-            optionalLabel
+            {optionalLabel}
           </Text>
         </span>
       )}
