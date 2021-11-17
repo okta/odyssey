@@ -15,7 +15,6 @@ import ReactDOMServer from "react-dom/server";
 import Choices from "choices.js";
 import { CloseIcon } from "../../Icon";
 import styles from "../Select.module.scss";
-import type { ChoicesHTMLSelectElement } from "./useChoices.types";
 
 type UseChoices = (args: {
   id: string;
@@ -24,6 +23,10 @@ type UseChoices = (args: {
   noResultsText?: string;
   noChoicesText?: string;
 }) => void;
+
+export interface ChoicesHTMLSelectElement extends HTMLSelectElement {
+  choices?: Choices;
+}
 
 const useChoices: UseChoices = ({
   id,
