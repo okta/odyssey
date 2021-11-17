@@ -14,7 +14,6 @@ import React, { useEffect, useRef } from "react";
 import ReactDOMServer from "react-dom/server";
 import Choices from "choices.js";
 import { CloseIcon } from "../../Icon";
-
 import styles from "../Select.module.scss";
 
 type UseChoices = (args: {
@@ -24,6 +23,10 @@ type UseChoices = (args: {
   noResultsText?: string;
   noChoicesText?: string;
 }) => void;
+
+export interface ChoicesHTMLSelectElement extends HTMLSelectElement {
+  choices?: Choices;
+}
 
 const useChoices: UseChoices = ({
   id,
@@ -35,9 +38,9 @@ const useChoices: UseChoices = ({
   const choices = useRef<undefined | Choices>();
 
   useEffect(() => {
-    const select = document.getElementById(id) as HTMLSelectElement;
+    const select = document.getElementById(id) as ChoicesHTMLSelectElement;
 
-    choices.current = new Choices(select, {
+    const choicesInstance = new Choices(select, {
       loadingText,
       noResultsText,
       noChoicesText,
@@ -93,7 +96,13 @@ const useChoices: UseChoices = ({
       }),
     });
 
-    return () => choices?.current?.destroy();
+    select.choices = choicesInstance;
+    choices.current = choicesInstance;
+
+    return () => {
+      delete select.choices;
+      choicesInstance.destroy();
+    };
   }, [id, loadingText, noChoicesText, noResultsText]);
 
   useEffect(() => {
