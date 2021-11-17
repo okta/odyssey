@@ -16,7 +16,7 @@ import { Box as Source } from "../../../../odyssey-react/src";
 import { Box, BoxProps } from "@okta/odyssey-react";
 
 export default {
-  title: `Components/Box`,
+  title: `Utilities/Box`,
   component: Source,
 };
 

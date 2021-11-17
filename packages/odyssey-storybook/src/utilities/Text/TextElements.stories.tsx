@@ -17,7 +17,7 @@ import type { TextProps } from "@okta/odyssey-react";
 import { Text as Source } from "../../../../odyssey-react/src";
 
 export default {
-  title: `Components/Text/Elements`,
+  title: `Utilities/Text/Elements`,
   component: Source,
   argTypes: {
     children: {
