@@ -1,0 +1,70 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
+# Box
+
+**WARNING: This utility component is not feature complete. Information here is currently intended for internal alignment. This page will be updated as the API and recommended use cases are solidified.**
+
+Box is a polymorphic component that acts as the root for most components.
+
+A simple `<Button>` component might look like this:
+
+```jsx
+<Box as="button" ref={ref} className={componentClass}>
+  {label}
+</Box>
+```
+
+[View the source on GitHub](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/src/components/Box)
+
+## Props
+
+<ArgsTable />
+
+## Behavior
+
+Box uses an `as="abbr"` polymorphic API to ensure semantic elements can be used as necessary. This helps improve the quality of the resulting DOM output. This improves outcomes for accessibility, testing, use-ability, and long term maintenance.
+
+Box also provides a minimal set of styles for the component and its children. This allows Box to house design tokens for inheritable styles without the need for globally applied CSS.
+
+#### Inheritable styles
+
+Box includes these defaults:
+
+- `color: $text-body`
+- `font-family: $body-font-family`
+- `font-weight: 400`
+- `line-height: $base-line-height`
+
+Box includes these parent resets:
+
+- `border: 0`
+- `box-sizing: border-box`
+- `font-feature-settings: "lnum", "pnum"`
+- `font-size: 100%`
+- `font-style: normal`
+- `font: inherit`
+- `letter-spacing: 0`
+- `margin-block: 0`
+- `margin-inline: 0`
+- `padding-block: 0`
+- `padding-inline: 0`
+- `text-decoration-skip-ink: all`
+- `vertical-align: baseline`
+
+## Usage
+
+As noted above, Box is best used as the root element for other components. By utilizing the `as` prop, components will be rendered as the proper HTML element.
+
+In addition to the default styles provided, Box provides an API for styling of certain layout properties via utility classes. (e.g., `padding`, `margin`).
+
+Box also accepts a `className` prop for applying component-specific styling to the polymorphic root element it composes. This same element is also available as the `ref` prop. This prevents the need for Box to define every style for all use cases. This technique is best reserved for new, bespoke components. If additional variants for existing components are desired, please [make a request](https://github.com/okta/odyssey/issues/new/choose) against the component.
+
+## Accessibility
+
+By setting Box to the appropriate element, you help ensure a good foundation for accessibility. However, this may not cover all a11y concerns specific to your component or use case. Please reference individual components or our general guidelines for more information.
+
+## References
+
+### Related Components
+
+- [Text](?path=/docs/components-text-elements--span)
