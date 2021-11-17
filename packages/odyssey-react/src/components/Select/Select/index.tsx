@@ -15,7 +15,7 @@ import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
 import { SelectOption } from "../SelectOption";
 import { SelectOptionGroup } from "../SelectOptionGroup";
 import { useChoices } from "./useChoices";
-import type { ChoicesHTMLSelectElement } from "./useChoices.types";
+import type { ChoicesHTMLSelectElement } from "./useChoices";
 import {
   forwardRefWithStatics,
   useOid,
@@ -179,5 +179,4 @@ Select.OptionGroup = SelectOptionGroup;
 
 Select = withStyles(styles)(Select);
 
-export type { ChoicesHTMLSelectElement };
 export { Select };
