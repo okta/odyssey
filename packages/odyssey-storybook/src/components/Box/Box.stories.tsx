@@ -15,9 +15,16 @@ import { Story } from "@storybook/react";
 import { Box as Source } from "../../../../odyssey-react/src";
 import { Box, BoxProps } from "@okta/odyssey-react";
 
+import BoxMdx from "./Box.mdx";
+
 export default {
   title: `Components/Box`,
   component: Source,
+  parameters: {
+    docs: {
+      page: BoxMdx,
+    },
+  },
 };
 
 const Template: Story<BoxProps> = (args) => <Box {...args}>Box</Box>;

@@ -16,12 +16,19 @@ import { Text, Heading, Link, ScreenReaderText } from "@okta/odyssey-react";
 import type { TextProps } from "@okta/odyssey-react";
 import { Text as Source } from "../../../../odyssey-react/src";
 
+import TextMdx from "./Text.mdx";
+
 export default {
   title: `Components/Text/Elements`,
   component: Source,
   argTypes: {
     children: {
       control: { type: "string" },
+    },
+  },
+  parameters: {
+    docs: {
+      page: TextMdx,
     },
   },
 };
@@ -55,14 +62,14 @@ abbr.parameters = {
 abbr.args = {
   children: (
     <Text as="p">
-      If you are a
+      If you are a{" "}
       <Text as="abbr" title="Back-end">
         BE
-      </Text>
-      or
+      </Text>{" "}
+      or{" "}
       <Text as="abbr" title="Front-end">
         FE
-      </Text>
+      </Text>{" "}
       developer, you should checkout our dev docs.
     </Text>
   ),
