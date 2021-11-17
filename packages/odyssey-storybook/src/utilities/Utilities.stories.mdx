@@ -23,7 +23,7 @@ Going further, `<Box />` accepts a `className` prop for applying component-speci
 A simple component like `<Button>` might look like this:
 
 ```html
-<Box {...omitProps} ref={ref} as="button" className={componentClass}>
+<Box {...omitProps} ref="{ref}" as="button" className="{componentClass}">
   { label }
 </Box>
 ```
@@ -78,14 +78,14 @@ A more complicated example might look like this:
 ```html
 <Text as="blockquote">
   <Text as="p">
-    The important thing is not to stop questioning. Curiosity has its own
-    reason for existence.
+    The important thing is not to stop questioning. Curiosity has its own reason
+    for existence.
   </Text>
   <footer>
     Albert Einstein,
     <Text as="cite">
-      Old Man's Advice to Youth: "Never Lose a Holy Curiosity," LIFE
-      magazine (2 May 1955) statement to William Miller, p. 64.
+      Old Man's Advice to Youth: "Never Lose a Holy Curiosity," LIFE magazine (2
+      May 1955) statement to William Miller, p. 64.
     </Text>
   </footer>
 </Text>
@@ -107,8 +107,8 @@ In addition, `<Text />` provides a simpler API with indirect descendant selector
     <footer>
       Albert Einstein,
       <cite>
-        Old Man's Advice to Youth: "Never Lose a Holy Curiosity," LIFE
-        magazine (2 May 1955) statement to William Miller, p. 64.
+        Old Man's Advice to Youth: "Never Lose a Holy Curiosity," LIFE magazine
+        (2 May 1955) statement to William Miller, p. 64.
       </cite>
     </footer>
   </blockquote>
@@ -124,51 +124,51 @@ Currently, we have a few open PRs that stand as practical examples for applicati
 ```html
 // Field
 
-<Box as={tag} className={styles.root}>
+<Box as="{tag}" className="{styles.root}">
   <Field.Label
-    inputId={inputId}
-    required={required}
-    optionalLabel={optionalLabel}
-    labelHidden={labelHidden}
-    as={TagLabel}
+    inputId="{inputId}"
+    required="{required}"
+    optionalLabel="{optionalLabel}"
+    labelHidden="{labelHidden}"
+    as="{TagLabel}"
   >
     {label}
   </Field.Label>
-  {hint && <Field.Hint id={inputId}>{hint}</Field.Hint>}
-  {children}
-  {error && <Field.Error id={inputId}>{error}</Field.Error>}
+  {hint && <Field.Hint id="{inputId}">{hint}</Field.Hint>} {children} {error &&
+  <Field.Error id="{inputId}">{error}</Field.Error>}
 </Box>
 
-// Label
+// Label //// In the case of these label elements, we can treat our Field
+styling as the HTML5 default, removing the need for component-specific styling.
 
-//// In the case of these label elements, we can treat our Field styling as the HTML5 default, removing the need for component-specific styling.
-
-<Text as={labelTag} htmlFor={inputId}>
-  {children}
-  {!required && optionalLabel && (
-    <span className={styles.optionalLabel} children={optionalLabel} />
+<Text as="{labelTag}" htmlFor="{inputId}">
+  {children} {!required && optionalLabel && (
+  <span className="{styles.optionalLabel}" children="{optionalLabel}" />
   )}
 </Text>
 
 // Hidden Label
 
 <ScreenReaderText>
-  <Text as={labelTag} htmlFor={inputId}>
-    {children}
-    {!required && optionalLabel && (
-      <span className={styles.optionalLabel} children={optionalLabel} />
+  <Text as="{labelTag}" htmlFor="{inputId}">
+    {children} {!required && optionalLabel && (
+    <span className="{styles.optionalLabel}" children="{optionalLabel}" />
     )}
   </Text>
 </ScreenReaderText>
 
 // Hint
 
-<Box as="p" className={styles.hint} id={`${id}-hint`} children={children} />
+<Box
+  as="p"
+  className="{styles.hint}"
+  id="{`${id}-hint`}"
+  children="{children}"
+/>
 
 // Error
 
-<Box as="p" className={styles.error} id={`${id}-error`}>{children} />
-
+<Box as="p" className="{styles.error}" id="{`${id}-error`}">{children} /> </Box>
 ```
 
 ### Heading
@@ -178,9 +178,7 @@ Much like `<Text />` is a convenience wrapper on top of `<Box />`, `<Heading />`
 ```html
 // Heading
 
-<Text as={tag} className={componentClass}>
-  {children}
-</Text>
+<Text as="{tag}" className="{componentClass}"> {children} </Text>
 ```
 
 My assumption here is that all Headings have parity with our desired HTML5 defaults. The `className` would be used to apply a different level of visual hierarchy to a tag (an `h1` with the styles of an `h3`).
@@ -192,17 +190,11 @@ If a component requires heading styling that deviates farther than that, those s
 ```html
 // List
 
-<Box as={tag}>
-  { children }
-</Box>
+<Box as="{tag}"> { children } </Box>
 
-//// `tag` here would be ul, ol, dl
+//// `tag` here would be ul, ol, dl // ListItem
 
-// ListItem
-
-<Text as={childTag}>
-  { children }
-</Text>
+<Text as="{childTag}"> { children } </Text>
 ```
 
 If `<List>` were only intended to be used in the fashion of plain HTML5, `<Text>` could probably be used throughout. e.g. `<Text as="ul">`. However, we've seen that `<List>` is likely to have more complicated functionality.
