@@ -14,7 +14,7 @@ import React, { cloneElement, forwardRef } from "react";
 import type { ReactElement, ComponentPropsWithRef } from "react";
 import { useCx, useOid, useOmit, withStyles } from "../../utils";
 import styles from "./Tooltip.module.scss";
-
+import { Text } from "../Text";
 export interface TooltipProps
   extends Omit<ComponentPropsWithRef<"aside">, "style" | "className" | "role"> {
   /**
@@ -55,7 +55,14 @@ let Tooltip = forwardRef<HTMLElement, TooltipProps>((props, ref) => {
         className={tooltipClasses}
         role="tooltip"
       >
-        {label}
+        <Text
+          color="bodyInverse"
+          size="caption"
+          weight="bold"
+          lineHeight="title"
+        >
+          {label}
+        </Text>
       </aside>
     </span>
   );

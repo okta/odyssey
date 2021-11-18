@@ -10,4 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./Form";
+module.exports = {
+  extends: "@okta/odyssey-stylelint",
+  ignoreFiles: ["./dist/**/*.scss"],
+};
