@@ -10,9 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const conventional = require("conventional-changelog-conventionalcommits");
-
-// NOTE: Our 0.x.x (preMajor) versioning scheme calls for new features
-// to be patch level bumps. Once we reach 1.0.0 this package can be
-// removed in favor of the using the conventional defaults directly!
-module.exports = conventional({ preMajor: true });
+module.exports = {
+  extends: "@okta/odyssey-stylelint",
+  ignoreFiles: ["./dist/**/*.scss"],
+};

@@ -12,13 +12,14 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactElement, ReactText } from "react";
+import { Text, TextProps } from "../Text";
 import { withStyles, useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
 
 interface CommonProps
   extends Omit<ComponentPropsWithRef<"button">, "style" | "className"> {
   /**
-   * Text content to be rendered within the button, usualy label text.
+   * Text content to be rendered within the button, usually label text.
    */
   children?: ReactText;
 
@@ -37,7 +38,13 @@ interface CommonProps
    * The visual variant to be displayed to the user.
    * @default primary
    */
-  variant?: "primary" | "secondary" | "danger" | "dismiss" | "clear";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "dismiss"
+    | "dismissInverted"
+    | "clear";
 
   /**
    * Extends the width of the button to that of its' parent.
@@ -54,6 +61,40 @@ interface IconProps extends CommonProps {
 }
 
 export type ButtonProps = IconProps | ChildrenProps;
+
+function buildColors(variant: ButtonProps["variant"]) {
+  let textColor: TextProps["color"] = "bodyInverse";
+  let parentHoveredColor: TextProps["parentHoveredColor"] = "bodyInverse";
+  let parentFocusedColor: TextProps["parentFocusedColor"] = "bodyInverse";
+  let parentDisabledColor: TextProps["parentDisabledColor"] = "bodyInverse";
+
+  if (variant === "secondary" || variant === "clear") {
+    textColor = "primary";
+    parentFocusedColor = "primary";
+    parentDisabledColor = "primaryLight";
+  }
+
+  if (variant === "clear") {
+    parentHoveredColor = "primaryDark";
+  }
+
+  if (variant === "dismiss" || variant === "dismissInverted") {
+    parentDisabledColor = "sub";
+  }
+
+  if (variant === "dismiss") {
+    textColor = "body";
+    parentHoveredColor = "body";
+    parentFocusedColor = "body";
+  }
+
+  return {
+    textColor,
+    parentHoveredColor,
+    parentFocusedColor,
+    parentDisabledColor,
+  };
+}
 
 /**
  * A clickable button used for form submissions and most in-page interactions.
@@ -75,12 +116,29 @@ let Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     wide && styles.wideLayout
   );
 
+  const {
+    textColor,
+    parentHoveredColor,
+    parentFocusedColor,
+    parentDisabledColor,
+  } = buildColors(variant);
   const omitProps = useOmit(rest);
-
   return (
     <button {...omitProps} ref={ref} className={componentClass}>
-      {icon && <span className={styles.icon}>{icon}</span>}
-      {children && <span className={styles.label}>{children}</span>}
+      <Text
+        color={textColor}
+        parentHoveredColor={parentHoveredColor}
+        parentFocusedColor={parentFocusedColor}
+        parentDisabledColor={parentDisabledColor}
+        weight="bold"
+        wrap="nowrap"
+        transition="inherit"
+        size={size === "s" ? "caption" : "base"}
+        lineHeight={size === "s" ? "title" : "normal"}
+      >
+        {icon && <span className={styles.icon}>{icon}</span>}
+        {children && <span className={styles.label}>{children}</span>}
+      </Text>
     </button>
   );
 });
