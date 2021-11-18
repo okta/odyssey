@@ -10,9 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
+import React, { useCallback } from "react";
 import { render, fireEvent, screen, within } from "@testing-library/react";
 import { Select } from ".";
+import type { ChoicesHTMLSelectElement } from "./Select/useChoices";
 
 const listboxRole = "listbox";
 const optionRole = "option";
@@ -54,9 +55,21 @@ describe("Select", () => {
   });
 
   it("renders controlled when provided with a value", () => {
+    const lightValue = "Lightspeed";
     render(tree({ value: warpValue }));
 
     const select = getSelectViaQuery();
+    expect(select).toHaveValue(warpValue);
+
+    // attempt to change via user interaction
+    const listbox = screen.getAllByRole(listboxRole)[0];
+    fireEvent.mouseDown(listbox);
+    const option = screen.getByText(lightValue, {
+      selector: `div[data-value=${lightValue}]`,
+    });
+    fireEvent.mouseDown(option);
+
+    // no change as input value is controlled
     expect(select).toHaveValue(warpValue);
   });
 
@@ -129,6 +142,41 @@ describe("Select", () => {
       multiple
       noChoicesText="yay"
     />;
+  });
+
+  it("Composer can use choices ref from dom", async () => {
+    let selectRef = null as ChoicesHTMLSelectElement | null;
+
+    const RefTree = ({
+      onRefAvailable,
+    }: {
+      onRefAvailable: (select: ChoicesHTMLSelectElement) => void;
+    }) => {
+      const selectRef = useCallback(
+        (select: ChoicesHTMLSelectElement) => {
+          onRefAvailable(select);
+        },
+        [onRefAvailable]
+      );
+
+      return (
+        <Select ref={selectRef} label={label} name={name}>
+          <Select.Option children={"No choices"} />
+        </Select>
+      );
+    };
+
+    render(
+      <RefTree
+        onRefAvailable={(select: ChoicesHTMLSelectElement) => {
+          selectRef = select;
+        }}
+      />
+    );
+
+    expect(selectRef).not.toBeNull();
+    expect(selectRef?.choices).toBeDefined();
+    expect(selectRef?.choices?.setChoices).toBeDefined();
   });
 
   a11yCheck(() => render(tree()));

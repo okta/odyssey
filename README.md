@@ -1,6 +1,6 @@
 [![Go to GitHub Build](https://img.shields.io/github/workflow/status/okta/odyssey/preview)](https://img.shields.io/github/workflow/status/okta/odyssey/preview)
 ![Odyssey uses Lerna](https://img.shields.io/github/lerna-json/v/okta/odyssey)
-![Odyssey supports WCAG 2.0 AA standards](https://img.shields.io/badge/wcag-2.0%20AA-informational)
+![Odyssey supports WCAG 2.1 AA standards](https://img.shields.io/badge/wcag-2.1%20AA-informational)
 ![Odyssey is covered under the Apache Version 2.0 license](https://img.shields.io/badge/license-Apache%202.0-informational)
 
 # Odyssey Design System

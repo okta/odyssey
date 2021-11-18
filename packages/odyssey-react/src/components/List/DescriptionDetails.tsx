@@ -12,6 +12,7 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
+import { Text } from "../Text";
 import { useOmit } from "../../utils";
 import styles from "./List.module.scss";
 
@@ -28,7 +29,7 @@ const DescriptionDetails = forwardRef<HTMLElement, DescriptionDetailsProps>(
 
     return (
       <dd {...omitProps} ref={ref} className={styles.details}>
-        {children}
+        <Text children={children} />
       </dd>
     );
   }

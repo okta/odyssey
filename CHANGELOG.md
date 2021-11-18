@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.8.4](https://github.com/okta/odyssey/compare/v0.8.3...v0.8.4) (2021-11-18)
+
+### Features
+
+- **odyssey-react:** expose hidden choices reference ([a64597a](https://github.com/okta/odyssey/commit/a64597a57f41bbbb1053d9e1a7254148d9318875))
+
 ## [0.8.3](https://github.com/okta/odyssey/compare/v0.8.2...v0.8.3) (2021-11-10)
 
 ### Bug Fixes

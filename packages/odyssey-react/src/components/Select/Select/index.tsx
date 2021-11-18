@@ -15,6 +15,7 @@ import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
 import { SelectOption } from "../SelectOption";
 import { SelectOptionGroup } from "../SelectOptionGroup";
 import { useChoices } from "./useChoices";
+import type { ChoicesHTMLSelectElement } from "./useChoices";
 import {
   forwardRefWithStatics,
   useOid,
@@ -99,70 +100,72 @@ export type SelectProps = MultipleProps | SingleProps;
  * Often referred to as a "dropdown menu" this input triggers a menu of
  * options a user can select.
  */
-let Select = forwardRefWithStatics<HTMLSelectElement, SelectProps, Statics>(
-  (props, ref) => {
-    const {
-      id,
-      children,
-      disabled = false,
-      name,
-      onChange,
-      required = true,
-      value,
-      error,
-      hint,
-      label,
-      optionalLabel,
-      loadingText = "",
-      noResultsText = "",
-      noChoicesText = "",
-      ...rest
-    } = props;
+let Select = forwardRefWithStatics<
+  ChoicesHTMLSelectElement,
+  SelectProps,
+  Statics
+>((props, ref) => {
+  const {
+    id,
+    children,
+    disabled = false,
+    name,
+    onChange,
+    required = true,
+    value,
+    error,
+    hint,
+    label,
+    optionalLabel,
+    loadingText = "",
+    noResultsText = "",
+    noChoicesText = "",
+    ...rest
+  } = props;
 
-    const omitProps = useOmit(rest);
+  const omitProps = useOmit(rest);
 
-    const oid = useOid(id);
+  const oid = useOid(id);
 
-    useChoices({ id: oid, value, loadingText, noResultsText, noChoicesText });
+  useChoices({ id: oid, value, loadingText, noResultsText, noChoicesText });
 
-    const handleChange = useCallback(
-      (event: ChangeEvent<HTMLSelectElement>) => {
-        onChange?.(event, event.target.value);
-      },
-      [onChange]
-    );
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      onChange?.(event, event.target.value);
+    },
+    [onChange]
+  );
 
-    return (
-      <Field
-        error={error}
-        hint={hint}
-        inputId={oid}
-        label={label}
-        optionalLabel={optionalLabel}
-        required={required}
-      >
-        <div className={styles.outer}>
-          {/* eslint-disable-next-line jsx-a11y/no-onchange */}
-          <select
-            {...omitProps}
-            id={oid}
-            name={name}
-            disabled={disabled}
-            required={required}
-            onChange={handleChange}
-            value={value}
-            ref={ref}
-          >
-            {children}
-          </select>
-          <span className={styles.indicator} role="presentation">
-            <CaretDownIcon />
-          </span>
-        </div>
-      </Field>
-    );
-  }
-);
+  return (
+    <Field
+      error={error}
+      hint={hint}
+      inputId={oid}
+      label={label}
+      optionalLabel={optionalLabel}
+      required={required}
+    >
+      <div className={styles.outer}>
+        {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+        <select
+          {...omitProps}
+          id={oid}
+          name={name}
+          disabled={disabled}
+          required={required}
+          onChange={handleChange}
+          value={value}
+          ref={ref}
+        >
+          {children}
+        </select>
+        <span className={styles.indicator} role="presentation">
+          <CaretDownIcon />
+        </span>
+      </div>
+    </Field>
+  );
+});
 
 Select.displayName = "Select";
 

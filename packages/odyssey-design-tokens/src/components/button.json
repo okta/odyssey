@@ -4,7 +4,7 @@
       "background": {
         "primary": {
           "comment": "Base primary background color",
-          "value": "{color.primary.base}"
+          "value": "{color.primary.base.value}"
         },
         "secondary": {
           "comment": "Base secondary background color",
@@ -12,7 +12,7 @@
         },
         "danger": {
           "comment": "Base danger background color",
-          "value": "{color.danger.base}"
+          "value": "{color.danger.base.value}"
         },
         "clear": {
           "comment": "Base clear background color",
@@ -22,7 +22,7 @@
       "text": {
         "primary": {
           "comment": "Button primary text color",
-          "value": "{color.text.inverse.value}"
+          "value": "{color.text.bodyInverse.value}"
         },
         "secondary": {
           "comment": "Button secondary text color",
@@ -30,26 +30,26 @@
         },
         "danger": {
           "comment": "Button danger text color",
-          "value": "{color.text.inverse.value}"
+          "value": "{color.text.bodyInverse.value}"
         },
         "clear": {
           "comment": "Button clear text color",
-          "value": "{color.text.inverse.value}"
+          "value": "{color.text.bodyInverse.value}"
         }
       }
     },
     "border": {
       "primary": {
         "comment": "Base primary background color",
-        "value": "{color.primary.base}"
+        "value": "{color.primary.base.value}"
       },
       "secondary": {
         "comment": "Base secondary background color",
-        "value": "{color.primary.base}"
+        "value": "{color.primary.base.value}"
       },
       "danger": {
         "comment": "Base danger background color",
-        "value": "{color.danger.base}"
+        "value": "{color.danger.base.value}"
       },
       "clear": {
         "comment": "Base clear background color",
