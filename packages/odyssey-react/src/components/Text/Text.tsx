@@ -62,6 +62,7 @@ export interface TextProps {
     | "danger"
     | "dangerDisabled"
     | "sub"
+    | "heading"
     | "primary";
 
   /**
