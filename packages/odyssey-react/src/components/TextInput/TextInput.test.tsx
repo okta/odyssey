@@ -32,7 +32,7 @@ describe("TextInput", () => {
     );
 
     expect(getByRole(textBox)).toHaveAttribute("id", "foo");
-    expect(getByText(label)).toHaveAttribute("for", "foo");
+    expect(getByText(label).parentElement).toHaveAttribute("for", "foo");
   });
 
   it("renders a generated id associating the input and label", () => {
