@@ -9,17 +9,16 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-@import "box-root";
-@import "box-display";
-@import "box-position";
-@import "box-grid";
-@import "box-flex";
-@import "box-width-height";
-@import "box-margin";
-@import "box-padding";
-@import "box-overflow";
-@import "box-border";
-@import "box-background";
-@import "box-cursor";
-@import "box-hover-focus";
-@import "box-other";
+
+.root {
+  box-sizing: border-box;
+  color: $text-body;
+  font-family: $body-font-family;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: $base-line-height;
+  font-feature-settings: "lnum", "pnum";
+  text-decoration-skip-ink: all;
+}
