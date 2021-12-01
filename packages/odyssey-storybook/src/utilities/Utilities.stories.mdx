@@ -10,54 +10,6 @@ In production docs, these sections will live with their appropriate utility. I'v
 
 ### Box
 
-`<Box />` acts as the root for most components. Prefer spreading omitted rest props and forwarding a ref to `<Box />` as well.
-
-This component uses an `as="abbr"` polymorphic API to keep the DOM a11y compliant as well as clean and comprehensible by developers and their automated tests.
-
-`<Box />` contains a minimal set of styles that are provided through inheritance to children (`font-family`) and provides an API for utility tailwind-esque styling (`padding`, `margin`).
-
-These styles that are owned by `<Box />` are also a centralized place to apply theme-able odyssey design tokens for override (theming `font-family` "globally").
-
-Going further, `<Box />` accepts a `className` prop for applying component-specific styling. This prevents the need for `<Box />` to define every style for all use cases. Additionally, parent component classes can contain their own theme-able tokens to keep things customizable.
-
-A simple component like `<Button>` might look like this:
-
-```jsx
-<Box {...omitProps} ref={ref} as="button" className={componentClass}>
-  {label}
-</Box>
-```
-
-**WIP API NOTE:** Can Box handle spreading props and the ref under the hood, so component authors wouldn't need to specify?
-
-#### Global styles
-
-Box includes these inheritable defaults:
-
-- color: $text-body;
-- font-family: $body-font-family;
-- font-style: normal;
-- font-weight: 400;
-- letter-spacing: 0;
-- line-height: $base-line-height;
-- font-feature-settings: "lnum", "pnum";
-- text-decoration-skip-ink: all;
-
-Box includes these parent resets:
-
-- box-sizing: border-box;
-- margin-block: 0;
-- margin-inline: 0;
-- padding-block: 0;
-- padding-inline: 0;
-- border: 0;
-- font: inherit;
-- font-size: 100%;
-- vertical-align: baseline;
-
-Component-specific styling may override these defaults via `className`, as above.
-
-Authors may specify in-situ variants to reset properties via utility props.
 
 ### Text
 
