@@ -27,6 +27,12 @@ describe("Box", () => {
     expect(screen.getByText("box").tagName.toLowerCase() === "span").toBe(true);
   });
 
+  it("allows a custom class", () => {
+    render(<Box className="testClass">box</Box>);
+
+    expect(screen.getByText("box")).toHaveClass("testClass");
+  });
+
   it("uses the display property to attach a class", () => {
     render(<Box display="inline">box</Box>);
 

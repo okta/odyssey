@@ -20,6 +20,11 @@ type borderRadius = "base" | "outer" | "none";
 
 export interface BoxProps {
   /**
+   * Css class to add additional styles not covered by props
+   */
+  className?: string;
+
+  /**
    * Display type
    */
   display?:
@@ -340,6 +345,7 @@ let Box = forwardRef(
       pointerEvents,
       userSelect,
       children,
+      className,
       ...rest
     },
     ref
@@ -495,7 +501,8 @@ let Box = forwardRef(
       focusRing && styles[`focusRing${convertProp(focusRing)}`],
       cursor && styles[`cursor${convertProp(cursor)}`],
       pointerEvents && styles[`pointerEvents${convertProp(pointerEvents)}`],
-      userSelect && styles[`userSelect${convertProp(userSelect)}`]
+      userSelect && styles[`userSelect${convertProp(userSelect)}`],
+      className
     );
 
     const omitProps = useOmit(rest);
