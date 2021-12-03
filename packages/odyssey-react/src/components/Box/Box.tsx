@@ -20,6 +20,12 @@ type borderRadius = "base" | "outer" | "none";
 
 export interface BoxProps {
   /**
+   * The semantic element to be rendered in to the DOM
+   * @default div
+   */
+  as?: keyof JSX.IntrinsicElements;
+
+  /**
    * Css class to add additional styles not covered by props
    */
   className?: string;
@@ -299,7 +305,7 @@ function convertProp(prop: string) {
 let Box = forwardRef(
   (
     {
-      as: Tag = "div",
+      as = "div",
       display,
       position,
       flexDirection,
@@ -350,6 +356,8 @@ let Box = forwardRef(
     },
     ref
   ) => {
+    const Tag = as;
+
     if (Array.isArray(margin)) {
       switch (margin.length) {
         case 2:
