@@ -526,6 +526,10 @@ export const Other = (args: BoxProps): ReactElement => (
 Other.argTypes = pickControls(["pointerEvents", "userSelect"]);
 Other.args = { userSelect: "none" };
 
+export const CustomClass = (): ReactElement => (
+  <Box className="test-class">Custom class</Box>
+);
+
 function pickControls(properties: string[]) {
   const props = [
     "key",
