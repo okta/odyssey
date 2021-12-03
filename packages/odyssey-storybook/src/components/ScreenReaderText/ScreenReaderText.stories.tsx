@@ -11,33 +11,23 @@
  */
 
 import React from "react";
-import { Story } from "@storybook/react";
-import { Box as Source } from "../../../../odyssey-react/src";
-import { Box, BoxProps } from "@okta/odyssey-react";
-
-import BoxMdx from "./Box.mdx";
+import type { Story } from "@storybook/react";
+import { ScreenReaderText, ScreenReaderTextProps } from "@okta/odyssey-react";
+import { ScreenReaderText as Source } from "../../../../odyssey-react/src";
 
 export default {
-  title: `Utilities/Box`,
+  title: `Components/ScreenReaderText`,
   component: Source,
-  parameters: {
-    docs: {
-      page: BoxMdx,
-    },
-  },
 };
 
-const Template: Story<BoxProps> = (args) => <Box {...args}>Box</Box>;
+const Template: Story<ScreenReaderTextProps> = ({ children }) => (
+  <p>
+    The following content is visually hidden:{" "}
+    <ScreenReaderText>{children}</ScreenReaderText>
+  </p>
+);
 
 export const Default = Template.bind({});
-
 Default.args = {
-  borderColor: "display",
-  hoverBorderColor: "interactive",
-  borderRadius: "base",
-  boxShadow: "default",
-  hoverBoxShadow: "default",
-  padding: "m",
-  focusRing: "primary",
-  tabIndex: 0,
+  children: "Hi! I'm accessible to screen readers!",
 };

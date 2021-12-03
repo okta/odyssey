@@ -18,8 +18,6 @@ export const parameters = {
         "Contributing",
         "Guidelines",
         "Components",
-        "Utilities",
-        ["Utilities", "*"],
       ],
       locales: "",
     },

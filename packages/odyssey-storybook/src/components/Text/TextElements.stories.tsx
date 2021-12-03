@@ -19,7 +19,7 @@ import { Text as Source } from "../../../../odyssey-react/src";
 import TextMdx from "./Text.mdx";
 
 export default {
-  title: `Utilities/Text/Elements`,
+  title: `Components/Text/Elements`,
   component: Source,
   argTypes: {
     children: {
