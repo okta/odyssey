@@ -111,7 +111,7 @@ describe("DescriptionTerm", () => {
     render(<List.Term ref={ref} children="term" />);
 
     expect(ref).toHaveBeenCalledTimes(1);
-    expect(ref).toHaveBeenLastCalledWith(screen.getByText("term"));
+    expect(ref).toHaveBeenLastCalledWith(screen.getByText("term").parentNode);
   });
 });
 

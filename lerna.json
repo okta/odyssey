@@ -1,6 +1,7 @@
 {
-  "version": "0.8.1",
+  "version": "0.8.4",
   "npmClient": "yarn",
+  "changelogPreset": "@okta/conventional-changelog-odyssey",
   "useWorkspaces": true,
   "packages": ["packages/*"]
 }

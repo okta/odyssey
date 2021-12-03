@@ -44,7 +44,7 @@ jobs:
             vrt:
               - './packages/odyssey-react/src/**'
               - './packages/odyssey/src/**'
-
+              - './packages/odyssey-storybook/**'
       - name: setup AWS
         if: steps.changes.outputs.deploy == 'true'
         uses: aws-actions/configure-aws-credentials@v1

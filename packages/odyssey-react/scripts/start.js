@@ -11,18 +11,40 @@
  */
 
 const { spawn } = require("child_process");
+const chokidar = require("chokidar");
+const path = require("path");
+const SRC = path.resolve(__dirname, "../src");
 
-const source = spawn("yarn", ["build:source", "--watch"]);
-const types = spawn("yarn", ["build:types", "--watch"]);
-
-[types, source].forEach((child) => {
-  child.stdout.setEncoding("utf-8");
-  child.stderr.setEncoding("utf-8");
-
-  child.stdout.on("data", console.log.bind(console));
-  child.stderr.on("data", console.error.bind(console));
-
-  child.on("error", console.error.bind(console));
-
-  child.on("close", process.exit.bind(process, 1));
+withIO(spawn("yarn", ["build:types", "--watch", "--preserveWatchOutput"]), {
+  exitOnClose: true,
 });
+
+const watcher = chokidar.watch(`${SRC}/**/*.{ts,js,tsx,jsx,scss}`, {
+  persistent: true,
+  ignoreInitial: true,
+  awaitWriteFinish: {
+    stabilityThreshold: 50,
+    pollInterval: 10,
+  },
+});
+
+["add", "change"].forEach((type) => {
+  watcher.on(type, (changed) => {
+    const srcDir = path.dirname(changed);
+    const distDir = buildDistDir(srcDir);
+    withIO(spawn("yarn", ["build:source", srcDir, distDir]));
+  });
+});
+
+function withIO(child, opts = {}) {
+  child.stdout.pipe(process.stdout);
+  child.stderr.pipe(process.stderr);
+
+  if (opts.exitOnClose) {
+    child.on("exit", process.exit.bind(process, 1));
+  }
+}
+
+function buildDistDir(changed) {
+  return path.join("dist", changed.split(SRC)[1]);
+}
