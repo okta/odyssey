@@ -2,7 +2,7 @@ import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
 
 # Text
 
-Text enables authors and components to insert styled HTML5 elements without the need for a global CSS sheet.
+Text is a bounded polymorphic component used to insert various styled HTML elements.
 
 [View source on GitHub](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/src/components/Text)
 
@@ -46,7 +46,7 @@ Text enables authors and components to insert styled HTML5 elements without the 
 
 ### cite
 
-        "> The HTML Citation element (`<cite>`) is used to describe a reference to a cited creative work, and must include the title of that work. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite)",
+> The HTML Citation element (`<cite>`) is used to describe a reference to a cited creative work, and must include the title of that work. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite)
 
 <Canvas>
   <Story id="components-text-elements--cite" />
@@ -54,7 +54,7 @@ Text enables authors and components to insert styled HTML5 elements without the 
 
 ### code
 
-        "> The `<code>` HTML element displays its contents styled in a fashion intended to indicate that the text is a short fragment of computer code. By default, the content text is displayed using the user agent's default monospace font. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code)",
+> The `<code>` HTML element displays its contents styled in a fashion intended to indicate that the text is a short fragment of computer code. By default, the content text is displayed using the user agent's default monospace font. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code)
 
 <Canvas>
   <Story id="components-text-elements--code" />
@@ -200,7 +200,7 @@ For most terms, the content of `dfn` should be term you are defining.
 
 ### Styled element insertion
 
-Text enables authors and components to insert styled HTML5 elements without the need for a global CSS sheet.
+Text enables authors and components to insert styled HTML elements without the need for a global CSS sheet.
 
 ```jsx
 <Text as="p">
@@ -226,48 +226,13 @@ A more complicated example might look like this:
 </Text>
 ```
 
-### Child element styling
-
-In addition, Text provides indirect descendant selectors for natural HTML5 composition or styling dynamic content (e.g. from markdown).
-
-```jsx
-<Text>
-  <blockquote>
-    <p>
-      The important thing is not to stop questioning. Curiosity has its own
-      reason for existence.
-    </p>
-    <footer>
-      Albert Einstein,
-      <cite>
-        Old Man's Advice to Youth: "Never Lose a Holy Curiosity," LIFE magazine
-        (2 May 1955) statement to William Miller, p. 64.
-      </cite>
-    </footer>
-  </blockquote>
-</Text>
-```
-
 ## Accessibility
 
-Crafts utilizing Landing Gear are required to utilize a nose wheel steering system. Ensure your individual Landing Gear components are associated with the appropriate rudder pedals.
+Please refer to individual variants above for their a11y concerns.
 
-## Responsive Web Design (optional)
+## References
 
-As noted above, craft are expected to utilize three sets of Landing Gear. This configuration should scale for both large and small crafts.
+### Related Components
 
-If you encounter issues with the configuration, please reach out, as a more fluid design may be required.
+- [Box](?path=/docs/components-box--default)
 
-## Globalization (optional)
-
-Some systems disallow Automatic variants of Landing Gear, as failures are catastrophic. Ensure your craft designs are in compliance with local mandates.
-
-## References (optional)
-
-### Related Components (optional)
-
-- [Rudder Pedals](../components/rudder-pedals)
-
-### Further Reading (optional)
-
-For more information, please review the landing and take-off procedures detailed in [The Shadow Proclamation](http://an.external.site)
