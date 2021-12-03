@@ -20,11 +20,17 @@ export default {
   component: Source,
 };
 
-const Template: Story<BoxProps> = (args) => (
-  <Box {...args} tabIndex={0}>
-    Box
-  </Box>
-);
+const Template: Story<BoxProps> = (args) => {
+  const {
+    as, // eslint-disable-line @typescript-eslint/no-unused-vars
+    ...rest
+  } = args;
+  return (
+    <Box {...rest} tabIndex={0}>
+      Box
+    </Box>
+  );
+};
 
 export const Default = Template.bind({});
 
