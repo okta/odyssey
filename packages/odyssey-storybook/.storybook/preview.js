@@ -14,10 +14,10 @@ export const parameters = {
       method: "",
       order: [
         "Welcome",
+        ["Introduction (README)", "Docs Status"],
         "Contributing",
         "Guidelines",
         "Components",
-        "Utilities",
       ],
       locales: "",
     },
