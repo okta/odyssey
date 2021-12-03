@@ -1,5 +1,7 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
 
+import { Text as Source } from "../../../../odyssey-react/src";
+
 # Text
 
 Text is a bounded polymorphic component used to insert various styled HTML elements.
@@ -84,116 +86,131 @@ For most terms, the content of `dfn` should be term you are defining.
   <Story id="components-text-elements--dfn" />
 </Canvas>
 
-### span (default)
+If you're referencing an acronym or abbreviation, you may also combine it with `<abbr>`:
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+<Text as="p">
+  <Text as="dfn" id="def-apf">
+    <Text as="abbr" title="All Purpose Flour">
+      APF
+    </Text>
+  </Text>{" "}
+  is general-use, unbleached wheat flour.
+</Text>
+
+### em
+
+> The `<em>` HTML element marks text that has stress emphasis. The `<em>` element can be nested, with each level of nesting indicating a greater degree of emphasis. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em)
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--em" />
 </Canvas>
 
-### span (default)
+### ins
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The HTML `<ins>` element represents a range of text that has been added to a document. You can use the `<del>` element to similarly represent a range of text that has been deleted from the document. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins)
+
+### Accessibility
+
+Many screen readers do not let users know of the presence of `ins`. To fix this, you should consider using the ScreenReaderText component, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--ins" />
 </Canvas>
 
-### span (default)
+### kbd
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The `<kbd>` HTML element represents a span of inline text denoting textual user input from a keyboard, voice input, or any other text entry device. By convention, the user agent defaults to rendering the contents of a `<kbd>` element using its default monospace font, although this is not mandated by the HTML standard. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd)
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--kbd" />
 </Canvas>
 
-### span (default)
+### mark
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The `<mark>` HTML element represents a span of inline text denoting textual user input from a keyboard, voice input, or any other text entry device. By convention, the user agent defaults to rendering the contents of a `<mark>` element using its default monospace font, although this is not mandated by the HTML standard. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark)
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--mark" />
 </Canvas>
 
-### span (default)
+### p
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The `<p>` HTML element represents a paragraph. Paragraphs are usually represented in visual media as blocks of text separated from adjacent blocks by blank lines and/or first-line indentation, but HTML paragraphs can be any structural grouping of related content, such as images or form fields. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p)",
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--p" />
 </Canvas>
 
-### span (default)
+### pre
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The `<pre>` HTML element represents preformatted text which is to be presented exactly as written in the HTML file. The text is typically rendered using a non-proportional, or "monospaced, font. Whitespace inside this element is displayed as written. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre)
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--pre" />
 </Canvas>
 
-### span (default)
+### q
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The HTML `<q>` element indicates that the enclosed text is a short inline quotation. Most modern browsers implement this by surrounding the text in quotation marks. This element is intended for short quotations that don't require paragraph breaks; for long quotations use the `<blockquote>` element - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q)
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--q" />
 </Canvas>
 
-### span (default)
+### s
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The HTML `<s>` element renders text with a strikethrough, or a line through it. Use the `<s>` element to represent things that are no longer relevant or no longer accurate. However, `<s>` is not appropriate when indicating document edits; for that, use the `<del>` and `<ins>` elements, as appropriate. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s)
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--s" />
 </Canvas>
 
-### span (default)
+### samp
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The HTML Sample Element (`<samp>`) is used to enclose inline text which represents sample (or quoted) output from a computer program. Its contents are typically rendered using the browser's default monospaced font (such as Courier or Lucida Console). - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp)
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--samp" />
 </Canvas>
 
-### span (default)
+### small
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The `<small>` HTML element represents side-comments and small print, like copyright and legal text, independent of its styled presentation. By default, it renders text within it one font-size smaller, such as from small to x-small. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small)
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--small" />
 </Canvas>
 
-### span (default)
+### strong
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The `<strong>` HTML element indicates that its contents have strong importance, seriousness, or urgency. Browsers typically render the contents in bold type. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong)
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--strong" />
 </Canvas>
 
-### span (default)
+### sub
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The `<sub>` HTML element specifies inline text which should be displayed as subscript for solely typographical reasons. Subscripts are typically rendered with a lowered baseline using smaller text. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub)",
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--sub" />
 </Canvas>
 
-### span (default)
+### sup
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The `<sup>` HTML element specifies inline text which is to be displayed as superscript for solely typographical reasons. Superscripts are usually rendered with a raised baseline using smaller text. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup)",
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--sup" />
 </Canvas>
 
-### span (default)
+### var
 
-> The `<span>` HTML element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. `<span>` is very much like a `<div>` element, but `<div>` is a block-level element whereas a `<span>` is an inline element. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span)
+> The `<var>` HTML element represents the name of a variable in a mathematical expression or a programming context. It's typically presented using an italicized version of the current typeface, although that behavior is browser-dependent. - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var)",
 
 <Canvas>
-  <Story id="components-text-elements--span" />
+  <Story id="components-text-elements--var" />
 </Canvas>
 
 ## Usage
