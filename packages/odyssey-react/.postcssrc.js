@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+const { resolve } = require("path");
+const { default: postcssScss } = require("@okta/odyssey-postcss-scss");
 const {
   default: transformStyles,
 } = require("@okta/odyssey-transform-styles-postcss-preset");
@@ -33,7 +35,13 @@ module.exports = (ctx) => {
     }
   );
 
+  const partials = `functions colors mixins tokens`.split(" ");
+  const importDir = resolve(require.resolve("@okta/odyssey"), "../abstracts");
+  const importData = partials
+    .map((partial) => `@import '${importDir}/${partial}';`)
+    .join("\n");
+
   return {
-    plugins: [transformStyles(options)],
+    plugins: [postcssScss({ importData }), transformStyles(options)],
   };
 };

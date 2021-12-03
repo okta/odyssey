@@ -1,14 +1,14 @@
 {
   "name": "@okta/odyssey-commitlint",
-  "version": "0.8.1",
+  "version": "0.8.4",
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "@commitlint/cli": "^12.1.1",
-    "@commitlint/config-conventional": "^12.1.1",
-    "@commitlint/config-lerna-scopes": "^12.1.1",
+    "@commitlint/cli": "^14.0.0",
+    "@commitlint/config-conventional": "^14.0.0",
+    "@commitlint/config-lerna-scopes": "^14.0.0",
     "husky": "^6.0.0"
   }
 }

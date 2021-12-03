@@ -12,7 +12,13 @@ export const parameters = {
   options: {
     storySort: {
       method: "",
-      order: ["Welcome", "Guidelines", "Components", "Utilities"],
+      order: [
+        "Welcome",
+        "Contributing",
+        "Guidelines",
+        "Components",
+        "Utilities",
+      ],
       locales: "",
     },
   },
@@ -23,12 +29,12 @@ export const parameters = {
     default: "white",
     values: [
       {
-        name: "white",
+        name: "Page Background",
         value: "#ffffff",
       },
       {
-        name: "gradient",
-        value: "linear-gradient(135deg,#00297a,#1662dd) no-repeat",
+        name: "Page Background (dark)",
+        value: "#1d1d21",
       },
     ],
   },

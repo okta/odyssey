@@ -1,0 +1,21 @@
+{
+  "name": "@okta/odyssey-postcss-scss",
+  "version": "0.8.4",
+  "main": "dist/index.js",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "prepare": "tsc"
+  },
+  "dependencies": {
+    "sass": "^1.42.1"
+  },
+  "devDependencies": {
+    "@okta/odyssey-typescript": "^0.8.4",
+    "@types/sass": "^1.16.1"
+  },
+  "peerDependencies": {
+    "postcss": "^8.3.6"
+  }
+}

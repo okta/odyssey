@@ -142,7 +142,7 @@ let Toast = forwardRefWithStatics<HTMLElement, ToastProps, Statics>(
         {body && <p className={styles.body}>{body}</p>}
         <span className={styles.dismiss}>
           <Button
-            variant="dismiss"
+            variant={variant === "caution" ? "dismiss" : "dismissInverted"}
             onClick={onDismiss}
             icon={<CloseIcon title={dismissButtonLabel} />}
           />

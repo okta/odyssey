@@ -16,8 +16,6 @@ import postcss from "postcss";
 import postcssrc from "postcss-load-config";
 import { createHash } from "crypto";
 import { readFileSync } from "fs";
-import { resolve } from "path";
-import { renderSync } from "sass";
 import formatWarnings from "./formatWarnings";
 
 export interface File {
@@ -43,23 +41,12 @@ if (!parentPort) {
   throw new Error("Cannot execute this module in the main thread");
 }
 
-const partials = `functions colors mixins tokens`.split(" ");
-const importDir = resolve(require.resolve("@okta/odyssey"), "../abstracts");
-const importData = partials
-  .map((partial) => `@import '${importDir}/${partial}';`)
-  .join("\n");
-
 parentPort.addListener("message", async (message: MessageArgs) => {
   let response: CompileResponse | undefined;
   const { signal, port, filePath } = message;
 
   try {
     const source = readFileSync(filePath, "utf8");
-
-    const intermediate = renderSync({
-      data: `${importData}\n${source}`,
-      file: filePath,
-    }).css.toString("utf8");
 
     let tokens: Tokens | undefined;
 
@@ -75,7 +62,7 @@ parentPort.addListener("message", async (message: MessageArgs) => {
 
     const { plugins } = await postcssrc(context);
     const runner = postcss(plugins);
-    const result = await runner.process(intermediate, { from: filePath });
+    const result = await runner.process(source, { from: filePath });
 
     if (!tokens) {
       throw new Error("Cannot fetch style tokens");

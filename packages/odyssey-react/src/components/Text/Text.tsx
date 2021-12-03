@@ -55,7 +55,15 @@ export interface TextProps {
    * The text color style for the text content.
    * @default body
    */
-  color?: "body" | "bodyInverse" | "code" | "danger" | "dangerDisabled" | "sub";
+  color?:
+    | "body"
+    | "bodyInverse"
+    | "code"
+    | "danger"
+    | "dangerDisabled"
+    | "sub"
+    | "heading"
+    | "primary";
 
   /**
    * The font weight for the text content.
@@ -97,7 +105,42 @@ export interface TextProps {
    * The overflow wrapping behavior for the text content.
    * @default normal
    */
-  wrap?: "normal" | "breakWord" | "anywhere";
+  wrap?: "normal" | "breakWord" | "anywhere" | "nowrap";
+
+  /**
+   * The text color style on hover.
+   */
+  hoverColor?: "body" | "bodyInverse" | "primaryDark";
+
+  /**
+   * The text color style on focus.
+   */
+  focusColor?: "body" | "bodyInverse" | "primary";
+
+  /**
+   * The text color style when disabled.
+   */
+  disabledColor?: "bodyInverse" | "primaryLight" | "sub";
+
+  /**
+   * The text color style when the parent element is hovered.
+   */
+  parentHoveredColor?: "body" | "bodyInverse" | "primaryDark";
+
+  /**
+   * The text color style when the parent element has focus.
+   */
+  parentFocusedColor?: "body" | "bodyInverse" | "primary";
+
+  /**
+   * The text color style when the parent element is disabled.
+   */
+  parentDisabledColor?: "bodyInverse" | "primaryLight" | "sub";
+
+  /**
+   * Transitions
+   */
+  transition?: "inherit";
 }
 
 /**
@@ -114,6 +157,13 @@ let Text = forwardRef((props, ref) => {
     size = "base",
     wrap = "normal",
     lineHeight = "normal",
+    hoverColor,
+    focusColor,
+    disabledColor,
+    parentHoveredColor,
+    parentFocusedColor,
+    parentDisabledColor,
+    transition,
     ...rest
   } = props;
 
@@ -128,9 +178,15 @@ let Text = forwardRef((props, ref) => {
     styles[transform + "Transform"],
     styles[size + "Size"],
     styles[wrap + "Wrap"],
-    styles[lineHeight + "LineHeight"]
+    styles[lineHeight + "LineHeight"],
+    styles[hoverColor + "HoverColor"],
+    styles[focusColor + "FocusColor"],
+    styles[disabledColor + "DisabledColor"],
+    styles[parentHoveredColor + "ParentHoveredColor"],
+    styles[parentFocusedColor + "ParentFocusedColor"],
+    styles[parentDisabledColor + "ParentDisabledColor"],
+    styles[transition + "Transition"]
   );
-
   const omitProps = useOmit(rest);
 
   return (
