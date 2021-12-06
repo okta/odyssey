@@ -16,7 +16,7 @@ import { ScreenReaderText, ScreenReaderTextProps } from "@okta/odyssey-react";
 import { ScreenReaderText as Source } from "../../../../odyssey-react/src";
 
 export default {
-  title: `Utilities/ScreenReaderText`,
+  title: `Components/ScreenReaderText`,
   component: Source,
 };
 
