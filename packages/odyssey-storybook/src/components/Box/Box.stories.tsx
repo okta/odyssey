@@ -20,13 +20,9 @@ export default {
   component: Source,
 };
 
-const Template: Story<BoxProps> = (args) => {
-  const {
-    as, // eslint-disable-line @typescript-eslint/no-unused-vars
-    ...rest
-  } = args;
+const Template: Story<BoxProps> = (args: Omit<BoxProps, "as">) => {
   return (
-    <Box {...rest} tabIndex={0}>
+    <Box {...args} tabIndex={0}>
       Box
     </Box>
   );
