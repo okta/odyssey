@@ -12,7 +12,7 @@
 
 import React, { ReactElement } from "react";
 import { Story } from "@storybook/react";
-import { Source } from "../../../../odyssey-react/src/components/Box/Source";
+import { Source } from "./Box.docgen";
 import { Box, BoxProps, Heading, Text } from "@okta/odyssey-react";
 
 import BoxMdx from "./Box.mdx";
