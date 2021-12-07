@@ -424,7 +424,7 @@ export const Overflow = (args: BoxProps): ReactElement => (
     padding="xs"
     borderColor="display"
     backgroundColor="default"
-    width="max-line-length"
+    maxWidth="max-line-length"
     maxHeight="screen-minus-padding"
     overflow={args.overflow}
     overflowX={args.overflowX}
