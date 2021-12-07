@@ -1,43 +1,103 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
 # Field
 
-These captions help make forms more accessible by providing context to the user. They can be used with all Odyssey inputs.
+This component provides traction and cushion during take-off and landing.
+
+[View source on GitHub](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/src/components/Field)
 
 ## Anatomy
 
-**STORY MISSING**
-
-## Usage
-
-Field labels provide textual affordances and context for Odyssey's various inputs. Our UI Kit provides these labels alongside each component.
-
-Please refer to individual components for complete documentation. These examples are provided for quick illustration.
+<Canvas>
+  <Story id="components-textinput--kitchen-sink" />
+</Canvas>
 
 ### Label
 
-Labels caption pieces of UI, typically form fields. They are required for all inputs. When related to sets of Radios or Checkboxes, they may also be referred to as "legends".
+A text label for the Field. The associated element may be `<label>` or `<legend>` depending on Field's Input type.
 
-Keep labels to a word or two so users can quickly scan the form. Always use sentence casing.
+The Label also indicates the Field's optional/required status to ensure screen readers properly announce the state.
 
-**STORY MISSING**
+### Hint
 
-### Field hint
 
-Use field hints to provide context, formatting help, or other guidelines to the user. Do not use the placeholder attribute for these purposes.
 
-Limit hints to a short sentence. If additional context is required, it should be provided outside the Field.
+### Error
 
-**STORY MISSING**
 
-### Error messages
 
-Invalid fields should include an inline message to explain the error.
+## Props
 
-If possible, describe how the error may be resolved.
+<ArgsTable />
 
-**STORY MISSING**
+## Behavior (optional)
 
-### Optional fields
+Landing Gear deploys through doors in the heat shield. This component cannot be retracted once deployed.
 
-Odyssey assumes inputs are required by default. Optional labels should be used to indicate when data is not required for the user to complete a task.
+## Variants (optional)
 
-**STORY MISSING**
+Odyssey offers both automatic and manual variants of Landing Gear.
+
+### Manual
+
+Since Landing Gear is deployed through the heat shield, our default variant is Manual control. Unless automated systems have a sufficient success rate, please utilize this variant.
+
+### Automatic
+
+Automatic Landing Gear is deployed once the orbiter has achieved a set proximity to the ground. If your atmospheric density is variable, we recommend using Manual deployment instead.
+
+## States (optional)
+
+### Retracted
+
+In its retracted state, Landing Gear is not visible, being stored behind the heat shield.
+
+### Deployed
+
+In its deployed state, Landing Gear emerges from behind the heat shield and becomes visible. Landings are only possible in this state.
+
+## Usage
+
+Landing Gear should be used when designing any craft with air-to-ground capability.
+
+For most crafts, three sets of Landing Gear are necessary and sufficient. If you are working with particularly large or small crafts, please reach out to the Odyssey team.
+
+### Do
+
+- Utilize Landing Gear when terrestial excursions are rare but expected.
+- Account for both retracted and deployed states in your designs.
+
+### Don't
+
+- Landing Gear should not be included on any craft that will not make terrestial landings.
+- Do not limit your craft to only Deployed or Retracted states. Landing Gear requires both states for full functionality.
+
+## Content Guidelines
+
+When marking left and right Landing Gear controls, treat the nose of your craft as "forward".
+
+Please do not use "port" and "starboard" terminology when referencing controls, as these designations are not useful on some planets.
+
+## Accessibility
+
+Crafts utilizing Landing Gear are required to utilize a nose wheel steering system. Ensure your individual Landing Gear components are associated with the appropriate rudder pedals.
+
+## Responsive Web Design (optional)
+
+As noted above, craft are expected to utilize three sets of Landing Gear. This configuration should scale for both large and small crafts.
+
+If you encounter issues with the configuration, please reach out, as a more fluid design may be required.
+
+## Globalization (optional)
+
+Some systems disallow Automatic variants of Landing Gear, as failures are catastrophic. Ensure your craft designs are in compliance with local mandates.
+
+## References (optional)
+
+### Related Components (optional)
+
+- [Rudder Pedals](../components/rudder-pedals)
+
+### Further Reading (optional)
+
+For more information, please review the landing and take-off procedures detailed in [The Shadow Proclamation](http://an.external.site)
