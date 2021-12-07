@@ -28,6 +28,7 @@ export default {
   args: {
     label: "Destination",
     optionalLabel: "Optional",
+    hint: "A test hint",
     error: (
       <>
         <ScreenReaderText>Error:</ScreenReaderText> Descriptive error text.

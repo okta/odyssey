@@ -54,6 +54,14 @@ Text.args = {
   defaultValue: "Jupiter",
 };
 
+export const KitchenSink = Template.bind({});
+KitchenSink.args = {
+  defaultValue: "Jupiter",
+  hint: "This is a hint",
+  optionalLabel: "Optional",
+  error: "This is an error",
+};
+
 export const Search = Template.bind({});
 Search.args = {
   defaultValue: "Search Planets",
