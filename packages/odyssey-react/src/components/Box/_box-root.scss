@@ -16,11 +16,17 @@
   font-family: $body-font-family;
   font-size: 1rem;
   font-style: normal;
+  font-variant: normal;
   font-weight: 400;
   letter-spacing: 0;
   line-height: $base-line-height;
   font-feature-settings: "lnum", "pnum";
   text-decoration-skip-ink: all;
+
+  &::before,
+  &::after {
+    box-sizing: inherit;
+  }
 
   // Catch-all border-box
   /* stylelint-disable selector-max-universal */
@@ -33,27 +39,4 @@
     }
   }
   /* stylelint-enable selector-max-universal */
-
-  /* stylelint-disable selector-max-type */
-  // HTML5 display-role reset for older browsers
-  article:not([class]),
-  aside:not([class]),
-  details:not([class]),
-  figcaption:not([class]),
-  figure:not([class]),
-  footer:not([class]),
-  header:not([class]),
-  hgroup:not([class]),
-  menu:not([class]),
-  nav:not([class]),
-  section:not([class]) {
-    display: block;
-  }
-
-  // Element Specific Resets
-  img:not([class]),
-  svg:not([class]) {
-    max-width: 100%;
-  }
-  /* stylelint-enable selector-max-type */
 }
