@@ -9,17 +9,51 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-@import "box-root";
-@import "box-display";
-@import "box-position";
-@import "box-grid";
-@import "box-flex";
-@import "box-width-height";
-@import "box-margin";
-@import "box-padding";
-@import "box-overflow";
-@import "box-border";
-@import "box-background";
-@import "box-cursor";
-@import "box-hover-focus";
-@import "box-other";
+
+.gridTemplateColumns2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.gridTemplateColumns3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.gridTemplateColumns2Auto1 {
+  grid-template-columns: auto 1fr;
+}
+
+.gridTemplateColumns3Auto1Auto3 {
+  grid-template-columns: auto 1fr auto;
+}
+
+.gridColumn1 {
+  grid-column: 1;
+}
+
+.gridColumn2 {
+  grid-column: 2;
+}
+
+.gridColumn3 {
+  grid-column: 3;
+}
+
+.gridRow1 {
+  grid-row: 1;
+}
+
+.gridRow2 {
+  grid-row: 2;
+}
+
+.gridRow3 {
+  grid-row: 3;
+}
+
+.gridRow4 {
+  grid-row: 4;
+}
+
+.gridRow5 {
+  grid-row: 5;
+}

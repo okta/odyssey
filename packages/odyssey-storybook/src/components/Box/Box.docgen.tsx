@@ -9,17 +9,10 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-@import "box-root";
-@import "box-display";
-@import "box-position";
-@import "box-grid";
-@import "box-flex";
-@import "box-width-height";
-@import "box-margin";
-@import "box-padding";
-@import "box-overflow";
-@import "box-border";
-@import "box-background";
-@import "box-cursor";
-@import "box-hover-focus";
-@import "box-other";
+
+import React, { forwardRef } from "react";
+import type { BoxProps } from "@okta/odyssey-react";
+
+const Source = forwardRef<HTMLDivElement, BoxProps>(() => <></>);
+
+export { Source };

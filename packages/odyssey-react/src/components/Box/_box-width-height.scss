@@ -9,17 +9,43 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-@import "box-root";
-@import "box-display";
-@import "box-position";
-@import "box-grid";
-@import "box-flex";
-@import "box-width-height";
-@import "box-margin";
-@import "box-padding";
-@import "box-overflow";
-@import "box-border";
-@import "box-background";
-@import "box-cursor";
-@import "box-hover-focus";
-@import "box-other";
+
+.width1px {
+  width: 1px;
+}
+
+.width1em {
+  width: 1em;
+}
+
+.widthFull {
+  width: 100%;
+}
+
+.widthScreen {
+  width: 100vw;
+}
+
+.maxWidthFull {
+  max-width: 100%;
+}
+
+.maxWidthMaxLineLength {
+  max-width: $max-line-length;
+}
+
+.maxWidthMaxLineLengthPlusPadding {
+  max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
+}
+
+.height1em {
+  height: 1em;
+}
+
+.maxHeightScreen {
+  max-height: 100vh;
+}
+
+.maxHeightScreenMinusPadding {
+  max-height: calc(100vh - #{$spacing-m});
+}
