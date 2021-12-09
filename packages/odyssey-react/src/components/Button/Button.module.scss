@@ -23,7 +23,7 @@
   transition-duration: 100ms;
   transition-timing-function: linear;
   border: 1px solid transparent;
-  background-color: $color-primary-base;
+  background-color: var(--ColorBackgroundPrimary);
   box-shadow: 0 0 0 0 $color-primary-light;
   color: $white;
   font-family: $body-font-family;
@@ -33,19 +33,19 @@
   white-space: nowrap;
 
   &:hover {
-    border-color: $color-primary-dark;
-    background-color: $color-primary-dark;
+    border-color: var(--ColorBorderPrimaryHover);
+    background-color: var(--ColorBackgroundPrimaryHover);
   }
 
   &:focus {
     @include outline;
 
-    background-color: $color-primary-dark;
+    background-color: var(--ColorBackgroundPrimaryFocus);
   }
 
   &:disabled {
     border-color: transparent;
-    background-color: $color-primary-light;
+    background-color: var(--ColorBackgroundPrimaryDisabled);
     cursor: not-allowed;
   }
 
@@ -68,25 +68,25 @@
 /* Variants */
 
 .secondaryVariant {
-  border-color: $color-primary-base;
-  background-color: $white;
+  border-color: var(--ColorBorderSecondary);
+  background-color: var(--ColorBackgroundSecondary);
   color: $color-primary-base;
 
   &:hover {
-    border-color: $color-primary-base;
-    background-color: $color-primary-base;
+    border-color: var(--ColorBorderSecondaryHover);
+    background-color: var(--ColorBackgroundSecondaryHover);
     color: $white;
   }
 
   &:focus {
-    border-color: $color-primary-base;
-    background-color: $white;
+    border-color: var(--ColorBorderSecondaryFocus);
+    background-color: var(--ColorBackgroundSecondaryFocus);
     color: $color-primary-base;
   }
 
   &:disabled {
-    border-color: $color-primary-light;
-    background-color: $white;
+    border-color: var(--ColorBorderSecondaryDisabled);
+    background-color: var(--ColorBackgroundSecondaryDisabled);
     color: $color-primary-light;
   }
 }

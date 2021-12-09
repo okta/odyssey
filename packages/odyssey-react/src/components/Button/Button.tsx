@@ -12,8 +12,9 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactElement, ReactText } from "react";
-import { withStyles, useCx, useOmit } from "../../utils";
+import { withTheme, useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
+import { theme } from "./Button.theme";
 
 interface CommonProps
   extends Omit<ComponentPropsWithRef<"button">, "style" | "className"> {
@@ -92,6 +93,6 @@ let Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 
 Button.displayName = "Button";
 
-Button = withStyles(styles)(Button);
+Button = withTheme(theme, styles)(Button);
 
 export { Button };
