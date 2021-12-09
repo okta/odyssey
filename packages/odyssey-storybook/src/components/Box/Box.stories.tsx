@@ -79,7 +79,7 @@ export const Background = (): ReactElement => (
         Primary Base
       </Box>
       <Box backgroundColor="primary-dark" padding="s" flex="evenly">
-        <Text as="span" color="bodyInverse">
+        <Text as="span" color="body-inverse">
           Primary Dark
         </Text>
       </Box>
@@ -102,7 +102,7 @@ export const Background = (): ReactElement => (
         Success Base
       </Box>
       <Box backgroundColor="success-dark" padding="s" flex="evenly">
-        <Text as="span" color="bodyInverse">
+        <Text as="span" color="body-inverse">
           Success Dark
         </Text>
       </Box>
@@ -146,7 +146,7 @@ export const Background = (): ReactElement => (
         Danger Base
       </Box>
       <Box backgroundColor="danger-dark" padding="s" flex="evenly">
-        <Text as="span" color="bodyInverse">
+        <Text as="span" color="body-inverse">
           Danger Dark
         </Text>
       </Box>
