@@ -59,7 +59,7 @@ BodyInverse.parameters = {
 };
 BodyInverse.args = {
   children: "Danger (disabled) text color",
-  color: "bodyInverse",
+  color: "body-inverse",
 };
 
 export const Code = Template.bind({});
@@ -80,7 +80,7 @@ export const ColorDangerDisabled = Template.bind({});
 ColorDangerDisabled.storyName = "Color: Danger, disabled";
 ColorDangerDisabled.args = {
   children: "Danger (disabled) text color",
-  color: "dangerDisabled",
+  color: "danger-disabled",
 };
 
 export const ColorSub = Template.bind({});
@@ -95,14 +95,14 @@ export const WeightRegular = Template.bind({});
 WeightRegular.storyName = "Weight: Regular";
 WeightRegular.args = {
   children: "Regular text weight",
-  weight: "regular",
+  fontWeight: "regular",
 };
 
 export const WeightBold = Template.bind({});
 WeightBold.storyName = "Weight: Bold";
 WeightBold.args = {
   children: "Bold text weight",
-  weight: "bold",
+  fontWeight: "bold",
 };
 
 // Style
@@ -125,42 +125,42 @@ export const TransformNormal = Template.bind({});
 TransformNormal.storyName = "Transform: none (default)";
 TransformNormal.args = {
   children: "Normal text transform style",
-  transform: "none",
+  textTransform: "none",
 };
 
 export const TransformCapitalize = Template.bind({});
 TransformCapitalize.storyName = "Transform: Capitalize";
 TransformCapitalize.args = {
   children: "Capitalize text transform style",
-  transform: "capitalize",
+  textTransform: "capitalize",
 };
 
 export const TransformLowerCase = Template.bind({});
 TransformLowerCase.storyName = "Transform: Lower case";
 TransformLowerCase.args = {
   children: "Lower case text transform style",
-  transform: "lowercase",
+  textTransform: "lowercase",
 };
 
 export const TransformUpperCase = Template.bind({});
 TransformUpperCase.storyName = "Transform: Upper case";
 TransformUpperCase.args = {
   children: "Uppercase text transform style",
-  transform: "uppercase",
+  textTransform: "uppercase",
 };
 
 export const TransformFullWidth = Template.bind({});
 TransformFullWidth.storyName = "Transform: Full width";
 TransformFullWidth.args = {
   children: "Full width text transform style",
-  transform: "fullWidth",
+  textTransform: "full-width",
 };
 
 export const TransformFullSizeKana = Template.bind({});
 TransformFullSizeKana.storyName = "Transform: Full size kana";
 TransformFullSizeKana.args = {
   children: "Full size kana text transform style",
-  transform: "fullSizeKana",
+  textTransform: "full-size-kana",
 };
 
 // Transform
@@ -168,21 +168,21 @@ export const SizeLede = Template.bind({});
 SizeLede.storyName = "Size: Lede";
 SizeLede.args = {
   children: "Lede text size style",
-  size: "lede",
+  fontSize: "lede",
 };
 
 export const SizeBase = Template.bind({});
 SizeBase.storyName = "Size: Base (default)";
 SizeBase.args = {
   children: "Base text size style",
-  size: "base",
+  fontSize: "base",
 };
 
 export const SizeCaption = Template.bind({});
 SizeCaption.storyName = "Size: Caption";
 SizeCaption.args = {
   children: "Caption text size style",
-  size: "caption",
+  fontSize: "caption",
 };
 
 // Wrap
@@ -195,7 +195,7 @@ WrapNormal.args = {
       <strong>incomprehensibile</strong> if viewed in the wrong context
     </>
   ),
-  wrap: "normal",
+  overflowWrap: "normal",
 };
 
 export const WrapBreakWord = TemplateWithContainer.bind({});
@@ -207,7 +207,7 @@ WrapBreakWord.args = {
       <strong>incomprehensibile</strong> if viewed in the wrong context
     </>
   ),
-  wrap: "breakWord",
+  overflowWrap: "break-word",
 };
 
 export const WrapAnywhere = TemplateWithContainer.bind({});
@@ -219,7 +219,7 @@ WrapAnywhere.args = {
       <strong>incomprehensibile</strong> if viewed in the wrong context
     </>
   ),
-  wrap: "anywhere",
+  overflowWrap: "anywhere",
 };
 
 // Line Height
@@ -242,4 +242,13 @@ LineHeightFont.storyName = "Line height: Font (1)";
 LineHeightFont.args = {
   children: "Font text LineHeight style",
   lineHeight: "font",
+};
+
+export const MarginPadding = Template.bind({});
+MarginPadding.storyName = "Margin and Padding";
+MarginPadding.args = {
+  children: "Margin and padding",
+  as: "div",
+  margin: "m",
+  padding: "m",
 };
