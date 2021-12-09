@@ -29,7 +29,7 @@ const DescriptionTerm = forwardRef<HTMLElement, DescriptionTermProps>(
 
     return (
       <dt {...omitProps} ref={ref} className={styles.term}>
-        <Text weight="bold" children={children} />
+        <Text fontWeight="bold" children={children} />
       </dt>
     );
   }

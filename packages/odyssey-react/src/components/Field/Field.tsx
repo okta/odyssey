@@ -121,12 +121,17 @@ function Label(props: PropsLabel) {
 
   const label = (
     <Tag className={styles.label} htmlFor={inputId}>
-      <Text color="heading" weight="bold">
+      <Text color="heading" fontWeight="bold">
         {children}
       </Text>
       {!required && optionalLabel && (
         <span className={styles.optionalLabel}>
-          <Text color="sub" size="caption" weight="regular" lineHeight="normal">
+          <Text
+            color="sub"
+            fontSize="caption"
+            fontWeight="regular"
+            lineHeight="normal"
+          >
             {optionalLabel}
           </Text>
         </span>
@@ -149,7 +154,7 @@ function Label(props: PropsLabel) {
 function Hint({ id, children }: PropsHint) {
   return (
     <p className={styles.hint} id={`${id}-hint`}>
-      <Text color="body" size="caption">
+      <Text color="body" fontSize="caption">
         {children}
       </Text>
     </p>
@@ -159,7 +164,7 @@ function Hint({ id, children }: PropsHint) {
 function Error({ id, children }: PropsError) {
   return (
     <p className={styles.error} id={`${id}-error`}>
-      <Text color="danger" size="caption">
+      <Text color="danger" fontSize="caption">
         {children}
       </Text>
     </p>
