@@ -18,7 +18,12 @@ describe("transformStyles", () => {
       expect(styles).toMatchSnapshot();
     });
 
-    it("transforms styles template as expected", () => {
+    it("transforms styles template function arity as expected", () => {
+      expect(styles.__template).toBeInstanceOf(Function);
+      expect(styles.__template).toHaveLength(1);
+    });
+
+    it("transforms styles template function return value as expected", () => {
       expect(styles.__template()).toMatchSnapshot();
     });
   });
