@@ -12,11 +12,26 @@
 
 import React, { forwardRef } from "react";
 import type { ReactNode } from "react";
+import { Box } from "../Box";
+import type { BoxProps } from "../Box";
 import { useCx, useOmit, withStyles } from "../../utils";
 import type { PolymorphicForwardRef } from "../../utils";
 import styles from "./Text.module.scss";
 
-export interface TextProps {
+export interface TextProps
+  extends Pick<
+    BoxProps,
+    | "margin"
+    | "marginTop"
+    | "marginRight"
+    | "marginBottom"
+    | "marginLeft"
+    | "padding"
+    | "paddingTop"
+    | "paddingRight"
+    | "paddingBottom"
+    | "paddingLeft"
+  > {
   /**
    * Text content to be rendered
    */
@@ -57,10 +72,10 @@ export interface TextProps {
    */
   color?:
     | "body"
-    | "bodyInverse"
+    | "body-inverse"
     | "code"
     | "danger"
-    | "dangerDisabled"
+    | "danger-disabled"
     | "sub"
     | "heading"
     | "primary";
@@ -69,7 +84,7 @@ export interface TextProps {
    * The font weight for the text content.
    * @default regular
    */
-  weight?: "regular" | "bold";
+  fontWeight?: "regular" | "bold";
 
   /**
    * The font style (normal or italic) for the text content.
@@ -81,19 +96,19 @@ export interface TextProps {
    * The text-transform for the text content.
    * @default none
    */
-  transform?:
+  textTransform?:
     | "none"
     | "capitalize"
     | "uppercase"
     | "lowercase"
-    | "fullWidth"
-    | "fullSizeKana";
+    | "full-width"
+    | "full-size-kana";
 
   /**
    * The font-size for the text content.
    * @default base
    */
-  size?: "lede" | "base" | "caption";
+  fontSize?: "lede" | "base" | "caption";
 
   /**
    * The line-height for the text content.
@@ -105,42 +120,14 @@ export interface TextProps {
    * The overflow wrapping behavior for the text content.
    * @default normal
    */
-  wrap?: "normal" | "breakWord" | "anywhere" | "nowrap";
+  overflowWrap?: "normal" | "break-word" | "anywhere";
+}
 
-  /**
-   * The text color style on hover.
-   */
-  hoverColor?: "body" | "bodyInverse" | "primaryDark";
-
-  /**
-   * The text color style on focus.
-   */
-  focusColor?: "body" | "bodyInverse" | "primary";
-
-  /**
-   * The text color style when disabled.
-   */
-  disabledColor?: "bodyInverse" | "primaryLight" | "sub";
-
-  /**
-   * The text color style when the parent element is hovered.
-   */
-  parentHoveredColor?: "body" | "bodyInverse" | "primaryDark";
-
-  /**
-   * The text color style when the parent element has focus.
-   */
-  parentFocusedColor?: "body" | "bodyInverse" | "primary";
-
-  /**
-   * The text color style when the parent element is disabled.
-   */
-  parentDisabledColor?: "bodyInverse" | "primaryLight" | "sub";
-
-  /**
-   * Transitions
-   */
-  transition?: "inherit";
+function convertProp(prop: string) {
+  function clearAndUpper(text: string) {
+    return text.replace(/-/, "").toUpperCase();
+  }
+  return prop.replace(/-\w/g, clearAndUpper);
 }
 
 /**
@@ -151,46 +138,31 @@ let Text = forwardRef((props, ref) => {
     children,
     as = "span",
     color = "body",
-    weight = "regular",
+    fontWeight = "regular",
     fontStyle = "normal",
-    transform = "none",
-    size = "base",
-    wrap = "normal",
+    textTransform = "none",
+    fontSize = "base",
+    overflowWrap = "normal",
     lineHeight = "normal",
-    hoverColor,
-    focusColor,
-    disabledColor,
-    parentHoveredColor,
-    parentFocusedColor,
-    parentDisabledColor,
-    transition,
     ...rest
   } = props;
-
-  const Tag = as;
 
   const componentClass = useCx(
     styles.root,
     styles[as],
-    styles[color + "Color"],
-    styles[weight + "Weight"],
-    styles[fontStyle + "Style"],
-    styles[transform + "Transform"],
-    styles[size + "Size"],
-    styles[wrap + "Wrap"],
-    styles[lineHeight + "LineHeight"],
-    styles[hoverColor + "HoverColor"],
-    styles[focusColor + "FocusColor"],
-    styles[disabledColor + "DisabledColor"],
-    styles[parentHoveredColor + "ParentHoveredColor"],
-    styles[parentFocusedColor + "ParentFocusedColor"],
-    styles[parentDisabledColor + "ParentDisabledColor"],
-    styles[transition + "Transition"]
+    styles[convertProp(color) + "Color"],
+    styles[convertProp(fontWeight) + "Weight"],
+    styles[convertProp(fontStyle) + "Style"],
+    styles[convertProp(textTransform) + "Transform"],
+    styles[convertProp(fontSize) + "Size"],
+    styles[convertProp(overflowWrap) + "Wrap"],
+    styles[convertProp(lineHeight) + "LineHeight"]
   );
   const omitProps = useOmit(rest);
 
   return (
-    <Tag
+    <Box
+      as={as}
       {...omitProps}
       ref={ref}
       className={componentClass}
