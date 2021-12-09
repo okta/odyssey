@@ -86,7 +86,7 @@ export function tokenObjectExpression({
     t.objectProperty(t.identifier("__digest"), t.stringLiteral(digest)),
     t.objectProperty(
       t.identifier("__template"),
-      t.functionExpression(null, [], body)
+      t.functionExpression(null, [t.identifier("theme")], body)
     ),
     ...tokenObjectProperties(tokens),
   ]);

@@ -9,4 +9,4 @@ Object {
 }
 `;
 
-exports[`transformStyles import visitor transforms styles template as expected 1`] = `".ods-c0f206:dir(ltr){margin-left:0}.ods-c0f206:dir(rtl){margin-right:0}.ods-c0f206:dir(ltr){margin-right:.375rem}.ods-c0f206:dir(rtl){margin-left:.375rem}.ods-c0f206{background:#ebebed;color:#1d1d21;display:inline-block;margin-bottom:.375rem;margin-top:0;padding:0 .375em}.ods-322606{::-moz-placeholder{color:#bada55}:-ms-input-placeholder{color:#bada55}::placeholder{color:#bada55}}"`;
+exports[`transformStyles import visitor transforms styles template function return value as expected 1`] = `".ods-c0f206:dir(ltr){margin-left:0}.ods-c0f206:dir(rtl){margin-right:0}.ods-c0f206:dir(ltr){margin-right:.375rem}.ods-c0f206:dir(rtl){margin-left:.375rem}.ods-c0f206{background:#ebebed;color:#1d1d21;display:inline-block;margin-bottom:.375rem;margin-top:0;padding:0 .375em}.ods-322606{::-moz-placeholder{color:#bada55}:-ms-input-placeholder{color:#bada55}::placeholder{color:#bada55}}"`;
