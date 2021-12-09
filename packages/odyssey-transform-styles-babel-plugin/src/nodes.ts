@@ -11,6 +11,7 @@
  */
 
 import * as t from "@babel/types";
+import template from "@babel/template";
 import type { Tokens } from "./compile";
 
 interface ObjectExpressionArgs {
@@ -80,13 +81,17 @@ export function tokenObjectExpression({
   styles,
   digest,
 }: ObjectExpressionArgs): t.ObjectExpression {
-  const body = t.blockStatement([t.returnStatement(t.stringLiteral(styles))]);
+  const body = template.ast(`return \`${styles}\``) as t.ReturnStatement;
 
   return t.objectExpression([
     t.objectProperty(t.identifier("__digest"), t.stringLiteral(digest)),
     t.objectProperty(
       t.identifier("__template"),
-      t.functionExpression(null, [t.identifier("theme")], body)
+      t.functionExpression(
+        null,
+        [t.identifier("theme")],
+        t.blockStatement([body])
+      )
     ),
     ...tokenObjectProperties(tokens),
   ]);
