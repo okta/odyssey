@@ -28,12 +28,14 @@ export default {
   args: {
     label: "Destination",
     optionalLabel: "Optional",
-    hint: "A test hint",
+    hint: "Your planetary destination.",
     error: (
       <>
-        <ScreenReaderText>Error:</ScreenReaderText> Descriptive error text.
+        <ScreenReaderText>Error:</ScreenReaderText> This field may not be left
+        blank.
       </>
     ),
+    required: true,
   },
   argTypes: {
     error: { control: "text" },
@@ -47,5 +49,32 @@ export default {
 
 const Template: Story<FieldProps> = (props) => <Field {...props} />;
 
-export const FieldSolo = Template.bind({});
-FieldSolo.args = {};
+export const KitchenSink = Template.bind({});
+KitchenSink.args = {
+  required: false,
+};
+
+export const FieldLabel = Template.bind({});
+FieldLabel.args = {
+  error: undefined,
+  hint: undefined,
+};
+
+export const FieldOptional = Template.bind({});
+FieldOptional.args = {
+  error: undefined,
+  hint: undefined,
+  required: false,
+};
+
+export const FieldHint = Template.bind({});
+FieldHint.args = {
+  label: undefined,
+  error: undefined,
+};
+
+export const FieldError = Template.bind({});
+FieldError.args = {
+  label: undefined,
+  hint: undefined,
+};

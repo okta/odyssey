@@ -2,7 +2,9 @@ import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
 
 # Field
 
-This component provides traction and cushion during take-off and landing.
+Field provides all of the supporting context required by inputs, including labels, hints, and errors.
+
+This component is also responsible for managing the appropriate application of `aria-` attributes and `id` associations between Inputs and their associated elements.
 
 [View source on GitHub](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/src/components/Field)
 
@@ -16,88 +18,133 @@ This component provides traction and cushion during take-off and landing.
 
 A text label for the Field. The associated element may be `<label>` or `<legend>` depending on Field's Input type.
 
-The Label also indicates the Field's optional/required status to ensure screen readers properly announce the state.
+<Canvas>
+  <Story id="components-field--field-label" />
+</Canvas>
+
+The label also indicates the Field's optional/required status to ensure screen readers properly announce the state.
+
+<Canvas>
+  <Story id="components-field--field-optional" />
+</Canvas>
 
 ### Hint
 
+A hint is helper text for the Field. The field hint is similar to the disallowed `placeholder` attribute. It should provide any necessary help text for the Field but is optional.
 
+Appropriate examples include expected formatting or value types.
+
+<Canvas>
+  <Story id="components-field--field-hint" />
+</Canvas>
 
 ### Error
 
+Inline error messaging for the Field.
 
+All errors require a visible or SR-only "Error:" label. This labeling is not handled automatically and must be included in the error message.
+
+<Canvas>
+  <Story id="components-field--field-error" />
+</Canvas>
 
 ## Props
 
 <ArgsTable />
 
-## Behavior (optional)
+## Variants
 
-Landing Gear deploys through doors in the heat shield. This component cannot be retracted once deployed.
+While their appearance is identical, Field supports single and grouped inputs by offering an `as=" foo"` polymorphic API.
 
-## Variants (optional)
+### Single Input
 
-Odyssey offers both automatic and manual variants of Landing Gear.
+Fields for lone inputs are rendered as `div's and assign their `label`/`input` relationship using an ID.
 
-### Manual
+<Canvas>
+  <Story id="components-textarea--default" />
+</Canvas>
 
-Since Landing Gear is deployed through the heat shield, our default variant is Manual control. Unless automated systems have a sufficient success rate, please utilize this variant.
+### Grouped Inputs
 
-### Automatic
+Fields for grouped inputs are rendered as `fieldset`s, using a `legend` to label all of the associated `input`s accessibly. This variant also spreads hint and error associations across affected controls.
 
-Automatic Landing Gear is deployed once the orbiter has achieved a set proximity to the ground. If your atmospheric density is variable, we recommend using Manual deployment instead.
+<Canvas>
+  <Story id="components-radio--default" />
+</Canvas>
 
-## States (optional)
+## States
 
-### Retracted
+Fields may be either required or optional, depending on what's called for by their input.
 
-In its retracted state, Landing Gear is not visible, being stored behind the heat shield.
+### Required
 
-### Deployed
+By default, inputs and Fields are set to `required`. As the default, this state has no unique affordance.
 
-In its deployed state, Landing Gear emerges from behind the heat shield and becomes visible. Landings are only possible in this state.
+<Canvas>
+  <Story id="components-textinput--text" />
+</Canvas>
+
+### Optional
+
+Fields with `required` set to `false` will be marked as optional:
+
+<Canvas>
+  <Story id="components-textinput--optional" />
+</Canvas>
 
 ## Usage
 
-Landing Gear should be used when designing any craft with air-to-ground capability.
+Field is a complementary component, providing shared structure across Odyssey Inputs like [Text Input](?path=/docs/components-textinput--text#text-input).
 
-For most crafts, three sets of Landing Gear are necessary and sufficient. If you are working with particularly large or small crafts, please reach out to the Odyssey team.
+When assembling Forms, it's unnecessary to utilize Field, as it's built into Odyssey's Inputs already.
 
-### Do
-
-- Utilize Landing Gear when terrestial excursions are rare but expected.
-- Account for both retracted and deployed states in your designs.
-
-### Don't
-
-- Landing Gear should not be included on any craft that will not make terrestial landings.
-- Do not limit your craft to only Deployed or Retracted states. Landing Gear requires both states for full functionality.
+If you are building a new or bespoke Input component, please utilize Field to ensure consistent behavior with existing components.
 
 ## Content Guidelines
 
-When marking left and right Landing Gear controls, treat the nose of your craft as "forward".
+### Labels
 
-Please do not use "port" and "starboard" terminology when referencing controls, as these designations are not useful on some planets.
+A well-written label describes the purpose of the Field for the user.
+
+Use concise, descriptive labels (a word or two) to help users quickly scan your form.
+
+Finally, please use sentence casing for your labels. Sentence case is easier to read and will help reduce error rates and speed up form completion time.
+
+### Hints
+
+When writing hints, only provide information that assists with the immediate task.
+
+For example, "The expected format is `YYYY-MM-DD`."
+
+Hints like, "This information will be used to do x, y, and z." may be informative without assisting the user in completing their form.
+
+If additional disclosures or warnings are required, an [Infobox](?path=/docs/components-infobox--info#infobox) may be more appropriate.
+
+Remember: a good label may eliminate the need for a hint.
+
+### Errors
+
+Error messaging should explain: (1) what has gone wrong and (2) how the user can fix the issue.
+
+"This value is invalid." is less helpful than "This field requires a complete email address."
+
+If the user cannot fix the error or if the error extends beyond the Field, it should instead be surfaced at the Field Group, Form, or page level.
 
 ## Accessibility
 
-Crafts utilizing Landing Gear are required to utilize a nose wheel steering system. Ensure your individual Landing Gear components are associated with the appropriate rudder pedals.
+Field does its best to correctly associate attributes and place `aria-` tags where necessary. For input-specific accessibility concerns, please refer to the relevant component's documentation.
 
-## Responsive Web Design (optional)
+Your error messages should include an "Error:" label, whether visible or visually hidden.
 
-As noted above, craft are expected to utilize three sets of Landing Gear. This configuration should scale for both large and small crafts.
+## Globalization
 
-If you encounter issues with the configuration, please reach out, as a more fluid design may be required.
+To support ease of localization, Field's `optionalLabel` string has no default and must be supplied by the user.
 
-## Globalization (optional)
+Similarly, an "Error:" label is not automatically inserted into Field error messages.
 
-Some systems disallow Automatic variants of Landing Gear, as failures are catastrophic. Ensure your craft designs are in compliance with local mandates.
+## References
 
-## References (optional)
+### Related Components
 
-### Related Components (optional)
-
-- [Rudder Pedals](../components/rudder-pedals)
-
-### Further Reading (optional)
-
-For more information, please review the landing and take-off procedures detailed in [The Shadow Proclamation](http://an.external.site)
+- [Field Group](?path=/docs/components-fieldgroup--default)
+- [Form](?path=/docs/components-form--default)
