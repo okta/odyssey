@@ -11,16 +11,6 @@
  */
 
 .root {
-  color: $text-body;
-  font-family: $body-font-family;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: $base-line-height;
-  font-feature-settings: "lnum", "pnum";
-  text-decoration-skip-ink: all;
-
   // stylelint-disable-next-line selector-max-type
   abbr,
   &.abbr {

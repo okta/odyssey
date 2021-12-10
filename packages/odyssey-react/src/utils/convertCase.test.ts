@@ -10,10 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { oid, useOid } from "./oid";
-export { omit, useOmit } from "./omit";
-export { cx, useCx } from "./cx";
-export { forwardRefWithStatics } from "./forwardRefWithStatics";
-export { withStyles } from "./withStyles";
-export { toCamelCase, toPascalCase } from "./convertCase";
-export type { PolymorphicForwardRef } from "./polymorphic";
+import { toCamelCase, toPascalCase } from "./convertCase";
+
+describe(`convertCase`, () => {
+  describe(`toCamelCase`, () => {
+    it(`converts a string to camelCase`, () => {
+      expect(toCamelCase("test-string")).toEqual("testString");
+    });
+  });
+  describe(`toPascalCase`, () => {
+    it(`converts a string to PascalCase`, () => {
+      expect(toPascalCase("test-string")).toEqual("TestString");
+    });
+  });
+});

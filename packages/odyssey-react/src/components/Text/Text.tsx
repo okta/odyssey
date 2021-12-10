@@ -14,7 +14,7 @@ import React, { forwardRef } from "react";
 import type { ReactNode } from "react";
 import { Box } from "../Box";
 import type { BoxProps } from "../Box";
-import { useCx, useOmit, withStyles } from "../../utils";
+import { useCx, useOmit, withStyles, toCamelCase } from "../../utils";
 import type { PolymorphicForwardRef } from "../../utils";
 import styles from "./Text.module.scss";
 
@@ -123,13 +123,6 @@ export interface TextProps
   overflowWrap?: "normal" | "break-word" | "anywhere";
 }
 
-function convertProp(prop: string) {
-  function clearAndUpper(text: string) {
-    return text.replace(/-/, "").toUpperCase();
-  }
-  return prop.replace(/-\w/g, clearAndUpper);
-}
-
 /**
  * A component which provides style for visible text elements.
  */
@@ -150,13 +143,13 @@ let Text = forwardRef((props, ref) => {
   const componentClass = useCx(
     styles.root,
     styles[as],
-    styles[convertProp(color) + "Color"],
-    styles[convertProp(fontWeight) + "Weight"],
-    styles[convertProp(fontStyle) + "Style"],
-    styles[convertProp(textTransform) + "Transform"],
-    styles[convertProp(fontSize) + "Size"],
-    styles[convertProp(overflowWrap) + "Wrap"],
-    styles[convertProp(lineHeight) + "LineHeight"]
+    styles[toCamelCase(color) + "Color"],
+    styles[toCamelCase(fontWeight) + "Weight"],
+    styles[toCamelCase(fontStyle) + "Style"],
+    styles[toCamelCase(textTransform) + "Transform"],
+    styles[toCamelCase(fontSize) + "Size"],
+    styles[toCamelCase(overflowWrap) + "Wrap"],
+    styles[toCamelCase(lineHeight) + "LineHeight"]
   );
   const omitProps = useOmit(rest);
 
