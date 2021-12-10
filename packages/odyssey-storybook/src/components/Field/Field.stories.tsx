@@ -25,18 +25,7 @@ export default {
       page: FieldMdx,
     },
   },
-  args: {
-    label: "Destination",
-    optionalLabel: "Optional",
-    hint: "Your planetary destination.",
-    error: (
-      <>
-        <ScreenReaderText>Error:</ScreenReaderText> This field may not be left
-        blank.
-      </>
-    ),
-    required: true,
-  },
+  args: {},
   argTypes: {
     error: { control: "text" },
     hint: { control: "text" },
@@ -51,30 +40,41 @@ const Template: Story<FieldProps> = (props) => <Field {...props} />;
 
 export const KitchenSink = Template.bind({});
 KitchenSink.args = {
+  label: "Destination",
+  optionalLabel: "Optional",
+  hint: "Your planetary destination.",
   required: false,
+  error: (
+    <>
+      <ScreenReaderText>Error:</ScreenReaderText> This field may not be left
+      blank.
+    </>
+  ),
 };
 
 export const FieldLabel = Template.bind({});
 FieldLabel.args = {
-  error: undefined,
-  hint: undefined,
+  label: "Destination",
 };
 
 export const FieldOptional = Template.bind({});
 FieldOptional.args = {
-  error: undefined,
-  hint: undefined,
+  label: "Destination",
+  optionalLabel: "Optional",
   required: false,
 };
 
 export const FieldHint = Template.bind({});
 FieldHint.args = {
-  label: undefined,
-  error: undefined,
+  hint: "Your planetary destination.",
 };
 
 export const FieldError = Template.bind({});
 FieldError.args = {
-  label: undefined,
-  hint: undefined,
+  error: (
+    <>
+      <ScreenReaderText>Error:</ScreenReaderText> This field may not be left
+      blank.
+    </>
+  ),
 };
