@@ -4,7 +4,7 @@ import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
 
 Field provides all of the supporting context required by inputs, including labels, hints, and errors.
 
-This component is also responsible for managing the appropriate application of `aria-` attributes and `id` associations between Inputs and their associated elements.
+This component also helps ensure proper accessibility by managing `aria-` attributes and `id` associations between inputs and their associated elements.
 
 [View source on GitHub](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/src/components/Field)
 
@@ -30,7 +30,7 @@ The label also indicates the Field's optional/required status to ensure screen r
 
 ### Hint
 
-A hint is helper text for the Field. The field hint is similar to the disallowed `placeholder` attribute. It should provide any necessary help text for the Field but is optional.
+A hint is helper text for the Field. They offer better accessibility and usability than the `placeholder` attribute. Hints should provide any necessary help text for their Field but are optional.
 
 Appropriate examples include expected formatting or value types.
 
@@ -58,7 +58,7 @@ While their appearance is identical, Field supports single and grouped inputs by
 
 ### Single Input
 
-Fields for lone inputs are rendered as `div's and assign their `label`/`input` relationship using an ID.
+Fields for lone inputs are rendered as `div`s and assign their `label`/`input` relationship using an ID.
 
 <Canvas>
   <Story id="components-textarea--default" />
@@ -86,7 +86,7 @@ By default, inputs and Fields are set to `required`. As the default, this state 
 
 ### Optional
 
-Fields with `required` set to `false` will be marked as optional:
+In order to mark a Field as optional, set `required` to `false` and include an `opationalLabel`.
 
 <Canvas>
   <Story id="components-textinput--optional" />
@@ -108,7 +108,11 @@ A well-written label describes the purpose of the Field for the user.
 
 Use concise, descriptive labels (a word or two) to help users quickly scan your form.
 
+"Destination" rather than "Please enter your destination".
+
 Finally, please use sentence casing for your labels. Sentence case is easier to read and will help reduce error rates and speed up form completion time.
+
+"Landing gear deployment speed" rather than "Landing Gear Deployment Speed"
 
 ### Hints
 
@@ -124,9 +128,9 @@ Remember: a good label may eliminate the need for a hint.
 
 ### Errors
 
-Error messaging should explain: (1) what has gone wrong and (2) how the user can fix the issue.
+At minimum, error messages should explain why an entry is invalid. Great error messages also note how the user can address the problem.
 
-"This value is invalid." is less helpful than "This field requires a complete email address."
+For example, "This value is invalid." is less helpful than "This field requires a complete email address."
 
 If the user cannot fix the error or if the error extends beyond the Field, it should instead be surfaced at the Field Group, Form, or page level.
 
