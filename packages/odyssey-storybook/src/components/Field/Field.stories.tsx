@@ -12,8 +12,8 @@
 
 import React from "react";
 import { Story } from "@storybook/react";
+import { Source } from "./Field.docgen";
 import { Field, FieldProps, ScreenReaderText } from "@okta/odyssey-react";
-import { Field as Source } from "../../../../odyssey-react/src";
 
 import FieldMdx from "./Field.mdx";
 
