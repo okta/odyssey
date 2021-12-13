@@ -12,7 +12,4 @@
 
 module.exports = {
   setupFilesAfterEnv: ["./jest.setup.js"],
-  transformIgnorePatterns: [
-    "<rootDir>/node_modules/(?!@okta/odyssey-design-tokens/)",
-  ],
 };

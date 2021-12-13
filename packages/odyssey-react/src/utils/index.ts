@@ -16,5 +16,4 @@ export { oid, useOid } from "./oid";
 export { omit, useOmit } from "./omit";
 export { toCamelCase, toPascalCase } from "./convertCase";
 export { withStyles } from "./withStyles";
-export { withTheme } from "./withTheme";
 export type { PolymorphicForwardRef } from "./polymorphic";
