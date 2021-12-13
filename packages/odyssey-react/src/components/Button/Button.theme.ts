@@ -10,11 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ThemeShape } from "../ThemeProvider/context";
+import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
-export const theme = (
-  theme: ThemeShape
-): Record<string, string | undefined> => ({
+export const theme: ThemeReducer = (theme) => ({
   // Primary Variant
   ColorBackgroundPrimary: theme.ColorPrimaryBase,
   ColorBorderPrimaryHover: theme.ColorPrimaryDark,
