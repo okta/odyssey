@@ -15,8 +15,9 @@ import { Story } from "@storybook/react";
 import {
   FieldGroup,
   FieldGroupProps,
-  TextInput,
   Infobox,
+  Select,
+  TextInput,
 } from "@okta/odyssey-react";
 import { FieldGroup as Source } from "../../../../odyssey-react/src";
 
@@ -48,7 +49,12 @@ const Template: Story<FieldGroupProps> = ({ title, desc }) => (
         content="this is an error"
       />
     </FieldGroup.Error>
-    <TextInput label="Foo" hint="Bar" />
+    <Select label="Destination" name="destination">
+      <Select.Option children="Venus" />
+      <Select.Option children="Nessus" />
+      <Select.Option children="Europa" />
+    </Select>
+    <TextInput label="Flight identifier" type="search" />
   </FieldGroup>
 );
 
