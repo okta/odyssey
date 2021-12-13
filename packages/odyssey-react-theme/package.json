@@ -1,7 +1,7 @@
 {
-  "name": "@okta/odyssey-react",
-  "version": "0.8.4",
-  "description": "React components for Odyssey, Okta's design system",
+  "name": "@okta/odyssey-react-theme",
+  "version": "0.0.0",
+  "description": "React theme logic for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "main": "dist/index.js",
@@ -9,34 +9,25 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/okta/odyssey",
-    "directory": "packages/odyssey-react"
+    "directory": "packages/odyssey-react-theme"
   },
   "dependencies": {
-    "@okta/odyssey-react-theme": "^0.0.0",
-    "choices.js": "^9.0.1"
+    "@okta/odyssey-design-tokens": "^0.8.4",
+    "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
     "@babel/cli": "*",
     "@okta/browserslist-config-odyssey": "^0.8.4",
     "@okta/odyssey-babel-preset": "^0.8.4",
     "@okta/odyssey-eslint": "^0.8.4",
-    "@okta/odyssey-icons": "^0.8.4",
-    "@okta/odyssey-postcss-scss": "^0.8.4",
-    "@okta/odyssey-stylelint": "^0.8.4",
-    "@okta/odyssey-svgr": "^0.8.4",
-    "@okta/odyssey-transform-styles-postcss-preset": "^0.8.4",
     "@okta/odyssey-typescript": "^0.8.4",
-    "@svgr/cli": "^5.5.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
-    "@testing-library/react-hooks": "^7.0.2",
     "@types/hoist-non-react-statics": "^3.3.1",
-    "@types/jest-axe": "^3.5.1",
     "@types/react": "^17.0.30",
     "@types/react-dom": "^17.0.5",
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
-    "jest-axe": "^5.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -45,17 +36,14 @@
     "react-dom": ">=16 <18"
   },
   "scripts": {
-    "start": "node ./scripts/start.js",
     "lint": "eslint .",
     "test": "jest",
     "typecheck": "tsc",
     "prepare": "yarn build",
-    "build": "yarn build:clean && yarn build:types && yarn build:source && yarn build:css",
+    "build": "yarn build:clean && yarn build:types && yarn build:source",
     "build:clean": "rm -rf dist",
     "build:types": "tsc --project tsconfig.production.json",
     "build:source": "./scripts/buildSource",
-    "build:css": "node ./scripts/buildCss.js",
-    "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.js) --out-dir ./src/components/Icon/",
     "prepack": "node ./scripts/prepack.js"
   }
 }
