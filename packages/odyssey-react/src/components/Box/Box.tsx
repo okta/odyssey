@@ -11,7 +11,13 @@
  */
 
 import React, { forwardRef } from "react";
-import { useCx, useOmit, withStyles, PolymorphicForwardRef } from "../../utils";
+import {
+  useCx,
+  useOmit,
+  withStyles,
+  PolymorphicForwardRef,
+  toPascalCase,
+} from "../../utils";
 import styles from "./Box.module.scss";
 
 type spacing = "xs" | "s" | "m" | "l" | "xl";
@@ -292,13 +298,6 @@ export interface BoxProps {
   userSelect?: "none" | "text" | "contain" | "all" | "auto";
 }
 
-function convertProp(prop: string) {
-  function clearAndUpper(text: string) {
-    return text.replace(/-/, "").toUpperCase();
-  }
-  return prop.replace(/(^\w|-\w)/g, clearAndUpper);
-}
-
 /**
  * Low level building block for ui
  */
@@ -446,70 +445,70 @@ let Box = forwardRef(
 
     const componentClass = useCx(
       styles.root,
-      display && styles[`display${convertProp(display)}`],
-      position && styles[`position${convertProp(position)}`],
-      flexDirection && styles[`flexDirection${convertProp(flexDirection)}`],
-      flexWrap && styles[`flexWrap${convertProp(flexWrap)}`],
-      flex && styles[`flex${convertProp(flex)}`],
-      flexGrow && styles[`flexGrow${convertProp(flexGrow)}`],
-      flexShrink && styles[`flexShrink${convertProp(flexShrink)}`],
-      alignItems && styles[`alignItems${convertProp(alignItems)}`],
-      justifyContent && styles[`justifyContent${convertProp(justifyContent)}`],
+      display && styles[`display${toPascalCase(display)}`],
+      position && styles[`position${toPascalCase(position)}`],
+      flexDirection && styles[`flexDirection${toPascalCase(flexDirection)}`],
+      flexWrap && styles[`flexWrap${toPascalCase(flexWrap)}`],
+      flex && styles[`flex${toPascalCase(flex)}`],
+      flexGrow && styles[`flexGrow${toPascalCase(flexGrow)}`],
+      flexShrink && styles[`flexShrink${toPascalCase(flexShrink)}`],
+      alignItems && styles[`alignItems${toPascalCase(alignItems)}`],
+      justifyContent && styles[`justifyContent${toPascalCase(justifyContent)}`],
       gridTemplateColumns &&
-        styles[`gridTemplateColumns${convertProp(gridTemplateColumns)}`],
-      gridColumn && styles[`gridColumn${convertProp(gridColumn)}`],
-      gridRow && styles[`gridRow${convertProp(gridRow)}`],
-      width && styles[`width${convertProp(width)}`],
-      maxWidth && styles[`maxWidth${convertProp(maxWidth)}`],
-      height && styles[`height${convertProp(height)}`],
-      maxHeight && styles[`maxHeight${convertProp(maxHeight)}`],
+        styles[`gridTemplateColumns${toPascalCase(gridTemplateColumns)}`],
+      gridColumn && styles[`gridColumn${toPascalCase(gridColumn)}`],
+      gridRow && styles[`gridRow${toPascalCase(gridRow)}`],
+      width && styles[`width${toPascalCase(width)}`],
+      maxWidth && styles[`maxWidth${toPascalCase(maxWidth)}`],
+      height && styles[`height${toPascalCase(height)}`],
+      maxHeight && styles[`maxHeight${toPascalCase(maxHeight)}`],
       margin &&
         !Array.isArray(margin) &&
-        styles[`margin${convertProp(margin)}`],
-      marginTop && styles[`marginTop${convertProp(marginTop)}`],
-      marginRight && styles[`marginRight${convertProp(marginRight)}`],
-      marginBottom && styles[`marginBottom${convertProp(marginBottom)}`],
-      marginLeft && styles[`marginLeft${convertProp(marginLeft)}`],
+        styles[`margin${toPascalCase(margin)}`],
+      marginTop && styles[`marginTop${toPascalCase(marginTop)}`],
+      marginRight && styles[`marginRight${toPascalCase(marginRight)}`],
+      marginBottom && styles[`marginBottom${toPascalCase(marginBottom)}`],
+      marginLeft && styles[`marginLeft${toPascalCase(marginLeft)}`],
       padding &&
         !Array.isArray(padding) &&
-        styles[`padding${convertProp(padding)}`],
-      paddingTop && styles[`paddingTop${convertProp(paddingTop)}`],
-      paddingRight && styles[`paddingRight${convertProp(paddingRight)}`],
-      paddingBottom && styles[`paddingBottom${convertProp(paddingBottom)}`],
-      paddingLeft && styles[`paddingLeft${convertProp(paddingLeft)}`],
+        styles[`padding${toPascalCase(padding)}`],
+      paddingTop && styles[`paddingTop${toPascalCase(paddingTop)}`],
+      paddingRight && styles[`paddingRight${toPascalCase(paddingRight)}`],
+      paddingBottom && styles[`paddingBottom${toPascalCase(paddingBottom)}`],
+      paddingLeft && styles[`paddingLeft${toPascalCase(paddingLeft)}`],
       overflow &&
         !Array.isArray(overflow) &&
-        styles[`overflow${convertProp(overflow)}`],
-      overflowX && styles[`overflowX${convertProp(overflowX)}`],
-      overflowY && styles[`overflowY${convertProp(overflowY)}`],
+        styles[`overflow${toPascalCase(overflow)}`],
+      overflowX && styles[`overflowX${toPascalCase(overflowX)}`],
+      overflowY && styles[`overflowY${toPascalCase(overflowY)}`],
       borderColor !== "none" && styles.borderBase,
-      borderColor && styles[`borderColor${convertProp(borderColor)}`],
+      borderColor && styles[`borderColor${toPascalCase(borderColor)}`],
       hoverBorderColor !== "none" && styles.borderBase,
       hoverBorderColor &&
-        styles[`hoverBorderColor${convertProp(hoverBorderColor)}`],
+        styles[`hoverBorderColor${toPascalCase(hoverBorderColor)}`],
       focusBorderColor &&
-        styles[`focusBorderColor${convertProp(focusBorderColor)}`],
+        styles[`focusBorderColor${toPascalCase(focusBorderColor)}`],
       borderRadius &&
         !Array.isArray(borderRadius) &&
-        styles[`borderRadius${convertProp(borderRadius)}`],
+        styles[`borderRadius${toPascalCase(borderRadius)}`],
       borderTopLeftRadius &&
-        styles[`borderTopLeftRadius${convertProp(borderTopLeftRadius)}`],
+        styles[`borderTopLeftRadius${toPascalCase(borderTopLeftRadius)}`],
       borderTopRightRadius &&
-        styles[`borderTopRightRadius${convertProp(borderTopRightRadius)}`],
+        styles[`borderTopRightRadius${toPascalCase(borderTopRightRadius)}`],
       borderBottomLeftRadius &&
-        styles[`borderBottomLeftRadius${convertProp(borderBottomLeftRadius)}`],
+        styles[`borderBottomLeftRadius${toPascalCase(borderBottomLeftRadius)}`],
       borderBottomRightRadius &&
         styles[
-          `borderBottomRightRadius${convertProp(borderBottomRightRadius)}`
+          `borderBottomRightRadius${toPascalCase(borderBottomRightRadius)}`
         ],
       backgroundColor &&
-        styles[`backgroundColor${convertProp(backgroundColor)}`],
-      boxShadow && styles[`boxShadow${convertProp(boxShadow)}`],
-      hoverBoxShadow && styles[`hoverBoxShadow${convertProp(hoverBoxShadow)}`],
-      focusRing && styles[`focusRing${convertProp(focusRing)}`],
-      cursor && styles[`cursor${convertProp(cursor)}`],
-      pointerEvents && styles[`pointerEvents${convertProp(pointerEvents)}`],
-      userSelect && styles[`userSelect${convertProp(userSelect)}`],
+        styles[`backgroundColor${toPascalCase(backgroundColor)}`],
+      boxShadow && styles[`boxShadow${toPascalCase(boxShadow)}`],
+      hoverBoxShadow && styles[`hoverBoxShadow${toPascalCase(hoverBoxShadow)}`],
+      focusRing && styles[`focusRing${toPascalCase(focusRing)}`],
+      cursor && styles[`cursor${toPascalCase(cursor)}`],
+      pointerEvents && styles[`pointerEvents${toPascalCase(pointerEvents)}`],
+      userSelect && styles[`userSelect${toPascalCase(userSelect)}`],
       className
     );
 

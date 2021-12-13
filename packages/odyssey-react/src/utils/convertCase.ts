@@ -10,10 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { oid, useOid } from "./oid";
-export { omit, useOmit } from "./omit";
-export { cx, useCx } from "./cx";
-export { forwardRefWithStatics } from "./forwardRefWithStatics";
-export { withStyles } from "./withStyles";
-export { toCamelCase, toPascalCase } from "./convertCase";
-export type { PolymorphicForwardRef } from "./polymorphic";
+function clearAndUpper(str: string): string {
+  return str.replace(/-/, "").toUpperCase();
+}
+
+function toCamelCase(str: string): string {
+  return str.replace(/-\w/g, clearAndUpper);
+}
+
+function toPascalCase(str: string): string {
+  return str.replace(/(^\w|-\w)/g, clearAndUpper);
+}
+
+export { toCamelCase, toPascalCase };
