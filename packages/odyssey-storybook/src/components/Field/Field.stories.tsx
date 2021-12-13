@@ -12,28 +12,20 @@
 
 import React from "react";
 import { Story } from "@storybook/react";
+import { FieldDocGen } from "./Field.docgen";
 import { Field, FieldProps, ScreenReaderText } from "@okta/odyssey-react";
-import { Field as Source } from "../../../../odyssey-react/src";
 
 import FieldMdx from "./Field.mdx";
 
 export default {
   title: `Components/Field`,
-  component: Source,
+  component: FieldDocGen,
   parameters: {
     docs: {
       page: FieldMdx,
     },
   },
-  args: {
-    label: "Destination",
-    optionalLabel: "Optional",
-    error: (
-      <>
-        <ScreenReaderText>Error:</ScreenReaderText> Descriptive error text.
-      </>
-    ),
-  },
+  args: {},
   argTypes: {
     error: { control: "text" },
     hint: { control: "text" },
@@ -46,5 +38,43 @@ export default {
 
 const Template: Story<FieldProps> = (props) => <Field {...props} />;
 
-export const FieldSolo = Template.bind({});
-FieldSolo.args = {};
+export const KitchenSink = Template.bind({});
+KitchenSink.args = {
+  label: "Destination",
+  optionalLabel: "Optional",
+  hint: "Your planetary destination.",
+  required: false,
+  error: (
+    <>
+      <ScreenReaderText>Error:</ScreenReaderText> This field may not be left
+      blank.
+    </>
+  ),
+};
+
+export const FieldLabel = Template.bind({});
+FieldLabel.args = {
+  label: "Destination",
+};
+
+export const FieldOptional = Template.bind({});
+FieldOptional.args = {
+  label: "Destination",
+  optionalLabel: "Optional",
+  required: false,
+};
+
+export const FieldHint = Template.bind({});
+FieldHint.args = {
+  hint: "Your planetary destination.",
+};
+
+export const FieldError = Template.bind({});
+FieldError.args = {
+  error: (
+    <>
+      <ScreenReaderText>Error:</ScreenReaderText> This field may not be left
+      blank.
+    </>
+  ),
+};

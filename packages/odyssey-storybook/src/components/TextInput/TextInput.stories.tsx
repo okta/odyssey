@@ -50,8 +50,20 @@ export default {
 const Template: Story<TextInputProps> = (props) => <TextInput {...props} />;
 
 export const Text = Template.bind({});
-Text.args = {
-  defaultValue: "Jupiter",
+Text.args = {};
+
+export const Optional = Template.bind({});
+Optional.args = {
+  required: false,
+  optionalLabel: "Optional",
+};
+
+export const KitchenSink = Template.bind({});
+KitchenSink.args = {
+  hint: "This is a hint",
+  optionalLabel: "Optional",
+  error: "This is an error",
+  required: false,
 };
 
 export const Search = Template.bind({});
