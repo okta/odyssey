@@ -10,9 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef } from "react";
+import type { FunctionComponent } from "react";
 import type { FieldProps } from "@okta/odyssey-react";
 
-const Source = forwardRef<HTMLDivElement, FieldProps>(() => <></>);
+const FieldDocGen: FunctionComponent<FieldProps> = () => {
+  return null;
+};
 
-export { Source };
+export { FieldDocGen };

@@ -12,14 +12,14 @@
 
 import React from "react";
 import { Story } from "@storybook/react";
-import { Source } from "./Field.docgen";
+import { FieldDocGen } from "./Field.docgen";
 import { Field, FieldProps, ScreenReaderText } from "@okta/odyssey-react";
 
 import FieldMdx from "./Field.mdx";
 
 export default {
   title: `Components/Field`,
-  component: Source,
+  component: FieldDocGen,
   parameters: {
     docs: {
       page: FieldMdx,
