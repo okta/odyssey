@@ -160,10 +160,10 @@ let TextInput: FunctionComponent<Props> = (props) => {
 
   const search = (
     <span className={styles.outer}>
+      {input}
       <span className={styles.indicator} role="presentation">
         <SearchIcon />
       </span>
-      {input}
     </span>
   );
 
