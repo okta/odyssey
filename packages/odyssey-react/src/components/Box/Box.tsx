@@ -19,6 +19,7 @@ import {
   toPascalCase,
 } from "../../utils";
 import styles from "./Box.module.scss";
+import textStyles from "../Text/Text.module.scss";
 
 type spacing = "xs" | "s" | "m" | "l" | "xl";
 type overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
@@ -296,6 +297,31 @@ export interface BoxProps {
    * Content selection
    */
   userSelect?: "none" | "text" | "contain" | "all" | "auto";
+  /**
+   * Whether to apply the body text color class
+   * @default true
+   */
+  applyColor?: boolean;
+  /**
+   * Whether to apply the normal font weight class
+   * @default true
+   */
+  applyFontWeight?: boolean;
+  /**
+   * Whether to apply the normal font style class
+   * @default true
+   */
+  applyFontStyle?: boolean;
+  /**
+   * Whether to apply the base font size class
+   * @default true
+   */
+  applyFontSize?: boolean;
+  /**
+   * Whether to apply the base line height class
+   * @default true
+   */
+  applyLineHeight?: boolean;
 }
 
 /**
@@ -305,6 +331,11 @@ let Box = forwardRef(
   (
     {
       as = "div",
+      applyColor = true,
+      applyFontWeight = true,
+      applyFontStyle = true,
+      applyFontSize = true,
+      applyLineHeight = true,
       display,
       position,
       flexDirection,
@@ -481,9 +512,9 @@ let Box = forwardRef(
         styles[`overflow${toPascalCase(overflow)}`],
       overflowX && styles[`overflowX${toPascalCase(overflowX)}`],
       overflowY && styles[`overflowY${toPascalCase(overflowY)}`],
-      borderColor !== "none" && styles.borderBase,
+      borderColor && borderColor !== "none" && styles.borderBase,
       borderColor && styles[`borderColor${toPascalCase(borderColor)}`],
-      hoverBorderColor !== "none" && styles.borderBase,
+      hoverBorderColor && hoverBorderColor !== "none" && styles.borderBase,
       hoverBorderColor &&
         styles[`hoverBorderColor${toPascalCase(hoverBorderColor)}`],
       focusBorderColor &&
@@ -509,6 +540,11 @@ let Box = forwardRef(
       cursor && styles[`cursor${toPascalCase(cursor)}`],
       pointerEvents && styles[`pointerEvents${toPascalCase(pointerEvents)}`],
       userSelect && styles[`userSelect${toPascalCase(userSelect)}`],
+      applyColor && textStyles.bodyColor,
+      applyFontWeight && textStyles.regularWeight,
+      applyFontStyle && textStyles.normalStyle,
+      applyFontSize && textStyles.baseSize,
+      applyLineHeight && textStyles.normalLineHeight,
       className
     );
 
