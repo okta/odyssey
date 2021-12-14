@@ -17,11 +17,12 @@ import {
   withStyles,
   PolymorphicForwardRef,
   toPascalCase,
+  toCamelCase,
 } from "../../utils";
 import styles from "./Box.module.scss";
 import textStyles from "../Text/Text.module.scss";
 
-type spacing = "xs" | "s" | "m" | "l" | "xl";
+type spacing = "xs" | "s" | "m" | "l" | "xl" | "0" | false;
 type overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
 type borderRadius = "base" | "outer" | "none";
 
@@ -143,6 +144,7 @@ export interface BoxProps {
   maxHeight?: "screen" | "screen-minus-padding";
   /**
    * Margin applied outside the box border
+   * @default "0"
    */
   margin?: spacing | spacing[];
   /**
@@ -163,6 +165,7 @@ export interface BoxProps {
   marginLeft?: spacing;
   /**
    * Padding applied inside the box between the border and the content
+   * @default "0"
    */
   padding?: spacing | spacing[];
   /**
@@ -299,29 +302,29 @@ export interface BoxProps {
   userSelect?: "none" | "text" | "contain" | "all" | "auto";
   /**
    * Whether to apply the body text color class
-   * @default true
+   * @default body
    */
-  applyColor?: boolean;
+  color?: "body" | false;
   /**
    * Whether to apply the normal font weight class
-   * @default true
+   * @default regular
    */
-  applyFontWeight?: boolean;
+  fontWeight?: "regular" | false;
   /**
    * Whether to apply the normal font style class
-   * @default true
+   * @default normal
    */
-  applyFontStyle?: boolean;
+  fontStyle?: "normal" | false;
   /**
    * Whether to apply the base font size class
-   * @default true
+   * @default base
    */
-  applyFontSize?: boolean;
+  fontSize?: "base" | false;
   /**
    * Whether to apply the base line height class
-   * @default true
+   * @default normal
    */
-  applyLineHeight?: boolean;
+  lineHeight?: "normal" | false;
 }
 
 /**
@@ -331,11 +334,11 @@ let Box = forwardRef(
   (
     {
       as = "div",
-      applyColor = true,
-      applyFontWeight = true,
-      applyFontStyle = true,
-      applyFontSize = true,
-      applyLineHeight = true,
+      color = "body",
+      fontWeight = "regular",
+      fontStyle = "normal",
+      fontSize = "base",
+      lineHeight = "normal",
       display,
       position,
       flexDirection,
@@ -352,12 +355,12 @@ let Box = forwardRef(
       maxWidth,
       height,
       maxHeight,
-      margin,
+      margin = "0",
       marginTop,
       marginRight,
       marginBottom,
       marginLeft,
-      padding,
+      padding = "0",
       paddingTop,
       paddingRight,
       paddingBottom,
@@ -540,11 +543,11 @@ let Box = forwardRef(
       cursor && styles[`cursor${toPascalCase(cursor)}`],
       pointerEvents && styles[`pointerEvents${toPascalCase(pointerEvents)}`],
       userSelect && styles[`userSelect${toPascalCase(userSelect)}`],
-      applyColor && textStyles.bodyColor,
-      applyFontWeight && textStyles.regularWeight,
-      applyFontStyle && textStyles.normalStyle,
-      applyFontSize && textStyles.baseSize,
-      applyLineHeight && textStyles.normalLineHeight,
+      color && textStyles[`${toCamelCase(color)}Color`],
+      fontWeight && textStyles[`${toCamelCase(fontWeight)}Weight`],
+      fontStyle && textStyles[`${toCamelCase(fontStyle)}Style`],
+      fontSize && textStyles[`${toCamelCase(fontSize)}Size`],
+      lineHeight && textStyles[`${toCamelCase(lineHeight)}LineHeight`],
       className
     );
 

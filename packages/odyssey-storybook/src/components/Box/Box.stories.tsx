@@ -192,6 +192,11 @@ export const MarginPadding = (): ReactElement => (
     Margin
     <Box display="flex" alignItems="flex-end">
       <Box backgroundColor="danger-light" marginRight="s">
+        <Box borderColor="ui" backgroundColor="default">
+          &nbsp;default / 0&nbsp;
+        </Box>
+      </Box>
+      <Box backgroundColor="danger-light" marginRight="s">
         <Box borderColor="ui" backgroundColor="default" margin="xs">
           &nbsp;xs&nbsp;
         </Box>
@@ -219,6 +224,9 @@ export const MarginPadding = (): ReactElement => (
     </Box>
     Padding
     <Box display="flex" alignItems="flex-end">
+      <Box backgroundColor="success-light" borderColor="ui" marginRight="s">
+        <Box backgroundColor="default">&nbsp;default / 0&nbsp;</Box>
+      </Box>
       <Box
         padding="xs"
         backgroundColor="success-light"
