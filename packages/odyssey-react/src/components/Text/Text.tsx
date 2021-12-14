@@ -159,11 +159,11 @@ let Text = forwardRef((props, ref) => {
       {...omitProps}
       ref={ref}
       className={componentClass}
-      applyColor={false}
-      applyFontWeight={false}
-      applyFontStyle={false}
-      applyFontSize={false}
-      applyLineHeight={false}
+      color={false}
+      fontWeight={false}
+      fontStyle={false}
+      fontSize={false}
+      lineHeight={false}
       children={children}
     />
   );
