@@ -17,6 +17,8 @@ import { Box, BoxProps, Heading, Text } from "@okta/odyssey-react";
 
 import BoxMdx from "./Box.mdx";
 
+import "./box-stories.css";
+
 export default {
   title: `Components/Box`,
   component: Source,
@@ -544,7 +546,9 @@ Other.argTypes = pickControls(["pointerEvents", "userSelect"]);
 Other.args = { userSelect: "none" };
 
 export const CustomClass = (): ReactElement => (
-  <Box className="test-class">Custom class</Box>
+  <Box className="test-class" padding={false} color={false}>
+    Custom class
+  </Box>
 );
 
 function pickControls(properties: string[]) {
