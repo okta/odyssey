@@ -38,7 +38,7 @@ interface PropsError {
 }
 
 type Statics = {
-  Error: typeof Error;
+  Error: typeof FieldGroupError;
 };
 
 export const FieldGroup: FunctionComponent<FieldGroupProps> & Statics =
@@ -61,14 +61,14 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> & Statics =
         );
       },
       {
-        Error,
+        Error: FieldGroupError,
       }
     )
   );
 
-function Error({ children }: PropsError) {
+function FieldGroupError({ children }: PropsError) {
   return <section className={styles.error}>{children}</section>;
 }
 
 FieldGroup.displayName = "FieldGroup";
-Error.displayName = "FieldGroupError";
+FieldGroupError.displayName = "FieldGroupError";
