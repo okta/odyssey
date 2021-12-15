@@ -61,7 +61,7 @@ interface PropsError {
 interface Statics {
   Label: typeof Label;
   Hint: typeof Hint;
-  Error: typeof Error;
+  Error: typeof FieldError;
 }
 
 export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
@@ -104,7 +104,7 @@ export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
     },
     {
       Label,
-      Error,
+      Error: FieldError,
       Hint,
     }
   )
@@ -164,7 +164,7 @@ function Hint({ id, children }: PropsHint) {
   );
 }
 
-function Error({ id, children }: PropsError) {
+function FieldError({ id, children }: PropsError) {
   return (
     <p className={styles.error} id={`${id}-error`}>
       <Text color="danger" fontSize="caption">
@@ -177,4 +177,4 @@ function Error({ id, children }: PropsError) {
 Field.displayName = "Field";
 Label.displayName = "FieldLabel";
 Hint.displayName = "FieldHint";
-Error.displayName = "FieldError";
+FieldError.displayName = "FieldError";
