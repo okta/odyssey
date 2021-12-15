@@ -1,0 +1,28 @@
+{
+  "color": {
+    "primary": {
+      "light": { "value": "{color.palette.blue.300.value}" },
+      "base": { "value": "{color.palette.blue.500.value}" },
+      "dark": { "value": "{color.palette.blue.900.value}" }
+    },
+    "danger": {
+      "light": { "value": "{color.palette.red.300.value}" },
+      "base": { "value": "{color.palette.red.500.value}" },
+      "dark": { "value": "{color.palette.red.900.value}" }
+    },
+    "text": {
+      "body": {
+        "comment": "Base text color used for most typography",
+        "value": "{color.palette.neutral.900.value}"
+      },
+      "bodyInverse": {
+        "comment": "Inverse text color typically used on a colorful background",
+        "value": "{color.palette.neutral.white.value}"
+      },
+      "primary": {
+        "comment": "Branded text color, primarily used within button",
+        "value": "{color.palette.blue.500.value}"
+      }
+    }
+  }
+}

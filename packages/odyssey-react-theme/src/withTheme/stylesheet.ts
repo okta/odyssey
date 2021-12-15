@@ -10,10 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { cx, useCx } from "./cx";
-export { forwardRefWithStatics } from "./forwardRefWithStatics";
-export { oid, useOid } from "./oid";
-export { omit, useOmit } from "./omit";
-export { toCamelCase, toPascalCase } from "./convertCase";
-export { withStyles } from "./withStyles";
-export type { PolymorphicForwardRef } from "./polymorphic";
+export class OStyleSheet extends Set<string> {
+  private element: HTMLStyleElement;
+
+  constructor() {
+    super();
+    const el = document.createElement("style");
+    el.setAttribute("data-ods", "");
+    this.element = document.head.appendChild(el);
+  }
+
+  inject(key: string, styles: string): boolean {
+    if (this.has(key)) return false;
+    this.element.innerHTML += styles;
+    this.add(key);
+    return true;
+  }
+}

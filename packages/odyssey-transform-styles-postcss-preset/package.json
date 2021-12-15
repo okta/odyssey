@@ -9,6 +9,7 @@
     "prepare": "tsc"
   },
   "dependencies": {
+    "@okta/odyssey-postcss-theme": "^0.0.0",
     "autoprefixer": "^10.3.4",
     "cssnano": "^5.0.8",
     "postcss-logical": "^5.0.0",

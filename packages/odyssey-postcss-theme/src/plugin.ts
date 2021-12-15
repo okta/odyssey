@@ -10,10 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { cx, useCx } from "./cx";
-export { forwardRefWithStatics } from "./forwardRefWithStatics";
-export { oid, useOid } from "./oid";
-export { omit, useOmit } from "./omit";
-export { toCamelCase, toPascalCase } from "./convertCase";
-export { withStyles } from "./withStyles";
-export type { PolymorphicForwardRef } from "./polymorphic";
+import type { PluginCreator } from "postcss";
+
+const customPropRegex = /var\(--([A-z][\w-]*)\)/g;
+
+const plugin: PluginCreator<never> = () => ({
+  postcssPlugin: "odyssey-postcss-theme",
+  Declaration: (decl) => {
+    const replaced = decl.value.replace(
+      customPropRegex,
+      (_, capture) => `\$\{theme.${capture} || 'inherit'\}`
+    );
+    decl.value = replaced;
+  },
+});
+
+plugin.postcss = true;
+export { plugin as default };

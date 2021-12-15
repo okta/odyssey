@@ -5,7 +5,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "style-dictionary build",
+    "build": "style-dictionary clean && style-dictionary build",
     "prepare": "yarn build"
   },
   "dependencies": {
