@@ -20,12 +20,14 @@ import postcssLogical from "postcss-logical";
 import type { LogicalOptions } from "postcss-logical";
 import cssnano from "cssnano";
 import autoprefixer from "autoprefixer";
+import postcssTheme from "@okta/odyssey-postcss-theme";
 
 interface PluginOptions {
   logical?: LogicalOptions;
   cssnano?: CssNanoOptions;
   autoprefixer?: AutoPrefixerOptions;
   modules?: Parameters<PostcssModulesPlugin>[number];
+  theme?: false;
 }
 
 const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
@@ -53,6 +55,7 @@ const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
     autoprefixer: {
       ...optsArgs.autoprefixer,
     },
+    theme: !!optsArgs.theme,
   };
 
   const plugins = [
@@ -61,6 +64,7 @@ const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
     optsArgs.cssnano !== false &&
       (cssnano(opts.cssnano) as PluginCreator<CssNanoOptions>),
     optsArgs.autoprefixer !== false && autoprefixer(opts.autoprefixer),
+    optsArgs.theme !== false && postcssTheme(),
   ].filter(Boolean);
 
   return postcss(plugins);
