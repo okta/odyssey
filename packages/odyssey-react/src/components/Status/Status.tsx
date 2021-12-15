@@ -14,6 +14,7 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useCx, useOmit, withStyles } from "../../utils";
 import { ScreenReaderText } from "../ScreenReaderText";
+import { Box } from "../Box";
 import styles from "./Status.module.scss";
 
 export interface StatusProps
@@ -63,10 +64,10 @@ let Status = forwardRef<HTMLDivElement, StatusProps>((props, ref) => {
   );
 
   return (
-    <div {...omitProps} className={styles.status} role="status" ref={ref}>
+    <Box {...omitProps} className={styles.status} role="status" ref={ref}>
       {labelElement}
       <span className={valueClass}>{descriptor}</span>
-    </div>
+    </Box>
   );
 });
 

@@ -22,7 +22,6 @@ $status-indicator-size: 1em * 0.5;
   position: relative;
   padding-inline-start: $status-indicator-size + $spacing-xs-em;
   background-color: transparent;
-  color: $text-body;
 
   &::before {
     @include border-radius(1em);
