@@ -252,7 +252,7 @@
   width: 100%;
   padding-block: $spacing-xs-em;
   padding-inline-start: $spacing-s-em;
-  padding-inline-end: $spacing-m-em;
+  padding-inline-end: $spacing-m-em + $spacing-xs-em;
   overflow: hidden;
   transition-property: border-color, background-color, box-shadow;
   transition-duration: $base-duration;
