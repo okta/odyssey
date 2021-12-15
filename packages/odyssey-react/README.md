@@ -6,14 +6,14 @@ This project has not yet hit version 1.0.0 and is still in active development.
 
 That said, it is beyond the early alpha stage in some key areas. For some
 early-adopters that means it is good enough to use for real things. Some
-other people think this means odyssey-react is not ready yet.
+other people think this means it is not ready yet.
 
-Even though odyssey-react's version is not yet 1.0.0, effort is still made
-to keep the API stable. Patch versions are intended for backwards-compatible
+Even though the project is in development, effort is still made to keep
+the API stable. Patch versions are intended for backwards-compatible
 changes and minor versions are intended for backwards-incompatible changes.
 
-If you plan to use odyssey-react for something real, you should either pin
-the exact version (maximum safety) or pin the major and minor versions
+If you plan to use this for something real, you should either pin the
+exact version (maximum safety) or pin the major and minor versions
 (only accept backwards-compatible upgrades).
 
 ## Getting Started
