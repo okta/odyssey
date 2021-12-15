@@ -10,10 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { cx, useCx } from "./cx";
-export { forwardRefWithStatics } from "./forwardRefWithStatics";
-export { oid, useOid } from "./oid";
-export { omit, useOmit } from "./omit";
-export { toCamelCase, toPascalCase } from "./convertCase";
-export { withStyles } from "./withStyles";
-export type { PolymorphicForwardRef } from "./polymorphic";
+import { createContext } from "react";
+import * as DesignTokens from "@okta/odyssey-design-tokens";
+
+export const tokens = { ...DesignTokens };
+
+type TokensType = typeof tokens;
+export type Theme = { [T in keyof TokensType]: TokensType[T] };
+export type PartialTheme = Partial<Theme>;
+export type ThemeKey = keyof Theme;
+export type ThemeValue = Theme[ThemeKey];
+
+const ThemeContext = createContext<Theme>(tokens);
+
+ThemeContext.displayName = "ThemeContext";
+
+export { ThemeContext };
