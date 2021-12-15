@@ -18,7 +18,10 @@ import { Box } from "../Box";
 import styles from "./Status.module.scss";
 
 export interface StatusProps
-  extends Omit<ComponentPropsWithRef<"div">, "style" | "className" | "role"> {
+  extends Omit<
+    ComponentPropsWithRef<"div">,
+    "style" | "className" | "role" | "color"
+  > {
   /**
    * The status label.
    */
