@@ -32,6 +32,10 @@ module.exports = (ctx) => {
         grid: "autoplace",
         env: "production",
       },
+      modules: {
+        ...ctx.transformStyles.modules,
+        generateScopedName: "ods-[local]-[hash:hex:6]",
+      },
     }
   );
 
