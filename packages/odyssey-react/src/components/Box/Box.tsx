@@ -17,10 +17,8 @@ import {
   withStyles,
   PolymorphicForwardRef,
   toPascalCase,
-  toCamelCase,
 } from "../../utils";
 import styles from "./Box.module.scss";
-import textStyles from "../Text/Text.module.scss";
 
 type spacing = "xs" | "s" | "m" | "l" | "xl" | "0" | false;
 type overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
@@ -543,11 +541,11 @@ let Box = forwardRef(
       cursor && styles[`cursor${toPascalCase(cursor)}`],
       pointerEvents && styles[`pointerEvents${toPascalCase(pointerEvents)}`],
       userSelect && styles[`userSelect${toPascalCase(userSelect)}`],
-      color && textStyles[`${toCamelCase(color)}Color`],
-      fontWeight && textStyles[`${toCamelCase(fontWeight)}Weight`],
-      fontStyle && textStyles[`${toCamelCase(fontStyle)}Style`],
-      fontSize && textStyles[`${toCamelCase(fontSize)}Size`],
-      lineHeight && textStyles[`${toCamelCase(lineHeight)}LineHeight`],
+      color && styles[`color${toPascalCase(color)}`],
+      fontWeight && styles[`fontWeight${toPascalCase(fontWeight)}`],
+      fontStyle && styles[`fontStyle${toPascalCase(fontStyle)}`],
+      fontSize && styles[`fontSize${toPascalCase(fontSize)}`],
+      lineHeight && styles[`lineHeight${toPascalCase(lineHeight)}`],
       className
     );
 
@@ -562,6 +560,6 @@ let Box = forwardRef(
 
 Box.displayName = "Box";
 
-Box = withStyles({ ...textStyles, ...styles })(Box);
+Box = withStyles(styles)(Box);
 
 export { Box };
