@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type GetInfoIconProps = SvgIconNoChildrenProps;
 
-const GetInfoIcon = forwardRef<SVGSVGElement, GetInfoIconProps>(
+export const GetInfoIcon = forwardRef<SVGSVGElement, GetInfoIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -38,5 +38,3 @@ const GetInfoIcon = forwardRef<SVGSVGElement, GetInfoIconProps>(
 );
 
 GetInfoIcon.displayName = "GetInfoIcon";
-
-export { GetInfoIcon };

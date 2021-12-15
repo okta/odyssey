@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type ArrowRightIconProps = SvgIconNoChildrenProps;
 
-const ArrowRightIcon = forwardRef<SVGSVGElement, ArrowRightIconProps>(
+export const ArrowRightIcon = forwardRef<SVGSVGElement, ArrowRightIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -36,5 +36,3 @@ const ArrowRightIcon = forwardRef<SVGSVGElement, ArrowRightIconProps>(
 );
 
 ArrowRightIcon.displayName = "ArrowRightIcon";
-
-export { ArrowRightIcon };

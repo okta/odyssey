@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type SettingsIconProps = SvgIconNoChildrenProps;
 
-const SettingsIcon = forwardRef<SVGSVGElement, SettingsIconProps>(
+export const SettingsIcon = forwardRef<SVGSVGElement, SettingsIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -36,5 +36,3 @@ const SettingsIcon = forwardRef<SVGSVGElement, SettingsIconProps>(
 );
 
 SettingsIcon.displayName = "SettingsIcon";
-
-export { SettingsIcon };
