@@ -49,7 +49,7 @@ interface PropsActions {
 }
 
 type Statics = {
-  Error: typeof Error;
+  Error: typeof FormError;
   Main: typeof Main;
   Actions: typeof Actions;
 };
@@ -75,7 +75,7 @@ export const Form = withTheme(
   })
 );
 
-function Error({ children }: PropsError) {
+function FormError({ children }: PropsError) {
   return <section className={styles.error}>{children}</section>;
 }
 
@@ -87,11 +87,11 @@ function Actions({ children }: PropsActions) {
   return <section className={styles.actions}>{children}</section>;
 }
 
-Form.Error = Error;
+Form.Error = FormError;
 Form.Main = Main;
 Form.Actions = Actions;
 
 Form.displayName = "Form";
-Error.displayName = "FormError";
+FormError.displayName = "FormError";
 Main.displayName = "FormMain";
 Actions.displayName = "FormActions";
