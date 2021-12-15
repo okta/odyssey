@@ -562,6 +562,6 @@ let Box = forwardRef(
 
 Box.displayName = "Box";
 
-Box = withStyles(styles)(Box);
+Box = withStyles({ ...styles, ...textStyles })(Box);
 
 export { Box };
