@@ -11,17 +11,12 @@
  */
 
 import React from "react";
-import type {
-  ComponentProps,
-  FunctionComponent,
-  ReactNode,
-  ReactElement,
-} from "react";
-import { useOmit, withStyles } from "../../utils";
-
+import type { FunctionComponent, ReactNode, ReactElement } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOmit } from "../../utils";
 import styles from "./FieldGroup.module.scss";
 
-interface Props {
+export interface FieldGroupProps {
   /**
    * Content to be rendered within the FieldGroup.
    */
@@ -46,24 +41,30 @@ type Statics = {
   Error: typeof Error;
 };
 
-let FieldGroup: FunctionComponent<Props> & Statics = Object.assign(
-  (props: Props) => {
-    const { children, title, desc, ...rest } = props;
+export const FieldGroup: FunctionComponent<FieldGroupProps> & Statics =
+  withTheme(
+    () => ({}),
+    styles
+  )(
+    Object.assign(
+      (props: FieldGroupProps) => {
+        const { children, title, desc, ...rest } = props;
 
-    const omitProps = useOmit(rest);
+        const omitProps = useOmit(rest);
 
-    return (
-      <fieldset {...omitProps} className={styles.root}>
-        {title && <legend className={styles.title}>{title}</legend>}
-        {desc && <p>{desc}</p>}
-        {children}
-      </fieldset>
-    );
-  },
-  {
-    Error,
-  }
-);
+        return (
+          <fieldset {...omitProps} className={styles.root}>
+            {title && <legend className={styles.title}>{title}</legend>}
+            {desc && <p>{desc}</p>}
+            {children}
+          </fieldset>
+        );
+      },
+      {
+        Error,
+      }
+    )
+  );
 
 function Error({ children }: PropsError) {
   return <section className={styles.error}>{children}</section>;
@@ -71,10 +72,3 @@ function Error({ children }: PropsError) {
 
 FieldGroup.displayName = "FieldGroup";
 Error.displayName = "FieldGroupError";
-
-FieldGroup.Error = Error;
-
-FieldGroup = withStyles(styles)(FieldGroup);
-
-export type FieldGroupProps = ComponentProps<typeof FieldGroup>;
-export { FieldGroup };
