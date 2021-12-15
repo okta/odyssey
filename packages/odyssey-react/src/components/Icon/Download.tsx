@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type DownloadIconProps = SvgIconNoChildrenProps;
 
-const DownloadIcon = forwardRef<SVGSVGElement, DownloadIconProps>(
+export const DownloadIcon = forwardRef<SVGSVGElement, DownloadIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -40,5 +40,3 @@ const DownloadIcon = forwardRef<SVGSVGElement, DownloadIconProps>(
 );
 
 DownloadIcon.displayName = "DownloadIcon";
-
-export { DownloadIcon };
