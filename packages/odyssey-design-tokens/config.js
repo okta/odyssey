@@ -10,10 +10,33 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { cx, useCx } from "./cx";
-export { forwardRefWithStatics } from "./forwardRefWithStatics";
-export { oid, useOid } from "./oid";
-export { omit, useOmit } from "./omit";
-export { toCamelCase, toPascalCase } from "./convertCase";
-export { withStyles } from "./withStyles";
-export type { PolymorphicForwardRef } from "./polymorphic";
+module.exports = {
+  source: ["src/**/*.json"],
+  platforms: {
+    js: {
+      transformGroup: "js",
+      buildPath: "dist/js/",
+      files: [
+        {
+          format: "javascript/es6",
+          destination: "tokens.js",
+        },
+        {
+          format: "typescript/es6-declarations",
+          destination: "tokens.d.ts",
+        },
+      ],
+    },
+    scss: {
+      transformGroup: "scss",
+      buildPath: "dist/scss/",
+      files: [
+        {
+          format: "scss/map-deep",
+          destination: "tokens.scss",
+          mapName: "ods-tokens",
+        },
+      ],
+    },
+  },
+};
