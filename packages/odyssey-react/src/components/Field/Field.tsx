@@ -21,6 +21,7 @@ import { withTheme } from "@okta/odyssey-react-theme";
 import { ScreenReaderText } from "../ScreenReaderText";
 import { SharedFieldTypes } from "./types";
 import { Text } from "../Text";
+import { Box } from "../Box";
 import styles from "./Field.module.scss";
 
 export interface FieldProps extends SharedFieldTypes {
@@ -82,11 +83,15 @@ export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
         as = "div",
       } = props;
 
-      const Tag = as;
       const TagLabel = as === "fieldset" ? "legend" : "label";
 
       return (
-        <Tag className={styles.root}>
+        <Box
+          as={TagLabel}
+          className={styles.root}
+          display="flex"
+          flexDirection="column"
+        >
           <Field.Label
             inputId={inputId}
             required={required}
@@ -99,7 +104,7 @@ export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
           {hint && <Field.Hint id={inputId}>{hint}</Field.Hint>}
           {children}
           {error && <Field.Error id={inputId}>{error}</Field.Error>}
-        </Tag>
+        </Box>
       );
     },
     {
@@ -120,10 +125,15 @@ function Label(props: PropsLabel) {
     as = "label",
   } = props;
 
-  const Tag = as;
-
   const label = (
-    <Tag className={styles.label} htmlFor={inputId}>
+    <Box
+      as={as}
+      className={styles.label}
+      htmlFor={inputId}
+      display="flex"
+      alignItems="flex-end"
+      justifyContent="space-between"
+    >
       <Text color="heading" fontWeight="bold">
         {children}
       </Text>
@@ -139,15 +149,15 @@ function Label(props: PropsLabel) {
           </Text>
         </span>
       )}
-    </Tag>
+    </Box>
   );
 
   const labelVisuallyHidden = (
     <ScreenReaderText>
-      <Tag htmlFor={inputId}>
+      <Box as={as} htmlFor={inputId}>
         {children}
         {!required && optionalLabel && <span children={optionalLabel} />}
-      </Tag>
+      </Box>
     </ScreenReaderText>
   );
 
