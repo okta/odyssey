@@ -13,19 +13,17 @@
 import React from "react";
 import type {
   FunctionComponent,
-  ComponentProps,
   ReactElement,
   ReactNode,
   ReactText,
 } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
 import { ScreenReaderText } from "../ScreenReaderText";
-import { withStyles } from "../../utils";
 import { SharedFieldTypes } from "./types";
 import { Text } from "../Text";
-
 import styles from "./Field.module.scss";
 
-interface Props extends SharedFieldTypes {
+export interface FieldProps extends SharedFieldTypes {
   /**
    * Input to be rendered within the Field
    */
@@ -63,48 +61,53 @@ interface PropsError {
 interface Statics {
   Label: typeof Label;
   Hint: typeof Hint;
-  Error: typeof Error;
+  Error: typeof FieldError;
 }
 
-let Field: FunctionComponent<Props> & Statics = Object.assign(
-  (props: Props) => {
-    const {
-      error,
-      hint,
-      inputId,
-      label,
-      optionalLabel,
-      required = true,
-      children,
-      labelHidden,
-      as = "div",
-    } = props;
+export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
+  () => ({}),
+  styles
+)(
+  Object.assign(
+    (props: FieldProps) => {
+      const {
+        error,
+        hint,
+        inputId,
+        label,
+        optionalLabel,
+        required = true,
+        children,
+        labelHidden,
+        as = "div",
+      } = props;
 
-    const Tag = as;
-    const TagLabel = as === "fieldset" ? "legend" : "label";
+      const Tag = as;
+      const TagLabel = as === "fieldset" ? "legend" : "label";
 
-    return (
-      <Tag className={styles.root}>
-        <Field.Label
-          inputId={inputId}
-          required={required}
-          optionalLabel={optionalLabel}
-          labelHidden={labelHidden}
-          as={TagLabel}
-        >
-          {label}
-        </Field.Label>
-        {hint && <Field.Hint id={inputId}>{hint}</Field.Hint>}
-        {children}
-        {error && <Field.Error id={inputId}>{error}</Field.Error>}
-      </Tag>
-    );
-  },
-  {
-    Label,
-    Error,
-    Hint,
-  }
+      return (
+        <Tag className={styles.root}>
+          <Field.Label
+            inputId={inputId}
+            required={required}
+            optionalLabel={optionalLabel}
+            labelHidden={labelHidden}
+            as={TagLabel}
+          >
+            {label}
+          </Field.Label>
+          {hint && <Field.Hint id={inputId}>{hint}</Field.Hint>}
+          {children}
+          {error && <Field.Error id={inputId}>{error}</Field.Error>}
+        </Tag>
+      );
+    },
+    {
+      Label,
+      Error: FieldError,
+      Hint,
+    }
+  )
 );
 
 function Label(props: PropsLabel) {
@@ -161,7 +164,7 @@ function Hint({ id, children }: PropsHint) {
   );
 }
 
-function Error({ id, children }: PropsError) {
+function FieldError({ id, children }: PropsError) {
   return (
     <p className={styles.error} id={`${id}-error`}>
       <Text color="danger" fontSize="caption">
@@ -174,9 +177,4 @@ function Error({ id, children }: PropsError) {
 Field.displayName = "Field";
 Label.displayName = "FieldLabel";
 Hint.displayName = "FieldHint";
-Error.displayName = "FieldError";
-
-Field = withStyles(styles)(Field);
-
-export type FieldProps = ComponentProps<typeof Field>;
-export { Field };
+FieldError.displayName = "FieldError";
