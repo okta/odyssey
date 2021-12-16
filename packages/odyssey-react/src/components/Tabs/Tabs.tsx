@@ -11,16 +11,12 @@
  */
 
 import React, { useState, useRef, forwardRef } from "react";
-import type {
-  ReactElement,
-  ReactText,
-  ComponentProps,
-  ComponentPropsWithRef,
-} from "react";
-import styles from "./Tab.module.scss";
-import { forwardRefWithStatics, useCx, useOid, withStyles } from "../../utils";
+import type { ReactElement, ReactText, ComponentPropsWithRef } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { forwardRefWithStatics, useCx, useOid } from "../../utils";
+import styles from "./Tabs.module.scss";
 
-type Props = {
+export type TabsProps = {
   /**
    * A collection of Tab.Panels to be rendered
    */
@@ -84,9 +80,11 @@ type PropsTab = {
  * same page. They allow content to be viewed without having to navigate away from that page
  * or route.
  */
-
-let Tabs = forwardRefWithStatics<HTMLDivElement, Props, Statics>(
-  (props, ref) => {
+export const Tabs = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRefWithStatics<HTMLDivElement, TabsProps, Statics>((props, ref) => {
     const { children, id, selectedId, ariaLabel, onTabChange } = props;
     const defaultSelectedTabId = selectedId || children[0].props.id;
     const [selectedTabId, setSelectedTabId] = useState(defaultSelectedTabId);
@@ -160,7 +158,7 @@ let Tabs = forwardRefWithStatics<HTMLDivElement, Props, Statics>(
         </Tabs.PanelContainer>
       </Tabs.Container>
     );
-  }
+  })
 );
 
 const Container = forwardRef<HTMLDivElement, PropsTabsContainer>(
@@ -245,8 +243,3 @@ PanelContainer.displayName = "TabsPanelContainer";
 Panel.displayName = "TabsPanel";
 List.displayName = "TabsList";
 Tab.displayName = "TabsTab";
-
-Tabs = withStyles(styles)(Tabs);
-
-export type TabsProps = ComponentProps<typeof Tabs>;
-export { Tabs };
