@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type ArrowDownIconProps = SvgIconNoChildrenProps;
 
-const ArrowDownIcon = forwardRef<SVGSVGElement, ArrowDownIconProps>(
+export const ArrowDownIcon = forwardRef<SVGSVGElement, ArrowDownIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -36,5 +36,3 @@ const ArrowDownIcon = forwardRef<SVGSVGElement, ArrowDownIconProps>(
 );
 
 ArrowDownIcon.displayName = "ArrowDownIcon";
-
-export { ArrowDownIcon };

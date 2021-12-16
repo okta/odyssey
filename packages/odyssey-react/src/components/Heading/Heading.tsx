@@ -12,7 +12,8 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
-import { useCx, useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOmit } from "../../utils";
 import styles from "./Heading.module.scss";
 
 export interface HeadingProps
@@ -50,36 +51,37 @@ export interface HeadingProps
  * or content that follows it. By default, header tags (h1 through h6)
  * use the corresponding visual size.
  */
-let Heading = forwardRef<HTMLHeadingElement, HeadingProps>((props, ref) => {
-  const {
-    level = "1",
-    visualLevel,
-    children,
-    noEndMargin = false,
-    lineHeight,
-    ...rest
-  } = props;
+export const Heading = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLHeadingElement, HeadingProps>((props, ref) => {
+    const {
+      level = "1",
+      visualLevel,
+      children,
+      noEndMargin = false,
+      lineHeight,
+      ...rest
+    } = props;
 
-  const Tag = `h${level}` as const;
+    const Tag = `h${level}` as const;
 
-  const componentClass = useCx(
-    styles.root,
-    visualLevel && styles[`level${visualLevel}`],
-    noEndMargin && styles.noEndMargin,
-    lineHeight && styles[`${lineHeight}LineHeight`]
-  );
+    const componentClass = useCx(
+      styles.root,
+      visualLevel && styles[`level${visualLevel}`],
+      noEndMargin && styles.noEndMargin,
+      lineHeight && styles[`${lineHeight}LineHeight`]
+    );
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <Tag {...omitProps} ref={ref} className={componentClass}>
-      {children}
-    </Tag>
-  );
-});
+    return (
+      <Tag {...omitProps} ref={ref} className={componentClass}>
+        {children}
+      </Tag>
+    );
+  })
+);
 
 Heading.displayName = "Heading";
-
-Heading = withStyles(styles)(Heading);
-
-export { Heading };
