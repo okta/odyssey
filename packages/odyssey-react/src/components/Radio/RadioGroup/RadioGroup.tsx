@@ -67,7 +67,7 @@ export interface RadioGroupProps
  * Radios appear as a ring shaped UI accompanied by a caption that allows
  * the user to choose only one option at a time.
  */
-const RadioGroup = (props: RadioGroupProps): JSX.Element => {
+export const RadioGroup = (props: RadioGroupProps): JSX.Element => {
   const {
     children,
     disabled = false,
@@ -112,5 +112,3 @@ const RadioGroup = (props: RadioGroupProps): JSX.Element => {
 };
 
 RadioGroup.displayName = "RadioGroup";
-
-export { RadioGroup };

@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type ExternalIconProps = SvgIconNoChildrenProps;
 
-const ExternalIcon = forwardRef<SVGSVGElement, ExternalIconProps>(
+export const ExternalIcon = forwardRef<SVGSVGElement, ExternalIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -44,5 +44,3 @@ const ExternalIcon = forwardRef<SVGSVGElement, ExternalIconProps>(
 );
 
 ExternalIcon.displayName = "ExternalIcon";
-
-export { ExternalIcon };

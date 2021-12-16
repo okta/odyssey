@@ -12,9 +12,11 @@
 
 import React from "react";
 import type { ReactElement, ComponentPropsWithRef, ForwardedRef } from "react";
-import { forwardRefWithStatics, useOmit, useCx, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { forwardRefWithStatics, useOmit, useCx } from "../../utils";
 import styles from "./List.module.scss";
 import { ListItem } from "./ListItem";
+import { Box } from "../Box";
 import { DescriptionTerm } from "./DescriptionTerm";
 import { DescriptionDetails } from "./DescriptionDetails";
 
@@ -50,8 +52,14 @@ type Statics = {
   Details: typeof DescriptionDetails;
 };
 
-let List = forwardRefWithStatics<HTMLElement, ListProps, Statics>(
-  (props, ref) => {
+/**
+ * List provides ordered, unordered, description, and unstyled list UI.
+ */
+export const List = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRefWithStatics<HTMLElement, ListProps, Statics>((props, ref) => {
     const {
       children,
       listType = "unordered",
@@ -69,38 +77,41 @@ let List = forwardRefWithStatics<HTMLElement, ListProps, Statics>(
     function ListElement() {
       if (listType === "ordered") {
         return (
-          <ol
+          <Box
+            as="ol"
             {...omitProps}
             className={componentClass}
             ref={ref as ForwardedRef<HTMLOListElement>}
           >
             {children}
-          </ol>
+          </Box>
         );
       } else if (listType === "description") {
         return (
-          <dl
+          <Box
+            as="dl"
             {...omitProps}
             className={componentClass}
             ref={ref as ForwardedRef<HTMLDListElement>}
           >
             {children}
-          </dl>
+          </Box>
         );
       }
       return (
-        <ul
+        <Box
+          as="ul"
           {...omitProps}
           className={componentClass}
           ref={ref as ForwardedRef<HTMLUListElement>}
         >
           {children}
-        </ul>
+        </Box>
       );
     }
 
     return <ListElement />;
-  }
+  })
 );
 
 List.displayName = "List";
@@ -108,7 +119,3 @@ List.displayName = "List";
 List.Item = ListItem;
 List.Term = DescriptionTerm;
 List.Details = DescriptionDetails;
-
-List = withStyles(styles)(List);
-
-export { List };

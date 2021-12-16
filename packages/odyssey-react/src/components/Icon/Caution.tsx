@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type CautionIconProps = SvgIconNoChildrenProps;
 
-const CautionIcon = forwardRef<SVGSVGElement, CautionIconProps>(
+export const CautionIcon = forwardRef<SVGSVGElement, CautionIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -38,5 +38,3 @@ const CautionIcon = forwardRef<SVGSVGElement, CautionIconProps>(
 );
 
 CautionIcon.displayName = "CautionIcon";
-
-export { CautionIcon };
