@@ -12,10 +12,11 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
 import { useRadioGroup } from "../context";
-import { useCx, useOid, useOmit, withStyles } from "../../../utils";
-import styles from "./RadioButton.module.scss";
+import { useCx, useOid, useOmit } from "../../../utils";
 import type { SharedFieldTypes } from "../../Field/types";
+import styles from "./RadioButton.module.scss";
 
 export interface RadioButtonProps
   extends Pick<SharedFieldTypes, "hint" | "error">,
@@ -40,8 +41,11 @@ export interface RadioButtonProps
  * Radios appear as a ring shaped UI accompanied by a caption that allows
  * the user to choose only one option at a time.
  */
-let RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
-  (props, ref) => {
+export const RadioButton = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) => {
     const { id, label, value, ...rest } = props;
 
     const {
@@ -85,11 +89,7 @@ let RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
         <label children={label} className={styles.label} htmlFor={oid} />
       </>
     );
-  }
+  })
 );
 
 RadioButton.displayName = "RadioButton";
-
-RadioButton = withStyles(styles)(RadioButton);
-
-export { RadioButton };

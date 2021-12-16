@@ -12,8 +12,9 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactText, ReactElement } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
 import { ExternalIcon } from "../Icon";
-import { useCx, useOmit, withStyles } from "../../utils";
+import { useCx, useOmit } from "../../utils";
 import styles from "./Link.module.scss";
 
 export interface LinkProps
@@ -46,27 +47,28 @@ export interface LinkProps
 /**
  * Links are navigation elements displayed as text. Use a Link to bring a user to another page or start a download.
  */
-let Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-  const { children, variant = "primary", icon, ...rest } = props;
-  const classNames = useCx(styles.root, styles[`${variant}Variant`]);
-  const omitProps = useOmit(rest);
-  const external = rest.target === `_blank`;
+export const Link = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
+    const { children, variant = "primary", icon, ...rest } = props;
+    const classNames = useCx(styles.root, styles[`${variant}Variant`]);
+    const omitProps = useOmit(rest);
+    const external = rest.target === `_blank`;
 
-  return (
-    <a {...omitProps} ref={ref} className={classNames}>
-      {icon && <span className={styles.icon}>{icon}</span>}
-      {children}
-      {external && (
-        <span className={styles.indicator} role="presentation">
-          <ExternalIcon />
-        </span>
-      )}
-    </a>
-  );
-});
+    return (
+      <a {...omitProps} ref={ref} className={classNames}>
+        {icon && <span className={styles.icon}>{icon}</span>}
+        {children}
+        {external && (
+          <span className={styles.indicator} role="presentation">
+            <ExternalIcon />
+          </span>
+        )}
+      </a>
+    );
+  })
+);
 
 Link.displayName = "Link";
-
-Link = withStyles(styles)(Link);
-
-export { Link };

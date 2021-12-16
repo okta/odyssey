@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type GoForwardIconProps = SvgIconNoChildrenProps;
 
-const GoForwardIcon = forwardRef<SVGSVGElement, GoForwardIconProps>(
+export const GoForwardIcon = forwardRef<SVGSVGElement, GoForwardIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -36,5 +36,3 @@ const GoForwardIcon = forwardRef<SVGSVGElement, GoForwardIconProps>(
 );
 
 GoForwardIcon.displayName = "GoForwardIcon";
-
-export { GoForwardIcon };

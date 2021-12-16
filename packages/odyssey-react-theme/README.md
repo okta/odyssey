@@ -1,4 +1,4 @@
-# @okta/odyssey-react
+# @okta/odyssey-react-theme
 
 ## Production Readiness
 
@@ -21,29 +21,13 @@ exact version (maximum safety) or pin the major and minor versions
 Install the package:
 
 ```sh
-$ yarn add @okta/odyssey-react
-```
-
-Include deprecated global styles with fingerprint extension and fonts:
-
-```html
-<link rel="stylesheet" href="odyssey-deprecated-global.abc123.css" />
-
-<link rel="preconnect" href="https://fonts.gstatic.com" />
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap"
-/>
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
-/>
+$ yarn add @okta/odyssey-react-theme
 ```
 
 Import named ESM exports:
 
 ```js
-import { Button } from "@okta/odyssey-react";
+import { ThemeProvider } from "@okta/odyssey-react-theme";
 ```
 
 ## Components

@@ -208,15 +208,18 @@
     @include border-radius(100%);
 
     display: inline-block;
-    position: relative;
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-xs-em / 2;
     width: 1em;
     height: 1em;
     margin-block-start: 0;
     margin-inline-end: 0;
     margin-block-end: 0;
-    margin-inline-start: $spacing-s;
+    margin-inline-start: 0;
     padding-block: 0;
     padding-inline: 0;
+    transform: translateY(-50%);
     opacity: 1;
     background-color: cv("blue", "400");
     line-height: 1;
@@ -248,7 +251,8 @@
   display: inline-block;
   width: 100%;
   padding-block: $spacing-xs-em;
-  padding-inline: $spacing-s-em;
+  padding-inline-start: $spacing-s-em;
+  padding-inline-end: $spacing-m-em + $spacing-xs-em;
   overflow: hidden;
   transition-property: border-color, background-color, box-shadow;
   transition-duration: $base-duration;
@@ -313,6 +317,8 @@
     @include border-radius(1em);
 
     display: inline-block;
+    position: relative;
+    max-width: 100%;
     margin-inline-end: $spacing-xs;
     margin-block-end: $spacing-xs;
     padding-block: 0;
@@ -329,7 +335,7 @@
     vertical-align: middle;
 
     &[data-deletable] {
-      padding-inline-end: $spacing-xs;
+      padding-inline-end: $spacing-m-em + $spacing-xs-em;
     }
 
     [dir="rtl"] & {

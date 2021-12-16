@@ -10,28 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef } from "react";
-import type { ComponentPropsWithRef } from "react";
-import { useOmit } from "../../utils";
-import styles from "./List.module.scss";
+const { writeFileSync } = require("fs");
+const { resolve } = require("path");
 
-export type ListItemProps = Omit<
-  ComponentPropsWithRef<"li">,
-  "style" | "className"
->;
+const pkgPath = resolve(__dirname, "../package.json");
 
-export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
-  (props, ref) => {
-    const { children, ...rest } = props;
+// eslint-disable-next-line no-unused-vars
+const { scripts, devDependencies, ...pkg } = require(pkgPath);
 
-    const omitProps = useOmit(rest);
-
-    return (
-      <li {...omitProps} ref={ref} className={styles.item}>
-        {children}
-      </li>
-    );
-  }
-);
-
-ListItem.displayName = "ListItem";
+writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");

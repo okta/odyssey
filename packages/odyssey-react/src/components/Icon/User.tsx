@@ -19,20 +19,20 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type UserIconProps = SvgIconNoChildrenProps;
 
-const UserIcon = forwardRef<SVGSVGElement, UserIconProps>((props, ref) => {
-  const omitProps = useOmit(props);
-  return (
-    <SvgIcon ref={ref} {...omitProps}>
-      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M7 7C8.65685 7 10 5.65685 10 4 10 2.34315 8.65685 1 7 1 5.34315 1 4 2.34315 4 4 4 5.65685 5.34315 7 7 7zM5 8C4 8 3 9 3 10V12C3 12.5523 3.44772 13 4 13H10C10.5523 13 11 12.5523 11 12V10C11 9 10 8 9 8H5z"
-          fill="currentColor"
-        />
-      </svg>
-    </SvgIcon>
-  );
-});
+export const UserIcon = forwardRef<SVGSVGElement, UserIconProps>(
+  (props, ref) => {
+    const omitProps = useOmit(props);
+    return (
+      <SvgIcon ref={ref} {...omitProps}>
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M7 7C8.65685 7 10 5.65685 10 4 10 2.34315 8.65685 1 7 1 5.34315 1 4 2.34315 4 4 4 5.65685 5.34315 7 7 7zM5 8C4 8 3 9 3 10V12C3 12.5523 3.44772 13 4 13H10C10.5523 13 11 12.5523 11 12V10C11 9 10 8 9 8H5z"
+            fill="currentColor"
+          />
+        </svg>
+      </SvgIcon>
+    );
+  }
+);
 
 UserIcon.displayName = "UserIcon";
-
-export { UserIcon };

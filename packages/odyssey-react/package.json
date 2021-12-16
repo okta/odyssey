@@ -5,7 +5,7 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "main": "dist/index.js",
-  "types": "dist/index.d.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/okta/odyssey",

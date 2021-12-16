@@ -1,18 +1,19 @@
 {
   "name": "@okta/odyssey-storybook",
   "version": "0.8.4",
+  "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
-  "private": true,
-  "scripts": {
-    "start": "start-storybook --quiet --port 6006",
-    "build": "build-storybook --quiet --output-dir dist",
-    "typecheck": "tsc"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/odyssey",
+    "directory": "packages/odyssey-storybook"
   },
-  "dependencies": {
+  "devDependencies": {
     "@applitools/eyes-storybook": "^3.24.0",
     "@okta/odyssey-design-tokens": "^0.8.4",
     "@okta/odyssey-react": "^0.8.4",
+    "@okta/odyssey-typescript": "^0.8.4",
     "@pxblue/storybook-rtl-addon": "^1.0.1",
     "@storybook/addon-a11y": "^6.3.7",
     "@storybook/addon-actions": "^6.3.7",
@@ -21,11 +22,14 @@
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/addons": "^6.3.12",
     "@storybook/react": "^6.3.7",
-    "@storybook/theming": "^6.3.12"
-  },
-  "devDependencies": {
-    "@okta/odyssey-typescript": "^0.8.4",
+    "@storybook/theming": "^6.3.12",
     "@types/mdx": "^2.0.1",
     "@types/react": "^17.0.30"
+  },
+  "scripts": {
+    "start": "start-storybook --quiet --port 6006",
+    "build": "build-storybook --quiet --output-dir dist",
+    "typecheck": "tsc",
+    "prepack": "node ./scripts/prepack.js"
   }
 }

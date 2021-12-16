@@ -12,8 +12,8 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactElement, ReactText } from "react";
-import { useCx, useOmit } from "../../utils";
 import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
 import { theme } from "./Button.theme";
 
@@ -96,3 +96,5 @@ export const Button = withTheme(
     );
   })
 );
+
+Button.displayName = "Button";
