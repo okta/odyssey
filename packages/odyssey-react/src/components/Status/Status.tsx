@@ -12,7 +12,8 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
-import { useCx, useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOmit } from "../../utils";
 import { ScreenReaderText } from "../ScreenReaderText";
 import { Box } from "../Box";
 import styles from "./Status.module.scss";
@@ -46,33 +47,34 @@ export interface StatusProps
  * Status is used to inform users by providing feedback on system states. Status can display broad
  * operational states as well as granular states like user status.
  */
-let Status = forwardRef<HTMLDivElement, StatusProps>((props, ref) => {
-  const {
-    label,
-    descriptor,
-    labelHidden = false,
-    variant = "neutral",
-    ...rest
-  } = props;
+export const Status = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLDivElement, StatusProps>((props, ref) => {
+    const {
+      label,
+      descriptor,
+      labelHidden = false,
+      variant = "neutral",
+      ...rest
+    } = props;
 
-  const omitProps = useOmit(rest);
-  const valueClass = useCx(styles.value, styles[`${variant}Variant`]);
-  const labelElement = labelHidden ? (
-    <ScreenReaderText children={label} />
-  ) : (
-    <span className={styles.label} children={label} />
-  );
+    const omitProps = useOmit(rest);
+    const valueClass = useCx(styles.value, styles[`${variant}Variant`]);
+    const labelElement = labelHidden ? (
+      <ScreenReaderText children={label} />
+    ) : (
+      <span className={styles.label} children={label} />
+    );
 
-  return (
-    <Box {...omitProps} className={styles.status} role="status" ref={ref}>
-      {labelElement}
-      <span className={valueClass}>{descriptor}</span>
-    </Box>
-  );
-});
+    return (
+      <Box {...omitProps} className={styles.status} role="status" ref={ref}>
+        {labelElement}
+        <span className={valueClass}>{descriptor}</span>
+      </Box>
+    );
+  })
+);
 
 Status.displayName = "Status";
-
-Status = withStyles(styles)(Status);
-
-export { Status };
