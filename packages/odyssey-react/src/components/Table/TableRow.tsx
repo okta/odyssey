@@ -19,7 +19,7 @@ export interface TableRowProps
   children?: ReactElement | ReactElement[];
 }
 
-const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
+export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
   (props, ref) => {
     const { children, ...rest } = props;
 
@@ -34,5 +34,3 @@ const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
 );
 
 TableRow.displayName = "TableRow";
-
-export { TableRow };
