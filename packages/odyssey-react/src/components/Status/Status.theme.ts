@@ -13,6 +13,9 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
+  // Space
+  SpaceXs: theme.SpaceXs,
+
   // Caution Variant
   ColorIndicatorCaution: theme.ColorCautionBase,
 
