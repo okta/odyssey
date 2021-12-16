@@ -20,6 +20,7 @@ $status-indicator-size: 1em * 0.5;
 
 .value {
   position: relative;
+  // padding-inline-start: calc(#{$status-indicator-size + var(--SpaceRelativeXs));
   padding-inline-start: $status-indicator-size + $spacing-xs-em;
   background-color: transparent;
 
