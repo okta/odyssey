@@ -34,7 +34,7 @@ $status-indicator-size: 1em * 0.5;
     height: $status-indicator-size;
     margin-inline-end: $spacing-xs;
     transform: translateY(-50%);
-    background-color: cv("gray", "600");
+    background-color: var(--ColorIndicatorNeutral);
   }
 }
 
@@ -42,18 +42,18 @@ $status-indicator-size: 1em * 0.5;
 
 .successVariant {
   &::before {
-    background-color: $color-success-base;
+    background-color: var(--ColorIndicatorSuccess);
   }
 }
 
 .cautionVariant {
   &::before {
-    background-color: $color-caution-base;
+    background-color: var(--ColorIndicatorCaution);
   }
 }
 
 .dangerVariant {
   &::before {
-    background-color: $color-danger-base;
+    background-color: var(--ColorIndicatorDanger);
   }
 }
