@@ -12,7 +12,8 @@
 
 import React from "react";
 import type { ReactElement, ComponentPropsWithRef, ForwardedRef } from "react";
-import { forwardRefWithStatics, useOmit, useCx, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { forwardRefWithStatics, useOmit, useCx } from "../../utils";
 import styles from "./List.module.scss";
 import { ListItem } from "./ListItem";
 import { DescriptionTerm } from "./DescriptionTerm";
@@ -50,8 +51,14 @@ type Statics = {
   Details: typeof DescriptionDetails;
 };
 
-let List = forwardRefWithStatics<HTMLElement, ListProps, Statics>(
-  (props, ref) => {
+/**
+ * List provides ordered, unordered, description, and unstyled list UI.
+ */
+export const List = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRefWithStatics<HTMLElement, ListProps, Statics>((props, ref) => {
     const {
       children,
       listType = "unordered",
@@ -100,7 +107,7 @@ let List = forwardRefWithStatics<HTMLElement, ListProps, Statics>(
     }
 
     return <ListElement />;
-  }
+  })
 );
 
 List.displayName = "List";
@@ -108,7 +115,3 @@ List.displayName = "List";
 List.Item = ListItem;
 List.Term = DescriptionTerm;
 List.Details = DescriptionDetails;
-
-List = withStyles(styles)(List);
-
-export { List };

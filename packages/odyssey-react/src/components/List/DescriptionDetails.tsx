@@ -21,20 +21,19 @@ export type DescriptionDetailsProps = Omit<
   "style" | "className"
 >;
 
-const DescriptionDetails = forwardRef<HTMLElement, DescriptionDetailsProps>(
-  (props, ref) => {
-    const { children, ...rest } = props;
+export const DescriptionDetails = forwardRef<
+  HTMLElement,
+  DescriptionDetailsProps
+>((props, ref) => {
+  const { children, ...rest } = props;
 
-    const omitProps = useOmit(rest);
+  const omitProps = useOmit(rest);
 
-    return (
-      <dd {...omitProps} ref={ref} className={styles.details}>
-        <Text children={children} />
-      </dd>
-    );
-  }
-);
+  return (
+    <dd {...omitProps} ref={ref} className={styles.details}>
+      <Text children={children} />
+    </dd>
+  );
+});
 
 DescriptionDetails.displayName = "DescriptionDetails";
-
-export { DescriptionDetails };
