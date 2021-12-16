@@ -43,7 +43,7 @@ type DescriptionProps = CommonProps & ComponentPropsWithRef<"dl">;
 
 export type ListProps = Omit<
   UnorderedProps | OrderedProps | DescriptionProps,
-  "style" | "className"
+  "style" | "className" | "color"
 >;
 
 type Statics = {
