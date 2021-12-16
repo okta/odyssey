@@ -21,7 +21,7 @@ export type DescriptionTermProps = Omit<
   "style" | "className"
 >;
 
-const DescriptionTerm = forwardRef<HTMLElement, DescriptionTermProps>(
+export const DescriptionTerm = forwardRef<HTMLElement, DescriptionTermProps>(
   (props, ref) => {
     const { children, ...rest } = props;
 
@@ -36,5 +36,3 @@ const DescriptionTerm = forwardRef<HTMLElement, DescriptionTermProps>(
 );
 
 DescriptionTerm.displayName = "DescriptionTerm";
-
-export { DescriptionTerm };
