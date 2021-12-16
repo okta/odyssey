@@ -13,20 +13,20 @@
 import React, { createContext, useContext, useMemo, useRef } from "react";
 import type {
   FunctionComponent,
-  ComponentProps,
   ReactElement,
   ReactNode,
   ReactText,
 } from "react";
 import { createPortal } from "react-dom";
+import { withTheme } from "@okta/odyssey-react-theme";
 import { Button as CoreButton } from "../Button";
 import type { ButtonProps as CoreButtonProps } from "../Button";
 import { Heading } from "../Heading";
-import { forwardRefWithStatics, useOid, useCx, withStyles } from "../../utils";
+import { forwardRefWithStatics, useOid, useCx } from "../../utils";
 import styles from "./Modal.module.scss";
 import { CloseIcon } from "../Icon";
 
-type Props = {
+export type ModalProps = {
   /**
    * The modal content, should use the Static components provided by Modal (Modal.Header, Modal.Body and Modal.Footer)
    */
@@ -86,8 +86,11 @@ const ModalContext = createContext({} as ModalContext);
  * requiring user interaction. This dialog disables the main content until the
  * user interacts with the modal dialog.
  */
-let Modal = forwardRefWithStatics<HTMLDivElement, Props, Statics>(
-  (props, ref) => {
+export const Modal = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRefWithStatics<HTMLDivElement, ModalProps, Statics>((props, ref) => {
     const { children, id, open = false, onClose, closeMessage, onOpen } = props;
     const modalTitleId = useOid();
     const context = useMemo(
@@ -120,7 +123,7 @@ let Modal = forwardRefWithStatics<HTMLDivElement, Props, Statics>(
       </ModalContext.Provider>,
       document.body
     );
-  }
+  })
 );
 
 const Header = ({ children }: PropsModalHeader) => {
@@ -175,8 +178,3 @@ Footer.displayName = "ModalFooter";
 Button.displayName = "ModalButton";
 
 Object.assign(Modal, { Header, Body, Footer, Button });
-
-Modal = withStyles(styles)(Modal);
-
-export type ModalProps = ComponentProps<typeof Modal>;
-export { Modal };

@@ -10,28 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef } from "react";
-import type { ComponentPropsWithRef } from "react";
-import { useOmit } from "../../utils";
-import styles from "./List.module.scss";
-
-export type ListItemProps = Omit<
-  ComponentPropsWithRef<"li">,
-  "style" | "className"
->;
-
-export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
-  (props, ref) => {
-    const { children, ...rest } = props;
-
-    const omitProps = useOmit(rest);
-
-    return (
-      <li {...omitProps} ref={ref} className={styles.item}>
-        {children}
-      </li>
-    );
-  }
-);
-
-ListItem.displayName = "ListItem";
+export * from "./RadioButton";
