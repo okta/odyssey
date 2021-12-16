@@ -16,7 +16,8 @@ import type {
   FunctionComponent,
   ReactNode,
 } from "react";
-import { withStyles, useOmit } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOmit } from "../../utils";
 import styles from "./ScreenReaderText.module.scss";
 
 export interface ScreenReaderTextProps
@@ -33,22 +34,25 @@ export interface ScreenReaderTextProps
   as?: "span" | "em" | "strong";
 }
 
-let ScreenReaderText: FunctionComponent<ScreenReaderTextProps> = (props) => {
-  const { children, as = "span", ...rest } = props;
+/**
+ * Render messages that are only visible to screen readers for a11y.
+ */
+export const ScreenReaderText: FunctionComponent<ScreenReaderTextProps> =
+  withTheme(
+    () => ({}),
+    styles
+  )((props) => {
+    const { children, as = "span", ...rest } = props;
 
-  const Tag = as;
+    const Tag = as;
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <Tag {...omitProps} className={styles.root}>
-      {children}
-    </Tag>
-  );
-};
+    return (
+      <Tag {...omitProps} className={styles.root}>
+        {children}
+      </Tag>
+    );
+  });
 
 ScreenReaderText.displayName = "ScreenReaderText";
-
-ScreenReaderText = withStyles(styles)(ScreenReaderText);
-
-export { ScreenReaderText };
