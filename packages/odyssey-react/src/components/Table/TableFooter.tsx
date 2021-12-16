@@ -19,20 +19,19 @@ export interface TableFooterProps
   children?: ReactElement | ReactElement[];
 }
 
-const TableFooter = forwardRef<HTMLTableSectionElement, TableFooterProps>(
-  (props, ref) => {
-    const { children, ...rest } = props;
+export const TableFooter = forwardRef<
+  HTMLTableSectionElement,
+  TableFooterProps
+>((props, ref) => {
+  const { children, ...rest } = props;
 
-    const omitProps = useOmit(rest);
+  const omitProps = useOmit(rest);
 
-    return (
-      <tfoot {...omitProps} ref={ref}>
-        {children}
-      </tfoot>
-    );
-  }
-);
+  return (
+    <tfoot {...omitProps} ref={ref}>
+      {children}
+    </tfoot>
+  );
+});
 
 TableFooter.displayName = "TableFooter";
-
-export { TableFooter };

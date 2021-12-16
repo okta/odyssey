@@ -12,8 +12,9 @@
 
 import React, { forwardRef } from "react";
 import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
-import { useOmit, withStyles } from "../../utils";
-import styles from "./Table.module.scss";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOmit } from "../../utils";
+import styles from "./TableContainer.module.scss";
 
 export interface TableContainerProps
   extends Omit<
@@ -30,8 +31,11 @@ export interface TableContainerProps
   title: ReactNode;
 }
 
-let TableContainer = forwardRef<HTMLElement, TableContainerProps>(
-  (props, ref) => {
+export const TableContainer = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLElement, TableContainerProps>((props, ref) => {
     const { children, title, ...rest } = props;
 
     const omitProps = useOmit(rest);
@@ -42,11 +46,7 @@ let TableContainer = forwardRef<HTMLElement, TableContainerProps>(
         {children}
       </figure>
     );
-  }
+  })
 );
 
 TableContainer.displayName = "TableContainer";
-
-TableContainer = withStyles(styles)(TableContainer);
-
-export { TableContainer };
