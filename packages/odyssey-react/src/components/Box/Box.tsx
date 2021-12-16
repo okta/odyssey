@@ -302,27 +302,27 @@ export interface BoxProps {
    * Whether to apply the body text color class
    * @default body
    */
-  color?: "body" | false;
+  color?: "body" | "inherit" | false;
   /**
    * Whether to apply the normal font weight class
    * @default regular
    */
-  fontWeight?: "regular" | false;
+  fontWeight?: "regular" | "inherit" | false;
   /**
    * Whether to apply the normal font style class
    * @default normal
    */
-  fontStyle?: "normal" | false;
+  fontStyle?: "normal" | "inherit" | false;
   /**
    * Whether to apply the base font size class
    * @default base
    */
-  fontSize?: "base" | false;
+  fontSize?: "base" | "inherit" | false;
   /**
    * Whether to apply the base line height class
    * @default normal
    */
-  lineHeight?: "normal" | false;
+  lineHeight?: "normal" | "inherit" | false;
 }
 
 /**
