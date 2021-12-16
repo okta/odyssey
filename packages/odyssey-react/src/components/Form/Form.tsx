@@ -15,6 +15,7 @@ import type { ComponentPropsWithRef, ReactNode, ReactElement } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit, forwardRefWithStatics } from "../../utils";
 import { Heading } from "../Heading";
+import { Box } from "../Box";
 import styles from "./Form.module.scss";
 
 export interface FormProps
@@ -64,27 +65,39 @@ export const Form = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <form {...omitProps} className={styles.root} ref={ref}>
-        <header className={styles.header}>
+      <Box as="form" {...omitProps} className={styles.root} ref={ref}>
+        <Box as="header" className={styles.header}>
           {title && <Heading visualLevel="3" children={title} />}
           {desc && <p>{desc}</p>}
-        </header>
+        </Box>
         {children}
-      </form>
+      </Box>
     );
   })
 );
 
 function FormError({ children }: PropsError) {
-  return <section className={styles.error}>{children}</section>;
+  return (
+    <Box as="section" className={styles.error}>
+      {children}
+    </Box>
+  );
 }
 
 function Main({ children }: PropsMain) {
-  return <section className={styles.main}>{children}</section>;
+  return (
+    <Box as="section" className={styles.main}>
+      {children}
+    </Box>
+  );
 }
 
 function Actions({ children }: PropsActions) {
-  return <section className={styles.actions}>{children}</section>;
+  return (
+    <Box as="section" className={styles.actions}>
+      {children}
+    </Box>
+  );
 }
 
 Form.Error = FormError;
