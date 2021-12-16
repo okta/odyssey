@@ -16,6 +16,7 @@ import { withTheme } from "@okta/odyssey-react-theme";
 import { forwardRefWithStatics, useOmit, useCx } from "../../utils";
 import styles from "./List.module.scss";
 import { ListItem } from "./ListItem";
+import { Box } from "../Box";
 import { DescriptionTerm } from "./DescriptionTerm";
 import { DescriptionDetails } from "./DescriptionDetails";
 
@@ -76,33 +77,36 @@ export const List = withTheme(
     function ListElement() {
       if (listType === "ordered") {
         return (
-          <ol
+          <Box
+            as="ol"
             {...omitProps}
             className={componentClass}
             ref={ref as ForwardedRef<HTMLOListElement>}
           >
             {children}
-          </ol>
+          </Box>
         );
       } else if (listType === "description") {
         return (
-          <dl
+          <Box
+            as="dl"
             {...omitProps}
             className={componentClass}
             ref={ref as ForwardedRef<HTMLDListElement>}
           >
             {children}
-          </dl>
+          </Box>
         );
       }
       return (
-        <ul
+        <Box
+          as="ul"
           {...omitProps}
           className={componentClass}
           ref={ref as ForwardedRef<HTMLUListElement>}
         >
           {children}
-        </ul>
+        </Box>
       );
     }
 
