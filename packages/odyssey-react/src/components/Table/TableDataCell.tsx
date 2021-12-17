@@ -35,7 +35,7 @@ export const TableDataCell = withTheme(
     const { children, format, empty, ...rest } = props;
 
     const componentClass = useCx(
-      styles.cell,
+      styles.root,
       format && styles[`${format}Format`],
       empty && styles[`${empty}State`]
     );
