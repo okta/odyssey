@@ -10,6 +10,15 @@
       "base": { "value": "{color.palette.red.500.value}" },
       "dark": { "value": "{color.palette.red.900.value}" }
     },
+    "caution": {
+      "base": { "value": "{color.palette.yellow.500.value}" }
+    },
+    "success": {
+      "base": { "value": "{color.palette.green.500.value}" }
+    },
+    "neutral": {
+      "base": { "value": "{color.palette.neutral.600.value}" }
+    },
     "text": {
       "body": {
         "comment": "Base text color used for most typography",
