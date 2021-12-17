@@ -11,29 +11,27 @@
  */
 
 import React, { Component } from "react";
-import type { Theme, ThemeKey, ThemeValue } from "../ThemeProvider/context";
-import { isThemeValue } from "../ThemeProvider/utils";
 import type {
   ForwardedRef,
   ComponentType,
   NamedExoticComponent,
   ComponentClass,
 } from "react";
+import type { Theme, ThemeKey, ThemeValue } from "../ThemeProvider/context";
+import { supportsCustomProperties } from "./utils";
 import { OStyleSheet } from "./stylesheet";
 
 const sheet = new OStyleSheet();
 
 type SourceStyles = Record<string, string>;
-type TemplateTheme = Record<string, string>;
+type TemplateTheme = Record<string, ThemeValue>;
 interface TranspiledStyles {
   __digest: string;
   __template: (theme: TemplateTheme) => string;
 }
 
-export type ComponentTheme = Record<
-  string,
-  ThemeValue | [ThemeKey, ThemeValue]
->;
+type ComponentThemeValue = ThemeValue | [ThemeKey, ThemeValue];
+export type ComponentTheme = Record<string, ComponentThemeValue>;
 type VirtualComponentTheme = Record<string, ThemeValue>;
 export type ThemeReducer = (theme: Theme) => VirtualComponentTheme;
 
@@ -72,36 +70,62 @@ export function withThemeFactory<
       return (template as Template)(this.templateTheme);
     }
 
-    private get templateTheme() {
-      return Object.fromEntries(
-        Object.entries(this.componentTheme).map(
-          ([componentToken, candidate]) => {
-            const value = isThemeValue(candidate)
-              ? candidate
-              : `var(--${candidate[0]}, ${candidate[1]})`;
-
-            return [
-              componentToken,
-              `var(--${digest}-${componentToken}, ${value})`,
-            ];
-          }
-        )
+    private get templateTheme(): TemplateTheme {
+      const templateTheme: TemplateTheme = Object.fromEntries(
+        Object.entries(this.componentTheme).map(this.templateThemeEntry)
       );
-    }
 
-    private get componentTheme() {
-      // NOTE: https://github.com/Microsoft/TypeScript/issues/20846
-      // Our reducer *should not* present the proxy behavior via types so assert result
-      return themeReducer(this.reducerTheme) as unknown as ComponentTheme;
-    }
-
-    private get reducerTheme() {
-      return new Proxy(this.props.theme, {
-        get(target, key) {
-          if (key in target) return [key, target[key as keyof Theme]];
-          throw new TypeError(`Missing property '${String(key)}' within theme`);
+      return new Proxy(templateTheme, {
+        get: (target, key) => {
+          if (key in target) return target[key as string];
+          throw new TypeError(
+            `Missing property '${String(key)}' within ${
+              this.displayName
+            } style module`
+          );
         },
       });
+    }
+
+    private get componentTheme(): ComponentTheme {
+      return themeReducer(this.reducerTheme);
+    }
+
+    private get reducerTheme(): Theme {
+      return new Proxy(this.shallowCopyTheme, {
+        get: (target, key) => {
+          if (key in target) return [key, target[key as keyof Theme]];
+          throw new TypeError(
+            `Missing property '${String(key)}' within ${
+              this.displayName
+            } theme module`
+          );
+        },
+      });
+    }
+
+    private get shallowCopyTheme(): Theme {
+      return Object.assign(Object.create(null), this.props.theme);
+    }
+
+    private templateThemeEntry([key, candidate]: [
+      string,
+      ComponentThemeValue
+    ]): [string, ThemeValue] {
+      const isMappedValue = Array.isArray(candidate);
+      const fallbackValue = isMappedValue ? candidate[1] : candidate;
+
+      const value = supportsCustomProperties
+        ? isMappedValue
+          ? `var(--${digest}-${key}, var(--${candidate[0]}, ${fallbackValue}))`
+          : `var(--${digest}-${key}, ${fallbackValue})`
+        : fallbackValue;
+
+      return [key, value];
+    }
+
+    private get displayName(): string {
+      return Composed.displayName || Composed.name || "Component";
     }
 
     override render() {
