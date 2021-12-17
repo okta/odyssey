@@ -17,6 +17,7 @@ import { useCx, useOmit } from "../../utils";
 import { ScreenReaderText } from "../ScreenReaderText";
 import { Box } from "../Box";
 import styles from "./Status.module.scss";
+import { theme } from "./Status.theme";
 
 export interface StatusProps
   extends Omit<ComponentPropsWithRef<"div">, "style" | "className" | "role"> {
@@ -48,7 +49,7 @@ export interface StatusProps
  * operational states as well as granular states like user status.
  */
 export const Status = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLDivElement, StatusProps>((props, ref) => {

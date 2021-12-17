@@ -11,11 +11,12 @@
  */
 
 $status-indicator-size: 1em * 0.5;
+$status-border-radius: 1em;
 
 .label {
   display: block;
-  margin-block-end: $spacing-xs;
-  font-weight: 600;
+  margin-block-end: var(--SpaceFixedXs);
+  font-weight: var(--FontWeightBold);
 }
 
 .value {
@@ -24,7 +25,7 @@ $status-indicator-size: 1em * 0.5;
   background-color: transparent;
 
   &::before {
-    @include border-radius(1em);
+    @include border-radius($status-border-radius);
 
     content: "";
     position: absolute;
@@ -32,9 +33,9 @@ $status-indicator-size: 1em * 0.5;
     inset-inline-start: 0;
     width: $status-indicator-size;
     height: $status-indicator-size;
-    margin-inline-end: $spacing-xs;
+    margin-inline-end: var(--SpaceFixedXs);
     transform: translateY(-50%);
-    background-color: cv("gray", "600");
+    background-color: var(--ColorIndicatorNeutral);
   }
 }
 
@@ -42,18 +43,18 @@ $status-indicator-size: 1em * 0.5;
 
 .successVariant {
   &::before {
-    background-color: $color-success-base;
+    background-color: var(--ColorIndicatorSuccess);
   }
 }
 
 .cautionVariant {
   &::before {
-    background-color: $color-caution-base;
+    background-color: var(--ColorIndicatorCaution);
   }
 }
 
 .dangerVariant {
   &::before {
-    background-color: $color-danger-base;
+    background-color: var(--ColorIndicatorDanger);
   }
 }
