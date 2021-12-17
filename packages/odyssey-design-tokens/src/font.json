@@ -26,6 +26,9 @@
         "level-5": { "value": "" },
         "level-6": { "value": "" }
       }
+    },
+    "weight": {
+      "bold": { "value": "600" }
     }
   }
 }

@@ -1,13 +1,13 @@
 {
   "space": {
-    "fixed" : {
+    "fixed": {
       "xs": { "value": "0.375rem" },
       "s": { "value": "0.75rem" },
       "m": { "value": "1.5rem" },
       "l": { "value": "3rem" },
       "xl": { "value": "6rem" }
     },
-    "relative" : {
+    "relative": {
       "xs": { "value": "0.375em" },
       "s": { "value": "0.75em" },
       "m": { "value": "1.5em" },

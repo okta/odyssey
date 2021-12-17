@@ -13,6 +13,9 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
+  // Type
+  FontWeightBold: theme.FontWeightBold,
+
   // Space
   SpaceFixedXs: theme.SpaceFixedXs,
   SpaceRelativeXs: theme.SpaceRelativeXs,
