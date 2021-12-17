@@ -12,7 +12,8 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
-import { useCx, useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOmit } from "../../utils";
 import { Heading } from "../Heading";
 import { Text } from "../Text";
 import { CautionIcon, CompleteIcon, ErrorIcon, GetInfoIcon } from "../Icon";
@@ -70,36 +71,37 @@ const icon = {
  * An infobox is a type of alert that provides feedback in response to a
  * user action or system activity.
  */
-let Infobox = forwardRef<HTMLElement, InfoboxProps>((props, ref) => {
-  const { content, actions, title, variant = "info", ...rest } = props;
+export const Infobox = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLElement, InfoboxProps>((props, ref) => {
+    const { content, actions, title, variant = "info", ...rest } = props;
 
-  const classNames = useCx(styles.root, styles[`${variant}Variant`]);
-  const omitProps = useOmit(rest);
+    const classNames = useCx(styles.root, styles[`${variant}Variant`]);
+    const omitProps = useOmit(rest);
 
-  return (
-    <aside {...omitProps} ref={ref} className={classNames} role="status">
-      <span className={styles.icon}>{icon[variant]}</span>
-      {title && (
-        <div className={styles.title}>
-          <Heading visualLevel="6" children={title} />
-        </div>
-      )}
-      {content && (
-        <section className={styles.content}>
-          <Text>{content}</Text>
-        </section>
-      )}
-      {actions && (
-        <section className={styles.actions}>
-          <Text>{actions}</Text>
-        </section>
-      )}
-    </aside>
-  );
-});
+    return (
+      <aside {...omitProps} ref={ref} className={classNames} role="status">
+        <span className={styles.icon}>{icon[variant]}</span>
+        {title && (
+          <div className={styles.title}>
+            <Heading visualLevel="6" children={title} />
+          </div>
+        )}
+        {content && (
+          <section className={styles.content}>
+            <Text>{content}</Text>
+          </section>
+        )}
+        {actions && (
+          <section className={styles.actions}>
+            <Text>{actions}</Text>
+          </section>
+        )}
+      </aside>
+    );
+  })
+);
 
 Infobox.displayName = "Infobox";
-
-Infobox = withStyles(styles)(Infobox);
-
-export { Infobox };

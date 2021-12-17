@@ -56,7 +56,7 @@ export type ${compProps} = SvgIconNoChildrenProps
 
 ${newLine}
 
-const ${compName} = forwardRef<SVGSVGElement, ${compProps}>((props, ref) => {
+export const ${compName} = forwardRef<SVGSVGElement, ${compProps}>((props, ref) => {
   const omitProps = useOmit(props);
   return (
     ${icon}
@@ -66,10 +66,6 @@ const ${compName} = forwardRef<SVGSVGElement, ${compProps}>((props, ref) => {
 ${newLine}
 
 ${compName}.displayName = "${compName}";
-
-${newLine}
-
-export { ${compName} as ${compName} }
 `;
 }
 

@@ -5,15 +5,15 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "main": "dist/index.js",
-  "types": "dist/index.d.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/okta/odyssey",
     "directory": "packages/odyssey-react"
   },
   "dependencies": {
-    "choices.js": "^9.0.1",
-    "hoist-non-react-statics": "^3.3.2"
+    "@okta/odyssey-react-theme": "^0.0.0",
+    "choices.js": "^9.0.1"
   },
   "devDependencies": {
     "@babel/cli": "*",
@@ -30,7 +30,6 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/react-hooks": "^7.0.2",
-    "@types/hoist-non-react-statics": "^3.3.1",
     "@types/jest-axe": "^3.5.1",
     "@types/react": "^17.0.30",
     "@types/react-dom": "^17.0.5",

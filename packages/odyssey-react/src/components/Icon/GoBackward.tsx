@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type GoBackwardIconProps = SvgIconNoChildrenProps;
 
-const GoBackwardIcon = forwardRef<SVGSVGElement, GoBackwardIconProps>(
+export const GoBackwardIcon = forwardRef<SVGSVGElement, GoBackwardIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -36,5 +36,3 @@ const GoBackwardIcon = forwardRef<SVGSVGElement, GoBackwardIconProps>(
 );
 
 GoBackwardIcon.displayName = "GoBackwardIcon";
-
-export { GoBackwardIcon };
