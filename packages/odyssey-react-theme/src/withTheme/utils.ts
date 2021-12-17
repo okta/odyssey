@@ -10,20 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { PluginCreator } from "postcss";
-
-const customPropRegex = /var\(--([A-z][\w-]*)\)/g;
-
-const plugin: PluginCreator<never> = () => ({
-  postcssPlugin: "odyssey-postcss-theme",
-  Declaration: (decl) => {
-    const replaced = decl.value.replace(
-      customPropRegex,
-      (_, capture) => `\$\{theme.${capture}\}`
-    );
-    decl.value = replaced;
-  },
-});
-
-plugin.postcss = true;
-export { plugin as default };
+export const supportsCustomProperties: boolean = (() => {
+  try {
+    return window.CSS.supports("--custom: properties");
+  } catch (_) {
+    return false;
+  }
+})();
