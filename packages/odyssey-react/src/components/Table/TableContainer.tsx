@@ -41,7 +41,7 @@ export const TableContainer = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <figure {...omitProps} ref={ref} className={styles.container}>
+      <figure {...omitProps} ref={ref} className={styles.root}>
         <figcaption className={styles.title}>{title}</figcaption>
         {children}
       </figure>
