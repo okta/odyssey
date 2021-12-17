@@ -11,10 +11,10 @@
  */
 
 import React, { forwardRef } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
 import {
   useCx,
   useOmit,
-  withStyles,
   PolymorphicForwardRef,
   toPascalCase,
 } from "../../utils";
@@ -301,228 +301,233 @@ export interface BoxProps {
 /**
  * Low level building block for ui
  */
-let Box = forwardRef(
-  (
-    {
-      as = "div",
-      display,
-      position,
-      flexDirection,
-      flexWrap,
-      flex,
-      flexGrow,
-      flexShrink,
-      alignItems,
-      justifyContent,
-      gridTemplateColumns,
-      gridColumn,
-      gridRow,
-      width,
-      maxWidth,
-      height,
-      maxHeight,
-      margin,
-      marginTop,
-      marginRight,
-      marginBottom,
-      marginLeft,
-      padding,
-      paddingTop,
-      paddingRight,
-      paddingBottom,
-      paddingLeft,
-      overflow,
-      overflowX,
-      overflowY,
-      borderColor,
-      hoverBorderColor,
-      focusBorderColor,
-      borderRadius,
-      borderTopLeftRadius,
-      borderTopRightRadius,
-      borderBottomLeftRadius,
-      borderBottomRightRadius,
-      backgroundColor,
-      boxShadow,
-      hoverBoxShadow,
-      focusRing,
-      cursor,
-      pointerEvents,
-      userSelect,
-      children,
-      className,
-      ...rest
-    },
-    ref
-  ) => {
-    const Tag = as;
+export const Box = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef(
+    (
+      {
+        as = "div",
+        display,
+        position,
+        flexDirection,
+        flexWrap,
+        flex,
+        flexGrow,
+        flexShrink,
+        alignItems,
+        justifyContent,
+        gridTemplateColumns,
+        gridColumn,
+        gridRow,
+        width,
+        maxWidth,
+        height,
+        maxHeight,
+        margin,
+        marginTop,
+        marginRight,
+        marginBottom,
+        marginLeft,
+        padding,
+        paddingTop,
+        paddingRight,
+        paddingBottom,
+        paddingLeft,
+        overflow,
+        overflowX,
+        overflowY,
+        borderColor,
+        hoverBorderColor,
+        focusBorderColor,
+        borderRadius,
+        borderTopLeftRadius,
+        borderTopRightRadius,
+        borderBottomLeftRadius,
+        borderBottomRightRadius,
+        backgroundColor,
+        boxShadow,
+        hoverBoxShadow,
+        focusRing,
+        cursor,
+        pointerEvents,
+        userSelect,
+        children,
+        className,
+        ...rest
+      },
+      ref
+    ) => {
+      const Tag = as;
 
-    if (Array.isArray(margin)) {
-      switch (margin.length) {
-        case 2:
-          marginTop = margin[0];
-          marginBottom = margin[0];
-          marginLeft = margin[1];
-          marginRight = margin[1];
-          break;
-        case 3:
-          marginTop = margin[0];
-          marginRight = margin[1];
-          marginLeft = margin[1];
-          marginBottom = margin[2];
-          break;
-        case 4:
-          marginTop = margin[0];
-          marginRight = margin[1];
-          marginBottom = margin[2];
-          marginLeft = margin[3];
-          break;
-        default:
-          margin = margin[0];
+      if (Array.isArray(margin)) {
+        switch (margin.length) {
+          case 2:
+            marginTop = margin[0];
+            marginBottom = margin[0];
+            marginLeft = margin[1];
+            marginRight = margin[1];
+            break;
+          case 3:
+            marginTop = margin[0];
+            marginRight = margin[1];
+            marginLeft = margin[1];
+            marginBottom = margin[2];
+            break;
+          case 4:
+            marginTop = margin[0];
+            marginRight = margin[1];
+            marginBottom = margin[2];
+            marginLeft = margin[3];
+            break;
+          default:
+            margin = margin[0];
+        }
       }
-    }
 
-    if (Array.isArray(padding)) {
-      switch (padding.length) {
-        case 2:
-          paddingTop = padding[0];
-          paddingBottom = padding[0];
-          paddingLeft = padding[1];
-          paddingRight = padding[1];
-          break;
-        case 3:
-          paddingTop = padding[0];
-          paddingRight = padding[1];
-          paddingLeft = padding[1];
-          paddingBottom = padding[2];
-          break;
-        case 4:
-          paddingTop = padding[0];
-          paddingRight = padding[1];
-          paddingBottom = padding[2];
-          paddingLeft = padding[3];
-          break;
-        default:
-          padding = padding[0];
+      if (Array.isArray(padding)) {
+        switch (padding.length) {
+          case 2:
+            paddingTop = padding[0];
+            paddingBottom = padding[0];
+            paddingLeft = padding[1];
+            paddingRight = padding[1];
+            break;
+          case 3:
+            paddingTop = padding[0];
+            paddingRight = padding[1];
+            paddingLeft = padding[1];
+            paddingBottom = padding[2];
+            break;
+          case 4:
+            paddingTop = padding[0];
+            paddingRight = padding[1];
+            paddingBottom = padding[2];
+            paddingLeft = padding[3];
+            break;
+          default:
+            padding = padding[0];
+        }
       }
-    }
 
-    if (Array.isArray(borderRadius)) {
-      switch (borderRadius.length) {
-        case 2:
-          borderTopLeftRadius = borderRadius[0];
-          borderBottomRightRadius = borderRadius[0];
-          borderTopRightRadius = borderRadius[1];
-          borderBottomLeftRadius = borderRadius[1];
-          break;
-        case 3:
-          borderTopLeftRadius = borderRadius[0];
-          borderTopRightRadius = borderRadius[1];
-          borderBottomLeftRadius = borderRadius[1];
-          borderBottomRightRadius = borderRadius[2];
-          break;
-        case 4:
-          borderTopLeftRadius = borderRadius[0];
-          borderTopRightRadius = borderRadius[1];
-          borderBottomRightRadius = borderRadius[2];
-          borderBottomLeftRadius = borderRadius[3];
-          break;
-        default:
-          borderRadius = borderRadius[0];
+      if (Array.isArray(borderRadius)) {
+        switch (borderRadius.length) {
+          case 2:
+            borderTopLeftRadius = borderRadius[0];
+            borderBottomRightRadius = borderRadius[0];
+            borderTopRightRadius = borderRadius[1];
+            borderBottomLeftRadius = borderRadius[1];
+            break;
+          case 3:
+            borderTopLeftRadius = borderRadius[0];
+            borderTopRightRadius = borderRadius[1];
+            borderBottomLeftRadius = borderRadius[1];
+            borderBottomRightRadius = borderRadius[2];
+            break;
+          case 4:
+            borderTopLeftRadius = borderRadius[0];
+            borderTopRightRadius = borderRadius[1];
+            borderBottomRightRadius = borderRadius[2];
+            borderBottomLeftRadius = borderRadius[3];
+            break;
+          default:
+            borderRadius = borderRadius[0];
+        }
       }
-    }
 
-    if (Array.isArray(overflow)) {
-      switch (overflow.length) {
-        case 2:
-          overflowX = overflow[0];
-          overflowY = overflow[1];
-          break;
-        default:
-          overflowX = overflow[0];
+      if (Array.isArray(overflow)) {
+        switch (overflow.length) {
+          case 2:
+            overflowX = overflow[0];
+            overflowY = overflow[1];
+            break;
+          default:
+            overflowX = overflow[0];
+        }
       }
+
+      const componentClass = useCx(
+        styles.root,
+        display && styles[`display${toPascalCase(display)}`],
+        position && styles[`position${toPascalCase(position)}`],
+        flexDirection && styles[`flexDirection${toPascalCase(flexDirection)}`],
+        flexWrap && styles[`flexWrap${toPascalCase(flexWrap)}`],
+        flex && styles[`flex${toPascalCase(flex)}`],
+        flexGrow && styles[`flexGrow${toPascalCase(flexGrow)}`],
+        flexShrink && styles[`flexShrink${toPascalCase(flexShrink)}`],
+        alignItems && styles[`alignItems${toPascalCase(alignItems)}`],
+        justifyContent &&
+          styles[`justifyContent${toPascalCase(justifyContent)}`],
+        gridTemplateColumns &&
+          styles[`gridTemplateColumns${toPascalCase(gridTemplateColumns)}`],
+        gridColumn && styles[`gridColumn${toPascalCase(gridColumn)}`],
+        gridRow && styles[`gridRow${toPascalCase(gridRow)}`],
+        width && styles[`width${toPascalCase(width)}`],
+        maxWidth && styles[`maxWidth${toPascalCase(maxWidth)}`],
+        height && styles[`height${toPascalCase(height)}`],
+        maxHeight && styles[`maxHeight${toPascalCase(maxHeight)}`],
+        margin &&
+          !Array.isArray(margin) &&
+          styles[`margin${toPascalCase(margin)}`],
+        marginTop && styles[`marginTop${toPascalCase(marginTop)}`],
+        marginRight && styles[`marginRight${toPascalCase(marginRight)}`],
+        marginBottom && styles[`marginBottom${toPascalCase(marginBottom)}`],
+        marginLeft && styles[`marginLeft${toPascalCase(marginLeft)}`],
+        padding &&
+          !Array.isArray(padding) &&
+          styles[`padding${toPascalCase(padding)}`],
+        paddingTop && styles[`paddingTop${toPascalCase(paddingTop)}`],
+        paddingRight && styles[`paddingRight${toPascalCase(paddingRight)}`],
+        paddingBottom && styles[`paddingBottom${toPascalCase(paddingBottom)}`],
+        paddingLeft && styles[`paddingLeft${toPascalCase(paddingLeft)}`],
+        overflow &&
+          !Array.isArray(overflow) &&
+          styles[`overflow${toPascalCase(overflow)}`],
+        overflowX && styles[`overflowX${toPascalCase(overflowX)}`],
+        overflowY && styles[`overflowY${toPascalCase(overflowY)}`],
+        borderColor !== "none" && styles.borderBase,
+        borderColor && styles[`borderColor${toPascalCase(borderColor)}`],
+        hoverBorderColor !== "none" && styles.borderBase,
+        hoverBorderColor &&
+          styles[`hoverBorderColor${toPascalCase(hoverBorderColor)}`],
+        focusBorderColor &&
+          styles[`focusBorderColor${toPascalCase(focusBorderColor)}`],
+        borderRadius &&
+          !Array.isArray(borderRadius) &&
+          styles[`borderRadius${toPascalCase(borderRadius)}`],
+        borderTopLeftRadius &&
+          styles[`borderTopLeftRadius${toPascalCase(borderTopLeftRadius)}`],
+        borderTopRightRadius &&
+          styles[`borderTopRightRadius${toPascalCase(borderTopRightRadius)}`],
+        borderBottomLeftRadius &&
+          styles[
+            `borderBottomLeftRadius${toPascalCase(borderBottomLeftRadius)}`
+          ],
+        borderBottomRightRadius &&
+          styles[
+            `borderBottomRightRadius${toPascalCase(borderBottomRightRadius)}`
+          ],
+        backgroundColor &&
+          styles[`backgroundColor${toPascalCase(backgroundColor)}`],
+        boxShadow && styles[`boxShadow${toPascalCase(boxShadow)}`],
+        hoverBoxShadow &&
+          styles[`hoverBoxShadow${toPascalCase(hoverBoxShadow)}`],
+        focusRing && styles[`focusRing${toPascalCase(focusRing)}`],
+        cursor && styles[`cursor${toPascalCase(cursor)}`],
+        pointerEvents && styles[`pointerEvents${toPascalCase(pointerEvents)}`],
+        userSelect && styles[`userSelect${toPascalCase(userSelect)}`],
+        className
+      );
+
+      const omitProps = useOmit(rest);
+      return (
+        <Tag {...omitProps} className={componentClass} ref={ref}>
+          {children}
+        </Tag>
+      );
     }
-
-    const componentClass = useCx(
-      styles.root,
-      display && styles[`display${toPascalCase(display)}`],
-      position && styles[`position${toPascalCase(position)}`],
-      flexDirection && styles[`flexDirection${toPascalCase(flexDirection)}`],
-      flexWrap && styles[`flexWrap${toPascalCase(flexWrap)}`],
-      flex && styles[`flex${toPascalCase(flex)}`],
-      flexGrow && styles[`flexGrow${toPascalCase(flexGrow)}`],
-      flexShrink && styles[`flexShrink${toPascalCase(flexShrink)}`],
-      alignItems && styles[`alignItems${toPascalCase(alignItems)}`],
-      justifyContent && styles[`justifyContent${toPascalCase(justifyContent)}`],
-      gridTemplateColumns &&
-        styles[`gridTemplateColumns${toPascalCase(gridTemplateColumns)}`],
-      gridColumn && styles[`gridColumn${toPascalCase(gridColumn)}`],
-      gridRow && styles[`gridRow${toPascalCase(gridRow)}`],
-      width && styles[`width${toPascalCase(width)}`],
-      maxWidth && styles[`maxWidth${toPascalCase(maxWidth)}`],
-      height && styles[`height${toPascalCase(height)}`],
-      maxHeight && styles[`maxHeight${toPascalCase(maxHeight)}`],
-      margin &&
-        !Array.isArray(margin) &&
-        styles[`margin${toPascalCase(margin)}`],
-      marginTop && styles[`marginTop${toPascalCase(marginTop)}`],
-      marginRight && styles[`marginRight${toPascalCase(marginRight)}`],
-      marginBottom && styles[`marginBottom${toPascalCase(marginBottom)}`],
-      marginLeft && styles[`marginLeft${toPascalCase(marginLeft)}`],
-      padding &&
-        !Array.isArray(padding) &&
-        styles[`padding${toPascalCase(padding)}`],
-      paddingTop && styles[`paddingTop${toPascalCase(paddingTop)}`],
-      paddingRight && styles[`paddingRight${toPascalCase(paddingRight)}`],
-      paddingBottom && styles[`paddingBottom${toPascalCase(paddingBottom)}`],
-      paddingLeft && styles[`paddingLeft${toPascalCase(paddingLeft)}`],
-      overflow &&
-        !Array.isArray(overflow) &&
-        styles[`overflow${toPascalCase(overflow)}`],
-      overflowX && styles[`overflowX${toPascalCase(overflowX)}`],
-      overflowY && styles[`overflowY${toPascalCase(overflowY)}`],
-      borderColor !== "none" && styles.borderBase,
-      borderColor && styles[`borderColor${toPascalCase(borderColor)}`],
-      hoverBorderColor !== "none" && styles.borderBase,
-      hoverBorderColor &&
-        styles[`hoverBorderColor${toPascalCase(hoverBorderColor)}`],
-      focusBorderColor &&
-        styles[`focusBorderColor${toPascalCase(focusBorderColor)}`],
-      borderRadius &&
-        !Array.isArray(borderRadius) &&
-        styles[`borderRadius${toPascalCase(borderRadius)}`],
-      borderTopLeftRadius &&
-        styles[`borderTopLeftRadius${toPascalCase(borderTopLeftRadius)}`],
-      borderTopRightRadius &&
-        styles[`borderTopRightRadius${toPascalCase(borderTopRightRadius)}`],
-      borderBottomLeftRadius &&
-        styles[`borderBottomLeftRadius${toPascalCase(borderBottomLeftRadius)}`],
-      borderBottomRightRadius &&
-        styles[
-          `borderBottomRightRadius${toPascalCase(borderBottomRightRadius)}`
-        ],
-      backgroundColor &&
-        styles[`backgroundColor${toPascalCase(backgroundColor)}`],
-      boxShadow && styles[`boxShadow${toPascalCase(boxShadow)}`],
-      hoverBoxShadow && styles[`hoverBoxShadow${toPascalCase(hoverBoxShadow)}`],
-      focusRing && styles[`focusRing${toPascalCase(focusRing)}`],
-      cursor && styles[`cursor${toPascalCase(cursor)}`],
-      pointerEvents && styles[`pointerEvents${toPascalCase(pointerEvents)}`],
-      userSelect && styles[`userSelect${toPascalCase(userSelect)}`],
-      className
-    );
-
-    const omitProps = useOmit(rest);
-    return (
-      <Tag {...omitProps} className={componentClass} ref={ref}>
-        {children}
-      </Tag>
-    );
-  }
+  )
 ) as PolymorphicForwardRef<"div", BoxProps>;
 
 Box.displayName = "Box";
-
-Box = withStyles(styles)(Box);
-
-export { Box };

@@ -28,7 +28,7 @@ export * from "./Radio";
 export * from "./ScreenReaderText";
 export * from "./Select";
 export * from "./Status";
-export * from "./Tab";
+export * from "./Tabs";
 export * from "./Table";
 export * from "./Tag";
 export * from "./Text";

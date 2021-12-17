@@ -19,20 +19,20 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type CheckIconProps = SvgIconNoChildrenProps;
 
-const CheckIcon = forwardRef<SVGSVGElement, CheckIconProps>((props, ref) => {
-  const omitProps = useOmit(props);
-  return (
-    <SvgIcon ref={ref} {...omitProps}>
-      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M0 6.53333L1.86667 4.66667L5.6 8.51667L12.1333 1.86667L14 3.61667L5.6 12.25L0 6.53333Z"
-          fill="currentColor"
-        />
-      </svg>
-    </SvgIcon>
-  );
-});
+export const CheckIcon = forwardRef<SVGSVGElement, CheckIconProps>(
+  (props, ref) => {
+    const omitProps = useOmit(props);
+    return (
+      <SvgIcon ref={ref} {...omitProps}>
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M0 6.53333L1.86667 4.66667L5.6 8.51667L12.1333 1.86667L14 3.61667L5.6 12.25L0 6.53333Z"
+            fill="currentColor"
+          />
+        </svg>
+      </SvgIcon>
+    );
+  }
+);
 
 CheckIcon.displayName = "CheckIcon";
-
-export { CheckIcon };

@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type CompleteIconProps = SvgIconNoChildrenProps;
 
-const CompleteIcon = forwardRef<SVGSVGElement, CompleteIconProps>(
+export const CompleteIcon = forwardRef<SVGSVGElement, CompleteIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -38,5 +38,3 @@ const CompleteIcon = forwardRef<SVGSVGElement, CompleteIconProps>(
 );
 
 CompleteIcon.displayName = "CompleteIcon";
-
-export { CompleteIcon };

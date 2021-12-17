@@ -11,19 +11,13 @@
  */
 
 import React from "react";
-import type {
-  ComponentPropsWithRef,
-  ReactNode,
-  ReactElement,
-  ComponentProps,
-} from "react";
-import { useOmit, withStyles, forwardRefWithStatics } from "../../utils";
-
+import type { ComponentPropsWithRef, ReactNode, ReactElement } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOmit, forwardRefWithStatics } from "../../utils";
 import { Heading } from "../Heading";
-
 import styles from "./Form.module.scss";
 
-interface Props
+export interface FormProps
   extends Omit<ComponentPropsWithRef<"form">, "style" | "className"> {
   /**
    * Content to be rendered within the Form. Avoid using direct children, put child content
@@ -55,13 +49,16 @@ interface PropsActions {
 }
 
 type Statics = {
-  Error: typeof Error;
+  Error: typeof FormError;
   Main: typeof Main;
   Actions: typeof Actions;
 };
 
-let Form = forwardRefWithStatics<HTMLFormElement, Props, Statics>(
-  (props, ref) => {
+export const Form = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRefWithStatics<HTMLFormElement, FormProps, Statics>((props, ref) => {
     const { children, title, desc, ...rest } = props;
 
     const omitProps = useOmit(rest);
@@ -75,10 +72,10 @@ let Form = forwardRefWithStatics<HTMLFormElement, Props, Statics>(
         {children}
       </form>
     );
-  }
+  })
 );
 
-function Error({ children }: PropsError) {
+function FormError({ children }: PropsError) {
   return <section className={styles.error}>{children}</section>;
 }
 
@@ -90,16 +87,11 @@ function Actions({ children }: PropsActions) {
   return <section className={styles.actions}>{children}</section>;
 }
 
-Form.Error = Error;
+Form.Error = FormError;
 Form.Main = Main;
 Form.Actions = Actions;
 
 Form.displayName = "Form";
-Error.displayName = "FormError";
+FormError.displayName = "FormError";
 Main.displayName = "FormMain";
 Actions.displayName = "FormActions";
-
-Form = withStyles(styles)(Form);
-
-export type FormProps = ComponentProps<typeof Form>;
-export { Form };

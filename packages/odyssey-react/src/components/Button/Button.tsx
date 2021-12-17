@@ -12,8 +12,10 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactElement, ReactText } from "react";
-import { withStyles, useCx, useOmit } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOmit } from "../../utils";
 import styles from "./Button.module.scss";
+import { theme } from "./Button.theme";
 
 interface CommonProps
   extends Omit<ComponentPropsWithRef<"button">, "style" | "className"> {
@@ -64,34 +66,35 @@ export type ButtonProps = IconProps | ChildrenProps;
 /**
  * A clickable button used for form submissions and most in-page interactions.
  */
-let Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const {
-    children,
-    size = "m",
-    variant = "primary",
-    wide,
-    icon,
-    ...rest
-  } = props;
+export const Button = withTheme(
+  theme,
+  styles
+)(
+  forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+    const {
+      children,
+      size = "m",
+      variant = "primary",
+      wide,
+      icon,
+      ...rest
+    } = props;
 
-  const componentClass = useCx(
-    styles.root,
-    styles[`${variant}Variant`],
-    styles[`${size}Size`],
-    wide && styles.wideLayout
-  );
+    const componentClass = useCx(
+      styles.root,
+      styles[`${variant}Variant`],
+      styles[`${size}Size`],
+      wide && styles.wideLayout
+    );
 
-  const omitProps = useOmit(rest);
-  return (
-    <button {...omitProps} ref={ref} className={componentClass}>
-      {icon && <span className={styles.icon}>{icon}</span>}
-      {children && <span className={styles.label}>{children}</span>}
-    </button>
-  );
-});
+    const omitProps = useOmit(rest);
+    return (
+      <button {...omitProps} ref={ref} className={componentClass}>
+        {icon && <span className={styles.icon}>{icon}</span>}
+        {children && <span className={styles.label}>{children}</span>}
+      </button>
+    );
+  })
+);
 
 Button.displayName = "Button";
-
-Button = withStyles(styles)(Button);
-
-export { Button };

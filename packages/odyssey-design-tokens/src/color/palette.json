@@ -1,0 +1,114 @@
+{
+  "color": {
+    "palette": {
+      "neutral": {
+        "white": {
+          "comment": "Used for page backgrounds, text",
+          "value": "#ffffff"
+        },
+        "000": {
+          "comment": "Used for Backgrounds, read-only & disabled input fills",
+          "value": "#f5f5f6"
+        },
+        "100": {
+          "comment": "Used for read-only/disabled states",
+          "value": "#ebebed"
+        },
+        "200": { "comment": "Used for Display borders", "value": "#d7d7dc" },
+        "500": {
+          "comment": "Used for Interactive UI borders",
+          "value": "#8c8c96"
+        },
+        "600": {
+          "comment": "Used for caption text, Status label, disabled Overlay Buttons",
+          "value": "#6e6e78"
+        },
+        "900": {
+          "comment": "Used for titles, body copy, icons, shadows, tooltips",
+          "value": "#1d1d21"
+        }
+      },
+      "blue": {
+        "000": {
+          "comment": "Used for clear button hover, backgrounds",
+          "value": "#f2f5ff"
+        },
+        "300": {
+          "comment": "Used for buttons disabled state fills & borders, focus rings",
+          "value": "#a7b5ec"
+        },
+        "400": {
+          "comment": "Used for a11y-friendly UI backgrounds",
+          "value": "#788ee2"
+        },
+        "500": {
+          "comment": "Used for links, buttons, icons, hover states, selected states",
+          "value": "#1662dd"
+        },
+        "900": {
+          "comment": "Used for okta logo, brand moments, button hovers",
+          "value": "#00297a"
+        }
+      },
+      "green": {
+        "000": {
+          "comment": "Used for moments of success, validation, wayfinding",
+          "value": "#e5faf3"
+        },
+        "300": { "comment": "N/A", "value": "#84d2b1" },
+        "500": {
+          "comment": "Used for moments of success, validation, wayfinding, status",
+          "value": "#00b478"
+        },
+        "600": {
+          "comment": "Used for background color for success messaging",
+          "value": "#008055"
+        },
+        "900": {
+          "comment": "Used for moments of success, validation, wayfinding",
+          "value": "#00503c"
+        }
+      },
+      "red": {
+        "000": {
+          "comment": "Used for system errors, danger buttons, error states",
+          "value": "#ffdfe2"
+        },
+        "300": {
+          "comment": "Used for danger button disabled state fills, borders, & focus ring",
+          "value": "#f88c90"
+        },
+        "500": {
+          "comment": "Used for system errors, danger buttons, error states, status dot",
+          "value": "#da372c"
+        },
+        "900": {
+          "comment": "Used for destructive button & invalid input hovers",
+          "value": "#640019"
+        }
+      },
+      "yellow": {
+        "000": { "comment": "Used for moments of caution", "value": "#faf5dc" },
+        "300": { "comment": "N/A", "value": "#f9dc77" },
+        "500": {
+          "comment": "Used for Moments of caution, status dot",
+          "value": "#ffc61c"
+        },
+        "900": { "comment": "Used for moments of caution", "value": "#663800" }
+      },
+      "orange": {
+        "500": { "comment": "N/A", "value": "#e97107" }
+      },
+      "turquoise": {
+        "400": { "comment": "Used for background color", "value": "#65adb7" },
+        "500": { "comment": "Used for brand moments", "value": "#2d8c9e" }
+      },
+      "purple": {
+        "500": {
+          "comment": "Used for Moments of learning, tips, brand moments",
+          "value": "#8d6e97"
+        }
+      }
+    }
+  }
+}

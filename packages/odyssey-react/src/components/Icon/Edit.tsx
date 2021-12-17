@@ -19,22 +19,22 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type EditIconProps = SvgIconNoChildrenProps;
 
-const EditIcon = forwardRef<SVGSVGElement, EditIconProps>((props, ref) => {
-  const omitProps = useOmit(props);
-  return (
-    <SvgIcon ref={ref} {...omitProps}>
-      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M12.8008 2.78969L11.2103 1.19923C10.9447 0.933589 10.5121 0.933589 10.2465 1.19923L9 2.44572L11.5543 5L12.8007 3.75351C13.0664 3.48787 13.0664 3.05533 12.8008 2.78969ZM3.5 13L10.5 6L8 3.5L1 10.5V13L3.5 13Z"
-          fill="currentColor"
-        />
-      </svg>
-    </SvgIcon>
-  );
-});
+export const EditIcon = forwardRef<SVGSVGElement, EditIconProps>(
+  (props, ref) => {
+    const omitProps = useOmit(props);
+    return (
+      <SvgIcon ref={ref} {...omitProps}>
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12.8008 2.78969L11.2103 1.19923C10.9447 0.933589 10.5121 0.933589 10.2465 1.19923L9 2.44572L11.5543 5L12.8007 3.75351C13.0664 3.48787 13.0664 3.05533 12.8008 2.78969ZM3.5 13L10.5 6L8 3.5L1 10.5V13L3.5 13Z"
+            fill="currentColor"
+          />
+        </svg>
+      </SvgIcon>
+    );
+  }
+);
 
 EditIcon.displayName = "EditIcon";
-
-export { EditIcon };

@@ -12,9 +12,10 @@
 
 import React, { useCallback, useRef, useEffect, forwardRef } from "react";
 import type { ComponentPropsWithRef, ChangeEvent } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
 import { CheckIcon, MinusIcon } from "../Icon";
 import styles from "./Checkbox.module.scss";
-import { useCx, useOid, useOmit, withStyles } from "../../utils";
+import { useCx, useOid, useOmit } from "../../utils";
 import { Field } from "../Field";
 import type { SharedFieldTypes } from "../Field/types";
 
@@ -51,71 +52,74 @@ export interface CheckboxProps
 /**
  * A clickable Checkbox used for form submissions and most in-page interactions.
  */
-let Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const {
-    id,
-    label,
-    onChange,
-    required = true,
-    indeterminate = false,
-    error,
-    ...rest
-  } = props;
+export const Checkbox = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
+    const {
+      id,
+      label,
+      onChange,
+      required = true,
+      indeterminate = false,
+      error,
+      ...rest
+    } = props;
 
-  const oid = useOid(id);
-  const omitProps = useOmit(rest);
+    const oid = useOid(id);
+    const omitProps = useOmit(rest);
 
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      onChange?.(event, event.target.value);
-    },
-    [onChange]
-  );
+    const handleChange = useCallback(
+      (event: ChangeEvent<HTMLInputElement>) => {
+        onChange?.(event, event.target.value);
+      },
+      [onChange]
+    );
 
-  const internalRef = useRef<HTMLInputElement>(null);
+    const internalRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (!ref) return;
-    typeof ref === "function"
-      ? ref(internalRef.current)
-      : (ref.current = internalRef.current);
-  }, [ref, internalRef]);
+    useEffect(() => {
+      if (!ref) return;
+      typeof ref === "function"
+        ? ref(internalRef.current)
+        : (ref.current = internalRef.current);
+    }, [ref, internalRef]);
 
-  useEffect(() => {
-    if (!internalRef.current) return;
-    internalRef.current.indeterminate = indeterminate;
-  }, [indeterminate, internalRef]);
+    useEffect(() => {
+      if (!internalRef.current) return;
+      internalRef.current.indeterminate = indeterminate;
+    }, [indeterminate, internalRef]);
 
-  const ariaDescribedBy = useCx(typeof error !== "undefined" && `${oid}-error`);
+    const ariaDescribedBy = useCx(
+      typeof error !== "undefined" && `${oid}-error`
+    );
 
-  return (
-    <>
-      <input
-        {...omitProps}
-        className={styles.checkbox}
-        id={oid}
-        aria-describedby={ariaDescribedBy}
-        onChange={handleChange}
-        ref={internalRef}
-        required={required}
-        type="checkbox"
-      />
-      <label className={styles.label} htmlFor={oid}>
-        <span className={styles.box} role="presentation">
-          <span className={styles.indicator}>
-            {indeterminate ? <MinusIcon /> : <CheckIcon />}
+    return (
+      <>
+        <input
+          {...omitProps}
+          className={styles.checkbox}
+          id={oid}
+          aria-describedby={ariaDescribedBy}
+          onChange={handleChange}
+          ref={internalRef}
+          required={required}
+          type="checkbox"
+        />
+        <label className={styles.label} htmlFor={oid}>
+          <span className={styles.box} role="presentation">
+            <span className={styles.indicator}>
+              {indeterminate ? <MinusIcon /> : <CheckIcon />}
+            </span>
           </span>
-        </span>
 
-        {label}
-      </label>
-      {error && <Field.Error id={oid}>{error}</Field.Error>}
-    </>
-  );
-});
+          {label}
+        </label>
+        {error && <Field.Error id={oid}>{error}</Field.Error>}
+      </>
+    );
+  })
+);
 
 Checkbox.displayName = "Checkbox";
-
-Checkbox = withStyles(styles)(Checkbox);
-
-export { Checkbox };

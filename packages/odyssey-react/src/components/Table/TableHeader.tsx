@@ -19,20 +19,19 @@ export interface TableHeaderProps
   children?: ReactElement | ReactElement[];
 }
 
-const TableHeader = forwardRef<HTMLTableSectionElement, TableHeaderProps>(
-  (props, ref) => {
-    const { children, ...rest } = props;
+export const TableHeader = forwardRef<
+  HTMLTableSectionElement,
+  TableHeaderProps
+>((props, ref) => {
+  const { children, ...rest } = props;
 
-    const omitProps = useOmit(rest);
+  const omitProps = useOmit(rest);
 
-    return (
-      <thead {...omitProps} ref={ref}>
-        {children}
-      </thead>
-    );
-  }
-);
+  return (
+    <thead {...omitProps} ref={ref}>
+      {children}
+    </thead>
+  );
+});
 
 TableHeader.displayName = "TableHeader";
-
-export { TableHeader };

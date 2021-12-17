@@ -1,31 +1,35 @@
 {
   "name": "@okta/odyssey-storybook",
   "version": "0.8.4",
+  "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/odyssey",
+    "directory": "packages/odyssey-storybook"
+  },
+  "devDependencies": {
+    "@applitools/eyes-storybook": "^3.24.0",
+    "@okta/odyssey-design-tokens": "^0.8.4",
+    "@okta/odyssey-react": "^0.8.4",
+    "@okta/odyssey-typescript": "^0.8.4",
+    "@pxblue/storybook-rtl-addon": "^1.0.1",
+    "@storybook/addon-a11y": "^6.3.7",
+    "@storybook/addon-actions": "^6.3.7",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-links": "^6.3.7",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/addons": "^6.3.12",
+    "@storybook/react": "^6.3.7",
+    "@storybook/theming": "^6.3.12",
+    "@types/mdx": "^2.0.1",
+    "@types/react": "^17.0.30"
+  },
   "scripts": {
     "start": "start-storybook --quiet --port 6006",
     "build": "build-storybook --quiet --output-dir dist",
-    "typecheck": "tsc"
-  },
-  "dependencies": {
-    "@applitools/eyes-storybook": "^3.27.0",
-    "@okta/odyssey-design-tokens": "^0.8.4",
-    "@okta/odyssey-react": "^0.8.4",
-    "@pxblue/storybook-rtl-addon": "^1.1.0",
-    "@storybook/addon-a11y": "^6.4.8",
-    "@storybook/addon-actions": "^6.4.8",
-    "@storybook/addon-essentials": "^6.4.8",
-    "@storybook/addon-links": "^6.4.8",
-    "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/addons": "^6.4.8",
-    "@storybook/react": "^6.4.8",
-    "@storybook/theming": "^6.4.8"
-  },
-  "devDependencies": {
-    "@okta/odyssey-typescript": "^0.8.4",
-    "@types/mdx": "^2.0.1",
-    "@types/react": "^17.0.30"
+    "typecheck": "tsc",
+    "prepack": "node ./scripts/prepack.js"
   }
 }
