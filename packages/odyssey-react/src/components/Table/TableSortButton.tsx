@@ -60,7 +60,7 @@ export const TableSortButton = withTheme(
       ...rest
     } = props;
 
-    const componentClass = useCx(styles.sort, styles[`${direction}Direction`]);
+    const componentClass = useCx(styles.root, styles[`${direction}Direction`]);
 
     const omitProps = useOmit(rest);
 

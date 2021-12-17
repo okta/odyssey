@@ -34,7 +34,7 @@ export const TableHeaderCell = withTheme(
     const { children, format, ...rest } = props;
 
     const componentClass = useCx(
-      styles.cell,
+      styles.root,
       styles.headerCell,
       props.scope === "col" && styles.headerCellCol,
       format && styles[`${format}Format`]
