@@ -10,4 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./withStyles";
+import type { ThemeReducer } from "@okta/odyssey-react-theme";
+
+export const theme: ThemeReducer = (theme) => ({
+  // Type
+  FontWeightBold: theme.FontWeightBold,
+
+  // Space
+  SpaceFixedXs: theme.SpaceFixedXs,
+  SpaceRelativeXs: theme.SpaceRelativeXs,
+
+  // Caution Variant
+  ColorIndicatorCaution: theme.ColorCautionBase,
+
+  // Danger Variant
+  ColorIndicatorDanger: theme.ColorDangerBase,
+
+  // Neutral Variant
+  ColorIndicatorNeutral: theme.ColorNeutralBase,
+
+  // Success Variant
+  ColorIndicatorSuccess: theme.ColorSuccessBase,
+});

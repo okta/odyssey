@@ -12,7 +12,8 @@
 
 import React, { cloneElement, forwardRef } from "react";
 import type { ReactElement, ComponentPropsWithRef } from "react";
-import { useCx, useOid, useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOid, useOmit } from "../../utils";
 import styles from "./Tooltip.module.scss";
 import { Text } from "../Text";
 export interface TooltipProps
@@ -37,39 +38,40 @@ export interface TooltipProps
 /**
  * A transient element that provides additional context for an element when it receives hover or focus.
  */
-let Tooltip = forwardRef<HTMLElement, TooltipProps>((props, ref) => {
-  const { children, id, label, position = "top", ...rest } = props;
+export const Tooltip = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLElement, TooltipProps>((props, ref) => {
+    const { children, id, label, position = "top", ...rest } = props;
 
-  const oid = useOid(id);
-  const omitProps = useOmit(rest);
-  const tooltipClasses = useCx(styles.root, styles[`${position}Position`]);
-  const clone = cloneElement(children, { "aria-describedby": oid });
+    const oid = useOid(id);
+    const omitProps = useOmit(rest);
+    const tooltipClasses = useCx(styles.root, styles[`${position}Position`]);
+    const clone = cloneElement(children, { "aria-describedby": oid });
 
-  return (
-    <span className={styles.hasTooltip}>
-      {clone}
-      <aside
-        {...omitProps}
-        ref={ref}
-        id={oid}
-        className={tooltipClasses}
-        role="tooltip"
-      >
-        <Text
-          color="body-inverse"
-          fontSize="caption"
-          fontWeight="bold"
-          lineHeight="title"
+    return (
+      <span className={styles.hasTooltip}>
+        {clone}
+        <aside
+          {...omitProps}
+          ref={ref}
+          id={oid}
+          className={tooltipClasses}
+          role="tooltip"
         >
-          {label}
-        </Text>
-      </aside>
-    </span>
-  );
-});
+          <Text
+            color="body-inverse"
+            fontSize="caption"
+            fontWeight="bold"
+            lineHeight="title"
+          >
+            {label}
+          </Text>
+        </aside>
+      </span>
+    );
+  })
+);
 
 Tooltip.displayName = "Tooltip";
-
-Tooltip = withStyles(styles)(Tooltip);
-
-export { Tooltip };

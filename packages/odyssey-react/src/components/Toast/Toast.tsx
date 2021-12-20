@@ -12,16 +12,16 @@
 
 import React, { createContext, useContext, useState } from "react";
 import type { ComponentPropsWithRef, ReactNode, AnimationEvent } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
 import {
   useCx,
   useOmit,
   useOid,
   oid,
-  withStyles,
   forwardRefWithStatics,
 } from "../../utils";
-import styles from "./Toast.module.scss";
 import { Button } from "../Button";
+import type { ButtonProps } from "../Button";
 import {
   GetInfoIcon,
   ErrorIcon,
@@ -29,7 +29,7 @@ import {
   CompleteIcon,
   CloseIcon,
 } from "../Icon";
-import type { ButtonProps } from "../Button";
+import styles from "./Toast.module.scss";
 
 export interface ToastProps
   extends Omit<
@@ -114,8 +114,11 @@ const icon = {
  * Toasts are transient, non-disruptive messages that provide at-a-glance,
  * asynchronous feedback or updates.
  */
-let Toast = forwardRefWithStatics<HTMLElement, ToastProps, Statics>(
-  (props, ref) => {
+export const Toast = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRefWithStatics<HTMLElement, ToastProps, Statics>((props, ref) => {
     const {
       title,
       body,
@@ -149,7 +152,7 @@ let Toast = forwardRefWithStatics<HTMLElement, ToastProps, Statics>(
         </span>
       </aside>
     );
-  }
+  })
 );
 
 /**
@@ -215,10 +218,6 @@ export const useToast = (): Context => {
 };
 
 Toast.displayName = "Toast";
-
 ToastProvider.displayName = "ToastProvider";
+
 Toast.Provider = ToastProvider;
-
-Toast = withStyles(styles)(Toast);
-
-export { Toast };
