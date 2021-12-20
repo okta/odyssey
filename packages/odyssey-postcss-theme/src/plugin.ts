@@ -19,7 +19,7 @@ const plugin: PluginCreator<never> = () => ({
   Declaration: (decl) => {
     const replaced = decl.value.replace(
       customPropRegex,
-      (_, capture) => `\$\{theme.${capture} || 'inherit'\}`
+      (_, capture) => `\$\{theme.${capture}\}`
     );
     decl.value = replaced;
   },

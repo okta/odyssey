@@ -12,19 +12,19 @@
 
 import React, { useCallback } from "react";
 import type {
-  ComponentProps,
   FunctionComponent,
   FocusEventHandler,
   ChangeEvent,
   RefCallback,
 } from "react";
-import { useOid, useCx, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOid, useCx } from "../../utils";
 import { SearchIcon } from "../Icon/Search";
 import styles from "./TextInput.module.scss";
 import { Field } from "../Field";
 import type { SharedFieldTypes } from "../Field/types";
 
-interface Props extends SharedFieldTypes {
+export interface TextInputProps extends SharedFieldTypes {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
@@ -103,7 +103,10 @@ interface Props extends SharedFieldTypes {
 /**
  * Text inputs allow users to edit and input data.
  */
-let TextInput: FunctionComponent<Props> = (props) => {
+export const TextInput: FunctionComponent<TextInputProps> = withTheme(
+  () => ({}),
+  styles
+)((props) => {
   const {
     defaultValue,
     disabled = false,
@@ -180,11 +183,6 @@ let TextInput: FunctionComponent<Props> = (props) => {
       {type === "search" ? search : input}
     </Field>
   );
-};
+});
 
 TextInput.displayName = "TextInput";
-
-TextInput = withStyles(styles)(TextInput);
-
-export type TextInputProps = ComponentProps<typeof TextInput>;
-export { TextInput };

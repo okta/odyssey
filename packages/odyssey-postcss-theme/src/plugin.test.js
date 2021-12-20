@@ -22,13 +22,13 @@ async function run(input, output) {
 it("transforms css custom properties", async () => {
   await run(
     "a { color: var(--linkColor); }",
-    "a { color: ${theme.linkColor || 'inherit'}; }"
+    "a { color: ${theme.linkColor}; }"
   );
 });
 
 it("transforms css custom properties within shorthand syntax", async () => {
   await run(
     "a { margin: var(--linkMarginTop) 2rem var(--linkMarginBottom) 1rem; }",
-    "a { margin: ${theme.linkMarginTop || 'inherit'} 2rem ${theme.linkMarginBottom || 'inherit'} 1rem; }"
+    "a { margin: ${theme.linkMarginTop} 2rem ${theme.linkMarginBottom} 1rem; }"
   );
 });

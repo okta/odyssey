@@ -10,28 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef } from "react";
-import type { ReactElement, ComponentPropsWithRef } from "react";
-import { useOmit } from "../../utils";
-
-export interface TableHeaderProps
-  extends Omit<ComponentPropsWithRef<"thead">, "style" | "className"> {
-  children?: ReactElement | ReactElement[];
-}
-
-export const TableHeader = forwardRef<
-  HTMLTableSectionElement,
-  TableHeaderProps
->((props, ref) => {
-  const { children, ...rest } = props;
-
-  const omitProps = useOmit(rest);
-
-  return (
-    <thead {...omitProps} ref={ref}>
-      {children}
-    </thead>
-  );
-});
-
-TableHeader.displayName = "TableHeader";
+export const supportsCustomProperties: boolean = (() => {
+  try {
+    return window.CSS.supports("--custom: properties");
+  } catch (_) {
+    return false;
+  }
+})();
