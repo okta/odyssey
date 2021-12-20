@@ -142,7 +142,6 @@ export interface BoxProps {
   maxHeight?: "screen" | "screen-minus-padding";
   /**
    * Margin applied outside the box border
-   * @default "0"
    */
   margin?: spacing | spacing[];
   /**
@@ -163,7 +162,6 @@ export interface BoxProps {
   marginLeft?: spacing;
   /**
    * Padding applied inside the box between the border and the content
-   * @default "0"
    */
   padding?: spacing | spacing[];
   /**
@@ -357,12 +355,12 @@ export const Box = withTheme(
         maxWidth,
         height,
         maxHeight,
-        margin = "0",
+        margin,
         marginTop,
         marginRight,
         marginBottom,
         marginLeft,
-        padding = "0",
+        padding,
         paddingTop,
         paddingRight,
         paddingBottom,
