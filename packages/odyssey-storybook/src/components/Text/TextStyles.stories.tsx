@@ -58,7 +58,7 @@ BodyInverse.parameters = {
   backgrounds: { default: "Page Background (dark)" },
 };
 BodyInverse.args = {
-  children: "Danger (disabled) text color",
+  children: "Body inverse",
   color: "body-inverse",
 };
 

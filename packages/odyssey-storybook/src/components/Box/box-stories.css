@@ -10,28 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.root {
-  box-sizing: border-box;
-  font-family: $body-font-family;
-  font-variant: normal;
-  letter-spacing: 0;
-  font-feature-settings: "lnum", "pnum";
-  text-decoration-skip-ink: all;
-
-  &::before,
-  &::after {
-    box-sizing: inherit;
-  }
-
-  // Catch-all border-box
-  /* stylelint-disable selector-max-universal */
-  * {
-    box-sizing: border-box;
-
-    &::before,
-    &::after {
-      box-sizing: inherit;
-    }
-  }
-  /* stylelint-enable selector-max-universal */
+.test-class {
+  /* stylelint-disable-next-line property-disallowed-list */
+  padding: 16px;
+  background-color: #663399;
+  color: #ffffff;
 }

@@ -164,6 +164,11 @@ export const Text = withTheme(
         {...omitProps}
         ref={ref}
         className={componentClass}
+        color={false}
+        fontWeight={false}
+        fontStyle={false}
+        fontSize={false}
+        lineHeight={false}
         children={children}
       />
     );

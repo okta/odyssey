@@ -20,7 +20,10 @@ import styles from "./Status.module.scss";
 import { theme } from "./Status.theme";
 
 export interface StatusProps
-  extends Omit<ComponentPropsWithRef<"div">, "style" | "className" | "role"> {
+  extends Omit<
+    ComponentPropsWithRef<"div">,
+    "style" | "className" | "role" | "color"
+  > {
   /**
    * The status label.
    */
