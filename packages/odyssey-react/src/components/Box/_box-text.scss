@@ -10,28 +10,42 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.root {
-  box-sizing: border-box;
-  font-family: $body-font-family;
-  font-variant: normal;
-  letter-spacing: 0;
-  font-feature-settings: "lnum", "pnum";
-  text-decoration-skip-ink: all;
+.colorBody {
+  color: $text-body;
+}
 
-  &::before,
-  &::after {
-    box-sizing: inherit;
-  }
+.colorInherit {
+  color: inherit;
+}
 
-  // Catch-all border-box
-  /* stylelint-disable selector-max-universal */
-  * {
-    box-sizing: border-box;
+.fontWeightRegular {
+  font-weight: 400;
+}
 
-    &::before,
-    &::after {
-      box-sizing: inherit;
-    }
-  }
-  /* stylelint-enable selector-max-universal */
+.fontWeightInherit {
+  font-weight: inherit;
+}
+
+.fontStyleNormal {
+  font-style: normal;
+}
+
+.fontStyleInherit {
+  font-style: inherit;
+}
+
+.fontSizeBase {
+  font-size: $size-body-base;
+}
+
+.fontSizeInherit {
+  font-size: inherit;
+}
+
+.lineHeightNormal {
+  line-height: $base-line-height;
+}
+
+.lineHeightInherit {
+  line-height: inherit;
 }

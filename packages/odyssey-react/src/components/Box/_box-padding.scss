@@ -11,6 +11,10 @@
  */
 
 /* stylelint-disable property-disallowed-list */
+.padding0 {
+  padding: 0;
+}
+
 .paddingXs {
   padding: $spacing-xs;
 }

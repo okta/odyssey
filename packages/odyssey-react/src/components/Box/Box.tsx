@@ -20,7 +20,7 @@ import {
 } from "../../utils";
 import styles from "./Box.module.scss";
 
-type spacing = "xs" | "s" | "m" | "l" | "xl";
+type spacing = "xs" | "s" | "m" | "l" | "xl" | "0" | false;
 type overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
 type borderRadius = "base" | "outer" | "none";
 
@@ -296,6 +296,31 @@ export interface BoxProps {
    * Content selection
    */
   userSelect?: "none" | "text" | "contain" | "all" | "auto";
+  /**
+   * Whether to apply the body text color class
+   * @default body
+   */
+  color?: "body" | "inherit" | false;
+  /**
+   * Whether to apply the normal font weight class
+   * @default regular
+   */
+  fontWeight?: "regular" | "inherit" | false;
+  /**
+   * Whether to apply the normal font style class
+   * @default normal
+   */
+  fontStyle?: "normal" | "inherit" | false;
+  /**
+   * Whether to apply the base font size class
+   * @default base
+   */
+  fontSize?: "base" | "inherit" | false;
+  /**
+   * Whether to apply the base line height class
+   * @default normal
+   */
+  lineHeight?: "normal" | "inherit" | false;
 }
 
 /**
@@ -309,6 +334,11 @@ export const Box = withTheme(
     (
       {
         as = "div",
+        color = "body",
+        fontWeight = "regular",
+        fontStyle = "normal",
+        fontSize = "base",
+        lineHeight = "normal",
         display,
         position,
         flexDirection,
@@ -486,9 +516,9 @@ export const Box = withTheme(
           styles[`overflow${toPascalCase(overflow)}`],
         overflowX && styles[`overflowX${toPascalCase(overflowX)}`],
         overflowY && styles[`overflowY${toPascalCase(overflowY)}`],
-        borderColor !== "none" && styles.borderBase,
+        borderColor && borderColor !== "none" && styles.borderBase,
         borderColor && styles[`borderColor${toPascalCase(borderColor)}`],
-        hoverBorderColor !== "none" && styles.borderBase,
+        hoverBorderColor && hoverBorderColor !== "none" && styles.borderBase,
         hoverBorderColor &&
           styles[`hoverBorderColor${toPascalCase(hoverBorderColor)}`],
         focusBorderColor &&
@@ -517,6 +547,11 @@ export const Box = withTheme(
         cursor && styles[`cursor${toPascalCase(cursor)}`],
         pointerEvents && styles[`pointerEvents${toPascalCase(pointerEvents)}`],
         userSelect && styles[`userSelect${toPascalCase(userSelect)}`],
+        color && styles[`color${toPascalCase(color)}`],
+        fontWeight && styles[`fontWeight${toPascalCase(fontWeight)}`],
+        fontStyle && styles[`fontStyle${toPascalCase(fontStyle)}`],
+        fontSize && styles[`fontSize${toPascalCase(fontSize)}`],
+        lineHeight && styles[`lineHeight${toPascalCase(lineHeight)}`],
         className
       );
 
