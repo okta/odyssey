@@ -72,7 +72,7 @@ export const RadioButton = withTheme(
     );
 
     return (
-      <Box className="root">
+      <Box className={styles.root}>
         <input
           {...omitProps}
           aria-describedby={ariaDescribedBy}
