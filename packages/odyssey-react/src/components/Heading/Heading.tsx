@@ -85,6 +85,7 @@ export const Heading = withTheme(
         className={componentClass}
         color={false}
         fontWeight={false}
+        fontSize={false}
       >
         {children}
       </Box>
