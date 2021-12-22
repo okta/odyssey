@@ -179,8 +179,8 @@
       border-color: $color-primary-base;
     }
   }
+}
 
-  &:last-child {
-    margin-block-end: 0;
-  }
+.root:last-child > .label {
+  margin-block-end: 0;
 }
