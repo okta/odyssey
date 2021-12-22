@@ -13,9 +13,13 @@
 import React, { forwardRef } from "react";
 import type { ReactElement, ComponentPropsWithRef } from "react";
 import { useOmit } from "../../../utils";
+import { Box } from "../../Box";
 
 export interface SelectOptionGroupProps
-  extends Omit<ComponentPropsWithRef<"optgroup">, "style" | "className"> {
+  extends Omit<
+    ComponentPropsWithRef<"optgroup">,
+    "style" | "className" | "color"
+  > {
   /**
    * One or more option to be used together as a group
    */
@@ -40,9 +44,9 @@ const SelectOptionGroup = forwardRef<
   const omitProps = useOmit(rest);
 
   return (
-    <optgroup {...omitProps} ref={ref}>
+    <Box as="optgroup" {...omitProps} ref={ref}>
       {children}
-    </optgroup>
+    </Box>
   );
 });
 
