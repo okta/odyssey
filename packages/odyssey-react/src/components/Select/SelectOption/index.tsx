@@ -13,11 +13,12 @@
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useOmit } from "../../../utils";
+import { Box } from "../../Box";
 
 export interface SelectOptionProps
   extends Omit<
     ComponentPropsWithRef<"option">,
-    "style" | "className" | "selected"
+    "style" | "className" | "selected" | "color"
   > {
   /**
    * The underlying option element value attribute.
@@ -36,9 +37,9 @@ const SelectOption = forwardRef<HTMLOptionElement, SelectOptionProps>(
     const omitProps = useOmit(rest);
 
     return (
-      <option {...omitProps} ref={ref}>
+      <Box as="option" {...omitProps} ref={ref}>
         {children}
-      </option>
+      </Box>
     );
   }
 );
