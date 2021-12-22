@@ -12,12 +12,13 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
+import { Box } from "../Box";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOmit } from "../../utils";
 import styles from "./Heading.module.scss";
 
 export interface HeadingProps
-  extends Omit<ComponentPropsWithRef<"h1">, "style" | "className"> {
+  extends Omit<ComponentPropsWithRef<"h1">, "style" | "className" | "color"> {
   /**
    * The semantic level for the underlying heading tag
    * @default 1
@@ -65,7 +66,7 @@ export const Heading = withTheme(
       ...rest
     } = props;
 
-    const Tag = `h${level}` as const;
+    const tag = `h${level}` as const;
 
     const componentClass = useCx(
       styles.root,
@@ -77,9 +78,18 @@ export const Heading = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <Tag {...omitProps} ref={ref} className={componentClass}>
+      <Box
+        as={tag}
+        {...omitProps}
+        ref={ref}
+        className={componentClass}
+        color={false}
+        fontWeight={false}
+        fontSize={false}
+        lineHeight={false}
+      >
         {children}
-      </Tag>
+      </Box>
     );
   })
 );
