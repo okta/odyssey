@@ -14,6 +14,7 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOmit } from "../../utils";
+import { Box } from "../Box";
 import { Heading } from "../Heading";
 import { Button } from "../Button";
 import { Text } from "../Text";
@@ -22,7 +23,10 @@ import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
 
 interface CommonProps
-  extends Omit<ComponentPropsWithRef<"div">, "style" | "className" | "role"> {
+  extends Omit<
+    ComponentPropsWithRef<"div">,
+    "style" | "className" | "role" | "color"
+  > {
   /**
    * The visual variant to be displayed to the user.
    * @default info
@@ -91,7 +95,7 @@ export const Banner = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <div
+      <Box
         {...omitProps}
         ref={ref}
         className={componentClass}
@@ -129,7 +133,7 @@ export const Banner = withTheme(
             />
           </span>
         )}
-      </div>
+      </Box>
     );
   })
 );
