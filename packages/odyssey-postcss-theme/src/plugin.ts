@@ -16,12 +16,13 @@ const customPropRegex = /var\(--([A-z][\w-]*)\)/g;
 
 const plugin: PluginCreator<never> = () => ({
   postcssPlugin: "odyssey-postcss-theme",
-  Declaration: (decl) => {
-    const replaced = decl.value.replace(
-      customPropRegex,
-      (_, capture) => `\$\{theme.${capture}\}`
-    );
-    decl.value = replaced;
+  OnceExit(root) {
+    root.walkDecls((decl) => {
+      decl.value = decl.value.replace(
+        customPropRegex,
+        (_, capture) => `\$\{theme.${capture}\}`
+      );
+    });
   },
 });
 
