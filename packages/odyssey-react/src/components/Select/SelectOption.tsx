@@ -12,8 +12,8 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
-import { useOmit } from "../../../utils";
-import { Box } from "../../Box";
+import { useOmit } from "../../utils";
+import { Box } from "../Box";
 
 export interface SelectOptionProps
   extends Omit<
