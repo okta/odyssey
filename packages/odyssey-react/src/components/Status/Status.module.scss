@@ -21,7 +21,9 @@ $status-border-radius: 1em;
 
 .value {
   position: relative;
-  padding-inline-start: $status-indicator-size + $spacing-xs-em;
+  padding-inline-start: calc(
+    #{$status-indicator-size} + var(--SpaceRelativeXs)
+  );
   background-color: transparent;
 
   &::before {
