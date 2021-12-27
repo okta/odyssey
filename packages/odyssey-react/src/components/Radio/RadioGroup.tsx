@@ -12,10 +12,10 @@
 
 import React from "react";
 import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
-import { RadioGroupProvider } from "../context";
-import { useOid } from "../../../utils";
-import { Field } from "../../Field";
-import type { SharedFieldTypes } from "../../Field/types";
+import { RadioGroupProvider } from "./context";
+import { useOid } from "../../utils";
+import { Field } from "../Field";
+import type { SharedFieldTypes } from "../Field/types";
 
 export interface RadioGroupProps
   extends SharedFieldTypes,
