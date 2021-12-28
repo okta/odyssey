@@ -11,11 +11,6 @@
  */
 
 import type * as Babel from "@babel/core";
-import type {
-  VariableDeclaration,
-  ObjectExpression,
-  NewExpression,
-} from "@babel/traverse/node_modules/@babel/types";
 import type { File } from "./compile";
 import { resolve, dirname } from "path";
 import compileFactory from "./compileFactory";
@@ -67,7 +62,7 @@ export default function transformStyles({
           path.replaceWith(
             identityObjectProxyVariableDeclaration({
               name: specifier.local.name,
-            }) as VariableDeclaration
+            })
           );
 
           return;
@@ -85,7 +80,7 @@ export default function transformStyles({
           variableDeclaration({
             name: specifier.local.name,
             ...file,
-          }) as VariableDeclaration
+          })
         );
       },
 
@@ -118,7 +113,7 @@ export default function transformStyles({
         }
 
         if (opts.identityObjectProxy) {
-          path.replaceWith(identityObjectProxy() as NewExpression);
+          path.replaceWith(identityObjectProxy());
 
           return;
         }
@@ -131,7 +126,7 @@ export default function transformStyles({
           fileMap.set(filePath, file);
         }
 
-        path.replaceWith(tokenObjectExpression(file) as ObjectExpression);
+        path.replaceWith(tokenObjectExpression(file));
       },
     },
   };

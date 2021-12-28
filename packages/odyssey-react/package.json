@@ -16,7 +16,7 @@
     "choices.js": "^9.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "*",
+    "@babel/cli": "^7.14.8",
     "@okta/browserslist-config-odyssey": "^0.8.4",
     "@okta/odyssey-babel-preset": "^0.8.4",
     "@okta/odyssey-eslint": "^0.8.4",
@@ -34,10 +34,15 @@
     "@types/react": "^17.0.30",
     "@types/react-dom": "^17.0.5",
     "babel-jest": "^26.6.3",
+    "chokidar": "^3.4.0",
     "jest": "^26.6.3",
     "jest-axe": "^5.0.1",
+    "postcss": "^8.3.6",
+    "postcss-load-config": "^3.1.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "regenerator-runtime": "^0.13.7",
+    "sass": "^1.42.1"
   },
   "peerDependencies": {
     "react": ">=16 <18",

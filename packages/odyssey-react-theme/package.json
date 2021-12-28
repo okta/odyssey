@@ -16,7 +16,7 @@
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
-    "@babel/cli": "*",
+    "@babel/cli": "^7.14.8",
     "@okta/browserslist-config-odyssey": "^0.8.4",
     "@okta/odyssey-babel-preset": "^0.8.4",
     "@okta/odyssey-eslint": "^0.8.4",
@@ -29,7 +29,8 @@
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "regenerator-runtime": "^0.13.7"
   },
   "peerDependencies": {
     "react": ">=16 <18",
