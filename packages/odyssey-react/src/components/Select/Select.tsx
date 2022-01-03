@@ -13,15 +13,15 @@
 import React, { useCallback } from "react";
 import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
-import { SelectOption } from "../SelectOption";
-import { SelectOptionGroup } from "../SelectOptionGroup";
+import { SelectOption } from "./SelectOption";
+import { SelectOptionGroup } from "./SelectOptionGroup";
 import { useChoices } from "./useChoices";
 import type { ChoicesHTMLSelectElement } from "./useChoices";
-import { forwardRefWithStatics, useOid, useOmit } from "../../../utils";
-import { Field } from "../../Field";
-import type { SharedFieldTypes } from "../../Field/types";
-import { CaretDownIcon } from "../../Icon";
-import styles from "../Select.module.scss";
+import { forwardRefWithStatics, useOid, useOmit } from "../../utils";
+import { Field } from "../Field";
+import type { SharedFieldTypes } from "../Field/types";
+import { CaretDownIcon } from "../Icon";
+import styles from "./Select.module.scss";
 
 interface CommonProps
   extends SharedFieldTypes,
