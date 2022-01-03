@@ -10,21 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { PluginCreator } from "postcss";
+const postcss = require("postcss");
+const { default: plugin } = require("../dist");
 
-const customPropRegex = /var\(--([A-z][\w-]*)\)/g;
+async function run(input, output, importData = "") {
+  const result = await postcss([plugin({ importData })]).process(input, {
+    from: undefined,
+  });
+  expect(result.css).toEqual(output);
+  expect(result.warnings()).toHaveLength(0);
+}
 
-const plugin: PluginCreator<never> = () => ({
-  postcssPlugin: "odyssey-postcss-theme",
-  OnceExit(root) {
-    root.walkDecls((decl) => {
-      decl.value = decl.value.replace(
-        customPropRegex,
-        (_, capture) => `\$\{theme.${capture}\}`
-      );
-    });
-  },
+it("transforms scss", async () => {
+  await run("$color: red; a { color: $color }", "a {\n  color: red;\n}");
 });
 
-plugin.postcss = true;
-export { plugin as default };
+it("transforms scss with importData", async () => {
+  await run("a { color: $color }", "a {\n  color: red;\n}", "$color: red;");
+});
