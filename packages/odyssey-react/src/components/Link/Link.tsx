@@ -59,7 +59,14 @@ export const Link = withTheme(
     const external = rest.target === `_blank`;
 
     return (
-      <Box as="a" color={false} {...omitProps} ref={ref} className={classNames}>
+      <Box
+        as="a"
+        color={false}
+        fontStyle={false}
+        {...omitProps}
+        ref={ref}
+        className={classNames}
+      >
         {icon && <span className={styles.icon}>{icon}</span>}
         {children}
         {external && (
