@@ -19,6 +19,7 @@ import type {
 } from "react";
 import { createPortal } from "react-dom";
 import { withTheme } from "@okta/odyssey-react-theme";
+import { Box } from "../Box";
 import { Button as CoreButton } from "../Button";
 import type { ButtonProps as CoreButtonProps } from "../Button";
 import { Heading } from "../Heading";
@@ -107,7 +108,7 @@ export const Modal = withTheme(
 
     return createPortal(
       <ModalContext.Provider value={context}>
-        <div ref={ref} className={componentClass} id={oid} hidden={!open}>
+        <Box ref={ref} className={componentClass} id={oid} hidden={!open}>
           <div className={styles.overlay} tabIndex={-1}>
             <div
               className={styles.dialog}
@@ -119,7 +120,7 @@ export const Modal = withTheme(
               {children}
             </div>
           </div>
-        </div>
+        </Box>
       </ModalContext.Provider>,
       document.body
     );
@@ -129,7 +130,7 @@ export const Modal = withTheme(
 const Header = ({ children }: PropsModalHeader) => {
   const { modalTitleId, closeMessage } = useContext(ModalContext);
   return (
-    <header className={styles.header}>
+    <Box as="header" className={styles.header}>
       <span className={styles.dismiss}>
         <Modal.Button
           close
@@ -144,16 +145,20 @@ const Header = ({ children }: PropsModalHeader) => {
         lineHeight="title"
         children={children}
       />
-    </header>
+    </Box>
   );
 };
 
 const Body: FunctionComponent<PropsModalBody> = ({ children }) => (
-  <main className={styles.content}>{children}</main>
+  <Box as="main" className={styles.content} data-body="body">
+    {children}
+  </Box>
 );
 
 const Footer: FunctionComponent<PropsModalFooter> = ({ children }) => (
-  <footer className={styles.footer}>{children}</footer>
+  <Box as="footer" className={styles.footer}>
+    {children}
+  </Box>
 );
 
 const Button: FunctionComponent<PropsModalButton> = (
