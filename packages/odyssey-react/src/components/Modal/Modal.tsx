@@ -150,7 +150,7 @@ const Header = ({ children }: PropsModalHeader) => {
 };
 
 const Body: FunctionComponent<PropsModalBody> = ({ children }) => (
-  <Box as="main" className={styles.content} data-body="body">
+  <Box as="main" className={styles.content}>
     {children}
   </Box>
 );
