@@ -23,6 +23,10 @@
   border: 1px solid cv("gray", "900");
   opacity: 0;
   background: cv("gray", "900");
+  color: $text-body-inverse;
+  font-size: $size-body-caption;
+  font-weight: 600;
+  line-height: $title-line-height;
   white-space: nowrap;
   pointer-events: none;
 

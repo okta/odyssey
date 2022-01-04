@@ -15,9 +15,12 @@ import type { ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOid, useOmit } from "../../utils";
 import styles from "./Tooltip.module.scss";
-import { Text } from "../Text";
+import { Box } from "../Box";
 export interface TooltipProps
-  extends Omit<ComponentPropsWithRef<"aside">, "style" | "className" | "role"> {
+  extends Omit<
+    ComponentPropsWithRef<"aside">,
+    "style" | "className" | "role" | "color"
+  > {
   /**
    * Content to be rendered that needs a tooltip label
    */
@@ -53,22 +56,16 @@ export const Tooltip = withTheme(
     return (
       <span className={styles.hasTooltip}>
         {clone}
-        <aside
+        <Box
+          as="aside"
           {...omitProps}
           ref={ref}
           id={oid}
           className={tooltipClasses}
           role="tooltip"
         >
-          <Text
-            color="body-inverse"
-            fontSize="caption"
-            fontWeight="bold"
-            lineHeight="title"
-          >
-            {label}
-          </Text>
-        </aside>
+          {label}
+        </Box>
       </span>
     );
   })
