@@ -17,6 +17,7 @@ import { ExternalIcon } from "../Icon";
 import { useCx, useOmit } from "../../utils";
 import { Box } from "../Box";
 import styles from "./Link.module.scss";
+import { theme } from "./Link.theme";
 
 export interface LinkProps
   extends Omit<
@@ -49,7 +50,7 @@ export interface LinkProps
  * Links are navigation elements displayed as text. Use a Link to bring a user to another page or start a download.
  */
 export const Link = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
