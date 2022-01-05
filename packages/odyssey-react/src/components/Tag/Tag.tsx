@@ -15,12 +15,12 @@ import type { ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit } from "../../utils";
 import styles from "./Tag.module.scss";
-import { Text } from "../Text";
+import { Box } from "../Box";
 
 export interface TagProps
   extends Omit<
     ComponentPropsWithRef<"ul">,
-    "style" | "className" | "children"
+    "style" | "className" | "children" | "color"
   > {
   /**
    * Children are never rendered.
@@ -46,13 +46,13 @@ export const Tag = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <ul {...omitProps} ref={ref} className={styles.list}>
+      <Box as="ul" {...omitProps} ref={ref} className={styles.list}>
         {tags.map((item) => (
           <li className={styles.tag} key={item}>
-            <Text>{item}</Text>
+            {item}
           </li>
         ))}
-      </ul>
+      </Box>
     );
   })
 );
