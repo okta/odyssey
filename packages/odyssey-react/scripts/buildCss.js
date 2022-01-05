@@ -23,8 +23,6 @@ const scssSource = [
   "abstracts/mixins",
   "abstracts/tokens",
   "base/reset",
-  "base/typography-global",
-  "base/typography-text",
 ];
 
 const importDir = resolve(require.resolve("@okta/odyssey"), "..");
