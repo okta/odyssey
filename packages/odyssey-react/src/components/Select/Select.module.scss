@@ -494,6 +494,8 @@
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
+  font-family: inherit;
+  font-size: 100%;
   text-indent: -9999px;
   appearance: none;
 
@@ -507,12 +509,13 @@
 
   display: inline-block;
   max-width: 100%;
+  border: 0;
+  background-color: $white;
+  font-family: inherit;
   margin-block-end: 5px;
   padding-block: 4px;
   padding-inline-start: 2px;
   padding-inline-end: 0;
-  border: 0;
-  background-color: $white;
   vertical-align: baseline;
 
   &:focus {

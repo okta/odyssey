@@ -22,7 +22,10 @@ import { ScreenReaderText } from "../ScreenReaderText";
 import { CommonFieldProps } from "./types";
 import { Text } from "../Text";
 import { Box } from "../Box";
+import { useCx } from "../../utils";
 import styles from "./Field.module.scss";
+import { theme } from "./Field.theme";
+import { FieldError } from "./FieldError";
 
 export type FieldProps = CommonFieldProps & {
   /**
@@ -53,11 +56,6 @@ interface HintProps {
   id: string;
   children: ReactText;
 }
-interface FieldErrorProps {
-  id: string;
-  children: ReactNode;
-}
-
 interface Statics {
   Label: typeof Label;
   Hint: typeof Hint;
@@ -65,7 +63,7 @@ interface Statics {
 }
 
 export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   Object.assign(
@@ -83,11 +81,15 @@ export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
       } = props;
 
       const TagLabel = as === "fieldset" ? "legend" : "label";
+      const componentClass = useCx(
+        styles.root,
+        as === "fieldset" && styles.fieldset
+      );
 
       return (
         <Box
           as={as}
-          className={styles.root}
+          className={componentClass}
           display="flex"
           flexDirection="column"
         >
@@ -171,17 +173,6 @@ function Hint({ id, children }: HintProps) {
   );
 }
 
-function FieldError({ id, children }: FieldErrorProps) {
-  return (
-    <Box as="p" className={styles.error} id={`${id}-error`}>
-      <Text color="danger" fontSize="caption">
-        {children}
-      </Text>
-    </Box>
-  );
-}
-
 Field.displayName = "Field";
 Label.displayName = "FieldLabel";
 Hint.displayName = "FieldHint";
-FieldError.displayName = "FieldError";

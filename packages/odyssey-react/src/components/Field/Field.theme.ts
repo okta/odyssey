@@ -10,35 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.root {
-  max-width: $max-line-length;
-  margin-block-start: 0;
-  margin-block-end: $spacing-m;
-  padding-inline: 0;
-  padding-block-start: 0;
-  padding-block-end: $spacing-m;
-  margin-inline: 0;
-  border-block-end: 1px solid $border-color-display;
-  border: none;
+import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
-  &:last-child {
-    margin-block: 0;
-    margin-inline: 0;
-    border-block-end: 0;
-  }
-}
-
-.title {
-  margin-block: 0;
-  margin-inline: 0;
-  padding-block: 0;
-  padding-inline: 0;
-  color: $text-heading;
-  font-size: $size-title-4;
-  font-weight: 600;
-  line-height: $title-line-height;
-}
-
-.error {
-  margin-block-end: $spacing-m;
-}
+export const theme: ThemeReducer = () => ({});
