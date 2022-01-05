@@ -57,7 +57,7 @@ bundled, and polyfilled for advanced use cases and browser support targets.
 
 ## License
 
-[Apache Version 2.0](https://github.com/okta/odyssey/blob/master/LICENSE).
+[Apache Version 2.0](https://github.com/okta/odyssey/blob/master/LICENSE)
 
 ## Support Disclaimer
 

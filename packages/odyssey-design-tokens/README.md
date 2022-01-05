@@ -36,7 +36,7 @@ Tokens are published in two formats: ESM and SCSS.
 
 ## License
 
-[Apache Version 2.0](https://github.com/okta/odyssey/blob/master/LICENSE).
+[Apache Version 2.0](https://github.com/okta/odyssey/blob/master/LICENSE)
 
 ## Support Disclaimer
 
