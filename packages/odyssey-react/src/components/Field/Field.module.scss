@@ -13,10 +13,20 @@
 .root {
   max-width: $max-line-length;
   margin-block-end: $spacing-m;
-
+  padding-block-start: 0;
   &:last-child {
     margin-block-end: 0;
   }
+}
+
+.fieldset {
+  margin-block-start: 0;
+  margin-block-end: $spacing-m;
+  padding-block-end: $spacing-m;
+  margin-inline: 0;
+  padding-inline: 0;
+  border: 0;
+  padding-block-start: 0;
 }
 
 .label {
@@ -24,6 +34,7 @@
   margin-block-start: 0;
   margin-block-end: $spacing-xs;
   margin-inline: 0;
+  padding-inline: 0;
 }
 
 .optionalLabel {
@@ -33,8 +44,4 @@
 .hint {
   margin-block-start: -$spacing-xs;
   margin-block-end: $spacing-xs;
-}
-
-.error {
-  margin-block-start: $spacing-xs;
 }

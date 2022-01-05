@@ -12,7 +12,11 @@
 
 import React from "react";
 import type { Story } from "@storybook/react";
-import { ScreenReaderText, ScreenReaderTextProps } from "@okta/odyssey-react";
+import {
+  ScreenReaderText,
+  ScreenReaderTextProps,
+  Text,
+} from "@okta/odyssey-react";
 import { ScreenReaderText as Source } from "../../../../odyssey-react/src";
 
 export default {
@@ -21,10 +25,10 @@ export default {
 };
 
 const Template: Story<ScreenReaderTextProps> = ({ children }) => (
-  <p>
+  <Text>
     The following content is visually hidden:{" "}
     <ScreenReaderText>{children}</ScreenReaderText>
-  </p>
+  </Text>
 );
 
 export const Default = Template.bind({});

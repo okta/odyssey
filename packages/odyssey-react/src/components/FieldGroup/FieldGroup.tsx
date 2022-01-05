@@ -14,6 +14,7 @@ import React from "react";
 import type { FunctionComponent, ReactNode, ReactElement } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { Box } from "../Box";
+import { Text } from "../Text";
 import { useOmit } from "../../utils";
 import styles from "./FieldGroup.module.scss";
 
@@ -56,7 +57,7 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> & Statics =
         return (
           <Box as="fieldset" {...omitProps} className={styles.root}>
             {title && <legend className={styles.title}>{title}</legend>}
-            {desc && <p>{desc}</p>}
+            {desc && <Text as="p">{desc}</Text>}
             {children}
           </Box>
         );
