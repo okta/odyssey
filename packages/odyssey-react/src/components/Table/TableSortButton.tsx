@@ -69,7 +69,13 @@ export const TableSortButton = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <Box as="button" {...omitProps} ref={ref} className={componentClass}>
+      <Box
+        as="button"
+        {...omitProps}
+        ref={ref}
+        className={componentClass}
+        lineHeight={false}
+      >
         {children}
         <span className={styles.sortIndicator}>
           {direction === "unsorted" && <SortIcon title={unsortedIconTitle} />}
