@@ -80,7 +80,13 @@ export const Table = withTheme(
     const omitProps = useOmit(rest);
 
     const TableEl = () => (
-      <Box as="table" {...omitProps} ref={ref} className={styles.root}>
+      <Box
+        as="table"
+        {...omitProps}
+        ref={ref}
+        className={styles.root}
+        lineHeight={false}
+      >
         <caption>
           <ScreenReaderText>{caption}</ScreenReaderText>
         </caption>
