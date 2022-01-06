@@ -14,6 +14,7 @@ import React, { useState, useRef, forwardRef } from "react";
 import type { ReactElement, ReactText, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { forwardRefWithStatics, useCx, useOid } from "../../utils";
+import { Box } from "../Box";
 import styles from "./Tabs.module.scss";
 
 export type TabsProps = {
@@ -163,15 +164,15 @@ export const Tabs = withTheme(
 
 const Container = forwardRef<HTMLDivElement, PropsTabsContainer>(
   ({ children, id, ariaLabel }, ref) => (
-    <div id={id} aria-label={ariaLabel} data-testid="ods-tabs" ref={ref}>
+    <Box id={id} aria-label={ariaLabel} data-testid="ods-tabs" ref={ref}>
       {children}
-    </div>
+    </Box>
   )
 );
 
 const List = forwardRef<HTMLDivElement, PropsTabsList>(
   ({ children, onKeyUp }, ref) => (
-    <div
+    <Box
       tabIndex={-1}
       role="tablist"
       aria-label="label"
@@ -180,7 +181,7 @@ const List = forwardRef<HTMLDivElement, PropsTabsList>(
       ref={ref}
     >
       {children}
-    </div>
+    </Box>
   )
 );
 
@@ -196,7 +197,8 @@ const Tab = function TabsTab({
   });
 
   return (
-    <button
+    <Box
+      as="button"
       id={id}
       role="tab"
       tabIndex={selected ? 0 : -1}
@@ -204,18 +206,21 @@ const Tab = function TabsTab({
       aria-selected={selected}
       className={componentClass}
       onClick={onClick}
+      color={false}
+      fontSize={false}
+      fontWeight={false}
     >
       {children}
-    </button>
+    </Box>
   );
 };
 
 const PanelContainer = ({ children }: PropsTabsPanelContainer) => (
-  <div className="ods-tabs--tabpanel">{children}</div>
+  <Box className="ods-tabs--tabpanel">{children}</Box>
 );
 
 const Panel = ({ children, id, selected }: PropsTabsPanel) => (
-  <div
+  <Box
     id={id}
     role="tabpanel"
     className={styles.tabpanel}
@@ -224,7 +229,7 @@ const Panel = ({ children, id, selected }: PropsTabsPanel) => (
     hidden={!selected}
   >
     {children}
-  </div>
+  </Box>
 );
 
 type Statics = {
