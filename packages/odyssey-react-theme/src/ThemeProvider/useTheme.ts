@@ -10,18 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext } from "react";
-import * as DesignTokens from "@okta/odyssey-design-tokens";
+import { useContext } from "react";
+import { ThemeContext } from "./context";
+import type { Theme } from "./context";
 
-export const tokens = { ...DesignTokens };
-
-export type Theme = typeof tokens;
-export type PartialTheme = Partial<Theme>;
-export type ThemeKey = keyof Theme;
-export type ThemeValue = Theme[ThemeKey];
-
-const ThemeContext = createContext<Theme>(tokens);
-
-ThemeContext.displayName = "ThemeContext";
-
-export { ThemeContext };
+export const useTheme = (): Theme => useContext(ThemeContext);

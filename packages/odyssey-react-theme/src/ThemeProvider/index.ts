@@ -12,3 +12,4 @@
 
 export * from "./ThemeProvider";
 export type { Theme } from "./context";
+export * from "./useTheme";
