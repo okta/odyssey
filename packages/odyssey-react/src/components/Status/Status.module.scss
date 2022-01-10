@@ -15,15 +15,13 @@ $status-border-radius: 1em;
 
 .label {
   display: block;
-  margin-block-end: var(--SpaceFixedXs);
+  margin-block-end: var(--SpaceRemXs);
   font-weight: var(--FontWeightBold);
 }
 
 .value {
   position: relative;
-  padding-inline-start: calc(
-    #{$status-indicator-size} + var(--SpaceRelativeXs)
-  );
+  padding-inline-start: calc(#{$status-indicator-size} + var(--SpaceEmXs));
   background-color: transparent;
 
   &::before {
@@ -35,7 +33,7 @@ $status-border-radius: 1em;
     inset-inline-start: 0;
     width: $status-indicator-size;
     height: $status-indicator-size;
-    margin-inline-end: var(--SpaceFixedXs);
+    margin-inline-end: var(--SpaceRemXs);
     transform: translateY(-50%);
     background-color: var(--ColorIndicatorNeutral);
   }

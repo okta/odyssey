@@ -17,8 +17,8 @@ export const theme: ThemeReducer = (theme) => ({
   FontWeightBold: theme.FontWeightBold,
 
   // Space
-  SpaceFixedXs: theme.SpaceFixedXs,
-  SpaceRelativeXs: theme.SpaceRelativeXs,
+  SpaceRemXs: theme.SpaceRemXs,
+  SpaceEmXs: theme.SpaceEmXs,
 
   // Caution Variant
   ColorIndicatorCaution: theme.ColorCautionBase,
