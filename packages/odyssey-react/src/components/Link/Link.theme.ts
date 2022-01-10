@@ -20,5 +20,5 @@ export const theme: ThemeReducer = (theme) => ({
   ColorTextBody: theme.ColorTextBody,
 
   // Space
-  SpaceRelativeXs: theme.SpaceRelativeXs,
+  SpaceEmXs: theme.SpaceEmXs,
 });
