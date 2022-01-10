@@ -10,84 +10,64 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-$color-background-default: $white;
-
-$color-background-disabled: cv("gray", "000");
-
-$color-background-primary-light: cv("blue", "000");
-$color-background-primary-base: cv("blue", "300");
-$color-background-primary-dark: cv("blue", "900");
-
-$color-background-danger-light: cv("red", "000");
-$color-background-danger-base: cv("red", "300");
-$color-background-danger-dark: cv("red", "500");
-
-$color-background-caution-light: cv("yellow", "000");
-$color-background-caution-base: cv("yellow", "300");
-$color-background-caution-dark: cv("yellow", "500");
-
-$color-background-success-light: cv("green", "000");
-$color-background-success-base: cv("green", "300");
-$color-background-success-dark: cv("green", "600");
-
 /*********************************
  Backgrounds
 *********************************/
 
 .backgroundColorDefault {
-  background-color: $color-background-default;
+  background-color: var(--ColorBackgroundBase);
 }
 
 .backgroundColorDisabled {
-  background-color: $color-background-disabled;
+  background-color: var(--ColorBackgroundDisabled);
 }
 
 .backgroundColorPrimaryLight {
-  background-color: $color-background-primary-light;
+  background-color: var(--ColorBackgroundPrimaryLight);
 }
 
 .backgroundColorPrimaryBase {
-  background-color: $color-background-primary-base;
+  background-color: var(--ColorBackgroundPrimaryBase);
 }
 
 .backgroundColorPrimaryDark {
-  background-color: $color-background-primary-dark;
+  background-color: var(--ColorBackgroundPrimaryDark);
 }
 
 .backgroundColorDangerLight {
-  background-color: $color-background-danger-light;
+  background-color: var(--ColorBackgroundDangerLight);
 }
 
 .backgroundColorDangerBase {
-  background-color: $color-background-danger-base;
+  background-color: var(--ColorBackgroundDangerBase);
 }
 
 .backgroundColorDangerDark {
-  background-color: $color-background-danger-dark;
+  background-color: var(--ColorBackgroundDangerDark);
 }
 
 .backgroundColorCautionLight {
-  background-color: $color-background-caution-light;
+  background-color: var(--ColorBackgroundCautionLight);
 }
 
 .backgroundColorCautionBase {
-  background-color: $color-background-caution-base;
+  background-color: var(--ColorBackgroundCautionBase);
 }
 
 .backgroundColorCautionDark {
-  background-color: $color-background-caution-dark;
+  background-color: var(--ColorBackgroundCautionDark);
 }
 
 .backgroundColorSuccessLight {
-  background-color: $color-background-success-light;
+  background-color: var(--ColorBackgroundSuccessLight);
 }
 
 .backgroundColorSuccessBase {
-  background-color: $color-background-success-base;
+  background-color: var(--ColorBackgroundSuccessBase);
 }
 
 .backgroundColorSuccessDark {
-  background-color: $color-background-success-dark;
+  background-color: var(--ColorBackgroundSuccessDark);
 }
 
 /*********************************
@@ -95,5 +75,5 @@ $color-background-success-dark: cv("green", "600");
 *********************************/
 
 .boxShadowDefault {
-  box-shadow: $box-shadow-default;
+  box-shadow: var(--ShadowBase);
 }

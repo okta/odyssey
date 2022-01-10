@@ -1,0 +1,14 @@
+{
+  "border": {
+    "width": {
+      "base": { "value": "0.0625rem" }
+    },
+    "style": {
+      "base": { "value": "solid" }
+    },
+    "radius": {
+      "base": { "value": "0.25rem" },
+      "outer": { "value": "0.375rem" }
+    }
+  }
+}

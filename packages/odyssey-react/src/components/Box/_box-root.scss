@@ -12,7 +12,7 @@
 
 .root {
   box-sizing: border-box;
-  font-family: $body-font-family;
+  font-family: var(--FontFamilyBase);
   font-variant: normal;
   letter-spacing: 0;
   font-feature-settings: "lnum", "pnum";
