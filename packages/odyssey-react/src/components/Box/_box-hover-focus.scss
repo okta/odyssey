@@ -10,36 +10,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-$border-color-primary: cv("blue");
-$box-shadow-hover: 0 8px 12px rgba(cv("gray", "900"), 0.12);
-$focus-width: 2px;
-
 .hoverBorderColorUi:hover {
-  border-color: $border-color-ui;
+  border-color: var(--ColorBorderUi);
 }
 
 .hoverBorderColorPrimary:hover {
-  border-color: $border-color-primary;
+  border-color: var(--ColorBorderPrimary);
 }
 
 .hoverBoxShadowDefault:hover {
-  box-shadow: $box-shadow-hover;
+  box-shadow: var(--ShadowHover);
 }
 
 .focusBorderColorPrimary:focus {
-  border-color: $border-color-primary;
+  border-color: var(--ColorBorderPrimary);
 }
 
 .focusBorderColorDanger:focus {
-  border-color: $border-color-danger;
+  border-color: var(--ColorBorderDanger);
 }
 
 .focusRingPrimary:focus {
   outline: 0;
-  box-shadow: 0 0 0 $focus-width $focus-ring-primary;
+  box-shadow: 0 0 0 var(--FocusWidth) var(--ColorFocusPrimary);
 }
 
 .focusRingDanger:focus {
   outline: 0;
-  box-shadow: 0 0 0 $focus-width $focus-ring-danger;
+  box-shadow: 0 0 0 var(--FocusWidth) var(--ColorFocusDanger);
 }
