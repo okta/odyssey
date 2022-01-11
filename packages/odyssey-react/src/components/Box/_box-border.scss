@@ -10,67 +10,64 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-$outer-border-radius: 6px;
-$border-color-danger: $color-danger-base;
-
 .borderBase {
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
+  border-width: var(--BorderWidthBase);
+  border-style: var(--BorderStyleBase);
+  border-color: var(--ColorBorderBase);
 }
 
 .borderColorDisplay {
-  border-color: $border-color-display;
+  border-color: var(--ColorBorderDisplay);
 }
 
 .borderColorUi {
-  border-color: $border-color-ui;
+  border-color: var(--ColorBorderUi);
 }
 
 .borderColorDanger {
-  border-color: $border-color-danger;
+  border-color: var(--ColorBorderDanger);
 }
 
 /* Radius */
 
 /* stylelint-disable property-disallowed-list */
 .borderRadiusBase {
-  border-radius: $base-border-radius;
+  border-radius: var(--BorderRadiusBase);
 }
 
 .borderRadiusOuter {
-  border-radius: $outer-border-radius;
+  border-radius: var(--BorderRadiusOuter);
 }
 /* stylelint-enable property-disallowed-list */
 
 .borderTopLeftRadiusBase {
-  border-start-start-radius: $base-border-radius;
+  border-start-start-radius: var(--BorderRadiusBase);
 }
 
 .borderTopLeftRadiusOuter {
-  border-start-start-radius: $outer-border-radius;
+  border-start-start-radius: var(--BorderRadiusOuter);
 }
 
 .borderTopRightRadiusBase {
-  border-start-end-radius: $base-border-radius;
+  border-start-end-radius: var(--BorderRadiusBase);
 }
 
 .borderTopRightRadiusOuter {
-  border-start-end-radius: $outer-border-radius;
+  border-start-end-radius: var(--BorderRadiusOuter);
 }
 
 .borderBottomLeftRadiusBase {
-  border-end-start-radius: $base-border-radius;
+  border-end-start-radius: var(--BorderRadiusBase);
 }
 
 .borderBottomLeftRadiusOuter {
-  border-end-start-radius: $outer-border-radius;
+  border-end-start-radius: var(--BorderRadiusOuter);
 }
 
 .borderBottomRightRadiusBase {
-  border-end-end-radius: $base-border-radius;
+  border-end-end-radius: var(--BorderRadiusBase);
 }
 
 .borderBottomRightRadiusOuter {
-  border-end-end-radius: $outer-border-radius;
+  border-end-end-radius: var(--BorderRadiusOuter);
 }

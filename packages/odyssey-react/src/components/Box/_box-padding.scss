@@ -16,102 +16,102 @@
 }
 
 .paddingXs {
-  padding: $spacing-xs;
+  padding: var(--SpaceRemXs);
 }
 
 .paddingS {
-  padding: $spacing-s;
+  padding: var(--SpaceRemS);
 }
 
 .paddingM {
-  padding: $spacing-m;
+  padding: var(--SpaceRemM);
 }
 
 .paddingL {
-  padding: $spacing-l;
+  padding: var(--SpaceRemL);
 }
 
 .paddingXl {
-  padding: $spacing-xl;
+  padding: var(--SpaceRemXl);
 }
 /* stylelint-enable property-disallowed-list */
 
 .paddingTopXs {
-  padding-block-start: $spacing-xs;
+  padding-block-start: var(--SpaceRemXs);
 }
 
 .paddingTopS {
-  padding-block-start: $spacing-s;
+  padding-block-start: var(--SpaceRemS);
 }
 
 .paddingTopM {
-  padding-block-start: $spacing-m;
+  padding-block-start: var(--SpaceRemM);
 }
 
 .paddingTopL {
-  padding-block-start: $spacing-l;
+  padding-block-start: var(--SpaceRemL);
 }
 
 .paddingTopXl {
-  padding-block-start: $spacing-xl;
+  padding-block-start: var(--SpaceRemXl);
 }
 
 .paddingRightXs {
-  padding-inline-end: $spacing-xs;
+  padding-inline-end: var(--SpaceRemXs);
 }
 
 .paddingRightS {
-  padding-inline-end: $spacing-s;
+  padding-inline-end: var(--SpaceRemS);
 }
 
 .paddingRightM {
-  padding-inline-end: $spacing-m;
+  padding-inline-end: var(--SpaceRemM);
 }
 
 .paddingRightL {
-  padding-inline-end: $spacing-l;
+  padding-inline-end: var(--SpaceRemL);
 }
 
 .paddingRightXl {
-  padding-inline-end: $spacing-xl;
+  padding-inline-end: var(--SpaceRemXl);
 }
 
 .paddingBottomXs {
-  padding-block-end: $spacing-xs;
+  padding-block-end: var(--SpaceRemXs);
 }
 
 .paddingBottomS {
-  padding-block-end: $spacing-s;
+  padding-block-end: var(--SpaceRemS);
 }
 
 .paddingBottomM {
-  padding-block-end: $spacing-m;
+  padding-block-end: var(--SpaceRemM);
 }
 
 .paddingBottomL {
-  padding-block-end: $spacing-l;
+  padding-block-end: var(--SpaceRemL);
 }
 
 .paddingBottomXl {
-  padding-block-end: $spacing-xl;
+  padding-block-end: var(--SpaceRemXl);
 }
 
 .paddingLeftXs {
-  padding-inline-start: $spacing-xs;
+  padding-inline-start: var(--SpaceRemXs);
 }
 
 .paddingLeftS {
-  padding-inline-start: $spacing-s;
+  padding-inline-start: var(--SpaceRemS);
 }
 
 .paddingLeftM {
-  padding-inline-start: $spacing-m;
+  padding-inline-start: var(--SpaceRemM);
 }
 
 .paddingLeftL {
-  padding-inline-start: $spacing-l;
+  padding-inline-start: var(--SpaceRemL);
 }
 
 .paddingLeftXl {
-  padding-inline-start: $spacing-xl;
+  padding-inline-start: var(--SpaceRemXl);
 }

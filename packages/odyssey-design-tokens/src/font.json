@@ -27,8 +27,15 @@
         "level-6": { "value": "" }
       }
     },
+    "style": {
+      "normal": { "value": "normal" }
+    },
     "weight": {
+      "normal": { "value": "400" },
       "bold": { "value": "600" }
+    },
+    "lineHeight": {
+      "base": { "value": 1.5 }
     }
   }
 }
