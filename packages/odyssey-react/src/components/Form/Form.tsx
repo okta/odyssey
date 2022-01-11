@@ -64,13 +64,13 @@ export const Form = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <Box as="form" {...omitProps} className={styles.root} ref={ref}>
+      <form {...omitProps} className={styles.root} ref={ref}>
         <header className={styles.header}>
           {title && <Heading visualLevel="3" children={title} />}
           {desc && <p>{desc}</p>}
         </header>
         {children}
-      </Box>
+      </form>
     );
   })
 );
