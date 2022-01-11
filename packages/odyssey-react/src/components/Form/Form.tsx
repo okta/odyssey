@@ -66,10 +66,10 @@ export const Form = withTheme(
 
     return (
       <Box as="form" {...omitProps} className={styles.root} ref={ref}>
-        <Box as="header" className={styles.header}>
+        <header className={styles.header}>
           {title && <Heading visualLevel="3" children={title} />}
           {desc && <p>{desc}</p>}
-        </Box>
+        </header>
         {children}
       </Box>
     );

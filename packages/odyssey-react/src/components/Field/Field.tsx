@@ -87,7 +87,7 @@ export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
 
       return (
         <Box
-          as={TagLabel}
+          as={as}
           className={styles.root}
           display="flex"
           flexDirection="column"
