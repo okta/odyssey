@@ -38,3 +38,13 @@ directly to evergreen browsers for simple applications, or further transpiled,
 bundled, and polyfilled for advanced use cases and browser support targets.
 
 [1]: https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm
+
+## License
+
+[Apache Version 2.0](https://github.com/okta/odyssey/blob/master/LICENSE)
+
+## Support Disclaimer
+
+This library is community supported and is maintained by members of the Okta team for developers and IT professionals.
+This library is not an official Okta product and does not qualify for any Okta support. Anyone who chooses to use this
+library must ensure that their implementation meets any applicable legal obligations including any Okta terms and conditions.

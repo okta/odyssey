@@ -13,6 +13,7 @@
 import React, { useCallback, useRef, useEffect, forwardRef } from "react";
 import type { ComponentPropsWithRef, ChangeEvent } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
+import { Box } from "../Box";
 import { CheckIcon, MinusIcon } from "../Icon";
 import styles from "./Checkbox.module.scss";
 import { useCx, useOid, useOmit } from "../../utils";
@@ -96,7 +97,7 @@ export const Checkbox = withTheme(
     );
 
     return (
-      <>
+      <Box>
         <input
           {...omitProps}
           className={styles.checkbox}
@@ -117,7 +118,7 @@ export const Checkbox = withTheme(
           {label}
         </label>
         {error && <Field.Error id={oid}>{error}</Field.Error>}
-      </>
+      </Box>
     );
   })
 );

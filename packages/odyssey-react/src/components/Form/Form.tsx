@@ -15,7 +15,6 @@ import type { ComponentPropsWithRef, ReactNode, ReactElement } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit, forwardRefWithStatics } from "../../utils";
 import { Heading } from "../Heading";
-import { Box } from "../Box";
 import styles from "./Form.module.scss";
 
 export interface FormProps
@@ -77,27 +76,15 @@ export const Form = withTheme(
 );
 
 function FormError({ children }: PropsError) {
-  return (
-    <Box as="section" className={styles.error}>
-      {children}
-    </Box>
-  );
+  return <section className={styles.error}>{children}</section>;
 }
 
 function Main({ children }: PropsMain) {
-  return (
-    <Box as="section" className={styles.main}>
-      {children}
-    </Box>
-  );
+  return <section className={styles.main}>{children}</section>;
 }
 
 function Actions({ children }: PropsActions) {
-  return (
-    <Box as="section" className={styles.actions}>
-      {children}
-    </Box>
-  );
+  return <section className={styles.actions}>{children}</section>;
 }
 
 Form.Error = FormError;

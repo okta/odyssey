@@ -12,9 +12,10 @@
 
 import React, { forwardRef } from "react";
 import type { ReactNode, ComponentPropsWithRef } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
 import type { CellTextFormats } from "./types";
-import { useCx, useOmit, withStyles } from "../../utils";
-import styles from "./Table.module.scss";
+import { useCx, useOmit } from "../../utils";
+import styles from "./TableCell.module.scss";
 
 export interface TableHeaderCellProps
   extends Omit<ComponentPropsWithRef<"th">, "style" | "className"> {
@@ -25,12 +26,15 @@ export interface TableHeaderCellProps
   format?: CellTextFormats;
 }
 
-let TableHeaderCell = forwardRef<HTMLTableCellElement, TableHeaderCellProps>(
-  (props, ref) => {
+export const TableHeaderCell = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLTableCellElement, TableHeaderCellProps>((props, ref) => {
     const { children, format, ...rest } = props;
 
     const componentClass = useCx(
-      styles.cell,
+      styles.root,
       styles.headerCell,
       props.scope === "col" && styles.headerCellCol,
       format && styles[`${format}Format`]
@@ -43,11 +47,7 @@ let TableHeaderCell = forwardRef<HTMLTableCellElement, TableHeaderCellProps>(
         {children}
       </th>
     );
-  }
+  })
 );
 
 TableHeaderCell.displayName = "TableHeaderCell";
-
-TableHeaderCell = withStyles(styles)(TableHeaderCell);
-
-export { TableHeaderCell };

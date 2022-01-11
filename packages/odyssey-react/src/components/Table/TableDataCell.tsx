@@ -12,9 +12,10 @@
 
 import React, { forwardRef } from "react";
 import type { ReactNode, ComponentPropsWithRef } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
 import type { CellTextFormats } from "./types";
-import { useCx, useOmit, withStyles } from "../../utils";
-import styles from "./Table.module.scss";
+import { useCx, useOmit } from "../../utils";
+import styles from "./TableCell.module.scss";
 
 export interface TableDataCellProps
   extends Omit<ComponentPropsWithRef<"td">, "style" | "className"> {
@@ -26,12 +27,15 @@ export interface TableDataCellProps
   empty?: boolean;
 }
 
-let TableDataCell = forwardRef<HTMLTableCellElement, TableDataCellProps>(
-  (props, ref) => {
+export const TableDataCell = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLTableCellElement, TableDataCellProps>((props, ref) => {
     const { children, format, empty, ...rest } = props;
 
     const componentClass = useCx(
-      styles.cell,
+      styles.root,
       format && styles[`${format}Format`],
       empty && styles[`${empty}State`]
     );
@@ -43,11 +47,7 @@ let TableDataCell = forwardRef<HTMLTableCellElement, TableDataCellProps>(
         {children}
       </td>
     );
-  }
+  })
 );
 
 TableDataCell.displayName = "TableDataCell";
-
-TableDataCell = withStyles(styles)(TableDataCell);
-
-export { TableDataCell };

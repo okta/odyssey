@@ -14,12 +14,13 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit } from "../../utils";
+import { Box } from "../Box";
 import styles from "./CircularLoadIndicator.module.scss";
 
 export interface CircularLoadIndicatorProps
   extends Omit<
     ComponentPropsWithRef<"span">,
-    "style" | "className" | "role" | "aria-valuemin" | "aria-valuemax"
+    "style" | "className" | "role" | "aria-valuemin" | "aria-valuemax" | "color"
   > {
   /**
    * Id used to reference the indicator in loading element's `aria-describedby` attribute
@@ -57,7 +58,8 @@ export const CircularLoadIndicator = withTheme(
     const omitProps = useOmit(rest);
     const internalId = useOid();
     return (
-      <span
+      <Box
+        as="span"
         {...omitProps}
         className={styles.root}
         role="progressbar"
@@ -84,7 +86,7 @@ export const CircularLoadIndicator = withTheme(
             fill="none"
           ></circle>
         </svg>
-      </span>
+      </Box>
     );
   })
 );

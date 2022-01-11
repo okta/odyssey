@@ -12,18 +12,18 @@
 
 import React, { useCallback } from "react";
 import type {
-  ComponentProps,
   FunctionComponent,
   FocusEventHandler,
   ChangeEvent,
   RefCallback,
 } from "react";
-import styles from "./TextArea.module.scss";
-import { useOid, useCx, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOid, useCx } from "../../utils";
 import { Field } from "../Field";
 import type { SharedFieldTypes } from "../Field/types";
+import styles from "./TextArea.module.scss";
 
-interface Props extends SharedFieldTypes {
+export interface TextAreaProps extends SharedFieldTypes {
   /**
    * The underlying textarea element id attribute. Automatically generated if not provided
    */
@@ -96,7 +96,10 @@ interface Props extends SharedFieldTypes {
 /**
  * TextArea allows users to edit and input data.
  */
-let TextArea: FunctionComponent<Props> = (props) => {
+export const TextArea: FunctionComponent<TextAreaProps> = withTheme(
+  () => ({}),
+  styles
+)((props) => {
   const {
     defaultValue,
     disabled = false,
@@ -157,11 +160,6 @@ let TextArea: FunctionComponent<Props> = (props) => {
       />
     </Field>
   );
-};
+});
 
 TextArea.displayName = "TextArea";
-
-TextArea = withStyles(styles)(TextArea);
-
-export type TextAreaProps = ComponentProps<typeof TextArea>;
-export { TextArea };

@@ -12,16 +12,17 @@
 
 import React, { createContext, useContext, useState } from "react";
 import type { ComponentPropsWithRef, ReactNode, AnimationEvent } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
 import {
   useCx,
   useOmit,
   useOid,
   oid,
-  withStyles,
   forwardRefWithStatics,
 } from "../../utils";
-import styles from "./Toast.module.scss";
+import { Box } from "../Box";
 import { Button } from "../Button";
+import type { ButtonProps } from "../Button";
 import {
   GetInfoIcon,
   ErrorIcon,
@@ -29,12 +30,12 @@ import {
   CompleteIcon,
   CloseIcon,
 } from "../Icon";
-import type { ButtonProps } from "../Button";
+import styles from "./Toast.module.scss";
 
 export interface ToastProps
   extends Omit<
     ComponentPropsWithRef<"aside">,
-    "children" | "style" | "className" | "role"
+    "children" | "style" | "className" | "role" | "color"
   > {
   /**
    * Children are never rendered.
@@ -114,8 +115,11 @@ const icon = {
  * Toasts are transient, non-disruptive messages that provide at-a-glance,
  * asynchronous feedback or updates.
  */
-let Toast = forwardRefWithStatics<HTMLElement, ToastProps, Statics>(
-  (props, ref) => {
+export const Toast = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRefWithStatics<HTMLElement, ToastProps, Statics>((props, ref) => {
     const {
       title,
       body,
@@ -130,12 +134,14 @@ let Toast = forwardRefWithStatics<HTMLElement, ToastProps, Statics>(
     const omitProps = useOmit(rest);
 
     return (
-      <aside
+      <Box
+        as="aside"
         {...omitProps}
         ref={ref}
         role="status"
         id={xid}
         className={componentClass}
+        color={false}
       >
         <span className={styles.icon}>{icon[variant]}</span>
         <h1 className={styles.title}>{title}</h1>
@@ -147,9 +153,9 @@ let Toast = forwardRefWithStatics<HTMLElement, ToastProps, Statics>(
             icon={<CloseIcon title={dismissButtonLabel} />}
           />
         </span>
-      </aside>
+      </Box>
     );
-  }
+  })
 );
 
 /**
@@ -184,7 +190,7 @@ const ToastProvider = (props: PropsToastProvider) => {
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
-      <div className={styles.toastPen} data-testid="ods-toast-pen">
+      <Box className={styles.toastPen} data-testid="ods-toast-pen">
         {toasts.map(({ title, body, variant = "info", id = oid() }) => (
           <Toast
             id={id}
@@ -199,7 +205,7 @@ const ToastProvider = (props: PropsToastProvider) => {
             onAnimationEnd={handleAnimationEnd}
           />
         ))}
-      </div>
+      </Box>
     </ToastContext.Provider>
   );
 };
@@ -215,10 +221,6 @@ export const useToast = (): Context => {
 };
 
 Toast.displayName = "Toast";
-
 ToastProvider.displayName = "ToastProvider";
+
 Toast.Provider = ToastProvider;
-
-Toast = withStyles(styles)(Toast);
-
-export { Toast };

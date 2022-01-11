@@ -17,6 +17,8 @@ import { Box, BoxProps, Heading, Text } from "@okta/odyssey-react";
 
 import BoxMdx from "./Box.mdx";
 
+import "./box-stories.css";
+
 export default {
   title: `Components/Box`,
   component: Source,
@@ -192,6 +194,11 @@ export const MarginPadding = (): ReactElement => (
     Margin
     <Box display="flex" alignItems="flex-end">
       <Box backgroundColor="danger-light" marginRight="s">
+        <Box borderColor="ui" backgroundColor="default">
+          &nbsp;default / 0&nbsp;
+        </Box>
+      </Box>
+      <Box backgroundColor="danger-light" marginRight="s">
         <Box borderColor="ui" backgroundColor="default" margin="xs">
           &nbsp;xs&nbsp;
         </Box>
@@ -219,6 +226,9 @@ export const MarginPadding = (): ReactElement => (
     </Box>
     Padding
     <Box display="flex" alignItems="flex-end">
+      <Box backgroundColor="success-light" borderColor="ui" marginRight="s">
+        <Box backgroundColor="default">&nbsp;default / 0&nbsp;</Box>
+      </Box>
       <Box
         padding="xs"
         backgroundColor="success-light"
@@ -536,7 +546,9 @@ Other.argTypes = pickControls(["pointerEvents", "userSelect"]);
 Other.args = { userSelect: "none" };
 
 export const CustomClass = (): ReactElement => (
-  <Box className="test-class">Custom class</Box>
+  <Box className="test-class" padding={false} color={false}>
+    Custom class
+  </Box>
 );
 
 function pickControls(properties: string[]) {

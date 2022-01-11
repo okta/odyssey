@@ -15,12 +15,14 @@ import type { ComponentPropsWithRef, ReactText, ReactElement } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { ExternalIcon } from "../Icon";
 import { useCx, useOmit } from "../../utils";
+import { Box } from "../Box";
 import styles from "./Link.module.scss";
+import { theme } from "./Link.theme";
 
 export interface LinkProps
   extends Omit<
     ComponentPropsWithRef<"a">,
-    "style" | "className" | "children" | "href"
+    "style" | "className" | "children" | "href" | "color"
   > {
   /**
    * The URL that the hyperlink points to. Links are not restricted to HTTP-based URLs — they can use any URL scheme supported by browsers.
@@ -34,7 +36,7 @@ export interface LinkProps
   variant?: "primary" | "secondary";
 
   /**
-   * The human readable/percievable value shown to the user
+   * The human readable/perceivable value shown to the user
    */
   children: ReactText;
 
@@ -48,7 +50,7 @@ export interface LinkProps
  * Links are navigation elements displayed as text. Use a Link to bring a user to another page or start a download.
  */
 export const Link = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
@@ -58,7 +60,14 @@ export const Link = withTheme(
     const external = rest.target === `_blank`;
 
     return (
-      <a {...omitProps} ref={ref} className={classNames}>
+      <Box
+        as="a"
+        color={false}
+        fontStyle={false}
+        {...omitProps}
+        ref={ref}
+        className={classNames}
+      >
         {icon && <span className={styles.icon}>{icon}</span>}
         {children}
         {external && (
@@ -66,7 +75,7 @@ export const Link = withTheme(
             <ExternalIcon />
           </span>
         )}
-      </a>
+      </Box>
     );
   })
 );

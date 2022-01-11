@@ -14,11 +14,15 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactElement, ReactText } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOmit } from "../../utils";
+import { Box } from "../Box";
 import styles from "./Button.module.scss";
 import { theme } from "./Button.theme";
 
 interface CommonProps
-  extends Omit<ComponentPropsWithRef<"button">, "style" | "className"> {
+  extends Omit<
+    ComponentPropsWithRef<"button">,
+    "style" | "className" | "color"
+  > {
   /**
    * Text content to be rendered within the button, usually label text.
    */
@@ -89,10 +93,19 @@ export const Button = withTheme(
 
     const omitProps = useOmit(rest);
     return (
-      <button {...omitProps} ref={ref} className={componentClass}>
+      <Box
+        as="button"
+        color={false}
+        fontWeight={false}
+        fontSize={false}
+        lineHeight={false}
+        {...omitProps}
+        ref={ref}
+        className={componentClass}
+      >
         {icon && <span className={styles.icon}>{icon}</span>}
         {children && <span className={styles.label}>{children}</span>}
-      </button>
+      </Box>
     );
   })
 );

@@ -13,22 +13,31 @@
 const postcss = require("postcss");
 const { default: plugin } = require("../dist");
 
-async function run(input, output) {
-  const result = await postcss([plugin]).process(input, { from: undefined });
+async function run(
+  input,
+  output,
+  opts = { modules: { getJSON: Function.prototype } }
+) {
+  const result = await postcss([plugin(opts)]).process(input, {
+    from: undefined,
+  });
   expect(result.css).toEqual(output);
   expect(result.warnings()).toHaveLength(0);
 }
 
-it("transforms css custom properties", async () => {
-  await run(
-    "a { color: var(--linkColor); }",
-    "a { color: ${theme.linkColor}; }"
-  );
+it("minimizes non meaningful whitespace", async () => {
+  await run("a {\n    margin: 1px;\n}", "a{margin:1px}");
 });
 
-it("transforms css custom properties within shorthand syntax", async () => {
-  await run(
-    "a { margin: var(--linkMarginTop) 2rem var(--linkMarginBottom) 1rem; }",
-    "a { margin: ${theme.linkMarginTop} 2rem ${theme.linkMarginBottom} 1rem; }"
-  );
+describe("calc", () => {
+  it("transforms css custom properties to theme expressions", async () => {
+    await run(
+      "a { margin: calc(1px + var(--space)); }",
+      "a{margin:calc(1px + ${theme.space})}"
+    );
+  });
+
+  it("reduces expressions when possible", async () => {
+    await run("a { margin: calc(1px + 1px); }", "a{margin:2px}");
+  });
 });
