@@ -11,21 +11,19 @@
       }
     },
     "size": {
-      "base": { "value": "16" },
-      "scale": { "value": 1.1487 },
-      "body": {
-        "lede": { "value": "" },
-        "base": { "value": "" },
-        "caption": { "value": "" }
+      "base": { "value": "16px" },
+      "scale": {
+        "0": { "value": "0.871rem" },
+        "1": { "value": "1rem" },
+        "2": { "value": "1.149rem" },
+        "3": { "value": "1.32rem" },
+        "4": { "value": "1.516rem" },
+        "5": { "value": "1.741em" },
+        "6": { "value": "2rem" }
       },
-      "title": {
-        "level-1": { "value": "" },
-        "level-2": { "value": "" },
-        "level-3": { "value": "" },
-        "level-4": { "value": "" },
-        "level-5": { "value": "" },
-        "level-6": { "value": "" }
-      }
+      "lede": { "value": "{font.size.scale.2.value}" },
+      "base": { "value": "{font.size.scale.1.value}" },
+      "caption": { "value": "{font.size.scale.0.value}" }
     },
     "style": {
       "normal": { "value": "normal" }
