@@ -34,7 +34,7 @@ export const theme: ThemeReducer = (theme) => ({
   ColorTextInvalid: theme.ColorTextDanger,
   MarginBlockEnd: theme.SpaceRemXs,
   LabelPaddingInlineStart: theme.SpaceEmS,
-  FontSize: theme.FontSizeBase,
+  FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightNormal,
   CircleSize: "1em",
   BorderSize: "2px",
