@@ -10,4 +10,42 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./RadioButton";
+.colorBody {
+  color: $text-body;
+}
+
+.colorInherit {
+  color: inherit;
+}
+
+.fontWeightRegular {
+  font-weight: 400;
+}
+
+.fontWeightInherit {
+  font-weight: inherit;
+}
+
+.fontStyleNormal {
+  font-style: normal;
+}
+
+.fontStyleInherit {
+  font-style: inherit;
+}
+
+.fontSizeBase {
+  font-size: $size-body-base;
+}
+
+.fontSizeInherit {
+  font-size: inherit;
+}
+
+.lineHeightNormal {
+  line-height: $base-line-height;
+}
+
+.lineHeightInherit {
+  line-height: inherit;
+}

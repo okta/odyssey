@@ -10,4 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./RadioGroup";
+import type { ThemeReducer } from "@okta/odyssey-react-theme";
+
+export const theme: ThemeReducer = (theme) => ({
+  // Primary Variant
+  ColorTextPrimary: theme.ColorTextPrimary,
+
+  // Secondary Variant
+  ColorTextBody: theme.ColorTextBody,
+
+  // Space
+  SpaceRelativeXs: theme.SpaceRelativeXs,
+});

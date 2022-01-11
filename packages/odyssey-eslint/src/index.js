@@ -24,13 +24,25 @@ module.exports = {
     sourceType: "module",
   },
   ignorePatterns: ["node_modules", "dist"],
-  plugins: ["header"],
+  plugins: ["header", "import"],
   rules: {
     "header/header": [
       "error",
       "block",
       ["!", { pattern, template }, ...header.split("\n")],
       2,
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: [
+          "**/*.stories.*",
+          "**/*.docgen.*",
+          "**/jest.setup.js",
+          "**/*.test.*",
+          "**/scripts/*",
+        ],
+      },
     ],
   },
   overrides: [

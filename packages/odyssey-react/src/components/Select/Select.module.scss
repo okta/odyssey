@@ -210,7 +210,7 @@
     display: inline-block;
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-xs-em / 2;
+    inset-inline-end: $spacing-xs-em * 0.5;
     width: 1em;
     height: 1em;
     margin-block-start: 0;

@@ -12,7 +12,9 @@
 
 import React from "react";
 import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
-import { useOmit, forwardRefWithStatics, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOmit, forwardRefWithStatics } from "../../utils";
+import { Box } from "../Box";
 import { TableContainer } from "./TableContainer";
 import { TableHeader } from "./TableHeader";
 import { TableBody } from "./TableBody";
@@ -21,9 +23,7 @@ import { TableRow } from "./TableRow";
 import { TableDataCell } from "./TableDataCell";
 import { TableHeaderCell } from "./TableHeaderCell";
 import { TableSortButton } from "./TableSortButton";
-
 import { ScreenReaderText } from "../ScreenReaderText";
-
 import styles from "./Table.module.scss";
 
 type ContainerProps =
@@ -40,7 +40,10 @@ type ContainerProps =
     };
 
 interface ElementProps
-  extends Omit<ComponentPropsWithRef<"table">, "style" | "className"> {
+  extends Omit<
+    ComponentPropsWithRef<"table">,
+    "style" | "className" | "color" | "width"
+  > {
   /**
    * Valid Table child elements including Head, Body, and Foot
    */
@@ -67,19 +70,28 @@ type Statics = {
 /**
  * Tables provide structure for displaying sets of data across rows and columns.
  */
-let Table = forwardRefWithStatics<HTMLTableElement, TableProps, Statics>(
-  (props, ref) => {
+export const Table = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRefWithStatics<HTMLTableElement, TableProps, Statics>((props, ref) => {
     const { children, caption, title, withContainer = true, ...rest } = props;
 
     const omitProps = useOmit(rest);
 
     const TableEl = () => (
-      <table {...omitProps} ref={ref} className={styles.root}>
+      <Box
+        as="table"
+        {...omitProps}
+        ref={ref}
+        className={styles.root}
+        lineHeight={false}
+      >
         <caption>
           <ScreenReaderText>{caption}</ScreenReaderText>
         </caption>
         {children}
-      </table>
+      </Box>
     );
 
     return (
@@ -93,7 +105,7 @@ let Table = forwardRefWithStatics<HTMLTableElement, TableProps, Statics>(
         )}
       </>
     );
-  }
+  })
 );
 
 Table.Container = TableContainer;
@@ -106,7 +118,3 @@ Table.HeaderCell = TableHeaderCell;
 Table.SortButton = TableSortButton;
 
 Table.displayName = "Table";
-
-Table = withStyles(styles)(Table);
-
-export { Table };

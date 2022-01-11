@@ -12,9 +12,10 @@
 
 import React, { forwardRef } from "react";
 import type { ReactNode } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
 import { Box } from "../Box";
 import type { BoxProps } from "../Box";
-import { useCx, useOmit, withStyles, toCamelCase } from "../../utils";
+import { useCx, useOmit, toCamelCase } from "../../utils";
 import type { PolymorphicForwardRef } from "../../utils";
 import styles from "./Text.module.scss";
 
@@ -126,46 +127,52 @@ export interface TextProps
 /**
  * A component which provides style for visible text elements.
  */
-let Text = forwardRef((props, ref) => {
-  const {
-    children,
-    as = "span",
-    color = "body",
-    fontWeight = "regular",
-    fontStyle = "normal",
-    textTransform = "none",
-    fontSize = "base",
-    overflowWrap = "normal",
-    lineHeight = "normal",
-    ...rest
-  } = props;
+export const Text = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef((props, ref) => {
+    const {
+      children,
+      as = "span",
+      color = "body",
+      fontWeight = "regular",
+      fontStyle = "normal",
+      textTransform = "none",
+      fontSize = "base",
+      overflowWrap = "normal",
+      lineHeight = "normal",
+      ...rest
+    } = props;
 
-  const componentClass = useCx(
-    styles.root,
-    styles[as],
-    styles[toCamelCase(color) + "Color"],
-    styles[toCamelCase(fontWeight) + "Weight"],
-    styles[toCamelCase(fontStyle) + "Style"],
-    styles[toCamelCase(textTransform) + "Transform"],
-    styles[toCamelCase(fontSize) + "Size"],
-    styles[toCamelCase(overflowWrap) + "Wrap"],
-    styles[toCamelCase(lineHeight) + "LineHeight"]
-  );
-  const omitProps = useOmit(rest);
+    const componentClass = useCx(
+      styles.root,
+      styles[as],
+      styles[toCamelCase(color) + "Color"],
+      styles[toCamelCase(fontWeight) + "Weight"],
+      styles[toCamelCase(fontStyle) + "Style"],
+      styles[toCamelCase(textTransform) + "Transform"],
+      styles[toCamelCase(fontSize) + "Size"],
+      styles[toCamelCase(overflowWrap) + "Wrap"],
+      styles[toCamelCase(lineHeight) + "LineHeight"]
+    );
+    const omitProps = useOmit(rest);
 
-  return (
-    <Box
-      as={as}
-      {...omitProps}
-      ref={ref}
-      className={componentClass}
-      children={children}
-    />
-  );
-}) as PolymorphicForwardRef<"span", TextProps>;
+    return (
+      <Box
+        as={as}
+        {...omitProps}
+        ref={ref}
+        className={componentClass}
+        color={false}
+        fontWeight={false}
+        fontStyle={false}
+        fontSize={false}
+        lineHeight={false}
+        children={children}
+      />
+    );
+  })
+) as PolymorphicForwardRef<"span", TextProps>;
 
 Text.displayName = "Text";
-
-Text = withStyles(styles)(Text);
-
-export { Text };

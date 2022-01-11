@@ -12,14 +12,15 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
-import { useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOmit } from "../../utils";
 import styles from "./Tag.module.scss";
-import { Text } from "../Text";
+import { Box } from "../Box";
 
 export interface TagProps
   extends Omit<
     ComponentPropsWithRef<"ul">,
-    "style" | "className" | "children"
+    "style" | "className" | "children" | "color"
   > {
   /**
    * Children are never rendered.
@@ -36,23 +37,24 @@ export interface TagProps
  * Think of them as “adjectives” in your UI toolbox that make navigating
  * and parsing content easier.
  */
-let Tag = forwardRef<HTMLUListElement, TagProps>((props, ref) => {
-  const { tags, ...rest } = props;
-  const omitProps = useOmit(rest);
+export const Tag = withTheme(
+  () => ({}),
+  styles
+)(
+  forwardRef<HTMLUListElement, TagProps>((props, ref) => {
+    const { tags, ...rest } = props;
+    const omitProps = useOmit(rest);
 
-  return (
-    <ul {...omitProps} ref={ref} className={styles.list}>
-      {tags.map((item) => (
-        <li className={styles.tag} key={item}>
-          <Text>{item}</Text>
-        </li>
-      ))}
-    </ul>
-  );
-});
+    return (
+      <Box as="ul" {...omitProps} ref={ref} className={styles.list}>
+        {tags.map((item) => (
+          <li className={styles.tag} key={item}>
+            {item}
+          </li>
+        ))}
+      </Box>
+    );
+  })
+);
 
 Tag.displayName = "Tag";
-
-Tag = withStyles(styles)(Tag);
-
-export { Tag };

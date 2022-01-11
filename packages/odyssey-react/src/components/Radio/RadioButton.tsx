@@ -13,9 +13,10 @@
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
-import { useRadioGroup } from "../context";
-import { useCx, useOid, useOmit } from "../../../utils";
-import type { SharedFieldTypes } from "../../Field/types";
+import { useRadioGroup } from "./context";
+import { Box } from "../Box";
+import { useCx, useOid, useOmit } from "../../utils";
+import type { SharedFieldTypes } from "../Field/types";
 import styles from "./RadioButton.module.scss";
 
 export interface RadioButtonProps
@@ -71,7 +72,7 @@ export const RadioButton = withTheme(
     );
 
     return (
-      <>
+      <Box className={styles.root}>
         <input
           {...omitProps}
           aria-describedby={ariaDescribedBy}
@@ -87,7 +88,7 @@ export const RadioButton = withTheme(
           value={value}
         />
         <label children={label} className={styles.label} htmlFor={oid} />
-      </>
+      </Box>
     );
   })
 );

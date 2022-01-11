@@ -15,5 +15,4 @@ export { forwardRefWithStatics } from "./forwardRefWithStatics";
 export { oid, useOid } from "./oid";
 export { omit, useOmit } from "./omit";
 export { toCamelCase, toPascalCase } from "./convertCase";
-export { withStyles } from "./withStyles";
 export type { PolymorphicForwardRef } from "./polymorphic";

@@ -31,7 +31,7 @@ export interface FieldProps extends SharedFieldTypes {
   children: ReactElement | ReactElement[];
 
   /**
-   * The underlying input element id attribute. Automatically generated if not provided
+   * The underlying input element id attribute.
    */
   inputId: string;
 

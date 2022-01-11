@@ -11,38 +11,45 @@
  */
 
 import React, { forwardRef } from "react";
-import type { ComponentPropsWithRef } from "react";
-import { useOmit } from "../../../utils";
+import type { ReactElement, ComponentPropsWithRef } from "react";
+import { useOmit } from "../../utils";
+import { Box } from "../Box";
 
-export interface SelectOptionProps
+export interface SelectOptionGroupProps
   extends Omit<
-    ComponentPropsWithRef<"option">,
-    "style" | "className" | "selected"
+    ComponentPropsWithRef<"optgroup">,
+    "style" | "className" | "color"
   > {
   /**
-   * The underlying option element value attribute.
+   * One or more option to be used together as a group
    */
-  value?: string;
+  children: ReactElement | ReactElement[];
+
+  /**
+   * The underlying option group element label attribute.
+   */
+  label: string;
 }
 
 /**
  * Often referred to as a "dropdown menu" this input triggers a menu of
  * options a user can select.
  */
-const SelectOption = forwardRef<HTMLOptionElement, SelectOptionProps>(
-  (props, ref) => {
-    const { children, ...rest } = props;
+const SelectOptionGroup = forwardRef<
+  HTMLOptGroupElement,
+  SelectOptionGroupProps
+>((props, ref) => {
+  const { children, ...rest } = props;
 
-    const omitProps = useOmit(rest);
+  const omitProps = useOmit(rest);
 
-    return (
-      <option {...omitProps} ref={ref}>
-        {children}
-      </option>
-    );
-  }
-);
+  return (
+    <Box as="optgroup" {...omitProps} ref={ref}>
+      {children}
+    </Box>
+  );
+});
 
-SelectOption.displayName = "SelectOption";
+SelectOptionGroup.displayName = "SelectOptionGroup";
 
-export { SelectOption };
+export { SelectOptionGroup };

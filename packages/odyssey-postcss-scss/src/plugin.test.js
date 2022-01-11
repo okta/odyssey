@@ -10,28 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef } from "react";
-import type { ReactElement, ComponentPropsWithRef } from "react";
-import { useOmit } from "../../utils";
+const postcss = require("postcss");
+const { default: plugin } = require("../dist");
 
-export interface TableHeaderProps
-  extends Omit<ComponentPropsWithRef<"thead">, "style" | "className"> {
-  children?: ReactElement | ReactElement[];
+async function run(input, output, importData = "") {
+  const result = await postcss([plugin({ importData })]).process(input, {
+    from: undefined,
+  });
+  expect(result.css).toEqual(output);
+  expect(result.warnings()).toHaveLength(0);
 }
 
-export const TableHeader = forwardRef<
-  HTMLTableSectionElement,
-  TableHeaderProps
->((props, ref) => {
-  const { children, ...rest } = props;
-
-  const omitProps = useOmit(rest);
-
-  return (
-    <thead {...omitProps} ref={ref}>
-      {children}
-    </thead>
-  );
+it("transforms scss", async () => {
+  await run("$color: red; a { color: $color }", "a {\n  color: red;\n}");
 });
 
-TableHeader.displayName = "TableHeader";
+it("transforms scss with importData", async () => {
+  await run("a { color: $color }", "a {\n  color: red;\n}", "$color: red;");
+});
