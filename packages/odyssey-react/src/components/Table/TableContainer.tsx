@@ -14,12 +14,13 @@ import React, { forwardRef } from "react";
 import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit } from "../../utils";
+import { Box } from "../Box";
 import styles from "./TableContainer.module.scss";
 
 export interface TableContainerProps
   extends Omit<
     ComponentPropsWithRef<"figure">,
-    "style" | "className" | "title"
+    "style" | "className" | "title" | "color"
   > {
   /**
    * The table for this container
@@ -41,10 +42,10 @@ export const TableContainer = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <figure {...omitProps} ref={ref} className={styles.root}>
+      <Box as="figure" {...omitProps} ref={ref} className={styles.root}>
         <figcaption className={styles.title}>{title}</figcaption>
         {children}
-      </figure>
+      </Box>
     );
   })
 );
