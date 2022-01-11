@@ -191,7 +191,7 @@ Border.argTypes = pickControls([
 
 export const MarginPadding = (): ReactElement => (
   <>
-    Margin
+    <Text>Margin</Text>
     <Box display="flex" alignItems="flex-end">
       <Box backgroundColor="danger-light" marginRight="s">
         <Box borderColor="ui" backgroundColor="default">
@@ -224,7 +224,7 @@ export const MarginPadding = (): ReactElement => (
         </Box>
       </Box>
     </Box>
-    Padding
+    <Text>Padding</Text>
     <Box display="flex" alignItems="flex-end">
       <Box backgroundColor="success-light" borderColor="ui" marginRight="s">
         <Box backgroundColor="default">&nbsp;default / 0&nbsp;</Box>
