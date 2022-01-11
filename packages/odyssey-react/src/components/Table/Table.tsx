@@ -14,6 +14,7 @@ import React from "react";
 import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit, forwardRefWithStatics } from "../../utils";
+import { Box } from "../Box";
 import { TableContainer } from "./TableContainer";
 import { TableHeader } from "./TableHeader";
 import { TableBody } from "./TableBody";
@@ -39,7 +40,10 @@ type ContainerProps =
     };
 
 interface ElementProps
-  extends Omit<ComponentPropsWithRef<"table">, "style" | "className"> {
+  extends Omit<
+    ComponentPropsWithRef<"table">,
+    "style" | "className" | "color" | "width"
+  > {
   /**
    * Valid Table child elements including Head, Body, and Foot
    */
@@ -76,12 +80,18 @@ export const Table = withTheme(
     const omitProps = useOmit(rest);
 
     const TableEl = () => (
-      <table {...omitProps} ref={ref} className={styles.root}>
+      <Box
+        as="table"
+        {...omitProps}
+        ref={ref}
+        className={styles.root}
+        lineHeight={false}
+      >
         <caption>
           <ScreenReaderText>{caption}</ScreenReaderText>
         </caption>
         {children}
-      </table>
+      </Box>
     );
 
     return (
