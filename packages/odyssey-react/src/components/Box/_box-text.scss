@@ -11,15 +11,15 @@
  */
 
 .colorBody {
-  color: $text-body;
+  color: var(--ColorTextBody);
 }
 
 .colorInherit {
   color: inherit;
 }
 
-.fontWeightRegular {
-  font-weight: 400;
+.fontWeightNormal {
+  font-weight: var(--FontWeightNormal);
 }
 
 .fontWeightInherit {
@@ -27,7 +27,7 @@
 }
 
 .fontStyleNormal {
-  font-style: normal;
+  font-style: var(--FontStyleNormal);
 }
 
 .fontStyleInherit {
@@ -35,7 +35,7 @@
 }
 
 .fontSizeBase {
-  font-size: $size-body-base;
+  font-size: var(--FontSizeBase);
 }
 
 .fontSizeInherit {
@@ -43,7 +43,7 @@
 }
 
 .lineHeightNormal {
-  line-height: $base-line-height;
+  line-height: var(--FontLineHeightBase);
 }
 
 .lineHeightInherit {

@@ -16,102 +16,102 @@
 }
 
 .marginXs {
-  margin: $spacing-xs;
+  margin: var(--SpaceRemXs);
 }
 
 .marginS {
-  margin: $spacing-s;
+  margin: var(--SpaceRemS);
 }
 
 .marginM {
-  margin: $spacing-m;
+  margin: var(--SpaceRemM);
 }
 
 .marginL {
-  margin: $spacing-l;
+  margin: var(--SpaceRemL);
 }
 
 .marginXl {
-  margin: $spacing-xl;
+  margin: var(--SpaceRemXl);
 }
 /* stylelint-enable property-disallowed-list */
 
 .marginTopXs {
-  margin-block-start: $spacing-xs;
+  margin-block-start: var(--SpaceRemXs);
 }
 
 .marginTopS {
-  margin-block-start: $spacing-s;
+  margin-block-start: var(--SpaceRemS);
 }
 
 .marginTopM {
-  margin-block-start: $spacing-m;
+  margin-block-start: var(--SpaceRemM);
 }
 
 .marginTopL {
-  margin-block-start: $spacing-l;
+  margin-block-start: var(--SpaceRemL);
 }
 
 .marginTopXl {
-  margin-block-start: $spacing-xl;
+  margin-block-start: var(--SpaceRemXl);
 }
 
 .marginRightXs {
-  margin-inline-end: $spacing-xs;
+  margin-inline-end: var(--SpaceRemXs);
 }
 
 .marginRightS {
-  margin-inline-end: $spacing-s;
+  margin-inline-end: var(--SpaceRemS);
 }
 
 .marginRightM {
-  margin-inline-end: $spacing-m;
+  margin-inline-end: var(--SpaceRemM);
 }
 
 .marginRightL {
-  margin-inline-end: $spacing-l;
+  margin-inline-end: var(--SpaceRemL);
 }
 
 .marginRightXl {
-  margin-inline-end: $spacing-xl;
+  margin-inline-end: var(--SpaceRemXl);
 }
 
 .marginBottomXs {
-  margin-block-end: $spacing-xs;
+  margin-block-end: var(--SpaceRemXs);
 }
 
 .marginBottomS {
-  margin-block-end: $spacing-s;
+  margin-block-end: var(--SpaceRemS);
 }
 
 .marginBottomM {
-  margin-block-end: $spacing-m;
+  margin-block-end: var(--SpaceRemM);
 }
 
 .marginBottomL {
-  margin-block-end: $spacing-l;
+  margin-block-end: var(--SpaceRemL);
 }
 
 .marginBottomXl {
-  margin-block-end: $spacing-xl;
+  margin-block-end: var(--SpaceRemXl);
 }
 
 .marginLeftXs {
-  margin-inline-start: $spacing-xs;
+  margin-inline-start: var(--SpaceRemXs);
 }
 
 .marginLeftS {
-  margin-inline-start: $spacing-s;
+  margin-inline-start: var(--SpaceRemS);
 }
 
 .marginLeftM {
-  margin-inline-start: $spacing-m;
+  margin-inline-start: var(--SpaceRemM);
 }
 
 .marginLeftL {
-  margin-inline-start: $spacing-l;
+  margin-inline-start: var(--SpaceRemL);
 }
 
 .marginLeftXl {
-  margin-inline-start: $spacing-xl;
+  margin-inline-start: var(--SpaceRemXl);
 }

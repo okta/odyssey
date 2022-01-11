@@ -18,6 +18,7 @@ import {
   PolymorphicForwardRef,
   toPascalCase,
 } from "../../utils";
+import { theme } from "./Box.theme";
 import styles from "./Box.module.scss";
 
 type spacing = "xs" | "s" | "m" | "l" | "xl" | "0" | false;
@@ -303,9 +304,9 @@ export interface BoxProps {
   color?: "body" | "inherit" | false;
   /**
    * Whether to apply the normal font weight class
-   * @default regular
+   * @default normal
    */
-  fontWeight?: "regular" | "inherit" | false;
+  fontWeight?: "normal" | "inherit" | false;
   /**
    * Whether to apply the normal font style class
    * @default normal
@@ -327,7 +328,7 @@ export interface BoxProps {
  * Low level building block for ui
  */
 export const Box = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef(
@@ -335,7 +336,7 @@ export const Box = withTheme(
       {
         as = "div",
         color = "body",
-        fontWeight = "regular",
+        fontWeight = "normal",
         fontStyle = "normal",
         fontSize = "base",
         lineHeight = "normal",
