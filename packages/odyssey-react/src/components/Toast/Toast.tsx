@@ -20,6 +20,7 @@ import {
   oid,
   forwardRefWithStatics,
 } from "../../utils";
+import { Box } from "../Box";
 import { Button } from "../Button";
 import type { ButtonProps } from "../Button";
 import {
@@ -34,7 +35,7 @@ import styles from "./Toast.module.scss";
 export interface ToastProps
   extends Omit<
     ComponentPropsWithRef<"aside">,
-    "children" | "style" | "className" | "role"
+    "children" | "style" | "className" | "role" | "color"
   > {
   /**
    * Children are never rendered.
@@ -133,12 +134,14 @@ export const Toast = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <aside
+      <Box
+        as="aside"
         {...omitProps}
         ref={ref}
         role="status"
         id={xid}
         className={componentClass}
+        color={false}
       >
         <span className={styles.icon}>{icon[variant]}</span>
         <h1 className={styles.title}>{title}</h1>
@@ -150,7 +153,7 @@ export const Toast = withTheme(
             icon={<CloseIcon title={dismissButtonLabel} />}
           />
         </span>
-      </aside>
+      </Box>
     );
   })
 );
@@ -187,7 +190,7 @@ const ToastProvider = (props: PropsToastProvider) => {
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
-      <div className={styles.toastPen} data-testid="ods-toast-pen">
+      <Box className={styles.toastPen} data-testid="ods-toast-pen">
         {toasts.map(({ title, body, variant = "info", id = oid() }) => (
           <Toast
             id={id}
@@ -202,7 +205,7 @@ const ToastProvider = (props: PropsToastProvider) => {
             onAnimationEnd={handleAnimationEnd}
           />
         ))}
-      </div>
+      </Box>
     </ToastContext.Provider>
   );
 };
