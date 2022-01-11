@@ -63,6 +63,10 @@ export const Tooltip = withTheme(
           id={oid}
           className={tooltipClasses}
           role="tooltip"
+          color={false}
+          font-size={false}
+          font-weight={false}
+          line-height={false}
         >
           {label}
         </Box>
