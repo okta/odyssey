@@ -21,7 +21,6 @@ module.exports = {
   showStorybookOutput: true,
   testConcurrency: 10,
   browser: [
-    { width: 1024, height: 768, name: "ie11" },
     { width: 1024, height: 768, name: "edgechromium" },
     { width: 1024, height: 768, name: "chrome" },
     { width: 1024, height: 768, name: "safari" },
