@@ -14,6 +14,7 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOmit } from "../../utils";
+import { Box } from "../Box";
 import { Heading } from "../Heading";
 import { Text } from "../Text";
 import { CautionIcon, CompleteIcon, ErrorIcon, GetInfoIcon } from "../Icon";
@@ -22,7 +23,7 @@ import styles from "./Infobox.module.scss";
 interface CommonProps
   extends Omit<
     ComponentPropsWithRef<"aside">,
-    "style" | "className" | "children" | "title" | "content"
+    "style" | "className" | "children" | "title" | "content" | "color"
   > {
   /**
    * Children are never rendered.
@@ -82,7 +83,13 @@ export const Infobox = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <aside {...omitProps} ref={ref} className={classNames} role="status">
+      <Box
+        as="aside"
+        {...omitProps}
+        ref={ref}
+        className={classNames}
+        role="status"
+      >
         <span className={styles.icon}>{icon[variant]}</span>
         {title && (
           <div className={styles.title}>
@@ -99,7 +106,7 @@ export const Infobox = withTheme(
             <Text>{actions}</Text>
           </section>
         )}
-      </aside>
+      </Box>
     );
   })
 );
