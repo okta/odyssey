@@ -5,15 +5,14 @@
 
 # Odyssey Design System
 
-This repository contains the code for Okta's Design System Odyssey. It includes Icons, SCSS, and React Components used to build products and experiences at Okta.
+This repository contains the code for Okta's Design System Odyssey. It includes Icons and React Components used to build products and experiences at Okta.
 
 ## Packages
 
-| Package/README                                                                                      | Description                                                        |
-| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| [@okta/odyssey-icons](https://github.com/okta/odyssey/tree/master/packages/odyssey-icons/README.md) | Odyssey SVG icons.                                                 |
-| [@okta/odyssey-react](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/README.md) | Odyssey components for [React](https://reactjs.org/).              |
-| [@okta/odyssey-scss](https://github.com/okta/odyssey/tree/master/packages/odyssey-scss/README.md)   | Odyssey SCSS, includes components, includes base and reset styles. |
+| Package/README                                                                                      | Description                                           |
+| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| [@okta/odyssey-icons](https://github.com/okta/odyssey/tree/master/packages/odyssey-icons/README.md) | Odyssey SVG icons.                                    |
+| [@okta/odyssey-react](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/README.md) | Odyssey components for [React](https://reactjs.org/). |
 
 ### Making a commit
 
