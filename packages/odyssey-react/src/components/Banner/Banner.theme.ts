@@ -13,9 +13,6 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  // Layout
-  LayoutMaxlinelength: theme.LayoutMaxlinelength,
-
   // Space
   SpaceRemXs: theme.SpaceRemXs,
   SpaceRemS: theme.SpaceRemS,
@@ -23,7 +20,8 @@ export const theme: ThemeReducer = (theme) => ({
   SpaceRemL: theme.SpaceRemL,
 
   // Type
-  FontSizeScale2: theme.FontSizeScale2,
+  FontSizeHeading5: theme.FontSizeHeading5,
+  FontLineLengthMax: theme.FontLineLengthMax,
 
   // Info Variant
   ColorPrimaryLight: theme.ColorPrimaryLight,

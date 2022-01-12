@@ -27,7 +27,7 @@
 .icon {
   grid-area: icon;
   margin-inline-end: var(--SpaceRemS);
-  font-size: var(--FontSizeScale2);
+  font-size: var(--FontSizeHeading5);
   line-height: 1;
 }
 
@@ -83,7 +83,7 @@
   background-color: var(--ColorDangerLight);
 }
 
-@media screen and (max-width: (calc(var(--LayoutMaxlinelength) * 1.5))) {
+@media screen and (max-width: (calc(var(--FontLineLengthMax) * 1.5))) {
   .root {
     grid-template-areas: initial;
     grid-template-columns: repeat(2, minmax(min-content, max-content));
