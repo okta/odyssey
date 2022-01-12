@@ -34,5 +34,4 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Danger Variant
   ColorDangerLight: theme.ColorDangerLight,
-
 });
