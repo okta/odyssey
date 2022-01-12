@@ -25,15 +25,7 @@ by providing the `--no-verify` flag to `git commit`.
 
 ## Browser Support
 
-Odyssey browser support mirrors Okta's [Supported platforms, browsers, and operating systems](https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm) and is as follows:
-
-| Browser              | Support Policy                                                                                                          |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Internet Explorer 11 | Supported for the desktop mode of Windows 8. Metro Mode is not supported.                                               |
-| Edge                 | Latest public version supported.                                                                                        |
-| Chrome               | Latest public version supported.                                                                                        |
-| Safari               | Latest public version supported.                                                                                        |
-| Firefox              | Latest public version for Rapid Release supported. <br /> Latest public version for Extended Support Release supported. |
+Odyssey browser support mirrors Okta's [Supported platforms, browsers, and operating systems](https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm) with the exception of IE 11, which will be released at a later time.
 
 ## Licenses
 
