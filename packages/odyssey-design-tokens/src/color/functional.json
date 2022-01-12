@@ -11,9 +11,11 @@
       "dark": { "value": "{color.palette.red.900.value}" }
     },
     "caution": {
+      "light": { "value": "{color.palette.yellow.300.value}" },
       "base": { "value": "{color.palette.yellow.500.value}" }
     },
     "success": {
+      "light": { "value": "{color.palette.green.300.value}" },
       "base": { "value": "{color.palette.green.500.value}" }
     },
     "neutral": {

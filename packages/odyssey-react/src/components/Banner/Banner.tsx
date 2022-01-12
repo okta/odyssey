@@ -21,6 +21,7 @@ import { Text } from "../Text";
 import type { ButtonProps } from "../Button";
 import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
+import { theme } from "./Banner.theme";
 
 interface CommonProps
   extends Omit<
@@ -70,7 +71,7 @@ const icon = {
  * to act upon.
  */
 export const Banner = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLDivElement, BannerProps>((props, ref) => {

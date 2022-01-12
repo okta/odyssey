@@ -11,21 +11,15 @@
       }
     },
     "size": {
-      "base": { "value": "16" },
-      "scale": { "value": 1.1487 },
-      "body": {
-        "lede": { "value": "" },
-        "base": { "value": "" },
-        "caption": { "value": "" }
-      },
-      "title": {
-        "level-1": { "value": "" },
-        "level-2": { "value": "" },
-        "level-3": { "value": "" },
-        "level-4": { "value": "" },
-        "level-5": { "value": "" },
-        "level-6": { "value": "" }
-      }
+      "base": { "value": "16px" },
+      "body": { "value": "1rem" },
+      "caption": { "value": "0.871rem" },
+      "heading6": { "value": "1rem" },
+      "heading5": { "value": "1.149rem" },
+      "heading4": { "value": "1.32rem" },
+      "heading3": { "value": "1.516rem" },
+      "heading2": { "value": "1.741rem" },
+      "heading1": { "value": "2rem" }
     },
     "style": {
       "normal": { "value": "normal" }
@@ -36,6 +30,9 @@
     },
     "lineHeight": {
       "base": { "value": 1.5 }
+    },
+    "lineLength": {
+      "max": { "value": "32rem" }
     }
   }
 }
