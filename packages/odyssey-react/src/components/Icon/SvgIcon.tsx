@@ -14,6 +14,7 @@ import React, { Children, cloneElement, forwardRef } from "react";
 import type { ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit } from "../../utils";
+import { theme } from "./SvgIcon.theme";
 import styles from "./SvgIcon.module.scss";
 
 export interface SvgIconProps
@@ -36,7 +37,7 @@ export interface SvgIconProps
  * A thin wrapper to augment icon svgs with proper attributes and accessibility features
  */
 export const SvgIcon = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<SVGSVGElement, SvgIconProps>(
