@@ -37,4 +37,6 @@
 
 .error {
   margin-block-start: $spacing-xs;
+  color: $color-danger-base;
+  font-size: $size-body-caption;
 }
