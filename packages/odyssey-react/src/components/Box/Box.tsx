@@ -480,6 +480,7 @@ export const Box = withTheme(
 
       const componentClass = useCx(
         styles.root,
+        as && styles[`as${toPascalCase(as)}`],
         display && styles[`display${toPascalCase(display)}`],
         position && styles[`position${toPascalCase(position)}`],
         flexDirection && styles[`flexDirection${toPascalCase(flexDirection)}`],
