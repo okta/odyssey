@@ -177,9 +177,7 @@ function Hint({ id, children }: PropsHint) {
 function FieldError({ id, children }: PropsError) {
   return (
     <Box as="p" className={styles.error} id={`${id}-error`}>
-      <Text color="danger" fontSize="caption">
-        {children}
-      </Text>
+      {children}
     </Box>
   );
 }
