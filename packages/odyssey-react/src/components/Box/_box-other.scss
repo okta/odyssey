@@ -33,3 +33,16 @@
 .userSelectAll {
   user-select: all;
 }
+
+/* Element Resets */
+
+.asFieldset {
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
