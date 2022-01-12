@@ -10,10 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { useEffect, useRef } from "react";
-import ReactDOMServer from "react-dom/server";
+import { useEffect, useRef } from "react";
 import Choices from "choices.js";
-import { CloseIcon } from "../Icon";
 import styles from "./Select.module.scss";
 
 type UseChoices = (args: {
@@ -76,24 +74,6 @@ const useChoices: UseChoices = ({
         noResults: styles.noResults,
         noChoices: styles.noChoices,
       },
-      callbackOnCreateTemplates: () => ({
-        item: (...args) => {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          const item = Choices.defaults.templates.item.call(this!, ...args);
-          const btn = item.querySelector("button");
-          if (btn) {
-            const indicator = document.createElement("span");
-            indicator.classList.add(styles.buttonIndicator);
-            indicator.setAttribute("role", "presentation");
-            indicator.insertAdjacentHTML(
-              "afterbegin",
-              ReactDOMServer.renderToString(<CloseIcon />)
-            );
-            btn?.appendChild(indicator);
-          }
-          return item;
-        },
-      }),
     });
 
     select.choices = choicesInstance;
