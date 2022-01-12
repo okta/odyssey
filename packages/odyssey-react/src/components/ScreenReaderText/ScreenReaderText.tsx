@@ -18,6 +18,7 @@ import type {
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit } from "../../utils";
+import { theme } from "./ScreenReaderText.theme";
 import styles from "./ScreenReaderText.module.scss";
 
 export interface ScreenReaderTextProps
@@ -39,13 +40,10 @@ export interface ScreenReaderTextProps
  */
 export const ScreenReaderText: FunctionComponent<ScreenReaderTextProps> =
   withTheme(
-    () => ({}),
+    theme,
     styles
   )((props) => {
-    const { children, as = "span", ...rest } = props;
-
-    const Tag = as;
-
+    const { children, as: Tag = "span", ...rest } = props;
     const omitProps = useOmit(rest);
 
     return (

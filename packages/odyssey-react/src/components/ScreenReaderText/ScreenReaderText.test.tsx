@@ -24,5 +24,29 @@ describe("ScreenReaderText", () => {
     expect(screen.getByText(content)).toHaveStyle(`clip: rect(0 0 0 0)`);
   });
 
-  a11yCheck(() => render(<ScreenReaderText>{content}</ScreenReaderText>));
+  it("it allows the user to change the tagName using the as prop", () => {
+    const tagName = "em";
+    const { container } = render(
+      <ScreenReaderText as={tagName} children={content} />
+    );
+
+    expect(container.querySelector(tagName)).toBeVisible();
+  });
+
+  describe("polymorphism", () => {
+    it("restricts `as` prop", () => {
+      // @ts-expect-error foo is invalid 'as' value
+      <ScreenReaderText as="foo" />;
+      // @ts-expect-error aside is invalid 'as' value
+      <ScreenReaderText as="aside" />;
+
+      // valid
+      <ScreenReaderText children={content} />;
+      <ScreenReaderText as="span" children={content} />;
+      <ScreenReaderText as="em" children={content} />;
+      <ScreenReaderText as="strong" children={content} />;
+    });
+  });
+
+  a11yCheck(() => render(<ScreenReaderText children={content} />));
 });
