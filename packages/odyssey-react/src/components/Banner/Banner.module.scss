@@ -19,28 +19,28 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-block: $spacing-s;
-  padding-inline: $spacing-m;
-  background-color: cv("blue", "300");
+  padding-block: var(--SpaceRemS);
+  padding-inline: var(--SpaceRemM);
+  background-color: var(--ColorPrimaryLight);
 }
 
 .icon {
   grid-area: icon;
-  margin-inline-end: $spacing-s;
-  font-size: $size-title-5;
+  margin-inline-end: var(--SpaceRemS);
+  font-size: var(--FontSizeHeading5);
   line-height: 1;
 }
 
 .title {
   grid-area: title;
-  margin-inline-end: $spacing-xs;
+  margin-inline-end: var(--SpaceRemXs);
 }
 
 .content {
   grid-area: content;
   max-width: 100%;
   margin-block-end: 0;
-  margin-inline-end: $spacing-m;
+  margin-inline-end: var(--SpaceRemM);
 }
 
 .actions {
@@ -52,8 +52,8 @@
 .dismiss {
   position: absolute;
   inset-block-start: 50%;
-  inset-inline-end: $spacing-m;
-  margin-inline-start: $spacing-m;
+  inset-inline-end: var(--SpaceRemM);
+  margin-inline-start: var(--SpaceRemM);
   transform: translateY(-50%);
 }
 
@@ -62,28 +62,28 @@
 }
 
 .isDismissable {
-  padding-block: $spacing-s;
-  padding-inline-start: $spacing-m;
-  padding-inline-end: $spacing-l;
+  padding-block: var(--SpaceRemS);
+  padding-inline-start: var(--SpaceRemM);
+  padding-inline-end: var(--SpaceRemL);
 }
 
 .infoVariant {
-  background-color: cv("blue", "300");
+  background-color: var(--ColorPrimaryLight);
 }
 
 .successVariant {
-  background-color: cv("green", "300");
+  background-color: var(--ColorSuccessLight);
 }
 
 .cautionVariant {
-  background-color: cv("yellow", "300");
+  background-color: var(--ColorCautionLight);
 }
 
 .dangerVariant {
-  background-color: cv("red", "300");
+  background-color: var(--ColorDangerLight);
 }
 
-@media screen and (max-width: ($max-line-length * 1.5)) {
+@media screen and (max-width: (calc(var(--FontLineLengthMax) * 1.5))) {
   .root {
     grid-template-areas: initial;
     grid-template-columns: repeat(2, minmax(min-content, max-content));
