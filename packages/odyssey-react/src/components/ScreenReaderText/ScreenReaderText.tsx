@@ -42,10 +42,7 @@ export const ScreenReaderText: FunctionComponent<ScreenReaderTextProps> =
     () => ({}),
     styles
   )((props) => {
-    const { children, as = "span", ...rest } = props;
-
-    const Tag = as;
-
+    const { children, as: Tag = "span", ...rest } = props;
     const omitProps = useOmit(rest);
 
     return (
