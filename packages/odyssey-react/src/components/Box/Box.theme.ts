@@ -37,7 +37,7 @@ export const theme: ThemeReducer = (theme) => ({
   ColorBorderUi: theme.ColorBorderUi,
   ColorBorderDisplay: theme.ColorBorderDisplay,
   ColorBorderPrimary: theme.ColorBorderPrimary,
-  ColorBorderDanger: theme.ColorBorderDanger,
+  ColorBorderDanger: theme.ColorBorderDangerBase,
 
   // Focus Outline
   ColorFocusPrimary: theme.ColorFocusPrimary,

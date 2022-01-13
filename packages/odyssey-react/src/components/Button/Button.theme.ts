@@ -13,20 +13,106 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
+  ...root(theme),
+
   // Primary Variant
   ColorBackgroundPrimary: theme.ColorPrimaryBase,
-  ColorBorderPrimaryHover: theme.ColorPrimaryDark,
-  ColorBackgroundPrimaryHover: theme.ColorPrimaryDark,
-  ColorBackgroundPrimaryFocus: theme.ColorPrimaryDark,
   ColorBackgroundPrimaryDisabled: theme.ColorPrimaryLight,
+  ColorBackgroundPrimaryFocus: theme.ColorPrimaryDark,
+  ColorBackgroundPrimaryHover: theme.ColorPrimaryDark,
+  ColorBorderPrimary: "transparent",
+  ColorBorderPrimaryDisabled: "transparent",
+  ColorBorderPrimaryHover: theme.ColorPrimaryDark,
+  Gutter: theme.SpaceRemS,
 
   // Secondary Variant
-  ColorBorderSecondary: theme.ColorPrimaryBase,
-  ColorBackgroundSecondary: theme.ColorPaletteNeutralWhite,
-  ColorBorderSecondaryHover: theme.ColorPrimaryBase,
+  ColorBackgroundSecondary: theme.ColorBackgroundBase,
+  ColorBackgroundSecondaryDisabled: theme.ColorBackgroundBase,
+  ColorBackgroundSecondaryFocus: theme.ColorBackgroundBase,
   ColorBackgroundSecondaryHover: theme.ColorPrimaryBase,
-  ColorBorderSecondaryFocus: theme.ColorPrimaryBase,
-  ColorBackgroundSecondaryFocus: theme.ColorPaletteNeutralWhite,
+  ColorBorderSecondary: theme.ColorPrimaryBase,
   ColorBorderSecondaryDisabled: theme.ColorPrimaryLight,
-  ColorBackgroundSecondaryDisabled: theme.ColorPrimaryLight,
+  ColorBorderSecondaryFocus: theme.ColorPrimaryBase,
+  ColorBorderSecondaryHover: theme.ColorPrimaryBase,
+  ColorTextSecondary: theme.ColorTextPrimary,
+  ColorTextSecondaryDisabled: theme.ColorPaletteBlue300,
+  ColorTextSecondaryFocus: theme.ColorTextPrimary,
+  ColorTextSecondaryHover: theme.ColorTextBodyInverse,
+
+  // Danger Variant
+  ColorBackgroundDanger: theme.ColorBackgroundDangerDark,
+  ColorBackgroundDangerDisabled: theme.ColorDangerLight,
+  ColorBackgroundDangerFocus: theme.ColorPaletteRed900,
+  ColorBackgroundDangerHover: theme.ColorPaletteRed900,
+  ColorBorderDangerDisabled: theme.ColorBorderDangerLight,
+  ColorBorderDangerHover: theme.ColorBorderDangerDark,
+  ColorFocusOutlineDanger: theme.ColorFocusDanger,
+
+  // Dismiss Variant
+  ColorBackgroundDismiss: "transparent",
+  ColorBorderDismissHover: "transparent",
+  ColorTextDismiss: "inherit",
+  ColorTextDismissDisabled: theme.ColorNeutralBase,
+  FontLineHeightDismiss: 1,
+  SpacePaddingBlockDismiss: theme.SpaceEmXs,
+  SpacePaddingInlineDismiss: theme.SpaceEmXs,
+  ColorBackgroundDismissHover: "rgba(255, 255, 255, 0.6)",
+  ColorBackgroundDismissFocus: "rgba(255, 255, 255, 0.6)",
+  ColorBackgroundDismissDisabled: "rgba(235, 235, 237, 0.6)",
+
+  // Dismiss Inverted Variant
+  ColorShadowDismissInverted: theme.ColorPaletteNeutralWhite,
+
+  // Clear Variant
+  ColorBackgroundClear: "transparent",
+  ColorBackgroundClearDisabled: "transparent",
+  ColorBackgroundClearFocus: theme.ColorBackgroundBase,
+  ColorBackgroundClearHover: theme.ColorBackgroundPrimaryLight,
+  ColorBorderClearHover: "transparent",
+  ColorTextClear: theme.ColorPrimaryBase,
+  ColorTextClearDisabled: theme.ColorPrimaryLight,
+  ColorTextClearFocus: theme.ColorTextPrimary,
+  ColorTextClearHover: theme.ColorPaletteBlue900,
+
+  // Wide Layout
+  SpaceMarginBlockEndWideLayout: theme.SpaceRemS,
+  SpaceMarginBlockWideLayout: 0,
+  SpaceMarginInlineWideLayout: 0,
+
+  // Small Size
+  FontLineHeightSmallSize: theme.FontLineHeightTitle,
+  FontSizeSmallSize: theme.FontSizeCaption,
+
+  // Large Size
+  SpacePaddingBlockLargeSize: theme.SpaceEmS,
+  SpacePaddingInlineLargeSize: theme.SpaceEmM,
+});
+
+const root: ThemeReducer = (theme) => ({
+  // Font
+  ColorText: theme.ColorTextBodyInverse,
+  FontFamily: theme.FontFamilyBase,
+  FontLineHeight: theme.FontLineHeightBase,
+  FontSize: theme.FontSizeBase,
+  FontWeight: theme.FontWeightBold,
+  FontWhiteSpace: "nowrap",
+
+  // Space
+  SpaceMarginBlock: 0,
+  SpaceMarginInline: 0,
+  SpacePaddingBlock: theme.SpaceEmXs,
+  SpacePaddingInline: theme.SpaceEmS,
+
+  // Border
+  BorderRadius: theme.BorderRadiusBase,
+  BorderStyle: theme.BorderStyleBase,
+  BorderWidth: theme.BorderWidthBase,
+
+  TransitionDuration: theme.TransitionDurationBase,
+  TransitionTiming: theme.TransitionTimingBase,
+
+  LabelMinWidth: theme.SpaceEmL,
+  LabelSpaceMarginInlineStart: theme.SpaceRemXs,
+
+  FocusOutlineWidth: "4px",
 });

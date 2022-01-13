@@ -4,7 +4,11 @@
       "ui": { "value": "{color.palette.neutral.500.value}" },
       "display": { "value": "{color.palette.neutral.200.value}" },
       "disabled": { "value": "{color.palette.neutral.200.value}" },
-      "danger": { "value": "{color.danger.base.value}" },
+      "danger": {
+        "light": { "value": "{color.danger.light.value}" },
+        "base": { "value": "{color.danger.base.value}" },
+        "dark": { "value": "{color.danger.dark.value}" }
+      },
       "primary": { "value": "{color.primary.base.value}" }
     }
   }
