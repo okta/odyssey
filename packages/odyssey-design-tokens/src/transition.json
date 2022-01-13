@@ -1,0 +1,10 @@
+{
+  "transition": {
+    "duration": {
+      "base": { "value": "100ms" }
+    },
+    "timing": {
+      "base": { "value": "linear" }
+    }
+  }
+}

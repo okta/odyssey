@@ -3,6 +3,7 @@
     "border": {
       "ui": { "value": "{color.palette.neutral.500.value}" },
       "display": { "value": "{color.palette.neutral.200.value}" },
+      "disabled": { "value": "{color.palette.neutral.200.value}" },
       "danger": { "value": "{color.danger.base.value}" },
       "primary": { "value": "{color.primary.base.value}" }
     }
