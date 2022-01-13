@@ -10,21 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import { Fieldset } from ".";
+import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
-const fieldset = "group";
-const fieldsetText = "This is a fieldset.";
-
-describe("Fieldset", () => {
-  it("render the Fieldset", () => {
-    render(<Fieldset children={fieldsetText} />);
-
-    const fieldsetElement = screen.getByRole(fieldset);
-    expect(fieldsetElement).toBeVisible();
-    expect(fieldsetElement.tagName).toBe("FIELDSET");
-  });
-
-  a11yCheck(() => render(<fieldset children={fieldsetText} />));
-});
+export const theme: ThemeReducer = () => ({});

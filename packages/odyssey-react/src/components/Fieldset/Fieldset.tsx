@@ -15,7 +15,8 @@ import type { ComponentPropsWithRef, ReactNode } from "react";
 import { Box } from "../Box";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit, useCx } from "../../utils";
-import styles from "./Heading.module.scss";
+import styles from "./Fieldset.module.scss";
+import { theme } from "./Fieldset.theme";
 
 export interface FieldsetProps
   extends Omit<
@@ -37,7 +38,7 @@ export interface FieldsetProps
  * The <fieldset> HTML element is used to group several controls as well as labels (<label>) within a web form.
  */
 export const Fieldset = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLFieldSetElement, FieldsetProps>((props, ref) => {
