@@ -19,12 +19,12 @@ import { useChoices } from "./useChoices";
 import type { ChoicesHTMLSelectElement } from "./useChoices";
 import { forwardRefWithStatics, useOid, useOmit } from "../../utils";
 import { Field } from "../Field";
-import type { SharedFieldTypes } from "../Field/types";
+import type { CommonFieldProps } from "../Field/types";
 import { CaretDownIcon } from "../Icon";
 import styles from "./Select.module.scss";
 
 interface CommonProps
-  extends SharedFieldTypes,
+  extends CommonFieldProps,
     Omit<ComponentPropsWithRef<"select">, "onChange" | "style" | "className"> {
   /**
    * One or more options or option groups to be used together as a group
@@ -39,12 +39,6 @@ interface CommonProps
    * The underlying select element name attribute for the group
    */
   name: string;
-
-  /**
-   * The underlying select element required attribute for the group
-   * @default true
-   */
-  required?: boolean;
 
   /**
    * The underlying select element disabled attribute for the group
@@ -107,7 +101,7 @@ export const Select = withTheme(
         disabled = false,
         name,
         onChange,
-        required = true,
+        required,
         value,
         error,
         hint,

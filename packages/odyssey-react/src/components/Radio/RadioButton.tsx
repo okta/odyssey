@@ -16,21 +16,16 @@ import { withTheme } from "@okta/odyssey-react-theme";
 import { useRadioGroup } from "./context";
 import { Box } from "../Box";
 import { useCx, useOid, useOmit } from "../../utils";
-import type { SharedFieldTypes } from "../Field/types";
+import type { CommonFieldProps } from "../Field/types";
 import styles from "./RadioButton.module.scss";
 
 export interface RadioButtonProps
-  extends Pick<SharedFieldTypes, "hint" | "error">,
+  extends Pick<CommonFieldProps, "label" | "hint" | "error" | "required">,
     Omit<ComponentPropsWithRef<"input">, "style" | "className"> {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
   id?: string;
-
-  /**
-   * The form field label
-   */
-  label: string;
 
   /**
    * The underlying input element value attribute

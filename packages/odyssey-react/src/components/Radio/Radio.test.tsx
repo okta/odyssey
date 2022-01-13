@@ -23,7 +23,7 @@ const warpLabel = "Warp speed";
 const warpValue = "warp";
 
 const tree = (props: Record<string, unknown> = {}) => (
-  <Radio.Group {...props} label={label} name={name}>
+  <Radio.Group {...props} label={label} name={name} required>
     <Radio.Button label="Lightspeed" value="light" />
     <Radio.Button label="Warp speed" value="warp" />
     <Radio.Button label="Ludicrous speed" value="ludicrous" />
