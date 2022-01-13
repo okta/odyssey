@@ -11,26 +11,27 @@
  */
 
 .root {
-  @include border-radius($base-border-radius);
+  @include border-radius(var(--BorderRadius));
 
   display: inline-block;
   position: relative;
-  margin-block: 0;
-  margin-inline: 0;
-  padding-block: $spacing-xs-em;
-  padding-inline: $spacing-s-em;
+  margin-block: var(--SpaceMarginBlock);
+  margin-inline: var(--SpaceMarginInline);
+  padding-block: var(--SpacePaddingBlock);
+  padding-inline: var(--SpacePaddingInline);
   transition-property: color, background-color, border-color, box-shadow;
-  transition-duration: 100ms;
-  transition-timing-function: linear;
-  border: 1px solid transparent;
+  transition-duration: var(--TransitionDuration);
+  transition-timing-function: var(--TransitionTiming);
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--ColorBorderPrimary);
   background-color: var(--ColorBackgroundPrimary);
-  box-shadow: 0 0 0 0 $color-primary-light;
-  color: $white;
-  font-family: $body-font-family;
-  font-size: ms(0);
-  font-weight: 600;
-  line-height: $base-line-height;
-  white-space: nowrap;
+  color: var(--ColorText);
+  font-family: var(--FontFamily);
+  font-size: var(--FontSize);
+  font-weight: var(--FontWeight);
+  line-height: var(--FontLineHeight);
+  white-space: var(--FontWhiteSpace);
 
   &:hover {
     border-color: var(--ColorBorderPrimaryHover);
@@ -44,13 +45,13 @@
   }
 
   &:disabled {
-    border-color: transparent;
+    border-color: var(--ColorBorderPrimaryDisabled);
     background-color: var(--ColorBackgroundPrimaryDisabled);
     cursor: not-allowed;
   }
 
   & + & {
-    margin-inline-start: $spacing-s;
+    margin-inline-start: var(--Gutter);
   }
 }
 
@@ -58,10 +59,10 @@
 
 .label {
   display: inline-block;
-  min-width: $spacing-l-em;
+  min-width: var(--LabelMinWidth);
 
   &:not(:only-child) {
-    margin-inline-start: $spacing-xs;
+    margin-inline-start: var(--LabelSpaceMarginInlineStart);
   }
 }
 
@@ -70,69 +71,69 @@
 .secondaryVariant {
   border-color: var(--ColorBorderSecondary);
   background-color: var(--ColorBackgroundSecondary);
-  color: $color-primary-base;
+  color: var(--ColorTextSecondary);
 
   &:hover {
     border-color: var(--ColorBorderSecondaryHover);
     background-color: var(--ColorBackgroundSecondaryHover);
-    color: $white;
+    color: var(--ColorTextSecondaryHover);
   }
 
   &:focus {
     border-color: var(--ColorBorderSecondaryFocus);
     background-color: var(--ColorBackgroundSecondaryFocus);
-    color: $color-primary-base;
+    color: var(--ColorTextSecondaryFocus);
   }
 
   &:disabled {
     border-color: var(--ColorBorderSecondaryDisabled);
     background-color: var(--ColorBackgroundSecondaryDisabled);
-    color: $color-primary-light;
+    color: var(--ColorTextSecondaryDisabled);
   }
 }
 
 .dangerVariant {
-  background-color: $color-danger-base;
+  background-color: var(--ColorBackgroundDanger);
 
   &:hover {
-    border-color: $color-danger-dark;
-    background-color: $color-danger-dark;
+    border-color: var(--ColorBorderDangerHover);
+    background-color: var(--ColorBackgroundDangerHover);
   }
 
   &:focus {
-    @include outline($focus-ring-danger);
+    @include outline(var(--ColorFocusOutlineDanger), var(--FocusOutlineWidth));
 
-    background-color: $color-danger-dark;
+    background-color: var(--ColorBackgroundDangerFocus);
   }
 
   &:disabled {
-    border-color: $color-danger-light;
-    background-color: $color-danger-light;
+    border-color: var(--ColorBorderDangerDisabled);
+    background-color: var(--ColorBackgroundDangerDisabled);
   }
 }
 
 .dismissVariant,
 .dismissInvertedVariant {
-  padding-block: ($spacing-xs-em * 0.5);
-  padding-inline: ($spacing-xs-em * 0.5);
+  padding-block: calc(var(--SpacePaddingBlockDismiss) * 0.5);
+  padding-inline: calc(var(--SpacePaddingInlineDismiss) * 0.5);
   border: 0;
-  background-color: transparent;
-  color: inherit;
-  line-height: 1;
+  background-color: var(--ColorBackgroundDismiss);
+  color: var(--ColorTextDismiss);
+  line-height: var(--FontLineHeightDismiss);
 
   &:hover {
-    border-color: transparent;
-    background-color: transparentize($white, 0.6);
+    border-color: var(--ColorBorderDismissHover);
+    background-color: var(--ColorBackgroundDismissHover);
   }
 
   &:focus {
-    background-color: transparentize($white, 0.6);
+    background-color: var(--ColorBackgroundDismissFocus);
     box-shadow: 0 0 0 2px;
   }
 
   &:disabled {
-    background-color: transparentize(cv("gray", "100"), 0.6);
-    color: cv("gray", "600");
+    background-color: var(--ColorBackgroundDismissDisabled);
+    color: var(--ColorTextDismissDisabled);
   }
 
   .icon {
@@ -144,27 +145,27 @@
 }
 
 .dismissInvertedVariant:focus {
-  box-shadow: 0 0 0 2px $white;
+  box-shadow: 0 0 0 2px var(--ColorShadowDismissInverted);
 }
 
 .clearVariant {
-  background-color: transparent;
-  color: $color-primary-base;
+  background-color: var(--ColorBackgroundClear);
+  color: var(--ColorTextClear);
 
   &:hover {
-    border-color: transparent;
-    background-color: cv("blue", "000");
-    color: $color-primary-dark;
+    border-color: var(--ColorBorderClearHover);
+    background-color: var(--ColorBackgroundClearHover);
+    color: var(--ColorTextClearHover);
   }
 
   &:focus {
-    background-color: $white;
-    color: $color-primary-base;
+    background-color: var(--ColorBackgroundClearFocus);
+    color: var(--ColorTextClearFocus);
   }
 
   &:disabled {
-    background-color: transparent;
-    color: $color-primary-light;
+    background-color: var(--ColorBackgroundClearDisabled);
+    color: var(--ColorTextClearDisabled);
   }
 }
 
@@ -173,22 +174,22 @@
 .wideLayout {
   display: block;
   width: 100%;
-  margin-block: 0;
-  margin-inline: 0;
+  margin-block: var(--SpaceMarginBlockWideLayout);
+  margin-inline: var(--SpaceMarginInlineWideLayout);
 
   &:not(:last-child) {
-    margin-block-end: $spacing-s;
+    margin-block-end: var(--SpaceMarginBlockEndWideLayout);
   }
 }
 
 /* Sizes */
 
 .sSize {
-  font-size: ms(-1);
-  line-height: $title-line-height;
+  font-size: var(--FontSizeSmallSize);
+  line-height: var(--FontLineHeightSmallSize);
 }
 
 .lSize {
-  padding-block: $spacing-s-em;
-  padding-inline: $spacing-m-em;
+  padding-block: var(--SpacePaddingBlockLargeSize);
+  padding-inline: var(--SpacePaddingInlineLargeSize);
 }
