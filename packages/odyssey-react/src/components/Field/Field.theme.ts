@@ -10,50 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.colorBody {
-  color: var(--ColorTextBody);
-}
+import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
-.colorDanger {
-  color: var(--ColorTextDanger);
-}
-
-.colorInherit {
-  color: inherit;
-}
-
-.fontWeightNormal {
-  font-weight: var(--FontWeightNormal);
-}
-
-.fontWeightInherit {
-  font-weight: inherit;
-}
-
-.fontStyleNormal {
-  font-style: var(--FontStyleNormal);
-}
-
-.fontStyleInherit {
-  font-style: inherit;
-}
-
-.fontSizeBase {
-  font-size: var(--FontSizeBase);
-}
-
-.fontSizeCaption {
-  font-size: var(--FontSizeCaption);
-}
-
-.fontSizeInherit {
-  font-size: inherit;
-}
-
-.lineHeightNormal {
-  line-height: var(--FontLineHeightBase);
-}
-
-.lineHeightInherit {
-  line-height: inherit;
-}
+export const theme: ThemeReducer = () => ({});

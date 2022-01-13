@@ -18,8 +18,10 @@ export const theme: ThemeReducer = (theme) => ({
   FontWeightNormal: theme.FontWeightNormal,
   FontStyleNormal: theme.FontStyleNormal,
   FontSizeBase: theme.FontSizeBase,
+  FontSizeCaption: theme.FontSizeCaption,
   FontLineHeightBase: theme.FontLineHeightBase,
   ColorTextBody: theme.ColorTextBody,
+  ColorTextDanger: theme.ColorDangerBase,
 
   // Space
   SpaceRemXs: theme.SpaceRemXs,

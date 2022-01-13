@@ -23,6 +23,7 @@ import { SharedFieldTypes } from "./types";
 import { Text } from "../Text";
 import { Box } from "../Box";
 import styles from "./Field.module.scss";
+import { theme } from "./Field.theme";
 
 export interface FieldProps extends SharedFieldTypes {
   /**
@@ -66,7 +67,7 @@ interface Statics {
 }
 
 export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   Object.assign(
@@ -176,7 +177,13 @@ function Hint({ id, children }: PropsHint) {
 
 function FieldError({ id, children }: PropsError) {
   return (
-    <Box as="p" className={styles.error} id={`${id}-error`}>
+    <Box
+      as="p"
+      color="danger"
+      fontSize="caption"
+      id={`${id}-error`}
+      marginTop="xs"
+    >
       {children}
     </Box>
   );

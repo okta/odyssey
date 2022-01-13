@@ -301,7 +301,7 @@ export interface BoxProps {
    * Whether to apply the body text color class
    * @default body
    */
-  color?: "body" | "inherit" | false;
+  color?: "body" | "danger" | "inherit" | false;
   /**
    * Whether to apply the normal font weight class
    * @default normal
@@ -316,7 +316,7 @@ export interface BoxProps {
    * Whether to apply the base font size class
    * @default base
    */
-  fontSize?: "base" | "inherit" | false;
+  fontSize?: "base" | "caption" | "inherit" | false;
   /**
    * Whether to apply the base line height class
    * @default normal
