@@ -13,7 +13,7 @@
 import React from "react";
 import type { FunctionComponent, ReactNode, ReactElement } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
-import { Box } from "../Box";
+import { Box } from "../Fieldset";
 import { useOmit } from "../../utils";
 import styles from "./FieldGroup.module.scss";
 
