@@ -30,6 +30,29 @@ describe("Modal", () => {
     expect(screen.getByRole(role)).toBeVisible();
   });
 
+  it("accepts and spreads omitted rest props to the root of each compound static component", () => {
+    const handleClose = jest.fn();
+    render(
+      <Modal
+        data-testid="foo"
+        open={true}
+        onClose={handleClose}
+        closeMessage={message}
+      >
+        <Modal.Header data-testid="bar">{modalTitle}</Modal.Header>
+        <Modal.Body data-testid="baz" children="baz" />
+        <Modal.Footer data-testid="qux" children="qux" />
+        <Modal.Button data-testid="quux" close children="quux" />
+      </Modal>
+    );
+
+    expect(screen.getByTestId("foo")).toBeVisible();
+    expect(screen.getByTestId("bar")).toBeVisible();
+    expect(screen.getByTestId("baz")).toBeVisible();
+    expect(screen.getByTestId("qux")).toBeVisible();
+    expect(screen.getByTestId("quux")).toBeVisible();
+  });
+
   it("should be hidden when open prop is set to `false`", () => {
     const handleClose = jest.fn();
     render(

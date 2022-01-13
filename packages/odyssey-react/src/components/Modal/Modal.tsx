@@ -23,7 +23,7 @@ import { Box } from "../Box";
 import { Button as CoreButton } from "../Button";
 import type { ButtonProps as CoreButtonProps } from "../Button";
 import { Heading } from "../Heading";
-import { forwardRefWithStatics, useOid, useCx } from "../../utils";
+import { forwardRefWithStatics, useOid, useCx, useOmit } from "../../utils";
 import styles from "./Modal.module.scss";
 import { CloseIcon } from "../Icon";
 
@@ -92,12 +92,21 @@ export const Modal = withTheme(
   styles
 )(
   forwardRefWithStatics<HTMLDivElement, ModalProps, Statics>((props, ref) => {
-    const { children, id, open = false, onClose, closeMessage, onOpen } = props;
+    const {
+      children,
+      id,
+      open = false,
+      onClose,
+      closeMessage,
+      onOpen,
+      ...rest
+    } = props;
     const modalTitleId = useOid();
     const context = useMemo(
       () => ({ onClose, closeMessage, modalTitleId }),
       [onClose, closeMessage, modalTitleId]
     );
+    const omitProps = useOmit(rest);
     const oid = useOid(id);
     const modalDialog = useRef<HTMLDivElement>(null);
     const componentClass = useCx(styles.root, { [styles.openState]: open });
@@ -108,7 +117,13 @@ export const Modal = withTheme(
 
     return createPortal(
       <ModalContext.Provider value={context}>
-        <Box ref={ref} className={componentClass} id={oid} hidden={!open}>
+        <Box
+          {...omitProps}
+          ref={ref}
+          className={componentClass}
+          id={oid}
+          hidden={!open}
+        >
           <div className={styles.overlay} tabIndex={-1}>
             <div
               className={styles.dialog}
@@ -127,10 +142,13 @@ export const Modal = withTheme(
   })
 );
 
-const Header = ({ children }: PropsModalHeader) => {
+const Header: FunctionComponent<PropsModalHeader> = (props) => {
+  const { children, ...rest } = props;
+  const omitProps = useOmit(rest);
   const { modalTitleId, closeMessage } = useContext(ModalContext);
+
   return (
-    <Box as="header" className={styles.header}>
+    <Box {...omitProps} as="header" className={styles.header}>
       <span className={styles.dismiss}>
         <Modal.Button
           close
@@ -149,17 +167,25 @@ const Header = ({ children }: PropsModalHeader) => {
   );
 };
 
-const Body: FunctionComponent<PropsModalBody> = ({ children }) => (
-  <Box as="main" className={styles.content}>
-    {children}
-  </Box>
-);
+const Body: FunctionComponent<PropsModalBody> = (props) => {
+  const { children, ...rest } = props;
+  const omitProps = useOmit(rest);
+  return (
+    <Box {...omitProps} as="main" className={styles.content}>
+      {children}
+    </Box>
+  );
+};
 
-const Footer: FunctionComponent<PropsModalFooter> = ({ children }) => (
-  <Box as="footer" className={styles.footer}>
-    {children}
-  </Box>
-);
+const Footer: FunctionComponent<PropsModalFooter> = (props) => {
+  const { children, ...rest } = props;
+  const omitProps = useOmit(rest);
+  return (
+    <Box {...omitProps} as="footer" className={styles.footer}>
+      {children}
+    </Box>
+  );
+};
 
 const Button: FunctionComponent<PropsModalButton> = (
   props: PropsModalButton
