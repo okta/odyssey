@@ -20,6 +20,7 @@ import {
   Heading,
   UserIcon,
   SettingsIcon,
+  Text,
 } from "@okta/odyssey-react";
 import { List as Source } from "../../../../odyssey-react/src";
 
@@ -71,6 +72,7 @@ type ActionCardProps = {
   subHeading: ReactText;
   onClick: () => void;
 };
+
 const ActionCard = ({
   icon,
   heading,
@@ -103,10 +105,10 @@ const ActionCard = ({
     >
       <Box marginRight="m">{icon}</Box>
       <Box flexGrow="1" userSelect="none">
-        <Heading level="2" visualLevel="6">
+        <Heading level="2" visualLevel="6" noEndMargin>
           {heading}
         </Heading>
-        <p className="action-card-sub">{subHeading}</p>
+        <Text marginBottom="0">{subHeading}</Text>
       </Box>
     </Box>
   );
