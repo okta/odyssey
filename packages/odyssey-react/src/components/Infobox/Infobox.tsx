@@ -19,6 +19,7 @@ import { Heading } from "../Heading";
 import { Text } from "../Text";
 import { CautionIcon, CompleteIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Infobox.module.scss";
+import { theme } from "./Infobox.theme";
 
 interface CommonProps
   extends Omit<
@@ -73,7 +74,7 @@ const icon = {
  * user action or system activity.
  */
 export const Infobox = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLElement, InfoboxProps>((props, ref) => {
