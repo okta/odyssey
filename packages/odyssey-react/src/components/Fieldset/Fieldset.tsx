@@ -14,8 +14,8 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
 import { Box } from "../Box";
 import { withTheme } from "@okta/odyssey-react-theme";
-import { useOmit } from "../../utils";
-import styles from "./Fieldset.module.scss";
+import { useOmit, useCx } from "../../utils";
+import styles from "./Heading.module.scss";
 
 export interface FieldsetProps
   extends Omit<
@@ -26,23 +26,28 @@ export interface FieldsetProps
    * The human readable section title to be visually displayed
    */
   children: ReactNode;
+
+  /**
+   * CSS class to add additional styles not covered by props
+   */
+  className?: string;
 }
 
 /**
- * The <fieldset> HTML element is used to group several controls as
- * well as labels (<label>) within a Form component instance.
+ * The <fieldset> HTML element is used to group several controls as well as labels (<label>) within a web form.
  */
 export const Fieldset = withTheme(
   () => ({}),
   styles
 )(
   forwardRef<HTMLFieldSetElement, FieldsetProps>((props, ref) => {
-    const { children, ...rest } = props;
+    const { children, className, ...rest } = props;
 
     const omitProps = useOmit(rest);
+    const componentClass = useCx(styles.root, className);
 
     return (
-      <Box as="fieldset" {...omitProps} ref={ref} className={styles.root}>
+      <Box as="fieldset" {...omitProps} ref={ref} className={componentClass}>
         {children}
       </Box>
     );
