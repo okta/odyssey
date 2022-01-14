@@ -176,7 +176,7 @@ export const TextInput: FunctionComponent<TextInputProps> = withTheme(
       hint={hint}
       inputId={oid}
       label={label}
-      labelHidden={type === "search" ? true : false}
+      labelHidden={type === "search"}
       optionalLabel={optionalLabel}
       required={required}
     >
