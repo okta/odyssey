@@ -59,17 +59,17 @@
 /* Variants */
 
 .infoVariant {
-  background-color: var(--InfoBackgroundColor);
+  background-color: var(--ColorBackgroundInfo);
 }
 
 .successVariant {
-  background-color: var(--SuccessBackgroundColor);
+  background-color: var(--ColorBackgroundSuccess);
 }
 
 .cautionVariant {
-  background-color: var(--CautionBackgroundColor);
+  background-color: var(--ColorBackgroundCaution);
 }
 
 .dangerVariant {
-  background-color: var(--DangerBackgroundColor);
+  background-color: var(--ColorBackgroundDanger);
 }
