@@ -11,7 +11,7 @@
  */
 
 .root {
-  @include border-radius($base-border-radius);
+  @include border-radius(var(--BorderRadius));
 
   display: grid;
   grid-template-areas:
@@ -20,21 +20,21 @@
     ". actions";
   grid-template-columns: max-content 1fr;
   width: 100%;
-  max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
-  padding-block: $spacing-m;
-  padding-inline: $spacing-m;
-  column-gap: $spacing-s;
+  max-width: calc(var(--FontLineLengthMax) + calc(var(--SpacePadding) * 2));
+  padding-block: var(--SpacePadding);
+  padding-inline: var(--SpacePadding);
+  column-gap: var(--ColumnGap);
 
   &:not(:last-child) {
-    margin-block-end: $spacing-m;
+    margin-block-end: var(--SpaceMarginBlockEnd);
   }
 }
 
 .icon {
   grid-area: icon;
   align-self: start;
-  font-size: $size-title-5;
-  line-height: $title-line-height;
+  font-size: var(--IconSize);
+  line-height: var(--IconLineHeight);
   justify-self: start;
 }
 
@@ -46,7 +46,7 @@
   grid-area: content;
 
   &:not(:last-child) {
-    margin-block-end: $spacing-xs;
+    margin-block-end: var(--ContentSpaceMarginBlockEnd);
   }
 }
 
@@ -59,17 +59,17 @@
 /* Variants */
 
 .infoVariant {
-  background-color: cv("blue", "000");
+  background-color: var(--ColorBackgroundInfo);
 }
 
 .successVariant {
-  background-color: cv("green", "000");
+  background-color: var(--ColorBackgroundSuccess);
 }
 
 .cautionVariant {
-  background-color: cv("yellow", "000");
+  background-color: var(--ColorBackgroundCaution);
 }
 
 .dangerVariant {
-  background-color: cv("red", "000");
+  background-color: var(--ColorBackgroundDanger);
 }
