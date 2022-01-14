@@ -22,6 +22,7 @@ import { ScreenReaderText } from "../ScreenReaderText";
 import { SharedFieldTypes } from "./types";
 import { Text } from "../Text";
 import { Box } from "../Box";
+import { useCx } from "../../utils";
 import styles from "./Field.module.scss";
 import { theme } from "./Field.theme";
 
@@ -85,11 +86,15 @@ export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
       } = props;
 
       const TagLabel = as === "fieldset" ? "legend" : "label";
+      const componentClass = useCx(
+        styles.root,
+        as === "fieldset" && styles.rootFieldset
+      );
 
       return (
         <Box
           as={as}
-          className={styles.root}
+          className={componentClass}
           display="flex"
           flexDirection="column"
         >
