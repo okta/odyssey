@@ -23,7 +23,7 @@
     var(--TransitionDelay);
   border: var(--TipBorderWidth) solid var(--TipBackgroundColor);
   opacity: 0;
-  background: var(--TipBackgroundColor);
+  background-color: var(--TipBackgroundColor);
   color: var(--TipTextColor);
   font-size: var(--TipFontSize);
   font-weight: var(--TipFontWeight);
