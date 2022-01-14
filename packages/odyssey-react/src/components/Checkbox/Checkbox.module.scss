@@ -130,8 +130,8 @@
 .label {
   display: block;
   position: relative;
-  margin-block-end: var(--MarginBottom);
-  padding-inline-start: calc(var(--BoxSize) + var(--PaddingLabelLeft));
+  margin-block-end: var(--MarginBlockEnd);
+  padding-inline-start: calc(var(--BoxSize) + var(--PaddingLabelInlineStart));
   font-size: var(--FontSize);
   font-weight: var(--FontWeight);
   text-align: start;
