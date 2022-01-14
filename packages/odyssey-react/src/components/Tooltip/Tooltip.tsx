@@ -14,8 +14,10 @@ import React, { cloneElement, forwardRef } from "react";
 import type { ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOid, useOmit } from "../../utils";
-import styles from "./Tooltip.module.scss";
 import { Box } from "../Box";
+import styles from "./Tooltip.module.scss";
+import { theme } from "./Tooltip.theme";
+
 export interface TooltipProps
   extends Omit<
     ComponentPropsWithRef<"aside">,
@@ -42,7 +44,7 @@ export interface TooltipProps
  * A transient element that provides additional context for an element when it receives hover or focus.
  */
 export const Tooltip = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLElement, TooltipProps>((props, ref) => {
@@ -64,9 +66,9 @@ export const Tooltip = withTheme(
           className={tooltipClasses}
           role="tooltip"
           color={false}
-          font-size={false}
-          font-weight={false}
-          line-height={false}
+          fontSize={false}
+          fontWeight={false}
+          lineHeight={false}
         >
           {label}
         </Box>
