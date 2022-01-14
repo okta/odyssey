@@ -19,6 +19,7 @@ import styles from "./Checkbox.module.scss";
 import { useCx, useOid, useOmit } from "../../utils";
 import { Field } from "../Field";
 import type { SharedFieldTypes } from "../Field/types";
+import { theme } from "./Checkbox.theme";
 
 export interface CheckboxProps
   extends Omit<
@@ -54,7 +55,7 @@ export interface CheckboxProps
  * A clickable Checkbox used for form submissions and most in-page interactions.
  */
 export const Checkbox = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
