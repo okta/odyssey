@@ -29,7 +29,4 @@ export const theme: ThemeReducer = (theme) => ({
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTiming: theme.TransitionTimingBase,
   TransitionDelay: "1s",
-
-  // Danger Variant
-  ColorDangerLight: theme.ColorDangerLight,
 });
