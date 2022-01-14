@@ -155,7 +155,7 @@
   .box {
     width: var(--BoxSize);
     height: var(--BoxSize);
-    border: var(--BorderSize) solid var(--ColorBorder);
+    border: var(--BorderSize) var(--BorderStyle) var(--ColorBorder);
   }
 
   /* Check */
