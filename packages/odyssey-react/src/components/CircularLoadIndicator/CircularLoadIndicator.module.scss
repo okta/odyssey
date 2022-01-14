@@ -10,38 +10,30 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-$circular-load-indicator-size: 1.5em;
-$circular-load-indicator-circle-stroke-width: 17%;
-$circular-load-indicator-circle-color: cv("gray", "100");
-$circular-load-indicator-animated-circle-color: $color-primary-dark;
-$circular-load-indicator-animation-duration: 1.4s;
-$circular-load-indicator-easing: cubic-bezier(0.35, -0.12, 0.09, 0.96);
-
 .root {
   display: inline-block;
-  animation: rotateClockwise $circular-load-indicator-animation-duration linear
-    infinite;
-  color: $color-primary-base;
+  animation: rotateClockwise var(--AnimationDuration) linear infinite;
+  color: var(--TextColor);
 }
 
 .svg {
   display: block;
-  width: $circular-load-indicator-size;
-  height: $circular-load-indicator-size;
+  width: var(--Size);
+  height: var(--Size);
 }
 
 .circle {
-  stroke-width: $circular-load-indicator-circle-stroke-width;
-  stroke: $circular-load-indicator-circle-color;
+  stroke-width: var(--CircleStrokeWidth);
+  stroke: var(--CircleColor);
 }
 
 .animatedCircle {
-  animation: indeterminateStroke $circular-load-indicator-animation-duration
-    $circular-load-indicator-easing infinite;
-  stroke-width: $circular-load-indicator-circle-stroke-width;
+  animation: indeterminateStroke var(--AnimationDuration) var(--AnimationEasing)
+    infinite;
+  stroke-width: var(--CircleStrokeWidth);
   stroke-dasharray: 160%, 360%;
   stroke-dashoffset: 0;
-  stroke: $circular-load-indicator-animated-circle-color;
+  stroke: var(--AnimatedCircleColor);
 }
 
 @keyframes rotateClockwise {

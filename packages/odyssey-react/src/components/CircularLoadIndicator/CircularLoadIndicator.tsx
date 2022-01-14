@@ -16,6 +16,7 @@ import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit } from "../../utils";
 import { Box } from "../Box";
 import styles from "./CircularLoadIndicator.module.scss";
+import { theme } from "./CircularLoadIndicator.theme";
 
 export interface CircularLoadIndicatorProps
   extends Omit<
@@ -44,7 +45,7 @@ export interface CircularLoadIndicatorProps
  * set the `aria-busy` attribute to `true` on the region until it is finished loading.
  */
 export const CircularLoadIndicator = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLSpanElement, CircularLoadIndicatorProps>((props, ref) => {
