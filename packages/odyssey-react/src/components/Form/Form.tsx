@@ -15,6 +15,7 @@ import type { ComponentPropsWithRef, ReactNode, ReactElement } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit, forwardRefWithStatics } from "../../utils";
 import { Heading } from "../Heading";
+import { Box } from "../Box";
 import styles from "./Form.module.scss";
 
 export interface FormProps
@@ -64,13 +65,13 @@ export const Form = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <form {...omitProps} className={styles.root} ref={ref}>
+      <Box as="form" {...omitProps} className={styles.root} ref={ref}>
         <header className={styles.header}>
           {title && <Heading visualLevel="3" children={title} />}
           {desc && <p>{desc}</p>}
         </header>
         {children}
-      </form>
+      </Box>
     );
   })
 );
