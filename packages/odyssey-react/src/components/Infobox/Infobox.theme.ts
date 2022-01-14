@@ -26,8 +26,8 @@ export const theme: ThemeReducer = (theme) => ({
   ContentSpaceMarginBlockEnd: theme.SpaceRemXs,
 
   // Variants
-  CautionBackgroundColor: theme.ColorBackgroundCautionLight,
-  DangerBackgroundColor: theme.ColorBackgroundDangerLight,
-  InfoBackgroundColor: theme.ColorBackgroundPrimaryLight,
-  SuccessBackgroundColor: theme.ColorBackgroundSuccessLight,
+  ColorBackgroundCaution: theme.ColorBackgroundCautionLight,
+  ColorBackgroundDanger: theme.ColorBackgroundDangerLight,
+  ColorBackgroundInfo: theme.ColorBackgroundPrimaryLight,
+  ColorBackgroundSuccess: theme.ColorBackgroundSuccessLight,
 });
