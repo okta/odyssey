@@ -19,7 +19,7 @@ import { Box } from "../Box";
 import styles from "./Form.module.scss";
 
 export interface FormProps
-  extends Omit<ComponentPropsWithRef<"form">, "style" | "className"> {
+  extends Omit<ComponentPropsWithRef<"form">, "style" | "color" | "className"> {
   /**
    * Content to be rendered within the Form. Avoid using direct children, put child content
    * within the provided Form static components (Form.Error and Form.Actions)
