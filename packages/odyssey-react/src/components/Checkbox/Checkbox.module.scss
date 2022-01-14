@@ -19,8 +19,8 @@
   &:indeterminate {
     + .label {
       .box {
-        border-color: $color-primary-base;
-        background-color: $color-primary-base;
+        border-color: var(--ColorBorderChecked);
+        background-color: var(--ColorBackground);
       }
     }
   }
@@ -28,7 +28,7 @@
   &:checked {
     + .label {
       .indicator {
-        color: $white;
+        color: var(--ColorCheck);
       }
     }
   }
@@ -37,7 +37,7 @@
     + .label {
       &:hover {
         .box {
-          border-color: $color-primary-base;
+          border-color: var(--ColorBorderHover);
         }
       }
     }
@@ -46,7 +46,7 @@
   &:indeterminate {
     + .label {
       .indicator {
-        color: $white;
+        color: var(--ColorCheck);
       }
     }
   }
@@ -54,9 +54,9 @@
   &:focus {
     + .label {
       .box {
-        @include outline($focus-ring-primary, 2px);
+        @include outline(var(--ColorFocusOutline), var(--FocusOutlineWidth));
 
-        border-color: $color-primary-base;
+        border-color: var(--ColorBorderFocus);
       }
     }
   }
@@ -64,12 +64,12 @@
   &:disabled {
     + .label,
     + .label:hover {
-      color: $text-body;
+      color: var(--ColorTextDisabled);
       cursor: not-allowed;
 
       .box {
-        border-color: $border-input-disabled;
-        background-color: $bg-input-disabled;
+        border-color: var(--ColorBorderDisabled);
+        background-color: var(--ColorBackgroundDisabled);
       }
     }
 
@@ -77,8 +77,8 @@
     &:indeterminate {
       + .label {
         .box {
-          border-color: $color-primary-light;
-          background-color: $color-primary-light;
+          border-color: var(--ColorBorderDisabledChecked);
+          background-color: var(--ColorBackgroundDisabledChecked);
         }
       }
     }
@@ -86,10 +86,10 @@
 
   &:invalid {
     + .label {
-      color: $text-danger;
+      color: var(--ColorTextInvalid);
 
       .box {
-        border-color: $color-danger-base;
+        border-color: var(--ColorBorderInvalid);
       }
     }
 
@@ -97,7 +97,7 @@
     &:indeterminate {
       + .label {
         .box {
-          background-color: $color-danger-base;
+          background-color: var(--ColorBackgroundInvalid);
         }
       }
     }
@@ -106,7 +106,7 @@
       + .label {
         &:hover {
           .box {
-            border-color: $color-danger-dark;
+            border-color: var(--ColorBorderInvalidHover);
           }
         }
       }
@@ -115,37 +115,12 @@
     &:focus {
       + .label {
         .box {
-          @include outline($focus-ring-danger, 2px);
+          @include outline(
+            var(--ColorFocusOutlineInvalid),
+            var(--FocusOutlineWidth)
+          );
 
-          border-color: $color-danger-base;
-        }
-      }
-    }
-
-    &:disabled {
-      + .label {
-        color: $text-danger;
-
-        &::before {
-          border-color: $color-danger-light;
-        }
-      }
-
-      &:checked {
-        + .label {
-          .box {
-            background-color: $color-danger-light;
-          }
-        }
-      }
-
-      &:checked,
-      &:not(:checked),
-      &:indeterminate {
-        + .label {
-          .box {
-            border-color: $color-danger-light;
-          }
+          border-color: var(--ColorBorderInvalid);
         }
       }
     }
@@ -155,15 +130,15 @@
 .label {
   display: block;
   position: relative;
-  margin-block-end: $spacing-xs;
-  padding-inline-start: 1em + $spacing-s-em;
-  font-size: $size-body-base;
-  font-weight: 400;
+  margin-block-end: var(--MarginBlockEnd);
+  padding-inline-start: calc(var(--BoxSize) + var(--PaddingLabelInlineStart));
+  font-size: var(--FontSize);
+  font-weight: var(--FontWeight);
   text-align: start;
 
   .box,
   .indicator {
-    @include border-radius($base-border-radius);
+    @include border-radius(var(--BorderRadius));
 
     display: block;
     position: absolute;
@@ -171,16 +146,16 @@
     inset-inline-start: 0;
     transform: translateY(-50%);
     transition-property: border-color, color, opacity, box-shadow;
-    transition-duration: $base-duration;
-    transition-timing-function: $base-timing;
+    transition-duration: var(--TransitionDuration);
+    transition-timing-function: var(--TransitionTiming);
   }
 
   /* Box */
 
   .box {
-    width: 1em;
-    height: 1em;
-    border: 2px solid $border-color-ui;
+    width: var(--BoxSize);
+    height: var(--BoxSize);
+    border: var(--BorderSize) var(--BorderStyle) var(--ColorBorder);
   }
 
   /* Check */
@@ -188,7 +163,7 @@
   .indicator {
     z-index: 1;
     color: transparent;
-    font-size: 0.75em;
+    font-size: var(--CheckSize);
   }
 
   &:last-child {
