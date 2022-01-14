@@ -105,10 +105,10 @@ const ActionCard = ({
     >
       <Box marginRight="m">{icon}</Box>
       <Box flexGrow="1" userSelect="none">
-        <Heading level="2" visualLevel="6" noEndMargin>
+        <Heading level="2" visualLevel="6">
           {heading}
         </Heading>
-        <Text marginBottom="0">{subHeading}</Text>
+        <Text marginTop="xs">{subHeading}</Text>
       </Box>
     </Box>
   );
