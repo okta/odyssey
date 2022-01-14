@@ -38,6 +38,7 @@ export const theme: ThemeReducer = (theme) => ({
   BorderRadius: theme.BorderRadiusBase,
   BoxSize: "1em",
   BorderSize: "2px",
+  BorderStyle: theme.BorderStyleBase,
   CheckSize: "0.75em",
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTiming: theme.TransitionTimingBase,
