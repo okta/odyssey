@@ -19,12 +19,12 @@ import type {
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { ScreenReaderText } from "../ScreenReaderText";
-import { SharedFieldTypes } from "./types";
+import { CommonFieldProps } from "./types";
 import { Text } from "../Text";
 import { Box } from "../Box";
 import styles from "./Field.module.scss";
 
-export interface FieldProps extends SharedFieldTypes {
+export type FieldProps = CommonFieldProps & {
   /**
    * Input to be rendered within the Field
    */
@@ -40,21 +40,20 @@ export interface FieldProps extends SharedFieldTypes {
    * @default div
    */
   as?: "div" | "fieldset";
-}
+};
 
-interface PropsLabel {
+interface LabelProps
+  extends Pick<CommonFieldProps, "labelHidden" | "required" | "optionalLabel"> {
   inputId: string;
-  optionalLabel?: string;
-  required: boolean;
-  labelHidden?: boolean;
   children: ReactNode;
   as?: "label" | "legend";
 }
-interface PropsHint {
+
+interface HintProps {
   id: string;
   children: ReactText;
 }
-interface PropsError {
+interface FieldErrorProps {
   id: string;
   children: ReactNode;
 }
@@ -77,7 +76,7 @@ export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
         inputId,
         label,
         optionalLabel,
-        required = true,
+        required = false,
         children,
         labelHidden,
         as = "div",
@@ -115,10 +114,10 @@ export const Field: FunctionComponent<FieldProps> & Statics = withTheme(
   )
 );
 
-function Label(props: PropsLabel) {
+function Label(props: LabelProps) {
   const {
     inputId,
-    optionalLabel = "Optional",
+    optionalLabel,
     required,
     children,
     labelHidden,
@@ -164,7 +163,7 @@ function Label(props: PropsLabel) {
   return labelHidden ? labelVisuallyHidden : label;
 }
 
-function Hint({ id, children }: PropsHint) {
+function Hint({ id, children }: HintProps) {
   return (
     <Box as="p" className={styles.hint} id={`${id}-hint`}>
       <Text color="body" fontSize="caption">
@@ -174,7 +173,7 @@ function Hint({ id, children }: PropsHint) {
   );
 }
 
-function FieldError({ id, children }: PropsError) {
+function FieldError({ id, children }: FieldErrorProps) {
   return (
     <Box as="p" className={styles.error} id={`${id}-error`}>
       <Text color="danger" fontSize="caption">

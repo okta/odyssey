@@ -20,10 +20,10 @@ import type {
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useCx } from "../../utils";
 import { Field } from "../Field";
-import type { SharedFieldTypes } from "../Field/types";
+import type { CommonFieldProps } from "../Field/types";
 import styles from "./TextArea.module.scss";
 
-export interface TextAreaProps extends SharedFieldTypes {
+export interface TextAreaProps extends CommonFieldProps {
   /**
    * The underlying textarea element id attribute. Automatically generated if not provided
    */
@@ -39,12 +39,6 @@ export interface TextAreaProps extends SharedFieldTypes {
    * The underlying textarea element name attribute
    */
   name?: string;
-
-  /**
-   * The underlying textarea element required attribute
-   * @default true
-   */
-  required?: boolean;
 
   /**
    * The underlying textarea element disabled attribute
@@ -110,7 +104,7 @@ export const TextArea: FunctionComponent<TextAreaProps> = withTheme(
     onFocus,
     placeholder,
     readonly = false,
-    required = true,
+    required,
     textareaRef,
     value,
     error,
