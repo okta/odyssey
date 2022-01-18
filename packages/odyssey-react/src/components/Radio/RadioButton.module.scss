@@ -18,12 +18,12 @@
   &:checked {
     + .label {
       &::before {
-        border-color: $color-primary-base;
-        background-color: $color-primary-base;
+        border-color: var(--ColorBorderChecked);
+        background-color: var(--ColorBackgroundChecked);
       }
 
       &::after {
-        background: $white;
+        background: var(--ColorDot);
       }
     }
   }
@@ -32,33 +32,33 @@
   &.focus {
     + .label {
       &::before {
-        @include outline($focus-ring-primary, 2px);
+        @include outline(var(--ColorFocusOutline), var(--FocusOutlineWidth));
 
-        border-color: $color-primary-base;
+        border-color: var(--ColorBorderFocus);
       }
     }
   }
 
   &:disabled {
     + .label {
-      color: $text-body;
+      color: var(--ColorTextDisabled);
       cursor: not-allowed;
 
       &::before {
-        border-color: $border-input-disabled;
-        background-color: $bg-input-disabled;
+        border-color: var(--ColorBorderDisabled);
+        background-color: var(--ColorBackgroundDisabled);
       }
     }
 
     &:checked {
       + .label {
         &::before {
-          border-color: $color-primary-light;
-          background-color: $color-primary-light;
+          border-color: var(--ColorBorderDisabledChecked);
+          background-color: var(--ColorBackgroundDisabledChecked);
         }
 
         &::after {
-          background-color: $white;
+          background-color: var(--ColorDot);
         }
       }
     }
@@ -67,21 +67,21 @@
   &:invalid,
   &.invalid {
     &:hover:not(:checked) + .label::before {
-      border-color: $color-danger-dark;
+      border-color: var(--ColorBorderInvalidHover);
     }
 
     + .label {
-      color: $text-danger;
+      color: var(--ColorTextInvalid);
 
       &::before {
-        border-color: $color-danger-base;
+        border-color: var(--ColorBorderInvalid);
       }
     }
 
     &:checked {
       + .label {
         &::before {
-          background-color: $color-danger-base;
+          background-color: var(--ColorBackgroundInvalid);
         }
       }
     }
@@ -89,42 +89,12 @@
     &:focus {
       + .label {
         &::before {
-          @include outline($focus-ring-danger, 2px);
+          @include outline(
+            var(--ColorFocusOutlineInvalid),
+            var(--FocusOutlineWidth)
+          );
 
-          border-color: $color-danger-base;
-        }
-      }
-    }
-
-    &:disabled {
-      + .label {
-        color: $text-danger;
-
-        &::before {
-          border-color: $color-danger-base-disabled;
-          background: $white;
-        }
-      }
-
-      &:hover {
-        + .label {
-          &::before {
-            border-color: $color-danger-base-disabled;
-          }
-        }
-      }
-
-      &:checked {
-        + .label {
-          &::before {
-            border-color: $color-danger-base-disabled;
-            background-color: $color-danger-base-disabled;
-          }
-
-          &::after {
-            border-color: $color-danger-base-disabled;
-            background-color: $white;
-          }
+          border-color: var(--ColorBorderInvalid);
         }
       }
     }
@@ -134,40 +104,43 @@
 .label {
   display: block;
   position: relative;
-  margin-block-end: $spacing-xs;
-  padding-inline-start: 1em + $spacing-s-em;
-  font-size: $size-body-base;
-  font-weight: 400;
+  margin-block-end: var(--MarginBlockEnd);
+  padding-inline-start: calc(
+    var(--CircleSize) + var(--PaddingLabelInlineStart)
+  );
+  font-size: var(--FontSize);
+  font-weight: var(--FontWeight);
   text-align: start;
 
   &::before,
   &::after {
-    @include border-radius(1.125rem);
+    @include border-radius(50%);
 
     content: "";
     display: block;
     position: absolute;
     inset-block-start: 50%;
     inset-inline-start: 0;
-    width: 1em;
-    height: 1em;
+    width: var(--CircleSize);
+    height: var(--CircleSize);
     transition-property: border-color, background, opacity, box-shadow;
-    transition-duration: $base-duration;
-    transition-timing-function: $base-timing;
-    border: 2px solid transparent;
+    transition-duration: var(--TransitionDuration);
+    transition-timing-function: var(--TransitionTiming);
+    border: var(--BorderSize) var(--BorderStyle) transparent;
   }
 
-  /* Box */
+  /* Circle */
 
   &::before {
     transform: translateY(-50%);
-    border-color: $border-color-ui;
+    border-color: var(--ColorBorder);
+    background-color: var(--ColorBackground);
   }
 
-  /* Check */
+  /* Dot */
 
   &::after {
-    transform: translateY(-50%) scale(0.4);
+    transform: translateY(-50%) scale(var(--DotScale));
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
@@ -176,7 +149,7 @@
   &:hover,
   &.hover {
     &::before {
-      border-color: $color-primary-base;
+      border-color: var(--ColorBorderHover);
     }
   }
 }

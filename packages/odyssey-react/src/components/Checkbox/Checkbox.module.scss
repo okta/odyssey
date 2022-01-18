@@ -20,7 +20,7 @@
     + .label {
       .box {
         border-color: var(--ColorBorderChecked);
-        background-color: var(--ColorBackground);
+        background-color: var(--ColorBackgroundChecked);
       }
     }
   }
@@ -156,6 +156,7 @@
     width: var(--BoxSize);
     height: var(--BoxSize);
     border: var(--BorderSize) var(--BorderStyle) var(--ColorBorder);
+    background-color: var(--ColorBackground);
   }
 
   /* Check */
