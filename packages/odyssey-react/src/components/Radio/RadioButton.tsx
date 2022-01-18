@@ -17,6 +17,7 @@ import { useRadioGroup } from "./context";
 import { Box } from "../Box";
 import { useCx, useOid, useOmit } from "../../utils";
 import type { SharedFieldTypes } from "../Field/types";
+import { theme } from "./RadioButton.theme";
 import styles from "./RadioButton.module.scss";
 
 export interface RadioButtonProps
@@ -43,7 +44,7 @@ export interface RadioButtonProps
  * the user to choose only one option at a time.
  */
 export const RadioButton = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) => {
