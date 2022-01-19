@@ -15,53 +15,46 @@ import type { ChangeEvent, ReactElement, ComponentPropsWithRef } from "react";
 import { RadioGroupProvider } from "./context";
 import { useOid } from "../../utils";
 import { Field } from "../Field";
-import type { SharedFieldTypes } from "../Field/types";
+import type { CommonFieldProps } from "../Field/types";
 
-export interface RadioGroupProps
-  extends SharedFieldTypes,
-    Omit<
-      ComponentPropsWithRef<"fieldset">,
-      "onChange" | "style" | "className"
-    > {
-  /**
-   * One or more Radio.Button to be used together as a group
-   */
-  children: ReactElement | ReactElement[];
+export type RadioGroupProps = CommonFieldProps &
+  Omit<
+    ComponentPropsWithRef<"fieldset">,
+    "onChange" | "style" | "className" | "required"
+  > & {
+    /**
+     * One or more Radio.Button to be used together as a group
+     */
+    children: ReactElement | ReactElement[];
 
-  /**
-   * The underlying input element name attribute for the group
-   */
-  name: string;
+    /**
+     * The underlying input element name attribute for the group
+     */
+    name: string;
 
-  /**
-   * The underlying RadioGroup id
-   */
-  id?: string;
+    /**
+     * The underlying RadioGroup id
+     */
+    id?: string;
 
-  /**
-   * The underlying input element required attribute for the group
-   * @default true
-   */
-  required?: boolean;
+    /**
+     * The underlying input element disabled attribute for the group
+     * @default false
+     */
+    disabled?: boolean;
 
-  /**
-   * The underlying input element disabled attribute for the group
-   * @default false
-   */
-  disabled?: boolean;
+    /**
+     * The checked Radio.Button value attribute for a controlled group.
+     */
+    value?: string;
 
-  /**
-   * The checked Radio.Button value attribute for a controlled group.
-   */
-  value?: string;
-
-  /**
-   * Callback executed when the input group fires a change event
-   * @param {Object} event the event object
-   * @param {string} value the string value of the input
-   */
-  onChange?: (event?: ChangeEvent<HTMLInputElement>, value?: string) => void;
-}
+    /**
+     * Callback executed when the input group fires a change event
+     * @param {Object} event the event object
+     * @param {string} value the string value of the input
+     */
+    onChange?: (event?: ChangeEvent<HTMLInputElement>, value?: string) => void;
+  };
 
 /**
  * Radios appear as a ring shaped UI accompanied by a caption that allows
@@ -74,7 +67,7 @@ export const RadioGroup = (props: RadioGroupProps): JSX.Element => {
     name,
     id,
     onChange,
-    required = true,
+    required,
     value,
     error,
     hint,

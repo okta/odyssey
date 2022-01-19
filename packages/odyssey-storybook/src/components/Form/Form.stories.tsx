@@ -55,7 +55,7 @@ const Template: Story<FormProps> = ({ title, desc }) => (
         title="Origination logistics"
         desc="This information is required for your craft to leave the starport."
       >
-        <TextInput label="Foo" hint="Bar" error="Baz" />
+        <TextInput label="Name" />
       </FieldGroup>
     </Form.Main>
     <Form.Actions>

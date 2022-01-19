@@ -15,11 +15,11 @@ import type { ComponentPropsWithRef, ChangeEvent } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { Box } from "../Box";
 import { CheckIcon, MinusIcon } from "../Icon";
-import styles from "./Checkbox.module.scss";
 import { useCx, useOid, useOmit } from "../../utils";
 import { Field } from "../Field";
-import type { SharedFieldTypes } from "../Field/types";
+import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./Checkbox.theme";
+import styles from "./Checkbox.module.scss";
 
 export interface CheckboxProps
   extends Omit<
@@ -48,7 +48,7 @@ export interface CheckboxProps
    */
   onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
 
-  error?: SharedFieldTypes["error"];
+  error?: CommonFieldProps["error"];
 }
 
 /**
@@ -63,7 +63,7 @@ export const Checkbox = withTheme(
       id,
       label,
       onChange,
-      required = true,
+      required,
       indeterminate = false,
       error,
       ...rest

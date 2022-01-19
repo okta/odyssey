@@ -22,9 +22,9 @@ import { useOid, useCx } from "../../utils";
 import { SearchIcon } from "../Icon/Search";
 import styles from "./TextInput.module.scss";
 import { Field } from "../Field";
-import type { SharedFieldTypes } from "../Field/types";
+import type { CommonFieldProps } from "../Field/types";
 
-export interface TextInputProps extends SharedFieldTypes {
+export interface TextInputProps extends CommonFieldProps {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
    */
@@ -46,12 +46,6 @@ export interface TextInputProps extends SharedFieldTypes {
    * The underlying input element name attribute
    */
   name?: string;
-
-  /**
-   * The underlying input element required attribute
-   * @default true
-   */
-  required?: boolean;
 
   /**
    * The underlying input element disabled attribute
@@ -118,7 +112,7 @@ export const TextInput: FunctionComponent<TextInputProps> = withTheme(
     onFocus,
     placeholder,
     readonly = false,
-    required = true,
+    required,
     type = "text",
     value,
     error,
