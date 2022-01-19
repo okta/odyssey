@@ -12,7 +12,61 @@
 
 .root {
   @include border-radius(var(--BorderRadius));
-  @include input-baseline;
+
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: var(--MaxWidth);
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: var(--PaddingBlock);
+  padding-inline: var(--PaddingInline);
+  transition-property: border-color, background-color, box-shadow;
+  transition-duration: var(--TransitionDuration);
+  transition-timing-function: var(--TransitionTiming);
+  border: var(--BorderWidth) var(--BorderStyle) var(--ColorBorder);
+  background-color: var(--ColorBackground);
+  color: var(--ColorText);
+  font-family: var(--FontFamily);
+  font-size: var(--FontSize);
+  line-height: var(--LineHeight);
+
+  &:hover,
+  &:focus {
+    border-color: cv("blue");
+  }
+
+  &:focus {
+    @include outline(var(--ColorFocusOutline), var(--FocusOutlineWidth));
+  }
+
+  &:invalid {
+    border-color: var(--ColorBorderInvalid);
+  }
+
+  &:disabled {
+    opacity: 1;
+    color: var(--ColorTextDisabled);
+    cursor: not-allowed;
+  }
+
+  &:disabled,
+  &[readonly] {
+    border-color: var(--ColorBorderDisabled);
+    background-color: var(--ColorBackgroundDisabled);
+
+    &:hover {
+      border-color: var(--ColorBorderDisabled);
+    }
+  }
+
+  &:invalid:focus {
+    @include outline(var(--ColorFocusOutlineInvalid), var(--FocusOutlineWidth));
+  }
+
+  &::placeholder {
+    color: var(--ColorTextPlaceholder);
+  }
 
   &[type="search"] {
     padding-inline-start: calc(
@@ -51,69 +105,3 @@
   line-height: 1;
   pointer-events: none;
 }
-
-/*
-@mixin input-baseline {
-  @include border-radius($base-border-radius);
-
-  display: block;
-  position: relative;
-  width: 100%;
-  max-width: $max-line-length;
-  margin-block: 0;
-  margin-inline: 0;
-  padding-block: $spacing-xs-em;
-  padding-inline: $spacing-s-em;
-  transition-property: border-color, background-color, box-shadow;
-  transition-duration: $base-duration;
-  transition-timing-function: $base-timing;
-  border: 1px solid $border-color-ui;
-  background-color: $white;
-  box-shadow: 0 0 0 0 cv("blue", "000");
-  color: $text-body;
-  font-family: $body-font-family;
-  font-size: $size-body-base;
-  line-height: $base-line-height;
-
-  &:hover,
-  &:focus,
-  &.is-ods-input-hover,
-  &.is-ods-input-focus {
-    border-color: cv("blue");
-  }
-
-  &:focus,
-  &.is-ods-input-focus {
-    @include outline;
-  }
-
-  &:disabled {
-    opacity: 1;
-    color: $text-body;
-    cursor: not-allowed;
-  }
-
-  &:disabled,
-  &[readonly] {
-    border-color: $border-input-disabled;
-    background-color: $bg-input-disabled;
-
-    &:hover {
-      border-color: $border-input-disabled;
-    }
-  }
-
-  &:invalid,
-  &.is-ods-input-invalid {
-    border-color: $color-danger-base;
-
-    &:focus {
-      @include outline($focus-ring-danger);
-    }
-  }
-
-  &::placeholder {
-    color: $text-sub;
-  }
-}
-*/
