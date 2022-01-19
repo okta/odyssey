@@ -27,6 +27,7 @@ export default {
   },
   args: {
     label: "Destination",
+    required: true,
     optionalLabel: "Optional",
   },
   argTypes: {

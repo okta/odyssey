@@ -13,15 +13,27 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Field } from ".";
+import type { FieldProps } from ".";
 
-const tree = () => (
-  <Field inputId="foo" label="bar" children={<input id="foo" />} />
+const tree = (props: Partial<FieldProps> = {}) => (
+  <Field
+    inputId="foo"
+    label="bar"
+    required
+    children={<input id="foo" />}
+    {...props}
+  />
 );
 
 describe("Field", () => {
   it("renders visibly", () => {
     render(tree());
     expect(screen.getByRole("textbox", { name: "bar" })).toBeVisible();
+  });
+
+  it("renders optional label when *not* required", () => {
+    render(tree({ required: false, optionalLabel: "Optional" }));
+    expect(screen.getByText("Optional")).toBeVisible();
   });
 
   a11yCheck(() => render(tree()));

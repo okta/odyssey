@@ -11,7 +11,7 @@
  */
 
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
 import { TextArea } from ".";
 
@@ -35,9 +35,9 @@ describe("TextArea", () => {
   });
 
   it("renders a generated id associating the input and label", () => {
-    const { getByLabelText } = render(<TextArea label={label} />);
+    render(<TextArea label={label} required />);
 
-    expect(getByLabelText(label)).toBe;
+    expect(screen.getByRole(textBox, { name: label })).toBeVisible();
   });
 
   it("renders a provided name for the input", () => {

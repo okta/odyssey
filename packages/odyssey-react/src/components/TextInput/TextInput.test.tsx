@@ -11,7 +11,7 @@
  */
 
 import React from "react";
-import { render, fireEvent, within } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
 import { TextInput } from ".";
 import type { TextInputProps } from ".";
@@ -36,9 +36,9 @@ describe("TextInput", () => {
   });
 
   it("renders a generated id associating the input and label", () => {
-    const { getByLabelText } = render(<TextInput label={label} />);
+    render(<TextInput label={label} required />);
 
-    expect(getByLabelText(label)).toBe;
+    expect(screen.getByRole(textBox, { name: label })).toBeVisible();
   });
 
   it("renders a provided name for the input", () => {
@@ -81,9 +81,12 @@ describe("TextInput", () => {
     ["search"],
     ["password"],
   ])("renders %s input type", (type) => {
-    const { getByLabelText } = render(<TextInput label={label} type={type} />);
+    render(<TextInput label={label} type={type} required />);
 
-    expect(getByLabelText(label)).toHaveAttribute("type", type ?? "text");
+    expect(screen.getByLabelText(label)).toHaveAttribute(
+      "type",
+      type ?? "text"
+    );
   });
 
   it("invokes onChange with expected args when change input event fires", () => {
