@@ -19,7 +19,7 @@ export const theme: ThemeReducer = (theme) => ({
   ColorBorderFocus: theme.ColorPrimaryBase,
   ColorBorderDisabled: theme.ColorBorderDisabled,
   ColorBorderDisabledChecked: theme.ColorPrimaryLight,
-  ColorBorderInvalid: theme.ColorBorderDanger,
+  ColorBorderInvalid: theme.ColorBorderDangerBase,
   ColorBorderInvalidHover: theme.ColorDangerDark,
   ColorBackground: theme.ColorPrimaryBase,
   ColorBackgroundDisabled: theme.ColorBackgroundDisabled,
