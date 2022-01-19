@@ -131,7 +131,7 @@
   display: block;
   position: relative;
   margin-block-end: var(--MarginBlockEnd);
-  padding-inline-start: calc(var(--BoxSize) + var(--PaddingLabelInlineStart));
+  padding-inline-start: calc(var(--BoxSize) + var(--LabelPaddingInlineStart));
   font-size: var(--FontSize);
   font-weight: var(--FontWeight);
   text-align: start;

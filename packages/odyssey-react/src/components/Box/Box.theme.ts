@@ -42,7 +42,7 @@ export const theme: ThemeReducer = (theme) => ({
   // Focus Outline
   ColorFocusPrimary: theme.ColorFocusPrimary,
   ColorFocusDanger: theme.ColorFocusDanger,
-  FocusOutlineWidth: theme.FocusOutlineWidth,
+  FocusOutlineWidth: theme.FocusOutlineWidthBase,
 
   // Background
   ColorBackgroundBase: theme.ColorBackgroundBase,

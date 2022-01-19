@@ -106,7 +106,7 @@
   position: relative;
   margin-block-end: var(--MarginBlockEnd);
   padding-inline-start: calc(
-    var(--CircleSize) + var(--PaddingLabelInlineStart)
+    var(--CircleSize) + var(--LabelPaddingInlineStart)
   );
   font-size: var(--FontSize);
   font-weight: var(--FontWeight);
