@@ -11,7 +11,7 @@
       },
       "primary": {
         "comment": "Branded text color, primarily used within button",
-        "value": "{color.palette.blue.500.value}"
+        "value": "{color.primary.base.value}"
       },
       "danger": { "value": "{color.danger.base.value}" },
       "dangerDisabled": { "value": "{color.danger.light.value}" }
