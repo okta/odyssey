@@ -13,6 +13,7 @@
         "comment": "Branded text color, primarily used within button",
         "value": "{color.primary.base.value}"
       },
+      "sub": { "value": "{color.palette.neutral.600.value}" },
       "danger": { "value": "{color.danger.base.value}" },
       "dangerDisabled": { "value": "{color.danger.light.value}" }
     }
