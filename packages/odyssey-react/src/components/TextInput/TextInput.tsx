@@ -20,9 +20,10 @@ import type {
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useCx } from "../../utils";
 import { SearchIcon } from "../Icon/Search";
-import styles from "./TextInput.module.scss";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
+import { theme } from "./TextInput.theme";
+import styles from "./TextInput.module.scss";
 
 export interface TextInputProps extends CommonFieldProps {
   /**
@@ -98,7 +99,7 @@ export interface TextInputProps extends CommonFieldProps {
  * Text inputs allow users to edit and input data.
  */
 export const TextInput: FunctionComponent<TextInputProps> = withTheme(
-  () => ({}),
+  theme,
   styles
 )((props) => {
   const {
