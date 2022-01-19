@@ -32,10 +32,10 @@
 
 .focusRingPrimary:focus {
   outline: 0;
-  box-shadow: 0 0 0 var(--FocusWidth) var(--ColorFocusPrimary);
+  box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusPrimary);
 }
 
 .focusRingDanger:focus {
   outline: 0;
-  box-shadow: 0 0 0 var(--FocusWidth) var(--ColorFocusDanger);
+  box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusDanger);
 }
