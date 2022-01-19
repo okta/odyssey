@@ -114,5 +114,5 @@ const root: ThemeReducer = (theme) => ({
   LabelMinWidth: theme.SpaceEmL,
   LabelSpaceMarginInlineStart: theme.SpaceRemXs,
 
-  FocusOutlineWidth: "4px",
+  FocusOutlineWidth: theme.FocusOutlineWidthBase,
 });
