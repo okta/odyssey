@@ -11,10 +11,14 @@
  */
 
 .root {
+  @include border-radius(var(--BorderRadius));
   @include input-baseline;
 
   &[type="search"] {
-    padding-inline-start: ms(1) + $spacing-s + $spacing-xs;
+    padding-inline-start: calc(
+      var(--IndicatorSize) + var(--IndicatorInsetInlineStart) +
+        var(--SearchPaddingInlineStart)
+    );
 
     &::-webkit-search-decoration,
     &::-webkit-search-cancel-button,
@@ -29,7 +33,7 @@
     }
 
     [dir="rtl"] & {
-      background-position: right $spacing-s center;
+      background-position: right var(--RtlBackgroundPositionRightOffset) center;
     }
   }
 }
@@ -41,9 +45,75 @@
 .indicator {
   position: absolute;
   inset-block-start: 50%;
-  inset-inline-start: $spacing-s;
+  inset-inline-start: var(--IndicatorInsetInlineStart);
   transform: translateY(-50%);
-  font-size: ms(1);
+  font-size: var(--IndicatorSize);
   line-height: 1;
   pointer-events: none;
 }
+
+/*
+@mixin input-baseline {
+  @include border-radius($base-border-radius);
+
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: $max-line-length;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: $spacing-xs-em;
+  padding-inline: $spacing-s-em;
+  transition-property: border-color, background-color, box-shadow;
+  transition-duration: $base-duration;
+  transition-timing-function: $base-timing;
+  border: 1px solid $border-color-ui;
+  background-color: $white;
+  box-shadow: 0 0 0 0 cv("blue", "000");
+  color: $text-body;
+  font-family: $body-font-family;
+  font-size: $size-body-base;
+  line-height: $base-line-height;
+
+  &:hover,
+  &:focus,
+  &.is-ods-input-hover,
+  &.is-ods-input-focus {
+    border-color: cv("blue");
+  }
+
+  &:focus,
+  &.is-ods-input-focus {
+    @include outline;
+  }
+
+  &:disabled {
+    opacity: 1;
+    color: $text-body;
+    cursor: not-allowed;
+  }
+
+  &:disabled,
+  &[readonly] {
+    border-color: $border-input-disabled;
+    background-color: $bg-input-disabled;
+
+    &:hover {
+      border-color: $border-input-disabled;
+    }
+  }
+
+  &:invalid,
+  &.is-ods-input-invalid {
+    border-color: $color-danger-base;
+
+    &:focus {
+      @include outline($focus-ring-danger);
+    }
+  }
+
+  &::placeholder {
+    color: $text-sub;
+  }
+}
+*/
