@@ -22,7 +22,7 @@ export const theme: ThemeReducer = (theme) => ({
   ColorBackgroundPrimaryHover: theme.ColorPrimaryDark,
   ColorBorderPrimary: "transparent",
   ColorBorderPrimaryDisabled: "transparent",
-  ColorBorderPrimaryHover: theme.ColorPrimaryDark,
+  ColorBorderPrimaryHover: theme.ColorBorderPrimaryDark,
   Gutter: theme.SpaceRemS,
 
   // Secondary Variant
@@ -93,7 +93,7 @@ const root: ThemeReducer = (theme) => ({
   ColorText: theme.ColorTextBodyInverse,
   FontFamily: theme.FontFamilyBase,
   FontLineHeight: theme.FontLineHeightBase,
-  FontSize: theme.FontSizeBase,
+  FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightBold,
   FontWhiteSpace: "nowrap",
 

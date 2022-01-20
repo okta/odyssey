@@ -9,7 +9,10 @@
         "base": { "value": "{color.danger.base.value}" },
         "dark": { "value": "{color.danger.dark.value}" }
       },
-      "primary": { "value": "{color.primary.base.value}" }
+      "primary": {
+        "base": { "value": "{color.primary.base.value}" },
+        "dark": { "value": "{color.primary.dark.value}" }
+      }
     }
   }
 }

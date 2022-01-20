@@ -62,25 +62,11 @@ BodyInverse.args = {
   color: "body-inverse",
 };
 
-export const Code = Template.bind({});
-Code.storyName = "Color: Code";
-Code.args = {
-  children: "Code text color",
-  color: "code",
-};
-
 export const ColorDanger = Template.bind({});
 ColorDanger.storyName = "Color: Danger";
 ColorDanger.args = {
   children: "Danger text color",
   color: "danger",
-};
-
-export const ColorDangerDisabled = Template.bind({});
-ColorDangerDisabled.storyName = "Color: Danger, disabled";
-ColorDangerDisabled.args = {
-  children: "Danger (disabled) text color",
-  color: "danger-disabled",
 };
 
 export const ColorSub = Template.bind({});
@@ -91,11 +77,11 @@ ColorSub.args = {
 };
 
 // Weight
-export const WeightRegular = Template.bind({});
-WeightRegular.storyName = "Weight: Regular";
-WeightRegular.args = {
-  children: "Regular text weight",
-  fontWeight: "regular",
+export const WeightNormal = Template.bind({});
+WeightNormal.storyName = "Weight: Normal";
+WeightNormal.args = {
+  children: "Normal text weight",
+  fontWeight: "normal",
 };
 
 export const WeightBold = Template.bind({});
@@ -149,28 +135,7 @@ TransformUpperCase.args = {
   textTransform: "uppercase",
 };
 
-export const TransformFullWidth = Template.bind({});
-TransformFullWidth.storyName = "Transform: Full width";
-TransformFullWidth.args = {
-  children: "Full width text transform style",
-  textTransform: "full-width",
-};
-
-export const TransformFullSizeKana = Template.bind({});
-TransformFullSizeKana.storyName = "Transform: Full size kana";
-TransformFullSizeKana.args = {
-  children: "Full size kana text transform style",
-  textTransform: "full-size-kana",
-};
-
 // Transform
-export const SizeLede = Template.bind({});
-SizeLede.storyName = "Size: Lede";
-SizeLede.args = {
-  children: "Lede text size style",
-  fontSize: "lede",
-};
-
 export const SizeBase = Template.bind({});
 SizeBase.storyName = "Size: Base (default)";
 SizeBase.args = {
@@ -210,18 +175,6 @@ WrapBreakWord.args = {
   overflowWrap: "break-word",
 };
 
-export const WrapAnywhere = TemplateWithContainer.bind({});
-WrapAnywhere.storyName = "Wrap: Anywhere";
-WrapAnywhere.args = {
-  children: (
-    <>
-      Normal text wrap style. The wrap prop can be{" "}
-      <strong>incomprehensibile</strong> if viewed in the wrong context
-    </>
-  ),
-  overflowWrap: "anywhere",
-};
-
 // Line Height
 export const LineHeightNormal = TemplateWithContainer.bind({});
 LineHeightNormal.storyName = "Line height: Normal (default)";
@@ -235,13 +188,6 @@ LineHeightTitle.storyName = "Line height: Title";
 LineHeightTitle.args = {
   children: "Title text LineHeight style",
   lineHeight: "title",
-};
-
-export const LineHeightFont = TemplateWithContainer.bind({});
-LineHeightFont.storyName = "Line height: Font (1)";
-LineHeightFont.args = {
-  children: "Font text LineHeight style",
-  lineHeight: "font",
 };
 
 export const MarginPadding = Template.bind({});
