@@ -25,6 +25,7 @@ import { TableHeaderCell } from "./TableHeaderCell";
 import { TableSortButton } from "./TableSortButton";
 import { ScreenReaderText } from "../ScreenReaderText";
 import styles from "./Table.module.scss";
+import { theme } from "./Table.theme";
 
 type ContainerProps =
   | { withContainer: false; title?: never }
@@ -71,7 +72,7 @@ type Statics = {
  * Tables provide structure for displaying sets of data across rows and columns.
  */
 export const Table = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRefWithStatics<HTMLTableElement, TableProps, Statics>((props, ref) => {

@@ -10,15 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.root {
-  width: auto;
-  margin-block: 0;
-  margin-inline: 0;
-  border-spacing: 0;
-  border-collapse: collapse;
-  line-height: var(--LineHeight);
+import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
-  &:only-child {
-    margin-block-end: 0;
-  }
-}
+export const theme: ThemeReducer = (theme) => ({
+  MarginBlockEnd: theme.FontLineLengthMax,
+
+  TitleMargin: theme.SpaceEmXs,
+  TitleColor: theme.ColorTextHeading,
+  TitleFontSize: theme.FontSizeHeading4,
+  TitleWeight: theme.FontWeightBold,
+});

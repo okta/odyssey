@@ -13,7 +13,7 @@
 .root {
   max-width: 100%;
   margin-block-start: 0;
-  margin-block-end: $type-margin;
+  margin-block-end: var(--MarginBlockEnd);
   margin-inline: 0;
   overflow-x: auto;
 
@@ -23,9 +23,9 @@
 }
 
 .title {
-  margin-block-end: $spacing-xs-em;
-  color: $text-heading;
-  font-size: $size-title-4;
-  font-weight: 600;
+  margin-block-end: var(--TitleMargin);
+  color: var(--TitleColor);
+  font-size: var(--TitleFontSize);
+  font-weight: var(--TitleWeight);
   text-align: start;
 }
