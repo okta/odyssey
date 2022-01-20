@@ -12,7 +12,7 @@
 
 .root {
   margin-block-start: 0;
-  margin-block-end: $spacing-xs-em;
+  margin-block-end: var(--MarginBlockEnd);
   margin-inline: 0;
   color: $text-heading;
   font-family: $body-font-family;
@@ -21,27 +21,27 @@
 }
 
 .level1 {
-  font-size: $size-title-1;
+  font-size: var(--SizeTitle1);
 }
 
 .level2 {
-  font-size: $size-title-2;
+  font-size: var(--SizeTitle2);
 }
 
 .level3 {
-  font-size: $size-title-3;
+  font-size: var(--SizeTitle3);
 }
 
 .level4 {
-  font-size: $size-title-4;
+  font-size: var(--SizeTitle4);
 }
 
 .level5 {
-  font-size: $size-title-5;
+  font-size: var(--SizeTitle5);
 }
 
 .level6 {
-  font-size: $size-title-6;
+  font-size: var(--SizeTitle6);
 }
 
 .level1,
@@ -61,9 +61,9 @@
 }
 
 .baseLineHeight {
-  line-height: $base-line-height;
+  line-height: var(--LineHeightBase);
 }
 
 .titleLineHeight {
-  line-height: $title-line-height;
+  line-height: var(--LineHeightTitle);
 }
