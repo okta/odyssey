@@ -14,8 +14,9 @@ import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit } from "../../utils";
-import styles from "./Tag.module.scss";
 import { Box } from "../Box";
+import styles from "./Tag.module.scss";
+import { theme } from "./Tag.theme";
 
 export interface TagProps
   extends Omit<
@@ -38,7 +39,7 @@ export interface TagProps
  * and parsing content easier.
  */
 export const Tag = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLUListElement, TagProps>((props, ref) => {
@@ -46,9 +47,9 @@ export const Tag = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <Box as="ul" {...omitProps} ref={ref} className={styles.list}>
+      <Box as="ul" {...omitProps} ref={ref} className={styles.root}>
         {tags.map((item) => (
-          <li className={styles.tag} key={item}>
+          <li className={styles.item} key={item}>
             {item}
           </li>
         ))}
