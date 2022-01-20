@@ -34,7 +34,7 @@ export const theme: ThemeReducer = (theme) => ({
   FocusOutlineWidth: theme.FocusOutlineWidthSmall,
   MarginBlockEnd: theme.SpaceRemXs,
   LabelPaddingInlineStart: theme.SpaceEmS,
-  FontSize: theme.FontSizeBase,
+  FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightNormal,
   BorderRadius: theme.BorderRadiusBase,
   BoxSize: "1em",

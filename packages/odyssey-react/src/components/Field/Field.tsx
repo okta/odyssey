@@ -133,15 +133,13 @@ function Label(props: LabelProps) {
       alignItems="flex-end"
       justifyContent="space-between"
     >
-      <Text color="heading" fontWeight="bold">
-        {children}
-      </Text>
+      <Text fontWeight="bold">{children}</Text>
       {!required && optionalLabel && (
         <span className={styles.optionalLabel}>
           <Text
             color="sub"
             fontSize="caption"
-            fontWeight="regular"
+            fontWeight="normal"
             lineHeight="normal"
           >
             {optionalLabel}

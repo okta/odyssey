@@ -14,7 +14,7 @@
         "value": "{color.primary.base.value}"
       },
       "danger": { "value": "{color.danger.base.value}" },
-      "dangerDisabled": { "value": "{color.danger.light.value}" }
+      "sub": { "value": "{color.neutral.base.value}" }
     }
   }
 }

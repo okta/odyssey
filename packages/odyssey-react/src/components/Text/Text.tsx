@@ -17,6 +17,7 @@ import { Box } from "../Box";
 import type { BoxProps } from "../Box";
 import { useCx, useOmit, toCamelCase } from "../../utils";
 import type { PolymorphicForwardRef } from "../../utils";
+import { theme } from "./Text.theme";
 import styles from "./Text.module.scss";
 
 export interface TextProps
@@ -71,21 +72,13 @@ export interface TextProps
    * The text color style for the text content.
    * @default body
    */
-  color?:
-    | "body"
-    | "body-inverse"
-    | "code"
-    | "danger"
-    | "danger-disabled"
-    | "sub"
-    | "heading"
-    | "primary";
+  color?: "body" | "body-inverse" | "danger" | "sub" | "primary";
 
   /**
    * The font weight for the text content.
-   * @default regular
+   * @default normal
    */
-  fontWeight?: "regular" | "bold";
+  fontWeight?: "normal" | "bold";
 
   /**
    * The font style (normal or italic) for the text content.
@@ -97,38 +90,32 @@ export interface TextProps
    * The text-transform for the text content.
    * @default none
    */
-  textTransform?:
-    | "none"
-    | "capitalize"
-    | "uppercase"
-    | "lowercase"
-    | "full-width"
-    | "full-size-kana";
+  textTransform?: "none" | "capitalize" | "uppercase" | "lowercase";
 
   /**
    * The font-size for the text content.
    * @default base
    */
-  fontSize?: "lede" | "base" | "caption";
+  fontSize?: "base" | "caption";
 
   /**
    * The line-height for the text content.
    * @default normal
    */
-  lineHeight?: "normal" | "title" | "font";
+  lineHeight?: "normal" | "title";
 
   /**
    * The overflow wrapping behavior for the text content.
    * @default normal
    */
-  overflowWrap?: "normal" | "break-word" | "anywhere";
+  overflowWrap?: "normal" | "break-word";
 }
 
 /**
  * A component which provides style for visible text elements.
  */
 export const Text = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef((props, ref) => {
@@ -136,7 +123,7 @@ export const Text = withTheme(
       children,
       as = "span",
       color = "body",
-      fontWeight = "regular",
+      fontWeight = "normal",
       fontStyle = "normal",
       textTransform = "none",
       fontSize = "base",

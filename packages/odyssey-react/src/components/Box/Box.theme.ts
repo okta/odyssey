@@ -17,7 +17,7 @@ export const theme: ThemeReducer = (theme) => ({
   FontFamilyBase: theme.FontFamilyBase,
   FontWeightNormal: theme.FontWeightNormal,
   FontStyleNormal: theme.FontStyleNormal,
-  FontSizeBase: theme.FontSizeBase,
+  FontSize: theme.FontSizeBody,
   FontLineHeightBase: theme.FontLineHeightBase,
   ColorTextBody: theme.ColorTextBody,
 
@@ -36,7 +36,7 @@ export const theme: ThemeReducer = (theme) => ({
   ColorBorderBase: "transparent",
   ColorBorderUi: theme.ColorBorderUi,
   ColorBorderDisplay: theme.ColorBorderDisplay,
-  ColorBorderPrimary: theme.ColorBorderPrimary,
+  ColorBorderPrimary: theme.ColorBorderPrimaryBase,
   ColorBorderDanger: theme.ColorBorderDangerBase,
 
   // Focus Outline
