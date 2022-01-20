@@ -17,14 +17,16 @@
   position: relative;
   width: 100%;
   max-width: var(--MaxWidth);
-  margin-block: 0;
-  margin-inline: 0;
+  margin-block: var(--MarginBlock);
+  margin-inline: var(--MarginInline);
   padding-block: var(--PaddingBlock);
   padding-inline: var(--PaddingInline);
   transition-property: border-color, background-color, box-shadow;
   transition-duration: var(--TransitionDuration);
   transition-timing-function: var(--TransitionTiming);
-  border: var(--BorderWidth) var(--BorderStyle) var(--ColorBorder);
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--ColorBorder);
   background-color: var(--ColorBackground);
   color: var(--ColorText);
   font-family: var(--FontFamily);
@@ -33,7 +35,7 @@
 
   &:hover,
   &:focus {
-    border-color: cv("blue");
+    border-color: var(--ColorBorderHoverFocus);
   }
 
   &:focus {
@@ -84,10 +86,6 @@
     &::-ms-clear,
     &::-ms-reveal {
       display: none;
-    }
-
-    [dir="rtl"] & {
-      background-position: right var(--RtlBackgroundPositionRightOffset) center;
     }
   }
 }
