@@ -5,10 +5,6 @@
         "comment": "Base text color used for most typography",
         "value": "{color.palette.neutral.900.value}"
       },
-      "sub": {
-        "comment": "Text color for subordinate text like captions",
-        "value": "{color.palette.neutral.600.value}"
-      },
       "heading": {
         "comment": "Text color for headings",
         "value": "{color.palette.neutral.900.value}"
@@ -21,9 +17,11 @@
         "comment": "Branded text color, primarily used within button",
         "value": "{color.primary.base.value}"
       },
-      "sub": { "value": "{color.palette.neutral.600.value}" },
-      "danger": { "value": "{color.danger.base.value}" },
-      "sub": { "value": "{color.neutral.base.value}" }
+      "sub": {
+        "comment": "Text color for subordinate text like captions",
+        "value": "{color.palette.neutral.600.value}"
+      },
+      "danger": { "value": "{color.danger.base.value}" }
     }
   }
 }
