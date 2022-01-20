@@ -16,6 +16,7 @@ import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit } from "../../utils";
 import { Box } from "../Box";
 import styles from "./TableContainer.module.scss";
+import { theme } from "./TableContainer.theme";
 
 export interface TableContainerProps
   extends Omit<
@@ -33,7 +34,7 @@ export interface TableContainerProps
 }
 
 export const TableContainer = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLElement, TableContainerProps>((props, ref) => {
