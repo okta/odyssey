@@ -37,6 +37,6 @@ export const theme: ThemeReducer = (theme) => ({
   TransitionTiming: theme.TransitionTimingBase,
   RtlBackgroundPositionRightOffset: theme.SpaceRemS,
   SearchPaddingInlineStart: theme.SpaceRemXs,
-  IndicatorSize: theme.FontSizeBody,
+  IndicatorSize: "1.1487rem",
   IndicatorInsetInlineStart: theme.SpaceRemS,
 });
