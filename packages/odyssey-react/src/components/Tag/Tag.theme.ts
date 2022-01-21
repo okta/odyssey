@@ -10,22 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.root {
-  display: inline-block;
-  margin-block-end: calc(-1 * var(--SpaceMarginBlockEnd));
-  margin-inline-start: var(--SpaceMarginInlineStart);
-  list-style-type: none;
-}
+import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
-.item {
-  @include border-radius(var(--BorderRadiusItem));
+export const theme: ThemeReducer = (theme) => ({
+  // Color
+  BackgroundColorItem: theme.ColorPaletteNeutral100,
 
-  display: inline-block;
-  margin-block-start: var(--SpaceMarginBlockStartItem);
-  margin-block-end: var(--SpaceMarginBlockEndItem);
-  margin-inline-start: var(--SpaceMarginInlineStartItem);
-  margin-inline-end: var(--SpaceMarginInlineEndItem);
-  padding-block: var(--SpacePaddingBlockItem);
-  padding-inline: var(--SpacePaddingInlineItem);
-  background: var(--BackgroundColorItem);
-}
+  // Radius
+  BorderRadiusItem: theme.BorderRadiusBase,
+
+  // Space
+  SpaceMarginBlockEnd: theme.SpaceRemXs,
+  SpaceMarginInlineStart: theme.SpaceRemXs,
+  SpaceMarginBlockStartItem: 0,
+  SpaceMarginBlockEndItem: theme.SpaceRemXs,
+  SpaceMarginInlineStartItem: 0,
+  SpaceMarginInlineEndItem: theme.SpaceRemXs,
+  SpacePaddingBlockItem: 0,
+  SpacePaddingInlineItem: theme.SpaceEmXs,
+});
