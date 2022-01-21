@@ -19,5 +19,5 @@ export const theme: ThemeReducer = (theme) => ({
   CircleColor: theme.ColorPaletteNeutral100,
   AnimatedCircleColor: theme.ColorPrimaryDark,
   AnimationDuration: "1.4s",
-  AnimationEasing: "cubic-bezier(0.35, -0.12, 0.09, 0.96)",
+  AnimationTimingFunction: "cubic-bezier(0.35, -0.12, 0.09, 0.96)",
 });
