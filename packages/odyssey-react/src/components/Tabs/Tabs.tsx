@@ -164,7 +164,7 @@ export const Tabs = withTheme(
 
 const Container = forwardRef<HTMLDivElement, PropsTabsContainer>(
   ({ children, id, ariaLabel }, ref) => (
-    <Box id={id} aria-label={ariaLabel} data-testid="ods-tabs" ref={ref}>
+    <Box id={id} aria-label={ariaLabel} ref={ref}>
       {children}
     </Box>
   )
