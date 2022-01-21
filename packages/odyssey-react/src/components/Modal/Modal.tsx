@@ -24,8 +24,9 @@ import { Button as CoreButton } from "../Button";
 import type { ButtonProps as CoreButtonProps } from "../Button";
 import { Heading } from "../Heading";
 import { forwardRefWithStatics, useOid, useCx, useOmit } from "../../utils";
-import styles from "./Modal.module.scss";
 import { CloseIcon } from "../Icon";
+import { theme } from "./Modal.theme";
+import styles from "./Modal.module.scss";
 
 export type ModalProps = {
   /**
@@ -88,7 +89,7 @@ const ModalContext = createContext({} as ModalContext);
  * user interacts with the modal dialog.
  */
 export const Modal = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRefWithStatics<HTMLDivElement, ModalProps, Statics>((props, ref) => {

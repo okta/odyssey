@@ -12,7 +12,10 @@
 
 .root {
   display: inline-block;
-  animation: rotateClockwise var(--AnimationDuration) linear infinite;
+  animation-name: rotateClockwise;
+  animation-duration: var(--AnimationDuration);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
   color: var(--TextColor);
 }
 
@@ -28,8 +31,10 @@
 }
 
 .animatedCircle {
-  animation: indeterminateStroke var(--AnimationDuration) var(--AnimationEasing)
-    infinite;
+  animation-name: indeterminateStroke;
+  animation-duration: var(--AnimationDuration);
+  animation-timing-function: var(--AnimationTimingFunction);
+  animation-iteration-count: infinite;
   stroke-width: var(--CircleStrokeWidth);
   stroke-dasharray: 160%, 360%;
   stroke-dashoffset: 0;
