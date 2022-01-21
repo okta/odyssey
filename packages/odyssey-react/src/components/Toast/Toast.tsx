@@ -190,7 +190,7 @@ const ToastProvider = (props: PropsToastProvider) => {
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
-      <Box className={styles.toastPen} data-testid="ods-toast-pen">
+      <Box className={styles.toastPen}>
         {toasts.map(({ title, body, variant = "info", id = oid() }) => (
           <Toast
             id={id}
