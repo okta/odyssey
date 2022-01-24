@@ -59,7 +59,9 @@ describe("Table Container", () => {
 
   it("renders the heading", () => {
     render(<Table.Container heading={heading} />);
-    expect(screen.getByText(heading).tagName.toLowerCase()).toEqual("figcaption");
+    expect(screen.getByText(heading).tagName.toLowerCase()).toEqual(
+      "figcaption"
+    );
   });
 });
 
