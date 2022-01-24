@@ -27,17 +27,17 @@ export default {
     },
   },
   args: {
-    title: "Big and small planets",
+    heading: "Big and small planets",
     caption: "Information about the largest and smallest planets.",
   },
   argTypes: {
-    title: { control: "text" },
+    heading: { control: "text" },
     caption: { control: "text" },
   },
 };
 
-const Template: Story = ({ title, caption, withContainer, direction }) => (
-  <Table caption={caption} title={title} withContainer={withContainer}>
+const Template: Story = ({ heading, caption, withContainer, direction }) => (
+  <Table caption={caption} heading={heading} withContainer={withContainer}>
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell scope="col">
