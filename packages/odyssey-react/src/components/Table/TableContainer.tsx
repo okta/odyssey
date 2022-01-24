@@ -21,7 +21,7 @@ import { theme } from "./TableContainer.theme";
 export interface TableContainerProps
   extends Omit<
     ComponentPropsWithRef<"figure">,
-    "style" | "className" | "title" | "color"
+    "style" | "className" | "heading" | "color"
   > {
   /**
    * The table for this container
@@ -30,7 +30,7 @@ export interface TableContainerProps
   /**
    * The visible heading for the table
    */
-  title: ReactNode;
+  heading: ReactNode;
 }
 
 export const TableContainer = withTheme(
@@ -38,13 +38,13 @@ export const TableContainer = withTheme(
   styles
 )(
   forwardRef<HTMLElement, TableContainerProps>((props, ref) => {
-    const { children, title, ...rest } = props;
+    const { children, heading, ...rest } = props;
 
     const omitProps = useOmit(rest);
 
     return (
       <Box as="figure" {...omitProps} ref={ref} className={styles.root}>
-        <figcaption className={styles.title}>{title}</figcaption>
+        <figcaption className={styles.heading}>{heading}</figcaption>
         {children}
       </Box>
     );
