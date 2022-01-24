@@ -12,10 +12,10 @@
 
 .root {
   max-width: var(--MaxWidth);
-  margin-block-start: var(--MarginBlockStart);
-  margin-block-end: var(--MarginBlockEnd);
-  margin-inline: var(--MarginInline);
-  padding-block: var(--PaddingBlock);
+  margin-block-start: var(--SpaceMarginBlockStart);
+  margin-block-end: var(--SpaceMarginBlockEnd);
+  margin-inline: var(--SpaceMarginInline);
+  padding-block: var(--SpacePaddingBlock);
 }
 
 .unordered {
@@ -28,7 +28,7 @@
 
 .ordered,
 .unordered {
-  padding-inline-start: var(--OrderedUnorderedPaddingInlineStart);
+  padding-inline-start: var(--SpacePaddingInlineStartOrderedUnordered);
   padding-inline-end: 0;
   list-style-position: outside;
 
@@ -45,7 +45,8 @@
 
 .description {
   display: grid;
-  grid-gap: var(--DescriptionGridGapRows) var(--DescriptionGridGapColumns);
+  grid-column-gap: var(--GridColumnGapDescription);
+  grid-row-gap: var(--GridRowGapDescription);
   grid-template-columns: repeat(2, minmax(min-content, max-content));
   padding-inline: 0;
 
