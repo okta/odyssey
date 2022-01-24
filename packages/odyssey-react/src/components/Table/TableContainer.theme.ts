@@ -16,7 +16,7 @@ export const theme: ThemeReducer = (theme) => ({
   SpaceMarginBlockEnd: theme.FontLineLengthMax,
 
   SpaceMarginHeading: theme.SpaceEmXs,
-  ColorTextBody: theme.ColorTextBody,
+  ColorTextHeading: theme.ColorTextBody,
   FontSizeHeading: theme.FontSizeHeading4,
   FontWeightHeading: theme.FontWeightBold,
 });
