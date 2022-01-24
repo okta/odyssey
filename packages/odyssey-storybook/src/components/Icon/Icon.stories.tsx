@@ -140,7 +140,7 @@ const meta = [
 
 export const Library = (): ReactElement => {
   return (
-    <Table title="Library" caption="Available Odyssey Icons">
+    <Table heading="Library" caption="Available Odyssey Icons">
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Icon</Table.HeaderCell>
