@@ -12,27 +12,29 @@
 
 .tablist {
   position: relative;
-  border-block-end: 1px solid $border-color-display;
+  border-block-end-width: var(--BorderBlockEndWidthTabList);
+  border-block-end-style: var(--BorderBlockEndStyleTabList);
+  border-block-end-color: var(--ColorBorderBlockEndTabList);
 }
 
 .tab {
   display: inline-block;
   position: relative;
-  margin-block: 0;
-  margin-inline: 0;
-  padding-block: $spacing-s;
-  padding-inline: $spacing-s;
+  margin-block: var(--SpaceMarginBlockTab);
+  margin-inline: var(--SpaceMarginInlineTab);
+  padding-block: var(--SpacePaddingBlockTab);
+  padding-inline: var(--SpacePaddingInlineTab);
   border: 0;
   background: none;
-  color: $text-body;
+  color: var(--ColorTextTab);
   font-family: inherit;
-  font-size: $size-title-6;
-  font-weight: 600;
+  font-size: var(--FontSizeTab);
+  font-weight: var(--FontWeightTab);
 }
 
 .tabpanel {
-  padding-block: $spacing-l;
-  padding-inline: 0;
+  padding-block: var(--SpacePaddingBlockTabPanel);
+  padding-inline: var(--SpacePaddingInlineTabPanel);
 
   &:focus {
     outline: none;
@@ -40,8 +42,7 @@
 }
 
 /* Tab states */
-
-.selectedState {
+.selected {
   &::before {
     content: "";
     position: absolute;
@@ -49,6 +50,6 @@
     inset-inline-start: 0;
     width: 100%;
     height: 3px;
-    background: $color-primary-base;
+    background: var(--ColorBackgroundSelected);
   }
 }

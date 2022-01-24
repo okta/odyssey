@@ -16,6 +16,7 @@ import { withTheme } from "@okta/odyssey-react-theme";
 import { forwardRefWithStatics, useCx, useOid } from "../../utils";
 import { Box } from "../Box";
 import styles from "./Tabs.module.scss";
+import { theme } from "./Tabs.theme";
 
 export type TabsProps = {
   /**
@@ -82,7 +83,7 @@ type PropsTab = {
  * or route.
  */
 export const Tabs = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRefWithStatics<HTMLDivElement, TabsProps, Statics>((props, ref) => {
@@ -193,7 +194,7 @@ const Tab = function TabsTab({
   onClick,
 }: PropsTab) {
   const componentClass = useCx(styles.tab, {
-    [styles.selectedState]: selected,
+    [styles.selected]: selected,
   });
 
   return (
