@@ -16,7 +16,7 @@
   width: 100%;
   padding-block: 0;
   padding-inline-start: 0;
-  padding-inline-end: calc(1em + var(--PaddingInlineEnd));
+  padding-inline-end: calc(1em + var(--SpacePaddingInlineEnd));
   border: 0;
   background: none;
   font-family: inherit;
@@ -31,21 +31,21 @@
   inset-block-start: 50%;
   inset-inline-end: 0;
   margin-block: 0;
-  margin-inline-start: var(--IndicatorMarginInlineStart);
+  margin-inline-start: var(--SpaceMarginInlineStartIndicator);
   margin-inline-end: 0;
   transform: translateY(-50%);
-  color: var(--IndicatorColor);
-  font-size: var(--IndicatorSize);
+  color: var(--ColorIndicator);
+  font-size: var(--SizeIndicator);
 }
 
 .unsortedDirection {
   .sortIndicator {
-    color: var(--IndicatorColorUnsorted);
+    color: var(--ColorIndicatorUnsorted);
   }
 
   &:hover {
     .sortIndicator {
-      color: var(--IndicatorColorUnsortedHover);
+      color: var(--ColorIndicatorUnsortedHover);
     }
   }
 }

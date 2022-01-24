@@ -13,7 +13,7 @@
 .root {
   max-width: 100%;
   margin-block-start: 0;
-  margin-block-end: var(--MarginBlockEnd);
+  margin-block-end: var(--SpaceMarginBlockEnd);
   margin-inline: 0;
   overflow-x: auto;
 
@@ -23,9 +23,9 @@
 }
 
 .heading {
-  margin-block-end: var(--HeadingMargin);
-  color: var(--HeadingColor);
-  font-size: var(--HeadingFontSize);
-  font-weight: var(--HeadingWeight);
+  margin-block-end: var(--SpaceMarginHeading);
+  color: var(--ColorTextHeading);
+  font-size: var(--FontSizeHeading);
+  font-weight: var(--FontWeightHeading);
   text-align: start;
 }
