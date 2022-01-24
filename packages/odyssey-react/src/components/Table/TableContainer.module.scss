@@ -22,10 +22,10 @@
   }
 }
 
-.title {
-  margin-block-end: var(--TitleMargin);
-  color: var(--TitleColor);
-  font-size: var(--TitleFontSize);
-  font-weight: var(--TitleWeight);
+.heading {
+  margin-block-end: var(--HeadingMargin);
+  color: var(--HeadingColor);
+  font-size: var(--HeadingFontSize);
+  font-weight: var(--HeadingWeight);
   text-align: start;
 }

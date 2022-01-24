@@ -28,7 +28,7 @@ import styles from "./Table.module.scss";
 import { theme } from "./Table.theme";
 
 type ContainerProps =
-  | { withContainer: false; title?: never }
+  | { withContainer: false; heading?: never }
   | {
       /**
        * Whether to use a Table.Container around the Table
@@ -37,7 +37,7 @@ type ContainerProps =
       /**
        * The visible heading for the table
        */
-      title: ReactNode;
+      heading: ReactNode;
     };
 
 interface ElementProps
@@ -76,7 +76,7 @@ export const Table = withTheme(
   styles
 )(
   forwardRefWithStatics<HTMLTableElement, TableProps, Statics>((props, ref) => {
-    const { children, caption, title, withContainer = true, ...rest } = props;
+    const { children, caption, heading, withContainer = true, ...rest } = props;
 
     const omitProps = useOmit(rest);
 
@@ -98,7 +98,7 @@ export const Table = withTheme(
     return (
       <>
         {withContainer ? (
-          <TableContainer title={title}>
+          <TableContainer heading={heading}>
             <TableEl />
           </TableContainer>
         ) : (

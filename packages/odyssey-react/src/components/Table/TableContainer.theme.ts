@@ -15,8 +15,8 @@ import type { ThemeReducer } from "@okta/odyssey-react-theme";
 export const theme: ThemeReducer = (theme) => ({
   MarginBlockEnd: theme.FontLineLengthMax,
 
-  TitleMargin: theme.SpaceEmXs,
-  TitleColor: theme.ColorTextHeading,
-  TitleFontSize: theme.FontSizeHeading4,
-  TitleWeight: theme.FontWeightBold,
+  HeadingMargin: theme.SpaceEmXs,
+  HeadingColor: theme.ColorTextHeading,
+  HeadingFontSize: theme.FontSizeHeading4,
+  HeadingWeight: theme.FontWeightBold,
 });
