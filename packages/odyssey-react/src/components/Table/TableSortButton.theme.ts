@@ -16,8 +16,8 @@ export const theme: ThemeReducer = (theme) => ({
   SpacePaddingInlineEnd: theme.SpaceRemS,
 
   SpaceMarginInlineStartIndicator: theme.SpaceRemS,
-  ColorIndicator: theme.ColorTextHeading,
+  ColorIndicator: theme.ColorTextBody,
   ColorIndicatorUnsorted: theme.ColorTextSub,
-  ColorIndicatorUnsortedHover: theme.ColorTextHeading,
+  ColorIndicatorUnsortedHover: theme.ColorTextBody,
   SizeIndicator: "0.75em",
 });
