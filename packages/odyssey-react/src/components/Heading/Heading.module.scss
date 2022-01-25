@@ -20,7 +20,12 @@
   font-size: $base-font-size;
 =======
   color: var(--ColorTextHeading);
+<<<<<<< HEAD
 >>>>>>> 265f2f40 (chore: update theme variables to be inline with existing conventions)
+=======
+  font-family: var(--FontFamilyTitle);
+  font-size: var(--FontSizeBase);
+>>>>>>> 2c96cc63 (chore: add theme keyts for FontSizeBase and FontFamilyTitle)
   font-weight: 600;
 }
 
@@ -51,7 +56,7 @@
 .level1,
 .level2,
 .level3 {
-  line-height: var(--FontLineHeightTitle);
+  line-height: var(--FontLineHeightTitlegit);
 }
 
 .level4,

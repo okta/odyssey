@@ -21,6 +21,8 @@ export const theme: ThemeReducer = (theme) => ({
   SizeTitle4: theme.FontSizeHeading4,
   SizeTitle5: theme.FontSizeHeading5,
   SizeTitle6: theme.FontSizeHeading6,
+  FontFamilyTitle: theme.FontFamilyBase,
+  FontSizeBase: theme.FontSizeBody,
   FontLineHeightTitle: theme.FontLineHeightTitle,
   FontLineHeightBase: theme.FontLineHeightTitle,
 });
