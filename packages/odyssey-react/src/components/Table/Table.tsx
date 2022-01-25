@@ -11,7 +11,7 @@
  */
 
 import React from "react";
-import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
+import type { ReactText, ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit, forwardRefWithStatics } from "../../utils";
 import { Box } from "../Box";
@@ -37,7 +37,7 @@ type ContainerProps =
       /**
        * The visible heading for the table
        */
-      heading: ReactNode;
+      heading?: ReactText;
     };
 
 interface ElementProps

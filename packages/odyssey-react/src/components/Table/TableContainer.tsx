@@ -11,7 +11,7 @@
  */
 
 import React, { forwardRef } from "react";
-import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
+import type { ReactText, ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit } from "../../utils";
 import { Box } from "../Box";
@@ -21,7 +21,7 @@ import { theme } from "./TableContainer.theme";
 export interface TableContainerProps
   extends Omit<
     ComponentPropsWithRef<"figure">,
-    "style" | "className" | "heading" | "color"
+    "style" | "className" | "color"
   > {
   /**
    * The table for this container
@@ -30,7 +30,7 @@ export interface TableContainerProps
   /**
    * The visible heading for the table
    */
-  heading: ReactNode;
+  heading?: ReactText;
 }
 
 export const TableContainer = withTheme(
