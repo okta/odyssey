@@ -22,6 +22,7 @@ import { useOid, useCx } from "../../utils";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import styles from "./TextArea.module.scss";
+import { theme } from "./TextArea.theme";
 
 export interface TextAreaProps extends CommonFieldProps {
   /**
@@ -91,7 +92,7 @@ export interface TextAreaProps extends CommonFieldProps {
  * TextArea allows users to edit and input data.
  */
 export const TextArea: FunctionComponent<TextAreaProps> = withTheme(
-  () => ({}),
+  theme,
   styles
 )((props) => {
   const {

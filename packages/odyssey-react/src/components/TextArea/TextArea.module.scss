@@ -11,13 +11,67 @@
  */
 
 .root {
-  @include input-baseline;
+  @include border-radius(var(--BorderRadius));
 
-  min-width: $spacing-m;
-  max-width: $max-line-length;
-  min-height: $spacing-m * 2;
-  padding-block-start: $spacing-xs-em;
-  padding-block-end: $spacing-s-em;
-  padding-inline: $spacing-s-em;
-  margin-block-start: $spacing-xs;
+  display: block;
+  position: relative;
+  width: 100%;
+  min-width: var(--MinWidth);
+  max-width: var(--MaxWidth);
+  min-height: var(--MinHeight);
+  padding-block-start: var(--SpacePaddingBlockStart);
+  padding-block-end: var(--SpacePaddingBlockEnd);
+  padding-inline: var(--SpacePaddingInline);
+  margin-block-start: var(--SpaceMarginBlockStart);
+  margin-block-end: var(--SpaceMarginBlockEnd);
+  margin-inline: var(--SpaceMarginInline);
+  transition-property: border-color, background-color, box-shadow;
+  transition-duration: var(--TransitionDuration);
+  transition-timing-function: var(--TransitionTiming);
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--ColorBorder);
+  background-color: var(--ColorBackground);
+  box-shadow: 0 0 0 0 var(--ColorShadow);
+  color: var(--ColorText);
+  font-family: var(--FontFamily);
+  font-size: var(--FontSize);
+  line-height: var(--LineHeight);
+
+  &:hover,
+  &:focus {
+    border-color: var(--ColorBorderHoverFocus);
+  }
+
+  &:focus {
+    @include outline(var(--ColorFocusOutline), var(--FocusOutlineWidth));
+  }
+
+  &:invalid {
+    border-color: var(--ColorBorderInvalid);
+  }
+
+  &:disabled {
+    opacity: 1;
+    color: var(--ColorTextDisabled);
+    cursor: not-allowed;
+  }
+
+  &:disabled,
+  &[readonly] {
+    border-color: var(--ColorBorderDisabled);
+    background-color: var(--ColorBackgroundDisabled);
+
+    &:hover {
+      border-color: var(--ColorBorderDisabled);
+    }
+  }
+
+  &:invalid:focus {
+    @include outline(var(--ColorFocusOutlineInvalid), var(--FocusOutlineWidth));
+  }
+
+  &::placeholder {
+    color: var(--ColorTextPlaceholder);
+  }
 }
