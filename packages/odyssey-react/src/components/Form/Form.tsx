@@ -15,10 +15,12 @@ import type { ComponentPropsWithRef, ReactNode, ReactElement } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit, forwardRefWithStatics } from "../../utils";
 import { Heading } from "../Heading";
+import { Box } from "../Box";
+import { Text } from "../Text";
 import styles from "./Form.module.scss";
 
 export interface FormProps
-  extends Omit<ComponentPropsWithRef<"form">, "style" | "className"> {
+  extends Omit<ComponentPropsWithRef<"form">, "style" | "color" | "className"> {
   /**
    * Content to be rendered within the Form. Avoid using direct children, put child content
    * within the provided Form static components (Form.Error and Form.Actions)
@@ -64,13 +66,13 @@ export const Form = withTheme(
     const omitProps = useOmit(rest);
 
     return (
-      <form {...omitProps} className={styles.root} ref={ref}>
+      <Box as="form" {...omitProps} className={styles.root} ref={ref}>
         <header className={styles.header}>
           {title && <Heading visualLevel="3" children={title} />}
-          {desc && <p>{desc}</p>}
+          {desc && <Text as="p">{desc}</Text>}
         </header>
         {children}
-      </form>
+      </Box>
     );
   })
 );
