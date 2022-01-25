@@ -24,11 +24,9 @@ Install the package:
 $ yarn add @okta/odyssey-react
 ```
 
-Include deprecated global styles with fingerprint extension and fonts:
+Include fonts:
 
 ```html
-<link rel="stylesheet" href="odyssey-deprecated-global.abc123.css" />
-
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link
   rel="stylesheet"

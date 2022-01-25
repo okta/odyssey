@@ -15,6 +15,8 @@
   margin-block-end: calc(-1 * var(--SpaceMarginBlockEnd));
   margin-inline-start: var(--SpaceMarginInlineStart);
   list-style-type: none;
+  padding-inline: 0;
+  margin-block-start: 0;
 }
 
 .item {

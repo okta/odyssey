@@ -13,7 +13,7 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { Modal, ModalProps, Button } from "@okta/odyssey-react";
+import { Modal, ModalProps, Button, Text } from "@okta/odyssey-react";
 import { Modal as Source } from "../../../../odyssey-react/src";
 
 import ModalMdx from "./Modal.mdx";
@@ -61,10 +61,10 @@ const Template: Story<ModalProps> = () => {
       >
         <Modal.Header>Modal Title</Modal.Header>
         <Modal.Body>
-          <p>
+          <Text as="p">
             This is the modal content area. It's width is determined based on
             the amount of content within it.
-          </p>
+          </Text>
         </Modal.Body>
         <Modal.Footer>
           <Modal.Button variant="clear">Cancel</Modal.Button>
