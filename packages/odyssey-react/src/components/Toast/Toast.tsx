@@ -30,6 +30,7 @@ import {
   CompleteIcon,
   CloseIcon,
 } from "../Icon";
+import { theme } from "./Toast.theme";
 import styles from "./Toast.module.scss";
 
 export interface ToastProps
@@ -116,7 +117,7 @@ const icon = {
  * asynchronous feedback or updates.
  */
 export const Toast = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRefWithStatics<HTMLElement, ToastProps, Statics>((props, ref) => {
@@ -144,7 +145,7 @@ export const Toast = withTheme(
         color={false}
       >
         <span className={styles.icon}>{icon[variant]}</span>
-        <h1 className={styles.title}>{title}</h1>
+        <h1 className={styles.heading}>{title}</h1>
         {body && <p className={styles.body}>{body}</p>}
         <span className={styles.dismiss}>
           <Button
