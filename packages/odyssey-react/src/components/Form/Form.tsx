@@ -18,6 +18,7 @@ import { Heading } from "../Heading";
 import { Box } from "../Box";
 import { Text } from "../Text";
 import styles from "./Form.module.scss";
+import { theme } from "./Form.theme";
 
 export interface FormProps
   extends Omit<ComponentPropsWithRef<"form">, "style" | "color" | "className"> {
@@ -57,7 +58,7 @@ type Statics = {
 };
 
 export const Form = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRefWithStatics<HTMLFormElement, FormProps, Statics>((props, ref) => {
