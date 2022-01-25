@@ -18,6 +18,7 @@ import { Box } from "../Box";
 import { SortIcon, SortAscIcon, SortDescIcon } from "../Icon";
 import { ScreenReaderText } from "../ScreenReaderText";
 import styles from "./TableSortButton.module.scss";
+import { theme } from "./TableSortButton.theme";
 
 export interface TableSortButtonProps
   extends Omit<
@@ -50,7 +51,7 @@ export interface TableSortButtonProps
 }
 
 export const TableSortButton = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLButtonElement, TableSortButtonProps>((props, ref) => {

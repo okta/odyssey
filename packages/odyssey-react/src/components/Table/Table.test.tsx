@@ -20,12 +20,12 @@ import { TableRow } from "./TableRow";
 import { TableHeaderCell } from "./TableHeaderCell";
 
 const caption = "test table";
-const tableTitle = "test table";
+const tableHeading = "test table";
 
 describe("Table", () => {
   it("renders the table", () => {
     render(
-      <Table caption={caption} title={tableTitle}>
+      <Table caption={caption} heading={tableHeading}>
         <TableHeader />
         <TableBody />
         <TableFooter />
@@ -36,7 +36,7 @@ describe("Table", () => {
   });
 
   it("renders the caption prop in the caption element", () => {
-    render(<Table caption={caption} title={tableTitle} />);
+    render(<Table caption={caption} heading={tableHeading} />);
 
     expect(screen.getByRole("table", { name: caption })).toBeVisible();
   });
@@ -49,24 +49,26 @@ describe("Table", () => {
   });
 });
 
-const title = "test title";
+const heading = "test heading";
 
 describe("Table Container", () => {
   it("renders the container", () => {
-    render(<Table.Container title={title} />);
+    render(<Table.Container heading={heading} />);
     expect(screen.getByRole("figure")).toBeInTheDocument();
   });
 
-  it("renders the title", () => {
-    render(<Table.Container title={title} />);
-    expect(screen.getByText(title).tagName.toLowerCase()).toEqual("figcaption");
+  it("renders the heading", () => {
+    render(<Table.Container heading={heading} />);
+    expect(screen.getByText(heading).tagName.toLowerCase()).toEqual(
+      "figcaption"
+    );
   });
 });
 
 describe("Table Data Cell", () => {
   it("renders the cell", () => {
     render(
-      <Table caption={caption} title={tableTitle}>
+      <Table caption={caption} heading={tableHeading}>
         <Table.Body>
           <Table.Row>
             <Table.DataCell>data</Table.DataCell>
@@ -79,7 +81,7 @@ describe("Table Data Cell", () => {
 
   it("adds the proper class for format prop", () => {
     render(
-      <Table caption={caption} title={tableTitle}>
+      <Table caption={caption} heading={tableHeading}>
         <Table.Body>
           <Table.Row>
             <Table.DataCell format="num">1</Table.DataCell>
@@ -94,7 +96,7 @@ describe("Table Data Cell", () => {
 describe("Table Header Cell", () => {
   it("renders the cell", () => {
     render(
-      <Table caption={caption} title={tableTitle}>
+      <Table caption={caption} heading={tableHeading}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>heading</Table.HeaderCell>
@@ -107,7 +109,7 @@ describe("Table Header Cell", () => {
 
   it("adds the proper class for format prop", () => {
     render(
-      <Table caption={caption} title={tableTitle}>
+      <Table caption={caption} heading={tableHeading}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell format="num">number</Table.HeaderCell>
@@ -153,7 +155,7 @@ describe("Table Sort Button", () => {
 
 a11yCheck(() =>
   render(
-    <Table caption={caption} title={tableTitle}>
+    <Table caption={caption} heading={tableHeading}>
       <TableHeader>
         <TableRow>
           <TableHeaderCell></TableHeaderCell>

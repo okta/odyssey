@@ -11,32 +11,33 @@
  */
 
 .root {
-  border-block-end: 1px solid $border-color-display;
-  max-width: $max-line-length;
-  padding-block: $spacing-s;
-  padding-inline: $spacing-s;
+  border-block-end: var(--BorderWidth) var(--BorderStyle) var(--BorderColor);
+  max-width: var(--MaxLineLength);
+  padding-block: var(--SpacePaddingBlock);
+  padding-inline: var(--SpacePaddingInline);
   text-align: start;
   vertical-align: baseline;
   overflow-wrap: break-word;
 }
 
 .headerCell {
-  color: $text-heading;
-  font-weight: 600;
+  color: var(--ColorTextHeader);
+  font-weight: var(--FontWeightHeader);
 }
 
 .headerCellCol {
-  border-block-start: 1px solid $border-color-display;
+  border-block-start: var(--BorderWidthHeaderCol) var(--BorderStyleHeaderCol)
+    var(--BorderColorHeaderCol);
 }
 
 /* Table states */
 
 .emptyState {
   max-width: 100%;
-  padding-block: $spacing-l;
-  padding-inline: $spacing-xl;
-  background: cv("gray", "000");
-  color: $text-sub;
+  padding-block: var(--SpacePaddingBlockEmpty);
+  padding-inline: var(--SpacePaddingInlineEmpty);
+  background-color: var(--BackgroundColorEmpty);
+  color: var(--ColorTextEmpty);
   text-align: center;
 }
 
