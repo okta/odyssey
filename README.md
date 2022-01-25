@@ -6,9 +6,9 @@ Build and design consistent, efficient, and accessible UIs for all Okta users.
 
 | Package/README                                                                                                      | Description                                                      |
 | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| [@okta/odyssey-design-tokens](https://github.com/okta/odyssey/tree/master/packages/odyssey-design-tokens/README.md) | Low level token values needed to construct and maintain Odyssey. |
-| [@okta/odyssey-react-theme](https://github.com/okta/odyssey/tree/master/packages/odyssey-react-themep/README.md)    | Theming layer for odyssey-react.                                 |
-| [@okta/odyssey-react](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/README.md)                 | Odyssey components for [React](https://reactjs.org/).            |
+| [@okta/odyssey-design-tokens](https://github.com/okta/odyssey/blob/master/packages/odyssey-design-tokens/README.md) | Low level token values needed to construct and maintain Odyssey. |
+| [@okta/odyssey-react-theme](https://github.com/okta/odyssey/blob/master/packages/odyssey-react-theme/README.md)     | Theming layer for odyssey-react.                                 |
+| [@okta/odyssey-react](https://github.com/okta/odyssey/blob/master/packages/odyssey-react/README.md)                 | Odyssey components for [React](https://reactjs.org/).            |
 
 ### Making a commit
 
@@ -21,7 +21,7 @@ by providing the `--no-verify` flag to `git commit`.
 
 ## Browser Support
 
-Odyssey browser support mirrors Okta's [Supported platforms, browsers, and operating systems](https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm) with the exception of IE 11, which will be released at a later time.
+Odyssey browser support mirrors Okta's [Supported platforms, browsers, and operating systems](https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm) with the exception of IE 11.
 
 ## Feature Requests, Bugs & Feedback
 
