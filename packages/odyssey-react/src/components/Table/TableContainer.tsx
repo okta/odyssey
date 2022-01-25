@@ -11,16 +11,17 @@
  */
 
 import React, { forwardRef } from "react";
-import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
+import type { ReactText, ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit } from "../../utils";
 import { Box } from "../Box";
 import styles from "./TableContainer.module.scss";
+import { theme } from "./TableContainer.theme";
 
 export interface TableContainerProps
   extends Omit<
     ComponentPropsWithRef<"figure">,
-    "style" | "className" | "title" | "color"
+    "style" | "className" | "color"
   > {
   /**
    * The table for this container
@@ -29,21 +30,21 @@ export interface TableContainerProps
   /**
    * The visible heading for the table
    */
-  title: ReactNode;
+  heading?: ReactText;
 }
 
 export const TableContainer = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLElement, TableContainerProps>((props, ref) => {
-    const { children, title, ...rest } = props;
+    const { children, heading, ...rest } = props;
 
     const omitProps = useOmit(rest);
 
     return (
       <Box as="figure" {...omitProps} ref={ref} className={styles.root}>
-        <figcaption className={styles.title}>{title}</figcaption>
+        <figcaption className={styles.heading}>{heading}</figcaption>
         {children}
       </Box>
     );

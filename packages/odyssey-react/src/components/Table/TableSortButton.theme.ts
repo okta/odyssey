@@ -10,22 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.root {
-  max-width: 100%;
-  margin-block-start: 0;
-  margin-block-end: var(--SpaceMarginBlockEnd);
-  margin-inline: 0;
-  overflow-x: auto;
+import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
-  &:last-child {
-    margin-block: 0;
-  }
-}
+export const theme: ThemeReducer = (theme) => ({
+  SpacePaddingInlineEnd: theme.SpaceRemS,
 
-.heading {
-  margin-block-end: var(--SpaceMarginHeading);
-  color: var(--ColorTextHeading);
-  font-size: var(--FontSizeHeading);
-  font-weight: var(--FontWeightHeading);
-  text-align: start;
-}
+  SpaceMarginInlineStartIndicator: theme.SpaceRemS,
+  ColorIndicator: theme.ColorTextBody,
+  ColorIndicatorUnsorted: theme.ColorTextSub,
+  ColorIndicatorUnsortedHover: theme.ColorTextBody,
+  SizeIndicator: "0.75em",
+});

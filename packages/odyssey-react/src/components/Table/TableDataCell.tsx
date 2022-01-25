@@ -16,6 +16,7 @@ import { withTheme } from "@okta/odyssey-react-theme";
 import type { CellTextFormats } from "./types";
 import { useCx, useOmit } from "../../utils";
 import styles from "./TableCell.module.scss";
+import { theme } from "./TableCell.theme";
 
 export interface TableDataCellProps
   extends Omit<ComponentPropsWithRef<"td">, "style" | "className"> {
@@ -28,7 +29,7 @@ export interface TableDataCellProps
 }
 
 export const TableDataCell = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLTableCellElement, TableDataCellProps>((props, ref) => {
@@ -37,7 +38,7 @@ export const TableDataCell = withTheme(
     const componentClass = useCx(
       styles.root,
       format && styles[`${format}Format`],
-      empty && styles[`${empty}State`]
+      empty && styles[`emptyState`]
     );
 
     const omitProps = useOmit(rest);
