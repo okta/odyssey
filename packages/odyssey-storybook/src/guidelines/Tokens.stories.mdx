@@ -41,7 +41,9 @@ Most Functional tokens map to a palette value. For example: `font.size.caption` 
 
 Others, however, may have no palette mapping. For example: `border.width.base` might be set to `1px`.
 
-<strong>Editor's Note:</strong> the font size example here points to a possible conflation. Functional font sizes and their associated palettes would both be prefixed with `font`, based on their scope or type.
+<strong>Editor's Note:</strong> the font size example here points to a possible conflation.
+Functional font sizes and their associated palettes would both be prefixed with `font`,
+based on their scope or type.
 
 #### Location
 
@@ -85,7 +87,9 @@ The scope is an optional part that refers to where the token will be applied. Sc
 
 The base refers to the type of token. It's made up of two parts: "category" and "property". The category represents the general purpose or grouping of the token. For example, `color`, `font`, or `spacing`. The property is an optional part for deeper specification of the base type. For example: `color.text` or `font.weight`.
 
-<strong>Editor's Note:</strong> In practice, this category+property formula has often been interpreted as matching the css property. For example: `font` + `size` = `font-size`. While this is often a happy coincidence, I don't believe it is the original intent.
+<strong>Editor's Note:</strong> In practice, this category+property formula has often
+been interpreted as matching the css property. For example: `font` + `size` = `font-size`.
+While this is often a happy coincidence, I don't believe it is the original intent.
 
 Finally, the modifier refers to a variant, scale, or mode. Modifiers can be combined to create more specific variants. For example: `success`, `success.hover`, and `success.hover.darkmode`. There is some disagreement about whether or not this is the correct place for Dark Mode values to be set, but the general case seems clear.
 
@@ -96,7 +100,9 @@ In this proposal, all tokens are assumed to live within Style Dictionary and fol
 - `button.space.inline`
 - `forms.border.color.invalid`
 
-<strong>Editor's note:</strong> For the sake of language consistency, I will use the initial proposal's terminology throughout this document. For example, "Scope" when referring to a Component or Component part being targeted by the token.
+<strong>Editor's note:</strong> For the sake of language consistency, I will use
+the initial proposal's terminology throughout this document. For example, "Scope"
+when referring to a Component or Component part being targeted by the token.
 
 ### Current Implementations
 
@@ -112,7 +118,10 @@ The first approach here will be referred to as Hierarchy Agnostic, as it seeks t
 
 The second approach will be referred to as Hierarchy Specific, as it presents a different naming convention for those tokens located only at the React Theme level.
 
-<strong>Editor's note:</strong> In all cases, the current implementations are doing the best they can with the tokens available. Some choices represented below may not be seen as ideal by other party, but represent common solutions to a pervasive lack of consistency.
+<strong>Editor's note:</strong> In all cases, the current implementations are doing
+the best they can with the tokens available. Some choices represented below may not
+be seen as ideal by other party, but represent common solutions to a pervasive lack
+of consistency.
 
 #### Hierarchy Agnostic
 
@@ -136,7 +145,9 @@ The Hierarchy Specific approach proposes an alternate naming format for Componen
 - `PaddingBlock: theme.SpaceEmXs`
 - `ContentPaddingInline: 0`
 
-<strong>Editor's note</strong>: The above examples are rewrites of the Hierarchy Agnostic approach, not examples pulled from code. This was done for the sake of easy comparison.
+<strong>Editor's note</strong>: The above examples are rewrites of the Hierarchy
+Agnostic approach, not examples pulled from code. This was done for the sake of
+easy comparison.
 
 The major differences here are those noted above. First, the "Category" aspect of "Base" has been dropped from these tokens to keep names shorter. It's assumed that the "Property" component indicates the value category. For example, `PaddingBlock` rather than `SpacePaddingBlock`. Second, the "Scope" remains at the front of the token name, differentiated from "Modifier". For example: `FocusColorPrimary` rather than `ColorFocusPrimary`.
 
