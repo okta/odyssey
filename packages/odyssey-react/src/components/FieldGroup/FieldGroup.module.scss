@@ -13,12 +13,12 @@
 .root {
   max-width: $max-line-length;
   margin-block-start: 0;
-  margin-block-end: $spacing-m;
+  margin-block-end: var(--SpaceEmM);
   padding-inline: 0;
   padding-block-start: 0;
-  padding-block-end: $spacing-m;
+  padding-block-end: var(--SpaceEmM);
   margin-inline: 0;
-  border-block-end: 1px solid $border-color-display;
+  border-block-end: 1px solid var(--ColorBorderDisplay);
   border: none;
 
   &:last-child {
@@ -33,12 +33,12 @@
   margin-inline: 0;
   padding-block: 0;
   padding-inline: 0;
-  color: $text-heading;
-  font-size: $size-title-4;
+  color: var(--FontColorTitle);
+  font-size: var(--TitleFontSize);
   font-weight: 600;
-  line-height: $title-line-height;
+  line-height: var(--FontLineHeightTitle);
 }
 
 .error {
-  margin-block-end: $spacing-m;
+  margin-block-end: var(--SpaceEmM);
 }
