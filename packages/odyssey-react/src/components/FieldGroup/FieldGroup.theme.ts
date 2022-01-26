@@ -16,7 +16,7 @@ export const theme: ThemeReducer = (theme) => ({
   BorderStyle: theme.BorderStyleBase,
   BorderWidth: theme.BorderWidthBase,
   BorderColor: theme.ColorBorderDisplay,
-  FontColor: theme.ColorTextBody,
+  TitleFontColor: theme.ColorTextBody,
   TitleFontLineHeight: theme.FontLineHeightTitle,
   TitleFontSize: theme.FontSizeHeading4,
   MarginBlockEnd: theme.SpaceRemM,
