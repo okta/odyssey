@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2018-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,17 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ThemeReducer } from "@okta/odyssey-react-theme";
+.root {
+  width: 100%;
+  margin-block-start: var(--SpaceMarginBlockStart);
+  margin-block-end: var(--SpaceMarginBlockEnd);
+  margin-inline: var(--SpaceMarginInline);
+  padding-inline: var(--SpacePaddingInline);
+}
 
-export const theme: ThemeReducer = (theme) => ({
-  BorderColor: "currentcolor",
-  BorderStyle: "none",
-  BorderWidth: 0,
-  FontMaxWidth: theme.FontLineLengthMax,
-  SpaceMarginBlockEnd: theme.SpaceRemM,
-  SpaceMarginBlockStart: 0,
-  SpaceMarginInline: 0,
-  SpacePaddingBlockEnd: theme.SpaceRemM,
-  SpacePaddingBlockStart: 0,
-  SpacePaddingInline: 0,
-});
+.optionalLabel {
+  padding-inline-start: var(--SpacePaddingInlineStartOptional);
+}
