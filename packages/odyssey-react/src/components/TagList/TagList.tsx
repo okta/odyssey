@@ -15,10 +15,10 @@ import type { ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit } from "../../utils";
 import { Box } from "../Box";
-import styles from "./Tag.module.scss";
-import { theme } from "./Tag.theme";
+import styles from "./TagList.module.scss";
+import { theme } from "./TagList.theme";
 
-export interface TagProps
+export interface TagListProps
   extends Omit<
     ComponentPropsWithRef<"ul">,
     "style" | "className" | "children" | "color"
@@ -34,15 +34,15 @@ export interface TagProps
 }
 
 /**
- * Use Tags to help describe and differentiate an entity or object.
+ * Use TagList to help describe and differentiate an entity or object.
  * Think of them as “adjectives” in your UI toolbox that make navigating
  * and parsing content easier.
  */
-export const Tag = withTheme(
+export const TagList = withTheme(
   theme,
   styles
 )(
-  forwardRef<HTMLUListElement, TagProps>((props, ref) => {
+  forwardRef<HTMLUListElement, TagListProps>((props, ref) => {
     const { tags, ...rest } = props;
     const omitProps = useOmit(rest);
 
@@ -58,4 +58,4 @@ export const Tag = withTheme(
   })
 );
 
-Tag.displayName = "Tag";
+TagList.displayName = "TagList";

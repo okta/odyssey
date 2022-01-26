@@ -12,21 +12,21 @@
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { Tag } from ".";
+import { TagList } from ".";
 
 const tagList = ["Item one", "Item two", "Item three"];
 const list = "list";
 const listitem = "listitem";
 
-describe("Tag", () => {
+describe("TagList", () => {
   it("renders the tags as a list", () => {
-    render(<Tag tags={tagList} />);
+    render(<TagList tags={tagList} />);
 
     expect(screen.getByRole(list)).toBeInTheDocument();
   });
 
   it("renders the tags in the correct order as list items", () => {
-    render(<Tag tags={tagList} />);
+    render(<TagList tags={tagList} />);
 
     const tags = screen.getAllByRole(listitem).map((el) => el.textContent);
     expect(tags).toEqual(tagList);
@@ -35,11 +35,11 @@ describe("Tag", () => {
   it("restricts children prop via types and does not render them", () => {
     render(
       // @ts-expect-error never type for children
-      <Tag tags={tagList} children="child" />
+      <TagList tags={tagList} children="child" />
     );
 
     expect(screen.queryByText("child")).toBeNull;
   });
 
-  a11yCheck(() => render(<Tag tags={["foo"]} />));
+  a11yCheck(() => render(<TagList tags={["foo"]} />));
 });
