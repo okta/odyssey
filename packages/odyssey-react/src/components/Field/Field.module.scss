@@ -11,37 +11,21 @@
  */
 
 .root {
-  max-width: $max-line-length;
-  margin-block-end: $spacing-m;
-  padding-block-start: 0;
+  max-width: var(--FontMaxWidth);
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--BorderColor);
+  margin-block-start: var(--SpaceMarginBlockStart);
+  margin-block-end: var(--SpaceMarginBlockEnd);
+  margin-inline: var(--SpaceMarginInline);
+  padding-block-start: var(--SpacePaddingBlockStart);
+  padding-inline: var(--SpacePaddingInline);
+
   &:last-child {
     margin-block-end: 0;
   }
 }
 
 .fieldset {
-  margin-block-start: 0;
-  margin-block-end: $spacing-m;
-  padding-block-end: $spacing-m;
-  margin-inline: 0;
-  padding-inline: 0;
-  border: 0;
-  padding-block-start: 0;
-}
-
-.label {
-  width: 100%;
-  margin-block-start: 0;
-  margin-block-end: $spacing-xs;
-  margin-inline: 0;
-  padding-inline: 0;
-}
-
-.optionalLabel {
-  padding-inline-start: $spacing-s;
-}
-
-.hint {
-  margin-block-start: -$spacing-xs;
-  margin-block-end: $spacing-xs;
+  padding-block-end: var(--SpacePaddingBlockEnd);
 }

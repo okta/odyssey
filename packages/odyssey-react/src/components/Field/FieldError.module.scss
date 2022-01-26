@@ -11,7 +11,7 @@
  */
 
 .root {
-  margin-block-start: $spacing-xs;
-  color: $color-danger-base;
-  font-size: $size-body-caption;
+  margin-block-start: var(--SpaceMarginBlockStart);
+  color: var(--ColorText);
+  font-size: var(--FontSize);
 }
