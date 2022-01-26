@@ -14,9 +14,9 @@
   margin-block-start: 0;
   margin-block-end: var(--SpaceMarginBlockEnd);
   margin-inline: 0;
-  color: $text-heading;
-  font-family: $body-font-family;
-  font-size: $base-font-size;
+  color: var(--ColorText);
+  font-family: var(--FontFamily);
+  font-size: var(--FontSize);
   font-weight: 600;
 }
 
