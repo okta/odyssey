@@ -14,18 +14,9 @@
   margin-block-start: 0;
   margin-block-end: var(--SpaceMarginBlockEnd);
   margin-inline: 0;
-<<<<<<< HEAD
   color: $text-heading;
   font-family: $body-font-family;
   font-size: $base-font-size;
-=======
-  color: var(--ColorTextHeading);
-<<<<<<< HEAD
->>>>>>> 265f2f40 (chore: update theme variables to be inline with existing conventions)
-=======
-  font-family: var(--FontFamilyTitle);
-  font-size: var(--FontSizeBase);
->>>>>>> 2c96cc63 (chore: add theme keyts for FontSizeBase and FontFamilyTitle)
   font-weight: 600;
 }
 
@@ -62,7 +53,7 @@
 .level4,
 .level5,
 .level6 {
-  line-height: var(--FontLineHeightBase);
+  line-height: var(--FontLineHeight);
 }
 
 .noEndMargin {
@@ -70,9 +61,9 @@
 }
 
 .baseLineHeight {
-  line-height: var(--FontLineHeightBase);
+  line-height: var(--FontLineHeight);
 }
 
 .titleLineHeight {
-  line-height: var(--LineHeightTitle);
+  line-height: var(--LineHeightAlt);
 }
