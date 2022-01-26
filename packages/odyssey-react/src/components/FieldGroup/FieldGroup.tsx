@@ -17,6 +17,7 @@ import { Box } from "../Box";
 import { Text } from "../Text";
 import { useOmit } from "../../utils";
 import styles from "./FieldGroup.module.scss";
+import { theme } from "./FieldGroup.theme";
 
 export interface FieldGroupProps {
   /**
@@ -45,7 +46,7 @@ type Statics = {
 
 export const FieldGroup: FunctionComponent<FieldGroupProps> & Statics =
   withTheme(
-    () => ({}),
+    theme,
     styles
   )(
     Object.assign(
