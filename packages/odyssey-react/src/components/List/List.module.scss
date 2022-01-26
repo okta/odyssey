@@ -45,10 +45,10 @@
 
 .description {
   display: grid;
-  grid-column-gap: var(--GridColumnGapDescription);
-  grid-row-gap: var(--GridRowGapDescription);
   grid-template-columns: repeat(2, minmax(min-content, max-content));
   padding-inline: 0;
+  column-gap: var(--ColumnGapDescription);
+  row-gap: var(--RowGapDescription);
 
   &:last-child {
     margin-block-end: 0;
