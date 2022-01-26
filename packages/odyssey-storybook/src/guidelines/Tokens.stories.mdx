@@ -4,245 +4,148 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 # Design Tokens
 
-Design Tokens abstract Base elements into names that are commonly understood. They are then used together to build components.
+For those reviewing this document, you may refer to <a href="https://docs.google.com/document/d/1ZXQahqi_ihNnHIGqE_VoruOzt5CVWmgnJq2_niHI51w/edit#">the initial document</a> for more background. Arnold's initial work is not the current source of truth, but does represent the best effort at a full coverage proposal. It acts as a starting point for this document.
 
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Semantic Colors</figcaption>
-  <table class="ods-table">
-    <thead>
-      <tr>
-        <th scope="column">Token Name</th>
-        <th scope="column">Example</th>
-        <th scope="column">Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="is-ods-table-checkbox">
-          <div>
-            <code>$color-primary-light</code>
-          </div>
-        </td>
-        <td>
-          <span class="sample-token sample-token--color-primary-light"></span>
-        </td>
-        <td>Blue 300</td>
-      </tr>
-      <tr>
-        <td>
-          <code>$color-primary-base</code>
-        </td>
-        <td>
-          <span class="sample-token sample-token--color-primary-base"></span>
-        </td>
-        <td>Blue 500</td>
-      </tr>
-      <tr>
-        <td>
-          <code>$color-primary-dark</code>
-        </td>
-        <td>
-          <span class="sample-token sample-token--color-primary-dark"></span>
-        </td>
-        <td>Blue 900</td>
-      </tr>
-      <tr>
-        <td>
-          <code>$color-danger-light</code>
-        </td>
-        <td>
-          <span class="sample-token sample-token--color-danger-light"></span>
-        </td>
-        <td>Red 300</td>
-      </tr>
-      <tr>
-        <td>
-          <code>$color-danger-base</code>
-        </td>
-        <td>
-          <span class="sample-token sample-token--color-danger-base"></span>
-        </td>
-        <td>Red 500</td>
-      </tr>
-      <tr>
-        <td>
-          <code>$color-danger-dark</code>
-        </td>
-        <td>
-          <span class="sample-token sample-token--color-danger-dark"></span>
-        </td>
-        <td>Red 900</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
+## What are Design Tokens?
 
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Focus Ring</figcaption>
-  <table class="ods-table">
-    <thead>
-      <tr>
-        <th scope="column">Token Name</th>
-        <th scope="column">Example</th>
-        <th scope="column">Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <code>$focus-ring-primary</code>
-        </td>
-        <td>
-          <span class="sample-token sample-token--color-primary-outline"></span>
-        </td>
-        <td>Blue 300</td>
-      </tr>
-      <tr>
-        <td>
-          <code>$focus-ring-danger</code>
-        </td>
-        <td>
-          <span class="sample-token sample-token--color-danger-outline"></span>
-        </td>
-        <td>Red 300</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
+Design Tokens in their simplest form are variables. What makes them unique is that they represent visual design attributes. These variables are implemented using a consistent naming convention, organized, documented, and distributed to designers and developers. We are doing this so that:
 
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Type</figcaption>
-  <table class="ods-table">
-    <thead>
-      <tr>
-        <th scope="column">Token Name</th>
-        <th scope="column">Example</th>
-        <th scope="column">Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <code>$text-body</code>
-        </td>
-        <td>
-          <span class="sample-token--text-body">Aa</span>
-        </td>
-        <td>Gray 900</td>
-      </tr>
-      <tr>
-        <td>
-          <code>$text-danger</code>
-        </td>
-        <td>
-          <span class="sample-token--text-danger">Aa</span>
-        </td>
-        <td>Red 500</td>
-      </tr>
-      <tr>
-        <td>
-          <code>$text-heading</code>
-        </td>
-        <td>
-          <span class="sample-token--text-heading">Aa</span>
-        </td>
-        <td>Gray 900</td>
-      </tr>
-      <tr>
-        <td>
-          <code>$text-sub</code>
-        </td>
-        <td>
-          <span class="sample-token--text-sub">Aa</span>
-        </td>
-        <td>Gray 600</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
+- The upcoming Odyssey Style API (Theming) has a way to customize the system globally and within specific scopes (more on this later).
+- Developers can use tokens to create snowflake components and custom UI. Doing this allows for easier updating in the future.
+- Design Tokens establish a common language between designers, developers, test engineers, and product managers.
+- Design Tokens are platform agnostic. While Odyssey will consume them as CSS Custom Properties, you can export them in various formats for use in different programming languages (Less, XML, JSON, YAML, etc.)
 
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Spacing</figcaption>
-  <table class="ods-table">
-    <thead>
-      <tr>
-        <th scope="column">Token Name</th>
-        <th scope="column">Example</th>
-        <th scope="column">Value</th>
-        <th scope="column">Pixels</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <code>$spacing-xl</code>
-        </td>
-        <td>
-          <div class="sample--spacing-spacing-xl"></div>
-        </td>
-        <td>
-          <span class="conversion--spacing-xl-actual"></span>
-        </td>
-        <td>
-          <span class="conversion--spacing-xl-px"></span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <code>$spacing-l</code>
-        </td>
-        <td>
-          <div class="sample--spacing-spacing-l"></div>
-        </td>
-        <td>
-          <span class="conversion--spacing-l-actual"></span>
-        </td>
-        <td>
-          <span class="conversion--spacing-l-px"></span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <code>$spacing-m</code>
-        </td>
-        <td>
-          <div class="sample--spacing-spacing-m"></div>
-        </td>
-        <td>
-          <span class="conversion--spacing-m-actual"></span>
-        </td>
-        <td>
-          <span class="conversion--spacing-m-px"></span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <code>$spacing-s</code>
-        </td>
-        <td>
-          <div class="sample--spacing-spacing-s"></div>
-        </td>
-        <td>
-          <span class="conversion--spacing-s-actual"></span>
-        </td>
-        <td>
-          <span class="conversion--spacing-s-px"></span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <code>$spacing-xs</code>
-        </td>
-        <td>
-          <div class="sample--spacing-spacing-xs"></div>
-        </td>
-        <td>
-          <span class="conversion--spacing-xs-actual"></span>
-        </td>
-        <td>
-          <span class="conversion--spacing-xs-px"></span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
+## Token Hierarchy
+
+We have three levels of token hierarchy. Previously these were referred to as L1, L2, and L3 tokens. This language has often cause confusion and a new naming scheme as been proposed:
+
+- Palette tokens (previously L1, sometimes referred to as "Foundational")
+- Functional tokens (previously L2, sometimes referred to as "Semantic" or "Global")
+- Component tokens (previously L3, sometimes referred to as "Local")
+
+### Palette Tokens
+
+Palette tokens refer to simple values like colors, type properties, or spacing units. The associated values pulled from Okta's Visual Identity Guidelines and serve as the foundation for subsequent token levels. You might think of this as the default theme of Odyssey, and you would be correct!
+
+Because they are foundational, the token names associated with these values are devoid of semantic meaning. For example: `color.blue.500` with a value of `#1662dd`.
+
+#### Location
+
+These tokens are currently housed in our Style Dictionary within JSON files named for the palette type. For example: `colors.json`
+
+### Functional Tokens
+
+Functional tokens provide a semantic abstraction of the palette. Functional tokens are the most consumed level, both within Odyssey and inside of Odyssey consuming codebases.
+
+Most Functional tokens map to a palette value. For example: `font.size.caption` might map to `font.scale.0`.
+
+Others, however, may have no palette mapping. For example: `border.width.base` might be set to `1px`.
+
+<strong>Editor's Note:</strong> the font size example here points to a possible conflation. Functional font sizes and their associated palettes would both be prefixed with `font`, based on their scope or type.
+
+#### Location
+
+These tokens are currently house in our Style Dictionary withing JSON files named for the functional scope. For example: `colors.json`
+
+As noted above, it's currently difficult to differentiate between Palette and Functional tokens via name or location.
+
+### Component Tokens
+
+Component tokens are specific to the component with which they are associated.
+
+Some Component tokens will map to Functional values. For example: `button.font.size` would be mapped to `font.size.body`, and `button.border.radius` would be mapped to `border.radius.base`.
+
+Other values may be bespoke to the component. For example: `loader.indicator.size` may have a value of `0.75em`.
+
+#### Location
+
+Currently, these tokens are only housed within our `odyssey-react` package. For example: `Button.theme`
+
+This allows for colocation with the theming apartus. However, it separates these tokens from their siblings and prevents us from providing these values to non-React implementations in the future.
+
+#### Theming Tokens
+
+The intent is that Tokens may be themed at all levels. The most work-intensive theming would be a full rewrite of the complete Palette. The most common use case is assumed to be setting bespoke values for Functional tokens. Component tokens offer the ability to target specific components and component values for theming. All levels represent valid use cases; however, some levels may include private tokens unavailable for theming.
+
+## Naming Tokens
+
+The largest disagreement around naming currently involves Component tokens. Specifically, whether Palette, Functional, and Component tokens should share the same naming scheme.
+
+Below, three proposals are outlined, including the initial proposal from the document above. These proposals represent Shred's best approximation of the varying viewpoints and may not match any view exactly.
+
+### Initial Proposal
+
+The initial proposal adhered to a uniform naming scheme. A simplified version of the document is as follows:
+
+`Prefix + Scope + Base (Category + Property) + Modifier`
+
+The prefix is a static value that signals that the token affects the design system. This ensures that CSS Custom Properties (or other variables) generated from the tokens are unique to the design system and can be safely used alongside other Custom Props. In our case, the prefix would always be "ods".
+
+The scope is an optional part that refers to where the token will be applied. Scopes can either be components or component groups. For example: "Button" in the case of Button tokens or "Forms" in the case of properties that should be shared across the Form Component group.
+
+The base refers to the type of token. It's made up of two parts: "category" and "property". The category represents the general purpose or grouping of the token. For example, `color`, `font`, or `spacing`. The property is an optional part for deeper specification of the base type. For example: `color.text` or `font.weight`.
+
+<strong>Editor's Note:</strong> In practice, this category+property formula has often been interpreted as matching the css property. For example: `font` + `size` = `font-size`. While this is often a happy coincidence, I don't believe it is the original intent.
+
+Finally, the modifier refers to a variant, scale, or mode. Modifiers can be combined to create more specific variants. For example: `success`, `success.hover`, and `success.hover.darkmode`. There is some disagreement about whether or not this is the correct place for Dark Mode values to be set, but the general case seems clear.
+
+In this proposal, all tokens are assumed to live within Style Dictionary and follow the same naming scheme throughout. Examples include:
+
+- `color.primary.base`
+- `font.size.caption`
+- `button.space.inline`
+- `forms.border.color.invalid`
+
+<strong>Editor's note:</strong> For the sake of language consistency, I will use the initial proposal's terminology throughout this document. For example, "Scope" when referring to a Component or Component part being targeted by the token.
+
+### Current Implementations
+
+The current implementations deviate from the initial proposal in two major ways. Whether or not these deviations are beneficial, they have been ad hoc. This has led to a lack of conformity or source of truth for resolving naming disputes because the initial document no longer applies in most cases.
+
+First, even those tokens implemented in Style Dictionary do not follow the scheme to the letter. This is expected, as the initial proposal had several unanswered questions and was never finalized to account for all use cases. However, it's led to a lack of clarity on how tokens of every level should be organized and named.
+
+Second, Component tokens are not housed in Style Dictionary. That is, they are only housed within React. Without interrogating this decision too much, it has led to variance in naming based on variance in environment and need. For example, the exposed Component tokens are not prefixed with a scope, as the API for theming them includes the scope.
+
+The proposals below address this variance in different ways. They are, however, most concerned with Component token naming.
+
+The first approach here will be referred to as Hierarchy Agnostic, as it seeks to preserve naming consistency with the Style Dictionary tokens of all types. Palette, Functional, and Component tokens follow similar -- but not identical -- naming schemes despite their implementation.
+
+The second approach will be referred to as Hierarchy Specific, as it presents a different naming convention for those tokens located only at the React Theme level.
+
+<strong>Editor's note:</strong> In all cases, the current implementations are doing the best they can with the tokens available. Some choices represented below may not be seen as ideal by other party, but represent common solutions to a pervasive lack of consistency.
+
+#### Hierarchy Agnostic
+
+As noted above, this approach seeks to create a consistent naming scheme across token levels. Component token examples and their mappings include:
+
+- `ColorButtonIndicator: theme.ColorPaletteNeutralWhite`
+- `ColorFocusPrimary: theme.ColorFocusPrimary`
+- `SpacePaddingBlock: theme.SpaceEmXs`
+- `SpacePaddingInlineContent: 0`
+
+From this limited set, we can see how the local Component tokens (left) seek to mirror the format of the Functional and Palette tokens (right).
+
+This approach differs from the Hierarchy Specific approach in two major ways. First, the Base aspect of the name is preserved. For example, the "Space" in `SpacePaddingBlock`. Second, this approach prefers locating Component part scopes as Modifiers, placing them at the end of the token. For example, the "Content" in `SpacePaddingInlineContent`.
+
+#### Hierarchy Specific
+
+The Hierarchy Specific approach proposes an alternate naming format for Component tokens to provide for terser, more human-friendly tokens at the cost of consistency with those tokens housed in Style Dictionary. Component token examples and their mappings include:
+
+- `ButtonIndicatorColor: theme.ColorPaletteNeutralWhite`
+- `FocusColorPrimary: theme.ColorFocusPrimary`
+- `PaddingBlock: theme.SpaceEmXs`
+- `ContentPaddingInline: 0`
+
+<strong>Editor's note</strong>: The above examples are rewrites of the Hierarchy Agnostic approach, not examples pulled from code. This was done for the sake of easy comparison.
+
+The major differences here are those noted above. First, the "Category" aspect of "Base" has been dropped from these tokens to keep names shorter. It's assumed that the "Property" component indicates the value category. For example, `PaddingBlock` rather than `SpacePaddingBlock`. Second, the "Scope" remains at the front of the token name, differentiated from "Modifier". For example: `FocusColorPrimary` rather than `ColorFocusPrimary`.
+
+## Editorial Opinion
+
+This editor has tried his best to represent the above approaches without evaluation, as that is the job of our review committee. I've reached out to the proponents of each approach to ensure their proposal has been represented correctly. That said, I offer some additional opinions that are not addressed by the above proposals.
+
+First, "Prefix" is missing from all extant naming. I don't believe this is a problem for naming itself, but does create a brittleness at runtime. Given the verbosity of our token names, this may not be a practical concern.
+
+Second, consistency would be easier to achieve if tokens of all stripes were sourced from Style Dictionary -- even if a React theme mapping is still present. This would help separate our concerns and ensure that any component-specific values are available to non-React implementations.
+
+Finally, no deep thinking has been done on the proper Palette to Functional to Component token cascade. There's little distinction between Palette and Functional tokens in name, value association, or use. Concepts like "group" tokens, outlined in the initial proposal, are nowhere to be seen -- with each component assuming it's values are wholly unique to itself. As such, implementation of these tokens and expectations about their values are mixed across the codebase. Regardless of the approach selected for naming tokens, these mappings should be thought through systematically.
