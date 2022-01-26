@@ -14,11 +14,12 @@ import React from "react";
 import type { ReactElement, ComponentPropsWithRef, ForwardedRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { forwardRefWithStatics, useOmit, useCx } from "../../utils";
-import styles from "./List.module.scss";
-import { ListItem } from "./ListItem";
 import { Box } from "../Box";
+import { ListItem } from "./ListItem";
 import { DescriptionTerm } from "./DescriptionTerm";
 import { DescriptionDetails } from "./DescriptionDetails";
+import { theme } from "./List.theme";
+import styles from "./List.module.scss";
 
 interface CommonProps {
   /**
@@ -56,7 +57,7 @@ type Statics = {
  * List provides ordered, unordered, description, and unstyled list UI.
  */
 export const List = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRefWithStatics<HTMLElement, ListProps, Statics>((props, ref) => {
