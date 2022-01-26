@@ -30,7 +30,7 @@ export * from "./Select";
 export * from "./Status";
 export * from "./Tabs";
 export * from "./Table";
-export * from "./Tag";
+export * from "./TagList";
 export * from "./Text";
 export * from "./TextArea";
 export * from "./TextInput";

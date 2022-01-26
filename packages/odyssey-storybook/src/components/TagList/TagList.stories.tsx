@@ -10,4 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./Tag";
+import React from "react";
+import type { Story } from "@storybook/react";
+import { TagList, TagListProps } from "@okta/odyssey-react";
+import { TagList as Source } from "@okta/odyssey-react/src";
+
+import TagListMdx from "./TagList.mdx";
+
+export default {
+  title: `Components/TagList`,
+  component: Source,
+  parameters: {
+    docs: {
+      page: TagListMdx,
+    },
+  },
+};
+
+const Template: Story<TagListProps> = ({ tags }) => <TagList tags={tags} />;
+
+export const Default = Template.bind({});
+Default.args = {
+  tags: ["Item one", "Item two", "Item three"],
+};
