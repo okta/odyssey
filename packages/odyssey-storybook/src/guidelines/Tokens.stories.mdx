@@ -4,20 +4,20 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 # Design Tokens
 
-For those reviewing this document, you may refer to <a href="https://docs.google.com/document/d/1ZXQahqi_ihNnHIGqE_VoruOzt5CVWmgnJq2_niHI51w/edit#">the initial document</a> for more background. Arnold's initial work is not the current source of truth, but does represent the best effort at a full coverage proposal. It acts as a starting point for this document.
+For those reviewing this document in preparation for discussion, you may wish to refer to the <a href="https://docs.google.com/document/d/1ZXQahqi_ihNnHIGqE_VoruOzt5CVWmgnJq2_niHI51w/edit#">initial proposal</a> for more background. Arnold's initial work is not the current source of truth. Still, it does represent the best effort at a full coverage proposal. It acts as a starting point for this document.
 
 ## What are Design Tokens?
 
 Design Tokens in their simplest form are variables. What makes them unique is that they represent visual design attributes. These variables are implemented using a consistent naming convention, organized, documented, and distributed to designers and developers. We are doing this so that:
 
 - The upcoming Odyssey Style API (Theming) has a way to customize the system globally and within specific scopes (more on this later).
-- Developers can use tokens to create snowflake components and custom UI. Doing this allows for easier updating in the future.
+- Developers can use tokens to crate snowflake components and custom UI. Doing this allows for easier updating in the future.
 - Design Tokens establish a common language between designers, developers, test engineers, and product managers.
 - Design Tokens are platform agnostic. While Odyssey will consume them as CSS Custom Properties, you can export them in various formats for use in different programming languages (Less, XML, JSON, YAML, etc.)
 
 ## Token Hierarchy
 
-We have three levels of token hierarchy. Previously these were referred to as L1, L2, and L3 tokens. This language has often cause confusion and a new naming scheme as been proposed:
+We have three levels of token hierarchy; previously, these were referred to as L1, L2, and L3 tokens. This language has often caused confusion, and a new naming scheme has been proposed:
 
 - Palette tokens (previously L1, sometimes referred to as "Foundational")
 - Functional tokens (previously L2, sometimes referred to as "Semantic" or "Global")
@@ -25,29 +25,27 @@ We have three levels of token hierarchy. Previously these were referred to as L1
 
 ### Palette Tokens
 
-Palette tokens refer to simple values like colors, type properties, or spacing units. The associated values pulled from Okta's Visual Identity Guidelines and serve as the foundation for subsequent token levels. You might think of this as the default theme of Odyssey, and you would be correct!
+Palette tokens refer to simple values like colors, type properties, or spacing units. The associated values are pulled from Okta's Visual Identity Guidelines and serve as the foundation for subsequent token levels. You might think of this as the default theme of Odyssey, and you would be correct!
 
 Because they are foundational, the token names associated with these values are devoid of semantic meaning. For example: `color.blue.500` with a value of `#1662dd`.
 
 #### Location
 
-These tokens are currently housed in our Style Dictionary within JSON files named for the palette type. For example: `colors.json`
+These tokens are currently housed in our Style Dictionary within JSON files named for the palette type. For example: `colors.json`.
 
 ### Functional Tokens
 
-Functional tokens provide a semantic abstraction of the palette. Functional tokens are the most consumed level, both within Odyssey and inside of Odyssey consuming codebases.
+Functional tokens provide a semantic abstraction of the Palette. Functional tokens are the most consumed level, both within Odyssey and inside of Odyssey consuming codebases.
 
 Most Functional tokens map to a palette value. For example: `font.size.caption` might map to `font.scale.0`.
 
-Others, however, may have no palette mapping. For example: `border.width.base` might be set to `1px`.
+Others, however, may have no palette mapping. For example: `border.width.base` might be set to `1px.
 
-<strong>Editor's Note:</strong> the font size example here points to a possible conflation.
-Functional font sizes and their associated palettes would both be prefixed with `font`,
-based on their scope or type.
+**Editor's Note:** The font size example here points to a possible conflation. Functional font sizes and their associated palettes would both be prefixed with `font`, based on their scope or type. Would these tokens live in the same file, `font.json`?
 
 #### Location
 
-These tokens are currently house in our Style Dictionary withing JSON files named for the functional scope. For example: `colors.json`
+These tokens are currently housed in our Style Dictionary within JSON files named for the functional scope. For example: `color.json`.
 
 As noted above, it's currently difficult to differentiate between Palette and Functional tokens via name or location.
 
@@ -61,17 +59,17 @@ Other values may be bespoke to the component. For example: `loader.indicator.siz
 
 #### Location
 
-Currently, these tokens are only housed within our `odyssey-react` package. For example: `Button.theme`
+Currently, these tokens are only housed within our odyssey-react package. For example: within `Button.theme`.
 
-This allows for colocation with the theming apartus. However, it separates these tokens from their siblings and prevents us from providing these values to non-React implementations in the future.
+This allows for colocation with the theming apparatus. However, it separates these tokens from their siblings and prevents us from providing these values to non-React implementations in the future.
 
-#### Theming Tokens
+## Theming Tokens
 
-The intent is that Tokens may be themed at all levels. The most work-intensive theming would be a full rewrite of the complete Palette. The most common use case is assumed to be setting bespoke values for Functional tokens. Component tokens offer the ability to target specific components and component values for theming. All levels represent valid use cases; however, some levels may include private tokens unavailable for theming.
+The intent is that Tokens are themeable at all levels. The most work-intensive theming would be a total rewrite of the complete Palette. The most common use case is assumed to be setting bespoke values for Functional tokens. Component tokens offer the ability to target specific components and component values for theming. All levels represent valid use cases; however, some may include private tokens unavailable for theming.
 
 ## Naming Tokens
 
-The largest disagreement around naming currently involves Component tokens. Specifically, whether Palette, Functional, and Component tokens should share the same naming scheme.
+The most significant disagreement around naming currently involves Component tokens. Specifically, whether Palette, Functional, and Component tokens should share the same naming scheme.
 
 Below, three proposals are outlined, including the initial proposal from the document above. These proposals represent Shred's best approximation of the varying viewpoints and may not match any view exactly.
 
@@ -83,47 +81,44 @@ The initial proposal adhered to a uniform naming scheme. A simplified version of
 
 The prefix is a static value that signals that the token affects the design system. This ensures that CSS Custom Properties (or other variables) generated from the tokens are unique to the design system and can be safely used alongside other Custom Props. In our case, the prefix would always be "ods".
 
-The scope is an optional part that refers to where the token will be applied. Scopes can either be components or component groups. For example: "Button" in the case of Button tokens or "Forms" in the case of properties that should be shared across the Form Component group.
+The scope is an optional part that refers to where the token will be applied. Scopes can either be Components or Component groups. For example: "Button" in the case of Button tokens or "Forms" in the case of properties that should be shared across the Form Component group.
 
-The base refers to the type of token. It's made up of two parts: "category" and "property". The category represents the general purpose or grouping of the token. For example, `color`, `font`, or `spacing`. The property is an optional part for deeper specification of the base type. For example: `color.text` or `font.weight`.
+The base refers to the type of token. It's made up of two parts: "category" and "property". The category represents the general purpose or grouping of the token—for example, color, font, or spacing. The property is an optional part for deeper specification of the base type. For example: `color.text` or `font.weight`.
 
-<strong>Editor's Note:</strong> In practice, this category+property formula has often
-been interpreted as matching the css property. For example: `font` + `size` = `font-size`.
-While this is often a happy coincidence, I don't believe it is the original intent.
+**Editor's Note:** In practice, this category+property formula has often been interpreted as matching the CSS property. For example: `font` + `size` = `font-size`. While this is often a happy coincidence, I don't believe it is the original intent.
 
 Finally, the modifier refers to a variant, scale, or mode. Modifiers can be combined to create more specific variants. For example: `success`, `success.hover`, and `success.hover.darkmode`. There is some disagreement about whether or not this is the correct place for Dark Mode values to be set, but the general case seems clear.
 
-In this proposal, all tokens are assumed to live within Style Dictionary and follow the same naming scheme throughout. Examples include:
+All tokens are assumed to live within Style Dictionary and follow the same naming scheme. Examples include:
 
 - `color.primary.base`
 - `font.size.caption`
 - `button.space.inline`
 - `forms.border.color.invalid`
 
-<strong>Editor's note:</strong> For the sake of language consistency, I will use
-the initial proposal's terminology throughout this document. For example, "Scope"
-when referring to a Component or Component part being targeted by the token.
+**Editor's note:** For the sake of language consistency, I will use the initial proposal's terminology throughout this document. For example, "Scope" refers to a Component or Component part targeted by the token.
 
 ### Current Implementations
 
-The current implementations deviate from the initial proposal in two major ways. Whether or not these deviations are beneficial, they have been ad hoc. This has led to a lack of conformity or source of truth for resolving naming disputes because the initial document no longer applies in most cases.
+The current implementations deviate from the initial proposal in two significant ways. Whether or not these deviations are beneficial, they have been ad hoc. This has led to a lack of conformity or source of truth for resolving naming disputes because the initial document no longer applies in most cases.
 
-First, even those tokens implemented in Style Dictionary do not follow the scheme to the letter. This is expected, as the initial proposal had several unanswered questions and was never finalized to account for all use cases. However, it's led to a lack of clarity on how tokens of every level should be organized and named.
+First, even those tokens implemented in Style Dictionary do not follow the scheme to the letter. This is expected, as the initial proposal had several unanswered questions and was never finalized to account for all use cases. However, it's led to confusion on how to name and organize tokens of every level.
 
-Second, Component tokens are not housed in Style Dictionary. That is, they are only housed within React. Without interrogating this decision too much, it has led to variance in naming based on variance in environment and need. For example, the exposed Component tokens are not prefixed with a scope, as the API for theming them includes the scope.
+Second, Component tokens are not housed in Style Dictionary. That is, they are only housed within React. This has led to variance in naming based on the variance in the environment and need. For example, the exposed Component tokens are not prefixed with a scope, as the API for theming them includes the scope.
 
-The proposals below address this variance in different ways. They are, however, most concerned with Component token naming.
+It's possible we should not treat Component tokens as tokens, but this has not been discussed.
 
-The first approach here will be referred to as Hierarchy Agnostic, as it seeks to preserve naming consistency with the Style Dictionary tokens of all types. Palette, Functional, and Component tokens follow similar -- but not identical -- naming schemes despite their implementation.
+The proposals below address this variance differently but are most concerned with Component token naming.
 
-The second approach will be referred to as Hierarchy Specific, as it presents a different naming convention for those tokens located only at the React Theme level.
+I refer to the first approach here as Hierarchy Agnostic. It seeks to preserve naming consistency with all levels of tokens. Palette, Functional, and Component tokens follow similar, but not identical, naming schemes despite their differing implementations.
 
-<strong>Editor's note:</strong> In all cases, the current implementations are doing
-the best they can with the tokens available. Some choices represented below may not
-be seen as ideal by other party, but represent common solutions to a pervasive lack
-of consistency.
+I refer to the second approach as Hierarchy Specific. It presents a different naming convention for those tokens located only at the React Theme level.
+
+**Editor's note:** In all cases, the current implementations are doing the best with the available tokens. Some choices represented below may not be seen as ideal by other parties but represent preferred solutions to a pervasive lack of consistency.
 
 #### Hierarchy Agnostic
+
+`Base (Category + Property) + Scope + Modifier`
 
 As noted above, this approach seeks to create a consistent naming scheme across token levels. Component token examples and their mappings include:
 
@@ -138,25 +133,35 @@ This approach differs from the Hierarchy Specific approach in two major ways. Fi
 
 #### Hierarchy Specific
 
-The Hierarchy Specific approach proposes an alternate naming format for Component tokens to provide for terser, more human-friendly tokens at the cost of consistency with those tokens housed in Style Dictionary. Component token examples and their mappings include:
+`Modifier + Scope + Base (Property + Category)`
+
+The Hierarchy Specific approach proposes an alternate naming format for Component tokens to provide for terser, more human-friendly tokens at the cost of consistency with those housed in Style Dictionary. Component token examples and their mappings include:
 
 - `ButtonIndicatorColor: theme.ColorPaletteNeutralWhite`
-- `FocusColorPrimary: theme.ColorFocusPrimary`
+- `PrimaryFocusColor: theme.ColorFocusPrimary`
 - `PaddingBlock: theme.SpaceEmXs`
 - `ContentPaddingInline: 0`
 
-<strong>Editor's note</strong>: The above examples are rewrites of the Hierarchy
-Agnostic approach, not examples pulled from code. This was done for the sake of
-easy comparison.
+**Editor's note:** The above examples are rewrites of the Hierarchy Agnostic approach, not examples pulled from code. This was done for the sake of easy comparison.
 
-The major differences here are those noted above. First, the "Category" aspect of "Base" has been dropped from these tokens to keep names shorter. It's assumed that the "Property" component indicates the value category. For example, `PaddingBlock` rather than `SpacePaddingBlock`. Second, the "Scope" remains at the front of the token name, differentiated from "Modifier". For example: `FocusColorPrimary` rather than `ColorFocusPrimary`.
+The significant differences here are those noted above. First, the "Category" aspect of "Base" has been dropped in certain cases to shorten names. It's assumed that the "Property" component indicates the value category—for example, `PaddingBlock` rather than `SpacePaddingBlock`. Second, the "Modifier" takes the primary spot in the name. For instance: `PrimaryFocusColor` rather than `ColorFocusPrimary`.
 
-## Editorial Opinion
+### Editorial Opinion
 
 This editor has tried his best to represent the above approaches without evaluation, as that is the job of our review committee. I've reached out to the proponents of each approach to ensure their proposal has been represented correctly. That said, I offer some additional opinions that are not addressed by the above proposals.
 
-First, "Prefix" is missing from all extant naming. I don't believe this is a problem for naming itself, but does create a brittleness at runtime. Given the verbosity of our token names, this may not be a practical concern.
+First, "Prefix" is missing from all extant naming. I don't believe this is a problem for naming itself but creates a brittleness at runtime. Given the verbosity of our token names, this may not be a practical concern.
 
-Second, consistency would be easier to achieve if tokens of all stripes were sourced from Style Dictionary -- even if a React theme mapping is still present. This would help separate our concerns and ensure that any component-specific values are available to non-React implementations.
+Second, consistency would be easier to achieve if tokens of all stripes were sourced from Style Dictionary -- even if a React theme mapping is still present. This would help separate our concerns and ensure that any component-specific values are available to non-React implementations. This is a question about Component tokens.
 
-Finally, no deep thinking has been done on the proper Palette to Functional to Component token cascade. There's little distinction between Palette and Functional tokens in name, value association, or use. Concepts like "group" tokens, outlined in the initial proposal, are nowhere to be seen -- with each component assuming it's values are wholly unique to itself. As such, implementation of these tokens and expectations about their values are mixed across the codebase. Regardless of the approach selected for naming tokens, these mappings should be thought through systematically.
+If Component tokens are qualitatively different than Palette or Functional tokens, I believe we should refer to them differently and eschew any desire for a shared naming convention. If Component tokens are indeed tokens that require the same format in naming, it would be simpler to treat them similarly in other respects as well.
+
+Finally, no deep thinking has been done on the proper Palette to Functional to Component token cascade. There's little distinction between Palette and Functional tokens in name, value association, or use. Concepts like "group" tokens, outlined in the initial proposal, are nowhere to be seen -- with each component assuming its values are wholly unique to itself. As such, implementation of these tokens and expectations about their values are mixed across the codebase.
+
+For clarity, this is not a naming problem. Regardless of the approach selected for naming tokens, these relationships and value mappings should be thought through systematically. This is a large undertaking that has been made easier by the creation of our much larger set of tokens.
+
+The initial proposal remains the naming scheme that accounts for the broadest range of concerns, despite a lack of clarity around specific implementation. I recommend that whatever naming scheme we adhere to provides a formula and associated definitions similar to those laid out by the initial proposal:
+
+`Prefix + Scope + Base (Category + Property) + Modifier`
+
+While there is disagreement about order and which parts are necessary at which level, any naming scheme should provide equal clarity of application.
