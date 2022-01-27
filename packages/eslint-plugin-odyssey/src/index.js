@@ -10,5 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// eslint-disable-next-line import/no-extraneous-dependencies
-module.exports = require("@okta/odyssey-eslint-config");
+module.exports = {
+  rules: {
+    "no-invalid-theme-properties": require("./rules/no-invalid-theme-properties"),
+  },
+};
