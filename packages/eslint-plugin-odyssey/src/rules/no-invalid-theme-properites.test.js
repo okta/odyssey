@@ -13,7 +13,7 @@
 const rule = require("./no-invalid-theme-properties");
 const RuleTester = require("eslint").RuleTester;
 
-const message = rule.meta.messages.invalidThemeProperty;
+const { string, format, filename, dirname } = rule.meta.messages;
 const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2015 } });
 
 ruleTester.run("no-invalid-theme-properties", rule, {
@@ -28,23 +28,33 @@ ruleTester.run("no-invalid-theme-properties", rule, {
   invalid: [
     {
       code: "({ foo: 0 })",
-      errors: [{ message }],
+      errors: [{ message: format }],
     },
     {
       code: "({ fooBar: 0 })",
-      errors: [{ message }],
+      errors: [{ message: format }],
     },
     {
       code: "({ $fooBarBaz: 0 })",
-      errors: [{ message }],
+      errors: [{ message: format }],
     },
     {
       code: "({ fooBarBaz0: 0 })",
-      errors: [{ message }],
+      errors: [{ message: format }],
     },
     {
       code: "({ [Symbol('foo')]: 0 })",
-      errors: [{ message }],
+      errors: [{ message: string }],
+    },
+    {
+      code: "({ Foo: 0 })",
+      errors: [{ message: dirname }],
+      filename: "Foo/Bar.theme.ts",
+    },
+    {
+      code: "({ Bar: 0 })",
+      errors: [{ message: filename }],
+      filename: "Foo/Bar.theme.ts",
     },
   ],
 });
