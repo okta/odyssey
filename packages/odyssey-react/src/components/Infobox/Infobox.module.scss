@@ -15,7 +15,7 @@
 
   display: grid;
   grid-template-areas:
-    "icon title"
+    "icon heading"
     ". content"
     ". actions";
   grid-template-columns: max-content 1fr;
@@ -38,8 +38,8 @@
   justify-self: start;
 }
 
-.title {
-  grid-area: title;
+.heading {
+  grid-area: heading;
 }
 
 .content {

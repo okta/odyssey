@@ -21,33 +21,33 @@
 }
 
 .level1 {
-  font-size: $size-title-1;
+  font-size: $size-heading-1;
 }
 
 .level2 {
-  font-size: $size-title-2;
+  font-size: $size-heading-2;
 }
 
 .level3 {
-  font-size: $size-title-3;
+  font-size: $size-heading-3;
 }
 
 .level4 {
-  font-size: $size-title-4;
+  font-size: $size-heading-4;
 }
 
 .level5 {
-  font-size: $size-title-5;
+  font-size: $size-heading-5;
 }
 
 .level6 {
-  font-size: $size-title-6;
+  font-size: $size-heading-6;
 }
 
 .level1,
 .level2,
 .level3 {
-  line-height: $title-line-height;
+  line-height: $heading-line-height;
 }
 
 .level4,
@@ -64,6 +64,6 @@
   line-height: $base-line-height;
 }
 
-.titleLineHeight {
-  line-height: $title-line-height;
+.headingLineHeight {
+  line-height: $heading-line-height;
 }

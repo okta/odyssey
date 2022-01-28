@@ -31,12 +31,12 @@ export default {
     children: {
       control: null,
     },
-    title: {
-      defaultValue: "Banner title",
+    heading: {
+      defaultValue: "Banner heading",
       control: "text",
     },
     content: {
-      defaultValue: "Additional string related to the title.",
+      defaultValue: "Additional string related to the heading.",
       control: null,
     },
     dismissButtonLabel: {
