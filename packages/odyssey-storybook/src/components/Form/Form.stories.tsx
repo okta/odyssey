@@ -29,7 +29,7 @@ export default {
     children: {
       control: { type: null },
     },
-    title: {
+    heading: {
       defaultValue: "Interplanetary flight registration",
       control: { type: "text" },
     },
@@ -41,18 +41,18 @@ export default {
   },
 };
 
-const Template: Story<FormProps> = ({ title, desc }) => (
-  <Form title={title} desc={desc}>
+const Template: Story<FormProps> = ({ heading, desc }) => (
+  <Form heading={heading} desc={desc}>
     <Form.Error>
       <Infobox
-        title="Signal interrupted"
+        heading="Signal interrupted"
         variant="danger"
         content="This is an error."
       />
     </Form.Error>
     <Form.Main>
       <FieldGroup
-        title="Origination logistics"
+        legend="Origination logistics"
         desc="This information is required for your craft to leave the starport."
       >
         <TextInput label="Name" />

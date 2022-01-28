@@ -31,7 +31,7 @@ export interface HeadingProps
   visualLevel?: HeadingProps["level"];
 
   /**
-   * The human readable section title to be visually displayed
+   * The human readable section heading to be visually displayed
    */
   children: ReactNode;
 
@@ -44,7 +44,7 @@ export interface HeadingProps
   /**
    * Specify explicit line height spacing
    */
-  lineHeight?: "base" | "title";
+  lineHeight?: "base" | "heading";
 }
 
 /**

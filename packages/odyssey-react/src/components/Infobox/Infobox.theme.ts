@@ -21,7 +21,7 @@ export const theme: ThemeReducer = (theme) => ({
   ColumnGap: theme.SpaceRemS,
 
   IconSize: theme.FontSizeHeading5,
-  IconLineHeight: theme.FontLineHeightTitle,
+  IconLineHeight: theme.FontLineHeightHeading,
 
   ContentSpaceMarginBlockEnd: theme.SpaceRemXs,
 

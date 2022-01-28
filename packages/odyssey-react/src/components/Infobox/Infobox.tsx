@@ -24,7 +24,7 @@ import { theme } from "./Infobox.theme";
 interface CommonProps
   extends Omit<
     ComponentPropsWithRef<"aside">,
-    "style" | "className" | "children" | "title" | "content" | "color"
+    "style" | "className" | "children" | "content" | "color"
   > {
   /**
    * Children are never rendered.
@@ -37,9 +37,9 @@ interface CommonProps
   variant?: "info" | "danger" | "caution" | "success";
 
   /**
-   * The title or headline of the Infobox. If Infobox.Content is not present it is required.
+   * The heading or headline of the Infobox. If Infobox.Content is not present it is required.
    */
-  title?: string;
+  heading?: string;
 
   /**
    * Content to be rendered within the infobox.
@@ -52,15 +52,15 @@ interface CommonProps
   actions?: ReactNode;
 }
 
-interface TitleProps extends CommonProps {
-  title: string;
+interface HeadingProps extends CommonProps {
+  heading: string;
 }
 
 interface ContentProps extends CommonProps {
   content: ReactNode;
 }
 
-export type InfoboxProps = TitleProps | ContentProps;
+export type InfoboxProps = HeadingProps | ContentProps;
 
 const icon = {
   caution: <CautionIcon />,
@@ -78,7 +78,7 @@ export const Infobox = withTheme(
   styles
 )(
   forwardRef<HTMLElement, InfoboxProps>((props, ref) => {
-    const { content, actions, title, variant = "info", ...rest } = props;
+    const { content, actions, heading, variant = "info", ...rest } = props;
 
     const classNames = useCx(styles.root, styles[`${variant}Variant`]);
     const omitProps = useOmit(rest);
@@ -92,9 +92,9 @@ export const Infobox = withTheme(
         role="status"
       >
         <span className={styles.icon}>{icon[variant]}</span>
-        {title && (
-          <div className={styles.title}>
-            <Heading visualLevel="6" children={title} />
+        {heading && (
+          <div className={styles.heading}>
+            <Heading visualLevel="6" children={heading} />
           </div>
         )}
         {content && (

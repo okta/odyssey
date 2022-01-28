@@ -13,7 +13,7 @@
 .root {
   display: grid;
   position: relative;
-  grid-template-areas: "icon title content actions";
+  grid-template-areas: "icon heading content actions";
   grid-template-columns: repeat(4, minmax(min-content, max-content));
   grid-template-rows: 1fr;
   align-items: center;
@@ -31,8 +31,8 @@
   line-height: 1;
 }
 
-.title {
-  grid-area: title;
+.heading {
+  grid-area: heading;
   margin-inline-end: var(--SpaceRemXs);
 }
 
@@ -93,13 +93,13 @@
   }
 
   .icon,
-  .title,
+  .heading,
   .content,
   .actions {
     grid-area: initial;
   }
 
-  .title,
+  .heading,
   .content,
   .actions {
     grid-column: 2;

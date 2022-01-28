@@ -13,5 +13,5 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  FontLineHeight: theme.FontLineHeightTitle,
+  FontLineHeight: theme.FontLineHeightHeading,
 });

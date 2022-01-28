@@ -102,7 +102,7 @@ export interface TextProps
    * The line-height for the text content.
    * @default normal
    */
-  lineHeight?: "normal" | "title";
+  lineHeight?: "normal" | "heading";
 
   /**
    * The overflow wrapping behavior for the text content.

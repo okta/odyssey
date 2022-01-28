@@ -39,8 +39,8 @@ export default {
     },
   },
   argTypes: {
-    title: {
-      defaultValue: "Title",
+    heading: {
+      defaultValue: "Heading",
       control: {
         type: "text",
       },
@@ -82,7 +82,7 @@ const DemoApp = () => {
 
     const formData = new FormData(event.currentTarget);
     const toastObj = {
-      title: formData.get("title"),
+      heading: formData.get("heading"),
       body: formData.get("body"),
       variant: formData.get("variant"),
     } as ToastObject;
@@ -95,7 +95,7 @@ const DemoApp = () => {
       <Form onSubmit={handleSubmit}>
         <Form.Main>
           <FieldGroup
-            title="Toast Provider Demo"
+            legend="Toast Provider Demo"
             desc="This demo shows you how the toast should appear within an app!"
           >
             <Select
@@ -110,10 +110,10 @@ const DemoApp = () => {
               <Select.Option value="danger">danger</Select.Option>
             </Select>
             <TextInput
-              label="Title"
-              hint="The title to be displayed on the toast."
-              name="title"
-              id="title"
+              label="Heading"
+              hint="The heading to be displayed on the toast."
+              name="heading"
+              id="heading"
               defaultValue="Shuttle Endeavour has reached the hangar"
             />
             <TextInput

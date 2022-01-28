@@ -187,7 +187,7 @@ export const LineHeightTitle = TemplateWithContainer.bind({});
 LineHeightTitle.storyName = "Line height: Title";
 LineHeightTitle.args = {
   children: "Title text LineHeight style",
-  lineHeight: "title",
+  lineHeight: "heading",
 };
 
 export const MarginPadding = Template.bind({});

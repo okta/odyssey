@@ -15,13 +15,13 @@ import { act, render, fireEvent, screen, within } from "@testing-library/react";
 import { Toast, useToast } from ".";
 
 const role = "status";
-const title = "Toast";
+const heading = "Toast";
 const body = "Descriptive body content (optional)";
 const dismissLabel = "Close Toast";
 
 const tree = (props: Record<string, unknown> = {}) => (
   <Toast
-    title={title}
+    heading={heading}
     body={body}
     dismissButtonLabel={dismissLabel}
     {...props}
@@ -35,10 +35,10 @@ describe("Toast", () => {
     expect(screen.getByRole(role)).toBeVisible();
   });
 
-  it("renders the toast title visibly", () => {
+  it("renders the toast heading visibly", () => {
     render(tree());
 
-    expect(screen.getByText(title)).toBeVisible();
+    expect(screen.getByText(heading)).toBeVisible();
   });
 
   it("renders the toast body visibly", () => {
@@ -66,8 +66,12 @@ describe("Toast", () => {
 
   it("restricts children prop via types and does not render them", () => {
     render(
-      // @ts-expect-error never type for children
-      <Toast title={title} dismissButtonLabel={dismissLabel} children="child" />
+      <Toast
+        heading={heading}
+        dismissButtonLabel={dismissLabel}
+        // @ts-expect-error never type for children
+        children="child"
+      />
     );
 
     expect(screen.queryByText("child")).toBeNull();
@@ -111,7 +115,7 @@ describe("Toast.Provider", () => {
   it("should add a toast", () => {
     const { addToast } = setup();
     act(() => {
-      addToast({ title, body });
+      addToast({ heading, body });
     });
     const toastNode = screen.getByRole(role);
 
@@ -121,7 +125,7 @@ describe("Toast.Provider", () => {
   it("should invoke onToastExit when the toast exits", () => {
     const { addToast } = setup();
     act(() => {
-      addToast({ title, body });
+      addToast({ heading, body });
     });
 
     fireEvent.click(screen.getByRole("button"));

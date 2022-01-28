@@ -26,9 +26,9 @@ export interface FieldGroupProps {
   children: ReactElement | ReactElement[];
 
   /**
-   * The title of the FieldGroup.
+   * The legend of the FieldGroup.
    */
-  title?: string;
+  legend?: string;
 
   /**
    * A short description of the FieldGroup.
@@ -51,13 +51,13 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> & Statics =
   )(
     Object.assign(
       (props: FieldGroupProps) => {
-        const { children, title, desc, ...rest } = props;
+        const { children, legend, desc, ...rest } = props;
 
         const omitProps = useOmit(rest);
 
         return (
           <Box as="fieldset" {...omitProps} className={styles.root}>
-            {title && <legend className={styles.title}>{title}</legend>}
+            {legend && <legend className={styles.legend}>{legend}</legend>}
             {desc && <Text as="p">{desc}</Text>}
             {children}
           </Box>
