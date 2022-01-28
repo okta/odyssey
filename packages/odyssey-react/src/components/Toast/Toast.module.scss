@@ -139,11 +139,11 @@
   display: grid;
   position: fixed;
   z-index: 1;
-  inset-inline-end: var(--ToastPenInsetInlineEnd);
-  inset-block-end: var(--ToastPenInsetBlockEnd);
+  inset-inline-end: var(--PenInsetInlineEnd);
+  inset-block-end: var(--PenInsetBlockEnd);
   grid-template-columns: minmax(min-content, max-content);
   max-height: 100vh;
   overflow: visible;
   column-gap: 0;
-  row-gap: var(--ToastPenRowGap);
+  row-gap: var(--PenRowGap);
 }
