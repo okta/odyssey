@@ -80,7 +80,7 @@ export const theme: ThemeReducer = (theme) => ({
   SpaceMarginInlineWideLayout: 0,
 
   // Small Size
-  FontLineHeightSmallSize: theme.FontLineHeightTitle,
+  FontLineHeightSmallSize: theme.FontLineHeightHeading,
   FontSizeSmallSize: theme.FontSizeCaption,
 
   // Large Size

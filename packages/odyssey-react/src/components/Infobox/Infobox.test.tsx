@@ -15,33 +15,33 @@ import { render, screen } from "@testing-library/react";
 import { Infobox } from ".";
 
 const statusRole = "status";
-const title = "Infobox title";
+const heading = "Infobox heading";
 const content = "Infobox Content";
 const actions = "<a href='https://www.okta.com'>click me</a>";
 
 describe("Infobox", () => {
   it("renders visibly", () => {
-    render(<Infobox title={title} content={content} actions={actions} />);
+    render(<Infobox heading={heading} content={content} actions={actions} />);
 
     expect(screen.getByRole(statusRole)).toBeVisible();
-    expect(screen.getByText(title)).toBeVisible();
+    expect(screen.getByText(heading)).toBeVisible();
     expect(screen.getByText(content)).toBeVisible();
     expect(screen.getByText(actions)).toBeVisible();
   });
 
-  it("restricts title and content props via types", () => {
-    // @ts-expect-error requires title or content prop
+  it("restricts heading and content props via types", () => {
+    // @ts-expect-error requires heading or content prop
     <Infobox />;
 
-    <Infobox title={title} />;
+    <Infobox heading={heading} />;
     <Infobox content={content} />;
-    <Infobox title={title} content={content} />;
+    <Infobox heading={heading} content={content} />;
   });
 
   it("restricts children prop via types and does not render them", () => {
     render(
       // @ts-expect-error never type for children
-      <Infobox title={title} children="child" />
+      <Infobox heading={heading} children="child" />
     );
 
     expect(screen.queryByText("child")).toBeNull();
@@ -50,13 +50,13 @@ describe("Infobox", () => {
   it("invokes ref with expected args after render", () => {
     const ref = jest.fn();
 
-    render(<Infobox ref={ref} title={title} actions={actions} />);
+    render(<Infobox ref={ref} heading={heading} actions={actions} />);
 
     expect(ref).toHaveBeenCalledTimes(1);
     expect(ref).toHaveBeenLastCalledWith(screen.getByRole(statusRole));
   });
 
   a11yCheck(() =>
-    render(<Infobox title={title} content={content} actions={actions} />)
+    render(<Infobox heading={heading} content={content} actions={actions} />)
   );
 });

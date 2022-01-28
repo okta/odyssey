@@ -78,7 +78,7 @@ type PropsModalButton = {
 
 interface ModalContext {
   onClose: () => void;
-  modalTitleId: string;
+  modalHeadingId: string;
   closeMessage: string;
 }
 const ModalContext = createContext({} as ModalContext);
@@ -102,10 +102,10 @@ export const Modal = withTheme(
       onOpen,
       ...rest
     } = props;
-    const modalTitleId = useOid();
+    const modalHeadingId = useOid();
     const context = useMemo(
-      () => ({ onClose, closeMessage, modalTitleId }),
-      [onClose, closeMessage, modalTitleId]
+      () => ({ onClose, closeMessage, modalHeadingId }),
+      [onClose, closeMessage, modalHeadingId]
     );
     const omitProps = useOmit(rest);
     const oid = useOid(id);
@@ -130,7 +130,7 @@ export const Modal = withTheme(
               className={styles.dialog}
               role="dialog"
               aria-modal="true"
-              aria-labelledby={modalTitleId}
+              aria-labelledby={modalHeadingId}
               ref={modalDialog}
             >
               {children}
@@ -146,7 +146,7 @@ export const Modal = withTheme(
 const Header: FunctionComponent<PropsModalHeader> = (props) => {
   const { children, ...rest } = props;
   const omitProps = useOmit(rest);
-  const { modalTitleId, closeMessage } = useContext(ModalContext);
+  const { modalHeadingId, closeMessage } = useContext(ModalContext);
 
   return (
     <Box {...omitProps} as="header" className={styles.header}>
@@ -158,10 +158,10 @@ const Header: FunctionComponent<PropsModalHeader> = (props) => {
         />
       </span>
       <Heading
-        id={modalTitleId}
+        id={modalHeadingId}
         visualLevel="4"
         noEndMargin
-        lineHeight="title"
+        lineHeight="heading"
         children={children}
       />
     </Box>

@@ -28,16 +28,16 @@ import styles from "./Table.module.scss";
 import { theme } from "./Table.theme";
 
 type ContainerProps =
-  | { withContainer: false; heading?: never }
+  | { withContainer: false; caption?: never }
   | {
       /**
        * Whether to use a Table.Container around the Table
        */
       withContainer?: true;
       /**
-       * The visible heading for the table
+       * The visible caption for the table
        */
-      heading?: ReactText;
+      caption?: ReactText;
     };
 
 interface ElementProps
@@ -52,7 +52,7 @@ interface ElementProps
   /**
    * Provides users of assistive technologies with context for the table contents
    */
-  caption: string;
+  screenReaderCaption: string;
 }
 
 export type TableProps = ContainerProps & ElementProps;
@@ -76,7 +76,13 @@ export const Table = withTheme(
   styles
 )(
   forwardRefWithStatics<HTMLTableElement, TableProps, Statics>((props, ref) => {
-    const { children, caption, heading, withContainer = true, ...rest } = props;
+    const {
+      children,
+      screenReaderCaption,
+      caption,
+      withContainer = true,
+      ...rest
+    } = props;
 
     const omitProps = useOmit(rest);
 
@@ -89,7 +95,7 @@ export const Table = withTheme(
         lineHeight={false}
       >
         <caption>
-          <ScreenReaderText>{caption}</ScreenReaderText>
+          <ScreenReaderText>{screenReaderCaption}</ScreenReaderText>
         </caption>
         {children}
       </Box>
@@ -98,7 +104,7 @@ export const Table = withTheme(
     return (
       <>
         {withContainer ? (
-          <TableContainer heading={heading}>
+          <TableContainer caption={caption}>
             <TableEl />
           </TableContainer>
         ) : (

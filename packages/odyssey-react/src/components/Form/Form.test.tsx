@@ -15,7 +15,7 @@ import { render, screen } from "@testing-library/react";
 import { Form } from ".";
 
 const tree = () => (
-  <Form title="foo" desc="bar" children={<input aria-label="baz" />} />
+  <Form heading="foo" desc="bar" children={<input aria-label="baz" />} />
 );
 
 describe("Form", () => {
@@ -28,7 +28,7 @@ describe("Form", () => {
     expect(input.form).toBeVisible();
   });
 
-  it("renders title heading visibly", () => {
+  it("renders heading heading visibly", () => {
     render(tree());
     expect(screen.getByRole("heading", { name: "foo" })).toBeVisible();
   });

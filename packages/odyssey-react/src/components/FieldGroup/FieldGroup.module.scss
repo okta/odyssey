@@ -28,15 +28,15 @@
   }
 }
 
-.title {
+.legend {
   margin-block: 0;
   margin-inline: 0;
   padding-block: 0;
   padding-inline: 0;
-  color: var(--TitleFontColor);
-  font-size: var(--TitleFontSize);
+  color: var(--LegendFontColor);
+  font-size: var(--LegendFontSize);
   font-weight: 600;
-  line-height: var(--TitleFontLineHeight);
+  line-height: var(--LegendFontLineHeight);
 }
 
 .error {
