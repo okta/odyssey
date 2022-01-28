@@ -10,12 +10,82 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, ReactElement, ReactText } from "react";
 import Choices from "choices.js";
+import type { SelectOptionProps } from "./SelectOption";
+import type { SelectOptionGroupProps } from "./SelectOptionGroup";
 import styles from "./Select.module.scss";
+
+type ChildrenType = ReactElement<SelectOptionProps | SelectOptionGroupProps>;
+interface Option {
+  value: ReactText;
+}
+interface Group {
+  label: string;
+  choices: Option[];
+}
+
+const isArray = (
+  children: ChildrenType | ChildrenType[]
+): children is ChildrenType[] => {
+  return children instanceof Array;
+};
+
+const isFragment = (children: ChildrenType): children is ChildrenType => {
+  return (
+    !children.props.label &&
+    !!children.props.children &&
+    children.props.children instanceof Array
+  );
+};
+
+const isGroup = (children: ChildrenType): children is ChildrenType => {
+  return (
+    !!children.props.label &&
+    !!children.props.children &&
+    children.props.children instanceof Array
+  );
+};
+
+const parseChildren = (
+  children: ChildrenType | ChildrenType[]
+): (Group | Option)[] => {
+  const options: (Group | Option)[] = [];
+
+  if (isArray(children)) {
+    children.forEach((child) => options.push(...parseChildren(child)));
+  } else if (isFragment(children)) {
+    options.push(...parseChildren(children.props.children as ChildrenType));
+  } else {
+    options.push(
+      isGroup(children) ? parseGroup(children) : parseOption(children)
+    );
+  }
+
+  return options;
+};
+
+const parseGroup = (group: ReactElement<SelectOptionGroupProps>): Group => {
+  const options: Option[] = [];
+
+  if (group.props.children instanceof Array) {
+    group.props.children.forEach((child: any | any[]) =>
+      options.push(parseOption(child))
+    );
+  } else {
+    options.push(parseOption(group.props.children));
+  }
+
+  return { label: group.props.label, choices: options };
+};
+
+const parseOption = (option: ReactElement<SelectOptionProps>): Option => {
+  return { value: option.props.children };
+};
 
 type UseChoices = (args: {
   id: string;
+  children: ChildrenType | ChildrenType[];
   value?: string;
   loadingText?: string;
   noResultsText?: string;
@@ -28,6 +98,7 @@ export interface ChoicesHTMLSelectElement extends HTMLSelectElement {
 
 const useChoices: UseChoices = ({
   id,
+  children,
   value,
   loadingText,
   noResultsText,
@@ -84,6 +155,15 @@ const useChoices: UseChoices = ({
       choicesInstance.destroy();
     };
   }, [id, loadingText, noChoicesText, noResultsText]);
+
+  useEffect(() => {
+    choices.current?.setChoices(
+      parseChildren(children),
+      "value",
+      "label",
+      true
+    );
+  }, [children]);
 
   useEffect(() => {
     const forceValue = () => value && choices?.current?.setChoiceByValue(value);

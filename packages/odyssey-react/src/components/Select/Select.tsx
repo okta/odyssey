@@ -118,7 +118,14 @@ export const Select = withTheme(
 
       const oid = useOid(id);
 
-      useChoices({ id: oid, value, loadingText, noResultsText, noChoicesText });
+      useChoices({
+        id: oid,
+        children,
+        value,
+        loadingText,
+        noResultsText,
+        noChoicesText,
+      });
 
       const handleChange = useCallback(
         (event: ChangeEvent<HTMLSelectElement>) => {

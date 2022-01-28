@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef } from "react";
+import React, { forwardRef, ReactText } from "react";
 import type { ComponentPropsWithRef } from "react";
 import { useOmit } from "../../utils";
 import { Box } from "../Box";
@@ -21,9 +21,9 @@ export interface SelectOptionProps
     "style" | "className" | "selected" | "color"
   > {
   /**
-   * The underlying option element value attribute.
+   * The option's value
    */
-  value?: string;
+  children: ReactText;
 }
 
 /**

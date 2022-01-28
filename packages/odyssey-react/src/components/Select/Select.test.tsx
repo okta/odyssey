@@ -21,11 +21,20 @@ const label = "Select speed";
 const name = "speed";
 const warpValue = "Warp speed";
 
-const tree = (props: Record<string, unknown> = {}) => (
-  <Select {...props} label={label} name={name}>
+const DEFAULT_OPTIONS = (
+  <>
     <Select.Option children="Lightspeed" />
     <Select.Option children="Warp speed" />
     <Select.Option children="Ludicrous speed" />
+  </>
+);
+
+const tree = (
+  props: Record<string, unknown> = {},
+  children = DEFAULT_OPTIONS
+) => (
+  <Select {...props} label={label} name={name}>
+    {children}
   </Select>
 );
 
@@ -124,6 +133,30 @@ describe("Select", () => {
       expect.objectContaining({ type: "change" }),
       warpValue
     );
+  });
+
+  it("correctly renders new children when updated dynamically", () => {
+    const { rerender } = render(tree());
+
+    // Make sure initial tree has 3 items
+    let listbox = screen.getAllByRole(listboxRole).pop() as HTMLDivElement;
+    let options = within(listbox).getAllByRole(optionRole);
+    expect(options.length).toBe(3);
+
+    rerender(
+      tree(
+        {},
+        <>
+          <Select.Option children="Lightspeed" />
+          <Select.Option children="Warp speed" />
+        </>
+      )
+    );
+
+    // Make sure tree has 2 items after being dynamically updated
+    listbox = screen.getAllByRole(listboxRole).pop() as HTMLDivElement;
+    options = within(listbox).getAllByRole(optionRole);
+    expect(options.length).toBe(2);
   });
 
   it("restricts multiple and noChoicesText via types", () => {

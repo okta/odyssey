@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
+import React, { useState } from "react";
 import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
-import { Select, SelectProps } from "@okta/odyssey-react";
+import { Button, Select, SelectProps } from "@okta/odyssey-react";
 import { Select as Source } from "../../../../odyssey-react/src";
 
 import SelectMdx from "./Select.mdx";
@@ -57,9 +57,11 @@ export default {
 
 const Template: Story<SelectProps> = (args) => (
   <Select {...args}>
-    {options.map((option) => (
-      <Select.Option key={option} children={option} value={option} />
-    ))}
+    <>
+      {options.map((option) => (
+        <Select.Option key={option} children={option} value={option} />
+      ))}
+    </>
   </Select>
 );
 
@@ -100,3 +102,34 @@ export const Group = (args: SelectProps): ReactElement => (
     </Select.OptionGroup>
   </Select>
 );
+
+export const Dynamic = (): ReactElement => {
+  const [options, setOptions] = useState([
+    {
+      value: "Option 1",
+    },
+  ]);
+
+  const addOption = () => {
+    const newOptions = [
+      ...options,
+      {
+        value: `Option ${options.length + 1}`,
+      },
+    ];
+    setOptions(newOptions);
+  };
+
+  return (
+    <div className="App">
+      <Button onClick={addOption}>Add option</Button>
+      <form>
+        <Select label="menu" name="test">
+          {options.map((option) => (
+            <Select.Option key={option.value}>{option.value}</Select.Option>
+          )) || []}
+        </Select>
+      </form>
+    </div>
+  );
+};
