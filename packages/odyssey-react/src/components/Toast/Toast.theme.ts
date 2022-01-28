@@ -48,7 +48,7 @@ export const theme: ThemeReducer = (theme) => ({
   ReducedAnimationDuration: "300ms",
   SuccessBackgroundColor: theme.ColorBackgroundSuccessDark,
   TextColor: theme.ColorTextBodyInverse,
-  ToastPenRowGap: theme.SpaceRemS,
-  ToastPenInsetBlockEnd: theme.SpaceRemM,
-  ToastPenInsetInlineEnd: theme.SpaceRemM,
+  PenRowGap: theme.SpaceRemS,
+  PenInsetBlockEnd: theme.SpaceRemM,
+  PenInsetInlineEnd: theme.SpaceRemM,
 });
