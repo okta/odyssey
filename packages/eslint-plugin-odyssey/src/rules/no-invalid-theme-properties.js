@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+const path = require("path");
 const validThemeProperty = /^[A-Z][A-Za-z]+$/;
 
 module.exports = {
@@ -24,32 +25,37 @@ module.exports = {
     fixable: null,
     schema: [], // no options
     messages: {
-      invalidThemeProperty: "Invalid theme property, use UpperCamelCase string",
+      string: "Invalid theme property, use a string key",
+      format: "Invalid theme property, use UpperCamelCase format",
+      filename: "Invalid theme property, avoid file name",
+      dirname: "Invalid theme property, avoid directory name",
     },
   },
   create: function (context) {
-    function report(node) {
-      context.report({
-        messageId: "invalidThemeProperty",
-        node,
-      });
-    }
-
-    function isInvalidThemeProperty(value) {
-      if (typeof value !== "string") {
-        return true;
-      }
-      if (validThemeProperty.test(value)) {
-        return false;
-      }
-
-      return true;
-    }
-
     function check(node) {
       const value = node.key.name;
-      if (isInvalidThemeProperty(value)) {
-        report(node);
+      const absolute = context.getFilename();
+      const filename = path.basename(absolute).split(".")[0];
+      const dirname = path.basename(path.dirname(absolute));
+
+      if (typeof value !== "string") {
+        context.report({ messageId: "string", node });
+        return;
+      }
+
+      if (!validThemeProperty.test(value)) {
+        context.report({ messageId: "format", node });
+        return;
+      }
+
+      if (value.includes(filename)) {
+        context.report({ messageId: "filename", node });
+        return;
+      }
+
+      if (value.includes(dirname)) {
+        context.report({ messageId: "dirname", node });
+        return;
       }
     }
 
