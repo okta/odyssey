@@ -15,7 +15,7 @@ import { render, screen } from "@testing-library/react";
 import { FieldGroup } from ".";
 
 const tree = () => (
-  <FieldGroup title="foo" desc="bar" children={<input aria-label="baz" />} />
+  <FieldGroup legend="foo" desc="bar" children={<input aria-label="baz" />} />
 );
 
 describe("FieldGroup", () => {
