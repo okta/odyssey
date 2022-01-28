@@ -49,7 +49,7 @@
 
   &:disabled {
     opacity: 1;
-    color: var(--ColorText);
+    color: var(--ColorTextDisabled);
     cursor: not-allowed;
   }
 

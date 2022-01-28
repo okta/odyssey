@@ -31,7 +31,7 @@ export const theme: ThemeReducer = (theme) => ({
   ColorFocusDanger: theme.ColorFocusDanger,
   ColorFocusPrimary: theme.ColorFocusPrimary,
   ColorText: theme.ColorTextBody,
-  ColorTextDisabled: theme.ColorTextBody,
+  ColorTextDisabled: theme.ColorTextSub,
   ColorTextPlaceholder: theme.ColorTextSub,
   FocusOutlineWidth: theme.FocusOutlineWidthBase,
   FontFamily: theme.FontFamilyBase,
