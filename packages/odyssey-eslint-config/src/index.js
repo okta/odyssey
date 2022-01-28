@@ -24,7 +24,7 @@ module.exports = {
     sourceType: "module",
   },
   ignorePatterns: ["node_modules", "dist"],
-  plugins: ["header", "import"],
+  plugins: ["header", "import", "@okta/odyssey"],
   rules: {
     "header/header": [
       "error",
@@ -61,6 +61,12 @@ module.exports = {
       files: ["jest.setup.js", "*.test.*"],
       env: {
         jest: true,
+      },
+    },
+    {
+      files: ["*.theme.ts"],
+      rules: {
+        "@okta/odyssey/no-invalid-theme-properties": "error",
       },
     },
     {
