@@ -43,9 +43,9 @@ export interface ToastProps
    */
   children?: never;
   /**
-   * The title to be displayed on the toast.
+   * The heading to be displayed on the toast.
    */
-  title: string;
+  heading: string;
 
   /**
    * Supplemental information. Be concise - less than three lines of content - as your Toast will soon vanish!
@@ -91,7 +91,7 @@ interface Statics {
 
 export interface ToastObject {
   id?: string;
-  title: string;
+  heading: string;
   body?: string;
   variant?: ToastProps["variant"];
 }
@@ -122,7 +122,7 @@ export const Toast = withTheme(
 )(
   forwardRefWithStatics<HTMLElement, ToastProps, Statics>((props, ref) => {
     const {
-      title,
+      heading,
       body,
       variant = "info",
       id,
@@ -145,7 +145,7 @@ export const Toast = withTheme(
         color={false}
       >
         <span className={styles.icon}>{icon[variant]}</span>
-        <h1 className={styles.heading}>{title}</h1>
+        <h1 className={styles.heading}>{heading}</h1>
         {body && <p className={styles.body}>{body}</p>}
         <span className={styles.dismiss}>
           <Button
@@ -192,11 +192,11 @@ const ToastProvider = (props: PropsToastProvider) => {
     <ToastContext.Provider value={{ addToast }}>
       {children}
       <Box className={styles.toastPen}>
-        {toasts.map(({ title, body, variant = "info", id = oid() }) => (
+        {toasts.map(({ heading, body, variant = "info", id = oid() }) => (
           <Toast
             id={id}
             key={id}
-            title={title}
+            heading={heading}
             body={body}
             variant={variant}
             dismissButtonLabel={dismissButtonLabel}

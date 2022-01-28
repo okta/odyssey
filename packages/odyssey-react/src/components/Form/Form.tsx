@@ -29,9 +29,9 @@ export interface FormProps
   children: ReactElement | ReactElement[];
 
   /**
-   * The title of the Form.
+   * The heading of the Form.
    */
-  title?: string;
+  heading?: string;
 
   /**
    * A short description of the form.
@@ -62,14 +62,14 @@ export const Form = withTheme(
   styles
 )(
   forwardRefWithStatics<HTMLFormElement, FormProps, Statics>((props, ref) => {
-    const { children, title, desc, ...rest } = props;
+    const { children, heading, desc, ...rest } = props;
 
     const omitProps = useOmit(rest);
 
     return (
       <Box as="form" {...omitProps} className={styles.root} ref={ref}>
         <header className={styles.header}>
-          {title && <Heading visualLevel="3" children={title} />}
+          {heading && <Heading visualLevel="3" children={heading} />}
           {desc && <Text as="p">{desc}</Text>}
         </header>
         {children}

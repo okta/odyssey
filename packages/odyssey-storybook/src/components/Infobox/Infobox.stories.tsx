@@ -29,8 +29,8 @@ export default {
     children: {
       control: { type: null },
     },
-    title: {
-      defaultValue: "Infobox title",
+    heading: {
+      defaultValue: "Infobox heading",
       control: { type: "text" },
     },
   },
@@ -44,9 +44,9 @@ const actions = (
   </Link>
 );
 
-const Template: Story<InfoboxProps> = ({ title, variant }) => (
+const Template: Story<InfoboxProps> = ({ heading, variant }) => (
   <Infobox
-    title={title}
+    heading={heading}
     variant={variant}
     content={content}
     actions={actions}

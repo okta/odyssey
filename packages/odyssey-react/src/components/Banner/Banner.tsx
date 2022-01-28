@@ -35,9 +35,9 @@ interface CommonProps
   variant?: "info" | "danger" | "caution";
 
   /**
-   * Human-readable title for the banner.
+   * Human-readable heading for the banner.
    */
-  title: string;
+  heading: string;
 
   /**
    * Human-readable descriptive content for the banner.
@@ -77,7 +77,7 @@ export const Banner = withTheme(
   forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
     const {
       children,
-      title,
+      heading,
       content,
       open,
       variant = "info",
@@ -104,13 +104,13 @@ export const Banner = withTheme(
         hidden={!open}
       >
         <span className={styles.icon}>{icon[variant]}</span>
-        {title && (
-          <div className={styles.title}>
+        {heading && (
+          <div className={styles.heading}>
             <Heading
               visualLevel="6"
-              lineHeight="title"
+              lineHeight="heading"
               noEndMargin
-              children={title}
+              children={heading}
             />
           </div>
         )}
