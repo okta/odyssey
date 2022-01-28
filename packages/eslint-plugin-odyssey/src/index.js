@@ -10,29 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ThemeReducer } from "@okta/odyssey-react-theme";
-
-export const theme: ThemeReducer = (theme) => ({
-  // Space
-  SpaceRemXs: theme.SpaceRemXs,
-  SpaceRemS: theme.SpaceRemS,
-  SpaceRemM: theme.SpaceRemM,
-  SpaceRemL: theme.SpaceRemL,
-
-  // Type
-  FontLineLengthMax: theme.FontLineLengthMax,
-
-  // Info Variant
-  ColorPrimaryLight: theme.ColorPrimaryLight,
-
-  // Success Variant
-  ColorSuccessLight: theme.ColorSuccessLight,
-
-  // Caution Variant
-  ColorCautionLight: theme.ColorCautionLight,
-
-  // Danger Variant
-  ColorDangerLight: theme.ColorDangerLight,
-
-  SizeIcon: theme.FontSizeHeading5,
-});
+module.exports = {
+  rules: {
+    "no-invalid-theme-properties": require("./rules/no-invalid-theme-properties"),
+  },
+};

@@ -11,4 +11,4 @@
  */
 
 // eslint-disable-next-line import/no-extraneous-dependencies
-module.exports = require("@okta/odyssey-eslint");
+module.exports = require("@okta/odyssey-eslint-config");
