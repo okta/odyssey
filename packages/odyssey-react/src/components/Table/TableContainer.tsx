@@ -28,9 +28,9 @@ export interface TableContainerProps
    */
   children?: ReactElement | ReactElement[];
   /**
-   * The visible heading for the table
+   * The visible caption for the table
    */
-  heading?: ReactText;
+  caption?: ReactText;
 }
 
 export const TableContainer = withTheme(
@@ -38,13 +38,13 @@ export const TableContainer = withTheme(
   styles
 )(
   forwardRef<HTMLElement, TableContainerProps>((props, ref) => {
-    const { children, heading, ...rest } = props;
+    const { children, caption, ...rest } = props;
 
     const omitProps = useOmit(rest);
 
     return (
       <Box as="figure" {...omitProps} ref={ref} className={styles.root}>
-        <figcaption className={styles.heading}>{heading}</figcaption>
+        <figcaption className={styles.caption}>{caption}</figcaption>
         {children}
       </Box>
     );

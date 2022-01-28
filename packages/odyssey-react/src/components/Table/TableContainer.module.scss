@@ -22,10 +22,10 @@
   }
 }
 
-.heading {
-  margin-block-end: var(--SpaceMarginHeading);
-  color: var(--ColorTextHeading);
-  font-size: var(--FontSizeHeading);
-  font-weight: var(--FontWeightHeading);
+.caption {
+  margin-block-end: var(--SpaceMarginCaption);
+  color: var(--ColorTextCaption);
+  font-size: var(--FontSizeCaption);
+  font-weight: var(--FontWeightCaption);
   text-align: start;
 }
