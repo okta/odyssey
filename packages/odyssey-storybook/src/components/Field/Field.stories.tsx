@@ -36,7 +36,9 @@ export default {
   },
 };
 
-const Template: Story<FieldProps> = (props) => <Field {...props} />;
+const Template: Story<FieldProps> = (props) => (
+  <Field as={props.as || "div"} {...props} />
+);
 
 export const KitchenSink = Template.bind({});
 KitchenSink.args = {

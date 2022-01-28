@@ -17,10 +17,11 @@ import type { FieldProps } from ".";
 
 const tree = (props: Partial<FieldProps> = {}) => (
   <Field
+    as={props.as || "div"}
+    children={<input id="foo" />}
     inputId="foo"
     label="bar"
     required
-    children={<input id="foo" />}
     {...props}
   />
 );
@@ -34,6 +35,18 @@ describe("Field", () => {
   it("renders optional label when *not* required", () => {
     render(tree({ required: false, optionalLabel: "Optional" }));
     expect(screen.getByText("Optional")).toBeVisible();
+  });
+
+  describe("polymorphism", () => {
+    it("renders as a div by default", () => {
+      const { container } = render(tree());
+      expect(container.firstElementChild?.tagName).toBe("DIV");
+    });
+
+    it("renders as fieldset", () => {
+      const { container } = render(tree({ as: "fieldset" }));
+      expect(container.firstElementChild?.tagName).toBe("FIELDSET");
+    });
   });
 
   a11yCheck(() => render(tree()));

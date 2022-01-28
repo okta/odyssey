@@ -11,24 +11,25 @@
  */
 
 import React, { forwardRef } from "react";
-import type { ComponentPropsWithRef, ReactNode } from "react";
+import type { ComponentPropsWithRef, ReactText } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { Box } from "../Box";
+import { Text } from "../Text";
 import { useOmit } from "../../utils";
-import { theme } from "./FieldError.theme";
-import styles from "./FieldError.module.scss";
+import { theme } from "./FieldHint.theme";
+import styles from "./FieldHint.module.scss";
 
-interface FieldErrorProps
+interface FieldHintProps
   extends Omit<ComponentPropsWithRef<"p">, "style" | "className" | "color"> {
   id: string;
-  children: ReactNode;
+  children: ReactText;
 }
 
-export const FieldError = withTheme(
+export const FieldHint = withTheme(
   theme,
   styles
 )(
-  forwardRef<HTMLParagraphElement, FieldErrorProps>((props, ref) => {
+  forwardRef<HTMLParagraphElement, FieldHintProps>((props, ref) => {
     const { children, id, ...rest } = props;
     const omitProps = useOmit(rest);
 
@@ -38,12 +39,14 @@ export const FieldError = withTheme(
         ref={ref}
         as="p"
         className={styles.root}
-        id={`${id}-error`}
+        id={`${id}-hint`}
       >
-        {children}
+        <Text color="body" fontSize="caption">
+          {children}
+        </Text>
       </Box>
     );
   })
 );
 
-FieldError.displayName = "FieldError";
+FieldHint.displayName = "FieldHint";
