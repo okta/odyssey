@@ -13,26 +13,17 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  ColorBackgroundOverlay: "rgba(29, 29, 33, 0.75)",
-
-  // dialog
-  SpacePaddingBlockStartDialog: theme.SpaceRemM,
-  SpacePaddingBlockEndDialog: 0,
-  SpacePaddingInlineDialog: theme.SpaceRemM,
-  ColorBackgroundDialog: theme.ColorBackgroundBase,
-
-  // dismiss
-  SpaceMarginBlockEndDismiss: theme.SpaceRemXs,
-
-  // content
-  SpacePaddingBlockStartContent: theme.SpaceRemXs,
-  SpacePaddingBlockEndContent: theme.SpaceRemL,
-  SpacePaddingInlineContent: 0,
-  FontSizeContent: theme.FontSizeBody,
-
-  // footer
-  SpacePaddingBlockEndFooter: theme.SpaceRemM,
-
-  AnimationDuration: "100ms",
-  AnimationTimingFunction: "linear",
+  AnimationDuration: theme.TransitionDurationBase,
+  AnimationTimingFunction: theme.TransitionTimingBase,
+  ContentFontSize: theme.FontSizeBody,
+  ContentPaddingBlockEnd: theme.SpaceRemL,
+  ContentPaddingBlockStart: theme.SpaceRemXs,
+  ContentPaddingInline: 0,
+  DialogBackgroundColor: theme.ColorBackgroundBase,
+  DialogPaddingBlockEnd: 0,
+  DialogPaddingBlockStart: theme.SpaceRemM,
+  DialogPaddingInline: theme.SpaceRemM,
+  DismissMarginBlockEnd: theme.SpaceRemXs,
+  FooterPaddingBlockEnd: theme.SpaceRemM,
+  OverlayBackgroundColor: "rgba(29, 29, 33, 0.75)",
 });
