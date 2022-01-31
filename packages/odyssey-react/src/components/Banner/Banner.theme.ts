@@ -20,7 +20,6 @@ export const theme: ThemeReducer = (theme) => ({
   SpaceRemL: theme.SpaceRemL,
 
   // Type
-  FontSizeHeading5: theme.FontSizeHeading5,
   FontLineLengthMax: theme.FontLineLengthMax,
 
   // Info Variant
@@ -34,4 +33,6 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Danger Variant
   ColorDangerLight: theme.ColorDangerLight,
+
+  SizeIcon: theme.FontSizeHeading5,
 });

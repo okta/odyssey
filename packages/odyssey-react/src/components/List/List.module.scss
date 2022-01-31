@@ -11,11 +11,11 @@
  */
 
 .root {
-  max-width: $max-line-length;
-  margin-block-start: 0;
-  margin-block-end: $type-margin;
-  margin-inline: 0;
-  padding-block: 0;
+  max-width: var(--FontMaxWidth);
+  margin-block-start: var(--SpaceMarginBlockStart);
+  margin-block-end: var(--SpaceMarginBlockEnd);
+  margin-inline: var(--SpaceMarginInline);
+  padding-block: var(--SpacePaddingBlock);
 }
 
 .unordered {
@@ -28,7 +28,7 @@
 
 .ordered,
 .unordered {
-  padding-inline-start: $spacing-m;
+  padding-inline-start: var(--SpacePaddingInlineStartOrderedUnordered);
   padding-inline-end: 0;
   list-style-position: outside;
 
@@ -45,9 +45,10 @@
 
 .description {
   display: grid;
-  grid-gap: $spacing-xs $spacing-m;
   grid-template-columns: repeat(2, minmax(min-content, max-content));
   padding-inline: 0;
+  column-gap: var(--ColumnGapDescription);
+  row-gap: var(--RowGapDescription);
 
   &:last-child {
     margin-block-end: 0;

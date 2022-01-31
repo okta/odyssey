@@ -11,23 +11,35 @@
  */
 
 import React, { forwardRef } from "react";
+import type { ComponentPropsWithRef, ReactNode } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
-import type { ReactNode, FunctionComponent } from "react";
-import styles from "./FieldError.module.scss";
 import { Box } from "../Box";
+import { useOmit } from "../../utils";
+import { theme } from "./FieldError.theme";
+import styles from "./FieldError.module.scss";
 
-interface FieldErrorProps {
+interface FieldErrorProps
+  extends Omit<ComponentPropsWithRef<"p">, "style" | "className" | "color"> {
   id: string;
   children: ReactNode;
 }
 
-export const FieldError: FunctionComponent<FieldErrorProps> = withTheme(
-  () => ({}),
+export const FieldError = withTheme(
+  theme,
   styles
 )(
-  forwardRef<HTMLParagraphElement, FieldErrorProps>(({ children, id }, ref) => {
+  forwardRef<HTMLParagraphElement, FieldErrorProps>((props, ref) => {
+    const { children, id, ...rest } = props;
+    const omitProps = useOmit(rest);
+
     return (
-      <Box as="p" className={styles.root} id={`${id}-error`} ref={ref}>
+      <Box
+        {...omitProps}
+        ref={ref}
+        as="p"
+        className={styles.root}
+        id={`${id}-error`}
+      >
         {children}
       </Box>
     );

@@ -12,11 +12,11 @@
 
 import React, { forwardRef } from "react";
 import type { ReactNode } from "react";
+import type { PolymorphicForwardRef } from "../../utils";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { Box } from "../Box";
 import type { BoxProps } from "../Box";
 import { useCx, useOmit, toCamelCase } from "../../utils";
-import type { PolymorphicForwardRef } from "../../utils";
 import { theme } from "./Text.theme";
 import styles from "./Text.module.scss";
 
@@ -102,7 +102,7 @@ export interface TextProps
    * The line-height for the text content.
    * @default normal
    */
-  lineHeight?: "normal" | "title";
+  lineHeight?: "normal" | "heading";
 
   /**
    * The overflow wrapping behavior for the text content.
