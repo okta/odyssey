@@ -15,13 +15,15 @@ $status-border-radius: 1em;
 
 .label {
   display: block;
-  margin-block-end: var(--SpaceRemXs);
-  font-weight: var(--FontWeightBold);
+  margin-block-end: var(--LabelMarginBlockEnd);
+  font-weight: var(--LabelFontWeight);
 }
 
-.value {
+.descriptor {
   position: relative;
-  padding-inline-start: calc(#{$status-indicator-size} + var(--SpaceEmXs));
+  padding-inline-start: calc(
+    #{$status-indicator-size} + var(--DescriptorPaddingInlineStart)
+  );
   background-color: transparent;
 
   &::before {
@@ -33,28 +35,33 @@ $status-border-radius: 1em;
     inset-inline-start: 0;
     width: $status-indicator-size;
     height: $status-indicator-size;
-    margin-inline-end: var(--SpaceRemXs);
+    margin-inline-end: var(--IndicatorMarginInlineEnd);
     transform: translateY(-50%);
-    background-color: var(--ColorIndicatorNeutral);
   }
 }
 
-/* Value variants */
+/* Variants */
+
+.neutralVariant {
+  &::before {
+    background-color: var(--IndicatorNeutralBackgroundColor);
+  }
+}
 
 .successVariant {
   &::before {
-    background-color: var(--ColorIndicatorSuccess);
+    background-color: var(--IndicatorSuccessBackgroundColor);
   }
 }
 
 .cautionVariant {
   &::before {
-    background-color: var(--ColorIndicatorCaution);
+    background-color: var(--IndicatorCautionBackgroundColor);
   }
 }
 
 .dangerVariant {
   &::before {
-    background-color: var(--ColorIndicatorDanger);
+    background-color: var(--IndicatorDangerBackgroundColor);
   }
 }
