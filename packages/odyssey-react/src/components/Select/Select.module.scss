@@ -19,61 +19,62 @@
   display: block;
   position: relative;
   width: 100%;
-  max-width: var(--FontMaxWidth);
-  margin-block: var(--SpaceMarginBlock);
-  margin-inline: var(--SpaceMarginInline);
-  padding-block: var(--SpacePaddingBlock);
-  padding-inline: var(--SpacePaddingInline);
+  max-width: var(--MaxWidth);
+  margin-block: var(--MarginBlock);
+  margin-inline: var(--MarginInline);
+  padding-block: var(--PaddingBlock);
+  padding-inline: var(--PaddingInline);
   transition-property: border-color, background-color, box-shadow;
   transition-duration: var(--TransitionDuration);
   transition-timing-function: var(--TransitionTiming);
   border-width: var(--BorderWidth);
   border-style: var(--BorderStyle);
-  border-color: var(--ColorBorder);
-  background-color: var(--ColorBackground);
-  box-shadow: 0 0 0 0 var(--ColorFocusPrimary);
-  color: var(--ColorText);
+  border-color: var(--BorderColor);
+  background-color: var(--BackgroundColor);
+  box-shadow: 0 0 0 0 var(--FocusBoxShadowColor);
+  color: var(--TextColor);
   font-family: var(--FontFamily);
   font-size: var(--FontSize);
-  line-height: var(--FontLineHeight);
+  line-height: var(--LineHeight);
 
   &:hover,
   &:focus {
-    border-color: var(--ColorBorderHoverFocus);
+    border-color: var(--HoverFocusBorderColor);
   }
 
   &:focus {
     outline: 0;
-    box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusPrimary);
+    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
   }
 
   &:disabled {
     opacity: 1;
-    color: var(--ColorTextDisabled);
+    color: var(--DisabledTextColor);
     cursor: not-allowed;
   }
 
   &:disabled,
   &[readonly] {
-    border-color: var(--ColorBorderDisabledReadonly);
-    background-color: var(--ColorBackgroundDisabledReadonly);
+    border-color: var(--DisabledReadonlyBorderColor);
+    background-color: var(--DisabledReadonlyBackgroundColor);
 
     &:hover {
-      border-color: var(--ColorBorderDisabledReadonly);
+      border-color: var(--DisabledReadonlyHoverBorderColor);
     }
   }
 
   &:invalid {
-    border-color: var(--ColorBorderInvalid);
+    border-color: var(--InvalidBorderColor);
 
     &:focus {
       outline: 0;
-      box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusDanger);
+      box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+        var(--InvalidFocusBoxShadowColor);
     }
   }
 
   &::placeholder {
-    color: var(--ColorTextPlaceholder);
+    color: var(--PlaceholderTextColor);
   }
 
   option {
@@ -88,7 +89,7 @@
 
 .root {
   position: relative;
-  max-width: var(--FontMaxWidth);
+  max-width: var(--MaxWidth);
   overflow: hidden;
   font-size: var(--FontSize);
 
@@ -97,16 +98,16 @@
   .focus & {
     @include border-radius(var(--BorderRadius));
 
-    outline: none;
-    box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusPrimary);
+    outline: 0;
+    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
 
     &.open {
-      box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusPrimary),
-        0 2px 0 var(--FocusOutlineWidth) var(--ColorFocusPrimary);
+      box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor),
+        0 2px 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
 
       &.flipped {
-        box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusPrimary),
-          0 -2px 0 var(--FocusOutlineWidth) var(--ColorFocusPrimary);
+        box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor),
+          0 -2px 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
       }
     }
   }
@@ -122,16 +123,16 @@
   &.disabled {
     .inner,
     .input {
-      border-width: var(--BorderWidth);
-      border-style: var(--BorderStyle);
-      border-color: var(--ColorBorderDisabled);
-      background-color: var(--ColorBackgroundDisabled);
-      color: var(--ColorTextDisabled);
+      border-width: var(--DisabledBorderWidth);
+      border-style: var(--DisabledBorderStyle);
+      border-color: var(--DisabledBorderColor);
+      background-color: var(--DisabledBackgroundColor);
+      color: var(--DisabledTextColor);
       cursor: not-allowed;
       user-select: none;
 
       &:hover {
-        border-color: var(--ColorBorderDisabledHover);
+        border-color: var(--DisabledHoverBorderColor);
       }
     }
 
@@ -152,22 +153,25 @@
 
       outline: 0;
       outline: none;
-      box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusDanger);
+      box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+        var(--InvalidFocusBoxShadowColor);
 
       &.open {
-        box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusDanger),
-          0 2px 0 var(--FocusOutlineWidth) var(--ColorFocusDanger);
+        box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+            var(--InvalidFocusBoxShadowColor),
+          0 2px 0 var(--FocusBoxShadowSpread) var(--InvalidFocusBoxShadowColor);
 
         &.flipped {
-          box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusDanger),
-            0 -2px 0 var(--FocusOutlineWidth) var(--ColorFocusDanger);
+          box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+              var(--InvalidFocusBoxShadowColor),
+            0 -2px 0 var(--FocusBoxShadowSpread) var(--InvalidFocusBoxShadowColor);
         }
       }
     }
 
     .inner,
     .input {
-      border-color: var(--ColorBorderInvalid);
+      border-color: var(--InvalidBorderColor);
     }
   }
 
@@ -217,7 +221,8 @@
 
     &:focus {
       outline: 0;
-      box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusDanger);
+      box-shadow: 0 0 0 var(--ButtonFocusBoxShadowSpread)
+        var(--ButtonFocusBoxShadowColor);
     }
   }
 
@@ -283,15 +288,15 @@
     padding-inline: 0;
     transform: translateY(-50%);
     opacity: 1;
-    background-color: var(--ColorBackgroundButton);
+    background-color: var(--ButtonBackgroundColor);
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg' class='ods-icon'%3E%3Cpath d='M2.323 10.118a1.102 1.102 0 1 0 1.559 1.56L7 8.558l3.118 3.118a1.102 1.102 0 0 0 1.56-1.559L8.558 7l3.118-3.118a1.102 1.102 0 0 0-1.559-1.56L7 5.442 3.882 2.323a1.102 1.102 0 1 0-1.56 1.559L5.442 7l-3.118 3.118Z' fill='%23fff'/%3E%3C/svg%3E");
     background-position: center;
-    background-size: calc(var(--FontLineHeight) * 1em - 1em);
+    background-size: calc(var(--LineHeight) * 1em - 1em);
     line-height: 1;
 
     &:hover,
     &:focus {
-      background-color: var(--ColorBackgroundButtonHoverFocus);
+      background-color: var(--ButtonHoverFocusBackgroundColor);
     }
   }
 
@@ -303,7 +308,7 @@
     width: 1em;
     height: 1em;
     transform: translate(-50%, -50%);
-    color: var(--ColorButtonIndicator);
+    color: var(--ButtonIndicatorColor);
     font-size: 0.5em;
     text-indent: 0;
     pointer-events: none;
@@ -572,7 +577,7 @@
   display: inline-block;
   max-width: 100%;
   border: 0;
-  background-color: var(--ColorBackground);
+  background-color: var(--BackgroundColor);
   font-family: inherit;
   margin-block-end: 5px;
   padding-block: 4px;
