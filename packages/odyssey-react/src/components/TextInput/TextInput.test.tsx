@@ -26,7 +26,7 @@ describe("TextInput", () => {
     expect(screen.getByRole(textBox)).toBeVisible();
   });
 
-  it("accepts and spreads omitted rest props to the root of each compound static component", () => {
+  it("accepts and spreads omitted rest props to the input element", () => {
     render(<TextInput label={label} data-testid="foo" />);
 
     expect(screen.getByTestId("foo")).toBeInstanceOf(HTMLInputElement);
@@ -126,13 +126,13 @@ describe("TextInput", () => {
     }
   );
 
-  it("invokes inputRef with expected args after render", () => {
-    const handle = jest.fn();
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
 
-    render(<TextInput inputRef={handle} label={label} />);
+    render(<TextInput ref={ref} label={label} />);
 
-    expect(handle).toHaveBeenCalledTimes(1);
-    expect(handle).toHaveBeenLastCalledWith(screen.getByRole(textBox));
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(textBox));
   });
 
   a11yCheck(() => render(<TextInput label="foo" />));
