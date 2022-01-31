@@ -18,7 +18,7 @@ import type {
   RefCallback,
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
-import { useOid, useCx } from "../../utils";
+import { useOid, useOmit, useCx } from "../../utils";
 import { SearchIcon } from "../Icon/Search";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
@@ -120,9 +120,11 @@ export const TextInput: FunctionComponent<TextInputProps> = withTheme(
     hint,
     label,
     optionalLabel,
+    ...rest
   } = props;
 
   const oid = useOid(id);
+  const omitProps = useOmit(rest);
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -153,6 +155,7 @@ export const TextInput: FunctionComponent<TextInputProps> = withTheme(
       type={type}
       defaultValue={defaultValue}
       value={value}
+      {...omitProps}
     />
   );
 

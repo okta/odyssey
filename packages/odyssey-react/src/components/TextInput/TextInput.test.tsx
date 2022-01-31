@@ -21,18 +21,22 @@ const label = "Destination";
 
 describe("TextInput", () => {
   it("renders into the document", () => {
-    const { getByRole } = render(<TextInput label={label} />);
+    render(<TextInput label={label} />);
 
-    expect(getByRole(textBox)).toBeInTheDocument();
+    expect(screen.getByRole(textBox)).toBeVisible();
+  });
+
+  it("accepts and spreads omitted rest props to the root of each compound static component", () => {
+    render(<TextInput label={label} data-testid="foo" />);
+
+    expect(screen.getByTestId("foo")).toBeInstanceOf(HTMLInputElement);
   });
 
   it("renders a provided id associating the input and label", () => {
-    const { getByRole, getByText } = render(
-      <TextInput label={label} id="foo" />
-    );
+    render(<TextInput label={label} id="foo" />);
 
-    expect(getByRole(textBox)).toHaveAttribute("id", "foo");
-    expect(getByText(label).parentElement).toHaveAttribute("for", "foo");
+    expect(screen.getByRole(textBox)).toHaveAttribute("id", "foo");
+    expect(screen.getByText(label).parentElement).toHaveAttribute("for", "foo");
   });
 
   it("renders a generated id associating the input and label", () => {
@@ -42,9 +46,9 @@ describe("TextInput", () => {
   });
 
   it("renders a provided name for the input", () => {
-    const { getByRole } = render(<TextInput label={label} name="bar" />);
+    render(<TextInput label={label} name="bar" />);
 
-    expect(getByRole(textBox)).toHaveAttribute("name", "bar");
+    expect(screen.getByRole(textBox)).toHaveAttribute("name", "bar");
   });
 
   it("renders the optionalLabel when input is not required", () => {
@@ -58,7 +62,7 @@ describe("TextInput", () => {
       within(container.querySelector("label") as HTMLElement).getByText(
         optionalLabel
       )
-    ).toBeInTheDocument();
+    ).toBeVisible();
   });
 
   it.each([["disabled"], ["readonly"], ["required"]])(
@@ -111,11 +115,9 @@ describe("TextInput", () => {
     (prop, type) => {
       const handle = jest.fn();
 
-      const { getByRole } = render(
-        <TextInput {...{ [prop]: handle }} label={label} />
-      );
+      render(<TextInput {...{ [prop]: handle }} label={label} />);
 
-      fireEvent[type].call(fireEvent, getByRole(textBox));
+      fireEvent[type].call(fireEvent, screen.getByRole(textBox));
 
       expect(handle).toHaveBeenCalledTimes(1);
       expect(handle).toHaveBeenLastCalledWith(
@@ -127,10 +129,10 @@ describe("TextInput", () => {
   it("invokes inputRef with expected args after render", () => {
     const handle = jest.fn();
 
-    const { getByRole } = render(<TextInput inputRef={handle} label={label} />);
+    render(<TextInput inputRef={handle} label={label} />);
 
     expect(handle).toHaveBeenCalledTimes(1);
-    expect(handle).toHaveBeenLastCalledWith(getByRole(textBox));
+    expect(handle).toHaveBeenLastCalledWith(screen.getByRole(textBox));
   });
 
   a11yCheck(() => render(<TextInput label="foo" />));
