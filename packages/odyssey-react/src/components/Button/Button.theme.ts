@@ -80,7 +80,7 @@ export const theme: ThemeReducer = (theme) => ({
   DismissDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
 
   // Dismiss Inverted Variant
-  DismissInvertedShadowColor: theme.ColorPaletteNeutralWhite,
+  DismissInvertedBoxShadowColor: theme.ColorPaletteNeutralWhite,
 
   // Clear Variant
   ClearBackgroundColor: "transparent",
