@@ -15,7 +15,7 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import { Banner } from ".";
 
 const role = "status";
-const bannerTitle = "Banner title";
+const bannerHeading = "Banner heading";
 const bannerContent = "Banner content";
 const bannerActions =
   "Banner actions <a href='https://www.okta.com'>with a link</a>";
@@ -24,7 +24,7 @@ const bannerDismissButtonLabel = "Dismiss message";
 describe("Banner", () => {
   it("renders the Banner visibly into document", () => {
     const { getByRole } = render(
-      <Banner open title={bannerTitle} content={bannerContent}>
+      <Banner open heading={bannerHeading} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
@@ -32,19 +32,19 @@ describe("Banner", () => {
     expect(getByRole(role)).toBeVisible();
   });
 
-  it("renders the Banner title visibly into document", () => {
+  it("renders the Banner heading visibly into document", () => {
     const { getByText } = render(
-      <Banner open title={bannerTitle} content={bannerContent}>
+      <Banner open heading={bannerHeading} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
 
-    expect(getByText(bannerTitle)).toBeVisible();
+    expect(getByText(bannerHeading)).toBeVisible();
   });
 
   it("renders the content visibly into document", () => {
     const { getByText } = render(
-      <Banner open title={bannerTitle} content={bannerContent}>
+      <Banner open heading={bannerHeading} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
@@ -53,7 +53,7 @@ describe("Banner", () => {
 
   it("renders the action (children) visibly into document", () => {
     const { getByText } = render(
-      <Banner open title={bannerTitle} content={bannerContent}>
+      <Banner open heading={bannerHeading} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
@@ -62,7 +62,7 @@ describe("Banner", () => {
 
   it("hides the banner if visible prop is set to false", () => {
     const { getByRole } = render(
-      <Banner open={false} title={bannerTitle} content={bannerContent}>
+      <Banner open={false} heading={bannerHeading} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
@@ -72,7 +72,7 @@ describe("Banner", () => {
 
   it("does not render the dismiss button when the onDismiss callback is omitted", () => {
     const { queryByRole } = render(
-      <Banner open title={bannerTitle} content={bannerContent}>
+      <Banner open heading={bannerHeading} content={bannerContent}>
         {bannerActions}
       </Banner>
     );
@@ -85,7 +85,7 @@ describe("Banner", () => {
     const { getByRole } = render(
       <Banner
         open
-        title={bannerTitle}
+        heading={bannerHeading}
         content={bannerContent}
         onDismiss={handleDismiss}
         dismissButtonLabel={bannerDismissButtonLabel}
@@ -101,7 +101,7 @@ describe("Banner", () => {
     const { getByRole } = render(
       <Banner
         open
-        title={bannerTitle}
+        heading={bannerHeading}
         content={bannerContent}
         onDismiss={handleDismiss}
         dismissButtonLabel={bannerDismissButtonLabel}
@@ -127,7 +127,7 @@ describe("Banner", () => {
       <Banner
         dismissButtonLabel={bannerDismissButtonLabel}
         open
-        title={bannerTitle}
+        heading={bannerHeading}
         content={bannerContent}
         onDismiss={handleDismiss}
       >
@@ -145,7 +145,7 @@ describe("Banner", () => {
     const ref = jest.fn();
 
     render(
-      <Banner ref={ref} open title={bannerTitle} content={bannerContent} />
+      <Banner ref={ref} open heading={bannerHeading} content={bannerContent} />
     );
 
     expect(ref).toHaveBeenCalledTimes(1);
@@ -156,29 +156,29 @@ describe("Banner", () => {
     // @ts-expect-error requires dismissButtonLabel prop with onDismiss prop
     <Banner
       onDismiss={jest.fn()}
-      title={bannerTitle}
+      heading={bannerHeading}
       content={bannerContent}
     />;
 
     // @ts-expect-error requires onDismiss prop with dismissButtonLabel prop
     <Banner
       dismissButtonLabel={bannerDismissButtonLabel}
-      title={bannerTitle}
+      heading={bannerHeading}
       content={bannerContent}
     />;
 
     <Banner
       onDismiss={jest.fn()}
       dismissButtonLabel={bannerDismissButtonLabel}
-      title={bannerTitle}
+      heading={bannerHeading}
       content={bannerContent}
     />;
-    <Banner title={bannerTitle} content={bannerContent} />;
+    <Banner heading={bannerHeading} content={bannerContent} />;
   });
 
   a11yCheck(() =>
     render(
-      <Banner open title={bannerTitle} content={bannerContent}>
+      <Banner open heading={bannerHeading} content={bannerContent}>
         {bannerActions}
       </Banner>
     )

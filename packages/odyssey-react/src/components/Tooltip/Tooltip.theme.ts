@@ -20,7 +20,7 @@ export const theme: ThemeReducer = (theme) => ({
   TipBackgroundColor: theme.ColorTextBody,
   TipFontSize: theme.FontSizeCaption,
   TipFontWeight: theme.FontWeightBold,
-  TipLineHeight: theme.FontLineHeightTitle,
+  TipLineHeight: theme.FontLineHeightHeading,
   TipBorderWidth: theme.BorderWidthBase,
 
   TailWidth: theme.SpaceRemXs,

@@ -28,7 +28,7 @@ export default {
     children: {
       control: { type: null },
     },
-    title: {
+    legend: {
       defaultValue: "Origination logistics",
       control: { type: "text" },
     },
@@ -40,8 +40,8 @@ export default {
   },
 };
 
-const Template: Story<FieldGroupProps> = ({ title, desc }) => (
-  <FieldGroup title={title} desc={desc}>
+const Template: Story<FieldGroupProps> = ({ legend, desc }) => (
+  <FieldGroup legend={legend} desc={desc}>
     <FieldGroup.Error>
       <Infobox
         title="Route impossible"

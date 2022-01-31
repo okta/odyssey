@@ -21,6 +21,7 @@ import { forwardRefWithStatics, useOid, useOmit } from "../../utils";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import { CaretDownIcon } from "../Icon";
+import { theme } from "./Select.theme";
 import styles from "./Select.module.scss";
 
 interface CommonProps
@@ -90,7 +91,7 @@ export type SelectProps = MultipleProps | SingleProps;
  * options a user can select.
  */
 export const Select = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRefWithStatics<ChoicesHTMLSelectElement, SelectProps, Statics>(

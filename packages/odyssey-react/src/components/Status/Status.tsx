@@ -65,7 +65,10 @@ export const Status = withTheme(
     } = props;
 
     const omitProps = useOmit(rest);
-    const valueClass = useCx(styles.value, styles[`${variant}Variant`]);
+    const descriptorClass = useCx(
+      styles.descriptor,
+      styles[`${variant}Variant`]
+    );
     const labelElement = labelHidden ? (
       <ScreenReaderText children={label} />
     ) : (
@@ -75,7 +78,7 @@ export const Status = withTheme(
     return (
       <Box {...omitProps} className={styles.status} role="status" ref={ref}>
         {labelElement}
-        <span className={valueClass}>{descriptor}</span>
+        <span className={descriptorClass}>{descriptor}</span>
       </Box>
     );
   })

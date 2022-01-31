@@ -14,14 +14,16 @@ import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
   // Font
+  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
   ColorTextBody: theme.ColorTextBody,
   ColorTextBodyInverse: theme.ColorTextBodyInverse,
   ColorTextDanger: theme.ColorTextDanger,
   ColorTextPrimary: theme.ColorTextPrimary,
   ColorTextSub: theme.ColorTextSub,
+  /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
   FontFamilyBase: theme.FontFamilyBase,
   FontLineHeightNormal: theme.FontLineHeightBase,
-  FontLineHeightTitle: theme.FontLineHeightTitle,
+  FontLineHeightHeading: theme.FontLineHeightHeading,
   FontSizeBase: theme.FontSizeBody,
   FontSizeCaption: theme.FontSizeCaption,
   FontStyleItalic: "italic",
@@ -96,7 +98,7 @@ export const theme: ThemeReducer = (theme) => ({
   ColorBorderKbd: theme.ColorBorderDisplay,
   ColorShadowInsideKbd: theme.ColorPaletteNeutral000,
   ColorShadowOutsideKbd: theme.ColorPaletteNeutral200,
-  FontLineHeightKbd: theme.FontLineHeightTitle,
+  FontLineHeightKbd: theme.FontLineHeightHeading,
   FontWeightKbd: theme.FontWeightNormal,
   SpacePaddingBlockKbd: 0,
   SpacePaddingInlineKbd: theme.SpaceRemXs,
