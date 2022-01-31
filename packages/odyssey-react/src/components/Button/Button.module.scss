@@ -31,7 +31,7 @@
   font-size: var(--FontSize);
   font-weight: var(--FontWeight);
   line-height: var(--LineHeight);
-  white-space: var(--WhiteSpace);
+  white-space: nowrap;
 
   &:hover {
     border-color: var(--PrimaryHoverBorderColor);
