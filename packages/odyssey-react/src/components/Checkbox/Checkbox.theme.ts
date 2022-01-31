@@ -44,7 +44,6 @@ export const theme: ThemeReducer = (theme) => ({
   DisabledCheckedBoxBackgroundColor: theme.ColorPrimaryLight,
   DisabledTextColor: theme.ColorTextBody,
 
-
   InvalidBorderColor: theme.ColorBorderDangerBase,
   InvalidBoxBackgroundColor: theme.ColorBackgroundDangerDark,
   InvalidFocusOutlineColor: theme.ColorFocusDanger,
