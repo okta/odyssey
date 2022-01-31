@@ -13,12 +13,13 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  ColumnGapDescription: theme.SpaceRemM,
-  RowGapDescription: theme.SpaceRemXs,
-  FontMaxWidth: theme.FontLineLengthMax,
-  SpaceMarginBlockEnd: theme.SpaceRemM,
-  SpaceMarginBlockStart: 0,
-  SpaceMarginInline: 0,
-  SpacePaddingBlock: 0,
-  SpacePaddingInlineStartOrderedUnordered: theme.SpaceRemM,
+  DescriptionColumnGap: theme.SpaceRemM,
+  DescriptionRowGap: theme.SpaceRemXs,
+  MarginBlockEnd: theme.SpaceRemM,
+  MarginBlockStart: 0,
+  MarginInline: 0,
+  MaxWidth: theme.FontLineLengthMax,
+  OrderedUnorderedPaddingInlineEnd: 0,
+  OrderedUnorderedPaddingInlineStart: theme.SpaceRemM,
+  PaddingBlock: 0,
 });
