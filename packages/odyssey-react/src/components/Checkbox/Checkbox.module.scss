@@ -67,7 +67,7 @@
   &:disabled {
     + .label,
     + .label:hover {
-      color: var(--DisabledTextColor);
+      color: var(--LabelDisabledTextColor);
       cursor: not-allowed;
 
       .box {
@@ -89,7 +89,7 @@
 
   &:invalid {
     + .label {
-      color: var(--InvalidTextColor);
+      color: var(--LabelInvalidTextColor);
 
       .box {
         border-color: var(--BoxInvalidBorderColor);

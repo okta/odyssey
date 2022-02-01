@@ -17,8 +17,6 @@ export const theme: ThemeReducer = (theme) => ({
   BorderRadius: theme.BorderRadiusBase,
   FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightNormal,
-  DisabledTextColor: theme.ColorTextBody,
-  InvalidTextColor: theme.ColorTextDanger,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTiming: theme.TransitionTimingBase,
 
@@ -43,6 +41,8 @@ export const theme: ThemeReducer = (theme) => ({
   BoxSize: "1em",
 
   LabelPaddingInlineStart: theme.SpaceEmS,
+  LabelDisabledTextColor: theme.ColorTextBody,
+  LabelInvalidTextColor: theme.ColorTextDanger,
 
   IndicatorColor: theme.ColorTextBodyInverse,
   IndicatorSize: "0.75em",
