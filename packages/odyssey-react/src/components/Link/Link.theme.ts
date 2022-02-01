@@ -21,5 +21,5 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Space
   IndicatorMarginInlineStart: theme.SpaceEmXs,
-  IndicatorMarginInlineEnd: theme.SpaceEmXs,
+  IconMarginInlineEnd: theme.SpaceEmXs,
 });
