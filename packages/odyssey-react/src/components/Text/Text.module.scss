@@ -11,9 +11,9 @@
  */
 
 .root {
-  color: var(--ColorTextBody);
-  font-family: var(--FontFamilyBase);
-  font-size: var(--FontSizeBase);
+  color: var(--TextColor);
+  font-family: var(--FontFamily);
+  font-size: var(--FontSize);
   font-variant: normal;
   letter-spacing: 0;
   font-feature-settings: "lnum", "pnum";
@@ -22,16 +22,16 @@
   // stylelint-disable-next-line selector-max-type
   abbr,
   &.abbr {
-    border-block-end-width: var(--BorderBlockEndWidthAbbr);
-    border-block-end-style: var(--BorderBlockEndStyleAbbr);
-    border-block-end-color: var(--ColorBorderBlockEndAbbr);
+    border-block-end-width: var(--AbbrBorderBlockEndWidth);
+    border-block-end-style: var(--AbbrBorderBlockEndStyle);
+    border-block-end-color: var(--AbbrBorderBlockEndColor);
     text-decoration: none;
   }
 
   // stylelint-disable-next-line selector-max-type
   em,
   &.em {
-    font-style: var(--FontStyleEm);
+    font-style: var(--EmFontStyle);
 
     // stylelint-disable-next-line selector-max-type, selector-max-class
     > em,
@@ -43,7 +43,7 @@
   // stylelint-disable-next-line selector-max-type
   strong,
   &.strong {
-    font-weight: var(--FontWeightStrong);
+    font-weight: var(--StrongFontWeight);
 
     // stylelint-disable-next-line selector-max-type, selector-max-class
     > strong,
@@ -55,32 +55,32 @@
   // stylelint-disable-next-line selector-max-type
   sup,
   &.sup {
-    font-size: var(--FontSizeSup);
-    line-height: var(--FontLineHeightSup);
+    font-size: var(--SupFontSize);
+    line-height: var(--SupLineHeight);
     vertical-align: super;
   }
 
   // stylelint-disable-next-line selector-max-type
   sub,
   &.sub {
-    font-size: var(--FontSizeSub);
-    line-height: var(--FontLineHeightSub);
+    font-size: var(--SubFontSize);
+    line-height: var(--SubLineHeight);
     vertical-align: sub;
   }
 
   // stylelint-disable-next-line selector-max-type
   blockquote,
   &.blockquote {
-    max-width: var(--FontMaxWidthBlockquote);
-    margin-block-start: var(--SpaceMarginBlockStartBlockquote);
-    margin-block-end: var(--SpaceMarginBlockEndBlockquote);
-    margin-inline: var(--SpaceMarginInlineBlockquote);
-    padding-block: var(--SpacePaddingBlockBlockquote);
-    padding-inline-end: var(--SpacePaddingInlineEndBlockquote);
-    padding-inline-start: var(--SpacePaddingInlineStartBlockquote);
-    border-inline-start-width: var(--BorderInlineStartWidthBlockquote);
-    border-inline-start-style: var(--BorderInlineStartStyleBlockquote);
-    border-inline-start-color: var(--ColorBorderInlineStartBlockquote);
+    max-width: var(--BlockquoteMaxWidth);
+    margin-block-start: var(--BlockquoteMarginBlockStart);
+    margin-block-end: var(--BlockquoteMarginBlockEnd);
+    margin-inline: var(--BlockquoteMarginInline);
+    padding-block: var(--BlockquotePaddingBlock);
+    padding-inline-end: var(--BlockquotePaddingInlineEnd);
+    padding-inline-start: var(--BlockquotePaddingInlineStart);
+    border-inline-start-width: var(--BlockquoteBorderInlineStartWidth);
+    border-inline-start-style: var(--BlockquoteBorderInlineStartStyle);
+    border-inline-start-color: var(--BlockquoteBorderInlineStartColor);
 
     // stylelint-disable-next-line selector-max-type
     &:last-child {
@@ -91,10 +91,10 @@
   // stylelint-disable-next-line selector-max-type
   p,
   &.p {
-    max-width: var(--FontMaxWidthP);
-    margin-block-start: var(--SpaceMarginBlockStartP);
-    margin-block-end: var(--SpaceMarginBlockEndP);
-    margin-inline: var(--SpaceMarginInlineP);
+    max-width: var(--PMaxWidth);
+    margin-block-start: var(--PMarginBlockStart);
+    margin-block-end: var(--PMarginBlockEnd);
+    margin-inline: var(--PMarginInline);
 
     // stylelint-disable-next-line selector-max-type
     &:last-child {
@@ -105,10 +105,10 @@
   // stylelint-disable-next-line selector-max-type
   pre,
   &.pre {
-    margin-block-start: var(--SpaceMarginBlockStartPre);
-    margin-block-end: var(--SpaceMarginBlockEndPre);
-    margin-inline: var(--SpaceMarginInlinePre);
-    font-family: var(--FontFamilyPre);
+    margin-block-start: var(--PreMarginBlockStart);
+    margin-block-end: var(--PreMarginBlockEnd);
+    margin-inline: var(--PreMarginInline);
+    font-family: var(--PreFontFamily);
     white-space: pre-wrap;
     tab-size: 2;
 
@@ -121,51 +121,51 @@
   // stylelint-disable-next-line selector-max-type
   cite,
   &.cite {
-    font-style: var(--FontStyleCite);
+    font-style: var(--CiteFontStyle);
   }
 
   // stylelint-disable-next-line selector-max-type
   del,
   &.del {
     display: inline-block;
-    background-color: var(--ColorBackgroundDel);
+    background-color: var(--DelBackgroundColor);
   }
 
   // stylelint-disable-next-line selector-max-type
   dfn,
   &.dfn {
-    font-style: var(--FontStyleDfn);
+    font-style: var(--DfnFontStyle);
   }
 
   // stylelint-disable-next-line selector-max-type
   ins,
   &.ins {
     display: inline-block;
-    background-color: var(--ColorBackgroundIns);
+    background-color: var(--InsBackgroundColor);
   }
 
   // stylelint-disable-next-line selector-max-type
   kbd,
   &.kbd {
-    @include border-radius(var(--BorderRadiusKbd));
+    @include border-radius(var(--KbdBorderRadius));
 
     display: inline-block;
-    padding-block: var(--SpacePaddingBlockKbd);
-    padding-inline: var(--SpacePaddingInlineKbd);
-    border-width: var(--BorderWidthKbd);
-    border-style: var(--BorderStyleKbd);
-    border-color: var(--ColorBorderKbd);
-    background-color: var(--ColorBackgroundKbd);
-    box-shadow: 0 2px 0 var(--ColorShadowInsideKbd),
-      0 3px 0 var(--ColorShadowOutsideKbd);
-    font-weight: var(--FontWeightKbd);
-    line-height: var(--FontLineHeightKbd);
+    padding-block: var(--KbdPaddingBlock);
+    padding-inline: var(--KbdPaddingInline);
+    border-width: var(--KbdBorderWidth);
+    border-style: var(--KbdBorderStyle);
+    border-color: var(--KbdBorderColor);
+    background-color: var(--KbdBackgroundColor);
+    box-shadow: 0 2px 0 var(--KbdInsideShadowColor),
+      0 3px 0 var(--KbdOutsideShadowColor);
+    font-weight: var(--KbdFontWeight);
+    line-height: var(--KbdLineHeight);
   }
 
   // stylelint-disable-next-line selector-max-type
   mark,
   &.mark {
-    background-color: var(--ColorBackgroundMark);
+    background-color: var(--MarkBackgroundColor);
   }
 
   // stylelint-disable-next-line selector-max-type
@@ -193,39 +193,39 @@
   // stylelint-disable-next-line selector-max-type
   samp,
   &.samp {
-    padding-block: var(--SpacePaddingBlockSamp);
-    padding-inline: var(--SpacePaddingInlineSamp);
-    background-color: var(--ColorBackgroundSamp);
-    box-shadow: var(--ShadowSamp);
-    font-family: var(--FontFamilySamp);
-    font-size: var(--FontSizeSamp);
+    padding-block: var(--SampPaddingBlock);
+    padding-inline: var(--SampPaddingInline);
+    background-color: var(--SampBackgroundColor);
+    box-shadow: var(--SampBoxShadow);
+    font-family: var(--SampFontFamily);
+    font-size: var(--SampFontSize);
 
     // stylelint-disable-next-line selector-max-type, selector-max-class
     kbd,
     .kbd {
-      background-color: var(--ColorBackgroundSampKbd);
+      background-color: var(--SampKbdBackgroundColor);
     }
   }
 
   // stylelint-disable-next-line selector-max-type
   small,
   &.small {
-    font-size: var(--FontSizeSmall);
+    font-size: var(--SmallFontSize);
   }
 
   // stylelint-disable-next-line selector-max-type
   details,
   &.details {
-    font-size: var(--FontSizeDetails);
+    font-size: var(--DetailsFontSize);
   }
 
   // stylelint-disable-next-line selector-max-type
   summary,
   &.summary {
-    @include border-radius(var(--BorderRadiusSummary));
+    @include border-radius(var(--SummaryBorderRadius));
 
-    font-size: var(--FontSizeSummary);
-    font-weight: var(--FontWeightSummary);
+    font-size: var(--SummaryFontSize);
+    font-weight: var(--SummaryFontWeight);
     cursor: default;
 
     // stylelint-disable-next-line selector-max-type
@@ -237,80 +237,80 @@
   // stylelint-disable-next-line selector-max-type
   code,
   &.code {
-    font-family: var(--FontFamilyCode);
+    font-family: var(--CodeFontFamily);
   }
 
   // stylelint-disable-next-line selector-max-type
   var,
   &.var {
-    font-style: var(--FontStyleVar);
-    font-weight: var(--FontWeightVar);
+    font-style: var(--VarFontStyle);
+    font-weight: var(--VarFontWeight);
   }
 }
 
 // Color
 .bodyColor {
-  color: var(--ColorTextBody);
+  color: var(--BodyTextColor);
 }
 
 .bodyInverseColor {
-  color: var(--ColorTextBodyInverse);
+  color: var(--BodyInverseTextColor);
 }
 
 .subColor {
-  color: var(--ColorTextSub);
+  color: var(--SubTextColor);
 }
 
 .dangerColor {
-  color: var(--ColorTextDanger);
+  color: var(--DangerTextColor);
 }
 
 .primaryColor {
-  color: var(--ColorTextPrimary);
+  color: var(--PrimaryTextColor);
 }
 
 // Weight
 .boldWeight {
-  font-weight: var(--FontWeightBold);
+  font-weight: var(--BoldFontWeight);
 }
 
 .normalWeight {
-  font-weight: var(--FontWeightNormal);
+  font-weight: var(--NormalFontWeight);
 }
 
 // Style
 .normalStyle {
-  font-style: var(--FontStyleNormal);
+  font-style: var(--NormalFontStyle);
 }
 
 .italicStyle {
-  font-style: var(--FontStyleItalic);
+  font-style: var(--ItalicFontStyle);
 }
 
 // Transform
 .noneTransform {
-  text-transform: var(--FontTransformNone);
+  text-transform: var(--NoneTextTransform);
 }
 
 .capitalizeTransform {
-  text-transform: var(--FontTransformCapitalize);
+  text-transform: var(--CapitalizeTextTransform);
 }
 
 .uppercaseTransform {
-  text-transform: var(--FontTransformUppercase);
+  text-transform: var(--UppercaseTextTransform);
 }
 
 .lowercaseTransform {
-  text-transform: var(--FontTransformLowercase);
+  text-transform: var(--LowercaseTextTransform);
 }
 
 // Size
 .baseSize {
-  font-size: var(--FontSizeBase);
+  font-size: var(--BaseFontSize);
 }
 
 .captionSize {
-  font-size: var(--FontSizeCaption);
+  font-size: var(--CaptionFontSize);
 }
 
 // Wrap
@@ -324,9 +324,9 @@
 
 // Line height
 .normalLineHeight {
-  line-height: var(--FontLineHeightNormal);
+  line-height: var(--NormalLineHeight);
 }
 
 .headingLineHeight {
-  line-height: var(--FontLineHeightHeading);
+  line-height: var(--HeadingLineHeight);
 }
