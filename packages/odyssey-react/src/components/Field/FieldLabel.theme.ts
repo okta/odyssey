@@ -13,9 +13,10 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  SpaceMarginBlockStart: 0,
-  SpaceMarginBlockEnd: theme.SpaceRemXs,
-  SpaceMarginInline: 0,
-  SpacePaddingInline: 0,
-  SpacePaddingInlineStartOptional: theme.SpaceRemS,
+  MarginBlockStart: 0,
+  MarginBlockEnd: theme.SpaceRemXs,
+  MarginInline: 0,
+  PaddingInline: 0,
+
+  OptionalLabelPaddingInlineStart: theme.SpaceRemS,
 });

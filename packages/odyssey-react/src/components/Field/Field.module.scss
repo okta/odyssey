@@ -11,15 +11,15 @@
  */
 
 .root {
-  max-width: var(--FontMaxWidth);
+  max-width: var(--MaxWidth);
   border-width: var(--BorderWidth);
   border-style: var(--BorderStyle);
   border-color: var(--BorderColor);
-  margin-block-start: var(--SpaceMarginBlockStart);
-  margin-block-end: var(--SpaceMarginBlockEnd);
-  margin-inline: var(--SpaceMarginInline);
-  padding-block-start: var(--SpacePaddingBlockStart);
-  padding-inline: var(--SpacePaddingInline);
+  margin-block-start: var(--MarginBlockStart);
+  margin-block-end: var(--MarginBlockEnd);
+  margin-inline: var(--MarginInline);
+  padding-block-start: var(--PaddingBlockStart);
+  padding-inline: var(--PaddingInline);
 
   &:last-child {
     margin-block-end: 0;
@@ -27,5 +27,5 @@
 }
 
 .fieldset {
-  padding-block-end: var(--SpacePaddingBlockEnd);
+  padding-block-end: var(--FieldsetPaddingBlockEnd);
 }
