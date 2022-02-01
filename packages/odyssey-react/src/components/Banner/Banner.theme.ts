@@ -13,26 +13,27 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  // Space
-  SpaceRemXs: theme.SpaceRemXs,
-  SpaceRemS: theme.SpaceRemS,
-  SpaceRemM: theme.SpaceRemM,
-  SpaceRemL: theme.SpaceRemL,
+  MaxLineLength: theme.FontLineLengthMax,
 
-  // Type
-  FontLineLengthMax: theme.FontLineLengthMax,
+  PaddingBlock: theme.SpaceRemS,
+  PaddingInline: theme.SpaceRemM,
 
-  // Info Variant
-  ColorPrimaryLight: theme.ColorPrimaryLight,
+  IconMarginInlineEnd: theme.SpaceRemS,
+  IconSize: theme.FontSizeHeading5,
 
-  // Success Variant
-  ColorSuccessLight: theme.ColorSuccessLight,
+  HeadingMarginInlineEnd: theme.SpaceRemXs,
 
-  // Caution Variant
-  ColorCautionLight: theme.ColorCautionLight,
+  ContentMarginInlineEnd: theme.SpaceRemM,
 
-  // Danger Variant
-  ColorDangerLight: theme.ColorDangerLight,
+  DismissButtonInsetInlineEnd: theme.SpaceRemM,
+  DismissButtonMarginInlineStart: theme.SpaceRemM,
 
-  SizeIcon: theme.FontSizeHeading5,
+  DismissablePaddingBlock: theme.SpaceRemS,
+  DismissablePaddingInlineEnd: theme.SpaceRemL,
+  DismissablePaddingInlineStart: theme.SpaceRemM,
+
+  CautionBackgroundColor: theme.ColorCautionLight,
+  DangerBackgroundColor: theme.ColorDangerLight,
+  InfoBackgroundColor: theme.ColorPrimaryLight,
+  SuccessBackgroundColor: theme.ColorSuccessLight,
 });
