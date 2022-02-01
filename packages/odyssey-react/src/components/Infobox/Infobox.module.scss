@@ -20,13 +20,13 @@
     ". actions";
   grid-template-columns: max-content 1fr;
   width: 100%;
-  max-width: calc(var(--FontLineLengthMax) + calc(var(--SpacePadding) * 2));
-  padding-block: var(--SpacePadding);
-  padding-inline: var(--SpacePadding);
+  max-width: calc(var(--FontLineLengthMax) + calc(var(--Padding) * 2));
+  padding-block: var(--Padding);
+  padding-inline: var(--Padding);
   column-gap: var(--ColumnGap);
 
   &:not(:last-child) {
-    margin-block-end: var(--SpaceMarginBlockEnd);
+    margin-block-end: var(--MarginBlockEnd);
   }
 }
 
@@ -46,7 +46,7 @@
   grid-area: content;
 
   &:not(:last-child) {
-    margin-block-end: var(--ContentSpaceMarginBlockEnd);
+    margin-block-end: var(--ContentMarginBlockEnd);
   }
 }
 
@@ -59,17 +59,17 @@
 /* Variants */
 
 .infoVariant {
-  background-color: var(--ColorBackgroundInfo);
+  background-color: var(--InfoBackgroundColor);
 }
 
 .successVariant {
-  background-color: var(--ColorBackgroundSuccess);
+  background-color: var(--SuccessBackgroundColor);
 }
 
 .cautionVariant {
-  background-color: var(--ColorBackgroundCaution);
+  background-color: var(--CautionBackgroundColor);
 }
 
 .dangerVariant {
-  background-color: var(--ColorBackgroundDanger);
+  background-color: var(--DangerBackgroundColor);
 }
