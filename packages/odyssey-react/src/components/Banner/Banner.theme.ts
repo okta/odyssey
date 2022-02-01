@@ -25,8 +25,8 @@ export const theme: ThemeReducer = (theme) => ({
 
   ContentMarginInlineEnd: theme.SpaceRemM,
 
-  DismissInsetInlineEnd: theme.SpaceRemM,
-  DismissMarginInlineStart: theme.SpaceRemM,
+  DismissButtonInsetInlineEnd: theme.SpaceRemM,
+  DismissButtonMarginInlineStart: theme.SpaceRemM,
 
   DismissablePaddingBlock: theme.SpaceRemS,
   DismissablePaddingInlineEnd: theme.SpaceRemL,
