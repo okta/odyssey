@@ -16,7 +16,7 @@ export const theme: ThemeReducer = (theme) => ({
   MarginBlockEnd: theme.SpaceRemXs,
   BorderColor: theme.ColorBorderUi,
   BorderRadius: theme.BorderRadiusBase,
-  BorderSize: "2px",
+  BorderWidth: "2px",
   BorderStyle: theme.BorderStyleBase,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTiming: theme.TransitionTimingBase,
