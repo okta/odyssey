@@ -56,7 +56,7 @@
       .box {
         @include outline(var(--FocusOutlineColor), var(--FocusOutlineWidth));
 
-        border-color: var(--FocusBorderColor);
+        border-color: var(--BoxFocusBorderColor);
       }
     }
   }
