@@ -19,8 +19,8 @@
   &:indeterminate {
     + .label {
       .box {
-        border-color: var(--CheckedBoxBorderColor);
-        background-color: var(--CheckedBoxBackgroundColor);
+        border-color: var(--BoxCheckedBorderColor);
+        background-color: var(--BoxCheckedBackgroundColor);
       }
     }
   }
@@ -28,7 +28,7 @@
   &:checked {
     + .label {
       .indicator {
-        color: var(--CheckColor);
+        color: var(--IndicatorColor);
       }
     }
   }
@@ -46,7 +46,7 @@
   &:indeterminate {
     + .label {
       .indicator {
-        color: var(--CheckColor);
+        color: var(--IndicatorColor);
       }
     }
   }
@@ -54,7 +54,7 @@
   &:focus {
     + .label {
       .box {
-        @include outline(var(--FocusOutlineColor), var(--FocusOutlineWidth));
+        @include outline(var(--BoxFocusOutlineColor), var(--BoxFocusOutlineWidth));
 
         border-color: var(--BoxFocusBorderColor);
       }
@@ -68,8 +68,8 @@
       cursor: not-allowed;
 
       .box {
-        border-color: var(--DisabledBorderColor);
-        background-color: var(--DisabledBoxBackgroundColor);
+        border-color: var(--BoxDisabledBorderColor);
+        background-color: var(--BoxDisabledBackgroundColor);
       }
     }
 
@@ -77,8 +77,8 @@
     &:indeterminate {
       + .label {
         .box {
-          border-color: var(--DisabledCheckedBoxBorderColor);
-          background-color: var(--DisabledCheckedBoxBackgroundColor);
+          border-color: var(--BoxDisabledCheckedBorderColor);
+          background-color: var(--BoxDisabledCheckedBackgroundColor);
         }
       }
     }
@@ -89,7 +89,7 @@
       color: var(--InvalidTextColor);
 
       .box {
-        border-color: var(--InvalidBorderColor);
+        border-color: var(--BoxInvalidBorderColor);
       }
     }
 
@@ -97,7 +97,7 @@
     &:indeterminate {
       + .label {
         .box {
-          background-color: var(--InvalidBoxBackgroundColor);
+          background-color: var(--BoxInvalidBackgroundColor);
         }
       }
     }
@@ -106,7 +106,7 @@
       + .label {
         &:hover {
           .box {
-            border-color: var(--InvalidHoverBorderColor);
+            border-color: var(--BoxInvalidHoverBorderColor);
           }
         }
       }
@@ -120,7 +120,7 @@
             var(--FocusOutlineWidth)
           );
 
-          border-color: var(--InvalidBorderColor);
+          border-color: var(--BoxInvalidBorderColor);
         }
       }
     }
@@ -155,9 +155,9 @@
   .box {
     width: var(--BoxSize);
     height: var(--BoxSize);
-    border-width: var(--BorderWidth)
-    border-style: var(--BorderStyle)
-    border-color: var(--BorderColor);
+    border-width: var(--BoxBorderWidth);
+    border-style: var(--BoxBorderStyle);
+    border-color: var(--BoxBorderColor);
     background-color: var(--BoxBackgroundColor);
   }
 
@@ -166,7 +166,7 @@
   .indicator {
     z-index: 1;
     color: transparent;
-    font-size: var(--CheckSize);
+    font-size: var(--IndicatorSize);
   }
 
   &:last-child {
