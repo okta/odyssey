@@ -11,40 +11,40 @@
  */
 
 .root {
-  color: var(--ColorTextPrimary);
+  color: var(--PrimaryTextColor);
   text-decoration: none;
 
   &:hover {
-    color: var(--ColorTextPrimary);
+    color: var(--PrimaryTextColor);
     text-decoration: underline;
   }
 
   &:visited {
-    color: var(--ColorTextPrimary);
+    color: var(--PrimaryTextColor);
   }
 }
 
 .indicator {
   display: inline-block;
-  margin-inline-start: var(--SpaceEmXs);
+  margin-inline-start: var(--XsSpaceEm);
 }
 
 .icon {
   display: inline-block;
-  margin-inline-end: var(--SpaceEmXs);
+  margin-inline-end: var(--XsSpaceEm);
 }
 
 /* Variant */
 
 .secondaryVariant {
-  color: var(--ColorTextBody);
+  color: var(--BodyTextColor);
   text-decoration: underline;
 
   &:hover {
-    color: var(--ColorTextBody);
+    color: var(--BodyTextColor);
   }
 
   &:visited {
-    color: var(--ColorTextBody);
+    color: var(--BodyTextColor);
   }
 }
