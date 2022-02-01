@@ -29,6 +29,7 @@ export const theme: ThemeReducer = (theme) => ({
   FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightBold,
   LineHeight: theme.FontLineHeightBase,
+  FocusOutlineColor: theme.ColorFocusPrimary,
   FocusOutlineWidth: theme.FocusOutlineWidthBase,
 
   // Label

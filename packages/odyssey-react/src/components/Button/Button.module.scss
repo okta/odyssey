@@ -39,7 +39,7 @@
   }
 
   &:focus {
-    @include outline;
+    @include outline(var(--FocusOutlineColor), var(--FocusOutlineWidth));
 
     background-color: var(--PrimaryFocusBackgroundColor);
   }
