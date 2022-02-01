@@ -19,59 +19,62 @@
   min-width: var(--MinWidth);
   max-width: var(--MaxWidth);
   min-height: var(--MinHeight);
-  padding-block-start: var(--SpacePaddingBlockStart);
-  padding-block-end: var(--SpacePaddingBlockEnd);
-  padding-inline: var(--SpacePaddingInline);
-  margin-block-start: var(--SpaceMarginBlockStart);
-  margin-block-end: var(--SpaceMarginBlockEnd);
-  margin-inline: var(--SpaceMarginInline);
+  padding-block-start: var(--PaddingBlockStart);
+  padding-block-end: var(--PaddingBlockEnd);
+  padding-inline: var(--PaddingInline);
+  margin-block-start: var(--MarginBlockStart);
+  margin-block-end: var(--MarginBlockEnd);
+  margin-inline: var(--MarginInline);
   transition-property: border-color, background-color, box-shadow;
   transition-duration: var(--TransitionDuration);
-  transition-timing-function: var(--TransitionTiming);
+  transition-timing-function: var(--TransitionTimingFunction);
   border-width: var(--BorderWidth);
   border-style: var(--BorderStyle);
-  border-color: var(--ColorBorder);
-  background-color: var(--ColorBackground);
-  box-shadow: 0 0 0 0 var(--ColorShadow);
-  color: var(--ColorText);
+  border-color: var(--BorderColor);
+  background-color: var(--BackgroundColor);
+  box-shadow: 0 0 0 0 var(--BoxShadowColor);
+  color: var(--TextColor);
   font-family: var(--FontFamily);
   font-size: var(--FontSize);
   line-height: var(--LineHeight);
 
   &:hover,
   &:focus {
-    border-color: var(--ColorBorderHoverFocus);
+    border-color: var(--HoverFocusBorderColor);
   }
 
   &:focus {
-    @include outline(var(--ColorFocusOutline), var(--FocusOutlineWidth));
+    @include outline(var(--FocusBoxShadowColor), var(--FocusBoxShadowSpread));
   }
 
   &:invalid {
-    border-color: var(--ColorBorderInvalid);
+    border-color: var(--InvalidBorderColor);
   }
 
   &:disabled {
     opacity: 1;
-    color: var(--ColorTextDisabled);
+    color: var(--DisabledTextColor);
     cursor: not-allowed;
   }
 
   &:disabled,
   &[readonly] {
-    border-color: var(--ColorBorderDisabled);
-    background-color: var(--ColorBackgroundDisabled);
+    border-color: var(--DisabledBorderColor);
+    background-color: var(--DisabledBackgroundColor);
 
     &:hover {
-      border-color: var(--ColorBorderDisabled);
+      border-color: var(--DisabledBorderColor);
     }
   }
 
   &:invalid:focus {
-    @include outline(var(--ColorFocusOutlineInvalid), var(--FocusOutlineWidth));
+    @include outline(
+      var(--InvalidFocusBoxShadowColor),
+      var(--FocusBoxShadowSpread)
+    );
   }
 
   &::placeholder {
-    color: var(--ColorTextPlaceholder);
+    color: var(--PlaceholderTextColor);
   }
 }
