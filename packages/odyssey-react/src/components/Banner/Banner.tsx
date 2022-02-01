@@ -125,7 +125,7 @@ export const Banner = withTheme(
           </section>
         )}
         {onDismiss && (
-          <span className={styles.dismiss}>
+          <span className={styles.dismissButton}>
             <Button
               variant="dismiss"
               onClick={onDismiss}

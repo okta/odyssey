@@ -48,11 +48,11 @@
   justify-content: end;
 }
 
-.dismiss {
+.dismissButton {
   position: absolute;
   inset-block-start: 50%;
-  inset-inline-end: var(--DismissInsetInlineEnd);
-  margin-inline-start: var(--DismissMarginInlineStart);
+  inset-inline-end: var(--DismissButtonInsetInlineEnd);
+  margin-inline-start: var(--DismissButtonMarginInlineStart);
   transform: translateY(-50%);
 }
 
