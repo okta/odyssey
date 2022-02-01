@@ -35,13 +35,13 @@ export const theme: ThemeReducer = (theme) => ({
 
   LabelPaddingInlineStart: theme.SpaceEmS,
 
-  CheckedBorderColor: theme.ColorPrimaryBase,
   CheckedBoxBackgroundColor: theme.ColorPrimaryBase,
+  CheckedBoxBorderColor: theme.ColorPrimaryBase,
 
   DisabledBorderColor: theme.ColorBorderDisabled,
   DisabledBoxBackgroundColor: theme.ColorBackgroundDisabled,
-  DisabledCheckedBorderColor: theme.ColorPrimaryLight,
   DisabledCheckedBoxBackgroundColor: theme.ColorPrimaryLight,
+  DisabledCheckedBoxBorderColor: theme.ColorPrimaryLight,
   DisabledTextColor: theme.ColorTextBody,
 
   InvalidBorderColor: theme.ColorBorderDangerBase,

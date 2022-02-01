@@ -19,7 +19,7 @@
   &:indeterminate {
     + .label {
       .box {
-        border-color: var(--CheckedBorderColor);
+        border-color: var(--CheckedBoxBorderColor);
         background-color: var(--CheckedBoxBackgroundColor);
       }
     }
@@ -77,7 +77,7 @@
     &:indeterminate {
       + .label {
         .box {
-          border-color: var(--DisabledCheckedBorderColor);
+          border-color: var(--DisabledCheckedBoxBorderColor);
           background-color: var(--DisabledCheckedBoxBackgroundColor);
         }
       }
