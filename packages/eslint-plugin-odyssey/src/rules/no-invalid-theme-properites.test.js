@@ -13,48 +13,50 @@
 const rule = require("./no-invalid-theme-properties");
 const RuleTester = require("eslint").RuleTester;
 
-const { string, format, filename, dirname } = rule.meta.messages;
+const { declaration, string, format, filename, dirname } = rule.meta.messages;
 const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 2015 } });
 
 ruleTester.run("no-invalid-theme-properties", rule, {
   valid: [
-    { code: "({ Foo: 0 })" },
-    { code: "({ FooBar: 0 })" },
-    { code: "({ FooBarBaz: 0 })" },
+    { code: "({ FooX: 0 })" },
+    { code: "({ FooBarX: 0 })" },
     { code: "({ FooBarBazX: 0 })" },
-    { code: "({ FooBarBazXs: 0 })" },
   ],
 
   invalid: [
     {
-      code: "({ foo: 0 })",
+      code: "({ fooX: 0 })",
       errors: [{ message: format }],
     },
     {
-      code: "({ fooBar: 0 })",
+      code: "({ fooBarX: 0 })",
       errors: [{ message: format }],
     },
     {
-      code: "({ $fooBarBaz: 0 })",
+      code: "({ $fooBarBazX: 0 })",
       errors: [{ message: format }],
     },
     {
-      code: "({ fooBarBaz0: 0 })",
+      code: "({ fooBarBaz0X: 0 })",
       errors: [{ message: format }],
     },
     {
-      code: "({ [Symbol('foo')]: 0 })",
+      code: "({ [Symbol('fooX')]: 0 })",
       errors: [{ message: string }],
     },
     {
-      code: "({ Foo: 0 })",
+      code: "({ FooX: 0 })",
       errors: [{ message: dirname }],
       filename: "Foo/Bar.theme.ts",
     },
     {
-      code: "({ Bar: 0 })",
+      code: "({ BarX: 0 })",
       errors: [{ message: filename }],
       filename: "Foo/Bar.theme.ts",
+    },
+    {
+      code: "({ Baz: 0 })",
+      errors: [{ message: declaration }],
     },
   ],
 });
