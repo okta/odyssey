@@ -32,7 +32,6 @@ export const theme: ThemeReducer = (theme) => ({
   DismissablePaddingInlineEnd: theme.SpaceRemL,
   DismissablePaddingInlineStart: theme.SpaceRemM,
 
-  BaseBackgroundColor: theme.ColorPrimaryLight,
   CautionBackgroundColor: theme.ColorCautionLight,
   DangerBackgroundColor: theme.ColorDangerLight,
   InfoBackgroundColor: theme.ColorPrimaryLight,
