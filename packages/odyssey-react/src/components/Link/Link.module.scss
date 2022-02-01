@@ -37,14 +37,14 @@
 /* Variant */
 
 .secondaryVariant {
-  color: var(--BodyTextColor);
+  color: var(--SecondaryTextColor);
   text-decoration: underline;
 
   &:hover {
-    color: var(--BodyTextColor);
+    color: var(--SecondaryTextColor);
   }
 
   &:visited {
-    color: var(--BodyTextColor);
+    color: var(--SecondaryTextColor);
   }
 }

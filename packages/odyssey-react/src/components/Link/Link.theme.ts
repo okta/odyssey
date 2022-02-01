@@ -17,7 +17,7 @@ export const theme: ThemeReducer = (theme) => ({
   TextColor: theme.ColorTextPrimary,
 
   // Secondary Variant
-  BodyTextColor: theme.ColorTextBody,
+  SecondaryTextColor: theme.ColorTextBody,
 
   // Space
   MarginInlineStart: theme.SpaceEmXs,
