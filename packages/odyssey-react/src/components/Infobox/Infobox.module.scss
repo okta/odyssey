@@ -20,9 +20,9 @@
     ". actions";
   grid-template-columns: max-content 1fr;
   width: 100%;
-  max-width: calc(var(--FontLineLengthMax) + calc(var(--Padding) * 2));
-  padding-block: var(--Padding);
-  padding-inline: var(--Padding);
+  max-width: calc(var(--MaxLineLength) + calc(var(--Padding) * 2));
+  padding-block: var(--PaddingBlock);
+  padding-inline: var(--PaddingInline);
   column-gap: var(--ColumnGap);
 
   &:not(:last-child) {
