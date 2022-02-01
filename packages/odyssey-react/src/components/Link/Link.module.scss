@@ -26,12 +26,12 @@
 
 .indicator {
   display: inline-block;
-  margin-inline-start: var(--MarginInlineStart);
+  margin-inline-start: var(--IndicatorMarginInlineStart);
 }
 
 .icon {
   display: inline-block;
-  margin-inline-end: var(--MarginInlineEnd);
+  margin-inline-end: var(--IndicatorMarginInlineEnd);
 }
 
 /* Variant */
