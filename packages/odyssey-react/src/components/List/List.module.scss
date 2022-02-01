@@ -11,11 +11,11 @@
  */
 
 .root {
-  max-width: var(--FontMaxWidth);
-  margin-block-start: var(--SpaceMarginBlockStart);
-  margin-block-end: var(--SpaceMarginBlockEnd);
-  margin-inline: var(--SpaceMarginInline);
-  padding-block: var(--SpacePaddingBlock);
+  max-width: var(--MaxWidth);
+  margin-block-start: var(--MarginBlockStart);
+  margin-block-end: var(--MarginBlockEnd);
+  margin-inline: var(--MarginInline);
+  padding-block: var(--PaddingBlock);
 }
 
 .unordered {
@@ -28,8 +28,8 @@
 
 .ordered,
 .unordered {
-  padding-inline-start: var(--SpacePaddingInlineStartOrderedUnordered);
-  padding-inline-end: 0;
+  padding-inline-start: var(--OrderedUnorderedPaddingInlineStart);
+  padding-inline-end: var(--OrderedUnorderedPaddingInlineEnd);
   list-style-position: outside;
 
   &:last-child {
@@ -47,8 +47,8 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(min-content, max-content));
   padding-inline: 0;
-  column-gap: var(--ColumnGapDescription);
-  row-gap: var(--RowGapDescription);
+  column-gap: var(--DescriptionColumnGap);
+  row-gap: var(--DescriptionRowGap);
 
   &:last-child {
     margin-block-end: 0;
