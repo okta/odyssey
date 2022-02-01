@@ -23,7 +23,6 @@ export const theme: ThemeReducer = (theme) => ({
   PaddingBlockStart: 0,
   PaddingInline: 0,
 
-  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   FieldsetPaddingBlockEnd: theme.SpaceRemM,
-  /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
 });
