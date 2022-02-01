@@ -119,8 +119,8 @@
       + .label {
         .box {
           @include outline(
-            var(--InvalidFocusOutlineColor),
-            var(--FocusOutlineWidth)
+            var(--BoxInvalidFocusOutlineColor),
+            var(--BoxFocusOutlineWidth)
           );
 
           border-color: var(--BoxInvalidBorderColor);
