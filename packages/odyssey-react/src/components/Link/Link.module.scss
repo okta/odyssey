@@ -11,27 +11,27 @@
  */
 
 .root {
-  color: var(--PrimaryTextColor);
+  color: var(--TextColor);
   text-decoration: none;
 
   &:hover {
-    color: var(--PrimaryTextColor);
+    color: var(--TextColor);
     text-decoration: underline;
   }
 
   &:visited {
-    color: var(--PrimaryTextColor);
+    color: var(--TextColor);
   }
 }
 
 .indicator {
   display: inline-block;
-  margin-inline-start: var(--XsSpaceEm);
+  margin-inline-start: var(--MarginInlineStart);
 }
 
 .icon {
   display: inline-block;
-  margin-inline-end: var(--XsSpaceEm);
+  margin-inline-end: var(--MarginInlineEnd);
 }
 
 /* Variant */
