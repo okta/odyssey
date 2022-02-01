@@ -26,8 +26,9 @@
 }
 
 .headerCellCol {
-  border-block-start: var(--HeaderCellColBorderWidth)
-    var(--HeaderCellColBorderStyle) var(--HeaderCellColBorderColor);
+  border-block-start-width: var(--HeaderCellColumnBorderWidth);
+  border-block-start-style: var(--HeaderCellColumnBorderStyle);
+  border-block-start-color: var(--HeaderCellColumnBorderColor);
 }
 
 /* Table states */
