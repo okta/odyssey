@@ -28,7 +28,7 @@
   inset-inline-start: 0;
   align-items: center;
   justify-content: center;
-  background-color: var(--ColorBackgroundOverlay);
+  background-color: var(--OverlayBackgroundColor);
 
   .root[aria-hidden="false"] & {
     animation-name: overlayIn;
@@ -49,11 +49,11 @@
   position: relative;
   max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
   max-height: calc(100vh - #{$spacing-m});
-  padding-block-start: var(--SpacePaddingBlockStartDialog);
-  padding-block-end: var(--SpacePaddingBlockEndDialog);
-  padding-inline: var(--SpacePaddingInlineDialog);
+  padding-block-start: var(--DialogPaddingBlockStart);
+  padding-block-end: var(--DialogPaddingBlockEnd);
+  padding-inline: var(--DialogPaddingInline);
   overflow-y: auto;
-  background-color: var(--ColorBackgroundDialog);
+  background-color: var(--DialogBackgroundColor);
 
   .root[aria-hidden="false"] & {
     animation-name: dialogIn;
@@ -75,20 +75,20 @@
 
 .dismiss {
   align-self: flex-end;
-  margin-block-end: var(--SpaceMarginBlockEndDismiss);
+  margin-block-end: var(--DismissMarginBlockEnd);
 }
 
 .content {
-  padding-block-start: var(--SpacePaddingBlockStartContent);
-  padding-block-end: var(--SpacePaddingBlockEndContent);
-  padding-inline: var(--SpacePaddingInlineContent);
-  font-size: var(--FontSizeContent);
+  padding-block-start: var(--ContentPaddingBlockStart);
+  padding-block-end: var(--ContentPaddingBlockEnd);
+  padding-inline: var(--ContentPaddingInline);
+  font-size: var(--ContentFontSize);
 }
 
 .footer {
   display: flex;
   justify-content: flex-end;
-  padding-block-end: var(--SpacePaddingBlockEndFooter);
+  padding-block-end: var(--FooterPaddingBlockEnd);
 }
 
 @keyframes overlayIn {
