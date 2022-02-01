@@ -13,6 +13,6 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  SpaceMarginBlockStart: "-0.375rem",
-  SpaceMarginBlockEnd: theme.SpaceRemXs,
+  MarginBlockStart: "-0.375rem",
+  MarginBlockEnd: theme.SpaceRemXs,
 });

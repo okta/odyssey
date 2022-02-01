@@ -12,12 +12,12 @@
 
 .root {
   width: 100%;
-  margin-block-start: var(--SpaceMarginBlockStart);
-  margin-block-end: var(--SpaceMarginBlockEnd);
-  margin-inline: var(--SpaceMarginInline);
-  padding-inline: var(--SpacePaddingInline);
+  margin-block-start: var(--MarginBlockStart);
+  margin-block-end: var(--MarginBlockEnd);
+  margin-inline: var(--MarginInline);
+  padding-inline: var(--PaddingInline);
 }
 
 .optionalLabel {
-  padding-inline-start: var(--SpacePaddingInlineStartOptional);
+  padding-inline-start: var(--OptionalLabelPaddingInlineStart);
 }
