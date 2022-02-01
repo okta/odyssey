@@ -38,14 +38,15 @@ interface CommonProps {
   unstyled?: boolean;
 }
 
-type UnorderedProps = CommonProps & ComponentPropsWithRef<"ul">;
-type OrderedProps = CommonProps & ComponentPropsWithRef<"ol">;
-type DescriptionProps = CommonProps & ComponentPropsWithRef<"dl">;
+type UnorderedProps = ComponentPropsWithRef<"ul">;
+type OrderedProps = ComponentPropsWithRef<"ol">;
+type DescriptionProps = ComponentPropsWithRef<"dl">;
 
-export type ListProps = Omit<
-  UnorderedProps | OrderedProps | DescriptionProps,
-  "style" | "className" | "color"
->;
+export type ListProps = CommonProps &
+  Omit<
+    UnorderedProps | OrderedProps | DescriptionProps,
+    "style" | "className" | "color" | "children"
+  >;
 
 type Statics = {
   Item: typeof ListItem;
