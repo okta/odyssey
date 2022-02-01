@@ -18,12 +18,12 @@
   &:checked {
     + .label {
       &::before {
-        border-color: var(--ColorBorderChecked);
-        background-color: var(--ColorBackgroundChecked);
+        border-color: var(--CircleCheckedBorderColor);
+        background-color: var(--CircleCheckedBackgroundColor);
       }
 
       &::after {
-        background: var(--ColorDot);
+        background-color: var(--DotCheckedBackgroundColor);
       }
     }
   }
@@ -32,33 +32,34 @@
   &.focus {
     + .label {
       &::before {
-        @include outline(var(--ColorFocusOutline), var(--FocusOutlineWidth));
-
-        border-color: var(--ColorBorderFocus);
+        border-color: var(--DotFocusBorderColor);
+        outline: 0;
+        box-shadow: 0 0 0 var(--CircleFocusBoxShadowSpread)
+          var(--CircleFocusBoxShadowColor);
       }
     }
   }
 
   &:disabled {
     + .label {
-      color: var(--ColorTextDisabled);
+      color: var(--LabelDisabledTextColor);
       cursor: not-allowed;
 
       &::before {
-        border-color: var(--ColorBorderDisabled);
-        background-color: var(--ColorBackgroundDisabled);
+        border-color: var(--CircleDisabledBorderColor);
+        background-color: var(--CircleDisabledBackgroundColor);
       }
     }
 
     &:checked {
       + .label {
         &::before {
-          border-color: var(--ColorBorderDisabledChecked);
-          background-color: var(--ColorBackgroundDisabledChecked);
+          border-color: var(--CircleDisabledCheckedBorderColor);
+          background-color: var(--CircleDisabledBackgroundColor);
         }
 
         &::after {
-          background-color: var(--ColorDot);
+          background-color: var(--DotDisabledCheckedBackgroundColor);
         }
       }
     }
@@ -67,21 +68,21 @@
   &:invalid,
   &.invalid {
     &:hover:not(:checked) + .label::before {
-      border-color: var(--ColorBorderInvalidHover);
+      border-color: var(--CircleInvalidHoverBorderColor);
     }
 
     + .label {
-      color: var(--ColorTextInvalid);
+      color: var(--LabelInvalidTextColor);
 
       &::before {
-        border-color: var(--ColorBorderInvalid);
+        border-color: var(--CircleInvalidBorderColor);
       }
     }
 
     &:checked {
       + .label {
         &::before {
-          background-color: var(--ColorBackgroundInvalid);
+          background-color: var(--CircleInvalidCheckedBackgroundColor);
         }
       }
     }
@@ -89,12 +90,10 @@
     &:focus {
       + .label {
         &::before {
-          @include outline(
-            var(--ColorFocusOutlineInvalid),
-            var(--FocusOutlineWidth)
-          );
-
-          border-color: var(--ColorBorderInvalid);
+          border-color: var(--CircleInvalidFocusBorderColor);
+          outline: 0;
+          box-shadow: 0 0 0 var(--CircleInvalidFocusBoxShadowSpread)
+            var(--CircleInvalidFocusBoxShadowColor);
         }
       }
     }
@@ -104,12 +103,12 @@
 .label {
   display: block;
   position: relative;
-  margin-block-end: var(--MarginBlockEnd);
+  margin-block-end: var(--LabelMarginBlockEnd);
   padding-inline-start: calc(
     var(--CircleSize) + var(--LabelPaddingInlineStart)
   );
-  font-size: var(--FontSize);
-  font-weight: var(--FontWeight);
+  font-size: var(--LabelFontSize);
+  font-weight: var(--LabelFontWeight);
   text-align: start;
 
   &::before,
@@ -125,16 +124,18 @@
     height: var(--CircleSize);
     transition-property: border-color, background, opacity, box-shadow;
     transition-duration: var(--TransitionDuration);
-    transition-timing-function: var(--TransitionTiming);
-    border: var(--BorderSize) var(--BorderStyle) transparent;
+    transition-timing-function: var(--TransitionTimingFunction);
+    border-width: var(--CircleDotBorderWidth);
+    border-style: var(--CircleDotBorderStyle);
+    border-color: transparent;
   }
 
   /* Circle */
 
   &::before {
     transform: translateY(-50%);
-    border-color: var(--ColorBorder);
-    background-color: var(--ColorBackground);
+    border-color: var(--CircleBorderColor);
+    background-color: var(--CircleBackgroundColor);
   }
 
   /* Dot */
@@ -149,7 +150,7 @@
   &:hover,
   &.hover {
     &::before {
-      border-color: var(--ColorBorderHover);
+      border-color: var(--DotHoverBorderColor);
     }
   }
 }
