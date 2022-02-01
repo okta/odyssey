@@ -20,5 +20,5 @@ export const theme: ThemeReducer = (theme) => ({
   SortIndicatorTextColor: theme.ColorTextBody,
 
   UnsortedSortIndicatorTextColor: theme.ColorTextSub,
-  UnsortedHoverSortIndicatorTextColor: theme.ColorTextBody,
+  UnsortedSortIndicatorHoverTextColor: theme.ColorTextBody,
 });

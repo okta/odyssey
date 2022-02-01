@@ -24,9 +24,9 @@ export const theme: ThemeReducer = (theme) => ({
   HeaderTextColor: theme.ColorTextBody,
   HeaderFontWeight: theme.FontWeightBold,
 
-  HeaderCellColBorderWidth: theme.BorderWidthBase,
-  HeaderCellColBorderStyle: theme.BorderStyleBase,
-  HeaderCellColBorderColor: theme.ColorBorderDisplay,
+  HeaderCellColumnBorderWidth: theme.BorderWidthBase,
+  HeaderCellColumnBorderStyle: theme.BorderStyleBase,
+  HeaderCellColumnBorderColor: theme.ColorBorderDisplay,
 
   EmptyPaddingBlock: theme.SpaceRemL,
   EmptyPaddingInline: theme.SpaceRemXl,
