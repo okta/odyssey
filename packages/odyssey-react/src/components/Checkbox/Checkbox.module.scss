@@ -54,7 +54,10 @@
   &:focus {
     + .label {
       .box {
-        @include outline(var(--BoxFocusOutlineColor), var(--BoxFocusOutlineWidth));
+        @include outline(
+          var(--BoxFocusOutlineColor),
+          var(--BoxFocusOutlineWidth)
+        );
 
         border-color: var(--BoxFocusBorderColor);
       }
