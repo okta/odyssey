@@ -16,11 +16,13 @@ export const theme: ThemeReducer = (theme) => ({
   BorderColor: "currentcolor",
   BorderStyle: "none",
   BorderWidth: 0,
-  FontMaxWidth: theme.FontLineLengthMax,
-  SpaceMarginBlockEnd: theme.SpaceRemM,
-  SpaceMarginBlockStart: 0,
-  SpaceMarginInline: 0,
-  SpacePaddingBlockEnd: theme.SpaceRemM,
-  SpacePaddingBlockStart: 0,
-  SpacePaddingInline: 0,
+  MaxWidth: theme.FontLineLengthMax,
+  MarginBlockEnd: theme.SpaceRemM,
+  MarginBlockStart: 0,
+  MarginInline: 0,
+  PaddingBlockStart: 0,
+  PaddingInline: 0,
+
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
+  FieldsetPaddingBlockEnd: theme.SpaceRemM,
 });
