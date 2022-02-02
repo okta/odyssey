@@ -12,7 +12,7 @@
 
 .root {
   margin-block-start: 0;
-  margin-block-end: var(--ContentMarginBlockEnd);
+  margin-block-end: var(--MarginBlockEnd);
   margin-inline: 0;
   color: var(--TextColor);
   font-family: var(--FontFamily);
@@ -21,27 +21,27 @@
 }
 
 .level1 {
-  font-size: var(--Size1FontSize);
+  font-size: var(--Level1FontSize);
 }
 
 .level2 {
-  font-size: var(--Size2FontSize);
+  font-size: var(--Level2FontSize);
 }
 
 .level3 {
-  font-size: var(--Size3FontSize);
+  font-size: var(--Level3FontSize);
 }
 
 .level4 {
-  font-size: var(--Size4FontSize);
+  font-size: var(--Level4FontSize);
 }
 
 .level5 {
-  font-size: var(--Size5FontSize);
+  font-size: var(--Level5FontSize);
 }
 
 .level6 {
-  font-size: var(--Size6FontSize);
+  font-size: var(--Level6FontSize);
 }
 
 .level1,
