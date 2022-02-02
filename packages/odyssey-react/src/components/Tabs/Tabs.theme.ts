@@ -15,7 +15,7 @@ import type { ThemeReducer } from "@okta/odyssey-react-theme";
 export const theme: ThemeReducer = (theme) => ({
   ListBorderBlockEndStyle: theme.BorderStyleBase,
   ListBorderBlockEndWidth: theme.BorderWidthBase,
-  ListBorderColorBlockEnd: theme.ColorBorderDisplay,
+  ListBorderBlockEndColor: theme.ColorBorderDisplay,
   PanelPaddingBlock: theme.SpaceRemL,
   PanelPaddingInline: 0,
   TabTextColor: theme.ColorPaletteNeutral900,
