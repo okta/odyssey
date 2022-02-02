@@ -24,11 +24,13 @@ export const theme: ThemeReducer = (theme) => ({
   CircleDotBorderStyle: theme.BorderStyleBase,
   CircleDotBorderWidth: "2px",
   CircleFocusBoxShadowColor: theme.ColorFocusPrimary,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   CircleFocusBoxShadowSpread: theme.FocusOutlineWidthSmall,
   CircleInvalidBorderColor: theme.ColorBorderDangerBase,
   CircleInvalidCheckedBackgroundColor: theme.ColorBackgroundDangerDark,
   CircleInvalidFocusBorderColor: theme.ColorBorderDangerBase,
   CircleInvalidFocusBoxShadowColor: theme.ColorFocusDanger,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   CircleInvalidFocusBoxShadowSpread: theme.FocusOutlineWidthSmall,
   CircleInvalidHoverBorderColor: theme.ColorDangerDark,
   CircleSize: "1em",

@@ -20,7 +20,7 @@
     ". actions";
   grid-template-columns: max-content 1fr;
   width: 100%;
-  max-width: calc(var(--MaxLineLength) + calc(var(--PaddingInline) * 2));
+  max-width: calc(var(--MaxWidth) + calc(var(--PaddingInline) * 2));
   padding-block: var(--PaddingBlock);
   padding-inline: var(--PaddingInline);
   column-gap: var(--ColumnGap);

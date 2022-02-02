@@ -13,6 +13,9 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
+  // REMOVE THIS
+  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
+
   // Border
   BorderRadius: theme.BorderRadiusBase,
   BorderStyle: theme.BorderStyleBase,

@@ -150,7 +150,7 @@
     transform: translateY(-50%);
     transition-property: border-color, color, opacity, box-shadow;
     transition-duration: var(--TransitionDuration);
-    transition-timing-function: var(--TransitionTiming);
+    transition-timing-function: var(--TransitionTimingFunction);
   }
 
   /* Box */

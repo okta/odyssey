@@ -20,6 +20,7 @@ export const theme: ThemeReducer = (theme) => ({
   BorderWidth: theme.BorderWidthBase,
   ButtonBackgroundColor: theme.ColorPaletteBlue400,
   ButtonFocusBoxShadowColor: theme.ColorFocusPrimary,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   ButtonFocusBoxShadowSpread: theme.FocusOutlineWidthBase,
   ButtonHoverFocusBackgroundColor: theme.ColorPrimaryBase,
   ButtonIndicatorColor: theme.ColorPaletteNeutralWhite,
@@ -33,6 +34,7 @@ export const theme: ThemeReducer = (theme) => ({
   DisabledReadonlyHoverBorderColor: theme.ColorBorderDisabled,
   DisabledTextColor: theme.ColorTextSub,
   FocusBoxShadowColor: theme.ColorFocusPrimary,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,

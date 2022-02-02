@@ -18,7 +18,7 @@ export const theme: ThemeReducer = (theme) => ({
   FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightNormal,
   TransitionDuration: theme.TransitionDurationBase,
-  TransitionTiming: theme.TransitionTimingBase,
+  TransitionTimingFunction: theme.TransitionTimingBase,
 
   BoxBackgroundColor: "transparent",
   BoxBorderColor: theme.ColorBorderUi,
