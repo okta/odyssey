@@ -16,8 +16,8 @@ export const theme: ThemeReducer = (theme) => ({
   Size: theme.SpaceEmM,
   TextColor: theme.ColorPrimaryBase,
   CircleStrokeWidth: "17%",
-  CircleColor: theme.ColorPaletteNeutral100,
-  AnimatedCircleColor: theme.ColorPrimaryDark,
+  CircleStrokeColor: theme.ColorPaletteNeutral100,
+  AnimatedCircleStrokeColor: theme.ColorPrimaryDark,
   AnimationDuration: "1.4s",
   AnimationTimingFunction: "cubic-bezier(0.35, -0.12, 0.09, 0.96)",
 });
