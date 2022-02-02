@@ -13,10 +13,12 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
+  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
   AnimationDelayIn: "0s",
   AnimationDelayOut: "5300ms",
   AnimationDurationIn: "300ms",
   AnimationDurationOut: "1000ms",
+  /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
   BackgroundColor: theme.ColorBackgroundPrimaryDark,
   BodyFontSize: theme.FontSizeBody,
   BorderRadius: theme.BorderRadiusBase,
@@ -39,6 +41,7 @@ export const theme: ThemeReducer = (theme) => ({
   HeadingMarginInline: 0,
   HeadingPaddingInlineEnd: theme.SpaceRemM,
   HeadingTextColor: theme.ColorTextBodyInverse,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   HoverAnimationDelayOut: "300s",
   IconColor: theme.ColorTextBodyInverse,
   IconSize: theme.FontSizeHeading4,

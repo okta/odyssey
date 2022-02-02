@@ -19,7 +19,7 @@
   z-index: 1;
   padding-block: var(--TipPaddingBlock);
   padding-inline: var(--TipPaddingInline);
-  transition: opacity var(--TransitionDuration) var(--TransitionTiming)
+  transition: opacity var(--TransitionDuration) var(--TransitionTimingFunction)
     var(--TransitionDelay);
   border: var(--TipBorderWidth) solid var(--TipBackgroundColor);
   opacity: 0;

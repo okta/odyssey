@@ -27,6 +27,6 @@ export const theme: ThemeReducer = (theme) => ({
   TailMargin: theme.SpaceRemS,
 
   TransitionDuration: theme.TransitionDurationBase,
-  TransitionTiming: theme.TransitionTimingBase,
+  TransitionTimingFunction: theme.TransitionTimingBase,
   TransitionDelay: "1s",
 });
