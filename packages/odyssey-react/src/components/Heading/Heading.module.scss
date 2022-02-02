@@ -47,13 +47,13 @@
 .level1,
 .level2,
 .level3 {
-  line-height: var(--Heading);
+  line-height: var(--HeadingLineHeight);
 }
 
 .level4,
 .level5,
 .level6 {
-  line-height: var(--LineHeight);
+  line-height: var(--BaseLineHeight);
 }
 
 .noEndMargin {
@@ -61,9 +61,9 @@
 }
 
 .baseLineHeight {
-  line-height: var(--LineHeight);
+  line-height: var(--BaseLineHeight);
 }
 
 .headingLineHeight {
-  line-height: var(--Heading);
+  line-height: var(--HeadingLineHeight);
 }
