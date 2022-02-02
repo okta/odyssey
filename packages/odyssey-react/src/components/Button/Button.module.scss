@@ -39,9 +39,9 @@
   }
 
   &:focus {
-    @include outline(var(--FocusOutlineColor), var(--FocusOutlineWidth));
-
+    outline: 0;
     background-color: var(--PrimaryFocusBackgroundColor);
+    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
   }
 
   &:disabled {
@@ -101,9 +101,8 @@
   }
 
   &:focus {
-    @include outline(var(--DangerFocusOutlineColor), var(--FocusOutlineWidth));
-
     background-color: var(--DangerFocusBackgroundColor);
+    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--DangerFocusBoxShadowColor);
   }
 
   &:disabled {
