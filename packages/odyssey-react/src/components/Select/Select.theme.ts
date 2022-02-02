@@ -48,5 +48,5 @@ export const theme: ThemeReducer = (theme) => ({
   PlaceholderTextColor: theme.ColorTextSub,
   TextColor: theme.ColorTextBody,
   TransitionDuration: theme.TransitionDurationBase,
-  TransitionTiming: theme.TransitionTimingBase,
+  TransitionTimingFunction: theme.TransitionTimingBase,
 });
