@@ -12,6 +12,7 @@
 
 const path = require("path");
 const validThemeProperty = /^[A-Z][A-Za-z]+$/;
+const declarations = require("../utils/cssDeclarations");
 
 module.exports = {
   meta: {
@@ -25,6 +26,7 @@ module.exports = {
     fixable: null,
     schema: [], // no options
     messages: {
+      declaration: "Invalid theme property, use a css declaration suffix",
       string: "Invalid theme property, use a string key",
       format: "Invalid theme property, use UpperCamelCase format",
       filename: "Invalid theme property, avoid file name",
@@ -55,6 +57,11 @@ module.exports = {
 
       if (value.includes(dirname)) {
         context.report({ messageId: "dirname", node });
+        return;
+      }
+
+      if (!declarations.some((decl) => value.endsWith(decl))) {
+        context.report({ messageId: "declaration", node });
         return;
       }
     }

@@ -11,7 +11,7 @@
  */
 
 .root {
-  max-width: calc(var(--MaxLineLength) + (2 * var(--PaddingInline)));
+  max-width: calc(var(--MaxWidth) + (2 * var(--PaddingInline)));
   margin-block-start: var(--MarginBlockStart);
   margin-block-end: var(--MarginBlockEnd);
   margin-inline: var(--MarginInline);
