@@ -15,123 +15,133 @@ import type { ThemeReducer } from "@okta/odyssey-react-theme";
 export const theme: ThemeReducer = (theme) => ({
   // Font
   /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
-  ColorTextBody: theme.ColorTextBody,
-  ColorTextBodyInverse: theme.ColorTextBodyInverse,
-  ColorTextDanger: theme.ColorTextDanger,
-  ColorTextPrimary: theme.ColorTextPrimary,
-  ColorTextSub: theme.ColorTextSub,
+  TextColor: theme.ColorTextBody,
+  BodyTextColor: theme.ColorTextBody,
+  BodyInverseTextColor: theme.ColorTextBodyInverse,
+  DangerTextColor: theme.ColorTextDanger,
+  PrimaryTextColor: theme.ColorTextPrimary,
+  SubTextColor: theme.ColorTextSub,
   /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
-  FontFamilyBase: theme.FontFamilyBase,
-  FontLineHeightNormal: theme.FontLineHeightBase,
-  FontLineHeightHeading: theme.FontLineHeightHeading,
-  FontSizeBase: theme.FontSizeBody,
-  FontSizeCaption: theme.FontSizeCaption,
-  FontStyleItalic: "italic",
-  FontStyleNormal: theme.FontStyleNormal,
-  FontTransformCapitalize: "capitalize",
-  FontTransformLowercase: "lowercase",
-  FontTransformNone: "none",
-  FontTransformUppercase: "uppercase",
-  FontWeightBold: theme.FontWeightBold,
-  FontWeightNormal: theme.FontWeightNormal,
+  FontFamily: theme.FontFamilyBase,
+
+  LineHeight: theme.FontLineHeightBase,
+  NormalLineHeight: theme.FontLineHeightBase,
+  HeadingLineHeight: theme.FontLineHeightHeading,
+
+  FontSize: theme.FontSizeBody,
+  BaseFontSize: theme.FontSizeBody,
+  CaptionFontSize: theme.FontSizeCaption,
+
+  ItalicFontStyle: "italic",
+  NormalFontStyle: theme.FontStyleNormal,
+
+  /* eslint-disable  @okta/odyssey/no-invalid-theme-properties */
+  CapitalizeTextTransform: "capitalize",
+  LowercaseTextTransform: "lowercase",
+  NoneTextTransform: "none",
+  UppercaseTextTransform: "uppercase",
+  /* eslint-enable  @okta/odyssey/no-invalid-theme-properties */
+
+  BoldFontWeight: theme.FontWeightBold,
+  NormalFontWeight: theme.FontWeightNormal,
 
   // abbr
-  BorderBlockEndStyleAbbr: "dashed",
-  BorderBlockEndWidthAbbr: theme.BorderWidthBase,
-  ColorBorderBlockEndAbbr: theme.ColorBorderPrimaryDark,
+  AbbrBorderBlockEndStyle: "dashed",
+  AbbrBorderBlockEndWidth: theme.BorderWidthBase,
+  AbbrBorderBlockEndColor: theme.ColorBorderPrimaryDark,
 
   // em
-  FontStyleEm: "italic",
+  EmFontStyle: "italic",
 
   // strong
-  FontWeightStrong: theme.FontWeightBold,
+  StrongFontWeight: theme.FontWeightBold,
 
   // sup
-  FontLineHeightSup: 1,
-  FontSizeSup: "0.7583rem",
+  SupLineHeight: 1,
+  SupFontSize: "0.7583rem",
 
   // sub
-  FontLineHeightSub: 1,
-  FontSizeSub: "0.7583rem",
+  SubLineHeight: 1,
+  SubFontSize: "0.7583rem",
 
   // blockquote
-  BorderInlineStartStyleBlockquote: theme.BorderStyleBase,
-  BorderInlineStartWidthBlockquote: "3px",
-  ColorBorderInlineStartBlockquote: theme.ColorBorderDisplay,
-  FontMaxWidthBlockquote: theme.FontLineLengthMax,
-  SpaceMarginBlockEndBlockquote: theme.SpaceEmM,
-  SpaceMarginBlockStartBlockquote: 0,
-  SpaceMarginInlineBlockquote: 0,
-  SpacePaddingBlockBlockquote: 0,
-  SpacePaddingInlineEndBlockquote: 0,
-  SpacePaddingInlineStartBlockquote: theme.SpaceRemS,
+  BlockquoteBorderInlineStartStyle: theme.BorderStyleBase,
+  BlockquoteBorderInlineStartWidth: "3px",
+  BlockquoteBorderInlineStartColor: theme.ColorBorderDisplay,
+  BlockquoteMaxWidth: theme.FontLineLengthMax,
+  BlockquoteMarginBlockEnd: theme.SpaceEmM,
+  BlockquoteMarginBlockStart: 0,
+  BlockquoteMarginInline: 0,
+  BlockquotePaddingBlock: 0,
+  BlockquotePaddingInlineEnd: 0,
+  BlockquotePaddingInlineStart: theme.SpaceRemS,
 
   // p
-  FontMaxWidthP: theme.FontLineLengthMax,
-  SpaceMarginBlockEndP: theme.SpaceEmM,
-  SpaceMarginBlockStartP: 0,
-  SpaceMarginInlineP: 0,
+  PMaxWidth: theme.FontLineLengthMax,
+  PMarginBlockEnd: theme.SpaceEmM,
+  PMarginBlockStart: 0,
+  PMarginInline: 0,
 
   // pre
-  FontFamilyPre: theme.FontFamilyMono,
-  SpaceMarginBlockEndPre: theme.SpaceEmM,
-  SpaceMarginBlockStartPre: 0,
-  SpaceMarginInlinePre: 0,
+  PreFontFamily: theme.FontFamilyMono,
+  PreMarginBlockEnd: theme.SpaceEmM,
+  PreMarginBlockStart: 0,
+  PreMarginInline: 0,
 
   // cite
-  FontStyleCite: "italic",
+  CiteFontStyle: "italic",
 
   // del
-  ColorBackgroundDel: theme.ColorBackgroundDangerBase,
+  DelBackgroundColor: theme.ColorBackgroundDangerBase,
 
   // dfn
-  FontStyleDfn: "italic",
+  DfnFontStyle: "italic",
 
   // ins
-  ColorBackgroundIns: theme.ColorBackgroundSuccessLight,
+  InsBackgroundColor: theme.ColorBackgroundSuccessLight,
 
   // kbd
-  BorderWidthKbd: theme.BorderWidthBase,
-  BorderStyleKbd: theme.BorderStyleBase,
-  BorderRadiusKbd: theme.BorderRadiusBase,
-  ColorBackgroundKbd: theme.ColorBackgroundDisabled,
-  ColorBorderKbd: theme.ColorBorderDisplay,
-  ColorShadowInsideKbd: theme.ColorPaletteNeutral000,
-  ColorShadowOutsideKbd: theme.ColorPaletteNeutral200,
-  FontLineHeightKbd: theme.FontLineHeightHeading,
-  FontWeightKbd: theme.FontWeightNormal,
-  SpacePaddingBlockKbd: 0,
-  SpacePaddingInlineKbd: theme.SpaceRemXs,
+  KbdBorderWidth: theme.BorderWidthBase,
+  KbdBorderStyle: theme.BorderStyleBase,
+  KbdBorderColor: theme.ColorBorderDisplay,
+  KbdBorderRadius: theme.BorderRadiusBase,
+  KbdBackgroundColor: theme.ColorBackgroundDisabled,
+  KbdInsideBoxShadowColor: theme.ColorPaletteNeutral000,
+  KbdOutsideBoxShadowColor: theme.ColorPaletteNeutral200,
+  KbdLineHeight: theme.FontLineHeightHeading,
+  KbdFontWeight: theme.FontWeightNormal,
+  KbdPaddingBlock: 0,
+  KbdPaddingInline: theme.SpaceRemXs,
 
   // mark
-  ColorBackgroundMark: theme.ColorBackgroundCautionLight,
+  MarkBackgroundColor: theme.ColorBackgroundCautionLight,
 
   // samp
-  ColorBackgroundSamp: theme.ColorBackgroundDisabled,
-  FontFamilySamp: theme.FontFamilyMono,
-  FontSizeSamp: theme.FontSizeBody,
-  ShadowSamp: "0 1px 0 #d7d7dc",
-  SpacePaddingBlockSamp: 0,
-  SpacePaddingInlineSamp: "0.5ch",
+  SampBackgroundColor: theme.ColorBackgroundDisabled,
+  SampFontFamily: theme.FontFamilyMono,
+  SampFontSize: theme.FontSizeBody,
+  SampBoxShadow: "0 1px 0 #d7d7dc",
+  SampPaddingBlock: 0,
+  SampPaddingInline: "0.5ch",
 
   // samp kbd
-  ColorBackgroundSampKbd: theme.ColorBackgroundBase,
+  SampKbdBackgroundColor: theme.ColorBackgroundBase,
 
   // small
-  FontSizeSmall: theme.FontSizeCaption,
+  SmallFontSize: theme.FontSizeCaption,
 
   // details
-  FontSizeDetails: theme.FontSizeBody,
+  DetailsFontSize: theme.FontSizeBody,
 
   // summary
-  BorderRadiusSummary: theme.BorderRadiusBase,
-  FontSizeSummary: theme.FontSizeHeading5,
-  FontWeightSummary: theme.FontWeightBold,
+  SummaryBorderRadius: theme.BorderRadiusBase,
+  SummaryFontSize: theme.FontSizeHeading5,
+  SummaryFontWeight: theme.FontWeightBold,
 
   // code
-  FontFamilyCode: theme.FontFamilyMono,
+  CodeFontFamily: theme.FontFamilyMono,
 
   // var
-  FontStyleVar: "italic",
-  FontWeightVar: theme.FontWeightBold,
+  VarFontStyle: "italic",
+  VarFontWeight: theme.FontWeightBold,
 });
