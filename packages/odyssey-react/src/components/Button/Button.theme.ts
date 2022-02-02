@@ -13,109 +13,97 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  // REMOVE THIS
-  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
-
-  ...root(theme),
-
-  // Primary Variant
-  ColorBackgroundPrimary: theme.ColorPrimaryBase,
-  ColorBackgroundPrimaryDisabled: theme.ColorPrimaryLight,
-  ColorBackgroundPrimaryFocus: theme.ColorPrimaryDark,
-  ColorBackgroundPrimaryHover: theme.ColorPrimaryDark,
-  ColorBorderPrimary: "transparent",
-  ColorBorderPrimaryDisabled: "transparent",
-  ColorBorderPrimaryHover: theme.ColorBorderPrimaryDark,
-  Gutter: theme.SpaceRemS,
-
-  // Secondary Variant
-  ColorBackgroundSecondary: theme.ColorBackgroundBase,
-  ColorBackgroundSecondaryDisabled: theme.ColorBackgroundBase,
-  ColorBackgroundSecondaryFocus: theme.ColorBackgroundBase,
-  ColorBackgroundSecondaryHover: theme.ColorPrimaryBase,
-  ColorBorderSecondary: theme.ColorPrimaryBase,
-  ColorBorderSecondaryDisabled: theme.ColorPrimaryLight,
-  ColorBorderSecondaryFocus: theme.ColorPrimaryBase,
-  ColorBorderSecondaryHover: theme.ColorPrimaryBase,
-  ColorTextSecondary: theme.ColorTextPrimary,
-  ColorTextSecondaryDisabled: theme.ColorPaletteBlue300,
-  ColorTextSecondaryFocus: theme.ColorTextPrimary,
-  ColorTextSecondaryHover: theme.ColorTextBodyInverse,
-
-  // Danger Variant
-  ColorBackgroundDanger: theme.ColorBackgroundDangerDark,
-  ColorBackgroundDangerDisabled: theme.ColorDangerLight,
-  ColorBackgroundDangerFocus: theme.ColorPaletteRed900,
-  ColorBackgroundDangerHover: theme.ColorPaletteRed900,
-  ColorBorderDangerDisabled: theme.ColorBorderDangerLight,
-  ColorBorderDangerHover: theme.ColorBorderDangerDark,
-  ColorFocusOutlineDanger: theme.ColorFocusDanger,
-
-  // Dismiss Variant
-  ColorBackgroundDismiss: "transparent",
-  ColorBorderDismissHover: "transparent",
-  ColorTextDismiss: "inherit",
-  ColorTextDismissDisabled: theme.ColorNeutralBase,
-  FontLineHeightDismiss: 1,
-  SpacePaddingBlockDismiss: theme.SpaceEmXs,
-  SpacePaddingInlineDismiss: theme.SpaceEmXs,
-  ColorBackgroundDismissHover: "rgba(255, 255, 255, 0.6)",
-  ColorBackgroundDismissFocus: "rgba(255, 255, 255, 0.6)",
-  ColorBackgroundDismissDisabled: "rgba(235, 235, 237, 0.6)",
-
-  // Dismiss Inverted Variant
-  ColorShadowDismissInverted: theme.ColorPaletteNeutralWhite,
-
-  // Clear Variant
-  ColorBackgroundClear: "transparent",
-  ColorBackgroundClearDisabled: "transparent",
-  ColorBackgroundClearFocus: theme.ColorBackgroundBase,
-  ColorBackgroundClearHover: theme.ColorBackgroundPrimaryLight,
-  ColorBorderClearHover: "transparent",
-  ColorTextClear: theme.ColorPrimaryBase,
-  ColorTextClearDisabled: theme.ColorPrimaryLight,
-  ColorTextClearFocus: theme.ColorTextPrimary,
-  ColorTextClearHover: theme.ColorPaletteBlue900,
-
-  // Wide Layout
-  SpaceMarginBlockEndWideLayout: theme.SpaceRemS,
-  SpaceMarginBlockWideLayout: 0,
-  SpaceMarginInlineWideLayout: 0,
-
-  // Small Size
-  FontLineHeightSmallSize: theme.FontLineHeightHeading,
-  FontSizeSmallSize: theme.FontSizeCaption,
-
-  // Large Size
-  SpacePaddingBlockLargeSize: theme.SpaceEmS,
-  SpacePaddingInlineLargeSize: theme.SpaceEmM,
-});
-
-const root: ThemeReducer = (theme) => ({
-  // Font
-  ColorText: theme.ColorTextBodyInverse,
-  FontFamily: theme.FontFamilyBase,
-  FontLineHeight: theme.FontLineHeightBase,
-  FontSize: theme.FontSizeBody,
-  FontWeight: theme.FontWeightBold,
-  FontWhiteSpace: "nowrap",
-
-  // Space
-  SpaceMarginBlock: 0,
-  SpaceMarginInline: 0,
-  SpacePaddingBlock: theme.SpaceEmXs,
-  SpacePaddingInline: theme.SpaceEmS,
-
-  // Border
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
+  MarginBlock: 0,
+  MarginInline: 0,
+  PaddingBlock: theme.SpaceEmXs,
+  PaddingInline: theme.SpaceEmS,
+  TransitionDuration: theme.TransitionDurationBase,
+  TransitionTimingFunction: theme.TransitionTimingBase,
   BorderRadius: theme.BorderRadiusBase,
   BorderStyle: theme.BorderStyleBase,
   BorderWidth: theme.BorderWidthBase,
+  TextColor: theme.ColorTextBodyInverse,
+  FontFamily: theme.FontFamilyBase,
+  FontSize: theme.FontSizeBody,
+  FontWeight: theme.FontWeightBold,
+  LineHeight: theme.FontLineHeightBase,
+  FocusBoxShadowColor: theme.ColorFocusPrimary,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
+  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
 
-  TransitionDuration: theme.TransitionDurationBase,
-  TransitionTiming: theme.TransitionTimingBase,
-
+  // Label
   LabelMinWidth: theme.SpaceEmL,
-  LabelSpaceMarginInlineStart: theme.SpaceRemXs,
+  LabelMarginInlineStart: theme.SpaceRemXs,
 
-  FocusOutlineWidth: theme.FocusOutlineWidthBase,
+  // Primary Variant
+  PrimaryBackgroundColor: theme.ColorPrimaryBase,
+  PrimaryBorderColor: "transparent",
+  PrimaryDisabledBackgroundColor: theme.ColorPrimaryLight,
+  PrimaryDisabledBorderColor: "transparent",
+  PrimaryFocusBackgroundColor: theme.ColorPrimaryDark,
+  PrimaryHoverBackgroundColor: theme.ColorPrimaryDark,
+  PrimaryHoverBorderColor: theme.ColorBorderPrimaryDark,
+
+  // Secondary Variant
+  SecondaryBackgroundColor: theme.ColorBackgroundBase,
+  SecondaryBorderColor: theme.ColorPrimaryBase,
+  SecondaryDisabledBackgroundColor: theme.ColorBackgroundBase,
+  SecondaryDisabledBorderColor: theme.ColorPrimaryLight,
+  SecondaryDisabledTextColor: theme.ColorPaletteBlue300,
+  SecondaryFocusBackgroundColor: theme.ColorBackgroundBase,
+  SecondaryFocusBorderColor: theme.ColorPrimaryBase,
+  SecondaryFocusTextColor: theme.ColorTextPrimary,
+  SecondaryHoverBackgroundColor: theme.ColorPrimaryBase,
+  SecondaryHoverBorderColor: theme.ColorPrimaryBase,
+  SecondaryHoverTextColor: theme.ColorTextBodyInverse,
+  SecondaryTextColor: theme.ColorTextPrimary,
+
+  // Danger Variant
+  DangerBackgroundColor: theme.ColorBackgroundDangerDark,
+  DangerDisabledBackgroundColor: theme.ColorDangerLight,
+  DangerDisabledBorderColor: theme.ColorBorderDangerLight,
+  DangerFocusBackgroundColor: theme.ColorPaletteRed900,
+  DangerFocusBoxShadowColor: theme.ColorFocusDanger,
+  DangerHoverBackgroundColor: theme.ColorPaletteRed900,
+  DangerHoverBorderColor: theme.ColorBorderDangerDark,
+
+  // Dismiss Variant
+  DismissBackgroundColor: "transparent",
+  DismissHoverBorderColor: "transparent",
+  DismissTextColor: "inherit",
+  DismissDisabledTextColor: theme.ColorNeutralBase,
+  DismissLineHeight: 1,
+  DismissPaddingBlock: theme.SpaceEmXs,
+  DismissPaddingInline: theme.SpaceEmXs,
+  DismissHoverBackgroundColor: "rgba(255, 255, 255, 0.6)",
+  DismissFocusBackgroundColor: "rgba(255, 255, 255, 0.6)",
+  DismissDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
+
+  // Dismiss Inverted Variant
+  DismissInvertedBoxShadowColor: theme.ColorPaletteNeutralWhite,
+
+  // Clear Variant
+  ClearBackgroundColor: "transparent",
+  ClearDisabledBackgroundColor: "transparent",
+  ClearDisabledTextColor: theme.ColorPrimaryLight,
+  ClearFocusBackgroundColor: theme.ColorBackgroundBase,
+  ClearFocusTextColor: theme.ColorTextPrimary,
+  ClearHoverBackgroundColor: theme.ColorBackgroundPrimaryLight,
+  ClearHoverBorderColor: "transparent",
+  ClearHoverTextColor: theme.ColorPaletteBlue900,
+  ClearTextColor: theme.ColorPrimaryBase,
+
+  // Wide Layout
+  WideLayoutMarginBlock: 0,
+  WideLayoutMarginBlockEnd: theme.SpaceRemS,
+  WideLayoutMarginInline: 0,
+
+  // Small Size
+  SmallSizeFontSize: theme.FontSizeCaption,
+  SmallSizeLineHeight: theme.FontLineHeightHeading,
+
+  // Large Size
+  LargeSizePaddingBlock: theme.SpaceEmS,
+  LargeSizePaddingInline: theme.SpaceEmM,
 });
