@@ -12,8 +12,8 @@
 
 .root {
   max-width: 100%;
-  margin-block-start: 0;
-  margin-block-end: var(--SpaceMarginBlockEnd);
+  margin-block-start: var(--MarginBlockStart);
+  margin-block-end: var(--MarginBlockEnd);
   margin-inline: 0;
   overflow-x: auto;
 
@@ -23,9 +23,9 @@
 }
 
 .caption {
-  margin-block-end: var(--SpaceMarginCaption);
-  color: var(--ColorTextCaption);
-  font-size: var(--FontSizeCaption);
-  font-weight: var(--FontWeightCaption);
+  margin-block-end: var(--CaptionMarginBlockEnd);
+  color: var(--CaptionTextColor);
+  font-size: var(--CaptionFontSize);
+  font-weight: var(--CaptionFontWeight);
   text-align: start;
 }
