@@ -22,5 +22,5 @@ export const theme: ThemeReducer = (theme) => ({
   PaddingInline: theme.SpaceRemM,
 
   // Sizing
-  FontLineLengthMax: theme.FontLineLengthMax,
+  MaxLineLength: theme.FontLineLengthMax,
 });
