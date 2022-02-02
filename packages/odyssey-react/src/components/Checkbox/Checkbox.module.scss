@@ -55,8 +55,8 @@
     + .label {
       .box {
         @include outline(
-          var(--BoxFocusOutlineColor),
-          var(--BoxFocusOutlineWidth)
+          var(--BoxFocusBoxShadowColor),
+          var(--BoxFocusBoxShadowSpread)
         );
 
         border-color: var(--BoxFocusBorderColor);
@@ -119,8 +119,8 @@
       + .label {
         .box {
           @include outline(
-            var(--BoxInvalidFocusOutlineColor),
-            var(--BoxFocusOutlineWidth)
+            var(--BoxInvalidFocusBoxShadowColor),
+            var(--BoxFocusBoxShadowSpread)
           );
 
           border-color: var(--BoxInvalidBorderColor);
