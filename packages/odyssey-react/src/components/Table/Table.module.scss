@@ -12,11 +12,11 @@
 
 .root {
   width: auto;
-  margin-block: 0;
-  margin-inline: 0;
+  margin-block: var(--MarginBlock);
+  margin-inline: var(--MarginInline);
   border-spacing: 0;
   border-collapse: collapse;
-  line-height: var(--FontLineHeight);
+  line-height: var(--LineHeight);
 
   &:only-child {
     margin-block-end: 0;
