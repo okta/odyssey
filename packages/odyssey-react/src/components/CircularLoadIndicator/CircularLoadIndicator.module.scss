@@ -27,7 +27,7 @@
 
 .circle {
   stroke-width: var(--CircleStrokeWidth);
-  stroke: var(--CircleColor);
+  stroke: var(--CircleStrokeColor);
 }
 
 .animatedCircle {
@@ -38,7 +38,7 @@
   stroke-width: var(--CircleStrokeWidth);
   stroke-dasharray: 160%, 360%;
   stroke-dashoffset: 0;
-  stroke: var(--AnimatedCircleColor);
+  stroke: var(--AnimatedCircleStrokeColor);
 }
 
 @keyframes rotateClockwise {
