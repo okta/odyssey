@@ -19,18 +19,10 @@ export const theme: ThemeReducer = (theme) => ({
   BorderWidth: theme.BorderWidthBase,
 
   // Color
-  ColorBackground: theme.ColorBackgroundBase,
-  ColorBackgroundDisabled: theme.ColorBackgroundDisabled,
-  ColorBorder: theme.ColorBorderUi,
-  ColorBorderDisabled: theme.ColorBorderDisabled,
-  ColorBorderHoverFocus: theme.ColorPrimaryBase,
-  ColorBorderInvalid: theme.ColorBorderDangerBase,
-  ColorFocusOutline: theme.ColorFocusPrimary,
-  ColorFocusOutlineInvalid: theme.ColorFocusDanger,
-  ColorShadow: theme.ColorBackgroundPrimaryLight,
-  ColorText: theme.ColorTextBody,
-  ColorTextDisabled: theme.ColorTextBody,
-  ColorTextPlaceholder: theme.ColorTextSub,
+  BackgroundColor: theme.ColorBackgroundBase,
+  BorderColor: theme.ColorBorderUi,
+  BoxShadowColor: theme.ColorBackgroundPrimaryLight,
+  TextColor: theme.ColorTextBody,
 
   // Font
   FontFamily: theme.FontFamilyBase,
@@ -38,20 +30,36 @@ export const theme: ThemeReducer = (theme) => ({
   LineHeight: theme.FontLineHeightBase,
 
   // Sizing
-  FocusOutlineWidth: theme.FocusOutlineWidthBase,
   MaxWidth: theme.FontLineLengthMax,
   MinHeight: theme.SpaceRemL,
   MinWidth: theme.SpaceRemM,
 
   // Space
-  SpaceMarginBlockEnd: 0,
-  SpaceMarginBlockStart: theme.SpaceRemXs,
-  SpaceMarginInline: 0,
-  SpacePaddingBlockEnd: theme.SpaceEmS,
-  SpacePaddingBlockStart: theme.SpaceEmXs,
-  SpacePaddingInline: theme.SpaceEmS,
+  MarginBlockEnd: 0,
+  MarginBlockStart: theme.SpaceRemXs,
+  MarginInline: 0,
+  PaddingBlockEnd: theme.SpaceEmS,
+  PaddingBlockStart: theme.SpaceEmXs,
+  PaddingInline: theme.SpaceEmS,
+
+  // Placeholder
+  PlaceholderTextColor: theme.ColorTextSub,
+
+  // Focus
+  HoverFocusBorderColor: theme.ColorPrimaryBase,
+  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
+  FocusBoxShadowColor: theme.ColorFocusPrimary,
+
+  // Disabled
+  DisabledBackgroundColor: theme.ColorBackgroundDisabled,
+  DisabledBorderColor: theme.ColorBorderDisabled,
+  DisabledTextColor: theme.ColorTextBody,
+
+  // Invalid
+  InvalidBorderColor: theme.ColorBorderDangerBase,
+  InvalidFocusBoxShadowColor: theme.ColorFocusDanger,
 
   // Transition
   TransitionDuration: theme.TransitionDurationBase,
-  TransitionTiming: theme.TransitionTimingBase,
+  TransitionTimingFunction: theme.TransitionTimingBase,
 });
