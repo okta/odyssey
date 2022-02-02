@@ -11,7 +11,7 @@
  */
 
 .colorBody {
-  color: var(--ColorTextBody);
+  color: var(--BodyTextColor);
 }
 
 .colorInherit {
@@ -19,7 +19,7 @@
 }
 
 .fontWeightNormal {
-  font-weight: var(--FontWeightNormal);
+  font-weight: var(--NormalFontWeight);
 }
 
 .fontWeightInherit {
@@ -27,7 +27,7 @@
 }
 
 .fontStyleNormal {
-  font-style: var(--FontStyleNormal);
+  font-style: var(--NormalFontStyle);
 }
 
 .fontStyleInherit {
@@ -43,7 +43,7 @@
 }
 
 .lineHeightNormal {
-  line-height: var(--FontLineHeightBase);
+  line-height: var(--BaseLineHeight);
 }
 
 .lineHeightInherit {

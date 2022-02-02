@@ -15,59 +15,59 @@
 *********************************/
 
 .backgroundColorDefault {
-  background-color: var(--ColorBackgroundBase);
+  background-color: var(--BaseBackgroundColor);
 }
 
 .backgroundColorDisabled {
-  background-color: var(--ColorBackgroundDisabled);
+  background-color: var(--DisabledBackgroundColor);
 }
 
 .backgroundColorPrimaryLight {
-  background-color: var(--ColorBackgroundPrimaryLight);
+  background-color: var(--PrimaryLightBackgroundColor);
 }
 
 .backgroundColorPrimaryBase {
-  background-color: var(--ColorBackgroundPrimaryBase);
+  background-color: var(--PrimaryBaseBackgroundColor);
 }
 
 .backgroundColorPrimaryDark {
-  background-color: var(--ColorBackgroundPrimaryDark);
+  background-color: var(--PrimaryDarkBackgroundColor);
 }
 
 .backgroundColorDangerLight {
-  background-color: var(--ColorBackgroundDangerLight);
+  background-color: var(--DangerLightBackgroundColor);
 }
 
 .backgroundColorDangerBase {
-  background-color: var(--ColorBackgroundDangerBase);
+  background-color: var(--DangerBaseBackgroundColor);
 }
 
 .backgroundColorDangerDark {
-  background-color: var(--ColorBackgroundDangerDark);
+  background-color: var(--DangerDarkBackgroundColor);
 }
 
 .backgroundColorCautionLight {
-  background-color: var(--ColorBackgroundCautionLight);
+  background-color: var(--CautionLightBackgroundColor);
 }
 
 .backgroundColorCautionBase {
-  background-color: var(--ColorBackgroundCautionBase);
+  background-color: var(--CautionBaseBackgroundColor);
 }
 
 .backgroundColorCautionDark {
-  background-color: var(--ColorBackgroundCautionDark);
+  background-color: var(--CautionDarkBackgroundColor);
 }
 
 .backgroundColorSuccessLight {
-  background-color: var(--ColorBackgroundSuccessLight);
+  background-color: var(--SuccessLightBackgroundColor);
 }
 
 .backgroundColorSuccessBase {
-  background-color: var(--ColorBackgroundSuccessBase);
+  background-color: var(--SuccessBaseBackgroundColor);
 }
 
 .backgroundColorSuccessDark {
-  background-color: var(--ColorBackgroundSuccessDark);
+  background-color: var(--SuccessDarkBackgroundColor);
 }
 
 /*********************************
@@ -75,5 +75,5 @@
 *********************************/
 
 .boxShadowDefault {
-  box-shadow: var(--ShadowBase);
+  box-shadow: var(--BaseBoxShadow);
 }
