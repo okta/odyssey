@@ -11,23 +11,27 @@
  */
 
 .root {
-  @include border-radius(var(--TipBorderRadius));
+  @include border-radius(var(--BorderRadius));
 
   display: block;
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  padding-block: var(--TipPaddingBlock);
-  padding-inline: var(--TipPaddingInline);
-  transition: opacity var(--TransitionDuration) var(--TransitionTimingFunction)
-    var(--TransitionDelay);
-  border: var(--TipBorderWidth) solid var(--TipBackgroundColor);
+  padding-block: var(--PaddingBlock);
+  padding-inline: var(--PaddingInline);
+  transition-property: opacity;
+  transition-duration: var(--TransitionDuration);
+  transition-timing-function: var(--TransitionTimingFunction);
+  transition-delay: var(--TransitionDelay);
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--BackgroundColor);
   opacity: 0;
-  background-color: var(--TipBackgroundColor);
-  color: var(--TipTextColor);
-  font-size: var(--TipFontSize);
-  font-weight: var(--TipFontWeight);
-  line-height: var(--TipLineHeight);
+  background-color: var(--BackgroundColor);
+  color: var(--TextColor);
+  font-size: var(--FontSize);
+  font-weight: var(--FontWeight);
+  line-height: var(--LineHeight);
   white-space: nowrap;
   pointer-events: none;
 
@@ -41,7 +45,7 @@
   }
 
   &::after {
-    border-width: calc(var(--TailWidth) - calc(var(--TipBorderWidth) * 2));
+    border-width: calc(var(--TailWidth) - calc(var(--BorderWidth) * 2));
   }
 
   &::before {
@@ -70,11 +74,11 @@
   }
 
   &::after {
-    border-block-start-color: var(--TipBackgroundColor);
+    border-block-start-color: var(--BackgroundColor);
   }
 
   &::before {
-    border-block-start-color: var(--TipBackgroundColor);
+    border-block-start-color: var(--BackgroundColor);
   }
 
   [dir="rtl"] & {
@@ -100,11 +104,11 @@
   }
 
   &::after {
-    border-inline-end-color: var(--TipBackgroundColor);
+    border-inline-end-color: var(--BackgroundColor);
   }
 
   &::before {
-    border-inline-end-color: var(--TipBackgroundColor);
+    border-inline-end-color: var(--BackgroundColor);
   }
 }
 
@@ -121,11 +125,11 @@
   }
 
   &::after {
-    border-block-end-color: var(--TipBackgroundColor);
+    border-block-end-color: var(--BackgroundColor);
   }
 
   &::before {
-    border-block-end-color: var(--TipBackgroundColor);
+    border-block-end-color: var(--BackgroundColor);
   }
 
   [dir="rtl"] & {
@@ -151,11 +155,11 @@
   }
 
   &::after {
-    border-inline-start-color: var(--TipBackgroundColor);
+    border-inline-start-color: var(--BackgroundColor);
   }
 
   &::before {
-    border-inline-start-color: var(--TipBackgroundColor);
+    border-inline-start-color: var(--BackgroundColor);
   }
 }
 
@@ -176,7 +180,7 @@
     width: 100vw;
     border: 0;
     opacity: 0;
-    font-size: var(--TipFontSize);
+    font-size: var(--FontSize);
     white-space: wrap;
     pointer-events: none;
 
@@ -190,7 +194,7 @@
     }
 
     &::after {
-      border-width: calc(var(--TailWidth) - calc(var(--TipBorderWidth) * 2));
+      border-width: calc(var(--TailWidth) - calc(var(--BorderWidth) * 2));
     }
 
     &::before {
