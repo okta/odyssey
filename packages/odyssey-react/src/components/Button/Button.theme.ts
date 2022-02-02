@@ -29,8 +29,8 @@ export const theme: ThemeReducer = (theme) => ({
   FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightBold,
   LineHeight: theme.FontLineHeightBase,
-  FocusOutlineColor: theme.ColorFocusPrimary,
-  FocusOutlineWidth: theme.FocusOutlineWidthBase,
+  FocusBoxShadowColor: theme.ColorFocusPrimary,
+  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
 
   // Label
   LabelMinWidth: theme.SpaceEmL,
@@ -64,7 +64,7 @@ export const theme: ThemeReducer = (theme) => ({
   DangerDisabledBackgroundColor: theme.ColorDangerLight,
   DangerDisabledBorderColor: theme.ColorBorderDangerLight,
   DangerFocusBackgroundColor: theme.ColorPaletteRed900,
-  DangerFocusOutlineColor: theme.ColorFocusDanger,
+  DangerFocusBoxShadowColor: theme.ColorFocusDanger,
   DangerHoverBackgroundColor: theme.ColorPaletteRed900,
   DangerHoverBorderColor: theme.ColorBorderDangerDark,
 
