@@ -12,22 +12,22 @@
 
 .root {
   display: inline-block;
-  margin-block-end: calc(-1 * var(--SpaceMarginBlockEnd));
-  margin-inline-start: var(--SpaceMarginInlineStart);
+  margin-block-end: calc(-1 * var(--MarginBlockEnd));
+  margin-inline-start: var(--MarginInlineStart);
   list-style-type: none;
   padding-inline: 0;
   margin-block-start: 0;
 }
 
 .item {
-  @include border-radius(var(--BorderRadiusItem));
+  @include border-radius(var(--ItemBorderRadius));
 
   display: inline-block;
-  margin-block-start: var(--SpaceMarginBlockStartItem);
-  margin-block-end: var(--SpaceMarginBlockEndItem);
-  margin-inline-start: var(--SpaceMarginInlineStartItem);
-  margin-inline-end: var(--SpaceMarginInlineEndItem);
-  padding-block: var(--SpacePaddingBlockItem);
-  padding-inline: var(--SpacePaddingInlineItem);
-  background: var(--BackgroundColorItem);
+  margin-block-start: var(--ItemMarginBlockStart);
+  margin-block-end: var(--ItemMarginBlockEnd);
+  margin-inline-start: var(--ItemMarginInlineStart);
+  margin-inline-end: var(--ItemMarginInlineEnd);
+  padding-block: var(--ItemPaddingBlock);
+  padding-inline: var(--ItemPaddingInline);
+  background-color: var(--ItemBackgroundColor);
 }
