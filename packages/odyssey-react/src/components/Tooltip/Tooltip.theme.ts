@@ -21,6 +21,7 @@ export const theme: ThemeReducer = (theme) => ({
   FontSize: theme.FontSizeCaption,
   FontWeight: theme.FontWeightBold,
   LineHeight: theme.FontLineHeightHeading,
+  BorderStyle: theme.BorderStyleBase,
   BorderWidth: theme.BorderWidthBase,
 
   TailWidth: theme.SpaceRemXs,

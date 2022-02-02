@@ -23,7 +23,9 @@
   transition-duration: var(--TransitionDuration);
   transition-timing-function: var(--TransitionTimingFunction);
   transition-delay: var(--TransitionDelay);
-  border: var(--BorderWidth) solid var(--BackgroundColor);
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--BackgroundColor);
   opacity: 0;
   background-color: var(--BackgroundColor);
   color: var(--TextColor);
