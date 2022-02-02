@@ -32,7 +32,8 @@
 
 .focusRingPrimary:focus {
   outline: 0;
-  box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--PrimaryFocusBoxShadowColor);
+  box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+    var(--PrimaryFocusBoxShadowColor);
 }
 
 .focusRingDanger:focus {

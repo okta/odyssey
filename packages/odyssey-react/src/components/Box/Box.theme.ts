@@ -13,9 +13,7 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  // Root
-  FontFamily: theme.FontFamilyBase,
-
+  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
   // Width/Height
   MaxLineLength: theme.FontLineLengthMax,
 
@@ -26,6 +24,19 @@ export const theme: ThemeReducer = (theme) => ({
   SpaceRemL: theme.SpaceRemL,
   SpaceRemXl: theme.SpaceRemXl,
 
+  // Shadow
+  BaseBoxShadow: theme.ShadowBase,
+  HoverBoxShadow: theme.ShadowHover,
+
+  // Focus Outline
+  PrimaryFocusBoxShadowColor: theme.ColorFocusPrimary,
+  DangerFocusBoxShadowColor: theme.ColorFocusDanger,
+  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
+  /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
+
+  // Root
+  FontFamily: theme.FontFamilyBase,
+
   // Text
   BaseFontFamily: theme.FontFamilyBase,
   NormalFontWeight: theme.FontWeightNormal,
@@ -33,7 +44,6 @@ export const theme: ThemeReducer = (theme) => ({
   FontSize: theme.FontSizeBody,
   BaseLineHeight: theme.FontLineHeightBase,
   BodyTextColor: theme.ColorTextBody,
-
 
   // Border
   BaseBorderWidth: theme.BorderWidthBase,
@@ -45,11 +55,6 @@ export const theme: ThemeReducer = (theme) => ({
   DisplayBorderColor: theme.ColorBorderDisplay,
   PrimaryBorderColor: theme.ColorBorderPrimaryBase,
   DangerBorderColor: theme.ColorBorderDangerBase,
-
-  // Focus Outline
-  PrimaryFocusBoxShadowColor: theme.ColorFocusPrimary,
-  DangerFocusBoxShadowColor: theme.ColorFocusDanger,
-  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
 
   // Background
   BaseBackgroundColor: theme.ColorBackgroundBase,
@@ -66,8 +71,4 @@ export const theme: ThemeReducer = (theme) => ({
   SuccessLightBackgroundColor: theme.ColorBackgroundSuccessLight,
   SuccessBaseBackgroundColor: theme.ColorBackgroundSuccessBase,
   SuccessDarkBackgroundColor: theme.ColorBackgroundSuccessDark,
-
-  // Shadow
-  BaseBoxShadow: theme.ShadowBase,
-  HoverBoxShadow: theme.ShadowHover,
 });
