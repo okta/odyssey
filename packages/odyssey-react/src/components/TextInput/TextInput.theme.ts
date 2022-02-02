@@ -21,10 +21,9 @@ export const theme: ThemeReducer = (theme) => ({
   DisabledBackgroundColor: theme.ColorBackgroundDisabled,
   DisabledBorderColor: theme.ColorBorderDisabled,
   DisabledTextColor: theme.ColorTextBody,
-  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
   FocusBoxShadowColor: theme.ColorFocusPrimary,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
-  /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
   HoverFocusBorderColor: theme.ColorPrimaryBase,
