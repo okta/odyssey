@@ -31,11 +31,11 @@
 }
 
 .maxWidthMaxLineLength {
-  max-width: $max-line-length;
+  max-width: var(--MaxLineLength);
 }
 
 .maxWidthMaxLineLengthPlusPadding {
-  max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
+  max-width: calc(var(--MaxLineLength) + var(--SpaceRemM) + var(--SpaceRemM));
 }
 
 .height1em {
@@ -47,5 +47,5 @@
 }
 
 .maxHeightScreenMinusPadding {
-  max-height: calc(100vh - #{$spacing-m});
+  max-height: calc(100vh - var(--SpaceRemM));
 }

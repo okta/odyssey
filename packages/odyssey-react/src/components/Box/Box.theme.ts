@@ -13,16 +13,11 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  // REMOVE THIS
-  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
+  // Root
+  FontFamily: theme.FontFamilyBase,
 
-  // Font
-  FontFamilyBase: theme.FontFamilyBase,
-  FontWeightNormal: theme.FontWeightNormal,
-  FontStyleNormal: theme.FontStyleNormal,
-  FontSize: theme.FontSizeBody,
-  FontLineHeightBase: theme.FontLineHeightBase,
-  ColorTextBody: theme.ColorTextBody,
+  // Width/Height
+  MaxLineLength: theme.FontLineLengthMax,
 
   // Space
   SpaceRemXs: theme.SpaceRemXs,
@@ -31,39 +26,48 @@ export const theme: ThemeReducer = (theme) => ({
   SpaceRemL: theme.SpaceRemL,
   SpaceRemXl: theme.SpaceRemXl,
 
+  // Text
+  BaseFontFamily: theme.FontFamilyBase,
+  NormalFontWeight: theme.FontWeightNormal,
+  NormalFontStyle: theme.FontStyleNormal,
+  FontSize: theme.FontSizeBody,
+  BaseLineHeight: theme.FontLineHeightBase,
+  BodyTextColor: theme.ColorTextBody,
+
+
   // Border
-  BorderWidthBase: theme.BorderWidthBase,
-  BorderStyleBase: theme.BorderStyleBase,
-  BorderRadiusBase: theme.BorderRadiusBase,
-  BorderRadiusOuter: theme.BorderRadiusOuter,
-  ColorBorderBase: "transparent",
-  ColorBorderUi: theme.ColorBorderUi,
-  ColorBorderDisplay: theme.ColorBorderDisplay,
-  ColorBorderPrimary: theme.ColorBorderPrimaryBase,
-  ColorBorderDanger: theme.ColorBorderDangerBase,
+  BaseBorderWidth: theme.BorderWidthBase,
+  BaseBorderStyle: theme.BorderStyleBase,
+  BaseBorderRadius: theme.BorderRadiusBase,
+  OuterBorderRadius: theme.BorderRadiusOuter,
+  BaseBorderColor: "transparent",
+  UiBorderColor: theme.ColorBorderUi,
+  DisplayBorderColor: theme.ColorBorderDisplay,
+  PrimaryBorderColor: theme.ColorBorderPrimaryBase,
+  DangerBorderColor: theme.ColorBorderDangerBase,
 
   // Focus Outline
-  ColorFocusPrimary: theme.ColorFocusPrimary,
-  ColorFocusDanger: theme.ColorFocusDanger,
-  FocusOutlineWidth: theme.FocusOutlineWidthBase,
+  PrimaryFocusBoxShadowColor: theme.ColorFocusPrimary,
+  DangerFocusBoxShadowColor: theme.ColorFocusDanger,
+  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
 
   // Background
-  ColorBackgroundBase: theme.ColorBackgroundBase,
-  ColorBackgroundDisabled: theme.ColorBackgroundDisabled,
-  ColorBackgroundPrimaryLight: theme.ColorBackgroundPrimaryLight,
-  ColorBackgroundPrimaryBase: theme.ColorBackgroundPrimaryBase,
-  ColorBackgroundPrimaryDark: theme.ColorBackgroundPrimaryDark,
-  ColorBackgroundDangerLight: theme.ColorBackgroundDangerLight,
-  ColorBackgroundDangerBase: theme.ColorBackgroundDangerBase,
-  ColorBackgroundDangerDark: theme.ColorBackgroundDangerDark,
-  ColorBackgroundCautionLight: theme.ColorBackgroundCautionLight,
-  ColorBackgroundCautionBase: theme.ColorBackgroundCautionBase,
-  ColorBackgroundCautionDark: theme.ColorBackgroundCautionDark,
-  ColorBackgroundSuccessLight: theme.ColorBackgroundSuccessLight,
-  ColorBackgroundSuccessBase: theme.ColorBackgroundSuccessBase,
-  ColorBackgroundSuccessDark: theme.ColorBackgroundSuccessDark,
+  BaseBackgroundColor: theme.ColorBackgroundBase,
+  DisabledBackgroundColor: theme.ColorBackgroundDisabled,
+  PrimaryLightBackgroundColor: theme.ColorBackgroundPrimaryLight,
+  PrimaryBaseBackgroundColor: theme.ColorBackgroundPrimaryBase,
+  PrimaryDarkBackgroundColor: theme.ColorBackgroundPrimaryDark,
+  DangerLightBackgroundColor: theme.ColorBackgroundDangerLight,
+  DangerBaseBackgroundColor: theme.ColorBackgroundDangerBase,
+  DangerDarkBackgroundColor: theme.ColorBackgroundDangerDark,
+  CautionLightBackgroundColor: theme.ColorBackgroundCautionLight,
+  CautionBaseBackgroundColor: theme.ColorBackgroundCautionBase,
+  CautionDarkBackgroundColor: theme.ColorBackgroundCautionDark,
+  SuccessLightBackgroundColor: theme.ColorBackgroundSuccessLight,
+  SuccessBaseBackgroundColor: theme.ColorBackgroundSuccessBase,
+  SuccessDarkBackgroundColor: theme.ColorBackgroundSuccessDark,
 
   // Shadow
-  ShadowBase: theme.ShadowBase,
-  ShadowHover: theme.ShadowHover,
+  BaseBoxShadow: theme.ShadowBase,
+  HoverBoxShadow: theme.ShadowHover,
 });
