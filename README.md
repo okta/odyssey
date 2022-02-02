@@ -10,25 +10,13 @@ Build and design consistent, efficient, and accessible UIs for all Okta users.
 | [@okta/odyssey-react-theme](https://github.com/okta/odyssey/blob/master/packages/odyssey-react-theme/README.md)     | Theming layer for odyssey-react.                                 |
 | [@okta/odyssey-react](https://github.com/okta/odyssey/blob/master/packages/odyssey-react/README.md)                 | Odyssey components for [React](https://reactjs.org/).            |
 
-### Making a commit
-
-Odyssey uses the [conventional commits](https://www.conventionalcommits.org)
-standard for formating commit messages. After you commit work locally with
-`git` your commit message wil be linted to ensure it adheres to the
-configuration setup within the `@okta/odyssey-commitlint` package.
-In case of emergencies, break the glass and use an invalid commit message
-by providing the `--no-verify` flag to `git commit`.
-
 ## Browser Support
 
 Odyssey browser support mirrors Okta's [Supported platforms, browsers, and operating systems](https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm) with the exception of IE 11.
 
-## Feature Requests, Bugs & Feedback
+## Contributing
 
-### Oktanauts
-
-- Reach out to us directly in the [#odyssey](https://okta.slack.com/archives/C7T2H3KNJ) Slack channel.
-- Open a JIRA issue [via this GitHub link](https://github.com/okta/odyssey/issues/new/choose).
+Please follow our [contributing guidelines](./.github/CONTRIBUTING.md).
 
 ## License
 
