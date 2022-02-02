@@ -16,6 +16,7 @@ import { Box } from "../Box";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOmit } from "../../utils";
 import styles from "./Heading.module.scss";
+import { theme } from "./Heading.theme";
 
 export interface HeadingProps
   extends Omit<ComponentPropsWithRef<"h1">, "style" | "className" | "color"> {
@@ -53,7 +54,7 @@ export interface HeadingProps
  * use the corresponding visual size.
  */
 export const Heading = withTheme(
-  () => ({}),
+  theme,
   styles
 )(
   forwardRef<HTMLHeadingElement, HeadingProps>((props, ref) => {

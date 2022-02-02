@@ -12,48 +12,48 @@
 
 .root {
   margin-block-start: 0;
-  margin-block-end: $spacing-xs-em;
+  margin-block-end: var(--MarginBlockEnd);
   margin-inline: 0;
-  color: $text-heading;
-  font-family: $body-font-family;
-  font-size: $base-font-size;
+  color: var(--TextColor);
+  font-family: var(--FontFamily);
+  font-size: var(--FontSize);
   font-weight: 600;
 }
 
 .level1 {
-  font-size: $size-heading-1;
+  font-size: var(--Level1FontSize);
 }
 
 .level2 {
-  font-size: $size-heading-2;
+  font-size: var(--Level2FontSize);
 }
 
 .level3 {
-  font-size: $size-heading-3;
+  font-size: var(--Level3FontSize);
 }
 
 .level4 {
-  font-size: $size-heading-4;
+  font-size: var(--Level4FontSize);
 }
 
 .level5 {
-  font-size: $size-heading-5;
+  font-size: var(--Level5FontSize);
 }
 
 .level6 {
-  font-size: $size-heading-6;
+  font-size: var(--Level6FontSize);
 }
 
 .level1,
 .level2,
 .level3 {
-  line-height: $heading-line-height;
+  line-height: var(--HeadingLineHeight);
 }
 
 .level4,
 .level5,
 .level6 {
-  line-height: $base-line-height;
+  line-height: var(--BaseLineHeight);
 }
 
 .noEndMargin {
@@ -61,9 +61,9 @@
 }
 
 .baseLineHeight {
-  line-height: $base-line-height;
+  line-height: var(--BaseLineHeight);
 }
 
 .headingLineHeight {
-  line-height: $heading-line-height;
+  line-height: var(--HeadingLineHeight);
 }
