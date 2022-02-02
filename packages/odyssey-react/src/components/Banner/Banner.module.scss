@@ -82,7 +82,7 @@
   background-color: var(--DangerBackgroundColor);
 }
 
-@media screen and (max-width: (calc(var(--MaxWidth) * 1.5))) {
+@media screen and (max-width: (calc(var(--MaxLineLength) * 1.5))) {
   .root {
     grid-template-areas: initial;
     grid-template-columns: repeat(2, minmax(min-content, max-content));
