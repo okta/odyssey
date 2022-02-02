@@ -15,11 +15,11 @@
 
   display: grid;
   position: relative;
-  grid-column-gap: var(--GridColumnGap);
-  grid-row-gap: var(--GridRowGap);
   grid-template-columns: min-content 1fr min-content;
   align-items: start;
   max-width: var(--MaxWidth);
+  column-gap: var(--ColumnGap);
+  row-gap: var(--RowGap);
   padding-block: var(--PaddingBlock);
   padding-inline: var(--PaddingInline);
   animation-name: toastIn, toastOut;
@@ -62,7 +62,7 @@
 
 .icon {
   width: var(--IconSize);
-  color: var(--IconColor);
+  color: var(--IconTextColor);
   font-size: var(--IconSize);
   line-height: 1;
 }
