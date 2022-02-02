@@ -5,6 +5,10 @@
         "comment": "Base text color used for most typography",
         "value": "{color.palette.neutral.900.value}"
       },
+      "heading": {
+        "comment": "Base text color used for headings",
+        "value": "{color.palette.neutral.900.value}"
+      },
       "bodyInverse": {
         "comment": "Inverse text color typically used on a colorful background",
         "value": "{color.palette.neutral.white.value}"
