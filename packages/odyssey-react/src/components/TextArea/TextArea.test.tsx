@@ -20,18 +20,22 @@ const label = "Destination";
 
 describe("TextArea", () => {
   it("renders into the document", () => {
-    const { getByRole } = render(<TextArea label={label} />);
+    render(<TextArea label={label} />);
 
-    expect(getByRole(textBox)).toBeInTheDocument();
+    expect(screen.getByRole(textBox)).toBeVisible();
+  });
+
+  it("accepts and spreads omitted rest props to the textarea", () => {
+    render(<TextArea label={label} data-testid="foo" />);
+
+    expect(screen.getByTestId("foo")).toBeInstanceOf(HTMLTextAreaElement);
   });
 
   it("renders a provided id associating the input and label", () => {
-    const { getByRole, getByText } = render(
-      <TextArea label={label} id="foo" />
-    );
+    render(<TextArea label={label} id="foo" />);
 
-    expect(getByRole(textBox)).toHaveAttribute("id", "foo");
-    expect(getByText(label).parentElement).toHaveAttribute("for", "foo");
+    expect(screen.getByRole(textBox)).toHaveAttribute("id", "foo");
+    expect(screen.getByText(label).parentElement).toHaveAttribute("for", "foo");
   });
 
   it("renders a generated id associating the input and label", () => {
@@ -41,36 +45,34 @@ describe("TextArea", () => {
   });
 
   it("renders a provided name for the input", () => {
-    const { getByRole } = render(<TextArea label={label} name="bar" />);
+    render(<TextArea label={label} name="bar" />);
 
-    expect(getByRole(textBox)).toHaveAttribute("name", "bar");
+    expect(screen.getByRole(textBox)).toHaveAttribute("name", "bar");
   });
 
   it("renders a provided hint", () => {
     const hint = "Look here";
 
-    const { getByText } = render(<TextArea label={label} hint={hint} />);
+    render(<TextArea label={label} hint={hint} />);
 
-    expect(getByText(hint)).toBeInTheDocument();
+    expect(screen.getByText(hint)).toBeVisible();
   });
 
   it.each([["disabled"], ["readonly"], ["required"]])(
     "renders %s attribute",
     (attr: string) => {
-      const { getByRole } = render(
-        <TextArea label={label} {...{ [attr]: true }} />
-      );
+      render(<TextArea label={label} {...{ [attr]: true }} />);
 
-      expect(getByRole(textBox)).toHaveAttribute(attr);
+      expect(screen.getByRole(textBox)).toHaveAttribute(attr);
     }
   );
 
   it("invokes onChange with expected args when change input event fires", () => {
     const handle = jest.fn();
 
-    const { getByRole } = render(<TextArea onChange={handle} label={label} />);
+    render(<TextArea onChange={handle} label={label} />);
 
-    fireEvent.change(getByRole(textBox), { target: { value: "new" } });
+    fireEvent.change(screen.getByRole(textBox), { target: { value: "new" } });
 
     expect(handle).toHaveBeenCalledTimes(1);
     expect(handle).toHaveBeenLastCalledWith(
@@ -87,11 +89,9 @@ describe("TextArea", () => {
     (prop, type) => {
       const handle = jest.fn();
 
-      const { getByRole } = render(
-        <TextArea {...{ [prop]: handle }} label={label} />
-      );
+      render(<TextArea {...{ [prop]: handle }} label={label} />);
 
-      fireEvent[type].call(fireEvent, getByRole(textBox));
+      fireEvent[type].call(fireEvent, screen.getByRole(textBox));
 
       expect(handle).toHaveBeenCalledTimes(1);
       expect(handle).toHaveBeenLastCalledWith(
@@ -100,15 +100,13 @@ describe("TextArea", () => {
     }
   );
 
-  it("invokes textareaRef with expected args after render", () => {
-    const handle = jest.fn();
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
 
-    const { getByRole } = render(
-      <TextArea textareaRef={handle} label={label} />
-    );
+    render(<TextArea ref={ref} label={label} />);
 
-    expect(handle).toHaveBeenCalledTimes(1);
-    expect(handle).toHaveBeenLastCalledWith(getByRole(textBox));
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(textBox));
   });
 
   a11yCheck(() => render(<TextArea label="foo" />));
