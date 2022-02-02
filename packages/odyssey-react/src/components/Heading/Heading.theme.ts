@@ -26,5 +26,6 @@ export const theme: ThemeReducer = (theme) => ({
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
   LineHeight: theme.FontLineHeightHeading,
-  AltLineHeight: theme.FontLineHeightHeading,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
+  Heading: theme.FontLineHeightHeading,
 });
