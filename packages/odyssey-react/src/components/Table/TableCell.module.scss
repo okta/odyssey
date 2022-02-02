@@ -12,32 +12,33 @@
 
 .root {
   border-block-end: var(--BorderWidth) var(--BorderStyle) var(--BorderColor);
-  max-width: var(--MaxLineLength);
-  padding-block: var(--SpacePaddingBlock);
-  padding-inline: var(--SpacePaddingInline);
+  max-width: var(--MaxWidth);
+  padding-block: var(--PaddingBlock);
+  padding-inline: var(--PaddingInline);
   text-align: start;
   vertical-align: baseline;
   overflow-wrap: break-word;
 }
 
 .headerCell {
-  color: var(--ColorTextHeader);
-  font-weight: var(--FontWeightHeader);
+  color: var(--HeaderTextColor);
+  font-weight: var(--HeaderFontWeight);
 }
 
 .headerCellCol {
-  border-block-start: var(--BorderWidthHeaderCol) var(--BorderStyleHeaderCol)
-    var(--BorderColorHeaderCol);
+  border-block-start-width: var(--HeaderCellColumnBorderWidth);
+  border-block-start-style: var(--HeaderCellColumnBorderStyle);
+  border-block-start-color: var(--HeaderCellColumnBorderColor);
 }
 
 /* Table states */
 
 .emptyState {
   max-width: 100%;
-  padding-block: var(--SpacePaddingBlockEmpty);
-  padding-inline: var(--SpacePaddingInlineEmpty);
-  background-color: var(--BackgroundColorEmpty);
-  color: var(--ColorTextEmpty);
+  padding-block: var(--EmptyPaddingBlock);
+  padding-inline: var(--EmptyPaddingInline);
+  background-color: var(--EmptyBackgroundColor);
+  color: var(--EmptyTextColor);
   text-align: center;
 }
 
