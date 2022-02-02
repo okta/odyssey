@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.0](https://github.com/okta/odyssey/compare/v0.8.4...v0.9.0) (2022-02-02)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey:** renames "title" variables to "heading"
+
+### Code Refactoring
+
+- **odyssey:** renames "title" variables to "heading" ([622d4ec](https://github.com/okta/odyssey/commit/622d4ec8c3f17f524ae44635c141ead54093d4dc))
+
 ### [0.8.4](https://github.com/okta/odyssey/compare/v0.8.3...v0.8.4) (2021-11-18)
 
 **Note:** Version bump only for package @okta/odyssey
