@@ -102,7 +102,8 @@
 
   &:focus {
     background-color: var(--DangerFocusBackgroundColor);
-    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--DangerFocusBoxShadowColor);
+    box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+      var(--DangerFocusBoxShadowColor);
   }
 
   &:disabled {
