@@ -13,13 +13,7 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  MarginBlockEnd: theme.SpaceRemXs,
   BorderRadius: theme.BorderRadiusBase,
-  FontSize: theme.FontSizeBody,
-  FontWeight: theme.FontWeightNormal,
-  TransitionDuration: theme.TransitionDurationBase,
-  TransitionTimingFunction: theme.TransitionTimingBase,
-
   BoxBackgroundColor: "transparent",
   BoxBorderColor: theme.ColorBorderUi,
   BoxBorderStyle: theme.BorderStyleBase,
@@ -32,6 +26,7 @@ export const theme: ThemeReducer = (theme) => ({
   BoxDisabledCheckedBorderColor: theme.ColorPrimaryLight,
   BoxFocusBorderColor: theme.ColorPrimaryBase,
   BoxFocusBoxShadowColor: theme.ColorFocusPrimary,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   BoxFocusBoxShadowSpread: theme.FocusOutlineWidthSmall,
   BoxHoverBorderColor: theme.ColorPrimaryBase,
   BoxInvalidBackgroundColor: theme.ColorBackgroundDangerDark,
@@ -39,11 +34,14 @@ export const theme: ThemeReducer = (theme) => ({
   BoxInvalidFocusBoxShadowColor: theme.ColorFocusDanger,
   BoxInvalidHoverBorderColor: theme.ColorDangerDark,
   BoxSize: "1em",
-
-  LabelPaddingInlineStart: theme.SpaceEmS,
-  LabelDisabledTextColor: theme.ColorTextBody,
-  LabelInvalidTextColor: theme.ColorTextDanger,
-
+  FontSize: theme.FontSizeBody,
+  FontWeight: theme.FontWeightNormal,
   IndicatorColor: theme.ColorTextBodyInverse,
   IndicatorSize: "0.75em",
+  LabelDisabledTextColor: theme.ColorTextBody,
+  LabelInvalidTextColor: theme.ColorTextDanger,
+  LabelPaddingInlineStart: theme.SpaceEmS,
+  MarginBlockEnd: theme.SpaceRemXs,
+  TransitionDuration: theme.TransitionDurationBase,
+  TransitionTimingFunction: theme.TransitionTimingBase,
 });
