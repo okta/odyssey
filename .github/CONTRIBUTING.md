@@ -15,7 +15,7 @@ Please read [the full text](/CODE_OF_CONDUCT.md) so that you can understand what
 
 - Code should be easy to reason about
 - Code should be easy to delete
-- Avoid abstracting too early
+- Avoid early abstractions
 - Avoid thinking too far into the future
 - Complexity should be introduced when it is inevitable
 
