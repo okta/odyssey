@@ -156,8 +156,8 @@
     border-style: var(--KbdBorderStyle);
     border-color: var(--KbdBorderColor);
     background-color: var(--KbdBackgroundColor);
-    box-shadow: 0 2px 0 var(--KbdInsideShadowColor),
-      0 3px 0 var(--KbdOutsideShadowColor);
+    box-shadow: 0 2px 0 var(--KbdInsideBoxShadowColor),
+      0 3px 0 var(--KbdOutsideBoxShadowColor);
     font-weight: var(--KbdFontWeight);
     line-height: var(--KbdLineHeight);
   }
