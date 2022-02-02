@@ -11,12 +11,12 @@
  */
 
 .root {
-  max-width: calc(var(--FontLineLengthMax) + (2 * var(--SpacePaddingInline)));
-  margin-block-start: var(--SpaceMarginBlockStart);
-  margin-block-end: var(--SpaceMarginBlockEnd);
-  margin-inline: var(--SpaceMarginInline);
-  padding-block: var(--SpacePaddingBlock);
-  padding-inline: var(--SpacePaddingInline);
+  max-width: calc(var(--FontLineLengthMax) + (2 * var(--PaddingInline)));
+  margin-block-start: var(--MarginBlockStart);
+  margin-block-end: var(--MarginBlockEnd);
+  margin-inline: var(--MarginInline);
+  padding-block: var(--PaddingBlock);
+  padding-inline: var(--PaddingInline);
 
   &:last-child {
     margin-block-end: 0;
@@ -26,7 +26,7 @@
 .header,
 .error,
 .main {
-  margin-block-end: var(--SpaceMarginBlockEndHeaderErrorMain);
+  margin-block-end: var(--HeaderErrorMainMarginBlockEnd);
 }
 
 .actions {
