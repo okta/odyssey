@@ -11,31 +11,31 @@
  */
 
 .hoverBorderColorUi:hover {
-  border-color: var(--ColorBorderUi);
+  border-color: var(--UiBorderColor);
 }
 
 .hoverBorderColorPrimary:hover {
-  border-color: var(--ColorBorderPrimary);
+  border-color: var(--PrimaryBorderColor);
 }
 
 .hoverBoxShadowDefault:hover {
-  box-shadow: var(--ShadowHover);
+  box-shadow: var(--HoverBoxShadow);
 }
 
 .focusBorderColorPrimary:focus {
-  border-color: var(--ColorBorderPrimary);
+  border-color: var(--PrimaryBorderColor);
 }
 
 .focusBorderColorDanger:focus {
-  border-color: var(--ColorBorderDanger);
+  border-color: var(--DangerBorderColor);
 }
 
 .focusRingPrimary:focus {
   outline: 0;
-  box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusPrimary);
+  box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--PrimaryFocusBoxShadowColor);
 }
 
 .focusRingDanger:focus {
   outline: 0;
-  box-shadow: 0 0 0 var(--FocusOutlineWidth) var(--ColorFocusDanger);
+  box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--DangerFocusBoxShadowColor);
 }
