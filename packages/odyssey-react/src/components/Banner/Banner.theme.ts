@@ -13,7 +13,8 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  MaxWidth: theme.FontLineLengthMax,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
+  MaxLineLength: theme.FontLineLengthMax,
 
   PaddingBlock: theme.SpaceRemS,
   PaddingInline: theme.SpaceRemM,
