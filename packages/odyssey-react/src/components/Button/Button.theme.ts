@@ -13,6 +13,7 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   Gutter: theme.SpaceRemS,
 
   MarginBlock: 0,
@@ -20,7 +21,7 @@ export const theme: ThemeReducer = (theme) => ({
   PaddingBlock: theme.SpaceEmXs,
   PaddingInline: theme.SpaceEmS,
   TransitionDuration: theme.TransitionDurationBase,
-  TransitionTiming: theme.TransitionTimingBase,
+  TransitionTimingFunction: theme.TransitionTimingBase,
   BorderRadius: theme.BorderRadiusBase,
   BorderStyle: theme.BorderStyleBase,
   BorderWidth: theme.BorderWidthBase,
@@ -30,6 +31,7 @@ export const theme: ThemeReducer = (theme) => ({
   FontWeight: theme.FontWeightBold,
   LineHeight: theme.FontLineHeightBase,
   FocusBoxShadowColor: theme.ColorFocusPrimary,
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
 
   // Label
