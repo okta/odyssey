@@ -19,13 +19,13 @@ import { TableFooter } from "./TableFooter";
 import { TableRow } from "./TableRow";
 import { TableHeaderCell } from "./TableHeaderCell";
 
-const caption = "test table";
-const tableTitle = "test table";
+const screenReaderCaption = "test table";
+const tableCaption = "test table";
 
 describe("Table", () => {
   it("renders the table", () => {
     render(
-      <Table caption={caption} title={tableTitle}>
+      <Table screenReaderCaption={screenReaderCaption} caption={tableCaption}>
         <TableHeader />
         <TableBody />
         <TableFooter />
@@ -35,38 +35,46 @@ describe("Table", () => {
     expect(screen.getByRole("table")).toBeInTheDocument();
   });
 
-  it("renders the caption prop in the caption element", () => {
-    render(<Table caption={caption} title={tableTitle} />);
+  it("renders the screenReaderCaption prop in the caption element", () => {
+    render(
+      <Table screenReaderCaption={screenReaderCaption} caption={tableCaption} />
+    );
 
-    expect(screen.getByRole("table", { name: caption })).toBeVisible();
+    expect(
+      screen.getByRole("table", { name: screenReaderCaption })
+    ).toBeVisible();
   });
 
   it("conditionally uses a container", () => {
-    render(<Table caption={caption} withContainer={false} />);
+    render(
+      <Table screenReaderCaption={screenReaderCaption} withContainer={false} />
+    );
     expect(
       screen.getByRole("table").parentElement?.classList.contains("figure")
     ).toBe(false);
   });
 });
 
-const title = "test title";
+const caption = "test caption";
 
 describe("Table Container", () => {
   it("renders the container", () => {
-    render(<Table.Container title={title} />);
+    render(<Table.Container caption={caption} />);
     expect(screen.getByRole("figure")).toBeInTheDocument();
   });
 
-  it("renders the title", () => {
-    render(<Table.Container title={title} />);
-    expect(screen.getByText(title).tagName.toLowerCase()).toEqual("figcaption");
+  it("renders the caption", () => {
+    render(<Table.Container caption={caption} />);
+    expect(screen.getByText(caption).tagName.toLowerCase()).toEqual(
+      "figcaption"
+    );
   });
 });
 
 describe("Table Data Cell", () => {
   it("renders the cell", () => {
     render(
-      <Table caption={caption} title={tableTitle}>
+      <Table screenReaderCaption={screenReaderCaption} caption={tableCaption}>
         <Table.Body>
           <Table.Row>
             <Table.DataCell>data</Table.DataCell>
@@ -79,7 +87,7 @@ describe("Table Data Cell", () => {
 
   it("adds the proper class for format prop", () => {
     render(
-      <Table caption={caption} title={tableTitle}>
+      <Table screenReaderCaption={screenReaderCaption} caption={tableCaption}>
         <Table.Body>
           <Table.Row>
             <Table.DataCell format="num">1</Table.DataCell>
@@ -94,20 +102,20 @@ describe("Table Data Cell", () => {
 describe("Table Header Cell", () => {
   it("renders the cell", () => {
     render(
-      <Table caption={caption} title={tableTitle}>
+      <Table screenReaderCaption={screenReaderCaption} caption={tableCaption}>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>heading</Table.HeaderCell>
+            <Table.HeaderCell>caption</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
       </Table>
     );
-    expect(screen.getByText("heading")).toBeInTheDocument();
+    expect(screen.getByText("caption")).toBeInTheDocument();
   });
 
   it("adds the proper class for format prop", () => {
     render(
-      <Table caption={caption} title={tableTitle}>
+      <Table screenReaderCaption={screenReaderCaption} caption={tableCaption}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell format="num">number</Table.HeaderCell>
@@ -153,7 +161,7 @@ describe("Table Sort Button", () => {
 
 a11yCheck(() =>
   render(
-    <Table caption={caption} title={tableTitle}>
+    <Table screenReaderCaption={screenReaderCaption} caption={tableCaption}>
       <TableHeader>
         <TableRow>
           <TableHeaderCell></TableHeaderCell>

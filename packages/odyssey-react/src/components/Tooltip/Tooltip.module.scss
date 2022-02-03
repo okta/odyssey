@@ -11,18 +11,27 @@
  */
 
 .root {
-  @include border-radius($base-border-radius);
+  @include border-radius(var(--BorderRadius));
 
   display: block;
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  padding-block: $spacing-xs;
-  padding-inline: $spacing-s;
-  transition: opacity $base-duration $base-timing 1s;
-  border: 1px solid cv("gray", "900");
+  padding-block: var(--PaddingBlock);
+  padding-inline: var(--PaddingInline);
+  transition-property: opacity;
+  transition-duration: var(--TransitionDuration);
+  transition-timing-function: var(--TransitionTimingFunction);
+  transition-delay: var(--TransitionDelay);
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--BackgroundColor);
   opacity: 0;
-  background: cv("gray", "900");
+  background-color: var(--BackgroundColor);
+  color: var(--TextColor);
+  font-size: var(--FontSize);
+  font-weight: var(--FontWeight);
+  line-height: var(--LineHeight);
   white-space: nowrap;
   pointer-events: none;
 
@@ -36,11 +45,11 @@
   }
 
   &::after {
-    border-width: calc(#{$spacing-xs} - 2px);
+    border-width: calc(var(--TailWidth) - calc(var(--BorderWidth) * 2));
   }
 
   &::before {
-    border-width: $spacing-xs;
+    border-width: var(--TailWidth);
   }
 
   /* stylelint-disable-next-line selector-max-universal */
@@ -53,7 +62,7 @@
 }
 
 .topPosition {
-  inset-block-end: calc(100% + #{$spacing-s});
+  inset-block-end: calc(100% + var(--TailMargin));
   inset-inline-start: 50%;
   transform: translateX(-50%);
 
@@ -65,11 +74,11 @@
   }
 
   &::after {
-    border-block-start-color: cv("gray", "900");
+    border-block-start-color: var(--BackgroundColor);
   }
 
   &::before {
-    border-block-start-color: cv("gray", "900");
+    border-block-start-color: var(--BackgroundColor);
   }
 
   [dir="rtl"] & {
@@ -84,7 +93,7 @@
 
 .endPosition {
   inset-block-start: 50%;
-  inset-inline-start: calc(100% + #{$spacing-s});
+  inset-inline-start: calc(100% + var(--TailMargin));
   transform: translateY(-50%);
 
   &::after,
@@ -95,16 +104,16 @@
   }
 
   &::after {
-    border-inline-end-color: cv("gray", "900");
+    border-inline-end-color: var(--BackgroundColor);
   }
 
   &::before {
-    border-inline-end-color: cv("gray", "900");
+    border-inline-end-color: var(--BackgroundColor);
   }
 }
 
 .bottomPosition {
-  inset-block-start: calc(100% + #{$spacing-s});
+  inset-block-start: calc(100% + var(--TailMargin));
   inset-inline-start: 50%;
   transform: translateX(-50%);
 
@@ -116,11 +125,11 @@
   }
 
   &::after {
-    border-block-end-color: cv("gray", "900");
+    border-block-end-color: var(--BackgroundColor);
   }
 
   &::before {
-    border-block-end-color: cv("gray", "900");
+    border-block-end-color: var(--BackgroundColor);
   }
 
   [dir="rtl"] & {
@@ -135,7 +144,7 @@
 
 .startPosition {
   inset-block-start: 50%;
-  inset-inline-end: calc(100% + #{$spacing-s});
+  inset-inline-end: calc(100% + var(--TailMargin));
   transform: translateY(-50%);
 
   &::after,
@@ -146,11 +155,11 @@
   }
 
   &::after {
-    border-inline-start-color: cv("gray", "900");
+    border-inline-start-color: var(--BackgroundColor);
   }
 
   &::before {
-    border-inline-start-color: cv("gray", "900");
+    border-inline-start-color: var(--BackgroundColor);
   }
 }
 
@@ -171,7 +180,7 @@
     width: 100vw;
     border: 0;
     opacity: 0;
-    font-size: $size-body-caption;
+    font-size: var(--FontSize);
     white-space: wrap;
     pointer-events: none;
 
@@ -185,11 +194,11 @@
     }
 
     &::after {
-      border-width: calc(#{$spacing-xs} - 2px);
+      border-width: calc(var(--TailWidth) - calc(var(--BorderWidth) * 2));
     }
 
     &::before {
-      border-width: $spacing-xs;
+      border-width: var(--TailWidth);
     }
   }
 

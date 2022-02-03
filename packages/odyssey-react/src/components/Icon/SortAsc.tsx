@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type SortAscIconProps = SvgIconNoChildrenProps;
 
-const SortAscIcon = forwardRef<SVGSVGElement, SortAscIconProps>(
+export const SortAscIcon = forwardRef<SVGSVGElement, SortAscIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -38,5 +38,3 @@ const SortAscIcon = forwardRef<SVGSVGElement, SortAscIconProps>(
 );
 
 SortAscIcon.displayName = "SortAscIcon";
-
-export { SortAscIcon };

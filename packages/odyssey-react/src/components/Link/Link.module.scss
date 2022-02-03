@@ -11,40 +11,40 @@
  */
 
 .root {
-  color: cv("blue", "500");
+  color: var(--TextColor);
   text-decoration: none;
 
   &:hover {
-    color: cv("blue", "500");
+    color: var(--TextColor);
     text-decoration: underline;
   }
 
   &:visited {
-    color: cv("blue", "500");
+    color: var(--TextColor);
   }
 }
 
 .indicator {
   display: inline-block;
-  margin-inline-start: 0.2em;
+  margin-inline-start: var(--IndicatorMarginInlineStart);
 }
 
 .icon {
   display: inline-block;
-  margin-inline-end: 0.2em;
+  margin-inline-end: var(--IconMarginInlineEnd);
 }
 
 /* Variant */
 
 .secondaryVariant {
-  color: $text-body;
+  color: var(--SecondaryTextColor);
   text-decoration: underline;
 
   &:hover {
-    color: $text-body;
+    color: var(--SecondaryTextColor);
   }
 
   &:visited {
-    color: $text-body;
+    color: var(--SecondaryTextColor);
   }
 }

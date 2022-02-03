@@ -19,7 +19,7 @@ import type { SvgIconNoChildrenProps } from "./types";
 
 export type CaretDownIconProps = SvgIconNoChildrenProps;
 
-const CaretDownIcon = forwardRef<SVGSVGElement, CaretDownIconProps>(
+export const CaretDownIcon = forwardRef<SVGSVGElement, CaretDownIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -36,5 +36,3 @@ const CaretDownIcon = forwardRef<SVGSVGElement, CaretDownIconProps>(
 );
 
 CaretDownIcon.displayName = "CaretDownIcon";
-
-export { CaretDownIcon };

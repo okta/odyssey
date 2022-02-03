@@ -12,118 +12,13 @@
 
 .root {
   width: auto;
-  margin-block: 0;
-  margin-inline: 0;
+  margin-block: var(--MarginBlock);
+  margin-inline: var(--MarginInline);
   border-spacing: 0;
   border-collapse: collapse;
-  line-height: $title-line-height;
+  line-height: var(--LineHeight);
 
   &:only-child {
     margin-block-end: 0;
-  }
-}
-
-.container {
-  max-width: 100%;
-  margin-block-start: 0;
-  margin-block-end: $type-margin;
-  margin-inline: 0;
-  overflow-x: auto;
-
-  &:last-child {
-    margin-block: 0;
-  }
-}
-
-.title {
-  margin-block-end: $spacing-xs-em;
-  color: $text-heading;
-  font-size: $size-title-4;
-  font-weight: 600;
-  text-align: start;
-}
-
-.cell {
-  border-block-end: 1px solid $border-color-display;
-  max-width: $max-line-length;
-  padding-block: $spacing-s;
-  padding-inline: $spacing-s;
-  text-align: start;
-  vertical-align: baseline;
-  overflow-wrap: break-word;
-}
-
-.headerCell {
-  color: $text-heading;
-  font-weight: 600;
-}
-
-.headerCellCol {
-  border-block-start: 1px solid $border-color-display;
-}
-
-.sort {
-  position: relative;
-  align-items: center;
-  width: 100%;
-  padding-block: 0;
-  padding-inline-start: 0;
-  padding-inline-end: calc(1em + #{$spacing-s});
-  border: 0;
-  background: none;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  text-align: inherit;
-  white-space: nowrap;
-}
-
-/* Table states */
-
-.emptyState {
-  max-width: 100%;
-  padding-block: $spacing-l;
-  padding-inline: $spacing-xl;
-  background: cv("gray", "000");
-  color: $text-sub;
-  text-align: center;
-}
-
-/* Data formats */
-
-.numFormat {
-  /* Numerical data display should not swap for RTL languages. */
-  /* stylelint-disable-next-line liberty/use-logical-spec */
-  text-align: right;
-  font-feature-settings: "lnum", "tnum";
-}
-
-.dateFormat {
-  white-space: nowrap;
-}
-
-/* Sort directions */
-
-.sortIndicator {
-  position: absolute;
-  inset-block-start: 50%;
-  inset-inline-end: 0;
-  margin-block: 0;
-  margin-inline-start: $spacing-s;
-  margin-inline-end: 0;
-  transform: translateY(-50%);
-  color: $text-heading;
-  font-size: 0.75em;
-}
-
-.unsortedDirection {
-  .sortIndicator {
-    color: $text-sub;
-  }
-
-  &:hover {
-    .sortIndicator {
-      color: $text-heading;
-    }
   }
 }

@@ -11,8 +11,10 @@
  */
 
 import React from "react";
-import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
-import { useOmit, forwardRefWithStatics, withStyles } from "../../utils";
+import type { ReactText, ReactElement, ComponentPropsWithRef } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOmit, forwardRefWithStatics } from "../../utils";
+import { Box } from "../Box";
 import { TableContainer } from "./TableContainer";
 import { TableHeader } from "./TableHeader";
 import { TableBody } from "./TableBody";
@@ -21,26 +23,28 @@ import { TableRow } from "./TableRow";
 import { TableDataCell } from "./TableDataCell";
 import { TableHeaderCell } from "./TableHeaderCell";
 import { TableSortButton } from "./TableSortButton";
-
 import { ScreenReaderText } from "../ScreenReaderText";
-
 import styles from "./Table.module.scss";
+import { theme } from "./Table.theme";
 
 type ContainerProps =
-  | { withContainer: false; title?: never }
+  | { withContainer: false; caption?: never }
   | {
       /**
        * Whether to use a Table.Container around the Table
        */
       withContainer?: true;
       /**
-       * The visible heading for the table
+       * The visible caption for the table
        */
-      title: ReactNode;
+      caption?: ReactText;
     };
 
 interface ElementProps
-  extends Omit<ComponentPropsWithRef<"table">, "style" | "className"> {
+  extends Omit<
+    ComponentPropsWithRef<"table">,
+    "style" | "className" | "color" | "width"
+  > {
   /**
    * Valid Table child elements including Head, Body, and Foot
    */
@@ -48,7 +52,7 @@ interface ElementProps
   /**
    * Provides users of assistive technologies with context for the table contents
    */
-  caption: string;
+  screenReaderCaption: string;
 }
 
 export type TableProps = ContainerProps & ElementProps;
@@ -67,25 +71,40 @@ type Statics = {
 /**
  * Tables provide structure for displaying sets of data across rows and columns.
  */
-let Table = forwardRefWithStatics<HTMLTableElement, TableProps, Statics>(
-  (props, ref) => {
-    const { children, caption, title, withContainer = true, ...rest } = props;
+export const Table = withTheme(
+  theme,
+  styles
+)(
+  forwardRefWithStatics<HTMLTableElement, TableProps, Statics>((props, ref) => {
+    const {
+      children,
+      screenReaderCaption,
+      caption,
+      withContainer = true,
+      ...rest
+    } = props;
 
     const omitProps = useOmit(rest);
 
     const TableEl = () => (
-      <table {...omitProps} ref={ref} className={styles.root}>
+      <Box
+        as="table"
+        {...omitProps}
+        ref={ref}
+        className={styles.root}
+        lineHeight={false}
+      >
         <caption>
-          <ScreenReaderText>{caption}</ScreenReaderText>
+          <ScreenReaderText>{screenReaderCaption}</ScreenReaderText>
         </caption>
         {children}
-      </table>
+      </Box>
     );
 
     return (
       <>
         {withContainer ? (
-          <TableContainer title={title}>
+          <TableContainer caption={caption}>
             <TableEl />
           </TableContainer>
         ) : (
@@ -93,7 +112,7 @@ let Table = forwardRefWithStatics<HTMLTableElement, TableProps, Statics>(
         )}
       </>
     );
-  }
+  })
 );
 
 Table.Container = TableContainer;
@@ -106,7 +125,3 @@ Table.HeaderCell = TableHeaderCell;
 Table.SortButton = TableSortButton;
 
 Table.displayName = "Table";
-
-Table = withStyles(styles)(Table);
-
-export { Table };

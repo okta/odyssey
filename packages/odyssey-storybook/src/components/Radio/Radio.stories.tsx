@@ -26,6 +26,7 @@ export default {
     },
   },
   args: {
+    required: false,
     label: "Speed",
     name: "speed",
     hint: "Select the speed at which you expect to travel.",
@@ -63,5 +64,6 @@ Disabled.args = {
 
 export const Invalid = Template.bind({});
 Invalid.args = {
+  required: true,
   error: "This field is required.",
 };

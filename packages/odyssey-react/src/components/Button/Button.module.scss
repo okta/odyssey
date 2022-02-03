@@ -11,41 +11,42 @@
  */
 
 .root {
-  @include border-radius($base-border-radius);
+  @include border-radius(var(--BorderRadius));
 
   display: inline-block;
   position: relative;
-  margin-block: 0;
-  margin-inline: 0;
-  padding-block: $spacing-xs-em;
-  padding-inline: $spacing-s-em;
+  margin-block: var(--MarginBlock);
+  margin-inline: var(--MarginInline);
+  padding-block: var(--PaddingBlock);
+  padding-inline: var(--PaddingInline);
   transition-property: color, background-color, border-color, box-shadow;
-  transition-duration: 100ms;
-  transition-timing-function: linear;
-  border: 1px solid transparent;
-  background-color: $color-primary-base;
-  box-shadow: 0 0 0 0 $color-primary-light;
-  color: $white;
-  font-family: $body-font-family;
-  font-size: ms(0);
-  font-weight: 600;
-  line-height: $base-line-height;
+  transition-duration: var(--TransitionDuration);
+  transition-timing-function: var(--TransitionTimingFunction);
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--PrimaryBorderColor);
+  background-color: var(--PrimaryBackgroundColor);
+  color: var(--TextColor);
+  font-family: var(--FontFamily);
+  font-size: var(--FontSize);
+  font-weight: var(--FontWeight);
+  line-height: var(--LineHeight);
   white-space: nowrap;
 
   &:hover {
-    border-color: $color-primary-dark;
-    background-color: $color-primary-dark;
+    border-color: var(--PrimaryHoverBorderColor);
+    background-color: var(--PrimaryHoverBackgroundColor);
   }
 
   &:focus {
-    @include outline;
-
-    background-color: $color-primary-dark;
+    outline: 0;
+    background-color: var(--PrimaryFocusBackgroundColor);
+    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
   }
 
   &:disabled {
-    border-color: transparent;
-    background-color: $color-primary-light;
+    border-color: var(--PrimaryDisabledBorderColor);
+    background-color: var(--PrimaryDisabledBackgroundColor);
     cursor: not-allowed;
   }
 
@@ -58,80 +59,81 @@
 
 .label {
   display: inline-block;
-  min-width: $spacing-l-em;
+  min-width: var(--LabelMinWidth);
 
   &:not(:only-child) {
-    margin-inline-start: $spacing-xs;
+    margin-inline-start: var(--LabelMarginInlineStart);
   }
 }
 
 /* Variants */
 
 .secondaryVariant {
-  border-color: $color-primary-base;
-  background-color: $white;
-  color: $color-primary-base;
+  border-color: var(--SecondaryBorderColor);
+  background-color: var(--SecondaryBackgroundColor);
+  color: var(--SecondaryTextColor);
 
   &:hover {
-    border-color: $color-primary-base;
-    background-color: $color-primary-base;
-    color: $white;
+    border-color: var(--SecondaryHoverBorderColor);
+    background-color: var(--SecondaryHoverBackgroundColor);
+    color: var(--SecondaryHoverTextColor);
   }
 
   &:focus {
-    border-color: $color-primary-base;
-    background-color: $white;
-    color: $color-primary-base;
+    border-color: var(--SecondaryFocusBorderColor);
+    background-color: var(--SecondaryFocusBackgroundColor);
+    color: var(--SecondaryFocusTextColor);
   }
 
   &:disabled {
-    border-color: $color-primary-light;
-    background-color: $white;
-    color: $color-primary-light;
+    border-color: var(--SecondaryDisabledBorderColor);
+    background-color: var(--SecondaryDisabledBackgroundColor);
+    color: var(--SecondaryDisabledTextColor);
   }
 }
 
 .dangerVariant {
-  background-color: $color-danger-base;
+  background-color: var(--DangerBackgroundColor);
 
   &:hover {
-    border-color: $color-danger-dark;
-    background-color: $color-danger-dark;
+    border-color: var(--DangerHoverBorderColor);
+    background-color: var(--DangerHoverBackgroundColor);
   }
 
   &:focus {
-    @include outline($focus-ring-danger);
-
-    background-color: $color-danger-dark;
+    background-color: var(--DangerFocusBackgroundColor);
+    box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+      var(--DangerFocusBoxShadowColor);
   }
 
   &:disabled {
-    border-color: $color-danger-light;
-    background-color: $color-danger-light;
+    border-color: var(--DangerDisabledBorderColor);
+    background-color: var(--DangerDisabledBackgroundColor);
   }
 }
 
-.dismissVariant {
-  padding-block: ($spacing-xs-em * 0.5);
-  padding-inline: ($spacing-xs-em * 0.5);
+.dismissVariant,
+.dismissInvertedVariant {
+  padding-block: calc(var(--DismissPaddingBlock) * 0.5);
+  padding-inline: calc(var(--DismissPaddingInline) * 0.5);
   border: 0;
-  background-color: transparent;
-  color: inherit;
-  line-height: 1;
+  background-color: var(--DismissBackgroundColor);
+  color: var(--DismissTextColor);
+  line-height: var(--DismissLineHeight);
 
   &:hover {
-    border-color: transparent;
-    background-color: transparentize($white, 0.6);
+    border-color: var(--DismissHoverBorderColor);
+    background-color: var(--DismissHoverBackgroundColor);
   }
 
   &:focus {
-    background-color: transparentize($white, 0.6);
+    background-color: var(--DismissFocusBackgroundColor);
     box-shadow: 0 0 0 2px;
   }
 
   &:disabled {
-    background-color: transparentize(cv("gray", "100"), 0.6);
-    color: cv("gray", "600");
+    background-color: var(--DismissDisabledBackgroundColor);
+    color: var(--DismissDisabledTextColor);
   }
 
   .icon {
@@ -142,24 +144,28 @@
   }
 }
 
+.dismissInvertedVariant:focus {
+  box-shadow: 0 0 0 2px var(--DismissInvertedBoxShadowColor);
+}
+
 .clearVariant {
-  background-color: transparent;
-  color: $color-primary-base;
+  background-color: var(--ClearBackgroundColor);
+  color: var(--ClearTextColor);
 
   &:hover {
-    border-color: transparent;
-    background-color: cv("blue", "000");
-    color: $color-primary-dark;
+    border-color: var(--ClearHoverBorderColor);
+    background-color: var(--ClearHoverBackgroundColor);
+    color: var(--ClearHoverTextColor);
   }
 
   &:focus {
-    background-color: $white;
-    color: $color-primary-base;
+    background-color: var(--ClearFocusBackgroundColor);
+    color: var(--ClearFocusTextColor);
   }
 
   &:disabled {
-    background-color: transparent;
-    color: $color-primary-light;
+    background-color: var(--ClearDisabledBackgroundColor);
+    color: var(--ClearDisabledTextColor);
   }
 }
 
@@ -168,22 +174,22 @@
 .wideLayout {
   display: block;
   width: 100%;
-  margin-block: 0;
-  margin-inline: 0;
+  margin-block: var(--WideLayoutMarginBlock);
+  margin-inline: var(--WideLayoutMarginInline);
 
   &:not(:last-child) {
-    margin-block-end: $spacing-s;
+    margin-block-end: var(--WideLayoutMarginBlockEnd);
   }
 }
 
 /* Sizes */
 
 .sSize {
-  font-size: ms(-1);
-  line-height: $title-line-height;
+  font-size: var(--SmallSizeFontSize);
+  line-height: var(--SmallSizeLineHeight);
 }
 
 .lSize {
-  padding-block: $spacing-s-em;
-  padding-inline: $spacing-m-em;
+  padding-block: var(--LargeSizePaddingBlock);
+  padding-inline: var(--LargeSizePaddingInline);
 }

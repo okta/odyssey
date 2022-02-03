@@ -15,7 +15,7 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import { Modal } from ".";
 
 const role = "dialog";
-const modalTitle = "Modal Title";
+const modalHeading = "Modal Heading";
 const message = "Close modal";
 
 describe("Modal", () => {
@@ -23,18 +23,41 @@ describe("Modal", () => {
     const handleClose = jest.fn();
     render(
       <Modal open={true} onClose={handleClose} closeMessage={message}>
-        <Modal.Header>{modalTitle}</Modal.Header>
+        <Modal.Header>{modalHeading}</Modal.Header>
       </Modal>
     );
 
     expect(screen.getByRole(role)).toBeVisible();
   });
 
+  it("accepts and spreads omitted rest props to the root of each compound static component", () => {
+    const handleClose = jest.fn();
+    render(
+      <Modal
+        data-testid="foo"
+        open={true}
+        onClose={handleClose}
+        closeMessage={message}
+      >
+        <Modal.Header data-testid="bar">{modalHeading}</Modal.Header>
+        <Modal.Body data-testid="baz" children="baz" />
+        <Modal.Footer data-testid="qux" children="qux" />
+        <Modal.Button data-testid="quux" close children="quux" />
+      </Modal>
+    );
+
+    expect(screen.getByTestId("foo")).toBeVisible();
+    expect(screen.getByTestId("bar")).toBeVisible();
+    expect(screen.getByTestId("baz")).toBeVisible();
+    expect(screen.getByTestId("qux")).toBeVisible();
+    expect(screen.getByTestId("quux")).toBeVisible();
+  });
+
   it("should be hidden when open prop is set to `false`", () => {
     const handleClose = jest.fn();
     render(
       <Modal open={false} onClose={handleClose} closeMessage={message}>
-        <Modal.Header>{modalTitle}</Modal.Header>
+        <Modal.Header>{modalHeading}</Modal.Header>
       </Modal>
     );
 
@@ -53,7 +76,7 @@ describe("Modal", () => {
         onClose={handleClose}
         closeMessage={message}
       >
-        <Modal.Header>{modalTitle}</Modal.Header>
+        <Modal.Header>{modalHeading}</Modal.Header>
       </Modal>
     );
 
@@ -64,7 +87,7 @@ describe("Modal", () => {
     const handleClose = jest.fn();
     render(
       <Modal open onClose={handleClose} closeMessage={message}>
-        <Modal.Header>{modalTitle}</Modal.Header>
+        <Modal.Header>{modalHeading}</Modal.Header>
       </Modal>
     );
 
@@ -77,7 +100,7 @@ describe("Modal", () => {
     const handleClose = jest.fn();
     render(
       <Modal open={true} onClose={handleClose} closeMessage={message}>
-        <Modal.Header>{modalTitle}</Modal.Header>
+        <Modal.Header>{modalHeading}</Modal.Header>
         <Modal.Footer>
           <Modal.Button variant="clear">Cancel</Modal.Button>
           <Modal.Button close>Continue</Modal.Button>
@@ -94,7 +117,7 @@ describe("Modal", () => {
     const handleClose = jest.fn();
     render(
       <Modal open={true} onClose={handleClose} closeMessage={message}>
-        <Modal.Header>{modalTitle}</Modal.Header>
+        <Modal.Header>{modalHeading}</Modal.Header>
         <Modal.Footer>
           <Modal.Button variant="clear">Cancel</Modal.Button>
           <Modal.Button close>Continue</Modal.Button>
@@ -116,7 +139,7 @@ describe("Modal", () => {
           console.log("onClose");
         }}
       >
-        <Modal.Header>Modal Title</Modal.Header>
+        <Modal.Header>Modal Heading</Modal.Header>
         <Modal.Body>
           <p>
             This is the modal content area. It's width is determined based on

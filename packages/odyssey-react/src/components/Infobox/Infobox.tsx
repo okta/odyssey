@@ -12,16 +12,19 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
-import { useCx, useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOmit } from "../../utils";
+import { Box } from "../Box";
 import { Heading } from "../Heading";
 import { Text } from "../Text";
 import { CautionIcon, CompleteIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Infobox.module.scss";
+import { theme } from "./Infobox.theme";
 
 interface CommonProps
   extends Omit<
     ComponentPropsWithRef<"aside">,
-    "style" | "className" | "children" | "title" | "content"
+    "style" | "className" | "children" | "content" | "color"
   > {
   /**
    * Children are never rendered.
@@ -34,9 +37,9 @@ interface CommonProps
   variant?: "info" | "danger" | "caution" | "success";
 
   /**
-   * The title or headline of the Infobox. If Infobox.Content is not present it is required.
+   * The heading or headline of the Infobox. If Infobox.Content is not present it is required.
    */
-  title?: string;
+  heading?: string;
 
   /**
    * Content to be rendered within the infobox.
@@ -49,15 +52,15 @@ interface CommonProps
   actions?: ReactNode;
 }
 
-interface TitleProps extends CommonProps {
-  title: string;
+interface HeadingProps extends CommonProps {
+  heading: string;
 }
 
 interface ContentProps extends CommonProps {
   content: ReactNode;
 }
 
-export type InfoboxProps = TitleProps | ContentProps;
+export type InfoboxProps = HeadingProps | ContentProps;
 
 const icon = {
   caution: <CautionIcon />,
@@ -70,36 +73,43 @@ const icon = {
  * An infobox is a type of alert that provides feedback in response to a
  * user action or system activity.
  */
-let Infobox = forwardRef<HTMLElement, InfoboxProps>((props, ref) => {
-  const { content, actions, title, variant = "info", ...rest } = props;
+export const Infobox = withTheme(
+  theme,
+  styles
+)(
+  forwardRef<HTMLElement, InfoboxProps>((props, ref) => {
+    const { content, actions, heading, variant = "info", ...rest } = props;
 
-  const classNames = useCx(styles.root, styles[`${variant}Variant`]);
-  const omitProps = useOmit(rest);
+    const classNames = useCx(styles.root, styles[`${variant}Variant`]);
+    const omitProps = useOmit(rest);
 
-  return (
-    <aside {...omitProps} ref={ref} className={classNames} role="status">
-      <span className={styles.icon}>{icon[variant]}</span>
-      {title && (
-        <div className={styles.title}>
-          <Heading visualLevel="6" children={title} />
-        </div>
-      )}
-      {content && (
-        <section className={styles.content}>
-          <Text>{content}</Text>
-        </section>
-      )}
-      {actions && (
-        <section className={styles.actions}>
-          <Text>{actions}</Text>
-        </section>
-      )}
-    </aside>
-  );
-});
+    return (
+      <Box
+        as="aside"
+        {...omitProps}
+        ref={ref}
+        className={classNames}
+        role="status"
+      >
+        <span className={styles.icon}>{icon[variant]}</span>
+        {heading && (
+          <div className={styles.heading}>
+            <Heading visualLevel="6" children={heading} />
+          </div>
+        )}
+        {content && (
+          <section className={styles.content}>
+            <Text>{content}</Text>
+          </section>
+        )}
+        {actions && (
+          <section className={styles.actions}>
+            <Text>{actions}</Text>
+          </section>
+        )}
+      </Box>
+    );
+  })
+);
 
 Infobox.displayName = "Infobox";
-
-Infobox = withStyles(styles)(Infobox);
-
-export { Infobox };

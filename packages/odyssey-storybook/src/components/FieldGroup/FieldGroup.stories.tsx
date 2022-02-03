@@ -15,8 +15,9 @@ import { Story } from "@storybook/react";
 import {
   FieldGroup,
   FieldGroupProps,
-  TextInput,
   Infobox,
+  Select,
+  TextInput,
 } from "@okta/odyssey-react";
 import { FieldGroup as Source } from "../../../../odyssey-react/src";
 
@@ -27,7 +28,7 @@ export default {
     children: {
       control: { type: null },
     },
-    title: {
+    legend: {
       defaultValue: "Origination logistics",
       control: { type: "text" },
     },
@@ -39,8 +40,8 @@ export default {
   },
 };
 
-const Template: Story<FieldGroupProps> = ({ title, desc }) => (
-  <FieldGroup title={title} desc={desc}>
+const Template: Story<FieldGroupProps> = ({ legend, desc }) => (
+  <FieldGroup legend={legend} desc={desc}>
     <FieldGroup.Error>
       <Infobox
         title="Route impossible"
@@ -48,7 +49,12 @@ const Template: Story<FieldGroupProps> = ({ title, desc }) => (
         content="this is an error"
       />
     </FieldGroup.Error>
-    <TextInput label="Foo" hint="Bar" />
+    <Select label="Destination" name="destination">
+      <Select.Option children="Venus" />
+      <Select.Option children="Nessus" />
+      <Select.Option children="Europa" />
+    </Select>
+    <TextInput label="Flight identifier" type="search" />
   </FieldGroup>
 );
 

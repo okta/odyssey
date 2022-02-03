@@ -58,15 +58,8 @@ BodyInverse.parameters = {
   backgrounds: { default: "Page Background (dark)" },
 };
 BodyInverse.args = {
-  children: "Danger (disabled) text color",
-  color: "bodyInverse",
-};
-
-export const Code = Template.bind({});
-Code.storyName = "Color: Code";
-Code.args = {
-  children: "Code text color",
-  color: "code",
+  children: "Body inverse",
+  color: "body-inverse",
 };
 
 export const ColorDanger = Template.bind({});
@@ -74,13 +67,6 @@ ColorDanger.storyName = "Color: Danger";
 ColorDanger.args = {
   children: "Danger text color",
   color: "danger",
-};
-
-export const ColorDangerDisabled = Template.bind({});
-ColorDangerDisabled.storyName = "Color: Danger, disabled";
-ColorDangerDisabled.args = {
-  children: "Danger (disabled) text color",
-  color: "dangerDisabled",
 };
 
 export const ColorSub = Template.bind({});
@@ -91,18 +77,18 @@ ColorSub.args = {
 };
 
 // Weight
-export const WeightRegular = Template.bind({});
-WeightRegular.storyName = "Weight: Regular";
-WeightRegular.args = {
-  children: "Regular text weight",
-  weight: "regular",
+export const WeightNormal = Template.bind({});
+WeightNormal.storyName = "Weight: Normal";
+WeightNormal.args = {
+  children: "Normal text weight",
+  fontWeight: "normal",
 };
 
 export const WeightBold = Template.bind({});
 WeightBold.storyName = "Weight: Bold";
 WeightBold.args = {
   children: "Bold text weight",
-  weight: "bold",
+  fontWeight: "bold",
 };
 
 // Style
@@ -125,64 +111,43 @@ export const TransformNormal = Template.bind({});
 TransformNormal.storyName = "Transform: none (default)";
 TransformNormal.args = {
   children: "Normal text transform style",
-  transform: "none",
+  textTransform: "none",
 };
 
 export const TransformCapitalize = Template.bind({});
 TransformCapitalize.storyName = "Transform: Capitalize";
 TransformCapitalize.args = {
   children: "Capitalize text transform style",
-  transform: "capitalize",
+  textTransform: "capitalize",
 };
 
 export const TransformLowerCase = Template.bind({});
 TransformLowerCase.storyName = "Transform: Lower case";
 TransformLowerCase.args = {
   children: "Lower case text transform style",
-  transform: "lowercase",
+  textTransform: "lowercase",
 };
 
 export const TransformUpperCase = Template.bind({});
 TransformUpperCase.storyName = "Transform: Upper case";
 TransformUpperCase.args = {
   children: "Uppercase text transform style",
-  transform: "uppercase",
-};
-
-export const TransformFullWidth = Template.bind({});
-TransformFullWidth.storyName = "Transform: Full width";
-TransformFullWidth.args = {
-  children: "Full width text transform style",
-  transform: "fullWidth",
-};
-
-export const TransformFullSizeKana = Template.bind({});
-TransformFullSizeKana.storyName = "Transform: Full size kana";
-TransformFullSizeKana.args = {
-  children: "Full size kana text transform style",
-  transform: "fullSizeKana",
+  textTransform: "uppercase",
 };
 
 // Transform
-export const SizeLede = Template.bind({});
-SizeLede.storyName = "Size: Lede";
-SizeLede.args = {
-  children: "Lede text size style",
-  size: "lede",
-};
-
 export const SizeBase = Template.bind({});
 SizeBase.storyName = "Size: Base (default)";
 SizeBase.args = {
   children: "Base text size style",
-  size: "base",
+  fontSize: "base",
 };
 
 export const SizeCaption = Template.bind({});
 SizeCaption.storyName = "Size: Caption";
 SizeCaption.args = {
   children: "Caption text size style",
-  size: "caption",
+  fontSize: "caption",
 };
 
 // Wrap
@@ -195,7 +160,7 @@ WrapNormal.args = {
       <strong>incomprehensibile</strong> if viewed in the wrong context
     </>
   ),
-  wrap: "normal",
+  overflowWrap: "normal",
 };
 
 export const WrapBreakWord = TemplateWithContainer.bind({});
@@ -207,19 +172,7 @@ WrapBreakWord.args = {
       <strong>incomprehensibile</strong> if viewed in the wrong context
     </>
   ),
-  wrap: "breakWord",
-};
-
-export const WrapAnywhere = TemplateWithContainer.bind({});
-WrapAnywhere.storyName = "Wrap: Anywhere";
-WrapAnywhere.args = {
-  children: (
-    <>
-      Normal text wrap style. The wrap prop can be{" "}
-      <strong>incomprehensibile</strong> if viewed in the wrong context
-    </>
-  ),
-  wrap: "anywhere",
+  overflowWrap: "break-word",
 };
 
 // Line Height
@@ -234,12 +187,14 @@ export const LineHeightTitle = TemplateWithContainer.bind({});
 LineHeightTitle.storyName = "Line height: Title";
 LineHeightTitle.args = {
   children: "Title text LineHeight style",
-  lineHeight: "title",
+  lineHeight: "heading",
 };
 
-export const LineHeightFont = TemplateWithContainer.bind({});
-LineHeightFont.storyName = "Line height: Font (1)";
-LineHeightFont.args = {
-  children: "Font text LineHeight style",
-  lineHeight: "font",
+export const MarginPadding = Template.bind({});
+MarginPadding.storyName = "Margin and Padding";
+MarginPadding.args = {
+  children: "Margin and padding",
+  as: "div",
+  margin: "m",
+  padding: "m",
 };

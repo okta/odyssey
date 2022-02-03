@@ -12,16 +12,22 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
-import { useCx, useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOmit } from "../../utils";
+import { Box } from "../Box";
 import { Heading } from "../Heading";
 import { Button } from "../Button";
 import { Text } from "../Text";
 import type { ButtonProps } from "../Button";
 import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
 import styles from "./Banner.module.scss";
+import { theme } from "./Banner.theme";
 
 interface CommonProps
-  extends Omit<ComponentPropsWithRef<"div">, "style" | "className" | "role"> {
+  extends Omit<
+    ComponentPropsWithRef<"div">,
+    "style" | "className" | "role" | "color"
+  > {
   /**
    * The visual variant to be displayed to the user.
    * @default info
@@ -29,9 +35,9 @@ interface CommonProps
   variant?: "info" | "danger" | "caution";
 
   /**
-   * Human-readable title for the banner.
+   * Human-readable heading for the banner.
    */
-  title: string;
+  heading: string;
 
   /**
    * Human-readable descriptive content for the banner.
@@ -64,72 +70,73 @@ const icon = {
  * on the website. They can be purely informational messages or critical errors
  * to act upon.
  */
-let Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
-  const {
-    children,
-    title,
-    content,
-    open,
-    variant = "info",
-    onDismiss,
-    dismissButtonLabel,
-    ...rest
-  } = props;
+export const Banner = withTheme(
+  theme,
+  styles
+)(
+  forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
+    const {
+      children,
+      heading,
+      content,
+      open,
+      variant = "info",
+      onDismiss,
+      dismissButtonLabel,
+      ...rest
+    } = props;
 
-  const componentClass = useCx(
-    styles.root,
-    styles[`${variant}Variant`],
-    !open && styles.isDismissed,
-    onDismiss && styles.isDismissable
-  );
+    const componentClass = useCx(
+      styles.root,
+      styles[`${variant}Variant`],
+      !open && styles.isDismissed,
+      onDismiss && styles.isDismissable
+    );
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <div
-      {...omitProps}
-      ref={ref}
-      className={componentClass}
-      role="status"
-      hidden={!open}
-    >
-      <span className={styles.icon}>{icon[variant]}</span>
-      {title && (
-        <div className={styles.title}>
-          <Heading
-            visualLevel="6"
-            lineHeight="title"
-            noEndMargin
-            children={title}
-          />
-        </div>
-      )}
-      {content && (
-        <span className={styles.content}>
-          <Text as="p" children={content} />
-        </span>
-      )}
-      {children && (
-        <section className={styles.actions}>
-          <Text>{children}</Text>
-        </section>
-      )}
-      {onDismiss && (
-        <span className={styles.dismiss}>
-          <Button
-            variant="dismiss"
-            onClick={onDismiss}
-            aria-label={dismissButtonLabel}
-            icon={<CloseIcon />}
-          />
-        </span>
-      )}
-    </div>
-  );
-});
+    return (
+      <Box
+        {...omitProps}
+        ref={ref}
+        className={componentClass}
+        role="status"
+        hidden={!open}
+      >
+        <span className={styles.icon}>{icon[variant]}</span>
+        {heading && (
+          <div className={styles.heading}>
+            <Heading
+              visualLevel="6"
+              lineHeight="heading"
+              noEndMargin
+              children={heading}
+            />
+          </div>
+        )}
+        {content && (
+          <span className={styles.content}>
+            <Text as="p" children={content} />
+          </span>
+        )}
+        {children && (
+          <section className={styles.actions}>
+            <Text>{children}</Text>
+          </section>
+        )}
+        {onDismiss && (
+          <span className={styles.dismissButton}>
+            <Button
+              variant="dismiss"
+              onClick={onDismiss}
+              aria-label={dismissButtonLabel}
+              icon={<CloseIcon />}
+            />
+          </span>
+        )}
+      </Box>
+    );
+  })
+);
 
 Banner.displayName = "Banner";
-
-Banner = withStyles(styles)(Banner);
-
-export { Banner };

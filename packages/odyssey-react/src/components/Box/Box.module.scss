@@ -9,129 +9,18 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-
-.root {
-  box-sizing: border-box;
-}
-
-/* stylelint-disable property-disallowed-list */
-.paddingXs {
-  padding: $spacing-xs;
-}
-
-.paddingS {
-  padding: $spacing-s;
-}
-
-.paddingM {
-  padding: $spacing-m;
-}
-
-.paddingL {
-  padding: $spacing-l;
-}
-
-.paddingXl {
-  padding: $spacing-xl;
-}
-/* stylelint-enable property-disallowed-list */
-
-.borderBase {
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-}
-
-.borderColorDisplay {
-  border-color: $border-color-display;
-}
-
-.borderColorInteractive {
-  border-color: $border-color-ui;
-}
-
-.hoverBorderColorInteractive:hover {
-  border-color: $border-color-ui;
-}
-
-.borderRadiusBase {
-  /* stylelint-disable-next-line property-disallowed-list */
-  border-radius: $base-border-radius;
-}
-
-.boxShadowDefault {
-  box-shadow: $box-shadow-default;
-}
-
-.hoverBoxShadowDefault:hover {
-  box-shadow: 0 8px 12px rgba(cv("gray", "900"), 0.12);
-}
-
-.focusRingPrimary:focus {
-  outline: 0;
-  box-shadow: 0 0 0 2px $focus-ring-primary;
-}
-
-.displayFlex {
-  display: flex;
-}
-
-.flexGrow0 {
-  flex-grow: 0;
-}
-
-.flexGrow1 {
-  flex-grow: 1;
-}
-
-.marginRightXs {
-  margin-inline-end: $spacing-xs;
-}
-
-.marginRightS {
-  margin-inline-end: $spacing-s;
-}
-
-.marginRightM {
-  margin-inline-end: $spacing-m;
-}
-
-.marginRightL {
-  margin-inline-end: $spacing-l;
-}
-
-.marginRightXl {
-  margin-inline-end: $spacing-xl;
-}
-
-.marginBottomXs {
-  margin-block-end: $spacing-xs;
-}
-
-.marginBottomS {
-  margin-block-end: $spacing-s;
-}
-
-.marginBottomM {
-  margin-block-end: $spacing-m;
-}
-
-.marginBottomL {
-  margin-block-end: $spacing-l;
-}
-
-.marginBottomXl {
-  margin-block-end: $spacing-xl;
-}
-
-.alignItemsCenter {
-  align-items: center;
-}
-
-.cursorPointer {
-  cursor: pointer;
-}
-
-.userSelectNone {
-  user-select: none;
-}
+@import "box-root";
+@import "box-display";
+@import "box-position";
+@import "box-grid";
+@import "box-flex";
+@import "box-width-height";
+@import "box-margin";
+@import "box-padding";
+@import "box-overflow";
+@import "box-text";
+@import "box-border";
+@import "box-background";
+@import "box-cursor";
+@import "box-hover-focus";
+@import "box-other";

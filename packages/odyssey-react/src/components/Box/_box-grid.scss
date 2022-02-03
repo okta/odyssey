@@ -1,0 +1,59 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+.gridTemplateColumns2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.gridTemplateColumns3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.gridTemplateColumns2Auto1 {
+  grid-template-columns: auto 1fr;
+}
+
+.gridTemplateColumns3Auto1Auto3 {
+  grid-template-columns: auto 1fr auto;
+}
+
+.gridColumn1 {
+  grid-column: 1;
+}
+
+.gridColumn2 {
+  grid-column: 2;
+}
+
+.gridColumn3 {
+  grid-column: 3;
+}
+
+.gridRow1 {
+  grid-row: 1;
+}
+
+.gridRow2 {
+  grid-row: 2;
+}
+
+.gridRow3 {
+  grid-row: 3;
+}
+
+.gridRow4 {
+  grid-row: 4;
+}
+
+.gridRow5 {
+  grid-row: 5;
+}
