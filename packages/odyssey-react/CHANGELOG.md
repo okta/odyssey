@@ -3,6 +3,164 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.0](https://github.com/okta/odyssey/compare/v0.8.4...v0.9.0) (2022-02-02)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-react:** rename TextInput "inputRef" prop to "ref"
+- **odyssey-react:** rename TextArea "textareaRef" prop to "ref"
+- **odyssey-react:** renames "title" props to "heading"
+- **odyssey-react:** renames FieldGroup "title" prop to "legend"
+- **odyssey-react:** renames Table "title" prop to "caption"
+- **odyssey-react:** rename Tag component to TagList
+- **odyssey-react:** rename Table prop "title" to "heading"
+- **odyssey-react:** remove odyssey-deprecated-global.css stylesheet. Odyssey consumers should now use component composition.
+- **odyssey-react:** remove data-testid="ods-toast-pen" from Toast
+- **odyssey-react:** remove data-testid="ods-tabs" from Tabs
+- **odyssey-react:** Text prop fontWeight "regular" renamed to "normal"
+- **odyssey-react:** Text props color "heading" "danger-disabled" and "code" removed
+- **odyssey-react:** Text prop fontSize "lede" removed
+- **odyssey-react:** Text props textTransform "full-width" and "full-size-kana" removed
+- **odyssey-react:** Text prop lineHeight "font" removed
+- **odyssey-react:** Text prop overflowWrap "anywhere" removed
+- **odyssey-react:** required form input components must now declare true prop for `required`
+- **odyssey-react:** non-required form input components must now declare translated string prop for `optionalLabel`
+- **odyssey-react:** rename Text props and values to match standard css, remove text interaction props
+- **odyssey-react:** Text prop hoverBorderColor prop "interactive" renamed to "ui"
+
+### Features
+
+- expose hidden choices reference ([a64597a](https://github.com/okta/odyssey/commit/a64597a57f41bbbb1053d9e1a7254148d9318875))
+- no invalid theme properties eslint rule ([847d506](https://github.com/okta/odyssey/commit/847d5061f18e1ad6372cb538b559e136535bca33))
+- **odyssey-react-theme:** add new react-theme package ([d2197f2](https://github.com/okta/odyssey/commit/d2197f20b820d31613482653cb2f83821560fd96))
+- **odyssey-react:** add base styles and theme variables to TextInput ([3216e72](https://github.com/okta/odyssey/commit/3216e7286dd3c42ebe693267669915158f2b120c))
+- **odyssey-react:** add Box as Button root ([c0971de](https://github.com/okta/odyssey/commit/c0971de468c15605efb1dde68c79ccb73a558c91))
+- **odyssey-react:** add Box as root of Banner ([3321802](https://github.com/okta/odyssey/commit/33218020597000e28580e82d02062c9978fec911))
+- **odyssey-react:** add Box as root of Checkbox ([ce14011](https://github.com/okta/odyssey/commit/ce14011fc1f3cef7b878d95fe91c486e5ded83e5))
+- **odyssey-react:** add Box as root of FieldGroup ([e325f50](https://github.com/okta/odyssey/commit/e325f505f434d31512425fc345656d985a054999))
+- **odyssey-react:** add Box as root of Link ([35d74f9](https://github.com/okta/odyssey/commit/35d74f9428bb13822622caec4fbec110da2c3ed1))
+- **odyssey-react:** add Box in Heading ([564d674](https://github.com/okta/odyssey/commit/564d674d5ab4c04340ee89c8c8f9d1e3684f6194))
+- **odyssey-react:** add Box to Tag ([ab87e11](https://github.com/okta/odyssey/commit/ab87e11b294f76285a8975f9964fabcecbdebabf))
+- **odyssey-react:** add Box to Modal and sub-components ([0b8f85a](https://github.com/okta/odyssey/commit/0b8f85a0d2eb653054b3646c98bd9ac352869b82))
+- **odyssey-react:** add Box to Select option and optiongroup ([a48a5d4](https://github.com/okta/odyssey/commit/a48a5d4da32d1db539c3e0465c9df2c28acf6941))
+- **odyssey-react:** add Box to Table ([f7aed53](https://github.com/okta/odyssey/commit/f7aed53048dc2964dfc99bc8319af04b690dd0d9))
+- **odyssey-react:** add Box to Tabs components ([d4bfae9](https://github.com/okta/odyssey/commit/d4bfae9c94c4906d4b67f085cb808939f9014126))
+- **odyssey-react:** add Box to Toast ([581a8eb](https://github.com/okta/odyssey/commit/581a8ebb29c62ddefaeb3767d7d7d77f7beedd92))
+- **odyssey-react:** add Box to Tooltip ([f157469](https://github.com/okta/odyssey/commit/f157469f76c03f94bb28a84f5d8bd4be56aee196))
+- **odyssey-react:** add Box wrapper to RadioButton ([31938c6](https://github.com/okta/odyssey/commit/31938c6379e47891be62363cd43a2d2d1dee383d))
+- **odyssey-react:** add full Box component implementation ([35c47af](https://github.com/okta/odyssey/commit/35c47af5e7589a85e73399952856f64570ef3e11))
+- **odyssey-react:** add inherit to Box text prop values ([4ba9794](https://github.com/okta/odyssey/commit/4ba979443d387a68a27d98c4455d82c09afd41a3))
+- **odyssey-react:** add reset styles to box, expose as prop ([ab539a8](https://github.com/okta/odyssey/commit/ab539a8f0bc1c9d82f60fbff32e8f9b7d794551f))
+- **odyssey-react:** add support for className prop in Box ([117e0bb](https://github.com/okta/odyssey/commit/117e0bb32d9dde87fe22264006385c4c112f65b9))
+- **odyssey-react:** add text classes to Box withStyles ([264218f](https://github.com/okta/odyssey/commit/264218fe95fa2800147a17622934576850d208bb))
+- **odyssey-react:** add Text component to Button to remove dependence on global styles ([16e7b3e](https://github.com/okta/odyssey/commit/16e7b3e5fd0008b3577ef9837b29b52131913b49))
+- **odyssey-react:** add text styles to Box root ([a653b3d](https://github.com/okta/odyssey/commit/a653b3de2445c3a8ea5267d982558444e4179579))
+- **odyssey-react:** add theme variables to List ([2364006](https://github.com/okta/odyssey/commit/23640063aa9290d82234d7bf58fd9d4767259282))
+- **odyssey-react:** add theme variables to RadioButton. Consistency pass for variable naming ([be14acc](https://github.com/okta/odyssey/commit/be14acc88bc4f794bedbc643d52844e5377386ee))
+- **odyssey-react:** add themeing variables to Checkbox ([fbf79e5](https://github.com/okta/odyssey/commit/fbf79e5e158efb88b4c62b4776459caf147f8952))
+- **odyssey-react:** add themeing variables to Toast ([752d1ea](https://github.com/okta/odyssey/commit/752d1ea25dc0d3c8fa4b1e13ab26736546268ea8))
+- **odyssey-react:** add ThemeProvider ([41a5516](https://github.com/okta/odyssey/commit/41a5516e19dcd06cb004b3c0ba6a09845a717551))
+- **odyssey-react:** add theming to CircularLoadIndicator ([d58604f](https://github.com/okta/odyssey/commit/d58604f81f3a5d4c571ed0c815120d6325e16306))
+- **odyssey-react:** add theming to Table ([e059ac3](https://github.com/okta/odyssey/commit/e059ac30dc816dd808a4ea4fa7a3d2cd7a44a0b4))
+- **odyssey-react:** add theming to Tooltip ([2ec9e86](https://github.com/okta/odyssey/commit/2ec9e8636c30218e8d0c6ce90a7ffe38dccb5c1d))
+- **odyssey-react:** add WithTheme HOC ([325155e](https://github.com/okta/odyssey/commit/325155ef9c1af0e2de1f809d88381a8c87b48f45))
+- **odyssey-react:** add withTheme to Infobox ([015256d](https://github.com/okta/odyssey/commit/015256d218867ba8cff20b9f22ca6cad4c7bdc8e))
+- **odyssey-react:** additional theme vars in Checkbox ([27cafca](https://github.com/okta/odyssey/commit/27cafcaf9bddd4d4af64cba7aca6db9715bcf86d))
+- **odyssey-react:** additional theme vars in Checkbox ([54e3f38](https://github.com/okta/odyssey/commit/54e3f38faeda856278e37139632b398a98e06343))
+- **odyssey-react:** align theme variables between components ([97ee069](https://github.com/okta/odyssey/commit/97ee069cd6d0780ad01a1f75ce79aaaed1d50865))
+- **odyssey-react:** align types related to Box ([0c4d4d9](https://github.com/okta/odyssey/commit/0c4d4d97617c9d8d0a5ac1a5a54d3518461f39e4))
+- **odyssey-react:** allow Button to control font-family ([8eb6d05](https://github.com/okta/odyssey/commit/8eb6d057a55ae67d6cebc8ac7ab21539b8d52ad5))
+- **odyssey-react:** allow default text properties to be overriden in Box ([da68956](https://github.com/okta/odyssey/commit/da68956c9613a5c4610d5b9082f54d7f300580c3))
+- **odyssey-react:** allow font-style to be set by Link with Box ([0cfe6d0](https://github.com/okta/odyssey/commit/0cfe6d0068e17434b8b483a73d97253e8d95e9cb))
+- **odyssey-react:** cleanup Box api docs and css rules ([014b867](https://github.com/okta/odyssey/commit/014b8672da898985f8f31bfc04fe2343c2ea8a15))
+- **odyssey-react:** consistent margin and padding theme varible names in Checkbox ([899789f](https://github.com/okta/odyssey/commit/899789fbbeeabecdc129c8e4c353d6250eca4e02))
+- **odyssey-react:** convert Status to tokens ([be5b1f2](https://github.com/okta/odyssey/commit/be5b1f20a95f96ae1b343c029146e4032ff0c4cf))
+- **odyssey-react:** correct order of stylesheets withStyles in Box ([4a627e7](https://github.com/okta/odyssey/commit/4a627e71d07df9bd8b3aea56bcbece04d02ae249))
+- **odyssey-react:** enable theming for Link ([81a7b1b](https://github.com/okta/odyssey/commit/81a7b1b4271f151f2469f9eb7fae0e228c2edb70))
+- **odyssey-react:** eternalize string case conversion utils, remove duplicate root Text styles ([75178c1](https://github.com/okta/odyssey/commit/75178c199bc42f2fb4c8ab00085c971dcdc0a35b))
+- **odyssey-react:** exclude lineHeight from Table Box wrapper ([e2588a1](https://github.com/okta/odyssey/commit/e2588a1e2f85ec4c2a9612a707b3530ec64bfb9f))
+- **odyssey-react:** heading withTheme ([d8cbae5](https://github.com/okta/odyssey/commit/d8cbae50a3d1f82ee998ab072a0916272b9fa4ad))
+- **odyssey-react:** initial theme setup for TextInput ([1e0ac34](https://github.com/okta/odyssey/commit/1e0ac3441f38f9eaf724ea7cdb3e8f6340ba7b3c))
+- **odyssey-react:** merge 'develop' to resolve conflict ([c63849e](https://github.com/okta/odyssey/commit/c63849e3a0e49e160c1cf414c62fb637790a616c))
+- **odyssey-react:** merge 'develop' to resolve conflicts ([3a21d99](https://github.com/okta/odyssey/commit/3a21d99765c1421fc509f514ee0cc23caa97e3e2))
+- **odyssey-react:** merge branch 'develop' into ab/box to resolve conflicts ([b3fc8ec](https://github.com/okta/odyssey/commit/b3fc8ecb52a8aa74292aa2b19cd5cba1e240d9e5))
+- **odyssey-react:** merge changes from 'develop' to resolve conflict ([2544eca](https://github.com/okta/odyssey/commit/2544eca8456f18ee92387e0b7db9906187ca5595))
+- **odyssey-react:** omit fontSize from Heading's Box root ([916011f](https://github.com/okta/odyssey/commit/916011fd270319951c60efc04097fe4723bb2164))
+- **odyssey-react:** omit lineHeight from Heading's Box root ([7f16d75](https://github.com/okta/odyssey/commit/7f16d7523354c78829da05d3244e9cbbea02b9a1))
+- **odyssey-react:** only style unclassed HTML 5 elements under box ([759681a](https://github.com/okta/odyssey/commit/759681a1eba836a8de2160c07e6b9d2724408ecd))
+- **odyssey-react:** refactor CircularLoadIndicator to use Box ([d0d4666](https://github.com/okta/odyssey/commit/d0d46666a3ed7ac02d2fcbad91ab1e358ace1f9d))
+- **odyssey-react:** refactor Infobox to use Box ([1508d2e](https://github.com/okta/odyssey/commit/1508d2e17fca6fc684e5c5b7a5537e53bbc48988))
+- **odyssey-react:** remove defaults for Box margin and padding ([df07d90](https://github.com/okta/odyssey/commit/df07d9025a28b8d770a5d615ace1ffe3662c8b02))
+- **odyssey-react:** remove lineheight from TableSortButton Box wrapper ([8262093](https://github.com/okta/odyssey/commit/8262093e1307ef7772753d443e20ecbbb2d376a6))
+- **odyssey-react:** remove Text styles form Box ([505c7a4](https://github.com/okta/odyssey/commit/505c7a44cc83763292258a9ad03cd89092b11885))
+- **odyssey-react:** remove unused style declaration and add missing variables to TextInput ([2d72b10](https://github.com/okta/odyssey/commit/2d72b10839741514f2244747711882d3348bf067))
+- **odyssey-react:** remove use of ReactDOMServer in Select ([6f484a4](https://github.com/okta/odyssey/commit/6f484a4bbcdbf658467cd38755711b6de7d973f6))
+- **odyssey-react:** rename theme properties in List ([e9bb90c](https://github.com/okta/odyssey/commit/e9bb90c97ae77c76ba6cb90557392ce4b686097b))
+- **odyssey-react:** set overrides for Tooltip font styles ([575112c](https://github.com/okta/odyssey/commit/575112c5ba5f5737a9693ed344d1b03d1de5dcfe))
+- **odyssey-react:** spread omitted rest props for TextInput ([e86aaaf](https://github.com/okta/odyssey/commit/e86aaaf46cbe3e97e7856aabc60fe4ae24a8c94b))
+- **odyssey-react:** spread omitted rest props through for Modal ([aeed8f0](https://github.com/okta/odyssey/commit/aeed8f0d8c33f28cc652b023a8b8798df6678b9a))
+- **odyssey-react:** Text component refactor in Banner ([#1160](https://github.com/okta/odyssey/issues/1160)) ([8795f01](https://github.com/okta/odyssey/commit/8795f0172e34fd1ebdf86f3f854ef8539a7ada70))
+- **odyssey-react:** trim Box css reset ([7daac55](https://github.com/okta/odyssey/commit/7daac55a1ada44c8897d510c073b2cd91cd53d6c))
+- **odyssey-react:** unset default text properties in Box using false value for props ([d0ba167](https://github.com/okta/odyssey/commit/d0ba167b94f7b64468c617400f89bf6b98181c0f))
+- **odyssey-react:** update Button with Text to overcome regressions ([235863b](https://github.com/okta/odyssey/commit/235863b3dcfc5111fdda147e5cb3070bad3f830e))
+- **odyssey-react:** update indicator size in TextInput ([254398d](https://github.com/okta/odyssey/commit/254398d53255a6db26ce985247ace77de494bcea))
+- **odyssey-react:** update max width variable ([f4d039b](https://github.com/okta/odyssey/commit/f4d039bc0c66ae69ef2ea7fda65061f6ad16162f))
+- **odyssey-react:** update spacing css for RadioButton ([4b7834d](https://github.com/okta/odyssey/commit/4b7834d21c4bd6592e72fb9a86ac6d871d6353e4))
+- **odyssey-react:** update Text api to simplify and align with standard css ([54b2538](https://github.com/okta/odyssey/commit/54b2538d03befd775c363df994404a44773b0051))
+- **odyssey-react:** update text import ([d48393a](https://github.com/okta/odyssey/commit/d48393a0d23f7b8b4f073be138f32a8bcbf3b160))
+- **odyssey-react:** update to correct FontSize theme variable name in Checkbox ([a09cb4c](https://github.com/okta/odyssey/commit/a09cb4c0df4c31b2d4d3770de22ff1f093d0c012))
+- **odyssey-react:** update variable naming ([bbea0f5](https://github.com/okta/odyssey/commit/bbea0f5776337944ae7a5abdedcc566ab72279f2))
+- **odyssey-react:** updated Box to use polymorphic `as` prop ([32a3cf2](https://github.com/okta/odyssey/commit/32a3cf262f38ecc933828d7d4b7bc1899fd1a73e))
+- **odyssey-react:** use root class name from styles object in RadioButton ([de032a0](https://github.com/okta/odyssey/commit/de032a0d3ec30821b29c3d11957fa82cdd2b40d4))
+- **odyssey-react:** use Text component in Field ([c0b5735](https://github.com/okta/odyssey/commit/c0b57353c8b8f1372ab1060e71cc15cb97fa516b))
+- **odyssey-react:** utilize Space tokens in Status ([e8f052e](https://github.com/okta/odyssey/commit/e8f052e52e0afe85a92438082556af944e9074dc))
+- **odyssey-react:** withTheme for Banner ([e56d09e](https://github.com/okta/odyssey/commit/e56d09ef3dd14e501e90df7e778819fb63b3430e))
+- **odyssey-react:** withTheme for Box ([6916b7a](https://github.com/okta/odyssey/commit/6916b7abb73ef3e3501ba30e649168c2ac24eb35))
+- **odyssey-react:** withTheme for Button ([fe466a7](https://github.com/okta/odyssey/commit/fe466a7099c201704de1452052e02e61f65dadf0))
+- **odyssey-react:** withTheme for Field ([a6b9cfa](https://github.com/okta/odyssey/commit/a6b9cfa32bcc4ae6ea4925fc44d454a79b9de3a8))
+- **odyssey-react:** withTheme for Form ([fa77ce3](https://github.com/okta/odyssey/commit/fa77ce3b74f01d690f67e47f11382a26cb014dbc))
+- **odyssey-react:** withTheme for Modal ([75ad6f2](https://github.com/okta/odyssey/commit/75ad6f258c757ea6ea62a12c3ec658f04d68f505))
+- **odyssey-react:** withTheme for ScreenReaderText ([b21e4f3](https://github.com/okta/odyssey/commit/b21e4f3cdbbd803dd919605eb196862c79ce321d))
+- **odyssey-react:** withTheme for Select ([95008bf](https://github.com/okta/odyssey/commit/95008bf45569a1e515ab6dfc3f6c365e957ea332))
+- **odyssey-react:** withTheme for SvgIcon ([a1d66d3](https://github.com/okta/odyssey/commit/a1d66d3231f6b9412d675cc28dd0b74cce69b790))
+- **odyssey-react:** withTheme for Tabs ([b037e68](https://github.com/okta/odyssey/commit/b037e687b106c360e409fa2358b4b6d08ba6fc15))
+- **odyssey-react:** withTheme for tag ([970ccdd](https://github.com/okta/odyssey/commit/970ccddcd83275c8aeef4dd501304fa7bb8ee66b))
+- **odyssey-react:** withTheme for Text ([83ddd3f](https://github.com/okta/odyssey/commit/83ddd3f534156e545d8e37725d88c0e778361d2f))
+- **odyssey-react:** withTheme for TextArea ([1a52082](https://github.com/okta/odyssey/commit/1a52082f5498b8a7de43b30207037956ed7d0a16))
+- **odyssey-storybook:** add stories to document Box ([eb4bf3d](https://github.com/okta/odyssey/commit/eb4bf3d8ce57ff2755bcc0499ef2e115a6eb96fe))
+- support async select options ([0bc1986](https://github.com/okta/odyssey/commit/0bc1986e01d6f843cd589c56d4cdda27b629750f))
+
+### Bug Fixes
+
+- controlled select case by using to ref.current ([b61b2bd](https://github.com/okta/odyssey/commit/b61b2bd0c448a3b01fc85a7c6233a9b69a4409a4))
+- lint ([617b736](https://github.com/okta/odyssey/commit/617b736038b508b8747c78099cca2b7202cc0846))
+- **odyssey-react:** disabled text color for Select ([38445f2](https://github.com/okta/odyssey/commit/38445f214c9218f88aa2d9c3315e9272b33b884a))
+- **odyssey-react:** fix failing Field related tests ([0fd1fe0](https://github.com/okta/odyssey/commit/0fd1fe0230bc48ab89f3955f865d988c52c3aabd))
+- **odyssey-react:** fix Search Icon layer height ([b597d73](https://github.com/okta/odyssey/commit/b597d739cc95792476043eb2a96cefcb34de8537))
+- **odyssey-react:** fix types path ([674ba20](https://github.com/okta/odyssey/commit/674ba2011ea81b7a8e15d1125b0a35fdca536c29))
+- **odyssey-react:** fixes visual blemishes in Select styling ([d52d054](https://github.com/okta/odyssey/commit/d52d05479d1b592f372f233c9da50b0c9ae20527))
+- **odyssey-react:** improve List children type annotation ([1676b58](https://github.com/okta/odyssey/commit/1676b58ca7f0f1f680eb78bf72f3acd612ff6c39))
+- **odyssey-react:** input height for multiple Select ([5cf6a79](https://github.com/okta/odyssey/commit/5cf6a79d27324369fb6c87608eb6e7a617424681))
+- **odyssey-react:** remove inherited color from props for StatusProps ([704b226](https://github.com/okta/odyssey/commit/704b22652d8cb3182677d8eacb554b1606d0f512))
+- **odyssey-react:** remove stray console log ([48cde40](https://github.com/okta/odyssey/commit/48cde40b3e60ba76d65e0c80d88ec1e01b09a2ea))
+- **odyssey-react:** required prop default to true ([0ad6b7a](https://github.com/okta/odyssey/commit/0ad6b7aaa4c95b82b8108976394e77b830d52e69))
+- remove added dep / prop ([a349727](https://github.com/okta/odyssey/commit/a3497270d0369fa3bd0b1d8571fef698d28c27c4))
+- type issue need cast to force union start type when using callback ([2f8f482](https://github.com/okta/odyssey/commit/2f8f482bb42737dca5f32e97384fe2c83f6f7cbb))
+- updates per review feedback ([10cf21e](https://github.com/okta/odyssey/commit/10cf21ef22c13e3affb1cec57ba3bb8e8b218256))
+
+### Code Refactoring
+
+- **odyssey-react:** remove data-testid="ods-tabs" from Tabs ([641a332](https://github.com/okta/odyssey/commit/641a332580aa74d7e66c313094cdb677b1ab9550))
+- **odyssey-react:** remove data-testid="ods-toast-pen" from Toast ([8689746](https://github.com/okta/odyssey/commit/868974665efaa0f0218ff96f70d800a2b5364854))
+- **odyssey-react:** remove global typography styles ([01f0b0e](https://github.com/okta/odyssey/commit/01f0b0e31d704516b48b634c343b4cf132f9275a))
+- **odyssey-react:** rename Table prop "title" to "heading" ([1aa9bd1](https://github.com/okta/odyssey/commit/1aa9bd19629aecd0a9c4a632b700a35da5935086))
+- **odyssey-react:** rename Tag to TagList ([6bdbfa6](https://github.com/okta/odyssey/commit/6bdbfa66b93dc83d34913aea9e526446edb4938b))
+- **odyssey-react:** rename TextArea textareaRef prop to ref, forward spread rest props ([354bd84](https://github.com/okta/odyssey/commit/354bd840005618856c2b1573031595539ad414e0))
+- **odyssey-react:** rename TextInput inputRef prop to ref ([a795c66](https://github.com/okta/odyssey/commit/a795c66e9a52429e77a397fe2ff68c93b246e2d4))
+- **odyssey-react:** renames "title" props to "heading" ([0be3fb7](https://github.com/okta/odyssey/commit/0be3fb7779e1e74c1c5015ca041d136d5d673d7e))
+- **odyssey-react:** renames FieldGroup "title" prop to "legend" ([44dc958](https://github.com/okta/odyssey/commit/44dc958ba8c432aa5623e705736c9a6945faea8a))
+- **odyssey-react:** renames Table "heading" and "caption" props ([a515cee](https://github.com/okta/odyssey/commit/a515cee7d8a0e8b7c4d7de6acd61263be697bd24))
+
 ### [0.8.4](https://github.com/okta/odyssey/compare/v0.8.3...v0.8.4) (2021-11-18)
 
 ### Features
