@@ -44,7 +44,7 @@ const Template: Story<FieldGroupProps> = ({ legend, desc }) => (
   <FieldGroup legend={legend} desc={desc}>
     <FieldGroup.Error>
       <Infobox
-        title="Route impossible"
+        heading="Route impossible"
         variant="danger"
         content="this is an error"
       />
