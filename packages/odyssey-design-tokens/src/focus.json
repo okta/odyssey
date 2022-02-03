@@ -1,0 +1,10 @@
+{
+  "focus": {
+    "outline": {
+      "width": {
+        "base": { "value": "4px" },
+        "small": { "value": "2px" }
+      }
+    }
+  }
+}

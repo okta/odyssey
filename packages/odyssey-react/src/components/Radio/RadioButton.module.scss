@@ -1,0 +1,160 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+/* stylelint-disable no-descending-specificity, max-nesting-depth, selector-max-class */
+
+.radio {
+  @include is-visually-hidden;
+
+  &:checked {
+    + .label {
+      &::before {
+        border-color: var(--CircleCheckedBorderColor);
+        background-color: var(--CircleCheckedBackgroundColor);
+      }
+
+      &::after {
+        background-color: var(--DotCheckedBackgroundColor);
+      }
+    }
+  }
+
+  &:focus,
+  &.focus {
+    + .label {
+      &::before {
+        border-color: var(--DotFocusBorderColor);
+        outline: 0;
+        box-shadow: 0 0 0 var(--CircleFocusBoxShadowSpread)
+          var(--CircleFocusBoxShadowColor);
+      }
+    }
+  }
+
+  &:disabled {
+    + .label {
+      color: var(--LabelDisabledTextColor);
+      cursor: not-allowed;
+
+      &::before {
+        border-color: var(--CircleDisabledBorderColor);
+        background-color: var(--CircleDisabledBackgroundColor);
+      }
+    }
+
+    &:checked {
+      + .label {
+        &::before {
+          border-color: var(--CircleDisabledCheckedBorderColor);
+          background-color: var(--CircleDisabledBackgroundColor);
+        }
+
+        &::after {
+          background-color: var(--DotDisabledCheckedBackgroundColor);
+        }
+      }
+    }
+  }
+
+  &:invalid,
+  &.invalid {
+    &:hover:not(:checked) + .label::before {
+      border-color: var(--CircleInvalidHoverBorderColor);
+    }
+
+    + .label {
+      color: var(--LabelInvalidTextColor);
+
+      &::before {
+        border-color: var(--CircleInvalidBorderColor);
+      }
+    }
+
+    &:checked {
+      + .label {
+        &::before {
+          background-color: var(--CircleInvalidCheckedBackgroundColor);
+        }
+      }
+    }
+
+    &:focus {
+      + .label {
+        &::before {
+          border-color: var(--CircleInvalidFocusBorderColor);
+          outline: 0;
+          box-shadow: 0 0 0 var(--CircleInvalidFocusBoxShadowSpread)
+            var(--CircleInvalidFocusBoxShadowColor);
+        }
+      }
+    }
+  }
+}
+
+.label {
+  display: block;
+  position: relative;
+  margin-block-end: var(--LabelMarginBlockEnd);
+  padding-inline-start: calc(
+    var(--CircleSize) + var(--LabelPaddingInlineStart)
+  );
+  font-size: var(--LabelFontSize);
+  font-weight: var(--LabelFontWeight);
+  text-align: start;
+
+  &::before,
+  &::after {
+    @include border-radius(50%);
+
+    content: "";
+    display: block;
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    width: var(--CircleSize);
+    height: var(--CircleSize);
+    transition-property: border-color, background, opacity, box-shadow;
+    transition-duration: var(--TransitionDuration);
+    transition-timing-function: var(--TransitionTimingFunction);
+    border-width: var(--CircleDotBorderWidth);
+    border-style: var(--CircleDotBorderStyle);
+    border-color: transparent;
+  }
+
+  /* Circle */
+
+  &::before {
+    transform: translateY(-50%);
+    border-color: var(--CircleBorderColor);
+    background-color: var(--CircleBackgroundColor);
+  }
+
+  /* Dot */
+
+  &::after {
+    transform: translateY(-50%) scale(var(--DotScale));
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &:hover,
+  &.hover {
+    &::before {
+      border-color: var(--DotHoverBorderColor);
+    }
+  }
+}
+
+.root:last-child > .label {
+  margin-block-end: 0;
+}

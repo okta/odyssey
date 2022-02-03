@@ -12,11 +12,14 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
-import { useCx, useOmit, withStyles } from "../../utils";
+import { Box } from "../Box";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOmit } from "../../utils";
 import styles from "./Heading.module.scss";
+import { theme } from "./Heading.theme";
 
 export interface HeadingProps
-  extends Omit<ComponentPropsWithRef<"h1">, "style" | "className"> {
+  extends Omit<ComponentPropsWithRef<"h1">, "style" | "className" | "color"> {
   /**
    * The semantic level for the underlying heading tag
    * @default 1
@@ -29,7 +32,7 @@ export interface HeadingProps
   visualLevel?: HeadingProps["level"];
 
   /**
-   * The human readable section title to be visually displayed
+   * The human readable section heading to be visually displayed
    */
   children: ReactNode;
 
@@ -42,7 +45,7 @@ export interface HeadingProps
   /**
    * Specify explicit line height spacing
    */
-  lineHeight?: "base" | "title";
+  lineHeight?: "base" | "heading";
 }
 
 /**
@@ -50,36 +53,46 @@ export interface HeadingProps
  * or content that follows it. By default, header tags (h1 through h6)
  * use the corresponding visual size.
  */
-let Heading = forwardRef<HTMLHeadingElement, HeadingProps>((props, ref) => {
-  const {
-    level = "1",
-    visualLevel,
-    children,
-    noEndMargin = false,
-    lineHeight,
-    ...rest
-  } = props;
+export const Heading = withTheme(
+  theme,
+  styles
+)(
+  forwardRef<HTMLHeadingElement, HeadingProps>((props, ref) => {
+    const {
+      level = "1",
+      visualLevel,
+      children,
+      noEndMargin = false,
+      lineHeight,
+      ...rest
+    } = props;
 
-  const Tag = `h${level}` as const;
+    const tag = `h${level}` as const;
 
-  const componentClass = useCx(
-    styles.root,
-    visualLevel && styles[`level${visualLevel}`],
-    noEndMargin && styles.noEndMargin,
-    lineHeight && styles[`${lineHeight}LineHeight`]
-  );
+    const componentClass = useCx(
+      styles.root,
+      visualLevel && styles[`level${visualLevel}`],
+      noEndMargin && styles.noEndMargin,
+      lineHeight && styles[`${lineHeight}LineHeight`]
+    );
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <Tag {...omitProps} ref={ref} className={componentClass}>
-      {children}
-    </Tag>
-  );
-});
+    return (
+      <Box
+        as={tag}
+        {...omitProps}
+        ref={ref}
+        className={componentClass}
+        color={false}
+        fontWeight={false}
+        fontSize={false}
+        lineHeight={false}
+      >
+        {children}
+      </Box>
+    );
+  })
+);
 
 Heading.displayName = "Heading";
-
-Heading = withStyles(styles)(Heading);
-
-export { Heading };

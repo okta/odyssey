@@ -12,14 +12,19 @@
 
 import React, { forwardRef } from "react";
 import type { ReactNode, ComponentPropsWithRef } from "react";
-import { useCx, useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOmit } from "../../utils";
+import { Box } from "../Box";
 import { SortIcon, SortAscIcon, SortDescIcon } from "../Icon";
 import { ScreenReaderText } from "../ScreenReaderText";
-
-import styles from "./Table.module.scss";
+import styles from "./TableSortButton.module.scss";
+import { theme } from "./TableSortButton.theme";
 
 export interface TableSortButtonProps
-  extends Omit<ComponentPropsWithRef<"button">, "style" | "className"> {
+  extends Omit<
+    ComponentPropsWithRef<"button">,
+    "style" | "className" | "color"
+  > {
   children?: ReactNode;
   /**
    * Current sort direction shown in icon
@@ -45,8 +50,11 @@ export interface TableSortButtonProps
   screenReaderCallToAction: string;
 }
 
-let TableSortButton = forwardRef<HTMLButtonElement, TableSortButtonProps>(
-  (props, ref) => {
+export const TableSortButton = withTheme(
+  theme,
+  styles
+)(
+  forwardRef<HTMLButtonElement, TableSortButtonProps>((props, ref) => {
     const {
       children,
       direction = "unsorted",
@@ -57,12 +65,18 @@ let TableSortButton = forwardRef<HTMLButtonElement, TableSortButtonProps>(
       ...rest
     } = props;
 
-    const componentClass = useCx(styles.sort, styles[`${direction}Direction`]);
+    const componentClass = useCx(styles.root, styles[`${direction}Direction`]);
 
     const omitProps = useOmit(rest);
 
     return (
-      <button {...omitProps} ref={ref} className={componentClass}>
+      <Box
+        as="button"
+        {...omitProps}
+        ref={ref}
+        className={componentClass}
+        lineHeight={false}
+      >
         {children}
         <span className={styles.sortIndicator}>
           {direction === "unsorted" && <SortIcon title={unsortedIconTitle} />}
@@ -70,13 +84,9 @@ let TableSortButton = forwardRef<HTMLButtonElement, TableSortButtonProps>(
           {direction === "desc" && <SortDescIcon title={descendingIconTitle} />}
         </span>
         <ScreenReaderText>{screenReaderCallToAction}</ScreenReaderText>
-      </button>
+      </Box>
     );
-  }
+  })
 );
 
 TableSortButton.displayName = "TableSortButton";
-
-TableSortButton = withStyles(styles)(TableSortButton);
-
-export { TableSortButton };

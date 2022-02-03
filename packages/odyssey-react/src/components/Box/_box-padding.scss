@@ -1,0 +1,117 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+/* stylelint-disable property-disallowed-list */
+.padding0 {
+  padding: 0;
+}
+
+.paddingXs {
+  padding: var(--SpaceRemXs);
+}
+
+.paddingS {
+  padding: var(--SpaceRemS);
+}
+
+.paddingM {
+  padding: var(--SpaceRemM);
+}
+
+.paddingL {
+  padding: var(--SpaceRemL);
+}
+
+.paddingXl {
+  padding: var(--SpaceRemXl);
+}
+/* stylelint-enable property-disallowed-list */
+
+.paddingTopXs {
+  padding-block-start: var(--SpaceRemXs);
+}
+
+.paddingTopS {
+  padding-block-start: var(--SpaceRemS);
+}
+
+.paddingTopM {
+  padding-block-start: var(--SpaceRemM);
+}
+
+.paddingTopL {
+  padding-block-start: var(--SpaceRemL);
+}
+
+.paddingTopXl {
+  padding-block-start: var(--SpaceRemXl);
+}
+
+.paddingRightXs {
+  padding-inline-end: var(--SpaceRemXs);
+}
+
+.paddingRightS {
+  padding-inline-end: var(--SpaceRemS);
+}
+
+.paddingRightM {
+  padding-inline-end: var(--SpaceRemM);
+}
+
+.paddingRightL {
+  padding-inline-end: var(--SpaceRemL);
+}
+
+.paddingRightXl {
+  padding-inline-end: var(--SpaceRemXl);
+}
+
+.paddingBottomXs {
+  padding-block-end: var(--SpaceRemXs);
+}
+
+.paddingBottomS {
+  padding-block-end: var(--SpaceRemS);
+}
+
+.paddingBottomM {
+  padding-block-end: var(--SpaceRemM);
+}
+
+.paddingBottomL {
+  padding-block-end: var(--SpaceRemL);
+}
+
+.paddingBottomXl {
+  padding-block-end: var(--SpaceRemXl);
+}
+
+.paddingLeftXs {
+  padding-inline-start: var(--SpaceRemXs);
+}
+
+.paddingLeftS {
+  padding-inline-start: var(--SpaceRemS);
+}
+
+.paddingLeftM {
+  padding-inline-start: var(--SpaceRemM);
+}
+
+.paddingLeftL {
+  padding-inline-start: var(--SpaceRemL);
+}
+
+.paddingLeftXl {
+  padding-inline-start: var(--SpaceRemXl);
+}

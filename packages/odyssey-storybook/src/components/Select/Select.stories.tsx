@@ -23,7 +23,7 @@ const options = [
   "Barnard's Star",
   "WISE 1049-5319",
   "Wolf 359",
-  "Lalande 21185",
+  "Lalande21185LagrangeAlpha1978Lalande21185LagrangeAlpha1978",
   "Sirius A",
   "Sirius B",
 ];
@@ -89,10 +89,10 @@ Multiple.args = {
 
 export const Group = (args: SelectProps): ReactElement => (
   <Select {...args}>
-    <Select.OptionGroup label="Group A">
-      <Select.Option children="Option 1" />
-      <Select.Option children="Option 2" />
-      <Select.Option children="Option 3" />
+    <Select.OptionGroup label="Planets">
+      <Select.Option children="Mars" />
+      <Select.Option children="Mercury" />
+      <Select.Option children="Venus" />
     </Select.OptionGroup>
     <Select.OptionGroup label="Group B">
       <Select.Option children="Option 1" />

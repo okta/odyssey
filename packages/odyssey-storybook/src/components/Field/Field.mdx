@@ -1,43 +1,154 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+
 # Field
 
-These captions help make forms more accessible by providing context to the user. They can be used with all Odyssey inputs.
+Field provides all of the supporting context required by inputs, including labels, hints, and errors.
+
+This component also helps ensure proper accessibility by managing `aria-` attributes and `id` associations between inputs and their associated elements.
+
+[View source on GitHub](https://github.com/okta/odyssey/tree/master/packages/odyssey-react/src/components/Field)
 
 ## Anatomy
 
-**STORY MISSING**
-
-## Usage
-
-Field labels provide textual affordances and context for Odyssey's various inputs. Our UI Kit provides these labels alongside each component.
-
-Please refer to individual components for complete documentation. These examples are provided for quick illustration.
+<Canvas>
+  <Story id="components-textinput--kitchen-sink" />
+</Canvas>
 
 ### Label
 
-Labels caption pieces of UI, typically form fields. They are required for all inputs. When related to sets of Radios or Checkboxes, they may also be referred to as "legends".
+A text label for the Field. The associated element may be `<label>` or `<legend>` depending on Field's Input type.
 
-Keep labels to a word or two so users can quickly scan the form. Always use sentence casing.
+<Canvas>
+  <Story id="components-field--field-label" />
+</Canvas>
 
-**STORY MISSING**
+The label also indicates the Field's optional/required status to ensure screen readers properly announce the state.
 
-### Field hint
+<Canvas>
+  <Story id="components-field--field-optional" />
+</Canvas>
 
-Use field hints to provide context, formatting help, or other guidelines to the user. Do not use the placeholder attribute for these purposes.
+### Hint
 
-Limit hints to a short sentence. If additional context is required, it should be provided outside the Field.
+A hint is helper text for the Field. They offer better accessibility and usability than the `placeholder` attribute. Hints should provide any necessary help text for their Field but are optional.
 
-**STORY MISSING**
+Appropriate examples include expected formatting or value types.
 
-### Error messages
+<Canvas>
+  <Story id="components-field--field-hint" />
+</Canvas>
 
-Invalid fields should include an inline message to explain the error.
+### Error
 
-If possible, describe how the error may be resolved.
+Inline error messaging for the Field.
 
-**STORY MISSING**
+All errors require a visible or SR-only "Error:" label. This labeling is not handled automatically and must be included in the error message.
 
-### Optional fields
+<Canvas>
+  <Story id="components-field--field-error" />
+</Canvas>
 
-Odyssey assumes inputs are required by default. Optional labels should be used to indicate when data is not required for the user to complete a task.
+## Props
 
-**STORY MISSING**
+<ArgsTable />
+
+## Variants
+
+While their appearance is identical, Field supports single and grouped inputs by offering an `as=" foo"` polymorphic API.
+
+### Single Input
+
+Fields for lone inputs are rendered as `div`s and assign their `label`/`input` relationship using an ID.
+
+<Canvas>
+  <Story id="components-textarea--default" />
+</Canvas>
+
+### Grouped Inputs
+
+Fields for grouped inputs are rendered as `fieldset`s, using a `legend` to label all of the associated `input`s accessibly. This variant also spreads hint and error associations across affected controls.
+
+<Canvas>
+  <Story id="components-radio--default" />
+</Canvas>
+
+## States
+
+Fields may be either required or optional, depending on what's called for by their input.
+
+### Required
+
+By default, inputs and Fields are set to `required`. As the default, this state has no unique affordance.
+
+<Canvas>
+  <Story id="components-textinput--text" />
+</Canvas>
+
+### Optional
+
+In order to mark a Field as optional, set `required` to `false` and include an `opationalLabel`.
+
+<Canvas>
+  <Story id="components-textinput--optional" />
+</Canvas>
+
+## Usage
+
+Field is a complementary component, providing shared structure across Odyssey Inputs like [Text Input](?path=/docs/components-textinput--text#text-input).
+
+When assembling Forms, it's unnecessary to utilize Field, as it's built into Odyssey's Inputs already.
+
+If you are building a new or bespoke Input component, please utilize Field to ensure consistent behavior with existing components.
+
+## Content Guidelines
+
+### Labels
+
+A well-written label describes the purpose of the Field for the user.
+
+Use concise, descriptive labels (a word or two) to help users quickly scan your form.
+
+"Destination" rather than "Please enter your destination".
+
+Finally, please use sentence casing for your labels. Sentence case is easier to read and will help reduce error rates and speed up form completion time.
+
+"Landing gear deployment speed" rather than "Landing Gear Deployment Speed"
+
+### Hints
+
+When writing hints, only provide information that assists with the immediate task.
+
+For example, "The expected format is `YYYY-MM-DD`."
+
+Hints like, "This information will be used to do x, y, and z." may be informative without assisting the user in completing their form.
+
+If additional disclosures or warnings are required, an [Infobox](?path=/docs/components-infobox--info#infobox) may be more appropriate.
+
+Remember: a good label may eliminate the need for a hint.
+
+### Errors
+
+At minimum, error messages should explain why an entry is invalid. Great error messages also note how the user can address the problem.
+
+For example, "This value is invalid." is less helpful than "This field requires a complete email address."
+
+If the user cannot fix the error or if the error extends beyond the Field, it should instead be surfaced at the Field Group, Form, or page level.
+
+## Accessibility
+
+Field does its best to correctly associate attributes and place `aria-` tags where necessary. For input-specific accessibility concerns, please refer to the relevant component's documentation.
+
+Your error messages should include an "Error:" label, whether visible or visually hidden.
+
+## Globalization
+
+To support ease of localization, Field's `optionalLabel` string has no default and must be supplied by the user.
+
+Similarly, an "Error:" label is not automatically inserted into Field error messages.
+
+## References
+
+### Related Components
+
+- [Field Group](?path=/docs/components-fieldgroup--default)
+- [Form](?path=/docs/components-form--default)

@@ -12,16 +12,11 @@
 
 import type { ReactNode } from "react";
 
-export interface SharedFieldTypes {
+export interface CommonFieldProps {
   /**
    * the form field label
    */
   label: string;
-
-  /**
-   * Text to display when the field is optional, i.e. required prop is false
-   */
-  optionalLabel?: string;
 
   /**
    * Visually hides the label. This can be used in scenarios where you want a label for assistive user agents, but not have it be visible.
@@ -40,7 +35,12 @@ export interface SharedFieldTypes {
 
   /**
    * The underlying input element required attribute
-   * @default true
+   * @default false
    */
   required?: boolean;
+
+  /**
+   * Text to display when the field is optional, i.e. required prop is false
+   */
+  optionalLabel?: string;
 }

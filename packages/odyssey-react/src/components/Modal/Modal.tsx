@@ -13,20 +13,22 @@
 import React, { createContext, useContext, useMemo, useRef } from "react";
 import type {
   FunctionComponent,
-  ComponentProps,
   ReactElement,
   ReactNode,
   ReactText,
 } from "react";
 import { createPortal } from "react-dom";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { Box } from "../Box";
 import { Button as CoreButton } from "../Button";
 import type { ButtonProps as CoreButtonProps } from "../Button";
 import { Heading } from "../Heading";
-import { forwardRefWithStatics, useOid, useCx, withStyles } from "../../utils";
-import styles from "./Modal.module.scss";
+import { forwardRefWithStatics, useOid, useCx, useOmit } from "../../utils";
 import { CloseIcon } from "../Icon";
+import { theme } from "./Modal.theme";
+import styles from "./Modal.module.scss";
 
-type Props = {
+export type ModalProps = {
   /**
    * The modal content, should use the Static components provided by Modal (Modal.Header, Modal.Body and Modal.Footer)
    */
@@ -76,7 +78,7 @@ type PropsModalButton = {
 
 interface ModalContext {
   onClose: () => void;
-  modalTitleId: string;
+  modalHeadingId: string;
   closeMessage: string;
 }
 const ModalContext = createContext({} as ModalContext);
@@ -86,14 +88,26 @@ const ModalContext = createContext({} as ModalContext);
  * requiring user interaction. This dialog disables the main content until the
  * user interacts with the modal dialog.
  */
-let Modal = forwardRefWithStatics<HTMLDivElement, Props, Statics>(
-  (props, ref) => {
-    const { children, id, open = false, onClose, closeMessage, onOpen } = props;
-    const modalTitleId = useOid();
+export const Modal = withTheme(
+  theme,
+  styles
+)(
+  forwardRefWithStatics<HTMLDivElement, ModalProps, Statics>((props, ref) => {
+    const {
+      children,
+      id,
+      open = false,
+      onClose,
+      closeMessage,
+      onOpen,
+      ...rest
+    } = props;
+    const modalHeadingId = useOid();
     const context = useMemo(
-      () => ({ onClose, closeMessage, modalTitleId }),
-      [onClose, closeMessage, modalTitleId]
+      () => ({ onClose, closeMessage, modalHeadingId }),
+      [onClose, closeMessage, modalHeadingId]
     );
+    const omitProps = useOmit(rest);
     const oid = useOid(id);
     const modalDialog = useRef<HTMLDivElement>(null);
     const componentClass = useCx(styles.root, { [styles.openState]: open });
@@ -104,29 +118,38 @@ let Modal = forwardRefWithStatics<HTMLDivElement, Props, Statics>(
 
     return createPortal(
       <ModalContext.Provider value={context}>
-        <div ref={ref} className={componentClass} id={oid} hidden={!open}>
+        <Box
+          {...omitProps}
+          ref={ref}
+          className={componentClass}
+          id={oid}
+          hidden={!open}
+        >
           <div className={styles.overlay} tabIndex={-1}>
             <div
               className={styles.dialog}
               role="dialog"
               aria-modal="true"
-              aria-labelledby={modalTitleId}
+              aria-labelledby={modalHeadingId}
               ref={modalDialog}
             >
               {children}
             </div>
           </div>
-        </div>
+        </Box>
       </ModalContext.Provider>,
       document.body
     );
-  }
+  })
 );
 
-const Header = ({ children }: PropsModalHeader) => {
-  const { modalTitleId, closeMessage } = useContext(ModalContext);
+const Header: FunctionComponent<PropsModalHeader> = (props) => {
+  const { children, ...rest } = props;
+  const omitProps = useOmit(rest);
+  const { modalHeadingId, closeMessage } = useContext(ModalContext);
+
   return (
-    <header className={styles.header}>
+    <Box {...omitProps} as="header" className={styles.header}>
       <span className={styles.dismiss}>
         <Modal.Button
           close
@@ -135,23 +158,35 @@ const Header = ({ children }: PropsModalHeader) => {
         />
       </span>
       <Heading
-        id={modalTitleId}
+        id={modalHeadingId}
         visualLevel="4"
         noEndMargin
-        lineHeight="title"
+        lineHeight="heading"
         children={children}
       />
-    </header>
+    </Box>
   );
 };
 
-const Body: FunctionComponent<PropsModalBody> = ({ children }) => (
-  <main className={styles.content}>{children}</main>
-);
+const Body: FunctionComponent<PropsModalBody> = (props) => {
+  const { children, ...rest } = props;
+  const omitProps = useOmit(rest);
+  return (
+    <Box {...omitProps} as="main" className={styles.content}>
+      {children}
+    </Box>
+  );
+};
 
-const Footer: FunctionComponent<PropsModalFooter> = ({ children }) => (
-  <footer className={styles.footer}>{children}</footer>
-);
+const Footer: FunctionComponent<PropsModalFooter> = (props) => {
+  const { children, ...rest } = props;
+  const omitProps = useOmit(rest);
+  return (
+    <Box {...omitProps} as="footer" className={styles.footer}>
+      {children}
+    </Box>
+  );
+};
 
 const Button: FunctionComponent<PropsModalButton> = (
   props: PropsModalButton
@@ -175,8 +210,3 @@ Footer.displayName = "ModalFooter";
 Button.displayName = "ModalButton";
 
 Object.assign(Modal, { Header, Body, Footer, Button });
-
-Modal = withStyles(styles)(Modal);
-
-export type ModalProps = ComponentProps<typeof Modal>;
-export { Modal };

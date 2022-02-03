@@ -19,6 +19,7 @@ import {
   CloseIcon,
   SettingsIcon,
 } from "@okta/odyssey-react";
+import { ThemeProvider } from "@okta/odyssey-react-theme";
 
 import ButtonMdx from "./Button.mdx";
 
@@ -102,4 +103,36 @@ export const IconOnly = Template.bind({});
 IconOnly.args = {
   icon: <SettingsIcon />,
   children: undefined,
+};
+
+export const Theme: Story<
+  ButtonProps & {
+    ColorBackgroundPrimary: string;
+    ColorBackgroundSecondary: string;
+  }
+> = (props) => {
+  const { ColorBackgroundPrimary, ColorBackgroundSecondary, ...rest } = props;
+  return (
+    <ThemeProvider
+      theme={{
+        [Button.theme]: { ColorBackgroundPrimary, ColorBackgroundSecondary },
+      }}
+    >
+      <Button {...rest} />
+    </ThemeProvider>
+  );
+};
+Theme.argTypes = {
+  ColorBackgroundPrimary: {
+    name: "primary background",
+    defaultValue: "#1662dd",
+    type: "string",
+    control: "color",
+  },
+  ColorBackgroundSecondary: {
+    name: "secondary background",
+    defaultValue: "#fff",
+    type: "string",
+    control: "color",
+  },
 };

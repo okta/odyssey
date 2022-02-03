@@ -1,5 +1,3 @@
-import "@okta/odyssey-react/dist/odyssey-deprecated-global.251d01.css";
-
 export const parameters = {
   controls: {
     expanded: true,
@@ -14,10 +12,10 @@ export const parameters = {
       method: "",
       order: [
         "Welcome",
+        ["Introduction (README)", "Docs Status"],
         "Contributing",
         "Guidelines",
         "Components",
-        "Utilities",
       ],
       locales: "",
     },

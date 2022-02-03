@@ -12,12 +12,70 @@
 
 /* stylelint-disable color-no-hex, declaration-no-important, selector-class-pattern, max-nesting-depth, selector-max-compound-selectors, selector-no-qualifying-type, no-descending-specificity, selector-max-class, selector-max-type */
 
-/* - styles from _select.scss - */
-
 .root:not([data-type]) {
-  @include input-baseline;
+  @include border-radius(var(--BorderRadius));
 
   appearance: none;
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: var(--MaxWidth);
+  margin-block: var(--MarginBlock);
+  margin-inline: var(--MarginInline);
+  padding-block: var(--PaddingBlock);
+  padding-inline: var(--PaddingInline);
+  transition-property: border-color, background-color, box-shadow;
+  transition-duration: var(--TransitionDuration);
+  transition-timing-function: var(--TransitionTimingFunction);
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--BorderColor);
+  background-color: var(--BackgroundColor);
+  box-shadow: 0 0 0 0 var(--FocusBoxShadowColor);
+  color: var(--TextColor);
+  font-family: var(--FontFamily);
+  font-size: var(--FontSize);
+  line-height: var(--LineHeight);
+
+  &:hover,
+  &:focus {
+    border-color: var(--HoverFocusBorderColor);
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
+  }
+
+  &:disabled {
+    opacity: 1;
+    color: var(--DisabledTextColor);
+    cursor: not-allowed;
+  }
+
+  &:disabled,
+  &[readonly] {
+    border-color: var(--DisabledReadonlyBorderColor);
+    background-color: var(--DisabledReadonlyBackgroundColor);
+
+    &:hover {
+      border-color: var(--DisabledReadonlyHoverBorderColor);
+    }
+  }
+
+  &:invalid {
+    border-color: var(--InvalidBorderColor);
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+        var(--InvalidFocusBoxShadowColor);
+    }
+  }
+
+  &::placeholder {
+    color: var(--PlaceholderTextColor);
+  }
 
   option {
     padding-block: 0;
@@ -31,25 +89,25 @@
 
 .root {
   position: relative;
-  max-width: $max-line-length;
+  max-width: var(--MaxWidth);
   overflow: hidden;
-  font-size: $size-body-base;
+  font-size: var(--FontSize);
 
   &:focus,
   &.focused,
   .focus & {
-    @include border-radius($base-border-radius);
+    @include border-radius(var(--BorderRadius));
 
-    outline: none;
-    box-shadow: 0 0 0 4px $color-primary-light;
+    outline: 0;
+    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
 
     &.open {
-      box-shadow: 0 0 0 4px $color-primary-light,
-        0 2px 0 4px $color-primary-light;
+      box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor),
+        0 2px 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
 
       &.flipped {
-        box-shadow: 0 0 0 4px $color-primary-light,
-          0 -2px 0 4px $color-primary-light;
+        box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor),
+          0 -2px 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
       }
     }
   }
@@ -65,14 +123,16 @@
   &.disabled {
     .inner,
     .input {
-      border: 1px solid $border-input-disabled;
-      background-color: $bg-input-disabled;
-      color: $text-sub;
+      border-width: var(--DisabledBorderWidth);
+      border-style: var(--DisabledBorderStyle);
+      border-color: var(--DisabledBorderColor);
+      background-color: var(--DisabledBackgroundColor);
+      color: var(--DisabledTextColor);
       cursor: not-allowed;
       user-select: none;
 
       &:hover {
-        border-color: $border-color-ui;
+        border-color: var(--DisabledHoverBorderColor);
       }
     }
 
@@ -89,25 +149,29 @@
   .invalid & {
     &:focus,
     &.focused {
-      @include outline($focus-ring-danger);
-      @include border-radius($base-border-radius);
+      @include border-radius(var(--BorderRadius));
 
+      outline: 0;
       outline: none;
+      box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+        var(--InvalidFocusBoxShadowColor);
 
       &.open {
-        box-shadow: 0 0 0 4px $color-danger-light,
-          0 2px 0 4px $color-danger-light;
+        box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+            var(--InvalidFocusBoxShadowColor),
+          0 2px 0 var(--FocusBoxShadowSpread) var(--InvalidFocusBoxShadowColor);
 
         &.flipped {
-          box-shadow: 0 0 0 4px $color-danger-light,
-            0 -2px 0 4px $color-danger-light;
+          box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
+              var(--InvalidFocusBoxShadowColor),
+            0 -2px 0 var(--FocusBoxShadowSpread) var(--InvalidFocusBoxShadowColor);
         }
       }
     }
 
     .inner,
     .input {
-      border-color: $color-danger-base;
+      border-color: var(--InvalidBorderColor);
     }
   }
 
@@ -125,14 +189,15 @@
   .input {
     display: inline-block;
     width: 100%;
+    background-color: transparent;
+    font: inherit;
+    vertical-align: top;
     margin-block-start: 0;
     margin-block-end: $spacing-xs;
     margin-inline: 0;
     padding-block: 0;
     padding-inline: 0;
     border-block-end: 0;
-    background-color: transparent;
-    vertical-align: top;
   }
 
   .button {
@@ -155,7 +220,9 @@
     }
 
     &:focus {
-      @include outline($focus-ring-primary);
+      outline: 0;
+      box-shadow: 0 0 0 var(--ButtonFocusBoxShadowSpread)
+        var(--ButtonFocusBoxShadowColor);
     }
   }
 
@@ -208,22 +275,28 @@
     @include border-radius(100%);
 
     display: inline-block;
-    position: relative;
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-xs-em * 0.5;
     width: 1em;
     height: 1em;
     margin-block-start: 0;
     margin-inline-end: 0;
     margin-block-end: 0;
-    margin-inline-start: $spacing-s;
+    margin-inline-start: 0;
     padding-block: 0;
     padding-inline: 0;
+    transform: translateY(-50%);
     opacity: 1;
-    background-color: cv("blue", "400");
+    background-color: var(--ButtonBackgroundColor);
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg' class='ods-icon'%3E%3Cpath d='M2.323 10.118a1.102 1.102 0 1 0 1.559 1.56L7 8.558l3.118 3.118a1.102 1.102 0 0 0 1.56-1.559L8.558 7l3.118-3.118a1.102 1.102 0 0 0-1.559-1.56L7 5.442 3.882 2.323a1.102 1.102 0 1 0-1.56 1.559L5.442 7l-3.118 3.118Z' fill='%23fff'/%3E%3C/svg%3E");
+    background-position: center;
+    background-size: calc(var(--LineHeight) * 1em - 1em);
     line-height: 1;
 
     &:hover,
     &:focus {
-      background-color: $color-primary-base;
+      background-color: var(--ButtonHoverFocusBackgroundColor);
     }
   }
 
@@ -235,7 +308,7 @@
     width: 1em;
     height: 1em;
     transform: translate(-50%, -50%);
-    color: $white;
+    color: var(--ButtonIndicatorColor);
     font-size: 0.5em;
     text-indent: 0;
     pointer-events: none;
@@ -243,12 +316,13 @@
 }
 
 .inner {
-  @include border-radius($base-border-radius);
+  @include border-radius(var(--BorderRadius));
 
   display: inline-block;
   width: 100%;
   padding-block: $spacing-xs-em;
-  padding-inline: $spacing-s-em;
+  padding-inline-start: $spacing-s-em;
+  padding-inline-end: $spacing-m-em + $spacing-xs-em;
   overflow: hidden;
   transition-property: border-color, background-color, box-shadow;
   transition-duration: $base-duration;
@@ -313,6 +387,8 @@
     @include border-radius(1em);
 
     display: inline-block;
+    position: relative;
+    max-width: 100%;
     margin-inline-end: $spacing-xs;
     margin-block-end: $spacing-xs;
     padding-block: 0;
@@ -329,7 +405,7 @@
     vertical-align: middle;
 
     &[data-deletable] {
-      padding-inline-end: $spacing-xs;
+      padding-inline-end: $spacing-m-em + $spacing-xs-em;
     }
 
     [dir="rtl"] & {
@@ -485,6 +561,8 @@
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
+  font-family: inherit;
+  font-size: 100%;
   text-indent: -9999px;
   appearance: none;
 
@@ -498,12 +576,13 @@
 
   display: inline-block;
   max-width: 100%;
+  border: 0;
+  background-color: var(--BackgroundColor);
+  font-family: inherit;
   margin-block-end: 5px;
   padding-block: 4px;
   padding-inline-start: 2px;
   padding-inline-end: 0;
-  border: 0;
-  background-color: $white;
   vertical-align: baseline;
 
   &:focus {

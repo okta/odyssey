@@ -11,27 +11,27 @@
  */
 
 .root {
-  color: $text-body;
-  font-family: $body-font-family;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
+  color: var(--TextColor);
+  font-family: var(--FontFamily);
+  font-size: var(--FontSize);
+  font-variant: normal;
   letter-spacing: 0;
-  line-height: $base-line-height;
   font-feature-settings: "lnum", "pnum";
   text-decoration-skip-ink: all;
 
   // stylelint-disable-next-line selector-max-type
   abbr,
   &.abbr {
-    border-block-end: 1px dashed $color-primary-dark;
+    border-block-end-width: var(--AbbrBorderBlockEndWidth);
+    border-block-end-style: var(--AbbrBorderBlockEndStyle);
+    border-block-end-color: var(--AbbrBorderBlockEndColor);
     text-decoration: none;
   }
 
   // stylelint-disable-next-line selector-max-type
   em,
   &.em {
-    font-style: italic;
+    font-style: var(--EmFontStyle);
 
     // stylelint-disable-next-line selector-max-type, selector-max-class
     > em,
@@ -43,7 +43,7 @@
   // stylelint-disable-next-line selector-max-type
   strong,
   &.strong {
-    font-weight: 600;
+    font-weight: var(--StrongFontWeight);
 
     // stylelint-disable-next-line selector-max-type, selector-max-class
     > strong,
@@ -53,32 +53,34 @@
   }
 
   // stylelint-disable-next-line selector-max-type
-  sub,
+  sup,
   &.sup {
-    font-size: ms(-2);
-    line-height: 1;
+    font-size: var(--SupFontSize);
+    line-height: var(--SupLineHeight);
     vertical-align: super;
   }
 
   // stylelint-disable-next-line selector-max-type
   sub,
   &.sub {
-    font-size: ms(-2);
-    line-height: 1;
+    font-size: var(--SubFontSize);
+    line-height: var(--SubLineHeight);
     vertical-align: sub;
   }
 
   // stylelint-disable-next-line selector-max-type
   blockquote,
   &.blockquote {
-    max-width: $max-line-length;
-    margin-block-start: 0;
-    margin-block-end: $type-margin;
-    margin-inline: 0;
-    padding-block: 0;
-    padding-inline-end: 0;
-    padding-inline-start: $spacing-s;
-    border-inline-start: 3px solid $border-color-display;
+    max-width: var(--BlockquoteMaxWidth);
+    margin-block-start: var(--BlockquoteMarginBlockStart);
+    margin-block-end: var(--BlockquoteMarginBlockEnd);
+    margin-inline: var(--BlockquoteMarginInline);
+    padding-block: var(--BlockquotePaddingBlock);
+    padding-inline-end: var(--BlockquotePaddingInlineEnd);
+    padding-inline-start: var(--BlockquotePaddingInlineStart);
+    border-inline-start-width: var(--BlockquoteBorderInlineStartWidth);
+    border-inline-start-style: var(--BlockquoteBorderInlineStartStyle);
+    border-inline-start-color: var(--BlockquoteBorderInlineStartColor);
 
     // stylelint-disable-next-line selector-max-type
     &:last-child {
@@ -89,10 +91,10 @@
   // stylelint-disable-next-line selector-max-type
   p,
   &.p {
-    max-width: $max-line-length;
-    margin-block-start: 0;
-    margin-block-end: $type-margin;
-    margin-inline: 0;
+    max-width: var(--PMaxWidth);
+    margin-block-start: var(--PMarginBlockStart);
+    margin-block-end: var(--PMarginBlockEnd);
+    margin-inline: var(--PMarginInline);
 
     // stylelint-disable-next-line selector-max-type
     &:last-child {
@@ -103,10 +105,10 @@
   // stylelint-disable-next-line selector-max-type
   pre,
   &.pre {
-    margin-block-start: 0;
-    margin-block-end: $type-margin;
-    margin-inline: 0;
-    font-family: $mono-font-family;
+    margin-block-start: var(--PreMarginBlockStart);
+    margin-block-end: var(--PreMarginBlockEnd);
+    margin-inline: var(--PreMarginInline);
+    font-family: var(--PreFontFamily);
     white-space: pre-wrap;
     tab-size: 2;
 
@@ -119,48 +121,51 @@
   // stylelint-disable-next-line selector-max-type
   cite,
   &.cite {
-    font-style: italic;
+    font-style: var(--CiteFontStyle);
   }
 
   // stylelint-disable-next-line selector-max-type
   del,
   &.del {
     display: inline-block;
-    background: $color-danger-light;
+    background-color: var(--DelBackgroundColor);
   }
 
   // stylelint-disable-next-line selector-max-type
   dfn,
   &.dfn {
-    font-style: italic;
+    font-style: var(--DfnFontStyle);
   }
 
   // stylelint-disable-next-line selector-max-type
   ins,
   &.ins {
     display: inline-block;
-    background: cv("green", "000");
+    background-color: var(--InsBackgroundColor);
   }
 
   // stylelint-disable-next-line selector-max-type
   kbd,
   &.kbd {
-    @include border-radius($base-border-radius);
+    @include border-radius(var(--KbdBorderRadius));
 
     display: inline-block;
-    padding-block: 0;
-    padding-inline: $spacing-xs;
-    border: 1px solid cv("gray", "200");
-    background: cv("gray", "000");
-    box-shadow: 0 2px 0 cv("gray", "000"), 0 3px 0 cv("gray", "200");
-    font-weight: 400;
-    line-height: $title-line-height;
+    padding-block: var(--KbdPaddingBlock);
+    padding-inline: var(--KbdPaddingInline);
+    border-width: var(--KbdBorderWidth);
+    border-style: var(--KbdBorderStyle);
+    border-color: var(--KbdBorderColor);
+    background-color: var(--KbdBackgroundColor);
+    box-shadow: 0 2px 0 var(--KbdInsideBoxShadowColor),
+      0 3px 0 var(--KbdOutsideBoxShadowColor);
+    font-weight: var(--KbdFontWeight);
+    line-height: var(--KbdLineHeight);
   }
 
   // stylelint-disable-next-line selector-max-type
   mark,
   &.mark {
-    background: cv("yellow", "000");
+    background-color: var(--MarkBackgroundColor);
   }
 
   // stylelint-disable-next-line selector-max-type
@@ -188,39 +193,39 @@
   // stylelint-disable-next-line selector-max-type
   samp,
   &.samp {
-    padding-block: 0;
-    padding-inline: 0.5ch;
-    background-color: cv("gray", "000");
-    box-shadow: 0 1px 0 cv("gray", "200");
-    font-family: $mono-font-family;
-    font-size: ms(0);
+    padding-block: var(--SampPaddingBlock);
+    padding-inline: var(--SampPaddingInline);
+    background-color: var(--SampBackgroundColor);
+    box-shadow: var(--SampBoxShadow);
+    font-family: var(--SampFontFamily);
+    font-size: var(--SampFontSize);
 
     // stylelint-disable-next-line selector-max-type, selector-max-class
     kbd,
     .kbd {
-      background: $white;
+      background-color: var(--SampKbdBackgroundColor);
     }
   }
 
   // stylelint-disable-next-line selector-max-type
   small,
   &.small {
-    font-size: $size-body-caption;
+    font-size: var(--SmallFontSize);
   }
 
   // stylelint-disable-next-line selector-max-type
   details,
   &.details {
-    font-size: ms(0);
+    font-size: var(--DetailsFontSize);
   }
 
   // stylelint-disable-next-line selector-max-type
   summary,
   &.summary {
-    @include border-radius($base-border-radius);
+    @include border-radius(var(--SummaryBorderRadius));
 
-    font-size: ms(1);
-    font-weight: 600;
+    font-size: var(--SummaryFontSize);
+    font-weight: var(--SummaryFontWeight);
     cursor: default;
 
     // stylelint-disable-next-line selector-max-type
@@ -232,96 +237,80 @@
   // stylelint-disable-next-line selector-max-type
   code,
   &.code {
-    font-family: $mono-font-family;
+    font-family: var(--CodeFontFamily);
   }
 
   // stylelint-disable-next-line selector-max-type
   var,
   &.var {
-    font-style: italic;
-    font-weight: 600;
+    font-style: var(--VarFontStyle);
+    font-weight: var(--VarFontWeight);
   }
 }
 
 // Color
 .bodyColor {
-  color: $text-body;
+  color: var(--BodyTextColor);
 }
 
 .bodyInverseColor {
-  color: $text-body-inverse;
+  color: var(--BodyInverseTextColor);
 }
 
 .subColor {
-  color: $text-sub;
-}
-
-.codeColor {
-  color: $text-code;
+  color: var(--SubTextColor);
 }
 
 .dangerColor {
-  color: $text-danger;
+  color: var(--DangerTextColor);
 }
 
-.dangerDisabledColor {
-  color: $text-danger-disabled;
+.primaryColor {
+  color: var(--PrimaryTextColor);
 }
 
 // Weight
 .boldWeight {
-  font-weight: 600;
+  font-weight: var(--BoldFontWeight);
 }
 
-.regularWeight {
-  font-weight: 400;
+.normalWeight {
+  font-weight: var(--NormalFontWeight);
 }
 
 // Style
 .normalStyle {
-  font-style: normal;
+  font-style: var(--NormalFontStyle);
 }
 
 .italicStyle {
-  font-style: italic;
+  font-style: var(--ItalicFontStyle);
 }
 
 // Transform
 .noneTransform {
-  text-transform: none;
+  text-transform: var(--NoneTextTransform);
 }
 
 .capitalizeTransform {
-  text-transform: capitalize;
+  text-transform: var(--CapitalizeTextTransform);
 }
 
 .uppercaseTransform {
-  text-transform: uppercase;
+  text-transform: var(--UppercaseTextTransform);
 }
 
 .lowercaseTransform {
-  text-transform: lowercase;
-}
-
-.fullWidthTransform {
-  text-transform: full-width;
-}
-
-.fullSizeKanaTransform {
-  text-transform: full-size-kana;
+  text-transform: var(--LowercaseTextTransform);
 }
 
 // Size
-.ledeSize {
-  font-size: $size-body-lede;
-}
-
 .baseSize {
-  font-size: $size-body-base;
+  font-size: var(--BaseFontSize);
 }
 
 .captionSize {
-  font-size: $size-body-caption;
+  font-size: var(--CaptionFontSize);
 }
 
 // Wrap
@@ -333,19 +322,11 @@
   overflow-wrap: break-word;
 }
 
-.anywhereWrap {
-  overflow-wrap: anywhere;
-}
-
 // Line height
 .normalLineHeight {
-  line-height: $base-line-height;
+  line-height: var(--NormalLineHeight);
 }
 
-.titleLineHeight {
-  line-height: $title-line-height;
-}
-
-.fontLineHeight {
-  line-height: 1;
+.headingLineHeight {
+  line-height: var(--HeadingLineHeight);
 }

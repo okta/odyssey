@@ -11,13 +11,70 @@
  */
 
 .root {
-  @include input-baseline;
+  @include border-radius(var(--BorderRadius));
 
-  min-width: $spacing-m;
-  max-width: $max-line-length;
-  min-height: $spacing-m * 2;
-  padding-block-start: $spacing-xs-em;
-  padding-block-end: $spacing-s-em;
-  padding-inline: $spacing-s-em;
-  margin-block-start: $spacing-xs;
+  display: block;
+  position: relative;
+  width: 100%;
+  min-width: var(--MinWidth);
+  max-width: var(--MaxWidth);
+  min-height: var(--MinHeight);
+  padding-block-start: var(--PaddingBlockStart);
+  padding-block-end: var(--PaddingBlockEnd);
+  padding-inline: var(--PaddingInline);
+  margin-block-start: var(--MarginBlockStart);
+  margin-block-end: var(--MarginBlockEnd);
+  margin-inline: var(--MarginInline);
+  transition-property: border-color, background-color, box-shadow;
+  transition-duration: var(--TransitionDuration);
+  transition-timing-function: var(--TransitionTimingFunction);
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--BorderColor);
+  background-color: var(--BackgroundColor);
+  box-shadow: 0 0 0 0 var(--BoxShadowColor);
+  color: var(--TextColor);
+  font-family: var(--FontFamily);
+  font-size: var(--FontSize);
+  line-height: var(--LineHeight);
+
+  &:hover,
+  &:focus {
+    border-color: var(--HoverFocusBorderColor);
+  }
+
+  &:focus {
+    @include outline(var(--FocusBoxShadowColor), var(--FocusBoxShadowSpread));
+  }
+
+  &:invalid {
+    border-color: var(--InvalidBorderColor);
+  }
+
+  &:disabled {
+    opacity: 1;
+    color: var(--DisabledTextColor);
+    cursor: not-allowed;
+  }
+
+  &:disabled,
+  &[readonly] {
+    border-color: var(--DisabledBorderColor);
+    background-color: var(--DisabledBackgroundColor);
+
+    &:hover {
+      border-color: var(--DisabledBorderColor);
+    }
+  }
+
+  &:invalid:focus {
+    @include outline(
+      var(--InvalidFocusBoxShadowColor),
+      var(--FocusBoxShadowSpread)
+    );
+  }
+
+  &::placeholder {
+    color: var(--PlaceholderTextColor);
+  }
 }

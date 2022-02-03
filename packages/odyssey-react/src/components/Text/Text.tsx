@@ -12,11 +12,28 @@
 
 import React, { forwardRef } from "react";
 import type { ReactNode } from "react";
-import { useCx, useOmit, withStyles } from "../../utils";
 import type { PolymorphicForwardRef } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { Box } from "../Box";
+import type { BoxProps } from "../Box";
+import { useCx, useOmit, toCamelCase } from "../../utils";
+import { theme } from "./Text.theme";
 import styles from "./Text.module.scss";
 
-export interface TextProps {
+export interface TextProps
+  extends Pick<
+    BoxProps,
+    | "margin"
+    | "marginTop"
+    | "marginRight"
+    | "marginBottom"
+    | "marginLeft"
+    | "padding"
+    | "paddingTop"
+    | "paddingRight"
+    | "paddingBottom"
+    | "paddingLeft"
+  > {
   /**
    * Text content to be rendered
    */
@@ -55,13 +72,13 @@ export interface TextProps {
    * The text color style for the text content.
    * @default body
    */
-  color?: "body" | "bodyInverse" | "code" | "danger" | "dangerDisabled" | "sub";
+  color?: "body" | "body-inverse" | "danger" | "sub" | "primary";
 
   /**
    * The font weight for the text content.
-   * @default regular
+   * @default normal
    */
-  weight?: "regular" | "bold";
+  fontWeight?: "normal" | "bold";
 
   /**
    * The font style (normal or italic) for the text content.
@@ -73,78 +90,76 @@ export interface TextProps {
    * The text-transform for the text content.
    * @default none
    */
-  transform?:
-    | "none"
-    | "capitalize"
-    | "uppercase"
-    | "lowercase"
-    | "fullWidth"
-    | "fullSizeKana";
+  textTransform?: "none" | "capitalize" | "uppercase" | "lowercase";
 
   /**
    * The font-size for the text content.
    * @default base
    */
-  size?: "lede" | "base" | "caption";
+  fontSize?: "base" | "caption";
 
   /**
    * The line-height for the text content.
    * @default normal
    */
-  lineHeight?: "normal" | "title" | "font";
+  lineHeight?: "normal" | "heading";
 
   /**
    * The overflow wrapping behavior for the text content.
    * @default normal
    */
-  wrap?: "normal" | "breakWord" | "anywhere";
+  overflowWrap?: "normal" | "break-word";
 }
 
 /**
  * A component which provides style for visible text elements.
  */
-let Text = forwardRef((props, ref) => {
-  const {
-    children,
-    as = "span",
-    color = "body",
-    weight = "regular",
-    fontStyle = "normal",
-    transform = "none",
-    size = "base",
-    wrap = "normal",
-    lineHeight = "normal",
-    ...rest
-  } = props;
+export const Text = withTheme(
+  theme,
+  styles
+)(
+  forwardRef((props, ref) => {
+    const {
+      children,
+      as = "span",
+      color = "body",
+      fontWeight = "normal",
+      fontStyle = "normal",
+      textTransform = "none",
+      fontSize = "base",
+      overflowWrap = "normal",
+      lineHeight = "normal",
+      ...rest
+    } = props;
 
-  const Tag = as;
+    const componentClass = useCx(
+      styles.root,
+      styles[as],
+      styles[toCamelCase(color) + "Color"],
+      styles[toCamelCase(fontWeight) + "Weight"],
+      styles[toCamelCase(fontStyle) + "Style"],
+      styles[toCamelCase(textTransform) + "Transform"],
+      styles[toCamelCase(fontSize) + "Size"],
+      styles[toCamelCase(overflowWrap) + "Wrap"],
+      styles[toCamelCase(lineHeight) + "LineHeight"]
+    );
+    const omitProps = useOmit(rest);
 
-  const componentClass = useCx(
-    styles.root,
-    styles[as],
-    styles[color + "Color"],
-    styles[weight + "Weight"],
-    styles[fontStyle + "Style"],
-    styles[transform + "Transform"],
-    styles[size + "Size"],
-    styles[wrap + "Wrap"],
-    styles[lineHeight + "LineHeight"]
-  );
-
-  const omitProps = useOmit(rest);
-
-  return (
-    <Tag
-      {...omitProps}
-      ref={ref}
-      className={componentClass}
-      children={children}
-    />
-  );
-}) as PolymorphicForwardRef<"span", TextProps>;
+    return (
+      <Box
+        as={as}
+        {...omitProps}
+        ref={ref}
+        className={componentClass}
+        color={false}
+        fontWeight={false}
+        fontStyle={false}
+        fontSize={false}
+        lineHeight={false}
+        children={children}
+      />
+    );
+  })
+) as PolymorphicForwardRef<"span", TextProps>;
 
 Text.displayName = "Text";
-
-Text = withStyles(styles)(Text);
-
-export { Text };

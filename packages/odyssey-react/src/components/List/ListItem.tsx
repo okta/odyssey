@@ -20,18 +20,18 @@ export type ListItemProps = Omit<
   "style" | "className"
 >;
 
-const ListItem = forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {
-  const { children, ...rest } = props;
+export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
+  (props, ref) => {
+    const { children, ...rest } = props;
 
-  const omitProps = useOmit(rest);
+    const omitProps = useOmit(rest);
 
-  return (
-    <li {...omitProps} ref={ref} className={styles.item}>
-      {children}
-    </li>
-  );
-});
+    return (
+      <li {...omitProps} ref={ref} className={styles.item}>
+        {children}
+      </li>
+    );
+  }
+);
 
 ListItem.displayName = "ListItem";
-
-export { ListItem };

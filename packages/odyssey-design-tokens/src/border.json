@@ -1,0 +1,14 @@
+{
+  "border": {
+    "width": {
+      "base": { "value": "1px" }
+    },
+    "style": {
+      "base": { "value": "solid" }
+    },
+    "radius": {
+      "base": { "value": "4px" },
+      "outer": { "value": "6px" }
+    }
+  }
+}

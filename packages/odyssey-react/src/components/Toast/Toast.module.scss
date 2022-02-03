@@ -11,75 +11,76 @@
  */
 
 .root {
-  @include border-radius($base-border-radius);
+  @include border-radius(var(--BorderRadius));
 
   display: grid;
   position: relative;
-  grid-gap: 0 $spacing-s;
   grid-template-columns: min-content 1fr min-content;
   align-items: start;
-  max-width: $max-line-length;
-  padding-block: $spacing-m;
-  padding-inline: $spacing-s;
+  max-width: var(--MaxWidth);
+  column-gap: var(--ColumnGap);
+  row-gap: var(--RowGap);
+  padding-block: var(--PaddingBlock);
+  padding-inline: var(--PaddingInline);
   animation-name: toastIn, toastOut;
-  animation-duration: 300ms, 1000ms;
-  animation-delay: 0s, 5300ms;
+  animation-duration: var(--InAnimationDuration), var(--OutAnimationDuration);
+  animation-delay: var(--InAnimationDelay), var(--OutAnimationDelay);
   border: 0;
-  background-color: cv("blue", "900");
-  box-shadow: 0 8px 12px rgba(cv("gray", "900"), 0.12);
-  color: $white;
+  background-color: var(--BackgroundColor);
+  box-shadow: var(--BoxShadow);
+  color: var(--TextColor);
 
   &:hover,
   &:focus-within {
-    animation-delay: 0s, 300s;
+    animation-delay: 0s, var(--HoverOutAnimationDelay);
   }
 
   &:last-child {
     margin-block-end: 0;
   }
 
-  // TODO: We should create default vars (e.g. $durationOut) since it is
-  // used here and on line 55.
   @media (prefers-reduced-motion) {
     animation-name: toastIn;
-    animation-duration: 300ms;
+    animation-duration: var(--ReducedAnimationDuration);
     animation-delay: 0s;
   }
 }
 
 .dismissed {
   animation-name: toastOut;
-  animation-duration: 1000ms;
-  animation-delay: 1000ms; // TODO: play around with the timing here.
+  animation-duration: var(--DismissedAnimationDuration);
+  animation-delay: var(
+    --DismissedAnimationDelay
+  ); // TODO: play around with the timing here.
 
   @media (prefers-reduced-motion) {
     animation-name: toastOut;
-    animation-duration: 300ms;
+    animation-duration: var(--ReducedAnimationDuration);
     animation-delay: 0s;
   }
 }
 
 .icon {
-  width: $size-title-4;
-  color: $white;
-  font-size: $size-title-4;
+  width: var(--IconSize);
+  color: var(--IconColor);
+  font-size: var(--IconSize);
   line-height: 1;
 }
 
-.title {
-  margin-block: 0;
-  margin-inline: 0;
-  padding-inline-end: $spacing-m;
-  color: $white;
-  font-size: $size-body-base;
-  font-weight: 600;
-  line-height: $base-line-height;
+.heading {
+  margin-block: var(--HeadingMarginBlock);
+  margin-inline: var(--HeadingMarginInline);
+  padding-inline-end: var(--HeadingPaddingInlineEnd);
+  color: var(--HeadingTextColor);
+  font-size: var(--HeadingFontSize);
+  font-weight: var(--HeadingFontWeight);
+  line-height: var(--HeadingLineHeight);
 }
 
 .dismiss {
   position: absolute;
-  inset-block-start: $spacing-xs;
-  inset-inline-end: $spacing-xs;
+  inset-block-start: var(--DismissInsetBlockStart);
+  inset-inline-end: var(--DismissInsetInlineEnd);
   margin-block-end: 0;
   border: 0;
   line-height: 1;
@@ -87,29 +88,29 @@
 
 .body {
   grid-column: 2;
-  margin-block-end: 0;
-  font-size: $size-body-base;
+  margin-block: 0;
+  font-size: var(--BodyFontSize);
 }
 
 .successVariant {
-  background-color: cv("green", "600");
+  background-color: var(--SuccessBackgroundColor);
 }
 
 .cautionVariant {
-  background-color: cv("yellow", "500");
-  color: $text-body;
+  background-color: var(--CautionBackgroundColor);
+  color: var(--CautionTextColor);
 
   .icon {
-    color: $text-body;
+    color: var(--CautionIconColor);
   }
 
-  .title {
-    color: $text-heading;
+  .heading {
+    color: var(--CautionHeadingColor);
   }
 }
 
 .dangerVariant {
-  background-color: cv("red", "500");
+  background-color: var(--DangerBackgroundColor);
 }
 
 @keyframes toastIn {
@@ -138,10 +139,11 @@
   display: grid;
   position: fixed;
   z-index: 1;
-  inset-inline-end: $spacing-m;
-  inset-block-end: $spacing-m;
-  grid-gap: $spacing-s 0;
+  inset-inline-end: var(--PenInsetInlineEnd);
+  inset-block-end: var(--PenInsetBlockEnd);
   grid-template-columns: minmax(min-content, max-content);
   max-height: 100vh;
   overflow: visible;
+  column-gap: 0;
+  row-gap: var(--PenRowGap);
 }

@@ -11,7 +11,7 @@
  */
 
 import React from "react";
-import { render, fireEvent, within } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import type { EventType } from "@testing-library/dom";
 import { TextInput } from ".";
 import type { TextInputProps } from ".";
@@ -21,30 +21,34 @@ const label = "Destination";
 
 describe("TextInput", () => {
   it("renders into the document", () => {
-    const { getByRole } = render(<TextInput label={label} />);
+    render(<TextInput label={label} />);
 
-    expect(getByRole(textBox)).toBeInTheDocument();
+    expect(screen.getByRole(textBox)).toBeVisible();
+  });
+
+  it("accepts and spreads omitted rest props to the input element", () => {
+    render(<TextInput label={label} data-testid="foo" />);
+
+    expect(screen.getByTestId("foo")).toBeInstanceOf(HTMLInputElement);
   });
 
   it("renders a provided id associating the input and label", () => {
-    const { getByRole, getByText } = render(
-      <TextInput label={label} id="foo" />
-    );
+    render(<TextInput label={label} id="foo" />);
 
-    expect(getByRole(textBox)).toHaveAttribute("id", "foo");
-    expect(getByText(label)).toHaveAttribute("for", "foo");
+    expect(screen.getByRole(textBox)).toHaveAttribute("id", "foo");
+    expect(screen.getByText(label).parentElement).toHaveAttribute("for", "foo");
   });
 
   it("renders a generated id associating the input and label", () => {
-    const { getByLabelText } = render(<TextInput label={label} />);
+    render(<TextInput label={label} required />);
 
-    expect(getByLabelText(label)).toBe;
+    expect(screen.getByRole(textBox, { name: label })).toBeVisible();
   });
 
   it("renders a provided name for the input", () => {
-    const { getByRole } = render(<TextInput label={label} name="bar" />);
+    render(<TextInput label={label} name="bar" />);
 
-    expect(getByRole(textBox)).toHaveAttribute("name", "bar");
+    expect(screen.getByRole(textBox)).toHaveAttribute("name", "bar");
   });
 
   it("renders the optionalLabel when input is not required", () => {
@@ -58,7 +62,7 @@ describe("TextInput", () => {
       within(container.querySelector("label") as HTMLElement).getByText(
         optionalLabel
       )
-    ).toBeInTheDocument();
+    ).toBeVisible();
   });
 
   it.each([["disabled"], ["readonly"], ["required"]])(
@@ -81,9 +85,12 @@ describe("TextInput", () => {
     ["search"],
     ["password"],
   ])("renders %s input type", (type) => {
-    const { getByLabelText } = render(<TextInput label={label} type={type} />);
+    render(<TextInput label={label} type={type} required />);
 
-    expect(getByLabelText(label)).toHaveAttribute("type", type ?? "text");
+    expect(screen.getByLabelText(label)).toHaveAttribute(
+      "type",
+      type ?? "text"
+    );
   });
 
   it("invokes onChange with expected args when change input event fires", () => {
@@ -108,11 +115,9 @@ describe("TextInput", () => {
     (prop, type) => {
       const handle = jest.fn();
 
-      const { getByRole } = render(
-        <TextInput {...{ [prop]: handle }} label={label} />
-      );
+      render(<TextInput {...{ [prop]: handle }} label={label} />);
 
-      fireEvent[type].call(fireEvent, getByRole(textBox));
+      fireEvent[type].call(fireEvent, screen.getByRole(textBox));
 
       expect(handle).toHaveBeenCalledTimes(1);
       expect(handle).toHaveBeenLastCalledWith(
@@ -121,13 +126,13 @@ describe("TextInput", () => {
     }
   );
 
-  it("invokes inputRef with expected args after render", () => {
-    const handle = jest.fn();
+  it("invokes ref with expected args after render", () => {
+    const ref = jest.fn();
 
-    const { getByRole } = render(<TextInput inputRef={handle} label={label} />);
+    render(<TextInput ref={ref} label={label} />);
 
-    expect(handle).toHaveBeenCalledTimes(1);
-    expect(handle).toHaveBeenLastCalledWith(getByRole(textBox));
+    expect(ref).toHaveBeenCalledTimes(1);
+    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(textBox));
   });
 
   a11yCheck(() => render(<TextInput label="foo" />));

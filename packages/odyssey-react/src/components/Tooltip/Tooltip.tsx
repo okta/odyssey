@@ -12,11 +12,17 @@
 
 import React, { cloneElement, forwardRef } from "react";
 import type { ReactElement, ComponentPropsWithRef } from "react";
-import { useCx, useOid, useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useCx, useOid, useOmit } from "../../utils";
+import { Box } from "../Box";
 import styles from "./Tooltip.module.scss";
-import { Text } from "../Text";
+import { theme } from "./Tooltip.theme";
+
 export interface TooltipProps
-  extends Omit<ComponentPropsWithRef<"aside">, "style" | "className" | "role"> {
+  extends Omit<
+    ComponentPropsWithRef<"aside">,
+    "style" | "className" | "role" | "color"
+  > {
   /**
    * Content to be rendered that needs a tooltip label
    */
@@ -37,39 +43,38 @@ export interface TooltipProps
 /**
  * A transient element that provides additional context for an element when it receives hover or focus.
  */
-let Tooltip = forwardRef<HTMLElement, TooltipProps>((props, ref) => {
-  const { children, id, label, position = "top", ...rest } = props;
+export const Tooltip = withTheme(
+  theme,
+  styles
+)(
+  forwardRef<HTMLElement, TooltipProps>((props, ref) => {
+    const { children, id, label, position = "top", ...rest } = props;
 
-  const oid = useOid(id);
-  const omitProps = useOmit(rest);
-  const tooltipClasses = useCx(styles.root, styles[`${position}Position`]);
-  const clone = cloneElement(children, { "aria-describedby": oid });
+    const oid = useOid(id);
+    const omitProps = useOmit(rest);
+    const tooltipClasses = useCx(styles.root, styles[`${position}Position`]);
+    const clone = cloneElement(children, { "aria-describedby": oid });
 
-  return (
-    <span className={styles.hasTooltip}>
-      {clone}
-      <aside
-        {...omitProps}
-        ref={ref}
-        id={oid}
-        className={tooltipClasses}
-        role="tooltip"
-      >
-        <Text
-          color="bodyInverse"
-          size="caption"
-          weight="bold"
-          lineHeight="title"
+    return (
+      <span className={styles.hasTooltip}>
+        {clone}
+        <Box
+          as="aside"
+          {...omitProps}
+          ref={ref}
+          id={oid}
+          className={tooltipClasses}
+          role="tooltip"
+          color={false}
+          fontSize={false}
+          fontWeight={false}
+          lineHeight={false}
         >
           {label}
-        </Text>
-      </aside>
-    </span>
-  );
-});
+        </Box>
+      </span>
+    );
+  })
+);
 
 Tooltip.displayName = "Tooltip";
-
-Tooltip = withStyles(styles)(Tooltip);
-
-export { Tooltip };

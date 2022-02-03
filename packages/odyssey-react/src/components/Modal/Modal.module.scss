@@ -28,14 +28,18 @@
   inset-inline-start: 0;
   align-items: center;
   justify-content: center;
-  background: rgba(cv("gray", "900"), 0.75);
+  background-color: var(--OverlayBackgroundColor);
 
   .root[aria-hidden="false"] & {
-    animation: overlayIn $base-duration $base-timing;
+    animation-name: overlayIn;
+    animation-duration: var(--AnimationDuration);
+    animation-timing-function: var(--AnimationTimingFunction);
   }
 
   .root[aria-hidden="true"] & {
-    animation: overlayOut $base-duration $base-timing;
+    animation-name: overlayOut;
+    animation-duration: var(--AnimationDuration);
+    animation-timing-function: var(--AnimationTimingFunction);
   }
 }
 
@@ -45,18 +49,22 @@
   position: relative;
   max-width: calc(#{$max-line-length} + #{$spacing-m} + #{$spacing-m});
   max-height: calc(100vh - #{$spacing-m});
-  padding-block-start: $spacing-m;
-  padding-block-end: 0;
-  padding-inline: $spacing-m;
+  padding-block-start: var(--DialogPaddingBlockStart);
+  padding-block-end: var(--DialogPaddingBlockEnd);
+  padding-inline: var(--DialogPaddingInline);
   overflow-y: auto;
-  background-color: $white;
+  background-color: var(--DialogBackgroundColor);
 
   .root[aria-hidden="false"] & {
-    animation: dialogIn $base-duration $base-timing;
+    animation-name: dialogIn;
+    animation-duration: var(--AnimationDuration);
+    animation-timing-function: var(--AnimationTimingFunction);
   }
 
   .root[aria-hidden="true"] & {
-    animation: dialogOut $base-duration $base-timing;
+    animation-name: dialogOut;
+    animation-duration: var(--AnimationDuration);
+    animation-timing-function: var(--AnimationTimingFunction);
   }
 }
 
@@ -67,20 +75,20 @@
 
 .dismiss {
   align-self: flex-end;
-  margin-block-end: $spacing-xs;
+  margin-block-end: var(--DismissMarginBlockEnd);
 }
 
 .content {
-  padding-block-start: $spacing-xs;
-  padding-block-end: $spacing-l;
-  padding-inline: 0;
-  font-size: $size-body-base;
+  padding-block-start: var(--ContentPaddingBlockStart);
+  padding-block-end: var(--ContentPaddingBlockEnd);
+  padding-inline: var(--ContentPaddingInline);
+  font-size: var(--ContentFontSize);
 }
 
 .footer {
   display: flex;
   justify-content: flex-end;
-  padding-block-end: $spacing-m;
+  padding-block-end: var(--FooterPaddingBlockEnd);
 }
 
 @keyframes overlayIn {

@@ -12,7 +12,9 @@
 
 import React, { Children, cloneElement, forwardRef } from "react";
 import type { ReactElement, ComponentPropsWithRef } from "react";
-import { useOid, useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOid, useOmit } from "../../utils";
+import { theme } from "./SvgIcon.theme";
 import styles from "./SvgIcon.module.scss";
 
 export interface SvgIconProps
@@ -34,37 +36,37 @@ export interface SvgIconProps
 /**
  * A thin wrapper to augment icon svgs with proper attributes and accessibility features
  */
+export const SvgIcon = withTheme(
+  theme,
+  styles
+)(
+  forwardRef<SVGSVGElement, SvgIconProps>(
+    ({ title, children, ...rest }, ref) => {
+      const oid = useOid();
+      const omitProps = useOmit(rest);
 
-let SvgIcon = forwardRef<SVGSVGElement, SvgIconProps>(
-  ({ title, children, ...rest }, ref) => {
-    const oid = useOid();
-    const omitProps = useOmit(rest);
-
-    return Children.only(
-      cloneElement(
-        children,
-        {
-          ...omitProps,
-          "aria-labelledby": oid,
-          className: styles.root,
-          ref: ref,
-          role: title ? "img" : "presentation",
-        },
-        [
-          title && (
-            <title id={oid} key={oid}>
-              {title}
-            </title>
-          ),
-          children.props.children,
-        ]
-      )
-    );
-  }
+      return Children.only(
+        cloneElement(
+          children,
+          {
+            ...omitProps,
+            "aria-labelledby": oid,
+            className: styles.root,
+            ref: ref,
+            role: title ? "img" : "presentation",
+          },
+          [
+            title && (
+              <title id={oid} key={oid}>
+                {title}
+              </title>
+            ),
+            children.props.children,
+          ]
+        )
+      );
+    }
+  )
 );
 
 SvgIcon.displayName = "SvgIcon";
-
-SvgIcon = withStyles(styles)(SvgIcon);
-
-export { SvgIcon };

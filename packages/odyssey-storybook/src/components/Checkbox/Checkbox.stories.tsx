@@ -10,9 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
+import React, { useEffect } from "react";
 import type { Story } from "@storybook/react";
-import { useEffect } from "react";
 import { Checkbox as Source } from "../../../../odyssey-react/src";
 import { Checkbox, CheckboxProps, ScreenReaderText } from "@okta/odyssey-react";
 
@@ -27,13 +26,9 @@ export default {
     },
   },
   args: {
+    required: false,
     label: "Checkbox label",
     value: "checkbox_value",
-    error: (
-      <>
-        <ScreenReaderText>Error:</ScreenReaderText> Descriptive error text.
-      </>
-    ),
   },
   argTypes: {
     checked: { control: "boolean" },
@@ -71,3 +66,11 @@ Invalid.decorators = [
     return <Story />;
   },
 ];
+Invalid.args = {
+  required: true,
+  error: (
+    <>
+      <ScreenReaderText>Error:</ScreenReaderText> Descriptive error text.
+    </>
+  ),
+};

@@ -11,42 +11,44 @@
  */
 
 import React, { forwardRef } from "react";
-import type { ReactNode, ReactElement, ComponentPropsWithRef } from "react";
-import { useOmit, withStyles } from "../../utils";
-import styles from "./Table.module.scss";
+import type { ReactText, ReactElement, ComponentPropsWithRef } from "react";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOmit } from "../../utils";
+import { Box } from "../Box";
+import styles from "./TableContainer.module.scss";
+import { theme } from "./TableContainer.theme";
 
 export interface TableContainerProps
   extends Omit<
     ComponentPropsWithRef<"figure">,
-    "style" | "className" | "title"
+    "style" | "className" | "color"
   > {
   /**
    * The table for this container
    */
   children?: ReactElement | ReactElement[];
   /**
-   * The visible heading for the table
+   * The visible caption for the table
    */
-  title: ReactNode;
+  caption?: ReactText;
 }
 
-let TableContainer = forwardRef<HTMLElement, TableContainerProps>(
-  (props, ref) => {
-    const { children, title, ...rest } = props;
+export const TableContainer = withTheme(
+  theme,
+  styles
+)(
+  forwardRef<HTMLElement, TableContainerProps>((props, ref) => {
+    const { children, caption, ...rest } = props;
 
     const omitProps = useOmit(rest);
 
     return (
-      <figure {...omitProps} ref={ref} className={styles.container}>
-        <figcaption className={styles.title}>{title}</figcaption>
+      <Box as="figure" {...omitProps} ref={ref} className={styles.root}>
+        <figcaption className={styles.caption}>{caption}</figcaption>
         {children}
-      </figure>
+      </Box>
     );
-  }
+  })
 );
 
 TableContainer.displayName = "TableContainer";
-
-TableContainer = withStyles(styles)(TableContainer);
-
-export { TableContainer };

@@ -12,13 +12,16 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
-import { useOid, useOmit, withStyles } from "../../utils";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { useOid, useOmit } from "../../utils";
+import { Box } from "../Box";
 import styles from "./CircularLoadIndicator.module.scss";
+import { theme } from "./CircularLoadIndicator.theme";
 
 export interface CircularLoadIndicatorProps
   extends Omit<
     ComponentPropsWithRef<"span">,
-    "style" | "className" | "role" | "aria-valuemin" | "aria-valuemax"
+    "style" | "className" | "role" | "aria-valuemin" | "aria-valuemax" | "color"
   > {
   /**
    * Id used to reference the indicator in loading element's `aria-describedby` attribute
@@ -41,53 +44,52 @@ export interface CircularLoadIndicatorProps
  * the author should use `aria-describedby` to point to the indicator, and
  * set the `aria-busy` attribute to `true` on the region until it is finished loading.
  */
-let CircularLoadIndicator = forwardRef<
-  HTMLSpanElement,
-  CircularLoadIndicatorProps
->((props, ref) => {
-  const {
-    "aria-label": ariaLabel,
-    "aria-valuetext": ariaValuetext,
-    id,
-    ...rest
-  } = props;
+export const CircularLoadIndicator = withTheme(
+  theme,
+  styles
+)(
+  forwardRef<HTMLSpanElement, CircularLoadIndicatorProps>((props, ref) => {
+    const {
+      "aria-label": ariaLabel,
+      "aria-valuetext": ariaValuetext,
+      id,
+      ...rest
+    } = props;
 
-  const omitProps = useOmit(rest);
-  const internalId = useOid();
-  return (
-    <span
-      {...omitProps}
-      className={styles.root}
-      role="progressbar"
-      aria-valuemin={0}
-      aria-valuemax={1}
-      aria-valuetext={ariaValuetext}
-      aria-label={ariaLabel}
-      ref={ref}
-      id={id || internalId}
-    >
-      <svg className={styles.svg} viewBox="0 0 24 24" role="presentation">
-        <circle
-          className={styles.circle}
-          cx="12"
-          cy="12"
-          r="10"
-          fill="none"
-        ></circle>
-        <circle
-          className={styles.animatedCircle}
-          cx="12"
-          cy="12"
-          r="10"
-          fill="none"
-        ></circle>
-      </svg>
-    </span>
-  );
-});
+    const omitProps = useOmit(rest);
+    const internalId = useOid();
+    return (
+      <Box
+        as="span"
+        {...omitProps}
+        className={styles.root}
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={1}
+        aria-valuetext={ariaValuetext}
+        aria-label={ariaLabel}
+        ref={ref}
+        id={id || internalId}
+      >
+        <svg className={styles.svg} viewBox="0 0 24 24" role="presentation">
+          <circle
+            className={styles.circle}
+            cx="12"
+            cy="12"
+            r="10"
+            fill="none"
+          ></circle>
+          <circle
+            className={styles.animatedCircle}
+            cx="12"
+            cy="12"
+            r="10"
+            fill="none"
+          ></circle>
+        </svg>
+      </Box>
+    );
+  })
+);
 
 CircularLoadIndicator.displayName = "CircularLoadIndicator";
-
-CircularLoadIndicator = withStyles(styles)(CircularLoadIndicator);
-
-export { CircularLoadIndicator };

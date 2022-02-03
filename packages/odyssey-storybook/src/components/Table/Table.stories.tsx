@@ -27,17 +27,26 @@ export default {
     },
   },
   args: {
-    title: "Big and small planets",
-    caption: "Information about the largest and smallest planets.",
+    caption: "Big and small planets",
+    screenReaderCaption: "Information about the largest and smallest planets.",
   },
   argTypes: {
-    title: { control: "text" },
     caption: { control: "text" },
+    screenReaderCaption: { control: "text" },
   },
 };
 
-const Template: Story = ({ title, caption, withContainer, direction }) => (
-  <Table caption={caption} title={title} withContainer={withContainer}>
+const Template: Story = ({
+  caption,
+  screenReaderCaption,
+  withContainer,
+  direction,
+}) => (
+  <Table
+    screenReaderCaption={screenReaderCaption}
+    caption={caption}
+    withContainer={withContainer}
+  >
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell scope="col">

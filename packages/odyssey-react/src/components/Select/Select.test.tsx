@@ -13,7 +13,7 @@
 import React, { useCallback } from "react";
 import { render, fireEvent, screen, within } from "@testing-library/react";
 import { Select } from ".";
-import type { ChoicesHTMLSelectElement } from "./Select/useChoices";
+import type { ChoicesHTMLSelectElement } from "./useChoices";
 
 const listboxRole = "listbox";
 const optionRole = "option";
