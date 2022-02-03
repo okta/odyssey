@@ -183,10 +183,10 @@ LineHeightNormal.args = {
   lineHeight: "normal",
 };
 
-export const LineHeightTitle = TemplateWithContainer.bind({});
-LineHeightTitle.storyName = "Line height: Title";
-LineHeightTitle.args = {
-  children: "Title text LineHeight style",
+export const LineHeightHeading = TemplateWithContainer.bind({});
+LineHeightHeading.storyName = "Line height: Heading";
+LineHeightHeading.args = {
+  children: "Heading text LineHeight style",
   lineHeight: "heading",
 };
 
