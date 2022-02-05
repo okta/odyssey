@@ -51,6 +51,12 @@ describe("TextInput", () => {
     expect(screen.getByRole(textBox)).toHaveAttribute("name", "bar");
   });
 
+  it("renders a max length for the input", () => {
+    render(<TextInput label={label} name="bar" maxLength={5} />);
+
+    expect(screen.getByRole(textBox)).toHaveAttribute("maxLength", "5");
+  });
+
   it("renders the optionalLabel when input is not required", () => {
     const optionalLabel = "Optional";
 

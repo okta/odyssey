@@ -69,6 +69,11 @@ export interface TextInputProps
   value?: string;
 
   /**
+   * The underlying input element max length attribute
+   */
+   maxLength?: number;
+
+  /**
    * The initial input element value for uncontrolled components
    */
   defaultValue?: string;
@@ -104,6 +109,7 @@ export const TextInput = withTheme(
     const {
       defaultValue,
       disabled = false,
+      maxLength,
       id,
       name,
       onBlur,
@@ -142,6 +148,7 @@ export const TextInput = withTheme(
         aria-describedby={ariaDescribedBy}
         className={styles.root}
         disabled={disabled}
+        maxLength={maxLength}
         id={oid}
         name={name}
         onChange={handleChange}

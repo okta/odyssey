@@ -44,6 +44,12 @@ describe("TextArea", () => {
     expect(screen.getByRole(textBox, { name: label })).toBeVisible();
   });
 
+  it("renders a max length for the text area", () => {
+    render(<TextArea label={label} name="bar" maxLength={5} />);
+
+    expect(screen.getByRole(textBox)).toHaveAttribute("maxLength", "5");
+  });
+
   it("renders a provided name for the input", () => {
     render(<TextArea label={label} name="bar" />);
 
