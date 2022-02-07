@@ -68,7 +68,7 @@ export const RadioButton = withTheme(
     );
 
     return (
-      <Box className={styles.root}>
+      <Box className={styles.root} position="relative">
         <input
           {...omitProps}
           aria-describedby={ariaDescribedBy}
