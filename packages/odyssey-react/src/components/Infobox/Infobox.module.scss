@@ -15,8 +15,7 @@
 
   display: grid;
   grid-template-areas:
-    "icon heading"
-    ". content"
+    "icon content"
     ". actions";
   grid-template-columns: max-content 1fr;
   width: 100%;
@@ -36,10 +35,6 @@
   font-size: var(--IconSize);
   line-height: var(--IconLineHeight);
   justify-self: start;
-}
-
-.heading {
-  grid-area: heading;
 }
 
 .content {
