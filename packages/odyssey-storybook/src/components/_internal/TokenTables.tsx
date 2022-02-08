@@ -189,7 +189,11 @@ const TokenTables = (): ReactNode => {
   return (
     <>
       {tables.map((table) => (
-        <Table screenReaderCaption={"Design tokens"} caption={table.name}>
+        <Table
+          screenReaderCaption={"Design tokens"}
+          caption={table.name}
+          key={table.name}
+        >
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell scope="col">Token Name</Table.HeaderCell>
@@ -199,7 +203,7 @@ const TokenTables = (): ReactNode => {
           </Table.Header>
           <Table.Body>
             {table.values.map((token: Token) => (
-              <Table.Row>
+              <Table.Row key={`${token.name}-row`}>
                 <Table.DataCell>
                   <Text as="code">{token.name}</Text>
                 </Table.DataCell>

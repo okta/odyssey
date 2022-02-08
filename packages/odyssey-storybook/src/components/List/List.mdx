@@ -1,0 +1,35 @@
+import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { theme } from "@okta/odyssey-react/dist/components/List/List.theme";
+import { ThemeTable } from "../_internal/ThemeTable";
+
+# List
+
+List provides ordered, unordered, description, and unstyled list UI.
+
+<Canvas>
+  <Story id="components-list--default" />
+</Canvas>
+
+## Props
+
+<ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
+
+## Stories
+
+<Canvas>
+  <Story id="components-list--ordered-list" />
+</Canvas>
+
+<Canvas>
+  <Story id="components-list--description-list" />
+</Canvas>
+
+<Canvas>
+  <Story id="components-list--unstyled-list" />
+</Canvas>
+
+<Canvas>
+  <Story id="components-list--action-list" />
+</Canvas>

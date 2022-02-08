@@ -1,4 +1,6 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { theme } from "@okta/odyssey-react/dist/components/Link/Link.theme";
+import { ThemeTable } from "../_internal/ThemeTable";
 
 # Link
 
@@ -19,7 +21,9 @@ Use an external link when:
 - The destination of the link aids in the completion of a task on the current tab (e.g. help documentation)
 - Opening the link in the current tab would result in loss of data or task interruption (e.g. completing a long form)
 
-<Story id="components-link--external" />
+<Canvas>
+  <Story id="components-link--external" />
+</Canvas>
 
 ## States
 
@@ -51,7 +55,9 @@ Icons may be included in standalone links. They are not supported within paragra
 
 Icon layout is automatic, based on language direction.
 
-<Story id="components-link--with-icon" />
+<Canvas>
+  <Story id="components-link--with-icon" />
+</Canvas>
 
 ### Mailto
 
@@ -67,9 +73,11 @@ Links in Odyssey are not underlined. They maintain a minimum 3:1 contrast ratio 
 
 Links should display a visible affordance when users interact via keyboard. Odyssey preserves the default `:focus` state for each browser.
 
-## Arguments
+## Props
 
 <ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
 
 ## References
 

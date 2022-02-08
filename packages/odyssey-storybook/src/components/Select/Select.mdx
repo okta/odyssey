@@ -1,4 +1,6 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { theme } from "@okta/odyssey-react/dist/components/Select/Select.theme";
+import { ThemeTable } from "../_internal/ThemeTable";
 
 # Select
 
@@ -16,7 +18,9 @@ Odyssey also supports a Multi-Select variant that allows users to select many va
 
 To support expected functionality and behaviors, Select relies on the Choices.js library. Odyssey provides fallback styling when Choices.js isn't available.
 
-<Story id="components-select--default" />
+<Canvas>
+  <Story id="components-select--default" />
+</Canvas>
 
 ## Variants
 
@@ -26,13 +30,17 @@ Odyssey provides support for both single and multi-value Selects.
 
 The default Select allows users to choose a single value from a list of options. Selecting another option will replace the first.
 
-<Story id="components-select--default" />
+<Canvas>
+  <Story id="components-select--default" />
+</Canvas>
 
 ### Multi-Select
 
 The Multi-Select variant allows users to choose more than one value from the list of options.
 
-<Story id="components-select--multiple" />
+<Canvas>
+  <Story id="components-select--multiple" />
+</Canvas>
 
 ## States
 
@@ -62,13 +70,17 @@ Disabled inputs are unavailable for interaction and cannot be focused. They can 
 
 The values of disabled inputs will not be submitted.
 
-<Story id="components-select--disabled" />
+<Canvas>
+  <Story id="components-select--disabled" />
+</Canvas>
 
 ### Optional
 
 Odyssey assumes inputs are required by default. Optional inputs should be used to indicate when data is not required for the user to complete a task.
 
-<Story id="components-select--optional" />
+<Canvas>
+  <Story id="components-select--optional" />
+</Canvas>
 
 ### Invalid
 
@@ -92,11 +104,15 @@ Select inputs should not have a default selected unless a majority of users will
 
 Options may be grouped within the Select list to help guide users. When doing this, consider that Choices will ignore any ungrouped items.
 
-<Story id="components-select--group" />
+<Canvas>
+  <Story id="components-select--group" />
+</Canvas>
 
-## Arguments
+## Props
 
 <ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
 
 ## References
 

@@ -14,10 +14,16 @@ import React from "react";
 import type { Story } from "@storybook/react";
 import { TextArea, TextAreaProps } from "@okta/odyssey-react";
 import { TextArea as Source } from "../../../../odyssey-react/src";
+import TextAreaMdx from "./TextArea.mdx";
 
 export default {
   title: `Components/TextArea`,
   component: Source,
+  parameters: {
+    docs: {
+      page: TextAreaMdx,
+    },
+  },
   args: {
     label: "Field Label",
     defaultValue: " ",
