@@ -1,4 +1,6 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { theme } from "@okta/odyssey-react/dist/components/Checkbox/Checkbox.theme";
+import { ThemeTable } from "../_internal/ThemeTable";
 
 # Checkbox
 
@@ -12,7 +14,9 @@ Checkboxes appear as a square shaped UI accompanied by a caption. Checkboxes can
 
 Users can click a Checkbox to make a choice and click it again to deselect an option. They allow users to select one or more options of something.
 
-<Story id="components-checkbox--default" />
+<Canvas>
+  <Story id="components-checkbox--default" />
+</Canvas>
 
 ## States
 
@@ -22,7 +26,9 @@ Checkboxes support several states: enabled, hover, focus, disabled, invalid, req
 
 Checkboxes in their "unchecked" state are considered enabled. They are ready for user interaction.
 
-<Story id="components-checkbox--default" />
+<Canvas>
+  <Story id="components-checkbox--default" />
+</Canvas>
 
 ### Hover
 
@@ -48,7 +54,9 @@ Disabled inputs are unavailable for interaction and cannot be focused. They can 
 
 Checkboxes are disabled individually. The values of disabled inputs will not be submitted.
 
-<Story id="components-checkbox--disabled" />
+<Canvas>
+  <Story id="components-checkbox--disabled" />
+</Canvas>
 
 ### Invalid
 
@@ -58,7 +66,9 @@ When indicating a validation error, please use a Field Error label to indicate t
 
 Unlike Radio Buttons, Checkboxes validate individually, not as a group.
 
-<Story id="components-checkbox--invalid" />
+<Canvas>
+  <Story id="components-checkbox--invalid" />
+</Canvas>
 
 ### Required
 
@@ -74,8 +84,12 @@ In the case of nested checkboxes, an indeterminate state may be required.
 
 Note that this state is visual-only and will be submitted as either "checked" or "unchecked" depending on the design of your UI.
 
-<Story id="components-checkbox--indeterminate" />
+<Canvas>
+  <Story id="components-checkbox--indeterminate" />
+</Canvas>
 
-## Arguments
+## Props
 
 <ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />

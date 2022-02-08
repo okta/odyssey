@@ -21,10 +21,16 @@ import {
   Button,
 } from "@okta/odyssey-react";
 import { Form as Source } from "../../../../odyssey-react/src";
+import FormMdx from "./Form.mdx";
 
 export default {
   title: `Components/Form`,
   component: Source,
+  parameters: {
+    docs: {
+      page: FormMdx,
+    },
+  },
   argTypes: {
     children: {
       control: { type: null },

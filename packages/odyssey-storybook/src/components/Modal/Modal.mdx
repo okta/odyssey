@@ -1,4 +1,6 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { theme } from "@okta/odyssey-react/dist/components/Modal/Modal.theme";
+import { ThemeTable } from "../_internal/ThemeTable";
 
 # Modal
 
@@ -66,9 +68,11 @@ For convenience, users can exit the modal in a few ways:
 
 For users happy with their new context, we ensure their attention isn't misdirected. Scrolling on the main content becomes locked, and we inform the browser to lock the `tabindex` to the modal context. This way, regardless of input method, a user's interactions are limited to their new scope.
 
-## Arguments
+## Props
 
 <ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
 
 ## Further reading
 

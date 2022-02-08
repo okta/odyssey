@@ -1,4 +1,6 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { theme } from "@okta/odyssey-react/dist/components/Tabs/Tabs.theme";
+import { ThemeTable } from "../_internal/ThemeTable";
 
 # Table
 
@@ -24,7 +26,9 @@ Finally, when a descending heading is clicked, it should swap to unsorted.
 
 When any column becomes sorted, the previously active column should return to an unsorted state.
 
-<Story id="components-table--default" />
+<Canvas>
+  <Story id="components-table--default" />
+</Canvas>
 
 ## States
 
@@ -33,7 +37,9 @@ When any column becomes sorted, the previously active column should return to an
 If no data is returned - whether due to filtering or an empty data set - be sure to provide a null state for your users. If you can detect why no data was returned, make that clear in the tfoot.
 The data-null attribute will ensure the table styling is adjusted.
 
-<Story id="components-table--empty-table" />
+<Canvas>
+  <Story id="components-table--empty-table" />
+</Canvas>
 
 ## Usage
 
@@ -53,7 +59,9 @@ If you need to group rows by a shared data point, we also support using rowspan 
 
 Note: spanning multiple rows or columns may cause issues for assistive technologies.
 
-<Story id="components-table--row-grouping" />
+<Canvas>
+  <Story id="components-table--row-grouping" />
+</Canvas>
 
 ## Content guidelines
 
@@ -138,6 +146,8 @@ Try to refrain from using complicated table layouts that rely on colspan or rows
 
 This same advice applies to nested tables or hidden rows as well. They can introduce problems that make your table inaccessible for some users.
 
-## Arguments
+## Props
 
 <ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
