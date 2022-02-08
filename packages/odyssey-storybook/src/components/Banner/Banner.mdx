@@ -1,4 +1,6 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { theme } from "@okta/odyssey-react/dist/components/Banner/Banner.theme";
+import { ThemeTable } from "../_internal/ThemeTable";
 
 # Banner
 
@@ -20,7 +22,9 @@ They are best used to indicate global states or errors that effect an entire pro
 
 Use Info Banners to surface neutral information or broad announcements to users.
 
-<Story id="components-banner--info" />
+<Canvas>
+  <Story id="components-banner--info" />
+</Canvas>
 
 ### Danger
 
@@ -28,7 +32,9 @@ Use Danger Banners to inform users that a system-wide error has occurred. You ma
 
 Include guidance to make sure users know what steps to take to address the error or avoid the threat.
 
-<Story id="components-banner--danger" />
+<Canvas>
+  <Story id="components-banner--danger" />
+</Canvas>
 
 ### Caution
 
@@ -36,7 +42,9 @@ Use Caution Banners to inform users of tasks or processes that may need their at
 
 When using the Caution variant, ensure the user does not need more context than you can give in the space available.
 
-<Story id="components-banner--caution" />
+<Canvas>
+  <Story id="components-banner--caution" />
+</Canvas>
 
 ## Usage
 
@@ -68,9 +76,11 @@ Banners support dismissal for messages that do not persist or only require a one
 
 Banner content should be succinct and direct. When including an action, be sure the link text clearly indicates where it leads.
 
-## Arguments
+## Props
 
 <ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
 
 ## References
 
