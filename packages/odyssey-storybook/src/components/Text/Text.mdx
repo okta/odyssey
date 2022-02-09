@@ -1,4 +1,6 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { theme } from "@okta/odyssey-react/dist/components/Text/Text.theme";
+import { ThemeTable } from "../../../.storybook/components/ThemeTable";
 
 import { Text } from "../../../../odyssey-react/src";
 
@@ -11,6 +13,8 @@ Text is a bounded polymorphic component used to insert various styled HTML eleme
 ## Props
 
 <ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
 
 ## Variants
 
