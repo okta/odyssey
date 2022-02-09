@@ -49,7 +49,7 @@ const ThemeTable = ({ componentThemeReducer }: ThemeTableProps): ReactNode => {
         <Table.Row>
           <Table.HeaderCell scope="col">Variable Name</Table.HeaderCell>
           <Table.HeaderCell scope="col">Token Value</Table.HeaderCell>
-          <Table.HeaderCell scope="col" format={"num"}></Table.HeaderCell>
+          <Table.HeaderCell scope="col" format="num"></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -61,7 +61,7 @@ const ThemeTable = ({ componentThemeReducer }: ThemeTableProps): ReactNode => {
             <Table.DataCell>
               <Text as="code">{componentVariables[variable]}</Text>
             </Table.DataCell>
-            <Table.DataCell format={"num"}>
+            <Table.DataCell format="num">
               <Text as="code" color="sub" fontSize="caption">
                 {getTokenValue(componentVariables[variable])
                   ? `(${getTokenValue(componentVariables[variable])})`
