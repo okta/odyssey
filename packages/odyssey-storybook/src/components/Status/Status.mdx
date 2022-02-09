@@ -1,4 +1,6 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { theme } from "@okta/odyssey-react/dist/components/Status/Status.theme";
+import { ThemeTable } from "../../../.storybook/components/ThemeTable";
 
 # Status
 
@@ -22,25 +24,33 @@ Neutral Statuses are gray and should be used to indicate states like "Paused", "
 
 This is the default variant.
 
-<Story id="components-status--neutral" />
+<Canvas>
+  <Story id="components-status--neutral" />
+</Canvas>
 
 ### Success
 
 Success Statuses are green and should be used to indicate states like "Complete", "Active", or "Service operational".
 
-<Story id="components-status--success" />
+<Canvas>
+  <Story id="components-status--success" />
+</Canvas>
 
 ### Caution
 
 Caution Statuses are yellow and should be used to indicate states like "Attention suggested" or "Service degradation".
 
-<Story id="components-status--caution" />
+<Canvas>
+  <Story id="components-status--caution" />
+</Canvas>
 
 ### Danger
 
 Danger Statuses are red and should be used to indicate states like "Error", "Failure", or "Service disruption".
 
-<Story id="components-status--danger" />
+<Canvas>
+  <Story id="components-status--danger" />
+</Canvas>
 
 ## Usage
 
@@ -64,8 +74,12 @@ Statuses content should provide a quick overview. Limit Status descriptor and la
 
 Where necessary, labels may be hidden. If a label is not present, ensure the Status copy communicates appropriate context. Even if the label is hidden, it must be populated to ensure context for users of assistive technology.
 
-<Story id="components-status--with-label-hidden" />
+<Canvas>
+  <Story id="components-status--with-label-hidden" />
+</Canvas>
 
-## Arguments
+## Props
 
 <ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
