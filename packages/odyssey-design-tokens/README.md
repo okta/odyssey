@@ -27,7 +27,7 @@ $ yarn add @okta/odyssey-design-tokens
 Import named ESM exports:
 
 ```js
-import { * as Tokens } from "@okta/odyssey-design-tokens";
+import * as Tokens from "@okta/odyssey-design-tokens";
 ```
 
 ## Tokens
