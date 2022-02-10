@@ -17,10 +17,16 @@ import {
   CircularLoadIndicatorProps,
 } from "@okta/odyssey-react";
 import { CircularLoadIndicator as Source } from "../../../../odyssey-react/src";
+import CircularLoadIndicatorMdx from "./CircularLoadIndicator.mdx";
 
 export default {
   title: `Components/CircularLoadIndicator`,
   component: Source,
+  parameters: {
+    docs: {
+      page: CircularLoadIndicatorMdx,
+    },
+  },
 };
 
 const Template: Story<CircularLoadIndicatorProps> = () => (

@@ -23,10 +23,16 @@ import {
   Text,
 } from "@okta/odyssey-react";
 import { List as Source } from "../../../../odyssey-react/src";
+import ListMdx from "./List.mdx";
 
 export default {
   title: `Components/List`,
   component: Source,
+  parameters: {
+    docs: {
+      page: ListMdx,
+    },
+  },
 };
 
 const Template: Story<ListProps> = ({ listType, unstyled }) => (

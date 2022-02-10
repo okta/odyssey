@@ -1,4 +1,6 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { theme } from "@okta/odyssey-react/dist/components/Infobox/Infobox.theme";
+import { ThemeTable } from "../../../.storybook/components/ThemeTable";
 
 # Infobox
 
@@ -18,7 +20,9 @@ This component may be present on load or triggered by different types of events,
 
 Use Infoboxes for communicating important guidance to the user. When using the Info variant, consider if plain copy will suffice on the page itself first. Reserve this component for "can’t miss" instructions.
 
-<Story id="components-infobox--info" />
+<Canvas>
+  <Story id="components-infobox--info" />
+</Canvas>
 
 ### Danger
 
@@ -26,7 +30,9 @@ Use Danger Infoboxes to inform users that an error has occurred. You may also in
 
 Include guidance to make sure users know what steps to take to address the error or avoid data loss.
 
-<Story id="components-infobox--danger" />
+<Canvas>
+  <Story id="components-infobox--danger" />
+</Canvas>
 
 ### Caution
 
@@ -34,13 +40,17 @@ Use Caution Infoboxes to inform users of tasks or processes that need their atte
 
 When using the Caution variant, ensure the user does not need more context than you can give in the space available.
 
-<Story id="components-infobox--caution" />
+<Canvas>
+  <Story id="components-infobox--caution" />
+</Canvas>
 
 ### Success
 
 Use Success Infoboxes for reporting successful actions, processes, or states to the user.
 
-<Story id="components-infobox--success" />
+<Canvas>
+  <Story id="components-infobox--success" />
+</Canvas>
 
 ## Usage
 
@@ -86,9 +96,11 @@ Both Title and Content are optional, but at least one of them is required.
 
 When deploying Infoboxes, two `role`s may apply. Danger variants should utilize the `alert` role, as their contents represent immediate risk or failure. Success and Caution variants are better suited to the `status` role, which provides a less urgent announcement on appearance. The Info variant does not require a `role`, as it represents plain content.
 
-## Arguments
+## Props
 
 <ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
 
 ## References
 
