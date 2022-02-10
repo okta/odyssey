@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.9.1](https://github.com/okta/odyssey/compare/v0.9.0...v0.9.1) (2022-02-10)
+
+### Bug Fixes
+
+- **odyssey-react:** add relatively positioned containers to Checkbox and Radio ([1e48b51](https://github.com/okta/odyssey/commit/1e48b5180ce1ebfaadf2e72af4066881adf0ce70))
+- **odyssey-react:** allow Infobox to have content without extra space for heading ([93a67dd](https://github.com/okta/odyssey/commit/93a67ddbcfe0fde395f137fa67d318dbda51ce92))
+
 ## [0.9.0](https://github.com/okta/odyssey/compare/v0.8.4...v0.9.0) (2022-02-02)
 
 ### ⚠ BREAKING CHANGES
