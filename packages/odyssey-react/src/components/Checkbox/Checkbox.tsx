@@ -98,7 +98,7 @@ export const Checkbox = withTheme(
     );
 
     return (
-      <Box>
+      <Box position="relative">
         <input
           {...omitProps}
           className={styles.checkbox}

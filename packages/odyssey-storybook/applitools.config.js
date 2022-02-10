@@ -18,6 +18,7 @@ module.exports = {
   // github integration.
   exitcode: false,
 
+  matchLevel: "Strict",
   showStorybookOutput: true,
   testConcurrency: 10,
   browser: [
@@ -30,5 +31,8 @@ module.exports = {
     level: "AA",
     guidelinesVersion: "WCAG_2_1",
   },
-  matchLevel: "Strict",
+  include({ name }) {
+    if (name === "Toast.Provider") return false;
+    return true;
+  },
 };

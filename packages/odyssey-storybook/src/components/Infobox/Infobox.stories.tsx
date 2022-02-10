@@ -11,6 +11,7 @@
  */
 
 import React from "react";
+import type { ReactElement } from "react";
 import { Story } from "@storybook/react";
 import { Infobox, InfoboxProps, Link } from "@okta/odyssey-react";
 import { Infobox as Source } from "../../../../odyssey-react/src";
@@ -72,3 +73,7 @@ export const Success = Template.bind({});
 Success.args = {
   variant: "success",
 };
+
+export const HeadingOnly = (): ReactElement => <Infobox heading="Heading" />;
+
+export const ContentOnly = (): ReactElement => <Infobox content={content} />;

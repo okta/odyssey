@@ -92,16 +92,12 @@ export const Infobox = withTheme(
         role="status"
       >
         <span className={styles.icon}>{icon[variant]}</span>
-        {heading && (
-          <div className={styles.heading}>
-            <Heading visualLevel="6" children={heading} />
-          </div>
-        )}
-        {content && (
-          <section className={styles.content}>
-            <Text>{content}</Text>
-          </section>
-        )}
+
+        <section className={styles.content}>
+          {heading && <Heading visualLevel="6" children={heading} />}
+          {content && <Text>{content}</Text>}
+        </section>
+
         {actions && (
           <section className={styles.actions}>
             <Text>{actions}</Text>

@@ -16,7 +16,7 @@ Odyssey browser support mirrors Okta's [Supported platforms, browsers, and opera
 
 ## Contributing
 
-Please follow our [contributing guidelines](./.github/CONTRIBUTING.md).
+Please follow our [contributing guidelines](https://github.com/okta/odyssey/blob/eced5cb6192fc0177375eccff52fc6477c69d37c/packages/odyssey-storybook/src/contributing/GettingStarted.stories.mdx).
 
 ## License
 

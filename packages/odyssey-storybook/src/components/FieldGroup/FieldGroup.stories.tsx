@@ -20,10 +20,16 @@ import {
   TextInput,
 } from "@okta/odyssey-react";
 import { FieldGroup as Source } from "../../../../odyssey-react/src";
+import FieldGroupMdx from "./FieldGroup.mdx";
 
 export default {
   title: `Components/FieldGroup`,
   component: Source,
+  parameters: {
+    docs: {
+      page: FieldGroupMdx,
+    },
+  },
   argTypes: {
     children: {
       control: { type: null },
@@ -44,7 +50,7 @@ const Template: Story<FieldGroupProps> = ({ legend, desc }) => (
   <FieldGroup legend={legend} desc={desc}>
     <FieldGroup.Error>
       <Infobox
-        title="Route impossible"
+        heading="Route impossible"
         variant="danger"
         content="this is an error"
       />
