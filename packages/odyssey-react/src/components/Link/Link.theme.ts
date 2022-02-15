@@ -20,6 +20,6 @@ export const theme: ThemeReducer = (theme) => ({
   SecondaryTextColor: theme.ColorTextBody,
 
   // Space
-  IndicatorMarginInlineStart: theme.SpaceEmXs,
-  IconMarginInlineEnd: theme.SpaceEmXs,
+  IndicatorMarginInlineStart: theme.Space2,
+  IconMarginInlineEnd: theme.Space2,
 });
