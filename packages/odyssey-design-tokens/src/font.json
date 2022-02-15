@@ -16,14 +16,14 @@
       "2": { "value": "1.143rem" },
       "3": { "value": "1.286rem" },
       "4": { "value": "1.429rem" },
-      "5": { "value": "0.857rem" },
-      "6": { "value": "0.857rem" },
-      "7": { "value": "0.857rem" },
-      "8": { "value": "0.857rem" },
-      "9": { "value": "0.857rem" },
-      "10": { "value": "0.857rem" },
-      "11": { "value": "0.857rem" },
-      "12": { "value": "0.857rem" }
+      "5": { "value": "1.571rem" },
+      "6": { "value": "1.786rem" },
+      "7": { "value": "2rem" },
+      "8": { "value": "2.286rem" },
+      "9": { "value": "2.571rem" },
+      "10": { "value": "2.857rem" },
+      "11": { "value": "3.214rem" },
+      "12": { "value": "3.643rem" }
     },
     "size": {
       "base": { "value": "14px" },
