@@ -117,8 +117,8 @@
 
 .dismissVariant,
 .dismissInvertedVariant {
-  padding-block: calc(var(--DismissPaddingBlock) * 0.5);
-  padding-inline: calc(var(--DismissPaddingInline) * 0.5);
+  padding-block: var(--DismissPaddingBlock);
+  padding-inline: var(--DismissPaddingInline);
   border: 0;
   background-color: var(--DismissBackgroundColor);
   color: var(--DismissTextColor);
@@ -188,8 +188,9 @@
 /* Sizes */
 
 .sSize {
+  padding-block: var(--SmallSizePaddingBlock);
+  padding-inline: var(--SmallSizePaddingInline);
   font-size: var(--SmallSizeFontSize);
-  line-height: var(--SmallSizeLineHeight);
 }
 
 .lSize {
