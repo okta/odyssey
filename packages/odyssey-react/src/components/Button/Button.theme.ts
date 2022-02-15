@@ -27,7 +27,7 @@ export const theme: ThemeReducer = (theme) => ({
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightBold,
-  LineHeight: theme.FontLineHeightBase,
+  LineHeight: theme.FontLineHeightUi,
   FocusBoxShadowColor: theme.ColorFocusPrimary,
   // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
@@ -101,7 +101,7 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Small Size
   SmallSizeFontSize: theme.FontSizeCaption,
-  SmallSizeLineHeight: theme.FontLineHeightHeading,
+  SmallSizeLineHeight: theme.FontLineHeightUi,
 
   // Large Size
   LargeSizePaddingBlock: theme.SpaceEmS,

@@ -41,7 +41,7 @@ export const theme: ThemeReducer = (theme) => ({
   HoverFocusBorderColor: theme.ColorBorderPrimaryBase,
   InvalidBorderColor: theme.ColorBorderDangerBase,
   InvalidFocusBoxShadowColor: theme.ColorFocusDanger,
-  LineHeight: theme.FontLineHeightBase,
+  LineHeight: theme.FontLineHeightBody,
   MarginBlock: 0,
   MarginInline: 0,
   MaxWidth: theme.FontLineLengthMax,

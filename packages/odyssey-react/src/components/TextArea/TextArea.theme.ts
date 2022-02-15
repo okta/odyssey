@@ -27,7 +27,7 @@ export const theme: ThemeReducer = (theme) => ({
   // Font
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
-  LineHeight: theme.FontLineHeightBase,
+  LineHeight: theme.FontLineHeightBody,
 
   // Sizing
   MaxWidth: theme.FontLineLengthMax,

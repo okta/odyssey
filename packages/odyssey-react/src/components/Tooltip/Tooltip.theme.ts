@@ -20,7 +20,7 @@ export const theme: ThemeReducer = (theme) => ({
   BackgroundColor: theme.ColorTextBody,
   FontSize: theme.FontSizeCaption,
   FontWeight: theme.FontWeightBold,
-  LineHeight: theme.FontLineHeightHeading,
+  LineHeight: theme.FontLineHeightUi,
   BorderStyle: theme.BorderStyleBase,
   BorderWidth: theme.BorderWidthBase,
 

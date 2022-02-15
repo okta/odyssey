@@ -33,7 +33,7 @@ export const theme: ThemeReducer = (theme) => ({
   DismissInsetInlineEnd: theme.SpaceRemXs,
   HeadingFontSize: theme.FontSizeHeading6,
   HeadingFontWeight: theme.FontWeightBold,
-  HeadingLineHeight: theme.FontLineHeightBase,
+  HeadingLineHeight: theme.FontLineHeightHeading6,
   HeadingMarginBlock: 0,
   HeadingMarginInline: 0,
   HeadingPaddingInlineEnd: theme.SpaceRemM,

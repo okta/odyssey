@@ -42,7 +42,7 @@ export const theme: ThemeReducer = (theme) => ({
   NormalFontWeight: theme.FontWeightNormal,
   NormalFontStyle: theme.FontStyleNormal,
   FontSize: theme.FontSizeBody,
-  BaseLineHeight: theme.FontLineHeightBase,
+  BodyLineHeight: theme.FontLineHeightBody,
   BodyTextColor: theme.ColorTextBody,
 
   // Border

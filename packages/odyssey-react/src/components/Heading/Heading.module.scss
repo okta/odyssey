@@ -22,48 +22,42 @@
 
 .level1 {
   font-size: var(--Level1FontSize);
+  line-height: var(--Level1LineHeight);
 }
 
 .level2 {
   font-size: var(--Level2FontSize);
+  line-height: var(--Level2LineHeight);
 }
 
 .level3 {
   font-size: var(--Level3FontSize);
+  line-height: var(--Level3LineHeight);
 }
 
 .level4 {
   font-size: var(--Level4FontSize);
+  line-height: var(--Level4LineHeight);
 }
 
 .level5 {
   font-size: var(--Level5FontSize);
+  line-height: var(--Level5LineHeight);
 }
 
 .level6 {
   font-size: var(--Level6FontSize);
-}
-
-.level1,
-.level2,
-.level3 {
-  line-height: var(--HeadingLineHeight);
-}
-
-.level4,
-.level5,
-.level6 {
-  line-height: var(--BaseLineHeight);
+  line-height: var(--Level6LineHeight);
 }
 
 .noEndMargin {
   margin-block-end: 0;
 }
 
-.baseLineHeight {
-  line-height: var(--BaseLineHeight);
+.bodyLineHeight {
+  line-height: var(--BodyLineHeight);
 }
 
-.headingLineHeight {
-  line-height: var(--HeadingLineHeight);
+.uiLineHeight {
+  line-height: var(--UiLineHeight);
 }
