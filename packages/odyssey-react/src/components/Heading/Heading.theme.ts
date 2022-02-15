@@ -22,10 +22,16 @@ export const theme: ThemeReducer = (theme) => ({
   Level4FontSize: theme.FontSizeHeading4,
   Level5FontSize: theme.FontSizeHeading5,
   Level6FontSize: theme.FontSizeHeading6,
+  Level1LineHeight: theme.FontLineHeightHeading1,
+  Level2LineHeight: theme.FontLineHeightHeading2,
+  Level3LineHeight: theme.FontLineHeightHeading3,
+  Level4LineHeight: theme.FontLineHeightHeading4,
+  Level5LineHeight: theme.FontLineHeightHeading5,
+  Level6LineHeight: theme.FontLineHeightHeading6,
   /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
-  BaseLineHeight: theme.FontLineHeightHeading,
+  BodyLineHeight: theme.FontLineHeightBody,
   // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
-  HeadingLineHeight: theme.FontLineHeightHeading,
+  UiLineHeight: theme.FontLineHeightUi,
 });
