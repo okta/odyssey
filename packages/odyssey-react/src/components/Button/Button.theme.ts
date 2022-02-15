@@ -27,7 +27,7 @@ export const theme: ThemeReducer = (theme) => ({
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightBold,
-  LineHeight: theme.FontLineHeightBase,
+  LineHeight: theme.FontLineHeightUi,
 
   FocusOutlineColor: theme.FocusOutlineColorPrimary,
   FocusOutlineOffset: theme.FocusOutlineOffsetBase,
@@ -103,7 +103,7 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Small Size
   SmallSizeFontSize: theme.FontSizeCaption,
-  SmallSizeLineHeight: theme.FontLineHeightHeading,
+  SmallSizeLineHeight: theme.FontLineHeightUi,
 
   // Large Size
   LargeSizePaddingBlock: theme.SpaceEmS,

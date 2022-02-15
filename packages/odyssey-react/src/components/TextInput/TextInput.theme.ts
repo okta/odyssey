@@ -32,7 +32,7 @@ export const theme: ThemeReducer = (theme) => ({
   IndicatorSize: "1.1487rem",
   InvalidBorderColor: theme.ColorBorderDangerBase,
   InvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
-  LineHeight: theme.FontLineHeightBase,
+  LineHeight: theme.FontLineHeightUi,
   MarginBlock: 0,
   MarginInline: 0,
   MaxWidth: theme.FontLineLengthMax,

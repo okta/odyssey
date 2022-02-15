@@ -17,7 +17,7 @@ export const theme: ThemeReducer = (theme) => ({
   BorderWidth: theme.BorderWidthBase,
   BorderColor: theme.ColorBorderDisplay,
   LegendTextColor: theme.ColorTextBody,
-  LegendLineHeight: theme.FontLineHeightHeading,
+  LegendLineHeight: theme.FontLineHeightHeading4,
   LegendFontSize: theme.FontSizeHeading4,
   MarginBlockEnd: theme.SpaceRemM,
   PaddingBlockEnd: theme.SpaceRemM,
