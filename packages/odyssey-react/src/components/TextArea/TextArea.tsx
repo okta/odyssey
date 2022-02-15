@@ -46,6 +46,12 @@ export interface TextAreaProps
   disabled?: boolean;
 
   /**
+   * The underlying textarea element resize attribute
+   * @default "both"
+   */
+  resize?: "both" | "horizontal" | "vertical" | "none";
+
+  /**
    * The underlying textarea element readonly attribute
    * @default false
    */
@@ -97,6 +103,7 @@ export const TextArea = withTheme(
     const {
       defaultValue,
       disabled = false,
+      resize = "both",
       id,
       name,
       onBlur,
@@ -112,6 +119,8 @@ export const TextArea = withTheme(
       optionalLabel,
       ...rest
     } = props;
+
+    const componentClass = useCx(styles.root, styles[`${resize}Resize`]);
 
     const oid = useOid(id);
     const omitProps = useOmit(rest);
@@ -140,7 +149,7 @@ export const TextArea = withTheme(
         <textarea
           {...omitProps}
           aria-describedby={ariaDescribedBy}
-          className={styles.root}
+          className={componentClass}
           disabled={disabled}
           id={oid}
           name={name}
