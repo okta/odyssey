@@ -78,3 +78,19 @@
     color: var(--PlaceholderTextColor);
   }
 }
+
+.noneResize {
+  resize: none;
+}
+
+.horizontalResize {
+  resize: horizontal;
+}
+
+.verticalResize {
+  resize: vertical;
+}
+
+.bothResize {
+  resize: both;
+}
