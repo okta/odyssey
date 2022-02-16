@@ -18,11 +18,13 @@ interface Opts {
   transformStyles?: TransformStylesOpts;
 }
 
-function preset(
-  api: Babel.ConfigAPI,
-  _opts: Opts = {}
-): Babel.TransformOptions {
+interface Preset {
+  (api: Babel.ConfigAPI, opts: Opts): Babel.TransformOptions;
+}
+
+export const preset: Preset = (api, _opts = {}) => {
   assertEnv(api.env());
+
   const opts = Object.assign(
     {
       env: {},
@@ -43,6 +45,4 @@ function preset(
       ["@babel/preset-typescript", opts.typescript],
     ],
   };
-}
-
-export { assertEnv, preset as default };
+};
