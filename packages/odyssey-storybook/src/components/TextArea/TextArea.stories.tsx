@@ -32,6 +32,7 @@ export default {
   argTypes: {
     required: { control: "boolean" },
     disabled: { control: "boolean" },
+    resize: { control: "text" },
     readonly: { control: "boolean" },
     defaultValue: { control: "text" },
     hint: { control: "text" },
@@ -60,4 +61,9 @@ export const Optional = Template.bind({});
 Optional.args = {
   required: false,
   optionalLabel: "Optional",
+};
+
+export const ResizeNone = Template.bind({});
+ResizeNone.args = {
+  resize: "none",
 };

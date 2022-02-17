@@ -22,3 +22,16 @@ declare module "postcss-logical" {
 
   export { LogicalOptions, postcssLogical as default };
 }
+
+declare module "loader-utils" {
+  type Context = { resourcePath: string };
+  type Options = { content: string; context: string };
+
+  function interpolateName(
+    loaderContext: Context,
+    name: string,
+    options: Options
+  ): string;
+
+  export { interpolateName };
+}
