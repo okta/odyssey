@@ -14,6 +14,7 @@ import type { PluginCreator } from "postcss";
 import type { CssNanoOptions } from "cssnano";
 import type { Options as AutoPrefixerOptions } from "autoprefixer";
 import type PostcssModulesPlugin from "postcss-modules";
+import { interpolateName } from "loader-utils";
 import postcss from "postcss";
 import postcssModules from "postcss-modules";
 import postcssLogical from "postcss-logical";
@@ -38,7 +39,13 @@ const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
       ...optsArgs.logical,
     },
     modules: {
-      generateScopedName: "ods-[hash:hex:6]",
+      generateScopedName(name, cssPath, css) {
+        return interpolateName(
+          { resourcePath: cssPath },
+          "ods-[hash:base62:6]",
+          { content: name + css, context: process.cwd() }
+        );
+      },
       ...optsArgs.modules,
     },
     cssnano: {
