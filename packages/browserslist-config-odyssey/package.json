@@ -1,6 +1,6 @@
 {
   "name": "@okta/browserslist-config-odyssey",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "main": "dist/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -9,6 +9,6 @@
     "prepare": "tsc"
   },
   "devDependencies": {
-    "@okta/odyssey-typescript": "^0.9.1"
+    "@okta/odyssey-typescript": "^0.9.2"
   }
 }
