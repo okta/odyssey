@@ -13,7 +13,7 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  Size: theme.SpaceEmM,
+  Size: theme.Space4,
   TextColor: theme.ColorPrimaryBase,
   CircleStrokeWidth: "17%",
   CircleStrokeColor: theme.ColorPaletteNeutral100,

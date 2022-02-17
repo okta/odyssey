@@ -18,11 +18,11 @@ export const theme: ThemeReducer = (theme) => ({
   MaxLineLength: theme.FontLineLengthMax,
 
   // Space
-  SpaceRemXs: theme.SpaceRemXs,
-  SpaceRemS: theme.SpaceRemS,
-  SpaceRemM: theme.SpaceRemM,
-  SpaceRemL: theme.SpaceRemL,
-  SpaceRemXl: theme.SpaceRemXl,
+  Space1: theme.Space1,
+  Space2: theme.Space2,
+  Space4: theme.Space4,
+  Space7: theme.Space7,
+  Space9: theme.Space9,
 
   // Shadow
   BaseBoxShadow: theme.ShadowBase,
