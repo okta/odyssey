@@ -16,7 +16,7 @@ export const theme: ThemeReducer = (theme) => ({
   BorderRadius: theme.BorderRadiusBase,
   FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightNormal,
-  MarginBlockEnd: theme.Space2,
+  MarginBlockEnd: theme.SpaceScale2,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,
 
@@ -48,5 +48,5 @@ export const theme: ThemeReducer = (theme) => ({
 
   LabelDisabledTextColor: theme.ColorTextBody,
   LabelInvalidTextColor: theme.ColorTextDanger,
-  LabelPaddingInlineStart: theme.Space2,
+  LabelPaddingInlineStart: theme.SpaceScale2,
 });

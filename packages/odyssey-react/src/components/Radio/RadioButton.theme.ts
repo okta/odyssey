@@ -40,8 +40,8 @@ export const theme: ThemeReducer = (theme) => ({
   LabelFontSize: theme.FontSizeBody,
   LabelFontWeight: theme.FontWeightNormal,
   LabelInvalidTextColor: theme.ColorTextDanger,
-  LabelMarginBlockEnd: theme.Space2,
-  LabelPaddingInlineStart: theme.Space2,
+  LabelMarginBlockEnd: theme.SpaceScale2,
+  LabelPaddingInlineStart: theme.SpaceScale2,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,
 });

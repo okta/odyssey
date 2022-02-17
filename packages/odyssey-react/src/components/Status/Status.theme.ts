@@ -13,12 +13,12 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  DescriptorPaddingInlineStart: theme.Space2,
+  DescriptorPaddingInlineStart: theme.SpaceScale2,
   IndicatorCautionBackgroundColor: theme.ColorCautionBase,
   IndicatorDangerBackgroundColor: theme.ColorDangerBase,
-  IndicatorMarginInlineEnd: theme.Space2,
+  IndicatorMarginInlineEnd: theme.SpaceScale2,
   IndicatorNeutralBackgroundColor: theme.ColorNeutralBase,
   IndicatorSuccessBackgroundColor: theme.ColorSuccessBase,
   LabelFontWeight: theme.FontWeightBold,
-  LabelMarginBlockEnd: theme.Space2,
+  LabelMarginBlockEnd: theme.SpaceScale2,
 });
