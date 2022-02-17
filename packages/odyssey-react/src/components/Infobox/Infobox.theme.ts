@@ -16,16 +16,16 @@ export const theme: ThemeReducer = (theme) => ({
   // Root
   // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   MaxLineLength: theme.FontLineLengthMax,
-  PaddingBlock: theme.Space4,
-  PaddingInline: theme.Space4,
-  MarginBlockEnd: theme.Space4,
+  PaddingBlock: theme.SpaceScale4,
+  PaddingInline: theme.SpaceScale4,
+  MarginBlockEnd: theme.SpaceScale4,
   BorderRadius: theme.BorderRadiusBase,
-  ColumnGap: theme.Space3,
+  ColumnGap: theme.SpaceScale3,
 
   IconSize: theme.FontSizeHeading5,
   IconLineHeight: theme.FontLineHeightHeading5,
 
-  ContentMarginBlockEnd: theme.Space3,
+  ContentMarginBlockEnd: theme.SpaceScale3,
 
   // Variants
   CautionBackgroundColor: theme.ColorBackgroundCautionLight,

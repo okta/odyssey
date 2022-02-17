@@ -76,22 +76,22 @@ export const theme: ThemeReducer = (theme) => ({
   BlockquoteBorderInlineStartWidth: "3px",
   BlockquoteBorderInlineStartColor: theme.ColorBorderDisplay,
   BlockquoteMaxWidth: theme.FontLineLengthMax,
-  BlockquoteMarginBlockEnd: theme.Space4,
+  BlockquoteMarginBlockEnd: theme.SpaceScale4,
   BlockquoteMarginBlockStart: 0,
   BlockquoteMarginInline: 0,
   BlockquotePaddingBlock: 0,
   BlockquotePaddingInlineEnd: 0,
-  BlockquotePaddingInlineStart: theme.Space2,
+  BlockquotePaddingInlineStart: theme.SpaceScale2,
 
   // p
   PMaxWidth: theme.FontLineLengthMax,
-  PMarginBlockEnd: theme.Space4,
+  PMarginBlockEnd: theme.SpaceScale4,
   PMarginBlockStart: 0,
   PMarginInline: 0,
 
   // pre
   PreFontFamily: theme.FontFamilyMono,
-  PreMarginBlockEnd: theme.Space4,
+  PreMarginBlockEnd: theme.SpaceScale4,
   PreMarginBlockStart: 0,
   PreMarginInline: 0,
 
@@ -118,7 +118,7 @@ export const theme: ThemeReducer = (theme) => ({
   KbdLineHeight: theme.FontLineHeightUi,
   KbdFontWeight: theme.FontWeightNormal,
   KbdPaddingBlock: 0,
-  KbdPaddingInline: theme.Space1,
+  KbdPaddingInline: theme.SpaceScale1,
 
   // mark
   MarkBackgroundColor: theme.ColorBackgroundCautionLight,

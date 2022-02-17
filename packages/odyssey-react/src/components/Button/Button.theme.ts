@@ -16,8 +16,8 @@ export const theme: ThemeReducer = (theme) => ({
   // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   MarginBlock: 0,
   MarginInline: 0,
-  PaddingBlock: theme.Space2,
-  PaddingInline: theme.Space3,
+  PaddingBlock: theme.SpaceScale2,
+  PaddingInline: theme.SpaceScale3,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,
   BorderRadius: theme.BorderRadiusBase,
@@ -35,8 +35,8 @@ export const theme: ThemeReducer = (theme) => ({
   FocusOutlineWidth: theme.FocusOutlineWidthBase,
 
   // Label
-  LabelMinWidth: theme.Space7,
-  LabelMarginInlineStart: theme.Space1,
+  LabelMinWidth: theme.SpaceScale7,
+  LabelMarginInlineStart: theme.SpaceScale1,
 
   // Primary Variant
   PrimaryBackgroundColor: theme.ColorPrimaryBase,
@@ -76,8 +76,8 @@ export const theme: ThemeReducer = (theme) => ({
   DismissTextColor: "inherit",
   DismissDisabledTextColor: theme.ColorNeutralBase,
   DismissLineHeight: 1,
-  DismissPaddingBlock: theme.Space1,
-  DismissPaddingInline: theme.Space1,
+  DismissPaddingBlock: theme.SpaceScale1,
+  DismissPaddingInline: theme.SpaceScale1,
   DismissHoverBackgroundColor: "rgba(255, 255, 255, 0.6)",
   DismissFocusBackgroundColor: "rgba(255, 255, 255, 0.6)",
   DismissDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
@@ -98,15 +98,15 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Wide Layout
   WideLayoutMarginBlock: 0,
-  WideLayoutMarginBlockEnd: theme.Space4,
+  WideLayoutMarginBlockEnd: theme.SpaceScale4,
   WideLayoutMarginInline: 0,
 
   // Small Size
   SmallSizeFontSize: theme.FontSizeCaption,
-  SmallSizePaddingBlock: theme.Space1,
-  SmallSizePaddingInline: theme.Space2,
+  SmallSizePaddingBlock: theme.SpaceScale1,
+  SmallSizePaddingInline: theme.SpaceScale2,
 
   // Large Size
-  LargeSizePaddingBlock: theme.Space3,
-  LargeSizePaddingInline: theme.Space4,
+  LargeSizePaddingBlock: theme.SpaceScale3,
+  LargeSizePaddingInline: theme.SpaceScale4,
 });
