@@ -2,11 +2,11 @@
 
 exports[`transformStyles import visitor transforms styles as expected 1`] = `
 Object {
-  "__digest": "fdf87d",
+  "__digest": "0776a6",
   "__template": [Function],
-  "autoprefixed": "ods-322606",
-  "root": "ods-c0f206",
+  "autoprefixed": "ods-58h7mt",
+  "root": "ods-3l3bKz",
 }
 `;
 
-exports[`transformStyles import visitor transforms styles template function return value as expected 1`] = `".ods-c0f206:dir(ltr){margin-left:0}.ods-c0f206:dir(rtl){margin-right:0}.ods-c0f206:dir(ltr){margin-right:.375rem}.ods-c0f206:dir(rtl){margin-left:.375rem}.ods-c0f206{background:#ebebed;color:#1d1d21;display:inline-block;margin-bottom:.375rem;margin-top:0;padding:0 .375em}.ods-322606{::-moz-placeholder{color:#bada55}:-ms-input-placeholder{color:#bada55}::placeholder{color:#bada55}}"`;
+exports[`transformStyles import visitor transforms styles template function return value as expected 1`] = `".ods-3l3bKz:dir(ltr){margin-left:0}.ods-3l3bKz:dir(rtl){margin-right:0}.ods-3l3bKz:dir(ltr){margin-right:.375rem}.ods-3l3bKz:dir(rtl){margin-left:.375rem}.ods-3l3bKz{background:#ebebed;color:#1d1d21;display:inline-block;margin-bottom:.375rem;margin-top:0;padding:0 .375em}.ods-58h7mt{::-moz-placeholder{color:#bada55}:-ms-input-placeholder{color:#bada55}::placeholder{color:#bada55}}"`;

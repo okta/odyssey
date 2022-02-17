@@ -109,5 +109,11 @@ describe("TextArea", () => {
     expect(ref).toHaveBeenLastCalledWith(screen.getByRole(textBox));
   });
 
+  it("assigns resize prop correctly", () => {
+    render(<TextArea resize="none" label={label} />);
+    const container = screen.getByRole(textBox, { name: label });
+    expect(container).toHaveClass("noneResize");
+  });
+
   a11yCheck(() => render(<TextArea label="foo" />));
 });
