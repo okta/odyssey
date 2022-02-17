@@ -31,16 +31,16 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Sizing
   MaxWidth: theme.FontLineLengthMax,
-  MinHeight: theme.SpaceRemL,
-  MinWidth: theme.SpaceRemM,
+  MinHeight: theme.Space7,
+  MinWidth: theme.Space4,
 
   // Space
   MarginBlockEnd: 0,
-  MarginBlockStart: theme.SpaceRemXs,
+  MarginBlockStart: theme.Space1,
   MarginInline: 0,
-  PaddingBlockEnd: theme.SpaceEmS,
-  PaddingBlockStart: theme.SpaceEmXs,
-  PaddingInline: theme.SpaceEmS,
+  PaddingBlockEnd: theme.Space2,
+  PaddingBlockStart: theme.Space1,
+  PaddingInline: theme.Space2,
 
   // Placeholder
   PlaceholderTextColor: theme.ColorTextSub,
