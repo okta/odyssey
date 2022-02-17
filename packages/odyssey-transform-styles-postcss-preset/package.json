@@ -13,6 +13,7 @@
     "@okta/odyssey-postcss-theme": "^0.9.1",
     "autoprefixer": "^10.3.4",
     "cssnano": "^5.0.8",
+    "loader-utils": "1.4.0",
     "postcss-logical": "^5.0.0",
     "postcss-modules": "^4.2.2"
   },
