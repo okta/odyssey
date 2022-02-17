@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.9.2](https://github.com/okta/odyssey/compare/v0.9.1...v0.9.2) (2022-02-17)
+
+### Bug Fixes
+
+- improve class name hashing ([a22e295](https://github.com/okta/odyssey/commit/a22e295a254100c0fefdd48ac21d00caf2b36c2b))
+
 ### [0.9.1](https://github.com/okta/odyssey/compare/v0.9.0...v0.9.1) (2022-02-10)
 
 **Note:** Version bump only for package @okta/odyssey-transform-styles-postcss-preset
