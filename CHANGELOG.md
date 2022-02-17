@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.9.2](https://github.com/okta/odyssey/compare/v0.9.1...v0.9.2) (2022-02-17)
+
+### Features
+
+- **odyssey-react:** add resize prop to TextArea ([9e71ba0](https://github.com/okta/odyssey/commit/9e71ba0f42ad6bc43f886cccf4bead45e6ae1fd0))
+
+### Bug Fixes
+
+- improve class name hashing ([a22e295](https://github.com/okta/odyssey/commit/a22e295a254100c0fefdd48ac21d00caf2b36c2b))
+
 ### [0.9.1](https://github.com/okta/odyssey/compare/v0.9.0...v0.9.1) (2022-02-10)
 
 ### Features
