@@ -8,20 +8,6 @@
     "6": { "value": "2.28571429rem" },
     "7": { "value": "2.85714286rem" },
     "8": { "value": "3.42857143rem" },
-    "9": { "value": "4rem" },
-    "rem": {
-      "xs": { "value": "0.375rem" },
-      "s": { "value": "0.75rem" },
-      "m": { "value": "1.5rem" },
-      "l": { "value": "3rem" },
-      "xl": { "value": "6rem" }
-    },
-    "em": {
-      "xs": { "value": "0.375em" },
-      "s": { "value": "0.75em" },
-      "m": { "value": "1.5em" },
-      "l": { "value": "3em" },
-      "xl": { "value": "6em" }
-    }
+    "9": { "value": "4rem" }
   }
 }
