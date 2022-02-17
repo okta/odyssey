@@ -35,7 +35,9 @@
 }
 
 .maxWidthMaxLineLengthPlusPadding {
-  max-width: calc(var(--MaxLineLength) + var(--SpaceScale4) + var(--SpaceScale4));
+  max-width: calc(
+    var(--MaxLineLength) + var(--SpaceScale4) + var(--SpaceScale4)
+  );
 }
 
 .height1em {
