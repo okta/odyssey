@@ -11,11 +11,14 @@
  */
 
 import type * as Babel from "@babel/core";
-import type { TransformStylesOpts } from "@okta/odyssey-transform-styles-babel-plugin";
+import type { ThemeOpts } from "@okta/odyssey-theme-babel-plugin";
 import assertEnv from "./assertEnv";
 
 interface Opts {
-  transformStyles?: TransformStylesOpts;
+  theme?: ThemeOpts;
+  env?: Record<string, unknown>;
+  react?: Record<string, unknown>;
+  typescript?: Record<string, unknown>;
 }
 
 interface Preset {
@@ -29,16 +32,14 @@ export const preset: Preset = (api, _opts = {}) => {
     {
       env: {},
       react: {},
-      transformStyles: {},
+      theme: {},
       typescript: {},
     },
     _opts
   );
 
   return {
-    plugins: [
-      ["@okta/odyssey-transform-styles-babel-plugin", opts.transformStyles],
-    ],
+    plugins: [["@okta/odyssey-theme-babel-plugin", opts.theme]],
     presets: [
       ["@babel/preset-env", opts.env],
       ["@babel/preset-react", opts.react],

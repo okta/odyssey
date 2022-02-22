@@ -1,4 +1,4 @@
-# @okta/odyssey-babel-preset
+# @okta/odyssey-theme-babel-plugin
 
 ## Production Readiness
 
@@ -21,39 +21,25 @@ exact version (maximum safety) or pin the major and minor versions
 Install the package:
 
 ```sh
-$ yarn add --dev @okta/odyssey-babel-preset
+$ yarn add --dev @okta/odyssey-theme-babel-plugin
 ```
 
 Reference the preset within your babel configuration:
 
 ```js
 module.exports = {
-  presets: [
+  plugins: [
     [
-      "@okta/odyssey-babel-preset",
+      "@okta/odyssey-theme",
       {
-        theme: {
-          identityObjectProxy: true,
-        },
-        react: {
-          runtime: "classic",
-        },
+        identityObjectProxy: true,
       },
     ],
   ],
 
   env: {
     production: {
-      presets: [
-        [
-          "@okta/odyssey-babel-preset",
-          {
-            react: {
-              runtime: "classic",
-            },
-          },
-        ],
-      ],
+      plugins: ["@okta/odyssey-theme"],
     },
   },
 };

@@ -22,19 +22,17 @@ import {
 } from "./nodes";
 import { normalizeOpts, shouldInclude } from "./normalizeOpts";
 
-export interface TransformStylesOpts {
+export interface ThemeOpts {
   include?: Array<string | RegExp>;
   identityObjectProxy: boolean;
 }
 
-export default function transformStyles({
-  types: t,
-}: typeof Babel): Babel.PluginObj {
+export default function theme({ types: t }: typeof Babel): Babel.PluginObj {
   const fileMap = new Map<string, File>();
   const compile = compileFactory();
 
   return {
-    name: "odyssey-transform-styles",
+    name: "odyssey-theme",
 
     visitor: {
       ImportDeclaration(path, state) {

@@ -11,9 +11,9 @@
  */
 
 import type * as Babel from "@babel/core";
-import type { TransformStylesOpts } from "./transformStyles";
+import type { ThemeOpts } from "./theme";
 
-interface NormalizedOpts extends TransformStylesOpts {
+interface NormalizedOpts extends ThemeOpts {
   include: RegExp[];
 }
 
