@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "prepare": "tsc",
-    "prepack": "node ./scripts/prepack.js"
+    "prepack": "prepack"
   },
   "dependencies": {
     "@babel/core": "^7.15.0",

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*!
  * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
@@ -13,7 +14,7 @@
 const { writeFileSync } = require("fs");
 const { resolve } = require("path");
 
-const pkgPath = resolve(__dirname, "../package.json");
+const pkgPath = resolve(process.cwd(), "./package.json");
 
 // eslint-disable-next-line no-unused-vars
 const { scripts, devDependencies, ...pkg } = require(pkgPath);
