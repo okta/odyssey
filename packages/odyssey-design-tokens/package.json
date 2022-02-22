@@ -17,6 +17,6 @@
   "scripts": {
     "build": "style-dictionary clean && style-dictionary build",
     "prepare": "yarn build",
-    "prepack": "node ./scripts/prepack.js"
+    "prepack": "prepack"
   }
 }
