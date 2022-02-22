@@ -55,6 +55,6 @@
     "build:types": "tsc --project tsconfig.production.json",
     "build:source": "./scripts/buildSource",
     "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.js) --out-dir ./src/components/Icon/",
-    "prepack": "node ./scripts/prepack.js"
+    "prepack": "prepack"
   }
 }
