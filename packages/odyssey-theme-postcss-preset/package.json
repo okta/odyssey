@@ -1,13 +1,13 @@
 {
-  "name": "@okta/odyssey-transform-styles-postcss-preset",
+  "name": "@okta/odyssey-theme-postcss-preset",
   "version": "0.9.2",
   "main": "dist/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
-  "private": true,
   "scripts": {
     "prepare": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "prepack": "prepack"
   },
   "dependencies": {
     "@okta/odyssey-postcss-theme": "^0.9.2",
