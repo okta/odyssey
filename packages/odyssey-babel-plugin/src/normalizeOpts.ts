@@ -11,9 +11,13 @@
  */
 
 import type * as Babel from "@babel/core";
-import type { TransformStylesOpts } from "./transformStyles";
 
-interface NormalizedOpts extends TransformStylesOpts {
+export interface Opts {
+  include?: Array<string | RegExp>;
+  identityObjectProxy: boolean;
+}
+
+interface NormalizedOpts extends Opts {
   include: RegExp[];
 }
 
