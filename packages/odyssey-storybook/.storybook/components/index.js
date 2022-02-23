@@ -1,3 +1,3 @@
-import Markdown from "./Markdown";
-
-export { Markdown };
+export { Markdown } from "./Markdown";
+export { ThemeTable } from "./ThemeTable";
+export { TokenTables } from "./TokenTables";
