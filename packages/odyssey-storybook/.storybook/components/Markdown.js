@@ -1,5 +1,5 @@
 import React from "react";
-import Markdown from "markdown-to-jsx";
+import { default as MarkdownToJSX } from "markdown-to-jsx";
 import { components } from "@storybook/components";
 
 // The purpose of the overrides const is to leverage the default
@@ -9,14 +9,11 @@ import { components } from "@storybook/components";
 // chose to rely on the Storybook theming API and have consistent
 // styles throughout our Markdown and SB docs.
 
-const overrides = {};
+const overrides = Object.entries(components).reduce(
+  (memo, [key, component]) => Object.assign(memo, { [key]: { component } }),
+  Object.create(null)
+);
 
-Object.keys(components).forEach((key) => {
-  overrides[key] = {
-    component: components[key],
-  };
-});
-
-export default ({ content }) => (
-  <Markdown options={{ overrides }}>{content}</Markdown>
+export const Markdown = ({ content }) => (
+  <MarkdownToJSX options={{ overrides }} children={content} />
 );

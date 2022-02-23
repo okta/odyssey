@@ -10,12 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect } from "react";
+import type { ReactNode } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { Table, Text } from "@okta/odyssey-react";
-/* eslint-enable import/no-extraneous-dependencies */
-import type { ReactNode } from "react";
 
 type FontWeight = 400 | 600;
 
@@ -31,7 +29,7 @@ type TableData = {
 
 type TokenName = keyof typeof Tokens;
 
-const TokenTables = (): ReactNode => {
+export const TokenTables = (): ReactNode => {
   const [tables, setTables] = useState<Array<TableData>>([]);
 
   useEffect(() => {
@@ -236,5 +234,3 @@ const TokenTables = (): ReactNode => {
     </>
   );
 };
-
-export { TokenTables };
