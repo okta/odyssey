@@ -10,12 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const { writeFileSync } = require("fs");
-const { resolve } = require("path");
+const { default: postcssOdyssey } = require("@okta/odyssey-postcss-preset");
 
-const pkgPath = resolve(__dirname, "../package.json");
-
-// eslint-disable-next-line no-unused-vars
-const { scripts, devDependencies, ...pkg } = require(pkgPath);
-
-writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
+module.exports = (ctx) => {
+  return {
+    plugins: [postcssOdyssey(ctx.odyssey)],
+  };
+};

@@ -31,7 +31,7 @@ interface PluginOptions {
   theme?: false;
 }
 
-const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
+export const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
   const opts: Required<PluginOptions> = {
     logical: {
       dir: false,
@@ -78,4 +78,3 @@ const plugin: PluginCreator<PluginOptions> = (optsArgs = {}) => {
 };
 
 plugin.postcss = true;
-export { plugin as default };

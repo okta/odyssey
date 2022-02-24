@@ -35,6 +35,6 @@
     "build": "build-storybook --quiet --output-dir dist",
     "typecheck": "tsc",
     "prepublishOnly": "yarn run build",
-    "prepack": "node ./scripts/prepack.js"
+    "prepack": "prepack"
   }
 }
