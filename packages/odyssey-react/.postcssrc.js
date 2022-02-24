@@ -12,17 +12,15 @@
 
 const { resolve } = require("path");
 const { default: postcssScss } = require("@okta/odyssey-postcss-scss");
-const {
-  default: transformStyles,
-} = require("@okta/odyssey-transform-styles-postcss-preset");
+const { default: postcssOdyssey } = require("@okta/odyssey-postcss-preset");
 
 module.exports = (ctx) => {
-  if (!ctx.transformStyles) {
+  if (!ctx.odyssey) {
     return {};
   }
 
   const options = Object.assign(
-    ctx.transformStyles,
+    ctx.odyssey,
     ctx.env === "production" && {
       logical: {
         dir: "ltr",
@@ -42,6 +40,6 @@ module.exports = (ctx) => {
     .join("\n");
 
   return {
-    plugins: [postcssScss({ importData }), transformStyles(options)],
+    plugins: [postcssScss({ importData }), postcssOdyssey(options)],
   };
 };

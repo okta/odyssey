@@ -10,20 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-/* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
+import type { ReactNode } from "react";
 import type { Theme, ThemeReducer } from "@okta/odyssey-react-theme";
 import { tokens } from "@okta/odyssey-react-theme/dist/ThemeProvider/context";
 import type { ThemeKey } from "@okta/odyssey-react-theme/dist/ThemeProvider/context";
 import { Table, Text } from "@okta/odyssey-react";
-/* eslint-enable import/no-extraneous-dependencies */
-import type { ReactNode } from "react";
 
 type ThemeTableProps = {
   componentThemeReducer: ThemeReducer;
 };
 
-const ThemeTable = ({ componentThemeReducer }: ThemeTableProps): ReactNode => {
+export const ThemeTable = ({
+  componentThemeReducer,
+}: ThemeTableProps): ReactNode => {
   const remappedTokens: { [key: string]: string } = {};
   for (const [k] of Object.entries(tokens)) {
     remappedTokens[k] = k;
@@ -74,5 +74,3 @@ const ThemeTable = ({ componentThemeReducer }: ThemeTableProps): ReactNode => {
     </Table>
   );
 };
-
-export { ThemeTable };

@@ -1,0 +1,36 @@
+{
+  "name": "@okta/odyssey-postcss-preset",
+  "version": "0.9.3",
+  "description": "Postcss preset for Odyssey, Okta's design system",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/odyssey",
+    "directory": "packages/odyssey-postcss-preset"
+  },
+  "scripts": {
+    "prepare": "tsc",
+    "test": "jest",
+    "prepack": "prepack"
+  },
+  "dependencies": {
+    "@okta/odyssey-postcss-theme": "^0.9.3",
+    "autoprefixer": "^10.3.4",
+    "cssnano": "^5.0.8",
+    "loader-utils": "^1.4.0",
+    "postcss-logical": "^5.0.0",
+    "postcss-modules": "^4.2.2"
+  },
+  "devDependencies": {
+    "@okta/odyssey-typescript": "^0.9.3",
+    "@types/cssnano": "^4.0.1",
+    "jest": "^26.6.3",
+    "postcss": "^8.3.6"
+  },
+  "peerDependencies": {
+    "postcss": "^8.3.6"
+  }
+}
