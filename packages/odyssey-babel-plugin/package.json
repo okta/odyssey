@@ -1,0 +1,35 @@
+{
+  "name": "@okta/odyssey-babel-plugin",
+  "version": "0.9.3",
+  "description": "Babel plugin for Odyssey, Okta's design system",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/odyssey",
+    "directory": "packages/odyssey-babel-plugin"
+  },
+  "scripts": {
+    "prepare": "tsc",
+    "test": "jest",
+    "prepack": "prepack"
+  },
+  "dependencies": {
+    "@babel/template": "^7.12.13",
+    "@babel/types": "^7.14.5",
+    "postcss-load-config": "^3.1.0"
+  },
+  "devDependencies": {
+    "@okta/odyssey-postcss-preset": "^0.9.3",
+    "@okta/odyssey-typescript": "^0.9.3",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
+    "postcss": "^8.3.6"
+  },
+  "peerDependencies": {
+    "@okta/odyssey-postcss-preset": ">= 0.8.2",
+    "postcss": ">= 8 <9"
+  }
+}

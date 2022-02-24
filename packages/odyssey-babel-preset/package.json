@@ -1,23 +1,29 @@
 {
   "name": "@okta/odyssey-babel-preset",
-  "version": "0.9.2",
-  "main": "dist/index.js",
+  "version": "0.9.3",
+  "description": "Babel preset for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
-  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/odyssey",
+    "directory": "packages/odyssey-babel-preset"
+  },
   "scripts": {
-    "prepare": "tsc"
+    "prepare": "tsc",
+    "prepack": "prepack"
   },
   "dependencies": {
-    "@babel/cli": "^7.14.8",
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
-    "@okta/odyssey-transform-styles-babel-plugin": "^0.9.2"
+    "@okta/odyssey-babel-plugin": "^0.9.3"
   },
   "devDependencies": {
-    "@okta/odyssey-typescript": "^0.9.2",
+    "@okta/odyssey-typescript": "^0.9.3",
     "@types/babel__core": "^7.1.15"
   }
 }

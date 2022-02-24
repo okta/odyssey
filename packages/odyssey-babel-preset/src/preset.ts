@@ -11,38 +11,39 @@
  */
 
 import type * as Babel from "@babel/core";
-import type { TransformStylesOpts } from "@okta/odyssey-transform-styles-babel-plugin";
+import type { Opts as OdysseyOpts } from "@okta/odyssey-babel-plugin";
 import assertEnv from "./assertEnv";
 
 interface Opts {
-  transformStyles?: TransformStylesOpts;
+  odyssey?: OdysseyOpts;
+  env?: Record<string, unknown>;
+  react?: Record<string, unknown>;
+  typescript?: Record<string, unknown>;
 }
 
-function preset(
-  api: Babel.ConfigAPI,
-  _opts: Opts = {}
-): Babel.TransformOptions {
+interface Preset {
+  (api: Babel.ConfigAPI, opts: Opts): Babel.TransformOptions;
+}
+
+export const preset: Preset = (api, _opts = {}) => {
   assertEnv(api.env());
+
   const opts = Object.assign(
     {
       env: {},
       react: {},
-      transformStyles: {},
+      odyssey: {},
       typescript: {},
     },
     _opts
   );
 
   return {
-    plugins: [
-      ["@okta/odyssey-transform-styles-babel-plugin", opts.transformStyles],
-    ],
+    plugins: [["@okta/odyssey-babel-plugin", opts.odyssey]],
     presets: [
       ["@babel/preset-env", opts.env],
       ["@babel/preset-react", opts.react],
       ["@babel/preset-typescript", opts.typescript],
     ],
   };
-}
-
-export { assertEnv, preset as default };
+};
