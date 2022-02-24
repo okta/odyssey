@@ -14,27 +14,20 @@ import type * as Babel from "@babel/core";
 import type { File } from "./compile";
 import { resolve, dirname } from "path";
 import compileFactory from "./compileFactory";
+import { normalizeOpts, shouldInclude } from "./normalizeOpts";
 import {
   tokenObjectExpression,
   variableDeclaration,
   identityObjectProxy,
   identityObjectProxyVariableDeclaration,
 } from "./nodes";
-import { normalizeOpts, shouldInclude } from "./normalizeOpts";
 
-export interface TransformStylesOpts {
-  include?: Array<string | RegExp>;
-  identityObjectProxy: boolean;
-}
-
-export default function transformStyles({
-  types: t,
-}: typeof Babel): Babel.PluginObj {
+export function plugin({ types: t }: typeof Babel): Babel.PluginObj {
   const fileMap = new Map<string, File>();
   const compile = compileFactory();
 
   return {
-    name: "odyssey-transform-styles",
+    name: "odyssey",
 
     visitor: {
       ImportDeclaration(path, state) {

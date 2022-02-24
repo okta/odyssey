@@ -34,7 +34,7 @@ module.exports = {
     return Object.assign(config, {
       plugins: [
         [
-          require.resolve("@okta/odyssey-transform-styles-babel-plugin"),
+          require.resolve("@okta/odyssey-babel-plugin"),
           {
             identityObjectProxy: true,
           },

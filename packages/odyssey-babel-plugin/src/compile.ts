@@ -50,8 +50,10 @@ parentPort.addListener("message", async (message: MessageArgs) => {
 
     let tokens: Tokens | undefined;
 
+    const CONTEXT_KEY = "odyssey";
+
     const context = {
-      transformStyles: {
+      [CONTEXT_KEY]: {
         modules: {
           getJSON(_: string, _tokens: Tokens) {
             tokens = _tokens;
