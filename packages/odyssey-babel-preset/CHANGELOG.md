@@ -8,7 +8,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 - **odyssey-babel-preset:** make package public ([082b214](https://github.com/okta/odyssey/commit/082b2147205718abd9d585bd4840af2ccd96c360))
-- **odyssey-lifecycle:** add new package to reduce duplication for lifecycle scripts ([aff7760](https://github.com/okta/odyssey/commit/aff776066345b8942a7f94c2b1c47ccd8f6357b0))
 
 ### [0.9.2](https://github.com/okta/odyssey/compare/v0.9.1...v0.9.2) (2022-02-17)
 
