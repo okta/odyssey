@@ -43,7 +43,6 @@ export const theme: ThemeReducer = (theme) => ({
   BoxInvalidHoverBorderColor: theme.ColorDangerDark,
   BoxSize: theme.FontScale2,
 
-
   IndicatorColor: theme.ColorTextBodyInverse,
   IndicatorSize: theme.FontScale0,
 
