@@ -36,7 +36,7 @@ export const theme: ThemeReducer = (theme) => ({
   MarginBlock: 0,
   MarginInline: 0,
   MaxWidth: theme.FontLineLengthMax,
-  PaddingBlock: theme.SpaceScale1,
+  PaddingBlock: theme.SpaceScale2,
   PaddingInline: theme.SpaceScale2,
   PlaceholderTextColor: theme.ColorTextSub,
   SearchPaddingInlineStart: theme.SpaceScale1,
