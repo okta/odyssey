@@ -75,11 +75,22 @@ const Template: Story<ModalProps> = () => {
   );
 };
 
+// Default state (modal is initially open)
 export const Default = Template.bind({});
 Default.args = {
   open: true,
 };
 Default.argTypes = {
+  onOpen: { action: "modal/onOpen" },
+  onClose: { action: "modal/onClose" },
+};
+
+// Unopened state (modal is initially closed)
+export const Unopened = Template.bind({});
+Unopened.args = {
+  open: false,
+};
+Unopened.argTypes = {
   onOpen: { action: "modal/onOpen" },
   onClose: { action: "modal/onClose" },
 };
