@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@okta/odyssey-react-theme": "^0.9.3",
-    "choices.js": "^9.0.1"
+    "choices.js": "^9.0.1",
+    "react-aria": "^3.13.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
