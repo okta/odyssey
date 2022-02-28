@@ -6,3 +6,4 @@ package-lock.json
 storybook-static
 yarn-error.log
 **/coverage
+.yarnrc
