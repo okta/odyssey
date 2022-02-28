@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-/* stylelint-disable */
 *,
 *::before,
 *::after {
@@ -18,7 +17,8 @@
 }
 
 body {
-  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
   background-color: #f5f5f5;
 }
 
@@ -27,9 +27,11 @@ main {
 }
 
 .app {
-  margin: 0 auto;
-  padding: 64px 32px;
-  background-color: #ffffff;
+  margin-block: 0;
+  margin-inline: auto;
+  padding-block: 64px;
+  padding-inline: 32px;
   max-width: 1024px;
   min-height: 100vh;
+  background-color: #ffffff;
 }

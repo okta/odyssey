@@ -10,17 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-/* stylelint-disable */
 .error-message {
-  padding: 8px 16px;
+  padding-block: 8px;
+  padding-inline: 16px;
   background-color: #da372c;
-  color: white;
+  color: #ffffff;
   font-family: monospace;
 }
 
 .error-heading {
   font-size: 18px;
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
 .error-text {
@@ -28,7 +28,8 @@
 }
 
 .boundary {
-  border: 1px solid gainsboro;
-  margin-bottom: 24px;
-  padding: 16px;
+  padding-block: 16px;
+  padding-inline: 16px;
+  border: 1px solid #dcdcdc;
+  margin-block-end: 24px;
 }
