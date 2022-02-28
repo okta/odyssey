@@ -1,7 +1,3 @@
 {
-  "presets": [
-    "@babel/preset-react",
-    "@babel/preset-typescript",
-    "@babel/preset-env"
-  ]
+  "presets": ["@okta/odyssey-babel-preset"]
 }
