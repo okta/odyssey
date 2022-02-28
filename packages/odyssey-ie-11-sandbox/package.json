@@ -1,6 +1,7 @@
 {
   "name": "@okta/odyssey-ie-11-sandbox",
   "version": "0.9.1",
+  "private": true,
   "description": "Testing for IE11",
   "author": "Okta, Inc.",
   "homepage": "https://github.com/okta/odyssey#readme",
@@ -27,6 +28,8 @@
     "@babel/preset-env": "7.15.0",
     "@babel/preset-react": "7.14.5",
     "@babel/preset-typescript": "7.15.0",
+    "@okta/odyssey-babel-preset": "^0.9.1",
+    "@okta/browserslist-config-odyssey": "^0.9.1",
     "babel-loader": "8.2.2",
     "css-loader": "3.6.0",
     "html-webpack-plugin": "4.5.2",
@@ -35,8 +38,5 @@
     "webpack": "4.46.0",
     "webpack-cli": "4.9.1",
     "webpack-dev-server": "4.7.3"
-  },
-  "browserslist": [
-    "ie 11"
-  ]
+  }
 }
