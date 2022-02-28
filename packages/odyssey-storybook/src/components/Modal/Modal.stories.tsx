@@ -77,7 +77,7 @@ const Template: Story<ModalProps> = () => {
 
 export const Default = Template.bind({});
 Default.args = {
-  open: true,
+  open: false,
 };
 Default.argTypes = {
   onOpen: { action: "modal/onOpen" },

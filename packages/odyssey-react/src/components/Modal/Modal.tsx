@@ -18,7 +18,9 @@ import type {
   ReactText,
 } from "react";
 import { createPortal } from "react-dom";
+import { FocusScope } from "@react-aria/focus";
 import { withTheme } from "@okta/odyssey-react-theme";
+
 import { Box } from "../Box";
 import { Button as CoreButton } from "../Button";
 import type { ButtonProps as CoreButtonProps } from "../Button";
@@ -81,6 +83,7 @@ interface ModalContext {
   modalHeadingId: string;
   closeMessage: string;
 }
+
 const ModalContext = createContext({} as ModalContext);
 
 /**
@@ -126,15 +129,17 @@ export const Modal = withTheme(
           hidden={!open}
         >
           <div className={styles.overlay} tabIndex={-1}>
-            <div
-              className={styles.dialog}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby={modalHeadingId}
-              ref={modalDialog}
-            >
-              {children}
-            </div>
+            <FocusScope contain>
+              <div
+                className={styles.dialog}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={modalHeadingId}
+                ref={modalDialog}
+              >
+                {children}
+              </div>
+            </FocusScope>
           </div>
         </Box>
       </ModalContext.Provider>,
