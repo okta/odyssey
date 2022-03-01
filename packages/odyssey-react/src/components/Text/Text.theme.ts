@@ -135,6 +135,10 @@ export const theme: ThemeReducer = (theme) => ({
 
   // summary
   SummaryBorderRadius: theme.BorderRadiusBase,
+  SummaryFocusOutlineColor: theme.FocusOutlineColorPrimary,
+  SummaryFocusOutlineOffset: theme.FocusOutlineOffsetBase,
+  SummaryFocusOutlineStyle: theme.FocusOutlineStyle,
+  SummaryFocusOutlineWidth: theme.FocusOutlineWidthBase,
   SummaryFontSize: theme.FontSizeHeading5,
   SummaryFontWeight: theme.FontWeightBold,
 
