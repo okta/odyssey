@@ -26,6 +26,7 @@ import { Button as CoreButton } from "../Button";
 import type { ButtonProps as CoreButtonProps } from "../Button";
 import { Heading } from "../Heading";
 import { forwardRefWithStatics, useOid, useCx, useOmit } from "../../utils";
+import { useFocus } from "../../utils/focusHandling";
 import { CloseIcon } from "../Icon";
 import { theme } from "./Modal.theme";
 import styles from "./Modal.module.scss";
@@ -114,9 +115,13 @@ export const Modal = withTheme(
     const oid = useOid(id);
     const modalDialog = useRef<HTMLDivElement>(null);
     const componentClass = useCx(styles.root, { [styles.openState]: open });
+    const { setFocus } = useFocus();
 
-    if (open && onOpen) {
-      onOpen();
+    if (open) {
+      setFocus(modalDialog.current);
+      if (onOpen) {
+        onOpen();
+      }
     }
 
     return createPortal(
