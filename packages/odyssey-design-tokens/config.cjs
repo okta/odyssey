@@ -15,25 +15,25 @@ module.exports = {
   platforms: {
     js: {
       transformGroup: "js",
-      buildPath: "dist/js/",
+      buildPath: "dist/",
       files: [
         {
           format: "javascript/es6",
-          destination: "tokens.js",
+          destination: "index.js",
         },
         {
           format: "typescript/es6-declarations",
-          destination: "tokens.d.ts",
+          destination: "index.d.ts",
         },
       ],
     },
     scss: {
       transformGroup: "scss",
-      buildPath: "dist/scss/",
+      buildPath: "dist/",
       files: [
         {
           format: "scss/map-deep",
-          destination: "tokens.scss",
+          destination: "index.scss",
           mapName: "ods-tokens",
         },
       ],

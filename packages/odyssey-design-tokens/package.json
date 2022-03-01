@@ -4,8 +4,15 @@
   "description": "Design tokens for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
-  "main": "dist/js/tokens.js",
-  "types": "dist/js/tokens.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./dist/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/okta/odyssey",
@@ -15,7 +22,8 @@
     "style-dictionary": "^3.0.1"
   },
   "scripts": {
-    "build": "style-dictionary clean && style-dictionary build",
+    "prebuild": "style-dictionary clean --config ./config.cjs",
+    "build": "style-dictionary build --config ./config.cjs",
     "prepare": "yarn build",
     "prepack": "prepack"
   }
