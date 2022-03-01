@@ -1,9 +1,18 @@
 {
   "focus": {
     "outline": {
+      "color": {
+        "primary": { "value": "{color.primary.base.value}" },
+        "danger": { "value": "{color.danger.base.value}" }
+      },
+      "offset": {
+        "base": { "value": "2px" },
+        "tight": { "value": "0" }
+      },
+      "style": { "value": "solid" },
       "width": {
-        "base": { "value": "4px" },
-        "small": { "value": "2px" }
+        "base": { "value": "2px" },
+        "tight": { "value": "1px" }
       }
     }
   }
