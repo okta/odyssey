@@ -28,9 +28,11 @@ export const theme: ThemeReducer = (theme) => ({
   FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightBold,
   LineHeight: theme.FontLineHeightBase,
-  FocusBoxShadowColor: theme.ColorFocusPrimary,
-  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
-  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
+
+  FocusOutlineColor: theme.FocusOutlineColorPrimary,
+  FocusOutlineOffset: theme.FocusOutlineOffsetBase,
+  FocusOutlineStyle: theme.FocusOutlineStyle,
+  FocusOutlineWidth: theme.FocusOutlineWidthBase,
 
   // Label
   LabelMinWidth: theme.SpaceEmL,
@@ -64,7 +66,7 @@ export const theme: ThemeReducer = (theme) => ({
   DangerDisabledBackgroundColor: theme.ColorDangerLight,
   DangerDisabledBorderColor: theme.ColorBorderDangerLight,
   DangerFocusBackgroundColor: theme.ColorPaletteRed900,
-  DangerFocusBoxShadowColor: theme.ColorFocusDanger,
+  DangerFocusOutlineColor: theme.FocusOutlineColorDanger,
   DangerHoverBackgroundColor: theme.ColorPaletteRed900,
   DangerHoverBorderColor: theme.ColorBorderDangerDark,
 

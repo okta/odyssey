@@ -54,12 +54,10 @@
   &:focus {
     + .label {
       .box {
-        @include outline(
-          var(--BoxFocusBoxShadowColor),
-          var(--BoxFocusBoxShadowSpread)
-        );
-
-        border-color: var(--BoxFocusBorderColor);
+        outline-color: var(--BoxFocusOutlineColor);
+        outline-offset: var(--BoxFocusOutlineOffset);
+        outline-style: var(--BoxFocusOutlineStyle);
+        outline-width: var(--BoxFocusOutlineWidth);
       }
     }
   }
@@ -118,12 +116,7 @@
     &:focus {
       + .label {
         .box {
-          @include outline(
-            var(--BoxInvalidFocusBoxShadowColor),
-            var(--BoxFocusBoxShadowSpread)
-          );
-
-          border-color: var(--BoxInvalidBorderColor);
+          outline-color: var(--BoxInvalidFocusOutlineColor);
         }
       }
     }
@@ -148,9 +141,12 @@
     inset-block-start: 50%;
     inset-inline-start: 0;
     transform: translateY(-50%);
-    transition-property: border-color, color, opacity, box-shadow;
+    transition-property: border-color, color, opacity, outline-offset,
+      outline-color;
     transition-duration: var(--TransitionDuration);
     transition-timing-function: var(--TransitionTimingFunction);
+    outline-color: transparent;
+    outline-offset: 0;
   }
 
   /* Box */

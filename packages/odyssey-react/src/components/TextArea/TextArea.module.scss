@@ -25,7 +25,7 @@
   margin-block-start: var(--MarginBlockStart);
   margin-block-end: var(--MarginBlockEnd);
   margin-inline: var(--MarginInline);
-  transition-property: border-color, background-color, box-shadow;
+  transition-property: border-color, background-color;
   transition-duration: var(--TransitionDuration);
   transition-timing-function: var(--TransitionTimingFunction);
   border-width: var(--BorderWidth);
@@ -44,7 +44,10 @@
   }
 
   &:focus {
-    @include outline(var(--FocusBoxShadowColor), var(--FocusBoxShadowSpread));
+    outline-color: var(--FocusOutlineColor);
+    outline-offset: var(--FocusOutlineOffset);
+    outline-style: var(--FocusOutlineStyle);
+    outline-width: var(--FocusOutlineWidth);
   }
 
   &:invalid {
@@ -68,10 +71,7 @@
   }
 
   &:invalid:focus {
-    @include outline(
-      var(--InvalidFocusBoxShadowColor),
-      var(--FocusBoxShadowSpread)
-    );
+    outline-color: var(--InvalidFocusOutlineColor);
   }
 
   &::placeholder {

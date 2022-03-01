@@ -29,9 +29,11 @@ export const theme: ThemeReducer = (theme) => ({
   HoverBoxShadow: theme.ShadowHover,
 
   // Focus Outline
-  PrimaryFocusBoxShadowColor: theme.ColorFocusPrimary,
-  DangerFocusBoxShadowColor: theme.ColorFocusDanger,
-  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
+  PrimaryFocusOutlineColor: theme.FocusOutlineColorPrimary,
+  DangerFocusOutlineColor: theme.FocusOutlineColorDanger,
+  FocusOutlineOffset: theme.FocusOutlineOffsetBase,
+  FocusOutlineStyle: theme.FocusOutlineStyle,
+  FocusOutlineWidth: theme.FocusOutlineWidthBase,
   /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
 
   // Root
