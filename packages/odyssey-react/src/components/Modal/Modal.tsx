@@ -115,13 +115,15 @@ export const Modal = withTheme(
     const oid = useOid(id);
     const modalDialog = useRef<HTMLDivElement>(null);
     const componentClass = useCx(styles.root, { [styles.openState]: open });
-    const { setFocus } = useFocus();
+    const { restoreFocus, setFocus } = useFocus();
 
     if (open) {
       setFocus(modalDialog.current);
       if (onOpen) {
         onOpen();
       }
+    } else {
+      restoreFocus();
     }
 
     return createPortal(
