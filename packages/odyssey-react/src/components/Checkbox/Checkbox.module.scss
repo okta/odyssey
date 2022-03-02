@@ -136,8 +136,8 @@
     inset-block-start: 50%;
     inset-inline-start: 0;
     transform: translateY(-50%);
-    transition-property: background-color, border-color, color, opacity, outline-offset,
-      outline-color;
+    transition-property: background-color, border-color, color, opacity,
+      outline-offset, outline-color;
     transition-duration: var(--TransitionDuration);
     transition-timing-function: var(--TransitionTimingFunction);
     outline-color: transparent;

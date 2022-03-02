@@ -49,5 +49,4 @@ export const theme: ThemeReducer = (theme) => ({
   LabelDisabledTextColor: theme.ColorTextBody,
   LabelInvalidTextColor: theme.ColorTextDanger,
   LabelPaddingInlineStart: theme.SpaceEmS,
-
 });
