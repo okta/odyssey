@@ -30,7 +30,7 @@ export const Default = Template.bind({});
 
 Default.argTypes = {
   name: {
-    defaultValue: "caution",
+    defaultValue: "alert-triangle-filled",
     control: { type: "select" },
   },
   title: {
@@ -40,6 +40,27 @@ Default.argTypes = {
 };
 
 const meta = [
+  { name: "add", classname: "AddIcon", use: "To add" },
+  {
+    name: "add-circle",
+    classname: "AddCircleIcon",
+    use: "To add",
+  },
+  {
+    name: "alert-circle",
+    classname: "AlertCircleIcon",
+    use: "To indicate an error",
+  },
+  {
+    name: "alert-circle-filled",
+    classname: "AlertCircleFilledIcon",
+    use: "To indicate an error",
+  },
+  {
+    name: "alert-triangle-filled",
+    classname: "AlertTriangleFilledIcon",
+    use: "To indicate a crucial decision",
+  },
   {
     name: "anchor",
     classname: "AnchorIcon",
@@ -48,27 +69,27 @@ const meta = [
   {
     name: "arrow-down",
     classname: "ArrowDownIcon",
-    use: "UI indicator - element triggers collapse",
+    use: "",
+  },
+  {
+    name: "arrow-left",
+    classname: "ArrowLeftIcon",
+    use: "",
   },
   {
     name: "arrow-right",
     classname: "ArrowRightIcon",
-    use: "UI indicator - element triggers expand",
+    use: "",
   },
   {
-    name: "caret-down",
-    classname: "CaretDownIcon",
-    use: "UI indicator - element triggers open",
+    name: "arrow-up",
+    classname: "ArrowUpIcon",
+    use: "",
   },
   {
-    name: "caret-up",
-    classname: "CaretUpIcon",
-    use: "UI indicator - element triggers close",
-  },
-  {
-    name: "caution",
-    classname: "CautionIcon",
-    use: "To indicate a crucial decision",
+    name: "calendar",
+    classname: "CalendarIcon",
+    use: "",
   },
   {
     name: "check",
@@ -76,44 +97,73 @@ const meta = [
     use: "UI indicator - custom checkbox",
   },
   {
+    name: "check",
+    classname: "CheckCircleFilledIcon",
+    use: "To show a completed process",
+  },
+  {
+    name: "chevron-down",
+    classname: "ChevronDownIcon",
+    use: "UI indicator - element triggers open",
+  },
+  {
+    name: "chevron-up",
+    classname: "ChevronUpIcon",
+    use: "UI indicator - element triggers close",
+  },
+  {
     name: "close",
     classname: "CloseIcon",
     use: "To close a modal or other UI",
   },
   {
-    name: "complete",
-    classname: "CompleteIcon",
-    use: "To show a completed process",
+    name: "close-circle-filled",
+    classname: "CloseCircleFilledIcon",
+    use: "",
   },
   { name: "copy", classname: "CopyIcon", use: "To copy text" },
   { name: "delete", classname: "DeleteIcon", use: "To delete something" },
   { name: "download", classname: "DownloadIcon", use: "To download" },
-  { name: "edit", classname: "EditIcon", use: "To edit something" },
-  { name: "error", classname: "ErrorIcon", use: "To indicate an error" },
   {
-    name: "external",
-    classname: "ExternalIcon",
+    name: "drag-handle",
+    classname: "DragHandleIcon",
+    use: "Element is draggable",
+  },
+  { name: "edit", classname: "EditIcon", use: "To edit something" },
+  {
+    name: "external-link",
+    classname: "ExternalLinkIcon",
     use: "UI indicator - external link",
   },
   { name: "filter", classname: "FilterIcon", use: "To filter results" },
-  { name: "get-info", classname: "GetInfoIcon", use: "To get information" },
+  { name: "globe", classname: "GlobeIcon", use: "" },
+  { name: "home", classname: "HomeIcon", use: "" },
   {
-    name: "go-backward",
-    classname: "GoBackwardIcon",
-    use: "To navigate backward",
+    name: "information-circle",
+    classname: "InformationCircleIcon",
+    use: "To get information",
   },
   {
-    name: "go-forward",
-    classname: "GoForwardIcon",
-    use: "To navigate forward",
+    name: "information-circle-filled",
+    classname: "InformationCircleFilledIcon",
+    use: "To get information",
   },
-  { name: "minus", classname: "MinusIcon", use: "To subtract or remove" },
   {
     name: "notification",
     classname: "NotificationIcon",
     use: "To notify the user of something",
   },
-  { name: "plus", classname: "PlusIcon", use: "To add" },
+  { name: "overflow-vertical", classname: "OverflowVerticalIcon", use: "" },
+  {
+    name: "question-circle",
+    classname: "QuestionCircleIcon",
+    use: "To provide clarification",
+  },
+  {
+    name: "question-circle-filled",
+    classname: "QuestionCircleFilledIcon",
+    use: "To provide clarification",
+  },
   { name: "search", classname: "SearchIcon", use: "To search for something" },
   {
     name: "settings",
@@ -121,19 +171,9 @@ const meta = [
     use: "To edit user or app settings",
   },
   {
-    name: "sort",
-    classname: "SortIcon",
-    use: "UI indicator - Data is sortable",
-  },
-  {
-    name: "sort-asc",
-    classname: "SortAscIcon",
-    use: "UI indicator - Data is sorted ascending",
-  },
-  {
-    name: "sort-desc",
-    classname: "SortDescIcon",
-    use: "UI indicator - Data is sorted descending",
+    name: "subtract",
+    classname: "SubtractIcon",
+    use: "To subtract or remove",
   },
   { name: "user", classname: "UserIcon", use: "To support a user name" },
 ];
