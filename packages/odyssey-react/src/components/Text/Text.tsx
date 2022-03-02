@@ -102,7 +102,14 @@ export interface TextProps
    * The line-height for the text content.
    * @default normal
    */
-  lineHeight?: "normal" | "heading";
+  lineHeight?:
+    | "body"
+    | "heading1"
+    | "heading2"
+    | "heading3"
+    | "heading4"
+    | "heading5"
+    | "heading6";
 
   /**
    * The overflow wrapping behavior for the text content.
@@ -128,7 +135,7 @@ export const Text = withTheme(
       textTransform = "none",
       fontSize = "base",
       overflowWrap = "normal",
-      lineHeight = "normal",
+      lineHeight = "body",
       ...rest
     } = props;
 
