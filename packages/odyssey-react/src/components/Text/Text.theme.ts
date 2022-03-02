@@ -26,14 +26,12 @@ export const theme: ThemeReducer = (theme) => ({
 
   LineHeight: theme.FontLineHeightBody,
   BodyLineHeight: theme.FontLineHeightBody,
-  /* eslint-disable  @okta/odyssey/no-invalid-theme-properties */
   Heading1LineHeight: theme.FontLineHeightHeading1,
   Heading2LineHeight: theme.FontLineHeightHeading2,
   Heading3LineHeight: theme.FontLineHeightHeading3,
   Heading4LineHeight: theme.FontLineHeightHeading4,
   Heading5LineHeight: theme.FontLineHeightHeading5,
   Heading6LineHeight: theme.FontLineHeightHeading6,
-  /* eslint-enable  @okta/odyssey/no-invalid-theme-properties */
 
   FontSize: theme.FontSizeBody,
   BaseFontSize: theme.FontSizeBody,
