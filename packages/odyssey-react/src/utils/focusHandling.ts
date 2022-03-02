@@ -17,12 +17,12 @@ interface UseFocusHook {
   setFocus: (elem: OptionalHTMLElement) => void;
 }
 
+const LAST_FOCUSED_ELEMENT_KEY = "LAST_FOCUSED_ELEMENT";
 const FOCUSABLE_ITEMS_SELECTOR =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-// Store original focused element to restore original focus after modal is closed
-const focusedElementMap = new Map();
-const originalFocusedElemKey = "originalFocusedElement";
+// Store last focused element to restore original focus after modal is closed
+const lastFocusedElementMap = new Map<string, HTMLElement>();
 
 /**
  * Set focus on first focusable element inside node tree
@@ -39,7 +39,12 @@ function setFocus(elem: OptionalHTMLElement): void {
   if (focusableItems.length > 0) {
     setTimeout(() => {
       // Capture original focused element before setting focus inside modal dialog
-      focusedElementMap.set(originalFocusedElemKey, document.activeElement);
+      if (document.activeElement) {
+        lastFocusedElementMap.set(
+          LAST_FOCUSED_ELEMENT_KEY,
+          document.activeElement as HTMLElement
+        );
+      }
       // Focus on first focusable element inside dialog
       focusableItems[0].focus();
     });
@@ -50,10 +55,12 @@ function setFocus(elem: OptionalHTMLElement): void {
  * Restore focus to element with original focus prior to opening modal dialog
  */
 function restoreFocus(): void {
-  const originalFocusedElem = focusedElementMap.get(originalFocusedElemKey);
-  if (originalFocusedElem) {
+  const lastFocusedElement = lastFocusedElementMap.get(
+    LAST_FOCUSED_ELEMENT_KEY
+  );
+  if (lastFocusedElement && document.contains(lastFocusedElement)) {
     setTimeout(() => {
-      originalFocusedElem.focus();
+      lastFocusedElement.focus();
     });
   }
 }
