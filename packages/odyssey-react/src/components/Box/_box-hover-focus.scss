@@ -31,12 +31,15 @@
 }
 
 .focusRingPrimary:focus {
-  outline: 0;
-  box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
-    var(--PrimaryFocusBoxShadowColor);
+  outline-color: var(--PrimaryFocusOutlineColor);
+  outline-offset: var(--FocusOutlineOffset);
+  outline-style: var(--FocusOutlineStyle);
+  outline-width: var(--FocusOutlineWidth);
 }
 
 .focusRingDanger:focus {
-  outline: 0;
-  box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--DangerFocusBoxShadowColor);
+  outline-color: var(--DangerFocusOutlineColor);
+  outline-offset: var(--FocusOutlineOffset);
+  outline-style: var(--FocusOutlineStyle);
+  outline-width: var(--FocusOutlineWidth);
 }

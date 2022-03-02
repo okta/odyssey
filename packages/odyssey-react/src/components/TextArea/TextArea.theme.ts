@@ -47,9 +47,10 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Focus
   HoverFocusBorderColor: theme.ColorPrimaryBase,
-  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
-  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
-  FocusBoxShadowColor: theme.ColorFocusPrimary,
+  FocusOutlineColor: theme.FocusOutlineColorPrimary,
+  FocusOutlineOffset: theme.FocusOutlineOffsetTight,
+  FocusOutlineStyle: theme.FocusOutlineStyle,
+  FocusOutlineWidth: theme.FocusOutlineWidthTight,
 
   // Disabled
   DisabledBackgroundColor: theme.ColorBackgroundDisabled,
@@ -58,7 +59,7 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Invalid
   InvalidBorderColor: theme.ColorBorderDangerBase,
-  InvalidFocusBoxShadowColor: theme.ColorFocusDanger,
+  InvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
 
   // Transition
   TransitionDuration: theme.TransitionDurationBase,
