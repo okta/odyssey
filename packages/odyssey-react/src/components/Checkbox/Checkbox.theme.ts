@@ -14,12 +14,20 @@ import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
   BorderRadius: theme.BorderRadiusBase,
+  FontSize: theme.FontSizeBody,
+  FontWeight: theme.FontWeightNormal,
+  MarginBlockEnd: theme.SpaceRemXs,
+  TransitionDuration: theme.TransitionDurationBase,
+  TransitionTimingFunction: theme.TransitionTimingBase,
+
   BoxBackgroundColor: "transparent",
   BoxBorderColor: theme.ColorBorderUi,
   BoxBorderStyle: theme.BorderStyleBase,
   BoxBorderWidth: "2px",
   BoxCheckedBackgroundColor: theme.ColorPrimaryBase,
   BoxCheckedBorderColor: theme.ColorPrimaryBase,
+  BoxCheckedHoverBackgroundColor: theme.ColorPrimaryDark,
+  BoxCheckedHoverBorderColor: theme.ColorPrimaryDark,
   BoxDisabledBackgroundColor: theme.ColorBackgroundDisabled,
   BoxDisabledBorderColor: theme.ColorBorderDisabled,
   BoxDisabledCheckedBackgroundColor: theme.ColorPrimaryLight,
@@ -34,14 +42,12 @@ export const theme: ThemeReducer = (theme) => ({
   BoxInvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
   BoxInvalidHoverBorderColor: theme.ColorDangerDark,
   BoxSize: "1em",
-  FontSize: theme.FontSizeBody,
-  FontWeight: theme.FontWeightNormal,
+
   IndicatorColor: theme.ColorTextBodyInverse,
   IndicatorSize: "0.75em",
+
   LabelDisabledTextColor: theme.ColorTextBody,
   LabelInvalidTextColor: theme.ColorTextDanger,
   LabelPaddingInlineStart: theme.SpaceEmS,
-  MarginBlockEnd: theme.SpaceRemXs,
-  TransitionDuration: theme.TransitionDurationBase,
-  TransitionTimingFunction: theme.TransitionTimingBase,
+
 });
