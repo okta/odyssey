@@ -5,7 +5,14 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./dist/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/okta/odyssey",
@@ -45,7 +52,7 @@
     "react-dom": ">=16 <18"
   },
   "scripts": {
-    "start": "node ./scripts/start.js",
+    "start": "node ./scripts/start.cjs",
     "lint": "eslint .",
     "test": "jest",
     "typecheck": "tsc",
@@ -54,7 +61,7 @@
     "build:clean": "rm -rf dist",
     "build:types": "tsc --project tsconfig.production.json",
     "build:source": "./scripts/buildSource",
-    "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.js) --out-dir ./src/components/Icon/",
+    "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.cjs) --out-dir ./src/components/Icon/",
     "prepack": "prepack"
   }
 }
