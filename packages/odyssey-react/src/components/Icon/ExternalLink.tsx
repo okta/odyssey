@@ -17,24 +17,25 @@ import { useOmit } from "../../utils";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type CheckIconProps = SvgIconNoChildrenProps;
+export type ExternalLinkIconProps = SvgIconNoChildrenProps;
 
-export const CheckIcon = forwardRef<SVGSVGElement, CheckIconProps>(
-  (props, ref) => {
-    const omitProps = useOmit(props);
-    return (
-      <SvgIcon ref={ref} {...omitProps}>
-        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M14.3536 4.35355L6.35355 12.3536C6.15829 12.5488 5.84171 12.5488 5.64645 12.3536L1.64645 8.35355L2.35355 7.64645L6 11.2929L13.6464 3.64645L14.3536 4.35355Z"
-            fill="currentColor"
-          />
-        </svg>
-      </SvgIcon>
-    );
-  }
-);
+export const ExternalLinkIcon = forwardRef<
+  SVGSVGElement,
+  ExternalLinkIconProps
+>((props, ref) => {
+  const omitProps = useOmit(props);
+  return (
+    <SvgIcon ref={ref} {...omitProps}>
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M13.2929 2H7.99998V1H14.5C14.7761 1 15 1.22386 15 1.5V8H14V2.70711L6.35353 10.3536L5.64642 9.64645L13.2929 2ZM1.5 4H1V4.5V14.5V15H1.5H11.5H12V14.5V8H11V14H2V5H8V4H1.5Z"
+          fill="currentColor"
+        />
+      </svg>
+    </SvgIcon>
+  );
+});
 
-CheckIcon.displayName = "CheckIcon";
+ExternalLinkIcon.displayName = "ExternalLinkIcon";

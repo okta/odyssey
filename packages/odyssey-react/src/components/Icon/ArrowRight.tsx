@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,9 +24,11 @@ export const ArrowRightIcon = forwardRef<SVGSVGElement, ArrowRightIconProps>(
     const omitProps = useOmit(props);
     return (
       <SvgIcon ref={ref} {...omitProps}>
-        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
-            d="M4.91005 3.40923L8.98851 6.80794C9.10845 6.90789 9.10845 7.09211 8.98851 7.19206L4.91004 10.5908C4.74721 10.7265 4.5 10.6107 4.5 10.3987L4.5 3.60128C4.5 3.38932 4.74721 3.27353 4.91005 3.40923Z"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M13.2929 7.5L9.14645 3.35355L9.85355 2.64645L14.8536 7.64645C15.0488 7.84171 15.0488 8.15829 14.8536 8.35355L9.85355 13.3536L9.14645 12.6464L13.2929 8.5H1V7.5H13.2929Z"
             fill="currentColor"
           />
         </svg>

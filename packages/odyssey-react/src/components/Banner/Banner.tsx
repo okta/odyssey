@@ -19,7 +19,12 @@ import { Heading } from "../Heading";
 import { Button } from "../Button";
 import { Text } from "../Text";
 import type { ButtonProps } from "../Button";
-import { CautionIcon, CloseIcon, ErrorIcon, GetInfoIcon } from "../Icon";
+import {
+  AlertTriangleFilledIcon,
+  CloseIcon,
+  AlertCircleFilledIcon,
+  InformationCircleFilledIcon,
+} from "../Icon";
 import styles from "./Banner.module.scss";
 import { theme } from "./Banner.theme";
 
@@ -60,9 +65,9 @@ type DismissProps =
 export type BannerProps = CommonProps & DismissProps;
 
 const icon = {
-  caution: <CautionIcon />,
-  danger: <ErrorIcon />,
-  info: <GetInfoIcon />,
+  caution: <AlertTriangleFilledIcon />,
+  danger: <AlertCircleFilledIcon />,
+  info: <InformationCircleFilledIcon />,
 };
 
 /**

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -17,16 +17,18 @@ import { useOmit } from "../../utils";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type GoBackwardIconProps = SvgIconNoChildrenProps;
+export type ChevronDownIconProps = SvgIconNoChildrenProps;
 
-export const GoBackwardIcon = forwardRef<SVGSVGElement, GoBackwardIconProps>(
+export const ChevronDownIcon = forwardRef<SVGSVGElement, ChevronDownIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
       <SvgIcon ref={ref} {...omitProps}>
-        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
-            d="M4.51059 6.00121L6.92796 3.72595C7.34572 3.33275 7.34132 2.67278 6.92356 2.27958C6.52128 1.90095 5.87952 1.90683 5.4895 2.29763L1.14535 6.65043C0.95155 6.84461 0.95155 7.15539 1.14535 7.34957L5.4895 11.7024C5.87952 12.0932 6.52128 12.099 6.92356 11.7204C7.34132 11.3272 7.34572 10.6672 6.92796 10.274L4.51059 7.99879H12.4915C12.7723 7.99879 13 7.7752 13 7.49939V6.50061C13 6.2248 12.7723 6.00121 12.4915 6.00121H4.51059Z"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M8 10.2929L12.6464 5.64645L13.3536 6.35355L8.35355 11.3536C8.15829 11.5488 7.84171 11.5488 7.64645 11.3536L2.64645 6.35355L3.35355 5.64645L8 10.2929Z"
             fill="currentColor"
           />
         </svg>
@@ -35,4 +37,4 @@ export const GoBackwardIcon = forwardRef<SVGSVGElement, GoBackwardIconProps>(
   }
 );
 
-GoBackwardIcon.displayName = "GoBackwardIcon";
+ChevronDownIcon.displayName = "ChevronDownIcon";

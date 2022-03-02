@@ -17,11 +17,11 @@ import { useOmit } from "../../utils";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type NotificationIconProps = SvgIconNoChildrenProps;
+export type CloseCircleFilledIconProps = SvgIconNoChildrenProps;
 
-export const NotificationIcon = forwardRef<
+export const CloseCircleFilledIcon = forwardRef<
   SVGSVGElement,
-  NotificationIconProps
+  CloseCircleFilledIconProps
 >((props, ref) => {
   const omitProps = useOmit(props);
   return (
@@ -30,7 +30,7 @@ export const NotificationIcon = forwardRef<
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M15.125 12L15.5 13H14.432H11C11 14.6569 9.65685 16 8 16C6.34315 16 5 14.6569 5 13H1.568H0.5L0.875 12L1.61119 10.0368C1.8694 9.34827 2.04108 8.63032 2.12228 7.89945L2.44784 4.96942C2.76219 2.14032 5.15349 0 8 0C10.8465 0 13.2378 2.14032 13.5522 4.96942L13.8777 7.89945C13.9589 8.63032 14.1306 9.34827 14.3888 10.0368L15.125 12ZM6 13C6 14.1046 6.89543 15 8 15C9.10457 15 10 14.1046 10 13H6ZM5 12H1.943L2.54752 10.3879C2.8348 9.62186 3.02581 8.82306 3.11617 8.00988L3.44173 5.07985C3.6998 2.75719 5.66304 1 8 1C10.337 1 12.3002 2.75718 12.5583 5.07985L12.8838 8.00988C12.9742 8.82306 13.1652 9.62186 13.4525 10.3879L14.057 12H11H10H6H5Z"
+          d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM11.3536 5.35355L8.70711 8L11.3536 10.6464L10.6464 11.3536L8 8.70711L5.35355 11.3536L4.64645 10.6464L7.29289 8L4.64645 5.35355L5.35355 4.64645L8 7.29289L10.6464 4.64645L11.3536 5.35355Z"
           fill="currentColor"
         />
       </svg>
@@ -38,4 +38,4 @@ export const NotificationIcon = forwardRef<
   );
 });
 
-NotificationIcon.displayName = "NotificationIcon";
+CloseCircleFilledIcon.displayName = "CloseCircleFilledIcon";

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -17,18 +17,18 @@ import { useOmit } from "../../utils";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type SortAscIconProps = SvgIconNoChildrenProps;
+export type AddCircleIconProps = SvgIconNoChildrenProps;
 
-export const SortAscIcon = forwardRef<SVGSVGElement, SortAscIconProps>(
+export const AddCircleIcon = forwardRef<SVGSVGElement, AddCircleIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
       <SvgIcon ref={ref} {...omitProps}>
-        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M6.2929 1.29289C6.68343 0.902369 7.31659 0.902369 7.70712 1.29289L11.7071 5.29289C12.0976 5.68342 12.0976 6.31658 11.7071 6.70711C11.3166 7.09763 10.6834 7.09763 10.2929 6.70711L8.00001 4.41421V12C8.00001 12.5523 7.55229 13 7.00001 13C6.44773 13 6.00001 12.5523 6.00001 12V4.41421L3.70711 6.70711C3.31658 7.09763 2.68342 7.09763 2.29289 6.70711C1.90237 6.31658 1.90237 5.68342 2.29289 5.29289L6.2929 1.29289Z"
+            d="M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM7.5 11V8.5H5V7.5H7.5V5H8.5V7.5H11V8.5H8.5V11H7.5Z"
             fill="currentColor"
           />
         </svg>
@@ -37,4 +37,4 @@ export const SortAscIcon = forwardRef<SVGSVGElement, SortAscIconProps>(
   }
 );
 
-SortAscIcon.displayName = "SortAscIcon";
+AddCircleIcon.displayName = "AddCircleIcon";
