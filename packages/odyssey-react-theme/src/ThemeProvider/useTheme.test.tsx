@@ -10,6 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./ThemeProvider";
-export type { Theme } from "./context";
-export { useTheme } from "./useTheme";
+import React from "react";
+import * as Tokens from "@okta/odyssey-design-tokens";
+import { render } from "@testing-library/react";
+import { useTheme } from ".";
+import type { Theme } from "./context";
+
+describe("useTheme", () => {
+  let theme: Theme | undefined;
+  const Capture = () => {
+    theme = useTheme();
+    return null;
+  };
+
+  afterEach(() => {
+    theme = undefined;
+  });
+
+  it("provides default theme via context", () => {
+    render(<Capture />);
+    expect(theme).toEqual(Tokens);
+  });
+});
