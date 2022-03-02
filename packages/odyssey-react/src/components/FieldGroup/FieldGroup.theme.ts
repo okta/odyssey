@@ -19,6 +19,6 @@ export const theme: ThemeReducer = (theme) => ({
   LegendTextColor: theme.ColorTextBody,
   LegendLineHeight: theme.FontLineHeightHeading4,
   LegendFontSize: theme.FontSizeHeading4,
-  MarginBlockEnd: theme.SpaceScale4,
-  PaddingBlockEnd: theme.SpaceScale4,
+  MarginBlockEnd: theme.SpaceScale3,
+  PaddingBlockEnd: theme.SpaceScale3,
 });

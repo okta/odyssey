@@ -20,12 +20,12 @@ export const theme: ThemeReducer = (theme) => ({
   FontSize: theme.FontSizeCaption,
   FontWeight: theme.FontWeightNormal,
   LineHeight: theme.FontLineHeightUi,
-  PaddingBlock: theme.SpaceScale2,
-  PaddingInline: theme.SpaceScale3,
+  PaddingBlock: theme.SpaceScale1,
+  PaddingInline: theme.SpaceScale2,
   TextColor: theme.ColorTextBodyInverse,
 
-  TailWidth: theme.SpaceScale1,
-  TailMargin: theme.SpaceScale2,
+  TailWidth: theme.SpaceScale0,
+  TailMargin: theme.SpaceScale1,
 
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,

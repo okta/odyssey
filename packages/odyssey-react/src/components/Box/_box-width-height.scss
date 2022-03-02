@@ -36,7 +36,7 @@
 
 .maxWidthMaxLineLengthPlusPadding {
   max-width: calc(
-    var(--MaxLineLength) + var(--SpaceScale4) + var(--SpaceScale4)
+    var(--MaxLineLength) + var(--SpaceScale3) + var(--SpaceScale3)
   );
 }
 
@@ -49,5 +49,5 @@
 }
 
 .maxHeightScreenMinusPadding {
-  max-height: calc(100vh - var(--SpaceScale4));
+  max-height: calc(100vh - var(--SpaceScale3));
 }

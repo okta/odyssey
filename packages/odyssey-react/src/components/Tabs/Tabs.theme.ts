@@ -17,15 +17,15 @@ export const theme: ThemeReducer = (theme) => ({
   ListBorderBlockEndWidth: theme.BorderWidthBase,
   ListBorderBlockEndColor: theme.ColorBorderDisplay,
 
-  PanelPaddingBlock: theme.SpaceScale6,
+  PanelPaddingBlock: theme.SpaceScale5,
   PanelPaddingInline: 0,
 
   TabTextColor: theme.ColorPaletteNeutral900,
   TabFontSize: theme.FontSizeBody,
   TabFontWeight: theme.FontWeightBold,
   TabMarginBlock: 0,
-  TabMarginInline: theme.SpaceScale5,
-  TabPaddingBlock: theme.SpaceScale4,
+  TabMarginInline: theme.SpaceScale4,
+  TabPaddingBlock: theme.SpaceScale3,
   TabPaddingInline: 0,
   TabSelectedBackgroundColor: theme.ColorPrimaryBase,
 });

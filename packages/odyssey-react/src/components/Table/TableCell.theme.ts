@@ -17,12 +17,12 @@ export const theme: ThemeReducer = (theme) => ({
   BorderStyle: theme.BorderStyleBase,
   BorderWidth: theme.BorderWidthBase,
   MaxWidth: theme.FontLineLengthMax,
-  PaddingBlock: theme.SpaceScale4,
-  PaddingInline: theme.SpaceScale2,
+  PaddingBlock: theme.SpaceScale3,
+  PaddingInline: theme.SpaceScale1,
 
   EmptyBackgroundColor: theme.ColorBackgroundDisabled,
-  EmptyPaddingBlock: theme.SpaceScale4,
-  EmptyPaddingInline: theme.SpaceScale6,
+  EmptyPaddingBlock: theme.SpaceScale3,
+  EmptyPaddingInline: theme.SpaceScale5,
   EmptyTextColor: theme.ColorTextSub,
 
   HeaderCellColumnBorderColor: theme.ColorBorderDisplay,
