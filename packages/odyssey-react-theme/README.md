@@ -30,6 +30,12 @@ Import named ESM exports:
 import { ThemeProvider } from "@okta/odyssey-react-theme";
 ```
 
+To access the current theme values use our hook:
+
+```js
+import { useTheme } from "@okta/odyssey-react-theme";
+```
+
 ## Components
 
 Components are published in an ESM format transpiled for the modern browsers

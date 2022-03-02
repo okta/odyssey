@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./ThemeProvider";
-export type { Theme } from "./context";
-export { useTheme } from "./useTheme";
+import { useContext } from "react";
+import { ThemeContext } from "./context";
+import type { Theme } from "./context";
+
+export const useTheme = (): Theme => useContext(ThemeContext);
