@@ -17,12 +17,12 @@ export const theme: ThemeReducer = (theme) => ({
   BorderStyle: "none",
   BorderWidth: 0,
   MaxWidth: theme.FontLineLengthMax,
-  MarginBlockEnd: theme.SpaceScale4,
+  MarginBlockEnd: theme.SpaceScale3,
   MarginBlockStart: 0,
   MarginInline: 0,
   PaddingBlockStart: 0,
   PaddingInline: 0,
 
   // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
-  FieldsetPaddingBlockEnd: theme.SpaceScale4,
+  FieldsetPaddingBlockEnd: theme.SpaceScale3,
 });
