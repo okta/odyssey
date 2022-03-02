@@ -37,7 +37,7 @@ function setFocus(elem: OptionalHTMLElement): void {
     FOCUSABLE_ITEMS_SELECTOR
   );
   if (focusableItems.length > 0) {
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       // Capture original focused element before setting focus inside modal dialog
       if (document.activeElement) {
         lastFocusedElementMap.set(
@@ -59,14 +59,14 @@ function restoreFocus(): void {
     LAST_FOCUSED_ELEMENT_KEY
   );
   if (lastFocusedElement && document.contains(lastFocusedElement)) {
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       lastFocusedElement.focus();
     });
   }
 }
 
 /**
- * Custom React Hook to obtain the current focused element and provide the setFocus helper method
+ * Custom React Hook to provide set/restore focus helper methods
  * @returns {UseFocusHook}
  */
 export function useFocus(): UseFocusHook {
