@@ -28,7 +28,7 @@ export const theme: ThemeReducer = (theme) => ({
   BoxFocusOutlineOffset: theme.FocusOutlineOffsetBase,
   BoxFocusOutlineStyle: theme.FocusOutlineStyle,
   BoxFocusOutlineWidth: theme.FocusOutlineWidthBase,
-  BoxHoverBorderColor: theme.ColorPrimaryBase,
+  BoxHoverBorderColor: theme.ColorNeutralDark,
   BoxInvalidBackgroundColor: theme.ColorBackgroundDangerDark,
   BoxInvalidBorderColor: theme.ColorBorderDangerBase,
   BoxInvalidFocusOutlineColor: theme.FocusOutlineColorDanger,

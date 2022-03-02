@@ -34,7 +34,7 @@ export const theme: ThemeReducer = (theme) => ({
   CircleSize: "1em",
   DotCheckedBackgroundColor: theme.ColorPaletteNeutralWhite,
   DotDisabledCheckedBackgroundColor: theme.ColorPaletteNeutralWhite,
-  DotHoverBorderColor: theme.ColorPrimaryBase,
+  DotHoverBorderColor: theme.ColorNeutralDark,
   DotScale: 0.4,
   LabelDisabledTextColor: theme.ColorTextBody,
   LabelFontSize: theme.FontSizeBody,
