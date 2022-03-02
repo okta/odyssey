@@ -24,10 +24,10 @@ import { Box } from "../Box";
 import { Button } from "../Button";
 import type { ButtonProps } from "../Button";
 import {
-  GetInfoIcon,
-  ErrorIcon,
-  CautionIcon,
-  CompleteIcon,
+  AlertCircleFilledIcon,
+  AlertTriangleFilledIcon,
+  CheckCircleFilledIcon,
+  InformationCircleFilledIcon,
   CloseIcon,
 } from "../Icon";
 import { theme } from "./Toast.theme";
@@ -106,10 +106,10 @@ const ToastContext = createContext<Context>({
 });
 
 const icon = {
-  info: <GetInfoIcon />,
-  danger: <ErrorIcon />,
-  caution: <CautionIcon />,
-  success: <CompleteIcon />,
+  info: <InformationCircleFilledIcon />,
+  danger: <AlertCircleFilledIcon />,
+  caution: <AlertTriangleFilledIcon />,
+  success: <CheckCircleFilledIcon />,
 };
 
 /**

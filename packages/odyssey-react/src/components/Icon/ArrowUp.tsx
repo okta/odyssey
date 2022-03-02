@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -17,16 +17,18 @@ import { useOmit } from "../../utils";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type GoForwardIconProps = SvgIconNoChildrenProps;
+export type ArrowUpIconProps = SvgIconNoChildrenProps;
 
-export const GoForwardIcon = forwardRef<SVGSVGElement, GoForwardIconProps>(
+export const ArrowUpIcon = forwardRef<SVGSVGElement, ArrowUpIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
       <SvgIcon ref={ref} {...omitProps}>
-        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
-            d="M9.48941 6.00121L7.07204 3.72595C6.65428 3.33275 6.65868 2.67278 7.07644 2.27958C7.47872 1.90095 8.12048 1.90683 8.5105 2.29763L12.8546 6.65043C13.0484 6.84461 13.0484 7.15539 12.8546 7.34957L8.5105 11.7024C8.12048 12.0932 7.47872 12.099 7.07644 11.7204C6.65868 11.3272 6.65428 10.6672 7.07204 10.274L9.48941 7.99879H1.50848C1.22765 7.99879 1 7.7752 1 7.4994V6.5006C1 6.2248 1.22765 6.00121 1.50848 6.00121H9.48941Z"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M7.50001 2.70711L3.35356 6.85355L2.64645 6.14645L7.64645 1.14645C7.84172 0.951185 8.1583 0.951185 8.35356 1.14645L13.3536 6.14645L12.6465 6.85355L8.50001 2.70711L8.50001 15L7.50001 15L7.50001 2.70711Z"
             fill="currentColor"
           />
         </svg>
@@ -35,4 +37,4 @@ export const GoForwardIcon = forwardRef<SVGSVGElement, GoForwardIconProps>(
   }
 );
 
-GoForwardIcon.displayName = "GoForwardIcon";
+ArrowUpIcon.displayName = "ArrowUpIcon";

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -17,18 +17,18 @@ import { useOmit } from "../../utils";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type GetInfoIconProps = SvgIconNoChildrenProps;
+export type ChevronUpIconProps = SvgIconNoChildrenProps;
 
-export const GetInfoIcon = forwardRef<SVGSVGElement, GetInfoIconProps>(
+export const ChevronUpIcon = forwardRef<SVGSVGElement, ChevronUpIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
       <SvgIcon ref={ref} {...omitProps}>
-        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13ZM8 4C8 4.55228 7.55228 5 7 5C6.44772 5 6 4.55228 6 4C6 3.44772 6.44772 3 7 3C7.55228 3 8 3.44772 8 4ZM8 6V11H6V6H8Z"
+            d="M8 5.70711L3.35355 10.3536L2.64645 9.64645L7.64645 4.64645C7.84171 4.45118 8.15829 4.45118 8.35355 4.64645L13.3536 9.64645L12.6464 10.3536L8 5.70711Z"
             fill="currentColor"
           />
         </svg>
@@ -37,4 +37,4 @@ export const GetInfoIcon = forwardRef<SVGSVGElement, GetInfoIconProps>(
   }
 );
 
-GetInfoIcon.displayName = "GetInfoIcon";
+ChevronUpIcon.displayName = "ChevronUpIcon";

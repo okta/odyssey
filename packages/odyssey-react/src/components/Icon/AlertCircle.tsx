@@ -17,9 +17,9 @@ import { useOmit } from "../../utils";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type SearchIconProps = SvgIconNoChildrenProps;
+export type AlertCircleIconProps = SvgIconNoChildrenProps;
 
-export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
+export const AlertCircleIcon = forwardRef<SVGSVGElement, AlertCircleIconProps>(
   (props, ref) => {
     const omitProps = useOmit(props);
     return (
@@ -28,7 +28,7 @@ export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
           <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M12 7C12 9.76142 9.76142 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7ZM9.32556 12.5327C8.61038 12.8336 7.82462 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C10.3137 1 13 3.68629 13 7C13 7.82462 12.8336 8.61038 12.5327 9.32556L15.1036 11.8964C15.9892 12.7821 15.9892 14.2179 15.1036 15.1036C14.2179 15.9892 12.7821 15.9892 11.8964 15.1036L9.32556 12.5327ZM10.2509 12.0438L12.6036 14.3964C13.0986 14.8915 13.9014 14.8915 14.3964 14.3964C14.8915 13.9014 14.8915 13.0986 14.3964 12.6036L12.0438 10.2509C11.5805 10.9683 10.9683 11.5805 10.2509 12.0438Z"
+            d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM8 12C8.14834 12 8.29334 11.956 8.41668 11.8736C8.54001 11.7912 8.63614 11.6741 8.69291 11.537C8.74968 11.4 8.76453 11.2492 8.73559 11.1037C8.70665 10.9582 8.63522 10.8246 8.53033 10.7197C8.42544 10.6148 8.29181 10.5434 8.14632 10.5144C8.00083 10.4855 7.85003 10.5003 7.71299 10.5571C7.57594 10.6139 7.45881 10.71 7.3764 10.8333C7.29399 10.9567 7.25 11.1017 7.25 11.25C7.25 11.4489 7.32902 11.6397 7.46967 11.7803C7.61032 11.921 7.80109 12 8 12ZM7.5 8.5C7.5 8.77614 7.72386 9 8 9C8.27614 9 8.5 8.77614 8.5 8.5V4H7.5L7.5 8.5Z"
             fill="currentColor"
           />
         </svg>
@@ -37,4 +37,4 @@ export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
   }
 );
 
-SearchIcon.displayName = "SearchIcon";
+AlertCircleIcon.displayName = "AlertCircleIcon";
