@@ -22,31 +22,26 @@
         border-color: var(--BoxCheckedBorderColor);
         background-color: var(--BoxCheckedBackgroundColor);
       }
-    }
-  }
 
-  &:checked {
-    + .label {
       .indicator {
         color: var(--IndicatorColor);
       }
-    }
-  }
 
-  &:not(:checked) {
-    + .label {
       &:hover {
         .box {
-          border-color: var(--BoxHoverBorderColor);
+          border-color: var(--BoxCheckedHoverBorderColor);
+          background-color: var(--BoxCheckedHoverBackgroundColor);
         }
       }
     }
   }
 
-  &:indeterminate {
+  &:not(:checked):not(:indeterminate) {
     + .label {
-      .indicator {
-        color: var(--IndicatorColor);
+      &:hover {
+        .box {
+          border-color: var(--BoxHoverBorderColor);
+        }
       }
     }
   }
@@ -141,7 +136,7 @@
     inset-block-start: 50%;
     inset-inline-start: 0;
     transform: translateY(-50%);
-    transition-property: border-color, color, opacity, outline-offset,
+    transition-property: background-color, border-color, color, opacity, outline-offset,
       outline-color;
     transition-duration: var(--TransitionDuration);
     transition-timing-function: var(--TransitionTimingFunction);
