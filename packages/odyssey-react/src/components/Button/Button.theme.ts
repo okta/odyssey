@@ -16,8 +16,8 @@ export const theme: ThemeReducer = (theme) => ({
   // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   MarginBlock: 0,
   MarginInline: 0,
-  PaddingBlock: theme.SpaceEmXs,
-  PaddingInline: theme.SpaceEmS,
+  PaddingBlock: theme.SpaceScale1,
+  PaddingInline: theme.SpaceScale2,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,
   BorderRadius: theme.BorderRadiusBase,
@@ -27,7 +27,7 @@ export const theme: ThemeReducer = (theme) => ({
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightBold,
-  LineHeight: theme.FontLineHeightBase,
+  LineHeight: theme.FontLineHeightUi,
 
   FocusOutlineColor: theme.FocusOutlineColorPrimary,
   FocusOutlineOffset: theme.FocusOutlineOffsetBase,
@@ -35,8 +35,8 @@ export const theme: ThemeReducer = (theme) => ({
   FocusOutlineWidth: theme.FocusOutlineWidthBase,
 
   // Label
-  LabelMinWidth: theme.SpaceEmL,
-  LabelMarginInlineStart: theme.SpaceRemXs,
+  LabelMinWidth: theme.SpaceScale6,
+  LabelMarginInlineStart: theme.SpaceScale1,
 
   // Primary Variant
   PrimaryBackgroundColor: theme.ColorPrimaryBase,
@@ -76,8 +76,8 @@ export const theme: ThemeReducer = (theme) => ({
   DismissTextColor: "inherit",
   DismissDisabledTextColor: theme.ColorNeutralBase,
   DismissLineHeight: 1,
-  DismissPaddingBlock: theme.SpaceEmXs,
-  DismissPaddingInline: theme.SpaceEmXs,
+  DismissPaddingBlock: theme.SpaceScale0,
+  DismissPaddingInline: theme.SpaceScale0,
   DismissHoverBackgroundColor: "rgba(255, 255, 255, 0.6)",
   DismissFocusBackgroundColor: "rgba(255, 255, 255, 0.6)",
   DismissDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
@@ -98,14 +98,15 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Wide Layout
   WideLayoutMarginBlock: 0,
-  WideLayoutMarginBlockEnd: theme.SpaceRemS,
+  WideLayoutMarginBlockEnd: theme.SpaceScale3,
   WideLayoutMarginInline: 0,
 
   // Small Size
   SmallSizeFontSize: theme.FontSizeCaption,
-  SmallSizeLineHeight: theme.FontLineHeightHeading,
+  SmallSizePaddingBlock: theme.SpaceScale0,
+  SmallSizePaddingInline: theme.SpaceScale1,
 
   // Large Size
-  LargeSizePaddingBlock: theme.SpaceEmS,
-  LargeSizePaddingInline: theme.SpaceEmM,
+  LargeSizePaddingBlock: theme.SpaceScale2,
+  LargeSizePaddingInline: theme.SpaceScale3,
 });

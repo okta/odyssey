@@ -24,9 +24,14 @@ export const theme: ThemeReducer = (theme) => ({
   /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
   FontFamily: theme.FontFamilyBase,
 
-  LineHeight: theme.FontLineHeightBase,
-  NormalLineHeight: theme.FontLineHeightBase,
-  HeadingLineHeight: theme.FontLineHeightHeading,
+  LineHeight: theme.FontLineHeightBody,
+  BodyLineHeight: theme.FontLineHeightBody,
+  Heading1LineHeight: theme.FontLineHeightHeading1,
+  Heading2LineHeight: theme.FontLineHeightHeading2,
+  Heading3LineHeight: theme.FontLineHeightHeading3,
+  Heading4LineHeight: theme.FontLineHeightHeading4,
+  Heading5LineHeight: theme.FontLineHeightHeading5,
+  Heading6LineHeight: theme.FontLineHeightHeading6,
 
   FontSize: theme.FontSizeBody,
   BaseFontSize: theme.FontSizeBody,
@@ -69,22 +74,22 @@ export const theme: ThemeReducer = (theme) => ({
   BlockquoteBorderInlineStartWidth: "3px",
   BlockquoteBorderInlineStartColor: theme.ColorBorderDisplay,
   BlockquoteMaxWidth: theme.FontLineLengthMax,
-  BlockquoteMarginBlockEnd: theme.SpaceEmM,
+  BlockquoteMarginBlockEnd: theme.SpaceScale3,
   BlockquoteMarginBlockStart: 0,
   BlockquoteMarginInline: 0,
   BlockquotePaddingBlock: 0,
   BlockquotePaddingInlineEnd: 0,
-  BlockquotePaddingInlineStart: theme.SpaceRemS,
+  BlockquotePaddingInlineStart: theme.SpaceScale1,
 
   // p
   PMaxWidth: theme.FontLineLengthMax,
-  PMarginBlockEnd: theme.SpaceEmM,
+  PMarginBlockEnd: theme.SpaceScale3,
   PMarginBlockStart: 0,
   PMarginInline: 0,
 
   // pre
   PreFontFamily: theme.FontFamilyMono,
-  PreMarginBlockEnd: theme.SpaceEmM,
+  PreMarginBlockEnd: theme.SpaceScale3,
   PreMarginBlockStart: 0,
   PreMarginInline: 0,
 
@@ -108,10 +113,10 @@ export const theme: ThemeReducer = (theme) => ({
   KbdBackgroundColor: theme.ColorBackgroundDisabled,
   KbdInsideBoxShadowColor: theme.ColorPaletteNeutral000,
   KbdOutsideBoxShadowColor: theme.ColorPaletteNeutral200,
-  KbdLineHeight: theme.FontLineHeightHeading,
+  KbdLineHeight: theme.FontLineHeightUi,
   KbdFontWeight: theme.FontWeightNormal,
   KbdPaddingBlock: 0,
-  KbdPaddingInline: theme.SpaceRemXs,
+  KbdPaddingInline: theme.SpaceScale0,
 
   // mark
   MarkBackgroundColor: theme.ColorBackgroundCautionLight,

@@ -11,7 +11,7 @@
  */
 
 const path = require("path");
-const validThemeProperty = /^[A-Z][A-Za-z]+$/;
+const validThemeProperty = /^[A-Z][A-Za-z0-9]+$/;
 const declarations = require("../utils/cssDeclarations");
 
 module.exports = {

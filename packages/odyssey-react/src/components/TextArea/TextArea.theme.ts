@@ -27,20 +27,20 @@ export const theme: ThemeReducer = (theme) => ({
   // Font
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
-  LineHeight: theme.FontLineHeightBase,
+  LineHeight: theme.FontLineHeightBody,
 
   // Sizing
   MaxWidth: theme.FontLineLengthMax,
-  MinHeight: theme.SpaceRemL,
-  MinWidth: theme.SpaceRemM,
+  MinHeight: theme.SpaceScale6,
+  MinWidth: theme.SpaceScale3,
 
   // Space
   MarginBlockEnd: 0,
-  MarginBlockStart: theme.SpaceRemXs,
+  MarginBlockStart: theme.SpaceScale0,
   MarginInline: 0,
-  PaddingBlockEnd: theme.SpaceEmS,
-  PaddingBlockStart: theme.SpaceEmXs,
-  PaddingInline: theme.SpaceEmS,
+  PaddingBlockEnd: theme.SpaceScale1,
+  PaddingBlockStart: theme.SpaceScale0,
+  PaddingInline: theme.SpaceScale1,
 
   // Placeholder
   PlaceholderTextColor: theme.ColorTextSub,

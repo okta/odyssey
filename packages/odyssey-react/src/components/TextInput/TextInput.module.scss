@@ -19,7 +19,7 @@
   max-width: var(--MaxWidth);
   margin-block: var(--MarginBlock);
   margin-inline: var(--MarginInline);
-  padding-block: var(--PaddingBlock);
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
   padding-inline: var(--PaddingInline);
   transition-property: border-color, background-color;
   transition-duration: var(--TransitionDuration);

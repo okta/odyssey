@@ -111,12 +111,7 @@ export const Banner = withTheme(
         <span className={styles.icon}>{icon[variant]}</span>
         {heading && (
           <div className={styles.heading}>
-            <Heading
-              visualLevel="6"
-              lineHeight="heading"
-              noEndMargin
-              children={heading}
-            />
+            <Heading visualLevel="6" noEndMargin children={heading} />
           </div>
         )}
         {content && (

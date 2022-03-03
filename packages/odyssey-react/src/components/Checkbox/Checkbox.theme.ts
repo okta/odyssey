@@ -16,7 +16,7 @@ export const theme: ThemeReducer = (theme) => ({
   BorderRadius: theme.BorderRadiusBase,
   FontSize: theme.FontSizeBody,
   FontWeight: theme.FontWeightNormal,
-  MarginBlockEnd: theme.SpaceRemXs,
+  MarginBlockEnd: theme.SpaceScale1,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,
 
@@ -41,12 +41,12 @@ export const theme: ThemeReducer = (theme) => ({
   BoxInvalidBorderColor: theme.ColorBorderDangerBase,
   BoxInvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
   BoxInvalidHoverBorderColor: theme.ColorDangerDark,
-  BoxSize: "1em",
+  BoxSize: theme.FontScale2,
 
   IndicatorColor: theme.ColorTextBodyInverse,
-  IndicatorSize: "0.75em",
+  IndicatorSize: theme.FontScale0,
 
   LabelDisabledTextColor: theme.ColorTextBody,
   LabelInvalidTextColor: theme.ColorTextDanger,
-  LabelPaddingInlineStart: theme.SpaceEmS,
+  LabelPaddingInlineStart: theme.SpaceScale1,
 });
