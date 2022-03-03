@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.0](https://github.com/okta/odyssey/compare/v0.9.3...v0.10.0) (2022-03-03)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-design-tokens:** set space scale under "scale"
+- **odyssey-design-tokens:** removes prior space tokens from dict
+- **odyssey-design-tokens:** updates type tokens to match new scale
+- **odyssey-design-tokens:** migrates all focus tokens under Focus; renames outlines
+  tokens
+- **odyssey-design-tokens:** define explicit exports and module type
+
+### Features
+
+- **odyssey-design-tokens:** add new spacing scale ([faf6f19](https://github.com/okta/odyssey/commit/faf6f19ff1f6a46d925724507ae37c7960685bb3))
+- **odyssey-design-tokens:** make Neutral Dark color available ([a718368](https://github.com/okta/odyssey/commit/a7183684e885016c20ace0d8b3d23a5ad20b48d3))
+- **odyssey-design-tokens:** standardize focus styles for outline ([c6556a0](https://github.com/okta/odyssey/commit/c6556a0bf37011da8ab30082e748c22edf022283))
+- **odyssey-design-tokens:** updates type tokens to match new scale ([b763705](https://github.com/okta/odyssey/commit/b76370513ad7ea74c215de0f732698bc33b52436))
+
+### Code Refactoring
+
+- **odyssey-design-tokens:** define explicit exports and module type ([fdb56c5](https://github.com/okta/odyssey/commit/fdb56c552b8f7e876969ccdcf583522a727c776b))
+- **odyssey-design-tokens:** removes prior space tokens from dict ([f35b3f5](https://github.com/okta/odyssey/commit/f35b3f5878df7dd94864bfdb4f5143ae724cb244))
+- **odyssey-design-tokens:** set space scale under "scale" ([5ddbe65](https://github.com/okta/odyssey/commit/5ddbe65ea5844365389aef98599444734c47bda3))
+
 ### [0.9.3](https://github.com/okta/odyssey/compare/v0.9.2...v0.9.3) (2022-02-24)
 
 **Note:** Version bump only for package @okta/odyssey-design-tokens
