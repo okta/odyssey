@@ -188,12 +188,12 @@
 /* Sizes */
 
 .sSize {
-  padding-block: var(--SmallSizePaddingBlock);
+  padding-block: calc(var(--SmallSizePaddingBlock) - var(--BorderWidth));
   padding-inline: var(--SmallSizePaddingInline);
   font-size: var(--SmallSizeFontSize);
 }
 
 .lSize {
-  padding-block: var(--LargeSizePaddingBlock);
+  padding-block: calc(var(--LargeSizePaddingBlock) - var(--BorderWidth));
   padding-inline: var(--LargeSizePaddingInline);
 }

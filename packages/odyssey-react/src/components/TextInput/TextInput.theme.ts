@@ -39,7 +39,7 @@ export const theme: ThemeReducer = (theme) => ({
   PaddingBlock: theme.SpaceScale1,
   PaddingInline: theme.SpaceScale1,
   PlaceholderTextColor: theme.ColorTextSub,
-  SearchPaddingInlineStart: theme.SpaceScale0,
+  SearchPaddingInlineStart: theme.SpaceScale1,
   TextColor: theme.ColorTextBody,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,
