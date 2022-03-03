@@ -1,0 +1,3 @@
+{
+  "presets": ["@okta/odyssey-babel-preset"]
+}
