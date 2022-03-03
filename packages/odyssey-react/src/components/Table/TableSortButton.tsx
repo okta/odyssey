@@ -15,7 +15,7 @@ import type { ReactNode, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOmit } from "../../utils";
 import { Box } from "../Box";
-import { SortIcon, SortAscIcon, SortDescIcon } from "../Icon";
+import { ArrowUpIcon, ArrowDownIcon } from "../Icon";
 import { ScreenReaderText } from "../ScreenReaderText";
 import styles from "./TableSortButton.module.scss";
 import { theme } from "./TableSortButton.theme";
@@ -79,9 +79,16 @@ export const TableSortButton = withTheme(
       >
         {children}
         <span className={styles.sortIndicator}>
-          {direction === "unsorted" && <SortIcon title={unsortedIconTitle} />}
-          {direction === "asc" && <SortAscIcon title={ascendingIconTitle} />}
-          {direction === "desc" && <SortDescIcon title={descendingIconTitle} />}
+          {direction === "unsorted" && (
+            <>
+              <ArrowUpIcon />
+              <ArrowDownIcon title={unsortedIconTitle} />
+            </>
+          )}
+          {direction === "asc" && <ArrowUpIcon title={ascendingIconTitle} />}
+          {direction === "desc" && (
+            <ArrowDownIcon title={descendingIconTitle} />
+          )}
         </span>
         <ScreenReaderText>{screenReaderCallToAction}</ScreenReaderText>
       </Box>
