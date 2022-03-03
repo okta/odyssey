@@ -22,7 +22,7 @@
   max-width: var(--MaxWidth);
   margin-block: var(--MarginBlock);
   margin-inline: var(--MarginInline);
-  padding-block: var(--PaddingBlock);
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
   padding-inline: var(--PaddingInline);
   transition-property: border-color, background-color;
   transition-duration: var(--TransitionDuration);
@@ -309,7 +309,7 @@
 
   display: inline-block;
   width: 100%;
-  padding-block: $spacing-xs-em;
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
   padding-inline-start: $spacing-s-em;
   padding-inline-end: $spacing-m-em + $spacing-xs-em;
   overflow: hidden;
@@ -322,7 +322,7 @@
   color: $text-body;
   font-family: $body-font-family;
   font-size: $size-body-base;
-  line-height: $base-line-height;
+  line-height: var(--LineHeight);
   vertical-align: top;
 
   &:hover,

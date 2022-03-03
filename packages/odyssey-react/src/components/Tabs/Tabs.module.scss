@@ -21,7 +21,7 @@
   display: inline-block;
   position: relative;
   margin-block: var(--TabMarginBlock);
-  margin-inline: var(--TabMarginInline);
+  margin-inline-end: var(--TabMarginInline);
   padding-block: var(--TabPaddingBlock);
   padding-inline: var(--TabPaddingInline);
   border: 0;
@@ -30,6 +30,10 @@
   font-family: inherit;
   font-size: var(--TabFontSize);
   font-weight: var(--TabFontWeight);
+
+  &:last-child {
+    margin-inline-end: 0;
+  }
 }
 
 .tabpanel {

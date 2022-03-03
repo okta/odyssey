@@ -176,18 +176,18 @@ WrapBreakWord.args = {
 };
 
 // Line Height
-export const LineHeightNormal = TemplateWithContainer.bind({});
-LineHeightNormal.storyName = "Line height: Normal (default)";
-LineHeightNormal.args = {
-  children: "Normal text LineHeight style",
-  lineHeight: "normal",
+export const LineHeightBody = TemplateWithContainer.bind({});
+LineHeightBody.storyName = "Line height: Body (default)";
+LineHeightBody.args = {
+  children: "Body LineHeight style",
+  lineHeight: "body",
 };
 
 export const LineHeightHeading = TemplateWithContainer.bind({});
-LineHeightHeading.storyName = "Line height: Heading";
+LineHeightHeading.storyName = "Line height: Headings";
 LineHeightHeading.args = {
-  children: "Heading text LineHeight style",
-  lineHeight: "heading",
+  children: "Headings 1-6 line-heights",
+  lineHeight: "heading1",
 };
 
 export const MarginPadding = Template.bind({});

@@ -12,11 +12,12 @@
 
 .root {
   display: inline-block;
+  margin-block-start: 0;
   margin-block-end: calc(-1 * var(--MarginBlockEnd));
   margin-inline-start: var(--MarginInlineStart);
-  list-style-type: none;
   padding-inline: 0;
-  margin-block-start: 0;
+  list-style-type: none;
+  line-height: var(--LineHeight);
 }
 
 .item {
