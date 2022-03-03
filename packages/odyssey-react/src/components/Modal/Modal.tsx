@@ -31,6 +31,8 @@ import { CloseIcon } from "../Icon";
 import { theme } from "./Modal.theme";
 import styles from "./Modal.module.scss";
 
+type OptionalHTMLElement = HTMLElement | null;
+
 export type ModalProps = {
   /**
    * The modal content, should use the Static components provided by Modal (Modal.Header, Modal.Body and Modal.Footer)
@@ -116,14 +118,15 @@ export const Modal = withTheme(
     const modalDialog = useRef<HTMLDivElement>(null);
     const componentClass = useCx(styles.root, { [styles.openState]: open });
     const { restoreFocus, setFocus } = useFocus();
+    const lastFocusedElemRef = useRef<OptionalHTMLElement>(null);
 
     if (open) {
-      setFocus(modalDialog.current);
+      lastFocusedElemRef.current = setFocus(modalDialog.current);
       if (onOpen) {
         onOpen();
       }
     } else {
-      restoreFocus();
+      lastFocusedElemRef.current && restoreFocus(lastFocusedElemRef.current);
     }
 
     return createPortal(
