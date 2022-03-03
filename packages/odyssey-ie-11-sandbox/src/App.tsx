@@ -29,7 +29,7 @@ import {
   TextInput,
   Text,
   Form,
-  CautionIcon,
+  AlertTriangleFilledIcon,
   Status,
   Modal,
   Radio,
@@ -215,7 +215,7 @@ export default function App(): JSX.Element {
         variant="neutral"
       />
       <ErrorBoundary>
-        <CautionIcon fr="" />
+        <AlertTriangleFilledIcon fr="" />
       </ErrorBoundary>
 
       <Status
