@@ -36,7 +36,7 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Label
   LabelMinWidth: theme.SpaceScale6,
-  LabelMarginInlineStart: theme.SpaceScale0,
+  LabelMarginInlineStart: theme.SpaceScale1,
 
   // Primary Variant
   PrimaryBackgroundColor: theme.ColorPrimaryBase,

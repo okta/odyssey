@@ -155,6 +155,6 @@
   }
 }
 
-.root:last-child > .label {
+.root:last-of-type .label {
   margin-block-end: 0;
 }
