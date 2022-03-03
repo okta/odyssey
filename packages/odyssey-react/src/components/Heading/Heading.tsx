@@ -41,11 +41,6 @@ export interface HeadingProps
    * @default false
    */
   noEndMargin?: boolean;
-
-  /**
-   * Specify explicit line height spacing
-   */
-  lineHeight?: "base" | "heading";
 }
 
 /**
@@ -63,7 +58,6 @@ export const Heading = withTheme(
       visualLevel,
       children,
       noEndMargin = false,
-      lineHeight,
       ...rest
     } = props;
 
@@ -72,8 +66,7 @@ export const Heading = withTheme(
     const componentClass = useCx(
       styles.root,
       visualLevel && styles[`level${visualLevel}`],
-      noEndMargin && styles.noEndMargin,
-      lineHeight && styles[`${lineHeight}LineHeight`]
+      noEndMargin && styles.noEndMargin
     );
 
     const omitProps = useOmit(rest);

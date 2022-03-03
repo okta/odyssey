@@ -15,7 +15,6 @@ import type { ThemeReducer } from "@okta/odyssey-react-theme";
 export const theme: ThemeReducer = (theme) => ({
   MarginBlockEnd: theme.SpaceScale1,
   TextColor: theme.ColorTextHeading,
-  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
   Level1FontSize: theme.FontSizeHeading1,
   Level2FontSize: theme.FontSizeHeading2,
   Level3FontSize: theme.FontSizeHeading3,
@@ -28,10 +27,6 @@ export const theme: ThemeReducer = (theme) => ({
   Level4LineHeight: theme.FontLineHeightHeading4,
   Level5LineHeight: theme.FontLineHeightHeading5,
   Level6LineHeight: theme.FontLineHeightHeading6,
-  /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
-  BodyLineHeight: theme.FontLineHeightBody,
-  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
-  UiLineHeight: theme.FontLineHeightUi,
 });
