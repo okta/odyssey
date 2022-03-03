@@ -13,54 +13,52 @@
 type OptionalHTMLElement = HTMLElement | null;
 
 interface UseFocusHook {
-  restoreFocus: () => void;
-  setFocus: (elem: OptionalHTMLElement) => void;
+  restoreFocus: (current: OptionalHTMLElement) => void;
+  setFocus: (elem: OptionalHTMLElement) => OptionalHTMLElement;
 }
 
-const LAST_FOCUSED_ELEMENT_KEY = "LAST_FOCUSED_ELEMENT";
-const FOCUSABLE_ITEMS_SELECTOR =
-  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE_ITEMS = [
+  "button",
+  "[href]",
+  "input",
+  "select",
+  "textarea",
+  '[tabindex]:not([tabindex="-1"])',
+];
 
-// Store last focused element to restore original focus after modal is closed
-const lastFocusedElementMap = new Map<string, HTMLElement>();
+const FOCUSABLE_ITEMS_SELECTOR = FOCUSABLE_ITEMS.join(",");
 
 /**
  * Set focus on first focusable element inside node tree
  * @param {HTMLElement} elem - parent element that contains focusable child elements
  * @returns {void}
  */
-function setFocus(elem: OptionalHTMLElement): void {
+function setFocus(elem: OptionalHTMLElement): OptionalHTMLElement {
   if (!elem) {
-    return;
+    return null;
   }
   const focusableItems: NodeListOf<HTMLElement> = elem.querySelectorAll(
     FOCUSABLE_ITEMS_SELECTOR
   );
+  // Capture original focused element before setting focus inside modal dialog
+  const lastFocusedElement = document.activeElement;
   if (focusableItems.length > 0) {
     requestAnimationFrame(() => {
-      // Capture original focused element before setting focus inside modal dialog
-      if (document.activeElement) {
-        lastFocusedElementMap.set(
-          LAST_FOCUSED_ELEMENT_KEY,
-          document.activeElement as HTMLElement
-        );
-      }
       // Focus on first focusable element inside dialog
       focusableItems[0].focus();
     });
   }
+  return lastFocusedElement as OptionalHTMLElement;
 }
 
 /**
  * Restore focus to element with original focus prior to opening modal dialog
+ * @param {OptionalHTMLElement} elem
  */
-function restoreFocus(): void {
-  const lastFocusedElement = lastFocusedElementMap.get(
-    LAST_FOCUSED_ELEMENT_KEY
-  );
-  if (lastFocusedElement && document.contains(lastFocusedElement)) {
+function restoreFocus(elem: OptionalHTMLElement): void {
+  if (elem && document.contains(elem)) {
     requestAnimationFrame(() => {
-      lastFocusedElement.focus();
+      elem.focus();
     });
   }
 }
