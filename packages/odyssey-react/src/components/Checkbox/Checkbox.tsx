@@ -14,7 +14,7 @@ import React, { useCallback, useRef, useEffect, forwardRef } from "react";
 import type { ComponentPropsWithRef, ChangeEvent } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { Box } from "../Box";
-import { CheckIcon, MinusIcon } from "../Icon";
+import { CheckIcon, SubtractIcon } from "../Icon";
 import { useCx, useOid, useOmit } from "../../utils";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
@@ -112,7 +112,7 @@ export const Checkbox = withTheme(
         <label className={styles.label} htmlFor={oid}>
           <span className={styles.box} role="presentation">
             <span className={styles.indicator}>
-              {indeterminate ? <MinusIcon /> : <CheckIcon />}
+              {indeterminate ? <SubtractIcon /> : <CheckIcon />}
             </span>
           </span>
 
