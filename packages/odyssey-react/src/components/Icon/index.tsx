@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -14,32 +14,56 @@
 
 export * from "./Icon";
 
+import { AddCircleIcon } from "./AddCircle";
+export * from "./AddCircle";
+
+import { AddIcon } from "./Add";
+export * from "./Add";
+
+import { AlertCircleFilledIcon } from "./AlertCircleFilled";
+export * from "./AlertCircleFilled";
+
+import { AlertCircleIcon } from "./AlertCircle";
+export * from "./AlertCircle";
+
+import { AlertTriangleFilledIcon } from "./AlertTriangleFilled";
+export * from "./AlertTriangleFilled";
+
 import { AnchorIcon } from "./Anchor";
 export * from "./Anchor";
 
 import { ArrowDownIcon } from "./ArrowDown";
 export * from "./ArrowDown";
 
+import { ArrowLeftIcon } from "./ArrowLeft";
+export * from "./ArrowLeft";
+
 import { ArrowRightIcon } from "./ArrowRight";
 export * from "./ArrowRight";
 
-import { CaretDownIcon } from "./CaretDown";
-export * from "./CaretDown";
+import { ArrowUpIcon } from "./ArrowUp";
+export * from "./ArrowUp";
 
-import { CaretUpIcon } from "./CaretUp";
-export * from "./CaretUp";
+import { CalendarIcon } from "./Calendar";
+export * from "./Calendar";
 
-import { CautionIcon } from "./Caution";
-export * from "./Caution";
+import { CheckCircleFilledIcon } from "./CheckCircleFilled";
+export * from "./CheckCircleFilled";
 
 import { CheckIcon } from "./Check";
 export * from "./Check";
 
+import { ChevronDownIcon } from "./ChevronDown";
+export * from "./ChevronDown";
+
+import { ChevronUpIcon } from "./ChevronUp";
+export * from "./ChevronUp";
+
+import { CloseCircleFilledIcon } from "./CloseCircleFilled";
+export * from "./CloseCircleFilled";
+
 import { CloseIcon } from "./Close";
 export * from "./Close";
-
-import { CompleteIcon } from "./Complete";
-export * from "./Complete";
 
 import { CopyIcon } from "./Copy";
 export * from "./Copy";
@@ -50,35 +74,41 @@ export * from "./Delete";
 import { DownloadIcon } from "./Download";
 export * from "./Download";
 
+import { DragHandleIcon } from "./DragHandle";
+export * from "./DragHandle";
+
 import { EditIcon } from "./Edit";
 export * from "./Edit";
 
-import { ErrorIcon } from "./Error";
-export * from "./Error";
-
-import { ExternalIcon } from "./External";
-export * from "./External";
+import { ExternalLinkIcon } from "./ExternalLink";
+export * from "./ExternalLink";
 
 import { FilterIcon } from "./Filter";
 export * from "./Filter";
 
-import { GetInfoIcon } from "./GetInfo";
-export * from "./GetInfo";
+import { GlobeIcon } from "./Globe";
+export * from "./Globe";
 
-import { GoBackwardIcon } from "./GoBackward";
-export * from "./GoBackward";
+import { HomeIcon } from "./Home";
+export * from "./Home";
 
-import { GoForwardIcon } from "./GoForward";
-export * from "./GoForward";
+import { InformationCircleFilledIcon } from "./InformationCircleFilled";
+export * from "./InformationCircleFilled";
 
-import { MinusIcon } from "./Minus";
-export * from "./Minus";
+import { InformationCircleIcon } from "./InformationCircle";
+export * from "./InformationCircle";
 
 import { NotificationIcon } from "./Notification";
 export * from "./Notification";
 
-import { PlusIcon } from "./Plus";
-export * from "./Plus";
+import { OverflowVerticalIcon } from "./OverflowVertical";
+export * from "./OverflowVertical";
+
+import { QuestionCircleFilledIcon } from "./QuestionCircleFilled";
+export * from "./QuestionCircleFilled";
+
+import { QuestionCircleIcon } from "./QuestionCircle";
+export * from "./QuestionCircle";
 
 import { SearchIcon } from "./Search";
 export * from "./Search";
@@ -86,45 +116,47 @@ export * from "./Search";
 import { SettingsIcon } from "./Settings";
 export * from "./Settings";
 
-import { SortAscIcon } from "./SortAsc";
-export * from "./SortAsc";
-
-import { SortDescIcon } from "./SortDesc";
-export * from "./SortDesc";
-
-import { SortIcon } from "./Sort";
-export * from "./Sort";
+import { SubtractIcon } from "./Subtract";
+export * from "./Subtract";
 
 import { UserIcon } from "./User";
 export * from "./User";
 
 export const iconDictionary = {
+  "add-circle": AddCircleIcon,
+  add: AddIcon,
+  "alert-circle-filled": AlertCircleFilledIcon,
+  "alert-circle": AlertCircleIcon,
+  "alert-triangle-filled": AlertTriangleFilledIcon,
   anchor: AnchorIcon,
   "arrow-down": ArrowDownIcon,
+  "arrow-left": ArrowLeftIcon,
   "arrow-right": ArrowRightIcon,
-  "caret-down": CaretDownIcon,
-  "caret-up": CaretUpIcon,
-  caution: CautionIcon,
+  "arrow-up": ArrowUpIcon,
+  calendar: CalendarIcon,
+  "check-circle-filled": CheckCircleFilledIcon,
   check: CheckIcon,
+  "chevron-down": ChevronDownIcon,
+  "chevron-up": ChevronUpIcon,
+  "close-circle-filled": CloseCircleFilledIcon,
   close: CloseIcon,
-  complete: CompleteIcon,
   copy: CopyIcon,
   delete: DeleteIcon,
   download: DownloadIcon,
+  "drag-handle": DragHandleIcon,
   edit: EditIcon,
-  error: ErrorIcon,
-  external: ExternalIcon,
+  "external-link": ExternalLinkIcon,
   filter: FilterIcon,
-  "get-info": GetInfoIcon,
-  "go-backward": GoBackwardIcon,
-  "go-forward": GoForwardIcon,
-  minus: MinusIcon,
+  globe: GlobeIcon,
+  home: HomeIcon,
+  "information-circle-filled": InformationCircleFilledIcon,
+  "information-circle": InformationCircleIcon,
   notification: NotificationIcon,
-  plus: PlusIcon,
+  "overflow-vertical": OverflowVerticalIcon,
+  "question-circle-filled": QuestionCircleFilledIcon,
+  "question-circle": QuestionCircleIcon,
   search: SearchIcon,
   settings: SettingsIcon,
-  "sort-asc": SortAscIcon,
-  "sort-desc": SortDescIcon,
-  sort: SortIcon,
+  subtract: SubtractIcon,
   user: UserIcon,
 };

@@ -27,29 +27,30 @@ export const theme: ThemeReducer = (theme) => ({
   // Font
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
-  LineHeight: theme.FontLineHeightBase,
+  LineHeight: theme.FontLineHeightBody,
 
   // Sizing
   MaxWidth: theme.FontLineLengthMax,
-  MinHeight: theme.SpaceRemL,
-  MinWidth: theme.SpaceRemM,
+  MinHeight: theme.SpaceScale6,
+  MinWidth: theme.SpaceScale3,
 
   // Space
   MarginBlockEnd: 0,
-  MarginBlockStart: theme.SpaceRemXs,
+  MarginBlockStart: theme.SpaceScale0,
   MarginInline: 0,
-  PaddingBlockEnd: theme.SpaceEmS,
-  PaddingBlockStart: theme.SpaceEmXs,
-  PaddingInline: theme.SpaceEmS,
+  PaddingBlockEnd: theme.SpaceScale1,
+  PaddingBlockStart: theme.SpaceScale0,
+  PaddingInline: theme.SpaceScale1,
 
   // Placeholder
   PlaceholderTextColor: theme.ColorTextSub,
 
   // Focus
   HoverFocusBorderColor: theme.ColorPrimaryBase,
-  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
-  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
-  FocusBoxShadowColor: theme.ColorFocusPrimary,
+  FocusOutlineColor: theme.FocusOutlineColorPrimary,
+  FocusOutlineOffset: theme.FocusOutlineOffsetTight,
+  FocusOutlineStyle: theme.FocusOutlineStyle,
+  FocusOutlineWidth: theme.FocusOutlineWidthTight,
 
   // Disabled
   DisabledBackgroundColor: theme.ColorBackgroundDisabled,
@@ -58,7 +59,7 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Invalid
   InvalidBorderColor: theme.ColorBorderDangerBase,
-  InvalidFocusBoxShadowColor: theme.ColorFocusDanger,
+  InvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
 
   // Transition
   TransitionDuration: theme.TransitionDurationBase,

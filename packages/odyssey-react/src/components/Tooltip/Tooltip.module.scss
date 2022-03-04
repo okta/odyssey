@@ -17,7 +17,7 @@
   visibility: hidden;
   position: absolute;
   z-index: 1;
-  padding-block: var(--PaddingBlock);
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
   padding-inline: var(--PaddingInline);
   transition-property: opacity;
   transition-duration: var(--TransitionDuration);

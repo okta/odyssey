@@ -18,20 +18,22 @@ export const theme: ThemeReducer = (theme) => ({
   MaxLineLength: theme.FontLineLengthMax,
 
   // Space
-  SpaceRemXs: theme.SpaceRemXs,
-  SpaceRemS: theme.SpaceRemS,
-  SpaceRemM: theme.SpaceRemM,
-  SpaceRemL: theme.SpaceRemL,
-  SpaceRemXl: theme.SpaceRemXl,
+  SpaceScale0: theme.SpaceScale0,
+  SpaceScale1: theme.SpaceScale1,
+  SpaceScale3: theme.SpaceScale3,
+  SpaceScale6: theme.SpaceScale6,
+  SpaceScale8: theme.SpaceScale8,
 
   // Shadow
   BaseBoxShadow: theme.ShadowBase,
   HoverBoxShadow: theme.ShadowHover,
 
   // Focus Outline
-  PrimaryFocusBoxShadowColor: theme.ColorFocusPrimary,
-  DangerFocusBoxShadowColor: theme.ColorFocusDanger,
-  FocusBoxShadowSpread: theme.FocusOutlineWidthBase,
+  PrimaryFocusOutlineColor: theme.FocusOutlineColorPrimary,
+  DangerFocusOutlineColor: theme.FocusOutlineColorDanger,
+  FocusOutlineOffset: theme.FocusOutlineOffsetBase,
+  FocusOutlineStyle: theme.FocusOutlineStyle,
+  FocusOutlineWidth: theme.FocusOutlineWidthBase,
   /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
 
   // Root
@@ -42,7 +44,7 @@ export const theme: ThemeReducer = (theme) => ({
   NormalFontWeight: theme.FontWeightNormal,
   NormalFontStyle: theme.FontStyleNormal,
   FontSize: theme.FontSizeBody,
-  BaseLineHeight: theme.FontLineHeightBase,
+  BodyLineHeight: theme.FontLineHeightBody,
   BodyTextColor: theme.ColorTextBody,
 
   // Border

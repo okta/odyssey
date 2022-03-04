@@ -1,14 +1,21 @@
 {
   "name": "@okta/browserslist-config-odyssey",
-  "version": "0.9.3",
-  "main": "dist/index.js",
+  "version": "0.10.0",
+  "description": "Browserslist config for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
-  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/odyssey",
+    "directory": "packages/browserslist-config-odyssey"
+  },
   "scripts": {
-    "prepare": "tsc"
+    "prepare": "tsc",
+    "prepack": "prepack"
   },
   "devDependencies": {
-    "@okta/odyssey-typescript": "^0.9.3"
+    "@okta/odyssey-typescript": "^0.10.0"
   }
 }

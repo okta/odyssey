@@ -17,14 +17,17 @@
   position: relative;
   margin-block: var(--MarginBlock);
   margin-inline: var(--MarginInline);
-  padding-block: var(--PaddingBlock);
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
   padding-inline: var(--PaddingInline);
-  transition-property: color, background-color, border-color, box-shadow;
+  transition-property: color, background-color, border-color, outline-offset,
+    outline-color;
   transition-duration: var(--TransitionDuration);
   transition-timing-function: var(--TransitionTimingFunction);
   border-width: var(--BorderWidth);
   border-style: var(--BorderStyle);
   border-color: var(--PrimaryBorderColor);
+  outline-color: transparent;
+  outline-offset: 0;
   background-color: var(--PrimaryBackgroundColor);
   color: var(--TextColor);
   font-family: var(--FontFamily);
@@ -39,9 +42,11 @@
   }
 
   &:focus {
-    outline: 0;
+    outline-color: var(--FocusOutlineColor);
+    outline-offset: var(--FocusOutlineOffset);
+    outline-style: var(--FocusOutlineStyle);
+    outline-width: var(--FocusOutlineWidth);
     background-color: var(--PrimaryFocusBackgroundColor);
-    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
   }
 
   &:disabled {
@@ -80,7 +85,6 @@
   }
 
   &:focus {
-    border-color: var(--SecondaryFocusBorderColor);
     background-color: var(--SecondaryFocusBackgroundColor);
     color: var(--SecondaryFocusTextColor);
   }
@@ -101,9 +105,8 @@
   }
 
   &:focus {
+    outline-color: var(--DangerFocusOutlineColor);
     background-color: var(--DangerFocusBackgroundColor);
-    box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
-      var(--DangerFocusBoxShadowColor);
   }
 
   &:disabled {
@@ -114,8 +117,8 @@
 
 .dismissVariant,
 .dismissInvertedVariant {
-  padding-block: calc(var(--DismissPaddingBlock) * 0.5);
-  padding-inline: calc(var(--DismissPaddingInline) * 0.5);
+  padding-block: var(--DismissPaddingBlock);
+  padding-inline: var(--DismissPaddingInline);
   border: 0;
   background-color: var(--DismissBackgroundColor);
   color: var(--DismissTextColor);
@@ -185,11 +188,12 @@
 /* Sizes */
 
 .sSize {
+  padding-block: calc(var(--SmallSizePaddingBlock) - var(--BorderWidth));
+  padding-inline: var(--SmallSizePaddingInline);
   font-size: var(--SmallSizeFontSize);
-  line-height: var(--SmallSizeLineHeight);
 }
 
 .lSize {
-  padding-block: var(--LargeSizePaddingBlock);
+  padding-block: calc(var(--LargeSizePaddingBlock) - var(--BorderWidth));
   padding-inline: var(--LargeSizePaddingInline);
 }

@@ -161,7 +161,6 @@ const Header: FunctionComponent<PropsModalHeader> = (props) => {
         id={modalHeadingId}
         visualLevel="4"
         noEndMargin
-        lineHeight="heading"
         children={children}
       />
     </Box>

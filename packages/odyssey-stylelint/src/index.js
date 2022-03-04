@@ -22,6 +22,7 @@ module.exports = {
     "stylelint-config-property-sort-order-smacss",
     "stylelint-config-prettier",
   ],
+  ignoreFiles: ["**/dist/**/*.scss"],
   rules: {
     "odyssey/header": true,
     "at-rule-empty-line-before": [

@@ -32,10 +32,10 @@
   &.focus {
     + .label {
       &::before {
-        border-color: var(--DotFocusBorderColor);
-        outline: 0;
-        box-shadow: 0 0 0 var(--CircleFocusBoxShadowSpread)
-          var(--CircleFocusBoxShadowColor);
+        outline-color: var(--CircleFocusOutlineColor);
+        outline-offset: var(--CircleFocusOutlineOffset);
+        outline-style: var(--CircleFocusOutlineStyle);
+        outline-width: var(--CircleFocusOutlineWidth);
       }
     }
   }
@@ -90,10 +90,7 @@
     &:focus {
       + .label {
         &::before {
-          border-color: var(--CircleInvalidFocusBorderColor);
-          outline: 0;
-          box-shadow: 0 0 0 var(--CircleInvalidFocusBoxShadowSpread)
-            var(--CircleInvalidFocusBoxShadowColor);
+          outline-color: var(--CircleInvalidFocusOutlineColor);
         }
       }
     }
@@ -122,12 +119,15 @@
     inset-inline-start: 0;
     width: var(--CircleSize);
     height: var(--CircleSize);
-    transition-property: border-color, background, opacity, box-shadow;
+    transition-property: border-color, background, opacity, outline-offset,
+      outline-color;
     transition-duration: var(--TransitionDuration);
     transition-timing-function: var(--TransitionTimingFunction);
     border-width: var(--CircleDotBorderWidth);
     border-style: var(--CircleDotBorderStyle);
     border-color: transparent;
+    outline-color: transparent;
+    outline-offset: 0;
   }
 
   /* Circle */
@@ -155,6 +155,6 @@
   }
 }
 
-.root:last-child > .label {
+.root:last-of-type .label {
   margin-block-end: 0;
 }

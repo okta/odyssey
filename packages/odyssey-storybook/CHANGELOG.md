@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.0](https://github.com/okta/odyssey/compare/v0.9.3...v0.10.0) (2022-03-03)
+
+### Features
+
+- **odyssey-storybook:** force 14px font-size on preview html ([9eb4fdc](https://github.com/okta/odyssey/commit/9eb4fdc2b1cf2fabe379ce7154303bfae33328de))
+- **odyssey-storybook:** update Icon and Link stories with new icons ([67d9d3f](https://github.com/okta/odyssey/commit/67d9d3f482d600d321cc0475bce3615690bdf483))
+
 ### [0.9.3](https://github.com/okta/odyssey/compare/v0.9.2...v0.9.3) (2022-02-24)
 
 **Note:** Version bump only for package @okta/odyssey-react-theme

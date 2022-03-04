@@ -13,7 +13,7 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  LineHeight: theme.FontLineHeightHeading,
+  LineHeight: theme.FontLineHeightUi,
   MarginBlock: 0,
   MarginInline: 0,
 });
