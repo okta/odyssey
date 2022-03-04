@@ -1,17 +1,21 @@
 #!/bin/bash
 
-echo "installing node v12.20.0"
-if setup_service node v12.20.0; then
-  echo "Installed node v12.20.0 successfully"
+NODE_VERSION=v16.14.0
+
+echo "installing node ${NODE_VERSION}"
+if setup_service node $NODE_VERSION; then
+  echo "Installed node ${NODE_VERSION} successfully"
 else
-  echo "node v12.20.0 installation failed."
+  echo "node ${NODE_VERSION} installation failed."
 fi
 
-echo "installing yarn 1.22.10"
-if setup_service yarn 1.22.10; then
-  echo "Yarn v1.22.10 installed."
+YARN_VERSION=1.22.17
+
+echo "installing yarn v${YARN_VERSION}"
+if setup_service yarn $YARN_VERSION; then
+  echo "Yarn v${YARN_VERSION} installed."
 else
-  echo "Yarn installation failed!"
+  echo "Yarn v${YARN_VERSION} installation failed!"
 fi
 
 cd ${OKTA_HOME}/odyssey
