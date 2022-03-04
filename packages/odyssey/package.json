@@ -1,7 +1,7 @@
 {
   "name": "@okta/odyssey",
   "private": true,
-  "version": "0.9.3",
+  "version": "0.10.0",
   "description": "Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
