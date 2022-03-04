@@ -13,9 +13,9 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  PaddingInlineEnd: theme.SpaceRemS,
-  SortIndicatorFontSize: "0.75em",
-  SortIndicatorMarginInlineStart: theme.SpaceRemS,
+  PaddingInlineEnd: theme.SpaceScale1,
+  SortIndicatorFontSize: theme.FontScale1,
+  SortIndicatorMarginInlineStart: theme.SpaceScale1,
   SortIndicatorTextColor: theme.ColorTextBody,
   UnsortedSortIndicatorHoverTextColor: theme.ColorTextBody,
   UnsortedSortIndicatorTextColor: theme.ColorTextSub,

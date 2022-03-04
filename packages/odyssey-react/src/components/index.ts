@@ -20,6 +20,7 @@ export * from "./FieldGroup";
 export * from "./Form";
 export * from "./Heading";
 export * from "./Icon";
+export * from "./Icon/SvgIcon";
 export * from "./Infobox";
 export * from "./Link";
 export * from "./List";

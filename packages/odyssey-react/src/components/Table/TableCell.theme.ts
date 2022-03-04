@@ -16,16 +16,18 @@ export const theme: ThemeReducer = (theme) => ({
   BorderColor: theme.ColorBorderDisplay,
   BorderStyle: theme.BorderStyleBase,
   BorderWidth: theme.BorderWidthBase,
+  MaxWidth: theme.FontLineLengthMax,
+  PaddingBlock: theme.SpaceScale3,
+  PaddingInline: theme.SpaceScale1,
+
   EmptyBackgroundColor: theme.ColorBackgroundDisabled,
-  EmptyPaddingBlock: theme.SpaceRemL,
-  EmptyPaddingInline: theme.SpaceRemXl,
+  EmptyPaddingBlock: theme.SpaceScale3,
+  EmptyPaddingInline: theme.SpaceScale5,
   EmptyTextColor: theme.ColorTextSub,
+
   HeaderCellColumnBorderColor: theme.ColorBorderDisplay,
   HeaderCellColumnBorderStyle: theme.BorderStyleBase,
   HeaderCellColumnBorderWidth: theme.BorderWidthBase,
   HeaderFontWeight: theme.FontWeightBold,
   HeaderTextColor: theme.ColorTextBody,
-  MaxWidth: theme.FontLineLengthMax,
-  PaddingBlock: theme.SpaceRemS,
-  PaddingInline: theme.SpaceRemS,
 });

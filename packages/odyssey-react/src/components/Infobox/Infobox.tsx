@@ -17,7 +17,12 @@ import { useCx, useOmit } from "../../utils";
 import { Box } from "../Box";
 import { Heading } from "../Heading";
 import { Text } from "../Text";
-import { CautionIcon, CompleteIcon, ErrorIcon, GetInfoIcon } from "../Icon";
+import {
+  AlertCircleFilledIcon,
+  AlertTriangleFilledIcon,
+  CheckCircleFilledIcon,
+  InformationCircleFilledIcon,
+} from "../Icon";
 import styles from "./Infobox.module.scss";
 import { theme } from "./Infobox.theme";
 
@@ -63,10 +68,10 @@ interface ContentProps extends CommonProps {
 export type InfoboxProps = HeadingProps | ContentProps;
 
 const icon = {
-  caution: <CautionIcon />,
-  danger: <ErrorIcon />,
-  info: <GetInfoIcon />,
-  success: <CompleteIcon />,
+  caution: <AlertTriangleFilledIcon />,
+  danger: <AlertCircleFilledIcon />,
+  info: <InformationCircleFilledIcon />,
+  success: <CheckCircleFilledIcon />,
 };
 
 /**

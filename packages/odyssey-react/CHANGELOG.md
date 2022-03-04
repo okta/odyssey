@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.0](https://github.com/okta/odyssey/compare/v0.9.3...v0.10.0) (2022-03-03)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-react:** Heading now applies standard line-heights for each
+  semantic and visual heading level. If custom line-heights are desired
+  for these headings, they can now be themed. Alternately, Text may be
+  used to generate custom font-size/line-height combinations.
+- **odyssey-react:** removes "normal" and "heading" line height props in
+  favor of "body" and "heading"s 1-6; (e.g. "heading3")
+- **odyssey-react:** utilizes new type tokens
+- **odyssey-react:** icons deleted and renamed
+- **odyssey-react:** define explicit exports and module type
+
+### Features
+
+- **odyssey-react:** add SvgIcon to exported components ([bbe1ff3](https://github.com/okta/odyssey/commit/bbe1ff36344bbc184838c3e7e9a57a8ed3a820e2))
+- **odyssey-react:** update focus styles to be a11y-friendly ([a9dc7c4](https://github.com/okta/odyssey/commit/a9dc7c41773fddb86ccb37f17f2e93bf6960cb0e))
+- **odyssey-react:** update icons with new designs, update components with icons ([a5430b9](https://github.com/okta/odyssey/commit/a5430b9c9d6921f629884c1a99a081a37e161b7a))
+
+### Code Refactoring
+
+- **odyssey-react:** define explicit exports and module type ([6a194a5](https://github.com/okta/odyssey/commit/6a194a5fa035b8526b163735626d28e09c5df4ae))
+- **odyssey-react:** remove lineheight props from Heading ([d0538d0](https://github.com/okta/odyssey/commit/d0538d0d8b8d21b16d4244241e64c0af5875f87d))
+- **odyssey-react:** update Text props to reflect new line-heights ([f0ef803](https://github.com/okta/odyssey/commit/f0ef803f4e6415c1f23d9e3254e32f99fa482bf3))
+- **odyssey-react:** utilizes new type tokens ([3650b7c](https://github.com/okta/odyssey/commit/3650b7c0df01dc0d66416193a31d9889888e0cd6))
+
 ### [0.9.3](https://github.com/okta/odyssey/compare/v0.9.2...v0.9.3) (2022-02-24)
 
 **Note:** Version bump only for package @okta/odyssey-react-theme

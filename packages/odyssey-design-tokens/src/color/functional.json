@@ -19,7 +19,8 @@
       "base": { "value": "{color.palette.green.500.value}" }
     },
     "neutral": {
-      "base": { "value": "{color.palette.neutral.600.value}" }
+      "base": { "value": "{color.palette.neutral.600.value}" },
+      "dark": { "value": "{color.palette.neutral.900.value}" }
     }
   }
 }

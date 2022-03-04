@@ -27,9 +27,9 @@ $ yarn add --dev @okta/odyssey-postcss-scss
 Reference the plugin within your postcss configuration:
 
 ```js
-const { resolve } = require("path");
 const { default: postcssScss } = require("@okta/odyssey-postcss-scss");
 
+module.exports = () => {
   return {
     plugins: [postcssScss()],
   };

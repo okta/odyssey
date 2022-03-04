@@ -22,16 +22,15 @@
   max-width: var(--MaxWidth);
   margin-block: var(--MarginBlock);
   margin-inline: var(--MarginInline);
-  padding-block: var(--PaddingBlock);
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
   padding-inline: var(--PaddingInline);
-  transition-property: border-color, background-color, box-shadow;
+  transition-property: border-color, background-color;
   transition-duration: var(--TransitionDuration);
   transition-timing-function: var(--TransitionTimingFunction);
   border-width: var(--BorderWidth);
   border-style: var(--BorderStyle);
   border-color: var(--BorderColor);
   background-color: var(--BackgroundColor);
-  box-shadow: 0 0 0 0 var(--FocusBoxShadowColor);
   color: var(--TextColor);
   font-family: var(--FontFamily);
   font-size: var(--FontSize);
@@ -43,8 +42,10 @@
   }
 
   &:focus {
-    outline: 0;
-    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
+    outline-color: var(--FocusOutlineColor);
+    outline-offset: var(--FocusOutlineOffset);
+    outline-style: var(--FocusOutlineStyle);
+    outline-width: var(--FocusOutlineWidth);
   }
 
   &:disabled {
@@ -67,9 +68,7 @@
     border-color: var(--InvalidBorderColor);
 
     &:focus {
-      outline: 0;
-      box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
-        var(--InvalidFocusBoxShadowColor);
+      outline-color: var(--InvalidFocusOutlineColor);
     }
   }
 
@@ -98,16 +97,14 @@
   .focus & {
     @include border-radius(var(--BorderRadius));
 
-    outline: 0;
-    box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
+    outline-color: var(--FocusOutlineColor);
+    outline-offset: var(--FocusOutlineOffset);
+    outline-style: var(--FocusOutlineStyle);
+    outline-width: var(--FocusOutlineWidth);
 
     &.open {
-      box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor),
-        0 2px 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
-
       &.flipped {
-        box-shadow: 0 0 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor),
-          0 -2px 0 var(--FocusBoxShadowSpread) var(--FocusBoxShadowColor);
+        /* Preserving to expose available selectors. */
       }
     }
   }
@@ -138,7 +135,7 @@
 
     &:focus,
     &.focused {
-      box-shadow: none;
+      outline: 0;
     }
 
     .item {
@@ -151,20 +148,11 @@
     &.focused {
       @include border-radius(var(--BorderRadius));
 
-      outline: 0;
-      outline: none;
-      box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
-        var(--InvalidFocusBoxShadowColor);
+      outline-color: var(--InvalidFocusOutlineColor);
 
       &.open {
-        box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
-            var(--InvalidFocusBoxShadowColor),
-          0 2px 0 var(--FocusBoxShadowSpread) var(--InvalidFocusBoxShadowColor);
-
         &.flipped {
-          box-shadow: 0 0 0 var(--FocusBoxShadowSpread)
-              var(--InvalidFocusBoxShadowColor),
-            0 -2px 0 var(--FocusBoxShadowSpread) var(--InvalidFocusBoxShadowColor);
+          /* Preserving to expose available selectors. */
         }
       }
     }
@@ -220,9 +208,10 @@
     }
 
     &:focus {
-      outline: 0;
-      box-shadow: 0 0 0 var(--ButtonFocusBoxShadowSpread)
-        var(--ButtonFocusBoxShadowColor);
+      outline-color: var(--FocusOutlineColor);
+      outline-offset: var(--FocusOutlineOffset);
+      outline-style: var(--FocusOutlineStyle);
+      outline-width: var(--FocusOutlineWidth);
     }
   }
 
@@ -320,7 +309,7 @@
 
   display: inline-block;
   width: 100%;
-  padding-block: $spacing-xs-em;
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
   padding-inline-start: $spacing-s-em;
   padding-inline-end: $spacing-m-em + $spacing-xs-em;
   overflow: hidden;
@@ -333,7 +322,7 @@
   color: $text-body;
   font-family: $body-font-family;
   font-size: $size-body-base;
-  line-height: $base-line-height;
+  line-height: var(--LineHeight);
   vertical-align: top;
 
   &:hover,
@@ -446,8 +435,10 @@
   }
 
   .focused & {
-    @include outline($focus-ring-primary);
-
+    outline-color: var(--FocusOutlineColor);
+    outline-offset: var(--FocusOutlineOffset);
+    outline-style: var(--FocusOutlineStyle);
+    outline-width: var(--FocusOutlineWidth);
     clip-path: inset(0 -4px -4px -4px);
   }
 
@@ -529,7 +520,7 @@
   }
 
   .invalid .focused & {
-    @include outline($focus-ring-danger);
+    outline-color: var(--InvalidFocusOutlineColor);
   }
 
   .invalid .open & {

@@ -15,7 +15,7 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v2
         with:
-          node-version: v12.20.0
+          node-version: v16.14.0
           cache: yarn
       - name: node_modules cache
         uses: actions/cache@v2
@@ -96,6 +96,6 @@ jobs:
       - name: visual regression test
         if: steps.changes.outputs.vrt == 'true'
         env:
-          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+          APPLITOOLS_API_KEY: ${{ secrets.OKTA_474937 }}
           APPLITOOLS_BATCH_ID: ${{ github.event.pull_request.head.sha }}
         run: yarn workspace @okta/odyssey-storybook eyes-storybook -u ${{ env.URL_STORYBOOK }}

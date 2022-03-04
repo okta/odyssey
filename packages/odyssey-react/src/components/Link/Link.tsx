@@ -13,7 +13,7 @@
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactText, ReactElement } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
-import { ExternalIcon } from "../Icon";
+import { ExternalLinkIcon } from "../Icon";
 import { useCx, useOmit } from "../../utils";
 import { Box } from "../Box";
 import styles from "./Link.module.scss";
@@ -72,7 +72,7 @@ export const Link = withTheme(
         {children}
         {external && (
           <span className={styles.indicator} role="presentation">
-            <ExternalIcon />
+            <ExternalLinkIcon />
           </span>
         )}
       </Box>

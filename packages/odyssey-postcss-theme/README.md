@@ -29,7 +29,7 @@ Reference the plugin within your postcss configuration:
 ```js
 const { default: postcssTheme } = require("@okta/odyssey-postcss-theme");
 
-module.exports = (ctx) => {
+module.exports = () => {
   return {
     plugins: [postcssTheme()],
   };

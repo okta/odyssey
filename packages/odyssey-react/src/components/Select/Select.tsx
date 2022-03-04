@@ -20,7 +20,7 @@ import type { ChoicesHTMLSelectElement } from "./useChoices";
 import { forwardRefWithStatics, useOid, useOmit } from "../../utils";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
-import { CaretDownIcon } from "../Icon";
+import { ChevronDownIcon } from "../Icon";
 import { theme } from "./Select.theme";
 import styles from "./Select.module.scss";
 
@@ -151,7 +151,7 @@ export const Select = withTheme(
               {children}
             </select>
             <span className={styles.indicator} role="presentation">
-              <CaretDownIcon />
+              <ChevronDownIcon />
             </span>
           </div>
         </Field>

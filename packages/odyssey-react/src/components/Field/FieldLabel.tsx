@@ -65,7 +65,7 @@ export const FieldLabel = withTheme(
               color="sub"
               fontSize="caption"
               fontWeight="normal"
-              lineHeight="normal"
+              lineHeight="body"
             >
               {optionalLabel}
             </Text>

@@ -16,14 +16,16 @@ export const theme: ThemeReducer = (theme) => ({
   ListBorderBlockEndStyle: theme.BorderStyleBase,
   ListBorderBlockEndWidth: theme.BorderWidthBase,
   ListBorderBlockEndColor: theme.ColorBorderDisplay,
-  PanelPaddingBlock: theme.SpaceRemL,
+
+  PanelPaddingBlock: theme.SpaceScale5,
   PanelPaddingInline: 0,
+
   TabTextColor: theme.ColorPaletteNeutral900,
-  TabFontSize: theme.FontSizeHeading6,
+  TabFontSize: theme.FontSizeBody,
   TabFontWeight: theme.FontWeightBold,
   TabMarginBlock: 0,
-  TabMarginInline: 0,
-  TabPaddingBlock: theme.SpaceRemS,
-  TabPaddingInline: theme.SpaceRemS,
+  TabMarginInline: theme.SpaceScale4,
+  TabPaddingBlock: theme.SpaceScale3,
+  TabPaddingInline: 0,
   TabSelectedBackgroundColor: theme.ColorPrimaryBase,
 });

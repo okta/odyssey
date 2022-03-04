@@ -1,8 +1,0 @@
-{
-  "color": {
-    "focus": {
-      "primary": { "value": "{color.primary.light.value}" },
-      "danger": { "value": "{color.danger.light.value}" }
-    }
-  }
-}

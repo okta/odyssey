@@ -1,30 +1,37 @@
 {
   "name": "@okta/odyssey-react",
-  "version": "0.9.3",
+  "version": "0.10.0",
   "description": "React components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./dist/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/okta/odyssey",
     "directory": "packages/odyssey-react"
   },
   "dependencies": {
-    "@okta/odyssey-react-theme": "^0.9.3",
+    "@okta/odyssey-react-theme": "^0.10.0",
     "choices.js": "^9.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
-    "@okta/browserslist-config-odyssey": "^0.9.3",
-    "@okta/odyssey-babel-preset": "^0.9.3",
-    "@okta/odyssey-icons": "^0.9.3",
-    "@okta/odyssey-postcss-preset": "^0.9.3",
-    "@okta/odyssey-postcss-scss": "^0.9.3",
-    "@okta/odyssey-stylelint": "^0.9.3",
-    "@okta/odyssey-svgr": "^0.9.3",
-    "@okta/odyssey-typescript": "^0.9.3",
+    "@okta/browserslist-config-odyssey": "^0.10.0",
+    "@okta/odyssey-babel-preset": "^0.10.0",
+    "@okta/odyssey-icons": "^0.10.0",
+    "@okta/odyssey-postcss-preset": "^0.10.0",
+    "@okta/odyssey-postcss-scss": "^0.10.0",
+    "@okta/odyssey-stylelint": "^0.10.0",
+    "@okta/odyssey-svgr": "^0.10.0",
+    "@okta/odyssey-typescript": "^0.10.0",
     "@svgr/cli": "^5.5.0",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
@@ -45,7 +52,7 @@
     "react-dom": ">=16 <18"
   },
   "scripts": {
-    "start": "node ./scripts/start.js",
+    "start": "node ./scripts/start.cjs",
     "lint": "eslint .",
     "test": "jest",
     "typecheck": "tsc",
@@ -54,7 +61,7 @@
     "build:clean": "rm -rf dist",
     "build:types": "tsc --project tsconfig.production.json",
     "build:source": "./scripts/buildSource",
-    "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.js) --out-dir ./src/components/Icon/",
+    "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.cjs) --out-dir ./src/components/Icon/",
     "prepack": "prepack"
   }
 }
