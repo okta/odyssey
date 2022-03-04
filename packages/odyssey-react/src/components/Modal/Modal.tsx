@@ -25,8 +25,13 @@ import { Box } from "../Box";
 import { Button as CoreButton } from "../Button";
 import type { ButtonProps as CoreButtonProps } from "../Button";
 import { Heading } from "../Heading";
-import { forwardRefWithStatics, useOid, useCx, useOmit } from "../../utils";
-import { useFocus } from "../../utils/focusHandling";
+import {
+  forwardRefWithStatics,
+  useCx,
+  useFocus,
+  useOid,
+  useOmit,
+} from "../../utils";
 import { CloseIcon } from "../Icon";
 import { theme } from "./Modal.theme";
 import styles from "./Modal.module.scss";
