@@ -4045,18 +4045,18 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
-"@react-aria/focus@3.5.2":
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/@react-aria/focus/-/focus-3.5.2.tgz#250852f328fdb8317b8aa8b01427cf53b68ffca4"
-  integrity sha512-7o40oDWvguFOxflOCOe1xioa3z6LewTLPp9liThmVuQYe7DAso8ZV0E+ssxRWlMkI2Td6CJQek1+en5nVPXvfQ==
+"@react-aria/focus@3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/focus/-/focus-3.5.0.tgz#02b85f97d6114af1eccc0902ce40723b626cb7f9"
+  integrity sha512-Eib75Q6QgQdn8VVVByg5Vipaaj/C//8Bs++sQY7nkomRx4sdArOnXbDppul3YHP6mRfU9VRLvAigEUlReQF/Xw==
   dependencies:
     "@babel/runtime" "^7.6.2"
-    "@react-aria/interactions" "^3.8.1"
-    "@react-aria/utils" "^3.11.2"
-    "@react-types/shared" "^3.11.1"
+    "@react-aria/interactions" "^3.6.0"
+    "@react-aria/utils" "^3.9.0"
+    "@react-types/shared" "^3.9.0"
     clsx "^1.1.1"
 
-"@react-aria/interactions@^3.8.1":
+"@react-aria/interactions@^3.6.0":
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/@react-aria/interactions/-/interactions-3.8.1.tgz#d86aa8fcf93b38e2cf61dda7ef04c9e0a0527056"
   integrity sha512-oE6Yo5BTiqInQCTnERMOALwULJy6TbBv+XXEAmifKWBvjbKSb6jN91lhWOruuYZpWAV+eAawHAk/u/KMzwVVEQ==
@@ -4072,7 +4072,7 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
-"@react-aria/utils@^3.11.2":
+"@react-aria/utils@^3.11.2", "@react-aria/utils@^3.9.0":
   version "3.11.2"
   resolved "https://registry.yarnpkg.com/@react-aria/utils/-/utils-3.11.2.tgz#95747fb362bfcbc591270e5c67b7a38eaa60c187"
   integrity sha512-mbOIPJ2zXgSMQTVXUenl8A8oOUvXPQPmlJv1OqkYPXf74yI5MagpWqbekj8t9Mwrbnj87LL3dY39pWjvlHoJ+w==
@@ -4090,7 +4090,7 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
-"@react-types/shared@^3.11.1":
+"@react-types/shared@^3.11.1", "@react-types/shared@^3.9.0":
   version "3.11.1"
   resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.11.1.tgz#fbe4f28b28f2b22461bbe88c4cce5d1d44d3ae64"
   integrity sha512-2wwUnvLFsWPiNXK5kiKfS3+k6mtWXAtfp76haIow3OyyFLEezWD9F9ZsCtyjNG+R+JlRcmvQRgRjQaGoeUWLKg==
