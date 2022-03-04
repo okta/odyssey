@@ -130,6 +130,18 @@ describe("Modal", () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
+  xit("should automatically focus on the dismiss icon when modal is open", () => {
+    const handleClose = jest.fn();
+    const { container } = render(
+      <Modal open onClose={handleClose} closeMessage={message}>
+        <Modal.Header>{modalHeading}</Modal.Header>
+      </Modal>
+    );
+    // TODO: Determine why the dismiss icon lookup fails below
+    const dismissIcon = container.querySelector("header button");
+    expect(document.activeElement).toBe(dismissIcon);
+  });
+
   a11yCheck(() =>
     render(
       <Modal
