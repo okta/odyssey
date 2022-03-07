@@ -121,15 +121,15 @@ export const Modal = withTheme(
 
     return createPortal(
       <ModalContext.Provider value={context}>
-        <Box
-          {...omitProps}
-          ref={ref}
-          className={componentClass}
-          id={oid}
-          hidden={!open}
-        >
-          <div className={styles.overlay} tabIndex={-1}>
-            <FocusManager autofocus returnFocus trapped>
+        <FocusManager autofocus returnFocus trapped>
+          <Box
+            {...omitProps}
+            ref={ref}
+            className={componentClass}
+            id={oid}
+            hidden={!open}
+          >
+            <div className={styles.overlay} tabIndex={-1}>
               <div
                 className={styles.dialog}
                 role="dialog"
@@ -139,9 +139,9 @@ export const Modal = withTheme(
               >
                 {children}
               </div>
-            </FocusManager>
-          </div>
-        </Box>
+            </div>
+          </Box>
+        </FocusManager>
       </ModalContext.Provider>,
       document.body
     );

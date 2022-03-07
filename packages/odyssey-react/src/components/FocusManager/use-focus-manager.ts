@@ -87,10 +87,26 @@ export function useFocusManager(
           if (mutation.type === "childList") {
             const nextEls = getFocusableChildNodes(node);
             setFocusableEls(nextEls);
+          } else if (
+            mutation.type === "attributes" &&
+            mutation.attributeName === "hidden"
+          ) {
+            // Focus on first element if children of observed node are unhidden (e.g. modal is opened)
+            // NOTE: Do NOT simplify below to "if (mutation.oldValue) ...",
+            //       as an empty string means there is a hidden attribute introduced during the mutation.
+            if (mutation.oldValue !== null) {
+              const nextEls = getFocusableChildNodes(node);
+              nextEls.length && nextEls[0].focus();
+            }
           }
         });
       });
-      observer.observe(node, { childList: true, subtree: true });
+      observer.observe(node, {
+        attributes: true,
+        attributeOldValue: true,
+        childList: true,
+        subtree: true,
+      });
     }
 
     const nextEls = getFocusableChildNodes(node);
