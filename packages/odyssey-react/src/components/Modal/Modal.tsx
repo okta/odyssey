@@ -18,25 +18,17 @@ import type {
   ReactText,
 } from "react";
 import { createPortal } from "react-dom";
-import { FocusScope } from "@react-aria/focus";
 import { withTheme } from "@okta/odyssey-react-theme";
 
 import { Box } from "../Box";
 import { Button as CoreButton } from "../Button";
 import type { ButtonProps as CoreButtonProps } from "../Button";
 import { Heading } from "../Heading";
-import {
-  forwardRefWithStatics,
-  useCx,
-  useFocus,
-  useOid,
-  useOmit,
-} from "../../utils";
+import { forwardRefWithStatics, useCx, useOid, useOmit } from "../../utils";
+import { FocusManager } from "../FocusManager";
 import { CloseIcon } from "../Icon";
 import { theme } from "./Modal.theme";
 import styles from "./Modal.module.scss";
-
-type OptionalHTMLElement = HTMLElement | null;
 
 export type ModalProps = {
   /**
@@ -122,14 +114,9 @@ export const Modal = withTheme(
     const oid = useOid(id);
     const modalDialog = useRef<HTMLDivElement>(null);
     const componentClass = useCx(styles.root, { [styles.openState]: open });
-    const { restoreFocus, setFocus } = useFocus();
-    const lastFocusedElemRef = useRef<OptionalHTMLElement>(null);
 
     if (open) {
-      lastFocusedElemRef.current = setFocus(modalDialog.current);
       onOpen && onOpen();
-    } else {
-      lastFocusedElemRef.current && restoreFocus(lastFocusedElemRef.current);
     }
 
     return createPortal(
@@ -142,7 +129,7 @@ export const Modal = withTheme(
           hidden={!open}
         >
           <div className={styles.overlay} tabIndex={-1}>
-            <FocusScope contain>
+            <FocusManager autofocus returnFocus trapped>
               <div
                 className={styles.dialog}
                 role="dialog"
@@ -152,7 +139,7 @@ export const Modal = withTheme(
               >
                 {children}
               </div>
-            </FocusScope>
+            </FocusManager>
           </div>
         </Box>
       </ModalContext.Provider>,

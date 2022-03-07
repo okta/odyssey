@@ -17,6 +17,7 @@ export * from "./Checkbox";
 export * from "./CircularLoadIndicator";
 export * from "./Field";
 export * from "./FieldGroup";
+export * from "./FocusManager";
 export * from "./Form";
 export * from "./Heading";
 export * from "./Icon";
