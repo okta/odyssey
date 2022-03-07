@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.0](https://github.com/okta/odyssey/compare/v0.9.3...v0.10.0) (2022-03-03)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-react:** Heading now applies standard line-heights for each
+  semantic and visual heading level. If custom line-heights are desired
+  for these headings, they can now be themed. Alternately, Text may be
+  used to generate custom font-size/line-height combinations.
+- **odyssey-react:** removes "normal" and "heading" line height props in
+  favor of "body" and "heading"s 1-6; (e.g. "heading3")
+- **odyssey-design-tokens:** set space scale under "scale"
+- **odyssey-design-tokens:** removes prior space tokens from dict
+- **odyssey-react:** utilizes new type tokens
+- **odyssey-design-tokens:** updates type tokens to match new scale
+- **odyssey-react:** icons deleted and renamed
+- **odyssey-icons:** icons deleted and renamed
+- **odyssey-design-tokens:** migrates all focus tokens under Focus; renames outlines
+  tokens
+- **odyssey-design-tokens:** define explicit exports and module type
+- **odyssey-react:** define explicit exports and module type
+- **odyssey-react-theme:** define explicit exports and module type
+
+### Features
+
+- **browserslist-config-odyssey:** make package public ([d0341bf](https://github.com/okta/odyssey/commit/d0341bfba4d9f1c55c80d663763abfef38e8c636))
+- **odyssey-design-tokens:** add new spacing scale ([faf6f19](https://github.com/okta/odyssey/commit/faf6f19ff1f6a46d925724507ae37c7960685bb3))
+- **odyssey-design-tokens:** make Neutral Dark color available ([a718368](https://github.com/okta/odyssey/commit/a7183684e885016c20ace0d8b3d23a5ad20b48d3))
+- **odyssey-design-tokens:** standardize focus styles for outline ([c6556a0](https://github.com/okta/odyssey/commit/c6556a0bf37011da8ab30082e748c22edf022283))
+- **odyssey-design-tokens:** updates type tokens to match new scale ([b763705](https://github.com/okta/odyssey/commit/b76370513ad7ea74c215de0f732698bc33b52436))
+- **odyssey-icons:** update icons with new designs ([c46a433](https://github.com/okta/odyssey/commit/c46a4338e85ae5d48339fe7c1c0b5902adacb6f1))
+- **odyssey-react-theme:** useTheme hook ([fce5848](https://github.com/okta/odyssey/commit/fce584841b43c3c9dac796f64b240e9085cc7a42))
+- **odyssey-react:** add SvgIcon to exported components ([bbe1ff3](https://github.com/okta/odyssey/commit/bbe1ff36344bbc184838c3e7e9a57a8ed3a820e2))
+- **odyssey-react:** update focus styles to be a11y-friendly ([a9dc7c4](https://github.com/okta/odyssey/commit/a9dc7c41773fddb86ccb37f17f2e93bf6960cb0e))
+- **odyssey-react:** update icons with new designs, update components with icons ([a5430b9](https://github.com/okta/odyssey/commit/a5430b9c9d6921f629884c1a99a081a37e161b7a))
+- **odyssey-storybook:** force 14px font-size on preview html ([9eb4fdc](https://github.com/okta/odyssey/commit/9eb4fdc2b1cf2fabe379ce7154303bfae33328de))
+- **odyssey-storybook:** update Icon and Link stories with new icons ([67d9d3f](https://github.com/okta/odyssey/commit/67d9d3f482d600d321cc0475bce3615690bdf483))
+- **odyssey:** add package for IE 11 testing sandbox ([e30b754](https://github.com/okta/odyssey/commit/e30b754d610addb7746145e973b24427a181e5db))
+
+### Code Refactoring
+
+- **odyssey-design-tokens:** define explicit exports and module type ([fdb56c5](https://github.com/okta/odyssey/commit/fdb56c552b8f7e876969ccdcf583522a727c776b))
+- **odyssey-design-tokens:** removes prior space tokens from dict ([f35b3f5](https://github.com/okta/odyssey/commit/f35b3f5878df7dd94864bfdb4f5143ae724cb244))
+- **odyssey-design-tokens:** set space scale under "scale" ([5ddbe65](https://github.com/okta/odyssey/commit/5ddbe65ea5844365389aef98599444734c47bda3))
+- **odyssey-react-theme:** define explicit exports and module type ([f71a20b](https://github.com/okta/odyssey/commit/f71a20b32182eb0befa58be2e5f996b41bb2e87f))
+- **odyssey-react:** define explicit exports and module type ([6a194a5](https://github.com/okta/odyssey/commit/6a194a5fa035b8526b163735626d28e09c5df4ae))
+- **odyssey-react:** remove lineheight props from Heading ([d0538d0](https://github.com/okta/odyssey/commit/d0538d0d8b8d21b16d4244241e64c0af5875f87d))
+- **odyssey-react:** update Text props to reflect new line-heights ([f0ef803](https://github.com/okta/odyssey/commit/f0ef803f4e6415c1f23d9e3254e32f99fa482bf3))
+- **odyssey-react:** utilizes new type tokens ([3650b7c](https://github.com/okta/odyssey/commit/3650b7c0df01dc0d66416193a31d9889888e0cd6))
+
 ### [0.9.3](https://github.com/okta/odyssey/compare/v0.9.2...v0.9.3) (2022-02-24)
 
 ### Features

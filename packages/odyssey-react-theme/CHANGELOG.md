@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.0](https://github.com/okta/odyssey/compare/v0.9.3...v0.10.0) (2022-03-03)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-react-theme:** define explicit exports and module type
+
+### Features
+
+- **odyssey-react-theme:** useTheme hook ([fce5848](https://github.com/okta/odyssey/commit/fce584841b43c3c9dac796f64b240e9085cc7a42))
+
+### Code Refactoring
+
+- **odyssey-react-theme:** define explicit exports and module type ([f71a20b](https://github.com/okta/odyssey/commit/f71a20b32182eb0befa58be2e5f996b41bb2e87f))
+
 ### [0.9.3](https://github.com/okta/odyssey/compare/v0.9.2...v0.9.3) (2022-02-24)
 
 **Note:** Version bump only for package @okta/odyssey-react-theme
