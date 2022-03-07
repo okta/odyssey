@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-commitlint",
-  "version": "0.9.3",
+  "version": "0.10.0",
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.0](https://github.com/okta/odyssey/compare/v0.9.3...v0.10.0) (2022-03-03)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-design-tokens:** define explicit exports and module type
+
+### Code Refactoring
+
+- **odyssey-design-tokens:** define explicit exports and module type ([fdb56c5](https://github.com/okta/odyssey/commit/fdb56c552b8f7e876969ccdcf583522a727c776b))
+
 ### [0.9.3](https://github.com/okta/odyssey/compare/v0.9.2...v0.9.3) (2022-02-24)
 
 **Note:** Version bump only for package @okta/odyssey-stylelint
