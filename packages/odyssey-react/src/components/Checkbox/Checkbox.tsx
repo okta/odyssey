@@ -15,7 +15,7 @@ import type { ComponentPropsWithRef, ChangeEvent } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { Box } from "../Box";
 import { CheckIcon, SubtractIcon } from "../Icon";
-import { useCx, useOid, useOmit } from "../../utils";
+import { useOid, useOmit } from "../../utils";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./Checkbox.theme";
@@ -70,6 +70,7 @@ export const Checkbox = withTheme(
     } = props;
 
     const oid = useOid(id);
+    const ariaLabelledById = useOid();
     const omitProps = useOmit(rest);
 
     const handleChange = useCallback(
@@ -93,17 +94,13 @@ export const Checkbox = withTheme(
       internalRef.current.indeterminate = indeterminate;
     }, [indeterminate, internalRef]);
 
-    const ariaDescribedBy = useCx(
-      typeof error !== "undefined" && `${oid}-error`
-    );
-
     return (
       <Box position="relative">
         <input
           {...omitProps}
           className={styles.checkbox}
           id={oid}
-          aria-describedby={ariaDescribedBy}
+          aria-labelledby={ariaLabelledById}
           onChange={handleChange}
           ref={internalRef}
           required={required}
@@ -115,8 +112,7 @@ export const Checkbox = withTheme(
               {indeterminate ? <SubtractIcon /> : <CheckIcon />}
             </span>
           </span>
-
-          {label}
+          <span id={ariaLabelledById}>{label}</span>
         </label>
         {error && <Field.Error id={oid}>{error}</Field.Error>}
       </Box>
