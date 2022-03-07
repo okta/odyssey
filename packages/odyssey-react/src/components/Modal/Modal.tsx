@@ -127,9 +127,7 @@ export const Modal = withTheme(
 
     if (open) {
       lastFocusedElemRef.current = setFocus(modalDialog.current);
-      if (onOpen) {
-        onOpen();
-      }
+      onOpen && onOpen();
     } else {
       lastFocusedElemRef.current && restoreFocus(lastFocusedElemRef.current);
     }
