@@ -54,7 +54,20 @@ describe("Checkbox", () => {
     );
 
     expect(getByRole(checkbox)).toHaveAttribute("id", "foo");
-    expect(getByText(label)).toHaveAttribute("for", "foo");
+    expect(getByText(label).closest("label")).toHaveAttribute("for", "foo");
+  });
+
+  it("renders input elem with aria-labelledby attr referencing label text", () => {
+    const { container } = render(
+      <Checkbox label={label} name={name} value={value} />
+    );
+
+    const inputElem = container.querySelector("input");
+    const ariaLabelledById = inputElem?.getAttribute("aria-labelledby");
+    const labelledByIdElem = container.querySelector(
+      `[id="${ariaLabelledById}"]`
+    );
+    expect(labelledByIdElem).toBeInTheDocument();
   });
 
   it("renders a generated id associating the input and label", () => {
