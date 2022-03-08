@@ -44,13 +44,18 @@ export const SvgIcon = withTheme(
     ({ title, children, ...rest }, ref) => {
       const oid = useOid();
       const omitProps = useOmit(rest);
+      const ariaProps = !!title
+        ? {
+            "aria-labelledby": oid,
+          }
+        : {};
 
       return Children.only(
         cloneElement(
           children,
           {
             ...omitProps,
-            "aria-labelledby": oid,
+            ...ariaProps,
             className: styles.root,
             ref: ref,
             role: title ? "img" : "presentation",
