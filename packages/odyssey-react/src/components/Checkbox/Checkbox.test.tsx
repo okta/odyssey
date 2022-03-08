@@ -49,12 +49,13 @@ describe("Checkbox", () => {
   });
 
   it("renders a provided id associating the input and label", () => {
-    const { getByRole, getByText } = render(
+    const { container } = render(
       <Checkbox label={label} name={name} value={value} id="foo" />
     );
-
-    expect(getByRole(checkbox)).toHaveAttribute("id", "foo");
-    expect(getByText(label).closest("label")).toHaveAttribute("for", "foo");
+    const inputElem = container.querySelector("input");
+    const labelElem = container.querySelector("label");
+    expect(inputElem).toHaveAttribute("id", "foo");
+    expect(labelElem).toHaveAttribute("for", "foo");
   });
 
   it("renders input elem with aria-labelledby attr referencing label text", () => {
@@ -71,11 +72,17 @@ describe("Checkbox", () => {
   });
 
   it("renders a generated id associating the input and label", () => {
-    render(<Checkbox label={label} name={name} value={value} />);
+    const { container } = render(
+      <Checkbox label={label} name={name} value={value} />
+    );
 
-    const result = screen.getByLabelText(label);
-    expect(result).toBeInstanceOf(HTMLInputElement);
-    expect(result).toHaveAttribute("name", name);
+    const inputElem = container.querySelector("input");
+    const labelElem = container.querySelector("label");
+    const inputElemId = inputElem?.getAttribute("id");
+    const labelElemForAttrValue = labelElem?.getAttribute("for");
+    expect(inputElem).toBeInstanceOf(HTMLInputElement);
+    expect(labelElem).toBeInstanceOf(HTMLLabelElement);
+    expect(labelElemForAttrValue).toEqual(inputElemId);
   });
 
   it.each([["disabled"], ["checked"], ["required"]])(
