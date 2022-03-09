@@ -12,7 +12,8 @@
     },
     "caution": {
       "light": { "value": "{color.palette.yellow.300.value}" },
-      "base": { "value": "{color.palette.yellow.500.value}" }
+      "base": { "value": "{color.palette.yellow.500.value}" },
+      "dark": { "value": "{color.palette.yellow.900.value}" }
     },
     "success": {
       "light": { "value": "{color.palette.green.300.value}" },
