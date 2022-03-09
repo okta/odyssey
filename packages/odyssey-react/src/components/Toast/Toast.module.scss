@@ -13,19 +13,18 @@
 .root {
   @include border-radius(var(--BorderRadius));
 
-  display: grid;
   position: relative;
-  grid-template-columns: min-content 1fr min-content;
-  align-items: start;
   max-width: var(--MaxWidth);
-  column-gap: var(--ColumnGap);
-  row-gap: var(--RowGap);
   padding-block: var(--PaddingBlock);
-  padding-inline: var(--PaddingInline);
+  padding-inline: calc(
+    var(--IconSize) + var(--IconMargin) + var(--PaddingInline)
+  );
   animation-name: toastIn, toastOut;
   animation-duration: var(--InAnimationDuration), var(--OutAnimationDuration);
   animation-delay: var(--InAnimationDelay), var(--OutAnimationDelay);
-  border: 0;
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
+  border-color: var(--BorderColor);
   background-color: var(--BackgroundColor);
   box-shadow: var(--BoxShadow);
   color: var(--TextColor);
@@ -61,6 +60,9 @@
 }
 
 .icon {
+  position: absolute;
+  inset-block-start: var(--IconInsetBlockStart);
+  inset-inline-start: var(--IconInsetInlineStart);
   width: var(--IconSize);
   color: var(--IconColor);
   font-size: var(--IconSize);
@@ -68,9 +70,9 @@
 }
 
 .heading {
-  margin-block: var(--HeadingMarginBlock);
+  margin-block-start: 0;
+  margin-block-end: var(--HeadingMarginBlock);
   margin-inline: var(--HeadingMarginInline);
-  padding-inline-end: var(--HeadingPaddingInlineEnd);
   color: var(--HeadingTextColor);
   font-size: var(--HeadingFontSize);
   font-weight: var(--HeadingFontWeight);
@@ -87,30 +89,35 @@
 }
 
 .body {
-  grid-column: 2;
   margin-block: 0;
   font-size: var(--BodyFontSize);
 }
 
 .successVariant {
+  border-color: var(--SuccessBorderColor);
   background-color: var(--SuccessBackgroundColor);
+
+  .icon {
+    color: var(--SuccessIconColor);
+  }
 }
 
 .cautionVariant {
+  border-color: var(--CautionBorderColor);
   background-color: var(--CautionBackgroundColor);
-  color: var(--CautionTextColor);
 
   .icon {
     color: var(--CautionIconColor);
   }
-
-  .heading {
-    color: var(--CautionHeadingColor);
-  }
 }
 
 .dangerVariant {
+  border-color: var(--DangerBorderColor);
   background-color: var(--DangerBackgroundColor);
+
+  .icon {
+    color: var(--DangerIconColor);
+  }
 }
 
 @keyframes toastIn {
