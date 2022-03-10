@@ -308,25 +308,17 @@ export default function App(): JSX.Element {
         variant="neutral"
       />
       <ErrorBoundary>
-        <NativeSelect label="NativeSelect">
+        <NativeSelect label="NativeSelect" name="native-select">
           <NativeSelect.Option>
             This is an extremely long option for testing what happens to text
             when it tries to overflow
           </NativeSelect.Option>
           <NativeSelect.Option>Option 2</NativeSelect.Option>
           <NativeSelect.Option>Option 3</NativeSelect.Option>
-          <NativeSelect.Option>Option 4</NativeSelect.Option>
-          <NativeSelect.Option>Option 5</NativeSelect.Option>
-        </NativeSelect>
-        <NativeSelect label="NativeSelect multiple" multiple>
-          <NativeSelect.Option>
-            This is an extremely long option for testing what happens to text
-            when it tries to overflow
-          </NativeSelect.Option>
-          <NativeSelect.Option>Option 2</NativeSelect.Option>
-          <NativeSelect.Option>Option 3</NativeSelect.Option>
-          <NativeSelect.Option>Option 4</NativeSelect.Option>
-          <NativeSelect.Option>Option 5</NativeSelect.Option>
+          <NativeSelect.OptionGroup label="Group">
+            <NativeSelect.Option>Option 4</NativeSelect.Option>
+            <NativeSelect.Option>Option 5</NativeSelect.Option>
+          </NativeSelect.OptionGroup>
         </NativeSelect>
       </ErrorBoundary>
 
