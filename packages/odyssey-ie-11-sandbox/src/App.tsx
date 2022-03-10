@@ -492,12 +492,12 @@ export default function App(): JSX.Element {
         descriptor="Toast"
         label="Status Label"
         labelHidden
-        variant="danger"
+        variant="success"
       />
       <ErrorBoundary>
         <Toast
-          heading="Info Modal"
-          body="Modal text"
+          heading="Info Toast"
+          body="Toast text"
           dismissButtonLabel="Close"
         />
       </ErrorBoundary>
