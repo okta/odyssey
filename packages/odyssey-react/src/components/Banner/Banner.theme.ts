@@ -19,12 +19,16 @@ export const theme: ThemeReducer = (theme) => ({
   PaddingBlock: theme.SpaceScale3,
   PaddingInline: theme.SpaceScale3,
 
+  IconInsetBlockStart: theme.SpaceScale3,
+  IconInsetInlineStart: theme.SpaceScale3,
   IconMarginInlineEnd: theme.SpaceScale3,
   IconSize: theme.FontSizeHeading5,
 
   HeadingMarginInlineEnd: theme.SpaceScale0,
+  HeadingMobileMarginBlockEnd: theme.SpaceScale0,
 
   ContentMarginInlineEnd: theme.SpaceScale3,
+  ContentMobileMarginBlockEnd: theme.SpaceScale0,
 
   DismissButtonInsetInlineEnd: theme.SpaceScale3,
   DismissButtonMarginInlineStart: theme.SpaceScale3,
@@ -33,8 +37,12 @@ export const theme: ThemeReducer = (theme) => ({
   DismissablePaddingInlineEnd: theme.SpaceScale6,
   DismissablePaddingInlineStart: theme.SpaceScale3,
 
-  CautionBackgroundColor: theme.ColorCautionLight,
-  DangerBackgroundColor: theme.ColorDangerLight,
-  InfoBackgroundColor: theme.ColorPrimaryLight,
-  SuccessBackgroundColor: theme.ColorSuccessLight,
+  CautionBackgroundColor: theme.ColorBackgroundCautionLight,
+  CautionIconColor: theme.ColorCautionDark,
+
+  DangerBackgroundColor: theme.ColorBackgroundDangerLight,
+  DangerIconColor: theme.ColorDangerBase,
+
+  InfoBackgroundColor: theme.ColorBackgroundPrimaryLight,
+  InfoIconColor: theme.ColorPrimaryBase,
 });
