@@ -222,7 +222,7 @@ export default function App(): JSX.Element {
         descriptor="Infobox"
         label="Status Label"
         labelHidden
-        variant="success"
+        variant="neutral"
       />
       <Infobox
         actions={

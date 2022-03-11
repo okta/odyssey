@@ -74,4 +74,6 @@ Success.args = {
   variant: "success",
 };
 
+export const HeadingOnly = (): ReactElement => <Infobox heading="Heading" />;
+
 export const ContentOnly = (): ReactElement => <Infobox content={content} />;

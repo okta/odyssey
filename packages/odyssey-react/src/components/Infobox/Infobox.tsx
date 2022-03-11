@@ -15,6 +15,7 @@ import type { ComponentPropsWithRef, ReactNode } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOmit } from "../../utils";
 import { Box } from "../Box";
+import { Heading } from "../Heading";
 import { Text } from "../Text";
 import {
   AlertCircleFilledIcon,
@@ -98,7 +99,7 @@ export const Infobox = withTheme(
         <span className={styles.icon}>{icon[variant]}</span>
 
         <section className={styles.content}>
-          {heading && <h1 className={styles.heading}>{heading}</h1>}
+          {heading && <Heading visualLevel="6" children={heading} />}
           {content && <Text>{content}</Text>}
         </section>
 
