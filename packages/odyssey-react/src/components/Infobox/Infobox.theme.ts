@@ -14,22 +14,41 @@ import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
   // Root
+  BorderRadius: theme.BorderRadiusBase,
+  BorderStyle: theme.BorderStyleBase,
+  BorderWidth: theme.BorderWidthBase,
+  ColumnGap: theme.SpaceScale2,
+  MarginBlockEnd: theme.SpaceScale3,
   // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   MaxLineLength: theme.FontLineLengthMax,
   PaddingBlock: theme.SpaceScale3,
   PaddingInline: theme.SpaceScale3,
-  MarginBlockEnd: theme.SpaceScale3,
-  BorderRadius: theme.BorderRadiusBase,
-  ColumnGap: theme.SpaceScale2,
 
-  IconSize: theme.FontSizeHeading5,
-  IconLineHeight: theme.FontLineHeightHeading5,
+  IconInsetBlockStart: theme.SpaceScale3,
+  IconInsetInlineStart: theme.SpaceScale3,
+  IconMargin: theme.SpaceScale3,
+  IconSize: theme.FontSizeHeading4,
+
+  HeadingFontSize: theme.FontSizeHeading6,
+  HeadingFontWeight: theme.FontWeightBold,
+  HeadingLineHeight: theme.FontLineHeightHeading6,
+  HeadingMarginBlock: theme.SpaceScale0,
+  HeadingMarginInline: 0,
+  HeadingTextColor: theme.ColorTextBody,
 
   ContentMarginBlockEnd: theme.SpaceScale2,
 
   // Variants
   CautionBackgroundColor: theme.ColorBackgroundCautionLight,
+  CautionBorderColor: theme.ColorBackgroundCautionBase,
+  CautionIconColor: theme.ColorCautionDark,
   DangerBackgroundColor: theme.ColorBackgroundDangerLight,
+  DangerBorderColor: theme.ColorBackgroundDangerBase,
+  DangerIconColor: theme.ColorDangerBase,
   InfoBackgroundColor: theme.ColorBackgroundPrimaryLight,
+  InfoBorderColor: theme.ColorBackgroundPrimaryBase,
+  InfoIconColor: theme.ColorPrimaryBase,
   SuccessBackgroundColor: theme.ColorBackgroundSuccessLight,
+  SuccessBorderColor: theme.ColorBackgroundSuccessBase,
+  SuccessIconColor: theme.ColorSuccessBase,
 });
