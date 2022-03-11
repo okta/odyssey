@@ -18,7 +18,7 @@ import type {
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit, useCx } from "../../utils";
-import { SearchIcon } from "../Icon/Search";
+import { SearchIcon } from "../Icon";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./TextInput.theme";
@@ -133,13 +133,20 @@ export const TextInput = withTheme(
 
     const ariaDescribedBy = useCx(
       hint && `${oid}-hint`,
-      typeof error !== "undefined" && `${oid}-error`
+      !!error && `${oid}-error`
     );
+
+    const ariaProps =
+      hint || error
+        ? {
+            "aria-describedby": ariaDescribedBy,
+          }
+        : {};
 
     const input = (
       <input
         {...omitProps}
-        aria-describedby={ariaDescribedBy}
+        {...ariaProps}
         className={styles.root}
         disabled={disabled}
         id={oid}
