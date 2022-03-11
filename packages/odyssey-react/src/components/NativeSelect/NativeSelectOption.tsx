@@ -12,10 +12,7 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactNode } from "react";
-import { withTheme } from "@okta/odyssey-react-theme";
 import { useOmit } from "../../utils";
-import { theme } from "./NativeSelectOption.theme";
-import styles from "./NativeSelectOption.module.scss";
 
 export interface NativeSelectOptionProps
   extends Omit<ComponentPropsWithRef<"option">, "style" | "className"> {
@@ -28,20 +25,18 @@ export interface NativeSelectOptionProps
 /**
  * Native select input to choose one option from a list
  */
-export const NativeSelectOption = withTheme(
-  theme,
-  styles
-)(
-  forwardRef<HTMLOptionElement, NativeSelectOptionProps>((props, ref) => {
-    const { children, ...rest } = props;
-    const omitProps = useOmit(rest);
+export const NativeSelectOption = forwardRef<
+  HTMLOptionElement,
+  NativeSelectOptionProps
+>((props, ref) => {
+  const { children, ...rest } = props;
+  const omitProps = useOmit(rest);
 
-    return (
-      <option {...omitProps} ref={ref} className={styles.root}>
-        {children}
-      </option>
-    );
-  })
-);
+  return (
+    <option {...omitProps} ref={ref}>
+      {children}
+    </option>
+  );
+});
 
 NativeSelectOption.displayName = "NativeSelectOption";
