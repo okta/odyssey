@@ -35,12 +35,6 @@
     display: none;
   }
 
-  &[multiple] {
-    width: auto;
-    /* stylelint-disable-next-line property-disallowed-list */
-    padding: 0;
-  }
-
   &:hover,
   &:focus {
     border-color: var(--HoverFocusBorderColor);
