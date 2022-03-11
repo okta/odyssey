@@ -52,7 +52,7 @@ export default function App(): JSX.Element {
         descriptor="Banner"
         label="Status Label"
         labelHidden
-        variant="danger"
+        variant="success"
       />
       <ErrorBoundary>
         <Banner
