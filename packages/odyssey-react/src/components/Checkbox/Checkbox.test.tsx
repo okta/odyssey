@@ -65,6 +65,24 @@ describe("Checkbox", () => {
     expect(result).toHaveAttribute("name", name);
   });
 
+  it("renders an aria-describedby attribute when an error is present", () => {
+    const error = "oops";
+    render(<Checkbox label={label} name={name} value={value} error="oops" />);
+
+    const errorEl = screen.getByText(error);
+    expect(screen.getByRole(checkbox, { name: label })).toHaveAttribute(
+      "aria-describedby",
+      errorEl.id
+    );
+  });
+
+  it("does not render an aria-describedby attribute when no error is present", () => {
+    render(<Checkbox label={label} name={name} value={value} />);
+    expect(screen.getByRole(checkbox, { name: label })).not.toHaveAttribute(
+      "aria-describedby"
+    );
+  });
+
   it.each([["disabled"], ["checked"], ["required"]])(
     "renders %s attribute",
     (attr: string) => {
