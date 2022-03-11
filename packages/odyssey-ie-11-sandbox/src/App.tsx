@@ -249,7 +249,7 @@ export default function App(): JSX.Element {
         descriptor="List"
         label="Status Label"
         labelHidden
-        variant="danger"
+        variant="success"
       />
       <ErrorBoundary>
         <List listType="unordered">
