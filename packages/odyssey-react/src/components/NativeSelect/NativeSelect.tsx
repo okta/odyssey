@@ -106,7 +106,11 @@ export const NativeSelect = withTheme(
         value,
         ...rest
       } = props;
-      const omitProps = useOmit(rest);
+
+      type RestProps = typeof rest & { multiple?: string };
+      type RestPropKeys = (keyof RestProps)[];
+      const omitProps = useOmit<RestProps, RestPropKeys>(rest, "multiple");
+
       const oid = useOid(id);
 
       const handleChange = useCallback(
