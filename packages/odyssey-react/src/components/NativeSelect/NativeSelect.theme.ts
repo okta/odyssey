@@ -33,6 +33,8 @@ export const theme: ThemeReducer = (theme) => ({
   InvalidBorderColor: theme.ColorBorderDangerBase,
   InvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
   LineHeight: theme.FontLineHeightUi,
+  MarginBlock: 0,
+  MarginInline: 0,
   MaxWidth: theme.FontLineLengthMax,
   PaddingBlock: theme.SpaceScale1,
   PaddingInline: theme.SpaceScale1,
