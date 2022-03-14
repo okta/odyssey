@@ -14,6 +14,8 @@
   appearance: none;
   width: 100%;
   max-width: var(--MaxWidth);
+  margin-block: var(--MarginBlock);
+  margin-inline: var(--MarginInline);
   padding-block: var(--PaddingBlock);
   padding-inline-start: var(--PaddingInline);
   padding-inline-end: calc(
