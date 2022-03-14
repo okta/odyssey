@@ -32,6 +32,7 @@ import {
   AlertTriangleFilledIcon,
   Status,
   Modal,
+  NativeSelect,
   Radio,
   Tabs,
   Table,
@@ -298,6 +299,27 @@ export default function App(): JSX.Element {
             <Modal.Button close>Continue</Modal.Button>
           </Modal.Footer>
         </Modal>
+      </ErrorBoundary>
+
+      <Status
+        descriptor="NativeSelect"
+        label="Status Label"
+        labelHidden
+        variant="neutral"
+      />
+      <ErrorBoundary>
+        <NativeSelect label="NativeSelect" name="native-select">
+          <NativeSelect.Option>
+            This is an extremely long option for testing what happens to text
+            when it tries to overflow
+          </NativeSelect.Option>
+          <NativeSelect.Option>Option 2</NativeSelect.Option>
+          <NativeSelect.Option>Option 3</NativeSelect.Option>
+          <NativeSelect.OptionGroup label="Group">
+            <NativeSelect.Option>Option 4</NativeSelect.Option>
+            <NativeSelect.Option>Option 5</NativeSelect.Option>
+          </NativeSelect.OptionGroup>
+        </NativeSelect>
       </ErrorBoundary>
 
       <Status
