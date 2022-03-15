@@ -110,7 +110,7 @@ describe("Link", () => {
   a11yCheck(() => render(<Link href={href}>{children}</Link>));
   a11yCheck(() =>
     render(
-      <Link href={href} variant="secondary">
+      <Link href={href} variant="monochrome">
         {children}
       </Link>
     )

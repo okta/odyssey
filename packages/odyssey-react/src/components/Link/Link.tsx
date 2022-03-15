@@ -31,9 +31,9 @@ export interface LinkProps
 
   /**
    * The visual variant to be displayed to the user.
-   * @default primary
+   * @default default
    */
-  variant?: "primary" | "secondary";
+  variant?: "default" | "monochrome";
 
   /**
    * The human readable/perceivable value shown to the user
@@ -54,7 +54,7 @@ export const Link = withTheme(
   styles
 )(
   forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-    const { children, variant = "primary", icon, ...rest } = props;
+    const { children, variant = "default", icon, ...rest } = props;
     const classNames = useCx(styles.root, styles[`${variant}Variant`]);
     const omitProps = useOmit(rest);
     const external = rest.target === `_blank`;
