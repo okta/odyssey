@@ -56,17 +56,17 @@ Default.args = {
   children: "Anchor link",
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
+export const Monochrome = Template.bind({});
+Monochrome.args = {
   href: "#anchor",
-  variant: "secondary",
-  children: "Secondary link",
+  variant: "monochrome",
+  children: "Monochrome link",
 };
 
 export const WithIcon = Template.bind({});
 WithIcon.args = {
   href: "#anchor",
-  children: "Secondary link",
+  children: "Monochrome link",
   icon: <InformationCircleFilledIcon />,
 };
 

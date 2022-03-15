@@ -15,11 +15,11 @@ import type { ThemeReducer } from "@okta/odyssey-react-theme";
 export const theme: ThemeReducer = (theme) => ({
   BorderRadius: theme.BorderRadiusBase,
 
-  // Primary Variant
+  // Default Variant
   TextColor: theme.ColorTextPrimary,
 
-  // Secondary Variant
-  SecondaryTextColor: theme.ColorTextBody,
+  // Monochrome Variant
+  MonochromeTextColor: theme.ColorTextBody,
 
   // Focus
   FocusOutlineColor: theme.FocusOutlineColorPrimary,
