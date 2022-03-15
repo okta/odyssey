@@ -1,6 +1,12 @@
 {
   "shadow": {
-    "base": { "value": "0 2px 0 rgba(175, 175, 175, 0.12)" },
-    "hover": { "value": "0 8px 12px rgba(29, 29, 33, 0.12)" }
+    "scale": {
+      "0": {
+        "value": "0px 1px 4px rgba(29, 29, 33, 0.08), 0px 4px 6px rgba(29, 29, 33, 0.01), 0px 5px 15px rgba(29, 29, 33, 0.05)"
+      },
+      "1": {
+        "value": "0px 1px 4px rgba(29, 29, 33, 0.08), 0px 4px 10px rgba(29, 29, 33, 0.08), 0px 8px 30px rgba(29, 29, 33, 0.1)"
+      }
+    }
   }
 }
