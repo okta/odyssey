@@ -45,15 +45,15 @@
 
 /* Variant */
 
-.secondaryVariant {
-  color: var(--SecondaryTextColor);
+.monochromeVariant {
+  color: var(--MonochromeTextColor);
   text-decoration: underline;
 
   &:hover {
-    color: var(--SecondaryTextColor);
+    color: var(--MonochromeTextColor);
   }
 
   &:visited {
-    color: var(--SecondaryTextColor);
+    color: var(--MonochromeTextColor);
   }
 }
