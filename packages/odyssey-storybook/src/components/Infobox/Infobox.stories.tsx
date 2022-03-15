@@ -40,7 +40,7 @@ export default {
 const content =
   "An infobox is a type of alert that provides feedback in response to a user action or system activity.";
 const actions = (
-  <Link href="https://ww.okta.com" variant="secondary">
+  <Link href="https://ww.okta.com" variant="monochrome">
     Link to associated action
   </Link>
 );
