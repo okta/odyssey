@@ -19,7 +19,7 @@ export const theme: ThemeReducer = (theme) => ({
   BorderRadius: theme.BorderRadiusBase,
   BorderStyle: theme.BorderStyleBase,
   BorderWidth: theme.BorderWidthBase,
-  BoxShadow: theme.ShadowHover,
+  BoxShadow: theme.ShadowScale1,
   ColumnGap: theme.SpaceScale1,
   MaxWidth: theme.FontLineLengthMax,
   PaddingBlock: theme.SpaceScale3,
