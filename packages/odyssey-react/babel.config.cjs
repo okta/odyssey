@@ -27,6 +27,7 @@ module.exports = {
 
   env: {
     production: {
+      plugins: ["@okta/fully-specified"],
       presets: [
         [
           "@okta/odyssey-babel-preset",
