@@ -32,6 +32,7 @@ import {
   AlertTriangleFilledIcon,
   Status,
   Modal,
+  NativeSelect,
   Radio,
   Tabs,
   Table,
@@ -52,7 +53,7 @@ export default function App(): JSX.Element {
         descriptor="Banner"
         label="Status Label"
         labelHidden
-        variant="danger"
+        variant="success"
       />
       <ErrorBoundary>
         <Banner
@@ -222,7 +223,7 @@ export default function App(): JSX.Element {
         descriptor="Infobox"
         label="Status Label"
         labelHidden
-        variant="neutral"
+        variant="success"
       />
       <Infobox
         actions={
@@ -249,7 +250,7 @@ export default function App(): JSX.Element {
         descriptor="List"
         label="Status Label"
         labelHidden
-        variant="danger"
+        variant="success"
       />
       <ErrorBoundary>
         <List listType="unordered">
@@ -298,6 +299,27 @@ export default function App(): JSX.Element {
             <Modal.Button close>Continue</Modal.Button>
           </Modal.Footer>
         </Modal>
+      </ErrorBoundary>
+
+      <Status
+        descriptor="NativeSelect"
+        label="Status Label"
+        labelHidden
+        variant="neutral"
+      />
+      <ErrorBoundary>
+        <NativeSelect label="NativeSelect" name="native-select">
+          <NativeSelect.Option>
+            This is an extremely long option for testing what happens to text
+            when it tries to overflow
+          </NativeSelect.Option>
+          <NativeSelect.Option>Option 2</NativeSelect.Option>
+          <NativeSelect.Option>Option 3</NativeSelect.Option>
+          <NativeSelect.OptionGroup label="Group">
+            <NativeSelect.Option>Option 4</NativeSelect.Option>
+            <NativeSelect.Option>Option 5</NativeSelect.Option>
+          </NativeSelect.OptionGroup>
+        </NativeSelect>
       </ErrorBoundary>
 
       <Status
@@ -492,12 +514,12 @@ export default function App(): JSX.Element {
         descriptor="Toast"
         label="Status Label"
         labelHidden
-        variant="danger"
+        variant="success"
       />
       <ErrorBoundary>
         <Toast
-          heading="Info Modal"
-          body="Modal text"
+          heading="Info Toast"
+          body="Toast text"
           dismissButtonLabel="Close"
         />
       </ErrorBoundary>

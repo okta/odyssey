@@ -25,8 +25,8 @@ export const theme: ThemeReducer = (theme) => ({
   SpaceScale8: theme.SpaceScale8,
 
   // Shadow
-  BaseBoxShadow: theme.ShadowBase,
-  HoverBoxShadow: theme.ShadowHover,
+  BaseBoxShadow: theme.ShadowScale0,
+  HoverBoxShadow: theme.ShadowScale1,
 
   // Focus Outline
   PrimaryFocusOutlineColor: theme.FocusOutlineColorPrimary,

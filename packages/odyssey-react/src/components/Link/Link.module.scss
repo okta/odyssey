@@ -11,12 +11,21 @@
  */
 
 .root {
+  @include border-radius(var(--BorderRadius));
+
   color: var(--TextColor);
   text-decoration: none;
 
   &:hover {
     color: var(--TextColor);
     text-decoration: underline;
+  }
+
+  &:focus {
+    outline-color: var(--FocusOutlineColor);
+    outline-offset: var(--FocusOutlineOffset);
+    outline-style: var(--FocusOutlineStyle);
+    outline-width: var(--FocusOutlineWidth);
   }
 
   &:visited {
@@ -36,15 +45,15 @@
 
 /* Variant */
 
-.secondaryVariant {
-  color: var(--SecondaryTextColor);
+.monochromeVariant {
+  color: var(--MonochromeTextColor);
   text-decoration: underline;
 
   &:hover {
-    color: var(--SecondaryTextColor);
+    color: var(--MonochromeTextColor);
   }
 
   &:visited {
-    color: var(--SecondaryTextColor);
+    color: var(--MonochromeTextColor);
   }
 }
