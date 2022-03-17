@@ -9,4 +9,6 @@
 # Resources
 #  - [CODEOWNERS] https://help.github.com/articles/about-codeowners
 
-*                      @okta/design-system
+* @okta/design-system
+* @ganeshsomasundaram-okta
+* @KevinGhadyani-Okta
