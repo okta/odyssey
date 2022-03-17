@@ -68,7 +68,7 @@ const Template: Story<BannerProps> = (props) => {
 
   return (
     <Banner {...props} {...dismissProps}>
-      <Link variant="secondary" href="https://www.okta.com">
+      <Link variant="monochrome" href="https://www.okta.com">
         Action Link
       </Link>
     </Banner>

@@ -45,6 +45,24 @@ describe("TextInput", () => {
     expect(screen.getByRole(textBox, { name: label })).toBeVisible();
   });
 
+  it("renders an aria-describedby attribute when an error is present", () => {
+    const error = "oops";
+    render(<TextInput label={label} error={error} />);
+
+    const errorEl = screen.getByText(error);
+    expect(screen.getByRole(textBox, { name: label })).toHaveAttribute(
+      "aria-describedby",
+      errorEl.id
+    );
+  });
+
+  it("does not render an aria-describedby attribute when no error is present", () => {
+    render(<TextInput label={label} />);
+    expect(screen.getByRole(textBox, { name: label })).not.toHaveAttribute(
+      "aria-describedby"
+    );
+  });
+
   it("renders a provided name for the input", () => {
     render(<TextInput label={label} name="bar" />);
 

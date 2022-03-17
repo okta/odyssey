@@ -25,6 +25,7 @@ export * from "./Infobox";
 export * from "./Link";
 export * from "./List";
 export * from "./Modal";
+export * from "./NativeSelect";
 export * from "./Radio";
 export * from "./ScreenReaderText";
 export * from "./Select";

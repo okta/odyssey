@@ -93,17 +93,16 @@ export const Checkbox = withTheme(
       internalRef.current.indeterminate = indeterminate;
     }, [indeterminate, internalRef]);
 
-    const ariaDescribedBy = useCx(
-      typeof error !== "undefined" && `${oid}-error`
-    );
+    const ariaDescribedBy = useCx(!!error && `${oid}-error`);
+    const ariaProps = error ? { "aria-describedby": ariaDescribedBy } : {};
 
     return (
       <Box position="relative">
         <input
           {...omitProps}
+          {...ariaProps}
           className={styles.checkbox}
           id={oid}
-          aria-describedby={ariaDescribedBy}
           onChange={handleChange}
           ref={internalRef}
           required={required}

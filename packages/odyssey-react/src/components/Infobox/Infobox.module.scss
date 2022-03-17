@@ -13,16 +13,14 @@
 .root {
   @include border-radius(var(--BorderRadius));
 
-  display: grid;
-  grid-template-areas:
-    "icon content"
-    ". actions";
-  grid-template-columns: max-content 1fr;
-  width: 100%;
+  position: relative;
   max-width: calc(var(--MaxLineLength) + calc(var(--PaddingInline) * 2));
   padding-block: var(--PaddingBlock);
-  padding-inline: var(--PaddingInline);
-  column-gap: var(--ColumnGap);
+  padding-inline: calc(
+    var(--IconSize) + var(--IconMargin) + var(--PaddingInline)
+  );
+  border-width: var(--BorderWidth);
+  border-style: var(--BorderStyle);
 
   &:not(:last-child) {
     margin-block-end: var(--MarginBlockEnd);
@@ -30,16 +28,25 @@
 }
 
 .icon {
-  grid-area: icon;
-  align-self: start;
+  position: absolute;
+  inset-block-start: var(--IconInsetBlockStart);
+  inset-inline-start: var(--IconInsetInlineStart);
+  width: var(--IconSize);
   font-size: var(--IconSize);
-  line-height: var(--IconLineHeight);
-  justify-self: start;
+  line-height: 1;
+}
+
+.heading {
+  margin-block-start: 0;
+  margin-block-end: var(--HeadingMarginBlock);
+  margin-inline: var(--HeadingMarginInline);
+  color: var(--HeadingTextColor);
+  font-size: var(--HeadingFontSize);
+  font-weight: var(--HeadingFontWeight);
+  line-height: var(--HeadingLineHeight);
 }
 
 .content {
-  grid-area: content;
-
   &:not(:last-child) {
     margin-block-end: var(--ContentMarginBlockEnd);
   }
@@ -47,24 +54,42 @@
 
 .actions {
   display: flex;
-  grid-area: actions;
-  justify-content: start;
 }
 
 /* Variants */
 
 .infoVariant {
+  border-color: var(--InfoBorderColor);
   background-color: var(--InfoBackgroundColor);
+
+  .icon {
+    color: var(--InfoIconColor);
+  }
 }
 
 .successVariant {
+  border-color: var(--SuccessBorderColor);
   background-color: var(--SuccessBackgroundColor);
+
+  .icon {
+    color: var(--SuccessIconColor);
+  }
 }
 
 .cautionVariant {
+  border-color: var(--CautionBorderColor);
   background-color: var(--CautionBackgroundColor);
+
+  .icon {
+    color: var(--CautionIconColor);
+  }
 }
 
 .dangerVariant {
+  border-color: var(--DangerBorderColor);
   background-color: var(--DangerBackgroundColor);
+
+  .icon {
+    color: var(--DangerIconColor);
+  }
 }

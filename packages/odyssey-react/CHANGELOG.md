@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.0](https://github.com/okta/odyssey/compare/v0.10.0...v0.11.0) (2022-03-17)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-react:** Link variant "primary" renamed "default"; "secondary"
+  renamed "monochrome"
+- **odyssey-react:** Toast "Caution" variant now utilizes the same style
+  API; theme tokens unique to Caution have been removed. HeadingPadding is
+  no longer themeable.
+- **odyssey-react** Infobox theme variable IconLineHeight removed
+
+### Features
+
+- **odyssey-react:** add :focus state to Link ([28cf97f](https://github.com/okta/odyssey/commit/28cf97f01cf9725b8279e82cff0e4df48781b6a2))
+- **odyssey-react:** add NativeSelect component ([c2f0cd2](https://github.com/okta/odyssey/commit/c2f0cd2854e5b6b3f7fde83e69fb9ae64041b797))
+- **odyssey-react:** make Toast IE11-friendly, update styles ([d4d98d6](https://github.com/okta/odyssey/commit/d4d98d6c2d214f67acd9276d8a893023ca855fdb))
+- **odyssey-react:** restore native ui functions for TextInput, Search ([fff58c1](https://github.com/okta/odyssey/commit/fff58c12cc171c4f05886179d603622224fe013d))
+- **odyssey-react:** update Banner styles and make Banner IE11-friendly ([f470462](https://github.com/okta/odyssey/commit/f47046243a59bd9961de0c7df37345320f546c06))
+- **odyssey-react:** update Infobox style+component to match new UI ([40b77d3](https://github.com/okta/odyssey/commit/40b77d3668c510c08570b5118dc9203c9a825ca8))
+
+### Bug Fixes
+
+- **odyssey-react:** build fully qualified module specifiers ([60db4c6](https://github.com/okta/odyssey/commit/60db4c697dcec4f9eccae6a272e8c0bc82e0da03))
+- **odyssey-react:** conditionally display aria-describedby attribute in TextInput component ([54a3863](https://github.com/okta/odyssey/commit/54a38632d6e40a28a754272c8c0d411b68c334a3))
+- **odyssey-react:** conditionally display aria-describedby attribute to avoid a11y warnings ([fa83fd7](https://github.com/okta/odyssey/commit/fa83fd797e2cd650df0b3ba89cd67c1b108f0c43))
+- **odyssey-react:** make Description List IE11-friendly ([0c1e040](https://github.com/okta/odyssey/commit/0c1e0406d429b008eb2c4265df9796bfc22c5f99))
+
+### Code Refactoring
+
+- **odyssey-react:** update Link variant names ([f65d9f2](https://github.com/okta/odyssey/commit/f65d9f23170036cec6d70763aadf6d7c2d0638d2))
+
 ## [0.10.0](https://github.com/okta/odyssey/compare/v0.9.3...v0.10.0) (2022-03-03)
 
 ### ⚠ BREAKING CHANGES

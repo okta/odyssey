@@ -11,11 +11,8 @@
  */
 
 .root {
-  display: grid;
+  display: flex;
   position: relative;
-  grid-template-areas: "icon heading content actions";
-  grid-template-columns: repeat(4, minmax(min-content, max-content));
-  grid-template-rows: 1fr;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -24,19 +21,17 @@
 }
 
 .icon {
-  grid-area: icon;
+  width: var(--IconSize);
   margin-inline-end: var(--IconMarginInlineEnd);
   font-size: var(--IconSize);
   line-height: 1;
 }
 
 .heading {
-  grid-area: heading;
   margin-inline-end: var(--HeadingMarginInlineEnd);
 }
 
 .content {
-  grid-area: content;
   max-width: 100%;
   margin-block-end: 0;
   margin-inline-end: var(--ContentMarginInlineEnd);
@@ -44,7 +39,6 @@
 
 .actions {
   display: flex;
-  grid-area: actions;
   justify-content: end;
 }
 
@@ -68,39 +62,51 @@
 
 .infoVariant {
   background-color: var(--InfoBackgroundColor);
-}
 
-.successVariant {
-  background-color: var(--SuccessBackgroundColor);
+  .icon {
+    color: var(--InfoIconColor);
+  }
 }
 
 .cautionVariant {
   background-color: var(--CautionBackgroundColor);
+
+  .icon {
+    color: var(--CautionIconColor);
+  }
 }
 
 .dangerVariant {
   background-color: var(--DangerBackgroundColor);
+
+  .icon {
+    color: var(--DangerIconColor);
+  }
 }
 
-@media screen and (max-width: (calc(var(--MaxLineLength) * 1.5))) {
+@media screen and (max-width: (calc(33rem * 1.5))) {
   .root {
-    grid-template-areas: initial;
-    grid-template-columns: repeat(2, minmax(min-content, max-content));
-    grid-template-rows: unset;
-    justify-content: start;
-    justify-items: start;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-inline: calc(
+      var(--IconSize) + var(--IconMarginInlineEnd) + var(--PaddingInline)
+    );
   }
 
-  .icon,
-  .heading,
-  .content,
-  .actions {
-    grid-area: initial;
+  .icon {
+    position: absolute;
+    inset-block-start: var(--IconInsetBlockStart);
+    inset-inline-start: var(--IconInsetInlineStart);
   }
 
-  .heading,
-  .content,
-  .actions {
-    grid-column: 2;
+  .heading {
+    margin-block-end: var(--HeadingMobileMarginBlockEnd);
+    margin-inline-end: 0;
+  }
+
+  .content {
+    margin-block-end: var(--ContentMobileMarginBlockEnd);
+    margin-inline-end: 0;
   }
 }
