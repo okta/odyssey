@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.0](https://github.com/okta/odyssey/compare/v0.10.0...v0.11.0) (2022-03-17)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-design-tokens:** Shadow tokens now utilize a scale palette, matching
+  color, spacing, and type.
+
+### Features
+
+- **odyssey-design-tokens:** add token for Caution Dark ([217dc74](https://github.com/okta/odyssey/commit/217dc743bfd6f431d8965ee9c6ddf94877d7ca23))
+
+### Code Refactoring
+
+- **odyssey-design-tokens:** update Shadow names and styles ([78d0fc7](https://github.com/okta/odyssey/commit/78d0fc75a24cfda4239379bf27b39893b02cbe7d))
+
 ## [0.10.0](https://github.com/okta/odyssey/compare/v0.9.3...v0.10.0) (2022-03-03)
 
 ### ⚠ BREAKING CHANGES
