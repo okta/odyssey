@@ -23,7 +23,7 @@ const FOCUSABLE_ITEMS = [
   "input",
   "select",
   "textarea",
-  '[tabindex]:not([tabindex="-1"])',
+  "[tabindex]",
 ];
 
 const FOCUSABLE_ITEMS_SELECTOR = FOCUSABLE_ITEMS.join(",");
@@ -37,9 +37,15 @@ function setFocus(elem: OptionalHTMLElement): OptionalHTMLElement {
   if (!elem) {
     return null;
   }
-  const focusableItems: NodeListOf<HTMLElement> = elem.querySelectorAll(
+  const allItems: NodeListOf<HTMLElement> = elem.querySelectorAll(
     FOCUSABLE_ITEMS_SELECTOR
   );
+  const focusableItems = Array.from(allItems).filter((el) => {
+    if (el.tabIndex === -1) {
+      return false;
+    }
+    return true;
+  });
   // Capture original focused element before setting focus inside modal dialog
   const lastFocusedElement = document.activeElement;
   if (focusableItems.length > 0) {
