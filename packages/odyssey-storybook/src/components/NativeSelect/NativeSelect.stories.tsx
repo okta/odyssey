@@ -10,13 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 import type { Story } from "@storybook/react";
 import { NativeSelect, NativeSelectProps } from "@okta/odyssey-react";
 import { NativeSelect as Source } from "../../../../odyssey-react/src";
-
 import NativeSelectMdx from "./NativeSelect.mdx";
-import { action } from "@storybook/addon-actions";
+
+const options = [
+  "Lalande21185LagrangeAlpha1978Lalande21185LagrangeAlpha1978",
+  "Centauri",
+  "Barnard's Star",
+  "WISE 1049-5319",
+  "Wolf 359",
+  "Sirius A",
+  "Sirius B",
+];
 
 export default {
   title: `Components/NativeSelect`,
@@ -35,19 +43,18 @@ export default {
     label: { control: "text" },
     required: { control: "boolean" },
     disabled: { control: "boolean" },
+    value: {
+      options: options,
+      control: "select",
+    },
   },
 };
 
 const Template: Story<NativeSelectProps> = (args) => (
   <NativeSelect {...args} name="my-select">
-    <NativeSelect.Option>
-      This is an extremely long option for testing what happens to text when it
-      tries to overflow
-    </NativeSelect.Option>
-    <NativeSelect.Option>Option 2</NativeSelect.Option>
-    <NativeSelect.Option>Option 3</NativeSelect.Option>
-    <NativeSelect.Option>Option 4</NativeSelect.Option>
-    <NativeSelect.Option>Option 5</NativeSelect.Option>
+    {options.map((option) => (
+      <NativeSelect.Option key={option} children={option} value={option} />
+    ))}
   </NativeSelect>
 );
 
@@ -55,54 +62,19 @@ export const Default = Template.bind({});
 
 export const OptionGroups = (): JSX.Element => (
   <NativeSelect label="Select Option Groups" name="grouped">
-    <NativeSelect.OptionGroup label="Group 1">
-      <NativeSelect.Option>Option 1</NativeSelect.Option>
-      <NativeSelect.Option>Option 2</NativeSelect.Option>
+    <NativeSelect.OptionGroup label="Planets">
+      <NativeSelect.Option children="Mars" />
+      <NativeSelect.Option children="Mercury" />
+      <NativeSelect.Option children="Venus" />
     </NativeSelect.OptionGroup>
-    <NativeSelect.OptionGroup label="Group 2">
-      <NativeSelect.Option>Option 3</NativeSelect.Option>
-      <NativeSelect.Option>Option 4</NativeSelect.Option>
-      <NativeSelect.Option>Option 5</NativeSelect.Option>
+    <NativeSelect.OptionGroup label="Group B">
+      <NativeSelect.Option children="Option 1" />
+      <NativeSelect.Option children="Option 2" />
     </NativeSelect.OptionGroup>
   </NativeSelect>
 );
 
-export const Controlled = (): JSX.Element => {
-  const [value, setValue] = useState<string | undefined>();
-  const name = "controlled-select";
-
-  function handleChange(
-    _event?: ChangeEvent<HTMLSelectElement> | undefined,
-    value?: string | undefined
-  ) {
-    setValue(value);
-  }
-
-  return (
-    <>
-      <NativeSelect
-        label="Controlled"
-        name={name}
-        value={value}
-        onChange={handleChange}
-        onBlur={action("on-blur")}
-        onFocus={action("on-focus")}
-      >
-        <NativeSelect.Option>Option 1</NativeSelect.Option>
-        <NativeSelect.Option>Option 2</NativeSelect.Option>
-        <NativeSelect.Option>Option 3</NativeSelect.Option>
-        <NativeSelect.Option>Option 4</NativeSelect.Option>
-        <NativeSelect.Option>Option 5</NativeSelect.Option>
-      </NativeSelect>
-      <p
-        style={{
-          backgroundColor: "whitesmoke",
-          fontFamily: "monospace",
-          padding: "8px",
-        }}
-      >
-        {name}: {value}
-      </p>
-    </>
-  );
+export const Controlled = Template.bind({});
+Controlled.args = {
+  value: options[3],
 };
