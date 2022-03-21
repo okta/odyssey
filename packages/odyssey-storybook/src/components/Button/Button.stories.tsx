@@ -74,7 +74,7 @@ Clear.args = {
 export const Dismiss = Template.bind({});
 Dismiss.args = {
   variant: "dismiss",
-  icon: <CloseIcon />,
+  icon: <CloseIcon title="close" />,
   children: undefined,
 };
 
@@ -105,7 +105,7 @@ WithIcon.args = {
 
 export const IconOnly = Template.bind({});
 IconOnly.args = {
-  icon: <SettingsIcon />,
+  icon: <SettingsIcon title="settings" />,
   children: undefined,
 };
 
