@@ -31,6 +31,8 @@ const config = {
   ie11,
   modern,
   production: all,
+  development: modern,
+  test: modern,
 };
 
 module.exports = config;
