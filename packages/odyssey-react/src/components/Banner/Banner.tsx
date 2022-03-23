@@ -17,7 +17,6 @@ import { useCx, useOmit } from "../../utils";
 import { Box } from "../Box";
 import { Heading } from "../Heading";
 import { Button } from "../Button";
-import { Text } from "../Text";
 import type { ButtonProps } from "../Button";
 import {
   AlertTriangleFilledIcon,
@@ -114,16 +113,8 @@ export const Banner = withTheme(
             <Heading visualLevel="6" noEndMargin children={heading} />
           </div>
         )}
-        {content && (
-          <span className={styles.content}>
-            <Text as="p" children={content} />
-          </span>
-        )}
-        {children && (
-          <section className={styles.actions}>
-            <Text>{children}</Text>
-          </section>
-        )}
+        {content && <p className={styles.content}>{content}</p>}
+        {children && <section className={styles.actions}>{children}</section>}
         {onDismiss && (
           <span className={styles.dismissButton}>
             <Button
