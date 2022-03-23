@@ -34,7 +34,7 @@ module.exports = (ctx) => {
   );
 
   const partials = `functions colors mixins tokens`.split(" ");
-  const importDir = resolve(require.resolve("@okta/odyssey"), "../abstracts");
+  const importDir = resolve(__dirname, "src/scss/abstracts");
   const importData = partials
     .map((partial) => `@import '${importDir}/${partial}';`)
     .join("\n");

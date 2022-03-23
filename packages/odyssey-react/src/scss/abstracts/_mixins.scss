@@ -83,6 +83,7 @@
   font-size: $size-body-base;
   line-height: $base-line-height;
 
+  /* stylelint-disable selector-class-pattern */
   &:hover,
   &:focus,
   &.is-ods-input-hover,
@@ -94,6 +95,7 @@
   &.is-ods-input-focus {
     @include outline;
   }
+  /* stylelint-enable selector-class-pattern */
 
   &:disabled {
     opacity: 1;
@@ -111,6 +113,7 @@
     }
   }
 
+  /* stylelint-disable selector-class-pattern */
   &:invalid,
   &.is-ods-input-invalid {
     border-color: $color-danger-base;
@@ -119,6 +122,7 @@
       @include outline($focus-ring-danger);
     }
   }
+  /* stylelint-enable selector-class-pattern */
 
   &::placeholder {
     color: $text-sub;
