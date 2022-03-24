@@ -14,6 +14,10 @@ import React from "react";
 import { Story } from "@storybook/react";
 import { Button as Source } from "../../../../odyssey-react/src";
 import {
+  ColorBackgroundBase,
+  ColorPrimaryBase,
+} from "@okta/odyssey-design-tokens";
+import {
   Button,
   ButtonProps,
   CloseIcon,
@@ -70,7 +74,7 @@ Clear.args = {
 export const Dismiss = Template.bind({});
 Dismiss.args = {
   variant: "dismiss",
-  icon: <CloseIcon />,
+  icon: <CloseIcon title="close" />,
   children: undefined,
 };
 
@@ -101,21 +105,21 @@ WithIcon.args = {
 
 export const IconOnly = Template.bind({});
 IconOnly.args = {
-  icon: <SettingsIcon />,
+  icon: <SettingsIcon title="settings" />,
   children: undefined,
 };
 
 export const Theme: Story<
   ButtonProps & {
-    ColorBackgroundPrimary: string;
-    ColorBackgroundSecondary: string;
+    PrimaryBackgroundColor: string;
+    SecondaryBackgroundColor: string;
   }
 > = (props) => {
-  const { ColorBackgroundPrimary, ColorBackgroundSecondary, ...rest } = props;
+  const { PrimaryBackgroundColor, SecondaryBackgroundColor, ...rest } = props;
   return (
     <ThemeProvider
       theme={{
-        [Button.theme]: { ColorBackgroundPrimary, ColorBackgroundSecondary },
+        [Button.theme]: { PrimaryBackgroundColor, SecondaryBackgroundColor },
       }}
     >
       <Button {...rest} />
@@ -123,15 +127,15 @@ export const Theme: Story<
   );
 };
 Theme.argTypes = {
-  ColorBackgroundPrimary: {
+  PrimaryBackgroundColor: {
     name: "primary background",
-    defaultValue: "#1662dd",
+    defaultValue: ColorPrimaryBase,
     type: "string",
     control: "color",
   },
-  ColorBackgroundSecondary: {
+  SecondaryBackgroundColor: {
     name: "secondary background",
-    defaultValue: "#fff",
+    defaultValue: ColorBackgroundBase,
     type: "string",
     control: "color",
   },

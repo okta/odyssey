@@ -11,12 +11,14 @@
  */
 
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { Modal } from ".";
+import { useState } from "react";
 
 const role = "dialog";
 const modalHeading = "Modal Heading";
 const message = "Close modal";
+const callToAction = "Open Modal";
 
 describe("Modal", () => {
   it("renders visibly into the document", () => {
@@ -128,6 +130,46 @@ describe("Modal", () => {
     fireEvent.click(screen.getByText("Continue"));
 
     expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+
+  const FocusWrapper = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <>
+        <button onClick={() => setIsOpen(true)}>{callToAction}</button>
+        <Modal
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          closeMessage={message}
+        >
+          <Modal.Header>{modalHeading}</Modal.Header>
+        </Modal>
+      </>
+    );
+  };
+
+  it("should initially focus on modal's dismiss icon when opened", async () => {
+    render(<FocusWrapper />);
+    const dismissIcon = screen.getByTitle(message).closest("button");
+    screen.getByText(callToAction).click();
+    await waitFor(() => {
+      expect(document.activeElement).toBe(dismissIcon);
+    });
+  });
+
+  it("should restore focus to original focused element when modal is closed", async () => {
+    render(<FocusWrapper />);
+    const openButton = screen.getByText(callToAction);
+    const closeButton = screen.getByTitle(message).closest("button");
+    openButton.focus();
+    openButton.click();
+    await waitFor(() => {
+      expect(screen.getByText(modalHeading)).toBeVisible();
+    });
+    closeButton?.click();
+    await waitFor(() => {
+      expect(document.activeElement).toBe(openButton);
+    });
   });
 
   a11yCheck(() =>
