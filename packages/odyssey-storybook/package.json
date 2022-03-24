@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -11,10 +11,10 @@
   },
   "devDependencies": {
     "@applitools/eyes-storybook": "^3.24.0",
-    "@okta/odyssey-design-tokens": "^0.11.0",
-    "@okta/odyssey-react": "^0.11.0",
-    "@okta/odyssey-react-theme": "^0.11.0",
-    "@okta/odyssey-typescript": "^0.11.0",
+    "@okta/odyssey-design-tokens": "^0.11.1",
+    "@okta/odyssey-react": "^0.11.1",
+    "@okta/odyssey-react-theme": "^0.11.1",
+    "@okta/odyssey-typescript": "^0.11.1",
     "@pxblue/storybook-rtl-addon": "^1.0.1",
     "@storybook/addon-a11y": "^6.3.7",
     "@storybook/addon-actions": "^6.3.7",

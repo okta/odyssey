@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.11.1](https://github.com/okta/odyssey/compare/v0.11.0...v0.11.1) (2022-03-24)
+
+### Bug Fixes
+
+- **odyssey-react:** improve keyboard focus behavior for Modal component ([c5d8481](https://github.com/okta/odyssey/commit/c5d84816242122a05038289d4ce828aed650e222))
+- **odyssey-storybook:** controls for Button theme story ([7301868](https://github.com/okta/odyssey/commit/7301868c0d07990af37f74dd97b3bccdb48b7e6b))
+- **odyssey-storybook:** improve Button doc stories ([2f7fdf0](https://github.com/okta/odyssey/commit/2f7fdf0dc3d7cd51a604d71d7920fc5155897ed4))
+- **odyssey-storybook:** improve NativeSelect doc stories ([d2e4044](https://github.com/okta/odyssey/commit/d2e404412a90fe07ec78c947097643b408f0f5a1))
+
 ## [0.11.0](https://github.com/okta/odyssey/compare/v0.10.0...v0.11.0) (2022-03-17)
 
 ### Features
