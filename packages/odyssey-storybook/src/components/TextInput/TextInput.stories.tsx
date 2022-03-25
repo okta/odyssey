@@ -67,8 +67,10 @@ KitchenSink.args = {
   required: false,
 };
 
-export const Search = Template.bind({});
-Search.args = {
+export const Faux = Template.bind({});
+Faux.args = {
   defaultValue: "Search Planets",
-  type: "search",
+  type: "faux",
+  prefix: "+1",
+  suffix: "lbs.",
 };

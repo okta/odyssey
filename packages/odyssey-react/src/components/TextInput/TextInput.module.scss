@@ -13,8 +13,7 @@
 .root {
   @include border-radius(var(--BorderRadius));
 
-  display: block;
-  position: relative;
+  display: flex;
   width: 100%;
   max-width: var(--MaxWidth);
   margin-block: var(--MarginBlock);
@@ -34,11 +33,11 @@
   line-height: var(--LineHeight);
 
   &:hover,
-  &:focus {
+  &:focus-within {
     border-color: var(--HoverFocusBorderColor);
   }
 
-  &:focus {
+  &:focus-within {
     outline-color: var(--FocusOutlineColor);
     outline-offset: var(--FocusOutlineOffset);
     outline-style: var(--FocusOutlineStyle);
@@ -65,7 +64,7 @@
     }
   }
 
-  &:invalid:focus {
+  &:invalid:focus-within {
     outline-color: var(--InvalidFocusOutlineColor);
   }
 
@@ -81,16 +80,25 @@
   }
 }
 
-.outer {
-  position: relative;
+.prefix {
+  color: var(--PrefixTextColor);
+  padding-inline-end: var(--PaddingInline);
 }
 
-.indicator {
-  position: absolute;
-  inset-block-start: 50%;
-  inset-inline-start: var(--IndicatorInsetInlineStart);
-  transform: translateY(-50%);
-  font-size: var(--IndicatorSize);
-  line-height: 1;
-  pointer-events: none;
+.suffix {
+  color: var(--SuffixTextColor);
+  padding-inline-start: var(--PaddingInline);
+}
+
+.input {
+  flex: 1;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  border: 0;
+
+  &:focus {
+    outline: 0;
+  }
 }

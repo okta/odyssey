@@ -18,7 +18,7 @@ import type {
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit, useCx } from "../../utils";
-import { SearchIcon } from "../Icon";
+//import { SearchIcon } from "../Icon";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./TextInput.theme";
@@ -39,7 +39,7 @@ export interface TextInputProps
    * The underlying input element type
    * @default text
    */
-  type?: "text" | "email" | "url" | "tel" | "search" | "password";
+  type?: "text" | "email" | "url" | "tel" | "faux" | "password";
 
   /**
    * The underlying input element name attribute
@@ -62,6 +62,16 @@ export interface TextInputProps
    * The underlying input element placeholder attribute
    */
   placeholder?: string;
+
+  /**
+   * An optional prefix displayed before the input
+   */
+  prefix?: string;
+
+  /**
+   * An optional suffix displayed after the input
+   */
+  suffix?: string;
 
   /**
    * The input element value for controlled components
@@ -113,6 +123,8 @@ export const TextInput = withTheme(
       readonly = false,
       required,
       type = "text",
+      prefix,
+      suffix,
       value,
       error,
       hint,
@@ -147,7 +159,7 @@ export const TextInput = withTheme(
       <input
         {...omitProps}
         {...ariaProps}
-        className={styles.root}
+        className={styles.input}
         disabled={disabled}
         id={oid}
         name={name}
@@ -164,13 +176,20 @@ export const TextInput = withTheme(
       />
     );
 
-    const search = (
-      <span className={styles.outer}>
+    const faux = (
+      <div className={styles.root}>
+        {prefix && (
+          <span className={styles.prefix} aria-hidden="true">
+            {prefix}
+          </span>
+        )}
         {input}
-        <span className={styles.indicator} role="presentation">
-          <SearchIcon />
-        </span>
-      </span>
+        {suffix && (
+          <span className={styles.suffix} aria-hidden="true">
+            {suffix}
+          </span>
+        )}
+      </div>
     );
 
     return (
@@ -179,11 +198,11 @@ export const TextInput = withTheme(
         hint={hint}
         inputId={oid}
         label={label}
-        labelHidden={type === "search"}
+        labelHidden={type === "faux"}
         optionalLabel={optionalLabel}
         required={required}
       >
-        {type === "search" ? search : input}
+        {type === "faux" ? faux : input}
       </Field>
     );
   })
