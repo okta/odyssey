@@ -22,7 +22,7 @@ module.exports = {
 
   matchLevel: "Strict",
   showStorybookOutput: true,
-  testConcurrency: 10,
+  testConcurrency: 20,
   browser: [{ width: 1024, height: 768, name: "chrome" }],
   accessibilityValidation: {
     level: "AA",
