@@ -16,7 +16,9 @@
   width: 100%;
   padding-block: 0;
   padding-inline-start: 0;
-  padding-inline-end: calc(1em + var(--PaddingInlineEnd));
+  padding-inline-end: calc(
+    (2 * var(--SortIndicatorFontSize)) + var(--PaddingInlineEnd)
+  );
   border: 0;
   background: none;
   font-family: inherit;
