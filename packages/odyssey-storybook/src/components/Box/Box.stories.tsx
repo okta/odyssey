@@ -50,6 +50,36 @@ Default.args = {
   focusBorderColor: "primary",
 };
 
+export const TooLightContrast = (): ReactElement => (
+  <span style={{ color: "snow" }}>
+    <Box
+      as="span"
+      backgroundColor="default"
+      borderColor="display"
+      color="inherit"
+      padding="m"
+      marginBottom="s"
+    >
+      This should fail color contrast
+    </Box>
+  </span>
+);
+
+export const TooDarkContrast = (): ReactElement => (
+  <span style={{ color: "midnightblue" }}>
+    <Box
+      as="span"
+      backgroundColor="primary-dark"
+      borderColor="display"
+      color="inherit"
+      padding="m"
+      marginBottom="s"
+    >
+      This should fail color contrast
+    </Box>
+  </span>
+);
+
 export const Background = (): ReactElement => (
   <>
     <Box
