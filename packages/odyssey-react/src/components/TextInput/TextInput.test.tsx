@@ -153,5 +153,25 @@ describe("TextInput", () => {
     expect(ref).toHaveBeenLastCalledWith(screen.getByRole(textBox));
   });
 
+  it("renders the prefix", () => {
+    render(<TextInput label={label} prefix="test prefix" />);
+    const prefixElement = screen.getByText("test prefix");
+    expect(prefixElement).toBeInTheDocument();
+    expect(prefixElement.className).toEqual("prefix");
+  });
+
+  it("renders the suffix", () => {
+    render(<TextInput label={label} suffix="test suffix" />);
+    const suffixElement = screen.getByText("test suffix");
+    expect(suffixElement).toBeInTheDocument();
+    expect(suffixElement.className).toEqual("suffix");
+  });
+
+  it.only("doesn't render the prefix if type is search", () => {
+    render(<TextInput label={label} prefix="test prefix" type="search" />);
+    expect(screen.queryByText("test prefix")).toBeNull();
+    expect(screen.getByLabelText(label)).toHaveAttribute("type", "search");
+  });
+
   a11yCheck(() => render(<TextInput label="foo" />));
 });

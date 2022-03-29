@@ -45,6 +45,8 @@ export default {
     onChange: { control: false },
     onBlur: { control: false },
     onFocus: { control: false },
+    prefix: { control: "text" },
+    suffix: { control: "text" },
   },
 };
 
@@ -71,4 +73,19 @@ export const Search = Template.bind({});
 Search.args = {
   defaultValue: "Search Planets",
   type: "search",
+  prefix: "testing",
+};
+
+export const Prefix = Template.bind({});
+Prefix.args = {
+  label: "Phone Number",
+  type: "tel",
+  prefix: "+1",
+};
+
+export const Suffix = Template.bind({});
+Suffix.args = {
+  label: "Time til destination",
+  type: "text",
+  suffix: "minutes",
 };
