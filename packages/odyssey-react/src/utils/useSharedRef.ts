@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,11 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { cx, useCx } from "./cx";
-export { forwardRefWithStatics } from "./forwardRefWithStatics";
-export { oid, useOid } from "./oid";
-export { omit, useOmit } from "./omit";
-export { toCamelCase, toPascalCase } from "./convertCase";
-export { useFocus } from "./focusHandling";
-export type { PolymorphicForwardRef } from "./polymorphic";
-export { useSharedRef } from "./useSharedRef";
+import { ForwardedRef, RefObject, useEffect, useRef } from "react";
+
+export function useSharedRef<T>(ref?: ForwardedRef<T>): RefObject<T> {
+  const internalRef = useRef<T>(null);
+
+  useEffect(() => {
+    if (!ref) {
+      return;
+    }
+    if (typeof ref === "function") {
+      ref(internalRef.current);
+    } else {
+      ref.current = internalRef.current;
+    }
+  }, [ref, internalRef]);
+
+  return internalRef;
+}
