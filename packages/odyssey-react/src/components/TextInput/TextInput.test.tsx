@@ -167,7 +167,7 @@ describe("TextInput", () => {
     expect(suffixElement.className).toEqual("suffix");
   });
 
-  it.only("doesn't render the prefix if type is search", () => {
+  it("doesn't render the prefix if type is search", () => {
     render(<TextInput label={label} prefix="test prefix" type="search" />);
     expect(screen.queryByText("test prefix")).toBeNull();
     expect(screen.getByLabelText(label)).toHaveAttribute("type", "search");

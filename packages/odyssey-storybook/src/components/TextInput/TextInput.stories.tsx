@@ -73,7 +73,6 @@ export const Search = Template.bind({});
 Search.args = {
   defaultValue: "Search Planets",
   type: "search",
-  prefix: "testing",
 };
 
 export const Prefix = Template.bind({});
