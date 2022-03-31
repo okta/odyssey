@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.11.2](https://github.com/okta/odyssey/compare/v0.11.1...v0.11.2) (2022-03-31)
+
+### Bug Fixes
+
+- **odyssey-react:** Link Icons now match text height ([6deee76](https://github.com/okta/odyssey/commit/6deee765b215893991c034beaac63dfe7159d7d1))
+- **odyssey-react:** TableSortButton padding now accounts for two Icons ([368d509](https://github.com/okta/odyssey/commit/368d50998c9afae168166f993be6c388348a4673))
+
 ### [0.11.1](https://github.com/okta/odyssey/compare/v0.11.0...v0.11.1) (2022-03-24)
 
 ### Bug Fixes
