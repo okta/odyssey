@@ -103,7 +103,7 @@ interface CommonProps
   onFocus?: FocusEventHandler<HTMLInputElement>;
 }
 
-interface SearchProps extends Omit<CommonProps, "type" | "prefix"> {
+interface SearchProps extends Omit<CommonProps, "type" | "prefix" | "suffix"> {
   type: "search";
   prefix?: never;
   suffix?: never;
