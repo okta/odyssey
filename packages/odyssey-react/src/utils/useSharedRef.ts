@@ -10,8 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ForwardedRef, RefObject, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import type { ForwardedRef, RefObject } from "react";
 
+/**
+ * hook to intercept and share a ref with an upstream client
+ */
 export function useSharedRef<T>(ref?: ForwardedRef<T>): RefObject<T> {
   const internalRef = useRef<T>(null);
 
