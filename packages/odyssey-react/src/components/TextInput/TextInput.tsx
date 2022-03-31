@@ -157,6 +157,10 @@ export const TextInput = withTheme(
       !!error && `${oid}-error`
     );
 
+    const decoratedSuffix = useCx(styles.decoration, suffix && styles.suffix);
+
+    const decoratedPrefix = useCx(styles.decoration, prefix && styles.prefix);
+
     const ariaProps =
       hint || error
         ? {
@@ -177,7 +181,7 @@ export const TextInput = withTheme(
         <div className={styles.root}>
           {(prefix || isSearchTextInput) && (
             <span
-              className={styles.prefix}
+              className={decoratedPrefix}
               aria-hidden="true"
               onClick={setFocus}
             >
@@ -202,9 +206,9 @@ export const TextInput = withTheme(
             defaultValue={defaultValue}
             value={value}
           />
-          {suffix && (
+          {suffix && !isSearchTextInput && (
             <span
-              className={styles.suffix}
+              className={decoratedSuffix}
               aria-hidden="true"
               onClick={setFocus}
             >
