@@ -180,20 +180,6 @@ describe("TextInput", () => {
     expect(suffixElement.className).toContain("suffix");
   });
 
-  it("doesn't render the prefix or suffix if type is search", () => {
-    render(
-      <TextInput
-        label={label}
-        prefix="test prefix"
-        type="search"
-        suffix="test suffix"
-      />
-    );
-    expect(screen.queryByText("test prefix")).toBeNull();
-    expect(screen.queryByText("test suffix")).toBeNull();
-    expect(screen.getByLabelText(label)).toHaveAttribute("type", "search");
-  });
-
   it("gives the input focus when prefix is clicked", () => {
     render(<TextInput label={label} prefix="test prefix" />);
     const prefixElement = screen.getByText("test prefix");
