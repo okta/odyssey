@@ -71,22 +71,18 @@
   &::placeholder {
     color: var(--PlaceholderTextColor);
   }
+}
 
-  &[type="search"] {
-    padding-inline-start: calc(
-      var(--IndicatorSize) + var(--IndicatorInsetInlineStart) +
-        var(--SearchPaddingInlineStart)
-    );
-  }
+.decoration {
+  color: var(--StaticTextColor);
+  cursor: default;
 }
 
 .prefix {
-  color: var(--PrefixTextColor);
   padding-inline-end: var(--PaddingInline);
 }
 
 .suffix {
-  color: var(--SuffixTextColor);
   padding-inline-start: var(--PaddingInline);
 }
 
