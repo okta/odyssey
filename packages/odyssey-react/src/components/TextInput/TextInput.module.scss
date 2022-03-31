@@ -73,7 +73,8 @@
   }
 }
 
-.decoration {
+.prefix,
+.suffix {
   color: var(--StaticTextColor);
   cursor: default;
 }
