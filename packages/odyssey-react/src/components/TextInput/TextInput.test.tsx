@@ -20,6 +20,19 @@ const textBox = "textbox";
 const label = "Destination";
 
 describe("TextInput", () => {
+  beforeEach(() => {
+    jest
+      .spyOn(window, "requestAnimationFrame")
+      .mockImplementation((callback: FrameRequestCallback): number => {
+        callback(0);
+        return 0;
+      });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("renders into the document", () => {
     render(<TextInput label={label} />);
 
@@ -157,20 +170,44 @@ describe("TextInput", () => {
     render(<TextInput label={label} prefix="test prefix" />);
     const prefixElement = screen.getByText("test prefix");
     expect(prefixElement).toBeInTheDocument();
-    expect(prefixElement.className).toEqual("prefix");
+    expect(prefixElement.className).toContain("prefix");
   });
 
   it("renders the suffix", () => {
     render(<TextInput label={label} suffix="test suffix" />);
     const suffixElement = screen.getByText("test suffix");
     expect(suffixElement).toBeInTheDocument();
-    expect(suffixElement.className).toEqual("suffix");
+    expect(suffixElement.className).toContain("suffix");
   });
 
-  it("doesn't render the prefix if type is search", () => {
-    render(<TextInput label={label} prefix="test prefix" type="search" />);
+  it("doesn't render the prefix or suffix if type is search", () => {
+    render(
+      <TextInput
+        label={label}
+        prefix="test prefix"
+        type="search"
+        suffix="test suffix"
+      />
+    );
     expect(screen.queryByText("test prefix")).toBeNull();
+    expect(screen.queryByText("test suffix")).toBeNull();
     expect(screen.getByLabelText(label)).toHaveAttribute("type", "search");
+  });
+
+  it("gives the input focus when prefix is clicked", () => {
+    render(<TextInput label={label} prefix="test prefix" />);
+    const prefixElement = screen.getByText("test prefix");
+    prefixElement.click();
+    const inputElement = screen.getByRole(textBox);
+    expect(inputElement).toHaveFocus();
+  });
+
+  it("gives the  input focus when suffix is clicked", () => {
+    render(<TextInput label={label} suffix="test suffix" />);
+    const prefixElement = screen.getByText("test suffix");
+    prefixElement.click();
+    const inputElement = screen.getByRole(textBox);
+    expect(inputElement).toHaveFocus();
   });
 
   a11yCheck(() => render(<TextInput label="foo" />));
