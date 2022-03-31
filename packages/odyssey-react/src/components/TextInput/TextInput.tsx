@@ -24,7 +24,7 @@ import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./TextInput.theme";
 import styles from "./TextInput.module.scss";
 
-export interface TextInputProps
+interface CommonProps
   extends CommonFieldProps,
     Omit<
       ComponentPropsWithRef<"input">,
@@ -39,7 +39,7 @@ export interface TextInputProps
    * The underlying input element type
    * @default text
    */
-  type?: "text" | "email" | "url" | "tel" | "search" | "password";
+  type?: "text" | "email" | "url" | "tel" | "password";
 
   /**
    * The underlying input element name attribute
@@ -102,6 +102,14 @@ export interface TextInputProps
    */
   onFocus?: FocusEventHandler<HTMLInputElement>;
 }
+
+interface SearchProps extends Omit<CommonProps, "type" | "prefix"> {
+  type: "search";
+  prefix?: never;
+  suffix?: never;
+}
+
+export type TextInputProps = CommonProps | SearchProps;
 
 /**
  * Text inputs allow users to edit and input data.
