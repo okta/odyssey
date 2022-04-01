@@ -29,10 +29,29 @@
   color: var(--TabTextColor);
   font-family: inherit;
   font-size: var(--TabFontSize);
-  font-weight: var(--TabFontWeight);
 
   &:last-child {
     margin-inline-end: 0;
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--TabHoverTextColor);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.label {
+  @include border-radius(var(--LabelBorderRadius));
+
+  .tab:focus & {
+    outline-color: var(--LabelFocusOutlineColor);
+    outline-offset: var(--LabelFocusOutlineOffset);
+    outline-style: var(--LabelFocusOutlineStyle);
+    outline-width: var(--LabelFocusOutlineWidth);
   }
 }
 
@@ -47,6 +66,9 @@
 
 /* Tab states */
 .selected {
+  color: var(--TabSelectedTextColor);
+  font-weight: var(--TabSelectedFontWeight);
+
   &::before {
     content: "";
     position: absolute;
