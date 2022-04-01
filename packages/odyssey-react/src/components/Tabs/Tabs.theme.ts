@@ -37,5 +37,5 @@ export const theme: ThemeReducer = (theme) => ({
 
   TabSelectedBackgroundColor: theme.ColorPrimaryBase,
   TabSelectedFontWeight: theme.FontWeightBold,
-  TabSelectedTextColor: theme.ColorTextBody
+  TabSelectedTextColor: theme.ColorTextBody,
 });
