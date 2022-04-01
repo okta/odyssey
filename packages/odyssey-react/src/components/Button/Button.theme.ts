@@ -83,6 +83,18 @@ export const theme: ThemeReducer = (theme) => ({
   FloatingHoverBackgroundColor: "rgba(29, 29, 33, 0.1)",
   FloatingDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
 
+  // Affix Variant
+  AffixBackgroundColor: "transparent",
+  AffixDisabledBackgroundColor: "transparent",
+  AffixDisabledTextColor: theme.ColorPaletteNeutral500,
+  AffixFocusBackgroundColor: theme.ColorPaletteNeutral200,
+  AffixFocusTextColor: theme.ColorTextBody,
+  AffixHoverBackgroundColor: theme.ColorPaletteNeutral200,
+  AffixHoverBorderColor: "transparent",
+  AffixHoverTextColor: theme.ColorTextBody,
+  AffixPadding: theme.SpaceScale0,
+  AffixTextColor: theme.ColorTextBody,
+
   // Wide Layout
   WideLayoutMarginBlock: 0,
   WideLayoutMarginBlockEnd: theme.SpaceScale3,

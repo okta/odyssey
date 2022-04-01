@@ -33,11 +33,11 @@
   line-height: var(--LineHeight);
 
   &:hover,
-  &:focus-within {
+  &.focus {
     border-color: var(--HoverFocusBorderColor);
   }
 
-  &:focus-within {
+  &.focus {
     outline-color: var(--FocusOutlineColor);
     outline-offset: var(--FocusOutlineOffset);
     outline-style: var(--FocusOutlineStyle);
@@ -79,16 +79,31 @@
 
 .prefix,
 .suffix {
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
   color: var(--AffixTextColor);
   cursor: default;
 }
 
 .prefix {
-  padding-inline-end: var(--AffixPaddingInline);
+  padding-inline-start: var(--AffixPadding);
 }
 
 .suffix {
-  padding-inline-start: var(--AffixPaddingInline);
+  padding-inline-end: var(--AffixPadding);
+}
+
+.affixHidden {
+  opacity: 0;
+}
+
+.affixFull {
+  padding-block: var(--AffixPadding);
+  padding-inline-end: var(--AffixPadding);
+}
+
+.root:hover .affixHidden,
+.root:focus-within .affixHidden {
+  opacity: 1;
 }
 
 .affixIcon {
@@ -101,12 +116,27 @@
   flex: 1;
   margin-block: 0;
   margin-inline: 0;
-  padding-block: 0;
-  padding-inline: 0;
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
+  padding-inline: var(--PaddingInline);
   border: 0;
+  background-color: transparent;
   font: inherit;
 
   &:focus {
     outline: 0;
+  }
+
+  &[type="search"] {
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+    }
+
+    &::-ms-clear,
+    &::-ms-reveal {
+      display: none;
+    }
   }
 }

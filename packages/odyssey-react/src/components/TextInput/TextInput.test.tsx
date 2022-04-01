@@ -196,5 +196,43 @@ describe("TextInput", () => {
     expect(inputElement).toHaveFocus();
   });
 
+  it("clears the input when the clear button is clicked for uncontrolled value", () => {
+    render(
+      <TextInput
+        label={label}
+        type="search"
+        defaultValue="Default uncontrolled value"
+      />
+    );
+    const inputElement = screen.getByRole("searchbox");
+    expect(inputElement).toHaveValue("Default uncontrolled value");
+    inputElement.focus();
+    const clearButton = screen.getByRole("button");
+    clearButton.click();
+    expect(screen.getByRole("searchbox")).toHaveValue("");
+  });
+
+  it("calls onchange with empty value when clear button is clicked", () => {
+    const onChange = jest.fn();
+    render(
+      <TextInput
+        label={label}
+        type="search"
+        value="controlled value"
+        onChange={onChange}
+      />
+    );
+    const inputElement = screen.getByRole("searchbox");
+    expect(inputElement).toHaveValue("controlled value");
+    inputElement.focus();
+    const clearButton = screen.getByRole("button");
+    clearButton.click();
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ type: "change" }),
+      ""
+    );
+  });
+
   a11yCheck(() => render(<TextInput label="foo" />));
 });
