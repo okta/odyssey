@@ -36,7 +36,10 @@ describe("Tabs", () => {
     );
 
     expect(getByText("TabPanel 1")).toBeVisible();
-    expect(getByText("Tab 1")).toHaveAttribute("aria-selected", "true");
+    expect(getByText("Tab 1").parentElement).toHaveAttribute(
+      "aria-selected",
+      "true"
+    );
     expect(getByRole(roleTabList)).toBeInTheDocument();
     expect(getByRole(roleTabPanel)).toBeInTheDocument();
   });
@@ -57,7 +60,10 @@ describe("Tabs", () => {
     );
 
     expect(getByText("TabPanel 2")).toBeVisible();
-    expect(getByText("Tab 2")).toHaveAttribute("aria-selected", "true");
+    expect(getByText("Tab 2").parentElement).toHaveAttribute(
+      "aria-selected",
+      "true"
+    );
   });
 
   it("changes the selected tabpanel when a tab is clicked", () => {
@@ -78,8 +84,14 @@ describe("Tabs", () => {
     fireEvent.click(getByText("Tab 3"));
 
     expect(getByText("TabPanel 3")).toBeVisible();
-    expect(getByText("Tab 3")).toHaveAttribute("aria-selected", "true");
-    expect(getByText("Tab 1")).toHaveAttribute("aria-selected", "false");
+    expect(getByText("Tab 3").parentElement).toHaveAttribute(
+      "aria-selected",
+      "true"
+    );
+    expect(getByText("Tab 1").parentElement).toHaveAttribute(
+      "aria-selected",
+      "false"
+    );
   });
 
   it("should invoke the onTabChange callback when a different tab is selected", () => {
@@ -123,7 +135,7 @@ describe("Tabs", () => {
     fireEvent.keyUp(getByRole(roleTabList), { key: "End", code: "End" });
 
     await waitFor(() => {
-      expect(getByText("Tab 3")).toHaveFocus();
+      expect(getByText("Tab 3").parentElement).toHaveFocus();
     });
   });
 
@@ -146,7 +158,7 @@ describe("Tabs", () => {
     fireEvent.keyUp(getByRole(roleTabList), { key: "Home", code: "Home" });
 
     await waitFor(() => {
-      expect(getByText("Tab 1")).toHaveFocus();
+      expect(getByText("Tab 1").parentElement).toHaveFocus();
     });
   });
 
@@ -173,7 +185,7 @@ describe("Tabs", () => {
     });
 
     await waitFor(() => {
-      expect(getByText("Tab 1")).toHaveFocus();
+      expect(getByText("Tab 1").parentElement).toHaveFocus();
     });
   });
 
@@ -200,7 +212,7 @@ describe("Tabs", () => {
     });
 
     await waitFor(() => {
-      expect(getByText("Tab 3")).toHaveFocus();
+      expect(getByText("Tab 3").parentElement).toHaveFocus();
     });
   });
 
