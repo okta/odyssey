@@ -87,6 +87,24 @@
   padding-inline-start: var(--PaddingInline);
 }
 
+.clear {
+  display: none;
+  padding-inline-start: var(--PaddingInline);
+}
+
+// stylelint-disable-next-line selector-max-type
+.clear button {
+  padding-block: 0;
+  padding-inline: 0;
+  border: 0;
+  line-height: 1;
+}
+
+.root:hover .clear,
+.root:focus-within .clear {
+  display: block;
+}
+
 // Strips away the browser defaults from the input to make it as invisible as possible.
 .input {
   flex: 1;
@@ -98,5 +116,18 @@
 
   &:focus {
     outline: 0;
+  }
+  &[type="search"] {
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+    }
+
+    &::-ms-clear,
+    &::-ms-reveal {
+      display: none;
+    }
   }
 }

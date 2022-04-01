@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef, useCallback, useState } from "react";
 import type {
   FocusEventHandler,
   ComponentPropsWithRef,
@@ -18,11 +18,12 @@ import type {
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit, useCx, useSharedRef } from "../../utils";
-import { SearchIcon } from "../Icon";
+import { CloseCircleFilledIcon, SearchIcon } from "../Icon";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./TextInput.theme";
 import styles from "./TextInput.module.scss";
+import { Button } from "../Button";
 
 interface CommonProps
   extends CommonFieldProps,
@@ -146,6 +147,8 @@ export const TextInput = withTheme(
     const oid = useOid(id);
     const omitProps = useOmit(rest);
     const internalRef = useSharedRef(ref);
+    const [isControlled] = useState(value ? true : false);
+    const [hasValue, setHasValue] = useState(defaultValue);
 
     const setFocus = () => {
       requestAnimationFrame(() => {
@@ -155,10 +158,26 @@ export const TextInput = withTheme(
 
     const handleChange = useCallback(
       (event: ChangeEvent<HTMLInputElement>) => {
+        if (!isControlled) {
+          setHasValue(event.target.value);
+        }
         onChange?.(event, event.target.value);
       },
-      [onChange]
+      [isControlled, onChange]
     );
+    const onClear = () => {
+      if (internalRef.current) {
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+          window?.HTMLInputElement?.prototype,
+          "value"
+        )?.set;
+        if (nativeInputValueSetter) {
+          nativeInputValueSetter.call(internalRef.current, "");
+          const aChangeEvent = new Event("change", { bubbles: true });
+          internalRef.current.dispatchEvent(aChangeEvent);
+        }
+      }
+    };
 
     const ariaDescribedBy = useCx(
       hint && `${oid}-hint`,
@@ -172,6 +191,7 @@ export const TextInput = withTheme(
           }
         : {};
 
+    const showClearButton = isControlled ? !!value : hasValue;
     return (
       <Field
         error={error}
@@ -217,6 +237,16 @@ export const TextInput = withTheme(
               onClick={setFocus}
             >
               {suffix}
+            </span>
+          )}
+          {isSearchTextInput && showClearButton && (
+            <span className={styles.clear} aria-hidden="true">
+              <Button
+                variant="clear"
+                size="s"
+                icon={<CloseCircleFilledIcon />}
+                onClick={onClear}
+              />
             </span>
           )}
         </div>
