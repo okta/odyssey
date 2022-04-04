@@ -10,11 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import type {
   FocusEventHandler,
   ComponentPropsWithRef,
   ChangeEvent,
+  RefObject,
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit, useCx, useSharedRef } from "../../utils";
@@ -24,6 +25,9 @@ import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./TextInput.theme";
 import styles from "./TextInput.module.scss";
 
+function checkInputValidity(inputRef: RefObject<HTMLInputElement>) {
+  return inputRef.current ? inputRef.current?.checkValidity() : true;
+}
 interface CommonProps
   extends CommonFieldProps,
     Omit<
@@ -146,6 +150,11 @@ export const TextInput = withTheme(
     const oid = useOid(id);
     const omitProps = useOmit(rest);
     const internalRef = useSharedRef(ref);
+    const [isValid, setIsValid] = useState(checkInputValidity(internalRef));
+
+    useEffect(() => {
+      setIsValid(checkInputValidity(internalRef));
+    }, [internalRef, required, type]);
 
     const setFocus = () => {
       requestAnimationFrame(() => {
@@ -153,12 +162,10 @@ export const TextInput = withTheme(
       });
     };
 
-    const handleChange = useCallback(
-      (event: ChangeEvent<HTMLInputElement>) => {
-        onChange?.(event, event.target.value);
-      },
-      [onChange]
-    );
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setIsValid(checkInputValidity(internalRef));
+      onChange?.(event, event.target.value);
+    };
 
     const ariaDescribedBy = useCx(
       hint && `${oid}-hint`,
@@ -177,10 +184,7 @@ export const TextInput = withTheme(
       isSearchTextInput && styles.affixIcon
     );
 
-    const rootStyles = useCx(
-      styles.root,
-      !internalRef.current?.checkValidity() && styles.invalid
-    );
+    const rootStyles = useCx(styles.root, !isValid && styles.invalid);
 
     return (
       <Field
