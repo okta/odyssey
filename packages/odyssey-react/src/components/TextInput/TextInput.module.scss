@@ -63,11 +63,12 @@
   &::placeholder {
     color: var(--PlaceholderTextColor);
   }
-}
 
-.invalid {
-  border-color: var(--InvalidBorderColor);
-  &:focus-within {
+  &.invalid {
+    border-color: var(--InvalidBorderColor);
+  }
+
+  &.invalid:focus-within {
     outline-color: var(--InvalidFocusOutlineColor);
   }
 }
