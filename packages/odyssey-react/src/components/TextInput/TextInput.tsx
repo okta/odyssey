@@ -148,7 +148,8 @@ export const TextInput = withTheme(
     const omitProps = useOmit(rest);
     const internalRef = useSharedRef(ref);
     const [isControlled] = useState(value ? true : false);
-    const [hasValue, setHasValue] = useState(defaultValue);
+    const [hasUncontrolledValue, setHasUncontrolledValue] =
+      useState(defaultValue);
 
     const setFocus = () => {
       requestAnimationFrame(() => {
@@ -159,7 +160,7 @@ export const TextInput = withTheme(
     const handleChange = useCallback(
       (event: ChangeEvent<HTMLInputElement>) => {
         if (!isControlled) {
-          setHasValue(event.target.value);
+          setHasUncontrolledValue(event.target.value);
         }
         onChange?.(event, event.target.value);
       },
@@ -191,7 +192,12 @@ export const TextInput = withTheme(
           }
         : {};
 
-    const showClearButton = isControlled ? !!value : hasValue;
+    const showClearButton = isControlled ? !!value : hasUncontrolledValue;
+    const suffixStyle = useCx(
+      styles.suffix,
+      showClearButton && styles.affixHidden
+    );
+
     return (
       <Field
         error={error}
@@ -230,23 +236,21 @@ export const TextInput = withTheme(
             defaultValue={defaultValue}
             value={value}
           />
-          {suffix && !isSearchTextInput && (
+          {(suffix || isSearchTextInput) && (
             <span
-              className={styles.suffix}
+              className={suffixStyle}
               aria-hidden="true"
-              onClick={setFocus}
+              onClick={isSearchTextInput ? undefined : setFocus}
             >
-              {suffix}
-            </span>
-          )}
-          {isSearchTextInput && showClearButton && (
-            <span className={styles.clear} aria-hidden="true">
-              <Button
-                variant="clear"
-                size="s"
-                icon={<CloseCircleFilledIcon />}
-                onClick={onClear}
-              />
+              {!isSearchTextInput && suffix}
+              {isSearchTextInput && showClearButton && (
+                <Button
+                  variant="clear"
+                  size="s"
+                  icon={<CloseCircleFilledIcon />}
+                  onClick={onClear}
+                />
+              )}
             </span>
           )}
         </div>
