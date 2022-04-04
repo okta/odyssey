@@ -154,7 +154,7 @@ export const TextInput = withTheme(
 
     useEffect(() => {
       setIsValid(checkInputValidity(internalRef));
-    }, [internalRef, required, type]);
+    }, [internalRef, required, type, value]);
 
     const setFocus = () => {
       requestAnimationFrame(() => {
