@@ -172,6 +172,8 @@ export const TextInput = withTheme(
           }
         : {};
 
+    const hasSearchIcon = useCx(styles.prefix, styles.affixIcon);
+
     return (
       <Field
         error={error}
@@ -183,13 +185,22 @@ export const TextInput = withTheme(
         required={required}
       >
         <div className={styles.root}>
-          {(prefix || isSearchTextInput) && (
+          {prefix && !isSearchTextInput && (
             <span
               className={styles.prefix}
               aria-hidden="true"
               onClick={setFocus}
             >
-              {isSearchTextInput ? <SearchIcon /> : prefix}
+              {prefix}
+            </span>
+          )}
+          {isSearchTextInput && (
+            <span
+              className={hasSearchIcon}
+              aria-hidden="true"
+              onClick={setFocus}
+            >
+              <SearchIcon />
             </span>
           )}
           <input
