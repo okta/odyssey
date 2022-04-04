@@ -13,6 +13,7 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
+  AffixTextColor: theme.ColorTextSub,
   BackgroundColor: theme.ColorBackgroundBase,
   BorderColor: theme.ColorBorderUi,
   BorderRadius: theme.BorderRadiusBase,
@@ -28,8 +29,7 @@ export const theme: ThemeReducer = (theme) => ({
   FontFamily: theme.FontFamilyBase,
   FontSize: theme.FontSizeBody,
   HoverFocusBorderColor: theme.ColorPrimaryBase,
-  IndicatorInsetInlineStart: theme.SpaceScale1,
-  IndicatorSize: "1.1487rem",
+  IconSize: "1.1487rem",
   InvalidBorderColor: theme.ColorBorderDangerBase,
   InvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
   LineHeight: theme.FontLineHeightUi,
@@ -39,7 +39,6 @@ export const theme: ThemeReducer = (theme) => ({
   PaddingBlock: theme.SpaceScale1,
   PaddingInline: theme.SpaceScale1,
   PlaceholderTextColor: theme.ColorTextSub,
-  StaticTextColor: theme.ColorTextSub,
   TextColor: theme.ColorTextBody,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,
