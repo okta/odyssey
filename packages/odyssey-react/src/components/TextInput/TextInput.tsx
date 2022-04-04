@@ -177,6 +177,11 @@ export const TextInput = withTheme(
       isSearchTextInput && styles.affixIcon
     );
 
+    const rootStyles = useCx(
+      styles.root,
+      !internalRef.current?.checkValidity() && styles.invalid
+    );
+
     return (
       <Field
         error={error}
@@ -187,7 +192,7 @@ export const TextInput = withTheme(
         optionalLabel={optionalLabel}
         required={required}
       >
-        <div className={styles.root}>
+        <div className={rootStyles}>
           {(prefix || isSearchTextInput) && (
             <span
               className={prefixStyles}
