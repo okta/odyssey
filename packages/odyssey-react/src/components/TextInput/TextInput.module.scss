@@ -44,10 +44,6 @@
     outline-width: var(--FocusOutlineWidth);
   }
 
-  &:invalid {
-    border-color: var(--InvalidBorderColor);
-  }
-
   &:disabled {
     opacity: 1;
     color: var(--DisabledTextColor);
@@ -64,12 +60,15 @@
     }
   }
 
-  &:invalid:focus-within {
-    outline-color: var(--InvalidFocusOutlineColor);
-  }
-
   &::placeholder {
     color: var(--PlaceholderTextColor);
+  }
+}
+
+.invalid {
+  border-color: var(--InvalidBorderColor);
+  &:focus-within {
+    outline-color: var(--InvalidFocusOutlineColor);
   }
 }
 
