@@ -88,20 +88,12 @@
 }
 
 .affixHidden {
-  display: none;
-}
-
-// stylelint-disable-next-line selector-max-type
-.affixHidden button {
-  padding-block: 0;
-  padding-inline: 0;
-  border: 0;
-  line-height: 1;
+  opacity: 0;
 }
 
 .root:hover .affixHidden,
 .root:focus-within .affixHidden {
-  display: block;
+  opacity: 1;
 }
 
 .affixIcon {

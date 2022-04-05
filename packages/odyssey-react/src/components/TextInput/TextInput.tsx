@@ -259,8 +259,7 @@ export const TextInput = withTheme(
               {!isSearchTextInput && suffix}
               {isSearchTextInput && showClearButton && (
                 <Button
-                  variant="clear"
-                  size="s"
+                  variant="affix"
                   icon={<CloseCircleFilledIcon />}
                   onClick={onClear}
                 />
