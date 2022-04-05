@@ -20,6 +20,19 @@ const textBox = "textbox";
 const label = "Destination";
 
 describe("TextInput", () => {
+  beforeEach(() => {
+    jest
+      .spyOn(window, "requestAnimationFrame")
+      .mockImplementation((callback: FrameRequestCallback): number => {
+        callback(0);
+        return 0;
+      });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("renders into the document", () => {
     render(<TextInput label={label} />);
 
@@ -151,6 +164,36 @@ describe("TextInput", () => {
 
     expect(ref).toHaveBeenCalledTimes(1);
     expect(ref).toHaveBeenLastCalledWith(screen.getByRole(textBox));
+  });
+
+  it("renders the prefix", () => {
+    render(<TextInput label={label} prefix="test prefix" />);
+    const prefixElement = screen.getByText("test prefix");
+    expect(prefixElement).toBeInTheDocument();
+    expect(prefixElement.className).toContain("prefix");
+  });
+
+  it("renders the suffix", () => {
+    render(<TextInput label={label} suffix="test suffix" />);
+    const suffixElement = screen.getByText("test suffix");
+    expect(suffixElement).toBeInTheDocument();
+    expect(suffixElement.className).toContain("suffix");
+  });
+
+  it("gives the input focus when prefix is clicked", () => {
+    render(<TextInput label={label} prefix="test prefix" />);
+    const prefixElement = screen.getByText("test prefix");
+    prefixElement.click();
+    const inputElement = screen.getByRole(textBox);
+    expect(inputElement).toHaveFocus();
+  });
+
+  it("gives the  input focus when suffix is clicked", () => {
+    render(<TextInput label={label} suffix="test suffix" />);
+    const prefixElement = screen.getByText("test suffix");
+    prefixElement.click();
+    const inputElement = screen.getByRole(textBox);
+    expect(inputElement).toHaveFocus();
   });
 
   a11yCheck(() => render(<TextInput label="foo" />));
