@@ -177,8 +177,8 @@
   background-color: var(--AffixBackgroundColor);
   color: var(--AffixTextColor);
   line-height: 1;
-  padding-block: 0;
-  padding-inline: 0;
+  padding-block: 0.28571429rem;
+  padding-inline: 0.28571429rem;
 
   &:hover {
     border-color: var(--AffixHoverBorderColor);

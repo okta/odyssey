@@ -18,8 +18,6 @@
   max-width: var(--MaxWidth);
   margin-block: var(--MarginBlock);
   margin-inline: var(--MarginInline);
-  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
-  padding-inline: var(--PaddingInline);
   transition-property: border-color, background-color;
   transition-duration: var(--TransitionDuration);
   transition-timing-function: var(--TransitionTimingFunction);
@@ -75,20 +73,26 @@
 
 .prefix,
 .suffix {
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
   color: var(--AffixTextColor);
   cursor: default;
 }
 
 .prefix {
-  padding-inline-end: var(--PaddingInline);
+  padding-inline-start: var(--PaddingInline);
 }
 
 .suffix {
-  padding-inline-start: var(--PaddingInline);
+  padding-inline-end: var(--PaddingInline);
 }
 
 .affixHidden {
   opacity: 0;
+}
+
+.affixFull {
+  padding-block: 0.28571429rem;
+  padding-inline-end: 0.28571429rem;
 }
 
 .root:hover .affixHidden,
@@ -106,8 +110,8 @@
   flex: 1;
   margin-block: 0;
   margin-inline: 0;
-  padding-block: 0;
-  padding-inline: 0;
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
+  padding-inline: var(--PaddingInline);
   border: 0;
   font: inherit;
 

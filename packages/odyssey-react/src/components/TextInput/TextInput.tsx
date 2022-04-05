@@ -202,7 +202,8 @@ export const TextInput = withTheme(
     const showClearButton = isControlled ? !!value : hasUncontrolledValue;
     const suffixStyle = useCx(
       styles.suffix,
-      showClearButton && styles.affixHidden
+      showClearButton && styles.affixHidden,
+      showClearButton && styles.affixFull
     );
 
     const prefixStyles = useCx(
