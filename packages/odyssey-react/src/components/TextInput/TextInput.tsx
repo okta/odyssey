@@ -10,11 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef, useCallback, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import type {
   FocusEventHandler,
   ComponentPropsWithRef,
   ChangeEvent,
+  RefObject,
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit, useCx, useSharedRef } from "../../utils";
@@ -25,6 +26,9 @@ import { theme } from "./TextInput.theme";
 import styles from "./TextInput.module.scss";
 import { Button } from "../Button";
 
+function checkInputValidity(inputRef: RefObject<HTMLInputElement>) {
+  return inputRef.current ? inputRef.current?.checkValidity() : true;
+}
 interface CommonProps
   extends CommonFieldProps,
     Omit<
@@ -150,6 +154,11 @@ export const TextInput = withTheme(
     const [isControlled] = useState(value ? true : false);
     const [hasUncontrolledValue, setHasUncontrolledValue] =
       useState(defaultValue);
+    const [isValid, setIsValid] = useState(checkInputValidity(internalRef));
+
+    useEffect(() => {
+      setIsValid(checkInputValidity(internalRef));
+    }, [internalRef, required, type, value]);
 
     const setFocus = () => {
       requestAnimationFrame(() => {
@@ -157,15 +166,6 @@ export const TextInput = withTheme(
       });
     };
 
-    const handleChange = useCallback(
-      (event: ChangeEvent<HTMLInputElement>) => {
-        if (!isControlled) {
-          setHasUncontrolledValue(event.target.value);
-        }
-        onChange?.(event, event.target.value);
-      },
-      [isControlled, onChange]
-    );
     const onClear = () => {
       if (internalRef.current) {
         const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
@@ -178,6 +178,13 @@ export const TextInput = withTheme(
           internalRef.current.dispatchEvent(aChangeEvent);
         }
       }
+    };
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setIsValid(checkInputValidity(internalRef));
+      if (!isControlled) {
+        setHasUncontrolledValue(event.target.value);
+      }
+      onChange?.(event, event.target.value);
     };
 
     const ariaDescribedBy = useCx(
@@ -198,6 +205,13 @@ export const TextInput = withTheme(
       showClearButton && styles.affixHidden
     );
 
+    const prefixStyles = useCx(
+      styles.prefix,
+      isSearchTextInput && styles.affixIcon
+    );
+
+    const rootStyles = useCx(styles.root, !isValid && styles.invalid);
+
     return (
       <Field
         error={error}
@@ -208,10 +222,10 @@ export const TextInput = withTheme(
         optionalLabel={optionalLabel}
         required={required}
       >
-        <div className={styles.root}>
+        <div className={rootStyles}>
           {(prefix || isSearchTextInput) && (
             <span
-              className={styles.prefix}
+              className={prefixStyles}
               aria-hidden="true"
               onClick={setFocus}
             >

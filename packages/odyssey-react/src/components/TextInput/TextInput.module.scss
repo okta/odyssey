@@ -44,10 +44,6 @@
     outline-width: var(--FocusOutlineWidth);
   }
 
-  &:invalid {
-    border-color: var(--InvalidBorderColor);
-  }
-
   &:disabled {
     opacity: 1;
     color: var(--DisabledTextColor);
@@ -64,18 +60,22 @@
     }
   }
 
-  &:invalid:focus-within {
-    outline-color: var(--InvalidFocusOutlineColor);
-  }
-
   &::placeholder {
     color: var(--PlaceholderTextColor);
+  }
+
+  &.invalid {
+    border-color: var(--InvalidBorderColor);
+  }
+
+  &.invalid:focus-within {
+    outline-color: var(--InvalidFocusOutlineColor);
   }
 }
 
 .prefix,
 .suffix {
-  color: var(--StaticTextColor);
+  color: var(--AffixTextColor);
   cursor: default;
 }
 
@@ -104,6 +104,11 @@
   display: block;
 }
 
+.affixIcon {
+  font-size: var(--IconSize);
+  line-height: 1;
+}
+
 // Strips away the browser defaults from the input to make it as invisible as possible.
 .input {
   flex: 1;
@@ -112,6 +117,7 @@
   padding-block: 0;
   padding-inline: 0;
   border: 0;
+  font: inherit;
 
   &:focus {
     outline: 0;
