@@ -113,6 +113,7 @@
   padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
   padding-inline: var(--PaddingInline);
   border: 0;
+  background-color: transparent;
   font: inherit;
 
   &:focus {
