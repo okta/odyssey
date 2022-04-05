@@ -20,12 +20,22 @@ export const theme: ThemeReducer = (theme) => ({
   PanelPaddingBlock: theme.SpaceScale5,
   PanelPaddingInline: 0,
 
-  TabTextColor: theme.ColorPaletteNeutral900,
+  LabelBorderRadius: theme.BorderRadiusBase,
+  LabelFocusOutlineColor: theme.FocusOutlineColorPrimary,
+  LabelFocusOutlineOffset: theme.FocusOutlineOffsetBase,
+  LabelFocusOutlineStyle: theme.FocusOutlineStyle,
+  LabelFocusOutlineWidth: theme.FocusOutlineWidthTight,
+
+  TabTextColor: theme.ColorTextSub,
   TabFontSize: theme.FontSizeBody,
-  TabFontWeight: theme.FontWeightBold,
   TabMarginBlock: 0,
   TabMarginInline: theme.SpaceScale4,
   TabPaddingBlock: theme.SpaceScale3,
   TabPaddingInline: 0,
+
+  TabHoverTextColor: theme.ColorPrimaryBase,
+
   TabSelectedBackgroundColor: theme.ColorPrimaryBase,
+  TabSelectedFontWeight: theme.FontWeightBold,
+  TabSelectedTextColor: theme.ColorTextBody,
 });
