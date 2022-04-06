@@ -226,7 +226,7 @@ export const TextInput = withTheme(
         hint={hint}
         inputId={oid}
         label={label}
-        labelHidden={isSearchTextInput && !label}
+        labelHidden={isSearchTextInput}
         optionalLabel={optionalLabel}
         required={required}
       >
