@@ -73,6 +73,7 @@ export const Search = Template.bind({});
 Search.args = {
   placeholder: "Search Planets",
   type: "search",
+  required: false,
 };
 
 export const Prefix = Template.bind({});
@@ -80,6 +81,7 @@ Prefix.args = {
   label: "Phone Number",
   type: "tel",
   prefix: "+1",
+  required: false,
 };
 
 export const Suffix = Template.bind({});
@@ -87,4 +89,5 @@ Suffix.args = {
   label: "Time til destination",
   type: "text",
   suffix: "minutes",
+  required: false,
 };

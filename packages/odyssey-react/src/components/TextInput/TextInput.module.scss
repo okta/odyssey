@@ -31,11 +31,11 @@
   line-height: var(--LineHeight);
 
   &:hover,
-  &:focus-within {
+  &.focus {
     border-color: var(--HoverFocusBorderColor);
   }
 
-  &:focus-within {
+  &.focus {
     outline-color: var(--FocusOutlineColor);
     outline-offset: var(--FocusOutlineOffset);
     outline-style: var(--FocusOutlineStyle);
@@ -66,7 +66,8 @@
     border-color: var(--InvalidBorderColor);
   }
 
-  &.invalid:focus-within {
+  // stylelint-disable-next-line selector-max-class
+  &.invalid.focus {
     outline-color: var(--InvalidFocusOutlineColor);
   }
 }

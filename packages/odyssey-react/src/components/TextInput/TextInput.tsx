@@ -12,6 +12,7 @@
 
 import React, { forwardRef, useEffect, useState } from "react";
 import type {
+  FocusEvent,
   FocusEventHandler,
   ComponentPropsWithRef,
   ChangeEvent,
@@ -155,6 +156,7 @@ export const TextInput = withTheme(
     const [hasUncontrolledValue, setHasUncontrolledValue] =
       useState(defaultValue);
     const [isValid, setIsValid] = useState(checkInputValidity(internalRef));
+    const [hasFocus, setHasFocus] = useState(false);
 
     useEffect(() => {
       setIsValid(checkInputValidity(internalRef));
@@ -170,6 +172,7 @@ export const TextInput = withTheme(
     };
 
     const onClear = () => {
+      setFocus();
       if (internalRef.current) {
         const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
           window?.HTMLInputElement?.prototype,
@@ -188,6 +191,16 @@ export const TextInput = withTheme(
         setIsValid(checkInputValidity(internalRef));
       }
       onChange?.(event, event.target.value);
+    };
+
+    const internalOnFocus = (event: FocusEvent<HTMLInputElement>) => {
+      setHasFocus(true);
+      onFocus?.(event);
+    };
+
+    const internalOnBlur = (event: FocusEvent<HTMLInputElement>) => {
+      setHasFocus(false);
+      onBlur?.(event);
     };
 
     const ariaDescribedBy = useCx(
@@ -218,7 +231,12 @@ export const TextInput = withTheme(
       showSuffixButton && styles.affixFull
     );
 
-    const rootStyles = useCx(styles.root, !isValid && styles.invalid);
+    // Root styles
+    const rootStyles = useCx(
+      styles.root,
+      !isValid && styles.invalid,
+      hasFocus && styles.focus
+    );
 
     return (
       <Field
@@ -248,8 +266,8 @@ export const TextInput = withTheme(
             id={oid}
             name={name}
             onChange={handleChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
+            onBlur={internalOnBlur}
+            onFocus={internalOnFocus}
             placeholder={placeholder}
             readOnly={readonly}
             ref={internalRef}
