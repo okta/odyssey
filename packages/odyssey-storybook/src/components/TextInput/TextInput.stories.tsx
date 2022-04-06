@@ -71,17 +71,11 @@ KitchenSink.args = {
 
 export const Search = Template.bind({});
 Search.args = {
-  defaultValue: "Search Planets",
+  placeholder: "Search Planets",
+  defaultValue: "Pluto",
   type: "search",
   required: false,
   label: undefined,
-};
-
-export const ControlledSearch = Template.bind({});
-ControlledSearch.args = {
-  type: "search",
-  value: "Ruby Ruby Ruby Ruby Soho",
-  label: "Destination Unknown",
 };
 
 export const Prefix = Template.bind({});
