@@ -80,6 +80,7 @@ export const Prefix = Template.bind({});
 Prefix.args = {
   label: "Phone Number",
   type: "tel",
+  defaultValue: "867-5309",
   prefix: "+1",
   required: false,
 };
@@ -89,5 +90,6 @@ Suffix.args = {
   label: "Time til destination",
   type: "text",
   suffix: "minutes",
+  defaultValue: "60",
   required: false,
 };
