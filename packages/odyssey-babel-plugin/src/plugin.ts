@@ -11,7 +11,6 @@
  */
 
 import type * as Babel from "@babel/core";
-import type { File } from "./compile";
 import { resolve, dirname } from "path";
 import compileFactory from "./compileFactory";
 import { normalizeOpts, shouldInclude } from "./normalizeOpts";
@@ -23,7 +22,6 @@ import {
 } from "./nodes";
 
 export function plugin({ types: t }: typeof Babel): Babel.PluginObj {
-  const fileMap = new Map<string, File>();
   const compile = compileFactory();
 
   return {
@@ -62,12 +60,7 @@ export function plugin({ types: t }: typeof Babel): Babel.PluginObj {
         }
 
         const filePath = resolve(dirname(importer), importee);
-        let file = fileMap.get(filePath);
-
-        if (!file) {
-          file = compile({ filePath });
-          fileMap.set(filePath, file);
-        }
+        const file = compile({ filePath });
 
         path.replaceWith(
           variableDeclaration({
@@ -112,12 +105,7 @@ export function plugin({ types: t }: typeof Babel): Babel.PluginObj {
         }
 
         const filePath = resolve(dirname(importer), importee);
-        let file = fileMap.get(filePath);
-
-        if (!file) {
-          file = compile({ filePath });
-          fileMap.set(filePath, file);
-        }
+        const file = compile({ filePath });
 
         path.replaceWith(tokenObjectExpression(file));
       },
