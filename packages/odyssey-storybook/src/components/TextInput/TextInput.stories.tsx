@@ -82,7 +82,6 @@ Prefix.args = {
   type: "tel",
   defaultValue: "867-5309",
   prefix: "+1",
-  required: false,
 };
 
 export const Suffix = Template.bind({});
@@ -91,5 +90,4 @@ Suffix.args = {
   type: "text",
   suffix: "minutes",
   defaultValue: "60",
-  required: false,
 };
