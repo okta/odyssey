@@ -174,26 +174,26 @@
 
 .affixVariant {
   border: 0;
-  background-color: var(--ClearBackgroundColor);
-  color: var(--ClearTextColor);
+  background-color: var(--AffixBackgroundColor);
+  color: var(--AffixTextColor);
   line-height: 1;
-  padding-block: 0;
-  padding-inline: 0;
+  padding-block: var(--AffixPadding);
+  padding-inline: var(--AffixPadding);
 
   &:hover {
-    border-color: var(--ClearHoverBorderColor);
-    background-color: var(--ClearHoverBackgroundColor);
-    color: var(--ClearHoverTextColor);
+    border-color: var(--AffixHoverBorderColor);
+    background-color: var(--AffixHoverBackgroundColor);
+    color: var(--AffixHoverTextColor);
   }
 
   &:focus {
-    background-color: var(--ClearFocusBackgroundColor);
-    color: var(--ClearFocusTextColor);
+    background-color: var(--AffixFocusBackgroundColor);
+    color: var(--AffixFocusTextColor);
   }
 
   &:disabled {
-    background-color: var(--ClearDisabledBackgroundColor);
-    color: var(--ClearDisabledTextColor);
+    background-color: var(--AffixDisabledBackgroundColor);
+    color: var(--AffixDisabledTextColor);
   }
 }
 

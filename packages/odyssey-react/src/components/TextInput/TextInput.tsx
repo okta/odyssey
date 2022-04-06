@@ -19,7 +19,7 @@ import type {
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit, useCx, useSharedRef } from "../../utils";
-import { CloseCircleFilledIcon, SearchIcon } from "../Icon";
+import { Icon } from "../Icon";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./TextInput.theme";
@@ -146,19 +146,22 @@ export const TextInput = withTheme(
       ...rest
     } = props;
 
-    const isSearchTextInput = type === "search";
-
     const oid = useOid(id);
     const omitProps = useOmit(rest);
     const internalRef = useSharedRef(ref);
-    const [isControlled] = useState(value ? true : false);
+    const [isControlled, setIsControlled] = useState(
+      typeof value !== "undefined"
+    );
     const [hasUncontrolledValue, setHasUncontrolledValue] =
       useState(defaultValue);
     const [isValid, setIsValid] = useState(checkInputValidity(internalRef));
 
     useEffect(() => {
       setIsValid(checkInputValidity(internalRef));
-    }, [internalRef, required, type, value]);
+      if (!isControlled && typeof value !== "undefined") {
+        setIsControlled(true);
+      }
+    }, [internalRef, isControlled, required, type, value]);
 
     const setFocus = () => {
       requestAnimationFrame(() => {
@@ -180,9 +183,9 @@ export const TextInput = withTheme(
       }
     };
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      setIsValid(checkInputValidity(internalRef));
       if (!isControlled) {
         setHasUncontrolledValue(event.target.value);
+        setIsValid(checkInputValidity(internalRef));
       }
       onChange?.(event, event.target.value);
     };
@@ -199,15 +202,20 @@ export const TextInput = withTheme(
           }
         : {};
 
-    const showClearButton = isControlled ? !!value : hasUncontrolledValue;
-    const suffixStyle = useCx(
-      styles.suffix,
-      showClearButton && styles.affixHidden
-    );
+    const isSearchTextInput = type === "search";
+    // Prefix style and logic
+    const isPrefixIcon = isSearchTextInput;
+    const prefixIconName = "search";
+    const prefixStyles = useCx(styles.prefix, isPrefixIcon && styles.affixIcon);
 
-    const prefixStyles = useCx(
-      styles.prefix,
-      isSearchTextInput && styles.affixIcon
+    // Suffix style and logic
+    const isSuffixButton = isSearchTextInput;
+    const suffixButtonIconName = "close-circle-filled";
+    const showSuffixButton = isControlled ? !!value : !!hasUncontrolledValue;
+    const suffixButtonStyle = useCx(
+      styles.suffix,
+      showSuffixButton && styles.affixHidden,
+      showSuffixButton && styles.affixFull
     );
 
     const rootStyles = useCx(styles.root, !isValid && styles.invalid);
@@ -218,18 +226,18 @@ export const TextInput = withTheme(
         hint={hint}
         inputId={oid}
         label={label}
-        labelHidden={isSearchTextInput}
+        labelHidden={isSearchTextInput && !label}
         optionalLabel={optionalLabel}
         required={required}
       >
         <div className={rootStyles}>
-          {(prefix || isSearchTextInput) && (
+          {(prefix || isPrefixIcon) && (
             <span
               className={prefixStyles}
               aria-hidden="true"
               onClick={setFocus}
             >
-              {isSearchTextInput ? <SearchIcon /> : prefix}
+              {isPrefixIcon ? <Icon name={prefixIconName} /> : prefix}
             </span>
           )}
           <input
@@ -250,20 +258,25 @@ export const TextInput = withTheme(
             defaultValue={defaultValue}
             value={value}
           />
-          {(suffix || isSearchTextInput) && (
+          {/** Text Suffix */}
+          {suffix && !isSuffixButton && (
             <span
-              className={suffixStyle}
+              className={styles.suffix}
               aria-hidden="true"
-              onClick={isSearchTextInput ? undefined : setFocus}
+              onClick={setFocus}
             >
-              {!isSearchTextInput && suffix}
-              {isSearchTextInput && showClearButton && (
-                <Button
-                  variant="affix"
-                  icon={<CloseCircleFilledIcon />}
-                  onClick={onClear}
-                />
-              )}
+              {suffix}
+            </span>
+          )}
+          {/** Button Suffix */}
+          {isSuffixButton && showSuffixButton && (
+            <span className={suffixButtonStyle}>
+              <Button
+                name={name}
+                variant="affix"
+                icon={<Icon name={suffixButtonIconName} />}
+                onClick={onClear}
+              />
             </span>
           )}
         </div>

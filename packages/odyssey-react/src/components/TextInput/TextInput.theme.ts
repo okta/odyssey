@@ -13,6 +13,7 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
+  AffixPadding: theme.SpaceScale0,
   AffixTextColor: theme.ColorTextSub,
   BackgroundColor: theme.ColorBackgroundBase,
   BorderColor: theme.ColorBorderUi,

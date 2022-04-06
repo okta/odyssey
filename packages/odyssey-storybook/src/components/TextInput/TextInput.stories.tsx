@@ -73,6 +73,15 @@ export const Search = Template.bind({});
 Search.args = {
   defaultValue: "Search Planets",
   type: "search",
+  required: false,
+  label: undefined,
+};
+
+export const ControlledSearch = Template.bind({});
+ControlledSearch.args = {
+  type: "search",
+  value: "Ruby Ruby Ruby Ruby Soho",
+  label: "Destination Unknown",
 };
 
 export const Prefix = Template.bind({});
@@ -87,4 +96,5 @@ Suffix.args = {
   label: "Time til destination",
   type: "text",
   suffix: "minutes",
+  required: false,
 };
