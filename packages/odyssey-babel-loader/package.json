@@ -1,0 +1,20 @@
+{
+  "name": "@okta/odyssey-babel-loader",
+  "version": "0.0.0",
+  "description": "Babel webpack loader for Odyssey, Okta's design system",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/odyssey",
+    "directory": "packages/odyssey-babel-loader"
+  },
+  "scripts": {
+    "prepare": "rm -rf ./dist && mkdir ./dist && cp -r ./src/** ./dist",
+    "prepack": "prepack"
+  },
+  "dependencies": {
+    "babel-loader": "^8"
+  }
+}
