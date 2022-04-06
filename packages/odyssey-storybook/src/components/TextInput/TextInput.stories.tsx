@@ -90,5 +90,4 @@ Suffix.args = {
   label: "Time til destination",
   type: "text",
   suffix: "minutes",
-  required: false,
 };
