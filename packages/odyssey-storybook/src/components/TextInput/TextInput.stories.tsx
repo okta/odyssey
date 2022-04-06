@@ -72,10 +72,7 @@ KitchenSink.args = {
 export const Search = Template.bind({});
 Search.args = {
   placeholder: "Search Planets",
-  defaultValue: "Pluto",
   type: "search",
-  required: false,
-  label: undefined,
 };
 
 export const Prefix = Template.bind({});
