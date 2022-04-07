@@ -1,0 +1,88 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Contributing/Odyssey Development" />
+
+# Odyssey development
+
+# Repository structure
+
+The repo is managed via [lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/)
+and applies a modular approach to code organization where individual
+packages are separated for a number of reasons:
+
+- Delineate private vs public code
+- Share configuration and behavior easily
+- Enforce strong domain boundaries across our dependency graph to allow
+  for easier long term maintenance.
+
+## Working locally
+
+Odyssey uses the Gallium LTS Node version. Ensure you have the correct
+version of `node` installed as well as `yarn` available on your `$PATH`.
+You may need to configure your editor, terminal tab, or tmux pane to
+the correct version each time:
+
+```sh
+# use node node version specified by Odyssey
+nvm use
+
+# install yarn client globally for correct node version
+npm install --global yarn
+```
+
+To begin developing locally against Odyssey first clone the repository
+and follow the subsequent steps:
+
+```sh
+# install dependencies
+yarn install --ignore-scripts
+
+# ensure packages are built
+yarn prepare
+
+# ensure git hooks are installed
+yarn postprepare
+
+# start Storybook and see examples in the browser
+yarn start
+```
+
+As you make component javascript or style changes you should see the Storybook
+application update in your browser. Keep in mind that some tooling focused
+packages in our repo are not watched to trigger automatic dev server reloads.
+
+## Testing your code
+
+We strongly suggest writing or modifying tests to support any changes you make.
+You can then run `yarn test` to ensure the test suite continues to pass.
+
+## Committing to git
+
+When making a commit, your commit title should be formatted to include
+meaningful, machine parseable meta-data about your work. Odyssey uses the
+[conventional-commits](https://www.conventionalcommits.org) standard for
+this purpose.
+
+The scope of your commit, while optional, should only include the particular
+package changed in your work. When operating on multiple packages, break
+the work into smaller commits with correct scopes for each.
+
+The title of your commmit should reflect the nature of the change. A `feat`
+title for example denote work that adds a new feature. If you are iterating
+within your feature branch prior to merge use commit titles from the perspective
+of a downstream developer reviewing a CHANGELOG in a future release. For example,
+if you need to make changes based on code review feedback, do not title
+your commit `fix: respond to PR feedback` instead squash changes together
+using an interactive rebase or use a `chore: respond to PR feedback` title
+which will not appear within CHANGELOG output.
+
+If you are unsure of your commit structure, run `yarn commitlint` to
+ensure your latest commit adheres to conventional commit standard.
+
+## Building for accessibility
+
+As a highlevel guide, please consult the full [Dequeue Web Accessibility Checklist](https://dequeuniversity.com/checklists/web).
+
+Beyond the checklist, Odyssey uses DOM based assertions in our test suite,
+static analysis of our component code at authorship time, and snapshot based
+contrast ratio assertions in CI to further automate good a11y outcomes.
