@@ -20,7 +20,7 @@ import type {
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit, useCx, useSharedRef } from "../../utils";
-import { Icon } from "../Icon";
+import { CloseCircleFilledIcon, SearchIcon } from "../Icon";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./TextInput.theme";
@@ -218,12 +218,10 @@ export const TextInput = withTheme(
     const isSearchTextInput = type === "search";
     // Prefix style and logic
     const isPrefixIcon = isSearchTextInput;
-    const prefixIconName = "search";
     const prefixStyles = useCx(styles.prefix, isPrefixIcon && styles.affixIcon);
 
     // Suffix style and logic
     const isSuffixButton = isSearchTextInput;
-    const suffixButtonIconName = "close-circle-filled";
     const showSuffixButton = isControlled ? !!value : !!hasUncontrolledValue;
     const suffixButtonStyle = useCx(
       styles.suffix,
@@ -255,7 +253,7 @@ export const TextInput = withTheme(
               aria-hidden="true"
               onClick={setFocus}
             >
-              {isPrefixIcon ? <Icon name={prefixIconName} /> : prefix}
+              {isPrefixIcon ? <SearchIcon /> : prefix}
             </span>
           )}
           <input
@@ -292,7 +290,7 @@ export const TextInput = withTheme(
               <Button
                 name={name}
                 variant="affix"
-                icon={<Icon name={suffixButtonIconName} />}
+                icon={<CloseCircleFilledIcon />}
                 onClick={onClear}
               />
             </span>
