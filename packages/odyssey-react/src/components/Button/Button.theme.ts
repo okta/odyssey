@@ -96,6 +96,18 @@ export const theme: ThemeReducer = (theme) => ({
   ClearHoverTextColor: theme.ColorPaletteBlue900,
   ClearTextColor: theme.ColorPrimaryBase,
 
+  // Affix Variant
+  AffixBackgroundColor: "transparent",
+  AffixDisabledBackgroundColor: "transparent",
+  AffixDisabledTextColor: theme.ColorPaletteNeutral500,
+  AffixFocusBackgroundColor: theme.ColorPaletteNeutral200,
+  AffixFocusTextColor: theme.ColorTextBody,
+  AffixHoverBackgroundColor: theme.ColorPaletteNeutral200,
+  AffixHoverBorderColor: "transparent",
+  AffixHoverTextColor: theme.ColorTextBody,
+  AffixPadding: theme.SpaceScale0,
+  AffixTextColor: theme.ColorTextBody,
+
   // Wide Layout
   WideLayoutMarginBlock: 0,
   WideLayoutMarginBlockEnd: theme.SpaceScale3,

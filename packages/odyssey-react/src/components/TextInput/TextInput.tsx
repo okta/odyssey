@@ -12,6 +12,7 @@
 
 import React, { forwardRef, useEffect, useState } from "react";
 import type {
+  FocusEvent,
   FocusEventHandler,
   ComponentPropsWithRef,
   ChangeEvent,
@@ -19,11 +20,12 @@ import type {
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit, useCx, useSharedRef } from "../../utils";
-import { SearchIcon } from "../Icon";
+import { Icon } from "../Icon";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./TextInput.theme";
 import styles from "./TextInput.module.scss";
+import { Button } from "../Button";
 
 function checkInputValidity(inputRef: RefObject<HTMLInputElement>) {
   return inputRef.current ? inputRef.current?.checkValidity() : true;
@@ -145,16 +147,23 @@ export const TextInput = withTheme(
       ...rest
     } = props;
 
-    const isSearchTextInput = type === "search";
-
     const oid = useOid(id);
     const omitProps = useOmit(rest);
     const internalRef = useSharedRef(ref);
+    const [isControlled, setIsControlled] = useState(
+      typeof value !== "undefined"
+    );
+    const [hasUncontrolledValue, setHasUncontrolledValue] =
+      useState(defaultValue);
     const [isValid, setIsValid] = useState(checkInputValidity(internalRef));
+    const [hasFocus, setHasFocus] = useState(false);
 
     useEffect(() => {
       setIsValid(checkInputValidity(internalRef));
-    }, [internalRef, required, type, value]);
+      if (!isControlled && typeof value !== "undefined") {
+        setIsControlled(true);
+      }
+    }, [internalRef, isControlled, required, type, value]);
 
     const setFocus = () => {
       requestAnimationFrame(() => {
@@ -162,9 +171,36 @@ export const TextInput = withTheme(
       });
     };
 
+    const onClear = () => {
+      setFocus();
+      if (internalRef.current) {
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+          window?.HTMLInputElement?.prototype,
+          "value"
+        )?.set;
+        if (nativeInputValueSetter) {
+          nativeInputValueSetter.call(internalRef.current, "");
+          const aChangeEvent = new Event("change", { bubbles: true });
+          internalRef.current.dispatchEvent(aChangeEvent);
+        }
+      }
+    };
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      setIsValid(checkInputValidity(internalRef));
+      if (!isControlled) {
+        setHasUncontrolledValue(event.target.value);
+        setIsValid(checkInputValidity(internalRef));
+      }
       onChange?.(event, event.target.value);
+    };
+
+    const internalOnFocus = (event: FocusEvent<HTMLInputElement>) => {
+      setHasFocus(true);
+      onFocus?.(event);
+    };
+
+    const internalOnBlur = (event: FocusEvent<HTMLInputElement>) => {
+      setHasFocus(false);
+      onBlur?.(event);
     };
 
     const ariaDescribedBy = useCx(
@@ -179,12 +215,28 @@ export const TextInput = withTheme(
           }
         : {};
 
-    const prefixStyles = useCx(
-      styles.prefix,
-      isSearchTextInput && styles.affixIcon
+    const isSearchTextInput = type === "search";
+    // Prefix style and logic
+    const isPrefixIcon = isSearchTextInput;
+    const prefixIconName = "search";
+    const prefixStyles = useCx(styles.prefix, isPrefixIcon && styles.affixIcon);
+
+    // Suffix style and logic
+    const isSuffixButton = isSearchTextInput;
+    const suffixButtonIconName = "close-circle-filled";
+    const showSuffixButton = isControlled ? !!value : !!hasUncontrolledValue;
+    const suffixButtonStyle = useCx(
+      styles.suffix,
+      showSuffixButton && styles.affixHidden,
+      showSuffixButton && styles.affixFull
     );
 
-    const rootStyles = useCx(styles.root, !isValid && styles.invalid);
+    // Root styles
+    const rootStyles = useCx(
+      styles.root,
+      !isValid && styles.invalid,
+      hasFocus && styles.focus
+    );
 
     return (
       <Field
@@ -197,13 +249,13 @@ export const TextInput = withTheme(
         required={required}
       >
         <div className={rootStyles}>
-          {(prefix || isSearchTextInput) && (
+          {(prefix || isPrefixIcon) && (
             <span
               className={prefixStyles}
               aria-hidden="true"
               onClick={setFocus}
             >
-              {isSearchTextInput ? <SearchIcon /> : prefix}
+              {isPrefixIcon ? <Icon name={prefixIconName} /> : prefix}
             </span>
           )}
           <input
@@ -214,8 +266,8 @@ export const TextInput = withTheme(
             id={oid}
             name={name}
             onChange={handleChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
+            onBlur={internalOnBlur}
+            onFocus={internalOnFocus}
             placeholder={placeholder}
             readOnly={readonly}
             ref={internalRef}
@@ -224,13 +276,25 @@ export const TextInput = withTheme(
             defaultValue={defaultValue}
             value={value}
           />
-          {suffix && !isSearchTextInput && (
+          {/** Text Suffix */}
+          {suffix && !isSuffixButton && (
             <span
               className={styles.suffix}
               aria-hidden="true"
               onClick={setFocus}
             >
               {suffix}
+            </span>
+          )}
+          {/** Button Suffix */}
+          {isSuffixButton && showSuffixButton && (
+            <span className={suffixButtonStyle}>
+              <Button
+                name={name}
+                variant="affix"
+                icon={<Icon name={suffixButtonIconName} />}
+                onClick={onClear}
+              />
             </span>
           )}
         </div>
