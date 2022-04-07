@@ -1,0 +1,313 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guidelines/Downstream Development" />
+
+# Downstream development
+
+Odyssey publishes a handful of packages that can be used together to
+develop consistent, themeable, and optimized UI downstream of the Odyssey
+core components themselves. While we will cover each step in detail in
+this guide, you can also review a finalized [example project][1] to
+see the end result.
+
+At a high level, their are two parts of the system that work in concert:
+
+- A build toolchain API used at develop time
+- A react component API used at run time
+
+When applied together, developers can use the preferred APIs provided by
+Odyssey and take advantage of powerful efficiencies.
+
+Beyond the preferred API described above, development teams can also
+consume packages, modules, and utilities from the Odyssey system in
+isolation. For unpreferred use cases like this, more care should be taken
+to ensure successful UI outcomes for accessibility, internationalization,
+customization, and performance. Teams using an unpreferred approach
+should contact the Odyssey team as the specifics are beyond the scope of
+this guide.
+
+[1]: https://github.com/jeffbelser-okta/odyssey-demo
+
+## Setup a simple react project
+
+This can be done via higher order tools such as create-react-app or simply
+use `git` and `npm` executables from your command line and follow the
+prompts in a new directory:
+
+```sh
+  $ mkdir odyssey-demo && \
+    cd odyssey-demo && \
+    git init && \
+    npm init
+```
+
+With your project initialized, it is time to install Odyssey development dependencies:
+
+```sh
+  $ npm install --save-dev \
+      @okta/odyssey-babel-preset \
+      @okta/odyssey-postcss-preset \
+      @okta/odyssey-babel-loader \
+      @okta/browserslist-config-odyssey
+```
+
+Now install foundational development dependencies:
+
+```sh
+  $ npm install --save-dev \
+      typescript \
+      @types/react \
+      @types/react-dom \
+      webpack \
+      webpack-cli \
+      webpack-dev-server \
+      html-webpack-plugin \
+      postcss
+```
+
+And update the `package.json` file at the root of your project:
+
+```json
+"scripts": {
+  "start": "NODE_ENV=development webpack serve --hot --open"
+  "build": "NODE_ENV=production webpack"
+}
+```
+
+### Webpack
+
+Begin by creating a [`webpack.config.js` config file][2] at the root of your project:
+
+```js
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+
+module.exports = {
+  entry: "./src/index.tsx",
+  output: {
+    filename: "bundle.[hash].js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+    }),
+  ],
+  resolve: {
+    modules: [path.resolve(__dirname, "./src"), "node_modules"],
+    extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "@okta/odyssey-babel-loader",
+        },
+      },
+    ],
+  },
+};
+```
+
+[2]: https://webpack.js.org
+
+### Browserslist
+
+Begin by creating a [`.browserslistrc` config file][3] at the root of your project:
+
+```
+extends @okta/browserslist-config-odyssey
+```
+
+Alternatively, add a `browserslist` entry to your package.json file.
+
+This config will allow postcss, babel and other toolchains to optimize
+your build based on the intended browser targets. The configuration provided
+from the `@okta/browserslist-config-odyssey` package mirrors
+[Okta's own published browser support list][4]. You should feel free to
+manipulate this configuration further to optimize your asset delivery.
+For example, to construct separate modern and IE11 only bundles that
+include appropriate polyfills and transpiled source code.
+
+[3]: https://github.com/browserslist/browserslist
+[4]: https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm
+
+### Babel
+
+Begin by creating a [`babel.config.js` config file][5] the root of your project:
+
+```js
+module.exports = {
+  presets: ["@okta/odyssey-babel-preset"],
+
+  env: {
+    test: {
+      presets: [
+        [
+          "@okta/odyssey-babel-preset",
+          {
+            odyssey: {
+              // NOTE: allow for faster unit tests
+              identityObjectProxy: true,
+            },
+          },
+        ],
+      ],
+    },
+    production: {
+      comments: false,
+    },
+  },
+};
+```
+
+You can further configure each part of this preset by passing arguments
+within your babel configuration. The preset accepts arguments for the
+following babel presets and plugins:
+
+- `@babel/preset-env`
+- `@babel/preset-react`
+- `@babel/preset-typescript`
+- `@babel/odyssey-babel-plugin`
+
+Keep in mind you may want to configure the preset depending on the target
+environment. For example, tests may be built differently than local
+development code which is built differently than production code. An
+example of this is shown in the configuration above which saves time
+in unit test environments by enabling the `identityObjectProxy` option.
+Test coverage for styles can then be provided at the integration and VRT layer.
+
+[5]: https://babeljs.io
+
+### PostCSS
+
+Begin by creating a [`.postcssrc.js` config file][6] at the root of your project:
+
+```js
+const { default: postcssOdyssey } = require("@okta/odyssey-postcss-preset");
+
+module.exports = (ctx) => {
+  if (!ctx.odyssey) {
+    return {};
+  }
+
+  const options = Object.assign(
+    ctx.odyssey,
+    ctx.env === "production"
+      ? {
+          logical: {
+            dir: "ltr",
+            preserve: false,
+          },
+          autoprefixer: {
+            grid: "autoplace",
+            env: "production",
+          },
+        }
+      : {
+          modules: {
+            ...ctx.odyssey.modules,
+            // NOTE: use custom class names for easier local development
+            generateScopedName: "[name]__[local]___[hash:base62:6]",
+          },
+        }
+  );
+
+  return {
+    plugins: [postcssOdyssey(options)],
+  };
+};
+```
+
+Again, you can further configure each part of this preset by passing arguments
+within your postcss configuration. You may also want to configure the
+preset differently depending on the environment. You can see an example
+of this above using the `ctx.env === "production"` expression.
+
+[6]: https://postcss.org
+
+## Your first Odyssey component
+
+With your build toolchain in place it is time to install additional
+dependencies used at run time:
+
+```sh
+  $ npm install \
+      react \
+      react-dom \
+      @okta/odyssey-react-theme \
+      @okta/odyssey-react
+```
+
+Now create a new component file using JSX and typescript: `HelloWorld.tsx`
+
+```js
+import React from "react";
+import { Box } from "@okta/odyssey-react";
+import { withTheme } from "@okta/odyssey-react-theme";
+import { theme } from "./HelloWorld.theme";
+import styles from "./HelloWorld.module.css";
+
+const HelloWorld = () => (
+  <Box
+    as="p"
+    display="flex"
+    alignItems="center"
+    justifyContent="center"
+    className={styles.root}
+  >
+    <Box
+      as="strong"
+      className={styles.text}
+      color={false}
+      fontSize={false}
+      children="Hello World!"
+    />
+  </Box>
+);
+
+export default withTheme(theme, styles)(HelloWorld);
+```
+
+Then render your component within a react-dom entrypoint:
+
+```js
+import React from "react";
+import { render } from "react-dom";
+import HelloWorld from "./HelloWorld";
+
+const rootElement = document.getElementById("root");
+render(<HelloWorld />, rootElement);
+```
+
+Next, create a sibling CSS module file: `HelloWorld.module.css`:
+
+```css
+.root {
+  height: 100vh;
+}
+
+.text {
+  font-size: 3rem;
+  color: var(--Color);
+}
+```
+
+And finally, create a sibling theme module file: `HelloWorld.theme.ts`:
+
+```js
+import type { ThemeReducer } from "@okta/odyssey-react-theme";
+
+export const theme: ThemeReducer = (theme) => ({
+  Color: theme.ColorPrimaryBase,
+});
+```
+
+Notice that the object properties returned from your theme reducer function
+should map 1:1 with CSS custom property names referenced within your style
+module. In this case, `{ Color: "..." }` and `var(--Color)`.
+
+Now you should be able to reload your project and see your 'Hello World'
+component in the DOM!
