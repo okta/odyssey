@@ -15,11 +15,12 @@ import type { SvgIconNoChildrenProps } from "./types";
 import { useOmit } from "../../utils";
 import { iconDictionary } from "./";
 
+export type IconName = keyof typeof iconDictionary;
 export interface IconProps extends SvgIconNoChildrenProps {
   /**
    * Name of the icon to render
    */
-  name: keyof typeof iconDictionary;
+  name: IconName;
 }
 
 /**

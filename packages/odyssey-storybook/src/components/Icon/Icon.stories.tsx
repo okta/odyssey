@@ -135,6 +135,8 @@ const meta = [
     classname: "ExternalLinkIcon",
     use: "UI indicator - external link",
   },
+  { name: "eye", classname: "EyeIcon", use: "To make something visible" },
+  { name: "eye-off", classname: "EyeOffIcon", use: "To make something hidden" },
   { name: "filter", classname: "FilterIcon", use: "To filter results" },
   { name: "globe", classname: "GlobeIcon", use: "" },
   { name: "home", classname: "HomeIcon", use: "" },

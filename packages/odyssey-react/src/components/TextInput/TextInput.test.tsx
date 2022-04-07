@@ -234,5 +234,14 @@ describe("TextInput", () => {
     );
   });
 
+  it("has a suffix button when input type is password", () => {
+    render(
+      <TextInput label={label} type="password" defaultValue="Imma password" />
+    );
+    const inputElement = screen.getByLabelText(label);
+    expect(inputElement).toHaveValue("Imma password");
+    expect(screen.getByRole("button")).toBeInTheDocument();
+  });
+
   a11yCheck(() => render(<TextInput label="foo" />));
 });

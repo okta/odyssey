@@ -21,6 +21,7 @@ import type {
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit, useCx, useSharedRef } from "../../utils";
 import { Icon } from "../Icon";
+import type { IconName } from "../Icon";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./TextInput.theme";
@@ -30,6 +31,41 @@ import { Button } from "../Button";
 function checkInputValidity(inputRef: RefObject<HTMLInputElement>) {
   return inputRef.current ? inputRef.current?.checkValidity() : true;
 }
+
+function getAffixIconTypes({
+  type,
+  internalType,
+}: {
+  type?: string;
+  internalType?: string;
+}): { suffixIcon: IconName | null; prefixIcon: IconName | null } {
+  const isPasswordTextInput = type === "password";
+  const isSearchTextInput = type === "search";
+  if (isSearchTextInput) {
+    return {
+      suffixIcon: "close-circle-filled",
+      prefixIcon: "search",
+    };
+  }
+  if (isPasswordTextInput) {
+    if (internalType === "text") {
+      return {
+        suffixIcon: "eye-off",
+        prefixIcon: null,
+      };
+    }
+    return {
+      suffixIcon: "eye",
+      prefixIcon: null,
+    };
+  }
+
+  return {
+    suffixIcon: null,
+    prefixIcon: null,
+  };
+}
+
 interface CommonProps
   extends CommonFieldProps,
     Omit<
@@ -157,12 +193,14 @@ export const TextInput = withTheme(
       useState(defaultValue);
     const [isValid, setIsValid] = useState(checkInputValidity(internalRef));
     const [hasFocus, setHasFocus] = useState(false);
+    const [internalType, setInternalType] = useState(type);
 
     useEffect(() => {
       setIsValid(checkInputValidity(internalRef));
       if (!isControlled && typeof value !== "undefined") {
         setIsControlled(true);
       }
+      setInternalType(type);
     }, [internalRef, isControlled, required, type, value]);
 
     const setFocus = () => {
@@ -172,7 +210,6 @@ export const TextInput = withTheme(
     };
 
     const onClear = () => {
-      setFocus();
       if (internalRef.current) {
         const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
           window?.HTMLInputElement?.prototype,
@@ -216,20 +253,36 @@ export const TextInput = withTheme(
         : {};
 
     const isSearchTextInput = type === "search";
+    const isPasswordTextInput = type === "password";
+    const { prefixIcon, suffixIcon } = getAffixIconTypes({
+      type,
+      internalType,
+    });
     // Prefix style and logic
-    const isPrefixIcon = isSearchTextInput;
-    const prefixIconName = "search";
+    const isPrefixIcon = prefixIcon !== null;
     const prefixStyles = useCx(styles.prefix, isPrefixIcon && styles.affixIcon);
 
     // Suffix style and logic
-    const isSuffixButton = isSearchTextInput;
-    const suffixButtonIconName = "close-circle-filled";
-    const showSuffixButton = isControlled ? !!value : !!hasUncontrolledValue;
+    const isHoverFocusOnlyButton = isSearchTextInput;
+    const isSuffixButton = suffixIcon !== null;
+    const showSuffixButton = isHoverFocusOnlyButton
+      ? isControlled
+        ? !!value
+        : !!hasUncontrolledValue
+      : isSuffixButton;
     const suffixButtonStyle = useCx(
       styles.suffix,
-      showSuffixButton && styles.affixHidden,
+      isHoverFocusOnlyButton && showSuffixButton && styles.affixHidden,
       showSuffixButton && styles.affixFull
     );
+    const onSuffixButtonClick = () => {
+      setFocus();
+      if (isSearchTextInput) {
+        onClear();
+      } else if (isPasswordTextInput) {
+        setInternalType(internalType === type ? "text" : type);
+      }
+    };
 
     // Root styles
     const rootStyles = useCx(
@@ -249,13 +302,14 @@ export const TextInput = withTheme(
         required={required}
       >
         <div className={rootStyles}>
+          {/** Text or Icon Prefix */}
           {(prefix || isPrefixIcon) && (
             <span
               className={prefixStyles}
               aria-hidden="true"
               onClick={setFocus}
             >
-              {isPrefixIcon ? <Icon name={prefixIconName} /> : prefix}
+              {isPrefixIcon ? <Icon name={prefixIcon} /> : prefix}
             </span>
           )}
           <input
@@ -272,7 +326,7 @@ export const TextInput = withTheme(
             readOnly={readonly}
             ref={internalRef}
             required={required}
-            type={type}
+            type={internalType}
             defaultValue={defaultValue}
             value={value}
           />
@@ -292,8 +346,8 @@ export const TextInput = withTheme(
               <Button
                 name={name}
                 variant="affix"
-                icon={<Icon name={suffixButtonIconName} />}
-                onClick={onClear}
+                icon={<Icon name={suffixIcon} />}
+                onClick={onSuffixButtonClick}
               />
             </span>
           )}

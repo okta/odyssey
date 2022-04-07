@@ -89,3 +89,9 @@ Suffix.args = {
   type: "text",
   suffix: "minutes",
 };
+
+export const Password = Template.bind({});
+Password.args = {
+  label: "Password",
+  type: "password",
+};
