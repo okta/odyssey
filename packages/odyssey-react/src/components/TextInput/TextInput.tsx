@@ -276,8 +276,8 @@ export const TextInput = withTheme(
       showSuffixButton && styles.affixFull
     );
     const onSuffixButtonClick = () => {
-      setFocus();
       if (isSearchTextInput) {
+        setFocus();
         onClear();
       } else if (isPasswordTextInput) {
         setInternalType(internalType === type ? "text" : type);
