@@ -26,7 +26,7 @@ export function normalizeOpts(
 ): NormalizedOpts {
   const opts = babelOpts || Object.create(null);
   const normalized = {
-    include: [/\.module\.scss$/i],
+    include: [/\.module\.(?:scss|css)$/i],
     identityObjectProxy: false,
   };
 

@@ -211,7 +211,7 @@ const Tab = function TabsTab({
       fontSize={false}
       fontWeight={false}
     >
-      {children}
+      <span className={styles.label}>{children}</span>
     </Box>
   );
 };

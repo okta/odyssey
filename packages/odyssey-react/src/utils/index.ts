@@ -17,3 +17,4 @@ export { omit, useOmit } from "./omit";
 export { toCamelCase, toPascalCase } from "./convertCase";
 export { useFocus } from "./focusHandling";
 export type { PolymorphicForwardRef } from "./polymorphic";
+export { useSharedRef } from "./useSharedRef";

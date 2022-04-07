@@ -33,13 +33,18 @@
   }
 }
 
-.indicator {
+.indicator,
+.icon {
   display: inline-block;
+  height: 1em;
+  line-height: 1;
+}
+
+.indicator {
   margin-inline-start: var(--IndicatorMarginInlineStart);
 }
 
 .icon {
-  display: inline-block;
   margin-inline-end: var(--IconMarginInlineEnd);
 }
 

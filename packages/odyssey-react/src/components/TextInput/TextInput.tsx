@@ -10,25 +10,29 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import type {
   FocusEventHandler,
   ComponentPropsWithRef,
   ChangeEvent,
+  RefObject,
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
-import { useOid, useOmit, useCx } from "../../utils";
+import { useOid, useOmit, useCx, useSharedRef } from "../../utils";
 import { SearchIcon } from "../Icon";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
 import { theme } from "./TextInput.theme";
 import styles from "./TextInput.module.scss";
 
-export interface TextInputProps
+function checkInputValidity(inputRef: RefObject<HTMLInputElement>) {
+  return inputRef.current ? inputRef.current?.checkValidity() : true;
+}
+interface CommonProps
   extends CommonFieldProps,
     Omit<
       ComponentPropsWithRef<"input">,
-      "style" | "className" | "color" | "onChange"
+      "style" | "className" | "color" | "onChange" | "prefix"
     > {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
@@ -39,7 +43,7 @@ export interface TextInputProps
    * The underlying input element type
    * @default text
    */
-  type?: "text" | "email" | "url" | "tel" | "search" | "password";
+  type?: "text" | "email" | "url" | "tel" | "password";
 
   /**
    * The underlying input element name attribute
@@ -62,6 +66,16 @@ export interface TextInputProps
    * The underlying input element placeholder attribute
    */
   placeholder?: string;
+
+  /**
+   * An optional string prefix displayed before the input
+   */
+  prefix?: string;
+
+  /**
+   * An optional string suffix displayed after the input
+   */
+  suffix?: string;
 
   /**
    * The input element value for controlled components
@@ -93,6 +107,14 @@ export interface TextInputProps
   onFocus?: FocusEventHandler<HTMLInputElement>;
 }
 
+interface SearchProps extends Omit<CommonProps, "type" | "prefix" | "suffix"> {
+  type: "search";
+  prefix?: never;
+  suffix?: never;
+}
+
+export type TextInputProps = CommonProps | SearchProps;
+
 /**
  * Text inputs allow users to edit and input data.
  */
@@ -113,6 +135,8 @@ export const TextInput = withTheme(
       readonly = false,
       required,
       type = "text",
+      prefix,
+      suffix,
       value,
       error,
       hint,
@@ -121,15 +145,27 @@ export const TextInput = withTheme(
       ...rest
     } = props;
 
+    const isSearchTextInput = type === "search";
+
     const oid = useOid(id);
     const omitProps = useOmit(rest);
+    const internalRef = useSharedRef(ref);
+    const [isValid, setIsValid] = useState(checkInputValidity(internalRef));
 
-    const handleChange = useCallback(
-      (event: ChangeEvent<HTMLInputElement>) => {
-        onChange?.(event, event.target.value);
-      },
-      [onChange]
-    );
+    useEffect(() => {
+      setIsValid(checkInputValidity(internalRef));
+    }, [internalRef, required, type, value]);
+
+    const setFocus = () => {
+      requestAnimationFrame(() => {
+        internalRef.current?.focus();
+      });
+    };
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setIsValid(checkInputValidity(internalRef));
+      onChange?.(event, event.target.value);
+    };
 
     const ariaDescribedBy = useCx(
       hint && `${oid}-hint`,
@@ -143,35 +179,12 @@ export const TextInput = withTheme(
           }
         : {};
 
-    const input = (
-      <input
-        {...omitProps}
-        {...ariaProps}
-        className={styles.root}
-        disabled={disabled}
-        id={oid}
-        name={name}
-        onChange={handleChange}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        placeholder={placeholder}
-        readOnly={readonly}
-        ref={ref}
-        required={required}
-        type={type}
-        defaultValue={defaultValue}
-        value={value}
-      />
+    const prefixStyles = useCx(
+      styles.prefix,
+      isSearchTextInput && styles.affixIcon
     );
 
-    const search = (
-      <span className={styles.outer}>
-        {input}
-        <span className={styles.indicator} role="presentation">
-          <SearchIcon />
-        </span>
-      </span>
-    );
+    const rootStyles = useCx(styles.root, !isValid && styles.invalid);
 
     return (
       <Field
@@ -179,11 +192,48 @@ export const TextInput = withTheme(
         hint={hint}
         inputId={oid}
         label={label}
-        labelHidden={type === "search"}
+        labelHidden={isSearchTextInput}
         optionalLabel={optionalLabel}
         required={required}
       >
-        {type === "search" ? search : input}
+        <div className={rootStyles}>
+          {(prefix || isSearchTextInput) && (
+            <span
+              className={prefixStyles}
+              aria-hidden="true"
+              onClick={setFocus}
+            >
+              {isSearchTextInput ? <SearchIcon /> : prefix}
+            </span>
+          )}
+          <input
+            {...omitProps}
+            {...ariaProps}
+            className={styles.input}
+            disabled={disabled}
+            id={oid}
+            name={name}
+            onChange={handleChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            placeholder={placeholder}
+            readOnly={readonly}
+            ref={internalRef}
+            required={required}
+            type={type}
+            defaultValue={defaultValue}
+            value={value}
+          />
+          {suffix && !isSearchTextInput && (
+            <span
+              className={styles.suffix}
+              aria-hidden="true"
+              onClick={setFocus}
+            >
+              {suffix}
+            </span>
+          )}
+        </div>
       </Field>
     );
   })
