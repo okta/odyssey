@@ -21,9 +21,9 @@ Build and design consistent, efficient, and accessible UIs for all Okta users.
 
 Odyssey browser support mirrors Okta's [Supported platforms, browsers, and operating systems](https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm) with the exception of IE 11.
 
-## Contributing
+## Questions & Contributing
 
-Please follow our [contributing guidelines](https://github.com/okta/odyssey/blob/eced5cb6192fc0177375eccff52fc6477c69d37c/packages/odyssey-storybook/src/contributing/GettingStarted.stories.mdx).
+Please follow our [Getting Started guide](https://odyssey.okta.design/?path=/story/contributing-getting-started--page).
 
 ## License
 
