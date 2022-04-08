@@ -126,7 +126,10 @@
 
   &:hover,
   &:focus {
-    background-color: rgba(var(--DismissHoverBackgroundColor), var(--DismissHoverBackgroundOpacity));
+    background-color: rgba(
+      var(--DismissHoverBackgroundColor),
+      var(--DismissHoverBackgroundOpacity)
+    );
   }
 
   &:disabled {
