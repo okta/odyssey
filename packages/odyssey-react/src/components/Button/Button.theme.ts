@@ -77,8 +77,7 @@ export const theme: ThemeReducer = (theme) => ({
   DismissLineHeight: 1,
   DismissPaddingBlock: theme.SpaceScale0,
   DismissPaddingInline: theme.SpaceScale0,
-  DismissHoverBackgroundColor: "29, 29, 33",
-  DismissHoverBackgroundOpacity: 0.1,
+  DismissHoverBackgroundColor: "rgba(29, 29, 33, 0.1)",
   DismissFocusBackgroundColor: "rgba(255, 255, 255, 0.6)",
   DismissDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
 
