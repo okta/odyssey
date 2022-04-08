@@ -39,9 +39,3 @@ jobs:
           APPLITOOLS_API_KEY: ${{ secrets.OKTA_474937 }}
           APPLITOOLS_BATCH_ID: ${{ github.sha }}
         run: yarn workspace @okta/odyssey-storybook eyes-storybook --conf ./applitools.xbrowser.config.js --storybook-url ${{ env.URL_STORYBOOK }}
-
-      - name: "inform slack of x-browser VRT"
-        run: bash ./scripts/notify-slack-xbrowser-vrt.sh
-        env:
-          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          BRANCH_NAME: ${{ github.ref_name }}
