@@ -20,6 +20,7 @@ import {
 import {
   Button,
   ButtonProps,
+  CloseCircleFilledIcon,
   CloseIcon,
   SettingsIcon,
 } from "@okta/odyssey-react";
@@ -106,6 +107,13 @@ WithIcon.args = {
 export const IconOnly = Template.bind({});
 IconOnly.args = {
   icon: <SettingsIcon title="settings" />,
+  children: undefined,
+};
+
+export const Affix = Template.bind({});
+Affix.args = {
+  variant: "affix",
+  icon: <CloseCircleFilledIcon title="close" />,
   children: undefined,
 };
 

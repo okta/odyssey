@@ -172,6 +172,31 @@
   }
 }
 
+.affixVariant {
+  border: 0;
+  background-color: var(--AffixBackgroundColor);
+  color: var(--AffixTextColor);
+  line-height: 1;
+  padding-block: var(--AffixPadding);
+  padding-inline: var(--AffixPadding);
+
+  &:hover {
+    border-color: var(--AffixHoverBorderColor);
+    background-color: var(--AffixHoverBackgroundColor);
+    color: var(--AffixHoverTextColor);
+  }
+
+  &:focus {
+    background-color: var(--AffixFocusBackgroundColor);
+    color: var(--AffixFocusTextColor);
+  }
+
+  &:disabled {
+    background-color: var(--AffixDisabledBackgroundColor);
+    color: var(--AffixDisabledTextColor);
+  }
+}
+
 /* Layouts */
 
 .wideLayout {
