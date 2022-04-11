@@ -28,6 +28,7 @@ export * from "./Modal";
 export * from "./NativeSelect";
 export * from "./PasswordInput";
 export * from "./Radio";
+export * from "./SearchInput";
 export * from "./ScreenReaderText";
 export * from "./Select";
 export * from "./Status";
