@@ -1,4 +1,4 @@
-name: Cross Browser VRT
+name: X-Browser VRT
 on:
   workflow_dispatch:
   schedule:
@@ -13,6 +13,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: develop
+          fetch-depth: 3
+
       - name: setup node
         uses: actions/setup-node@v2
         with:
