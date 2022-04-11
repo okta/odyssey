@@ -39,11 +39,9 @@ jobs:
           filters: |
             deploy:
               - './packages/odyssey-react/**'
-              - './packages/odyssey/src/**'
               - './packages/odyssey-storybook/**'
             vrt:
               - './packages/odyssey-react/src/**'
-              - './packages/odyssey/src/**'
               - './packages/odyssey-storybook/**'
       - name: setup AWS
         if: steps.changes.outputs.deploy == 'true'
