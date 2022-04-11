@@ -28,7 +28,7 @@ jobs:
         run: yarn install --frozen-lockfile --prefer-offline --ignore-scripts
 
       - name: set $SHA7
-        run: echo "SHA7=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
+        run: echo "SHA7=$(git log --format=%h --no-merges --max-count 1)" >> $GITHUB_ENV
       - name: set $URL_STORYBOOK
         run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
       - name: set $DATE
@@ -37,5 +37,5 @@ jobs:
       - name: visual regression test
         env:
           APPLITOOLS_API_KEY: ${{ secrets.OKTA_474937 }}
-          APPLITOOLS_BATCH_ID: ${{ github.sha }}
+          APPLITOOLS_BATCH_ID: ${{ github.env.SHA7 }}
         run: yarn workspace @okta/odyssey-storybook eyes-storybook --conf ./applitools.xbrowser.config.js --storybook-url ${{ env.URL_STORYBOOK }}
