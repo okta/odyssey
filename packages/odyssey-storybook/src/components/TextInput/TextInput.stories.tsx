@@ -12,7 +12,13 @@
 
 import React from "react";
 import type { Story } from "@storybook/react";
-import { TextInput, TextInputProps } from "@okta/odyssey-react";
+import {
+  Button,
+  CopyIcon,
+  GlobeIcon,
+  TextInput,
+  TextInputProps,
+} from "@okta/odyssey-react";
 import { TextInput as Source } from "../../../../odyssey-react/src";
 
 import TextInputMdx from "./TextInput.mdx";
@@ -45,8 +51,8 @@ export default {
     onChange: { control: false },
     onBlur: { control: false },
     onFocus: { control: false },
-    prefix: { control: "text" },
-    suffix: { control: "text" },
+    PrefixText: { control: "text" },
+    SuffixText: { control: "text" },
   },
 };
 
@@ -69,22 +75,32 @@ KitchenSink.args = {
   required: false,
 };
 
-export const Search = Template.bind({});
-Search.args = {
-  defaultValue: "Search Planets",
-  type: "search",
-};
-
 export const Prefix = Template.bind({});
 Prefix.args = {
   label: "Phone Number",
   type: "tel",
-  prefix: "+1",
+  PrefixText: "+1",
 };
 
 export const Suffix = Template.bind({});
 Suffix.args = {
   label: "Time til destination",
   type: "text",
-  suffix: "minutes",
+  SuffixText: "minutes",
+};
+
+export const PrefixIcon = Template.bind({});
+PrefixIcon.args = {
+  label: "A website",
+  type: "url",
+  required: false,
+  PrefixIcon: <GlobeIcon />,
+};
+
+export const SuffixButton = Template.bind({});
+SuffixButton.args = {
+  label: "Copy",
+  type: "text",
+  required: false,
+  SuffixButton: <Button variant="affix" icon={<CopyIcon />} />,
 };

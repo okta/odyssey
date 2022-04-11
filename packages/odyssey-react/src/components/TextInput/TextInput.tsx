@@ -10,8 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef, useEffect, useState } from "react";
+import React, { forwardRef, ReactNode, useEffect, useState } from "react";
 import type {
+  FocusEvent,
   FocusEventHandler,
   ComponentPropsWithRef,
   ChangeEvent,
@@ -19,20 +20,20 @@ import type {
 } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useOid, useOmit, useCx, useSharedRef } from "../../utils";
-import { SearchIcon } from "../Icon";
 import { Field } from "../Field";
 import type { CommonFieldProps } from "../Field/types";
+import { Affix } from "./Affix";
 import { theme } from "./TextInput.theme";
 import styles from "./TextInput.module.scss";
 
 function checkInputValidity(inputRef: RefObject<HTMLInputElement>) {
-  return inputRef.current ? inputRef.current?.checkValidity() : true;
+  return inputRef.current ? inputRef.current.checkValidity() : true;
 }
-interface CommonProps
+export interface TextInputProps
   extends CommonFieldProps,
     Omit<
       ComponentPropsWithRef<"input">,
-      "style" | "className" | "color" | "onChange" | "prefix"
+      "style" | "className" | "color" | "onChange"
     > {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
@@ -43,7 +44,7 @@ interface CommonProps
    * The underlying input element type
    * @default text
    */
-  type?: "text" | "email" | "url" | "tel" | "password";
+  type?: "text" | "email" | "url" | "tel";
 
   /**
    * The underlying input element name attribute
@@ -68,14 +69,40 @@ interface CommonProps
   placeholder?: string;
 
   /**
-   * An optional string prefix displayed before the input
+   * An optional prefix button displayed before the input
+   * Only one of PrefixButton, PrefixIcon, PrefixText can be set
    */
-  prefix?: string;
+  PrefixButton?: ReactNode;
 
   /**
-   * An optional string suffix displayed after the input
+   * An optional prefix icon displayed before the input
+   * Only one of PrefixButton, PrefixIcon, PrefixText can be set
    */
-  suffix?: string;
+  PrefixIcon?: ReactNode;
+
+  /**
+   * An optional prefix text displayed before the input
+   * Only one of PrefixButton, PrefixIcon, PrefixText can be set
+   */
+  PrefixText?: string;
+
+  /**
+   * An optional suffix button displayed before the input
+   * Only one of SuffixButton, SuffixIcon, SuffixText can be set
+   */
+  SuffixButton?: ReactNode;
+
+  /**
+   * An optional suffix icon displayed before the input
+   * Only one of SuffixButton, SuffixIcon, SuffixText can be set
+   */
+  SuffixIcon?: ReactNode;
+
+  /**
+   * An optional suffix text displayed before the input
+   * Only one of SuffixButton, SuffixIcon, SuffixText can be set
+   */
+  SuffixText?: string;
 
   /**
    * The input element value for controlled components
@@ -107,14 +134,6 @@ interface CommonProps
   onFocus?: FocusEventHandler<HTMLInputElement>;
 }
 
-interface SearchProps extends Omit<CommonProps, "type" | "prefix" | "suffix"> {
-  type: "search";
-  prefix?: never;
-  suffix?: never;
-}
-
-export type TextInputProps = CommonProps | SearchProps;
-
 /**
  * Text inputs allow users to edit and input data.
  */
@@ -135,35 +154,51 @@ export const TextInput = withTheme(
       readonly = false,
       required,
       type = "text",
-      prefix,
-      suffix,
+      SuffixButton,
+      SuffixIcon,
+      SuffixText,
+      PrefixButton,
+      PrefixIcon,
+      PrefixText,
       value,
       error,
       hint,
       label,
+      labelHidden,
       optionalLabel,
       ...rest
     } = props;
 
-    const isSearchTextInput = type === "search";
-
     const oid = useOid(id);
     const omitProps = useOmit(rest);
     const internalRef = useSharedRef(ref);
-    const [isValid, setIsValid] = useState(checkInputValidity(internalRef));
+    const [isValid, setIsValid] = useState(true);
+    const [hasFocus, setHasFocus] = useState(false);
 
     useEffect(() => {
-      setIsValid(checkInputValidity(internalRef));
-    }, [internalRef, required, type, value]);
+      if (internalRef.current) {
+        setIsValid(checkInputValidity(internalRef));
+      }
+    }, [internalRef, required]);
 
-    const setFocus = () => {
-      requestAnimationFrame(() => {
-        internalRef.current?.focus();
-      });
+    const internalOnFocus = (event: FocusEvent<HTMLInputElement>) => {
+      setHasFocus(true);
+      onFocus?.(event);
+    };
+
+    const internalOnBlur = (event: FocusEvent<HTMLInputElement>) => {
+      setHasFocus(false);
+      onBlur?.(event);
     };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      setIsValid(checkInputValidity(internalRef));
+      if (
+        typeof value === "undefined" ||
+        value === internalRef.current?.value
+      ) {
+        // not a controlled value, check validity on change
+        setIsValid(checkInputValidity(internalRef));
+      }
       onChange?.(event, event.target.value);
     };
 
@@ -179,12 +214,23 @@ export const TextInput = withTheme(
           }
         : {};
 
-    const prefixStyles = useCx(
-      styles.prefix,
-      isSearchTextInput && styles.affixIcon
+    const rootStyles = useCx(
+      styles.root,
+      !isValid && styles.invalid,
+      hasFocus && styles.focus
     );
 
-    const rootStyles = useCx(styles.root, !isValid && styles.invalid);
+    const prefixStyles = useCx(
+      styles.prefix,
+      PrefixButton ? styles.affixFull : undefined,
+      PrefixIcon ? styles.affixIcon : undefined
+    );
+
+    const suffixStyles = useCx(
+      styles.suffix,
+      SuffixButton ? styles.affixFull : undefined,
+      SuffixIcon ? styles.affixIcon : undefined
+    );
 
     return (
       <Field
@@ -192,20 +238,18 @@ export const TextInput = withTheme(
         hint={hint}
         inputId={oid}
         label={label}
-        labelHidden={isSearchTextInput}
+        labelHidden={labelHidden}
         optionalLabel={optionalLabel}
         required={required}
       >
         <div className={rootStyles}>
-          {(prefix || isSearchTextInput) && (
-            <span
-              className={prefixStyles}
-              aria-hidden="true"
-              onClick={setFocus}
-            >
-              {isSearchTextInput ? <SearchIcon /> : prefix}
-            </span>
-          )}
+          <Affix
+            sharedRef={internalRef}
+            AffixButton={PrefixButton}
+            AffixIcon={PrefixIcon}
+            AffixText={PrefixText}
+            className={prefixStyles}
+          />
           <input
             {...omitProps}
             {...ariaProps}
@@ -214,8 +258,8 @@ export const TextInput = withTheme(
             id={oid}
             name={name}
             onChange={handleChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
+            onBlur={internalOnBlur}
+            onFocus={internalOnFocus}
             placeholder={placeholder}
             readOnly={readonly}
             ref={internalRef}
@@ -224,15 +268,13 @@ export const TextInput = withTheme(
             defaultValue={defaultValue}
             value={value}
           />
-          {suffix && !isSearchTextInput && (
-            <span
-              className={styles.suffix}
-              aria-hidden="true"
-              onClick={setFocus}
-            >
-              {suffix}
-            </span>
-          )}
+          <Affix
+            sharedRef={internalRef}
+            AffixButton={SuffixButton}
+            AffixIcon={SuffixIcon}
+            AffixText={SuffixText}
+            className={suffixStyles}
+          />
         </div>
       </Field>
     );
