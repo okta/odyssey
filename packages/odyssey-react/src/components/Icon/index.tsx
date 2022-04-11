@@ -83,6 +83,12 @@ export * from "./Edit";
 import { ExternalLinkIcon } from "./ExternalLink";
 export * from "./ExternalLink";
 
+import { EyeOffIcon } from "./EyeOff";
+export * from "./EyeOff";
+
+import { EyeIcon } from "./Eye";
+export * from "./Eye";
+
 import { FilterIcon } from "./Filter";
 export * from "./Filter";
 
@@ -146,6 +152,8 @@ export const iconDictionary = {
   "drag-handle": DragHandleIcon,
   edit: EditIcon,
   "external-link": ExternalLinkIcon,
+  "eye-off": EyeOffIcon,
+  eye: EyeIcon,
   filter: FilterIcon,
   globe: GlobeIcon,
   home: HomeIcon,
