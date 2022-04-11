@@ -12,10 +12,8 @@
 
 import React from "react";
 import { Story } from "@storybook/react";
-import { useArgs } from "@storybook/client-api";
 import { Banner as Source } from "../../../../odyssey-react/src";
 import { Banner, BannerProps, Link } from "@okta/odyssey-react";
-
 import BannerMdx from "./Banner.mdx";
 
 export default {
@@ -26,6 +24,13 @@ export default {
     docs: {
       page: BannerMdx,
     },
+    actions: {
+      argTypesRegex: null,
+    },
+  },
+  args: {
+    onDismiss: null,
+    dismissButtonLabel: null,
   },
   argTypes: {
     children: {
@@ -40,34 +45,21 @@ export default {
       control: null,
     },
     dismissButtonLabel: {
-      defaultValue: "Dismiss banner",
       control: "text",
     },
     open: {
       defaultValue: true,
     },
+    onDismiss: {
+      type: null,
+      control: null,
+    },
   },
 };
 
-type OnDismissEvent = Parameters<NonNullable<BannerProps["onDismiss"]>>[number];
-
 const Template: Story<BannerProps> = (props) => {
-  const [, updateArgs] = useArgs();
-  let dismissProps = {};
-
-  if (props.onDismiss) {
-    dismissProps = {
-      onDismiss: (event: OnDismissEvent) => {
-        if (typeof props.onDismiss === "function") {
-          props.onDismiss(event);
-        }
-        updateArgs({ open: false });
-      },
-    };
-  }
-
   return (
-    <Banner {...props} {...dismissProps}>
+    <Banner {...props}>
       <Link variant="monochrome" href="https://www.okta.com">
         Action Link
       </Link>
@@ -78,35 +70,22 @@ const Template: Story<BannerProps> = (props) => {
 export const Info = Template.bind({});
 Info.args = {
   variant: "info",
-  dismissButtonLabel: undefined,
-  onDismiss: undefined,
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
   variant: "danger",
-  dismissButtonLabel: undefined,
-  onDismiss: undefined,
 };
 
 export const Caution = Template.bind({});
 Caution.args = {
   variant: "caution",
-  dismissButtonLabel: undefined,
-  onDismiss: undefined,
 };
 
 export const Dismissable = Template.bind({});
 Dismissable.args = {
+  dismissButtonLabel: "dismiss",
   onDismiss: () => {
     console.log("Banner: onDismiss!");
-  },
-};
-Dismissable.argTypes = {
-  onDismiss: {
-    control: { disable: false },
-  },
-  dismissButtonLabel: {
-    control: { disable: false, type: "text" },
   },
 };
