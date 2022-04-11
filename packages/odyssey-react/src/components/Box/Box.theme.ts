@@ -13,8 +13,8 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
   // Width/Height
+  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   MaxLineLength: theme.FontLineLengthMax,
 
   // Space
@@ -25,8 +25,10 @@ export const theme: ThemeReducer = (theme) => ({
   SpaceScale8: theme.SpaceScale8,
 
   // Shadow
+  /* eslint-disable @okta/odyssey/no-invalid-theme-properties */
   BaseBoxShadow: theme.ShadowScale0,
   HoverBoxShadow: theme.ShadowScale1,
+  /* eslint-enable @okta/odyssey/no-invalid-theme-properties */
 
   // Focus Outline
   PrimaryFocusOutlineColor: theme.FocusOutlineColorPrimary,
