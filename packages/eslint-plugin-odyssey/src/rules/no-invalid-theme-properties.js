@@ -11,7 +11,7 @@
  */
 
 const path = require("path");
-const validThemeProperty = /^[A-Z][A-Za-z0-9]+$/;
+const validThemeProperty = /^[A-Z][A-z0-9]+$/;
 const declarations = require("../utils/cssDeclarations");
 
 module.exports = {
@@ -60,7 +60,10 @@ module.exports = {
         return;
       }
 
-      if (!declarations.some((decl) => value.endsWith(decl))) {
+      if (
+        !value.match(/[0-9]+$/) &&
+        !declarations.some((decl) => value.endsWith(decl))
+      ) {
         context.report({ messageId: "declaration", node });
         return;
       }
