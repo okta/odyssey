@@ -16,7 +16,7 @@ import {
   FieldGroupProps,
   Infobox,
   Select,
-  TextInput,
+  SearchInput,
 } from "../../../../../odyssey-react/src";
 import FieldGroupMdx from "./FieldGroup.mdx";
 
@@ -58,7 +58,7 @@ const Template: Story<FieldGroupProps> = ({ legend, desc }) => (
       <Select.Option children="Nessus" />
       <Select.Option children="Europa" />
     </Select>
-    <TextInput label="Flight identifier" type="search" />
+    <SearchInput label="Flight identifier" />
   </FieldGroup>
 );
 

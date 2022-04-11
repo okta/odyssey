@@ -43,7 +43,7 @@ interface CommonProps
    * The visual variant to be displayed to the user.
    * @default primary
    */
-  variant?: "primary" | "secondary" | "danger" | "floating";
+  variant?: "primary" | "secondary" | "danger" | "floating" | "affix";
 
   /**
    * Extends the width of the button to that of its' parent.
@@ -59,7 +59,15 @@ interface IconProps extends CommonProps {
   icon: ReactElement;
 }
 
-export type ButtonProps = IconProps | ChildrenProps;
+interface AffixProps
+  extends Omit<CommonProps, "variant" | "children" | "icon" | "size"> {
+  variant: "affix";
+  children: never;
+  icon: ReactElement;
+  size: "s";
+}
+
+export type ButtonProps = IconProps | ChildrenProps | AffixProps;
 
 /**
  * A clickable button used for form submissions and most in-page interactions.
