@@ -6,10 +6,6 @@ import { ThemeTable } from "../../../.storybook/components";
 
 Banners let users know important messages related to their overall experience on the website. They can be purely informational messages or critical errors to act upon.
 
-## Anatomy
-
-**ANATOMY MISSING**
-
 ## Behavior
 
 Banners must be present on load and should not be trigged asynchronously, as they may not be visible. These alerts are not transient, but may be dismissed by the user.
@@ -54,27 +50,31 @@ In addition to the required content and placement, Banners have several optional
 
 Banners can utilize an optional Title to give an at-a-glance lede.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="components-banner--with-title" />
+</Canvas>
 
 ### Actions
 
-It's often useful to direct users toward an appropriate action, especially for fixing errors.
+It's often useful to direct users toward an appropriate action, especially for fixing errors. Please utilize <a href="?path=/docs/components-link--monochrome">Link</a> for these actions. If it's necessary to provide the user with an action, please direct them to the appropriate flow instead of beginning a new process inline.
 
-**STORY MISSING**
-
-The actions section is limited to links. If it's necessary to provide the user with an action, please direct them to the appropriate flow instead of beginning a new process inline.
-
-**STORY MISSING**
+<Canvas>
+  <Story id="components-banner--with-link" />
+</Canvas>
 
 ### Dismissal
 
 Banners support dismissal for messages that do not persist or only require a one-time acknowledgement.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="components-banner--dismissable" />
+</Canvas>
 
 ## Content Guidelines
 
-Banner content should be succinct and direct. When including an action, be sure the link text clearly indicates where it leads.
+Banner content should be succinct and direct. If possible, your content should be limited to a single line, which wraps around 80 characters. Banner content will also be visible on mobile.
+
+When including an action, be sure the link text clearly indicates where it leads.
 
 ## Props
 
