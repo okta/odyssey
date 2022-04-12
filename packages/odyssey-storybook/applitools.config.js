@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+const VRT_IGNORE = "Toast.Provider".split(" ");
+
 module.exports = {
   // NOTE: the docs for this exitcode config are incorrect as of this
   // writing. An explicit `false` value here allows a failed VRT run to
@@ -27,7 +29,7 @@ module.exports = {
     guidelinesVersion: "WCAG_2_1",
   },
   include({ name }) {
-    if (name === "Toast.Provider") return false;
+    if (VRT_IGNORE.includes(name)) return false;
     return true;
   },
 };
