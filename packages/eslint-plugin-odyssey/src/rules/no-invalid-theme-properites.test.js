@@ -21,6 +21,8 @@ ruleTester.run("no-invalid-theme-properties", rule, {
     { code: "({ FooX: 0 })" },
     { code: "({ FooBarX: 0 })" },
     { code: "({ FooBarBazX: 0 })" },
+    { code: "({ FooBarBazX0: 0 })" },
+    { code: "({ FooBarBazX000: 0 })" },
   ],
 
   invalid: [
