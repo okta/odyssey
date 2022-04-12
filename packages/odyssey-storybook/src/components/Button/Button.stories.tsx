@@ -12,24 +12,23 @@
 
 import React from "react";
 import { Story } from "@storybook/react";
-import { Button as Source } from "../../../../odyssey-react/src";
-import {
-  ColorBackgroundBase,
-  ColorPrimaryBase,
-} from "@okta/odyssey-design-tokens";
 import {
   Button,
   ButtonProps,
   CloseIcon,
   SettingsIcon,
-} from "@okta/odyssey-react";
+} from "../../../../odyssey-react/src";
+import {
+  ColorBackgroundBase,
+  ColorPrimaryBase,
+} from "@okta/odyssey-design-tokens";
 import { ThemeProvider } from "@okta/odyssey-react-theme";
 
 import ButtonMdx from "./Button.mdx";
 
 export default {
   title: `Components/Button`,
-  component: Source,
+  component: Button,
   parameters: {
     docs: {
       page: ButtonMdx,
