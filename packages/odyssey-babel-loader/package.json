@@ -11,10 +11,13 @@
     "directory": "packages/odyssey-babel-loader"
   },
   "scripts": {
-    "prepare": "rm -rf ./dist && mkdir ./dist && cp -r ./src/** ./dist",
+    "build": "rm -rf ./dist && mkdir ./dist && cp -r ./src/** ./dist",
     "prepack": "prepack"
   },
   "dependencies": {
     "babel-loader": "^8"
+  },
+  "devDependencies": {
+    "@okta/odyssey-lifecycle": "^0.11.3"
   }
 }

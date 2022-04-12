@@ -5285,16 +5285,21 @@ __metadata:
   dependencies:
     "@babel/core": ^7.15.0
     "@babel/types": ^7.14.5
+    "@okta/odyssey-lifecycle": ^0.11.3
+    "@okta/odyssey-typescript": ^0.11.3
     babel-jest: ^26.6.3
     jest: ^26.6.3
+    typescript: ^4.4.4
   languageName: unknown
   linkType: soft
 
-"@okta/browserslist-config-odyssey@^0.11.2, @okta/browserslist-config-odyssey@workspace:packages/browserslist-config-odyssey":
+"@okta/browserslist-config-odyssey@^0.11.3, @okta/browserslist-config-odyssey@workspace:packages/browserslist-config-odyssey":
   version: 0.0.0-use.local
   resolution: "@okta/browserslist-config-odyssey@workspace:packages/browserslist-config-odyssey"
   dependencies:
-    "@okta/odyssey-typescript": ^0.11.2
+    "@okta/odyssey-lifecycle": ^0.11.3
+    "@okta/odyssey-typescript": ^0.11.3
+    typescript: ^4.4.4
   languageName: unknown
   linkType: soft
 
@@ -5306,7 +5311,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/eslint-plugin-odyssey@^0.11.2, @okta/eslint-plugin-odyssey@workspace:packages/eslint-plugin-odyssey":
+"@okta/eslint-plugin-odyssey@^0.11.3, @okta/eslint-plugin-odyssey@workspace:packages/eslint-plugin-odyssey":
   version: 0.0.0-use.local
   resolution: "@okta/eslint-plugin-odyssey@workspace:packages/eslint-plugin-odyssey"
   dependencies:
@@ -5317,33 +5322,36 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-babel-loader@workspace:packages/odyssey-babel-loader":
+"@okta/odyssey-babel-loader@^0.11.3, @okta/odyssey-babel-loader@workspace:packages/odyssey-babel-loader":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-babel-loader@workspace:packages/odyssey-babel-loader"
   dependencies:
+    "@okta/odyssey-lifecycle": ^0.11.3
     babel-loader: ^8
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-babel-plugin@^0.11.2, @okta/odyssey-babel-plugin@workspace:packages/odyssey-babel-plugin":
+"@okta/odyssey-babel-plugin@^0.11.3, @okta/odyssey-babel-plugin@workspace:packages/odyssey-babel-plugin":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-babel-plugin@workspace:packages/odyssey-babel-plugin"
   dependencies:
     "@babel/template": ^7.12.13
     "@babel/types": ^7.14.5
-    "@okta/odyssey-postcss-preset": ^0.11.2
-    "@okta/odyssey-typescript": ^0.11.2
+    "@okta/odyssey-lifecycle": ^0.11.3
+    "@okta/odyssey-postcss-preset": ^0.11.3
+    "@okta/odyssey-typescript": ^0.11.3
     babel-jest: ^26.6.3
     jest: ^26.6.3
     postcss: ^8.3.6
     postcss-load-config: ^3.1.0
+    typescript: ^4.4.4
   peerDependencies:
     "@okta/odyssey-postcss-preset": ">= 0.8.2"
     postcss: ">= 8 <9"
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-babel-preset@^0.11.2, @okta/odyssey-babel-preset@workspace:packages/odyssey-babel-preset":
+"@okta/odyssey-babel-preset@^0.11.3, @okta/odyssey-babel-preset@workspace:packages/odyssey-babel-preset":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-babel-preset@workspace:packages/odyssey-babel-preset"
   dependencies:
@@ -5351,48 +5359,53 @@ __metadata:
     "@babel/preset-env": ^7.15.0
     "@babel/preset-react": ^7.14.5
     "@babel/preset-typescript": ^7.15.0
-    "@okta/odyssey-babel-plugin": ^0.11.2
-    "@okta/odyssey-typescript": ^0.11.2
+    "@okta/odyssey-babel-plugin": ^0.11.3
+    "@okta/odyssey-lifecycle": ^0.11.3
+    "@okta/odyssey-typescript": ^0.11.3
     "@types/babel__core": ^7.1.15
+    typescript: ^4.4.4
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-commitlint@workspace:packages/odyssey-commitlint":
+"@okta/odyssey-commitlint@^0.11.3, @okta/odyssey-commitlint@workspace:packages/odyssey-commitlint":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-commitlint@workspace:packages/odyssey-commitlint"
   dependencies:
-    "@commitlint/cli": ^14.0.0
     "@commitlint/config-conventional": ^14.0.0
     "@commitlint/config-lerna-scopes": ^14.0.0
-    husky: ^6.0.0
+  peerDependencies:
+    "@commitlint/cli": ^14.0.0
+    husky: ^7.0.2
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-design-tokens@^0.11.2, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
+"@okta/odyssey-design-tokens@^0.11.3, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens"
   dependencies:
+    "@okta/odyssey-lifecycle": ^0.11.3
     style-dictionary: ^3.0.1
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-eslint-config@workspace:packages/odyssey-eslint-config":
+"@okta/odyssey-eslint-config@^0.11.3, @okta/odyssey-eslint-config@workspace:packages/odyssey-eslint-config":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-eslint-config@workspace:packages/odyssey-eslint-config"
   dependencies:
-    "@okta/eslint-plugin-odyssey": ^0.11.2
+    "@okta/eslint-plugin-odyssey": ^0.11.3
     "@typescript-eslint/eslint-plugin": ^4.31.1
     "@typescript-eslint/parser": ^4.31.1
-    eslint: ^7.27.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-header: ^3.1.1
     eslint-plugin-import: ^2.25.3
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-react-hooks: ^4.2.0
+  peerDependencies:
+    eslint: ^7.27.0
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-icons@^0.11.2, @okta/odyssey-icons@workspace:packages/odyssey-icons":
+"@okta/odyssey-icons@^0.11.3, @okta/odyssey-icons@workspace:packages/odyssey-icons":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-icons@workspace:packages/odyssey-icons"
   dependencies:
@@ -5408,9 +5421,9 @@ __metadata:
     "@babel/preset-env": 7.15.0
     "@babel/preset-react": 7.14.5
     "@babel/preset-typescript": 7.15.0
-    "@okta/browserslist-config-odyssey": ^0.11.2
-    "@okta/odyssey-babel-preset": ^0.11.2
-    "@okta/odyssey-react": ^0.11.2
+    "@okta/browserslist-config-odyssey": ^0.11.3
+    "@okta/odyssey-babel-preset": ^0.11.3
+    "@okta/odyssey-react": ^0.11.3
     babel-loader: 8.2.2
     core-js: ^3.21.0
     css-loader: 3.6.0
@@ -5426,7 +5439,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle":
+"@okta/odyssey-lifecycle@^0.11.3, @okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle"
   bin:
@@ -5434,109 +5447,116 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-lint-staged@workspace:packages/odyssey-lint-staged":
+"@okta/odyssey-lint-staged@^0.11.3, @okta/odyssey-lint-staged@workspace:packages/odyssey-lint-staged":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-lint-staged@workspace:packages/odyssey-lint-staged"
-  dependencies:
-    "@okta/odyssey-prettier": ^0.11.2
-    husky: ^7.0.2
+  peerDependencies:
+    "@okta/odyssey-prettier": ^0.11.3
     lint-staged: ^11.1.2
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-postcss-preset@^0.11.2, @okta/odyssey-postcss-preset@workspace:packages/odyssey-postcss-preset":
+"@okta/odyssey-postcss-preset@^0.11.3, @okta/odyssey-postcss-preset@workspace:packages/odyssey-postcss-preset":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-postcss-preset@workspace:packages/odyssey-postcss-preset"
   dependencies:
-    "@okta/odyssey-postcss-theme": ^0.11.2
-    "@okta/odyssey-typescript": ^0.11.2
+    "@okta/odyssey-lifecycle": ^0.11.3
+    "@okta/odyssey-postcss-theme": ^0.11.3
+    "@okta/odyssey-typescript": ^0.11.3
     "@types/cssnano": ^4.0.1
     autoprefixer: ^10.3.4
     cssnano: ^5.0.8
     jest: ^26.6.3
     loader-utils: ^1.4.0
-    postcss: ^8.3.6
     postcss-logical: ^5.0.0
     postcss-modules: ^4.2.2
+    typescript: ^4.4.4
   peerDependencies:
     postcss: ^8.3.6
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-postcss-scss@^0.11.2, @okta/odyssey-postcss-scss@workspace:packages/odyssey-postcss-scss":
+"@okta/odyssey-postcss-scss@^0.11.3, @okta/odyssey-postcss-scss@workspace:packages/odyssey-postcss-scss":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-postcss-scss@workspace:packages/odyssey-postcss-scss"
   dependencies:
-    "@okta/odyssey-typescript": ^0.11.2
+    "@okta/odyssey-lifecycle": ^0.11.3
+    "@okta/odyssey-typescript": ^0.11.3
     "@types/sass": ^1.16.1
     jest: ^26.6.3
     postcss: ^8.3.6
     sass: ^1.42.1
+    typescript: ^4.4.4
   peerDependencies:
     postcss: ^8.3.6
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-postcss-theme@^0.11.2, @okta/odyssey-postcss-theme@workspace:packages/odyssey-postcss-theme":
+"@okta/odyssey-postcss-theme@^0.11.3, @okta/odyssey-postcss-theme@workspace:packages/odyssey-postcss-theme":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-postcss-theme@workspace:packages/odyssey-postcss-theme"
   dependencies:
-    "@okta/odyssey-typescript": ^0.11.2
+    "@okta/odyssey-lifecycle": ^0.11.3
+    "@okta/odyssey-typescript": ^0.11.3
     jest: ^26.6.3
-    postcss: ^8.3.6
+    typescript: ^4.4.4
   peerDependencies:
     postcss: ^8.3.6
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-prettier@^0.11.2, @okta/odyssey-prettier@workspace:packages/odyssey-prettier":
+"@okta/odyssey-prettier@^0.11.3, @okta/odyssey-prettier@workspace:packages/odyssey-prettier":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-prettier@workspace:packages/odyssey-prettier"
-  dependencies:
+  peerDependencies:
     prettier: ^2.4.0
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-react-theme@^0.11.2, @okta/odyssey-react-theme@workspace:packages/odyssey-react-theme":
+"@okta/odyssey-react-theme@^0.11.3, @okta/odyssey-react-theme@workspace:packages/odyssey-react-theme":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-react-theme@workspace:packages/odyssey-react-theme"
   dependencies:
     "@babel/cli": ^7.14.8
-    "@okta/browserslist-config-odyssey": ^0.11.2
-    "@okta/odyssey-babel-preset": ^0.11.2
-    "@okta/odyssey-design-tokens": ^0.11.2
-    "@okta/odyssey-typescript": ^0.11.2
+    "@okta/browserslist-config-odyssey": ^0.11.3
+    "@okta/odyssey-babel-preset": ^0.11.3
+    "@okta/odyssey-design-tokens": ^0.11.3
+    "@okta/odyssey-lifecycle": ^0.11.3
+    "@okta/odyssey-typescript": ^0.11.3
     "@testing-library/jest-dom": ^5.12.0
     "@testing-library/react": ^11.2.7
     "@types/hoist-non-react-statics": ^3.3.1
     "@types/react": ^17.0.30
     "@types/react-dom": ^17.0.5
     babel-jest: ^26.6.3
+    eslint: ^7.27.0
     hoist-non-react-statics: ^3.3.2
     jest: ^26.6.3
     react: ^17.0.2
     react-dom: ^17.0.2
     regenerator-runtime: ^0.13.7
+    typescript: ^4.4.4
   peerDependencies:
     react: ">=16 <18"
     react-dom: ">=16 <18"
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-react@^0.11.2, @okta/odyssey-react@workspace:packages/odyssey-react":
+"@okta/odyssey-react@^0.11.3, @okta/odyssey-react@workspace:packages/odyssey-react":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-react@workspace:packages/odyssey-react"
   dependencies:
     "@babel/cli": ^7.14.8
-    "@okta/browserslist-config-odyssey": ^0.11.2
-    "@okta/odyssey-babel-preset": ^0.11.2
-    "@okta/odyssey-icons": ^0.11.2
-    "@okta/odyssey-postcss-preset": ^0.11.2
-    "@okta/odyssey-postcss-scss": ^0.11.2
-    "@okta/odyssey-react-theme": ^0.11.2
-    "@okta/odyssey-stylelint": ^0.11.2
-    "@okta/odyssey-svgr": ^0.11.2
-    "@okta/odyssey-typescript": ^0.11.2
+    "@okta/browserslist-config-odyssey": ^0.11.3
+    "@okta/odyssey-babel-preset": ^0.11.3
+    "@okta/odyssey-icons": ^0.11.3
+    "@okta/odyssey-lifecycle": ^0.11.3
+    "@okta/odyssey-postcss-preset": ^0.11.3
+    "@okta/odyssey-postcss-scss": ^0.11.3
+    "@okta/odyssey-react-theme": ^0.11.3
+    "@okta/odyssey-stylelint": ^0.11.3
+    "@okta/odyssey-svgr": ^0.11.3
+    "@okta/odyssey-typescript": ^0.11.3
     "@react-aria/focus": 3.5.0
     "@svgr/cli": ^5.5.0
     "@testing-library/jest-dom": ^5.12.0
@@ -5549,11 +5569,13 @@ __metadata:
     babel-jest: ^26.6.3
     choices.js: ^9.0.1
     chokidar: ^3.4.0
+    eslint: ^7.27.0
     jest: ^26.6.3
     jest-axe: ^5.0.1
     react: ^17.0.2
     react-dom: ^17.0.2
     regenerator-runtime: ^0.13.7
+    typescript: ^4.4.4
   peerDependencies:
     react: ">=16 <18"
     react-dom: ">=16 <18"
@@ -5565,10 +5587,12 @@ __metadata:
   resolution: "@okta/odyssey-storybook@workspace:packages/odyssey-storybook"
   dependencies:
     "@applitools/eyes-storybook": ^3.24.0
-    "@okta/odyssey-design-tokens": ^0.11.2
-    "@okta/odyssey-react": ^0.11.2
-    "@okta/odyssey-react-theme": ^0.11.2
-    "@okta/odyssey-typescript": ^0.11.2
+    "@okta/odyssey-babel-loader": ^0.11.3
+    "@okta/odyssey-design-tokens": ^0.11.3
+    "@okta/odyssey-lifecycle": ^0.11.3
+    "@okta/odyssey-react": ^0.11.3
+    "@okta/odyssey-react-theme": ^0.11.3
+    "@okta/odyssey-typescript": ^0.11.3
     "@pxblue/storybook-rtl-addon": ^1.0.1
     "@storybook/addon-a11y": ^6.3.7
     "@storybook/addon-actions": ^6.3.7
@@ -5583,17 +5607,17 @@ __metadata:
     "@types/react": ^17.0.30
     react: ^17.0.2
     react-dom: ^17.0.2
+    typescript: ^4.4.4
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-stylelint@^0.11.2, @okta/odyssey-stylelint@workspace:packages/odyssey-stylelint":
+"@okta/odyssey-stylelint@^0.11.3, @okta/odyssey-stylelint@workspace:packages/odyssey-stylelint":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-stylelint@workspace:packages/odyssey-stylelint"
   dependencies:
     jest: ^26.6.3
     jest-preset-stylelint: ^4.1.1
     postcss-scss: ^4.0.0
-    stylelint: ^13.13.1
     stylelint-checkstyle-formatter: ^0.1.1
     stylelint-config-prettier: ^8.0.2
     stylelint-config-property-sort-order-smacss: ^7.1.0
@@ -5601,10 +5625,12 @@ __metadata:
     stylelint-config-standard: ^22.0.0
     stylelint-scss: ^3.19.0
     stylelint-use-logical-spec: ^3.2.0
+  peerDependencies:
+    stylelint: ^13.13.1
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-svgr@^0.11.2, @okta/odyssey-svgr@workspace:packages/odyssey-svgr":
+"@okta/odyssey-svgr@^0.11.3, @okta/odyssey-svgr@workspace:packages/odyssey-svgr":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-svgr@workspace:packages/odyssey-svgr"
   dependencies:
@@ -5612,10 +5638,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-typescript@^0.11.2, @okta/odyssey-typescript@workspace:packages/odyssey-typescript":
+"@okta/odyssey-typescript@^0.11.3, @okta/odyssey-typescript@workspace:packages/odyssey-typescript":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-typescript@workspace:packages/odyssey-typescript"
-  dependencies:
+  peerDependencies:
     typescript: ^4.4.4
   languageName: unknown
   linkType: soft
@@ -15345,15 +15371,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"husky@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "husky@npm:6.0.0"
-  bin:
-    husky: lib/bin.js
-  checksum: db6da76a670b2cd1e967990decfd291e6f35a5aee4d362208a51771474d3b4896d526acb4bf0413c2d7154716e42a4d8b6cc19f2bb108e48d1f554624c723a00
-  languageName: node
-  linkType: hard
-
 "husky@npm:^7.0.2":
   version: 7.0.2
   resolution: "husky@npm:7.0.2"
@@ -19467,7 +19484,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "odyssey@workspace:."
   dependencies:
+    "@commitlint/cli": ^14.0.0
+    "@okta/odyssey-commitlint": ^0.11.3
+    "@okta/odyssey-eslint-config": ^0.11.3
+    "@okta/odyssey-lint-staged": ^0.11.3
+    "@okta/odyssey-prettier": ^0.11.3
+    "@okta/odyssey-stylelint": ^0.11.3
+    eslint: ^7.27.0
+    husky: ^7.0.2
     lerna: 4.0.0
+    lint-staged: ^11.1.2
+    prettier: ^2.4.0
+    stylelint: ^13.13.1
   languageName: unknown
   linkType: soft
 
