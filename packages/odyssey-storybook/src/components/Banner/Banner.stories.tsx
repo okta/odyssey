@@ -13,14 +13,12 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { Banner as Source } from "../../../../odyssey-react/src";
-import { Banner, BannerProps, Link } from "@okta/odyssey-react";
-
+import { Banner, BannerProps, Link } from "../../../../odyssey-react/src";
 import BannerMdx from "./Banner.mdx";
 
 export default {
   title: `Components/Banner`,
-  component: Source,
+  component: Banner,
   parameters: {
     layout: "fullscreen",
     docs: {
