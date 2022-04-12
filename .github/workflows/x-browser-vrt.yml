@@ -27,7 +27,7 @@ jobs:
           key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-node-modules-cache-
       - name: install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline --ignore-scripts
+        run: yarn install --immutable
 
       - name: set $SHA7
         run: echo "SHA7=$(git log --format=%h --no-merges --max-count 1)" >> $GITHUB_ENV

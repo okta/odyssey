@@ -5,9 +5,8 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
-  "dependencies": {
+  "peerDependencies": {
     "@okta/odyssey-prettier": "^0.11.3",
-    "husky": "^7.0.2",
     "lint-staged": "^11.1.2"
   }
 }
