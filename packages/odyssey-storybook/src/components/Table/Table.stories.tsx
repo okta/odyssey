@@ -40,7 +40,6 @@ const Template: Story = ({
   caption,
   screenReaderCaption,
   withContainer,
-  direction,
 }) => (
   <Table
     screenReaderCaption={screenReaderCaption}
@@ -49,17 +48,9 @@ const Template: Story = ({
   >
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell scope="col">
-          <Table.SortButton
-            direction={direction}
-            unsortedIconTitle="Unsorted"
-            ascendingIconTitle="Ascending"
-            descendingIconTitle="Descending"
-            screenReaderCallToAction="click to sort"
-          >
-            Planet
-          </Table.SortButton>
-        </Table.HeaderCell>
+        <Table.SortHeaderCell scope="col"> 
+            Planet 
+        </Table.SortHeaderCell>
         <Table.HeaderCell scope="col" format={"num"}>
           Radius (km)
         </Table.HeaderCell>
@@ -95,14 +86,9 @@ const Template: Story = ({
 export const Default = Template.bind({});
 
 (Default.args = {
-  direction: "unsorted",
   withContainer: true,
 }),
   (Default.argTypes = {
-    direction: {
-      control: { type: "select" },
-      options: ["asc", "desc", "unsorted"],
-    },
     withContainer: { control: { type: "boolean" } },
   });
 

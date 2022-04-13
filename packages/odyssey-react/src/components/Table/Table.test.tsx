@@ -11,13 +11,14 @@
  */
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { Table } from ".";
 import { TableHeader } from "./TableHeader";
 import { TableBody } from "./TableBody";
 import { TableFooter } from "./TableFooter";
 import { TableRow } from "./TableRow";
 import { TableHeaderCell } from "./TableHeaderCell";
+import { TableSortHeaderCell } from "./TableSortHeaderCell";
 
 const screenReaderCaption = "test table";
 const tableCaption = "test table";
@@ -134,9 +135,6 @@ describe("Table Sort Button", () => {
     render(
       <Table.SortButton
         direction="unsorted"
-        unsortedIconTitle="Unsorted"
-        ascendingIconTitle="Ascending"
-        descendingIconTitle="Descending"
         screenReaderCallToAction="click to sort"
       />
     );
@@ -144,19 +142,25 @@ describe("Table Sort Button", () => {
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
-  it("uses direction prop to display an icon", () => {
-    render(
-      <Table.SortButton
-        direction="asc"
-        unsortedIconTitle="Unsorted"
-        ascendingIconTitle="Ascending"
-        descendingIconTitle="Descending"
-        screenReaderCallToAction="click to sort"
-      />
+});
+
+it("TableSortHeaderCell renders the sort buttons", () => {
+  
+  render(
+    <TableSortHeaderCell
+      screenReaderCallToAction="screenReaderCallToAction"
+      onSort={jest.fn()}
+      >
+        headerName
+        </TableSortHeaderCell>
     );
-    const sortIcon = screen.getByLabelText("Ascending").parentElement;
-    expect(sortIcon).toBeVisible();
-  });
+    const tableHeader = screen.getByRole("columnheader") ;
+    const button = screen.getByRole("button");
+    expect(tableHeader).toHaveAttribute("aria-sort", "none");
+    fireEvent.click(button);
+    expect(tableHeader).toHaveAttribute("aria-sort", "ascending");
+    fireEvent.click(button);
+    expect(tableHeader).toHaveAttribute("aria-sort", "descending");  
 });
 
 a11yCheck(() =>

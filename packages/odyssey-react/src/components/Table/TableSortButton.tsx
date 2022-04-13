@@ -33,18 +33,6 @@ export interface TableSortButtonProps
   direction: "asc" | "desc" | "unsorted";
 
   /**
-   * Title for the unsorted icon
-   */
-  unsortedIconTitle: string;
-  /**
-   * Title for the ascending sort icon
-   */
-  ascendingIconTitle: string;
-  /**
-   * Title for the descending sort icon
-   */
-  descendingIconTitle: string;
-  /**
    * Screen read only text used as the call to action for the button
    */
   screenReaderCallToAction: string;
@@ -58,9 +46,6 @@ export const TableSortButton = withTheme(
     const {
       children,
       direction = "unsorted",
-      unsortedIconTitle,
-      ascendingIconTitle,
-      descendingIconTitle,
       screenReaderCallToAction,
       ...rest
     } = props;
@@ -82,12 +67,12 @@ export const TableSortButton = withTheme(
           {direction === "unsorted" && (
             <>
               <ArrowUpIcon />
-              <ArrowDownIcon title={unsortedIconTitle} />
+              <ArrowDownIcon />
             </>
           )}
-          {direction === "asc" && <ArrowUpIcon title={ascendingIconTitle} />}
+          {direction === "asc" && <ArrowUpIcon />}
           {direction === "desc" && (
-            <ArrowDownIcon title={descendingIconTitle} />
+            <ArrowDownIcon />
           )}
         </span>
         <ScreenReaderText>{screenReaderCallToAction}</ScreenReaderText>

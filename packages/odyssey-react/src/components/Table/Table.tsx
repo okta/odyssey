@@ -26,6 +26,7 @@ import { TableSortButton } from "./TableSortButton";
 import { ScreenReaderText } from "../ScreenReaderText";
 import styles from "./Table.module.scss";
 import { theme } from "./Table.theme";
+import { TableSortHeaderCell } from "./TableSortHeaderCell";
 
 type ContainerProps =
   | { withContainer: false; caption?: never }
@@ -65,6 +66,7 @@ type Statics = {
   Row: typeof TableRow;
   DataCell: typeof TableDataCell;
   HeaderCell: typeof TableHeaderCell;
+  SortHeaderCell: typeof TableSortHeaderCell;
   SortButton: typeof TableSortButton;
 };
 
@@ -122,6 +124,7 @@ Table.Footer = TableFooter;
 Table.Row = TableRow;
 Table.DataCell = TableDataCell;
 Table.HeaderCell = TableHeaderCell;
+Table.SortHeaderCell = TableSortHeaderCell;
 Table.SortButton = TableSortButton;
 
 Table.displayName = "Table";
