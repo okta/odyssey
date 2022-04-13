@@ -44,13 +44,8 @@ export const TableSortHeaderCell = withTheme(
   styles
 )(
   forwardRef<HTMLTableCellElement, TableSortHeaderCellProps>((props, ref) => {
-    const {
-      children,
-      format,
-      screenReaderCallToAction,
-      onSort,
-      ...rest
-    } = props;
+    const { children, format, screenReaderCallToAction, onSort, ...rest } =
+      props;
     const [direction, setDirection] = useState<"asc" | "desc" | "unsorted">(
       "unsorted"
     );
