@@ -11,18 +11,19 @@
  */
 
 module.exports = require("babel-loader").custom(() => ({
-  customOptions({ include, loader = {} }, { source }) {
+  customOptions({ include, ...loader }, { source }) {
     const dependencyRegexp = buildImportDependencyRegexp(include);
 
     Array.from(source.matchAll(dependencyRegexp)).forEach(([, dependency]) => {
-      const absoluteDependency = this.utils.absolutify(
+      const absoluteDependency = this.utils?.absolutify(
         this.context,
         dependency
       );
+
       this.addDependency(absoluteDependency);
     });
 
-    return { loader };
+    return { custom: { include }, loader };
   },
 }));
 
