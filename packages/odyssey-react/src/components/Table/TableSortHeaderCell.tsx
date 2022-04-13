@@ -44,30 +44,54 @@ export const TableSortHeaderCell = withTheme(
   styles
 )(
   forwardRef<HTMLTableCellElement, TableSortHeaderCellProps>((props, ref) => {
-    const { children, format, screenReaderCallToAction, onSort, ...rest } = props;
-    const [direction, setDirection] = useState<"asc" | "desc" | "unsorted">("unsorted");
+    const {
+      children,
+      format,
+      screenReaderCallToAction,
+      onSort,
+      ...rest
+    } = props;
+    const [direction, setDirection] = useState<"asc" | "desc" | "unsorted">(
+      "unsorted"
+    );
 
     const onClick = () => {
-        setDirection(direction => direction === 'unsorted' ? "asc" : direction === "asc" ? "desc" : "asc");
-        if(onSort) {
-            onSort(direction);
-        }
-    }
-   
+      setDirection((direction) =>
+        direction === "unsorted" ? "asc" : direction === "asc" ? "desc" : "asc"
+      );
+      if (onSort) {
+        onSort(direction);
+      }
+    };
+
     const componentClass = useCx(
       styles.root,
       styles.headerCell,
       props.scope === "col" && styles.headerCellCol,
       format && styles[`${format}Format`]
     );
-    
 
     const omitProps = useOmit(rest);
 
     return (
-      <th {...omitProps} ref={ref} className={componentClass} 
-        aria-sort={direction === 'asc' ? "ascending" : direction === "desc" ? "descending" : "none"}>              
-        <TableSortButton direction={direction}  onClick={onClick} screenReaderCallToAction={screenReaderCallToAction} children={children}/>                   
+      <th
+        {...omitProps}
+        ref={ref}
+        className={componentClass}
+        aria-sort={
+          direction === "asc"
+            ? "ascending"
+            : direction === "desc"
+            ? "descending"
+            : "none"
+        }
+      >
+        <TableSortButton
+          direction={direction}
+          onClick={onClick}
+          screenReaderCallToAction={screenReaderCallToAction}
+          children={children}
+        />
       </th>
     );
   })

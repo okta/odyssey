@@ -36,11 +36,7 @@ export default {
   },
 };
 
-const Template: Story = ({
-  caption,
-  screenReaderCaption,
-  withContainer,
-}) => (
+const Template: Story = ({ caption, screenReaderCaption, withContainer }) => (
   <Table
     screenReaderCaption={screenReaderCaption}
     caption={caption}
@@ -48,8 +44,11 @@ const Template: Story = ({
   >
     <Table.Header>
       <Table.Row>
-        <Table.SortHeaderCell scope="col"> 
-            Planet 
+        <Table.SortHeaderCell
+          scope="col"
+          screenReaderCallToAction="click to start"
+        >
+          Planet
         </Table.SortHeaderCell>
         <Table.HeaderCell scope="col" format={"num"}>
           Radius (km)

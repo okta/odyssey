@@ -71,9 +71,7 @@ export const TableSortButton = withTheme(
             </>
           )}
           {direction === "asc" && <ArrowUpIcon />}
-          {direction === "desc" && (
-            <ArrowDownIcon />
-          )}
+          {direction === "desc" && <ArrowDownIcon />}
         </span>
         <ScreenReaderText>{screenReaderCallToAction}</ScreenReaderText>
       </Box>

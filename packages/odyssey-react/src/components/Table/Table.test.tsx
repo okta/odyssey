@@ -141,26 +141,24 @@ describe("Table Sort Button", () => {
 
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
-
 });
 
 it("TableSortHeaderCell renders the sort buttons", () => {
-  
   render(
     <TableSortHeaderCell
       screenReaderCallToAction="screenReaderCallToAction"
       onSort={jest.fn()}
-      >
-        headerName
-        </TableSortHeaderCell>
-    );
-    const tableHeader = screen.getByRole("columnheader") ;
-    const button = screen.getByRole("button");
-    expect(tableHeader).toHaveAttribute("aria-sort", "none");
-    fireEvent.click(button);
-    expect(tableHeader).toHaveAttribute("aria-sort", "ascending");
-    fireEvent.click(button);
-    expect(tableHeader).toHaveAttribute("aria-sort", "descending");  
+    >
+      headerName
+    </TableSortHeaderCell>
+  );
+  const tableHeader = screen.getByRole("columnheader");
+  const button = screen.getByRole("button");
+  expect(tableHeader).toHaveAttribute("aria-sort", "none");
+  fireEvent.click(button);
+  expect(tableHeader).toHaveAttribute("aria-sort", "ascending");
+  fireEvent.click(button);
+  expect(tableHeader).toHaveAttribute("aria-sort", "descending");
 });
 
 a11yCheck(() =>
