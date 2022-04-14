@@ -13,9 +13,7 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { Modal, ModalProps, Button, Text } from "@okta/odyssey-react";
-import { Modal as Source } from "../../../../odyssey-react/src";
-
+import { Modal, ModalProps, Button, Text } from "../../../../odyssey-react/src";
 import ModalMdx from "./Modal.mdx";
 
 export default {
