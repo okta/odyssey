@@ -13,14 +13,12 @@
 import React from "react";
 import type { ReactElement } from "react";
 import { Story } from "@storybook/react";
-import { Infobox, InfoboxProps, Link } from "@okta/odyssey-react";
-import { Infobox as Source } from "../../../../odyssey-react/src";
-
+import { Infobox, InfoboxProps, Link } from "../../../../odyssey-react/src";
 import InfoboxMdx from "./Infobox.mdx";
 
 export default {
   title: `Components/Infobox`,
-  component: Source,
+  component: Infobox,
   parameters: {
     docs: {
       page: InfoboxMdx,
