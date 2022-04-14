@@ -10,16 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+const { resolve } = require("path");
+
 module.exports = require("babel-loader").custom(() => ({
   customOptions({ include, ...loader }, { source }) {
     const dependencyRegexp = buildImportDependencyRegexp(include);
 
     Array.from(source.matchAll(dependencyRegexp)).forEach(([, dependency]) => {
-      const absoluteDependency = this.utils?.absolutify(
-        this.context,
-        dependency
-      );
-
+      const fn = this.utils?.absolutify || resolve;
+      const absoluteDependency = fn(this.context, dependency);
       this.addDependency(absoluteDependency);
     });
 
