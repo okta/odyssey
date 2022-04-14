@@ -18,7 +18,7 @@ import ModalMdx from "./Modal.mdx";
 
 export default {
   title: `Components/Modal`,
-  component: Source,
+  component: Modal,
   parameters: {
     layout: "fullscreen",
     docs: {
