@@ -26,7 +26,7 @@
     "test": "lerna run test",
     "typecheck": "lerna run typecheck",
     "build": "lerna run build --ignore @okta/odyssey-ie-11-sandbox --ignore @okta/odyssey-storybook",
-    "postinstall": "yarn build && [ -z \"CI\" ] && husky install || exit 0"
+    "postinstall": "yarn build && [ -z \"$CI\" ] && husky install || exit 0"
   },
   "devDependencies": {
     "@commitlint/cli": "^14.0.0",
