@@ -32,12 +32,15 @@ export default {
       control: null,
     },
     heading: {
-      defaultValue: "Banner heading",
+      defaultValue: null,
       control: "text",
     },
     content: {
-      defaultValue: "Additional string related to the heading.",
-      control: null,
+      defaultValue: "The mission to Sagitarius A has been set for January 7.",
+      control: "text",
+    },
+    onDismiss: {
+      defaultValue: false,
     },
     dismissButtonLabel: {
       defaultValue: "Dismiss banner",
@@ -66,38 +69,49 @@ const Template: Story<BannerProps> = (props) => {
     };
   }
 
-  return (
-    <Banner {...props} {...dismissProps}>
-      <Link variant="monochrome" href="https://www.okta.com">
-        Action Link
-      </Link>
-    </Banner>
-  );
+  return <Banner {...props} {...dismissProps} />;
 };
 
 export const Info = Template.bind({});
 Info.args = {
   variant: "info",
-  dismissButtonLabel: undefined,
-  onDismiss: undefined,
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
   variant: "danger",
-  dismissButtonLabel: undefined,
-  onDismiss: undefined,
+  content: "Hangar 18 has been compromised.",
 };
 
 export const Caution = Template.bind({});
 Caution.args = {
   variant: "caution",
-  dismissButtonLabel: undefined,
-  onDismiss: undefined,
+  content: "Severe solar winds detected. Local system flights may be delayed.",
+};
+
+export const WithTitle = Template.bind({});
+WithTitle.args = {
+  variant: "info",
+  heading: "New launch scheduled",
+};
+
+export const WithLink = Template.bind({});
+WithLink.args = {
+  variant: "danger",
+  content: "Hangar 18 has been compromised.",
+  children: (
+    <>
+      <Link variant="monochrome" href="#">
+        View report
+      </Link>
+    </>
+  ),
 };
 
 export const Dismissable = Template.bind({});
 Dismissable.args = {
+  variant: "caution",
+  content: "Severe solar winds detected. Local system flights may be delayed.",
   onDismiss: () => {
     console.log("Banner: onDismiss!");
   },

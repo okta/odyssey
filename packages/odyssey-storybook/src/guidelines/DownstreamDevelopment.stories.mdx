@@ -7,7 +7,7 @@ import { Meta } from "@storybook/addon-docs/blocks";
 Odyssey publishes a handful of packages that can be used together to
 develop consistent, themeable, and optimized UI downstream of the Odyssey
 core components themselves. While we will cover each step in detail in
-this guide, you can also review a finalized [example project][1] to
+this guide, you can also review a [finalized example project][1] to
 see the end result.
 
 At a high level, their are two parts of the system that work in concert:
@@ -28,9 +28,11 @@ this guide.
 
 [1]: https://github.com/jeffbelser-okta/odyssey-demo
 
-## Setup a simple react project
+## Initial setup
 
-This can be done via higher order tools such as create-react-app or simply
+- [View example project code](https://www.github.com/jeffbelser-okta/odyssey-demo/compare/0-empty...1-setup)
+
+This can be done via higher order tools such as `create-react-app` or simply
 use `git` and `npm` executables from your command line and follow the
 prompts in a new directory:
 
@@ -76,7 +78,9 @@ And update the `package.json` file at the root of your project:
 
 ### Webpack
 
-Begin by creating a [`webpack.config.js` config file][2] at the root of your project:
+- [View example project code](https://www.github.com/jeffbelser-okta/odyssey-demo/compare/1-setup...2-webpack)
+
+Create a [`webpack.config.js` config file][2] at the root of your project:
 
 ```js
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -111,11 +115,15 @@ module.exports = {
 };
 ```
 
+Add an HTML entrypoint file at `public/index.html`
+
 [2]: https://webpack.js.org
 
 ### Browserslist
 
-Begin by creating a [`.browserslistrc` config file][3] at the root of your project:
+- [View example project code](https://www.github.com/jeffbelser-okta/odyssey-demo/compare/2-webpack...3-browserslist)
+
+Create a [`.browserslistrc` config file][3] at the root of your project:
 
 ```
 extends @okta/browserslist-config-odyssey
@@ -136,7 +144,9 @@ include appropriate polyfills and transpiled source code.
 
 ### Babel
 
-Begin by creating a [`babel.config.js` config file][5] the root of your project:
+- [View example project code](https://www.github.com/jeffbelser-okta/odyssey-demo/compare/3-browserslist...4-babel)
+
+Create a [`babel.config.js` config file][5] the root of your project:
 
 ```js
 module.exports = {
@@ -183,7 +193,9 @@ Test coverage for styles can then be provided at the integration and VRT layer.
 
 ### PostCSS
 
-Begin by creating a [`.postcssrc.js` config file][6] at the root of your project:
+- [View example project code](https://www.github.com/jeffbelser-okta/odyssey-demo/compare/4-babel...5-postcss)
+
+Create a [`.postcssrc.js` config file][6] at the root of your project:
 
 ```js
 const { default: postcssOdyssey } = require("@okta/odyssey-postcss-preset");
@@ -229,6 +241,8 @@ of this above using the `ctx.env === "production"` expression.
 [6]: https://postcss.org
 
 ## Your first Odyssey component
+
+- [View example project code](https://www.github.com/jeffbelser-okta/odyssey-demo/compare/5-postcss...6-components)
 
 With your build toolchain in place it is time to install additional
 dependencies used at run time:

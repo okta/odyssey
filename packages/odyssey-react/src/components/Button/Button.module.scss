@@ -124,31 +124,15 @@
   color: var(--DismissTextColor);
   line-height: var(--DismissLineHeight);
 
-  &:hover {
-    border-color: var(--DismissHoverBorderColor);
-    background-color: var(--DismissHoverBackgroundColor);
-  }
-
+  &:hover,
   &:focus {
-    background-color: var(--DismissFocusBackgroundColor);
-    box-shadow: 0 0 0 2px;
+    background-color: var(--DismissHoverBackgroundColor);
   }
 
   &:disabled {
     background-color: var(--DismissDisabledBackgroundColor);
     color: var(--DismissDisabledTextColor);
   }
-
-  .icon {
-    display: block;
-    margin-block-start: 0.0625em;
-    margin-block-end: -0.0625em;
-    line-height: 0.9;
-  }
-}
-
-.dismissInvertedVariant:focus {
-  box-shadow: 0 0 0 2px var(--DismissInvertedBoxShadowColor);
 }
 
 .clearVariant {

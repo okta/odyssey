@@ -4,18 +4,10 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 # Odyssey development
 
-# Repository structure
+This is the guide to read if you are cloning Odyssey to your local machine
+to build a new feature, refactor, fix bugs, or improve our documentation!
 
-The repo is managed via [lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/)
-and applies a modular approach to code organization where individual
-packages are separated for a number of reasons:
-
-- Delineate private vs public code
-- Share configuration and behavior easily
-- Enforce strong domain boundaries across our dependency graph to allow
-  for easier long term maintenance.
-
-## Working locally
+## Node
 
 Odyssey uses the Gallium LTS Node version. Ensure you have the correct
 version of `node` installed as well as `yarn` available on your `$PATH`.
@@ -30,10 +22,26 @@ nvm use
 npm install --global yarn
 ```
 
-To begin developing locally against Odyssey first clone the repository
-and follow the subsequent steps:
+## Repository structure
+
+The repo is managed via [lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/)
+and applies a modular approach to code organization where individual
+packages are separated for a number of reasons:
+
+- Delineate private vs public code
+- Share configuration and behavior easily
+- Enforce strong domain boundaries across our dependency graph to allow
+  for easier long term maintenance.
+
+## Initial setup
+
+Let's get Odyssey installed on your machine and running locally:
 
 ```sh
+# clone the git repository
+git clone https://github.com/okta/odyssey.git
+cd odyssey
+
 # install dependencies
 yarn install --ignore-scripts
 
@@ -43,13 +51,16 @@ yarn prepare
 # ensure git hooks are installed
 yarn postprepare
 
-# start Storybook and see examples in the browser
+# start Storybook in the browser
 yarn start
 ```
 
 As you make component javascript or style changes you should see the Storybook
 application update in your browser. Keep in mind that some tooling focused
 packages in our repo are not watched to trigger automatic dev server reloads.
+
+If you're working on a tooling package make sure to focus on unit coverage
+first and then integration testing with the Storybook environment second.
 
 ## Testing your code
 
@@ -68,13 +79,20 @@ package changed in your work. When operating on multiple packages, break
 the work into smaller commits with correct scopes for each.
 
 The title of your commmit should reflect the nature of the change. A `feat`
-title for example denote work that adds a new feature. If you are iterating
-within your feature branch prior to merge use commit titles from the perspective
-of a downstream developer reviewing a CHANGELOG in a future release. For example,
-if you need to make changes based on code review feedback, do not title
-your commit `fix: respond to PR feedback` instead squash changes together
-using an interactive rebase or use a `chore: respond to PR feedback` title
-which will not appear within CHANGELOG output.
+title for example would denote work that adds a new feature to the project.
+A `chore` title is exactly that, work that is not worthy of mention to
+a public audience and contains no breaking changes.
+
+If you are iterating within your feature branch prior to merge use commit
+titles intended for downstream developers who would be reviewing a CHANGELOG
+file, considering an upgrade to a future release of one or more `@okta/odyssey-*`
+packages for their own project.
+
+For example, if you need to make changes based in your branch based on
+some code review feedback, avoid titling your commit `fix: respond to PR feedback`
+instead squash your changes together using an interactive rebase or use
+an innocuous commit title: `chore(odyssey-react): respond to PR feedback`
+which will not appear within any generated CHANGELOG files at release time.
 
 If you are unsure of your commit structure, run `yarn commitlint` to
 ensure your latest commit adheres to conventional commit standard.
