@@ -18,6 +18,8 @@
     "babel-loader": "^8"
   },
   "devDependencies": {
-    "@okta/odyssey-lifecycle": "^0.11.3"
+    "@babel/core": "^7.15.0",
+    "@okta/odyssey-lifecycle": "^0.11.3",
+    "webpack": "4.46.0"
   }
 }

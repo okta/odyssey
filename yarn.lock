@@ -5326,8 +5326,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-babel-loader@workspace:packages/odyssey-babel-loader"
   dependencies:
+    "@babel/core": ^7.15.0
     "@okta/odyssey-lifecycle": ^0.11.3
     babel-loader: ^8
+    webpack: 4.46.0
   languageName: unknown
   linkType: soft
 
@@ -5335,6 +5337,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-babel-plugin@workspace:packages/odyssey-babel-plugin"
   dependencies:
+    "@babel/core": ^7.15.0
     "@babel/template": ^7.12.13
     "@babel/types": ^7.14.5
     "@okta/odyssey-lifecycle": ^0.11.3
@@ -5518,6 +5521,7 @@ __metadata:
   resolution: "@okta/odyssey-react-theme@workspace:packages/odyssey-react-theme"
   dependencies:
     "@babel/cli": ^7.14.8
+    "@babel/core": ^7.15.0
     "@okta/browserslist-config-odyssey": ^0.11.3
     "@okta/odyssey-babel-preset": ^0.11.3
     "@okta/odyssey-design-tokens": ^0.11.3
@@ -5547,6 +5551,7 @@ __metadata:
   resolution: "@okta/odyssey-react@workspace:packages/odyssey-react"
   dependencies:
     "@babel/cli": ^7.14.8
+    "@babel/core": ^7.15.0
     "@okta/browserslist-config-odyssey": ^0.11.3
     "@okta/odyssey-babel-preset": ^0.11.3
     "@okta/odyssey-icons": ^0.11.3
@@ -5559,6 +5564,7 @@ __metadata:
     "@okta/odyssey-typescript": ^0.11.3
     "@react-aria/focus": 3.5.0
     "@svgr/cli": ^5.5.0
+    "@testing-library/dom": ^7.28.1
     "@testing-library/jest-dom": ^5.12.0
     "@testing-library/react": ^11.2.7
     "@testing-library/react-hooks": ^7.0.2
@@ -5572,9 +5578,11 @@ __metadata:
     eslint: ^7.27.0
     jest: ^26.6.3
     jest-axe: ^5.0.1
+    postcss: ^8.3.6
     react: ^17.0.2
     react-dom: ^17.0.2
     regenerator-runtime: ^0.13.7
+    stylelint: ^13.13.1
     typescript: ^4.4.4
   peerDependencies:
     react: ">=16 <18"
@@ -5587,6 +5595,7 @@ __metadata:
   resolution: "@okta/odyssey-storybook@workspace:packages/odyssey-storybook"
   dependencies:
     "@applitools/eyes-storybook": ^3.24.0
+    "@babel/core": ^7.15.0
     "@okta/odyssey-babel-loader": ^0.11.3
     "@okta/odyssey-design-tokens": ^0.11.3
     "@okta/odyssey-lifecycle": ^0.11.3
@@ -5600,14 +5609,19 @@ __metadata:
     "@storybook/addon-links": ^6.3.7
     "@storybook/addon-postcss": ^2.0.0
     "@storybook/addons": ^6.3.12
+    "@storybook/api": ^6.3.0
     "@storybook/client-api": ^6.3.7
+    "@storybook/components": ^6.3.0
+    "@storybook/core-events": ^6.3.0
     "@storybook/react": ^6.3.7
     "@storybook/theming": ^6.3.12
     "@types/mdx": ^2.0.1
     "@types/react": ^17.0.30
+    babel-loader: ^8
     react: ^17.0.2
     react-dom: ^17.0.2
     typescript: ^4.4.4
+    webpack: 4.46.0
   languageName: unknown
   linkType: soft
 
@@ -5617,6 +5631,7 @@ __metadata:
   dependencies:
     jest: ^26.6.3
     jest-preset-stylelint: ^4.1.1
+    postcss: ^8.3.6
     postcss-scss: ^4.0.0
     stylelint-checkstyle-formatter: ^0.1.1
     stylelint-config-prettier: ^8.0.2
