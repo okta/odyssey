@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-prettier",
-  "version": "0.11.2",
+  "version": "0.11.3",
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
