@@ -12,15 +12,18 @@
 
 import React from "react";
 import { Story } from "@storybook/react";
-import { Text, Heading, Link, ScreenReaderText } from "@okta/odyssey-react";
-import type { TextProps } from "@okta/odyssey-react";
-import { Text as Source } from "../../../../odyssey-react/src";
-
+import {
+  Text,
+  TextProps,
+  Heading,
+  Link,
+  ScreenReaderText,
+} from "../../../../odyssey-react/src";
 import TextMdx from "./Text.mdx";
 
 export default {
   title: `Components/Text/Elements`,
-  component: Source,
+  component: Text,
   argTypes: {
     children: {
       control: { type: "string" },
