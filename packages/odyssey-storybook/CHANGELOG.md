@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.11.3](https://github.com/okta/odyssey/compare/v0.11.2...v0.11.3) (2022-04-14)
+
+### Features
+
+- **odyssey-storybook:** enable hiding stories from sidebar ([1a1b5c5](https://github.com/okta/odyssey/commit/1a1b5c5e0f9b8a8057b68519e3aa25ea844b702a))
+
 ### [0.11.2](https://github.com/okta/odyssey/compare/v0.11.1...v0.11.2) (2022-04-07)
 
 ### Features
