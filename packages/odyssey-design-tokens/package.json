@@ -19,12 +19,12 @@
     "directory": "packages/odyssey-design-tokens"
   },
   "devDependencies": {
+    "@okta/odyssey-lifecycle": "^0.11.3",
     "style-dictionary": "^3.0.1"
   },
   "scripts": {
     "prebuild": "style-dictionary clean --config ./config.cjs",
     "build": "style-dictionary build --config ./config.cjs",
-    "prepare": "yarn build",
     "prepack": "prepack"
   }
 }

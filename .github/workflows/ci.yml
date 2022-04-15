@@ -24,7 +24,7 @@ jobs:
           key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-node-modules-cache-
       - name: install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+        run: yarn install --immutable
       - name: lint
         run: yarn lint
       - name: type check
