@@ -12,13 +12,11 @@
 
 import React from "react";
 import { Story } from "@storybook/react";
-import { Text } from "@okta/odyssey-react";
-import type { TextProps } from "@okta/odyssey-react";
-import { Text as Source } from "../../../../odyssey-react/src";
+import { Text, TextProps } from "../../../../odyssey-react/src";
 
 export default {
   title: `Components/Text/Styles`,
-  component: Source,
+  component: Text,
   argTypes: {
     children: {
       control: { type: "string" },

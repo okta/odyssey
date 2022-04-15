@@ -14,8 +14,8 @@
     "node": ">=16.14.0"
   },
   "scripts": {
-    "start": "lerna run start --parallel --ignore @okta/odyssey-ie-11-sandbox",
-    "start:ie11": "lerna run start --scope @okta/odyssey-ie-11-sandbox",
+    "start": "yarn workspace @okta/odyssey-storybook start",
+    "start:ie11": "yarn workspace @okta/odyssey-ie-11-sandbox start",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry",
     "lint": "yarn eslint && yarn stylelint && yarn prettier-check",

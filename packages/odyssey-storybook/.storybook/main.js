@@ -30,20 +30,9 @@ module.exports = {
       },
     },
   },
-  babel(config) {
-    return Object.assign(config, {
-      plugins: [
-        [
-          require.resolve("@okta/odyssey-babel-plugin"),
-          {
-            identityObjectProxy: true,
-          },
-        ],
-        ...config.plugins,
-      ],
-      babelrc: false,
-      configFile: false,
-    });
+  webpackFinal(config) {
+    const rules = buildRules(config.module.rules);
+    return Object.assign({}, config, { module: { ...config.module, rules } });
   },
   addons: [
     "@storybook/addon-links",
@@ -52,3 +41,33 @@ module.exports = {
     "@pxblue/storybook-rtl-addon",
   ],
 };
+
+function buildRules(rules) {
+  return rules
+    .reduce((memo, rule) => {
+      const testString = rule.test?.toString();
+      const isStyleLoader = /s?css/.test(testString);
+      const isScriptLoader = /(jsx?|tsx?)/.test(testString);
+
+      if (isStyleLoader) return memo;
+
+      if (isScriptLoader) {
+        const exclude = rule.exclude
+          ? [/odyssey-react/].concat(rule.exclude)
+          : [/odyssey-react/];
+
+        return memo.concat(Object.assign({}, rule, { exclude }));
+      }
+
+      return memo.concat(rule);
+    }, [])
+    .concat({
+      test: /odyssey-react\/\S+\.(jsx?|tsx?)$/,
+      exclude: /node_modules/,
+      loader: "@okta/odyssey-babel-loader",
+      options: {
+        cacheDirectory: false,
+        presets: ["@okta/odyssey-babel-preset"],
+      },
+    });
+}
