@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.11.3](https://github.com/okta/odyssey/compare/v0.11.2...v0.11.3) (2022-04-14)
+
+### Bug Fixes
+
+- **odyssey-react:** accessible focus states for Dismiss Button ([fc7546d](https://github.com/okta/odyssey/commit/fc7546d54599631125e53ca936bad54b4c987108))
+- **odyssey-react:** fix mobile Banner margins ([36dcc91](https://github.com/okta/odyssey/commit/36dcc91059a83e951ea06692e704404c30fcd577))
+
 ### [0.11.2](https://github.com/okta/odyssey/compare/v0.11.1...v0.11.2) (2022-04-07)
 
 ### Features
