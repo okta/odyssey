@@ -12,7 +12,7 @@
     "directory": "packages/odyssey-postcss-scss"
   },
   "scripts": {
-    "prepare": "tsc",
+    "build": "tsc",
     "test": "jest",
     "prepack": "prepack"
   },
@@ -20,10 +20,12 @@
     "sass": "^1.42.1"
   },
   "devDependencies": {
+    "@okta/odyssey-lifecycle": "^0.11.3",
     "@okta/odyssey-typescript": "^0.11.3",
     "@types/sass": "^1.16.1",
     "jest": "^26.6.3",
-    "postcss": "^8.3.6"
+    "postcss": "^8.3.6",
+    "typescript": "^4.4.4"
   },
   "peerDependencies": {
     "postcss": "^8.3.6"
