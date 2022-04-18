@@ -14,7 +14,6 @@
   @include border-radius(var(--BorderRadius));
 
   display: block;
-  visibility: hidden;
   position: absolute;
   z-index: 1;
   padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
@@ -26,7 +25,6 @@
   border-width: var(--BorderWidth);
   border-style: var(--BorderStyle);
   border-color: var(--BackgroundColor);
-  opacity: 0;
   background-color: var(--BackgroundColor);
   color: var(--TextColor);
   font-size: var(--FontSize);

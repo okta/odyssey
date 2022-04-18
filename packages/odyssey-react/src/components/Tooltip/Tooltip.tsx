@@ -10,13 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { cloneElement, forwardRef } from "react";
+import React, { cloneElement, forwardRef, useRef, useState } from "react";
 import type { ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOid, useOmit } from "../../utils";
 import { Box } from "../Box";
 import styles from "./Tooltip.module.scss";
 import { theme } from "./Tooltip.theme";
+import { Portal } from "./Portal";
 
 export interface TooltipProps
   extends Omit<
@@ -50,29 +51,81 @@ export const Tooltip = withTheme(
   forwardRef<HTMLElement, TooltipProps>((props, ref) => {
     const { children, id, label, position = "top", ...rest } = props;
 
+    const tooltipRef = useRef<HTMLDivElement>(null);
     const oid = useOid(id);
     const omitProps = useOmit(rest);
     const tooltipClasses = useCx(styles.root, styles[`${position}Position`]);
     const clone = cloneElement(children, { "aria-describedby": oid });
+    const [coords, setCoords] = useState({});    
 
-    return (
+    const getPosition = (rect: DOMRect) => {
+      switch(position) {
+        default:
+        case 'top':
+          return {
+            left: rect.x + rect.width / 2,
+            top: rect.y
+          }
+        case 'bottom':
+          return {
+            left: rect.x + rect.width / 2,
+            top: rect.y + rect.height
+          }
+        case 'end':
+          return {
+            left: rect.x + rect.width,
+            top: rect.y + rect.height / 2
+          }
+        case 'start':
+          return {
+            left: rect.x,
+            top: rect.y + rect.height / 2
+          }
+          
+      }
+    }
+    const showTooltip = () => {
+      if(!tooltipRef || !tooltipRef.current) {
+        return;
+      }
+      const rect = tooltipRef.current.getBoundingClientRect();
+      const location = getPosition(rect);  
+      setCoords({
+        ...location,
+        position: 'absolute',
+        visibility: 'visible',
+        opacity: 1,
+      });            
+    }
+
+    const hideTooltip = () => {
+      setCoords({ ...coords, visibility: 'hidden', opacity: 0 });      
+    }
+
+    return (      
       <span className={styles.hasTooltip}>
-        {clone}
-        <Box
-          as="aside"
-          {...omitProps}
-          ref={ref}
-          id={oid}
-          className={tooltipClasses}
-          role="tooltip"
-          color={false}
-          fontSize={false}
-          fontWeight={false}
-          lineHeight={false}
-        >
-          {label}
-        </Box>
-      </span>
+        <span ref={tooltipRef} onMouseOver={showTooltip} onFocus={showTooltip} onMouseOut={hideTooltip} onBlur={hideTooltip}>
+        {clone}        
+        </span>
+        <Portal>
+        <span style={{ ...coords }}>
+          <Box
+            as="aside"
+            {...omitProps}
+            ref={ref}
+            id={oid}
+            className={tooltipClasses}
+            role="tooltip"
+            color={false}
+            fontSize={false}
+            fontWeight={false}
+            lineHeight={false}
+          >
+            {label}
+          </Box>
+          </span>           
+        </Portal>
+        </span>               
     );
   })
 );
