@@ -101,11 +101,11 @@ const TableTemplate: Story<InfoboxProps> = ({
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell scope="col">Planet</Table.HeaderCell>
-        <Table.HeaderCell scope="col" format={"num"}>
+        <Table.HeaderCell scope="col" format="num">
           Radius (km)
         </Table.HeaderCell>
         <Table.HeaderCell scope="col">Type</Table.HeaderCell>
-        <Table.HeaderCell scope="col" format={"date"}>
+        <Table.HeaderCell scope="col" format="date">
           Perihelion date
         </Table.HeaderCell>
       </Table.Row>
@@ -113,9 +113,9 @@ const TableTemplate: Story<InfoboxProps> = ({
     <Table.Body>
       <Table.Row>
         <Table.DataCell>Jupiter</Table.DataCell>
-        <Table.DataCell format={"num"}>69,911</Table.DataCell>
+        <Table.DataCell format="num">69,911</Table.DataCell>
         <Table.DataCell>Gas giant</Table.DataCell>
-        <Table.DataCell format={"date"}>January 21, 2023</Table.DataCell>
+        <Table.DataCell format="date">January 21, 2023</Table.DataCell>
       </Table.Row>
       <Table.Row>
         <Table.DataCell>
@@ -127,15 +127,15 @@ const TableTemplate: Story<InfoboxProps> = ({
             actions={actions}
           />
         </Table.DataCell>
-        <Table.DataCell format={"num"}>6,371</Table.DataCell>
+        <Table.DataCell format="num">6,371</Table.DataCell>
         <Table.DataCell>Terrestrial</Table.DataCell>
-        <Table.DataCell format={"date"}>January 2, 2021</Table.DataCell>
+        <Table.DataCell format="date">January 2, 2021</Table.DataCell>
       </Table.Row>
       <Table.Row>
         <Table.DataCell>Mercury</Table.DataCell>
-        <Table.DataCell format={"num"}>1,737</Table.DataCell>
+        <Table.DataCell format="num">1,737</Table.DataCell>
         <Table.DataCell>Terrestrial</Table.DataCell>
-        <Table.DataCell format={"date"}>&ndash;</Table.DataCell>
+        <Table.DataCell format="date">&ndash;</Table.DataCell>
       </Table.Row>
     </Table.Body>
   </Table>
