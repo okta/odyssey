@@ -10,20 +10,27 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {  FC, useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import { FC, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 export const Portal: FC = ({ children }) => {
-    const el = document.createElement("div");    
-  
-    useEffect(() => {
-        document.body.appendChild(el);
-        return () => {
-            document.body.removeChild(el)
-        };
-    }, [el]);
-  
-    return createPortal(children, el)
-  };
-  
-  Portal.displayName = "Portal";
+  const [el, setEl] = useState<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setEl(document.createElement("div"));
+  }, []);
+
+  useEffect(() => {
+    if (el) {
+      document.body.appendChild(el);
+      return () => {
+        document.body.removeChild(el);
+      };
+    }
+    return;
+  }, [el]);
+
+  return el ? createPortal(children, el) : null;
+};
+
+Portal.displayName = "Portal";

@@ -18,6 +18,7 @@ import { Box } from "../Box";
 import styles from "./Tooltip.module.scss";
 import { theme } from "./Tooltip.theme";
 import { Portal } from "./Portal";
+import { useTheme } from "@okta/odyssey-react-theme";
 
 export interface TooltipProps
   extends Omit<
@@ -56,76 +57,95 @@ export const Tooltip = withTheme(
     const omitProps = useOmit(rest);
     const tooltipClasses = useCx(styles.root, styles[`${position}Position`]);
     const clone = cloneElement(children, { "aria-describedby": oid });
-    const [coords, setCoords] = useState({});    
-
+    const [coords, setCoords] = useState({});
+    const [timeoutFn, setTimeoutFn] = useState<NodeJS.Timeout | null>();
+    const { SpaceScale1 } = useTheme();
+    const remValue = Number(SpaceScale1.replace("rem", ""));
+    const pxValue =
+      remValue *
+      parseFloat(getComputedStyle(document.documentElement).fontSize);
     const getPosition = (rect: DOMRect) => {
-      switch(position) {
+      switch (position) {
         default:
-        case 'top':
+        case "top":
           return {
             left: rect.x + rect.width / 2,
-            top: rect.y
-          }
-        case 'bottom':
+            top: rect.y - pxValue,
+          };
+        case "bottom":
           return {
             left: rect.x + rect.width / 2,
-            top: rect.y + rect.height
-          }
-        case 'end':
+            top: rect.y + rect.height + pxValue,
+          };
+        case "end":
           return {
             left: rect.x + rect.width,
-            top: rect.y + rect.height / 2
-          }
-        case 'start':
+            top: rect.y + rect.height / 2,
+          };
+        case "start":
           return {
             left: rect.x,
-            top: rect.y + rect.height / 2
-          }
-          
+            top: rect.y + rect.height / 2,
+          };
       }
-    }
+    };
     const showTooltip = () => {
-      if(!tooltipRef || !tooltipRef.current) {
+      if (!tooltipRef || !tooltipRef.current) {
         return;
       }
       const rect = tooltipRef.current.getBoundingClientRect();
-      const location = getPosition(rect);  
-      setCoords({
-        ...location,
-        position: 'absolute',
-        visibility: 'visible',
-        opacity: 1,
-      });            
-    }
+      const location = getPosition(rect);
+      const timeout = setTimeout(
+        () =>
+          setCoords({
+            ...location,
+            position: "absolute",
+            visibility: "visible",
+            opacity: 1,
+          }),
+        1000
+      );
+      setTimeoutFn(timeout);
+    };
 
     const hideTooltip = () => {
-      setCoords({ ...coords, visibility: 'hidden', opacity: 0 });      
-    }
+      setCoords({ ...coords, visibility: "hidden", opacity: 0 });
+      if (timeoutFn) {
+        clearTimeout(timeoutFn);
+      }
+      setTimeoutFn(null);
+    };
 
-    return (      
+    return (
       <span className={styles.hasTooltip}>
-        <span ref={tooltipRef} onMouseOver={showTooltip} onFocus={showTooltip} onMouseOut={hideTooltip} onBlur={hideTooltip}>
-        {clone}        
+        <span
+          ref={tooltipRef}
+          onMouseOver={showTooltip}
+          onFocus={showTooltip}
+          onMouseOut={hideTooltip}
+          onBlur={hideTooltip}
+        >
+          {clone}
         </span>
         <Portal>
-        <span style={{ ...coords }}>
-          <Box
-            as="aside"
-            {...omitProps}
-            ref={ref}
-            id={oid}
-            className={tooltipClasses}
-            role="tooltip"
-            color={false}
-            fontSize={false}
-            fontWeight={false}
-            lineHeight={false}
-          >
-            {label}
-          </Box>
-          </span>           
+          <span style={{ ...coords }}>
+            <Box
+              as="aside"
+              {...omitProps}
+              ref={ref}
+              id={oid}
+              className={tooltipClasses}
+              role="tooltip"
+              color={false}
+              fontSize={false}
+              fontWeight={false}
+              lineHeight={false}
+            >
+              {label}
+            </Box>
+          </span>
         </Portal>
-        </span>               
+      </span>
     );
   })
 );
