@@ -66,9 +66,9 @@ Clear.args = {
   variant: "clear",
 };
 
-export const Dismiss = Template.bind({});
-Dismiss.args = {
-  variant: "dismiss",
+export const Floating = Template.bind({});
+Floating.args = {
+  variant: "floating",
   icon: <CloseIcon title="close" />,
   children: undefined,
 };
