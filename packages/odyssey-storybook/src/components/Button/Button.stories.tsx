@@ -18,10 +18,6 @@ import {
   CloseIcon,
   SettingsIcon,
 } from "../../../../odyssey-react/src";
-import {
-  ColorBackgroundBase,
-  ColorPrimaryBase,
-} from "@okta/odyssey-design-tokens";
 import { ThemeProvider } from "@okta/odyssey-react-theme";
 
 import ButtonMdx from "./Button.mdx";
@@ -121,20 +117,24 @@ export const Theme: Story<
         [Button.theme]: { PrimaryBackgroundColor, SecondaryBackgroundColor },
       }}
     >
-      <Button {...rest} />
+      <Button {...rest} variant="primary" />
+      <Button {...rest} variant="secondary" />
     </ThemeProvider>
   );
 };
 Theme.argTypes = {
+  variant: {
+    control: null,
+  },
   PrimaryBackgroundColor: {
     name: "primary background",
-    defaultValue: ColorPrimaryBase,
+    defaultValue: "lightcoral",
     type: "string",
     control: "color",
   },
   SecondaryBackgroundColor: {
     name: "secondary background",
-    defaultValue: ColorBackgroundBase,
+    defaultValue: "lemonchiffon",
     type: "string",
     control: "color",
   },
