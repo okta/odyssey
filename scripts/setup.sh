@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NODE_VERSION=v16.14.0
+NODE_VERSION=lts/gallium
 
 echo "installing node ${NODE_VERSION}"
 if setup_service node $NODE_VERSION; then
