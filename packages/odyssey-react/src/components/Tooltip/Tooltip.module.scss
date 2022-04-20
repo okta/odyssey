@@ -49,14 +49,6 @@
   &::before {
     border-width: var(--TailWidth);
   }
-
-  /* stylelint-disable-next-line selector-max-universal */
-  .hasTooltip *:focus + &,
-  .hasTooltip:hover &,
-  .hasTooltip:focus & {
-    visibility: visible;
-    opacity: 1;
-  }
 }
 
 .topPosition {

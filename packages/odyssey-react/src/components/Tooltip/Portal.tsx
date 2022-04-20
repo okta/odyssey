@@ -21,15 +21,17 @@ export const Portal: FC = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (el) {
-      document.body.appendChild(el);
-      return () => {
-        document.body.removeChild(el);
-      };
+    const portalElement = el;
+    if (portalElement) {
+      document.body.appendChild(portalElement);
     }
-    return;
-  }, [el]);
 
+    return () => {
+      if (portalElement) {
+        document.body.removeChild(portalElement);
+      }
+    };
+  }, [el]);
   return el ? createPortal(children, el) : null;
 };
 

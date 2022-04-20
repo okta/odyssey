@@ -19,6 +19,7 @@ import styles from "./Tooltip.module.scss";
 import { theme } from "./Tooltip.theme";
 import { Portal } from "./Portal";
 import { useTheme } from "@okta/odyssey-react-theme";
+import { getHideTooltipStyles, getShowTooltipStyles } from "./utils";
 
 export interface TooltipProps
   extends Omit<
@@ -57,51 +58,18 @@ export const Tooltip = withTheme(
     const omitProps = useOmit(rest);
     const tooltipClasses = useCx(styles.root, styles[`${position}Position`]);
     const clone = cloneElement(children, { "aria-describedby": oid });
-    const [coords, setCoords] = useState({});
+    const [tooltipStyles, setTooltipStyles] = useState({});
     const [timeoutFn, setTimeoutFn] = useState<NodeJS.Timeout | null>();
     const { SpaceScale1 } = useTheme();
-    const remValue = Number(SpaceScale1.replace("rem", ""));
-    const pxValue =
-      remValue *
-      parseFloat(getComputedStyle(document.documentElement).fontSize);
-    const getPosition = (rect: DOMRect) => {
-      switch (position) {
-        default:
-        case "top":
-          return {
-            left: rect.x + rect.width / 2,
-            top: rect.y - pxValue,
-          };
-        case "bottom":
-          return {
-            left: rect.x + rect.width / 2,
-            top: rect.y + rect.height + pxValue,
-          };
-        case "end":
-          return {
-            left: rect.x + rect.width,
-            top: rect.y + rect.height / 2,
-          };
-        case "start":
-          return {
-            left: rect.x,
-            top: rect.y + rect.height / 2,
-          };
-      }
-    };
+
     const showTooltip = () => {
       if (!tooltipRef || !tooltipRef.current) {
         return;
       }
-      const rect = tooltipRef.current.getBoundingClientRect();
-      const location = getPosition(rect);
       const timeout = setTimeout(
         () =>
-          setCoords({
-            ...location,
-            position: "absolute",
-            visibility: "visible",
-            opacity: 1,
+          setTooltipStyles({
+            ...getShowTooltipStyles(position, tooltipRef, SpaceScale1),
           }),
         1000
       );
@@ -109,7 +77,7 @@ export const Tooltip = withTheme(
     };
 
     const hideTooltip = () => {
-      setCoords({ ...coords, visibility: "hidden", opacity: 0 });
+      setTooltipStyles({ ...tooltipStyles, ...getHideTooltipStyles() });
       if (timeoutFn) {
         clearTimeout(timeoutFn);
       }
@@ -128,7 +96,7 @@ export const Tooltip = withTheme(
           {clone}
         </span>
         <Portal>
-          <span style={{ ...coords }}>
+          <span style={{ ...tooltipStyles }}>
             <Box
               as="aside"
               {...omitProps}
