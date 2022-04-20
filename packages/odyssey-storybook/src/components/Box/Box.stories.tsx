@@ -51,7 +51,7 @@ Default.args = {
 };
 
 export const TooLightContrast = (): ReactElement => (
-  <span style={{ color: "lightgray" }}>
+  <span style={{ fontSize: "3rem", color: "lightgray" }}>
     <Box
       as="span"
       backgroundColor="default"
@@ -59,6 +59,7 @@ export const TooLightContrast = (): ReactElement => (
       color="inherit"
       padding="m"
       marginBottom="s"
+      fontSize="inherit"
     >
       This should fail color contrast
     </Box>
@@ -66,7 +67,7 @@ export const TooLightContrast = (): ReactElement => (
 );
 
 export const TooDarkContrast = (): ReactElement => (
-  <span style={{ color: "darkslateblue" }}>
+  <span style={{ fontSize: "3rem", color: "darkslateblue" }}>
     <Box
       as="span"
       backgroundColor="primary-dark"
@@ -74,6 +75,7 @@ export const TooDarkContrast = (): ReactElement => (
       color="inherit"
       padding="m"
       marginBottom="s"
+      fontSize="inherit"
     >
       This should fail color contrast
     </Box>
