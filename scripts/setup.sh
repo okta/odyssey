@@ -9,7 +9,7 @@ else
   echo "node ${NODE_VERSION} installation failed."
 fi
 
-YARN_VERSION=1.22.17
+YARN_VERSION=3.2.0
 
 echo "installing yarn v${YARN_VERSION}"
 if setup_service yarn $YARN_VERSION; then
@@ -20,7 +20,7 @@ fi
 
 cd ${OKTA_HOME}/odyssey
 
-if ! yarn install --frozen-lockfile; then
+if ! yarn install --immutable; then
   echo "yarn install command failed! Exiting..."
   exit ${FAILED_SETUP}
 fi

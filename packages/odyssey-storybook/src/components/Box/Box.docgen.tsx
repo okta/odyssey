@@ -11,8 +11,6 @@
  */
 
 import React, { forwardRef } from "react";
-import type { BoxProps } from "@okta/odyssey-react";
+import type { BoxProps } from "../../../../odyssey-react/src";
 
-const Source = forwardRef<HTMLDivElement, BoxProps>(() => <></>);
-
-export { Source };
+export const BoxDocGen = forwardRef<HTMLDivElement, BoxProps>(() => <></>);

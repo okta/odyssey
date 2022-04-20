@@ -12,14 +12,12 @@
 
 import React from "react";
 import type { Story } from "@storybook/react";
-import { Radio, RadioGroupProps } from "@okta/odyssey-react";
-import { Radio as Source } from "../../../../odyssey-react/src";
-
+import { Radio, RadioGroupProps } from "../../../../odyssey-react/src";
 import RadioMdx from "./Radio.mdx";
 
 export default {
   title: `Components/Radio`,
-  component: Source.Group,
+  component: Radio.Group,
   parameters: {
     docs: {
       page: RadioMdx,

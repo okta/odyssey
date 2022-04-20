@@ -108,5 +108,9 @@
   .content {
     margin-block-end: var(--ContentMobileMarginBlockEnd);
     margin-inline-end: 0;
+
+    &:last-child {
+      margin-block-end: 0;
+    }
   }
 }

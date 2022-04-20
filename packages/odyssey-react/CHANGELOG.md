@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.11.3](https://github.com/okta/odyssey/compare/v0.11.2...v0.11.3) (2022-04-14)
+
+### Bug Fixes
+
+- **odyssey-react:** accessible focus states for Dismiss Button ([fc7546d](https://github.com/okta/odyssey/commit/fc7546d54599631125e53ca936bad54b4c987108))
+- **odyssey-react:** fix mobile Banner margins ([36dcc91](https://github.com/okta/odyssey/commit/36dcc91059a83e951ea06692e704404c30fcd577))
+
+### [0.11.2](https://github.com/okta/odyssey/compare/v0.11.1...v0.11.2) (2022-04-07)
+
+### Features
+
+- **odyssey-react:** add prefix and suffix text props to TextInput component ([da7b2d9](https://github.com/okta/odyssey/commit/da7b2d99e9a494600f4c1587f9763cb15cbc880b))
+
+### Bug Fixes
+
+- **odyssey-react:** consolidate common css ([d8b18b3](https://github.com/okta/odyssey/commit/d8b18b3ddf0cefb7d6c28a16fc03b0c942f56a17))
+- **odyssey-react:** Link Icons now match text height ([6deee76](https://github.com/okta/odyssey/commit/6deee765b215893991c034beaac63dfe7159d7d1))
+- **odyssey-react:** missing error border ([fbbfbc1](https://github.com/okta/odyssey/commit/fbbfbc146c00cc4bfe8d9cc6a945dd8ad49253da))
+- **odyssey-react:** show invalid border ([fe3e025](https://github.com/okta/odyssey/commit/fe3e0251cf8b13d92d0a3a669f03098e542458ad))
+- **odyssey-react:** TableSortButton padding now accounts for two Icons ([368d509](https://github.com/okta/odyssey/commit/368d50998c9afae168166f993be6c388348a4673))
+- **odyssey-react:** update css so that the icon is sized correctly ([f6987fa](https://github.com/okta/odyssey/commit/f6987fa786f9822765485619583e2caaca384d81))
+- **odyssey-react:** update input borders when value is invalid ([635ca4c](https://github.com/okta/odyssey/commit/635ca4c2cba182abe574ff525432f781c6b82ab8))
+- **odyssey-react:** update Tab states to be more accessible ([fd0508f](https://github.com/okta/odyssey/commit/fd0508f44096172da4ad46623150bc3e79e56d63))
+
 ### [0.11.1](https://github.com/okta/odyssey/compare/v0.11.0...v0.11.1) (2022-03-24)
 
 ### Bug Fixes

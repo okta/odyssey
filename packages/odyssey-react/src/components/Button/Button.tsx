@@ -44,13 +44,14 @@ interface CommonProps
    * @default primary
    */
   variant?:
-    | "primary"
-    | "secondary"
+    | "affix"
+    | "clear"
     | "danger"
     | "dismiss"
     | "dismissInverted"
-    | "clear"
-    | "affix";
+    | "floating"
+    | "primary"
+    | "secondary";
 
   /**
    * Extends the width of the button to that of its' parent.

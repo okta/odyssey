@@ -115,40 +115,23 @@
   }
 }
 
-.dismissVariant,
-.dismissInvertedVariant {
-  padding-block: var(--DismissPaddingBlock);
-  padding-inline: var(--DismissPaddingInline);
+.floatingVariant {
+  padding-block: var(--FloatingPaddingBlock);
+  padding-inline: var(--FloatingPaddingInline);
   border: 0;
-  background-color: var(--DismissBackgroundColor);
-  color: var(--DismissTextColor);
-  line-height: var(--DismissLineHeight);
+  background-color: var(--FloatingBackgroundColor);
+  color: var(--FloatingTextColor);
+  line-height: var(--FloatingLineHeight);
 
-  &:hover {
-    border-color: var(--DismissHoverBorderColor);
-    background-color: var(--DismissHoverBackgroundColor);
-  }
-
+  &:hover,
   &:focus {
-    background-color: var(--DismissFocusBackgroundColor);
-    box-shadow: 0 0 0 2px;
+    background-color: var(--FloatingHoverBackgroundColor);
   }
 
   &:disabled {
-    background-color: var(--DismissDisabledBackgroundColor);
-    color: var(--DismissDisabledTextColor);
+    background-color: var(--FloatingDisabledBackgroundColor);
+    color: var(--FloatingDisabledTextColor);
   }
-
-  .icon {
-    display: block;
-    margin-block-start: 0.0625em;
-    margin-block-end: -0.0625em;
-    line-height: 0.9;
-  }
-}
-
-.dismissInvertedVariant:focus {
-  box-shadow: 0 0 0 2px var(--DismissInvertedBoxShadowColor);
 }
 
 .clearVariant {
