@@ -96,16 +96,33 @@ describe("TextInput", () => {
     ).toBeVisible();
   });
 
-  it.each([["disabled"], ["readonly"], ["required"]])(
-    "renders %s attribute",
-    (attr: string) => {
-      const { getByRole } = render(
-        <TextInput label={label} {...{ [attr]: true }} />
-      );
+  it("renders required attribute", () => {
+    render(<TextInput label={label} required />);
 
-      expect(getByRole(textBox)).toHaveAttribute(attr);
-    }
-  );
+    expect(screen.getByRole(textBox)).toHaveAttribute("required");
+  });
+
+  it("renders disabled attribute with correct style", () => {
+    const handle = jest.fn();
+
+    render(<TextInput onChange={handle} label={label} disabled />);
+
+    const textBoxElement = screen.getByRole(textBox);
+    expect(textBoxElement).toHaveAttribute("disabled");
+    expect(textBoxElement.parentElement).toBeInTheDocument();
+    expect(textBoxElement.parentElement?.className).toContain("disabled");
+  });
+
+  it("renders readonly attribute with correct style", () => {
+    const handle = jest.fn();
+
+    render(<TextInput onChange={handle} label={label} readonly />);
+
+    const textBoxElement = screen.getByRole(textBox);
+    expect(textBoxElement).toHaveAttribute("readonly");
+    expect(textBoxElement.parentElement).toBeInTheDocument();
+    expect(textBoxElement.parentElement?.className).toContain("readonly");
+  });
 
   it.each<[TextInputProps["type"]]>([
     [undefined],

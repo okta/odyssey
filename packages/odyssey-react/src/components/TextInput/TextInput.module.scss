@@ -42,22 +42,6 @@
     outline-width: var(--FocusOutlineWidth);
   }
 
-  &:disabled {
-    opacity: 1;
-    color: var(--DisabledTextColor);
-    cursor: not-allowed;
-  }
-
-  &:disabled,
-  &[readonly] {
-    border-color: var(--DisabledBorderColor);
-    background-color: var(--DisabledBackgroundColor);
-
-    &:hover {
-      border-color: var(--DisabledBorderColor);
-    }
-  }
-
   &::placeholder {
     color: var(--PlaceholderTextColor);
   }
@@ -69,6 +53,22 @@
   // stylelint-disable-next-line selector-max-class
   &.invalid.focus {
     outline-color: var(--InvalidFocusOutlineColor);
+  }
+
+  &.disabled {
+    opacity: 1;
+    color: var(--DisabledTextColor);
+    cursor: not-allowed;
+  }
+
+  &.disabled,
+  &.readonly {
+    border-color: var(--DisabledBorderColor);
+    background-color: var(--DisabledBackgroundColor);
+
+    &:hover {
+      border-color: var(--DisabledBorderColor);
+    }
   }
 }
 
@@ -110,6 +110,10 @@
 
   &:focus {
     outline: 0;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
   }
 
   &[type="search"] {

@@ -33,7 +33,7 @@ export interface TextInputProps
   extends CommonFieldProps,
     Omit<
       ComponentPropsWithRef<"input">,
-      "style" | "className" | "color" | "onChange"
+      "style" | "className" | "color" | "onChange" | "readOnly"
     > {
   /**
    * The underlying input element id attribute. Automatically generated if not provided
@@ -217,7 +217,9 @@ export const TextInput = withTheme(
     const rootStyles = useCx(
       styles.root,
       !isValid && styles.invalid,
-      hasFocus && styles.focus
+      hasFocus && styles.focus,
+      disabled && styles.disabled,
+      readonly && styles.readonly
     );
 
     const prefixStyles = useCx(
