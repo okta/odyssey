@@ -22,14 +22,14 @@ import styles from "./SearchInput.module.scss";
 
 export interface SearchInputProps
   extends Omit<
-    TextInputProps,
-    | "type"
-    | "PrefixButton"
-    | "PrefixIcon"
-    | "PrefixText"
-    | "SuffixButton"
-    | "SuffixIcon"
-    | "SuffixText"
+  TextInputProps,
+  | "type"
+  | "PrefixButton"
+  | "PrefixIcon"
+  | "PrefixText"
+  | "SuffixButton"
+  | "SuffixIcon"
+  | "SuffixText"
   > {
   type?: never;
   PrefixButton?: never;
@@ -99,10 +99,8 @@ export const SearchInput = withTheme(
     return (
       <span className={styles.search}>
         {/*
-        // @ts-expect-error using a type="search" intentionally here */}
-        <TextInput
-          {...omitProps}
-          type="search"
+         @ts-expect-error using a type="search" intentionally here */}
+        <TextInput {...omitProps} type="search"
           ref={internalRef}
           defaultValue={defaultValue}
           label={label}

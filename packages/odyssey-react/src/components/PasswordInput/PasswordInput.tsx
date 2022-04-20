@@ -20,19 +20,19 @@ import type { TooltipProps } from "../Tooltip";
 
 interface PasswordInputProps
   extends Omit<
-    TextInputProps,
-    | "type"
-    | "PrefixButton"
-    | "PrefixIcon"
-    | "PrefixText"
-    | "SuffixButton"
-    | "SuffixIcon"
-    | "SuffixText"
+  TextInputProps,
+  | "type"
+  | "PrefixButton"
+  | "PrefixIcon"
+  | "PrefixText"
+  | "SuffixButton"
+  | "SuffixIcon"
+  | "SuffixText"
   > {
   type?: never;
   tooltipLabel:
-    | TooltipProps["label"]
-    | ((isHidden: boolean) => TooltipProps["label"]);
+  | TooltipProps["label"]
+  | ((isHidden: boolean) => TooltipProps["label"]);
   tooltipPosition?: TooltipProps["position"];
   PrefixButton?: never;
   PrefixIcon?: never;
@@ -68,10 +68,8 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
     return (
       <>
         {/*
-        // @ts-expect-error using a type="password" intentionally here*/}
-        <TextInput
-          {...omitProps}
-          type={internalType}
+        @ts-expect-error using a type="password" intentionally here */}
+        <TextInput {...omitProps} type={internalType}
           ref={ref}
           name={name}
           label={label}

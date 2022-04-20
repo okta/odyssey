@@ -11,7 +11,7 @@
  */
 
 module.exports = {
-  "*": "prettier --ignore-unknown --ignore-path .gitignore --write",
+  "*": "prettier --ignore-unknown --write",
   "*.scss": "stylelint",
   "*.{js,jsx,ts,tsx}": "eslint",
 };
