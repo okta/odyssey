@@ -15,8 +15,10 @@ import { RefObject } from "react";
 function getPosition(
   position: "top" | "end" | "bottom" | "start",
   rect: DOMRect,
-  paddingValue: number
+  paddingValue: number,
+  direction: string
 ) {
+    console.log('direction: ' + direction);
   switch (position) {
     default:
     case "top":
@@ -30,13 +32,19 @@ function getPosition(
         top: rect.y + rect.height + paddingValue,
       };
     case "end":
-      return {
+      return direction === 'ltr' ? {
         left: rect.x + rect.width,
+        top: rect.y + rect.height / 2,
+      } : {
+        left: rect.x,
         top: rect.y + rect.height / 2,
       };
     case "start":
-      return {
+      return direction === 'ltr' ? {
         left: rect.x,
+        top: rect.y + rect.height / 2,
+      } : {
+        left: rect.x + rect.width,
         top: rect.y + rect.height / 2,
       };
   }
@@ -57,7 +65,8 @@ export function getShowTooltipStyles(
     parseFloat(getComputedStyle(document.documentElement).fontSize);
 
   const rect = tooltipRef.current.getBoundingClientRect();
-  const location = getPosition(position, rect, paddingValue);
+  const direction = window.getComputedStyle(tooltipRef.current, null).getPropertyValue('direction');
+  const location = getPosition(position, rect, paddingValue, direction);
   return {
     ...location,
     position: "absolute",
