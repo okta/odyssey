@@ -17,8 +17,7 @@ function getPosition(
   rect: DOMRect,
   paddingValue: number,
   direction: string
-) {
-    console.log('direction: ' + direction);
+) {    
   switch (position) {
     default:
     case "top":
