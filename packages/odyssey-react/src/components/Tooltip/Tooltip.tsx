@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { cloneElement, forwardRef, useRef, useState } from "react";
+import React, {
+  cloneElement,
+  CSSProperties,
+  forwardRef,
+  useRef,
+  useState,
+} from "react";
 import type { ReactElement, ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOid, useOmit } from "../../utils";
@@ -58,7 +64,11 @@ export const Tooltip = withTheme(
     const omitProps = useOmit(rest);
     const tooltipClasses = useCx(styles.root, styles[`${position}Position`]);
     const clone = cloneElement(children, { "aria-describedby": oid });
-    const [tooltipStyles, setTooltipStyles] = useState({});
+    const [tooltipStyles, setTooltipStyles] = useState<CSSProperties>({
+      visibility: "hidden",
+      opacity: 0,
+      display: "none",
+    });
     const [timeoutFn, setTimeoutFn] = useState<NodeJS.Timeout | null>();
     const { SpaceScale1 } = useTheme();
 

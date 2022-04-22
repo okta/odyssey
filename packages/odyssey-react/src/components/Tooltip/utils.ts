@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { RefObject } from "react";
+import { CSSProperties, RefObject } from "react";
 
 function getPosition(
   position: "top" | "end" | "bottom" | "start",
   rect: DOMRect,
   paddingValue: number,
   direction: string
-) {    
+) {
   switch (position) {
     default:
     case "top":
@@ -31,32 +31,35 @@ function getPosition(
         top: rect.y + rect.height + paddingValue,
       };
     case "end":
-      return direction === 'ltr' ? {
-        left: rect.x + rect.width,
-        top: rect.y + rect.height / 2,
-      } : {
-        left: rect.x,
-        top: rect.y + rect.height / 2,
-      };
+      return direction === "ltr"
+        ? {
+            left: rect.x + rect.width,
+            top: rect.y + rect.height / 2,
+          }
+        : {
+            left: rect.x,
+            top: rect.y + rect.height / 2,
+          };
     case "start":
-      return direction === 'ltr' ? {
-        left: rect.x,
-        top: rect.y + rect.height / 2,
-      } : {
-        left: rect.x + rect.width,
-        top: rect.y + rect.height / 2,
-      };
+      return direction === "ltr"
+        ? {
+            left: rect.x,
+            top: rect.y + rect.height / 2,
+          }
+        : {
+            left: rect.x + rect.width,
+            top: rect.y + rect.height / 2,
+          };
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function getShowTooltipStyles(
   position: "top" | "end" | "bottom" | "start",
   tooltipRef: RefObject<HTMLDivElement>,
   themePadding: string
-) {
+): CSSProperties {
   if (!tooltipRef || !tooltipRef.current) {
-    return;
+    return {};
   }
   const remPadding = Number(themePadding.replace("rem", ""));
   const paddingValue =
@@ -64,7 +67,9 @@ export function getShowTooltipStyles(
     parseFloat(getComputedStyle(document.documentElement).fontSize);
 
   const rect = tooltipRef.current.getBoundingClientRect();
-  const direction = window.getComputedStyle(tooltipRef.current, null).getPropertyValue('direction');
+  const direction = window
+    .getComputedStyle(tooltipRef.current, null)
+    .getPropertyValue("direction");
   const location = getPosition(position, rect, paddingValue, direction);
   return {
     ...location,
@@ -74,9 +79,6 @@ export function getShowTooltipStyles(
   };
 }
 
-export function getHideTooltipStyles(): {
-  visibility: string;
-  opacity: number;
-} {
+export function getHideTooltipStyles(): CSSProperties {
   return { visibility: "hidden", opacity: 0 };
 }
