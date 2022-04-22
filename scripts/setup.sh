@@ -9,7 +9,8 @@ else
   echo "node ${NODE_VERSION} installation failed."
 fi
 
-YARN_VERSION=3.2.0
+# Note: Yarn will automatically switch over to yarn 3 after installing yarn 1.x
+YARN_VERSION=1.22.17
 
 echo "installing yarn v${YARN_VERSION}"
 if setup_service yarn $YARN_VERSION; then
@@ -19,6 +20,9 @@ else
 fi
 
 cd ${OKTA_HOME}/odyssey
+
+# Override .yarnrc.yml npmRegistryServer with Okta's
+yarn config set npmRegistryServer ${ARTIFACTORY_URL}/api/npm/npm-okta-master
 
 if ! yarn install --immutable; then
   echo "yarn install command failed! Exiting..."
