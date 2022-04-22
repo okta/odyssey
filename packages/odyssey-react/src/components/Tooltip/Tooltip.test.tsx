@@ -38,7 +38,10 @@ describe("Tooltip", () => {
     );
 
     expect(screen.getByRole(button)).toHaveAttribute("aria-describedby", "foo");
-    expect(screen.getByRole(tooltip, { hidden: true })).toHaveAttribute("id", "foo");
+    expect(screen.getByRole(tooltip, { hidden: true })).toHaveAttribute(
+      "id",
+      "foo"
+    );
   });
 
   it("invokes ref with expected args after render", () => {
@@ -51,7 +54,9 @@ describe("Tooltip", () => {
     );
 
     expect(ref).toHaveBeenCalledTimes(1);
-    expect(ref).toHaveBeenLastCalledWith(screen.getByRole(tooltip, { hidden: true }));
+    expect(ref).toHaveBeenLastCalledWith(
+      screen.getByRole(tooltip, { hidden: true })
+    );
   });
 
   a11yCheck(() =>
