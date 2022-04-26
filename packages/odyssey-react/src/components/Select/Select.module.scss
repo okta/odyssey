@@ -37,11 +37,11 @@
   line-height: var(--LineHeight);
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     border-color: var(--HoverFocusBorderColor);
   }
 
-  &:focus {
+  &:focus-visible {
     outline-color: var(--FocusOutlineColor);
     outline-offset: var(--FocusOutlineOffset);
     outline-style: var(--FocusOutlineStyle);
@@ -67,7 +67,7 @@
   &:invalid {
     border-color: var(--InvalidBorderColor);
 
-    &:focus {
+    &:focus-visible {
       outline-color: var(--InvalidFocusOutlineColor);
     }
   }
@@ -92,7 +92,7 @@
   overflow: hidden;
   font-size: var(--FontSize);
 
-  &:focus,
+  &:focus-visible,
   &.focused,
   .focus & {
     @include border-radius(var(--BorderRadius));
@@ -133,7 +133,7 @@
       }
     }
 
-    &:focus,
+    &:focus-visible,
     &.focused {
       outline: 0;
     }
@@ -144,7 +144,7 @@
   }
 
   .invalid & {
-    &:focus,
+    &:focus-visible,
     &.focused {
       @include border-radius(var(--BorderRadius));
 
@@ -203,11 +203,11 @@
     opacity: 0.25;
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       opacity: 1;
     }
 
-    &:focus {
+    &:focus-visible {
       outline-color: var(--FocusOutlineColor);
       outline-offset: var(--FocusOutlineOffset);
       outline-style: var(--FocusOutlineStyle);
@@ -284,7 +284,7 @@
     line-height: 1;
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       background-color: var(--ButtonHoverFocusBackgroundColor);
     }
   }
@@ -557,7 +557,7 @@
   text-indent: -9999px;
   appearance: none;
 
-  &:focus {
+  &:focus-visible {
     outline: none;
   }
 }
@@ -576,7 +576,7 @@
   padding-inline-end: 0;
   vertical-align: baseline;
 
-  &:focus {
+  &:focus-visible {
     outline: 0;
   }
 

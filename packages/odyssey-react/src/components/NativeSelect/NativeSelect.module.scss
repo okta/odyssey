@@ -38,11 +38,11 @@
   }
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     border-color: var(--HoverFocusBorderColor);
   }
 
-  &:focus {
+  &:focus-visible {
     outline-color: var(--FocusOutlineColor);
     outline-offset: var(--FocusOutlineOffset);
     outline-style: var(--FocusOutlineStyle);
@@ -64,7 +64,7 @@
     }
   }
 
-  &:invalid:focus {
+  &:invalid:focus-visible {
     outline-color: var(--InvalidFocusOutlineColor);
   }
 }

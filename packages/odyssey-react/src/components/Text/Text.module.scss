@@ -229,7 +229,7 @@
     cursor: default;
 
     // stylelint-disable-next-line selector-max-type
-    &:focus {
+    &:focus-visible {
       outline-color: var(--SummaryFocusOutlineColor);
       outline-offset: var(--SummaryFocusOutlineOffset);
       outline-style: var(--SummaryFocusOutlineStyle);

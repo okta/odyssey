@@ -30,7 +30,7 @@
   color: var(--TextColor);
 
   &:hover,
-  &:focus-within {
+  &:focus-visible-within {
     animation-delay: 0s, var(--HoverOutAnimationDelay);
   }
 

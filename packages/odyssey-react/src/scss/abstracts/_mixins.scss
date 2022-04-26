@@ -85,13 +85,13 @@
 
   /* stylelint-disable selector-class-pattern */
   &:hover,
-  &:focus,
+  &:focus-visible,
   &.is-ods-input-hover,
   &.is-ods-input-focus {
     border-color: cv("blue");
   }
 
-  &:focus,
+  &:focus-visible,
   &.is-ods-input-focus {
     @include outline;
   }
@@ -118,7 +118,7 @@
   &.is-ods-input-invalid {
     border-color: $color-danger-base;
 
-    &:focus {
+    &:focus-visible {
       @include outline($focus-ring-danger);
     }
   }

@@ -46,7 +46,7 @@
     }
   }
 
-  &:focus {
+  &:focus-visible {
     + .label {
       .box {
         outline-color: var(--BoxFocusOutlineColor);
@@ -104,7 +104,7 @@
       }
     }
 
-    &:focus {
+    &:focus-visible {
       + .label {
         .box {
           outline-color: var(--BoxInvalidFocusOutlineColor);

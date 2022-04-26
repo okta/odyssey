@@ -21,7 +21,7 @@
     text-decoration: underline;
   }
 
-  &:focus {
+  &:focus-visible {
     outline-color: var(--FocusOutlineColor);
     outline-offset: var(--FocusOutlineOffset);
     outline-style: var(--FocusOutlineStyle);

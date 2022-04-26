@@ -53,9 +53,9 @@
   }
 
   /* stylelint-disable-next-line selector-max-universal */
-  .hasTooltip *:focus + &,
+  .hasTooltip *:focus-visible + &,
   .hasTooltip:hover &,
-  .hasTooltip:focus & {
+  .hasTooltip:focus-visible & {
     visibility: visible;
     opacity: 1;
   }
