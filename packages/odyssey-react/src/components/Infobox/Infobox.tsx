@@ -27,7 +27,7 @@ import { theme } from "./Infobox.theme";
 
 interface CommonProps
   extends Omit<
-    ComponentPropsWithRef<"aside">,
+    ComponentPropsWithRef<"div">,
     "style" | "className" | "children" | "content" | "color"
   > {
   /**
@@ -81,7 +81,7 @@ export const Infobox = withTheme(
   theme,
   styles
 )(
-  forwardRef<HTMLElement, InfoboxProps>((props, ref) => {
+  forwardRef<HTMLDivElement, InfoboxProps>((props, ref) => {
     const { content, actions, heading, variant = "info", ...rest } = props;
 
     const classNames = useCx(styles.root, styles[`${variant}Variant`]);
@@ -89,7 +89,7 @@ export const Infobox = withTheme(
 
     return (
       <Box
-        as="aside"
+        as="div"
         {...omitProps}
         ref={ref}
         className={classNames}
