@@ -171,7 +171,7 @@ const Header: FunctionComponent<PropsModalHeader> = (props) => {
       <span className={styles.dismiss}>
         <Modal.Button
           close
-          variant="floating"
+          variant="dismiss"
           icon={<CloseIcon title={closeMessage} />}
         />
       </span>
