@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.0](https://github.com/okta/odyssey/compare/v0.11.3...v0.12.0) (2022-04-29)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
 ### [0.11.3](https://github.com/okta/odyssey/compare/v0.11.2...v0.11.3) (2022-04-14)
 
 **Note:** Version bump only for package @okta/odyssey-commitlint

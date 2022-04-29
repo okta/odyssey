@@ -17,14 +17,12 @@ import {
   LinkProps,
   Icon,
   InformationCircleFilledIcon,
-} from "@okta/odyssey-react";
-import { Link as Source } from "../../../../odyssey-react/src";
-
+} from "../../../../odyssey-react/src";
 import LinkMdx from "./Link.mdx";
 
 export default {
   title: `Components/Link`,
-  component: Source,
+  component: Link,
   parameters: {
     docs: {
       page: LinkMdx,
