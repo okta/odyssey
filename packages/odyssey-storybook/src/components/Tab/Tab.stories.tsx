@@ -12,15 +12,17 @@
 
 import React from "react";
 import { Story } from "@storybook/react";
-import { Tabs, TabsProps } from "../../../../odyssey-react/src";
-import TabsMdx from "./Tabs.mdx";
+import { Tabs, TabsProps } from "@okta/odyssey-react";
+import { Tabs as Source } from "../../../../odyssey-react/src";
+
+import TabMdx from "./Tab.mdx";
 
 export default {
   title: `Components/Tabs`,
-  component: Tabs,
+  component: Source,
   parameters: {
     docs: {
-      page: TabsMdx,
+      page: TabMdx,
     },
   },
 };

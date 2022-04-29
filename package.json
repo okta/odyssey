@@ -10,12 +10,12 @@
     "@babel/plugin-transform-typescript": "^7.15.0"
   },
   "engines": {
-    "yarn": "^3.2.0",
-    "node": ">=16 <17"
+    "yarn": "^1.15.2",
+    "node": ">=16.14.0"
   },
   "scripts": {
-    "start": "yarn workspace @okta/odyssey-storybook start",
-    "start:ie11": "yarn workspace @okta/odyssey-ie-11-sandbox start",
+    "start": "lerna run start --parallel --ignore @okta/odyssey-ie-11-sandbox",
+    "start:ie11": "lerna run start --scope @okta/odyssey-ie-11-sandbox",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry",
     "lint": "yarn eslint && yarn stylelint && yarn prettier-check",
@@ -25,23 +25,11 @@
     "stylelint": "stylelint **/*.scss",
     "test": "lerna run test",
     "typecheck": "lerna run typecheck",
-    "build": "lerna run build --ignore @okta/odyssey-ie-11-sandbox --ignore @okta/odyssey-storybook",
-    "postinstall": "yarn build && [ -z \"$CI\" ] && husky install || exit 0"
+    "prepare": "lerna run prepare",
+    "postprepare": "[ -z \"$CI\" ] && husky install || exit 0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^14.0.0",
-    "@okta/odyssey-commitlint": "^0.12.0",
-    "@okta/odyssey-eslint-config": "^0.12.0",
-    "@okta/odyssey-lint-staged": "^0.12.0",
-    "@okta/odyssey-prettier": "^0.12.0",
-    "@okta/odyssey-stylelint": "^0.12.0",
-    "eslint": "^7.27.0",
-    "husky": "^7.0.2",
-    "lerna": "4.0.0",
-    "lint-staged": "^11.1.2",
-    "prettier": "^2.4.0",
-    "stylelint": "^13.13.1"
+    "lerna": "4.0.0"
   },
-  "version": "0.5.0",
-  "packageManager": "yarn@3.2.0"
+  "version": "0.5.0"
 }

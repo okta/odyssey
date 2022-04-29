@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-stylelint",
-  "version": "0.12.0",
+  "version": "0.11.3",
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "stylelint": "^13.13.1",
     "stylelint-checkstyle-formatter": "^0.1.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-property-sort-order-smacss": "^7.1.0",
@@ -20,10 +21,6 @@
   "devDependencies": {
     "jest": "^26.6.3",
     "jest-preset-stylelint": "^4.1.1",
-    "postcss": "^8.3.6",
     "postcss-scss": "^4.0.0"
-  },
-  "peerDependencies": {
-    "stylelint": "^13.13.1"
   }
 }

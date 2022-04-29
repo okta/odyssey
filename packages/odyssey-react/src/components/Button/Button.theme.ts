@@ -70,16 +70,19 @@ export const theme: ThemeReducer = (theme) => ({
   DangerHoverBackgroundColor: theme.ColorPaletteRed900,
   DangerHoverBorderColor: theme.ColorBorderDangerDark,
 
-  // Floating Variant
-  FloatingBackgroundColor: "transparent",
-  FloatingTextColor: "inherit",
-  FloatingDisabledTextColor: theme.ColorNeutralBase,
-  FloatingLineHeight: 1,
-  FloatingPaddingBlock: theme.SpaceScale0,
-  FloatingPaddingInline: theme.SpaceScale0,
-  FloatingHoverBackgroundColor: "rgba(29, 29, 33, 0.1)",
-  FloatingFocusBackgroundColor: "rgba(255, 255, 255, 0.6)",
-  FloatingDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
+  // Dismiss Variant
+  DismissBackgroundColor: "transparent",
+  DismissTextColor: "inherit",
+  DismissDisabledTextColor: theme.ColorNeutralBase,
+  DismissLineHeight: 1,
+  DismissPaddingBlock: theme.SpaceScale0,
+  DismissPaddingInline: theme.SpaceScale0,
+  DismissHoverBackgroundColor: "rgba(29, 29, 33, 0.1)",
+  DismissFocusBackgroundColor: "rgba(255, 255, 255, 0.6)",
+  DismissDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
+
+  // Dismiss Inverted Variant
+  DismissInvertedBoxShadowColor: theme.ColorPaletteNeutralWhite,
 
   // Clear Variant
   ClearBackgroundColor: "transparent",

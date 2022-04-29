@@ -21,25 +21,16 @@ module.exports = (ctx) => {
 
   const options = Object.assign(
     ctx.odyssey,
-    ctx.env === "production"
-      ? {
-          logical: {
-            dir: "ltr",
-            preserve: false,
-          },
-          autoprefixer: {
-            grid: "autoplace",
-            env: "production",
-          },
-        }
-      : {
-          logical: false,
-          autoprefixer: false,
-          modules: {
-            ...ctx.odyssey.modules,
-            generateScopedName: "ods-[name]-[local]-[hash:base62:6]",
-          },
-        }
+    ctx.env === "production" && {
+      logical: {
+        dir: "ltr",
+        preserve: false,
+      },
+      autoprefixer: {
+        grid: "autoplace",
+        env: "production",
+      },
+    }
   );
 
   const partials = `functions colors mixins tokens`.split(" ");

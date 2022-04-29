@@ -3,16 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.12.0](https://github.com/okta/odyssey/compare/v0.11.3...v0.12.0) (2022-04-29)
-
-### Features
-
-- **odyssey-storybook:** add styles for Do and Don't examples ([e65463f](https://github.com/okta/odyssey/commit/e65463f4b3f96416abbd7f20a027d608f5da594c))
-
-### Bug Fixes
-
-- resolve missing peer dependencies ([36a85d6](https://github.com/okta/odyssey/commit/36a85d6543b53216edab1a61ffec2d883bdaed89))
-
 ### [0.11.3](https://github.com/okta/odyssey/compare/v0.11.2...v0.11.3) (2022-04-14)
 
 ### Features
