@@ -149,7 +149,7 @@ export const Toast = withTheme(
         {body && <p className={styles.body}>{body}</p>}
         <span className={styles.dismiss}>
           <Button
-            variant={variant === "caution" ? "dismiss" : "dismissInverted"}
+            variant="floating"
             onClick={onDismiss}
             icon={<CloseIcon title={dismissButtonLabel} />}
           />

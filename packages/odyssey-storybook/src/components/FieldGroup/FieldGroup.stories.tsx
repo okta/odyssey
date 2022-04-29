@@ -18,13 +18,12 @@ import {
   Infobox,
   Select,
   TextInput,
-} from "@okta/odyssey-react";
-import { FieldGroup as Source } from "../../../../odyssey-react/src";
+} from "../../../../odyssey-react/src";
 import FieldGroupMdx from "./FieldGroup.mdx";
 
 export default {
   title: `Components/FieldGroup`,
-  component: Source,
+  component: FieldGroup,
   parameters: {
     docs: {
       page: FieldGroupMdx,
