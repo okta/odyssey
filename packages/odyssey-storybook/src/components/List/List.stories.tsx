@@ -21,12 +21,13 @@ import {
   UserIcon,
   SettingsIcon,
   Text,
-} from "../../../../odyssey-react/src";
+} from "@okta/odyssey-react";
+import { List as Source } from "../../../../odyssey-react/src";
 import ListMdx from "./List.mdx";
 
 export default {
   title: `Components/List`,
-  component: List,
+  component: Source,
   parameters: {
     docs: {
       page: ListMdx,

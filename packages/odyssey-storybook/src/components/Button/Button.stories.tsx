@@ -12,19 +12,24 @@
 
 import React from "react";
 import { Story } from "@storybook/react";
+import { Button as Source } from "../../../../odyssey-react/src";
+import {
+  ColorBackgroundBase,
+  ColorPrimaryBase,
+} from "@okta/odyssey-design-tokens";
 import {
   Button,
   ButtonProps,
   CloseIcon,
   SettingsIcon,
-} from "../../../../odyssey-react/src";
+} from "@okta/odyssey-react";
 import { ThemeProvider } from "@okta/odyssey-react-theme";
 
 import ButtonMdx from "./Button.mdx";
 
 export default {
   title: `Components/Button`,
-  component: Button,
+  component: Source,
   parameters: {
     docs: {
       page: ButtonMdx,
@@ -66,9 +71,9 @@ Clear.args = {
   variant: "clear",
 };
 
-export const Floating = Template.bind({});
-Floating.args = {
-  variant: "floating",
+export const Dismiss = Template.bind({});
+Dismiss.args = {
+  variant: "dismiss",
   icon: <CloseIcon title="close" />,
   children: undefined,
 };
@@ -117,24 +122,20 @@ export const Theme: Story<
         [Button.theme]: { PrimaryBackgroundColor, SecondaryBackgroundColor },
       }}
     >
-      <Button {...rest} variant="primary" />
-      <Button {...rest} variant="secondary" />
+      <Button {...rest} />
     </ThemeProvider>
   );
 };
 Theme.argTypes = {
-  variant: {
-    control: null,
-  },
   PrimaryBackgroundColor: {
     name: "primary background",
-    defaultValue: "lightcoral",
+    defaultValue: ColorPrimaryBase,
     type: "string",
     control: "color",
   },
   SecondaryBackgroundColor: {
     name: "secondary background",
-    defaultValue: "lemonchiffon",
+    defaultValue: ColorBackgroundBase,
     type: "string",
     control: "color",
   },

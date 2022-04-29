@@ -12,17 +12,14 @@
 
 import React, { useEffect } from "react";
 import type { Story } from "@storybook/react";
-import {
-  Checkbox,
-  CheckboxProps,
-  ScreenReaderText,
-} from "../../../../odyssey-react/src";
+import { Checkbox as Source } from "../../../../odyssey-react/src";
+import { Checkbox, CheckboxProps, ScreenReaderText } from "@okta/odyssey-react";
 
 import CheckboxMdx from "./Checkbox.mdx";
 
 export default {
   title: `Components/Checkbox`,
-  component: Checkbox,
+  component: Source,
   parameters: {
     docs: {
       page: CheckboxMdx,

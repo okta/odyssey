@@ -12,6 +12,6 @@ BABEL_ARGS=(
   "--source-maps"
 )
 
-yarn run babel ${BABEL_ARGS[@]}
+$(yarn bin)/babel ${BABEL_ARGS[@]}
 
 exit 0;

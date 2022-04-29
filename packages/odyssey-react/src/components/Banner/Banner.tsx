@@ -118,7 +118,7 @@ export const Banner = withTheme(
         {onDismiss && (
           <span className={styles.dismissButton}>
             <Button
-              variant="floating"
+              variant="dismiss"
               onClick={onDismiss}
               aria-label={dismissButtonLabel}
               icon={<CloseIcon />}

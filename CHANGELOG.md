@@ -3,30 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.12.0](https://github.com/okta/odyssey/compare/v0.11.3...v0.12.0) (2022-04-29)
-
-### ⚠ BREAKING CHANGES
-
-- **odyssey-react:** Button - "dismiss" variant renamed to "floating"
-
-### Features
-
-- **odyssey-storybook:** add styles for Do and Don't examples ([e65463f](https://github.com/okta/odyssey/commit/e65463f4b3f96416abbd7f20a027d608f5da594c))
-
-### Bug Fixes
-
-- **odyssey-babel-loader:** support loader options passthrough ([b8da108](https://github.com/okta/odyssey/commit/b8da108555e56d909fbb2dc0a175d77e49acb5a2))
-- **odyssey-babel-loader:** support webpack 4 API ([5725162](https://github.com/okta/odyssey/commit/572516258a1439f06e9b9baf134bb186dbc15d01))
-- **odyssey-react:** [a11y] Infobox is now a div rather than aside ([19acd20](https://github.com/okta/odyssey/commit/19acd20cf6a67dc3ad1d85c396f36f9f912cb24f))
-- **odyssey-react:** make invalid border behavior consistent ([67398cf](https://github.com/okta/odyssey/commit/67398cf8d33cf52aaedd9d1a2aceacb24c54a8f6))
-- **odyssey-react:** MultiSelect dismissal is visible again ([c7a9573](https://github.com/okta/odyssey/commit/c7a9573beb0e9766fcd3b2961803ef926ab3821f))
-- resolve missing peer dependencies ([36a85d6](https://github.com/okta/odyssey/commit/36a85d6543b53216edab1a61ffec2d883bdaed89))
-- update bacon setup script ([35db26e](https://github.com/okta/odyssey/commit/35db26e86176006f2ab3bba2e2faaef09e5f149b))
-
-### Code Refactoring
-
-- **odyssey-react:** Button - "dismiss" variant renamed to "floating" ([a5306a0](https://github.com/okta/odyssey/commit/a5306a08576cd14a02a7662fd282b0f89fad210a))
-
 ### [0.11.3](https://github.com/okta/odyssey/compare/v0.11.2...v0.11.3) (2022-04-14)
 
 ### Features

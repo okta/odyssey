@@ -19,12 +19,13 @@ import {
   TextInput,
   Infobox,
   Button,
-} from "../../../../odyssey-react/src";
+} from "@okta/odyssey-react";
+import { Form as Source } from "../../../../odyssey-react/src";
 import FormMdx from "./Form.mdx";
 
 export default {
   title: `Components/Form`,
-  component: Form,
+  component: Source,
   parameters: {
     docs: {
       page: FormMdx,
