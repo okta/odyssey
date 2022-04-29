@@ -12,7 +12,7 @@
     "directory": "packages/odyssey-babel-preset"
   },
   "scripts": {
-    "build": "tsc",
+    "prepare": "tsc",
     "prepack": "prepack"
   },
   "dependencies": {

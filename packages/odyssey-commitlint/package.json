@@ -6,11 +6,9 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "@commitlint/config-conventional": "^14.0.0",
-    "@commitlint/config-lerna-scopes": "^14.0.0"
-  },
-  "peerDependencies": {
     "@commitlint/cli": "^14.0.0",
-    "husky": "^7.0.2"
+    "@commitlint/config-conventional": "^14.0.0",
+    "@commitlint/config-lerna-scopes": "^14.0.0",
+    "husky": "^6.0.0"
   }
 }

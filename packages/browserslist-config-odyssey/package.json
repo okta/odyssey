@@ -12,7 +12,7 @@
     "directory": "packages/browserslist-config-odyssey"
   },
   "scripts": {
-    "build": "tsc",
+    "prepare": "tsc",
     "prepack": "prepack"
   },
   "devDependencies": {

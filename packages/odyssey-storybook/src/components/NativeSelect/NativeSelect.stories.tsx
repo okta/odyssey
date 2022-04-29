@@ -12,7 +12,8 @@
 
 import React from "react";
 import type { Story } from "@storybook/react";
-import { NativeSelect, NativeSelectProps } from "../../../../odyssey-react/src";
+import { NativeSelect, NativeSelectProps } from "@okta/odyssey-react";
+import { NativeSelect as Source } from "../../../../odyssey-react/src";
 import NativeSelectMdx from "./NativeSelect.mdx";
 
 const options = [
@@ -27,7 +28,7 @@ const options = [
 
 export default {
   title: `Components/NativeSelect`,
-  component: NativeSelect,
+  component: Source,
   parameters: {
     docs: {
       page: NativeSelectMdx,

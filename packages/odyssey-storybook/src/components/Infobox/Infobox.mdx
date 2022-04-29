@@ -1,11 +1,14 @@
 import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
-import { theme } from "../../../../odyssey-react/src/components/Infobox/Infobox.theme";
-import { CheckIcon, CloseIcon } from "../../../../odyssey-react/src";
+import { theme } from "@okta/odyssey-react/dist/components/Infobox/Infobox.theme";
 import { ThemeTable } from "../../../.storybook/components";
 
 # Infobox
 
 An infobox is a type of alert that provides feedback in response to a user action or system activity.
+
+## Anatomy
+
+**ANATOMY MISSING**
 
 ## Behavior
 
@@ -59,15 +62,11 @@ Avoid overusing Infobox within the same view. They are intended to draw the eye,
 
 It is ideal to direct users toward an appropriate action, especially for addressing errors. Infoboxes allow for both inline and separated actions. To preserve clarity, limit Infoboxes to one link.
 
-<Canvas>
-  <Story id="components-infobox--with-link-inline" />
-</Canvas>
+**STORY MISSING**
 
 The actions section is limited to links. If it's necessary to provide the user with an action, please direct them to the appropriate flow instead of beginning a new process inline.
 
-<Canvas>
-  <Story id="components-infobox--with-link" />
-</Canvas>
+**STORY MISSING**
 
 ### Placement
 
@@ -75,27 +74,19 @@ Infoboxes should be displayed above the content they apply to but not higher tha
 
 For example, a Form error should be displayed above all Fieldsets, but below the Form title.
 
-<Canvas className="sb-do">
-  <Story id="components-infobox--form-do" />
-  <span class="sb-marker sb-marker--do">
-    <CheckIcon /> Do
-  </span>
-</Canvas>
+**STORY MISSING**
 
 Stay away from nesting Infoboxes within information-dense UI like Tables. If you need to convey something about an individual data point, consider another design solution.
 
-<Canvas className="sb-dont">
-  <Story id="components-infobox--table-dont" />
-  <span class="sb-marker sb-marker--dont">
-    <CloseIcon /> Don't
-  </span>
-</Canvas>
+**STORY MISSING**
 
 ## Content Guidelines
 
 These messages may be used for longer content than Toast or Banner, but shouldn't go beyond two paragraphs. When including an inline link or action, be sure the link text clearly indicates where it leads.
 
 Do not include images or other UIs within Infobox.
+
+**STORY MISSING**
 
 ### Content Areas
 

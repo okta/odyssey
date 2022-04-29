@@ -25,6 +25,7 @@
   "scripts": {
     "prebuild": "style-dictionary clean --config ./config.cjs",
     "build": "style-dictionary build --config ./config.cjs",
+    "prepare": "yarn build",
     "prepack": "prepack"
   }
 }

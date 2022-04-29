@@ -11,7 +11,7 @@
     "directory": "packages/odyssey-babel-loader"
   },
   "scripts": {
-    "build": "rm -rf ./dist && mkdir ./dist && cp -r ./src/** ./dist",
+    "prepare": "rm -rf ./dist && mkdir ./dist && cp -r ./src/** ./dist",
     "prepack": "prepack"
   },
   "dependencies": {

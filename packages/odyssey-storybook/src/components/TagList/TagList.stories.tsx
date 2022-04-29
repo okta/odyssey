@@ -12,12 +12,14 @@
 
 import React from "react";
 import type { Story } from "@storybook/react";
-import { TagList, TagListProps } from "../../../../odyssey-react/src";
+import { TagList, TagListProps } from "@okta/odyssey-react";
+import { TagList as Source } from "@okta/odyssey-react/src";
+
 import TagListMdx from "./TagList.mdx";
 
 export default {
   title: `Components/TagList`,
-  component: TagList,
+  component: Source,
   parameters: {
     docs: {
       page: TagListMdx,

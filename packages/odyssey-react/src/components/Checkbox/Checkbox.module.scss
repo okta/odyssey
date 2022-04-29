@@ -87,12 +87,6 @@
       .box {
         border-color: var(--BoxInvalidBorderColor);
       }
-
-      &:hover {
-        .box {
-          border-color: var(--BoxInvalidHoverBorderColor);
-        }
-      }
     }
 
     &:checked,
@@ -100,6 +94,16 @@
       + .label {
         .box {
           background-color: var(--BoxInvalidBackgroundColor);
+        }
+      }
+    }
+
+    &:not(:checked) {
+      + .label {
+        &:hover {
+          .box {
+            border-color: var(--BoxInvalidHoverBorderColor);
+          }
         }
       }
     }

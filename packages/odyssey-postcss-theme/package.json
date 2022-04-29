@@ -12,7 +12,7 @@
     "directory": "packages/odyssey-postcss-theme"
   },
   "scripts": {
-    "build": "tsc",
+    "prepare": "tsc",
     "test": "jest",
     "prepack": "prepack"
   },
@@ -20,7 +20,7 @@
     "@okta/odyssey-lifecycle": "^0.12.0",
     "@okta/odyssey-typescript": "^0.12.0",
     "jest": "^26.6.3",
-    "typescript": "^4.4.4"
+    "postcss": "^8.3.6"
   },
   "peerDependencies": {
     "postcss": "^8.3.6"

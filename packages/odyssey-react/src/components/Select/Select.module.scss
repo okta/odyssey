@@ -280,7 +280,7 @@
     background-color: var(--ButtonBackgroundColor);
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg' class='ods-icon'%3E%3Cpath d='M2.323 10.118a1.102 1.102 0 1 0 1.559 1.56L7 8.558l3.118 3.118a1.102 1.102 0 0 0 1.56-1.559L8.558 7l3.118-3.118a1.102 1.102 0 0 0-1.559-1.56L7 5.442 3.882 2.323a1.102 1.102 0 1 0-1.56 1.559L5.442 7l-3.118 3.118Z' fill='%23fff'/%3E%3C/svg%3E");
     background-position: center;
-    background-size: var(--DismissSize);
+    background-size: calc(var(--LineHeight) * 1em - 1em);
     line-height: 1;
 
     &:hover,

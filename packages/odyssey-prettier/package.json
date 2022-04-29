@@ -5,7 +5,7 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
-  "peerDependencies": {
+  "devDependencies": {
     "prettier": "^2.4.0"
   }
 }

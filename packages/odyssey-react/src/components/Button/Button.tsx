@@ -43,7 +43,13 @@ interface CommonProps
    * The visual variant to be displayed to the user.
    * @default primary
    */
-  variant?: "primary" | "secondary" | "danger" | "floating" | "clear";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "dismiss"
+    | "dismissInverted"
+    | "clear";
 
   /**
    * Extends the width of the button to that of its' parent.
