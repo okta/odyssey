@@ -24,7 +24,7 @@ npm install --global yarn
 
 ## Repository structure
 
-The repo is managed via [lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/)
+The repo is managed via [lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://yarnpkg.com/features/workspaces)
 and applies a modular approach to code organization where individual
 packages are separated for a number of reasons:
 
@@ -42,14 +42,8 @@ Let's get Odyssey installed on your machine and running locally:
 git clone https://github.com/okta/odyssey.git
 cd odyssey
 
-# install dependencies
-yarn install --ignore-scripts
-
-# ensure packages are built
-yarn prepare
-
-# ensure git hooks are installed
-yarn postprepare
+# install dependencies, build packages, and install git hooks
+yarn install
 
 # start Storybook in the browser
 yarn start
@@ -61,6 +55,16 @@ packages in our repo are not watched to trigger automatic dev server reloads.
 
 If you're working on a tooling package make sure to focus on unit coverage
 first and then integration testing with the Storybook environment second.
+
+### Development commands
+
+```sh
+# Build all packages (use after rebasing/changing branches/etc)
+yarn build
+
+# Lint all packages
+yarn lint
+```
 
 ## Testing your code
 

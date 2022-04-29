@@ -12,14 +12,12 @@
 
 import React from "react";
 import type { Story } from "@storybook/react";
-import { TextInput, TextInputProps } from "@okta/odyssey-react";
-import { TextInput as Source } from "../../../../odyssey-react/src";
-
+import { TextInput, TextInputProps } from "../../../../odyssey-react/src";
 import TextInputMdx from "./TextInput.mdx";
 
 export default {
   title: `Components/TextInput`,
-  component: Source,
+  component: TextInput,
   parameters: {
     docs: {
       page: TextInputMdx,
