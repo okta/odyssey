@@ -12,14 +12,12 @@
 
 import React from "react";
 import type { Story } from "@storybook/react";
-import { Status, StatusProps } from "@okta/odyssey-react";
-import { Status as Source } from "../../../../odyssey-react/src";
-
+import { Status, StatusProps } from "../../../../odyssey-react/src";
 import StatusMdx from "./Status.mdx";
 
 export default {
   title: `Components/Status`,
-  component: Source,
+  component: Status,
   parameters: {
     docs: {
       page: StatusMdx,

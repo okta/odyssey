@@ -31,6 +31,7 @@ export const theme: ThemeReducer = (theme) => ({
   HoverFocusBorderColor: theme.ColorPrimaryBase,
   IconSize: "1.1487rem",
   InvalidBorderColor: theme.ColorBorderDangerBase,
+  InvalidHoverBorderColor: theme.ColorDangerDark,
   InvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
   LineHeight: theme.FontLineHeightUi,
   MarginBlock: 0,
