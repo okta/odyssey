@@ -13,12 +13,14 @@
 import React from "react";
 import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
-import { Table, TableProps } from "../../../../odyssey-react/src";
+import { Table, TableProps } from "@okta/odyssey-react";
+import { Table as Source } from "../../../../odyssey-react/src";
+
 import TableMdx from "./Table.mdx";
 
 export default {
   title: `Components/Table`,
-  component: Table,
+  component: Source,
   parameters: {
     docs: {
       page: TableMdx,

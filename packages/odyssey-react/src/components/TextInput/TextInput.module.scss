@@ -66,10 +66,6 @@
 
   &.invalid {
     border-color: var(--InvalidBorderColor);
-
-    &:hover {
-      border-color: var(--InvalidHoverBorderColor);
-    }
   }
 
   &.invalid:focus-within {

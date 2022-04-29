@@ -11,8 +11,10 @@
  */
 
 import type { FunctionComponent } from "react";
-import type { FieldProps } from "../../../../odyssey-react/src";
+import type { FieldProps } from "@okta/odyssey-react";
 
-export const FieldDocGen: FunctionComponent<FieldProps> = () => {
+const FieldDocGen: FunctionComponent<FieldProps> = () => {
   return null;
 };
+
+export { FieldDocGen };

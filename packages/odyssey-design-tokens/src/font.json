@@ -26,7 +26,7 @@
       "12": { "value": "3.643rem" }
     },
     "size": {
-      "base": { "value": "87.5%" },
+      "base": { "value": "14px" },
       "caption": { "value": "{font.scale.0.value}" },
       "body": { "value": "{font.scale.1.value}" },
       "heading6": { "value": "{font.scale.2.value}" },

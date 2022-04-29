@@ -115,22 +115,23 @@
   }
 }
 
-.floatingVariant {
-  padding-block: var(--FloatingPaddingBlock);
-  padding-inline: var(--FloatingPaddingInline);
+.dismissVariant,
+.dismissInvertedVariant {
+  padding-block: var(--DismissPaddingBlock);
+  padding-inline: var(--DismissPaddingInline);
   border: 0;
-  background-color: var(--FloatingBackgroundColor);
-  color: var(--FloatingTextColor);
-  line-height: var(--FloatingLineHeight);
+  background-color: var(--DismissBackgroundColor);
+  color: var(--DismissTextColor);
+  line-height: var(--DismissLineHeight);
 
   &:hover,
   &:focus {
-    background-color: var(--FloatingHoverBackgroundColor);
+    background-color: var(--DismissHoverBackgroundColor);
   }
 
   &:disabled {
-    background-color: var(--FloatingDisabledBackgroundColor);
-    color: var(--FloatingDisabledTextColor);
+    background-color: var(--DismissDisabledBackgroundColor);
+    color: var(--DismissDisabledTextColor);
   }
 }
 

@@ -13,7 +13,9 @@
 import React from "react";
 import type { Story } from "@storybook/react";
 import type { ReactElement } from "react";
-import { Select, SelectProps } from "../../../../odyssey-react/src";
+import { Select, SelectProps } from "@okta/odyssey-react";
+import { Select as Source } from "../../../../odyssey-react/src";
+
 import SelectMdx from "./Select.mdx";
 
 const options = [
@@ -28,7 +30,7 @@ const options = [
 
 export default {
   title: `Components/Select`,
-  component: Select,
+  component: Source,
   parameters: {
     docs: {
       page: SelectMdx,
