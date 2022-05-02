@@ -12,16 +12,16 @@
 
 import React, { ReactElement } from "react";
 import { Story } from "@storybook/react";
-import { Source } from "./Box.docgen";
-import { Box, BoxProps, Heading, Text } from "@okta/odyssey-react";
+import { BoxDocGen } from "./Box.docgen";
+import { Box, BoxProps, Heading, Text } from "../../../../odyssey-react/src";
 
 import BoxMdx from "./Box.mdx";
 
-import "./box-stories.css";
+import "!style-loader!css-loader!./box-stories.css";
 
 export default {
   title: `Components/Box`,
-  component: Source,
+  component: BoxDocGen,
   parameters: {
     docs: {
       page: BoxMdx,

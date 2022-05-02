@@ -12,13 +12,12 @@
 
 import React from "react";
 import { Story } from "@storybook/react";
-import { Heading, HeadingProps } from "@okta/odyssey-react";
-import { Heading as Source } from "../../../../odyssey-react/src";
+import { Heading, HeadingProps } from "../../../../odyssey-react/src";
 import HeadingMdx from "./Heading.mdx";
 
 export default {
   title: `Components/Heading`,
-  component: Source,
+  component: Heading,
   parameters: {
     docs: {
       page: HeadingMdx,

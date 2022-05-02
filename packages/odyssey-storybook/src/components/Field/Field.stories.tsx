@@ -13,8 +13,11 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { FieldDocGen } from "./Field.docgen";
-import { Field, FieldProps, ScreenReaderText } from "@okta/odyssey-react";
-
+import {
+  Field,
+  FieldProps,
+  ScreenReaderText,
+} from "../../../../odyssey-react/src";
 import FieldMdx from "./Field.mdx";
 
 export default {

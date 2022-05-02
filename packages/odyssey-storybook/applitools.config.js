@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const VRT_IGNORE = "Toast.Provider".split(" ");
+const VRT_IGNORE = "Toast.Provider Infobox.Form Infobox.Table".split(" ");
 
 module.exports = {
   // NOTE: the docs for this exitcode config are incorrect as of this
@@ -22,7 +22,7 @@ module.exports = {
 
   matchLevel: "Strict",
   showStorybookOutput: true,
-  testConcurrency: 10,
+  testConcurrency: 20,
   browser: [{ width: 1024, height: 768, name: "chrome" }],
   accessibilityValidation: {
     level: "AA",
