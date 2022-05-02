@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.1](https://github.com/okta/odyssey/compare/v0.12.0...v0.12.1) (2022-05-02)
+
+### Bug Fixes
+
+- build: use fixed node version instead of alias
+
 ## [0.12.0](https://github.com/okta/odyssey/compare/v0.11.3...v0.12.0) (2022-04-29)
 
 ### ⚠ BREAKING CHANGES
