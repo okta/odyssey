@@ -30,6 +30,7 @@ export const theme: ThemeReducer = (theme) => ({
   DisabledReadonlyBorderColor: theme.ColorBorderDisabled,
   DisabledReadonlyHoverBorderColor: theme.ColorBorderDisabled,
   DisabledTextColor: theme.ColorTextSub,
+  DismissSize: theme.SpaceScale1,
   FocusOutlineColor: theme.FocusOutlineColorPrimary,
   FocusOutlineOffset: theme.FocusOutlineOffsetTight,
   FocusOutlineStyle: theme.FocusOutlineStyle,
