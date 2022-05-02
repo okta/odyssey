@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-ie-11-sandbox",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "private": true,
   "description": "Testing for IE11",
   "author": "Okta, Inc.",
@@ -17,7 +17,7 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "@okta/odyssey-react": "^0.12.0",
+    "@okta/odyssey-react": "^0.12.1",
     "core-js": "^3.21.0",
     "proxy-polyfill": "^0.3.2",
     "react": "^17.0.2",
@@ -28,8 +28,8 @@
     "@babel/preset-env": "7.15.0",
     "@babel/preset-react": "7.14.5",
     "@babel/preset-typescript": "7.15.0",
-    "@okta/browserslist-config-odyssey": "^0.12.0",
-    "@okta/odyssey-babel-preset": "^0.12.0",
+    "@okta/browserslist-config-odyssey": "^0.12.1",
+    "@okta/odyssey-babel-preset": "^0.12.1",
     "babel-loader": "8.2.2",
     "css-loader": "3.6.0",
     "html-webpack-plugin": "4.5.2",
