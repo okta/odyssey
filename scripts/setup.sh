@@ -22,7 +22,7 @@ fi
 cd ${OKTA_HOME}/odyssey
 
 # Override .yarnrc.yml npmRegistryServer with Okta's
-yarn config set npmRegistryServer ${ARTIFACTORY_URL}/api/npm/npm-okta-master
+export YARN_NPM_REGISTRY_SERVER=${ARTIFACTORY_URL}/api/npm/npm-okta-master
 
 if ! yarn install --immutable; then
   echo "yarn install command failed! Exiting..."
