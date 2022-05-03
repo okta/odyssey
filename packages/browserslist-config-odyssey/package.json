@@ -1,6 +1,6 @@
 {
   "name": "@okta/browserslist-config-odyssey",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Browserslist config for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -16,8 +16,8 @@
     "prepack": "prepack"
   },
   "devDependencies": {
-    "@okta/odyssey-lifecycle": "^0.12.0",
-    "@okta/odyssey-typescript": "^0.12.0",
+    "@okta/odyssey-lifecycle": "^0.12.1",
+    "@okta/odyssey-typescript": "^0.12.1",
     "typescript": "^4.4.4"
   }
 }
