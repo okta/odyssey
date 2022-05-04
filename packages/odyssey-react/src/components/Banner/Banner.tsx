@@ -94,7 +94,7 @@ export const Banner = withTheme(
       styles.root,
       styles[`${variant}Variant`],
       !open && styles.isDismissed,
-      onDismiss && styles.isDismissable
+      onDismiss && styles.isDismissible
     );
 
     const omitProps = useOmit(rest);
