@@ -33,9 +33,9 @@ export const theme: ThemeReducer = (theme) => ({
   DismissButtonInsetInlineEnd: theme.SpaceScale3,
   DismissButtonMarginInlineStart: theme.SpaceScale3,
 
-  DismissablePaddingBlock: theme.SpaceScale3,
-  DismissablePaddingInlineEnd: theme.SpaceScale6,
-  DismissablePaddingInlineStart: theme.SpaceScale3,
+  DismissiblePaddingBlock: theme.SpaceScale3,
+  DismissiblePaddingInlineEnd: theme.SpaceScale6,
+  DismissiblePaddingInlineStart: theme.SpaceScale3,
 
   CautionBackgroundColor: theme.ColorBackgroundCautionLight,
   CautionIconColor: theme.ColorCautionDark,
