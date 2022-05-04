@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepack": "prepack"
+    "prepack": "yarn exec prepack"
   },
   "devDependencies": {
     "@okta/odyssey-lifecycle": "^0.12.2",
