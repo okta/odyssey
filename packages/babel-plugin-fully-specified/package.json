@@ -15,7 +15,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "prepack": "prepack"
+    "prepack": "yarn exec prepack"
   },
   "dependencies": {
     "@babel/types": "^7.14.5"

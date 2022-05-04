@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "prepack": "prepack"
+    "prepack": "yarn exec prepack"
   },
   "dependencies": {
     "@okta/odyssey-postcss-theme": "^0.12.3",

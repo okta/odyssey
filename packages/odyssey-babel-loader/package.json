@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "rm -rf ./dist && mkdir ./dist && cp -r ./src/** ./dist",
-    "prepack": "prepack"
+    "prepack": "yarn exec prepack"
   },
   "dependencies": {
     "babel-loader": "^8"
