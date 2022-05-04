@@ -106,15 +106,15 @@ WithLink.args = {
   ),
 };
 
-export const Dismissable = Template.bind({});
-Dismissable.args = {
+export const Dismissible = Template.bind({});
+Dismissible.args = {
   variant: "caution",
   content: "Severe solar winds detected. Local system flights may be delayed.",
   onDismiss: () => {
     console.log("Banner: onDismiss!");
   },
 };
-Dismissable.argTypes = {
+Dismissible.argTypes = {
   onDismiss: {
     control: { disable: false },
   },
