@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.2](https://github.com/okta/odyssey/compare/v0.12.1...v0.12.2) (2022-05-03)
+
+### Bug Fixes
+
+- do not use yarn prefix for okta registry ([d8a0de1](https://github.com/okta/odyssey/commit/d8a0de1dff9c2733584ef1ba43761917a3ad2782))
+- provide fallback for env variable ([b438a51](https://github.com/okta/odyssey/commit/b438a510b3495c0bc83b7de001d2d75d084de890))
+
 ## [0.12.1](https://github.com/okta/odyssey/compare/v0.12.0...v0.12.1) (2022-05-02)
 
 ### Bug Fixes
