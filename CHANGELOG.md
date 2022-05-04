@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.3](https://github.com/okta/odyssey/compare/v0.12.2...v0.12.3) (2022-05-04)
+
+### Bug Fixes
+
+- use yarn override env variable in ci setup script ([a7d4d08](https://github.com/okta/odyssey/commit/a7d4d083749b75f8ddf9d1845d11930b6acd60b1))
+
 ## [0.12.2](https://github.com/okta/odyssey/compare/v0.12.1...v0.12.2) (2022-05-03)
 
 ### Bug Fixes
