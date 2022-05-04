@@ -54,6 +54,6 @@
     "build:clean": "rm -rf dist",
     "build:types": "tsc --project tsconfig.production.json",
     "build:source": "./scripts/buildSource",
-    "prepack": "prepack"
+    "prepack": "yarn exec prepack"
   }
 }

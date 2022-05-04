@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepack": "prepack"
+    "prepack": "yarn exec prepack"
   },
   "dependencies": {
     "@babel/core": "^7.15.0",

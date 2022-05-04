@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "prepack": "prepack"
+    "prepack": "yarn exec prepack"
   },
   "dependencies": {
     "@babel/template": "^7.12.13",
