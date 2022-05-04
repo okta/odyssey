@@ -69,6 +69,6 @@
     "build:types": "tsc --project tsconfig.production.json",
     "build:source": "./scripts/buildSource",
     "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.cjs) --out-dir ./src/components/Icon/",
-    "prepack": "prepack"
+    "prepack": "yarn exec prepack"
   }
 }

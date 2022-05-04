@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "prepack": "prepack"
+    "prepack": "yarn exec prepack"
   },
   "dependencies": {
     "sass": "^1.42.1"

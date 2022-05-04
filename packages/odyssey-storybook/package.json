@@ -43,6 +43,6 @@
     "start": "start-storybook --quiet --port 6006",
     "build": "build-storybook --quiet --output-dir dist",
     "typecheck": "tsc",
-    "prepack": "yarn build && prepack"
+    "prepack": "yarn build && yarn exec prepack"
   }
 }
