@@ -116,15 +116,13 @@
 }
 
 .floatingVariant {
-  padding-block: var(--FloatingPaddingBlock);
-  padding-inline: var(--FloatingPaddingInline);
-  border: 0;
+  border-color: transparent;
   background-color: var(--FloatingBackgroundColor);
   color: var(--FloatingTextColor);
-  line-height: var(--FloatingLineHeight);
 
   &:hover,
   &:focus {
+    border-color: transparent;
     background-color: var(--FloatingHoverBackgroundColor);
   }
 
