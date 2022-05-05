@@ -74,11 +74,7 @@ export const theme: ThemeReducer = (theme) => ({
   FloatingBackgroundColor: "transparent",
   FloatingTextColor: "inherit",
   FloatingDisabledTextColor: theme.ColorNeutralBase,
-  FloatingLineHeight: 1,
-  FloatingPaddingBlock: theme.SpaceScale0,
-  FloatingPaddingInline: theme.SpaceScale0,
   FloatingHoverBackgroundColor: "rgba(29, 29, 33, 0.1)",
-  FloatingFocusBackgroundColor: "rgba(255, 255, 255, 0.6)",
   FloatingDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
 
   // Clear Variant
