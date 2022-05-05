@@ -104,7 +104,7 @@ describe("Modal", () => {
       <Modal open={true} onClose={handleClose} closeMessage={message}>
         <Modal.Header>{modalHeading}</Modal.Header>
         <Modal.Footer>
-          <Modal.Button variant="clear">Cancel</Modal.Button>
+          <Modal.Button variant="floating">Cancel</Modal.Button>
           <Modal.Button close>Continue</Modal.Button>
         </Modal.Footer>
       </Modal>
@@ -121,7 +121,7 @@ describe("Modal", () => {
       <Modal open={true} onClose={handleClose} closeMessage={message}>
         <Modal.Header>{modalHeading}</Modal.Header>
         <Modal.Footer>
-          <Modal.Button variant="clear">Cancel</Modal.Button>
+          <Modal.Button variant="floating">Cancel</Modal.Button>
           <Modal.Button close>Continue</Modal.Button>
         </Modal.Footer>
       </Modal>
@@ -189,7 +189,7 @@ describe("Modal", () => {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Modal.Button variant="clear" close>
+          <Modal.Button variant="floating" close>
             Cancel
           </Modal.Button>
           <Modal.Button close>Continue</Modal.Button>
