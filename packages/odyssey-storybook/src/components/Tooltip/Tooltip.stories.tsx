@@ -36,17 +36,17 @@ const Template: Story<TooltipProps> = () => (
       </Button>
     </Tooltip>
     <Tooltip label="Ending tooltip label" position="end">
-      <Button onClick={action("Ending button clicked")} variant="clear">
+      <Button onClick={action("Ending button clicked")} variant="floating">
         End
       </Button>
     </Tooltip>
     <Tooltip label="Bottom tooltip label" position="bottom">
-      <Button onClick={action("Bottom button clicked")} variant="clear">
+      <Button onClick={action("Bottom button clicked")} variant="floating">
         Bottom
       </Button>
     </Tooltip>
     <Tooltip label="Starting tooltip label" position="start">
-      <Button onClick={action("Starting button clicked")} variant="clear">
+      <Button onClick={action("Starting button clicked")} variant="floating">
         Start
       </Button>
     </Tooltip>
