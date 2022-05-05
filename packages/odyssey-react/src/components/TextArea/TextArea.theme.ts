@@ -38,9 +38,9 @@ export const theme: ThemeReducer = (theme) => ({
   MarginBlockEnd: 0,
   MarginBlockStart: theme.SpaceScale0,
   MarginInline: 0,
-  PaddingBlockEnd: theme.SpaceScale1,
-  PaddingBlockStart: theme.SpaceScale0,
-  PaddingInline: theme.SpaceScale1,
+  PaddingBlockEnd: theme.SpaceScale2,
+  PaddingBlockStart: theme.SpaceScale2,
+  PaddingInline: theme.SpaceScale2,
 
   // Placeholder
   PlaceholderTextColor: theme.ColorTextSub,
