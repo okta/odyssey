@@ -175,12 +175,14 @@ const Header: FunctionComponent<PropsModalHeader> = (props) => {
           icon={<CloseIcon title={closeMessage} />}
         />
       </span>
-      <Heading
-        id={modalHeadingId}
-        visualLevel="4"
-        noEndMargin
-        children={children}
-      />
+      <span className={styles.heading}>
+        <Heading
+          id={modalHeadingId}
+          visualLevel="4"
+          noEndMargin
+          children={children}
+        />
+      </span>
     </Box>
   );
 };
