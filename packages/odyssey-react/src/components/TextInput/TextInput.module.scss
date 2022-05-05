@@ -19,7 +19,7 @@
   margin-block: var(--MarginBlock);
   margin-inline: var(--MarginInline);
   padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
-  padding-inline: var(--PaddingInline);
+  padding-inline: calc(var(--PaddingInline) - var(--BorderWidth));
   transition-property: border-color, background-color;
   transition-duration: var(--TransitionDuration);
   transition-timing-function: var(--TransitionTimingFunction);
@@ -84,11 +84,11 @@
 }
 
 .prefix {
-  padding-inline-end: var(--PaddingInline);
+  padding-inline-end: var(--AffixPaddingInline);
 }
 
 .suffix {
-  padding-inline-start: var(--PaddingInline);
+  padding-inline-start: var(--AffixPaddingInline);
 }
 
 .affixIcon {
