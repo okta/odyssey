@@ -16,7 +16,7 @@ export const theme: ThemeReducer = (theme) => ({
   // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   MarginBlock: 0,
   MarginInline: 0,
-  PaddingBlock: theme.SpaceScale1,
+  PaddingBlock: theme.SpaceScale2,
   PaddingInline: theme.SpaceScale2,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,
@@ -74,11 +74,7 @@ export const theme: ThemeReducer = (theme) => ({
   FloatingBackgroundColor: "transparent",
   FloatingTextColor: "inherit",
   FloatingDisabledTextColor: theme.ColorNeutralBase,
-  FloatingLineHeight: 1,
-  FloatingPaddingBlock: theme.SpaceScale0,
-  FloatingPaddingInline: theme.SpaceScale0,
   FloatingHoverBackgroundColor: "rgba(29, 29, 33, 0.1)",
-  FloatingFocusBackgroundColor: "rgba(255, 255, 255, 0.6)",
   FloatingDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
 
   // Clear Variant
@@ -98,11 +94,11 @@ export const theme: ThemeReducer = (theme) => ({
   WideLayoutMarginInline: 0,
 
   // Small Size
-  SmallSizeFontSize: theme.FontSizeCaption,
-  SmallSizePaddingBlock: theme.SpaceScale0,
-  SmallSizePaddingInline: theme.SpaceScale1,
+  SmallSizeFontSize: theme.FontSizeBody,
+  SmallSizePaddingBlock: theme.SpaceScale1,
+  SmallSizePaddingInline: theme.SpaceScale2,
 
   // Large Size
-  LargeSizePaddingBlock: theme.SpaceScale2,
+  LargeSizePaddingBlock: theme.SpaceScale3,
   LargeSizePaddingInline: theme.SpaceScale3,
 });

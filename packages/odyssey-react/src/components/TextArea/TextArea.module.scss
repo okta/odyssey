@@ -19,9 +19,9 @@
   min-width: var(--MinWidth);
   max-width: var(--MaxWidth);
   min-height: var(--MinHeight);
-  padding-block-start: var(--PaddingBlockStart);
-  padding-block-end: var(--PaddingBlockEnd);
-  padding-inline: var(--PaddingInline);
+  padding-block-start: calc(var(--PaddingBlockStart) - var(--BorderWidth));
+  padding-block-end: calc(var(--PaddingBlockEnd) - var(--BorderWidth));
+  padding-inline: calc(var(--PaddingInline) - var(--BorderWidth));
   margin-block-start: var(--MarginBlockStart);
   margin-block-end: var(--MarginBlockEnd);
   margin-inline: var(--MarginInline);
