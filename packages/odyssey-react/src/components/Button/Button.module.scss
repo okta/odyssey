@@ -18,7 +18,7 @@
   margin-block: var(--MarginBlock);
   margin-inline: var(--MarginInline);
   padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
-  padding-inline: var(--PaddingInline);
+  padding-inline: calc(var(--PaddingInline) - var(--BorderWidth));
   transition-property: color, background-color, border-color, outline-offset,
     outline-color;
   transition-duration: var(--TransitionDuration);
@@ -172,11 +172,11 @@
 
 .sSize {
   padding-block: calc(var(--SmallSizePaddingBlock) - var(--BorderWidth));
-  padding-inline: var(--SmallSizePaddingInline);
+  padding-inline: calc(var(--SmallSizePaddingInline) - var(--BorderWidth));
   font-size: var(--SmallSizeFontSize);
 }
 
 .lSize {
   padding-block: calc(var(--LargeSizePaddingBlock) - var(--BorderWidth));
-  padding-inline: var(--LargeSizePaddingInline);
+  padding-inline: calc(var(--LargeSizePaddingInline) - var(--BorderWidth));
 }
