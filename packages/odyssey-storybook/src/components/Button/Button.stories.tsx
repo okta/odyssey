@@ -15,7 +15,6 @@ import { Story } from "@storybook/react";
 import {
   Button,
   ButtonProps,
-  CloseIcon,
   SettingsIcon,
 } from "../../../../odyssey-react/src";
 import { ThemeProvider } from "@okta/odyssey-react-theme";
@@ -61,16 +60,9 @@ Danger.args = {
   variant: "danger",
 };
 
-export const Clear = Template.bind({});
-Clear.args = {
-  variant: "clear",
-};
-
 export const Floating = Template.bind({});
 Floating.args = {
   variant: "floating",
-  icon: <CloseIcon title="close" />,
-  children: undefined,
 };
 
 export const Small = Template.bind({});

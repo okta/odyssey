@@ -41,12 +41,17 @@
     background-color: var(--PrimaryHoverBackgroundColor);
   }
 
-  &:focus {
+  &:focus-visible {
     outline-color: var(--FocusOutlineColor);
     outline-offset: var(--FocusOutlineOffset);
     outline-style: var(--FocusOutlineStyle);
     outline-width: var(--FocusOutlineWidth);
     background-color: var(--PrimaryFocusBackgroundColor);
+  }
+
+  &:active {
+    border-color: var(--PrimaryActiveBorderColor);
+    background-color: var(--PrimaryActiveBackgroundColor);
   }
 
   &:disabled {
@@ -84,9 +89,13 @@
     color: var(--SecondaryHoverTextColor);
   }
 
-  &:focus {
+  &:focus-visible {
     background-color: var(--SecondaryFocusBackgroundColor);
     color: var(--SecondaryFocusTextColor);
+  }
+
+  &:active {
+    border-color: var(--SecondaryActiveBorderColor);
   }
 
   &:disabled {
@@ -104,9 +113,14 @@
     background-color: var(--DangerHoverBackgroundColor);
   }
 
-  &:focus {
+  &:focus-visible {
     outline-color: var(--DangerFocusOutlineColor);
     background-color: var(--DangerFocusBackgroundColor);
+  }
+
+  &:active {
+    border-color: var(--DangerActiveBorderColor);
+    background-color: var(--DangerActiveBackgroundColor);
   }
 
   &:disabled {
@@ -121,35 +135,18 @@
   color: var(--FloatingTextColor);
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     border-color: transparent;
     background-color: var(--FloatingHoverBackgroundColor);
+  }
+
+  &:active {
+    background-color: var(--FloatingActiveBackgroundColor);
   }
 
   &:disabled {
     background-color: var(--FloatingDisabledBackgroundColor);
     color: var(--FloatingDisabledTextColor);
-  }
-}
-
-.clearVariant {
-  background-color: var(--ClearBackgroundColor);
-  color: var(--ClearTextColor);
-
-  &:hover {
-    border-color: var(--ClearHoverBorderColor);
-    background-color: var(--ClearHoverBackgroundColor);
-    color: var(--ClearHoverTextColor);
-  }
-
-  &:focus {
-    background-color: var(--ClearFocusBackgroundColor);
-    color: var(--ClearFocusTextColor);
-  }
-
-  &:disabled {
-    background-color: var(--ClearDisabledBackgroundColor);
-    color: var(--ClearDisabledTextColor);
   }
 }
 
