@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.0](https://github.com/okta/odyssey/compare/v0.12.3...v0.13.0) (2022-05-05)
+
+### Bug Fixes
+
+- **odyssey-storybook:** correct spelling of 'dismissible' in props, styles, and docs ([55c8ecb](https://github.com/okta/odyssey/commit/55c8ecb3a8cfb1b02a2d4a3c148a778138736602))
+
 ## [0.12.3](https://github.com/okta/odyssey/compare/v0.12.2...v0.12.3) (2022-05-04)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
