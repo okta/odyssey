@@ -295,7 +295,7 @@ export default function App(): JSX.Element {
             </Text>
           </Modal.Body>
           <Modal.Footer>
-            <Modal.Button variant="clear">Cancel</Modal.Button>
+            <Modal.Button variant="floating">Cancel</Modal.Button>
             <Modal.Button close>Continue</Modal.Button>
           </Modal.Footer>
         </Modal>

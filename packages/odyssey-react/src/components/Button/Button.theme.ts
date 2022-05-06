@@ -16,7 +16,7 @@ export const theme: ThemeReducer = (theme) => ({
   // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
   MarginBlock: 0,
   MarginInline: 0,
-  PaddingBlock: theme.SpaceScale1,
+  PaddingBlock: theme.SpaceScale2,
   PaddingInline: theme.SpaceScale2,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,
@@ -41,56 +41,47 @@ export const theme: ThemeReducer = (theme) => ({
   // Primary Variant
   PrimaryBackgroundColor: theme.ColorPrimaryBase,
   PrimaryBorderColor: "transparent",
+  PrimaryActiveBackgroundColor: theme.ColorPrimaryBase,
+  PrimaryActiveBorderColor: "transparent",
   PrimaryDisabledBackgroundColor: theme.ColorPrimaryLight,
   PrimaryDisabledBorderColor: "transparent",
   PrimaryFocusBackgroundColor: theme.ColorPrimaryDark,
   PrimaryHoverBackgroundColor: theme.ColorPrimaryDark,
-  PrimaryHoverBorderColor: theme.ColorBorderPrimaryDark,
+  PrimaryHoverBorderColor: "transparent",
 
   // Secondary Variant
-  SecondaryBackgroundColor: theme.ColorBackgroundBase,
-  SecondaryBorderColor: theme.ColorPrimaryBase,
-  SecondaryDisabledBackgroundColor: theme.ColorBackgroundBase,
-  SecondaryDisabledBorderColor: theme.ColorPrimaryLight,
-  SecondaryDisabledTextColor: theme.ColorPaletteBlue300,
-  SecondaryFocusBackgroundColor: theme.ColorBackgroundBase,
+  SecondaryBackgroundColor: theme.ColorPaletteNeutral000,
+  SecondaryBorderColor: theme.ColorBorderDisplay,
+  SecondaryActiveBorderColor: theme.ColorPrimaryBase,
+  SecondaryDisabledBackgroundColor: theme.ColorPaletteNeutral100,
+  SecondaryDisabledBorderColor: theme.ColorPaletteNeutral100,
+  SecondaryDisabledTextColor: theme.ColorPaletteNeutral500,
+  SecondaryFocusBackgroundColor: theme.ColorBackgroundPrimaryLight,
   SecondaryFocusBorderColor: theme.ColorPrimaryBase,
   SecondaryFocusTextColor: theme.ColorTextPrimary,
-  SecondaryHoverBackgroundColor: theme.ColorPrimaryBase,
-  SecondaryHoverBorderColor: theme.ColorPrimaryBase,
-  SecondaryHoverTextColor: theme.ColorTextBodyInverse,
-  SecondaryTextColor: theme.ColorTextPrimary,
+  SecondaryHoverBackgroundColor: theme.ColorBackgroundPrimaryLight,
+  SecondaryHoverBorderColor: theme.ColorPaletteBlue300,
+  SecondaryHoverTextColor: theme.ColorTextPrimary,
+  SecondaryTextColor: theme.ColorTextBody,
 
   // Danger Variant
   DangerBackgroundColor: theme.ColorBackgroundDangerDark,
+  DangerActiveBorderColor: "transparent",
+  DangerActiveBackgroundColor: theme.ColorBackgroundDangerDark,
   DangerDisabledBackgroundColor: theme.ColorDangerLight,
   DangerDisabledBorderColor: theme.ColorBorderDangerLight,
   DangerFocusBackgroundColor: theme.ColorPaletteRed900,
   DangerFocusOutlineColor: theme.FocusOutlineColorDanger,
   DangerHoverBackgroundColor: theme.ColorPaletteRed900,
-  DangerHoverBorderColor: theme.ColorBorderDangerDark,
+  DangerHoverBorderColor: "transparent",
 
   // Floating Variant
   FloatingBackgroundColor: "transparent",
   FloatingTextColor: "inherit",
+  FloatingActiveBackgroundColor: "rgba(29, 29, 33, 0.2)",
   FloatingDisabledTextColor: theme.ColorNeutralBase,
-  FloatingLineHeight: 1,
-  FloatingPaddingBlock: theme.SpaceScale0,
-  FloatingPaddingInline: theme.SpaceScale0,
   FloatingHoverBackgroundColor: "rgba(29, 29, 33, 0.1)",
-  FloatingFocusBackgroundColor: "rgba(255, 255, 255, 0.6)",
   FloatingDisabledBackgroundColor: "rgba(235, 235, 237, 0.6)",
-
-  // Clear Variant
-  ClearBackgroundColor: "transparent",
-  ClearDisabledBackgroundColor: "transparent",
-  ClearDisabledTextColor: theme.ColorPrimaryLight,
-  ClearFocusBackgroundColor: theme.ColorBackgroundBase,
-  ClearFocusTextColor: theme.ColorTextPrimary,
-  ClearHoverBackgroundColor: theme.ColorBackgroundPrimaryLight,
-  ClearHoverBorderColor: "transparent",
-  ClearHoverTextColor: theme.ColorPaletteBlue900,
-  ClearTextColor: theme.ColorPrimaryBase,
 
   // Wide Layout
   WideLayoutMarginBlock: 0,
@@ -98,11 +89,11 @@ export const theme: ThemeReducer = (theme) => ({
   WideLayoutMarginInline: 0,
 
   // Small Size
-  SmallSizeFontSize: theme.FontSizeCaption,
-  SmallSizePaddingBlock: theme.SpaceScale0,
-  SmallSizePaddingInline: theme.SpaceScale1,
+  SmallSizeFontSize: theme.FontSizeBody,
+  SmallSizePaddingBlock: theme.SpaceScale1,
+  SmallSizePaddingInline: theme.SpaceScale2,
 
   // Large Size
-  LargeSizePaddingBlock: theme.SpaceScale2,
+  LargeSizePaddingBlock: theme.SpaceScale3,
   LargeSizePaddingInline: theme.SpaceScale3,
 });

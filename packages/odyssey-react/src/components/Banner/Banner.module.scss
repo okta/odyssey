@@ -54,10 +54,10 @@
   display: none;
 }
 
-.isDismissable {
-  padding-block: var(--DismissablePaddingBlock);
-  padding-inline-start: var(--DismissablePaddingInlineStart);
-  padding-inline-end: var(--DismissablePaddingInlineEnd);
+.isDismissible {
+  padding-block: var(--DismissiblePaddingBlock);
+  padding-inline-start: var(--DismissiblePaddingInlineStart);
+  padding-inline-end: var(--DismissiblePaddingInlineEnd);
 }
 
 .infoVariant {

@@ -70,7 +70,13 @@
 
 .header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding-block-end: var(--HeaderPaddingBlockEnd);
+}
+
+.heading {
+  flex: 1;
 }
 
 .dismiss {
@@ -88,6 +94,7 @@
 .footer {
   display: flex;
   justify-content: flex-end;
+  padding-block-start: var(--FooterPaddingBlockStart);
   padding-block-end: var(--FooterPaddingBlockEnd);
 }
 
