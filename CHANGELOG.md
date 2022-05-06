@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.0](https://github.com/okta/odyssey/compare/v0.12.3...v0.13.0) (2022-05-05)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-react:** Deprecates "Clear" Button style in favor of "Floating"
+- **odyssey-react:** removes `FloatingLineHeight` and `FloatingPadding`
+  tokens
+
+### Features
+
+- **odyssey-react:** Update Button variant styling ([7f3ef6c](https://github.com/okta/odyssey/commit/7f3ef6c48c0d16c9d49a1f8bc70f8a405ba99dd9))
+- **odyssey-react:** update Button size styles ([251fdab](https://github.com/okta/odyssey/commit/251fdab88e624ea5c7ed50e521ce9a13d417b783))
+- **odyssey-react:** update Modal display, add tokens for Padding ([670cb50](https://github.com/okta/odyssey/commit/670cb50ac458d054b636a133e9f69096c3d22d42))
+- **odyssey-react:** update Select/NativeSelect padding ([2a68c70](https://github.com/okta/odyssey/commit/2a68c70642d0a12d128d04b2049829e35fd0b25f))
+- **odyssey-react:** update TextArea padding ([8b5ce78](https://github.com/okta/odyssey/commit/8b5ce78f788609070f1461e8663cdd5a076e2acb))
+- **odyssey-react:** update TextInput padding, add AffixPaddingInline ([fb33562](https://github.com/okta/odyssey/commit/fb33562a50167470b983c67bcc0f6e21a72c10a1))
+
+### Bug Fixes
+
+- explicitly call yarn in prepack lifecycle script for lerna ([613d00a](https://github.com/okta/odyssey/commit/613d00a5912d51221d92d977d423ce0aa22b5a06))
+- **odyssey-storybook:** correct spelling of 'dismissible' in props, styles, and docs ([55c8ecb](https://github.com/okta/odyssey/commit/55c8ecb3a8cfb1b02a2d4a3c148a778138736602))
+
+### Code Refactoring
+
+- **odyssey-react:** Floating Button height is now consistent ([8263e99](https://github.com/okta/odyssey/commit/8263e99b3eaaf636d8f5f07ec44ce58d0f91b5d0))
+
 ## [0.12.3](https://github.com/okta/odyssey/compare/v0.12.2...v0.12.3) (2022-05-04)
 
 ### Bug Fixes

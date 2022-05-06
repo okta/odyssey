@@ -13,34 +13,42 @@
 import type { ThemeReducer } from "@okta/odyssey-react-theme";
 
 export const theme: ThemeReducer = (theme) => ({
-  AffixTextColor: theme.ColorTextSub,
   BackgroundColor: theme.ColorBackgroundBase,
   BorderColor: theme.ColorBorderUi,
   BorderRadius: theme.BorderRadiusBase,
   BorderStyle: theme.BorderStyleBase,
   BorderWidth: theme.BorderWidthBase,
-  DisabledBackgroundColor: theme.ColorBackgroundDisabled,
-  DisabledBorderColor: theme.ColorBorderDisabled,
-  DisabledTextColor: theme.ColorTextBody,
-  FocusOutlineColor: theme.FocusOutlineColorPrimary,
-  FocusOutlineOffset: theme.FocusOutlineOffsetTight,
-  FocusOutlineStyle: theme.FocusOutlineStyle,
-  FocusOutlineWidth: theme.FocusOutlineWidthTight,
-  FontFamily: theme.FontFamilyBase,
-  FontSize: theme.FontSizeBody,
-  HoverFocusBorderColor: theme.ColorPrimaryBase,
-  IconSize: "1.1487rem",
-  InvalidBorderColor: theme.ColorBorderDangerBase,
-  InvalidHoverBorderColor: theme.ColorDangerDark,
-  InvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
   LineHeight: theme.FontLineHeightUi,
   MarginBlock: 0,
   MarginInline: 0,
   MaxWidth: theme.FontLineLengthMax,
-  PaddingBlock: theme.SpaceScale1,
-  PaddingInline: theme.SpaceScale1,
+  PaddingBlock: theme.SpaceScale2,
+  PaddingInline: theme.SpaceScale2,
   PlaceholderTextColor: theme.ColorTextSub,
   TextColor: theme.ColorTextBody,
   TransitionDuration: theme.TransitionDurationBase,
   TransitionTimingFunction: theme.TransitionTimingBase,
+
+  AffixPaddingInline: theme.SpaceScale1,
+  AffixTextColor: theme.ColorTextSub,
+
+  DisabledBackgroundColor: theme.ColorBackgroundDisabled,
+  DisabledBorderColor: theme.ColorBorderDisabled,
+  DisabledTextColor: theme.ColorTextBody,
+
+  FocusOutlineColor: theme.FocusOutlineColorPrimary,
+  FocusOutlineOffset: theme.FocusOutlineOffsetTight,
+  FocusOutlineStyle: theme.FocusOutlineStyle,
+  FocusOutlineWidth: theme.FocusOutlineWidthTight,
+
+  FontFamily: theme.FontFamilyBase,
+  FontSize: theme.FontSizeBody,
+
+  HoverFocusBorderColor: theme.ColorPrimaryBase,
+
+  IconSize: "1.1487rem",
+
+  InvalidBorderColor: theme.ColorBorderDangerBase,
+  InvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
+  InvalidHoverBorderColor: theme.ColorDangerDark,
 });

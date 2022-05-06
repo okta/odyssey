@@ -16,10 +16,11 @@
   max-width: var(--MaxWidth);
   margin-block: var(--MarginBlock);
   margin-inline: var(--MarginInline);
-  padding-block: var(--PaddingBlock);
-  padding-inline-start: var(--PaddingInline);
+  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
+  padding-inline-start: calc(var(--PaddingInline) - var(--BorderWidth));
   padding-inline-end: calc(
-    var(--PaddingInline) + var(--IndicatorSize) + var(--PaddingInline)
+    var(--PaddingInline) + var(--IndicatorSize) + var(--PaddingInline) -
+      var(--BorderWidth)
   );
   border-width: var(--BorderWidth);
   border-style: var(--BorderStyle);

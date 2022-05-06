@@ -65,7 +65,7 @@ const Template: Story<ModalProps> = () => {
           </Text>
         </Modal.Body>
         <Modal.Footer>
-          <Modal.Button variant="clear">Cancel</Modal.Button>
+          <Modal.Button variant="floating">Cancel</Modal.Button>
           <Modal.Button close>Continue</Modal.Button>
         </Modal.Footer>
       </Modal>
