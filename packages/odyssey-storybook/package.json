@@ -31,11 +31,13 @@
     "@storybook/core-events": "^6.4.22",
     "@storybook/react": "^6.4.22",
     "@storybook/theming": "^6.4.22",
+    "@testing-library/testcafe": "^4.4.1",
     "@types/mdx": "^2.0.1",
     "@types/react": "^17.0.30",
     "babel-loader": "^8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "testcafe": "https://github.com/okta/testcafe.git",
     "typescript": "^4.4.4",
     "webpack": "4.46.0"
   },
