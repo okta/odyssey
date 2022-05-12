@@ -30,6 +30,8 @@ export const theme: ThemeReducer = (theme) => ({
   TransitionTimingFunction: theme.TransitionTimingBase,
 
   AffixPadding: theme.SpaceScale0,
+  AffixPadding1: theme.SpaceScale1,
+  AffixPadding2: theme.SpaceScale2,
   AffixTextColor: theme.ColorTextSub,
 
   DisabledBackgroundColor: theme.ColorBackgroundDisabled,

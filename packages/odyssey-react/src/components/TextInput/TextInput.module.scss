@@ -14,12 +14,11 @@
   @include border-radius(var(--BorderRadius));
 
   display: flex;
+  align-items: center;
   width: 100%;
   max-width: var(--MaxWidth);
   margin-block: var(--MarginBlock);
   margin-inline: var(--MarginInline);
-  padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
-  padding-inline: calc(var(--PaddingInline) - var(--BorderWidth));
   transition-property: border-color, background-color;
   transition-duration: var(--TransitionDuration);
   transition-timing-function: var(--TransitionTimingFunction);
@@ -72,7 +71,8 @@
     }
   }
 
-  &.invalid:focus-within {
+  // stylelint-disable-next-line selector-max-class
+  &.invalid.focus {
     outline-color: var(--InvalidFocusOutlineColor);
   }
 }
@@ -85,11 +85,11 @@
 }
 
 .prefix {
-  padding-inline-start: var(--AffixPadding);
+  padding-inline-start: calc(var(--AffixPadding2) - var(--BorderWidth));
 }
 
 .suffix {
-  padding-inline-end: var(--AffixPadding);
+  padding-inline-end: calc(var(--AffixPadding2) - var(--BorderWidth));
 }
 
 .affixHidden {
@@ -101,8 +101,9 @@
   padding-inline-end: var(--AffixPadding);
 }
 
+// stylelint-disable-next-line selector-max-class
 .root:hover .affixHidden,
-.root:focus-within .affixHidden {
+.root.focus .affixHidden {
   opacity: 1;
 }
 
@@ -117,10 +118,14 @@
   margin-block: 0;
   margin-inline: 0;
   padding-block: calc(var(--PaddingBlock) - var(--BorderWidth));
-  padding-inline: var(--PaddingInline);
+  padding-inline: calc(var(--PaddingInline) - var(--BorderWidth));
   border: 0;
   background-color: transparent;
   font: inherit;
+
+  .prefix + & {
+    padding-inline-start: var(--AffixPadding1);
+  }
 
   &:focus {
     outline: 0;
