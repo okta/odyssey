@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
+import React, { useEffect } from "react";
 import type { Story } from "@storybook/react";
 import { TextInput, TextInputProps } from "../../../../odyssey-react/src";
 import TextInputMdx from "./TextInput.mdx";
@@ -68,10 +68,16 @@ KitchenSink.args = {
 };
 
 export const Search = Template.bind({});
+Search.decorators = [
+  (Story) => {
+    // focus the input to reveal the search clear button for VRT!
+    useEffect(() => window.document.querySelector("input")?.focus());
+    return <Story />;
+  },
+];
 Search.args = {
-  placeholder: "Search Planets",
+  defaultValue: "Search Planets",
   type: "search",
-  required: false,
 };
 
 export const Prefix = Template.bind({});
