@@ -33,7 +33,6 @@
     "@okta/odyssey-commitlint": "^0.13.0",
     "@okta/odyssey-eslint-config": "^0.13.0",
     "@okta/odyssey-lint-staged": "^0.13.0",
-    "@okta/odyssey-prettier": "^0.13.0",
     "@okta/odyssey-stylelint": "^0.13.0",
     "eslint": "^7.27.0",
     "husky": "^7.0.2",
