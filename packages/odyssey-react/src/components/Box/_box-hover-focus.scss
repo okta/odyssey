@@ -22,22 +22,22 @@
   box-shadow: var(--HoverBoxShadow);
 }
 
-.focusBorderColorPrimary:focus {
+.focusBorderColorPrimary:focus-visible {
   border-color: var(--PrimaryBorderColor);
 }
 
-.focusBorderColorDanger:focus {
+.focusBorderColorDanger:focus-visible {
   border-color: var(--DangerBorderColor);
 }
 
-.focusRingPrimary:focus {
+.focusRingPrimary:focus-visible {
   outline-color: var(--PrimaryFocusOutlineColor);
   outline-offset: var(--FocusOutlineOffset);
   outline-style: var(--FocusOutlineStyle);
   outline-width: var(--FocusOutlineWidth);
 }
 
-.focusRingDanger:focus {
+.focusRingDanger:focus-visible {
   outline-color: var(--DangerFocusOutlineColor);
   outline-offset: var(--FocusOutlineOffset);
   outline-style: var(--FocusOutlineStyle);
