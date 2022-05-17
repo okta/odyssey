@@ -28,7 +28,7 @@
     }
   }
 
-  &:focus,
+  &:focus-visible,
   &.focus {
     + .label {
       &::before {
@@ -87,7 +87,7 @@
       }
     }
 
-    &:focus {
+    &:focus-visible {
       + .label {
         &::before {
           outline-color: var(--CircleInvalidFocusOutlineColor);

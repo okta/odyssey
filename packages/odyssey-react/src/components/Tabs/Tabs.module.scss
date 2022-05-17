@@ -35,11 +35,11 @@
   }
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     color: var(--TabHoverTextColor);
   }
 
-  &:focus {
+  &:focus-visible {
     outline: 0;
   }
 }
@@ -47,7 +47,7 @@
 .label {
   @include border-radius(var(--LabelBorderRadius));
 
-  .tab:focus & {
+  .tab:focus-visible & {
     outline-color: var(--LabelFocusOutlineColor);
     outline-offset: var(--LabelFocusOutlineOffset);
     outline-style: var(--LabelFocusOutlineStyle);
@@ -59,7 +59,7 @@
   padding-block: var(--PanelPaddingBlock);
   padding-inline: var(--PanelPaddingInline);
 
-  &:focus {
+  &:focus-visible {
     outline: none;
   }
 }
