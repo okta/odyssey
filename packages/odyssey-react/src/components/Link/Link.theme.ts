@@ -20,6 +20,7 @@ export const theme: ThemeReducer = (theme) => ({
 
   // Monochrome Variant
   MonochromeTextColor: theme.ColorTextBody,
+  MonochromeHoverTextColor: theme.ColorTextSub,
 
   // Focus
   FocusOutlineColor: theme.FocusOutlineColorPrimary,
