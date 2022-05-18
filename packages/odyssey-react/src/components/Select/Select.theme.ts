@@ -56,4 +56,11 @@ export const theme: ThemeReducer = (theme) => ({
 
   InvalidBorderColor: theme.ColorBorderDangerBase,
   InvalidFocusOutlineColor: theme.FocusOutlineColorDanger,
+
+  ItemBackgroundColor: theme.ColorBackgroundPrimaryLight,
+  ItemBorderColor: theme.ColorPrimaryLight,
+  ItemBorderStyle: theme.BorderStyleBase,
+  ItemBorderWidth: theme.BorderWidthBase,
+  ItemMargin: theme.SpaceScale0,
+  ItemPadding: theme.SpaceScale1,
 });
