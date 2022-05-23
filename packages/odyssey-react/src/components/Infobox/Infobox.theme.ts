@@ -19,8 +19,6 @@ export const theme: ThemeReducer = (theme) => ({
   BorderWidth: theme.BorderWidthBase,
   ColumnGap: theme.SpaceScale2,
   MarginBlockEnd: theme.SpaceScale3,
-  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
-  MaxLineLength: theme.FontLineLengthMax,
   PaddingBlock: theme.SpaceScale3,
   PaddingInline: theme.SpaceScale3,
 
