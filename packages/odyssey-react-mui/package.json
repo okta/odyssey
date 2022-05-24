@@ -1,0 +1,67 @@
+{
+  "name": "@okta/odyssey-react-mui",
+  "version": "0.14.0",
+  "description": "React MUI components for Odyssey, Okta's design system",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/odyssey",
+    "directory": "packages/odyssey-react-mui"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@mui/icons-material": "^5.8.0",
+    "@mui/material": "^5.8.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@okta/browserslist-config-odyssey": "^0.14.0",
+    "@okta/odyssey-babel-preset": "^0.14.0",
+    "@okta/odyssey-icons": "^0.14.0",
+    "@okta/odyssey-lifecycle": "^0.14.0",
+    "@okta/odyssey-typescript": "^0.14.0",
+    "@testing-library/dom": "^7.28.1",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/react-hooks": "^7.0.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest-axe": "^3.5.1",
+    "@types/react": "^17.0.30",
+    "@types/react-dom": "^17.0.5",
+    "babel-jest": "^26.6.3",
+    "babel-plugin-import": "^1.13.5",
+    "eslint": "^7.27.0",
+    "jest": "^26.6.3",
+    "jest-axe": "^5.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "regenerator-runtime": "^0.13.7",
+    "stylelint": "^13.13.1",
+    "typescript": "^4.4.4"
+  },
+  "peerDependencies": {
+    "react": ">=16 <18",
+    "react-dom": ">=16 <18"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest",
+    "typecheck": "tsc",
+    "build": "yarn build:clean && yarn build:types && yarn build:source",
+    "build:clean": "rm -rf dist",
+    "build:types": "tsc --project tsconfig.production.json",
+    "build:source": "./scripts/buildSource",
+    "prepack": "yarn exec prepack"
+  }
+}

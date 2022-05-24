@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+export NODE_ENV="production"
+export BROWSERSLIST_ENV="modern"
+EXTENSIONS=".js,.jsx,.ts,.tsx"
+BABEL_ARGS=(
+  "${1:-src}"
+  "--out-dir ${2:-dist}"
+  "--extensions ${EXTENSIONS}"
+  "--source-maps"
+)
+
+yarn run babel ${BABEL_ARGS[@]}
+
+exit 0;
