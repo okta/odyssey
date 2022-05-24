@@ -17,7 +17,7 @@ import { Banner, BannerProps, Link } from "../../../../odyssey-react/src";
 import BannerMdx from "./Banner.mdx";
 
 export default {
-  title: `Components/Banner`,
+  title: `Components/Alerts/Banner`,
   component: Banner,
   parameters: {
     layout: "fullscreen",
