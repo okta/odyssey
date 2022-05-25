@@ -27,10 +27,6 @@
   line-height: 1;
 }
 
-.heading {
-  margin-inline-end: var(--HeadingMarginInlineEnd);
-}
-
 .content {
   max-width: calc(var(--MaxLineLength) * 2);
   margin-block: 0;
@@ -98,11 +94,6 @@
     position: absolute;
     inset-block-start: var(--IconInsetBlockStart);
     inset-inline-start: var(--IconInsetInlineStart);
-  }
-
-  .heading {
-    margin-block-end: var(--HeadingMobileMarginBlockEnd);
-    margin-inline-end: 0;
   }
 
   .content {
