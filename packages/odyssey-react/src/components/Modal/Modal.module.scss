@@ -52,7 +52,7 @@
   padding-block-start: var(--DialogPaddingBlockStart);
   padding-block-end: var(--DialogPaddingBlockEnd);
   padding-inline: var(--DialogPaddingInline);
-  overflow-y: auto;
+  overflow-y: visible;
   background-color: var(--DialogBackgroundColor);
 
   .root[aria-hidden="false"] & {
