@@ -29,10 +29,6 @@ export default {
     children: {
       control: null,
     },
-    heading: {
-      defaultValue: null,
-      control: "text",
-    },
     content: {
       defaultValue: "The mission to Sagitarius A has been set for January 7.",
       control: "text",
@@ -85,12 +81,6 @@ export const Caution = Template.bind({});
 Caution.args = {
   variant: "caution",
   content: "Severe solar winds detected. Local system flights may be delayed.",
-};
-
-export const WithTitle = Template.bind({});
-WithTitle.args = {
-  variant: "info",
-  heading: "New launch scheduled",
 };
 
 export const WithLink = Template.bind({});
