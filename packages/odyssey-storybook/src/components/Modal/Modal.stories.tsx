@@ -13,7 +13,13 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
-import { Modal, ModalProps, Button, Text } from "../../../../odyssey-react/src";
+import {
+  Modal,
+  ModalProps,
+  Button,
+  Select,
+  Text,
+} from "../../../../odyssey-react/src";
 import ModalMdx from "./Modal.mdx";
 
 export default {
@@ -61,8 +67,17 @@ const Template: Story<ModalProps> = () => {
         <Modal.Body>
           <Text as="p">
             This is the modal content area. It's width is determined based on
-            the amount of content within it.
+            the amount of content within it. Use the dropdown below to test
+            overflow behavior.
           </Text>
+          <Select label="Destination" name="destination">
+            <Select.Option children="Venus" />
+            <Select.Option children="Nessus" />
+            <Select.Option children="Europa" />
+            <Select.Option children="Mercury" />
+            <Select.Option children="Mars" />
+            <Select.Option children="Neptune" />
+          </Select>
         </Modal.Body>
         <Modal.Footer>
           <Modal.Button variant="floating">Cancel</Modal.Button>
