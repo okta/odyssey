@@ -24,7 +24,7 @@ import {
 import InfoboxMdx from "./Infobox.mdx";
 
 export default {
-  title: `Components/Infobox`,
+  title: `Components/Alerts/Infobox`,
   component: Infobox,
   parameters: {
     docs: {
