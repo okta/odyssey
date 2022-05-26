@@ -25,7 +25,7 @@ export const theme: ThemeReducer = (theme) => ({
   IconInsetBlockStart: theme.SpaceScale3,
   IconInsetInlineStart: theme.SpaceScale3,
   IconMargin: theme.SpaceScale3,
-  IconSize: theme.FontSizeHeading4,
+  IconSize: theme.FontScale4,
 
   HeadingFontSize: theme.FontSizeHeading6,
   HeadingFontWeight: theme.FontWeightBold,
