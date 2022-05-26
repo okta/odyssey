@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.0](https://github.com/okta/odyssey/compare/v0.13.0...v0.14.0) (2022-05-26)
+
+### Bug Fixes
+
+- **odyssey-storybook:** fix nested story references ([f0b26a1](https://github.com/okta/odyssey/commit/f0b26a1e9c97cd8db99eba577494ed84f9cc9cce))
+
 ## [0.13.0](https://github.com/okta/odyssey/compare/v0.12.3...v0.13.0) (2022-05-05)
 
 ### Bug Fixes
