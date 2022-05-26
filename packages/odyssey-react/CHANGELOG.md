@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.0](https://github.com/okta/odyssey/compare/v0.13.0...v0.14.0) (2022-05-26)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-react:** removes heading prop, ability to add headings to banner
+- **odyssey-react:** removes ability to theme Infobox width
+
+### Features
+
+- **odyssey-react:** add :hover to Link, Monochrome ([48f8d3b](https://github.com/okta/odyssey/commit/48f8d3bfb8c9d3f4a81ac0e3ed57b9fc5f747a74))
+- **odyssey-react:** utilize :focus-visible for less intrusive ux ([87cd7ca](https://github.com/okta/odyssey/commit/87cd7ca0982b2b34fb32273879e18254a66320f0))
+
+### Bug Fixes
+
+- **odyssey-react:** fix Infobox icon alignment ([9ed9e8e](https://github.com/okta/odyssey/commit/9ed9e8ecf19d2c420132863310fc48817aaf8314))
+- **odyssey-react:** modal overflow is now visible (ex: dropdowns) ([f97d399](https://github.com/okta/odyssey/commit/f97d3997e44e53e5baf3f93e7d732fb8041f53bd))
+- **odyssey-react:** multiselect height no longer changes on selection ([1a86b1c](https://github.com/okta/odyssey/commit/1a86b1c1557182c6fc5bd866d7088708cc429ad6))
+
+### Code Refactoring
+
+- **odyssey-react:** remove heading from Banner ([a9d3c56](https://github.com/okta/odyssey/commit/a9d3c56903d00d03d8486f018c5ce2719ce7aa2b))
+- **odyssey-react:** set Infobox max-width to 100% ([2405dad](https://github.com/okta/odyssey/commit/2405dada0023adf8fe4d09204262ae601babbbc5))
+
 ## [0.13.0](https://github.com/okta/odyssey/compare/v0.12.3...v0.13.0) (2022-05-05)
 
 ### ⚠ BREAKING CHANGES
