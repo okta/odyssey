@@ -28,7 +28,7 @@ import {
 import ToastMdx from "./Toast.mdx";
 
 export default {
-  title: `Components/Toast`,
+  title: `Components/Alerts/Toast`,
   component: Toast,
   parameters: {
     layout: "fullscreen",

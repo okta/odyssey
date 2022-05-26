@@ -181,7 +181,7 @@
     font: inherit;
     vertical-align: top;
     margin-block-start: 0;
-    margin-block-end: $spacing-xs;
+    margin-block-end: 0;
     margin-inline: 0;
     padding-block: 0;
     padding-inline: 0;
@@ -256,7 +256,13 @@
 .root[data-type*="select-multiple"],
 .root[data-type*="text"] {
   .inner {
-    padding-block-end: 0;
+    padding-block-start: calc(
+      var(--PaddingBlock) - var(--BorderWidth) - var(--ItemBorderWidth)
+    );
+    padding-block-end: calc(
+      var(--PaddingBlock) - var(--ItemMargin) - var(--BorderWidth) -
+        var(--ItemBorderWidth)
+    );
     cursor: text;
   }
 
@@ -266,7 +272,7 @@
     display: inline-block;
     position: absolute;
     inset-block-start: 50%;
-    inset-inline-end: $spacing-xs-em * 0.5;
+    inset-inline-end: calc(var(--ItemMargin) * 0.5);
     width: 1em;
     height: 1em;
     margin-block-start: 0;
@@ -369,6 +375,16 @@
   }
 }
 
+.root[data-type*="select-multiple"] {
+  .input {
+    border-width: var(--ItemBorderWidth);
+    border-style: solid;
+    border-color: transparent;
+    margin-block-end: var(--ItemMargin);
+    padding-block: 0;
+  }
+}
+
 .listMultiple {
   display: inline;
 
@@ -378,23 +394,21 @@
     display: inline-block;
     position: relative;
     max-width: 100%;
-    margin-inline-end: $spacing-xs;
-    margin-block-end: $spacing-xs;
+    border-width: var(--ItemBorderWidth);
+    border-style: var(--ItemBorderStyle);
+    border-color: var(--ItemBorderColor);
+    background-color: var(--ItemBackgroundColor);
+    vertical-align: middle;
+    margin-inline-end: var(--ItemMargin);
+    margin-block-end: var(--ItemMargin);
     padding-block: 0;
-    padding-inline: $spacing-s;
-    border: 1px solid $color-primary-light;
-    background-color: cv("blue", "000");
-    color: $text-body;
-    font-size: $size-body-base;
-    font-weight: 400;
-    line-height: calc((#{$base-line-height} * 1em) - 2px);
+    padding-inline: var(--ItemPadding);
 
     /* Adjust for pill border */
     overflow-wrap: break-word;
-    vertical-align: middle;
 
     &[data-deletable] {
-      padding-inline-end: $spacing-m-em + $spacing-xs-em;
+      padding-inline-end: calc(var(--ItemPadding) + 1em);
     }
 
     [dir="rtl"] & {
@@ -570,9 +584,9 @@
   border: 0;
   background-color: var(--BackgroundColor);
   font-family: inherit;
-  margin-block-end: 5px;
-  padding-block: 4px;
-  padding-inline-start: 2px;
+  margin-block-end: 0;
+  padding-block: 0;
+  padding-inline-start: 0;
   padding-inline-end: 0;
   vertical-align: baseline;
 
@@ -581,7 +595,7 @@
   }
 
   [dir="rtl"] & {
-    padding-inline-end: 2px;
+    padding-inline-end: 0;
     padding-inline-start: 0;
   }
 }

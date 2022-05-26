@@ -20,6 +20,7 @@ export const parameters = {
       locales: "",
     },
   },
+  viewMode: "docs",
   previewTabs: {
     "storybook/docs/panel": { index: -1 },
   },

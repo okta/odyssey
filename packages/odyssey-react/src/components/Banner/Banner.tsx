@@ -15,7 +15,6 @@ import type { ComponentPropsWithRef } from "react";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useCx, useOmit } from "../../utils";
 import { Box } from "../Box";
-import { Heading } from "../Heading";
 import { Button } from "../Button";
 import type { ButtonProps } from "../Button";
 import {
@@ -37,11 +36,6 @@ interface CommonProps
    * @default info
    */
   variant?: "info" | "danger" | "caution";
-
-  /**
-   * Human-readable heading for the banner.
-   */
-  heading: string;
 
   /**
    * Human-readable descriptive content for the banner.
@@ -81,7 +75,6 @@ export const Banner = withTheme(
   forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
     const {
       children,
-      heading,
       content,
       open,
       variant = "info",
@@ -108,11 +101,6 @@ export const Banner = withTheme(
         hidden={!open}
       >
         <span className={styles.icon}>{icon[variant]}</span>
-        {heading && (
-          <div className={styles.heading}>
-            <Heading visualLevel="6" noEndMargin children={heading} />
-          </div>
-        )}
         {content && <p className={styles.content}>{content}</p>}
         {children && <section className={styles.actions}>{children}</section>}
         {onDismiss && (

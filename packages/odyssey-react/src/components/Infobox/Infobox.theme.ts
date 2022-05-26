@@ -19,15 +19,13 @@ export const theme: ThemeReducer = (theme) => ({
   BorderWidth: theme.BorderWidthBase,
   ColumnGap: theme.SpaceScale2,
   MarginBlockEnd: theme.SpaceScale3,
-  // eslint-disable-next-line @okta/odyssey/no-invalid-theme-properties
-  MaxLineLength: theme.FontLineLengthMax,
   PaddingBlock: theme.SpaceScale3,
   PaddingInline: theme.SpaceScale3,
 
   IconInsetBlockStart: theme.SpaceScale3,
   IconInsetInlineStart: theme.SpaceScale3,
   IconMargin: theme.SpaceScale3,
-  IconSize: theme.FontSizeHeading4,
+  IconSize: theme.FontScale4,
 
   HeadingFontSize: theme.FontSizeHeading6,
   HeadingFontWeight: theme.FontWeightBold,
