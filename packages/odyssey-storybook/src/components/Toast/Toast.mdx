@@ -1,6 +1,8 @@
-import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
 import { theme } from "../../../../odyssey-react/src/components/Toast/Toast.theme";
 import { ThemeTable } from "../../../.storybook/components";
+
+<Meta anchor />
 
 # Toast
 
@@ -136,7 +138,7 @@ Do not use Danger Toasts for in-page errors such as invalid form fields. Instead
     <tbody>
       <tr>
         <th scope="row">
-          <a href="?path=/docs/components-banner--info#banner">Banner</a>
+          <a href="?path=/docs/components-alerts-banner--info#banner">Banner</a>
         </th>
         <td>Info, Caution, Danger</td>
         <td>No</td>
@@ -146,7 +148,9 @@ Do not use Danger Toasts for in-page errors such as invalid form fields. Instead
       </tr>
       <tr>
         <th scope="row">
-          <a href="?path=/docs/components-infobox--info#infobox">Infobox</a>
+          <a href="?path=/docs/components-alerts-infobox--info#infobox">
+            Infobox
+          </a>
         </th>
         <td>Success, Caution, Danger</td>
         <td>Yes</td>

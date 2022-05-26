@@ -1,7 +1,9 @@
-import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
 import { theme } from "../../../../odyssey-react/src/components/Infobox/Infobox.theme";
 import { CheckIcon, CloseIcon } from "../../../../odyssey-react/src";
 import { ThemeTable } from "../../../.storybook/components";
+
+<Meta anchor />
 
 # Infobox
 
@@ -18,7 +20,7 @@ This component may be present on load or triggered by different types of events,
 Use Infoboxes for communicating important guidance to the user. When using the Info variant, consider if plain copy will suffice on the page itself first. Reserve this component for "can’t miss" instructions.
 
 <Canvas>
-  <Story id="components-infobox--info" />
+  <Story id="components-alerts-infobox--info" />
 </Canvas>
 
 ### Danger
@@ -28,7 +30,7 @@ Use Danger Infoboxes to inform users that an error has occurred. You may also in
 Include guidance to make sure users know what steps to take to address the error or avoid data loss.
 
 <Canvas>
-  <Story id="components-infobox--danger" />
+  <Story id="components-alerts-infobox--danger" />
 </Canvas>
 
 ### Caution
@@ -38,7 +40,7 @@ Use Caution Infoboxes to inform users of tasks or processes that need their atte
 When using the Caution variant, ensure the user does not need more context than you can give in the space available.
 
 <Canvas>
-  <Story id="components-infobox--caution" />
+  <Story id="components-alerts-infobox--caution" />
 </Canvas>
 
 ### Success
@@ -46,7 +48,7 @@ When using the Caution variant, ensure the user does not need more context than 
 Use Success Infoboxes for reporting successful actions, processes, or states to the user.
 
 <Canvas>
-  <Story id="components-infobox--success" />
+  <Story id="components-alerts-infobox--success" />
 </Canvas>
 
 ## Usage
@@ -60,23 +62,23 @@ Avoid overusing Infobox within the same view. They are intended to draw the eye,
 It is ideal to direct users toward an appropriate action, especially for addressing errors. Infoboxes allow for both inline and separated actions. To preserve clarity, limit Infoboxes to one link.
 
 <Canvas>
-  <Story id="components-infobox--with-link-inline" />
+  <Story id="components-alerts-infobox--with-link-inline" />
 </Canvas>
 
 The actions section is limited to links. If it's necessary to provide the user with an action, please direct them to the appropriate flow instead of beginning a new process inline.
 
 <Canvas>
-  <Story id="components-infobox--with-link" />
+  <Story id="components-alerts-infobox--with-link" />
 </Canvas>
 
 ### Placement
 
-Infoboxes should be displayed above the content they apply to but not higher than their scope.
+Infoboxes will stretch to fit the width of their parent. Be mindful of this behavior, as it will help indicate the scope of their messaging. Infoboxes should be displayed above the content they apply to but not higher than their scope.
 
-For example, a Form error should be displayed above all Fieldsets, but below the Form title.
+For example, a Form error should be displayed above all Fieldsets, but below the Form title. In this example, the Infobox is constrained to the width of the Form.
 
 <Canvas className="sb-do">
-  <Story id="components-infobox--form-do" />
+  <Story id="components-alerts-infobox--form-do" />
   <span class="sb-marker sb-marker--do">
     <CheckIcon /> Do
   </span>
@@ -85,7 +87,7 @@ For example, a Form error should be displayed above all Fieldsets, but below the
 Stay away from nesting Infoboxes within information-dense UI like Tables. If you need to convey something about an individual data point, consider another design solution.
 
 <Canvas className="sb-dont">
-  <Story id="components-infobox--table-dont" />
+  <Story id="components-alerts-infobox--table-dont" />
   <span class="sb-marker sb-marker--dont">
     <CloseIcon /> Don't
   </span>
@@ -174,7 +176,7 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
     <tbody>
       <tr>
         <th scope="row">
-          <a href="?path=/docs/components-banner--info#banner">Banner</a>
+          <a href="?path=/docs/components-alerts-banner--info#banner">Banner</a>
         </th>
         <td>Info, Caution, Danger</td>
         <td>No</td>
@@ -192,7 +194,7 @@ When deploying Infoboxes, two `role`s may apply. Danger variants should utilize 
       </tr>
       <tr>
         <th scope="row">
-          <a href="?path=/docs/components-toast--info#toast">Toast</a>
+          <a href="?path=/docs/components-alerts-toast--info#toast">Toast</a>
         </th>
         <td>Info, Success, Caution, Danger</td>
         <td>Yes</td>

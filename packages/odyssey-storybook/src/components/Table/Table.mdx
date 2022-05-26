@@ -1,10 +1,16 @@
-import { Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
 import { theme } from "../../../../odyssey-react/src/components/Table/Table.theme";
 import { ThemeTable } from "../../../.storybook/components";
+
+<Meta anchor />
 
 # Table
 
 Tables provide structure for displaying sets of data across rows and columns. They support multiple content types and some internal actions.
+
+<Canvas>
+  <Story id="components-table--default" />
+</Canvas>
 
 ## Behavior
 
@@ -23,7 +29,7 @@ Finally, when a descending heading is clicked, it should swap to unsorted.
 When any column becomes sorted, the previously active column should return to an unsorted state.
 
 <Canvas>
-  <Story id="components-table--default" />
+  <Story id="components-table--sorted" />
 </Canvas>
 
 ## States
@@ -43,11 +49,13 @@ Note that tables should not have a fixed width, nor should their columns. Browse
 
 ### Row headings
 
-If your data set has keys on two axes, we also support setting the starting column as a row heading. This is helpful when you expect the user tuseze a known value for data lookup (e.g. "Which missions went to Mars?").
+If your data set has keys on two axes, we also support setting the starting column as a row heading. This is helpful when you expect the user to use a known value for data lookup (e.g. "Which missions went to Mars?").
 
 Be sure to identify your row heading column as well. That is, don't leave a blank cell in the starting header column. Our secondary headings need context too!
 
-**STORY MISSING**
+<Canvas>
+  <Story id="components-table--row-heading" />
+</Canvas>
 
 ### Row groupings
 
@@ -75,56 +83,37 @@ The basic Table cell styling is based on what is most legible and scannable for 
 
 Currently, we provide extra support for numerical data, dates, Buttons, Statuses, and Checkboxes.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="components-table--supported-content" />
+</Canvas>
 
-<ul>
-<li class="desc-counter--item">
-
-<h4 class="desc-counter--title">Checkboxes</h4>
+#### Checkboxes
 
 Include checkboxes in the first column. The heading checkbox should check/uncheck all rows when clicked.
 
 If mixed, the heading checkbox should be set to Indeterminate.
 
-</li>
-<li class="desc-counter--item">
-
-<h4 class="desc-counter--title">Numerical data</h4>
+#### Numerical data
 
 We use tabular numbers and end-align figures for quick scanning.
 
 Leave off any units. Instead, specify them in the column's header.
 
-</li>
-<li class="desc-counter--item">
-
-<h4 class="desc-counter--title">Statuses</h4>
+#### Statuses
 
 No extra styling is required when adding Statuses to your table. Ensure their labels are hidden and their column has an appropriate heading.
 
-</li>
-<li class="desc-counter--item">
-
-<h4 class="desc-counter--title">Dates</h4>
+#### Dates
 
 To maintain ease of reading, dates should not be line-broken. White-space is preserved throughout the column. This applies to all date formats.
 
-</li>
-<li class="desc-counter--item">
-
-<h4 class="desc-counter--title">Empty cells</h4>
+#### Empty cells
 
 If a cell is empty, use an en dash (–) to indicate this.
 
-</li>
-<li class="desc-counter--item">
+#### Buttons
 
-<h4 class="desc-counter--title">Buttons</h4>
-
-No extra styling is required when adding Buttons to a table. They will resize to the "Small" variant and align to the baseline of other type in the row.
-
-</li>
-</ul>
+No extra styling is required when adding Buttons to a table. Be sure to use the "Small" variant. Content will align to the baseline of other text in the row.
 
 ## Accessibility
 

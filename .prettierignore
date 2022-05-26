@@ -1,0 +1,11 @@
+.DS_Store
+dist
+node_modules/
+npm-debug.log
+package-lock.json
+storybook-static
+yarn-error.log
+**/coverage
+.pnp.*
+.yarn/*
+.git/*

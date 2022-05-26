@@ -17,7 +17,7 @@ import { Banner, BannerProps, Link } from "../../../../odyssey-react/src";
 import BannerMdx from "./Banner.mdx";
 
 export default {
-  title: `Components/Banner`,
+  title: `Components/Alerts/Banner`,
   component: Banner,
   parameters: {
     layout: "fullscreen",
@@ -28,10 +28,6 @@ export default {
   argTypes: {
     children: {
       control: null,
-    },
-    heading: {
-      defaultValue: null,
-      control: "text",
     },
     content: {
       defaultValue: "The mission to Sagitarius A has been set for January 7.",
@@ -85,12 +81,6 @@ export const Caution = Template.bind({});
 Caution.args = {
   variant: "caution",
   content: "Severe solar winds detected. Local system flights may be delayed.",
-};
-
-export const WithTitle = Template.bind({});
-WithTitle.args = {
-  variant: "info",
-  heading: "New launch scheduled",
 };
 
 export const WithLink = Template.bind({});
