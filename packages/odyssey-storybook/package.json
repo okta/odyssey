@@ -12,10 +12,12 @@
   "devDependencies": {
     "@applitools/eyes-storybook": "^3.27.6",
     "@babel/core": "^7.15.0",
+    "@mui/material": "^5.8.1",
     "@okta/odyssey-babel-loader": "^0.14.0",
     "@okta/odyssey-design-tokens": "^0.14.0",
     "@okta/odyssey-lifecycle": "^0.14.0",
     "@okta/odyssey-react": "^0.14.0",
+    "@okta/odyssey-react-mui": "^0.14.0",
     "@okta/odyssey-react-theme": "^0.14.0",
     "@okta/odyssey-typescript": "^0.14.0",
     "@pxblue/storybook-rtl-addon": "^1.0.1",
