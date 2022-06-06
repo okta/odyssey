@@ -10,19 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createTheme } from "@mui/material/styles";
+import type { ThemeOptions } from "@mui/material";
 
-const themeSpacing = createTheme({
-  spacing: [
-    0,
-    "0.28571429rem",
-    "0.57142857rem",
-    "0.85714286rem",
-    "1.14285714rem",
-    "1.71428571rem",
-    "2.28571429rem",
-    "2.85714286rem",
-    "3.42857143rem",
-    "4rem",
-  ],
-});
+export const spacingTheme: ThemeOptions["spacing"] = [
+  0,
+  "0.28571429rem",
+  "0.57142857rem",
+  "0.85714286rem",
+  "1.14285714rem",
+  "1.71428571rem",
+  "2.28571429rem",
+  "2.85714286rem",
+  "3.42857143rem",
+  "4rem",
+];
