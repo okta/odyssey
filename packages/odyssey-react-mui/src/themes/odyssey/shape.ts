@@ -10,10 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createTheme } from "@mui/material/styles";
+import type { ThemeOptions } from "@mui/material";
 
-const themeShape = createTheme({
-  shape: {
-    borderRadius: 4,
-  },
-});
+export const paletteTheme: ThemeOptions["shape"] = {
+  borderRadius: 4,
+};
