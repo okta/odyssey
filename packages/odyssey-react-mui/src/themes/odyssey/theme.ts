@@ -10,5 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./components";
-export * from "./themes";
+import { createTheme } from "@mui/material/styles";
+
+import { palette } from "./palette";
+import { shape } from "./shape";
+import { spacing } from "./spacing";
+import { typography } from "./typography";
+
+export const theme = createTheme({ palette, shape, spacing, typography });

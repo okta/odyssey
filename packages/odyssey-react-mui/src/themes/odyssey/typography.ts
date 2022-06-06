@@ -12,7 +12,7 @@
 
 import type { ThemeOptions } from "@mui/material";
 
-export const paletteTheme: ThemeOptions["typography"] = {
+export const typography: ThemeOptions["typography"] = {
   htmlFontSize: 16,
   fontFamily:
     "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
