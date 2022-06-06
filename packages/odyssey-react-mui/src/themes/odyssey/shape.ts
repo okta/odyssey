@@ -12,6 +12,6 @@
 
 import type { ThemeOptions } from "@mui/material";
 
-export const paletteTheme: ThemeOptions["shape"] = {
+export const shape: ThemeOptions["shape"] = {
   borderRadius: 4,
 };

@@ -12,7 +12,7 @@
 
 import type { ThemeOptions } from "@mui/material";
 
-export const paletteTheme: ThemeOptions["palette"] = {
+export const palette: ThemeOptions["palette"] = {
   mode: "light",
   common: {
     black: "#1d1d21",

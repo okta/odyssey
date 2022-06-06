@@ -12,7 +12,7 @@
 
 import type { ThemeOptions } from "@mui/material";
 
-export const spacingTheme: ThemeOptions["spacing"] = [
+export const spacing: ThemeOptions["spacing"] = [
   0,
   "0.28571429rem",
   "0.57142857rem",
