@@ -13,7 +13,12 @@
 import React, { ReactElement } from "react";
 import type { Story } from "@storybook/react";
 import { PasswordInput, PasswordInputProps } from "@okta/odyssey-react-mui";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  ThemeProvider as MuiThemeProvider,
+  createTheme,
+} from "@mui/material/styles";
+import { ThemeProvider } from "@storybook/theming";
+
 import PasswordInputMdx from "./PasswordInput.mdx";
 
 export default {
@@ -63,9 +68,11 @@ export const Themed = (
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <PasswordInput {...rest} />
-    </ThemeProvider>
+    <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <PasswordInput {...rest} />
+      </ThemeProvider>
+    </MuiThemeProvider>
   );
 };
 
