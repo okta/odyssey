@@ -18,11 +18,12 @@ import {
   createTheme,
 } from "@mui/material/styles";
 import { ThemeProvider } from "@storybook/theming";
+import { MuiOdysseyThemeDecorator } from "../../../.storybook/components/MuiOdysseyThemeDecorator";
 
 import PasswordInputMdx from "./PasswordInput.mdx";
 
 export default {
-  title: `Components/PasswordInput`,
+  title: `Mui Components/PasswordInput`,
   component: PasswordInput,
   parameters: {
     docs: {
@@ -45,6 +46,7 @@ export default {
     required: { control: "boolean" },
     value: { control: "text" },
   },
+  decorators: [MuiOdysseyThemeDecorator],
 };
 
 const Template: Story<PasswordInputProps> = (props) => (
