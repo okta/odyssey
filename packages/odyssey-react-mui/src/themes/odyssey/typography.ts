@@ -24,82 +24,103 @@ export const typography: ThemeOptions["typography"] = {
   h1: {
     fontFamily:
       "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
-    fontWeight: "600",
+    fontWeight: 600,
     fontSize: "2.571rem",
     lineHeight: "1.25",
     letterSpacing: "initial",
+    marginBottom: "0.57142857rem",
   },
   h2: {
     fontFamily:
       "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
-    fontWeight: "600",
+    fontWeight: 600,
     fontSize: "2.286rem",
     lineHeight: "1.28571429",
     letterSpacing: "initial",
+    marginBottom: "0.57142857rem",
   },
   h3: {
     fontFamily:
       "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
-    fontWeight: "600",
+    fontWeight: 600,
     fontSize: "2rem",
     lineHeight: "1.28",
     letterSpacing: "initial",
+    marginBottom: "0.57142857rem",
   },
   h4: {
     fontFamily:
       "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
-    fontWeight: "600",
+    fontWeight: 600,
     fontSize: "1.571rem",
     lineHeight: "1.27272727",
     letterSpacing: "initial",
+    marginBottom: "0.57142857rem",
   },
   h5: {
     fontFamily:
       "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
-    fontWeight: "600",
+    fontWeight: 600,
     fontSize: "1.286rem",
     lineHeight: "1.333333333",
     letterSpacing: "initial",
+    marginBottom: "0.57142857rem",
   },
   h6: {
     fontFamily:
       "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
-    fontWeight: "600",
+    fontWeight: 600,
     fontSize: "1.143rem",
     lineHeight: "1.25",
     letterSpacing: "initial",
+    marginBottom: "0.57142857rem",
   },
-  //subtitle1: undefined,
-  //subtitle2: undefined,
-  body1: {
+  subtitle1: undefined,
+  subtitle2: undefined,
+  body: {
     fontFamily:
       "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
-    fontWeight: "400",
+    fontWeight: 400,
     fontSize: "1rem",
     lineHeight: "1.42857143",
     letterSpacing: "initial",
   },
-  //body2: undefined,
-  //button: undefined,
+  body1: undefined,
+  body2: undefined,
+  button: undefined,
   caption: {
     fontFamily:
       "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
-    fontWeight: "400",
+    fontWeight: 400,
     fontSize: "0.875rem",
     lineHeight: "1.42857143",
     letterSpacing: "initial",
   },
-  //overline: undefined,
+  overline: undefined,
 };
 
 // Update the Typography's variant prop options
 // Unsure where we want to store this
-//declare module "@mui/material/Typography" {
-//interface TypographyPropsVariantOverrides {
-//subtitle1: false;
-//subtitle2: false;
-//body2: false;
-//button: false;
-//overline: false;
-//}
-//}
+declare module "@mui/material/styles" {
+  interface TypographyVariants {
+    body: React.CSSProperties;
+  }
+
+  // allow configuration using `createTheme`
+  interface TypographyVariantsOptions {
+    body?: React.CSSProperties;
+  }
+}
+
+// Update the Typography's variant prop options
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    body1: false;
+    body2: false;
+    body: true;
+    button: false;
+    overline: false;
+    subtitle1: false;
+    subtitle2: false;
+  }
+}
