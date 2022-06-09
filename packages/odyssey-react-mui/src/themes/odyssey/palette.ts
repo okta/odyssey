@@ -20,7 +20,7 @@ export const palette: ThemeOptions["palette"] = {
   },
   primary: {
     light: "#a7b5ec",
-    main: "#ff4400",
+    main: "#1662dd",
     dark: "#00297a",
     contrastText: "#ffffff",
   },
@@ -43,9 +43,9 @@ export const palette: ThemeOptions["palette"] = {
     contrastText: "#1d1d21",
   },
   info: {
-    light: "#80C7CA",
-    main: "#2D8C9E",
-    dark: "#004650",
+    light: "#a7b5ec",
+    main: "#1662dd",
+    dark: "#00297a",
     contrastText: "#ffffff",
   },
   success: {
