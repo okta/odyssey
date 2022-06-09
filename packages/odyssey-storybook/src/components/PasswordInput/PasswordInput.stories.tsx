@@ -18,11 +18,12 @@ import {
   createTheme,
 } from "@mui/material/styles";
 import { ThemeProvider } from "@storybook/theming";
+import { MuiThemeDecorator } from "../../../.storybook/components/MuiThemeDecorator";
 
 import PasswordInputMdx from "./PasswordInput.mdx";
 
 export default {
-  title: `Components/PasswordInput`,
+  title: `MUI Components/PasswordInput`,
   component: PasswordInput,
   parameters: {
     docs: {
@@ -45,15 +46,14 @@ export default {
     required: { control: "boolean" },
     value: { control: "text" },
   },
+  decorators: [MuiThemeDecorator],
 };
 
 const Template: Story<PasswordInputProps> = (props) => (
   <PasswordInput {...props} />
 );
-
 export const Password = Template.bind({});
 Password.args = {};
-
 export const Themed = (
   props: PasswordInputProps & { PrimaryMain: string }
 ): ReactElement => {
@@ -66,7 +66,6 @@ export const Themed = (
       },
     },
   });
-
   return (
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
@@ -75,7 +74,6 @@ export const Themed = (
     </MuiThemeProvider>
   );
 };
-
 Themed.argTypes = {
   PrimaryMain: {
     name: "primary main color",
@@ -84,14 +82,12 @@ Themed.argTypes = {
     control: "color",
   },
 };
-
 export const Styled = Template.bind({});
 Styled.args = {
   sx: {
     "& .MuiButtonBase-root": { backgroundColor: "lightcoral" },
   },
 };
-
 export const CustomAttributes = Template.bind({});
 CustomAttributes.args = {
   inputProps: {
