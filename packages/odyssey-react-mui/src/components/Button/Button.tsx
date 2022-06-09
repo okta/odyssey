@@ -10,6 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./PasswordInput";
-export * from "./Link";
-export * from "./Button";
+import React, { forwardRef } from "react";
+import { Button as MuiButton } from "@mui/material";
+import type { ButtonProps } from "@mui/material";
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props) => {
+  const { children, ...rest } = props;
+  return <MuiButton {...rest}>{children}</MuiButton>;
+});
