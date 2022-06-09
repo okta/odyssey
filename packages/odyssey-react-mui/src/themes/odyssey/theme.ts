@@ -16,5 +16,12 @@ import { palette } from "./palette";
 import { shape } from "./shape";
 import { spacing } from "./spacing";
 import { typography } from "./typography";
+import { components } from "./components";
 
-export const theme = createTheme({ palette, shape, spacing, typography });
+export const theme = createTheme({
+  palette,
+  shape,
+  spacing,
+  typography,
+  components,
+});
