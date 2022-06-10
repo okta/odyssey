@@ -21,10 +21,10 @@ import {
 } from "@mui/material/styles";
 import { ThemeProvider } from "@storybook/theming";
 
-import ButtonMdx from "./Button.mdx";
+import ButtonMdx from "./MuiButton.mdx";
 
 export default {
-  title: `Components/MuiButton`,
+  title: `MUI Components/Button`,
   component: Button,
   parameters: {
     docs: {
