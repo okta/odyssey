@@ -11,7 +11,7 @@
  */
 
 import React from "react";
-import type { Story } from "@storybook/react";
+import { Story } from "@storybook/react";
 import { Typography, TypographyProps } from "@mui/material";
 import { MuiThemeDecorator } from "../../../.storybook/components/MuiThemeDecorator";
 
