@@ -98,29 +98,3 @@ export const typography: ThemeOptions["typography"] = {
   },
   overline: undefined,
 };
-
-// Update the Typography's variant prop options
-// Unsure where we want to store this
-declare module "@mui/material/styles" {
-  interface TypographyVariants {
-    body: React.CSSProperties;
-  }
-
-  // allow configuration using `createTheme`
-  interface TypographyVariantsOptions {
-    body?: React.CSSProperties;
-  }
-}
-
-// Update the Typography's variant prop options
-declare module "@mui/material/Typography" {
-  interface TypographyPropsVariantOverrides {
-    body1: false;
-    body2: false;
-    body: true;
-    button: false;
-    overline: false;
-    subtitle1: false;
-    subtitle2: false;
-  }
-}
