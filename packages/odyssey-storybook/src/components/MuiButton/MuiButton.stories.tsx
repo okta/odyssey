@@ -68,4 +68,51 @@ const Template: Story<ButtonProps> = (props) => <Button {...props} />;
 export const ButtonPrimary = Template.bind({});
 ButtonPrimary.args = {
   children: "Button label",
+  variant: "primary",
+};
+
+export const ButtonSecondary = Template.bind({});
+ButtonSecondary.args = {
+  children: "Button label",
+  variant: "secondary",
+};
+
+export const ButtonDanger = Template.bind({});
+ButtonDanger.args = {
+  children: "Button label",
+  variant: "danger",
+};
+
+export const ButtonFloating = Template.bind({});
+ButtonFloating.args = {
+  children: "Button label",
+  variant: "floating",
+};
+
+export const ButtonSmall = Template.bind({});
+ButtonSmall.args = {
+  children: "Button label",
+  size: "s",
+  variant: "primary",
+};
+
+export const ButtonMedium = Template.bind({});
+ButtonMedium.args = {
+  children: "Button label",
+  size: "m",
+  variant: "primary",
+};
+
+export const ButtonLarge = Template.bind({});
+ButtonLarge.args = {
+  children: "Button label",
+  size: "l",
+  variant: "primary",
+};
+
+export const ButtonFullWidth = Template.bind({});
+ButtonFullWidth.args = {
+  children: "Button label",
+  fullWidth: true,
+  variant: "primary",
 };
