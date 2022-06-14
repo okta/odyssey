@@ -46,5 +46,21 @@ declare module "@mui/material/Link" {
     success: false;
   }
 }
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {
+    floating: true;
+    primary: true;
+    secondary: true;
+    danger: true;
+    text: false;
+    contained: false;
+    outlined: false;
+  }
+  interface ButtonPropsSizeOverrides {
+    s: true;
+    m: true;
+    l: true;
+  }
+}
 
 export {};
