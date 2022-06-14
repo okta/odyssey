@@ -10,16 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ReactElement } from "react";
+import React from "react";
 import type { Story } from "@storybook/react";
-import { Button } from "@okta/odyssey-react-mui";
-import type { ButtonProps } from "@mui/material";
 
-import {
-  ThemeProvider as MuiThemeProvider,
-  createTheme,
-} from "@mui/material/styles";
-import { ThemeProvider } from "@storybook/theming";
+import { Button } from "@mui/material";
+import type { ButtonProps } from "@mui/material";
+import { MuiThemeDecorator } from "../../../.storybook/components/MuiThemeDecorator";
 
 import ButtonMdx from "./MuiButton.mdx";
 
@@ -34,89 +30,42 @@ export default {
   argTypes: {
     children: {
       control: "text",
-      defaultValue: "Button label",
+      defaultValue: "Button labels",
     },
-    color: {
-      options: ["primary", "secondary", "success", "error", "info", "warning"],
+    size: {
+      options: ["s", "m", "l"],
+      control: { type: "radio" },
+    },
+    // if we choose to apply colors via "variants" then odyssey global theme will not apply
+    variant: {
+      options: [
+        "primary",
+        "secondary",
+        "danger",
+        "floating",
+        "text",
+        "contained",
+      ],
       control: { type: "radio" },
     },
     disabled: {
       control: "boolean",
     },
-    disableElevation: {
-      control: "boolean",
-    },
-    disableFocusRipple: {
-      control: "boolean",
-    },
-    disableRipple: {
-      control: "boolean",
-    },
     fullWidth: {
+      // called 'wide' in original ods button
       control: "boolean",
     },
-    href: {
-      control: "text",
-    },
-    size: {
-      options: ["small", "medium", "large"],
-      control: { type: "radio" },
-    },
-    variant: {
-      options: ["text", "contained", "outlined"],
-      control: { type: "radio" },
-    },
-    endIcon: {
-      control: "text",
+    startIcon: {
+      // called 'icon' in original ods button
+      control: "object",
     },
   },
+  decorators: [MuiThemeDecorator],
 };
 
 const Template: Story<ButtonProps> = (props) => <Button {...props} />;
 
-export const MyMuiButton = Template.bind({});
-MyMuiButton.args = { children: "My mui button" };
-
-export const Themed = (
-  props: ButtonProps & { PrimaryMain: string }
-): ReactElement => {
-  const { PrimaryMain, ...rest } = props;
-  const theme = createTheme({
-    palette: {
-      mode: "light",
-      primary: {
-        main: PrimaryMain,
-      },
-    },
-  });
-
-  return (
-    <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <Button {...rest} />
-      </ThemeProvider>
-    </MuiThemeProvider>
-  );
-};
-
-Themed.argTypes = {
-  PrimaryMain: {
-    name: "color override - primary",
-    defaultValue: "#3fb466",
-    type: "string",
-    control: "color",
-  },
-};
-
 export const ButtonPrimary = Template.bind({});
 ButtonPrimary.args = {
-  children: "primary",
-  color: "primary",
-  size: "medium",
-  variant: "text",
-  disabled: false,
-  disableElevation: false,
-  disableFocusRipple: false,
-  disableRipple: false,
-  fullWidth: false,
+  children: "Button label",
 };
