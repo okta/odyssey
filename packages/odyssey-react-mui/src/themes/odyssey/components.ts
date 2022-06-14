@@ -18,6 +18,27 @@ export const components: ThemeOptions["components"] = {
       boxSizing: "border-box",
     },
   },
+  MuiCircularProgress: {
+    defaultProps: {
+      size: "1.14285714rem",
+      thickness: 8,
+      color: "primary",
+      disableShrink: false,
+      variant: "indeterminate",
+    },
+    styleOverrides: {
+      root: ({ ownerState }) => ({
+        ...(ownerState.color !== "inherit" && {
+          color: "#00297a",
+        }),
+      }),
+      circle: ({ ownerState }) => ({
+        ...(ownerState.variant === "indeterminate" && {
+          strokeDasharray: "160%, 360%",
+        }),
+      }),
+    },
+  },
   MuiFormLabel: {
     styleOverrides: {
       root: {
