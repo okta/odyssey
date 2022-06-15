@@ -144,6 +144,7 @@ export const components: ThemeOptions["components"] = {
   MuiButton: {
     defaultProps: {
       disableElevation: true,
+      disableRipple: true,
     },
     variants: [
       {
