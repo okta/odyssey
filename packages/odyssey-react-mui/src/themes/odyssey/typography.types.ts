@@ -10,19 +10,25 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createTheme } from "@mui/material/styles";
+import { CSSProperties } from "react";
 
-import { palette } from "./palette";
-import { shape } from "./shape";
-import { spacing } from "./spacing";
-import { typography } from "./typography";
-import "./typography.types";
-import { components } from "./components";
+declare module "@mui/material/styles" {
+  interface TypographyVariants {
+    body: CSSProperties;
+  }
+  interface TypographyVariantsOptions {
+    body?: CSSProperties;
+  }
+}
 
-export const theme = createTheme({
-  palette,
-  shape,
-  spacing,
-  typography,
-  components,
-});
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    body1: false;
+    body2: false;
+    body: true;
+    button: false;
+    overline: false;
+    subtitle1: false;
+    subtitle2: false;
+  }
+}
