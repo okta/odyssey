@@ -261,19 +261,19 @@ export const components: ThemeOptions["components"] = {
           paddingInline: "calc(1.14285714rem - 1px)",
         },
       },
-      // {
-      //   props: { wide: true },
-      //   style: {
-      //     display: 'block',
-      //     width: '100%',
-      //     marginBlock: '0',
-      //     marginInline: '0',
+      {
+        props: { fullWidth: true },
+        style: {
+          display: "block",
+          width: "100%",
+          marginBlock: "0",
+          marginInline: "0",
 
-      //     '&:not(:last-child)': {
-      //       marginBlockEnd: '1.14285714rem',
-      //     },
-      //   },
-      // },
+          "&:not(:last-child)": {
+            marginBlockEnd: "1.14285714rem",
+          },
+        },
+      },
     ],
     styleOverrides: {
       root: ({ ownerState }) => ({
