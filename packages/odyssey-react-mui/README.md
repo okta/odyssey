@@ -18,10 +18,10 @@ exact version (maximum safety) or pin the major and minor versions
 
 ## Getting Started
 
-Install the package:
+Install the package and peer dependencies:
 
 ```sh
-$ yarn add @okta/odyssey-react-mui
+$ yarn add @okta/odyssey-react-mui @emotion/react @mui/material @mui/icons-material
 ```
 
 Include fonts:
