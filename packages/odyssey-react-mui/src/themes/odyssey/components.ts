@@ -61,6 +61,10 @@ export const components: ThemeOptions["components"] = {
     },
   },
   MuiTypography: {
+    defaultProps: {
+      fontFamily:
+        "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
+    },
     styleOverrides: {
       paragraph: {
         marginBottom: "1.14285714rem",
