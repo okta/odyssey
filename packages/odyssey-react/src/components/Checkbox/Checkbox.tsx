@@ -12,6 +12,7 @@
 
 import React, { useCallback, useRef, useEffect, forwardRef } from "react";
 import type { ComponentPropsWithRef, ChangeEvent } from "react";
+import DOMPurify from "dompurify";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { Box } from "../Box";
 import { CheckIcon, SubtractIcon } from "../Icon";
@@ -114,8 +115,9 @@ export const Checkbox = withTheme(
               {indeterminate ? <SubtractIcon /> : <CheckIcon />}
             </span>
           </span>
-
-          {label}
+          <span
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(label) }}
+          />
         </label>
         {error && <Field.Error id={oid}>{error}</Field.Error>}
       </Box>

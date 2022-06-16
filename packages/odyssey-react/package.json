@@ -22,7 +22,9 @@
   "dependencies": {
     "@okta/odyssey-react-theme": "^0.14.0",
     "@react-aria/focus": "3.5.0",
-    "choices.js": "^9.0.1"
+    "@types/dompurify": "^2.3.3",
+    "choices.js": "^9.0.1",
+    "dompurify": "^2.3.8"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",

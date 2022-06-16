@@ -12,6 +12,7 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef, ReactElement } from "react";
+import DOMPurify from "dompurify";
 import type { PolymorphicForwardRef } from "../../utils";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { CommonFieldProps } from "./types";
@@ -88,7 +89,13 @@ export const Field = withTheme(
         >
           {label}
         </FieldLabel>
-        {hint && <FieldHint id={inputId}>{hint}</FieldHint>}
+        {hint && (
+          <FieldHint id={inputId}>
+            <span
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(hint) }}
+            />
+          </FieldHint>
+        )}
         {children}
         {error && <FieldError id={inputId}>{error}</FieldError>}
       </Box>

@@ -12,6 +12,7 @@
 
 import React, { forwardRef } from "react";
 import type { ComponentPropsWithRef } from "react";
+import DOMPurify from "dompurify";
 import { withTheme } from "@okta/odyssey-react-theme";
 import { useRadioGroup } from "./context";
 import { Box } from "../Box";
@@ -83,7 +84,15 @@ export const RadioButton = withTheme(
           type="radio"
           value={value}
         />
-        <label children={label} className={styles.label} htmlFor={oid} />
+        <label
+          children={
+            <span
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(label) }}
+            />
+          }
+          className={styles.label}
+          htmlFor={oid}
+        />
       </Box>
     );
   })
