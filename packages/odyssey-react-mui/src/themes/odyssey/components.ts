@@ -106,6 +106,14 @@ export const components: ThemeOptions["components"] = {
         ".icon": {
           marginInlineEnd: "0.57142857rem",
         },
+        svg: {
+          fontSize: "1rem",
+          height: "1em",
+          position: "relative",
+          top: "-0.0625em",
+          verticalAlign: "middle",
+          width: "1em",
+        },
       },
     },
     variants: [
