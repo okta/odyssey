@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ReactElement } from "react";
+import React from "react";
 import type { Story } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../.storybook/components/MuiThemeDecorator";

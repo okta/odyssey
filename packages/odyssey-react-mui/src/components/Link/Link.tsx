@@ -12,25 +12,33 @@
 
 import React, { forwardRef, ReactElement } from "react";
 
-import { Link as MuiLink } from "@mui/material";
+import { Link as MuiLink, SvgIcon } from "@mui/material";
 import type { LinkProps as MuiLinkProps } from "@mui/material";
-import { ExternalLinkIcon } from "@okta/odyssey-react";
 
 export interface LinkProps extends MuiLinkProps {
   icon?: ReactElement;
 }
 
-export const Link = forwardRef<HTMLLinkElement, LinkProps>((props) => {
-  const { icon, children, target } = props;
-  return (
-    <MuiLink {...props}>
-      <span className="icon">{icon}</span>
-      {children}
-      {target === "_blank" && (
-        <span className="indicator" role="presentation">
-          <ExternalLinkIcon />
-        </span>
-      )}
-    </MuiLink>
-  );
-});
+export const Link = forwardRef<HTMLLinkElement | HTMLAnchorElement, LinkProps>(
+  (props) => {
+    const { icon, children, target } = props;
+    return (
+      <MuiLink {...props}>
+        <span className="icon">{icon}</span>
+        {children}
+        {target === "_blank" && (
+          <span className="indicator" role="presentation">
+            <SvgIcon viewBox="0 0 16 16" titleAccess="external link icon">
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M13.2929 2H7.99998V1H14.5C14.7761 1 15 1.22386 15 1.5V8H14V2.70711L6.35353 10.3536L5.64642 9.64645L13.2929 2ZM1.5 4H1V4.5V14.5V15H1.5H11.5H12V14.5V8H11V14H2V5H8V4H1.5Z"
+                fill="currentColor"
+              />
+            </SvgIcon>
+          </span>
+        )}
+      </MuiLink>
+    );
+  }
+);
