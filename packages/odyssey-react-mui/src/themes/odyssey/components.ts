@@ -67,4 +67,53 @@ export const components: ThemeOptions["components"] = {
       },
     },
   },
+  MuiLink: {
+    variants: [
+      {
+        props: { variant: "default" },
+        style: {
+          color: "#1662dd",
+          textDecoration: "none",
+
+          "&:hover": {
+            color: "#1662dd",
+            textDecoration: "underline",
+          },
+
+          "&:focus-visible": {
+            outlineColor: "#1662dd",
+            outlineOffset: "2px",
+            outlineStyle: "solid",
+            outlineWidth: "1px",
+          },
+
+          "&:visited": {
+            color: "#1662dd",
+          },
+        },
+      },
+      {
+        props: { variant: "monochrome" },
+        style: {
+          color: "#1d1d21",
+          textDecoration: "underline",
+
+          "&:hover": {
+            color: "#6e6e78",
+          },
+
+          "&:focus-visible": {
+            outlineColor: "#1662dd",
+            outlineOffset: "2px",
+            outlineStyle: "solid",
+            outlineWidth: "1px",
+          },
+
+          "&:visited": {
+            color: "#1d1d21",
+          },
+        },
+      },
+    ],
+  },
 };
