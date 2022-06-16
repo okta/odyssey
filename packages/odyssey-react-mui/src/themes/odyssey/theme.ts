@@ -18,7 +18,7 @@ import { spacing } from "./spacing";
 import { typography } from "./typography";
 import { components } from "./components";
 
-export const theme = createTheme({
+export const odysseyTheme = createTheme({
   palette,
   shape,
   spacing,
