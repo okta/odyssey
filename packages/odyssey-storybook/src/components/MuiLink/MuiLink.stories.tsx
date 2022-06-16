@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
+import React, { ReactElement } from "react";
 import type { Story } from "@storybook/react";
 
-import { Link } from "@mui/material";
-import type { LinkProps } from "@mui/material";
 import { MuiThemeDecorator } from "../../../.storybook/components/MuiThemeDecorator";
 import { InformationCircleFilledIcon } from "../../../../odyssey-react/src";
+import { Link, LinkProps } from "@okta/odyssey-react-mui";
+
 import LinkMdx from "./MuiLink.mdx";
 
 export default {
@@ -38,6 +38,12 @@ export default {
     },
     icon: {
       control: "object",
+    },
+    rel: {
+      control: "text",
+    },
+    target: {
+      control: "text",
     },
   },
   decorators: [MuiThemeDecorator],
