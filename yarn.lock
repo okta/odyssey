@@ -5716,6 +5716,7 @@ __metadata:
     "@mui/material": ^5.8.2
     "@okta/browserslist-config-odyssey": ^0.14.0
     "@okta/odyssey-babel-preset": ^0.14.0
+    "@okta/odyssey-design-tokens": ^0.14.0
     "@okta/odyssey-icons": ^0.14.0
     "@okta/odyssey-lifecycle": ^0.14.0
     "@okta/odyssey-typescript": ^0.14.0
