@@ -1,6 +1,4 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
-import { theme } from "../../../../odyssey-react/src/components/Link/Link.theme";
-import { ThemeTable } from "../../../.storybook/components";
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
 
 <Meta anchor />
 
@@ -71,14 +69,9 @@ Links in Odyssey are not underlined. They maintain a minimum 3:1 contrast ratio 
 
 Links should display a visible affordance when users interact via keyboard. Odyssey preserves the default `:focus` state for each browser.
 
-## Props
-
-<ArgsTable />
-
-<ThemeTable componentThemeReducer={theme} />
-
 ## References
 
 ### Further reading
 
+- <a href="https://mui.com/material-ui/api/link/">Link API</a> - Material UI
 - [Google's Developer Documentation](https://developers.google.com/web/tools/lighthouse/audits/noopener) provides backgrounds on security and performance considerations when using external links
