@@ -93,17 +93,17 @@ export const components: ThemeOptions["components"] = {
           color: "#1662dd",
         },
 
-        ".indicator, .icon": {
+        ".Link-indicator, .Link-icon": {
           display: "inline-block",
           height: "1em",
           lineHeight: 1,
         },
 
-        ".indicator": {
+        ".Link-indicator": {
           marginInlineStart: "0.57142857rem",
         },
 
-        ".icon": {
+        ".Link-icon": {
           marginInlineEnd: "0.57142857rem",
         },
         svg: {
