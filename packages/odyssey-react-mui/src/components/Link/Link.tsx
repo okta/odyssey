@@ -24,10 +24,10 @@ export const Link = forwardRef<HTMLLinkElement | HTMLAnchorElement, LinkProps>(
     const { icon, children, target } = props;
     return (
       <MuiLink {...props}>
-        <span className="icon">{icon}</span>
+        <span className="Link-icon">{icon}</span>
         {children}
         {target === "_blank" && (
-          <span className="indicator" role="presentation">
+          <span className="Link-indicator" role="presentation">
             <SvgIcon viewBox="0 0 16 16" titleAccess="external link">
               <path
                 fillRule="evenodd"
