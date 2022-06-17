@@ -28,7 +28,7 @@ export const Link = forwardRef<HTMLLinkElement | HTMLAnchorElement, LinkProps>(
         {children}
         {target === "_blank" && (
           <span className="Link-indicator" role="presentation">
-            <SvgIcon viewBox="0 0 16 16" titleAccess="external link">
+            <SvgIcon viewBox="0 0 16 16">
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
