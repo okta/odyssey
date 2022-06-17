@@ -285,8 +285,6 @@ export const components: ThemeOptions["components"] = {
         fontWeight: 600,
         paddingBlock: "0.85714286rem",
         paddingInline: "0.85714286rem",
-        fontFamily:
-          "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
         display: "inline-block",
         position: "relative",
         marginBlock: "0",
