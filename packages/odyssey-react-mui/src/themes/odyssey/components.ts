@@ -141,17 +141,21 @@ export const components: ThemeOptions["components"] = {
       },
     ],
   },
+  MuiButtonBase: {
+    defaultProps: {
+      disableRipple: true,
+    },
+  },
   MuiButton: {
     defaultProps: {
       disableElevation: true,
-      disableRipple: true,
     },
     variants: [
       {
         props: { variant: "primary" },
         style: {
           fontWeight: 600,
-          color: "#fff",
+          color: "#ffffff",
           borderColor: "transparent",
           backgroundColor: "#1662dd",
 
@@ -164,7 +168,7 @@ export const components: ThemeOptions["components"] = {
           },
 
           "&:disabled": {
-            color: "#fff",
+            color: "#ffffff",
             backgroundColor: "#a7b5ec",
           },
         },
@@ -201,7 +205,7 @@ export const components: ThemeOptions["components"] = {
         props: { variant: "danger" },
         style: {
           backgroundColor: "#da372c",
-          color: "#fff",
+          color: "#ffffff",
           "&:hover": {
             borderColor: "transparent",
             backgroundColor: "#640019",
@@ -218,7 +222,7 @@ export const components: ThemeOptions["components"] = {
           },
 
           "&:disabled": {
-            color: "#fff",
+            color: "#ffffff",
             borderColor: "#f88c90",
             backgroundColor: "#f88c90",
           },
@@ -227,7 +231,7 @@ export const components: ThemeOptions["components"] = {
       {
         props: { variant: "floating" },
         style: {
-          backgroundColor: "#fff",
+          backgroundColor: "#ffffff",
           color: "#1d1d21",
           borderColor: "transparent",
 

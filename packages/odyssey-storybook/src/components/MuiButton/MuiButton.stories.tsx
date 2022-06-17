@@ -38,15 +38,9 @@ export default {
     },
     // if we choose to apply colors via "variants" then odyssey global theme will not apply
     variant: {
-      options: [
-        "primary",
-        "secondary",
-        "danger",
-        "floating",
-        "text",
-        "contained",
-      ],
+      options: ["primary", "secondary", "danger", "floating"],
       control: { type: "radio" },
+      defaultValue: "primary",
     },
     disabled: {
       control: "boolean",
@@ -115,4 +109,11 @@ ButtonFullWidth.args = {
   children: "Button label",
   fullWidth: true,
   variant: "primary",
+};
+
+export const ButtonPrimaryDisabled = Template.bind({});
+ButtonPrimaryDisabled.args = {
+  children: "Button label",
+  variant: "primary",
+  disabled: true,
 };
