@@ -1,6 +1,4 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
-import { theme } from "../../../../odyssey-react/src/components/Button/Button.theme";
-import { ThemeTable } from "../../../.storybook/components";
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
 
 <Meta anchor />
 
@@ -120,7 +118,9 @@ Disabled Buttons are unavailable for interaction and cannot be focused. They can
 
 You should pair Disabled Buttons with a Tooltip if the user would benefit from additional context.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-button--button-primary-disabled" />
+</Canvas>
 
 ## Usage
 
@@ -166,33 +166,23 @@ When using multiple words, use sentence case. Capitalize only the first letter a
 
 Icons can be added to any of our Button variants to increase clarity or add flair. Icons will be laid out automatically based on language direction.
 
-<Canvas>
-  <Story id="mui-components-button--with-icon" />
-</Canvas>
+**STORY MISSING**
 
 #### Icon-only usability
 
 We recommend pairing icon-only Buttons with our Tooltip. While this is not required, it will increase clarity for sighted users.
 
-<Canvas>
-  <Story id="mui-components-button--icon-only" />
-</Canvas>
+**STORY MISSING**
 
 ## Accessibility
 
 Color is not a clear affordance for all users, please use clear, concise copy to label Buttons. Good rules of thumb: use three or less words to describe your action and start your label with a verb (e.g. "Access report" vs "Report PDF").
 
-## Props
-
-<ArgsTable />
-
-<ThemeTable componentThemeReducer={theme} />
-
 ## References
 
 ### Further reading
 
-- <a href="https://mui.com/material-ui/api/button/">Material UI Button API</a>
+- <a href="https://mui.com/material-ui/api/button/">Button API</a> - Material UI
 - <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button">
     Button
   </a> - MDN
