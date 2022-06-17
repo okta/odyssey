@@ -18,7 +18,7 @@ import {
   createTheme,
 } from "@mui/material/styles";
 import { ThemeProvider } from "@storybook/theming";
-import { MuiThemeDecorator } from "../../../.storybook/components/MuiThemeDecorator";
+import { MuiThemeDecorator } from "../../../.storybook/components";
 
 import PasswordInputMdx from "./PasswordInput.mdx";
 

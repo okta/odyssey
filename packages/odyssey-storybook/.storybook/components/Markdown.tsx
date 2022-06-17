@@ -14,6 +14,8 @@ const overrides = Object.entries(components).reduce(
   Object.create(null)
 );
 
-export const Markdown = ({ content }) => (
-  <MarkdownToJSX options={{ overrides }} children={content} />
-);
+export const Markdown = ({
+  content,
+}: {
+  content: string & React.ReactNode;
+}) => <MarkdownToJSX options={{ overrides }} children={content} />;
