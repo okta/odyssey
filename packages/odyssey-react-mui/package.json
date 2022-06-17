@@ -18,6 +18,9 @@
     "url": "https://github.com/okta/odyssey",
     "directory": "packages/odyssey-react-mui"
   },
+  "dependencies": {
+    "@okta/odyssey-design-tokens": "^0.14.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.15.0",
