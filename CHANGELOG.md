@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.14.1](https://github.com/odyssey-okta/odyssey/compare/v0.14.0...v0.14.1) (2022-06-21)
+
+### Features
+
+- **odyssey-react-mui:** add component themes, update palette + type ([c4fd294](https://github.com/odyssey-okta/odyssey/commit/c4fd29488ba333236ce2ea478b2b407337ea08cc))
+
 ## [0.14.0](https://github.com/okta/odyssey/compare/v0.13.0...v0.14.0) (2022-05-26)
 
 ### ⚠ BREAKING CHANGES
