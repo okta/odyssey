@@ -11,16 +11,17 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
 export const spacing: ThemeOptions["spacing"] = [
   0,
-  "0.28571429rem",
-  "0.57142857rem",
-  "0.85714286rem",
-  "1.14285714rem",
-  "1.71428571rem",
-  "2.28571429rem",
-  "2.85714286rem",
-  "3.42857143rem",
-  "4rem",
+  Tokens.SpaceScale0,
+  Tokens.SpaceScale1,
+  Tokens.SpaceScale2,
+  Tokens.SpaceScale3,
+  Tokens.SpaceScale4,
+  Tokens.SpaceScale5,
+  Tokens.SpaceScale6,
+  Tokens.SpaceScale7,
+  Tokens.SpaceScale8,
 ];
