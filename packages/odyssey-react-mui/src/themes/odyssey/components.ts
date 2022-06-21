@@ -141,4 +141,181 @@ export const components: ThemeOptions["components"] = {
       },
     ],
   },
+  MuiButtonBase: {
+    defaultProps: {
+      disableRipple: true,
+    },
+  },
+  MuiButton: {
+    defaultProps: {
+      disableElevation: true,
+    },
+    variants: [
+      {
+        props: { variant: "primary" },
+        style: {
+          fontWeight: 600,
+          color: "#ffffff",
+          borderColor: "transparent",
+          backgroundColor: "#1662dd",
+
+          "&:hover, &:focus-visible": {
+            backgroundColor: "#00297a",
+          },
+
+          "&:active": {
+            backgroundColor: "#1662dd",
+          },
+
+          "&:disabled": {
+            color: "#ffffff",
+            backgroundColor: "#a7b5ec",
+          },
+        },
+      },
+      {
+        props: { variant: "secondary" },
+        style: {
+          backgroundColor: "#f5f5f6",
+          borderColor: "#d7d7dc",
+          color: "#1d1d21",
+          "&:hover": {
+            background: "#f2f5ff",
+            borderColor: "#a7b5ec",
+            color: "#1662dd",
+          },
+
+          "&:focus-visible": {
+            backgroundColor: "#1662dd",
+            color: "#1662dd",
+          },
+
+          "&:active": {
+            borderColor: "#1662dd",
+          },
+
+          "&:disabled": {
+            borderColor: "#ebebed",
+            backgroundColor: "#ebebed",
+            color: "#8c8c96",
+          },
+        },
+      },
+      {
+        props: { variant: "danger" },
+        style: {
+          backgroundColor: "#da372c",
+          color: "#ffffff",
+          "&:hover": {
+            borderColor: "transparent",
+            backgroundColor: "#640019",
+          },
+
+          "&:focus-visible": {
+            outlineColor: "#f88c90",
+            backgroundColor: "#640019",
+          },
+
+          "&:active": {
+            borderColor: "transparent",
+            backgroundColor: "#da372c",
+          },
+
+          "&:disabled": {
+            color: "#ffffff",
+            borderColor: "#f88c90",
+            backgroundColor: "#f88c90",
+          },
+        },
+      },
+      {
+        props: { variant: "floating" },
+        style: {
+          backgroundColor: "#ffffff",
+          color: "#1d1d21",
+          borderColor: "transparent",
+
+          "&:hover, &:focus-visible": {
+            backgroundColor: "rgba(29, 29, 33, 0.1)",
+            borderColor: "transparent",
+          },
+          "&:active": {
+            backgroundColor: "rgba(29, 29, 33, 0.2)",
+            borderColor: "transparent",
+          },
+          "&:disabled": {
+            backgroundColor: "rgba(235, 235, 237, 0.6)",
+            color: "#6e6e78",
+            borderColor: "transparent",
+          },
+        },
+      },
+      {
+        props: { size: "s" },
+        style: {
+          paddingBlock: "calc(0.57142857rem - 1px)",
+          paddingInline: "calc(0.85714286rem - - 1px)",
+          fontSize: "1rem",
+        },
+      },
+      {
+        props: { size: "l" },
+        style: {
+          paddingBlock: "calc(1.14285714rem - 1px)",
+          paddingInline: "calc(1.14285714rem - 1px)",
+        },
+      },
+      {
+        props: { fullWidth: true },
+        style: {
+          display: "block",
+          width: "100%",
+          marginBlock: "0",
+          marginInline: "0",
+
+          "&:not(:last-child)": {
+            marginBlockEnd: "1.14285714rem",
+          },
+        },
+      },
+    ],
+    styleOverrides: {
+      root: ({ ownerState }) => ({
+        ...ownerState,
+        fontWeight: 600,
+        paddingBlock: "0.85714286rem",
+        paddingInline: "0.85714286rem",
+        display: "inline-block",
+        position: "relative",
+        marginBlock: "0",
+        marginInline: "0",
+        transitionProperty:
+          "color, background-color, border-color, outline-offset, outline-color",
+        transitionDuration: "100ms",
+        transitionTimingFunction: "linear",
+        borderWidth: "1px",
+        borderStyle: "solid",
+        outlineColor: "transparent",
+        outlineOffset: "0",
+        fontSize: "1rem",
+        lineHeight: "1.14285714",
+        whiteSpace: "nowrap",
+
+        "& + &": {
+          marginInlineStart: "0.57142857rem",
+        },
+
+        "&:focus-visible": {
+          outlineOffset: "2px",
+          outlineStyle: "solid",
+          outlineWidth: "2px",
+        },
+
+        "&:disabled": {
+          cursor: "not-allowed",
+          pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from 'none'
+        },
+      }),
+    },
+  },
 };
