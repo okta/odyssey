@@ -11,7 +11,8 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
 export const shape: ThemeOptions["shape"] = {
-  borderRadius: 4,
+  borderRadius: Tokens.BorderRadiusBase,
 };
