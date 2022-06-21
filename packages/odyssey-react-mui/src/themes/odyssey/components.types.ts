@@ -10,27 +10,41 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { CSSProperties } from "react";
-
-declare module "@mui/material/styles" {
-  interface TypographyVariants {
-    body: CSSProperties;
-  }
-  interface TypographyVariantsOptions {
-    body?: CSSProperties;
-  }
-}
-
-declare module "@mui/material/Typography" {
-  interface TypographyPropsVariantOverrides {
+declare module "@mui/material/Link" {
+  interface LinkPropsVariantOverrides {
+    default: true;
+    monochrome: true;
     body1: false;
     body2: false;
-    body: true;
     button: false;
+    caption: false;
+    h1: false;
+    h2: false;
+    h3: false;
+    h4: false;
+    h5: false;
+    h6: false;
+    inherit: false;
     overline: false;
     subtitle1: false;
     subtitle2: false;
-    default: true; // used by Link
-    monochrome: true; // used by Link
+  }
+
+  interface LinkPropsUnderlineOverrides {
+    none: false;
+    hover: false;
+    always: false;
+  }
+
+  interface LinkPropsColorOverrides {
+    inherit: false;
+    primary: false;
+    secondary: false;
+    error: false;
+    info: false;
+    warning: false;
+    success: false;
   }
 }
+
+export {};
