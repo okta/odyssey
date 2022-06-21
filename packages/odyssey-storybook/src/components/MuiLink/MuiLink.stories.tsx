@@ -54,6 +54,7 @@ const Template: Story<LinkProps> = (props) => <Link {...props} />;
 export const Default = Template.bind({});
 Default.args = {
   href: "#anchor",
+  variant: "default",
   children: "Anchor link",
 };
 
@@ -67,7 +68,7 @@ Monochrome.args = {
 export const WithIcon = Template.bind({});
 WithIcon.args = {
   href: "#anchor",
-  children: "Monochrome link",
+  children: "Info link",
   icon: <InformationCircleFilledIcon />,
 };
 
