@@ -18,6 +18,7 @@ import { spacing } from "./spacing";
 import { typography } from "./typography";
 import "./typography.types";
 import { components } from "./components";
+import "./components.types";
 
 export const theme = createTheme({
   palette,

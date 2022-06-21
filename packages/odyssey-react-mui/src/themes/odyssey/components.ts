@@ -61,10 +61,84 @@ export const components: ThemeOptions["components"] = {
     },
   },
   MuiTypography: {
+    defaultProps: {
+      fontFamily:
+        "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
+    },
     styleOverrides: {
       paragraph: {
         marginBottom: "1.14285714rem",
       },
     },
+  },
+  MuiLink: {
+    styleOverrides: {
+      root: {
+        color: "#1662dd",
+        textDecoration: "none",
+
+        "&:hover": {
+          color: "#1662dd",
+          textDecoration: "underline",
+        },
+
+        "&:focus-visible": {
+          outlineColor: "#1662dd",
+          outlineOffset: "2px",
+          outlineStyle: "solid",
+          outlineWidth: "1px",
+        },
+
+        "&:visited": {
+          color: "#1662dd",
+        },
+
+        ".Link-indicator, .Link-icon": {
+          display: "inline-block",
+          height: "1em",
+          lineHeight: 1,
+        },
+
+        ".Link-indicator": {
+          marginInlineStart: "0.57142857rem",
+        },
+
+        ".Link-icon": {
+          marginInlineEnd: "0.57142857rem",
+        },
+        svg: {
+          fontSize: "1rem",
+          height: "1em",
+          position: "relative",
+          top: "-0.0625em",
+          verticalAlign: "middle",
+          width: "1em",
+        },
+      },
+    },
+    variants: [
+      {
+        props: { variant: "monochrome" },
+        style: {
+          color: "#1d1d21",
+          textDecoration: "underline",
+
+          "&:hover": {
+            color: "#6e6e78",
+          },
+
+          "&:focus-visible": {
+            outlineColor: "#1662dd",
+            outlineOffset: "2px",
+            outlineStyle: "solid",
+            outlineWidth: "1px",
+          },
+
+          "&:visited": {
+            color: "#1d1d21",
+          },
+        },
+      },
+    ],
   },
 };
