@@ -16,6 +16,7 @@ Build and design consistent, efficient, and accessible UIs for all Okta users.
 | [@okta/odyssey-babel-loader](https://github.com/okta/odyssey/blob/master/packages/odyssey-babel-loader/README.md)               | Babel webpack loader |
 | [@okta/odyssey-react-theme](https://github.com/okta/odyssey/blob/master/packages/odyssey-react-theme/README.md)                 | React theme logic    |
 | [@okta/odyssey-react](https://github.com/okta/odyssey/blob/master/packages/odyssey-react/README.md)                             | React components     |
+| [@okta/odyssey-react-mui](https://github.com/okta/odyssey/blob/master/packages/odyssey-react-mui/README.md)                     | React MUI components |
 
 ## Browser Support
 
