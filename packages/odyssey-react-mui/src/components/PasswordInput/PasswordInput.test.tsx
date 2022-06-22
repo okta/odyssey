@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { a11yCheck } from "../../../test";
 import { PasswordInput } from ".";
