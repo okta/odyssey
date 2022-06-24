@@ -13,6 +13,7 @@
     "@applitools/eyes-storybook": "^3.27.6",
     "@babel/core": "^7.15.0",
     "@mui/material": "^5.8.2",
+    "@mui/utils": "^5.8.2",
     "@okta/odyssey-babel-loader": "^0.14.1",
     "@okta/odyssey-design-tokens": "^0.14.1",
     "@okta/odyssey-lifecycle": "^0.14.1",
