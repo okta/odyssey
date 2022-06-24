@@ -5182,6 +5182,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mui/utils@npm:^5.8.2":
+  version: 5.8.4
+  resolution: "@mui/utils@npm:5.8.4"
+  dependencies:
+    "@babel/runtime": ^7.17.2
+    "@types/prop-types": ^15.7.5
+    "@types/react-is": ^16.7.1 || ^17.0.0
+    prop-types: ^15.8.1
+    react-is: ^17.0.2
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0
+  checksum: 4d36ff74ee231be7f146bde7bb1f31f717c18f9c2617b5100448d827ac6a4e745645fd035be728ac408604ba58e2b375a96b1d50711801a150b2489c0ff2caf2
+  languageName: node
+  linkType: hard
+
 "@nicolo-ribaudo/chokidar-2@npm:2.1.8-no-fsevents.2":
   version: 2.1.8-no-fsevents.2
   resolution: "@nicolo-ribaudo/chokidar-2@npm:2.1.8-no-fsevents.2"
@@ -5742,6 +5757,7 @@ __metadata:
     "@emotion/react": ^11
     "@mui/icons-material": ^5
     "@mui/material": ^5
+    "@mui/utils": ^5
     react: ^17
     react-dom: ^17
   languageName: unknown
@@ -5828,6 +5844,7 @@ __metadata:
     "@applitools/eyes-storybook": ^3.27.6
     "@babel/core": ^7.15.0
     "@mui/material": ^5.8.2
+    "@mui/utils": ^5.8.2
     "@okta/odyssey-babel-loader": ^0.14.1
     "@okta/odyssey-design-tokens": ^0.14.1
     "@okta/odyssey-lifecycle": ^0.14.1
