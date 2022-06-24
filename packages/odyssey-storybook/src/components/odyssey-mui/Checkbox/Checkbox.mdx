@@ -1,0 +1,79 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+
+<Meta anchor />
+
+# Checkbox
+
+Checkboxes appear as a square shaped UI accompanied by a caption. Checkboxes can be found in tables, forms, or in and around text inputs.
+
+## Behavior
+
+Users can click a Checkbox to make a choice and click it again to deselect an option. They allow users to select one or more options of something.
+
+Checkboxes may appear individually or as a group.
+
+<Canvas>
+  <Story id="mui-components-checkbox--single" />
+</Canvas>
+
+<Canvas>
+  <Story id="mui-components-checkbox--group" />
+</Canvas>
+
+### Required Checkboxes
+
+Unlike other inputs, Odyssey assumes Checkboxes are optional by default.
+
+Individual checkboxes can be set to required. This is useful when a user confirms they have read the terms of service.
+
+## States
+
+Checkboxes support several states: enabled, hover, focus, disabled, invalid, required, and indeterminate.
+
+### Enabled
+
+Checkboxes in their "unchecked" state are considered enabled. They are ready for user interaction.
+
+<Canvas>
+  <Story id="mui-components-checkbox--group" />
+</Canvas>
+
+### Checked
+
+Checked Checkboxes, sometimes referred to as "ticked", display a check to indicate the they are selected.
+
+<Canvas>
+  <Story id="mui-components-checkbox--checked" />
+</Canvas>
+
+### Disabled
+
+Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
+
+Checkboxes may be disabled individually or as a group. The values of disabled inputs will not be submitted.
+
+<Canvas>
+  <Story id="mui-components-checkbox--disabled" />
+</Canvas>
+
+### Invalid
+
+Checkboxes present as invalid when a required input is left unchecked or an incompatible choice has been made.
+
+When indicating a validation error, please use FormHelperText set to `error` to indicate the nature of the problem. Color alone is not an accessible way to signify that something has gone wrong.
+
+Unlike Radio Buttons, Checkboxes validate individually, not as a group.
+
+<Canvas>
+  <Story id="mui-components-checkbox--error" />
+</Canvas>
+
+### Indeterminate
+
+In the case of nested checkboxes, an indeterminate state may be required.
+
+Note that this state is visual-only and will be submitted as either "checked" or "unchecked" depending on the internal state.
+
+<Canvas>
+  <Story id="mui-components-checkbox--indeterminate" />
+</Canvas>

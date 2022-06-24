@@ -1,0 +1,49 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+
+<Meta anchor />
+
+# Radio
+
+Radios appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
+
+## Behavior
+
+Radio Buttons allow users to select one option from a set. Users can click a Radio to make a choice; selecting another will deselect the last.
+
+<Canvas>
+  <Story id="mui-components-radio--default" />
+</Canvas>
+
+## States
+
+The most prominent Radio states are `enabled`, `disabled`, and `invalid`.
+
+### Enabled
+
+Radio Buttons in their "unchecked" state are considered enabled. They are ready for user interaction.
+
+<Canvas>
+  <Story id="mui-components-radio--default" />
+</Canvas>
+
+### Disabled
+
+Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
+
+Radios may be disabled as a group or individually.
+
+<Canvas>
+  <Story id="mui-components-radio--disabled" />
+</Canvas>
+
+### Invalid
+
+Radios are invalid when a required input is left unchecked or an incompatible choice has been made.
+
+When indicating a validation error, please use FormHelperText set to `error` to indicate the nature of the problem. Color alone is not an accessible way to signify that something has gone wrong.
+
+Unlike Checkboxes, Radios validate as a group, not individually.
+
+<Canvas>
+  <Story id="mui-components-radio--invalid" />
+</Canvas>

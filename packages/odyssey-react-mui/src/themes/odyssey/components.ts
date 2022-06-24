@@ -11,141 +11,9 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
+//import radioClasses from "@mui/material";
 
 export const components: ThemeOptions["components"] = {
-  MuiCssBaseline: {
-    styleOverrides: {
-      boxSizing: "border-box",
-    },
-  },
-  MuiCircularProgress: {
-    defaultProps: {
-      size: "1.14285714rem",
-      thickness: 8,
-      color: "primary",
-      disableShrink: false,
-      variant: "indeterminate",
-    },
-    styleOverrides: {
-      root: ({ ownerState }) => ({
-        ...(ownerState.color !== "inherit" && {
-          color: "#00297a",
-        }),
-      }),
-      circle: ({ ownerState }) => ({
-        ...(ownerState.variant === "indeterminate" && {
-          strokeDasharray: "160%, 360%",
-        }),
-      }),
-    },
-  },
-  MuiFormLabel: {
-    styleOverrides: {
-      root: {
-        color: "#1d1d21",
-        lineHeight: "1.42857143",
-        fontSize: "1rem",
-        fontWeight: 600,
-      },
-    },
-  },
-  MuiInputBase: {
-    styleOverrides: {
-      root: {
-        lineHeight: "1.14285714",
-      },
-      input: {
-        boxSizing: "border-box",
-        height: "auto",
-      },
-    },
-  },
-  MuiTypography: {
-    defaultProps: {
-      fontFamily:
-        "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
-    },
-    styleOverrides: {
-      paragraph: {
-        marginBottom: "1.14285714rem",
-      },
-    },
-  },
-  MuiLink: {
-    styleOverrides: {
-      root: {
-        color: "#1662dd",
-        textDecoration: "none",
-
-        "&:hover": {
-          color: "#1662dd",
-          textDecoration: "underline",
-        },
-
-        "&:focus-visible": {
-          outlineColor: "#1662dd",
-          outlineOffset: "2px",
-          outlineStyle: "solid",
-          outlineWidth: "1px",
-        },
-
-        "&:visited": {
-          color: "#1662dd",
-        },
-
-        ".Link-indicator, .Link-icon": {
-          display: "inline-block",
-          height: "1em",
-          lineHeight: 1,
-        },
-
-        ".Link-indicator": {
-          marginInlineStart: "0.57142857rem",
-        },
-
-        ".Link-icon": {
-          marginInlineEnd: "0.57142857rem",
-        },
-        svg: {
-          fontSize: "1rem",
-          height: "1em",
-          position: "relative",
-          top: "-0.0625em",
-          verticalAlign: "middle",
-          width: "1em",
-        },
-      },
-    },
-    variants: [
-      {
-        props: { variant: "monochrome" },
-        style: {
-          color: "#1d1d21",
-          textDecoration: "underline",
-
-          "&:hover": {
-            color: "#6e6e78",
-          },
-
-          "&:focus-visible": {
-            outlineColor: "#1662dd",
-            outlineOffset: "2px",
-            outlineStyle: "solid",
-            outlineWidth: "1px",
-          },
-
-          "&:visited": {
-            color: "#1d1d21",
-          },
-        },
-      },
-    ],
-  },
-  MuiButtonBase: {
-    defaultProps: {
-      disableRipple: true,
-    },
-  },
   MuiButton: {
     defaultProps: {
       disableElevation: true,
@@ -316,6 +184,263 @@ export const components: ThemeOptions["components"] = {
           pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from 'none'
         },
       }),
+    },
+  },
+  MuiButtonBase: {
+    defaultProps: {
+      disableRipple: true,
+    },
+  },
+  MuiCssBaseline: {
+    styleOverrides: {
+      boxSizing: "border-box",
+      fontFeatureSettings: "'lnum','pnum'",
+      fontVariant: "normal",
+    },
+  },
+  MuiCheckbox: {
+    defaultProps: {
+      size: "small",
+    },
+    styleOverrides: {
+      root: {
+        borderRadius: "4px",
+        "&:hover": {
+          backgroundColor: "transparent",
+        },
+        padding: 0,
+        ".Mui-error > &": {
+          color: "#da372c",
+          "&:hover": {
+            color: "#640019",
+          },
+        },
+        ".Mui-error > &.Mui-checked": {
+          "&:hover": {
+            color: "#640019",
+          },
+        },
+        "&.Mui-focusVisible": {
+          outlineColor: "#1662dd",
+          outlineOffset: 0,
+          outlineStyle: "solid",
+          outlineWidth: "2px",
+        },
+      },
+    },
+  },
+  MuiCircularProgress: {
+    defaultProps: {
+      size: "1.14285714rem",
+      thickness: 8,
+      color: "primary",
+      disableShrink: false,
+      variant: "indeterminate",
+    },
+    styleOverrides: {
+      root: ({ ownerState }) => ({
+        ...(ownerState.color !== "inherit" && {
+          color: "#00297a",
+        }),
+      }),
+      circle: ({ ownerState }) => ({
+        ...(ownerState.variant === "indeterminate" && {
+          strokeDasharray: "160%, 360%",
+        }),
+      }),
+    },
+  },
+  MuiFormControlLabel: {
+    styleOverrides: {
+      root: ({ ownerState }) => ({
+        gap: "0.57142857rem",
+        marginLeft: 0,
+        marginRight: 0, // used for row presentation of radio/checkbox
+        ...(ownerState.labelPlacement === "start" && {
+          marginLeft: 0, // used for row presentation of radio/checkbox
+          marginRight: 0,
+        }),
+        ...(ownerState.labelPlacement === "top" && {
+          marginLeft: 0,
+        }),
+        ...(ownerState.labelPlacement === "bottom" && {
+          marginLeft: 0,
+        }),
+        "&:not(:last-child)": {
+          marginBottom: "0.57142857rem",
+        },
+        "&.Mui-disabled": {
+          pointerEvents: "none",
+        },
+        //[`&:hover ${radioClasses.root}:not(${radioClasses.checked})`]: {
+        //color: "#1d1d21",
+        //},
+        "&:hover .MuiRadio-root, &:hover .MuiCheckbox-root": {
+          color: "#1d1d21",
+        },
+        "&:hover .MuiRadio-root.Mui-checked, &:hover .MuiCheckbox-root.Mui-checked":
+          {
+            color: "#00297a",
+          },
+        "&.Mui-error:hover .MuiRadio-root, &.Mui-error:hover .MuiCheckbox-root":
+          {
+            color: "#640019",
+          },
+        "&.Mui-error:hover .MuiRadio-root.Mui-checked, &.Mui-error:hover .MuiCheckbox-root.Mui-checked":
+          {
+            color: "#640019",
+          },
+      }),
+    },
+  },
+  MuiFormHelperText: {
+    defaultProps: {
+      variant: "standard",
+    },
+    styleOverrides: {
+      root: {
+        lineHeight: "1.33333333",
+        marginTop: "0.57142857rem",
+        ".MuiFormLabel-root + &": {
+          marginTop: "-0.28571429rem",
+          color: "#6e6e78",
+        },
+        marginBottom: "0.57142857rem",
+        "&:last-child": {
+          marginBottom: 0,
+        },
+      },
+    },
+  },
+  MuiFormLabel: {
+    styleOverrides: {
+      root: {
+        color: "#1d1d21",
+        lineHeight: "1.14285714",
+        fontSize: "1rem",
+        fontWeight: 600,
+        marginBottom: "0.57142857rem",
+        "&.Mui-focused, &.Mui-error, &.Mui-disabled": {
+          color: "#1d1d21",
+        },
+      },
+    },
+  },
+  MuiInputBase: {
+    styleOverrides: {
+      root: {
+        lineHeight: "1.14285714",
+      },
+      input: {
+        boxSizing: "border-box",
+        height: "auto",
+      },
+    },
+  },
+  MuiLink: {
+    styleOverrides: {
+      root: {
+        color: "#1662dd",
+        textDecoration: "none",
+
+        "&:hover": {
+          color: "#1662dd",
+          textDecoration: "underline",
+        },
+
+        "&:focus-visible": {
+          outlineColor: "#1662dd",
+          outlineOffset: "2px",
+          outlineStyle: "solid",
+          outlineWidth: "1px",
+        },
+
+        "&:visited": {
+          color: "#1662dd",
+        },
+
+        ".Link-indicator, .Link-icon": {
+          display: "inline-block",
+          height: "1em",
+          lineHeight: 1,
+        },
+
+        ".Link-indicator": {
+          marginInlineStart: "0.57142857rem",
+        },
+
+        ".Link-icon": {
+          marginInlineEnd: "0.57142857rem",
+        },
+        svg: {
+          fontSize: "1rem",
+          height: "1em",
+          position: "relative",
+          top: "-0.0625em",
+          verticalAlign: "middle",
+          width: "1em",
+        },
+      },
+    },
+    variants: [
+      {
+        props: { variant: "monochrome" },
+        style: {
+          color: "#1d1d21",
+          textDecoration: "underline",
+
+          "&:hover": {
+            color: "#6e6e78",
+          },
+
+          "&:focus-visible": {
+            outlineColor: "#1662dd",
+            outlineOffset: "2px",
+            outlineStyle: "solid",
+            outlineWidth: "1px",
+          },
+
+          "&:visited": {
+            color: "#1d1d21",
+          },
+        },
+      },
+    ],
+  },
+  MuiRadio: {
+    defaultProps: {
+      size: "small",
+    },
+    styleOverrides: {
+      root: {
+        "&:hover": {
+          backgroundColor: "transparent",
+        },
+        padding: 0,
+        ".Mui-error > &": {
+          color: "#da372c",
+          "&:hover": {
+            color: "#640019",
+          },
+        },
+        "&.Mui-focusVisible": {
+          outlineColor: "#1662dd",
+          outlineOffset: 0,
+          outlineStyle: "solid",
+          outlineWidth: "2px",
+        },
+      },
+    },
+  },
+  MuiTypography: {
+    defaultProps: {
+      fontFamily:
+        "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
+    },
+    styleOverrides: {
+      paragraph: {
+        marginBottom: "1.14285714rem",
+      },
     },
   },
 };
