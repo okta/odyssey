@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
 import type { ReactNode } from "react";
 import type { Theme, ThemeReducer } from "@okta/odyssey-react-theme";
 import { tokens } from "@okta/odyssey-react-theme/dist/ThemeProvider/context";

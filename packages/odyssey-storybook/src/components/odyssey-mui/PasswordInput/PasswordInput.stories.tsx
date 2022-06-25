@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import type { Story } from "@storybook/react";
 import { PasswordInput, PasswordInputProps } from "@okta/odyssey-react-mui";
 import {
