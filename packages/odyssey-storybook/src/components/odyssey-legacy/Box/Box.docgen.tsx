@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import type { BoxProps } from "../../../../../odyssey-react/src";
 
 export const BoxDocGen = forwardRef<HTMLDivElement, BoxProps>(() => <></>);
