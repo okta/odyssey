@@ -58,8 +58,7 @@ plugins:
   - removeAttrs: false
   - removeAttributesBySelector: false
   - removeElementsByAttr: false
-  - addClassesToSVGElement:
-      classNames: ["ods-icon"]
+  - addClassesToSVGElement: false
   - removeStyleElement: true
   - removeScriptElement: true
   - addAttributesToSVGElement: false
