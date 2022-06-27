@@ -11,6 +11,11 @@
  */
 
 const generate = require("@babel/generator").default;
+const {
+  jsxFragment,
+  jsxOpeningFragment,
+  jsxClosingFragment,
+} = require("@babel/types");
 const headerComment = require("./header-comment");
 
 function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
@@ -23,20 +28,21 @@ function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
   const compName = componentName.name.substring(3) + "Icon";
   const compProps = compName + "Props";
 
-  const attrs = jsx.openingElement.attributes;
-  const classNameIndex = attrs.findIndex(
-    (att) => att.name.name === "className"
+  const fragmentJsx = jsxFragment(
+    jsxOpeningFragment(),
+    jsxClosingFragment(),
+    jsx.children
   );
-  jsx.openingElement.attributes = [
-    ...attrs.slice(0, classNameIndex),
-    ...attrs.slice(classNameIndex + 1),
-  ];
+  const svgChildren = generate(fragmentJsx).code;
 
   const icon = `<SvgIcon
+  viewBox="0 0 16 16"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
   ref={ref}
-  {...omitProps}
+  {...props}
 >
-  ${generate(jsx).code}
+  ${svgChildren}
 </SvgIcon>`;
 
   const newLine = `
@@ -45,8 +51,7 @@ function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
   return typeScriptTpl.ast`
 ${headerComment}
 
-import React, { forwardRef } from "react";
-import { useOmit } from '../../utils';
+import { forwardRef } from "react";
 import { SvgIcon } from './SvgIcon';
 import type { SvgIconNoChildrenProps } from './types';
 
@@ -57,7 +62,6 @@ export type ${compProps} = SvgIconNoChildrenProps
 ${newLine}
 
 export const ${compName} = forwardRef<SVGSVGElement, ${compProps}>((props, ref) => {
-  const omitProps = useOmit(props);
   return (
     ${icon}
   )
