@@ -1,4 +1,4 @@
-import React from "react";
+import type { ReactNode } from "react";
 import { default as MarkdownToJSX } from "markdown-to-jsx";
 import { components } from "@storybook/components";
 
@@ -14,8 +14,6 @@ const overrides = Object.entries(components).reduce(
   Object.create(null)
 );
 
-export const Markdown = ({
-  content,
-}: {
-  content: string & React.ReactNode;
-}) => <MarkdownToJSX options={{ overrides }} children={content} />;
+export const Markdown = ({ content }: { content: string & ReactNode }) => (
+  <MarkdownToJSX options={{ overrides }} children={content} />
+);

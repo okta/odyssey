@@ -16,9 +16,6 @@ module.exports = {
       "@okta/odyssey-babel-preset",
       {
         odyssey: false,
-        react: {
-          runtime: "classic",
-        },
       },
     ],
   ],
@@ -74,9 +71,6 @@ module.exports = {
             odyssey: false,
             env: {
               modules: false,
-            },
-            react: {
-              runtime: "classic",
             },
           },
         ],
