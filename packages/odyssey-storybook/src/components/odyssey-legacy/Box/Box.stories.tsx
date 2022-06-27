@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { Story } from "@storybook/react";
 import { BoxDocGen } from "./Box.docgen";
 import { Box, BoxProps, Heading, Text } from "../../../../../odyssey-react/src";

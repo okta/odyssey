@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef, useState, useMemo } from "react";
+import { forwardRef, useState, useMemo } from "react";
 import type { Ref, ChangeEvent, MouseEvent } from "react";
 import type { OutlinedInputProps, TooltipProps } from "@mui/material";
 import {

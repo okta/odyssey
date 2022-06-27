@@ -55,9 +55,8 @@
     "@emotion/react": "^11",
     "@mui/icons-material": "^5",
     "@mui/material": "^5",
-    "@mui/utils": "^5",
-    "react": "^17",
-    "react-dom": "^17"
+    "react": ">=17 <19",
+    "react-dom": ">=17 <19"
   },
   "scripts": {
     "lint": "eslint .",
