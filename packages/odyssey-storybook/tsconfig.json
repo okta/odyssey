@@ -1,6 +1,6 @@
 {
   "extends": "@okta/odyssey-typescript/tsconfig.react.json",
-  "references": [{ "path": "../odyssey-react/tsconfig.production.json" }],
+  "references": [{ "path": "../odyssey-react/tsconfig.composite.json" }],
   "compilerOptions": {
     "jsx": "react-jsx"
   }
