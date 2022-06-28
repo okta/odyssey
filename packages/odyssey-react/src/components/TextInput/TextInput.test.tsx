@@ -96,16 +96,33 @@ describe("TextInput", () => {
     ).toBeVisible();
   });
 
-  it.each([["disabled"], ["readonly"], ["required"]])(
-    "renders %s attribute",
-    (attr: string) => {
-      const { getByRole } = render(
-        <TextInput label={label} {...{ [attr]: true }} />
-      );
+  it("renders required attribute", () => {
+    render(<TextInput label={label} required />);
 
-      expect(getByRole(textBox)).toHaveAttribute(attr);
-    }
-  );
+    expect(screen.getByRole(textBox)).toHaveAttribute("required");
+  });
+
+  it("renders disabled attribute with correct style", () => {
+    const handle = jest.fn();
+
+    render(<TextInput onChange={handle} label={label} disabled />);
+
+    const textBoxElement = screen.getByRole(textBox);
+    expect(textBoxElement).toHaveAttribute("disabled");
+    expect(textBoxElement.parentElement).toBeInTheDocument();
+    expect(textBoxElement.parentElement?.className).toContain("disabled");
+  });
+
+  it("renders readonly attribute with correct style", () => {
+    const handle = jest.fn();
+
+    render(<TextInput onChange={handle} label={label} readonly />);
+
+    const textBoxElement = screen.getByRole(textBox);
+    expect(textBoxElement).toHaveAttribute("readonly");
+    expect(textBoxElement.parentElement).toBeInTheDocument();
+    expect(textBoxElement.parentElement?.className).toContain("readonly");
+  });
 
   it.each<[TextInputProps["type"]]>([
     [undefined],
@@ -113,8 +130,6 @@ describe("TextInput", () => {
     ["email"],
     ["url"],
     ["tel"],
-    ["search"],
-    ["password"],
   ])("renders %s input type", (type) => {
     render(<TextInput label={label} type={type} required />);
 
@@ -167,21 +182,21 @@ describe("TextInput", () => {
   });
 
   it("renders the prefix", () => {
-    render(<TextInput label={label} prefix="test prefix" />);
+    render(<TextInput label={label} PrefixText="test prefix" />);
     const prefixElement = screen.getByText("test prefix");
     expect(prefixElement).toBeInTheDocument();
     expect(prefixElement.className).toContain("prefix");
   });
 
   it("renders the suffix", () => {
-    render(<TextInput label={label} suffix="test suffix" />);
+    render(<TextInput label={label} SuffixText="test suffix" />);
     const suffixElement = screen.getByText("test suffix");
     expect(suffixElement).toBeInTheDocument();
     expect(suffixElement.className).toContain("suffix");
   });
 
   it("gives the input focus when prefix is clicked", () => {
-    render(<TextInput label={label} prefix="test prefix" />);
+    render(<TextInput label={label} PrefixText="test prefix" />);
     const prefixElement = screen.getByText("test prefix");
     prefixElement.click();
     const inputElement = screen.getByRole(textBox);
@@ -189,7 +204,7 @@ describe("TextInput", () => {
   });
 
   it("gives the  input focus when suffix is clicked", () => {
-    render(<TextInput label={label} suffix="test suffix" />);
+    render(<TextInput label={label} SuffixText="test suffix" />);
     const prefixElement = screen.getByText("test suffix");
     prefixElement.click();
     const inputElement = screen.getByRole(textBox);

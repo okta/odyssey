@@ -19,6 +19,7 @@ import {
   Link,
   Table,
   TextInput,
+  PasswordInput,
 } from "../../../../../odyssey-react/src";
 import InfoboxMdx from "./Infobox.mdx";
 
@@ -77,7 +78,13 @@ const FormTemplate: Story<InfoboxProps> = ({
       actions={actions}
     />
     <TextInput type="text" label="Username" disabled />
-    <TextInput type="password" label="Authorization code" disabled />
+    <PasswordInput
+      tooltipLabel={(isHidden) =>
+        isHidden ? "show password" : "hide password"
+      }
+      label="Authorization code"
+      disabled
+    />
     <Form.Actions>
       <Button variant="primary" disabled>
         Login
