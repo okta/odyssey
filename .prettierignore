@@ -1,9 +1,10 @@
 .DS_Store
-dist
+dist/
+dist-composite/
 node_modules/
 npm-debug.log
 package-lock.json
-storybook-static
+storybook-static/
 yarn-error.log
 **/coverage
 .pnp.*
