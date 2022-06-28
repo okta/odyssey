@@ -67,7 +67,7 @@
     "typecheck": "tsc",
     "build": "yarn build:clean && yarn build:types && yarn build:source",
     "build:clean": "rm -rf dist",
-    "build:types": "tsc --project tsconfig.production.json",
+    "build:types": "tsc --project tsconfig.composite.json && tsc --project tsconfig.production.json",
     "build:source": "./scripts/buildSource",
     "build-icons": "svgr $(node ./scripts/resolveIconSrcPath.cjs) --out-dir ./src/components/Icon/",
     "prepack": "yarn exec prepack"
