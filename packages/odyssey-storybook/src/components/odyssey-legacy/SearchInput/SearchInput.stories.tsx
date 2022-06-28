@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -12,25 +12,24 @@
 
 import type { Story } from "@storybook/react";
 import {
-  Button,
-  CopyIcon,
-  GlobeIcon,
-  TextInput,
-  TextInputProps,
+  SearchInput,
+  SearchInputProps,
 } from "../../../../../odyssey-react/src";
-import TextInputMdx from "./TextInput.mdx";
+
+import SearchInputMdx from "./SearchInput.mdx";
 
 export default {
-  title: `Legacy Components/TextInput`,
-  component: TextInput,
+  title: `Legacy Components/SearchInput`,
+  component: SearchInput,
   parameters: {
     docs: {
-      page: TextInputMdx,
+      page: SearchInputMdx,
     },
   },
   args: {
+    placeholder: "Search planets",
+    required: false,
     label: "Destination",
-    required: true,
     optionalLabel: "Optional",
   },
   argTypes: {
@@ -48,56 +47,25 @@ export default {
     onChange: { control: false },
     onBlur: { control: false },
     onFocus: { control: false },
-    PrefixText: { control: "text" },
-    SuffixText: { control: "text" },
   },
 };
 
-const Template: Story<TextInputProps> = (props) => <TextInput {...props} />;
+const Template: Story<SearchInputProps> = (props) => <SearchInput {...props} />;
 
-export const Text = Template.bind({});
-Text.args = {};
+export const Default = Template.bind({});
+Default.args = {};
 
-export const Optional = Template.bind({});
-Optional.args = {
-  required: false,
-  optionalLabel: "Optional",
+export const Required = Template.bind({});
+Required.args = {
+  defaultValue: "Pluto",
+  required: true,
 };
 
 export const KitchenSink = Template.bind({});
 KitchenSink.args = {
+  labelHidden: false,
   hint: "This is a hint",
   optionalLabel: "Optional",
   error: "This is an error",
   required: false,
-};
-
-export const Prefix = Template.bind({});
-Prefix.args = {
-  label: "Phone Number",
-  type: "tel",
-  PrefixText: "+1",
-};
-
-export const Suffix = Template.bind({});
-Suffix.args = {
-  label: "Time til destination",
-  type: "text",
-  SuffixText: "minutes",
-};
-
-export const PrefixIcon = Template.bind({});
-PrefixIcon.args = {
-  label: "A website",
-  type: "url",
-  required: false,
-  PrefixIcon: <GlobeIcon />,
-};
-
-export const SuffixButton = Template.bind({});
-SuffixButton.args = {
-  label: "Copy",
-  type: "text",
-  required: false,
-  SuffixButton: <Button variant="affix" icon={<CopyIcon />} />,
 };
