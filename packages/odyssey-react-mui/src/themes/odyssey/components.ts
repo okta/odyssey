@@ -145,6 +145,17 @@ export const components: ThemeOptions["components"] = {
           },
         },
       },
+      {
+        // icon only
+        props: { children: "" },
+        style: {
+          minWidth: "auto",
+
+          ".MuiButton-startIcon": {
+            margin: "0",
+          },
+        },
+      },
     ],
     styleOverrides: {
       root: () => ({
@@ -180,6 +191,10 @@ export const components: ThemeOptions["components"] = {
         "&:disabled": {
           cursor: "not-allowed",
           pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from 'none'
+        },
+
+        ".MuiButton-startIcon > *:nth-of-type(1)": {
+          fontSize: "inherit",
         },
       }),
     },
