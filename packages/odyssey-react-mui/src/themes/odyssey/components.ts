@@ -147,8 +147,7 @@ export const components: ThemeOptions["components"] = {
       },
     ],
     styleOverrides: {
-      root: ({ ownerState }) => ({
-        ...ownerState,
+      root: () => ({
         fontWeight: 600,
         paddingBlock: "0.85714286rem",
         paddingInline: "0.85714286rem",
