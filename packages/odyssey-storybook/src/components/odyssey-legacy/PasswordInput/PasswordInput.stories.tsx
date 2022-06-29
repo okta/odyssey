@@ -58,6 +58,6 @@ Default.args = {};
 
 export const Optional = Template.bind({});
 Optional.args = {
-  defaultValue: "a really good password",
+  defaultValue: "a complex password",
   required: false,
 };
