@@ -11,48 +11,49 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
 export const palette: ThemeOptions["palette"] = {
   mode: "light",
   common: {
-    black: "#1d1d21",
-    white: "#ffffff",
+    black: Tokens.ColorNeutralDark,
+    white: Tokens.ColorPaletteNeutralWhite,
   },
   primary: {
-    light: "#a7b5ec",
-    main: "#1662dd",
-    dark: "#00297a",
-    contrastText: "#ffffff",
+    light: Tokens.ColorPrimaryLight,
+    main: Tokens.ColorPrimaryBase,
+    dark: Tokens.ColorPrimaryDark,
+    contrastText: Tokens.ColorTextBodyInverse,
   },
   secondary: {
     light: "#80C7CA",
-    main: "#2D8C9E",
+    main: Tokens.ColorPaletteTurquoise500,
     dark: "#004650",
-    contrastText: "#ffffff",
+    contrastText: Tokens.ColorTextBodyInverse,
   },
   error: {
-    light: "#f88c90",
-    main: "#da372c",
-    dark: "#640019",
-    contrastText: "#ffffff",
+    light: Tokens.ColorBackgroundDangerBase,
+    main: Tokens.ColorDangerBase,
+    dark: Tokens.ColorDangerDark,
+    contrastText: Tokens.ColorTextBodyInverse,
   },
   warning: {
-    light: "#f9dc77",
-    main: "#ffc61c",
-    dark: "#663800",
-    contrastText: "#1d1d21",
+    light: Tokens.ColorCautionLight,
+    main: Tokens.ColorCautionBase,
+    dark: Tokens.ColorCautionDark,
+    contrastText: Tokens.ColorTextBody,
   },
   info: {
-    light: "#a7b5ec",
-    main: "#1662dd",
-    dark: "#00297a",
-    contrastText: "#ffffff",
+    light: Tokens.ColorPrimaryLight,
+    main: Tokens.ColorPrimaryBase,
+    dark: Tokens.ColorPrimaryDark,
+    contrastText: Tokens.ColorTextBodyInverse,
   },
   success: {
     light: "#84d2b1",
     main: "#00b478",
     dark: "#00503c",
-    contrastText: "#ffffff",
+    contrastText: Tokens.ColorTextBodyInverse,
   },
   grey: {
     50: "#f5f5f6",
@@ -72,16 +73,14 @@ export const palette: ThemeOptions["palette"] = {
     A700: "#585862",
   },
   text: {
-    primary: "#1d1d21",
-    secondary: "#6e6e78",
-    // We do not currently have a unique disabled color.
-    disabled: "#6e6e78",
+    primary: Tokens.ColorNeutralDark,
+    secondary: Tokens.ColorNeutralBase,
+    disabled: Tokens.ColorNeutralBase, // We do not currently have a unique disabled color.
   },
-  // Currently mapping this to ColorBorderDisplay.
-  divider: "#d7d7dc",
+  divider: Tokens.ColorBorderDisplay,
   background: {
-    paper: "#ffffff",
-    default: "#ffffff",
+    paper: Tokens.ColorBackgroundBase,
+    default: Tokens.ColorBackgroundBase,
   },
   action: {
     // We have no equivalents here. It's likely we will update these as their uses are discovered.
