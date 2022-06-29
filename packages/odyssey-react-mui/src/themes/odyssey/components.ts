@@ -74,8 +74,9 @@ export const components: ThemeOptions["components"] = {
         style: {
           backgroundColor: "#da372c",
           color: "#ffffff",
+          borderColor: "transparent",
+
           "&:hover": {
-            borderColor: "transparent",
             backgroundColor: "#640019",
           },
 
@@ -85,13 +86,11 @@ export const components: ThemeOptions["components"] = {
           },
 
           "&:active": {
-            borderColor: "transparent",
             backgroundColor: "#da372c",
           },
 
           "&:disabled": {
             color: "#ffffff",
-            borderColor: "#f88c90",
             backgroundColor: "#f88c90",
           },
         },
