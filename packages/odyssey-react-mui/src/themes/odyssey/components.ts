@@ -14,6 +14,55 @@ import type { ThemeOptions } from "@mui/material";
 //import radioClasses from "@mui/material";
 
 export const components: ThemeOptions["components"] = {
+  MuiAlert: {
+    styleOverrides: {
+      root: ({ ownerState, theme }) => ({
+        padding: theme.spacing(4),
+        color: theme.palette.text.primary,
+        ...(ownerState.severity && {
+          backgroundColor: theme.palette[ownerState.severity].lighter,
+          borderColor: theme.palette[ownerState.severity].light,
+        }),
+        ...(ownerState.variant === "infobox" && {
+          borderStyle: "solid",
+          borderWidth: 1,
+          "&:not(:last-child)": {
+            marginBottom: theme.spacing(4),
+          },
+        }),
+        ...(ownerState.variant === "banner" && {
+          borderWidth: 0,
+        }),
+      }),
+      icon: ({ ownerState, theme }) => ({
+        marginRight: theme.spacing(4),
+        padding: 0,
+        fontSize: "1.429rem",
+        opacity: 1,
+        ...(ownerState.severity && {
+          color: theme.palette[ownerState.severity].main,
+        }),
+        ...(ownerState.severity === "warning" && {
+          color: theme.palette[ownerState.severity].dark,
+        }),
+      }),
+      message: ({ theme }) => ({
+        padding: 0,
+        lineHeight: theme.typography.body.lineHeight,
+      }),
+    },
+  },
+  MuiAlertTitle: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        marginTop: 0,
+        marginBottom: theme.spacing(1),
+        lineHeight: theme.typography.h6.lineHeight,
+        fontSize: theme.typography.h6.fontSize,
+        fontWeight: theme.typography.fontWeightBold,
+      }),
+    },
+  },
   MuiButton: {
     defaultProps: {
       disableElevation: true,
