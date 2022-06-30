@@ -123,8 +123,9 @@ export const components: ThemeOptions["components"] = {
         style: {
           backgroundColor: "#da372c",
           color: "#ffffff",
+          borderColor: "transparent",
+
           "&:hover": {
-            borderColor: "transparent",
             backgroundColor: "#640019",
           },
 
@@ -134,13 +135,11 @@ export const components: ThemeOptions["components"] = {
           },
 
           "&:active": {
-            borderColor: "transparent",
             backgroundColor: "#da372c",
           },
 
           "&:disabled": {
             color: "#ffffff",
-            borderColor: "#f88c90",
             backgroundColor: "#f88c90",
           },
         },
@@ -195,10 +194,20 @@ export const components: ThemeOptions["components"] = {
           },
         },
       },
+      {
+        // icon only
+        props: { children: "" },
+        style: {
+          minWidth: "auto",
+
+          ".MuiButton-startIcon": {
+            margin: "0",
+          },
+        },
+      },
     ],
     styleOverrides: {
-      root: ({ ownerState }) => ({
-        ...ownerState,
+      root: () => ({
         fontWeight: 600,
         paddingBlock: "0.85714286rem",
         paddingInline: "0.85714286rem",
@@ -231,6 +240,10 @@ export const components: ThemeOptions["components"] = {
         "&:disabled": {
           cursor: "not-allowed",
           pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from 'none'
+        },
+
+        ".MuiButton-startIcon > *:nth-of-type(1)": {
+          fontSize: "inherit",
         },
       }),
     },

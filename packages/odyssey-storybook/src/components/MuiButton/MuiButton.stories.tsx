@@ -15,6 +15,7 @@ import type { Story } from "@storybook/react";
 import { Button } from "@mui/material";
 import type { ButtonProps } from "@mui/material";
 import { MuiThemeDecorator } from "../../../.storybook/components/MuiThemeDecorator";
+import { SettingsIcon } from "../../../../odyssey-react/src";
 
 import ButtonMdx from "./MuiButton.mdx";
 
@@ -115,4 +116,16 @@ ButtonPrimaryDisabled.args = {
   children: "Button label",
   variant: "primary",
   disabled: true,
+};
+
+export const ButtonWithIcon = Template.bind({});
+ButtonWithIcon.args = {
+  children: "Button label",
+  startIcon: <SettingsIcon />,
+};
+
+export const IconOnly = Template.bind({});
+IconOnly.args = {
+  children: "",
+  startIcon: <SettingsIcon />,
 };
