@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.14.2](https://github.com/odyssey-okta/odyssey/compare/v0.14.1...v0.14.2) (2022-06-30)
+
+### Features
+
+- **odyssey-icons:** add eye and eye off icons ([d44a241](https://github.com/odyssey-okta/odyssey/commit/d44a241537fa84fcf7679b7e96e52655d83d846f))
+- **odyssey-react-mui:** add theme for Checkbox, Radio, Labels, Hints ([a7ed02a](https://github.com/odyssey-okta/odyssey/commit/a7ed02a79340c32920da92da4947a068ac44c2fd))
+
+### Bug Fixes
+
+- **odyssey-storybook:** fix font-family display in MUI components ([91a80c1](https://github.com/odyssey-okta/odyssey/commit/91a80c1fbc1c94875bf83fde33296f22a81dedf1))
+
 ### [0.14.1](https://github.com/okta/odyssey/compare/v0.14.0...v0.14.1) (2022-06-21)
 
 ### Features
