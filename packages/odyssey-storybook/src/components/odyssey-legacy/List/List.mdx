@@ -1,0 +1,37 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { theme } from "../../../../../odyssey-react/src/components/List/List.theme";
+import { ThemeTable } from "../../../../.storybook/components";
+
+<Meta anchor />
+
+# List
+
+List provides ordered, unordered, description, and unstyled list UI.
+
+<Canvas>
+  <Story id="legacy-components-list--default" />
+</Canvas>
+
+## Props
+
+<ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
+
+## Stories
+
+<Canvas>
+  <Story id="legacy-components-list--ordered-list" />
+</Canvas>
+
+<Canvas>
+  <Story id="legacy-components-list--description-list" />
+</Canvas>
+
+<Canvas>
+  <Story id="legacy-components-list--unstyled-list" />
+</Canvas>
+
+<Canvas>
+  <Story id="legacy-components-list--action-list" />
+</Canvas>

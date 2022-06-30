@@ -1,0 +1,33 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { theme } from "../../../../../odyssey-react/src/components/TextArea/TextArea.theme";
+import { ThemeTable } from "../../../../.storybook/components";
+
+<Meta anchor />
+
+# TextArea
+
+TextArea allows users to edit and input data.
+
+<Canvas>
+  <Story id="legacy-components-textarea--default" />
+</Canvas>
+
+## Props
+
+<ArgsTable />
+
+<ThemeTable componentThemeReducer={theme} />
+
+## Stories
+
+<Canvas>
+  <Story id="legacy-components-textarea--disabled" />
+</Canvas>
+
+<Canvas>
+  <Story id="legacy-components-textarea--optional" />
+</Canvas>
+
+<Canvas>
+  <Story id="legacy-components-textarea--resizenone" />
+</Canvas>

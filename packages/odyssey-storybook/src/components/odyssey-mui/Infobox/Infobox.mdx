@@ -1,0 +1,113 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+
+<Meta anchor />
+
+# Infobox
+
+An infobox is a type of alert that provides feedback in response to a user action or system activity.
+
+## Behavior
+
+This component may be present on load or triggered by different types of events, but they are not transient or dismissible.
+
+## Variants
+
+### Info
+
+Use Infoboxes for communicating important guidance to the user. When using the Info variant, consider if plain copy will suffice on the page itself first. Reserve this component for "can’t miss" instructions.
+
+<Canvas>
+  <Story id="mui-components-alerts-infobox--info" />
+</Canvas>
+
+### Error
+
+Use Error Infoboxes to inform users that an error has occurred. You may also inform a user when specific processes are particularly destructive.
+
+Include guidance to make sure users know what steps to take to address the error or avoid data loss.
+
+<Canvas>
+  <Story id="mui-components-alerts-infobox--error" />
+</Canvas>
+
+### Warning
+
+Use Warning Infoboxes to inform users of tasks or processes that need their attention.
+
+When using the Warning variant, ensure the user does not need more context than you can give in the space available.
+
+<Canvas>
+  <Story id="mui-components-alerts-infobox--warning" />
+</Canvas>
+
+### Success
+
+Use Success Infoboxes for reporting successful actions, processes, or states to the user.
+
+<Canvas>
+  <Story id="mui-components-alerts-infobox--success" />
+</Canvas>
+
+## Usage
+
+Infoboxes can be present when the page loads or appear dynamically. For instance, a Form may include a Warning message if the user should be aware of particular requirements up front. Alternately, the Error variant may be used on Form submission to surface an error.
+
+Avoid overusing Infobox within the same view. They are intended to draw the eye, and multiple visible Infoboxes may overwhelm users.
+
+### Actions
+
+It is ideal to direct users toward an appropriate action, especially for addressing errors. Infoboxes allow for both inline and separated actions. To preserve clarity, limit Infoboxes to one link.
+
+<Canvas>
+  <Story id="mui-components-alerts-infobox--inline-link" />
+</Canvas>
+
+Interactive content should be limited to a single Link. If it's necessary to provide the user with an action, please direct them to the appropriate flow instead of beginning a new process inline.
+
+<Canvas>
+  <Story id="mui-components-alerts-infobox--block-link" />
+</Canvas>
+
+### Placement
+
+Infoboxes will stretch to fit the width of their parent. Be mindful of this behavior, as it will help indicate the scope of their messaging. Infoboxes should be displayed above the content they apply to but not higher than their scope.
+
+For example, a Form error should be displayed above all Fieldsets, but below the Form title. In this example, the Infobox is constrained to the width of the Form.
+
+<Canvas className="sb-do">
+  <Story id="legacy-components-alerts-infobox--form-do" />
+  <span class="sb-marker sb-marker--do">
+    <CheckIcon /> Do
+  </span>
+</Canvas>
+
+**Note:** This is a legacy story for guidance only. Will be replaced when Mui components are available.
+
+Stay away from nesting Infoboxes within information-dense UI like Tables. If you need to convey something about an individual data point, consider another design solution.
+
+<Canvas className="sb-dont">
+  <Story id="legacy-components-alerts-infobox--table-dont" />
+  <span class="sb-marker sb-marker--dont">
+    <CloseIcon /> Don't
+  </span>
+</Canvas>
+
+**Note:** This is a legacy story for guidance only. Will be replaced when Mui components are available.
+
+## Content Guidelines
+
+These messages may be used for longer content than Toast or Banner, but shouldn't go beyond two paragraphs. When including an inline link or action, be sure the link text clearly indicates where it leads.
+
+Do not include images or other UIs within Infobox.
+
+### Content Areas
+
+Both Title and Content are optional, but at least one of them is required.
+
+## Accessibility
+
+When deploying Infoboxes, two `role`s may apply. Error variants should utilize the `alert` role, as their contents represent immediate risk or failure. Success and Warning variants are better suited to the `status` role, which provides a less urgent announcement on appearance. The Info variant does not require a `role`, as it represents plain content.
+
+## Props
+
+<ArgsTable />

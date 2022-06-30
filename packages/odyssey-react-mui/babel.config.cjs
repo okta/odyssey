@@ -17,7 +17,7 @@ module.exports = {
       {
         odyssey: false,
         react: {
-          runtime: "classic",
+          runtime: "automatic",
         },
       },
     ],
@@ -76,7 +76,7 @@ module.exports = {
               modules: false,
             },
             react: {
-              runtime: "classic",
+              runtime: "automatic",
             },
           },
         ],
