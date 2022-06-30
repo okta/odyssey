@@ -10,6 +10,47 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+declare module "@mui/material/Alert" {
+  interface AlertPropsVariantOverrides {
+    // Disable Mui defaults
+    filled: false;
+    outlined: false;
+    standard: false;
+    // Enable Odyssey variants
+    banner: true;
+    infobox: true;
+  }
+}
+
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {
+    floating: true;
+    primary: true;
+    secondary: true;
+    danger: true;
+    text: false;
+    contained: false;
+    outlined: false;
+  }
+  interface ButtonPropsSizeOverrides {
+    s: true;
+    m: true;
+    l: true;
+    small: false;
+    medium: false;
+    large: false;
+  }
+  interface ButtonPropsColorOverrides {
+    inherit: false;
+    primary: false;
+    secondary: false;
+    error: false;
+    info: false;
+    warning: false;
+    success: false;
+  }
+}
+
 declare module "@mui/material/Link" {
   interface LinkPropsVariantOverrides {
     default: true;
@@ -37,34 +78,6 @@ declare module "@mui/material/Link" {
   }
 
   interface LinkPropsColorOverrides {
-    inherit: false;
-    primary: false;
-    secondary: false;
-    error: false;
-    info: false;
-    warning: false;
-    success: false;
-  }
-}
-declare module "@mui/material/Button" {
-  interface ButtonPropsVariantOverrides {
-    floating: true;
-    primary: true;
-    secondary: true;
-    danger: true;
-    text: false;
-    contained: false;
-    outlined: false;
-  }
-  interface ButtonPropsSizeOverrides {
-    s: true;
-    m: true;
-    l: true;
-    small: false;
-    medium: false;
-    large: false;
-  }
-  interface ButtonPropsColorOverrides {
     inherit: false;
     primary: false;
     secondary: false;

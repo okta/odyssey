@@ -10,21 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createTheme } from "@mui/material/styles";
+declare module "@mui/material/styles" {
+  interface PaletteColor {
+    lighter?: string;
+  }
+  interface SimplePaletteColorOptions {
+    lighter?: string;
+  }
+}
 
-import { palette } from "./palette";
-import "./palette.types";
-import { shape } from "./shape";
-import { spacing } from "./spacing";
-import { typography } from "./typography";
-import "./typography.types";
-import { components } from "./components";
-import "./components.types";
-
-export const theme = createTheme({
-  palette,
-  shape,
-  spacing,
-  typography,
-  components,
-});
+export {};
