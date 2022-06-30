@@ -23,7 +23,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module",
   },
-  ignorePatterns: ["node_modules", "dist"],
+  ignorePatterns: ["node_modules", "dist", "dist-composite"],
   plugins: ["header", "import", "@okta/odyssey"],
   rules: {
     "header/header": [

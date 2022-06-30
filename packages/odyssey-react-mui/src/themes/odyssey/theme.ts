@@ -13,6 +13,7 @@
 import { createTheme } from "@mui/material/styles";
 
 import { palette } from "./palette";
+import "./palette.types";
 import { shape } from "./shape";
 import { spacing } from "./spacing";
 import { typography } from "./typography";

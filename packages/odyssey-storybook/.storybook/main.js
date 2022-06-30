@@ -67,7 +67,16 @@ function buildRules(rules) {
       loader: "@okta/odyssey-babel-loader",
       options: {
         cacheDirectory: false,
-        presets: ["@okta/odyssey-babel-preset"],
+        presets: [
+          [
+            "@okta/odyssey-babel-preset",
+            {
+              react: {
+                runtime: "classic",
+              },
+            },
+          ],
+        ],
       },
     });
 }

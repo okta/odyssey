@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import { Table, Text } from "@okta/odyssey-react";
