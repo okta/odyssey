@@ -12,11 +12,11 @@
 
 import type { Story } from "@storybook/react";
 
-import { MuiThemeDecorator } from "../../../.storybook/components/MuiThemeDecorator";
-import { InformationCircleFilledIcon } from "../../../../odyssey-react/src";
+import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
+import { InformationCircleFilledIcon } from "../../../../../odyssey-react/src";
 import { Link, LinkProps } from "@okta/odyssey-react-mui";
 
-import LinkMdx from "./MuiLink.mdx";
+import LinkMdx from "./Link.mdx";
 
 export default {
   title: `MUI Components/Link`,
