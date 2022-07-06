@@ -53,8 +53,8 @@ function buildRules(rules) {
 
       if (isScriptLoader) {
         const exclude = rule.exclude
-          ? [/odyssey-react/].concat(rule.exclude)
-          : [/odyssey-react/];
+          ? [/odyssey-react\//].concat(rule.exclude)
+          : [/odyssey-react\//];
 
         return memo.concat(Object.assign({}, rule, { exclude }));
       }

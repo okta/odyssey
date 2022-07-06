@@ -505,4 +505,16 @@ export const components: ThemeOptions["components"] = {
       },
     },
   },
+  MuiSvgIcon: {
+    styleOverrides: {
+      root: {
+        fontSize: "1rem",
+        height: "1em",
+        position: "relative",
+        top: "-0.0625em",
+        verticalAlign: "middle",
+        width: "1em",
+      },
+    },
+  },
 };
