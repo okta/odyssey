@@ -14,10 +14,10 @@ import type { Story } from "@storybook/react";
 
 import { Button } from "@mui/material";
 import type { ButtonProps } from "@mui/material";
-import { MuiThemeDecorator } from "../../../.storybook/components/MuiThemeDecorator";
-import { SettingsIcon } from "../../../../odyssey-react/src";
+import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
+import { SettingsIcon } from "../../../../../odyssey-react/src";
 
-import ButtonMdx from "./MuiButton.mdx";
+import ButtonMdx from "./Button.mdx";
 
 export default {
   title: `MUI Components/Button`,
