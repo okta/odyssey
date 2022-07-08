@@ -14,8 +14,10 @@
     "node": ">=16 <17"
   },
   "scripts": {
-    "start": "yarn workspace @okta/odyssey-storybook start",
+    "start": "npm-run-all --parallel start:mui start:storybook",
     "start:ie11": "yarn workspace @okta/odyssey-ie-11-sandbox start",
+    "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
+    "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry",
     "lint": "yarn eslint && yarn stylelint && yarn prettier-check",
@@ -38,6 +40,7 @@
     "husky": "^7.0.2",
     "lerna": "4.0.0",
     "lint-staged": "^11.1.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.4.0",
     "stylelint": "^13.13.1"
   },
