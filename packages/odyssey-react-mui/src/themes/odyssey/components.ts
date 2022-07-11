@@ -207,10 +207,9 @@ export const components: ThemeOptions["components"] = {
       },
     ],
     styleOverrides: {
-      root: () => ({
+      root: ({ theme }) => ({
         fontWeight: 600,
-        paddingBlock: "0.85714286rem",
-        paddingInline: "0.85714286rem",
+        padding: `calc(${theme.spacing(3)} - 1px) ${theme.spacing(3)}`,
         display: "inline-block",
         position: "relative",
         marginBlock: "0",
@@ -239,7 +238,7 @@ export const components: ThemeOptions["components"] = {
 
         "&:disabled": {
           cursor: "not-allowed",
-          pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from 'none'
+          pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from "none"
         },
 
         ".MuiButton-startIcon > *:nth-of-type(1)": {
@@ -308,6 +307,25 @@ export const components: ThemeOptions["components"] = {
       circle: ({ ownerState }) => ({
         ...(ownerState.variant === "indeterminate" && {
           strokeDasharray: "160%, 360%",
+        }),
+      }),
+    },
+  },
+  MuiFormControl: {
+    styleOverrides: {
+      root: ({ ownerState, theme }) => ({
+        width: "100%",
+        maxWidth: "32rem",
+        ...(ownerState.margin === "normal" && {
+          marginTop: 0,
+          marginBottom: theme.spacing(4),
+        }),
+        ...(ownerState.margin === "dense" && {
+          marginTop: 0,
+          marginBottom: theme.spacing(4),
+        }),
+        ...(ownerState.fullWidth && {
+          maxWidth: "100%",
         }),
       }),
     },
@@ -399,6 +417,29 @@ export const components: ThemeOptions["components"] = {
       },
     },
   },
+  MuiInputLabel: {
+    defaultProps: {
+      disableAnimation: true,
+      shrink: false,
+    },
+    styleOverrides: {
+      root: ({ ownerState }) => ({
+        // @ts-expect-error: Incorrect typing in MUI
+        ...(ownerState.formControl && {
+          position: "initial",
+          transform: "none",
+        }),
+        ...(ownerState.variant === "outlined" && {
+          pointerEvents: "initial",
+          transform: "none",
+          maxWidth: "100%",
+          ...(ownerState.size === "small" && {
+            transform: "none",
+          }),
+        }),
+      }),
+    },
+  },
   MuiLink: {
     styleOverrides: {
       root: {
@@ -469,6 +510,41 @@ export const components: ThemeOptions["components"] = {
       },
     ],
   },
+  MuiNativeSelect: {
+    defaultProps: {
+      variant: "outlined",
+    },
+    styleOverrides: {
+      icon: ({ theme }) => ({
+        color: theme.palette.text.primary,
+      }),
+    },
+  },
+  MuiOutlinedInput: {
+    defaultProps: {
+      notched: false,
+    },
+    styleOverrides: {
+      root: {
+        "&.Mui-disabled": {
+          pointerEvents: "none",
+        },
+      },
+      input: ({ theme }) => ({
+        padding: `calc(${theme.spacing(3)} - 1px) ${theme.spacing(3)}`,
+        border: "1px solid transparent",
+      }),
+      notchedOutline: ({ theme }) => ({
+        borderColor: theme.palette.grey[500],
+        ".MuiOutlinedInput-root:hover &": {
+          borderColor: theme.palette.primary.main,
+        },
+        ".MuiOutlinedInput-root.Mui-error:hover &": {
+          borderColor: theme.palette.error.dark,
+        },
+      }),
+    },
+  },
   MuiRadio: {
     defaultProps: {
       size: "small",
@@ -502,18 +578,6 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       paragraph: {
         marginBottom: "1.14285714rem",
-      },
-    },
-  },
-  MuiSvgIcon: {
-    styleOverrides: {
-      root: {
-        fontSize: "1rem",
-        height: "1em",
-        position: "relative",
-        top: "-0.0625em",
-        verticalAlign: "middle",
-        width: "1em",
       },
     },
   },
