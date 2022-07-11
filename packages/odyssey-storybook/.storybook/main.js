@@ -10,9 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+const path = require("path");
 const { ProvidePlugin } = require("webpack");
 
 module.exports = {
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-a11y",
+    "@pxblue/storybook-rtl-addon",
+  ],
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   typescript: {
     check: false,
@@ -30,16 +37,13 @@ module.exports = {
       },
     },
   },
-  webpackFinal(config) {
-    const rules = buildRules(config.module.rules);
-    return Object.assign({}, config, { module: { ...config.module, rules } });
-  },
-  addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-a11y",
-    "@pxblue/storybook-rtl-addon",
-  ],
+  webpackFinal: (config) => ({
+    ...config,
+    module: {
+      ...config.module,
+      rules: buildRules(config.module.rules),
+    },
+  }),
 };
 
 function buildRules(rules) {
