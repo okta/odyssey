@@ -15,6 +15,9 @@ import { createTheme } from "@mui/material/styles";
 import { palette } from "./palette";
 import "./palette.types";
 import { shape } from "./shape";
+import "./shape.types";
+import { mixins } from "./mixins";
+import "./mixins.types";
 import { spacing } from "./spacing";
 import { typography } from "./typography";
 import "./typography.types";
@@ -24,7 +27,26 @@ import "./components.types";
 export const theme = createTheme({
   palette,
   shape,
+  mixins,
   spacing,
   typography,
   components,
+  odyssey: {
+    borderWidth: "1px",
+  },
 });
+
+// This TS mod allows for `odyssey` above, but not within components.ts
+declare module "@mui/material/styles" {
+  interface Theme {
+    odyssey: {
+      borderWidth: string;
+    };
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    odyssey?: {
+      borderWidth?: string;
+    };
+  }
+}

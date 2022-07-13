@@ -22,16 +22,20 @@ export const components: ThemeOptions["components"] = {
         ...(ownerState.severity && {
           backgroundColor: theme.palette[ownerState.severity].lighter,
           borderColor: theme.palette[ownerState.severity].light,
+          // theme.odyssey is unrecognized here, but fine in theme.ts
+          borderWidth: theme.odyssey.borderWidth,
         }),
         ...(ownerState.variant === "infobox" && {
           borderStyle: "solid",
-          borderWidth: 1,
+          // theme.shape is not getting updated types from shape.types.ts
+          borderWidth: theme.shape.borderWidth,
           "&:not(:last-child)": {
             marginBottom: theme.spacing(4),
           },
         }),
         ...(ownerState.variant === "banner" && {
-          borderWidth: 0,
+          // theme.mixins is picking up new types as expected
+          borderWidth: theme.mixins.borderWidth,
         }),
       }),
       icon: ({ ownerState, theme }) => ({

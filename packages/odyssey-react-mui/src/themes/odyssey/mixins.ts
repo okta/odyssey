@@ -13,8 +13,6 @@
 import type { ThemeOptions } from "@mui/material";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
-export const shape: ThemeOptions["shape"] = {
-  borderRadius: Tokens.BorderRadiusBase,
-  // Expected: Shape should work identically to Mixins
+export const mixins: ThemeOptions["mixins"] = {
   borderWidth: Tokens.BorderWidthBase,
 };

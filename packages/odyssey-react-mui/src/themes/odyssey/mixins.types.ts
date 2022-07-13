@@ -10,11 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
+declare module "@mui/material/styles" {
+  // This mod works here, but not for Shape
+  interface Mixins {
+    borderWidth?: string;
+  }
+  interface MixinsOptions {
+    borderWidth?: string;
+  }
+}
 
-export const shape: ThemeOptions["shape"] = {
-  borderRadius: Tokens.BorderRadiusBase,
-  // Expected: Shape should work identically to Mixins
-  borderWidth: Tokens.BorderWidthBase,
-};
+export {};
