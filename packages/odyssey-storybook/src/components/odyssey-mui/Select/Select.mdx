@@ -1,0 +1,59 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+
+<Meta anchor />
+
+# Select
+
+Often referred to as a “dropdown menu” this input triggers a menu of options a user can select. Country and state Selects are common examples.
+
+## Behavior
+
+Interacting with a Select displays a list of values to choose from. Choosing a value will override any previous selection and close the Select.
+
+Odyssey also supports a Multi-Select variant that allows users to select many values.
+
+To support expected functionality and behaviors, Select relies on the Choices.js library. Odyssey provides fallback styling when Choices.js isn't available.
+
+## Variants
+
+Odyssey provides support for both single and multi-value Selects.
+
+### Single Select
+
+The default Select allows users to choose a single value from a list of options. Selecting another option will replace the first.
+
+### Multi-Select
+
+The Multi-Select variant allows users to choose more than one value from the list of options.
+
+### Native Select
+
+The browser-native `<select>` component may be used by passing `<Select>` the `native` prop.
+
+#### Single
+
+<Canvas>
+  <Story id="mui-components-select--native-default" />
+</Canvas>
+
+<Canvas>
+  <Story id="mui-components-select--native-disabled" />
+</Canvas>
+
+<Canvas>
+  <Story id="mui-components-select--native-invalid" />
+</Canvas>
+
+#### Multi
+
+## Usage
+
+Selects are most useful when users are choosing between 7-15 options. For smaller sets, Radio Buttons are more effective. For larger sets, a Text Input with autocompletion may be a better fit.
+
+Selects perform better when the options are familiar to the user. If a user may be unfamiliar with their options or need to compare them, use Radio Buttons.
+
+Select inputs should not have a default selected unless a majority of users will be choosing it.
+
+## Props
+
+<ArgsTable />
