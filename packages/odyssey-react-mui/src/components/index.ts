@@ -12,3 +12,4 @@
 
 export * from "./PasswordInput";
 export * from "./Link";
+export * from "./Icon";
