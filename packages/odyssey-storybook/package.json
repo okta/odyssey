@@ -12,8 +12,8 @@
   "devDependencies": {
     "@applitools/eyes-storybook": "^3.27.6",
     "@babel/core": "^7.15.0",
-    "@mui/material": "^5.8.2",
-    "@mui/utils": "^5.8.2",
+    "@mui/material": "^5.9.0",
+    "@mui/utils": "^5.9.0",
     "@okta/odyssey-babel-loader": "^0.14.3",
     "@okta/odyssey-design-tokens": "^0.14.3",
     "@okta/odyssey-lifecycle": "^0.14.3",
