@@ -168,31 +168,31 @@ export const components: ThemeOptions["components"] = {
       },
       {
         props: { size: "s" },
-        style: {
-          paddingBlock: "calc(0.57142857rem - 1px)",
-          paddingInline: "calc(0.85714286rem - - 1px)",
+        style: ({ theme }) => ({
+          paddingBlock: `calc(${theme.spacing(2)} - 1px)`,
+          paddingInline: `calc(${theme.spacing(3)} - 1px)`,
           fontSize: "1rem",
-        },
+        }),
       },
       {
         props: { size: "l" },
-        style: {
-          paddingBlock: "calc(1.14285714rem - 1px)",
-          paddingInline: "calc(1.14285714rem - 1px)",
-        },
+        style: ({ theme }) => ({
+          paddingBlock: `calc(${theme.spacing(4)} - 1px)`,
+          paddingInline: `calc(${theme.spacing(4)} - 1px)`,
+        }),
       },
       {
         props: { fullWidth: true },
-        style: {
+        style: ({ theme }) => ({
           display: "block",
           width: "100%",
           marginBlock: "0",
           marginInline: "0",
 
           "&:not(:last-child)": {
-            marginBlockEnd: "1.14285714rem",
+            marginBlockEnd: theme.spacing(4),
           },
-        },
+        }),
       },
       {
         // icon only
@@ -227,7 +227,7 @@ export const components: ThemeOptions["components"] = {
         whiteSpace: "nowrap",
 
         "& + &": {
-          marginInlineStart: "0.57142857rem",
+          marginInlineStart: theme.spacing(2),
         },
 
         "&:focus-visible": {
@@ -292,6 +292,7 @@ export const components: ThemeOptions["components"] = {
   },
   MuiCircularProgress: {
     defaultProps: {
+      // TODO: defaultProps cannot take a theme object; needs workaround
       size: "1.14285714rem",
       thickness: 8,
       color: "primary",
@@ -333,7 +334,7 @@ export const components: ThemeOptions["components"] = {
   MuiFormControlLabel: {
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
-        gap: "0.57142857rem",
+        gap: theme.spacing(2),
         marginLeft: 0,
         marginRight: 0, // used for row presentation of radio/checkbox
         ...(ownerState.labelPlacement === "start" && {
@@ -347,7 +348,7 @@ export const components: ThemeOptions["components"] = {
           marginLeft: 0,
         }),
         "&:not(:last-child)": {
-          marginBottom: "0.57142857rem",
+          marginBottom: theme.spacing(2),
         },
         "&.Mui-disabled": {
           pointerEvents: "none",
@@ -380,12 +381,12 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         lineHeight: "1.33333333",
-        marginTop: "0.57142857rem",
+        marginTop: theme.spacing(2),
         ".MuiFormLabel-root + &": {
-          marginTop: "-0.28571429rem",
+          marginTop: `-${theme.spacing(1)}`,
           color: theme.palette.text.secondary,
         },
-        marginBottom: "0.57142857rem",
+        marginBottom: theme.spacing(2),
         "&:last-child": {
           marginBottom: 0,
         },
@@ -399,7 +400,7 @@ export const components: ThemeOptions["components"] = {
         lineHeight: "1.14285714",
         fontSize: "1rem",
         fontWeight: 600,
-        marginBottom: "0.57142857rem",
+        marginBottom: theme.spacing(2),
         "&.Mui-focused, &.Mui-error, &.Mui-disabled": {
           color: theme.palette.text.primary,
         },
@@ -469,11 +470,11 @@ export const components: ThemeOptions["components"] = {
         },
 
         ".Link-indicator": {
-          marginInlineStart: "0.57142857rem",
+          marginInlineStart: theme.spacing(2),
         },
 
         ".Link-icon": {
-          marginInlineEnd: "0.57142857rem",
+          marginInlineEnd: theme.spacing(2),
         },
         svg: {
           fontSize: "1rem",
@@ -576,9 +577,9 @@ export const components: ThemeOptions["components"] = {
         "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
     },
     styleOverrides: {
-      paragraph: {
-        marginBottom: "1.14285714rem",
-      },
+      paragraph: ({ theme }) => ({
+        marginBottom: theme.spacing(4),
+      }),
     },
   },
 };
