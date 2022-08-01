@@ -79,9 +79,10 @@ const SingleTemplate: Story = (args) => {
           />
         }
         label="Pre-flight systems check complete"
+        aria-describedby="checkbox-error"
       />
       {args.error && (
-        <FormHelperText error>
+        <FormHelperText error id="checkbox-error">
           <span style={visuallyHidden}>Error:</span> {args.error}
         </FormHelperText>
       )}
@@ -114,8 +115,10 @@ const GroupTemplate: Story = (args) => {
       error={args.invalid}
     >
       <FormLabel component="legend">Systems check</FormLabel>
-      {args.hint && <FormHelperText>{args.hint}</FormHelperText>}
-      <FormGroup>
+      {args.hint && (
+        <FormHelperText id="checkbox-hint">{args.hint}</FormHelperText>
+      )}
+      <FormGroup aria-describedby="checkbox-hint checkbox-error">
         <FormControlLabel
           control={<Checkbox name="life-support" />}
           label="Life support"
@@ -130,7 +133,7 @@ const GroupTemplate: Story = (args) => {
         />
       </FormGroup>
       {args.error && (
-        <FormHelperText error>
+        <FormHelperText id="checkbox-error" error>
           <span style={visuallyHidden}>Error:</span> {args.error}
         </FormHelperText>
       )}

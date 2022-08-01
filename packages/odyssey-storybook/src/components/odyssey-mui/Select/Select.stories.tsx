@@ -55,12 +55,15 @@ const NativeTemplate: Story = (args) => {
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
-      {args.hint && <FormHelperText>{args.hint}</FormHelperText>}
+      {args.hint && (
+        <FormHelperText id="select-hint">{args.hint}</FormHelperText>
+      )}
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         label={args.label}
         native
+        aria-describedby="select-hint select-error"
       >
         <option value="earth">Earth</option>
         <option value="mars">Mars</option>
@@ -71,7 +74,7 @@ const NativeTemplate: Story = (args) => {
         <option value="ganymede">Ganymede</option>
       </Select>
       {args.error && (
-        <FormHelperText error>
+        <FormHelperText id="select-error" error>
           <span style={visuallyHidden}>Error:</span> {args.error}
         </FormHelperText>
       )}
