@@ -407,6 +407,22 @@ export const components: ThemeOptions["components"] = {
       }),
     },
   },
+  MuiInputAdornment: {
+    defaultProps: {
+      variant: "outlined",
+    },
+    styleOverrides: {
+      root: ({ ownerState }) => ({
+        display: "flex",
+        ...(ownerState.position === "start" && {
+          marginRight: 0,
+        }),
+        ...(ownerState.position === "end" && {
+          marginLeft: 0,
+        }),
+      }),
+    },
+  },
   MuiInputBase: {
     styleOverrides: {
       root: {
@@ -526,11 +542,17 @@ export const components: ThemeOptions["components"] = {
       notched: false,
     },
     styleOverrides: {
-      root: {
+      root: ({ ownerState, theme }) => ({
         "&.Mui-disabled": {
           pointerEvents: "none",
         },
-      },
+        ...(ownerState.startAdornment && {
+          paddingLeft: theme.spacing(3),
+        }),
+        ...(ownerState.endAdornment && {
+          paddingRight: theme.spacing(3),
+        }),
+      }),
       input: ({ theme }) => ({
         padding: `calc(${theme.spacing(3)} - 1px) ${theme.spacing(3)}`,
         border: "1px solid transparent",
