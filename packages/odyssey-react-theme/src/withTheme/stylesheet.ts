@@ -18,7 +18,7 @@ export class OStyleSheet extends Set<string> {
     const el = document.createElement("style");
     el.setAttribute("data-ods", "");
     // @ts-expect-error ts(2339)
-    el.setAttribute("nonce", window.nonce);
+    el.setAttribute("nonce", window.cspNonce);
     this.element = document.head.appendChild(el);
   }
 
