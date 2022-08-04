@@ -70,85 +70,85 @@ export const components: ThemeOptions["components"] = {
     variants: [
       {
         props: { variant: "primary" },
-        style: {
+        style: ({ theme }) => ({
           fontWeight: 600,
-          color: "#ffffff",
+          color: theme.palette.common.white,
           borderColor: "transparent",
-          backgroundColor: "#1662dd",
+          backgroundColor: theme.palette.primary.main,
 
           "&:hover, &:focus-visible": {
-            backgroundColor: "#00297a",
+            backgroundColor: theme.palette.primary.dark,
           },
 
           "&:active": {
-            backgroundColor: "#1662dd",
+            backgroundColor: theme.palette.primary.main,
           },
 
           "&:disabled": {
-            color: "#ffffff",
-            backgroundColor: "#a7b5ec",
+            color: theme.palette.common.white,
+            backgroundColor: theme.palette.primary.light,
           },
-        },
+        }),
       },
       {
         props: { variant: "secondary" },
-        style: {
-          backgroundColor: "#f5f5f6",
-          borderColor: "#d7d7dc",
-          color: "#1d1d21",
+        style: ({ theme }) => ({
+          backgroundColor: theme.palette.grey[50],
+          borderColor: theme.palette.grey[200],
+          color: theme.palette.text.primary,
           "&:hover": {
-            background: "#f2f5ff",
-            borderColor: "#a7b5ec",
-            color: "#1662dd",
+            background: theme.palette.primary.lighter,
+            borderColor: theme.palette.primary.light,
+            color: theme.palette.primary.main,
           },
 
           "&:focus-visible": {
-            backgroundColor: "#1662dd",
-            color: "#1662dd",
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.main,
           },
 
           "&:active": {
-            borderColor: "#1662dd",
+            borderColor: theme.palette.primary.main,
           },
 
           "&:disabled": {
-            borderColor: "#ebebed",
-            backgroundColor: "#ebebed",
-            color: "#8c8c96",
+            borderColor: theme.palette.grey[100],
+            backgroundColor: theme.palette.grey[100],
+            color: theme.palette.grey[500],
           },
-        },
+        }),
       },
       {
         props: { variant: "danger" },
-        style: {
-          backgroundColor: "#da372c",
-          color: "#ffffff",
+        style: ({ theme }) => ({
+          backgroundColor: theme.palette.error.main,
+          color: theme.palette.common.white,
           borderColor: "transparent",
 
           "&:hover": {
-            backgroundColor: "#640019",
+            backgroundColor: theme.palette.error.dark,
           },
 
           "&:focus-visible": {
-            outlineColor: "#f88c90",
-            backgroundColor: "#640019",
+            outlineColor: theme.palette.error.light,
+            backgroundColor: theme.palette.error.dark,
           },
 
           "&:active": {
-            backgroundColor: "#da372c",
+            backgroundColor: theme.palette.error.main,
           },
 
           "&:disabled": {
-            color: "#ffffff",
-            backgroundColor: "#f88c90",
+            color: theme.palette.common.white,
+            backgroundColor: theme.palette.error.light,
           },
-        },
+        }),
       },
       {
         props: { variant: "floating" },
-        style: {
-          backgroundColor: "#ffffff",
-          color: "#1d1d21",
+        style: ({ theme }) => ({
+          backgroundColor: theme.palette.common.white,
+          color: theme.palette.text.primary,
           borderColor: "transparent",
 
           "&:hover, &:focus-visible": {
@@ -161,38 +161,38 @@ export const components: ThemeOptions["components"] = {
           },
           "&:disabled": {
             backgroundColor: "rgba(235, 235, 237, 0.6)",
-            color: "#6e6e78",
+            color: theme.palette.text.secondary,
             borderColor: "transparent",
           },
-        },
+        }),
       },
       {
         props: { size: "s" },
-        style: {
-          paddingBlock: "calc(0.57142857rem - 1px)",
-          paddingInline: "calc(0.85714286rem - - 1px)",
+        style: ({ theme }) => ({
+          paddingBlock: `calc(${theme.spacing(2)} - 1px)`,
+          paddingInline: `calc(${theme.spacing(3)} - 1px)`,
           fontSize: "1rem",
-        },
+        }),
       },
       {
         props: { size: "l" },
-        style: {
-          paddingBlock: "calc(1.14285714rem - 1px)",
-          paddingInline: "calc(1.14285714rem - 1px)",
-        },
+        style: ({ theme }) => ({
+          paddingBlock: `calc(${theme.spacing(4)} - 1px)`,
+          paddingInline: `calc(${theme.spacing(4)} - 1px)`,
+        }),
       },
       {
         props: { fullWidth: true },
-        style: {
+        style: ({ theme }) => ({
           display: "block",
           width: "100%",
           marginBlock: "0",
           marginInline: "0",
 
           "&:not(:last-child)": {
-            marginBlockEnd: "1.14285714rem",
+            marginBlockEnd: theme.spacing(4),
           },
-        },
+        }),
       },
       {
         // icon only
@@ -227,7 +227,7 @@ export const components: ThemeOptions["components"] = {
         whiteSpace: "nowrap",
 
         "& + &": {
-          marginInlineStart: "0.57142857rem",
+          marginInlineStart: theme.spacing(2),
         },
 
         "&:focus-visible": {
@@ -264,34 +264,35 @@ export const components: ThemeOptions["components"] = {
       size: "small",
     },
     styleOverrides: {
-      root: {
+      root: ({ theme }) => ({
         borderRadius: "4px",
         "&:hover": {
           backgroundColor: "transparent",
         },
         padding: 0,
         ".Mui-error > &": {
-          color: "#da372c",
+          color: theme.palette.error.main,
           "&:hover": {
-            color: "#640019",
+            color: theme.palette.error.dark,
           },
         },
         ".Mui-error > &.Mui-checked": {
           "&:hover": {
-            color: "#640019",
+            color: theme.palette.error.dark,
           },
         },
         "&.Mui-focusVisible": {
-          outlineColor: "#1662dd",
+          outlineColor: theme.palette.primary.main,
           outlineOffset: 0,
           outlineStyle: "solid",
           outlineWidth: "2px",
         },
-      },
+      }),
     },
   },
   MuiCircularProgress: {
     defaultProps: {
+      // TODO: defaultProps cannot take a theme object; needs workaround
       size: "1.14285714rem",
       thickness: 8,
       color: "primary",
@@ -299,9 +300,9 @@ export const components: ThemeOptions["components"] = {
       variant: "indeterminate",
     },
     styleOverrides: {
-      root: ({ ownerState }) => ({
+      root: ({ theme, ownerState }) => ({
         ...(ownerState.color !== "inherit" && {
-          color: "#00297a",
+          color: theme.palette.primary.dark,
         }),
       }),
       circle: ({ ownerState }) => ({
@@ -332,8 +333,8 @@ export const components: ThemeOptions["components"] = {
   },
   MuiFormControlLabel: {
     styleOverrides: {
-      root: ({ ownerState }) => ({
-        gap: "0.57142857rem",
+      root: ({ theme, ownerState }) => ({
+        gap: theme.spacing(2),
         marginLeft: 0,
         marginRight: 0, // used for row presentation of radio/checkbox
         ...(ownerState.labelPlacement === "start" && {
@@ -347,28 +348,28 @@ export const components: ThemeOptions["components"] = {
           marginLeft: 0,
         }),
         "&:not(:last-child)": {
-          marginBottom: "0.57142857rem",
+          marginBottom: theme.spacing(2),
         },
         "&.Mui-disabled": {
           pointerEvents: "none",
         },
         //[`&:hover ${radioClasses.root}:not(${radioClasses.checked})`]: {
-        //color: "#1d1d21",
+        //color: theme.palette.text.primary,
         //},
         "&:hover .MuiRadio-root, &:hover .MuiCheckbox-root": {
-          color: "#1d1d21",
+          color: theme.palette.text.primary,
         },
         "&:hover .MuiRadio-root.Mui-checked, &:hover .MuiCheckbox-root.Mui-checked":
           {
-            color: "#00297a",
+            color: theme.palette.primary.dark,
           },
         "&.Mui-error:hover .MuiRadio-root, &.Mui-error:hover .MuiCheckbox-root":
           {
-            color: "#640019",
+            color: theme.palette.error.dark,
           },
         "&.Mui-error:hover .MuiRadio-root.Mui-checked, &.Mui-error:hover .MuiCheckbox-root.Mui-checked":
           {
-            color: "#640019",
+            color: theme.palette.error.dark,
           },
       }),
     },
@@ -378,32 +379,48 @@ export const components: ThemeOptions["components"] = {
       variant: "standard",
     },
     styleOverrides: {
-      root: {
+      root: ({ theme }) => ({
         lineHeight: "1.33333333",
-        marginTop: "0.57142857rem",
+        marginTop: theme.spacing(2),
         ".MuiFormLabel-root + &": {
-          marginTop: "-0.28571429rem",
-          color: "#6e6e78",
+          marginTop: `-${theme.spacing(1)}`,
+          color: theme.palette.text.secondary,
         },
-        marginBottom: "0.57142857rem",
+        marginBottom: theme.spacing(2),
         "&:last-child": {
           marginBottom: 0,
         },
-      },
+      }),
     },
   },
   MuiFormLabel: {
     styleOverrides: {
-      root: {
-        color: "#1d1d21",
+      root: ({ theme }) => ({
+        color: theme.palette.text.primary,
         lineHeight: "1.14285714",
         fontSize: "1rem",
         fontWeight: 600,
-        marginBottom: "0.57142857rem",
+        marginBottom: theme.spacing(2),
         "&.Mui-focused, &.Mui-error, &.Mui-disabled": {
-          color: "#1d1d21",
+          color: theme.palette.text.primary,
         },
-      },
+      }),
+    },
+  },
+  MuiInputAdornment: {
+    defaultProps: {
+      variant: "outlined",
+    },
+    styleOverrides: {
+      root: ({ ownerState }) => ({
+        display: "flex",
+        ...(ownerState.position === "start" && {
+          marginRight: 0,
+        }),
+        ...(ownerState.position === "end" && {
+          marginLeft: 0,
+        }),
+      }),
     },
   },
   MuiInputBase: {
@@ -442,24 +459,24 @@ export const components: ThemeOptions["components"] = {
   },
   MuiLink: {
     styleOverrides: {
-      root: {
-        color: "#1662dd",
+      root: ({ theme }) => ({
+        color: theme.palette.primary.main,
         textDecoration: "none",
 
         "&:hover": {
-          color: "#1662dd",
+          color: theme.palette.primary.main,
           textDecoration: "underline",
         },
 
         "&:focus-visible": {
-          outlineColor: "#1662dd",
+          outlineColor: theme.palette.primary.main,
           outlineOffset: "2px",
           outlineStyle: "solid",
           outlineWidth: "1px",
         },
 
         "&:visited": {
-          color: "#1662dd",
+          color: theme.palette.primary.main,
         },
 
         ".Link-indicator, .Link-icon": {
@@ -469,11 +486,11 @@ export const components: ThemeOptions["components"] = {
         },
 
         ".Link-indicator": {
-          marginInlineStart: "0.57142857rem",
+          marginInlineStart: theme.spacing(2),
         },
 
         ".Link-icon": {
-          marginInlineEnd: "0.57142857rem",
+          marginInlineEnd: theme.spacing(2),
         },
         svg: {
           fontSize: "1rem",
@@ -483,30 +500,30 @@ export const components: ThemeOptions["components"] = {
           verticalAlign: "middle",
           width: "1em",
         },
-      },
+      }),
     },
     variants: [
       {
         props: { variant: "monochrome" },
-        style: {
-          color: "#1d1d21",
+        style: ({ theme }) => ({
+          color: theme.palette.text.primary,
           textDecoration: "underline",
 
           "&:hover": {
-            color: "#6e6e78",
+            color: theme.palette.text.secondary,
           },
 
           "&:focus-visible": {
-            outlineColor: "#1662dd",
+            outlineColor: theme.palette.primary.main,
             outlineOffset: "2px",
             outlineStyle: "solid",
             outlineWidth: "1px",
           },
 
           "&:visited": {
-            color: "#1d1d21",
+            color: theme.palette.text.primary,
           },
-        },
+        }),
       },
     ],
   },
@@ -525,11 +542,17 @@ export const components: ThemeOptions["components"] = {
       notched: false,
     },
     styleOverrides: {
-      root: {
+      root: ({ ownerState, theme }) => ({
         "&.Mui-disabled": {
           pointerEvents: "none",
         },
-      },
+        ...(ownerState.startAdornment && {
+          paddingLeft: theme.spacing(3),
+        }),
+        ...(ownerState.endAdornment && {
+          paddingRight: theme.spacing(3),
+        }),
+      }),
       input: ({ theme }) => ({
         padding: `calc(${theme.spacing(3)} - 1px) ${theme.spacing(3)}`,
         border: "1px solid transparent",
@@ -550,24 +573,24 @@ export const components: ThemeOptions["components"] = {
       size: "small",
     },
     styleOverrides: {
-      root: {
+      root: ({ theme }) => ({
         "&:hover": {
           backgroundColor: "transparent",
         },
         padding: 0,
         ".Mui-error > &": {
-          color: "#da372c",
+          color: theme.palette.error.main,
           "&:hover": {
-            color: "#640019",
+            color: theme.palette.error.dark,
           },
         },
         "&.Mui-focusVisible": {
-          outlineColor: "#1662dd",
+          outlineColor: theme.palette.primary.main,
           outlineOffset: 0,
           outlineStyle: "solid",
           outlineWidth: "2px",
         },
-      },
+      }),
     },
   },
   MuiTypography: {
@@ -576,9 +599,9 @@ export const components: ThemeOptions["components"] = {
         "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
     },
     styleOverrides: {
-      paragraph: {
-        marginBottom: "1.14285714rem",
-      },
+      paragraph: ({ theme }) => ({
+        marginBottom: theme.spacing(4),
+      }),
     },
   },
 };
