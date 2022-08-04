@@ -66,8 +66,14 @@ const DefaultTemplate: Story = (args) => {
       error={args.invalid}
     >
       <FormLabel component="legend">{args.label}</FormLabel>
-      {args.hint && <FormHelperText>{args.hint}</FormHelperText>}
-      <RadioGroup defaultValue="Lightspeed" name="radio-buttons-group">
+      {args.hint && (
+        <FormHelperText id="radio-hint">{args.hint}</FormHelperText>
+      )}
+      <RadioGroup
+        defaultValue="Lightspeed"
+        name="radio-buttons-group"
+        aria-describedby="radio-hint radio-error"
+      >
         <FormControlLabel
           value="Lightspeed"
           control={<Radio />}
@@ -85,7 +91,7 @@ const DefaultTemplate: Story = (args) => {
         />
       </RadioGroup>
       {args.error && (
-        <FormHelperText error>
+        <FormHelperText id="radio-error" error>
           <span style={visuallyHidden}>Error:</span> {args.error}
         </FormHelperText>
       )}

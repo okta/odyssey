@@ -1,54 +1,52 @@
 import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
-import { theme } from "../../../../../odyssey-react/src/components/TextInput/TextInput.theme";
-import { ThemeTable } from "../../../../.storybook/components";
 
 <Meta anchor />
 
-# Text Input
+# Text Field
 
-Text inputs allow users to edit and input data. They can range from simple search boxes to long-form text areas.
+Text fields allow users to edit and input data.
 
 ## Variants
 
 ### Default
 
-This default serves as the basis for our Text Inputs. A shown here, they required paired with a paired Label.
+This default serves as the basis for our Text Inputs.
 
-<Story id="legacy-components-textinput--text" />
-
-#### Button variant
-
-We also provide an attached button for in-page searching or avoiding placeholder text. Please follow our [Button guidelines](/components/button) when using these variants.
-
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-text-field--default" />
+</Canvas>
 
 ### Textarea
 
 Textareas should be used for multi-line text inputs. As the user types the field will grow vertically to accommodate the new lines.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-text-field--multiline" />
+</Canvas>
+
+### Adornments
+
+Adornments may be added to inputs to create additional affordances or behavior. Odyssey supports icon and text adornments.
+
+<Canvas>
+  <Story id="mui-components-text-field--tel" />
+</Canvas>
+
+<Canvas>
+  <Story id="mui-components-text-field--adornment" />
+</Canvas>
 
 ## States
 
-Text inputs support the following states: enabled, hover, focus, disabled, read-only, optional, and invalid.
+Text fields support the following states: enabled, hover, focus, disabled, read-only, optional, and invalid.
 
 ### Enabled
 
-Text inputs in their "normal" state are considered enabled. They are ready for user interaction.
+Text fields in their "normal" state are considered enabled. They are ready for user interaction.
 
-**STORY MISSING**
-
-### Hover
-
-Hover states are activated when the user pauses their pointer over the input.
-
-**STORY MISSING**
-
-### Focus
-
-The focus state is a visual affordance that the user has highlighted the input with a pointer, keyboard, or voice.
-
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-text-field--default" />
+</Canvas>
 
 ### Disabled
 
@@ -56,7 +54,9 @@ Disabled inputs are unavailable for interaction and cannot be focused. They can 
 
 The values of disabled inputs will not be submitted.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-text-field--disabled" />
+</Canvas>
 
 ### Read-only
 
@@ -66,7 +66,9 @@ This state can be helpful when displaying computed or third-party values, or whe
 
 The values of read-only inputs will be submitted.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-text-field--read-only" />
+</Canvas>
 
 ### Optional
 
@@ -80,39 +82,43 @@ The invalid state is for inputs with incorrect values or values of the wrong for
 
 When indicating a validation error, please use a Field Error label to indicate the nature of the error. Color alone is not an accessible way to signify that something has gone wrong.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-text-field--invalid" />
+</Canvas>
 
-## Content Guidelines
+## Input Types
 
-Text inputs support most free-form content, but we offer specific support for email, telephone numbers, and passwords.
+Text fields support most free-form content, but we offer specific support for email, telephone numbers, and passwords.
 
 ### Email
 
 There are no specific UI changes for email addresses, but inputs of this type will validate that the address is properly formatted.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-text-field--email" />
+</Canvas>
 
 ### Tel
 
 Unlike email fields, tel inputs are not automatically validated because global formats are so varied.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-text-field--tel" />
+</Canvas>
 
 ### Password
 
 Passwords inputs ensure that sensitive content is safely obscured.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-text-field--password" />
+</Canvas>
 
 ## Accessibility
 
 ### Placeholders
 
 Except for Search inputs, we advise against using placeholder text for inputs.
-
-### Purpose
-
-When collecting an individual's personal data, you must define the input's purpose via the `autocomplete` attribute. This allows users to automate the filling of fields and ensures the purpose is known, regardless of the label. A complete list of fields this is required for may be found <a href="https://www.w3.org/TR/WCAG21/#input-purposes">in the WCAG spec</a>.
 
 #### Translation
 
@@ -132,8 +138,6 @@ Low-contrast placeholders may be illegible for some users. Yet, placeholders wit
 
 Finally, Users with low digital literacy may not understand the purpose or behavior of placeholder text.
 
-## Arguments
+### Purpose
 
-<ArgsTable />
-
-<ThemeTable componentThemeReducer={theme} />
+When collecting an individual's personal data, you must define the input's purpose via the `autocomplete` attribute. This allows users to automate the filling of fields and ensures the purpose is known, regardless of the label. A complete list of fields this is required for may be found <a href="https://www.w3.org/TR/WCAG21/#input-purposes">in the WCAG spec</a>.
