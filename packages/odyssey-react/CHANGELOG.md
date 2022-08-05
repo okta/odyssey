@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.14.4](https://github.com/okta/odyssey/compare/v0.14.3...v0.14.4) (2022-08-04)
+
+### Features
+
+- **odyssey-react-mui:** add Icon components ([9ba7b4b](https://github.com/okta/odyssey/commit/9ba7b4bdbc17fed37d54e68406dc3527bfc7d703))
+
 ### [0.14.3](https://github.com/okta/odyssey/compare/v0.14.2...v0.14.3) (2022-07-14)
 
 ### Features
