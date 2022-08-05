@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.14.4](https://github.com/okta/odyssey/compare/v0.14.3...v0.14.4) (2022-08-04)
+
+### Features
+
+- **odyssey-react-mui:** add Icon components ([9ba7b4b](https://github.com/okta/odyssey/commit/9ba7b4bdbc17fed37d54e68406dc3527bfc7d703))
+- **odyssey-react-mui:** add MUI themes ([63bd3a3](https://github.com/okta/odyssey/commit/63bd3a3ff1799858f69196abe5f860670e2ac624))
+- **odyssey-react-mui:** add support for InputAdornments ([98f4e39](https://github.com/okta/odyssey/commit/98f4e3968b733bda09756047abc1d07beec8ad57))
+- **odyssey-react-mui:** enable palette theming for components ([f6d4979](https://github.com/okta/odyssey/commit/f6d4979b1b48b0903c677149185d233fb0a62e6b))
+- **odyssey-react-mui:** enable spacing theming for components ([ee3aed5](https://github.com/okta/odyssey/commit/ee3aed58a3632a557109365a503512cb29b50746))
+- **odyssey-react-mui:** storybook updates with MUI theme changes in development ([2563a95](https://github.com/okta/odyssey/commit/2563a95a4b10e0c1ab80050aff3bbb018500cbc7))
+
+### Bug Fixes
+
+- updated peerDependencies for odyssey-react-mui to restrict the Material UI version ([d599952](https://github.com/okta/odyssey/commit/d599952cd923a46c78096333e47db801524a9922))
+- upgraded Material UI to fix custom theme values ([a39077a](https://github.com/okta/odyssey/commit/a39077aad95227d8af5285ff6fdee24462f49b20))
+
 ### [0.14.3](https://github.com/okta/odyssey/compare/v0.14.2...v0.14.3) (2022-07-14)
 
 ### Features
