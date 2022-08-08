@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { grid2Classes, ThemeOptions } from "@mui/material";
+import type { ThemeOptions } from "@mui/material";
 //import radioClasses from "@mui/material";
 
 export const components: ThemeOptions["components"] = {
