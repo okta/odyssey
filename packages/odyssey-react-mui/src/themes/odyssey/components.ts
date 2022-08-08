@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ThemeOptions } from "@mui/material";
+import { grid2Classes, ThemeOptions } from "@mui/material";
 //import radioClasses from "@mui/material";
 
 export const components: ThemeOptions["components"] = {
@@ -18,10 +18,17 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
         padding: theme.spacing(4),
+        gap: theme.spacing(4),
         color: theme.palette.text.primary,
         ...(ownerState.severity && {
           backgroundColor: theme.palette[ownerState.severity].lighter,
           borderColor: theme.palette[ownerState.severity].light,
+        }),
+        ...(ownerState.variant === "banner" && {
+          position: "relative",
+          justifyContent: "center",
+          alignItems: "center",
+          borderWidth: 0,
         }),
         ...(ownerState.variant === "infobox" && {
           borderStyle: "solid",
@@ -30,12 +37,38 @@ export const components: ThemeOptions["components"] = {
             marginBottom: theme.spacing(4),
           },
         }),
+        ...(ownerState.variant === "toast" && {
+          maxWidth: theme.mixins.maxWidth,
+          borderStyle: "solid",
+          borderWidth: 1,
+          position: "relative",
+          alignItems: "start",
+        }),
+      }),
+      action: ({ ownerState, theme }) => ({
         ...(ownerState.variant === "banner" && {
-          borderWidth: 0,
+          padding: 0,
+          marginRight: 0,
+          top: "50%",
+          right: theme.spacing(4),
+          position: "absolute",
+          transform: "translateY(-50%)",
+        }),
+        ...(ownerState.variant === "toast" && {
+          position: "absolute",
+          top: `calc(${theme.spacing(4)} - ${theme.spacing(1)} + ${
+            theme.mixins.borderWidth
+          })`,
+          right: `calc(${theme.spacing(4)} - ${theme.spacing(1)} + ${
+            theme.mixins.borderWidth
+          })`,
+          padding: 0,
+          marginLeft: 0,
+          marginRight: 0,
         }),
       }),
       icon: ({ ownerState, theme }) => ({
-        marginRight: theme.spacing(4),
+        marginRight: 0,
         padding: 0,
         fontSize: "1.429rem",
         opacity: 1,
@@ -46,9 +79,20 @@ export const components: ThemeOptions["components"] = {
           color: theme.palette[ownerState.severity].dark,
         }),
       }),
-      message: ({ theme }) => ({
+      message: ({ ownerState, theme }) => ({
         padding: 0,
         lineHeight: theme.typography.body.lineHeight,
+        ...(ownerState.variant === "banner" && {
+          display: "flex",
+          justifyContent: "space-between",
+          gap: theme.spacing(4),
+        }),
+        ...(ownerState.variant === "toast" && {
+          flexGrow: 1,
+          paddingRight: `calc((${theme.spacing(1)} * 2) + ${
+            theme.typography.body.fontSize
+          } + ${theme.spacing(4)})`,
+        }),
       }),
     },
   },
@@ -407,6 +451,14 @@ export const components: ThemeOptions["components"] = {
       }),
     },
   },
+  MuiIconButton: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        padding: theme.spacing(1),
+        fontSize: theme.typography.body.fontSize,
+      }),
+    },
+  },
   MuiInputAdornment: {
     defaultProps: {
       variant: "outlined",
@@ -591,6 +643,14 @@ export const components: ThemeOptions["components"] = {
           outlineWidth: "2px",
         },
       }),
+    },
+  },
+  MuiSnackbar: {
+    defaultProps: {
+      anchorOrigin: {
+        vertical: "bottom",
+        horizontal: "right",
+      },
     },
   },
   MuiTypography: {
