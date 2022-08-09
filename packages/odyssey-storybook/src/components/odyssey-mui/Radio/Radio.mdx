@@ -4,46 +4,20 @@ import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
 
 # Radio
 
-Radios appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
+Use radio buttons when a user must make a single selection from a list of two or more options that are mutually exclusive.
 
-## Behavior
+## Overview
 
-Radio Buttons allow users to select one option from a set. Users can click a Radio to make a choice; selecting another will deselect the last.
-
-<Canvas>
-  <Story id="mui-components-radio--default" />
-</Canvas>
-
-## States
-
-The most prominent Radio states are `enabled`, `disabled`, and `invalid`.
-
-### Enabled
-
-Radio Buttons in their "unchecked" state are considered enabled. They are ready for user interaction.
+Radio buttons are wrapped into a radio group so we can visually present groups of options as distinct and separate from other possible groups in the same page.
 
 <Canvas>
   <Story id="mui-components-radio--default" />
 </Canvas>
 
-### Disabled
+### When to use
 
-Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
+#### Radio group vs Checkbox
+Radio buttons allow the user to select 1 option. Checkboxes, in contrast, are independent of all the other checkboxes and multiple options can be selected at the same time.
 
-Radios may be disabled as a group or individually.
-
-<Canvas>
-  <Story id="mui-components-radio--disabled" />
-</Canvas>
-
-### Invalid
-
-Radios are invalid when a required input is left unchecked or an incompatible choice has been made.
-
-When indicating a validation error, please use FormHelperText set to `error` to indicate the nature of the problem. Color alone is not an accessible way to signify that something has gone wrong.
-
-Unlike Checkboxes, Radios validate as a group, not individually.
-
-<Canvas>
-  <Story id="mui-components-radio--invalid" />
-</Canvas>
+#### Radio group vs Select
+Consider how you wish to present your list of options to the user. A radio group will display all possible options and make it easy to compare them without the need to first interact with the component, lowering the cognitive load for users.
