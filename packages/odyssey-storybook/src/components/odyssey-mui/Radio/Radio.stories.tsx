@@ -87,7 +87,7 @@ const DefaultTemplate: Story = (args) => {
         <FormControlLabel
           value="Ludicrous speed"
           control={<Radio />}
-          label="Ludicrous speed"
+          label="Loco speed"
         />
       </RadioGroup>
       {args.error && (
