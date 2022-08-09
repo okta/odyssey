@@ -10,24 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createTheme } from "@mui/material/styles";
+import type { ThemeOptions } from "@mui/material";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
-import { palette } from "./palette";
-import "./palette.types";
-import { shape } from "./shape";
-import { mixins } from "./mixins";
-import "./mixins.types";
-import { spacing } from "./spacing";
-import { typography } from "./typography";
-import "./typography.types";
-import { components } from "./components";
-import "./components.types";
-
-export const theme = createTheme({
-  palette,
-  shape,
-  mixins,
-  spacing,
-  typography,
-  components,
-});
+export const mixins: ThemeOptions["mixins"] = {
+  maxWidth: Tokens.FontLineLengthMax,
+  borderWidth: Tokens.BorderWidthBase,
+};
