@@ -44,6 +44,35 @@ Import named ESM exports:
 import { PasswordInput } from "@okta/odyssey-react-mui";
 ```
 
+Add the Material-UI `ThemeProvider` around your whole app:
+
+```jsx
+import { ThemeProvider } from "@mui/material/styles";
+import { odysseyTheme } from "@okta/odyssey-react-mui";
+
+const YourAppRoot = ({ children }) => (
+  <ThemeProvider theme={odysseyTheme}>{children}</ThemeProvider>
+);
+```
+
+### Upgrade Piecemeal
+
+It’s possible to have 2 versions of Odyssey running at the same time, so when adding MUI, you can do it piecemeal.
+
+This is how you setup two `ThemeProvider`s like so:
+
+```jsx
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { odysseyTheme } from "@okta/odyssey-react-mui";
+import { ThemeProvider } from "@okta/odyssey-react-theme";
+
+const YourAppRoot = ({ children }) => (
+  <MuiThemeProvider theme={odysseyTheme}>
+    <ThemeProvider>{children}</ThemeProvider>
+  </MuiThemeProvider>
+);
+```
+
 ## Components
 
 Components are published in an ESM format transpiled for the modern browsers
