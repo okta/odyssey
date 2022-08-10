@@ -25,8 +25,9 @@
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.15.0",
     "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.9.0",
+    "@mui/material": "^5.9.2",
     "@okta/browserslist-config-odyssey": "^0.14.4",
     "@okta/odyssey-babel-preset": "^0.14.4",
     "@okta/odyssey-icons": "^0.14.4",
@@ -56,6 +57,7 @@
   },
   "peerDependencies": {
     "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "@mui/icons-material": "^5",
     "@mui/material": "^5.9.0",
     "react": ">=17 <19",
