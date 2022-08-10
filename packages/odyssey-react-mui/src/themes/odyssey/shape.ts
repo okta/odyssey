@@ -15,4 +15,6 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 
 export const shape: ThemeOptions["shape"] = {
   borderRadius: Tokens.BorderRadiusBase,
+  // Expected: Mods should work identically to mixins.ts/mixins.types.ts
+  borderStyle: Tokens.BorderStyleBase,
 };

@@ -11,6 +11,7 @@
  */
 
 declare module "@mui/material/styles" {
+  // These mods work as expectd to allow the values in mixins.ts
   interface Mixins {
     borderWidth?: string;
     maxWidth?: string;

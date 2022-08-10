@@ -10,11 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
+declare module "@mui/material/styles" {
+  // These mods work as expectd to allow the values in mixins.ts
+  interface Shape {
+    borderStyle?: string;
+  }
 
-export const mixins: ThemeOptions["mixins"] = {
-  // These tokens work as expected with the TS mods in mixins.types.ts
-  maxWidth: Tokens.FontLineLengthMax,
-  borderWidth: Tokens.BorderWidthBase,
-};
+  interface ShapeOptions {
+    borderStyle?: string;
+  }
+}
+
+export {};
