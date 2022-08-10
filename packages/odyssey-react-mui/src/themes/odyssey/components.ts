@@ -31,7 +31,7 @@ export const components: ThemeOptions["components"] = {
           borderWidth: 0,
         }),
         ...(ownerState.variant === "infobox" && {
-          borderStyle: "solid",
+          borderStyle: theme.shape.borderStyle,
           borderWidth: 1,
           "&:not(:last-child)": {
             marginBottom: theme.spacing(4),
@@ -39,7 +39,7 @@ export const components: ThemeOptions["components"] = {
         }),
         ...(ownerState.variant === "toast" && {
           maxWidth: theme.mixins.maxWidth,
-          borderStyle: "solid",
+          borderStyle: theme.shape.borderStyle,
           borderWidth: 1,
           position: "relative",
           alignItems: "start",
@@ -57,10 +57,10 @@ export const components: ThemeOptions["components"] = {
         ...(ownerState.variant === "toast" && {
           position: "absolute",
           top: `calc(${theme.spacing(4)} - ${theme.spacing(1)} + ${
-            theme.mixins.borderWidth
+            theme.shape.borderWidth
           })`,
           right: `calc(${theme.spacing(4)} - ${theme.spacing(1)} + ${
-            theme.mixins.borderWidth
+            theme.shape.borderWidth
           })`,
           padding: 0,
           marginLeft: 0,
@@ -269,7 +269,7 @@ export const components: ThemeOptions["components"] = {
         transitionDuration: "100ms",
         transitionTimingFunction: "linear",
         borderWidth: "1px",
-        borderStyle: "solid",
+        borderStyle: theme.shape.borderStyle,
         outlineColor: "transparent",
         outlineOffset: "0",
         fontSize: "1rem",

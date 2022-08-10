@@ -10,14 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+interface Shape {
+  borderRadius?: string;
+  borderStyle?: string;
+  borderWidth?: string;
+}
+
 declare module "@mui/material/styles" {
-  // These mods work as expectd to allow the values in mixins.ts
-  interface Shape {
-    borderStyle?: string;
+  interface Theme {
+    shape: Shape;
   }
 
-  interface ShapeOptions {
-    borderStyle?: string;
+  interface ThemeOptions {
+    shape: Shape;
   }
 }
 

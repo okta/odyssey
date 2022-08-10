@@ -15,7 +15,7 @@ import { createTheme } from "@mui/material/styles";
 import { palette } from "./palette";
 import "./palette.types";
 import { shape } from "./shape";
-import "./shape.types.ts";
+import "./shape.types";
 import { mixins } from "./mixins";
 import "./mixins.types";
 import { spacing } from "./spacing";

@@ -14,7 +14,5 @@ import type { ThemeOptions } from "@mui/material";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 export const mixins: ThemeOptions["mixins"] = {
-  // These tokens work as expected with the TS mods in mixins.types.ts
   maxWidth: Tokens.FontLineLengthMax,
-  borderWidth: Tokens.BorderWidthBase,
 };
