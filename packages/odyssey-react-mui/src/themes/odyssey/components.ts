@@ -124,6 +124,10 @@ export const components: ThemeOptions["components"] = {
             backgroundColor: theme.palette.primary.dark,
           },
 
+          "&:focus-visible": {
+            outlineColor: theme.palette.primary.main,
+          },
+
           "&:active": {
             backgroundColor: theme.palette.primary.main,
           },
@@ -140,15 +144,14 @@ export const components: ThemeOptions["components"] = {
           backgroundColor: theme.palette.grey[50],
           borderColor: theme.palette.grey[200],
           color: theme.palette.text.primary,
-          "&:hover": {
-            background: theme.palette.primary.lighter,
+          "&:hover, &:focus-visible": {
+            backgroundColor: theme.palette.primary.lighter,
             borderColor: theme.palette.primary.light,
             color: theme.palette.primary.main,
           },
 
           "&:focus-visible": {
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.primary.main,
+            outlineColor: theme.palette.primary.main,
           },
 
           "&:active": {
@@ -174,7 +177,7 @@ export const components: ThemeOptions["components"] = {
           },
 
           "&:focus-visible": {
-            outlineColor: theme.palette.error.light,
+            outlineColor: theme.palette.error.main,
             backgroundColor: theme.palette.error.dark,
           },
 
@@ -198,6 +201,9 @@ export const components: ThemeOptions["components"] = {
           "&:hover, &:focus-visible": {
             backgroundColor: "rgba(29, 29, 33, 0.1)",
             borderColor: "transparent",
+          },
+          "&:focus-visible": {
+            outlineColor: theme.palette.primary.main,
           },
           "&:active": {
             backgroundColor: "rgba(29, 29, 33, 0.2)",
