@@ -3,47 +3,56 @@ import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
 <Meta anchor />
 
 # Radio
+Use radio buttons when a user must make a single selection from a list of two or more options that are mutually exclusive.
 
-Radios appear as a ring shaped UI accompanied by a caption that allows the user to choose only one option at a time.
+## About
+Radio buttons are wrapped into a radio group so we can visually present groups of options as distinct and separate from other possible groups on the same page.
 
-## Behavior
+### When to use
 
-Radio Buttons allow users to select one option from a set. Users can click a Radio to make a choice; selecting another will deselect the last.
+#### Radio group vs Checkbox
+Radio buttons allow the user to select 1 option. Checkboxes, in contrast, are independent of all the other checkboxes and multiple options can be selected at
 
+#### Radio group vs Select
+Consider how you wish to present your list of options to the user. A radio group will display all possible options and make it easy to compare them without the need to first interact with the component, lowering the cognitive load for users.
+
+## Examples
 <Canvas>
   <Story id="mui-components-radio--default" />
 </Canvas>
 
-## States
+## Anatomy
 
-The most prominent Radio states are `enabled`, `disabled`, and `invalid`.
+### Label
+The label helps the user understand the group of options provided and in making a selection.
 
-### Enabled
+### Radio button input and label
+Radio buttons make up the list of available options within a group. The list is laid out vertically with one choice per line.
+By default radio button have one of the options selected. If users need to withhold an answer you should provide a neutral option for this.
 
-Radio Buttons in their "unchecked" state are considered enabled. They are ready for user interaction.
+A radio button can be selected from either the radio input or the radio label, this provides a better affordance for the user.
 
-<Canvas>
-  <Story id="mui-components-radio--default" />
-</Canvas>
+### Hint text (optional)
+The hint text is placed in between the label and the radio buttons.
+This is an optional property that includes in-context descriptions to clarify the grouping or explain the set of options.
+Hints should not include long-form content or rich text as it visually separates the intended label from the input area.
 
-### Disabled
 
-Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
+## Behaviors
 
-Radios may be disabled as a group or individually.
+### States
+A radio button has 2 states: Selected and Unselected.
+By default one of the options within the list should be selected. Once another option is triggered the previous selection will be deselected.
+
+On top of the previous two states, radio buttons can also exist in all the other states needed for form inputs: `focus`, `disabled`, and `invalid`.
 
 <Canvas>
   <Story id="mui-components-radio--disabled" />
 </Canvas>
 
-### Invalid
-
-Radios are invalid when a required input is left unchecked or an incompatible choice has been made.
-
-When indicating a validation error, please use FormHelperText set to `error` to indicate the nature of the problem. Color alone is not an accessible way to signify that something has gone wrong.
-
-Unlike Checkboxes, Radios validate as a group, not individually.
-
 <Canvas>
   <Story id="mui-components-radio--invalid" />
 </Canvas>
+
+## References and additional reading material
+* Jakob Nielsen (2004, September 26) [Checkboxes vs. Radio Buttons](https://www.nngroup.com/articles/checkboxes-vs-radio-buttons/) - Nielsen Norman Group
