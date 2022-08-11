@@ -51,8 +51,8 @@ export default {
 const DefaultTemplate: Story = (args) => {
   const {} = args;
   return (
-    <Alert severity={args.severity} role="status" variant="infobox">
-      <AlertTitle>{args.title}</AlertTitle>
+    <Alert severity={args.severity} role={args.role} variant="infobox">
+      {args.title && <AlertTitle>{args.title}</AlertTitle>}
       {args.content}
     </Alert>
   );
@@ -91,6 +91,14 @@ Success.args = {
   role: "status",
   severity: "success",
   title: "Ready for lift-off",
+};
+
+export const BodyOnly = DefaultTemplate.bind({});
+BodyOnly.args = {
+  content:
+    "You are currently logged in from Moonbase Alpha-6, located on Luna.",
+  severity: "info",
+  title: null,
 };
 
 export const InlineLink = DefaultTemplate.bind({});

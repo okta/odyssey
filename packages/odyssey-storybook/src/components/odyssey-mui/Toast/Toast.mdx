@@ -1,6 +1,4 @@
 import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
-import { theme } from "../../../../../odyssey-react/src/components/Toast/Toast.theme";
-import { ThemeTable } from "../../../../.storybook/components";
 
 <Meta anchor />
 
@@ -31,7 +29,9 @@ Each Toast is made up of up to four parts: Icon & Color, Title, Body, and a Dism
   </dd>
 </dl>
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-alerts-toast--info-static" />
+</Canvas>
 
 ## Behavior
 
@@ -49,31 +49,39 @@ Use Info Toasts to surface neutral information to users.
 
 This is the default variant for this component.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-alerts-toast--info-static" />
+</Canvas>
 
 ### Success
 
 Use Success Toasts to inform users of successful or completed processes.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-alerts-toast--success-static" />
+</Canvas>
 
-### Caution
+### Warning
 
-Use Caution Toasts to inform users of tasks or processes that may need their attention.
+Use Warning Toasts to inform users of tasks or processes that may need their attention.
 
-When using the Caution variant, ensure the user does not need more context than you can give in the space available.
+When using the Warning variant, ensure the user does not need more context than you can give in the space available.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-alerts-toast--warning-static" />
+</Canvas>
 
-### Danger
+### Error
 
-Use Danger Toasts to inform users that an error has occurred.
+Use Error Toasts to inform users that an error has occurred.
 
-When using a Danger Toast, be sure that the error is also logged elsewhere, so a user can refer to it later.
+When using a Error Toast, be sure that the error is also logged elsewhere, so a user can refer to it later.
 
-Do not use Danger Toasts for in-page errors such as invalid form fields. Instead, use static messaging the user can refer to while addressing their error.
+Do not use Error Toasts for in-page errors such as invalid form fields. Instead, use static messaging the user can refer to while addressing their error.
 
-**STORY MISSING**
+<Canvas>
+  <Story id="mui-components-alerts-toast--error-static" />
+</Canvas>
 
 ## References
 
@@ -140,7 +148,7 @@ Do not use Danger Toasts for in-page errors such as invalid form fields. Instead
         <th scope="row">
           <a href="?path=/docs/components-alerts-banner--info#banner">Banner</a>
         </th>
-        <td>Info, Caution, Danger</td>
+        <td>Info, Warning, Error</td>
         <td>No</td>
         <td>No</td>
         <td>Yes</td>
@@ -152,7 +160,7 @@ Do not use Danger Toasts for in-page errors such as invalid form fields. Instead
             Infobox
           </a>
         </th>
-        <td>Success, Caution, Danger</td>
+        <td>Success, Warning, Error</td>
         <td>Yes</td>
         <td>No</td>
         <td>No</td>
@@ -160,7 +168,7 @@ Do not use Danger Toasts for in-page errors such as invalid form fields. Instead
       </tr>
       <tr>
         <th scope="row">Toast</th>
-        <td>Info, Success, Caution, Danger</td>
+        <td>Info, Success, Warning, Error</td>
         <td>Yes</td>
         <td>Yes</td>
         <td>Yes</td>
@@ -173,5 +181,3 @@ Do not use Danger Toasts for in-page errors such as invalid form fields. Instead
 ## Props
 
 <ArgsTable />
-
-<ThemeTable componentThemeReducer={theme} />

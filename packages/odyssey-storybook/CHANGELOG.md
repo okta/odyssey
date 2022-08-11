@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.14.5](https://github.com/okta/odyssey/compare/v0.14.4...v0.14.5) (2022-08-11)
+
+### Features
+
+- upgraded Storybook and Material-UI ([ab495f9](https://github.com/okta/odyssey/commit/ab495f9eef6769a2d2e46f488b1a98dc29bc772d))
+
+### Bug Fixes
+
+- removed unused imports in Storybook main.js ([4bcac94](https://github.com/okta/odyssey/commit/4bcac94d2054b16aa3f95971da477c2bd6e6ecd6))
+- storybook pages now show correct code examples ([d3f1100](https://github.com/okta/odyssey/commit/d3f110009b273183305650142b4a3ea5e653b9a4))
+
 ### [0.14.4](https://github.com/okta/odyssey/compare/v0.14.3...v0.14.4) (2022-08-04)
 
 ### Features
