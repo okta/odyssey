@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.14.5](https://github.com/okta/odyssey/compare/v0.14.4...v0.14.5) (2022-08-11)
+
+### Features
+
+- added information about ThemeProvider and useTheme to README ([2b2490e](https://github.com/okta/odyssey/commit/2b2490e402bbfb492752a030333871f9a5f8b561))
+- **odyssey-react-mui:** add borderWidth and maxWidth theme variables ([05a2fef](https://github.com/okta/odyssey/commit/05a2fef7eb676262e293c80c5de9d24c70c6892d))
+- **odyssey-react-mui:** add themes for Banner and Toast ([236c2bd](https://github.com/okta/odyssey/commit/236c2bdab1f7e03b0d431730d240de1f1c0ead2b))
+- upgraded Storybook and Material-UI ([ab495f9](https://github.com/okta/odyssey/commit/ab495f9eef6769a2d2e46f488b1a98dc29bc772d))
+
+### Bug Fixes
+
+- **odyssey-react-mui:** fix Button :focus-visible styles ([91aaa06](https://github.com/okta/odyssey/commit/91aaa06290433126815c065d382b4261fb7b1c7d))
+
 ### [0.14.4](https://github.com/okta/odyssey/compare/v0.14.3...v0.14.4) (2022-08-04)
 
 ### Features
