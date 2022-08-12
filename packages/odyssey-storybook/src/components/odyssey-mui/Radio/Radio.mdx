@@ -14,7 +14,7 @@ Radio buttons are wrapped into a radio group so we can visually present groups o
 
 #### Radio group vs Checkbox
 
-Radio buttons allow the user to select 1 option. Checkboxes, in contrast, are independent of all the other checkboxes and multiple options can be selected at
+Radio buttons allow the user to select 1 option. Checkboxes, in contrast, are independent of all the other checkboxes and multiple options can be selected at the same time.
 
 #### Radio group vs Select
 
@@ -22,15 +22,37 @@ Consider how you wish to present your list of options to the user. A radio group
 
 ## Examples
 
+### Default
+
 <Canvas>
   <Story id="mui-components-radio--default" />
 </Canvas>
 
-## Anatomy
+### Hint text
+
+A hint adds adittional context to the radio group.
 
 <Canvas>
   <Story id="mui-components-radio--hint" />
 </Canvas>
+
+### Disabled
+
+Disabled inputs block any possible user interaction and cannot be focused.
+
+<Canvas>
+  <Story id="mui-components-radio--disabled" />
+</Canvas>
+
+### Invalid
+
+Validation should happen on the group and not individually on each item.
+
+<Canvas>
+  <Story id="mui-components-radio--invalid" />
+</Canvas>
+
+## Anatomy
 
 ### Label
 
@@ -58,13 +80,9 @@ By default one of the options within the list should be selected. Once another o
 
 On top of the previous two states, radio buttons can also exist in all the other states needed for form inputs: `focus`, `disabled`, and `invalid`.
 
-<Canvas>
-  <Story id="mui-components-radio--disabled" />
-</Canvas>
+### Interactions
 
-<Canvas>
-  <Story id="mui-components-radio--invalid" />
-</Canvas>
+Both the radio button and the radio button label are part of the click target.
 
 ## References and additional reading material
 
