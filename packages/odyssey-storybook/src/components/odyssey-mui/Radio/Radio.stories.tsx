@@ -43,7 +43,7 @@ export default {
     },
     hint: {
       control: "text",
-      defaultValue: "Select the speed at which you wish to travel.",
+      defaultValue: null,
     },
     invalid: {
       control: "boolean",
@@ -101,6 +101,11 @@ const DefaultTemplate: Story = (args) => {
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
+
+export const Hint = DefaultTemplate.bind({});
+Hint.args = {
+  hint: "Select the speed at which you wish to travel.",
+};
 
 export const Disabled = DefaultTemplate.bind({});
 Disabled.args = {
