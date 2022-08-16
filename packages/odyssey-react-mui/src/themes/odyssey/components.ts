@@ -659,6 +659,73 @@ export const components: ThemeOptions["components"] = {
       },
     },
   },
+  MuiTab: {
+    defaultProps: {
+      iconPosition: "start",
+    },
+    styleOverrides: {
+      root: ({ theme, ownerState }) => ({
+        maxWidth: `calc(${theme.mixins.maxWidth} / 2)`,
+        minWidth: "unset",
+        minHeight: "unset",
+        padding: `${theme.spacing(4)} 0`,
+        lineHeight: theme.typography.body.lineHeight,
+        overflow: "visible",
+        ...(ownerState.selected == true && {
+          color: theme.palette.text.primary,
+        }),
+        ...(ownerState.textColor === "inherit" && {
+          color: "inherit",
+          opacity: 1,
+        }),
+        ...(ownerState.wrapped && {
+          fontSize: theme.typography.caption.fontSize,
+          lineHeight: theme.typography.caption.lineHeight,
+        }),
+        "&:hover": {
+          color: theme.palette.primary.main,
+        },
+        "&:focus-visible::before, &.Mui-focusVisible::before": {
+          content: "''",
+          position: "absolute",
+          top: theme.spacing(4),
+          right: `calc(-1 * ${theme.spacing(2)})`,
+          bottom: theme.spacing(4),
+          left: `calc(-1 * ${theme.spacing(2)})`,
+          borderWidth: theme.mixins.borderWidth,
+          borderStyle: theme.mixins.borderStyle,
+          borderColor: theme.palette.primary.main,
+          borderRadius: theme.mixins.borderRadius,
+        },
+        "&.Mui-selected": {
+          color: theme.palette.text.primary,
+          fontWeight: theme.typography.fontWeightBold,
+          "&:hover": {
+            color: theme.palette.primary.main,
+          },
+        },
+        "&.Mui-disabled": {
+          cursor: "not-allowed",
+          pointerEvents: "unset",
+          "&:hover": {
+            color: theme.palette.text.disabled,
+          },
+        },
+      }),
+    },
+  },
+  MuiTabs: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        minHeight: "unset",
+        marginBottom: theme.spacing(5),
+      }),
+      flexContainer: ({ theme }) => ({
+        gap: theme.spacing(5),
+        borderBottom: `${theme.mixins.borderWidth} ${theme.mixins.borderStyle} ${theme.palette.divider}`,
+      }),
+    },
+  },
   MuiTypography: {
     defaultProps: {
       fontFamily:
