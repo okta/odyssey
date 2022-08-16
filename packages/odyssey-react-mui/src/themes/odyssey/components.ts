@@ -718,7 +718,7 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         minHeight: "unset",
-        marginBottom: theme.spacing(5), // Temp
+        marginBottom: theme.spacing(5),
       }),
       flexContainer: ({ theme }) => ({
         gap: theme.spacing(5),
