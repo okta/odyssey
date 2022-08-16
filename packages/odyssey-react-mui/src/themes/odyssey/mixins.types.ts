@@ -12,11 +12,15 @@
 
 declare module "@mui/material/styles" {
   interface Mixins {
+    borderRadius?: string;
+    borderStyle?: string;
     borderWidth?: string;
     maxWidth?: string;
   }
 
   interface MixinsOptions {
+    borderRadius?: string;
+    borderStyle?: string;
     borderWidth?: string;
     maxWidth?: string;
   }

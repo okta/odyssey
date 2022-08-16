@@ -78,9 +78,9 @@ export const palette: ThemeOptions["palette"] = {
     A700: "#585862",
   },
   text: {
-    primary: Tokens.ColorNeutralDark,
-    secondary: Tokens.ColorNeutralBase,
-    disabled: Tokens.ColorNeutralBase, // We do not currently have a unique disabled color.
+    primary: Tokens.ColorPaletteNeutral900,
+    secondary: Tokens.ColorPaletteNeutral600,
+    disabled: Tokens.ColorPaletteNeutral500,
   },
   divider: Tokens.ColorBorderDisplay,
   background: {
