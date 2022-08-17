@@ -628,6 +628,7 @@ export const components: ThemeOptions["components"] = {
             borderColor: theme.palette.action.disabled,
           },
         [`&.${outlinedInputClasses.disabled}`]: {
+          backgroundColor: theme.palette.grey[50],
           pointerEvents: "none",
         },
         ...(ownerState.startAdornment && {
