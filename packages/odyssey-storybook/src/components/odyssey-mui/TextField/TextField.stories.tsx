@@ -50,7 +50,7 @@ export default {
     },
     hint: {
       control: "text",
-      defaultValue: "Specify your destination within the Sol system.",
+      defaultValue: null,
     },
     invalid: {
       control: "boolean",
@@ -136,6 +136,11 @@ Invalid.args = {
   error: "This field is required.",
 };
 
+export const Hint = Template.bind({});
+Hint.args = {
+  hint: "Specify your destination within the Sol system.",
+};
+
 export const Adornment = Template.bind({});
 Adornment.args = {
   endAdornment: <InputAdornment position="end">kg</InputAdornment>,
@@ -146,7 +151,6 @@ Adornment.args = {
 export const Email = Template.bind({});
 Email.args = {
   autoComplete: "work email",
-  hint: null,
   label: "Company email",
   type: "email",
 };
@@ -154,7 +158,6 @@ Email.args = {
 export const Multiline = Template.bind({});
 Multiline.args = {
   autoComplete: "shipping street-address",
-  hint: "Your complete address, preferably on a terrestrial body",
   label: "Permanent residence",
   multiline: true,
 };
@@ -162,7 +165,6 @@ Multiline.args = {
 export const Password = Template.bind({});
 Password.args = {
   autoComplete: "current-password",
-  hint: null,
   label: "Password",
   type: "password",
 };
@@ -170,7 +172,6 @@ Password.args = {
 export const Tel = Template.bind({});
 Tel.args = {
   autoComplete: "mobile tel",
-  hint: null,
   label: "Phone number",
   startAdornment: <InputAdornment position="start">+1</InputAdornment>,
   type: "tel",
