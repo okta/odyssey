@@ -12,6 +12,7 @@
 
 import type { ThemeOptions } from "@mui/material";
 //import radioClasses from "@mui/material";
+import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 
 export const components: ThemeOptions["components"] = {
   MuiAlert: {
@@ -598,10 +599,35 @@ export const components: ThemeOptions["components"] = {
   MuiOutlinedInput: {
     defaultProps: {
       notched: false,
+      minRows: 3,
     },
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
-        "&.Mui-disabled": {
+        [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
+          borderColor: theme.palette.text.primary,
+        },
+        [`&.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]:
+          {
+            borderColor: theme.palette.primary.main,
+            borderWidth: 2,
+          },
+        [`&.${outlinedInputClasses.error} .${outlinedInputClasses.notchedOutline}`]:
+          {
+            borderColor: theme.palette.error.main,
+          },
+        [`&.${outlinedInputClasses.error}:hover .${outlinedInputClasses.notchedOutline}`]:
+          {
+            borderColor: theme.palette.error.dark,
+          },
+        [`&.${outlinedInputClasses.error}.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]:
+          {
+            borderColor: theme.palette.error.main,
+          },
+        [`&.${outlinedInputClasses.disabled} .${outlinedInputClasses.notchedOutline}`]:
+          {
+            borderColor: theme.palette.action.disabled,
+          },
+        [`&.${outlinedInputClasses.disabled}`]: {
           pointerEvents: "none",
         },
         ...(ownerState.startAdornment && {
@@ -610,19 +636,21 @@ export const components: ThemeOptions["components"] = {
         ...(ownerState.endAdornment && {
           paddingRight: theme.spacing(3),
         }),
+        ...(ownerState.multiline && {
+          padding: "0",
+          ...(ownerState.size === "small" && {
+            padding: "0",
+          }),
+        }),
       }),
       input: ({ theme }) => ({
         padding: `calc(${theme.spacing(3)} - 1px) ${theme.spacing(3)}`,
-        border: "1px solid transparent",
+        borderWidth: theme.mixins.borderWidth,
+        borderStyle: theme.mixins.borderStyle,
+        borderColor: "transparent",
       }),
       notchedOutline: ({ theme }) => ({
         borderColor: theme.palette.grey[500],
-        ".MuiOutlinedInput-root:hover &": {
-          borderColor: theme.palette.primary.main,
-        },
-        ".MuiOutlinedInput-root.Mui-error:hover &": {
-          borderColor: theme.palette.error.dark,
-        },
       }),
     },
   },
