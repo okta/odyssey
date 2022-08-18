@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "0.14.5",
+  "version": "0.14.6",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -19,7 +19,7 @@
     "directory": "packages/odyssey-react-mui"
   },
   "dependencies": {
-    "@okta/odyssey-design-tokens": "^0.14.5"
+    "@okta/odyssey-design-tokens": "^0.14.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
@@ -28,12 +28,12 @@
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.2",
-    "@okta/browserslist-config-odyssey": "^0.14.5",
-    "@okta/odyssey-babel-preset": "^0.14.5",
-    "@okta/odyssey-icons": "^0.14.5",
-    "@okta/odyssey-lifecycle": "^0.14.5",
-    "@okta/odyssey-svgr": "^0.14.5",
-    "@okta/odyssey-typescript": "^0.14.5",
+    "@okta/browserslist-config-odyssey": "^0.14.6",
+    "@okta/odyssey-babel-preset": "^0.14.6",
+    "@okta/odyssey-icons": "^0.14.6",
+    "@okta/odyssey-lifecycle": "^0.14.6",
+    "@okta/odyssey-svgr": "^0.14.6",
+    "@okta/odyssey-typescript": "^0.14.6",
     "@svgr/cli": "^5.5.0",
     "@testing-library/dom": "^7.28.1",
     "@testing-library/jest-dom": "^5.12.0",
