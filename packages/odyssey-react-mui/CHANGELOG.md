@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.14.6](https://github.com/okta/odyssey/compare/v0.14.5...v0.14.6) (2022-08-18)
+
+### Features
+
+- **odyssey-react-mui:** add borderRadius and borderStyle variables ([b144cf6](https://github.com/okta/odyssey/commit/b144cf6ea2930d6a3ac5fbbe85610931f8debd1e))
+- **odyssey-react-mui:** add theme for Tabs, Tab ([b4c9fc6](https://github.com/okta/odyssey/commit/b4c9fc6d7f0395e900aa842f9dfeb2ea7366b11c))
+- **odyssey-react-mui:** set theme.palette.action.disabled ([b3ce58a](https://github.com/okta/odyssey/commit/b3ce58a60fb5df7be895d54bc45b81fb5da4f719))
+- **odyssey-react-mui:** update palette.text.disabled ([c9cb834](https://github.com/okta/odyssey/commit/c9cb8344a707f788c47819a008c8dcb32937fbda))
+
 ### [0.14.5](https://github.com/okta/odyssey/compare/v0.14.4...v0.14.5) (2022-08-11)
 
 ### Features
