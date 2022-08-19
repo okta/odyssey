@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.14.6](https://github.com/okta/odyssey/compare/v0.14.5...v0.14.6) (2022-08-18)
+
+**Note:** Version bump only for package @okta/odyssey-lifecycle
+
 ### [0.14.5](https://github.com/okta/odyssey/compare/v0.14.4...v0.14.5) (2022-08-11)
 
 **Note:** Version bump only for package @okta/odyssey-lifecycle
