@@ -19,7 +19,6 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
-  FormHelperText,
   FormGroup,
   FormLabel,
   InputLabel,
@@ -29,7 +28,6 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import FormMdx from "./Form.mdx";
