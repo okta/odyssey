@@ -63,9 +63,13 @@ export const typography: ThemeOptions["typography"] = {
     lineHeight: Tokens.FontLineHeightHeading6,
     marginBottom: Tokens.SpaceScale1,
   },
-  subtitle1: undefined,
+  subtitle1: {
+    fontWeight: Tokens.FontWeightNormal,
+    fontSize: Tokens.FontScale0,
+    lineHeight: Tokens.FontLineHeightBody,
+  },
   subtitle2: undefined,
-  body: {
+  body1: {
     fontFamily: Tokens.FontFamilyBase,
     fontWeight: Number(Tokens.FontWeightNormal),
     fontSize: Tokens.FontScale1,
@@ -74,13 +78,14 @@ export const typography: ThemeOptions["typography"] = {
     lineHeight: Tokens.FontLineHeightBody,
     letterSpacing: "initial",
   },
-  body1: undefined,
   body2: undefined,
   button: undefined,
-  caption: {
-    fontWeight: Tokens.FontWeightNormal,
-    fontSize: Tokens.FontScale0,
-    lineHeight: Tokens.FontLineHeightBody,
-  },
   overline: undefined,
+  legend: {
+    padding: 0,
+    fontWeight: Number(Tokens.FontWeightBold),
+    fontSize: Tokens.FontScale2,
+    lineHeight: Tokens.FontLineHeightHeading6,
+    marginBottom: Tokens.SpaceScale1,
+  },
 };

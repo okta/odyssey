@@ -14,23 +14,26 @@ import { CSSProperties } from "react";
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
-    body: CSSProperties;
+    legend: CSSProperties;
   }
   interface TypographyVariantsOptions {
-    body?: CSSProperties;
+    legend?: CSSProperties;
   }
 }
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    body1: false;
+    body1: true;
     body2: false;
     body: true;
     button: false;
+    legend: true;
     overline: false;
-    subtitle1: false;
+    subtitle1: true;
     subtitle2: false;
     default: true; // used by Link
     monochrome: true; // used by Link
   }
 }
+
+export {};
