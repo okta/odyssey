@@ -277,7 +277,7 @@ export const components: ThemeOptions["components"] = {
         lineHeight: "1.14285714",
         whiteSpace: "nowrap",
 
-        "& + &": {
+        ".MuiButton-root + &": {
           marginInlineStart: theme.spacing(2),
         },
 
