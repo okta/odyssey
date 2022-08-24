@@ -107,31 +107,31 @@ export default {
       control: "text",
       defaultValue: null,
     },
-    fieldsetAlert: {
+    fieldGroupAlert: {
       control: "boolean",
       defaultValue: false,
     },
-    fieldsetOne: {
+    fieldGroupOne: {
       control: "boolean",
       defaultValue: false,
     },
-    fieldsetOneTitle: {
+    fieldGroupOneTitle: {
       control: "text",
       defaultValue: false,
     },
-    fieldsetOneHint: {
+    fieldGroupOneHint: {
       control: "text",
       defaultValue: false,
     },
-    fieldsetTwo: {
+    fieldGroupTwo: {
       control: "boolean",
       defaultValue: false,
     },
-    fieldsetTwoTitle: {
+    fieldGroupTwoTitle: {
       control: "text",
       defaultValue: false,
     },
-    fieldsetTwoHint: {
+    fieldGroupTwoHint: {
       control: "text",
       defaultValue: false,
     },
@@ -169,8 +169,8 @@ const Template: Story = (args) => {
           )}
         </Box>
       )}
-      {/* <Fieldset> One */}
-      {args.fieldsetOne && (
+      {/* <FieldGroup> One */}
+      {args.fieldGroupOne && (
         <Box
           component="fieldset"
           sx={(theme) => ({
@@ -180,11 +180,11 @@ const Template: Story = (args) => {
             marginBottom: theme.spacing(7),
           })}
         >
-          {args.fieldsetOneTitle && (
-            <Typography variant="legend">{args.fieldsetOneTitle}</Typography>
+          {args.fieldGroupOneTitle && (
+            <Typography variant="legend">{args.fieldGroupOneTitle}</Typography>
           )}
-          {args.fieldsetOneTitle && (
-            <Typography paragraph>{args.fieldsetOneHint}</Typography>
+          {args.fieldGroupOneTitle && (
+            <Typography paragraph>{args.fieldGroupOneHint}</Typography>
           )}
           <FormControl>
             <InputLabel id="demo-simple-select-label">
@@ -215,8 +215,8 @@ const Template: Story = (args) => {
           </FormControl>
         </Box>
       )}
-      {/* <Fieldset> Two */}
-      {args.fieldsetTwo && (
+      {/* <FieldGroup> Two */}
+      {args.fieldGroupTwo && (
         <Box
           component="fieldset"
           sx={(theme) => ({
@@ -228,9 +228,9 @@ const Template: Story = (args) => {
         >
           <Typography variant="legend">Ship registration</Typography>
           <Typography paragraph>
-            Here are some more fields in a separate fieldset.
+            Here are some more fields in a separate field group.
           </Typography>
-          {args.fieldsetAlert && (
+          {args.fieldGroupAlert && (
             <Alert severity="error" role="alert" variant="infobox">
               <AlertTitle>Something else is wrong</AlertTitle>
               Something else has gone horribly awry!
@@ -322,7 +322,7 @@ const Template: Story = (args) => {
 
 export const Simple = Template.bind({});
 Simple.args = {
-  fieldsetOne: true,
+  fieldGroupOne: true,
 };
 
 export const WithHeader = Template.bind({});
@@ -330,15 +330,16 @@ WithHeader.args = {
   formTitle: "Docking registration",
   formHint:
     "Before docking with the station, please register your ship and crew.",
-  fieldsetOne: true,
+  fieldGroupOne: true,
 };
 
 export const WithLegend = Template.bind({});
 WithLegend.args = {
-  fieldsetOne: true,
-  fieldsetOneTitle: "Reason for visit",
-  fieldsetOneHint: "This helps us understand why you are visiting our station.",
-  fieldsetTwo: true,
+  fieldGroupOne: true,
+  fieldGroupOneTitle: "Reason for visit",
+  fieldGroupOneHint:
+    "This helps us understand why you are visiting our station.",
+  fieldGroupTwo: true,
 };
 
 export const WithFormError = Template.bind({});
@@ -347,16 +348,17 @@ WithFormError.args = {
   formTitle: "Docking registration",
   formHint:
     "Before docking with the station, please register your ship and crew.",
-  fieldsetOne: true,
+  fieldGroupOne: true,
 };
 
-export const WithFieldsetError = Template.bind({});
-WithFieldsetError.args = {
-  fieldsetAlert: true,
-  fieldsetOne: true,
-  fieldsetOneTitle: "Reason for visit",
-  fieldsetOneHint: "This helps us understand why you are visiting our station.",
-  fieldsetTwo: true,
+export const WithFieldGroupError = Template.bind({});
+WithFieldGroupError.args = {
+  fieldGroupAlert: true,
+  fieldGroupOne: true,
+  fieldGroupOneTitle: "Reason for visit",
+  fieldGroupOneHint:
+    "This helps us understand why you are visiting our station.",
+  fieldGroupTwo: true,
 };
 
 export const KitchenSink = Template.bind({});
@@ -365,9 +367,10 @@ KitchenSink.args = {
   formTitle: "Docking registration",
   formHint:
     "Before docking with the station, please register your ship and crew.",
-  fieldsetAlert: true,
-  fieldsetOne: true,
-  fieldsetOneTitle: "Reason for visit",
-  fieldsetOneHint: "This helps us understand why you are visiting our station.",
-  fieldsetTwo: true,
+  fieldGroupAlert: true,
+  fieldGroupOne: true,
+  fieldGroupOneTitle: "Reason for visit",
+  fieldGroupOneHint:
+    "This helps us understand why you are visiting our station.",
+  fieldGroupTwo: true,
 };
