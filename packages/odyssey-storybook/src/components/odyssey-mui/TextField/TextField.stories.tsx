@@ -24,7 +24,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TextFieldMdx from "./TextField.mdx";
 
 export default {
-  title: `MUI Components/Text Field`,
+  title: `MUI Components/Forms/Text Field`,
   component: OutlinedInput,
   parameters: {
     docs: {

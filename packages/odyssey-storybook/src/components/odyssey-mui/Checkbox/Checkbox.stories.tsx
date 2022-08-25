@@ -25,7 +25,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import CheckboxMdx from "./Checkbox.mdx";
 
 export default {
-  title: `MUI Components/Checkbox`,
+  title: `MUI Components/Forms/Checkbox`,
   component: Checkbox,
   parameters: {
     docs: {
