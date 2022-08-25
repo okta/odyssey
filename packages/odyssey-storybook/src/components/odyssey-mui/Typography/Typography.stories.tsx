@@ -78,11 +78,11 @@ Heading6.args = {
 export const Body = Template.bind({});
 Body.args = {
   children: "This is body copy.",
-  variant: "body",
+  variant: "body1",
 };
 
 export const Caption = Template.bind({});
 Caption.args = {
   children: "This is a caption.",
-  variant: "caption",
+  variant: "subtitle1",
 };

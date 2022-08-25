@@ -23,7 +23,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import PasswordInputMdx from "./PasswordInput.mdx";
 
 export default {
-  title: `MUI Components/PasswordInput`,
+  title: `MUI Components/Forms/PasswordInput`,
   component: PasswordInput,
   parameters: {
     docs: {
