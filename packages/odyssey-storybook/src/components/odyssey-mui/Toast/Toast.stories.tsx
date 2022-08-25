@@ -67,7 +67,7 @@ const DefaultTemplate: Story = (args) => {
       </Button>
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity={args.severity} variant="toast">
+          <Alert severity={args.severity} variant="toast">
             {args.title && <AlertTitle>{args.title}</AlertTitle>}
             {args.content}
           </Alert>
@@ -79,7 +79,7 @@ const DefaultTemplate: Story = (args) => {
 
 const StaticTemplate: Story = (args) => {
   return (
-    <Alert onClose={() => undefined} severity={args.severity} variant="toast">
+    <Alert severity={args.severity} variant="toast">
       {args.title && <AlertTitle>{args.title}</AlertTitle>}
       {args.content}
     </Alert>

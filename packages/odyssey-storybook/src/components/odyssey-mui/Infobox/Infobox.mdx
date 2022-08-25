@@ -116,6 +116,97 @@ Infobox should always include their main messaging within the body content. Titl
 
 When deploying Infoboxes, two `role`s may apply. Error variants should utilize the `alert` role, as their contents represent immediate risk or failure. Success and Warning variants are better suited to the `status` role, which provides a less urgent announcement on appearance. The Info variant does not require a `role`, as it represents plain content.
 
-## Props
+## References
 
-<ArgsTable />
+<figure class="ods-table--figure">
+  <figcaption class="ods-table--figcaption">Related Components</figcaption>
+  <table class="ods-table">
+    <caption>Differences between the available alert components</caption>
+    <thead>
+      <tr>
+        <th scope="column">Component</th>
+        <th scope="column">Available Variants</th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-dynamic">Dynamic</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-dynamic"
+              role="tooltip"
+            >
+              May be inserted after page load
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-transient">Transient</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-transient"
+              role="tooltip"
+            >
+              Disappears without user interaction
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-dismissible">Dismissible</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-dismissible"
+              role="tooltip"
+            >
+              May be dismissed by the user
+            </aside>
+          </span>
+        </th>
+        <th scope="column">
+          <span class="has-ods-tooltip">
+            <abbr aria-describedby="tip-actionable">Actionable</abbr>
+            <aside
+              class="ods-tooltip is-ods-tooltip-top"
+              id="tip-actionable"
+              role="tooltip"
+            >
+              May include actions or links
+            </aside>
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <a href="?path=/docs/components-alerts-banner--info#banner">Banner</a>
+        </th>
+        <td>Info, Warning, Error</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <th scope="row">Infobox</th>
+        <td>Success, Warning, Error</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <a href="?path=/docs/mui-components-alerts-toast--info#toast">
+            Toast
+          </a>
+        </th>
+        <td>Info, Success, Warning, Error</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
