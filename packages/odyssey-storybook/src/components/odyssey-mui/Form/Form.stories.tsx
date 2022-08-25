@@ -41,55 +41,6 @@ export default {
     },
   },
   argTypes: {
-    autoComplete: {
-      control: "text",
-      defaultValue: "name",
-    },
-    disabled: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    endAdornment: {
-      control: "text",
-      defaultValue: null,
-    },
-    error: {
-      control: "text",
-      defaultValue: null,
-    },
-    hint: {
-      control: "text",
-      defaultValue: null,
-    },
-    invalid: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    label: {
-      control: "text",
-      defaultValue: "Destination",
-    },
-    multiline: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    readOnly: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    startAdornment: {
-      control: "text",
-      defaultValue: null,
-    },
-    type: {
-      control: "select",
-      options: ["text", "email", "search", "tel", "password"],
-      defaultValue: "text",
-    },
-    value: {
-      control: "text",
-      defaultValue: null,
-    },
     formAlert: {
       control: "boolean",
       defaultValue: null,
