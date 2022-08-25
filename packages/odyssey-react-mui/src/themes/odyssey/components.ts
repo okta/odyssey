@@ -90,9 +90,6 @@ export const components: ThemeOptions["components"] = {
         }),
         ...(ownerState.variant === "toast" && {
           flexGrow: 1,
-          paddingRight: `calc((${theme.spacing(1)} * 2) + ${
-            theme.typography.body.fontSize
-          } + ${theme.spacing(4)})`,
         }),
       }),
     },
