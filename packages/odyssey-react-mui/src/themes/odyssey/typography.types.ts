@@ -14,9 +14,11 @@ import { CSSProperties } from "react";
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
+    kbd: CSSProperties;
     legend: CSSProperties;
   }
   interface TypographyVariantsOptions {
+    kbd?: CSSProperties;
     legend?: CSSProperties;
   }
 }
@@ -27,6 +29,7 @@ declare module "@mui/material/Typography" {
     body2: false;
     body: true;
     button: false;
+    kbd: true;
     legend: true;
     overline: false;
     subtitle1: true;
