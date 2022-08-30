@@ -23,10 +23,10 @@ export const components: ThemeOptions["components"] = {
   MuiAlert: {
     defaultProps: {
       iconMapping: {
-        error: <AlertTriangleFilledIcon fontSize="inherit" />,
-        info: <InformationCircleFilledIcon fontSize="inherit" />,
-        success: <CheckCircleFilledIcon fontSize="inherit" />,
-        warning: <AlertTriangleFilledIcon fontSize="inherit" />,
+        error: <AlertTriangleFilledIcon />,
+        info: <InformationCircleFilledIcon />,
+        success: <CheckCircleFilledIcon />,
+        warning: <AlertTriangleFilledIcon />,
       },
     },
     styleOverrides: {
@@ -705,6 +705,12 @@ export const components: ThemeOptions["components"] = {
         vertical: "bottom",
         horizontal: "right",
       },
+    },
+  },
+  MuiSvgIcon: {
+    defaultProps: {
+      fontSize: "inherit",
+      color: "inherit",
     },
   },
   MuiTab: {
