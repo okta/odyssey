@@ -13,9 +13,22 @@
 import type { ThemeOptions } from "@mui/material";
 //import radioClasses from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import {
+  AlertTriangleFilledIcon,
+  CheckCircleFilledIcon,
+  InformationCircleFilledIcon,
+} from "../../components/Icon";
 
 export const components: ThemeOptions["components"] = {
   MuiAlert: {
+    defaultProps: {
+      iconMapping: {
+        error: <AlertTriangleFilledIcon />,
+        info: <InformationCircleFilledIcon />,
+        success: <CheckCircleFilledIcon />,
+        warning: <AlertTriangleFilledIcon />,
+      },
+    },
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
         padding: theme.spacing(4),
@@ -692,6 +705,12 @@ export const components: ThemeOptions["components"] = {
         vertical: "bottom",
         horizontal: "right",
       },
+    },
+  },
+  MuiSvgIcon: {
+    defaultProps: {
+      fontSize: "inherit",
+      color: "inherit",
     },
   },
   MuiTab: {
