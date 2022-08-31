@@ -125,6 +125,9 @@ export * from "./Settings";
 import { SubtractIcon } from "./Subtract";
 export * from "./Subtract";
 
+import { UserGroupIcon } from "./UserGroup";
+export * from "./UserGroup";
+
 import { UserIcon } from "./User";
 export * from "./User";
 
@@ -166,5 +169,6 @@ export const iconDictionary = {
   search: SearchIcon,
   settings: SettingsIcon,
   subtract: SubtractIcon,
+  "user-group": UserGroupIcon,
   user: UserIcon,
 };
