@@ -43,10 +43,10 @@ import * as SomethingTest from \\"./lib/something.test.js\\";"
 `;
 
 exports[`plugin should skip bare module specifiers 1`] = `
-"import babel from '@babel/core';
-import { transform } from '@babel/core';
-export * from '@babel/core';
-export { transform } from '@babel/core';"
+"import babel from \\"@babel/core/index.js\\";
+import { transform } from \\"@babel/core/index.js\\";
+export * from \\"@babel/core/index.js\\";
+export { transform } from \\"@babel/core/index.js\\";"
 `;
 
 exports[`plugin should skip style module imports 1`] = `

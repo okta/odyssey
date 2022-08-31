@@ -34,8 +34,6 @@ const isNodeModule = (candidate: string): boolean => {
 };
 
 const skipModule = (candidate: string) =>
-  !candidate.startsWith(".") ||
-  isNodeModule(candidate) ||
   [".js", ".scss"].includes(extname(candidate));
 
 export function plugin({
@@ -77,7 +75,9 @@ export function plugin({
           return;
         }
 
-        const dirPath = resolve(dirname(state.filename), candidate);
+        const dirPath = isNodeModule(candidate)
+          ? dirname(require.resolve(candidate))
+          : resolve(dirname(state.filename), candidate);
 
         const fullySpecifiedLiteral = t.stringLiteral(
           existsSync(dirPath) && lstatSync(dirPath).isDirectory()
