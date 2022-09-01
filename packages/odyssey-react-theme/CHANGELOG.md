@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.0](https://github.com/okta/odyssey/compare/v0.14.6...v0.15.0) (2022-09-01)
+
+### Features
+
+- added nonce capabilities for Okta apps ([c89a488](https://github.com/okta/odyssey/commit/c89a48848d6daf8aed1c0f0f865130a8b3f3c96a))
+
+### Bug Fixes
+
+- fixed incorrect Nonce global on window ([5a21b7d](https://github.com/okta/odyssey/commit/5a21b7d3041161a6b14520ca540f78673a2521f8))
+
 ### [0.14.6](https://github.com/okta/odyssey/compare/v0.14.5...v0.14.6) (2022-08-18)
 
 **Note:** Version bump only for package @okta/odyssey-react-theme
