@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.0](https://github.com/okta/odyssey/compare/v0.14.6...v0.15.0) (2022-09-01)
+
+### Features
+
+- **odyssey-storybook:** add user-group icon example ([3715357](https://github.com/okta/odyssey/commit/3715357edfba73ed92bff2525df007ad9f6ba93b))
+
 ### [0.14.6](https://github.com/okta/odyssey/compare/v0.14.5...v0.14.6) (2022-08-18)
 
 **Note:** Version bump only for package @okta/odyssey-storybook

@@ -153,6 +153,10 @@ const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
     use: "To subtract or remove",
   },
   { name: "user", use: "To support a user name" },
+  {
+    name: "user-group",
+    use: "To represent a group of users",
+  },
 ];
 
 export const Library = (): ReactElement => {

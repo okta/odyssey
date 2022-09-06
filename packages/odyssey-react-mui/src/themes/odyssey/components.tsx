@@ -13,9 +13,22 @@
 import type { ThemeOptions } from "@mui/material";
 //import radioClasses from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import {
+  AlertTriangleFilledIcon,
+  CheckCircleFilledIcon,
+  InformationCircleFilledIcon,
+} from "../../components/Icon";
 
 export const components: ThemeOptions["components"] = {
   MuiAlert: {
+    defaultProps: {
+      iconMapping: {
+        error: <AlertTriangleFilledIcon />,
+        info: <InformationCircleFilledIcon />,
+        success: <CheckCircleFilledIcon />,
+        warning: <AlertTriangleFilledIcon />,
+      },
+    },
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
         padding: theme.spacing(4),
@@ -82,7 +95,7 @@ export const components: ThemeOptions["components"] = {
       }),
       message: ({ ownerState, theme }) => ({
         padding: 0,
-        lineHeight: theme.typography.body.lineHeight,
+        lineHeight: theme.typography.body1.lineHeight,
         ...(ownerState.variant === "banner" && {
           display: "flex",
           justifyContent: "space-between",
@@ -90,9 +103,6 @@ export const components: ThemeOptions["components"] = {
         }),
         ...(ownerState.variant === "toast" && {
           flexGrow: 1,
-          paddingRight: `calc((${theme.spacing(1)} * 2) + ${
-            theme.typography.body.fontSize
-          } + ${theme.spacing(4)})`,
         }),
       }),
     },
@@ -277,7 +287,7 @@ export const components: ThemeOptions["components"] = {
         lineHeight: "1.14285714",
         whiteSpace: "nowrap",
 
-        "& + &": {
+        ".MuiButton-root + &": {
           marginInlineStart: theme.spacing(2),
         },
 
@@ -364,17 +374,26 @@ export const components: ThemeOptions["components"] = {
     },
   },
   MuiFormControl: {
+    defaultProps: {
+      margin: "normal",
+    },
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
         width: "100%",
         maxWidth: "32rem",
         ...(ownerState.margin === "normal" && {
           marginTop: 0,
-          marginBottom: theme.spacing(4),
+          marginBottom: theme.spacing(5),
+          "&:last-child": {
+            marginBottom: 0,
+          },
         }),
         ...(ownerState.margin === "dense" && {
           marginTop: 0,
-          marginBottom: theme.spacing(4),
+          marginBottom: theme.spacing(5),
+          "&:last-child": {
+            marginBottom: 0,
+          },
         }),
         ...(ownerState.fullWidth && {
           maxWidth: "100%",
@@ -462,7 +481,7 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         padding: theme.spacing(1),
-        fontSize: theme.typography.body.fontSize,
+        fontSize: theme.typography.body1.fontSize,
       }),
     },
   },
@@ -688,6 +707,12 @@ export const components: ThemeOptions["components"] = {
       },
     },
   },
+  MuiSvgIcon: {
+    defaultProps: {
+      fontSize: "inherit",
+      color: "inherit",
+    },
+  },
   MuiTab: {
     defaultProps: {
       iconPosition: "start",
@@ -698,7 +723,7 @@ export const components: ThemeOptions["components"] = {
         minWidth: "unset",
         minHeight: "unset",
         padding: `${theme.spacing(4)} 0`,
-        lineHeight: theme.typography.body.lineHeight,
+        lineHeight: theme.typography.body1.lineHeight,
         overflow: "visible",
         ...(ownerState.selected == true && {
           color: theme.palette.text.primary,
@@ -708,8 +733,8 @@ export const components: ThemeOptions["components"] = {
           opacity: 1,
         }),
         ...(ownerState.wrapped && {
-          fontSize: theme.typography.caption.fontSize,
-          lineHeight: theme.typography.caption.lineHeight,
+          fontSize: theme.typography.subtitle1.fontSize,
+          lineHeight: theme.typography.subtitle1.lineHeight,
         }),
         "&:hover": {
           color: theme.palette.primary.main,
@@ -759,10 +784,39 @@ export const components: ThemeOptions["components"] = {
     defaultProps: {
       fontFamily:
         "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
+      variantMapping: {
+        h1: "h1",
+        h2: "h2",
+        h3: "h3",
+        h4: "h4",
+        h5: "h5",
+        h6: "h6",
+        subtitle1: "p",
+        body1: "p",
+        inherit: "p",
+        kbd: "kbd",
+        legend: "legend",
+      },
     },
     styleOverrides: {
       paragraph: ({ theme }) => ({
         marginBottom: theme.spacing(4),
+      }),
+      root: ({ theme, ownerState }) => ({
+        ...(ownerState.variant === "kbd" && {
+          display: "inline-block",
+          minWidth: `calc(${theme.typography.subtitle1.fontSize} * ${theme.typography.h5.lineHeight})`,
+          borderStyle: theme.mixins.borderStyle,
+          borderWidth: theme.mixins.borderWidth,
+          borderRadius: theme.mixins.borderRadius,
+          borderColor: theme.palette.grey[200],
+          backgroundColor: theme.palette.grey[50],
+          padding: `calc(${theme.spacing(1)} / 2) ${theme.spacing(1)}`,
+          fontSize: theme.typography.subtitle1.fontSize,
+          fontWeight: theme.typography.fontWeightRegular,
+          lineHeight: theme.typography.h5.lineHeight,
+          boxShadow: `0 1px 1px 0 hsla(240, 6%, 12%, 0.05)`,
+        }),
       }),
     },
   },
