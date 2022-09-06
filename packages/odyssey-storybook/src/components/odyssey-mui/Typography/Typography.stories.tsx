@@ -30,7 +30,18 @@ export default {
       defaultValue: "Spice is vital for space travel.",
     },
     variant: {
-      options: ["h1", "h2", "h3", "h4", "h5", "h6", "body", "caption"],
+      options: [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "body1",
+        "subtitle1",
+        "kbd",
+        "legend",
+      ],
       control: { type: "select" },
     },
   },
@@ -78,11 +89,29 @@ Heading6.args = {
 export const Body = Template.bind({});
 Body.args = {
   children: "This is body copy.",
-  variant: "body",
+  variant: "body1",
 };
 
 export const Caption = Template.bind({});
 Caption.args = {
   children: "This is a caption.",
-  variant: "caption",
+  variant: "subtitle1",
+};
+
+export const Legend = Template.bind({});
+Legend.args = {
+  children: "This is a legend",
+  variant: "legend",
+};
+
+export const kbd = Template.bind({});
+kbd.args = {
+  children: "⌘",
+  variant: "kbd",
+};
+
+export const kbd2 = Template.bind({});
+kbd2.args = {
+  children: "Ctrl",
+  variant: "kbd",
 };

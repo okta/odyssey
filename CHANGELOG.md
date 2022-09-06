@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.0](https://github.com/okta/odyssey/compare/v0.14.6...v0.15.0) (2022-09-01)
+
+### ⚠ BREAKING CHANGES
+
+- **odyssey-react-mui:** removes `body` and `caption` variants in favor of MUI's `body1` and `subtitle`
+
+### Features
+
+- added nonce capabilities for Okta apps ([c89a488](https://github.com/okta/odyssey/commit/c89a48848d6daf8aed1c0f0f865130a8b3f3c96a))
+- **odyssey-icons:** add UserGroup assets ([b205264](https://github.com/okta/odyssey/commit/b205264b1bab5f7f9a2278024ef647436248e54d))
+- **odyssey-react-mui:** add styles for kbd to Typography ([69b3ecc](https://github.com/okta/odyssey/commit/69b3eccd8bf40dc634754c3fb19518574e88c9db))
+- **odyssey-react-mui:** add UserGroupIcon ([532a2d2](https://github.com/okta/odyssey/commit/532a2d2d6351d93c99c2af3b0e92d7041de331b8))
+- **odyssey-react-mui:** apply ODS Icons to MuiAlert ([4260b7a](https://github.com/okta/odyssey/commit/4260b7aeccf0534707687dfc3c8c5f94dbb20901))
+- **odyssey-react-mui:** set defaultProps for SvgIcon ([52b2e7d](https://github.com/okta/odyssey/commit/52b2e7d15f16f899523e396b53fcfcb7056a958b))
+- **odyssey-react-mui:** themes spacing for Form layout and Typography ([263d248](https://github.com/okta/odyssey/commit/263d2482643e600041edaa34073b164eb1cf8873))
+- **odyssey-storybook:** add user-group icon example ([3715357](https://github.com/okta/odyssey/commit/3715357edfba73ed92bff2525df007ad9f6ba93b))
+
+### Bug Fixes
+
+- fixed incorrect Nonce global on window ([5a21b7d](https://github.com/okta/odyssey/commit/5a21b7d3041161a6b14520ca540f78673a2521f8))
+- **odyssey-react-mui:** fix adjacent Button spacing ([44941d5](https://github.com/okta/odyssey/commit/44941d55d83249069cd6a545104a106b624e7387))
+- temporarily remove `type: "module"` from odyssey-react-mui ([5fde17a](https://github.com/okta/odyssey/commit/5fde17a72970174a69a27080763e66b91e9d1cfb))
+
 ### [0.14.6](https://github.com/okta/odyssey/compare/v0.14.5...v0.14.6) (2022-08-18)
 
 ### Features

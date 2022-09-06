@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.0](https://github.com/okta/odyssey/compare/v0.14.6...v0.15.0) (2022-09-01)
+
+### Features
+
+- **odyssey-icons:** add UserGroup assets ([b205264](https://github.com/okta/odyssey/commit/b205264b1bab5f7f9a2278024ef647436248e54d))
+
 ### [0.14.6](https://github.com/okta/odyssey/compare/v0.14.5...v0.14.6) (2022-08-18)
 
 **Note:** Version bump only for package @okta/odyssey-icons

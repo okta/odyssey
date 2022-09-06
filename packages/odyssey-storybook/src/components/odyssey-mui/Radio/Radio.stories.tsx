@@ -25,7 +25,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import RadioMdx from "./Radio.mdx";
 
 export default {
-  title: `MUI Components/Radio`,
+  title: `MUI Components/Forms/Radio`,
   component: Radio,
   parameters: {
     docs: {
