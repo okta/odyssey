@@ -25,17 +25,16 @@ declare module "@mui/material/styles" {
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    body1: true;
+    body1: true; // Design may refer to this as "body"
     body2: false;
-    body: true;
     button: false;
     kbd: true;
     legend: true;
     overline: false;
-    subtitle1: true;
+    subtitle1: true; // Design may refer to this as "caption"
     subtitle2: false;
-    default: true; // used by Link
-    monochrome: true; // used by Link
+    default: true; // used by <Link>
+    monochrome: true; // used by <Link>
   }
 }
 
