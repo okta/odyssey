@@ -59,7 +59,6 @@ declare module "@mui/material/Link" {
     body1: false;
     body2: false;
     button: false;
-    caption: false;
     h1: false;
     h2: false;
     h3: false;
