@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-design-tokens",
-  "version": "0.14.6",
+  "version": "0.15.0",
   "description": "Design tokens for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -20,7 +20,7 @@
     "directory": "packages/odyssey-design-tokens"
   },
   "devDependencies": {
-    "@okta/odyssey-lifecycle": "^0.14.6",
+    "@okta/odyssey-lifecycle": "^0.15.0",
     "style-dictionary": "^3.0.1"
   },
   "scripts": {
