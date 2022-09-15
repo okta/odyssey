@@ -270,6 +270,7 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         fontWeight: 600,
+        minWidth: "unset",
         padding: `calc(${theme.spacing(3)} - 1px) ${theme.spacing(3)}`,
         display: "inline-block",
         position: "relative",
@@ -279,11 +280,11 @@ export const components: ThemeOptions["components"] = {
           "color, background-color, border-color, outline-offset, outline-color",
         transitionDuration: "100ms",
         transitionTimingFunction: "linear",
-        borderWidth: "1px",
-        borderStyle: "solid",
+        borderWidth: theme.mixins.borderWidth,
+        borderStyle: theme.mixins.borderStyle,
         outlineColor: "transparent",
         outlineOffset: "0",
-        fontSize: "1rem",
+        fontSize: theme.typography.body1.fontSize,
         lineHeight: "1.14285714",
         whiteSpace: "nowrap",
 
@@ -482,6 +483,27 @@ export const components: ThemeOptions["components"] = {
       root: ({ theme }) => ({
         padding: theme.spacing(1),
         fontSize: theme.typography.body1.fontSize,
+        backgroundColor: "transparent",
+        color: theme.palette.text.primary,
+        borderColor: "transparent",
+        borderRadius: theme.mixins.borderRadius,
+
+        "&:hover, &:focus-visible": {
+          backgroundColor: "rgba(29, 29, 33, 0.1)",
+          borderColor: "transparent",
+        },
+        "&:focus-visible": {
+          outlineColor: theme.palette.primary.main,
+        },
+        "&:active": {
+          backgroundColor: "rgba(29, 29, 33, 0.2)",
+          borderColor: "transparent",
+        },
+        "&:disabled": {
+          backgroundColor: "rgba(235, 235, 237, 0.6)",
+          color: theme.palette.text.secondary,
+          borderColor: "transparent",
+        },
       }),
     },
   },
