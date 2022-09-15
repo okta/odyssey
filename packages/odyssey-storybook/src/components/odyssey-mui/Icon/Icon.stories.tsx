@@ -78,6 +78,10 @@ const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
     use: "",
   },
   {
+    name: "arrow-up-down",
+    use: "",
+  },
+  {
     name: "calendar",
     use: "",
   },
