@@ -113,20 +113,20 @@ contrast ratio assertions in CI to further automate good a11y outcomes.
 
 Updating or adding icons is currently a simple but manual process:
 
-1. [Des] Export the SVG from Figma with default settings.
-2. [Eng] Copy this SVG into `packages/odyssey-icons/figma/`.
+1. [Design] Export the SVG from Figma with default settings.
+2. [Engineering] Copy this SVG into `packages/odyssey-icons/figma/`.
 
 - This is where our unoptimized icon assets are housed.
 
-3. [Eng] From `packages/odyssey-icons/` run `yarn svgo`.
+3. [Engineering] From `packages/odyssey-icons/` run `yarn svgo`.
 
 - This updates all unoptimized assets based on the latest `packages/odyssey-icons/.svgo.yml` and copies them to `packages/odyssey-icons/src/`.
 
-4. [Eng] From `packages/odyssey-react-mui` run `yarn build:icons`.
+4. [Engineering] From `packages/odyssey-react-mui` run `yarn build:icons`.
 
 - This generates `<XIcon>` components for all optimized assets in `packages/odyssey-icons/src/`.
 
-5. [Eng] Update `packages/odyssey-storybook/src/components/odyssey-mui/Icon/Icon.stories.tsx` to include this new icon.
+5. [Engineering] Update `packages/odyssey-storybook/src/components/odyssey-mui/Icon/Icon.stories.tsx` to include this new icon.
 
 - `name` should match the asset's filename; `use` is optional--ask Design if you're unsure.
 
