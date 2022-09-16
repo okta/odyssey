@@ -108,3 +108,26 @@ As a highlevel guide, please consult the full [Dequeue Web Accessibility Checkli
 Beyond the checklist, Odyssey uses DOM based assertions in our test suite,
 static analysis of our component code at authorship time, and snapshot based
 contrast ratio assertions in CI to further automate good a11y outcomes.
+
+## Icon management
+
+Updating or adding icons is currently a simple but manual process:
+
+1. [Design] Export the SVG from Figma with default settings.
+2. [Engineering] Copy this SVG into `packages/odyssey-icons/figma/`.
+
+- This is where our unoptimized icon assets are housed.
+
+3. [Engineering] From `packages/odyssey-icons/` run `yarn svgo`.
+
+- This updates all unoptimized assets based on the latest `packages/odyssey-icons/.svgo.yml` and copies them to `packages/odyssey-icons/src/`.
+
+4. [Engineering] From `packages/odyssey-react-mui` run `yarn build:icons`.
+
+- This generates `<XIcon>` components for all optimized assets in `packages/odyssey-icons/src/`.
+
+5. [Engineering] Update `packages/odyssey-storybook/src/components/odyssey-mui/Icon/Icon.stories.tsx` to include this new icon.
+
+- `name` should match the asset's filename; `use` is optional--ask Design if you're unsure.
+
+If these steps have completed successfully, the new asset should be visible in [the Icon Library](?path=/docs/mui-components-icon--library#library).
