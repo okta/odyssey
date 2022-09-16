@@ -41,6 +41,9 @@ export * from "./ArrowLeft";
 import { ArrowRightIcon } from "./ArrowRight";
 export * from "./ArrowRight";
 
+import { ArrowUpDownIcon } from "./ArrowUpDown";
+export * from "./ArrowUpDown";
+
 import { ArrowUpIcon } from "./ArrowUp";
 export * from "./ArrowUp";
 
@@ -141,6 +144,7 @@ export const iconDictionary = {
   "arrow-down": ArrowDownIcon,
   "arrow-left": ArrowLeftIcon,
   "arrow-right": ArrowRightIcon,
+  "arrow-up-down": ArrowUpDownIcon,
   "arrow-up": ArrowUpIcon,
   calendar: CalendarIcon,
   "check-circle-filled": CheckCircleFilledIcon,
