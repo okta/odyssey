@@ -5,6 +5,7 @@
   "description": "The home for Odyssey's supported icons.",
   "homepage": "https://github.com/okta/odyssey",
   "license": "Apache-2.0",
+  "sideEffects": false,
   "author": "Okta, Inc.",
   "files": [
     "src"
