@@ -47,10 +47,10 @@ export default function compileFactory(): Compile {
       delete result.message.warning;
     }
 
+    worker.unref();
+
     return result.message;
   };
-
-  worker.unref();
 
   return compile;
 }

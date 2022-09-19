@@ -150,25 +150,27 @@ describe("Modal", () => {
 
   it("should initially focus on modal's dismiss icon when opened", async () => {
     render(<FocusWrapper />);
-    const dismissIcon = screen.getByTitle(message).closest("button");
     screen.getByText(callToAction).click();
     await waitFor(() => {
-      expect(document.activeElement).toBe(dismissIcon);
+      const closeButton = screen.getByRole("button", { name: message });
+      expect(closeButton).toHaveFocus();
     });
   });
 
   it("should restore focus to original focused element when modal is closed", async () => {
     render(<FocusWrapper />);
     const openButton = screen.getByText(callToAction);
-    const closeButton = screen.getByTitle(message).closest("button");
     openButton.focus();
     openButton.click();
     await waitFor(() => {
-      expect(screen.getByText(modalHeading)).toBeVisible();
+      expect(screen.getByRole("dialog")).toBeVisible();
     });
+    const closeButton = screen.getByRole("button", { name: message });
+    expect(closeButton).toBeVisible();
     closeButton?.click();
     await waitFor(() => {
-      expect(document.activeElement).toBe(openButton);
+      expect(closeButton).not.toBeVisible();
+      expect(openButton).toHaveFocus();
     });
   });
 
