@@ -18,7 +18,7 @@
     "stylelint-use-logical-spec": "^3.2.0"
   },
   "devDependencies": {
-    "jest": "^26.6.3",
+    "jest": "^29.0.3",
     "jest-preset-stylelint": "^4.1.1",
     "postcss": "^8.3.6",
     "postcss-scss": "^4.0.0"
