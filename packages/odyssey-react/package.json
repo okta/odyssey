@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@okta/odyssey-react-theme": "^0.15.0",
-    "@react-aria/focus": "3.8.0",
     "choices.js": "^9.0.1"
   },
   "devDependencies": {
