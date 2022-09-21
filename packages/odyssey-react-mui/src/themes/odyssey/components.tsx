@@ -96,6 +96,7 @@ export const components: ThemeOptions["components"] = {
       message: ({ ownerState, theme }) => ({
         padding: 0,
         lineHeight: theme.typography.body1.lineHeight,
+        overflow: "visible",
         ...(ownerState.variant === "banner" && {
           display: "flex",
           justifyContent: "space-between",
