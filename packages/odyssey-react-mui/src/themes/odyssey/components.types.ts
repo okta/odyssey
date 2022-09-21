@@ -88,4 +88,15 @@ declare module "@mui/material/Link" {
   }
 }
 
+declare module "@mui/material/TableCell" {
+  interface TableCellPropsVariantOverrides {
+    action: true;
+    body: true;
+    date: true;
+    footer: true;
+    head: true;
+    number: true;
+  }
+}
+
 export {};
