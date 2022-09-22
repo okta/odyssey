@@ -40,12 +40,7 @@ function setFocus(elem: OptionalHTMLElement): OptionalHTMLElement {
   const allItems: NodeListOf<HTMLElement> = elem.querySelectorAll(
     FOCUSABLE_ITEMS_SELECTOR
   );
-  const focusableItems = Array.from(allItems).filter((el) => {
-    if (el.tabIndex === -1) {
-      return false;
-    }
-    return true;
-  });
+  const focusableItems = Array.from(allItems).filter((el) => el.tabIndex >= 0);
   // Capture original focused element before setting focus inside modal dialog
   const lastFocusedElement = document.activeElement;
   if (focusableItems.length > 0) {
@@ -63,9 +58,9 @@ function setFocus(elem: OptionalHTMLElement): OptionalHTMLElement {
  */
 function restoreFocus(elem: OptionalHTMLElement): void {
   if (elem && document.contains(elem)) {
-    requestAnimationFrame(() => {
+    (() => {
       elem.focus();
-    });
+    })();
   }
 }
 

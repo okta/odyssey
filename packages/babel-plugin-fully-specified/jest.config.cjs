@@ -11,9 +11,5 @@
  */
 
 module.exports = {
-  setupFilesAfterEnv: ["./jest.setup.js"],
   testEnvironment: "jsdom",
-  transformIgnorePatterns: [
-    "<rootDir>/node_modules/(?!@okta/odyssey-design-tokens/)",
-  ],
 };
