@@ -24,8 +24,8 @@
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/core": "^7.15.0",
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.19.1",
     "@okta/browserslist-config-odyssey": "^0.15.0",
     "@okta/odyssey-babel-preset": "^0.15.0",
     "@okta/odyssey-lifecycle": "^0.15.0",
@@ -42,7 +42,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "regenerator-runtime": "^0.13.7",
-    "typescript": "^4.4.4"
+    "typescript": "^4.8.3"
   },
   "peerDependencies": {
     "react": ">=16 <18",
