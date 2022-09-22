@@ -4,6 +4,7 @@
   "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/okta/odyssey",
@@ -12,9 +13,9 @@
   "devDependencies": {
     "@applitools/eyes-storybook": "^3.27.6",
     "@babel/core": "^7.19.1",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.9.2",
-    "@mui/utils": "^5.9.2",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.5",
+    "@mui/utils": "^5.10.3",
     "@okta/odyssey-babel-loader": "^0.15.0",
     "@okta/odyssey-design-tokens": "^0.15.0",
     "@okta/odyssey-lifecycle": "^0.15.0",

@@ -6,6 +6,7 @@
   "author": "Okta, Inc.",
   "homepage": "https://github.com/okta/odyssey#readme",
   "license": "Apache-2.0",
+  "sideEffects": false,
   "main": "dist/index.js",
   "repository": {
     "type": "git",

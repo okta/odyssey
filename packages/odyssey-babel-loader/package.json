@@ -4,6 +4,7 @@
   "description": "Babel webpack loader for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
+  "sideEffects": false,
   "main": "dist/index.js",
   "repository": {
     "type": "git",
