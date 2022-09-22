@@ -144,7 +144,7 @@ describe("Select", () => {
     />;
   });
 
-  it("Composer can use choices ref from dom", async () => {
+  it("Composer can use choices ref from dom", () => {
     let selectRef = null as ChoicesHTMLSelectElement | null;
 
     const RefTree = ({

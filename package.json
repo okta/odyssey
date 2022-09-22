@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "resolutions": {
-    "@babel/plugin-transform-typescript": "^7.15.0"
+    "@babel/plugin-transform-typescript": "^7.19.1"
   },
   "engines": {
     "yarn": "^3.2.0",
@@ -45,5 +45,5 @@
     "stylelint": "^13.13.1"
   },
   "version": "0.5.0",
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "yarn@3.2.3"
 }
