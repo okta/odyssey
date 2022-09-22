@@ -4,11 +4,11 @@
   "description": "React theme logic for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
+  "sideEffects": false,
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
-  "sideEffects": false,
   "exports": {
     ".": {
       "default": "./dist/index.js"

@@ -4,6 +4,7 @@
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
+  "sideEffects": false,
   "private": true,
   "dependencies": {
     "@okta/eslint-plugin-odyssey": "^0.15.0",

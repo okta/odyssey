@@ -13,8 +13,14 @@
 import type { ThemeOptions } from "@mui/material";
 //import radioClasses from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { tableBodyClasses } from "@mui/material/TableBody";
+import { tableCellClasses } from "@mui/material/TableCell";
+import { tableHeadClasses } from "@mui/material/TableHead";
+import { tableRowClasses } from "@mui/material/TableRow";
+import { tableSortLabelClasses } from "@mui/material/TableSortLabel";
 import {
   AlertTriangleFilledIcon,
+  ArrowDownIcon,
   CheckCircleFilledIcon,
   InformationCircleFilledIcon,
 } from "../../components/Icon";
@@ -96,6 +102,7 @@ export const components: ThemeOptions["components"] = {
       message: ({ ownerState, theme }) => ({
         padding: 0,
         lineHeight: theme.typography.body1.lineHeight,
+        overflow: "visible",
         ...(ownerState.variant === "banner" && {
           display: "flex",
           justifyContent: "space-between",
@@ -787,6 +794,209 @@ export const components: ThemeOptions["components"] = {
             color: theme.palette.text.disabled,
           },
         },
+      }),
+    },
+  },
+  MuiTable: {
+    styleOverrides: {
+      root: ({ theme, ownerState }) => ({
+        display: "table",
+        width: "auto",
+        borderCollapse: "separate",
+        borderSpacing: 0,
+        border: `${theme.mixins.borderWidth} ${theme.mixins.borderStyle} ${theme.palette.grey[100]}`,
+        borderRadius: theme.mixins.borderRadius,
+        marginBlock: theme.spacing(0),
+        marginInline: theme.spacing(0),
+        lineHeight: "1.14285714",
+
+        "&:only-child": {
+          marginBlockEnd: 0,
+        },
+
+        ...(ownerState.stickyHeader && {
+          borderCollapse: "separate",
+        }),
+      }),
+    },
+  },
+  MuiTableCell: {
+    styleOverrides: {
+      root: ({ theme, ownerState }) => ({
+        ...theme.typography.body1,
+        maxWidth: theme.mixins.maxWidth,
+        borderBottom: `${theme.mixins.borderWidth} ${theme.mixins.borderStyle} ${theme.palette.grey[100]}`,
+        textAlign: "start",
+        verticalAlign: "baseline",
+        padding: "unset",
+        paddingBlock: theme.spacing(4),
+        paddingInline: theme.spacing(4),
+        overflowWrap: "break-word",
+
+        [`.${tableBodyClasses.root} .${tableRowClasses.root}:last-of-type &`]: {
+          borderBottom: 0,
+        },
+
+        [`.${tableRowClasses.selected} &`]: {
+          borderBottomColor: theme.palette.primary.light,
+        },
+
+        [`.${tableRowClasses.selected}:hover &`]: {
+          borderBottomColor: theme.palette.primary.main,
+        },
+
+        ...(ownerState.variant === "action" && {
+          paddingBlock: 0,
+        }),
+
+        ...(ownerState.variant === "body" && {
+          color: theme.palette.text.primary,
+        }),
+
+        ...(ownerState.variant === "date" && {
+          whiteSpace: "nowrap",
+        }),
+
+        ...(ownerState.variant === "footer" && {
+          color: theme.palette.text.secondary,
+          lineHeight: theme.typography.body1.lineHeight,
+          fontSize: theme.typography.body1.fontSize,
+        }),
+
+        [`.${tableHeadClasses.root} &`]: {
+          color: theme.palette.text.secondary,
+          lineHeight: theme.typography.body1.lineHeight,
+          fontWeight: theme.typography.fontWeightBold,
+          backgroundColor: theme.palette.grey[50],
+        },
+
+        ...(ownerState.variant === "head" && {
+          lineHeight: theme.typography.body1.lineHeight,
+          fontWeight: theme.typography.fontWeightBold,
+        }),
+
+        ...(ownerState.variant === "number" && {
+          textAlign: "right",
+          fontFeatureSettings: '"lnum", "tnum"',
+        }),
+
+        ...(ownerState.padding === "checkbox" && {
+          width: 48, // prevent the checkbox column from growing
+          padding: "0 0 0 4px",
+        }),
+
+        ...(ownerState.padding === "none" && {
+          padding: 0,
+        }),
+
+        ...(ownerState.align === "left" && {
+          textAlign: "left",
+        }),
+
+        ...(ownerState.align === "center" && {
+          textAlign: "center",
+        }),
+
+        ...(ownerState.align === "right" && {
+          textAlign: "right",
+          flexDirection: "row-reverse",
+        }),
+
+        ...(ownerState.align === "justify" && {
+          textAlign: "justify",
+        }),
+      }),
+    },
+  },
+  MuiTableContainer: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        width: "unset",
+        maxWidth: "100%",
+        marginBlockStart: theme.spacing(0),
+        marginBlockEnd: theme.spacing(4),
+        marginInline: 0,
+        overflowX: "auto",
+
+        "&:last-child": {
+          marginBlock: 0,
+        },
+      }),
+    },
+  },
+  MuiTableRow: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        verticalAlign: "unset",
+        [`&.${tableRowClasses.hover}:hover`]: {
+          backgroundColor: theme.palette.grey[50],
+        },
+        [`&.${tableRowClasses.selected}`]: {
+          backgroundColor: theme.palette.primary.lighter,
+          "&:hover": {
+            backgroundColor: theme.palette.primary.lighter,
+          },
+        },
+      }),
+    },
+  },
+  MuiTableSortLabel: {
+    defaultProps: {
+      IconComponent: ArrowDownIcon,
+    },
+    styleOverrides: {
+      root: ({ theme }) => ({
+        cursor: "pointer",
+        display: "inline-flex",
+        justifyContent: "flex-start",
+        flexDirection: "inherit",
+        alignItems: "center",
+        "&:focus-visible": {
+          color: theme.palette.text.primary,
+          outlineOffset: theme.spacing(4),
+          outlineStyle: "solid",
+          outlineWidth: "2px",
+          outlineColor: theme.palette.primary.main,
+        },
+        "&:hover": {
+          color: theme.palette.text.primary,
+          [`& .${tableSortLabelClasses.icon}`]: {
+            opacity: 1,
+          },
+        },
+        [`&.${tableSortLabelClasses.active}`]: {
+          color: theme.palette.text.secondary,
+          [`& .${tableSortLabelClasses.icon}`]: {
+            opacity: 1,
+            color: "inherit",
+          },
+        },
+      }),
+      icon: ({ theme, ownerState }) => ({
+        fontSize: "inherit",
+        marginRight: 0,
+        marginLeft: 0,
+        opacity: 0,
+        color: "inherit",
+        transition: theme.transitions.create(["opacity", "transform"], {
+          duration: theme.transitions.duration.shorter,
+        }),
+        userSelect: "none",
+
+        [`.${tableCellClasses.alignRight} &`]: {
+          marginInlineEnd: theme.spacing(2),
+        },
+
+        [`.${tableCellClasses.alignLeft} &`]: {
+          marginInlineStart: theme.spacing(2),
+        },
+
+        ...(ownerState.direction === "desc" && {
+          transform: "rotate(0deg)",
+        }),
+        ...(ownerState.direction === "asc" && {
+          transform: "rotate(180deg)",
+        }),
       }),
     },
   },
