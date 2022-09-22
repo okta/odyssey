@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.15.1](https://github.com/okta/odyssey/compare/v0.15.0...v0.15.1) (2022-09-22)
+
+### Features
+
+- added missing `"sideEffects": false` to all packages ([61ee25b](https://github.com/okta/odyssey/commit/61ee25b461f27a473f1a82dcc1647e044fed8a3d))
+- **odyssey-react-mui:** add ArrowUpDown icon ([a2f99b8](https://github.com/okta/odyssey/commit/a2f99b8eaa3172bab0f799796f08db539c0f49fa))
+- **odyssey-react-mui:** add theme for IconButton ([1b121fa](https://github.com/okta/odyssey/commit/1b121fa791f4032773459519b730028edfef11d5))
+- **odyssey-react-mui:** add themes for Table component API ([dcae5e8](https://github.com/okta/odyssey/commit/dcae5e81f0ed4364ae9ed62877c57c2a0c8cd165))
+- **odyssey-react-mui:** update to MUI 5.10.5 ([6908971](https://github.com/okta/odyssey/commit/69089713a795cef0aaa2b3eb2bfea61379e9edd0))
+
+### Bug Fixes
+
+- **odyssey-react-mui:** fixes focus outline on Infobox links ([6536cba](https://github.com/okta/odyssey/commit/6536cba41cbccdc5389061fef42ca6d4fccb186e))
+- **odyssey-react-mui:** remove `body` from Typography type mods ([bb83940](https://github.com/okta/odyssey/commit/bb83940d4e1ff8e99dc0524ae17d76d1c67d1dad))
+
 ## [0.15.0](https://github.com/okta/odyssey/compare/v0.14.6...v0.15.0) (2022-09-01)
 
 ### ⚠ BREAKING CHANGES
