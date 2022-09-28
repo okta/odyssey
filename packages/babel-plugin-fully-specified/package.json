@@ -22,7 +22,7 @@
     "@babel/types": "^7.19.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.1",
+    "@babel/core": "^7.19.3",
     "@okta/odyssey-lifecycle": "^0.15.0",
     "@okta/odyssey-typescript": "^0.15.0",
     "jest": "^29.0.3",
