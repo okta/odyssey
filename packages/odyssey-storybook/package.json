@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@applitools/eyes-storybook": "^3.27.6",
-    "@babel/core": "^7.19.1",
+    "@babel/core": "^7.19.3",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.5",
     "@mui/utils": "^5.10.3",
