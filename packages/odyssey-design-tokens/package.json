@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@okta/odyssey-lifecycle": "^0.15.0",
-    "style-dictionary": "^3.0.1"
+    "style-dictionary": "^3.7.1"
   },
   "scripts": {
     "prebuild": "style-dictionary clean --config ./config.cjs",
