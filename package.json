@@ -39,7 +39,7 @@
     "@okta/odyssey-stylelint": "^0.15.0",
     "eslint": "^7.27.0",
     "husky": "^7.0.2",
-    "lerna": "^5.1.7",
+    "lerna": "^5.5.4",
     "lint-staged": "^11.1.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.4.0",
