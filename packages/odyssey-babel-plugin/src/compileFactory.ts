@@ -52,5 +52,7 @@ export default function compileFactory(): Compile {
     return result.message;
   };
 
+  worker.unref();
+
   return compile;
 }
