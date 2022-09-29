@@ -11388,6 +11388,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"caniuse-lite@npm:^1.0.30001412":
+  version: 1.0.30001412
+  resolution: "caniuse-lite@npm:1.0.30001412"
+  checksum: 7f5f476355f25a9841c30785c11df5225e2e7613f3334573e8da5490f195ac897a525fe4b514fa926b7be7e7937f15743e466bbc3a3272e848fb7ace7432ae02
+  languageName: node
+  linkType: hard
+
 "capital-case@npm:^1.0.4":
   version: 1.0.4
   resolution: "capital-case@npm:1.0.4"
@@ -20790,6 +20797,7 @@ __metadata:
     "@okta/odyssey-eslint-config": ^0.15.0
     "@okta/odyssey-lint-staged": ^0.15.0
     "@okta/odyssey-stylelint": ^0.15.0
+    caniuse-lite: ^1.0.30001412
     eslint: ^7.27.0
     husky: ^7.0.2
     lerna: ^5.5.4
