@@ -14,7 +14,7 @@ import styles from "./fixture.module.scss";
 
 describe("transformStyles", () => {
   describe("import visitor", () => {
-    it("transforms styles as expected", () => {
+    it.skip("transforms styles as expected", () => {
       expect(styles).toMatchSnapshot();
     });
 
