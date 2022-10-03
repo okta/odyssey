@@ -23,7 +23,8 @@
     "jest": "^29.0.3",
     "jest-preset-stylelint": "^6.0.0",
     "postcss": "^8.4.16",
-    "postcss-scss": "^4.0.5"
+    "postcss-scss": "^4.0.5",
+    "stylelint": "^14.13.0"
   },
   "peerDependencies": {
     "stylelint": "^14.13.0"

@@ -1,0 +1,21 @@
+0 silly argv {
+0 silly argv   _: [ 'run' ],
+0 silly argv   ignore: [ '@okta/odyssey-ie-11-sandbox', '@okta/odyssey-storybook' ],
+0 silly argv   lernaVersion: '5.5.4',
+0 silly argv   '$0': '.yarn/cache/lerna-npm-5.5.4-cba1b1119c-3107df46a5.zip/node_modules/lerna/cli.js',
+0 silly argv   script: 'build'
+0 silly argv }
+1 notice cli v5.5.4
+2 verbose rootPath /Users/kevinghadyani/okta/odyssey
+3 notice filter excluding ["@okta/odyssey-ie-11-sandbox","@okta/odyssey-storybook"]
+4 info filter [ '!@okta/odyssey-ie-11-sandbox', '!@okta/odyssey-storybook' ]
+5 info Executing command in 12 packages: "yarn run build"
+6 error TypeError: Cannot read properties of undefined (reading 'version')
+6 error     at /Users/kevinghadyani/okta/odyssey/.yarn/cache/@lerna-package-graph-npm-5.5.4-11ebe36da3-4e48d8993e.zip/node_modules/@lerna/package-graph/index.js:80:37
+6 error     at Array.forEach (<anonymous>)
+6 error     at /Users/kevinghadyani/okta/odyssey/.yarn/cache/@lerna-package-graph-npm-5.5.4-11ebe36da3-4e48d8993e.zip/node_modules/@lerna/package-graph/index.js:60:38
+6 error     at Map.forEach (<anonymous>)
+6 error     at new PackageGraph (/Users/kevinghadyani/okta/odyssey/.yarn/cache/@lerna-package-graph-npm-5.5.4-11ebe36da3-4e48d8993e.zip/node_modules/@lerna/package-graph/index.js:49:10)
+6 error     at new QueryGraph (/Users/kevinghadyani/okta/odyssey/.yarn/cache/@lerna-query-graph-npm-5.5.4-e7092d749e-b360f980ff.zip/node_modules/@lerna/query-graph/query-graph.js:48:18)
+6 error     at runTopologically (/Users/kevinghadyani/okta/odyssey/.yarn/cache/@lerna-run-topologically-npm-5.5.4-9a86ec8a9f-2fc3f2bcc6.zip/node_modules/@lerna/run-topologically/run-topologically.js:23:17)
+6 error     at RunCommand.runScriptInPackagesTopological (/Users/kevinghadyani/okta/odyssey/.yarn/cache/@lerna-run-npm-5.5.4-f369e1c77b-aab32307bf.zip/node_modules/@lerna/run/index.js:162:17)

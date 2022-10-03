@@ -24,12 +24,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
-    "@okta/odyssey-lifecycle": "^0.15.0",
-    "@okta/odyssey-postcss-preset": "^0.15.0",
-    "@okta/odyssey-typescript": "^0.15.0",
+    "@okta/odyssey-lifecycle": "workspace:*",
+    "@okta/odyssey-postcss-preset": "workspace:*",
+    "@okta/odyssey-typescript": "workspace:*",
+    "@types/babel__core": "^7.1.19",
+    "@types/babel__template": "^7.4.1",
+    "@types/node": "^16.11.63",
     "jest": "^29.0.3",
     "postcss": "^8.4.16",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.4"
   },
   "peerDependencies": {
     "@okta/odyssey-postcss-preset": ">= 0.8.2",

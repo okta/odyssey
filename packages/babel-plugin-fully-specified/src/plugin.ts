@@ -12,8 +12,8 @@
 
 import type * as Babel from "@babel/core";
 import * as BabelTypes from "@babel/types";
-import { resolve, extname, dirname } from "path";
-import { existsSync, lstatSync } from "fs";
+import { resolve, extname, dirname } from "node:path";
+import { existsSync, lstatSync } from "node:fs";
 
 const isNodeModule = (candidate: string): boolean => {
   if (candidate.startsWith(".") || candidate.startsWith("/")) {

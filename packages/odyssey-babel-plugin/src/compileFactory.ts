@@ -11,8 +11,12 @@
  */
 
 import type { MessageArgs, File, CompileResponse } from "./compile";
-import { resolve } from "path";
-import { MessageChannel, Worker, receiveMessageOnPort } from "worker_threads";
+import { resolve } from "node:path";
+import {
+  MessageChannel,
+  Worker,
+  receiveMessageOnPort,
+} from "node:worker_threads";
 
 type Message = Required<Pick<CompileResponse, keyof File>> & CompileResponse;
 type Result = { message: Message } | undefined;

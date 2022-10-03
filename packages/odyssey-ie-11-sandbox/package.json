@@ -18,7 +18,7 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "@okta/odyssey-react": "^0.15.0",
+    "@okta/odyssey-react": "workspace:*",
     "core-js": "^3.21.0",
     "proxy-polyfill": "^0.3.2",
     "react": "^17.0.2",
@@ -29,8 +29,8 @@
     "@babel/preset-env": "7.19.1",
     "@babel/preset-react": "7.18.6",
     "@babel/preset-typescript": "7.18.6",
-    "@okta/browserslist-config-odyssey": "^0.15.0",
-    "@okta/odyssey-babel-preset": "^0.15.0",
+    "@okta/browserslist-config-odyssey": "workspace:*",
+    "@okta/odyssey-babel-preset": "workspace:*",
     "babel-loader": "8.2.2",
     "css-loader": "3.6.0",
     "html-webpack-plugin": "4.5.2",

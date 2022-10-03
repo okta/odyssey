@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { MessagePort } from "worker_threads";
-import { parentPort } from "worker_threads";
+import type { MessagePort } from "node:worker_threads";
+import { parentPort } from "node:worker_threads";
 import postcss from "postcss";
 import postcssrc from "postcss-load-config";
-import { createHash } from "crypto";
-import { readFileSync } from "fs";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import formatWarnings from "./formatWarnings";
 
 export interface File {

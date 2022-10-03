@@ -11,7 +11,7 @@
  */
 
 import type * as Babel from "@babel/core";
-import { resolve, dirname } from "path";
+import { resolve, dirname } from "node:path";
 import compileFactory from "./compileFactory";
 import { normalizeOpts, shouldInclude } from "./normalizeOpts";
 import {
