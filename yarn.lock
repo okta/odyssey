@@ -6434,7 +6434,7 @@ __metadata:
     "@testing-library/user-event": ^13.5.0
     "@types/babel__preset-env": ^7
     "@types/jest-axe": ^3.5.1
-    "@types/react": ^17.0.30
+    "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.5
     babel-plugin-import: ^1.13.5
     eslint: ^8.24.0
@@ -6477,7 +6477,7 @@ __metadata:
     "@testing-library/react": ^11.2.7
     "@types/babel__preset-env": ^7
     "@types/hoist-non-react-statics": ^3.3.1
-    "@types/react": ^17.0.30
+    "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.5
     eslint: ^8.24.0
     hoist-non-react-statics: ^3.3.2
@@ -6519,7 +6519,7 @@ __metadata:
     "@testing-library/user-event": ^13.5.0
     "@types/babel__preset-env": ^7
     "@types/jest-axe": ^3.5.1
-    "@types/react": ^17.0.30
+    "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.5
     choices.js: ^9.0.1
     chokidar: ^3.4.0
@@ -6569,7 +6569,7 @@ __metadata:
     "@storybook/react": ^6.5.12
     "@storybook/theming": ^6.5.12
     "@types/mdx": ^2.0.1
-    "@types/react": ^17.0.30
+    "@types/react": ^17.0.39
     babel-loader: ^8
     markdown-to-jsx: ^7.1.7
     react: ^17.0.2
@@ -8811,7 +8811,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17":
+"@types/react@npm:^17, @types/react@npm:^17.0.39":
   version: 17.0.50
   resolution: "@types/react@npm:17.0.50"
   dependencies:
@@ -8819,17 +8819,6 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: b5629dff7c2f3e9fcba95a19b2b3bfd78d7cacc33ba5fc26413dba653d34afcac3b93ddabe563e8062382688a1eac7db68e93739bb8e712d27637a03aaafbbb8
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^17.0.30":
-  version: 17.0.30
-  resolution: "@types/react@npm:17.0.30"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: e3aaac1b8fda6e3622b75db0bd7d8dc412c2f2b77a00afdd32cae8c71fb0b1ca6926ab1fbe1c536dd51d96c0ba372738993837a8df1637637aaab7b86e421b7f
   languageName: node
   linkType: hard
 
