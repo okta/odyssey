@@ -65,7 +65,7 @@
     "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-scss": "^4.3.0",
     "stylelint-use-logical-spec": "^4.1.0",
-    "typescript": "^4.8.4"
+    "typescript": "4.8.3"
   },
   "version": "0.5.0",
   "packageManager": "yarn@3.2.3"

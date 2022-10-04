@@ -5,7 +5,10 @@
   "license": "Apache-2.0",
   "sideEffects": false,
   "private": true,
+  "exports": {
+    "/tsconfig.react.json": "./tsconfig.react.json"
+  },
   "peerDependencies": {
-    "typescript": "^4.8.4"
+    "typescript": "4.8.3"
   }
 }
