@@ -6,6 +6,26 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 Thanks for supporting Odyssey. This is the Quick Start guide you should read first.
 
+## Requirements
+
+### Husky Config
+
+Please add this to `~/.huskyrc` to use Odyssey with Git tooling such as GitKraken:
+
+```bash
+#!/usr/bin/env bash
+source ~/.zshrc
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+if test -f ".nvmrc"; then
+  nvm use
+fi
+```
+
+In this case, the config is referencing the `~/.zshrc` file. If you're using bash, then reference `~/.bashrc` instead.
+
 ## Code of Conduct
 
 Odyssey has adopted the [Contributor Covenant](https://www.contributor-covenant.org/) as its Code of Conduct, and we expect project participants to adhere to it.
