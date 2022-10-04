@@ -6440,7 +6440,6 @@ __metadata:
     "@emotion/styled": ^11.10.4
     "@mui/icons-material": ^5.10.3
     "@mui/material": ^5.10.5
-    "@mui/types": ^7.2.0
     "@okta/babel-plugin-fully-specified": "workspace:*"
     "@okta/browserslist-config-odyssey": "workspace:*"
     "@okta/odyssey-babel-plugin": "workspace:*"
