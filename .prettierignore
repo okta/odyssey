@@ -9,10 +9,5 @@ yarn-error.log
 **/coverage
 .pnp.*
 .yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
 packages/odyssey-react/src/components/PasswordInput/PasswordInput.tsx
 packages/odyssey-react/src/components/SearchInput/SearchInput.tsx
