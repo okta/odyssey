@@ -10,5 +10,30 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+export {
+  Alert,
+  AlertTitle,
+  Box,
+  Button,
+  CircularProgress,
+  CssBaseline,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  FormLabel,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  Radio,
+  RadioGroup,
+  Select,
+  SvgIcon,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
+export type { ButtonProps, TypographyProps } from "@mui/material";
+
 export * from "./components";
 export * from "./themes";

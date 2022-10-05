@@ -1,12 +1,14 @@
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
+import {
+  CssBaseline,
+  odysseyTheme,
+  ThemeProvider as OdysseyMuiThemeProvider,
+} from "@okta/odyssey-react-mui";
 import { ThemeProvider } from "@storybook/theming";
-import { odysseyTheme as theme } from "@okta/odyssey-react-mui";
 import type { DecoratorFn } from "@storybook/react";
 
 export const MuiThemeDecorator: DecoratorFn = (Story) => (
-  <MuiThemeProvider theme={theme}>
-    <ThemeProvider theme={theme}>
+  <OdysseyMuiThemeProvider>
+    <ThemeProvider theme={odysseyTheme}>
       <CssBaseline />
       <div
         style={{
@@ -17,5 +19,5 @@ export const MuiThemeDecorator: DecoratorFn = (Story) => (
         <Story />
       </div>
     </ThemeProvider>
-  </MuiThemeProvider>
+  </OdysseyMuiThemeProvider>
 );

@@ -12,8 +12,8 @@
 
 import type { Story } from "@storybook/react";
 
-import { Button } from "@mui/material";
-import type { ButtonProps } from "@mui/material";
+import { Button } from "@okta/odyssey-react-mui";
+import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 import { SettingsIcon } from "../../../../../odyssey-react/src";
 
