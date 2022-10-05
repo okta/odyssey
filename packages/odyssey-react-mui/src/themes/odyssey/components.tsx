@@ -532,9 +532,13 @@ export const components: ThemeOptions["components"] = {
   },
   MuiInputBase: {
     styleOverrides: {
-      root: {
+      root: ({ ownerState, theme }) => ({
         lineHeight: "1.14285714",
-      },
+
+        ...(ownerState.readOnly === true && {
+          backgroundColor: theme.palette.grey[50],
+        }),
+      }),
       input: {
         boxSizing: "border-box",
         height: "auto",
@@ -674,10 +678,11 @@ export const components: ThemeOptions["components"] = {
         [`&.${outlinedInputClasses.disabled} .${outlinedInputClasses.notchedOutline}`]:
           {
             borderColor: theme.palette.action.disabled,
+            pointerEvents: "auto",
           },
         [`&.${outlinedInputClasses.disabled}`]: {
           backgroundColor: theme.palette.grey[50],
-          pointerEvents: "none",
+          cursor: "not-allowed",
         },
         ...(ownerState.startAdornment && {
           paddingLeft: theme.spacing(3),
