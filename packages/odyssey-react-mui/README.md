@@ -47,11 +47,36 @@ import { PasswordInput } from "@okta/odyssey-react-mui";
 Add the Material-UI `ThemeProvider` around your whole app:
 
 ```jsx
-import { ThemeProvider } from "@mui/material/styles";
-import { odysseyTheme } from "@okta/odyssey-react-mui";
+import { ThemeProvider } from "@okta/odyssey-react-mui";
+
+const YourAppRoot = ({ children }) => <ThemeProvider>{children}</ThemeProvider>;
+```
+
+Add Material-UI components not exported from Odyssey with Odyssey styling:
+
+```jsx
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { odysseyTheme, ThemeProvider } from "@okta/odyssey-react-mui";
 
 const YourAppRoot = ({ children }) => (
-  <ThemeProvider theme={odysseyTheme}>{children}</ThemeProvider>
+  <MuiThemeProvider theme={odysseyTheme}>
+    <ThemeProvider>{children}</ThemeProvider>
+  </MuiThemeProvider>
+);
+```
+
+Add your own theme to MUI (does not affect Odyssey components):
+
+```jsx
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@okta/odyssey-react-mui";
+
+import { myMaterialUiTheme } from "./myMaterialUiTheme";
+
+const YourAppRoot = ({ children }) => (
+  <MuiThemeProvider theme={myMaterialUiTheme}>
+    <ThemeProvider>{children}</ThemeProvider>
+  </MuiThemeProvider>
 );
 ```
 
@@ -62,14 +87,13 @@ It’s possible to have 2 versions of Odyssey running at the same time, so when 
 This is how you setup two `ThemeProvider`s like so:
 
 ```jsx
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { odysseyTheme } from "@okta/odyssey-react-mui";
-import { ThemeProvider } from "@okta/odyssey-react-theme";
+import { ThemeProvider as OdysseyMuiThemeProvider } from "@okta/odyssey-react-mui";
+import { ThemeProvider as OdysseyLegacyThemeProvider } from "@okta/odyssey-react-theme";
 
 const YourAppRoot = ({ children }) => (
-  <MuiThemeProvider theme={odysseyTheme}>
-    <ThemeProvider>{children}</ThemeProvider>
-  </MuiThemeProvider>
+  <OdysseyMuiThemeProvider>
+    <OdysseyLegacyThemeProvider>{children}</OdysseyLegacyThemeProvider>
+  </OdysseyMuiThemeProvider>
 );
 ```
 

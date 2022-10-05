@@ -18,7 +18,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-} from "@mui/material";
+} from "@okta/odyssey-react-mui";
 import { visuallyHidden } from "@mui/utils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 

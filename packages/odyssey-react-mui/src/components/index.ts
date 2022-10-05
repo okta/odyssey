@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./PasswordInput";
-export * from "./Link";
 export * from "./Icon";
+export * from "./Link";
+export * from "./PasswordInput";
+export * from "./ThemeProvider";

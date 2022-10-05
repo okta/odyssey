@@ -12,7 +12,7 @@
 
 import * as React from "react";
 import { Story } from "@storybook/react";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs, Typography } from "@okta/odyssey-react-mui";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 // import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
