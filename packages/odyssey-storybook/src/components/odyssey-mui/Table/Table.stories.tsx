@@ -100,7 +100,7 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
 
 type Order = "asc" | "desc";
 
-function getComparator<Key extends keyof any>(
+function getComparator<Key extends string | number | symbol>(
   order: Order,
   orderBy: Key
 ): (
@@ -110,23 +110,6 @@ function getComparator<Key extends keyof any>(
   return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-// This method is created for cross-browser compatibility, if you don't
-// need to support IE11, you can use Array.prototype.sort() directly
-function stableSort<T>(
-  array: readonly T[],
-  comparator: (a: T, b: T) => number
-) {
-  const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
 }
 
 interface HeadCell {
@@ -285,40 +268,41 @@ function EnhancedTable() {
           rowCount={rows.length}
         />
         <TableBody>
-          {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-          rows.slice().sort(getComparator(order, orderBy)) */}
-          {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
-            const isItemSelected = isSelected(row.name);
-            const labelId = `enhanced-table-checkbox-${index}`;
+          {rows
+            .slice()
+            .sort(getComparator(order, orderBy))
+            .map((row, index) => {
+              const isItemSelected = isSelected(row.name);
+              const labelId = `enhanced-table-checkbox-${index}`;
 
-            return (
-              <TableRow
-                hover
-                onClick={(event) => handleClick(event, row.name)}
-                role="checkbox"
-                aria-checked={isItemSelected}
-                tabIndex={-1}
-                key={row.name}
-                selected={isItemSelected}
-              >
-                <TableCell>
-                  <Checkbox
-                    checked={isItemSelected}
-                    inputProps={{
-                      "aria-labelledby": labelId,
-                    }}
-                  />
-                </TableCell>
-                <TableCell id={labelId}>{row.name}</TableCell>
-                <TableCell variant="number">
-                  {row.radius.toLocaleString("en-US")}
-                </TableCell>
-                <TableCell>{row.type}</TableCell>
-                <TableCell variant="date">{row.perihelion}</TableCell>
-                <TableCell>{row.descriptor}</TableCell>
-              </TableRow>
-            );
-          })}
+              return (
+                <TableRow
+                  hover
+                  onClick={(event) => handleClick(event, row.name)}
+                  role="checkbox"
+                  aria-checked={isItemSelected}
+                  tabIndex={-1}
+                  key={row.name}
+                  selected={isItemSelected}
+                >
+                  <TableCell>
+                    <Checkbox
+                      checked={isItemSelected}
+                      inputProps={{
+                        "aria-labelledby": labelId,
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell id={labelId}>{row.name}</TableCell>
+                  <TableCell variant="number">
+                    {row.radius.toLocaleString("en-US")}
+                  </TableCell>
+                  <TableCell>{row.type}</TableCell>
+                  <TableCell variant="date">{row.perihelion}</TableCell>
+                  <TableCell>{row.descriptor}</TableCell>
+                </TableRow>
+              );
+            })}
         </TableBody>
       </Table>
     </TableContainer>
