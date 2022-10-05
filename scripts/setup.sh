@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NODE_VERSION=v16.15.0
+NODE_VERSION=v16.17.1
 
 echo "installing node ${NODE_VERSION}"
 if setup_service node $NODE_VERSION; then
