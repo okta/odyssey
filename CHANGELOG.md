@@ -3,50 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-### [0.15.1](https://github.com/okta/odyssey/compare/v0.15.0...v0.15.1) (2022-10-06)
-
-### Features
-
-- added direnv compatibility ([04d0a45](https://github.com/okta/odyssey/commit/04d0a459779882a7c5c4ae6130d17fe2516bc0b6))
-- added Husky compatibility with nvm ([9d5be9f](https://github.com/okta/odyssey/commit/9d5be9f3de925ce7256642faa5021206de13f211))
-- added missing `"sideEffects": false` to all packages ([61ee25b](https://github.com/okta/odyssey/commit/61ee25b461f27a473f1a82dcc1647e044fed8a3d))
-- **odyssey-icons:** add arrow-up-down asset ([b6a3872](https://github.com/okta/odyssey/commit/b6a38729d03378596ed92b55727a834596c6360d))
-- **odyssey-react-mui:** add ArrowUpDown icon ([a2f99b8](https://github.com/okta/odyssey/commit/a2f99b8eaa3172bab0f799796f08db539c0f49fa))
-- **odyssey-react-mui:** add theme for IconButton ([1b121fa](https://github.com/okta/odyssey/commit/1b121fa791f4032773459519b730028edfef11d5))
-- **odyssey-react-mui:** add themes for Table component API ([dcae5e8](https://github.com/okta/odyssey/commit/dcae5e81f0ed4364ae9ed62877c57c2a0c8cd165))
-- **odyssey-react-mui:** update to MUI 5.10.5 ([6908971](https://github.com/okta/odyssey/commit/69089713a795cef0aaa2b3eb2bfea61379e9edd0))
-- upgraded Node.js ([cdb0aad](https://github.com/okta/odyssey/commit/cdb0aad73fc76c6ce0e536951e049aaa1e92dab2))
-
-### Bug Fixes
-
-- added yarn cache as part of the repo to speed up CI dependency installs ([0ced2fe](https://github.com/okta/odyssey/commit/0ced2fe6abd548ebd422f82850945faa9dc9b2e9))
-- corrected TypeScript issues with odyssey-babel-plugin ([96a51a5](https://github.com/okta/odyssey/commit/96a51a5b81e6996e9e5ee41e02e5db64a0a7bbe9))
-- fixed broken yarn.lock ([5e9651e](https://github.com/okta/odyssey/commit/5e9651e74e0ccc9e7a7e1b6ea1696f51e2531312))
-- force-updated qs as the vulnerability is in Applitools and Storybook ([b3f8536](https://github.com/okta/odyssey/commit/b3f8536daa1738f14dc3358397bb3a00251fea42))
-- force-upgraded vulnerable ramda and qs ([bcd84aa](https://github.com/okta/odyssey/commit/bcd84aaffc970cd7fd0e168e9c884ecfdf4a0495))
-- hotfixed TypeScript compatibility issues with custom Babel plugins ([78d1a7b](https://github.com/okta/odyssey/commit/78d1a7b9390d67215e2a4042ecd364743f54d8c3))
-- issue with Babel worker not completing ([cd900a9](https://github.com/okta/odyssey/commit/cd900a9b38f26b78870fd037f4a7e4a3de7fb842))
-- **odyssey-react-mui:** apply appropriate styles to readonly and disabled text inputs ([ccea01b](https://github.com/okta/odyssey/commit/ccea01b18a6c4d20591c43ef199ed64e392e773a))
-- **odyssey-react-mui:** fixes focus outline on Infobox links ([6536cba](https://github.com/okta/odyssey/commit/6536cba41cbccdc5389061fef42ca6d4fccb186e))
-- **odyssey-react-mui:** remove `body` from Typography type mods ([bb83940](https://github.com/okta/odyssey/commit/bb83940d4e1ff8e99dc0524ae17d76d1c67d1dad))
-- **odyssey-storybook:** fix eslint error, remove unnec IE11 compat ([443dbeb](https://github.com/okta/odyssey/commit/443dbebd502edf0242333452038e10d5e51e3a21))
-- removed @react-aria/focus ([573a9af](https://github.com/okta/odyssey/commit/573a9afccb3cfb7102333070cb2a28e8c6eab2ed))
-- skipped another snapshot test only failing in GitHub Actions ([c56de33](https://github.com/okta/odyssey/commit/c56de335cbc94fe62239519613b0b975440be534))
-- skipped snapshot test that only breaks in GitHub Actions ([0c0c315](https://github.com/okta/odyssey/commit/0c0c315f8425034bd5fa3c7c008b86057cf5cb83))
-- updated @svgr/cli ([41dff60](https://github.com/okta/odyssey/commit/41dff6061b237a1937b02f0786e7daaf1e6465cb))
-- updated Babel and Postcss dependencies ([fc5a214](https://github.com/okta/odyssey/commit/fc5a214171866fdc1c883e7f1e03c622aa580ef1))
-- updated Babel to latest to fix yarn install issues ([5eccaf0](https://github.com/okta/odyssey/commit/5eccaf0470eb6b6d36c36ce11301dbd7f7748652))
-- updated Node.js versions in Bacon scripts ([7a7b133](https://github.com/okta/odyssey/commit/7a7b133bca924dbf0cbe5949c998bc5aaeb23e1b))
-- updated Stylelint rules and linting issues ([8fe0791](https://github.com/okta/odyssey/commit/8fe0791f303013484b17f99e8f60a789dbbbb3c0))
-- upgrade caniuse-lite ([c6dd13e](https://github.com/okta/odyssey/commit/c6dd13e91abff7eb5dd914f681d29a5816b407d9))
-- upgrade Lerna to 5.5.4 ([4d2607e](https://github.com/okta/odyssey/commit/4d2607e0467259cf95932eb993a5b36d7ffcc6e5))
-- upgraded @typescript-eslint/\* packages to remove ESLint plugin warning about estree ([bd9a3af](https://github.com/okta/odyssey/commit/bd9a3af5f316c3b9b5f368a146c967c77bab7a2d))
-- upgraded eslint-plugin-import ([c37a96e](https://github.com/okta/odyssey/commit/c37a96eade7804acb8424ad24da2be52228ca373))
-- upgraded Jest to v29 ([3872c7e](https://github.com/okta/odyssey/commit/3872c7e75ea017781dc8e53526055f232efcbf0b))
-- upgraded libraries depending on minimist ([29dfd9b](https://github.com/okta/odyssey/commit/29dfd9bd1503277bde0217beb33c15ef4f541736))
-- upgraded node-sass ([4dae8c2](https://github.com/okta/odyssey/commit/4dae8c23018e30731e87045802da61e4d312237e))
-- upgraded webpack-dev-server and Storybook ([de2e43e](https://github.com/okta/odyssey/commit/de2e43ed3c14d0b7f0e5a257796fdcedd27b8c76))
-
 ## [0.15.0](https://github.com/okta/odyssey/compare/v0.14.6...v0.15.0) (2022-09-01)
 
 ### ⚠ BREAKING CHANGES
