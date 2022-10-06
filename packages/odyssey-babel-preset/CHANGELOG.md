@@ -3,18 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-### [0.15.1](https://github.com/okta/odyssey/compare/v0.15.0...v0.15.1) (2022-10-06)
-
-### Features
-
-- added missing `"sideEffects": false` to all packages ([61ee25b](https://github.com/okta/odyssey/commit/61ee25b461f27a473f1a82dcc1647e044fed8a3d))
-
-### Bug Fixes
-
-- hotfixed TypeScript compatibility issues with custom Babel plugins ([78d1a7b](https://github.com/okta/odyssey/commit/78d1a7b9390d67215e2a4042ecd364743f54d8c3))
-- updated Babel and Postcss dependencies ([fc5a214](https://github.com/okta/odyssey/commit/fc5a214171866fdc1c883e7f1e03c622aa580ef1))
-- updated Babel to latest to fix yarn install issues ([5eccaf0](https://github.com/okta/odyssey/commit/5eccaf0470eb6b6d36c36ce11301dbd7f7748652))
-
 ## [0.15.0](https://github.com/okta/odyssey/compare/v0.14.6...v0.15.0) (2022-09-01)
 
 **Note:** Version bump only for package @okta/odyssey-babel-preset

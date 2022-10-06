@@ -3,22 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-### [0.15.1](https://github.com/okta/odyssey/compare/v0.15.0...v0.15.1) (2022-10-06)
-
-### Features
-
-- added missing `"sideEffects": false` to all packages ([61ee25b](https://github.com/okta/odyssey/commit/61ee25b461f27a473f1a82dcc1647e044fed8a3d))
-
-### Bug Fixes
-
-- corrected TypeScript issues with odyssey-babel-plugin ([96a51a5](https://github.com/okta/odyssey/commit/96a51a5b81e6996e9e5ee41e02e5db64a0a7bbe9))
-- issue with Babel worker not completing ([cd900a9](https://github.com/okta/odyssey/commit/cd900a9b38f26b78870fd037f4a7e4a3de7fb842))
-- skipped another snapshot test only failing in GitHub Actions ([c56de33](https://github.com/okta/odyssey/commit/c56de335cbc94fe62239519613b0b975440be534))
-- skipped snapshot test that only breaks in GitHub Actions ([0c0c315](https://github.com/okta/odyssey/commit/0c0c315f8425034bd5fa3c7c008b86057cf5cb83))
-- updated Babel and Postcss dependencies ([fc5a214](https://github.com/okta/odyssey/commit/fc5a214171866fdc1c883e7f1e03c622aa580ef1))
-- updated Babel to latest to fix yarn install issues ([5eccaf0](https://github.com/okta/odyssey/commit/5eccaf0470eb6b6d36c36ce11301dbd7f7748652))
-- upgraded Jest to v29 ([3872c7e](https://github.com/okta/odyssey/commit/3872c7e75ea017781dc8e53526055f232efcbf0b))
-
 ## [0.15.0](https://github.com/okta/odyssey/compare/v0.14.6...v0.15.0) (2022-09-01)
 
 **Note:** Version bump only for package @okta/odyssey-babel-plugin
