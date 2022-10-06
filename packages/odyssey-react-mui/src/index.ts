@@ -36,11 +36,37 @@ export {
   Tabs,
   Typography,
 } from "@mui/material";
+
 export type {
+  AlertProps,
+  AlertTitleProps,
+  BoxProps,
   ButtonProps,
+  CheckboxProps,
   CircularProgressProps,
+  CssBaselineProps,
+  FormControlProps,
+  FormControlLabelProps,
+  FormGroupProps,
+  FormHelperTextProps,
+  FormLabelProps,
+  InputAdornmentProps,
+  InputLabelProps,
+  OutlinedInputProps,
+  RadioProps,
+  RadioGroupProps,
+  SelectProps,
+  SnackbarProps,
+  StackProps,
+  SvgIconProps,
+  TabProps,
+  TabsProps,
   TypographyProps,
 } from "@mui/material";
+
+export { Favorite as FavoriteIcon } from "@mui/icons-material";
+
+export { visuallyHidden } from "@mui/utils";
 
 export * from "./components";
 export * from "./themes";

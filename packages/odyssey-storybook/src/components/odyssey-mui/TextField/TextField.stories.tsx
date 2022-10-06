@@ -17,8 +17,8 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  visuallyHidden,
 } from "@okta/odyssey-react-mui";
-import { visuallyHidden } from "@mui/utils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TextFieldMdx from "./TextField.mdx";
