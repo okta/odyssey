@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.15.1](https://github.com/okta/odyssey/compare/v0.15.0...v0.15.1) (2022-10-06)
+
+### Features
+
+- added missing `"sideEffects": false` to all packages ([61ee25b](https://github.com/okta/odyssey/commit/61ee25b461f27a473f1a82dcc1647e044fed8a3d))
+
+### Bug Fixes
+
+- updated Babel to latest to fix yarn install issues ([5eccaf0](https://github.com/okta/odyssey/commit/5eccaf0470eb6b6d36c36ce11301dbd7f7748652))
+- upgraded node-sass ([4dae8c2](https://github.com/okta/odyssey/commit/4dae8c23018e30731e87045802da61e4d312237e))
+- upgraded webpack-dev-server and Storybook ([de2e43e](https://github.com/okta/odyssey/commit/de2e43ed3c14d0b7f0e5a257796fdcedd27b8c76))
+
 ## [0.15.0](https://github.com/okta/odyssey/compare/v0.14.6...v0.15.0) (2022-09-01)
 
 **Note:** Version bump only for package @okta/odyssey-ie-11-sandbox
