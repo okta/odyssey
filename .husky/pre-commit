@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 . "$(dirname "$0")/_/husky.sh"
 
 yarn lint-staged

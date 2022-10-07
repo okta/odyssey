@@ -18,6 +18,7 @@ module.exports = {
   ],
   extends: [
     "stylelint-config-standard",
+    "stylelint-config-standard-scss",
     "stylelint-config-sass-guidelines",
     "stylelint-config-property-sort-order-smacss",
     "stylelint-config-prettier",
@@ -25,6 +26,7 @@ module.exports = {
   ignoreFiles: ["**/dist/**/*.scss"],
   rules: {
     "odyssey/header": true,
+    "alpha-value-notation": null,
     "at-rule-empty-line-before": [
       "always",
       {
@@ -38,8 +40,11 @@ module.exports = {
       "always",
       { ignoreAtRules: ["if", "else"] },
     ],
+    "color-function-notation": null,
     "color-hex-length": "long",
+    "custom-property-pattern": null,
     "declaration-no-important": true,
+    "declaration-block-no-redundant-longhand-properties": null,
     "declaration-property-value-disallowed-list": {
       "word-break": ["/^break/"],
     },
@@ -49,11 +54,17 @@ module.exports = {
     ],
     "property-disallowed-list": ["border-radius", "margin", "padding"],
     "order/properties-alphabetical-order": null,
+    "order/properties-order": null,
+    "rule-empty-line-before": null,
+    "selector-not-notation": null,
     "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
     "scss/at-else-closing-brace-space-after": "always-intermediate",
     "scss/at-else-empty-line-before": "never",
     "scss/at-if-closing-brace-newline-after": "always-last-in-chain",
     "scss/at-if-closing-brace-space-after": "always-intermediate",
+    "scss/dollar-variable-empty-line-before": null,
+    "scss/no-global-function-names": null,
+    "scss/operator-no-newline-after": null,
     "selector-type-no-unknown": [true, { ignore: ["custom-elements"] }],
     "liberty/use-logical-spec": [
       true,

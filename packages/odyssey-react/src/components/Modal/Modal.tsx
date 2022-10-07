@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { createContext, useContext, useMemo, useRef } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import type {
   FunctionComponent,
   ReactElement,
@@ -18,7 +24,6 @@ import type {
   ReactText,
 } from "react";
 import { createPortal } from "react-dom";
-import { FocusScope } from "@react-aria/focus";
 import { withTheme } from "@okta/odyssey-react-theme";
 
 import { Box } from "../Box";
@@ -122,15 +127,18 @@ export const Modal = withTheme(
     const oid = useOid(id);
     const modalDialog = useRef<HTMLDivElement>(null);
     const componentClass = useCx(styles.root, { [styles.openState]: open });
+
     const { restoreFocus, setFocus } = useFocus();
     const lastFocusedElemRef = useRef<OptionalHTMLElement>(null);
 
-    if (open) {
-      lastFocusedElemRef.current = setFocus(modalDialog.current);
-      onOpen && onOpen();
-    } else {
-      lastFocusedElemRef.current && restoreFocus(lastFocusedElemRef.current);
-    }
+    useEffect(() => {
+      if (open) {
+        lastFocusedElemRef.current = setFocus(modalDialog.current);
+        onOpen?.();
+      } else {
+        lastFocusedElemRef.current && restoreFocus(lastFocusedElemRef.current);
+      }
+    }, [onOpen, open, restoreFocus, setFocus]);
 
     return createPortal(
       <ModalContext.Provider value={context}>
@@ -142,17 +150,15 @@ export const Modal = withTheme(
           hidden={!open}
         >
           <div className={styles.overlay} tabIndex={-1}>
-            <FocusScope contain>
-              <div
-                className={styles.dialog}
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby={modalHeadingId}
-                ref={modalDialog}
-              >
-                {children}
-              </div>
-            </FocusScope>
+            <div
+              className={styles.dialog}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={modalHeadingId}
+              ref={modalDialog}
+            >
+              {children}
+            </div>
           </div>
         </Box>
       </ModalContext.Provider>,

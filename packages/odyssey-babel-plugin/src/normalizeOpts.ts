@@ -24,20 +24,19 @@ interface NormalizedOpts extends Opts {
 export function normalizeOpts(
   babelOpts: Babel.PluginPass["opts"]
 ): NormalizedOpts {
-  const opts = babelOpts || Object.create(null);
+  const opts = babelOpts as Opts;
   const normalized = {
     include: [/\.module\.(?:scss|css)$/i],
-    identityObjectProxy: false,
+    identityObjectProxy:
+      typeof opts.identityObjectProxy === "boolean"
+        ? opts.identityObjectProxy
+        : false,
   };
 
   if (Array.isArray(opts.include)) {
     normalized.include = opts.include.map((incl: string | RegExp) =>
       incl instanceof RegExp ? incl : new RegExp(incl)
     );
-  }
-
-  if ([true, false].includes(opts.identityObjectProxy)) {
-    normalized.identityObjectProxy = opts.identityObjectProxy;
   }
 
   return normalized;
