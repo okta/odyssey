@@ -1,10 +1,11 @@
 {
   "name": "@okta/conventional-changelog-odyssey",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "main": "index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
+  "sideEffects": false,
   "dependencies": {
     "conventional-changelog-conventionalcommits": "^4.6.1"
   }

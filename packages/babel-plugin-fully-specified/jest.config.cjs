@@ -10,21 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const styles = require("./fixture.module.scss");
-
-describe("transformStyles", () => {
-  describe("require visitor", () => {
-    it.skip("transforms styles as expected", () => {
-      expect(styles).toMatchSnapshot();
-    });
-
-    it("transforms styles template function arity as expected", () => {
-      expect(styles.__template).toBeInstanceOf(Function);
-      expect(styles.__template).toHaveLength(1);
-    });
-
-    it.skip("transforms styles template function return value as expected", () => {
-      expect(styles.__template()).toMatchSnapshot();
-    });
-  });
-});
+module.exports = {
+  testEnvironment: "jsdom",
+};

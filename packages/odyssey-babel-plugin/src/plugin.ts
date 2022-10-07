@@ -29,9 +29,6 @@ export function plugin({ types: t }: typeof Babel): Babel.PluginObj {
 
     visitor: {
       ImportDeclaration(path, state) {
-        if (state.opts === false) {
-          return;
-        }
         const opts = normalizeOpts(state.opts);
 
         const importer = state?.file?.opts?.filename;
@@ -71,9 +68,6 @@ export function plugin({ types: t }: typeof Babel): Babel.PluginObj {
       },
 
       CallExpression(path, state) {
-        if (state.opts === false) {
-          return;
-        }
         const opts = normalizeOpts(state.opts);
 
         const importer = state?.file?.opts?.filename;
