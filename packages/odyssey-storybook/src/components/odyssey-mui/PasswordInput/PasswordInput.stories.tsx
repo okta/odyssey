@@ -10,14 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactElement } from "react";
 import type { Story } from "@storybook/react";
 import { PasswordInput, PasswordInputProps } from "@okta/odyssey-react-mui";
-import {
-  ThemeProvider as MuiThemeProvider,
-  createTheme,
-} from "@mui/material/styles";
-import { ThemeProvider } from "@storybook/theming";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import PasswordInputMdx from "./PasswordInput.mdx";
@@ -52,42 +46,17 @@ export default {
 const Template: Story<PasswordInputProps> = (props) => (
   <PasswordInput {...props} />
 );
+
 export const Password = Template.bind({});
 Password.args = {};
-export const Themed = (
-  props: PasswordInputProps & { PrimaryMain: string }
-): ReactElement => {
-  const { PrimaryMain, ...rest } = props;
-  const theme = createTheme({
-    palette: {
-      mode: "light",
-      primary: {
-        main: PrimaryMain,
-      },
-    },
-  });
-  return (
-    <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <PasswordInput {...rest} />
-      </ThemeProvider>
-    </MuiThemeProvider>
-  );
-};
-Themed.argTypes = {
-  PrimaryMain: {
-    name: "primary main color",
-    defaultValue: "#3fb466",
-    type: "string",
-    control: "color",
-  },
-};
+
 export const Styled = Template.bind({});
 Styled.args = {
   sx: {
     "& .MuiButtonBase-root": { backgroundColor: "lightcoral" },
   },
 };
+
 export const CustomAttributes = Template.bind({});
 CustomAttributes.args = {
   inputProps: {
