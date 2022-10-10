@@ -26,7 +26,7 @@ export default {
     },
   },
   argTypes: {
-    content: {
+    children: {
       control: { type: "object" },
     },
     describeChild: {
@@ -44,21 +44,20 @@ export default {
 };
 
 const Template: Story = (args) => {
-  const {} = args;
   return (
     <Tooltip
       title={args.title}
       placement={args.placement}
       describeChild={args.describeChild}
     >
-      {args.content}
+      {args.children}
     </Tooltip>
   );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  content: <Button>Launch</Button>,
+  children: <Button>Launch</Button>,
   describeChild: true,
   placement: "top",
   title: "This will begin a 10-second countdown",
@@ -66,7 +65,7 @@ Default.args = {
 
 export const Icon = Template.bind({});
 Icon.args = {
-  content: (
+  children: (
     <Button variant="secondary">
       <DownloadIcon />
     </Button>
@@ -78,7 +77,7 @@ Icon.args = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  content: (
+  children: (
     <Button variant="secondary" disabled>
       <DownloadIcon />
     </Button>
