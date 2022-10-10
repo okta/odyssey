@@ -42,6 +42,7 @@ export {
   TableSortLabel,
   Tabs,
   Typography,
+  useTheme,
 } from "@mui/material";
 
 export type {
@@ -76,6 +77,7 @@ export type {
   TabProps,
   TabsProps,
   TypographyProps,
+  useThemeProps,
 } from "@mui/material";
 
 export { Favorite as FavoriteIcon } from "@mui/icons-material";
