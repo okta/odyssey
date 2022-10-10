@@ -24,7 +24,7 @@ export const Link = forwardRef<HTMLLinkElement | HTMLAnchorElement, LinkProps>(
     const { icon, children, target } = props;
     return (
       <MuiLink {...props}>
-        <span className="Link-icon">{icon}</span>
+        {icon && <span className="Link-icon">{icon}</span>}
         {children}
         {target === "_blank" && (
           <span className="Link-indicator" role="presentation">
