@@ -41,6 +41,7 @@ export {
   TableRow,
   TableSortLabel,
   Tabs,
+  ThemeProvider as MuiThemeProvider,
   Typography,
   useTheme,
 } from "@mui/material";
