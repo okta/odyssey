@@ -18,6 +18,7 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import { tableHeadClasses } from "@mui/material/TableHead";
 import { tableRowClasses } from "@mui/material/TableRow";
 import { tableSortLabelClasses } from "@mui/material/TableSortLabel";
+import { tooltipClasses } from "@mui/material/Tooltip";
 import {
   AlertTriangleFilledIcon,
   ArrowDownIcon,
@@ -127,6 +128,7 @@ export const components: ThemeOptions["components"] = {
   },
   MuiButton: {
     defaultProps: {
+      variant: "primary",
       disableElevation: true,
     },
     variants: [
@@ -1014,6 +1016,84 @@ export const components: ThemeOptions["components"] = {
       flexContainer: ({ theme }) => ({
         gap: theme.spacing(5),
         borderBottom: `${theme.mixins.borderWidth} ${theme.mixins.borderStyle} ${theme.palette.divider}`,
+      }),
+    },
+  },
+  MuiTooltip: {
+    defaultProps: {
+      arrow: true,
+      enterDelay: 500,
+      enterNextDelay: 250,
+      placement: "top",
+    },
+    styleOverrides: {
+      tooltip: ({ theme, ownerState }) => ({
+        maxWidth: `calc(${theme.mixins.maxWidth} / 2)`,
+        paddingBlock: theme.spacing(2),
+        paddingInline: theme.spacing(3),
+        backgroundColor: theme.palette.grey[900],
+        color: theme.palette.common.white,
+        fontSize: theme.typography.subtitle1.fontSize,
+        lineHeight: theme.typography.subtitle1.lineHeight,
+        ...(ownerState.touch === true && {
+          paddingBlock: theme.spacing(2),
+          paddingInline: theme.spacing(3),
+          fontSize: theme.typography.subtitle1.fontSize,
+          lineHeight: theme.typography.subtitle1.lineHeight,
+          fontWeight: theme.typography.fontWeightRegular,
+        }),
+        [`.${tooltipClasses.popper}[data-popper-placement*="left"] &`]: {
+          transformOrigin: "right center",
+          ...(!ownerState.isRtl
+            ? {
+                marginRight: theme.spacing(3),
+                ...(ownerState.touch === true && {
+                  marginRight: theme.spacing(4),
+                }),
+              }
+            : {
+                marginLeft: theme.spacing(3),
+                ...(ownerState.touch === true && {
+                  marginLeft: theme.spacing(4),
+                }),
+              }),
+        },
+        [`.${tooltipClasses.popper}[data-popper-placement*="right"] &`]: {
+          transformOrigin: "left center",
+          ...(!ownerState.isRtl
+            ? {
+                marginLeft: theme.spacing(3),
+                ...(ownerState.touch === true && {
+                  marginLeft: theme.spacing(4),
+                }),
+              }
+            : {
+                marginRight: theme.spacing(3),
+                ...(ownerState.touch === true && {
+                  marginRight: theme.spacing(4),
+                }),
+              }),
+        },
+        [`.${tooltipClasses.popper}[data-popper-placement*="top"] &`]: {
+          transformOrigin: "center bottom",
+          marginBottom: theme.spacing(3),
+          ...(ownerState.touch === true && {
+            marginBottom: theme.spacing(4),
+          }),
+        },
+        [`.${tooltipClasses.popper}[data-popper-placement*="bottom"] &`]: {
+          transformOrigin: "center top",
+          marginTop: theme.spacing(3),
+          ...(ownerState.touch === true && {
+            marginTop: theme.spacing(4),
+          }),
+        },
+      }),
+      arrow: ({ theme }) => ({
+        color: theme.palette.grey[900],
+        "&::before": {
+          borderRadius: "2px",
+        },
       }),
     },
   },
