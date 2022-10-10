@@ -1092,8 +1092,27 @@ export const components: ThemeOptions["components"] = {
       arrow: ({ theme }) => ({
         color: theme.palette.grey[900],
         "&::before": {
-          borderRadius: "2px",
+          borderRadius: "0",
         },
+
+        [`.${tooltipClasses.popper}[data-popper-placement*="top"] &::before`]: {
+          borderRadius: `0 0 3px 0`,
+        },
+
+        [`.${tooltipClasses.popper}[data-popper-placement*="right"] &::before`]:
+          {
+            borderRadius: `0 0 0 3px`,
+          },
+
+        [`.${tooltipClasses.popper}[data-popper-placement*="bottom"] &::before`]:
+          {
+            borderRadius: `3px 0 0 0`,
+          },
+
+        [`.${tooltipClasses.popper}[data-popper-placement*="left"] &::before`]:
+          {
+            borderRadius: `0 3px 0 0`,
+          },
       }),
     },
   },
