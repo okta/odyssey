@@ -87,7 +87,7 @@ Disabled.args = {
   title: "You don't have access to these logs",
 };
 
-const PlacementTemplate: Story = (args) => {
+const PlacementTemplate: Story = () => {
   return (
     <>
       <Tooltip title="Top" placement="top">
