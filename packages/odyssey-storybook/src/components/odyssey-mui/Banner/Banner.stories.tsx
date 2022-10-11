@@ -48,7 +48,6 @@ export default {
 };
 
 const DefaultTemplate: Story = (args) => {
-  const {} = args;
   return (
     <Alert
       severity={args.severity}

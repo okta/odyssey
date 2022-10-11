@@ -50,7 +50,6 @@ export default {
 };
 
 const DefaultTemplate: Story = (args) => {
-  const {} = args;
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
