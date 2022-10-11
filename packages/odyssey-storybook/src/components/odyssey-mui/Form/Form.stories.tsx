@@ -91,7 +91,6 @@ export default {
 };
 
 const Template: Story = (args) => {
-  const {} = args;
   return (
     // <Form>
     <Box
