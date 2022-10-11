@@ -50,18 +50,21 @@ export const components: ThemeOptions["components"] = {
           justifyContent: "center",
           alignItems: "center",
           borderWidth: 0,
+          borderRadius: 0,
         }),
         ...(ownerState.variant === "infobox" && {
-          borderStyle: "solid",
-          borderWidth: 1,
+          borderStyle: theme.mixins.borderStyle,
+          borderWidth: theme.mixins.borderWidth,
+          borderRadius: theme.mixins.borderRadius,
           "&:not(:last-child)": {
             marginBottom: theme.spacing(4),
           },
         }),
         ...(ownerState.variant === "toast" && {
           maxWidth: theme.mixins.maxWidth,
-          borderStyle: "solid",
-          borderWidth: 1,
+          borderStyle: theme.mixins.borderStyle,
+          borderWidth: theme.mixins.borderWidth,
+          borderRadius: theme.mixins.borderRadius,
           position: "relative",
           alignItems: "start",
         }),
@@ -291,6 +294,7 @@ export const components: ThemeOptions["components"] = {
         transitionTimingFunction: "linear",
         borderWidth: theme.mixins.borderWidth,
         borderStyle: theme.mixins.borderStyle,
+        borderRadius: theme.mixins.borderRadius,
         outlineColor: "transparent",
         outlineOffset: "0",
         fontSize: theme.typography.body1.fontSize,
@@ -1044,33 +1048,33 @@ export const components: ThemeOptions["components"] = {
         }),
         [`.${tooltipClasses.popper}[data-popper-placement*="left"] &`]: {
           transformOrigin: "right center",
-          ...(!ownerState.isRtl
+          ...(ownerState.isRtl
             ? {
-                marginRight: theme.spacing(3),
-                ...(ownerState.touch === true && {
-                  marginRight: theme.spacing(4),
-                }),
-              }
-            : {
                 marginLeft: theme.spacing(3),
                 ...(ownerState.touch === true && {
                   marginLeft: theme.spacing(4),
+                }),
+              }
+            : {
+                marginRight: theme.spacing(3),
+                ...(ownerState.touch === true && {
+                  marginRight: theme.spacing(4),
                 }),
               }),
         },
         [`.${tooltipClasses.popper}[data-popper-placement*="right"] &`]: {
           transformOrigin: "left center",
-          ...(!ownerState.isRtl
+          ...(ownerState.isRtl
             ? {
-                marginLeft: theme.spacing(3),
-                ...(ownerState.touch === true && {
-                  marginLeft: theme.spacing(4),
-                }),
-              }
-            : {
                 marginRight: theme.spacing(3),
                 ...(ownerState.touch === true && {
                   marginRight: theme.spacing(4),
+                }),
+              }
+            : {
+                marginLeft: theme.spacing(3),
+                ...(ownerState.touch === true && {
+                  marginLeft: theme.spacing(4),
                 }),
               }),
         },
