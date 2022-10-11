@@ -82,8 +82,6 @@ function a11yProps(index: number) {
 }
 
 const DefaultTemplate: Story = (args) => {
-  const {} = args;
-
   const [value, setValue] = React.useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {

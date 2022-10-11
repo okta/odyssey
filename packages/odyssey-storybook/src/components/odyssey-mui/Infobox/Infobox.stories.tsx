@@ -49,7 +49,6 @@ export default {
 };
 
 const DefaultTemplate: Story = (args) => {
-  const {} = args;
   return (
     <Alert severity={args.severity} role={args.role} variant="infobox">
       {args.title && <AlertTitle>{args.title}</AlertTitle>}

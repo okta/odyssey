@@ -67,7 +67,6 @@ export default {
 };
 
 const SingleTemplate: Story = (args) => {
-  const {} = args;
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <FormControlLabel
@@ -107,7 +106,6 @@ Indeterminate.args = {
 };
 
 const GroupTemplate: Story = (args) => {
-  const {} = args;
   return (
     <FormControl
       component="fieldset"
