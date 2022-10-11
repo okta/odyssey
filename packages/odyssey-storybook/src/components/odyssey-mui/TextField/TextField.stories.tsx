@@ -86,7 +86,6 @@ export default {
 };
 
 const Template: Story = (args) => {
-  const {} = args;
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-text-field-label">{args.label}</InputLabel>

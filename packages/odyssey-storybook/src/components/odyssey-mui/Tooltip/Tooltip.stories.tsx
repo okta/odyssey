@@ -88,7 +88,6 @@ Disabled.args = {
 };
 
 const PlacementTemplate: Story = (args) => {
-  const {} = args;
   return (
     <>
       <Tooltip title="Top" placement="top">

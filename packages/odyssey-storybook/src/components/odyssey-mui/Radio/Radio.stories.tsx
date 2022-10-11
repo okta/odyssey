@@ -58,7 +58,6 @@ export default {
 };
 
 const DefaultTemplate: Story = (args) => {
-  const {} = args;
   return (
     <FormControl
       component="fieldset"

@@ -310,8 +310,6 @@ function EnhancedTable() {
 }
 
 const DefaultTemplate: Story = (args) => {
-  const {} = args;
-
   return (
     <TableContainer>
       <Table>
@@ -348,8 +346,6 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {};
 
 const RowHeadingTemplate: Story = (args) => {
-  const {} = args;
-
   return (
     <TableContainer>
       <Table>
@@ -386,8 +382,6 @@ export const RowHeadings = RowHeadingTemplate.bind({});
 RowHeadings.args = {};
 
 const RowGroupingTemplate: Story = (args) => {
-  const {} = args;
-
   return (
     <TableContainer>
       <Table>
@@ -447,8 +441,6 @@ export const RowGroupings = RowGroupingTemplate.bind({});
 RowGroupings.args = {};
 
 const EnhancedTemplate: Story = (args) => {
-  const {} = args;
-
   return <EnhancedTable />;
 };
 

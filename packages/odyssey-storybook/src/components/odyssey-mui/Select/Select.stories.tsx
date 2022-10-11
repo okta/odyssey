@@ -51,7 +51,6 @@ export default {
 };
 
 const NativeTemplate: Story = (args) => {
-  const {} = args;
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
