@@ -18,7 +18,6 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel start:mui start:storybook",
-    "start:ie11": "yarn workspace @okta/odyssey-ie-11-sandbox start",
     "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
@@ -30,7 +29,7 @@
     "stylelint": "stylelint **/*.scss",
     "test": "lerna run test",
     "typecheck": "lerna run typecheck",
-    "build": "lerna run build --ignore @okta/odyssey-ie-11-sandbox --ignore @okta/odyssey-storybook",
+    "build": "lerna run build --ignore @okta/odyssey-storybook",
     "postinstall": "yarn build && [ -z ${CI:-} ] && husky install || exit 0"
   },
   "devDependencies": {

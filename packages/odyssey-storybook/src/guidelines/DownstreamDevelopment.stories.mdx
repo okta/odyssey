@@ -63,7 +63,6 @@ Now install foundational development dependencies:
       webpack \
       webpack-cli \
       webpack-dev-server \
-      html-webpack-plugin \
       postcss
 ```
 
@@ -83,7 +82,6 @@ And update the `package.json` file at the root of your project:
 Create a [`webpack.config.js` config file][2] at the root of your project:
 
 ```js
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
