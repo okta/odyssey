@@ -844,6 +844,10 @@ export const components: ThemeOptions["components"] = {
         paddingInline: theme.spacing(4),
         overflowWrap: "break-word",
 
+        [`.${tableRowClasses.root}:hover &[rowspan]`]: {
+          backgroundColor: theme.palette.common.white,
+        },
+
         [`.${tableBodyClasses.root} .${tableRowClasses.root}:last-of-type &`]: {
           borderBottom: 0,
         },
@@ -939,7 +943,7 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         verticalAlign: "unset",
-        [`&.${tableRowClasses.hover}:hover`]: {
+        [`&.${tableRowClasses.root}:hover`]: {
           backgroundColor: theme.palette.grey[50],
         },
         [`&.${tableRowClasses.selected}`]: {
