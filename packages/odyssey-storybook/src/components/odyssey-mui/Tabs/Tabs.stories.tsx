@@ -19,7 +19,6 @@ import {
   TabContext,
   TabList,
   TabPanel,
-  Typography,
 } from "@okta/odyssey-react-mui";
 // import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -54,19 +53,6 @@ export default {
   },
   decorators: [MuiThemeDecorator],
 };
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
 
 const DefaultTemplate: Story = (args) => {
   const [value, setValue] = React.useState(0);
