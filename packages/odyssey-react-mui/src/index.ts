@@ -40,7 +40,6 @@ export {
   TableHead,
   TableRow,
   TableSortLabel,
-  Tabs,
   ThemeProvider as MuiThemeProvider,
   Tooltip,
   Typography,
@@ -69,6 +68,7 @@ export type {
   SnackbarProps,
   StackProps,
   SvgIconProps,
+  TabProps,
   TableBodyProps,
   TableCellProps,
   TableContainerProps,
@@ -76,12 +76,14 @@ export type {
   TableProps,
   TableRowProps,
   TableSortLabelProps,
-  TabProps,
-  TabsProps,
   TooltipProps,
   TypographyProps,
   useThemeProps,
 } from "@mui/material";
+
+export { TabContext, TabList, TabPanel } from "@mui/lab";
+
+export type { TabContextProps, TabListProps, TabPanelProps } from "@mui/lab";
 
 export { Favorite as FavoriteIcon } from "@mui/icons-material";
 
