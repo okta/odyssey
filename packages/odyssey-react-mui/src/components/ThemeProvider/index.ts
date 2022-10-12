@@ -10,24 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createTheme } from "@mui/material/styles";
-
-import { components } from "./components";
-import { mixins } from "./mixins";
-import { palette } from "./palette";
-import { shape } from "./shape";
-import { spacing } from "./spacing";
-import { typography } from "./typography";
-import "./components.types";
-import "./mixins.types";
-import "./palette.types";
-import "./typography.types";
-
-export const theme = createTheme({
-  components,
-  mixins,
-  palette,
-  shape,
-  spacing,
-  typography,
-});
+export * from "./ThemeProvider";

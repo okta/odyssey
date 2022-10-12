@@ -10,5 +10,80 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+export {
+  Alert,
+  AlertTitle,
+  Box,
+  Button,
+  Checkbox,
+  CircularProgress,
+  CssBaseline,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  FormLabel,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  Radio,
+  RadioGroup,
+  Select,
+  Snackbar,
+  Stack,
+  SvgIcon,
+  Tab,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+  Tabs,
+  ThemeProvider as MuiThemeProvider,
+  Typography,
+  useTheme,
+} from "@mui/material";
+
+export type {
+  AlertProps,
+  AlertTitleProps,
+  BoxProps,
+  ButtonProps,
+  CheckboxProps,
+  CircularProgressProps,
+  CssBaselineProps,
+  FormControlLabelProps,
+  FormControlProps,
+  FormGroupProps,
+  FormHelperTextProps,
+  FormLabelProps,
+  InputAdornmentProps,
+  InputLabelProps,
+  OutlinedInputProps,
+  RadioGroupProps,
+  RadioProps,
+  SelectProps,
+  SnackbarProps,
+  StackProps,
+  SvgIconProps,
+  TableBodyProps,
+  TableCellProps,
+  TableContainerProps,
+  TableHeadProps,
+  TableProps,
+  TableRowProps,
+  TableSortLabelProps,
+  TabProps,
+  TabsProps,
+  TypographyProps,
+  useThemeProps,
+} from "@mui/material";
+
+export { Favorite as FavoriteIcon } from "@mui/icons-material";
+
+export { visuallyHidden } from "@mui/utils";
+
 export * from "./components";
 export * from "./themes";

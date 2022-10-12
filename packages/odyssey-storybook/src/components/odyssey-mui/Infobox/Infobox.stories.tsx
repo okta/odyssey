@@ -11,7 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import { Alert, AlertTitle, Link, Typography } from "@mui/material";
+import { Alert, AlertTitle, Link, Typography } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import InfoboxMdx from "./Infobox.mdx";

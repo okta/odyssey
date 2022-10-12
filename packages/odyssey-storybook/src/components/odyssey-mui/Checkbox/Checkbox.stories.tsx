@@ -18,8 +18,8 @@ import {
   FormGroup,
   FormHelperText,
   FormLabel,
-} from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
+  visuallyHidden,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import CheckboxMdx from "./Checkbox.mdx";

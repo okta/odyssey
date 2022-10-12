@@ -18,8 +18,8 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-} from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
+  visuallyHidden,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import RadioMdx from "./Radio.mdx";
