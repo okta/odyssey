@@ -42,6 +42,7 @@ export {
   TableSortLabel,
   Tabs,
   ThemeProvider as MuiThemeProvider,
+  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -77,6 +78,7 @@ export type {
   TableSortLabelProps,
   TabProps,
   TabsProps,
+  TooltipProps,
   TypographyProps,
   useThemeProps,
 } from "@mui/material";

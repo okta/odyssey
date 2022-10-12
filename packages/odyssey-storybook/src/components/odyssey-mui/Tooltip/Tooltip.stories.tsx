@@ -11,8 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import { Button, Tooltip } from "@mui/material";
-import { DownloadIcon } from "@okta/odyssey-react-mui";
+import { Button, DownloadIcon, Tooltip } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TooltipMdx from "./Tooltip.mdx";
