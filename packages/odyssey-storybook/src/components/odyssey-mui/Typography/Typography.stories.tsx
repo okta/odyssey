@@ -11,7 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import { Typography, TypographyProps } from "@mui/material";
+import { Typography, TypographyProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TypographyMdx from "./Typography.mdx";

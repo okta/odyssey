@@ -11,8 +11,13 @@
  */
 
 import { Story } from "@storybook/react";
-import { FormControl, FormHelperText, InputLabel, Select } from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  Select,
+  visuallyHidden,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import SelectMdx from "./Select.mdx";

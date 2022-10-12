@@ -87,10 +87,6 @@ const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   },
   {
     name: "check",
-    use: "UI indicator - custom checkbox",
-  },
-  {
-    name: "check",
     use: "To show a completed process",
   },
   {

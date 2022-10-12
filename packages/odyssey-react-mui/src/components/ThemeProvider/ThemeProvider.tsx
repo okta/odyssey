@@ -10,24 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createTheme } from "@mui/material/styles";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { ReactElement } from "react";
 
-import { components } from "./components";
-import { mixins } from "./mixins";
-import { palette } from "./palette";
-import { shape } from "./shape";
-import { spacing } from "./spacing";
-import { typography } from "./typography";
-import "./components.types";
-import "./mixins.types";
-import "./palette.types";
-import "./typography.types";
+import { odysseyTheme } from "../../themes";
 
-export const theme = createTheme({
-  components,
-  mixins,
-  palette,
-  shape,
-  spacing,
-  typography,
-});
+export const ThemeProvider = ({ children }: { children: ReactElement }) => (
+  <MuiThemeProvider theme={odysseyTheme}>{children}</MuiThemeProvider>
+);
