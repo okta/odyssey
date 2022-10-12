@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { oid, length } from "./oid";
+import { useMemo } from "react";
 
-describe("oid", () => {
-  it("returns a nice id string", () => {
-    const result = oid();
-    expect(typeof result).toBe("string");
-    expect(result).toHaveLength(length);
-  });
-});
+import { createUniqueId } from "./createUniqueId";
+
+export const useUniqueId = (id?: string): string => {
+  const uniqueId = useMemo(() => createUniqueId(), []);
+
+  return id || uniqueId;
+};
