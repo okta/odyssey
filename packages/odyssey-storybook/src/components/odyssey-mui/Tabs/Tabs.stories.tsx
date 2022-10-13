@@ -16,8 +16,9 @@ import {
   Box,
   FavoriteIcon,
   Tab,
-  Tabs,
-  Typography,
+  TabContext,
+  TabList,
+  TabPanel,
 } from "@okta/odyssey-react-mui";
 // import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -53,72 +54,35 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
 const DefaultTemplate: Story = (args) => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState("0");
 
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
   return (
     <Box>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="basic tabs example"
-      >
-        <Tab label="Planets" {...a11yProps(0)} />
-        <Tab label="Moons" {...a11yProps(1)} />
-        <Tab
-          label={args.label}
-          {...a11yProps(2)}
-          icon={args.icon}
-          disabled={args.disabled}
-          wrapped={args.wrapped}
-        />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        Information about Planets
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Information about Moons
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Information about {args.label}
-      </TabPanel>
+      <TabContext value={value}>
+        <TabList onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="Planets" value="0" />
+          <Tab label="Moons" value="1" />
+
+          <Tab
+            disabled={args.disabled}
+            icon={args.icon}
+            label={args.label}
+            value="2"
+            wrapped={args.wrapped}
+          />
+        </TabList>
+
+        <TabPanel value="0">Information about Planets</TabPanel>
+
+        <TabPanel value="1">Information about Moons</TabPanel>
+
+        <TabPanel value="2">Information about {args.label}</TabPanel>
+      </TabContext>
     </Box>
   );
 };

@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@mui/icons-material": "^5.10.3",
+    "@mui/lab": "^5.0.0-alpha.103",
     "@mui/material": "^5.10.5",
     "@mui/utils": "^5.10.3",
     "@okta/odyssey-design-tokens": "^0.15.0"
