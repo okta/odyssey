@@ -10,32 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 87.5%;
-}
-
-body {
-  margin-block: 0;
-  margin-inline: 0;
-  background-color: #f5f5f5;
-}
-
-main {
-  display: block;
-}
-
-.app {
-  margin-block: 0;
-  margin-inline: auto;
-  padding-block: 64px;
-  padding-inline: 32px;
-  max-width: 1024px;
-  min-height: 100vh;
-  background-color: #ffffff;
-}
+export * from "./ThemeProvider";

@@ -11,7 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import { Alert, Link } from "@mui/material";
+import { Alert, Link } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import BannerMdx from "./Banner.mdx";
@@ -48,7 +48,6 @@ export default {
 };
 
 const DefaultTemplate: Story = (args) => {
-  const {} = args;
   return (
     <Alert
       severity={args.severity}

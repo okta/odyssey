@@ -10,26 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-.error-message {
-  padding-block: 8px;
-  padding-inline: 16px;
-  background-color: #da372c;
-  color: #ffffff;
-  font-family: monospace;
-}
+import { useMemo } from "react";
 
-.error-heading {
-  font-size: 18px;
-  margin-block-start: 0;
-}
+import { createUniqueId } from "./createUniqueId";
 
-.error-text {
-  font-weight: bold;
-}
+export const useUniqueId = (id?: string): string => {
+  const uniqueId = useMemo(() => createUniqueId(), []);
 
-.boundary {
-  padding-block: 16px;
-  padding-inline: 16px;
-  border: 1px solid #dcdcdc;
-  margin-block-end: 24px;
-}
+  return id || uniqueId;
+};

@@ -27,7 +27,7 @@ import {
   Radio,
   Select,
   Typography,
-} from "@mui/material";
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import FormMdx from "./Form.mdx";
@@ -91,7 +91,6 @@ export default {
 };
 
 const Template: Story = (args) => {
-  const {} = args;
   return (
     // <Form>
     <Box

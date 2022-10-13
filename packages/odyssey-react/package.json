@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "description": "React components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -20,19 +20,19 @@
     "directory": "packages/odyssey-react"
   },
   "dependencies": {
-    "@okta/odyssey-react-theme": "^0.15.1",
+    "@okta/odyssey-react-theme": "^0.15.2",
     "choices.js": "^9.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.3",
-    "@okta/browserslist-config-odyssey": "^0.15.1",
-    "@okta/odyssey-babel-preset": "^0.15.1",
-    "@okta/odyssey-lifecycle": "^0.15.1",
-    "@okta/odyssey-postcss-preset": "^0.15.1",
-    "@okta/odyssey-postcss-scss": "^0.15.1",
-    "@okta/odyssey-stylelint": "^0.15.1",
-    "@okta/odyssey-typescript": "^0.15.1",
+    "@okta/browserslist-config-odyssey": "^0.15.2",
+    "@okta/odyssey-babel-preset": "^0.15.2",
+    "@okta/odyssey-lifecycle": "^0.15.2",
+    "@okta/odyssey-postcss-preset": "^0.15.2",
+    "@okta/odyssey-postcss-scss": "^0.15.2",
+    "@okta/odyssey-stylelint": "^0.15.2",
+    "@okta/odyssey-typescript": "^0.15.2",
     "@testing-library/dom": "^8.18.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",

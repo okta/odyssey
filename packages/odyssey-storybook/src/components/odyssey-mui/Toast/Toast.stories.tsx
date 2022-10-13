@@ -12,7 +12,13 @@
 
 import * as React from "react";
 import { Story } from "@storybook/react";
-import { Alert, AlertTitle, Button, Snackbar, Stack } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  Snackbar,
+  Stack,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import ToastMdx from "./Toast.mdx";
@@ -50,7 +56,6 @@ export default {
 };
 
 const DefaultTemplate: Story = (args) => {
-  const {} = args;
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {

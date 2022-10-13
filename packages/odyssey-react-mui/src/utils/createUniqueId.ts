@@ -10,12 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { oid, length } from "./oid";
+// This is a random number chosen to shrink down the unique ID to an arbitrary length.
+export const uniqueIdLength = 6;
 
-describe("oid", () => {
-  it("returns a nice id string", () => {
-    const result = oid();
-    expect(typeof result).toBe("string");
-    expect(result).toHaveLength(length);
-  });
-});
+export const createUniqueId = (): string =>
+  Math.random().toString(36).slice(-uniqueIdLength);

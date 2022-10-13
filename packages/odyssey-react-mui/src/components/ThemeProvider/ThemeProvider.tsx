@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,13 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo } from "react";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { ReactElement } from "react";
 
-export const length = 6;
+import { odysseyTheme } from "../../themes";
 
-export const oid = (): string => Math.random().toString(36).slice(-length);
-
-export const useOid = (id?: string): string => {
-  const _oid = useMemo(oid, [oid]);
-  return id || _oid;
-};
+export const ThemeProvider = ({ children }: { children: ReactElement }) => (
+  <MuiThemeProvider theme={odysseyTheme}>{children}</MuiThemeProvider>
+);

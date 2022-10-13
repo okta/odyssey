@@ -22,7 +22,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useOid } from "../../utils";
+import { useUniqueId } from "../../utils";
 
 interface State {
   password: string;
@@ -77,14 +77,14 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         : tooltipLabel;
     }, [values, tooltipLabel]);
 
-    const oid = useOid(id);
+    const uniqueId = useUniqueId(id);
 
     return (
       <Box>
-        <InputLabel htmlFor={oid}>{label}</InputLabel>
+        <InputLabel htmlFor={uniqueId}>{label}</InputLabel>
         <OutlinedInput
           {...rest}
-          id={oid}
+          id={uniqueId}
           inputProps={inputProps}
           inputRef={ref}
           onChange={handlePasswordChange}
