@@ -12,7 +12,7 @@
 
 import { forwardRef } from "react";
 import type { SvgIconNoChildrenProps } from "./types";
-import { iconDictionary } from "./";
+import { iconDictionary } from "./iconDictionary";
 
 export interface IconProps extends SvgIconNoChildrenProps {
   /**
