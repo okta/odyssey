@@ -11,7 +11,7 @@
  */
 
 import { forwardRef } from "react";
-import type { SvgIconNoChildrenProps } from "./types";
+import type { SvgIconNoChildrenProps } from "./iconDictionary/types";
 import { iconDictionary } from "./iconDictionary";
 
 export interface IconProps extends SvgIconNoChildrenProps {
