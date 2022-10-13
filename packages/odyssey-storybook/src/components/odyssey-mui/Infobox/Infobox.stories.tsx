@@ -11,7 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import { Alert, AlertTitle, Link, Typography } from "@mui/material";
+import { Alert, AlertTitle, Link, Typography } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import InfoboxMdx from "./Infobox.mdx";
@@ -49,7 +49,6 @@ export default {
 };
 
 const DefaultTemplate: Story = (args) => {
-  const {} = args;
   return (
     <Alert severity={args.severity} role={args.role} variant="infobox">
       {args.title && <AlertTitle>{args.title}</AlertTitle>}

@@ -11,8 +11,13 @@
  */
 
 import { Story } from "@storybook/react";
-import { FormControl, FormHelperText, InputLabel, Select } from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  Select,
+  visuallyHidden,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import SelectMdx from "./Select.mdx";
@@ -51,7 +56,6 @@ export default {
 };
 
 const NativeTemplate: Story = (args) => {
-  const {} = args;
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>

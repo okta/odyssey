@@ -99,4 +99,10 @@ declare module "@mui/material/TableCell" {
   }
 }
 
+declare module "@mui/material/Tooltip" {
+  interface TooltipComponentsPropsOverrides {
+    placement?: "bottom" | "left" | "right" | "top";
+  }
+}
+
 export {};

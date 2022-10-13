@@ -11,7 +11,10 @@
  */
 
 import { Story } from "@storybook/react";
-import { CircularProgress, CircularProgressProps } from "@mui/material";
+import {
+  CircularProgress,
+  CircularProgressProps,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import CircularProgressMdx from "./CircularProgress.mdx";

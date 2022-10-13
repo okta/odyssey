@@ -12,22 +12,22 @@
 
 import { createTheme } from "@mui/material/styles";
 
-import { palette } from "./palette";
-import "./palette.types";
-import { shape } from "./shape";
+import { components } from "./components";
 import { mixins } from "./mixins";
-import "./mixins.types";
+import { palette } from "./palette";
+import { shape } from "./shape";
 import { spacing } from "./spacing";
 import { typography } from "./typography";
-import "./typography.types";
-import { components } from "./components";
 import "./components.types";
+import "./mixins.types";
+import "./palette.types";
+import "./typography.types";
 
 export const theme = createTheme({
+  components,
+  mixins,
   palette,
   shape,
-  mixins,
   spacing,
   typography,
-  components,
 });

@@ -12,15 +12,17 @@
 
 import { Story } from "@storybook/react";
 import * as React from "react";
-import Button from "@mui/material/Button";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
-import Checkbox from "@mui/material/Checkbox";
+import {
+  Button,
+  Checkbox,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TableMdx from "./Table.mdx";
 
@@ -309,9 +311,7 @@ function EnhancedTable() {
   );
 }
 
-const DefaultTemplate: Story = (args) => {
-  const {} = args;
-
+const DefaultTemplate: Story = () => {
   return (
     <TableContainer>
       <Table>
@@ -347,9 +347,7 @@ const DefaultTemplate: Story = (args) => {
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
 
-const RowHeadingTemplate: Story = (args) => {
-  const {} = args;
-
+const RowHeadingTemplate: Story = () => {
   return (
     <TableContainer>
       <Table>
@@ -385,9 +383,7 @@ const RowHeadingTemplate: Story = (args) => {
 export const RowHeadings = RowHeadingTemplate.bind({});
 RowHeadings.args = {};
 
-const RowGroupingTemplate: Story = (args) => {
-  const {} = args;
-
+const RowGroupingTemplate: Story = () => {
   return (
     <TableContainer>
       <Table>
@@ -446,9 +442,7 @@ const RowGroupingTemplate: Story = (args) => {
 export const RowGroupings = RowGroupingTemplate.bind({});
 RowGroupings.args = {};
 
-const EnhancedTemplate: Story = (args) => {
-  const {} = args;
-
+const EnhancedTemplate: Story = () => {
   return <EnhancedTable />;
 };
 

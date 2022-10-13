@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.15.2](https://github.com/okta/odyssey/compare/v0.15.1...v0.15.2) (2022-10-13)
+
+### Features
+
+- added @mui/lab ([379a077](https://github.com/okta/odyssey/commit/379a077c82ed4c020d75b07a5d0d66b60b7c319e))
+- exported useUniqueId and createUniqueId ([79448f4](https://github.com/okta/odyssey/commit/79448f4281cb0594c789ce9ab86c67704f82afe8))
+- **odyssey-react-mui:** add per-corner borderRadius support for Tooltip ([069fa02](https://github.com/okta/odyssey/commit/069fa02d06560656071306a18427400bb3b2a1e4))
+- **odyssey-react-mui:** add theme for Tooltip ([96092ec](https://github.com/okta/odyssey/commit/96092ecb46981ab750a87184c8aa0133151de7f3))
+- **odyssey-react-mui:** import Labs types, add styling for TabPanel ([992bf14](https://github.com/okta/odyssey/commit/992bf1475fa34e5b93547738f76e7dda4d1a20bc))
+- re-exported MUI components as Odyssey MUI components ([3d97a5b](https://github.com/okta/odyssey/commit/3d97a5b72d3bff474a1e1a1e3f7545b53bd0c247))
+- updated exports and stories to use new Tabs API from @mui/lab ([18b9739](https://github.com/okta/odyssey/commit/18b9739fcd5691dbd89a9d17df19cb53cb083343))
+
+### Bug Fixes
+
+- added missing component props from MUI, utils, and one icon ([e105118](https://github.com/okta/odyssey/commit/e1051181c4d737d4761a521452c9208db8246794))
+- added missing exports from @mui/material ([31e7348](https://github.com/okta/odyssey/commit/31e7348de0f5f6e6dd40ff3951cf796ad7bb2e4d))
+- added missing Tooltip import ([6229d7f](https://github.com/okta/odyssey/commit/6229d7f2a5bd750d05e969789eb4dc8006d8640f))
+- added missing useTheme export ([ae28864](https://github.com/okta/odyssey/commit/ae288641e714063bfb11bd743a15bcf5b168007a))
+- added MuiThemeProvider as an out from Odyssey ([bbcc4ae](https://github.com/okta/odyssey/commit/bbcc4aede21c59707e9ba07e2e2ddcac9c54eddd))
+- exported more MUI components ([8f09257](https://github.com/okta/odyssey/commit/8f092571c7654adad830fe974e283f02d12b8f71))
+- link icon wasn't optional ([567da0c](https://github.com/okta/odyssey/commit/567da0c0bfffe45623e12d7ae37635bd04d86de0))
+- **odyssey-react-mui:** ensure font weights are typed as numbers ([ee7c9a8](https://github.com/okta/odyssey/commit/ee7c9a88881f96c169f4f4ab203ab2148deead77))
+- **odyssey-react-mui:** fix bg color on table row hover ([b8371c2](https://github.com/okta/odyssey/commit/b8371c272ec013630a1cf8fbd96d9ff004cc51c2))
+- **odyssey-react-mui:** strip units from borderRadiusBase ([267d82a](https://github.com/okta/odyssey/commit/267d82a3d183ddbfda11e3774fca687bfbf1adaa))
+- password input wasn't using useUniqueId ([cf9435c](https://github.com/okta/odyssey/commit/cf9435c7f1402595bd5bb53571726f210445c723))
+- removed unused Checkmark from docs ([d305bd1](https://github.com/okta/odyssey/commit/d305bd123159f248b2af67196e01d7f30eb5e84e))
+- tabs story using number, not string ([81dcd74](https://github.com/okta/odyssey/commit/81dcd7408df74aa8e2168962e85d421974571068))
+- updated Tabs stories to remove more unused boilerplate ([0a60f36](https://github.com/okta/odyssey/commit/0a60f36878a98413ce5695e1d1d9143ba5de5713))
+
 ### [0.15.1](https://github.com/okta/odyssey/compare/v0.15.0...v0.15.1) (2022-10-06)
 
 ### Features

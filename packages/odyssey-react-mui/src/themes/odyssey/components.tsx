@@ -11,6 +11,7 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
+import type {} from "@mui/lab/themeAugmentation";
 //import radioClasses from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { tableBodyClasses } from "@mui/material/TableBody";
@@ -18,6 +19,7 @@ import { tableCellClasses } from "@mui/material/TableCell";
 import { tableHeadClasses } from "@mui/material/TableHead";
 import { tableRowClasses } from "@mui/material/TableRow";
 import { tableSortLabelClasses } from "@mui/material/TableSortLabel";
+import { tooltipClasses } from "@mui/material/Tooltip";
 import {
   AlertTriangleFilledIcon,
   ArrowDownIcon,
@@ -49,18 +51,21 @@ export const components: ThemeOptions["components"] = {
           justifyContent: "center",
           alignItems: "center",
           borderWidth: 0,
+          borderRadius: 0,
         }),
         ...(ownerState.variant === "infobox" && {
-          borderStyle: "solid",
-          borderWidth: 1,
+          borderStyle: theme.mixins.borderStyle,
+          borderWidth: theme.mixins.borderWidth,
+          borderRadius: theme.mixins.borderRadius,
           "&:not(:last-child)": {
             marginBottom: theme.spacing(4),
           },
         }),
         ...(ownerState.variant === "toast" && {
           maxWidth: theme.mixins.maxWidth,
-          borderStyle: "solid",
-          borderWidth: 1,
+          borderStyle: theme.mixins.borderStyle,
+          borderWidth: theme.mixins.borderWidth,
+          borderRadius: theme.mixins.borderRadius,
           position: "relative",
           alignItems: "start",
         }),
@@ -127,6 +132,7 @@ export const components: ThemeOptions["components"] = {
   },
   MuiButton: {
     defaultProps: {
+      variant: "primary",
       disableElevation: true,
     },
     variants: [
@@ -289,6 +295,7 @@ export const components: ThemeOptions["components"] = {
         transitionTimingFunction: "linear",
         borderWidth: theme.mixins.borderWidth,
         borderStyle: theme.mixins.borderStyle,
+        borderRadius: theme.mixins.borderRadius,
         outlineColor: "transparent",
         outlineOffset: "0",
         fontSize: theme.typography.body1.fontSize,
@@ -802,6 +809,13 @@ export const components: ThemeOptions["components"] = {
       }),
     },
   },
+  MuiTabPanel: {
+    styleOverrides: {
+      root: {
+        padding: 0,
+      },
+    },
+  },
   MuiTable: {
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
@@ -837,6 +851,10 @@ export const components: ThemeOptions["components"] = {
         paddingBlock: theme.spacing(4),
         paddingInline: theme.spacing(4),
         overflowWrap: "break-word",
+
+        [`.${tableRowClasses.root}:hover &[rowspan]`]: {
+          backgroundColor: theme.palette.common.white,
+        },
 
         [`.${tableBodyClasses.root} .${tableRowClasses.root}:last-of-type &`]: {
           borderBottom: 0,
@@ -933,7 +951,7 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         verticalAlign: "unset",
-        [`&.${tableRowClasses.hover}:hover`]: {
+        [`&.${tableRowClasses.root}:hover`]: {
           backgroundColor: theme.palette.grey[50],
         },
         [`&.${tableRowClasses.selected}`]: {
@@ -1014,6 +1032,103 @@ export const components: ThemeOptions["components"] = {
       flexContainer: ({ theme }) => ({
         gap: theme.spacing(5),
         borderBottom: `${theme.mixins.borderWidth} ${theme.mixins.borderStyle} ${theme.palette.divider}`,
+      }),
+    },
+  },
+  MuiTooltip: {
+    defaultProps: {
+      arrow: true,
+      enterDelay: 500,
+      enterNextDelay: 250,
+      placement: "top",
+    },
+    styleOverrides: {
+      tooltip: ({ theme, ownerState }) => ({
+        maxWidth: `calc(${theme.mixins.maxWidth} / 2)`,
+        paddingBlock: theme.spacing(2),
+        paddingInline: theme.spacing(3),
+        backgroundColor: theme.palette.grey[900],
+        color: theme.palette.common.white,
+        fontSize: theme.typography.subtitle1.fontSize,
+        lineHeight: theme.typography.subtitle1.lineHeight,
+        ...(ownerState.touch === true && {
+          paddingBlock: theme.spacing(2),
+          paddingInline: theme.spacing(3),
+          fontSize: theme.typography.subtitle1.fontSize,
+          lineHeight: theme.typography.subtitle1.lineHeight,
+          fontWeight: theme.typography.fontWeightRegular,
+        }),
+        [`.${tooltipClasses.popper}[data-popper-placement*="left"] &`]: {
+          transformOrigin: "right center",
+          ...(ownerState.isRtl
+            ? {
+                marginLeft: theme.spacing(3),
+                ...(ownerState.touch === true && {
+                  marginLeft: theme.spacing(4),
+                }),
+              }
+            : {
+                marginRight: theme.spacing(3),
+                ...(ownerState.touch === true && {
+                  marginRight: theme.spacing(4),
+                }),
+              }),
+        },
+        [`.${tooltipClasses.popper}[data-popper-placement*="right"] &`]: {
+          transformOrigin: "left center",
+          ...(ownerState.isRtl
+            ? {
+                marginRight: theme.spacing(3),
+                ...(ownerState.touch === true && {
+                  marginRight: theme.spacing(4),
+                }),
+              }
+            : {
+                marginLeft: theme.spacing(3),
+                ...(ownerState.touch === true && {
+                  marginLeft: theme.spacing(4),
+                }),
+              }),
+        },
+        [`.${tooltipClasses.popper}[data-popper-placement*="top"] &`]: {
+          transformOrigin: "center bottom",
+          marginBottom: theme.spacing(3),
+          ...(ownerState.touch === true && {
+            marginBottom: theme.spacing(4),
+          }),
+        },
+        [`.${tooltipClasses.popper}[data-popper-placement*="bottom"] &`]: {
+          transformOrigin: "center top",
+          marginTop: theme.spacing(3),
+          ...(ownerState.touch === true && {
+            marginTop: theme.spacing(4),
+          }),
+        },
+      }),
+      arrow: ({ theme }) => ({
+        color: theme.palette.grey[900],
+        "&::before": {
+          borderRadius: "0",
+        },
+
+        [`.${tooltipClasses.popper}[data-popper-placement*="top"] &::before`]: {
+          borderRadius: `0 0 3px 0`,
+        },
+
+        [`.${tooltipClasses.popper}[data-popper-placement*="right"] &::before`]:
+          {
+            borderRadius: `0 0 0 3px`,
+          },
+
+        [`.${tooltipClasses.popper}[data-popper-placement*="bottom"] &::before`]:
+          {
+            borderRadius: `3px 0 0 0`,
+          },
+
+        [`.${tooltipClasses.popper}[data-popper-placement*="left"] &::before`]:
+          {
+            borderRadius: `0 3px 0 0`,
+          },
       }),
     },
   },

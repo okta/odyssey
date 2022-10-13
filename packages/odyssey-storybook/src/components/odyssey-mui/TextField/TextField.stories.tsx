@@ -17,8 +17,8 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
-} from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
+  visuallyHidden,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TextFieldMdx from "./TextField.mdx";
@@ -86,7 +86,6 @@ export default {
 };
 
 const Template: Story = (args) => {
-  const {} = args;
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-text-field-label">{args.label}</InputLabel>
