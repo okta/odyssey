@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo } from "react";
+import { createUniqueId, uniqueIdLength } from "./createUniqueId";
 
-export const length = 6;
+describe("createUniqueId", () => {
+  it("returns a nice id string", () => {
+    const result = createUniqueId();
 
-export const oid = (): string => Math.random().toString(36).slice(-length);
-
-export const useOid = (id?: string): string => {
-  const _oid = useMemo(oid, [oid]);
-  return id || _oid;
-};
+    expect(typeof result).toBe("string");
+    expect(result).toHaveLength(uniqueIdLength);
+  });
+});
