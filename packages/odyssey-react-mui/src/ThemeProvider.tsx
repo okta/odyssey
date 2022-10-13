@@ -13,7 +13,7 @@
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { ReactElement } from "react";
 
-import { odysseyTheme } from "../../themes";
+import { odysseyTheme } from "./theme";
 
 export const ThemeProvider = ({ children }: { children: ReactElement }) => (
   <MuiThemeProvider theme={odysseyTheme}>{children}</MuiThemeProvider>
