@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.15.2](https://github.com/okta/odyssey/compare/v0.15.1...v0.15.2) (2022-10-13)
+
+### Features
+
+- re-exported MUI components as Odyssey MUI components ([3d97a5b](https://github.com/okta/odyssey/commit/3d97a5b72d3bff474a1e1a1e3f7545b53bd0c247))
+- updated exports and stories to use new Tabs API from @mui/lab ([18b9739](https://github.com/okta/odyssey/commit/18b9739fcd5691dbd89a9d17df19cb53cb083343))
+
+### Bug Fixes
+
+- added missing component props from MUI, utils, and one icon ([e105118](https://github.com/okta/odyssey/commit/e1051181c4d737d4761a521452c9208db8246794))
+- added missing Tooltip import ([6229d7f](https://github.com/okta/odyssey/commit/6229d7f2a5bd750d05e969789eb4dc8006d8640f))
+- exported more MUI components ([8f09257](https://github.com/okta/odyssey/commit/8f092571c7654adad830fe974e283f02d12b8f71))
+- removed unused Checkmark from docs ([d305bd1](https://github.com/okta/odyssey/commit/d305bd123159f248b2af67196e01d7f30eb5e84e))
+- tabs story using number, not string ([81dcd74](https://github.com/okta/odyssey/commit/81dcd7408df74aa8e2168962e85d421974571068))
+- updated Tabs stories to remove more unused boilerplate ([0a60f36](https://github.com/okta/odyssey/commit/0a60f36878a98413ce5695e1d1d9143ba5de5713))
+
 ### [0.15.1](https://github.com/okta/odyssey/compare/v0.15.0...v0.15.1) (2022-10-06)
 
 ### Features
