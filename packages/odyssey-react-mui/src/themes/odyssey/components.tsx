@@ -11,6 +11,7 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
+import type {} from "@mui/lab/themeAugmentation";
 //import radioClasses from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { tableBodyClasses } from "@mui/material/TableBody";
@@ -806,6 +807,13 @@ export const components: ThemeOptions["components"] = {
           },
         },
       }),
+    },
+  },
+  MuiTabPanel: {
+    styleOverrides: {
+      root: {
+        padding: 0,
+      },
     },
   },
   MuiTable: {
