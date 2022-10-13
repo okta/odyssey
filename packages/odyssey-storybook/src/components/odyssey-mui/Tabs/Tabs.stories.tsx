@@ -55,9 +55,9 @@ export default {
 };
 
 const DefaultTemplate: Story = (args) => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState("0");
 
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
