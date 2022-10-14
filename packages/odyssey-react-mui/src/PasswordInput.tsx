@@ -22,7 +22,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useUniqueId } from "../../utils";
+import { useUniqueId } from "./useUniqueId";
 
 interface State {
   password: string;

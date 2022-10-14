@@ -25,7 +25,7 @@ import {
   ArrowDownIcon,
   CheckCircleFilledIcon,
   InformationCircleFilledIcon,
-} from "../../components/Icon";
+} from "../iconDictionary";
 
 export const components: ThemeOptions["components"] = {
   MuiAlert: {

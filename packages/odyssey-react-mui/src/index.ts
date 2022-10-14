@@ -10,6 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+export * from "./createUniqueId";
+export * from "./Icon";
+export * from "./iconDictionary";
+export * from "./Link";
+export * from "./PasswordInput";
+export * from "./theme";
+export * from "./ThemeProvider";
+export * from "./useUniqueId";
+
 export {
   Alert,
   AlertTitle,
@@ -88,7 +97,3 @@ export type { TabContextProps, TabListProps, TabPanelProps } from "@mui/lab";
 export { Favorite as FavoriteIcon } from "@mui/icons-material";
 
 export { visuallyHidden } from "@mui/utils";
-
-export * from "./components";
-export * from "./themes";
-export * from "./utils";

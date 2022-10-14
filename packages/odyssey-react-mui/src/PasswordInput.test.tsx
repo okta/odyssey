@@ -11,8 +11,9 @@
  */
 
 import { render, screen } from "@testing-library/react";
-import { a11yCheck } from "../../../test";
-import { PasswordInput } from ".";
+
+import { a11yCheck } from "./a11yCheck";
+import { PasswordInput } from "./PasswordInput";
 
 const label = "Password";
 const tooltipOnLabel = "Show password";
