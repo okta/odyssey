@@ -56,7 +56,7 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
+const DefaultTemplate: Story = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -102,7 +102,7 @@ const DefaultTemplate: Story = (args) => {
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
 
-const LongTemplate: Story = (args) => {
+const LongTemplate: Story = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -123,7 +123,7 @@ const LongTemplate: Story = (args) => {
             <CloseIcon />
           </Button>
         </DialogTitle>
-        <DialogContent dividers="true">
+        <DialogContent dividers={true}>
           <DialogContentText>
             For example, a Contributor (the Initial Developer in (a) the power,
             direct or indirect, to cause the whole must be sufficiently detailed
