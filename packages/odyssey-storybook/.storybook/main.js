@@ -23,12 +23,11 @@ module.exports = {
     checkOptions: {},
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
-      customComponentTypes: ["PolymorphicForwardRef"],
       shouldExtractLiteralValuesFromEnum: true,
       propFilter: (prop) => {
         if (!prop.parent) return true;
         return (
-          /odyssey-react/.test(prop.parent.fileName) ||
+          /odyssey-react-mui/.test(prop.parent.fileName) ||
           !/node_modules/.test(prop.parent.fileName)
         );
       },
@@ -54,8 +53,8 @@ function buildRules(rules) {
 
       if (isScriptLoader) {
         const exclude = rule.exclude
-          ? [/odyssey-react\//].concat(rule.exclude)
-          : [/odyssey-react\//];
+          ? [/odyssey-react-mui\//].concat(rule.exclude)
+          : [/odyssey-react-mui\//];
 
         return memo.concat(Object.assign({}, rule, { exclude }));
       }
@@ -63,7 +62,7 @@ function buildRules(rules) {
       return memo.concat(rule);
     }, [])
     .concat({
-      test: /odyssey-react\/\S+\.(jsx?|tsx?)$/,
+      test: /odyssey-react-mui\/\S+\.(jsx?|tsx?)$/,
       exclude: /node_modules/,
       loader: "@okta/odyssey-babel-loader",
       options: {
