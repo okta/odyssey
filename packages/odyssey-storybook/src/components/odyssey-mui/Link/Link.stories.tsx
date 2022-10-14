@@ -13,8 +13,7 @@
 import type { Story } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
-import { InformationCircleFilledIcon } from "../../../../../odyssey-react/src";
-import { Link, LinkProps } from "@okta/odyssey-react-mui";
+import { Icon, Link, LinkProps } from "@okta/odyssey-react-mui";
 
 import LinkMdx from "./Link.mdx";
 
@@ -68,7 +67,7 @@ export const WithIcon = Template.bind({});
 WithIcon.args = {
   href: "#anchor",
   children: "Info link",
-  icon: <InformationCircleFilledIcon />,
+  icon: <Icon name="information-circle-filled" />,
 };
 
 export const External = Template.bind({});

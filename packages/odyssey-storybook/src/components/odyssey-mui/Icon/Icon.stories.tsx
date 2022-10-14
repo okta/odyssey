@@ -11,10 +11,18 @@
  */
 
 import { Story } from "@storybook/react";
-import { Table } from "../../../../../odyssey-react/src";
-import { Icon, iconDictionary } from "../../../../../odyssey-react-mui/src";
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 import type { ReactElement } from "react";
+import {
+  Icon,
+  iconDictionary,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "../../../../../odyssey-react-mui/src";
+import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 export default {
   title: `MUI Components/Icon`,
@@ -160,31 +168,34 @@ const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
 ];
 
 export const Library = (): ReactElement => {
-  return (
-    <Table caption="Library" screenReaderCaption="Available Odyssey Icons">
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell>Icon</Table.HeaderCell>
-          <Table.HeaderCell>Name</Table.HeaderCell>
-          <Table.HeaderCell>Class Name</Table.HeaderCell>
-          <Table.HeaderCell>Use</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        {meta.map(({ name, use }) => {
-          const CurrentIcon = iconDictionary[name];
-          return (
-            <Table.Row key={`${name}_row`}>
-              <Table.DataCell>
-                <CurrentIcon />
-              </Table.DataCell>
-              <Table.DataCell>{name}</Table.DataCell>
-              <Table.DataCell>{CurrentIcon.displayName}</Table.DataCell>
-              <Table.DataCell>{use}</Table.DataCell>
-            </Table.Row>
-          );
-        })}
-      </Table.Body>
-    </Table>
-  );
+  return <div />;
+  // return (
+  //   <TableContainer>
+  //     <Table>
+  //       <TableHead>
+  //         <TableRow>
+  //           <TableCell>Icon</TableCell>
+  //           <TableCell>Name</TableCell>
+  //           <TableCell>Class Name</TableCell>
+  //           <TableCell>Use</TableCell>
+  //         </TableRow>
+  //       </TableHead>
+  //       <TableBody>
+  //         {meta.map(({ name, use }) => {
+  //           const CurrentIcon = iconDictionary[name];
+  //           return (
+  //             <TableRow key={`${name}_row`}>
+  //               <TableCell>
+  //                 <CurrentIcon />
+  //               </TableCell>
+  //               <TableCell>{name}</TableCell>
+  //               <TableCell>{CurrentIcon.displayName}</TableCell>
+  //               <TableCell>{use}</TableCell>
+  //             </TableRow>
+  //           );
+  //         })}
+  //       </TableBody>
+  //     </Table>
+  //   </TableContainer>
+  // );
 };
