@@ -15,6 +15,7 @@ export * from "./Icon";
 export * from "./iconDictionary";
 export * from "./Link";
 export * from "./PasswordInput";
+export * from "./theme";
 export * from "./ThemeProvider";
 export * from "./useUniqueId";
 
