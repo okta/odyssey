@@ -17,6 +17,7 @@
     "@okta/odyssey-design-tokens": "^0.15.2",
     "@okta/odyssey-lifecycle": "^0.15.2",
     "@okta/odyssey-react": "^0.15.2",
+    "@okta/odyssey-react-labs": "^0.15.2",
     "@okta/odyssey-react-mui": "^0.15.2",
     "@okta/odyssey-react-theme": "^0.15.2",
     "@okta/odyssey-typescript": "^0.15.2",
