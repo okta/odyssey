@@ -52,17 +52,13 @@ function buildRules(rules) {
       if (isStyleLoader) return memo;
 
       if (isScriptLoader) {
-        const exclude = rule.exclude
-          ? [/odyssey-react-mui\//].concat(rule.exclude)
-          : [/odyssey-react-mui\//];
-
-        return memo.concat(Object.assign({}, rule, { exclude }));
+        return memo.concat({ ...rule, exclude: rule.exclude });
       }
 
       return memo.concat(rule);
     }, [])
     .concat({
-      test: /odyssey-react-mui\/\S+\.(jsx?|tsx?)$/,
+      test: /odyssey-react\/\S+\.(jsx?|tsx?)$/,
       exclude: /node_modules/,
       loader: "@okta/odyssey-babel-loader",
       options: {

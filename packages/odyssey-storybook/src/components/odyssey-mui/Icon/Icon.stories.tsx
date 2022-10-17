@@ -11,6 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
+import { createElement } from "react";
 import type { ReactElement } from "react";
 import {
   Icon,
@@ -168,34 +169,31 @@ const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
 ];
 
 export const Library = (): ReactElement => {
-  return <div />;
-  // return (
-  //   <TableContainer>
-  //     <Table>
-  //       <TableHead>
-  //         <TableRow>
-  //           <TableCell>Icon</TableCell>
-  //           <TableCell>Name</TableCell>
-  //           <TableCell>Class Name</TableCell>
-  //           <TableCell>Use</TableCell>
-  //         </TableRow>
-  //       </TableHead>
-  //       <TableBody>
-  //         {meta.map(({ name, use }) => {
-  //           const CurrentIcon = iconDictionary[name];
-  //           return (
-  //             <TableRow key={`${name}_row`}>
-  //               <TableCell>
-  //                 <CurrentIcon />
-  //               </TableCell>
-  //               <TableCell>{name}</TableCell>
-  //               <TableCell>{CurrentIcon.displayName}</TableCell>
-  //               <TableCell>{use}</TableCell>
-  //             </TableRow>
-  //           );
-  //         })}
-  //       </TableBody>
-  //     </Table>
-  //   </TableContainer>
-  // );
+  // return <div />;
+  return (
+    <TableContainer>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Icon</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Class Name</TableCell>
+            <TableCell>Use</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {meta.map(({ name, use }) => {
+            return (
+              <TableRow key={`${name}_row`}>
+                <TableCell>{createElement(iconDictionary[name])}</TableCell>
+                <TableCell>{name}</TableCell>
+                <TableCell>{iconDictionary[name].displayName}</TableCell>
+                <TableCell>{use}</TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 };
