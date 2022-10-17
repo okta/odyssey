@@ -12,7 +12,7 @@
 
 import type { Story } from "@storybook/react";
 
-import { Button, Icon } from "@okta/odyssey-react-mui";
+import { Button, SettingsIcon } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
@@ -120,11 +120,11 @@ ButtonPrimaryDisabled.args = {
 export const ButtonWithIcon = Template.bind({});
 ButtonWithIcon.args = {
   children: "Button label",
-  startIcon: <Icon name="settings" />,
+  startIcon: <SettingsIcon />,
 };
 
 export const IconOnly = Template.bind({});
 IconOnly.args = {
   children: "",
-  startIcon: <Icon name="settings" />,
+  startIcon: <SettingsIcon />,
 };
