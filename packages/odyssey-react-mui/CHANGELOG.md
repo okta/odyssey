@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.15.3](https://github.com/okta/odyssey/compare/v0.15.2...v0.15.3) (2022-10-20)
+
+### Features
+
+- **odyssey-react-mui:** add styles and exports for Dialog ([f8b392b](https://github.com/okta/odyssey/commit/f8b392b66e95c905a72542fc128929f08ae4abf9))
+
+### Bug Fixes
+
+- added missing `theme` export ([59ecdbf](https://github.com/okta/odyssey/commit/59ecdbf749057f33814c6742ebb9506a67dfa792))
+- broken imports in odyssey-react-mui after flattening ([1fbdfb9](https://github.com/okta/odyssey/commit/1fbdfb9aeeb33d7e45ec9b2e62d0d85d04d848fa))
+- flattened odyssey-react-mui for better DX ([305eeab](https://github.com/okta/odyssey/commit/305eeab37a7ba47fe1a9866ccab71e5e7a918a30))
+
 ### [0.15.2](https://github.com/okta/odyssey/compare/v0.15.1...v0.15.2) (2022-10-13)
 
 ### Features
