@@ -13,6 +13,7 @@
 import type { ThemeOptions } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
 //import radioClasses from "@mui/material";
+import { dialogActionsClasses } from "@mui/material/DialogActions";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { tableBodyClasses } from "@mui/material/TableBody";
 import { tableCellClasses } from "@mui/material/TableCell";
@@ -25,7 +26,7 @@ import {
   ArrowDownIcon,
   CheckCircleFilledIcon,
   InformationCircleFilledIcon,
-} from "../../components/Icon";
+} from "../iconDictionary";
 
 export const components: ThemeOptions["components"] = {
   MuiAlert: {
@@ -128,6 +129,13 @@ export const components: ThemeOptions["components"] = {
         fontSize: theme.typography.h6.fontSize,
         fontWeight: theme.typography.fontWeightBold,
       }),
+    },
+  },
+  MuiBackdrop: {
+    styleOverrides: {
+      root: {
+        backgroundColor: "rgba(29,29,33,0.75)",
+      },
     },
   },
   MuiButton: {
@@ -385,6 +393,75 @@ export const components: ThemeOptions["components"] = {
         ...(ownerState.variant === "indeterminate" && {
           strokeDasharray: "160%, 360%",
         }),
+      }),
+    },
+  },
+  MuiDialog: {
+    defaultProps: {
+      scroll: "paper",
+    },
+    styleOverrides: {
+      paper: ({ theme }) => ({
+        maxWidth: `calc(${theme.mixins.maxWidth} + (${theme.spacing(6)} * 2))`,
+        boxShadow: "none",
+        filter:
+          "drop-shadow(0px 1px 4px rgba(29, 29, 33, 0.08)) drop-shadow(0px 4px 10px rgba(29, 29, 33, 0.08)) drop-shadow(0px 8px 30px rgba(29, 29, 33, 0.1))",
+      }),
+    },
+  },
+  MuiDialogActions: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        paddingBlockStart: theme.spacing(4),
+        paddingBlockEnd: theme.spacing(6),
+        paddingInline: theme.spacing(6),
+      }),
+    },
+  },
+  MuiDialogContent: {
+    styleOverrides: {
+      root: ({ theme, ownerState }) => ({
+        padding: 0,
+        paddingBlock: theme.spacing(4),
+        paddingInline: theme.spacing(6),
+
+        ...(ownerState.dividers === false && {
+          [`& + .${dialogActionsClasses.root}`]: {
+            paddingBlockStart: theme.spacing(4),
+          },
+        }),
+      }),
+    },
+  },
+  MuiDialogContentText: {
+    defaultProps: {
+      color: "text.primary",
+    },
+    styleOverrides: {
+      root: ({ theme }) => ({
+        marginBlockEnd: theme.spacing(5),
+
+        "&:last-child": {
+          marginBlockEnd: "0",
+        },
+      }),
+    },
+  },
+  MuiDialogTitle: {
+    defaultProps: {
+      component: "h1",
+      variant: "h5",
+    },
+    styleOverrides: {
+      root: ({ theme }) => ({
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBlockEnd: 0,
+        padding: 0,
+        paddingBlockStart: theme.spacing(5),
+        paddingBlockEnd: theme.spacing(4),
+        paddingInline: theme.spacing(6),
       }),
     },
   },

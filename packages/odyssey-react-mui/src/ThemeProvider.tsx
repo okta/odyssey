@@ -10,4 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./odyssey";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { ReactElement } from "react";
+
+import { odysseyTheme } from "./theme";
+
+export const ThemeProvider = ({ children }: { children: ReactElement }) => (
+  <MuiThemeProvider theme={odysseyTheme}>{children}</MuiThemeProvider>
+);
