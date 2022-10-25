@@ -16,6 +16,7 @@ export const parameters = {
         "Contributing",
         "Guidelines",
         "MUI Components",
+        "Labs Components",
         "Legacy Components",
       ],
       locales: "",
