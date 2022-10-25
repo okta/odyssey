@@ -64,6 +64,7 @@ export const typography: ThemeOptions["typography"] = {
     marginBottom: Tokens.SpaceScale1,
   },
   subtitle1: {
+    color: Tokens.ColorPaletteNeutral600,
     fontWeight: Tokens.FontWeightNormal,
     fontSize: Tokens.FontScale0,
     lineHeight: Tokens.FontLineHeightBody,
