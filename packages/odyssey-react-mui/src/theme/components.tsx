@@ -14,7 +14,7 @@ import type { ThemeOptions } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
 //import radioClasses from "@mui/material";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
-import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { inputBaseClasses } from "@mui/material/InputBase";
 import { tableBodyClasses } from "@mui/material/TableBody";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { tableHeadClasses } from "@mui/material/TableHead";
@@ -542,6 +542,7 @@ export const components: ThemeOptions["components"] = {
     },
     styleOverrides: {
       root: ({ theme }) => ({
+        fontSize: theme.typography.subtitle1.fontSize,
         lineHeight: "1.33333333",
         marginTop: theme.spacing(2),
         ".MuiFormLabel-root + &": {
@@ -598,35 +599,129 @@ export const components: ThemeOptions["components"] = {
       }),
     },
   },
+  MuiInput: {
+    defaultProps: {
+      disableUnderline: true,
+    },
+    styleOverrides: {
+      root: {
+        "label + &": {
+          marginTop: 0,
+        },
+      },
+    },
+  },
   MuiInputAdornment: {
     defaultProps: {
       variant: "outlined",
     },
     styleOverrides: {
-      root: ({ ownerState }) => ({
+      root: ({ theme, ownerState }) => ({
         display: "flex",
+        minWidth: "1em",
+        maxHeight: "unset",
+        alignItems: "center",
+        whiteSpace: "nowrap",
+        color: theme.palette.action.active,
         ...(ownerState.position === "start" && {
-          marginRight: 0,
+          marginInlineEnd: theme.spacing(2),
         }),
         ...(ownerState.position === "end" && {
-          marginLeft: 0,
+          marginInlineStart: theme.spacing(2),
+        }),
+        ...(ownerState.disablePointerEvents === true && {
+          pointerEvents: "none",
         }),
       }),
     },
   },
   MuiInputBase: {
+    defaultProps: {
+      minRows: 3,
+      required: true,
+    },
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
+        ...theme.typography.body1,
+        flex: "1",
+        width: "auto",
+        color: theme.palette.text.primary,
         lineHeight: "1.14285714",
+        borderWidth: theme.mixins.borderWidth,
+        borderStyle: theme.mixins.borderStyle,
+        borderRadius: theme.mixins.borderRadius,
+        borderColor: theme.palette.grey[500],
+        paddingBlock: `calc(${theme.spacing(3)} - ${theme.mixins.borderWidth})`,
+        paddingInline: theme.spacing(3),
+
+        ...(ownerState.multiline && {
+          paddingBlock: theme.spacing(3),
+          paddingInline: theme.spacing(3),
+          ...(ownerState.size === "small" && {
+            paddingBlock: theme.spacing(3),
+            paddingInline: theme.spacing(3),
+          }),
+        }),
+
+        ...(ownerState.fullWidth && {
+          width: "100%",
+        }),
 
         ...(ownerState.readOnly === true && {
           backgroundColor: theme.palette.grey[50],
         }),
+
+        [`&:hover`]: {
+          borderColor: theme.palette.grey[900],
+        },
+
+        [`&.${inputBaseClasses.focused}`]: {
+          borderColor: theme.palette.primary.main,
+          outlineColor: theme.palette.primary.main,
+          outlineOffset: 0,
+          outlineStyle: "solid",
+          outlineWidth: "1px",
+        },
+
+        [`&.${inputBaseClasses.error}`]: {
+          borderColor: theme.palette.error.main,
+        },
+
+        [`&.${inputBaseClasses.error}:hover`]: {
+          borderColor: theme.palette.error.dark,
+        },
+
+        [`&.${inputBaseClasses.error}.${inputBaseClasses.focused}`]: {
+          borderColor: theme.palette.error.main,
+          outlineColor: theme.palette.error.main,
+        },
+
+        [`&.${inputBaseClasses.disabled}`]: {
+          color: theme.palette.text.disabled,
+          borderColor: theme.palette.action.disabled,
+          pointerEvents: "auto",
+          backgroundColor: theme.palette.grey[50],
+          cursor: "not-allowed",
+        },
       }),
-      input: {
+      input: ({ theme }) => ({
         boxSizing: "border-box",
         height: "auto",
-      },
+        paddingBlock: 0,
+        paddingInline: 0,
+
+        [`.${inputBaseClasses.disabled} &`]: {
+          pointerEvents: "auto",
+          cursor: "not-allowed",
+        },
+
+        [`label[data-shrink=false] + .${inputBaseClasses.formControl} &`]: {
+          "&::placeholder": {
+            color: theme.palette.text.secondary,
+            opacity: "1 !important",
+          },
+        },
+      }),
     },
   },
   MuiInputLabel: {
@@ -636,6 +731,8 @@ export const components: ThemeOptions["components"] = {
     },
     styleOverrides: {
       root: ({ ownerState }) => ({
+        display: "flex",
+        justifyContent: "space-between",
         // @ts-expect-error: Incorrect typing in MUI
         ...(ownerState.formControl && {
           position: "initial",
@@ -724,71 +821,11 @@ export const components: ThemeOptions["components"] = {
   },
   MuiNativeSelect: {
     defaultProps: {
-      variant: "outlined",
+      variant: "standard",
     },
     styleOverrides: {
       icon: ({ theme }) => ({
         color: theme.palette.text.primary,
-      }),
-    },
-  },
-  MuiOutlinedInput: {
-    defaultProps: {
-      notched: false,
-      minRows: 3,
-    },
-    styleOverrides: {
-      root: ({ ownerState, theme }) => ({
-        [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
-          borderColor: theme.palette.text.primary,
-        },
-        [`&.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]:
-          {
-            borderColor: theme.palette.primary.main,
-            borderWidth: 2,
-          },
-        [`&.${outlinedInputClasses.error} .${outlinedInputClasses.notchedOutline}`]:
-          {
-            borderColor: theme.palette.error.main,
-          },
-        [`&.${outlinedInputClasses.error}:hover .${outlinedInputClasses.notchedOutline}`]:
-          {
-            borderColor: theme.palette.error.dark,
-          },
-        [`&.${outlinedInputClasses.error}.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]:
-          {
-            borderColor: theme.palette.error.main,
-          },
-        [`&.${outlinedInputClasses.disabled} .${outlinedInputClasses.notchedOutline}`]:
-          {
-            borderColor: theme.palette.action.disabled,
-            pointerEvents: "auto",
-          },
-        [`&.${outlinedInputClasses.disabled}`]: {
-          backgroundColor: theme.palette.grey[50],
-          cursor: "not-allowed",
-        },
-        ...(ownerState.startAdornment && {
-          paddingLeft: theme.spacing(3),
-        }),
-        ...(ownerState.endAdornment && {
-          paddingRight: theme.spacing(3),
-        }),
-        ...(ownerState.multiline && {
-          padding: "0",
-          ...(ownerState.size === "small" && {
-            padding: "0",
-          }),
-        }),
-      }),
-      input: ({ theme }) => ({
-        padding: `calc(${theme.spacing(3)} - 1px) ${theme.spacing(3)}`,
-        borderWidth: theme.mixins.borderWidth,
-        borderStyle: theme.mixins.borderStyle,
-        borderColor: "transparent",
-      }),
-      notchedOutline: ({ theme }) => ({
-        borderColor: theme.palette.grey[500],
       }),
     },
   },
@@ -823,6 +860,16 @@ export const components: ThemeOptions["components"] = {
         vertical: "bottom",
         horizontal: "right",
       },
+    },
+  },
+  MuiSelect: {
+    defaultProps: {
+      variant: "standard",
+    },
+    styleOverrides: {
+      icon: ({ theme }) => ({
+        color: theme.palette.text.primary,
+      }),
     },
   },
   MuiSvgIcon: {

@@ -21,8 +21,8 @@ import {
   FormControlLabel,
   FormGroup,
   FormLabel,
+  InputBase,
   InputLabel,
-  OutlinedInput,
   RadioGroup,
   Radio,
   Select,
@@ -34,7 +34,7 @@ import FormMdx from "./Form.mdx";
 
 export default {
   title: `MUI Components/Forms/Form`,
-  component: OutlinedInput,
+  component: InputBase,
   parameters: {
     docs: {
       page: FormMdx,
@@ -155,10 +155,9 @@ const Template: Story = (args) => {
           </FormControl>
           <FormControl>
             <InputLabel id="demo-text-field-label">Nature of visit</InputLabel>
-            <OutlinedInput
-              aria-describedby="Form-hint Form-error"
+            <InputBase
+              inputProps={{ "aria-describedby": "form-hint form-error" }}
               id="demo-text-field"
-              label="Nature of visit"
               multiline={true}
               type="text"
             />
@@ -188,10 +187,9 @@ const Template: Story = (args) => {
           )}
           <FormControl>
             <InputLabel id="demo-text-field-label">Destination</InputLabel>
-            <OutlinedInput
-              aria-describedby="Form-hint Form-error"
+            <InputBase
+              inputProps={{ "aria-describedby": "form-hint form-error" }}
               id="demo-text-field"
-              label="Destination"
             />
           </FormControl>
           <FormControl component="fieldset">
