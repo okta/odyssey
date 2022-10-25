@@ -169,7 +169,6 @@ const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
 ];
 
 export const Library = (): ReactElement => {
-  // return <div />;
   return (
     <TableContainer>
       <Table>
