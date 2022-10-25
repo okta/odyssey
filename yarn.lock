@@ -6313,24 +6313,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-babel-plugin@^0.15.3, @okta/odyssey-babel-plugin@workspace:packages/odyssey-babel-plugin":
-  version: 0.0.0-use.local
-  resolution: "@okta/odyssey-babel-plugin@workspace:packages/odyssey-babel-plugin"
-  dependencies:
-    "@babel/core": ^7.19.3
-    "@babel/template": ^7.18.10
-    "@babel/types": ^7.19.0
-    "@okta/odyssey-lifecycle": ^0.15.2
-    "@okta/odyssey-typescript": ^0.15.2
-    jest: ^29.0.3
-    postcss: ^8.4.16
-    postcss-load-config: ^3.1.0
-    typescript: ^4.8.3
-  peerDependencies:
-    postcss: ">= 8 <9"
-  languageName: unknown
-  linkType: soft
-
 "@okta/odyssey-babel-preset@^0.15.2, @okta/odyssey-babel-preset@^0.15.3, @okta/odyssey-babel-preset@workspace:packages/odyssey-babel-preset":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-babel-preset@workspace:packages/odyssey-babel-preset"
@@ -6407,31 +6389,6 @@ __metadata:
     lint-staged: ^11.1.2
   languageName: unknown
   linkType: soft
-
-"@okta/odyssey-postcss-preset@npm:^0.15.1":
-  version: 0.15.2
-  resolution: "@okta/odyssey-postcss-preset@npm:0.15.2"
-  dependencies:
-    "@okta/odyssey-postcss-theme": ^0.15.2
-    autoprefixer: ^10.3.4
-    cssnano: ^5.0.8
-    loader-utils: ^3.2.0
-    postcss-logical: ^5.0.0
-    postcss-modules: ^4.2.2
-  peerDependencies:
-    postcss: ^8.4.16
-  checksum: e6a50e60d669eff4317475dc797ccb6c826bf06dd49ec5d7fa69ad7872199fa423a4c92edc5207d8d020095aefb737c6b8c0338bbdfe5b89527bb9153b322739
-  languageName: node
-  linkType: hard
-
-"@okta/odyssey-postcss-theme@npm:^0.15.2":
-  version: 0.15.2
-  resolution: "@okta/odyssey-postcss-theme@npm:0.15.2"
-  peerDependencies:
-    postcss: ^8.4.16
-  checksum: 12dec7d88efdf6bc6d68eb7b843f4fb897fe3a1a4f05bb0c8f3165cf44d0ec295d1a5f3c6c987272a0ffa9a6445bde609e2766cb943d6fd97c7b1db99e355e3c
-  languageName: node
-  linkType: hard
 
 "@okta/odyssey-react-labs@^0.15.3, @okta/odyssey-react-labs@workspace:packages/odyssey-react-labs":
   version: 0.0.0-use.local
@@ -6536,10 +6493,8 @@ __metadata:
     "@okta/odyssey-babel-loader": ^0.15.3
     "@okta/odyssey-design-tokens": ^0.15.3
     "@okta/odyssey-lifecycle": ^0.15.3
-    "@okta/odyssey-react": ^0.15.3
     "@okta/odyssey-react-labs": ^0.15.3
     "@okta/odyssey-react-mui": ^0.15.3
-    "@okta/odyssey-react-theme": ^0.15.3
     "@okta/odyssey-typescript": ^0.15.3
     "@pxblue/storybook-rtl-addon": ^1.0.1
     "@storybook/addon-a11y": ^6.5.12
