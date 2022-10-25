@@ -54,6 +54,14 @@ Text fields in their "normal" state are considered enabled. They are ready for u
   <Story id="mui-components-forms-text-field--default" />
 </Canvas>
 
+### Optional
+
+Text fields in Odyssey are assumed to be required by default. Setting required to `false` will introduce an "Optional" affordance.
+
+<Canvas>
+  <Story id="mui-components-forms-text-field--optional" />
+</Canvas>
+
 ### Disabled
 
 Disabled inputs are unavailable for interaction and cannot be focused. They can be used when input is disallowed, possibly due to a system state or access restrictions.
@@ -118,6 +126,14 @@ Passwords inputs ensure that sensitive content is safely obscured.
 
 <Canvas>
   <Story id="mui-components-forms-text-field--password" />
+</Canvas>
+
+### Search
+
+Search inputs allow the user to submit queries. This is the only input type where `placeholder` may be used.
+
+<Canvas>
+  <Story id="mui-components-forms-text-field--search" />
 </Canvas>
 
 ## Accessibility
