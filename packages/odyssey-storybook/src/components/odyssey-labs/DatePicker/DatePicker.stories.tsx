@@ -15,6 +15,7 @@ import { OutlinedInput, OutlinedInputProps } from "@okta/odyssey-react-mui";
 import {
   AdapterDateFns,
   DatePicker,
+  DatePickerProps,
   LocalizationProvider,
 } from "@okta/odyssey-react-labs";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
@@ -62,7 +63,7 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-const Template: Story = (props) => (
+const Template: Story<DatePickerProps<unknown, unknown>> = (props) => (
   <LocalizationProvider dateAdapter={AdapterDateFns}>
     <DatePicker {...props} />
   </LocalizationProvider>
