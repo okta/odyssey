@@ -6339,8 +6339,8 @@ __metadata:
     "@babel/preset-env": ^7.19.1
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
-    "@okta/odyssey-lifecycle": ^0.15.2
-    "@okta/odyssey-typescript": ^0.15.2
+    "@okta/odyssey-lifecycle": ^0.15.3
+    "@okta/odyssey-typescript": ^0.15.3
     "@types/babel__core": ^7.1.19
     typescript: ^4.8.3
   languageName: unknown
@@ -6564,7 +6564,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-stylelint@^0.15.1, @okta/odyssey-stylelint@workspace:packages/odyssey-stylelint":
+"@okta/odyssey-stylelint@^0.15.3, @okta/odyssey-stylelint@workspace:packages/odyssey-stylelint":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-stylelint@workspace:packages/odyssey-stylelint"
   dependencies:
