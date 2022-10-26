@@ -11,7 +11,7 @@
  */
 
 import type { Story } from "@storybook/react";
-import { OutlinedInput, OutlinedInputProps } from "@okta/odyssey-react-mui";
+import { InputBase, InputBaseProps } from "@okta/odyssey-react-mui";
 import {
   AdapterDateFns,
   DatePicker,
@@ -45,14 +45,14 @@ export default {
         InputProps,
         ...props
       }: {
-        InputProps: OutlinedInputProps;
+        InputProps: InputBaseProps;
       }) => {
         const combinedProps = {
           ...InputProps,
           ...props,
         };
 
-        return <OutlinedInput {...combinedProps} />;
+        return <InputBase {...combinedProps} />;
       },
     },
     value: {
