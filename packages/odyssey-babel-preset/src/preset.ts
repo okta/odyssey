@@ -11,11 +11,9 @@
  */
 
 import type * as Babel from "@babel/core";
-import type { Opts as OdysseyOpts } from "@okta/odyssey-babel-plugin";
 import assertEnv from "./assertEnv";
 
 interface Opts {
-  odyssey?: OdysseyOpts;
   env?: Record<string, unknown>;
   react?: Record<string, unknown>;
   typescript?: Record<string, unknown>;
@@ -39,7 +37,6 @@ export const preset: Preset = (api, _opts = {}) => {
   );
 
   return {
-    plugins: [["@okta/odyssey-babel-plugin", opts.odyssey]],
     presets: [
       ["@babel/preset-env", opts.env],
       ["@babel/preset-react", opts.react],

@@ -1,7 +1,0 @@
-{
-  "env": {
-    "test": {
-      "plugins": ["@okta/odyssey-babel-plugin"]
-    }
-  }
-}
