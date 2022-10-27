@@ -5,45 +5,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.16.0](https://github.com/okta/odyssey/compare/v0.15.3...v0.16.0) (2022-10-27)
 
-**Note:** Version bump only for package @okta/odyssey-react-mui
-
-### [0.15.3](https://github.com/okta/odyssey/compare/v0.15.2...v0.15.3) (2022-10-20)
-
-### Features
-
-- **odyssey-react-mui:** add styles and exports for Dialog ([f8b392b](https://github.com/okta/odyssey/commit/f8b392b66e95c905a72542fc128929f08ae4abf9))
-
 ### Bug Fixes
 
-- added missing `theme` export ([59ecdbf](https://github.com/okta/odyssey/commit/59ecdbf749057f33814c6742ebb9506a67dfa792))
-- broken imports in odyssey-react-mui after flattening ([1fbdfb9](https://github.com/okta/odyssey/commit/1fbdfb9aeeb33d7e45ec9b2e62d0d85d04d848fa))
-- flattened odyssey-react-mui for better DX ([305eeab](https://github.com/okta/odyssey/commit/305eeab37a7ba47fe1a9866ccab71e5e7a918a30))
-
-### [0.15.2](https://github.com/okta/odyssey/compare/v0.15.1...v0.15.2) (2022-10-13)
-
-### Features
-
-- added @mui/lab ([379a077](https://github.com/okta/odyssey/commit/379a077c82ed4c020d75b07a5d0d66b60b7c319e))
-- exported useUniqueId and createUniqueId ([79448f4](https://github.com/okta/odyssey/commit/79448f4281cb0594c789ce9ab86c67704f82afe8))
-- **odyssey-react-mui:** add per-corner borderRadius support for Tooltip ([069fa02](https://github.com/okta/odyssey/commit/069fa02d06560656071306a18427400bb3b2a1e4))
-- **odyssey-react-mui:** add theme for Tooltip ([96092ec](https://github.com/okta/odyssey/commit/96092ecb46981ab750a87184c8aa0133151de7f3))
-- **odyssey-react-mui:** import Labs types, add styling for TabPanel ([992bf14](https://github.com/okta/odyssey/commit/992bf1475fa34e5b93547738f76e7dda4d1a20bc))
-- re-exported MUI components as Odyssey MUI components ([3d97a5b](https://github.com/okta/odyssey/commit/3d97a5b72d3bff474a1e1a1e3f7545b53bd0c247))
-- updated exports and stories to use new Tabs API from @mui/lab ([18b9739](https://github.com/okta/odyssey/commit/18b9739fcd5691dbd89a9d17df19cb53cb083343))
-
-### Bug Fixes
-
-- added missing component props from MUI, utils, and one icon ([e105118](https://github.com/okta/odyssey/commit/e1051181c4d737d4761a521452c9208db8246794))
-- added missing exports from @mui/material ([31e7348](https://github.com/okta/odyssey/commit/31e7348de0f5f6e6dd40ff3951cf796ad7bb2e4d))
-- added missing Tooltip import ([6229d7f](https://github.com/okta/odyssey/commit/6229d7f2a5bd750d05e969789eb4dc8006d8640f))
-- added missing useTheme export ([ae28864](https://github.com/okta/odyssey/commit/ae288641e714063bfb11bd743a15bcf5b168007a))
-- added MuiThemeProvider as an out from Odyssey ([bbcc4ae](https://github.com/okta/odyssey/commit/bbcc4aede21c59707e9ba07e2e2ddcac9c54eddd))
-- exported more MUI components ([8f09257](https://github.com/okta/odyssey/commit/8f092571c7654adad830fe974e283f02d12b8f71))
-- link icon wasn't optional ([567da0c](https://github.com/okta/odyssey/commit/567da0c0bfffe45623e12d7ae37635bd04d86de0))
-- **odyssey-react-mui:** ensure font weights are typed as numbers ([ee7c9a8](https://github.com/okta/odyssey/commit/ee7c9a88881f96c169f4f4ab203ab2148deead77))
-- **odyssey-react-mui:** fix bg color on table row hover ([b8371c2](https://github.com/okta/odyssey/commit/b8371c272ec013630a1cf8fbd96d9ff004cc51c2))
-- **odyssey-react-mui:** strip units from borderRadiusBase ([267d82a](https://github.com/okta/odyssey/commit/267d82a3d183ddbfda11e3774fca687bfbf1adaa))
-- password input wasn't using useUniqueId ([cf9435c](https://github.com/okta/odyssey/commit/cf9435c7f1402595bd5bb53571726f210445c723))
+- added odyssey-react-labs ([aca12b2](https://github.com/okta/odyssey/commit/aca12b2dc421b411d5e87278dd37dd1cd6b39bc2))
+- missing unit test in odyssey-react-labs ([66233e3](https://github.com/okta/odyssey/commit/66233e30680b65cb7f5a514c285956c5dbf8d8c2))
 
 ### [0.15.1](https://github.com/okta/odyssey/compare/v0.15.0...v0.15.1) (2022-10-06)
 
