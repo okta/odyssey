@@ -1,3 +1,0 @@
-{
-  "extends": "@okta/odyssey-typescript/tsconfig.react.json"
-}

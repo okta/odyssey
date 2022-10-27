@@ -12,11 +12,16 @@
 
 import { Story } from "@storybook/react";
 import {
+  EyeIcon,
   FormControl,
   FormHelperText,
+  IconButton,
   InputAdornment,
+  InputBase,
   InputLabel,
-  OutlinedInput,
+  SearchIcon,
+  Tooltip,
+  Typography,
   visuallyHidden,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -25,7 +30,7 @@ import TextFieldMdx from "./TextField.mdx";
 
 export default {
   title: `MUI Components/Forms/Text Field`,
-  component: OutlinedInput,
+  component: InputBase,
   parameters: {
     docs: {
       page: TextFieldMdx,
@@ -64,9 +69,21 @@ export default {
       control: "boolean",
       defaultValue: false,
     },
+    optionalLabel: {
+      control: "text",
+      defaultValue: "Optional",
+    },
+    placeholder: {
+      control: "text",
+      defaultValue: null,
+    },
     readOnly: {
       control: "boolean",
       defaultValue: false,
+    },
+    required: {
+      control: "boolean",
+      defaultValue: true,
     },
     startAdornment: {
       control: "text",
@@ -88,19 +105,44 @@ export default {
 const Template: Story = (args) => {
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
-      <InputLabel id="demo-text-field-label">{args.label}</InputLabel>
+      <InputLabel id="demo-text-field-label">
+        {args.label}
+        {!args.required && (
+          <Typography variant="subtitle1">{args.optionalLabel}</Typography>
+        )}
+      </InputLabel>
       {args.hint && (
         <FormHelperText id="textfield-hint">{args.hint}</FormHelperText>
       )}
-      <OutlinedInput
-        aria-describedby="textfield-hint textfield-error"
+      <InputBase
+        inputProps={{ "aria-describedby": "textfield-hint textfield-error" }}
         autoComplete={args.autoComplete}
-        endAdornment={args.endAdornment}
+        endAdornment={
+          args.type === "password" ? (
+            <InputAdornment position="end">
+              <Tooltip title="Toggle password visibility">
+                <IconButton aria-label="toggle password visibility" edge="end">
+                  <EyeIcon />
+                </IconButton>
+              </Tooltip>
+            </InputAdornment>
+          ) : (
+            args.endAdornment
+          )
+        }
         id="demo-text-field"
-        label={args.label}
         multiline={args.multiline}
+        placeholder={args.type === "search" ? args.placeholder : null}
         readOnly={args.readOnly}
-        startAdornment={args.startAdornment}
+        startAdornment={
+          args.type === "search" ? (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ) : (
+            args.startAdornment
+          )
+        }
         type={args.type}
         value={args.value}
       />
@@ -123,6 +165,11 @@ Disabled.args = {
   disabled: true,
 };
 
+export const Optional = Template.bind({});
+Optional.args = {
+  required: false,
+};
+
 export const ReadOnly = Template.bind({});
 ReadOnly.args = {
   readOnly: true,
@@ -142,6 +189,7 @@ Hint.args = {
 
 export const Adornment = Template.bind({});
 Adornment.args = {
+  label: "Cargo weight",
   endAdornment: <InputAdornment position="end">kg</InputAdornment>,
 };
 
@@ -166,6 +214,13 @@ Password.args = {
   autoComplete: "current-password",
   label: "Password",
   type: "password",
+};
+
+export const Search = Template.bind({});
+Search.args = {
+  label: "Search",
+  placeholder: "Search planets",
+  type: "search",
 };
 
 export const Tel = Template.bind({});

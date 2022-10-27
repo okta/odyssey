@@ -12,10 +12,9 @@
 
 import type { Story } from "@storybook/react";
 
-import { Button } from "@okta/odyssey-react-mui";
+import { Button, SettingsIcon } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
-import { SettingsIcon } from "../../../../../odyssey-react/src";
 
 import ButtonMdx from "./Button.mdx";
 

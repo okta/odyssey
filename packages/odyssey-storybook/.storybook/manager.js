@@ -3,7 +3,4 @@ import theme from "./OdysseyTheme";
 
 addons.setConfig({
   theme,
-  sidebar: {
-    collapsedRoots: ["legacy-components"],
-  },
 });

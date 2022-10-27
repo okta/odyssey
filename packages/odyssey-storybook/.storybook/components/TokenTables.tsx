@@ -13,7 +13,15 @@
 import { useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
-import { Table, Text } from "@okta/odyssey-react";
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  Typography,
+} from "@okta/odyssey-react-mui";
 
 type FontWeight = 400 | 600;
 
@@ -187,49 +195,47 @@ export const TokenTables = (): ReactNode => {
   return (
     <>
       {tables.map((table) => (
-        <Table
-          screenReaderCaption={"Design tokens"}
-          caption={table.name}
-          key={table.name}
-        >
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell scope="col">Token Name</Table.HeaderCell>
-              <Table.HeaderCell scope="col">Example</Table.HeaderCell>
-              <Table.HeaderCell scope="col">Value</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {table.values.map((token: Token) => (
-              <Table.Row key={`${token.name}-row`}>
-                <Table.DataCell>
-                  <Text as="code">{token.name}</Text>
-                </Table.DataCell>
-                <Table.DataCell>
-                  {token.name.includes("Border") &&
-                    !token.name.includes("ColorBorder") &&
-                    renderBorder(token)}
-                  {token.name.includes("Color") &&
-                    !token.name.includes("ColorText") &&
-                    renderColor(token.value)}
-                  {token.name.includes("ColorText") &&
-                    renderColorText(token.value)}
-                  {token.name.includes("Space") && renderSpace(token.value)}
-                  {token.name.includes("Font") && renderFont(token)}
-                  {token.name.includes("Focus") &&
-                    !token.name.includes("ColorFocus") &&
-                    renderFocus(token.value)}
-                  {token.name.includes("Shadow") && renderShadow(token.value)}
-                </Table.DataCell>
-                <Table.DataCell>
-                  <Text as="code">
-                    {getDisplayedValue(table.name, token.value)}
-                  </Text>
-                </Table.DataCell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell scope="col">Token Name</TableCell>
+                <TableCell scope="col">Example</TableCell>
+                <TableCell scope="col">Value</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {table.values.map((token: Token) => (
+                <TableRow key={`${token.name}-row`}>
+                  <TableCell>
+                    <Typography>{token.name}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    {token.name.includes("Border") &&
+                      !token.name.includes("ColorBorder") &&
+                      renderBorder(token)}
+                    {token.name.includes("Color") &&
+                      !token.name.includes("ColorText") &&
+                      renderColor(token.value)}
+                    {token.name.includes("ColorText") &&
+                      renderColorText(token.value)}
+                    {token.name.includes("Space") && renderSpace(token.value)}
+                    {token.name.includes("Font") && renderFont(token)}
+                    {token.name.includes("Focus") &&
+                      !token.name.includes("ColorFocus") &&
+                      renderFocus(token.value)}
+                    {token.name.includes("Shadow") && renderShadow(token.value)}
+                  </TableCell>
+                  <TableCell>
+                    <Typography>
+                      {getDisplayedValue(table.name, token.value)}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       ))}
     </>
   );

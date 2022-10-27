@@ -17,7 +17,8 @@
     "node": ">=16 <17"
   },
   "scripts": {
-    "start": "npm-run-all --parallel start:mui start:storybook",
+    "start": "npm-run-all --parallel start:mui start:labs start:storybook",
+    "start:labs": "yarn workspace @okta/odyssey-react-labs dev",
     "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
@@ -34,10 +35,10 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^14.0.0",
-    "@okta/odyssey-commitlint": "^0.15.3",
-    "@okta/odyssey-eslint-config": "^0.15.3",
-    "@okta/odyssey-lint-staged": "^0.15.3",
-    "@okta/odyssey-stylelint": "^0.15.3",
+    "@okta/odyssey-commitlint": "^0.16.0",
+    "@okta/odyssey-eslint-config": "^0.16.0",
+    "@okta/odyssey-lint-staged": "^0.16.0",
+    "@okta/odyssey-stylelint": "^0.16.0",
     "caniuse-lite": "^1.0.30001412",
     "eslint": "^7.27.0",
     "husky": "^7.0.2",

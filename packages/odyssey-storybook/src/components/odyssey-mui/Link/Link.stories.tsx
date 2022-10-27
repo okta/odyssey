@@ -13,8 +13,11 @@
 import type { Story } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
-import { InformationCircleFilledIcon } from "../../../../../odyssey-react/src";
-import { Link, LinkProps } from "@okta/odyssey-react-mui";
+import {
+  InformationCircleFilledIcon,
+  Link,
+  LinkProps,
+} from "@okta/odyssey-react-mui";
 
 import LinkMdx from "./Link.mdx";
 

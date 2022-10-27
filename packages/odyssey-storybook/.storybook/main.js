@@ -23,12 +23,11 @@ module.exports = {
     checkOptions: {},
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
-      customComponentTypes: ["PolymorphicForwardRef"],
       shouldExtractLiteralValuesFromEnum: true,
       propFilter: (prop) => {
         if (!prop.parent) return true;
         return (
-          /odyssey-react/.test(prop.parent.fileName) ||
+          /odyssey-react-mui/.test(prop.parent.fileName) ||
           !/node_modules/.test(prop.parent.fileName)
         );
       },
@@ -53,11 +52,7 @@ function buildRules(rules) {
       if (isStyleLoader) return memo;
 
       if (isScriptLoader) {
-        const exclude = rule.exclude
-          ? [/odyssey-react\//].concat(rule.exclude)
-          : [/odyssey-react\//];
-
-        return memo.concat(Object.assign({}, rule, { exclude }));
+        return memo.concat({ ...rule, exclude: rule.exclude });
       }
 
       return memo.concat(rule);
