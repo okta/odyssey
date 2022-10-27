@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.15.4](https://github.com/okta/odyssey/compare/v0.15.3...v0.15.4) (2022-10-27)
+
+### Bug Fixes
+
+- added odyssey-react-labs ([aca12b2](https://github.com/okta/odyssey/commit/aca12b2dc421b411d5e87278dd37dd1cd6b39bc2))
+- missing unit test in odyssey-react-labs ([66233e3](https://github.com/okta/odyssey/commit/66233e30680b65cb7f5a514c285956c5dbf8d8c2))
+
 ### [0.15.1](https://github.com/okta/odyssey/compare/v0.15.0...v0.15.1) (2022-10-06)
 
 ### Features
