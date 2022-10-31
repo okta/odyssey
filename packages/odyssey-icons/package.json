@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-icons",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "private": true,
   "description": "The home for Odyssey's supported icons.",
   "homepage": "https://github.com/okta/odyssey",
@@ -11,7 +11,7 @@
     "src"
   ],
   "scripts": {
-    "svgo": "svgo --config='.svgo.yml' -f figma -o src"
+    "svgo": "svgo --config='.svgo.config.js' -f figma -o src"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,6 @@
     "url": "https://github.com/okta/odyssey/issues"
   },
   "devDependencies": {
-    "svgo": "^2.8.0"
+    "svgo": "3.0.0"
   }
 }
