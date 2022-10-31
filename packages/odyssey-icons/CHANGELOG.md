@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.16.1](https://github.com/okta/odyssey/compare/v0.15.3...v0.16.1) (2022-10-31)
+
+### Bug Fixes
+
+- **odyssey-icons:** remove svgo yml ([35f26ed](https://github.com/okta/odyssey/commit/35f26eda4da9850834898a42c5e79ca479bffa2a))
+
 ### [0.15.3](https://github.com/okta/odyssey/compare/v0.15.2...v0.15.3) (2022-10-20)
 
 **Note:** Version bump only for package @okta/odyssey-icons

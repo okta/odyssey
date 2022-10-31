@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.16.1](https://github.com/okta/odyssey/compare/v0.15.3...v0.16.1) (2022-10-31)
+
+### Bug Fixes
+
+- added odyssey-react-labs ([aca12b2](https://github.com/okta/odyssey/commit/aca12b2dc421b411d5e87278dd37dd1cd6b39bc2))
+- broken types in DatePicker story ([37f33c6](https://github.com/okta/odyssey/commit/37f33c606954e84e59a18055d59348546fe91370))
+- fix browserslist vuln ([6942fef](https://github.com/okta/odyssey/commit/6942fef31a712bf637ae4c7566f33042d349b010))
+- missing unit test in odyssey-react-labs ([66233e3](https://github.com/okta/odyssey/commit/66233e30680b65cb7f5a514c285956c5dbf8d8c2))
+- **odyssey-icons:** remove svgo yml ([35f26ed](https://github.com/okta/odyssey/commit/35f26eda4da9850834898a42c5e79ca479bffa2a))
+- upgrade node-fetch version ([70fded7](https://github.com/okta/odyssey/commit/70fded79b43d15a950a2e5bfce8a453743a05ce2))
+- upgrade tar version ([17b30cb](https://github.com/okta/odyssey/commit/17b30cb3c86840272ca6e99ae31f0fe1c7351655))
+
 ### [0.15.3](https://github.com/okta/odyssey/compare/v0.15.2...v0.15.3) (2022-10-20)
 
 ### Features

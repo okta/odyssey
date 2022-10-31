@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.16.1](https://github.com/okta/odyssey/compare/v0.15.3...v0.16.1) (2022-10-31)
+
+### Bug Fixes
+
+- added odyssey-react-labs ([aca12b2](https://github.com/okta/odyssey/commit/aca12b2dc421b411d5e87278dd37dd1cd6b39bc2))
+- broken types in DatePicker story ([37f33c6](https://github.com/okta/odyssey/commit/37f33c606954e84e59a18055d59348546fe91370))
+
 ### [0.15.3](https://github.com/okta/odyssey/compare/v0.15.2...v0.15.3) (2022-10-20)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
