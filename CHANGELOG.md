@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.16.1](https://github.com/okta/odyssey/compare/v0.16.0...v0.16.1) (2022-10-31)
+
+### Bug Fixes
+
+- fix browserslist vuln ([6942fef](https://github.com/okta/odyssey/commit/6942fef31a712bf637ae4c7566f33042d349b010))
+- **odyssey-icons:** remove svgo yml ([35f26ed](https://github.com/okta/odyssey/commit/35f26eda4da9850834898a42c5e79ca479bffa2a))
+- upgrade node-fetch version ([70fded7](https://github.com/okta/odyssey/commit/70fded79b43d15a950a2e5bfce8a453743a05ce2))
+- upgrade tar version ([17b30cb](https://github.com/okta/odyssey/commit/17b30cb3c86840272ca6e99ae31f0fe1c7351655))
+
 ## [0.16.0](https://github.com/okta/odyssey/compare/v0.15.3...v0.16.0) (2022-10-27)
 
 ### Bug Fixes
