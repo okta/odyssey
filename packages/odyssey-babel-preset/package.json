@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-babel-preset",
-  "version": "0.15.3",
+  "version": "0.16.0",
   "description": "Babel preset for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -23,8 +23,8 @@
     "@babel/preset-typescript": "^7.18.6"
   },
   "devDependencies": {
-    "@okta/odyssey-lifecycle": "^0.15.3",
-    "@okta/odyssey-typescript": "^0.15.3",
+    "@okta/odyssey-lifecycle": "^0.16.0",
+    "@okta/odyssey-typescript": "^0.16.0",
     "@types/babel__core": "^7.1.19",
     "typescript": "^4.8.3"
   }
