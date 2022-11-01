@@ -21,7 +21,7 @@ exact version (maximum safety) or pin the major and minor versions
 Install the package and peer dependencies:
 
 ```sh
-$ yarn add @okta/odyssey-react-mui @emotion/react @mui/material @mui/icons-material
+$ yarn add @okta/odyssey-react-mui @emotion/react
 ```
 
 Include fonts:
@@ -44,7 +44,7 @@ Import named ESM exports:
 import { PasswordInput } from "@okta/odyssey-react-mui";
 ```
 
-Add the Material-UI `ThemeProvider` around your whole app:
+Add the Odyssey `ThemeProvider` around your whole app:
 
 ```jsx
 import { ThemeProvider } from "@okta/odyssey-react-mui";
@@ -53,6 +53,10 @@ const YourAppRoot = ({ children }) => <ThemeProvider>{children}</ThemeProvider>;
 ```
 
 Add Material-UI components not exported from Odyssey with Odyssey styling:
+
+```sh
+$ yarn add @mui/material
+```
 
 ```jsx
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
