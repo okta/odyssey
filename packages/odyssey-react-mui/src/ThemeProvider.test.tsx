@@ -10,8 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// This is a random number chosen to shrink down the unique ID to an arbitrary length.
-export const uniqueIdLength = 6;
+import { render, screen } from "@testing-library/react";
+import { Button } from "./";
+import { ThemeProvider } from "./ThemeProvider";
 
-export const createUniqueId = () =>
-  Math.random().toString(36).slice(-uniqueIdLength);
+describe("ThemeProvider", () => {
+  it("renders without crashing the app", () => {
+    expect(() =>
+      render(
+        <ThemeProvider>
+          <div />
+        </ThemeProvider>
+      )
+    ).not.toThrow();
+  });
+
+  it("themes a Button", () => {
+    render(
+      <ThemeProvider>
+        <Button>text</Button>
+      </ThemeProvider>
+    );
+
+    expect(screen.queryByRole("button")).toHaveTextContent("text");
+  });
+});

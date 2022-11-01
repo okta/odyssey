@@ -12,10 +12,10 @@
 
 import { useMemo } from "react";
 
-import { createUniqueId } from "./createUniqueId";
+import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId";
 
-export const useUniqueId = (id?: string) => {
-  const uniqueId = useMemo(() => createUniqueId(), []);
+export const useUniqueAlphabeticalId = (id?: string) => {
+  const uniqueAlphabeticalId = useMemo(() => createUniqueAlphabeticalId(), []);
 
-  return id || uniqueId;
+  return id || uniqueAlphabeticalId;
 };

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,12 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useMemo } from "react";
+// This is a random number chosen to shrink down the unique ID to an arbitrary length.
+export const uniqueIdLength = 6;
 
-import { createUniqueId } from "./createUniqueId";
-
-export const useUniqueId = (id?: string) => {
-  const uniqueId = useMemo(() => createUniqueId(), []);
-
-  return id || uniqueId;
-};
+export const createUniqueAlphabeticalId = () =>
+  Math.random()
+    .toString(36)
+    .replace(/[\d\.]/g, "");
