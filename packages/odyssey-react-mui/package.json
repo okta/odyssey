@@ -19,10 +19,10 @@
     "directory": "packages/odyssey-react-mui"
   },
   "dependencies": {
-    "@mui/icons-material": "^5.10.3",
+    "@mui/icons-material": "^5.10.9",
     "@mui/lab": "^5.0.0-alpha.103",
-    "@mui/material": "^5.10.5",
-    "@mui/utils": "^5.10.3",
+    "@mui/material": "^5.10.12",
+    "@mui/utils": "^5.10.9",
     "@okta/odyssey-design-tokens": "^0.16.1"
   },
   "devDependencies": {
