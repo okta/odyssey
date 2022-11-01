@@ -13,6 +13,7 @@
 import type { ThemeOptions } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
 //import radioClasses from "@mui/material";
+import { chipClasses } from "@mui/material/Chip";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { tableBodyClasses } from "@mui/material/TableBody";
@@ -25,6 +26,7 @@ import {
   AlertTriangleFilledIcon,
   ArrowDownIcon,
   CheckCircleFilledIcon,
+  CloseIcon,
   InformationCircleFilledIcon,
 } from "../iconDictionary";
 
@@ -372,6 +374,55 @@ export const components: ThemeOptions["components"] = {
           outlineWidth: "2px",
         },
       }),
+    },
+  },
+  MuiChip: {
+    defaultProps: {
+      deleteIcon: <CloseIcon />,
+    },
+    styleOverrides: {
+      root: ({ theme, ownerState }) => ({
+        height: "auto",
+        paddingBlock: theme.spacing(1),
+        paddingInline: theme.spacing(2),
+        fontSize: theme.typography.body1.fontSize,
+        borderRadius: theme.mixins.borderRadius,
+        backgroundColor: theme.palette.grey[100],
+
+        [`& .${chipClasses.deleteIcon}`]: {
+          WebkitTapHighlightColor: "transparent",
+          color: theme.palette.text.secondary,
+          fontSize: "1em",
+          cursor: "pointer",
+          margin: "0",
+          marginInlineStart: theme.spacing(2),
+
+          "&:hover": {
+            color: theme.palette.text.primary,
+          },
+        },
+
+        [`&.${chipClasses.disabled}`]: {
+          opacity: theme.palette.action.disabledOpacity,
+          pointerEvents: "none",
+        },
+
+        ...(ownerState.clickable && {
+          "&:hover": {
+            backgroundColor: theme.palette.grey[200],
+          },
+          [`&.${chipClasses.focusVisible}`]: {
+            backgroundColor: theme.palette.grey[200],
+          },
+          "&:active": {
+            boxShadow: "none",
+            backgroundColor: theme.palette.grey[300],
+          },
+        }),
+      }),
+      label: {
+        padding: 0,
+      },
     },
   },
   MuiCircularProgress: {
