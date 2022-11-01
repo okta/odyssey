@@ -26,7 +26,7 @@ import {
   AlertTriangleFilledIcon,
   ArrowDownIcon,
   CheckCircleFilledIcon,
-  CloseIcon,
+  CloseCircleFilledIcon,
   InformationCircleFilledIcon,
 } from "../iconDictionary";
 
@@ -378,7 +378,7 @@ export const components: ThemeOptions["components"] = {
   },
   MuiChip: {
     defaultProps: {
-      deleteIcon: <CloseIcon />,
+      deleteIcon: <CloseCircleFilledIcon />,
     },
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
@@ -403,8 +403,10 @@ export const components: ThemeOptions["components"] = {
         },
 
         [`&.${chipClasses.disabled}`]: {
-          opacity: theme.palette.action.disabledOpacity,
+          opacity: 1,
           pointerEvents: "none",
+          backgroundColor: theme.palette.grey[50],
+          color: theme.palette.text.secondary,
         },
 
         ...(ownerState.clickable && {
@@ -413,6 +415,10 @@ export const components: ThemeOptions["components"] = {
           },
           [`&.${chipClasses.focusVisible}`]: {
             backgroundColor: theme.palette.grey[200],
+            outlineColor: theme.palette.primary.main,
+            outlineOffset: "2px",
+            outlineStyle: "solid",
+            outlineWidth: "2px",
           },
           "&:active": {
             boxShadow: "none",
