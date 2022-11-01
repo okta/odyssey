@@ -43,36 +43,17 @@ module.exports = {
 };
 
 function buildRules(rules) {
-  return rules
-    .reduce((memo, rule) => {
-      const testString = rule.test?.toString();
-      const isStyleLoader = /s?css/.test(testString);
-      const isScriptLoader = /(jsx?|tsx?)/.test(testString);
+  return rules.reduce((memo, rule) => {
+    const testString = rule.test?.toString();
+    const isStyleLoader = /s?css/.test(testString);
+    const isScriptLoader = /(jsx?|tsx?)/.test(testString);
 
-      if (isStyleLoader) return memo;
+    if (isStyleLoader) return memo;
 
-      if (isScriptLoader) {
-        return memo.concat({ ...rule, exclude: rule.exclude });
-      }
+    if (isScriptLoader) {
+      return memo.concat({ ...rule, exclude: rule.exclude });
+    }
 
-      return memo.concat(rule);
-    }, [])
-    .concat({
-      test: /odyssey-react\/\S+\.(jsx?|tsx?)$/,
-      exclude: /node_modules/,
-      loader: "@okta/odyssey-babel-loader",
-      options: {
-        cacheDirectory: false,
-        presets: [
-          [
-            "@okta/odyssey-babel-preset",
-            {
-              react: {
-                runtime: "classic",
-              },
-            },
-          ],
-        ],
-      },
-    });
+    return memo.concat(rule);
+  }, []);
 }

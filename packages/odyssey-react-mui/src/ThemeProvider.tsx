@@ -10,11 +10,34 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { ReactElement } from "react";
+import { memo, ReactElement, useMemo } from "react";
 
 import { odysseyTheme } from "./theme";
+import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
 
-export const ThemeProvider = ({ children }: { children: ReactElement }) => (
-  <MuiThemeProvider theme={odysseyTheme}>{children}</MuiThemeProvider>
-);
+const ThemeProvider = ({ children }: { children: ReactElement }) => {
+  const uniqueAlphabeticalId = useUniqueAlphabeticalId();
+
+  const emotionCache = useMemo(
+    () =>
+      createCache({
+        key: uniqueAlphabeticalId,
+        // @ts-expect-error ts(2345)
+        nonce: window.cspNonce,
+      }),
+    [uniqueAlphabeticalId]
+  );
+
+  return (
+    <CacheProvider value={emotionCache}>
+      <MuiThemeProvider theme={odysseyTheme}>{children}</MuiThemeProvider>
+    </CacheProvider>
+  );
+};
+
+const MemoizedThemeProvider = memo(ThemeProvider);
+
+export { MemoizedThemeProvider as ThemeProvider };
