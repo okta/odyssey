@@ -19,7 +19,7 @@
     "directory": "packages/odyssey-react-mui"
   },
   "dependencies": {
-    "@mui/material": "^5.10.5",
+    "@mui/material": "^5.10.12",
     "@mui/x-date-pickers": "^5.0.4",
     "date-fns": "^2.29.3"
   },
@@ -59,7 +59,7 @@
   "peerDependencies": {
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@okta/odyssey-react-mui": "^0.15.2",
+    "@okta/odyssey-react-mui": "^0.16.1",
     "react": ">=17 <19",
     "react-dom": ">=17 <19"
   },
