@@ -14,6 +14,8 @@ export * from "./createUniqueId";
 export * from "./Icon";
 export * from "./iconDictionary";
 export * from "./Link";
+export * from "./OdysseyCacheProvider";
+export * from "./OdysseyThemeProvider";
 export * from "./PasswordInput";
 export * from "./theme";
 export * from "./ThemeProvider";
