@@ -12,24 +12,25 @@
 
 import { render, screen } from "@testing-library/react";
 import { Button } from "./";
-import { ThemeProvider } from "./ThemeProvider";
+import { OdysseyCacheProvider } from "./OdysseyCacheProvider";
 
-describe("ThemeProvider", () => {
+// This component needs to be tested, even if it doesn't make much sense, because it can't be loaded by Storybook; therefore, any issues will only be seen by consumers of Odyssey.
+describe("OdysseyCacheProvider", () => {
   it("renders without crashing the app", () => {
     expect(() =>
       render(
-        <ThemeProvider>
+        <OdysseyCacheProvider>
           <div />
-        </ThemeProvider>
+        </OdysseyCacheProvider>
       )
     ).not.toThrow();
   });
 
   it("themes a Button", () => {
     render(
-      <ThemeProvider>
+      <OdysseyCacheProvider>
         <Button>text</Button>
-      </ThemeProvider>
+      </OdysseyCacheProvider>
     );
 
     expect(screen.queryByRole("button")).toHaveTextContent("text");
