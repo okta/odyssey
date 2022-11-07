@@ -10,23 +10,34 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+declare global {
+  interface Window {
+    cspNonce: string;
+  }
+}
+
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import { memo, ReactElement, useMemo } from "react";
 
 import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
 
-const OdysseyCacheProvider = ({ children }: { children: ReactElement }) => {
+const OdysseyCacheProvider = ({
+  children,
+  nonce,
+}: {
+  children: ReactElement;
+  nonce?: string;
+}) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
 
   const emotionCache = useMemo(
     () =>
       createCache({
         key: uniqueAlphabeticalId,
-        // @ts-expect-error ts(2345)
-        nonce: window.cspNonce,
+        nonce: nonce || window.cspNonce,
       }),
-    [uniqueAlphabeticalId]
+    [nonce, uniqueAlphabeticalId]
   );
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
