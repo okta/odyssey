@@ -386,6 +386,7 @@ export const components: ThemeOptions["components"] = {
         paddingBlock: theme.spacing(2),
         paddingInline: theme.spacing(3),
         fontSize: theme.typography.body1.fontSize,
+        lineHeight: "1.14285714",
         borderRadius: "1.5em",
         backgroundColor: theme.palette.grey[100],
 
