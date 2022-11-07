@@ -383,11 +383,16 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
         height: "auto",
-        paddingBlock: theme.spacing(1),
-        paddingInline: theme.spacing(2),
+        paddingBlock: theme.spacing(2),
+        paddingInline: theme.spacing(3),
         fontSize: theme.typography.body1.fontSize,
-        borderRadius: theme.mixins.borderRadius,
+        lineHeight: "1.14285714",
+        borderRadius: "1.5em",
         backgroundColor: theme.palette.grey[100],
+
+        ...(ownerState.onDelete && {
+          paddingInlineEnd: theme.spacing(2),
+        }),
 
         [`& .${chipClasses.deleteIcon}`]: {
           WebkitTapHighlightColor: "transparent",
