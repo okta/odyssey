@@ -14841,10 +14841,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-value@npm:^2.0.3, get-value@npm:^2.0.6":
+"get-value@npm:^2.0.6":
   version: 2.0.6
   resolution: "get-value@npm:2.0.6"
   checksum: 5c3b99cb5398ea8016bf46ff17afc5d1d286874d2ad38ca5edb6e87d75c0965b0094cb9a9dddef2c59c23d250702323539a7fbdd870620db38c7e7d7ec87c1eb
+  languageName: node
+  linkType: hard
+
+"get-value@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "get-value@npm:3.0.1"
+  dependencies:
+    isobject: ^3.0.1
+  checksum: d2df36858c34f0ef63d928e760740b23d14a7b955eaf740fea0d908b60cf2504de388a2ff72fb531318719645271f506390005f811a53d35ce4d7f7eba98e470
   languageName: node
   linkType: hard
 
@@ -15281,17 +15290,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"has-value@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "has-value@npm:0.3.1"
-  dependencies:
-    get-value: ^2.0.3
-    has-values: ^0.1.4
-    isobject: ^2.0.0
-  checksum: 29e2a1e6571dad83451b769c7ce032fce6009f65bccace07c2962d3ad4d5530b6743d8f3229e4ecf3ea8e905d23a752c5f7089100c1f3162039fa6dc3976558f
-  languageName: node
-  linkType: hard
-
 "has-value@npm:^1.0.0":
   version: 1.0.0
   resolution: "has-value@npm:1.0.0"
@@ -15303,10 +15301,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"has-values@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "has-values@npm:0.1.4"
-  checksum: ab1c4bcaf811ccd1856c11cfe90e62fca9e2b026ebe474233a3d282d8d67e3b59ed85b622c7673bac3db198cb98bd1da2b39300a2f98e453729b115350af49bc
+"has-value@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "has-value@npm:2.0.2"
+  dependencies:
+    get-value: ^3.0.0
+    has-values: ^2.0.1
+  checksum: 074b8d410d7e4702751270163c5ce52e35492f93ebde98f28579098f5d68ce63aab07aa064405d2bbc4ab629ef22367fb07e1cdd4fe9ed9720e6989e7b49e623
   languageName: node
   linkType: hard
 
@@ -15317,6 +15318,15 @@ __metadata:
     is-number: ^3.0.0
     kind-of: ^4.0.0
   checksum: 77e6693f732b5e4cf6c38dfe85fdcefad0fab011af74995c3e83863fabf5e3a836f406d83565816baa0bc0a523c9410db8b990fe977074d61aeb6d8f4fcffa11
+  languageName: node
+  linkType: hard
+
+"has-values@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "has-values@npm:2.0.1"
+  dependencies:
+    kind-of: ^6.0.2
+  checksum: 67a7c9b1536a608d749c1f2fe5ec6258b7331a722093410c2b49e0fd3e196a74a1d1d43895aa6c476ebfaa04ae05c749c8347d7d497746a5925989faff7779bc
   languageName: node
   linkType: hard
 
@@ -16663,7 +16673,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"isarray@npm:1.0.0, isarray@npm:^1.0.0, isarray@npm:~1.0.0":
+"isarray@npm:^1.0.0, isarray@npm:~1.0.0":
   version: 1.0.0
   resolution: "isarray@npm:1.0.0"
   checksum: f032df8e02dce8ec565cf2eb605ea939bdccea528dbcf565cdf92bfa2da9110461159d86a537388ef1acef8815a330642d7885b29010e8f7eac967c9993b65ab
@@ -16681,15 +16691,6 @@ __metadata:
   version: 2.0.0
   resolution: "isexe@npm:2.0.0"
   checksum: 26bf6c5480dda5161c820c5b5c751ae1e766c587b1f951ea3fcfc973bafb7831ae5b54a31a69bd670220e42e99ec154475025a468eae58ea262f813fdc8d1c62
-  languageName: node
-  linkType: hard
-
-"isobject@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "isobject@npm:2.1.0"
-  dependencies:
-    isarray: 1.0.0
-  checksum: 811c6f5a866877d31f0606a88af4a45f282544de886bf29f6a34c46616a1ae2ed17076cc6bf34c0128f33eecf7e1fcaa2c82cf3770560d3e26810894e96ae79f
   languageName: node
   linkType: hard
 
@@ -24952,12 +24953,12 @@ __metadata:
   linkType: hard
 
 "unset-value@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "unset-value@npm:1.0.0"
+  version: 2.0.1
+  resolution: "unset-value@npm:2.0.1"
   dependencies:
-    has-value: ^0.3.1
-    isobject: ^3.0.0
-  checksum: 5990ecf660672be2781fc9fb322543c4aa592b68ed9a3312fa4df0e9ba709d42e823af090fc8f95775b4cd2c9a5169f7388f0cec39238b6d0d55a69fc2ab6b29
+    has-value: ^2.0.2
+    isobject: ^4.0.0
+  checksum: 5f14b28b71956b9a9cd54d844cb8cd000948fcddf55ae582b1b824fd9a3564d615ef4f7d4cf86adfcae4be819016a537411044fbd691890c3e1f953ba42af61a
   languageName: node
   linkType: hard
 
