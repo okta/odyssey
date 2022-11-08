@@ -10,17 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { memo, ReactElement } from "react";
 
-import { OdysseyCacheProvider } from "./OdysseyCacheProvider";
-import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
+import { odysseyTheme } from "./theme";
 
-const ThemeProvider = ({ children }: { children: ReactElement }) => (
-  <OdysseyCacheProvider>
-    <OdysseyThemeProvider>{children}</OdysseyThemeProvider>
-  </OdysseyCacheProvider>
+const OdysseyThemeProvider = ({ children }: { children: ReactElement }) => (
+  <MuiThemeProvider theme={odysseyTheme}>{children}</MuiThemeProvider>
 );
 
-const MemoizedThemeProvider = memo(ThemeProvider);
+const MemoizedOdysseyThemeProvider = memo(OdysseyThemeProvider);
 
-export { MemoizedThemeProvider as ThemeProvider };
+export { MemoizedOdysseyThemeProvider as OdysseyThemeProvider };

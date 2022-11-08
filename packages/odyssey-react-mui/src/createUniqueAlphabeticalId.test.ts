@@ -10,8 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// This is a random number chosen to shrink down the unique ID to an arbitrary length.
-export const uniqueIdLength = 6;
+import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId";
 
-export const createUniqueId = () =>
-  Math.random().toString(36).slice(-uniqueIdLength);
+describe("createUniqueAlphabeticalId", () => {
+  it("only has lowercase letters", () => {
+    const uniqueAlphabeticalId = createUniqueAlphabeticalId();
+
+    expect(uniqueAlphabeticalId.match(/[a-z]/)).not.toBeNull();
+    expect(uniqueAlphabeticalId.toLowerCase()).toBe(uniqueAlphabeticalId);
+  });
+});

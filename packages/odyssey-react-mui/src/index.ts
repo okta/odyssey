@@ -14,6 +14,8 @@ export * from "./createUniqueId";
 export * from "./Icon";
 export * from "./iconDictionary";
 export * from "./Link";
+export * from "./OdysseyCacheProvider";
+export * from "./OdysseyThemeProvider";
 export * from "./PasswordInput";
 export * from "./theme";
 export * from "./ThemeProvider";
@@ -108,6 +110,6 @@ export { TabContext, TabList, TabPanel } from "@mui/lab";
 
 export type { TabContextProps, TabListProps, TabPanelProps } from "@mui/lab";
 
-export { Favorite as FavoriteIcon } from "@mui/icons-material";
+export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
 export { visuallyHidden } from "@mui/utils";
