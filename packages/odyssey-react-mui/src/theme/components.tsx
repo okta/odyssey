@@ -295,7 +295,7 @@ export const components: ThemeOptions["components"] = {
         fontWeight: 600,
         minWidth: "unset",
         padding: `calc(${theme.spacing(3)} - 1px) ${theme.spacing(3)}`,
-        display: "inline-block",
+        display: "inline-flex",
         position: "relative",
         marginBlock: "0",
         marginInline: "0",
@@ -328,8 +328,13 @@ export const components: ThemeOptions["components"] = {
         },
 
         ".MuiButton-startIcon > *:nth-of-type(1)": {
-          fontSize: "inherit",
+          fontSize: "1.14285714em",
         },
+      }),
+      startIcon: ({ theme }) => ({
+        display: "inline-flex",
+        margin: 0,
+        marginInlineEnd: theme.spacing(2),
       }),
     },
   },
