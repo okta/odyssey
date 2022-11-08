@@ -17,5 +17,5 @@ import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId";
 export const useUniqueAlphabeticalId = (id?: string) => {
   const uniqueAlphabeticalId = useMemo(() => createUniqueAlphabeticalId(), []);
 
-  return id || uniqueAlphabeticalId;
+  return id ?? uniqueAlphabeticalId;
 };
