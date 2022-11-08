@@ -10,17 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement } from "react";
+import { useMemo } from "react";
 
-import { OdysseyCacheProvider } from "./OdysseyCacheProvider";
-import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
+import { createUniqueAlphabeticalId } from "./createUniqueAlphabeticalId";
 
-const ThemeProvider = ({ children }: { children: ReactElement }) => (
-  <OdysseyCacheProvider>
-    <OdysseyThemeProvider>{children}</OdysseyThemeProvider>
-  </OdysseyCacheProvider>
-);
+export const useUniqueAlphabeticalId = (id?: string) => {
+  const uniqueAlphabeticalId = useMemo(() => createUniqueAlphabeticalId(), []);
 
-const MemoizedThemeProvider = memo(ThemeProvider);
-
-export { MemoizedThemeProvider as ThemeProvider };
+  return id ?? uniqueAlphabeticalId;
+};
