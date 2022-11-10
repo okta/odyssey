@@ -13,6 +13,7 @@
 import type { ThemeOptions } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
 //import radioClasses from "@mui/material";
+import { chipClasses } from "@mui/material/Chip";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { tableBodyClasses } from "@mui/material/TableBody";
@@ -25,6 +26,7 @@ import {
   AlertTriangleFilledIcon,
   ArrowDownIcon,
   CheckCircleFilledIcon,
+  CloseCircleFilledIcon,
   InformationCircleFilledIcon,
 } from "../iconDictionary";
 
@@ -293,7 +295,7 @@ export const components: ThemeOptions["components"] = {
         fontWeight: 600,
         minWidth: "unset",
         padding: `calc(${theme.spacing(3)} - 1px) ${theme.spacing(3)}`,
-        display: "inline-block",
+        display: "inline-flex",
         position: "relative",
         marginBlock: "0",
         marginInline: "0",
@@ -326,8 +328,13 @@ export const components: ThemeOptions["components"] = {
         },
 
         ".MuiButton-startIcon > *:nth-of-type(1)": {
-          fontSize: "inherit",
+          fontSize: "1.14285714em",
         },
+      }),
+      startIcon: ({ theme }) => ({
+        display: "inline-flex",
+        margin: 0,
+        marginInlineEnd: theme.spacing(2),
       }),
     },
   },
@@ -372,6 +379,66 @@ export const components: ThemeOptions["components"] = {
           outlineWidth: "2px",
         },
       }),
+    },
+  },
+  MuiChip: {
+    defaultProps: {
+      deleteIcon: <CloseCircleFilledIcon />,
+    },
+    styleOverrides: {
+      root: ({ theme, ownerState }) => ({
+        height: "auto",
+        paddingBlock: theme.spacing(2),
+        paddingInline: theme.spacing(3),
+        fontSize: theme.typography.body1.fontSize,
+        lineHeight: "1.14285714",
+        borderRadius: "1.5em",
+        backgroundColor: theme.palette.grey[100],
+
+        ...(ownerState.onDelete && {
+          paddingInlineEnd: theme.spacing(2),
+        }),
+
+        [`& .${chipClasses.deleteIcon}`]: {
+          WebkitTapHighlightColor: "transparent",
+          color: theme.palette.text.secondary,
+          fontSize: "1em",
+          cursor: "pointer",
+          margin: "0",
+          marginInlineStart: theme.spacing(2),
+
+          "&:hover": {
+            color: theme.palette.text.primary,
+          },
+        },
+
+        [`&.${chipClasses.disabled}`]: {
+          opacity: 1,
+          pointerEvents: "none",
+          backgroundColor: theme.palette.grey[50],
+          color: theme.palette.text.secondary,
+        },
+
+        ...(ownerState.clickable && {
+          "&:hover": {
+            backgroundColor: theme.palette.grey[200],
+          },
+          [`&.${chipClasses.focusVisible}`]: {
+            backgroundColor: theme.palette.grey[200],
+            outlineColor: theme.palette.primary.main,
+            outlineOffset: "2px",
+            outlineStyle: "solid",
+            outlineWidth: "2px",
+          },
+          "&:active": {
+            boxShadow: "none",
+            backgroundColor: theme.palette.grey[300],
+          },
+        }),
+      }),
+      label: {
+        padding: 0,
+      },
     },
   },
   MuiCircularProgress: {

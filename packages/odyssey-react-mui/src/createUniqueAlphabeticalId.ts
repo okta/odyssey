@@ -13,5 +13,7 @@
 // This is a random number chosen to shrink down the unique ID to an arbitrary length.
 export const uniqueIdLength = 6;
 
-export const createUniqueId = () =>
-  Math.random().toString(36).slice(-uniqueIdLength);
+export const createUniqueAlphabeticalId = () =>
+  Math.random()
+    .toString(36)
+    .replace(/[\d\.]/g, "");
