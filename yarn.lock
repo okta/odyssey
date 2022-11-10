@@ -10576,37 +10576,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.12.0":
-  version: 4.16.5
-  resolution: "browserslist@npm:4.16.5"
-  dependencies:
-    caniuse-lite: ^1.0.30001214
-    colorette: ^1.2.2
-    electron-to-chromium: ^1.3.719
-    escalade: ^3.1.1
-    node-releases: ^1.1.71
-  bin:
-    browserslist: cli.js
-  checksum: 8d060e01829a99e9525a5d2ab93193c5fe56790e6f46e44428fac634c3eb8dd7294d53763cdde9d7614bda5a81dc38d2cd946b761aa05fc70799aa685d472287
-  languageName: node
-  linkType: hard
-
-"browserslist@npm:^4.14.5, browserslist@npm:^4.16.6":
-  version: 4.16.6
-  resolution: "browserslist@npm:4.16.6"
-  dependencies:
-    caniuse-lite: ^1.0.30001219
-    colorette: ^1.2.2
-    electron-to-chromium: ^1.3.723
-    escalade: ^3.1.1
-    node-releases: ^1.1.71
-  bin:
-    browserslist: cli.js
-  checksum: 3dffc86892d2dcfcfc66b52519b7e5698ae070b4fc92ab047e760efc4cae0474e9e70bbe10d769c8d3491b655ef3a2a885b88e7196c83cc5dc0a46dfdba8b70c
-  languageName: node
-  linkType: hard
-
-"browserslist@npm:^4.21.3, browserslist@npm:^4.21.4":
+"browserslist@npm:^4.12.0, browserslist@npm:^4.14.5, browserslist@npm:^4.16.6, browserslist@npm:^4.21.3, browserslist@npm:^4.21.4":
   version: 4.21.4
   resolution: "browserslist@npm:4.21.4"
   dependencies:
@@ -10954,17 +10924,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001219":
+"caniuse-lite@npm:^1.0.30001109":
   version: 1.0.30001319
   resolution: "caniuse-lite@npm:1.0.30001319"
   checksum: 1c03cc4ca019c410d197b76604cd8605077ef124906f3debd3f026568e01a1aa3888cdfcb0d23c0786115b0b3f790486f2aa8e0cce361d3dcc5c92ff3611f73e
-  languageName: node
-  linkType: hard
-
-"caniuse-lite@npm:^1.0.30001214":
-  version: 1.0.30001426
-  resolution: "caniuse-lite@npm:1.0.30001426"
-  checksum: e8b9c14ee33410d95b27da619f50648f373a7be712748970643f25d95fa80687b4755ba365f34a7a1cea00f9137193943aa6e742eedf0a4d7857f83809f49435
   languageName: node
   linkType: hard
 
@@ -11518,13 +11481,6 @@ __metadata:
   version: 1.2.1
   resolution: "colorette@npm:1.2.1"
   checksum: 06e2fcdb9e2a2c527ac84509a56eadf481cde1768933eb612808f3bb3a9d9872c06b4a9f95e4d0f7befeef8b38307f79b88242d9ea52470d1125520b8116de08
-  languageName: node
-  linkType: hard
-
-"colorette@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "colorette@npm:1.2.2"
-  checksum: 69fec14ddaedd0f5b00e4bae40dc4bc61f7050ebdc82983a595d6fd64e650b9dc3c033fff378775683138e992e0ddd8717ac7c7cec4d089679dcfbe3cd921b04
   languageName: node
   linkType: hard
 
@@ -13061,20 +13017,6 @@ __metadata:
   version: 1.1.1
   resolution: "ee-first@npm:1.1.1"
   checksum: 1b4cac778d64ce3b582a7e26b218afe07e207a0f9bfe13cc7395a6d307849cfe361e65033c3251e00c27dd060cab43014c2d6b2647676135e18b77d2d05b3f4f
-  languageName: node
-  linkType: hard
-
-"electron-to-chromium@npm:^1.3.719":
-  version: 1.4.284
-  resolution: "electron-to-chromium@npm:1.4.284"
-  checksum: be496e9dca6509dbdbb54dc32146fc99f8eb716d28a7ee8ccd3eba0066561df36fc51418d8bd7cf5a5891810bf56c0def3418e74248f51ea4a843d423603d10a
-  languageName: node
-  linkType: hard
-
-"electron-to-chromium@npm:^1.3.723":
-  version: 1.3.725
-  resolution: "electron-to-chromium@npm:1.3.725"
-  checksum: 90801f5cc30f76495412ce86cef141cd22924ec75c88c276eaa42435d09370d9df5d8127060dae4fdb96a3ea0b0a726ee228788affb997e7f4172f4e54001c5d
   languageName: node
   linkType: hard
 
@@ -14934,16 +14876,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob-parent@npm:^5.0.0, glob-parent@npm:~5.1.0":
-  version: 5.1.1
-  resolution: "glob-parent@npm:5.1.1"
-  dependencies:
-    is-glob: ^4.0.1
-  checksum: 9f9a19c8d441d9df51df5985b2280b084f5ebc07e0fe5de761f346cb707cc30e7d51fb51c0e82490730b6c0ca9c9a3d0c73e4a22861a3cf363cc745e01721dd4
-  languageName: node
-  linkType: hard
-
-"glob-parent@npm:^5.1.0, glob-parent@npm:^5.1.1, glob-parent@npm:^5.1.2, glob-parent@npm:~5.1.2":
+"glob-parent@npm:^5.0.0, glob-parent@npm:^5.1.0, glob-parent@npm:^5.1.1, glob-parent@npm:^5.1.2, glob-parent@npm:~5.1.0, glob-parent@npm:~5.1.2":
   version: 5.1.2
   resolution: "glob-parent@npm:5.1.2"
   dependencies:
@@ -19248,13 +19181,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-releases@npm:^1.1.71":
-  version: 1.1.71
-  resolution: "node-releases@npm:1.1.71"
-  checksum: a6ab18069e43d70b811fa7f12b397619f2003f78ac2ed0affa30876880ca3036a191d33679d93baac166afa12a7b1b1716e13f3c82c0f0fa09e2c83db3f91faf
-  languageName: node
-  linkType: hard
-
 "node-releases@npm:^2.0.6":
   version: 2.0.6
   resolution: "node-releases@npm:2.0.6"
@@ -20552,6 +20478,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"picocolors@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "picocolors@npm:0.2.1"
+  checksum: 3b0f441f0062def0c0f39e87b898ae7461c3a16ffc9f974f320b44c799418cabff17780ee647fda42b856a1dc45897e2c62047e1b546d94d6d5c6962f45427b2
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^1.0.0":
   version: 1.0.0
   resolution: "picocolors@npm:1.0.0"
@@ -20860,25 +20793,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^7.0.14, postcss@npm:^7.0.26, postcss@npm:^7.0.32, postcss@npm:^7.0.5, postcss@npm:^7.0.6":
-  version: 7.0.35
-  resolution: "postcss@npm:7.0.35"
+"postcss@npm:^7.0.14, postcss@npm:^7.0.26, postcss@npm:^7.0.32, postcss@npm:^7.0.36, postcss@npm:^7.0.5, postcss@npm:^7.0.6":
+  version: 7.0.39
+  resolution: "postcss@npm:7.0.39"
   dependencies:
-    chalk: ^2.4.2
+    picocolors: ^0.2.1
     source-map: ^0.6.1
-    supports-color: ^6.1.0
-  checksum: 6b197769057f38b9d4d8778c7e3b8b4a56c0c2c3ac8edf7552b06ac964e1a3601567fa2c5335a54fba103492305b0fc1347ce786fd72e30903a22f09f86525ae
-  languageName: node
-  linkType: hard
-
-"postcss@npm:^7.0.36":
-  version: 7.0.36
-  resolution: "postcss@npm:7.0.36"
-  dependencies:
-    chalk: ^2.4.2
-    source-map: ^0.6.1
-    supports-color: ^6.1.0
-  checksum: 4cfc0989b9ad5d0e8971af80d87f9c5beac5c84cb89ff22ad69852edf73c0a2fa348e7e0a135b5897bf893edad0fe86c428769050431ad9b532f072ff530828d
+  checksum: 4ac793f506c23259189064bdc921260d869a115a82b5e713973c5af8e94fbb5721a5cc3e1e26840500d7e1f1fa42a209747c5b1a151918a9bc11f0d7ed9048e3
   languageName: node
   linkType: hard
 
@@ -23785,15 +23706,6 @@ __metadata:
   dependencies:
     has-flag: ^3.0.0
   checksum: 95f6f4ba5afdf92f495b5a912d4abee8dcba766ae719b975c56c084f5004845f6f5a5f7769f52d53f40e21952a6d87411bafe34af4a01e65f9926002e38e1dac
-  languageName: node
-  linkType: hard
-
-"supports-color@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "supports-color@npm:6.1.0"
-  dependencies:
-    has-flag: ^3.0.0
-  checksum: 74358f9535c83ee113fbaac354b11e808060f6e7d8722082ee43af3578469134e89d00026dce2a6b93ce4e5b89d0e9a10f638b2b9f64c7838c2fb2883a47b3d5
   languageName: node
   linkType: hard
 
