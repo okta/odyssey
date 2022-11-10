@@ -12,7 +12,7 @@
 
 import type { Story } from "@storybook/react";
 
-import { Button, SettingsIcon } from "@okta/odyssey-react-mui";
+import { Button, AddIcon } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
@@ -29,7 +29,7 @@ export default {
   argTypes: {
     children: {
       control: "text",
-      defaultValue: "Button labels",
+      defaultValue: "Add Crew",
     },
     size: {
       options: ["s", "m", "l"],
@@ -59,72 +59,58 @@ export default {
 const Template: Story<ButtonProps> = (props) => <Button {...props} />;
 
 export const ButtonPrimary = Template.bind({});
-ButtonPrimary.args = {
-  children: "Button label",
-  variant: "primary",
-};
+ButtonPrimary.args = {};
 
 export const ButtonSecondary = Template.bind({});
 ButtonSecondary.args = {
-  children: "Button label",
   variant: "secondary",
 };
 
 export const ButtonDanger = Template.bind({});
 ButtonDanger.args = {
-  children: "Button label",
   variant: "danger",
 };
 
 export const ButtonFloating = Template.bind({});
 ButtonFloating.args = {
-  children: "Button label",
   variant: "floating",
 };
 
 export const ButtonSmall = Template.bind({});
 ButtonSmall.args = {
-  children: "Button label",
   size: "s",
-  variant: "primary",
 };
 
 export const ButtonMedium = Template.bind({});
 ButtonMedium.args = {
-  children: "Button label",
   size: "m",
-  variant: "primary",
 };
 
 export const ButtonLarge = Template.bind({});
 ButtonLarge.args = {
-  children: "Button label",
   size: "l",
-  variant: "primary",
 };
 
 export const ButtonFullWidth = Template.bind({});
 ButtonFullWidth.args = {
-  children: "Button label",
+  children: "Add Crew",
   fullWidth: true,
-  variant: "primary",
 };
 
 export const ButtonPrimaryDisabled = Template.bind({});
 ButtonPrimaryDisabled.args = {
-  children: "Button label",
-  variant: "primary",
+  children: "Add Crew",
   disabled: true,
 };
 
 export const ButtonWithIcon = Template.bind({});
 ButtonWithIcon.args = {
-  children: "Button label",
-  startIcon: <SettingsIcon />,
+  children: "Add Crew",
+  startIcon: <AddIcon />,
 };
 
 export const IconOnly = Template.bind({});
 IconOnly.args = {
   children: "",
-  startIcon: <SettingsIcon />,
+  startIcon: <AddIcon />,
 };
