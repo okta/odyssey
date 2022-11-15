@@ -10,14 +10,33 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { memo, ReactElement } from "react";
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from "@mui/material/styles";
+import { deepmerge } from "@mui/utils";
+import { memo, ReactElement, useMemo } from "react";
 
 import { odysseyTheme } from "./theme";
 
-const OdysseyThemeProvider = ({ children }: { children: ReactElement }) => (
-  <MuiThemeProvider theme={odysseyTheme}>{children}</MuiThemeProvider>
-);
+const OdysseyThemeProvider = ({
+  children,
+  customTheme,
+}: {
+  children: ReactElement;
+  customTheme?: typeof odysseyTheme;
+}) => {
+  const customOdysseyTheme = useMemo(
+    () => customTheme && createTheme(deepmerge(odysseyTheme, customTheme)),
+    [customTheme]
+  );
+
+  return (
+    <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
+      {children}
+    </MuiThemeProvider>
+  );
+};
 
 const MemoizedOdysseyThemeProvider = memo(OdysseyThemeProvider);
 
