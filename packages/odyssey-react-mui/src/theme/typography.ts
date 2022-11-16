@@ -89,4 +89,10 @@ export const typography: ThemeOptions["typography"] = {
     lineHeight: Tokens.FontLineHeightHeading6,
     marginBottom: Tokens.SpaceScale1,
   },
+  ui: {
+    fontWeight: Number(Tokens.FontWeightNormal),
+    fontSize: Tokens.FontScale1,
+    lineHeight: Tokens.FontLineHeightUi,
+    letterSpacing: "initial",
+  },
 };
