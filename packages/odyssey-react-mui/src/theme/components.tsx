@@ -16,6 +16,7 @@ import type {} from "@mui/lab/themeAugmentation";
 import { chipClasses } from "@mui/material/Chip";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
 import { inputBaseClasses } from "@mui/material/InputBase";
+import { svgIconClasses } from "@mui/material/SvgIcon";
 import { tableBodyClasses } from "@mui/material/TableBody";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { tableHeadClasses } from "@mui/material/TableHead";
@@ -98,7 +99,7 @@ export const components: ThemeOptions["components"] = {
       icon: ({ ownerState, theme }) => ({
         marginRight: 0,
         padding: 0,
-        fontSize: "1.429rem",
+        fontSize: "inherit",
         opacity: 1,
         ...(ownerState.severity && {
           color: theme.palette[ownerState.severity].main,
@@ -106,6 +107,10 @@ export const components: ThemeOptions["components"] = {
         ...(ownerState.severity === "warning" && {
           color: theme.palette[ownerState.severity].dark,
         }),
+
+        [`& .${svgIconClasses.root}`]: {
+          fontSize: "1.429rem",
+        },
       }),
       message: ({ ownerState, theme }) => ({
         padding: 0,
@@ -309,7 +314,7 @@ export const components: ThemeOptions["components"] = {
         outlineColor: "transparent",
         outlineOffset: "0",
         fontSize: theme.typography.body1.fontSize,
-        lineHeight: "1.14285714",
+        lineHeight: theme.typography.ui.lineHeight,
         whiteSpace: "nowrap",
 
         ".MuiButton-root + &": {
@@ -328,7 +333,7 @@ export const components: ThemeOptions["components"] = {
         },
 
         ".MuiButton-startIcon > *:nth-of-type(1)": {
-          fontSize: "1.14285714em",
+          fontSize: `${theme.typography.ui.lineHeight}em`,
         },
       }),
       startIcon: ({ theme }) => ({
@@ -391,7 +396,7 @@ export const components: ThemeOptions["components"] = {
         paddingBlock: theme.spacing(2),
         paddingInline: theme.spacing(3),
         fontSize: theme.typography.body1.fontSize,
-        lineHeight: "1.14285714",
+        lineHeight: theme.typography.ui.lineHeight,
         borderRadius: "1.5em",
         backgroundColor: theme.palette.grey[100],
 
@@ -443,7 +448,7 @@ export const components: ThemeOptions["components"] = {
   },
   MuiCircularProgress: {
     defaultProps: {
-      // TODO: defaultProps cannot take a theme object; needs workaround
+      // TODO: defaultProps cannot take a theme object; matches theme.typography.ui.lineHeight
       size: "1.14285714rem",
       thickness: 8,
       color: "primary",
@@ -627,7 +632,7 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         color: theme.palette.text.primary,
-        lineHeight: "1.14285714",
+        lineHeight: theme.typography.ui.lineHeight,
         fontSize: "1rem",
         fontWeight: 600,
         marginBottom: theme.spacing(2),
@@ -713,7 +718,7 @@ export const components: ThemeOptions["components"] = {
         flex: "1",
         width: "auto",
         color: theme.palette.text.primary,
-        lineHeight: "1.14285714",
+        lineHeight: theme.typography.ui.lineHeight,
         borderWidth: theme.mixins.borderWidth,
         borderStyle: theme.mixins.borderStyle,
         borderRadius: theme.mixins.borderRadius,
@@ -944,6 +949,11 @@ export const components: ThemeOptions["components"] = {
       fontSize: "inherit",
       color: "inherit",
     },
+    styleOverrides: {
+      root: ({ theme }) => ({
+        fontSize: `${theme.typography.ui.lineHeight}rem`,
+      }),
+    },
   },
   MuiTab: {
     defaultProps: {
@@ -1018,7 +1028,7 @@ export const components: ThemeOptions["components"] = {
         borderRadius: theme.mixins.borderRadius,
         marginBlock: theme.spacing(0),
         marginInline: theme.spacing(0),
-        lineHeight: "1.14285714",
+        lineHeight: theme.typography.ui.lineHeight,
 
         "&:only-child": {
           marginBlockEnd: 0,
