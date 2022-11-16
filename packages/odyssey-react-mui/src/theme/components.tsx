@@ -16,6 +16,7 @@ import type {} from "@mui/lab/themeAugmentation";
 import { chipClasses } from "@mui/material/Chip";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
 import { inputBaseClasses } from "@mui/material/InputBase";
+import { svgIconClasses } from "@mui/material/SvgIcon";
 import { tableBodyClasses } from "@mui/material/TableBody";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { tableHeadClasses } from "@mui/material/TableHead";
@@ -98,7 +99,7 @@ export const components: ThemeOptions["components"] = {
       icon: ({ ownerState, theme }) => ({
         marginRight: 0,
         padding: 0,
-        fontSize: "1.429rem",
+        fontSize: "inherit",
         opacity: 1,
         ...(ownerState.severity && {
           color: theme.palette[ownerState.severity].main,
@@ -106,6 +107,10 @@ export const components: ThemeOptions["components"] = {
         ...(ownerState.severity === "warning" && {
           color: theme.palette[ownerState.severity].dark,
         }),
+
+        [`& .${svgIconClasses.root}`]: {
+          fontSize: "1.429rem",
+        },
       }),
       message: ({ ownerState, theme }) => ({
         padding: 0,
@@ -946,7 +951,7 @@ export const components: ThemeOptions["components"] = {
     },
     styleOverrides: {
       root: ({ theme }) => ({
-        fontSize: `${theme.typography.ui.lineHeight}em`,
+        fontSize: `${theme.typography.ui.lineHeight}rem`,
       }),
     },
   },
