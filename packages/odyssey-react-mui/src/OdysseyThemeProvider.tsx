@@ -12,6 +12,7 @@
 
 import {
   createTheme,
+  ThemeOptions,
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material/styles";
 import { deepmerge } from "@mui/utils";
@@ -24,7 +25,7 @@ const OdysseyThemeProvider = ({
   customTheme,
 }: {
   children: ReactElement;
-  customTheme?: typeof odysseyTheme;
+  customTheme?: ThemeOptions;
 }) => {
   const customOdysseyTheme = useMemo(
     () => customTheme && createTheme(deepmerge(odysseyTheme, customTheme)),
