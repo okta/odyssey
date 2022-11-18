@@ -21,6 +21,7 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 import DatePickerMdx from "./DatePicker.mdx";
+import { DatePickerThemeProvider } from "./DatePickerThemeProvider";
 
 export default {
   title: `Labs Components/DatePicker`,
@@ -65,7 +66,9 @@ export default {
 
 const Template: Story<DatePickerProps<unknown, unknown>> = (props) => (
   <LocalizationProvider dateAdapter={AdapterDateFns}>
-    <DatePicker {...props} />
+    <DatePickerThemeProvider>
+      <DatePicker {...props} />
+    </DatePickerThemeProvider>
   </LocalizationProvider>
 );
 
