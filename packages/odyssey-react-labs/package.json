@@ -19,7 +19,7 @@
     "directory": "packages/odyssey-react-mui"
   },
   "dependencies": {
-    "@mui/material": "^5.10.12",
+    "@mui/material": "^5.10.16",
     "@mui/x-date-pickers": "^5.0.4",
     "date-fns": "^2.29.3"
   },
