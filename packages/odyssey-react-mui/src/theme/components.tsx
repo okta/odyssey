@@ -887,6 +887,32 @@ export const components: ThemeOptions["components"] = {
       },
     ],
   },
+  MuiMenuItem: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        justifyContent: "space-between",
+
+        "&.Mui-selected": {
+          backgroundColor: "transparent",
+          color: theme.palette.primary.main,
+
+          "&:hover": {
+            backgroundColor: theme.palette.primary.lighter,
+          },
+
+          // Temp CSS until we use JS to insert this element
+          [`& .${svgIconClasses.root}`]: {
+            display: "block",
+          },
+        },
+
+        // Temp CSS until we use JS to insert this element
+        [`& .${svgIconClasses.root}`]: {
+          display: "none",
+        },
+      }),
+    },
+  },
   MuiNativeSelect: {
     defaultProps: {
       variant: "standard",
@@ -949,6 +975,11 @@ export const components: ThemeOptions["components"] = {
 
         "&:focus": {
           backgroundColor: "transparent",
+        },
+
+        // Temp CSS until we use JS to insert this element
+        [`& .${svgIconClasses.root}`]: {
+          display: "none",
         },
       }),
       icon: ({ theme }) => ({
