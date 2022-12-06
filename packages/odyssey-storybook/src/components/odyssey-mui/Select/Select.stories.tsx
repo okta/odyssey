@@ -15,6 +15,7 @@ import {
   FormControl,
   FormHelperText,
   InputLabel,
+  MenuItem,
   Select,
   visuallyHidden,
 } from "@okta/odyssey-react-mui";
@@ -51,8 +52,55 @@ export default {
       control: "text",
       defaultValue: "Destination",
     },
+    multiple: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    native: {
+      control: "boolean",
+      defaultValue: false,
+    },
   },
   decorators: [MuiThemeDecorator],
+};
+
+const destinations = [
+  "Earth",
+  "Mars",
+  "Ceres",
+  "Eros",
+  "Tycho Station",
+  "Phoebe",
+  "Ganymede",
+];
+
+const Template: Story = (args) => {
+  return (
+    <FormControl disabled={args.disabled} error={args.invalid}>
+      <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
+      {args.hint && (
+        <FormHelperText id="select-hint">{args.hint}</FormHelperText>
+      )}
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        label={args.label}
+        native={args.native}
+        aria-describedby="select-hint select-error"
+      >
+        {destinations.map((destination) => (
+          <MenuItem key={destination} value={destination}>
+            {destination}
+          </MenuItem>
+        ))}
+      </Select>
+      {args.error && (
+        <FormHelperText id="select-error" error>
+          <span style={visuallyHidden}>Error:</span> {args.error}
+        </FormHelperText>
+      )}
+    </FormControl>
+  );
 };
 
 const NativeTemplate: Story = (args) => {
@@ -66,7 +114,7 @@ const NativeTemplate: Story = (args) => {
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         label={args.label}
-        native
+        native={args.native}
         aria-describedby="select-hint select-error"
       >
         <option value="earth">Earth</option>
@@ -86,16 +134,21 @@ const NativeTemplate: Story = (args) => {
   );
 };
 
-export const NativeDefault = NativeTemplate.bind({});
-NativeDefault.args = {};
+export const Default = Template.bind({});
+Default.args = {};
 
-export const NativeDisabled = NativeTemplate.bind({});
-NativeDisabled.args = {
+export const DefaultDisabled = Template.bind({});
+DefaultDisabled.args = {
   disabled: true,
 };
 
-export const NativeInvalid = NativeTemplate.bind({});
-NativeInvalid.args = {
+export const DefaultInvalid = Template.bind({});
+DefaultInvalid.args = {
   invalid: true,
   error: "This field is required.",
+};
+
+export const NativeDefault = NativeTemplate.bind({});
+NativeDefault.args = {
+  native: true,
 };
