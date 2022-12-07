@@ -20,6 +20,30 @@ const datePickerTheme = {
     primary: {
       main: "red", // THIS IS A SAMPLE.
     },
+    action: {
+      active: "rgba(255, 0, 0, 1)",
+      hoverOpacity: 1,
+    },
+  },
+  components: {
+    MuiPickersDay: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected:focus, &.Mui-selected:hover": {
+            backgroundColor: "rgba(255, 0, 0, 1)",
+          },
+        },
+      },
+    },
+    PrivatePickersYear: {
+      styleOverrides: {
+        button: {
+          "&.Mui-selected:focus, &.Mui-selected:hover": {
+            backgroundColor: "rgba(255, 0, 0, 1)",
+          },
+        },
+      },
+    },
   },
 };
 
