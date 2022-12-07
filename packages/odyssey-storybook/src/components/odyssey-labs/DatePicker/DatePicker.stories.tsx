@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import type { Story } from "@storybook/react";
 import { InputBase, InputBaseProps } from "@okta/odyssey-react-mui";
 import {
@@ -21,7 +22,6 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 import DatePickerMdx from "./DatePicker.mdx";
-import { DatePickerThemeProvider } from "./DatePickerThemeProvider";
 
 export default {
   title: `Labs Components/DatePicker`,
@@ -64,12 +64,19 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-const Template: Story<DatePickerProps<unknown, unknown>> = (props) => (
-  <LocalizationProvider dateAdapter={AdapterDateFns}>
-    <DatePickerThemeProvider>
-      <DatePicker {...props} />
-    </DatePickerThemeProvider>
-  </LocalizationProvider>
-);
+const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
+  const [value, setValue] = React.useState<unknown | null>(null);
+  const datePickerProps = {
+    ...props,
+    value,
+    onChange: (newValue: unknown) => setValue(newValue),
+  };
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DatePicker {...datePickerProps} />
+    </LocalizationProvider>
+  );
+};
 
 export const DatePickerPrimary = Template.bind({});
