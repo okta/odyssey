@@ -10,9 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import * as React from 'react';
 import { Story } from "@storybook/react";
 import {
+  Box,
   CheckIcon,
+  Chip,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -20,6 +23,7 @@ import {
   Select,
   visuallyHidden,
 } from "@okta/odyssey-react-mui";
+import { SelectChangeEvent } from '@mui/material/Select';
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import SelectMdx from "./Select.mdx";
@@ -75,6 +79,18 @@ const destinations = [
   "Ganymede",
 ];
 
+const [destinationName, setDestinationName] = React.useState<string[]>([]);
+
+const handleChange = (event: SelectChangeEvent<typeof destinationName>) => {
+  const {
+    target: { value },
+  } = event;
+  setDestinationName(
+    // On autofill we get a stringified value.
+    typeof value === 'string' ? value.split(',') : value,
+  );
+};
+
 const Template: Story = (args) => {
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
@@ -88,6 +104,45 @@ const Template: Story = (args) => {
         label={args.label}
         native={args.native}
         aria-describedby="select-hint select-error"
+      >
+        {destinations.map((destination) => (
+          <MenuItem key={destination} value={destination}>
+            {destination}
+            <CheckIcon />
+          </MenuItem>
+        ))}
+      </Select>
+      {args.error && (
+        <FormHelperText id="select-error" error>
+          <span style={visuallyHidden}>Error:</span> {args.error}
+        </FormHelperText>
+      )}
+    </FormControl>
+  );
+};
+
+const MultiTemplate: Story = (args) => {
+  return (
+    <FormControl disabled={args.disabled} error={args.invalid}>
+      <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
+      {args.hint && (
+        <FormHelperText id="select-hint">{args.hint}</FormHelperText>
+      )}
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        label={args.label}
+        native={args.native}
+        onChange={handleChange}
+        aria-describedby="select-hint select-error"
+        renderValue={(selected) => (
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            {selected.map((destination) => (
+              <Chip key={destination} label={destination} />
+            ))}
+          </Box>
+        )}
+        value={destinationName}
       >
         {destinations.map((destination) => (
           <MenuItem key={destination} value={destination}>
@@ -148,6 +203,11 @@ export const DefaultInvalid = Template.bind({});
 DefaultInvalid.args = {
   invalid: true,
   error: "This field is required.",
+};
+
+export const Multi = MultiTemplate.bind({});
+Multi.args = {
+  multiple: true,
 };
 
 export const NativeDefault = NativeTemplate.bind({});
