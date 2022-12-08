@@ -14,11 +14,13 @@ import * as React from "react";
 import { Story } from "@storybook/react";
 import {
   Box,
+  Checkbox,
   CheckIcon,
   Chip,
   FormControl,
   FormHelperText,
   InputLabel,
+  ListItemText,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -96,7 +98,7 @@ const Template: Story = (args) => {
         {destinations.map((destination) => (
           <MenuItem key={destination} value={destination}>
             {destination}
-            <CheckIcon />
+            {/* <CheckIcon /> */}
           </MenuItem>
         ))}
       </Select>
@@ -122,6 +124,10 @@ const MultiTemplate: Story = (args) => {
     );
   };
 
+  const handleDelete = () => {
+    console.info("This should deselect the option.");
+  };
+
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
@@ -134,11 +140,16 @@ const MultiTemplate: Story = (args) => {
         label={args.label}
         native={args.native}
         onChange={handleChange}
+        multiple={args.multiple}
         aria-describedby="select-hint select-error"
         renderValue={(selected) => (
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+          <Box>
             {selected.map((destination) => (
-              <Chip key={destination} label={destination} />
+              <Chip
+                key={destination}
+                label={destination}
+                onDelete={handleDelete}
+              />
             ))}
           </Box>
         )}
@@ -146,8 +157,8 @@ const MultiTemplate: Story = (args) => {
       >
         {destinations.map((destination) => (
           <MenuItem key={destination} value={destination}>
-            {destination}
-            <CheckIcon />
+            <Checkbox checked={destinationName.indexOf(destination) > -1} />
+            <ListItemText primary={destination} />
           </MenuItem>
         ))}
       </Select>
