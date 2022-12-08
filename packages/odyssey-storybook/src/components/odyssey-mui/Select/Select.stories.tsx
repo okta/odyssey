@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import * as React from 'react';
+import * as React from "react";
 import { Story } from "@storybook/react";
 import {
   Box,
@@ -21,9 +21,9 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   visuallyHidden,
 } from "@okta/odyssey-react-mui";
-import { SelectChangeEvent } from '@mui/material/Select';
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import SelectMdx from "./Select.mdx";
@@ -79,18 +79,6 @@ const destinations = [
   "Ganymede",
 ];
 
-const [destinationName, setDestinationName] = React.useState<string[]>([]);
-
-const handleChange = (event: SelectChangeEvent<typeof destinationName>) => {
-  const {
-    target: { value },
-  } = event;
-  setDestinationName(
-    // On autofill we get a stringified value.
-    typeof value === 'string' ? value.split(',') : value,
-  );
-};
-
 const Template: Story = (args) => {
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
@@ -122,6 +110,18 @@ const Template: Story = (args) => {
 };
 
 const MultiTemplate: Story = (args) => {
+  const [destinationName, setDestinationName] = React.useState<string[]>([]);
+
+  const handleChange = (event: SelectChangeEvent<typeof destinationName>) => {
+    const {
+      target: { value },
+    } = event;
+    setDestinationName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
@@ -136,7 +136,7 @@ const MultiTemplate: Story = (args) => {
         onChange={handleChange}
         aria-describedby="select-hint select-error"
         renderValue={(selected) => (
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
             {selected.map((destination) => (
               <Chip key={destination} label={destination} />
             ))}

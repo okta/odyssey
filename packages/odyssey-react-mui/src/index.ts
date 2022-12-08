@@ -91,6 +91,7 @@ export type {
   MenuItemProps,
   RadioGroupProps,
   RadioProps,
+  SelectChangeEvent,
   SelectProps,
   SnackbarProps,
   StackProps,
