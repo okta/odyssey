@@ -15,7 +15,7 @@ import { Story } from "@storybook/react";
 import {
   Box,
   Checkbox,
-  CheckIcon,
+  //CheckIcon,
   Chip,
   FormControl,
   FormHelperText,
