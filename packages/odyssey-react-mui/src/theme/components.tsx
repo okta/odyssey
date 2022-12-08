@@ -891,6 +891,7 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         justifyContent: "space-between",
+        gap: theme.spacing(2),
 
         "&.Mui-selected": {
           backgroundColor: "transparent",
@@ -899,16 +900,6 @@ export const components: ThemeOptions["components"] = {
           "&:hover": {
             backgroundColor: theme.palette.primary.lighter,
           },
-
-          // Temp CSS until we use JS to insert this element
-          [`& .${svgIconClasses.root}`]: {
-            display: "block",
-          },
-        },
-
-        // Temp CSS until we use JS to insert this element
-        [`& .${svgIconClasses.root}`]: {
-          display: "none",
         },
       }),
     },
@@ -918,7 +909,13 @@ export const components: ThemeOptions["components"] = {
       variant: "standard",
     },
     styleOverrides: {
+      select: {
+        "&:focus": {
+          backgroundColor: "transparent",
+        },
+      },
       icon: ({ theme }) => ({
+        insetInlineEnd: theme.spacing(3),
         color: theme.palette.text.primary,
       }),
     },
@@ -977,9 +974,12 @@ export const components: ThemeOptions["components"] = {
           backgroundColor: "transparent",
         },
 
-        // Temp CSS until we use JS to insert this element
-        [`& .${svgIconClasses.root}`]: {
-          display: "none",
+        ".MuiBox-root": {
+          display: "flex",
+          flexWrap: "wrap",
+          gap: theme.spacing(1),
+          marginBlock: `-${theme.spacing(2)}`,
+          marginInline: `-${theme.spacing(2)}`,
         },
       }),
       icon: ({ theme }) => ({
