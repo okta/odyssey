@@ -1,13 +1,13 @@
 {
   "name": "@okta/odyssey-eslint-config",
-  "version": "0.16.1",
+  "version": "0.17.0",
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "sideEffects": false,
   "private": true,
   "dependencies": {
-    "@okta/eslint-plugin-odyssey": "^0.16.1",
+    "@okta/eslint-plugin-odyssey": "^0.17.0",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
     "eslint-config-prettier": "^8.3.0",
