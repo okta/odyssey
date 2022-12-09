@@ -16,10 +16,12 @@ declare module "@mui/material/styles" {
   interface TypographyVariants {
     kbd: CSSProperties;
     legend: CSSProperties;
+    ui: CSSProperties;
   }
   interface TypographyVariantsOptions {
     kbd?: CSSProperties;
     legend?: CSSProperties;
+    ui: CSSProperties;
   }
 }
 
@@ -33,6 +35,7 @@ declare module "@mui/material/Typography" {
     overline: false;
     subtitle1: true; // Design may refer to this as "caption"
     subtitle2: false;
+    ui: true;
     default: true; // used by <Link>
     monochrome: true; // used by <Link>
   }
