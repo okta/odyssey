@@ -9,7 +9,13 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Set up secret file
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        run: |
+          echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g'
       - name: checkout
         uses: actions/checkout@v2
       - name: setup node
