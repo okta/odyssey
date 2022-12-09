@@ -15,7 +15,6 @@ import { Story } from "@storybook/react";
 import {
   Box,
   Checkbox,
-  //CheckIcon,
   Chip,
   FormControl,
   FormHelperText,
@@ -98,7 +97,6 @@ const Template: Story = (args) => {
         {destinations.map((destination) => (
           <MenuItem key={destination} value={destination}>
             {destination}
-            {/* <CheckIcon /> */}
           </MenuItem>
         ))}
       </Select>
