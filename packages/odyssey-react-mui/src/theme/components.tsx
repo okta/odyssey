@@ -15,6 +15,7 @@ import type {} from "@mui/lab/themeAugmentation";
 //import radioClasses from "@mui/material";
 import { chipClasses } from "@mui/material/Chip";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
+import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { svgIconClasses } from "@mui/material/SvgIcon";
 import { tableBodyClasses } from "@mui/material/TableBody";
@@ -27,6 +28,7 @@ import {
   AlertTriangleFilledIcon,
   ArrowDownIcon,
   CheckCircleFilledIcon,
+  ChevronDownIcon,
   CloseCircleFilledIcon,
   InformationCircleFilledIcon,
 } from "../iconDictionary";
@@ -141,7 +143,7 @@ export const components: ThemeOptions["components"] = {
   MuiBackdrop: {
     styleOverrides: {
       root: {
-        backgroundColor: "rgba(29,29,33,0.75)",
+        //backgroundColor: "rgba(29,29,33,0.75)",
       },
     },
   },
@@ -690,16 +692,17 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
         display: "flex",
-        minWidth: "1em",
+        minWidth: "1.25em",
         maxHeight: "unset",
+        margin: 0,
         alignItems: "center",
         whiteSpace: "nowrap",
         color: theme.palette.action.active,
         ...(ownerState.position === "start" && {
-          marginInlineEnd: theme.spacing(2),
+          marginInlineStart: theme.spacing(2),
         }),
         ...(ownerState.position === "end" && {
-          marginInlineStart: theme.spacing(2),
+          marginInlineEnd: theme.spacing(2),
         }),
         ...(ownerState.disablePointerEvents === true && {
           pointerEvents: "none",
@@ -723,17 +726,6 @@ export const components: ThemeOptions["components"] = {
         borderStyle: theme.mixins.borderStyle,
         borderRadius: theme.mixins.borderRadius,
         borderColor: theme.palette.grey[500],
-        paddingBlock: `calc(${theme.spacing(3)} - ${theme.mixins.borderWidth})`,
-        paddingInline: theme.spacing(3),
-
-        ...(ownerState.multiline && {
-          paddingBlock: theme.spacing(3),
-          paddingInline: theme.spacing(3),
-          ...(ownerState.size === "small" && {
-            paddingBlock: theme.spacing(3),
-            paddingInline: theme.spacing(3),
-          }),
-        }),
 
         ...(ownerState.fullWidth && {
           width: "100%",
@@ -779,12 +771,16 @@ export const components: ThemeOptions["components"] = {
       input: ({ theme }) => ({
         boxSizing: "border-box",
         height: "auto",
-        paddingBlock: 0,
-        paddingInline: 0,
+        paddingBlock: `calc(${theme.spacing(3)} - ${theme.mixins.borderWidth})`,
+        paddingInline: theme.spacing(3),
 
         [`.${inputBaseClasses.disabled} &`]: {
           pointerEvents: "auto",
           cursor: "not-allowed",
+        },
+
+        [`.${inputAdornmentClasses.root} + &`]: {
+          paddingInlineStart: theme.spacing(2),
         },
 
         [`label[data-shrink=false] + .${inputBaseClasses.formControl} &`]: {
@@ -891,13 +887,43 @@ export const components: ThemeOptions["components"] = {
       },
     ],
   },
+  MuiMenuItem: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        justifyContent: "space-between",
+        gap: theme.spacing(2),
+
+        "&.Mui-selected": {
+          backgroundColor: "transparent",
+          color: theme.palette.primary.main,
+
+          "&:hover": {
+            backgroundColor: theme.palette.primary.lighter,
+          },
+        },
+      }),
+    },
+  },
   MuiNativeSelect: {
     defaultProps: {
       variant: "standard",
     },
     styleOverrides: {
+      select: {
+        "&:focus": {
+          backgroundColor: "transparent",
+        },
+      },
       icon: ({ theme }) => ({
+        insetInlineEnd: theme.spacing(3),
         color: theme.palette.text.primary,
+      }),
+    },
+  },
+  MuiPopover: {
+    styleOverrides: {
+      paper: ({ theme }) => ({
+        marginBlockStart: theme.spacing(1),
       }),
     },
   },
@@ -937,9 +963,27 @@ export const components: ThemeOptions["components"] = {
   MuiSelect: {
     defaultProps: {
       variant: "standard",
+      IconComponent: ChevronDownIcon,
     },
     styleOverrides: {
+      select: ({ theme }) => ({
+        paddingBlock: `calc(${theme.spacing(3)} - ${theme.mixins.borderWidth})`,
+        paddingInline: theme.spacing(3),
+
+        "&:focus": {
+          backgroundColor: "transparent",
+        },
+
+        ".MuiBox-root": {
+          display: "flex",
+          flexWrap: "wrap",
+          gap: theme.spacing(1),
+          marginBlock: `-${theme.spacing(2)}`,
+          marginInline: `-${theme.spacing(2)}`,
+        },
+      }),
       icon: ({ theme }) => ({
+        insetInlineEnd: theme.spacing(3),
         color: theme.palette.text.primary,
       }),
     },

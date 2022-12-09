@@ -6,6 +6,10 @@ import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
 
 Often referred to as a “dropdown menu” this input triggers a menu of options a user can select. Country and state Selects are common examples.
 
+<Canvas>
+  <Story id="mui-components-forms-select--default" />
+</Canvas>
+
 ## Behavior
 
 Interacting with a Select displays a list of values to choose from. Choosing a value will override any previous selection and close the Select.
@@ -22,9 +26,25 @@ Odyssey provides support for both single and multi-value Selects.
 
 The default Select allows users to choose a single value from a list of options. Selecting another option will replace the first.
 
+<Canvas>
+  <Story id="mui-components-forms-select--default" />
+</Canvas>
+
+<Canvas>
+  <Story id="mui-components-forms-select--default-disabled" />
+</Canvas>
+
+<Canvas>
+  <Story id="mui-components-forms-select--default-invalid" />
+</Canvas>
+
 ### Multi-Select
 
 The Multi-Select variant allows users to choose more than one value from the list of options.
+
+<Canvas>
+  <Story id="mui-components-forms-select--multi" />
+</Canvas>
 
 ### Native Select
 
@@ -34,14 +54,6 @@ The browser-native `<select>` component may be used by passing `<Select>` the `n
 
 <Canvas>
   <Story id="mui-components-forms-select--native-default" />
-</Canvas>
-
-<Canvas>
-  <Story id="mui-components-forms-select--native-disabled" />
-</Canvas>
-
-<Canvas>
-  <Story id="mui-components-forms-select--native-invalid" />
 </Canvas>
 
 #### Multi
