@@ -27,7 +27,7 @@ export const palette: ThemeOptions["palette"] = {
     contrastText: Tokens.ColorTextBodyInverse,
   },
   secondary: {
-    light: "#80c7ca",
+    light: "#fff",
     main: Tokens.ColorPaletteTurquoise500,
     dark: "#004650",
     contrastText: Tokens.ColorTextBodyInverse,
