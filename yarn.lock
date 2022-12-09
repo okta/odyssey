@@ -3609,6 +3609,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.20.1":
+  version: 7.20.6
+  resolution: "@babel/runtime@npm:7.20.6"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: 42a8504db21031b1859fbc0f52d698a3d2f5ada9519eb76c6f96a7e657d8d555732a18fe71ef428a67cc9fc81ca0d3562fb7afdc70549c5fec343190cbaa9b03
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.8.4":
   version: 7.11.2
   resolution: "@babel/runtime@npm:7.11.2"
@@ -5568,14 +5577,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/base@npm:5.0.0-alpha.104":
-  version: 5.0.0-alpha.104
-  resolution: "@mui/base@npm:5.0.0-alpha.104"
+"@mui/base@npm:5.0.0-alpha.108":
+  version: 5.0.0-alpha.108
+  resolution: "@mui/base@npm:5.0.0-alpha.108"
   dependencies:
-    "@babel/runtime": ^7.19.0
+    "@babel/runtime": ^7.20.1
     "@emotion/is-prop-valid": ^1.2.0
-    "@mui/types": ^7.2.0
-    "@mui/utils": ^5.10.9
+    "@mui/types": ^7.2.2
+    "@mui/utils": ^5.10.16
     "@popperjs/core": ^2.11.6
     clsx: ^1.2.1
     prop-types: ^15.8.1
@@ -5587,22 +5596,22 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: f66693b4659bb50cc89b6b0e055db45d091bb546f82a4c6cc230f3699e647b68c941dcb8e8d42648e3470f83da5600f400ff21af9a8f7aaf6b018ac5ad3ceeb1
+  checksum: 657095101f3a91103e36915b85e1a69275d84761d0f34d53597cc311c79c1646227edb195f08b6af642a329ad230bdecd783d0f6c929769c08c37c87252f8c1f
   languageName: node
   linkType: hard
 
-"@mui/core-downloads-tracker@npm:^5.10.12":
-  version: 5.10.12
-  resolution: "@mui/core-downloads-tracker@npm:5.10.12"
-  checksum: 894c7ee810851de2ee5de43648822e6f5ea639e4ab494fd54c9a6cb6dbace608b5634699fab05978f2d21efc4378bbce83b8352ef7aa958afd3d387c32373244
+"@mui/core-downloads-tracker@npm:^5.10.16":
+  version: 5.10.16
+  resolution: "@mui/core-downloads-tracker@npm:5.10.16"
+  checksum: fde359ecd5a21c0f3a5c798dc4f5ea0f132c28d182aae993e244eb5b87012549e50973bf986a7356b58874b3f8b6bb2b36c49c6b03da4a4bc2bee30f7650ad58
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:^5.10.9":
-  version: 5.10.9
-  resolution: "@mui/icons-material@npm:5.10.9"
+"@mui/icons-material@npm:^5.10.16":
+  version: 5.10.16
+  resolution: "@mui/icons-material@npm:5.10.16"
   dependencies:
-    "@babel/runtime": ^7.19.0
+    "@babel/runtime": ^7.20.1
   peerDependencies:
     "@mui/material": ^5.0.0
     "@types/react": ^17.0.0 || ^18.0.0
@@ -5610,7 +5619,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 8d2f66c094c39ed66b4d2581e8cc9e97a89e15793d0a768869a4b8d01ee6ff2adbbd10761bcafc14dad640c7a51a550a85cdf5f195373afb317afb5e82dce6e5
+  checksum: 00cf9cdbb76a5806307d9cccb647cbd8e45d18a1be7e252727c789cd5a29103abf7fdbe724553425bcdff8daf58ec612e5a8c08c3c7a5a6e28efb14b86507687
   languageName: node
   linkType: hard
 
@@ -5644,16 +5653,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/material@npm:^5.10.12":
-  version: 5.10.12
-  resolution: "@mui/material@npm:5.10.12"
+"@mui/material@npm:^5.10.16":
+  version: 5.10.16
+  resolution: "@mui/material@npm:5.10.16"
   dependencies:
-    "@babel/runtime": ^7.19.0
-    "@mui/base": 5.0.0-alpha.104
-    "@mui/core-downloads-tracker": ^5.10.12
-    "@mui/system": ^5.10.12
-    "@mui/types": ^7.2.0
-    "@mui/utils": ^5.10.9
+    "@babel/runtime": ^7.20.1
+    "@mui/base": 5.0.0-alpha.108
+    "@mui/core-downloads-tracker": ^5.10.16
+    "@mui/system": ^5.10.16
+    "@mui/types": ^7.2.2
+    "@mui/utils": ^5.10.16
     "@types/react-transition-group": ^4.4.5
     clsx: ^1.2.1
     csstype: ^3.1.1
@@ -5673,7 +5682,24 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: 37b3d605d0cdb5136ac5a568d1c3c00ad5a3e01242cea6bccad5ccb08512e3c600dde75af852515c947b994fb5afa972044faac07416d347cbb6e503651c23a3
+  checksum: 2268fcae6f7b695030975df0cdbabd94922dba287ac2dbc66dfdc6d617cf0ab6c19bdb7b6e80927f3af6d24774fade0b7a433654449e816e8b0ad4e4b358a922
+  languageName: node
+  linkType: hard
+
+"@mui/private-theming@npm:^5.10.16":
+  version: 5.10.16
+  resolution: "@mui/private-theming@npm:5.10.16"
+  dependencies:
+    "@babel/runtime": ^7.20.1
+    "@mui/utils": ^5.10.16
+    prop-types: ^15.8.1
+  peerDependencies:
+    "@types/react": ^17.0.0 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 81fe5ed89ef0df81f92e3d33d5fb3c3e46a7fdbec7c50315874adac23b6bfa8946c2242aa9352a051ed6419f2641982cae9a7499d10d01d3ff8e58b901494917
   languageName: node
   linkType: hard
 
@@ -5691,6 +5717,27 @@ __metadata:
     "@types/react":
       optional: true
   checksum: bc7441188bd225546f517babb675aebe6e265ff62b60c21ecc3744233a265dec85011a75919082fb039540dfda924d6fc1a3ad218928dab8aafb7457c571855a
+  languageName: node
+  linkType: hard
+
+"@mui/styled-engine@npm:^5.10.16":
+  version: 5.10.16
+  resolution: "@mui/styled-engine@npm:5.10.16"
+  dependencies:
+    "@babel/runtime": ^7.20.1
+    "@emotion/cache": ^11.10.5
+    csstype: ^3.1.1
+    prop-types: ^15.8.1
+  peerDependencies:
+    "@emotion/react": ^11.4.1
+    "@emotion/styled": ^11.3.0
+    react: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@emotion/react":
+      optional: true
+    "@emotion/styled":
+      optional: true
+  checksum: ee55de7b3de4a875a6dec7ae1bad65d6826adf4ee417158a5d3e1cd868c41c46b4f4c6c5975e706650340280f10875e15c45673be7bd5295cdc3448f2709b372
   languageName: node
   linkType: hard
 
@@ -5715,15 +5762,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/system@npm:^5.10.12":
-  version: 5.10.12
-  resolution: "@mui/system@npm:5.10.12"
+"@mui/system@npm:^5.10.16":
+  version: 5.10.16
+  resolution: "@mui/system@npm:5.10.16"
   dependencies:
-    "@babel/runtime": ^7.19.0
-    "@mui/private-theming": ^5.10.9
-    "@mui/styled-engine": ^5.10.8
-    "@mui/types": ^7.2.0
-    "@mui/utils": ^5.10.9
+    "@babel/runtime": ^7.20.1
+    "@mui/private-theming": ^5.10.16
+    "@mui/styled-engine": ^5.10.16
+    "@mui/types": ^7.2.2
+    "@mui/utils": ^5.10.16
     clsx: ^1.2.1
     csstype: ^3.1.1
     prop-types: ^15.8.1
@@ -5739,7 +5786,7 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: 1803a6f54bc1fda304834f362c60697b2ee157df7629b26337cb3d180093cbc244a94df45719da436b2917f98674687a98fea353a9ec8e6de7c5c3b5ba592bc8
+  checksum: 181b0f26f880c50da2d4cb829c7614ab5e2118e6570c5b4019bb3b42f26b8ebbafca4481867dc5e184cdf8a2753e711ea067ece064e2d561aeab7e82e9a18902
   languageName: node
   linkType: hard
 
@@ -5780,6 +5827,33 @@ __metadata:
     "@types/react":
       optional: true
   checksum: a863140f2039c33fab7651e024f6ba277b282930b5b43e8a68c2339508a74fcedf15af2f0f46bafe276fb65ae0b44cd8a880e1f9a870d957f61457b59709ecba
+  languageName: node
+  linkType: hard
+
+"@mui/types@npm:^7.2.2":
+  version: 7.2.2
+  resolution: "@mui/types@npm:7.2.2"
+  peerDependencies:
+    "@types/react": "*"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: bda8d778cfd33190eacc7a2275948b78fda2d4ea0e82084d3a281b4ff4c787d2ef3d515c4b7f89b52dd65f59ad2bebb502a1fc49c3fdfaf496a6ab019af01054
+  languageName: node
+  linkType: hard
+
+"@mui/utils@npm:^5.10.16":
+  version: 5.10.16
+  resolution: "@mui/utils@npm:5.10.16"
+  dependencies:
+    "@babel/runtime": ^7.20.1
+    "@types/prop-types": ^15.7.5
+    "@types/react-is": ^16.7.1 || ^17.0.0
+    prop-types: ^15.8.1
+    react-is: ^18.2.0
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0
+  checksum: 2db4ac76544fe19856b5d456b2ddfb55baf505ce24f27f1d06900758d61067b74ceb94069d34cb82467e4be5fa33d613a0f2f947fc7b29315317090ac8cacbeb
   languageName: node
   linkType: hard
 
@@ -6247,20 +6321,20 @@ __metadata:
   dependencies:
     "@babel/core": ^7.19.3
     "@babel/types": ^7.19.0
-    "@okta/odyssey-lifecycle": ^0.17.0
-    "@okta/odyssey-typescript": ^0.17.0
+    "@okta/odyssey-lifecycle": ^0.17.1
+    "@okta/odyssey-typescript": ^0.17.1
     jest: ^29.0.3
     jest-environment-jsdom: ^29.0.3
     typescript: ^4.8.3
   languageName: unknown
   linkType: soft
 
-"@okta/browserslist-config-odyssey@^0.17.0, @okta/browserslist-config-odyssey@workspace:packages/browserslist-config-odyssey":
+"@okta/browserslist-config-odyssey@^0.17.1, @okta/browserslist-config-odyssey@workspace:packages/browserslist-config-odyssey":
   version: 0.0.0-use.local
   resolution: "@okta/browserslist-config-odyssey@workspace:packages/browserslist-config-odyssey"
   dependencies:
-    "@okta/odyssey-lifecycle": ^0.17.0
-    "@okta/odyssey-typescript": ^0.17.0
+    "@okta/odyssey-lifecycle": ^0.17.1
+    "@okta/odyssey-typescript": ^0.17.1
     typescript: ^4.8.3
   languageName: unknown
   linkType: soft
@@ -6273,7 +6347,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/eslint-plugin-odyssey@^0.17.0, @okta/eslint-plugin-odyssey@workspace:packages/eslint-plugin-odyssey":
+"@okta/eslint-plugin-odyssey@^0.17.1, @okta/eslint-plugin-odyssey@workspace:packages/eslint-plugin-odyssey":
   version: 0.0.0-use.local
   resolution: "@okta/eslint-plugin-odyssey@workspace:packages/eslint-plugin-odyssey"
   dependencies:
@@ -6284,18 +6358,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-babel-loader@^0.17.0, @okta/odyssey-babel-loader@workspace:packages/odyssey-babel-loader":
+"@okta/odyssey-babel-loader@^0.17.1, @okta/odyssey-babel-loader@workspace:packages/odyssey-babel-loader":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-babel-loader@workspace:packages/odyssey-babel-loader"
   dependencies:
     "@babel/core": ^7.15.0
-    "@okta/odyssey-lifecycle": ^0.17.0
+    "@okta/odyssey-lifecycle": ^0.17.1
     babel-loader: ^8
     webpack: 4.46.0
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-babel-preset@^0.17.0, @okta/odyssey-babel-preset@workspace:packages/odyssey-babel-preset":
+"@okta/odyssey-babel-preset@^0.17.1, @okta/odyssey-babel-preset@workspace:packages/odyssey-babel-preset":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-babel-preset@workspace:packages/odyssey-babel-preset"
   dependencies:
@@ -6303,14 +6377,14 @@ __metadata:
     "@babel/preset-env": ^7.19.1
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
-    "@okta/odyssey-lifecycle": ^0.17.0
-    "@okta/odyssey-typescript": ^0.17.0
+    "@okta/odyssey-lifecycle": ^0.17.1
+    "@okta/odyssey-typescript": ^0.17.1
     "@types/babel__core": ^7.1.19
     typescript: ^4.8.3
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-commitlint@^0.17.0, @okta/odyssey-commitlint@workspace:packages/odyssey-commitlint":
+"@okta/odyssey-commitlint@^0.17.1, @okta/odyssey-commitlint@workspace:packages/odyssey-commitlint":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-commitlint@workspace:packages/odyssey-commitlint"
   dependencies:
@@ -6322,20 +6396,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-design-tokens@^0.17.0, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
+"@okta/odyssey-design-tokens@^0.17.1, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens"
   dependencies:
-    "@okta/odyssey-lifecycle": ^0.17.0
+    "@okta/odyssey-lifecycle": ^0.17.1
     style-dictionary: ^3.7.1
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-eslint-config@^0.17.0, @okta/odyssey-eslint-config@workspace:packages/odyssey-eslint-config":
+"@okta/odyssey-eslint-config@^0.17.1, @okta/odyssey-eslint-config@workspace:packages/odyssey-eslint-config":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-eslint-config@workspace:packages/odyssey-eslint-config"
   dependencies:
-    "@okta/eslint-plugin-odyssey": ^0.17.0
+    "@okta/eslint-plugin-odyssey": ^0.17.1
     "@typescript-eslint/eslint-plugin": ^5.39.0
     "@typescript-eslint/parser": ^5.39.0
     eslint-config-prettier: ^8.3.0
@@ -6348,7 +6422,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-icons@^0.17.0, @okta/odyssey-icons@workspace:packages/odyssey-icons":
+"@okta/odyssey-icons@^0.17.1, @okta/odyssey-icons@workspace:packages/odyssey-icons":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-icons@workspace:packages/odyssey-icons"
   dependencies:
@@ -6356,7 +6430,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-lifecycle@^0.17.0, @okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle":
+"@okta/odyssey-lifecycle@^0.17.1, @okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle"
   bin:
@@ -6364,7 +6438,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-lint-staged@^0.17.0, @okta/odyssey-lint-staged@workspace:packages/odyssey-lint-staged":
+"@okta/odyssey-lint-staged@^0.17.1, @okta/odyssey-lint-staged@workspace:packages/odyssey-lint-staged":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-lint-staged@workspace:packages/odyssey-lint-staged"
   peerDependencies:
@@ -6372,7 +6446,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-react-labs@^0.17.0, @okta/odyssey-react-labs@workspace:packages/odyssey-react-labs":
+"@okta/odyssey-react-labs@^0.17.1, @okta/odyssey-react-labs@workspace:packages/odyssey-react-labs":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-react-labs@workspace:packages/odyssey-react-labs"
   dependencies:
@@ -6380,15 +6454,15 @@ __metadata:
     "@babel/core": ^7.19.3
     "@emotion/react": ^11.10.4
     "@emotion/styled": ^11.10.4
-    "@mui/material": ^5.10.12
+    "@mui/material": ^5.10.16
     "@mui/x-date-pickers": ^5.0.4
-    "@okta/browserslist-config-odyssey": ^0.17.0
-    "@okta/odyssey-babel-preset": ^0.17.0
-    "@okta/odyssey-icons": ^0.17.0
-    "@okta/odyssey-lifecycle": ^0.17.0
-    "@okta/odyssey-react-mui": ^0.17.0
-    "@okta/odyssey-svgr": ^0.17.0
-    "@okta/odyssey-typescript": ^0.17.0
+    "@okta/browserslist-config-odyssey": ^0.17.1
+    "@okta/odyssey-babel-preset": ^0.17.1
+    "@okta/odyssey-icons": ^0.17.1
+    "@okta/odyssey-lifecycle": ^0.17.1
+    "@okta/odyssey-react-mui": ^0.17.1
+    "@okta/odyssey-svgr": ^0.17.1
+    "@okta/odyssey-typescript": ^0.17.1
     "@svgr/cli": ^6.3.1
     "@testing-library/dom": ^7.28.1
     "@testing-library/jest-dom": ^5.12.0
@@ -6413,13 +6487,13 @@ __metadata:
   peerDependencies:
     "@emotion/react": ^11
     "@emotion/styled": ^11
-    "@okta/odyssey-react-mui": ^0.16.1
+    "@okta/odyssey-react-mui": ^0.17.1
     react: ">=17 <19"
     react-dom: ">=17 <19"
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-react-mui@^0.17.0, @okta/odyssey-react-mui@workspace:packages/odyssey-react-mui":
+"@okta/odyssey-react-mui@^0.17.1, @okta/odyssey-react-mui@workspace:packages/odyssey-react-mui":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-react-mui@workspace:packages/odyssey-react-mui"
   dependencies:
@@ -6428,17 +6502,17 @@ __metadata:
     "@emotion/cache": ^11.10.5
     "@emotion/react": ^11.10.4
     "@emotion/styled": ^11.10.4
-    "@mui/icons-material": ^5.10.9
+    "@mui/icons-material": ^5.10.16
     "@mui/lab": ^5.0.0-alpha.103
-    "@mui/material": ^5.10.12
-    "@mui/utils": ^5.10.9
-    "@okta/browserslist-config-odyssey": ^0.17.0
-    "@okta/odyssey-babel-preset": ^0.17.0
-    "@okta/odyssey-design-tokens": ^0.17.0
-    "@okta/odyssey-icons": ^0.17.0
-    "@okta/odyssey-lifecycle": ^0.17.0
-    "@okta/odyssey-svgr": ^0.17.0
-    "@okta/odyssey-typescript": ^0.17.0
+    "@mui/material": ^5.10.16
+    "@mui/utils": ^5.10.16
+    "@okta/browserslist-config-odyssey": ^0.17.1
+    "@okta/odyssey-babel-preset": ^0.17.1
+    "@okta/odyssey-design-tokens": ^0.17.1
+    "@okta/odyssey-icons": ^0.17.1
+    "@okta/odyssey-lifecycle": ^0.17.1
+    "@okta/odyssey-svgr": ^0.17.1
+    "@okta/odyssey-typescript": ^0.17.1
     "@svgr/cli": ^6.3.1
     "@testing-library/dom": ^7.28.1
     "@testing-library/jest-dom": ^5.12.0
@@ -6473,12 +6547,12 @@ __metadata:
   dependencies:
     "@applitools/eyes-storybook": ^3.29.4
     "@babel/core": ^7.19.3
-    "@okta/odyssey-babel-loader": ^0.17.0
-    "@okta/odyssey-design-tokens": ^0.17.0
-    "@okta/odyssey-lifecycle": ^0.17.0
-    "@okta/odyssey-react-labs": ^0.17.0
-    "@okta/odyssey-react-mui": ^0.17.0
-    "@okta/odyssey-typescript": ^0.17.0
+    "@okta/odyssey-babel-loader": ^0.17.1
+    "@okta/odyssey-design-tokens": ^0.17.1
+    "@okta/odyssey-lifecycle": ^0.17.1
+    "@okta/odyssey-react-labs": ^0.17.1
+    "@okta/odyssey-react-mui": ^0.17.1
+    "@okta/odyssey-typescript": ^0.17.1
     "@pxblue/storybook-rtl-addon": ^1.0.1
     "@storybook/addon-a11y": ^6.5.13
     "@storybook/addon-actions": ^6.5.13
@@ -6502,7 +6576,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-stylelint@^0.17.0, @okta/odyssey-stylelint@workspace:packages/odyssey-stylelint":
+"@okta/odyssey-stylelint@^0.17.1, @okta/odyssey-stylelint@workspace:packages/odyssey-stylelint":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-stylelint@workspace:packages/odyssey-stylelint"
   dependencies:
@@ -6523,7 +6597,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-svgr@^0.17.0, @okta/odyssey-svgr@workspace:packages/odyssey-svgr":
+"@okta/odyssey-svgr@^0.17.1, @okta/odyssey-svgr@workspace:packages/odyssey-svgr":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-svgr@workspace:packages/odyssey-svgr"
   dependencies:
@@ -6532,7 +6606,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-typescript@^0.17.0, @okta/odyssey-typescript@workspace:packages/odyssey-typescript":
+"@okta/odyssey-typescript@^0.17.1, @okta/odyssey-typescript@workspace:packages/odyssey-typescript":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-typescript@workspace:packages/odyssey-typescript"
   peerDependencies:
@@ -12477,9 +12551,9 @@ __metadata:
   linkType: hard
 
 "decode-uri-component@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "decode-uri-component@npm:0.2.0"
-  checksum: f3749344ab9305ffcfe4bfe300e2dbb61fc6359e2b736812100a3b1b6db0a5668cba31a05e4b45d4d63dbf1a18dfa354cd3ca5bb3ededddabb8cd293f4404f94
+  version: 0.2.2
+  resolution: "decode-uri-component@npm:0.2.2"
+  checksum: 95476a7d28f267292ce745eac3524a9079058bbb35767b76e3ee87d42e34cd0275d2eb19d9d08c3e167f97556e8a2872747f5e65cbebcac8b0c98d83e285f139
   languageName: node
   linkType: hard
 
@@ -17910,13 +17984,13 @@ __metadata:
   linkType: hard
 
 "loader-utils@npm:^1.2.3":
-  version: 1.4.1
-  resolution: "loader-utils@npm:1.4.1"
+  version: 1.4.2
+  resolution: "loader-utils@npm:1.4.2"
   dependencies:
     big.js: ^5.2.2
     emojis-list: ^3.0.0
     json5: ^1.0.1
-  checksum: ea0b648cba0194e04a90aab6270619f0e35be009e33a443d9e642e93056cd49e6ca4c9678bd1c777a2392551bc5f4d0f24a87f5040608da1274aa84c6eebb502
+  checksum: eb6fb622efc0ffd1abdf68a2022f9eac62bef8ec599cf8adb75e94d1d338381780be6278534170e99edc03380a6d29bc7eb1563c89ce17c5fed3a0b17f1ad804
   languageName: node
   linkType: hard
 
@@ -19710,10 +19784,10 @@ __metadata:
   resolution: "odyssey@workspace:."
   dependencies:
     "@commitlint/cli": ^14.0.0
-    "@okta/odyssey-commitlint": ^0.17.0
-    "@okta/odyssey-eslint-config": ^0.17.0
-    "@okta/odyssey-lint-staged": ^0.17.0
-    "@okta/odyssey-stylelint": ^0.17.0
+    "@okta/odyssey-commitlint": ^0.17.1
+    "@okta/odyssey-eslint-config": ^0.17.1
+    "@okta/odyssey-lint-staged": ^0.17.1
+    "@okta/odyssey-stylelint": ^0.17.1
     caniuse-lite: ^1.0.30001412
     eslint: ^7.27.0
     husky: ^7.0.2
@@ -21715,6 +21789,13 @@ __metadata:
   version: 1.4.2
   resolution: "regenerate@npm:1.4.2"
   checksum: 3317a09b2f802da8db09aa276e469b57a6c0dd818347e05b8862959c6193408242f150db5de83c12c3fa99091ad95fb42a6db2c3329bfaa12a0ea4cbbeb30cb0
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.13.11":
+  version: 0.13.11
+  resolution: "regenerator-runtime@npm:0.13.11"
+  checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4
   languageName: node
   linkType: hard
 

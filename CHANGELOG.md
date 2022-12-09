@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.17.1](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.1) (2022-12-09)
+
+### Features
+
+- **odyssey-react-mui:** add theme for multiselect ([ce8fbdb](https://github.com/okta/odyssey/commit/ce8fbdb33218b6064556800ad0a9a60a06c617b1))
+- **odyssey-react-mui:** increase default icon size to 16px; add ui type variant ([6577c33](https://github.com/okta/odyssey/commit/6577c331c29a5bfc53b41ebd269cf69366e2825c))
+- **odyssey-react-mui:** theme Select and refactor InputBase styles to support Select ([0538fb1](https://github.com/okta/odyssey/commit/0538fb1f77f79f2fca1635001163c11d6dfbd7f7))
+
 ### [0.17.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.0) (2022-11-10)
 
 ### Features
