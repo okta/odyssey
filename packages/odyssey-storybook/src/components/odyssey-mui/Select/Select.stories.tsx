@@ -122,10 +122,6 @@ const MultiTemplate: Story = (args) => {
     );
   };
 
-  const handleDelete = () => {
-    console.info("This should deselect the option.");
-  };
-
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
@@ -143,11 +139,7 @@ const MultiTemplate: Story = (args) => {
         renderValue={(selected) => (
           <Box>
             {selected.map((destination) => (
-              <Chip
-                key={destination}
-                label={destination}
-                onDelete={handleDelete}
-              />
+              <Chip key={destination} label={destination} />
             ))}
           </Box>
         )}
