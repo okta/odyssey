@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.17.1](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.1) (2022-12-09)
+
+### Features
+
+- added Emotion CacheProvider as part of ThemeProvider ([4c00a59](https://github.com/okta/odyssey/commit/4c00a591f8e1c237eec74758d4d8a13fd7a5499a))
+- added optional nonce prop to OdysseyCacheProvider ([f264b50](https://github.com/okta/odyssey/commit/f264b50d5c737fcaa672eadb4d3302acfd136582))
+- **odyssey-react-mui:** add theme for multiselect ([ce8fbdb](https://github.com/okta/odyssey/commit/ce8fbdb33218b6064556800ad0a9a60a06c617b1))
+- **odyssey-react-mui:** add theme for Tag/Chip ([8539c6d](https://github.com/okta/odyssey/commit/8539c6d3aa3a29fcef0984bc611ccab9a4b524af))
+- **odyssey-react-mui:** increase default icon size to 16px; add ui type variant ([6577c33](https://github.com/okta/odyssey/commit/6577c331c29a5bfc53b41ebd269cf69366e2825c))
+- **odyssey-react-mui:** theme Select and refactor InputBase styles to support Select ([0538fb1](https://github.com/okta/odyssey/commit/0538fb1f77f79f2fca1635001163c11d6dfbd7f7))
+
+### Bug Fixes
+
+- added missing export for OdysseyThemeProvider and OdysseyCacheProvider ([3273f35](https://github.com/okta/odyssey/commit/3273f3537856a2b71161888ab291c5663bc2dbcb))
+- forwardRef in Link ([d1429af](https://github.com/okta/odyssey/commit/d1429afe1dde8608e2587abc2be99e7601650dc5))
+- minor type updates in unique ID hooks ([01df5b2](https://github.com/okta/odyssey/commit/01df5b2d7a19ed9862d27e1ca423d2ea29ad17c6))
+- **odyssey-react-mui:** size and align icons correctly within Button ([7787bf0](https://github.com/okta/odyssey/commit/7787bf0d03da093dc4a94955e57240c9b11e7762))
+- split OdysseyThemeProvider and OdysseyCacheProvider ([16a6ce3](https://github.com/okta/odyssey/commit/16a6ce3672a634e3450545ffe8c41a70db1b7fb3))
+- upgraded MUI icons ([c978ab6](https://github.com/okta/odyssey/commit/c978ab66375f649a9b66544dbc490cc0442cff2c))
+
 ### [0.17.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.0) (2022-11-10)
 
 ### Features
