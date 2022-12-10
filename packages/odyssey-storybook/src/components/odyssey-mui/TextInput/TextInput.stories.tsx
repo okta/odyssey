@@ -1,0 +1,180 @@
+/*!
+ * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+import { Story } from "@storybook/react";
+import { InputAdornment } from "@okta/odyssey-react-mui";
+import { TextInput } from "@okta/odyssey-react-mui/src/components";
+
+import { MuiThemeDecorator } from "../../../../.storybook/components";
+
+import TextInputMdx from "./TextInput.mdx";
+
+export default {
+  title: `MUI Components/Text Input`,
+  component: TextInput,
+  parameters: {
+    docs: {
+      page: TextInputMdx,
+    },
+  },
+  argTypes: {
+    autoComplete: {
+      control: "text",
+      defaultValue: "name",
+    },
+    disabled: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    endAdornment: {
+      control: "text",
+      defaultValue: undefined,
+    },
+    error: {
+      control: "text",
+      defaultValue: undefined,
+    },
+    hint: {
+      control: "text",
+      defaultValue: undefined,
+    },
+    id: {
+      control: "text",
+      defaultValue: undefined,
+    },
+    label: {
+      control: "text",
+      defaultValue: "Destination",
+    },
+    multiline: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    onChange: {
+      control: "function",
+      defaultValue: undefined,
+    },
+    onFocus: {
+      control: "function",
+      defaultValue: undefined,
+    },
+    optionalLabel: {
+      control: "text",
+      defaultValue: "Optional",
+    },
+    placeholder: {
+      control: "text",
+      defaultValue: undefined,
+    },
+    readOnly: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    required: {
+      control: "boolean",
+      defaultValue: true,
+    },
+    startAdornment: {
+      control: "text",
+      defaultValue: undefined,
+    },
+    type: {
+      control: "select",
+      options: ["text", "email", "search", "tel", "password"],
+      defaultValue: "text",
+    },
+    value: {
+      control: "text",
+      defaultValue: undefined,
+    },
+  },
+  decorators: [MuiThemeDecorator],
+};
+
+const Template: Story = (args) => {
+  return <TextInput {...args} />;
+};
+
+// States
+
+export const Default = Template.bind({});
+Default.args = {};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true,
+};
+
+export const Optional = Template.bind({});
+Optional.args = {
+  required: false,
+};
+
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+  readOnly: true,
+  value: "Earth",
+};
+
+export const Invalid = Template.bind({});
+Invalid.args = {
+  error: "This field is required.",
+};
+
+export const Hint = Template.bind({});
+Hint.args = {
+  hint: "Specify your destination within the Sol system.",
+};
+
+export const Adornment = Template.bind({});
+Adornment.args = {
+  label: "Cargo weight",
+  endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+};
+
+// Types
+
+export const Email = Template.bind({});
+Email.args = {
+  autoComplete: "work email",
+  label: "Company email",
+  type: "email",
+};
+
+export const Multiline = Template.bind({});
+Multiline.args = {
+  autoComplete: "shipping street-address",
+  label: "Permanent residence",
+  multiline: true,
+};
+
+export const Password = Template.bind({});
+Password.args = {
+  autoComplete: "current-password",
+  label: "Password",
+  type: "password",
+};
+
+export const Search = Template.bind({});
+Search.args = {
+  label: "Search",
+  placeholder: "Search planets",
+  type: "search",
+};
+
+export const Tel = Template.bind({});
+Tel.args = {
+  autoComplete: "mobile tel",
+  label: "Phone number",
+  startAdornment: <InputAdornment position="start">+1</InputAdornment>,
+  type: "tel",
+};
