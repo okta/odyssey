@@ -10,11 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-export { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-export type {
-  DatePickerProps,
-  LocalizationProviderProps,
-} from "@mui/x-date-pickers";
+import type {
+  ComponentsProps,
+  ComponentsOverrides,
+  ComponentsVariants,
+  Theme,
+} from "@mui/material/styles";
 
-export * from "./theme";
+declare module "@mui/material/styles" {
+  interface Components {
+    MuiPickersDay?: {
+      defaultProps?: ComponentsProps["MuiStepContent"];
+      styleOverrides?: ComponentsOverrides<Theme>["MuiStepContent"];
+      variants?: ComponentsVariants["MuiStepContent"];
+    };
+    PrivatePickersYear?: {
+      defaultProps?: ComponentsProps["MuiStepContent"];
+      styleOverrides?: ComponentsOverrides<Theme>["MuiStepContent"];
+      variants?: ComponentsVariants["MuiStepContent"];
+    };
+  }
+}

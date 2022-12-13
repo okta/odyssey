@@ -10,11 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-export { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-export type {
-  DatePickerProps,
-  LocalizationProviderProps,
-} from "@mui/x-date-pickers";
+import type { ThemeOptions } from "@mui/material/styles";
 
-export * from "./theme";
+import { datePickerTheme } from "./DatePicker/datePickerTheme";
+
+export const components: ThemeOptions["components"] = {
+  ...datePickerTheme,
+};
