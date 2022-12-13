@@ -22,7 +22,7 @@ import {
 import CustomThemeMdx from "./CustomTheme.mdx";
 
 export default {
-  title: `Labs Components/Custom Theme`,
+  title: `Customization/components`,
   component: Button,
   parameters: {
     docs: {
