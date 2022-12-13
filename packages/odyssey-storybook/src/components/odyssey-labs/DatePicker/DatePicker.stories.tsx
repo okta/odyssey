@@ -22,9 +22,9 @@ import {
   DatePicker,
   DatePickerProps,
   LocalizationProvider,
+  labsTheme,
 } from "@okta/odyssey-react-labs";
 
-import { labsTheme } from "../../../../../odyssey-react-labs/src";
 import DatePickerMdx from "./DatePicker.mdx";
 
 export default {
