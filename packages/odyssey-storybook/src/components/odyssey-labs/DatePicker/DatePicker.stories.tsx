@@ -12,15 +12,19 @@
 
 import React from "react";
 import type { Story } from "@storybook/react";
-import { InputBase, InputBaseProps } from "@okta/odyssey-react-mui";
+import {
+  InputBase,
+  InputBaseProps,
+  OdysseyThemeProvider,
+} from "@okta/odyssey-react-mui";
 import {
   AdapterDateFns,
   DatePicker,
   DatePickerProps,
   LocalizationProvider,
 } from "@okta/odyssey-react-labs";
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
+import { labsTheme } from "../../../../../odyssey-react-labs/src";
 import DatePickerMdx from "./DatePicker.mdx";
 
 export default {
@@ -61,11 +65,10 @@ export default {
       defaultValue: null,
     },
   },
-  decorators: [MuiThemeDecorator],
 };
 
 const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
-  const [value, setValue] = React.useState<unknown | null>(null);
+  const [value, setValue] = React.useState<unknown>(Date.now());
   const datePickerProps = {
     ...props,
     value,
@@ -73,9 +76,11 @@ const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DatePicker {...datePickerProps} />
-    </LocalizationProvider>
+    <OdysseyThemeProvider customTheme={labsTheme}>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <DatePicker {...datePickerProps} />
+      </LocalizationProvider>
+    </OdysseyThemeProvider>
   );
 };
 
