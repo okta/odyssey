@@ -84,6 +84,18 @@ const YourAppRoot = ({ children }) => (
 );
 ```
 
+Add your own theme to MUI (override Odyssey components):
+
+```jsx
+import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
+
+import { myMaterialUiTheme } from "./myMaterialUiTheme";
+
+const YourAppRoot = ({ children }) => (
+  <OdysseyThemeProvider theme={myMaterialUiTheme}>{children}<OdysseyThemeProvider>
+);
+```
+
 ### Upgrade Piecemeal
 
 It’s possible to have 2 versions of Odyssey running at the same time, so when adding MUI, you can do it piecemeal.
