@@ -11,8 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import { InputAdornment } from "@okta/odyssey-react-mui";
-import { TextInput } from "@okta/odyssey-react-mui/src/components";
+import { TextInput, InputAdornment } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
