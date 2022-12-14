@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.17.1](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.1) (2022-12-09)
+
+### Features
+
+- added Emotion CacheProvider as part of ThemeProvider ([4c00a59](https://github.com/okta/odyssey/commit/4c00a591f8e1c237eec74758d4d8a13fd7a5499a))
+
+### Bug Fixes
+
+- split OdysseyThemeProvider and OdysseyCacheProvider ([16a6ce3](https://github.com/okta/odyssey/commit/16a6ce3672a634e3450545ffe8c41a70db1b7fb3))
+
 ### [0.17.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.0) (2022-11-10)
 
 ### Features
