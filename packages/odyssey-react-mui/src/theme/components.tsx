@@ -142,9 +142,13 @@ export const components: ThemeOptions["components"] = {
   },
   MuiBackdrop: {
     styleOverrides: {
-      root: {
-        //backgroundColor: "rgba(29,29,33,0.75)",
-      },
+      root: ({ ownerState }) => ({
+        backgroundColor: "rgba(29,29,33,0.75)",
+
+        ...(ownerState.invisible === true && {
+          backgroundColor: "transparent",
+        }),
+      }),
     },
   },
   MuiButton: {
