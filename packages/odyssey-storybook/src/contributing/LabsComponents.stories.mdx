@@ -13,7 +13,7 @@ Getting components added to Odyssey requires a few steps to be completed first:
 1. Get approval from Odyssey design to see if that component even belongs in Odyssey.
 2. The component should be generic enough to allow reuse by all teams at Okta.
 3. Re-export or wrap your custom component, and provide Storybook documentation.
-4. If necessary, create a custom `ThemeProvider` specific to your component.
+4. If necessary, create a custom `theme` specific to your component.
 
 ## Approval
 
@@ -31,10 +31,10 @@ All components in Labs need Storybook documentation. While it may seem redundant
 
 When we need to wrap one or more components documentation is even more crucial to understanding how this is supposed to work for all engineers at Okta. Be as detailed as you can to make it as easy for anyone to understand.
 
-## Custom `ThemeProvider`s
+## Custom `theme`s
 
-Why do we have a custom `ThemeProvider` for each Labs component?
+Why do we have a custom `theme` for each Labs component?
 
-That's because each component needs to be custom-themed. Sometimes, components will have all the right themeing straight out of Odyssey, but other times, we need to customize those styles.
+That's because each component needs to be custom-themed. Sometimes, components will have all the right theming straight out of Odyssey, but other times, we need to customize those styles.
 
-Rather than building in the component-specific `ThemeProvider` into a wrapped version of the component itself, we're exporting the `ThemeProvider` component separately to allow its removal when customized styles are necessary. This provides a bit of boilerplate for each labs component but ensures consumers aren't locked-in to the theming set in labs.
+We have the `OdysseyThemeProvider`, which takes in custom theme for labs component.
