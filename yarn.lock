@@ -6396,7 +6396,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-design-tokens@*, @okta/odyssey-design-tokens@^0.17.0, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
+"@okta/odyssey-design-tokens@*, @okta/odyssey-design-tokens@^0.17.1, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens"
   dependencies:
@@ -6430,7 +6430,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-lifecycle@*, @okta/odyssey-lifecycle@^0.17.0, @okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle":
+"@okta/odyssey-lifecycle@*, @okta/odyssey-lifecycle@^0.17.1, @okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle"
   bin:
@@ -6493,7 +6493,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-react-mui@*, @okta/odyssey-react-mui@^0.17.0, @okta/odyssey-react-mui@workspace:packages/odyssey-react-mui":
+"@okta/odyssey-react-mui@*, @okta/odyssey-react-mui@^0.17.1, @okta/odyssey-react-mui@workspace:packages/odyssey-react-mui":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-react-mui@workspace:packages/odyssey-react-mui"
   dependencies:
@@ -6606,7 +6606,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-typescript@*, @okta/odyssey-typescript@^0.17.0, @okta/odyssey-typescript@workspace:packages/odyssey-typescript":
+"@okta/odyssey-typescript@*, @okta/odyssey-typescript@^0.17.1, @okta/odyssey-typescript@workspace:packages/odyssey-typescript":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-typescript@workspace:packages/odyssey-typescript"
   peerDependencies:
