@@ -139,7 +139,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     const labelId = label && id ? `${id}-label` : undefined;
 
     return (
-      <FormControl variant="filled" disabled={disabled} error={!!error}>
+      <FormControl disabled={disabled} error={!!error}>
         <InputLabel htmlFor={id} id={labelId}>
           {label}
           {!required && (
@@ -166,7 +166,16 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             )
           }
           id={id}
-          inputProps={{ "aria-describedby": `${hintId} ${errorId}` }}
+          inputProps={
+            hintId || errorId
+              ? {
+                  "aria-describedby":
+                    hintId && errorId
+                      ? `${hintId} ${errorId}`
+                      : hintId || errorId,
+                }
+              : undefined
+          }
           multiline={multiline}
           onChange={onChange}
           onFocus={onFocus}
