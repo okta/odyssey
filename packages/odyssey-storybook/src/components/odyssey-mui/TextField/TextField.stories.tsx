@@ -11,26 +11,15 @@
  */
 
 import { Story } from "@storybook/react";
-import {
-  EyeIcon,
-  FormControl,
-  FormHelperText,
-  IconButton,
-  InputAdornment,
-  InputBase,
-  InputLabel,
-  SearchIcon,
-  Tooltip,
-  Typography,
-  visuallyHidden,
-} from "@okta/odyssey-react-mui";
+import { TextField, InputAdornment } from "@okta/odyssey-react-mui";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TextFieldMdx from "./TextField.mdx";
 
 export default {
   title: `MUI Components/Forms/Text Field`,
-  component: InputBase,
+  component: TextField,
   parameters: {
     docs: {
       page: TextFieldMdx,
@@ -47,19 +36,19 @@ export default {
     },
     endAdornment: {
       control: "text",
-      defaultValue: null,
+      defaultValue: undefined,
     },
     error: {
       control: "text",
-      defaultValue: null,
+      defaultValue: undefined,
     },
     hint: {
       control: "text",
-      defaultValue: null,
+      defaultValue: undefined,
     },
-    invalid: {
-      control: "boolean",
-      defaultValue: false,
+    id: {
+      control: "text",
+      defaultValue: undefined,
     },
     label: {
       control: "text",
@@ -69,13 +58,21 @@ export default {
       control: "boolean",
       defaultValue: false,
     },
+    onChange: {
+      control: "function",
+      defaultValue: undefined,
+    },
+    onFocus: {
+      control: "function",
+      defaultValue: undefined,
+    },
     optionalLabel: {
       control: "text",
       defaultValue: "Optional",
     },
     placeholder: {
       control: "text",
-      defaultValue: null,
+      defaultValue: undefined,
     },
     readOnly: {
       control: "boolean",
@@ -87,7 +84,7 @@ export default {
     },
     startAdornment: {
       control: "text",
-      defaultValue: null,
+      defaultValue: undefined,
     },
     type: {
       control: "select",
@@ -96,63 +93,14 @@ export default {
     },
     value: {
       control: "text",
-      defaultValue: null,
+      defaultValue: undefined,
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
 const Template: Story = (args) => {
-  return (
-    <FormControl disabled={args.disabled} error={args.invalid}>
-      <InputLabel id="demo-text-field-label">
-        {args.label}
-        {!args.required && (
-          <Typography variant="subtitle1">{args.optionalLabel}</Typography>
-        )}
-      </InputLabel>
-      {args.hint && (
-        <FormHelperText id="textfield-hint">{args.hint}</FormHelperText>
-      )}
-      <InputBase
-        inputProps={{ "aria-describedby": "textfield-hint textfield-error" }}
-        autoComplete={args.autoComplete}
-        endAdornment={
-          args.type === "password" ? (
-            <InputAdornment position="end">
-              <Tooltip title="Toggle password visibility">
-                <IconButton aria-label="toggle password visibility" edge="end">
-                  <EyeIcon />
-                </IconButton>
-              </Tooltip>
-            </InputAdornment>
-          ) : (
-            args.endAdornment
-          )
-        }
-        id="demo-text-field"
-        multiline={args.multiline}
-        placeholder={args.type === "search" ? args.placeholder : null}
-        readOnly={args.readOnly}
-        startAdornment={
-          args.type === "search" ? (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ) : (
-            args.startAdornment
-          )
-        }
-        type={args.type}
-        value={args.value}
-      />
-      {args.error && (
-        <FormHelperText id="textfield-error" error>
-          <span style={visuallyHidden}>Error:</span> {args.error}
-        </FormHelperText>
-      )}
-    </FormControl>
-  );
+  return <TextField {...args} />;
 };
 
 // States
@@ -178,7 +126,6 @@ ReadOnly.args = {
 
 export const Invalid = Template.bind({});
 Invalid.args = {
-  invalid: true,
   error: "This field is required.",
 };
 

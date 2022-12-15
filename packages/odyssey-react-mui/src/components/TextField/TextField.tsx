@@ -26,7 +26,7 @@ import {
   useUniqueId,
 } from "../..";
 
-export interface TextInputProps {
+export interface TextFieldProps {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
@@ -99,7 +99,7 @@ export interface TextInputProps {
   value?: unknown;
 }
 
-export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
     const {
       autoComplete,
