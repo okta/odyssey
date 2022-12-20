@@ -6493,7 +6493,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-react-mui@^0.17.1, @okta/odyssey-react-mui@workspace:packages/odyssey-react-mui":
+"@okta/odyssey-react-mui@^0.17.1, @okta/odyssey-react-mui@workspace:*, @okta/odyssey-react-mui@workspace:packages/odyssey-react-mui":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-react-mui@workspace:packages/odyssey-react-mui"
   dependencies:
@@ -6551,6 +6551,7 @@ __metadata:
     "@okta/odyssey-design-tokens": "workspace:*"
     "@okta/odyssey-lifecycle": "workspace:*"
     "@okta/odyssey-react-labs": "workspace:*"
+    "@okta/odyssey-react-mui": "workspace:*"
     "@okta/odyssey-typescript": "workspace:*"
     "@pxblue/storybook-rtl-addon": ^1.0.1
     "@storybook/addon-a11y": ^6.5.13
