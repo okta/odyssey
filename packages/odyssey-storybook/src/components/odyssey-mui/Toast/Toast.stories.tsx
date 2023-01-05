@@ -16,6 +16,8 @@ import {
   Alert,
   AlertTitle,
   Button,
+  CloseIcon,
+  Link,
   Snackbar,
   Stack,
 } from "@okta/odyssey-react-mui";
@@ -32,10 +34,18 @@ export default {
     },
   },
   argTypes: {
+    action: {
+      control: "text",
+      default: null,
+    },
     content: {
       control: "text",
       defaultValue:
         "The mission to Sagitarius A has been scheduled for January 7.",
+    },
+    isDismissible: {
+      control: "boolean",
+      defaultValue: null,
     },
     role: {
       control: "radio",
@@ -46,10 +56,6 @@ export default {
       control: "radio",
       options: ["error", "info", "success", "warning"],
       defaultValue: "info",
-    },
-    title: {
-      control: "string",
-      defaultValue: "Moonbase Alpha-6",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -68,13 +74,34 @@ const DefaultTemplate: Story = (args) => {
   return (
     <>
       <Button variant="primary" onClick={handleClick}>
-        Open {args.severity} snackbar
+        Open {args.severity} toast
       </Button>
       <Stack spacing={2} sx={{ width: "100%" }}>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert severity={args.severity} variant="toast">
-            {args.title && <AlertTitle>{args.title}</AlertTitle>}
-            {args.content}
+        <Snackbar
+          open={open}
+          autoHideDuration={args.isDismissible === true ? undefined : 6000}
+          onClose={handleClose}
+        >
+          <Alert
+            severity={args.severity}
+            variant="toast"
+            action={
+              args.isDismissible && (
+                <Button
+                  aria-label="close"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  variant="floating"
+                  size="s"
+                >
+                  <CloseIcon fontSize="inherit" />
+                </Button>
+              )
+            }
+          >
+            <AlertTitle>{args.content}</AlertTitle>
+            {args.action && args.action}
           </Alert>
         </Snackbar>
       </Stack>
@@ -84,29 +111,37 @@ const DefaultTemplate: Story = (args) => {
 
 const StaticTemplate: Story = (args) => {
   return (
-    <Alert severity={args.severity} variant="toast">
-      {args.title && <AlertTitle>{args.title}</AlertTitle>}
-      {args.content}
+    <Alert
+      severity={args.severity}
+      variant="toast"
+      action={
+        args.isDismissible && (
+          <Button
+            aria-label="close"
+            variant="floating"
+            size="s"
+            startIcon={<CloseIcon />}
+          ></Button>
+        )
+      }
+    >
+      <AlertTitle>{args.content}</AlertTitle>
+      {args.action && args.action}
     </Alert>
   );
 };
 
 export const Info = DefaultTemplate.bind({});
-Info.args = {
-  title: null,
-};
+Info.args = {};
 
 export const InfoStatic = StaticTemplate.bind({});
-InfoStatic.args = {
-  title: null,
-};
+InfoStatic.args = {};
 
 export const Error = DefaultTemplate.bind({});
 Error.args = {
   content: "Hangar 18 has been compromised.",
   role: "alert",
   severity: "error",
-  title: "Security breach",
 };
 
 export const ErrorStatic = StaticTemplate.bind({});
@@ -114,7 +149,6 @@ ErrorStatic.args = {
   content: "Hangar 18 has been compromised.",
   role: "alert",
   severity: "error",
-  title: "Security breach",
 };
 
 export const Warning = DefaultTemplate.bind({});
@@ -122,7 +156,6 @@ Warning.args = {
   content: "Severe solar winds detected. Local system flights may be delayed.",
   role: "status",
   severity: "warning",
-  title: "Safety warning",
 };
 
 export const WarningStatic = StaticTemplate.bind({});
@@ -130,7 +163,6 @@ WarningStatic.args = {
   content: "Severe solar winds detected. Local system flights may be delayed.",
   role: "status",
   severity: "warning",
-  title: "Safety warning",
 };
 
 export const Success = DefaultTemplate.bind({});
@@ -138,7 +170,6 @@ Success.args = {
   content: "Docking completed successfully.",
   role: "status",
   severity: "success",
-  title: null,
 };
 
 export const SuccessStatic = StaticTemplate.bind({});
@@ -146,5 +177,24 @@ SuccessStatic.args = {
   content: "Docking completed successfully.",
   role: "status",
   severity: "success",
-  title: null,
+};
+
+export const Dismissible = DefaultTemplate.bind({});
+Dismissible.args = {
+  action: (
+    <Link href="#anchor" variant="monochrome">
+      View report
+    </Link>
+  ),
+  isDismissible: true,
+};
+
+export const DismissibleStatic = StaticTemplate.bind({});
+DismissibleStatic.args = {
+  action: (
+    <Link href="#anchor" variant="monochrome">
+      View report
+    </Link>
+  ),
+  isDismissible: true,
 };
