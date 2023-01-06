@@ -73,7 +73,7 @@ export const components: ThemeOptions["components"] = {
           borderWidth: theme.mixins.borderWidth,
           borderRadius: theme.mixins.borderRadius,
           position: "relative",
-          alignItems: "start",
+          alignItems: "center",
         }),
       }),
       action: ({ ownerState, theme }) => ({
@@ -86,13 +86,6 @@ export const components: ThemeOptions["components"] = {
           transform: "translateY(-50%)",
         }),
         ...(ownerState.variant === "toast" && {
-          position: "absolute",
-          top: `calc(${theme.spacing(4)} - ${theme.spacing(1)} + ${
-            theme.mixins.borderWidth
-          })`,
-          right: `calc(${theme.spacing(4)} - ${theme.spacing(1)} + ${
-            theme.mixins.borderWidth
-          })`,
           padding: 0,
           marginLeft: 0,
           marginRight: 0,
@@ -137,6 +130,10 @@ export const components: ThemeOptions["components"] = {
         lineHeight: theme.typography.h6.lineHeight,
         fontSize: theme.typography.h6.fontSize,
         fontWeight: theme.typography.fontWeightBold,
+
+        "&:last-child": {
+          marginBlockEnd: 0,
+        },
       }),
     },
   },
@@ -239,7 +236,7 @@ export const components: ThemeOptions["components"] = {
       {
         props: { variant: "floating" },
         style: ({ theme }) => ({
-          backgroundColor: theme.palette.common.white,
+          backgroundColor: "transparent",
           color: theme.palette.text.primary,
           borderColor: "transparent",
 
@@ -265,7 +262,7 @@ export const components: ThemeOptions["components"] = {
         props: { size: "s" },
         style: ({ theme }) => ({
           paddingBlock: `calc(${theme.spacing(2)} - 1px)`,
-          paddingInline: `calc(${theme.spacing(3)} - 1px)`,
+          paddingInline: `calc(${theme.spacing(2)} - 1px)`,
           fontSize: "1rem",
         }),
       },
@@ -346,6 +343,10 @@ export const components: ThemeOptions["components"] = {
         display: "inline-flex",
         margin: 0,
         marginInlineEnd: theme.spacing(2),
+
+        "&:only-child": {
+          margin: 0,
+        },
       }),
     },
   },
