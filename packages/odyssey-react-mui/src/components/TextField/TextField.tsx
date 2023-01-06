@@ -14,8 +14,8 @@ import {
   ChangeEventHandler,
   FocusEventHandler,
   forwardRef,
-  MouseEvent,
   ReactNode,
+  useCallback,
   useState,
 } from "react";
 import {
@@ -129,14 +129,12 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     } = props;
 
     const [inputType, setInputType] = useState(inType);
-    const handleClickShowPassword = () => {
+
+    const togglePasswordVisibility = useCallback(() => {
       setInputType((currentType) =>
         currentType === "password" ? "text" : "password"
       );
-    };
-    const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-    };
+    }, []);
 
     const id = useUniqueId(idOverride);
     const hintId = hintText ? `${id}-hint` : undefined;
@@ -160,8 +158,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                 <IconButton
                   aria-label="toggle password visibility"
                   edge="end"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
+                  onClick={togglePasswordVisibility}
                 >
                   {inputType === "password" ? <EyeIcon /> : <EyeOffIcon />}
                 </IconButton>

@@ -13,17 +13,18 @@
 import type { Story } from "@storybook/react";
 import {
   Button,
-  InputBase,
   FormControlLabel,
-  RadioGroup,
-  Radio,
   OdysseyThemeProvider,
+  Radio,
+  RadioGroup,
+  TextField,
+  ThemeOptions,
 } from "@okta/odyssey-react-mui";
+
 import CustomThemeMdx from "./CustomTheme.mdx";
 
 export default {
-  title: `Customization/components`,
-  component: Button,
+  title: "Customization/Components",
   parameters: {
     docs: {
       page: CustomThemeMdx,
@@ -31,70 +32,60 @@ export default {
   },
 };
 
-const Template: Story = (props) => {
-  const customTheme = {
-    palette: {
-      primary: {
-        main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE.
-      },
+const customTheme: ThemeOptions = {
+  palette: {
+    primary: {
+      main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
     },
-  };
-
-  return (
-    <OdysseyThemeProvider customTheme={customTheme}>
-      <div>
-        {props.button && <Button variant="primary">Primary</Button>}
-        {props.input && (
-          <InputBase
-            autoComplete="name"
-            endAdornment={null}
-            id="demo-text-field"
-            inputProps={{
-              "aria-describedby": "textfield-hint textfield-error",
-            }}
-            startAdornment={null}
-            type="text"
-          />
-        )}
-        {props.radio && (
-          <RadioGroup
-            defaultValue="Lightspeed"
-            name="radio-buttons-group"
-            aria-describedby="radio-hint radio-error"
-          >
-            <FormControlLabel
-              value="Lightspeed"
-              control={<Radio />}
-              label="Lightspeed"
-            />
-            <FormControlLabel
-              value="Warp speed"
-              control={<Radio />}
-              label="Warp speed"
-            />
-            <FormControlLabel
-              value="Ludicrous speed"
-              control={<Radio />}
-              label="Ludicrous speed"
-            />
-          </RadioGroup>
-        )}
-      </div>
-    </OdysseyThemeProvider>
-  );
+  },
 };
 
-export const ButtonPrimary = Template.bind({});
-ButtonPrimary.args = {
-  button: true,
-};
+export const ButtonStory: Story = () => (
+  <OdysseyThemeProvider customTheme={customTheme}>
+    <div>
+      <Button variant="primary">Primary</Button>
+    </div>
+  </OdysseyThemeProvider>
+);
 
-export const InputDefault = Template.bind({});
-InputDefault.args = {
-  input: true,
-};
+ButtonStory.name = "Button";
 
-export const RadioDefault = Template.bind({});
-RadioDefault.args = {
-  radio: true,
-};
+export const TextFieldStory: Story = () => (
+  <OdysseyThemeProvider customTheme={customTheme}>
+    <div>
+      <TextField autoCompleteType="name" type="text" />
+    </div>
+  </OdysseyThemeProvider>
+);
+
+TextFieldStory.name = "TextField";
+
+export const RadioGroupStory: Story = () => (
+  <OdysseyThemeProvider customTheme={customTheme}>
+    <div>
+      <RadioGroup
+        defaultValue="Lightspeed"
+        name="radio-buttons-group"
+        aria-describedby="radio-hint radio-error"
+      >
+        <FormControlLabel
+          value="Lightspeed"
+          control={<Radio />}
+          label="Lightspeed"
+        />
+        <FormControlLabel
+          value="Warp speed"
+          control={<Radio />}
+          label="Warp speed"
+        />
+        <FormControlLabel
+          value="Ludicrous speed"
+          control={<Radio />}
+          label="Ludicrous speed"
+        />
+      </RadioGroup>
+    </div>
+  </OdysseyThemeProvider>
+);
+
+RadioGroupStory.name = "RadioGroup";
