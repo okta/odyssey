@@ -73,7 +73,7 @@ export const components: ThemeOptions["components"] = {
           borderWidth: theme.mixins.borderWidth,
           borderRadius: theme.mixins.borderRadius,
           position: "relative",
-          alignItems: "start",
+          alignItems: "center",
         }),
       }),
       action: ({ ownerState, theme }) => ({
@@ -86,13 +86,6 @@ export const components: ThemeOptions["components"] = {
           transform: "translateY(-50%)",
         }),
         ...(ownerState.variant === "toast" && {
-          position: "absolute",
-          top: `calc(${theme.spacing(4)} - ${theme.spacing(1)} + ${
-            theme.mixins.borderWidth
-          })`,
-          right: `calc(${theme.spacing(4)} - ${theme.spacing(1)} + ${
-            theme.mixins.borderWidth
-          })`,
           padding: 0,
           marginLeft: 0,
           marginRight: 0,
@@ -137,14 +130,22 @@ export const components: ThemeOptions["components"] = {
         lineHeight: theme.typography.h6.lineHeight,
         fontSize: theme.typography.h6.fontSize,
         fontWeight: theme.typography.fontWeightBold,
+
+        "&:last-child": {
+          marginBlockEnd: 0,
+        },
       }),
     },
   },
   MuiBackdrop: {
     styleOverrides: {
-      root: {
-        //backgroundColor: "rgba(29,29,33,0.75)",
-      },
+      root: ({ ownerState }) => ({
+        backgroundColor: "rgba(29,29,33,0.75)",
+
+        ...(ownerState.invisible === true && {
+          backgroundColor: "transparent",
+        }),
+      }),
     },
   },
   MuiButton: {
@@ -235,7 +236,7 @@ export const components: ThemeOptions["components"] = {
       {
         props: { variant: "floating" },
         style: ({ theme }) => ({
-          backgroundColor: theme.palette.common.white,
+          backgroundColor: "transparent",
           color: theme.palette.text.primary,
           borderColor: "transparent",
 
@@ -261,7 +262,7 @@ export const components: ThemeOptions["components"] = {
         props: { size: "s" },
         style: ({ theme }) => ({
           paddingBlock: `calc(${theme.spacing(2)} - 1px)`,
-          paddingInline: `calc(${theme.spacing(3)} - 1px)`,
+          paddingInline: `calc(${theme.spacing(2)} - 1px)`,
           fontSize: "1rem",
         }),
       },
@@ -342,6 +343,10 @@ export const components: ThemeOptions["components"] = {
         display: "inline-flex",
         margin: 0,
         marginInlineEnd: theme.spacing(2),
+
+        "&:only-child": {
+          margin: 0,
+        },
       }),
     },
   },
@@ -886,6 +891,18 @@ export const components: ThemeOptions["components"] = {
         }),
       },
     ],
+  },
+  MuiListSubheader: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        paddingBlock: theme.spacing(2),
+        paddingInline: theme.spacing(4),
+        fontSize: theme.typography.caption.fontSize,
+        lineHeight: theme.typography.caption.lineHeight,
+        color: theme.palette.text.secondary,
+        textTransform: "uppercase",
+      }),
+    },
   },
   MuiMenuItem: {
     styleOverrides: {
