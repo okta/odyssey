@@ -20,6 +20,7 @@ import {
   FormHelperText,
   InputLabel,
   ListItemText,
+  ListSubheader,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -80,6 +81,14 @@ const destinations = [
   "Ganymede",
 ];
 
+const exodestinations = [
+  "Auberon",
+  "Al-Halub",
+  "Freehold",
+  "Laconia",
+  "New Terra",
+];
+
 const Template: Story = (args) => {
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
@@ -95,6 +104,42 @@ const Template: Story = (args) => {
         aria-describedby="select-hint select-error"
       >
         {destinations.map((destination) => (
+          <MenuItem key={destination} value={destination}>
+            {destination}
+          </MenuItem>
+        ))}
+      </Select>
+      {args.error && (
+        <FormHelperText id="select-error" error>
+          <span style={visuallyHidden}>Error:</span> {args.error}
+        </FormHelperText>
+      )}
+    </FormControl>
+  );
+};
+
+const GroupedTemplate: Story = (args) => {
+  return (
+    <FormControl disabled={args.disabled} error={args.invalid}>
+      <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
+      {args.hint && (
+        <FormHelperText id="select-hint">{args.hint}</FormHelperText>
+      )}
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        label={args.label}
+        native={args.native}
+        aria-describedby="select-hint select-error"
+      >
+        <ListSubheader>Sol System</ListSubheader>
+        {destinations.map((destination) => (
+          <MenuItem key={destination} value={destination}>
+            {destination}
+          </MenuItem>
+        ))}
+        <ListSubheader>Extrasolar</ListSubheader>
+        {exodestinations.map((destination) => (
           <MenuItem key={destination} value={destination}>
             {destination}
           </MenuItem>
@@ -205,6 +250,9 @@ DefaultInvalid.args = {
   invalid: true,
   error: "This field is required.",
 };
+
+export const Grouped = GroupedTemplate.bind({});
+Grouped.args = {};
 
 export const Multi = MultiTemplate.bind({});
 Multi.args = {
