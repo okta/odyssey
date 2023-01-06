@@ -21,8 +21,8 @@ import {
   AdapterDateFns,
   DatePicker,
   DatePickerProps,
+  datePickerTheme,
   LocalizationProvider,
-  labsTheme,
 } from "@okta/odyssey-react-labs";
 
 import DatePickerMdx from "./DatePicker.mdx";
@@ -76,7 +76,7 @@ const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
   };
 
   return (
-    <OdysseyThemeProvider customTheme={labsTheme}>
+    <OdysseyThemeProvider customTheme={datePickerTheme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker {...datePickerProps} />
       </LocalizationProvider>
