@@ -892,6 +892,18 @@ export const components: ThemeOptions["components"] = {
       },
     ],
   },
+  MuiListSubheader: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        paddingBlock: theme.spacing(2),
+        paddingInline: theme.spacing(4),
+        fontSize: theme.typography.caption.fontSize,
+        lineHeight: theme.typography.caption.lineHeight,
+        color: theme.palette.text.secondary,
+        textTransform: "uppercase",
+      }),
+    },
+  },
   MuiMenuItem: {
     styleOverrides: {
       root: ({ theme }) => ({
