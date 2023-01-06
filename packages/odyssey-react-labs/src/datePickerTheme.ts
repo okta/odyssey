@@ -12,29 +12,31 @@
 
 import type { ThemeOptions } from "@mui/material/styles";
 
-export const datePickerTheme: ThemeOptions["components"] = {
-  MuiPickersDay: {
-    styleOverrides: {
-      root: ({ theme }) => ({
-        "&:focus, &:hover": {
-          backgroundColor: theme.palette.primary.main,
-        },
-        " &.Mui-selected:focus, &.Mui-selected:hover": {
-          backgroundColor: theme.palette.primary.main,
-        },
-      }),
+export const datePickerTheme: ThemeOptions = {
+  components: {
+    MuiPickersDay: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "&:focus, &:hover": {
+            backgroundColor: theme.palette.primary.main,
+          },
+          " &.Mui-selected:focus, &.Mui-selected:hover": {
+            backgroundColor: theme.palette.primary.main,
+          },
+        }),
+      },
     },
-  },
-  PrivatePickersYear: {
-    styleOverrides: {
-      root: ({ theme }) => ({
-        "& > button:focus, & > button:hover": {
-          backgroundColor: theme.palette.primary.main,
-        },
-        " & > button.Mui-selected:focus, & > button.Mui-selected:hover": {
-          backgroundColor: theme.palette.primary.main,
-        },
-      }),
+    PrivatePickersYear: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "& > button:focus, & > button:hover": {
+            backgroundColor: theme.palette.primary.main,
+          },
+          " & > button.Mui-selected:focus, & > button.Mui-selected:hover": {
+            backgroundColor: theme.palette.primary.main,
+          },
+        }),
+      },
     },
   },
 };
