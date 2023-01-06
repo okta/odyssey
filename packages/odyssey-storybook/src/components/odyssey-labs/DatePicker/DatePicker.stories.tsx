@@ -10,15 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import React from "react";
 import type { Story } from "@storybook/react";
-import { InputBase, InputBaseProps } from "@okta/odyssey-react-mui";
+import {
+  InputBase,
+  InputBaseProps,
+  OdysseyThemeProvider,
+} from "@okta/odyssey-react-mui";
 import {
   AdapterDateFns,
   DatePicker,
   DatePickerProps,
+  datePickerTheme,
   LocalizationProvider,
 } from "@okta/odyssey-react-labs";
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 import DatePickerMdx from "./DatePicker.mdx";
 
@@ -60,13 +65,23 @@ export default {
       defaultValue: null,
     },
   },
-  decorators: [MuiThemeDecorator],
 };
 
-const Template: Story<DatePickerProps<unknown, unknown>> = (props) => (
-  <LocalizationProvider dateAdapter={AdapterDateFns}>
-    <DatePicker {...props} />
-  </LocalizationProvider>
-);
+const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
+  const [value, setValue] = React.useState<unknown>(Date.now());
+  const datePickerProps = {
+    ...props,
+    value,
+    onChange: (newValue: unknown) => setValue(newValue),
+  };
+
+  return (
+    <OdysseyThemeProvider customTheme={datePickerTheme}>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <DatePicker {...datePickerProps} />
+      </LocalizationProvider>
+    </OdysseyThemeProvider>
+  );
+};
 
 export const DatePickerPrimary = Template.bind({});
