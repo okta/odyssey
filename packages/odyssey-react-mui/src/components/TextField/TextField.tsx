@@ -124,11 +124,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       isReadOnly,
       isRequired = true,
       startAdornment,
-      type: inType = "text",
+      type: inputType = "text",
       value,
     } = props;
 
-    const [inputType, setInputType] = useState(inType);
+    const [inputType, setInputType] = useState(inputType);
 
     const togglePasswordVisibility = useCallback(() => {
       setInputType((currentType) =>
@@ -153,7 +153,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         <InputBase
           autoComplete={autoCompleteType}
           endAdornment={
-            inType === "password" ? (
+            inputType === "password" ? (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
