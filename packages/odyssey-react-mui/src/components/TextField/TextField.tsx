@@ -10,7 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { forwardRef, useState } from "react";
+import {
+  ChangeEventHandler,
+  FocusEventHandler,
+  forwardRef,
+  MouseEvent,
+  ReactNode,
+  useState,
+} from "react";
 import {
   EyeIcon,
   EyeOffIcon,
@@ -32,23 +39,23 @@ export interface TextFieldProps {
    * The name can be confusing, as it's more like an autofill.
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
-  autoComplete?: string;
+  autoCompleteType?: string;
   /**
    * If `true`, the component is disabled.
    */
-  disabled?: boolean;
+  isDisabled?: boolean;
   /**
    * End `InputAdornment` for this component.
    */
-  endAdornment?: React.ReactNode;
+  endAdornment?: ReactNode;
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
-  error?: string;
+  errorMessage?: string;
   /**
    * The helper text content.
    */
-  hint?: string;
+  hintText?: string;
   /**
    * The id of the `input` element.
    */
@@ -56,39 +63,39 @@ export interface TextFieldProps {
   /**
    * The label for the `input` element.
    */
-  label?: string;
+  labelText?: string;
   /**
    * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
    */
-  multiline?: boolean;
+  isMultiline?: boolean;
   /**
    * Callback fired when the value is changed.
    */
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   /**
    * Callback fired when the `input` element get focus.
    */
-  onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
    * The label for the `input` element if the it's not optional
    */
-  optionalLabel?: string;
+  optionalLabelText?: string;
   /**
    * The short hint displayed in the `input` before the user enters a value.
    */
-  placeholder?: string;
+  placeholderText?: string;
   /**
    * It prevents the user from changing the value of the field
    */
-  readOnly?: boolean;
+  isReadOnly?: boolean;
   /**
    * If `true`, the `input` element is required.
    */
-  required?: boolean;
+  isRequired?: boolean;
   /**
    * Start `InputAdornment` for this component.
    */
-  startAdornment?: React.ReactNode;
+  startAdornment?: ReactNode;
   /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */
@@ -102,20 +109,20 @@ export interface TextFieldProps {
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (props, ref) => {
     const {
-      autoComplete,
-      disabled = false,
+      autoCompleteType,
+      isDisabled = false,
       endAdornment,
-      error,
-      hint,
+      errorMessage,
+      hintText,
       id: idOverride,
-      label,
-      multiline = false,
+      labelText,
+      isMultiline = false,
       onChange,
       onFocus,
-      optionalLabel,
-      placeholder,
-      readOnly,
-      required = true,
+      optionalLabelText,
+      placeholderText,
+      isReadOnly,
+      isRequired = true,
       startAdornment,
       type: inType = "text",
       value,
@@ -127,28 +134,26 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         currentType === "password" ? "text" : "password"
       );
     };
-    const handleMouseDownPassword = (
-      event: React.MouseEvent<HTMLButtonElement>
-    ) => {
+    const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
     };
 
     const id = useUniqueId(idOverride);
-    const hintId = hint && id ? `${id}-hint` : undefined;
-    const errorId = error && id ? `${id}-error` : undefined;
-    const labelId = label && id ? `${id}-label` : undefined;
+    const hintId = hintText ? `${id}-hint` : undefined;
+    const errorId = errorMessage ? `${id}-error` : undefined;
+    const labelId = labelText ? `${id}-label` : undefined;
 
     return (
-      <FormControl disabled={disabled} error={!!error}>
+      <FormControl disabled={isDisabled} error={Boolean(errorMessage)}>
         <InputLabel htmlFor={id} id={labelId}>
-          {label}
-          {!required && (
-            <Typography variant="subtitle1">{optionalLabel}</Typography>
+          {labelText}
+          {!isRequired && (
+            <Typography variant="subtitle1">{optionalLabelText}</Typography>
           )}
         </InputLabel>
-        {hint && <FormHelperText id={hintId}>{hint}</FormHelperText>}
+        {hintText && <FormHelperText id={hintId}>{hintText}</FormHelperText>}
         <InputBase
-          autoComplete={autoComplete}
+          autoComplete={autoCompleteType}
           endAdornment={
             inType === "password" ? (
               <InputAdornment position="end">
@@ -176,11 +181,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                 }
               : undefined
           }
-          multiline={multiline}
+          multiline={isMultiline}
           onChange={onChange}
           onFocus={onFocus}
-          placeholder={placeholder}
-          readOnly={readOnly}
+          placeholder={placeholderText}
+          readOnly={isReadOnly}
           ref={ref}
           startAdornment={
             inType === "search" ? (
@@ -194,11 +199,10 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           type={inputType}
           value={value}
         />
-        {error && (
-          <FormHelperText id={errorId} error>
-            {/* TODO - why Error here??? */}
+        {errorMessage && (
+          <FormHelperText error id={errorId}>
             <span style={visuallyHidden}>Error:</span>
-            {error}
+            {errorMessage}
           </FormHelperText>
         )}
       </FormControl>
