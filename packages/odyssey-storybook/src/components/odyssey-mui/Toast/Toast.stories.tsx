@@ -34,7 +34,7 @@ export default {
     },
   },
   argTypes: {
-    action: {
+    actionLink: {
       control: "text",
       default: null,
     },
@@ -64,23 +64,23 @@ export default {
 const DefaultTemplate: Story = (args) => {
   const [open, setOpen] = React.useState(false);
 
-  const handleClick = () => {
+  const openToast = React.useCallback(() => {
     setOpen(true);
-  };
-
-  const handleClose = () => {
+  }, []);
+  const closeToast = React.useCallback(() => {
     setOpen(false);
-  };
+  }, []);
+
   return (
     <>
-      <Button variant="primary" onClick={handleClick}>
-        Open {args.severity} toast
+      <Button variant="primary" onClick={openToast}>
+        Open {args.severity} snackbar Open {args.severity} toast
       </Button>
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar
           open={open}
           autoHideDuration={args.isDismissible === true ? undefined : 6000}
-          onClose={handleClose}
+          onClose={closeToast}
         >
           <Alert
             severity={args.severity}
@@ -89,9 +89,7 @@ const DefaultTemplate: Story = (args) => {
               args.isDismissible && (
                 <Button
                   aria-label="close"
-                  onClick={() => {
-                    setOpen(false);
-                  }}
+                  onClick={closeToast}
                   variant="floating"
                   size="s"
                 >
@@ -101,7 +99,7 @@ const DefaultTemplate: Story = (args) => {
             }
           >
             <AlertTitle>{args.content}</AlertTitle>
-            {args.action && args.action}
+            {args.actionLink && args.actionLink}
           </Alert>
         </Snackbar>
       </Stack>
@@ -126,7 +124,7 @@ const StaticTemplate: Story = (args) => {
       }
     >
       <AlertTitle>{args.content}</AlertTitle>
-      {args.action && args.action}
+      {args.actionLink && args.actionLink}
     </Alert>
   );
 };
@@ -181,7 +179,7 @@ SuccessStatic.args = {
 
 export const Dismissible = DefaultTemplate.bind({});
 Dismissible.args = {
-  action: (
+  actionLink: (
     <Link href="#anchor" variant="monochrome">
       View report
     </Link>
@@ -191,7 +189,7 @@ Dismissible.args = {
 
 export const DismissibleStatic = StaticTemplate.bind({});
 DismissibleStatic.args = {
-  action: (
+  actionLink: (
     <Link href="#anchor" variant="monochrome">
       View report
     </Link>
