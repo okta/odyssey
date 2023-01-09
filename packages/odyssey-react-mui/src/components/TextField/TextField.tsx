@@ -16,6 +16,8 @@ import {
   forwardRef,
   ReactNode,
   useCallback,
+  useEffect,
+  useMemo,
   useState,
 } from "react";
 import {
@@ -55,7 +57,7 @@ export interface TextFieldProps {
   /**
    * The helper text content.
    */
-  hintText?: string;
+  hint?: string;
   /**
    * The id of the `input` element.
    */
@@ -63,7 +65,7 @@ export interface TextFieldProps {
   /**
    * The label for the `input` element.
    */
-  labelText?: string;
+  label?: string;
   /**
    * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
    */
@@ -79,11 +81,11 @@ export interface TextFieldProps {
   /**
    * The label for the `input` element if the it's not optional
    */
-  optionalLabelText?: string;
+  optionalLabel?: string;
   /**
    * The short hint displayed in the `input` before the user enters a value.
    */
-  placeholderText?: string;
+  placeholder?: string;
   /**
    * It prevents the user from changing the value of the field
    */
@@ -99,7 +101,7 @@ export interface TextFieldProps {
   /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */
-  type?: "email" | "password" | "search" | "tel" | "text";
+  type?: string;
   /**
    * The value of the `input` element, required for a controlled component.
    */
@@ -113,22 +115,26 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       isDisabled = false,
       endAdornment,
       errorMessage,
-      hintText,
+      hint,
       id: idOverride,
-      labelText,
+      label,
       isMultiline = false,
       onChange,
       onFocus,
-      optionalLabelText,
-      placeholderText,
+      optionalLabel,
+      placeholder,
       isReadOnly,
       isRequired = true,
       startAdornment,
-      type: inputType = "text",
+      type = "text",
       value,
     } = props;
 
-    const [inputType, setInputType] = useState(inputType);
+    const [inputType, setInputType] = useState(type);
+
+    useEffect(() => {
+      setInputType(type);
+    }, [type]);
 
     const togglePasswordVisibility = useCallback(() => {
       setInputType((currentType) =>
@@ -137,19 +143,30 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     }, []);
 
     const id = useUniqueId(idOverride);
-    const hintId = hintText ? `${id}-hint` : undefined;
+    const hintId = hint ? `${id}-hint` : undefined;
     const errorId = errorMessage ? `${id}-error` : undefined;
-    const labelId = labelText ? `${id}-label` : undefined;
+    const labelId = label ? `${id}-label` : undefined;
+
+    const inputProps = useMemo(
+      () =>
+        errorId || hintId
+          ? {
+              "aria-describedby":
+                errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId,
+            }
+          : undefined,
+      [errorId, hintId]
+    );
 
     return (
       <FormControl disabled={isDisabled} error={Boolean(errorMessage)}>
         <InputLabel htmlFor={id} id={labelId}>
-          {labelText}
+          {label}
           {!isRequired && (
-            <Typography variant="subtitle1">{optionalLabelText}</Typography>
+            <Typography variant="subtitle1">{optionalLabel}</Typography>
           )}
         </InputLabel>
-        {hintText && <FormHelperText id={hintId}>{hintText}</FormHelperText>}
+        {hint && <FormHelperText id={hintId}>{hint}</FormHelperText>}
         <InputBase
           autoComplete={autoCompleteType}
           endAdornment={
@@ -168,24 +185,15 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             )
           }
           id={id}
-          inputProps={
-            hintId || errorId
-              ? {
-                  "aria-describedby":
-                    hintId && errorId
-                      ? `${hintId} ${errorId}`
-                      : hintId || errorId,
-                }
-              : undefined
-          }
+          inputProps={inputProps}
           multiline={isMultiline}
           onChange={onChange}
           onFocus={onFocus}
-          placeholder={placeholderText}
+          placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}
           startAdornment={
-            inType === "search" ? (
+            inputType === "search" ? (
               <InputAdornment position="start">
                 <SearchIcon />
               </InputAdornment>
