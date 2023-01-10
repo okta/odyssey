@@ -449,6 +449,9 @@ export const components: ThemeOptions["components"] = {
         }),
 
         ...(ownerState.variant === "status" && {
+          paddingBlock: 0,
+          paddingInline: 0,
+          borderRadius: 0,
           backgroundColor: "transparent",
           color: theme.palette.text.primary,
 
