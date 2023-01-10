@@ -447,6 +447,38 @@ export const components: ThemeOptions["components"] = {
             backgroundColor: theme.palette.grey[300],
           },
         }),
+
+        ...(ownerState.variant === "status" && {
+          backgroundColor: "transparent",
+          color: theme.palette.text.primary,
+
+          "&::before": {
+            content: "''",
+            width: ".57em",
+            height: ".57em",
+            marginInlineEnd: theme.spacing(2),
+            borderRadius: "100%",
+            backgroundColor: theme.palette.text.secondary,
+          },
+
+          [`&.${chipClasses.colorError}`]: {
+            "&::before": {
+              backgroundColor: theme.palette.error.main,
+            },
+          },
+
+          [`&.${chipClasses.colorSuccess}`]: {
+            "&::before": {
+              backgroundColor: theme.palette.success.main,
+            },
+          },
+
+          [`&.${chipClasses.colorWarning}`]: {
+            "&::before": {
+              backgroundColor: theme.palette.warning.main,
+            },
+          },
+        }),
       }),
       label: {
         padding: 0,
