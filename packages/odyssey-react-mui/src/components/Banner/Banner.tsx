@@ -16,7 +16,7 @@ import { Alert, Link } from "../..";
 export interface BannerProps {
   severity?: AlertColor;
   role?: string;
-  children: any;
+  children: string;
   onClose?: any;
   linkUrl?: string;
   linkText?: string;
