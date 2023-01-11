@@ -1,0 +1,61 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+
+<Meta anchor />
+
+# Status
+
+<Canvas>
+  <Story id="mui-components-status--success" />
+</Canvas>
+
+## Behavior
+
+Status is not an interactive element. It is only intended to inform. If a Status indicates that a user should take action, be sure to provide the appropriate controls.
+
+## Variants
+
+There are four variants of Status available: Default, Success, Caution, and Danger.
+
+### Default
+
+Default statuses are gray and should be used to indicate states like "Paused", "Not started", or "Queued".
+
+<Canvas>
+  <Story id="mui-components-status--default" />
+</Canvas>
+
+### Success
+
+Success statuses are green and should be used to indicate states like "Complete", "Active", or "Service operational".
+
+<Canvas>
+  <Story id="mui-components-status--success" />
+</Canvas>
+
+### Warning
+
+Warning statuses are yellow and should be used to indicate states like "Attention suggested" or "Service degradation".
+
+<Canvas>
+  <Story id="mui-components-status--warning" />
+</Canvas>
+
+### Error
+
+Error statuses are red and should be used to indicate states like "Error", "Failure", or "Service disruption".
+
+<Canvas>
+  <Story id="mui-components-status--error" />
+</Canvas>
+
+## Usage
+
+Use Status to communicate the state of a discrete item, such as a server or individual process. Both labeled and unlabeled variants are acceptable, but should follow the associated guidelines.
+
+### Within Table
+
+Table supports Status as a content type. Status requires a distinct column and should not be mixed with other content types.
+
+## Content guidelines
+
+Statuses content should provide a quick overview. Limit Status descriptor and label text to three words or less. Use sentence casing for both.
