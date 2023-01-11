@@ -20,6 +20,7 @@ export * from "./PasswordInput";
 export * from "./theme";
 export * from "./ThemeProvider";
 export * from "./useUniqueId";
+export * from "./components";
 
 export {
   Alert,
@@ -108,6 +109,7 @@ export type {
   TableProps,
   TableRowProps,
   TableSortLabelProps,
+  ThemeOptions,
   TooltipProps,
   TypographyProps,
   useThemeProps,
