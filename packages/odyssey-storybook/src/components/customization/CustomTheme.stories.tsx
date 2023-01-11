@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Story } from "@storybook/react";
+import type { StoryFn } from "@storybook/react";
 import {
   Button,
   FormControlLabel,
@@ -22,6 +22,7 @@ import {
 } from "@okta/odyssey-react-mui";
 
 import CustomThemeMdx from "./CustomTheme.mdx";
+import { useMemo } from "react";
 
 export default {
   title: "Customization/Components",
@@ -32,60 +33,91 @@ export default {
   },
 };
 
-const customTheme: ThemeOptions = {
-  palette: {
-    primary: {
-      main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
-    },
-  },
+export const ButtonStory: StoryFn = () => {
+  const customTheme = useMemo<ThemeOptions>(
+    () => ({
+      palette: {
+        primary: {
+          main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
+        },
+      },
+    }),
+    []
+  );
+
+  return (
+    <OdysseyThemeProvider customTheme={customTheme}>
+      <div>
+        <Button variant="primary">Primary</Button>
+      </div>
+    </OdysseyThemeProvider>
+  );
 };
 
-export const ButtonStory: Story = () => (
-  <OdysseyThemeProvider customTheme={customTheme}>
-    <div>
-      <Button variant="primary">Primary</Button>
-    </div>
-  </OdysseyThemeProvider>
-);
+ButtonStory.storyName = "Button";
 
-ButtonStory.name = "Button";
+export const TextFieldStory: StoryFn = () => {
+  const customTheme = useMemo<ThemeOptions>(
+    () => ({
+      palette: {
+        primary: {
+          main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
+        },
+      },
+    }),
+    []
+  );
 
-export const TextFieldStory: Story = () => (
-  <OdysseyThemeProvider customTheme={customTheme}>
-    <div>
-      <TextField autoCompleteType="name" type="text" />
-    </div>
-  </OdysseyThemeProvider>
-);
+  return (
+    <OdysseyThemeProvider customTheme={customTheme}>
+      <div>
+        <TextField autoCompleteType="name" type="text" />
+      </div>
+    </OdysseyThemeProvider>
+  );
+};
 
-TextFieldStory.name = "TextField";
+TextFieldStory.storyName = "TextField";
 
-export const RadioGroupStory: Story = () => (
-  <OdysseyThemeProvider customTheme={customTheme}>
-    <div>
-      <RadioGroup
-        defaultValue="Lightspeed"
-        name="radio-buttons-group"
-        aria-describedby="radio-hint radio-error"
-      >
-        <FormControlLabel
-          value="Lightspeed"
-          control={<Radio />}
-          label="Lightspeed"
-        />
-        <FormControlLabel
-          value="Warp speed"
-          control={<Radio />}
-          label="Warp speed"
-        />
-        <FormControlLabel
-          value="Ludicrous speed"
-          control={<Radio />}
-          label="Ludicrous speed"
-        />
-      </RadioGroup>
-    </div>
-  </OdysseyThemeProvider>
-);
+export const RadioGroupStory: StoryFn = () => {
+  const customTheme = useMemo<ThemeOptions>(
+    () => ({
+      palette: {
+        primary: {
+          main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
+        },
+      },
+    }),
+    []
+  );
 
-RadioGroupStory.name = "RadioGroup";
+  return (
+    <OdysseyThemeProvider customTheme={customTheme}>
+      <div>
+        <RadioGroup
+          defaultValue="Lightspeed"
+          name="radio-buttons-group"
+          aria-describedby="radio-hint radio-error"
+        >
+          <FormControlLabel
+            value="Lightspeed"
+            control={<Radio />}
+            label="Lightspeed"
+          />
+          <FormControlLabel
+            value="Warp speed"
+            control={<Radio />}
+            label="Warp speed"
+          />
+          <FormControlLabel
+            value="Ludicrous speed"
+            control={<Radio />}
+            label="Ludicrous speed"
+          />
+        </RadioGroup>
+      </div>
+    </OdysseyThemeProvider>
+  );
+};
+
+RadioGroupStory.storyName = "RadioGroup";

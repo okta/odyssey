@@ -195,7 +195,7 @@ export const TokenTables = (): ReactNode => {
   return (
     <>
       {tables.map((table) => (
-        <TableContainer>
+        <TableContainer key={table.name}>
           <Table>
             <TableHead>
               <TableRow>
