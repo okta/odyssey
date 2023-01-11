@@ -17,7 +17,7 @@
     "@okta/odyssey-design-tokens": "^0.17.1",
     "@okta/odyssey-lifecycle": "^0.17.1",
     "@okta/odyssey-react-labs": "^0.17.1",
-    "@okta/odyssey-react-mui": "^0.17.1",
+    "@okta/odyssey-react-mui": "workspace:*",
     "@okta/odyssey-typescript": "^0.17.1",
     "@pxblue/storybook-rtl-addon": "^1.0.1",
     "@storybook/addon-a11y": "^6.5.13",
