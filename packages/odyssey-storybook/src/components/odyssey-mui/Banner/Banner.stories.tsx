@@ -11,7 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import { Alert, Link } from "@okta/odyssey-react-mui";
+import { Alert, Link, Banner } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import BannerMdx from "./Banner.mdx";
@@ -43,20 +43,29 @@ export default {
       options: ["error", "info", "warning"],
       defaultValue: "info",
     },
+    linkUrl: {
+      control: "text",
+      defaultValue: null,
+    },
+    linkText: {
+      control: "text",
+      defaultValue: null,
+    },
   },
   decorators: [MuiThemeDecorator],
 };
 
 const DefaultTemplate: Story = (args) => {
   return (
-    <Alert
+    <Banner
       severity={args.severity}
       role={args.role}
-      variant="banner"
+      linkUrl={args.linkUrl}
+      linkText={args.linkText}
       onClose={args.onClose}
     >
       {args.content}
-    </Alert>
+    </Banner>
   );
 };
 
@@ -79,14 +88,9 @@ Warning.args = {
 
 export const WithLink = DefaultTemplate.bind({});
 WithLink.args = {
-  content: (
-    <>
-      Hangar 18 has been compromised.
-      <Link href="#anchor" variant="monochrome">
-        View report
-      </Link>
-    </>
-  ),
+  content: "Hangar 18 has been compromised.",
+  linkUrl: "#anchor",
+  linkText: "View report",
   role: "status",
   severity: "error",
 };
