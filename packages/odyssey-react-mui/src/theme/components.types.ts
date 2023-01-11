@@ -52,6 +52,13 @@ declare module "@mui/material/Button" {
   }
 }
 
+declare module "@mui/material/Chip" {
+  interface ChipPropsVariantOverrides {
+    // Enable Odyssey variant for Status component
+    status: true;
+  }
+}
+
 declare module "@mui/material/Link" {
   interface LinkPropsVariantOverrides {
     default: true;
