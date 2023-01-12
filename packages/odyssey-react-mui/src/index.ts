@@ -109,6 +109,7 @@ export type {
   TableProps,
   TableRowProps,
   TableSortLabelProps,
+  ThemeOptions,
   TooltipProps,
   TypographyProps,
   useThemeProps,

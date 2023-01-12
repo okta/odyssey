@@ -6358,7 +6358,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-babel-loader@^0.17.1, @okta/odyssey-babel-loader@workspace:packages/odyssey-babel-loader":
+"@okta/odyssey-babel-loader@workspace:*, @okta/odyssey-babel-loader@workspace:packages/odyssey-babel-loader":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-babel-loader@workspace:packages/odyssey-babel-loader"
   dependencies:
@@ -6396,7 +6396,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-design-tokens@^0.17.1, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
+"@okta/odyssey-design-tokens@^0.17.1, @okta/odyssey-design-tokens@workspace:*, @okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-design-tokens@workspace:packages/odyssey-design-tokens"
   dependencies:
@@ -6430,7 +6430,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-lifecycle@^0.17.1, @okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle":
+"@okta/odyssey-lifecycle@^0.17.1, @okta/odyssey-lifecycle@workspace:*, @okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-lifecycle@workspace:packages/odyssey-lifecycle"
   bin:
@@ -6446,7 +6446,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-react-labs@^0.17.1, @okta/odyssey-react-labs@workspace:packages/odyssey-react-labs":
+"@okta/odyssey-react-labs@workspace:*, @okta/odyssey-react-labs@workspace:packages/odyssey-react-labs":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-react-labs@workspace:packages/odyssey-react-labs"
   dependencies:
@@ -6493,7 +6493,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-react-mui@^0.17.1, @okta/odyssey-react-mui@workspace:packages/odyssey-react-mui":
+"@okta/odyssey-react-mui@^0.17.1, @okta/odyssey-react-mui@workspace:*, @okta/odyssey-react-mui@workspace:packages/odyssey-react-mui":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-react-mui@workspace:packages/odyssey-react-mui"
   dependencies:
@@ -6547,12 +6547,12 @@ __metadata:
   dependencies:
     "@applitools/eyes-storybook": ^3.29.4
     "@babel/core": ^7.19.3
-    "@okta/odyssey-babel-loader": ^0.17.1
-    "@okta/odyssey-design-tokens": ^0.17.1
-    "@okta/odyssey-lifecycle": ^0.17.1
-    "@okta/odyssey-react-labs": ^0.17.1
-    "@okta/odyssey-react-mui": ^0.17.1
-    "@okta/odyssey-typescript": ^0.17.1
+    "@okta/odyssey-babel-loader": "workspace:*"
+    "@okta/odyssey-design-tokens": "workspace:*"
+    "@okta/odyssey-lifecycle": "workspace:*"
+    "@okta/odyssey-react-labs": "workspace:*"
+    "@okta/odyssey-react-mui": "workspace:*"
+    "@okta/odyssey-typescript": "workspace:*"
     "@pxblue/storybook-rtl-addon": ^1.0.1
     "@storybook/addon-a11y": ^6.5.13
     "@storybook/addon-actions": ^6.5.13
@@ -6606,7 +6606,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-typescript@^0.17.1, @okta/odyssey-typescript@workspace:packages/odyssey-typescript":
+"@okta/odyssey-typescript@^0.17.1, @okta/odyssey-typescript@workspace:*, @okta/odyssey-typescript@workspace:packages/odyssey-typescript":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-typescript@workspace:packages/odyssey-typescript"
   peerDependencies:
