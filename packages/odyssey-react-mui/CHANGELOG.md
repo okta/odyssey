@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.17.2](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.2) (2023-01-12)
+
+### Features
+
+- add TextInput ([fa5a033](https://github.com/okta/odyssey/commit/fa5a03309263a1239c1902c86eef04d5ba4c4774))
+- added customTheme property to OdysseyThemeProvider ([4207c4b](https://github.com/okta/odyssey/commit/4207c4b0079bd19f637d5ad83c8c8d188598cdf1))
+- added Emotion CacheProvider as part of ThemeProvider ([4c00a59](https://github.com/okta/odyssey/commit/4c00a591f8e1c237eec74758d4d8a13fd7a5499a))
+- added forwardRef to Link ([5598ff8](https://github.com/okta/odyssey/commit/5598ff872a2bd9cf2e3e3a9898ddbbbe9c05ce38))
+- added optional nonce prop to OdysseyCacheProvider ([f264b50](https://github.com/okta/odyssey/commit/f264b50d5c737fcaa672eadb4d3302acfd136582))
+- added styles for DatePicker theming ([db967ba](https://github.com/okta/odyssey/commit/db967bad7fe836d8f5877f6ffe5a601f78ff47ec))
+- **odyssey-react-mui:** add check icon to selected list items ([dbe5777](https://github.com/okta/odyssey/commit/dbe577783a3506d6ebb46047437936c242b69303))
+- **odyssey-react-mui:** add status theme to Chip ([82c9c28](https://github.com/okta/odyssey/commit/82c9c284c016b63e96ddbe3b3c82822b9c7f5857))
+- **odyssey-react-mui:** add theme for ListSubheader ([b27c79a](https://github.com/okta/odyssey/commit/b27c79a91eda15a802520bc07ba0a9025b30d63c))
+- **odyssey-react-mui:** add theme for multiselect ([ce8fbdb](https://github.com/okta/odyssey/commit/ce8fbdb33218b6064556800ad0a9a60a06c617b1))
+- **odyssey-react-mui:** add theme for Tag/Chip ([8539c6d](https://github.com/okta/odyssey/commit/8539c6d3aa3a29fcef0984bc611ccab9a4b524af))
+- **odyssey-react-mui:** increase default icon size to 16px; add ui type variant ([6577c33](https://github.com/okta/odyssey/commit/6577c331c29a5bfc53b41ebd269cf69366e2825c))
+- **odyssey-react-mui:** theme Select and refactor InputBase styles to support Select ([0538fb1](https://github.com/okta/odyssey/commit/0538fb1f77f79f2fca1635001163c11d6dfbd7f7))
+- replace the previous TextField ([e01ce2a](https://github.com/okta/odyssey/commit/e01ce2ae315bafce886179135e05c0cd11b52430))
+
+### Bug Fixes
+
+- added missing export for OdysseyThemeProvider and OdysseyCacheProvider ([3273f35](https://github.com/okta/odyssey/commit/3273f3537856a2b71161888ab291c5663bc2dbcb))
+- fixed a number of logistical issues ([48a95e1](https://github.com/okta/odyssey/commit/48a95e1bf963632186b083eaa461a1ec3b2ac7c8))
+- forwardRef in Link ([d1429af](https://github.com/okta/odyssey/commit/d1429afe1dde8608e2587abc2be99e7601650dc5))
+- minor type updates in unique ID hooks ([01df5b2](https://github.com/okta/odyssey/commit/01df5b2d7a19ed9862d27e1ca423d2ea29ad17c6))
+- **odyssey-react-mui:** fix floating and small Button properties, fix Toast layout ([e98d36b](https://github.com/okta/odyssey/commit/e98d36b57509a99ccd0f2290aee56322a0d155b8))
+- **odyssey-react-mui:** override MuiBackdrop colors correctly ([972a2c3](https://github.com/okta/odyssey/commit/972a2c3090fd6f4827adfc14390d5798dec2ab50))
+- **odyssey-react-mui:** size and align icons correctly within Button ([7787bf0](https://github.com/okta/odyssey/commit/7787bf0d03da093dc4a94955e57240c9b11e7762))
+- renamed inType to inputType ([dd67213](https://github.com/okta/odyssey/commit/dd67213a3ed6ce81dc322402b14886ecf5e53f88))
+- split OdysseyThemeProvider and OdysseyCacheProvider ([16a6ce3](https://github.com/okta/odyssey/commit/16a6ce3672a634e3450545ffe8c41a70db1b7fb3))
+- updated per PR comments ([e436890](https://github.com/okta/odyssey/commit/e436890a1eaedffc5ba382b88f1e6271fad4861b))
+- updated prop names ([1a73aa8](https://github.com/okta/odyssey/commit/1a73aa8aa1197e47795cda7b54382deb9ed56628))
+- upgraded MUI icons ([c978ab6](https://github.com/okta/odyssey/commit/c978ab66375f649a9b66544dbc490cc0442cff2c))
+
 ### [0.17.1](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.1) (2022-12-09)
 
 ### Features
