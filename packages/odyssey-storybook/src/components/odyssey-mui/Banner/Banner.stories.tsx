@@ -29,9 +29,9 @@ export default {
       control: "text",
       defaultValue: "The mission to Sagitarius A has been set for January 7.",
     },
-    onClose: {
-      control: "text",
-      defaultValue: null,
+    isDismissable: {
+      control: "boolean",
+      defaultValue: false,
     },
     role: {
       control: "radio",
@@ -62,7 +62,7 @@ const DefaultTemplate: Story = (args) => {
       role={args.role}
       linkUrl={args.linkUrl}
       linkText={args.linkText}
-      onClose={args.onClose}
+      isDismissable={args.isDismissable}
     >
       {args.content}
     </Banner>
@@ -97,7 +97,7 @@ WithLink.args = {
 
 export const Dismissible = DefaultTemplate.bind({});
 Dismissible.args = {
-  onClose: `{() => {}}`,
+  isDismissable: true,
   severity: "warning",
   role: "status",
 };

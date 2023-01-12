@@ -11,31 +11,47 @@
  */
 
 import { AlertColor } from "@mui/material";
+import React, { useState } from "react";
 import { Alert, Link } from "../..";
 
 export interface BannerProps {
   severity?: AlertColor;
   role?: "status" | undefined;
   children: string;
-  onClose?: any;
+  isDismissable?: boolean;
   linkUrl?: string;
   linkText?: string;
 }
 
 export const Banner = ({
-  onClose = null,
+  isDismissable = true,
   severity = "info",
   role,
   linkUrl,
   linkText = "Learn more",
   children,
-}: BannerProps) => (
-  <Alert role={role} variant="banner" severity={severity} onClose={onClose}>
-    {children}
-    {linkUrl && (
-      <Link href={linkUrl} variant="monochrome">
-        {linkText}
-      </Link>
-    )}
-  </Alert>
-);
+}: BannerProps) => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleClose = () => setIsVisible(false);
+
+  return (
+    <React.Fragment>
+      {isVisible && (
+        <Alert
+          role={role}
+          variant="banner"
+          severity={severity}
+          onClose={isDismissable ? handleClose : undefined}
+        >
+          {children}
+          {linkUrl && (
+            <Link href={linkUrl} variant="monochrome">
+              {linkText}
+            </Link>
+          )}
+        </Alert>
+      )}
+    </React.Fragment>
+  );
+};
