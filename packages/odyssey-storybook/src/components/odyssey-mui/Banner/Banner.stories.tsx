@@ -11,7 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import { Alert, Link, Banner } from "@okta/odyssey-react-mui";
+import { Banner } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import BannerMdx from "./Banner.mdx";
