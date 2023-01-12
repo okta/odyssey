@@ -29,10 +29,6 @@ export default {
       control: "text",
       defaultValue: "The mission to Sagitarius A has been set for January 7.",
     },
-    isDismissable: {
-      control: "boolean",
-      defaultValue: false,
-    },
     role: {
       control: "radio",
       options: ["status", null],
@@ -51,6 +47,10 @@ export default {
       control: "text",
       defaultValue: null,
     },
+    onClose: {
+      control: "text",
+      defaultValue: null,
+    },
   },
   decorators: [MuiThemeDecorator],
 };
@@ -62,7 +62,7 @@ const DefaultTemplate: Story = (args) => {
       role={args.role}
       linkUrl={args.linkUrl}
       linkText={args.linkText}
-      isDismissable={args.isDismissable}
+      onClose={args.onClose}
     >
       {args.content}
     </Banner>
@@ -97,7 +97,7 @@ WithLink.args = {
 
 export const Dismissible = DefaultTemplate.bind({});
 Dismissible.args = {
-  isDismissable: true,
+  onClose: `{() => {}}`,
   severity: "warning",
   role: "status",
 };
