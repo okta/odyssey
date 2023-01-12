@@ -11,7 +11,7 @@
  */
 
 import { AlertColor } from "@mui/material";
-import React, { useState } from "react";
+import React, { SyntheticEvent } from "react";
 import { Alert, Link } from "./";
 
 export interface BannerProps {
@@ -30,9 +30,10 @@ export interface BannerProps {
    */
   children: string;
   /**
-   * If true, the alert can be closed with the X icon
+   * The function that's fired when the user clicks the close button. If undefined,
+   * the close button will not be shown.
    */
-  isDismissable?: boolean;
+  onClose?: (event: SyntheticEvent<HTMLButtonElement>) => void;
   /**
    * If defined, the alert will include a link to the URL
    */
@@ -46,34 +47,19 @@ export interface BannerProps {
 }
 
 export const Banner = ({
-  isDismissable = true,
+  onClose,
   severity = "info",
   role,
   linkUrl,
   linkText = "Learn more",
   children,
-}: BannerProps) => {
-  const [isVisible, setIsVisible] = useState(true);
-
-  const handleClose = () => setIsVisible(false);
-
-  return (
-    <React.Fragment>
-      {isVisible && (
-        <Alert
-          role={role}
-          variant="banner"
-          severity={severity}
-          onClose={isDismissable ? handleClose : undefined}
-        >
-          {children}
-          {linkUrl && (
-            <Link href={linkUrl} variant="monochrome">
-              {linkText}
-            </Link>
-          )}
-        </Alert>
-      )}
-    </React.Fragment>
-  );
-};
+}: BannerProps) => (
+  <Alert role={role} variant="banner" severity={severity} onClose={onClose}>
+    {children}
+    {linkUrl && (
+      <Link href={linkUrl} variant="monochrome">
+        {linkText}
+      </Link>
+    )}
+  </Alert>
+);
