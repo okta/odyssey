@@ -12,7 +12,7 @@
 
 import { AlertColor } from "@mui/material";
 import React, { useState } from "react";
-import { Alert, Link } from "../..";
+import { Alert, Link } from "./";
 
 export interface BannerProps {
   /**
