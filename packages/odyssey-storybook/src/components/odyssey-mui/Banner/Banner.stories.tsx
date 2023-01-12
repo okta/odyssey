@@ -18,7 +18,7 @@ import BannerMdx from "./Banner.mdx";
 
 export default {
   title: `MUI Components/Alerts/Banner`,
-  component: Alert,
+  component: Banner,
   parameters: {
     docs: {
       page: BannerMdx,
