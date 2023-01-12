@@ -15,11 +15,33 @@ import React, { useState } from "react";
 import { Alert, Link } from "../..";
 
 export interface BannerProps {
+  /**
+   * Determine the color and icon of the alert
+   */
   severity?: AlertColor;
+  /**
+   * Sets the ARIA role of the alert
+   * ("status" for something that dynamically updates, null for something
+   * unchanging)
+   */
   role?: "status" | undefined;
+  /**
+   * The text content of the alert
+   */
   children: string;
+  /**
+   * If true, the alert can be closed with the X icon
+   */
   isDismissable?: boolean;
+  /**
+   * If defined, the alert will include a link to the URL
+   */
   linkUrl?: string;
+  /**
+   * If linkUrl is not undefined, this is the text of the link.
+   * If left blank, it defaults to "Learn more".
+   * Note that linkText does nothing if linkUrl is not defined
+   */
   linkText?: string;
 }
 
