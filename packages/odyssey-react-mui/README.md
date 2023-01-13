@@ -52,35 +52,19 @@ import { ThemeProvider } from "@okta/odyssey-react-mui";
 const YourAppRoot = ({ children }) => <ThemeProvider>{children}</ThemeProvider>;
 ```
 
-Add Material-UI components not exported from Odyssey with Odyssey styling:
+Add Material-UI components not exported from Odyssey with Odyssey styling or add your own theme to MUI:
 
 ```sh
 $ yarn add @mui/material
 ```
 
 ```jsx
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { odysseyTheme, ThemeProvider } from "@okta/odyssey-react-mui";
-
-const YourAppRoot = ({ children }) => (
-  <MuiThemeProvider theme={odysseyTheme}>
-    <ThemeProvider>{children}</ThemeProvider>
-  </MuiThemeProvider>
-);
-```
-
-Add your own theme to MUI (does not affect Odyssey components):
-
-```jsx
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { ThemeProvider } from "@okta/odyssey-react-mui";
+import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
 
 import { myMaterialUiTheme } from "./myMaterialUiTheme";
 
 const YourAppRoot = ({ children }) => (
-  <MuiThemeProvider theme={myMaterialUiTheme}>
-    <ThemeProvider>{children}</ThemeProvider>
-  </MuiThemeProvider>
+  <OdysseyThemeProvider theme={myMaterialUiTheme}>{children}<OdysseyThemeProvider>
 );
 ```
 
