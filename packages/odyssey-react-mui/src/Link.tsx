@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactElement } from "react";
+import { forwardRef, ReactElement } from "react";
 
 import { Link as MuiLink, SvgIcon } from "@mui/material";
 import type { LinkProps as MuiLinkProps } from "@mui/material";
@@ -19,10 +19,10 @@ export interface LinkProps extends MuiLinkProps {
   icon?: ReactElement;
 }
 
-export const Link = (props: LinkProps) => {
+export const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
   const { icon, children, target } = props;
   return (
-    <MuiLink {...props}>
+    <MuiLink {...props} ref={ref}>
       {icon && <span className="Link-icon">{icon}</span>}
       {children}
       {target === "_blank" && (
@@ -39,4 +39,4 @@ export const Link = (props: LinkProps) => {
       )}
     </MuiLink>
   );
-};
+});

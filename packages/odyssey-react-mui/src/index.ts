@@ -20,6 +20,7 @@ export * from "./PasswordInput";
 export * from "./theme";
 export * from "./ThemeProvider";
 export * from "./useUniqueId";
+export * from "./components";
 
 export {
   Alert,
@@ -45,6 +46,7 @@ export {
   InputBase,
   InputLabel,
   ListItemText,
+  ListSubheader,
   MenuItem,
   Radio,
   RadioGroup,
@@ -90,6 +92,7 @@ export type {
   InputBaseProps,
   InputLabelProps,
   ListItemTextProps,
+  ListSubheaderProps,
   MenuItemProps,
   RadioGroupProps,
   RadioProps,
@@ -106,6 +109,7 @@ export type {
   TableProps,
   TableRowProps,
   TableSortLabelProps,
+  ThemeOptions,
   TooltipProps,
   TypographyProps,
   useThemeProps,
