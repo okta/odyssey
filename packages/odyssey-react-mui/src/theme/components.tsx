@@ -861,10 +861,10 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         color: theme.palette.primary.main,
-        textDecoration: "none",
+        textDecoration: "underline",
 
         "&:hover": {
-          color: theme.palette.primary.main,
+          color: theme.palette.primary.dark,
           textDecoration: "underline",
         },
 
