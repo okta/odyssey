@@ -7,7 +7,7 @@
   "sideEffects": false,
   "private": true,
   "dependencies": {
-    "@okta/eslint-plugin-odyssey": "^0.17.1",
+    "@okta/eslint-plugin-odyssey": "workspace:*",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
     "eslint-config-prettier": "^8.3.0",
