@@ -667,6 +667,7 @@ export const components: ThemeOptions["components"] = {
         "&:last-child": {
           marginBottom: 0,
         },
+        textAlign: "start",
       }),
     },
   },
