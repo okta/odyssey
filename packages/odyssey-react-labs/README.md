@@ -1,4 +1,4 @@
-# @okta/odyssey-react-mui
+# @okta/odyssey-react-labs
 
 ## Production Readiness
 
@@ -21,80 +21,7 @@ exact version (maximum safety) or pin the major and minor versions
 Install the package and peer dependencies:
 
 ```sh
-$ yarn add @okta/odyssey-react-mui @emotion/react @mui/material @mui/icons-material
-```
-
-Include fonts:
-
-```html
-<link rel="preconnect" href="https://fonts.gstatic.com" />
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap"
-/>
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
-/>
-```
-
-Import named ESM exports:
-
-```js
-import { PasswordInput } from "@okta/odyssey-react-mui";
-```
-
-Add the Material-UI `ThemeProvider` around your whole app:
-
-```jsx
-import { ThemeProvider } from "@okta/odyssey-react-mui";
-
-const YourAppRoot = ({ children }) => <ThemeProvider>{children}</ThemeProvider>;
-```
-
-Add Material-UI components not exported from Odyssey with Odyssey styling:
-
-```jsx
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { odysseyTheme, ThemeProvider } from "@okta/odyssey-react-mui";
-
-const YourAppRoot = ({ children }) => (
-  <MuiThemeProvider theme={odysseyTheme}>
-    <ThemeProvider>{children}</ThemeProvider>
-  </MuiThemeProvider>
-);
-```
-
-Add your own theme to MUI (does not affect Odyssey components):
-
-```jsx
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { ThemeProvider } from "@okta/odyssey-react-mui";
-
-import { myMaterialUiTheme } from "./myMaterialUiTheme";
-
-const YourAppRoot = ({ children }) => (
-  <MuiThemeProvider theme={myMaterialUiTheme}>
-    <ThemeProvider>{children}</ThemeProvider>
-  </MuiThemeProvider>
-);
-```
-
-### Upgrade Piecemeal
-
-It’s possible to have 2 versions of Odyssey running at the same time, so when adding MUI, you can do it piecemeal.
-
-This is how you setup two `ThemeProvider`s like so:
-
-```jsx
-import { ThemeProvider as OdysseyMuiThemeProvider } from "@okta/odyssey-react-mui";
-import { ThemeProvider as OdysseyLegacyThemeProvider } from "@okta/odyssey-react-theme";
-
-const YourAppRoot = ({ children }) => (
-  <OdysseyMuiThemeProvider>
-    <OdysseyLegacyThemeProvider>{children}</OdysseyLegacyThemeProvider>
-  </OdysseyMuiThemeProvider>
-);
+yarn add @okta/odyssey-react-mui @okta/odyssey-react-labs @emotion/react
 ```
 
 ## Components
