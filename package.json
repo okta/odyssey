@@ -23,7 +23,7 @@
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "stylelint": "stylelint **/*.scss",
     "test": "lerna run test",
-    "typecheck": "yarn workspaces foreach -vip run typecheck",
+    "typecheck": "lerna run typecheck",
     "build": "lerna run build --ignore @okta/odyssey-storybook",
     "postinstall": "yarn build && [ -z ${CI:-} ] && husky install || exit 0"
   },
