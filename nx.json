@@ -10,6 +10,9 @@
   "targetDefaults": {
     "build": {
       "outputs": ["{projectRoot}/dist"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"]
     }
   }
 }
