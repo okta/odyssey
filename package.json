@@ -16,7 +16,7 @@
     "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
-    "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry",
+    "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-registry",
     "lint": "yarn eslint && yarn stylelint && yarn prettier-check",
     "prettier-check": "prettier --ignore-unknown --loglevel warn --check .",
     "prettier-write": "prettier --ignore-unknown --loglevel warn --write .",
