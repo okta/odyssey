@@ -4,6 +4,5 @@
   "changelogPreset": "@okta/conventional-changelog-odyssey",
   "useWorkspaces": true,
   "packages": ["packages/*"],
-  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "useNx": true
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }
