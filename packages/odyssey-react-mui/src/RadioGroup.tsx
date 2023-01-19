@@ -10,13 +10,40 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio } from "./";
+import { FormControl, FormLabel, FormHelperText, visuallyHidden } from "./";
+import { RadioGroup as MuiRadioGroup } from "@mui/material";
 
 export interface RadioGroupProps {
-  value: string;
   label: string;
+  hint?: string | undefined;
+  disabled?: boolean | undefined;
+  invalid?: boolean | undefined;
+  error?: any | undefined;
+  children: any;
 }
 
-export const RadioGroup = ({ value, label }: RadioGroupProps) => (
-  <Radio value={value} label={label} />
+export const RadioGroup = ({
+  label,
+  hint,
+  disabled,
+  invalid,
+  error,
+  children,
+}: RadioGroupProps) => (
+  <FormControl component="fieldset" disabled={disabled} error={invalid}>
+    <FormLabel component="legend">{label}</FormLabel>
+    {hint && <FormHelperText id="radio-hint">{hint}</FormHelperText>}
+    <MuiRadioGroup
+      defaultValue="Lightspeed"
+      name="radio-buttons-group"
+      aria-describedby="radio-hint radio-error"
+    >
+      {children}
+    </MuiRadioGroup>
+    {error && (
+      <FormHelperText id="radio-error" error>
+        <span style={visuallyHidden}>Error:</span> {error}
+      </FormHelperText>
+    )}
+  </FormControl>
 );
