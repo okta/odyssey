@@ -11,15 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import {
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  visuallyHidden,
-} from "@okta/odyssey-react-mui";
+import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import RadioGroupMdx from "./RadioGroup.mdx";
@@ -59,42 +51,17 @@ export default {
 
 const DefaultTemplate: Story = (args) => {
   return (
-    <FormControl
-      component="fieldset"
+    <RadioGroup
       disabled={args.disabled}
-      error={args.invalid}
+      invalid={args.invalid}
+      error={args.error}
+      label={args.label}
+      hint={args.hint}
     >
-      <FormLabel component="legend">{args.label}</FormLabel>
-      {args.hint && (
-        <FormHelperText id="radio-hint">{args.hint}</FormHelperText>
-      )}
-      <RadioGroup
-        defaultValue="Lightspeed"
-        name="radio-buttons-group"
-        aria-describedby="radio-hint radio-error"
-      >
-        <FormControlLabel
-          value="Lightspeed"
-          control={<Radio />}
-          label="Lightspeed"
-        />
-        <FormControlLabel
-          value="Warp speed"
-          control={<Radio />}
-          label="Warp speed"
-        />
-        <FormControlLabel
-          value="Ludicrous speed"
-          control={<Radio />}
-          label="Ludicrous speed"
-        />
-      </RadioGroup>
-      {args.error && (
-        <FormHelperText id="radio-error" error>
-          <span style={visuallyHidden}>Error:</span> {args.error}
-        </FormHelperText>
-      )}
-    </FormControl>
+      <Radio value="lightspeed" label="Lightspeed" />
+      <Radio value="Warp Speed" label="Warp Speed" />
+      <Radio value="Ludicrous Speed" label="Ludicrous Speed" />
+    </RadioGroup>
   );
 };
 

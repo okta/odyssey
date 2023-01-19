@@ -11,15 +11,7 @@
  */
 
 import { Story } from "@storybook/react";
-import {
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  visuallyHidden,
-} from "@okta/odyssey-react-mui";
+import { Radio } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import RadioMdx from "./Radio.mdx";
@@ -33,86 +25,21 @@ export default {
     },
   },
   argTypes: {
-    disabled: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    error: {
+    value: {
       control: "text",
-      defaultValue: null,
-    },
-    hint: {
-      control: "text",
-      defaultValue: null,
-    },
-    invalid: {
-      control: "boolean",
-      defaultValue: false,
+      defaultValue: "Value",
     },
     label: {
       control: "text",
-      defaultValue: "Speed",
+      defaultValue: "Label",
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
 const DefaultTemplate: Story = (args) => {
-  return (
-    <FormControl
-      component="fieldset"
-      disabled={args.disabled}
-      error={args.invalid}
-    >
-      <FormLabel component="legend">{args.label}</FormLabel>
-      {args.hint && (
-        <FormHelperText id="radio-hint">{args.hint}</FormHelperText>
-      )}
-      <RadioGroup
-        defaultValue="Lightspeed"
-        name="radio-buttons-group"
-        aria-describedby="radio-hint radio-error"
-      >
-        <FormControlLabel
-          value="Lightspeed"
-          control={<Radio />}
-          label="Lightspeed"
-        />
-        <FormControlLabel
-          value="Warp speed"
-          control={<Radio />}
-          label="Warp speed"
-        />
-        <FormControlLabel
-          value="Ludicrous speed"
-          control={<Radio />}
-          label="Ludicrous speed"
-        />
-      </RadioGroup>
-      {args.error && (
-        <FormHelperText id="radio-error" error>
-          <span style={visuallyHidden}>Error:</span> {args.error}
-        </FormHelperText>
-      )}
-    </FormControl>
-  );
+  return <Radio value={args.value} label={args.label} />;
 };
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
-
-export const Hint = DefaultTemplate.bind({});
-Hint.args = {
-  hint: "Select the speed at which you wish to travel.",
-};
-
-export const Disabled = DefaultTemplate.bind({});
-Disabled.args = {
-  disabled: true,
-};
-
-export const Invalid = DefaultTemplate.bind({});
-Invalid.args = {
-  invalid: true,
-  error: "This field is required.",
-};
