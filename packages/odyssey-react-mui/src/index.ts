@@ -18,6 +18,8 @@ export * from "./Link";
 export * from "./OdysseyCacheProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./PasswordInput";
+export * from "./Radio";
+export * from "./RadioGroup";
 export * from "./TextField";
 export * from "./theme";
 export * from "./ThemeProvider";
@@ -49,8 +51,6 @@ export {
   ListItemText,
   ListSubheader,
   MenuItem,
-  Radio,
-  RadioGroup,
   Select,
   Snackbar,
   Stack,
