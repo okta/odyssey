@@ -3,7 +3,7 @@
 NODE_VERSION=v16.17.1
 
 # Note: Yarn will automatically switch over to yarn 3 after installing yarn 1.x
-YARN_VERSION=1.22.17
+YARN_VERSION=1.22.19
 
 echo "installing node ${NODE_VERSION}"
 if setup_service node-and-yearn $NODE_VERSION $YARN_VERSION; then
