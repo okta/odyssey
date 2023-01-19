@@ -2,21 +2,14 @@
 
 NODE_VERSION=v16.17.1
 
-echo "installing node ${NODE_VERSION}"
-if setup_service node $NODE_VERSION; then
-  echo "Installed node ${NODE_VERSION} successfully"
-else
-  echo "node ${NODE_VERSION} installation failed."
-fi
-
 # Note: Yarn will automatically switch over to yarn 3 after installing yarn 1.x
-YARN_VERSION=1.22.17
+YARN_VERSION=1.22.19
 
-echo "installing yarn v${YARN_VERSION}"
-if setup_service yarn $YARN_VERSION; then
-  echo "Yarn v${YARN_VERSION} installed."
+echo "installing node ${NODE_VERSION}"
+if setup_service node-and-yearn $NODE_VERSION $YARN_VERSION; then
+  echo "Installed node ${NODE_VERSION} and yarn $YARN_VERSION successfully"
 else
-  echo "Yarn v${YARN_VERSION} installation failed!"
+  echo "node ${NODE_VERSION} and yarn $YARN_VERSION installation failed."
 fi
 
 cd ${OKTA_HOME}/odyssey
