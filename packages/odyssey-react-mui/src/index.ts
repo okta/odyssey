@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+export * from "./Banner";
 export * from "./createUniqueId";
 export * from "./Icon";
 export * from "./iconDictionary";
@@ -17,10 +18,10 @@ export * from "./Link";
 export * from "./OdysseyCacheProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./PasswordInput";
+export * from "./TextField";
 export * from "./theme";
 export * from "./ThemeProvider";
 export * from "./useUniqueId";
-export * from "./components";
 
 export {
   Alert,
