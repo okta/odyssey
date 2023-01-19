@@ -11,7 +11,6 @@
  */
 
 import { AlertColor } from "@mui/material";
-import React, { SyntheticEvent } from "react";
 import { Alert, Link } from "./";
 
 export interface BannerProps {
@@ -33,7 +32,7 @@ export interface BannerProps {
    * The function that's fired when the user clicks the close button. If undefined,
    * the close button will not be shown.
    */
-  onClose?: (event: SyntheticEvent<HTMLButtonElement>) => void;
+  onClose?: any;
   /**
    * If defined, the alert will include a link to the URL
    */
