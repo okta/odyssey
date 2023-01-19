@@ -6,12 +6,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "resolutions": {
-    "@babel/plugin-transform-typescript": "^7.19.1",
-    "@types/babel__traverse": "^7.18.1",
-    "ramda": "0.28.0",
-    "qs": "6.11.0"
-  },
   "engines": {
     "yarn": "^3.2.0",
     "node": ">=16 <17"
@@ -22,32 +16,32 @@
     "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
-    "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-access --no-verify-registry",
+    "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-registry",
     "lint": "yarn eslint && yarn stylelint && yarn prettier-check",
     "prettier-check": "prettier --ignore-unknown --loglevel warn --check .",
     "prettier-write": "prettier --ignore-unknown --loglevel warn --write .",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "stylelint": "stylelint **/*.scss",
     "test": "lerna run test",
-    "typecheck": "yarn workspaces foreach -vip run typecheck",
+    "typecheck": "lerna run typecheck",
     "build": "lerna run build --ignore @okta/odyssey-storybook",
     "postinstall": "yarn build && [ -z ${CI:-} ] && husky install || exit 0"
   },
   "devDependencies": {
     "@commitlint/cli": "^14.0.0",
-    "@okta/odyssey-commitlint": "^0.17.1",
-    "@okta/odyssey-eslint-config": "^0.17.1",
-    "@okta/odyssey-lint-staged": "^0.17.1",
-    "@okta/odyssey-stylelint": "^0.17.1",
+    "@okta/odyssey-commitlint": "workspace:*",
+    "@okta/odyssey-eslint-config": "workspace:*",
+    "@okta/odyssey-lint-staged": "workspace:*",
+    "@okta/odyssey-stylelint": "workspace:*",
     "caniuse-lite": "^1.0.30001412",
     "eslint": "^7.27.0",
     "husky": "^7.0.2",
-    "lerna": "^5.5.4",
+    "lerna": "^6.4.1",
     "lint-staged": "^11.1.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.4.0",
     "stylelint": "^14.13.0"
   },
   "version": "0.5.0",
-  "packageManager": "yarn@3.2.3"
+  "packageManager": "yarn@3.3.1"
 }
