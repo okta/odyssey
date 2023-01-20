@@ -45,6 +45,10 @@ export default {
       control: "text",
       defaultValue: "Speed",
     },
+    name: {
+      control: "text",
+      defaultValue: "label",
+    },
   },
   decorators: [MuiThemeDecorator],
 };
@@ -57,6 +61,7 @@ const DefaultTemplate: Story = (args) => {
       error={args.error}
       label={args.label}
       hint={args.hint}
+      defaultValue={args.defaultValue}
     >
       <Radio value="lightspeed" label="Lightspeed" />
       <Radio value="Warp Speed" label="Warp Speed" />
