@@ -79,7 +79,7 @@ export const components: ThemeOptions["components"] = {
       action: ({ ownerState, theme }) => ({
         ...(ownerState.variant === "banner" && {
           padding: 0,
-          marginRight: 0,
+          marginInlineEnd: 0,
           top: "50%",
           right: theme.spacing(4),
           position: "absolute",
@@ -87,12 +87,12 @@ export const components: ThemeOptions["components"] = {
         }),
         ...(ownerState.variant === "toast" && {
           padding: 0,
-          marginLeft: 0,
-          marginRight: 0,
+          marginInlineStart: 0,
+          marginInlineEnd: 0,
         }),
       }),
       icon: ({ ownerState, theme }) => ({
-        marginRight: 0,
+        marginInlineEnd: 0,
         padding: 0,
         fontSize: "inherit",
         opacity: 1,
@@ -611,17 +611,17 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
         gap: theme.spacing(2),
-        marginLeft: 0,
-        marginRight: 0, // used for row presentation of radio/checkbox
+        marginInlineStart: 0,
+        marginInlineEnd: 0, // used for row presentation of radio/checkbox
         ...(ownerState.labelPlacement === "start" && {
-          marginLeft: 0, // used for row presentation of radio/checkbox
-          marginRight: 0,
+          marginInlineStart: 0, // used for row presentation of radio/checkbox
+          marginInlineEnd: 0,
         }),
         ...(ownerState.labelPlacement === "top" && {
-          marginLeft: 0,
+          marginInlineStart: 0,
         }),
         ...(ownerState.labelPlacement === "bottom" && {
-          marginLeft: 0,
+          marginInlineStart: 0,
         }),
         "&:not(:last-child)": {
           marginBottom: theme.spacing(2),
@@ -1204,7 +1204,7 @@ export const components: ThemeOptions["components"] = {
         }),
 
         ...(ownerState.variant === "number" && {
-          textAlign: "right",
+          textAlign: "end",
           fontFeatureSettings: '"lnum", "tnum"',
         }),
 
@@ -1218,7 +1218,7 @@ export const components: ThemeOptions["components"] = {
         }),
 
         ...(ownerState.align === "left" && {
-          textAlign: "left",
+          textAlign: "start",
         }),
 
         ...(ownerState.align === "center" && {
@@ -1226,7 +1226,7 @@ export const components: ThemeOptions["components"] = {
         }),
 
         ...(ownerState.align === "right" && {
-          textAlign: "right",
+          textAlign: "end",
           flexDirection: "row-reverse",
         }),
 
@@ -1302,8 +1302,8 @@ export const components: ThemeOptions["components"] = {
       }),
       icon: ({ theme, ownerState }) => ({
         fontSize: "inherit",
-        marginRight: 0,
-        marginLeft: 0,
+        marginInlineEnd: 0,
+        marginInlineStart: 0,
         opacity: 0,
         color: "inherit",
         transition: theme.transitions.create(["opacity", "transform"], {
@@ -1367,15 +1367,15 @@ export const components: ThemeOptions["components"] = {
           transformOrigin: "right center",
           ...(ownerState.isRtl
             ? {
-                marginLeft: theme.spacing(3),
+                marginInlineStart: theme.spacing(3),
                 ...(ownerState.touch === true && {
-                  marginLeft: theme.spacing(4),
+                  marginInlineStart: theme.spacing(4),
                 }),
               }
             : {
-                marginRight: theme.spacing(3),
+                marginInlineEnd: theme.spacing(3),
                 ...(ownerState.touch === true && {
-                  marginRight: theme.spacing(4),
+                  marginInlineEnd: theme.spacing(4),
                 }),
               }),
         },
@@ -1383,15 +1383,15 @@ export const components: ThemeOptions["components"] = {
           transformOrigin: "left center",
           ...(ownerState.isRtl
             ? {
-                marginRight: theme.spacing(3),
+                marginInlineEnd: theme.spacing(3),
                 ...(ownerState.touch === true && {
-                  marginRight: theme.spacing(4),
+                  marginInlineEnd: theme.spacing(4),
                 }),
               }
             : {
-                marginLeft: theme.spacing(3),
+                marginInlineStart: theme.spacing(3),
                 ...(ownerState.touch === true && {
-                  marginLeft: theme.spacing(4),
+                  marginInlineStart: theme.spacing(4),
                 }),
               }),
         },
