@@ -18,6 +18,7 @@ import {
   Radio,
 } from "./";
 import { RadioGroup as MuiRadioGroup } from "@mui/material";
+import { useMemo } from "react";
 
 export interface RadioGroupProps {
   /**
@@ -65,11 +66,20 @@ export const RadioGroup = ({
   children,
   defaultValue,
 }: RadioGroupProps) => {
-  // Setting ariaDescribedBy this way to avoid linter's prefer-const error
-  const ariaDescribedBy = [
-    hint && `${name}-hint`,
-    error && `${name}-error`,
-  ].filter(Boolean);
+  const radioGroupProps = useMemo(
+    () =>
+      error || hint
+        ? {
+            "aria-describedby": [
+              hint && `${name}-hint`,
+              error && `${name}-error`,
+            ]
+              .filter(Boolean)
+              .join(" "),
+          }
+        : undefined,
+    [error, hint]
+  );
 
   return (
     <FormControl component="fieldset" disabled={disabled} error={invalid}>
@@ -78,7 +88,7 @@ export const RadioGroup = ({
       <MuiRadioGroup
         defaultValue={defaultValue}
         name={`${name}-group`}
-        aria-describedby={ariaDescribedBy.join(" ")}
+        {...radioGroupProps}
       >
         {children}
       </MuiRadioGroup>
