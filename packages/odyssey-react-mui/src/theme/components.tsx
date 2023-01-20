@@ -928,6 +928,13 @@ export const components: ThemeOptions["components"] = {
       },
     ],
   },
+  MuiListItem: {
+    styleOverrides: {
+      root: {
+        textAlign: "start",
+      },
+    },
+  },
   MuiListSubheader: {
     styleOverrides: {
       root: ({ theme }) => ({
