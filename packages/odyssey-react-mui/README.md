@@ -21,7 +21,7 @@ exact version (maximum safety) or pin the major and minor versions
 Install the package and peer dependencies:
 
 ```sh
-$ yarn add @okta/odyssey-react-mui @emotion/react
+yarn add @okta/odyssey-react-mui @emotion/react
 ```
 
 Include fonts:

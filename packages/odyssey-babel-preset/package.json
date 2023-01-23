@@ -23,8 +23,8 @@
     "@babel/preset-typescript": "^7.18.6"
   },
   "devDependencies": {
-    "@okta/odyssey-lifecycle": "^0.17.1",
-    "@okta/odyssey-typescript": "^0.17.1",
+    "@okta/odyssey-lifecycle": "workspace:*",
+    "@okta/odyssey-typescript": "workspace:*",
     "@types/babel__core": "^7.1.19",
     "typescript": "^4.8.3"
   }
