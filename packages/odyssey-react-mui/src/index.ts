@@ -21,7 +21,7 @@ export * from "./PasswordInput";
 export * from "./Radio";
 export * from "./RadioGroup";
 export * from "./TextField";
-// export * from "./Status";
+export * from "./Status";
 export * from "./theme";
 export * from "./ThemeProvider";
 export * from "./useUniqueId";
