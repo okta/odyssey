@@ -667,6 +667,7 @@ export const components: ThemeOptions["components"] = {
         "&:last-child": {
           marginBottom: 0,
         },
+        textAlign: "start",
       }),
     },
   },
@@ -861,10 +862,10 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         color: theme.palette.primary.main,
-        textDecoration: "none",
+        textDecoration: "underline",
 
         "&:hover": {
-          color: theme.palette.primary.main,
+          color: theme.palette.primary.dark,
           textDecoration: "underline",
         },
 
@@ -926,6 +927,13 @@ export const components: ThemeOptions["components"] = {
         }),
       },
     ],
+  },
+  MuiListItem: {
+    styleOverrides: {
+      root: {
+        textAlign: "start",
+      },
+    },
   },
   MuiListSubheader: {
     styleOverrides: {
