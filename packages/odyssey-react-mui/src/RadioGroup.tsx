@@ -18,7 +18,7 @@ import {
   Radio,
 } from "./";
 import { RadioGroup as MuiRadioGroup } from "@mui/material";
-import { useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 
 export interface RadioGroupProps {
   /**
@@ -33,19 +33,19 @@ export interface RadioGroupProps {
   /**
    * Optional hint text
    */
-  hint?: string | undefined;
+  hint?: string;
   /**
    * Disables the whole radio group
    */
-  disabled?: boolean | undefined;
+  disabled?: boolean;
   /**
    * Declares the group invalid
    */
-  invalid?: boolean | undefined;
+  invalid?: boolean;
   /**
    * The error text for an invalid group
    */
-  error?: string | undefined;
+  error?: string;
   /**
    * The text value of the radio that should be selected by default
    */
@@ -53,7 +53,7 @@ export interface RadioGroupProps {
   /**
    * The <Radio> components within the group. Must include two or more.
    */
-  children: Array<React.ReactElement<typeof Radio>>;
+  children: Array<ReactElement<typeof Radio>>;
 }
 
 export const RadioGroup = ({
@@ -78,7 +78,7 @@ export const RadioGroup = ({
               .join(" "),
           }
         : undefined,
-    [error, hint]
+    [error, hint, name]
   );
 
   return (
@@ -86,9 +86,9 @@ export const RadioGroup = ({
       <FormLabel component="legend">{label}</FormLabel>
       {hint && <FormHelperText id={`${name}-hint`}>{hint}</FormHelperText>}
       <MuiRadioGroup
+        {...radioGroupProps}
         defaultValue={defaultValue}
         name={`${name}-group`}
-        {...radioGroupProps}
       >
         {children}
       </MuiRadioGroup>
