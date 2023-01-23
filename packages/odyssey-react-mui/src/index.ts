@@ -21,6 +21,7 @@ export * from "./PasswordInput";
 export * from "./Radio";
 export * from "./RadioGroup";
 export * from "./TextField";
+export * from "./Status";
 export * from "./theme";
 export * from "./ThemeProvider";
 export * from "./useUniqueId";
@@ -48,6 +49,9 @@ export {
   InputAdornment,
   InputBase,
   InputLabel,
+  List,
+  ListItem,
+  ListItemIcon,
   ListItemText,
   ListSubheader,
   MenuItem,
@@ -92,6 +96,9 @@ export type {
   InputAdornmentProps,
   InputBaseProps,
   InputLabelProps,
+  ListProps,
+  ListItemProps,
+  ListItemIconProps,
   ListItemTextProps,
   ListSubheaderProps,
   MenuItemProps,
