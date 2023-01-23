@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AlertColor, AlertProps } from "@mui/material";
+import { AlertColor } from "@mui/material";
 import { SyntheticEvent } from "react";
 import { Alert, Link } from "./";
 
