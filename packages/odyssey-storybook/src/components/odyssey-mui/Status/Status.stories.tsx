@@ -11,14 +11,14 @@
  */
 
 import { Story } from "@storybook/react";
-import { Chip } from "@okta/odyssey-react-mui";
+import { Status } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import StatusMdx from "./Status.mdx";
 
 export default {
   title: `MUI Components/Status`,
-  component: Chip,
+  component: Status,
   parameters: {
     docs: {
       page: StatusMdx,
@@ -39,7 +39,7 @@ export default {
 };
 
 const DefaultTemplate: Story = (args) => {
-  return <Chip label={args.label} variant="status" color={args.severity} />;
+  return <Status label={args.label} severity={args.severity} />;
 };
 
 export const Default = DefaultTemplate.bind({});
