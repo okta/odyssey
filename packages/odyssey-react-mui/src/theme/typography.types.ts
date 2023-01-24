@@ -14,12 +14,10 @@ import { CSSProperties } from "react";
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
-    kbd: CSSProperties;
     legend: CSSProperties;
     ui: CSSProperties;
   }
   interface TypographyVariantsOptions {
-    kbd?: CSSProperties;
     legend?: CSSProperties;
     ui: CSSProperties;
   }
@@ -30,7 +28,6 @@ declare module "@mui/material/Typography" {
     body1: true; // Design may refer to this as "body"
     body2: false;
     button: false;
-    kbd: true;
     legend: true;
     overline: false;
     subtitle1: true; // Design may refer to this as "caption"
