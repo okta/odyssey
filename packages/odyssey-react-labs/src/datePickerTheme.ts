@@ -14,28 +14,126 @@ import type { ThemeOptions } from "@mui/material/styles";
 
 export const datePickerTheme: ThemeOptions = {
   components: {
-    MuiPickersDay: {
+    MuiCalendarPicker: {
       styleOverrides: {
         root: ({ theme }) => ({
-          "&:focus, &:hover": {
-            backgroundColor: theme.palette.primary.main,
+          paddingBottom: theme.spacing(5),
+          paddingLeft: theme.spacing(5),
+          paddingRight: theme.spacing(5),
+          paddingTop: theme.spacing(4),
+          width: "auto",
+        }),
+      },
+    },
+    MuiCalendarOrClockPicker: {
+      styleOverrides: {
+        root: () => ({
+          "& > div": {
+            width: "auto",
           },
-          " &.Mui-selected:focus, &.Mui-selected:hover": {
+        }),
+      },
+    },
+    MuiDayPicker: {
+      styleOverrides: {
+        slideTransition: ({ theme }) => ({
+          minHeight: `${(204 / 16) * (16 / 14)}rem`,
+        }),
+        weekContainer: ({ theme }) => ({
+          gap: theme.spacing(1),
+          justifyContent: "space-between",
+          marginBottom: theme.spacing(1),
+          marginLeft: 0,
+          marginRight: 0,
+        }),
+        weekDayLabel: ({ theme }) => ({
+          height: theme.spacing(6),
+          marginBottom: theme.spacing(2),
+          marginLeft: 0,
+          marginRight: 0,
+          width: theme.spacing(6),
+        }),
+      },
+    },
+    MuiDatePicker: {
+      defaultProps: {},
+    },
+    MuiYearPicker: {},
+    MuiPickersCalendarHeader: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          gap: theme.spacing(1),
+          justifyContent: "space-between",
+          marginBottom: theme.spacing(1),
+          marginTop: 0,
+          paddingLeft: theme.spacing(2),
+          paddingRight: 0,
+          width: "auto",
+        }),
+        switchViewIcon: ({ theme }) => ({}),
+      },
+    },
+    MuiPickersDay: {
+      styleOverrides: {
+        dayWithMargin: ({ theme }) => ({
+          marginLeft: 0,
+          marginRight: 0,
+        }),
+        root: ({ theme }) => ({
+          border: "none",
+          borderRadius: "0.428571428571429rem",
+          height: theme.spacing(6),
+          width: theme.spacing(6),
+          "&:focus": {
+            backgroundColor: theme.palette.grey[100],
+          },
+          "&:hover": {
+            backgroundColor: theme.palette.grey[100],
+          },
+          "&.Mui-selected, &.Mui-selected:focus": {
+            backgroundColor: "transparent",
+            color: theme.palette.primary.main,
+            // color: theme.palette.text.primary,
+          },
+          "&.Mui-selected:hover": {
+            backgroundColor: theme.palette.grey[100],
+            color: theme.palette.primary.main,
+          },
+          "&.MuiPickersDay-today": {
+            backgroundColor: "transparent",
+            color: theme.palette.primary.main,
+          },
+          "&.MuiPickersDay-today::after": {
             backgroundColor: theme.palette.primary.main,
+            borderRadius: "50%",
+            content: '" "',
+            height: "2px",
+            position: "absolute",
+            bottom: theme.spacing(1),
+            width: "2px",
+            transform: "translateY(-50%)",
+          },
+          "&.MuiPickersDay-today.Mui-selected:hover": {
+            backgroundColor: theme.palette.grey[100],
+            color: theme.palette.primary.main,
+          },
+          "&.Mui-disabled:focus, &.Mui-disabled:hover": {
+            backgroundColor: "transparent",
+            color: theme.palette.grey[300],
           },
         }),
       },
     },
     PrivatePickersYear: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          "& > button:focus, & > button:hover": {
-            backgroundColor: theme.palette.primary.main,
-          },
-          " & > button.Mui-selected:focus, & > button.Mui-selected:hover": {
-            backgroundColor: theme.palette.primary.main,
-          },
-        }),
+        // root: ({ theme }) => ({
+        //   "& > button:focus, & > button:hover": {
+        //     backgroundColor: theme.palette.primary.main,
+        //   },
+        //   "& > button.Mui-selected:focus, & > button.Mui-selected:hover": {
+        //     backgroundColor: theme.palette.primary.main,
+        //   },
+        // }),
       },
     },
   },
