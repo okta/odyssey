@@ -10,24 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type {
-  ComponentsProps,
-  ComponentsOverrides,
-  ComponentsVariants,
-  Theme,
-} from "@mui/material/styles";
-
-declare module "@mui/material/styles" {
-  interface Components {
-    MuiPickersDay?: {
-      defaultProps?: ComponentsProps["MuiStepContent"];
-      styleOverrides?: ComponentsOverrides<Theme>["MuiStepContent"];
-      variants?: ComponentsVariants["MuiStepContent"];
-    };
-    PrivatePickersYear?: {
-      defaultProps?: ComponentsProps["MuiStepContent"];
-      styleOverrides?: ComponentsOverrides<Theme>["MuiStepContent"];
-      variants?: ComponentsVariants["MuiStepContent"];
-    };
-  }
-}
+import "@mui/x-date-pickers/themeAugmentation";
