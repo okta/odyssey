@@ -10,7 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { Theme } from "@emotion/react";
 import type { ThemeOptions } from "@mui/material/styles";
+
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CalendarIcon,
+  ChevronDownIcon,
+} from "@okta/odyssey-react-mui";
 
 export const datePickerTheme: ThemeOptions = {
   components: {
@@ -33,11 +41,29 @@ export const datePickerTheme: ThemeOptions = {
           },
         }),
       },
+      defaultProps: {
+        components: {
+          LeftArrowIcon: ArrowLeftIcon,
+          RightArrowIcon: ArrowRightIcon,
+          SwitchViewIcon: ChevronDownIcon,
+        },
+      },
+    },
+    MuiDesktopDatePicker: {
+      defaultProps: {
+        components: {
+          OpenPickerIcon: CalendarIcon,
+        },
+      },
     },
     MuiDayPicker: {
       styleOverrides: {
-        slideTransition: ({ theme }) => ({
-          minHeight: `${(204 / 16) * (16 / 14)}rem`,
+        header: ({ theme }) => ({
+          gap: theme.spacing(1),
+          justifyContent: "space-between",
+        }),
+        slideTransition: () => ({
+          minHeight: `${(214 / 16) * (16 / 14)}rem`,
         }),
         weekContainer: ({ theme }) => ({
           gap: theme.spacing(1),
@@ -45,8 +71,17 @@ export const datePickerTheme: ThemeOptions = {
           marginBottom: theme.spacing(1),
           marginLeft: 0,
           marginRight: 0,
+
+          "&:last-child": {
+            marginBottom: 0,
+          },
         }),
         weekDayLabel: ({ theme }) => ({
+          color: theme.palette.grey[900],
+          flexBasis: theme.spacing(6),
+          flexShrink: 0,
+          fontSize: theme.typography.subtitle1.fontSize,
+          fontWeight: theme.typography.fontWeightBold,
           height: theme.spacing(6),
           marginBottom: theme.spacing(2),
           marginLeft: 0,
@@ -56,14 +91,25 @@ export const datePickerTheme: ThemeOptions = {
       },
     },
     MuiDatePicker: {
-      defaultProps: {},
+      defaultProps: {
+        showDaysOutsideCurrentMonth: true,
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        edgeEnd: ({ theme }) => ({
+          marginInlineEnd: theme.spacing(1),
+        }),
+      },
     },
     MuiYearPicker: {},
     MuiPickersCalendarHeader: {
       styleOverrides: {
+        label: ({ theme }) => ({
+          fontSize: theme.typography.h6.fontSize,
+          fontWeight: theme.typography.fontWeightBold,
+        }),
         root: ({ theme }) => ({
-          gap: theme.spacing(1),
-          justifyContent: "space-between",
           marginBottom: theme.spacing(1),
           marginTop: 0,
           paddingLeft: theme.spacing(2),
@@ -75,21 +121,26 @@ export const datePickerTheme: ThemeOptions = {
     },
     MuiPickersDay: {
       styleOverrides: {
-        dayWithMargin: ({ theme }) => ({
+        dayWithMargin: () => ({
           marginLeft: 0,
           marginRight: 0,
         }),
         root: ({ theme }) => ({
           border: "none",
           borderRadius: "0.428571428571429rem",
+          flexBasis: theme.spacing(6),
+          flexShrink: 0,
+          fontSize: theme.typography.body1.fontSize,
           height: theme.spacing(6),
           width: theme.spacing(6),
+
           "&:focus": {
             backgroundColor: theme.palette.grey[100],
           },
           "&:hover": {
             backgroundColor: theme.palette.grey[100],
           },
+
           "&.Mui-selected, &.Mui-selected:focus": {
             backgroundColor: "transparent",
             color: theme.palette.primary.main,
@@ -99,6 +150,7 @@ export const datePickerTheme: ThemeOptions = {
             backgroundColor: theme.palette.grey[100],
             color: theme.palette.primary.main,
           },
+
           "&.MuiPickersDay-today": {
             backgroundColor: "transparent",
             color: theme.palette.primary.main,
@@ -107,20 +159,35 @@ export const datePickerTheme: ThemeOptions = {
             backgroundColor: theme.palette.primary.main,
             borderRadius: "50%",
             content: '" "',
-            height: "2px",
+            height: `${(2 / 16) * (16 / 14)}rem`,
             position: "absolute",
             bottom: theme.spacing(1),
-            width: "2px",
+            width: `${(2 / 16) * (16 / 14)}rem`,
             transform: "translateY(-50%)",
           },
           "&.MuiPickersDay-today.Mui-selected:hover": {
             backgroundColor: theme.palette.grey[100],
             color: theme.palette.primary.main,
           },
+
           "&.Mui-disabled:focus, &.Mui-disabled:hover": {
             backgroundColor: "transparent",
             color: theme.palette.grey[300],
           },
+        }),
+      },
+    },
+    MuiPickersPopper: {
+      styleOverrides: {
+        paper: ({ theme }) => ({
+          boxShadow: `0 ${(1 / 16) * (16 / 14)}rem ${
+            (4 / 16) * (16 / 14)
+          }rem rgba(29, 29, 33, 0.08), 0 ${(4 / 16) * (16 / 14)}rem ${
+            (10 / 16) * (16 / 14)
+          }rem rgba(29, 29, 33, 0.08), 0 ${(8 / 16) * (16 / 14)}rem ${
+            (30 / 16) * (16 / 14)
+          }rem rgba(29, 29, 33, 0.1)`,
+          marginTop: theme.spacing(1),
         }),
       },
     },
