@@ -13,7 +13,6 @@
 import type { StoryFn } from "@storybook/react";
 import {
   Button,
-  FormControlLabel,
   OdysseyThemeProvider,
   Radio,
   RadioGroup,
