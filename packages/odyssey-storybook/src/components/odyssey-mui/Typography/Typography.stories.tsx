@@ -39,7 +39,6 @@ export default {
         "h6",
         "body1",
         "subtitle1",
-        "kbd",
         "legend",
       ],
       control: { type: "select" },
@@ -102,16 +101,4 @@ export const Legend = Template.bind({});
 Legend.args = {
   children: "This is a legend",
   variant: "legend",
-};
-
-export const kbd = Template.bind({});
-kbd.args = {
-  children: "⌘",
-  variant: "kbd",
-};
-
-export const kbd2 = Template.bind({});
-kbd2.args = {
-  children: "Ctrl",
-  variant: "kbd",
 };

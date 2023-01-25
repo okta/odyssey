@@ -1,0 +1,83 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+
+<Meta anchor />
+
+# CSS Baseline
+
+Odyssey provides two components that insert "global" styles into your application, `<CssBaseline>` and `<ScopedCssBaseline>`.
+
+## `<CssBaseline>`
+
+The `<CssBaseline>` component updates the `<html>` and `<body>` elements to provide page-wide defaults expected by Odyssey.
+
+This component is required and should be inserted at the top of your view.
+
+### Layout
+
+- The `box-sizing` property is set to `border-box` on the `<html>` element. Every element is declared to inherit this property, ensuring that the element's declared width properly reflects the padding or border.
+- Removes margin on these elements in all browsers
+
+### Typography
+
+- `theme.typography.fontSize` is declared on `<html>`, setting the base for all rem units
+- The `theme.typography.body1` style is applied to the `<body>` element
+- `theme.typography.fontWeightBold` is set for the `<b>` and `<strong>` elements
+- Enables font-smoothing for improved readability
+
+## `<ScopedCssBaseline>`
+
+The `<ScopedCssBaseline>` component provides additional, optional element styles.
+
+These styles will only apply to children of `<ScopedCssBaseline>`.
+
+### kbd
+
+> The HTML Keyboard Input element (`<kbd>`) represents a span of inline text denoting textual user input from a keyboard, voice input, or any other text entry device. By convention, the user agent defaults to rendering the contents of a `<kbd>` element using its default monospace font, although this is not mandated by the HTML standard. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--kbd" />
+</Canvas>
+
+#### Usage
+
+When combined with <a href="#samp">`<samp>`</a>, the background of this element will swap to white for better contrast.
+
+### p
+
+> The `<p>` HTML element represents a paragraph. Paragraphs are usually represented in visual media as blocks of text separated from adjacent blocks by blank lines and/or first-line indentation, but HTML paragraphs can be any structural grouping of related content, such as images or form fields. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--p" />
+</Canvas>
+
+### ol
+
+> The `<ol>` HTML element represents an ordered list of items — typically rendered as a numbered list. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--ol" />
+</Canvas>
+
+### samp
+
+> The `<samp>` HTML element is used to enclose inline text which represents sample (or quoted) output from a computer program. Its contents are typically rendered using the browser's default monospaced font. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--samp" />
+</Canvas>
+
+### strong
+
+> The `<strong>` HTML element indicates that its contents have strong importance, seriousness, or urgency. Browsers typically render the contents in bold type. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--strong" />
+</Canvas>
+
+### ul
+
+> The `<ul>` HTML element represents an unordered list of items, typically rendered as a bulleted list. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--ul" />
+</Canvas>

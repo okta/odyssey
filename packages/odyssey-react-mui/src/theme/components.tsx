@@ -355,13 +355,6 @@ export const components: ThemeOptions["components"] = {
       disableRipple: true,
     },
   },
-  MuiCssBaseline: {
-    styleOverrides: {
-      boxSizing: "border-box",
-      fontFeatureSettings: "'lnum','pnum'",
-      fontVariant: "normal",
-    },
-  },
   MuiCheckbox: {
     defaultProps: {
       size: "small",
@@ -507,6 +500,84 @@ export const components: ThemeOptions["components"] = {
         ...(ownerState.variant === "indeterminate" && {
           strokeDasharray: "160%, 360%",
         }),
+      }),
+    },
+  },
+  MuiCssBaseline: {
+    styleOverrides: (themeParam) => `
+      html {
+        font-size: calc((${themeParam.typography.fontSize} / 16) * 100%);
+      }
+    `,
+  },
+  MuiScopedCssBaseline: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        kbd: {
+          display: "inline-block",
+          minWidth: `calc(${theme.typography.subtitle1.fontSize} * ${theme.typography.h5.lineHeight})`,
+          borderStyle: theme.mixins.borderStyle,
+          borderWidth: theme.mixins.borderWidth,
+          borderRadius: theme.mixins.borderRadius,
+          borderColor: theme.palette.grey[200],
+          backgroundColor: theme.palette.grey[50],
+          padding: `calc(${theme.spacing(1)} / 2) ${theme.spacing(1)}`,
+          fontSize: theme.typography.subtitle1.fontSize,
+          fontWeight: theme.typography.fontWeightRegular,
+          lineHeight: theme.typography.h5.lineHeight,
+          boxShadow: `0 1px 1px 0 hsla(240, 6%, 12%, 0.05)`,
+        },
+
+        p: {
+          maxWidth: theme.mixins.maxWidth,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        "ul, ol": {
+          maxWidth: theme.mixins.maxWidth,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          // Unique padding to get desire appearance with "outside" position
+          paddingInlineStart: "2ch",
+
+          ol: {
+            listStyleType: "lower-alpha",
+
+            ol: {
+              listStyleType: "lower-roman",
+            },
+          },
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        li: {
+          marginBlockEnd: theme.spacing(2),
+          paddingInlineStart: theme.spacing(1),
+
+          "ul, ol": {
+            marginBlockStart: theme.spacing(2),
+            marginInlineStart: `calc(${theme.spacing(6)} - 2ch)`,
+          },
+        },
+
+        samp: {
+          padding: "0 0.5ch",
+          backgroundColor: theme.palette.grey[50],
+          boxShadow: `0 1px 0 ${theme.palette.grey[50]}`,
+          fontSize: theme.typography.body1.fontSize,
+
+          kbd: {
+            background: theme.palette.common.white,
+          },
+        },
       }),
     },
   },
@@ -1451,29 +1522,12 @@ export const components: ThemeOptions["components"] = {
         subtitle1: "p",
         body1: "p",
         inherit: "p",
-        kbd: "kbd",
         legend: "legend",
       },
     },
     styleOverrides: {
       paragraph: ({ theme }) => ({
         marginBottom: theme.spacing(4),
-      }),
-      root: ({ theme, ownerState }) => ({
-        ...(ownerState.variant === "kbd" && {
-          display: "inline-block",
-          minWidth: `calc(${theme.typography.subtitle1.fontSize} * ${theme.typography.h5.lineHeight})`,
-          borderStyle: theme.mixins.borderStyle,
-          borderWidth: theme.mixins.borderWidth,
-          borderRadius: theme.mixins.borderRadius,
-          borderColor: theme.palette.grey[200],
-          backgroundColor: theme.palette.grey[50],
-          padding: `calc(${theme.spacing(1)} / 2) ${theme.spacing(1)}`,
-          fontSize: theme.typography.subtitle1.fontSize,
-          fontWeight: theme.typography.fontWeightRegular,
-          lineHeight: theme.typography.h5.lineHeight,
-          boxShadow: `0 1px 1px 0 hsla(240, 6%, 12%, 0.05)`,
-        }),
       }),
     },
   },
