@@ -63,9 +63,8 @@ const DefaultTemplate: Story = (args) => {
       linkUrl={args.linkUrl}
       linkText={args.linkText}
       onClose={args.onClose}
-    >
-      {args.content}
-    </Banner>
+      text={args.content}
+    ></Banner>
   );
 };
 
