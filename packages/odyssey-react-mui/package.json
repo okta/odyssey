@@ -20,10 +20,10 @@
   },
   "dependencies": {
     "@emotion/cache": "^11.10.5",
-    "@mui/icons-material": "^5.10.16",
-    "@mui/lab": "^5.0.0-alpha.103",
-    "@mui/material": "^5.10.16",
-    "@mui/utils": "^5.10.16",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/lab": "^5.0.0-alpha.117",
+    "@mui/material": "^5.11.6",
+    "@mui/utils": "^5.11.2",
     "@okta/odyssey-design-tokens": "workspace:*"
   },
   "devDependencies": {

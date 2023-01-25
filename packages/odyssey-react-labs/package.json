@@ -19,9 +19,9 @@
     "directory": "packages/odyssey-react-mui"
   },
   "dependencies": {
-    "@mui/material": "^5.10.16",
-    "@mui/x-date-pickers": "^5.0.4",
-    "@okta/odyssey-react-mui": "^0.16.1",
+    "@mui/material": "^5.11.6",
+    "@mui/x-date-pickers": "^5.0.15",
+    "@okta/odyssey-react-mui": "workspace:*",
     "date-fns": "^2.29.3"
   },
   "devDependencies": {
