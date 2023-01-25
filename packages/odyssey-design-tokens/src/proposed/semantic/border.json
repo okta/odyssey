@@ -13,40 +13,42 @@
       "main": { "value": "1px" },
       "medium": { "value": "2px" }
     },
-    // Moving these out of palette since their scope is "border"
+    // Moved these out of palette since their scope is "border"
     "color": {
       "subtle": {
-        "value": "color-neutral-3", 
+        "value": "{palette.grey.300}", 
         "comment": "For more subtle borders that don't need to meet accessibility requirements"},
       "main": {
-        "value": "color-neutral-6", 
+        "value": "{palette.grey.600}", 
         "comment": "The default/accessible border for interactive components"},
       "hover": {
-        "value": "color-neutral-10", 
+        "value": "{palette.grey.100}", 
         "comment": "For borders on interactive components in their hover state"},
       "disabled": {
-        "value": "color-neutral-3", 
+        "value": "{palette.grey.300}", 
         "comment": "For borders on interactive components in their disabled state"},
       "focus": {
-        "value": "color-blue-600", 
+        "value": "{palette.primary.main}", 
         "comment": "For use in the focus ring on interactive components"},
       "error-subtle": {
-        "value": "color-red-4", 
+        "value": "{palette.error.light}", 
         "comment": "For use as border on error alerts such as Toast"},
       "error": {
-        "value": "color-red-6", 
+        "value": "{palette.error.main}", 
         "comment": "For use on interactive components that need to display an error state"},
       "error-hover": {
-        "value": "color-red-10"
+        "value": "{palette.error.dark}"
       },
+      // If these are limited to < 3 components, I'd cut em
+      // and apply the coloration at the component level
       "warning-subtle": {
-        "value": "color-yellow-4", 
+        "value": "{palette.warning.main}", 
         "comment": "For use as border on warning alerts such as Toast"},
       "info": {
-        "value": "color-blue-4"
+        "value": "{palette.info.main}"
       },
       "success-subtle": {
-        "value": "color-green-4", 
+        "value": "{palette.success.main}", 
         "comment": "For use as border on success alerts such as Toast"
       }
     },
@@ -57,11 +59,11 @@
     // If so, we can reference tokens internally
     "border": {
       "main": {
-        "value": "{border.width.main} solid", 
+        "value": "{border.width.main} solid {border.color.main}", 
         "comment": "Default border width for most elements"
       },
       "medium": {
-        "value": "{border.width.medium} solid", 
+        "value": "{border.width.medium} solid {border.color.main}", 
         "comment": "Can be seen in focus rings and tab underlines"
       }
     }

@@ -11,138 +11,142 @@
     // Finally, MUI components use/expect these under the hood before theming.
     "primary": {
       "lighter": {
-       "value": "Tokens.ColorPaletteBlue000"
+        "value": "{odyssey.color.blue.1}"
       },
       "light": {
-        "value": "Tokens.ColorPaletteBlue300"
+        "value": "{odyssey.color.blue.4}"
       },
       "main": {
-        "value": "Tokens.ColorPaletteBlue500"
+        "value": "{odyssey.color.blue.6}"
       },
       "dark": {
-        "value": "Tokens.ColorPaletteBlue900"
+        "value": "{odyssey.color.blue.9}"
       },
       "contrastText": {
-        "value": "Tokens.ColorTextBodyInverse"
+        "value": "{palette.text.inverse}"
       }
     },
     "secondary": {
+      // We don't need to support this; hypothetical values
+      "lighter": {
+        "value": "{odyssey.color.turqoise.1}"
+      },
       "light": {
-        "value": "#80c7ca"
+        "value": "{odyssey.color.turqoise.4}"
       },
       "main": {
-        "value": "Tokens.ColorPaletteTurquoise500"
+        "value": "{odyssey.color.turqoise.6}"
       },
       "dark": {
-        "value": "#004650"
+        "value": "{odyssey.color.turqoise.9}"
       },
       "contrastText": {
-        "value": "Tokens.ColorTextBodyInverse"
+        "value": "{palette.text.inverse}"
       }
     },
     "error": {
       "lighter": {
-        "value": "Tokens.ColorPaletteRed000"
+        "value": "{odyssey.color.red.1}"
       },
       "light": {
-        "value": "Tokens.ColorPaletteRed300"
+        "value": "{odyssey.color.red.4}"
       },
       "main": {
-        "value": "Tokens.ColorPaletteRed500"
+        "value": "{odyssey.color.red.6}"
       },
       "dark": {
-        "value": "Tokens.ColorPaletteRed900"
+        "value": "{odyssey.color.red.9}"
       },
       "contrastText": {
-        "value": "Tokens.ColorTextBodyInverse"
+        "value": "{palette.text.inverse}"
       }
     },
     "warning": {
       "lighter": {
-        "value": "Tokens.ColorPaletteYellow000"
+        "value": "{odyssey.color.yellow.1}"
       },
       "light": {
-        "value": "Tokens.ColorPaletteYellow300"
+        "value": "{odyssey.color.yellow.4}"
       },
       "main": {
-        "value": "Tokens.ColorPaletteYellow500"
+        "value": "{odyssey.color.yellow.6}"
       },
       "dark": {
-        "value": "Tokens.ColorPaletteYellow900"
+        "value": "{odyssey.color.yellow.9}"
       },
       "contrastText": {
-        "value": "Tokens.ColorTextBody"
+        "value": "{palette.text.primary}"
       }
     },
     "info": {
       "lighter": {
-        "value": "Tokens.ColorPaletteBlue000"
+        "value": "{odyssey.color.blue.1}"
       },
       "light": {
-        "value": "Tokens.ColorPaletteBlue300"
+        "value": "{odyssey.color.blue.3}"
       },
       "main": {
-        "value": "Tokens.ColorPaletteBlue500"
+        "value": "{odyssey.color.blue.5}"
       },
       "dark": {
-        "value": "Tokens.ColorPaletteBlue900"
+        "value": "{odyssey.color.blue.9}"
       },
       "contrastText": {
-        "value": "Tokens.ColorTextBodyInverse"
+        "value": "{palette.text.inverse}"
       }
     },
     "success": {
       "lighter": {
-        "value": "Tokens.ColorPaletteGreen000"
+        "value": "{odyssey.color.green.1}"
       },
       "light": {
-        "value": "Tokens.ColorPaletteGreen300"
+        "value": "{odyssey.color.green.4}"
       },
       "main": {
-        "value": "Tokens.ColorPaletteGreen500"
+        "value": "{odyssey.color.green.6}"
       },
       "dark": {
-        "value": "Tokens.ColorPaletteGreen900"
+        "value": "{odyssey.color.green.9}"
       },
       "contrastText": {
-        "value": "Tokens.ColorTextBodyInverse"
+        "value": "{palette.text.inverse}"
       }
     },
     "grey": {
       // Our token here could be `neutral` and simply map to MUI's `grey`
       "0": {
         // This value is missing from MUI, but could be used in place of `common.white`
-        "value": "",
+        "value": "{odyssey.color.neutral.0}"
       },
       "50": {
-        "value": "Tokens.ColorPaletteNeutral000"
+        "value": "{odyssey.color.neutral.50}"
       },
       "100": {
-        "value": "Tokens.ColorPaletteNeutral100"
+        "value": "{odyssey.color.neutral.100}"
       },
       "200": {
-        "value": "Tokens.ColorPaletteNeutral200"
+        "value": "{odyssey.color.neutral.200}"
       },
       "300": {
-        "value": "#c1c1c8"
+        "value": "{odyssey.color.neutral.300}"
       },
       "400": {
-        "value": "#aaaab4"
+        "value": "{odyssey.color.neutral.400}"
       },
       "500": {
-        "value": "Tokens.ColorPaletteNeutral500"
+        "value": "{odyssey.color.neutral.500}"
       },
       "600": {
-        "value": "Tokens.ColorPaletteNeutral600"
+        "value": "{odyssey.color.neutral.600}"
       },
       "700": {
-        "value": "#585862"
+        "value": "{odyssey.color.neutral.700}"
       },
       "800": {
-        "value": "#41414b"
+        "value": "{odyssey.color.neutral.800}"
       },
       "900": {
-        "value": "Tokens.ColorPaletteNeutral900"
+        "value": "{odyssey.color.neutral.900}"
       }
     },
     // End MUI Palette
@@ -152,28 +156,41 @@
       // Info also uses these values, but could just as easily be
       // separated from "interactive/primary"
       "main": {
-        "value": "color-blue-6", 
+        "value": "{odyssey.color.blue.6}", 
         "comments": "For use as main brand color in interactive components such as buttons, links, checkboxes, radio buttons and tabs"
       },
       "hover": {
-        "value": "color-blue-10", 
+        "value": "{odyssey.color.blue.9}", 
         "comments": "For hover state of some interactive components such as buttons, checkboxes, and links"
       },
       "disabled": {
-        "value": "color-blue-4"
+        "value": "{odyssey.color.blue.4}"
       }
     },
+    // These go beyond "palette" and into "use"
+    // We may want to source from the palette above
+    // instead of the odyssey theme
     "text": {
-      "primary": {"value": "color-neutral-10", "comment": "For headings and body text"},
-      "secondary": {"value": "color-neutral-7", "comment": "For supporting or secondary text"},
-      "inverse": {"value": "color-neutral-0", "comment": "For text use on dark elements"},
-      "disabled": {"value": "color-neutral-6", "comment": "For disabled text"},
-      "error": {"value": "color-red-6"}
+      "primary": {
+        "value": "{palette.neutral.900}", 
+        "comment": "For headings and body text"},
+      "secondary": {
+        "value": "{palette.neutral.700}", 
+        "comment": "For supporting or secondary text"},
+      "inverse": {
+        "value": "{palette.neutral.0}", 
+        "comment": "For text use on dark elements"},
+      "disabled": {
+        "value": "{palette.neutral.600}", 
+        "comment": "For disabled text"},
+      "error": {
+        "value": "{palette.error.main}"
+      }
     },
     "background": {
       // Renaming "main" to "default" to match MUI
       "default": {
-        "value": "color-neutral-0", 
+        "value": "{palette.neutral.000}", 
         "comment": "For use in page or frame backgrounds"},
       "overlay": {
         "value": "240, 6, 12, 0.5", 
@@ -184,24 +201,24 @@
     },
     "surface": {
       // Propose removing these, since application is component-specific
-      "neutral-subtle": {"value": "color-neutral-1"},
-      "dark": {"value": "color-neutral-10", "comment": "For use in dark surfaces such as Tooltip"},
-      "error-subtle": {"value": "color-red-1", "comment": "For use as a subtle surface color on error components such as Toast"},
-      "warning-subtle": {"value": "color-yellow-1", "comment": "For use as a subtle surface color on warning components such as Toast"},
-      "info-subtle": {"value": "color-blue-1"},
-      "success-subtle": {"value": "color-green-1", "comment": "For use as a subtle surface color on success components such as Toast"}
+      // "neutral-subtle": {"value": "color-neutral-1"},
+      // "dark": {"value": "color-neutral-10", "comment": "For use in dark surfaces such as Tooltip"},
+      // "error-subtle": {"value": "color-red-1", "comment": "For use as a subtle surface color on error components such as Toast"},
+      // "warning-subtle": {"value": "color-yellow-1", "comment": "For use as a subtle surface color on warning components such as Toast"},
+      // "info-subtle": {"value": "color-blue-1"},
+      // "success-subtle": {"value": "color-green-1", "comment": "For use as a subtle surface color on success components such as Toast"}
     },
     "border": { 
       // Moved to border.json
     },
     "icon": {
       // Propose removing these, since they are component styles
-      "main": {"value":"color-neutral-10"},
-      "subtle": {"value":"color-neutral-7"},
-      "disabled": {"value":"color-neutral-6"},
-      "error": {"value":"color-red-6"},
-      "warning": {"value":"color-yellow-10"},
-      "success": {"value":"color-green-6"}
+      // "main": {"value":"color-neutral-10"},
+      // "subtle": {"value":"color-neutral-7"},
+      // "disabled": {"value":"color-neutral-6"},
+      // "error": {"value":"color-red-6"},
+      // "warning": {"value":"color-yellow-10"},
+      // "success": {"value":"color-green-6"}
     }
   }
 }
