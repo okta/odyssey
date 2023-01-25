@@ -1,0 +1,45 @@
+{
+  // Shifted these up so that `0` is "0", as MUI assumes
+  "spacing": {
+    "0": {
+      "value": "0",
+      "comment": "Use a spacing of 0px"
+    },
+    "1": {
+      "value": "0.28571429rem", 
+      "comment":"Use a spacing of 4px"
+    },
+    "2": {
+      "value": "0.57142857rem", 
+      "comment":"Use a spacing of 8px"
+    },
+    "3": {
+      "value": "0.85714286rem", 
+      "comment":"Use a spacing of 12px"
+    },
+    "4": {
+      "value": "1.14285714rem", 
+      "comment":"Use a spacing of 16px"
+    },
+    "5": {
+      "value": "1.71428571rem", 
+      "comment":"Use a spacing of 24px"
+    },
+    "6": {
+      "value": "2.28571429rem", 
+      "comment":"Use a spacing of 32px"
+    },
+    "7": {
+      "value": "2.85714286rem", 
+      "comment":"Use a spacing of 40px"
+    },
+    "8": {
+      "value": "3.42857143rem", 
+      "comment":"Use a spacing of 48px"
+    },
+    "9": {
+      "value": "4rem", 
+      "comment":"Use a spacing of 56px"
+    }
+  }
+}

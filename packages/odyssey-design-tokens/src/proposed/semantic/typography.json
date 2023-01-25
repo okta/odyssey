@@ -1,0 +1,50 @@
+{
+  // MUI variables we don't account for: font-variant, letter-spacing, font-feature-settings
+  "typography": {
+    "font-family": {
+      "default": {"value":"{odyssey.typography.typography.font-family.sans}"},
+      "code": {"value":"{odyssey.typography.typography.font-family.mono}"}
+    },
+    "font-size": {
+      // MUI has a fontSize variable for setting the REM base.
+      // We may or may not need a unique token for this--could use `body` for ex.
+      // "base": {
+      //   "value": "{odyssey.typography.base-size}",
+      // },
+      "caption": {"value":"{odyssey.typography.font-scale.0}"},
+      "body": {"value":"{odyssey.typography.font-scale.1}"},
+      "h6": {"value":"{odyssey.typography.font-scale.2}"},
+      "h5": {"value":"{odyssey.typography.font-scale.3}"},
+      "h4": {"value":"{odyssey.typography.font-scale.5}"},
+      "h3": {"value":"{odyssey.typography.font-scale.6}"},
+      "h2": {"value":"{odyssey.typography.font-scale.7}"},
+      "h1": {"value":"{odyssey.typography.font-scale.8}"}
+    },
+    "font-weight": {
+      // MUI expects tokens for light, regular, medium, and bold
+      // Jose's recs match the OpenType spec, so we can stick to those
+      // https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight#common_weight_name_mapping
+      // "light": {"value": "300" },
+      "regular": { "value": "400" },
+      // "medium": { "value": "500" },
+      "semibold": { "value": "600" },
+      // "bold": { "value": "700" }
+    },
+    "line-height": {
+      // Should we have unique tokens for line-height 
+      // rather than relying on matching a font-size?
+      "label": {
+        "value": "{odyssey.typography.font-scale.2}", 
+        "comment": "Pair this line height with font-size-body when using a label that does not wrap to additional lines."
+      },
+      "caption": {"value": "{odyssey.typography.font-scale.4}"},
+      "body": {"value": "{odyssey.typography.font-scale.4}"},
+      "h6": {"value": "{odyssey.typography.font-scale.4}"},
+      "h5": {"value": "{odyssey.typography.font-scale.6}"},
+      "h4": {"value": "{odyssey.typography.font-scale.7}"},
+      "h3": {"value": "{odyssey.typography.font-scale.8}"},
+      "h2": {"value": "{odyssey.typography.font-scale.9}"},
+      "h1": {"value": "{odyssey.typography.font-scale.10}"}
+    }
+  }
+}

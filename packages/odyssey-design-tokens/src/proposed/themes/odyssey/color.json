@@ -1,0 +1,49 @@
+{
+  // All non-semantic files should be prefixed with
+  // a theme name, to ensure no cross-contamination
+  "odyssey": {
+    "color": {
+      "neutral": {
+        // MUI isn't opinionated about 0 vs 100
+        // except in the case of greys where it uses 100s.
+        // We can pass in whatever we want though!
+        "0": {"value": "#FFFFFF"},
+        "1": {"value": "#F5F5F6"},
+        "2": {"value": "#EBEBED"},
+        "3": {"value": "#D7D7DC"},
+        "4": {"value": "#C1C1C8"},
+        "6": {"value": "#8C8C96"},
+        "7": {"value": "#6E6E78"},
+        "10": {"value": "#1D1D21"}
+      },
+      "blue": {
+        // Would this file include the full scope
+        // of the color scheme, with the semantic palette being
+        // limited to those we want in product?
+        "1": {"value":"#F2F5FF"},
+        "4": {"value":"#A7B5EC"},
+        "6": {"value":"#1662DD"},
+        "10": {"value":"#00297A"}
+      },
+      "green": {
+        "1": {"value":"#E5FAF3"},
+        "4": {"value":"#84D2B1"},
+        "6": {"value":"#00B478"},
+        "7": {"value":"#008055"},
+        "10": {"value":"#00503c"}
+      },
+      "red": {
+        "1": {"value":"#FFDFE2"},
+        "4": {"value":"#F88C90"},
+        "6": {"value":"#DA372C"},
+        "10": {"value":"#640019"}
+      },
+      "yellow": {
+        "1": {"value":"#FAF5DC"},
+        "4": {"value":"#F9DC77"},
+        "6": {"value":"#FFC61C"},
+        "10": {"value":"#663800"}
+      }
+    }
+  }
+}

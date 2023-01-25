@@ -1,0 +1,69 @@
+{
+  // MUI has a `shape` object - it's buggy right now
+  // We currently house these in `mixins` - feels off/confusing
+  // Proposing a `border` set to house all related tokens
+  "border": {
+    "radius": {
+      "main": {"value": "4px" },
+      "large": {"value": "8px" },
+      "circle": {"value": "100%" }
+    },
+    // Adding these
+    "width": {
+      "main": { "value": "1px" },
+      "medium": { "value": "2px" }
+    },
+    // Moving these out of palette since their scope is "border"
+    "color": {
+      "subtle": {
+        "value": "color-neutral-3", 
+        "comment": "For more subtle borders that don't need to meet accessibility requirements"},
+      "main": {
+        "value": "color-neutral-6", 
+        "comment": "The default/accessible border for interactive components"},
+      "hover": {
+        "value": "color-neutral-10", 
+        "comment": "For borders on interactive components in their hover state"},
+      "disabled": {
+        "value": "color-neutral-3", 
+        "comment": "For borders on interactive components in their disabled state"},
+      "focus": {
+        "value": "color-blue-600", 
+        "comment": "For use in the focus ring on interactive components"},
+      "error-subtle": {
+        "value": "color-red-4", 
+        "comment": "For use as border on error alerts such as Toast"},
+      "error": {
+        "value": "color-red-6", 
+        "comment": "For use on interactive components that need to display an error state"},
+      "error-hover": {
+        "value": "color-red-10"
+      },
+      "warning-subtle": {
+        "value": "color-yellow-4", 
+        "comment": "For use as border on warning alerts such as Toast"},
+      "info": {
+        "value": "color-blue-4"
+      },
+      "success-subtle": {
+        "value": "color-green-4", 
+        "comment": "For use as border on success alerts such as Toast"
+      }
+    },
+    "style": {
+      // should we include things like `solid` here?
+    }
+    // Not sure if we want these pre-assembled styles as Tokens
+    // If so, we can reference tokens internally
+    "border": {
+      "main": {
+        "value": "{border.width.main} solid", 
+        "comment": "Default border width for most elements"
+      },
+      "medium": {
+        "value": "{border.width.medium} solid", 
+        "comment": "Can be seen in focus rings and tab underlines"
+      }
+    }
+  }
+}
