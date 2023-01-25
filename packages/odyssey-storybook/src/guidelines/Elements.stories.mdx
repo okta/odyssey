@@ -4,7 +4,7 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 # Elements
 
-Currently, this page acts as an inventory of HTML elements previously styled via global CSS. As we move forward, these use cases will be covered by Box, Reset, or Text components.
+Currently, this page acts as an inventory of HTML elements previously styled via global CSS. As we move forward, these use cases will be covered by `<ScopedCssBaseline>`.
 
 As those components support specific use cases, their examples will be moved to the appropriate parent.
 
@@ -523,30 +523,6 @@ Many screen readers do not let users know of the presence of `ins`. To fix this,
 </ins>
 ```
 
-## kbd
-
-> The HTML Keyboard Input element (`<kbd>`) represents a span of inline text denoting textual user input from a keyboard, voice input, or any other text entry device. By convention, the user agent defaults to rendering the contents of a `<kbd>` element using its default monospace font, although this is not mandated by the HTML standard. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd'>MDN</a></cite>
-
-<figure class="docs-example">
-  <div class="docs-example--rendered">
-    <p>
-      Pressing <kbd>tab</kbd> will take you to the next focusable element on the
-      page.
-    </p>
-  </div>
-</figure>
-
-```html
-<p>
-  Pressing <kbd>tab</kbd> will take you to the next focusable element on the
-  page.
-</p>
-```
-
-### Usage
-
-When combined with <a href="#samp">`<samp>`</a>, the background of this element will swap to white for better contrast.
-
 ## mark
 
 > The HTML Mark Text element (`<mark>`) represents text which is marked or highlighted for reference or notation purposes, due to the marked passage's relevance or importance in the enclosing context. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark'>MDN</a></cite>
@@ -778,29 +754,6 @@ Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quot
 <p><strong>This dish is now SOLD OUT!</strong></p>
 ```
 
-## samp
-
-> The HTML Sample Element (`<samp>`) is used to enclose inline text which represents sample (or quoted) output from a computer program. Its contents are typically rendered using the browser's default monospaced font (such as Courier or Lucida Console). - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp">MDN</a></cite>
-
-<figure class="docs-example">
-  <div class="docs-example--rendered">
-    <p>
-      When iDonut crashed, it told me{" "}
-      <samp>
-        Press <kbd>F5</kbd> to refresh bakery
-      </samp>
-      .
-    </p>
-  </div>
-</figure>
-
-```html
-<p>
-  When iDonut crashed, it told me
-  <samp>Press <kbd>F5</kbd> to refresh bakery</samp>.
-</p>
-```
-
 ## small
 
 > The HTML `<small>` element represents side-comments and small print, like copyright and legal text, independent of its styled presentation. By default, it renders text within it one font-size smaller, such as from small to x-small. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small'>MDN</a></cite>
@@ -815,47 +768,6 @@ Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quot
 
 ```html
 <p><small>&copy; 2020 Atko, Inc. All Rights Reserved.</small></p>
-```
-
-## strong
-
-> The HTML Strong Importance Element (`<strong>`) indicates that its contents have strong importance, seriousness, or urgency. Browsers typically render the contents in bold type. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong'>MDN</a></cite>
-
-<figure class="docs-example">
-  <div class="docs-example--rendered">
-    <p>
-      For your safety and the safety of others,{" "}
-      <strong>please don't run.</strong>
-    </p>
-  </div>
-</figure>
-
-```html
-<p>
-  For your safety and the safety of others, <strong>please don't run.</strong>
-</p>
-```
-
-You can also nest `strong`. Doing so will provide additional style.
-
-<figure class="docs-example">
-  <div class="docs-example--rendered">
-    <p>
-      <strong>
-        For your safety and the safety of others,{" "}
-        <strong>please don't run.</strong>
-      </strong>
-    </p>
-  </div>
-</figure>
-
-```html
-<p>
-  <strong
-    >For your safety and the safety of others,
-    <strong>please don't run.</strong></strong
-  >
-</p>
 ```
 
 ## sub
