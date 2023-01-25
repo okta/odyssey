@@ -66,17 +66,12 @@ export const RadioGroup = ({
   children,
   defaultValue,
 }: RadioGroupProps) => {
-  const radioGroupProps = useMemo(
+  const ariaDescribedBy = useMemo(
     () =>
       error || hint
-        ? {
-            "aria-describedby": [
-              hint && `${name}-hint`,
-              error && `${name}-error`,
-            ]
-              .filter(Boolean)
-              .join(" "),
-          }
+        ? [hint && `${name}-hint`, error && `${name}-error`]
+            .filter(Boolean)
+            .join(" ")
         : undefined,
     [error, hint, name]
   );
@@ -86,7 +81,7 @@ export const RadioGroup = ({
       <FormLabel component="legend">{label}</FormLabel>
       {hint && <FormHelperText id={`${name}-hint`}>{hint}</FormHelperText>}
       <MuiRadioGroup
-        {...radioGroupProps}
+        aria-describedby={ariaDescribedBy}
         defaultValue={defaultValue}
         name={`${name}-group`}
       >
