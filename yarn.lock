@@ -6309,7 +6309,7 @@ __metadata:
     "@okta/odyssey-typescript": "workspace:*"
     jest: ^29.3.1
     jest-environment-jsdom: ^29.0.3
-    typescript: ^4.8.3
+    typescript: ^4.9.4
   languageName: unknown
   linkType: soft
 
@@ -6319,7 +6319,7 @@ __metadata:
   dependencies:
     "@okta/odyssey-lifecycle": "workspace:*"
     "@okta/odyssey-typescript": "workspace:*"
-    typescript: ^4.8.3
+    typescript: ^4.9.4
   languageName: unknown
   linkType: soft
 
@@ -6364,7 +6364,7 @@ __metadata:
     "@okta/odyssey-lifecycle": "workspace:*"
     "@okta/odyssey-typescript": "workspace:*"
     "@types/babel__core": ^7.1.19
-    typescript: ^4.8.3
+    typescript: ^4.9.4
   languageName: unknown
   linkType: soft
 
@@ -6467,7 +6467,7 @@ __metadata:
     react-dom: ^17.0.2
     regenerator-runtime: ^0.13.7
     stylelint: ^14.13.0
-    typescript: ^4.8.3
+    typescript: ^4.9.4
   peerDependencies:
     "@emotion/react": ^11
     "@emotion/styled": ^11
@@ -6516,7 +6516,7 @@ __metadata:
     react-dom: ^17.0.2
     regenerator-runtime: ^0.13.7
     stylelint: ^14.13.0
-    typescript: ^4.8.3
+    typescript: ^4.9.4
   peerDependencies:
     "@emotion/react": ^11
     "@emotion/styled": ^11
@@ -6555,7 +6555,7 @@ __metadata:
     markdown-to-jsx: ^7.1.7
     react: ^17.0.2
     react-dom: ^17.0.2
-    typescript: ^4.8.3
+    typescript: ^4.9.4
     webpack: 4.46.0
   languageName: unknown
   linkType: soft
@@ -6594,7 +6594,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-typescript@workspace:packages/odyssey-typescript"
   peerDependencies:
-    typescript: ^4.8.3
+    typescript: ^4.9.4
   languageName: unknown
   linkType: soft
 
@@ -24919,13 +24919,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.8.3":
-  version: 4.8.3
-  resolution: "typescript@npm:4.8.3"
+"typescript@npm:^4.9.4":
+  version: 4.9.4
+  resolution: "typescript@npm:4.9.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 8286a5edcaf3d68e65c451aa1e7150ad1cf53ee0813c07ec35b7abdfdb10f355ecaa13c6a226a694ae7a67785fd7eeebf89f845da0b4f7e4a35561ddc459aba0
+  checksum: e782fb9e0031cb258a80000f6c13530288c6d63f1177ed43f770533fdc15740d271554cdae86701c1dd2c83b082cea808b07e97fd68b38a172a83dbf9e0d0ef9
   languageName: node
   linkType: hard
 
@@ -24949,13 +24949,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.8.3#~builtin<compat/typescript>":
-  version: 4.8.3
-  resolution: "typescript@patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=aae4e6"
+"typescript@patch:typescript@^4.9.4#~builtin<compat/typescript>":
+  version: 4.9.4
+  resolution: "typescript@patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 2222d2382fb3146089b1d27ce2b55e9d1f99cc64118f1aba75809b693b856c5d3c324f052f60c75b577947fc538bc1c27bad0eb76cbdba9a63a253489504ba7e
+  checksum: 1caaea6cb7f813e64345190fddc4e6c924d0b698ab81189b503763c4a18f7f5501c69362979d36e19c042d89d936443e768a78b0675690b35eb663d19e0eae71
   languageName: node
   linkType: hard
 
