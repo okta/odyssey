@@ -30,6 +30,152 @@ The `<ScopedCssBaseline>` component provides additional, optional element styles
 
 These styles will only apply to children of `<ScopedCssBaseline>`.
 
+### abbr
+
+> The HTML `<abbr>` element represents an abbreviation or acronym; the optional title attribute can provide an expansion or description for the abbreviation. If present, title must contain this full description and nothing else. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--abbr" />
+</Canvas>
+
+#### Accessibility
+
+Writing out the acronym or abbreviation the first time it appears in your view will help people understand it, especially when the content is technical.
+
+Only include a `title` if expanding the abbreviation or acronym is impossible. The difference between the announced phrase and what appears on the screen can confuse users.
+
+### address
+
+> The HTML `<address>` element indicates that the enclosed HTML provides contact information for a person or people, or for an organization. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--address" />
+</Canvas>
+
+### blockquote
+
+> The HTML `<blockquote>` Element (or HTML Block Quotation Element) indicates that the enclosed text is an extended quotation. Usually, this is rendered visually by indentation (see Notes for how to change it). A URL for the source of the quotation may be given using the cite attribute, while a text representation of the source can be given using the `<cite>` element. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--blockquote" />
+</Canvas>
+
+### cite
+
+> The HTML Citation element (`<cite>`) is used to describe a reference to a cited creative work, and must include the title of that work. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--cite" />
+</Canvas>
+
+### code
+
+> The HTML `<code>` element displays its contents styled in a fashion intended to indicate that the text is a short fragment of computer code. By default, the content text is displayed using the user agent's default monospace font. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--code" />
+</Canvas>
+
+### del
+
+> The HTML `<del>` element represents a range of text that has been deleted from a document. This can be used when rendering "track changes" or source code diff information, for example. The `<ins>` element can be used for the opposite purpose: to indicate text that has been added to the document. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--del" />
+</Canvas>
+
+#### Accessibility
+
+Many screen readers do not let users know of the presence of `del`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
+
+### details
+
+> The HTML Details Element (`<details>`) creates a disclosure widget in which information is visible only when the widget is toggled into an "open" state. A summary or label can be provided using the `<summary>` element. [...] If the first child of the `<details>` element is a `<summary>`, the contents of the `<summary>` element are used as the label for the disclosure widget. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--details" />
+</Canvas>
+
+### dfn
+
+> The HTML Definition element (`<dfn>)` is used to indicate the term being defined within the context of a definition phrase or sentence. The `<p>` element, the `<dt>`/`<dd>` pairing, or the `<section>` element which is the nearest ancestor of the `<dfn>` is considered to be the definition of the term.
+
+There are multiple, valid ways to use `<dfn>`. For the sake of usability, Odyssey recommends you follow one of two formats.
+
+For most terms, the content of `<dfn>` should be term you are defining:
+
+<Canvas>
+  <Story id="mui-components-css-baseline--dfn" />
+</Canvas>
+
+If you're referencing an acronym or abbreviation, you may also combine it with `<abbr>`:
+
+<Canvas>
+  <Story id="mui-components-css-baseline--dfn-w-abbr" />
+</Canvas>
+
+In this example, the browser can correctly identify "All Purpose Flour" as the defined term, even though "APF" is the visible acronym.
+
+In both cases, utilizing the `id` attribute allows you to deep link to the definition, providing users with quick access.
+
+### dl
+
+> The HTML `<dl>` element represents a description list. The element encloses a list of groups of terms (specified using the `<dt>` element) and descriptions (provided by `<dd>` elements). Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs). - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--dl" />
+</Canvas>
+
+#### Accessibility
+
+Screen readers announce `<dl>` content differently - some may not indicate that the content is a list. To improve usability make sure each list item's content communicates its relationship to other list items.
+
+### em
+
+> The HTML `<em>` element marks text that has stress emphasis. The `<em>` element can be nested, with each level of nesting indicating a greater degree of emphasis. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--em" />
+</Canvas>
+
+You can also nest `em` tags to provide an added level of emphasis. Doing so will provide additional styling.
+
+<Canvas>
+  <Story id="mui-components-css-baseline--em-em" />
+</Canvas>
+
+### figure & figcaption
+
+> The HTML `<figure>` (Figure With Optional Caption) element represents self-contained content, potentially with an optional caption, which is specified using the (`<figcaption>`) element. The figure, its caption, and its contents are referenced as a single unit. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--figure" />
+</Canvas>
+
+#### Usage
+
+`<figure>` is appropriate for supplemental content - standard examples include supporting images, diagrams, and code snippets. Please include a `<figcaption>` to ensure your content has appropriate context.
+
+### hr
+
+> The HTML `<hr/>` element represents a thematic break between paragraph-level elements: for example, a change of scene in a story, or a shift of topic within a section. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--hr" />
+</Canvas>
+
+### ins
+
+> The HTML `<ins>` element represents a range of text that has been added to a document. You can use the `<del>` element to similarly represent a range of text that has been deleted from the document. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--ins" />
+</Canvas>
+
+#### Accessibility
+
+Many screen readers do not let users know of the presence of `ins`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
+
 ### kbd
 
 > The HTML Keyboard Input element (`<kbd>`) represents a span of inline text denoting textual user input from a keyboard, voice input, or any other text entry device. By convention, the user agent defaults to rendering the contents of a `<kbd>` element using its default monospace font, although this is not mandated by the HTML standard. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd'>MDN</a></cite>
@@ -42,6 +188,16 @@ These styles will only apply to children of `<ScopedCssBaseline>`.
 
 When combined with <a href="#samp">`<samp>`</a>, the background of this element will swap to white for better contrast.
 
+## mark
+
+> The HTML Mark Text element (`<mark>`) represents text which is marked or highlighted for reference or notation purposes, due to the marked passage's relevance or importance in the enclosing context. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--mark" />
+</Canvas>
+
+Many screen readers do not let users know of the presence of `mark`. To fix this, you should consider using `data-a11y-start` and `data-a11y-end`, prepend and append assistive text to the contents of the tag. In the above example, there are additional spaces before and after the text, this is intentional. Not adding these spaces will cause the content within the tag to run into the text within the tag.
+
 ### p
 
 > The `<p>` HTML element represents a paragraph. Paragraphs are usually represented in visual media as blocks of text separated from adjacent blocks by blank lines and/or first-line indentation, but HTML paragraphs can be any structural grouping of related content, such as images or form fields. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p'>MDN</a></cite>
@@ -50,12 +206,50 @@ When combined with <a href="#samp">`<samp>`</a>, the background of this element 
   <Story id="mui-components-css-baseline--p" />
 </Canvas>
 
+### pre
+
+> The HTML `<pre>` element represents preformatted text which is to be presented exactly as written in the HTML file. The text is typically rendered using a non-proportional ("monospace") font. Whitespace inside this element is displayed as written. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre">MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--pre" />
+</Canvas>
+
+**Note:** This example is currently broken due to the way Storybook handles linebreaks.
+
+#### Usage
+
+Since the `pre` tag preserves all whitespace, it's best to begin and end your content without linebreaks as below.
+
 ### ol
 
 > The `<ol>` HTML element represents an ordered list of items — typically rendered as a numbered list. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol'>MDN</a></cite>
 
 <Canvas>
   <Story id="mui-components-css-baseline--ol" />
+</Canvas>
+
+### q
+
+> The HTML `<q>` element indicates that the enclosed text is a short inline quotation. Most modern browsers implement this by surrounding the text in quotation marks. This element is intended for short quotations that don't require paragraph breaks; for long quotations use the `<blockquote>` element. - <cite><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q">MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--q" />
+</Canvas>
+
+#### Usage
+
+Only use the `<q>` element when you're quoting a person or text. Don't use this element for sarcasm, scare quotes, or similar.
+
+#### Smart quotes
+
+Outside of `<q>` and `<blockquote>`, browsers do not enable automatic smart quotes (“”). Instead, they rely on content authors to determine which type to use. Since we cannot ensure broad consistency, Odyssey does not apply smart quotes to `<q>`.
+
+### s
+
+> The HTML `<s>` element renders text with a strikethrough, or a line through it. Use the `<s>` element to represent things that are no longer relevant or no longer accurate. However, `<s>` is not appropriate when indicating document edits; for that, use the `<del>` and `<ins>` elements, as appropriate. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/s'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--s" />
 </Canvas>
 
 ### samp
@@ -66,6 +260,14 @@ When combined with <a href="#samp">`<samp>`</a>, the background of this element 
   <Story id="mui-components-css-baseline--samp" />
 </Canvas>
 
+### small
+
+> The HTML `<small>` element represents side-comments and small print, like copyright and legal text, independent of its styled presentation. By default, it renders text within it one font-size smaller, such as from small to x-small. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--small" />
+</Canvas>
+
 ### strong
 
 > The `<strong>` HTML element indicates that its contents have strong importance, seriousness, or urgency. Browsers typically render the contents in bold type. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong'>MDN</a></cite>
@@ -74,10 +276,42 @@ When combined with <a href="#samp">`<samp>`</a>, the background of this element 
   <Story id="mui-components-css-baseline--strong" />
 </Canvas>
 
+### sub
+
+> The HTML Subscript element (`<sub>`) specifies inline text which should be displayed as subscript for solely typographical reasons. Subscripts are typically rendered with a lowered baseline using smaller text. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--sub" />
+</Canvas>
+
+### summary
+
+> The HTML Disclosure Summary element (`<summary>`) element specifies a summary, caption, or legend for a `<details>` element's disclosure box. Clicking the `<summary>` element toggles the state of the parent `<details>` element open and closed.
+
+<Canvas>
+  <Story id="mui-components-css-baseline--summary" />
+</Canvas>
+
+### sup
+
+> The HTML Superscript element (`<sup>`) specifies inline text which is to be displayed as superscript for solely typographical reasons. Superscripts are usually rendered with a raised baseline using smaller text. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--sup" />
+</Canvas>
+
 ### ul
 
 > The `<ul>` HTML element represents an unordered list of items, typically rendered as a bulleted list. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong'>MDN</a></cite>
 
 <Canvas>
   <Story id="mui-components-css-baseline--ul" />
+</Canvas>
+
+### var
+
+> The HTML `<var>` element represents the name of a variable in a mathematical expression or a programming context. - <cite><a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var'>MDN</a></cite>
+
+<Canvas>
+  <Story id="mui-components-css-baseline--var" />
 </Canvas>

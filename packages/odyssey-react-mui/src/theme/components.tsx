@@ -513,6 +513,158 @@ export const components: ThemeOptions["components"] = {
   MuiScopedCssBaseline: {
     styleOverrides: {
       root: ({ theme }) => ({
+        abbr: {
+          borderBottomWidth: "1px",
+          borderBottomStyle: "dashed",
+          borderBottomColor: theme.palette.primary.dark,
+          textDecoration: "none",
+        },
+
+        address: {
+          maxWidth: theme.mixins.maxWidth,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          marginInline: 0,
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        blockquote: {
+          maxWidth: theme.mixins.maxWidth,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          marginInline: 0,
+          paddingBlock: 0,
+          paddingInlineStart: theme.spacing(2),
+          paddingInlineEnd: 0,
+          borderInlineStartWidth: "3px",
+          borderInlineStartStyle: "solid",
+          borderInlineStartColor: theme.palette.grey[200],
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        cite: {
+          fontStyle: "italic",
+        },
+
+        code: {
+          fontFamily:
+            "'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
+        },
+
+        del: {
+          display: "inline-block",
+          backgroundColor: theme.palette.error.light,
+
+          "&::before, &::after": {
+            clip: "rect(0 0 0 0)",
+            clipPath: "inset(50%)",
+            height: "1px",
+            overflow: "hidden",
+            position: "absolute",
+            whiteSpace: "nowrap",
+            width: "1px",
+          },
+
+          "&::before": {
+            content: "attr(data-a11y-start)",
+          },
+
+          "&::after": {
+            content: "attr(data-a11y-end)",
+          },
+        },
+
+        details: {
+          fontSize: theme.typography.body1.fontSize,
+        },
+
+        dfn: {
+          fontStyle: "italic",
+        },
+
+        dl: {
+          display: "grid",
+          gridGap: `${theme.spacing(2)} ${theme.spacing(4)}`,
+          gridTemplateColumns: "repeat(2, minmax(min-content, max-content))",
+          maxWidth: theme.mixins.maxWidth,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          marginInline: 0,
+          padding: 0,
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+
+          dt: {
+            gridColumn: 1,
+            fontWeight: 600,
+          },
+
+          dd: {
+            gridColumn: 2,
+            fontWeight: 400,
+          },
+        },
+
+        em: {
+          fontStyle: "italic",
+
+          "& > em": {
+            textDecoration: "underline",
+          },
+        },
+
+        figure: {
+          display: "grid",
+          gridGap: theme.spacing(2),
+          gridTemplateColumns: "minmax(min-content, max-content)",
+          justifyContent: "center",
+          justifyItems: "center",
+
+          figcaption: {
+            color: theme.palette.text.secondary,
+            fontSize: theme.typography.body1.fontSize,
+          },
+        },
+
+        hr: {
+          marginBlock: theme.spacing(2),
+          marginInline: 0,
+          borderWidth: "1px",
+          borderStyle: "solid",
+          borderColor: theme.palette.grey[200],
+        },
+
+        ins: {
+          display: "inline-block",
+          backgroundColor: theme.palette.success.light,
+
+          "&::before, &::after": {
+            clip: "rect(0 0 0 0)",
+            clipPath: "inset(50%)",
+            height: "1px",
+            overflow: "hidden",
+            position: "absolute",
+            whiteSpace: "nowrap",
+            width: "1px",
+          },
+
+          "&::before": {
+            content: "attr(data-a11y-start)",
+          },
+
+          "&::after": {
+            content: "attr(data-a11y-end)",
+          },
+        },
+
         kbd: {
           display: "inline-block",
           minWidth: `calc(${theme.typography.subtitle1.fontSize} * ${theme.typography.h5.lineHeight})`,
@@ -522,16 +674,54 @@ export const components: ThemeOptions["components"] = {
           borderColor: theme.palette.grey[200],
           backgroundColor: theme.palette.grey[50],
           padding: `calc(${theme.spacing(1)} / 2) ${theme.spacing(1)}`,
+          fontFamily:
+            "'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
           fontSize: theme.typography.subtitle1.fontSize,
           fontWeight: theme.typography.fontWeightRegular,
           lineHeight: theme.typography.h5.lineHeight,
           boxShadow: `0 1px 1px 0 hsla(240, 6%, 12%, 0.05)`,
         },
 
+        mark: {
+          backgroundColor: theme.palette.warning.light,
+
+          "&::before, &::after": {
+            clip: "rect(0 0 0 0)",
+            clipPath: "inset(50%)",
+            height: "1px",
+            overflow: "hidden",
+            position: "absolute",
+            whiteSpace: "nowrap",
+            width: "1px",
+          },
+
+          "&::before": {
+            content: "attr(data-a11y-start)",
+          },
+
+          "&::after": {
+            content: "attr(data-a11y-end)",
+          },
+        },
+
         p: {
           maxWidth: theme.mixins.maxWidth,
           marginBlockStart: 0,
           marginBlockEnd: theme.spacing(4),
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        pre: {
+          marginInline: 0,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          fontFamily:
+            "'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
+          whiteSpace: "pre-wrap",
+          tabSize: 2,
 
           "&:last-child": {
             marginBlockEnd: 0,
@@ -568,6 +758,22 @@ export const components: ThemeOptions["components"] = {
           },
         },
 
+        q: {
+          quotes: `'"' '"' "'" "'"`,
+
+          "&::before": {
+            content: "open-quote",
+          },
+
+          "&::after": {
+            content: "close-quote",
+          },
+        },
+
+        s: {
+          textDecoration: "line-through",
+        },
+
         samp: {
           padding: "0 0.5ch",
           backgroundColor: theme.palette.grey[50],
@@ -577,6 +783,40 @@ export const components: ThemeOptions["components"] = {
           kbd: {
             background: theme.palette.common.white,
           },
+        },
+
+        small: {
+          fontSize: theme.typography.caption.fontSize,
+        },
+
+        sub: {
+          fontSize: theme.typography.caption.fontSize,
+          lineHeight: 1,
+          verticalAlign: "sub",
+        },
+
+        summary: {
+          fontSize: theme.typography.body1.fontSize,
+          fontWeight: theme.typography.fontWeightBold,
+          cursor: "default",
+
+          "&:focus-visible": {
+            outlineColor: theme.palette.primary.main,
+            outlineOffset: "2px",
+            outlineStyle: "solid",
+            outlineWidth: "2px",
+          },
+        },
+
+        sup: {
+          fontSize: theme.typography.caption.fontSize,
+          lineHeight: 1,
+          verticalAlign: "super",
+        },
+
+        var: {
+          fontStyle: "italic",
+          fontWeight: theme.typography.fontWeightBold,
         },
       }),
     },
