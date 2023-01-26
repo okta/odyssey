@@ -32,7 +32,6 @@ import {
   CloseCircleFilledIcon,
   InformationCircleFilledIcon,
 } from "../iconDictionary";
-import { typography } from "../../dist/theme/typography";
 
 export const components: ThemeOptions["components"] = {
   MuiAlert: {
