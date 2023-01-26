@@ -26,6 +26,7 @@ export * from "./components";
 export {
   Alert,
   AlertTitle,
+  Autocomplete,
   Box,
   Button,
   Checkbox,
@@ -76,6 +77,7 @@ export {
 export type {
   AlertProps,
   AlertTitleProps,
+  AutocompleteProps,
   BoxProps,
   ButtonProps,
   CheckboxProps,
