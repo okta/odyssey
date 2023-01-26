@@ -18,15 +18,18 @@ import {
   CalendarIcon,
   ChevronDownIcon,
 } from "@okta/odyssey-react-mui";
+import { theme } from "@okta/odyssey-react-mui/dist/theme/theme";
+
+const popupPadding = theme.spacing(5);
 
 export const datePickerTheme: ThemeOptions = {
   components: {
     MuiCalendarPicker: {
       styleOverrides: {
         root: ({ theme }) => ({
-          paddingBottom: theme.spacing(5),
-          paddingLeft: theme.spacing(5),
-          paddingRight: theme.spacing(5),
+          paddingBottom: popupPadding,
+          paddingLeft: popupPadding,
+          paddingRight: popupPadding,
           paddingTop: theme.spacing(4),
           width: "100%",
 
@@ -195,6 +198,8 @@ export const datePickerTheme: ThemeOptions = {
           flexDirection: "column",
           flexWrap: "nowrap",
           maxHeight: `${(284 / 16) * (16 / 14)}rem`,
+          marginBottom: `-${popupPadding}`,
+          marginInlineEnd: `-${popupPadding}`,
         }),
       },
     },

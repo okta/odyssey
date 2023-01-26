@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Story } from "@storybook/react";
 import {
   InputBase,
@@ -69,11 +69,14 @@ export default {
 
 const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
   const [value, setValue] = useState<unknown>(Date.now());
-  const datePickerProps = {
-    ...props,
-    value,
-    onChange: (newValue: unknown) => setValue(newValue),
-  };
+  const datePickerProps = useMemo(
+    () => ({
+      ...props,
+      onChange: (newValue: unknown) => setValue(newValue),
+      value,
+    }),
+    [props, value]
+  );
 
   // TEMP: REMOVE THIS
   useEffect(() => {
