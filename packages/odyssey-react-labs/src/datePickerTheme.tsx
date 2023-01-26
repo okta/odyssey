@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Theme } from "@emotion/react";
 import type { ThemeOptions } from "@mui/material/styles";
 
 import {
@@ -29,7 +28,11 @@ export const datePickerTheme: ThemeOptions = {
           paddingLeft: theme.spacing(5),
           paddingRight: theme.spacing(5),
           paddingTop: theme.spacing(4),
-          width: "auto",
+          width: "100%",
+
+          "&, &::before, &::after": {
+            boxSizing: "border-box", // TEMP. Remove this when scoped CSS is added.
+          },
         }),
       },
     },
@@ -37,7 +40,7 @@ export const datePickerTheme: ThemeOptions = {
       styleOverrides: {
         root: () => ({
           "& > div": {
-            width: "auto",
+            width: `${(296 / 16) * (16 / 14)}rem`,
           },
         }),
       },
@@ -95,14 +98,6 @@ export const datePickerTheme: ThemeOptions = {
         showDaysOutsideCurrentMonth: true,
       },
     },
-    MuiIconButton: {
-      styleOverrides: {
-        edgeEnd: ({ theme }) => ({
-          marginInlineEnd: theme.spacing(1),
-        }),
-      },
-    },
-    MuiYearPicker: {},
     MuiPickersCalendarHeader: {
       styleOverrides: {
         label: ({ theme }) => ({
@@ -116,7 +111,6 @@ export const datePickerTheme: ThemeOptions = {
           paddingRight: 0,
           width: "auto",
         }),
-        switchViewIcon: ({ theme }) => ({}),
       },
     },
     MuiPickersDay: {
@@ -141,10 +135,13 @@ export const datePickerTheme: ThemeOptions = {
             backgroundColor: theme.palette.grey[100],
           },
 
+          "&:not(.Mui-selected)": {
+            border: "none",
+          },
+
           "&.Mui-selected, &.Mui-selected:focus": {
             backgroundColor: "transparent",
             color: theme.palette.primary.main,
-            // color: theme.palette.text.primary,
           },
           "&.Mui-selected:hover": {
             backgroundColor: theme.palette.grey[100],
@@ -154,6 +151,7 @@ export const datePickerTheme: ThemeOptions = {
           "&.MuiPickersDay-today": {
             backgroundColor: "transparent",
             color: theme.palette.primary.main,
+            fontWeight: theme.typography.fontWeightBold,
           },
           "&.MuiPickersDay-today::after": {
             backgroundColor: theme.palette.primary.main,
@@ -191,16 +189,66 @@ export const datePickerTheme: ThemeOptions = {
         }),
       },
     },
+    MuiYearPicker: {
+      styleOverrides: {
+        root: () => ({
+          flexDirection: "column",
+          flexWrap: "nowrap",
+          maxHeight: `${(284 / 16) * (16 / 14)}rem`,
+        }),
+      },
+    },
     PrivatePickersYear: {
       styleOverrides: {
-        // root: ({ theme }) => ({
-        //   "& > button:focus, & > button:hover": {
-        //     backgroundColor: theme.palette.primary.main,
-        //   },
-        //   "& > button.Mui-selected:focus, & > button.Mui-selected:hover": {
-        //     backgroundColor: theme.palette.primary.main,
-        //   },
-        // }),
+        button: ({ theme }) => ({
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: 0,
+          marginTop: 0,
+          position: "relative",
+
+          "&:focus": {
+            backgroundColor: theme.palette.grey[100],
+          },
+          "&:hover": {
+            backgroundColor: theme.palette.grey[100],
+          },
+
+          "&[aria-current='date']": {
+            backgroundColor: "transparent",
+            color: theme.palette.primary.main,
+            fontWeight: theme.typography.fontWeightBold,
+          },
+          "&[aria-current='date']::after": {
+            backgroundColor: theme.palette.primary.main,
+            borderRadius: "50%",
+            content: '" "',
+            height: `${(2 / 16) * (16 / 14)}rem`,
+            position: "absolute",
+            bottom: theme.spacing(1),
+            width: `${(2 / 16) * (16 / 14)}rem`,
+            transform: "translateY(-50%)",
+          },
+        }),
+        root: () => ({
+          display: "block",
+        }),
+        selected: ({ theme }) => ({
+          "&.Mui-selected, &.Mui-selected:focus": {
+            backgroundColor: "transparent",
+            color: theme.palette.primary.main,
+          },
+          "&.Mui-selected:hover": {
+            backgroundColor: theme.palette.grey[100],
+            color: theme.palette.primary.main,
+          },
+
+          "&[aria-current='date']": {
+            backgroundColor: theme.palette.grey[100],
+            color: theme.palette.primary.main,
+          },
+        }),
       },
     },
   },

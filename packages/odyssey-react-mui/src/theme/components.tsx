@@ -687,6 +687,9 @@ export const components: ThemeOptions["components"] = {
   },
   MuiIconButton: {
     styleOverrides: {
+      edgeEnd: ({ theme }) => ({
+        marginInlineEnd: theme.spacing(1),
+      }),
       root: ({ theme }) => ({
         padding: theme.spacing(1),
         fontSize: theme.typography.body1.fontSize,
