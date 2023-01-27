@@ -78,19 +78,6 @@ const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
     [props, value]
   );
 
-  // TEMP: REMOVE THIS
-  useEffect(() => {
-    // ts-expect-error
-    document.querySelector(".MuiIconButton-root").click();
-    setTimeout(() => {
-      document
-        .querySelector(
-          "[aria-label='calendar view is open, switch to year view']"
-        )
-        .click();
-    }, 1000);
-  }, []);
-
   return (
     <OdysseyThemeProvider customTheme={datePickerTheme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -101,3 +88,6 @@ const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
 };
 
 export const DatePickerPrimary = Template.bind({});
+DatePickerPrimary.args = {
+  open: true,
+};

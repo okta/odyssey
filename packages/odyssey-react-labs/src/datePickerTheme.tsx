@@ -10,26 +10,80 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ThemeOptions } from "@mui/material/styles";
-
+import { CSSInterpolation, Theme, ThemeOptions } from "@mui/material/styles";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CalendarIcon,
   ChevronDownIcon,
 } from "@okta/odyssey-react-mui";
-import { theme } from "@okta/odyssey-react-mui/dist/theme/theme";
 
-const popupPadding = theme.spacing(5);
+const popupSpacingValue = 5;
+
+type ThemeStyles = ({
+  theme,
+}: {
+  theme: Omit<Theme, "components">;
+}) => CSSInterpolation;
+
+type StateStyles = Record<string, ThemeStyles>;
+
+const dateStyles: StateStyles = {
+  default: ({ theme }) => ({
+    color: theme.palette.text.primary,
+  }),
+  disabled: ({ theme }) => ({
+    backgroundColor: "transparent",
+    color: theme.palette.text.disabled,
+  }),
+  hover: ({ theme }) => ({
+    backgroundColor: theme.palette.grey[100],
+  }),
+  hoverSelected: ({ theme }) => ({
+    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.primary.contrastText,
+  }),
+  outsideOfMonth: ({ theme }) => ({
+    backgroundColor: "transparent",
+    color: theme.palette.text.secondary,
+  }),
+  selected: ({ theme }) => ({
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+  }),
+  today: ({ theme }) => ({
+    backgroundColor: "transparent",
+    color: theme.palette.primary.main,
+  }),
+};
+
+const todayDotStyles: StateStyles = {
+  default: ({ theme }) => ({
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: "50%",
+    content: '" "',
+    height: `${(2 / 16) * (16 / 14)}rem`,
+    position: "absolute",
+    bottom: theme.spacing(1),
+    width: `${(2 / 16) * (16 / 14)}rem`,
+    transform: "translateY(-50%)",
+  }),
+  hover: ({ theme }) => ({
+    backgroundColor: theme.palette.primary.main,
+  }),
+  selected: ({ theme }) => ({
+    backgroundColor: theme.palette.primary.contrastText,
+  }),
+};
 
 export const datePickerTheme: ThemeOptions = {
   components: {
     MuiCalendarPicker: {
       styleOverrides: {
         root: ({ theme }) => ({
-          paddingBottom: popupPadding,
-          paddingLeft: popupPadding,
-          paddingRight: popupPadding,
+          paddingBottom: theme.spacing(popupSpacingValue),
+          paddingLeft: theme.spacing(popupSpacingValue),
+          paddingRight: theme.spacing(popupSpacingValue),
           paddingTop: theme.spacing(4),
           width: "100%",
 
@@ -98,7 +152,20 @@ export const datePickerTheme: ThemeOptions = {
     },
     MuiDatePicker: {
       defaultProps: {
+        PopperProps: {
+          popperOptions: {
+            placement: "auto-start",
+          },
+        },
         showDaysOutsideCurrentMonth: true,
+        views: ["day", "year", "month"],
+      },
+    },
+    MuiMonthPicker: {
+      styleOverrides: {
+        root: () => ({
+          display: "block",
+        }),
       },
     },
     MuiPickersCalendarHeader: {
@@ -122,60 +189,43 @@ export const datePickerTheme: ThemeOptions = {
           marginLeft: 0,
           marginRight: 0,
         }),
-        root: ({ theme }) => ({
-          border: "none",
-          borderRadius: "0.428571428571429rem",
-          flexBasis: theme.spacing(6),
-          flexShrink: 0,
-          fontSize: theme.typography.body1.fontSize,
-          height: theme.spacing(6),
-          width: theme.spacing(6),
-
-          "&:focus": {
-            backgroundColor: theme.palette.grey[100],
-          },
-          "&:hover": {
-            backgroundColor: theme.palette.grey[100],
-          },
-
-          "&:not(.Mui-selected)": {
+        root: ({ theme }) => [
+          dateStyles.default({ theme }),
+          {
             border: "none",
-          },
+            borderRadius: "0.428571428571429rem",
+            flexBasis: theme.spacing(6),
+            flexShrink: 0,
+            fontSize: theme.typography.body1.fontSize,
+            height: theme.spacing(6),
+            width: theme.spacing(6),
 
-          "&.Mui-selected, &.Mui-selected:focus": {
-            backgroundColor: "transparent",
-            color: theme.palette.primary.main,
-          },
-          "&.Mui-selected:hover": {
-            backgroundColor: theme.palette.grey[100],
-            color: theme.palette.primary.main,
-          },
+            "&.MuiPickersDay-today": [
+              dateStyles.today({ theme }),
+              {
+                fontWeight: theme.typography.fontWeightBold,
+              },
+            ],
 
-          "&.MuiPickersDay-today": {
-            backgroundColor: "transparent",
-            color: theme.palette.primary.main,
-            fontWeight: theme.typography.fontWeightBold,
-          },
-          "&.MuiPickersDay-today::after": {
-            backgroundColor: theme.palette.primary.main,
-            borderRadius: "50%",
-            content: '" "',
-            height: `${(2 / 16) * (16 / 14)}rem`,
-            position: "absolute",
-            bottom: theme.spacing(1),
-            width: `${(2 / 16) * (16 / 14)}rem`,
-            transform: "translateY(-50%)",
-          },
-          "&.MuiPickersDay-today.Mui-selected:hover": {
-            backgroundColor: theme.palette.grey[100],
-            color: theme.palette.primary.main,
-          },
+            "&.MuiPickersDay-today::after": todayDotStyles.default({ theme }),
+            "&.MuiPickersDay-today.Mui-selected::after":
+              todayDotStyles.selected({ theme }),
+            "&:hover": dateStyles.hover({ theme }),
 
-          "&.Mui-disabled:focus, &.Mui-disabled:hover": {
-            backgroundColor: "transparent",
-            color: theme.palette.grey[300],
+            "&:not(.Mui-selected)": {
+              border: "none",
+            },
+
+            "&.Mui-selected, &.Mui-selected:focus": dateStyles.selected({
+              theme,
+            }),
+            "&.Mui-selected:hover": dateStyles.hoverSelected({ theme }),
+            "&.MuiPickersDay-dayOutsideMonth": dateStyles.outsideOfMonth({
+              theme,
+            }),
+            "&.Mui-disabled": dateStyles.disabled({ theme }),
           },
-        }),
+        ],
       },
     },
     MuiPickersPopper: {
@@ -194,65 +244,89 @@ export const datePickerTheme: ThemeOptions = {
     },
     MuiYearPicker: {
       styleOverrides: {
-        root: () => ({
+        root: ({ theme }) => ({
           flexDirection: "column",
           flexWrap: "nowrap",
           maxHeight: `${(284 / 16) * (16 / 14)}rem`,
-          marginBottom: `-${popupPadding}`,
-          marginInlineEnd: `-${popupPadding}`,
+          marginBottom: `-${theme.spacing(popupSpacingValue)}`,
+          marginInlineEnd: `-${theme.spacing(popupSpacingValue)}`,
         }),
+      },
+    },
+    PrivatePickersMonth: {
+      styleOverrides: {
+        root: ({ theme }) => [
+          dateStyles.default({ theme }),
+          {
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: 0,
+            marginTop: 0,
+            position: "relative",
+
+            "&[aria-current='date']": [
+              dateStyles.today({ theme }),
+              {
+                fontWeight: theme.typography.fontWeightBold,
+              },
+            ],
+
+            "&[aria-current='date']::after": todayDotStyles.default({ theme }),
+            "&:hover": dateStyles.hover({ theme }),
+
+            "&:not(.Mui-selected)": {
+              border: "none",
+            },
+
+            "&.Mui-disabled": dateStyles.disabled({ theme }),
+
+            "&.Mui-selected[aria-current='date']::after":
+              todayDotStyles.selected({ theme }),
+            "&.Mui-selected, &.Mui-selected:focus": dateStyles.selected({
+              theme,
+            }),
+            "&.Mui-selected:hover": dateStyles.hoverSelected({ theme }),
+          },
+        ],
       },
     },
     PrivatePickersYear: {
       styleOverrides: {
-        button: ({ theme }) => ({
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: 0,
-          marginTop: 0,
-          position: "relative",
+        button: ({ theme }) => [
+          dateStyles.default({ theme }),
+          {
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: 0,
+            marginTop: 0,
+            position: "relative",
 
-          "&:focus": {
-            backgroundColor: theme.palette.grey[100],
-          },
-          "&:hover": {
-            backgroundColor: theme.palette.grey[100],
-          },
+            "&[aria-current='date']": [
+              dateStyles.today({ theme }),
+              {
+                fontWeight: theme.typography.fontWeightBold,
+              },
+            ],
 
-          "&[aria-current='date']": {
-            backgroundColor: "transparent",
-            color: theme.palette.primary.main,
-            fontWeight: theme.typography.fontWeightBold,
+            "&[aria-current='date']::after": todayDotStyles.default({ theme }),
+            "&:hover": dateStyles.hover({ theme }),
+
+            "&:not(.Mui-selected)": {
+              border: "none",
+            },
+
+            "&.Mui-disabled": dateStyles.disabled({ theme }),
           },
-          "&[aria-current='date']::after": {
-            backgroundColor: theme.palette.primary.main,
-            borderRadius: "50%",
-            content: '" "',
-            height: `${(2 / 16) * (16 / 14)}rem`,
-            position: "absolute",
-            bottom: theme.spacing(1),
-            width: `${(2 / 16) * (16 / 14)}rem`,
-            transform: "translateY(-50%)",
-          },
-        }),
+        ],
         root: () => ({
           display: "block",
         }),
         selected: ({ theme }) => ({
-          "&.Mui-selected, &.Mui-selected:focus": {
-            backgroundColor: "transparent",
-            color: theme.palette.primary.main,
-          },
-          "&.Mui-selected:hover": {
-            backgroundColor: theme.palette.grey[100],
-            color: theme.palette.primary.main,
-          },
-
-          "&[aria-current='date']": {
-            backgroundColor: theme.palette.grey[100],
-            color: theme.palette.primary.main,
-          },
+          "&[aria-current='date']::after": todayDotStyles.selected({ theme }),
+          "&:focus": dateStyles.selected({ theme }),
+          "&:hover": dateStyles.hoverSelected({ theme }),
         }),
       },
     },
