@@ -19,7 +19,7 @@ import {
   useUniqueId,
 } from "./";
 import { RadioGroup as MuiRadioGroup } from "@mui/material";
-import { ReactElement, useMemo } from "react";
+import { memo, ReactElement, useMemo } from "react";
 
 export interface RadioGroupProps {
   /**
@@ -33,7 +33,7 @@ export interface RadioGroupProps {
   /**
    * The error text for an invalid group
    */
-  error?: string;
+  errorMessage?: string;
   /**
    * Optional hint text
    */
@@ -42,10 +42,6 @@ export interface RadioGroupProps {
    * Disables the whole radio group
    */
   isDisabled?: boolean;
-  /**
-   * Declares the group invalid
-   */
-  isInvalid?: boolean;
   /**
    * The text label for the radio group
    */
@@ -57,30 +53,33 @@ export interface RadioGroupProps {
   name?: string;
 }
 
-export const RadioGroup = ({
+const RadioGroup = ({
   children,
   defaultValue,
-  error,
+  errorMessage,
   hint,
   isDisabled,
-  isInvalid,
   label,
   name,
 }: RadioGroupProps) => {
   const ariaDescribedBy = useMemo(
     () =>
-      error || hint
-        ? [hint && `${name}-hint`, error && `${name}-error`]
+      errorMessage || hint
+        ? [hint && `${name}-hint`, errorMessage && `${name}-error`]
             .filter(Boolean)
             .join(" ")
         : undefined,
-    [error, hint, name]
+    [errorMessage, hint, name]
   );
 
   const uniqueName = useUniqueId(name);
 
   return (
-    <FormControl component="fieldset" disabled={isDisabled} error={isInvalid}>
+    <FormControl
+      component="fieldset"
+      disabled={isDisabled}
+      error={Boolean(errorMessage)}
+    >
       <FormLabel component="legend">{label}</FormLabel>
       {hint && (
         <FormHelperText id={`${uniqueName}-hint`}>{hint}</FormHelperText>
@@ -88,15 +87,19 @@ export const RadioGroup = ({
       <MuiRadioGroup
         aria-describedby={ariaDescribedBy}
         defaultValue={defaultValue}
-        name={`${uniqueName}-group`}
+        name={uniqueName}
       >
         {children}
       </MuiRadioGroup>
-      {error && (
+      {errorMessage && (
         <FormHelperText id={`${uniqueName}-error`} error>
-          <span style={visuallyHidden}>Error:</span> {error}
+          <span style={visuallyHidden}>Error:</span> {errorMessage}
         </FormHelperText>
       )}
     </FormControl>
   );
 };
+
+const MemoizedRadioGroup = memo(RadioGroup);
+
+export { MemoizedRadioGroup as RadioGroup };
