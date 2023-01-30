@@ -10,17 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
-import {
-  InputAdornment,
-  TextField,
-  TextFieldProps,
-} from "@okta/odyssey-react-mui";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { InputAdornment, TextField } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TextFieldMdx from "./TextField.mdx";
 
-const storybookMeta: Meta<TextFieldProps> = {
+const storybookMeta: ComponentMeta<typeof TextField> = {
   title: `MUI Components/Forms/TextField`,
   component: TextField,
   parameters: {
@@ -95,7 +91,7 @@ const storybookMeta: Meta<TextFieldProps> = {
 
 export default storybookMeta;
 
-const Template: Story<TextFieldProps> = (args) => {
+const Template: ComponentStory<typeof TextField> = (args) => {
   return <TextField {...args} />;
 };
 

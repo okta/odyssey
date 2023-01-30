@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import { Radio, RadioGroup, RadioGroupProps } from "@okta/odyssey-react-mui";
+import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import RadioGroupMdx from "./RadioGroup.mdx";
 
-export default {
+const storybookMeta: ComponentMeta<typeof RadioGroup> = {
   title: `MUI Components/Forms/RadioGroup`,
   component: RadioGroup,
   parameters: {
@@ -49,7 +49,9 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story<RadioGroupProps> = (args) => {
+export default storybookMeta;
+
+const Template: ComponentStory<typeof RadioGroup> = (args) => {
   return (
     <RadioGroup {...args}>
       <Radio label="Light Speed" value="Light Speed" />
@@ -59,19 +61,19 @@ const DefaultTemplate: Story<RadioGroupProps> = (args) => {
   );
 };
 
-export const Default = DefaultTemplate.bind({});
+export const Default = Template.bind({});
 
-export const Hint = DefaultTemplate.bind({});
+export const Hint = Template.bind({});
 Hint.args = {
   hint: "Select the speed at which you wish to travel.",
 };
 
-export const Disabled = DefaultTemplate.bind({});
+export const Disabled = Template.bind({});
 Disabled.args = {
   isDisabled: true,
 };
 
-export const Error = DefaultTemplate.bind({});
+export const Error = Template.bind({});
 Error.args = {
   errorMessage: "This field is required.",
 };

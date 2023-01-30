@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Banner, BannerProps } from "@okta/odyssey-react-mui";
-import { ComponentMeta, Meta, Story } from "@storybook/react";
+import { Banner } from "@okta/odyssey-react-mui";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import BannerMdx from "./Banner.mdx";
@@ -53,7 +53,7 @@ const storybookMeta: ComponentMeta<typeof Banner> = {
 
 export default storybookMeta;
 
-const Template: Story<BannerProps> = (args) => {
+const Template: ComponentStory<typeof Banner> = (args) => {
   return <Banner {...args}></Banner>;
 };
 
