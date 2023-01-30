@@ -10,8 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AlertColor } from "@mui/material";
-import { SyntheticEvent } from "react";
+import { AlertColor, AlertProps } from "@mui/material";
 import { Alert, Link } from "./";
 
 export interface BannerProps {
@@ -33,7 +32,7 @@ export interface BannerProps {
    * The function that's fired when the user clicks the close button. If undefined,
    * the close button will not be shown.
    */
-  onClose?: ((event: SyntheticEvent<Element, Event>) => void) | undefined;
+  onClose?: AlertProps["onClose"];
   /**
    * If defined, the alert will include a link to the URL
    */
@@ -54,7 +53,7 @@ export const Banner = ({
   linkText = "Learn more",
   text,
 }: BannerProps) => (
-  <Alert role={role} variant="banner" severity={severity} onClose={onClose}>
+  <Alert onClose={onClose} role={role} severity={severity} variant="banner">
     {text}
     {linkUrl && (
       <Link href={linkUrl} variant="monochrome">
