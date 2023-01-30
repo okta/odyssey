@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.17.2](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.2) (2023-01-12)
+
+### Features
+
+- add labs theme ([8f45e5d](https://github.com/okta/odyssey/commit/8f45e5d4d74eb664b4f7ce73e08fdafd1e8da2cb))
+- added styles for DatePicker theming ([db967ba](https://github.com/okta/odyssey/commit/db967bad7fe836d8f5877f6ffe5a601f78ff47ec))
+
+### Bug Fixes
+
+- theme type issues ([16f2b4d](https://github.com/okta/odyssey/commit/16f2b4da129901f63bc21c8dec89385604128d98))
+- updated Odyssey Labs exports and theme ([080ac14](https://github.com/okta/odyssey/commit/080ac1409c5e2eb8705dbc11bf499fd53eb6197b))
+
 ### [0.17.1](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.1) (2022-12-09)
 
 **Note:** Version bump only for package @okta/odyssey-react-labs
