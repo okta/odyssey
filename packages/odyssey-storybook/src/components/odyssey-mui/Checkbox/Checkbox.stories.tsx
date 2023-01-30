@@ -77,7 +77,7 @@ const SingleTemplate: Story = (args) => {
             indeterminate={args.indeterminate}
           />
         }
-        label="Pre-flight systems check complete"
+        label="Preflight systems check complete"
         aria-describedby="checkbox-error"
       />
       {args.error && (
@@ -159,5 +159,5 @@ Error.parameters = {
 };
 Error.args = {
   invalid: true,
-  error: "Systems must be checked prior to launch.",
+  error: "Select 1 or more systems to check before initiating warp.",
 };
