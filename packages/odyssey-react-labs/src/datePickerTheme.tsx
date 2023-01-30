@@ -158,7 +158,7 @@ export const datePickerTheme: ThemeOptions = {
           },
         },
         showDaysOutsideCurrentMonth: true,
-        views: ["day", "year", "month"],
+        views: ["year", "month", "day"],
       },
     },
     MuiMonthPicker: {
@@ -193,7 +193,7 @@ export const datePickerTheme: ThemeOptions = {
           dateStyles.default({ theme }),
           {
             border: "none",
-            borderRadius: "0.428571428571429rem",
+            borderRadius: `${(6 / 16) * (16 / 14)}rem`,
             flexBasis: theme.spacing(6),
             flexShrink: 0,
             fontSize: theme.typography.body1.fontSize,
@@ -259,6 +259,7 @@ export const datePickerTheme: ThemeOptions = {
           dateStyles.default({ theme }),
           {
             alignItems: "center",
+            borderRadius: `${(6 / 16) * (16 / 14)}rem`,
             display: "flex",
             justifyContent: "center",
             marginBottom: 0,
