@@ -22,6 +22,7 @@ import {
   TableHead,
   TableRow,
   TableSortLabel,
+  Typography,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TableMdx from "./Table.mdx";
@@ -260,7 +261,11 @@ function EnhancedTable() {
 
   return (
     <TableContainer>
+      <Typography component="figcaption" variant="h4">
+        Destinations
+      </Typography>
       <Table aria-labelledby="tableTitle">
+        <caption>Information about the largest and smallest planets.</caption>
         <EnhancedTableHead
           numSelected={selected.length}
           order={order}
@@ -314,7 +319,11 @@ function EnhancedTable() {
 const DefaultTemplate: Story = () => {
   return (
     <TableContainer>
+      <Typography component="figcaption" variant="h4">
+        Destinations
+      </Typography>
       <Table>
+        <caption>Information about the largest and smallest planets.</caption>
         <TableHead>
           <TableRow>
             <TableCell>Planet</TableCell>
@@ -328,7 +337,9 @@ const DefaultTemplate: Story = () => {
           {rows.map((row) => (
             <TableRow key={row.name}>
               <TableCell>{row.name}</TableCell>
-              <TableCell variant="number">{row.radius}</TableCell>
+              <TableCell variant="number">
+                {row.radius.toLocaleString("en-US")}
+              </TableCell>
               <TableCell>{row.type}</TableCell>
               <TableCell variant="date">{row.perihelion}</TableCell>
               <TableCell variant="action">
@@ -350,7 +361,11 @@ Default.args = {};
 const RowHeadingTemplate: Story = () => {
   return (
     <TableContainer>
+      <Typography component="figcaption" variant="h4">
+        Destinations
+      </Typography>
       <Table>
+        <caption>Information about the largest and smallest planets.</caption>
         <TableHead>
           <TableRow>
             <TableCell>Planet</TableCell>
@@ -364,7 +379,9 @@ const RowHeadingTemplate: Story = () => {
           {rows.map((row) => (
             <TableRow key={row.name}>
               <TableCell variant="head">{row.name}</TableCell>
-              <TableCell variant="number">{row.radius}</TableCell>
+              <TableCell variant="number">
+                {row.radius.toLocaleString("en-US")}
+              </TableCell>
               <TableCell>{row.type}</TableCell>
               <TableCell variant="date">{row.perihelion}</TableCell>
               <TableCell variant="action">
@@ -386,7 +403,11 @@ RowHeadings.args = {};
 const RowGroupingTemplate: Story = () => {
   return (
     <TableContainer>
+      <Typography component="figcaption" variant="h4">
+        Destinations
+      </Typography>
       <Table>
+        <caption>Information about the largest and smallest planets.</caption>
         <TableHead>
           <TableRow>
             <TableCell>Type</TableCell>
