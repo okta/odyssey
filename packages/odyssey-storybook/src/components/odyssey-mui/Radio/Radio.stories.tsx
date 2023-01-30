@@ -39,9 +39,9 @@ const storybookMeta: Meta<RadioProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: Story<RadioProps> = (args) => {
+const Template: Story<RadioProps> = (args) => {
   return <Radio label={args.label} value={args.value} />;
 };
 
-export const Default = DefaultTemplate.bind({});
+export const Default = Template.bind({});
 Default.args = {};
