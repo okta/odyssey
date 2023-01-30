@@ -33,7 +33,7 @@ import {
   Typography,
   visuallyHidden,
   useUniqueId,
-} from "../..";
+} from "./";
 
 export interface TextFieldProps {
   /**
