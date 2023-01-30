@@ -32,7 +32,7 @@ const storybookMeta: ComponentMeta<typeof Banner> = {
       control: "text",
     },
     onClose: {
-      control: "text",
+      action: "closed",
     },
     role: {
       control: "radio",
@@ -62,30 +62,29 @@ Info.args = {};
 
 export const Error = Template.bind({});
 Error.args = {
-  content: "Hangar 18 has been compromised.",
   role: "status",
   severity: "error",
+  text: "Hangar 18 has been compromised.",
 };
 
 export const Warning = Template.bind({});
 Warning.args = {
-  content: "Severe solar winds detected. Local system flights may be delayed.",
   role: "status",
   severity: "warning",
+  text: "Severe solar winds detected. Local system flights may be delayed.",
 };
 
 export const WithLink = Template.bind({});
 WithLink.args = {
-  content: "Hangar 18 has been compromised.",
-  linkUrl: "#anchor",
   linkText: "View report",
+  linkUrl: "#anchor",
   role: "status",
   severity: "error",
+  text: "Hangar 18 has been compromised.",
 };
 
 export const Dismissible = Template.bind({});
 Dismissible.args = {
-  onClose: `{() => {}}`,
-  severity: "warning",
   role: "status",
+  severity: "warning",
 };
