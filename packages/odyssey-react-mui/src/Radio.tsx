@@ -14,10 +14,10 @@ import { FormControlLabel } from "./";
 import { Radio as MuiRadio } from "@mui/material";
 
 export interface RadioProps {
-  value: string;
   label: string;
+  value: string;
 }
 
-export const Radio = ({ value, label }: RadioProps) => (
-  <FormControlLabel value={value} control={<MuiRadio />} label={label} />
+export const Radio = ({ label, value }: RadioProps) => (
+  <FormControlLabel control={<MuiRadio />} label={label} value={value} />
 );
