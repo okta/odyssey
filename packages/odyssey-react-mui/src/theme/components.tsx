@@ -1125,6 +1125,7 @@ export const components: ThemeOptions["components"] = {
         height: "auto",
         paddingBlock: `calc(${theme.spacing(3)} - ${theme.mixins.borderWidth})`,
         paddingInline: theme.spacing(3),
+        boxShadow: "none",
 
         [`.${inputBaseClasses.disabled} &`]: {
           pointerEvents: "auto",
