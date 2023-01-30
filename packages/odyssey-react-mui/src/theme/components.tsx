@@ -625,13 +625,20 @@ export const components: ThemeOptions["components"] = {
           display: "grid",
           gridGap: theme.spacing(2),
           gridTemplateColumns: "minmax(min-content, max-content)",
-          justifyContent: "center",
-          justifyItems: "center",
+          justifyContent: "start",
+          justifyItems: "start",
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          marginInline: 0,
 
-          figcaption: {
-            color: theme.palette.text.secondary,
-            fontSize: theme.typography.body1.fontSize,
+          "&:last-child": {
+            marginBlockEnd: 0,
           },
+        },
+
+        "figcaption:not([class])": {
+          color: theme.palette.text.secondary,
+          fontSize: theme.typography.body1.fontSize,
         },
 
         hr: {
@@ -1453,6 +1460,16 @@ export const components: ThemeOptions["components"] = {
         ...(ownerState.stickyHeader && {
           borderCollapse: "separate",
         }),
+
+        caption: {
+          clip: "rect(0 0 0 0)",
+          clipPath: "inset(50%)",
+          height: "1px",
+          overflow: "hidden",
+          position: "absolute",
+          whiteSpace: "nowrap",
+          width: "1px",
+        },
       }),
     },
   },
@@ -1549,6 +1566,10 @@ export const components: ThemeOptions["components"] = {
     },
   },
   MuiTableContainer: {
+    defaultProps: {
+      // @ts-expect-error valid prop and value; MUI TS bug
+      component: "figure",
+    },
     styleOverrides: {
       root: ({ theme }) => ({
         width: "unset",
