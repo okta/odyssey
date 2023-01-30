@@ -69,14 +69,14 @@ const DefaultTemplate: Story = (args) => {
         <FormHelperText id="radio-hint">{args.hint}</FormHelperText>
       )}
       <RadioGroup
-        defaultValue="Lightspeed"
+        defaultValue="Light speed"
         name="radio-buttons-group"
         aria-describedby="radio-hint radio-error"
       >
         <FormControlLabel
-          value="Lightspeed"
+          value="Light speed"
           control={<Radio />}
-          label="Lightspeed"
+          label="Light speed"
         />
         <FormControlLabel
           value="Warp speed"
@@ -103,7 +103,7 @@ Default.args = {};
 
 export const Hint = DefaultTemplate.bind({});
 Hint.args = {
-  hint: "Select the speed at which you wish to travel.",
+  hint: "Select the speed of travel.",
 };
 
 export const Disabled = DefaultTemplate.bind({});
@@ -114,5 +114,5 @@ Disabled.args = {
 export const Invalid = DefaultTemplate.bind({});
 Invalid.args = {
   invalid: true,
-  error: "This field is required.",
+  error: "Select a speed.",
 };
