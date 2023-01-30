@@ -87,7 +87,4 @@ const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
   );
 };
 
-export const DatePickerPrimary = Template.bind({});
-DatePickerPrimary.args = {
-  open: true,
-};
+export const DatePickerStandard = Template.bind({});
