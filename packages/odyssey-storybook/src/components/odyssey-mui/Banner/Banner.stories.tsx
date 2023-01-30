@@ -10,15 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { Banner } from "@okta/odyssey-react-mui";
 import { Story } from "@storybook/react";
-import { Alert, Link } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import BannerMdx from "./Banner.mdx";
 
 export default {
   title: `MUI Components/Alerts/Banner`,
-  component: Alert,
+  component: Banner,
   parameters: {
     docs: {
       page: BannerMdx,
@@ -28,10 +28,6 @@ export default {
     content: {
       control: "text",
       defaultValue: "The mission to Sagitarius A has been set for January 7.",
-    },
-    onClose: {
-      control: "text",
-      defaultValue: null,
     },
     role: {
       control: "radio",
@@ -43,20 +39,32 @@ export default {
       options: ["error", "info", "warning"],
       defaultValue: "info",
     },
+    linkUrl: {
+      control: "text",
+      defaultValue: null,
+    },
+    linkText: {
+      control: "text",
+      defaultValue: null,
+    },
+    onClose: {
+      control: "text",
+      defaultValue: null,
+    },
   },
   decorators: [MuiThemeDecorator],
 };
 
 const DefaultTemplate: Story = (args) => {
   return (
-    <Alert
+    <Banner
       severity={args.severity}
       role={args.role}
-      variant="banner"
+      linkUrl={args.linkUrl}
+      linkText={args.linkText}
       onClose={args.onClose}
-    >
-      {args.content}
-    </Alert>
+      text={args.content}
+    ></Banner>
   );
 };
 
@@ -79,14 +87,9 @@ Warning.args = {
 
 export const WithLink = DefaultTemplate.bind({});
 WithLink.args = {
-  content: (
-    <>
-      Hangar 18 has been compromised.
-      <Link href="#anchor" variant="monochrome">
-        View report
-      </Link>
-    </>
-  ),
+  content: "Hangar 18 has been compromised.",
+  linkUrl: "#anchor",
+  linkText: "View report",
   role: "status",
   severity: "error",
 };
