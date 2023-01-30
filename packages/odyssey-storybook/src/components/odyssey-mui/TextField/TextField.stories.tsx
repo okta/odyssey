@@ -10,15 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import { TextField, InputAdornment } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import {
+  InputAdornment,
+  TextField,
+  TextFieldProps,
+} from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
 import TextFieldMdx from "./TextField.mdx";
 
-export default {
-  title: `MUI Components/Forms/Text Field`,
+const storybookMeta: Meta<TextFieldProps> = {
+  title: `MUI Components/Forms/TextField`,
   component: TextField,
   parameters: {
     docs: {
@@ -26,45 +29,39 @@ export default {
     },
   },
   argTypes: {
-    autoComplete: {
+    autoCompleteType: {
       control: "text",
       defaultValue: "name",
     },
-    disabled: {
+    isDisabled: {
       control: "boolean",
       defaultValue: false,
     },
     endAdornment: {
       control: "text",
-      defaultValue: undefined,
     },
-    error: {
+    errorMessage: {
       control: "text",
-      defaultValue: undefined,
     },
     hint: {
       control: "text",
-      defaultValue: undefined,
     },
     id: {
       control: "text",
-      defaultValue: undefined,
     },
     label: {
       control: "text",
       defaultValue: "Destination",
     },
-    multiline: {
+    isMultiline: {
       control: "boolean",
       defaultValue: false,
     },
     onChange: {
       control: "function",
-      defaultValue: undefined,
     },
     onFocus: {
       control: "function",
-      defaultValue: undefined,
     },
     optionalLabel: {
       control: "text",
@@ -72,19 +69,17 @@ export default {
     },
     placeholder: {
       control: "text",
-      defaultValue: undefined,
     },
-    readOnly: {
+    isReadOnly: {
       control: "boolean",
       defaultValue: false,
     },
-    required: {
+    isRequired: {
       control: "boolean",
       defaultValue: true,
     },
     startAdornment: {
       control: "text",
-      defaultValue: undefined,
     },
     type: {
       control: "select",
@@ -93,13 +88,14 @@ export default {
     },
     value: {
       control: "text",
-      defaultValue: undefined,
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const Template: Story = (args) => {
+export default storybookMeta;
+
+const Template: Story<TextFieldProps> = (args) => {
   return <TextField {...args} />;
 };
 
@@ -110,23 +106,23 @@ Default.args = {};
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  disabled: true,
+  isDisabled: true,
 };
 
 export const Optional = Template.bind({});
 Optional.args = {
-  required: false,
+  isRequired: false,
 };
 
 export const ReadOnly = Template.bind({});
 ReadOnly.args = {
-  readOnly: true,
+  isReadOnly: true,
   value: "Earth",
 };
 
-export const Invalid = Template.bind({});
-Invalid.args = {
-  error: "This field is required.",
+export const Error = Template.bind({});
+Error.args = {
+  errorMessage: "This field is required.",
 };
 
 export const Hint = Template.bind({});
@@ -144,21 +140,21 @@ Adornment.args = {
 
 export const Email = Template.bind({});
 Email.args = {
-  autoComplete: "work email",
+  autoCompleteType: "work email",
   label: "Company email",
   type: "email",
 };
 
 export const Multiline = Template.bind({});
 Multiline.args = {
-  autoComplete: "shipping street-address",
+  autoCompleteType: "shipping street-address",
   label: "Permanent residence",
-  multiline: true,
+  isMultiline: true,
 };
 
 export const Password = Template.bind({});
 Password.args = {
-  autoComplete: "current-password",
+  autoCompleteType: "current-password",
   label: "Password",
   type: "password",
 };
@@ -172,7 +168,7 @@ Search.args = {
 
 export const Tel = Template.bind({});
 Tel.args = {
-  autoComplete: "mobile tel",
+  autoCompleteType: "mobile tel",
   label: "Phone number",
   startAdornment: <InputAdornment position="start">+1</InputAdornment>,
   type: "tel",

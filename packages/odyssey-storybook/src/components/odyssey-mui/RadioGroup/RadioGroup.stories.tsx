@@ -11,9 +11,9 @@
  */
 
 import { Story } from "@storybook/react";
-import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { Radio, RadioGroup, RadioGroupProps } from "@okta/odyssey-react-mui";
 
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import RadioGroupMdx from "./RadioGroup.mdx";
 
 export default {
@@ -25,11 +25,7 @@ export default {
     },
   },
   argTypes: {
-    disabled: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    error: {
+    errorMessage: {
       control: "text",
       defaultValue: null,
     },
@@ -37,7 +33,7 @@ export default {
       control: "text",
       defaultValue: null,
     },
-    invalid: {
+    isDisabled: {
       control: "boolean",
       defaultValue: false,
     },
@@ -47,31 +43,23 @@ export default {
     },
     name: {
       control: "text",
-      defaultValue: "label",
+      defaultValue: "storybook-radio",
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
+const DefaultTemplate: Story<RadioGroupProps> = (args) => {
   return (
-    <RadioGroup
-      disabled={args.disabled}
-      invalid={args.invalid}
-      error={args.error}
-      label={args.label}
-      hint={args.hint}
-      defaultValue={args.defaultValue}
-    >
-      <Radio value="lightspeed" label="Lightspeed" />
-      <Radio value="Warp Speed" label="Warp Speed" />
-      <Radio value="Ludicrous Speed" label="Ludicrous Speed" />
+    <RadioGroup {...args}>
+      <Radio label="Light Speed" value="Light Speed" />
+      <Radio label="Warp Speed" value="Warp Speed" />
+      <Radio label="Ludicrous Speed" value="Ludicrous Speed" />
     </RadioGroup>
   );
 };
 
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
 
 export const Hint = DefaultTemplate.bind({});
 Hint.args = {
@@ -80,11 +68,10 @@ Hint.args = {
 
 export const Disabled = DefaultTemplate.bind({});
 Disabled.args = {
-  disabled: true,
+  isDisabled: true,
 };
 
-export const Invalid = DefaultTemplate.bind({});
-Invalid.args = {
-  invalid: true,
-  error: "This field is required.",
+export const Error = DefaultTemplate.bind({});
+Error.args = {
+  errorMessage: "This field is required.",
 };

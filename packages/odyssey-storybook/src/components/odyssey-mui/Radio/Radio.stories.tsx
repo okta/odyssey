@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import { Radio } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import { Radio, RadioProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import RadioMdx from "./Radio.mdx";
 
-export default {
+const storybookMeta: Meta<RadioProps> = {
   title: `MUI Components/Forms/Radio`,
   component: Radio,
   parameters: {
@@ -25,20 +25,22 @@ export default {
     },
   },
   argTypes: {
-    value: {
-      control: "text",
-      defaultValue: "Value",
-    },
     label: {
       control: "text",
       defaultValue: "Label",
+    },
+    value: {
+      control: "text",
+      defaultValue: "Value",
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
-  return <Radio value={args.value} label={args.label} />;
+export default storybookMeta;
+
+const DefaultTemplate: Story<RadioProps> = (args) => {
+  return <Radio label={args.label} value={args.value} />;
 };
 
 export const Default = DefaultTemplate.bind({});

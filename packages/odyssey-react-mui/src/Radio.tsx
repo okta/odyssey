@@ -12,12 +12,17 @@
 
 import { FormControlLabel } from "./";
 import { Radio as MuiRadio } from "@mui/material";
+import { memo } from "react";
 
-export interface RadioProps {
+export type RadioProps = {
   label: string;
   value: string;
-}
+};
 
-export const Radio = ({ label, value }: RadioProps) => (
+const Radio = ({ label, value }: RadioProps) => (
   <FormControlLabel control={<MuiRadio />} label={label} value={value} />
 );
+
+const MemoizedRadio = memo(Radio);
+
+export { MemoizedRadio as Radio };
