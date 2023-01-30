@@ -329,7 +329,7 @@ export const datePickerTheme: ThemeOptions = {
         }),
         selected: ({ theme }) => ({
           "&[aria-current='date']::after": todayDotStyles.selected({ theme }),
-          "&:focus": dateStyles.selected({ theme }),
+          "&, &:focus": dateStyles.selected({ theme }),
           "&:hover": dateStyles.hoverSelected({ theme }),
         }),
       },
