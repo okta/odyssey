@@ -1567,6 +1567,7 @@ export const components: ThemeOptions["components"] = {
   },
   MuiTableContainer: {
     defaultProps: {
+      // @ts-expect-error valid prop and value; MUI TS bug
       component: "figure",
     },
     styleOverrides: {
