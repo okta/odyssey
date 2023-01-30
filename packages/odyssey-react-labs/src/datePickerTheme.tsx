@@ -164,7 +164,9 @@ export const datePickerTheme: ThemeOptions = {
     MuiMonthPicker: {
       styleOverrides: {
         root: () => ({
-          display: "block",
+          marginLeft: 0,
+          marginRight: 0,
+          width: "auto",
         }),
       },
     },
@@ -298,6 +300,7 @@ export const datePickerTheme: ThemeOptions = {
           dateStyles.default({ theme }),
           {
             alignItems: "center",
+            borderRadius: `${(6 / 16) * (16 / 14)}rem`,
             display: "flex",
             justifyContent: "center",
             marginBottom: 0,
