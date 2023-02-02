@@ -11,6 +11,7 @@
  */
 
 import { AlertColor, AlertProps } from "@mui/material";
+import { memo } from "react";
 import { Alert, Link } from "./";
 
 export interface BannerProps {
@@ -23,7 +24,7 @@ export interface BannerProps {
    * ("status" for something that dynamically updates, null for something
    * unchanging)
    */
-  role?: "status" | undefined;
+  role?: "status";
   /**
    * The text content of the alert
    */
@@ -45,7 +46,7 @@ export interface BannerProps {
   linkText?: string;
 }
 
-export const Banner = ({
+const Banner = ({
   onClose,
   severity = "info",
   role,
@@ -62,3 +63,7 @@ export const Banner = ({
     )}
   </Alert>
 );
+
+const MemoizedBanner = memo(Banner);
+
+export { MemoizedBanner as Banner };

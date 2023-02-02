@@ -10,20 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./Banner";
-export * from "./createUniqueId";
-export * from "./Icon";
-export * from "./iconDictionary";
-export * from "./Link";
-export * from "./OdysseyCacheProvider";
-export * from "./OdysseyThemeProvider";
-export * from "./PasswordInput";
-export * from "./TextField";
-export * from "./Status";
-export * from "./theme";
-export * from "./ThemeProvider";
-export * from "./useUniqueId";
-
 export {
   Alert,
   AlertTitle,
@@ -53,8 +39,6 @@ export {
   ListItemText,
   ListSubheader,
   MenuItem,
-  Radio,
-  RadioGroup,
   ScopedCssBaseline,
   Select,
   Snackbar,
@@ -103,8 +87,6 @@ export type {
   ListItemTextProps,
   ListSubheaderProps,
   MenuItemProps,
-  RadioGroupProps,
-  RadioProps,
   ScopedCssBaselineProps,
   SelectChangeEvent,
   SelectProps,
@@ -132,3 +114,19 @@ export type { TabContextProps, TabListProps, TabPanelProps } from "@mui/lab";
 export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
 export { visuallyHidden } from "@mui/utils";
+
+export * from "./Banner";
+export * from "./createUniqueId";
+export * from "./Icon";
+export * from "./iconDictionary";
+export * from "./Link";
+export * from "./OdysseyCacheProvider";
+export * from "./OdysseyThemeProvider";
+export * from "./PasswordInput";
+export * from "./Radio";
+export * from "./RadioGroup";
+export * from "./Status";
+export * from "./TextField";
+export * from "./theme";
+export * from "./ThemeProvider";
+export * from "./useUniqueId";
