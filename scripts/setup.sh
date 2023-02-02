@@ -5,7 +5,10 @@ NODE_VERSION=16.19.0
 # Note: Yarn will automatically switch over to yarn 3 after installing yarn 1.x
 YARN_VERSION=1.22.19
 
-cd ${OKTA_HOME}/odyssey
+export ORIGINAL_REPO=$REPO
+REPO=odyssey
+
+cd ${OKTA_HOME}/${REPO}
 
 echo "installing node ${NODE_VERSION}"
 
@@ -22,3 +25,6 @@ if ! yarn install --immutable; then
   echo "yarn install command failed! Exiting..."
   exit ${FAILED_SETUP}
 fi
+
+REPO=$ORIGINAL_REPO
+cd ${OKTA_HOME}/${REPO}
