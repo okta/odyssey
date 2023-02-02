@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
+import { useMemo, useState } from "react";
 import type { Story } from "@storybook/react";
 import {
   InputBase,
@@ -68,12 +68,15 @@ export default {
 };
 
 const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
-  const [value, setValue] = React.useState<unknown>(Date.now());
-  const datePickerProps = {
-    ...props,
-    value,
-    onChange: (newValue: unknown) => setValue(newValue),
-  };
+  const [value, setValue] = useState<unknown>(Date.now());
+  const datePickerProps = useMemo(
+    () => ({
+      ...props,
+      onChange: (newValue: unknown) => setValue(newValue),
+      value,
+    }),
+    [props, value]
+  );
 
   return (
     <OdysseyThemeProvider customTheme={datePickerTheme}>
@@ -84,4 +87,4 @@ const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
   );
 };
 
-export const DatePickerPrimary = Template.bind({});
+export const DatePickerStandard = Template.bind({});

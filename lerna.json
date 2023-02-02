@@ -1,7 +1,9 @@
 {
-  "version": "0.17.2",
+  "version": "0.18.0",
   "npmClient": "yarn",
   "changelogPreset": "@okta/conventional-changelog-odyssey",
   "useWorkspaces": true,
-  "packages": ["packages/*"]
+  "packages": ["packages/*"],
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "useNx": false
 }

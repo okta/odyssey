@@ -79,7 +79,7 @@ export const components: ThemeOptions["components"] = {
       action: ({ ownerState, theme }) => ({
         ...(ownerState.variant === "banner" && {
           padding: 0,
-          marginRight: 0,
+          marginInlineEnd: 0,
           top: "50%",
           right: theme.spacing(4),
           position: "absolute",
@@ -87,12 +87,12 @@ export const components: ThemeOptions["components"] = {
         }),
         ...(ownerState.variant === "toast" && {
           padding: 0,
-          marginLeft: 0,
-          marginRight: 0,
+          marginInlineStart: 0,
+          marginInlineEnd: 0,
         }),
       }),
       icon: ({ ownerState, theme }) => ({
-        marginRight: 0,
+        marginInlineEnd: 0,
         padding: 0,
         fontSize: "inherit",
         opacity: 1,
@@ -355,13 +355,6 @@ export const components: ThemeOptions["components"] = {
       disableRipple: true,
     },
   },
-  MuiCssBaseline: {
-    styleOverrides: {
-      boxSizing: "border-box",
-      fontFeatureSettings: "'lnum','pnum'",
-      fontVariant: "normal",
-    },
-  },
   MuiCheckbox: {
     defaultProps: {
       size: "small",
@@ -510,6 +503,331 @@ export const components: ThemeOptions["components"] = {
       }),
     },
   },
+  MuiCssBaseline: {
+    styleOverrides: (themeParam) => `
+      html {
+        font-size: calc((${themeParam.typography.fontSize} / 16) * 100%);
+      }
+    `,
+  },
+  MuiScopedCssBaseline: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        abbr: {
+          borderBottomWidth: "1px",
+          borderBottomStyle: "dashed",
+          borderBottomColor: theme.palette.primary.dark,
+          textDecoration: "none",
+        },
+
+        address: {
+          maxWidth: theme.mixins.maxWidth,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          marginInline: 0,
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        blockquote: {
+          maxWidth: theme.mixins.maxWidth,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          marginInline: 0,
+          paddingBlock: 0,
+          paddingInlineStart: theme.spacing(2),
+          paddingInlineEnd: 0,
+          borderInlineStartWidth: "3px",
+          borderInlineStartStyle: "solid",
+          borderInlineStartColor: theme.palette.grey[200],
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        cite: {
+          fontStyle: "italic",
+        },
+
+        code: {
+          fontFamily:
+            "'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
+        },
+
+        del: {
+          display: "inline-block",
+          backgroundColor: theme.palette.error.light,
+
+          "&::before, &::after": {
+            clip: "rect(0 0 0 0)",
+            clipPath: "inset(50%)",
+            height: "1px",
+            overflow: "hidden",
+            position: "absolute",
+            whiteSpace: "nowrap",
+            width: "1px",
+          },
+
+          "&::before": {
+            content: "attr(data-a11y-start)",
+          },
+
+          "&::after": {
+            content: "attr(data-a11y-end)",
+          },
+        },
+
+        details: {
+          fontSize: theme.typography.body1.fontSize,
+        },
+
+        dfn: {
+          fontStyle: "italic",
+        },
+
+        dl: {
+          display: "grid",
+          gridGap: `${theme.spacing(2)} ${theme.spacing(4)}`,
+          gridTemplateColumns: "repeat(2, minmax(min-content, max-content))",
+          maxWidth: theme.mixins.maxWidth,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          marginInline: 0,
+          padding: 0,
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+
+          dt: {
+            gridColumn: 1,
+            fontWeight: 600,
+          },
+
+          dd: {
+            gridColumn: 2,
+            fontWeight: 400,
+          },
+        },
+
+        em: {
+          fontStyle: "italic",
+
+          "& > em": {
+            textDecoration: "underline",
+          },
+        },
+
+        figure: {
+          display: "grid",
+          gridGap: theme.spacing(2),
+          gridTemplateColumns: "minmax(min-content, max-content)",
+          justifyContent: "start",
+          justifyItems: "start",
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          marginInline: 0,
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        "figcaption:not([class])": {
+          color: theme.palette.text.secondary,
+          fontSize: theme.typography.body1.fontSize,
+        },
+
+        hr: {
+          marginBlock: theme.spacing(2),
+          marginInline: 0,
+          borderWidth: "1px",
+          borderStyle: "solid",
+          borderColor: theme.palette.grey[200],
+        },
+
+        ins: {
+          display: "inline-block",
+          backgroundColor: theme.palette.success.light,
+
+          "&::before, &::after": {
+            clip: "rect(0 0 0 0)",
+            clipPath: "inset(50%)",
+            height: "1px",
+            overflow: "hidden",
+            position: "absolute",
+            whiteSpace: "nowrap",
+            width: "1px",
+          },
+
+          "&::before": {
+            content: "attr(data-a11y-start)",
+          },
+
+          "&::after": {
+            content: "attr(data-a11y-end)",
+          },
+        },
+
+        kbd: {
+          display: "inline-block",
+          minWidth: `calc(${theme.typography.subtitle1.fontSize} * ${theme.typography.h5.lineHeight})`,
+          borderStyle: theme.mixins.borderStyle,
+          borderWidth: theme.mixins.borderWidth,
+          borderRadius: theme.mixins.borderRadius,
+          borderColor: theme.palette.grey[200],
+          backgroundColor: theme.palette.grey[50],
+          padding: `calc(${theme.spacing(1)} / 2) ${theme.spacing(1)}`,
+          fontFamily:
+            "'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
+          fontSize: theme.typography.subtitle1.fontSize,
+          fontWeight: theme.typography.fontWeightRegular,
+          lineHeight: theme.typography.h5.lineHeight,
+          boxShadow: `0 1px 1px 0 hsla(240, 6%, 12%, 0.05)`,
+        },
+
+        mark: {
+          backgroundColor: theme.palette.warning.light,
+
+          "&::before, &::after": {
+            clip: "rect(0 0 0 0)",
+            clipPath: "inset(50%)",
+            height: "1px",
+            overflow: "hidden",
+            position: "absolute",
+            whiteSpace: "nowrap",
+            width: "1px",
+          },
+
+          "&::before": {
+            content: "attr(data-a11y-start)",
+          },
+
+          "&::after": {
+            content: "attr(data-a11y-end)",
+          },
+        },
+
+        p: {
+          maxWidth: theme.mixins.maxWidth,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        pre: {
+          marginInline: 0,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          fontFamily:
+            "'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
+          whiteSpace: "pre-wrap",
+          tabSize: 2,
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        "ul, ol": {
+          maxWidth: theme.mixins.maxWidth,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(4),
+          // Unique padding to get desire appearance with "outside" position
+          paddingInlineStart: "2ch",
+
+          ol: {
+            listStyleType: "lower-alpha",
+
+            ol: {
+              listStyleType: "lower-roman",
+            },
+          },
+
+          "&:last-child": {
+            marginBlockEnd: 0,
+          },
+        },
+
+        li: {
+          marginBlockEnd: theme.spacing(2),
+          paddingInlineStart: theme.spacing(1),
+
+          "ul, ol": {
+            marginBlockStart: theme.spacing(2),
+            marginInlineStart: `calc(${theme.spacing(6)} - 2ch)`,
+          },
+        },
+
+        q: {
+          quotes: `'"' '"' "'" "'"`,
+
+          "&::before": {
+            content: "open-quote",
+          },
+
+          "&::after": {
+            content: "close-quote",
+          },
+        },
+
+        s: {
+          textDecoration: "line-through",
+        },
+
+        samp: {
+          padding: "0 0.5ch",
+          backgroundColor: theme.palette.grey[50],
+          boxShadow: `0 1px 0 ${theme.palette.grey[50]}`,
+          fontSize: theme.typography.body1.fontSize,
+
+          kbd: {
+            background: theme.palette.common.white,
+          },
+        },
+
+        small: {
+          fontSize: theme.typography.caption.fontSize,
+        },
+
+        sub: {
+          fontSize: theme.typography.caption.fontSize,
+          lineHeight: 1,
+          verticalAlign: "sub",
+        },
+
+        summary: {
+          fontSize: theme.typography.body1.fontSize,
+          fontWeight: theme.typography.fontWeightBold,
+          cursor: "default",
+
+          "&:focus-visible": {
+            outlineColor: theme.palette.primary.main,
+            outlineOffset: "2px",
+            outlineStyle: "solid",
+            outlineWidth: "2px",
+          },
+        },
+
+        sup: {
+          fontSize: theme.typography.caption.fontSize,
+          lineHeight: 1,
+          verticalAlign: "super",
+        },
+
+        var: {
+          fontStyle: "italic",
+          fontWeight: theme.typography.fontWeightBold,
+        },
+      }),
+    },
+  },
   MuiDialog: {
     defaultProps: {
       scroll: "paper",
@@ -611,17 +929,17 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
         gap: theme.spacing(2),
-        marginLeft: 0,
-        marginRight: 0, // used for row presentation of radio/checkbox
+        marginInlineStart: 0,
+        marginInlineEnd: 0, // used for row presentation of radio/checkbox
         ...(ownerState.labelPlacement === "start" && {
-          marginLeft: 0, // used for row presentation of radio/checkbox
-          marginRight: 0,
+          marginInlineStart: 0, // used for row presentation of radio/checkbox
+          marginInlineEnd: 0,
         }),
         ...(ownerState.labelPlacement === "top" && {
-          marginLeft: 0,
+          marginInlineStart: 0,
         }),
         ...(ownerState.labelPlacement === "bottom" && {
-          marginLeft: 0,
+          marginInlineStart: 0,
         }),
         "&:not(:last-child)": {
           marginBottom: theme.spacing(2),
@@ -667,6 +985,7 @@ export const components: ThemeOptions["components"] = {
         "&:last-child": {
           marginBottom: 0,
         },
+        textAlign: "start",
       }),
     },
   },
@@ -686,6 +1005,9 @@ export const components: ThemeOptions["components"] = {
   },
   MuiIconButton: {
     styleOverrides: {
+      edgeEnd: ({ theme }) => ({
+        marginInlineEnd: theme.spacing(1),
+      }),
       root: ({ theme }) => ({
         padding: theme.spacing(1),
         fontSize: theme.typography.body1.fontSize,
@@ -813,6 +1135,7 @@ export const components: ThemeOptions["components"] = {
         height: "auto",
         paddingBlock: `calc(${theme.spacing(3)} - ${theme.mixins.borderWidth})`,
         paddingInline: theme.spacing(3),
+        boxShadow: "none",
 
         [`.${inputBaseClasses.disabled} &`]: {
           pointerEvents: "auto",
@@ -861,10 +1184,10 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ theme }) => ({
         color: theme.palette.primary.main,
-        textDecoration: "none",
+        textDecoration: "underline",
 
         "&:hover": {
-          color: theme.palette.primary.main,
+          color: theme.palette.primary.dark,
           textDecoration: "underline",
         },
 
@@ -926,6 +1249,13 @@ export const components: ThemeOptions["components"] = {
         }),
       },
     ],
+  },
+  MuiListItem: {
+    styleOverrides: {
+      root: {
+        textAlign: "start",
+      },
+    },
   },
   MuiListSubheader: {
     styleOverrides: {
@@ -1133,6 +1463,16 @@ export const components: ThemeOptions["components"] = {
         ...(ownerState.stickyHeader && {
           borderCollapse: "separate",
         }),
+
+        caption: {
+          clip: "rect(0 0 0 0)",
+          clipPath: "inset(50%)",
+          height: "1px",
+          overflow: "hidden",
+          position: "absolute",
+          whiteSpace: "nowrap",
+          width: "1px",
+        },
       }),
     },
   },
@@ -1196,7 +1536,7 @@ export const components: ThemeOptions["components"] = {
         }),
 
         ...(ownerState.variant === "number" && {
-          textAlign: "right",
+          textAlign: "end",
           fontFeatureSettings: '"lnum", "tnum"',
         }),
 
@@ -1210,7 +1550,7 @@ export const components: ThemeOptions["components"] = {
         }),
 
         ...(ownerState.align === "left" && {
-          textAlign: "left",
+          textAlign: "start",
         }),
 
         ...(ownerState.align === "center" && {
@@ -1218,7 +1558,7 @@ export const components: ThemeOptions["components"] = {
         }),
 
         ...(ownerState.align === "right" && {
-          textAlign: "right",
+          textAlign: "end",
           flexDirection: "row-reverse",
         }),
 
@@ -1229,6 +1569,10 @@ export const components: ThemeOptions["components"] = {
     },
   },
   MuiTableContainer: {
+    defaultProps: {
+      // @ts-expect-error valid prop and value; MUI TS bug
+      component: "figure",
+    },
     styleOverrides: {
       root: ({ theme }) => ({
         width: "unset",
@@ -1294,8 +1638,8 @@ export const components: ThemeOptions["components"] = {
       }),
       icon: ({ theme, ownerState }) => ({
         fontSize: "inherit",
-        marginRight: 0,
-        marginLeft: 0,
+        marginInlineEnd: 0,
+        marginInlineStart: 0,
         opacity: 0,
         color: "inherit",
         transition: theme.transitions.create(["opacity", "transform"], {
@@ -1359,15 +1703,15 @@ export const components: ThemeOptions["components"] = {
           transformOrigin: "right center",
           ...(ownerState.isRtl
             ? {
-                marginLeft: theme.spacing(3),
+                marginInlineStart: theme.spacing(3),
                 ...(ownerState.touch === true && {
-                  marginLeft: theme.spacing(4),
+                  marginInlineStart: theme.spacing(4),
                 }),
               }
             : {
-                marginRight: theme.spacing(3),
+                marginInlineEnd: theme.spacing(3),
                 ...(ownerState.touch === true && {
-                  marginRight: theme.spacing(4),
+                  marginInlineEnd: theme.spacing(4),
                 }),
               }),
         },
@@ -1375,15 +1719,15 @@ export const components: ThemeOptions["components"] = {
           transformOrigin: "left center",
           ...(ownerState.isRtl
             ? {
-                marginRight: theme.spacing(3),
+                marginInlineEnd: theme.spacing(3),
                 ...(ownerState.touch === true && {
-                  marginRight: theme.spacing(4),
+                  marginInlineEnd: theme.spacing(4),
                 }),
               }
             : {
-                marginLeft: theme.spacing(3),
+                marginInlineStart: theme.spacing(3),
                 ...(ownerState.touch === true && {
-                  marginLeft: theme.spacing(4),
+                  marginInlineStart: theme.spacing(4),
                 }),
               }),
         },
@@ -1443,29 +1787,12 @@ export const components: ThemeOptions["components"] = {
         subtitle1: "p",
         body1: "p",
         inherit: "p",
-        kbd: "kbd",
         legend: "legend",
       },
     },
     styleOverrides: {
       paragraph: ({ theme }) => ({
         marginBottom: theme.spacing(4),
-      }),
-      root: ({ theme, ownerState }) => ({
-        ...(ownerState.variant === "kbd" && {
-          display: "inline-block",
-          minWidth: `calc(${theme.typography.subtitle1.fontSize} * ${theme.typography.h5.lineHeight})`,
-          borderStyle: theme.mixins.borderStyle,
-          borderWidth: theme.mixins.borderWidth,
-          borderRadius: theme.mixins.borderRadius,
-          borderColor: theme.palette.grey[200],
-          backgroundColor: theme.palette.grey[50],
-          padding: `calc(${theme.spacing(1)} / 2) ${theme.spacing(1)}`,
-          fontSize: theme.typography.subtitle1.fontSize,
-          fontWeight: theme.typography.fontWeightRegular,
-          lineHeight: theme.typography.h5.lineHeight,
-          boxShadow: `0 1px 1px 0 hsla(240, 6%, 12%, 0.05)`,
-        }),
       }),
     },
   },
