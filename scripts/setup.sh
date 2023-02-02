@@ -6,6 +6,7 @@ NODE_VERSION=v16.17.1
 YARN_VERSION=1.22.19
 
 echo "installing node ${NODE_VERSION}"
+
 if setup_service node-and-yarn $NODE_VERSION $YARN_VERSION; then
   echo "Installed node ${NODE_VERSION} and yarn $YARN_VERSION successfully"
 else
