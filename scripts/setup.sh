@@ -6,6 +6,7 @@ NODE_VERSION=16.19.0
 YARN_VERSION=1.22.19
 
 export ORIGINAL_REPO=$REPO
+export CURRENT_DIR=$(pwd)
 REPO=odyssey
 
 cd ${OKTA_HOME}/${REPO}
@@ -27,4 +28,4 @@ if ! yarn install --immutable; then
 fi
 
 REPO=$ORIGINAL_REPO
-cd ${OKTA_HOME}/${REPO}
+cd $CURRENT_DIR
