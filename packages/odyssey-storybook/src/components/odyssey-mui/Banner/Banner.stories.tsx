@@ -11,12 +11,12 @@
  */
 
 import { Banner } from "@okta/odyssey-react-mui";
-import { Story } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import BannerMdx from "./Banner.mdx";
 
-export default {
+const storybookMeta: ComponentMeta<typeof Banner> = {
   title: `MUI Components/Alerts/Banner`,
   component: Banner,
   parameters: {
@@ -25,78 +25,66 @@ export default {
     },
   },
   argTypes: {
-    content: {
+    linkText: {
       control: "text",
-      defaultValue: "The mission to Sagitarius A has been set for January 7.",
+    },
+    linkUrl: {
+      control: "text",
+    },
+    onClose: {
+      action: "closed",
     },
     role: {
       control: "radio",
-      options: ["status", null],
-      defaultValue: null,
+      options: ["status", undefined],
     },
     severity: {
       control: "radio",
       options: ["error", "info", "warning"],
       defaultValue: "info",
     },
-    linkUrl: {
+    text: {
       control: "text",
-      defaultValue: null,
-    },
-    linkText: {
-      control: "text",
-      defaultValue: null,
-    },
-    onClose: {
-      control: "text",
-      defaultValue: null,
+      defaultValue: "The mission to Sagitarius A has been set for January 7.",
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
-  return (
-    <Banner
-      severity={args.severity}
-      role={args.role}
-      linkUrl={args.linkUrl}
-      linkText={args.linkText}
-      onClose={args.onClose}
-      text={args.content}
-    ></Banner>
-  );
+export default storybookMeta;
+
+const Template: ComponentStory<typeof Banner> = (args) => {
+  return <Banner {...args}></Banner>;
 };
 
-export const Info = DefaultTemplate.bind({});
+export const Info = Template.bind({});
 Info.args = {};
 
-export const Error = DefaultTemplate.bind({});
+export const Error = Template.bind({});
 Error.args = {
-  content: "Hangar 18 has been compromised.",
   role: "status",
   severity: "error",
+  text: "Hangar 18 has been compromised.",
 };
 
-export const Warning = DefaultTemplate.bind({});
+export const Warning = Template.bind({});
 Warning.args = {
-  content: "Severe solar winds detected. Local system flights may be delayed.",
   role: "status",
   severity: "warning",
+  text: "Severe solar winds detected. Local system flights may be delayed.",
 };
 
-export const WithLink = DefaultTemplate.bind({});
+export const WithLink = Template.bind({});
 WithLink.args = {
-  content: "Hangar 18 has been compromised.",
-  linkUrl: "#anchor",
   linkText: "View report",
+  linkUrl: "#anchor",
   role: "status",
   severity: "error",
+  text: "Hangar 18 has been compromised.",
 };
 
-export const Dismissible = DefaultTemplate.bind({});
+export const Dismissible = Template.bind({});
 Dismissible.args = {
-  onClose: `{() => {}}`,
-  severity: "warning",
   role: "status",
+  severity: "warning",
 };

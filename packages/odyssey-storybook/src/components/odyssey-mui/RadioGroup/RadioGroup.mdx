@@ -1,0 +1,86 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+
+<Meta anchor />
+
+# RadioGroup
+
+Use radio buttons when a user must make a single selection from a list of two or more options that are mutually exclusive.
+
+## About
+
+Radio buttons are wrapped into a radio group so we can visually present groups of options as distinct and separate from other possible groups on the same page.
+
+### When to use
+
+#### Radio group vs Checkbox
+
+Radio buttons allow the user to select 1 option. Checkboxes, in contrast, are independent of all the other checkboxes and multiple options can be selected at the same time.
+
+#### Radio group vs Select
+
+Consider how you wish to present your list of options to the user. A radio group will display all possible options and make it easy to compare them without the need to first interact with the component, lowering the cognitive load for users.
+
+## Examples
+
+### Default
+
+<Canvas>
+  <Story id="mui-components-forms-radiogroup--default" />
+</Canvas>
+
+### Hint text
+
+The hint text is placed in between the label and the radio buttons.
+
+<Canvas>
+  <Story id="mui-components-forms-radiogroup--hint" />
+</Canvas>
+
+### Disabled
+
+Disabled inputs block any possible user interaction and cannot be focused.
+
+<Canvas>
+  <Story id="mui-components-forms-radiogroup--disabled" />
+</Canvas>
+
+### Error
+
+Validation should happen on the group and not individually on each item.
+
+<Canvas>
+  <Story id="mui-components-forms-radiogroup--error" />
+</Canvas>
+
+## Anatomy
+
+### Label
+
+The label helps the user understand the group of options provided and in making a selection.
+
+### Radio button input and label
+
+Radio buttons make up the list of available options within a group.<br/>
+The list is laid out vertically with one choice per line and by default one of the options is selected.<br/>
+If users need to withhold an answer you should provide a neutral option for this.
+
+### Hint text (optional)
+
+This is an optional property that includes in-context descriptions to clarify the grouping or explain the set of options.<br/>
+Hints should not include long-form content or rich text as it visually separates the intended label from the input area.
+
+## Behaviors
+
+### States
+
+A radio button has 2 states: Selected and Unselected.<br/>
+By default one of the options within the list should be selected. Once another option is triggered the previous selection will be deselected.<br/>
+On top of the previous two states, radio buttons can also exist in all the other states needed for form inputs: `focus`, `disabled`, and `invalid`.
+
+### Interactions
+
+A radio button can be selected from either the radio input or the radio label, this provides a better affordance for the user.
+
+## References and additional reading material
+
+- Jakob Nielsen (2004, September 26) [Checkboxes vs. Radio Buttons](https://www.nngroup.com/articles/checkboxes-vs-radio-buttons/) - Nielsen Norman Group

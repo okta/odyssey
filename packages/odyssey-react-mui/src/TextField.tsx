@@ -14,6 +14,8 @@ import {
   ChangeEventHandler,
   FocusEventHandler,
   forwardRef,
+  InputHTMLAttributes,
+  memo,
   ReactNode,
   useCallback,
   useEffect,
@@ -35,13 +37,13 @@ import {
   useUniqueId,
 } from "./";
 
-export interface TextFieldProps {
+export type TextFieldProps = {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
-  autoCompleteType?: string;
+  autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
   /**
    * If `true`, the component is disabled.
    */
@@ -106,111 +108,113 @@ export interface TextFieldProps {
    * The value of the `input` element, required for a controlled component.
    */
   value?: unknown;
-}
+};
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  (props, ref) => {
-    const {
-      autoCompleteType,
-      isDisabled = false,
-      endAdornment,
-      errorMessage,
-      hint,
-      id: idOverride,
-      label,
-      isMultiline = false,
-      onChange,
-      onFocus,
-      optionalLabel,
-      placeholder,
-      isReadOnly,
-      isRequired = true,
-      startAdornment,
-      type = "text",
-      value,
-    } = props;
+const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
+  const {
+    autoCompleteType,
+    isDisabled = false,
+    endAdornment,
+    errorMessage,
+    hint,
+    id: idOverride,
+    label,
+    isMultiline = false,
+    onChange,
+    onFocus,
+    optionalLabel,
+    placeholder,
+    isReadOnly,
+    isRequired = true,
+    startAdornment,
+    type = "text",
+    value,
+  } = props;
 
-    const [inputType, setInputType] = useState(type);
+  const [inputType, setInputType] = useState(type);
 
-    useEffect(() => {
-      setInputType(type);
-    }, [type]);
+  useEffect(() => {
+    setInputType(type);
+  }, [type]);
 
-    const togglePasswordVisibility = useCallback(() => {
-      setInputType((currentType) =>
-        currentType === "password" ? "text" : "password"
-      );
-    }, []);
-
-    const id = useUniqueId(idOverride);
-    const hintId = hint ? `${id}-hint` : undefined;
-    const errorId = errorMessage ? `${id}-error` : undefined;
-    const labelId = label ? `${id}-label` : undefined;
-
-    const inputProps = useMemo(
-      () =>
-        errorId || hintId
-          ? {
-              "aria-describedby":
-                errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId,
-            }
-          : undefined,
-      [errorId, hintId]
+  const togglePasswordVisibility = useCallback(() => {
+    setInputType((currentType) =>
+      currentType === "password" ? "text" : "password"
     );
+  }, []);
 
-    return (
-      <FormControl disabled={isDisabled} error={Boolean(errorMessage)}>
-        <InputLabel htmlFor={id} id={labelId}>
-          {label}
-          {!isRequired && (
-            <Typography variant="subtitle1">{optionalLabel}</Typography>
-          )}
-        </InputLabel>
-        {hint && <FormHelperText id={hintId}>{hint}</FormHelperText>}
-        <InputBase
-          autoComplete={autoCompleteType}
-          endAdornment={
-            inputType === "password" ? (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  edge="end"
-                  onClick={togglePasswordVisibility}
-                >
-                  {inputType === "password" ? <EyeIcon /> : <EyeOffIcon />}
-                </IconButton>
-              </InputAdornment>
-            ) : (
-              endAdornment
-            )
+  const id = useUniqueId(idOverride);
+  const hintId = hint ? `${id}-hint` : undefined;
+  const errorId = errorMessage ? `${id}-error` : undefined;
+  const labelId = label ? `${id}-label` : undefined;
+
+  const inputProps = useMemo(
+    () =>
+      errorId || hintId
+        ? {
+            "aria-describedby":
+              errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId,
           }
-          id={id}
-          inputProps={inputProps}
-          multiline={isMultiline}
-          onChange={onChange}
-          onFocus={onFocus}
-          placeholder={placeholder}
-          readOnly={isReadOnly}
-          ref={ref}
-          startAdornment={
-            inputType === "search" ? (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ) : (
-              startAdornment
-            )
-          }
-          type={inputType}
-          value={value}
-        />
-        {errorMessage && (
-          <FormHelperText error id={errorId}>
-            <span style={visuallyHidden}>Error:</span>
-            {errorMessage}
-          </FormHelperText>
+        : undefined,
+    [errorId, hintId]
+  );
+
+  return (
+    <FormControl disabled={isDisabled} error={Boolean(errorMessage)}>
+      <InputLabel htmlFor={id} id={labelId}>
+        {label}
+        {!isRequired && (
+          <Typography variant="subtitle1">{optionalLabel}</Typography>
         )}
-      </FormControl>
-    );
-  }
-);
+      </InputLabel>
+      {hint && <FormHelperText id={hintId}>{hint}</FormHelperText>}
+      <InputBase
+        autoComplete={autoCompleteType}
+        endAdornment={
+          inputType === "password" ? (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                edge="end"
+                onClick={togglePasswordVisibility}
+              >
+                {inputType === "password" ? <EyeIcon /> : <EyeOffIcon />}
+              </IconButton>
+            </InputAdornment>
+          ) : (
+            endAdornment
+          )
+        }
+        id={id}
+        inputProps={inputProps}
+        multiline={isMultiline}
+        onChange={onChange}
+        onFocus={onFocus}
+        placeholder={placeholder}
+        readOnly={isReadOnly}
+        ref={ref}
+        startAdornment={
+          inputType === "search" ? (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ) : (
+            startAdornment
+          )
+        }
+        type={inputType}
+        value={value}
+      />
+      {errorMessage && (
+        <FormHelperText error id={errorId}>
+          <span style={visuallyHidden}>Error:</span>
+          {errorMessage}
+        </FormHelperText>
+      )}
+    </FormControl>
+  );
+});
+
+const MemoizedTextField = memo(TextField);
+
+export { MemoizedTextField as TextField };

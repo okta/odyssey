@@ -13,7 +13,6 @@
 import type { StoryFn } from "@storybook/react";
 import {
   Button,
-  FormControlLabel,
   OdysseyThemeProvider,
   Radio,
   RadioGroup,
@@ -97,23 +96,12 @@ export const RadioGroupStory: StoryFn = () => {
         <RadioGroup
           defaultValue="Lightspeed"
           name="radio-buttons-group"
+          label="Speed"
           aria-describedby="radio-hint radio-error"
         >
-          <FormControlLabel
-            value="Lightspeed"
-            control={<Radio />}
-            label="Lightspeed"
-          />
-          <FormControlLabel
-            value="Warp speed"
-            control={<Radio />}
-            label="Warp speed"
-          />
-          <FormControlLabel
-            value="Ludicrous speed"
-            control={<Radio />}
-            label="Ludicrous speed"
-          />
+          <Radio value="lightspeed" label="Lightspeed" />
+          <Radio value="Warp Speed" label="Warp Speed" />
+          <Radio value="Ludicrous Speed" label="Ludicrous Speed" />
         </RadioGroup>
       </div>
     </OdysseyThemeProvider>
