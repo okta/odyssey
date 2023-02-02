@@ -10,21 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import {
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  visuallyHidden,
-} from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { Radio } from "@okta/odyssey-react-mui";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import RadioMdx from "./Radio.mdx";
 
-export default {
+const storybookMeta: ComponentMeta<typeof Radio> = {
   title: `MUI Components/Forms/Radio`,
   component: Radio,
   parameters: {
@@ -33,86 +25,23 @@ export default {
     },
   },
   argTypes: {
-    disabled: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    error: {
-      control: "text",
-      defaultValue: null,
-    },
-    hint: {
-      control: "text",
-      defaultValue: null,
-    },
-    invalid: {
-      control: "boolean",
-      defaultValue: false,
-    },
     label: {
       control: "text",
-      defaultValue: "Speed",
+      defaultValue: "Label",
+    },
+    value: {
+      control: "text",
+      defaultValue: "Value",
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
-  return (
-    <FormControl
-      component="fieldset"
-      disabled={args.disabled}
-      error={args.invalid}
-    >
-      <FormLabel component="legend">{args.label}</FormLabel>
-      {args.hint && (
-        <FormHelperText id="radio-hint">{args.hint}</FormHelperText>
-      )}
-      <RadioGroup
-        defaultValue="Lightspeed"
-        name="radio-buttons-group"
-        aria-describedby="radio-hint radio-error"
-      >
-        <FormControlLabel
-          value="Lightspeed"
-          control={<Radio />}
-          label="Lightspeed"
-        />
-        <FormControlLabel
-          value="Warp speed"
-          control={<Radio />}
-          label="Warp speed"
-        />
-        <FormControlLabel
-          value="Ludicrous speed"
-          control={<Radio />}
-          label="Ludicrous speed"
-        />
-      </RadioGroup>
-      {args.error && (
-        <FormHelperText id="radio-error" error>
-          <span style={visuallyHidden}>Error:</span> {args.error}
-        </FormHelperText>
-      )}
-    </FormControl>
-  );
+export default storybookMeta;
+
+const Template: ComponentStory<typeof Radio> = (args) => {
+  return <Radio label={args.label} value={args.value} />;
 };
 
-export const Default = DefaultTemplate.bind({});
+export const Default = Template.bind({});
 Default.args = {};
-
-export const Hint = DefaultTemplate.bind({});
-Hint.args = {
-  hint: "Select the speed at which you wish to travel.",
-};
-
-export const Disabled = DefaultTemplate.bind({});
-Disabled.args = {
-  disabled: true,
-};
-
-export const Invalid = DefaultTemplate.bind({});
-Invalid.args = {
-  invalid: true,
-  error: "This field is required.",
-};

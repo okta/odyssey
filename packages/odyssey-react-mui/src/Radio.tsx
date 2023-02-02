@@ -10,4 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./TextField";
+import { FormControlLabel } from "./";
+import { Radio as MuiRadio } from "@mui/material";
+import { memo } from "react";
+
+export type RadioProps = {
+  label: string;
+  value: string;
+};
+
+const Radio = ({ label, value }: RadioProps) => (
+  <FormControlLabel control={<MuiRadio />} label={label} value={value} />
+);
+
+const MemoizedRadio = memo(Radio);
+
+export { MemoizedRadio as Radio };

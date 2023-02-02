@@ -2,6 +2,7 @@ import {
   CssBaseline,
   odysseyTheme,
   OdysseyThemeProvider,
+  ScopedCssBaseline,
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
 import type { DecoratorFn } from "@storybook/react";
@@ -18,7 +19,9 @@ export const MuiThemeDecorator: DecoratorFn = (Story) => (
       <Fragment>
         <CssBaseline />
         <div style={styles}>
-          <Story />
+          <ScopedCssBaseline>
+            <Story />
+          </ScopedCssBaseline>
         </div>
       </Fragment>
     </StorybookThemeProvider>

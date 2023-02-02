@@ -10,4 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export * from "./TextField";
+import { Chip } from "./";
+
+export interface StatusProps {
+  /**
+   * Determine the color and icon of the alert
+   */
+  severity: "default" | "error" | "info" | "success" | "warning";
+
+  /**
+   * The text content of the status
+   */
+  label: string;
+}
+
+export const Status = ({ severity, label }: StatusProps) => (
+  <Chip label={label} color={severity} variant="status" />
+);
