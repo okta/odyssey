@@ -1,9 +1,9 @@
 {
   "version": "0.18.0",
   "npmClient": "yarn",
-  "commands": {
+  "command": {
     "publish": {
-      "ignore": [".yarnrc.yml"]
+      "ignore": ".yarnrc.yml"
     }
   },
   "changelogPreset": "@okta/conventional-changelog-odyssey",
