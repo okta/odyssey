@@ -2,7 +2,7 @@
   "version": "0.18.0",
   "npmClient": "yarn",
   "commands": {
-    "version": {
+    "publish": {
       "ignore": [".yarnrc.yml"]
     }
   },
