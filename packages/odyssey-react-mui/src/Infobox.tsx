@@ -25,7 +25,7 @@ export interface InfoboxProps {
   severity?: AlertColor;
   /**
    * Sets the ARIA role of the alert
-   * ("status" for something that dynamically updates, "alert" for errors", null for something
+   * ("status" for something that dynamically updates, "alert" for errors, null for something
    * unchanging)
    */
   role?: "status" | "alert";
