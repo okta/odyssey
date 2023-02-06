@@ -11,21 +11,21 @@
  */
 
 import { Story } from "@storybook/react";
-import { Alert, AlertTitle, Link, Typography } from "@okta/odyssey-react-mui";
+import { Infobox, Link, Typography } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import InfoboxMdx from "./Infobox.mdx";
 
 export default {
   title: `MUI Components/Alerts/Infobox`,
-  component: Alert,
+  component: Infobox,
   parameters: {
     docs: {
       page: InfoboxMdx,
     },
   },
   argTypes: {
-    content: {
+    children: {
       control: "text",
       defaultValue:
         "You are currently logged in from Moonbase Alpha-6, located on Luna.",
@@ -50,16 +50,20 @@ export default {
 
 const DefaultTemplate: Story = (args) => {
   return (
-    <Alert severity={args.severity} role={args.role} variant="infobox">
-      {args.title && <AlertTitle>{args.title}</AlertTitle>}
-      {args.content}
-    </Alert>
+    <Infobox
+      severity={args.severity}
+      role={args.role}
+      title={args.title}
+      variant="infobox"
+    >
+      {args.children}
+    </Infobox>
   );
 };
 
 export const Info = DefaultTemplate.bind({});
 Info.args = {
-  content:
+  children:
     "You are currently logged in from Moonbase Alpha-6, located on Luna.",
   severity: "info",
   title: "Moonbase Alpha-6",
@@ -67,7 +71,7 @@ Info.args = {
 
 export const Error = DefaultTemplate.bind({});
 Error.args = {
-  content:
+  children:
     "An issue has been discovered with your fuel mixture ratios. Please reconfigure your fuel mixture and perform safety checks again.",
   role: "alert",
   severity: "error",
@@ -76,7 +80,7 @@ Error.args = {
 
 export const Warning = DefaultTemplate.bind({});
 Warning.args = {
-  content:
+  children:
     "Safety checks must be completed before this mission can be approved for launch.",
   role: "status",
   severity: "warning",
@@ -85,7 +89,7 @@ Warning.args = {
 
 export const Success = DefaultTemplate.bind({});
 Success.args = {
-  content:
+  children:
     "Safety checks are complete, and this mission has been approved for launch.",
   role: "status",
   severity: "success",
@@ -94,7 +98,7 @@ Success.args = {
 
 export const BodyOnly = DefaultTemplate.bind({});
 BodyOnly.args = {
-  content:
+  children:
     "You are currently logged in from Moonbase Alpha-6, located on Luna.",
   severity: "info",
   title: null,
@@ -102,7 +106,7 @@ BodyOnly.args = {
 
 export const InlineLink = DefaultTemplate.bind({});
 InlineLink.args = {
-  content: (
+  children: (
     <>
       An issue has been discovered with your fuel mixture ratios. Please{" "}
       <Link href="#" variant="monochrome">
@@ -118,7 +122,7 @@ InlineLink.args = {
 
 export const BlockLink = DefaultTemplate.bind({});
 BlockLink.args = {
-  content: (
+  children: (
     <>
       <Typography paragraph>
         An issue has been discovered with your fuel mixture ratios. Please
