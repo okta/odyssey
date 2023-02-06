@@ -50,12 +50,7 @@ export default {
 
 const DefaultTemplate: Story = (args) => {
   return (
-    <Infobox
-      severity={args.severity}
-      role={args.role}
-      title={args.title}
-      variant="infobox"
-    >
+    <Infobox severity={args.severity} role={args.role} title={args.title}>
       {args.children}
     </Infobox>
   );
