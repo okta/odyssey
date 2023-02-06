@@ -21,10 +21,10 @@ export interface BannerProps {
   severity?: AlertColor;
   /**
    * Sets the ARIA role of the alert
-   * ("status" for something that dynamically updates, null for something
+   * ("status" for something that dynamically updates, "alert" for errors", null for something
    * unchanging)
    */
-  role?: "status";
+  role?: "status" | "alert";
   /**
    * The text content of the alert
    */
