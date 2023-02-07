@@ -119,6 +119,7 @@ export * from "./Banner";
 export * from "./createUniqueId";
 export * from "./Icon";
 export * from "./iconDictionary";
+export * from "./Infobox";
 export * from "./Link";
 export * from "./OdysseyCacheProvider";
 export * from "./OdysseyThemeProvider";
