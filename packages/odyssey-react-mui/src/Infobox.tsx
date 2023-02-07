@@ -22,7 +22,7 @@ export interface InfoboxProps {
   /**
    * Determine the color and icon of the alert
    */
-  severity?: AlertColor;
+  severity: AlertColor;
   /**
    * Sets the ARIA role of the alert
    * ("status" for something that dynamically updates, "alert" for errors, null for something
@@ -35,12 +35,7 @@ export interface InfoboxProps {
   title?: string;
 }
 
-const Infobox = ({
-  children,
-  severity = "info",
-  role,
-  title,
-}: InfoboxProps) => (
+const Infobox = ({ children, severity, role, title }: InfoboxProps) => (
   <Alert role={role} severity={severity} variant="infobox">
     {title && <AlertTitle>{title}</AlertTitle>}
     {children}

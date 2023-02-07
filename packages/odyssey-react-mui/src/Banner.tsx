@@ -18,7 +18,7 @@ export interface BannerProps {
   /**
    * Determine the color and icon of the alert
    */
-  severity?: AlertColor;
+  severity: AlertColor;
   /**
    * Sets the ARIA role of the alert
    * ("status" for something that dynamically updates, "alert" for errors, null for something
@@ -48,10 +48,10 @@ export interface BannerProps {
 
 const Banner = ({
   onClose,
-  severity = "info",
+  severity,
   role,
   linkUrl,
-  linkText = "Learn more",
+  linkText,
   text,
 }: BannerProps) => (
   <Alert onClose={onClose} role={role} severity={severity} variant="banner">
