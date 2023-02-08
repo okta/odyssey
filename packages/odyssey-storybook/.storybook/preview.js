@@ -13,8 +13,10 @@ export const parameters = {
       order: [
         "Welcome",
         ["Introduction (README)", "Docs Status"],
-        "Contributing",
+        "Installation",
+        ["Odyssey-React-MUI", "Odyssey-React-Labs"],
         "Guidelines",
+        "Contributing",
         "MUI Components",
         "Labs Components",
         "Customization",
