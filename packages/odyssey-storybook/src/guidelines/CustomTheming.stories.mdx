@@ -14,9 +14,8 @@ Customizing component styles with Odyssey theming is very simple. Just import `u
 
 ```tsx
 import { css } from "@emotion/react";
+import { useTheme } from "@okta/odyssey-react-mui";
 import { MouseEventHandler, ReactNode, useMemo } from "react";
-
-import { useTheme } from "./";
 
 export type WhatchamacallitProps = {
   children: ReactNode;
@@ -48,6 +47,26 @@ export const Whatchamacallit = ({
 
 If the global theme switches from light to dark mode, you'll get that change as well. You can find out the current mode under `theme.pallet.mode`.
 
+### Theme Variables
+
+When using `useTheme`, you have access to these configuration variables:
+
+- `breakpoints`
+- `components`
+- `direction`
+- `mixins`
+- `palette`
+- `shadows`
+- `shape`
+- `spacing`
+- `transitions`
+- `typography`
+- `zIndex`
+
+Light and dark modes are defined by `palette.mode`.
+
+If you need to know about right-to-left, that's `direction`. It gives you either `'ltr'` or `'rtl'`.
+
 ## Overridding Global Theme Properties
 
 You can also override Odyssey's global theme. Doing so is much more complex than adding styles to a component and should only be used by teams that absolutely need customizing global styles.
@@ -77,7 +96,9 @@ const myTheme = createTheme({
     borderWidth: Tokens.BorderWidthBase + 2,
   },
   palette: {
-    mode: "dark",
+    primary: {
+      main: Tokens.ColorPaletteNeutral900,
+    }
   },
   shape: {
     borderRadius: 4,
