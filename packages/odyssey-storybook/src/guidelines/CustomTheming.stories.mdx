@@ -1,0 +1,107 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guidelines/Custom Theming" />
+
+# Custom Theming Components with Odyssey
+
+Odyssey has its own theming system which other devs can hook into.
+
+While our internal system relies on Material-UI, you don't need to know any of that to interact with it.
+
+## Custom Component with Odyssey styles
+
+Customizing component styles with Odyssey theming is very simple. Just import `useTheme`, and everything is in there ready for you.
+
+```tsx
+import { css } from "@emotion/react";
+import { MouseEventHandler, ReactNode, useMemo } from "react";
+
+import { useTheme } from "./";
+
+export type WhatchamacallitProps = {
+  children: ReactNode;
+  onClick: MouseEventHandler;
+};
+
+export const Whatchamacallit = ({
+  children,
+  onClick,
+}: WhatchamacallitProps) => {
+  const theme = useTheme();
+
+  const whatchamacallitStyles = useMemo(
+    () => css`
+      border-radius: ${theme.shape.borderRadius};
+      color: ${theme.palette.text.secondary};
+      padding: ${theme.spacing(2)};
+    `,
+    [theme]
+  );
+
+  return (
+    <button css={whatchamacallitStyles} onClick={onClick}>
+      {children}
+    </button>
+  );
+};
+```
+
+If the global theme switches from light to dark mode, you'll get that change as well. You can find out the current mode under `theme.pallet.mode`.
+
+## Overridding Global Theme Properties
+
+You can also override Odyssey's global theme. Doing so is much more complex than adding styles to a component and should only be used by teams that absolutely need customizing global styles.
+
+In general, we advise teams never shift any colors or spacing values from the defaults unless you have an explict design reason to do so.
+
+To customize your theme, you'll want `OdysseyThemeProvider`. This component automatically merges any theme changes into the Odyssey theme for you.
+
+Our theming utilizes MUI's `ThemeOptions` under-the-hood, so you can find more in-depth information customizing the theme [in their docs](https://mui.com/material-ui/customization/theming/).
+
+```jsx
+import { createTheme } from "@mui/material/styles";
+import * as Tokens from "@okta/odyssey-design-tokens";
+import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
+
+const myTheme = createTheme({
+  components: {
+    MuiAlert: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.palette.text.secondary,
+        }),
+      },
+    },
+  },
+  mixins: {
+    borderWidth: Tokens.BorderWidthBase + 2,
+  },
+  palette: {
+    mode: "dark",
+  },
+  shape: {
+    borderRadius: 4,
+  },
+  spacing: [
+    Tokens.SpaceScale0,
+    Tokens.SpaceScale1,
+    Tokens.SpaceScale2,
+    Tokens.SpaceScale3,
+    Tokens.SpaceScale4,
+    Tokens.SpaceScale5,
+    Tokens.SpaceScale6,
+    Tokens.SpaceScale7,
+    Tokens.SpaceScale8,
+    Tokens.SpaceScale9,
+  ],
+  typography: {
+    fontSize: 16,
+  },
+})
+
+const YourAppRoot = ({ children }) => (
+  <OdysseyThemeProvider theme={myTheme}>
+    {children}
+  <OdysseyThemeProvider>
+);
+```
