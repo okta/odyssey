@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.19.0) (2023-02-09)
+
+### Features
+
+- updated a bunch of packages to the latest version ([36ce1d0](https://github.com/okta/odyssey/commit/36ce1d09a621f273878345c20cfc782059c04cd2))
+
 ## [0.18.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.18.0) (2023-02-02)
 
 ### Features
