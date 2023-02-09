@@ -12,8 +12,6 @@ else
   echo "node ${NODE_VERSION} and yarn $YARN_VERSION installation failed."
 fi
 
-cd ${OKTA_HOME}/odyssey
-
 # Override .yarnrc.yml npmRegistryServer with Okta's
 export YARN_NPM_REGISTRY_SERVER=${ARTIFACTORY_URL}/api/npm/npm-okta-master
 
@@ -21,3 +19,6 @@ if ! yarn install --immutable; then
   echo "yarn install command failed! Exiting..."
   exit ${FAILED_SETUP}
 fi
+
+REPO=$ORIGINAL_REPO
+cd $CURRENT_DIR
