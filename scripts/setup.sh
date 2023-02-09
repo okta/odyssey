@@ -1,12 +1,19 @@
 #!/bin/bash
 
-NODE_VERSION=v16.17.1
+NODE_VERSION=16.19.0
 
 # Note: Yarn will automatically switch over to yarn 3 after installing yarn 1.x
 YARN_VERSION=1.22.19
 
+export ORIGINAL_REPO=$REPO
+export CURRENT_DIR=$(pwd)
+REPO=odyssey
+
+cd ${OKTA_HOME}/${REPO}
+
 echo "installing node ${NODE_VERSION}"
-if setup_service node-and-yearn $NODE_VERSION $YARN_VERSION; then
+
+if setup_service node-and-yarn $NODE_VERSION $YARN_VERSION; then
   echo "Installed node ${NODE_VERSION} and yarn $YARN_VERSION successfully"
 else
   echo "node ${NODE_VERSION} and yarn $YARN_VERSION installation failed."
