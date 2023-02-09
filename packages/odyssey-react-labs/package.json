@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-labs",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "description": "React components for Odyssey, that will eventually be part of Odyssey React but who's implementation isn't yet approved.",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
