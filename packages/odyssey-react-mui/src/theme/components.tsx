@@ -10,13 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ThemeOptions } from "@mui/material";
+import { ThemeOptions } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
 //import radioClasses from "@mui/material";
+import { buttonClasses } from "@mui/material/Button";
 import { chipClasses } from "@mui/material/Chip";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
+import { dividerClasses } from "@mui/material/Divider";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
+import { listItemIconClasses } from "@mui/material/ListItemIcon";
+import { listItemTextClasses } from "@mui/material/ListItemText";
+import { menuItemClasses } from "@mui/material/MenuItem";
 import { svgIconClasses } from "@mui/material/SvgIcon";
 import { tableBodyClasses } from "@mui/material/TableBody";
 import { tableCellClasses } from "@mui/material/TableCell";
@@ -292,7 +297,7 @@ export const components: ThemeOptions["components"] = {
         style: {
           minWidth: "auto",
 
-          ".MuiButton-startIcon": {
+          [`.${buttonClasses.endIcon}, .${buttonClasses.startIcon}`]: {
             margin: "0",
           },
         },
@@ -335,18 +340,23 @@ export const components: ThemeOptions["components"] = {
           pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from "none"
         },
 
-        ".MuiButton-startIcon > *:nth-of-type(1)": {
-          fontSize: `${theme.typography.ui.lineHeight}em`,
+        [`.${buttonClasses.startIcon}, .${buttonClasses.endIcon}`]: {
+          "& > *:nth-of-type(1)": {
+            fontSize: `${theme.typography.ui.lineHeight}em`,
+          },
         },
       }),
+
+      endIcon: ({ theme }) => ({
+        display: "inline-flex",
+        margin: 0,
+        marginInlineStart: theme.spacing(2),
+      }),
+
       startIcon: ({ theme }) => ({
         display: "inline-flex",
         margin: 0,
         marginInlineEnd: theme.spacing(2),
-
-        "&:only-child": {
-          margin: 0,
-        },
       }),
     },
   },
@@ -735,7 +745,7 @@ export const components: ThemeOptions["components"] = {
           },
         },
 
-        "ul, ol": {
+        "ul:not([class]), ol:not([class])": {
           maxWidth: theme.mixins.maxWidth,
           marginBlockStart: 0,
           marginBlockEnd: theme.spacing(4),
@@ -755,7 +765,7 @@ export const components: ThemeOptions["components"] = {
           },
         },
 
-        li: {
+        "li:not([class])": {
           marginBlockEnd: theme.spacing(2),
           paddingInlineStart: theme.spacing(1),
 
@@ -1263,6 +1273,7 @@ export const components: ThemeOptions["components"] = {
         paddingBlock: theme.spacing(2),
         paddingInline: theme.spacing(4),
         fontSize: theme.typography.caption.fontSize,
+        fontWeight: theme.typography.fontWeightBold,
         lineHeight: theme.typography.caption.lineHeight,
         color: theme.palette.text.secondary,
         textTransform: "uppercase",
@@ -1271,19 +1282,71 @@ export const components: ThemeOptions["components"] = {
   },
   MuiMenuItem: {
     styleOverrides: {
-      root: ({ theme }) => ({
-        justifyContent: "space-between",
+      root: ({ theme, ownerState }) => ({
         gap: theme.spacing(2),
+        minHeight: "unset",
+        paddingBlock: theme.spacing(3),
 
-        "&.Mui-selected": {
+        "&:hover": {
+          textDecoration: "none",
+          backgroundColor: theme.palette.grey[100],
+
+          // Reset on touch devices, it doesn't add specificity
+          "@media (hover: none)": {
+            backgroundColor: "transparent",
+          },
+        },
+
+        [`&.${menuItemClasses.root}-destructive`]: {
+          color: theme.palette.error.main,
+        },
+
+        [`&.${menuItemClasses.selected}`]: {
           backgroundColor: "transparent",
           color: theme.palette.primary.main,
 
           "&:hover": {
             backgroundColor: theme.palette.primary.lighter,
+
+            "@media (hover: none)": {
+              backgroundColor: `rgba(${theme.palette.primary.main} / ${theme.palette.action.selectedOpacity})`,
+            },
           },
         },
+
+        ...(!ownerState.disableGutters && {
+          paddingInline: theme.spacing(4),
+        }),
+
+        ...(ownerState.divider && {
+          borderBlockEnd: `1px solid ${theme.palette.divider}`,
+        }),
+
+        [`&.${menuItemClasses.disabled}`]: {
+          opacity: 1,
+          color: theme.palette.text.disabled,
+        },
+
+        [`& + .${dividerClasses.root}`]: {
+          marginBlock: theme.spacing(1),
+        },
+
+        [`& .${listItemTextClasses.root}`]: {
+          marginBlock: 0,
+        },
+
+        [`& .${listItemIconClasses.root}`]: {
+          minWidth: "unset",
+        },
       }),
+    },
+  },
+  MuiListItemIcon: {
+    styleOverrides: {
+      root: {
+        minWidth: "unset",
+        color: "inherit",
+      },
     },
   },
   MuiNativeSelect: {
@@ -1306,6 +1369,9 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       paper: ({ theme }) => ({
         marginBlockStart: theme.spacing(1),
+        borderWidth: theme.mixins.borderWidth,
+        borderStyle: theme.mixins.borderStyle,
+        borderColor: theme.palette.grey[200],
       }),
     },
   },
