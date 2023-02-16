@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.20.0) (2023-02-16)
+
+### Features
+
+- add DatePicker styles to Labs ([#1672](https://github.com/okta/odyssey/issues/1672)) ([f8d8b5e](https://github.com/okta/odyssey/commit/f8d8b5e4f8d30f8bce346e4dca47f88c8350a26b))
+- updated a bunch of packages to the latest version ([36ce1d0](https://github.com/okta/odyssey/commit/36ce1d09a621f273878345c20cfc782059c04cd2))
+
+### Bug Fixes
+
+- another potential Lerna build order fix ([b4eb393](https://github.com/okta/odyssey/commit/b4eb39322204682e0b33dd76a7901370de754020))
+
 ## [0.19.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.19.0) (2023-02-09)
 
 ### Features
