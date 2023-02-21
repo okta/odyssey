@@ -24,6 +24,7 @@ export {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Divider,
   FormControl,
   FormControlLabel,
   FormGroup,
@@ -38,7 +39,9 @@ export {
   ListItemIcon,
   ListItemText,
   ListSubheader,
-  MenuItem,
+  Menu,
+  MenuList,
+  Paper,
   ScopedCssBaseline,
   Select,
   Snackbar,
@@ -72,6 +75,7 @@ export type {
   DialogContentProps,
   DialogContentTextProps,
   DialogTitleProps,
+  DividerProps,
   FormControlLabelProps,
   FormControlProps,
   FormGroupProps,
@@ -86,7 +90,9 @@ export type {
   ListItemIconProps,
   ListItemTextProps,
   ListSubheaderProps,
-  MenuItemProps,
+  MenuProps,
+  MenuListProps,
+  PaperProps,
   ScopedCssBaselineProps,
   SelectChangeEvent,
   SelectProps,
@@ -121,6 +127,8 @@ export * from "./Icon";
 export * from "./iconDictionary";
 export * from "./Infobox";
 export * from "./Link";
+export * from "./MenuButton";
+export * from "./MenuItem";
 export * from "./OdysseyCacheProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./PasswordInput";
