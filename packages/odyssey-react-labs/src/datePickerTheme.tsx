@@ -82,9 +82,7 @@ export const datePickerTheme: ThemeOptions = {
       styleOverrides: {
         root: ({ theme }) => ({
           paddingBottom: theme.spacing(popupSpacingValue),
-          paddingLeft: theme.spacing(popupSpacingValue),
-          paddingRight: theme.spacing(popupSpacingValue),
-          paddingTop: theme.spacing(4),
+          paddingTop: theme.spacing(1),
           width: "100%",
 
           "&, &::before, &::after": {
@@ -121,6 +119,8 @@ export const datePickerTheme: ThemeOptions = {
         header: ({ theme }) => ({
           gap: theme.spacing(1),
           justifyContent: "space-between",
+          paddingLeft: theme.spacing(popupSpacingValue),
+          paddingRight: theme.spacing(popupSpacingValue),
         }),
         slideTransition: () => ({
           minHeight: `${(214 / 16) * (16 / 14)}rem`,
@@ -131,6 +131,8 @@ export const datePickerTheme: ThemeOptions = {
           marginBottom: theme.spacing(1),
           marginLeft: 0,
           marginRight: 0,
+          paddingLeft: theme.spacing(popupSpacingValue),
+          paddingRight: theme.spacing(popupSpacingValue),
 
           "&:last-child": {
             marginBottom: 0,
@@ -179,7 +181,9 @@ export const datePickerTheme: ThemeOptions = {
         root: ({ theme }) => ({
           marginBottom: theme.spacing(1),
           marginTop: 0,
-          paddingLeft: theme.spacing(2),
+          paddingLeft: `calc(${theme.spacing(
+            popupSpacingValue
+          )} + ${theme.spacing(2)})`,
           paddingRight: 0,
           width: "auto",
         }),
