@@ -45,7 +45,7 @@ const storybookMeta: ComponentMeta<typeof Banner> = {
     },
     text: {
       control: "text",
-      defaultValue: "The mission to Sagitarius A has been set for January 7.",
+      defaultValue: "The mission to Sagittarius A is set for January 7.",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -64,7 +64,7 @@ export const Error = Template.bind({});
 Error.args = {
   role: "status",
   severity: "error",
-  text: "Hangar 18 has been compromised.",
+  text: "An unidentified flying object compromised Hangar 18.",
 };
 
 export const Warning = Template.bind({});
@@ -80,7 +80,7 @@ WithLink.args = {
   linkUrl: "#anchor",
   role: "status",
   severity: "error",
-  text: "Hangar 18 has been compromised.",
+  text: "An unidentified flying object compromised Hangar 18.",
 };
 
 export const Dismissible = Template.bind({});
