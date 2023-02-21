@@ -60,15 +60,7 @@ const storybookMeta: Meta<MenuButtonProps> = {
 export default storybookMeta;
 
 const DefaultTemplate: Story<MenuButtonProps> = (args) => {
-  return (
-    <MenuButton
-      buttonEndIcon={args.buttonEndIcon}
-      buttonLabel={args.buttonLabel}
-      buttonVariant={args.buttonVariant}
-    >
-      {args.children}
-    </MenuButton>
-  );
+  return <MenuButton {...args}>{args.children}</MenuButton>;
 };
 
 export const Simple = DefaultTemplate.bind({});
