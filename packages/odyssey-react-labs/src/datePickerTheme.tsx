@@ -127,8 +127,12 @@ export const datePickerTheme: ThemeOptions = {
     MuiCalendarPicker: {
       styleOverrides: {
         root: ({ theme }) => ({
+          borderColor: theme.palette.divider,
+          borderStyle: "solid",
+          borderWidth: "1px",
+          borderRadius: `${(4 / 16) * (16 / 14)}rem`,
           paddingBottom: theme.spacing(popupSpacingValue),
-          paddingTop: theme.spacing(1),
+          paddingTop: theme.spacing(4),
           width: "100%",
         }),
       },
@@ -352,10 +356,11 @@ export const datePickerTheme: ThemeOptions = {
             alignItems: "center",
             borderRadius: 0,
             display: "flex",
+            fontSize: theme.typography.body1.fontSize,
             justifyContent: "flex-start",
             marginBottom: 0,
             marginTop: 0,
-            paddingLeft: theme.spacing(4),
+            paddingLeft: theme.spacing(7),
             position: "relative",
             width: "100%",
 
