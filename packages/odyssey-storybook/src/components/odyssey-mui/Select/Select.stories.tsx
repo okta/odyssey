@@ -49,7 +49,7 @@ export default {
     },
     hint: {
       control: "text",
-      defaultValue: "Select your destination within the Sol system.",
+      defaultValue: "Select your destination in the Sol system.",
     },
     invalid: {
       control: "boolean",
@@ -248,7 +248,7 @@ DefaultDisabled.args = {
 export const DefaultInvalid = Template.bind({});
 DefaultInvalid.args = {
   invalid: true,
-  error: "This field is required.",
+  error: "Select your destination.",
 };
 
 export const Grouped = GroupedTemplate.bind({});
