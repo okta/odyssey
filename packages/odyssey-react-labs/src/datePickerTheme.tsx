@@ -10,12 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { CSSInterpolation, Theme, ThemeOptions } from "@mui/material/styles";
+import { CSSInterpolation, ThemeOptions } from "@mui/material/styles";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CalendarIcon,
   ChevronDownIcon,
+  odysseyTheme,
 } from "@okta/odyssey-react-mui";
 
 const popupSpacingValue = 5;
@@ -23,7 +24,7 @@ const popupSpacingValue = 5;
 type ThemeStyles = ({
   theme,
 }: {
-  theme: Omit<Theme, "components">;
+  theme: typeof odysseyTheme;
 }) => CSSInterpolation;
 
 type StateStyles = Record<string, ThemeStyles>;
@@ -61,18 +62,63 @@ const todayDotStyles: StateStyles = {
   default: ({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     borderRadius: "50%",
+    bottom: theme.spacing(1),
     content: '" "',
     height: `${(2 / 16) * (16 / 14)}rem`,
     position: "absolute",
-    bottom: theme.spacing(1),
-    width: `${(2 / 16) * (16 / 14)}rem`,
     transform: "translateY(-50%)",
+    width: `${(2 / 16) * (16 / 14)}rem`,
   }),
   hover: ({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
   }),
   selected: ({ theme }) => ({
     backgroundColor: theme.palette.primary.contrastText,
+  }),
+};
+
+const yearStyles: StateStyles = {
+  default: ({ theme }) => ({
+    backgroundColor: "transparent",
+    color: theme.palette.text.primary,
+  }),
+  disabled: ({ theme }) => ({
+    backgroundColor: "transparent",
+    color: theme.palette.text.disabled,
+  }),
+  hover: ({ theme }) => ({
+    backgroundColor: theme.palette.grey[100],
+  }),
+  hoverSelected: ({ theme }) => ({
+    backgroundColor: theme.palette.primary.lighter,
+    color: theme.palette.primary.main,
+  }),
+  outsideOfMonth: ({ theme }) => ({
+    backgroundColor: "transparent",
+    color: theme.palette.text.secondary,
+  }),
+  selected: ({ theme }) => ({
+    backgroundColor: "transparent",
+    color: theme.palette.primary.main,
+  }),
+  today: ({ theme }) => ({
+    backgroundColor: "transparent",
+    color: theme.palette.primary.main,
+  }),
+};
+
+const yearCheckStyles: StateStyles = {
+  default: ({ theme }) => ({
+    backgroundColor: theme.palette.primary.main,
+    content: '""',
+    height: `${(16 / 16) * (16 / 14)}rem`,
+    maskImage:
+      "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%0A%3E%3Cpath fillRule='evenodd' clipRule='evenodd' d='M14.3536 4.35355L6.35355 12.3536C6.15829 12.5488 5.84171 12.5488 5.64645 12.3536L1.64645 8.35355L2.35355 7.64645L6 11.2929L13.6464 3.64645L14.3536 4.35355Z' fill='currentColor' /%3E%3C/svg%3E%0A\")",
+    maskPosition: "50% 50%",
+    maskRepeat: "no-repeat",
+    position: "absolute",
+    right: theme.spacing(4),
+    width: `${(16 / 16) * (16 / 14)}rem`,
   }),
 };
 
@@ -84,10 +130,6 @@ export const datePickerTheme: ThemeOptions = {
           paddingBottom: theme.spacing(popupSpacingValue),
           paddingTop: theme.spacing(1),
           width: "100%",
-
-          "&, &::before, &::after": {
-            boxSizing: "border-box", // TEMP. Remove this when scoped CSS is added.
-          },
         }),
       },
     },
@@ -160,7 +202,7 @@ export const datePickerTheme: ThemeOptions = {
           },
         },
         showDaysOutsideCurrentMonth: true,
-        views: ["year", "month", "day"],
+        views: ["year", "day"],
       },
     },
     MuiMonthPicker: {
@@ -184,7 +226,7 @@ export const datePickerTheme: ThemeOptions = {
           paddingLeft: `calc(${theme.spacing(
             popupSpacingValue
           )} + ${theme.spacing(2)})`,
-          paddingRight: 0,
+          paddingRight: theme.spacing(popupSpacingValue),
           width: "auto",
         }),
       },
@@ -251,11 +293,14 @@ export const datePickerTheme: ThemeOptions = {
     MuiYearPicker: {
       styleOverrides: {
         root: ({ theme }) => ({
+          alignItems: "flex-start",
           flexDirection: "column",
           flexWrap: "nowrap",
-          maxHeight: `${(284 / 16) * (16 / 14)}rem`,
           marginBottom: `-${theme.spacing(popupSpacingValue)}`,
-          marginInlineEnd: `-${theme.spacing(popupSpacingValue)}`,
+          marginInlineEnd: 0,
+          maxHeight: `${(284 / 16) * (16 / 14)}rem`,
+          paddingLeft: 0,
+          paddingRight: 0,
         }),
       },
     },
@@ -271,6 +316,7 @@ export const datePickerTheme: ThemeOptions = {
             marginBottom: 0,
             marginTop: 0,
             position: "relative",
+            width: "100%",
 
             "&[aria-current='date']": [
               dateStyles.today({ theme }),
@@ -301,40 +347,41 @@ export const datePickerTheme: ThemeOptions = {
     PrivatePickersYear: {
       styleOverrides: {
         button: ({ theme }) => [
-          dateStyles.default({ theme }),
+          yearStyles.default({ theme }),
           {
             alignItems: "center",
-            borderRadius: `${(6 / 16) * (16 / 14)}rem`,
+            borderRadius: 0,
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             marginBottom: 0,
             marginTop: 0,
+            paddingLeft: theme.spacing(4),
             position: "relative",
+            width: "100%",
 
             "&[aria-current='date']": [
-              dateStyles.today({ theme }),
+              yearStyles.today({ theme }),
               {
                 fontWeight: theme.typography.fontWeightBold,
               },
             ],
 
-            "&[aria-current='date']::after": todayDotStyles.default({ theme }),
-            "&:hover": dateStyles.hover({ theme }),
+            "&[aria-current='date']::after": yearCheckStyles.default({ theme }),
+            "&:hover": yearStyles.hover({ theme }),
 
             "&:not(.Mui-selected)": {
               border: "none",
             },
 
-            "&.Mui-disabled": dateStyles.disabled({ theme }),
+            "&.Mui-disabled": yearStyles.disabled({ theme }),
           },
         ],
         root: () => ({
-          display: "block",
+          width: "100%",
         }),
         selected: ({ theme }) => ({
-          "&[aria-current='date']::after": todayDotStyles.selected({ theme }),
-          "&, &:focus": dateStyles.selected({ theme }),
-          "&:hover": dateStyles.hoverSelected({ theme }),
+          "&, &:focus": yearStyles.selected({ theme }),
+          "&:hover": yearStyles.hoverSelected({ theme }),
         }),
       },
     },
