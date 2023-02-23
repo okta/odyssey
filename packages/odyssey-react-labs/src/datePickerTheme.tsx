@@ -100,10 +100,7 @@ const yearStyles: StateStyles = {
   selected: ({ theme }) => ({
     backgroundColor: "transparent",
     color: theme.palette.primary.main,
-  }),
-  today: ({ theme }) => ({
-    backgroundColor: "transparent",
-    color: theme.palette.primary.main,
+    fontWeight: theme.typography.fontWeightBold,
   }),
 };
 
@@ -364,14 +361,6 @@ export const datePickerTheme: ThemeOptions = {
             position: "relative",
             width: "100%",
 
-            "&[aria-current='date']": [
-              yearStyles.today({ theme }),
-              {
-                fontWeight: theme.typography.fontWeightBold,
-              },
-            ],
-
-            "&[aria-current='date']::after": yearCheckStyles.default({ theme }),
             "&:hover": yearStyles.hover({ theme }),
 
             "&:not(.Mui-selected)": {
@@ -387,6 +376,7 @@ export const datePickerTheme: ThemeOptions = {
         selected: ({ theme }) => ({
           "&, &:focus": yearStyles.selected({ theme }),
           "&:hover": yearStyles.hoverSelected({ theme }),
+          "&::after": yearCheckStyles.default({ theme }),
         }),
       },
     },
