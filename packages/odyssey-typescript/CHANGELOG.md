@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.20.0) (2023-02-23)
+
+### Features
+
+- add DatePicker styles to Labs ([#1672](https://github.com/okta/odyssey/issues/1672)) ([f8d8b5e](https://github.com/okta/odyssey/commit/f8d8b5e4f8d30f8bce346e4dca47f88c8350a26b))
+
 ## [0.19.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.19.0) (2023-02-09)
 
 ### Features
