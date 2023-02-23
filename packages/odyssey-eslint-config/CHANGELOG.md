@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.20.0) (2023-02-23)
+
+### Bug Fixes
+
+- another potential Lerna build order fix ([b4eb393](https://github.com/okta/odyssey/commit/b4eb39322204682e0b33dd76a7901370de754020))
+
 ## [0.19.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.19.0) (2023-02-09)
 
 ### Bug Fixes
