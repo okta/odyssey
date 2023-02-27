@@ -259,6 +259,9 @@ export const datePickerTheme: ThemeOptions = {
             "&.MuiPickersDay-today::after": todayDotStyles.default({ theme }),
             "&.MuiPickersDay-today.Mui-selected::after":
               todayDotStyles.selected({ theme }),
+            "&.MuiPickersDay-dayOutsideMonth": dateStyles.outsideOfMonth({
+              theme,
+            }),
             "&:hover": dateStyles.hover({ theme }),
 
             "&:not(.Mui-selected)": {
@@ -269,9 +272,6 @@ export const datePickerTheme: ThemeOptions = {
               theme,
             }),
             "&.Mui-selected:hover": dateStyles.hoverSelected({ theme }),
-            "&.MuiPickersDay-dayOutsideMonth": dateStyles.outsideOfMonth({
-              theme,
-            }),
             "&.Mui-disabled": dateStyles.disabled({ theme }),
           },
         ],
