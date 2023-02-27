@@ -206,15 +206,6 @@ export const datePickerTheme: ThemeOptions = {
         views: ["year", "day"],
       },
     },
-    MuiMonthPicker: {
-      styleOverrides: {
-        root: () => ({
-          marginLeft: 0,
-          marginRight: 0,
-          width: "auto",
-        }),
-      },
-    },
     MuiPickersCalendarHeader: {
       styleOverrides: {
         label: ({ theme }) => ({
@@ -303,46 +294,6 @@ export const datePickerTheme: ThemeOptions = {
           paddingLeft: 0,
           paddingRight: 0,
         }),
-      },
-    },
-    PrivatePickersMonth: {
-      styleOverrides: {
-        root: ({ theme }) => [
-          dateStyles.default({ theme }),
-          {
-            alignItems: "center",
-            borderRadius: `${(6 / 16) * (16 / 14)}rem`,
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: 0,
-            marginTop: 0,
-            position: "relative",
-            width: "100%",
-
-            "&[aria-current='date']": [
-              dateStyles.today({ theme }),
-              {
-                fontWeight: theme.typography.fontWeightBold,
-              },
-            ],
-
-            "&[aria-current='date']::after": todayDotStyles.default({ theme }),
-            "&:hover": dateStyles.hover({ theme }),
-
-            "&:not(.Mui-selected)": {
-              border: "none",
-            },
-
-            "&.Mui-disabled": dateStyles.disabled({ theme }),
-
-            "&.Mui-selected[aria-current='date']::after":
-              todayDotStyles.selected({ theme }),
-            "&.Mui-selected, &.Mui-selected:focus": dateStyles.selected({
-              theme,
-            }),
-            "&.Mui-selected:hover": dateStyles.hoverSelected({ theme }),
-          },
-        ],
       },
     },
     PrivatePickersYear: {
