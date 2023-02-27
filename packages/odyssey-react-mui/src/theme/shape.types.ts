@@ -10,16 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
+declare module "@mui/material/styles" {
+  interface Shape {
+    borderRadius?: number;
+    borderStyle?: string;
+  }
 
-// Strip units from BorderRadiusBase to accommodate MUI's typing
-const NumericalBorderRadiusBase =
-  typeof Tokens.BorderRadiusBase === "string"
-    ? Number(Tokens.BorderRadiusBase.replace(/(\d+).*/, "$1"))
-    : Tokens.BorderRadiusBase;
+  interface ShapeOptions {
+    borderRadius?: number;
+    borderStyle?: string;
+  }
+}
 
-export const shape: ThemeOptions["shape"] = {
-  borderRadius: NumericalBorderRadiusBase,
-  borderStyle: Tokens.BorderStyleBase,
-};
+export {};

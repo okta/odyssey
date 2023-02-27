@@ -21,6 +21,7 @@ import { typography } from "./typography";
 import "./components.types";
 import "./mixins.types";
 import "./palette.types";
+import "./shape.types";
 import "./typography.types";
 
 export const theme = createTheme({

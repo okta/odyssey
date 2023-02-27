@@ -65,7 +65,7 @@ export const components: ThemeOptions["components"] = {
           borderRadius: 0,
         }),
         ...(ownerState.variant === "infobox" && {
-          borderStyle: theme.mixins.borderStyle,
+          borderStyle: theme.shape.borderStyle,
           borderWidth: theme.mixins.borderWidth,
           borderRadius: theme.mixins.borderRadius,
           "&:not(:last-child)": {
@@ -74,7 +74,7 @@ export const components: ThemeOptions["components"] = {
         }),
         ...(ownerState.variant === "toast" && {
           maxWidth: theme.mixins.maxWidth,
-          borderStyle: theme.mixins.borderStyle,
+          borderStyle: theme.shape.borderStyle,
           borderWidth: theme.mixins.borderWidth,
           borderRadius: theme.mixins.borderRadius,
           position: "relative",
@@ -317,7 +317,7 @@ export const components: ThemeOptions["components"] = {
         transitionDuration: "100ms",
         transitionTimingFunction: "linear",
         borderWidth: theme.mixins.borderWidth,
-        borderStyle: theme.mixins.borderStyle,
+        borderStyle: theme.shape.borderStyle,
         borderRadius: theme.mixins.borderRadius,
         outlineColor: "transparent",
         outlineOffset: "0",
@@ -685,7 +685,7 @@ export const components: ThemeOptions["components"] = {
         kbd: {
           display: "inline-block",
           minWidth: `calc(${theme.typography.subtitle1.fontSize} * ${theme.typography.h5.lineHeight})`,
-          borderStyle: theme.mixins.borderStyle,
+          borderStyle: theme.shape.borderStyle,
           borderWidth: theme.mixins.borderWidth,
           borderRadius: theme.mixins.borderRadius,
           borderColor: theme.palette.grey[200],
@@ -1095,7 +1095,7 @@ export const components: ThemeOptions["components"] = {
         color: theme.palette.text.primary,
         lineHeight: theme.typography.ui.lineHeight,
         borderWidth: theme.mixins.borderWidth,
-        borderStyle: theme.mixins.borderStyle,
+        borderStyle: theme.shape.borderStyle,
         borderRadius: theme.mixins.borderRadius,
         borderColor: theme.palette.grey[500],
 
@@ -1370,7 +1370,7 @@ export const components: ThemeOptions["components"] = {
       paper: ({ theme }) => ({
         marginBlockStart: theme.spacing(1),
         borderWidth: theme.mixins.borderWidth,
-        borderStyle: theme.mixins.borderStyle,
+        borderStyle: theme.shape.borderStyle,
         borderColor: theme.palette.grey[200],
       }),
     },
@@ -1481,7 +1481,7 @@ export const components: ThemeOptions["components"] = {
           bottom: theme.spacing(4),
           left: `calc(-1 * ${theme.spacing(2)})`,
           borderWidth: theme.mixins.borderWidth,
-          borderStyle: theme.mixins.borderStyle,
+          borderStyle: theme.shape.borderStyle,
           borderColor: theme.palette.primary.main,
           borderRadius: theme.mixins.borderRadius,
         },
@@ -1516,7 +1516,7 @@ export const components: ThemeOptions["components"] = {
         width: "auto",
         borderCollapse: "separate",
         borderSpacing: 0,
-        border: `${theme.mixins.borderWidth} ${theme.mixins.borderStyle} ${theme.palette.grey[100]}`,
+        border: `${theme.mixins.borderWidth} ${theme.shape.borderStyle} ${theme.palette.grey[100]}`,
         borderRadius: theme.mixins.borderRadius,
         marginBlock: theme.spacing(0),
         marginInline: theme.spacing(0),
@@ -1547,7 +1547,7 @@ export const components: ThemeOptions["components"] = {
       root: ({ theme, ownerState }) => ({
         ...theme.typography.body1,
         maxWidth: theme.mixins.maxWidth,
-        borderBottom: `${theme.mixins.borderWidth} ${theme.mixins.borderStyle} ${theme.palette.grey[100]}`,
+        borderBottom: `${theme.mixins.borderWidth} ${theme.shape.borderStyle} ${theme.palette.grey[100]}`,
         textAlign: "start",
         verticalAlign: "baseline",
         padding: "unset",
@@ -1738,7 +1738,7 @@ export const components: ThemeOptions["components"] = {
       }),
       flexContainer: ({ theme }) => ({
         gap: theme.spacing(5),
-        borderBottom: `${theme.mixins.borderWidth} ${theme.mixins.borderStyle} ${theme.palette.divider}`,
+        borderBottom: `${theme.mixins.borderWidth} ${theme.shape.borderStyle} ${theme.palette.divider}`,
       }),
     },
   },
