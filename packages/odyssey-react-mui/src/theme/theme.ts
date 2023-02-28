@@ -14,6 +14,7 @@ import { createTheme } from "@mui/material/styles";
 
 import { components } from "./components";
 import { mixins } from "./mixins";
+import { OdysseyTheme } from "./OdysseyTheme";
 import { palette } from "./palette";
 import { shape } from "./shape";
 import { spacing } from "./spacing";
@@ -24,10 +25,13 @@ import "./palette.types";
 import "./typography.types";
 
 export const theme = createTheme({
+  temp: {
+    borderWidth: "24px",
+  },
   components,
   mixins,
   palette,
   shape,
   spacing,
   typography,
-});
+}) as OdysseyTheme;

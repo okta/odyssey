@@ -58,7 +58,6 @@ export {
   ThemeProvider as MuiThemeProvider,
   Tooltip,
   Typography,
-  useTheme,
 } from "@mui/material";
 
 export type {
@@ -110,7 +109,6 @@ export type {
   ThemeOptions,
   TooltipProps,
   TypographyProps,
-  useThemeProps,
 } from "@mui/material";
 
 export { TabContext, TabList, TabPanel } from "@mui/lab";
