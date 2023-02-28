@@ -18,6 +18,7 @@ import { OdysseyTheme } from "./OdysseyTheme";
 import { palette } from "./palette";
 import { shape } from "./shape";
 import { spacing } from "./spacing";
+import { temp } from "./temp";
 import { typography } from "./typography";
 import "./components.types";
 import "./mixins.types";
@@ -25,13 +26,11 @@ import "./palette.types";
 import "./typography.types";
 
 export const theme = createTheme({
-  temp: {
-    borderWidth: "24px",
-  },
   components,
   mixins,
   palette,
   shape,
   spacing,
+  temp,
   typography,
 }) as OdysseyTheme;

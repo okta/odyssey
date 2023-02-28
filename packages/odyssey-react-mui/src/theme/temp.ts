@@ -10,16 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Theme } from "@mui/material/styles";
-import { Temp } from "./temp";
+export type Temp = {
+  borderWidth: string;
+};
 
-declare module "@mui/material/styles" {
-  interface ThemeOptions {
-    temp: Temp;
-  }
-}
-
-export interface OdysseyTheme extends Theme {
-  /** @deprecated `temp` is only for testing. It will be removed in a future version of Odyssey. */
-  temp: Temp;
-}
+export const temp: Temp = {
+  borderWidth: "24px",
+};
