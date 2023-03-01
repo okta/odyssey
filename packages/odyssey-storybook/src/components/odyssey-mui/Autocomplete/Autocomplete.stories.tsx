@@ -24,30 +24,7 @@ const storybookMeta: ComponentMeta<typeof Autocomplete> = {
       page: AutocompleteMdx,
     },
   },
-  argTypes: {
-    linkText: {
-      control: "text",
-    },
-    linkUrl: {
-      control: "text",
-    },
-    onClose: {
-      action: "closed",
-    },
-    role: {
-      control: "radio",
-      options: ["status", undefined],
-    },
-    severity: {
-      control: "radio",
-      options: ["error", "info", "warning"],
-      defaultValue: "info",
-    },
-    text: {
-      control: "text",
-      defaultValue: "The mission to Sagittarius A is set for January 7.",
-    },
-  },
+  argTypes: {},
   decorators: [MuiThemeDecorator],
 };
 
@@ -182,13 +159,13 @@ const top100Films = [
   { label: "Monty Python and the Holy Grail", year: 1975 },
 ];
 
-const OdysseyTemplate: ComponentStory<typeof Autocomplete> = (args) => {
+const OdysseyTemplate: ComponentStory<typeof Autocomplete> = () => {
   return (
     <Autocomplete
       disablePortal
       id="autocomplete-example"
       options={top100Films}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
+      renderInput={() => <TextField label="Movie" />}
     />
   );
 };
@@ -196,13 +173,13 @@ const OdysseyTemplate: ComponentStory<typeof Autocomplete> = (args) => {
 export const OdysseyTextField = OdysseyTemplate.bind({});
 OdysseyTextField.args = {};
 
-const MuiTemplate: ComponentStory<typeof Autocomplete> = (args) => {
+const MuiTemplate: ComponentStory<typeof Autocomplete> = () => {
   return (
     <Autocomplete
       disablePortal
       id="autocomplete-example"
       options={top100Films}
-      renderInput={(params) => <MuiTextField {...params} label="Movie" />}
+      renderInput={() => <MuiTextField label="Movie" />}
     />
   );
 };
