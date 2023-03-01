@@ -165,7 +165,9 @@ const OdysseyTemplate: ComponentStory<typeof Autocomplete> = () => {
       disablePortal
       id="autocomplete-example"
       options={top100Films}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
+      renderInput={(params) => (
+        <TextField {...params} ref={params.InputProps.ref} label="Movie" />
+      )}
     />
   );
 };

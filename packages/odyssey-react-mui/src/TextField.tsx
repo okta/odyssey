@@ -17,7 +17,6 @@ import {
   InputHTMLAttributes,
   memo,
   ReactNode,
-  Ref,
   useCallback,
   useEffect,
   useMemo,
@@ -93,7 +92,6 @@ export type TextFieldProps = {
   /**
    * It prevents the user from changing the value of the field
    */
-  InputProps: { ref: HTMLDivElement };
   inputProps: InputBaseProps["inputProps"];
   isReadOnly?: boolean;
   /**
@@ -122,7 +120,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     errorMessage,
     hint,
     id: idOverride,
-    InputProps,
     inputProps,
     label,
     isMultiline = false,
@@ -166,11 +163,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   // );
 
   return (
-    <FormControl
-      disabled={isDisabled}
-      error={Boolean(errorMessage)}
-      ref={InputProps.ref}
-    >
+    <FormControl disabled={isDisabled} error={Boolean(errorMessage)} ref={ref}>
       <InputLabel htmlFor={id} id={labelId}>
         {label}
         {!isRequired && (
