@@ -13,6 +13,7 @@
 export {
   Alert,
   AlertTitle,
+  Autocomplete,
   Box,
   Button,
   Checkbox,
@@ -55,6 +56,7 @@ export {
   TableHead,
   TableRow,
   TableSortLabel,
+  TextField as MuiTextField,
   ThemeProvider as MuiThemeProvider,
   Tooltip,
   Typography,
@@ -64,6 +66,7 @@ export {
 export type {
   AlertProps,
   AlertTitleProps,
+  AutocompleteProps,
   BoxProps,
   ButtonProps,
   CheckboxProps,
@@ -107,6 +110,7 @@ export type {
   TableProps,
   TableRowProps,
   TableSortLabelProps,
+  TextFieldProps as MuiTextFieldProps,
   ThemeOptions,
   TooltipProps,
   TypographyProps,
