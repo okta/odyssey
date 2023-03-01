@@ -154,17 +154,17 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   const errorId = errorMessage ? `${id}-error` : undefined;
   const labelId = label ? `${id}-label` : undefined;
 
-  const localInputProps = useMemo(
-    () =>
-      errorId || hintId
-        ? {
-            ...inputProps,
-            "aria-describedby":
-              errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId,
-          }
-        : inputProps,
-    [errorId, hintId]
-  );
+  const localInputProps = useMemo(() => {
+    const ariaDescribedBy =
+      errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId;
+
+    return {
+      ...inputProps,
+      "aria-describedby":
+        inputProps["aria-describedby"]?.concat(` ${ariaDescribedBy}`) ??
+        ariaDescribedBy,
+    };
+  }, [errorId, hintId, inputProps]);
 
   return (
     <FormControl disabled={isDisabled} error={Boolean(errorMessage)} ref={ref}>
