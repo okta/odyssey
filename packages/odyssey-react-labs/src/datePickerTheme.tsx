@@ -108,7 +108,7 @@ const yearCheckStyles: StateStyles = {
   default: ({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     content: '""',
-    height: `${(16 / 16) * (16 / 14)}rem`,
+    height: theme.typography.body1.fontSize,
     maskImage:
       "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%0A%3E%3Cpath fillRule='evenodd' clipRule='evenodd' d='M14.3536 4.35355L6.35355 12.3536C6.15829 12.5488 5.84171 12.5488 5.64645 12.3536L1.64645 8.35355L2.35355 7.64645L6 11.2929L13.6464 3.64645L14.3536 4.35355Z' fill='currentColor' /%3E%3C/svg%3E%0A\")",
     maskPosition: "50% 50%",
@@ -125,9 +125,9 @@ export const datePickerTheme: ThemeOptions = {
       styleOverrides: {
         root: ({ theme }) => ({
           borderColor: theme.palette.divider,
-          borderStyle: "solid",
-          borderWidth: "1px",
-          borderRadius: `${(4 / 16) * (16 / 14)}rem`,
+          borderStyle: theme.mixins.borderStyle,
+          borderWidth: theme.mixins.borderWidth,
+          borderRadius: theme.mixins.borderRadius,
           paddingBottom: theme.spacing(popupSpacingValue),
           paddingTop: theme.spacing(4),
           width: "100%",
