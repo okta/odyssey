@@ -64,10 +64,10 @@ const todayDotStyles: StateStyles = {
     borderRadius: "50%",
     bottom: theme.spacing(1),
     content: '" "',
-    height: `${(2 / 16) * (16 / 14)}rem`,
+    height: `${2 / theme.typography.fontSize}em`,
     position: "absolute",
     transform: "translateY(-50%)",
-    width: `${(2 / 16) * (16 / 14)}rem`,
+    width: `${2 / theme.typography.fontSize}em`,
   }),
   hover: ({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
@@ -108,14 +108,14 @@ const yearCheckStyles: StateStyles = {
   default: ({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     content: '""',
-    height: theme.typography.body1.fontSize,
+    height: theme.typography.h6.fontSize,
     maskImage:
       "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%0A%3E%3Cpath fillRule='evenodd' clipRule='evenodd' d='M14.3536 4.35355L6.35355 12.3536C6.15829 12.5488 5.84171 12.5488 5.64645 12.3536L1.64645 8.35355L2.35355 7.64645L6 11.2929L13.6464 3.64645L14.3536 4.35355Z' fill='currentColor' /%3E%3C/svg%3E%0A\")",
     maskPosition: "50% 50%",
     maskRepeat: "no-repeat",
     position: "absolute",
     right: theme.spacing(4),
-    width: `${(16 / 16) * (16 / 14)}rem`,
+    width: theme.typography.h6.fontSize,
   }),
 };
 
@@ -233,7 +233,7 @@ export const datePickerTheme: ThemeOptions = {
           dateStyles.default({ theme }),
           {
             border: "none",
-            borderRadius: `${(6 / 16) * (16 / 14)}rem`,
+            borderRadius: theme.mixins.borderRadius,
             flexBasis: theme.spacing(6),
             flexShrink: 0,
             fontSize: theme.typography.body1.fontSize,
