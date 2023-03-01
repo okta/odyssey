@@ -90,9 +90,12 @@ export type TextFieldProps = {
    */
   placeholder?: string;
   /**
-   * It prevents the user from changing the value of the field
+   * The props to be passed to InputBase.
    */
   inputProps?: InputBaseProps["inputProps"];
+  /**
+   * It prevents the user from changing the value of the field
+   */
   isReadOnly?: boolean;
   /**
    * If `true`, the `input` element is required.
