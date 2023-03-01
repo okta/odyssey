@@ -92,7 +92,7 @@ export type TextFieldProps = {
   /**
    * It prevents the user from changing the value of the field
    */
-  inputProps: InputBaseProps["inputProps"];
+  inputProps?: InputBaseProps["inputProps"];
   isReadOnly?: boolean;
   /**
    * If `true`, the `input` element is required.
@@ -120,7 +120,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     errorMessage,
     hint,
     id: idOverride,
-    inputProps,
+    inputProps = {},
     label,
     isMultiline = false,
     onChange,
@@ -151,16 +151,17 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   const errorId = errorMessage ? `${id}-error` : undefined;
   const labelId = label ? `${id}-label` : undefined;
 
-  // const inputProps = useMemo(
-  //   () =>
-  //     errorId || hintId
-  //       ? {
-  //           "aria-describedby":
-  //             errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId,
-  //         }
-  //       : undefined,
-  //   [errorId, hintId]
-  // );
+  const localInputProps = useMemo(
+    () =>
+      errorId || hintId
+        ? {
+            ...inputProps,
+            "aria-describedby":
+              errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId,
+          }
+        : inputProps,
+    [errorId, hintId]
+  );
 
   return (
     <FormControl disabled={isDisabled} error={Boolean(errorMessage)} ref={ref}>
@@ -189,7 +190,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
           )
         }
         id={id}
-        inputProps={inputProps}
+        inputProps={localInputProps}
         multiline={isMultiline}
         onChange={onChange}
         onFocus={onFocus}

@@ -166,7 +166,12 @@ const OdysseyTemplate: ComponentStory<typeof Autocomplete> = () => {
       id="autocomplete-example"
       options={top100Films}
       renderInput={(params) => (
-        <TextField {...params} ref={params.InputProps.ref} label="Movie" />
+        <TextField
+          {...params}
+          hint="Some hint"
+          ref={params.InputProps.ref}
+          label="Movie"
+        />
       )}
     />
   );
