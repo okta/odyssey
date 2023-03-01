@@ -165,7 +165,7 @@ const OdysseyTemplate: ComponentStory<typeof Autocomplete> = () => {
       disablePortal
       id="autocomplete-example"
       options={top100Films}
-      renderInput={() => <TextField label="Movie" />}
+      renderInput={(params) => <TextField {...params} label="Movie" />}
     />
   );
 };
@@ -179,7 +179,7 @@ const MuiTemplate: ComponentStory<typeof Autocomplete> = () => {
       disablePortal
       id="autocomplete-example"
       options={top100Films}
-      renderInput={() => <MuiTextField label="Movie" />}
+      renderInput={(params) => <MuiTextField {...params} label="Movie" />}
     />
   );
 };
