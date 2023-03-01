@@ -17,6 +17,7 @@ import {
   InputHTMLAttributes,
   memo,
   ReactNode,
+  Ref,
   useCallback,
   useEffect,
   useMemo,
@@ -35,6 +36,7 @@ import {
   Typography,
   visuallyHidden,
   useUniqueId,
+  InputBaseProps,
 } from "./";
 
 export type TextFieldProps = {
@@ -91,6 +93,8 @@ export type TextFieldProps = {
   /**
    * It prevents the user from changing the value of the field
    */
+  InputProps: { ref: HTMLDivElement };
+  inputProps: InputBaseProps["inputProps"];
   isReadOnly?: boolean;
   /**
    * If `true`, the `input` element is required.
@@ -118,6 +122,8 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     errorMessage,
     hint,
     id: idOverride,
+    InputProps,
+    inputProps,
     label,
     isMultiline = false,
     onChange,
@@ -148,19 +154,23 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   const errorId = errorMessage ? `${id}-error` : undefined;
   const labelId = label ? `${id}-label` : undefined;
 
-  const inputProps = useMemo(
-    () =>
-      errorId || hintId
-        ? {
-            "aria-describedby":
-              errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId,
-          }
-        : undefined,
-    [errorId, hintId]
-  );
+  // const inputProps = useMemo(
+  //   () =>
+  //     errorId || hintId
+  //       ? {
+  //           "aria-describedby":
+  //             errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId,
+  //         }
+  //       : undefined,
+  //   [errorId, hintId]
+  // );
 
   return (
-    <FormControl disabled={isDisabled} error={Boolean(errorMessage)}>
+    <FormControl
+      disabled={isDisabled}
+      error={Boolean(errorMessage)}
+      ref={InputProps.ref}
+    >
       <InputLabel htmlFor={id} id={labelId}>
         {label}
         {!isRequired && (
@@ -192,7 +202,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         onFocus={onFocus}
         placeholder={placeholder}
         readOnly={isReadOnly}
-        ref={ref}
         startAdornment={
           inputType === "search" ? (
             <InputAdornment position="start">
