@@ -24,7 +24,86 @@ const storybookMeta: ComponentMeta<typeof Autocomplete> = {
       page: AutocompleteMdx,
     },
   },
-  argTypes: {},
+  argTypes: {
+    // autoComplete appears to be broken in both examples
+    autoComplete: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    autoHighlight: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    autoSelect: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    blurOnSelect: {
+      control: "radio",
+      options: [true, false, "mouse", "touch"],
+      defaultValue: false,
+    },
+    clearOnBlur: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    clearOnEscape: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    disableCloseOnSelect: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    disabled: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    filterSelectedOptions: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    freeSolo: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    fullWidth: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    handleHomeEndKeys: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    includeInputInList: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    limitTags: {
+      control: "text",
+      defaultValue: "-1",
+    },
+    loading: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    multiple: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    openOnFocus: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    readOnly: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    selectOnFocus: {
+      control: "boolean",
+      defaultValue: false,
+    },
+  },
   decorators: [MuiThemeDecorator],
 };
 
@@ -159,16 +238,15 @@ const top100Films = [
   { label: "Monty Python and the Holy Grail", year: 1975 },
 ];
 
-const OdysseyTemplate: ComponentStory<typeof Autocomplete> = () => {
+const DefaultTemplate: ComponentStory<typeof Autocomplete> = (args) => {
   return (
     <Autocomplete
-      disablePortal
-      id="autocomplete-example"
+      {...args}
       options={top100Films}
       renderInput={(params) => (
         <TextField
           {...params}
-          hint="Some hint"
+          hint="Select your favorite movie"
           ref={params.InputProps.ref}
           label="Movie"
         />
@@ -177,19 +255,133 @@ const OdysseyTemplate: ComponentStory<typeof Autocomplete> = () => {
   );
 };
 
-export const OdysseyTextField = OdysseyTemplate.bind({});
-OdysseyTextField.args = {};
-
-const MuiTemplate: ComponentStory<typeof Autocomplete> = () => {
+const EmptyTemplate: ComponentStory<typeof Autocomplete> = (args) => {
   return (
     <Autocomplete
-      disablePortal
-      id="autocomplete-example"
+      {...args}
+      options={[]}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          hint="Select your favorite movie"
+          ref={params.InputProps.ref}
+          label="Movie"
+        />
+      )}
+    />
+  );
+};
+
+export const Default = DefaultTemplate.bind({});
+Default.args = {};
+
+export const autoHighlight = DefaultTemplate.bind({});
+autoHighlight.args = {
+  autoHighlight: true,
+};
+
+export const autoSelect = DefaultTemplate.bind({});
+autoSelect.args = {
+  autoSelect: true,
+};
+
+export const blurOnSelect = DefaultTemplate.bind({});
+blurOnSelect.args = {
+  blurOnSelect: true,
+};
+
+export const clearOnBlur = DefaultTemplate.bind({});
+clearOnBlur.args = {
+  clearOnBlur: true,
+};
+
+export const clearOnEscape = DefaultTemplate.bind({});
+clearOnEscape.args = {
+  clearOnEscape: true,
+};
+
+export const disableCloseOnSelect = DefaultTemplate.bind({});
+disableCloseOnSelect.args = {
+  disableCloseOnSelect: true,
+};
+
+export const disabled = DefaultTemplate.bind({});
+disabled.args = {
+  disabled: true,
+  value: "The Godfather",
+};
+
+export const filterSelectedOptions = DefaultTemplate.bind({});
+filterSelectedOptions.args = {
+  filterSelectedOptions: true,
+};
+
+export const freeSolo = DefaultTemplate.bind({});
+freeSolo.args = {
+  freeSolo: true,
+};
+
+export const fullWidth = DefaultTemplate.bind({});
+fullWidth.args = {
+  fullWidth: true,
+};
+
+export const handleHomeEndKeys = DefaultTemplate.bind({});
+handleHomeEndKeys.args = {
+  handleHomeEndKeys: true,
+};
+
+export const includeInputInList = DefaultTemplate.bind({});
+includeInputInList.args = {
+  includeInputInList: true,
+};
+
+export const limitTags = DefaultTemplate.bind({});
+limitTags.args = {
+  limitTags: 3,
+  multiple: true,
+};
+
+export const loading = EmptyTemplate.bind({});
+loading.args = {
+  loading: true,
+};
+
+export const multiple = DefaultTemplate.bind({});
+multiple.args = {
+  multiple: true,
+};
+
+export const openOnFocus = DefaultTemplate.bind({});
+openOnFocus.args = {
+  openOnFocus: true,
+};
+
+export const readOnly = DefaultTemplate.bind({});
+readOnly.args = {
+  readOnly: true,
+  value: "The Godfather",
+};
+
+export const selectOnFocus = DefaultTemplate.bind({});
+selectOnFocus.args = {
+  selectOnFocus: true,
+};
+
+const MuiTemplate: ComponentStory<typeof Autocomplete> = (args) => {
+  return (
+    <Autocomplete
+      {...args}
       options={top100Films}
       renderInput={(params) => <MuiTextField {...params} label="Movie" />}
     />
   );
 };
 
-export const MaterialTextField = MuiTemplate.bind({});
-MaterialTextField.args = {};
+export const MaterialSingle = MuiTemplate.bind({});
+MaterialSingle.args = {};
+
+export const MaterialMultiple = MuiTemplate.bind({});
+MaterialMultiple.args = {
+  multiple: true,
+};

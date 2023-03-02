@@ -35,6 +35,7 @@ import {
   CheckCircleFilledIcon,
   ChevronDownIcon,
   CloseCircleFilledIcon,
+  CloseIcon,
   InformationCircleFilledIcon,
 } from "../iconDictionary";
 
@@ -140,6 +141,12 @@ export const components: ThemeOptions["components"] = {
           marginBlockEnd: 0,
         },
       }),
+    },
+  },
+  MuiAutocomplete: {
+    defaultProps: {
+      clearIcon: <CloseIcon />,
+      popupIcon: <ChevronDownIcon />,
     },
   },
   MuiBackdrop: {
