@@ -32,7 +32,7 @@ const storybookMeta: ComponentMeta<typeof Autocomplete> = {
     },
     autoHighlight: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: true,
     },
     autoSelect: {
       control: "boolean",
@@ -49,7 +49,7 @@ const storybookMeta: ComponentMeta<typeof Autocomplete> = {
     },
     clearOnEscape: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: true,
     },
     disableCloseOnSelect: {
       control: "boolean",
@@ -73,7 +73,7 @@ const storybookMeta: ComponentMeta<typeof Autocomplete> = {
     },
     handleHomeEndKeys: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: true,
     },
     includeInputInList: {
       control: "boolean",
@@ -101,7 +101,7 @@ const storybookMeta: ComponentMeta<typeof Autocomplete> = {
     },
     selectOnFocus: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: true,
     },
   },
   decorators: [MuiThemeDecorator],
