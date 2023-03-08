@@ -11,7 +11,7 @@
     "node": ">=16 <17"
   },
   "scripts": {
-    "start": "npm-run-all --parallel start:mui start:labs start:storybook",
+    "start": "yarn build && npm-run-all --parallel start:mui start:labs start:storybook",
     "start:labs": "yarn workspace @okta/odyssey-react-labs dev",
     "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
@@ -43,5 +43,5 @@
     "stylelint": "^14.13.0"
   },
   "version": "0.5.0",
-  "packageManager": "yarn@3.3.1"
+  "packageManager": "yarn@3.4.1"
 }
