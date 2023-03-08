@@ -26,6 +26,7 @@ import {
 } from "@okta/odyssey-react-labs";
 
 import DatePickerMdx from "./DatePicker.mdx";
+import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 export default {
   title: `Labs Components/DatePicker`,
@@ -65,6 +66,7 @@ export default {
       defaultValue: null,
     },
   },
+  decorators: [MuiThemeDecorator],
 };
 
 const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
