@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.0](https://github.com/okta/odyssey/compare/v0.20.0...v0.21.0) (2023-03-09)
+
+### Bug Fixes
+
+- **odyssey-react-labs:** DatePicker styles with updated spec ([#1697](https://github.com/okta/odyssey/issues/1697)) ([cba0894](https://github.com/okta/odyssey/commit/cba0894bc1def44ea48bf74ffd4dbf487fdd3a8c))
+- **odyssey-react-mui:** don't require children prop for Icon buttons ([a333527](https://github.com/okta/odyssey/commit/a3335273c07cf479ff764d2c797fc1d10d66806b))
+
 ## [0.20.0](https://github.com/okta/odyssey/compare/v0.19.0...v0.20.0) (2023-02-23)
 
 ### Features
