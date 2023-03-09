@@ -3,7 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.20.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.20.0) (2023-02-23)
+## [0.21.0](https://github.com/okta/odyssey/compare/v0.20.0...v0.21.0) (2023-03-09)
+
+### Features
+
+- add DatePicker styles to Labs ([#1672](https://github.com/okta/odyssey/issues/1672)) ([f8d8b5e](https://github.com/okta/odyssey/commit/f8d8b5e4f8d30f8bce346e4dca47f88c8350a26b))
+- updated a bunch of packages to the latest version ([36ce1d0](https://github.com/okta/odyssey/commit/36ce1d09a621f273878345c20cfc782059c04cd2))
+
+### Bug Fixes
+
+- another potential Lerna build order fix ([b4eb393](https://github.com/okta/odyssey/commit/b4eb39322204682e0b33dd76a7901370de754020))
+- DatePicker styles with updated spec ([#1697](https://github.com/okta/odyssey/issues/1697)) ([cba0894](https://github.com/okta/odyssey/commit/cba0894bc1def44ea48bf74ffd4dbf487fdd3a8c))
+
+## [0.20.0](https://github.com/okta/odyssey/compare/v0.19.0...v0.20.0) (2023-02-23)
 
 ### Features
 
@@ -18,7 +30,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - theme type issues ([16f2b4d](https://github.com/okta/odyssey/commit/16f2b4da129901f63bc21c8dec89385604128d98))
 - updated Odyssey Labs exports and theme ([080ac14](https://github.com/okta/odyssey/commit/080ac1409c5e2eb8705dbc11bf499fd53eb6197b))
 
-## [0.19.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.19.0) (2023-02-09)
+## [0.19.0](https://github.com/okta/odyssey/compare/v0.18.0...v0.19.0) (2023-02-09)
 
 ### Features
 
@@ -33,7 +45,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - theme type issues ([16f2b4d](https://github.com/okta/odyssey/commit/16f2b4da129901f63bc21c8dec89385604128d98))
 - updated Odyssey Labs exports and theme ([080ac14](https://github.com/okta/odyssey/commit/080ac1409c5e2eb8705dbc11bf499fd53eb6197b))
 
-## [0.18.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.18.0) (2023-02-02)
+## [0.18.0](https://github.com/okta/odyssey/compare/v0.17.2...v0.18.0) (2023-02-02)
 
 ### Features
 
@@ -48,7 +60,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - theme type issues ([16f2b4d](https://github.com/okta/odyssey/commit/16f2b4da129901f63bc21c8dec89385604128d98))
 - updated Odyssey Labs exports and theme ([080ac14](https://github.com/okta/odyssey/commit/080ac1409c5e2eb8705dbc11bf499fd53eb6197b))
 
-### [0.17.2](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.2) (2023-01-12)
+### [0.17.2](https://github.com/okta/odyssey/compare/v0.17.1...v0.17.2) (2023-01-12)
 
 ### Features
 
@@ -60,7 +72,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - theme type issues ([16f2b4d](https://github.com/okta/odyssey/commit/16f2b4da129901f63bc21c8dec89385604128d98))
 - updated Odyssey Labs exports and theme ([080ac14](https://github.com/okta/odyssey/commit/080ac1409c5e2eb8705dbc11bf499fd53eb6197b))
 
-### [0.17.1](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.1) (2022-12-09)
+### [0.17.1](https://github.com/okta/odyssey/compare/v0.17.0...v0.17.1) (2022-12-09)
 
 **Note:** Version bump only for package @okta/odyssey-react-labs
 
