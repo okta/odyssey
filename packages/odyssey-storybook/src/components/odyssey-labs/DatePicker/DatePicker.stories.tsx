@@ -43,7 +43,6 @@ export default {
     },
     onChange: {
       control: "function",
-      defaultValue: () => "",
     },
     renderInput: {
       control: "function",
