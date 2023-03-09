@@ -111,6 +111,6 @@ ButtonWithIcon.args = {
 
 export const IconOnly = Template.bind({});
 IconOnly.args = {
-  children: "",
+  children: undefined,
   startIcon: <AddIcon />,
 };
