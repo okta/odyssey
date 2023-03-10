@@ -15,11 +15,11 @@ import { Temp } from "./temp";
 
 declare module "@mui/material/styles" {
   interface ThemeOptions {
-    temp: Temp;
+    temp?: Temp;
   }
 }
 
 export interface OdysseyTheme extends Theme {
   /** @deprecated `temp` is only for testing. It will be removed in a future version of Odyssey. */
-  temp: Temp;
+  temp?: Temp;
 }

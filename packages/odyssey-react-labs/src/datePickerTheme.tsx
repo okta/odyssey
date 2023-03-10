@@ -10,13 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { CSSInterpolation, ThemeOptions } from "@mui/material/styles";
+import { CSSInterpolation } from "@mui/material/styles";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CalendarIcon,
   ChevronDownIcon,
   odysseyTheme,
+  ThemeOptions,
 } from "@okta/odyssey-react-mui";
 
 const popupSpacingValue = 5;

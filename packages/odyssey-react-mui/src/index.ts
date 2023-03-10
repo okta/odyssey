@@ -18,6 +18,7 @@ export {
   Checkbox,
   Chip,
   CircularProgress,
+  createTheme,
   CssBaseline,
   Dialog,
   DialogActions,
@@ -117,7 +118,7 @@ export type { TabContextProps, TabListProps, TabPanelProps } from "@mui/lab";
 
 export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
-export { visuallyHidden } from "@mui/utils";
+export { deepmerge, visuallyHidden } from "@mui/utils";
 
 export * from "./Banner";
 export * from "./createUniqueId";
