@@ -19,6 +19,7 @@ export {
   Chip,
   CircularProgress,
   CssBaseline,
+  createTheme,
   Dialog,
   DialogActions,
   DialogContent,

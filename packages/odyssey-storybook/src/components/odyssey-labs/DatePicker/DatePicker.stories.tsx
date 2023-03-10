@@ -81,7 +81,7 @@ const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
   );
 
   return (
-    <OdysseyThemeProvider customTheme={datePickerTheme}>
+    <OdysseyThemeProvider themeOverride={datePickerTheme}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker {...datePickerProps} />
       </LocalizationProvider>

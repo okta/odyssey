@@ -22,14 +22,14 @@ import { odysseyTheme } from "./theme";
 
 const OdysseyThemeProvider = ({
   children,
-  customTheme,
+  themeOverride,
 }: {
   children: ReactElement;
-  customTheme?: ThemeOptions;
+  themeOverride?: ThemeOptions;
 }) => {
   const customOdysseyTheme = useMemo(
-    () => customTheme && createTheme(deepmerge(odysseyTheme, customTheme)),
-    [customTheme]
+    () => themeOverride && createTheme(deepmerge(odysseyTheme, themeOverride)),
+    [themeOverride]
   );
 
   return (
