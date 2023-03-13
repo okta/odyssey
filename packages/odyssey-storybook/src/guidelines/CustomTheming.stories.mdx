@@ -78,11 +78,14 @@ To customize your theme, you'll want `OdysseyThemeProvider`. This component auto
 Our theming utilizes MUI's `ThemeOptions` under-the-hood, so you can find more in-depth information customizing the theme [in their docs](https://mui.com/material-ui/customization/theming/).
 
 ```jsx
-import { createTheme } from "@mui/material/styles";
 import * as Tokens from "@okta/odyssey-design-tokens";
-import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
+import {
+  createTheme,
+  OdysseyCacheProvider,
+  OdysseyThemeProvider,
+} from "@okta/odyssey-react-mui";
 
-const myTheme = createTheme({
+const myThemeOverrides = {
   components: {
     MuiAlert: {
       styleOverrides: {
@@ -118,11 +121,13 @@ const myTheme = createTheme({
   typography: {
     fontSize: 16,
   },
-})
+}
 
 const YourAppRoot = ({ children }) => (
-  <OdysseyThemeProvider theme={myTheme}>
-    {children}
-  <OdysseyThemeProvider>
+  <OdysseyCacheProvider>
+    <OdysseyThemeProvider themeOverride={myThemeOverrides}>
+      {children}
+    <OdysseyThemeProvider>
+  </OdysseyCacheProvider>
 );
 ```
