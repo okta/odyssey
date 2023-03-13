@@ -18,8 +18,7 @@ import {
   Button,
   Checkbox,
   FormControl,
-  FormControlLabel,
-  FormGroup,
+  CheckboxGroup,
   FormLabel,
   InputBase,
   InputLabel,
@@ -192,23 +191,26 @@ const Template: Story = (args) => {
               id="demo-text-field"
             />
           </FormControl>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Systems check</FormLabel>
-            <FormGroup aria-describedby="checkbox-hint checkbox-error">
-              <FormControlLabel
-                control={<Checkbox name="life-support" />}
-                label="Life support"
-              />
-              <FormControlLabel
-                control={<Checkbox name="warp-core" />}
-                label="Warp core containment"
-              />
-              <FormControlLabel
-                control={<Checkbox name="cetacean-ops" />}
-                label="Cetacean ops"
-              />
-            </FormGroup>
-          </FormControl>
+          <CheckboxGroup
+            hint="Ensure these systems are operating before initiating warp."
+            label="Systems check"
+          >
+            <Checkbox
+              label="Life support"
+              name="life-support"
+              value="life-support"
+            />
+            <Checkbox
+              label="Warp core containment"
+              name="warp-core"
+              value="warp-core"
+            />
+            <Checkbox
+              label="Cetacean ops"
+              name="cetacean-ops"
+              value="cetacean-ops"
+            />
+          </CheckboxGroup>
           <FormControl
             component="fieldset"
             disabled={args.disabled}

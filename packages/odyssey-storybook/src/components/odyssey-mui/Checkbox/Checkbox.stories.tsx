@@ -10,21 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import {
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  FormHelperText,
-  FormLabel,
-  visuallyHidden,
-} from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { Checkbox } from "@okta/odyssey-react-mui";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import CheckboxMdx from "./Checkbox.mdx";
 
-export default {
+const storybookMeta: ComponentMeta<typeof Checkbox> = {
   title: `MUI Components/Forms/Checkbox`,
   component: Checkbox,
   parameters: {
@@ -33,131 +25,30 @@ export default {
     },
   },
   argTypes: {
-    defaultChecked: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    disabled: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    error: {
-      control: "text",
-      defaultValue: null,
-    },
-    hint: {
-      control: "text",
-      defaultValue:
-        "Ensure these systems are operating before initiating warp.",
-    },
-    indeterminate: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    invalid: {
-      control: "boolean",
-      defaultValue: false,
-    },
     label: {
       control: "text",
-      defaultValue: "Systems check",
+      defaultValue: "Label",
+    },
+    name: {
+      control: "text",
+      defaultValue: "checkbox",
+    },
+    onChange: {
+      control: "function",
+    },
+    value: {
+      control: "text",
+      defaultValue: "Value",
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const SingleTemplate: Story = (args) => {
-  return (
-    <FormControl disabled={args.disabled} error={args.invalid}>
-      <FormControlLabel
-        control={
-          <Checkbox
-            name="life-support"
-            defaultChecked={args.defaultChecked}
-            indeterminate={args.indeterminate}
-          />
-        }
-        label="Preflight systems check complete"
-        aria-describedby="checkbox-error"
-      />
-      {args.error && (
-        <FormHelperText error id="checkbox-error">
-          <span style={visuallyHidden}>Error:</span> {args.error}
-        </FormHelperText>
-      )}
-    </FormControl>
-  );
+export default storybookMeta;
+
+const Template: ComponentStory<typeof Checkbox> = (args) => {
+  return <Checkbox {...args} />;
 };
 
-export const Single = SingleTemplate.bind({});
-Single.parameters = { controls: { exclude: ["hint", "label"] } };
-Single.args = {};
-
-export const Checked = SingleTemplate.bind({});
-Checked.parameters = { controls: { exclude: ["hint", "label"] } };
-Checked.args = {
-  defaultChecked: true,
-};
-
-export const Indeterminate = SingleTemplate.bind({});
-Indeterminate.parameters = { controls: { exclude: ["hint", "label"] } };
-Indeterminate.args = {
-  indeterminate: true,
-};
-
-const GroupTemplate: Story = (args) => {
-  return (
-    <FormControl
-      component="fieldset"
-      disabled={args.disabled}
-      error={args.invalid}
-    >
-      <FormLabel component="legend">Systems check</FormLabel>
-      {args.hint && (
-        <FormHelperText id="checkbox-hint">{args.hint}</FormHelperText>
-      )}
-      <FormGroup aria-describedby="checkbox-hint checkbox-error">
-        <FormControlLabel
-          control={<Checkbox name="life-support" />}
-          label="Life support"
-        />
-        <FormControlLabel
-          control={<Checkbox name="warp-core" />}
-          label="Warp core containment"
-        />
-        <FormControlLabel
-          control={<Checkbox name="cetacean-ops" />}
-          label="Cetacean ops"
-        />
-      </FormGroup>
-      {args.error && (
-        <FormHelperText id="checkbox-error" error>
-          <span style={visuallyHidden}>Error:</span> {args.error}
-        </FormHelperText>
-      )}
-    </FormControl>
-  );
-};
-
-export const Group = GroupTemplate.bind({});
-Group.parameters = {
-  controls: { exclude: ["defaultChecked", "indeterminate"] },
-};
-Group.args = {};
-
-export const Disabled = GroupTemplate.bind({});
-Disabled.parameters = {
-  controls: { exclude: ["defaultChecked", "indeterminate"] },
-};
-Disabled.args = {
-  disabled: true,
-};
-
-export const Error = GroupTemplate.bind({});
-Error.parameters = {
-  controls: { exclude: ["defaultChecked", "indeterminate"] },
-};
-Error.args = {
-  invalid: true,
-  error: "Select 1 or more systems to check before initiating warp.",
-};
+export const Default = Template.bind({});
+Default.args = {};
