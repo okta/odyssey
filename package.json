@@ -11,21 +11,22 @@
     "node": ">=16 <17"
   },
   "scripts": {
-    "start": "yarn build && npm-run-all --parallel start:mui start:labs start:storybook",
+    "build": "lerna run build --ignore @okta/odyssey-storybook",
+    "dev:source": "lerna run dev:source",
+    "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-registry",
+    "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
+    "lint": "yarn eslint && yarn stylelint && yarn prettier-check",
+    "postinstall": "yarn build && [ -z ${CI:-} ] && husky install || exit 0",
+    "prettier-check": "prettier --ignore-unknown --loglevel warn --check .",
+    "prettier-write": "prettier --ignore-unknown --loglevel warn --write .",
     "start:labs": "yarn workspace @okta/odyssey-react-labs dev",
     "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
-    "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
-    "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-registry",
-    "lint": "yarn eslint && yarn stylelint && yarn prettier-check",
-    "prettier-check": "prettier --ignore-unknown --loglevel warn --check .",
-    "prettier-write": "prettier --ignore-unknown --loglevel warn --write .",
-    "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "start": "npm-run-all --sequential build --parallel dev:source start:storybook",
     "stylelint": "stylelint **/*.scss",
     "test": "lerna run test",
-    "typecheck": "lerna run typecheck",
-    "build": "lerna run build --ignore @okta/odyssey-storybook",
-    "postinstall": "yarn build && [ -z ${CI:-} ] && husky install || exit 0"
+    "typecheck": "lerna run typecheck"
   },
   "devDependencies": {
     "@commitlint/cli": "^14.0.0",
