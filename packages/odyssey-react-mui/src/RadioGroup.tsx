@@ -10,6 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { RadioGroup as MuiRadioGroup } from "@mui/material";
+import { ChangeEventHandler, memo, ReactElement, useMemo } from "react";
+
 import {
   FormControl,
   FormLabel,
@@ -17,9 +20,8 @@ import {
   visuallyHidden,
   Radio,
   useUniqueId,
-} from "./";
-import { RadioGroup as MuiRadioGroup } from "@mui/material";
-import { memo, ReactElement, useMemo } from "react";
+  RadioProps,
+} from ".";
 
 export interface RadioGroupProps {
   /**
@@ -47,10 +49,17 @@ export interface RadioGroupProps {
    */
   label: string;
   /**
-   * The name of the radio group, which only needs to be changed
-   * if there are multiple radio groups on the same screen
+   * The name of the radio group, which only needs to be changed if there are multiple radio groups on the same screen
    */
   name?: string;
+  /**
+   * Listen for changes in the browser that change `value`.
+   */
+  onChange?: ChangeEventHandler<EventTarget>;
+  /**
+   * The `value` on the selected radio button.
+   */
+  value?: RadioProps["value"];
 }
 
 const RadioGroup = ({
@@ -61,6 +70,7 @@ const RadioGroup = ({
   isDisabled,
   label,
   name,
+  onChange,
 }: RadioGroupProps) => {
   const ariaDescribedBy = useMemo(
     () =>
@@ -88,6 +98,7 @@ const RadioGroup = ({
         aria-describedby={ariaDescribedBy}
         defaultValue={defaultValue}
         name={uniqueName}
+        onChange={onChange}
       >
         {children}
       </MuiRadioGroup>

@@ -10,42 +10,53 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio as MuiRadio } from "@mui/material";
-import { memo } from "react";
+import { Checkbox as MuiCheckbox } from "@mui/material";
+import { ChangeEventHandler, memo } from "react";
 
 import { FormControlLabel } from ".";
 
-export type RadioProps = {
+export type CheckboxProps = {
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
   isChecked?: boolean;
   isDefaultChecked?: boolean;
   isDisabled?: boolean;
   hasError?: boolean;
-  label: string;
+  isIndeterminate?: boolean;
+  label?: string;
   name?: string;
-  value: string;
+  onChange?: ChangeEventHandler<EventTarget>;
+  value?: string;
 };
 
-const Radio = ({
+const Checkbox = ({
+  ariaLabel,
+  ariaLabelledBy,
   isChecked,
   isDefaultChecked,
   isDisabled,
+  isIndeterminate,
   hasError,
   label,
   name,
+  onChange,
   value,
-}: RadioProps) => (
+}: CheckboxProps) => (
   <FormControlLabel
+    aria-label={ariaLabel}
+    aria-labelledby={ariaLabelledBy}
     checked={isChecked}
     className={hasError ? "Mui-error" : ""}
-    control={<MuiRadio />}
+    control={<MuiCheckbox indeterminate={isIndeterminate} />}
     defaultChecked={isDefaultChecked}
     disabled={isDisabled}
     label={label}
     name={name}
+    onChange={onChange}
     value={value}
   />
 );
 
-const MemoizedRadio = memo(Radio);
+const MemoizedCheckbox = memo(Checkbox);
 
-export { MemoizedRadio as Radio };
+export { MemoizedCheckbox as Checkbox };

@@ -186,12 +186,10 @@ function EnhancedTableHead(props: EnhancedTableProps) {
       <TableRow>
         <TableCell>
           <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
+            ariaLabel="select all desserts"
+            isChecked={rowCount > 0 && numSelected === rowCount}
+            isIndeterminate={numSelected > 0 && numSelected < rowCount}
             onChange={onSelectAllClick}
-            inputProps={{
-              "aria-label": "select all desserts",
-            }}
           />
         </TableCell>
         {headCells.map((headCell) => (
@@ -294,10 +292,8 @@ function EnhancedTable() {
                 >
                   <TableCell>
                     <Checkbox
-                      checked={isItemSelected}
-                      inputProps={{
-                        "aria-labelledby": labelId,
-                      }}
+                      ariaLabelledBy={labelId}
+                      isChecked={isItemSelected}
                     />
                   </TableCell>
                   <TableCell id={labelId}>{row.name}</TableCell>
