@@ -69,7 +69,7 @@ const DefaultTemplate: Story = () => {
 
   return (
     <>
-      <Button onClick={handleClickOpen}>Open dialog</Button>
+      <Button onClick={handleClickOpen}>Open default dialog</Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
           Initiate self-destruct protocol
