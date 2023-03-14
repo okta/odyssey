@@ -17,8 +17,8 @@ export {
   Button,
   Chip,
   CircularProgress,
-  CssBaseline,
   createTheme,
+  CssBaseline,
   Dialog,
   DialogActions,
   DialogContent,
@@ -61,7 +61,6 @@ export {
   ThemeProvider as MuiThemeProvider,
   Tooltip,
   Typography,
-  useTheme,
 } from "@mui/material";
 
 export type {
@@ -115,7 +114,6 @@ export type {
   ThemeOptions,
   TooltipProps,
   TypographyProps,
-  useThemeProps,
 } from "@mui/material";
 
 export { TabContext, TabList, TabPanel } from "@mui/lab";
@@ -124,7 +122,7 @@ export type { TabContextProps, TabListProps, TabPanelProps } from "@mui/lab";
 
 export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
-export { visuallyHidden } from "@mui/utils";
+export { deepmerge, visuallyHidden } from "@mui/utils";
 
 export * from "./Banner";
 export * from "./Checkbox";
