@@ -5830,7 +5830,7 @@ __metadata:
     "@commitlint/config-conventional": ^17.4.4
     "@commitlint/config-lerna-scopes": ^17.4.2
   peerDependencies:
-    "@commitlint/cli": ^14.0.0
+    "@commitlint/cli": ^17.4.4
     husky: ^7.0.2
   languageName: unknown
   linkType: soft
