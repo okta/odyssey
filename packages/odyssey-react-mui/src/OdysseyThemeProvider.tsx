@@ -10,14 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  createTheme,
-  ThemeOptions,
-  ThemeProvider as MuiThemeProvider,
-} from "@mui/material/styles";
-import { deepmerge } from "@mui/utils";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { memo, ReactElement, useMemo } from "react";
 
+import { createTheme, deepmerge, ThemeOptions } from ".";
 import { odysseyTheme } from "./theme";
 
 const OdysseyThemeProvider = ({
