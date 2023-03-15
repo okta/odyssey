@@ -97,6 +97,10 @@ export type TextFieldProps = {
    */
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
+   * Callback fired when the `input` element loses focus.
+   */
+  onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  /**
    * The label for the `input` element if the it's not optional
    */
   optionalLabel?: string;
@@ -134,6 +138,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       label,
       onChange,
       onFocus,
+      onBlur,
       optionalLabel,
       placeholder,
       startAdornment,
@@ -202,6 +207,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           multiline={isMultiline}
           onChange={onChange}
           onFocus={onFocus}
+          onBlur={onBlur}
           placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}

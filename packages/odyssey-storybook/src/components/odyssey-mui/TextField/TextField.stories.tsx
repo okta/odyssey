@@ -59,6 +59,9 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     onFocus: {
       control: "function",
     },
+    onBlur: {
+      control: "function",
+    },
     optionalLabel: {
       control: "text",
       defaultValue: "Optional",
