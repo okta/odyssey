@@ -354,16 +354,24 @@ export const components: ThemeOptions["components"] = {
         },
       }),
 
-      endIcon: ({ theme }) => ({
+      endIcon: ({ theme, ownerState }) => ({
         display: "inline-flex",
         margin: 0,
         marginInlineStart: theme.spacing(2),
+
+        ...(ownerState.children === undefined && {
+          marginInlineStart: 0,
+        }),
       }),
 
-      startIcon: ({ theme }) => ({
+      startIcon: ({ theme, ownerState }) => ({
         display: "inline-flex",
         margin: 0,
         marginInlineEnd: theme.spacing(2),
+
+        ...(ownerState.children === undefined && {
+          marginInlineEnd: 0,
+        }),
       }),
     },
   },

@@ -3,23 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.20.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.20.0) (2023-02-23)
+## [0.21.0](https://github.com/okta/odyssey/compare/v0.20.0...v0.21.0) (2023-03-09)
 
 **Note:** Version bump only for package @okta/odyssey-lint-staged
 
-## [0.19.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.19.0) (2023-02-09)
+## [0.20.0](https://github.com/okta/odyssey/compare/v0.19.0...v0.20.0) (2023-02-23)
 
 **Note:** Version bump only for package @okta/odyssey-lint-staged
 
-## [0.18.0](https://github.com/okta/odyssey/compare/v0.16.1...v0.18.0) (2023-02-02)
+## [0.19.0](https://github.com/okta/odyssey/compare/v0.18.0...v0.19.0) (2023-02-09)
 
 **Note:** Version bump only for package @okta/odyssey-lint-staged
 
-### [0.17.2](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.2) (2023-01-12)
+## [0.18.0](https://github.com/okta/odyssey/compare/v0.17.2...v0.18.0) (2023-02-02)
 
 **Note:** Version bump only for package @okta/odyssey-lint-staged
 
-### [0.17.1](https://github.com/okta/odyssey/compare/v0.16.1...v0.17.1) (2022-12-09)
+### [0.17.2](https://github.com/okta/odyssey/compare/v0.17.1...v0.17.2) (2023-01-12)
+
+**Note:** Version bump only for package @okta/odyssey-lint-staged
+
+### [0.17.1](https://github.com/okta/odyssey/compare/v0.17.0...v0.17.1) (2022-12-09)
 
 **Note:** Version bump only for package @okta/odyssey-lint-staged
 

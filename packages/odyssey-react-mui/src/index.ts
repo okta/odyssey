@@ -16,9 +16,9 @@ export {
   Autocomplete,
   Box,
   Button,
-  Checkbox,
   Chip,
   CircularProgress,
+  createTheme,
   CssBaseline,
   Dialog,
   DialogActions,
@@ -32,8 +32,11 @@ export {
   FormHelperText,
   FormLabel,
   IconButton,
+  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextField`. */
   InputAdornment,
+  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextField`. */
   InputBase,
+  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextField`. */
   InputLabel,
   List,
   ListItem,
@@ -60,7 +63,6 @@ export {
   ThemeProvider as MuiThemeProvider,
   Tooltip,
   Typography,
-  useTheme,
 } from "@mui/material";
 
 export type {
@@ -69,7 +71,6 @@ export type {
   AutocompleteProps,
   BoxProps,
   ButtonProps,
-  CheckboxProps,
   ChipProps,
   CircularProgressProps,
   CssBaselineProps,
@@ -85,8 +86,11 @@ export type {
   FormHelperTextProps,
   FormLabelProps,
   IconButtonProps,
+  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextFieldProps`. */
   InputAdornmentProps,
+  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextFieldProps`. */
   InputBaseProps,
+  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextFieldProps`. */
   InputLabelProps,
   ListProps,
   ListItemProps,
@@ -114,7 +118,6 @@ export type {
   ThemeOptions,
   TooltipProps,
   TypographyProps,
-  useThemeProps,
 } from "@mui/material";
 
 export { TabContext, TabList, TabPanel } from "@mui/lab";
@@ -123,9 +126,11 @@ export type { TabContextProps, TabListProps, TabPanelProps } from "@mui/lab";
 
 export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
-export { visuallyHidden } from "@mui/utils";
+export { deepmerge, visuallyHidden } from "@mui/utils";
 
 export * from "./Banner";
+export * from "./Checkbox";
+export * from "./CheckboxGroup";
 export * from "./createUniqueId";
 export * from "./Icon";
 export * from "./iconDictionary";

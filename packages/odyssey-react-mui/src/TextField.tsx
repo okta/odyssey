@@ -22,6 +22,7 @@ import {
   useMemo,
   useState,
 } from "react";
+
 import {
   EyeIcon,
   EyeOffIcon,
@@ -30,12 +31,12 @@ import {
   IconButton,
   InputAdornment,
   InputBase,
+  InputBaseProps,
   InputLabel,
   SearchIcon,
   Typography,
-  visuallyHidden,
   useUniqueId,
-  InputBaseProps,
+  visuallyHidden,
 } from "./";
 
 export type TextFieldProps = {
@@ -45,10 +46,6 @@ export type TextFieldProps = {
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
-  /**
-   * If `true`, the component is disabled.
-   */
-  isDisabled?: boolean;
   /**
    * End `InputAdornment` for this component.
    */
@@ -66,13 +63,29 @@ export type TextFieldProps = {
    */
   id?: string;
   /**
-   * The label for the `input` element.
+   * Props that go onto the HTML `input` element.
    */
-  label?: string;
+  inputProps?: InputBaseProps["inputProps"];
+  /**
+   * If `true`, the component is disabled.
+   */
+  isDisabled?: boolean;
   /**
    * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
    */
   isMultiline?: boolean;
+  /**
+   * It prevents the user from changing the value of the field
+   */
+  isReadOnly?: boolean;
+  /**
+   * If `true`, the `input` element is required.
+   */
+  isRequired?: boolean;
+  /**
+   * The label for the `input` element.
+   */
+  label?: string;
   /**
    * Callback fired when the value is changed.
    */
@@ -90,18 +103,6 @@ export type TextFieldProps = {
    */
   placeholder?: string;
   /**
-   * The props to be passed to InputBase.
-   */
-  inputProps?: InputBaseProps["inputProps"];
-  /**
-   * It prevents the user from changing the value of the field
-   */
-  isReadOnly?: boolean;
-  /**
-   * If `true`, the `input` element is required.
-   */
-  isRequired?: boolean;
-  /**
    * Start `InputAdornment` for this component.
    */
   startAdornment?: ReactNode;
@@ -115,111 +116,118 @@ export type TextFieldProps = {
   value?: unknown;
 };
 
-const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
-  const {
-    autoCompleteType,
-    isDisabled = false,
-    endAdornment,
-    errorMessage,
-    hint,
-    id: idOverride,
-    inputProps = {},
-    label,
-    isMultiline = false,
-    onChange,
-    onFocus,
-    optionalLabel,
-    placeholder,
-    isReadOnly,
-    isRequired = true,
-    startAdornment,
-    type = "text",
-    value,
-  } = props;
+const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+  (
+    {
+      autoCompleteType,
+      endAdornment,
+      errorMessage,
+      hint,
+      id: idOverride,
+      inputProps = {},
+      isDisabled = false,
+      isMultiline = false,
+      isReadOnly,
+      isRequired = true,
+      label,
+      onChange,
+      onFocus,
+      optionalLabel,
+      placeholder,
+      startAdornment,
+      type = "text",
+      value,
+    },
+    ref
+  ) => {
+    const [inputType, setInputType] = useState(type);
 
-  const [inputType, setInputType] = useState(type);
+    useEffect(() => {
+      setInputType(type);
+    }, [type]);
 
-  useEffect(() => {
-    setInputType(type);
-  }, [type]);
+    const togglePasswordVisibility = useCallback(() => {
+      setInputType((currentType) =>
+        currentType === "password" ? "text" : "password"
+      );
+    }, []);
 
-  const togglePasswordVisibility = useCallback(() => {
-    setInputType((currentType) =>
-      currentType === "password" ? "text" : "password"
-    );
-  }, []);
+    const id = useUniqueId(idOverride);
+    const hintId = hint ? `${id}-hint` : undefined;
+    const errorId = errorMessage ? `${id}-error` : undefined;
+    const labelId = label ? `${id}-label` : undefined;
 
-  const id = useUniqueId(idOverride);
-  const hintId = hint ? `${id}-hint` : undefined;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const labelId = label ? `${id}-label` : undefined;
+    const localInputProps = useMemo(() => {
+      const ariaDescribedBy =
+        errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId;
 
-  const localInputProps = useMemo(() => {
-    const ariaDescribedBy =
-      errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId;
+      return {
+        ...inputProps,
+        "aria-describedby":
+          inputProps["aria-describedby"]?.concat(` ${ariaDescribedBy}`) ??
+          ariaDescribedBy,
+      };
+    }, [errorId, hintId, inputProps]);
 
-    return {
-      ...inputProps,
-      "aria-describedby":
-        inputProps["aria-describedby"]?.concat(` ${ariaDescribedBy}`) ??
-        ariaDescribedBy,
-    };
-  }, [errorId, hintId, inputProps]);
-
-  return (
-    <FormControl disabled={isDisabled} error={Boolean(errorMessage)} ref={ref}>
-      <InputLabel htmlFor={id} id={labelId}>
-        {label}
-        {!isRequired && (
-          <Typography variant="subtitle1">{optionalLabel}</Typography>
+    return (
+      <FormControl
+        disabled={isDisabled}
+        error={Boolean(errorMessage)}
+        ref={ref}
+      >
+        <InputLabel htmlFor={id} id={labelId}>
+          {label}
+          {!isRequired && (
+            <Typography variant="subtitle1">{optionalLabel}</Typography>
+          )}
+        </InputLabel>
+        {hint && <FormHelperText id={hintId}>{hint}</FormHelperText>}
+        <InputBase
+          autoComplete={autoCompleteType}
+          endAdornment={
+            inputType === "password" ? (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  edge="end"
+                  onClick={togglePasswordVisibility}
+                >
+                  {inputType === "password" ? <EyeIcon /> : <EyeOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            ) : (
+              endAdornment
+            )
+          }
+          id={id}
+          inputProps={localInputProps}
+          multiline={isMultiline}
+          onChange={onChange}
+          onFocus={onFocus}
+          placeholder={placeholder}
+          readOnly={isReadOnly}
+          startAdornment={
+            inputType === "search" ? (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ) : (
+              startAdornment
+            )
+          }
+          type={inputType}
+          value={value}
+        />
+        {errorMessage && (
+          <FormHelperText error id={errorId}>
+            <span style={visuallyHidden}>Error:</span>
+            {errorMessage}
+          </FormHelperText>
         )}
-      </InputLabel>
-      {hint && <FormHelperText id={hintId}>{hint}</FormHelperText>}
-      <InputBase
-        autoComplete={autoCompleteType}
-        endAdornment={
-          inputType === "password" ? (
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                edge="end"
-                onClick={togglePasswordVisibility}
-              >
-                {inputType === "password" ? <EyeIcon /> : <EyeOffIcon />}
-              </IconButton>
-            </InputAdornment>
-          ) : (
-            endAdornment
-          )
-        }
-        id={id}
-        inputProps={localInputProps}
-        multiline={isMultiline}
-        onChange={onChange}
-        onFocus={onFocus}
-        placeholder={placeholder}
-        readOnly={isReadOnly}
-        startAdornment={
-          inputType === "search" ? (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ) : (
-            startAdornment
-          )
-        }
-        type={inputType}
-        value={value}
-      />
-      {errorMessage && (
-        <FormHelperText error id={errorId}>
-          <span style={visuallyHidden}>Error:</span>
-          {errorMessage}
-        </FormHelperText>
-      )}
-    </FormControl>
-  );
-});
+      </FormControl>
+    );
+  }
+);
 
 const MemoizedTextField = memo(TextField);
 

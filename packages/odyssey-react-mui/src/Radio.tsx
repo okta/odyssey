@@ -10,17 +10,40 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { FormControlLabel } from "./";
 import { Radio as MuiRadio } from "@mui/material";
 import { memo } from "react";
 
+import { FormControlLabel } from ".";
+
 export type RadioProps = {
+  isChecked?: boolean;
+  isDefaultChecked?: boolean;
+  isDisabled?: boolean;
+  hasError?: boolean;
   label: string;
+  name?: string;
   value: string;
 };
 
-const Radio = ({ label, value }: RadioProps) => (
-  <FormControlLabel control={<MuiRadio />} label={label} value={value} />
+const Radio = ({
+  isChecked,
+  isDefaultChecked,
+  isDisabled,
+  hasError,
+  label,
+  name,
+  value,
+}: RadioProps) => (
+  <FormControlLabel
+    checked={isChecked}
+    className={hasError ? "Mui-error" : ""}
+    control={<MuiRadio />}
+    defaultChecked={isDefaultChecked}
+    disabled={isDisabled}
+    label={label}
+    name={name}
+    value={value}
+  />
 );
 
 const MemoizedRadio = memo(Radio);

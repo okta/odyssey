@@ -45,6 +45,13 @@ const storybookMeta: ComponentMeta<typeof RadioGroup> = {
       control: "text",
       defaultValue: "storybook-radio",
     },
+    onChange: {
+      control: "function",
+    },
+    value: {
+      control: "text",
+      defaultValue: "Value",
+    },
   },
   decorators: [MuiThemeDecorator],
 };
