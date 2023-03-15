@@ -1,14 +1,9 @@
 {
-  "version": "0.21.0",
-  "npmClient": "yarn",
-  "command": {
-    "publish": {
-      "ignoreChanges": ".yarnrc.yml"
-    }
-  },
-  "changelogPreset": "@okta/conventional-changelog-odyssey",
-  "useWorkspaces": true,
-  "packages": ["packages/*"],
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "useNx": false
+  "changelogPreset": "@okta/conventional-changelog-odyssey",
+  "npmClient": "yarn",
+  "packages": ["packages/*"],
+  "useNx": false,
+  "useWorkspaces": true,
+  "version": "0.21.0"
 }
