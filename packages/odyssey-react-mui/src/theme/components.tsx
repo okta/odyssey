@@ -1386,24 +1386,64 @@ export const components: ThemeOptions["components"] = {
   MuiRadio: {
     defaultProps: {
       size: "small",
+      icon: <></>,
+      checkedIcon: <></>,
     },
     styleOverrides: {
       root: ({ theme }) => ({
-        "&:hover": {
+        width: 16,
+        height: 16,
+        borderRadius: 16,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "#8C8C96", // gray 500
+
+        ".MuiFormControlLabel-root:hover > &": {
           backgroundColor: "transparent",
+          borderColor: "#1D1D21", // gray 900
+        },
+        ".Mui-error:hover > &": {
+          backgroundColor: "transparent",
+          borderColor: "#640019", // red 900
         },
         padding: 0,
         ".Mui-error > &": {
-          color: theme.palette.error.main,
-          "&:hover": {
-            color: theme.palette.error.dark,
+          borderColor: theme.palette.error.main,
+          "&::before": {
+            backgroundColor: theme.palette.error.main,
           },
         },
         "&.Mui-focusVisible": {
+          borderColor: "#1D1D21", // gray 900
           outlineColor: theme.palette.primary.main,
-          outlineOffset: 0,
+          outlineOffset: "2px",
           outlineStyle: "solid",
           outlineWidth: "2px",
+        },
+        "&.Mui-checked": {
+          position: "relative",
+
+          "&::before": {
+            content: "''",
+            width: "8px",
+            height: "8px",
+            borderRadius: "8px",
+            backgroundColor: theme.palette.primary.main,
+            position: "absolute",
+            top: "3px",
+            left: "3px",
+          },
+        },
+        ".Mui-error > &.Mui-checked::before": {
+          backgroundColor: theme.palette.error.main,
+        },
+        "&.Mui-disabled": {
+          backgroundColor: "#F5F5F6", // gray 000
+          borderColor: "#C1C1C8", // gray 300
+
+          "&::before": {
+            backgroundColor: "#C1C1C8", // gray 300
+          },
         },
       }),
     },
