@@ -1391,20 +1391,20 @@ export const components: ThemeOptions["components"] = {
     },
     styleOverrides: {
       root: ({ theme }) => ({
-        width: 16,
-        height: 16,
-        borderRadius: 16,
-        borderWidth: 1,
+        width: theme.spacing(4),
+        height: theme.spacing(4),
+        borderRadius: theme.spacing(4),
+        borderWidth: "1px",
         borderStyle: "solid",
-        borderColor: "#8C8C96", // gray 500
+        borderColor: theme.palette.grey[500],
 
         ".MuiFormControlLabel-root:hover > &": {
           backgroundColor: "transparent",
-          borderColor: "#1D1D21", // gray 900
+          borderColor: theme.palette.grey[900],
         },
         ".Mui-error:hover > &": {
           backgroundColor: "transparent",
-          borderColor: "#640019", // red 900
+          borderColor: theme.palette.error.dark,
         },
         padding: 0,
         ".Mui-error > &": {
@@ -1414,7 +1414,7 @@ export const components: ThemeOptions["components"] = {
           },
         },
         "&.Mui-focusVisible": {
-          borderColor: "#1D1D21", // gray 900
+          borderColor: theme.palette.grey[900],
           outlineColor: theme.palette.primary.main,
           outlineOffset: "2px",
           outlineStyle: "solid",
@@ -1425,24 +1425,24 @@ export const components: ThemeOptions["components"] = {
 
           "&::before": {
             content: "''",
-            width: "8px",
-            height: "8px",
-            borderRadius: "8px",
+            width: theme.spacing(2),
+            height: theme.spacing(2),
+            borderRadius: theme.spacing(2),
             backgroundColor: theme.palette.primary.main,
             position: "absolute",
-            top: "3px",
-            left: "3px",
+            top: theme.spacing(0.5),
+            left: theme.spacing(0.5),
           },
         },
         ".Mui-error > &.Mui-checked::before": {
           backgroundColor: theme.palette.error.main,
         },
         "&.Mui-disabled": {
-          backgroundColor: "#F5F5F6", // gray 000
-          borderColor: "#C1C1C8", // gray 300
+          backgroundColor: theme.palette.grey[50],
+          borderColor: theme.palette.grey[300],
 
           "&::before": {
-            backgroundColor: "#C1C1C8", // gray 300
+            backgroundColor: theme.palette.grey[300],
           },
         },
       }),
