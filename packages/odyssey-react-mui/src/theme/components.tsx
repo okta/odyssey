@@ -32,10 +32,12 @@ import { tooltipClasses } from "@mui/material/Tooltip";
 import {
   AlertTriangleFilledIcon,
   ArrowDownIcon,
+  CheckIcon,
   CheckCircleFilledIcon,
   ChevronDownIcon,
   CloseCircleFilledIcon,
   InformationCircleFilledIcon,
+  SubtractIcon,
 } from "../iconDictionary";
 
 export const components: ThemeOptions["components"] = {
@@ -376,30 +378,75 @@ export const components: ThemeOptions["components"] = {
   MuiCheckbox: {
     defaultProps: {
       size: "small",
+      icon: <></>,
+      checkedIcon: <CheckIcon />,
+      indeterminateIcon: <SubtractIcon />,
     },
     styleOverrides: {
       root: ({ theme }) => ({
-        borderRadius: "4px",
-        "&:hover": {
+        width: theme.spacing(4),
+        height: theme.spacing(4),
+        borderRadius: theme.spacing(1),
+        borderWidth: "1px",
+        borderStyle: "solid",
+        borderColor: theme.palette.grey[500],
+
+        ".MuiSvgIcon-root": {
+          color: theme.palette.common.white,
+          width: theme.spacing(3),
+          height: theme.spacing(3),
+        },
+
+        "&.Mui-checked": {
+          backgroundColor: theme.palette.primary.main,
+          borderColor: theme.palette.primary.main,
+
+          ".MuiFormControlLabel-root:hover > &": {
+            backgroundColor: theme.palette.primary.dark,
+            borderColor: theme.palette.primary.dark,
+          },
+        },
+
+        ".MuiFormControlLabel-root:hover > &": {
           backgroundColor: "transparent",
+          borderColor: theme.palette.grey[900],
+        },
+        ".Mui-error:hover > &": {
+          borderColor: theme.palette.error.dark,
+
+          "&.Mui-checked": {
+            backgroundColor: theme.palette.error.dark,
+            borderColor: theme.palette.error.dark,
+          },
         },
         padding: 0,
         ".Mui-error > &": {
-          color: theme.palette.error.main,
-          "&:hover": {
-            color: theme.palette.error.dark,
-          },
-        },
-        ".Mui-error > &.Mui-checked": {
-          "&:hover": {
-            color: theme.palette.error.dark,
+          borderColor: theme.palette.error.main,
+
+          "&.Mui-checked": {
+            backgroundColor: theme.palette.error.main,
+            borderColor: theme.palette.error.main,
           },
         },
         "&.Mui-focusVisible": {
+          borderColor: theme.palette.grey[900],
           outlineColor: theme.palette.primary.main,
-          outlineOffset: 0,
+          outlineOffset: "2px",
           outlineStyle: "solid",
           outlineWidth: "2px",
+        },
+        "&.Mui-disabled": {
+          backgroundColor: theme.palette.grey[50],
+          borderColor: theme.palette.grey[300],
+
+          ".Mui-error > &": {
+            backgroundColor: theme.palette.grey[50],
+            borderColor: theme.palette.grey[300],
+          },
+
+          ".MuiSvgIcon-root": {
+            color: theme.palette.common.black,
+          },
         },
       }),
     },
