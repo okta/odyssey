@@ -386,6 +386,7 @@ export const components: ThemeOptions["components"] = {
       root: ({ theme }) => ({
         width: theme.spacing(4),
         height: theme.spacing(4),
+        padding: 0,
         borderRadius: theme.spacing(1),
         borderWidth: "1px",
         borderStyle: "solid",
@@ -419,7 +420,6 @@ export const components: ThemeOptions["components"] = {
             borderColor: theme.palette.error.dark,
           },
         },
-        padding: 0,
         ".Mui-error > &": {
           borderColor: theme.palette.error.main,
 
