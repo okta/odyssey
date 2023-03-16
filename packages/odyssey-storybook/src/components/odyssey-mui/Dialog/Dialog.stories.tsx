@@ -69,21 +69,18 @@ const DefaultTemplate: Story = () => {
 
   return (
     <>
-      <Button onClick={handleClickOpen}>Open dialog</Button>
+      <Button onClick={handleClickOpen}>Open default dialog</Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
-          Confirm self-destruct
+          Initiate self-destruct protocol
           <Button variant="floating" onClick={handleClose}>
             <CloseIcon />
           </Button>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            You are about to initiate this ship's self-destruct protocol.
-          </DialogContentText>
-          <DialogContentText>
-            Destruction of company property is a serious offense. Are you sure
-            you want to proceed?
+            You are initiating this ship's self-destruct protocol. This ship,
+            and its occupants, will be destroyed.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -91,7 +88,7 @@ const DefaultTemplate: Story = () => {
             Cancel
           </Button>
           <Button variant="danger" onClick={handleClose}>
-            Initiate self-destruct
+            Initiate protocol
           </Button>
         </DialogActions>
       </Dialog>
@@ -267,7 +264,7 @@ const LongTemplate: Story = () => {
           <Button variant="floating" onClick={handleClose}>
             Cancel
           </Button>
-          <Button onClick={handleClose}>Agree</Button>
+          <Button onClick={handleClose}>Waive liability</Button>
         </DialogActions>
       </Dialog>
     </>

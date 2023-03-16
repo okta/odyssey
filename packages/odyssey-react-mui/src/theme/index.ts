@@ -11,3 +11,4 @@
  */
 
 export { theme as odysseyTheme } from "./theme";
+export { useTheme } from "./useTheme";
