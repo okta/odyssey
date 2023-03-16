@@ -82,7 +82,7 @@ Warning.args = {
 
 export const Success = DefaultTemplate.bind({});
 Success.args = {
-  children: "Safety checks are complete. Your mission is ready for lift-off.",
+  children: "Safety checks are complete. Your mission is ready for liftoff.",
   role: "status",
   severity: "success",
   title: "Approved for launch",
@@ -101,7 +101,7 @@ InlineLink.args = {
   ),
   role: "alert",
   severity: "error",
-  title: "Safety checks have failed",
+  title: "Safety checks failed",
 };
 
 export const BlockLink = DefaultTemplate.bind({});
@@ -109,8 +109,8 @@ BlockLink.args = {
   children: (
     <>
       <Typography paragraph>
-        An issue has been discovered with your fuel mixture ratios. Please
-        reconfigure your fuel mixture and perform safety checks again.
+        There is an issue with the fuel mixture ratios. Reconfigure the fuel
+        mixture and perform the safety checks again.
       </Typography>
 
       <Link href="#" variant="monochrome">
@@ -120,5 +120,5 @@ BlockLink.args = {
   ),
   role: "alert",
   severity: "error",
-  title: "Safety checks have failed",
+  title: "Safety checks failed",
 };
