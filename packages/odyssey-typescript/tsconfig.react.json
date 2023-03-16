@@ -2,11 +2,11 @@
   "extends": "./tsconfig.strict.json",
 
   "compilerOptions": {
-    "lib": ["dom", "es2020"],
-    "noEmit": true,
-    "module": "es2020",
-    "target": "es2020",
     "isolatedModules": true,
-    "jsx": "react"
+    "jsx": "react",
+    "lib": ["dom", "es2020"],
+    "module": "es2020",
+    "noEmit": true,
+    "target": "es2020"
   }
 }

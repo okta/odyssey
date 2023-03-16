@@ -1,17 +1,17 @@
 {
   "name": "@okta/odyssey-react-labs",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "description": "React components for Odyssey, that will eventually be part of Odyssey React but who's implementation isn't yet approved.",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "sideEffects": false,
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "exports": {
     ".": {
       "default": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/src/index.d.ts"
     }
   },
   "repository": {

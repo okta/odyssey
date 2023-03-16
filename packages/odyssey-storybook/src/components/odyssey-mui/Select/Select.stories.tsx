@@ -192,7 +192,7 @@ const MultiTemplate: Story = (args) => {
       >
         {destinations.map((destination) => (
           <MenuItem key={destination} value={destination}>
-            <Checkbox checked={destinationName.indexOf(destination) > -1} />
+            <Checkbox isChecked={destinationName.indexOf(destination) > -1} />
             <ListItemText primary={destination} />
           </MenuItem>
         ))}

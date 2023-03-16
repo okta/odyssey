@@ -33,7 +33,7 @@ export default {
 };
 
 export const ButtonStory: StoryFn = () => {
-  const customTheme = useMemo<ThemeOptions>(
+  const themeOverride = useMemo<ThemeOptions>(
     () => ({
       palette: {
         primary: {
@@ -45,7 +45,7 @@ export const ButtonStory: StoryFn = () => {
   );
 
   return (
-    <OdysseyThemeProvider customTheme={customTheme}>
+    <OdysseyThemeProvider themeOverride={themeOverride}>
       <div>
         <Button variant="primary">Primary</Button>
       </div>
@@ -56,7 +56,7 @@ export const ButtonStory: StoryFn = () => {
 ButtonStory.storyName = "Button";
 
 export const TextFieldStory: StoryFn = () => {
-  const customTheme = useMemo<ThemeOptions>(
+  const themeOverride = useMemo<ThemeOptions>(
     () => ({
       palette: {
         primary: {
@@ -68,7 +68,7 @@ export const TextFieldStory: StoryFn = () => {
   );
 
   return (
-    <OdysseyThemeProvider customTheme={customTheme}>
+    <OdysseyThemeProvider themeOverride={themeOverride}>
       <div>
         <TextField autoCompleteType="name" type="text" />
       </div>
@@ -79,7 +79,7 @@ export const TextFieldStory: StoryFn = () => {
 TextFieldStory.storyName = "TextField";
 
 export const RadioGroupStory: StoryFn = () => {
-  const customTheme = useMemo<ThemeOptions>(
+  const themeOverride = useMemo<ThemeOptions>(
     () => ({
       palette: {
         primary: {
@@ -91,7 +91,7 @@ export const RadioGroupStory: StoryFn = () => {
   );
 
   return (
-    <OdysseyThemeProvider customTheme={customTheme}>
+    <OdysseyThemeProvider themeOverride={themeOverride}>
       <div>
         <RadioGroup
           defaultValue="Lightspeed"

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,4 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-declare module "*.module.scss";
+import { Theme } from "@mui/material/styles";
+import { Temp } from "./temp";
+
+declare module "@mui/material/styles" {
+  interface ThemeOptions {
+    temp?: Temp;
+  }
+}
+
+export interface OdysseyTheme extends Theme {
+  /** @deprecated `temp` is only for testing. It will be removed in a future version of Odyssey. */
+  temp?: Temp;
+}

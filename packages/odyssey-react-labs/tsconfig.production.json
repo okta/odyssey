@@ -1,8 +1,14 @@
 {
   "extends": "@okta/odyssey-typescript/tsconfig.react.types.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "jsx": "react-jsx"
+    "composite": true,
+    "jsx": "react-jsx",
+    "outDir": "dist"
   },
-  "exclude": ["./test", "**/*.test.**", "**/dist/**/*"]
+  "exclude": ["./test", "**/*.test.**", "**/dist/**/*"],
+  "references": [
+    {
+      "path": "../odyssey-react-mui/tsconfig.production.json"
+    }
+  ]
 }

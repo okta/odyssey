@@ -29,13 +29,12 @@ export default {
   argTypes: {
     children: {
       control: "text",
-      defaultValue: "Add Crew",
+      defaultValue: "Add crew",
     },
     size: {
       options: ["s", "m", "l"],
       control: { type: "radio" },
     },
-    // if we choose to apply colors via "variants" then odyssey global theme will not apply
     variant: {
       options: ["primary", "secondary", "danger", "floating"],
       control: { type: "radio" },
@@ -45,11 +44,9 @@ export default {
       control: "boolean",
     },
     fullWidth: {
-      // called 'wide' in original ods button
       control: "boolean",
     },
     startIcon: {
-      // called 'icon' in original ods button
       control: "object",
     },
   },
@@ -93,19 +90,16 @@ ButtonLarge.args = {
 
 export const ButtonFullWidth = Template.bind({});
 ButtonFullWidth.args = {
-  children: "Add Crew",
   fullWidth: true,
 };
 
 export const ButtonPrimaryDisabled = Template.bind({});
 ButtonPrimaryDisabled.args = {
-  children: "Add Crew",
   disabled: true,
 };
 
 export const ButtonWithIcon = Template.bind({});
 ButtonWithIcon.args = {
-  children: "Add Crew",
   startIcon: <AddIcon />,
 };
 

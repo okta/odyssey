@@ -1,8 +1,9 @@
 {
   "extends": "@okta/odyssey-typescript/tsconfig.react.types.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "jsx": "react-jsx"
+    "composite": true,
+    "jsx": "react-jsx",
+    "outDir": "dist"
   },
   "exclude": ["./test", "**/*.test.**", "**/dist/**/*"]
 }
