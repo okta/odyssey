@@ -53,13 +53,13 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
       control: "boolean",
       defaultValue: false,
     },
+    onBlur: {
+      control: "function",
+    },
     onChange: {
       control: "function",
     },
     onFocus: {
-      control: "function",
-    },
-    onBlur: {
       control: "function",
     },
     optionalLabel: {

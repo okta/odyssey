@@ -89,6 +89,10 @@ export type TextFieldProps = {
    */
   label?: string;
   /**
+   * Callback fired when the `input` element loses focus.
+   */
+  onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  /**
    * Callback fired when the value is changed.
    */
   onChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
@@ -96,10 +100,6 @@ export type TextFieldProps = {
    * Callback fired when the `input` element get focus.
    */
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  /**
-   * Callback fired when the `input` element loses focus.
-   */
-  onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
    * The label for the `input` element if the it's not optional
    */
