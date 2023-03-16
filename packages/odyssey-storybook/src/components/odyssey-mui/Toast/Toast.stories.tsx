@@ -164,14 +164,14 @@ WarningStatic.args = {
 
 export const Success = DefaultTemplate.bind({});
 Success.args = {
-  content: "Docking completed successfully",
+  content: "Docking completed",
   role: "status",
   severity: "success",
 };
 
 export const SuccessStatic = StaticTemplate.bind({});
 SuccessStatic.args = {
-  content: "Docking completed successfully",
+  content: "Docking completed",
   role: "status",
   severity: "success",
 };
