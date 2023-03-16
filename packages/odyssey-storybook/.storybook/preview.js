@@ -1,12 +1,30 @@
 export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+  backgrounds: {
+    default: "Page Background",
+    grid: {
+      cellSize: 10,
+    },
+    values: [
+      {
+        name: "Page Background",
+        value: "#ffffff",
+      },
+      {
+        name: "Page Background (dark)",
+        value: "#1d1d21",
+      },
+    ],
+  },
   controls: {
     expanded: true,
     sort: "requiredFirst",
   },
-  grid: {
-    cellSize: 10,
+  docs: {
+    source: {
+      excludeDecorators: true,
+    },
   },
-  actions: { argTypesRegex: "^on[A-Z].*" },
   options: {
     storySort: {
       method: "",
@@ -25,25 +43,4 @@ export const parameters = {
     },
   },
   viewMode: "docs",
-  previewTabs: {
-    "storybook/docs/panel": { index: -1 },
-  },
-  backgrounds: {
-    default: "white",
-    values: [
-      {
-        name: "Page Background",
-        value: "#ffffff",
-      },
-      {
-        name: "Page Background (dark)",
-        value: "#1d1d21",
-      },
-    ],
-  },
-  docs: {
-    source: {
-      excludeDecorators: true,
-    },
-  },
 };

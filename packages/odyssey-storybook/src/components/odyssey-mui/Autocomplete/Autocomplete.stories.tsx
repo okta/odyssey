@@ -246,9 +246,11 @@ const DefaultTemplate: ComponentStory<typeof Autocomplete> = (args) => {
       renderInput={(params) => (
         <TextField
           {...params}
+          endAdornment={params.InputProps.endAdornment}
           hint="Select your favorite movie"
-          ref={params.InputProps.ref}
           label="Movie"
+          ref={params.InputProps.ref}
+          startAdornment={params.InputProps.startAdornment}
         />
       )}
     />
@@ -263,9 +265,11 @@ const EmptyTemplate: ComponentStory<typeof Autocomplete> = (args) => {
       renderInput={(params) => (
         <TextField
           {...params}
+          endAdornment={params.InputProps.endAdornment}
           hint="Select your favorite movie"
-          ref={params.InputProps.ref}
           label="Movie"
+          ref={params.InputProps.ref}
+          startAdornment={params.InputProps.startAdornment}
         />
       )}
     />
