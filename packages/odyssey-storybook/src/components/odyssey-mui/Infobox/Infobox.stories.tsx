@@ -42,7 +42,7 @@ export default {
     },
     title: {
       control: "string",
-      defaultValue: "Moonbase Alpha-6",
+      defaultValue: undefined,
     },
   },
   decorators: [MuiThemeDecorator],
@@ -58,25 +58,23 @@ const DefaultTemplate: Story = (args) => {
 
 export const Info = DefaultTemplate.bind({});
 Info.args = {
-  children:
-    "You are currently logged in from Moonbase Alpha-6, located on Luna.",
+  children: "You're signed in from Moonbase Alpha-6, located on Luna.",
   severity: "info",
-  title: "Moonbase Alpha-6",
 };
 
 export const Error = DefaultTemplate.bind({});
 Error.args = {
   children:
-    "An issue has been discovered with your fuel mixture ratios. Please reconfigure your fuel mixture and perform safety checks again.",
+    "Reconfigure the fuel mixture ratios and perform safety checks again.",
   role: "alert",
   severity: "error",
-  title: "Safety checks have failed",
+  title: "Safety checks failed",
 };
 
 export const Warning = DefaultTemplate.bind({});
 Warning.args = {
   children:
-    "Safety checks must be completed before this mission can be approved for launch.",
+    "Complete all safety checks before requesting approval to launch your mission.",
   role: "status",
   severity: "warning",
   title: "Safety checks incomplete",
@@ -84,35 +82,26 @@ Warning.args = {
 
 export const Success = DefaultTemplate.bind({});
 Success.args = {
-  children:
-    "Safety checks are complete, and this mission has been approved for launch.",
+  children: "Safety checks are complete. Your mission is ready for liftoff.",
   role: "status",
   severity: "success",
-  title: "Ready for lift-off",
-};
-
-export const BodyOnly = DefaultTemplate.bind({});
-BodyOnly.args = {
-  children:
-    "You are currently logged in from Moonbase Alpha-6, located on Luna.",
-  severity: "info",
-  title: null,
+  title: "Approved for launch",
 };
 
 export const InlineLink = DefaultTemplate.bind({});
 InlineLink.args = {
   children: (
     <>
-      An issue has been discovered with your fuel mixture ratios. Please{" "}
+      Your fuel mixture ratios need to be{" "}
       <Link href="#" variant="monochrome">
-        reconfigure your fuel mixture
-      </Link>{" "}
-      and perform safety checks again.
+        reconfigured
+      </Link>
+      . Then, rerun all safety checks.
     </>
   ),
   role: "alert",
   severity: "error",
-  title: "Safety checks have failed",
+  title: "Safety checks failed",
 };
 
 export const BlockLink = DefaultTemplate.bind({});
@@ -120,8 +109,8 @@ BlockLink.args = {
   children: (
     <>
       <Typography paragraph>
-        An issue has been discovered with your fuel mixture ratios. Please
-        reconfigure your fuel mixture and perform safety checks again.
+        There is an issue with the fuel mixture ratios. Reconfigure the fuel
+        mixture and perform the safety checks again.
       </Typography>
 
       <Link href="#" variant="monochrome">
@@ -131,5 +120,5 @@ BlockLink.args = {
   ),
   role: "alert",
   severity: "error",
-  title: "Safety checks have failed",
+  title: "Safety checks failed",
 };
