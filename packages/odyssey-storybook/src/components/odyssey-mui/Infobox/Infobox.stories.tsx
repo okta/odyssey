@@ -88,22 +88,6 @@ Success.args = {
   title: "Approved for launch",
 };
 
-export const InlineLink = DefaultTemplate.bind({});
-InlineLink.args = {
-  children: (
-    <>
-      Your fuel mixture ratios need to be{" "}
-      <Link href="#" variant="monochrome">
-        reconfigured
-      </Link>
-      . Then, rerun all safety checks.
-    </>
-  ),
-  role: "alert",
-  severity: "error",
-  title: "Safety checks failed",
-};
-
 export const BlockLink = DefaultTemplate.bind({});
 BlockLink.args = {
   children: (
