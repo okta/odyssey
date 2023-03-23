@@ -12,17 +12,17 @@
 
 import { Meta, Story } from "@storybook/react";
 import {
+  CalendarIcon,
   Divider,
+  GlobeIcon,
   ListItemIcon,
   ListItemText,
   ListSubheader,
   MenuButton,
   MenuButtonProps,
   MenuItem,
-  UserGroupIcon,
-  GlobeIcon,
-  CalendarIcon,
   OverflowVerticalIcon,
+  UserGroupIcon,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -50,6 +50,10 @@ const storybookMeta: Meta<MenuButtonProps> = {
       defaultValue: undefined,
     },
     buttonVariant: {
+      control: "text",
+      defaultValue: undefined,
+    },
+    tooltipTitle: {
       control: "text",
       defaultValue: undefined,
     },
@@ -116,7 +120,7 @@ Groupings.args = {
     <MenuItem>Configure thrusters</MenuItem>,
     <MenuItem>View cargo</MenuItem>,
     <Divider />,
-    <MenuItem>Logout</MenuItem>,
+    <MenuItem>Log out</MenuItem>,
   ],
 };
 
@@ -137,6 +141,7 @@ IconButton.args = {
     <MenuItem>Edit configuration</MenuItem>,
     <MenuItem>Launch</MenuItem>,
   ],
-  buttonLabel: "",
+  buttonLabel: undefined,
   buttonEndIcon: <OverflowVerticalIcon />,
+  tooltipTitle: "More actions",
 };
