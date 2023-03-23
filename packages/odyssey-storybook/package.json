@@ -11,7 +11,7 @@
     "directory": "packages/odyssey-storybook"
   },
   "devDependencies": {
-    "@applitools/eyes-storybook": "^3.31.2",
+    "@applitools/eyes-storybook": "^3.31.4",
     "@babel/core": "^7.19.3",
     "@okta/odyssey-babel-loader": "workspace:*",
     "@okta/odyssey-design-tokens": "workspace:*",

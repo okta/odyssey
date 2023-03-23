@@ -44,5 +44,11 @@
     "stylelint": "^14.13.0"
   },
   "version": "0.5.0",
+  "resolutions": {
+    "@applitools/execution-grid-tunnel/fastify": "4.8.1",
+    "html-webpack-plugin/loader-utils": "2.0.4",
+    "css-loader/loader-utils": "2.0.4",
+    "webpack/loader-utils": "2.0.4"
+  },
   "packageManager": "yarn@3.4.1"
 }
