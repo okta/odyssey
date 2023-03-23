@@ -386,11 +386,11 @@ export const components: ThemeOptions["components"] = {
       root: ({ theme }) => ({
         width: theme.spacing(4),
         height: theme.spacing(4),
-        padding: 0,
         borderRadius: theme.spacing(1),
         borderWidth: "1px",
         borderStyle: "solid",
         borderColor: theme.palette.grey[500],
+        padding: 0,
 
         ".MuiSvgIcon-root": {
           color: theme.palette.common.white,
@@ -1438,12 +1438,13 @@ export const components: ThemeOptions["components"] = {
     },
     styleOverrides: {
       root: ({ theme }) => ({
-        width: theme.spacing(4),
-        height: theme.spacing(4),
-        borderRadius: theme.spacing(4),
-        borderWidth: "1px",
-        borderStyle: "solid",
+        width: `${theme.typography.body1.lineHeight}em`,
+        height: `${theme.typography.body1.lineHeight}em`,
+        borderRadius: `${theme.typography.body1.lineHeight}em`,
+        borderWidth: theme.mixins.borderWidth,
+        borderStyle: theme.mixins.borderStyle,
         borderColor: theme.palette.grey[500],
+        padding: 0,
 
         ".MuiFormControlLabel-root:hover > &": {
           backgroundColor: "transparent",
@@ -1453,7 +1454,6 @@ export const components: ThemeOptions["components"] = {
           backgroundColor: "transparent",
           borderColor: theme.palette.error.dark,
         },
-        padding: 0,
         ".Mui-error > &": {
           borderColor: theme.palette.error.main,
           "&::before": {
@@ -1477,8 +1477,6 @@ export const components: ThemeOptions["components"] = {
             borderRadius: theme.spacing(2),
             backgroundColor: theme.palette.primary.main,
             position: "absolute",
-            top: theme.spacing(0.5),
-            left: theme.spacing(0.5),
           },
         },
         ".Mui-error > &.Mui-checked::before": {
