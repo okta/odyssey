@@ -18,6 +18,8 @@ import {
   ListSubheader,
   Menu,
   MenuItem,
+  Tooltip,
+  TooltipProps,
   useUniqueId,
 } from "./";
 import { memo, MouseEvent, ReactElement, useMemo, useState } from "react";
@@ -41,13 +43,23 @@ export interface MenuButtonProps {
    * The variant of the triggering Button
    */
   buttonVariant?: ButtonProps["variant"];
+  /**
+   * The title on the optional Tooltip
+   */
+  tooltipTitle?: string;
+  /**
+   * The title on the optional Tooltip
+   */
+  tooltipPlacement?: TooltipProps["placement"];
 }
 
 const MenuButton = ({
-  buttonLabel = "",
+  buttonLabel,
   children,
   buttonEndIcon = <ChevronDownIcon />,
   buttonVariant = "secondary",
+  tooltipPlacement,
+  tooltipTitle,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -68,28 +80,47 @@ const MenuButton = ({
     [uniqueId]
   );
 
+  const triggerButton = (
+    <Button
+      endIcon={buttonEndIcon}
+      id={`${uniqueId}-button`}
+      aria-controls={open ? `${uniqueId}-menu` : undefined}
+      aria-haspopup="true"
+      aria-expanded={open ? "true" : undefined}
+      onClick={handleClick}
+      variant={buttonVariant}
+    >
+      {buttonLabel}
+    </Button>
+  );
+
+  const menu = (
+    <Menu
+      id={`${uniqueId}-menu`}
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleClose}
+      MenuListProps={menuListProps}
+    >
+      {children}
+    </Menu>
+  );
+
+  if (tooltipTitle) {
+    return (
+      <div>
+        <Tooltip title={tooltipTitle} placement={tooltipPlacement}>
+          {triggerButton}
+        </Tooltip>
+        {menu}
+      </div>
+    );
+  }
+
   return (
     <div>
-      <Button
-        endIcon={buttonEndIcon}
-        id={`${uniqueId}-button`}
-        aria-controls={open ? `${uniqueId}-menu` : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        variant={buttonVariant}
-      >
-        {buttonLabel}
-      </Button>
-      <Menu
-        id={`${uniqueId}-menu`}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={menuListProps}
-      >
-        {children}
-      </Menu>
+      {triggerButton}
+      {menu}
     </div>
   );
 };
