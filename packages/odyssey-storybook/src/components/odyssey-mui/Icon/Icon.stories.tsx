@@ -32,7 +32,7 @@ export default {
 };
 
 const Template: Story = ({ ...args }) => (
-  <Icon name={args.name} titleAccess={args.title} />
+  <Icon name={args.name} titleAccess={args.title} size={args.size} />
 );
 
 export const Default = Template.bind({});
@@ -45,6 +45,11 @@ Default.argTypes = {
   title: {
     defaultValue: "Caution",
     control: { type: "text" },
+  },
+  size: {
+    defaultValue: "medium",
+    control: { type: "radio" },
+    options: ["small", "medium", "large"],
   },
 };
 

@@ -14,11 +14,16 @@ import { forwardRef } from "react";
 import type { SvgIconNoChildrenProps } from "./iconDictionary/types";
 import { iconDictionary } from "./iconDictionary";
 
-export interface IconProps extends SvgIconNoChildrenProps {
+export interface IconProps extends Omit<SvgIconNoChildrenProps, "fontSize"> {
   /**
    * Name of the icon to render
    */
   name: keyof typeof iconDictionary;
+
+  /**
+   * Size of the icon
+   */
+  size?: "small" | "medium" | "large";
 }
 
 /**
@@ -28,12 +33,24 @@ export interface IconProps extends SvgIconNoChildrenProps {
  * icon component imports where possible to keep your bundle size smaller.
  */
 export const Icon = forwardRef<SVGSVGElement, IconProps>(
-  ({ name, titleAccess, ...rest }, ref) => {
+  (
+    { name, size = "medium", className, titleAccess, ...rest }: IconProps,
+    ref
+  ) => {
     if (!(name in iconDictionary)) return null;
 
     const NamedIcon = iconDictionary[name];
 
-    return <NamedIcon titleAccess={titleAccess} ref={ref} {...rest} />;
+    return (
+      <NamedIcon
+        className={`icon ${
+          size ? `Icon-size${size.charAt(0).toUpperCase() + size.slice(1)}` : ""
+        } ${className || ""}`}
+        titleAccess={titleAccess}
+        ref={ref}
+        {...rest}
+      />
+    );
   }
 );
 
