@@ -188,7 +188,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         <InputBase
           autoComplete={autoCompleteType}
           endAdornment={
-            inputType === "password" ? (
+            type === "password" ? (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
