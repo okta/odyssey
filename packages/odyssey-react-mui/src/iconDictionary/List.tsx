@@ -16,9 +16,9 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type SearchIconProps = SvgIconNoChildrenProps;
+export type ListIconProps = SvgIconNoChildrenProps;
 
-export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
+export const ListIcon = forwardRef<SVGSVGElement, ListIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
@@ -32,7 +32,7 @@ export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
-            d="M1 6.5C1 3.46243 3.46243 1 6.5 1C9.53757 1 12 3.46243 12 6.5C12 9.53757 9.53757 12 6.5 12C3.46243 12 1 9.53757 1 6.5ZM6.5 0C2.91015 0 0 2.91015 0 6.5C0 10.0899 2.91015 13 6.5 13C7.59815 13 8.63269 12.7277 9.53978 12.2469L12.6464 15.3536C13.394 16.1011 14.606 16.1011 15.3536 15.3536C16.1011 14.606 16.1011 13.394 15.3536 12.6464L12.2469 9.53978C12.7277 8.63269 13 7.59815 13 6.5C13 2.91015 10.0899 0 6.5 0ZM11.6972 10.4043C11.3291 10.8935 10.8935 11.3291 10.4043 11.6972L13.3536 14.6464C13.7106 15.0035 14.2894 15.0035 14.6464 14.6464C15.0035 14.2894 15.0035 13.7106 14.6464 13.3536L11.6972 10.4043Z"
+            d="M0.5 2H0V2.5V4.5V5H0.5H2.5H3V4.5V2.5V2H2.5H0.5ZM1 4V3H2V4H1ZM0.5 6.5H0V7V9V9.5H0.5H2.5H3V9V7V6.5H2.5H0.5ZM1 8.5V7.5H2V8.5H1ZM0 11H0.5H2.5H3V11.5V13.5V14H2.5H0.5H0V13.5V11.5V11ZM1 12V13H2V12H1ZM4 4H16V3H4V4ZM16 13H4V12H16V13ZM4 8.5H16V7.5H4V8.5Z"
             fill="currentColor"
           />
         </>
@@ -41,4 +41,4 @@ export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
   }
 );
 
-SearchIcon.displayName = "SearchIcon";
+ListIcon.displayName = "ListIcon";

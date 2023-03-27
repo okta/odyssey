@@ -45,8 +45,17 @@ export * from "./ArrowUpDown";
 import { ArrowUpIcon } from "./ArrowUp";
 export * from "./ArrowUp";
 
+import { BugIcon } from "./Bug";
+export * from "./Bug";
+
 import { CalendarIcon } from "./Calendar";
 export * from "./Calendar";
+
+import { CallIcon } from "./Call";
+export * from "./Call";
+
+import { ChatIcon } from "./Chat";
+export * from "./Chat";
 
 import { CheckCircleFilledIcon } from "./CheckCircleFilled";
 export * from "./CheckCircleFilled";
@@ -60,6 +69,9 @@ export * from "./ChevronDown";
 import { ChevronUpIcon } from "./ChevronUp";
 export * from "./ChevronUp";
 
+import { ClockIcon } from "./Clock";
+export * from "./Clock";
+
 import { CloseCircleFilledIcon } from "./CloseCircleFilled";
 export * from "./CloseCircleFilled";
 
@@ -69,8 +81,23 @@ export * from "./Close";
 import { CopyIcon } from "./Copy";
 export * from "./Copy";
 
+import { CollapseLeftIcon } from "./CollapseLeft";
+export * from "./CollapseLeft";
+
+import { CollapseRightIcon } from "./CollapseRight";
+export * from "./CollapseRight";
+
 import { DeleteIcon } from "./Delete";
 export * from "./Delete";
+
+import { DenyIcon } from "./Deny";
+export * from "./Deny";
+
+import { DevicesIcon } from "./Devices";
+export * from "./Devices";
+
+import { DocumentationIcon } from "./Documentation";
+export * from "./Documentation";
 
 import { DownloadIcon } from "./Download";
 export * from "./Download";
@@ -80,6 +107,12 @@ export * from "./DragHandle";
 
 import { EditIcon } from "./Edit";
 export * from "./Edit";
+
+import { ExpandLeftIcon } from "./ExpandLeft";
+export * from "./ExpandLeft";
+
+import { ExpandRightIcon } from "./ExpandRight";
+export * from "./ExpandRight";
 
 import { ExternalLinkIcon } from "./ExternalLink";
 export * from "./ExternalLink";
@@ -93,8 +126,14 @@ export * from "./Eye";
 import { FilterIcon } from "./Filter";
 export * from "./Filter";
 
+import { FolderIcon } from "./Folder";
+export * from "./Folder";
+
 import { GlobeIcon } from "./Globe";
 export * from "./Globe";
+
+import { GridIcon } from "./Grid";
+export * from "./Grid";
 
 import { HomeIcon } from "./Home";
 export * from "./Home";
@@ -105,11 +144,23 @@ export * from "./InformationCircleFilled";
 import { InformationCircleIcon } from "./InformationCircle";
 export * from "./InformationCircle";
 
+import { LinkIcon } from "./Link";
+export * from "./Link";
+
+import { ListIcon } from "./List";
+export * from "./List";
+
+import { LockIcon } from "./Lock";
+export * from "./Lock";
+
 import { NotificationIcon } from "./Notification";
 export * from "./Notification";
 
 import { OverflowVerticalIcon } from "./OverflowVertical";
 export * from "./OverflowVertical";
+
+import { PauseIcon } from "./Pause";
+export * from "./Pause";
 
 import { QuestionCircleFilledIcon } from "./QuestionCircleFilled";
 export * from "./QuestionCircleFilled";
@@ -117,8 +168,20 @@ export * from "./QuestionCircleFilled";
 import { QuestionCircleIcon } from "./QuestionCircle";
 export * from "./QuestionCircle";
 
+import { RefreshIcon } from "./Refresh";
+export * from "./Refresh";
+
+import { ResetIcon } from "./Reset";
+export * from "./Reset";
+
+import { ResumeIcon } from "./Resume";
+export * from "./Resume";
+
 import { SearchIcon } from "./Search";
 export * from "./Search";
+
+import { ServerIcon } from "./Server";
+export * from "./Server";
 
 import { SettingsIcon } from "./Settings";
 export * from "./Settings";
@@ -126,11 +189,26 @@ export * from "./Settings";
 import { SubtractIcon } from "./Subtract";
 export * from "./Subtract";
 
+import { SyncIcon } from "./Sync";
+export * from "./Sync";
+
+import { UnlockIcon } from "./Unlock";
+export * from "./Unlock";
+
+import { UploadIcon } from "./Upload";
+export * from "./Upload";
+
 import { UserGroupIcon } from "./UserGroup";
 export * from "./UserGroup";
 
 import { UserIcon } from "./User";
 export * from "./User";
+
+import { VideoIcon } from "./Video";
+export * from "./Video";
+
+import { WarningIcon } from "./Warning";
+export * from "./Warning";
 
 export const iconDictionary = {
   "add-circle": AddCircleIcon,
@@ -144,33 +222,59 @@ export const iconDictionary = {
   "arrow-right": ArrowRightIcon,
   "arrow-up-down": ArrowUpDownIcon,
   "arrow-up": ArrowUpIcon,
+  bug: BugIcon,
   calendar: CalendarIcon,
+  call: CallIcon,
+  chat: ChatIcon,
   "check-circle-filled": CheckCircleFilledIcon,
   check: CheckIcon,
   "chevron-down": ChevronDownIcon,
   "chevron-up": ChevronUpIcon,
+  clock: ClockIcon,
   "close-circle-filled": CloseCircleFilledIcon,
   close: CloseIcon,
+  "collapse-left": CollapseLeftIcon,
+  "collapse-right": CollapseRightIcon,
   copy: CopyIcon,
   delete: DeleteIcon,
+  deny: DenyIcon,
+  devices: DevicesIcon,
+  documentation: DocumentationIcon,
   download: DownloadIcon,
   "drag-handle": DragHandleIcon,
   edit: EditIcon,
+  "expand-left": ExpandLeftIcon,
+  "expand-right": ExpandRightIcon,
   "external-link": ExternalLinkIcon,
   "eye-off": EyeOffIcon,
   eye: EyeIcon,
   filter: FilterIcon,
+  folder: FolderIcon,
   globe: GlobeIcon,
+  grid: GridIcon,
   home: HomeIcon,
   "information-circle-filled": InformationCircleFilledIcon,
   "information-circle": InformationCircleIcon,
+  link: LinkIcon,
+  list: ListIcon,
+  lock: LockIcon,
   notification: NotificationIcon,
   "overflow-vertical": OverflowVerticalIcon,
+  pause: PauseIcon,
   "question-circle-filled": QuestionCircleFilledIcon,
   "question-circle": QuestionCircleIcon,
+  refresh: RefreshIcon,
+  reset: ResetIcon,
+  resume: ResumeIcon,
   search: SearchIcon,
+  server: ServerIcon,
   settings: SettingsIcon,
   subtract: SubtractIcon,
+  sync: SyncIcon,
+  unlock: UnlockIcon,
+  upload: UploadIcon,
   "user-group": UserGroupIcon,
   user: UserIcon,
+  video: VideoIcon,
+  warning: WarningIcon,
 };

@@ -16,11 +16,11 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type InformationCircleIconProps = SvgIconNoChildrenProps;
+export type CollapseLeftIconProps = SvgIconNoChildrenProps;
 
-export const InformationCircleIcon = forwardRef<
+export const CollapseLeftIcon = forwardRef<
   SVGSVGElement,
-  InformationCircleIconProps
+  CollapseLeftIconProps
 >((props, ref) => {
   return (
     <SvgIcon
@@ -34,7 +34,7 @@ export const InformationCircleIcon = forwardRef<
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
-          d="M1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8ZM8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0ZM8 5.25C8.41421 5.25 8.75 4.91421 8.75 4.5C8.75 4.08579 8.41421 3.75 8 3.75C7.58579 3.75 7.25 4.08579 7.25 4.5C7.25 4.91421 7.58579 5.25 8 5.25ZM8 7C8.27614 7 8.5 7.22386 8.5 7.5V11.5V12H7.5V11.5V7.5C7.5 7.22386 7.72386 7 8 7Z"
+          d="M1 0V16H0V0H1ZM3.7854 7.5H16V8.5H3.7854L8.83786 13.1314L8.16214 13.8686L2.175 8.38037L2.16615 8.37214C2.16179 8.36802 2.15178 8.35845 2.14006 8.34573C2.11758 8.32133 2.06515 8.26065 2.03257 8.166C1.99554 8.05843 1.99554 7.94157 2.03257 7.834C2.06515 7.73935 2.11758 7.67867 2.14006 7.65427C2.15178 7.64155 2.16179 7.63198 2.16615 7.62786L2.175 7.61963L8.16214 2.13142L8.83786 2.86858L3.7854 7.5ZM2.85186 8.35575L2.85073 8.35678C2.84923 8.35816 2.84851 8.35884 2.84842 8.35893C2.8483 8.35906 2.8496 8.35789 2.85186 8.35575ZM2.85185 7.64425L2.85073 7.64322C2.847 7.6398 2.84808 7.64068 2.85185 7.64425Z"
           fill="currentColor"
         />
       </>
@@ -42,4 +42,4 @@ export const InformationCircleIcon = forwardRef<
   );
 });
 
-InformationCircleIcon.displayName = "InformationCircleIcon";
+CollapseLeftIcon.displayName = "CollapseLeftIcon";

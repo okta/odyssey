@@ -16,9 +16,9 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type SearchIconProps = SvgIconNoChildrenProps;
+export type ClockIconProps = SvgIconNoChildrenProps;
 
-export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
+export const ClockIcon = forwardRef<SVGSVGElement, ClockIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
@@ -32,7 +32,7 @@ export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
-            d="M1 6.5C1 3.46243 3.46243 1 6.5 1C9.53757 1 12 3.46243 12 6.5C12 9.53757 9.53757 12 6.5 12C3.46243 12 1 9.53757 1 6.5ZM6.5 0C2.91015 0 0 2.91015 0 6.5C0 10.0899 2.91015 13 6.5 13C7.59815 13 8.63269 12.7277 9.53978 12.2469L12.6464 15.3536C13.394 16.1011 14.606 16.1011 15.3536 15.3536C16.1011 14.606 16.1011 13.394 15.3536 12.6464L12.2469 9.53978C12.7277 8.63269 13 7.59815 13 6.5C13 2.91015 10.0899 0 6.5 0ZM11.6972 10.4043C11.3291 10.8935 10.8935 11.3291 10.4043 11.6972L13.3536 14.6464C13.7106 15.0035 14.2894 15.0035 14.6464 14.6464C15.0035 14.2894 15.0035 13.7106 14.6464 13.3536L11.6972 10.4043Z"
+            d="M1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8ZM8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0ZM7.5 4V6.1V6.12065C7.49999 6.52314 7.49999 6.85532 7.5221 7.12591C7.54506 7.40696 7.59434 7.66531 7.71799 7.90798C7.90973 8.28431 8.21569 8.59027 8.59202 8.78201C8.83469 8.90566 9.09304 8.95494 9.37409 8.9779C9.64469 9.00001 9.97687 9.00001 10.3794 9H10.4H12V8H10.4C9.97171 8 9.68056 7.99961 9.45552 7.98122C9.23631 7.96331 9.12421 7.93085 9.04601 7.89101C8.85785 7.79513 8.70487 7.64215 8.60899 7.45399C8.56915 7.37579 8.53669 7.26369 8.51878 7.04448C8.50039 6.81944 8.5 6.52829 8.5 6.1V4H7.5Z"
             fill="currentColor"
           />
         </>
@@ -41,4 +41,4 @@ export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
   }
 );
 
-SearchIcon.displayName = "SearchIcon";
+ClockIcon.displayName = "ClockIcon";

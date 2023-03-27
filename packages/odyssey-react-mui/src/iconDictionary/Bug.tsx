@@ -16,12 +16,9 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type InformationCircleIconProps = SvgIconNoChildrenProps;
+export type BugIconProps = SvgIconNoChildrenProps;
 
-export const InformationCircleIcon = forwardRef<
-  SVGSVGElement,
-  InformationCircleIconProps
->((props, ref) => {
+export const BugIcon = forwardRef<SVGSVGElement, BugIconProps>((props, ref) => {
   return (
     <SvgIcon
       viewBox="0 0 16 16"
@@ -34,7 +31,7 @@ export const InformationCircleIcon = forwardRef<
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
-          d="M1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8ZM8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0ZM8 5.25C8.41421 5.25 8.75 4.91421 8.75 4.5C8.75 4.08579 8.41421 3.75 8 3.75C7.58579 3.75 7.25 4.08579 7.25 4.5C7.25 4.91421 7.58579 5.25 8 5.25ZM8 7C8.27614 7 8.5 7.22386 8.5 7.5V11.5V12H7.5V11.5V7.5C7.5 7.22386 7.72386 7 8 7Z"
+          d="M4.53544 3C4.77806 1.30385 6.23676 0 8 0C9.76324 0 11.2219 1.30385 11.4646 3H12.5H13H16V4H13V8.04001L15.6581 8.92605L15.3419 9.87473L13 9.0941V10C13 10.9171 12.7531 11.7765 12.3221 12.5154L13.8536 14.0468L13.1464 14.7539L11.7264 13.3339C10.8108 14.3565 9.48058 15 8 15C6.51942 15 5.18915 14.3565 4.27363 13.3339L2.85355 14.7539L2.14645 14.0468L3.67787 12.5154C3.2469 11.7765 3 10.9171 3 10V9.0941L0.658114 9.87473L0.341886 8.92605L3 8.04001V4H0V3H3H3.5H4.53544ZM10.45 3C10.2184 1.85888 9.20948 1 8 1C6.79052 1 5.78164 1.85888 5.55001 3H10.45ZM7.5 4H4V10C4 12.0398 5.52684 13.723 7.5 13.9691V4ZM8.5 13.9691V4H12V10C12 12.0398 10.4732 13.723 8.5 13.9691Z"
           fill="currentColor"
         />
       </>
@@ -42,4 +39,4 @@ export const InformationCircleIcon = forwardRef<
   );
 });
 
-InformationCircleIcon.displayName = "InformationCircleIcon";
+BugIcon.displayName = "BugIcon";
