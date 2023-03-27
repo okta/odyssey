@@ -27,9 +27,6 @@ export * from "./AlertCircle";
 import { AlertTriangleFilledIcon } from "./AlertTriangleFilled";
 export * from "./AlertTriangleFilled";
 
-import { AnchorIcon } from "./Anchor";
-export * from "./Anchor";
-
 import { ArrowDownIcon } from "./ArrowDown";
 export * from "./ArrowDown";
 
@@ -183,9 +180,6 @@ export * from "./Search";
 import { ServerIcon } from "./Server";
 export * from "./Server";
 
-import { SettingsIcon } from "./Settings";
-export * from "./Settings";
-
 import { SubtractIcon } from "./Subtract";
 export * from "./Subtract";
 
@@ -216,7 +210,6 @@ export const iconDictionary = {
   "alert-circle-filled": AlertCircleFilledIcon,
   "alert-circle": AlertCircleIcon,
   "alert-triangle-filled": AlertTriangleFilledIcon,
-  anchor: AnchorIcon,
   "arrow-down": ArrowDownIcon,
   "arrow-left": ArrowLeftIcon,
   "arrow-right": ArrowRightIcon,
@@ -268,7 +261,6 @@ export const iconDictionary = {
   resume: ResumeIcon,
   search: SearchIcon,
   server: ServerIcon,
-  settings: SettingsIcon,
   subtract: SubtractIcon,
   sync: SyncIcon,
   unlock: UnlockIcon,

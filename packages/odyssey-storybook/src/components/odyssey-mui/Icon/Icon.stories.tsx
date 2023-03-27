@@ -70,10 +70,6 @@ const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
     use: "To indicate a crucial decision",
   },
   {
-    name: "anchor",
-    use: "UI indicator - element contains in page anchor link",
-  },
-  {
     name: "arrow-down",
     use: "",
   },
@@ -239,10 +235,6 @@ const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   {
     name: "server",
     use: "",
-  },
-  {
-    name: "settings",
-    use: "To edit user or app settings",
   },
   {
     name: "subtract",
