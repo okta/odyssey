@@ -1046,9 +1046,6 @@ export const components: ThemeOptions["components"] = {
     },
   },
   MuiInputAdornment: {
-    defaultProps: {
-      variant: "outlined",
-    },
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
         display: "flex",
