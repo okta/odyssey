@@ -35,6 +35,7 @@ import {
   CheckCircleFilledIcon,
   ChevronDownIcon,
   CloseCircleFilledIcon,
+  CloseIcon,
   InformationCircleFilledIcon,
 } from "../iconDictionary";
 
@@ -140,6 +141,26 @@ export const components: ThemeOptions["components"] = {
           marginBlockEnd: 0,
         },
       }),
+    },
+  },
+  MuiAutocomplete: {
+    defaultProps: {
+      autoHighlight: true,
+      autoSelect: false,
+      blurOnSelect: false,
+      clearIcon: <CloseIcon />,
+      clearOnEscape: true,
+      disableClearable: false,
+      disabledItemsFocusable: false,
+      disableListWrap: false,
+      disablePortal: false,
+      filterSelectedOptions: false,
+      fullWidth: false,
+      handleHomeEndKeys: true,
+      limitTags: -1,
+      openOnFocus: false,
+      popupIcon: <ChevronDownIcon />,
+      selectOnFocus: true,
     },
   },
   MuiBackdrop: {
