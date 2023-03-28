@@ -257,7 +257,7 @@ export const components: ThemeOptions["components"] = {
             borderColor: "transparent",
           },
           "&:disabled": {
-            backgroundColor: "rgba(235, 235, 237, 0.6)",
+            backgroundColor: "transparent",
             color: theme.palette.text.secondary,
             borderColor: "transparent",
           },
