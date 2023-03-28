@@ -12,7 +12,7 @@
 
 import { AlertColor } from "@mui/material";
 import { memo, ReactNode } from "react";
-import { Alert, AlertTitle } from ".";
+import { Alert, AlertTitle, visuallyHidden } from ".";
 
 export interface InfoboxProps {
   /**
@@ -37,6 +37,7 @@ export interface InfoboxProps {
 
 const Infobox = ({ children, severity, role, title }: InfoboxProps) => (
   <Alert role={role} severity={severity} variant="infobox">
+    <span style={visuallyHidden}>{severity}: </span>
     {title && <AlertTitle>{title}</AlertTitle>}
     {children}
   </Alert>
