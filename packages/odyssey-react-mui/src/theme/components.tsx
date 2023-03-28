@@ -171,10 +171,6 @@ export const components: ThemeOptions["components"] = {
             backgroundColor: theme.palette.primary.dark,
           },
 
-          "&:focus-visible": {
-            outlineColor: theme.palette.primary.main,
-          },
-
           "&:active": {
             backgroundColor: theme.palette.primary.main,
           },
@@ -195,10 +191,6 @@ export const components: ThemeOptions["components"] = {
             backgroundColor: theme.palette.primary.lighter,
             borderColor: theme.palette.primary.light,
             color: theme.palette.primary.main,
-          },
-
-          "&:focus-visible": {
-            outlineColor: theme.palette.primary.main,
           },
 
           "&:active": {
@@ -224,7 +216,7 @@ export const components: ThemeOptions["components"] = {
           },
 
           "&:focus-visible": {
-            outlineColor: theme.palette.error.main,
+            boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.error.main}`,
             backgroundColor: theme.palette.error.dark,
           },
 
@@ -248,9 +240,6 @@ export const components: ThemeOptions["components"] = {
           "&:hover, &:focus-visible": {
             backgroundColor: "rgba(29, 29, 33, 0.1)",
             borderColor: "transparent",
-          },
-          "&:focus-visible": {
-            outlineColor: theme.palette.primary.main,
           },
           "&:active": {
             backgroundColor: "rgba(29, 29, 33, 0.2)",
@@ -312,15 +301,12 @@ export const components: ThemeOptions["components"] = {
         position: "relative",
         marginBlock: "0",
         marginInline: "0",
-        transitionProperty:
-          "color, background-color, border-color, outline-offset, outline-color",
+        transitionProperty: "color, background-color, border-color, box-shadow",
         transitionDuration: "100ms",
         transitionTimingFunction: "linear",
         borderWidth: theme.mixins.borderWidth,
         borderStyle: theme.mixins.borderStyle,
         borderRadius: theme.mixins.borderRadius,
-        outlineColor: "transparent",
-        outlineOffset: "0",
         fontSize: theme.typography.body1.fontSize,
         lineHeight: theme.typography.ui.lineHeight,
         whiteSpace: "nowrap",
@@ -330,9 +316,9 @@ export const components: ThemeOptions["components"] = {
         },
 
         "&:focus-visible": {
-          outlineOffset: "2px",
-          outlineStyle: "solid",
-          outlineWidth: "2px",
+          boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.primary.main}`,
+          outline: "2px solid transparent",
+          outlineOffset: "1px",
         },
 
         "&:disabled": {
@@ -394,12 +380,6 @@ export const components: ThemeOptions["components"] = {
           "&:hover": {
             color: theme.palette.error.dark,
           },
-        },
-        "&.Mui-focusVisible": {
-          outlineColor: theme.palette.primary.main,
-          outlineOffset: 0,
-          outlineStyle: "solid",
-          outlineWidth: "2px",
         },
       }),
     },
@@ -1122,6 +1102,8 @@ export const components: ThemeOptions["components"] = {
         [`&.${inputBaseClasses.focused}`]: {
           borderColor: theme.palette.primary.main,
           boxShadow: `0 0 0 1px ${theme.palette.primary.main}`,
+          outline: "2px solid transparent",
+          outlineOffset: "1px",
         },
 
         [`&.${inputBaseClasses.error}`]: {
