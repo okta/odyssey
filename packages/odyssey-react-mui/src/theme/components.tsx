@@ -384,9 +384,9 @@ export const components: ThemeOptions["components"] = {
     },
     styleOverrides: {
       root: ({ theme }) => ({
-        width: theme.spacing(4),
-        height: theme.spacing(4),
-        borderRadius: theme.spacing(1),
+        width: `${theme.typography.h6.fontSize}`,
+        height: `${theme.typography.h6.fontSize}`,
+        borderRadius: theme.mixins.borderRadius,
         borderWidth: "1px",
         borderStyle: "solid",
         borderColor: theme.palette.grey[500],
@@ -1438,9 +1438,9 @@ export const components: ThemeOptions["components"] = {
     },
     styleOverrides: {
       root: ({ theme }) => ({
-        width: `${theme.typography.body1.lineHeight}em`,
-        height: `${theme.typography.body1.lineHeight}em`,
-        borderRadius: `${theme.typography.body1.lineHeight}em`,
+        width: `${theme.typography.h6.fontSize}`,
+        height: `${theme.typography.h6.fontSize}`,
+        borderRadius: `${theme.typography.h6.fontSize}`,
         borderWidth: theme.mixins.borderWidth,
         borderStyle: theme.mixins.borderStyle,
         borderColor: theme.palette.grey[500],
