@@ -1121,10 +1121,7 @@ export const components: ThemeOptions["components"] = {
 
         [`&.${inputBaseClasses.focused}`]: {
           borderColor: theme.palette.primary.main,
-          outlineColor: theme.palette.primary.main,
-          outlineOffset: 0,
-          outlineStyle: "solid",
-          outlineWidth: "1px",
+          boxShadow: `0 0 0 1px ${theme.palette.primary.main}`,
         },
 
         [`&.${inputBaseClasses.error}`]: {
@@ -1137,7 +1134,7 @@ export const components: ThemeOptions["components"] = {
 
         [`&.${inputBaseClasses.error}.${inputBaseClasses.focused}`]: {
           borderColor: theme.palette.error.main,
-          outlineColor: theme.palette.error.main,
+          boxShadow: `0 0 0 1px ${theme.palette.error.main}`,
         },
 
         [`&.${inputBaseClasses.disabled}`]: {
