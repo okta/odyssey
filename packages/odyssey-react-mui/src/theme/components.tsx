@@ -427,13 +427,16 @@ export const components: ThemeOptions["components"] = {
             backgroundColor: theme.palette.error.main,
             borderColor: theme.palette.error.main,
           },
+
+          "&.Mui-focusVisible": {
+            boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.error.main}`,
+          },
         },
         "&.Mui-focusVisible": {
           borderColor: theme.palette.grey[900],
-          outlineColor: theme.palette.primary.main,
-          outlineOffset: "2px",
-          outlineStyle: "solid",
-          outlineWidth: "2px",
+          boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.primary.main}`,
+          outline: "2px solid transparent",
+          outlineOffset: "1px",
         },
         "&.Mui-disabled": {
           backgroundColor: theme.palette.grey[50],
@@ -1459,13 +1462,16 @@ export const components: ThemeOptions["components"] = {
           "&::before": {
             backgroundColor: theme.palette.error.main,
           },
+
+          "&.Mui-focusVisible": {
+            boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.error.main}`,
+          },
         },
         "&.Mui-focusVisible": {
           borderColor: theme.palette.grey[900],
-          outlineColor: theme.palette.primary.main,
-          outlineOffset: "2px",
-          outlineStyle: "solid",
-          outlineWidth: "2px",
+          boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.primary.main}`,
+          outline: "2px solid transparent",
+          outlineOffset: "1px",
         },
         "&.Mui-checked": {
           position: "relative",
