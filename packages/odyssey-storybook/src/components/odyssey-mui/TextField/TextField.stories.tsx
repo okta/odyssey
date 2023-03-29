@@ -29,6 +29,10 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
       control: "text",
       defaultValue: "name",
     },
+    autoFocus: {
+      control: "boolean",
+      defaultValue: false,
+    },
     isDisabled: {
       control: "boolean",
       defaultValue: false,

@@ -163,3 +163,9 @@ Finally, Users with low digital literacy may not understand the purpose or behav
 ### Purpose
 
 When collecting an individual's personal data, you must define the input's purpose via the `autocomplete` attribute. This allows users to automate the filling of fields and ensures the purpose is known, regardless of the label. A complete list of fields this is required for may be found <a href="https://www.w3.org/TR/WCAG21/#input-purposes">in the WCAG spec</a>.
+
+### Autofocus
+
+Except for very specific cases, we advise against using the `autoFocus` prop; unless used considerately, the sense of focus being "teleported" to an unexpected part of the page can be jarring to users, especially those using screen readers.
+
+More details can be found [on MDN's `autofocus` page](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autofocus#accessibility_considerations).
