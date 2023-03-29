@@ -12,49 +12,44 @@
 
 import * as React from "react";
 import { Story } from "@storybook/react";
-import {
-  Alert,
-  AlertTitle,
-  Button,
-  CloseIcon,
-  Link,
-  Snackbar,
-  Stack,
-} from "@okta/odyssey-react-mui";
+import { Button, Snackbar, Stack, Toast } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import ToastMdx from "./Toast.mdx";
 
 export default {
   title: `MUI Components/Alerts/Toast`,
-  component: Alert,
+  component: Toast,
   parameters: {
     docs: {
       page: ToastMdx,
     },
   },
   argTypes: {
-    actionLink: {
+    linkText: {
       control: "text",
-      default: null,
     },
-    content: {
+    linkUrl: {
       control: "text",
-      defaultValue: "Mission to Sirius B scheduled for January 7, 2023",
     },
-    isDismissible: {
-      control: "boolean",
+    onClose: {
+      control: null,
+      type: { required: false, summary: "function" },
       defaultValue: null,
     },
     role: {
       control: "radio",
-      options: ["status", null],
+      options: ["alert", "status", null],
       defaultValue: null,
     },
     severity: {
       control: "radio",
       options: ["error", "info", "success", "warning"],
       defaultValue: "info",
+    },
+    text: {
+      control: "text",
+      defaultValue: "The mission to Sagittarius A is set for January 7.",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -78,28 +73,15 @@ const DefaultTemplate: Story = (args) => {
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar
           open={open}
-          autoHideDuration={args.isDismissible === true ? undefined : 6000}
+          autoHideDuration={args.onClose ? undefined : 6000}
           onClose={closeToast}
         >
-          <Alert
+          <Toast
             severity={args.severity}
-            variant="toast"
-            action={
-              args.isDismissible && (
-                <Button
-                  aria-label="close"
-                  onClick={closeToast}
-                  variant="floating"
-                  size="s"
-                >
-                  <CloseIcon fontSize="inherit" />
-                </Button>
-              )
-            }
-          >
-            <AlertTitle>{args.content}</AlertTitle>
-            {args.actionLink && args.actionLink}
-          </Alert>
+            text={args.text}
+            onClose={args.onClose}
+            {...args}
+          ></Toast>
         </Snackbar>
       </Stack>
     </>
@@ -107,25 +89,7 @@ const DefaultTemplate: Story = (args) => {
 };
 
 const StaticTemplate: Story = (args) => {
-  return (
-    <Alert
-      severity={args.severity}
-      variant="toast"
-      action={
-        args.isDismissible && (
-          <Button
-            aria-label="close"
-            variant="floating"
-            size="s"
-            startIcon={<CloseIcon />}
-          ></Button>
-        )
-      }
-    >
-      <AlertTitle>{args.content}</AlertTitle>
-      {args.actionLink && args.actionLink}
-    </Alert>
-  );
+  return <Toast severity={args.severity} text={args.text} {...args}></Toast>;
 };
 
 export const Info = DefaultTemplate.bind({});
@@ -136,62 +100,62 @@ InfoStatic.args = {};
 
 export const Error = DefaultTemplate.bind({});
 Error.args = {
-  content: "Security breach in Hangar 18",
+  text: "Security breach in Hangar 18",
   role: "alert",
   severity: "error",
 };
 
 export const ErrorStatic = StaticTemplate.bind({});
 ErrorStatic.args = {
-  content: "Security breach in Hangar 18",
+  text: "Security breach in Hangar 18",
   role: "alert",
   severity: "error",
 };
 
 export const Warning = DefaultTemplate.bind({});
 Warning.args = {
-  content: "Severe solar winds may delay local system flights",
+  text: "Severe solar winds may delay local system flights",
   role: "status",
   severity: "warning",
 };
 
 export const WarningStatic = StaticTemplate.bind({});
 WarningStatic.args = {
-  content: "Severe solar winds may delay local system flights",
+  text: "Severe solar winds may delay local system flights",
   role: "status",
   severity: "warning",
 };
 
 export const Success = DefaultTemplate.bind({});
 Success.args = {
-  content: "Docking completed",
+  text: "Docking completed",
   role: "status",
   severity: "success",
 };
 
 export const SuccessStatic = StaticTemplate.bind({});
 SuccessStatic.args = {
-  content: "Docking completed",
+  text: "Docking completed",
   role: "status",
   severity: "success",
 };
 
 export const Dismissible = DefaultTemplate.bind({});
 Dismissible.args = {
-  actionLink: (
-    <Link href="#anchor" variant="monochrome">
-      View report
-    </Link>
-  ),
   isDismissible: true,
+  linkText: "View report",
+  linkUrl: "#",
+  onClose: () => {
+    return true;
+  },
 };
 
 export const DismissibleStatic = StaticTemplate.bind({});
 DismissibleStatic.args = {
-  actionLink: (
-    <Link href="#anchor" variant="monochrome">
-      View report
-    </Link>
-  ),
   isDismissible: true,
+  linkText: "View report",
+  linkUrl: "#",
+  onClose: () => {
+    return true;
+  },
 };
