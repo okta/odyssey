@@ -43,6 +43,10 @@ import {
 
 export type TextFieldProps = {
   /**
+   * If `true`, the component will receive focus automatically.
+   */
+  autoFocus?: boolean;
+  /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
@@ -126,6 +130,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
       autoCompleteType,
+      autoFocus,
       endAdornment,
       errorMessage,
       hint,
@@ -187,6 +192,8 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         {hint && <FormHelperText id={hintId}>{hint}</FormHelperText>}
         <InputBase
           autoComplete={autoCompleteType}
+          /* eslint-disable-next-line jsx-a11y/no-autofocus */
+          autoFocus={autoFocus}
           endAdornment={
             type === "password" ? (
               <InputAdornment position="end">
