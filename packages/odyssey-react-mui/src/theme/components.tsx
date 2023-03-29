@@ -709,7 +709,7 @@ export const components: ThemeOptions["components"] = {
           },
         },
 
-        p: {
+        "p:not([class])": {
           maxWidth: theme.mixins.maxWidth,
           marginBlockStart: 0,
           marginBlockEnd: theme.spacing(4),
@@ -974,14 +974,14 @@ export const components: ThemeOptions["components"] = {
       root: ({ theme }) => ({
         fontSize: theme.typography.subtitle1.fontSize,
         lineHeight: "1.33333333",
-        marginTop: theme.spacing(2),
+        marginBlockStart: theme.spacing(2),
         ".MuiFormLabel-root + &": {
-          marginTop: `-${theme.spacing(1)}`,
+          marginBlockStart: `-${theme.spacing(1)}`,
           color: theme.palette.text.secondary,
         },
-        marginBottom: theme.spacing(2),
+        marginBlockEnd: theme.spacing(2),
         "&:last-child": {
-          marginBottom: 0,
+          marginBlockEnd: 0,
         },
         textAlign: "start",
       }),
