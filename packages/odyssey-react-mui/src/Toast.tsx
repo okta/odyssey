@@ -12,7 +12,7 @@
 
 import { AlertColor, AlertProps } from "@mui/material";
 import { memo, forwardRef, ForwardedRef } from "react";
-import { Alert, AlertTitle, Button, CloseIcon, Link } from ".";
+import { Alert, AlertTitle, Button, CloseIcon, Link, visuallyHidden } from ".";
 
 export interface ToastProps {
   /**
@@ -69,7 +69,10 @@ const Toast = forwardRef(
       severity={severity}
       variant="toast"
     >
-      <AlertTitle>{text}</AlertTitle>
+      <AlertTitle>
+        <span style={visuallyHidden}>{severity}:</span>
+        {text}
+      </AlertTitle>
       {linkUrl && (
         <Link href={linkUrl} variant="monochrome">
           {linkText}
