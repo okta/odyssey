@@ -14,71 +14,6 @@ Examples of MUI's variant behaviors to help us decide and style our own offering
 
 Note, some of these behaviors may currently be broken or have unsuitable UI.
 
-### autoHighlight
-
-If `true`, the first option is automatically highlighted.
-
-Default: `true`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--auto-highlight" />
-</Canvas>
-
-### autoSelect
-
-If `true`, the selected option becomes the value of the input when the Autocomplete loses focus unless the user chooses a different option or changes the character string in the input.
-
-Default: `false`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--auto-select" />
-</Canvas>
-
-### blurOnSelect
-
-Control if the input should be blurred when an option is selected:
-
-- `false` the input is not blurred.
-- `true` the input is always blurred.
-- `touch` the input is blurred after a touch event.
-- `mouse` the input is blurred after a mouse event.
-
-Default: `false`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--blur-on-select" />
-</Canvas>
-
-### clearOnBlur
-
-If `true`, the input's text is cleared on blur if no value is selected. Set to `true` if you want to help the user enter a new value. Set to `false` if you want to help the user resume their search.
-
-Default: `!props.freeSolo`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--clear-on-blur" />
-</Canvas>
-
-### clearOnEscape
-
-If `true`, clear all values when the user presses escape _and_ the popup is closed.
-
-Default: `true`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--clear-on-escape" />
-</Canvas>
-
-### disableCloseOnSelect
-
-If `true`, the popup won't close when a value is selected.
-
-Default: `props.multiple`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--disable-close-on-select" />
-</Canvas>
-
 ### disabled
 
 If `true`, the component is disabled.
@@ -87,16 +22,6 @@ Default: `false`
 
 <Canvas>
   <Story id="mui-components-forms-autocomplete--disabled" />
-</Canvas>
-
-### fitlerSelectedOptions
-
-If `true`, hide the selected options from the list box.
-
-Default: `false`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--filter-selected-options" />
 </Canvas>
 
 ### freeSolo
@@ -109,26 +34,6 @@ Default: `false`
   <Story id="mui-components-forms-autocomplete--free-solo" />
 </Canvas>
 
-### fullWidth
-
-If `true`, the input will take up the full width of its container.
-
-Default: `false`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--full-width" />
-</Canvas>
-
-### handleHomeEndKeys
-
-If `true`, the component handles the <kbd>Home</kbd> and <kbd>End</kbd> keys when the popup is open. It should move focus to the first option and last option, respectively.
-
-Default: `true`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--handle-home-end-keys" />
-</Canvas>
-
 ### includeInputInList
 
 If `true`, the highlight can move to the input.
@@ -137,16 +42,6 @@ Default: `false`
 
 <Canvas>
   <Story id="mui-components-forms-autocomplete--include-input-in-list" />
-</Canvas>
-
-### limitTags
-
-The maximum number of tags that will be visible when not focused. Set `-1` to disable the limit.
-
-Default: `-1`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--limit-tags" />
 </Canvas>
 
 ### loading
@@ -169,16 +64,6 @@ Default: `false`
   <Story id="mui-components-forms-autocomplete--multiple" />
 </Canvas>
 
-### openOnFocus
-
-If `true`, the popup will open on input focus.
-
-Default: `false`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--open-on-focus" />
-</Canvas>
-
 ### readOnly
 
 If `true`, the component becomes readonly. It is also supported for multiple tags where the tag cannot be deleted.
@@ -187,16 +72,6 @@ Default: `false`
 
 <Canvas>
   <Story id="mui-components-forms-autocomplete--read-only" />
-</Canvas>
-
-### selectOnFocus
-
-If `true`, the input's text is selected on focus. It helps the user clear the selected value.
-
-Default: `true`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--select-on-focus" />
 </Canvas>
 
 ## MUI TextField
