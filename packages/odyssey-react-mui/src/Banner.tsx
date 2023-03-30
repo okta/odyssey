@@ -12,7 +12,7 @@
 
 import { AlertColor, AlertProps } from "@mui/material";
 import { memo } from "react";
-import { Alert, Link } from "./";
+import { Alert, Link, visuallyHidden } from "./";
 
 export interface BannerProps {
   /**
@@ -55,6 +55,7 @@ const Banner = ({
   text,
 }: BannerProps) => (
   <Alert onClose={onClose} role={role} severity={severity} variant="banner">
+    <span style={visuallyHidden}>{severity}:</span>
     {text}
     {linkUrl && (
       <Link href={linkUrl} variant="monochrome">

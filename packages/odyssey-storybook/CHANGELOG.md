@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.2](https://github.com/okta/odyssey/compare/v0.21.1...v0.21.2) (2023-03-30)
+
+### Features
+
+- add missing autoFocus from TextField ([d01dcd4](https://github.com/okta/odyssey/commit/d01dcd4120017d16677ae870c3d1e0f7d1b13b47))
+
 ## [0.21.1](https://github.com/okta/odyssey/compare/v0.21.0...v0.21.1) (2023-03-16)
 
 ### Features
