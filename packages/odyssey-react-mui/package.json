@@ -10,8 +10,8 @@
   "types": "dist/src/index.d.ts",
   "exports": {
     ".": {
-      "default": "./dist/index.js",
-      "types": "./dist/src/index.d.ts"
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
   "repository": {
