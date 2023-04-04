@@ -40,8 +40,7 @@ export default {
     },
     content: {
       control: "text",
-      defaultValue:
-        "The mission to Sagitarius A has been scheduled for January 7.",
+      defaultValue: "Mission to Sirius B scheduled for January 7, 2023",
     },
     isDismissible: {
       control: "boolean",
@@ -137,42 +136,42 @@ InfoStatic.args = {};
 
 export const Error = DefaultTemplate.bind({});
 Error.args = {
-  content: "Hangar 18 has been compromised.",
+  content: "Security breach in Hangar 18",
   role: "alert",
   severity: "error",
 };
 
 export const ErrorStatic = StaticTemplate.bind({});
 ErrorStatic.args = {
-  content: "Hangar 18 has been compromised.",
+  content: "Security breach in Hangar 18",
   role: "alert",
   severity: "error",
 };
 
 export const Warning = DefaultTemplate.bind({});
 Warning.args = {
-  content: "Severe solar winds detected. Local system flights may be delayed.",
+  content: "Severe solar winds may delay local system flights",
   role: "status",
   severity: "warning",
 };
 
 export const WarningStatic = StaticTemplate.bind({});
 WarningStatic.args = {
-  content: "Severe solar winds detected. Local system flights may be delayed.",
+  content: "Severe solar winds may delay local system flights",
   role: "status",
   severity: "warning",
 };
 
 export const Success = DefaultTemplate.bind({});
 Success.args = {
-  content: "Docking completed successfully.",
+  content: "Docking completed",
   role: "status",
   severity: "success",
 };
 
 export const SuccessStatic = StaticTemplate.bind({});
 SuccessStatic.args = {
-  content: "Docking completed successfully.",
+  content: "Docking completed",
   role: "status",
   severity: "success",
 };

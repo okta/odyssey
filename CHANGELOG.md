@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.2](https://github.com/okta/odyssey/compare/v0.21.1...v0.21.2) (2023-03-30)
+
+### Features
+
+- add context to Banner and Infobox ([18b277c](https://github.com/okta/odyssey/commit/18b277c949065ad659508a75e04125637bc5308c))
+- add missing autoFocus from TextField ([d01dcd4](https://github.com/okta/odyssey/commit/d01dcd4120017d16677ae870c3d1e0f7d1b13b47))
+
+### Bug Fixes
+
+- **odyssey-react-mui:** fix Button, Floating, Disabled bg color ([a9c332a](https://github.com/okta/odyssey/commit/a9c332a85e3b4162bf68837978028081ef2133f7))
+- **odyssey-react-mui:** fixes spacing for Hint/Error field helpers ([846134e](https://github.com/okta/odyssey/commit/846134efcdf9cd8c62932e5f849ee64b0b81e468))
+
+## [0.21.1](https://github.com/okta/odyssey/compare/v0.21.0...v0.21.1) (2023-03-16)
+
+### Features
+
+- **odyssey-react-mui:** add ability to have custom props on theme ([#1701](https://github.com/okta/odyssey/issues/1701)) ([52dd8f8](https://github.com/okta/odyssey/commit/52dd8f87411214ec5e3850a7372105460e2fd959))
+
+### Bug Fixes
+
+- added TypeScript project references for VSCode ([#1708](https://github.com/okta/odyssey/issues/1708)) ([44e2783](https://github.com/okta/odyssey/commit/44e2783b6a87bca49fb1d5bcffa45b22adc77bbc))
+
 ## [0.21.0](https://github.com/okta/odyssey/compare/v0.20.0...v0.21.0) (2023-03-09)
 
 ### Bug Fixes

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.2](https://github.com/okta/odyssey/compare/v0.21.1...v0.21.2) (2023-03-30)
+
+**Note:** Version bump only for package @okta/odyssey-typescript
+
+## [0.21.1](https://github.com/okta/odyssey/compare/v0.21.0...v0.21.1) (2023-03-16)
+
+### Bug Fixes
+
+- added TypeScript project references for VSCode ([#1708](https://github.com/okta/odyssey/issues/1708)) ([44e2783](https://github.com/okta/odyssey/commit/44e2783b6a87bca49fb1d5bcffa45b22adc77bbc))
+
 ## [0.21.0](https://github.com/okta/odyssey/compare/v0.20.0...v0.21.0) (2023-03-09)
 
 **Note:** Version bump only for package @okta/odyssey-typescript

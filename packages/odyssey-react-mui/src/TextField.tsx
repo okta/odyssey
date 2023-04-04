@@ -43,6 +43,10 @@ import {
 
 export type TextFieldProps = {
   /**
+   * If `true`, the component will receive focus automatically.
+   */
+  autoFocus?: boolean;
+  /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
@@ -89,6 +93,10 @@ export type TextFieldProps = {
    */
   label?: string;
   /**
+   * Callback fired when the `input` element loses focus.
+   */
+  onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  /**
    * Callback fired when the value is changed.
    */
   onChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
@@ -122,6 +130,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
       autoCompleteType,
+      autoFocus,
       endAdornment,
       errorMessage,
       hint,
@@ -134,6 +143,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       label,
       onChange,
       onFocus,
+      onBlur,
       optionalLabel,
       placeholder,
       startAdornment,
@@ -182,8 +192,10 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         {hint && <FormHelperText id={hintId}>{hint}</FormHelperText>}
         <InputBase
           autoComplete={autoCompleteType}
+          /* eslint-disable-next-line jsx-a11y/no-autofocus */
+          autoFocus={autoFocus}
           endAdornment={
-            inputType === "password" ? (
+            type === "password" ? (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
@@ -202,6 +214,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           multiline={isMultiline}
           onChange={onChange}
           onFocus={onFocus}
+          onBlur={onBlur}
           placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}

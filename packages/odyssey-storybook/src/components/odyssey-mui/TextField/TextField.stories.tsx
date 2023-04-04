@@ -29,6 +29,10 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
       control: "text",
       defaultValue: "name",
     },
+    autoFocus: {
+      control: "boolean",
+      defaultValue: false,
+    },
     isDisabled: {
       control: "boolean",
       defaultValue: false,
@@ -52,6 +56,9 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     isMultiline: {
       control: "boolean",
       defaultValue: false,
+    },
+    onBlur: {
+      control: "function",
     },
     onChange: {
       control: "function",
