@@ -9,6 +9,7 @@
   "main": "src/config.js",
   "dependencies": {
     "@babel/generator": "^7.19.0",
-    "@babel/types": "^7.19.0"
+    "@babel/types": "^7.19.0",
+    "@svgr/core": "^7.0.0"
   }
 }

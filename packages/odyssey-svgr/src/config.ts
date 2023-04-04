@@ -10,12 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
+import { Config } from "@svgr/core";
+
+const svgrConfig: Config = {
   ignoreExisting: true,
-  typescript: true,
+  indexTemplate: require("./indexTemplate.ts"),
   prettierConfig: {
     parser: "typescript",
   },
-  template: require("./icon-template.js"),
-  indexTemplate: require("./index-template.js"),
+  template: require("./iconTemplate.ts"),
+  typescript: true,
 };
+
+module.exports = svgrConfig

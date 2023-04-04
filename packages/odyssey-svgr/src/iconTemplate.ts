@@ -18,9 +18,9 @@ const {
 } = require("@babel/types");
 const headerComment = require("./header-comment");
 
-function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
+const odysseyIconTemplate = ({ componentName, jsx }: TemplateVariables, { tpl: template, options }) => {
   const plugins = ["jsx"];
-  if (opts.typescript) {
+  if (options.typescript) {
     plugins.push("typescript");
   }
   const typeScriptTpl = template.smart({ plugins, preserveComments: true });
