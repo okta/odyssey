@@ -387,8 +387,8 @@ export const components: ThemeOptions["components"] = {
         width: `${theme.typography.ui.lineHeight}em`,
         height: `${theme.typography.ui.lineHeight}em`,
         borderRadius: theme.mixins.borderRadius,
-        borderWidth: "1px",
-        borderStyle: "solid",
+        borderWidth: theme.mixins.borderWidth,
+        borderStyle: theme.mixins.borderStyle,
         borderColor: theme.palette.grey[500],
         padding: 0,
 
@@ -1478,9 +1478,9 @@ export const components: ThemeOptions["components"] = {
 
           "&::before": {
             content: "''",
-            width: theme.spacing(2),
-            height: theme.spacing(2),
-            borderRadius: theme.spacing(2),
+            width: "0.5em",
+            height: "0.5em",
+            borderRadius: "50%",
             backgroundColor: theme.palette.primary.main,
             position: "absolute",
           },
