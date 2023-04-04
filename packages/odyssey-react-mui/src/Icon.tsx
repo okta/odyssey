@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef } from "react";
 import type { SvgIconNoChildrenProps } from "./iconDictionary/types";
 import { iconDictionary } from "./iconDictionary";
 
@@ -23,7 +22,7 @@ export interface IconProps extends Omit<SvgIconNoChildrenProps, "fontSize"> {
   /**
    * Size of the icon
    */
-  size?: "small" | "medium" | "large";
+  size: "small" | "medium" | "large";
 }
 
 /**
@@ -32,26 +31,26 @@ export interface IconProps extends Omit<SvgIconNoChildrenProps, "fontSize"> {
  * This component includes all icon data as static imports. Favor individual
  * icon component imports where possible to keep your bundle size smaller.
  */
-export const Icon = forwardRef<SVGSVGElement, IconProps>(
-  (
-    { name, size = "medium", className, titleAccess, ...rest }: IconProps,
-    ref
-  ) => {
-    if (!(name in iconDictionary)) return null;
+export const Icon = ({
+  name,
+  size,
+  className,
+  titleAccess,
+  ...rest
+}: IconProps) => {
+  if (!(name in iconDictionary)) return null;
 
-    const NamedIcon = iconDictionary[name];
+  const NamedIcon = iconDictionary[name];
 
-    return (
-      <NamedIcon
-        className={`icon ${
-          size ? `Icon-size${size.charAt(0).toUpperCase() + size.slice(1)}` : ""
-        } ${className || ""}`}
-        titleAccess={titleAccess}
-        ref={ref}
-        {...rest}
-      />
-    );
-  }
-);
+  return (
+    <NamedIcon
+      className={`icon Icon-size${
+        size.charAt(0).toUpperCase() + size.slice(1)
+      }`}
+      titleAccess={titleAccess}
+      {...rest}
+    />
+  );
+};
 
 Icon.displayName = "Icon";

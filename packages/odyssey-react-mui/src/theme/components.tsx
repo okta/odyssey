@@ -1454,16 +1454,16 @@ export const components: ThemeOptions["components"] = {
         fontSize: `${theme.typography.ui.lineHeight}rem`,
 
         "&.Icon-sizeSmall": {
-          width: `${Number(theme.typography.ui.lineHeight) * 0.75}rem`,
           height: `${Number(theme.typography.ui.lineHeight) * 0.75}rem`,
+          width: `${Number(theme.typography.ui.lineHeight) * 0.75}rem`,
         },
         "&.Icon-sizeMedium": {
-          width: `${theme.typography.ui.lineHeight}rem`,
           height: `${theme.typography.ui.lineHeight}rem`,
+          width: `${theme.typography.ui.lineHeight}rem`,
         },
         "&.Icon-sizeLarge": {
-          width: `${Number(theme.typography.ui.lineHeight) * 1.25}rem`,
           height: `${Number(theme.typography.ui.lineHeight) * 1.25}rem`,
+          width: `${Number(theme.typography.ui.lineHeight) * 1.25}rem`,
         },
       }),
     },
