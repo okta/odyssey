@@ -380,8 +380,8 @@ export const components: ThemeOptions["components"] = {
 
         ".MuiSvgIcon-root": {
           color: theme.palette.common.white,
-          width: theme.spacing(3),
-          height: theme.spacing(3),
+          width: "0.5em",
+          height: "0.5em",
         },
 
         "&.Mui-checked": {
