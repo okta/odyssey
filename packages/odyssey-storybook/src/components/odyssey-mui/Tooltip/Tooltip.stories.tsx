@@ -64,11 +64,7 @@ Default.args = {
 
 export const Icon = Template.bind({});
 Icon.args = {
-  children: (
-    <Button variant="secondary">
-      <DownloadIcon />
-    </Button>
-  ),
+  children: <Button variant="secondary" startIcon={<DownloadIcon />} />,
   describeChild: false,
   placement: "top",
   title: "Download logs",
@@ -77,9 +73,7 @@ Icon.args = {
 export const Disabled = Template.bind({});
 Disabled.args = {
   children: (
-    <Button variant="secondary" disabled>
-      <DownloadIcon />
-    </Button>
+    <Button variant="secondary" disabled startIcon={<DownloadIcon />} />
   ),
   describeChild: true,
   placement: "top",
