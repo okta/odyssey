@@ -10,20 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputBase } from "@mui/material";
+import { InputAdornment, InputBase } from "@mui/material";
 import {
   ChangeEventHandler,
   FocusEventHandler,
   forwardRef,
   InputHTMLAttributes,
   memo,
-  ReactNode,
   useCallback,
 } from "react";
 
+import { SearchIcon } from "./";
 import { Field } from "./Field";
 
-export type TextFieldProps = {
+export type SearchFieldProps = {
   /**
    * If `true`, the component will receive focus automatically.
    */
@@ -34,10 +34,6 @@ export type TextFieldProps = {
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
-  /**
-   * End `InputAdornment` for this component.
-   */
-  endAdornment?: ReactNode;
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
@@ -55,19 +51,7 @@ export type TextFieldProps = {
    */
   isDisabled?: boolean;
   /**
-   * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
-   */
-  isMultiline?: boolean;
-  /**
-   * It prevents the user from changing the value of the field
-   */
-  isReadOnly?: boolean;
-  /**
-   * If `true`, the `input` element is required.
-   */
-  isRequired?: boolean;
-  /**
-   * The label for the `input` element.
+   * This label won't show up visually, but it's required for accessibility.
    */
   label: string;
   /**
@@ -83,48 +67,29 @@ export type TextFieldProps = {
    */
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
-   * The label for the `input` element if the it's not optional
-   */
-  optionalLabel?: string;
-  /**
    * The short hint displayed in the `input` before the user enters a value.
    */
   placeholder?: string;
-  /**
-   * Start `InputAdornment` for this component.
-   */
-  startAdornment?: ReactNode;
-  /**
-   * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
-   */
-  type?: string;
   /**
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
 };
 
-const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
       autoCompleteType,
       autoFocus,
-      endAdornment,
       errorMessage,
       hint,
       id: idOverride,
       isDisabled = false,
-      isMultiline = false,
-      isReadOnly,
-      isRequired = true,
       label,
-      onBlur,
       onChange,
       onFocus,
-      optionalLabel,
+      onBlur,
       placeholder,
-      startAdornment,
-      type = "text",
       value,
     },
     ref
@@ -136,33 +101,29 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={autoFocus}
-          endAdornment={endAdornment}
           id={id}
-          multiline={isMultiline}
-          onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
+          onBlur={onBlur}
           placeholder={placeholder}
-          readOnly={isReadOnly}
           ref={ref}
-          startAdornment={startAdornment}
-          type={type}
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
+          type="search"
           value={value}
         />
       ),
       [
         autoCompleteType,
         autoFocus,
-        endAdornment,
-        isMultiline,
         onChange,
         onFocus,
         onBlur,
         placeholder,
-        isReadOnly,
         ref,
-        startAdornment,
-        type,
         value,
       ]
     );
@@ -170,19 +131,17 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <Field
         errorMessage={errorMessage}
-        hasVisibleLabel
+        hasVisibleLabel={false}
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
-        isRequired={isRequired}
         label={label}
-        optionalLabel={optionalLabel}
         renderFieldComponent={renderFieldComponent}
       />
     );
   }
 );
 
-const MemoizedTextField = memo(TextField);
+const MemoizedSearchField = memo(SearchField);
 
-export { MemoizedTextField as TextField };
+export { MemoizedSearchField as SearchField };

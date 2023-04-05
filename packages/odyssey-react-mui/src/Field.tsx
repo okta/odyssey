@@ -10,20 +10,26 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputBase } from "@mui/material";
+import { InputBaseProps } from "@mui/material";
 import {
   ChangeEventHandler,
   FocusEventHandler,
-  forwardRef,
   InputHTMLAttributes,
   memo,
+  ReactElement,
   ReactNode,
-  useCallback,
+  useMemo,
 } from "react";
 
-import { Field } from "./Field";
+import {
+  FieldError,
+  FieldHint,
+  FieldLabel,
+  FormControl,
+  useUniqueId,
+} from "./";
 
-export type TextFieldProps = {
+export type FieldProps = {
   /**
    * If `true`, the component will receive focus automatically.
    */
@@ -42,6 +48,7 @@ export type TextFieldProps = {
    * If `error` is not undefined, the `input` will indicate an error.
    */
   errorMessage?: string;
+  hasVisibleLabel: boolean;
   /**
    * The helper text content.
    */
@@ -50,6 +57,10 @@ export type TextFieldProps = {
    * The id of the `input` element.
    */
   id?: string;
+  /**
+   * Props that go onto the HTML `input` element.
+   */
+  inputProps?: InputBaseProps["inputProps"];
   /**
    * If `true`, the component is disabled.
    */
@@ -90,6 +101,13 @@ export type TextFieldProps = {
    * The short hint displayed in the `input` before the user enters a value.
    */
   placeholder?: string;
+  renderFieldComponent: ({
+    ariaDescribedBy,
+    id,
+  }: {
+    ariaDescribedBy?: string;
+    id: string;
+  }) => ReactElement;
   /**
    * Start `InputAdornment` for this component.
    */
@@ -104,85 +122,50 @@ export type TextFieldProps = {
   value?: string;
 };
 
-const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  (
-    {
-      autoCompleteType,
-      autoFocus,
-      endAdornment,
-      errorMessage,
-      hint,
-      id: idOverride,
-      isDisabled = false,
-      isMultiline = false,
-      isReadOnly,
-      isRequired = true,
-      label,
-      onBlur,
-      onChange,
-      onFocus,
-      optionalLabel,
-      placeholder,
-      startAdornment,
-      type = "text",
-      value,
-    },
-    ref
-  ) => {
-    const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }) => (
-        <InputBase
-          aria-describedby={ariaDescribedBy}
-          autoComplete={autoCompleteType}
-          /* eslint-disable-next-line jsx-a11y/no-autofocus */
-          autoFocus={autoFocus}
-          endAdornment={endAdornment}
-          id={id}
-          multiline={isMultiline}
-          onBlur={onBlur}
-          onChange={onChange}
-          onFocus={onFocus}
-          placeholder={placeholder}
-          readOnly={isReadOnly}
-          ref={ref}
-          startAdornment={startAdornment}
-          type={type}
-          value={value}
-        />
-      ),
-      [
-        autoCompleteType,
-        autoFocus,
-        endAdornment,
-        isMultiline,
-        onChange,
-        onFocus,
-        onBlur,
-        placeholder,
-        isReadOnly,
-        ref,
-        startAdornment,
-        type,
-        value,
-      ]
-    );
+const Field = ({
+  errorMessage,
+  hasVisibleLabel,
+  hint,
+  id: idOverride,
+  isDisabled = false,
+  isRequired = true,
+  label,
+  optionalLabel,
+  renderFieldComponent,
+}: FieldProps) => {
+  const id = useUniqueId(idOverride);
+  const hintId = hint ? `${id}-hint` : undefined;
+  const errorId = errorMessage ? `${id}-error` : undefined;
+  const labelId = `${id}-label`;
 
-    return (
-      <Field
-        errorMessage={errorMessage}
-        hasVisibleLabel
-        hint={hint}
-        id={idOverride}
-        isDisabled={isDisabled}
+  const ariaDescribedBy = useMemo(
+    () => [hintId, errorId].join(" ").trim() || undefined,
+    [errorId, hintId]
+  );
+
+  return (
+    <FormControl disabled={isDisabled} error={Boolean(errorMessage)}>
+      <FieldLabel
+        hasVisibleLabel={hasVisibleLabel}
+        id={labelId}
+        inputId={id}
         isRequired={isRequired}
-        label={label}
-        optionalLabel={optionalLabel}
-        renderFieldComponent={renderFieldComponent}
+        optionalText={optionalLabel}
+        text={label}
       />
-    );
-  }
-);
 
-const MemoizedTextField = memo(TextField);
+      {hint && <FieldHint id={hintId} text={hint} />}
 
-export { MemoizedTextField as TextField };
+      {renderFieldComponent({
+        ariaDescribedBy,
+        id,
+      })}
+
+      {errorMessage && <FieldError id={errorId} text={errorMessage} />}
+    </FormControl>
+  );
+};
+
+const MemoizedField = memo(Field);
+
+export { MemoizedField as Field };
