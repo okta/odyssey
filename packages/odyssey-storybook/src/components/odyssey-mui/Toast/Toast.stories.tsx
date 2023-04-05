@@ -10,14 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { action } from "@storybook/addon-actions";
+import { Meta, Story } from "@storybook/react";
+import {
+  Button,
+  Snackbar,
+  Stack,
+  Toast,
+  ToastProps,
+} from "@okta/odyssey-react-mui";
 import * as React from "react";
-import { Story } from "@storybook/react";
-import { Button, Snackbar, Stack, Toast } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import ToastMdx from "./Toast.mdx";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-export default {
+const storybookMeta: Meta<ToastProps> = {
   title: `MUI Components/Alerts/Toast`,
   component: Toast,
   parameters: {
@@ -26,6 +33,13 @@ export default {
     },
   },
   argTypes: {
+    autoHideDuration: {
+      control: "number",
+      defaultValue: 6000,
+    },
+    isDismissable: {
+      control: "boolean",
+    },
     linkText: {
       control: "text",
     },
@@ -34,7 +48,7 @@ export default {
     },
     onClose: {
       control: null,
-      type: { required: false, summary: "function" },
+      type: { name: "function", required: false },
       defaultValue: null,
     },
     role: {
@@ -55,7 +69,9 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
+export default storybookMeta;
+
+const DefaultTemplate: Story<ToastProps> = (args) => {
   const [open, setOpen] = React.useState(false);
 
   const openToast = React.useCallback(() => {
@@ -68,28 +84,15 @@ const DefaultTemplate: Story = (args) => {
   return (
     <>
       <Button variant="primary" onClick={openToast}>
-        Open {args.severity} snackbar Open {args.severity} toast
+        Open {args.severity} toast
       </Button>
-      <Stack spacing={2} sx={{ width: "100%" }}>
-        <Snackbar
-          open={open}
-          autoHideDuration={args.onClose ? undefined : 6000}
-          onClose={closeToast}
-        >
-          <Toast
-            severity={args.severity}
-            text={args.text}
-            onClose={args.onClose}
-            {...args}
-          ></Toast>
-        </Snackbar>
-      </Stack>
+      <Toast {...args}></Toast>
     </>
   );
 };
 
-const StaticTemplate: Story = (args) => {
-  return <Toast severity={args.severity} text={args.text} {...args}></Toast>;
+const StaticTemplate: Story<ToastProps> = (args) => {
+  return <Toast {...args}></Toast>;
 };
 
 export const Info = DefaultTemplate.bind({});
@@ -142,20 +145,16 @@ SuccessStatic.args = {
 
 export const Dismissible = DefaultTemplate.bind({});
 Dismissible.args = {
-  isDismissible: true,
+  isDismissable: true,
   linkText: "View report",
   linkUrl: "#",
-  onClose: () => {
-    return true;
-  },
+  onClose: action("closed"),
 };
 
 export const DismissibleStatic = StaticTemplate.bind({});
 DismissibleStatic.args = {
-  isDismissible: true,
+  isDismissable: true,
   linkText: "View report",
   linkUrl: "#",
-  onClose: () => {
-    return true;
-  },
+  onClose: action("closed"),
 };
