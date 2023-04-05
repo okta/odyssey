@@ -14,7 +14,6 @@ export {
   Alert,
   AlertTitle,
   Box,
-  Button,
   Chip,
   CircularProgress,
   createTheme,
@@ -67,7 +66,6 @@ export type {
   AlertProps,
   AlertTitleProps,
   BoxProps,
-  ButtonProps,
   ChipProps,
   CircularProgressProps,
   CssBaselineProps,
@@ -125,6 +123,7 @@ export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 export { deepmerge, visuallyHidden } from "@mui/utils";
 
 export * from "./Banner";
+export * from "./Button";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./createUniqueId";
