@@ -16,13 +16,7 @@ import { Tooltip } from "./";
 import { memo } from "react";
 
 export interface ButtonProps extends MuiButtonProps {
-  children?: string;
-  disabled?: boolean;
-  fullWidth?: boolean;
-  size?: "s" | "m" | "l";
-  startIcon?: React.ReactNode;
   tooltipText?: string;
-  variant?: "primary" | "secondary" | "danger" | "floating";
 }
 
 const Button = ({ children, tooltipText, ...props }: ButtonProps) => (
