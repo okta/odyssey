@@ -31,23 +31,26 @@ export default {
       control: "text",
       defaultValue: "Add crew",
     },
-    size: {
-      options: ["s", "m", "l"],
-      control: { type: "radio" },
-    },
-    variant: {
-      options: ["primary", "secondary", "danger", "floating"],
-      control: { type: "radio" },
-      defaultValue: "primary",
-    },
     disabled: {
       control: "boolean",
     },
     fullWidth: {
       control: "boolean",
     },
+    size: {
+      options: ["s", "m", "l"],
+      control: { type: "radio" },
+    },
     startIcon: {
       control: "object",
+    },
+    tooltipText: {
+      control: "text",
+    },
+    variant: {
+      options: ["primary", "secondary", "danger", "floating"],
+      control: { type: "radio" },
+      defaultValue: "primary",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -107,4 +110,5 @@ export const IconOnly = Template.bind({});
 IconOnly.args = {
   children: undefined,
   startIcon: <AddIcon />,
+  tooltipText: "Add crew",
 };

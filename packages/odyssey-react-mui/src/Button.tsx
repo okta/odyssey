@@ -11,6 +11,7 @@
  */
 
 import { Button as MuiButton } from "@mui/material";
+import { Tooltip } from "./";
 import { memo } from "react";
 
 export type ButtonProps = {
@@ -19,11 +20,19 @@ export type ButtonProps = {
   fullWidth?: boolean;
   size?: "s" | "m" | "l";
   startIcon?: React.ReactNode;
+  tooltipText?: string;
   variant?: "primary" | "secondary" | "danger" | "floating";
 };
 
-const Button = ({ children, ...props }: ButtonProps) => (
-  <MuiButton {...props}>{children}</MuiButton>
+const Button = ({ children, tooltipText, ...props }: ButtonProps) => (
+  <>
+    {tooltipText && (
+      <Tooltip describeChild placement="top" title={tooltipText}>
+        <MuiButton {...props}>{children}</MuiButton>
+      </Tooltip>
+    )}
+    {!tooltipText && <MuiButton {...props}>{children}</MuiButton>}
+  </>
 );
 
 const MemoizedButton = memo(Button);
