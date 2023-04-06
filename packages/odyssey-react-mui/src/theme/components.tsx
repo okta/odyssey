@@ -32,10 +32,12 @@ import { tooltipClasses } from "@mui/material/Tooltip";
 import {
   AlertTriangleFilledIcon,
   ArrowDownIcon,
+  CheckIcon,
   CheckCircleFilledIcon,
   ChevronDownIcon,
   CloseCircleFilledIcon,
   InformationCircleFilledIcon,
+  SubtractIcon,
 } from "../iconDictionary";
 
 export const components: ThemeOptions["components"] = {
@@ -362,23 +364,87 @@ export const components: ThemeOptions["components"] = {
   MuiCheckbox: {
     defaultProps: {
       size: "small",
+      icon: <></>,
+      checkedIcon: <CheckIcon />,
+      indeterminateIcon: <SubtractIcon />,
     },
     styleOverrides: {
       root: ({ theme }) => ({
-        borderRadius: "4px",
-        "&:hover": {
-          backgroundColor: "transparent",
-        },
+        width: `${theme.typography.ui.lineHeight}em`,
+        height: `${theme.typography.ui.lineHeight}em`,
+        borderRadius: theme.mixins.borderRadius,
+        borderWidth: theme.mixins.borderWidth,
+        borderStyle: theme.mixins.borderStyle,
+        borderColor: theme.palette.grey[500],
         padding: 0,
-        ".Mui-error > &": {
-          color: theme.palette.error.main,
-          "&:hover": {
-            color: theme.palette.error.dark,
+        boxShadow: `0 0 0 0 transparent`,
+        transition: theme.transitions.create(
+          ["border-color", "background-color", "box-shadow"],
+          {
+            duration: theme.transitions.duration.short,
+          }
+        ),
+
+        ".MuiSvgIcon-root": {
+          color: theme.palette.common.white,
+          width: "0.5em",
+          height: "0.5em",
+          transition: theme.transitions.create(["color"], {
+            duration: theme.transitions.duration.short,
+          }),
+        },
+
+        "&.Mui-checked": {
+          backgroundColor: theme.palette.primary.main,
+          borderColor: theme.palette.primary.main,
+
+          ".MuiFormControlLabel-root:hover > &": {
+            backgroundColor: theme.palette.primary.dark,
+            borderColor: theme.palette.primary.dark,
           },
         },
-        ".Mui-error > &.Mui-checked": {
-          "&:hover": {
-            color: theme.palette.error.dark,
+
+        ".MuiFormControlLabel-root:hover > &": {
+          backgroundColor: "transparent",
+          borderColor: theme.palette.grey[900],
+        },
+        ".Mui-error:hover > &": {
+          borderColor: theme.palette.error.dark,
+
+          "&.Mui-checked": {
+            backgroundColor: theme.palette.error.dark,
+            borderColor: theme.palette.error.dark,
+          },
+        },
+        ".Mui-error > &": {
+          borderColor: theme.palette.error.main,
+
+          "&.Mui-checked": {
+            backgroundColor: theme.palette.error.main,
+            borderColor: theme.palette.error.main,
+          },
+
+          "&.Mui-focusVisible": {
+            boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.error.main}`,
+          },
+        },
+        "&.Mui-focusVisible": {
+          borderColor: theme.palette.grey[900],
+          boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.primary.main}`,
+          outline: "2px solid transparent",
+          outlineOffset: "1px",
+        },
+        "&.Mui-disabled": {
+          backgroundColor: theme.palette.grey[50],
+          borderColor: theme.palette.grey[300],
+
+          ".Mui-error > &": {
+            backgroundColor: theme.palette.grey[50],
+            borderColor: theme.palette.grey[300],
+          },
+
+          ".MuiSvgIcon-root": {
+            color: theme.palette.common.black,
           },
         },
       }),
@@ -1086,12 +1152,21 @@ export const components: ThemeOptions["components"] = {
         borderStyle: theme.mixins.borderStyle,
         borderRadius: theme.mixins.borderRadius,
         borderColor: theme.palette.grey[500],
+        boxShadow: `0 0 0 0 transparent`,
+        backgroundColor: theme.palette.common.white,
+        transition: theme.transitions.create(
+          ["border-color", "background-color", "box-shadow"],
+          {
+            duration: theme.transitions.duration.short,
+          }
+        ),
 
         ...(ownerState.fullWidth && {
           width: "100%",
         }),
 
         ...(ownerState.readOnly === true && {
+          borderColor: "transparent",
           backgroundColor: theme.palette.grey[50],
         }),
 
@@ -1365,24 +1440,82 @@ export const components: ThemeOptions["components"] = {
   MuiRadio: {
     defaultProps: {
       size: "small",
+      icon: <></>,
+      checkedIcon: <></>,
     },
     styleOverrides: {
       root: ({ theme }) => ({
-        "&:hover": {
-          backgroundColor: "transparent",
-        },
+        width: `${theme.typography.ui.lineHeight}em`,
+        height: `${theme.typography.ui.lineHeight}em`,
+        borderRadius: `${theme.typography.ui.lineHeight}em`,
+        borderWidth: theme.mixins.borderWidth,
+        borderStyle: theme.mixins.borderStyle,
+        borderColor: theme.palette.grey[500],
         padding: 0,
+        boxShadow: `0 0 0 0 transparent`,
+        transition: theme.transitions.create(
+          ["border-color", "background-color", "box-shadow"],
+          {
+            duration: theme.transitions.duration.short,
+          }
+        ),
+
+        "&::before": {
+          content: "''",
+          position: "absolute",
+          width: "0.5em",
+          height: "0.5em",
+          borderRadius: "50%",
+          backgroundColor: "transparent",
+          transition: theme.transitions.create(["background-color"], {
+            duration: theme.transitions.duration.short,
+          }),
+        },
+
+        ".MuiFormControlLabel-root:hover > &": {
+          backgroundColor: "transparent",
+          borderColor: theme.palette.grey[900],
+        },
+        ".Mui-error:hover > &": {
+          backgroundColor: "transparent",
+          borderColor: theme.palette.error.dark,
+          "&::before": {
+            backgroundColor: theme.palette.error.dark,
+          },
+        },
         ".Mui-error > &": {
-          color: theme.palette.error.main,
-          "&:hover": {
-            color: theme.palette.error.dark,
+          borderColor: theme.palette.error.main,
+          "&::before": {
+            backgroundColor: theme.palette.error.main,
+          },
+
+          "&.Mui-focusVisible": {
+            boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.error.main}`,
           },
         },
         "&.Mui-focusVisible": {
-          outlineColor: theme.palette.primary.main,
-          outlineOffset: 0,
-          outlineStyle: "solid",
-          outlineWidth: "2px",
+          borderColor: theme.palette.grey[900],
+          boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.primary.main}`,
+          outline: "2px solid transparent",
+          outlineOffset: "1px",
+        },
+        "&.Mui-checked": {
+          position: "relative",
+
+          "&::before": {
+            backgroundColor: theme.palette.primary.main,
+          },
+        },
+        ".Mui-error > &.Mui-checked::before": {
+          backgroundColor: theme.palette.error.main,
+        },
+        "&.Mui-disabled": {
+          backgroundColor: theme.palette.grey[50],
+          borderColor: theme.palette.grey[300],
+
+          "&::before": {
+            backgroundColor: theme.palette.grey[300],
+          },
         },
       }),
     },
