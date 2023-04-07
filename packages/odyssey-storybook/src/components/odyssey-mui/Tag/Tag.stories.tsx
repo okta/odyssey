@@ -11,14 +11,14 @@
  */
 
 import { Story } from "@storybook/react";
-import { Chip, Stack } from "@okta/odyssey-react-mui";
+import { Tag, TagList } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TagMdx from "./Tag.mdx";
 
 export default {
   title: `MUI Components/Tag`,
-  component: Chip,
+  component: Tag,
   parameters: {
     docs: {
       page: TagMdx,
@@ -59,30 +59,30 @@ const handleDelete = () => {
 
 const DefaultTemplate: Story = (args) => {
   return (
-    <Stack direction="row" spacing={2}>
-      <Chip
+    <TagList>
+      <Tag
         label={args.label}
-        clickable={args.clickable}
-        disabled={args.disabled}
+        isClickable={args.clickable}
+        isDisabled={args.disabled}
         onDelete={args.deletable && handleDelete}
       />
       {args.label2 && (
-        <Chip
+        <Tag
           label={args.label2}
-          clickable={args.clickable}
-          disabled={args.disabled}
+          isClickable={args.clickable}
+          isDisabled={args.disabled}
           onDelete={args.deletable && handleDelete}
         />
       )}
       {args.label3 && (
-        <Chip
+        <Tag
           label={args.label3}
-          clickable={args.clickable}
-          disabled={args.disabled}
+          isClickable={args.clickable}
+          isDisabled={args.disabled}
           onDelete={args.deletable && handleDelete}
         />
       )}
-    </Stack>
+    </TagList>
   );
 };
 
