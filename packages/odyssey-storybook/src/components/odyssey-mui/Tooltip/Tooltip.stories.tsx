@@ -31,12 +31,15 @@ export default {
     describeChild: {
       control: { type: "boolean" },
     },
+    label: {
+      control: {
+        type: "text",
+        defaultValue: "This is a tooltip.",
+      },
+    },
     placement: {
       options: ["top", "right", "bottom", "left"],
       control: { type: "radio" },
-    },
-    title: {
-      control: { type: "text" },
     },
   },
   decorators: [MuiThemeDecorator],
@@ -45,7 +48,7 @@ export default {
 const Template: Story = (args) => {
   return (
     <Tooltip
-      title={args.title}
+      label={args.label}
       placement={args.placement}
       describeChild={args.describeChild}
     >
@@ -59,7 +62,7 @@ Default.args = {
   children: <Button>Launch</Button>,
   describeChild: true,
   placement: "top",
-  title: "This will begin a 10-second countdown",
+  label: "This will begin a 10-second countdown",
 };
 
 export const Icon = Template.bind({});
@@ -71,7 +74,7 @@ Icon.args = {
   ),
   describeChild: false,
   placement: "top",
-  title: "Download logs",
+  label: "Download logs",
 };
 
 export const Disabled = Template.bind({});
@@ -83,22 +86,22 @@ Disabled.args = {
   ),
   describeChild: true,
   placement: "top",
-  title: "You don't have access to these logs",
+  label: "You don't have access to these logs",
 };
 
 const PlacementTemplate: Story = () => {
   return (
     <>
-      <Tooltip title="Top" placement="top">
+      <Tooltip label="Top" placement="top">
         <Button>Top</Button>
       </Tooltip>
-      <Tooltip title="Right" placement="right">
+      <Tooltip label="Right" placement="right">
         <Button>Right</Button>
       </Tooltip>
-      <Tooltip title="Bottom" placement="bottom">
+      <Tooltip label="Bottom" placement="bottom">
         <Button>Bottom</Button>
       </Tooltip>
-      <Tooltip title="Left" placement="left">
+      <Tooltip label="Left" placement="left">
         <Button>Left</Button>
       </Tooltip>
     </>

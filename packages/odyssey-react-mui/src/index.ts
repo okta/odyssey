@@ -59,7 +59,6 @@ export {
   TableRow,
   TableSortLabel,
   ThemeProvider as MuiThemeProvider,
-  Tooltip,
   Typography,
 } from "@mui/material";
 
@@ -112,7 +111,6 @@ export type {
   TableRowProps,
   TableSortLabelProps,
   ThemeOptions,
-  TooltipProps,
   TypographyProps,
 } from "@mui/material";
 
@@ -143,4 +141,5 @@ export * from "./Status";
 export * from "./TextField";
 export * from "./theme";
 export * from "./ThemeProvider";
+export * from "./Tooltip";
 export * from "./useUniqueId";
