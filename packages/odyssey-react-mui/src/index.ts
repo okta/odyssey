@@ -19,11 +19,7 @@ export {
   CircularProgress,
   createTheme,
   CssBaseline,
-  Dialog,
-  DialogActions,
-  DialogContent,
   DialogContentText,
-  DialogTitle,
   Divider,
   FormControl,
   FormControlLabel,
@@ -71,11 +67,6 @@ export type {
   ChipProps,
   CircularProgressProps,
   CssBaselineProps,
-  DialogProps,
-  DialogActionsProps,
-  DialogContentProps,
-  DialogContentTextProps,
-  DialogTitleProps,
   DividerProps,
   FormControlLabelProps,
   FormControlProps,
@@ -128,6 +119,7 @@ export * from "./Banner";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./createUniqueId";
+export * from "./Dialog";
 export * from "./Icon";
 export * from "./iconDictionary";
 export * from "./Infobox";
