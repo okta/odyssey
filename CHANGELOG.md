@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.3](https://github.com/okta/odyssey/compare/v0.21.2...v0.21.3) (2023-04-06)
+
+### Features
+
+- add Odyssey styles to Radio and Checkbox ([39ebde0](https://github.com/okta/odyssey/commit/39ebde08d4cb83f933a98d79000ac23ad15c12c9))
+- **odyssey-react-mui:** add transitions to form controls, update state ui ([7388c00](https://github.com/okta/odyssey/commit/7388c00e5ca112ff12d429e45996ab5aa557a36a))
+
+### Bug Fixes
+
+- **odyssey-react-mui:** make text disabled color more a11y-friendly ([372a010](https://github.com/okta/odyssey/commit/372a010b934efc8421c42c8fa7d3a9323af8182f))
+- upgraded loader-utils and fastify for security ([#1734](https://github.com/okta/odyssey/issues/1734)) ([d6f3d27](https://github.com/okta/odyssey/commit/d6f3d27daefd1994059463ad33f9adceb35e36a0))
+
 ## [0.21.2](https://github.com/okta/odyssey/compare/v0.21.1...v0.21.2) (2023-03-30)
 
 ### Features
