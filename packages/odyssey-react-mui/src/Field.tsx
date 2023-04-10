@@ -10,16 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputBaseProps } from "@mui/material";
-import {
-  ChangeEventHandler,
-  FocusEventHandler,
-  InputHTMLAttributes,
-  memo,
-  ReactElement,
-  ReactNode,
-  useMemo,
-} from "react";
+import { memo, ReactElement, useMemo } from "react";
 
 import {
   FieldError,
@@ -30,20 +21,6 @@ import {
 } from "./";
 
 export type FieldProps = {
-  /**
-   * If `true`, the component will receive focus automatically.
-   */
-  autoFocus?: boolean;
-  /**
-   * This prop helps users to fill forms faster, especially on mobile devices.
-   * The name can be confusing, as it's more like an autofill.
-   * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
-   */
-  autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
-  /**
-   * End `InputAdornment` for this component.
-   */
-  endAdornment?: ReactNode;
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
@@ -58,21 +35,9 @@ export type FieldProps = {
    */
   id?: string;
   /**
-   * Props that go onto the HTML `input` element.
-   */
-  inputProps?: InputBaseProps["inputProps"];
-  /**
    * If `true`, the component is disabled.
    */
   isDisabled?: boolean;
-  /**
-   * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
-   */
-  isMultiline?: boolean;
-  /**
-   * It prevents the user from changing the value of the field
-   */
-  isReadOnly?: boolean;
   /**
    * If `true`, the `input` element is required.
    */
@@ -81,18 +46,6 @@ export type FieldProps = {
    * The label for the `input` element.
    */
   label: string;
-  /**
-   * Callback fired when the `input` element loses focus.
-   */
-  onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  /**
-   * Callback fired when the value is changed.
-   */
-  onChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
-  /**
-   * Callback fired when the `input` element get focus.
-   */
-  onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
    * The label for the `input` element if the it's not optional
    */
@@ -108,18 +61,6 @@ export type FieldProps = {
     ariaDescribedBy?: string;
     id: string;
   }) => ReactElement;
-  /**
-   * Start `InputAdornment` for this component.
-   */
-  startAdornment?: ReactNode;
-  /**
-   * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
-   */
-  type?: string;
-  /**
-   * The value of the `input` element, required for a controlled component.
-   */
-  value?: string;
 };
 
 const Field = ({

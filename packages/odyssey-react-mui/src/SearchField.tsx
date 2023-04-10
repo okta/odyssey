@@ -135,6 +135,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
+        isRequired={false}
         label={label}
         renderFieldComponent={renderFieldComponent}
       />

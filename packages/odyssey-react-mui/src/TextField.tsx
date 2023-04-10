@@ -97,7 +97,7 @@ export type TextFieldProps = {
   /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */
-  type?: string;
+  type?: "email" | "number" | "tel" | "text" | "url";
   /**
    * The value of the `input` element, required for a controlled component.
    */
