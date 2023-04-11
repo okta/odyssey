@@ -10,16 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip, ChipProps } from ".";
+import { Chip } from ".";
 import { memo } from "react";
 
-export interface TagProps extends Omit<ChipProps, "clickable" | "disabled"> {
+export type TagProps = {
   isClickable?: boolean;
   isDisabled?: boolean;
-}
+  label: string;
+  onDelete?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+};
 
-const Tag = ({ isClickable, isDisabled, label, ...rest }: TagProps) => (
-  <Chip label={label} clickable={isClickable} disabled={isDisabled} {...rest} />
+const Tag = ({ isClickable, isDisabled, label, onDelete }: TagProps) => (
+  <Chip
+    label={label}
+    clickable={isClickable}
+    component="li"
+    disabled={isDisabled}
+    onDelete={onDelete}
+  />
 );
 
 const MemoizedTag = memo(Tag);

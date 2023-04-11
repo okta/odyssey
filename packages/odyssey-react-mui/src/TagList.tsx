@@ -18,7 +18,7 @@ export type TagListProps = {
 };
 
 const TagList = ({ children }: TagListProps) => (
-  <Stack direction="row" spacing={2}>
+  <Stack component="ul" direction="row" spacing={2}>
     {children}
   </Stack>
 );
