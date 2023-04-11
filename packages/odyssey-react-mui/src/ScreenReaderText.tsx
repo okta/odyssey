@@ -13,12 +13,12 @@
 import { memo, ReactNode } from "react";
 import { Box, visuallyHidden } from "./";
 
-export interface ScreenReaderTextProps {
+export type ScreenReaderTextProps = {
   /**
    * The visually-hidden text.
    */
   children: ReactNode;
-}
+};
 
 const style = { ...visuallyHidden };
 
