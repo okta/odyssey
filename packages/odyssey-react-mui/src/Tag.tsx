@@ -13,10 +13,9 @@
 import { Chip, ChipProps } from ".";
 import { memo } from "react";
 
-export interface TagProps extends ChipProps {
+export interface TagProps extends Omit<ChipProps, "clickable" | "disabled"> {
   isClickable?: boolean;
   isDisabled?: boolean;
-  label: string;
 }
 
 const Tag = ({ isClickable, isDisabled, label, ...rest }: TagProps) => (
