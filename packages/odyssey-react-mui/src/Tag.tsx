@@ -14,16 +14,16 @@ import { Chip } from ".";
 import { memo } from "react";
 
 export type TagProps = {
-  isClickable?: boolean;
   isDisabled?: boolean;
+  isInteractive?: boolean;
   label: string;
   onDelete?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
-const Tag = ({ isClickable, isDisabled, label, onDelete }: TagProps) => (
+const Tag = ({ isDisabled, isInteractive, label, onDelete }: TagProps) => (
   <Chip
     label={label}
-    clickable={isClickable}
+    clickable={isInteractive}
     component="li"
     disabled={isDisabled}
     onDelete={onDelete}

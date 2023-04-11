@@ -37,7 +37,7 @@ export default {
       control: "text",
       defaultValue: null,
     },
-    clickable: {
+    interactive: {
       control: "boolean",
       defaultValue: false,
     },
@@ -62,14 +62,14 @@ const DefaultTemplate: Story = (args) => {
     <TagList>
       <Tag
         label={args.label}
-        isClickable={args.clickable}
+        isInteractive={args.interactive}
         isDisabled={args.disabled}
         onDelete={args.deletable && handleDelete}
       />
       {args.label2 && (
         <Tag
           label={args.label2}
-          isClickable={args.clickable}
+          isInteractive={args.interactive}
           isDisabled={args.disabled}
           onDelete={args.deletable && handleDelete}
         />
@@ -77,7 +77,7 @@ const DefaultTemplate: Story = (args) => {
       {args.label3 && (
         <Tag
           label={args.label3}
-          isClickable={args.clickable}
+          isInteractive={args.interactive}
           isDisabled={args.disabled}
           onDelete={args.deletable && handleDelete}
         />
