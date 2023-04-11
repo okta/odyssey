@@ -16,7 +16,6 @@ export {
   Box,
   Button,
   Chip,
-  CircularProgress,
   createTheme,
   CssBaseline,
   Dialog,
@@ -69,7 +68,6 @@ export type {
   BoxProps,
   ButtonProps,
   ChipProps,
-  CircularProgressProps,
   CssBaselineProps,
   DialogProps,
   DialogActionsProps,
@@ -127,6 +125,7 @@ export { deepmerge, visuallyHidden } from "@mui/utils";
 export * from "./Banner";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
+export * from "./CircularProgress";
 export * from "./createUniqueId";
 export * from "./Icon";
 export * from "./iconDictionary";
