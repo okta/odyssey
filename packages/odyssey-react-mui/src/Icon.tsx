@@ -22,7 +22,7 @@ export interface IconProps extends Omit<SvgIconNoChildrenProps, "fontSize"> {
   /**
    * Size of the icon
    */
-  size: "small" | "medium" | "large";
+  size: SvgIconNoChildrenProps["fontSize"];
 }
 
 /**
@@ -42,15 +42,7 @@ export const Icon = ({
 
   const NamedIcon = iconDictionary[name];
 
-  return (
-    <NamedIcon
-      className={`icon Icon-size${
-        size.charAt(0).toUpperCase() + size.slice(1)
-      }`}
-      titleAccess={titleAccess}
-      {...rest}
-    />
-  );
+  return <NamedIcon fontSize={size} titleAccess={titleAccess} {...rest} />;
 };
 
 Icon.displayName = "Icon";
