@@ -78,17 +78,17 @@ ButtonFloating.args = {
 
 export const ButtonSmall = Template.bind({});
 ButtonSmall.args = {
-  size: "s",
+  size: "small",
 };
 
 export const ButtonMedium = Template.bind({});
 ButtonMedium.args = {
-  size: "m",
+  size: "medium",
 };
 
 export const ButtonLarge = Template.bind({});
 ButtonLarge.args = {
-  size: "l",
+  size: "large",
 };
 
 export const ButtonFullWidth = Template.bind({});

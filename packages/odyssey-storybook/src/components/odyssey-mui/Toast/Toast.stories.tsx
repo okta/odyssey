@@ -90,7 +90,7 @@ const DefaultTemplate: Story = (args) => {
                   aria-label="close"
                   onClick={closeToast}
                   variant="floating"
-                  size="s"
+                  size="small"
                 >
                   <CloseIcon fontSize="inherit" />
                 </Button>
@@ -116,7 +116,7 @@ const StaticTemplate: Story = (args) => {
           <Button
             aria-label="close"
             variant="floating"
-            size="s"
+            size="small"
             startIcon={<CloseIcon />}
           ></Button>
         )

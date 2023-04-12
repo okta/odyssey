@@ -15,18 +15,27 @@ import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import { Tooltip } from "./";
 import { memo } from "react";
 
-export interface ButtonProps extends MuiButtonProps {
+export type ButtonProps = {
+  children?: React.ReactNode;
+  disabled?: boolean;
+  endIcon?: React.ReactNode;
+  fullWidth?: boolean;
+  id?: string;
+  onClick?: MuiButtonProps["onClick"];
+  size?: "small" | "medium" | "large";
+  startIcon?: React.ReactNode;
   tooltipText?: string;
-}
+  variant?: "primary" | "secondary" | "danger" | "floating";
+};
 
-const Button = ({ children, tooltipText, ...props }: ButtonProps) => (
+const Button = ({ children, tooltipText }: ButtonProps) => (
   <>
     {tooltipText && (
       <Tooltip describeChild placement="top" title={tooltipText}>
-        <MuiButton {...props}>{children}</MuiButton>
+        <MuiButton>{children}</MuiButton>
       </Tooltip>
     )}
-    {!tooltipText && <MuiButton {...props}>{children}</MuiButton>}
+    {!tooltipText && <MuiButton>{children}</MuiButton>}
   </>
 );
 
