@@ -27,14 +27,7 @@ export interface DialogProps extends MuiDialogProps {
   actions?: ReactNode;
 }
 
-const Dialog = ({
-  actions,
-  children,
-  onClose,
-  open,
-  title,
-  ...rest
-}: DialogProps) => {
+const Dialog = ({ actions, children, onClose, open, title }: DialogProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
 
@@ -57,7 +50,7 @@ const Dialog = ({
     );
 
   return (
-    <MuiDialog open={open} onClose={onClose} {...rest}>
+    <MuiDialog open={open} onClose={onClose}>
       <DialogTitle>
         {title}
         <Button variant="floating" onClick={onClose}>
