@@ -15,7 +15,6 @@ export {
   AlertTitle,
   Box,
   Chip,
-  CircularProgress,
   createTheme,
   CssBaseline,
   Dialog,
@@ -67,7 +66,6 @@ export type {
   AlertTitleProps,
   BoxProps,
   ChipProps,
-  CircularProgressProps,
   CssBaselineProps,
   DialogProps,
   DialogActionsProps,
@@ -126,6 +124,7 @@ export * from "./Banner";
 export * from "./Button";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
+export * from "./CircularProgress";
 export * from "./createUniqueId";
 export * from "./Icon";
 export * from "./iconDictionary";
@@ -138,6 +137,7 @@ export * from "./OdysseyThemeProvider";
 export * from "./PasswordInput";
 export * from "./Radio";
 export * from "./RadioGroup";
+export * from "./ScreenReaderText";
 export * from "./Status";
 export * from "./TextField";
 export * from "./theme";
