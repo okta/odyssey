@@ -11,9 +11,10 @@
  */
 
 import { InputLabel } from "@mui/material";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 
-import { Typography, visuallyHidden } from ".";
+import { ScreenReaderText } from "./ScreenReaderText";
+import { Typography } from ".";
 
 export type FieldLabelProps = {
   hasVisibleLabel: boolean;
@@ -32,17 +33,22 @@ const FieldLabel = ({
   optionalText,
   text,
 }: FieldLabelProps) => {
-  return (
-    <InputLabel
-      htmlFor={inputId}
-      id={id}
-      style={hasVisibleLabel ? undefined : visuallyHidden}
-    >
-      {text}
-      {!isRequired && (
-        <Typography variant="subtitle1">{optionalText}</Typography>
-      )}
-    </InputLabel>
+  const inputLabel = useMemo(
+    () => (
+      <InputLabel htmlFor={inputId} id={id}>
+        {text}
+        {!isRequired && (
+          <Typography variant="subtitle1">{optionalText}</Typography>
+        )}
+      </InputLabel>
+    ),
+    [id, inputId, isRequired, optionalText, text]
+  );
+
+  return hasVisibleLabel ? (
+    inputLabel
+  ) : (
+    <ScreenReaderText>{inputLabel}</ScreenReaderText>
   );
 };
 
