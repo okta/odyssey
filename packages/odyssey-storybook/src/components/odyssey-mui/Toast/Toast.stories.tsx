@@ -10,19 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import {
-  Button,
-  Snackbar,
-  Stack,
-  Toast,
-  ToastProps,
-} from "@okta/odyssey-react-mui";
+import { Button, Toast, ToastProps, ToastStack } from "@okta/odyssey-react-mui";
 import * as React from "react";
 
 import ToastMdx from "./Toast.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { useState } from "react";
 
 const storybookMeta: Meta<ToastProps> = {
   title: `MUI Components/Alerts/Toast`,
@@ -35,7 +29,7 @@ const storybookMeta: Meta<ToastProps> = {
   argTypes: {
     autoHideDuration: {
       control: "number",
-      defaultValue: 6000,
+      defaultValue: null,
     },
     isDismissable: {
       control: "boolean",
@@ -45,11 +39,6 @@ const storybookMeta: Meta<ToastProps> = {
     },
     linkUrl: {
       control: "text",
-    },
-    onClose: {
-      control: null,
-      type: { name: "function", required: false },
-      defaultValue: null,
     },
     role: {
       control: "radio",
@@ -77,22 +66,90 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
   const openToast = React.useCallback(() => {
     setOpen(true);
   }, []);
-  const closeToast = React.useCallback(() => {
-    setOpen(false);
-  }, []);
 
   return (
     <>
       <Button variant="primary" onClick={openToast}>
         Open {args.severity} toast
       </Button>
-      <Toast {...args}></Toast>
+      <Toast
+        autoHideDuration={args.autoHideDuration}
+        isDismissable={args.isDismissable}
+        linkText={args.linkText}
+        linkUrl={args.linkUrl}
+        isOpen={open}
+        role={args.role}
+        severity={args.severity}
+        text={args.text}
+      />
     </>
   );
 };
 
 const StaticTemplate: Story<ToastProps> = (args) => {
-  return <Toast {...args}></Toast>;
+  return <Toast isOpen={true} isStatic {...args}></Toast>;
+};
+
+const MultiTemplate: Story<ToastProps> = () => {
+  const [toasts, setToasts] = useState([
+    <Toast
+      isDismissable
+      isStatic
+      isOpen={true}
+      severity="info"
+      text="The mission to Sagittarius A is set for January 7."
+    />,
+    <Toast
+      isDismissable
+      isStatic
+      isOpen={true}
+      severity="success"
+      text="Docking completed."
+    />,
+  ]);
+
+  const addToast = () => {
+    const toastOptions = [
+      <Toast
+        isStatic
+        isOpen={true}
+        severity="info"
+        text={`The mission to Sagittarius A is set for January 7.`}
+      />,
+      <Toast
+        isStatic
+        isOpen={true}
+        severity="success"
+        text={`Docking completed.`}
+      />,
+      <Toast
+        isStatic
+        isOpen={true}
+        severity="warning"
+        isDismissable
+        text={`Severe solar winds may delay local system flights.`}
+      />,
+      <Toast
+        isStatic
+        isOpen={true}
+        severity="error"
+        isDismissable
+        text={`Security breach in Hangar 10.`}
+      />,
+    ];
+
+    setToasts([
+      ...toasts,
+      toastOptions[Math.floor(Math.random() * toastOptions.length)],
+    ]);
+  };
+
+  return (
+    <>
+      <Button onClick={addToast}>Open another Toast</Button>
+      <ToastStack>{toasts}</ToastStack>
+    </>
+  );
 };
 
 export const Info = DefaultTemplate.bind({});
@@ -148,7 +205,6 @@ Dismissible.args = {
   isDismissable: true,
   linkText: "View report",
   linkUrl: "#",
-  onClose: action("closed"),
 };
 
 export const DismissibleStatic = StaticTemplate.bind({});
@@ -156,5 +212,7 @@ DismissibleStatic.args = {
   isDismissable: true,
   linkText: "View report",
   linkUrl: "#",
-  onClose: action("closed"),
 };
+
+export const MultipleToasts = MultiTemplate.bind({});
+MultipleToasts.args = {};

@@ -10,8 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AlertColor, SnackbarProps } from "@mui/material";
-import { memo, forwardRef, ForwardedRef, useState } from "react";
+import { AlertColor } from "@mui/material";
+import React from "react";
+import { memo, forwardRef, ForwardedRef } from "react";
 import {
   Alert,
   AlertTitle,
@@ -34,6 +35,14 @@ export type ToastProps = {
    */
   isDismissable?: boolean;
   /**
+   * If true, the Toast is visible
+   */
+  isOpen?: boolean;
+  /**
+   * If isStatic is true, the alert will not respect Snackbar positioning
+   */
+  isStatic?: boolean;
+  /**
    * If linkUrl is not undefined, this is the text of the link.
    * If left blank, it defaults to "Learn more".
    * Note that linkText does nothing if linkUrl is not defined
@@ -43,10 +52,6 @@ export type ToastProps = {
    * If defined, the alert will include a link to the URL
    */
   linkUrl?: string;
-  /**
-   * The function that's fired when the user clicks the close button.
-   */
-  onClose?: SnackbarProps["onClose"];
   /**
    * Sets the ARIA role of the alert
    * ("status" for something that dynamically updates, "alert" for errors, null for something
@@ -68,22 +73,27 @@ const Toast = forwardRef(
     {
       autoHideDuration = 6000,
       isDismissable,
+      isStatic,
       linkText,
       linkUrl,
-      onClose,
+      isOpen,
       role,
       severity,
       text,
     }: ToastProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = React.useState(isOpen);
 
     return (
       <Snackbar
         open={open}
         autoHideDuration={isDismissable ? undefined : autoHideDuration}
-        onClose={onClose}
+        onClose={() => setOpen(false)}
+        className={isStatic ? "Toast-static" : ""}
+        ClickAwayListenerProps={{
+          onClickAway: () => false,
+        }}
       >
         <Alert
           ref={ref}
