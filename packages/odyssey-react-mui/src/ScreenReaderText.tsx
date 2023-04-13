@@ -20,7 +20,11 @@ export type ScreenReaderTextProps = {
   children: ReactNode;
 };
 
-// Passthrough to overcome MUI's `sx` typing issue.
+/**
+ * MUI sx expects you pass in a CSS object, not an object with CSS.
+ * They seem identical, but only if you create a new object like this will MUI be happy with the type of visuallyHidden.
+ * It's otherwise a regular object with CSS properties.
+ */
 const style = { ...visuallyHidden };
 
 const ScreenReaderText = ({ children }: ScreenReaderTextProps) => (
