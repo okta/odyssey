@@ -35,14 +35,6 @@ export type SearchFieldProps = {
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
   /**
-   * If `error` is not undefined, the `input` will indicate an error.
-   */
-  errorMessage?: string;
-  /**
-   * The helper text content.
-   */
-  hint?: string;
-  /**
    * The id of the `input` element.
    */
   id?: string;
@@ -81,8 +73,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     {
       autoCompleteType,
       autoFocus,
-      errorMessage,
-      hint,
       id: idOverride,
       isDisabled = false,
       label,
@@ -130,9 +120,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 
     return (
       <Field
-        errorMessage={errorMessage}
         hasVisibleLabel={false}
-        hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
         isRequired={false}
