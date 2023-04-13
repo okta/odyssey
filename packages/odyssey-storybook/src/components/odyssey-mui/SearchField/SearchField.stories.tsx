@@ -37,12 +37,6 @@ const storybookMeta: ComponentMeta<typeof SearchField> = {
       control: "boolean",
       defaultValue: false,
     },
-    errorMessage: {
-      control: "text",
-    },
-    hint: {
-      control: "text",
-    },
     id: {
       control: "text",
     },
