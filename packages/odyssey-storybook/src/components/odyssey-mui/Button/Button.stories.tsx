@@ -27,10 +27,6 @@ export default {
     },
   },
   argTypes: {
-    children: {
-      control: "text",
-      defaultValue: "Add crew",
-    },
     disabled: {
       control: "boolean",
     },
@@ -38,11 +34,15 @@ export default {
       control: "boolean",
     },
     size: {
-      options: ["s", "m", "l"],
+      options: ["small", "medium", "large"],
       control: { type: "radio" },
     },
     startIcon: {
       control: "object",
+    },
+    text: {
+      control: "text",
+      defaultValue: "Add crew",
     },
     tooltipText: {
       control: "text",
@@ -108,7 +108,7 @@ ButtonWithIcon.args = {
 
 export const IconOnly = Template.bind({});
 IconOnly.args = {
-  children: undefined,
   startIcon: <AddIcon />,
+  text: undefined,
   tooltipText: "Add crew",
 };

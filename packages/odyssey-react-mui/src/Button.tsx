@@ -16,7 +16,6 @@ import { Tooltip } from "./";
 import { memo } from "react";
 
 export type ButtonProps = {
-  children?: React.ReactNode;
   disabled?: boolean;
   endIcon?: React.ReactNode;
   fullWidth?: boolean;
@@ -24,20 +23,49 @@ export type ButtonProps = {
   onClick?: MuiButtonProps["onClick"];
   size?: "small" | "medium" | "large";
   startIcon?: React.ReactNode;
+  text?: string;
   tooltipText?: string;
   variant?: "primary" | "secondary" | "danger" | "floating";
 };
 
-const Button = ({ children, tooltipText }: ButtonProps) => (
-  <>
-    {tooltipText && (
-      <Tooltip describeChild placement="top" title={tooltipText}>
-        <MuiButton>{children}</MuiButton>
-      </Tooltip>
-    )}
-    {!tooltipText && <MuiButton>{children}</MuiButton>}
-  </>
-);
+const Button = ({
+  disabled,
+  endIcon,
+  fullWidth,
+  id,
+  onClick,
+  size = "medium",
+  startIcon,
+  text,
+  tooltipText,
+  variant,
+}: ButtonProps) => {
+  const button = (
+    <MuiButton
+      disabled={disabled}
+      endIcon={endIcon}
+      fullWidth={fullWidth}
+      id={id}
+      onClick={onClick}
+      size={size}
+      startIcon={startIcon}
+      variant={variant}
+    >
+      {text}
+    </MuiButton>
+  );
+
+  return (
+    <>
+      {tooltipText && (
+        <Tooltip describeChild placement="top" title={tooltipText}>
+          {button}
+        </Tooltip>
+      )}
+      {!tooltipText && button}
+    </>
+  );
+};
 
 const MemoizedButton = memo(Button);
 
