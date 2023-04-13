@@ -110,6 +110,7 @@ Default.args = {};
 export const Disabled = Template.bind({});
 Disabled.args = {
   isDisabled: true,
+  value: "Earth",
 };
 
 export const Optional = Template.bind({});

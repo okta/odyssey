@@ -12,7 +12,8 @@
 
 import { memo } from "react";
 
-import { FormHelperText, visuallyHidden } from ".";
+import { FormHelperText } from ".";
+import { ScreenReaderText } from "./ScreenReaderText";
 
 export type FieldErrorProps = {
   id?: string;
@@ -22,7 +23,7 @@ export type FieldErrorProps = {
 const FieldError = ({ id, text }: FieldErrorProps) => {
   return (
     <FormHelperText error id={id}>
-      <span style={visuallyHidden}>Error: </span>
+      <ScreenReaderText>Error:</ScreenReaderText>
       {text}
     </FormHelperText>
   );
