@@ -38,7 +38,7 @@ import {
   SearchIcon,
   Typography,
   useUniqueId,
-  visuallyHidden,
+  ScreenReaderText,
 } from "./";
 
 export type TextFieldProps = {
@@ -232,7 +232,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         />
         {errorMessage && (
           <FormHelperText error id={errorId}>
-            <span style={visuallyHidden}>Error:</span>
+            <ScreenReaderText>Error:</ScreenReaderText>
             {errorMessage}
           </FormHelperText>
         )}

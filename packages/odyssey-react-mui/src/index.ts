@@ -138,6 +138,7 @@ export * from "./OdysseyThemeProvider";
 export * from "./PasswordInput";
 export * from "./Radio";
 export * from "./RadioGroup";
+export * from "./ScreenReaderText";
 export * from "./Status";
 export * from "./TextField";
 export * from "./theme";

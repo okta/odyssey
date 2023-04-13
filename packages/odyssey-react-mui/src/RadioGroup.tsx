@@ -17,8 +17,8 @@ import {
   FormControl,
   FormLabel,
   FormHelperText,
-  visuallyHidden,
   Radio,
+  ScreenReaderText,
   useUniqueId,
   RadioProps,
 } from ".";
@@ -104,7 +104,7 @@ const RadioGroup = ({
       </MuiRadioGroup>
       {errorMessage && (
         <FormHelperText id={`${uniqueName}-error`} error>
-          <span style={visuallyHidden}>Error:</span> {errorMessage}
+          <ScreenReaderText>Error:</ScreenReaderText> {errorMessage}
         </FormHelperText>
       )}
     </FormControl>
