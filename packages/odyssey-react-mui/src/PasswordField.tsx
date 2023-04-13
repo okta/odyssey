@@ -158,7 +158,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     return (
       <Field
         errorMessage={errorMessage}
-        hasVisibleLabel={false}
+        hasVisibleLabel
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
