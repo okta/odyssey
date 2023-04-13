@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.4](https://github.com/okta/odyssey/compare/v0.21.3...v0.21.4) (2023-04-13)
+
+**Note:** Version bump only for package @okta/odyssey-lint-staged
+
 ## [0.21.3](https://github.com/okta/odyssey/compare/v0.21.2...v0.21.3) (2023-04-06)
 
 **Note:** Version bump only for package @okta/odyssey-lint-staged
