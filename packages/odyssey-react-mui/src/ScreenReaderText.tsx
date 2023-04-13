@@ -20,6 +20,7 @@ export type ScreenReaderTextProps = {
   children: ReactNode;
 };
 
+// Passthrough to overcome MUI's `sx` typing issue.
 const style = { ...visuallyHidden };
 
 const ScreenReaderText = ({ children }: ScreenReaderTextProps) => (
