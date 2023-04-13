@@ -28,12 +28,9 @@ export default {
     },
   },
   argTypes: {
-    variant: {
-      options: ["indeterminate", "determinate"],
-      control: { type: "radio" },
-    },
     value: {
       control: { type: "number" },
+      defaultValue: undefined,
     },
   },
   decorators: [MuiThemeDecorator],
@@ -48,6 +45,5 @@ Indeterminate.args = {};
 
 export const Determinate = Template.bind({});
 Determinate.args = {
-  variant: "determinate",
   value: 70,
 };
