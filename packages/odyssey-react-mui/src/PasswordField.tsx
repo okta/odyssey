@@ -10,20 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputBase } from "@mui/material";
+import { InputAdornment, InputBase } from "@mui/material";
 import {
   ChangeEventHandler,
   FocusEventHandler,
   forwardRef,
-  InputHTMLAttributes,
   memo,
-  ReactNode,
   useCallback,
+  useState,
 } from "react";
 
+import { EyeIcon, EyeOffIcon, IconButton } from "./";
 import { Field } from "./Field";
 
-export type TextFieldProps = {
+export type PasswordFieldProps = {
   /**
    * If `true`, the component will receive focus automatically.
    */
@@ -33,11 +33,7 @@ export type TextFieldProps = {
    * The name can be confusing, as it's more like an autofill.
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
-  autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
-  /**
-   * End `InputAdornment` for this component.
-   */
-  endAdornment?: ReactNode;
+  autoCompleteType?: "current-password" | "new-password";
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
@@ -54,10 +50,6 @@ export type TextFieldProps = {
    * If `true`, the component is disabled.
    */
   isDisabled?: boolean;
-  /**
-   * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
-   */
-  isMultiline?: boolean;
   /**
    * It prevents the user from changing the value of the field
    */
@@ -83,52 +75,42 @@ export type TextFieldProps = {
    */
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
-   * The label for the `input` element if the it's not optional
-   */
-  optionalLabel?: string;
-  /**
    * The short hint displayed in the `input` before the user enters a value.
    */
   placeholder?: string;
-  /**
-   * Start `InputAdornment` for this component.
-   */
-  startAdornment?: ReactNode;
-  /**
-   * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
-   */
-  type?: "email" | "number" | "tel" | "text" | "url";
   /**
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
 };
 
-const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
     {
       autoCompleteType,
       autoFocus,
-      endAdornment,
       errorMessage,
       hint,
       id: idOverride,
       isDisabled = false,
-      isMultiline = false,
       isReadOnly,
-      isRequired = true,
       label,
-      onBlur,
       onChange,
       onFocus,
-      optionalLabel,
+      onBlur,
       placeholder,
-      startAdornment,
-      type = "text",
       value,
     },
     ref
   ) => {
+    const [inputType, setInputType] = useState("password");
+
+    const togglePasswordVisibility = useCallback(() => {
+      setInputType((inputType) =>
+        inputType === "password" ? "text" : "password"
+      );
+    }, []);
+
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id }) => (
         <InputBase
@@ -136,33 +118,39 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={autoFocus}
-          endAdornment={endAdornment}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                edge="end"
+                onClick={togglePasswordVisibility}
+              >
+                {inputType === "password" ? <EyeIcon /> : <EyeOffIcon />}
+              </IconButton>
+            </InputAdornment>
+          }
           id={id}
-          multiline={isMultiline}
-          onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
+          onBlur={onBlur}
           placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}
-          startAdornment={startAdornment}
-          type={type}
+          type={inputType}
           value={value}
         />
       ),
       [
         autoCompleteType,
         autoFocus,
-        endAdornment,
-        isMultiline,
+        togglePasswordVisibility,
+        inputType,
         onChange,
         onFocus,
         onBlur,
         placeholder,
         isReadOnly,
         ref,
-        startAdornment,
-        type,
         value,
       ]
     );
@@ -174,15 +162,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
-        isRequired={isRequired}
         label={label}
-        optionalLabel={optionalLabel}
         renderFieldComponent={renderFieldComponent}
       />
     );
   }
 );
 
-const MemoizedTextField = memo(TextField);
+const MemoizedPasswordField = memo(PasswordField);
 
-export { MemoizedTextField as TextField };
+export { MemoizedPasswordField as PasswordField };
