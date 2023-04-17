@@ -19,23 +19,65 @@ import { memo, useCallback } from "react";
 
 import { Field } from "./Field";
 
-export type AutocompleteProps<OptionType> = {
-  isDisabled?: boolean;
+export type AutocompleteProps<
+  OptionType,
+  HasMultipleChoices extends boolean | undefined,
+  IsCustomValueAllowed extends boolean | undefined
+> = {
+  hasMultipleChoices?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["multiple"];
   hint?: string;
+  isCustomValueAllowed?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["freeSolo"];
+  isDisabled?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["disabled"];
   label: string;
-  onChange?: MuiAutocompleteProps<OptionType, false, false, false>["onChange"];
-  options: MuiAutocompleteProps<OptionType, false, false, false>["options"];
-  value?: MuiAutocompleteProps<OptionType, false, false, false>["value"];
+  onChange?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["onChange"];
+  options: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["options"];
+  value?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["value"];
 };
 
-const Autocomplete = <OptionType,>({
+const Autocomplete = <
+  OptionType,
+  HasMultipleChoices extends boolean | undefined,
+  IsCustomValueAllowed extends boolean | undefined
+>({
+  isCustomValueAllowed,
+  hasMultipleChoices,
   isDisabled,
   hint,
   label,
   onChange,
   options,
   value,
-}: AutocompleteProps<OptionType>) => {
+}: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
@@ -59,6 +101,8 @@ const Autocomplete = <OptionType,>({
   return (
     <MuiAutocomplete
       disabled={isDisabled}
+      freeSolo={isCustomValueAllowed}
+      multiple={hasMultipleChoices}
       onChange={onChange}
       options={options}
       renderInput={renderInput}
