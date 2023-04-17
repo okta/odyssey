@@ -84,12 +84,6 @@ The values of read-only inputs will be submitted.
   <Story id="mui-components-forms-textfield--read-only" />
 </Canvas>
 
-### Optional
-
-Odyssey assumes inputs are required by default. Optional inputs should be used to indicate when data is not required for the user to complete a task.
-
-**STORY MISSING**
-
 ### Invalid
 
 The invalid state is for inputs with incorrect values or values of the wrong format.
@@ -119,53 +113,3 @@ Unlike email fields, tel inputs are not automatically validated because global f
 <Canvas>
   <Story id="mui-components-forms-textfield--tel" />
 </Canvas>
-
-### Password
-
-Passwords inputs ensure that sensitive content is safely obscured.
-
-<Canvas>
-  <Story id="mui-components-forms-textfield--password" />
-</Canvas>
-
-### Search
-
-Search inputs allow the user to submit queries. This is the only input type where `placeholder` may be used.
-
-<Canvas>
-  <Story id="mui-components-forms-textfield--search" />
-</Canvas>
-
-## Accessibility
-
-### Placeholders
-
-Except for Search inputs, we advise against using placeholder text for inputs.
-
-#### Translation
-
-To prevent triggering a change in page layout, browsers don't translate certain attributes. Because of this, users will see untranslated placeholder text.
-
-#### Recall
-
-Placeholder text disappears when a field is interacted with. For this reason, it's not suitable for formatting guidelines or necessary context.
-
-#### Utility
-
-Placeholder content is limited to static text. Additionally, placeholder text is truncated beyond the width of its input.
-
-#### Field value confusion
-
-Low-contrast placeholders may be illegible for some users. Yet, placeholders with compliant contrast can be mistaken for field values. High Contrast Mode will make placeholders and values appear identical.
-
-Finally, Users with low digital literacy may not understand the purpose or behavior of placeholder text.
-
-### Purpose
-
-When collecting an individual's personal data, you must define the input's purpose via the `autocomplete` attribute. This allows users to automate the filling of fields and ensures the purpose is known, regardless of the label. A complete list of fields this is required for may be found <a href="https://www.w3.org/TR/WCAG21/#input-purposes">in the WCAG spec</a>.
-
-### Autofocus
-
-Except for very specific cases, we advise against using the `autoFocus` prop; unless used considerately, the sense of focus being "teleported" to an unexpected part of the page can be jarring to users, especially those using screen readers.
-
-More details can be found [on MDN's `autofocus` page](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autofocus#accessibility_considerations).
