@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Autocomplete, TextField, TextFieldMui } from "@okta/odyssey-react-mui";
+import { Autocomplete } from "@okta/odyssey-react-mui";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -25,30 +25,30 @@ const storybookMeta: ComponentMeta<typeof Autocomplete> = {
     },
   },
   argTypes: {
-    disabled: {
+    isDisabled: {
       control: "boolean",
       defaultValue: false,
     },
-    freeSolo: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    includeInputInList: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    loading: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    multiple: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    readOnly: {
-      control: "boolean",
-      defaultValue: false,
-    },
+    // freeSolo: {
+    //   control: "boolean",
+    //   defaultValue: false,
+    // },
+    // includeInputInList: {
+    //   control: "boolean",
+    //   defaultValue: false,
+    // },
+    // loading: {
+    //   control: "boolean",
+    //   defaultValue: false,
+    // },
+    // multiple: {
+    //   control: "boolean",
+    //   defaultValue: false,
+    // },
+    // readOnly: {
+    //   control: "boolean",
+    //   defaultValue: false,
+    // },
   },
   decorators: [MuiThemeDecorator],
 };
@@ -188,17 +188,9 @@ const Template: ComponentStory<typeof Autocomplete> = (args) => {
   return (
     <Autocomplete
       {...args}
+      hint="Select your favorite movie"
+      label="Movie"
       options={top100Films}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          endAdornment={params.InputProps.endAdornment}
-          hint="Select your favorite movie"
-          label="Movie"
-          ref={params.InputProps.ref}
-          startAdornment={params.InputProps.startAdornment}
-        />
-      )}
     />
   );
 };
@@ -208,16 +200,16 @@ const EmptyTemplate: ComponentStory<typeof Autocomplete> = (args) => {
     <Autocomplete
       {...args}
       options={[]}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          endAdornment={params.InputProps.endAdornment}
-          hint="Select your favorite movie"
-          label="Movie"
-          ref={params.InputProps.ref}
-          startAdornment={params.InputProps.startAdornment}
-        />
-      )}
+      // renderInput={(params) => (
+      //   <TextField
+      //     {...params}
+      //     endAdornment={params.InputProps.endAdornment}
+      //     hint="Select your favorite movie"
+      //     label="Movie"
+      //     ref={params.InputProps.ref}
+      //     startAdornment={params.InputProps.startAdornment}
+      //   />
+      // )}
     />
   );
 };
@@ -227,7 +219,7 @@ const MuiTemplate: ComponentStory<typeof Autocomplete> = (args) => {
     <Autocomplete
       {...args}
       options={top100Films}
-      renderInput={(params) => <TextFieldMui {...params} label="Movie" />}
+      // renderInput={(params) => <MuiTextField {...params} label="Movie" />}
     />
   );
 };
@@ -237,33 +229,33 @@ Default.args = {};
 
 export const disabled = Template.bind({});
 disabled.args = {
-  disabled: true,
+  // disabled: true,
   value: "The Godfather",
 };
 
 export const freeSolo = Template.bind({});
 freeSolo.args = {
-  freeSolo: true,
+  // freeSolo: true,
 };
 
 export const includeInputInList = Template.bind({});
 includeInputInList.args = {
-  includeInputInList: true,
+  // includeInputInList: true,
 };
 
 export const loading = EmptyTemplate.bind({});
 loading.args = {
-  loading: true,
+  // loading: true,
 };
 
 export const multiple = Template.bind({});
 multiple.args = {
-  multiple: true,
+  // multiple: true,
 };
 
 export const readOnly = Template.bind({});
 readOnly.args = {
-  readOnly: true,
+  // readOnly: true,
   value: "The Godfather",
 };
 
@@ -272,5 +264,5 @@ MaterialSingle.args = {};
 
 export const MaterialMultiple = MuiTemplate.bind({});
 MaterialMultiple.args = {
-  multiple: true,
+  // multiple: true,
 };
