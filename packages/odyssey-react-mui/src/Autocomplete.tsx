@@ -23,19 +23,10 @@ export type AutocompleteProps<OptionType> = {
   isDisabled?: boolean;
   hint?: string;
   label: string;
-  onChange?: MuiAutocompleteProps<OptionType, undefined, undefined, undefined>;
-  options: OptionType[];
-  value?: OptionType | null;
+  onChange?: MuiAutocompleteProps<OptionType, false, false, false>["onChange"];
+  options: MuiAutocompleteProps<OptionType, false, false, false>["options"];
+  value?: MuiAutocompleteProps<OptionType, false, false, false>["value"];
 };
-
-// <TextField
-//   {...params}
-//   endAdornment={params.InputProps.endAdornment}
-//   hint={hint}
-//   label={label}
-//   ref={params.InputProps.ref}
-//   startAdornment={params.InputProps.startAdornment}
-// />
 
 const Autocomplete = <OptionType,>({
   isDisabled,
@@ -50,7 +41,6 @@ const Autocomplete = <OptionType,>({
       <Field
         hasVisibleLabel
         hint={hint}
-        // id={params.InputLabelProps.id} // Pretty sure this is unnecessary -Kevin
         label={label}
         renderFieldComponent={({ ariaDescribedBy, id }) => (
           <InputBase
@@ -68,8 +58,6 @@ const Autocomplete = <OptionType,>({
   return (
     <MuiAutocomplete
       disabled={isDisabled}
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      /* @ts-ignore TEMP */ // PLEASE REMOVE once we figure out the correct type.
       onChange={onChange}
       options={options}
       renderInput={renderInput}
@@ -78,6 +66,6 @@ const Autocomplete = <OptionType,>({
   );
 };
 
-const MemoizedAutocomplete = memo(Autocomplete);
+const MemoizedAutocomplete = memo(Autocomplete) as typeof Autocomplete;
 
 export { MemoizedAutocomplete as Autocomplete };
