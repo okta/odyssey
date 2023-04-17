@@ -191,6 +191,7 @@ const Template: ComponentStory<typeof Autocomplete> = (args) => {
       hint="Select your favorite movie"
       label="Movie"
       options={top100Films}
+      value={{ label: "", year: 2000 }}
     />
   );
 };
@@ -220,6 +221,7 @@ const MuiTemplate: ComponentStory<typeof Autocomplete> = (args) => {
       {...args}
       options={top100Films}
       // renderInput={(params) => <MuiTextField {...params} label="Movie" />}
+      value={{ label: "", year: 2000 }}
     />
   );
 };
