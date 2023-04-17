@@ -1,0 +1,38 @@
+import { ArgsTable, Canvas, Meta, Source, Story } from "@storybook/addon-docs";
+
+<Meta anchor />
+
+# ScreenReaderText
+
+The ScreenReaderText component is designed to enhance accessibility by providing text that can be read by screen readers but is not visible to a sighted user.
+
+<Canvas>
+  <Story id="mui-components-screenreadertext--default" />
+</Canvas>
+
+## Usage
+
+The ScreenReaderText component should be used in conjunction with other visible UI elements to ensure that all users have access to the same information. It is typically used for labeling and providing additional context for form fields, buttons, and other interactive elements on the page.
+
+### Component composition
+
+ScreenReaderText may be used to provide accessibility when composing custom components.
+
+For example, when communicating the `severity` of an Alert:
+
+<Source
+  code={`
+<Alert role={role} severity={severity} variant="banner">
+  <ScreenReaderText>{severity}:</ScreenReaderText>
+  {text}
+</Alert>
+`}
+/>
+
+### Content guidelines
+
+The following guidelines should be followed when designing the ScreenReaderText component:
+
+- Use a clear and concise language that accurately describes the UI element being labeled or described.
+- Do not include any information that is already visible on the page, as this may cause confusion for users with screen readers.
+- Avoid using overly complex or technical language that may be difficult for some users to understand.
