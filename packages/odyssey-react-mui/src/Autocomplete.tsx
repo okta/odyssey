@@ -37,15 +37,16 @@ const Autocomplete = <OptionType,>({
   value,
 }: AutocompleteProps<OptionType>) => {
   const renderInput = useCallback(
-    (params) => (
+    ({ InputLabelProps, InputProps, ...params }) => (
       <Field
+        {...InputLabelProps}
         hasVisibleLabel
         hint={hint}
         label={label}
         renderFieldComponent={({ ariaDescribedBy, id }) => (
           <InputBase
             {...params}
-            {...params.InputProps}
+            {...InputProps}
             aria-describedby={ariaDescribedBy}
             id={id}
           />
