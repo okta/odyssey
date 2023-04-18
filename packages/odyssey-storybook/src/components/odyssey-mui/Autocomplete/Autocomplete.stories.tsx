@@ -204,22 +204,7 @@ const Template: Story<AutocompleteType> = (args) => {
 };
 
 const EmptyTemplate: Story<AutocompleteType> = (args) => {
-  return (
-    <Autocomplete
-      {...args}
-      options={[]}
-      // renderInput={(params) => (
-      //   <TextField
-      //     {...params}
-      //     endAdornment={params.InputProps.endAdornment}
-      //     hint="Select your favorite movie"
-      //     label="Movie"
-      //     ref={params.InputProps.ref}
-      //     startAdornment={params.InputProps.startAdornment}
-      //   />
-      // )}
-    />
-  );
+  return <Autocomplete {...args} options={[]} />;
 };
 
 const MuiTemplate: Story<AutocompleteType> = (args) => {
@@ -237,19 +222,14 @@ Default.args = {};
 
 export const disabled = Template.bind({});
 disabled.args = {
-  // disabled: true,
+  isDisabled: true,
   // value: "The Godfather",
   value: { label: "The Godfather", year: 1972 },
 };
 
 export const freeSolo = Template.bind({});
 freeSolo.args = {
-  // freeSolo: true,
-};
-
-export const includeInputInList = Template.bind({});
-includeInputInList.args = {
-  // includeInputInList: true,
+  isCustomValueAllowed: true,
 };
 
 export const loading = EmptyTemplate.bind({});
@@ -259,7 +239,7 @@ loading.args = {
 
 export const multiple = Template.bind({});
 multiple.args = {
-  // multiple: true,
+  hasMultipleChoices: true,
 };
 
 export const readOnly = Template.bind({});
@@ -274,5 +254,5 @@ MaterialSingle.args = {};
 
 export const MaterialMultiple = MuiTemplate.bind({});
 MaterialMultiple.args = {
-  // multiple: true,
+  hasMultipleChoices: true,
 };
