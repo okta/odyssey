@@ -11,7 +11,7 @@
  */
 
 import { Autocomplete, AutocompleteProps } from "@okta/odyssey-react-mui";
-import { ComponentMeta, ComponentStory, Story } from "@storybook/react";
+import { ComponentMeta, Story } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import AutocompleteMdx from "./Autocomplete.mdx";
@@ -186,13 +186,13 @@ const top100Films: ReadonlyArray<MovieType> = [
   { label: "Monty Python and the Holy Grail", year: 1975 },
 ];
 
-const Template: Story<
-  AutocompleteProps<
-    MovieType | undefined,
-    boolean | undefined,
-    boolean | undefined
-  >
-> = (args) => {
+type AutocompleteType = AutocompleteProps<
+  MovieType | undefined,
+  boolean | undefined,
+  boolean | undefined
+>;
+
+const Template: Story<AutocompleteType> = (args) => {
   return (
     <Autocomplete
       {...args}
@@ -203,13 +203,7 @@ const Template: Story<
   );
 };
 
-const EmptyTemplate: Story<
-  AutocompleteProps<
-    MovieType | undefined,
-    boolean | undefined,
-    boolean | undefined
-  >
-> = (args) => {
+const EmptyTemplate: Story<AutocompleteType> = (args) => {
   return (
     <Autocomplete
       {...args}
@@ -228,13 +222,7 @@ const EmptyTemplate: Story<
   );
 };
 
-const MuiTemplate: Story<
-  AutocompleteProps<
-    MovieType | undefined,
-    boolean | undefined,
-    boolean | undefined
-  >
-> = (args) => {
+const MuiTemplate: Story<AutocompleteType> = (args) => {
   return (
     <Autocomplete
       {...args}
