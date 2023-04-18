@@ -165,6 +165,34 @@ export const components: ThemeOptions["components"] = {
       popupIcon: <ChevronDownIcon />,
       selectOnFocus: true,
     },
+    styleOverrides: {
+      clearIndicator: ({ theme }) => ({
+        marginRight: "unset",
+        padding: theme.spacing(1),
+      }),
+      endAdornment: ({ theme, ownerState }) => ({
+        display: "flex",
+        gap: theme.spacing(1),
+        top: `calc(${theme.spacing(2)} - ${theme.mixins.borderWidth})`,
+        right: theme.spacing(2),
+        maxHeight: "unset",
+        alignItems: "center",
+        whiteSpace: "nowrap",
+        color: theme.palette.action.active,
+
+        ...(ownerState.disabled === true && {
+          display: "none",
+        }),
+
+        ...(ownerState.readOnly === true && {
+          display: "none",
+        }),
+      }),
+      popupIndicator: ({ theme }) => ({
+        padding: theme.spacing(1),
+        marginRight: "unset",
+      }),
+    },
   },
   MuiBackdrop: {
     styleOverrides: {
