@@ -73,7 +73,7 @@ Icon.args = {
 export const Disabled = Template.bind({});
 Disabled.args = {
   children: (
-    <Button variant="secondary" disabled startIcon={<DownloadIcon />} />
+    <Button variant="secondary" isDisabled startIcon={<DownloadIcon />} />
   ),
   describeChild: true,
   placement: "top",

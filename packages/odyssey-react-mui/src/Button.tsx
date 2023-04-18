@@ -16,10 +16,10 @@ import { Tooltip } from "./";
 import { memo } from "react";
 
 export type ButtonProps = {
-  disabled?: boolean;
   endIcon?: React.ReactNode;
   fullWidth?: boolean;
   id?: string;
+  isDisabled?: boolean;
   onClick?: MuiButtonProps["onClick"];
   size?: "small" | "medium" | "large";
   startIcon?: React.ReactNode;
@@ -29,10 +29,10 @@ export type ButtonProps = {
 };
 
 const Button = ({
-  disabled,
   endIcon,
   fullWidth,
   id,
+  isDisabled,
   onClick,
   size = "medium",
   startIcon,
@@ -42,7 +42,7 @@ const Button = ({
 }: ButtonProps) => {
   const button = (
     <MuiButton
-      disabled={disabled}
+      disabled={isDisabled}
       endIcon={endIcon}
       fullWidth={fullWidth}
       id={id}

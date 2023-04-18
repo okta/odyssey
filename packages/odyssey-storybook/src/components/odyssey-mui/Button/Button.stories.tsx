@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import { Button, AddIcon } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
@@ -27,10 +27,10 @@ export default {
     },
   },
   argTypes: {
-    disabled: {
+    fullWidth: {
       control: "boolean",
     },
-    fullWidth: {
+    isDisabled: {
       control: "boolean",
     },
     size: {
@@ -54,7 +54,7 @@ export default {
     },
   },
   decorators: [MuiThemeDecorator],
-};
+} as Meta<ButtonProps>;
 
 const Template: Story<ButtonProps> = (props) => <Button {...props} />;
 
@@ -98,7 +98,7 @@ ButtonFullWidth.args = {
 
 export const ButtonPrimaryDisabled = Template.bind({});
 ButtonPrimaryDisabled.args = {
-  disabled: true,
+  isDisabled: true,
 };
 
 export const ButtonWithIcon = Template.bind({});
