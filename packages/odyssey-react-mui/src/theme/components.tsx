@@ -200,6 +200,10 @@ export const components: ThemeOptions["components"] = {
       inputRoot: ({ theme, ownerState }) => ({
         ...(ownerState.readOnly === true && {
           backgroundColor: theme.palette.grey[50],
+
+          [`&:not(:hover)`]: {
+            borderColor: "transparent",
+          },
         }),
       }),
     },
