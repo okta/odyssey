@@ -29,7 +29,7 @@ const storybookMeta: ComponentMeta<typeof Autocomplete> = {
       control: "boolean",
       defaultValue: false,
     },
-    // freeSolo: {
+    // isCustomValueAllowed: {
     //   control: "boolean",
     //   defaultValue: false,
     // },
@@ -41,7 +41,7 @@ const storybookMeta: ComponentMeta<typeof Autocomplete> = {
     //   control: "boolean",
     //   defaultValue: false,
     // },
-    // multiple: {
+    // hasMultipleChoices: {
     //   control: "boolean",
     //   defaultValue: false,
     // },
@@ -207,16 +207,6 @@ const EmptyTemplate: Story<AutocompleteType> = (args) => {
   return <Autocomplete {...args} options={[]} />;
 };
 
-const MuiTemplate: Story<AutocompleteType> = (args) => {
-  return (
-    <Autocomplete
-      {...args}
-      options={top100Films}
-      // renderInput={(params) => <MuiTextField {...params} label="Movie" />}
-    />
-  );
-};
-
 export const Default = Template.bind({});
 Default.args = {};
 
@@ -227,8 +217,8 @@ disabled.args = {
   value: { label: "The Godfather", year: 1972 },
 };
 
-export const freeSolo = Template.bind({});
-freeSolo.args = {
+export const isCustomValueAllowed = Template.bind({});
+isCustomValueAllowed.args = {
   isCustomValueAllowed: true,
 };
 
@@ -237,8 +227,8 @@ loading.args = {
   // loading: true,
 };
 
-export const multiple = Template.bind({});
-multiple.args = {
+export const hasMultipleChoices = Template.bind({});
+hasMultipleChoices.args = {
   hasMultipleChoices: true,
 };
 
@@ -247,12 +237,4 @@ readOnly.args = {
   // readOnly: true,
   // value: "The Godfather",
   value: { label: "The Godfather", year: 1972 },
-};
-
-export const MaterialSingle = MuiTemplate.bind({});
-MaterialSingle.args = {};
-
-export const MaterialMultiple = MuiTemplate.bind({});
-MaterialMultiple.args = {
-  hasMultipleChoices: true,
 };
