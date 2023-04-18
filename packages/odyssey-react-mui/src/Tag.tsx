@@ -16,25 +16,18 @@ import { TagListContext } from "./TagListContext";
 
 export type TagProps = {
   isDisabled?: boolean;
-  isInteractive?: boolean;
   label: string;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onDelete?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
-const Tag = ({
-  isDisabled,
-  isInteractive,
-  label,
-  onClick,
-  onDelete,
-}: TagProps) => {
+const Tag = ({ isDisabled, label, onClick, onDelete }: TagProps) => {
   const { chipComponent } = useContext(TagListContext);
 
   return (
     <Chip
       label={label}
-      clickable={isInteractive}
+      clickable={onClick ? true : false}
       component={chipComponent}
       disabled={isDisabled}
       onClick={onClick}

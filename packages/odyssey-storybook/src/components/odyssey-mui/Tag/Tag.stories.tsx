@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import { Tag, TagList } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TagMdx from "./Tag.mdx";
@@ -29,13 +29,13 @@ export default {
       control: "text",
       defaultValue: "Starship",
     },
-    isInteractive: {
-      control: "boolean",
-      defaultValue: false,
-    },
     isDisabled: {
       control: "boolean",
       defaultValue: false,
+    },
+    onClick: {
+      control: "text",
+      defaultValue: null,
     },
     onDelete: {
       control: "text",
@@ -43,26 +43,26 @@ export default {
     },
   },
   decorators: [MuiThemeDecorator],
-};
+} as Meta<TagProps>;
 
-const DefaultTemplate: Story = (args) => {
+const DefaultTemplate: Story<TagProps> = (args) => {
   return (
     <Tag
       label={args.label}
-      isInteractive={args.isInteractive}
       isDisabled={args.isDisabled}
+      onClick={args.onClick}
       onDelete={args.onDelete}
     />
   );
 };
 
-const ListTemplate: Story = (args) => {
+const ListTemplate: Story<TagProps> = (args) => {
   return (
     <TagList>
       <Tag
         label={args.label}
-        isInteractive={args.isInteractive}
         isDisabled={args.isDisabled}
+        onClick={args.onClick}
         onDelete={args.onDelete}
       />
       <Tag label="Another tag" />
@@ -79,7 +79,9 @@ List.args = {};
 
 export const Clickable = DefaultTemplate.bind({});
 Clickable.args = {
-  isClickable: true,
+  onClick: () => {
+    return true;
+  },
 };
 
 export const Deletable = DefaultTemplate.bind({});
