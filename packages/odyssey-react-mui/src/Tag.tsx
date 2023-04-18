@@ -11,24 +11,37 @@
  */
 
 import { Chip } from ".";
-import { memo } from "react";
+import { memo, useContext } from "react";
+import { TagListContext } from "./TagListContext";
 
 export type TagProps = {
   isDisabled?: boolean;
   isInteractive?: boolean;
   label: string;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onDelete?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
-const Tag = ({ isDisabled, isInteractive, label, onDelete }: TagProps) => (
-  <Chip
-    label={label}
-    clickable={isInteractive}
-    component="li"
-    disabled={isDisabled}
-    onDelete={onDelete}
-  />
-);
+const Tag = ({
+  isDisabled,
+  isInteractive,
+  label,
+  onClick,
+  onDelete,
+}: TagProps) => {
+  const { chipComponent } = useContext(TagListContext);
+
+  return (
+    <Chip
+      label={label}
+      clickable={isInteractive}
+      component={chipComponent}
+      disabled={isDisabled}
+      onClick={onClick}
+      onDelete={onDelete}
+    />
+  );
+};
 
 const MemoizedTag = memo(Tag);
 

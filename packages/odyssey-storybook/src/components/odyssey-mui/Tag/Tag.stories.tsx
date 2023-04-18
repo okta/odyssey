@@ -29,59 +29,44 @@ export default {
       control: "text",
       defaultValue: "Starship",
     },
-    label2: {
+    isInteractive: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    isDisabled: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    onDelete: {
       control: "text",
       defaultValue: null,
-    },
-    label3: {
-      control: "text",
-      defaultValue: null,
-    },
-    interactive: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    disabled: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    deletable: {
-      control: "boolean",
-      defaultValue: false,
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const handleDelete = () => {
-  console.info("You clicked the delete icon.");
+const DefaultTemplate: Story = (args) => {
+  return (
+    <Tag
+      label={args.label}
+      isInteractive={args.isInteractive}
+      isDisabled={args.isDisabled}
+      onDelete={args.onDelete}
+    />
+  );
 };
 
-const DefaultTemplate: Story = (args) => {
+const ListTemplate: Story = (args) => {
   return (
     <TagList>
       <Tag
         label={args.label}
-        isInteractive={args.interactive}
-        isDisabled={args.disabled}
-        onDelete={args.deletable && handleDelete}
+        isInteractive={args.isInteractive}
+        isDisabled={args.isDisabled}
+        onDelete={args.onDelete}
       />
-      {args.label2 && (
-        <Tag
-          label={args.label2}
-          isInteractive={args.interactive}
-          isDisabled={args.disabled}
-          onDelete={args.deletable && handleDelete}
-        />
-      )}
-      {args.label3 && (
-        <Tag
-          label={args.label3}
-          isInteractive={args.interactive}
-          isDisabled={args.disabled}
-          onDelete={args.deletable && handleDelete}
-        />
-      )}
+      <Tag label="Another tag" />
+      <Tag label="A third tag" />
     </TagList>
   );
 };
@@ -89,23 +74,22 @@ const DefaultTemplate: Story = (args) => {
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
 
-export const List = DefaultTemplate.bind({});
-List.args = {
-  label2: "Warp-capable",
-  label3: "Unmanned",
-};
+export const List = ListTemplate.bind({});
+List.args = {};
 
 export const Clickable = DefaultTemplate.bind({});
 Clickable.args = {
-  clickable: true,
+  isClickable: true,
 };
 
 export const Deletable = DefaultTemplate.bind({});
 Deletable.args = {
-  deletable: true,
+  onDelete: () => {
+    return true;
+  },
 };
 
 export const Disabled = DefaultTemplate.bind({});
 Disabled.args = {
-  disabled: true,
+  isDisabled: true,
 };

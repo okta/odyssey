@@ -11,17 +11,29 @@
  */
 
 import { Stack, Tag } from ".";
-import { memo, ReactElement } from "react";
+import { memo, ReactElement, useMemo } from "react";
+import { ChipComponentType, TagListContext } from "./TagListContext";
 
 export type TagListProps = {
   children: ReactElement<typeof Tag> | Array<ReactElement<typeof Tag>>;
 };
 
-const TagList = ({ children }: TagListProps) => (
-  <Stack component="ul" direction="row" spacing={2}>
-    {children}
-  </Stack>
-);
+const TagList = ({ children }: TagListProps) => {
+  const providerValue = useMemo(
+    () => ({
+      chipComponent: "li" as ChipComponentType,
+    }),
+    []
+  );
+
+  return (
+    <Stack component="ul" direction="row" spacing={2}>
+      <TagListContext.Provider value={providerValue}>
+        {children}
+      </TagListContext.Provider>
+    </Stack>
+  );
+};
 
 const MemoizedTagList = memo(TagList);
 
