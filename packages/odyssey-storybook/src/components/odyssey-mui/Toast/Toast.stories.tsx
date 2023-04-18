@@ -56,7 +56,7 @@ const storybookMeta: Meta<ToastProps> = {
     },
   },
   decorators: [MuiThemeDecorator],
-};
+} as Meta<ToastProps>;
 
 export default storybookMeta;
 
