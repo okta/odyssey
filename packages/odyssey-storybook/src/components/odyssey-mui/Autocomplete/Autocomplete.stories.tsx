@@ -226,9 +226,23 @@ loading.args = {
   isLoading: true,
 };
 
-export const hasMultipleChoices = Template.bind({});
-hasMultipleChoices.args = {
+export const multiple = Template.bind({});
+multiple.args = {
   hasMultipleChoices: true,
+};
+
+export const multipleDisabled = Template.bind({});
+multipleDisabled.args = {
+  hasMultipleChoices: true,
+  isDisabled: true,
+  value: [{ label: "The Godfather", year: 1972 }],
+};
+
+export const multipleReadOnly = Template.bind({});
+multipleReadOnly.args = {
+  hasMultipleChoices: true,
+  isReadOnly: true,
+  value: [{ label: "The Godfather", year: 1972 }],
 };
 
 export const readOnly = Template.bind({});
