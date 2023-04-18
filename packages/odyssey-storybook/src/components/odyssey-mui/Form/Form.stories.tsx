@@ -248,10 +248,9 @@ const Template: Story = (args) => {
           </FormControl>
         </Box>
       )}
-      {/* <FormActions> ? <ButtonGroup> (new variant needed) ? */}
       <Box>
-        <Button variant="primary">Submit</Button>
-        <Button variant="floating">Cancel</Button>
+        <Button variant="primary" text="Submit" />
+        <Button variant="floating" text="Cancel" />
       </Box>
     </Box>
   );

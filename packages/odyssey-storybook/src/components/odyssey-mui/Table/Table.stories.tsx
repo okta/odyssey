@@ -339,9 +339,7 @@ const DefaultTemplate: Story = () => {
               <TableCell>{row.type}</TableCell>
               <TableCell variant="date">{row.perihelion}</TableCell>
               <TableCell variant="action">
-                <Button variant="secondary" size="small">
-                  Plot course
-                </Button>
+                <Button variant="secondary" size="small" text="Plot course" />
               </TableCell>
             </TableRow>
           ))}
@@ -381,9 +379,7 @@ const RowHeadingTemplate: Story = () => {
               <TableCell>{row.type}</TableCell>
               <TableCell variant="date">{row.perihelion}</TableCell>
               <TableCell variant="action">
-                <Button variant="secondary" size="small">
-                  Plot course
-                </Button>
+                <Button variant="secondary" size="small" text="Plot course" />
               </TableCell>
             </TableRow>
           ))}

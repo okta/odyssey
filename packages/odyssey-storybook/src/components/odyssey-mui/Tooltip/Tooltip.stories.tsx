@@ -56,7 +56,7 @@ const Template: Story = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  children: <Button>Launch</Button>,
+  children: <Button text="Launch" />,
   describeChild: true,
   placement: "top",
   title: "This will begin a 10-second countdown",
@@ -84,16 +84,16 @@ const PlacementTemplate: Story = () => {
   return (
     <>
       <Tooltip title="Top" placement="top">
-        <Button>Top</Button>
+        <Button text="Top" />
       </Tooltip>
       <Tooltip title="Right" placement="right">
-        <Button>Right</Button>
+        <Button text="Right" />
       </Tooltip>
       <Tooltip title="Bottom" placement="bottom">
-        <Button>Bottom</Button>
+        <Button text="Bottom" />
       </Tooltip>
       <Tooltip title="Left" placement="left">
-        <Button>Left</Button>
+        <Button text="Left" />
       </Tooltip>
     </>
   );
