@@ -159,6 +159,7 @@ export const components: ThemeOptions["components"] = {
       filterSelectedOptions: false,
       fullWidth: false,
       handleHomeEndKeys: true,
+      includeInputInList: true,
       limitTags: -1,
       openOnFocus: false,
       popupIcon: <ChevronDownIcon />,
