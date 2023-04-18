@@ -224,7 +224,7 @@ isCustomValueAllowed.args = {
 
 export const loading = EmptyTemplate.bind({});
 loading.args = {
-  // loading: true,
+  isLoading: true,
 };
 
 export const hasMultipleChoices = Template.bind({});

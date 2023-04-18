@@ -43,6 +43,12 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["disabled"];
+  isLoading?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["loading"];
   label: string;
   onChange?: MuiAutocompleteProps<
     OptionType,
@@ -72,6 +78,7 @@ const Autocomplete = <
   isCustomValueAllowed,
   hasMultipleChoices,
   isDisabled,
+  isLoading,
   hint,
   label,
   onChange,
@@ -102,6 +109,7 @@ const Autocomplete = <
     <MuiAutocomplete
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
+      loading={isLoading}
       multiple={hasMultipleChoices}
       onChange={onChange}
       options={options}
