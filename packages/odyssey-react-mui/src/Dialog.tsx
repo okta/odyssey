@@ -11,7 +11,6 @@
  */
 
 import { Dialog as MuiDialog } from "@mui/material";
-import { DialogProps as MuiDialogProps } from "@mui/material";
 import {
   DialogTitle,
   DialogContent,
@@ -21,26 +20,28 @@ import {
 import { Button, CloseIcon } from "./";
 import { memo, ReactNode, useState, useEffect, useRef } from "react";
 
-export interface DialogProps extends MuiDialogProps {
-  onClose: () => void;
-  title: string;
+export type DialogProps = {
   actions?: ReactNode;
-}
+  children: ReactNode | Array<ReactNode>;
+  onClose: () => void;
+  isOpen: boolean;
+  title: string;
+};
 
-const Dialog = ({ actions, children, onClose, open, title }: DialogProps) => {
+const Dialog = ({ actions, children, isOpen, onClose, title }: DialogProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setTimeout(() => {
       const dialogContentElement = dialogContentRef.current;
-      if (open && dialogContentElement) {
+      if (isOpen && dialogContentElement) {
         setIsContentScrollable(
           dialogContentElement.scrollHeight > dialogContentElement.clientHeight
         );
       }
     }, 0);
-  }, [children, open]);
+  }, [children, isOpen]);
 
   const content =
     typeof children === "string" ? (
@@ -50,7 +51,7 @@ const Dialog = ({ actions, children, onClose, open, title }: DialogProps) => {
     );
 
   return (
-    <MuiDialog open={open} onClose={onClose}>
+    <MuiDialog open={isOpen} onClose={onClose}>
       <DialogTitle>
         {title}
         <Button variant="floating" onClick={onClose}>

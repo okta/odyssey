@@ -11,8 +11,13 @@
  */
 
 import * as React from "react";
-import { Story } from "@storybook/react";
-import { Button, Dialog, DialogContentText } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import {
+  Button,
+  Dialog,
+  DialogContentText,
+  DialogProps,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import DialogMdx from "./Dialog.mdx";
@@ -55,9 +60,9 @@ export default {
     },
   },
   decorators: [MuiThemeDecorator],
-};
+} as Meta<DialogProps>;
 
-const DefaultTemplate: Story = (args) => {
+const DefaultTemplate: Story<DialogProps> = (args) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -83,7 +88,7 @@ const DefaultTemplate: Story = (args) => {
           </>
         }
         onClose={handleClose}
-        open={open}
+        isOpen={open}
         title={args.title}
       >
         {args.children}
