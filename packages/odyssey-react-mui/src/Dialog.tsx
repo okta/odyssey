@@ -33,15 +33,26 @@ const Dialog = ({ actions, children, isOpen, onClose, title }: DialogProps) => {
   const dialogContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setTimeout(() => {
+    let frameId: number;
+
+    const handleContentScroll = () => {
       const dialogContentElement = dialogContentRef.current;
-      if (isOpen && dialogContentElement) {
+      if (dialogContentElement) {
         setIsContentScrollable(
           dialogContentElement.scrollHeight > dialogContentElement.clientHeight
         );
       }
-    }, 0);
-  }, [children, isOpen]);
+      frameId = requestAnimationFrame(handleContentScroll);
+    };
+
+    if (isOpen) {
+      frameId = requestAnimationFrame(handleContentScroll);
+    }
+
+    return () => {
+      cancelAnimationFrame(frameId);
+    };
+  }, [isOpen]);
 
   const content =
     typeof children === "string" ? (
