@@ -10,8 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Autocomplete } from "@okta/odyssey-react-mui";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Autocomplete, AutocompleteProps } from "@okta/odyssey-react-mui";
+import { ComponentMeta, ComponentStory, Story } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import AutocompleteMdx from "./Autocomplete.mdx";
@@ -55,8 +55,10 @@ const storybookMeta: ComponentMeta<typeof Autocomplete> = {
 
 export default storybookMeta;
 
+type MovieType = { label: string; year: number };
+
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const top100Films = [
+const top100Films: ReadonlyArray<MovieType> = [
   { label: "The Shawshank Redemption", year: 1994 },
   { label: "The Godfather", year: 1972 },
   { label: "The Godfather: Part II", year: 1974 },
@@ -184,19 +186,30 @@ const top100Films = [
   { label: "Monty Python and the Holy Grail", year: 1975 },
 ];
 
-const Template: ComponentStory<typeof Autocomplete> = (args) => {
+const Template: Story<
+  AutocompleteProps<
+    MovieType | undefined,
+    boolean | undefined,
+    boolean | undefined
+  >
+> = (args) => {
   return (
     <Autocomplete
       {...args}
       hint="Select your favorite movie"
       label="Movie"
       options={top100Films}
-      value={{ label: "", year: 2000 }}
     />
   );
 };
 
-const EmptyTemplate: ComponentStory<typeof Autocomplete> = (args) => {
+const EmptyTemplate: Story<
+  AutocompleteProps<
+    MovieType | undefined,
+    boolean | undefined,
+    boolean | undefined
+  >
+> = (args) => {
   return (
     <Autocomplete
       {...args}
@@ -215,13 +228,18 @@ const EmptyTemplate: ComponentStory<typeof Autocomplete> = (args) => {
   );
 };
 
-const MuiTemplate: ComponentStory<typeof Autocomplete> = (args) => {
+const MuiTemplate: Story<
+  AutocompleteProps<
+    MovieType | undefined,
+    boolean | undefined,
+    boolean | undefined
+  >
+> = (args) => {
   return (
     <Autocomplete
       {...args}
       options={top100Films}
       // renderInput={(params) => <MuiTextField {...params} label="Movie" />}
-      value={{ label: "", year: 2000 }}
     />
   );
 };
@@ -232,7 +250,8 @@ Default.args = {};
 export const disabled = Template.bind({});
 disabled.args = {
   // disabled: true,
-  value: "The Godfather",
+  // value: "The Godfather",
+  value: { label: "The Godfather", year: 1972 },
 };
 
 export const freeSolo = Template.bind({});
@@ -258,7 +277,8 @@ multiple.args = {
 export const readOnly = Template.bind({});
 readOnly.args = {
   // readOnly: true,
-  value: "The Godfather",
+  // value: "The Godfather",
+  value: { label: "The Godfather", year: 1972 },
 };
 
 export const MaterialSingle = MuiTemplate.bind({});
