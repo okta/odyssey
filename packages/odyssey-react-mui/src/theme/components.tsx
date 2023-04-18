@@ -188,6 +188,10 @@ export const components: ThemeOptions["components"] = {
           display: "none",
         }),
       }),
+      loading: ({ theme }) => ({
+        paddingBlock: theme.spacing(3),
+        paddingInline: theme.spacing(4),
+      }),
       popupIndicator: ({ theme }) => ({
         padding: theme.spacing(1),
         marginRight: "unset",
