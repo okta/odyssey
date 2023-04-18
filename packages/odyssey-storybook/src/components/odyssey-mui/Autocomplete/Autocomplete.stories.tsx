@@ -11,7 +11,7 @@
  */
 
 import { Autocomplete, AutocompleteProps } from "@okta/odyssey-react-mui";
-import { ComponentMeta, ComponentStory, Story } from "@storybook/react";
+import { ComponentMeta, Story } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import AutocompleteMdx from "./Autocomplete.mdx";
