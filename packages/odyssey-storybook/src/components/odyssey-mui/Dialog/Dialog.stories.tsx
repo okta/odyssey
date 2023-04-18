@@ -33,12 +33,6 @@ export default {
   argTypes: {
     actions: {
       control: null,
-      defaultValue: (
-        <>
-          <Button variant="floating">Cancel</Button>
-          <Button variant="primary">Primary action</Button>
-        </>
-      ),
       description:
         "A ReactNode intended to contain one or more Button objects.",
     },
