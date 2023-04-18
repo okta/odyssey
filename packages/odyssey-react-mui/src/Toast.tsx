@@ -11,8 +11,13 @@
  */
 
 import { AlertColor } from "@mui/material";
-import React from "react";
-import { memo, forwardRef, ForwardedRef } from "react";
+import React, {
+  useContext,
+  useEffect,
+  memo,
+  forwardRef,
+  ForwardedRef,
+} from "react";
 import {
   Alert,
   AlertTitle,
@@ -22,6 +27,7 @@ import {
   Snackbar,
   visuallyHidden,
 } from ".";
+import { ToastStackContext } from "./ToastStackContext";
 
 export type ToastProps = {
   /**
@@ -53,6 +59,10 @@ export type ToastProps = {
    */
   linkUrl?: string;
   /**
+   * An optional function to run when the Toast is closed.
+   */
+  onClose?: () => void;
+  /**
    * Sets the ARIA role of the alert
    * ("status" for something that dynamically updates, "alert" for errors, null for something
    * unchanging)
@@ -77,6 +87,7 @@ const Toast = forwardRef(
       linkText,
       linkUrl,
       isOpen,
+      onClose,
       role,
       severity,
       text,
@@ -84,13 +95,25 @@ const Toast = forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [open, setOpen] = React.useState(isOpen);
+    const { isStatic: isContextStatic } = useContext(ToastStackContext);
+
+    useEffect(() => {
+      setOpen(isOpen);
+    }, [isOpen]);
+
+    const handleClose = () => {
+      setOpen(false);
+      if (onClose) {
+        onClose();
+      }
+    };
 
     return (
       <Snackbar
         open={open}
         autoHideDuration={isDismissable ? undefined : autoHideDuration}
-        onClose={() => setOpen(false)}
-        className={isStatic ? "Toast-static" : ""}
+        onClose={handleClose}
+        className={isContextStatic || isStatic ? "Toast-static" : ""}
         ClickAwayListenerProps={{
           onClickAway: () => false,
         }}
@@ -101,7 +124,7 @@ const Toast = forwardRef(
             isDismissable && (
               <Button
                 aria-label="close"
-                onClick={() => setOpen(false)}
+                onClick={handleClose}
                 size="s"
                 startIcon={<CloseIcon />}
                 variant="floating"

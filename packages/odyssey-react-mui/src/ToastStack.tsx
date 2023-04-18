@@ -10,32 +10,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React from "react";
-import { memo, forwardRef, ForwardedRef, ReactElement } from "react";
-import { Box, Snackbar, ToastProps } from ".";
+import { memo, ReactElement, useMemo } from "react";
+import { Box, Snackbar } from ".";
+import { ToastStackContext } from "./ToastStackContext";
 
 export type ToastStackProps = {
   children: ReactElement | Array<ReactElement>;
 };
 
-const ToastStack = forwardRef(
-  ({ children }: ToastStackProps, ref: ForwardedRef<HTMLDivElement>) => {
-    const modifiedChildren = React.Children.map(
-      children,
-      (child: ReactElement<ToastProps>) => {
-        return React.cloneElement(child, { isStatic: true });
-      }
-    );
+const ToastStack = ({ children }: ToastStackProps) => {
+  const providerValue = useMemo(
+    () => ({
+      isStatic: true,
+    }),
+    []
+  );
 
-    return (
-      <Snackbar open={true}>
-        <Box ref={ref} display="flex" flexDirection="column-reverse" gap={2}>
-          {modifiedChildren}
-        </Box>
-      </Snackbar>
-    );
-  }
-);
+  return (
+    <Snackbar open={true}>
+      <Box display="flex" flexDirection="column-reverse" gap={2}>
+        <ToastStackContext.Provider value={providerValue}>
+          {children}
+        </ToastStackContext.Provider>
+      </Box>
+    </Snackbar>
+  );
+};
 
 const MemoizedToastStack = memo(ToastStack);
 

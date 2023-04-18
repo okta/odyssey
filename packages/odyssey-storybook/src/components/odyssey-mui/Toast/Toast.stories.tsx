@@ -69,7 +69,7 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
 
   return (
     <>
-      <Button variant="primary" onClick={openToast}>
+      <Button variant="primary" onClick={openToast} disabled={open}>
         Open {args.severity} toast
       </Button>
       <Toast
@@ -78,6 +78,7 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
         linkText={args.linkText}
         linkUrl={args.linkUrl}
         isOpen={open}
+        onClose={() => setOpen(false)}
         role={args.role}
         severity={args.severity}
         text={args.text}
