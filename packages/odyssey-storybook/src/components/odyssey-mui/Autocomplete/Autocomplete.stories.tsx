@@ -213,7 +213,6 @@ Default.args = {};
 export const disabled = Template.bind({});
 disabled.args = {
   isDisabled: true,
-  // value: "The Godfather",
   value: { label: "The Godfather", year: 1972 },
 };
 
@@ -234,7 +233,6 @@ hasMultipleChoices.args = {
 
 export const readOnly = Template.bind({});
 readOnly.args = {
-  // readOnly: true,
-  // value: "The Godfather",
+  isReadOnly: true,
   value: { label: "The Godfather", year: 1972 },
 };
