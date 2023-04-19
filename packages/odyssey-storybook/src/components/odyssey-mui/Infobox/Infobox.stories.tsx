@@ -10,8 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import { Infobox, Link, Typography } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import {
+  Infobox,
+  InfoboxProps,
+  Link,
+  Typography,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import InfoboxMdx from "./Infobox.mdx";
@@ -46,9 +51,9 @@ export default {
     },
   },
   decorators: [MuiThemeDecorator],
-};
+} as Meta<InfoboxProps>;
 
-const DefaultTemplate: Story = (args) => {
+const DefaultTemplate: Story<InfoboxProps> = (args) => {
   return (
     <Infobox severity={args.severity} role={args.role} title={args.title}>
       {args.children}

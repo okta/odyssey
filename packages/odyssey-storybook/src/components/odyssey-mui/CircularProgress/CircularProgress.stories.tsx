@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import {
   CircularProgress,
   CircularProgressProps,
@@ -34,7 +34,7 @@ export default {
     },
   },
   decorators: [MuiThemeDecorator],
-};
+} as Meta<CircularProgressProps>;
 
 const Template: Story<CircularProgressProps> = (props) => (
   <CircularProgress {...props} />

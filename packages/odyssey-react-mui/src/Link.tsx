@@ -13,16 +13,20 @@
 import { forwardRef, ReactElement } from "react";
 
 import { Link as MuiLink, SvgIcon } from "@mui/material";
-import type { LinkProps as MuiLinkProps } from "@mui/material";
 
-export interface LinkProps extends MuiLinkProps {
+export type LinkProps = {
+  children: React.ReactNode;
+  href: string;
   icon?: ReactElement;
-}
+  rel?: string;
+  target: "_self" | "_blank" | "_parent" | "_top" | string;
+  variant?: "inherit" | "button" | "text" | "primary" | "secondary";
+};
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
   const { icon, children, target } = props;
   return (
-    <MuiLink {...props} ref={ref}>
+    <MuiLink ref={ref}>
       {icon && <span className="Link-icon">{icon}</span>}
       {children}
       {target === "_blank" && (
