@@ -531,19 +531,6 @@ export const components: ThemeOptions["components"] = {
           paddingInlineEnd: theme.spacing(2),
         }),
 
-        [`& .${chipClasses.deleteIcon}`]: {
-          WebkitTapHighlightColor: "transparent",
-          color: theme.palette.text.secondary,
-          fontSize: "1em",
-          cursor: "pointer",
-          margin: "0",
-          marginInlineStart: theme.spacing(2),
-
-          "&:hover": {
-            color: theme.palette.text.primary,
-          },
-        },
-
         [`&.${chipClasses.disabled}`]: {
           opacity: 1,
           pointerEvents: "none",
@@ -602,10 +589,32 @@ export const components: ThemeOptions["components"] = {
             },
           },
         }),
+
+        [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
+          backgroundColor: theme.palette.grey[200],
+        },
       }),
+
       label: {
         padding: 0,
       },
+
+      deleteIcon: ({ theme }) => ({
+        WebkitTapHighlightColor: "transparent",
+        color: theme.palette.text.secondary,
+        fontSize: "1em",
+        cursor: "pointer",
+        margin: "0",
+        marginInlineStart: theme.spacing(2),
+
+        "&:hover": {
+          color: theme.palette.text.primary,
+        },
+
+        [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
+          display: "none",
+        },
+      }),
     },
   },
   MuiCircularProgress: {
