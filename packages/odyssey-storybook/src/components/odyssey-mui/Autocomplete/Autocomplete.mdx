@@ -4,57 +4,45 @@ import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
 
 # Autocomplete
 
+Similar to <a href="?path=/docs/mui-components-forms-select--default">Select</a>, this input triggers a menu of options a user can select. Country and state Autocompletes are common examples.
+
 <Canvas>
   <Story id="mui-components-forms-autocomplete--default" />
 </Canvas>
 
-## Variant Behaviors
+## Behavior
 
-Examples of MUI's variant behaviors to help us decide and style our own offerings.
+Interacting with an Autocomplete displays a list of values to choose from. Users may filter the options list by typing.
 
-Note, some of these behaviors may currently be broken or have unsuitable UI.
+## Variants
 
-### disabled
+Odyssey provides support for both single and multi-value Autocompletes.
 
-If `true`, the component is disabled.
+### Single-select
 
-Default: `false`
+With the single-select variant, choosing a value will override any previous selection and close the Autocomplete.
+
+#### Enabled
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--default" />
+</Canvas>
+
+#### Disabled
 
 <Canvas>
   <Story id="mui-components-forms-autocomplete--disabled" />
 </Canvas>
 
-### isCustomValueAllowed
-
-If `true`, the Autocomplete is free solo, meaning that the user input is not bound to provided options.
-
-Default: `false`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--is-custom-value-allowed" />
-</Canvas>
-
-### loading
-
-If `true`, the component is in a loading state. This shows the `loadingText` in place of suggestions (only if there are no suggestions to show, e.g. options are empty).
-
-Default: `false`
-
-<Canvas>
-  <Story id="mui-components-forms-autocomplete--loading" />
-</Canvas>
-
-### readOnly
-
-If `true`, the component becomes readonly. It is also supported for multiple tags where the tag cannot be deleted.
-
-Default: `false`
+#### Read-only
 
 <Canvas>
   <Story id="mui-components-forms-autocomplete--read-only" />
 </Canvas>
 
 ### Multi-Select
+
+The multi-Select variant allows users to select many values.
 
 #### Enabled
 
@@ -72,4 +60,20 @@ Default: `false`
 
 <Canvas>
   <Story id="mui-components-forms-autocomplete--multiple-read-only" />
+</Canvas>
+
+## Loading state
+
+The loading state is displayed when retrieving values from the server or when data is unavailable.
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--loading" />
+</Canvas>
+
+## Custom Values
+
+Autocomplete also supports user-submitted values via the `isCustomValueAllowed` prop.
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--is-custom-value-allowed" />
 </Canvas>
