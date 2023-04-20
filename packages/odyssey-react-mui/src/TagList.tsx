@@ -10,18 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Stack, Tag } from ".";
+import { Tag } from "./";
+import { Stack } from "@mui/material";
 import { memo, ReactElement, useMemo } from "react";
-import { ChipComponentType, TagListContext } from "./TagListContext";
+import { ChipElementType, TagListContext } from "./TagListContext";
 
 export type TagListProps = {
   children: ReactElement<typeof Tag> | Array<ReactElement<typeof Tag>>;
 };
 
 const TagList = ({ children }: TagListProps) => {
-  const providerValue = useMemo(
+  const providerValue = useMemo<{
+    chipElementType: ChipElementType;
+  }>(
     () => ({
-      chipComponent: "li" as ChipComponentType,
+      chipElementType: "li",
     }),
     []
   );

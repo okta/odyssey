@@ -10,28 +10,28 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip } from ".";
+import { Chip, ChipProps } from "@mui/material";
 import { memo, useContext } from "react";
 import { TagListContext } from "./TagListContext";
 
 export type TagProps = {
   isDisabled?: boolean;
   label: string;
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  onDelete?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClick?: ChipProps["onClick"];
+  onRemove?: ChipProps["onDelete"];
 };
 
-const Tag = ({ isDisabled, label, onClick, onDelete }: TagProps) => {
-  const { chipComponent } = useContext(TagListContext);
+const Tag = ({ isDisabled, label, onClick, onRemove }: TagProps) => {
+  const { chipElementType } = useContext(TagListContext);
 
   return (
     <Chip
       label={label}
       clickable={onClick ? true : false}
-      component={chipComponent}
+      component={chipElementType}
       disabled={isDisabled}
       onClick={onClick}
-      onDelete={onDelete}
+      onDelete={onRemove}
     />
   );
 };

@@ -10,10 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, ElementType } from "react";
-import { ChipProps } from "@mui/material";
+import { createContext } from "react";
 
-export type ChipComponentType = ElementType<ChipProps>;
-export const TagListContext = createContext({
-  chipComponent: "div" as ChipComponentType,
+export type ChipElementType = "li" | "div";
+
+export type TagListContextType = {
+  chipElementType: ChipElementType;
+};
+
+export const TagListContext = createContext<TagListContextType>({
+  chipElementType: "div",
 });

@@ -11,15 +11,17 @@
  */
 
 import { Meta, Story } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
 import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TagMdx from "./Tag.mdx";
 
-export default {
+const storybookMeta: Meta<TagProps> = {
   title: `MUI Components/Tag`,
   component: Tag,
   parameters: {
+    actions: { argTypesRegex: null },
     docs: {
       page: TagMdx,
     },
@@ -34,37 +36,25 @@ export default {
       defaultValue: false,
     },
     onClick: {
-      control: "text",
-      defaultValue: null,
+      control: "function",
     },
-    onDelete: {
-      control: "text",
-      defaultValue: null,
+    onRemove: {
+      control: "function",
     },
   },
   decorators: [MuiThemeDecorator],
-} as Meta<TagProps>;
+};
+
+export default storybookMeta;
 
 const DefaultTemplate: Story<TagProps> = (args) => {
-  return (
-    <Tag
-      label={args.label}
-      isDisabled={args.isDisabled}
-      onClick={args.onClick}
-      onDelete={args.onDelete}
-    />
-  );
+  return <Tag {...args} />;
 };
 
 const ListTemplate: Story<TagProps> = (args) => {
   return (
     <TagList>
-      <Tag
-        label={args.label}
-        isDisabled={args.isDisabled}
-        onClick={args.onClick}
-        onDelete={args.onDelete}
-      />
+      <Tag {...args} />
       <Tag label="Another tag" />
       <Tag label="A third tag" />
     </TagList>
@@ -79,16 +69,12 @@ List.args = {};
 
 export const Clickable = DefaultTemplate.bind({});
 Clickable.args = {
-  onClick: () => {
-    return true;
-  },
+  onClick: action("clicked"),
 };
 
-export const Deletable = DefaultTemplate.bind({});
-Deletable.args = {
-  onDelete: () => {
-    return true;
-  },
+export const Removable = DefaultTemplate.bind({});
+Removable.args = {
+  onRemove: action("removed"),
 };
 
 export const Disabled = DefaultTemplate.bind({});
