@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 import {
   Button,
@@ -18,11 +17,12 @@ import {
   DialogContentText,
   DialogProps,
 } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { useState } from "react";
 
 import DialogMdx from "./Dialog.mdx";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-export default {
+const storybookMeta: Meta<DialogProps> = {
   title: `MUI Components/Dialog`,
   component: Dialog,
   parameters: {
@@ -42,9 +42,7 @@ export default {
         "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     },
     onClose: {
-      control: null,
-      type: { name: "function", required: false },
-      defaultValue: null,
+      control: "function",
       description:
         "The function that controls what happens when the dialog is dismissed.",
     },
@@ -54,39 +52,39 @@ export default {
     },
   },
   decorators: [MuiThemeDecorator],
-} as Meta<DialogProps>;
+};
+
+export default storybookMeta;
 
 const DefaultTemplate: Story<DialogProps> = (args) => {
-  const [open, setOpen] = React.useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const onOpen = () => {
+    setIsVisible(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const onClose = () => {
+    setIsVisible(false);
   };
 
   return (
     <>
-      <Button onClick={handleClickOpen}>Open dialog</Button>
+      <Button onClick={onOpen}>Open dialog</Button>
       <Dialog
+        {...args}
         actions={
           <>
-            <Button variant="floating" onClick={handleClose}>
+            <Button variant="floating" onClick={onClose}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={onClose}>
               Primary action
             </Button>
           </>
         }
-        onClose={handleClose}
-        isOpen={open}
-        title={args.title}
-      >
-        {args.children}
-      </Dialog>
+        onClose={onClose}
+        isOpen={isVisible}
+      />
     </>
   );
 };
