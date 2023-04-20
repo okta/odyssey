@@ -122,6 +122,7 @@ export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
 export { deepmerge, visuallyHidden } from "@mui/utils";
 
+export * from "./Autocomplete";
 export * from "./Banner";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
