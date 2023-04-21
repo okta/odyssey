@@ -69,13 +69,15 @@ const DefaultTemplate: Story = () => {
 
   return (
     <>
-      <Button onClick={handleClickOpen}>Open default dialog</Button>
+      <Button onClick={handleClickOpen} text="Open default dialog" />
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
           Initiate self-destruct protocol
-          <Button variant="floating" onClick={handleClose}>
-            <CloseIcon />
-          </Button>
+          <Button
+            startIcon={<CloseIcon />}
+            variant="floating"
+            onClick={handleClose}
+          />
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -84,12 +86,12 @@ const DefaultTemplate: Story = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="floating" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={handleClose}>
-            Initiate protocol
-          </Button>
+          <Button variant="floating" onClick={handleClose} text="Cancel" />
+          <Button
+            variant="danger"
+            onClick={handleClose}
+            text="Initiate protocol"
+          />
         </DialogActions>
       </Dialog>
     </>
@@ -112,13 +114,15 @@ const LongTemplate: Story = () => {
 
   return (
     <>
-      <Button onClick={handleClickOpen}>Open long dialog</Button>
+      <Button onClick={handleClickOpen} text="Open long dialog" />
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
           Cryosleep liability waiver
-          <Button variant="floating" onClick={handleClose}>
-            <CloseIcon />
-          </Button>
+          <Button
+            variant="floating"
+            onClick={handleClose}
+            startIcon={<CloseIcon />}
+          />
         </DialogTitle>
         <DialogContent dividers={true}>
           <DialogContentText>
@@ -261,10 +265,8 @@ const LongTemplate: Story = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="floating" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button onClick={handleClose}>Waive liability</Button>
+          <Button variant="floating" onClick={handleClose} text="Cancel" />
+          <Button onClick={handleClose} text="Waive liability" />
         </DialogActions>
       </Dialog>
     </>

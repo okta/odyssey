@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.4](https://github.com/okta/odyssey/compare/v0.21.3...v0.21.4) (2023-04-13)
+
+### Features
+
+- **odyssey-react-mui:** add ScreenReaderText component ([b0c98ad](https://github.com/okta/odyssey/commit/b0c98ad72924c5a510590f5e584dc99e1465ae1c))
+- wrapped CircularProgress ([fda8978](https://github.com/okta/odyssey/commit/fda89787c3bc13830d2d4e09290d261e490c0902))
+
+## [0.21.3](https://github.com/okta/odyssey/compare/v0.21.2...v0.21.3) (2023-04-06)
+
+### Features
+
+- add Odyssey styles to Radio and Checkbox ([39ebde0](https://github.com/okta/odyssey/commit/39ebde08d4cb83f933a98d79000ac23ad15c12c9))
+- **odyssey-react-mui:** add transitions to form controls, update state ui ([7388c00](https://github.com/okta/odyssey/commit/7388c00e5ca112ff12d429e45996ab5aa557a36a))
+
+### Bug Fixes
+
+- **odyssey-react-mui:** make text disabled color more a11y-friendly ([372a010](https://github.com/okta/odyssey/commit/372a010b934efc8421c42c8fa7d3a9323af8182f))
+- upgraded loader-utils and fastify for security ([#1734](https://github.com/okta/odyssey/issues/1734)) ([d6f3d27](https://github.com/okta/odyssey/commit/d6f3d27daefd1994059463ad33f9adceb35e36a0))
+
+## [0.21.2](https://github.com/okta/odyssey/compare/v0.21.1...v0.21.2) (2023-03-30)
+
+### Features
+
+- add context to Banner and Infobox ([18b277c](https://github.com/okta/odyssey/commit/18b277c949065ad659508a75e04125637bc5308c))
+- add missing autoFocus from TextField ([d01dcd4](https://github.com/okta/odyssey/commit/d01dcd4120017d16677ae870c3d1e0f7d1b13b47))
+
+### Bug Fixes
+
+- **odyssey-react-mui:** fix Button, Floating, Disabled bg color ([a9c332a](https://github.com/okta/odyssey/commit/a9c332a85e3b4162bf68837978028081ef2133f7))
+- **odyssey-react-mui:** fixes spacing for Hint/Error field helpers ([846134e](https://github.com/okta/odyssey/commit/846134efcdf9cd8c62932e5f849ee64b0b81e468))
+
 ## [0.21.1](https://github.com/okta/odyssey/compare/v0.21.0...v0.21.1) (2023-03-16)
 
 ### Features

@@ -69,9 +69,11 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
 
   return (
     <>
-      <Button variant="primary" onClick={openToast} disabled={open}>
-        Open {args.severity} toast
-      </Button>
+      <Button
+        variant="primary"
+        onClick={openToast}
+        text={`Open ${args.severity} toast`}
+      />
       <Toast
         autoHideDuration={args.autoHideDuration}
         isDismissable={args.isDismissable}
@@ -147,7 +149,7 @@ const MultiTemplate: Story<ToastProps> = () => {
 
   return (
     <>
-      <Button onClick={addToast}>Open another Toast</Button>
+      <Button onClick={addToast} text="Open another Toast" />
       <ToastStack>{toasts}</ToastStack>
     </>
   );

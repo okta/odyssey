@@ -29,6 +29,10 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
       control: "text",
       defaultValue: "name",
     },
+    autoFocus: {
+      control: "boolean",
+      defaultValue: false,
+    },
     isDisabled: {
       control: "boolean",
       defaultValue: false,
@@ -82,7 +86,7 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     },
     type: {
       control: "select",
-      options: ["text", "email", "search", "tel", "password"],
+      options: ["email", "number", "tel", "text", "url"],
       defaultValue: "text",
     },
     value: {
@@ -106,6 +110,7 @@ Default.args = {};
 export const Disabled = Template.bind({});
 Disabled.args = {
   isDisabled: true,
+  value: "Earth",
 };
 
 export const Optional = Template.bind({});
@@ -136,7 +141,6 @@ Adornment.args = {
 };
 
 // Types
-
 export const Email = Template.bind({});
 Email.args = {
   autoCompleteType: "work email",
@@ -149,20 +153,6 @@ Multiline.args = {
   autoCompleteType: "shipping street-address",
   label: "Permanent residence",
   isMultiline: true,
-};
-
-export const Password = Template.bind({});
-Password.args = {
-  autoCompleteType: "current-password",
-  label: "Password",
-  type: "password",
-};
-
-export const Search = Template.bind({});
-Search.args = {
-  label: "Search",
-  placeholder: "Search planets",
-  type: "search",
 };
 
 export const Tel = Template.bind({});
