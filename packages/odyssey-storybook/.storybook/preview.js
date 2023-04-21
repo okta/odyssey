@@ -14,7 +14,7 @@ export const parameters = {
         "Welcome",
         ["Introduction (README)", "Docs Status"],
         "Installation",
-        ["Odyssey-React-MUI", "Odyssey-React-Labs"],
+        ["Migrations", "Odyssey-React-MUI", "Odyssey-React-Labs"],
         "Guidelines",
         "Contributing",
         "MUI Components",
