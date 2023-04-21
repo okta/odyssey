@@ -69,17 +69,13 @@ const DefaultTemplate: Story<DialogProps> = (args) => {
 
   return (
     <>
-      <Button onClick={onOpen}>Open dialog</Button>
+      <Button onClick={onOpen} text="Open dialog" />
       <Dialog
         {...args}
         actions={
           <>
-            <Button variant="floating" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button variant="primary" onClick={onClose}>
-              Primary action
-            </Button>
+            <Button variant="floating" onClick={onClose} text="Cancel" />
+            <Button variant="primary" onClick={onClose} text="Primary action" />
           </>
         }
         onClose={onClose}

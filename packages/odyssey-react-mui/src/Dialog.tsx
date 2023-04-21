@@ -65,9 +65,11 @@ const Dialog = ({ actions, children, isOpen, onClose, title }: DialogProps) => {
     <MuiDialog open={isOpen} onClose={onClose}>
       <DialogTitle>
         {title}
-        <Button variant="floating" onClick={onClose}>
-          <CloseIcon />
-        </Button>
+        <Button
+          variant="floating"
+          onClick={onClose}
+          startIcon={<CloseIcon />}
+        />
       </DialogTitle>
       <DialogContent dividers={isContentScrollable} ref={dialogContentRef}>
         {content}
