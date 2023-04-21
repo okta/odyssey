@@ -125,7 +125,7 @@ const Toast = forwardRef(
               <Button
                 aria-label="close"
                 onClick={handleClose}
-                size="s"
+                size="small"
                 startIcon={<CloseIcon />}
                 variant="floating"
               />
