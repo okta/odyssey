@@ -318,7 +318,7 @@ export const components: ThemeOptions["components"] = {
         }),
       },
       {
-        props: { size: "s" },
+        props: { size: "small" },
         style: ({ theme }) => ({
           paddingBlock: `calc(${theme.spacing(2)} - 1px)`,
           paddingInline: `calc(${theme.spacing(2)} - 1px)`,
@@ -326,7 +326,7 @@ export const components: ThemeOptions["components"] = {
         }),
       },
       {
-        props: { size: "l" },
+        props: { size: "large" },
         style: ({ theme }) => ({
           paddingBlock: `calc(${theme.spacing(4)} - 1px)`,
           paddingInline: `calc(${theme.spacing(4)} - 1px)`,

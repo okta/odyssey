@@ -14,7 +14,6 @@ export {
   Alert,
   AlertTitle,
   Box,
-  Button,
   Chip,
   createTheme,
   CssBaseline,
@@ -66,7 +65,6 @@ export type {
   AlertProps,
   AlertTitleProps,
   BoxProps,
-  ButtonProps,
   ChipProps,
   CssBaselineProps,
   DialogProps,
@@ -124,6 +122,7 @@ export { deepmerge, visuallyHidden } from "@mui/utils";
 
 export * from "./Autocomplete";
 export * from "./Banner";
+export * from "./Button";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";

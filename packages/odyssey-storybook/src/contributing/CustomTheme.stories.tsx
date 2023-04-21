@@ -47,7 +47,7 @@ export const ButtonStory: StoryFn = () => {
   return (
     <OdysseyThemeProvider themeOverride={themeOverride}>
       <div>
-        <Button variant="primary">Primary</Button>
+        <Button variant="primary" text="Primary" />
       </div>
     </OdysseyThemeProvider>
   );
