@@ -31,8 +31,8 @@ import { ToastStackContext } from "./ToastStackContext";
 
 export type ToastProps = {
   /**
-   * If set, this determines how long the toast should appear before automatically
-   * disappearing, in milliseconds. It will only take effect if the toast is not dismissable.
+   * If set, this determines how long the toast should appear before automatically disappearing in milliseconds.
+   * It will only take effect if the toast is not dismissible.
    * If left blank, it defaults to 6000.
    */
   autoHideDuration?: number;
