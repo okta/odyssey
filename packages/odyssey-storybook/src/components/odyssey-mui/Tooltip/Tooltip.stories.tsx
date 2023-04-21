@@ -56,7 +56,7 @@ const Template: Story = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  children: <Button>Launch</Button>,
+  children: <Button text="Launch" />,
   describeChild: true,
   placement: "top",
   title: "This will begin a 10-second countdown",
@@ -64,11 +64,7 @@ Default.args = {
 
 export const Icon = Template.bind({});
 Icon.args = {
-  children: (
-    <Button variant="secondary">
-      <DownloadIcon />
-    </Button>
-  ),
+  children: <Button variant="secondary" startIcon={<DownloadIcon />} />,
   describeChild: false,
   placement: "top",
   title: "Download logs",
@@ -77,9 +73,7 @@ Icon.args = {
 export const Disabled = Template.bind({});
 Disabled.args = {
   children: (
-    <Button variant="secondary" disabled>
-      <DownloadIcon />
-    </Button>
+    <Button variant="secondary" isDisabled startIcon={<DownloadIcon />} />
   ),
   describeChild: true,
   placement: "top",
@@ -90,16 +84,16 @@ const PlacementTemplate: Story = () => {
   return (
     <>
       <Tooltip title="Top" placement="top">
-        <Button>Top</Button>
+        <Button text="Top" />
       </Tooltip>
       <Tooltip title="Right" placement="right">
-        <Button>Right</Button>
+        <Button text="Right" />
       </Tooltip>
       <Tooltip title="Bottom" placement="bottom">
-        <Button>Bottom</Button>
+        <Button text="Bottom" />
       </Tooltip>
       <Tooltip title="Left" placement="left">
-        <Button>Left</Button>
+        <Button text="Left" />
       </Tooltip>
     </>
   );

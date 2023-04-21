@@ -72,9 +72,11 @@ const DefaultTemplate: Story = (args) => {
 
   return (
     <>
-      <Button variant="primary" onClick={openToast}>
-        Open {args.severity} snackbar Open {args.severity} toast
-      </Button>
+      <Button
+        variant="primary"
+        onClick={openToast}
+        text={`Open ${args.severity} toast`}
+      />
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar
           open={open}
@@ -90,10 +92,9 @@ const DefaultTemplate: Story = (args) => {
                   aria-label="close"
                   onClick={closeToast}
                   variant="floating"
-                  size="s"
-                >
-                  <CloseIcon fontSize="inherit" />
-                </Button>
+                  size="small"
+                  startIcon={<CloseIcon fontSize="inherit" />}
+                />
               )
             }
           >
@@ -116,9 +117,9 @@ const StaticTemplate: Story = (args) => {
           <Button
             aria-label="close"
             variant="floating"
-            size="s"
+            size="small"
             startIcon={<CloseIcon />}
-          ></Button>
+          />
         )
       }
     >

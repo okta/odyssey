@@ -80,7 +80,7 @@ export const palette: ThemeOptions["palette"] = {
   text: {
     primary: Tokens.ColorPaletteNeutral900,
     secondary: Tokens.ColorPaletteNeutral600,
-    disabled: Tokens.ColorPaletteNeutral500,
+    disabled: Tokens.ColorPaletteNeutral600,
   },
   divider: Tokens.ColorBorderDisplay,
   background: {
