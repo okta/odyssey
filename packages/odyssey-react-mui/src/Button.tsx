@@ -25,8 +25,7 @@ export type ButtonProps = {
   startIcon?: React.ReactNode;
   text?: string;
   /**
-   * tooltipText determines the text of the tooltip
-   * that wraps the button if it's icon-only
+   * `tooltipText` determines the text of the tooltip that wraps the button if it's icon-only.
    */
   tooltipText?: string;
   variant?: "primary" | "secondary" | "danger" | "floating";
