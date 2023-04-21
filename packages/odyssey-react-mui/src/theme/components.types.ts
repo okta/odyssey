@@ -33,14 +33,6 @@ declare module "@mui/material/Button" {
     contained: false;
     outlined: false;
   }
-  interface ButtonPropsSizeOverrides {
-    s: true;
-    m: true;
-    l: true;
-    small: false;
-    medium: false;
-    large: false;
-  }
   interface ButtonPropsColorOverrides {
     inherit: false;
     primary: false;

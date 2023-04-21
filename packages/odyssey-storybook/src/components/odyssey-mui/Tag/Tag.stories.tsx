@@ -10,16 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import { Chip, Stack } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TagMdx from "./Tag.mdx";
 
-export default {
+const storybookMeta: Meta<TagProps> = {
   title: `MUI Components/Tag`,
-  component: Chip,
+  component: Tag,
   parameters: {
+    actions: { argTypesRegex: null },
     docs: {
       page: TagMdx,
     },
@@ -29,83 +31,53 @@ export default {
       control: "text",
       defaultValue: "Starship",
     },
-    label2: {
-      control: "text",
-      defaultValue: null,
-    },
-    label3: {
-      control: "text",
-      defaultValue: null,
-    },
-    clickable: {
+    isDisabled: {
       control: "boolean",
       defaultValue: false,
     },
-    disabled: {
-      control: "boolean",
-      defaultValue: false,
+    onClick: {
+      control: "function",
     },
-    deletable: {
-      control: "boolean",
-      defaultValue: false,
+    onRemove: {
+      control: "function",
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const handleDelete = () => {
-  console.info("You clicked the delete icon.");
+export default storybookMeta;
+
+const DefaultTemplate: Story<TagProps> = (args) => {
+  return <Tag {...args} />;
 };
 
-const DefaultTemplate: Story = (args) => {
+const ListTemplate: Story<TagProps> = (args) => {
   return (
-    <Stack direction="row" spacing={2}>
-      <Chip
-        label={args.label}
-        clickable={args.clickable}
-        disabled={args.disabled}
-        onDelete={args.deletable && handleDelete}
-      />
-      {args.label2 && (
-        <Chip
-          label={args.label2}
-          clickable={args.clickable}
-          disabled={args.disabled}
-          onDelete={args.deletable && handleDelete}
-        />
-      )}
-      {args.label3 && (
-        <Chip
-          label={args.label3}
-          clickable={args.clickable}
-          disabled={args.disabled}
-          onDelete={args.deletable && handleDelete}
-        />
-      )}
-    </Stack>
+    <TagList>
+      <Tag {...args} />
+      <Tag label="Another tag" />
+      <Tag label="A third tag" />
+    </TagList>
   );
 };
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
 
-export const List = DefaultTemplate.bind({});
-List.args = {
-  label2: "Warp-capable",
-  label3: "Unmanned",
-};
+export const List = ListTemplate.bind({});
+List.args = {};
 
 export const Clickable = DefaultTemplate.bind({});
 Clickable.args = {
-  clickable: true,
+  onClick: action("clicked"),
 };
 
-export const Deletable = DefaultTemplate.bind({});
-Deletable.args = {
-  deletable: true,
+export const Removable = DefaultTemplate.bind({});
+Removable.args = {
+  onRemove: action("removed"),
 };
 
 export const Disabled = DefaultTemplate.bind({});
 Disabled.args = {
-  disabled: true,
+  isDisabled: true,
 };

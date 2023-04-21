@@ -77,10 +77,9 @@ const MenuButton = ({
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        text={buttonLabel}
         variant={buttonVariant}
-      >
-        {buttonLabel}
-      </Button>
+      />
       <Menu
         id={`${uniqueId}-menu`}
         anchorEl={anchorEl}
