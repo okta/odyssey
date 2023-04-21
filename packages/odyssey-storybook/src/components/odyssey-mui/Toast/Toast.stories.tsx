@@ -75,7 +75,7 @@ const DefaultTemplate: Story = (args) => {
       <Button
         variant="primary"
         onClick={openToast}
-        text={`Open ${args.severity} snackbar Open ${args.severity} toast`}
+        text={`Open ${args.severity} toast`}
       />
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar

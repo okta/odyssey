@@ -17,11 +17,11 @@ import { memo } from "react";
 
 export type ButtonProps = {
   endIcon?: React.ReactNode;
-  fullWidth?: boolean;
   id?: string;
   isDisabled?: boolean;
+  isFullWidth?: boolean;
   onClick?: MuiButtonProps["onClick"];
-  size?: "small" | "medium" | "large";
+  size?: MuiButtonProps["size"];
   startIcon?: React.ReactNode;
   text?: string;
   tooltipText?: string;
@@ -30,9 +30,9 @@ export type ButtonProps = {
 
 const Button = ({
   endIcon,
-  fullWidth,
   id,
   isDisabled,
+  isFullWidth,
   onClick,
   size = "medium",
   startIcon,
@@ -44,7 +44,7 @@ const Button = ({
     <MuiButton
       disabled={isDisabled}
       endIcon={endIcon}
-      fullWidth={fullWidth}
+      fullWidth={isFullWidth}
       id={id}
       onClick={onClick}
       size={size}

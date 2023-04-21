@@ -18,7 +18,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDec
 
 import ButtonMdx from "./Button.mdx";
 
-export default {
+const storybookMeta: Meta<ButtonProps> = {
   title: `MUI Components/Button`,
   component: Button,
   parameters: {
@@ -27,10 +27,10 @@ export default {
     },
   },
   argTypes: {
-    fullWidth: {
+    isDisabled: {
       control: "boolean",
     },
-    isDisabled: {
+    isFullWidth: {
       control: "boolean",
     },
     size: {
@@ -54,7 +54,9 @@ export default {
     },
   },
   decorators: [MuiThemeDecorator],
-} as Meta<ButtonProps>;
+};
+
+export default storybookMeta;
 
 const Template: Story<ButtonProps> = (props) => <Button {...props} />;
 
@@ -93,7 +95,7 @@ ButtonLarge.args = {
 
 export const ButtonFullWidth = Template.bind({});
 ButtonFullWidth.args = {
-  fullWidth: true,
+  isFullWidth: true,
 };
 
 export const ButtonPrimaryDisabled = Template.bind({});
