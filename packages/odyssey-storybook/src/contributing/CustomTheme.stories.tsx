@@ -70,7 +70,7 @@ export const TextFieldStory: StoryFn = () => {
   return (
     <OdysseyThemeProvider themeOverride={themeOverride}>
       <div>
-        <TextField autoCompleteType="name" type="text" />
+        <TextField autoCompleteType="name" label="Name" type="text" />
       </div>
     </OdysseyThemeProvider>
   );
