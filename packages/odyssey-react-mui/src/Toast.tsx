@@ -37,7 +37,7 @@ export type ToastProps = {
    */
   autoHideDuration?: number;
   /**
-   * If isDismissable is true, the alert will include a close button
+   * If `true`, the alert will include a close button.
    */
   isDismissable?: boolean;
   /**
