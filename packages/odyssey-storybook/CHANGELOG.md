@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.0](https://github.com/okta/odyssey/compare/v0.21.4...v0.22.0) (2023-04-21)
+
+### Features
+
+- wrap the Button ([507cf60](https://github.com/okta/odyssey/commit/507cf60c045a445e09c039dc1f35574271114697))
+- wrapped Tag and TagList ([43ab012](https://github.com/okta/odyssey/commit/43ab012d17934503bd827624ad17c6d00531a978))
+
+### Bug Fixes
+
+- added extra props to Autocomplete to fix MUI types ([d7aff4a](https://github.com/okta/odyssey/commit/d7aff4ab510cbb512bee043b4056e1085ce0d059))
+- created Autocomplete wrapper component ([dbb1210](https://github.com/okta/odyssey/commit/dbb12100e656e9db3deb2a0d76bdcf5fb715e93d))
+- minor type improvement in Autocomplete stories ([79d42e1](https://github.com/okta/odyssey/commit/79d42e16ac304a3856697b8711a1b38fe8cfe28f))
+- pulled out TextField into separate components ([#1744](https://github.com/okta/odyssey/issues/1744)) ([0b7a412](https://github.com/okta/odyssey/commit/0b7a41290eb1a60693ee827f45e240531e7fbbcb))
+- types for Autocomplete in stories ([8d28a8c](https://github.com/okta/odyssey/commit/8d28a8c640dfccac92fdcad5af9bdc33759c9de3))
+
 ## [0.21.4](https://github.com/okta/odyssey/compare/v0.21.3...v0.21.4) (2023-04-13)
 
 ### Features
