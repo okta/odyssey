@@ -73,7 +73,7 @@ const DefaultTemplate: Story = (args) => {
   return (
     <>
       <Button variant="primary" onClick={openToast}>
-        Open {args.severity} snackbar Open {args.severity} toast
+        Open {args.severity} toast
       </Button>
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar
