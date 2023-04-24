@@ -9,6 +9,7 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
+
 import type { Config } from "svgo";
 
 const config: Config = {
@@ -21,15 +22,9 @@ const config: Config = {
       },
     },
     "removeDimensions",
-    // {
-    //   name: "preset-default",
-    //   params: {
-    //     overrides: {
-    //       removeViewBox: false,
-    //     },
-    //   },
-    // },
   ],
 };
+
+module.exports = config;
 
 export default config;
