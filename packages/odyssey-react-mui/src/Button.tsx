@@ -12,17 +12,30 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { Tooltip } from "./";
-import { memo } from "react";
+import { Icon, Tooltip } from "./";
+import { ReactElement, memo } from "react";
 
-export type ButtonProps = {
-  endIcon?: React.ReactNode;
+type ButtonPropsToOmit = {
+  endIcon?: never;
+  id?: never;
+  isDisabled?: never;
+  isFullWidth?: never;
+  onClick?: never;
+  size?: never;
+  startIcon?: never;
+  text?: never;
+  tooltipText?: never;
+  variant?: never;
+};
+
+export type ButtonProps = Omit<MuiButtonProps, keyof ButtonPropsToOmit> & {
+  endIcon?: ReactElement<typeof Icon>;
   id?: string;
   isDisabled?: boolean;
   isFullWidth?: boolean;
   onClick?: MuiButtonProps["onClick"];
   size?: MuiButtonProps["size"];
-  startIcon?: React.ReactNode;
+  startIcon?: ReactElement<typeof Icon>;
   text?: string;
   /**
    * `tooltipText` determines the text of the tooltip that wraps the button if it's icon-only.
@@ -42,6 +55,7 @@ const Button = ({
   text,
   tooltipText,
   variant,
+  ...rest
 }: ButtonProps) => {
   const button = (
     <MuiButton
@@ -53,6 +67,7 @@ const Button = ({
       size={size}
       startIcon={startIcon}
       variant={variant}
+      {...rest}
     >
       {text}
     </MuiButton>
