@@ -34,9 +34,9 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 1. // Placeholder
 
-## `v0.15.x` ➡️ `0.17.x`
+## `v0.14.x` ➡️ `0.17.x`
 
-### Import Changes
+### Importing from Odyssey
 
 As of `0.15.2`, all MUI and Odyssey components are exported from `@okta/odyssey-react-mui`. No further need to maintain a separate version of MUI.
 
@@ -45,3 +45,20 @@ If you're using components not supported by Odyssey, please get your product des
 It's possible you need to still have your own MUI version, but it's possible there's an Odyssey design solution.
 
 Also, Odyssey-Labs exists for this very purpose; things that you want in Odyssey, but we haven't had a finalized design.
+
+### Theming
+
+Odyssey now includes theme components and CSP nonce built into it's `ThemeProvider` wrapper. Just like MUI's `ThemeProvider`, this needs to go at the top-level of your app and takes no props.
+
+In a later update, this component will be renamed `OdysseyProvider`.
+
+#### Custom Theming
+
+It's possible you want to customize Odyssey's theme because of your app's requirements. You'll want `OdysseyThemeProvider` (MUI and Odyssey theme wrapper) and `OdysseyCacheProvider` (Emotion Cache + Nonce).
+
+At this point, we still export `MuiThemeProvider`
+
+### `useTheme`
+
+- `typography.body` is now `typography.body1`.
+- `typography.caption` is now `typography.subtitle`.
