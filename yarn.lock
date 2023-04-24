@@ -6085,7 +6085,6 @@ __metadata:
     "@okta/odyssey-icons": "workspace:*"
     "@okta/odyssey-lifecycle": "workspace:*"
     "@okta/odyssey-react-mui": "workspace:*"
-    "@okta/odyssey-svgr": "workspace:*"
     "@okta/odyssey-typescript": "workspace:*"
     "@testing-library/dom": ^7.28.1
     "@testing-library/jest-dom": ^5.12.0
@@ -6227,6 +6226,10 @@ __metadata:
   dependencies:
     "@babel/generator": ^7.19.0
     "@babel/types": ^7.19.0
+    "@okta/odyssey-typescript": "workspace:*"
+    "@svgr/babel-plugin-transform-svg-component": ^7.0.0
+    "@svgr/core": ^7.0.0
+    typescript: ^4.9.4
   languageName: unknown
   linkType: soft
 
