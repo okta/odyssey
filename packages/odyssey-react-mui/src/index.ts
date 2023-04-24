@@ -14,9 +14,7 @@ export {
   Alert,
   AlertTitle,
   Box,
-  Button,
   Chip,
-  CircularProgress,
   createTheme,
   CssBaseline,
   Dialog,
@@ -67,9 +65,7 @@ export type {
   AlertProps,
   AlertTitleProps,
   BoxProps,
-  ButtonProps,
   ChipProps,
-  CircularProgressProps,
   CssBaselineProps,
   DialogProps,
   DialogActionsProps,
@@ -124,10 +120,16 @@ export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
 export { deepmerge, visuallyHidden } from "@mui/utils";
 
+export * from "./Autocomplete";
 export * from "./Banner";
+export * from "./Button";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
+export * from "./CircularProgress";
 export * from "./createUniqueId";
+export * from "./FieldError";
+export * from "./FieldHint";
+export * from "./FieldLabel";
 export * from "./Icon";
 export * from "./iconDictionary";
 export * from "./Infobox";
@@ -136,10 +138,14 @@ export * from "./MenuButton";
 export * from "./MenuItem";
 export * from "./OdysseyCacheProvider";
 export * from "./OdysseyThemeProvider";
-export * from "./PasswordInput";
+export * from "./PasswordField";
 export * from "./Radio";
 export * from "./RadioGroup";
+export * from "./ScreenReaderText";
+export * from "./SearchField";
 export * from "./Status";
+export * from "./Tag";
+export * from "./TagList";
 export * from "./TextField";
 export * from "./theme";
 export * from "./ThemeProvider";

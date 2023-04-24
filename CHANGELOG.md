@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.0](https://github.com/okta/odyssey/compare/v0.21.4...v0.22.0) (2023-04-21)
+
+### Features
+
+- **odyssey-react-mui:** add styling for Autocomplete ([b03516b](https://github.com/okta/odyssey/commit/b03516ba469ef1045c17326590a97e39f0235aa8))
+- wrap the Button ([507cf60](https://github.com/okta/odyssey/commit/507cf60c045a445e09c039dc1f35574271114697))
+- wrapped Tag and TagList ([43ab012](https://github.com/okta/odyssey/commit/43ab012d17934503bd827624ad17c6d00531a978))
+
+### Bug Fixes
+
+- added extra props to Autocomplete to fix MUI types ([d7aff4a](https://github.com/okta/odyssey/commit/d7aff4ab510cbb512bee043b4056e1085ce0d059))
+- created Autocomplete wrapper component ([dbb1210](https://github.com/okta/odyssey/commit/dbb12100e656e9db3deb2a0d76bdcf5fb715e93d))
+- export types for Autocomplete ([28be391](https://github.com/okta/odyssey/commit/28be391f49bbce4882b68334a1d5805e50d47a4e))
+- minor type improvement in Autocomplete stories ([79d42e1](https://github.com/okta/odyssey/commit/79d42e16ac304a3856697b8711a1b38fe8cfe28f))
+- pulled out TextField into separate components ([#1744](https://github.com/okta/odyssey/issues/1744)) ([0b7a412](https://github.com/okta/odyssey/commit/0b7a41290eb1a60693ee827f45e240531e7fbbcb))
+- removed explicit displayName from MenuItem ([ab84734](https://github.com/okta/odyssey/commit/ab84734a4f8dc11aba42f56818bce59dbd469ddf))
+- separated InputProps and params in Autocomplete ([a93542c](https://github.com/okta/odyssey/commit/a93542c6238ab56a0a06075aceb5cf0997ceb7f1))
+- types for Autocomplete in stories ([8d28a8c](https://github.com/okta/odyssey/commit/8d28a8c640dfccac92fdcad5af9bdc33759c9de3))
+
+## [0.21.4](https://github.com/okta/odyssey/compare/v0.21.3...v0.21.4) (2023-04-13)
+
+### Features
+
+- **odyssey-react-mui:** add ScreenReaderText component ([b0c98ad](https://github.com/okta/odyssey/commit/b0c98ad72924c5a510590f5e584dc99e1465ae1c))
+- wrapped CircularProgress ([fda8978](https://github.com/okta/odyssey/commit/fda89787c3bc13830d2d4e09290d261e490c0902))
+
+## [0.21.3](https://github.com/okta/odyssey/compare/v0.21.2...v0.21.3) (2023-04-06)
+
+### Features
+
+- add Odyssey styles to Radio and Checkbox ([39ebde0](https://github.com/okta/odyssey/commit/39ebde08d4cb83f933a98d79000ac23ad15c12c9))
+- **odyssey-react-mui:** add transitions to form controls, update state ui ([7388c00](https://github.com/okta/odyssey/commit/7388c00e5ca112ff12d429e45996ab5aa557a36a))
+
+### Bug Fixes
+
+- **odyssey-react-mui:** make text disabled color more a11y-friendly ([372a010](https://github.com/okta/odyssey/commit/372a010b934efc8421c42c8fa7d3a9323af8182f))
+- upgraded loader-utils and fastify for security ([#1734](https://github.com/okta/odyssey/issues/1734)) ([d6f3d27](https://github.com/okta/odyssey/commit/d6f3d27daefd1994059463ad33f9adceb35e36a0))
+
 ## [0.21.2](https://github.com/okta/odyssey/compare/v0.21.1...v0.21.2) (2023-03-30)
 
 ### Features
