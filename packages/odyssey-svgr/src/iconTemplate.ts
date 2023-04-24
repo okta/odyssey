@@ -20,7 +20,7 @@ import type { Template } from "@svgr/babel-plugin-transform-svg-component";
 
 import { headerComment } from "./headerComment";
 
-const odysseyIconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
+export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
   const compName = componentName.substring(3) + "Icon";
   const compProps = compName + "Props";
 
@@ -68,5 +68,3 @@ ${newLine}
 ${compName}.displayName = "${compName}";
 `;
 };
-
-export default odysseyIconTemplate;

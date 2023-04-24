@@ -11,16 +11,18 @@
  */
 
 import { Config } from "@svgr/core";
+import { iconTemplate } from "./iconTemplate";
 
 const svgrConfig: Config = {
-  // ignoreExisting: true,
-  // indexTemplate: require("./indexTemplate"),
+  index: false,
   memo: true,
   prettierConfig: {
     parser: "typescript",
   },
-  template: require("./iconTemplate"),
+  template: iconTemplate,
   typescript: true,
 };
 
 export default svgrConfig;
+
+module.exports = svgrConfig;
