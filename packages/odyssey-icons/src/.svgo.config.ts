@@ -20,15 +20,15 @@ const config: Config = {
         currentColor: true,
       },
     },
-    // "removeDimensions",
-    {
-      name: "preset-default",
-      params: {
-        overrides: {
-          removeViewBox: false,
-        },
-      },
-    },
+    "removeDimensions",
+    // {
+    //   name: "preset-default",
+    //   params: {
+    //     overrides: {
+    //       removeViewBox: false,
+    //     },
+    //   },
+    // },
   ],
 };
 
