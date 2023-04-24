@@ -6050,7 +6050,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-icons@workspace:packages/odyssey-icons"
   dependencies:
-    svgo: 3.0.0
+    "@okta/odyssey-typescript": "workspace:*"
+    svgo: 3.0.2
+    typescript: ^4.9.4
   languageName: unknown
   linkType: soft
 
@@ -24687,23 +24689,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svgo@npm:3.0.0":
-  version: 3.0.0
-  resolution: "svgo@npm:3.0.0"
-  dependencies:
-    "@trysound/sax": 0.2.0
-    commander: ^7.2.0
-    css-select: ^5.1.0
-    css-tree: ^2.2.1
-    csso: ^5.0.5
-    picocolors: ^1.0.0
-  bin:
-    svgo: ./bin/svgo
-  checksum: bcbecff0c61c3a62249c23b955941c0fcfd0cb82223a10401d665a66afe0cf750197cb6be41fa9fd8b46cddf513b3e73ed1bfd398c2fca0ab008df767e1cecf6
-  languageName: node
-  linkType: hard
-
-"svgo@npm:^3.0.2":
+"svgo@npm:3.0.2, svgo@npm:^3.0.2":
   version: 3.0.2
   resolution: "svgo@npm:3.0.2"
   dependencies:

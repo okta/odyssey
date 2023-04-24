@@ -15,6 +15,7 @@ import { Config } from "@svgr/core";
 const svgrConfig: Config = {
   // ignoreExisting: true,
   // indexTemplate: require("./indexTemplate"),
+  memo: true,
   prettierConfig: {
     parser: "typescript",
   },

@@ -9,7 +9,9 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-module.exports = {
+import type { Config } from "svgo";
+
+const config: Config = {
   multipass: true,
   plugins: [
     {
@@ -18,6 +20,16 @@ module.exports = {
         currentColor: true,
       },
     },
-    "removeDimensions",
+    // "removeDimensions",
+    {
+      name: "preset-default",
+      params: {
+        overrides: {
+          removeViewBox: false,
+        },
+      },
+    },
   ],
 };
+
+export default config;
