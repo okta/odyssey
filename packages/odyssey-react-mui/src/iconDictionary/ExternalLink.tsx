@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -32,10 +32,10 @@ export const ExternalLinkIcon = forwardRef<
     >
       <>
         <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M13.2929 2H7.99998V1H14.5C14.7761 1 15 1.22386 15 1.5V8H14V2.70711L6.35353 10.3536L5.64642 9.64645L13.2929 2ZM1.5 4H1V4.5V14.5V15H1.5H11.5H12V14.5V8H11V14H2V5H8V4H1.5Z"
           fill="currentColor"
+          fillRule="evenodd"
+          d="M13.293 2H8V1h6.5a.5.5 0 0 1 .5.5V8h-1V2.707l-7.646 7.647-.708-.708L13.293 2ZM1.5 4H1v11h11V8h-1v6H2V5h6V4H1.5Z"
+          clipRule="evenodd"
         />
       </>
     </SvgIcon>
