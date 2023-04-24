@@ -24,7 +24,7 @@
         },
         "600": {
           "comment": "Used for caption text, Status label, disabled Overlay Buttons",
-          "value": "#707070"
+          "value": "#6E6E6E"
         },
         "900": {
           "comment": "Used for titles, body copy, icons, shadows, tooltips",
@@ -38,15 +38,15 @@
         },
         "300": {
           "comment": "Used for buttons disabled state fills & borders, focus rings",
-          "value": "#C1C9F6"
+          "value": "#9DAAF1"
         },
         "500": {
           "comment": "Used for links, buttons, icons, hover states, selected states",
-          "value": "#546BE7"
+          "value": "#4C64E1"
         },
         "900": {
           "comment": "Used for okta logo, brand moments, button hovers",
-          "value": "#2E40A5"
+          "value": "#22307C"
         }
       },
       "green": {
@@ -60,15 +60,15 @@
         },
         "500": {
           "comment": "Used for moments of success, validation, wayfinding, status",
-          "value": "#16884A"
+          "value": "#197F48"
         },
         "600": {
           "comment": "N/A",
-          "value": "#158046"
+          "value": "#0E562F"
         },
         "900": {
           "comment": "Used for moments of success, validation, wayfinding",
-          "value": "#0E562F"
+          "value": "#0A4023"
         }
       },
       "red": {
@@ -82,11 +82,11 @@
         },
         "500": {
           "comment": "Used for system errors, danger buttons, error states, status dot",
-          "value": "#E72500"
+          "value": "#D92300"
         },
         "900": {
           "comment": "Used for destructive button & invalid input hovers",
-          "value": "#951800"
+          "value": "#711200"
         }
       },
       "yellow": {
@@ -100,11 +100,11 @@
         },
         "500": {
           "comment": "Used for Moments of caution, status dot",
-          "value": "#A16C03"
+          "value": "#986603"
         },
         "900": {
           "comment": "Used for moments of caution",
-          "value": "#664402"
+          "value": "#4C3302"
         }
       },
       "orange": {
