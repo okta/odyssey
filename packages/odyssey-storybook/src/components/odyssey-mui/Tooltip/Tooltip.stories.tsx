@@ -10,13 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import { Button, DownloadIcon, Tooltip } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import {
+  Button,
+  DownloadIcon,
+  Tooltip,
+  TooltipProps,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TooltipMdx from "./Tooltip.mdx";
 
-export default {
+const storybookMeta: Meta<TooltipProps> = {
   title: `MUI Components/Tooltip`,
   component: Tooltip,
   parameters: {
@@ -45,7 +50,9 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-const Template: Story = (args) => {
+export default storybookMeta;
+
+const Template: Story<TooltipProps> = (args) => {
   return (
     <Tooltip
       label={args.label}
@@ -83,7 +90,7 @@ Disabled.args = {
   label: "You don't have access to these logs",
 };
 
-const PlacementTemplate: Story = () => {
+const PlacementTemplate: Story<TooltipProps> = () => {
   return (
     <>
       <Tooltip label="Top" placement="top">
