@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,10 +30,10 @@ export const CloseIcon = forwardRef<SVGSVGElement, CloseIconProps>(
       >
         <>
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M8 7.2929L2.35355 1.64645L1.64644 2.35355L7.29289 8L1.64645 13.6464L2.35355 14.3536L8 8.70711L13.6464 14.3536L14.3535 13.6464L8.7071 8L14.3536 2.35355L13.6464 1.64645L8 7.2929Z"
             fill="currentColor"
+            fillRule="evenodd"
+            d="M8 7.293 2.354 1.646l-.708.708L7.293 8l-5.647 5.646.708.708L8 8.707l5.646 5.647.707-.708L8.707 8l5.647-5.646-.708-.708L8 7.293Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>
