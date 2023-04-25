@@ -1,0 +1,79 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+
+<Meta anchor />
+
+# Autocomplete
+
+Similar to <a href="?path=/docs/mui-components-forms-select--default">Select</a>, this input triggers a menu of options a user can select. Country and state Autocompletes are common examples.
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--default" />
+</Canvas>
+
+## Behavior
+
+Interacting with an Autocomplete displays a list of values to choose from. Users may filter the options list by typing.
+
+## Variants
+
+Odyssey provides support for both single and multi-value Autocompletes.
+
+### Single-select
+
+With the single-select variant, choosing a value will override any previous selection and close the Autocomplete.
+
+#### Enabled
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--default" />
+</Canvas>
+
+#### Disabled
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--disabled" />
+</Canvas>
+
+#### Read-only
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--read-only" />
+</Canvas>
+
+### Multi-Select
+
+The multi-Select variant allows users to select many values.
+
+#### Enabled
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--multiple" />
+</Canvas>
+
+#### Disabled
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--multiple-disabled" />
+</Canvas>
+
+#### Read-only
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--multiple-read-only" />
+</Canvas>
+
+## Loading state
+
+The loading state is displayed when retrieving values from the server or when data is unavailable.
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--loading" />
+</Canvas>
+
+## Custom Values
+
+Autocomplete also supports user-submitted values via the `isCustomValueAllowed` prop.
+
+<Canvas>
+  <Story id="mui-components-forms-autocomplete--is-custom-value-allowed" />
+</Canvas>

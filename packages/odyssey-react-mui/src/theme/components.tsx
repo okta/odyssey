@@ -36,6 +36,7 @@ import {
   CheckCircleFilledIcon,
   ChevronDownIcon,
   CloseCircleFilledIcon,
+  CloseIcon,
   InformationCircleFilledIcon,
   SubtractIcon,
 } from "../iconDictionary";
@@ -141,6 +142,68 @@ export const components: ThemeOptions["components"] = {
         "&:last-child": {
           marginBlockEnd: 0,
         },
+      }),
+    },
+  },
+  MuiAutocomplete: {
+    defaultProps: {
+      autoHighlight: true,
+      autoSelect: false,
+      blurOnSelect: false,
+      clearIcon: <CloseIcon />,
+      clearOnEscape: true,
+      disableClearable: false,
+      disabledItemsFocusable: false,
+      disableListWrap: false,
+      disablePortal: false,
+      filterSelectedOptions: false,
+      fullWidth: false,
+      handleHomeEndKeys: true,
+      includeInputInList: true,
+      limitTags: -1,
+      openOnFocus: false,
+      popupIcon: <ChevronDownIcon />,
+      selectOnFocus: true,
+    },
+    styleOverrides: {
+      clearIndicator: ({ theme }) => ({
+        marginRight: "unset",
+        padding: theme.spacing(1),
+      }),
+      endAdornment: ({ theme, ownerState }) => ({
+        display: "flex",
+        gap: theme.spacing(1),
+        top: `calc(${theme.spacing(2)} - ${theme.mixins.borderWidth})`,
+        right: theme.spacing(2),
+        maxHeight: "unset",
+        alignItems: "center",
+        whiteSpace: "nowrap",
+        color: theme.palette.action.active,
+
+        ...(ownerState.disabled === true && {
+          display: "none",
+        }),
+
+        ...(ownerState.readOnly === true && {
+          display: "none",
+        }),
+      }),
+      loading: ({ theme }) => ({
+        paddingBlock: theme.spacing(3),
+        paddingInline: theme.spacing(4),
+      }),
+      popupIndicator: ({ theme }) => ({
+        padding: theme.spacing(1),
+        marginRight: "unset",
+      }),
+      inputRoot: ({ theme, ownerState }) => ({
+        ...(ownerState.readOnly === true && {
+          backgroundColor: theme.palette.grey[50],
+
+          [`&:not(:hover)`]: {
+            borderColor: "transparent",
+          },
+        }),
       }),
     },
   },
@@ -255,7 +318,7 @@ export const components: ThemeOptions["components"] = {
         }),
       },
       {
-        props: { size: "s" },
+        props: { size: "small" },
         style: ({ theme }) => ({
           paddingBlock: `calc(${theme.spacing(2)} - 1px)`,
           paddingInline: `calc(${theme.spacing(2)} - 1px)`,
@@ -263,7 +326,7 @@ export const components: ThemeOptions["components"] = {
         }),
       },
       {
-        props: { size: "l" },
+        props: { size: "large" },
         style: ({ theme }) => ({
           paddingBlock: `calc(${theme.spacing(4)} - 1px)`,
           paddingInline: `calc(${theme.spacing(4)} - 1px)`,
@@ -468,19 +531,6 @@ export const components: ThemeOptions["components"] = {
           paddingInlineEnd: theme.spacing(2),
         }),
 
-        [`& .${chipClasses.deleteIcon}`]: {
-          WebkitTapHighlightColor: "transparent",
-          color: theme.palette.text.secondary,
-          fontSize: "1em",
-          cursor: "pointer",
-          margin: "0",
-          marginInlineStart: theme.spacing(2),
-
-          "&:hover": {
-            color: theme.palette.text.primary,
-          },
-        },
-
         [`&.${chipClasses.disabled}`]: {
           opacity: 1,
           pointerEvents: "none",
@@ -539,10 +589,32 @@ export const components: ThemeOptions["components"] = {
             },
           },
         }),
+
+        [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
+          backgroundColor: theme.palette.grey[200],
+        },
       }),
+
       label: {
         padding: 0,
       },
+
+      deleteIcon: ({ theme }) => ({
+        WebkitTapHighlightColor: "transparent",
+        color: theme.palette.text.secondary,
+        fontSize: "1em",
+        cursor: "pointer",
+        margin: "0",
+        marginInlineStart: theme.spacing(2),
+
+        "&:hover": {
+          color: theme.palette.text.primary,
+        },
+
+        [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
+          display: "none",
+        },
+      }),
     },
   },
   MuiCircularProgress: {
@@ -1112,9 +1184,6 @@ export const components: ThemeOptions["components"] = {
     },
   },
   MuiInputAdornment: {
-    defaultProps: {
-      variant: "outlined",
-    },
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
         display: "flex",
