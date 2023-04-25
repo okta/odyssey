@@ -13,9 +13,12 @@
 import { Tooltip as MuiTooltip } from "@mui/material";
 import { TooltipProps as MuiTooltipProps } from "@mui/material";
 
-export interface TooltipProps extends Omit<MuiTooltipProps, "title"> {
+export type TooltipProps = {
+  children: React.ReactElement<any, any>;
+  describeChild?: boolean;
   label: string;
-}
+  placement?: MuiTooltipProps["placement"];
+};
 
 export const Tooltip = ({
   children,

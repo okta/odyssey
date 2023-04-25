@@ -76,9 +76,7 @@ Icon.args = {
 export const Disabled = Template.bind({});
 Disabled.args = {
   children: (
-    <span>
-      <Button variant="secondary" isDisabled startIcon={<DownloadIcon />} />
-    </span>
+    <Button variant="secondary" isDisabled startIcon={<DownloadIcon />} />
   ),
   describeChild: true,
   placement: "top",
@@ -88,16 +86,16 @@ Disabled.args = {
 const PlacementTemplate: Story = () => {
   return (
     <>
-      <Tooltip title="Top" placement="top">
+      <Tooltip label="Top" placement="top">
         <Button text="Top" />
       </Tooltip>
-      <Tooltip title="Right" placement="right">
+      <Tooltip label="Right" placement="right">
         <Button text="Right" />
       </Tooltip>
-      <Tooltip title="Bottom" placement="bottom">
+      <Tooltip label="Bottom" placement="bottom">
         <Button text="Bottom" />
       </Tooltip>
-      <Tooltip title="Left" placement="left">
+      <Tooltip label="Left" placement="left">
         <Button text="Left" />
       </Tooltip>
     </>
