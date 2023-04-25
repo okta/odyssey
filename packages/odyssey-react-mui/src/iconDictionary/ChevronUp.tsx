@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,10 +30,10 @@ export const ChevronUpIcon = forwardRef<SVGSVGElement, ChevronUpIconProps>(
       >
         <>
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M8 5.70711L3.35355 10.3536L2.64645 9.64645L7.64645 4.64645C7.84171 4.45118 8.15829 4.45118 8.35355 4.64645L13.3536 9.64645L12.6464 10.3536L8 5.70711Z"
             fill="currentColor"
+            fillRule="evenodd"
+            d="m8 5.707-4.646 4.647-.708-.708 5-5a.5.5 0 0 1 .708 0l5 5-.708.708L8 5.707Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>

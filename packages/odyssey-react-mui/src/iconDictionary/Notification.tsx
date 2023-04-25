@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -32,10 +32,10 @@ export const NotificationIcon = forwardRef<
     >
       <>
         <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M15.125 12L15.5 13H14.432H11C11 14.6569 9.65685 16 8 16C6.34315 16 5 14.6569 5 13H1.568H0.5L0.875 12L1.61119 10.0368C1.8694 9.34827 2.04108 8.63032 2.12228 7.89945L2.44784 4.96942C2.76219 2.14032 5.15349 0 8 0C10.8465 0 13.2378 2.14032 13.5522 4.96942L13.8777 7.89945C13.9589 8.63032 14.1306 9.34827 14.3888 10.0368L15.125 12ZM6 13C6 14.1046 6.89543 15 8 15C9.10457 15 10 14.1046 10 13H6ZM5 12H1.943L2.54752 10.3879C2.8348 9.62186 3.02581 8.82306 3.11617 8.00988L3.44173 5.07985C3.6998 2.75719 5.66304 1 8 1C10.337 1 12.3002 2.75718 12.5583 5.07985L12.8838 8.00988C12.9742 8.82306 13.1652 9.62186 13.4525 10.3879L14.057 12H11H10H6H5Z"
           fill="currentColor"
+          fillRule="evenodd"
+          d="m15.125 12 .375 1H11a3 3 0 1 1-6 0H.5l.375-1 .736-1.963a8.88 8.88 0 0 0 .511-2.138l.326-2.93a5.586 5.586 0 0 1 11.104 0l.326 2.93a8.88 8.88 0 0 0 .51 2.138L15.126 12ZM6 13a2 2 0 1 0 4 0H6Zm-1-1H1.943l.605-1.612a9.88 9.88 0 0 0 .568-2.378l.326-2.93a4.586 4.586 0 0 1 9.116 0l.326 2.93a9.88 9.88 0 0 0 .569 2.378L14.056 12H5Z"
+          clipRule="evenodd"
         />
       </>
     </SvgIcon>

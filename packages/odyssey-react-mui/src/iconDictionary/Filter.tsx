@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,10 +30,10 @@ export const FilterIcon = forwardRef<SVGSVGElement, FilterIconProps>(
       >
         <>
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M1 2H15V3H1V2ZM3 6H13V7H3V6ZM11 10H5V11H11V10ZM7 14H9V15H7V14Z"
             fill="currentColor"
+            fillRule="evenodd"
+            d="M1 2h14v1H1V2Zm2 4h10v1H3V6Zm8 4H5v1h6v-1Zm-4 4h2v1H7v-1Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>

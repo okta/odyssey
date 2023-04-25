@@ -10,15 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const path = require("path");
-const headerComment = require("./header-comment");
+import path from "path";
 
-const getBaseName = (filePath) =>
+import { headerComment } from "./headerComment";
+
+const getBaseName = (filePath: string) =>
   path.basename(filePath, path.extname(filePath));
 
-const getExportName = (basename) => `${basename}Icon`;
+const getExportName = (basename: string) => `${basename}Icon`;
 
-function toKebabCase(string) {
+function toKebabCase(string: string) {
   return string
     .split("")
     .map((letter) => {
@@ -32,7 +33,7 @@ function toKebabCase(string) {
     .replace(/[_\s]+/g, "-");
 }
 
-function odysseyIconIndexTemplate(filePaths) {
+function odysseyIconIndexTemplate(filePaths: string[]) {
   const iconComponentExport = `export * from "./Icon";\n\n`;
 
   const importExportEntries = filePaths
@@ -65,4 +66,4 @@ function odysseyIconIndexTemplate(filePaths) {
   );
 }
 
-module.exports = odysseyIconIndexTemplate;
+export default odysseyIconIndexTemplate;
