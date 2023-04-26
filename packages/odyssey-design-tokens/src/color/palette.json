@@ -7,24 +7,24 @@
           "value": "#ffffff"
         },
         "000": {
-          "comment": "Used for Backgrounds, read-only & disabled input fills",
-          "value": "#F4F4F4"
+          "comment": "Used for backgrounds, read-only & disabled input fills",
+          "value": "#f4f4f4"
         },
         "100": {
           "comment": "Used for read-only/disabled states",
-          "value": "#EDEDED"
+          "value": "#ededed"
         },
         "200": {
-          "comment": "Used for Display borders",
-          "value": "#E1E1E1"
+          "comment": "Used for display borders",
+          "value": "#e1e1e1"
         },
         "500": {
-          "comment": "Used for Interactive UI borders",
-          "value": "#8D8D8D"
+          "comment": "Used for interactive UI borders",
+          "value": "#8d8d8d"
         },
         "600": {
-          "comment": "Used for caption text, Status label, disabled Overlay Buttons",
-          "value": "#6E6E6E"
+          "comment": "Used for caption text, status label, disabled overlay buttons",
+          "value": "#6e6e6e"
         },
         "900": {
           "comment": "Used for titles, body copy, icons, shadows, tooltips",
@@ -34,55 +34,55 @@
       "blue": {
         "000": {
           "comment": "Used for clear button hover, backgrounds",
-          "value": "#F2F3FD"
+          "value": "#f2f3fd"
         },
         "300": {
           "comment": "Used for buttons disabled state fills & borders, focus rings",
-          "value": "#9DAAF1"
+          "value": "#9daaf1"
         },
         "500": {
           "comment": "Used for links, buttons, icons, hover states, selected states",
-          "value": "#4C64E1"
+          "value": "#4c64e1"
         },
         "900": {
           "comment": "Used for okta logo, brand moments, button hovers",
-          "value": "#22307C"
+          "value": "#22307c"
         }
       },
       "green": {
         "000": {
           "comment": "Used for moments of success, validation, wayfinding",
-          "value": "#DEFAE7"
+          "value": "#defae7"
         },
         "300": {
-          "comment": "N/A",
-          "value": "#7BE09E"
+          "comment": "n/a",
+          "value": "#7be09e"
         },
         "500": {
           "comment": "Used for moments of success, validation, wayfinding, status",
-          "value": "#197F48"
+          "value": "#197f48"
         },
         "600": {
-          "comment": "N/A",
-          "value": "#0E562F"
+          "comment": "n/a",
+          "value": "#0e562f"
         },
         "900": {
           "comment": "Used for moments of success, validation, wayfinding",
-          "value": "#0A4023"
+          "value": "#0a4023"
         }
       },
       "red": {
         "000": {
           "comment": "Used for system errors, danger buttons, error states",
-          "value": "#FFF0EE"
+          "value": "#fff0ee"
         },
         "300": {
           "comment": "Used for danger button disabled state fills, borders, & focus ring",
-          "value": "#FEBBAE"
+          "value": "#febbae"
         },
         "500": {
           "comment": "Used for system errors, danger buttons, error states, status dot",
-          "value": "#D92300"
+          "value": "#d92300"
         },
         "900": {
           "comment": "Used for destructive button & invalid input hovers",
@@ -92,31 +92,31 @@
       "yellow": {
         "000": {
           "comment": "Used for moments of caution",
-          "value": "#FCF6AC"
+          "value": "#fcf6ac"
         },
         "300": {
-          "comment": "N/A",
-          "value": "#F9C503"
+          "comment": "n/a",
+          "value": "#f9c503"
         },
         "500": {
-          "comment": "Used for Moments of caution, status dot",
+          "comment": "Used for moments of caution, status dot",
           "value": "#986603"
         },
         "900": {
           "comment": "Used for moments of caution",
-          "value": "#4C3302"
+          "value": "#4c3302"
         }
       },
       "orange": {
         "500": {
-          "comment": "N/A",
-          "value": "#EF9B05"
+          "comment": "n/a",
+          "value": "#ef9b05"
         }
       },
       "turquoise": {
         "400": {
           "comment": "Used for background color",
-          "value": "#4CB7A3"
+          "value": "#4cb7a3"
         },
         "500": {
           "comment": "Used for brand moments",
@@ -125,8 +125,8 @@
       },
       "purple": {
         "500": {
-          "comment": "Used for Moments of learning, tips, brand moments",
-          "value": "#4016A0"
+          "comment": "Used for moments of learning, tips, brand moments",
+          "value": "#4016a0"
         }
       }
     }
