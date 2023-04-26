@@ -10,28 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement, useMemo } from "react";
+import { memo, ReactElement } from "react";
 import { Box, Snackbar } from ".";
-import { ToastStackContext } from "./ToastStackContext";
 
 export type ToastStackProps = {
   children: ReactElement | Array<ReactElement>;
 };
 
 const ToastStack = ({ children }: ToastStackProps) => {
-  const providerValue = useMemo(
-    () => ({
-      isStatic: true,
-    }),
-    []
-  );
-
   return (
     <Snackbar open={true}>
       <Box display="flex" flexDirection="column-reverse" gap={2}>
-        <ToastStackContext.Provider value={providerValue}>
-          {children}
-        </ToastStackContext.Provider>
+        {children}
       </Box>
     </Snackbar>
   );

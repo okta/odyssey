@@ -27,7 +27,6 @@ import {
   Snackbar,
   visuallyHidden,
 } from ".";
-import { ToastStackContext } from "./ToastStackContext";
 
 export type ToastProps = {
   /**
@@ -44,10 +43,6 @@ export type ToastProps = {
    * If true, the Toast is visible
    */
   isOpen?: boolean;
-  /**
-   * If isStatic is true, the alert will not respect Snackbar positioning
-   */
-  isStatic?: boolean;
   /**
    * If linkUrl is not undefined, this is the text of the link.
    * If left blank, it defaults to "Learn more".
@@ -79,52 +74,44 @@ export type ToastProps = {
 };
 
 const Toast = forwardRef(
-  (
-    {
-      autoHideDuration = 6000,
-      isDismissable,
-      isStatic,
-      linkText,
-      linkUrl,
-      isOpen,
-      onClose,
-      role,
-      severity,
-      text,
-    }: ToastProps,
-    ref: ForwardedRef<HTMLDivElement>
-  ) => {
+  ({
+    autoHideDuration = 6000,
+    isDismissable,
+    linkText,
+    linkUrl,
+    isOpen,
+    onClose: onCloseProp,
+    role,
+    severity,
+    text,
+  }: ToastProps) => {
     const [open, setOpen] = React.useState(isOpen);
-    const { isStatic: isContextStatic } = useContext(ToastStackContext);
 
     useEffect(() => {
       setOpen(isOpen);
     }, [isOpen]);
 
-    const handleClose = () => {
+    const onClose = () => {
       setOpen(false);
-      if (onClose) {
-        onClose();
-      }
+      onCloseProp?.();
     };
 
     return (
       <Snackbar
         open={open}
         autoHideDuration={isDismissable ? undefined : autoHideDuration}
-        onClose={handleClose}
-        className={isContextStatic || isStatic ? "Toast-static" : ""}
+        onClose={onClose}
+        className="Toast"
         ClickAwayListenerProps={{
           onClickAway: () => false,
         }}
       >
         <Alert
-          ref={ref}
           action={
             isDismissable && (
               <Button
                 aria-label="close"
-                onClick={handleClose}
+                onClick={onClose}
                 size="small"
                 startIcon={<CloseIcon />}
                 variant="floating"

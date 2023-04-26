@@ -1598,7 +1598,7 @@ export const components: ThemeOptions["components"] = {
     },
     styleOverrides: {
       root: {
-        "&.Toast-static": {
+        "&.Toast": {
           position: "static",
         },
       },

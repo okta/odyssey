@@ -74,37 +74,37 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
         onClick={openToast}
         text={`Open ${args.severity} toast`}
       />
-      <Toast
-        autoHideDuration={args.autoHideDuration}
-        isDismissable={args.isDismissable}
-        linkText={args.linkText}
-        linkUrl={args.linkUrl}
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        role={args.role}
-        severity={args.severity}
-        text={args.text}
-      />
+      <ToastStack>
+        <Toast
+          autoHideDuration={args.autoHideDuration}
+          isDismissable={args.isDismissable}
+          linkText={args.linkText}
+          linkUrl={args.linkUrl}
+          isOpen={open}
+          onClose={() => setOpen(false)}
+          role={args.role}
+          severity={args.severity}
+          text={args.text}
+        />
+      </ToastStack>
     </>
   );
 };
 
 const StaticTemplate: Story<ToastProps> = (args) => {
-  return <Toast isOpen={true} isStatic {...args}></Toast>;
+  return <Toast isOpen={true} {...args}></Toast>;
 };
 
 const MultiTemplate: Story<ToastProps> = () => {
   const [toasts, setToasts] = useState([
     <Toast
       isDismissable
-      isStatic
       isOpen={true}
       severity="info"
       text="The mission to Sagittarius A is set for January 7."
     />,
     <Toast
       isDismissable
-      isStatic
       isOpen={true}
       severity="success"
       text="Docking completed."
@@ -114,26 +114,18 @@ const MultiTemplate: Story<ToastProps> = () => {
   const addToast = () => {
     const toastOptions = [
       <Toast
-        isStatic
         isOpen={true}
         severity="info"
         text={`The mission to Sagittarius A is set for January 7.`}
       />,
+      <Toast isOpen={true} severity="success" text={`Docking completed.`} />,
       <Toast
-        isStatic
-        isOpen={true}
-        severity="success"
-        text={`Docking completed.`}
-      />,
-      <Toast
-        isStatic
         isOpen={true}
         severity="warning"
         isDismissable
         text={`Severe solar winds may delay local system flights.`}
       />,
       <Toast
-        isStatic
         isOpen={true}
         severity="error"
         isDismissable
