@@ -29,7 +29,7 @@ const storybookMeta: ComponentMeta<typeof SearchField> = {
       control: "text",
       defaultValue: "name",
     },
-    autoFocus: {
+    hasInitialFocus: {
       control: "boolean",
       defaultValue: undefined,
     },

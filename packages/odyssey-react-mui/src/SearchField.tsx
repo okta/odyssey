@@ -25,15 +25,15 @@ import { Field } from "./Field";
 
 export type SearchFieldProps = {
   /**
-   * If `true`, the component will receive focus automatically.
-   */
-  autoFocus?: boolean;
-  /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
+  /**
+   * If `true`, the component will receive focus automatically.
+   */
+  hasInitialFocus?: boolean;
   /**
    * The id of the `input` element.
    */
@@ -72,7 +72,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
       autoCompleteType,
-      autoFocus,
+      hasInitialFocus,
       id: idOverride,
       isDisabled = false,
       label,
@@ -90,7 +90,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
-          autoFocus={autoFocus}
+          autoFocus={hasInitialFocus}
           id={id}
           onChange={onChange}
           onFocus={onFocus}
@@ -108,7 +108,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       ),
       [
         autoCompleteType,
-        autoFocus,
+        hasInitialFocus,
         onChange,
         onFocus,
         onBlur,

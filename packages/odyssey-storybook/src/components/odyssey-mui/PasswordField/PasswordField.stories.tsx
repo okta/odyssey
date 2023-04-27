@@ -29,7 +29,7 @@ const storybookMeta: ComponentMeta<typeof PasswordField> = {
       control: "text",
       defaultValue: "name",
     },
-    autoFocus: {
+    hasInitialFocus: {
       control: "boolean",
       defaultValue: undefined,
     },
