@@ -55,6 +55,7 @@ const CheckboxGroup = ({
       component="fieldset"
       disabled={isDisabled}
       error={Boolean(errorMessage)}
+      name={name}
     >
       {label && <FormLabel component="legend">{label}</FormLabel>}
       {hint && <FormHelperText id={`${name}-hint`}>{hint}</FormHelperText>}
