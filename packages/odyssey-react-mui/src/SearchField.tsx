@@ -92,6 +92,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={autoFocus}
           id={id}
+          name={id}
           onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
