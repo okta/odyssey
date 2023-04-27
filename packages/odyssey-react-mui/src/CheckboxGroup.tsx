@@ -10,16 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement, useMemo } from "react";
-
 import {
-  Checkbox,
-  FormControl,
-  FormGroup,
-  FormHelperText,
-  FormLabel,
-  ScreenReaderText,
-} from ".";
+  FormControl as MuiFormControl,
+  FormGroup as MuiFormGroup,
+  FormLabel as MuiFormLabel,
+} from "@mui/material";
+import { memo, ReactElement, useCallback } from "react";
+
+import { Checkbox } from "./Checkbox";
+import { Field } from "./Field";
 
 export type CheckboxGroupProps = {
   children:
@@ -27,9 +26,12 @@ export type CheckboxGroupProps = {
     | Array<ReactElement<typeof Checkbox>>;
   errorMessage?: string;
   hint?: string;
+  /**
+   * The id of the `input` element. This will also be the input's `name` field.
+   */
+  id?: string;
   isDisabled?: boolean;
-  label?: string;
-  name?: string;
+  label: string;
 };
 
 const CheckboxGroup = ({
@@ -37,35 +39,36 @@ const CheckboxGroup = ({
   isDisabled,
   errorMessage,
   hint,
+  id: idOverride,
   label,
-  name,
 }: CheckboxGroupProps) => {
-  const ariaDescribedBy = useMemo(
-    () =>
-      errorMessage || hint
-        ? [hint && `${name}-hint`, errorMessage && `${name}-error`]
-            .filter(Boolean)
-            .join(" ")
-        : undefined,
-    [errorMessage, hint, name]
+  const renderFieldComponent = useCallback(
+    ({ ariaDescribedBy, id }) => (
+      <MuiFormGroup aria-describedby={ariaDescribedBy} id={id}>
+        {children}
+      </MuiFormGroup>
+    ),
+    [children]
   );
 
   return (
-    <FormControl
+    <MuiFormControl
       component="fieldset"
       disabled={isDisabled}
       error={Boolean(errorMessage)}
-      name={name}
     >
-      {label && <FormLabel component="legend">{label}</FormLabel>}
-      {hint && <FormHelperText id={`${name}-hint`}>{hint}</FormHelperText>}
-      <FormGroup aria-describedby={ariaDescribedBy}>{children}</FormGroup>
-      {errorMessage && (
-        <FormHelperText id={`${name}-error`} error>
-          <ScreenReaderText>Error:</ScreenReaderText> {errorMessage}
-        </FormHelperText>
-      )}
-    </FormControl>
+      <MuiFormLabel component="legend">{label}</MuiFormLabel>
+
+      <Field
+        errorMessage={errorMessage}
+        hasVisibleLabel={false}
+        hint={hint}
+        id={idOverride}
+        isDisabled={isDisabled}
+        label={label}
+        renderFieldComponent={renderFieldComponent}
+      />
+    </MuiFormControl>
   );
 };
 

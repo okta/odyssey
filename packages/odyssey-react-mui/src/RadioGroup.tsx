@@ -10,18 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { RadioGroup as MuiRadioGroup } from "@mui/material";
-import { ChangeEventHandler, memo, ReactElement, useMemo } from "react";
-
 import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Radio,
-  ScreenReaderText,
-  useUniqueId,
-  RadioProps,
-} from ".";
+  FormControl as MuiFormControl,
+  FormLabel as MuiFormLabel,
+  RadioGroup as MuiRadioGroup,
+} from "@mui/material";
+import { ChangeEventHandler, memo, ReactElement, useCallback } from "react";
+
+import { Radio, RadioProps } from "./Radio";
+import { Field } from "./Field";
 
 export interface RadioGroupProps {
   /**
@@ -41,6 +38,10 @@ export interface RadioGroupProps {
    */
   hint?: string;
   /**
+   * The id of the `input` element. This will also be the input's `name` field.
+   */
+  id?: string;
+  /**
    * Disables the whole radio group
    */
   isDisabled?: boolean;
@@ -48,10 +49,6 @@ export interface RadioGroupProps {
    * The text label for the radio group
    */
   label: string;
-  /**
-   * The name of the radio group, which only needs to be changed if there are multiple radio groups on the same screen
-   */
-  name?: string;
   /**
    * Listen for changes in the browser that change `value`.
    */
@@ -67,47 +64,46 @@ const RadioGroup = ({
   defaultValue,
   errorMessage,
   hint,
+  id: idOverride,
   isDisabled,
   label,
-  name,
   onChange,
+  value,
 }: RadioGroupProps) => {
-  const ariaDescribedBy = useMemo(
-    () =>
-      errorMessage || hint
-        ? [hint && `${name}-hint`, errorMessage && `${name}-error`]
-            .filter(Boolean)
-            .join(" ")
-        : undefined,
-    [errorMessage, hint, name]
+  const renderFieldComponent = useCallback(
+    ({ ariaDescribedBy, id }) => (
+      <MuiRadioGroup
+        aria-describedby={ariaDescribedBy}
+        defaultValue={defaultValue}
+        id={id}
+        name={id}
+        onChange={onChange}
+        value={value}
+      >
+        {children}
+      </MuiRadioGroup>
+    ),
+    [children, defaultValue, onChange, value]
   );
 
-  const uniqueName = useUniqueId(name);
-
   return (
-    <FormControl
+    <MuiFormControl
       component="fieldset"
       disabled={isDisabled}
       error={Boolean(errorMessage)}
     >
-      <FormLabel component="legend">{label}</FormLabel>
-      {hint && (
-        <FormHelperText id={`${uniqueName}-hint`}>{hint}</FormHelperText>
-      )}
-      <MuiRadioGroup
-        aria-describedby={ariaDescribedBy}
-        defaultValue={defaultValue}
-        name={uniqueName}
-        onChange={onChange}
-      >
-        {children}
-      </MuiRadioGroup>
-      {errorMessage && (
-        <FormHelperText id={`${uniqueName}-error`} error>
-          <ScreenReaderText>Error:</ScreenReaderText> {errorMessage}
-        </FormHelperText>
-      )}
-    </FormControl>
+      <MuiFormLabel component="legend">{label}</MuiFormLabel>
+
+      <Field
+        errorMessage={errorMessage}
+        hasVisibleLabel={false}
+        hint={hint}
+        id={idOverride}
+        isDisabled={isDisabled}
+        label={label}
+        renderFieldComponent={renderFieldComponent}
+      />
+    </MuiFormControl>
   );
 };
 
