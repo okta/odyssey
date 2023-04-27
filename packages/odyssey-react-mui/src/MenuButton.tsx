@@ -41,13 +41,18 @@ export type MenuButtonProps = {
    * The variant of the triggering Button
    */
   buttonVariant?: ButtonProps["variant"];
-};
+  /**
+   * The id of the `input` element.
+   */
+  id?: string;
+}
 
 const MenuButton = ({
   buttonLabel = "",
   children,
   buttonEndIcon = <ChevronDownIcon />,
   buttonVariant = "secondary",
+  id: idOverride,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -61,7 +66,7 @@ const MenuButton = ({
     setAnchorEl(null);
   };
 
-  const uniqueId = useUniqueId();
+  const uniqueId = useUniqueId(idOverride);
 
   const menuListProps = useMemo(
     () => ({ "aria-labelledby": `${uniqueId}-button` }),
