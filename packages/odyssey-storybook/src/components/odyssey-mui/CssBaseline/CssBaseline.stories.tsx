@@ -10,13 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import { CssBaseline, ScopedCssBaseline } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import {
+  CssBaseline,
+  CssBaselineProps,
+  ScopedCssBaseline,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import CssBaselineMdx from "./CssBaseline.mdx";
 
-export default {
+const storybookMeta: Meta<CssBaselineProps> = {
   title: `MUI Components/CSS Baseline`,
   component: CssBaseline,
   parameters: {
@@ -26,6 +30,8 @@ export default {
   },
   decorators: [MuiThemeDecorator],
 };
+
+export default storybookMeta;
 
 const AbbrTemplate: Story = () => {
   return (

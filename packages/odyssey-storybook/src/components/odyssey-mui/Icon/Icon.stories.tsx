@@ -10,12 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import { createElement } from "react";
 import type { ReactElement } from "react";
 import {
   Icon,
   iconDictionary,
+  IconProps,
   Table,
   TableBody,
   TableCell,
@@ -25,11 +26,13 @@ import {
 } from "../../../../../odyssey-react-mui/src";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
-export default {
+const storybookMeta: Meta<IconProps> = {
   title: `MUI Components/Icon`,
   component: Icon,
   decorators: [MuiThemeDecorator],
 };
+
+export default storybookMeta;
 
 const Template: Story = ({ ...args }) => (
   <Icon name={args.name} titleAccess={args.title} />
