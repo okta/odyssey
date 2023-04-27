@@ -22,7 +22,7 @@ import {
 } from "./";
 import { memo, MouseEvent, ReactElement, useMemo, useState } from "react";
 
-export interface MenuButtonProps {
+export type MenuButtonProps = {
   /**
    * The <MenuItem> components within the Menu.
    */
@@ -41,7 +41,7 @@ export interface MenuButtonProps {
    * The variant of the triggering Button
    */
   buttonVariant?: ButtonProps["variant"];
-}
+};
 
 const MenuButton = ({
   buttonLabel = "",

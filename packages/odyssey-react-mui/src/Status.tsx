@@ -12,7 +12,7 @@
 
 import { Chip } from "./";
 
-export interface StatusProps {
+export type StatusProps = {
   /**
    * Determine the color and icon of the alert
    */
@@ -22,7 +22,7 @@ export interface StatusProps {
    * The text content of the status
    */
   label: string;
-}
+};
 
 export const Status = ({ severity, label }: StatusProps) => (
   <Chip label={label} color={severity} variant="status" />

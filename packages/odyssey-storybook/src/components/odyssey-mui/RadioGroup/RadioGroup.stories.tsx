@@ -35,7 +35,7 @@ const storybookMeta: ComponentMeta<typeof RadioGroup> = {
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: undefined,
     },
     label: {
       control: "text",

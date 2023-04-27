@@ -31,11 +31,11 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     },
     autoFocus: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: undefined,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: undefined,
     },
     endAdornment: {
       control: "text",
@@ -55,7 +55,7 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     },
     isMultiline: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: undefined,
     },
     onBlur: {
       control: "function",
@@ -75,7 +75,7 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     },
     isReadOnly: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: undefined,
     },
     isRequired: {
       control: "boolean",

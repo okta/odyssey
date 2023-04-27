@@ -30,7 +30,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import SelectMdx from "./Select.mdx";
 
-export default {
+const storybookMeta = {
   title: `MUI Components/Forms/Select`,
   component: Select,
   parameters: {
@@ -70,6 +70,8 @@ export default {
   },
   decorators: [MuiThemeDecorator],
 };
+
+export default storybookMeta;
 
 const destinations = [
   "Earth",

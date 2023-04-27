@@ -31,11 +31,11 @@ const storybookMeta: ComponentMeta<typeof SearchField> = {
     },
     autoFocus: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: undefined,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: undefined,
     },
     id: {
       control: "text",

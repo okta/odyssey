@@ -12,15 +12,19 @@
 
 import { forwardRef, ReactElement } from "react";
 
-import { Link as MuiLink, SvgIcon } from "@mui/material";
+import {
+  Link as MuiLink,
+  LinkProps as MuiLinkProps,
+  SvgIcon,
+} from "@mui/material";
 
 export type LinkProps = {
   children: React.ReactNode;
   href: string;
   icon?: ReactElement;
   rel?: string;
-  target: "_self" | "_blank" | "_parent" | "_top" | string;
-  variant?: "inherit" | "button" | "text" | "primary" | "secondary";
+  target?: "_self" | "_blank" | "_parent" | "_top" | string;
+  variant?: MuiLinkProps["variant"];
 };
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
