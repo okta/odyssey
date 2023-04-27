@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import * as React from "react";
 import {
   Button,
@@ -20,6 +20,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  TableProps,
   TableRow,
   TableSortLabel,
   Typography,
@@ -27,7 +28,7 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TableMdx from "./Table.mdx";
 
-export default {
+const storybookMeta: Meta<TableProps> = {
   title: `MUI Components/Table`,
   component: Table,
   parameters: {
@@ -55,6 +56,8 @@ export default {
   },
   decorators: [MuiThemeDecorator],
 };
+
+export default storybookMeta;
 
 interface Data {
   name: string;

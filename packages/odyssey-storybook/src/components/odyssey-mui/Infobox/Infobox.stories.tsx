@@ -21,7 +21,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import InfoboxMdx from "./Infobox.mdx";
 
-export default {
+const storybookMeta: Meta<InfoboxProps> = {
   title: `MUI Components/Alerts/Infobox`,
   component: Infobox,
   parameters: {
@@ -47,7 +47,9 @@ export default {
     },
   },
   decorators: [MuiThemeDecorator],
-} as Meta<InfoboxProps>;
+};
+
+export default storybookMeta;
 
 const DefaultTemplate: Story<InfoboxProps> = (args) => {
   return (

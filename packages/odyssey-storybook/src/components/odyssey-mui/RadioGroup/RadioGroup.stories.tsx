@@ -25,6 +25,12 @@ const storybookMeta: ComponentMeta<typeof RadioGroup> = {
     },
   },
   argTypes: {
+    children: {
+      control: "text",
+    },
+    defaultValue: {
+      control: "text",
+    },
     errorMessage: {
       control: "text",
     },

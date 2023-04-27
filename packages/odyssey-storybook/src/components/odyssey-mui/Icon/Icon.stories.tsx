@@ -34,9 +34,7 @@ const storybookMeta: Meta<IconProps> = {
 
 export default storybookMeta;
 
-const Template: Story = ({ ...args }) => (
-  <Icon name={args.name} titleAccess={args.title} />
-);
+const Template: Story<IconProps> = ({ ...args }) => <Icon {...args} />;
 
 export const Default = Template.bind({});
 
@@ -45,13 +43,9 @@ Default.argTypes = {
     defaultValue: "alert-triangle-filled",
     control: { type: "select" },
   },
-  title: {
-    defaultValue: "Caution",
-    control: { type: "text" },
-  },
 };
 
-const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
+const icons: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   { name: "add", use: "To add" },
   {
     name: "add-circle",
@@ -171,31 +165,29 @@ const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   },
 ];
 
-export const Library = (): ReactElement => {
-  return (
-    <TableContainer>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Icon</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Class Name</TableCell>
-            <TableCell>Use</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {meta.map(({ name, use }) => {
-            return (
-              <TableRow key={`${name}_row`}>
-                <TableCell>{createElement(iconDictionary[name])}</TableCell>
-                <TableCell>{name}</TableCell>
-                <TableCell>{iconDictionary[name].displayName}</TableCell>
-                <TableCell>{use}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-};
+export const Library: Story<IconProps> = () => (
+  <TableContainer>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Icon</TableCell>
+          <TableCell>Name</TableCell>
+          <TableCell>Class Name</TableCell>
+          <TableCell>Use</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {icons.map(({ name, use }) => {
+          return (
+            <TableRow key={`${name}_row`}>
+              <TableCell>{createElement(iconDictionary[name])}</TableCell>
+              <TableCell>{name}</TableCell>
+              <TableCell>{iconDictionary[name].displayName}</TableCell>
+              <TableCell>{use}</TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  </TableContainer>
+);

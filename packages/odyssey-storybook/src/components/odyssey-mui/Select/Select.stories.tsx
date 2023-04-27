@@ -24,13 +24,14 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  SelectProps,
   visuallyHidden,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import SelectMdx from "./Select.mdx";
 
-const storybookMeta = {
+const storybookMeta: Meta<SelectProps> = {
   title: `MUI Components/Forms/Select`,
   component: Select,
   parameters: {
@@ -91,7 +92,7 @@ const exodestinations = [
   "New Terra",
 ];
 
-const Template: Story = (args) => {
+const Template: Story<SelectProps> = (args) => {
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>

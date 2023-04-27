@@ -59,7 +59,7 @@ const storybookMeta: Meta<DialogProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: Story = () => {
+const DefaultTemplate: Story<DialogProps> = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

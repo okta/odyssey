@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { PasswordField } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import { PasswordField, PasswordFieldProps } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import PasswordFieldMdx from "./PasswordField.mdx";
 
-const storybookMeta: ComponentMeta<typeof PasswordField> = {
+const storybookMeta: Meta<PasswordFieldProps> = {
   title: `MUI Components/Forms/PasswordField`,
   component: PasswordField,
   parameters: {
@@ -76,7 +76,7 @@ const storybookMeta: ComponentMeta<typeof PasswordField> = {
 
 export default storybookMeta;
 
-const Template: ComponentStory<typeof PasswordField> = (args) => {
+const Template: Story<PasswordFieldProps> = (args) => {
   return <PasswordField {...args} />;
 };
 
