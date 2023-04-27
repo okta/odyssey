@@ -56,15 +56,15 @@ const storybookMeta: Meta<ToastProps> = {
     },
   },
   decorators: [MuiThemeDecorator],
-} as Meta<ToastProps>;
+};
 
 export default storybookMeta;
 
 const DefaultTemplate: Story<ToastProps> = (args) => {
-  const [open, setOpen] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(false);
 
   const openToast = React.useCallback(() => {
-    setOpen(true);
+    setIsVisible(true);
   }, []);
 
   return (
@@ -80,8 +80,8 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
           isDismissable={args.isDismissable}
           linkText={args.linkText}
           linkUrl={args.linkUrl}
-          isOpen={open}
-          onClose={() => setOpen(false)}
+          isOpen={isVisible}
+          onClose={() => setIsVisible(false)}
           role={args.role}
           severity={args.severity}
           text={args.text}

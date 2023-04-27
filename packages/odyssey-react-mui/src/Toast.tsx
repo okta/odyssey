@@ -11,16 +11,16 @@
  */
 
 import { AlertColor } from "@mui/material";
-import React, { useEffect, memo, forwardRef } from "react";
+import { useEffect, memo, forwardRef, useState, useCallback } from "react";
 import {
   Alert,
   AlertTitle,
-  Button,
   CloseIcon,
   Link,
   Snackbar,
   visuallyHidden,
 } from ".";
+import { Button } from "./Button";
 
 export type ToastProps = {
   /**
@@ -67,38 +67,38 @@ export type ToastProps = {
   text: string;
 };
 
+const ClickAwayListenerProps = { onClickAway: () => false };
+
 const Toast = forwardRef(
   ({
     autoHideDuration = 6000,
     isDismissable,
     linkText,
     linkUrl,
-    isOpen,
+    isOpen: isOpenProp,
     onClose: onCloseProp,
     role,
     severity,
     text,
   }: ToastProps) => {
-    const [open, setOpen] = React.useState(isOpen);
+    const [isOpen, setIsOpen] = useState(isOpenProp);
 
     useEffect(() => {
-      setOpen(isOpen);
-    }, [isOpen]);
+      setIsOpen(isOpenProp);
+    }, [isOpenProp]);
 
-    const onClose = () => {
-      setOpen(false);
+    const onClose = useCallback(() => {
+      setIsOpen(false);
       onCloseProp?.();
-    };
+    }, [onCloseProp]);
 
     return (
       <Snackbar
-        open={open}
+        open={isOpen}
         autoHideDuration={isDismissable ? undefined : autoHideDuration}
         onClose={onClose}
         className="Toast"
-        ClickAwayListenerProps={{
-          onClickAway: () => false,
-        }}
+        ClickAwayListenerProps={ClickAwayListenerProps}
       >
         <Alert
           action={

@@ -12,9 +12,10 @@
 
 import { memo, ReactElement } from "react";
 import { Box, Snackbar } from ".";
+import { Toast } from "./Toast";
 
 export type ToastStackProps = {
-  children: ReactElement | Array<ReactElement>;
+  children: ReactElement<typeof Toast> | Array<ReactElement<typeof Toast>>;
 };
 
 const ToastStack = ({ children }: ToastStackProps) => {
