@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Story } from "@storybook/react";
+import type { Meta, Story } from "@storybook/react";
 
 import { Button, AddIcon } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
@@ -18,7 +18,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDec
 
 import ButtonMdx from "./Button.mdx";
 
-export default {
+const storybookMeta: Meta<ButtonProps> = {
   title: `MUI Components/Button`,
   component: Button,
   parameters: {
@@ -27,31 +27,36 @@ export default {
     },
   },
   argTypes: {
-    children: {
+    isDisabled: {
+      control: "boolean",
+    },
+    isFullWidth: {
+      control: "boolean",
+    },
+    size: {
+      options: ["small", "medium", "large"],
+      control: { type: "radio" },
+    },
+    startIcon: {
+      control: "object",
+    },
+    text: {
       control: "text",
       defaultValue: "Add crew",
     },
-    size: {
-      options: ["s", "m", "l"],
-      control: { type: "radio" },
+    tooltipText: {
+      control: "text",
     },
     variant: {
       options: ["primary", "secondary", "danger", "floating"],
       control: { type: "radio" },
       defaultValue: "primary",
     },
-    disabled: {
-      control: "boolean",
-    },
-    fullWidth: {
-      control: "boolean",
-    },
-    startIcon: {
-      control: "object",
-    },
   },
   decorators: [MuiThemeDecorator],
 };
+
+export default storybookMeta;
 
 const Template: Story<ButtonProps> = (props) => <Button {...props} />;
 
@@ -75,27 +80,27 @@ ButtonFloating.args = {
 
 export const ButtonSmall = Template.bind({});
 ButtonSmall.args = {
-  size: "s",
+  size: "small",
 };
 
 export const ButtonMedium = Template.bind({});
 ButtonMedium.args = {
-  size: "m",
+  size: "medium",
 };
 
 export const ButtonLarge = Template.bind({});
 ButtonLarge.args = {
-  size: "l",
+  size: "large",
 };
 
 export const ButtonFullWidth = Template.bind({});
 ButtonFullWidth.args = {
-  fullWidth: true,
+  isFullWidth: true,
 };
 
 export const ButtonPrimaryDisabled = Template.bind({});
 ButtonPrimaryDisabled.args = {
-  disabled: true,
+  isDisabled: true,
 };
 
 export const ButtonWithIcon = Template.bind({});
@@ -105,6 +110,7 @@ ButtonWithIcon.args = {
 
 export const IconOnly = Template.bind({});
 IconOnly.args = {
-  children: undefined,
   startIcon: <AddIcon />,
+  text: undefined,
+  tooltipText: "Add crew",
 };

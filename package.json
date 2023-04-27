@@ -14,6 +14,7 @@
     "build": "lerna run build --ignore @okta/odyssey-storybook",
     "dev:source": "lerna run dev:source",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-svgr build && yarn workspace @okta/odyssey-react-mui build:icons",
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-registry",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
     "lint": "yarn eslint && yarn stylelint && yarn prettier-check",

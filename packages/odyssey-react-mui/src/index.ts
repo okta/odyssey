@@ -14,7 +14,6 @@ export {
   Alert,
   AlertTitle,
   Box,
-  Button,
   Chip,
   createTheme,
   CssBaseline,
@@ -66,7 +65,6 @@ export type {
   AlertProps,
   AlertTitleProps,
   BoxProps,
-  ButtonProps,
   ChipProps,
   CssBaselineProps,
   DialogProps,
@@ -122,7 +120,9 @@ export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
 export { deepmerge, visuallyHidden } from "@mui/utils";
 
+export * from "./Autocomplete";
 export * from "./Banner";
+export * from "./Button";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
@@ -144,6 +144,8 @@ export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Status";
+export * from "./Tag";
+export * from "./TagList";
 export * from "./TextField";
 export * from "./theme";
 export * from "./ThemeProvider";
