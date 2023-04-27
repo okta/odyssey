@@ -15,20 +15,7 @@ import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import { Icon, Tooltip } from "./";
 import { ReactElement, memo } from "react";
 
-type ButtonPropsToOmit = {
-  endIcon?: never;
-  id?: never;
-  isDisabled?: never;
-  isFullWidth?: never;
-  onClick?: never;
-  size?: never;
-  startIcon?: never;
-  text?: never;
-  tooltipText?: never;
-  variant?: never;
-};
-
-export type ButtonProps = Omit<MuiButtonProps, keyof ButtonPropsToOmit> & {
+export type ButtonProps = {
   endIcon?: ReactElement<typeof Icon>;
   id?: string;
   isDisabled?: boolean;
@@ -55,7 +42,6 @@ const Button = ({
   text,
   tooltipText,
   variant,
-  ...rest
 }: ButtonProps) => {
   const button = (
     <MuiButton
@@ -67,7 +53,6 @@ const Button = ({
       size={size}
       startIcon={startIcon}
       variant={variant}
-      {...rest}
     >
       {text}
     </MuiButton>
