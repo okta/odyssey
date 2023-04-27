@@ -31,11 +31,9 @@ const storybookMeta: ComponentMeta<typeof PasswordField> = {
     },
     hasInitialFocus: {
       control: "boolean",
-      defaultValue: undefined,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: undefined,
     },
     errorMessage: {
       control: "text",
@@ -64,7 +62,6 @@ const storybookMeta: ComponentMeta<typeof PasswordField> = {
     },
     isReadOnly: {
       control: "boolean",
-      defaultValue: undefined,
     },
     isRequired: {
       control: "boolean",
