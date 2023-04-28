@@ -24,7 +24,6 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  SelectProps,
   visuallyHidden,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
