@@ -102,7 +102,7 @@ const Toast = forwardRef(
       >
         <Alert
           action={
-            isDismissable && (
+            isDismissable === true && (
               <Button
                 aria-label="close"
                 onClick={onHide}
