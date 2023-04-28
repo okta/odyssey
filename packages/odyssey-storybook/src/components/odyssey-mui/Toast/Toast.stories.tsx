@@ -12,11 +12,10 @@
 
 import { Meta, Story } from "@storybook/react";
 import { Button, Toast, ToastProps, ToastStack } from "@okta/odyssey-react-mui";
-import * as React from "react";
+import { useCallback, useState } from "react";
 
 import ToastMdx from "./Toast.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useState } from "react";
 
 const storybookMeta: Meta<ToastProps> = {
   title: `MUI Components/Alerts/Toast`,
@@ -29,7 +28,6 @@ const storybookMeta: Meta<ToastProps> = {
   argTypes: {
     autoHideDuration: {
       control: "number",
-      defaultValue: null,
     },
     isDismissable: {
       control: "boolean",
@@ -42,17 +40,14 @@ const storybookMeta: Meta<ToastProps> = {
     },
     role: {
       control: "radio",
-      options: ["alert", "status", null],
-      defaultValue: null,
+      options: ["alert", "status", undefined],
     },
     severity: {
       control: "radio",
       options: ["error", "info", "success", "warning"],
-      defaultValue: "info",
     },
     text: {
       control: "text",
-      defaultValue: "The mission to Sagittarius A is set for January 7.",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -61,9 +56,9 @@ const storybookMeta: Meta<ToastProps> = {
 export default storybookMeta;
 
 const DefaultTemplate: Story<ToastProps> = (args) => {
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const openToast = React.useCallback(() => {
+  const openToast = useCallback(() => {
     setIsVisible(true);
   }, []);
 
@@ -91,11 +86,25 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
   );
 };
 
-const StaticTemplate: Story<ToastProps> = (args) => {
-  return <Toast isVisible={true} {...args}></Toast>;
+DefaultTemplate.args = {
+  severity: "info",
+  text: "The mission to Sagittarius A is set for January 7.",
 };
 
-const MultiTemplate: Story<ToastProps> = () => {
+const StaticTemplate: Story<ToastProps> = (args) => {
+  return <Toast {...args}></Toast>;
+};
+
+StaticTemplate.args = {
+  isVisible: true,
+};
+
+StaticTemplate.args = {
+  severity: "info",
+  text: "The mission to Sagittarius A is set for January 7.",
+};
+
+const MultipleTemplate: Story<ToastProps> = () => {
   const [toasts, setToasts] = useState([
     <Toast
       isDismissable
@@ -209,5 +218,5 @@ DismissibleStatic.args = {
   linkUrl: "#",
 };
 
-export const MultipleToasts = MultiTemplate.bind({});
+export const MultipleToasts = MultipleTemplate.bind({});
 MultipleToasts.args = {};
