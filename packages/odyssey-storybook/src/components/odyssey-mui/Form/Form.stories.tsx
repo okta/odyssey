@@ -26,7 +26,6 @@ import {
   Radio,
   Select,
   Typography,
-  FormControlProps,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 

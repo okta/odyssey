@@ -36,24 +36,7 @@ const storybookMeta: Meta<TableProps> = {
       page: TableMdx,
     },
   },
-  argTypes: {
-    disabled: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    icon: {
-      control: "text",
-      defaultValue: null,
-    },
-    label: {
-      control: "text",
-      defaultValue: "Asteroids",
-    },
-    wrapped: {
-      control: "boolean",
-      defaultValue: false,
-    },
-  },
+  argTypes: {},
   decorators: [MuiThemeDecorator],
 };
 

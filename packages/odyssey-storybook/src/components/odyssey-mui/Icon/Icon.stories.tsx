@@ -12,7 +12,6 @@
 
 import { Meta, Story } from "@storybook/react";
 import { createElement } from "react";
-import type { ReactElement } from "react";
 import {
   Icon,
   iconDictionary,

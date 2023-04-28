@@ -35,23 +35,10 @@ const storybookMeta: Meta<DialogProps> = {
     },
   },
   argTypes: {
-    content: {
-      control: "text",
-      defaultValue: "The mission to Sagitarius A has been set for January 7.",
-    },
-    onClose: {
-      control: "text",
-      defaultValue: null,
-    },
     role: {
       control: "radio",
       options: ["status", null],
       defaultValue: null,
-    },
-    severity: {
-      control: "radio",
-      options: ["error", "info", "warning"],
-      defaultValue: "info",
     },
   },
   decorators: [MuiThemeDecorator],

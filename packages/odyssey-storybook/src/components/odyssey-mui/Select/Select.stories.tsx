@@ -11,7 +11,7 @@
  */
 
 import * as React from "react";
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import {
   Box,
   Checkbox,
@@ -31,7 +31,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import SelectMdx from "./Select.mdx";
 
-const storybookMeta: Meta<SelectProps> = {
+const storybookMeta: Meta = {
   title: `MUI Components/Forms/Select`,
   component: Select,
   parameters: {
@@ -92,7 +92,7 @@ const exodestinations = [
   "New Terra",
 ];
 
-const Template: Story<SelectProps> = (args) => {
+const Template: Story = (args) => {
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
