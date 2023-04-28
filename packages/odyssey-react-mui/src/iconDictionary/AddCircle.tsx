@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,10 +30,10 @@ export const AddCircleIcon = forwardRef<SVGSVGElement, AddCircleIconProps>(
       >
         <>
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM7.5 11V8.5H5V7.5H7.5V5H8.5V7.5H11V8.5H8.5V11H7.5Z"
             fill="currentColor"
+            fillRule="evenodd"
+            d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-7 8A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm-.5-5V8.5H5v-1h2.5V5h1v2.5H11v1H8.5V11h-1Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>

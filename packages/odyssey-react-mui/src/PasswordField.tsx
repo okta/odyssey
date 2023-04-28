@@ -130,6 +130,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
             </InputAdornment>
           }
           id={id}
+          name={id}
           onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}

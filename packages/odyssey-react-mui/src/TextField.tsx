@@ -139,6 +139,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           endAdornment={endAdornment}
           id={id}
           multiline={isMultiline}
+          name={id}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}

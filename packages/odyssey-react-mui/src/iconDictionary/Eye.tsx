@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -29,10 +29,10 @@ export const EyeIcon = forwardRef<SVGSVGElement, EyeIconProps>((props, ref) => {
     >
       <>
         <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M3.89765 11.5506C2.89626 10.6994 2.04176 9.50056 1.15617 8C2.04176 6.49944 2.89626 5.30062 3.89765 4.44944C4.96916 3.53865 6.24031 3 8 3C9.75969 3 11.0308 3.53865 12.1024 4.44944C13.1037 5.30062 13.9582 6.49944 14.8438 8C13.9582 9.50056 13.1037 10.6994 12.1024 11.5506C11.0308 12.4613 9.75969 13 8 13C6.24031 13 4.96916 12.4613 3.89765 11.5506ZM8 14C12 14 14 11.5 16 8C14 4.5 12 2 8 2C4 2 2 4.5 0 8C2 11.5 4 14 8 14ZM11 8C11 9.65685 9.65685 11 8 11C6.34315 11 5 9.65685 5 8C5 6.34315 6.34315 5 8 5C9.65685 5 11 6.34315 11 8ZM12 8C12 10.2091 10.2091 12 8 12C5.79086 12 4 10.2091 4 8C4 5.79086 5.79086 4 8 4C10.2091 4 12 5.79086 12 8Z"
           fill="currentColor"
+          fillRule="evenodd"
+          d="M3.898 11.55C2.896 10.7 2.042 9.5 1.156 8c.886-1.5 1.74-2.7 2.742-3.55C4.969 3.538 6.24 3 8 3c1.76 0 3.03.539 4.102 1.45 1.002.85 1.856 2.05 2.742 3.55-.886 1.5-1.74 2.7-2.742 3.55C11.031 12.462 9.76 13 8 13c-1.76 0-3.03-.539-4.102-1.45ZM8 14c4 0 6-2.5 8-6-2-3.5-4-6-8-6S2 4.5 0 8c2 3.5 4 6 8 6Zm3-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm1 0a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
+          clipRule="evenodd"
         />
       </>
     </SvgIcon>
