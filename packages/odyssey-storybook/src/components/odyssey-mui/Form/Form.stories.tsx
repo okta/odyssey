@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import {
   Alert,
   AlertTitle,
@@ -26,14 +26,16 @@ import {
   Radio,
   Select,
   Typography,
+  FormControlProps,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import FormMdx from "./Form.mdx";
 
-export default {
+// TEMP: this needs a component for props
+const storybookMeta: Meta = {
   title: `MUI Components/Forms/Form`,
-  component: InputBase,
+  component: FormControl,
   parameters: {
     docs: {
       page: FormMdx,
@@ -88,6 +90,8 @@ export default {
   },
   decorators: [MuiThemeDecorator],
 };
+
+export default storybookMeta;
 
 const Template: Story = (args) => {
   return (

@@ -21,7 +21,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import InfoboxMdx from "./Infobox.mdx";
 
-export default {
+const storybookMeta: Meta<InfoboxProps> = {
   title: `MUI Components/Alerts/Infobox`,
   component: Infobox,
   parameters: {
@@ -32,13 +32,10 @@ export default {
   argTypes: {
     children: {
       control: "text",
-      defaultValue:
-        "You are currently logged in from Moonbase Alpha-6, located on Luna.",
     },
     role: {
       control: "radio",
-      options: ["alert", "status", null],
-      defaultValue: null,
+      options: ["alert", "status", undefined],
     },
     severity: {
       control: "radio",
@@ -47,11 +44,12 @@ export default {
     },
     title: {
       control: "string",
-      defaultValue: undefined,
     },
   },
   decorators: [MuiThemeDecorator],
-} as Meta<InfoboxProps>;
+};
+
+export default storybookMeta;
 
 const DefaultTemplate: Story<InfoboxProps> = (args) => {
   return (
@@ -59,6 +57,11 @@ const DefaultTemplate: Story<InfoboxProps> = (args) => {
       {args.children}
     </Infobox>
   );
+};
+
+DefaultTemplate.args = {
+  children:
+    "You are currently logged in from Moonbase Alpha-6, located on Luna.",
 };
 
 export const Info = DefaultTemplate.bind({});

@@ -121,7 +121,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       onBlur,
       onChange,
       onFocus,
-      optionalLabel,
+      optionalLabel = "Optional",
       placeholder,
       startAdornment,
       type = "text",

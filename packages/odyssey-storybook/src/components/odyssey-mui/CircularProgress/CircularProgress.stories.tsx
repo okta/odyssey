@@ -19,7 +19,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import CircularProgressMdx from "./CircularProgress.mdx";
 
-export default {
+const storybookMeta: Meta<CircularProgressProps> = {
   title: `MUI Components/Circular Progress`,
   component: CircularProgress,
   parameters: {
@@ -29,12 +29,13 @@ export default {
   },
   argTypes: {
     value: {
-      control: { type: "number" },
-      defaultValue: undefined,
+      control: "number",
     },
   },
   decorators: [MuiThemeDecorator],
-} as Meta<CircularProgressProps>;
+};
+
+export default storybookMeta;
 
 const Template: Story<CircularProgressProps> = (props) => (
   <CircularProgress {...props} />
