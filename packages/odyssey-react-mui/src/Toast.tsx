@@ -36,7 +36,7 @@ export type ToastProps = {
   /**
    * If true, the Toast is visible
    */
-  isOpen?: boolean;
+  isVisible?: boolean;
   /**
    * If linkUrl is not undefined, this is the text of the link.
    * If left blank, it defaults to "Learn more".
@@ -50,7 +50,7 @@ export type ToastProps = {
   /**
    * An optional function to run when the Toast is closed.
    */
-  onClose?: () => void;
+  onHide?: () => void;
   /**
    * Sets the ARIA role of the alert
    * ("status" for something that dynamically updates, "alert" for errors, null for something
@@ -75,28 +75,28 @@ const Toast = forwardRef(
     isDismissable,
     linkText,
     linkUrl,
-    isOpen: isOpenProp,
-    onClose: onCloseProp,
+    isVisible: isVisibleProp,
+    onHide: onHideProp,
     role,
     severity,
     text,
   }: ToastProps) => {
-    const [isOpen, setIsOpen] = useState(isOpenProp);
+    const [isVisible, setIsVisible] = useState(isVisibleProp);
 
     useEffect(() => {
-      setIsOpen(isOpenProp);
-    }, [isOpenProp]);
+      setIsVisible(isVisibleProp);
+    }, [isVisibleProp]);
 
-    const onClose = useCallback(() => {
-      setIsOpen(false);
-      onCloseProp?.();
-    }, [onCloseProp]);
+    const onHide = useCallback(() => {
+      setIsVisible(false);
+      onHideProp?.();
+    }, [onHideProp]);
 
     return (
       <Snackbar
-        open={isOpen}
+        open={isVisible}
         autoHideDuration={isDismissable ? undefined : autoHideDuration}
-        onClose={onClose}
+        onClose={onHide}
         className="Toast"
         ClickAwayListenerProps={ClickAwayListenerProps}
       >
@@ -105,7 +105,7 @@ const Toast = forwardRef(
             isDismissable && (
               <Button
                 aria-label="close"
-                onClick={onClose}
+                onClick={onHide}
                 size="small"
                 startIcon={<CloseIcon />}
                 variant="floating"

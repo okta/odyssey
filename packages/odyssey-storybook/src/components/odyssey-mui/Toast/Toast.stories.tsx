@@ -80,8 +80,8 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
           isDismissable={args.isDismissable}
           linkText={args.linkText}
           linkUrl={args.linkUrl}
-          isOpen={isVisible}
-          onClose={() => setIsVisible(false)}
+          isVisible={isVisible}
+          onHide={() => setIsVisible(false)}
           role={args.role}
           severity={args.severity}
           text={args.text}
@@ -92,20 +92,20 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
 };
 
 const StaticTemplate: Story<ToastProps> = (args) => {
-  return <Toast isOpen={true} {...args}></Toast>;
+  return <Toast isVisible={true} {...args}></Toast>;
 };
 
 const MultiTemplate: Story<ToastProps> = () => {
   const [toasts, setToasts] = useState([
     <Toast
       isDismissable
-      isOpen={true}
+      isVisible={true}
       severity="info"
       text="The mission to Sagittarius A is set for January 7."
     />,
     <Toast
       isDismissable
-      isOpen={true}
+      isVisible={true}
       severity="success"
       text="Docking completed."
     />,
@@ -114,19 +114,19 @@ const MultiTemplate: Story<ToastProps> = () => {
   const addToast = () => {
     const toastOptions = [
       <Toast
-        isOpen={true}
+        isVisible={true}
         severity="info"
         text={`The mission to Sagittarius A is set for January 7.`}
       />,
-      <Toast isOpen={true} severity="success" text={`Docking completed.`} />,
+      <Toast isVisible={true} severity="success" text={`Docking completed.`} />,
       <Toast
-        isOpen={true}
+        isVisible={true}
         severity="warning"
         isDismissable
         text={`Severe solar winds may delay local system flights.`}
       />,
       <Toast
-        isOpen={true}
+        isVisible={true}
         severity="error"
         isDismissable
         text={`Security breach in Hangar 10.`}
