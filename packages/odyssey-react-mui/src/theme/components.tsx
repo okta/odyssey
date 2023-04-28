@@ -1582,7 +1582,7 @@ export const components: ThemeOptions["components"] = {
           backgroundColor: theme.palette.grey[50],
           borderColor: theme.palette.grey[300],
 
-          "&::before": {
+          "&.Mui-checked::before": {
             backgroundColor: theme.palette.grey[300],
           },
         },

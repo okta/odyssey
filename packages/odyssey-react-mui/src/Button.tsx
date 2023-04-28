@@ -12,19 +12,20 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, RefObject, useContext, useMemo } from "react";
+import { memo, ReactElement, RefObject, useContext, useMemo } from "react";
 
 import { RefContext } from "./RefContext";
 import { Tooltip } from "./Tooltip";
+import { Icon } from "./Icon";
 
 export type ButtonProps = {
-  endIcon?: React.ReactNode;
+  endIcon?: ReactElement<typeof Icon>;
   id?: string;
   isDisabled?: boolean;
   isFullWidth?: boolean;
   onClick?: MuiButtonProps["onClick"];
   size?: MuiButtonProps["size"];
-  startIcon?: React.ReactNode;
+  startIcon?: ReactElement<typeof Icon>;
   text?: string;
   /**
    * `tooltipText` determines the text of the tooltip that wraps the button if it's icon-only.
