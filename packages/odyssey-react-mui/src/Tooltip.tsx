@@ -15,18 +15,23 @@ import { TooltipProps as MuiTooltipProps } from "@mui/material";
 
 export type TooltipProps = {
   children: React.ReactElement<any, any>;
-  describeChild?: boolean;
-  label: string;
+  // describeChild?: boolean;
+  ariaType: "description" | "label";
+  text: string;
   placement?: MuiTooltipProps["placement"];
 };
 
 export const Tooltip = ({
+  ariaType,
   children,
-  describeChild,
-  label,
+  text,
   placement,
 }: TooltipProps) => (
-  <MuiTooltip title={label} placement={placement} describeChild={describeChild}>
+  <MuiTooltip
+    title={text}
+    placement={placement}
+    describeChild={ariaType === "description"}
+  >
     {children}
   </MuiTooltip>
 );

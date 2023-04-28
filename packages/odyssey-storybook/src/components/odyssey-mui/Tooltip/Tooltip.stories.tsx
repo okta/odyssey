@@ -33,10 +33,14 @@ const storybookMeta: Meta<TooltipProps> = {
     children: {
       control: { type: "object" },
     },
-    describeChild: {
-      control: { type: "boolean" },
+    ariaType: {
+      control: {
+        options: ["label", "description"],
+        type: "radio",
+        defaultValue: "label",
+      },
     },
-    label: {
+    text: {
       control: {
         type: "text",
         defaultValue: "This is a tooltip.",
@@ -55,9 +59,9 @@ export default storybookMeta;
 const Template: Story<TooltipProps> = (args) => {
   return (
     <Tooltip
-      label={args.label}
+      text={args.text}
       placement={args.placement}
-      describeChild={args.describeChild}
+      ariaType={args.ariaType}
     >
       {args.children}
     </Tooltip>
@@ -67,17 +71,17 @@ const Template: Story<TooltipProps> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   children: <Button text="Launch" />,
-  describeChild: true,
+  ariaType: "description",
   placement: "top",
-  label: "This will begin a 10-second countdown",
+  text: "This will begin a 10-second countdown",
 };
 
 export const Icon = Template.bind({});
 Icon.args = {
   children: <Button variant="secondary" startIcon={<DownloadIcon />} />,
-  describeChild: false,
+  ariaType: "label",
   placement: "top",
-  label: "Download logs",
+  text: "Download logs",
 };
 
 export const Disabled = Template.bind({});
@@ -85,24 +89,24 @@ Disabled.args = {
   children: (
     <Button variant="secondary" isDisabled startIcon={<DownloadIcon />} />
   ),
-  describeChild: true,
+  ariaType: "description",
   placement: "top",
-  label: "You don't have access to these logs",
+  text: "You don't have access to these logs",
 };
 
 const PlacementTemplate: Story<TooltipProps> = () => {
   return (
     <>
-      <Tooltip label="Top" placement="top">
+      <Tooltip text="Top" placement="top" ariaType="label">
         <Button text="Top" />
       </Tooltip>
-      <Tooltip label="Right" placement="right">
+      <Tooltip text="Right" placement="right" ariaType="label">
         <Button text="Right" />
       </Tooltip>
-      <Tooltip label="Bottom" placement="bottom">
+      <Tooltip text="Bottom" placement="bottom" ariaType="label">
         <Button text="Bottom" />
       </Tooltip>
-      <Tooltip label="Left" placement="left">
+      <Tooltip text="Left" placement="left" ariaType="label">
         <Button text="Left" />
       </Tooltip>
     </>

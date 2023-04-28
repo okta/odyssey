@@ -61,7 +61,7 @@ const Button = ({
   return (
     <>
       {tooltipText && (
-        <Tooltip describeChild placement="top" label={tooltipText}>
+        <Tooltip ariaType="description" placement="top" text={tooltipText}>
           {button}
         </Tooltip>
       )}
