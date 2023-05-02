@@ -18,17 +18,34 @@ import {
   DialogActions,
 } from "@mui/material";
 import { Button, CloseIcon } from "./";
-import { memo, ReactNode, useState, useEffect, useRef } from "react";
+import {
+  memo,
+  ReactNode,
+  useState,
+  useEffect,
+  useRef,
+  ReactElement,
+} from "react";
 
 export type DialogProps = {
-  actions?: ReactNode;
+  callToActionPrimaryComponent?: ReactElement<typeof Button>;
+  callToActionSecondaryComponent?: ReactElement<typeof Button>;
+  callToActionTertiaryComponent?: ReactElement<typeof Button>;
   children: ReactNode | Array<ReactNode>;
   onClose: () => void;
   isOpen: boolean;
   title: string;
 };
 
-const Dialog = ({ actions, children, isOpen, onClose, title }: DialogProps) => {
+const Dialog = ({
+  callToActionPrimaryComponent,
+  callToActionSecondaryComponent,
+  callToActionTertiaryComponent,
+  children,
+  isOpen,
+  onClose,
+  title,
+}: DialogProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
 
@@ -75,7 +92,15 @@ const Dialog = ({ actions, children, isOpen, onClose, title }: DialogProps) => {
         {content}
       </DialogContent>
 
-      {actions && <DialogActions>{actions}</DialogActions>}
+      {(callToActionPrimaryComponent ||
+        callToActionSecondaryComponent ||
+        callToActionTertiaryComponent) && (
+        <DialogActions>
+          {callToActionTertiaryComponent}
+          {callToActionSecondaryComponent}
+          {callToActionPrimaryComponent}
+        </DialogActions>
+      )}
     </MuiDialog>
   );
 };

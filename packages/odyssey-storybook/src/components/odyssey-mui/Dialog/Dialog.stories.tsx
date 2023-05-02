@@ -31,10 +31,17 @@ const storybookMeta: Meta<DialogProps> = {
     },
   },
   argTypes: {
-    actions: {
+    callToActionPrimaryComponent: {
       control: null,
-      description:
-        "A ReactNode intended to contain one or more Button objects.",
+      description: "An optional Button object",
+    },
+    callToActionSecondaryComponent: {
+      control: null,
+      description: "An optional Button object",
+    },
+    callToActionTertiaryComponent: {
+      control: null,
+      description: "An optional Button object",
     },
     children: {
       control: "text",
@@ -72,11 +79,18 @@ const DefaultTemplate: Story<DialogProps> = (args) => {
       <Button onClick={onOpen} text="Open dialog" />
       <Dialog
         {...args}
-        actions={
-          <>
-            <Button variant="floating" onClick={onClose} text="Cancel" />
-            <Button variant="primary" onClick={onClose} text="Primary action" />
-          </>
+        callToActionPrimaryComponent={
+          <Button variant="primary" onClick={onClose} text="Primary action" />
+        }
+        callToActionSecondaryComponent={
+          <Button
+            variant="secondary"
+            onClick={onClose}
+            text="Secondary action"
+          />
+        }
+        callToActionTertiaryComponent={
+          <Button variant="floating" onClick={onClose} text="Cancel" />
         }
         onClose={onClose}
         isOpen={isVisible}
