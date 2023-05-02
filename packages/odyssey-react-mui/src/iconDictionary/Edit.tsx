@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,10 +30,10 @@ export const EditIcon = forwardRef<SVGSVGElement, EditIconProps>(
       >
         <>
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M10.3536 2.06066C10.1583 1.8654 9.84171 1.8654 9.64645 2.06066L8.70711 3L11 5.29289L11.9393 4.35355C12.1346 4.15829 12.1346 3.84171 11.9393 3.64645L10.3536 2.06066ZM2 9.70711L8 3.70711L10.2929 6L4.29289 12H2V9.70711ZM8.93934 1.35355C9.52513 0.767767 10.4749 0.767766 11.0607 1.35355L12.6464 2.93934C13.2322 3.52513 13.2322 4.47487 12.6464 5.06066L4.85355 12.8536L4.70711 13H4.5H1.5H1V12.5V9.5V9.29289L1.14645 9.14645L8.93934 1.35355ZM1 14V15H15V14H1Z"
             fill="currentColor"
+            fillRule="evenodd"
+            d="M10.354 2.06a.5.5 0 0 0-.708 0L8.707 3 11 5.293l.94-.94a.5.5 0 0 0 0-.707l-1.586-1.585ZM2 9.708l6-6L10.293 6l-6 6H2V9.707Zm6.94-8.353a1.5 1.5 0 0 1 2.12 0l1.586 1.585a1.5 1.5 0 0 1 0 2.122l-7.792 7.793-.147.146H1V9.293l.146-.147L8.94 1.354ZM1 14v1h14v-1H1Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>

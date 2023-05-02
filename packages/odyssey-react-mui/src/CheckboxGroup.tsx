@@ -18,7 +18,7 @@ import {
   FormGroup,
   FormHelperText,
   FormLabel,
-  visuallyHidden,
+  ScreenReaderText,
 } from ".";
 
 export type CheckboxGroupProps = {
@@ -55,13 +55,14 @@ const CheckboxGroup = ({
       component="fieldset"
       disabled={isDisabled}
       error={Boolean(errorMessage)}
+      name={name}
     >
       {label && <FormLabel component="legend">{label}</FormLabel>}
       {hint && <FormHelperText id={`${name}-hint`}>{hint}</FormHelperText>}
       <FormGroup aria-describedby={ariaDescribedBy}>{children}</FormGroup>
       {errorMessage && (
         <FormHelperText id={`${name}-error`} error>
-          <span style={visuallyHidden}>Error:</span> {errorMessage}
+          <ScreenReaderText>Error:</ScreenReaderText> {errorMessage}
         </FormHelperText>
       )}
     </FormControl>

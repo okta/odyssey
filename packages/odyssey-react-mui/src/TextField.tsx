@@ -10,12 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  InputAdornment,
-  InputBase,
-  InputBaseProps,
-  InputLabel,
-} from "@mui/material";
+import { InputBase } from "@mui/material";
 import {
   ChangeEventHandler,
   FocusEventHandler,
@@ -24,24 +19,15 @@ import {
   memo,
   ReactNode,
   useCallback,
-  useEffect,
-  useMemo,
-  useState,
 } from "react";
 
-import {
-  EyeIcon,
-  EyeOffIcon,
-  FormControl,
-  FormHelperText,
-  IconButton,
-  SearchIcon,
-  Typography,
-  useUniqueId,
-  visuallyHidden,
-} from "./";
+import { Field } from "./Field";
 
 export type TextFieldProps = {
+  /**
+   * If `true`, the component will receive focus automatically.
+   */
+  autoFocus?: boolean;
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
@@ -65,10 +51,6 @@ export type TextFieldProps = {
    */
   id?: string;
   /**
-   * Props that go onto the HTML `input` element.
-   */
-  inputProps?: InputBaseProps["inputProps"];
-  /**
    * If `true`, the component is disabled.
    */
   isDisabled?: boolean;
@@ -87,7 +69,7 @@ export type TextFieldProps = {
   /**
    * The label for the `input` element.
    */
-  label?: string;
+  label: string;
   /**
    * Callback fired when the `input` element loses focus.
    */
@@ -115,30 +97,30 @@ export type TextFieldProps = {
   /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */
-  type?: string;
+  type?: "email" | "number" | "tel" | "text" | "url";
   /**
    * The value of the `input` element, required for a controlled component.
    */
-  value?: unknown;
+  value?: string;
 };
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
       autoCompleteType,
+      autoFocus,
       endAdornment,
       errorMessage,
       hint,
       id: idOverride,
-      inputProps = {},
       isDisabled = false,
       isMultiline = false,
       isReadOnly,
       isRequired = true,
       label,
+      onBlur,
       onChange,
       onFocus,
-      onBlur,
       optionalLabel,
       placeholder,
       startAdornment,
@@ -147,89 +129,57 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     },
     ref
   ) => {
-    const [inputType, setInputType] = useState(type);
-
-    useEffect(() => {
-      setInputType(type);
-    }, [type]);
-
-    const togglePasswordVisibility = useCallback(() => {
-      setInputType((currentType) =>
-        currentType === "password" ? "text" : "password"
-      );
-    }, []);
-
-    const id = useUniqueId(idOverride);
-    const hintId = hint ? `${id}-hint` : undefined;
-    const errorId = errorMessage ? `${id}-error` : undefined;
-    const labelId = label ? `${id}-label` : undefined;
-
-    const localInputProps = useMemo(() => {
-      const ariaDescribedBy =
-        errorId && hintId ? `${hintId} ${errorId}` : errorId || hintId;
-
-      return {
-        ...inputProps,
-        "aria-describedby":
-          inputProps["aria-describedby"]?.concat(` ${ariaDescribedBy}`) ??
-          ariaDescribedBy,
-      };
-    }, [errorId, hintId, inputProps]);
-
-    return (
-      <FormControl disabled={isDisabled} error={Boolean(errorMessage)}>
-        <InputLabel htmlFor={id} id={labelId}>
-          {label}
-          {!isRequired && (
-            <Typography variant="subtitle1">{optionalLabel}</Typography>
-          )}
-        </InputLabel>
-        {hint && <FormHelperText id={hintId}>{hint}</FormHelperText>}
+    const renderFieldComponent = useCallback(
+      ({ ariaDescribedBy, id }) => (
         <InputBase
+          aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
-          endAdornment={
-            inputType === "password" ? (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  edge="end"
-                  onClick={togglePasswordVisibility}
-                >
-                  {inputType === "password" ? <EyeIcon /> : <EyeOffIcon />}
-                </IconButton>
-              </InputAdornment>
-            ) : (
-              endAdornment
-            )
-          }
+          /* eslint-disable-next-line jsx-a11y/no-autofocus */
+          autoFocus={autoFocus}
+          endAdornment={endAdornment}
           id={id}
-          inputProps={localInputProps}
           multiline={isMultiline}
+          name={id}
+          onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
-          onBlur={onBlur}
           placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}
-          startAdornment={
-            inputType === "search" ? (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ) : (
-              startAdornment
-            )
-          }
-          type={inputType}
+          startAdornment={startAdornment}
+          type={type}
           value={value}
         />
-        {errorMessage && (
-          <FormHelperText error id={errorId}>
-            <span style={visuallyHidden}>Error:</span>
-            {errorMessage}
-          </FormHelperText>
-        )}
-      </FormControl>
+      ),
+      [
+        autoCompleteType,
+        autoFocus,
+        endAdornment,
+        isMultiline,
+        onChange,
+        onFocus,
+        onBlur,
+        placeholder,
+        isReadOnly,
+        ref,
+        startAdornment,
+        type,
+        value,
+      ]
+    );
+
+    return (
+      <Field
+        errorMessage={errorMessage}
+        hasVisibleLabel
+        hint={hint}
+        id={idOverride}
+        isDisabled={isDisabled}
+        isRequired={isRequired}
+        label={label}
+        optionalLabel={optionalLabel}
+        renderFieldComponent={renderFieldComponent}
+      />
     );
   }
 );
