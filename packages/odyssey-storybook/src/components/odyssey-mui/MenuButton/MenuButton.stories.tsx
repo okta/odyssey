@@ -12,16 +12,16 @@
 
 import { Meta, Story } from "@storybook/react";
 import {
+  CalendarIcon,
   Divider,
+  GlobeIcon,
+  GroupIcon,
   ListItemIcon,
   ListItemText,
   ListSubheader,
   MenuButton,
   MenuButtonProps,
   MenuItem,
-  UserGroupIcon,
-  GlobeIcon,
-  CalendarIcon,
   OverflowVerticalIcon,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -77,7 +77,7 @@ ActionIcons.args = {
   children: [
     <MenuItem>
       <ListItemIcon>
-        <UserGroupIcon />
+        <GroupIcon />
       </ListItemIcon>
       <ListItemText>Assign crew</ListItemText>
     </MenuItem>,

@@ -30,25 +30,25 @@ import { tableRowClasses } from "@mui/material/TableRow";
 import { tableSortLabelClasses } from "@mui/material/TableSortLabel";
 import { tooltipClasses } from "@mui/material/Tooltip";
 import {
-  AlertTriangleFilledIcon,
   ArrowDownIcon,
-  CheckIcon,
   CheckCircleFilledIcon,
+  CheckIcon,
   ChevronDownIcon,
   CloseCircleFilledIcon,
   CloseIcon,
   InformationCircleFilledIcon,
   SubtractIcon,
+  WarningTriangleFilledIcon,
 } from "../iconDictionary";
 
 export const components: ThemeOptions["components"] = {
   MuiAlert: {
     defaultProps: {
       iconMapping: {
-        error: <AlertTriangleFilledIcon />,
+        error: <WarningTriangleFilledIcon />,
         info: <InformationCircleFilledIcon />,
         success: <CheckCircleFilledIcon />,
-        warning: <AlertTriangleFilledIcon />,
+        warning: <WarningTriangleFilledIcon />,
       },
     },
     styleOverrides: {

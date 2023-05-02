@@ -16,17 +16,11 @@ export * from "./AddCircle";
 import { AddIcon } from "./Add";
 export * from "./Add";
 
-import { AlertCircleFilledIcon } from "./AlertCircleFilled";
-export * from "./AlertCircleFilled";
+import { AlertDiamondFilledIcon } from "./AlertDiamondFilled";
+export * from "./AlertDiamondFilled";
 
-import { AlertCircleIcon } from "./AlertCircle";
-export * from "./AlertCircle";
-
-import { AlertTriangleFilledIcon } from "./AlertTriangleFilled";
-export * from "./AlertTriangleFilled";
-
-import { AnchorIcon } from "./Anchor";
-export * from "./Anchor";
+import { AlertDiamondIcon } from "./AlertDiamond";
+export * from "./AlertDiamond";
 
 import { ArrowDownIcon } from "./ArrowDown";
 export * from "./ArrowDown";
@@ -103,12 +97,6 @@ export * from "./CollapseRight";
 import { CopyIcon } from "./Copy";
 export * from "./Copy";
 
-import { DangerDiamondFilledIcon } from "./DangerDiamondFilled";
-export * from "./DangerDiamondFilled";
-
-import { DangerDiamondIcon } from "./DangerDiamond";
-export * from "./DangerDiamond";
-
 import { DeleteIcon } from "./Delete";
 export * from "./Delete";
 
@@ -136,15 +124,6 @@ export * from "./ExpandLeft";
 import { ExpandRightIcon } from "./ExpandRight";
 export * from "./ExpandRight";
 
-import { ExternalLinkIcon } from "./ExternalLink";
-export * from "./ExternalLink";
-
-import { EyeOffIcon } from "./EyeOff";
-export * from "./EyeOff";
-
-import { EyeIcon } from "./Eye";
-export * from "./Eye";
-
 import { FilterIcon } from "./Filter";
 export * from "./Filter";
 
@@ -157,6 +136,12 @@ export * from "./Globe";
 import { GridIcon } from "./Grid";
 export * from "./Grid";
 
+import { GroupIcon } from "./Group";
+export * from "./Group";
+
+import { HideIcon } from "./Hide";
+export * from "./Hide";
+
 import { HomeIcon } from "./Home";
 export * from "./Home";
 
@@ -165,6 +150,9 @@ export * from "./InformationCircleFilled";
 
 import { InformationCircleIcon } from "./InformationCircle";
 export * from "./InformationCircle";
+
+import { LinkExternalIcon } from "./LinkExternal";
+export * from "./LinkExternal";
 
 import { LinkIcon } from "./Link";
 export * from "./Link";
@@ -205,8 +193,8 @@ export * from "./Search";
 import { ServerIcon } from "./Server";
 export * from "./Server";
 
-import { SettingsIcon } from "./Settings";
-export * from "./Settings";
+import { ShowIcon } from "./Show";
+export * from "./Show";
 
 import { SubtractIcon } from "./Subtract";
 export * from "./Subtract";
@@ -220,25 +208,23 @@ export * from "./Unlock";
 import { UploadIcon } from "./Upload";
 export * from "./Upload";
 
-import { UserGroupIcon } from "./UserGroup";
-export * from "./UserGroup";
-
 import { UserIcon } from "./User";
 export * from "./User";
 
 import { VideoIcon } from "./Video";
 export * from "./Video";
 
-import { WarningIcon } from "./Warning";
-export * from "./Warning";
+import { WarningTriangleFilledIcon } from "./WarningTriangleFilled";
+export * from "./WarningTriangleFilled";
+
+import { WarningTriangleIcon } from "./WarningTriangle";
+export * from "./WarningTriangle";
 
 export const iconDictionary = {
   addcircle: AddCircleIcon,
   add: AddIcon,
-  alertcirclefilled: AlertCircleFilledIcon,
-  alertcircle: AlertCircleIcon,
-  alerttrianglefilled: AlertTriangleFilledIcon,
-  anchor: AnchorIcon,
+  alertdiamondfilled: AlertDiamondFilledIcon,
+  alertdiamond: AlertDiamondIcon,
   arrowdown: ArrowDownIcon,
   arrowleft: ArrowLeftIcon,
   arrowlowerleft: ArrowLowerLeftIcon,
@@ -264,8 +250,6 @@ export const iconDictionary = {
   collapseleft: CollapseLeftIcon,
   collapseright: CollapseRightIcon,
   copy: CopyIcon,
-  dangerdiamondfilled: DangerDiamondFilledIcon,
-  dangerdiamond: DangerDiamondIcon,
   delete: DeleteIcon,
   deny: DenyIcon,
   devices: DevicesIcon,
@@ -275,16 +259,16 @@ export const iconDictionary = {
   edit: EditIcon,
   expandleft: ExpandLeftIcon,
   expandright: ExpandRightIcon,
-  externallink: ExternalLinkIcon,
-  eyeoff: EyeOffIcon,
-  eye: EyeIcon,
   filter: FilterIcon,
   folder: FolderIcon,
   globe: GlobeIcon,
   grid: GridIcon,
+  group: GroupIcon,
+  hide: HideIcon,
   home: HomeIcon,
   informationcirclefilled: InformationCircleFilledIcon,
   informationcircle: InformationCircleIcon,
+  linkexternal: LinkExternalIcon,
   link: LinkIcon,
   list: ListIcon,
   lock: LockIcon,
@@ -298,13 +282,13 @@ export const iconDictionary = {
   resume: ResumeIcon,
   search: SearchIcon,
   server: ServerIcon,
-  settings: SettingsIcon,
+  show: ShowIcon,
   subtract: SubtractIcon,
   sync: SyncIcon,
   unlock: UnlockIcon,
   upload: UploadIcon,
-  usergroup: UserGroupIcon,
   user: UserIcon,
   video: VideoIcon,
-  warning: WarningIcon,
+  warningtrianglefilled: WarningTriangleFilledIcon,
+  warningtriangle: WarningTriangleIcon,
 };
