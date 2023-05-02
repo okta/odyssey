@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import CssBaselineMdx from "./CssBaseline.mdx";
 
 export default {
-  title: `MUI Components/CSS Baseline`,
+  title: "MUI Components/CSS Baseline",
   component: CssBaseline,
   parameters: {
     docs: {

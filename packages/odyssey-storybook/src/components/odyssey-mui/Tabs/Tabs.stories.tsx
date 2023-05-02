@@ -26,7 +26,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TabsMdx from "./Tabs.mdx";
 
 export default {
-  title: `MUI Components/Tabs`,
+  title: "MUI Components/Tabs",
   component: Tab,
   parameters: {
     docs: {

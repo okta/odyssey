@@ -26,7 +26,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import ToastMdx from "./Toast.mdx";
 
 export default {
-  title: `MUI Components/Alerts/Toast`,
+  title: "MUI Components/Alerts/Toast",
   component: Alert,
   parameters: {
     docs: {

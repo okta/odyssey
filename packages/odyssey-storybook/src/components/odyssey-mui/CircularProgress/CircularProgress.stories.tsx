@@ -20,7 +20,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import CircularProgressMdx from "./CircularProgress.mdx";
 
 export default {
-  title: `MUI Components/Circular Progress`,
+  title: "MUI Components/Circular Progress",
   component: CircularProgress,
   parameters: {
     docs: {

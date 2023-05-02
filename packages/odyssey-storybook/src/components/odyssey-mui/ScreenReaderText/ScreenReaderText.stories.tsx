@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import ScreenReaderTextMdx from "./ScreenReaderText.mdx";
 
 const storybookMeta: ComponentMeta<typeof ScreenReaderText> = {
-  title: `MUI Components/ScreenReaderText`,
+  title: "MUI Components/ScreenReaderText",
   component: ScreenReaderText,
   parameters: {
     docs: {

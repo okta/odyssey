@@ -22,7 +22,7 @@ import {
 import LinkMdx from "./Link.mdx";
 
 export default {
-  title: `MUI Components/Link`,
+  title: "MUI Components/Link",
   component: Link,
   parameters: {
     docs: {

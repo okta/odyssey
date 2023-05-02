@@ -26,7 +26,7 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 export default {
-  title: `MUI Components/Icon`,
+  title: "MUI Components/Icon",
   component: Icon,
   decorators: [MuiThemeDecorator],
 };

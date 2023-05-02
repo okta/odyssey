@@ -26,7 +26,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import DialogMdx from "./Dialog.mdx";
 
 export default {
-  title: `MUI Components/Dialog`,
+  title: "MUI Components/Dialog",
   component: Dialog,
   parameters: {
     docs: {

@@ -19,7 +19,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDec
 import ButtonMdx from "./Button.mdx";
 
 const storybookMeta: Meta<ButtonProps> = {
-  title: `MUI Components/Button`,
+  title: "MUI Components/Button",
   component: Button,
   parameters: {
     docs: {

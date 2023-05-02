@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import StatusMdx from "./Status.mdx";
 
 export default {
-  title: `MUI Components/Status`,
+  title: "MUI Components/Status",
   component: Status,
   parameters: {
     docs: {

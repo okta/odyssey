@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import RadioMdx from "./Radio.mdx";
 
 const storybookMeta: ComponentMeta<typeof Radio> = {
-  title: `MUI Components/Forms/Radio`,
+  title: "MUI Components/Forms/Radio",
   component: Radio,
   parameters: {
     docs: {

@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import InfoboxMdx from "./Infobox.mdx";
 
 export default {
-  title: `MUI Components/Alerts/Infobox`,
+  title: "MUI Components/Alerts/Infobox",
   component: Infobox,
   parameters: {
     docs: {

@@ -27,7 +27,7 @@ const storybookMeta: Meta<
     isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
   }
 > = {
-  title: `MUI Components/Forms/CheckboxGroup`,
+  title: "MUI Components/Forms/CheckboxGroup",
   component: CheckboxGroup,
   parameters: {
     docs: {

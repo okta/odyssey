@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import SearchFieldMdx from "./SearchField.mdx";
 
 const storybookMeta: ComponentMeta<typeof SearchField> = {
-  title: `MUI Components/Forms/SearchField`,
+  title: "MUI Components/Forms/SearchField",
   component: SearchField,
   parameters: {
     docs: {

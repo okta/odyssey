@@ -32,7 +32,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import FormMdx from "./Form.mdx";
 
 export default {
-  title: `MUI Components/Forms/Form`,
+  title: "MUI Components/Forms/Form",
   component: InputBase,
   parameters: {
     docs: {

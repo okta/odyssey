@@ -28,7 +28,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TableMdx from "./Table.mdx";
 
 export default {
-  title: `MUI Components/Table`,
+  title: "MUI Components/Table",
   component: Table,
   parameters: {
     docs: {

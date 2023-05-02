@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import BannerMdx from "./Banner.mdx";
 
 const storybookMeta: ComponentMeta<typeof Banner> = {
-  title: `MUI Components/Alerts/Banner`,
+  title: "MUI Components/Alerts/Banner",
   component: Banner,
   parameters: {
     docs: {

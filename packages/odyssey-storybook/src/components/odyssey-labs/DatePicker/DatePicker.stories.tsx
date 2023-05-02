@@ -29,7 +29,7 @@ import DatePickerMdx from "./DatePicker.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 export default {
-  title: `Labs Components/DatePicker`,
+  title: "Labs Components/DatePicker",
   component: DatePicker,
   parameters: {
     docs: {

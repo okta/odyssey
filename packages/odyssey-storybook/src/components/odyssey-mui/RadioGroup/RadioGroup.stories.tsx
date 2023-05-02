@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import RadioGroupMdx from "./RadioGroup.mdx";
 
 const storybookMeta: ComponentMeta<typeof RadioGroup> = {
-  title: `MUI Components/Forms/RadioGroup`,
+  title: "MUI Components/Forms/RadioGroup",
   component: RadioGroup,
   parameters: {
     docs: {

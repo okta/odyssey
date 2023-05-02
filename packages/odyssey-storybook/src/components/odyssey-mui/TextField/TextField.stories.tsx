@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TextFieldMdx from "./TextField.mdx";
 
 const storybookMeta: ComponentMeta<typeof TextField> = {
-  title: `MUI Components/Forms/TextField`,
+  title: "MUI Components/Forms/TextField",
   component: TextField,
   parameters: {
     docs: {

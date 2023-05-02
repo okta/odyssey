@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TypographyMdx from "./Typography.mdx";
 
 export default {
-  title: `MUI Components/Typography`,
+  title: "MUI Components/Typography",
   component: Typography,
   parameters: {
     docs: {

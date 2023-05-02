@@ -29,7 +29,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import MenuButtonMdx from "./MenuButton.mdx";
 
 const storybookMeta: Meta<MenuButtonProps> = {
-  title: `MUI Components/Menu Button`,
+  title: "MUI Components/Menu Button",
   component: MenuButton,
   parameters: {
     docs: {

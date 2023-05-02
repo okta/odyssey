@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TooltipMdx from "./Tooltip.mdx";
 
 export default {
-  title: `MUI Components/Tooltip`,
+  title: "MUI Components/Tooltip",
   component: Tooltip,
   parameters: {
     docs: {

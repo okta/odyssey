@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import PasswordFieldMdx from "./PasswordField.mdx";
 
 const storybookMeta: ComponentMeta<typeof PasswordField> = {
-  title: `MUI Components/Forms/PasswordField`,
+  title: "MUI Components/Forms/PasswordField",
   component: PasswordField,
   parameters: {
     docs: {

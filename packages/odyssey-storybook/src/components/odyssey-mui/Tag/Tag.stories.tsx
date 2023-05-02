@@ -18,7 +18,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TagMdx from "./Tag.mdx";
 
 const storybookMeta: Meta<TagProps> = {
-  title: `MUI Components/Tag`,
+  title: "MUI Components/Tag",
   component: Tag,
   parameters: {
     actions: { argTypesRegex: null },

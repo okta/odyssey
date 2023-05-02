@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import AutocompleteMdx from "./Autocomplete.mdx";
 
 const storybookMeta: ComponentMeta<typeof Autocomplete> = {
-  title: `MUI Components/Forms/Autocomplete`,
+  title: "MUI Components/Forms/Autocomplete",
   component: Autocomplete,
   parameters: {
     docs: {
