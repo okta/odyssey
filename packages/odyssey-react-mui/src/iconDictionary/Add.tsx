@@ -31,7 +31,7 @@ export const AddIcon = forwardRef<SVGSVGElement, AddIconProps>((props, ref) => {
         <path
           fill="currentColor"
           fillRule="evenodd"
-          d="M7.5 1V7.5H1v1H7.5V15h1V8.5H15v-1H8.5V1h-1Z"
+          d="M7.5 8.5V14h1V8.5H14v-1H8.5V2h-1v5.5H2v1h5.5Z"
           clipRule="evenodd"
         />
       </>

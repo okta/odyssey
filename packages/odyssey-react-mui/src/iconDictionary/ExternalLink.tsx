@@ -34,7 +34,7 @@ export const ExternalLinkIcon = forwardRef<
         <path
           fill="currentColor"
           fillRule="evenodd"
-          d="M13.293 2H8V1h6.5a.5.5 0 0 1 .5.5V8h-1V2.707l-7.646 7.647-.708-.708L13.293 2ZM1.5 4H1v11h11V8h-1v6H2V5h6V4H1.5Z"
+          d="M7 2h6.293l-8.147 8.146.708.708L14 2.707V8h1V1.504c0-.005 0-.019-.002-.035A.51.51 0 0 0 14.496 1H7v1Zm4 12V7.132l1-1.016V15H1V4h8.885L8.869 5H2v9h9Z"
           clipRule="evenodd"
         />
       </>

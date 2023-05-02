@@ -32,7 +32,7 @@ export const FilterIcon = forwardRef<SVGSVGElement, FilterIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M1 2h14v1H1V2Zm2 4h10v1H3V6Zm8 4H5v1h6v-1Zm-4 4h2v1H7v-1Z"
+            d="M16 2H0v1h16V2Zm-3 4H3v1h10V6Zm-8 4h6v1H5v-1Zm4 4H7v1h2v-1Z"
             clipRule="evenodd"
           />
         </>

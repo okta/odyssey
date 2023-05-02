@@ -32,7 +32,7 @@ export const CloseIcon = forwardRef<SVGSVGElement, CloseIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M8 7.293 2.354 1.646l-.708.708L7.293 8l-5.647 5.646.708.708L8 8.707l5.646 5.647.707-.708L8.707 8l5.647-5.646-.708-.708L8 7.293Z"
+            d="M8 8.707 13.293 14l.707-.707L8.707 8 14 2.71 13.292 2 8 7.293 2.707 2 2 2.707 7.293 8l-5.292 5.292.707.707L8 8.707Z"
             clipRule="evenodd"
           />
         </>

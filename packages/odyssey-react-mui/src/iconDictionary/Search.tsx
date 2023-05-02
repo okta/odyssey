@@ -32,7 +32,7 @@ export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Zm-2.674 5.533a6 6 0 1 1 3.207-3.207l2.57 2.57a2.268 2.268 0 0 1-3.207 3.208l-2.57-2.571Zm.925-.49 2.353 2.353a1.268 1.268 0 1 0 1.792-1.792l-2.352-2.353a6.03 6.03 0 0 1-1.793 1.793Z"
+            d="M11 6.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-.98 4.227a5.5 5.5 0 1 1 .707-.707l4.127 4.126-.708.708-4.127-4.127Z"
             clipRule="evenodd"
           />
         </>

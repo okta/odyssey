@@ -32,7 +32,7 @@ export const CheckIcon = forwardRef<SVGSVGElement, CheckIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="m14.354 4.354-8 8a.5.5 0 0 1-.708 0l-4-4 .708-.708L6 11.293l7.646-7.647.708.708Z"
+            d="m15.354 3.354-9 9a.5.5 0 0 1-.708 0l-5-5 .708-.708L6 11.293l8.646-8.646.707.707Z"
             clipRule="evenodd"
           />
         </>

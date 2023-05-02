@@ -32,7 +32,7 @@ export const ArrowLeftIcon = forwardRef<SVGSVGElement, ArrowLeftIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="m2.707 8.5 4.147 4.146-.708.708-5-5a.5.5 0 0 1 0-.708l5-5 .708.708L2.707 7.5H15v1H2.707Z"
+            d="M3.638 7.497H14v1H3.636l4.733 5.165-.738.676-5.493-5.996a.51.51 0 0 1 0-.69l5.493-5.99.738.676-4.731 5.159Z"
             clipRule="evenodd"
           />
         </>

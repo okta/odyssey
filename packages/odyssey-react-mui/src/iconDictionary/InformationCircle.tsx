@@ -34,7 +34,7 @@ export const InformationCircleIcon = forwardRef<
         <path
           fill="currentColor"
           fillRule="evenodd"
-          d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8 5.5A.75.75 0 1 0 8 4a.75.75 0 0 0 0 1.5Zm.5 2a.5.5 0 0 0-1 0V12h1V7.5Z"
+          d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Zm7-8a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm0 5.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM8 7a.5.5 0 0 1 .5.5V12h-1V7.5A.5.5 0 0 1 8 7Z"
           clipRule="evenodd"
         />
       </>
