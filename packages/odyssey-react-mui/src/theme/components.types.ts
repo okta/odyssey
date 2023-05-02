@@ -104,4 +104,10 @@ declare module "@mui/material/Tooltip" {
   }
 }
 
+declare module "@mui/material/SvgIcon" {
+  interface SvgIconPropsSizeOverrides {
+    fontSize?: "small" | "medium" | "large";
+  }
+}
+
 export {};
