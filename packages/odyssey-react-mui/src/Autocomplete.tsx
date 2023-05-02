@@ -95,8 +95,9 @@ const Autocomplete = <
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
-        {...InputLabelProps}
+        fieldType="single"
         hasVisibleLabel
+        id={InputLabelProps.htmlFor}
         hint={hint}
         label={label}
         renderFieldComponent={({ ariaDescribedBy, id }) => (

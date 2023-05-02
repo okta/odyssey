@@ -52,23 +52,16 @@ const CheckboxGroup = ({
   );
 
   return (
-    <MuiFormControl
-      component="fieldset"
-      disabled={isDisabled}
-      error={Boolean(errorMessage)}
-    >
-      <MuiFormLabel component="legend">{label}</MuiFormLabel>
-
-      <Field
-        errorMessage={errorMessage}
-        hasVisibleLabel={false}
-        hint={hint}
-        id={idOverride}
-        isDisabled={isDisabled}
-        label={label}
-        renderFieldComponent={renderFieldComponent}
-      />
-    </MuiFormControl>
+    <Field
+      errorMessage={errorMessage}
+      fieldType="group"
+      hasVisibleLabel={false}
+      hint={hint}
+      id={idOverride}
+      isDisabled={isDisabled}
+      label={label}
+      renderFieldComponent={renderFieldComponent}
+    />
   );
 };
 

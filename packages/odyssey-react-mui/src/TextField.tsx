@@ -171,6 +171,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <Field
         errorMessage={errorMessage}
+        fieldType="single"
         hasVisibleLabel
         hint={hint}
         id={idOverride}

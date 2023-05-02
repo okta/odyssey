@@ -121,6 +121,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 
     return (
       <Field
+        fieldType="single"
         hasVisibleLabel={false}
         id={idOverride}
         isDisabled={isDisabled}
