@@ -1596,6 +1596,13 @@ export const components: ThemeOptions["components"] = {
         horizontal: "right",
       },
     },
+    styleOverrides: {
+      root: {
+        "&.Toast": {
+          position: "static",
+        },
+      },
+    },
   },
   MuiSelect: {
     defaultProps: {
