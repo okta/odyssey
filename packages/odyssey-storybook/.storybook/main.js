@@ -22,7 +22,11 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "@pxblue/storybook-rtl-addon",
+    "@storybook/addon-interactions",
   ],
+  features: {
+    interactionsDebugger: true,
+  },
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   typescript: {
     check: false,
