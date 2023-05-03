@@ -66,6 +66,10 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     onFocus: {
       control: "function",
     },
+    isOptional: {
+      control: "boolean",
+      defaultValue: false,
+    },
     optionalLabel: {
       control: "text",
       defaultValue: "Optional",
@@ -76,10 +80,6 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     isReadOnly: {
       control: "boolean",
       defaultValue: false,
-    },
-    isRequired: {
-      control: "boolean",
-      defaultValue: true,
     },
     startAdornment: {
       control: "text",
@@ -115,7 +115,7 @@ Disabled.args = {
 
 export const Optional = Template.bind({});
 Optional.args = {
-  isRequired: false,
+  isOptional: true,
 };
 
 export const ReadOnly = Template.bind({});

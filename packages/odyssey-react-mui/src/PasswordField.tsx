@@ -51,13 +51,13 @@ export type PasswordFieldProps = {
    */
   isDisabled?: boolean;
   /**
+   * If `true`, the `input` element is not required.
+   */
+  isOptional?: boolean;
+  /**
    * It prevents the user from changing the value of the field
    */
   isReadOnly?: boolean;
-  /**
-   * If `true`, the `input` element is required.
-   */
-  isRequired?: boolean;
   /**
    * The label for the `input` element.
    */
@@ -93,6 +93,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       hint,
       id: idOverride,
       isDisabled = false,
+      isOptional = false,
       isReadOnly,
       label,
       onChange,
@@ -137,6 +138,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}
+          required={!isOptional}
           type={inputType}
           value={value}
         />
@@ -150,6 +152,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         onFocus,
         onBlur,
         placeholder,
+        isOptional,
         isReadOnly,
         ref,
         value,
@@ -163,6 +166,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
+        isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}
       />

@@ -59,13 +59,13 @@ export type TextFieldProps = {
    */
   isMultiline?: boolean;
   /**
+   * If `true`, the `input` element is not required.
+   */
+  isOptional?: boolean;
+  /**
    * It prevents the user from changing the value of the field
    */
   isReadOnly?: boolean;
-  /**
-   * If `true`, the `input` element is required.
-   */
-  isRequired?: boolean;
   /**
    * The label for the `input` element.
    */
@@ -83,7 +83,7 @@ export type TextFieldProps = {
    */
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
-   * The label for the `input` element if the it's not optional
+   * The label for the `input` element if it's optional
    */
   optionalLabel?: string;
   /**
@@ -115,8 +115,8 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       id: idOverride,
       isDisabled = false,
       isMultiline = false,
+      isOptional = false,
       isReadOnly,
-      isRequired = true,
       label,
       onBlur,
       onChange,
@@ -175,7 +175,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
-        isRequired={isRequired}
+        isOptional={isOptional}
         label={label}
         optionalLabel={optionalLabel}
         renderFieldComponent={renderFieldComponent}

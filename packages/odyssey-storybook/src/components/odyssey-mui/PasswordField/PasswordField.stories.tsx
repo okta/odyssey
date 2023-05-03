@@ -66,9 +66,9 @@ const storybookMeta: ComponentMeta<typeof PasswordField> = {
       control: "boolean",
       defaultValue: false,
     },
-    isRequired: {
+    isOptional: {
       control: "boolean",
-      defaultValue: true,
+      defaultValue: false,
     },
     value: {
       control: "text",
