@@ -10,11 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import { createElement } from "react";
 import type { ReactElement } from "react";
 import {
   Icon,
+  IconProps,
   iconDictionary,
   Table,
   TableBody,
@@ -22,31 +23,51 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from "../../../../../odyssey-react-mui/src";
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
-export default {
+const storybookMeta: Meta<IconProps> = {
   title: `MUI Components/Icon`,
   component: Icon,
   decorators: [MuiThemeDecorator],
+  argTypes: {
+    name: {
+      defaultValue: "alert-triangle-filled",
+      control: { type: "select" },
+    },
+    size: {
+      options: ["small", "medium", "large"],
+      control: { type: "radio" },
+    },
+    ariaLabelledby: {
+      control: "text",
+    },
+    color: {
+      options: ["inherit", "primary", "success", "warning", "error", "info"],
+      control: { type: "select" },
+      defaultValue: "inherit",
+    },
+    label: {
+      control: "text",
+    },
+  },
 };
 
-const Template: Story = ({ ...args }) => (
-  <Icon name={args.name} titleAccess={args.title} />
+export default storybookMeta;
+
+const Template: Story<IconProps> = ({ ...args }) => (
+  <Icon
+    name={args.name}
+    size={args.size}
+    ariaLabelledby={args.ariaLabelledby}
+    color={args.color}
+    label={args.label}
+  />
 );
 
-export const Default = Template.bind({});
-
-Default.argTypes = {
-  name: {
-    defaultValue: "alert-triangle-filled",
-    control: { type: "select" },
-  },
-  title: {
-    defaultValue: "Caution",
-    control: { type: "text" },
-  },
-};
+export const Default = Template.bind({
+  size: "medium",
+});
 
 const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   { name: "add", use: "To add" },

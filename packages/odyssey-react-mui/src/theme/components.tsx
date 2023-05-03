@@ -1638,8 +1638,16 @@ export const components: ThemeOptions["components"] = {
       color: "inherit",
     },
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme, ownerState }) => ({
         fontSize: `${theme.typography.ui.lineHeight}rem`,
+
+        ...(ownerState.fontSize === "small" && {
+          fontSize: `${Number(theme.typography.ui.lineHeight) * 0.75}rem`,
+        }),
+
+        ...(ownerState.fontSize === "large" && {
+          fontSize: `${Number(theme.typography.ui.lineHeight) * 1.25}rem`,
+        }),
       }),
     },
   },
