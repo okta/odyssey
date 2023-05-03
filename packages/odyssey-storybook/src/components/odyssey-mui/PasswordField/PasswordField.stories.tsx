@@ -63,9 +63,9 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     isReadOnly: {
       control: "boolean",
     },
-    isRequired: {
+    isOptional: {
       control: "boolean",
-      defaultValue: true,
+      defaultValue: false,
     },
     value: {
       control: "text",
