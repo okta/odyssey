@@ -14,34 +14,54 @@ import { Meta, Story } from "@storybook/react";
 import { createElement } from "react";
 import {
   Icon,
-  iconDictionary,
   IconProps,
+  iconDictionary,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-} from "../../../../../odyssey-react-mui/src";
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 const storybookMeta: Meta<IconProps> = {
   title: `MUI Components/Icon`,
   component: Icon,
   decorators: [MuiThemeDecorator],
+  argTypes: {
+    name: {
+      control: { type: "select" },
+      options: Object.keys(iconDictionary),
+    },
+    size: {
+      options: ["small", "medium", "large"],
+      control: { type: "radio" },
+    },
+    ariaLabelledby: {
+      control: "text",
+    },
+    label: {
+      control: "text",
+    },
+  },
 };
 
 export default storybookMeta;
 
-const Template: Story<IconProps> = ({ ...args }) => <Icon {...args} />;
+const Template: Story<IconProps> = ({ ...args }) => (
+  <Icon
+    name={args.name}
+    size={args.size}
+    ariaLabelledby={args.ariaLabelledby}
+    label={args.label}
+  />
+);
 
 export const Default = Template.bind({});
-
-Default.argTypes = {
-  name: {
-    defaultValue: "alert-triangle-filled",
-    control: { type: "select" },
-  },
+Default.args = {
+  name: "alert-triangle-filled",
+  size: "medium",
 };
 
 const icons: Array<{ name: keyof typeof iconDictionary; use: string }> = [

@@ -11,15 +11,26 @@
  */
 
 import { forwardRef } from "react";
-import type { SvgIconNoChildrenProps } from "./iconDictionary/types";
 import { iconDictionary } from "./iconDictionary";
 
-export interface IconProps extends SvgIconNoChildrenProps {
-  /**
-   * Name of the icon to render
+export type IconProps = {
+  /*
+   ** The element whose text describes the icon, if it exists
+   */
+  ariaLabelledby?: string;
+  /*
+   ** Text that describes the icon
+   */
+  label: string;
+  /*
+   ** Name of the icon to render
    */
   name: keyof typeof iconDictionary;
-}
+  /*
+   ** The size of the icon
+   */
+  size: "small" | "medium" | "large";
+};
 
 /**
  * A system of icons which establishes a visual language
@@ -28,12 +39,18 @@ export interface IconProps extends SvgIconNoChildrenProps {
  * icon component imports where possible to keep your bundle size smaller.
  */
 export const Icon = forwardRef<SVGSVGElement, IconProps>(
-  ({ name, titleAccess, ...rest }, ref) => {
+  ({ ariaLabelledby, label, name, size }) => {
     if (!(name in iconDictionary)) return null;
 
     const NamedIcon = iconDictionary[name];
 
-    return <NamedIcon titleAccess={titleAccess} ref={ref} {...rest} />;
+    return (
+      <NamedIcon
+        aria-labelledby={ariaLabelledby}
+        fontSize={size}
+        titleAccess={label}
+      />
+    );
   }
 );
 
