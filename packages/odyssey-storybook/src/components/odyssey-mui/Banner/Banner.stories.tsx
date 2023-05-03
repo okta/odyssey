@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Banner } from "@okta/odyssey-react-mui";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Banner, BannerProps } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import BannerMdx from "./Banner.mdx";
 
-const storybookMeta: ComponentMeta<typeof Banner> = {
+export default {
   title: `MUI Components/Alerts/Banner`,
   component: Banner,
   parameters: {
@@ -49,11 +49,9 @@ const storybookMeta: ComponentMeta<typeof Banner> = {
     },
   },
   decorators: [MuiThemeDecorator],
-};
+} as Meta<BannerProps>;
 
-export default storybookMeta;
-
-const Template: ComponentStory<typeof Banner> = (args) => {
+const Template: Story<BannerProps> = (args) => {
   return <Banner {...args}></Banner>;
 };
 

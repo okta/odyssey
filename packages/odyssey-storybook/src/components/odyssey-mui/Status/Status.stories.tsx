@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import { Status } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import { Status, StatusProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import StatusMdx from "./Status.mdx";
 
-export default {
+const storybookMeta: Meta<StatusProps> = {
   title: `MUI Components/Status`,
   component: Status,
   parameters: {
@@ -38,7 +38,9 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
+export default storybookMeta;
+
+const DefaultTemplate: Story<StatusProps> = (args) => {
   return <Status label={args.label} severity={args.severity} />;
 };
 
