@@ -1320,7 +1320,7 @@ export const components: ThemeOptions["components"] = {
           }),
         }),
         "& > .MuiTypography-root": {
-          lineHeight: `${theme.typography.ui.lineHeight}rem`,
+          lineHeight: "unset",
         },
       }),
     },
