@@ -14,15 +14,11 @@ import { AlertColor } from "@mui/material";
 import { memo, ReactNode } from "react";
 import { Alert, AlertTitle, ScreenReaderText } from ".";
 
-export interface InfoboxProps {
+export type InfoboxProps = {
   /**
    * The contents of the alert
    */
   children: ReactNode;
-  /**
-   * Determine the color and icon of the alert
-   */
-  severity: AlertColor;
   /**
    * Sets the ARIA role of the alert
    * ("status" for something that dynamically updates, "alert" for errors, null for something
@@ -30,12 +26,16 @@ export interface InfoboxProps {
    */
   role?: "status" | "alert";
   /**
+   * Determine the color and icon of the alert
+   */
+  severity: AlertColor;
+  /**
    * The title of the alert
    */
   title?: string;
-}
+};
 
-const Infobox = ({ children, severity, role, title }: InfoboxProps) => (
+const Infobox = ({ children, role, severity, title }: InfoboxProps) => (
   <Alert role={role} severity={severity} variant="infobox">
     <ScreenReaderText>{severity}: </ScreenReaderText>
     {title && <AlertTitle>{title}</AlertTitle>}

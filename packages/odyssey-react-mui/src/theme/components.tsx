@@ -1596,6 +1596,13 @@ export const components: ThemeOptions["components"] = {
         horizontal: "right",
       },
     },
+    styleOverrides: {
+      root: {
+        "&.Toast": {
+          position: "static",
+        },
+      },
+    },
   },
   MuiSelect: {
     defaultProps: {
@@ -2031,7 +2038,7 @@ export const components: ThemeOptions["components"] = {
   MuiTypography: {
     defaultProps: {
       fontFamily:
-        "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
+        "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
       variantMapping: {
         h1: "h1",
         h2: "h2",

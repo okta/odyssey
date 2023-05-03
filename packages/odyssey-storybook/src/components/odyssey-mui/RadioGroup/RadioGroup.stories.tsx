@@ -25,32 +25,32 @@ const storybookMeta: ComponentMeta<typeof RadioGroup> = {
     },
   },
   argTypes: {
+    children: {
+      control: "text",
+    },
+    defaultValue: {
+      control: "text",
+    },
     errorMessage: {
       control: "text",
-      defaultValue: null,
     },
     hint: {
       control: "text",
-      defaultValue: null,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
     },
     label: {
       control: "text",
-      defaultValue: "Speed",
     },
     name: {
       control: "text",
-      defaultValue: "storybook-radio",
     },
     onChange: {
       control: "function",
     },
     value: {
       control: "text",
-      defaultValue: "Value",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -66,6 +66,12 @@ const Template: ComponentStory<typeof RadioGroup> = (args) => {
       <Radio label="Ludicrous Speed" value="Ludicrous Speed" />
     </RadioGroup>
   );
+};
+
+Template.args = {
+  label: "Speed",
+  name: "storybook-radio",
+  value: "Value",
 };
 
 export const Default = Template.bind({});
