@@ -11,7 +11,7 @@
  */
 
 import { useMemo, useState } from "react";
-import type { Meta, Story } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react";
 import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
 import {
   AdapterDateFns,
@@ -25,7 +25,7 @@ import DatePickerMdx from "./DatePicker.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
-  title: `Labs Components/DatePicker`,
+  title: "Labs Components/DatePicker",
   component: DatePicker,
   parameters: {
     docs: {

@@ -16,7 +16,7 @@ import {
   CheckboxGroupProps,
   CheckboxProps,
 } from "@okta/odyssey-react-mui";
-import { Story, Meta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import CheckboxGroupMdx from "./CheckboxGroup.mdx";
@@ -27,7 +27,7 @@ const storybookMeta: Meta<
     isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
   }
 > = {
-  title: `MUI Components/Forms/CheckboxGroup`,
+  title: "MUI Components/Forms/CheckboxGroup",
   component: CheckboxGroup,
   parameters: {
     docs: {
@@ -66,7 +66,7 @@ const storybookMeta: Meta<
 
 export default storybookMeta;
 
-const SingleTemplate: Story<
+const SingleTemplate: StoryFn<
   CheckboxGroupProps & {
     isDefaultChecked: CheckboxProps["isDefaultChecked"];
     isIndeterminate: CheckboxProps["isIndeterminate"];
@@ -104,7 +104,7 @@ Indeterminate.args = {
   isIndeterminate: true,
 };
 
-const GroupTemplate: Story<CheckboxGroupProps> = (args) => {
+const GroupTemplate: StoryFn<CheckboxGroupProps> = (args) => {
   return (
     <CheckboxGroup
       errorMessage={args.errorMessage}
@@ -145,7 +145,7 @@ Error.args = {
   errorMessage: "Select 1 or more systems to check before initiating warp.",
 };
 
-const MixedErrorTemplate: Story<CheckboxGroupProps> = (args) => {
+const MixedErrorTemplate: StoryFn<CheckboxGroupProps> = (args) => {
   return (
     <CheckboxGroup
       isDisabled={args.isDisabled}

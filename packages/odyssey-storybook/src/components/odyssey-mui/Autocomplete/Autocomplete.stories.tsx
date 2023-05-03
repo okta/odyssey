@@ -11,13 +11,13 @@
  */
 
 import { Autocomplete, AutocompleteProps } from "@okta/odyssey-react-mui";
-import { ComponentMeta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import AutocompleteMdx from "./Autocomplete.mdx";
 
-const storybookMeta: ComponentMeta<typeof Autocomplete> = {
-  title: `MUI Components/Forms/Autocomplete`,
+const storybookMeta: Meta<typeof Autocomplete> = {
+  title: "MUI Components/Forms/Autocomplete",
   component: Autocomplete,
   parameters: {
     docs: {
@@ -91,11 +91,11 @@ type AutocompleteType = AutocompleteProps<
   boolean | undefined
 >;
 
-const Template: Story<AutocompleteType> = (args) => {
+const Template: StoryFn<AutocompleteType> = (args) => {
   return <Autocomplete {...args} options={stations} />;
 };
 
-const EmptyTemplate: Story<AutocompleteType> = (args) => {
+const EmptyTemplate: StoryFn<AutocompleteType> = (args) => {
   return <Autocomplete {...args} options={[]} />;
 };
 

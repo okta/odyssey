@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, Story } from "@storybook/react";
+import type { Meta, StoryFn } from "@storybook/react";
 
 import { Button, AddIcon } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
@@ -19,7 +19,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDec
 import ButtonMdx from "./Button.mdx";
 
 const storybookMeta: Meta<ButtonProps> = {
-  title: `MUI Components/Button`,
+  title: "MUI Components/Button",
   component: Button,
   parameters: {
     docs: {
@@ -52,59 +52,73 @@ const storybookMeta: Meta<ButtonProps> = {
       control: { type: "radio" },
       defaultValue: "primary",
     },
+    onClick: {
+      action: true,
+    },
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const Template: Story<ButtonProps> = (props) => <Button {...props} />;
+const Template: StoryFn<ButtonProps> = (props) => <Button {...props} />;
 
 export const ButtonPrimary = Template.bind({});
-ButtonPrimary.args = {};
+ButtonPrimary.args = {
+  text: "Add crew",
+};
 
 export const ButtonSecondary = Template.bind({});
 ButtonSecondary.args = {
+  text: "Add crew",
   variant: "secondary",
 };
 
 export const ButtonDanger = Template.bind({});
 ButtonDanger.args = {
+  text: "Add crew",
   variant: "danger",
 };
 
 export const ButtonFloating = Template.bind({});
 ButtonFloating.args = {
+  text: "Add crew",
   variant: "floating",
 };
 
 export const ButtonSmall = Template.bind({});
 ButtonSmall.args = {
+  text: "Add crew",
   size: "small",
 };
 
 export const ButtonMedium = Template.bind({});
 ButtonMedium.args = {
+  text: "Add crew",
   size: "medium",
 };
 
 export const ButtonLarge = Template.bind({});
 ButtonLarge.args = {
+  text: "Add crew",
   size: "large",
 };
 
 export const ButtonFullWidth = Template.bind({});
 ButtonFullWidth.args = {
+  text: "Add crew",
   isFullWidth: true,
 };
 
 export const ButtonPrimaryDisabled = Template.bind({});
 ButtonPrimaryDisabled.args = {
+  text: "Add crew",
   isDisabled: true,
 };
 
 export const ButtonWithIcon = Template.bind({});
 ButtonWithIcon.args = {
+  text: "Add crew",
   startIcon: <AddIcon />,
 };
 

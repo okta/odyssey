@@ -11,13 +11,13 @@
  */
 
 import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import RadioGroupMdx from "./RadioGroup.mdx";
 
-const storybookMeta: ComponentMeta<typeof RadioGroup> = {
-  title: `MUI Components/Forms/RadioGroup`,
+const storybookMeta: Meta<typeof RadioGroup> = {
+  title: "MUI Components/Forms/RadioGroup",
   component: RadioGroup,
   parameters: {
     docs: {
@@ -60,7 +60,7 @@ const storybookMeta: ComponentMeta<typeof RadioGroup> = {
 
 export default storybookMeta;
 
-const Template: ComponentStory<typeof RadioGroup> = (args) => {
+const Template: StoryFn<typeof RadioGroup> = (args) => {
   return (
     <RadioGroup {...args}>
       <Radio label="Light Speed" value="Light Speed" />

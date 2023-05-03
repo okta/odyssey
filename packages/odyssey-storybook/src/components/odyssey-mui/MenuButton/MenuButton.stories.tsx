@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import {
   Divider,
   ListItemIcon,
@@ -29,7 +29,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import MenuButtonMdx from "./MenuButton.mdx";
 
 const storybookMeta: Meta<MenuButtonProps> = {
-  title: `MUI Components/Menu Button`,
+  title: "MUI Components/Menu Button",
   component: MenuButton,
   parameters: {
     docs: {
@@ -56,7 +56,7 @@ const storybookMeta: Meta<MenuButtonProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: Story<MenuButtonProps> = (args) => {
+const DefaultTemplate: StoryFn<MenuButtonProps> = (args) => {
   return <MenuButton {...args}>{args.children}</MenuButton>;
 };
 

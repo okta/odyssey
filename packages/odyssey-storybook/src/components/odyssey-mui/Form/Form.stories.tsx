@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import {
   Alert,
   AlertTitle,
@@ -33,7 +33,7 @@ import FormMdx from "./Form.mdx";
 
 // TEMP: this needs a component for props
 const storybookMeta: Meta = {
-  title: `MUI Components/Forms/Form`,
+  title: "MUI Components/Forms/Form",
   component: FormControl,
   parameters: {
     docs: {
@@ -92,7 +92,7 @@ const storybookMeta: Meta = {
 
 export default storybookMeta;
 
-const Template: Story = (args) => {
+const Template: StoryFn = (args) => {
   return (
     // <Form>
     <Box

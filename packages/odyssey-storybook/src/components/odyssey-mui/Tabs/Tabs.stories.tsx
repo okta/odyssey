@@ -11,7 +11,7 @@
  */
 
 import * as React from "react";
-import { Story } from "@storybook/react";
+import { StoryFn } from "@storybook/react";
 import {
   Box,
   FavoriteIcon,
@@ -20,13 +20,12 @@ import {
   TabList,
   TabPanel,
 } from "@okta/odyssey-react-mui";
-// import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TabsMdx from "./Tabs.mdx";
 
 export default {
-  title: `MUI Components/Tabs`,
+  title: "MUI Components/Tabs",
   component: Tab,
   parameters: {
     docs: {
@@ -54,7 +53,7 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
+const DefaultTemplate: StoryFn = (args) => {
   const [value, setValue] = React.useState("0");
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
