@@ -40,7 +40,6 @@ import {
   InformationCircleFilledIcon,
   SubtractIcon,
 } from "../iconDictionary";
-import { theme } from "./theme";
 
 export const components: ThemeOptions["components"] = {
   MuiAlert: {
