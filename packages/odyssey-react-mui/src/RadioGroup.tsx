@@ -23,7 +23,7 @@ import {
   RadioProps,
 } from ".";
 
-export interface RadioGroupProps {
+export type RadioGroupProps = {
   /**
    * The <Radio> components within the group. Must include two or more.
    */
@@ -60,7 +60,7 @@ export interface RadioGroupProps {
    * The `value` on the selected radio button.
    */
   value?: RadioProps["value"];
-}
+};
 
 const RadioGroup = ({
   children,
