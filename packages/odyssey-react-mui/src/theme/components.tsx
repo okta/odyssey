@@ -40,6 +40,7 @@ import {
   InformationCircleFilledIcon,
   SubtractIcon,
 } from "../iconDictionary";
+import { theme } from "./theme";
 
 export const components: ThemeOptions["components"] = {
   MuiAlert: {
@@ -1318,6 +1319,9 @@ export const components: ThemeOptions["components"] = {
             transform: "none",
           }),
         }),
+        "& > .MuiTypography-root": {
+          lineHeight: `${theme.typography.ui.lineHeight}rem`,
+        },
       }),
     },
   },
