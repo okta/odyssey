@@ -10,20 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip } from "./";
+import { memo, ReactElement } from "react";
+import { Box, Snackbar } from ".";
+import { Toast } from "./Toast";
 
-export type StatusProps = {
-  /**
-   * Determine the color and icon of the alert
-   */
-  severity: "default" | "error" | "info" | "success" | "warning";
-
-  /**
-   * The text content of the status
-   */
-  label: string;
+export type ToastStackProps = {
+  children: ReactElement<typeof Toast> | Array<ReactElement<typeof Toast>>;
 };
 
-export const Status = ({ severity, label }: StatusProps) => (
-  <Chip label={label} color={severity} variant="status" />
-);
+const ToastStack = ({ children }: ToastStackProps) => {
+  return (
+    <Snackbar open={true}>
+      <Box display="flex" flexDirection="column-reverse" gap={2}>
+        {children}
+      </Box>
+    </Snackbar>
+  );
+};
+
+const MemoizedToastStack = memo(ToastStack);
+
+export { MemoizedToastStack as ToastStack };
