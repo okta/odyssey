@@ -993,6 +993,10 @@ export const components: ThemeOptions["components"] = {
         paddingBlock: theme.spacing(4),
         paddingInline: theme.spacing(6),
 
+        "&:last-child": {
+          paddingBlockEnd: theme.spacing(6),
+        },
+
         ...(ownerState.dividers === false && {
           [`& + .${dialogActionsClasses.root}`]: {
             paddingBlockStart: theme.spacing(4),
