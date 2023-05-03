@@ -34,6 +34,7 @@ const storybookMeta: Meta<IconProps> = {
     name: {
       defaultValue: "alert-triangle-filled",
       control: { type: "select" },
+      options: Object.keys(iconDictionary),
     },
     size: {
       options: ["small", "medium", "large"],
