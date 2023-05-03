@@ -17,11 +17,7 @@ export {
   Chip,
   createTheme,
   CssBaseline,
-  Dialog,
-  DialogActions,
-  DialogContent,
   DialogContentText,
-  DialogTitle,
   Divider,
   FormControl,
   FormControlLabel,
@@ -66,11 +62,6 @@ export type {
   BoxProps,
   ChipProps,
   CssBaselineProps,
-  DialogProps,
-  DialogActionsProps,
-  DialogContentProps,
-  DialogContentTextProps,
-  DialogTitleProps,
   DividerProps,
   FormControlLabelProps,
   FormControlProps,
@@ -125,6 +116,7 @@ export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
 export * from "./createUniqueId";
+export * from "./Dialog";
 export * from "./FieldError";
 export * from "./FieldHint";
 export * from "./FieldLabel";
