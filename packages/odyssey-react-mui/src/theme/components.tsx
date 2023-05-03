@@ -1318,6 +1318,9 @@ export const components: ThemeOptions["components"] = {
             transform: "none",
           }),
         }),
+        "& > .MuiTypography-root": {
+          lineHeight: "unset",
+        },
       }),
     },
   },

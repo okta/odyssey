@@ -39,9 +39,9 @@ export type FieldProps = {
    */
   isDisabled?: boolean;
   /**
-   * If `true`, the `input` element is required.
+   * If `true`, the `input` element is not required.
    */
-  isRequired?: boolean;
+  isOptional?: boolean;
   /**
    * The label for the `input` element.
    */
@@ -69,7 +69,7 @@ const Field = ({
   hint,
   id: idOverride,
   isDisabled = false,
-  isRequired = true,
+  isOptional = false,
   label,
   optionalLabel,
   renderFieldComponent,
@@ -90,7 +90,7 @@ const Field = ({
         hasVisibleLabel={hasVisibleLabel}
         id={labelId}
         inputId={id}
-        isRequired={isRequired}
+        isOptional={isOptional}
         optionalText={optionalLabel}
         text={label}
       />
