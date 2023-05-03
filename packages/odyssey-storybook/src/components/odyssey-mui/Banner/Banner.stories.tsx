@@ -15,6 +15,8 @@ import { Meta, StoryFn } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import BannerMdx from "./Banner.mdx";
+import { within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 const storybookMeta: Meta<typeof Banner> = {
   title: "MUI Components/Alerts/Banner",
@@ -59,6 +61,11 @@ export const InfoBanner = Template.bind({});
 InfoBanner.args = {
   severity: "info",
   text: "The mission to Sagittarius A is set for January 7.",
+};
+InfoBanner.play = async ({ args, canvasElement }) => {
+  const canvas = within(canvasElement);
+  const banner = await canvas.getByText(args.text);
+  await expect(banner).toBeInTheDocument();
 };
 
 export const ErrorBanner = Template.bind({});

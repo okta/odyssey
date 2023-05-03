@@ -20,6 +20,8 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import InfoboxMdx from "./Infobox.mdx";
+import { within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 const storybookMeta: Meta<InfoboxProps> = {
   title: "MUI Components/Alerts/Infobox",
@@ -94,6 +96,12 @@ Success.args = {
   role: "status",
   severity: "success",
   title: "Approved for launch",
+};
+Success.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const el = await canvas.getByText("Approved for launch");
+  await expect(el).toBeInTheDocument();
+  await expect(el.getAttribute("aria-live")).toBe(true);
 };
 
 export const BlockLink = DefaultTemplate.bind({});

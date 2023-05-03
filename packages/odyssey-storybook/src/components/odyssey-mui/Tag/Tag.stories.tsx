@@ -15,6 +15,8 @@ import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TagMdx from "./Tag.mdx";
+import { getByRole, userEvent, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 const storybookMeta: Meta<TagProps> = {
   title: "MUI Components/Tag",
@@ -69,6 +71,13 @@ List.args = {};
 export const Clickable = DefaultTemplate.bind({});
 Clickable.args = {
   label: "Starship",
+};
+Clickable.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const tag = await canvas.getByText("Starship");
+  const button = await getByRole(tag, "button");
+  await userEvent.click(button);
+  await expect(tag).not.toBeInTheDocument();
 };
 
 export const Removable = DefaultTemplate.bind({});

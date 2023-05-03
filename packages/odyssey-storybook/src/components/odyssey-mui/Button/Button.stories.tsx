@@ -17,6 +17,8 @@ import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 import ButtonMdx from "./Button.mdx";
+import { userEvent, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 const storybookMeta: Meta<ButtonProps> = {
   title: "MUI Components/Button",
@@ -66,6 +68,13 @@ const Template: StoryFn<ButtonProps> = (props) => <Button {...props} />;
 export const ButtonPrimary = Template.bind({});
 ButtonPrimary.args = {
   text: "Add crew",
+};
+ButtonPrimary.play = async ({ args, canvasElement }) => {
+  const canvas = within(canvasElement);
+  const button = await canvas.getByText("Add crew");
+  await userEvent.hover(button);
+  await userEvent.click(button);
+  await expect(args.onClick).toHaveBeenCalledTimes(1);
 };
 
 export const ButtonSecondary = Template.bind({});

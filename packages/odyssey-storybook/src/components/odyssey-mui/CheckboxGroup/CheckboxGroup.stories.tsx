@@ -20,6 +20,8 @@ import { StoryFn, Meta } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import CheckboxGroupMdx from "./CheckboxGroup.mdx";
+import { within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 const storybookMeta: Meta<
   CheckboxGroupProps & {
@@ -128,6 +130,11 @@ Group.parameters = {
   controls: { exclude: ["defaultChecked", "isIndeterminate"] },
 };
 Group.args = {};
+Group.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const options = await canvas.findAllByRole("checkbox");
+  await expect(options).toHaveLength(3);
+};
 
 export const Disabled = GroupTemplate.bind({});
 Disabled.parameters = {

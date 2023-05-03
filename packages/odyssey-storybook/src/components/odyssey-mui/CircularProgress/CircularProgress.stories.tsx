@@ -18,6 +18,8 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import CircularProgressMdx from "./CircularProgress.mdx";
+import { within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 const storybookMeta: Meta<CircularProgressProps> = {
   title: "MUI Components/Circular Progress",
@@ -40,10 +42,20 @@ export default storybookMeta;
 
 export const Indeterminate: StoryObj<CircularProgressProps> = {
   args: {},
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const el = await canvas.getByRole("progressbar");
+    await expect(el).toHaveAccessibleName();
+  },
 };
 
 export const Determinate: StoryObj<CircularProgressProps> = {
   args: {
     value: 70
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const el = await canvas.getByRole("progressbar");
+    await expect(el).toHaveAccessibleName();
   },
 };

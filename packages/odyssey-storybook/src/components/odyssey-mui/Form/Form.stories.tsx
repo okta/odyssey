@@ -30,6 +30,7 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import FormMdx from "./Form.mdx";
+import { userEvent, within } from "@storybook/testing-library";
 
 // TEMP: this needs a component for props
 const storybookMeta: Meta = {
@@ -264,6 +265,14 @@ const Template: StoryFn = (args) => {
 export const Simple = Template.bind({});
 Simple.args = {
   fieldGroupOne: true,
+};
+Simple.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const dropdown = await canvas.getByLabelText("Docking license");
+  const textarea = await canvas.getByLabelText("Nature of visit");
+  await userEvent.click(textarea);
+  await userEvent.type(textarea, "business");
+  await userEvent.click(dropdown);
 };
 
 export const WithHeader = Template.bind({});

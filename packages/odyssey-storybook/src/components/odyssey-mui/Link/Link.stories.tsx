@@ -18,8 +18,10 @@ import {
   Link,
   LinkProps,
 } from "@okta/odyssey-react-mui";
+import { expect } from "@storybook/jest";
 
 import LinkMdx from "./Link.mdx";
+import { userEvent, within } from "@storybook/testing-library";
 
 export default {
   title: "MUI Components/Link",
@@ -61,6 +63,12 @@ Default.args = {
   href: "#anchor",
   variant: "default",
   children: "Anchor link",
+};
+Default.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const link = await canvas.getByText("Anchor link");
+  await expect(link).toBeInTheDocument();
+  await userEvent.hover(link);
 };
 
 export const Monochrome = Template.bind({});

@@ -105,6 +105,16 @@ Default.args = {
     "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
   title: "Initiate self-destruct protocol",
 };
+Default.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const button = await canvas.getByText("Open default dialog");
+  await expect(canvas.queryByText("Initiate protocol")).not.toBeInTheDocument();
+  await userEvent.click(button);
+  const cta = await canvas.getByText("Cancel");
+  await userEvent.click(cta);
+  await expect(canvas.queryByText("Cancel")).not.toBeInTheDocument();
+};
+
 
 export const Long = DefaultTemplate.bind({});
 Long.args = {
