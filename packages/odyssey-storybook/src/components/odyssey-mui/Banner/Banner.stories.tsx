@@ -11,13 +11,13 @@
  */
 
 import { Banner, BannerProps } from "@okta/odyssey-react-mui";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import BannerMdx from "./Banner.mdx";
 
-export default {
-  title: `MUI Components/Alerts/Banner`,
+const storybookMeta: Meta<typeof Banner> = {
+  title: "MUI Components/Alerts/Banner",
   component: Banner,
   parameters: {
     docs: {
@@ -49,31 +49,34 @@ export default {
     },
   },
   decorators: [MuiThemeDecorator],
-} as Meta<BannerProps>;
-
-const Template: Story<BannerProps> = (args) => {
-  return <Banner {...args}></Banner>;
 };
 
-export const Info = Template.bind({});
-Info.args = {};
+export default storybookMeta;
 
-export const Error = Template.bind({});
-Error.args = {
+const Template: StoryFn<BannerProps> = (props) => <Banner {...props}></Banner>;
+
+export const InfoBanner = Template.bind({});
+InfoBanner.args = {
+  severity: "info",
+  text: "The mission to Sagittarius A is set for January 7.",
+};
+
+export const ErrorBanner = Template.bind({});
+ErrorBanner.args = {
   role: "status",
   severity: "error",
   text: "An unidentified flying object compromised Hangar 18.",
 };
 
-export const Warning = Template.bind({});
-Warning.args = {
+export const WarningBanner = Template.bind({});
+WarningBanner.args = {
   role: "status",
   severity: "warning",
   text: "Severe solar winds detected. Local system flights may be delayed.",
 };
 
-export const WithLink = Template.bind({});
-WithLink.args = {
+export const BannerWithLink = Template.bind({});
+BannerWithLink.args = {
   linkText: "View report",
   linkUrl: "#anchor",
   role: "status",
@@ -81,8 +84,8 @@ WithLink.args = {
   text: "An unidentified flying object compromised Hangar 18.",
 };
 
-export const Dismissible = Template.bind({});
-Dismissible.args = {
+export const DismissibleBanner = Template.bind({});
+DismissibleBanner.args = {
   role: "status",
   severity: "warning",
 };

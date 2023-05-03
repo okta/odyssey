@@ -17,7 +17,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import SelectMdx from "./Select.mdx";
 
 const storybookMeta: Meta<SelectProps> = {
-  title: `MUI Components/Forms/Select`,
+  title: "MUI Components/Forms/Select",
   component: Select,
   parameters: {
     docs: {

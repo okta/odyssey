@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { Typography, TypographyProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TypographyMdx from "./Typography.mdx";
 
 const storybookMeta: Meta<TypographyProps> = {
-  title: `MUI Components/Typography`,
+  title: "MUI Components/Typography",
   component: Typography,
   parameters: {
     docs: {

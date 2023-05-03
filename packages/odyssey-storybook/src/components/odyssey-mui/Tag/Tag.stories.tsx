@@ -10,15 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import { Meta, StoryFn } from "@storybook/react";
 import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TagMdx from "./Tag.mdx";
 
 const storybookMeta: Meta<TagProps> = {
-  title: `MUI Components/Tag`,
+  title: "MUI Components/Tag",
   component: Tag,
   parameters: {
     actions: { argTypesRegex: null },
@@ -36,10 +35,10 @@ const storybookMeta: Meta<TagProps> = {
       defaultValue: false,
     },
     onClick: {
-      control: "function",
+      action: true,
     },
     onRemove: {
-      control: "function",
+      action: true,
     },
   },
   decorators: [MuiThemeDecorator],
@@ -47,11 +46,11 @@ const storybookMeta: Meta<TagProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: Story<TagProps> = (args) => {
+const DefaultTemplate: StoryFn<TagProps> = (args) => {
   return <Tag {...args} />;
 };
 
-const ListTemplate: Story<TagProps> = (args) => {
+const ListTemplate: StoryFn<TagProps> = (args) => {
   return (
     <TagList>
       <Tag {...args} />
@@ -69,13 +68,11 @@ List.args = {};
 
 export const Clickable = DefaultTemplate.bind({});
 Clickable.args = {
-  onClick: action("clicked"),
+  label: "Starship",
 };
 
 export const Removable = DefaultTemplate.bind({});
-Removable.args = {
-  onRemove: action("removed"),
-};
+Removable.args = {};
 
 export const Disabled = DefaultTemplate.bind({});
 Disabled.args = {
