@@ -245,3 +245,29 @@ Long.args = {
   ),
   title: "Cryosleep liability waiver",
 };
+
+const NoButtonsTemplate: Story<DialogProps> = (args) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const onOpen = () => {
+    setIsVisible(true);
+  };
+
+  const onClose = () => {
+    setIsVisible(false);
+  };
+
+  return (
+    <>
+      <Button onClick={onOpen} text="Open dialog" />
+      <Dialog {...args} onClose={onClose} isOpen={isVisible} />
+    </>
+  );
+};
+
+export const NoButtons = NoButtonsTemplate.bind({});
+NoButtons.args = {
+  children:
+    "By closing this Dialog you agree to adhere to the Ceres Station terms of use.",
+  title: "Ceres Station docking terms",
+};
