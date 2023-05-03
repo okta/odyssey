@@ -38,7 +38,6 @@ const storybookMeta: Meta<CircularProgressProps> = {
 
 export default storybookMeta;
 
-
 export const Indeterminate: StoryObj<CircularProgressProps> = {
   args: {},
 };
