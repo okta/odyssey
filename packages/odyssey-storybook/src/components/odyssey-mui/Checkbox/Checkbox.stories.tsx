@@ -11,7 +11,7 @@
  */
 
 import { Checkbox, CheckboxProps } from "@okta/odyssey-react-mui";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import CheckboxMdx from "./Checkbox.mdx";
