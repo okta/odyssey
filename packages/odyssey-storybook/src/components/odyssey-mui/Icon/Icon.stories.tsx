@@ -11,13 +11,11 @@
  */
 
 import { Meta, Story } from "@storybook/react";
-import { Meta, Story } from "@storybook/react";
 import { createElement } from "react";
 import {
   Icon,
   IconProps,
   iconDictionary,
-  IconProps,
   Table,
   TableBody,
   TableCell,
@@ -33,7 +31,6 @@ const storybookMeta: Meta<IconProps> = {
   decorators: [MuiThemeDecorator],
   argTypes: {
     name: {
-      defaultValue: "alert-triangle-filled",
       control: { type: "select" },
       options: Object.keys(iconDictionary),
     },
@@ -43,11 +40,6 @@ const storybookMeta: Meta<IconProps> = {
     },
     ariaLabelledby: {
       control: "text",
-    },
-    color: {
-      options: ["inherit", "primary", "success", "warning", "error", "info"],
-      control: { type: "select" },
-      defaultValue: "inherit",
     },
     label: {
       control: "text",
@@ -62,14 +54,15 @@ const Template: Story<IconProps> = ({ ...args }) => (
     name={args.name}
     size={args.size}
     ariaLabelledby={args.ariaLabelledby}
-    color={args.color}
     label={args.label}
   />
 );
 
-export const Default = Template.bind({
+export const Default = Template.bind({});
+Default.args = {
+  name: "alert-triangle-filled",
   size: "medium",
-});
+};
 
 const icons: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   { name: "add", use: "To add" },

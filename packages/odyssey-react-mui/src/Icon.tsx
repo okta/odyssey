@@ -19,10 +19,6 @@ export type IconProps = {
    */
   ariaLabelledby?: string;
   /*
-   ** The color of the icon
-   */
-  color?: "inherit" | "primary" | "success" | "warning" | "error" | "info";
-  /*
    ** Text that describes the icon
    */
   label: string;
@@ -43,7 +39,7 @@ export type IconProps = {
  * icon component imports where possible to keep your bundle size smaller.
  */
 export const Icon = forwardRef<SVGSVGElement, IconProps>(
-  ({ ariaLabelledby, color = "inherit", label, name, size }) => {
+  ({ ariaLabelledby, label, name, size }) => {
     if (!(name in iconDictionary)) return null;
 
     const NamedIcon = iconDictionary[name];
@@ -51,7 +47,6 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(
     return (
       <NamedIcon
         aria-labelledby={ariaLabelledby}
-        color={color}
         fontSize={size}
         titleAccess={label}
       />
