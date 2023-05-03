@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import {
   CssBaseline,
   CssBaselineProps,
@@ -22,7 +22,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import CssBaselineMdx from "./CssBaseline.mdx";
 
 const storybookMeta: Meta<CssBaselineProps> = {
-  title: `MUI Components/CSS Baseline`,
+  title: "MUI Components/CSS Baseline",
   component: CssBaseline,
   parameters: {
     docs: {
@@ -34,7 +34,7 @@ const storybookMeta: Meta<CssBaselineProps> = {
 
 export default storybookMeta;
 
-const AbbrTemplate: Story<ScopedCssBaselineProps> = () => {
+const AbbrTemplate: StoryFn<ScopedCssBaselineProps> = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -45,7 +45,7 @@ const AbbrTemplate: Story<ScopedCssBaselineProps> = () => {
   );
 };
 
-const AddressTemplate: Story = () => {
+const AddressTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <address>
@@ -58,7 +58,7 @@ const AddressTemplate: Story = () => {
   );
 };
 
-const BlockquoteTemplate: Story = () => {
+const BlockquoteTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <blockquote cite="https://books.google.com/books?id=dlYEAAAAMBAJ&lpg=PP1&dq=Life,+2+May+1955&pg=PA61&hl=en#v=onepage&q=Life%2C%202%20May%201955&f=false">
@@ -78,7 +78,7 @@ const BlockquoteTemplate: Story = () => {
   );
 };
 
-const CiteTemplate: Story = () => {
+const CiteTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <blockquote>
@@ -100,7 +100,7 @@ const CiteTemplate: Story = () => {
   );
 };
 
-const CodeTemplate: Story = () => {
+const CodeTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -111,7 +111,7 @@ const CodeTemplate: Story = () => {
   );
 };
 
-const DelTemplate: Story = () => {
+const DelTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -134,7 +134,7 @@ const DelTemplate: Story = () => {
   );
 };
 
-const DetailsTemplate: Story = () => {
+const DetailsTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <details>
@@ -150,7 +150,7 @@ const DetailsTemplate: Story = () => {
   );
 };
 
-const DfnTemplate: Story = () => {
+const DfnTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -161,7 +161,7 @@ const DfnTemplate: Story = () => {
   );
 };
 
-const DfnWAbbrTemplate: Story = () => {
+const DfnWAbbrTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -174,7 +174,7 @@ const DfnWAbbrTemplate: Story = () => {
   );
 };
 
-const DlTemplate: Story = () => {
+const DlTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <h4>Citizens of Planet Mushroom</h4>
@@ -193,7 +193,7 @@ const DlTemplate: Story = () => {
   );
 };
 
-const EmTemplate: Story = () => {
+const EmTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -203,7 +203,7 @@ const EmTemplate: Story = () => {
   );
 };
 
-const EmEmTemplate: Story = () => {
+const EmEmTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -217,7 +217,7 @@ const EmEmTemplate: Story = () => {
   );
 };
 
-const FigureTemplate: Story = () => {
+const FigureTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <figure>
@@ -322,7 +322,7 @@ const FigureTemplate: Story = () => {
   );
 };
 
-const HrTemplate: Story = () => {
+const HrTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -334,7 +334,7 @@ const HrTemplate: Story = () => {
   );
 };
 
-const InsTemplate: Story = () => {
+const InsTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -357,7 +357,7 @@ const InsTemplate: Story = () => {
   );
 };
 
-const KbdTemplate: Story = () => {
+const KbdTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -367,7 +367,7 @@ const KbdTemplate: Story = () => {
   );
 };
 
-const MarkTemplate: Story = () => {
+const MarkTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>Search results for "malfunction":</p>
@@ -398,7 +398,7 @@ const MarkTemplate: Story = () => {
   );
 };
 
-const ParagraphTemplate: Story = () => {
+const ParagraphTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -418,7 +418,7 @@ const ParagraphTemplate: Story = () => {
   );
 };
 
-const PreTemplate: Story = () => {
+const PreTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <pre>const planetColors = mars: 'red', venus: 'yellow'</pre>
@@ -426,7 +426,7 @@ const PreTemplate: Story = () => {
   );
 };
 
-const OlTemplate: Story = () => {
+const OlTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>To initiate launch:</p>
@@ -450,7 +450,7 @@ const OlTemplate: Story = () => {
   );
 };
 
-const QTemplate: Story = () => {
+const QTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -463,7 +463,7 @@ const QTemplate: Story = () => {
   );
 };
 
-const STemplate: Story = () => {
+const STemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -476,7 +476,7 @@ const STemplate: Story = () => {
   );
 };
 
-const SampTemplate: Story = () => {
+const SampTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>Before we crashed, the console displayed:</p>
@@ -491,7 +491,7 @@ const SampTemplate: Story = () => {
   );
 };
 
-const SmallTemplate: Story = () => {
+const SmallTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -501,7 +501,7 @@ const SmallTemplate: Story = () => {
   );
 };
 
-const StrongTemplate: Story = () => {
+const StrongTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -511,7 +511,7 @@ const StrongTemplate: Story = () => {
   );
 };
 
-const SubTemplate: Story = () => {
+const SubTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -522,7 +522,7 @@ const SubTemplate: Story = () => {
   );
 };
 
-const SupTemplate: Story = () => {
+const SupTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>
@@ -545,7 +545,7 @@ const SupTemplate: Story = () => {
   );
 };
 
-const UlTemplate: Story = () => {
+const UlTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>Don't forget to pack:</p>
@@ -569,7 +569,7 @@ const UlTemplate: Story = () => {
   );
 };
 
-const VarTemplate: Story = () => {
+const VarTemplate: StoryFn = () => {
   return (
     <ScopedCssBaseline>
       <p>

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Story } from "@storybook/react";
+import type { StoryFn } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 import {
@@ -22,7 +22,7 @@ import {
 import LinkMdx from "./Link.mdx";
 
 export default {
-  title: `MUI Components/Link`,
+  title: "MUI Components/Link",
   component: Link,
   parameters: {
     docs: {
@@ -47,11 +47,14 @@ export default {
     target: {
       control: "text",
     },
+    onClick: {
+      action: true,
+    },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const Template: Story<LinkProps> = (props) => <Link {...props} />;
+const Template: StoryFn<LinkProps> = (props) => <Link {...props} />;
 
 export const Default = Template.bind({});
 Default.args = {

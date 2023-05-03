@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { createElement } from "react";
 import {
   Icon,
@@ -26,7 +26,7 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 const storybookMeta: Meta<IconProps> = {
-  title: `MUI Components/Icon`,
+  title: "MUI Components/Icon",
   component: Icon,
   decorators: [MuiThemeDecorator],
   argTypes: {
@@ -184,7 +184,7 @@ const icons: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   },
 ];
 
-export const Library: Story<IconProps> = () => (
+export const Library: StoryFn<IconProps> = () => (
   <TableContainer>
     <Table>
       <TableHead>

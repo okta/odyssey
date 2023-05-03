@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { SearchField, SearchFieldProps } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import SearchFieldMdx from "./SearchField.mdx";
 
 const storybookMeta: Meta<SearchFieldProps> = {
-  title: `MUI Components/Forms/SearchField`,
+  title: "MUI Components/Forms/SearchField",
   component: SearchField,
   parameters: {
     docs: {
@@ -27,18 +27,22 @@ const storybookMeta: Meta<SearchFieldProps> = {
   argTypes: {
     autoCompleteType: {
       control: "text",
+      defaultValue: "name",
     },
     hasInitialFocus: {
       control: "boolean",
+      defaultValue: false,
     },
     isDisabled: {
       control: "boolean",
+      defaultValue: false,
     },
     id: {
       control: "text",
     },
     label: {
       control: "text",
+      defaultValue: "Destination",
     },
     onBlur: {
       control: "function",
@@ -61,7 +65,7 @@ const storybookMeta: Meta<SearchFieldProps> = {
 
 export default storybookMeta;
 
-const Template: Story<SearchFieldProps> = (args) => {
+const Template: StoryFn<SearchFieldProps> = (args) => {
   return <SearchField {...args} />;
 };
 

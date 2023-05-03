@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import {
   InputAdornment,
   TextField,
@@ -21,7 +21,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TextFieldMdx from "./TextField.mdx";
 
 const storybookMeta: Meta<TextFieldProps> = {
-  title: `MUI Components/Forms/TextField`,
+  title: "MUI Components/Forms/TextField",
   component: TextField,
   parameters: {
     docs: {
@@ -35,9 +35,11 @@ const storybookMeta: Meta<TextFieldProps> = {
     },
     hasInitialFocus: {
       control: "boolean",
+      defaultValue: false,
     },
     isDisabled: {
       control: "boolean",
+      defaultValue: false,
     },
     endAdornment: {
       control: "text",
@@ -57,6 +59,7 @@ const storybookMeta: Meta<TextFieldProps> = {
     },
     isMultiline: {
       control: "boolean",
+      defaultValue: false,
     },
     onBlur: {
       control: "function",
@@ -98,7 +101,7 @@ const storybookMeta: Meta<TextFieldProps> = {
 
 export default storybookMeta;
 
-const Template: Story<TextFieldProps> = (args) => {
+const Template: StoryFn<TextFieldProps> = (args) => {
   return <TextField {...args} />;
 };
 

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import {
   Infobox,
   InfoboxProps,
@@ -22,7 +22,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import InfoboxMdx from "./Infobox.mdx";
 
 const storybookMeta: Meta<InfoboxProps> = {
-  title: `MUI Components/Alerts/Infobox`,
+  title: "MUI Components/Alerts/Infobox",
   component: Infobox,
   parameters: {
     docs: {
@@ -51,7 +51,7 @@ const storybookMeta: Meta<InfoboxProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: Story<InfoboxProps> = (args) => {
+const DefaultTemplate: StoryFn<InfoboxProps> = (args) => {
   return (
     <Infobox severity={args.severity} role={args.role} title={args.title}>
       {args.children}

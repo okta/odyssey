@@ -11,7 +11,7 @@
  */
 
 import * as React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import {
   Box,
   Checkbox,
@@ -30,8 +30,9 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import SelectMdx from "./Select.mdx";
 
+// FIXME needs SelectProps
 const storybookMeta: Meta = {
-  title: `MUI Components/Forms/Select`,
+  title: "MUI Components/Forms/Select",
   component: Select,
   parameters: {
     docs: {
@@ -91,7 +92,7 @@ const exodestinations = [
   "New Terra",
 ];
 
-const Template: Story = (args) => {
+const Template: StoryFn = (args) => {
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
@@ -120,7 +121,7 @@ const Template: Story = (args) => {
   );
 };
 
-const GroupedTemplate: Story = (args) => {
+const GroupedTemplate: StoryFn = (args) => {
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
@@ -156,7 +157,7 @@ const GroupedTemplate: Story = (args) => {
   );
 };
 
-const MultiTemplate: Story = (args) => {
+const MultiTemplate: StoryFn = (args) => {
   const [destinationName, setDestinationName] = React.useState<string[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof destinationName>) => {
@@ -208,7 +209,7 @@ const MultiTemplate: Story = (args) => {
   );
 };
 
-const NativeTemplate: Story = (args) => {
+const NativeTemplate: StoryFn = (args) => {
   return (
     <FormControl disabled={args.disabled} error={args.invalid}>
       <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>

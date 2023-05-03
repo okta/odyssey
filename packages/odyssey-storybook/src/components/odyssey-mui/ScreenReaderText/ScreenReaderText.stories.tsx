@@ -11,13 +11,13 @@
  */
 
 import { ScreenReaderText } from "@okta/odyssey-react-mui";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import ScreenReaderTextMdx from "./ScreenReaderText.mdx";
 
-const storybookMeta: ComponentMeta<typeof ScreenReaderText> = {
-  title: `MUI Components/ScreenReaderText`,
+const storybookMeta: Meta<typeof ScreenReaderText> = {
+  title: "MUI Components/ScreenReaderText",
   component: ScreenReaderText,
   parameters: {
     docs: {
@@ -35,7 +35,7 @@ const storybookMeta: ComponentMeta<typeof ScreenReaderText> = {
 
 export default storybookMeta;
 
-const Template: ComponentStory<typeof ScreenReaderText> = (args) => {
+const Template: StoryFn<typeof ScreenReaderText> = (args) => {
   return (
     <>
       The following text is visually hidden:

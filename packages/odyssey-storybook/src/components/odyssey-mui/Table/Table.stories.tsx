@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import * as React from "react";
 import {
   Button,
@@ -29,7 +29,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TableMdx from "./Table.mdx";
 
 const storybookMeta: Meta<TableProps> = {
-  title: `MUI Components/Table`,
+  title: "MUI Components/Table",
   component: Table,
   parameters: {
     docs: {
@@ -298,7 +298,7 @@ function EnhancedTable() {
   );
 }
 
-const DefaultTemplate: Story = () => {
+const DefaultTemplate: StoryFn = () => {
   return (
     <TableContainer>
       <Typography component="figcaption" variant="h4">
@@ -338,7 +338,7 @@ const DefaultTemplate: Story = () => {
 export const Default = DefaultTemplate.bind({});
 Default.args = {};
 
-const RowHeadingTemplate: Story = () => {
+const RowHeadingTemplate: StoryFn = () => {
   return (
     <TableContainer>
       <Typography component="figcaption" variant="h4">
@@ -378,7 +378,7 @@ const RowHeadingTemplate: Story = () => {
 export const RowHeadings = RowHeadingTemplate.bind({});
 RowHeadings.args = {};
 
-const RowGroupingTemplate: Story = () => {
+const RowGroupingTemplate: StoryFn = () => {
   return (
     <TableContainer>
       <Typography component="figcaption" variant="h4">
@@ -441,7 +441,7 @@ const RowGroupingTemplate: Story = () => {
 export const RowGroupings = RowGroupingTemplate.bind({});
 RowGroupings.args = {};
 
-const EnhancedTemplate: Story = () => {
+const EnhancedTemplate: StoryFn = () => {
   return <EnhancedTable />;
 };
 

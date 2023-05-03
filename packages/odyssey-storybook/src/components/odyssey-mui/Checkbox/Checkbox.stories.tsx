@@ -16,8 +16,8 @@ import { Meta, Story } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import CheckboxMdx from "./Checkbox.mdx";
 
-export default {
-  title: `MUI Components/Forms/Checkbox`,
+const storybookMeta: Meta<CheckboxProps> = {
+  title: "MUI Components/Forms/Checkbox",
   component: Checkbox,
   parameters: {
     docs: {
@@ -42,11 +42,12 @@ export default {
     },
   },
   decorators: [MuiThemeDecorator],
-} as Meta<CheckboxProps>;
-
-const Template: Story<CheckboxProps> = (args) => {
-  return <Checkbox {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {};
+export default storybookMeta;
+
+export const Default: StoryObj<typeof Checkbox> = {
+  args: {
+    label: "I agree to the terms and conditions",
+  },
+};

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { Button, Toast, ToastProps, ToastStack } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 
@@ -18,7 +18,7 @@ import ToastMdx from "./Toast.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<ToastProps> = {
-  title: `MUI Components/Alerts/Toast`,
+  title: "MUI Components/Alerts/Toast",
   component: Toast,
   parameters: {
     docs: {
@@ -55,7 +55,7 @@ const storybookMeta: Meta<ToastProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: Story<ToastProps> = (args) => {
+const DefaultTemplate: StoryFn<ToastProps> = (args) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const openToast = useCallback(() => {
@@ -91,7 +91,7 @@ DefaultTemplate.args = {
   text: "The mission to Sagittarius A is set for January 7.",
 };
 
-const StaticTemplate: Story<ToastProps> = (args) => {
+const StaticTemplate: StoryFn<ToastProps> = (args) => {
   return <Toast {...args}></Toast>;
 };
 
@@ -104,7 +104,7 @@ StaticTemplate.args = {
   text: "The mission to Sagittarius A is set for January 7.",
 };
 
-const MultipleTemplate: Story<ToastProps> = () => {
+const MultipleTemplate: StoryFn<ToastProps> = () => {
   const [toasts, setToasts] = useState([
     <Toast
       isDismissable

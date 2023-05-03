@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import {
   Button,
   Dialog,
@@ -23,7 +23,7 @@ import DialogMdx from "./Dialog.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<DialogProps> = {
-  title: `MUI Components/Dialog`,
+  title: "MUI Components/Dialog",
   component: Dialog,
   parameters: {
     docs: {
@@ -63,7 +63,7 @@ const storybookMeta: Meta<DialogProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: Story<DialogProps> = (args) => {
+const DefaultTemplate: StoryFn<DialogProps> = (args) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const onOpen = () => {

@@ -22,7 +22,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TooltipMdx from "./Tooltip.mdx";
 
 const storybookMeta: Meta<TooltipProps> = {
-  title: `MUI Components/Tooltip`,
+  title: "MUI Components/Tooltip",
   component: Tooltip,
   parameters: {
     docs: {
@@ -58,7 +58,7 @@ const storybookMeta: Meta<TooltipProps> = {
 
 export default storybookMeta;
 
-const Template: Story<TooltipProps> = (args) => {
+const Template: StoryFn<TooltipProps> = (args) => {
   return (
     <Tooltip
       text={args.text}
@@ -96,7 +96,7 @@ Disabled.args = {
   text: "You don't have access to these logs",
 };
 
-const PlacementTemplate: Story<TooltipProps> = () => {
+const PlacementTemplate: StoryFn<TooltipProps> = () => {
   return (
     <>
       <Tooltip text="Top" placement="top" ariaType="label">
