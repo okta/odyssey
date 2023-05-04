@@ -47,6 +47,7 @@ const Checkbox = ({
   <FormControlLabel
     aria-label={ariaLabel}
     aria-labelledby={ariaLabelledBy}
+    aria-required={!isOptional}
     checked={isChecked}
     className={hasError ? "Mui-error" : ""}
     control={
