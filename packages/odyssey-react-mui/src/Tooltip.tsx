@@ -30,8 +30,8 @@ export const Tooltip = ({
   placement,
 }: TooltipProps) => (
   <MuiTooltip
-    placement={placement}
     describeChild={ariaType === "description"}
+    placement={placement}
     title={text}
   >
     <MuiPropsChild>{children}</MuiPropsChild>
