@@ -13,7 +13,7 @@
 import { Tooltip as MuiTooltip } from "@mui/material";
 import type { TooltipProps as MuiTooltipProps } from "@mui/material";
 
-import { RefChild } from "./RefChild";
+import { MuiPropsChild } from "./MuiPropsChild";
 import { ReactElement } from "react";
 
 export type TooltipProps = {
@@ -34,6 +34,6 @@ export const Tooltip = ({
     describeChild={ariaType === "description"}
     title={text}
   >
-    <RefChild>{children}</RefChild>
+    <MuiPropsChild>{children}</MuiPropsChild>
   </MuiTooltip>
 );

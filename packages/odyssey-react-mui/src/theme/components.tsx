@@ -243,6 +243,7 @@ export const components: ThemeOptions["components"] = {
           "&:disabled": {
             color: theme.palette.common.white,
             backgroundColor: theme.palette.primary.light,
+            pointerEvents: "initial",
           },
         }),
       },
