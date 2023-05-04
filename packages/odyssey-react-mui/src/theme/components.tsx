@@ -1556,9 +1556,6 @@ export const components: ThemeOptions["components"] = {
         },
         ".Mui-error > &": {
           borderColor: theme.palette.error.main,
-          "&::before": {
-            backgroundColor: theme.palette.error.main,
-          },
 
           "&.Mui-focusVisible": {
             boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.error.main}`,
