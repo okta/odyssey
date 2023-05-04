@@ -25,17 +25,20 @@ const storybookMeta: ComponentMeta<typeof RadioGroup> = {
     },
   },
   argTypes: {
+    children: {
+      control: "text",
+    },
+    defaultValue: {
+      control: "text",
+    },
     errorMessage: {
       control: "text",
-      defaultValue: null,
     },
     hint: {
       control: "text",
-      defaultValue: null,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
     },
     label: {
       control: "text",
@@ -50,7 +53,6 @@ const storybookMeta: ComponentMeta<typeof RadioGroup> = {
     },
     value: {
       control: "text",
-      defaultValue: "Value",
     },
   },
   decorators: [MuiThemeDecorator],

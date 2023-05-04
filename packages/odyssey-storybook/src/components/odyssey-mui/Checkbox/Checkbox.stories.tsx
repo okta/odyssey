@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Checkbox } from "@okta/odyssey-react-mui";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Checkbox, CheckboxProps } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import CheckboxMdx from "./Checkbox.mdx";
 
-const storybookMeta: ComponentMeta<typeof Checkbox> = {
+export default {
   title: `MUI Components/Forms/Checkbox`,
   component: Checkbox,
   parameters: {
@@ -42,11 +42,9 @@ const storybookMeta: ComponentMeta<typeof Checkbox> = {
     },
   },
   decorators: [MuiThemeDecorator],
-};
+} as Meta<CheckboxProps>;
 
-export default storybookMeta;
-
-const Template: ComponentStory<typeof Checkbox> = (args) => {
+const Template: Story<CheckboxProps> = (args) => {
   return <Checkbox {...args} />;
 };
 

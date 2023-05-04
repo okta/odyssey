@@ -10,11 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  FormControl as MuiFormControl,
-  FormGroup as MuiFormGroup,
-  FormLabel as MuiFormLabel,
-} from "@mui/material";
+import { FormGroup as MuiFormGroup } from "@mui/material";
 import { memo, ReactElement, useCallback } from "react";
 
 import { Checkbox } from "./Checkbox";

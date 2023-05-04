@@ -6080,7 +6080,10 @@ __metadata:
     "@babel/core": ^7.19.3
     "@emotion/react": ^11.10.4
     "@emotion/styled": ^11.10.4
+    "@mui/icons-material": ^5.11.0
+    "@mui/lab": ^5.0.0-alpha.117
     "@mui/material": ^5.11.6
+    "@mui/utils": ^5.11.2
     "@mui/x-date-pickers": ^5.0.15
     "@okta/browserslist-config-odyssey": "workspace:*"
     "@okta/odyssey-babel-preset": "workspace:*"

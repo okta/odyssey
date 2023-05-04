@@ -25,10 +25,6 @@ import { Field } from "./Field";
 
 export type PasswordFieldProps = {
   /**
-   * If `true`, the component will receive focus automatically.
-   */
-  autoFocus?: boolean;
-  /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
@@ -38,6 +34,10 @@ export type PasswordFieldProps = {
    * If `error` is not undefined, the `input` will indicate an error.
    */
   errorMessage?: string;
+  /**
+   * If `true`, the component will receive focus automatically.
+   */
+  hasInitialFocus?: boolean;
   /**
    * The helper text content.
    */
@@ -51,13 +51,13 @@ export type PasswordFieldProps = {
    */
   isDisabled?: boolean;
   /**
+   * If `true`, the `input` element is not required.
+   */
+  isOptional?: boolean;
+  /**
    * It prevents the user from changing the value of the field
    */
   isReadOnly?: boolean;
-  /**
-   * If `true`, the `input` element is required.
-   */
-  isRequired?: boolean;
   /**
    * The label for the `input` element.
    */
@@ -88,11 +88,12 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
     {
       autoCompleteType,
-      autoFocus,
       errorMessage,
+      hasInitialFocus,
       hint,
       id: idOverride,
       isDisabled = false,
+      isOptional = false,
       isReadOnly,
       label,
       onChange,
@@ -117,7 +118,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
-          autoFocus={autoFocus}
+          autoFocus={hasInitialFocus}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -137,19 +138,21 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}
+          required={!isOptional}
           type={inputType}
           value={value}
         />
       ),
       [
         autoCompleteType,
-        autoFocus,
+        hasInitialFocus,
         togglePasswordVisibility,
         inputType,
         onChange,
         onFocus,
         onBlur,
         placeholder,
+        isOptional,
         isReadOnly,
         ref,
         value,
@@ -164,6 +167,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
+        isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}
       />

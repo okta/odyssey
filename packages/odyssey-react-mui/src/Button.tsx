@@ -12,8 +12,11 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { Icon, Tooltip } from "./";
-import { ReactElement, memo } from "react";
+import { memo, ReactElement, RefObject, useContext, useMemo } from "react";
+
+import { RefContext } from "./RefContext";
+import { Tooltip } from "./Tooltip";
+import { Icon } from "./Icon";
 
 export type ButtonProps = {
   endIcon?: ReactElement<typeof Icon>;
@@ -43,25 +46,42 @@ const Button = ({
   tooltipText,
   variant,
 }: ButtonProps) => {
-  const button = (
-    <MuiButton
-      disabled={isDisabled}
-      endIcon={endIcon}
-      fullWidth={isFullWidth}
-      id={id}
-      onClick={onClick}
-      size={size}
-      startIcon={startIcon}
-      variant={variant}
-    >
-      {text}
-    </MuiButton>
+  const { ref } = useContext(RefContext);
+
+  const button = useMemo(
+    () => (
+      <MuiButton
+        disabled={isDisabled}
+        endIcon={endIcon}
+        fullWidth={isFullWidth}
+        id={id}
+        ref={ref as RefObject<HTMLButtonElement>}
+        onClick={onClick}
+        size={size}
+        startIcon={startIcon}
+        variant={variant}
+      >
+        {text}
+      </MuiButton>
+    ),
+    [
+      endIcon,
+      id,
+      isDisabled,
+      isFullWidth,
+      onClick,
+      ref,
+      size,
+      startIcon,
+      text,
+      variant,
+    ]
   );
 
   return (
     <>
       {tooltipText && (
-        <Tooltip describeChild placement="top" title={tooltipText}>
+        <Tooltip ariaType="description" placement="top" text={tooltipText}>
           {button}
         </Tooltip>
       )}

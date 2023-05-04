@@ -10,17 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  FormControl as MuiFormControl,
-  FormLabel as MuiFormLabel,
-  RadioGroup as MuiRadioGroup,
-} from "@mui/material";
+import { RadioGroup as MuiRadioGroup } from "@mui/material";
 import { ChangeEventHandler, memo, ReactElement, useCallback } from "react";
 
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
 
-export interface RadioGroupProps {
+export type RadioGroupProps = {
   /**
    * The <Radio> components within the group. Must include two or more.
    */
@@ -57,7 +53,7 @@ export interface RadioGroupProps {
    * The `value` on the selected radio button.
    */
   value?: RadioProps["value"];
-}
+};
 
 const RadioGroup = ({
   children,

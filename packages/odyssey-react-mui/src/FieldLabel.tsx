@@ -20,7 +20,7 @@ export type FieldLabelProps = {
   hasVisibleLabel: boolean;
   id: string;
   inputId: string;
-  isRequired: boolean;
+  isOptional: boolean;
   optionalText?: string;
   text: string;
 };
@@ -29,7 +29,7 @@ const FieldLabel = ({
   hasVisibleLabel,
   id,
   inputId,
-  isRequired,
+  isOptional,
   optionalText,
   text,
 }: FieldLabelProps) => {
@@ -37,12 +37,12 @@ const FieldLabel = ({
     () => (
       <MuiInputLabel htmlFor={inputId} id={id}>
         {text}
-        {!isRequired && (
+        {isOptional && (
           <Typography variant="subtitle1">{optionalText}</Typography>
         )}
       </MuiInputLabel>
     ),
-    [id, inputId, isRequired, optionalText, text]
+    [id, inputId, isOptional, optionalText, text]
   );
 
   return hasVisibleLabel ? (

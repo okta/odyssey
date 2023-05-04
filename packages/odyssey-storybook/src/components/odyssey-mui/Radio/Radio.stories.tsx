@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio } from "@okta/odyssey-react-mui";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Radio, RadioProps } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import RadioMdx from "./Radio.mdx";
 
-const storybookMeta: ComponentMeta<typeof Radio> = {
+const storybookMeta: Meta<RadioProps> = {
   title: `MUI Components/Forms/Radio`,
   component: Radio,
   parameters: {
@@ -25,13 +25,26 @@ const storybookMeta: ComponentMeta<typeof Radio> = {
     },
   },
   argTypes: {
+    isChecked: {
+      control: "boolean",
+    },
+    isDefaultChecked: {
+      control: "boolean",
+    },
+    isDisabled: {
+      control: "boolean",
+    },
+    hasError: {
+      control: "boolean",
+    },
     label: {
       control: "text",
-      defaultValue: "Label",
+    },
+    name: {
+      control: "text",
     },
     value: {
       control: "text",
-      defaultValue: "Value",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -39,9 +52,12 @@ const storybookMeta: ComponentMeta<typeof Radio> = {
 
 export default storybookMeta;
 
-const Template: ComponentStory<typeof Radio> = (args) => {
+const Template: Story<RadioProps> = (args) => {
   return <Radio label={args.label} value={args.value} />;
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  label: "Label",
+  value: "Value",
+};
