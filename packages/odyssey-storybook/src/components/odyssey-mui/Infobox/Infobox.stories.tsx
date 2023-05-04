@@ -32,6 +32,8 @@ const storybookMeta: Meta<InfoboxProps> = {
   argTypes: {
     children: {
       control: "text",
+      defaultValue:
+        "You are currently logged in from Moonbase Alpha-6, located on Luna.",
     },
     role: {
       control: "radio",
@@ -57,11 +59,6 @@ const DefaultTemplate: Story<InfoboxProps> = (args) => {
       {args.children}
     </Infobox>
   );
-};
-
-DefaultTemplate.args = {
-  children:
-    "You are currently logged in from Moonbase Alpha-6, located on Luna.",
 };
 
 export const Info = DefaultTemplate.bind({});
