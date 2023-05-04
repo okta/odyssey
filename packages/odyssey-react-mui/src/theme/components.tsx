@@ -1338,6 +1338,7 @@ export const components: ThemeOptions["components"] = {
       root: ({ theme }) => ({
         color: theme.palette.primary.main,
         textDecoration: "underline",
+        cursor: "pointer",
 
         "&:hover": {
           color: theme.palette.primary.dark,
