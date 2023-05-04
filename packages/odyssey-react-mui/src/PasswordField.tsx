@@ -162,6 +162,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     return (
       <Field
         errorMessage={errorMessage}
+        fieldType="single"
         hasVisibleLabel
         hint={hint}
         id={idOverride}
