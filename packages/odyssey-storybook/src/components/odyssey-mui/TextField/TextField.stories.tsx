@@ -11,11 +11,7 @@
  */
 
 import { Meta, Story } from "@storybook/react";
-import {
-  InputAdornment,
-  TextField,
-  TextFieldProps,
-} from "@okta/odyssey-react-mui";
+import { TextField, TextFieldProps } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TextFieldMdx from "./TextField.mdx";
@@ -137,7 +133,7 @@ Hint.args = {
 export const Adornment = Template.bind({});
 Adornment.args = {
   label: "Cargo weight",
-  endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+  endAdornment: "kg",
 };
 
 // Types
@@ -159,6 +155,6 @@ export const Tel = Template.bind({});
 Tel.args = {
   autoCompleteType: "mobile tel",
   label: "Phone number",
-  startAdornment: <InputAdornment position="start">+1</InputAdornment>,
+  startAdornment: "+1",
   type: "tel",
 };
