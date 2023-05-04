@@ -243,6 +243,7 @@ export const components: ThemeOptions["components"] = {
           "&:disabled": {
             color: theme.palette.common.white,
             backgroundColor: theme.palette.primary.light,
+            pointerEvents: "initial",
           },
         }),
       },
@@ -384,6 +385,15 @@ export const components: ThemeOptions["components"] = {
           boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.primary.main}`,
           outline: "2px solid transparent",
           outlineOffset: "1px",
+        },
+
+        "&:disabled": {
+          cursor: "not-allowed",
+          pointerEvents: "initial",
+        },
+
+        "&:disabled:active": {
+          pointerEvents: "none",
         },
 
         [`.${buttonClasses.startIcon}, .${buttonClasses.endIcon}`]: {
