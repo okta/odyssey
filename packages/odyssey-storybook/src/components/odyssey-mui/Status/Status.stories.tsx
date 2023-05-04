@@ -10,20 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { Status, StatusProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
-import StatusMdx from "./Status.mdx";
 
 const storybookMeta: Meta<StatusProps> = {
   title: "MUI Components/Status",
   component: Status,
-  parameters: {
-    docs: {
-      page: StatusMdx,
-    },
-  },
   argTypes: {
     label: {
       control: "text",
@@ -40,27 +33,29 @@ const storybookMeta: Meta<StatusProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: StoryFn<StatusProps> = (args) => {
-  return <Status label={args.label} severity={args.severity} />;
+export const Default: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive in standby",
+  },
 };
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
-
-export const Error = DefaultTemplate.bind({});
-Error.args = {
-  label: "Warp drive unstable",
-  severity: "error",
+export const Error: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive unstable",
+    severity: "error",
+  },
 };
 
-export const Success = DefaultTemplate.bind({});
-Success.args = {
-  label: "Warp drive online",
-  severity: "success",
+export const Success: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive online",
+    severity: "success",
+  },
 };
 
-export const Warning = DefaultTemplate.bind({});
-Warning.args = {
-  label: "Warp fuel low",
-  severity: "warning",
+export const Warning: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp fuel low",
+    severity: "warning",
+  },
 };

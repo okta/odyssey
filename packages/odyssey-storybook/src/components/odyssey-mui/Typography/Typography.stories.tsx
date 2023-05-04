@@ -46,61 +46,61 @@ export const Heading1: StoryObj<TypographyProps> = {
   args: {
     children: "Heading 1",
     variant: "h1",
-  }
-}
+  },
+};
 
 export const Heading2: StoryObj<TypographyProps> = {
   args: {
     children: "Heading 2",
     variant: "h2",
-  }
-}
+  },
+};
 
 export const Heading3: StoryObj<TypographyProps> = {
   args: {
     children: "Heading 3",
     variant: "h3",
-  }
-}
+  },
+};
 
 export const Heading4: StoryObj<TypographyProps> = {
   args: {
     children: "Heading 4",
     variant: "h4",
-  }
-}
+  },
+};
 
 export const Heading5: StoryObj<TypographyProps> = {
   args: {
     children: "Heading 5",
     variant: "h5",
-  }
-}
+  },
+};
 
 export const Heading6: StoryObj<TypographyProps> = {
   args: {
     children: "Heading 6",
     variant: "h6",
-  }
-}
+  },
+};
 
 export const Body: StoryObj<TypographyProps> = {
   args: {
     children: "This is body copy.",
     variant: "body1",
-  }
-}
+  },
+};
 
 export const Caption: StoryObj<TypographyProps> = {
   args: {
     children: "This is a caption.",
     variant: "subtitle1",
-  }
-}
+  },
+};
 
 export const Legend: StoryObj<TypographyProps> = {
   args: {
     children: "This is a legend",
     variant: "legend",
-  }
-}
+  },
+};

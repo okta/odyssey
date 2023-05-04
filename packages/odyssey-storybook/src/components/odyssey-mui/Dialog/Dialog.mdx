@@ -1,6 +1,8 @@
-import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Dialog.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Dialog" anchor />
 
 # Dialog
 
@@ -11,19 +13,19 @@ UI that appears on top of the main content and moves the system into a mode requ
 Dialogs are inserted above the main content as a blocking mechanism to ask for user input or confirm an action. They disable all other contexts until the user interacts with the dialog itself.
 
 <Canvas>
-  <Story id="mui-components-dialog--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 While dialogs should contain concise, actionable content, longer dialogs are also supported:
 
 <Canvas>
-  <Story id="mui-components-dialog--long" />
+  <Story of={Stories.Long} />
 </Canvas>
 
 A dialog may include up to three footer buttons (one primary, one secondary, and one tertiary), or as few as zero:
 
 <Canvas>
-  <Story id="mui-components-dialog--no-buttons" />
+  <Story of={Stories.NoButtons} />
 </Canvas>
 
 ### Arrival

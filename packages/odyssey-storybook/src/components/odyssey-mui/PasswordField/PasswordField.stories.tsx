@@ -10,20 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { PasswordField, PasswordFieldProps } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import PasswordFieldMdx from "./PasswordField.mdx";
 
 const storybookMeta: Meta<PasswordFieldProps> = {
   title: "MUI Components/Forms/PasswordField",
   component: PasswordField,
-  parameters: {
-    docs: {
-      page: PasswordFieldMdx,
-    },
-  },
   argTypes: {
     autoCompleteType: {
       control: "text",
@@ -76,12 +70,9 @@ const storybookMeta: Meta<PasswordFieldProps> = {
 
 export default storybookMeta;
 
-const Template: StoryFn<typeof PasswordField> = (args) => {
-  return <PasswordField {...args} />;
-};
-
-export const Default = Template.bind({});
-Default.args = {
-  autoCompleteType: "current-password",
-  label: "Password",
+export const Default: StoryObj<PasswordFieldProps> = {
+  args: {
+    autoCompleteType: "current-password",
+    label: "Password",
+  },
 };

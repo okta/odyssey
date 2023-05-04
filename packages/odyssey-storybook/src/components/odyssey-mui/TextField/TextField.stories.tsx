@@ -10,23 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import {
   TextField,
   TextFieldProps,
 } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import TextFieldMdx from "./TextField.mdx";
 
 const storybookMeta: Meta<TextFieldProps> = {
   title: "MUI Components/Forms/TextField",
   component: TextField,
-  parameters: {
-    docs: {
-      page: TextFieldMdx,
-    },
-  },
   argTypes: {
     autoCompleteType: {
       control: "text",
@@ -96,67 +90,75 @@ const storybookMeta: Meta<TextFieldProps> = {
 
 export default storybookMeta;
 
-const Template: StoryFn<TextFieldProps> = (args) => {
-  return <TextField {...args} />;
-};
-
 // States
 
-export const Default = Template.bind({});
-Default.args = {};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  isDisabled: true,
-  value: "Earth",
+export const Default: StoryObj<TextFieldProps> = {
+  args: {
+    //
+  },
 };
 
-export const Optional = Template.bind({});
-Optional.args = {
-  isOptional: true,
+export const Disabled: StoryObj<TextFieldProps> = {
+  args: {
+    isDisabled: true,
+    value: "Earth",
+  },
 };
 
-export const ReadOnly = Template.bind({});
-ReadOnly.args = {
-  isReadOnly: true,
-  value: "Earth",
+export const Optional: StoryObj<TextFieldProps> = {
+  args: {
+    isOptional: true,
+  },
 };
 
-export const Error = Template.bind({});
-Error.args = {
-  errorMessage: "This field is required.",
+export const ReadOnly: StoryObj<TextFieldProps> = {
+  args: {
+    isReadOnly: true,
+    value: "Earth",
+  },
 };
 
-export const Hint = Template.bind({});
-Hint.args = {
-  hint: "Specify your destination within the Sol system.",
+export const Error: StoryObj<TextFieldProps> = {
+  args: {
+    errorMessage: "This field is required.",
+  },
 };
 
-export const Adornment = Template.bind({});
-Adornment.args = {
-  label: "Cargo weight",
-  endAdornment: "kg",
+export const Hint: StoryObj<TextFieldProps> = {
+  args: {
+    hint: "Specify your destination within the Sol system.",
+  },
+};
+
+export const Adornment: StoryObj<TextFieldProps> = {
+  args: {
+    label: "Cargo weight",
+    endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+  },
 };
 
 // Types
-export const Email = Template.bind({});
-Email.args = {
-  autoCompleteType: "work email",
-  label: "Company email",
-  type: "email",
+export const Email: StoryObj<TextFieldProps> = {
+  args: {
+    autoCompleteType: "work email",
+    label: "Company email",
+    type: "email",
+  },
 };
 
-export const Multiline = Template.bind({});
-Multiline.args = {
-  autoCompleteType: "shipping street-address",
-  label: "Permanent residence",
-  isMultiline: true,
+export const Multiline: StoryObj<TextFieldProps> = {
+  args: {
+    autoCompleteType: "shipping street-address",
+    label: "Permanent residence",
+    isMultiline: true,
+  },
 };
 
-export const Tel = Template.bind({});
-Tel.args = {
-  autoCompleteType: "mobile tel",
-  label: "Phone number",
-  startAdornment: "+1",
-  type: "tel",
+export const Tel: StoryObj<TextFieldProps> = {
+  args: {
+    autoCompleteType: "mobile tel",
+    label: "Phone number",
+    startAdornment: <InputAdornment position="start">+1</InputAdornment>,
+    type: "tel",
+  },
 };

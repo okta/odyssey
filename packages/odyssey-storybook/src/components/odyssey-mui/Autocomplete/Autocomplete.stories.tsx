@@ -11,19 +11,13 @@
  */
 
 import { Autocomplete, AutocompleteProps } from "@okta/odyssey-react-mui";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import AutocompleteMdx from "./Autocomplete.mdx";
 
 const storybookMeta: Meta<typeof Autocomplete> = {
   title: "MUI Components/Forms/Autocomplete",
   component: Autocomplete,
-  parameters: {
-    docs: {
-      page: AutocompleteMdx,
-    },
-  },
   argTypes: {
     label: {
       control: "text",
@@ -56,7 +50,6 @@ export default storybookMeta;
 
 type StationType = { label: string };
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },
   { label: "Bara Gaon Complex" },
@@ -91,54 +84,63 @@ type AutocompleteType = AutocompleteProps<
   boolean | undefined
 >;
 
-const Template: StoryFn<AutocompleteType> = (args) => {
-  return <Autocomplete {...args} options={stations} />;
+export const Default: StoryObj<AutocompleteType> = {
+  render: function C(props) {
+    return <Autocomplete {...props} options={stations} />;
+  },
 };
 
-const EmptyTemplate: StoryFn<AutocompleteType> = (args) => {
-  return <Autocomplete {...args} options={[]} />;
+export const Disabled: StoryObj<AutocompleteType> = {
+  ...Default,
+  args: {
+    isDisabled: true,
+    value: { label: "Tycho Station" },
+  },
 };
 
-export const Default = Template.bind({});
-Default.args = {};
-
-export const disabled = Template.bind({});
-disabled.args = {
-  isDisabled: true,
-  value: { label: "Tycho Station" },
+export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
+  ...Default,
+  args: {
+    isCustomValueAllowed: true,
+  },
 };
 
-export const isCustomValueAllowed = Template.bind({});
-isCustomValueAllowed.args = {
-  isCustomValueAllowed: true,
+export const Loading: StoryObj<AutocompleteType> = {
+  ...Default,
+  args: {
+    isLoading: true,
+  },
 };
 
-export const loading = EmptyTemplate.bind({});
-loading.args = {
-  isLoading: true,
+export const Multiple: StoryObj<AutocompleteType> = {
+  ...Default,
+  args: {
+    hasMultipleChoices: true,
+  },
 };
 
-export const multiple = Template.bind({});
-multiple.args = {
-  hasMultipleChoices: true,
+export const MultipleDisabled: StoryObj<AutocompleteType> = {
+  ...Default,
+  args: {
+    hasMultipleChoices: true,
+    isDisabled: true,
+    value: [{ label: "Tycho Station" }],
+  },
 };
 
-export const multipleDisabled = Template.bind({});
-multipleDisabled.args = {
-  hasMultipleChoices: true,
-  isDisabled: true,
-  value: [{ label: "Tycho Station" }],
+export const MultipleReadOnly: StoryObj<AutocompleteType> = {
+  ...Default,
+  args: {
+    hasMultipleChoices: true,
+    isReadOnly: true,
+    value: [{ label: "Tycho Station" }],
+  },
 };
 
-export const multipleReadOnly = Template.bind({});
-multipleReadOnly.args = {
-  hasMultipleChoices: true,
-  isReadOnly: true,
-  value: [{ label: "Tycho Station" }],
-};
-
-export const readOnly = Template.bind({});
-readOnly.args = {
-  isReadOnly: true,
-  value: { label: "Tycho Station" },
+export const ReadOnly: StoryObj<AutocompleteType> = {
+  ...Default,
+  args: {
+    isReadOnly: true,
+    value: { label: "Tycho Station" },
+  },
 };
