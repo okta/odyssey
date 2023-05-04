@@ -37,16 +37,16 @@ const storybookMeta: ComponentMeta<typeof RadioGroup> = {
     hint: {
       control: "text",
     },
+    id: {
+      control: "text",
+      defaultValue: "storybook-radio",
+    },
     isDisabled: {
       control: "boolean",
     },
     label: {
       control: "text",
       defaultValue: "Speed",
-    },
-    name: {
-      control: "text",
-      defaultValue: "storybook-radio",
     },
     onChange: {
       control: "function",
