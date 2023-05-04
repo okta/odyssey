@@ -1068,7 +1068,6 @@ export const components: ThemeOptions["components"] = {
   MuiFormControlLabel: {
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
-        gap: theme.spacing(2),
         marginInlineStart: 0,
         marginInlineEnd: 0, // used for row presentation of radio/checkbox
         ...(ownerState.labelPlacement === "start" && {
@@ -1105,6 +1104,15 @@ export const components: ThemeOptions["components"] = {
           {
             color: theme.palette.error.dark,
           },
+      }),
+      label: ({ theme }) => ({
+        "&:not(:first-child)": {
+          marginInlineStart: theme.spacing(2),
+        },
+      }),
+      asterisk: ({ theme }) => ({
+        color: theme.palette.error.main,
+        fontWeight: theme.typography.fontWeightBold,
       }),
     },
   },

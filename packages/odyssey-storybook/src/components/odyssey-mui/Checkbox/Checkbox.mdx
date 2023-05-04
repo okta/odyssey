@@ -9,3 +9,11 @@ Checkboxes appear as a square shaped UI accompanied by a caption. Checkboxes can
 <Canvas>
   <Story id="mui-components-forms-checkbox--default" />
 </Canvas>
+
+## Required checkboxes
+
+Checkboxes are optional by default, and there are few circumstances in which a checkbox is required. Odyssey provides an `isOptional` boolean that, when explicitly set to `false`, makes the checkbox required. Note that when a checkbox is required, it must be checked for the form to submit, so this is only appropriate for checkboxes that must be checked to continue, such as a confirmation.
+
+<Canvas>
+  <Story id="mui-components-forms-checkbox--required" />
+</Canvas>

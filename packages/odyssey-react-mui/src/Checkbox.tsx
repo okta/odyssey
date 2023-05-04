@@ -18,11 +18,12 @@ import { FormControlLabel } from ".";
 export type CheckboxProps = {
   ariaLabel?: string;
   ariaLabelledBy?: string;
+  hasError?: boolean;
   isChecked?: boolean;
   isDefaultChecked?: boolean;
   isDisabled?: boolean;
-  hasError?: boolean;
   isIndeterminate?: boolean;
+  isOptional?: boolean;
   label?: string;
   name?: string;
   onChange?: ChangeEventHandler<EventTarget>;
@@ -32,11 +33,12 @@ export type CheckboxProps = {
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
+  hasError,
   isChecked,
   isDefaultChecked,
   isDisabled,
   isIndeterminate,
-  hasError,
+  isOptional = true,
   label,
   name,
   onChange,
@@ -47,13 +49,16 @@ const Checkbox = ({
     aria-labelledby={ariaLabelledBy}
     checked={isChecked}
     className={hasError ? "Mui-error" : ""}
-    control={<MuiCheckbox indeterminate={isIndeterminate} />}
+    control={
+      <MuiCheckbox indeterminate={isIndeterminate} required={!isOptional} />
+    }
     defaultChecked={isDefaultChecked}
     disabled={isDisabled}
     label={label}
     name={name}
     onChange={onChange}
     value={value}
+    required={!isOptional}
   />
 );
 
