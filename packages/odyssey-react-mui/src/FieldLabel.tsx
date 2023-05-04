@@ -13,6 +13,7 @@
 import { InputLabel as MuiInputLabel } from "@mui/material";
 import { memo, useMemo } from "react";
 
+import { useTranslation } from "react-i18next";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { Typography } from ".";
 
@@ -21,7 +22,6 @@ export type FieldLabelProps = {
   id: string;
   inputId: string;
   isOptional: boolean;
-  optionalText?: string;
   text: string;
 };
 
@@ -30,19 +30,22 @@ const FieldLabel = ({
   id,
   inputId,
   isOptional,
-  optionalText,
   text,
 }: FieldLabelProps) => {
+  const { t } = useTranslation();
+
   const inputLabel = useMemo(
     () => (
       <MuiInputLabel htmlFor={inputId} id={id}>
         {text}
         {isOptional && (
-          <Typography variant="subtitle1">{optionalText}</Typography>
+          <Typography variant="subtitle1">
+            {t("fieldlabel.optional.text")}
+          </Typography>
         )}
       </MuiInputLabel>
     ),
-    [id, inputId, isOptional, optionalText, text]
+    [id, inputId, isOptional, text, t]
   );
 
   return hasVisibleLabel ? (

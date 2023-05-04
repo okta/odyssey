@@ -21,3 +21,6 @@ yarn-error.log
 
 # Lerna
 lerna-debug.log
+
+# bundled properties files (i18n)
+**/src/properties/ts/*.ts
