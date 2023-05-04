@@ -44,10 +44,12 @@ const storybookMeta: Meta<ToastProps> = {
     },
     severity: {
       control: "radio",
+      defaultValue: "info",
       options: ["error", "info", "success", "warning"],
     },
     text: {
       control: "text",
+      defaultValue: "The mission to Sagittarius A is set for January 7.",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -86,22 +88,8 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
   );
 };
 
-DefaultTemplate.args = {
-  severity: "info",
-  text: "The mission to Sagittarius A is set for January 7.",
-};
-
 const StaticTemplate: Story<ToastProps> = (args) => {
   return <Toast {...args}></Toast>;
-};
-
-StaticTemplate.args = {
-  isVisible: true,
-};
-
-StaticTemplate.args = {
-  severity: "info",
-  text: "The mission to Sagittarius A is set for January 7.",
 };
 
 const MultipleTemplate: Story<ToastProps> = () => {
@@ -160,7 +148,7 @@ export const Info = DefaultTemplate.bind({});
 Info.args = {};
 
 export const InfoStatic = StaticTemplate.bind({});
-InfoStatic.args = {};
+InfoStatic.args = { isVisible: true };
 
 export const Error = DefaultTemplate.bind({});
 Error.args = {
@@ -171,6 +159,7 @@ Error.args = {
 
 export const ErrorStatic = StaticTemplate.bind({});
 ErrorStatic.args = {
+  isVisible: true,
   text: "Security breach in Hangar 18",
   role: "alert",
   severity: "error",
@@ -185,6 +174,7 @@ Warning.args = {
 
 export const WarningStatic = StaticTemplate.bind({});
 WarningStatic.args = {
+  isVisible: true,
   text: "Severe solar winds may delay local system flights",
   role: "status",
   severity: "warning",
@@ -199,6 +189,7 @@ Success.args = {
 
 export const SuccessStatic = StaticTemplate.bind({});
 SuccessStatic.args = {
+  isVisible: true,
   text: "Docking completed",
   role: "status",
   severity: "success",
@@ -214,6 +205,7 @@ Dismissible.args = {
 export const DismissibleStatic = StaticTemplate.bind({});
 DismissibleStatic.args = {
   isDismissable: true,
+  isVisible: true,
   linkText: "View report",
   linkUrl: "#",
 };

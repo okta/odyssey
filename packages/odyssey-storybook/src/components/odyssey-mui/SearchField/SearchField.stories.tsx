@@ -27,6 +27,7 @@ const storybookMeta: Meta<SearchFieldProps> = {
   argTypes: {
     autoCompleteType: {
       control: "text",
+      defaultValue: "name",
     },
     hasInitialFocus: {
       control: "boolean",
@@ -39,6 +40,7 @@ const storybookMeta: Meta<SearchFieldProps> = {
     },
     label: {
       control: "text",
+      defaultValue: "Search",
     },
     onBlur: {
       control: "function",
@@ -51,6 +53,7 @@ const storybookMeta: Meta<SearchFieldProps> = {
     },
     placeholder: {
       control: "text",
+      defaultValue: "Search planets",
     },
     value: {
       control: "text",
@@ -65,13 +68,4 @@ const Template: Story<SearchFieldProps> = (args) => {
   return <SearchField {...args} />;
 };
 
-Template.args = {
-  autoCompleteType: "name",
-  label: "Destination",
-};
-
 export const Default = Template.bind({});
-Default.args = {
-  label: "Search",
-  placeholder: "Search planets",
-};
