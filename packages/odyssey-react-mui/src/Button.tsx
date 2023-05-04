@@ -12,11 +12,11 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, RefObject, useContext, useMemo } from "react";
+import { memo, ReactElement, useContext, useMemo } from "react";
 
-import { RefContext } from "./RefContext";
-import { Tooltip } from "./Tooltip";
 import { Icon } from "./Icon";
+import { MuiPropsContext } from "./MuiPropsContext";
+import { Tooltip } from "./Tooltip";
 
 export type ButtonProps = {
   endIcon?: ReactElement<typeof Icon>;
@@ -46,16 +46,16 @@ const Button = ({
   tooltipText,
   variant,
 }: ButtonProps) => {
-  const { ref } = useContext(RefContext);
+  const muiProps = useContext(MuiPropsContext);
 
   const button = useMemo(
     () => (
       <MuiButton
+        {...muiProps}
         disabled={isDisabled}
         endIcon={endIcon}
         fullWidth={isFullWidth}
         id={id}
-        ref={ref as RefObject<HTMLButtonElement>}
         onClick={onClick}
         size={size}
         startIcon={startIcon}
@@ -69,8 +69,8 @@ const Button = ({
       id,
       isDisabled,
       isFullWidth,
+      muiProps,
       onClick,
-      ref,
       size,
       startIcon,
       text,

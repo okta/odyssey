@@ -10,26 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef, ReactNode, useMemo } from "react";
+import { createContext } from "react";
 
-import { RefContext, RefContextType } from "./RefContext";
+export type MuiPropsContextType = Record<string, unknown>;
 
-export type RefChildProps = {
-  children: ReactNode;
-};
-
-export const RefChild = forwardRef<HTMLElement, RefChildProps>(
-  ({ children }, ref) => {
-    const providerValue = useMemo<RefContextType>(
-      () => ({
-        ref,
-      }),
-      [ref]
-    );
-    return (
-      <RefContext.Provider value={providerValue}>
-        {children}
-      </RefContext.Provider>
-    );
-  }
-);
+export const MuiPropsContext = createContext<MuiPropsContextType>({});
