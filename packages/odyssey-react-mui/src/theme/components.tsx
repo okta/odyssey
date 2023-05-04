@@ -386,11 +386,6 @@ export const components: ThemeOptions["components"] = {
           outlineOffset: "1px",
         },
 
-        "&:disabled": {
-          cursor: "not-allowed",
-          pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from "none"
-        },
-
         [`.${buttonClasses.startIcon}, .${buttonClasses.endIcon}`]: {
           "& > *:nth-of-type(1)": {
             fontSize: `${theme.typography.ui.lineHeight}em`,
