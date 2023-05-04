@@ -12,7 +12,7 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, RefObject, useContext, useMemo } from "react";
+import { memo, ReactElement, useContext, useMemo } from "react";
 
 import { Icon } from "./Icon";
 import { MuiPropsContext } from "./MuiPropsContext";

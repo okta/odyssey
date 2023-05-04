@@ -387,6 +387,15 @@ export const components: ThemeOptions["components"] = {
           outlineOffset: "1px",
         },
 
+        "&:disabled": {
+          cursor: "not-allowed",
+          pointerEvents: "initial",
+        },
+
+        "&:disabled:active": {
+          pointerEvents: "none",
+        },
+
         [`.${buttonClasses.startIcon}, .${buttonClasses.endIcon}`]: {
           "& > *:nth-of-type(1)": {
             fontSize: `${theme.typography.ui.lineHeight}em`,
