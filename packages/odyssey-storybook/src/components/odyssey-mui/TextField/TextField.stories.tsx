@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { InputAdornment, TextField } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import { TextField, TextFieldProps } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import TextFieldMdx from "./TextField.mdx";
 
-const storybookMeta: ComponentMeta<typeof TextField> = {
+const storybookMeta: Meta<TextFieldProps> = {
   title: `MUI Components/Forms/TextField`,
   component: TextField,
   parameters: {
@@ -29,13 +29,11 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
       control: "text",
       defaultValue: "name",
     },
-    autoFocus: {
+    hasInitialFocus: {
       control: "boolean",
-      defaultValue: false,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
     },
     endAdornment: {
       control: "text",
@@ -55,7 +53,6 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     },
     isMultiline: {
       control: "boolean",
-      defaultValue: false,
     },
     onBlur: {
       control: "function",
@@ -66,6 +63,10 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     onFocus: {
       control: "function",
     },
+    isOptional: {
+      control: "boolean",
+      defaultValue: false,
+    },
     optionalLabel: {
       control: "text",
       defaultValue: "Optional",
@@ -75,11 +76,6 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
     },
     isReadOnly: {
       control: "boolean",
-      defaultValue: false,
-    },
-    isRequired: {
-      control: "boolean",
-      defaultValue: true,
     },
     startAdornment: {
       control: "text",
@@ -98,7 +94,7 @@ const storybookMeta: ComponentMeta<typeof TextField> = {
 
 export default storybookMeta;
 
-const Template: ComponentStory<typeof TextField> = (args) => {
+const Template: Story<TextFieldProps> = (args) => {
   return <TextField {...args} />;
 };
 
@@ -115,7 +111,7 @@ Disabled.args = {
 
 export const Optional = Template.bind({});
 Optional.args = {
-  isRequired: false,
+  isOptional: true,
 };
 
 export const ReadOnly = Template.bind({});

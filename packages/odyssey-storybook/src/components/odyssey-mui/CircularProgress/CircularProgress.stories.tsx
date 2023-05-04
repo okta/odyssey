@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import {
   CircularProgress,
   CircularProgressProps,
@@ -19,7 +19,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import CircularProgressMdx from "./CircularProgress.mdx";
 
-export default {
+const storybookMeta: Meta<CircularProgressProps> = {
   title: `MUI Components/Circular Progress`,
   component: CircularProgress,
   parameters: {
@@ -29,12 +29,13 @@ export default {
   },
   argTypes: {
     value: {
-      control: { type: "number" },
-      defaultValue: undefined,
+      control: "number",
     },
   },
   decorators: [MuiThemeDecorator],
 };
+
+export default storybookMeta;
 
 const Template: Story<CircularProgressProps> = (props) => (
   <CircularProgress {...props} />

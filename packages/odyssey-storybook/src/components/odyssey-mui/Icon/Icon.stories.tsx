@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import { createElement } from "react";
-import type { ReactElement } from "react";
 import {
   Icon,
+  IconProps,
   iconDictionary,
   Table,
   TableBody,
@@ -22,33 +22,49 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from "../../../../../odyssey-react-mui/src";
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
-export default {
+const storybookMeta: Meta<IconProps> = {
   title: `MUI Components/Icon`,
   component: Icon,
   decorators: [MuiThemeDecorator],
+  argTypes: {
+    name: {
+      control: { type: "select" },
+      options: Object.keys(iconDictionary),
+    },
+    size: {
+      options: ["small", "medium", "large"],
+      control: { type: "radio" },
+    },
+    ariaLabelledby: {
+      control: "text",
+    },
+    label: {
+      control: "text",
+    },
+  },
 };
 
-const Template: Story = ({ ...args }) => (
-  <Icon name={args.name} titleAccess={args.title} />
+export default storybookMeta;
+
+const Template: Story<IconProps> = ({ ...args }) => (
+  <Icon
+    name={args.name}
+    size={args.size}
+    ariaLabelledby={args.ariaLabelledby}
+    label={args.label}
+  />
 );
 
 export const Default = Template.bind({});
-
-Default.argTypes = {
-  name: {
-    defaultValue: "alert-triangle-filled",
-    control: { type: "select" },
-  },
-  title: {
-    defaultValue: "Caution",
-    control: { type: "text" },
-  },
+Default.args = {
+  name: "alert-triangle-filled",
+  size: "medium",
 };
 
-const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
+const icons: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   { name: "add", use: "To add" },
   {
     name: "add-circle",
@@ -168,31 +184,29 @@ const meta: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   },
 ];
 
-export const Library = (): ReactElement => {
-  return (
-    <TableContainer>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Icon</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Class Name</TableCell>
-            <TableCell>Use</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {meta.map(({ name, use }) => {
-            return (
-              <TableRow key={`${name}_row`}>
-                <TableCell>{createElement(iconDictionary[name])}</TableCell>
-                <TableCell>{name}</TableCell>
-                <TableCell>{iconDictionary[name].displayName}</TableCell>
-                <TableCell>{use}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-};
+export const Library: Story<IconProps> = () => (
+  <TableContainer>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Icon</TableCell>
+          <TableCell>Name</TableCell>
+          <TableCell>Class Name</TableCell>
+          <TableCell>Use</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {icons.map(({ name, use }) => {
+          return (
+            <TableRow key={`${name}_row`}>
+              <TableCell>{createElement(iconDictionary[name])}</TableCell>
+              <TableCell>{name}</TableCell>
+              <TableCell>{iconDictionary[name].displayName}</TableCell>
+              <TableCell>{use}</TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  </TableContainer>
+);

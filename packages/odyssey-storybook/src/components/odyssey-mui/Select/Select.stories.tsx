@@ -11,7 +11,7 @@
  */
 
 import * as React from "react";
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import {
   Box,
   Checkbox,
@@ -30,7 +30,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import SelectMdx from "./Select.mdx";
 
-export default {
+const storybookMeta: Meta = {
   title: `MUI Components/Forms/Select`,
   component: Select,
   parameters: {
@@ -70,6 +70,8 @@ export default {
   },
   decorators: [MuiThemeDecorator],
 };
+
+export default storybookMeta;
 
 const destinations = [
   "Earth",

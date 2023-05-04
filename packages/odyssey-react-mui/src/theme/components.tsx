@@ -386,11 +386,6 @@ export const components: ThemeOptions["components"] = {
           outlineOffset: "1px",
         },
 
-        "&:disabled": {
-          cursor: "not-allowed",
-          pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from "none"
-        },
-
         [`.${buttonClasses.startIcon}, .${buttonClasses.endIcon}`]: {
           "& > *:nth-of-type(1)": {
             fontSize: `${theme.typography.ui.lineHeight}em`,
@@ -993,6 +988,10 @@ export const components: ThemeOptions["components"] = {
         paddingBlock: theme.spacing(4),
         paddingInline: theme.spacing(6),
 
+        "&:last-child": {
+          paddingBlockEnd: theme.spacing(6),
+        },
+
         ...(ownerState.dividers === false && {
           [`& + .${dialogActionsClasses.root}`]: {
             paddingBlockStart: theme.spacing(4),
@@ -1318,6 +1317,9 @@ export const components: ThemeOptions["components"] = {
             transform: "none",
           }),
         }),
+        "& > .MuiTypography-root": {
+          lineHeight: "unset",
+        },
       }),
     },
   },
@@ -1554,9 +1556,6 @@ export const components: ThemeOptions["components"] = {
         },
         ".Mui-error > &": {
           borderColor: theme.palette.error.main,
-          "&::before": {
-            backgroundColor: theme.palette.error.main,
-          },
 
           "&.Mui-focusVisible": {
             boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.error.main}`,
@@ -1596,6 +1595,13 @@ export const components: ThemeOptions["components"] = {
         horizontal: "right",
       },
     },
+    styleOverrides: {
+      root: {
+        "&.Toast": {
+          position: "static",
+        },
+      },
+    },
   },
   MuiSelect: {
     defaultProps: {
@@ -1631,8 +1637,16 @@ export const components: ThemeOptions["components"] = {
       color: "inherit",
     },
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme, ownerState }) => ({
         fontSize: `${theme.typography.ui.lineHeight}rem`,
+
+        ...(ownerState.fontSize === "small" && {
+          fontSize: `${Number(theme.typography.ui.lineHeight) * 0.75}rem`,
+        }),
+
+        ...(ownerState.fontSize === "large" && {
+          fontSize: `${Number(theme.typography.ui.lineHeight) * 1.25}rem`,
+        }),
       }),
     },
   },
@@ -2031,7 +2045,7 @@ export const components: ThemeOptions["components"] = {
   MuiTypography: {
     defaultProps: {
       fontFamily:
-        "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
+        "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
       variantMapping: {
         h1: "h1",
         h2: "h2",

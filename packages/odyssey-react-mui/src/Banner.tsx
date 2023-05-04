@@ -14,11 +14,22 @@ import { AlertColor, AlertProps } from "@mui/material";
 import { memo } from "react";
 import { Alert, Link, ScreenReaderText } from "./";
 
-export interface BannerProps {
+export type BannerProps = {
   /**
-   * Determine the color and icon of the alert
+   * If linkUrl is not undefined, this is the text of the link.
+   * If left blank, it defaults to "Learn more".
+   * Note that linkText does nothing if linkUrl is not defined
    */
-  severity: AlertColor;
+  linkText?: string;
+  /**
+   * If defined, the alert will include a link to the URL
+   */
+  linkUrl?: string;
+  /**
+   * The function that's fired when the user clicks the close button. If undefined,
+   * the close button will not be shown.
+   */
+  onClose?: AlertProps["onClose"];
   /**
    * Sets the ARIA role of the alert
    * ("status" for something that dynamically updates, "alert" for errors, null for something
@@ -26,32 +37,21 @@ export interface BannerProps {
    */
   role?: "status" | "alert";
   /**
+   * Determine the color and icon of the alert
+   */
+  severity: AlertColor;
+  /**
    * The text content of the alert
    */
   text: string;
-  /**
-   * The function that's fired when the user clicks the close button. If undefined,
-   * the close button will not be shown.
-   */
-  onClose?: AlertProps["onClose"];
-  /**
-   * If defined, the alert will include a link to the URL
-   */
-  linkUrl?: string;
-  /**
-   * If linkUrl is not undefined, this is the text of the link.
-   * If left blank, it defaults to "Learn more".
-   * Note that linkText does nothing if linkUrl is not defined
-   */
-  linkText?: string;
-}
+};
 
 const Banner = ({
-  onClose,
-  severity,
-  role,
   linkUrl,
   linkText,
+  onClose,
+  role,
+  severity,
   text,
 }: BannerProps) => (
   <Alert onClose={onClose} role={role} severity={severity} variant="banner">

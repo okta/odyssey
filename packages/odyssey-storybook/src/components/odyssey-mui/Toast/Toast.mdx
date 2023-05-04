@@ -26,6 +26,12 @@ Each Toast is made up of up to three parts: Severity, Title, and Message.
   <Story id="mui-components-alerts-toast--info-static" />
 </Canvas>
 
+`Toast` handles the visual appearance and show/hide logic, but not positioning. To have a `Toast` positioned correctly, it must be wrapped inside
+a `ToastStack`.
+
+There should only be one `ToastStack` per screen, regardless of how many `Toast`s there are, since a single `ToastStack` can accept multiple `Toast`s as
+children and will manage positioning accordingly.
+
 ## Behavior
 
 Toasts may be triggered by different types of events, but they are always transient. With this in mind, Toasts should not include any interactive or long-form content.
@@ -81,6 +87,10 @@ Do not use Error Toasts for in-page errors such as invalid form fields. Instead,
 <Canvas>
   <Story id="mui-components-alerts-toast--error-static" />
 </Canvas>
+
+### Multiple Toasts
+
+`ToastStack` can accept multiple `Toast`s as children and will handle the positioning of them.
 
 ## References
 

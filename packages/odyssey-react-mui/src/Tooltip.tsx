@@ -10,20 +10,30 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip } from "./";
+import { Tooltip as MuiTooltip } from "@mui/material";
+import type { TooltipProps as MuiTooltipProps } from "@mui/material";
 
-export type StatusProps = {
-  /**
-   * Determine the color and icon of the alert
-   */
-  severity: "default" | "error" | "info" | "success" | "warning";
+import { RefChild } from "./RefChild";
+import { ReactElement } from "react";
 
-  /**
-   * The text content of the status
-   */
-  label: string;
+export type TooltipProps = {
+  children: ReactElement;
+  ariaType: "description" | "label";
+  text: string;
+  placement?: MuiTooltipProps["placement"];
 };
 
-export const Status = ({ severity, label }: StatusProps) => (
-  <Chip label={label} color={severity} variant="status" />
+export const Tooltip = ({
+  ariaType,
+  children,
+  text,
+  placement,
+}: TooltipProps) => (
+  <MuiTooltip
+    placement={placement}
+    describeChild={ariaType === "description"}
+    title={text}
+  >
+    <RefChild>{children}</RefChild>
+  </MuiTooltip>
 );
