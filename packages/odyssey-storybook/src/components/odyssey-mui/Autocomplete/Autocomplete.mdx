@@ -1,13 +1,15 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Autocomplete.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Forms/Autocomplete" anchor />
 
 # Autocomplete
 
-Similar to <a href="?path=/docs/mui-components-forms-select--default">Select</a>, this input triggers a menu of options a user can select. Country and state Autocompletes are common examples.
+Similar to [Select](?path=/docs/mui-components-forms-select--default), this input triggers a menu of options a user can select. Country and state Autocompletes are common examples.
 
 <Canvas>
-  <Story id="mui-components-forms-autocomplete--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 ## Behavior
@@ -25,19 +27,19 @@ With the single-select variant, choosing a value will override any previous sele
 #### Enabled
 
 <Canvas>
-  <Story id="mui-components-forms-autocomplete--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 #### Disabled
 
 <Canvas>
-  <Story id="mui-components-forms-autocomplete--disabled" />
+  <Story of={Stories.Disabled} />
 </Canvas>
 
 #### Read-only
 
 <Canvas>
-  <Story id="mui-components-forms-autocomplete--read-only" />
+  <Story of={Stories.ReadOnly} />
 </Canvas>
 
 ### Multi-Select
@@ -47,19 +49,19 @@ The multi-Select variant allows users to select many values.
 #### Enabled
 
 <Canvas>
-  <Story id="mui-components-forms-autocomplete--multiple" />
+  <Story of={Stories.Multiple} />
 </Canvas>
 
 #### Disabled
 
 <Canvas>
-  <Story id="mui-components-forms-autocomplete--multiple-disabled" />
+  <Story of={Stories.MultipleDisabled} />
 </Canvas>
 
 #### Read-only
 
 <Canvas>
-  <Story id="mui-components-forms-autocomplete--multiple-read-only" />
+  <Story of={Stories.MultipleReadOnly} />
 </Canvas>
 
 ## Loading state
@@ -67,7 +69,7 @@ The multi-Select variant allows users to select many values.
 The loading state is displayed when retrieving values from the server or when data is unavailable.
 
 <Canvas>
-  <Story id="mui-components-forms-autocomplete--loading" />
+  <Story of={Stories.Loading} />
 </Canvas>
 
 ## Custom Values
@@ -75,5 +77,5 @@ The loading state is displayed when retrieving values from the server or when da
 Autocomplete also supports user-submitted values via the `isCustomValueAllowed` prop.
 
 <Canvas>
-  <Story id="mui-components-forms-autocomplete--is-custom-value-allowed" />
+  <Story of={Stories.IsCustomValueAllowed} />
 </Canvas>
