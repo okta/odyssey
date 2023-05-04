@@ -50,7 +50,7 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
 
 export default storybookMeta;
 
-const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
+const Template: StoryFn<DatePickerProps<unknown, unknown>> = (props) => {
   const [value, setValue] = useState<unknown>(Date.now());
   const datePickerProps = useMemo(
     () => ({
