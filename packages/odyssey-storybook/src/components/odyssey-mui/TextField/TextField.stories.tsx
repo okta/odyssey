@@ -67,10 +67,6 @@ const storybookMeta: Meta<TextFieldProps> = {
       control: "boolean",
       defaultValue: false,
     },
-    optionalLabel: {
-      control: "text",
-      defaultValue: "Optional",
-    },
     placeholder: {
       control: "text",
     },
