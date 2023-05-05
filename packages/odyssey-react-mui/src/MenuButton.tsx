@@ -32,11 +32,11 @@ export type MenuButtonProps = {
   /**
    * The end Icon on the trigggering Button
    */
-  buttonEndIcon?: ReactElement;
+  buttonEndIcon?: ButtonProps["endIcon"];
   /**
    * The label on the triggering Button
    */
-  buttonLabel?: string;
+  buttonLabel?: ButtonProps["text"];
   /**
    * The variant of the triggering Button
    */
@@ -45,14 +45,19 @@ export type MenuButtonProps = {
    * The id of the `input` element.
    */
   id?: string;
+  /**
+   * Sets the text of the tooltip that appears on the trigger.
+   */
+  tooltipText?: ButtonProps["tooltipText"];
 };
 
 const MenuButton = ({
-  buttonLabel = "",
-  children,
   buttonEndIcon = <ChevronDownIcon />,
+  buttonLabel = "",
   buttonVariant = "secondary",
+  children,
   id: idOverride,
+  tooltipText,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -76,21 +81,22 @@ const MenuButton = ({
   return (
     <div>
       <Button
+        aria-controls={open ? `${uniqueId}-menu` : undefined}
+        aria-expanded={open ? "true" : undefined}
+        aria-haspopup="true"
         endIcon={buttonEndIcon}
         id={`${uniqueId}-button`}
-        aria-controls={open ? `${uniqueId}-menu` : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         text={buttonLabel}
+        tooltipText={tooltipText}
         variant={buttonVariant}
       />
       <Menu
-        id={`${uniqueId}-menu`}
         anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
+        id={`${uniqueId}-menu`}
         MenuListProps={menuListProps}
+        onClose={handleClose}
+        open={open}
       >
         {children}
       </Menu>
