@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { StoryFn } from "@storybook/react";
+import type { StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 import {
@@ -20,17 +20,11 @@ import {
 } from "@okta/odyssey-react-mui";
 import { expect } from "@storybook/jest";
 
-import LinkMdx from "./Link.mdx";
 import { userEvent, within } from "@storybook/testing-library";
 
 export default {
   title: "MUI Components/Link",
   component: Link,
-  parameters: {
-    docs: {
-      page: LinkMdx,
-    },
-  },
   argTypes: {
     children: {
       control: "text",
@@ -56,38 +50,40 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-const Template: StoryFn<LinkProps> = (props) => <Link {...props} />;
-
-export const Default = Template.bind({});
-Default.args = {
-  href: "#anchor",
-  variant: "default",
-  children: "Anchor link",
-};
-Default.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  const link = canvas.getByText("Anchor link");
-  await expect(link).toBeVisible();
-};
-
-export const Monochrome = Template.bind({});
-Monochrome.args = {
-  href: "#anchor",
-  variant: "monochrome",
-  children: "Monochrome link",
+export const Default: StoryObj<LinkProps> = {
+  args: {
+    href: "#anchor",
+    variant: "default",
+    children: "Anchor link",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const link = await canvas.getByText("Anchor link");
+    await expect(link).toBeVisible();
+  },
 };
 
-export const WithIcon = Template.bind({});
-WithIcon.args = {
-  href: "#anchor",
-  children: "Info link",
-  icon: <InformationCircleFilledIcon />,
+export const Monochrome: StoryObj<LinkProps> = {
+  args: {
+    href: "#anchor",
+    variant: "monochrome",
+    children: "Monochrome link",
+  },
 };
 
-export const External = Template.bind({});
-External.args = {
-  href: "https://www.okta.com",
-  children: "Visit okta.com",
-  rel: "noopener",
-  target: "_blank",
+export const WithIcon: StoryObj<LinkProps> = {
+  args: {
+    href: "#anchor",
+    children: "Info link",
+    icon: <InformationCircleFilledIcon />,
+  },
+};
+
+export const External: StoryObj<LinkProps> = {
+  args: {
+    href: "https://www.okta.com",
+    children: "Visit okta.com",
+    rel: "noopener",
+    target: "_blank",
+  },
 };
