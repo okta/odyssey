@@ -20,7 +20,6 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 const storybookMeta: Meta<ToastProps> = {
   title: `MUI Components/Alerts/Toast`,
   component: Toast,
-  excludeStories: /.*Static$/,
   parameters: {
     docs: {
       page: ToastMdx,
@@ -50,7 +49,7 @@ const storybookMeta: Meta<ToastProps> = {
     },
     text: {
       control: "text",
-      defaultValue: "The mission to Sagittarius A is set for January 7.",
+      defaultValue: "Mission to Sagittarius A set for January 7",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -99,13 +98,13 @@ const MultipleTemplate: Story<ToastProps> = () => {
       isDismissable
       isVisible={true}
       severity="info"
-      text="The mission to Sagittarius A is set for January 7."
+      text="Mission to Sagittarius A set for January 7"
     />,
     <Toast
       isDismissable
       isVisible={true}
       severity="success"
-      text="Docking completed."
+      text="Docking completed"
     />,
   ]);
 
@@ -114,20 +113,20 @@ const MultipleTemplate: Story<ToastProps> = () => {
       <Toast
         isVisible={true}
         severity="info"
-        text={`The mission to Sagittarius A is set for January 7.`}
+        text={`Mission to Sagittarius A set for January 7`}
       />,
       <Toast isVisible={true} severity="success" text={`Docking completed.`} />,
       <Toast
         isVisible={true}
         severity="warning"
         isDismissable
-        text={`Severe solar winds may delay local system flights.`}
+        text={`Severe solar winds may delay local system flights`}
       />,
       <Toast
         isVisible={true}
         severity="error"
         isDismissable
-        text={`Security breach in Hangar 10.`}
+        text={`Security breach in Hangar 10`}
       />,
     ];
 
