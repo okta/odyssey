@@ -20,6 +20,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 const storybookMeta: Meta<ToastProps> = {
   title: `MUI Components/Alerts/Toast`,
   component: Toast,
+  excludeStories: /.*Static$/,
   parameters: {
     docs: {
       page: ToastMdx,
@@ -148,7 +149,10 @@ export const Info = DefaultTemplate.bind({});
 Info.args = {};
 
 export const InfoStatic = StaticTemplate.bind({});
-InfoStatic.args = { isVisible: true };
+InfoStatic.args = {
+  isVisible: true,
+  autoHideDuration: 0,
+};
 
 export const Error = DefaultTemplate.bind({});
 Error.args = {
@@ -163,6 +167,7 @@ ErrorStatic.args = {
   text: "Security breach in Hangar 18",
   role: "alert",
   severity: "error",
+  autoHideDuration: 0,
 };
 
 export const Warning = DefaultTemplate.bind({});
@@ -178,6 +183,7 @@ WarningStatic.args = {
   text: "Severe solar winds may delay local system flights",
   role: "status",
   severity: "warning",
+  autoHideDuration: 0,
 };
 
 export const Success = DefaultTemplate.bind({});
@@ -193,6 +199,7 @@ SuccessStatic.args = {
   text: "Docking completed",
   role: "status",
   severity: "success",
+  autoHideDuration: 0,
 };
 
 export const Dismissible = DefaultTemplate.bind({});

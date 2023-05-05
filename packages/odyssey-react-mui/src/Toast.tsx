@@ -95,7 +95,9 @@ const Toast = forwardRef(
     return (
       <Snackbar
         open={isVisible}
-        autoHideDuration={isDismissable ? undefined : autoHideDuration}
+        autoHideDuration={
+          isDismissable || autoHideDuration <= 0 ? undefined : autoHideDuration
+        }
         onClose={onHide}
         className="Toast"
         ClickAwayListenerProps={ClickAwayListenerProps}
