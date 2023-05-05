@@ -4,35 +4,76 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 # Migrations
 
-## `v0.21.x` ➡️ `v0.22.x`
+## `v0.21.x` ➡️ `v0.23.x`
+
+### New Components
+
+- `Autocomplete`
+- `Fieldset`
+- `Form`
+- `PasswordField`
+- `SearchField`
+- `Toast`
+
+### Components with Props Changes
+
+- `Banner`
+- `Button`
+- `Checkbox`
+- `Dialog`
+- `Icon`
+- `Infobox`
+- `MenuButton`
+- `Radio`
+- `RadioGroup`
+- `Tag`
+- `TagList`
+- `TextField`
+- `Toast`
 
 ### Component API
 
-1. // Placeholder
+**All components are now being wrapped and many prop names have changed. Prop names and APIs will now be more consistent across Odyssey.**
 
 ### Deprecations
 
-1. // Placeholder
+1. `InputAdornment` is no longer erquired for `startAdronment` and `endAdornment` on `TextField`.
+1. `InputBase` should be replaced with `TextField`.
+1. The `size` prop on `Icon` is now required.
 
-## `v0.20.x` ➡️ `v0.21.x`
+## `v0.17.x` ➡️ `v0.21.x`
+
+### New Components
+
+- `Banner`
+- `Checkbox`
+- `CheckboxGroup`
+- `Chip`
+- `DatePicker` (Labs)
+- `Infobox`
+- `ListSubheader`
+- `Radio`
+- `RadioGroup`
+- `ScopedCssBaseline`
+- `ScreenReaderText`
+- `Status`
+- `TextField`
+
+### Components with Props Changes
+
+- `Checkbox`
+- `Radio`
+- `RadioGroup`
 
 ### Component API
 
-1. // Placeholder
+1. Many new components have been added and wrapped; although, prop names in these versions are not necessarily following Odyssey guidelines.
+1. MUI-passthrough is still allowed even for wrapped components. This will change in later versions.
 
 ### Deprecations
 
-1. // Placeholder
-
-## `v0.17.x` ➡️ `v0.20.x`
-
-### Component API
-
-1. // Placeholder
-
-### Deprecations
-
-1. // Placeholder
+1. `InputBase` should be replaced with `TextField`.
+1. `InputLabel` should not be used. We build it into our field components and created an internal `Field` component to ensure matching styles. If you have custom field components that we don't support, message in `#odyssey` to see if we should add your field or expose `Field`.
 
 ## `v0.14.x` ➡️ `0.17.x`
 
