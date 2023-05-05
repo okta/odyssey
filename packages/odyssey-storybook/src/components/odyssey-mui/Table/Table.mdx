@@ -1,13 +1,15 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Table.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Table" anchor />
 
 # Table
 
 Tables provide structure for displaying sets of data across rows and columns. They support multiple content types and some internal actions.
 
 <Canvas>
-  <Story id="mui-components-table--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 ## Usage
@@ -21,7 +23,7 @@ If your data set has keys on two axes, we also support setting the starting colu
 Be sure to identify your row heading column as well. That is, don't leave a blank cell in the starting header column. Our secondary headings need context too!
 
 <Canvas>
-  <Story id="mui-components-table--row-headings" />
+  <Story of={Stories.RowHeadings} />
 </Canvas>
 
 ### Row groupings
@@ -31,7 +33,7 @@ If you need to group rows by a shared data point, we also support using rowspan 
 Note: spanning multiple rows or columns may cause issues for assistive technologies.
 
 <Canvas>
-  <Story id="mui-components-table--row-groupings" />
+  <Story of={Stories.RowGroupings} />
 </Canvas>
 
 ## Behavior
@@ -51,7 +53,7 @@ Sorting Table columns is a common interaction for users. Following standard conv
 Tables that feature row selection via Checkbox should also include a heading that allows for mass selection/deselection.
 
 <Canvas>
-  <Story id="mui-components-table--enhanced" />
+  <Story of={Stories.Enhanced} />
 </Canvas>
 
 ## Content guidelines
