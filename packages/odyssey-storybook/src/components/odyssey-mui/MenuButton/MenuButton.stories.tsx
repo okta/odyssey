@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import {
   Divider,
   ListItemIcon,
@@ -26,16 +26,9 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import MenuButtonMdx from "./MenuButton.mdx";
-
 const storybookMeta: Meta<MenuButtonProps> = {
   title: "MUI Components/Menu Button",
   component: MenuButton,
-  parameters: {
-    docs: {
-      page: MenuButtonMdx,
-    },
-  },
   argTypes: {
     children: {
       control: "text",
@@ -55,91 +48,96 @@ const storybookMeta: Meta<MenuButtonProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: StoryFn<MenuButtonProps> = (args) => {
-  return <MenuButton {...args}>{args.children}</MenuButton>;
+const DefaultTemplate: StoryObj<MenuButtonProps> = {
+  args: {
+    buttonLabel: "More actions",
+  },
 };
 
-DefaultTemplate.args = {
-  buttonLabel: "More actions",
+export const Simple: StoryObj<MenuButtonProps> = {
+  ...DefaultTemplate,
+  args: {
+    buttonLabel: "More actions",
+    children: [
+      <MenuItem>View details</MenuItem>,
+      <MenuItem>Edit configuration</MenuItem>,
+      <MenuItem>Launch</MenuItem>,
+    ],
+  },
 };
 
-export const Simple = DefaultTemplate.bind({});
-Simple.args = {
-  buttonLabel: "More actions",
-  children: [
-    <MenuItem>View details</MenuItem>,
-    <MenuItem>Edit configuration</MenuItem>,
-    <MenuItem>Launch</MenuItem>,
-  ],
+export const ActionIcons: StoryObj<MenuButtonProps> = {
+  args: {
+    children: [
+      <MenuItem>
+        <ListItemIcon>
+          <UserGroupIcon />
+        </ListItemIcon>
+        <ListItemText>Assign crew</ListItemText>
+      </MenuItem>,
+      <MenuItem>
+        <ListItemIcon>
+          <GlobeIcon />
+        </ListItemIcon>
+        <ListItemText>View destination</ListItemText>
+      </MenuItem>,
+      <MenuItem>
+        <ListItemIcon>
+          <CalendarIcon />
+        </ListItemIcon>
+        <ListItemText>Schedule launch</ListItemText>
+      </MenuItem>,
+    ],
+  },
 };
 
-export const ActionIcons = DefaultTemplate.bind({});
-ActionIcons.args = {
-  children: [
-    <MenuItem>
-      <ListItemIcon>
-        <UserGroupIcon />
-      </ListItemIcon>
-      <ListItemText>Assign crew</ListItemText>
-    </MenuItem>,
-    <MenuItem>
-      <ListItemIcon>
-        <GlobeIcon />
-      </ListItemIcon>
-      <ListItemText>View destination</ListItemText>
-    </MenuItem>,
-    <MenuItem>
-      <ListItemIcon>
-        <CalendarIcon />
-      </ListItemIcon>
-      <ListItemText>Schedule launch</ListItemText>
-    </MenuItem>,
-  ],
+export const ButtonVariant: StoryObj<MenuButtonProps> = {
+  args: {
+    buttonLabel: "More actions",
+    buttonVariant: "floating",
+    children: [
+      <MenuItem>View details</MenuItem>,
+      <MenuItem>Edit configuration</MenuItem>,
+      <MenuItem>Launch</MenuItem>,
+    ],
+  },
 };
 
-export const ButtonVariant = DefaultTemplate.bind({});
-ButtonVariant.args = {
-  buttonLabel: "More actions",
-  buttonVariant: "floating",
-  children: [
-    <MenuItem>View details</MenuItem>,
-    <MenuItem>Edit configuration</MenuItem>,
-    <MenuItem>Launch</MenuItem>,
-  ],
+export const Groupings: StoryObj<MenuButtonProps> = {
+  args: {
+    buttonLabel: "More actions",
+    children: [
+      <ListSubheader>Crew</ListSubheader>,
+      <MenuItem>Assign captain</MenuItem>,
+      <MenuItem>View roster</MenuItem>,
+      <ListSubheader>Ship</ListSubheader>,
+      <MenuItem>Configure thrusters</MenuItem>,
+      <MenuItem>View cargo</MenuItem>,
+      <Divider />,
+      <MenuItem>Logout</MenuItem>,
+    ],
+  },
 };
 
-export const Groupings = DefaultTemplate.bind({});
-Groupings.args = {
-  buttonLabel: "More actions",
-  children: [
-    <ListSubheader>Crew</ListSubheader>,
-    <MenuItem>Assign captain</MenuItem>,
-    <MenuItem>View roster</MenuItem>,
-    <ListSubheader>Ship</ListSubheader>,
-    <MenuItem>Configure thrusters</MenuItem>,
-    <MenuItem>View cargo</MenuItem>,
-    <Divider />,
-    <MenuItem>Logout</MenuItem>,
-  ],
+export const WithDestructive: StoryObj<MenuButtonProps> = {
+  args: {
+    buttonLabel: "Cargo options",
+    children: [
+      <MenuItem>View details</MenuItem>,
+      <MenuItem>Edit inventory</MenuItem>,
+      <MenuItem isDestructive>Jettison cargo</MenuItem>,
+    ],
+  },
 };
 
-export const WithDestructive = DefaultTemplate.bind({});
-WithDestructive.args = {
-  buttonLabel: "Cargo options",
-  children: [
-    <MenuItem>View details</MenuItem>,
-    <MenuItem>Edit inventory</MenuItem>,
-    <MenuItem isDestructive>Jettison cargo</MenuItem>,
-  ],
-};
-
-export const IconButton = DefaultTemplate.bind({});
-IconButton.args = {
-  children: [
-    <MenuItem>View details</MenuItem>,
-    <MenuItem>Edit configuration</MenuItem>,
-    <MenuItem>Launch</MenuItem>,
-  ],
-  buttonLabel: "",
-  buttonEndIcon: <OverflowVerticalIcon />,
+export const IconButton: StoryObj<MenuButtonProps> = {
+  args: {
+    children: [
+      <MenuItem>View details</MenuItem>,
+      <MenuItem>Edit configuration</MenuItem>,
+      <MenuItem>Launch</MenuItem>,
+    ],
+    buttonLabel: "",
+    buttonEndIcon: <OverflowVerticalIcon />,
+  },
 };
