@@ -455,8 +455,6 @@ export const components: ThemeOptions["components"] = {
 
         ".MuiSvgIcon-root": {
           color: theme.palette.common.white,
-          width: "0.5em",
-          height: "0.5em",
           transition: theme.transitions.create(["color"], {
             duration: theme.transitions.duration.short,
           }),
