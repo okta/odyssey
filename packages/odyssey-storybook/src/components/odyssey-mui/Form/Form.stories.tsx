@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import {
   Alert,
   AlertTitle,
@@ -29,18 +29,29 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import FormMdx from "./Form.mdx";
 import { userEvent, within } from "@storybook/testing-library";
 
+type FormStoryProps = Partial<{
+  formAlert: boolean;
+  formTitle: string;
+  formHint: string;
+  fieldGroupAlert: boolean;
+  fieldGroupOne: boolean;
+  fieldGroupOneTitle: string;
+  fieldGroupOneHint: string;
+  fieldGroupTwo: boolean;
+  fieldGroupTwoTitle: string;
+  fieldGroupTwoHint: string;
+  formTitleSize: "h1" | "h2" | "h3" | "h4";
+
+  disabled: boolean;
+  invalid: boolean;
+}>;
+
 // TEMP: this needs a component for props
-const storybookMeta: Meta = {
+const storybookMeta: Meta<FormStoryProps> = {
   title: "MUI Components/Forms/Form",
   component: FormControl,
-  parameters: {
-    docs: {
-      page: FormMdx,
-    },
-  },
   argTypes: {
     formAlert: {
       control: "boolean",
@@ -93,234 +104,254 @@ const storybookMeta: Meta = {
 
 export default storybookMeta;
 
-const Template: StoryFn = (args) => {
-  return (
-    // <Form>
-    <Box
-      component="form"
-      sx={(theme) => ({
-        maxWidth: theme.mixins.maxWidth,
-      })}
-    >
-      {/* <FormHeader> */}
-      {args.formTitle && (
-        <Box
-          component="div"
-          sx={(theme) => ({
-            marginBottom: theme.spacing(6),
-          })}
-        >
-          <Typography variant={args.formTitleSize} component="h1">
-            {args.formTitle}
-          </Typography>
-          {args.formHint && <Typography paragraph>{args.formHint}</Typography>}
-          {args.formAlert && (
-            <Alert severity="error" role="alert" variant="infobox">
-              <AlertTitle>Something's wrong</AlertTitle>
-              Something has gone horribly awry.
-            </Alert>
-          )}
-        </Box>
-      )}
-      {/* <FieldGroup> One */}
-      {args.fieldGroupOne && (
-        <Box
-          component="fieldset"
-          sx={(theme) => ({
-            border: 0,
-            padding: 0,
-            margin: 0,
-            marginBottom: theme.spacing(7),
-          })}
-        >
-          {args.fieldGroupOneTitle && (
-            <Typography variant="legend">{args.fieldGroupOneTitle}</Typography>
-          )}
-          {args.fieldGroupOneTitle && (
-            <Typography paragraph>{args.fieldGroupOneHint}</Typography>
-          )}
-          <FormControl>
-            <InputLabel id="demo-simple-select-label">
-              Docking license
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Docking license"
-              native
-              aria-describedby="select-hint select-error"
-            >
-              <option value="governmental">Governmental</option>
-              <option value="corporate">Corporate</option>
-              <option value="business">Private (Business)</option>
-              <option value="personal">Private (Personal)</option>
-            </Select>
-          </FormControl>
-          <FormControl>
-            <InputLabel id="demo-text-field-label">Nature of visit</InputLabel>
-            <InputBase
-              inputProps={{ "aria-describedby": "form-hint form-error" }}
-              id="demo-text-field"
-              multiline={true}
-              type="text"
-            />
-          </FormControl>
-        </Box>
-      )}
-      {/* <FieldGroup> Two */}
-      {args.fieldGroupTwo && (
-        <Box
-          component="fieldset"
-          sx={(theme) => ({
-            border: 0,
-            padding: 0,
-            margin: 0,
-            marginBottom: theme.spacing(7),
-          })}
-        >
-          <Typography variant="legend">Ship registration</Typography>
-          <Typography paragraph>
-            Here are some more fields in a separate field group.
-          </Typography>
-          {args.fieldGroupAlert && (
-            <Alert severity="error" role="alert" variant="infobox">
-              <AlertTitle>Something else is wrong</AlertTitle>
-              Something else has gone horribly awry!
-            </Alert>
-          )}
-          <FormControl>
-            <InputLabel id="demo-text-field-label">Destination</InputLabel>
-            <InputBase
-              inputProps={{ "aria-describedby": "form-hint form-error" }}
-              id="demo-text-field"
-            />
-          </FormControl>
-          <CheckboxGroup
-            hint="Ensure these systems are operating before initiating warp."
-            label="Systems check"
+const Template: StoryObj<FormStoryProps> = {
+  render: function C(props) {
+    return (
+      // <Form>
+      <Box
+        component="form"
+        sx={(theme) => ({
+          maxWidth: theme.mixins.maxWidth,
+        })}
+      >
+        {/* <FormHeader> */}
+        {props.formTitle && (
+          <Box
+            component="div"
+            sx={(theme) => ({
+              marginBottom: theme.spacing(6),
+            })}
           >
-            <Checkbox
-              label="Life support"
-              name="life-support"
-              value="life-support"
-            />
-            <Checkbox
-              label="Warp core containment"
-              name="warp-core"
-              value="warp-core"
-            />
-            <Checkbox
-              label="Cetacean ops"
-              name="cetacean-ops"
-              value="cetacean-ops"
-            />
-          </CheckboxGroup>
-          <FormControl
+            <Typography variant={props.formTitleSize} component="h1">
+              {props.formTitle}
+            </Typography>
+            {props.formHint && (
+              <Typography paragraph>{props.formHint}</Typography>
+            )}
+            {props.formAlert && (
+              <Alert severity="error" role="alert" variant="infobox">
+                <AlertTitle>Something's wrong</AlertTitle>
+                Something has gone horribly awry.
+              </Alert>
+            )}
+          </Box>
+        )}
+        {/* <FieldGroup> One */}
+        {props.fieldGroupOne && (
+          <Box
             component="fieldset"
-            disabled={args.disabled}
-            error={args.invalid}
+            sx={(theme) => ({
+              border: 0,
+              padding: 0,
+              margin: 0,
+              marginBottom: theme.spacing(7),
+            })}
           >
-            <FormLabel component="legend">Destination</FormLabel>
-            <RadioGroup
-              defaultValue="Lightspeed"
-              name="radio-buttons-group"
-              label="Speed"
-              aria-describedby="radio-hint radio-error"
+            {props.fieldGroupOneTitle && (
+              <Typography variant="legend">
+                {props.fieldGroupOneTitle}
+              </Typography>
+            )}
+            {props.fieldGroupOneTitle && (
+              <Typography paragraph>{props.fieldGroupOneHint}</Typography>
+            )}
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">
+                Docking license
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Docking license"
+                native
+                aria-describedby="select-hint select-error"
+              >
+                <option value="governmental">Governmental</option>
+                <option value="corporate">Corporate</option>
+                <option value="business">Private (Business)</option>
+                <option value="personal">Private (Personal)</option>
+              </Select>
+            </FormControl>
+            <FormControl>
+              <InputLabel id="demo-text-field-label">
+                Nature of visit
+              </InputLabel>
+              <InputBase
+                inputProps={{ "aria-describedby": "form-hint form-error" }}
+                id="demo-text-field"
+                multiline={true}
+                type="text"
+              />
+            </FormControl>
+          </Box>
+        )}
+        {/* <FieldGroup> Two */}
+        {props.fieldGroupTwo && (
+          <Box
+            component="fieldset"
+            sx={(theme) => ({
+              border: 0,
+              padding: 0,
+              margin: 0,
+              marginBottom: theme.spacing(7),
+            })}
+          >
+            <Typography variant="legend">Ship registration</Typography>
+            <Typography paragraph>
+              Here are some more fields in a separate field group.
+            </Typography>
+            {props.fieldGroupAlert && (
+              <Alert severity="error" role="alert" variant="infobox">
+                <AlertTitle>Something else is wrong</AlertTitle>
+                Something else has gone horribly awry!
+              </Alert>
+            )}
+            <FormControl>
+              <InputLabel id="demo-text-field-label">Destination</InputLabel>
+              <InputBase
+                inputProps={{ "aria-describedby": "form-hint form-error" }}
+                id="demo-text-field"
+              />
+            </FormControl>
+            <CheckboxGroup
+              hint="Ensure these systems are operating before initiating warp."
+              label="Systems check"
             >
-              <Radio value="lightspeed" label="Lightspeed" />
-              <Radio value="Warp Speed" label="Warp Speed" />
-              <Radio value="Ludicrous Speed" label="Ludicrous Speed" />
-            </RadioGroup>
-          </FormControl>
-          <FormControl>
-            <InputLabel id="demo-simple-select-label">Destination</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Destination"
-              native
-              aria-describedby="select-hint select-error"
+              <Checkbox
+                label="Life support"
+                name="life-support"
+                value="life-support"
+              />
+              <Checkbox
+                label="Warp core containment"
+                name="warp-core"
+                value="warp-core"
+              />
+              <Checkbox
+                label="Cetacean ops"
+                name="cetacean-ops"
+                value="cetacean-ops"
+              />
+            </CheckboxGroup>
+            <FormControl
+              component="fieldset"
+              disabled={props.disabled}
+              error={props.invalid}
             >
-              <option value="earth">Earth</option>
-              <option value="mars">Mars</option>
-              <option value="ceres">Ceres</option>
-              <option value="eros">Eros</option>
-              <option value="tycho">Tycho Station</option>
-              <option value="phoebe">Phoebe</option>
-              <option value="ganymede">Ganymede</option>
-            </Select>
-          </FormControl>
+              <FormLabel component="legend">Destination</FormLabel>
+              <RadioGroup
+                defaultValue="Lightspeed"
+                name="radio-buttons-group"
+                label="Speed"
+                aria-describedby="radio-hint radio-error"
+              >
+                <Radio value="lightspeed" label="Lightspeed" />
+                <Radio value="Warp Speed" label="Warp Speed" />
+                <Radio value="Ludicrous Speed" label="Ludicrous Speed" />
+              </RadioGroup>
+            </FormControl>
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">Destination</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Destination"
+                native
+                aria-describedby="select-hint select-error"
+              >
+                <option value="earth">Earth</option>
+                <option value="mars">Mars</option>
+                <option value="ceres">Ceres</option>
+                <option value="eros">Eros</option>
+                <option value="tycho">Tycho Station</option>
+                <option value="phoebe">Phoebe</option>
+                <option value="ganymede">Ganymede</option>
+              </Select>
+            </FormControl>
+          </Box>
+        )}
+        <Box>
+          <Button variant="primary" text="Submit" />
+          <Button variant="floating" text="Cancel" />
         </Box>
-      )}
-      <Box>
-        <Button variant="primary" text="Submit" />
-        <Button variant="floating" text="Cancel" />
       </Box>
-    </Box>
-  );
+    );
+  },
 };
 
 // States
 
-export const Simple = Template.bind({});
-Simple.args = {
-  fieldGroupOne: true,
-};
-Simple.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  const dropdown = canvas.getByLabelText("Docking license");
-  const textarea = canvas.getByLabelText("Nature of visit");
-  await userEvent.click(textarea);
-  await userEvent.type(textarea, "business");
-  await userEvent.click(dropdown);
-};
-
-export const WithHeader = Template.bind({});
-WithHeader.args = {
-  formTitle: "Docking registration",
-  formHint:
-    "Before docking with the station, please register your ship and crew.",
-  fieldGroupOne: true,
+export const Simple: StoryObj<FormStoryProps> = {
+  ...Template,
+  args: {
+    fieldGroupOne: true,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const dropdown = await canvas.getByLabelText("Docking license");
+    const textarea = await canvas.getByLabelText("Nature of visit");
+    await userEvent.click(textarea);
+    await userEvent.type(textarea, "business");
+    await userEvent.click(dropdown);
+  },
 };
 
-export const WithLegend = Template.bind({});
-WithLegend.args = {
-  fieldGroupOne: true,
-  fieldGroupOneTitle: "Reason for visit",
-  fieldGroupOneHint:
-    "This helps us understand why you are visiting our station.",
-  fieldGroupTwo: true,
+export const WithHeader: StoryObj<FormStoryProps> = {
+  ...Template,
+  args: {
+    formTitle: "Docking registration",
+    formHint:
+      "Before docking with the station, please register your ship and crew.",
+    fieldGroupOne: true,
+  },
 };
 
-export const WithFormError = Template.bind({});
-WithFormError.args = {
-  formAlert: true,
-  formTitle: "Docking registration",
-  formHint:
-    "Before docking with the station, please register your ship and crew.",
-  fieldGroupOne: true,
+export const WithLegend: StoryObj<FormStoryProps> = {
+  ...Template,
+  args: {
+    fieldGroupOne: true,
+    fieldGroupOneTitle: "Reason for visit",
+    fieldGroupOneHint:
+      "This helps us understand why you are visiting our station.",
+    fieldGroupTwo: true,
+  },
 };
 
-export const WithFieldGroupError = Template.bind({});
-WithFieldGroupError.args = {
-  fieldGroupAlert: true,
-  fieldGroupOne: true,
-  fieldGroupOneTitle: "Reason for visit",
-  fieldGroupOneHint:
-    "This helps us understand why you are visiting our station.",
-  fieldGroupTwo: true,
+export const WithFormError: StoryObj<FormStoryProps> = {
+  ...Template,
+  args: {
+    formAlert: true,
+    formTitle: "Docking registration",
+    formHint:
+      "Before docking with the station, please register your ship and crew.",
+    fieldGroupOne: true,
+  },
 };
 
-export const KitchenSink = Template.bind({});
-KitchenSink.args = {
-  formAlert: true,
-  formTitle: "Docking registration",
-  formHint:
-    "Before docking with the station, please register your ship and crew.",
-  fieldGroupAlert: true,
-  fieldGroupOne: true,
-  fieldGroupOneTitle: "Reason for visit",
-  fieldGroupOneHint:
-    "This helps us understand why you are visiting our station.",
-  fieldGroupTwo: true,
+export const WithFieldGroupError: StoryObj<FormStoryProps> = {
+  ...Template,
+  args: {
+    fieldGroupAlert: true,
+    fieldGroupOne: true,
+    fieldGroupOneTitle: "Reason for visit",
+    fieldGroupOneHint:
+      "This helps us understand why you are visiting our station.",
+    fieldGroupTwo: true,
+  },
+};
+
+export const KitchenSink: StoryObj<FormStoryProps> = {
+  ...Template,
+  args: {
+    formAlert: true,
+    formTitle: "Docking registration",
+    formHint:
+      "Before docking with the station, please register your ship and crew.",
+    fieldGroupAlert: true,
+    fieldGroupOne: true,
+    fieldGroupOneTitle: "Reason for visit",
+    fieldGroupOneHint:
+      "This helps us understand why you are visiting our station.",
+    fieldGroupTwo: true,
+  },
 };

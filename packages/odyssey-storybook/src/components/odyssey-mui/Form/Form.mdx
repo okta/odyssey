@@ -1,6 +1,9 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Form.stories";
+import * as TextFieldStories from "../TextField/TextField.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Forms/Form" anchor />
 
 # Form
 
@@ -11,7 +14,7 @@ The `Form` component arranges input controls to help with the layout and buildin
 Forms are used for submitting data so it is important for them to be easy to understand and easy to complete. There is generally not one simple way to create all forms but following basic usability guidelines can provide a good starting point.
 
 <Canvas>
-  <Story id="mui-components-forms-form--simple" />
+  <Story of={Stories.Simple} />
 </Canvas>
 
 ## Content
@@ -25,7 +28,7 @@ Forms should include a heading that describes the form. This heading may be prov
 An additional description can follow the heading.
 
 <Canvas>
-  <Story id="mui-components-forms-form--with-header" />
+  <Story of={Stories.WithHeader} />
 </Canvas>
 
 ### Field groups
@@ -35,7 +38,7 @@ Field groups allow you to group fields together within the same form.
 Field groups should be labeled by a legend. They can also include descriptions.
 
 <Canvas>
-  <Story id="mui-components-forms-form--with-legend" />
+  <Story of={Stories.WithLegend} />
 </Canvas>
 
 ### Form actions
@@ -67,7 +70,7 @@ Some errors may occur at the highest level. For example, the server may be unabl
 In these cases, an `Infobox` should be added at the top of the form to increase visibility. This alert should persist until the relevant errors are resolved.
 
 <Canvas>
-  <Story id="mui-components-forms-form--with-form-error" />
+  <Story of={Stories.WithFormError} />
 </Canvas>
 
 #### Field group error
@@ -77,7 +80,7 @@ When multiple input selections are incompatible, the whole group may be made inv
 In this case, an `Infobox` should be inserted at the top of the field group. This alert should persist until all input errors are resolved.
 
 <Canvas>
-  <Story id="mui-components-forms-form--with-field-group-error" />
+  <Story of={Stories.WithFieldGroupError} />
 </Canvas>
 
 #### Input error
@@ -85,7 +88,7 @@ In this case, an `Infobox` should be inserted at the top of the field group. Thi
 Each input field within a form has its own error state that prevents a user from moving forward or completing a form.
 
 <Canvas>
-  <Story id="mui-components-forms-text-field--invalid" />
+  <Story of={TextFieldStories.Error} />
 </Canvas>
 
 ### Validation styles
