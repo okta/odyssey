@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
   DownloadIcon,
@@ -19,16 +19,9 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import TooltipMdx from "./Tooltip.mdx";
-
 const storybookMeta: Meta<TooltipProps> = {
   title: "MUI Components/Tooltip",
   component: Tooltip,
-  parameters: {
-    docs: {
-      page: TooltipMdx,
-    },
-  },
   argTypes: {
     children: {
       control: { type: "object" },
@@ -58,62 +51,52 @@ const storybookMeta: Meta<TooltipProps> = {
 
 export default storybookMeta;
 
-const Template: StoryFn<TooltipProps> = (args) => {
-  return (
-    <Tooltip
-      text={args.text}
-      placement={args.placement}
-      ariaType={args.ariaType}
-    >
-      {args.children}
-    </Tooltip>
-  );
+export const Default: StoryObj<TooltipProps> = {
+  args: {
+    children: <Button text="Launch" />,
+    ariaType: "description",
+    placement: "top",
+    text: "This will begin a 10-second countdown",
+  },
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  children: <Button text="Launch" />,
-  ariaType: "description",
-  placement: "top",
-  text: "This will begin a 10-second countdown",
+export const Icon: StoryObj<TooltipProps> = {
+  args: {
+    children: <Button variant="secondary" startIcon={<DownloadIcon />} />,
+    ariaType: "label",
+    placement: "top",
+    text: "Download logs",
+  },
 };
 
-export const Icon = Template.bind({});
-Icon.args = {
-  children: <Button variant="secondary" startIcon={<DownloadIcon />} />,
-  ariaType: "label",
-  placement: "top",
-  text: "Download logs",
+export const Disabled: StoryObj<TooltipProps> = {
+  args: {
+    children: (
+      <Button variant="secondary" isDisabled startIcon={<DownloadIcon />} />
+    ),
+    ariaType: "description",
+    placement: "top",
+    text: "You don't have access to these logs",
+  },
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-  children: (
-    <Button variant="secondary" isDisabled startIcon={<DownloadIcon />} />
-  ),
-  ariaType: "description",
-  placement: "top",
-  text: "You don't have access to these logs",
+export const Placement: StoryObj<TooltipProps> = {
+  render: function C() {
+    return (
+      <>
+        <Tooltip text="Top" placement="top" ariaType="label">
+          <Button text="Top" />
+        </Tooltip>
+        <Tooltip text="Right" placement="right" ariaType="label">
+          <Button text="Right" />
+        </Tooltip>
+        <Tooltip text="Bottom" placement="bottom" ariaType="label">
+          <Button text="Bottom" />
+        </Tooltip>
+        <Tooltip text="Left" placement="left" ariaType="label">
+          <Button text="Left" />
+        </Tooltip>
+      </>
+    );
+  },
 };
-
-const PlacementTemplate: StoryFn<TooltipProps> = () => {
-  return (
-    <>
-      <Tooltip text="Top" placement="top" ariaType="label">
-        <Button text="Top" />
-      </Tooltip>
-      <Tooltip text="Right" placement="right" ariaType="label">
-        <Button text="Right" />
-      </Tooltip>
-      <Tooltip text="Bottom" placement="bottom" ariaType="label">
-        <Button text="Bottom" />
-      </Tooltip>
-      <Tooltip text="Left" placement="left" ariaType="label">
-        <Button text="Left" />
-      </Tooltip>
-    </>
-  );
-};
-
-export const Placement = PlacementTemplate.bind({});
-Placement.args = {};
