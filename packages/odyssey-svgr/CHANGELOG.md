@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.0](https://github.com/okta/odyssey/compare/v0.22.0...v0.23.0) (2023-05-05)
+
+### Bug Fixes
+
+- Icon generation now using newest version of SVGR and SVGO ([#1755](https://github.com/okta/odyssey/issues/1755)) ([89a30a3](https://github.com/okta/odyssey/commit/89a30a3685d1bd1600abf3876d910a19ff236f9b))
+
 ## [0.22.0](https://github.com/okta/odyssey/compare/v0.21.4...v0.22.0) (2023-04-21)
 
 **Note:** Version bump only for package @okta/odyssey-svgr
