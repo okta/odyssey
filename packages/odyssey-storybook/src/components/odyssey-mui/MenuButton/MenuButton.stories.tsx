@@ -50,6 +50,9 @@ const storybookMeta: Meta<MenuButtonProps> = {
     buttonVariant: {
       control: "text",
     },
+    tooltipText: {
+      control: "text",
+    },
   },
   decorators: [MuiThemeDecorator],
 };
@@ -113,7 +116,7 @@ Groupings.args = {
     <MenuItem>Configure thrusters</MenuItem>,
     <MenuItem>View cargo</MenuItem>,
     <Divider />,
-    <MenuItem>Logout</MenuItem>,
+    <MenuItem>Log out</MenuItem>,
   ],
 };
 
@@ -134,6 +137,7 @@ IconButton.args = {
     <MenuItem>Edit configuration</MenuItem>,
     <MenuItem>Launch</MenuItem>,
   ],
-  buttonLabel: "",
+  buttonLabel: undefined,
   buttonEndIcon: <OverflowVerticalIcon />,
+  tooltipText: "More actions",
 };
