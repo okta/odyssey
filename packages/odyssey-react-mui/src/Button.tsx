@@ -12,10 +12,14 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, useContext, useMemo } from "react";
+import { memo, ReactElement, useCallback, useContext } from "react";
 
 import { Icon } from "./Icon";
-import { MuiPropsContext } from "./MuiPropsContext";
+import {
+  defaultMuiPropsContextValue,
+  MuiPropsContext,
+  MuiPropsContextType,
+} from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 
 export type ButtonProps = {
@@ -48,28 +52,31 @@ const Button = ({
 }: ButtonProps) => {
   const muiProps = useContext(MuiPropsContext);
 
-  const button = useMemo(
-    () => (
-      <MuiButton
-        {...muiProps}
-        disabled={isDisabled}
-        endIcon={endIcon}
-        fullWidth={isFullWidth}
-        id={id}
-        onClick={onClick}
-        size={size}
-        startIcon={startIcon}
-        variant={variant}
-      >
-        {text}
-      </MuiButton>
-    ),
+  const propsChild = useCallback(
+    (muiProps: MuiPropsContextType) => {
+      return (
+        <MuiButton
+          {...muiProps}
+          disabled={isDisabled}
+          endIcon={endIcon}
+          fullWidth={isFullWidth}
+          id={id}
+          onClick={onClick}
+          size={size}
+          startIcon={startIcon}
+          variant={variant}
+        >
+          <MuiPropsContext.Provider value={defaultMuiPropsContextValue}>
+            {text}
+          </MuiPropsContext.Provider>
+        </MuiButton>
+      );
+    },
     [
       endIcon,
       id,
       isDisabled,
       isFullWidth,
-      muiProps,
       onClick,
       size,
       startIcon,
@@ -82,10 +89,26 @@ const Button = ({
     <>
       {tooltipText && (
         <Tooltip ariaType="description" placement="top" text={tooltipText}>
-          {button}
+          <MuiPropsContext.Consumer>{propsChild}</MuiPropsContext.Consumer>
         </Tooltip>
       )}
-      {!tooltipText && button}
+      {!tooltipText && (
+        <MuiButton
+          {...muiProps}
+          disabled={isDisabled}
+          endIcon={endIcon}
+          fullWidth={isFullWidth}
+          id={id}
+          onClick={onClick}
+          size={size}
+          startIcon={startIcon}
+          variant={variant}
+        >
+          <MuiPropsContext.Provider value={defaultMuiPropsContextValue}>
+            {text}
+          </MuiPropsContext.Provider>
+        </MuiButton>
+      )}
     </>
   );
 };

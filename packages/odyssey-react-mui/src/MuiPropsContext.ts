@@ -14,4 +14,8 @@ import { createContext } from "react";
 
 export type MuiPropsContextType = Record<string, unknown>;
 
-export const MuiPropsContext = createContext<MuiPropsContextType>({});
+export const defaultMuiPropsContextValue = {};
+
+export const MuiPropsContext = createContext<MuiPropsContextType>(
+  defaultMuiPropsContextValue
+);
