@@ -11,12 +11,8 @@
  */
 
 import { useMemo, useState } from "react";
-import type { Story } from "@storybook/react";
-import {
-  InputBase,
-  InputBaseProps,
-  OdysseyThemeProvider,
-} from "@okta/odyssey-react-mui";
+import type { Meta, Story } from "@storybook/react";
+import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
 import {
   AdapterDateFns,
   DatePicker,
@@ -28,7 +24,7 @@ import {
 import DatePickerMdx from "./DatePicker.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
-export default {
+const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
   title: `Labs Components/DatePicker`,
   component: DatePicker,
   parameters: {
@@ -44,22 +40,6 @@ export default {
     onChange: {
       control: "function",
     },
-    renderInput: {
-      control: "function",
-      defaultValue: ({
-        InputProps,
-        ...props
-      }: {
-        InputProps: InputBaseProps;
-      }) => {
-        const combinedProps = {
-          ...InputProps,
-          ...props,
-        };
-
-        return <InputBase {...combinedProps} />;
-      },
-    },
     value: {
       control: "text",
       defaultValue: null,
@@ -67,6 +47,8 @@ export default {
   },
   decorators: [MuiThemeDecorator],
 };
+
+export default storybookMeta;
 
 const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
   const [value, setValue] = useState<unknown>(Date.now());

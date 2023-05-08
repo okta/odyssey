@@ -10,24 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputBase } from "@mui/material";
+import { InputAdornment, InputBase } from "@mui/material";
 import {
   ChangeEventHandler,
   FocusEventHandler,
   forwardRef,
   InputHTMLAttributes,
   memo,
-  ReactNode,
+  ReactElement,
   useCallback,
 } from "react";
 
 import { Field } from "./Field";
+import { Icon } from "./Icon";
 
 export type TextFieldProps = {
-  /**
-   * If `true`, the component will receive focus automatically.
-   */
-  autoFocus?: boolean;
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
@@ -37,11 +34,15 @@ export type TextFieldProps = {
   /**
    * End `InputAdornment` for this component.
    */
-  endAdornment?: ReactNode;
+  endAdornment?: string | ReactElement<typeof Icon>;
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
   errorMessage?: string;
+  /**
+   * If `true`, the component will receive focus automatically.
+   */
+  hasInitialFocus?: boolean;
   /**
    * The helper text content.
    */
@@ -59,13 +60,13 @@ export type TextFieldProps = {
    */
   isMultiline?: boolean;
   /**
+   * If `true`, the `input` element is not required.
+   */
+  isOptional?: boolean;
+  /**
    * It prevents the user from changing the value of the field
    */
   isReadOnly?: boolean;
-  /**
-   * If `true`, the `input` element is required.
-   */
-  isRequired?: boolean;
   /**
    * The label for the `input` element.
    */
@@ -83,7 +84,7 @@ export type TextFieldProps = {
    */
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
-   * The label for the `input` element if the it's not optional
+   * The label for the `input` element if it's optional
    */
   optionalLabel?: string;
   /**
@@ -93,7 +94,7 @@ export type TextFieldProps = {
   /**
    * Start `InputAdornment` for this component.
    */
-  startAdornment?: ReactNode;
+  startAdornment?: string | ReactElement<typeof Icon>;
   /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */
@@ -108,20 +109,20 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
       autoCompleteType,
-      autoFocus,
+      hasInitialFocus,
       endAdornment,
       errorMessage,
       hint,
       id: idOverride,
       isDisabled = false,
       isMultiline = false,
+      isOptional = false,
       isReadOnly,
-      isRequired = true,
       label,
       onBlur,
       onChange,
       onFocus,
-      optionalLabel,
+      optionalLabel = "Optional",
       placeholder,
       startAdornment,
       type = "text",
@@ -135,24 +136,33 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
-          autoFocus={autoFocus}
-          endAdornment={endAdornment}
+          autoFocus={hasInitialFocus}
+          endAdornment={
+            endAdornment && (
+              <InputAdornment position="end">{endAdornment}</InputAdornment>
+            )
+          }
           id={id}
           multiline={isMultiline}
+          name={id}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
           placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}
-          startAdornment={startAdornment}
+          startAdornment={
+            startAdornment && (
+              <InputAdornment position="start">{startAdornment}</InputAdornment>
+            )
+          }
           type={type}
           value={value}
         />
       ),
       [
         autoCompleteType,
-        autoFocus,
+        hasInitialFocus,
         endAdornment,
         isMultiline,
         onChange,
@@ -170,11 +180,12 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <Field
         errorMessage={errorMessage}
+        fieldType="single"
         hasVisibleLabel
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
-        isRequired={isRequired}
+        isOptional={isOptional}
         label={label}
         optionalLabel={optionalLabel}
         renderFieldComponent={renderFieldComponent}

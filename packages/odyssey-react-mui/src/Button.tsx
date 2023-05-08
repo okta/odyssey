@@ -12,17 +12,20 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { Tooltip } from "./";
-import { memo } from "react";
+import { memo, ReactElement, useContext, useMemo } from "react";
+
+import { Icon } from "./Icon";
+import { MuiPropsContext } from "./MuiPropsContext";
+import { Tooltip } from "./Tooltip";
 
 export type ButtonProps = {
-  endIcon?: React.ReactNode;
+  endIcon?: ReactElement<typeof Icon>;
   id?: string;
   isDisabled?: boolean;
   isFullWidth?: boolean;
   onClick?: MuiButtonProps["onClick"];
   size?: MuiButtonProps["size"];
-  startIcon?: React.ReactNode;
+  startIcon?: ReactElement<typeof Icon>;
   text?: string;
   /**
    * `tooltipText` determines the text of the tooltip that wraps the button if it's icon-only.
@@ -43,25 +46,42 @@ const Button = ({
   tooltipText,
   variant,
 }: ButtonProps) => {
-  const button = (
-    <MuiButton
-      disabled={isDisabled}
-      endIcon={endIcon}
-      fullWidth={isFullWidth}
-      id={id}
-      onClick={onClick}
-      size={size}
-      startIcon={startIcon}
-      variant={variant}
-    >
-      {text}
-    </MuiButton>
+  const muiProps = useContext(MuiPropsContext);
+
+  const button = useMemo(
+    () => (
+      <MuiButton
+        {...muiProps}
+        disabled={isDisabled}
+        endIcon={endIcon}
+        fullWidth={isFullWidth}
+        id={id}
+        onClick={onClick}
+        size={size}
+        startIcon={startIcon}
+        variant={variant}
+      >
+        {text}
+      </MuiButton>
+    ),
+    [
+      endIcon,
+      id,
+      isDisabled,
+      isFullWidth,
+      muiProps,
+      onClick,
+      size,
+      startIcon,
+      text,
+      variant,
+    ]
   );
 
   return (
     <>
       {tooltipText && (
-        <Tooltip describeChild placement="top" title={tooltipText}>
+        <Tooltip ariaType="description" placement="top" text={tooltipText}>
           {button}
         </Tooltip>
       )}

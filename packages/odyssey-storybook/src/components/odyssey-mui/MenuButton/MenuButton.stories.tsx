@@ -39,7 +39,6 @@ const storybookMeta: Meta<MenuButtonProps> = {
   argTypes: {
     children: {
       control: "text",
-      defaultValue: undefined,
     },
     buttonLabel: {
       control: "text",
@@ -47,11 +46,9 @@ const storybookMeta: Meta<MenuButtonProps> = {
     },
     buttonEndIcon: {
       control: "text",
-      defaultValue: undefined,
     },
     buttonVariant: {
       control: "text",
-      defaultValue: undefined,
     },
   },
   decorators: [MuiThemeDecorator],

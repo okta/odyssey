@@ -10,64 +10,58 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import * as React from "react";
-import { Story } from "@storybook/react";
-import {
-  Alert,
-  AlertTitle,
-  Button,
-  CloseIcon,
-  Link,
-  Snackbar,
-  Stack,
-} from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { Meta, Story } from "@storybook/react";
+import { Button, Toast, ToastProps, ToastStack } from "@okta/odyssey-react-mui";
+import { useCallback, useState } from "react";
 
 import ToastMdx from "./Toast.mdx";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-export default {
+const storybookMeta: Meta<ToastProps> = {
   title: `MUI Components/Alerts/Toast`,
-  component: Alert,
+  component: Toast,
   parameters: {
     docs: {
       page: ToastMdx,
     },
   },
   argTypes: {
-    actionLink: {
-      control: "text",
-      default: null,
+    autoHideDuration: {
+      control: "number",
     },
-    content: {
-      control: "text",
-      defaultValue: "Mission to Sirius B scheduled for January 7, 2023",
-    },
-    isDismissible: {
+    isDismissable: {
       control: "boolean",
-      defaultValue: null,
+    },
+    linkText: {
+      control: "text",
+    },
+    linkUrl: {
+      control: "text",
     },
     role: {
       control: "radio",
-      options: ["status", null],
-      defaultValue: null,
+      options: ["alert", "status", undefined],
     },
     severity: {
       control: "radio",
-      options: ["error", "info", "success", "warning"],
       defaultValue: "info",
+      options: ["error", "info", "success", "warning"],
+    },
+    text: {
+      control: "text",
+      defaultValue: "Mission to Sagittarius A set for January 7",
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
-  const [open, setOpen] = React.useState(false);
+export default storybookMeta;
 
-  const openToast = React.useCallback(() => {
-    setOpen(true);
-  }, []);
-  const closeToast = React.useCallback(() => {
-    setOpen(false);
+const DefaultTemplate: Story<ToastProps> = (args) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const openToast = useCallback(() => {
+    setIsVisible(true);
   }, []);
 
   return (
@@ -77,55 +71,76 @@ const DefaultTemplate: Story = (args) => {
         onClick={openToast}
         text={`Open ${args.severity} toast`}
       />
-      <Stack spacing={2} sx={{ width: "100%" }}>
-        <Snackbar
-          open={open}
-          autoHideDuration={args.isDismissible === true ? undefined : 6000}
-          onClose={closeToast}
-        >
-          <Alert
-            severity={args.severity}
-            variant="toast"
-            action={
-              args.isDismissible && (
-                <Button
-                  aria-label="close"
-                  onClick={closeToast}
-                  variant="floating"
-                  size="small"
-                  startIcon={<CloseIcon fontSize="inherit" />}
-                />
-              )
-            }
-          >
-            <AlertTitle>{args.content}</AlertTitle>
-            {args.actionLink && args.actionLink}
-          </Alert>
-        </Snackbar>
-      </Stack>
+      <ToastStack>
+        <Toast
+          autoHideDuration={args.autoHideDuration}
+          isDismissable={args.isDismissable}
+          linkText={args.linkText}
+          linkUrl={args.linkUrl}
+          isVisible={isVisible}
+          onHide={() => setIsVisible(false)}
+          role={args.role}
+          severity={args.severity}
+          text={args.text}
+        />
+      </ToastStack>
     </>
   );
 };
 
-const StaticTemplate: Story = (args) => {
+const StaticTemplate: Story<ToastProps> = (args) => {
+  return <Toast {...args}></Toast>;
+};
+
+const MultipleTemplate: Story<ToastProps> = () => {
+  const [toasts, setToasts] = useState([
+    <Toast
+      isDismissable
+      isVisible={true}
+      severity="info"
+      text="Mission to Sagittarius A set for January 7"
+    />,
+    <Toast
+      isDismissable
+      isVisible={true}
+      severity="success"
+      text="Docking completed"
+    />,
+  ]);
+
+  const addToast = () => {
+    const toastOptions = [
+      <Toast
+        isVisible={true}
+        severity="info"
+        text={`Mission to Sagittarius A set for January 7`}
+      />,
+      <Toast isVisible={true} severity="success" text={`Docking completed.`} />,
+      <Toast
+        isVisible={true}
+        severity="warning"
+        isDismissable
+        text={`Severe solar winds may delay local system flights`}
+      />,
+      <Toast
+        isVisible={true}
+        severity="error"
+        isDismissable
+        text={`Security breach in Hangar 10`}
+      />,
+    ];
+
+    setToasts([
+      ...toasts,
+      toastOptions[Math.floor(Math.random() * toastOptions.length)],
+    ]);
+  };
+
   return (
-    <Alert
-      severity={args.severity}
-      variant="toast"
-      action={
-        args.isDismissible && (
-          <Button
-            aria-label="close"
-            variant="floating"
-            size="small"
-            startIcon={<CloseIcon />}
-          />
-        )
-      }
-    >
-      <AlertTitle>{args.content}</AlertTitle>
-      {args.actionLink && args.actionLink}
-    </Alert>
+    <>
+      <Button onClick={addToast} text="Open another Toast" />
+      <ToastStack>{toasts}</ToastStack>
+    </>
   );
 };
 
@@ -133,66 +148,73 @@ export const Info = DefaultTemplate.bind({});
 Info.args = {};
 
 export const InfoStatic = StaticTemplate.bind({});
-InfoStatic.args = {};
+InfoStatic.args = {
+  isVisible: true,
+  autoHideDuration: 0,
+};
 
 export const Error = DefaultTemplate.bind({});
 Error.args = {
-  content: "Security breach in Hangar 18",
+  text: "Security breach in Hangar 18",
   role: "alert",
   severity: "error",
 };
 
 export const ErrorStatic = StaticTemplate.bind({});
 ErrorStatic.args = {
-  content: "Security breach in Hangar 18",
+  isVisible: true,
+  text: "Security breach in Hangar 18",
   role: "alert",
   severity: "error",
+  autoHideDuration: 0,
 };
 
 export const Warning = DefaultTemplate.bind({});
 Warning.args = {
-  content: "Severe solar winds may delay local system flights",
+  text: "Severe solar winds may delay local system flights",
   role: "status",
   severity: "warning",
 };
 
 export const WarningStatic = StaticTemplate.bind({});
 WarningStatic.args = {
-  content: "Severe solar winds may delay local system flights",
+  isVisible: true,
+  text: "Severe solar winds may delay local system flights",
   role: "status",
   severity: "warning",
+  autoHideDuration: 0,
 };
 
 export const Success = DefaultTemplate.bind({});
 Success.args = {
-  content: "Docking completed",
+  text: "Docking completed",
   role: "status",
   severity: "success",
 };
 
 export const SuccessStatic = StaticTemplate.bind({});
 SuccessStatic.args = {
-  content: "Docking completed",
+  isVisible: true,
+  text: "Docking completed",
   role: "status",
   severity: "success",
+  autoHideDuration: 0,
 };
 
 export const Dismissible = DefaultTemplate.bind({});
 Dismissible.args = {
-  actionLink: (
-    <Link href="#anchor" variant="monochrome">
-      View report
-    </Link>
-  ),
-  isDismissible: true,
+  isDismissable: true,
+  linkText: "View report",
+  linkUrl: "#",
 };
 
 export const DismissibleStatic = StaticTemplate.bind({});
 DismissibleStatic.args = {
-  actionLink: (
-    <Link href="#anchor" variant="monochrome">
-      View report
-    </Link>
-  ),
-  isDismissible: true,
+  isDismissable: true,
+  isVisible: true,
+  linkText: "View report",
+  linkUrl: "#",
 };
+
+export const MultipleToasts = MultipleTemplate.bind({});
+MultipleToasts.args = {};
