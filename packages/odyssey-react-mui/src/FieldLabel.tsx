@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputLabel } from "@mui/material";
+import { InputLabel as MuiInputLabel } from "@mui/material";
 import { memo, useMemo } from "react";
 
 import { ScreenReaderText } from "./ScreenReaderText";
@@ -35,12 +35,12 @@ const FieldLabel = ({
 }: FieldLabelProps) => {
   const inputLabel = useMemo(
     () => (
-      <InputLabel htmlFor={inputId} id={id}>
+      <MuiInputLabel htmlFor={inputId} id={id}>
         {text}
         {isOptional && (
           <Typography variant="subtitle1">{optionalText}</Typography>
         )}
-      </InputLabel>
+      </MuiInputLabel>
     ),
     [id, inputId, isOptional, optionalText, text]
   );

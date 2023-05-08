@@ -222,7 +222,7 @@ const Template: Story = (args) => {
             <FormLabel component="legend">Destination</FormLabel>
             <RadioGroup
               defaultValue="Lightspeed"
-              name="radio-buttons-group"
+              id="radio-buttons-group"
               label="Speed"
               aria-describedby="radio-hint radio-error"
             >

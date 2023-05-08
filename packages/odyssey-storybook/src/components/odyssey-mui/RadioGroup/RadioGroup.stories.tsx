@@ -37,14 +37,16 @@ const storybookMeta: ComponentMeta<typeof RadioGroup> = {
     hint: {
       control: "text",
     },
+    id: {
+      control: "text",
+      defaultValue: "storybook-radio",
+    },
     isDisabled: {
       control: "boolean",
     },
     label: {
       control: "text",
-    },
-    name: {
-      control: "text",
+      defaultValue: "Speed",
     },
     onChange: {
       control: "function",
@@ -66,12 +68,6 @@ const Template: ComponentStory<typeof RadioGroup> = (args) => {
       <Radio label="Ludicrous Speed" value="Ludicrous Speed" />
     </RadioGroup>
   );
-};
-
-Template.args = {
-  label: "Speed",
-  name: "storybook-radio",
-  value: "Value",
 };
 
 export const Default = Template.bind({});

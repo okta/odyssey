@@ -243,6 +243,7 @@ export const components: ThemeOptions["components"] = {
           "&:disabled": {
             color: theme.palette.common.white,
             backgroundColor: theme.palette.primary.light,
+            pointerEvents: "initial",
           },
         }),
       },
@@ -388,7 +389,11 @@ export const components: ThemeOptions["components"] = {
 
         "&:disabled": {
           cursor: "not-allowed",
-          pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from "none"
+          pointerEvents: "initial",
+        },
+
+        "&:disabled:active": {
+          pointerEvents: "none",
         },
 
         [`.${buttonClasses.startIcon}, .${buttonClasses.endIcon}`]: {
@@ -450,8 +455,6 @@ export const components: ThemeOptions["components"] = {
 
         ".MuiSvgIcon-root": {
           color: theme.palette.common.white,
-          width: "0.5em",
-          height: "0.5em",
           transition: theme.transitions.create(["color"], {
             duration: theme.transitions.duration.short,
           }),
@@ -1341,6 +1344,7 @@ export const components: ThemeOptions["components"] = {
       root: ({ theme }) => ({
         color: theme.palette.primary.main,
         textDecoration: "underline",
+        cursor: "pointer",
 
         "&:hover": {
           color: theme.palette.primary.dark,
@@ -1569,9 +1573,6 @@ export const components: ThemeOptions["components"] = {
         },
         ".Mui-error > &": {
           borderColor: theme.palette.error.main,
-          "&::before": {
-            backgroundColor: theme.palette.error.main,
-          },
 
           "&.Mui-focusVisible": {
             boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.error.main}`,

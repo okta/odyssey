@@ -10,18 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputBase } from "@mui/material";
+import { InputAdornment, InputBase } from "@mui/material";
 import {
   ChangeEventHandler,
   FocusEventHandler,
   forwardRef,
   InputHTMLAttributes,
   memo,
-  ReactNode,
+  ReactElement,
   useCallback,
 } from "react";
 
 import { Field } from "./Field";
+import { Icon } from "./Icon";
 
 export type TextFieldProps = {
   /**
@@ -33,7 +34,7 @@ export type TextFieldProps = {
   /**
    * End `InputAdornment` for this component.
    */
-  endAdornment?: ReactNode;
+  endAdornment?: string | ReactElement<typeof Icon>;
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
@@ -93,7 +94,7 @@ export type TextFieldProps = {
   /**
    * Start `InputAdornment` for this component.
    */
-  startAdornment?: ReactNode;
+  startAdornment?: string | ReactElement<typeof Icon>;
   /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */
@@ -136,7 +137,9 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
-          endAdornment={endAdornment}
+          endAdornment={
+            <InputAdornment position="end">{endAdornment}</InputAdornment>
+          }
           id={id}
           multiline={isMultiline}
           name={id}
@@ -146,7 +149,9 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}
-          startAdornment={startAdornment}
+          startAdornment={
+            <InputAdornment position="start">{startAdornment}</InputAdornment>
+          }
           type={type}
           value={value}
         />
@@ -171,6 +176,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <Field
         errorMessage={errorMessage}
+        fieldType="single"
         hasVisibleLabel
         hint={hint}
         id={idOverride}

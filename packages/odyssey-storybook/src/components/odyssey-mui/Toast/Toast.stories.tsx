@@ -44,10 +44,12 @@ const storybookMeta: Meta<ToastProps> = {
     },
     severity: {
       control: "radio",
+      defaultValue: "info",
       options: ["error", "info", "success", "warning"],
     },
     text: {
       control: "text",
+      defaultValue: "Mission to Sagittarius A set for January 7",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -86,22 +88,8 @@ const DefaultTemplate: Story<ToastProps> = (args) => {
   );
 };
 
-DefaultTemplate.args = {
-  severity: "info",
-  text: "The mission to Sagittarius A is set for January 7.",
-};
-
 const StaticTemplate: Story<ToastProps> = (args) => {
   return <Toast {...args}></Toast>;
-};
-
-StaticTemplate.args = {
-  isVisible: true,
-};
-
-StaticTemplate.args = {
-  severity: "info",
-  text: "The mission to Sagittarius A is set for January 7.",
 };
 
 const MultipleTemplate: Story<ToastProps> = () => {
@@ -110,13 +98,13 @@ const MultipleTemplate: Story<ToastProps> = () => {
       isDismissable
       isVisible={true}
       severity="info"
-      text="The mission to Sagittarius A is set for January 7."
+      text="Mission to Sagittarius A set for January 7"
     />,
     <Toast
       isDismissable
       isVisible={true}
       severity="success"
-      text="Docking completed."
+      text="Docking completed"
     />,
   ]);
 
@@ -125,20 +113,20 @@ const MultipleTemplate: Story<ToastProps> = () => {
       <Toast
         isVisible={true}
         severity="info"
-        text={`The mission to Sagittarius A is set for January 7.`}
+        text={`Mission to Sagittarius A set for January 7`}
       />,
       <Toast isVisible={true} severity="success" text={`Docking completed.`} />,
       <Toast
         isVisible={true}
         severity="warning"
         isDismissable
-        text={`Severe solar winds may delay local system flights.`}
+        text={`Severe solar winds may delay local system flights`}
       />,
       <Toast
         isVisible={true}
         severity="error"
         isDismissable
-        text={`Security breach in Hangar 10.`}
+        text={`Security breach in Hangar 10`}
       />,
     ];
 
@@ -160,7 +148,10 @@ export const Info = DefaultTemplate.bind({});
 Info.args = {};
 
 export const InfoStatic = StaticTemplate.bind({});
-InfoStatic.args = {};
+InfoStatic.args = {
+  isVisible: true,
+  autoHideDuration: 0,
+};
 
 export const Error = DefaultTemplate.bind({});
 Error.args = {
@@ -171,9 +162,11 @@ Error.args = {
 
 export const ErrorStatic = StaticTemplate.bind({});
 ErrorStatic.args = {
+  isVisible: true,
   text: "Security breach in Hangar 18",
   role: "alert",
   severity: "error",
+  autoHideDuration: 0,
 };
 
 export const Warning = DefaultTemplate.bind({});
@@ -185,9 +178,11 @@ Warning.args = {
 
 export const WarningStatic = StaticTemplate.bind({});
 WarningStatic.args = {
+  isVisible: true,
   text: "Severe solar winds may delay local system flights",
   role: "status",
   severity: "warning",
+  autoHideDuration: 0,
 };
 
 export const Success = DefaultTemplate.bind({});
@@ -199,9 +194,11 @@ Success.args = {
 
 export const SuccessStatic = StaticTemplate.bind({});
 SuccessStatic.args = {
+  isVisible: true,
   text: "Docking completed",
   role: "status",
   severity: "success",
+  autoHideDuration: 0,
 };
 
 export const Dismissible = DefaultTemplate.bind({});
@@ -214,6 +211,7 @@ Dismissible.args = {
 export const DismissibleStatic = StaticTemplate.bind({});
 DismissibleStatic.args = {
   isDismissable: true,
+  isVisible: true,
   linkText: "View report",
   linkUrl: "#",
 };

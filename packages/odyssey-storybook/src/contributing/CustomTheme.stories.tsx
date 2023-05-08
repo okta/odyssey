@@ -95,7 +95,7 @@ export const RadioGroupStory: StoryFn = () => {
       <div>
         <RadioGroup
           defaultValue="Lightspeed"
-          name="radio-buttons-group"
+          id="radio-buttons-group"
           label="Speed"
           aria-describedby="radio-hint radio-error"
         >

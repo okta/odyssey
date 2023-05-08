@@ -11,7 +11,7 @@
     "node": ">=16 <17"
   },
   "scripts": {
-    "build": "lerna run build --ignore @okta/odyssey-storybook",
+    "build": "lerna run build --ignore @okta/odyssey-storybook --ignore @okta/odyssey-icons --ignore @okta/odyssey-svgr",
     "dev:source": "lerna run dev:source",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-svgr build && yarn workspace @okta/odyssey-react-mui build:icons",

@@ -42,6 +42,7 @@ const storybookMeta: Meta<MenuButtonProps> = {
     },
     buttonLabel: {
       control: "text",
+      defaultValue: "More actions",
     },
     buttonEndIcon: {
       control: "text",
@@ -59,13 +60,8 @@ const DefaultTemplate: Story<MenuButtonProps> = (args) => {
   return <MenuButton {...args}>{args.children}</MenuButton>;
 };
 
-DefaultTemplate.args = {
-  buttonLabel: "More actions",
-};
-
 export const Simple = DefaultTemplate.bind({});
 Simple.args = {
-  buttonLabel: "More actions",
   children: [
     <MenuItem>View details</MenuItem>,
     <MenuItem>Edit configuration</MenuItem>,
@@ -99,7 +95,6 @@ ActionIcons.args = {
 
 export const ButtonVariant = DefaultTemplate.bind({});
 ButtonVariant.args = {
-  buttonLabel: "More actions",
   buttonVariant: "floating",
   children: [
     <MenuItem>View details</MenuItem>,
@@ -110,7 +105,6 @@ ButtonVariant.args = {
 
 export const Groupings = DefaultTemplate.bind({});
 Groupings.args = {
-  buttonLabel: "More actions",
   children: [
     <ListSubheader>Crew</ListSubheader>,
     <MenuItem>Assign captain</MenuItem>,
