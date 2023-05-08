@@ -1113,9 +1113,8 @@ export const components: ThemeOptions["components"] = {
           marginInlineStart: theme.spacing(2),
         },
       }),
-      asterisk: ({ theme }) => ({
-        color: theme.palette.error.main,
-        fontWeight: theme.typography.fontWeightBold,
+      asterisk: () => ({
+        display: "none",
       }),
     },
   },

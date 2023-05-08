@@ -33,9 +33,13 @@ const storybookMeta: Meta<CheckboxProps> = {
       control: "text",
       defaultValue: "checkbox",
     },
-    isOptional: {
+    isRequired: {
       control: "boolean",
-      defaultValue: true,
+      defaultValue: false,
+    },
+    requiredLabel: {
+      control: "text",
+      defaultValue: "Required",
     },
     onChange: {
       control: "function",
@@ -59,5 +63,5 @@ Default.args = {};
 
 export const Required = Template.bind({});
 Required.args = {
-  isOptional: false,
+  isRequired: true,
 };

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Checkbox as MuiCheckbox } from "@mui/material";
+import { Checkbox as MuiCheckbox, Typography } from "@mui/material";
 import { ChangeEventHandler, memo } from "react";
 
 import { FormControlLabel } from ".";
@@ -23,10 +23,11 @@ export type CheckboxProps = {
   isDefaultChecked?: boolean;
   isDisabled?: boolean;
   isIndeterminate?: boolean;
-  isOptional?: boolean;
+  isRequired?: boolean;
   label?: string;
   name?: string;
   onChange?: ChangeEventHandler<EventTarget>;
+  requiredLabel?: string;
   value?: string;
 };
 
@@ -38,30 +39,45 @@ const Checkbox = ({
   isDefaultChecked,
   isDisabled,
   isIndeterminate,
-  isOptional = true,
+  isRequired = true,
   label,
   name,
   onChange,
+  requiredLabel = "Required",
   value,
-}: CheckboxProps) => (
-  <FormControlLabel
-    aria-label={ariaLabel}
-    aria-labelledby={ariaLabelledBy}
-    aria-required={!isOptional}
-    checked={isChecked}
-    className={hasError ? "Mui-error" : ""}
-    control={
-      <MuiCheckbox indeterminate={isIndeterminate} required={!isOptional} />
-    }
-    defaultChecked={isDefaultChecked}
-    disabled={isDisabled}
-    label={label}
-    name={name}
-    onChange={onChange}
-    value={value}
-    required={!isOptional}
-  />
-);
+}: CheckboxProps) => {
+  let combinedLabel = <>{label}</>;
+  if (isRequired) {
+    combinedLabel = (
+      <>
+        {label}{" "}
+        <Typography component="span" color="textSecondary">
+          ({requiredLabel})
+        </Typography>
+      </>
+    );
+  }
+
+  return (
+    <FormControlLabel
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
+      aria-required={isRequired}
+      checked={isChecked}
+      className={hasError ? "Mui-error" : ""}
+      control={
+        <MuiCheckbox indeterminate={isIndeterminate} required={isRequired} />
+      }
+      defaultChecked={isDefaultChecked}
+      disabled={isDisabled}
+      label={combinedLabel}
+      name={name}
+      onChange={onChange}
+      value={value}
+      required={isRequired}
+    />
+  );
+};
 
 const MemoizedCheckbox = memo(Checkbox);
 
