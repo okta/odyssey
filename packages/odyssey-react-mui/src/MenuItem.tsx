@@ -45,5 +45,6 @@ const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
 );
 
 const MemoizedMenuItem = memo(MenuItem);
+MemoizedMenuItem.displayName = "MenuItem";
 
 export { MemoizedMenuItem as MenuItem };
