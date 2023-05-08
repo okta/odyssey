@@ -25,32 +25,34 @@ const storybookMeta: ComponentMeta<typeof RadioGroup> = {
     },
   },
   argTypes: {
+    children: {
+      control: "text",
+    },
+    defaultValue: {
+      control: "text",
+    },
     errorMessage: {
       control: "text",
-      defaultValue: null,
     },
     hint: {
       control: "text",
-      defaultValue: null,
+    },
+    id: {
+      control: "text",
+      defaultValue: "storybook-radio",
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
     },
     label: {
       control: "text",
       defaultValue: "Speed",
-    },
-    name: {
-      control: "text",
-      defaultValue: "storybook-radio",
     },
     onChange: {
       control: "function",
     },
     value: {
       control: "text",
-      defaultValue: "Value",
     },
   },
   decorators: [MuiThemeDecorator],

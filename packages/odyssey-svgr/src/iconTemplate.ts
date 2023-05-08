@@ -10,22 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const generate = require("@babel/generator").default;
-const {
+import generate from "@babel/generator";
+import {
   jsxFragment,
   jsxOpeningFragment,
   jsxClosingFragment,
-} = require("@babel/types");
-const headerComment = require("./header-comment");
+} from "@babel/types";
+import type { Template } from "@svgr/babel-plugin-transform-svg-component";
 
-function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
-  const plugins = ["jsx"];
-  if (opts.typescript) {
-    plugins.push("typescript");
-  }
-  const typeScriptTpl = template.smart({ plugins, preserveComments: true });
+import { headerComment } from "./headerComment";
 
-  const compName = componentName.name.substring(3) + "Icon";
+export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
+  const compName = componentName.substring(3) + "Icon";
   const compProps = compName + "Props";
 
   const fragmentJsx = jsxFragment(
@@ -48,7 +44,7 @@ function odysseyIconTemplate({ template }, opts, { componentName, jsx }) {
   const newLine = `
   `;
 
-  return typeScriptTpl.ast`
+  return tpl`
 ${headerComment}
 
 import { forwardRef } from "react";
@@ -71,6 +67,4 @@ ${newLine}
 
 ${compName}.displayName = "${compName}";
 `;
-}
-
-module.exports = odysseyIconTemplate;
+};

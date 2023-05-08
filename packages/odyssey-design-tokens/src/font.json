@@ -3,11 +3,11 @@
     "family": {
       "base": {
         "comment": "Default font used within all Okta product user interfaces",
-        "value": "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif"
+        "value": "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif"
       },
       "mono": {
         "comment": "Monospace font used within all Okta product user interfaces",
-        "value": "'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace"
+        "value": "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace"
       }
     },
     "scale": {

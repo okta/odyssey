@@ -243,6 +243,7 @@ export const components: ThemeOptions["components"] = {
           "&:disabled": {
             color: theme.palette.common.white,
             backgroundColor: theme.palette.primary.light,
+            pointerEvents: "initial",
           },
         }),
       },
@@ -388,7 +389,11 @@ export const components: ThemeOptions["components"] = {
 
         "&:disabled": {
           cursor: "not-allowed",
-          pointerEvents: "inherit", // in order to have cursor: not-allowed, must change pointer-events from "none"
+          pointerEvents: "initial",
+        },
+
+        "&:disabled:active": {
+          pointerEvents: "none",
         },
 
         [`.${buttonClasses.startIcon}, .${buttonClasses.endIcon}`]: {
@@ -450,8 +455,6 @@ export const components: ThemeOptions["components"] = {
 
         ".MuiSvgIcon-root": {
           color: theme.palette.common.white,
-          width: "0.5em",
-          height: "0.5em",
           transition: theme.transitions.create(["color"], {
             duration: theme.transitions.duration.short,
           }),
@@ -993,6 +996,10 @@ export const components: ThemeOptions["components"] = {
         paddingBlock: theme.spacing(4),
         paddingInline: theme.spacing(6),
 
+        "&:last-child": {
+          paddingBlockEnd: theme.spacing(6),
+        },
+
         ...(ownerState.dividers === false && {
           [`& + .${dialogActionsClasses.root}`]: {
             paddingBlockStart: theme.spacing(4),
@@ -1318,6 +1325,9 @@ export const components: ThemeOptions["components"] = {
             transform: "none",
           }),
         }),
+        "& > .MuiTypography-root": {
+          lineHeight: "unset",
+        },
       }),
     },
   },
@@ -1326,6 +1336,7 @@ export const components: ThemeOptions["components"] = {
       root: ({ theme }) => ({
         color: theme.palette.primary.main,
         textDecoration: "underline",
+        cursor: "pointer",
 
         "&:hover": {
           color: theme.palette.primary.dark,
@@ -1554,9 +1565,6 @@ export const components: ThemeOptions["components"] = {
         },
         ".Mui-error > &": {
           borderColor: theme.palette.error.main,
-          "&::before": {
-            backgroundColor: theme.palette.error.main,
-          },
 
           "&.Mui-focusVisible": {
             boxShadow: `0 0 0 2px ${theme.palette.background.default}, 0 0 0 4px ${theme.palette.error.main}`,
@@ -1582,7 +1590,7 @@ export const components: ThemeOptions["components"] = {
           backgroundColor: theme.palette.grey[50],
           borderColor: theme.palette.grey[300],
 
-          "&::before": {
+          "&.Mui-checked::before": {
             backgroundColor: theme.palette.grey[300],
           },
         },
@@ -1594,6 +1602,13 @@ export const components: ThemeOptions["components"] = {
       anchorOrigin: {
         vertical: "bottom",
         horizontal: "right",
+      },
+    },
+    styleOverrides: {
+      root: {
+        "&.Toast": {
+          position: "static",
+        },
       },
     },
   },
@@ -1631,8 +1646,16 @@ export const components: ThemeOptions["components"] = {
       color: "inherit",
     },
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme, ownerState }) => ({
         fontSize: `${theme.typography.ui.lineHeight}rem`,
+
+        ...(ownerState.fontSize === "small" && {
+          fontSize: `${Number(theme.typography.ui.lineHeight) * 0.75}rem`,
+        }),
+
+        ...(ownerState.fontSize === "large" && {
+          fontSize: `${Number(theme.typography.ui.lineHeight) * 1.25}rem`,
+        }),
       }),
     },
   },
@@ -2031,7 +2054,7 @@ export const components: ThemeOptions["components"] = {
   MuiTypography: {
     defaultProps: {
       fontFamily:
-        "'Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
+        "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
       variantMapping: {
         h1: "h1",
         h2: "h2",

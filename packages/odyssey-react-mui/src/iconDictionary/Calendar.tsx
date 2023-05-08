@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,10 +30,10 @@ export const CalendarIcon = forwardRef<SVGSVGElement, CalendarIconProps>(
       >
         <>
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M5 3V4H6V3H10V4H11V3H14V6H2V3H5ZM5 2H2H1V3V11.8C1 12.9201 1 13.4802 1.21799 13.908C1.40973 14.2843 1.71569 14.5903 2.09202 14.782C2.51984 15 3.0799 15 4.2 15H11.8C12.9201 15 13.4802 15 13.908 14.782C14.2843 14.5903 14.5903 14.2843 14.782 13.908C15 13.4802 15 12.9201 15 11.8V3V2H14H11V0H10V2H6V0H5V2ZM2 11.8V7H14V11.8C14 12.3766 13.9992 12.7488 13.9761 13.0322C13.9539 13.3038 13.9162 13.4045 13.891 13.454C13.7951 13.6422 13.6422 13.7951 13.454 13.891C13.4045 13.9162 13.3038 13.9539 13.0322 13.9761C12.7488 13.9992 12.3766 14 11.8 14H4.2C3.62345 14 3.25117 13.9992 2.96784 13.9761C2.69617 13.9539 2.59545 13.9162 2.54601 13.891C2.35785 13.7951 2.20487 13.6422 2.10899 13.454C2.0838 13.4045 2.04612 13.3038 2.02393 13.0322C2.00078 12.7488 2 12.3766 2 11.8Z"
             fill="currentColor"
+            fillRule="evenodd"
+            d="M5 3v1h1V3h4v1h1V3h3v3H2V3h3Zm0-1H1v9.8c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C2.52 15 3.08 15 4.2 15h7.6c1.12 0 1.68 0 2.108-.218a2 2 0 0 0 .874-.874C15 13.48 15 12.92 15 11.8V2h-4V0h-1v2H6V0H5v2Zm-3 9.8V7h12v4.8c0 .577 0 .949-.024 1.232-.022.272-.06.373-.085.422a1 1 0 0 1-.437.437c-.05.025-.15.063-.422.085C12.75 14 12.377 14 11.8 14H4.2c-.577 0-.949 0-1.232-.024-.272-.022-.373-.06-.422-.085a1 1 0 0 1-.437-.437c-.025-.05-.063-.15-.085-.422C2 12.75 2 12.377 2 11.8Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>

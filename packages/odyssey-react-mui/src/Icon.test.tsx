@@ -18,7 +18,7 @@ const name = "check";
 
 describe("Icon", () => {
   it("renders an icon based on name prop", () => {
-    render(<Icon name={name} titleAccess={title} />);
+    render(<Icon name={name} label={title} size="medium" />);
 
     const svgElement = screen.getByRole("img");
     expect(svgElement).toBeVisible();

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,10 +30,10 @@ export const ArrowRightIcon = forwardRef<SVGSVGElement, ArrowRightIconProps>(
       >
         <>
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M13.2929 7.5L9.14645 3.35355L9.85355 2.64645L14.8536 7.64645C15.0488 7.84171 15.0488 8.15829 14.8536 8.35355L9.85355 13.3536L9.14645 12.6464L13.2929 8.5H1V7.5H13.2929Z"
             fill="currentColor"
+            fillRule="evenodd"
+            d="M13.293 7.5 9.146 3.354l.708-.708 5 5a.5.5 0 0 1 0 .708l-5 5-.708-.708L13.293 8.5H1v-1h12.293Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>

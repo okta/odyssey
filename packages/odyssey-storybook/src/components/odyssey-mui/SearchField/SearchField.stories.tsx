@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { SearchField } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import { SearchField, SearchFieldProps } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import SearchFieldMdx from "./SearchField.mdx";
 
-const storybookMeta: ComponentMeta<typeof SearchField> = {
+const storybookMeta: Meta<SearchFieldProps> = {
   title: `MUI Components/Forms/SearchField`,
   component: SearchField,
   parameters: {
@@ -29,20 +29,18 @@ const storybookMeta: ComponentMeta<typeof SearchField> = {
       control: "text",
       defaultValue: "name",
     },
-    autoFocus: {
+    hasInitialFocus: {
       control: "boolean",
-      defaultValue: false,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
     },
     id: {
       control: "text",
     },
     label: {
       control: "text",
-      defaultValue: "Destination",
+      defaultValue: "Search",
     },
     onBlur: {
       control: "function",
@@ -55,6 +53,7 @@ const storybookMeta: ComponentMeta<typeof SearchField> = {
     },
     placeholder: {
       control: "text",
+      defaultValue: "Search planets",
     },
     value: {
       control: "text",
@@ -65,12 +64,8 @@ const storybookMeta: ComponentMeta<typeof SearchField> = {
 
 export default storybookMeta;
 
-const Template: ComponentStory<typeof SearchField> = (args) => {
+const Template: Story<SearchFieldProps> = (args) => {
   return <SearchField {...args} />;
 };
 
 export const Default = Template.bind({});
-Default.args = {
-  label: "Search",
-  placeholder: "Search planets",
-};

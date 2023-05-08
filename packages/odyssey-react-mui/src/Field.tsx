@@ -13,18 +13,23 @@
 import { memo, ReactElement, useMemo } from "react";
 
 import {
-  FieldError,
-  FieldHint,
-  FieldLabel,
-  FormControl,
-  useUniqueId,
-} from "./";
+  FormControl as MuiFormControl,
+  FormLabel as MuiFormLabel,
+} from "@mui/material";
+import { FieldError } from "./FieldError";
+import { FieldHint } from "./FieldHint";
+import { FieldLabel } from "./FieldLabel";
+import { useUniqueId } from "./useUniqueId";
 
 export type FieldProps = {
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
   errorMessage?: string;
+  /**
+   * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
+   */
+  fieldType: "single" | "group";
   hasVisibleLabel: boolean;
   /**
    * The helper text content.
@@ -35,13 +40,17 @@ export type FieldProps = {
    */
   id?: string;
   /**
+   * Important for narrowing down the `fieldset` role to "radiogroup".
+   */
+  isRadioGroup?: boolean;
+  /**
    * If `true`, the component is disabled.
    */
   isDisabled?: boolean;
   /**
-   * If `true`, the `input` element is required.
+   * If `true`, the `input` element is not required.
    */
-  isRequired?: boolean;
+  isOptional?: boolean;
   /**
    * The label for the `input` element.
    */
@@ -54,6 +63,9 @@ export type FieldProps = {
    * The short hint displayed in the `input` before the user enters a value.
    */
   placeholder?: string;
+  /**
+   * Render-props function that sends back ARIA props to your field component.
+   */
   renderFieldComponent: ({
     ariaDescribedBy,
     id,
@@ -65,11 +77,13 @@ export type FieldProps = {
 
 const Field = ({
   errorMessage,
+  fieldType,
   hasVisibleLabel,
   hint,
   id: idOverride,
   isDisabled = false,
-  isRequired = true,
+  isRadioGroup = false,
+  isOptional = false,
   label,
   optionalLabel,
   renderFieldComponent,
@@ -85,15 +99,24 @@ const Field = ({
   );
 
   return (
-    <FormControl disabled={isDisabled} error={Boolean(errorMessage)}>
-      <FieldLabel
-        hasVisibleLabel={hasVisibleLabel}
-        id={labelId}
-        inputId={id}
-        isRequired={isRequired}
-        optionalText={optionalLabel}
-        text={label}
-      />
+    <MuiFormControl
+      component={fieldType === "group" ? "fieldset" : "div"}
+      disabled={isDisabled}
+      error={Boolean(errorMessage)}
+      role={isRadioGroup ? "radiogroup" : undefined}
+    >
+      {fieldType === "group" ? (
+        <MuiFormLabel component="legend">{label}</MuiFormLabel>
+      ) : (
+        <FieldLabel
+          hasVisibleLabel={hasVisibleLabel}
+          id={labelId}
+          inputId={id}
+          isOptional={isOptional}
+          optionalText={optionalLabel}
+          text={label}
+        />
+      )}
 
       {hint && <FieldHint id={hintId} text={hint} />}
 
@@ -103,7 +126,7 @@ const Field = ({
       })}
 
       {errorMessage && <FieldError id={errorId} text={errorMessage} />}
-    </FormControl>
+    </MuiFormControl>
   );
 };
 

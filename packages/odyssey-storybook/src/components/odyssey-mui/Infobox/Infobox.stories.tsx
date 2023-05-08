@@ -10,13 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
-import { Infobox, Link, Typography } from "@okta/odyssey-react-mui";
+import { Meta, Story } from "@storybook/react";
+import {
+  Infobox,
+  InfoboxProps,
+  Link,
+  Typography,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import InfoboxMdx from "./Infobox.mdx";
 
-export default {
+const storybookMeta: Meta<InfoboxProps> = {
   title: `MUI Components/Alerts/Infobox`,
   component: Infobox,
   parameters: {
@@ -32,8 +37,7 @@ export default {
     },
     role: {
       control: "radio",
-      options: ["alert", "status", null],
-      defaultValue: null,
+      options: ["alert", "status", undefined],
     },
     severity: {
       control: "radio",
@@ -42,13 +46,14 @@ export default {
     },
     title: {
       control: "string",
-      defaultValue: undefined,
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
+export default storybookMeta;
+
+const DefaultTemplate: Story<InfoboxProps> = (args) => {
   return (
     <Infobox severity={args.severity} role={args.role} title={args.title}>
       {args.children}

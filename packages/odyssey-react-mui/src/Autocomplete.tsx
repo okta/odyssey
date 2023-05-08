@@ -62,6 +62,12 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["onChange"];
+  onInputChange?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["onInputChange"];
   options: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
@@ -89,14 +95,16 @@ const Autocomplete = <
   hint,
   label,
   onChange,
+  onInputChange,
   options,
   value,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
-        {...InputLabelProps}
+        fieldType="single"
         hasVisibleLabel
+        id={InputLabelProps.htmlFor}
         hint={hint}
         label={label}
         renderFieldComponent={({ ariaDescribedBy, id }) => (
@@ -119,6 +127,7 @@ const Autocomplete = <
       loading={isLoading}
       multiple={hasMultipleChoices}
       onChange={onChange}
+      onInputChange={onInputChange}
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}

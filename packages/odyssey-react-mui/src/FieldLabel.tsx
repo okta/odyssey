@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputLabel } from "@mui/material";
+import { InputLabel as MuiInputLabel } from "@mui/material";
 import { memo, useMemo } from "react";
 
 import { ScreenReaderText } from "./ScreenReaderText";
@@ -20,7 +20,7 @@ export type FieldLabelProps = {
   hasVisibleLabel: boolean;
   id: string;
   inputId: string;
-  isRequired: boolean;
+  isOptional: boolean;
   optionalText?: string;
   text: string;
 };
@@ -29,20 +29,20 @@ const FieldLabel = ({
   hasVisibleLabel,
   id,
   inputId,
-  isRequired,
+  isOptional,
   optionalText,
   text,
 }: FieldLabelProps) => {
   const inputLabel = useMemo(
     () => (
-      <InputLabel htmlFor={inputId} id={id}>
+      <MuiInputLabel htmlFor={inputId} id={id}>
         {text}
-        {!isRequired && (
+        {isOptional && (
           <Typography variant="subtitle1">{optionalText}</Typography>
         )}
-      </InputLabel>
+      </MuiInputLabel>
     ),
-    [id, inputId, isRequired, optionalText, text]
+    [id, inputId, isOptional, optionalText, text]
   );
 
   return hasVisibleLabel ? (
