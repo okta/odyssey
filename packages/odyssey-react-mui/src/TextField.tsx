@@ -138,7 +138,9 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
           endAdornment={
-            <InputAdornment position="end">{endAdornment}</InputAdornment>
+            endAdornment && (
+              <InputAdornment position="end">{endAdornment}</InputAdornment>
+            )
           }
           id={id}
           multiline={isMultiline}
@@ -150,7 +152,9 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           readOnly={isReadOnly}
           ref={ref}
           startAdornment={
-            <InputAdornment position="start">{startAdornment}</InputAdornment>
+            startAdornment && (
+              <InputAdornment position="start">{startAdornment}</InputAdornment>
+            )
           }
           type={type}
           value={value}
