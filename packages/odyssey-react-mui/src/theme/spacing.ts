@@ -14,14 +14,14 @@ import type { ThemeOptions } from "@mui/material";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 export const spacing: ThemeOptions["spacing"] = [
-  0,
-  Tokens.SpaceScale0,
-  Tokens.SpaceScale1,
-  Tokens.SpaceScale2,
-  Tokens.SpaceScale3,
-  Tokens.SpaceScale4,
-  Tokens.SpaceScale5,
-  Tokens.SpaceScale6,
-  Tokens.SpaceScale7,
-  Tokens.SpaceScale8,
+  Tokens.Spacing0,
+  Tokens.Spacing1,
+  Tokens.Spacing2,
+  Tokens.Spacing3,
+  Tokens.Spacing4,
+  Tokens.Spacing5,
+  Tokens.Spacing6,
+  Tokens.Spacing7,
+  Tokens.Spacing8,
+  Tokens.Spacing9,
 ];
