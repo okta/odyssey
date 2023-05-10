@@ -33,7 +33,26 @@ The default Select allows users to choose a single value from a list of options.
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-forms-select--default-invalid" />
+  <Story id="mui-components-forms-select--default-error" />
+</Canvas>
+
+### Option datatypes
+
+`<Select>` accepts `options` in two formats:
+
+1. A flat array, in which case the value of each option is the same as its name
+2. An object with values for keys `value` and `name`
+
+Here's a `<Select>` that uses an object for its options:
+
+<Canvas>
+  <Story id="mui-components-forms-select--default-object" />
+</Canvas>
+
+Here's a `<Select>` that uses mixed data types, including headings:
+
+<Canvas>
+  <Story id="mui-components-forms-select--default-grouped" />
 </Canvas>
 
 ### Multi-Select
@@ -54,6 +73,12 @@ The browser-native `<select>` component may be used by passing `<Select>` the `n
   <Story id="mui-components-forms-select--native-default" />
 </Canvas>
 
+#### Multi
+
+<Canvas>
+  <Story id="mui-components-forms-select--native-multi" />
+</Canvas>
+
 ## Usage
 
 Selects are most useful when users are choosing between 7-15 options. For smaller sets, Radio Buttons are more effective. For larger sets, a Text Input with autocompletion may be a better fit.
@@ -61,11 +86,3 @@ Selects are most useful when users are choosing between 7-15 options. For smalle
 Selects perform better when the options are familiar to the user. If a user may be unfamiliar with their options or need to compare them, use Radio Buttons.
 
 Select inputs should not have a default selected unless a majority of users will be choosing it.
-
-### Grouping
-
-Select options may be grouped for faster lookup.
-
-<Canvas>
-  <Story id="mui-components-forms-select--grouped" />
-</Canvas>

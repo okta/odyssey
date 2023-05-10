@@ -10,27 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import * as React from "react";
 import { Meta, Story } from "@storybook/react";
-import {
-  Box,
-  Checkbox,
-  Chip,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  ListItemText,
-  ListSubheader,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  visuallyHidden,
-} from "@okta/odyssey-react-mui";
+import { Select, SelectProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import SelectMdx from "./Select.mdx";
 
-const storybookMeta: Meta = {
+const storybookMeta: Meta<SelectProps> = {
   title: `MUI Components/Forms/Select`,
   component: Select,
   parameters: {
@@ -39,11 +25,11 @@ const storybookMeta: Meta = {
     },
   },
   argTypes: {
-    disabled: {
+    isDisabled: {
       control: "boolean",
       defaultValue: false,
     },
-    error: {
+    errorMessage: {
       control: "text",
       defaultValue: null,
     },
@@ -51,21 +37,21 @@ const storybookMeta: Meta = {
       control: "text",
       defaultValue: "Select your destination in the Sol system.",
     },
-    invalid: {
+    isOptional: {
       control: "boolean",
       defaultValue: false,
+    },
+    optionalLabel: {
+      control: "text",
+      defaultValue: "Optional",
     },
     label: {
       control: "text",
       defaultValue: "Destination",
     },
-    multiple: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    native: {
-      control: "boolean",
-      defaultValue: false,
+    defaultValue: {
+      control: "text",
+      description: "The default value, if the control is native.",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -73,7 +59,7 @@ const storybookMeta: Meta = {
 
 export default storybookMeta;
 
-const destinations = [
+const optionsArray = [
   "Earth",
   "Mars",
   "Ceres",
@@ -83,7 +69,74 @@ const destinations = [
   "Ganymede",
 ];
 
-const exodestinations = [
+const optionsObject = [
+  {
+    text: "Earth",
+    value: "earth",
+  },
+  {
+    text: "Mars",
+    value: "mars",
+  },
+  {
+    text: "Ceres",
+    value: "ceres",
+  },
+  {
+    text: "Eros",
+    value: "eros",
+  },
+  {
+    text: "Tycho Station",
+    value: "tycho-station",
+  },
+  {
+    text: "Phoebe",
+    value: "phoebe",
+  },
+  {
+    text: "Ganymede",
+    value: "ganymede",
+  },
+];
+
+const optionsGrouped = [
+  {
+    text: "Sol System",
+    type: "heading",
+  },
+  {
+    text: "Earth",
+    value: "earth",
+  },
+  {
+    text: "Mars",
+    value: "mars",
+  },
+  {
+    text: "Ceres",
+    value: "ceres",
+  },
+  {
+    text: "Eros",
+    value: "eros",
+  },
+  {
+    text: "Tycho Station",
+    value: "tycho-station",
+  },
+  {
+    text: "Phoebe",
+    value: "phoebe",
+  },
+  {
+    text: "Ganymede",
+    value: "ganymede",
+  },
+  {
+    text: "Extrasolar",
+    type: "heading",
+  },
   "Auberon",
   "Al-Halub",
   "Freehold",
@@ -91,151 +144,52 @@ const exodestinations = [
   "New Terra",
 ];
 
-const Template: Story = (args) => {
+const Template: Story<SelectProps> = (args) => {
   return (
-    <FormControl disabled={args.disabled} error={args.invalid}>
-      <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
-      {args.hint && (
-        <FormHelperText id="select-hint">{args.hint}</FormHelperText>
-      )}
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        label={args.label}
-        native={args.native}
-        aria-describedby="select-hint select-error"
-      >
-        {destinations.map((destination) => (
-          <MenuItem key={destination} value={destination}>
-            {destination}
-          </MenuItem>
-        ))}
-      </Select>
-      {args.error && (
-        <FormHelperText id="select-error" error>
-          <span style={visuallyHidden}>Error:</span> {args.error}
-        </FormHelperText>
-      )}
-    </FormControl>
+    <Select
+      label={args.label}
+      hint={args.hint}
+      defaultValue={args.defaultValue}
+      errorMessage={args.errorMessage}
+      isDisabled={args.isDisabled}
+      isMultiSelect={args.isMultiSelect}
+      isNative={args.isNative}
+      isOptional={args.isOptional}
+      optionalLabel={args.optionalLabel}
+      options={optionsArray}
+    />
   );
 };
 
-const GroupedTemplate: Story = (args) => {
+const ObjectTemplate: Story<SelectProps> = (args) => {
   return (
-    <FormControl disabled={args.disabled} error={args.invalid}>
-      <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
-      {args.hint && (
-        <FormHelperText id="select-hint">{args.hint}</FormHelperText>
-      )}
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        label={args.label}
-        native={args.native}
-        aria-describedby="select-hint select-error"
-      >
-        <ListSubheader>Sol System</ListSubheader>
-        {destinations.map((destination) => (
-          <MenuItem key={destination} value={destination}>
-            {destination}
-          </MenuItem>
-        ))}
-        <ListSubheader>Extrasolar</ListSubheader>
-        {exodestinations.map((destination) => (
-          <MenuItem key={destination} value={destination}>
-            {destination}
-          </MenuItem>
-        ))}
-      </Select>
-      {args.error && (
-        <FormHelperText id="select-error" error>
-          <span style={visuallyHidden}>Error:</span> {args.error}
-        </FormHelperText>
-      )}
-    </FormControl>
+    <Select
+      label={args.label}
+      hint={args.hint}
+      errorMessage={args.errorMessage}
+      isDisabled={args.isDisabled}
+      isMultiSelect={args.isMultiSelect}
+      isNative={args.isNative}
+      isOptional={args.isOptional}
+      optionalLabel={args.optionalLabel}
+      options={optionsObject}
+    />
   );
 };
 
-const MultiTemplate: Story = (args) => {
-  const [destinationName, setDestinationName] = React.useState<string[]>([]);
-
-  const handleChange = (event: SelectChangeEvent<typeof destinationName>) => {
-    const {
-      target: { value },
-    } = event;
-    setDestinationName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
-
+const GroupTemplate: Story<SelectProps> = (args) => {
   return (
-    <FormControl disabled={args.disabled} error={args.invalid}>
-      <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
-      {args.hint && (
-        <FormHelperText id="select-hint">{args.hint}</FormHelperText>
-      )}
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        label={args.label}
-        native={args.native}
-        onChange={handleChange}
-        multiple={args.multiple}
-        aria-describedby="select-hint select-error"
-        renderValue={(selected) => (
-          <Box>
-            {selected.map((destination) => (
-              <Chip key={destination} label={destination} />
-            ))}
-          </Box>
-        )}
-        value={destinationName}
-      >
-        {destinations.map((destination) => (
-          <MenuItem key={destination} value={destination}>
-            <Checkbox isChecked={destinationName.indexOf(destination) > -1} />
-            <ListItemText primary={destination} />
-          </MenuItem>
-        ))}
-      </Select>
-      {args.error && (
-        <FormHelperText id="select-error" error>
-          <span style={visuallyHidden}>Error:</span> {args.error}
-        </FormHelperText>
-      )}
-    </FormControl>
-  );
-};
-
-const NativeTemplate: Story = (args) => {
-  return (
-    <FormControl disabled={args.disabled} error={args.invalid}>
-      <InputLabel id="demo-simple-select-label">{args.label}</InputLabel>
-      {args.hint && (
-        <FormHelperText id="select-hint">{args.hint}</FormHelperText>
-      )}
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        label={args.label}
-        native={args.native}
-        aria-describedby="select-hint select-error"
-      >
-        <option value="earth">Earth</option>
-        <option value="mars">Mars</option>
-        <option value="ceres">Ceres</option>
-        <option value="eros">Eros</option>
-        <option value="tycho">Tycho Station</option>
-        <option value="phoebe">Phoebe</option>
-        <option value="ganymede">Ganymede</option>
-      </Select>
-      {args.error && (
-        <FormHelperText id="select-error" error>
-          <span style={visuallyHidden}>Error:</span> {args.error}
-        </FormHelperText>
-      )}
-    </FormControl>
+    <Select
+      label={args.label}
+      hint={args.hint}
+      errorMessage={args.errorMessage}
+      isDisabled={args.isDisabled}
+      isMultiSelect={args.isMultiSelect}
+      isNative={args.isNative}
+      isOptional={args.isOptional}
+      optionalLabel={args.optionalLabel}
+      options={optionsGrouped}
+    />
   );
 };
 
@@ -244,24 +198,33 @@ Default.args = {};
 
 export const DefaultDisabled = Template.bind({});
 DefaultDisabled.args = {
-  disabled: true,
+  isDisabled: true,
 };
 
-export const DefaultInvalid = Template.bind({});
-DefaultInvalid.args = {
-  invalid: true,
-  error: "Select your destination.",
+export const DefaultError = Template.bind({});
+DefaultError.args = {
+  errorMessage: "Select your destination.",
 };
 
-export const Grouped = GroupedTemplate.bind({});
-Grouped.args = {};
+export const DefaultObject = ObjectTemplate.bind({});
+DefaultObject.args = {};
 
-export const Multi = MultiTemplate.bind({});
+export const DefaultGrouped = GroupTemplate.bind({});
+DefaultGrouped.args = {};
+
+export const Multi = Template.bind({});
 Multi.args = {
-  multiple: true,
+  isMultiSelect: true,
 };
 
-export const NativeDefault = NativeTemplate.bind({});
+export const NativeDefault = Template.bind({});
 NativeDefault.args = {
-  native: true,
+  isNative: true,
+  defaultValue: "Mars",
+};
+
+export const NativeMulti = Template.bind({});
+NativeMulti.args = {
+  isNative: true,
+  isMultiSelect: true,
 };
