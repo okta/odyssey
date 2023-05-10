@@ -176,5 +176,6 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
 );
 
 const MemoizedPasswordField = memo(PasswordField);
+MemoizedPasswordField.displayName = "PasswordField";
 
 export { MemoizedPasswordField as PasswordField };
