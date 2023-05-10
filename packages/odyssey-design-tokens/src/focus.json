@@ -2,8 +2,8 @@
   "focus": {
     "outline": {
       "color": {
-        "primary": { "value": "{color.primary.base.value}" },
-        "danger": { "value": "{color.danger.base.value}" }
+        "primary": { "value": "{palette.primary.main.value}" },
+        "danger": { "value": "{palette.danger.main.value}" }
       },
       "offset": {
         "base": { "value": "2px" },

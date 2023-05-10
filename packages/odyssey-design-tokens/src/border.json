@@ -1,14 +1,28 @@
 {
   "border": {
-    "width": {
-      "base": { "value": "1px" }
-    },
-    "style": {
-      "base": { "value": "solid" }
+    "color": {
+      "ui": { "value": "{palette.danger.light.value}" },
+      "display": { "value": "{hue.neutral.200.value}" },
+      "disabled": { "value": "{hue.neutral.200.value}" },
+      "danger": {
+        "light": { "value": "{palette.danger.light.value}" },
+        "base": { "value": "{palette.danger.main.value}" },
+        "dark": { "value": "{palette.danger.dark.value}" }
+      },
+      "primary": {
+        "base": { "value": "{palette.primary.main.value}" },
+        "dark": { "value": "{palette.primary.dark.value}" }
+      }
     },
     "radius": {
       "base": { "value": "4px" },
       "outer": { "value": "6px" }
+    },
+    "style": {
+      "base": { "value": "solid" }
+    },
+    "width": {
+      "base": { "value": "1px" }
     }
   }
 }
