@@ -11,7 +11,7 @@
  */
 
 import { Checkbox as MuiCheckbox, Typography } from "@mui/material";
-import { ChangeEventHandler, memo } from "react";
+import { ChangeEventHandler, memo, useMemo } from "react";
 
 import { FormControlLabel } from ".";
 
@@ -39,24 +39,27 @@ const Checkbox = ({
   isDefaultChecked,
   isDisabled,
   isIndeterminate,
-  isRequired = true,
-  label,
+  isRequired,
+  label: labelProp,
   name,
   onChange,
   requiredLabel = "Required",
   value,
 }: CheckboxProps) => {
-  let combinedLabel = <>{label}</>;
-  if (isRequired) {
-    combinedLabel = (
-      <>
-        {label}{" "}
-        <Typography component="span" color="textSecondary">
-          ({requiredLabel})
-        </Typography>
-      </>
-    );
-  }
+  const label = useMemo(() => {
+    if (isRequired) {
+      return (
+        <>
+          {labelProp}{" "}
+          <Typography component="span" color="textSecondary">
+            ({requiredLabel})
+          </Typography>
+        </>
+      );
+    } else {
+      return <>{labelProp}</>;
+    }
+  }, [isRequired, labelProp, requiredLabel]);
 
   return (
     <FormControlLabel
@@ -70,7 +73,7 @@ const Checkbox = ({
       }
       defaultChecked={isDefaultChecked}
       disabled={isDisabled}
-      label={combinedLabel}
+      label={label}
       name={name}
       onChange={onChange}
       value={value}
