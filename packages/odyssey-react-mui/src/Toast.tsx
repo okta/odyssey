@@ -134,5 +134,6 @@ const Toast = forwardRef(
 );
 
 const MemoizedToast = memo(Toast);
+MemoizedToast.displayName = "Toast";
 
 export { MemoizedToast as Toast };
