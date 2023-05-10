@@ -1,12 +1,12 @@
 import { create } from "@storybook/theming";
 import {
-  ColorPaletteNeutral000,
-  ColorPaletteNeutral200,
-  ColorPaletteNeutral500,
-  ColorPaletteNeutral600,
-  ColorPaletteNeutralWhite,
-  ColorPrimaryBase,
-  ColorPrimaryDark,
+  HueNeutral50,
+  HueNeutral200,
+  HueNeutral500,
+  HueNeutral600,
+  HueNeutralWhite,
+  PalettePrimaryBase,
+  PalettePrimaryDark,
   ColorTextBody,
   ColorTextBodyInverse,
   FontFamilyBase,
@@ -16,13 +16,13 @@ import {
 export default create({
   base: "light",
 
-  colorPrimary: ColorPrimaryBase,
-  colorSecondary: ColorPrimaryDark,
+  PalettePrimary: PalettePrimaryBase,
+  colorSecondary: PalettePrimaryDark,
 
   // UI
-  appBg: ColorPaletteNeutral000,
-  appContentBg: ColorPaletteNeutralWhite,
-  appBorderColor: ColorPaletteNeutral200,
+  appBg: HueNeutral50,
+  appContentBg: HueNeutralWhite,
+  appBorderColor: HueNeutral200,
   appBorderRadius: 4,
 
   // Typography
@@ -34,13 +34,13 @@ export default create({
   textInverseColor: ColorTextBodyInverse,
 
   // Toolbar default and active colors
-  barTextColor: ColorPaletteNeutral600,
+  barTextColor: HueNeutral600,
   barSelectedColor: ColorTextBody,
-  barBg: ColorPaletteNeutralWhite,
+  barBg: HueNeutralWhite,
 
   // Form colors
-  inputBg: ColorPaletteNeutralWhite,
-  inputBorder: ColorPaletteNeutral500,
+  inputBg: HueNeutralWhite,
+  inputBorder: HueNeutral500,
   inputTextColor: ColorTextBody,
   inputBorderRadius: 4,
 
