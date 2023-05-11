@@ -59,7 +59,7 @@ const storybookMeta: Meta<SelectProps> = {
 
 export default storybookMeta;
 
-const optionsArray = [
+const optionsArray: SelectProps["options"] = [
   "Earth",
   "Mars",
   "Ceres",
@@ -69,7 +69,7 @@ const optionsArray = [
   "Ganymede",
 ];
 
-const optionsObject = [
+const optionsObject: SelectProps["options"] = [
   {
     text: "Earth",
     value: "earth",
@@ -100,7 +100,7 @@ const optionsObject = [
   },
 ];
 
-const optionsGrouped = [
+const optionsGrouped: SelectProps["options"] = [
   {
     text: "Sol System",
     type: "heading",

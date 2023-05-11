@@ -23,11 +23,11 @@ import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
 
-export interface Option {
+export type Option = {
   text: string;
   value?: string;
-  type?: "heading" | "option" | string;
-}
+  type?: "heading" | "option";
+};
 
 export type SelectProps = {
   defaultValue?: string;
@@ -93,27 +93,29 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       value
     );
 
-    const onChange = (
-      event: SelectChangeEvent<string | string[]>,
-      child: ReactNode
-    ) => {
-      const {
-        target: { value },
-      } = event;
+    const onChange = useCallback(
+      (event: SelectChangeEvent<string | string[]>, child: ReactNode) => {
+        const {
+          target: { value },
+        } = event;
 
-      // Set the field value, with some additional logic to handle array values
-      // for multi-selects
-      if (isMultiSelect) {
-        setSelectedValue(typeof value === "string" ? value.split(",") : value);
-      } else {
-        setSelectedValue(value);
-      }
+        // Set the field value, with some additional logic to handle array values
+        // for multi-selects
+        if (isMultiSelect) {
+          setSelectedValue(
+            typeof value === "string" ? value.split(",") : value
+          );
+        } else {
+          setSelectedValue(value);
+        }
 
-      // Trigger the onChange event, if one has been passed
-      if (onChangeProp) {
-        onChangeProp(event, child);
-      }
-    };
+        // Trigger the onChange event, if one has been passed
+        if (onChangeProp) {
+          onChangeProp(event, child);
+        }
+      },
+      [isMultiSelect, onChangeProp, setSelectedValue]
+    );
 
     // Normalize the options array to accommodate the various
     // data types that might be passed
