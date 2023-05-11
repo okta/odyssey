@@ -2,6 +2,7 @@ import {
   CssBaseline,
   odysseyTheme,
   OdysseyThemeProvider,
+  OdysseyTranslationProvider,
   ScopedCssBaseline,
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
@@ -15,15 +16,17 @@ const styles = {
 
 export const MuiThemeDecorator: DecoratorFn = (Story) => (
   <OdysseyThemeProvider>
-    <StorybookThemeProvider theme={odysseyTheme}>
-      <Fragment>
-        <CssBaseline />
-        <div style={styles}>
-          <ScopedCssBaseline>
-            <Story />
-          </ScopedCssBaseline>
-        </div>
-      </Fragment>
-    </StorybookThemeProvider>
+    <OdysseyTranslationProvider>
+      <StorybookThemeProvider theme={odysseyTheme}>
+        <Fragment>
+          <CssBaseline />
+          <div style={styles}>
+            <ScopedCssBaseline>
+              <Story />
+            </ScopedCssBaseline>
+          </div>
+        </Fragment>
+      </StorybookThemeProvider>
+    </OdysseyTranslationProvider>
   </OdysseyThemeProvider>
 );

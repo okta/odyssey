@@ -11,3 +11,4 @@ yarn-error.log
 .yarn/*
 packages/odyssey-react/src/components/PasswordInput/PasswordInput.tsx
 packages/odyssey-react/src/components/SearchInput/SearchInput.tsx
+packages/odyssey-react-mui/src/properties/ts/*.ts

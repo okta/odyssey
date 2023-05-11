@@ -10,30 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo } from "react";
+import "i18next";
+import { translation as en } from "../properties/ts/odyssey-react-mui";
 
-import { FormHelperText } from ".";
-import { ScreenReaderText } from "./ScreenReaderText";
-import { useTranslation } from "react-i18next";
-
-export type FieldErrorProps = {
-  id?: string;
-  text: string;
-};
-
-const FieldError = ({ id, text }: FieldErrorProps) => {
-  const { t } = useTranslation();
-
-  return (
-    <FormHelperText error id={id}>
-      <ScreenReaderText>{`${t(
-        "fielderror.screenreader.text"
-      )}:`}</ScreenReaderText>
-      {text}
-    </FormHelperText>
-  );
-};
-
-const MemoizedFieldError = memo(FieldError);
-
-export { MemoizedFieldError as FieldError };
+declare module "i18next" {
+  interface CustomTypeOptions {
+    resources: {
+      translations: typeof en;
+    };
+  }
+}
