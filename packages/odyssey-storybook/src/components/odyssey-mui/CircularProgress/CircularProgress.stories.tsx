@@ -44,18 +44,18 @@ export const Indeterminate: StoryObj<CircularProgressProps> = {
   args: {},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const el = await canvas.getByRole("progressbar");
+    const el = canvas.getByRole("progressbar");
     await expect(el).toHaveAccessibleName();
   },
 };
 
 export const Determinate: StoryObj<CircularProgressProps> = {
   args: {
-    value: 70
+    value: 70,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const el = await canvas.getByRole("progressbar");
+    const el = canvas.getByRole("progressbar");
     await expect(el).toHaveAccessibleName();
   },
 };

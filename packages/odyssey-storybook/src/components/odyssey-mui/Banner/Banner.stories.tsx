@@ -64,8 +64,8 @@ InfoBanner.args = {
 };
 InfoBanner.play = async ({ args, canvasElement }) => {
   const canvas = within(canvasElement);
-  const banner = await canvas.getByText(args.text);
-  await expect(banner).toBeInTheDocument();
+  const banner = canvas.getByText(args.text);
+  await expect(banner).toBeVisible();
 };
 
 export const ErrorBanner = Template.bind({});

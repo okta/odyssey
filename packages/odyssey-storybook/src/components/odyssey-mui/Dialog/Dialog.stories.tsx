@@ -21,6 +21,7 @@ import { useState } from "react";
 
 import DialogMdx from "./Dialog.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, within } from "@storybook/testing-library";
 
 const storybookMeta: Meta<DialogProps> = {
   title: "MUI Components/Dialog",
@@ -107,14 +108,13 @@ Default.args = {
 };
 Default.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const button = await canvas.getByText("Open default dialog");
-  await expect(canvas.queryByText("Initiate protocol")).not.toBeInTheDocument();
+  const button = canvas.getByText("Open default dialog");
+  await expect(canvas.queryByText("Initiate protocol")).not.toBeVisible();
   await userEvent.click(button);
-  const cta = await canvas.getByText("Cancel");
-  await userEvent.click(cta);
-  await expect(canvas.queryByText("Cancel")).not.toBeInTheDocument();
+  const callToAction = canvas.getByText("Cancel");
+  await userEvent.click(callToAction);
+  await expect(canvas.queryByText("Cancel")).not.toBeVisible();
 };
-
 
 export const Long = DefaultTemplate.bind({});
 Long.args = {
@@ -256,7 +256,7 @@ Long.args = {
   title: "Cryosleep liability waiver",
 };
 
-const NoButtonsTemplate: Story<DialogProps> = (args) => {
+const NoButtonsTemplate: StoryFn<DialogProps> = (args) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const onOpen = () => {

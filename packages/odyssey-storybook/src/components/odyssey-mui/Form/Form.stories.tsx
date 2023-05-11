@@ -268,8 +268,8 @@ Simple.args = {
 };
 Simple.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const dropdown = await canvas.getByLabelText("Docking license");
-  const textarea = await canvas.getByLabelText("Nature of visit");
+  const dropdown = canvas.getByLabelText("Docking license");
+  const textarea = canvas.getByLabelText("Nature of visit");
   await userEvent.click(textarea);
   await userEvent.type(textarea, "business");
   await userEvent.click(dropdown);

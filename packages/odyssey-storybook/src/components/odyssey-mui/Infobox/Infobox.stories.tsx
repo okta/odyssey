@@ -99,9 +99,8 @@ Success.args = {
 };
 Success.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const el = await canvas.getByText("Approved for launch");
-  await expect(el).toBeInTheDocument();
-  await expect(el.getAttribute("aria-live")).toBe(true);
+  const el = canvas.getByRole(/^(alert|status)$/i);
+  await expect(el).toBeVisible();
 };
 
 export const BlockLink = DefaultTemplate.bind({});

@@ -74,10 +74,10 @@ Clickable.args = {
 };
 Clickable.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const tag = await canvas.getByText("Starship");
+  const tag = canvas.getByText("Starship");
   const button = await getByRole(tag, "button");
   await userEvent.click(button);
-  await expect(tag).not.toBeInTheDocument();
+  await expect(tag).not.toBeVisible();
 };
 
 export const Removable = DefaultTemplate.bind({});

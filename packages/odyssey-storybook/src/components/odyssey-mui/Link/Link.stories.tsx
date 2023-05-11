@@ -66,9 +66,8 @@ Default.args = {
 };
 Default.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const link = await canvas.getByText("Anchor link");
-  await expect(link).toBeInTheDocument();
-  await userEvent.hover(link);
+  const link = canvas.getByText("Anchor link");
+  await expect(link).toBeVisible();
 };
 
 export const Monochrome = Template.bind({});

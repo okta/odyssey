@@ -71,7 +71,7 @@ ButtonPrimary.args = {
 };
 ButtonPrimary.play = async ({ args, canvasElement }) => {
   const canvas = within(canvasElement);
-  const button = await canvas.getByText("Add crew");
+  const button = canvas.getByText("Add crew");
   await userEvent.hover(button);
   await userEvent.click(button);
   await expect(args.onClick).toHaveBeenCalledTimes(1);
