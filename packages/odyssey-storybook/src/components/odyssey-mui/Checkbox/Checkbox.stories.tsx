@@ -53,9 +53,9 @@ export const Default: StoryObj<typeof Checkbox> = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const el = await canvas.findByLabelText(
+    const checkboxElement = await canvas.findByLabelText(
       "I agree to the terms and conditions"
     );
-    await userEvent.click(el);
+    await userEvent.click(checkboxElement);
   },
 };
