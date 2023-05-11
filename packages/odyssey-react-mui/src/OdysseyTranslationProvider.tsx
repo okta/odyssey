@@ -10,30 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo } from "react";
+import { ReactElement, useEffect } from "react";
 
-import { FormHelperText } from ".";
-import { ScreenReaderText } from "./ScreenReaderText";
-import { useTranslation } from "react-i18next";
+import { SupportedLanguages } from "./OdysseyTranslationProvider.types";
 
-export type FieldErrorProps = {
-  id?: string;
-  text: string;
-};
+import i18n from "./OdysseyI18n";
+import { I18nextProvider } from "react-i18next";
 
-const FieldError = ({ id, text }: FieldErrorProps) => {
-  const { t } = useTranslation();
+export function OdysseyTranslationProvider({
+  children,
+  languageCode,
+}: {
+  children: ReactElement;
+  languageCode?: SupportedLanguages;
+}) {
+  useEffect(() => {
+    // Defaults to the browser's language if available otherwise `en` will be used
+    i18n.changeLanguage(languageCode || window.navigator.language);
+  }, [languageCode]);
 
-  return (
-    <FormHelperText error id={id}>
-      <ScreenReaderText>{`${t(
-        "fielderror.screenreader.text"
-      )}:`}</ScreenReaderText>
-      {text}
-    </FormHelperText>
-  );
-};
-
-const MemoizedFieldError = memo(FieldError);
-
-export { MemoizedFieldError as FieldError };
+  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+}

@@ -44,12 +44,14 @@ Import named ESM exports:
 import { PasswordInput } from "@okta/odyssey-react-mui";
 ```
 
-Add the Odyssey `ThemeProvider` around your whole app:
+Add the Odyssey `OdysseyProvider` around your whole app:
 
 ```jsx
-import { ThemeProvider } from "@okta/odyssey-react-mui";
+import { OdysseyProvider } from "@okta/odyssey-react-mui";
 
-const YourAppRoot = ({ children }) => <ThemeProvider>{children}</ThemeProvider>;
+const YourAppRoot = ({ children }) => (
+  <OdysseyProvider>{children}</OdysseyProvider>
+);
 ```
 
 Add Material-UI components not exported from Odyssey with Odyssey styling or add your own theme to MUI:
@@ -72,16 +74,39 @@ const YourAppRoot = ({ children }) => (
 
 It’s possible to have 2 versions of Odyssey running at the same time, so when adding MUI, you can do it piecemeal.
 
-This is how you setup two `ThemeProvider`s like so:
+This is how you setup two `OdysseyProvider`s like so:
 
 ```jsx
-import { ThemeProvider as OdysseyMuiThemeProvider } from "@okta/odyssey-react-mui";
+import { OdysseyProvider } from "@okta/odyssey-react-mui";
 import { ThemeProvider as OdysseyLegacyThemeProvider } from "@okta/odyssey-react-theme";
 
 const YourAppRoot = ({ children }) => (
-  <OdysseyMuiThemeProvider>
+  <OdysseyProvider>
     <OdysseyLegacyThemeProvider>{children}</OdysseyLegacyThemeProvider>
-  </OdysseyMuiThemeProvider>
+  </OdysseyProvider>
+);
+```
+
+### Overrides
+
+It is possible to provide `nonce`, `themeOverride` and `languageCode` to the underlying components via props:
+
+```jsx
+import { OdysseyProvider } from "@okta/odyssey-react-mui";
+import { theme } from "./themeOverride";
+
+const nonce =
+  "K6ybeaqlwaAKk0hQF?hE2qZ0Ar3M=G4Bpr-XFk1x4XbL3dH3T5=mk0aXeWX9ifn9";
+const languageCode = "en";
+
+const YourAppRoot = ({ children }) => (
+  <OdysseyProvider
+    nonce={nonce}
+    themeOverride={theme}
+    languageCode={languageCode}
+  >
+    {children}
+  </OdysseyProvider>
 );
 ```
 

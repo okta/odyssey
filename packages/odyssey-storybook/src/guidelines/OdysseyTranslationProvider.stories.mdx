@@ -1,0 +1,58 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guidelines/Odyssey Translation Provider" />
+
+# Globalization within Odyssey
+
+Odyssey has its own globalization system which other devs can hook into.
+
+## OdysseyTranslationProvider
+
+Odyssey comes out of the box with support for the following 26 languages:
+
+```ts
+export const supportedLanguages = [
+  "cs", // Czech
+  "da", // Danish
+  "de", // German
+  "el", // Greek
+  "en", // English
+  "es", // Spanish
+  "fi", // Finnish
+  "fr", // French
+  "hu", // Hungarian
+  "id", // Indonesian
+  "it", // Italian
+  "ja", // Japanese
+  "ko", // Korean
+  "ms", // Malaysian
+  "nb", // Norwegian
+  "nl-NL", // Dutch
+  "pl", // Polish
+  "pt-BR", // Portuguese (Brazil)
+  "ro", // Romanian
+  "ru", // Russian
+  "sv", // Swedish
+  "th", // Thai
+  "tr", // Turkish
+  "uk", // Ukrainian
+  "zh-CN", // Chinese (PRC)
+  "zh-TW", // Chinese
+] as const;
+```
+
+### Provider customization
+
+By default, it will use the `window.navigator.language` (browser setting) or `en` as the selected language code. It is possible to provide `languageCode` to the provider via props:
+
+```jsx
+import { OdysseyTranslationProvider } from "@okta/odyssey-react-mui";
+
+const languageCode = "cs";
+
+const YourAppRoot = ({ children }) => (
+  <OdysseyTranslationProvider languageCode={languageCode}>
+    {children}
+  </OdysseyTranslationProvider>
+);
+```

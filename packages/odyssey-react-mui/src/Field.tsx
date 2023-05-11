@@ -56,10 +56,6 @@ export type FieldProps = {
    */
   label: string;
   /**
-   * The label for the `input` element if the it's not optional
-   */
-  optionalLabel?: string;
-  /**
    * The short hint displayed in the `input` before the user enters a value.
    */
   placeholder?: string;
@@ -85,7 +81,6 @@ const Field = ({
   isRadioGroup = false,
   isOptional = false,
   label,
-  optionalLabel,
   renderFieldComponent,
 }: FieldProps) => {
   const id = useUniqueId(idOverride);
@@ -113,7 +108,6 @@ const Field = ({
           id={labelId}
           inputId={id}
           isOptional={isOptional}
-          optionalText={optionalLabel}
           text={label}
         />
       )}
