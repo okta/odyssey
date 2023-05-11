@@ -14,14 +14,14 @@
 // https://github.com/okta/ui-build-tools/blob/master/packages/clis/i18n/properties-to-json.js
 
 const { resolve, join, basename, extname } = require("node:path");
-const properties = require("properties");
 const {
-  ensureDirSync,
-  ensureFileSync,
   readFileSync,
   writeFileSync,
-  removeSync,
-} = require("fs-extra");
+  rmSync,
+  existsSync,
+  mkdirSync,
+} = require("fs");
+const properties = require("properties");
 const readdir = require("recursive-readdir");
 
 const convert = (baseFiles, propertiesTargetDir) => {
@@ -39,7 +39,6 @@ const convert = (baseFiles, propertiesTargetDir) => {
         propertiesTargetDir,
         filename.replace(extension, ".ts")
       );
-      ensureFileSync(targetFile);
       writeFileSync(
         targetFile,
         `export const translation = ${JSON.stringify(obj)};`
@@ -52,9 +51,13 @@ async function convertPropertiesToJson({ resourcePath, targetJsonPath }) {
   const sourceDirectory = resolve(resourcePath);
   const propertiesTargetDirectory = resolve(targetJsonPath);
 
-  ensureDirSync(sourceDirectory);
-  removeSync(propertiesTargetDirectory);
-  ensureDirSync(propertiesTargetDirectory);
+  if (!existsSync(sourceDirectory)) {
+    mkdirSync(sourceDirectory);
+  }
+  if (existsSync(propertiesTargetDirectory)) {
+    rmSync(propertiesTargetDirectory, { recursive: true, force: true });
+  }
+  mkdirSync(propertiesTargetDirectory);
 
   let baseFiles = await readdir(sourceDirectory);
   convert(baseFiles, propertiesTargetDirectory);

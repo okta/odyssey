@@ -14,20 +14,52 @@ import { ReactElement, useEffect } from "react";
 
 import { SupportedLanguages } from "./OdysseyTranslationProvider.types";
 
-import i18n from "./OdysseyI18n";
+import i18n, { defaultNS, resources } from "./OdysseyI18n";
 import { I18nextProvider } from "react-i18next";
 
-export function OdysseyTranslationProvider({
-  children,
-  languageCode,
-}: {
+export type TranslationOverrides = {
+  [key in SupportedLanguages]?: Partial<typeof resources["en"]>;
+};
+
+type OdysseyTranslationProviderProps = {
   children: ReactElement;
   languageCode?: SupportedLanguages;
-}) {
+  translationOverrides?: TranslationOverrides;
+};
+
+const mergeBundleOverrides = (
+  languageCode: SupportedLanguages,
+  translationOverrides: TranslationOverrides
+) => {
+  const bundle = resources[languageCode];
+  const overrides = translationOverrides[languageCode];
+  return {
+    ...bundle,
+    ...overrides,
+  };
+};
+
+export const OdysseyTranslationProvider = ({
+  children,
+  languageCode,
+  translationOverrides,
+}: OdysseyTranslationProviderProps) => {
   useEffect(() => {
     // Defaults to the browser's language if available otherwise `en` will be used
     i18n.changeLanguage(languageCode || window.navigator.language);
   }, [languageCode]);
 
+  useEffect(() => {
+    if (translationOverrides) {
+      Object.keys(translationOverrides).forEach((language) => {
+        const bundle = mergeBundleOverrides(
+          language as SupportedLanguages,
+          translationOverrides
+        );
+        i18n.addResourceBundle(language, defaultNS, bundle);
+      });
+    }
+  }, [translationOverrides]);
+
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
-}
+};
