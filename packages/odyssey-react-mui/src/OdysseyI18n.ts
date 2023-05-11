@@ -72,8 +72,8 @@ export const resources = {
   th,
   tr,
   uk,
-  zhCN,
-  znTW,
+  "zh-CN": zhCN,
+  "zh-TW": znTW,
 };
 
 i18n.use(initReactI18next).init({
@@ -89,6 +89,7 @@ i18n.use(initReactI18next).init({
   },
   react: {
     useSuspense: false,
+    bindI18nStore: "added",
   },
 });
 

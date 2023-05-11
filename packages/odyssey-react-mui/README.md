@@ -89,7 +89,7 @@ const YourAppRoot = ({ children }) => (
 
 ### Overrides
 
-It is possible to provide `nonce`, `themeOverride` and `languageCode` to the underlying components via props:
+It is possible to provide `nonce`, `themeOverride`, `languageCode` and `translationOverrides` to the underlying components via props:
 
 ```jsx
 import { OdysseyProvider } from "@okta/odyssey-react-mui";
@@ -97,13 +97,24 @@ import { theme } from "./themeOverride";
 
 const nonce =
   "K6ybeaqlwaAKk0hQF?hE2qZ0Ar3M=G4Bpr-XFk1x4XbL3dH3T5=mk0aXeWX9ifn9";
+
 const languageCode = "en";
+
+const translationOverrides = {
+  en: {
+    "fieldlabel.optional.text": "Not Required",
+  },
+  fr: {
+    "fieldlabel.optional.text": "Non Requis",
+  },
+};
 
 const YourAppRoot = ({ children }) => (
   <OdysseyProvider
     nonce={nonce}
     themeOverride={theme}
     languageCode={languageCode}
+    translationOverrides={translationOverrides}
   >
     {children}
   </OdysseyProvider>

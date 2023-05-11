@@ -56,3 +56,34 @@ const YourAppRoot = ({ children }) => (
   </OdysseyTranslationProvider>
 );
 ```
+
+If you want to override translation bundles, you can do so by providing the `translationOverrides` prop as such:
+
+```jsx
+import { OdysseyTranslationProvider } from "@okta/odyssey-react-mui";
+
+const translationOverrides = {
+  en: {
+    "fieldlabel.optional.text": "Not Required",
+  },
+  fr: {
+    "fieldlabel.optional.text": "Non Requis",
+  },
+};
+
+const YourAppRoot = ({ children }) => (
+  <OdysseyTranslationProvider languageCode={languageCode}>
+    {children}
+  </OdysseyTranslationProvider>
+);
+```
+
+The following keys can have their values overriden:
+
+- `fielderror.screenreader.text`
+- `fieldlabel.optional.text`
+- `severity.success`
+- `severity.warning`
+- `severity.info`
+- `severity.error`
+- `toast.close.text`
