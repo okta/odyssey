@@ -10,30 +10,38 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement, FC } from "react";
+import { memo, ReactElement } from "react";
 
 import { ThemeOptions } from ".";
 import { OdysseyCacheProvider } from "./OdysseyCacheProvider";
 import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
-import { OdysseyTranslationProvider } from "./OdysseyTranslationProvider";
+import {
+  OdysseyTranslationProvider,
+  TranslationOverrides,
+} from "./OdysseyTranslationProvider";
 import { SupportedLanguages } from "./OdysseyTranslationProvider.types";
 
-interface OdysseyProviderProps {
+type OdysseyProviderProps = {
   children: ReactElement;
   nonce?: string;
   themeOverride?: ThemeOptions;
   languageCode?: SupportedLanguages;
-}
+  translationOverrides?: TranslationOverrides;
+};
 
-const OdysseyProvider: FC<OdysseyProviderProps> = ({
+const OdysseyProvider = ({
   children,
   nonce,
   themeOverride,
   languageCode,
-}) => (
+  translationOverrides,
+}: OdysseyProviderProps) => (
   <OdysseyCacheProvider nonce={nonce}>
     <OdysseyThemeProvider themeOverride={themeOverride}>
-      <OdysseyTranslationProvider languageCode={languageCode}>
+      <OdysseyTranslationProvider
+        languageCode={languageCode}
+        translationOverrides={translationOverrides}
+      >
         {children}
       </OdysseyTranslationProvider>
     </OdysseyThemeProvider>
