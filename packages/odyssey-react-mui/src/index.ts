@@ -121,6 +121,7 @@ export * from "./Infobox";
 export * from "./Link";
 export * from "./MenuButton";
 export * from "./MenuItem";
+export * from "./NativeSelect";
 export * from "./OdysseyCacheProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./PasswordField";

@@ -23,27 +23,25 @@ import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
 
-export type Option = {
+export type SelectOption = {
   text: string;
   value?: string;
   type?: "heading" | "option";
 };
 
 export type SelectProps = {
-  defaultValue?: string;
   errorMessage?: string;
   hint?: string;
   id?: string;
   isDisabled?: boolean;
   isMultiSelect?: boolean;
-  isNative?: boolean;
   isOptional?: boolean;
   label: string;
   onBlur?: MuiSelectProps["onBlur"];
   onChange?: MuiSelectProps["onChange"];
   onFocus?: MuiSelectProps["onFocus"];
   optionalLabel?: string;
-  options: (string | Option)[];
+  options: (string | SelectOption)[];
   value?: string | string[];
 };
 
@@ -65,14 +63,12 @@ export type SelectProps = {
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
-      defaultValue,
       errorMessage,
       hint,
       id: idOverride,
       isDisabled = false,
       isMultiSelect = false,
       isOptional = false,
-      isNative = false,
       label,
       onBlur,
       onChange: onChangeProp,
@@ -165,22 +161,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     // Convert the options into the ReactNode children
     // that will populate the <Select>
     const children = normalizedOptions.map((option) => {
-      // If it's a heading, render a heading
       if (option.type === "heading") {
         return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
       }
 
-      // If it's a native <Select>, render a standard HTML <option>
-      if (isNative) {
-        return (
-          <option key={option.value} value={option.value}>
-            {option.text}
-          </option>
-        );
-      }
-
-      // If it's a non-native <Select>, render a <MenuItem>
-      // If it's a multi-select, include a <Checkbox>
       return (
         <MenuItem key={option.value} value={option.value}>
           {isMultiSelect && (
@@ -194,24 +178,20 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const renderFieldComponent = useCallback(
       () => (
         <MuiSelect
-          defaultValue={defaultValue}
           id={idOverride}
           name={idOverride}
-          native={isNative}
           multiple={isMultiSelect}
           onBlur={onBlur}
-          onChange={!isNative ? onChange : undefined}
+          onChange={onChange}
           onFocus={onFocus}
           ref={ref}
           children={children}
-          renderValue={renderValue}
-          value={!isNative ? selectedValue : undefined}
+          renderValue={isMultiSelect ? renderValue : undefined}
+          value={selectedValue}
         />
       ),
       [
-        defaultValue,
         idOverride,
-        isNative,
         isMultiSelect,
         onBlur,
         onChange,

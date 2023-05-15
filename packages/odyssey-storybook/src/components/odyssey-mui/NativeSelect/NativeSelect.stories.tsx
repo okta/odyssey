@@ -11,17 +11,17 @@
  */
 
 import { Meta, Story } from "@storybook/react";
-import { Select, SelectProps } from "@okta/odyssey-react-mui";
+import { NativeSelect, NativeSelectProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import SelectMdx from "./Select.mdx";
+import NativeSelectMdx from "./NativeSelect.mdx";
 
-const storybookMeta: Meta<SelectProps> = {
-  title: `MUI Components/Forms/Select`,
-  component: Select,
+const storybookMeta: Meta<NativeSelectProps> = {
+  title: `MUI Components/Forms/NativeSelect`,
+  component: NativeSelect,
   parameters: {
     docs: {
-      page: SelectMdx,
+      page: NativeSelectMdx,
     },
   },
   argTypes: {
@@ -49,115 +49,45 @@ const storybookMeta: Meta<SelectProps> = {
       control: "text",
       defaultValue: "Destination",
     },
+    defaultValue: {
+      control: "text",
+      description: "The default value, if the control is native.",
+    },
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const optionsArray: SelectProps["options"] = [
-  "Earth",
-  "Mars",
-  "Ceres",
-  "Eros",
-  "Tycho Station",
-  "Phoebe",
-  "Ganymede",
-];
-
-const optionsObject: SelectProps["options"] = [
-  {
-    text: "Earth",
-    value: "earth",
-  },
-  {
-    text: "Mars",
-    value: "mars",
-  },
-  {
-    text: "Ceres",
-    value: "ceres",
-  },
-  {
-    text: "Eros",
-    value: "eros",
-  },
-  {
-    text: "Tycho Station",
-    value: "tycho-station",
-  },
-  {
-    text: "Phoebe",
-    value: "phoebe",
-  },
-  {
-    text: "Ganymede",
-    value: "ganymede",
-  },
-];
-
-const optionsGrouped: SelectProps["options"] = [
-  {
-    text: "Sol System",
-    type: "heading",
-  },
-  {
-    text: "Earth",
-    value: "earth",
-  },
-  {
-    text: "Mars",
-    value: "mars",
-  },
-  {
-    text: "Ceres",
-    value: "ceres",
-  },
-  {
-    text: "Eros",
-    value: "eros",
-  },
-  {
-    text: "Tycho Station",
-    value: "tycho-station",
-  },
-  {
-    text: "Phoebe",
-    value: "phoebe",
-  },
-  {
-    text: "Ganymede",
-    value: "ganymede",
-  },
-  {
-    text: "Extrasolar",
-    type: "heading",
-  },
-  "Auberon",
-  "Al-Halub",
-  "Freehold",
-  "Laconia",
-  "New Terra",
-];
-
-const Template: Story<SelectProps> = (args) => {
+const Template: Story<NativeSelectProps> = (args) => {
   return (
-    <Select
+    <NativeSelect
       label={args.label}
       hint={args.hint}
+      defaultValue={args.defaultValue}
       errorMessage={args.errorMessage}
       isDisabled={args.isDisabled}
       isMultiSelect={args.isMultiSelect}
       isOptional={args.isOptional}
       optionalLabel={args.optionalLabel}
-      options={optionsArray}
+      children={
+        <>
+          <option value="earth">Earth</option>
+          <option value="mars">Mars</option>
+          <option value="ceres">Ceres</option>
+          <option value="eros">Eros</option>
+          <option value="tycho-station">Tycho Station</option>
+          <option value="phoebe">Phoebe</option>
+          <option value="ganymede">Ganymede</option>
+        </>
+      }
     />
   );
 };
 
-const ObjectTemplate: Story<SelectProps> = (args) => {
+const GroupTemplate: Story<NativeSelectProps> = (args) => {
   return (
-    <Select
+    <NativeSelect
       label={args.label}
       hint={args.hint}
       errorMessage={args.errorMessage}
@@ -165,22 +95,26 @@ const ObjectTemplate: Story<SelectProps> = (args) => {
       isMultiSelect={args.isMultiSelect}
       isOptional={args.isOptional}
       optionalLabel={args.optionalLabel}
-      options={optionsObject}
-    />
-  );
-};
-
-const GroupTemplate: Story<SelectProps> = (args) => {
-  return (
-    <Select
-      label={args.label}
-      hint={args.hint}
-      errorMessage={args.errorMessage}
-      isDisabled={args.isDisabled}
-      isMultiSelect={args.isMultiSelect}
-      isOptional={args.isOptional}
-      optionalLabel={args.optionalLabel}
-      options={optionsGrouped}
+      children={
+        <>
+          <optgroup label="Sol System">
+            <option value="earth">Earth</option>
+            <option value="mars">Mars</option>
+            <option value="ceres">Ceres</option>
+            <option value="eros">Eros</option>
+            <option value="tycho-station">Tycho Station</option>
+            <option value="phoebe">Phoebe</option>
+            <option value="ganymede">Ganymede</option>
+          </optgroup>
+          <optgroup label="Extrasolar">
+            <option value="auberon">Auberon</option>
+            <option value="al-halub">Al-Halub</option>
+            <option value="freehold">Freehold</option>
+            <option value="laconia">Laconia</option>
+            <option value="new-terra">New Terra</option>
+          </optgroup>
+        </>
+      }
     />
   );
 };
@@ -197,9 +131,6 @@ export const DefaultError = Template.bind({});
 DefaultError.args = {
   errorMessage: "Select your destination.",
 };
-
-export const DefaultObject = ObjectTemplate.bind({});
-DefaultObject.args = {};
 
 export const DefaultGrouped = GroupTemplate.bind({});
 DefaultGrouped.args = {};

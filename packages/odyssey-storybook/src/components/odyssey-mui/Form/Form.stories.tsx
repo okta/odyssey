@@ -24,7 +24,7 @@ import {
   InputLabel,
   RadioGroup,
   Radio,
-  Select,
+  NativeSelect,
   Typography,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -142,18 +142,18 @@ const Template: Story = (args) => {
             <InputLabel id="demo-simple-select-label">
               Docking license
             </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
+            <NativeSelect
               id="demo-simple-select"
               label="Docking license"
-              native
               aria-describedby="select-hint select-error"
             >
-              <option value="governmental">Governmental</option>
-              <option value="corporate">Corporate</option>
-              <option value="business">Private (Business)</option>
-              <option value="personal">Private (Personal)</option>
-            </Select>
+              <>
+                <option value="governmental">Governmental</option>
+                <option value="corporate">Corporate</option>
+                <option value="business">Private (Business)</option>
+                <option value="personal">Private (Personal)</option>
+              </>
+            </NativeSelect>
           </FormControl>
           <FormControl>
             <InputLabel id="demo-text-field-label">Nature of visit</InputLabel>
@@ -233,21 +233,21 @@ const Template: Story = (args) => {
           </FormControl>
           <FormControl>
             <InputLabel id="demo-simple-select-label">Destination</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
+            <NativeSelect
               id="demo-simple-select"
               label="Destination"
-              native
               aria-describedby="select-hint select-error"
             >
-              <option value="earth">Earth</option>
-              <option value="mars">Mars</option>
-              <option value="ceres">Ceres</option>
-              <option value="eros">Eros</option>
-              <option value="tycho">Tycho Station</option>
-              <option value="phoebe">Phoebe</option>
-              <option value="ganymede">Ganymede</option>
-            </Select>
+              <>
+                <option value="earth">Earth</option>
+                <option value="mars">Mars</option>
+                <option value="ceres">Ceres</option>
+                <option value="eros">Eros</option>
+                <option value="tycho">Tycho Station</option>
+                <option value="phoebe">Phoebe</option>
+                <option value="ganymede">Ganymede</option>
+              </>
+            </NativeSelect>
           </FormControl>
         </Box>
       )}
