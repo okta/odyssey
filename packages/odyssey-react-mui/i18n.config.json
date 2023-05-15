@@ -1,0 +1,6 @@
+{
+  "resourceFile": "odyssey-react-mui.properties",
+  "resourceFilePath": "packages/odyssey-react-mui/src/properties",
+  "translationsFilePath": "packages/odyssey-react-mui/src/properties/translations",
+  "reviewers": ["okta/eng-globalizationcore", "okta/design-system"]
+}
