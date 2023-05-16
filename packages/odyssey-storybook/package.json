@@ -64,7 +64,7 @@
     "start:storybook": "storybook dev -p 6006",
     "start:types": "tsc --build --watch",
     "start": "npm-run-all --parallel start:types start:storybook",
-    "test": "test-storybook",
+    "test": "test-storybook --maxWorkers 4",
     "typecheck": "tsc"
   }
 }

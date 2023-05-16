@@ -12,6 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
+  InputAdornment,
   TextField,
   TextFieldProps,
 } from "@okta/odyssey-react-mui";
