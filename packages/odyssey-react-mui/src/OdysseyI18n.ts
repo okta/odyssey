@@ -30,6 +30,7 @@ import { translation as ms } from "./properties/ts/odyssey-react-mui_ms";
 import { translation as nb } from "./properties/ts/odyssey-react-mui_nb";
 import { translation as nlNL } from "./properties/ts/odyssey-react-mui_nl-NL";
 import { translation as pl } from "./properties/ts/odyssey-react-mui_pl";
+import { translation as okPL } from "./properties/ts/odyssey-react-mui_ok-PL";
 import { translation as ptBR } from "./properties/ts/odyssey-react-mui_pt-BR";
 import { translation as ro } from "./properties/ts/odyssey-react-mui_ro";
 import { translation as ru } from "./properties/ts/odyssey-react-mui_ru";
@@ -64,6 +65,7 @@ export const resources = {
   ms,
   nb,
   "nl-NL": nlNL,
+  ok_PL: okPL,
   pl,
   "pt-BR": ptBR,
   ro,
