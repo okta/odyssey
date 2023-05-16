@@ -5,7 +5,7 @@ import {
   ScopedCssBaseline,
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
-import type { DecoratorFn } from "@storybook/react";
+import type { Decorator } from "@storybook/react";
 import { Fragment } from "react";
 
 const styles = {
@@ -13,8 +13,9 @@ const styles = {
     "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
 };
 
-export const MuiThemeDecorator: DecoratorFn = (Story) => (
+export const MuiThemeDecorator: Decorator = (Story) => (
   <OdysseyThemeProvider>
+    {/* @ts-expect-error type mismatch on "typography" */}
     <StorybookThemeProvider theme={odysseyTheme}>
       <Fragment>
         <CssBaseline />
