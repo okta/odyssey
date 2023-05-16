@@ -32,7 +32,7 @@ const preview: Preview = {
       "storybook/docs/panel": { index: -1 },
     },
     backgrounds: {
-      default: "white",
+      // default: "white",
       values: [
         {
           name: "Page Background",
