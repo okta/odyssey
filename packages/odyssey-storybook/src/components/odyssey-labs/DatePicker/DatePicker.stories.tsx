@@ -51,6 +51,10 @@ const Template: StoryFn<DatePickerProps<unknown, unknown>> = (props) => {
       ...props,
       onChange: (newValue: unknown) => setValue(newValue),
       value,
+      // FIXME missing renderInput causes test error
+      renderInput: function C() {
+        return <input type="date" />;
+      },
     }),
     [props, value]
   );
