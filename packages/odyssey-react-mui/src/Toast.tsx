@@ -21,6 +21,7 @@ import {
   visuallyHidden,
 } from ".";
 import { Button } from "./Button";
+import { useTranslation } from "react-i18next";
 
 export type ToastProps = {
   /**
@@ -81,6 +82,8 @@ const Toast = forwardRef(
     severity,
     text,
   }: ToastProps) => {
+    const { t } = useTranslation();
+
     const [isVisible, setIsVisible] = useState(isVisibleProp);
 
     useEffect(() => {
@@ -106,7 +109,7 @@ const Toast = forwardRef(
           action={
             isDismissable === true && (
               <Button
-                aria-label="close"
+                aria-label={t("toast.close.text")}
                 onClick={onHide}
                 size="small"
                 startIcon={<CloseIcon />}
@@ -134,5 +137,6 @@ const Toast = forwardRef(
 );
 
 const MemoizedToast = memo(Toast);
+MemoizedToast.displayName = "Toast";
 
 export { MemoizedToast as Toast };

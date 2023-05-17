@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.0](https://github.com/okta/odyssey/compare/v0.22.0...v0.23.0) (2023-05-08)
+
+### Features
+
+- add Migrations and Code Styling docs to Storybook ([#1750](https://github.com/okta/odyssey/issues/1750)) ([09412ae](https://github.com/okta/odyssey/commit/09412aed12b0eb25202f34bfbb384062eec36300))
+- wrap the Dialog ([1f8b331](https://github.com/okta/odyssey/commit/1f8b3314a135333369f44efc21de097cd0d42712))
+- wrapped Toast ([bf6d5c7](https://github.com/okta/odyssey/commit/bf6d5c779d0b57a0bd74f537ada7be763df1080e))
+
+### Bug Fixes
+
+- add Field wrapper to CheckboxGroup and RadioGroup ([#1762](https://github.com/okta/odyssey/issues/1762)) ([6f8c14d](https://github.com/okta/odyssey/commit/6f8c14d9d7ebcf0c5f9bbcb0e867820b5631b7a3))
+- Fix broken Toast stories ([b5651f6](https://github.com/okta/odyssey/commit/b5651f6eb8d6578305fecd3d92be7c9d18eea27d))
+- Icon generation now using newest version of SVGR and SVGO ([#1755](https://github.com/okta/odyssey/issues/1755)) ([89a30a3](https://github.com/okta/odyssey/commit/89a30a3685d1bd1600abf3876d910a19ff236f9b))
+- **odyssey-storybook:** include static toast stories for docs ([6d8fa58](https://github.com/okta/odyssey/commit/6d8fa581e4aa96fd9316cf5641dd869ec449af15))
+- **odyssey-storybook:** restore defaultValues for RadioGroup ([4ba8ebd](https://github.com/okta/odyssey/commit/4ba8ebd6d633c3502284dab573414766bb3493d7))
+- **odyssey-storybook:** stories were broken because templates don't have .args ([7f7343a](https://github.com/okta/odyssey/commit/7f7343ac8e03130f322b427d612937963d781f1e))
+- updated Migration doc ([87c37ca](https://github.com/okta/odyssey/commit/87c37caa7ae39733ddd378a45f8a275af3ac670d))
+
 ## [0.22.0](https://github.com/okta/odyssey/compare/v0.21.4...v0.22.0) (2023-04-21)
 
 ### Features

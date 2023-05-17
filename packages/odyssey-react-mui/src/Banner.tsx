@@ -13,6 +13,7 @@
 import { AlertColor, AlertProps } from "@mui/material";
 import { memo } from "react";
 import { Alert, Link, ScreenReaderText } from "./";
+import { useTranslation } from "react-i18next";
 
 export type BannerProps = {
   /**
@@ -53,17 +54,21 @@ const Banner = ({
   role,
   severity,
   text,
-}: BannerProps) => (
-  <Alert onClose={onClose} role={role} severity={severity} variant="banner">
-    <ScreenReaderText>{severity}:</ScreenReaderText>
-    {text}
-    {linkUrl && (
-      <Link href={linkUrl} variant="monochrome">
-        {linkText}
-      </Link>
-    )}
-  </Alert>
-);
+}: BannerProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Alert onClose={onClose} role={role} severity={severity} variant="banner">
+      <ScreenReaderText>{t(`severity.${severity}`)}:</ScreenReaderText>
+      {text}
+      {linkUrl && (
+        <Link href={linkUrl} variant="monochrome">
+          {linkText}
+        </Link>
+      )}
+    </Alert>
+  );
+};
 
 const MemoizedBanner = memo(Banner);
 
