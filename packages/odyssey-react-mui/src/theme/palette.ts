@@ -17,7 +17,7 @@ export const palette: ThemeOptions["palette"] = {
   mode: "light",
   common: {
     black: Tokens.HueNeutral900,
-    white: "#ffffff",
+    white: Tokens.HueNeutralWhite,
   },
   primary: {
     lighter: Tokens.HueBlue50,
@@ -80,12 +80,12 @@ export const palette: ThemeOptions["palette"] = {
   text: {
     primary: Tokens.HueNeutral900,
     secondary: Tokens.HueNeutral600,
-    disabled: Tokens.HueNeutral600,
+    disabled: Tokens.HueNeutral300,
   },
   divider: Tokens.BorderColorDisplay,
   background: {
-    paper: "#ffffff",
-    default: "#ffffff",
+    paper: Tokens.HueNeutralWhite,
+    default: Tokens.HueNeutralWhite,
   },
   action: {
     // We have no equivalents here. It's likely we will update these as their uses are discovered.

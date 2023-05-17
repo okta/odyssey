@@ -1,7 +1,7 @@
 {
   "border": {
     "color": {
-      "ui": { "value": "{palette.danger.light.value}" },
+      "ui": { "value": "{hue.neutral.500.value}" },
       "display": { "value": "{hue.neutral.200.value}" },
       "disabled": { "value": "{hue.neutral.200.value}" },
       "danger": {
