@@ -34,7 +34,6 @@ export type NativeSelectProps = {
   onBlur?: MuiSelectProps["onBlur"];
   onChange?: MuiSelectProps["onChange"];
   onFocus?: MuiSelectProps["onFocus"];
-  optionalLabel?: string;
   value?: string | string[];
 };
 
@@ -52,7 +51,6 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
       onBlur,
       onChange,
       onFocus,
-      optionalLabel = "Optional",
       value,
       children,
     },
@@ -97,7 +95,6 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
         isDisabled={isDisabled}
         isOptional={isOptional}
         label={label}
-        optionalLabel={optionalLabel}
         renderFieldComponent={renderFieldComponent}
       />
     );

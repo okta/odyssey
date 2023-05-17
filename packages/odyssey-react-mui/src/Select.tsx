@@ -40,7 +40,6 @@ export type SelectProps = {
   onBlur?: MuiSelectProps["onBlur"];
   onChange?: MuiSelectProps["onChange"];
   onFocus?: MuiSelectProps["onFocus"];
-  optionalLabel?: string;
   options: (string | SelectOption)[];
   value?: string | string[];
 };
@@ -73,7 +72,6 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       onBlur,
       onChange: onChangeProp,
       onFocus,
-      optionalLabel = "Optional",
       value,
       options,
     },
@@ -213,7 +211,6 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         isDisabled={isDisabled}
         isOptional={isOptional}
         label={label}
-        optionalLabel={optionalLabel}
         renderFieldComponent={renderFieldComponent}
       />
     );

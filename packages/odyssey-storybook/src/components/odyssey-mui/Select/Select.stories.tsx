@@ -41,10 +41,6 @@ const storybookMeta: Meta<SelectProps> = {
       control: "boolean",
       defaultValue: false,
     },
-    optionalLabel: {
-      control: "text",
-      defaultValue: "Optional",
-    },
     label: {
       control: "text",
       defaultValue: "Destination",
@@ -149,7 +145,6 @@ const Template: Story<SelectProps> = (args) => {
       isDisabled={args.isDisabled}
       isMultiSelect={args.isMultiSelect}
       isOptional={args.isOptional}
-      optionalLabel={args.optionalLabel}
       options={optionsArray}
     />
   );
@@ -164,7 +159,6 @@ const ObjectTemplate: Story<SelectProps> = (args) => {
       isDisabled={args.isDisabled}
       isMultiSelect={args.isMultiSelect}
       isOptional={args.isOptional}
-      optionalLabel={args.optionalLabel}
       options={optionsObject}
     />
   );
@@ -179,7 +173,6 @@ const GroupTemplate: Story<SelectProps> = (args) => {
       isDisabled={args.isDisabled}
       isMultiSelect={args.isMultiSelect}
       isOptional={args.isOptional}
-      optionalLabel={args.optionalLabel}
       options={optionsGrouped}
     />
   );

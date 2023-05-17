@@ -41,10 +41,6 @@ const storybookMeta: Meta<NativeSelectProps> = {
       control: "boolean",
       defaultValue: false,
     },
-    optionalLabel: {
-      control: "text",
-      defaultValue: "Optional",
-    },
     label: {
       control: "text",
       defaultValue: "Destination",
@@ -69,7 +65,6 @@ const Template: Story<NativeSelectProps> = (args) => {
       isDisabled={args.isDisabled}
       isMultiSelect={args.isMultiSelect}
       isOptional={args.isOptional}
-      optionalLabel={args.optionalLabel}
       children={
         <>
           <option value="earth">Earth</option>
@@ -94,7 +89,6 @@ const GroupTemplate: Story<NativeSelectProps> = (args) => {
       isDisabled={args.isDisabled}
       isMultiSelect={args.isMultiSelect}
       isOptional={args.isOptional}
-      optionalLabel={args.optionalLabel}
       children={
         <>
           <optgroup label="Sol System">
