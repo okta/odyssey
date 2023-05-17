@@ -28,9 +28,9 @@ export type LinkProps = {
 };
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-  const { icon, children, target, variant } = props;
+  const { icon, children, target, variant, href } = props;
   return (
-    <MuiLink ref={ref} variant={variant} target={target}>
+    <MuiLink ref={ref} variant={variant} target={target} href={href}>
       {icon && <span className="Link-icon">{icon}</span>}
       {children}
       {target === "_blank" && (
