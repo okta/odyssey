@@ -14,8 +14,8 @@ import type { ThemeOptions } from "@mui/material";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 export const mixins: ThemeOptions["mixins"] = {
-  maxWidth: Tokens.FontLineLengthMax,
-  borderRadius: Tokens.BorderRadiusBase,
-  borderStyle: Tokens.BorderStyleBase,
-  borderWidth: Tokens.BorderWidthBase,
+  maxWidth: Tokens.TypographyLineLengthMax,
+  borderRadius: Tokens.BorderRadiusMain,
+  borderStyle: Tokens.BorderStyleMain,
+  borderWidth: Tokens.BorderWidthMain,
 };

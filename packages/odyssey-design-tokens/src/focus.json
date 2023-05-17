@@ -6,12 +6,12 @@
         "danger": { "value": "{palette.danger.main.value}" }
       },
       "offset": {
-        "base": { "value": "2px" },
+        "main": { "value": "2px" },
         "tight": { "value": "0" }
       },
       "style": { "value": "solid" },
       "width": {
-        "base": { "value": "2px" },
+        "main": { "value": "2px" },
         "tight": { "value": "1px" }
       }
     }

@@ -6,23 +6,23 @@
       "disabled": { "value": "{hue.neutral.200.value}" },
       "danger": {
         "light": { "value": "{palette.danger.light.value}" },
-        "base": { "value": "{palette.danger.main.value}" },
+        "main": { "value": "{palette.danger.main.value}" },
         "dark": { "value": "{palette.danger.dark.value}" }
       },
       "primary": {
-        "base": { "value": "{palette.primary.main.value}" },
+        "main": { "value": "{palette.primary.main.value}" },
         "dark": { "value": "{palette.primary.dark.value}" }
       }
     },
     "radius": {
-      "base": { "value": "4px" },
+      "main": { "value": "4px" },
       "outer": { "value": "6px" }
     },
     "style": {
-      "base": { "value": "solid" }
+      "main": { "value": "solid" }
     },
     "width": {
-      "base": { "value": "1px" }
+      "main": { "value": "1px" }
     }
   }
 }
