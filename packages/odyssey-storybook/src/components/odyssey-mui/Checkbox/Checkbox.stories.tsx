@@ -14,7 +14,6 @@ import { Checkbox, CheckboxProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, within } from "@storybook/testing-library";
 
 const storybookMeta: Meta<CheckboxProps> = {
   title: "MUI Components/Forms/Checkbox",
@@ -44,12 +43,5 @@ export default storybookMeta;
 export const Default: StoryObj<CheckboxProps> = {
   args: {
     label: "I agree to the terms and conditions",
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const el = await canvas.findByLabelText(
-      "I agree to the terms and conditions"
-    );
-    await userEvent.click(el);
   },
 };
