@@ -12,16 +12,23 @@
 
 import type { ThemeOptions } from "@mui/material";
 import * as Tokens from "@okta/odyssey-design-tokens";
+import { TokenOverrideOptions } from ".";
+import { deepmerge } from "@mui/utils";
 
-export const spacing: ThemeOptions["spacing"] = [
-  0,
-  Tokens.SpaceScale0,
-  Tokens.SpaceScale1,
-  Tokens.SpaceScale2,
-  Tokens.SpaceScale3,
-  Tokens.SpaceScale4,
-  Tokens.SpaceScale5,
-  Tokens.SpaceScale6,
-  Tokens.SpaceScale7,
-  Tokens.SpaceScale8,
-];
+export const spacing = (
+  tokenOverrides?: TokenOverrideOptions
+): ThemeOptions["spacing"] => {
+  const odysseyTokens = deepmerge(Tokens, tokenOverrides);
+  return [
+    0,
+    odysseyTokens.SpaceScale0,
+    odysseyTokens.SpaceScale1,
+    odysseyTokens.SpaceScale2,
+    odysseyTokens.SpaceScale3,
+    odysseyTokens.SpaceScale4,
+    odysseyTokens.SpaceScale5,
+    odysseyTokens.SpaceScale6,
+    odysseyTokens.SpaceScale7,
+    odysseyTokens.SpaceScale8,
+  ];
+};

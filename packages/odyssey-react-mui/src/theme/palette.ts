@@ -13,92 +13,100 @@
 import type { ThemeOptions } from "@mui/material";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
-export const palette: ThemeOptions["palette"] = {
-  mode: "light",
-  common: {
-    black: Tokens.ColorNeutralDark,
-    white: Tokens.ColorPaletteNeutralWhite,
-  },
-  primary: {
-    lighter: Tokens.ColorPaletteBlue000,
-    light: Tokens.ColorPaletteBlue300,
-    main: Tokens.ColorPaletteBlue500,
-    dark: Tokens.ColorPaletteBlue900,
-    contrastText: Tokens.ColorTextBodyInverse,
-  },
-  secondary: {
-    light: "#80c7ca",
-    main: Tokens.ColorPaletteTurquoise500,
-    dark: "#004650",
-    contrastText: Tokens.ColorTextBodyInverse,
-  },
-  error: {
-    lighter: Tokens.ColorPaletteRed000,
-    light: Tokens.ColorPaletteRed300,
-    main: Tokens.ColorPaletteRed500,
-    dark: Tokens.ColorPaletteRed900,
-    contrastText: Tokens.ColorTextBodyInverse,
-  },
-  warning: {
-    lighter: Tokens.ColorPaletteYellow000,
-    light: Tokens.ColorPaletteYellow300,
-    main: Tokens.ColorPaletteYellow500,
-    dark: Tokens.ColorPaletteYellow900,
-    contrastText: Tokens.ColorTextBody,
-  },
-  info: {
-    lighter: Tokens.ColorPaletteBlue000,
-    light: Tokens.ColorPaletteBlue300,
-    main: Tokens.ColorPaletteBlue500,
-    dark: Tokens.ColorPaletteBlue900,
-    contrastText: Tokens.ColorTextBodyInverse,
-  },
-  success: {
-    lighter: Tokens.ColorPaletteGreen000,
-    light: Tokens.ColorPaletteGreen300,
-    main: Tokens.ColorPaletteGreen500,
-    dark: Tokens.ColorPaletteGreen900,
-    contrastText: Tokens.ColorTextBodyInverse,
-  },
-  grey: {
-    50: Tokens.ColorPaletteNeutral000,
-    100: Tokens.ColorPaletteNeutral100,
-    200: Tokens.ColorPaletteNeutral200,
-    300: "#c1c1c8",
-    400: "#aaaab4",
-    500: Tokens.ColorPaletteNeutral500,
-    600: Tokens.ColorPaletteNeutral600,
-    700: "#585862",
-    800: "#41414b",
-    900: Tokens.ColorPaletteNeutral900,
-    // These are "Accent" colors. MUI's palette matches them to the standard greys.
-    A100: Tokens.ColorPaletteNeutral100,
-    A200: Tokens.ColorPaletteNeutral200,
-    A400: "#aaaab4",
-    A700: "#585862",
-  },
-  text: {
-    primary: Tokens.ColorPaletteNeutral900,
-    secondary: Tokens.ColorPaletteNeutral600,
-    disabled: Tokens.ColorPaletteNeutral600,
-  },
-  divider: Tokens.ColorBorderDisplay,
-  background: {
-    paper: Tokens.ColorBackgroundBase,
-    default: Tokens.ColorBackgroundBase,
-  },
-  action: {
-    // We have no equivalents here. It's likely we will update these as their uses are discovered.
-    active: "rgba(0, 0, 0, 0.54)",
-    hover: "rgba(0, 0, 0, 0.04)",
-    hoverOpacity: 0.04,
-    selected: "rgba(0, 0, 0, 0.08)",
-    selectedOpacity: 0.08,
-    disabled: Tokens.ColorPaletteNeutral200,
-    disabledBackground: "rgba(0, 0, 0, 0.12)",
-    disabledOpacity: 0.38,
-    focus: "rgba(0, 0, 0, 0.12)",
-    focusOpacity: 0.12,
-    activatedOpacity: 0.12,
-  },
+import { deepmerge } from "@mui/utils";
+import { TokenOverrideOptions } from ".";
+
+export const palette = (
+  tokenOverrides?: TokenOverrideOptions
+): ThemeOptions["palette"] => {
+  const odysseyTokens = deepmerge(Tokens, tokenOverrides);
+  return {
+    mode: "light",
+    common: {
+      black: odysseyTokens.ColorNeutralDark,
+      white: odysseyTokens.ColorPaletteNeutralWhite,
+    },
+    primary: {
+      lighter: odysseyTokens.ColorPaletteBlue000,
+      light: odysseyTokens.ColorPaletteBlue300,
+      main: odysseyTokens.ColorPaletteBlue500,
+      dark: odysseyTokens.ColorPaletteBlue900,
+      contrastText: odysseyTokens.ColorTextBodyInverse,
+    },
+    secondary: {
+      light: "#80c7ca",
+      main: odysseyTokens.ColorPaletteTurquoise500,
+      dark: "#004650",
+      contrastText: odysseyTokens.ColorTextBodyInverse,
+    },
+    error: {
+      lighter: odysseyTokens.ColorPaletteRed000,
+      light: odysseyTokens.ColorPaletteRed300,
+      main: odysseyTokens.ColorPaletteRed500,
+      dark: odysseyTokens.ColorPaletteRed900,
+      contrastText: odysseyTokens.ColorTextBodyInverse,
+    },
+    warning: {
+      lighter: odysseyTokens.ColorPaletteYellow000,
+      light: odysseyTokens.ColorPaletteYellow300,
+      main: odysseyTokens.ColorPaletteYellow500,
+      dark: odysseyTokens.ColorPaletteYellow900,
+      contrastText: odysseyTokens.ColorTextBody,
+    },
+    info: {
+      lighter: odysseyTokens.ColorPaletteBlue000,
+      light: odysseyTokens.ColorPaletteBlue300,
+      main: odysseyTokens.ColorPaletteBlue500,
+      dark: odysseyTokens.ColorPaletteBlue900,
+      contrastText: odysseyTokens.ColorTextBodyInverse,
+    },
+    success: {
+      lighter: odysseyTokens.ColorPaletteGreen000,
+      light: odysseyTokens.ColorPaletteGreen300,
+      main: odysseyTokens.ColorPaletteGreen500,
+      dark: odysseyTokens.ColorPaletteGreen900,
+      contrastText: odysseyTokens.ColorTextBodyInverse,
+    },
+    grey: {
+      50: odysseyTokens.ColorPaletteNeutral000,
+      100: odysseyTokens.ColorPaletteNeutral100,
+      200: odysseyTokens.ColorPaletteNeutral200,
+      300: "#c1c1c8",
+      400: "#aaaab4",
+      500: odysseyTokens.ColorPaletteNeutral500,
+      600: odysseyTokens.ColorPaletteNeutral600,
+      700: "#585862",
+      800: "#41414b",
+      900: odysseyTokens.ColorPaletteNeutral900,
+      // These are "Accent" colors. MUI's palette matches them to the standard greys.
+      A100: odysseyTokens.ColorPaletteNeutral100,
+      A200: odysseyTokens.ColorPaletteNeutral200,
+      A400: "#aaaab4",
+      A700: "#585862",
+    },
+    text: {
+      primary: odysseyTokens.ColorPaletteNeutral900,
+      secondary: odysseyTokens.ColorPaletteNeutral600,
+      disabled: odysseyTokens.ColorPaletteNeutral600,
+    },
+    divider: odysseyTokens.ColorBorderDisplay,
+    background: {
+      paper: odysseyTokens.ColorBackgroundBase,
+      default: odysseyTokens.ColorBackgroundBase,
+    },
+    action: {
+      // We have no equivalents here. It's likely we will update these as their uses are discovered.
+      active: "rgba(0, 0, 0, 0.54)",
+      hover: "rgba(0, 0, 0, 0.04)",
+      hoverOpacity: 0.04,
+      selected: "rgba(0, 0, 0, 0.08)",
+      selectedOpacity: 0.08,
+      disabled: odysseyTokens.ColorPaletteNeutral200,
+      disabledBackground: "rgba(0, 0, 0, 0.12)",
+      disabledOpacity: 0.38,
+      focus: "rgba(0, 0, 0, 0.12)",
+      focusOpacity: 0.12,
+      activatedOpacity: 0.12,
+    },
+  };
 };

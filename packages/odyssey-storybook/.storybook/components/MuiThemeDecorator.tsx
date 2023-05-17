@@ -1,6 +1,6 @@
 import {
   CssBaseline,
-  odysseyTheme,
+  createOdysseyTheme,
   OdysseyThemeProvider,
   OdysseyTranslationProvider,
   ScopedCssBaseline,
@@ -13,6 +13,8 @@ const styles = {
   fontFamily:
     "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
 };
+
+const odysseyTheme = createOdysseyTheme();
 
 export const MuiThemeDecorator: Decorator = (Story) => (
   <OdysseyThemeProvider>

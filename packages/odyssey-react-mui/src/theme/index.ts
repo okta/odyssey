@@ -10,5 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { theme as odysseyTheme } from "./theme";
+export * from "./theme";
 export { useTheme } from "./useTheme";
+export interface TokenOverrideOptions {
+  [k: string]: string | number;
+}

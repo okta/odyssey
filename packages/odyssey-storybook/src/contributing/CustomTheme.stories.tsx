@@ -13,34 +13,45 @@
 import type { StoryObj } from "@storybook/react";
 import {
   Button,
+  ListItemText,
+  MenuItem,
+  MenuList,
+  MuiThemeProvider,
   OdysseyThemeProvider,
+  Paper,
   Radio,
   RadioGroup,
   TextField,
   ThemeOptions,
+  TokenOverrideOptions,
+  createOdysseyTheme,
+  createTheme,
+  deepmerge,
 } from "@okta/odyssey-react-mui";
 
+import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator";
+import CustomThemeMdx from "./CustomTheme.mdx";
 import { useMemo } from "react";
 
 export default {
   title: "Customization/Components",
+  decorators: [MuiThemeDecorator],
 };
 
 export const ButtonStory: StoryObj = {
   render: function C() {
-    const themeOverride = useMemo<ThemeOptions>(
-      () => ({
-        palette: {
-          primary: {
-            main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
-          },
-        },
-      }),
-      []
-    );
+
+    const odysseyDesignTokensOverrides: TokenOverrideOptions = {
+      BorderRadiusBase: "8px",
+      ColorBackgroundBase: "cyan", //focus border color
+      ColorPaletteBlue500: "green", //base background color
+      ColorPaletteBlue900: "rgb(150,0,0,1)", //used for hover/focus
+      FontLineHeightHeading1: 1.2,
+      SpaceScale0: "1rem",
+    };
 
     return (
-      <OdysseyThemeProvider themeOverride={themeOverride}>
+      <OdysseyThemeProvider tokenOverride={odysseyDesignTokensOverrides}>
         <div>
           <Button variant="primary" text="Primary" />
         </div>
@@ -53,19 +64,12 @@ ButtonStory.storyName = "Button";
 
 export const TextFieldStory: StoryObj = {
   render: function C() {
-    const themeOverride = useMemo<ThemeOptions>(
-      () => ({
-        palette: {
-          primary: {
-            main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
-          },
-        },
-      }),
-      []
-    );
+    const odysseyDesignTokensOverrides: TokenOverrideOptions = {
+      ColorPaletteBlue500: "orange",
+    };
 
     return (
-      <OdysseyThemeProvider themeOverride={themeOverride}>
+      <OdysseyThemeProvider tokenOverride={odysseyDesignTokensOverrides}>
         <div>
           <TextField autoCompleteType="name" label="Name" type="text" />
         </div>
@@ -78,19 +82,12 @@ TextFieldStory.storyName = "TextField";
 
 export const RadioGroupStory: StoryObj = {
   render: function C() {
-    const themeOverride = useMemo<ThemeOptions>(
-      () => ({
-        palette: {
-          primary: {
-            main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
-          },
-        },
-      }),
-      []
-    );
+    const odysseyDesignTokensOverrides: TokenOverrideOptions = {
+      ColorPaletteBlue500: "rgba(0, 160, 100, 1)", // THIS IS A SAMPLE. DO NOT USE!
+    };
 
     return (
-      <OdysseyThemeProvider themeOverride={themeOverride}>
+      <OdysseyThemeProvider tokenOverride={odysseyDesignTokensOverrides}>
         <div>
           <RadioGroup
             defaultValue="Lightspeed"
@@ -109,3 +106,45 @@ export const RadioGroupStory: StoryObj = {
 };
 
 RadioGroupStory.storyName = "RadioGroup";
+
+export const CustomComponentStory: StoryObj = {
+  render: function C() {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const themeOverrides1: ThemeOptions = {
+      components: {
+        MuiListItemText: {
+          styleOverrides: {
+            root: {
+              color: "red",
+            },
+          },
+        },
+      },
+    };
+    const odysseyTheme = createOdysseyTheme();
+    const customOdysseyTheme = useMemo(
+      () =>
+        themeOverrides1 && createTheme(deepmerge(odysseyTheme, themeOverrides1)),
+      [odysseyTheme, themeOverrides1]
+    );
+
+    return (
+      <>
+        <Paper>
+          <MenuList>
+            <MenuItem>
+              <MuiThemeProvider theme={customOdysseyTheme}>
+                <ListItemText>Cut</ListItemText>
+              </MuiThemeProvider>
+            </MenuItem>
+            <MenuItem>
+              <ListItemText>Copy</ListItemText>
+            </MenuItem>
+          </MenuList>
+        </Paper>
+      </>
+    );
+  },
+};
+
+CustomComponentStory.storyName = "CustomComponent";

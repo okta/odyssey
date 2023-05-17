@@ -12,13 +12,21 @@
 
 import type { ThemeOptions } from "@mui/material";
 import * as Tokens from "@okta/odyssey-design-tokens";
+import { deepmerge } from "@mui/utils";
+import { TokenOverrideOptions } from ".";
 
-// Strip units from BorderRadiusBase to accommodate MUI's typing
-const NumericalBorderRadiusBase =
-  typeof Tokens.BorderRadiusBase === "string"
-    ? Number(Tokens.BorderRadiusBase.replace(/(\d+).*/, "$1"))
-    : Tokens.BorderRadiusBase;
+export const shape = (
+  tokenOverrides?: TokenOverrideOptions
+): ThemeOptions["shape"] => {
+  const odysseyTokens = deepmerge(Tokens, tokenOverrides);
 
-export const shape: ThemeOptions["shape"] = {
-  borderRadius: NumericalBorderRadiusBase,
+  // Strip units from BorderRadiusBase to accommodate MUI's typing
+  const NumericalBorderRadiusBase =
+    typeof odysseyTokens.BorderRadiusBase === "string"
+      ? Number(odysseyTokens.BorderRadiusBase.replace(/(\d+).*/, "$1"))
+      : odysseyTokens.BorderRadiusBase;
+
+  return {
+    borderRadius: NumericalBorderRadiusBase,
+  };
 };
