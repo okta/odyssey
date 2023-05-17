@@ -12,6 +12,7 @@
 
 import { Checkbox as MuiCheckbox, Typography } from "@mui/material";
 import { ChangeEventHandler, memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { FormControlLabel } from ".";
 
@@ -20,14 +21,12 @@ export type CheckboxProps = {
   ariaLabelledBy?: string;
   hasError?: boolean;
   isChecked?: boolean;
-  isDefaultChecked?: boolean;
   isDisabled?: boolean;
   isIndeterminate?: boolean;
   isRequired?: boolean;
   label?: string;
   name?: string;
   onChange?: ChangeEventHandler<EventTarget>;
-  requiredLabel?: string;
   value?: string;
 };
 
@@ -36,30 +35,30 @@ const Checkbox = ({
   ariaLabelledBy,
   hasError,
   isChecked,
-  isDefaultChecked,
   isDisabled,
   isIndeterminate,
   isRequired,
   label: labelProp,
   name,
   onChange,
-  requiredLabel = "Required",
   value,
 }: CheckboxProps) => {
+  const { t } = useTranslation();
+
   const label = useMemo(() => {
     if (isRequired) {
       return (
         <>
           {labelProp}{" "}
           <Typography component="span" color="textSecondary">
-            ({requiredLabel})
+            ({t("fieldlabel.required.text")})
           </Typography>
         </>
       );
     } else {
       return <>{labelProp}</>;
     }
-  }, [isRequired, labelProp, requiredLabel]);
+  }, [isRequired, labelProp]);
 
   return (
     <FormControlLabel
@@ -71,7 +70,6 @@ const Checkbox = ({
       control={
         <MuiCheckbox indeterminate={isIndeterminate} required={isRequired} />
       }
-      defaultChecked={isDefaultChecked}
       disabled={isDisabled}
       label={label}
       name={name}

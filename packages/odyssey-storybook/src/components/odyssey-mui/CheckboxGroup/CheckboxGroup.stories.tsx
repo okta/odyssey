@@ -56,6 +56,10 @@ const storybookMeta: Meta<
       control: "boolean",
       defaultValue: false,
     },
+    isRequired: {
+      control: "boolean",
+      defaultValue: false,
+    },
     label: {
       control: "text",
       defaultValue: "Systems check",
@@ -77,6 +81,7 @@ const SingleTemplate: Story<
     hint={args.hint}
     isDisabled={args.isDisabled}
     label={args.label}
+    isRequired={args.isRequired}
   >
     <Checkbox
       isDefaultChecked={args.isDefaultChecked}
@@ -111,6 +116,7 @@ const GroupTemplate: Story<CheckboxGroupProps> = (args) => {
       hint={args.hint}
       isDisabled={args.isDisabled}
       label="Systems check"
+      isRequired={args.isRequired}
     >
       <Checkbox label="Life support" name="life-support" value="life-support" />
       <Checkbox
@@ -152,6 +158,7 @@ const MixedErrorTemplate: Story<CheckboxGroupProps> = (args) => {
       errorMessage={args.errorMessage}
       hint={args.hint}
       label="Who will you invite to your birthday?"
+      isRequired={args.isRequired}
     >
       <Checkbox label="Alfred" name="alfred" value="alfred" />
       <Checkbox

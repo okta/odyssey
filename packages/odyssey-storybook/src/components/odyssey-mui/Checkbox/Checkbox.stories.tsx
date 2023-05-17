@@ -33,13 +33,12 @@ const storybookMeta: Meta<CheckboxProps> = {
       control: "text",
       defaultValue: "checkbox",
     },
+    isIndeterminate: {
+      control: "boolean",
+    },
     isRequired: {
       control: "boolean",
       defaultValue: false,
-    },
-    requiredLabel: {
-      control: "text",
-      defaultValue: "Required",
     },
     onChange: {
       control: "function",
