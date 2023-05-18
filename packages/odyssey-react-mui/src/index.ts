@@ -115,6 +115,8 @@ export * from "./CheckboxGroup";
 export * from "./CircularProgress";
 export * from "./createUniqueId";
 export * from "./Dialog";
+export * from "./Fieldset";
+export * from "./Form";
 export * from "./Icon";
 export * from "./iconDictionary";
 export * from "./Infobox";
