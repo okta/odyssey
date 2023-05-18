@@ -1,6 +1,7 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import * as Stories from './Typography.stories';
 
-<Meta anchor />
+<Meta title="MUI Components/Typography" anchor />
 
 # Typography
 
@@ -19,11 +20,11 @@ To ensure consistency in typography sizes throughout Okta touchpoints, we've cre
 Odyssey ships with a base font-size of `14px`. We also offer a smaller "caption" style for subtext, figure captions, and other tertiary content.
 
 <Canvas>
-  <Story id="mui-components-typography--body" />
+  <Story of={Stories.Body} />
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-typography--caption" />
+  <Story of={Stories.Caption} />
 </Canvas>
 
 ### Headings
@@ -31,29 +32,29 @@ Odyssey ships with a base font-size of `14px`. We also offer a smaller "caption"
 Headings are used to describe the main idea of a page, a section, or content that follows it. By default, header tags (`h1` through `h6`) use the corresponding title size.
 
 <Canvas>
-  <Story id="mui-components-typography--heading-1" />
+  <Story of={Stories.Heading1} />
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-typography--heading-2" />
+  <Story of={Stories.Heading2} />
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-typography--heading-3" />
+  <Story of={Stories.Heading3} />
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-typography--heading-4" />
+  <Story of={Stories.Heading4} />
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-typography--heading-5" />
+  <Story of={Stories.Heading5} />
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-typography--heading-6" />
+  <Story of={Stories.Heading6} />
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-typography--legend" />
+  <Story of={Stories.Legend} />
 </Canvas>
