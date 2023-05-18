@@ -20,8 +20,6 @@ import {
 import { useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
 
 const storybookMeta: Meta<DialogProps> = {
   title: "MUI Components/Dialog",

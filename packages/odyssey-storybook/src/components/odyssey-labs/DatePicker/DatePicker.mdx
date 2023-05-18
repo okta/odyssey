@@ -1,5 +1,5 @@
 import { Canvas, Meta, Story } from "@storybook/addon-docs";
-import { DatePickerStandard } from "./DatePicker.stories.tsx";
+import * as Stories from "./DatePicker.stories.tsx";
 
 <Meta title="Labs Components/DatePicker" anchor />
 
@@ -16,5 +16,5 @@ Click it, choose a date.
 Use our default DatePicker for choosing a date. For example, “10/17/2022".
 
 <Canvas>
-  <Story id="labs-components-datepicker--date-picker-standard" />
+  <Story of={Stories.DatePickerStandard} />
 </Canvas>
