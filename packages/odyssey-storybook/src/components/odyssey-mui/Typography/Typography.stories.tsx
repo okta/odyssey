@@ -10,20 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { Typography, TypographyProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
-import TypographyMdx from "./Typography.mdx";
 
 const storybookMeta: Meta<TypographyProps> = {
   title: "MUI Components/Typography",
   component: Typography,
-  parameters: {
-    docs: {
-      page: TypographyMdx,
-    },
-  },
   argTypes: {
     children: {
       control: "text",
@@ -49,58 +42,65 @@ const storybookMeta: Meta<TypographyProps> = {
 
 export default storybookMeta;
 
-const Template: Story<TypographyProps> = (props) => <Typography {...props} />;
+export const Heading1: StoryObj<TypographyProps> = {
+  args: {
+    children: "Heading 1",
+    variant: "h1",
+  }
+}
 
-export const Heading1 = Template.bind({});
-Heading1.args = {
-  children: "Heading 1",
-  variant: "h1",
-};
+export const Heading2: StoryObj<TypographyProps> = {
+  args: {
+    children: "Heading 2",
+    variant: "h2",
+  }
+}
 
-export const Heading2 = Template.bind({});
-Heading2.args = {
-  children: "Heading 2",
-  variant: "h2",
-};
+export const Heading3: StoryObj<TypographyProps> = {
+  args: {
+    children: "Heading 3",
+    variant: "h3",
+  }
+}
 
-export const Heading3 = Template.bind({});
-Heading3.args = {
-  children: "Heading 3",
-  variant: "h3",
-};
+export const Heading4: StoryObj<TypographyProps> = {
+  args: {
+    children: "Heading 4",
+    variant: "h4",
+  }
+}
 
-export const Heading4 = Template.bind({});
-Heading4.args = {
-  children: "Heading 4",
-  variant: "h4",
-};
+export const Heading5: StoryObj<TypographyProps> = {
+  args: {
+    children: "Heading 5",
+    variant: "h5",
+  }
+}
 
-export const Heading5 = Template.bind({});
-Heading5.args = {
-  children: "Heading 5",
-  variant: "h5",
-};
+export const Heading6: StoryObj<TypographyProps> = {
+  args: {
+    children: "Heading 6",
+    variant: "h6",
+  }
+}
 
-export const Heading6 = Template.bind({});
-Heading6.args = {
-  children: "Heading 6",
-  variant: "h6",
-};
+export const Body: StoryObj<TypographyProps> = {
+  args: {
+    children: "This is body copy.",
+    variant: "body1",
+  }
+}
 
-export const Body = Template.bind({});
-Body.args = {
-  children: "This is body copy.",
-  variant: "body1",
-};
+export const Caption: StoryObj<TypographyProps> = {
+  args: {
+    children: "This is a caption.",
+    variant: "subtitle1",
+  }
+}
 
-export const Caption = Template.bind({});
-Caption.args = {
-  children: "This is a caption.",
-  variant: "subtitle1",
-};
-
-export const Legend = Template.bind({});
-Legend.args = {
-  children: "This is a legend",
-  variant: "legend",
-};
+export const Legend: StoryObj<TypographyProps> = {
+  args: {
+    children: "This is a legend",
+    variant: "legend",
+  }
+}
