@@ -17,16 +17,9 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import CircularProgressMdx from "./CircularProgress.mdx";
-
 const storybookMeta: Meta<CircularProgressProps> = {
   title: "MUI Components/Circular Progress",
   component: CircularProgress,
-  parameters: {
-    docs: {
-      page: CircularProgressMdx,
-    },
-  },
   argTypes: {
     value: {
       control: { type: "number" },
@@ -38,13 +31,12 @@ const storybookMeta: Meta<CircularProgressProps> = {
 
 export default storybookMeta;
 
-
 export const Indeterminate: StoryObj<CircularProgressProps> = {
   args: {},
 };
 
 export const Determinate: StoryObj<CircularProgressProps> = {
   args: {
-    value: 70
+    value: 70,
   },
 };

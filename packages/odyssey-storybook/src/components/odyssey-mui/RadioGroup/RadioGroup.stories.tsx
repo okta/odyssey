@@ -10,20 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
-import { Meta, StoryFn } from "@storybook/react";
+import { Radio, RadioGroup, RadioGroupProps } from "@okta/odyssey-react-mui";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import RadioGroupMdx from "./RadioGroup.mdx";
 
 const storybookMeta: Meta<typeof RadioGroup> = {
   title: "MUI Components/Forms/RadioGroup",
   component: RadioGroup,
-  parameters: {
-    docs: {
-      page: RadioGroupMdx,
-    },
-  },
   argTypes: {
     children: {
       control: "text",
@@ -60,29 +54,44 @@ const storybookMeta: Meta<typeof RadioGroup> = {
 
 export default storybookMeta;
 
-const Template: StoryFn<typeof RadioGroup> = (args) => {
-  return (
-    <RadioGroup {...args}>
-      <Radio label="Light Speed" value="Light Speed" />
-      <Radio label="Warp Speed" value="Warp Speed" />
-      <Radio label="Ludicrous Speed" value="Ludicrous Speed" />
-    </RadioGroup>
-  );
+const Template: StoryObj<RadioGroupProps> = {
+  render: function C(props) {
+    return (
+      <RadioGroup {...props}>
+        <Radio label="Light Speed" value="Light Speed" />
+        <Radio label="Warp Speed" value="Warp Speed" />
+        <Radio label="Ludicrous Speed" value="Ludicrous Speed" />
+      </RadioGroup>
+    );
+  },
 };
 
-export const Default = Template.bind({});
-
-export const Hint = Template.bind({});
-Hint.args = {
-  hint: "Select the speed at which you wish to travel.",
+export const Default: StoryObj<RadioGroupProps> = {
+  ...Template,
+  args: {
+    label: "Speed",
+    id: "storybook-radio",
+    value: "Value",
+  },
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-  isDisabled: true,
+export const Hint: StoryObj<RadioGroupProps> = {
+  ...Template,
+  args: {
+    hint: "Select the speed at which you wish to travel.",
+  },
 };
 
-export const Error = Template.bind({});
-Error.args = {
-  errorMessage: "This field is required.",
+export const Disabled: StoryObj<RadioGroupProps> = {
+  ...Template,
+  args: {
+    isDisabled: true,
+  },
+};
+
+export const Error: StoryObj<RadioGroupProps> = {
+  ...Template,
+  args: {
+    errorMessage: "This field is required.",
+  },
 };

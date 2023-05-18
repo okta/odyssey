@@ -21,17 +21,11 @@ import {
   LocalizationProvider,
 } from "@okta/odyssey-react-labs";
 
-import DatePickerMdx from "./DatePicker.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
   title: "Labs Components/DatePicker",
   component: DatePicker,
-  parameters: {
-    docs: {
-      page: DatePickerMdx,
-    },
-  },
   argTypes: {
     label: {
       control: "text",

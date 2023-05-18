@@ -10,20 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
-import TagMdx from "./Tag.mdx";
 
 const storybookMeta: Meta<TagProps> = {
   title: "MUI Components/Tag",
   component: Tag,
   parameters: {
     actions: { argTypesRegex: null },
-    docs: {
-      page: TagMdx,
-    },
   },
   argTypes: {
     label: {
@@ -46,35 +41,42 @@ const storybookMeta: Meta<TagProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: StoryFn<TagProps> = (args) => {
-  return <Tag {...args} />;
+export const Default: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+  },
 };
 
-const ListTemplate: StoryFn<TagProps> = (args) => {
-  return (
-    <TagList>
-      <Tag {...args} />
-      <Tag label="Another tag" />
-      <Tag label="A third tag" />
-    </TagList>
-  );
+export const List: StoryObj<TagProps> = {
+  render: function C(args) {
+    return (
+      <TagList>
+        <Tag {...args} />
+        <Tag label="Another tag" />
+        <Tag label="A third tag" />
+      </TagList>
+    );
+  },
+  args: {
+    label: "Starship",
+  },
 };
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
-
-export const List = ListTemplate.bind({});
-List.args = {};
-
-export const Clickable = DefaultTemplate.bind({});
-Clickable.args = {
-  label: "Starship",
+export const Clickable: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+  },
 };
 
-export const Removable = DefaultTemplate.bind({});
-Removable.args = {};
+export const Removable: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+  },
+};
 
-export const Disabled = DefaultTemplate.bind({});
-Disabled.args = {
-  isDisabled: true,
+export const Disabled: StoryObj<TagProps> = {
+  args: {
+    label: "Starship",
+    isDisabled: true,
+  },
 };
