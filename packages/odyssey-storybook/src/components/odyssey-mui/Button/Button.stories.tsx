@@ -10,22 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button, AddIcon } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
-import ButtonMdx from "./Button.mdx";
+import { userEvent, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
 
 const storybookMeta: Meta<ButtonProps> = {
   title: "MUI Components/Button",
   component: Button,
-  parameters: {
-    docs: {
-      page: ButtonMdx,
-    },
-  },
   argTypes: {
     isDisabled: {
       control: "boolean",
@@ -61,70 +57,89 @@ const storybookMeta: Meta<ButtonProps> = {
 
 export default storybookMeta;
 
-const Template: StoryFn<ButtonProps> = (props) => <Button {...props} />;
-
-export const ButtonPrimary = Template.bind({});
-ButtonPrimary.args = {
-  text: "Add crew",
+export const ButtonPrimary: StoryObj<ButtonProps> = {
+  args: {
+    text: "Add crew",
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByText(args.text!);
+    await step("hover and click", async (ctx) => {
+      console.log(ctx);
+      await userEvent.hover(button);
+      await userEvent.click(button);
+      await expect(args.onClick).toHaveBeenCalledTimes(1);
+    });
+  },
 };
 
-export const ButtonSecondary = Template.bind({});
-ButtonSecondary.args = {
-  text: "Add crew",
-  variant: "secondary",
+export const ButtonSecondary: StoryObj<ButtonProps> = {
+  args: {
+    text: "Add crew",
+    variant: "secondary",
+  },
 };
 
-export const ButtonDanger = Template.bind({});
-ButtonDanger.args = {
-  text: "Add crew",
-  variant: "danger",
+export const ButtonDanger: StoryObj<ButtonProps> = {
+  args: {
+    text: "Add crew",
+    variant: "danger",
+  },
 };
 
-export const ButtonFloating = Template.bind({});
-ButtonFloating.args = {
-  text: "Add crew",
-  variant: "floating",
+export const ButtonFloating: StoryObj<ButtonProps> = {
+  args: {
+    text: "Add crew",
+    variant: "floating",
+  },
 };
 
-export const ButtonSmall = Template.bind({});
-ButtonSmall.args = {
-  text: "Add crew",
-  size: "small",
+export const ButtonSmall: StoryObj<ButtonProps> = {
+  args: {
+    text: "Add crew",
+    size: "small",
+  },
 };
 
-export const ButtonMedium = Template.bind({});
-ButtonMedium.args = {
-  text: "Add crew",
-  size: "medium",
+export const ButtonMedium: StoryObj<ButtonProps> = {
+  args: {
+    text: "Add crew",
+    size: "medium",
+  },
 };
 
-export const ButtonLarge = Template.bind({});
-ButtonLarge.args = {
-  text: "Add crew",
-  size: "large",
+export const ButtonLarge: StoryObj<ButtonProps> = {
+  args: {
+    text: "Add crew",
+    size: "large",
+  },
 };
 
-export const ButtonFullWidth = Template.bind({});
-ButtonFullWidth.args = {
-  text: "Add crew",
-  isFullWidth: true,
+export const ButtonFullWidth: StoryObj<ButtonProps> = {
+  args: {
+    text: "Add crew",
+    isFullWidth: true,
+  },
 };
 
-export const ButtonPrimaryDisabled = Template.bind({});
-ButtonPrimaryDisabled.args = {
-  text: "Add crew",
-  isDisabled: true,
+export const ButtonPrimaryDisabled: StoryObj<ButtonProps> = {
+  args: {
+    text: "Add crew",
+    isDisabled: true,
+  },
 };
 
-export const ButtonWithIcon = Template.bind({});
-ButtonWithIcon.args = {
-  text: "Add crew",
-  startIcon: <AddIcon />,
+export const ButtonWithIcon: StoryObj<ButtonProps> = {
+  args: {
+    text: "Add crew",
+    startIcon: <AddIcon />,
+  },
 };
 
-export const IconOnly = Template.bind({});
-IconOnly.args = {
-  startIcon: <AddIcon />,
-  text: undefined,
-  tooltipText: "Add crew",
+export const IconOnly: StoryObj<ButtonProps> = {
+  args: {
+    startIcon: <AddIcon />,
+    text: undefined, // FIXME
+    tooltipText: "Add crew", // FIXME
+  },
 };

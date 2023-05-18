@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import {
   Infobox,
   InfoboxProps,
@@ -19,16 +19,9 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import InfoboxMdx from "./Infobox.mdx";
-
 const storybookMeta: Meta<InfoboxProps> = {
   title: "MUI Components/Alerts/Infobox",
   component: Infobox,
-  parameters: {
-    docs: {
-      page: InfoboxMdx,
-    },
-  },
   argTypes: {
     children: {
       control: "text",
@@ -53,61 +46,58 @@ const storybookMeta: Meta<InfoboxProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: StoryFn<InfoboxProps> = (args) => {
-  return (
-    <Infobox severity={args.severity} role={args.role} title={args.title}>
-      {args.children}
-    </Infobox>
-  );
+export const Info: StoryObj<InfoboxProps> = {
+  args: {
+    children: "You're signed in from Moonbase Alpha-6, located on Luna.",
+    severity: "info",
+  },
 };
 
-export const Info = DefaultTemplate.bind({});
-Info.args = {
-  children: "You're signed in from Moonbase Alpha-6, located on Luna.",
-  severity: "info",
+export const Error: StoryObj<InfoboxProps> = {
+  args: {
+    children:
+      "Reconfigure the fuel mixture ratios and perform safety checks again.",
+    role: "alert",
+    severity: "error",
+    title: "Safety checks failed",
+  },
 };
 
-export const Error = DefaultTemplate.bind({});
-Error.args = {
-  children:
-    "Reconfigure the fuel mixture ratios and perform safety checks again.",
-  role: "alert",
-  severity: "error",
-  title: "Safety checks failed",
+export const Warning: StoryObj<InfoboxProps> = {
+  args: {
+    children:
+      "Complete all safety checks before requesting approval to launch your mission.",
+    role: "status",
+    severity: "warning",
+    title: "Safety checks incomplete",
+  },
 };
 
-export const Warning = DefaultTemplate.bind({});
-Warning.args = {
-  children:
-    "Complete all safety checks before requesting approval to launch your mission.",
-  role: "status",
-  severity: "warning",
-  title: "Safety checks incomplete",
+export const Success: StoryObj<InfoboxProps> = {
+  args: {
+    children: "Safety checks are complete. Your mission is ready for liftoff.",
+    role: "status",
+    severity: "success",
+    title: "Approved for launch",
+  },
 };
 
-export const Success = DefaultTemplate.bind({});
-Success.args = {
-  children: "Safety checks are complete. Your mission is ready for liftoff.",
-  role: "status",
-  severity: "success",
-  title: "Approved for launch",
-};
+export const BlockLink: StoryObj<InfoboxProps> = {
+  args: {
+    children: (
+      <>
+        <Typography paragraph>
+          There is an issue with the fuel mixture ratios. Reconfigure the fuel
+          mixture and perform the safety checks again.
+        </Typography>
 
-export const BlockLink = DefaultTemplate.bind({});
-BlockLink.args = {
-  children: (
-    <>
-      <Typography paragraph>
-        There is an issue with the fuel mixture ratios. Reconfigure the fuel
-        mixture and perform the safety checks again.
-      </Typography>
-
-      <Link href="#" variant="monochrome">
-        Visit fueling console
-      </Link>
-    </>
-  ),
-  role: "alert",
-  severity: "error",
-  title: "Safety checks failed",
+        <Link href="#" variant="monochrome">
+          Visit fueling console
+        </Link>
+      </>
+    ),
+    role: "alert",
+    severity: "error",
+    title: "Safety checks failed",
+  },
 };

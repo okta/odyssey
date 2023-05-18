@@ -11,19 +11,13 @@
  */
 
 import { Banner, BannerProps } from "@okta/odyssey-react-mui";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import BannerMdx from "./Banner.mdx";
 
 const storybookMeta: Meta<typeof Banner> = {
   title: "MUI Components/Alerts/Banner",
   component: Banner,
-  parameters: {
-    docs: {
-      page: BannerMdx,
-    },
-  },
   argTypes: {
     linkText: {
       control: "text",
@@ -53,39 +47,42 @@ const storybookMeta: Meta<typeof Banner> = {
 
 export default storybookMeta;
 
-const Template: StoryFn<BannerProps> = (props) => <Banner {...props}></Banner>;
-
-export const InfoBanner = Template.bind({});
-InfoBanner.args = {
-  severity: "info",
-  text: "The mission to Sagittarius A is set for January 7.",
+export const InfoBanner: StoryObj<BannerProps> = {
+  args: {
+    severity: "info",
+    text: "The mission to Sagittarius A is set for January 7.",
+  },
 };
 
-export const ErrorBanner = Template.bind({});
-ErrorBanner.args = {
-  role: "status",
-  severity: "error",
-  text: "An unidentified flying object compromised Hangar 18.",
+export const ErrorBanner: StoryObj<BannerProps> = {
+  args: {
+    role: "status",
+    severity: "error",
+    text: "An unidentified flying object compromised Hangar 18.",
+  },
 };
 
-export const WarningBanner = Template.bind({});
-WarningBanner.args = {
-  role: "status",
-  severity: "warning",
-  text: "Severe solar winds detected. Local system flights may be delayed.",
+export const WarningBanner: StoryObj<BannerProps> = {
+  args: {
+    role: "status",
+    severity: "warning",
+    text: "Severe solar winds detected. Local system flights may be delayed.",
+  },
 };
 
-export const BannerWithLink = Template.bind({});
-BannerWithLink.args = {
-  linkText: "View report",
-  linkUrl: "#anchor",
-  role: "status",
-  severity: "error",
-  text: "An unidentified flying object compromised Hangar 18.",
+export const BannerWithLink: StoryObj<BannerProps> = {
+  args: {
+    linkText: "View report",
+    linkUrl: "#anchor",
+    role: "status",
+    severity: "error",
+    text: "An unidentified flying object compromised Hangar 18.",
+  },
 };
 
-export const DismissibleBanner = Template.bind({});
-DismissibleBanner.args = {
-  role: "status",
-  severity: "warning",
+export const DismissibleBanner: StoryObj<BannerProps> = {
+  args: {
+    role: "status",
+    severity: "warning",
+  },
 };
