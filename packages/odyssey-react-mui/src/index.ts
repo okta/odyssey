@@ -44,7 +44,6 @@ export {
   Snackbar,
   Stack,
   SvgIcon,
-  Tab,
   Table,
   TableBody,
   TableCell,
@@ -89,7 +88,6 @@ export type {
   SnackbarProps,
   StackProps,
   SvgIconProps,
-  TabProps,
   TableBodyProps,
   TableCellProps,
   TableContainerProps,
@@ -100,10 +98,6 @@ export type {
   ThemeOptions,
   TypographyProps,
 } from "@mui/material";
-
-export { TabContext, TabList, TabPanel } from "@mui/lab";
-
-export type { TabContextProps, TabListProps, TabPanelProps } from "@mui/lab";
 
 export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
@@ -133,6 +127,7 @@ export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Status";
+export * from "./Tabs";
 export * from "./Tag";
 export * from "./TagList";
 export * from "./TextField";
