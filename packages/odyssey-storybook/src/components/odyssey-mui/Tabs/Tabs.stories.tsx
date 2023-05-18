@@ -10,22 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import * as React from "react";
 import { Story } from "@storybook/react";
 import {
   Box,
   FavoriteIcon,
   Tab,
-  TabContext,
-  TabList,
-  TabPanel,
+  TabProps,
+  Tabs,
 } from "@okta/odyssey-react-mui";
 // import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TabsMdx from "./Tabs.mdx";
 
-export default {
+const storybookMeta = {
   title: `MUI Components/Tabs`,
   component: Tab,
   parameters: {
@@ -34,19 +32,21 @@ export default {
     },
   },
   argTypes: {
-    disabled: {
+    isDisabled: {
       control: "boolean",
       defaultValue: false,
     },
-    icon: {
+    startIcon: {
       control: "text",
       defaultValue: null,
     },
+    value: {
+      control: "text",
+    },
     label: {
       control: "text",
-      defaultValue: "Asteroids",
     },
-    wrapped: {
+    isWrapped: {
       control: "boolean",
       defaultValue: false,
     },
@@ -54,56 +54,55 @@ export default {
   decorators: [MuiThemeDecorator],
 };
 
-const DefaultTemplate: Story = (args) => {
-  const [value, setValue] = React.useState("0");
+export default storybookMeta;
 
-  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
-
+const DefaultTemplate: Story<TabProps> = (args) => {
   return (
     <Box>
-      <TabContext value={value}>
-        <TabList onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Planets" value="0" />
-          <Tab label="Moons" value="1" />
-
-          <Tab
-            disabled={args.disabled}
-            icon={args.icon}
-            label={args.label}
-            value="2"
-            wrapped={args.wrapped}
-          />
-        </TabList>
-
-        <TabPanel value="0">Information about Planets</TabPanel>
-
-        <TabPanel value="1">Information about Moons</TabPanel>
-
-        <TabPanel value="2">Information about {args.label}</TabPanel>
-      </TabContext>
+      <Tabs initialValue="planets" ariaLabel="basic tabs example">
+        <Tab label="Planets" value="planets">
+          Information about Planets.
+        </Tab>
+        <Tab label="Moons" value="moons">
+          Information about Moons.
+        </Tab>
+        <Tab
+          label={args.label}
+          value={args.value}
+          isDisabled={args.isDisabled}
+          startIcon={args.startIcon}
+          isWrapped={args.isWrapped}
+        >
+          Information about {args.label}.
+        </Tab>
+      </Tabs>
     </Box>
   );
 };
 
 export const Default = DefaultTemplate.bind({});
-Default.args = {};
+Default.args = {
+  label: "Asteroids",
+  value: "asteroids",
+};
 
 export const Disabled = DefaultTemplate.bind({});
 Disabled.args = {
-  disabled: true,
+  isDisabled: true,
   label: "Disabled Tab",
+  value: "disabled-tab",
 };
 
 export const Icons = DefaultTemplate.bind({});
 Icons.args = {
-  icon: <FavoriteIcon />,
+  startIcon: <FavoriteIcon />,
   label: "Icon Tab",
+  value: "icon-tab",
 };
 
 export const Wrapped = DefaultTemplate.bind({});
 Wrapped.args = {
   label: "This Variant Is Only a Fallback for Silly Long Labels",
-  wrapped: true,
+  value: "long-label",
+  isWrapped: true,
 };
