@@ -23,7 +23,7 @@ import CheckboxGroupMdx from "./CheckboxGroup.mdx";
 
 const storybookMeta: Meta<
   CheckboxGroupProps & {
-    isDefaultChecked: Parameters<typeof Checkbox>[0]["isDefaultChecked"];
+    isChecked: Parameters<typeof Checkbox>[0]["isChecked"];
     isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
   }
 > = {
@@ -35,7 +35,7 @@ const storybookMeta: Meta<
     },
   },
   argTypes: {
-    isDefaultChecked: {
+    isChecked: {
       control: "boolean",
       defaultValue: false,
     },
@@ -72,7 +72,7 @@ export default storybookMeta;
 
 const SingleTemplate: Story<
   CheckboxGroupProps & {
-    isDefaultChecked: CheckboxProps["isDefaultChecked"];
+    isChecked: CheckboxProps["isChecked"];
     isIndeterminate: CheckboxProps["isIndeterminate"];
   }
 > = (args) => (
@@ -84,7 +84,7 @@ const SingleTemplate: Story<
     isRequired={args.isRequired}
   >
     <Checkbox
-      isDefaultChecked={args.isDefaultChecked}
+      isChecked={args.isChecked}
       isIndeterminate={args.isIndeterminate}
       label="Pre-flight systems check complete"
       name="life-support"
@@ -162,14 +162,14 @@ const MixedErrorTemplate: Story<CheckboxGroupProps> = (args) => {
     >
       <Checkbox label="Alfred" name="alfred" value="alfred" />
       <Checkbox
-        isDefaultChecked
+        isChecked
         label="Barbara Gordon"
         name="barbara-gordon"
         value="barbara-gordon"
       />
       <Checkbox label="Hal Jordan" name="hal-jordan" value="hal-jordan" />
       <Checkbox
-        isDefaultChecked
+        isChecked
         label="The Joker"
         name="the-joker"
         value="the-joker"
