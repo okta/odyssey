@@ -10,21 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { Button, Toast, ToastProps, ToastStack } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 
-import ToastMdx from "./Toast.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<ToastProps> = {
+const meta: Meta<ToastProps> = {
   title: "MUI Components/Alerts/Toast",
   component: Toast,
-  parameters: {
-    docs: {
-      page: ToastMdx,
-    },
-  },
   argTypes: {
     autoHideDuration: {
       control: "number",
@@ -44,191 +38,208 @@ const storybookMeta: Meta<ToastProps> = {
     },
     severity: {
       control: "radio",
-      defaultValue: "info",
       options: ["error", "info", "success", "warning"],
     },
     text: {
       control: "text",
-      defaultValue: "Mission to Sagittarius A set for January 7",
     },
   },
   decorators: [MuiThemeDecorator],
 };
 
-export default storybookMeta;
+export default meta;
 
-const DefaultTemplate: StoryFn<ToastProps> = (args) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const openToast = useCallback(() => {
-    setIsVisible(true);
-  }, []);
-
-  return (
-    <>
-      <Button
-        variant="primary"
-        onClick={openToast}
-        text={`Open ${args.severity} toast`}
-      />
-      <ToastStack>
-        <Toast
-          autoHideDuration={args.autoHideDuration}
-          isDismissable={args.isDismissable}
-          linkText={args.linkText}
-          linkUrl={args.linkUrl}
-          isVisible={isVisible}
-          onHide={() => setIsVisible(false)}
-          role={args.role}
-          severity={args.severity}
-          text={args.text}
+const Single: StoryObj<ToastProps> = {
+  render: function C(props) {
+    const [isVisible, setIsVisible] = useState(false);
+    const openToast = useCallback(() => setIsVisible(true), []);
+    return (
+      <>
+        <Button
+          variant="primary"
+          onClick={openToast}
+          text={`Open ${props.severity} toast`}
         />
-      </ToastStack>
-    </>
-  );
+        <ToastStack>
+          <Toast
+            autoHideDuration={props.autoHideDuration}
+            isDismissable={props.isDismissable}
+            linkText={props.linkText}
+            linkUrl={props.linkUrl}
+            isVisible={isVisible}
+            onHide={() => setIsVisible(false)}
+            role={props.role}
+            severity={props.severity}
+            text={props.text}
+          />
+        </ToastStack>
+      </>
+    );
+  },
+  args: {
+    severity: "info",
+    linkText: "Info",
+    text: "The mission to Sagittarius A is set for January 7.",
+  },
 };
 
-DefaultTemplate.args = {
-  severity: "info",
-  text: "The mission to Sagittarius A is set for January 7.",
+const Static: StoryObj<ToastProps> = {
+  ...Single,
+  args: {
+    isVisible: true,
+    severity: "info",
+    text: "The mission to Sagittarius A is set for January 7.",
+  },
 };
 
-const StaticTemplate: StoryFn<ToastProps> = (args) => {
-  return <Toast {...args}></Toast>;
+export const Info: StoryObj<ToastProps> = {
+  ...Single,
+  args: {
+    isVisible: true,
+    text: "Testing",
+    severity: "info",
+  },
 };
 
-StaticTemplate.args = {
-  isVisible: true,
+export const InfoStatic: StoryObj<ToastProps> = {
+  ...Static,
+  args: {
+    isVisible: true,
+    text: "Hello world!",
+    severity: "info",
+  },
 };
 
-StaticTemplate.args = {
-  severity: "info",
-  text: "The mission to Sagittarius A is set for January 7.",
+export const Error = {
+  ...Single,
+  args: {
+    text: "Security breach in Hangar 18",
+    role: "alert",
+    severity: "error",
+  },
 };
 
-const MultipleTemplate: StoryFn<ToastProps> = () => {
-  const [toasts, setToasts] = useState([
-    <Toast
-      isDismissable
-      isVisible={true}
-      severity="info"
-      text="Mission to Sagittarius A set for January 7"
-    />,
-    <Toast
-      isDismissable
-      isVisible={true}
-      severity="success"
-      text="Docking completed"
-    />,
-  ]);
+export const ErrorStatic: StoryObj<ToastProps> = {
+  ...Static,
+  args: {
+    isVisible: true,
+    text: "Security breach in Hangar 18",
+    role: "alert",
+    severity: "error",
+  },
+};
 
-  const addToast = () => {
-    const toastOptions = [
+export const Warning: StoryObj<ToastProps> = {
+  ...Single,
+  args: {
+    text: "Severe solar winds may delay local system flights",
+    role: "status",
+    severity: "warning",
+  },
+};
+
+export const WarningStatic: StoryObj<ToastProps> = {
+  ...Static,
+  args: {
+    isVisible: true,
+    text: "Severe solar winds may delay local system flights",
+    role: "status",
+    severity: "warning",
+  },
+};
+
+export const Success: StoryObj<ToastProps> = {
+  ...Single,
+  args: {
+    text: "Docking completed",
+    role: "status",
+    severity: "success",
+  },
+};
+
+export const SuccessStatic: StoryObj<ToastProps> = {
+  ...Static,
+  args: {
+    isVisible: true,
+    text: "Docking completed",
+    role: "status",
+    severity: "success",
+  },
+};
+
+export const Dismissible: StoryObj<ToastProps> = {
+  ...Single,
+  args: {
+    isDismissable: true,
+    linkText: "View report",
+    linkUrl: "#",
+  },
+};
+
+export const DismissibleStatic: StoryObj<ToastProps> = {
+  ...Static,
+  args: {
+    isVisible: true,
+    isDismissable: true,
+    linkText: "View report",
+    linkUrl: "#",
+  },
+};
+
+export const MultipleToasts: StoryObj<ToastProps> = {
+  render: function C() {
+    const [toasts, setToasts] = useState([
       <Toast
+        isDismissable
         isVisible={true}
         severity="info"
-        text={`Mission to Sagittarius A set for January 7`}
-      />,
-      <Toast isVisible={true} severity="success" text={`Docking completed.`} />,
-      <Toast
-        isVisible={true}
-        severity="warning"
-        isDismissable
-        text={`Severe solar winds may delay local system flights`}
+        text="The mission to Sagittarius A is set for January 7."
       />,
       <Toast
-        isVisible={true}
-        severity="error"
         isDismissable
-        text={`Security breach in Hangar 10`}
+        isVisible={true}
+        severity="success"
+        text="Docking completed."
       />,
-    ];
-
-    setToasts([
-      ...toasts,
-      toastOptions[Math.floor(Math.random() * toastOptions.length)],
     ]);
-  };
 
-  return (
-    <>
-      <Button onClick={addToast} text="Open another Toast" />
-      <ToastStack>{toasts}</ToastStack>
-    </>
-  );
+    const addToast = () => {
+      const toastOptions = [
+        <Toast
+          isVisible={true}
+          severity="info"
+          text={`The mission to Sagittarius A is set for January 7.`}
+        />,
+        <Toast
+          isVisible={true}
+          severity="success"
+          text={`Docking completed.`}
+        />,
+        <Toast
+          isVisible={true}
+          severity="warning"
+          isDismissable
+          text={`Severe solar winds may delay local system flights.`}
+        />,
+        <Toast
+          isVisible={true}
+          severity="error"
+          isDismissable
+          text={`Security breach in Hangar 10.`}
+        />,
+      ];
+
+      setToasts([
+        ...toasts,
+        toastOptions[Math.floor(Math.random() * toastOptions.length)],
+      ]);
+    };
+
+    return (
+      <>
+        <Button onClick={addToast} text="Open another Toast" />
+        <ToastStack>{toasts}</ToastStack>
+      </>
+    );
+  },
 };
-
-export const Info = DefaultTemplate.bind({});
-Info.args = {};
-
-export const InfoStatic = StaticTemplate.bind({});
-InfoStatic.args = {
-  isVisible: true,
-  autoHideDuration: 0,
-};
-
-export const Error = DefaultTemplate.bind({});
-Error.args = {
-  text: "Security breach in Hangar 18",
-  role: "alert",
-  severity: "error",
-};
-
-export const ErrorStatic = StaticTemplate.bind({});
-ErrorStatic.args = {
-  isVisible: true,
-  text: "Security breach in Hangar 18",
-  role: "alert",
-  severity: "error",
-  autoHideDuration: 0,
-};
-
-export const Warning = DefaultTemplate.bind({});
-Warning.args = {
-  text: "Severe solar winds may delay local system flights",
-  role: "status",
-  severity: "warning",
-};
-
-export const WarningStatic = StaticTemplate.bind({});
-WarningStatic.args = {
-  isVisible: true,
-  text: "Severe solar winds may delay local system flights",
-  role: "status",
-  severity: "warning",
-  autoHideDuration: 0,
-};
-
-export const Success = DefaultTemplate.bind({});
-Success.args = {
-  text: "Docking completed",
-  role: "status",
-  severity: "success",
-};
-
-export const SuccessStatic = StaticTemplate.bind({});
-SuccessStatic.args = {
-  isVisible: true,
-  text: "Docking completed",
-  role: "status",
-  severity: "success",
-  autoHideDuration: 0,
-};
-
-export const Dismissible = DefaultTemplate.bind({});
-Dismissible.args = {
-  isDismissable: true,
-  linkText: "View report",
-  linkUrl: "#",
-};
-
-export const DismissibleStatic = StaticTemplate.bind({});
-DismissibleStatic.args = {
-  isDismissable: true,
-  isVisible: true,
-  linkText: "View report",
-  linkUrl: "#",
-};
-
-export const MultipleToasts = MultipleTemplate.bind({});
-MultipleToasts.args = {};

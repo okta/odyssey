@@ -11,19 +11,13 @@
  */
 
 import { Checkbox, CheckboxProps } from "@okta/odyssey-react-mui";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import CheckboxMdx from "./Checkbox.mdx";
 
 const storybookMeta: Meta<CheckboxProps> = {
   title: "MUI Components/Forms/Checkbox",
   component: Checkbox,
-  parameters: {
-    docs: {
-      page: CheckboxMdx,
-    },
-  },
   argTypes: {
     label: {
       control: "text",
@@ -46,7 +40,7 @@ const storybookMeta: Meta<CheckboxProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<typeof Checkbox> = {
+export const Default: StoryObj<CheckboxProps> = {
   args: {
     label: "I agree to the terms and conditions",
   },
