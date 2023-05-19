@@ -17,6 +17,7 @@ import {
   MenuItem,
   MenuList,
   MuiThemeProvider,
+  OdysseyTheme,
   OdysseyThemeProvider,
   Paper,
   Radio,
@@ -42,7 +43,7 @@ export const ButtonStory: StoryObj = {
   render: function C() {
 
     const odysseyDesignTokensOverrides: TokenOverrideOptions = {
-      BorderRadiusBase: "8px",
+      BorderRadiusBase: "12px",
       ColorBackgroundBase: "cyan", //focus border color
       ColorPaletteBlue500: "green", //base background color
       ColorPaletteBlue900: "rgb(150,0,0,1)", //used for hover/focus
@@ -69,11 +70,14 @@ export const TextFieldStory: StoryObj = {
     };
 
     return (
-      <OdysseyThemeProvider tokenOverride={odysseyDesignTokensOverrides}>
-        <div>
-          <TextField autoCompleteType="name" label="Name" type="text" />
-        </div>
-      </OdysseyThemeProvider>
+      <>
+        <TextField autoCompleteType="name" label="Name" type="text" />
+        <OdysseyThemeProvider tokenOverride={odysseyDesignTokensOverrides}>
+          <div>
+            <TextField autoCompleteType="name" label="Password" type="text" />
+          </div>
+        </OdysseyThemeProvider>
+      </>
     );
   },
 };
@@ -121,7 +125,7 @@ export const CustomComponentStory: StoryObj = {
         },
       },
     };
-    const odysseyTheme = createOdysseyTheme();
+    const odysseyTheme: OdysseyTheme = createOdysseyTheme();
     const customOdysseyTheme = useMemo(
       () =>
         themeOverrides1 && createTheme(deepmerge(odysseyTheme, themeOverrides1)),
