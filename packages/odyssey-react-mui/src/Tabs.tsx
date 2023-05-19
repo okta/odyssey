@@ -19,7 +19,7 @@ import {
 } from "@mui/lab";
 
 export type TabItemProps = {
-  children: string | ReactElement | ReactElement[];
+  children: string | string[] | ReactElement | ReactElement[];
   startIcon?: ReactElement;
   label: string;
   isDisabled?: boolean;
@@ -32,8 +32,15 @@ export type TabsProps = {
   ariaLabel?: string;
 };
 
-const TabItem = ({ children, ...rest }: TabItemProps) => {
-  return null;
+const TabItem = ({
+  children,
+  startIcon,
+  label,
+  isDisabled,
+  value,
+}: TabItemProps) => {
+  // We could return null instead, but then we throw errors because all the props are unused.
+  return { children, startIcon, label, isDisabled, value };
 };
 
 const Tabs = ({ ariaLabel, children, initialValue = "0" }: TabsProps) => {
@@ -42,6 +49,8 @@ const Tabs = ({ ariaLabel, children, initialValue = "0" }: TabsProps) => {
   const onChange = (_event: React.SyntheticEvent, newState: string) => {
     setTabState(newState);
   };
+
+  console.log(children);
 
   return (
     <MuiTabContext value={tabState}>
