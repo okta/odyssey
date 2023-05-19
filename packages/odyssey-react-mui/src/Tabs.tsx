@@ -18,22 +18,21 @@ import {
   TabContext as MuiTabContext,
 } from "@mui/lab";
 
-export type TabProps = {
-  children: any | any[];
+export type TabItemProps = {
+  children: string | ReactElement | ReactElement[];
   startIcon?: ReactElement;
   label: string;
-  isWrapped?: boolean;
   isDisabled?: boolean;
   value?: string;
 };
 
 export type TabsProps = {
-  children: ReactElement<typeof Tab>[];
+  children: ReactElement<TabItemProps>[];
   initialValue?: string;
   ariaLabel?: string;
 };
 
-const Tab = () => {
+const TabItem = ({ children, ...rest }: TabItemProps) => {
   return null;
 };
 
@@ -47,19 +46,21 @@ const Tabs = ({ ariaLabel, children, initialValue = "0" }: TabsProps) => {
   return (
     <MuiTabContext value={tabState}>
       <MuiTabList onChange={onChange} aria-label={ariaLabel}>
-        {children.map((tab) => (
+        {children.map((tab, index) => (
           <MuiTab
             disabled={tab.props.isDisabled}
             icon={tab.props.startIcon}
             label={tab.props.label}
-            wrapped={tab.props.isWrapped}
-            value={tab.props.value}
-            key={tab.props.value}
+            value={tab.props.value ? tab.props.value : index.toString()}
+            key={tab.props.value ? tab.props.value : index.toString()}
           />
         ))}
       </MuiTabList>
-      {children.map((tab) => (
-        <MuiTabPanel value={tab.props.value} key={tab.props.value}>
+      {children.map((tab, index) => (
+        <MuiTabPanel
+          value={tab.props.value ? tab.props.value : index.toString()}
+          key={tab.props.value ? tab.props.value : index.toString()}
+        >
           {tab.props.children}
         </MuiTabPanel>
       ))}
@@ -67,4 +68,4 @@ const Tabs = ({ ariaLabel, children, initialValue = "0" }: TabsProps) => {
   );
 };
 
-export { Tab, Tabs };
+export { TabItem, Tabs };

@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import {
   Box,
   FavoriteIcon,
-  Tab,
-  TabProps,
+  TabItem,
+  TabItemProps,
   Tabs,
 } from "@okta/odyssey-react-mui";
 // import { TabContext, TabList, TabPanel } from "@mui/lab";
@@ -23,9 +23,9 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import TabsMdx from "./Tabs.mdx";
 
-const storybookMeta = {
+const storybookMeta: Meta<TabItemProps> = {
   title: `MUI Components/Tabs`,
-  component: Tab,
+  component: TabItem,
   parameters: {
     docs: {
       page: TabsMdx,
@@ -46,35 +46,30 @@ const storybookMeta = {
     label: {
       control: "text",
     },
-    isWrapped: {
-      control: "boolean",
-      defaultValue: false,
-    },
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const DefaultTemplate: Story<TabProps> = (args) => {
+const DefaultTemplate: Story<TabItemProps> = (args) => {
   return (
     <Box>
       <Tabs initialValue="planets" ariaLabel="basic tabs example">
-        <Tab label="Planets" value="planets">
+        <TabItem label="Planets" value="planets">
           Information about Planets.
-        </Tab>
-        <Tab label="Moons" value="moons">
+        </TabItem>
+        <TabItem label="Moons" value="moons">
           Information about Moons.
-        </Tab>
-        <Tab
+        </TabItem>
+        <TabItem
           label={args.label}
           value={args.value}
           isDisabled={args.isDisabled}
           startIcon={args.startIcon}
-          isWrapped={args.isWrapped}
         >
           Information about {args.label}.
-        </Tab>
+        </TabItem>
       </Tabs>
     </Box>
   );
@@ -98,11 +93,4 @@ Icons.args = {
   startIcon: <FavoriteIcon />,
   label: "Icon Tab",
   value: "icon-tab",
-};
-
-export const Wrapped = DefaultTemplate.bind({});
-Wrapped.args = {
-  label: "This Variant Is Only a Fallback for Silly Long Labels",
-  value: "long-label",
-  isWrapped: true,
 };
