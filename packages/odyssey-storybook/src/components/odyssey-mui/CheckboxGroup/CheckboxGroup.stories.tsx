@@ -24,6 +24,7 @@ import CheckboxGroupMdx from "./CheckboxGroup.mdx";
 const storybookMeta: Meta<
   CheckboxGroupProps & {
     isChecked: Parameters<typeof Checkbox>[0]["isChecked"];
+    isDefaultChecked: Parameters<typeof Checkbox>[0]["isDefaultChecked"];
     isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
   }
 > = {
@@ -35,6 +36,10 @@ const storybookMeta: Meta<
     },
   },
   argTypes: {
+    isDefaultChecked: {
+      control: "boolean",
+      defaultValue: false,
+    },
     isChecked: {
       control: "boolean",
       defaultValue: false,
@@ -58,7 +63,7 @@ const storybookMeta: Meta<
     },
     isRequired: {
       control: "boolean",
-      defaultValue: false,
+      defaultValue: true,
     },
     label: {
       control: "text",
@@ -73,6 +78,7 @@ export default storybookMeta;
 const SingleTemplate: Story<
   CheckboxGroupProps & {
     isChecked: CheckboxProps["isChecked"];
+    isDefaultChecked: CheckboxProps["isDefaultChecked"];
     isIndeterminate: CheckboxProps["isIndeterminate"];
   }
 > = (args) => (
@@ -84,7 +90,7 @@ const SingleTemplate: Story<
     isRequired={args.isRequired}
   >
     <Checkbox
-      isChecked={args.isChecked}
+      isDefaultChecked={args.isDefaultChecked}
       isIndeterminate={args.isIndeterminate}
       label="Pre-flight systems check complete"
       name="life-support"
@@ -106,6 +112,7 @@ Checked.args = {
 export const Indeterminate = SingleTemplate.bind({});
 Indeterminate.parameters = { controls: { exclude: ["hint", "label"] } };
 Indeterminate.args = {
+  isDefaultChecked: true,
   isIndeterminate: true,
 };
 
@@ -118,13 +125,24 @@ const GroupTemplate: Story<CheckboxGroupProps> = (args) => {
       label="Systems check"
       isRequired={args.isRequired}
     >
-      <Checkbox label="Life support" name="life-support" value="life-support" />
+      <Checkbox
+        label="Life support"
+        name="life-support"
+        value="life-support"
+        isInvalid
+      />
       <Checkbox
         label="Warp core containment"
         name="warp-core"
         value="warp-core"
+        isInvalid
       />
-      <Checkbox label="Cetacean ops" name="cetacean-ops" value="cetacean-ops" />
+      <Checkbox
+        label="Cetacean ops"
+        name="cetacean-ops"
+        value="cetacean-ops"
+        isInvalid
+      />
     </CheckboxGroup>
   );
 };
@@ -134,6 +152,14 @@ Group.parameters = {
   controls: { exclude: ["defaultChecked", "isIndeterminate"] },
 };
 Group.args = {};
+
+export const OptionalGroup = GroupTemplate.bind({});
+Group.parameters = {
+  controls: { exclude: ["defaultChecked", "isIndeterminate"] },
+};
+Group.args = {
+  isRequired: false,
+};
 
 export const Disabled = GroupTemplate.bind({});
 Disabled.parameters = {
@@ -162,17 +188,19 @@ const MixedErrorTemplate: Story<CheckboxGroupProps> = (args) => {
     >
       <Checkbox label="Alfred" name="alfred" value="alfred" />
       <Checkbox
-        isChecked
+        isDefaultChecked
         label="Barbara Gordon"
         name="barbara-gordon"
         value="barbara-gordon"
+        isInvalid
       />
       <Checkbox label="Hal Jordan" name="hal-jordan" value="hal-jordan" />
       <Checkbox
-        isChecked
+        isDefaultChecked
         label="The Joker"
         name="the-joker"
         value="the-joker"
+        isInvalid
       />
     </CheckboxGroup>
   );

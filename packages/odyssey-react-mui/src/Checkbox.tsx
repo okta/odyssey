@@ -19,8 +19,9 @@ import { FormControlLabel } from ".";
 export type CheckboxProps = {
   ariaLabel?: string;
   ariaLabelledBy?: string;
-  hasError?: boolean;
+  isInvalid?: boolean;
   isChecked?: boolean;
+  isDefaultChecked?: boolean;
   isDisabled?: boolean;
   isIndeterminate?: boolean;
   isRequired?: boolean;
@@ -33,8 +34,9 @@ export type CheckboxProps = {
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
-  hasError,
+  isInvalid,
   isChecked,
+  isDefaultChecked,
   isDisabled,
   isIndeterminate,
   isRequired,
@@ -66,9 +68,13 @@ const Checkbox = ({
       aria-labelledby={ariaLabelledBy}
       aria-required={isRequired}
       checked={isChecked}
-      className={hasError ? "Mui-error" : ""}
+      className={isInvalid ? "Mui-error" : ""}
       control={
-        <MuiCheckbox indeterminate={isIndeterminate} required={isRequired} />
+        <MuiCheckbox
+          indeterminate={isIndeterminate}
+          required={isRequired}
+          defaultChecked={isDefaultChecked}
+        />
       }
       disabled={isDisabled}
       label={label}

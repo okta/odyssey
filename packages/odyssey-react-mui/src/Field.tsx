@@ -15,11 +15,13 @@ import { memo, ReactElement, useMemo } from "react";
 import {
   FormControl as MuiFormControl,
   FormLabel as MuiFormLabel,
+  Typography,
 } from "@mui/material";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
 import { useUniqueId } from "./useUniqueId";
+import { useTranslation } from "react-i18next";
 
 export type FieldProps = {
   /**
@@ -43,6 +45,10 @@ export type FieldProps = {
    * Important for narrowing down the `fieldset` role to "radiogroup".
    */
   isRadioGroup?: boolean;
+  /**
+   * Important for determining if children inherit error state
+   */
+  isCheckboxGroup?: boolean;
   /**
    * If `true`, the component is disabled.
    */
@@ -79,10 +85,13 @@ const Field = ({
   id: idOverride,
   isDisabled = false,
   isRadioGroup = false,
+  isCheckboxGroup = false,
   isOptional = false,
   label,
   renderFieldComponent,
 }: FieldProps) => {
+  const { t } = useTranslation();
+
   const id = useUniqueId(idOverride);
   const hintId = hint ? `${id}-hint` : undefined;
   const errorId = errorMessage ? `${id}-error` : undefined;
@@ -97,11 +106,18 @@ const Field = ({
     <MuiFormControl
       component={fieldType === "group" ? "fieldset" : "div"}
       disabled={isDisabled}
-      error={Boolean(errorMessage)}
+      error={!isCheckboxGroup ? Boolean(errorMessage) : false}
       role={isRadioGroup ? "radiogroup" : undefined}
     >
       {fieldType === "group" ? (
-        <MuiFormLabel component="legend">{label}</MuiFormLabel>
+        <MuiFormLabel component="legend">
+          {label}{" "}
+          {isOptional && (
+            <Typography component="span" color="textSecondary">
+              ({t("fieldlabel.optional.text")})
+            </Typography>
+          )}
+        </MuiFormLabel>
       ) : (
         <FieldLabel
           hasVisibleLabel={hasVisibleLabel}
