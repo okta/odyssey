@@ -20,28 +20,29 @@ const storybookMeta: Meta<NativeSelectProps> = {
   argTypes: {
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
     },
     errorMessage: {
       control: "text",
-      defaultValue: null,
     },
     hint: {
       control: "text",
-      defaultValue: "Select your destination in the Sol system.",
     },
     isOptional: {
       control: "boolean",
-      defaultValue: false,
     },
     label: {
       control: "text",
-      defaultValue: "Destination",
     },
     defaultValue: {
       control: "text",
       description: "The default value, if the control is native.",
     },
+  },
+  args: {
+    isDisabled: false,
+    hint: "Select your destination in the Sol system.",
+    isOptional: false,
+    label: "Destination",
   },
   decorators: [MuiThemeDecorator],
 };

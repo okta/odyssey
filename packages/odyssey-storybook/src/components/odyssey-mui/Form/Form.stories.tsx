@@ -27,62 +27,55 @@ const storybookMeta: Meta<FormProps> = {
   argTypes: {
     title: {
       control: "text",
-      defaultValue: "Docking registration",
     },
     alert: {
       control: "text",
-      defaultValue: undefined,
     },
     children: {
       control: "text",
-      defaultValue: (
-        <>
-          <TextField label="Name of vessel" />
-          <TextField isMultiline label="Nature of visit" />
-        </>
-      ),
     },
     description: {
       control: "text",
-      defaultValue: undefined,
     },
     formActions: {
       control: "text",
-      defaultValue: (
-        <>
-          <Button text="Submit" />
-          <Button variant="secondary" text="Reset" />
-        </>
-      ),
     },
     hasAutoComplete: {
       control: "boolean",
-      defaultValue: undefined,
     },
     encodingType: {
       control: "text",
-      defaultValue: undefined,
     },
     method: {
       control: "text",
-      defaultValue: undefined,
     },
     noValidate: {
       control: "boolean",
-      defaultValue: undefined,
     },
     target: {
       control: "text",
-      defaultValue: undefined,
     },
     id: {
       control: "text",
-      defaultValue: undefined,
     },
     name: {
       control: "text",
-      defaultValue: undefined,
     },
+  },
+  args: {
+    title: "Docking registration",
+    children: (
+      <>
+        <TextField label="Name of vessel" />
+        <TextField isMultiline label="Nature of visit" />
+      </>
+    ),
+    formActions: (
+      <>
+        <Button text="Submit" />
+        <Button variant="secondary" text="Reset" />
+      </>
+    ),
   },
   decorators: [MuiThemeDecorator],
 };

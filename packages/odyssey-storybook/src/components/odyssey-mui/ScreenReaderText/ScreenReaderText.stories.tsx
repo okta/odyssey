@@ -24,8 +24,10 @@ const storybookMeta: Meta<typeof ScreenReaderText> = {
   argTypes: {
     children: {
       control: "text",
-      defaultValue: "This text is visually hidden.",
     },
+  },
+  args: {
+    children: "This text is visually hidden.",
   },
   decorators: [MuiThemeDecorator],
 };

@@ -39,17 +39,15 @@ const storybookMeta: Meta<RadioProps> = {
     },
     value: {
       control: "text",
-      defaultValue: "Value",
     },
+  },
+  args: {
+    label: "Label",
+    value: "Value",
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-export const Default: StoryObj<RadioProps> = {
-  args: {
-    label: "Label",
-    value: "Value",
-  },
-};
+export const Default: StoryObj<RadioProps> = {};

@@ -20,7 +20,6 @@ const storybookMeta: Meta<TypographyProps> = {
   argTypes: {
     children: {
       control: "text",
-      defaultValue: "Spice is vital for space travel.",
     },
     variant: {
       options: [
@@ -36,6 +35,9 @@ const storybookMeta: Meta<TypographyProps> = {
       ],
       control: { type: "select" },
     },
+  },
+  args: {
+    children: "Spice is vital for space travel.",
   },
   decorators: [MuiThemeDecorator],
 };

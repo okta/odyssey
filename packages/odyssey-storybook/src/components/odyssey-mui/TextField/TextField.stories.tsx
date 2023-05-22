@@ -25,15 +25,12 @@ const storybookMeta: Meta<TextFieldProps> = {
   argTypes: {
     autoCompleteType: {
       control: "text",
-      defaultValue: "name",
     },
     hasInitialFocus: {
       control: "boolean",
-      defaultValue: false,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
     },
     endAdornment: {
       control: "text",
@@ -49,11 +46,9 @@ const storybookMeta: Meta<TextFieldProps> = {
     },
     label: {
       control: "text",
-      defaultValue: "Destination",
     },
     isMultiline: {
       control: "boolean",
-      defaultValue: false,
     },
     onBlur: {
       control: "function",
@@ -66,7 +61,6 @@ const storybookMeta: Meta<TextFieldProps> = {
     },
     isOptional: {
       control: "boolean",
-      defaultValue: false,
     },
     placeholder: {
       control: "text",
@@ -80,11 +74,13 @@ const storybookMeta: Meta<TextFieldProps> = {
     type: {
       control: "select",
       options: ["email", "number", "tel", "text", "url"],
-      defaultValue: "text",
     },
     value: {
       control: "text",
     },
+  },
+  args: {
+    label: "Destination",
   },
   decorators: [MuiThemeDecorator],
 };

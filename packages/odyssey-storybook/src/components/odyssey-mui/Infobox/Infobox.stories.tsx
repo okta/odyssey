@@ -25,8 +25,6 @@ const storybookMeta: Meta<InfoboxProps> = {
   argTypes: {
     children: {
       control: "text",
-      defaultValue:
-        "You are currently logged in from Moonbase Alpha-6, located on Luna.",
     },
     role: {
       control: "radio",
@@ -35,11 +33,15 @@ const storybookMeta: Meta<InfoboxProps> = {
     severity: {
       control: "radio",
       options: ["error", "info", "success", "warning"],
-      defaultValue: "info",
     },
     title: {
       control: "string",
     },
+  },
+  args: {
+    children:
+      "You are currently logged in from Moonbase Alpha-6, located on Luna.",
+    severity: "info",
   },
   decorators: [MuiThemeDecorator],
 };

@@ -21,22 +21,18 @@ const storybookMeta: Meta<SearchFieldProps> = {
   argTypes: {
     autoCompleteType: {
       control: "text",
-      defaultValue: "name",
     },
     hasInitialFocus: {
       control: "boolean",
-      defaultValue: false,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
     },
     id: {
       control: "text",
     },
     label: {
       control: "text",
-      defaultValue: "Search",
     },
     onBlur: {
       control: "function",
@@ -49,20 +45,18 @@ const storybookMeta: Meta<SearchFieldProps> = {
     },
     placeholder: {
       control: "text",
-      defaultValue: "Search planets",
     },
     value: {
       control: "text",
     },
+  },
+  args: {
+    label: "Search",
+    placeholder: "Search planets",
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-export const Default: StoryObj<SearchFieldProps> = {
-  args: {
-    label: "Search",
-    placeholder: "Search planets",
-  },
-};
+export const Default: StoryObj<SearchFieldProps> = {};

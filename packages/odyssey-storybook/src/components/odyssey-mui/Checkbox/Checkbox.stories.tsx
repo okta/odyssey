@@ -21,18 +21,15 @@ const storybookMeta: Meta<CheckboxProps> = {
   argTypes: {
     label: {
       control: "text",
-      defaultValue: "Label",
     },
     name: {
       control: "text",
-      defaultValue: "checkbox",
     },
     onChange: {
       control: "function",
     },
     value: {
       control: "text",
-      defaultValue: "Value",
     },
   },
   decorators: [MuiThemeDecorator],

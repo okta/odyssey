@@ -23,11 +23,9 @@ const storybookMeta: Meta<TagProps> = {
   argTypes: {
     label: {
       control: "text",
-      defaultValue: "Starship",
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
     },
     onClick: {
       action: true,
@@ -35,6 +33,11 @@ const storybookMeta: Meta<TagProps> = {
     onRemove: {
       action: true,
     },
+  },
+  args: {
+    label: "Starship",
+    onRemove: undefined,
+    onClick: undefined,
   },
   decorators: [MuiThemeDecorator],
 };
@@ -65,12 +68,18 @@ export const List: StoryObj<TagProps> = {
 export const Clickable: StoryObj<TagProps> = {
   args: {
     label: "Starship",
+    onClick: function noRefCheck(event) {
+      event;
+    },
   },
 };
 
 export const Removable: StoryObj<TagProps> = {
   args: {
     label: "Starship",
+    onRemove: function noRefCheck(event) {
+      event;
+    },
   },
 };
 

@@ -35,7 +35,6 @@ const storybookMeta: Meta<MenuButtonProps> = {
     },
     buttonLabel: {
       control: "text",
-      defaultValue: "More actions",
     },
     buttonEndIcon: {
       control: "text",
@@ -44,16 +43,15 @@ const storybookMeta: Meta<MenuButtonProps> = {
       control: "text",
     },
   },
+  args: {
+    buttonLabel: "More actions",
+  },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const DefaultTemplate: StoryObj<MenuButtonProps> = {
-  args: {
-    buttonLabel: "More actions",
-  },
-};
+const DefaultTemplate: StoryObj<MenuButtonProps> = {};
 
 export const Simple: StoryObj<MenuButtonProps> = {
   ...DefaultTemplate,

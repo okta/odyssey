@@ -42,6 +42,11 @@ const storybookMeta: Meta<typeof Banner> = {
       defaultValue: "The mission to Sagittarius A is set for January 7.",
     },
   },
+  args: {
+    severity: "info",
+    text: "The mission to Sagittarius A is set for January 7.",
+    onClose: undefined,
+  },
   decorators: [MuiThemeDecorator],
 };
 
@@ -82,7 +87,8 @@ export const BannerWithLink: StoryObj<BannerProps> = {
 
 export const DismissibleBanner: StoryObj<BannerProps> = {
   args: {
-    role: "status",
-    severity: "warning",
+    onClose: function noRefCheck(event) {
+      event;
+    },
   },
 };

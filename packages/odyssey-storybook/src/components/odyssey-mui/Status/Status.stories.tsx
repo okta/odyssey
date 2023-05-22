@@ -20,13 +20,15 @@ const storybookMeta: Meta<StatusProps> = {
   argTypes: {
     label: {
       control: "text",
-      defaultValue: "Warp drive in standby",
     },
     severity: {
       control: "radio",
       options: ["default", "error", "info", "success", "warning"],
-      defaultValue: "default",
     },
+  },
+  args: {
+    label: "Warp drive in standby",
+    severity: "default",
   },
   decorators: [MuiThemeDecorator],
 };

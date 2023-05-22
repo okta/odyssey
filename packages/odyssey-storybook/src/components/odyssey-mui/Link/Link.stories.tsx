@@ -25,7 +25,6 @@ export default {
   argTypes: {
     children: {
       control: "text",
-      defaultValue: "Link",
     },
     variant: {
       options: ["default", "monochrome"],

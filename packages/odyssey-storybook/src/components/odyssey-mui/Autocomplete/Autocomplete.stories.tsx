@@ -21,11 +21,9 @@ const storybookMeta: Meta<typeof Autocomplete> = {
   argTypes: {
     label: {
       control: "text",
-      defaultValue: "Destination",
     },
     hint: {
       control: "text",
-      defaultValue: "Select your destination in the Sol system.",
     },
     isDisabled: {
       control: "boolean",
@@ -42,6 +40,10 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     isReadOnly: {
       control: "boolean",
     },
+  },
+  args: {
+    label: "Destination",
+    hint: "Select your destination in the Sol system.",
   },
   decorators: [MuiThemeDecorator],
 };
