@@ -125,36 +125,39 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       return { text: option, value: option, type: "option" };
     });
 
-    const renderValue = (selected: string | string[]) => {
-      // If the selected value isn't an array, then we don't need to display
-      // chips and should fall back to the default render behavior
-      if (typeof selected === "string") {
-        return undefined;
-      }
+    const renderValue = useCallback(
+      (selected: string | string[]) => {
+        // If the selected value isn't an array, then we don't need to display
+        // chips and should fall back to the default render behavior
+        if (typeof selected === "string") {
+          return undefined;
+        }
 
-      // Convert the selected options array into <Chip>s
-      const renderedChips = selected
-        .map((item: string) => {
-          const selectedOption = normalizedOptions.find(
-            (option) => option.value === item
-          );
+        // Convert the selected options array into <Chip>s
+        const renderedChips = selected
+          .map((item: string) => {
+            const selectedOption = normalizedOptions.find(
+              (option) => option.value === item
+            );
 
-          if (!selectedOption) {
-            return null;
-          }
+            if (!selectedOption) {
+              return null;
+            }
 
-          return <Chip key={item} label={selectedOption.text} />;
-        })
-        .filter(Boolean);
+            return <Chip key={item} label={selectedOption.text} />;
+          })
+          .filter(Boolean);
 
-      if (renderedChips.length === 0) {
-        return null;
-      }
+        if (renderedChips.length === 0) {
+          return null;
+        }
 
-      // We need the <Box> to surround the <Chip>s for
-      // proper styling
-      return <Box>{renderedChips}</Box>;
-    };
+        // We need the <Box> to surround the <Chip>s for
+        // proper styling
+        return <Box>{renderedChips}</Box>;
+      },
+      [normalizedOptions]
+    );
 
     // Convert the options into the ReactNode children
     // that will populate the <Select>
