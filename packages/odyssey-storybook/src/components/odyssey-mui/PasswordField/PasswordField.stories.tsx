@@ -21,7 +21,6 @@ const storybookMeta: Meta<PasswordFieldProps> = {
   argTypes: {
     autoCompleteType: {
       control: "text",
-      defaultValue: "name",
     },
     hasInitialFocus: {
       control: "boolean",
@@ -40,7 +39,6 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     },
     label: {
       control: "text",
-      defaultValue: "Destination",
     },
     onBlur: {
       control: "function",
@@ -59,20 +57,19 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     },
     isOptional: {
       control: "boolean",
-      defaultValue: false,
     },
     value: {
       control: "text",
     },
+  },
+  args: {
+    autoCompleteType: "current-password",
+    label: "Password",
+    isOptional: false,
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-export const Default: StoryObj<PasswordFieldProps> = {
-  args: {
-    autoCompleteType: "current-password",
-    label: "Password",
-  },
-};
+export const Default: StoryObj<PasswordFieldProps> = {};

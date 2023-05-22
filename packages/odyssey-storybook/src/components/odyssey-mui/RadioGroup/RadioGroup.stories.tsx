@@ -33,14 +33,12 @@ const storybookMeta: Meta<typeof RadioGroup> = {
     },
     id: {
       control: "text",
-      defaultValue: "storybook-radio",
     },
     isDisabled: {
       control: "boolean",
     },
     label: {
       control: "text",
-      defaultValue: "Speed",
     },
     onChange: {
       control: "function",
@@ -48,6 +46,10 @@ const storybookMeta: Meta<typeof RadioGroup> = {
     value: {
       control: "text",
     },
+  },
+  args: {
+    id: "storybook-radio",
+    label: "Speed",
   },
   decorators: [MuiThemeDecorator],
 };
@@ -68,11 +70,6 @@ const Template: StoryObj<RadioGroupProps> = {
 
 export const Default: StoryObj<RadioGroupProps> = {
   ...Template,
-  args: {
-    label: "Speed",
-    id: "storybook-radio",
-    value: "Value",
-  },
 };
 
 export const Hint: StoryObj<RadioGroupProps> = {

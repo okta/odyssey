@@ -37,7 +37,6 @@ const storybookMeta: Meta<TooltipProps> = {
       control: {
         options: ["label", "description"],
         type: "radio",
-        defaultValue: "label",
       },
       description:
         "Choose `description` if the tooltip is an ARIA description of the child element. Otherwise, choose `label`. This must be explicitly set.",
@@ -45,13 +44,15 @@ const storybookMeta: Meta<TooltipProps> = {
     text: {
       control: {
         type: "text",
-        defaultValue: "This is a tooltip.",
       },
     },
     placement: {
       options: ["top", "right", "bottom", "left"],
       control: { type: "radio" },
     },
+  },
+  args: {
+    ariaType: "label",
   },
   decorators: [MuiThemeDecorator],
 };

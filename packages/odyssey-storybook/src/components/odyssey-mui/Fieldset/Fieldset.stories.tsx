@@ -25,37 +25,34 @@ const storybookMeta: Meta = {
   argTypes: {
     legend: {
       control: "text",
-      defaultValue: "Ship registration information",
     },
     alert: {
       control: "text",
-      defaultValue: undefined,
     },
     children: {
       control: "text",
-      defaultValue: (
-        <>
-          <TextField label="Name of vessel" />
-          <TextField isMultiline label="Nature of visit" />
-        </>
-      ),
     },
     description: {
       control: "text",
-      defaultValue: undefined,
     },
     id: {
       control: "text",
-      defaultValue: undefined,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: undefined,
     },
     name: {
       control: "text",
-      defaultValue: undefined,
     },
+  },
+  args: {
+    legend: "Ship registration information",
+    children: (
+      <>
+        <TextField label="Name of vessel" />
+        <TextField isMultiline label="Nature of visit" />
+      </>
+    ),
   },
   decorators: [MuiThemeDecorator],
 };
@@ -75,14 +72,6 @@ const Template: StoryObj<FieldsetProps> = {
         {args.children}
       </Fieldset>
     );
-  },
-  args: {
-    children: (
-      <>
-        <TextField label="Name of vessel" />
-        <TextField isMultiline label="Nature of visit" />
-      </>
-    ),
   },
 };
 

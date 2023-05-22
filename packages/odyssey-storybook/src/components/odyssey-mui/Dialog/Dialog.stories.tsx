@@ -39,8 +39,6 @@ const storybookMeta: Meta<DialogProps> = {
     },
     children: {
       control: "text",
-      defaultValue:
-        "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     },
     onClose: {
       control: "function",
@@ -49,8 +47,12 @@ const storybookMeta: Meta<DialogProps> = {
     },
     title: {
       control: "text",
-      defaultValue: "Initiate self-destruct protocol",
     },
+  },
+  args: {
+    children:
+      "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
+    title: "Initiate self-destruct protocol",
   },
   decorators: [MuiThemeDecorator],
 };

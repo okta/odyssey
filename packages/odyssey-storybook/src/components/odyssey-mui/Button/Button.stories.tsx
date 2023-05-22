@@ -38,7 +38,6 @@ const storybookMeta: Meta<ButtonProps> = {
     },
     text: {
       control: "text",
-      defaultValue: "Add crew",
     },
     tooltipText: {
       control: "text",
@@ -46,11 +45,14 @@ const storybookMeta: Meta<ButtonProps> = {
     variant: {
       options: ["primary", "secondary", "danger", "floating"],
       control: { type: "radio" },
-      defaultValue: "primary",
     },
     onClick: {
       action: true,
     },
+  },
+  args: {
+    text: "Add crew",
+    variant: "primary",
   },
   decorators: [MuiThemeDecorator],
 };
@@ -58,9 +60,6 @@ const storybookMeta: Meta<ButtonProps> = {
 export default storybookMeta;
 
 export const ButtonPrimary: StoryObj<ButtonProps> = {
-  args: {
-    text: "Add crew",
-  },
   play: async ({ args, canvasElement, step }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByText("Add crew");

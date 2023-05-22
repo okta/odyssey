@@ -23,7 +23,6 @@ const storybookMeta: Meta<CircularProgressProps> = {
   argTypes: {
     value: {
       control: { type: "number" },
-      defaultValue: undefined,
     },
   },
   decorators: [MuiThemeDecorator],
