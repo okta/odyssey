@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, ReactNode, useState } from "react";
 import { Tab as MuiTab } from "@mui/material";
 import {
   TabList as MuiTabList,
@@ -19,7 +19,7 @@ import {
 } from "@mui/lab";
 
 export type TabItemProps = {
-  children: string | string[] | ReactElement | ReactElement[];
+  children: ReactNode;
   startIcon?: ReactElement;
   label: string;
   isDisabled?: boolean;
@@ -32,15 +32,8 @@ export type TabsProps = {
   ariaLabel?: string;
 };
 
-const TabItem = ({
-  children,
-  startIcon,
-  label,
-  isDisabled,
-  value,
-}: TabItemProps) => {
-  // We could return null instead, but then we throw errors because all the props are unused.
-  return { children, startIcon, label, isDisabled, value };
+const TabItem = (props: TabItemProps) => {
+  return <>{props.children}</>;
 };
 
 const Tabs = ({ ariaLabel, children, initialValue = "0" }: TabsProps) => {
