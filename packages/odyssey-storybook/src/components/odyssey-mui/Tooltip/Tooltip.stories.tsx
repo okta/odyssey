@@ -69,7 +69,7 @@ const Template: StoryObj<TooltipProps> = {
         {args.children}
       </Tooltip>
     );
-  }
+  },
 };
 
 export const Default: StoryObj<TooltipProps> = {
@@ -79,7 +79,7 @@ export const Default: StoryObj<TooltipProps> = {
     ariaType: "description",
     placement: "top",
     text: "This will begin a 10-second countdown",
-  }
+  },
 };
 
 export const Icon: StoryObj<TooltipProps> = {
@@ -89,7 +89,7 @@ export const Icon: StoryObj<TooltipProps> = {
     ariaType: "label",
     placement: "top",
     text: "Download logs",
-  }
+  },
 };
 
 export const Disabled: StoryObj<TooltipProps> = {
@@ -101,7 +101,7 @@ export const Disabled: StoryObj<TooltipProps> = {
     ariaType: "description",
     placement: "top",
     text: "You don't have access to these logs",
-  }
+  },
 };
 
 export const Placement: StoryObj<TooltipProps> = {
@@ -122,5 +122,5 @@ export const Placement: StoryObj<TooltipProps> = {
         </Tooltip>
       </>
     );
-  }
+  },
 };
