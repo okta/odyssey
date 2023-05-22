@@ -1635,6 +1635,7 @@ export const components: ThemeOptions["components"] = {
         },
       }),
       icon: ({ theme }) => ({
+        right: "unset",
         insetInlineEnd: theme.spacing(3),
         color: theme.palette.text.primary,
       }),
