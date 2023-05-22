@@ -11,14 +11,11 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
-import { TokenOverrideOptions } from ".";
-import { deepmerge } from "@mui/utils";
+import { TokensOverride } from ".";
 
 export const typography = (
-  tokenOverrides?: TokenOverrideOptions
+  odysseyTokens: TokensOverride
 ): ThemeOptions["typography"] => {
-  const odysseyTokens = deepmerge(Tokens, tokenOverrides);
   return {
     htmlFontSize: 16,
     fontFamily: odysseyTokens.FontFamilyBase,

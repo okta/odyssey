@@ -10,8 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import * as Tokens from "@okta/odyssey-design-tokens";
+
 export * from "./theme";
 export { useTheme } from "./useTheme";
-export interface TokenOverrideOptions {
-  [k: string]: string | number;
-}
+
+export type TokensOverride = Partial<typeof Tokens>;

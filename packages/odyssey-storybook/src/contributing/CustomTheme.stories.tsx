@@ -24,15 +24,15 @@ import {
   RadioGroup,
   TextField,
   ThemeOptions,
-  TokenOverrideOptions,
-  createOdysseyTheme,
+  TokensOverride,
+  createOdysseyMuiTheme,
   createTheme,
   deepmerge,
 } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator";
-import CustomThemeMdx from "./CustomTheme.mdx";
 import { useMemo } from "react";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
 export default {
   title: "Customization/Components",
@@ -41,8 +41,7 @@ export default {
 
 export const ButtonStory: StoryObj = {
   render: function C() {
-
-    const odysseyDesignTokensOverrides: TokenOverrideOptions = {
+    const odysseyDesignTokensOverrides: TokensOverride = {
       BorderRadiusBase: "12px",
       ColorBackgroundBase: "cyan", //focus border color
       ColorPaletteBlue500: "green", //base background color
@@ -52,7 +51,7 @@ export const ButtonStory: StoryObj = {
     };
 
     return (
-      <OdysseyThemeProvider tokenOverride={odysseyDesignTokensOverrides}>
+      <OdysseyThemeProvider tokensOverride={odysseyDesignTokensOverrides}>
         <div>
           <Button variant="primary" text="Primary" />
         </div>
@@ -65,14 +64,14 @@ ButtonStory.storyName = "Button";
 
 export const TextFieldStory: StoryObj = {
   render: function C() {
-    const odysseyDesignTokensOverrides: TokenOverrideOptions = {
+    const odysseyDesignTokensOverrides: TokensOverride = {
       ColorPaletteBlue500: "orange",
     };
 
     return (
       <>
         <TextField autoCompleteType="name" label="Name" type="text" />
-        <OdysseyThemeProvider tokenOverride={odysseyDesignTokensOverrides}>
+        <OdysseyThemeProvider tokensOverride={odysseyDesignTokensOverrides}>
           <div>
             <TextField autoCompleteType="name" label="Password" type="text" />
           </div>
@@ -86,12 +85,12 @@ TextFieldStory.storyName = "TextField";
 
 export const RadioGroupStory: StoryObj = {
   render: function C() {
-    const odysseyDesignTokensOverrides: TokenOverrideOptions = {
+    const odysseyDesignTokensOverrides: TokensOverride = {
       ColorPaletteBlue500: "rgba(0, 160, 100, 1)", // THIS IS A SAMPLE. DO NOT USE!
     };
 
     return (
-      <OdysseyThemeProvider tokenOverride={odysseyDesignTokensOverrides}>
+      <OdysseyThemeProvider tokensOverride={odysseyDesignTokensOverrides}>
         <div>
           <RadioGroup
             defaultValue="Lightspeed"
@@ -113,23 +112,24 @@ RadioGroupStory.storyName = "RadioGroup";
 
 export const CustomComponentStory: StoryObj = {
   render: function C() {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const themeOverrides1: ThemeOptions = {
-      components: {
-        MuiListItemText: {
-          styleOverrides: {
-            root: {
-              color: "red",
+    const themeOverrides: ThemeOptions = useMemo(() => {
+      return {
+        components: {
+          MuiListItemText: {
+            styleOverrides: {
+              root: {
+                color: "red",
+              },
             },
           },
         },
-      },
-    };
-    const odysseyTheme: OdysseyTheme = createOdysseyTheme();
+      };
+    }, []);
+    const odysseyTheme: OdysseyTheme = createOdysseyMuiTheme(Tokens);
     const customOdysseyTheme = useMemo(
       () =>
-        themeOverrides1 && createTheme(deepmerge(odysseyTheme, themeOverrides1)),
-      [odysseyTheme, themeOverrides1]
+        themeOverrides && createTheme(deepmerge(odysseyTheme, themeOverrides)),
+      [odysseyTheme, themeOverrides]
     );
 
     return (

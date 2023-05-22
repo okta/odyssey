@@ -11,15 +11,12 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
+import { TokensOverride } from ".";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
-import { deepmerge } from "@mui/utils";
-import { TokenOverrideOptions } from ".";
-
 export const palette = (
-  tokenOverrides?: TokenOverrideOptions
+  odysseyTokens: TokensOverride
 ): ThemeOptions["palette"] => {
-  const odysseyTokens = deepmerge(Tokens, tokenOverrides);
   return {
     mode: "light",
     common: {
@@ -29,41 +26,43 @@ export const palette = (
     primary: {
       lighter: odysseyTokens.ColorPaletteBlue000,
       light: odysseyTokens.ColorPaletteBlue300,
-      main: odysseyTokens.ColorPaletteBlue500,
+      main: odysseyTokens.ColorPaletteBlue500 ?? Tokens.ColorPaletteGreen500,
       dark: odysseyTokens.ColorPaletteBlue900,
       contrastText: odysseyTokens.ColorTextBodyInverse,
     },
     secondary: {
       light: "#80c7ca",
-      main: odysseyTokens.ColorPaletteTurquoise500,
+      main:
+        odysseyTokens.ColorPaletteTurquoise500 ??
+        Tokens.ColorPaletteTurquoise500,
       dark: "#004650",
       contrastText: odysseyTokens.ColorTextBodyInverse,
     },
     error: {
       lighter: odysseyTokens.ColorPaletteRed000,
       light: odysseyTokens.ColorPaletteRed300,
-      main: odysseyTokens.ColorPaletteRed500,
+      main: odysseyTokens.ColorPaletteRed500 ?? Tokens.ColorPaletteRed500,
       dark: odysseyTokens.ColorPaletteRed900,
       contrastText: odysseyTokens.ColorTextBodyInverse,
     },
     warning: {
       lighter: odysseyTokens.ColorPaletteYellow000,
       light: odysseyTokens.ColorPaletteYellow300,
-      main: odysseyTokens.ColorPaletteYellow500,
+      main: odysseyTokens.ColorPaletteYellow500 ?? Tokens.ColorPaletteYellow500,
       dark: odysseyTokens.ColorPaletteYellow900,
       contrastText: odysseyTokens.ColorTextBody,
     },
     info: {
       lighter: odysseyTokens.ColorPaletteBlue000,
       light: odysseyTokens.ColorPaletteBlue300,
-      main: odysseyTokens.ColorPaletteBlue500,
+      main: odysseyTokens.ColorPaletteBlue500 ?? Tokens.ColorPaletteBlue500,
       dark: odysseyTokens.ColorPaletteBlue900,
       contrastText: odysseyTokens.ColorTextBodyInverse,
     },
     success: {
       lighter: odysseyTokens.ColorPaletteGreen000,
       light: odysseyTokens.ColorPaletteGreen300,
-      main: odysseyTokens.ColorPaletteGreen500,
+      main: odysseyTokens.ColorPaletteGreen500 ?? Tokens.ColorPaletteGreen500,
       dark: odysseyTokens.ColorPaletteGreen900,
       contrastText: odysseyTokens.ColorTextBodyInverse,
     },

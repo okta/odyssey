@@ -23,18 +23,18 @@ import "./components.types";
 import "./mixins.types";
 import "./palette.types";
 import "./typography.types";
-import { TokenOverrideOptions } from ".";
+import { TokensOverride } from ".";
 
 export type { OdysseyTheme } from "./OdysseyTheme";
 
-export const createOdysseyTheme = (tokenOverrides?: TokenOverrideOptions) => {
+export const createOdysseyMuiTheme = (odysseyTokens: TokensOverride) => {
   return createTheme({
     components,
-    mixins: mixins(tokenOverrides),
-    palette: palette(tokenOverrides),
-    shape: shape(tokenOverrides),
-    spacing: spacing(tokenOverrides),
+    mixins: mixins(odysseyTokens),
+    palette: palette(odysseyTokens),
+    shape: shape(odysseyTokens),
+    spacing: spacing(odysseyTokens),
     temp,
-    typography: typography(tokenOverrides),
+    typography: typography(odysseyTokens),
   });
 };

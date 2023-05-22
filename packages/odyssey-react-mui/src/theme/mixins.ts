@@ -10,15 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { MixinsOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
-import { TokenOverrideOptions } from ".";
-import { deepmerge } from "@mui/utils";
+import type { ThemeOptions } from "@mui/material";
+import { TokensOverride } from ".";
 
 export const mixins = (
-  tokenOverrides?: TokenOverrideOptions
-): MixinsOptions => {
-  const odysseyTokens = deepmerge(Tokens, tokenOverrides);
+  odysseyTokens: TokensOverride
+): ThemeOptions["mixins"] => {
   return {
     maxWidth: odysseyTokens.FontLineLengthMax,
     borderRadius: odysseyTokens.BorderRadiusBase,

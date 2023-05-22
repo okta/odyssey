@@ -13,19 +13,21 @@
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { memo, ReactElement, useMemo } from "react";
 
-import { createTheme, deepmerge, ThemeOptions, TokenOverrideOptions } from ".";
-import { createOdysseyTheme } from "./theme";
+import { createTheme, deepmerge, ThemeOptions, TokensOverride } from ".";
+import { createOdysseyMuiTheme } from "./theme";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
 const OdysseyThemeProvider = ({
   children,
   themeOverride,
-  tokenOverride,
+  tokensOverride,
 }: {
   children: ReactElement;
   themeOverride?: ThemeOptions;
-  tokenOverride?: TokenOverrideOptions;
+  tokensOverride?: TokensOverride;
 }) => {
-  const odysseyTheme = createOdysseyTheme(tokenOverride);
+  const odysseyTokens = { ...Tokens, ...tokensOverride };
+  const odysseyTheme = createOdysseyMuiTheme(odysseyTokens);
 
   const customOdysseyTheme = useMemo(
     () => themeOverride && createTheme(deepmerge(odysseyTheme, themeOverride)),

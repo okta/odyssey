@@ -11,15 +11,9 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
-import { deepmerge } from "@mui/utils";
-import { TokenOverrideOptions } from ".";
+import { TokensOverride } from ".";
 
-export const shape = (
-  tokenOverrides?: TokenOverrideOptions
-): ThemeOptions["shape"] => {
-  const odysseyTokens = deepmerge(Tokens, tokenOverrides);
-
+export const shape = (odysseyTokens: TokensOverride): ThemeOptions["shape"] => {
   // Strip units from BorderRadiusBase to accommodate MUI's typing
   const NumericalBorderRadiusBase =
     typeof odysseyTokens.BorderRadiusBase === "string"
