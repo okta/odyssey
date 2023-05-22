@@ -125,24 +125,13 @@ const GroupTemplate: Story<CheckboxGroupProps> = (args) => {
       label="Systems check"
       isRequired={args.isRequired}
     >
-      <Checkbox
-        label="Life support"
-        name="life-support"
-        value="life-support"
-        isInvalid
-      />
+      <Checkbox label="Life support" name="life-support" value="life-support" />
       <Checkbox
         label="Warp core containment"
         name="warp-core"
         value="warp-core"
-        isInvalid
       />
-      <Checkbox
-        label="Cetacean ops"
-        name="cetacean-ops"
-        value="cetacean-ops"
-        isInvalid
-      />
+      <Checkbox label="Cetacean ops" name="cetacean-ops" value="cetacean-ops" />
     </CheckboxGroup>
   );
 };
@@ -169,7 +158,38 @@ Disabled.args = {
   isDisabled: true,
 };
 
-export const Error = GroupTemplate.bind({});
+const GroupErrorTemplate: Story<CheckboxGroupProps> = (args) => {
+  return (
+    <CheckboxGroup
+      errorMessage={args.errorMessage}
+      hint={args.hint}
+      isDisabled={args.isDisabled}
+      label="Systems check"
+      isRequired={args.isRequired}
+    >
+      <Checkbox
+        label="Life support"
+        name="life-support"
+        value="life-support"
+        isInvalid
+      />
+      <Checkbox
+        label="Warp core containment"
+        name="warp-core"
+        value="warp-core"
+        isInvalid
+      />
+      <Checkbox
+        label="Cetacean ops"
+        name="cetacean-ops"
+        value="cetacean-ops"
+        isInvalid
+      />
+    </CheckboxGroup>
+  );
+};
+
+export const Error = GroupErrorTemplate.bind({});
 Error.parameters = {
   controls: { exclude: ["defaultChecked", "isIndeterminate"] },
 };
