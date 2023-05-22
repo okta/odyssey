@@ -63,7 +63,7 @@ export const ButtonPrimary: StoryObj<ButtonProps> = {
   },
   play: async ({ args, canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const button = canvas.getByText(args.text!);
+    const button = canvas.getByText("Add crew");
     await step("hover and click", async (ctx) => {
       console.log(ctx);
       await userEvent.hover(button);
