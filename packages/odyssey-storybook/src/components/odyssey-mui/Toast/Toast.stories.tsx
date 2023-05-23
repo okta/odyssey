@@ -44,42 +44,45 @@ const meta: Meta<ToastProps> = {
       control: "text",
     },
   },
+  args: {
+    severity: "info",
+    linkText: "Info",
+    text: "The mission to Sagittarius A is set for January 7.",
+  },
   decorators: [MuiThemeDecorator],
 };
 
 export default meta;
 
 const Single: StoryObj<ToastProps> = {
-  render: function C(props) {
-    const [isVisible, setIsVisible] = useState(false);
+  args: {
+    isVisible: false,
+  },
+  render: function C(args) {
+    const [isVisible, setIsVisible] = useState(args.isVisible);
     const openToast = useCallback(() => setIsVisible(true), []);
     return (
       <>
         <Button
           variant="primary"
           onClick={openToast}
-          text={`Open ${props.severity} toast`}
+          text={`Open ${args.severity} toast`}
         />
         <ToastStack>
           <Toast
-            autoHideDuration={props.autoHideDuration}
-            isDismissable={props.isDismissable}
-            linkText={props.linkText}
-            linkUrl={props.linkUrl}
+            autoHideDuration={args.autoHideDuration}
+            isDismissable={args.isDismissable}
+            linkText={args.linkText}
+            linkUrl={args.linkUrl}
             isVisible={isVisible}
             onHide={() => setIsVisible(false)}
-            role={props.role}
-            severity={props.severity}
-            text={props.text}
+            role={args.role}
+            severity={args.severity}
+            text={args.text}
           />
         </ToastStack>
       </>
     );
-  },
-  args: {
-    severity: "info",
-    linkText: "Info",
-    text: "The mission to Sagittarius A is set for January 7.",
   },
 };
 
@@ -95,7 +98,6 @@ const Static: StoryObj<ToastProps> = {
 export const Info: StoryObj<ToastProps> = {
   ...Single,
   args: {
-    isVisible: true,
     text: "Testing",
     severity: "info",
   },
