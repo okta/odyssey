@@ -11,7 +11,7 @@
  */
 
 import { useMemo, useState } from "react";
-import type { Meta, Story } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
 import {
   AdapterDateFns,
@@ -21,17 +21,11 @@ import {
   LocalizationProvider,
 } from "@okta/odyssey-react-labs";
 
-import DatePickerMdx from "./DatePicker.mdx";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
-  title: `Labs Components/DatePicker`,
+  title: "Labs Components/DatePicker",
   component: DatePicker,
-  parameters: {
-    docs: {
-      page: DatePickerMdx,
-    },
-  },
   argTypes: {
     label: {
       control: "text",
@@ -50,24 +44,24 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
 
 export default storybookMeta;
 
-const Template: Story<DatePickerProps<unknown, unknown>> = (props) => {
-  const [value, setValue] = useState<unknown>(Date.now());
-  const datePickerProps = useMemo(
-    () => ({
-      ...props,
-      onChange: (newValue: unknown) => setValue(newValue),
-      value,
-    }),
-    [props, value]
-  );
+export const DatePickerStandard: StoryObj<DatePickerProps<unknown, unknown>> = {
+  render: function C(props) {
+    const [value, setValue] = useState<unknown>(Date.now());
+    const datePickerProps = useMemo(
+      () => ({
+        ...props,
+        onChange: (newValue: unknown) => setValue(newValue),
+        value,
+      }),
+      [props, value]
+    );
 
-  return (
-    <OdysseyThemeProvider themeOverride={datePickerTheme}>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker {...datePickerProps} />
-      </LocalizationProvider>
-    </OdysseyThemeProvider>
-  );
+    return (
+      <OdysseyThemeProvider themeOverride={datePickerTheme}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker {...datePickerProps} />
+        </LocalizationProvider>
+      </OdysseyThemeProvider>
+    );
+  },
 };
-
-export const DatePickerStandard = Template.bind({});

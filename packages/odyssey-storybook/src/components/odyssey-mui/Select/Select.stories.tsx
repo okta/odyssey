@@ -10,41 +10,33 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import SelectMdx from "./Select.mdx";
-
 const storybookMeta: Meta<SelectProps> = {
-  title: `MUI Components/Forms/Select`,
+  title: "MUI Components/Forms/Select",
   component: Select,
-  parameters: {
-    docs: {
-      page: SelectMdx,
-    },
-  },
   argTypes: {
     isDisabled: {
       control: "boolean",
-      defaultValue: false,
     },
     errorMessage: {
       control: "text",
-      defaultValue: null,
     },
     hint: {
       control: "text",
-      defaultValue: "Select your destination in the Sol system.",
     },
     isOptional: {
       control: "boolean",
-      defaultValue: false,
     },
     label: {
       control: "text",
-      defaultValue: "Destination",
     },
+  },
+  args: {
+    hint: "Select your destination in the Sol system.",
+    label: "Destination",
   },
   decorators: [MuiThemeDecorator],
 };
@@ -136,68 +128,87 @@ const optionsGrouped: SelectProps["options"] = [
   "New Terra",
 ];
 
-const Template: Story<SelectProps> = (args) => {
-  return (
-    <Select
-      label={args.label}
-      hint={args.hint}
-      errorMessage={args.errorMessage}
-      isDisabled={args.isDisabled}
-      isMultiSelect={args.isMultiSelect}
-      isOptional={args.isOptional}
-      options={optionsArray}
-    />
-  );
+const Template: StoryObj<SelectProps> = {
+  render: function C(args) {
+    return (
+      <Select
+        label={args.label}
+        hint={args.hint}
+        errorMessage={args.errorMessage}
+        isDisabled={args.isDisabled}
+        isMultiSelect={args.isMultiSelect}
+        isOptional={args.isOptional}
+        options={optionsArray}
+      />
+    );
+  },
 };
 
-const ObjectTemplate: Story<SelectProps> = (args) => {
-  return (
-    <Select
-      label={args.label}
-      hint={args.hint}
-      errorMessage={args.errorMessage}
-      isDisabled={args.isDisabled}
-      isMultiSelect={args.isMultiSelect}
-      isOptional={args.isOptional}
-      options={optionsObject}
-    />
-  );
+const ObjectTemplate: StoryObj<SelectProps> = {
+  render: function C(args) {
+    return (
+      <Select
+        label={args.label}
+        hint={args.hint}
+        errorMessage={args.errorMessage}
+        isDisabled={args.isDisabled}
+        isMultiSelect={args.isMultiSelect}
+        isOptional={args.isOptional}
+        options={optionsObject}
+      />
+    );
+  },
+  args: {
+    hint: "Select your destination in the Sol system.",
+  },
 };
 
-const GroupTemplate: Story<SelectProps> = (args) => {
-  return (
-    <Select
-      label={args.label}
-      hint={args.hint}
-      errorMessage={args.errorMessage}
-      isDisabled={args.isDisabled}
-      isMultiSelect={args.isMultiSelect}
-      isOptional={args.isOptional}
-      options={optionsGrouped}
-    />
-  );
+const GroupTemplate: StoryObj<SelectProps> = {
+  render: function C(args) {
+    return (
+      <Select
+        label={args.label}
+        hint={args.hint}
+        errorMessage={args.errorMessage}
+        isDisabled={args.isDisabled}
+        isMultiSelect={args.isMultiSelect}
+        isOptional={args.isOptional}
+        options={optionsGrouped}
+      />
+    );
+  },
 };
 
-export const Default = Template.bind({});
+export const Default: StoryObj<SelectProps> = {
+  ...Template,
+};
 Default.args = {};
 
-export const DefaultDisabled = Template.bind({});
-DefaultDisabled.args = {
-  isDisabled: true,
+export const DefaultDisabled: StoryObj<SelectProps> = {
+  ...Template,
+  args: {
+    isDisabled: true,
+  },
 };
 
-export const DefaultError = Template.bind({});
-DefaultError.args = {
-  errorMessage: "Select your destination.",
+export const DefaultError: StoryObj<SelectProps> = {
+  ...Template,
+  args: {
+    errorMessage: "Select your destination.",
+  },
 };
 
-export const DefaultObject = ObjectTemplate.bind({});
-DefaultObject.args = {};
+export const DefaultObject: StoryObj<SelectProps> = {
+  ...ObjectTemplate,
+};
 
-export const DefaultGrouped = GroupTemplate.bind({});
-DefaultGrouped.args = {};
+export const DefaultGrouped: StoryObj<SelectProps> = {
+  ...GroupTemplate,
+};
 
-export const Multi = Template.bind({});
-Multi.args = {
-  isMultiSelect: true,
+export const Multi: StoryObj<SelectProps> = {
+  ...Template,
+  args: {
+    isMultiSelect: true,
+  },
 };
