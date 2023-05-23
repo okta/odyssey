@@ -24,13 +24,17 @@
       "danger": { "value": "{palette.danger.main.value}" }
     },
     "family": {
-      "base": {
-        "comment": "Default font used within all Okta product user interfaces",
+      "body": {
         "value": "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif"
       },
+      "heading": {
+        "value": "'Aeonik', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif"
+      },
+      "button": {
+        "value": "{typography.family.heading.value}"
+      },
       "mono": {
-        "comment": "Monospace font used within all Okta product user interfaces",
-        "value": "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace"
+        "value": "'Roboto Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace"
       }
     },
     "scale": {
@@ -63,21 +67,24 @@
       "normal": { "value": "normal" }
     },
     "weight": {
-      "normal": { "value": "400" },
-      "bold": { "value": "600" }
+      "body": { "value": "400" },
+      "bodyBold": { "value": "600" },
+      "heading": { "value": "500" },
+      "headingBold": { "value": "700" }
     },
     "lineHeight": {
-      "body": { "value": 1.42857143 },
-      "ui": { "value": 1.14285714 },
-      "heading6": { "value": 1.25 },
-      "heading5": { "value": 1.33333333 },
-      "heading4": { "value": 1.27272727 },
-      "heading3": { "value": 1.28 },
-      "heading2": { "value": 1.28571429 },
-      "heading1": { "value": 1.25 }
+      "body": { "value": 1.5 },
+      "ui": { "value": 1.2 },
+      "overline": { "value": 1.3 },
+      "heading6": { "value": 1.3 },
+      "heading5": { "value": 1.3 },
+      "heading4": { "value": 1.25 },
+      "heading3": { "value": 1.25 },
+      "heading2": { "value": 1.2 },
+      "heading1": { "value": 1.2 }
     },
     "lineLength": {
-      "max": { "value": "32rem" }
+      "max": { "value": "55ch" }
     }
   }
 }
