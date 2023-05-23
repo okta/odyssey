@@ -11,13 +11,7 @@
  */
 
 import { Meta, Story } from "@storybook/react";
-import {
-  Box,
-  FavoriteIcon,
-  TabItem,
-  TabItemProps,
-  Tabs,
-} from "@okta/odyssey-react-mui";
+import { Box, FavoriteIcon, TabItemProps, Tabs } from "@okta/odyssey-react-mui";
 // import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -25,7 +19,7 @@ import TabsMdx from "./Tabs.mdx";
 
 const storybookMeta: Meta<TabItemProps> = {
   title: `MUI Components/Tabs`,
-  component: TabItem,
+  component: Tabs,
   parameters: {
     docs: {
       page: TabsMdx,
@@ -53,24 +47,32 @@ const storybookMeta: Meta<TabItemProps> = {
 export default storybookMeta;
 
 const DefaultTemplate: Story<TabItemProps> = (args) => {
+  console.log(args);
   return (
     <Box>
-      <Tabs initialValue="planets" ariaLabel="basic tabs example">
-        <TabItem label="Planets" value="planets">
-          Information about Planets.
-        </TabItem>
-        <TabItem label="Moons" value="moons">
-          Information about Moons.
-        </TabItem>
-        <TabItem
-          label={args.label}
-          value={args.value}
-          isDisabled={args.isDisabled}
-          startIcon={args.startIcon}
-        >
-          Information about {args.label}.
-        </TabItem>
-      </Tabs>
+      <Tabs
+        initialValue="planets"
+        ariaLabel="basic tabs example"
+        tabs={[
+          {
+            label: "Planets",
+            value: "planets",
+            children: "Information about Planets.",
+          },
+          {
+            label: "Moons",
+            value: "moons",
+            children: "Information about Moons.",
+          },
+          {
+            label: args.label,
+            value: args.value,
+            isDisabled: args.isDisabled,
+            startIcon: args.startIcon,
+            children: `Information about ${args.label}.`,
+          },
+        ]}
+      />
     </Box>
   );
 };

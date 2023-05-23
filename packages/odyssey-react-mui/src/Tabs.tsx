@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ReactElement, ReactNode, useState } from "react";
+import React, { ReactElement, ReactNode, useCallback, useState } from "react";
 import { Tab as MuiTab } from "@mui/material";
 import {
   TabList as MuiTabList,
@@ -27,47 +27,44 @@ export type TabItemProps = {
 };
 
 export type TabsProps = {
-  children: ReactElement<TabItemProps>[];
+  tabs: TabItemProps[];
   initialValue?: string;
   ariaLabel?: string;
 };
 
-const TabItem = (props: TabItemProps) => {
-  return <>{props.children}</>;
-};
-
-const Tabs = ({ ariaLabel, children, initialValue = "0" }: TabsProps) => {
+const Tabs = ({ ariaLabel, tabs, initialValue = "0" }: TabsProps) => {
   const [tabState, setTabState] = useState(initialValue);
 
-  const onChange = (_event: React.SyntheticEvent, newState: string) => {
-    setTabState(newState);
-  };
-
-  console.log(children);
+  const onChange = useCallback(
+    (_event: React.SyntheticEvent, newState: string) => {
+      setTabState(newState);
+    },
+    []
+  );
 
   return (
     <MuiTabContext value={tabState}>
       <MuiTabList onChange={onChange} aria-label={ariaLabel}>
-        {children.map((tab, index) => (
+        {tabs.map((tab, index) => (
           <MuiTab
-            disabled={tab.props.isDisabled}
-            icon={tab.props.startIcon}
-            label={tab.props.label}
-            value={tab.props.value ? tab.props.value : index.toString()}
-            key={tab.props.value ? tab.props.value : index.toString()}
+            disabled={tab.isDisabled}
+            icon={tab.startIcon}
+            label={tab.label}
+            value={tab.value ? tab.value : index.toString()}
+            key={tab.value ? tab.value : index.toString()}
           />
         ))}
       </MuiTabList>
-      {children.map((tab, index) => (
+      {tabs.map((tab, index) => (
         <MuiTabPanel
-          value={tab.props.value ? tab.props.value : index.toString()}
-          key={tab.props.value ? tab.props.value : index.toString()}
+          value={tab.value ? tab.value : index.toString()}
+          key={tab.value ? tab.value : index.toString()}
         >
-          {tab.props.children}
+          {tab.children}
         </MuiTabPanel>
       ))}
     </MuiTabContext>
   );
 };
 
-export { TabItem, Tabs };
+export { Tabs };
