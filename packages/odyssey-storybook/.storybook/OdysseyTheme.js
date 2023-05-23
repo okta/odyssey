@@ -5,18 +5,18 @@ import {
   HueNeutral500,
   HueNeutral600,
   HueNeutralWhite,
-  PalettePrimaryBase,
+  PalettePrimaryMain,
   PalettePrimaryDark,
-  ColorTextBody,
-  ColorTextBodyInverse,
-  FontFamilyBase,
-  FontFamilyMono,
+  TypographyColorBody,
+  TypographyColorBodyInverse,
+  TypographyFamilyBody,
+  TypographyFamilyMono,
 } from "@okta/odyssey-design-tokens";
 
 export default create({
   base: "light",
 
-  PalettePrimary: PalettePrimaryBase,
+  PalettePrimary: PalettePrimaryMain,
   colorSecondary: PalettePrimaryDark,
 
   // UI
@@ -26,22 +26,22 @@ export default create({
   appBorderRadius: 4,
 
   // Typography
-  fontBase: FontFamilyBase,
-  fontCode: FontFamilyMono,
+  fontBase: TypographyFamilyBody,
+  fontCode: TypographyFamilyMono,
 
   // Text colors
-  textColor: ColorTextBody,
-  textInverseColor: ColorTextBodyInverse,
+  textColor: TypographyColorBody,
+  textInverseColor: TypographyColorBodyInverse,
 
   // Toolbar default and active colors
   barTextColor: HueNeutral600,
-  barSelectedColor: ColorTextBody,
+  barSelectedColor: TypographyColorBody,
   barBg: HueNeutralWhite,
 
   // Form colors
   inputBg: HueNeutralWhite,
   inputBorder: HueNeutral500,
-  inputTextColor: ColorTextBody,
+  inputTextColor: TypographyColorBody,
   inputBorderRadius: 4,
 
   brandTitle: "Odyssey Design System",
