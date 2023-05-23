@@ -12,7 +12,7 @@
 
 import { Meta, Story } from "@storybook/react";
 import { useMemo } from "react";
-import { Box, FavoriteIcon, TabItemProps, Tabs } from "@okta/odyssey-react-mui";
+import { FavoriteIcon, TabItemProps, Tabs } from "@okta/odyssey-react-mui";
 // import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
