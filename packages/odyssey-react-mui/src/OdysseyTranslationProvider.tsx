@@ -18,7 +18,7 @@ import i18n, { defaultNS, resources } from "./OdysseyI18n";
 import { I18nextProvider } from "react-i18next";
 
 export type TranslationOverrides = {
-  [key in SupportedLanguages]?: Partial<typeof resources["en"]>;
+  [key in SupportedLanguages]?: Partial<(typeof resources)["en"]>;
 };
 
 type OdysseyTranslationProviderProps = {

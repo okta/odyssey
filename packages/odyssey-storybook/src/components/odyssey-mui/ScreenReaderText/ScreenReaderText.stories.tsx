@@ -10,39 +10,37 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ScreenReaderText } from "@okta/odyssey-react-mui";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import {
+  ScreenReaderText,
+  ScreenReaderTextProps,
+} from "@okta/odyssey-react-mui";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import ScreenReaderTextMdx from "./ScreenReaderText.mdx";
 
-const storybookMeta: ComponentMeta<typeof ScreenReaderText> = {
-  title: `MUI Components/ScreenReaderText`,
+const storybookMeta: Meta<typeof ScreenReaderText> = {
+  title: "MUI Components/ScreenReaderText",
   component: ScreenReaderText,
-  parameters: {
-    docs: {
-      page: ScreenReaderTextMdx,
-    },
-  },
   argTypes: {
     children: {
       control: "text",
-      defaultValue: "This text is visually hidden.",
     },
+  },
+  args: {
+    children: "This text is visually hidden.",
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const Template: ComponentStory<typeof ScreenReaderText> = (args) => {
-  return (
-    <>
-      The following text is visually hidden:
-      <ScreenReaderText {...args}></ScreenReaderText>
-    </>
-  );
+export const Default: StoryObj<ScreenReaderTextProps> = {
+  render: function C(args) {
+    return (
+      <>
+        The following text is visually hidden:
+        <ScreenReaderText {...args}></ScreenReaderText>
+      </>
+    );
+  },
 };
-
-export const Default = Template.bind({});
-Default.args = {};

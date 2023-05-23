@@ -1,6 +1,8 @@
-import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Tag.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Tag" anchor />
 
 # Tag
 
@@ -9,11 +11,11 @@ Use tags to help describe and differentiate an entity or object. Think of them a
 TagList UI is simple. It consists of typography and spacing within a neutral container. Color, weight, and spacing help distinguish it from Button.
 
 <Canvas>
-  <Story id="mui-components-tag--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-tag--list" />
+  <Story of={Stories.List} />
 </Canvas>
 
 ## States & variants
@@ -21,19 +23,19 @@ TagList UI is simple. It consists of typography and spacing within a neutral con
 ### Clickable Tags
 
 <Canvas>
-  <Story id="mui-components-tag--clickable" />
+  <Story of={Stories.Clickable} />
 </Canvas>
 
 ### Removable Tags
 
 <Canvas>
-  <Story id="mui-components-tag--removable" />
+  <Story of={Stories.Removable} />
 </Canvas>
 
 ### Disabled Tags
 
 <Canvas>
-  <Story id="mui-components-tag--disabled" />
+  <Story of={Stories.Disabled} />
 </Canvas>
 
 ## Usage

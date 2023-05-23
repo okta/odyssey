@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { StoryFn } from "@storybook/react";
+import type { StoryObj } from "@storybook/react";
 import {
   Button,
   OdysseyThemeProvider,
@@ -20,92 +20,92 @@ import {
   ThemeOptions,
 } from "@okta/odyssey-react-mui";
 
-import CustomThemeMdx from "./CustomTheme.mdx";
 import { useMemo } from "react";
 
 export default {
   title: "Customization/Components",
-  parameters: {
-    docs: {
-      page: CustomThemeMdx,
-    },
-  },
 };
 
-export const ButtonStory: StoryFn = () => {
-  const themeOverride = useMemo<ThemeOptions>(
-    () => ({
-      palette: {
-        primary: {
-          main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
+export const ButtonStory: StoryObj = {
+  render: function C() {
+    const themeOverride = useMemo<ThemeOptions>(
+      () => ({
+        palette: {
+          primary: {
+            main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
+          },
         },
-      },
-    }),
-    []
-  );
+      }),
+      []
+    );
 
-  return (
-    <OdysseyThemeProvider themeOverride={themeOverride}>
-      <div>
-        <Button variant="primary" text="Primary" />
-      </div>
-    </OdysseyThemeProvider>
-  );
+    return (
+      <OdysseyThemeProvider themeOverride={themeOverride}>
+        <div>
+          <Button variant="primary" text="Primary" />
+        </div>
+      </OdysseyThemeProvider>
+    );
+  },
 };
 
 ButtonStory.storyName = "Button";
 
-export const TextFieldStory: StoryFn = () => {
-  const themeOverride = useMemo<ThemeOptions>(
-    () => ({
-      palette: {
-        primary: {
-          main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
+export const TextFieldStory: StoryObj = {
+  render: function C() {
+    const themeOverride = useMemo<ThemeOptions>(
+      () => ({
+        palette: {
+          primary: {
+            main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
+          },
         },
-      },
-    }),
-    []
-  );
+      }),
+      []
+    );
 
-  return (
-    <OdysseyThemeProvider themeOverride={themeOverride}>
-      <div>
-        <TextField autoCompleteType="name" label="Name" type="text" />
-      </div>
-    </OdysseyThemeProvider>
-  );
+    return (
+      <OdysseyThemeProvider themeOverride={themeOverride}>
+        <div>
+          <TextField autoCompleteType="name" label="Name" type="text" />
+        </div>
+      </OdysseyThemeProvider>
+    );
+  },
 };
 
 TextFieldStory.storyName = "TextField";
 
-export const RadioGroupStory: StoryFn = () => {
-  const themeOverride = useMemo<ThemeOptions>(
-    () => ({
-      palette: {
-        primary: {
-          main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
+export const RadioGroupStory: StoryObj = {
+  render: function C() {
+    const themeOverride = useMemo<ThemeOptions>(
+      () => ({
+        palette: {
+          primary: {
+            main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
+          },
         },
-      },
-    }),
-    []
-  );
+      }),
+      []
+    );
 
-  return (
-    <OdysseyThemeProvider themeOverride={themeOverride}>
-      <div>
-        <RadioGroup
-          defaultValue="Lightspeed"
-          id="radio-buttons-group"
-          label="Speed"
-          aria-describedby="radio-hint radio-error"
-        >
-          <Radio value="lightspeed" label="Lightspeed" />
-          <Radio value="Warp Speed" label="Warp Speed" />
-          <Radio value="Ludicrous Speed" label="Ludicrous Speed" />
-        </RadioGroup>
-      </div>
-    </OdysseyThemeProvider>
-  );
+    return (
+      <OdysseyThemeProvider themeOverride={themeOverride}>
+        <div>
+          <RadioGroup
+            defaultValue="Lightspeed"
+            id="radio-buttons-group"
+            label="Speed"
+            aria-describedby="radio-hint radio-error"
+          >
+            <Radio value="lightspeed" label="Lightspeed" />
+            <Radio value="Warp Speed" label="Warp Speed" />
+            <Radio value="Ludicrous Speed" label="Ludicrous Speed" />
+          </RadioGroup>
+        </div>
+      </OdysseyThemeProvider>
+    );
+  },
 };
 
 RadioGroupStory.storyName = "RadioGroup";

@@ -10,90 +10,92 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
-import { Fieldset, Infobox, TextField } from "@okta/odyssey-react-mui";
+import { Meta, StoryObj } from "@storybook/react";
+import {
+  Fieldset,
+  FieldsetProps,
+  Infobox,
+  TextField,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import FieldsetMdx from "./Fieldset.mdx";
-
 const storybookMeta: Meta = {
-  title: `MUI Components/Forms/Fieldset`,
+  title: "MUI Components/Forms/Fieldset",
   component: Fieldset,
-  parameters: {
-    docs: {
-      page: FieldsetMdx,
-    },
-  },
   argTypes: {
     legend: {
       control: "text",
-      defaultValue: "Ship registration information",
     },
     alert: {
       control: "text",
-      defaultValue: undefined,
     },
     children: {
       control: "text",
-      defaultValue: (
-        <>
-          <TextField label="Name of vessel" />
-          <TextField isMultiline label="Nature of visit" />
-        </>
-      ),
     },
     description: {
       control: "text",
-      defaultValue: undefined,
     },
     id: {
       control: "text",
-      defaultValue: undefined,
     },
     isDisabled: {
       control: "boolean",
-      defaultValue: undefined,
     },
     name: {
       control: "text",
-      defaultValue: undefined,
     },
+  },
+  args: {
+    legend: "Ship registration information",
+    children: (
+      <>
+        <TextField label="Name of vessel" />
+        <TextField isMultiline label="Nature of visit" />
+      </>
+    ),
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const Template: Story = (args) => {
-  return (
-    <Fieldset
-      legend={args.legend}
-      name={args.name}
-      description={args.description}
-      alert={args.alert}
-      id={args.id}
-    >
-      {args.children}
-    </Fieldset>
-  );
+const Template: StoryObj<FieldsetProps> = {
+  render: function C(args) {
+    return (
+      <Fieldset
+        legend={args.legend}
+        name={args.name}
+        description={args.description}
+        alert={args.alert}
+        id={args.id}
+      >
+        {args.children}
+      </Fieldset>
+    );
+  },
 };
 
 // States
 
-export const Simple = Template.bind({});
-Simple.args = {};
-
-export const Description = Template.bind({});
-Description.args = {
-  description:
-    "Before docking with the station, please register your ship and crew.",
+export const Simple: StoryObj<FieldsetProps> = {
+  ...Template,
 };
 
-export const Alert = Template.bind({});
-Alert.args = {
-  alert: (
-    <Infobox severity="error" role="alert" title="Something's wrong">
-      Something has gone horribly awry.
-    </Infobox>
-  ),
+export const Description: StoryObj<FieldsetProps> = {
+  ...Template,
+  args: {
+    description:
+      "Before docking with the station, please register your ship and crew.",
+  },
+};
+
+export const Alert: StoryObj<FieldsetProps> = {
+  ...Template,
+  args: {
+    alert: (
+      <Infobox severity="error" role="alert" title="Something's wrong">
+        Something has gone horribly awry.
+      </Infobox>
+    ),
+  },
 };

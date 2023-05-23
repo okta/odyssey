@@ -10,180 +10,186 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
   Fieldset,
   Form,
+  FormProps,
   Infobox,
   TextField,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import FormMdx from "./Form.mdx";
-
-const storybookMeta: Meta = {
-  title: `MUI Components/Forms/Form`,
+const storybookMeta: Meta<FormProps> = {
+  title: "MUI Components/Forms/Form",
   component: Form,
-  parameters: {
-    docs: {
-      page: FormMdx,
-    },
-  },
   argTypes: {
     title: {
       control: "text",
-      defaultValue: "Docking registration",
     },
     alert: {
       control: "text",
-      defaultValue: undefined,
     },
     children: {
       control: "text",
-      defaultValue: (
-        <>
-          <TextField label="Name of vessel" />
-          <TextField isMultiline label="Nature of visit" />
-        </>
-      ),
     },
     description: {
       control: "text",
-      defaultValue: undefined,
     },
     formActions: {
       control: "text",
-      defaultValue: (
-        <>
-          <Button text="Submit" />
-          <Button variant="secondary" text="Reset" />
-        </>
-      ),
     },
     hasAutoComplete: {
       control: "boolean",
-      defaultValue: undefined,
     },
     encodingType: {
       control: "text",
-      defaultValue: undefined,
     },
     method: {
       control: "text",
-      defaultValue: undefined,
     },
     noValidate: {
       control: "boolean",
-      defaultValue: undefined,
     },
     target: {
       control: "text",
-      defaultValue: undefined,
     },
     id: {
       control: "text",
-      defaultValue: undefined,
     },
     name: {
       control: "text",
-      defaultValue: undefined,
     },
+  },
+  args: {
+    title: "Docking registration",
+    children: (
+      <>
+        <TextField label="Name of vessel" />
+        <TextField isMultiline label="Nature of visit" />
+      </>
+    ),
+    formActions: (
+      <>
+        <Button text="Submit" />
+        <Button variant="secondary" text="Reset" />
+      </>
+    ),
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const Template: Story = (args) => {
-  return (
-    <Form
-      title={args.title}
-      name={args.name}
-      description={args.description}
-      formActions={args.formActions}
-      alert={args.alert}
-      hasAutoComplete={args.hasAutoComplete}
-      encodingType={args.encodingType}
-      method={args.method}
-      noValidate={args.noValidate}
-      target={args.target}
-      id={args.id}
-    >
-      {args.children}
-    </Form>
-  );
+const Template: StoryObj<FormProps> = {
+  render: function (args) {
+    return (
+      <Form
+        title={args.title}
+        name={args.name}
+        description={args.description}
+        formActions={args.formActions}
+        alert={args.alert}
+        hasAutoComplete={args.hasAutoComplete}
+        encodingType={args.encodingType}
+        method={args.method}
+        noValidate={args.noValidate}
+        target={args.target}
+        id={args.id}
+      >
+        {args.children}
+      </Form>
+    );
+  },
 };
 
 // States
 
-export const Simple = Template.bind({});
-Simple.args = {};
-
-export const Fieldsets = Template.bind({});
-Fieldsets.args = {
-  children: (
-    <>
-      <Fieldset legend="Vessel information" name="vessel">
+export const Simple: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    children: (
+      <>
         <TextField label="Name of vessel" />
         <TextField isMultiline label="Nature of visit" />
-      </Fieldset>
-      <Fieldset legend="Passenger information" name="passengers">
-        <TextField label="Number of passengers" />
-        <TextField label="Captain's name" />
-      </Fieldset>
-    </>
-  ),
+      </>
+    ),
+  },
 };
 
-export const Description = Template.bind({});
-Description.args = {
-  description:
-    "Before docking with the station, please register your ship and crew.",
+export const Fieldsets: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    children: (
+      <>
+        <Fieldset legend="Vessel information" name="vessel">
+          <TextField label="Name of vessel" />
+          <TextField isMultiline label="Nature of visit" />
+        </Fieldset>
+        <Fieldset legend="Passenger information" name="passengers">
+          <TextField label="Number of passengers" />
+          <TextField label="Captain's name" />
+        </Fieldset>
+      </>
+    ),
+  },
 };
 
-export const Alert = Template.bind({});
-Alert.args = {
-  alert: (
-    <Infobox severity="error" role="alert" title="Something's wrong">
-      Something has gone horribly awry.
-    </Infobox>
-  ),
+export const Description: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    description:
+      "Before docking with the station, please register your ship and crew.",
+  },
 };
 
-export const KitchenSink = Template.bind({});
-KitchenSink.args = {
-  alert: (
-    <Infobox severity="error" role="alert" title="Something's wrong">
-      Something has gone horribly awry.
-    </Infobox>
-  ),
-  children: (
-    <>
-      <Fieldset
-        legend="Vessel information"
-        name="vessel"
-        description="This information helps us verify vessel ownership and origination."
-      >
-        <TextField label="Name of vessel" />
-        <TextField isMultiline label="Nature of visit" />
-      </Fieldset>
-      <Fieldset
-        legend="Passenger information"
-        name="passengers"
-        description="This information will be used to track your passengers' whereabouts."
-        alert={
-          <Infobox severity="error" role="alert" title="Standby for boarding">
-            Your captain is a known space pirate. Your location has been
-            reported to Station Control.
-          </Infobox>
-        }
-      >
-        <TextField label="Number of passengers" />
-        <TextField label="Captain's name" />
-      </Fieldset>
-    </>
-  ),
-  description:
-    "Before docking with the station, please register your ship and crew.",
+export const Alert: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    alert: (
+      <Infobox severity="error" role="alert" title="Something's wrong">
+        Something has gone horribly awry.
+      </Infobox>
+    ),
+  },
+};
+
+export const KitchenSink: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    alert: (
+      <Infobox severity="error" role="alert" title="Something's wrong">
+        Something has gone horribly awry.
+      </Infobox>
+    ),
+    children: (
+      <>
+        <Fieldset
+          legend="Vessel information"
+          name="vessel"
+          description="This information helps us verify vessel ownership and origination."
+        >
+          <TextField label="Name of vessel" />
+          <TextField isMultiline label="Nature of visit" />
+        </Fieldset>
+        <Fieldset
+          legend="Passenger information"
+          name="passengers"
+          description="This information will be used to track your passengers' whereabouts."
+          alert={
+            <Infobox severity="error" role="alert" title="Standby for boarding">
+              Your captain is a known space pirate. Your location has been
+              reported to Station Control.
+            </Infobox>
+          }
+        >
+          <TextField label="Number of passengers" />
+          <TextField label="Captain's name" />
+        </Fieldset>
+      </>
+    ),
+    description:
+      "Before docking with the station, please register your ship and crew.",
+  },
 };
