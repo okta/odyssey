@@ -20,6 +20,7 @@ export type CheckboxProps = {
   ariaLabel?: string;
   ariaLabelledBy?: string;
   isInvalid?: boolean;
+  isValid?: boolean;
   isChecked?: boolean;
   isDefaultChecked?: boolean;
   isDisabled?: boolean;
@@ -35,6 +36,7 @@ const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
   isInvalid,
+  isValid,
   isChecked,
   isDefaultChecked,
   isDisabled,
@@ -68,7 +70,7 @@ const Checkbox = ({
       aria-labelledby={ariaLabelledBy}
       aria-required={isRequired}
       checked={isChecked}
-      className={isInvalid ? "Mui-error" : ""}
+      className={isInvalid ? "Mui-error" : isValid ? "Mui-valid" : ""}
       control={
         <MuiCheckbox
           indeterminate={isIndeterminate}

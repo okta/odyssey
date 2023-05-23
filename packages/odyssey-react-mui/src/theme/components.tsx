@@ -474,7 +474,7 @@ export const components: ThemeOptions["components"] = {
           backgroundColor: "transparent",
           borderColor: theme.palette.grey[900],
         },
-        ".Mui-error:hover > &": {
+        ".Mui-error:not(.Mui-valid):hover > &": {
           borderColor: theme.palette.error.dark,
 
           "&.Mui-checked": {
@@ -482,7 +482,7 @@ export const components: ThemeOptions["components"] = {
             borderColor: theme.palette.error.dark,
           },
         },
-        ".Mui-error > &": {
+        ".Mui-error:not(.Mui-valid) > &": {
           borderColor: theme.palette.error.main,
 
           "&.Mui-checked": {
@@ -504,7 +504,7 @@ export const components: ThemeOptions["components"] = {
           backgroundColor: theme.palette.grey[50],
           borderColor: theme.palette.grey[300],
 
-          ".Mui-error > &": {
+          ".Mui-error:not(.Mui-valid) > &": {
             backgroundColor: theme.palette.grey[50],
             borderColor: theme.palette.grey[300],
           },

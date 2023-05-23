@@ -63,7 +63,7 @@ const storybookMeta: Meta<
     },
     isRequired: {
       control: "boolean",
-      defaultValue: true,
+      defaultValue: false,
     },
     label: {
       control: "text",
@@ -167,24 +167,13 @@ const GroupErrorTemplate: Story<CheckboxGroupProps> = (args) => {
       label="Systems check"
       isRequired={args.isRequired}
     >
-      <Checkbox
-        label="Life support"
-        name="life-support"
-        value="life-support"
-        isInvalid
-      />
+      <Checkbox label="Life support" name="life-support" value="life-support" />
       <Checkbox
         label="Warp core containment"
         name="warp-core"
         value="warp-core"
-        isInvalid
       />
-      <Checkbox
-        label="Cetacean ops"
-        name="cetacean-ops"
-        value="cetacean-ops"
-        isInvalid
-      />
+      <Checkbox label="Cetacean ops" name="cetacean-ops" value="cetacean-ops" />
     </CheckboxGroup>
   );
 };
@@ -206,21 +195,24 @@ const MixedErrorTemplate: Story<CheckboxGroupProps> = (args) => {
       label="Who will you invite to your birthday?"
       isRequired={args.isRequired}
     >
-      <Checkbox label="Alfred" name="alfred" value="alfred" />
+      <Checkbox label="Alfred" name="alfred" value="alfred" isValid />
       <Checkbox
         isDefaultChecked
         label="Barbara Gordon"
         name="barbara-gordon"
         value="barbara-gordon"
-        isInvalid
       />
-      <Checkbox label="Hal Jordan" name="hal-jordan" value="hal-jordan" />
+      <Checkbox
+        label="Hal Jordan"
+        name="hal-jordan"
+        value="hal-jordan"
+        isValid
+      />
       <Checkbox
         isDefaultChecked
         label="The Joker"
         name="the-joker"
         value="the-joker"
-        isInvalid
       />
     </CheckboxGroup>
   );

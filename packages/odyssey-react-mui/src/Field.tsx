@@ -85,7 +85,6 @@ const Field = ({
   id: idOverride,
   isDisabled = false,
   isRadioGroup = false,
-  isCheckboxGroup = false,
   isOptional = false,
   label,
   renderFieldComponent,
@@ -106,13 +105,13 @@ const Field = ({
     <MuiFormControl
       component={fieldType === "group" ? "fieldset" : "div"}
       disabled={isDisabled}
-      error={!isCheckboxGroup ? Boolean(errorMessage) : false}
+      error={Boolean(errorMessage)}
       role={isRadioGroup ? "radiogroup" : undefined}
     >
       {fieldType === "group" ? (
         <MuiFormLabel component="legend">
           {label}{" "}
-          {isOptional && (
+          {isOptional && label && (
             <Typography component="span" color="textSecondary">
               ({t("fieldlabel.optional.text")})
             </Typography>

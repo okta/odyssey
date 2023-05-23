@@ -37,7 +37,7 @@ const CheckboxGroup = ({
   errorMessage,
   hint,
   id: idOverride,
-  isRequired = true,
+  isRequired = false,
   label,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
@@ -60,7 +60,6 @@ const CheckboxGroup = ({
       isOptional={!isRequired}
       label={label}
       renderFieldComponent={renderFieldComponent}
-      isCheckboxGroup
     />
   );
 };
