@@ -11,6 +11,7 @@
  */
 
 import { Meta, Story } from "@storybook/react";
+import { useMemo } from "react";
 import { Box, FavoriteIcon, TabItemProps, Tabs } from "@okta/odyssey-react-mui";
 // import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -23,6 +24,9 @@ const storybookMeta: Meta<TabItemProps> = {
   parameters: {
     docs: {
       page: TabsMdx,
+      // Without this line, the Docs page hangs indefinitely.
+      // https://github.com/storybookjs/storybook/issues/17025
+      source: { type: "code" },
     },
   },
   argTypes: {
@@ -46,34 +50,35 @@ const storybookMeta: Meta<TabItemProps> = {
 
 export default storybookMeta;
 
+const ExampleTabContent = ({ label }: { label: string }) => {
+  return useMemo(() => <>{`Information about ${label}`}</>, [label]);
+};
+
 const DefaultTemplate: Story<TabItemProps> = (args) => {
-  console.log(args);
   return (
-    <Box>
-      <Tabs
-        initialValue="planets"
-        ariaLabel="basic tabs example"
-        tabs={[
-          {
-            label: "Planets",
-            value: "planets",
-            children: "Information about Planets.",
-          },
-          {
-            label: "Moons",
-            value: "moons",
-            children: "Information about Moons.",
-          },
-          {
-            label: args.label,
-            value: args.value,
-            isDisabled: args.isDisabled,
-            startIcon: args.startIcon,
-            children: `Information about ${args.label}.`,
-          },
-        ]}
-      />
-    </Box>
+    <Tabs
+      initialValue="planets"
+      ariaLabel="basic tabs example"
+      tabs={[
+        {
+          label: "Planets",
+          value: "planets",
+          children: "Information about Planets.",
+        },
+        {
+          label: "Moons",
+          value: "moons",
+          children: "Information about Moons.",
+        },
+        {
+          label: args.label,
+          value: args.value,
+          isDisabled: args.isDisabled,
+          startIcon: args.startIcon,
+          children: <ExampleTabContent label={args.label} />,
+        },
+      ]}
+    />
   );
 };
 
