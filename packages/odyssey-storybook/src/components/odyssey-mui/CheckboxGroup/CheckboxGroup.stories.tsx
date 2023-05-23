@@ -36,10 +36,6 @@ const storybookMeta: Meta<
     },
   },
   argTypes: {
-    isDefaultChecked: {
-      control: "boolean",
-      defaultValue: false,
-    },
     isChecked: {
       control: "boolean",
       defaultValue: false,
@@ -78,7 +74,6 @@ export default storybookMeta;
 const SingleTemplate: Story<
   CheckboxGroupProps & {
     isChecked: CheckboxProps["isChecked"];
-    isDefaultChecked: CheckboxProps["isDefaultChecked"];
     isIndeterminate: CheckboxProps["isIndeterminate"];
   }
 > = (args) => (
@@ -90,7 +85,7 @@ const SingleTemplate: Story<
     isRequired={args.isRequired}
   >
     <Checkbox
-      isDefaultChecked={args.isDefaultChecked}
+      isChecked={args.isChecked}
       isIndeterminate={args.isIndeterminate}
       label="Pre-flight systems check complete"
       name="life-support"
@@ -106,13 +101,13 @@ Single.args = {};
 export const Checked = SingleTemplate.bind({});
 Checked.parameters = { controls: { exclude: ["hint", "label"] } };
 Checked.args = {
-  isDefaultChecked: true,
+  isChecked: true,
 };
 
 export const Indeterminate = SingleTemplate.bind({});
 Indeterminate.parameters = { controls: { exclude: ["hint", "label"] } };
 Indeterminate.args = {
-  isDefaultChecked: true,
+  isChecked: true,
   isIndeterminate: true,
 };
 
@@ -138,13 +133,13 @@ const GroupTemplate: Story<CheckboxGroupProps> = (args) => {
 
 export const Group = GroupTemplate.bind({});
 Group.parameters = {
-  controls: { exclude: ["defaultChecked", "isIndeterminate"] },
+  controls: { exclude: ["isIndeterminate"] },
 };
 Group.args = {};
 
 export const OptionalGroup = GroupTemplate.bind({});
 Group.parameters = {
-  controls: { exclude: ["defaultChecked", "isIndeterminate"] },
+  controls: { exclude: ["isIndeterminate"] },
 };
 Group.args = {
   isRequired: false,
@@ -152,7 +147,7 @@ Group.args = {
 
 export const Disabled = GroupTemplate.bind({});
 Disabled.parameters = {
-  controls: { exclude: ["defaultChecked", "isIndeterminate"] },
+  controls: { exclude: ["isIndeterminate"] },
 };
 Disabled.args = {
   isDisabled: true,
@@ -180,7 +175,7 @@ const GroupErrorTemplate: Story<CheckboxGroupProps> = (args) => {
 
 export const Error = GroupErrorTemplate.bind({});
 Error.parameters = {
-  controls: { exclude: ["defaultChecked", "isIndeterminate"] },
+  controls: { exclude: ["isIndeterminate"] },
 };
 Error.args = {
   errorMessage: "Select 1 or more systems to check before initiating warp.",
@@ -197,7 +192,7 @@ const MixedErrorTemplate: Story<CheckboxGroupProps> = (args) => {
     >
       <Checkbox label="Alfred" name="alfred" value="alfred" isValid />
       <Checkbox
-        isDefaultChecked
+        isChecked
         label="Barbara Gordon"
         name="barbara-gordon"
         value="barbara-gordon"
@@ -209,7 +204,7 @@ const MixedErrorTemplate: Story<CheckboxGroupProps> = (args) => {
         isValid
       />
       <Checkbox
-        isDefaultChecked
+        isChecked
         label="The Joker"
         name="the-joker"
         value="the-joker"
@@ -220,7 +215,7 @@ const MixedErrorTemplate: Story<CheckboxGroupProps> = (args) => {
 
 export const MixedError = MixedErrorTemplate.bind({});
 MixedError.parameters = {
-  controls: { exclude: ["defaultChecked", "isIndeterminate"] },
+  controls: { exclude: ["isIndeterminate"] },
 };
 MixedError.args = {
   errorMessage: "These choices are incompatible.",

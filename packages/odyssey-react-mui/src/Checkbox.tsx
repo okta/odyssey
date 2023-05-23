@@ -38,7 +38,6 @@ const Checkbox = ({
   isInvalid,
   isValid,
   isChecked,
-  isDefaultChecked,
   isDisabled,
   isIndeterminate,
   isRequired,
@@ -72,11 +71,7 @@ const Checkbox = ({
       checked={isChecked}
       className={isInvalid ? "Mui-error" : isValid ? "Mui-valid" : ""}
       control={
-        <MuiCheckbox
-          indeterminate={isIndeterminate}
-          required={isRequired}
-          defaultChecked={isDefaultChecked}
-        />
+        <MuiCheckbox indeterminate={isIndeterminate} required={isRequired} />
       }
       disabled={isDisabled}
       label={label}
