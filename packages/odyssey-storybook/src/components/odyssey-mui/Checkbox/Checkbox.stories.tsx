@@ -11,27 +11,19 @@
  */
 
 import { Checkbox, CheckboxProps } from "@okta/odyssey-react-mui";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import CheckboxMdx from "./Checkbox.mdx";
 
 const storybookMeta: Meta<CheckboxProps> = {
-  title: `MUI Components/Forms/Checkbox`,
+  title: "MUI Components/Forms/Checkbox",
   component: Checkbox,
-  parameters: {
-    docs: {
-      page: CheckboxMdx,
-    },
-  },
   argTypes: {
     label: {
       control: "text",
-      defaultValue: "Label",
     },
     name: {
       control: "text",
-      defaultValue: "checkbox",
     },
     isIndeterminate: {
       control: "boolean",
@@ -45,7 +37,6 @@ const storybookMeta: Meta<CheckboxProps> = {
     },
     value: {
       control: "text",
-      defaultValue: "Value",
     },
   },
   decorators: [MuiThemeDecorator],
@@ -53,14 +44,15 @@ const storybookMeta: Meta<CheckboxProps> = {
 
 export default storybookMeta;
 
-const Template: Story<CheckboxProps> = (args) => {
-  return <Checkbox {...args} />;
+export const Default: StoryObj<CheckboxProps> = {
+  args: {
+    label: "Enable warp drive recalibration",
+  },
 };
 
-export const Default = Template.bind({});
-Default.args = {};
-
-export const Required = Template.bind({});
-Required.args = {
-  isRequired: true,
-};
+export const Required: StoryObj<CheckboxProps> = {
+  args: {
+    label: "I agree to the terms and conditions",
+    isRequired: true
+  }
+}

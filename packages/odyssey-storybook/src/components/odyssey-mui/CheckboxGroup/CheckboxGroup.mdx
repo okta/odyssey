@@ -1,6 +1,8 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./CheckboxGroup.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Forms/CheckboxGroup" anchor />
 
 # Checkbox Group
 
@@ -13,11 +15,11 @@ Users can click a Checkbox to make a choice and click it again to deselect an op
 Checkboxes may appear individually or as a group.
 
 <Canvas>
-  <Story id="mui-components-forms-checkboxgroup--single" />
+  <Story of={Stories.Single} />
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-forms-checkboxgroup--group" />
+  <Story of={Stories.Group} />
 </Canvas>
 
 ### Required Checkboxes
@@ -35,7 +37,7 @@ Checkboxes support several states: enabled, hover, focus, disabled, invalid, req
 Checkboxes in their "unchecked" state are considered enabled. They are ready for user interaction.
 
 <Canvas>
-  <Story id="mui-components-forms-checkboxgroup--group" />
+  <Story of={Stories.Group} />
 </Canvas>
 
 ### Checked
@@ -43,7 +45,7 @@ Checkboxes in their "unchecked" state are considered enabled. They are ready for
 Checked Checkboxes, sometimes referred to as "ticked", display a check to indicate the they are selected.
 
 <Canvas>
-  <Story id="mui-components-forms-checkboxgroup--checked" />
+  <Story of={Stories.Checked} />
 </Canvas>
 
 ### Disabled
@@ -53,7 +55,7 @@ Disabled inputs are unavailable for interaction and cannot be focused. They can 
 Checkboxes may be disabled individually or as a group. The values of disabled inputs will not be submitted.
 
 <Canvas>
-  <Story id="mui-components-forms-checkboxgroup--disabled" />
+  <Story of={Stories.Disabled} />
 </Canvas>
 
 ### Invalid
@@ -65,14 +67,14 @@ When indicating a validation error, please use FormHelperText set to `error` to 
 Unlike Radio Buttons, Checkboxes validate individually, not as a group. Validity must be set individually on each checkbox using the `isInvalid` prop, even if the group has an `errorMessage` set.
 
 <Canvas>
-  <Story id="mui-components-forms-checkboxgroup--error" />
+  <Story of={Stories.Error} />
 </Canvas>
 
 Individual checkboxes can take a different validity than the whole group; if a group is invalid, individual checkboxes can be marked valid, and vice versa. This is particularly useful in cases
 where the state of particular checkboxes affect the validity of the entire group.
 
 <Canvas>
-  <Story id="mui-components-forms-checkboxgroup--mixed-error" />
+  <Story of={Stories.MixedError} />
 </Canvas>
 
 ### Indeterminate
@@ -82,5 +84,5 @@ In the case of nested checkboxes, an indeterminate state may be required.
 Note that this state is visual-only and will be submitted as either "checked" or "unchecked" depending on the internal state.
 
 <Canvas>
-  <Story id="mui-components-forms-checkboxgroup--indeterminate" />
+  <Story of={Stories.Indeterminate} />
 </Canvas>

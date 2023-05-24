@@ -14,27 +14,19 @@ import {
   Checkbox,
   CheckboxGroup,
   CheckboxGroupProps,
-  CheckboxProps,
 } from "@okta/odyssey-react-mui";
-import { Story, Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import CheckboxGroupMdx from "./CheckboxGroup.mdx";
 
-const storybookMeta: Meta<
-  CheckboxGroupProps & {
-    isChecked: Parameters<typeof Checkbox>[0]["isChecked"];
-    isDefaultChecked: Parameters<typeof Checkbox>[0]["isDefaultChecked"];
-    isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
-  }
-> = {
-  title: `MUI Components/Forms/CheckboxGroup`,
+type CheckboxGroupStoryProps = CheckboxGroupProps & {
+  isChecked: Parameters<typeof Checkbox>[0]["isChecked"];
+  isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
+};
+
+const storybookMeta: Meta<CheckboxGroupStoryProps> = {
+  title: "MUI Components/Forms/CheckboxGroup",
   component: CheckboxGroup,
-  parameters: {
-    docs: {
-      page: CheckboxGroupMdx,
-    },
-  },
   argTypes: {
     isChecked: {
       control: "boolean",
@@ -71,48 +63,56 @@ const storybookMeta: Meta<
 
 export default storybookMeta;
 
-const SingleTemplate: Story<
-  CheckboxGroupProps & {
-    isChecked: CheckboxProps["isChecked"];
-    isIndeterminate: CheckboxProps["isIndeterminate"];
-  }
-> = (args) => (
-  <CheckboxGroup
-    errorMessage={args.errorMessage}
-    hint={args.hint}
-    isDisabled={args.isDisabled}
-    label={args.label}
-    isRequired={args.isRequired}
-  >
-    <Checkbox
-      isChecked={args.isChecked}
-      isIndeterminate={args.isIndeterminate}
-      label="Pre-flight systems check complete"
-      name="life-support"
-      value="life-support"
-    />
-  </CheckboxGroup>
-);
-
-export const Single = SingleTemplate.bind({});
-Single.parameters = { controls: { exclude: ["hint", "label"] } };
-Single.args = {};
-
-export const Checked = SingleTemplate.bind({});
-Checked.parameters = { controls: { exclude: ["hint", "label"] } };
-Checked.args = {
-  isChecked: true,
+const SingleTemplate: StoryObj<CheckboxGroupStoryProps> = {
+  render: (args) => (
+    <CheckboxGroup
+      errorMessage={args.errorMessage}
+      hint={args.hint}
+      isDisabled={args.isDisabled}
+      label={args.label}
+    >
+      <Checkbox
+        isChecked={args.isChecked}
+        isIndeterminate={args.isIndeterminate}
+        label="Pre-flight systems check complete"
+        name="life-support"
+        value="life-support"
+      />
+    </CheckboxGroup>
+  ),
 };
 
-export const Indeterminate = SingleTemplate.bind({});
-Indeterminate.parameters = { controls: { exclude: ["hint", "label"] } };
-Indeterminate.args = {
-  isChecked: true,
-  isIndeterminate: true,
+export const Single: StoryObj<CheckboxGroupStoryProps> = {
+  ...SingleTemplate,
+  parameters: {
+    controls: {
+      exclude: ["hint", "label"],
+    },
+  },
+  args: {},
 };
 
-const GroupTemplate: Story<CheckboxGroupProps> = (args) => {
-  return (
+export const Checked: StoryObj<CheckboxGroupStoryProps> = {
+  ...Single,
+  parameters: {
+    controls: {
+      exclude: ["hint", "label"],
+    },
+  },
+  args: {
+    isChecked: true,
+  },
+};
+export const Indeterminate: StoryObj<CheckboxGroupStoryProps> = {
+  ...Single,
+  parameters: { controls: { exclude: ["hint", "label"] } },
+  args: {
+    isIndeterminate: true,
+  },
+};
+
+const GroupTemplate: StoryObj<CheckboxGroupProps> = {
+  render: (args) => (
     <CheckboxGroup
       errorMessage={args.errorMessage}
       hint={args.hint}
@@ -128,61 +128,44 @@ const GroupTemplate: Story<CheckboxGroupProps> = (args) => {
       />
       <Checkbox label="Cetacean ops" name="cetacean-ops" value="cetacean-ops" />
     </CheckboxGroup>
-  );
+  ),
+  parameters: {
+    controls: {
+      exclude: ["isChecked", "isIndeterminate"],
+    },
+  },
 };
 
-export const Group = GroupTemplate.bind({});
-Group.parameters = {
-  controls: { exclude: ["isIndeterminate"] },
-};
-Group.args = {};
-
-export const OptionalGroup = GroupTemplate.bind({});
-Group.parameters = {
-  controls: { exclude: ["isIndeterminate"] },
-};
-Group.args = {
-  isRequired: false,
+export const Group: StoryObj<CheckboxGroupStoryProps> = {
+  ...GroupTemplate,
 };
 
-export const Disabled = GroupTemplate.bind({});
-Disabled.parameters = {
-  controls: { exclude: ["isIndeterminate"] },
-};
-Disabled.args = {
-  isDisabled: true,
-};
-
-const GroupErrorTemplate: Story<CheckboxGroupProps> = (args) => {
-  return (
-    <CheckboxGroup
-      errorMessage={args.errorMessage}
-      hint={args.hint}
-      isDisabled={args.isDisabled}
-      label="Systems check"
-      isRequired={args.isRequired}
-    >
-      <Checkbox label="Life support" name="life-support" value="life-support" />
-      <Checkbox
-        label="Warp core containment"
-        name="warp-core"
-        value="warp-core"
-      />
-      <Checkbox label="Cetacean ops" name="cetacean-ops" value="cetacean-ops" />
-    </CheckboxGroup>
-  );
+export const Disabled: StoryObj<CheckboxGroupStoryProps> = {
+  ...GroupTemplate,
+  parameters: {
+    controls: {
+      exclude: ["isChecked", "isIndeterminate"],
+    },
+  },
+  args: {
+    isDisabled: true,
+  },
 };
 
-export const Error = GroupErrorTemplate.bind({});
-Error.parameters = {
-  controls: { exclude: ["isIndeterminate"] },
-};
-Error.args = {
-  errorMessage: "Select 1 or more systems to check before initiating warp.",
+export const Error: StoryObj<CheckboxGroupStoryProps> = {
+  ...GroupTemplate,
+  parameters: {
+    controls: {
+      exclude: ["isChecked", "isIndeterminate"],
+    },
+  },
+  args: {
+    errorMessage: "Select 1 or more systems to check before initiating warp.",
+  },
 };
 
-const MixedErrorTemplate: Story<CheckboxGroupProps> = (args) => {
-  return (
+export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
+  render: (args) => (
     <CheckboxGroup
       isDisabled={args.isDisabled}
       errorMessage={args.errorMessage}
@@ -210,13 +193,13 @@ const MixedErrorTemplate: Story<CheckboxGroupProps> = (args) => {
         value="the-joker"
       />
     </CheckboxGroup>
-  );
-};
-
-export const MixedError = MixedErrorTemplate.bind({});
-MixedError.parameters = {
-  controls: { exclude: ["isIndeterminate"] },
-};
-MixedError.args = {
-  errorMessage: "These choices are incompatible.",
+  ),
+  parameters: {
+    controls: {
+      exclude: ["isChecked", "isIndeterminate"],
+    },
+  },
+  args: {
+    errorMessage: "These choices are incompatible.",
+  },
 };

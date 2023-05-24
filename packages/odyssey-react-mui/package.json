@@ -12,6 +12,9 @@
     ".": {
       "types": "./dist/src/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./README.md": {
+      "default": "./README.md"
     }
   },
   "repository": {

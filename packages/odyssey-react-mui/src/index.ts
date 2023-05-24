@@ -40,7 +40,6 @@ export {
   MenuList,
   Paper,
   ScopedCssBaseline,
-  Select,
   Snackbar,
   Stack,
   SvgIcon,
@@ -85,7 +84,6 @@ export type {
   PaperProps,
   ScopedCssBaselineProps,
   SelectChangeEvent,
-  SelectProps,
   SnackbarProps,
   StackProps,
   SvgIconProps,
@@ -125,6 +123,7 @@ export * from "./Infobox";
 export * from "./Link";
 export * from "./MenuButton";
 export * from "./MenuItem";
+export * from "./NativeSelect";
 export * from "./OdysseyCacheProvider";
 export * from "./OdysseyProvider";
 export * from "./OdysseyThemeProvider";
@@ -134,6 +133,7 @@ export * from "./Radio";
 export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
+export * from "./Select";
 export * from "./Status";
 export * from "./Tag";
 export * from "./TagList";

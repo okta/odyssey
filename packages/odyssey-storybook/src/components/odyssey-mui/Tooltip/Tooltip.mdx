@@ -1,6 +1,8 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Tooltip.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Tooltip" anchor />
 
 # Tooltip
 
@@ -15,7 +17,7 @@ Tooltips vanish when a user stops hovering or changes focus. To maintain parity 
 The cursor displayed when hovering UI is determined by the element, not the Tooltip.
 
 <Canvas>
-  <Story id="mui-components-tooltip--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 ## Usage
@@ -33,7 +35,7 @@ Use Tooltips with all controls that rely solely on iconography for communicating
 This is especially important to distinguish between visually or contextually similar UI. Tooltips are also helpful with rarely-used features or features with variant interpretations.
 
 <Canvas>
-  <Story id="mui-components-tooltip--icon" />
+  <Story of={Stories.Icon} />
 </Canvas>
 
 #### An element benefits from supplemental information
@@ -43,7 +45,7 @@ This may be the case for disabled controls or inline content like abbreviations.
 Note: some disabled elements may need to be wrapped in a `span` or similar to allow interactions to trigger.
 
 <Canvas>
-  <Story id="mui-components-tooltip--disabled" />
+  <Story of={Stories.Disabled} />
 </Canvas>
 
 ### Don't use when...
@@ -66,7 +68,7 @@ When positioning a Tooltip, ensure:
 - The Tooltip is always visible when activated, not cropped or off-page.
 
 <Canvas>
-  <Story id="mui-components-tooltip--placement" />
+  <Story of={Stories.Placement} />
 </Canvas>
 
 ## Content

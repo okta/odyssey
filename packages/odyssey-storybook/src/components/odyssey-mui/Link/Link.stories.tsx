@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Story } from "@storybook/react";
+import type { StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 import {
@@ -19,20 +19,12 @@ import {
   LinkProps,
 } from "@okta/odyssey-react-mui";
 
-import LinkMdx from "./Link.mdx";
-
 export default {
-  title: `MUI Components/Link`,
+  title: "MUI Components/Link",
   component: Link,
-  parameters: {
-    docs: {
-      page: LinkMdx,
-    },
-  },
   argTypes: {
     children: {
       control: "text",
-      defaultValue: "Link",
     },
     variant: {
       options: ["default", "monochrome"],
@@ -47,37 +39,42 @@ export default {
     target: {
       control: "text",
     },
+    onClick: {
+      action: true,
+    },
   },
   decorators: [MuiThemeDecorator],
 };
 
-const Template: Story<LinkProps> = (props) => <Link {...props} />;
-
-export const Default = Template.bind({});
-Default.args = {
-  href: "#anchor",
-  variant: "default",
-  children: "Anchor link",
+export const Default: StoryObj<LinkProps> = {
+  args: {
+    href: "#anchor",
+    variant: "default",
+    children: "Anchor link",
+  },
 };
 
-export const Monochrome = Template.bind({});
-Monochrome.args = {
-  href: "#anchor",
-  variant: "monochrome",
-  children: "Monochrome link",
+export const Monochrome: StoryObj<LinkProps> = {
+  args: {
+    href: "#anchor",
+    variant: "monochrome",
+    children: "Monochrome link",
+  },
 };
 
-export const WithIcon = Template.bind({});
-WithIcon.args = {
-  href: "#anchor",
-  children: "Info link",
-  icon: <InformationCircleFilledIcon />,
+export const WithIcon: StoryObj<LinkProps> = {
+  args: {
+    href: "#anchor",
+    children: "Info link",
+    icon: <InformationCircleFilledIcon />,
+  },
 };
 
-export const External = Template.bind({});
-External.args = {
-  href: "https://www.okta.com",
-  children: "Visit okta.com",
-  rel: "noopener",
-  target: "_blank",
+export const External: StoryObj<LinkProps> = {
+  args: {
+    href: "https://www.okta.com",
+    children: "Visit okta.com",
+    rel: "noopener",
+    target: "_blank",
+  },
 };
