@@ -61,7 +61,7 @@ const Checkbox = ({
     } else {
       return <>{labelProp}</>;
     }
-  }, [isRequired, labelProp]);
+  }, [isRequired, labelProp, t]);
 
   return (
     <FormControlLabel
