@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks";
+import Markdown from "markdown-to-jsx";
 
-import Readme from "@okta/odyssey-react-labs/README.md";
+import Readme from "@okta/odyssey-react-labs/README.md?raw";
 
 <Meta title="Installation/Odyssey-React-Labs" />
 
-<Readme />
+<Markdown>{Readme}</Markdown>

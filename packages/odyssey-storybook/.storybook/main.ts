@@ -10,7 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
+import type { StorybookConfig } from "@storybook/react-vite";
+
+const config: StorybookConfig = {
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     {
       name: "@storybook/addon-docs",
@@ -19,14 +22,16 @@ module.exports = {
       },
     },
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
     "@storybook/addon-a11y",
-    "@pxblue/storybook-rtl-addon",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
   ],
-  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
+  framework: {
+    name: "@storybook/react-vite",
+    options: {},
+  },
   typescript: {
     check: false,
-    checkOptions: {},
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
@@ -39,27 +44,6 @@ module.exports = {
       },
     },
   },
-  webpackFinal: (config) => ({
-    ...config,
-    module: {
-      ...config.module,
-      rules: buildRules(config.module.rules),
-    },
-  }),
 };
 
-function buildRules(rules) {
-  return rules.reduce((memo, rule) => {
-    const testString = rule.test?.toString();
-    const isStyleLoader = /s?css/.test(testString);
-    const isScriptLoader = /(jsx?|tsx?)/.test(testString);
-
-    if (isStyleLoader) return memo;
-
-    if (isScriptLoader) {
-      return memo.concat({ ...rule, exclude: rule.exclude });
-    }
-
-    return memo.concat(rule);
-  }, []);
-}
+export default config;

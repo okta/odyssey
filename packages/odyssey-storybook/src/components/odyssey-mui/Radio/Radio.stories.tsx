@@ -11,19 +11,13 @@
  */
 
 import { Radio, RadioProps } from "@okta/odyssey-react-mui";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import RadioMdx from "./Radio.mdx";
 
 const storybookMeta: Meta<RadioProps> = {
-  title: `MUI Components/Forms/Radio`,
+  title: "MUI Components/Forms/Radio",
   component: Radio,
-  parameters: {
-    docs: {
-      page: RadioMdx,
-    },
-  },
   argTypes: {
     isChecked: {
       control: "boolean",
@@ -47,17 +41,13 @@ const storybookMeta: Meta<RadioProps> = {
       control: "text",
     },
   },
+  args: {
+    label: "Label",
+    value: "Value",
+  },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const Template: Story<RadioProps> = (args) => {
-  return <Radio label={args.label} value={args.value} />;
-};
-
-export const Default = Template.bind({});
-Default.args = {
-  label: "Label",
-  value: "Value",
-};
+export const Default: StoryObj<RadioProps> = {};

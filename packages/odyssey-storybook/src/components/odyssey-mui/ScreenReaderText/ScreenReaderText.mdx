@@ -1,13 +1,15 @@
-import { ArgsTable, Canvas, Meta, Source, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta, Source } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./ScreenReaderText.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/ScreenReaderText" anchor />
 
 # ScreenReaderText
 
 The ScreenReaderText component is designed to enhance accessibility by providing text that can be read by screen readers but is not visible to a sighted user.
 
 <Canvas>
-  <Story id="mui-components-screenreadertext--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 ## Usage
