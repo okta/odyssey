@@ -53,6 +53,6 @@ export const Default: StoryObj<CheckboxProps> = {
 export const Required: StoryObj<CheckboxProps> = {
   args: {
     label: "I agree to the terms and conditions",
-    isRequired: true
-  }
-}
+    isRequired: true,
+  },
+};
