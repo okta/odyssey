@@ -1,13 +1,15 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Tabs.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Tabs" anchor />
 
 # Tabs
 
 Navigation component used to organize content by grouping similar information on the same page. They allow content to be viewed without having to navigate away from that page or route.
 
 <Canvas>
-  <Story id="mui-components-tabs--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 ## Behavior

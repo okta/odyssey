@@ -1,11 +1,13 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./SearchField.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Forms/SearchField" anchor />
 
 # Search Field
 
 Search inputs allow the user to submit queries. This is the only input type where `placeholder` may be used.
 
 <Canvas>
-  <Story id="mui-components-forms-searchfield--default" />
+  <Story of={Stories.Default} />
 </Canvas>

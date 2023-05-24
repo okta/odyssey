@@ -189,5 +189,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 );
 
 const MemoizedTextField = memo(TextField);
+MemoizedTextField.displayName = "TextField";
 
 export { MemoizedTextField as TextField };

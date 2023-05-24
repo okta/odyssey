@@ -10,25 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
+import {
+  FavoriteIcon,
+  TabItemProps,
+  TabsProps,
+  Tabs,
+} from "@okta/odyssey-react-mui";
 import { useMemo } from "react";
-import { FavoriteIcon, TabItemProps, Tabs } from "@okta/odyssey-react-mui";
-// import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import TabsMdx from "./Tabs.mdx";
-
-const storybookMeta: Meta<TabItemProps> = {
-  title: `MUI Components/Tabs`,
+const storybookMeta: Meta<TabsProps & TabItemProps> = {
+  title: "MUI Components/Tabs",
   component: Tabs,
-  parameters: {
-    docs: {
-      page: TabsMdx,
-      // Without this line, the Docs page hangs indefinitely.
-      // https://github.com/storybookjs/storybook/issues/17025
-      source: { type: "code" },
-    },
-  },
   argTypes: {
     isDisabled: {
       control: "boolean",
@@ -54,50 +48,55 @@ const ExampleTabContent = ({ label }: { label: string }) => {
   return useMemo(() => <>{`Information about ${label}`}</>, [label]);
 };
 
-const DefaultTemplate: Story<TabItemProps> = (args) => {
-  return (
-    <Tabs
-      initialValue="planets"
-      ariaLabel="basic tabs example"
-      tabs={[
-        {
-          label: "Planets",
-          value: "planets",
-          children: "Information about Planets.",
-        },
-        {
-          label: "Moons",
-          value: "moons",
-          children: "Information about Moons.",
-        },
-        {
-          label: args.label,
-          value: args.value,
-          isDisabled: args.isDisabled,
-          startIcon: args.startIcon,
-          children: <ExampleTabContent label={args.label} />,
-        },
-      ]}
-    />
-  );
+const DefaultTemplate: StoryObj<TabItemProps> = {
+  render: function C(args) {
+    return (
+      <Tabs
+        initialValue="planets"
+        ariaLabel="basic tabs example"
+        tabs={[
+          {
+            label: "Planets",
+            value: "planets",
+            children: "Information about Planets.",
+          },
+          {
+            label: "Moons",
+            value: "moons",
+            children: "Information about Moons.",
+          },
+          {
+            label: args.label,
+            value: args.value,
+            isDisabled: args.isDisabled,
+            startIcon: args.startIcon,
+            children: <ExampleTabContent label={args.label} />,
+          },
+        ]}
+      />
+    );
+  },
 };
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  label: "Asteroids",
-  value: "asteroids",
+export const Default: StoryObj<TabItemProps> = {
+  ...DefaultTemplate,
+  args: {
+    //
+  },
 };
 
-export const Disabled = DefaultTemplate.bind({});
-Disabled.args = {
-  isDisabled: true,
-  label: "Disabled Tab",
-  value: "disabled-tab",
+export const Disabled: StoryObj<TabItemProps> = {
+  ...DefaultTemplate,
+  args: {
+    isDisabled: true,
+    label: "Disabled Tab",
+  },
 };
 
-export const Icons = DefaultTemplate.bind({});
-Icons.args = {
-  startIcon: <FavoriteIcon />,
-  label: "Icon Tab",
-  value: "icon-tab",
+export const Icons: StoryObj<TabItemProps> = {
+  ...DefaultTemplate,
+  args: {
+    startIcon: <FavoriteIcon />,
+    label: "Icon Tab",
+  },
 };
