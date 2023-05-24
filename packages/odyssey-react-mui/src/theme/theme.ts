@@ -23,11 +23,11 @@ import "./components.types";
 import "./mixins.types";
 import "./palette.types";
 import "./typography.types";
-import { TokensOverride } from ".";
+import { DesignTokensOverride } from ".";
 
 export type { OdysseyTheme } from "./OdysseyTheme";
 
-export const createOdysseyMuiTheme = (odysseyTokens: TokensOverride) => {
+export const createOdysseyMuiTheme = (odysseyTokens: DesignTokensOverride) => {
   return createTheme({
     components,
     mixins: mixins(odysseyTokens),

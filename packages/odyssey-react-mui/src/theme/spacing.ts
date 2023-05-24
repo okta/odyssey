@@ -11,11 +11,11 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import { TokensOverride } from ".";
+import { DesignTokensOverride } from ".";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 export const spacing = (
-  odysseyTokens: TokensOverride
+  odysseyTokens: DesignTokensOverride
 ): ThemeOptions["spacing"] => {
   return [
     0,

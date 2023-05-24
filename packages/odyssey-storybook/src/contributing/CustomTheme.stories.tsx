@@ -24,7 +24,7 @@ import {
   RadioGroup,
   TextField,
   ThemeOptions,
-  TokensOverride,
+  DesignTokensOverride,
   createOdysseyMuiTheme,
   createTheme,
   deepmerge,
@@ -41,7 +41,7 @@ export default {
 
 export const ButtonStory: StoryObj = {
   render: function C() {
-    const odysseyDesignTokensOverrides: TokensOverride = {
+    const odysseyDesignTokensOverrides: DesignTokensOverride = {
       BorderRadiusBase: "12px",
       ColorBackgroundBase: "cyan", //focus border color
       ColorPaletteBlue500: "green", //base background color
@@ -51,7 +51,7 @@ export const ButtonStory: StoryObj = {
     };
 
     return (
-      <OdysseyThemeProvider tokensOverride={odysseyDesignTokensOverrides}>
+      <OdysseyThemeProvider designTokensOverride={odysseyDesignTokensOverrides}>
         <div>
           <Button variant="primary" text="Primary" />
         </div>
@@ -64,14 +64,16 @@ ButtonStory.storyName = "Button";
 
 export const TextFieldStory: StoryObj = {
   render: function C() {
-    const odysseyDesignTokensOverrides: TokensOverride = {
+    const odysseyDesignTokensOverrides: DesignTokensOverride = {
       ColorPaletteBlue500: "orange",
     };
 
     return (
       <>
         <TextField autoCompleteType="name" label="Name" type="text" />
-        <OdysseyThemeProvider tokensOverride={odysseyDesignTokensOverrides}>
+        <OdysseyThemeProvider
+          designTokensOverride={odysseyDesignTokensOverrides}
+        >
           <div>
             <TextField autoCompleteType="name" label="Password" type="text" />
           </div>
@@ -85,12 +87,12 @@ TextFieldStory.storyName = "TextField";
 
 export const RadioGroupStory: StoryObj = {
   render: function C() {
-    const odysseyDesignTokensOverrides: TokensOverride = {
+    const odysseyDesignTokensOverrides: DesignTokensOverride = {
       ColorPaletteBlue500: "rgba(0, 160, 100, 1)", // THIS IS A SAMPLE. DO NOT USE!
     };
 
     return (
-      <OdysseyThemeProvider tokensOverride={odysseyDesignTokensOverrides}>
+      <OdysseyThemeProvider designTokensOverride={odysseyDesignTokensOverrides}>
         <div>
           <RadioGroup
             defaultValue="Lightspeed"

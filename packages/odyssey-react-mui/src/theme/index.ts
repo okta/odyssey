@@ -15,4 +15,4 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 export * from "./theme";
 export { useTheme } from "./useTheme";
 
-export type TokensOverride = Partial<typeof Tokens>;
+export type DesignTokensOverride = Partial<typeof Tokens>;
