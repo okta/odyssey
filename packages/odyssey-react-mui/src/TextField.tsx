@@ -84,10 +84,6 @@ export type TextFieldProps = {
    */
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
-   * The label for the `input` element if it's optional
-   */
-  optionalLabel?: string;
-  /**
    * The short hint displayed in the `input` before the user enters a value.
    */
   placeholder?: string;
@@ -122,7 +118,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       onBlur,
       onChange,
       onFocus,
-      optionalLabel = "Optional",
       placeholder,
       startAdornment,
       type = "text",
@@ -187,7 +182,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         isDisabled={isDisabled}
         isOptional={isOptional}
         label={label}
-        optionalLabel={optionalLabel}
         renderFieldComponent={renderFieldComponent}
       />
     );
@@ -195,5 +189,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 );
 
 const MemoizedTextField = memo(TextField);
+MemoizedTextField.displayName = "TextField";
 
 export { MemoizedTextField as TextField };

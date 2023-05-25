@@ -1,6 +1,8 @@
-import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./CustomTheme.stories";
 
-<Meta anchor />
+<Meta title="Customization/Components" anchor />
 
 # Custom Theme
 
@@ -13,17 +15,25 @@ Visually, the mui components under `OdysseyThemeProvider` with custom theme woul
 ### Button Primary
 
 <Canvas>
-  <Story id="customization-components--button-story" />
+  <Story of={Stories.ButtonStory} />
 </Canvas>
 
 ### Input Default
 
 <Canvas>
-  <Story id="customization-components--text-field-story" />
+  <Story of={Stories.TextFieldStory} />
 </Canvas>
 
 ### Radio Default
 
 <Canvas>
-  <Story id="customization-components--radio-group-story" />
+  <Story of={Stories.RadioGroupStory} />
+</Canvas>
+
+### Customizming MUI Components
+
+Overriding the theme of MUI component directly that is not part of odyssey - <a href="https://mui.com/material-ui/customization/theme-components/">Components Customization - Material UI</a>
+
+<Canvas>
+  <Story id="customization-components--custom-component-story" />
 </Canvas>

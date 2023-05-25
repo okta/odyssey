@@ -10,5 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { theme as odysseyTheme } from "./theme";
+import * as Tokens from "@okta/odyssey-design-tokens";
+
+export * from "./theme";
 export { useTheme } from "./useTheme";
+
+export type DesignTokensOverride = Partial<typeof Tokens>;

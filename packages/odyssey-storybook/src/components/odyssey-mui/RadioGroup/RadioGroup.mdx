@@ -1,6 +1,8 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./RadioGroup.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Forms/RadioGroup" anchor />
 
 # RadioGroup
 
@@ -25,7 +27,7 @@ Consider how you wish to present your list of options to the user. A radio group
 ### Default
 
 <Canvas>
-  <Story id="mui-components-forms-radiogroup--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 ### Hint text
@@ -33,7 +35,7 @@ Consider how you wish to present your list of options to the user. A radio group
 The hint text is placed in between the label and the radio buttons.
 
 <Canvas>
-  <Story id="mui-components-forms-radiogroup--hint" />
+  <Story of={Stories.Hint} />
 </Canvas>
 
 ### Disabled
@@ -41,7 +43,7 @@ The hint text is placed in between the label and the radio buttons.
 Disabled inputs block any possible user interaction and cannot be focused.
 
 <Canvas>
-  <Story id="mui-components-forms-radiogroup--disabled" />
+  <Story of={Stories.Disabled} />
 </Canvas>
 
 ### Error
@@ -49,7 +51,7 @@ Disabled inputs block any possible user interaction and cannot be focused.
 Validation should happen on the group and not individually on each item.
 
 <Canvas>
-  <Story id="mui-components-forms-radiogroup--error" />
+  <Story of={Stories.Error} />
 </Canvas>
 
 ## Anatomy

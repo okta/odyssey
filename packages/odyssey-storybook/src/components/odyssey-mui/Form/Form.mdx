@@ -1,46 +1,72 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Form.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Forms/Form" anchor />
 
 # Form
 
-The `Form` component arranges input controls to help with the layout and building of a form.
-
-## Overview
-
-Forms are used for submitting data so it is important for them to be easy to understand and easy to complete. There is generally not one simple way to create all forms but following basic usability guidelines can provide a good starting point.
+The form component arranges input controls to help with the layout and building of a form.
 
 <Canvas>
-  <Story id="mui-components-forms-form--simple" />
+  <Story of={Stories.Simple} />
 </Canvas>
 
 ## Content
 
-`Form` supports the following sections:
+Form supports standardized titles, descriptions, error messaging, fieldsets, fields, and actions.
 
-### Form header
+### Titles and descriptions
 
 Forms should include a heading that describes the form. This heading may be provided by the form's context; for example, a modal or page's title.
 
 An additional description can follow the heading.
 
 <Canvas>
-  <Story id="mui-components-forms-form--with-header" />
+  <Story of={Stories.Description} />
 </Canvas>
 
-### Field groups
+### Errors
 
-Field groups allow you to group fields together within the same form.
+### Form error
 
-Field groups should be labeled by a legend. They can also include descriptions.
+Some errors may occur at the highest level. For example, the server may be unable to process the submission.
+
+In these cases, an infobox should be added at the top of the form to increase visibility. This alert should persist until the relevant errors are resolved.
 
 <Canvas>
-  <Story id="mui-components-forms-form--with-legend" />
+  <Story of={Stories.Alert} />
 </Canvas>
 
-### Form actions
+### Fieldset error
 
-This section houses buttons to allow the user to submit, clear, or exit the form.
+When multiple input selections are incompatible, the whole group may be made invalid.
+
+In this case, an infobox should be inserted at the top of the fieldset. This alert should persist until all input errors are resolved.
+
+See <a href="?path=/docs/mui-components-forms-fieldset--simple">Fieldset</a> for more information.
+
+### Input error
+
+Each input field within a form has its own error state that prevents a user from moving forward or completing a form.
+
+See <a href="http://localhost:6006/?path=/docs/mui-components-forms-textfield--default">TextField</a> for more information.
+
+### Fieldsets
+
+In addition to individual fields, forms support fieldsets as children. This allows you to group related fields together.
+
+Fieldsets should be labeled by a legend. They can also include descriptions.
+
+<Canvas>
+  <Story of={Stories.Fieldsets} />
+</Canvas>
+
+### The kitchen sink
+
+<Canvas>
+  <Story of={Stories.KitchenSink} />
+</Canvas>
 
 ## Best practices
 
@@ -48,61 +74,11 @@ This section houses buttons to allow the user to submit, clear, or exit the form
 
 In general, it is good for forms to be as simple and short as possible. Eliminating unnecessary fields will reduce user effort and translate to better completion rates.
 
-Often in products like Okta, it will be difficult to avoid more complex forms for things like settings or configurations. In these cases based on context, it is an acceptable solution.
-
 ### Layout
 
-The `Form` component is designed in a single-column layout to maintain a logical flow of completion.
+The form component is designed in a single-column layout to maintain a logical flow of completion.
 
 Adding multiple columns in a form can generate confusion for users and lead to usability problems such as having more than one way to interpret the form and forcing users to reorient their eyes to different places in the form.
-
-## Validation
-
-### Error types
-
-#### Form error
-
-Some errors may occur at the highest level. For example, the server may be unable to process the submission.
-
-In these cases, an `Infobox` should be added at the top of the form to increase visibility. This alert should persist until the relevant errors are resolved.
-
-<Canvas>
-  <Story id="mui-components-forms-form--with-form-error" />
-</Canvas>
-
-#### Field group error
-
-When multiple input selections are incompatible, the whole group may be made invalid.
-
-In this case, an `Infobox` should be inserted at the top of the field group. This alert should persist until all input errors are resolved.
-
-<Canvas>
-  <Story id="mui-components-forms-form--with-field-group-error" />
-</Canvas>
-
-#### Input error
-
-Each input field within a form has its own error state that prevents a user from moving forward or completing a form.
-
-<Canvas>
-  <Story id="mui-components-forms-text-field--invalid" />
-</Canvas>
-
-### Validation styles
-
-Forms can validate in one of two ways. Even though Odyssey has suggestions on which one is preferable, both are acceptable, and choosing one is completely dependent on the product use case.
-
-#### Client-side validation
-
-Client-side validation is recommended when possible. It offers a better experience since errors can be displayed in real-time. For example, if a user enters an invalid email format, you can display an error message before the form is submitted.
-
-Inline errors should not be displayed until input has lost its active or focus state, this way the user has an opportunity to finish filling out the field before an error message is shown.
-
-#### Server-side validation
-
-On the server side, validation occurs when the user submits their input fields via a button. The form is then sent to the server and If there are any errors the feedback is sent back to the client with the errors.
-
-Form-level errors are most often detected at this level of validation.
 
 ## References and additional material
 

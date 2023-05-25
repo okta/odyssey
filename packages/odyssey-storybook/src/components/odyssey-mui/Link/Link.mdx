@@ -1,6 +1,8 @@
-import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Link.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Link" anchor />
 
 # Link
 
@@ -11,13 +13,13 @@ Links are navigation elements displayed as text.
 ### Default
 
 <Canvas>
-  <Story id="mui-components-link--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 ### Monochrome
 
 <Canvas>
-  <Story id="mui-components-link--monochrome" />
+  <Story of={Stories.Monochrome} />
 </Canvas>
 
 ### External links
@@ -25,13 +27,13 @@ Links are navigation elements displayed as text.
 Set `target = "_blank"`.
 
 <Canvas>
-  <Story id="mui-components-link--external" />
+  <Story of={Stories.External} />
 </Canvas>
 
 ### Icons
 
 <Canvas>
-  <Story id="mui-components-link--with-icon" />
+  <Story of={Stories.WithIcon} />
 </Canvas>
 
 ## References

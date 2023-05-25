@@ -1,11 +1,13 @@
-import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Status.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Status" anchor />
 
 # Status
 
 <Canvas>
-  <Story id="mui-components-status--success" />
+  <Story of={Stories.Success} />
 </Canvas>
 
 ## Behavior
@@ -21,7 +23,7 @@ There are four variants of Status available: Default, Success, Caution, and Dang
 Default statuses are gray and should be used to indicate states like "Paused", "Not started", or "Queued".
 
 <Canvas>
-  <Story id="mui-components-status--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 ### Success
@@ -29,7 +31,7 @@ Default statuses are gray and should be used to indicate states like "Paused", "
 Success statuses are green and should be used to indicate states like "Complete", "Active", or "Service operational".
 
 <Canvas>
-  <Story id="mui-components-status--success" />
+  <Story of={Stories.Success} />
 </Canvas>
 
 ### Warning
@@ -37,7 +39,7 @@ Success statuses are green and should be used to indicate states like "Complete"
 Warning statuses are yellow and should be used to indicate states like "Attention suggested" or "Service degradation".
 
 <Canvas>
-  <Story id="mui-components-status--warning" />
+  <Story of={Stories.Warning} />
 </Canvas>
 
 ### Error
@@ -45,7 +47,7 @@ Warning statuses are yellow and should be used to indicate states like "Attentio
 Error statuses are red and should be used to indicate states like "Error", "Failure", or "Service disruption".
 
 <Canvas>
-  <Story id="mui-components-status--error" />
+  <Story of={Stories.Error} />
 </Canvas>
 
 ## Usage

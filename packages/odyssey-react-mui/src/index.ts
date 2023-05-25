@@ -40,11 +40,9 @@ export {
   MenuList,
   Paper,
   ScopedCssBaseline,
-  Select,
   Snackbar,
   Stack,
   SvgIcon,
-  Tab,
   Table,
   TableBody,
   TableCell,
@@ -85,11 +83,9 @@ export type {
   PaperProps,
   ScopedCssBaselineProps,
   SelectChangeEvent,
-  SelectProps,
   SnackbarProps,
   StackProps,
   SvgIconProps,
-  TabProps,
   TableBodyProps,
   TableCellProps,
   TableContainerProps,
@@ -100,10 +96,6 @@ export type {
   ThemeOptions,
   TypographyProps,
 } from "@mui/material";
-
-export { TabContext, TabList, TabPanel } from "@mui/lab";
-
-export type { TabContextProps, TabListProps, TabPanelProps } from "@mui/lab";
 
 export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
@@ -117,25 +109,31 @@ export * from "./CheckboxGroup";
 export * from "./CircularProgress";
 export * from "./createUniqueId";
 export * from "./Dialog";
+export * from "./Fieldset";
+export * from "./Form";
 export * from "./Icon";
 export * from "./iconDictionary";
 export * from "./Infobox";
 export * from "./Link";
 export * from "./MenuButton";
 export * from "./MenuItem";
+export * from "./NativeSelect";
 export * from "./OdysseyCacheProvider";
+export * from "./OdysseyProvider";
 export * from "./OdysseyThemeProvider";
+export * from "./OdysseyTranslationProvider";
 export * from "./PasswordField";
 export * from "./Radio";
 export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
+export * from "./Select";
 export * from "./Status";
+export * from "./Tabs";
 export * from "./Tag";
 export * from "./TagList";
 export * from "./TextField";
 export * from "./theme";
-export * from "./ThemeProvider";
 export * from "./Tooltip";
 export * from "./Toast";
 export * from "./ToastStack";
