@@ -13,6 +13,7 @@
 import { AlertColor } from "@mui/material";
 import { memo, ReactNode } from "react";
 import { Alert, AlertTitle, ScreenReaderText } from ".";
+import { useTranslation } from "react-i18next";
 
 export type InfoboxProps = {
   /**
@@ -35,13 +36,17 @@ export type InfoboxProps = {
   title?: string;
 };
 
-const Infobox = ({ children, role, severity, title }: InfoboxProps) => (
-  <Alert role={role} severity={severity} variant="infobox">
-    <ScreenReaderText>{severity}: </ScreenReaderText>
-    {title && <AlertTitle>{title}</AlertTitle>}
-    {children}
-  </Alert>
-);
+const Infobox = ({ children, role, severity, title }: InfoboxProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Alert role={role} severity={severity} variant="infobox">
+      <ScreenReaderText>{t(`severity.${severity}`)}: </ScreenReaderText>
+      {title && <AlertTitle>{title}</AlertTitle>}
+      {children}
+    </Alert>
+  );
+};
 
 const MemoizedInfobox = memo(Infobox);
 

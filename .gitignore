@@ -6,7 +6,8 @@ npm-debug.log
 package-lock.json
 storybook-static/
 yarn-error.log
-**/coverage
+**/coverage/
+**/reports/
 .pnp.*
 .yarn/*
 !.yarn/cache
@@ -21,3 +22,6 @@ yarn-error.log
 
 # Lerna
 lerna-debug.log
+
+# bundled properties files (i18n)
+**/src/properties/ts/*.ts

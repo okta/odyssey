@@ -11,17 +11,22 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
+import { DesignTokensOverride } from ".";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
-export const spacing: ThemeOptions["spacing"] = [
-  0,
-  Tokens.SpaceScale0,
-  Tokens.SpaceScale1,
-  Tokens.SpaceScale2,
-  Tokens.SpaceScale3,
-  Tokens.SpaceScale4,
-  Tokens.SpaceScale5,
-  Tokens.SpaceScale6,
-  Tokens.SpaceScale7,
-  Tokens.SpaceScale8,
-];
+export const spacing = (
+  odysseyTokens: DesignTokensOverride
+): ThemeOptions["spacing"] => {
+  return [
+    0,
+    odysseyTokens.SpaceScale0 ?? Tokens.SpaceScale0,
+    odysseyTokens.SpaceScale1 ?? Tokens.SpaceScale1,
+    odysseyTokens.SpaceScale2 ?? Tokens.SpaceScale2,
+    odysseyTokens.SpaceScale3 ?? Tokens.SpaceScale3,
+    odysseyTokens.SpaceScale4 ?? Tokens.SpaceScale4,
+    odysseyTokens.SpaceScale5 ?? Tokens.SpaceScale5,
+    odysseyTokens.SpaceScale6 ?? Tokens.SpaceScale6,
+    odysseyTokens.SpaceScale7 ?? Tokens.SpaceScale7,
+    odysseyTokens.SpaceScale8 ?? Tokens.SpaceScale8,
+  ];
+};

@@ -10,308 +10,186 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import {
-  Alert,
-  AlertTitle,
-  Box,
   Button,
-  Checkbox,
-  FormControl,
-  CheckboxGroup,
-  FormLabel,
-  InputBase,
-  InputLabel,
-  RadioGroup,
-  Radio,
-  Select,
-  Typography,
+  Fieldset,
+  Form,
+  FormProps,
+  Infobox,
+  TextField,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import FormMdx from "./Form.mdx";
-
-// TEMP: this needs a component for props
-const storybookMeta: Meta = {
-  title: `MUI Components/Forms/Form`,
-  component: FormControl,
-  parameters: {
-    docs: {
-      page: FormMdx,
+const storybookMeta: Meta<FormProps> = {
+  title: "MUI Components/Forms/Form",
+  component: Form,
+  argTypes: {
+    title: {
+      control: "text",
+    },
+    alert: {
+      control: "text",
+    },
+    children: {
+      control: "text",
+    },
+    description: {
+      control: "text",
+    },
+    formActions: {
+      control: "text",
+    },
+    hasAutoComplete: {
+      control: "boolean",
+    },
+    encodingType: {
+      control: "text",
+    },
+    method: {
+      control: "text",
+    },
+    noValidate: {
+      control: "boolean",
+    },
+    target: {
+      control: "text",
+    },
+    id: {
+      control: "text",
+    },
+    name: {
+      control: "text",
     },
   },
-  argTypes: {
-    formAlert: {
-      control: "boolean",
-      defaultValue: null,
-    },
-    formTitle: {
-      control: "text",
-      defaultValue: null,
-    },
-    formTitleSize: {
-      control: "select",
-      options: ["h1", "h2", "h3", "h4"],
-      defaultValue: "h4",
-    },
-    formHint: {
-      control: "text",
-      defaultValue: null,
-    },
-    fieldGroupAlert: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    fieldGroupOne: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    fieldGroupOneTitle: {
-      control: "text",
-      defaultValue: false,
-    },
-    fieldGroupOneHint: {
-      control: "text",
-      defaultValue: false,
-    },
-    fieldGroupTwo: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    fieldGroupTwoTitle: {
-      control: "text",
-      defaultValue: false,
-    },
-    fieldGroupTwoHint: {
-      control: "text",
-      defaultValue: false,
-    },
+  args: {
+    title: "Docking registration",
+    children: (
+      <>
+        <TextField label="Name of vessel" />
+        <TextField isMultiline label="Nature of visit" />
+      </>
+    ),
+    formActions: (
+      <>
+        <Button text="Submit" />
+        <Button variant="secondary" text="Reset" />
+      </>
+    ),
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const Template: Story = (args) => {
-  return (
-    // <Form>
-    <Box
-      component="form"
-      sx={(theme) => ({
-        maxWidth: theme.mixins.maxWidth,
-      })}
-    >
-      {/* <FormHeader> */}
-      {args.formTitle && (
-        <Box
-          component="div"
-          sx={(theme) => ({
-            marginBottom: theme.spacing(6),
-          })}
-        >
-          <Typography variant={args.formTitleSize} component="h1">
-            {args.formTitle}
-          </Typography>
-          {args.formHint && <Typography paragraph>{args.formHint}</Typography>}
-          {args.formAlert && (
-            <Alert severity="error" role="alert" variant="infobox">
-              <AlertTitle>Something's wrong</AlertTitle>
-              Something has gone horribly awry.
-            </Alert>
-          )}
-        </Box>
-      )}
-      {/* <FieldGroup> One */}
-      {args.fieldGroupOne && (
-        <Box
-          component="fieldset"
-          sx={(theme) => ({
-            border: 0,
-            padding: 0,
-            margin: 0,
-            marginBottom: theme.spacing(7),
-          })}
-        >
-          {args.fieldGroupOneTitle && (
-            <Typography variant="legend">{args.fieldGroupOneTitle}</Typography>
-          )}
-          {args.fieldGroupOneTitle && (
-            <Typography paragraph>{args.fieldGroupOneHint}</Typography>
-          )}
-          <FormControl>
-            <InputLabel id="demo-simple-select-label">
-              Docking license
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Docking license"
-              native
-              aria-describedby="select-hint select-error"
-            >
-              <option value="governmental">Governmental</option>
-              <option value="corporate">Corporate</option>
-              <option value="business">Private (Business)</option>
-              <option value="personal">Private (Personal)</option>
-            </Select>
-          </FormControl>
-          <FormControl>
-            <InputLabel id="demo-text-field-label">Nature of visit</InputLabel>
-            <InputBase
-              inputProps={{ "aria-describedby": "form-hint form-error" }}
-              id="demo-text-field"
-              multiline={true}
-              type="text"
-            />
-          </FormControl>
-        </Box>
-      )}
-      {/* <FieldGroup> Two */}
-      {args.fieldGroupTwo && (
-        <Box
-          component="fieldset"
-          sx={(theme) => ({
-            border: 0,
-            padding: 0,
-            margin: 0,
-            marginBottom: theme.spacing(7),
-          })}
-        >
-          <Typography variant="legend">Ship registration</Typography>
-          <Typography paragraph>
-            Here are some more fields in a separate field group.
-          </Typography>
-          {args.fieldGroupAlert && (
-            <Alert severity="error" role="alert" variant="infobox">
-              <AlertTitle>Something else is wrong</AlertTitle>
-              Something else has gone horribly awry!
-            </Alert>
-          )}
-          <FormControl>
-            <InputLabel id="demo-text-field-label">Destination</InputLabel>
-            <InputBase
-              inputProps={{ "aria-describedby": "form-hint form-error" }}
-              id="demo-text-field"
-            />
-          </FormControl>
-          <CheckboxGroup
-            hint="Ensure these systems are operating before initiating warp."
-            label="Systems check"
-          >
-            <Checkbox
-              label="Life support"
-              name="life-support"
-              value="life-support"
-            />
-            <Checkbox
-              label="Warp core containment"
-              name="warp-core"
-              value="warp-core"
-            />
-            <Checkbox
-              label="Cetacean ops"
-              name="cetacean-ops"
-              value="cetacean-ops"
-            />
-          </CheckboxGroup>
-          <FormControl
-            component="fieldset"
-            disabled={args.disabled}
-            error={args.invalid}
-          >
-            <FormLabel component="legend">Destination</FormLabel>
-            <RadioGroup
-              defaultValue="Lightspeed"
-              id="radio-buttons-group"
-              label="Speed"
-              aria-describedby="radio-hint radio-error"
-            >
-              <Radio value="lightspeed" label="Lightspeed" />
-              <Radio value="Warp Speed" label="Warp Speed" />
-              <Radio value="Ludicrous Speed" label="Ludicrous Speed" />
-            </RadioGroup>
-          </FormControl>
-          <FormControl>
-            <InputLabel id="demo-simple-select-label">Destination</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Destination"
-              native
-              aria-describedby="select-hint select-error"
-            >
-              <option value="earth">Earth</option>
-              <option value="mars">Mars</option>
-              <option value="ceres">Ceres</option>
-              <option value="eros">Eros</option>
-              <option value="tycho">Tycho Station</option>
-              <option value="phoebe">Phoebe</option>
-              <option value="ganymede">Ganymede</option>
-            </Select>
-          </FormControl>
-        </Box>
-      )}
-      <Box>
-        <Button variant="primary" text="Submit" />
-        <Button variant="floating" text="Cancel" />
-      </Box>
-    </Box>
-  );
+const Template: StoryObj<FormProps> = {
+  render: function (args) {
+    return (
+      <Form
+        title={args.title}
+        name={args.name}
+        description={args.description}
+        formActions={args.formActions}
+        alert={args.alert}
+        hasAutoComplete={args.hasAutoComplete}
+        encodingType={args.encodingType}
+        method={args.method}
+        noValidate={args.noValidate}
+        target={args.target}
+        id={args.id}
+      >
+        {args.children}
+      </Form>
+    );
+  },
 };
 
 // States
 
-export const Simple = Template.bind({});
-Simple.args = {
-  fieldGroupOne: true,
+export const Simple: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    children: (
+      <>
+        <TextField label="Name of vessel" />
+        <TextField isMultiline label="Nature of visit" />
+      </>
+    ),
+  },
 };
 
-export const WithHeader = Template.bind({});
-WithHeader.args = {
-  formTitle: "Docking registration",
-  formHint:
-    "Before docking with the station, please register your ship and crew.",
-  fieldGroupOne: true,
+export const Fieldsets: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    children: (
+      <>
+        <Fieldset legend="Vessel information" name="vessel">
+          <TextField label="Name of vessel" />
+          <TextField isMultiline label="Nature of visit" />
+        </Fieldset>
+        <Fieldset legend="Passenger information" name="passengers">
+          <TextField label="Number of passengers" />
+          <TextField label="Captain's name" />
+        </Fieldset>
+      </>
+    ),
+  },
 };
 
-export const WithLegend = Template.bind({});
-WithLegend.args = {
-  fieldGroupOne: true,
-  fieldGroupOneTitle: "Reason for visit",
-  fieldGroupOneHint:
-    "This helps us understand why you are visiting our station.",
-  fieldGroupTwo: true,
+export const Description: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    description:
+      "Before docking with the station, please register your ship and crew.",
+  },
 };
 
-export const WithFormError = Template.bind({});
-WithFormError.args = {
-  formAlert: true,
-  formTitle: "Docking registration",
-  formHint:
-    "Before docking with the station, please register your ship and crew.",
-  fieldGroupOne: true,
+export const Alert: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    alert: (
+      <Infobox severity="error" role="alert" title="Something's wrong">
+        Something has gone horribly awry.
+      </Infobox>
+    ),
+  },
 };
 
-export const WithFieldGroupError = Template.bind({});
-WithFieldGroupError.args = {
-  fieldGroupAlert: true,
-  fieldGroupOne: true,
-  fieldGroupOneTitle: "Reason for visit",
-  fieldGroupOneHint:
-    "This helps us understand why you are visiting our station.",
-  fieldGroupTwo: true,
-};
-
-export const KitchenSink = Template.bind({});
-KitchenSink.args = {
-  formAlert: true,
-  formTitle: "Docking registration",
-  formHint:
-    "Before docking with the station, please register your ship and crew.",
-  fieldGroupAlert: true,
-  fieldGroupOne: true,
-  fieldGroupOneTitle: "Reason for visit",
-  fieldGroupOneHint:
-    "This helps us understand why you are visiting our station.",
-  fieldGroupTwo: true,
+export const KitchenSink: StoryObj<FormProps> = {
+  ...Template,
+  args: {
+    alert: (
+      <Infobox severity="error" role="alert" title="Something's wrong">
+        Something has gone horribly awry.
+      </Infobox>
+    ),
+    children: (
+      <>
+        <Fieldset
+          legend="Vessel information"
+          name="vessel"
+          description="This information helps us verify vessel ownership and origination."
+        >
+          <TextField label="Name of vessel" />
+          <TextField isMultiline label="Nature of visit" />
+        </Fieldset>
+        <Fieldset
+          legend="Passenger information"
+          name="passengers"
+          description="This information will be used to track your passengers' whereabouts."
+          alert={
+            <Infobox severity="error" role="alert" title="Standby for boarding">
+              Your captain is a known space pirate. Your location has been
+              reported to Station Control.
+            </Infobox>
+          }
+        >
+          <TextField label="Number of passengers" />
+          <TextField label="Captain's name" />
+        </Fieldset>
+      </>
+    ),
+    description:
+      "Before docking with the station, please register your ship and crew.",
+  },
 };

@@ -1,29 +1,36 @@
 import {
   CssBaseline,
-  odysseyTheme,
+  createOdysseyMuiTheme,
   OdysseyThemeProvider,
+  OdysseyTranslationProvider,
   ScopedCssBaseline,
 } from "@okta/odyssey-react-mui";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
-import type { DecoratorFn } from "@storybook/react";
+import type { Decorator } from "@storybook/react";
 import { Fragment } from "react";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
 const styles = {
   fontFamily:
     "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
 };
 
-export const MuiThemeDecorator: DecoratorFn = (Story) => (
+const odysseyTheme = createOdysseyMuiTheme(Tokens);
+
+export const MuiThemeDecorator: Decorator = (Story) => (
   <OdysseyThemeProvider>
-    <StorybookThemeProvider theme={odysseyTheme}>
-      <Fragment>
-        <CssBaseline />
-        <div style={styles}>
-          <ScopedCssBaseline>
-            <Story />
-          </ScopedCssBaseline>
-        </div>
-      </Fragment>
-    </StorybookThemeProvider>
+    <OdysseyTranslationProvider>
+      {/* @ts-expect-error type mismatch on "typography" */}
+      <StorybookThemeProvider theme={odysseyTheme}>
+        <Fragment>
+          <CssBaseline />
+          <div style={styles}>
+            <ScopedCssBaseline>
+              <Story />
+            </ScopedCssBaseline>
+          </div>
+        </Fragment>
+      </StorybookThemeProvider>
+    </OdysseyTranslationProvider>
   </OdysseyThemeProvider>
 );

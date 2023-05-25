@@ -16,11 +16,14 @@ import {
   ArrowRightIcon,
   CalendarIcon,
   ChevronDownIcon,
-  odysseyTheme,
+  createOdysseyMuiTheme,
   ThemeOptions,
 } from "@okta/odyssey-react-mui";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
 const popupSpacingValue = 5;
+
+const odysseyTheme = createOdysseyMuiTheme(Tokens);
 
 type ThemeStyles = ({
   theme,

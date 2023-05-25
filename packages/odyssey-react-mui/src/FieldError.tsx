@@ -14,6 +14,7 @@ import { memo } from "react";
 
 import { FormHelperText } from ".";
 import { ScreenReaderText } from "./ScreenReaderText";
+import { useTranslation } from "react-i18next";
 
 export type FieldErrorProps = {
   id?: string;
@@ -21,9 +22,13 @@ export type FieldErrorProps = {
 };
 
 const FieldError = ({ id, text }: FieldErrorProps) => {
+  const { t } = useTranslation();
+
   return (
     <FormHelperText error id={id}>
-      <ScreenReaderText>Error:</ScreenReaderText>
+      <ScreenReaderText>{`${t(
+        "fielderror.screenreader.text"
+      )}:`}</ScreenReaderText>
       {text}
     </FormHelperText>
   );

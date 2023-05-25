@@ -11,7 +11,7 @@
  */
 
 import { AlertColor } from "@mui/material";
-import { useEffect, memo, forwardRef, useState, useCallback } from "react";
+import { useEffect, memo, useState, useCallback } from "react";
 import {
   Alert,
   AlertTitle,
@@ -21,6 +21,7 @@ import {
   visuallyHidden,
 } from ".";
 import { Button } from "./Button";
+import { useTranslation } from "react-i18next";
 
 export type ToastProps = {
   /**
@@ -69,70 +70,71 @@ export type ToastProps = {
 
 const ClickAwayListenerProps = { onClickAway: () => false };
 
-const Toast = forwardRef(
-  ({
-    autoHideDuration = 6000,
-    isDismissable,
-    linkText,
-    linkUrl,
-    isVisible: isVisibleProp,
-    onHide: onHideProp,
-    role,
-    severity,
-    text,
-  }: ToastProps) => {
-    const [isVisible, setIsVisible] = useState(isVisibleProp);
+const Toast = ({
+  autoHideDuration = 6000,
+  isDismissable,
+  linkText,
+  linkUrl,
+  isVisible: isVisibleProp,
+  onHide: onHideProp,
+  role,
+  severity,
+  text,
+}: ToastProps) => {
+  const { t } = useTranslation();
 
-    useEffect(() => {
-      setIsVisible(isVisibleProp);
-    }, [isVisibleProp]);
+  const [isVisible, setIsVisible] = useState(isVisibleProp);
 
-    const onHide = useCallback(() => {
-      setIsVisible(false);
-      onHideProp?.();
-    }, [onHideProp]);
+  useEffect(() => {
+    setIsVisible(isVisibleProp);
+  }, [isVisibleProp]);
 
-    return (
-      <Snackbar
-        open={isVisible}
-        autoHideDuration={
-          isDismissable || autoHideDuration <= 0 ? undefined : autoHideDuration
+  const onHide = useCallback(() => {
+    setIsVisible(false);
+    onHideProp?.();
+  }, [onHideProp]);
+
+  return (
+    <Snackbar
+      open={isVisible}
+      autoHideDuration={
+        isDismissable || autoHideDuration <= 0 ? undefined : autoHideDuration
+      }
+      onClose={onHide}
+      className="Toast"
+      ClickAwayListenerProps={ClickAwayListenerProps}
+    >
+      <Alert
+        action={
+          isDismissable === true && (
+            <Button
+              aria-label={t("toast.close.text")}
+              onClick={onHide}
+              size="small"
+              startIcon={<CloseIcon />}
+              variant="floating"
+            />
+          )
         }
-        onClose={onHide}
-        className="Toast"
-        ClickAwayListenerProps={ClickAwayListenerProps}
+        role={role}
+        severity={severity}
+        variant="toast"
       >
-        <Alert
-          action={
-            isDismissable === true && (
-              <Button
-                aria-label="close"
-                onClick={onHide}
-                size="small"
-                startIcon={<CloseIcon />}
-                variant="floating"
-              />
-            )
-          }
-          role={role}
-          severity={severity}
-          variant="toast"
-        >
-          <AlertTitle>
-            <span style={visuallyHidden}>{severity}:</span>
-            {text}
-          </AlertTitle>
-          {linkUrl && (
-            <Link href={linkUrl} variant="monochrome">
-              {linkText}
-            </Link>
-          )}
-        </Alert>
-      </Snackbar>
-    );
-  }
-);
+        <AlertTitle>
+          <span style={visuallyHidden}>{severity}:</span>
+          {text}
+        </AlertTitle>
+        {linkUrl && (
+          <Link href={linkUrl} variant="monochrome">
+            {linkText}
+          </Link>
+        )}
+      </Alert>
+    </Snackbar>
+  );
+};
 
 const MemoizedToast = memo(Toast);
+MemoizedToast.displayName = "Toast";
 
 export { MemoizedToast as Toast };
