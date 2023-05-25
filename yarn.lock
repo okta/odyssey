@@ -5235,7 +5235,7 @@ __metadata:
     jscodeshift: ^0.14.0
     lodash: ^4.17.21
     prettier: ^2.8.0
-    recast: ^0.23.1
+    recast: ^0.24.0
   checksum: 79303dcfd130b32489bcd2283ac87ed01af9c02cec1bcaf171ed095a4730ab2c0c6d16165470f11cb2762d4c022137e0e44c42ce59605d44c699f3c517152cb6
   languageName: node
   linkType: hard
@@ -5374,7 +5374,7 @@ __metadata:
     "@storybook/csf": ^0.1.0
     "@storybook/types": 7.0.17
     fs-extra: ^11.1.0
-    recast: ^0.23.1
+    recast: ^0.24.0
     ts-dedent: ^2.0.0
   checksum: 21bae435fb01cd109f2f620ccfe9e285c48477911d6c240f13a620a49d320a1ece76d29e408f7ecb80db6a0ad949556f6f9cdd423c5b4fc76c96f05242c0a897
   languageName: node
@@ -20069,7 +20069,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recast@npm:^0.23.1":
+"recast@npm:^0.24.0":
   version: 0.23.2
   resolution: "recast@npm:0.23.2"
   dependencies:
