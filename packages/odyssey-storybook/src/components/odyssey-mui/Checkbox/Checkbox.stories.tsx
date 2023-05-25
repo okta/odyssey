@@ -25,6 +25,13 @@ const storybookMeta: Meta<CheckboxProps> = {
     name: {
       control: "text",
     },
+    isIndeterminate: {
+      control: "boolean",
+    },
+    isRequired: {
+      control: "boolean",
+      defaultValue: false,
+    },
     onChange: {
       control: "function",
     },
@@ -39,6 +46,13 @@ export default storybookMeta;
 
 export const Default: StoryObj<CheckboxProps> = {
   args: {
+    label: "Enable warp drive recalibration",
+  },
+};
+
+export const Required: StoryObj<CheckboxProps> = {
+  args: {
     label: "I agree to the terms and conditions",
+    isRequired: true,
   },
 };
