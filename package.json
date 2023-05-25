@@ -45,5 +45,5 @@
     "stylelint": "^14.13.0"
   },
   "version": "0.5.0",
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.5.1"
 }

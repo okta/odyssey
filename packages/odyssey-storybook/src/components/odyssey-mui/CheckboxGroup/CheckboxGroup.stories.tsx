@@ -20,7 +20,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 type CheckboxGroupStoryProps = CheckboxGroupProps & {
-  isDefaultChecked: Parameters<typeof Checkbox>[0]["isDefaultChecked"];
+  isChecked: Parameters<typeof Checkbox>[0]["isChecked"];
   isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
 };
 
@@ -28,7 +28,7 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
   title: "MUI Components/Forms/CheckboxGroup",
   component: CheckboxGroup,
   argTypes: {
-    isDefaultChecked: {
+    isChecked: {
       control: "boolean",
       defaultValue: false,
     },
@@ -46,6 +46,10 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
         "Ensure these systems are operating before initiating warp.",
     },
     isIndeterminate: {
+      control: "boolean",
+      defaultValue: false,
+    },
+    isRequired: {
       control: "boolean",
       defaultValue: false,
     },
@@ -68,7 +72,7 @@ const SingleTemplate: StoryObj<CheckboxGroupStoryProps> = {
       label={args.label}
     >
       <Checkbox
-        isDefaultChecked={args.isDefaultChecked}
+        isChecked={args.isChecked}
         isIndeterminate={args.isIndeterminate}
         label="Pre-flight systems check complete"
         name="life-support"
@@ -96,7 +100,7 @@ export const Checked: StoryObj<CheckboxGroupStoryProps> = {
     },
   },
   args: {
-    isDefaultChecked: true,
+    isChecked: true,
   },
 };
 export const Indeterminate: StoryObj<CheckboxGroupStoryProps> = {
@@ -114,6 +118,7 @@ const GroupTemplate: StoryObj<CheckboxGroupProps> = {
       hint={args.hint}
       isDisabled={args.isDisabled}
       label="Systems check"
+      isRequired={args.isRequired}
     >
       <Checkbox label="Life support" name="life-support" value="life-support" />
       <Checkbox
@@ -126,7 +131,7 @@ const GroupTemplate: StoryObj<CheckboxGroupProps> = {
   ),
   parameters: {
     controls: {
-      exclude: ["defaultChecked", "isIndeterminate"],
+      exclude: ["isChecked", "isIndeterminate"],
     },
   },
 };
@@ -139,7 +144,7 @@ export const Disabled: StoryObj<CheckboxGroupStoryProps> = {
   ...GroupTemplate,
   parameters: {
     controls: {
-      exclude: ["defaultChecked", "isIndeterminate"],
+      exclude: ["isChecked", "isIndeterminate"],
     },
   },
   args: {
@@ -151,7 +156,7 @@ export const Error: StoryObj<CheckboxGroupStoryProps> = {
   ...GroupTemplate,
   parameters: {
     controls: {
-      exclude: ["defaultChecked", "isIndeterminate"],
+      exclude: ["isChecked", "isIndeterminate"],
     },
   },
   args: {
@@ -166,17 +171,23 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
       errorMessage={args.errorMessage}
       hint={args.hint}
       label="Who will you invite to your birthday?"
+      isRequired={args.isRequired}
     >
-      <Checkbox label="Alfred" name="alfred" value="alfred" />
+      <Checkbox label="Alfred" name="alfred" value="alfred" isValid />
       <Checkbox
-        isDefaultChecked
+        isChecked
         label="Barbara Gordon"
         name="barbara-gordon"
         value="barbara-gordon"
       />
-      <Checkbox label="Hal Jordan" name="hal-jordan" value="hal-jordan" />
       <Checkbox
-        isDefaultChecked
+        label="Hal Jordan"
+        name="hal-jordan"
+        value="hal-jordan"
+        isValid
+      />
+      <Checkbox
+        isChecked
         label="The Joker"
         name="the-joker"
         value="the-joker"
@@ -185,7 +196,7 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
   ),
   parameters: {
     controls: {
-      exclude: ["defaultChecked", "isIndeterminate"],
+      exclude: ["isChecked", "isIndeterminate"],
     },
   },
   args: {

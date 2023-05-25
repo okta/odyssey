@@ -64,7 +64,7 @@ Checkboxes present as invalid when a required input is left unchecked or an inco
 
 When indicating a validation error, please use FormHelperText set to `error` to indicate the nature of the problem. Color alone is not an accessible way to signify that something has gone wrong.
 
-Unlike Radio Buttons, Checkboxes validate individually, not as a group.
+Unlike Radio Buttons, Checkboxes validate individually, not as a group. Validity must be set individually on each checkbox using the `isInvalid` prop, even if the group has an `errorMessage` set.
 
 <Canvas>
   <Story of={Stories.Error} />
