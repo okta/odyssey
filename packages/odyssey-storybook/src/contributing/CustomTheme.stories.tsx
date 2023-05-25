@@ -13,34 +13,45 @@
 import type { StoryObj } from "@storybook/react";
 import {
   Button,
+  ListItemText,
+  MenuItem,
+  MenuList,
+  MuiThemeProvider,
+  OdysseyTheme,
   OdysseyThemeProvider,
+  Paper,
   Radio,
   RadioGroup,
   TextField,
   ThemeOptions,
+  DesignTokensOverride,
+  createOdysseyMuiTheme,
+  createTheme,
+  deepmerge,
 } from "@okta/odyssey-react-mui";
 
+import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator";
 import { useMemo } from "react";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
 export default {
   title: "Customization/Components",
+  decorators: [MuiThemeDecorator],
 };
 
 export const ButtonStory: StoryObj = {
   render: function C() {
-    const themeOverride = useMemo<ThemeOptions>(
-      () => ({
-        palette: {
-          primary: {
-            main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
-          },
-        },
-      }),
-      []
-    );
+    const odysseyDesignTokensOverrides: DesignTokensOverride = {
+      BorderRadiusBase: "12px",
+      ColorBackgroundBase: "cyan", //focus border color
+      ColorPaletteBlue500: "green", //base background color
+      ColorPaletteBlue900: "rgb(150,0,0,1)", //used for hover/focus
+      FontLineHeightHeading1: 1.2,
+      SpaceScale0: "1rem",
+    };
 
     return (
-      <OdysseyThemeProvider themeOverride={themeOverride}>
+      <OdysseyThemeProvider designTokensOverride={odysseyDesignTokensOverrides}>
         <div>
           <Button variant="primary" text="Primary" />
         </div>
@@ -53,23 +64,21 @@ ButtonStory.storyName = "Button";
 
 export const TextFieldStory: StoryObj = {
   render: function C() {
-    const themeOverride = useMemo<ThemeOptions>(
-      () => ({
-        palette: {
-          primary: {
-            main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
-          },
-        },
-      }),
-      []
-    );
+    const odysseyDesignTokensOverrides: DesignTokensOverride = {
+      ColorPaletteBlue500: "orange",
+    };
 
     return (
-      <OdysseyThemeProvider themeOverride={themeOverride}>
-        <div>
-          <TextField autoCompleteType="name" label="Name" type="text" />
-        </div>
-      </OdysseyThemeProvider>
+      <>
+        <TextField autoCompleteType="name" label="Name" type="text" />
+        <OdysseyThemeProvider
+          designTokensOverride={odysseyDesignTokensOverrides}
+        >
+          <div>
+            <TextField autoCompleteType="name" label="Password" type="text" />
+          </div>
+        </OdysseyThemeProvider>
+      </>
     );
   },
 };
@@ -78,19 +87,12 @@ TextFieldStory.storyName = "TextField";
 
 export const RadioGroupStory: StoryObj = {
   render: function C() {
-    const themeOverride = useMemo<ThemeOptions>(
-      () => ({
-        palette: {
-          primary: {
-            main: "rgba(233, 0, 0, 1)", // THIS IS A SAMPLE. DO NOT USE!
-          },
-        },
-      }),
-      []
-    );
+    const odysseyDesignTokensOverrides: DesignTokensOverride = {
+      ColorPaletteBlue500: "rgba(0, 160, 100, 1)", // THIS IS A SAMPLE. DO NOT USE!
+    };
 
     return (
-      <OdysseyThemeProvider themeOverride={themeOverride}>
+      <OdysseyThemeProvider designTokensOverride={odysseyDesignTokensOverrides}>
         <div>
           <RadioGroup
             defaultValue="Lightspeed"
@@ -109,3 +111,46 @@ export const RadioGroupStory: StoryObj = {
 };
 
 RadioGroupStory.storyName = "RadioGroup";
+
+export const CustomComponentStory: StoryObj = {
+  render: function C() {
+    const themeOverrides: ThemeOptions = useMemo(() => {
+      return {
+        components: {
+          MuiListItemText: {
+            styleOverrides: {
+              root: {
+                color: "red",
+              },
+            },
+          },
+        },
+      };
+    }, []);
+    const odysseyTheme: OdysseyTheme = createOdysseyMuiTheme(Tokens);
+    const customOdysseyTheme = useMemo(
+      () =>
+        themeOverrides && createTheme(deepmerge(odysseyTheme, themeOverrides)),
+      [odysseyTheme, themeOverrides]
+    );
+
+    return (
+      <>
+        <Paper>
+          <MenuList>
+            <MenuItem>
+              <MuiThemeProvider theme={customOdysseyTheme}>
+                <ListItemText>Cut</ListItemText>
+              </MuiThemeProvider>
+            </MenuItem>
+            <MenuItem>
+              <ListItemText>Copy</ListItemText>
+            </MenuItem>
+          </MenuList>
+        </Paper>
+      </>
+    );
+  },
+};
+
+CustomComponentStory.storyName = "CustomComponent";

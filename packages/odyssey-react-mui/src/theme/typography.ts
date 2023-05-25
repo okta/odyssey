@@ -11,88 +11,92 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
+import { DesignTokensOverride } from ".";
 
-export const typography: ThemeOptions["typography"] = {
-  htmlFontSize: 16,
-  fontFamily: Tokens.FontFamilyBase,
-  fontSize: 14,
-  fontWeightLight: 300,
-  fontWeightRegular: Number(Tokens.FontWeightNormal),
-  fontWeightMedium: 500,
-  fontWeightBold: Number(Tokens.FontWeightBold),
-  allVariants: {
-    fontFamily: Tokens.FontFamilyBase,
-    fontFeatureSettings: "'lnum', 'pnum'",
-    fontVariant: "normal",
-    letterSpacing: 0,
-  },
-  h1: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontSizeHeading1,
-    lineHeight: Tokens.FontLineHeightHeading1,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  h2: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontSizeHeading2,
-    lineHeight: Tokens.FontLineHeightHeading2,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  h3: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontSizeHeading3,
-    lineHeight: Tokens.FontLineHeightHeading3,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  h4: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontSizeHeading4,
-    lineHeight: Tokens.FontLineHeightHeading4,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  h5: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontSizeHeading5,
-    lineHeight: Tokens.FontLineHeightHeading5,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  h6: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontScale2,
-    lineHeight: Tokens.FontLineHeightHeading6,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  subtitle1: {
-    color: Tokens.ColorPaletteNeutral600,
-    fontWeight: Tokens.FontWeightNormal,
-    fontSize: Tokens.FontScale0,
-    lineHeight: Tokens.FontLineHeightBody,
-  },
-  subtitle2: undefined,
-  body1: {
-    fontFamily: Tokens.FontFamilyBase,
-    fontWeight: Number(Tokens.FontWeightNormal),
-    fontSize: Tokens.FontScale1,
-    fontFeatureSettings: "'lnum', 'pnum'",
-    fontVariant: "normal",
-    lineHeight: Tokens.FontLineHeightBody,
-    letterSpacing: "initial",
-  },
-  body2: undefined,
-  button: undefined,
-  overline: undefined,
-  legend: {
-    padding: 0,
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontScale2,
-    lineHeight: Tokens.FontLineHeightHeading6,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  ui: {
-    fontWeight: Number(Tokens.FontWeightNormal),
-    fontSize: Tokens.FontScale1,
-    lineHeight: Tokens.FontLineHeightUi,
-    letterSpacing: "initial",
-  },
+export const typography = (
+  odysseyTokens: DesignTokensOverride
+): ThemeOptions["typography"] => {
+  return {
+    htmlFontSize: 16,
+    fontFamily: odysseyTokens.FontFamilyBase,
+    fontSize: 14,
+    fontWeightLight: 300,
+    fontWeightRegular: Number(odysseyTokens.FontWeightNormal),
+    fontWeightMedium: 500,
+    fontWeightBold: Number(odysseyTokens.FontWeightBold),
+    allVariants: {
+      fontFamily: odysseyTokens.FontFamilyBase,
+      fontFeatureSettings: "'lnum', 'pnum'",
+      fontVariant: "normal",
+      letterSpacing: 0,
+    },
+    h1: {
+      fontWeight: Number(odysseyTokens.FontWeightBold),
+      fontSize: odysseyTokens.FontSizeHeading1,
+      lineHeight: odysseyTokens.FontLineHeightHeading1,
+      marginBottom: odysseyTokens.SpaceScale1,
+    },
+    h2: {
+      fontWeight: Number(odysseyTokens.FontWeightBold),
+      fontSize: odysseyTokens.FontSizeHeading2,
+      lineHeight: odysseyTokens.FontLineHeightHeading2,
+      marginBottom: odysseyTokens.SpaceScale1,
+    },
+    h3: {
+      fontWeight: Number(odysseyTokens.FontWeightBold),
+      fontSize: odysseyTokens.FontSizeHeading3,
+      lineHeight: odysseyTokens.FontLineHeightHeading3,
+      marginBottom: odysseyTokens.SpaceScale1,
+    },
+    h4: {
+      fontWeight: Number(odysseyTokens.FontWeightBold),
+      fontSize: odysseyTokens.FontSizeHeading4,
+      lineHeight: odysseyTokens.FontLineHeightHeading4,
+      marginBottom: odysseyTokens.SpaceScale1,
+    },
+    h5: {
+      fontWeight: Number(odysseyTokens.FontWeightBold),
+      fontSize: odysseyTokens.FontSizeHeading5,
+      lineHeight: odysseyTokens.FontLineHeightHeading5,
+      marginBottom: odysseyTokens.SpaceScale1,
+    },
+    h6: {
+      fontWeight: Number(odysseyTokens.FontWeightBold),
+      fontSize: odysseyTokens.FontScale2,
+      lineHeight: odysseyTokens.FontLineHeightHeading6,
+      marginBottom: odysseyTokens.SpaceScale1,
+    },
+    subtitle1: {
+      color: odysseyTokens.ColorPaletteNeutral600,
+      fontWeight: odysseyTokens.FontWeightNormal,
+      fontSize: odysseyTokens.FontScale0,
+      lineHeight: odysseyTokens.FontLineHeightBody,
+    },
+    subtitle2: undefined,
+    body1: {
+      fontFamily: odysseyTokens.FontFamilyBase,
+      fontWeight: Number(odysseyTokens.FontWeightNormal),
+      fontSize: odysseyTokens.FontScale1,
+      fontFeatureSettings: "'lnum', 'pnum'",
+      fontVariant: "normal",
+      lineHeight: odysseyTokens.FontLineHeightBody,
+      letterSpacing: "initial",
+    },
+    body2: undefined,
+    button: undefined,
+    overline: undefined,
+    legend: {
+      padding: 0,
+      fontWeight: Number(odysseyTokens.FontWeightBold),
+      fontSize: odysseyTokens.FontScale2,
+      lineHeight: odysseyTokens.FontLineHeightHeading6,
+      marginBottom: odysseyTokens.SpaceScale1,
+    },
+    ui: {
+      fontWeight: Number(odysseyTokens.FontWeightNormal),
+      fontSize: odysseyTokens.FontScale1,
+      lineHeight: odysseyTokens.FontLineHeightUi,
+      letterSpacing: "initial",
+    },
+  };
 };

@@ -14,7 +14,6 @@ import { createTheme } from "@mui/material/styles";
 
 import { components } from "./components";
 import { mixins } from "./mixins";
-import { OdysseyTheme } from "./OdysseyTheme";
 import { palette } from "./palette";
 import { shape } from "./shape";
 import { spacing } from "./spacing";
@@ -24,13 +23,18 @@ import "./components.types";
 import "./mixins.types";
 import "./palette.types";
 import "./typography.types";
+import { DesignTokensOverride } from ".";
 
-export const theme = createTheme({
-  components,
-  mixins,
-  palette,
-  shape,
-  spacing,
-  temp,
-  typography,
-}) as OdysseyTheme;
+export type { OdysseyTheme } from "./OdysseyTheme";
+
+export const createOdysseyMuiTheme = (odysseyTokens: DesignTokensOverride) => {
+  return createTheme({
+    components,
+    mixins: mixins(odysseyTokens),
+    palette: palette(odysseyTokens),
+    shape: shape(odysseyTokens),
+    spacing: spacing(odysseyTokens),
+    temp,
+    typography: typography(odysseyTokens),
+  });
+};
