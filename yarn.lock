@@ -4371,6 +4371,7 @@ __metadata:
   peerDependencies:
     "@emotion/react": ^11
     "@emotion/styled": ^11
+    "@okta/odyssey-design-tokens": "workspace:*"
     "@okta/odyssey-react-mui": "workspace:*"
     react: ">=17 <19"
     react-dom: ">=17 <19"
