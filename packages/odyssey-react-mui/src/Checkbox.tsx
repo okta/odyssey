@@ -10,19 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Checkbox as MuiCheckbox } from "@mui/material";
-import { ChangeEventHandler, memo } from "react";
+import { Checkbox as MuiCheckbox, Typography } from "@mui/material";
+import { ChangeEventHandler, memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { FormControlLabel } from ".";
 
 export type CheckboxProps = {
   ariaLabel?: string;
   ariaLabelledBy?: string;
+  isInvalid?: boolean;
+  isValid?: boolean;
   isChecked?: boolean;
   isDefaultChecked?: boolean;
   isDisabled?: boolean;
-  hasError?: boolean;
   isIndeterminate?: boolean;
+  isRequired?: boolean;
   label?: string;
   name?: string;
   onChange?: ChangeEventHandler<EventTarget>;
@@ -32,30 +35,53 @@ export type CheckboxProps = {
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
+  isInvalid,
+  isValid,
   isChecked,
-  isDefaultChecked,
   isDisabled,
   isIndeterminate,
-  hasError,
-  label,
+  isRequired,
+  label: labelProp,
   name,
   onChange,
   value,
-}: CheckboxProps) => (
-  <FormControlLabel
-    aria-label={ariaLabel}
-    aria-labelledby={ariaLabelledBy}
-    checked={isChecked}
-    className={hasError ? "Mui-error" : ""}
-    control={<MuiCheckbox indeterminate={isIndeterminate} />}
-    defaultChecked={isDefaultChecked}
-    disabled={isDisabled}
-    label={label}
-    name={name}
-    onChange={onChange}
-    value={value}
-  />
-);
+}: CheckboxProps) => {
+  const { t } = useTranslation();
+
+  const label = useMemo(() => {
+    if (isRequired) {
+      return (
+        <>
+          {labelProp}{" "}
+          <Typography component="span" color="textSecondary">
+            ({t("fieldlabel.required.text")})
+          </Typography>
+        </>
+      );
+    } else {
+      return <>{labelProp}</>;
+    }
+  }, [isRequired, labelProp, t]);
+
+  return (
+    <FormControlLabel
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
+      aria-required={isRequired}
+      checked={isChecked}
+      className={isInvalid ? "Mui-error" : isValid ? "Mui-valid" : ""}
+      control={
+        <MuiCheckbox indeterminate={isIndeterminate} required={isRequired} />
+      }
+      disabled={isDisabled}
+      label={label}
+      name={name}
+      onChange={onChange}
+      value={value}
+      required={isRequired}
+    />
+  );
+};
 
 const MemoizedCheckbox = memo(Checkbox);
 

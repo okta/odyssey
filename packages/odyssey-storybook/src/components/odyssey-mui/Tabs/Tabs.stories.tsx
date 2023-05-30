@@ -10,38 +10,33 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import * as React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import {
-  Box,
   FavoriteIcon,
-  Tab,
-  TabContext,
-  TabList,
-  TabProps,
-  TabPanel,
+  TabItemProps,
+  TabsProps,
+  Tabs,
 } from "@okta/odyssey-react-mui";
+import { useMemo } from "react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<TabProps> = {
+const storybookMeta: Meta<TabsProps & TabItemProps> = {
   title: "MUI Components/Tabs",
-  component: Tab,
+  component: Tabs,
   argTypes: {
-    disabled: {
+    isDisabled: {
       control: "boolean",
       defaultValue: false,
     },
-    icon: {
+    startIcon: {
       control: "text",
       defaultValue: null,
     },
+    value: {
+      control: "text",
+    },
     label: {
       control: "text",
-      defaultValue: "Asteroids",
-    },
-    wrapped: {
-      control: "boolean",
-      defaultValue: false,
     },
   },
   decorators: [MuiThemeDecorator],
@@ -49,68 +44,59 @@ const storybookMeta: Meta<TabProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: StoryObj<TabProps> = {
+const ExampleTabContent = ({ label }: { label: string }) => {
+  return useMemo(() => <>{`Information about ${label}`}</>, [label]);
+};
+
+const DefaultTemplate: StoryObj<TabItemProps> = {
   render: function C(args) {
-    const [value, setValue] = React.useState("0");
-
-    const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
-      setValue(newValue);
-    };
-
     return (
-      <Box>
-        <TabContext value={value}>
-          <TabList onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="Planets" value="0" />
-            <Tab label="Moons" value="1" />
-
-            <Tab
-              disabled={args.disabled}
-              icon={args.icon}
-              label={args.label}
-              value="2"
-              wrapped={args.wrapped}
-            />
-          </TabList>
-
-          <TabPanel value="0">Information about Planets</TabPanel>
-
-          <TabPanel value="1">Information about Moons</TabPanel>
-
-          <TabPanel value="2">Information about {args.label}</TabPanel>
-        </TabContext>
-      </Box>
+      <Tabs
+        initialValue="planets"
+        ariaLabel="basic tabs example"
+        tabs={[
+          {
+            label: "Planets",
+            value: "planets",
+            children: "Information about Planets.",
+          },
+          {
+            label: "Moons",
+            value: "moons",
+            children: "Information about Moons.",
+          },
+          {
+            label: args.label,
+            value: args.value,
+            isDisabled: args.isDisabled,
+            startIcon: args.startIcon,
+            children: <ExampleTabContent label={args.label} />,
+          },
+        ]}
+      />
     );
   },
 };
 
-export const Default: StoryObj<TabProps> = {
+export const Default: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   args: {
     //
   },
 };
 
-export const Disabled: StoryObj<TabProps> = {
+export const Disabled: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   args: {
-    disabled: true,
+    isDisabled: true,
     label: "Disabled Tab",
   },
 };
 
-export const Icons: StoryObj<TabProps> = {
+export const Icons: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   args: {
-    icon: <FavoriteIcon />,
+    startIcon: <FavoriteIcon />,
     label: "Icon Tab",
-  },
-};
-
-export const Wrapped: StoryObj<TabProps> = {
-  ...DefaultTemplate,
-  args: {
-    label: "This Variant Is Only a Fallback for Silly Long Labels",
-    wrapped: true,
   },
 };

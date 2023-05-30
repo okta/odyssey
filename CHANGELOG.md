@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.0](https://github.com/okta/odyssey/compare/v0.23.0...v0.24.0) (2023-05-25)
+
+### Features
+
+- add odyssey token override support ([#1797](https://github.com/okta/odyssey/issues/1797)) ([52543cc](https://github.com/okta/odyssey/commit/52543cc5bc37ab5ad639434d80faa4683a1e8061))
+- make tranlationOverrides available via pass-through prop ([cb6fbe4](https://github.com/okta/odyssey/commit/cb6fbe45c14c05d639d147618f4279c538b034e2))
+- **odyssey-react-mui:** add Form and Fieldset components ([bc4cfe6](https://github.com/okta/odyssey/commit/bc4cfe690dd4d95cc60d6410b47800cfcc0f1bc2))
+- **odyssey-react-mui:** implement translation system via OdysseyTranslationProvider ([3c3fe2d](https://github.com/okta/odyssey/commit/3c3fe2dba78b21a8bc859ba33b5cd15e03c0c590))
+- wrap the Select ([26452d9](https://github.com/okta/odyssey/commit/26452d9712c69531d5e3637f84f6e4b8c187a526))
+
+### Bug Fixes
+
+- add href to Link ([93009b7](https://github.com/okta/odyssey/commit/93009b78e849476f99a56381f82771e3768e2e80))
+- correct type error ([0a2d09e](https://github.com/okta/odyssey/commit/0a2d09e676ee24c803516a953be6cd5033936480))
+- exported DatePicker from Labs instead of MUI ([#1793](https://github.com/okta/odyssey/issues/1793)) ([c63244b](https://github.com/okta/odyssey/commit/c63244b75a708580ac71c9cb706bb0026290b18d))
+- fix broken docs page ([6730a0e](https://github.com/okta/odyssey/commit/6730a0eee98806ccfb5be7c717353be0fe54bfff))
+- fix type errors ([30275bc](https://github.com/okta/odyssey/commit/30275bc70653f1ab2e07ee0e3f07faad2d8d7216))
+- **odyssey-react-mui:** add proper displayName for TextField ([cd0eff0](https://github.com/okta/odyssey/commit/cd0eff05b0c35ea158cf19e6e2585eb9c83038fa))
+- **odyssey-react-mui:** fix RTL placement of Select chevron ([9d99d9d](https://github.com/okta/odyssey/commit/9d99d9dcf5d166c46f1ea72d2bce2affe7ee0b6c))
+- remove unused forwardRef from Icon and Toast ([bdfd1b1](https://github.com/okta/odyssey/commit/bdfd1b1a523579c3c6699915957197f5dc67776a))
+- remove vestigial Box import ([b12a589](https://github.com/okta/odyssey/commit/b12a589e68682c620e47bffda7eac6b367ac7b4e))
+- renderValue was missing a useCallback wrapper ([#1800](https://github.com/okta/odyssey/issues/1800)) ([40d9566](https://github.com/okta/odyssey/commit/40d95669bf9d1f394aeb163fc41d46823f312d7f))
+
 ## [0.23.0](https://github.com/okta/odyssey/compare/v0.22.0...v0.23.0) (2023-05-08)
 
 ### Features

@@ -11,11 +11,15 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
+import { DesignTokensOverride } from ".";
 
-export const mixins: ThemeOptions["mixins"] = {
-  maxWidth: Tokens.TypographyLineLengthMax,
-  borderRadius: Tokens.BorderRadiusMain,
-  borderStyle: Tokens.BorderStyleMain,
-  borderWidth: Tokens.BorderWidthMain,
+export const mixins = (
+  odysseyTokens: DesignTokensOverride
+): ThemeOptions["mixins"] => {
+  return {
+    maxWidth: odysseyTokens.TypographyLineLengthMax,
+    borderRadius: odysseyTokens.BorderRadiusMain,
+    borderStyle: odysseyTokens.BorderStyleMain,
+    borderWidth: odysseyTokens.BorderWidthMain,
+  };
 };
