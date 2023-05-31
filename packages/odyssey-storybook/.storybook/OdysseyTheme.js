@@ -1,47 +1,47 @@
 import { create } from "@storybook/theming";
 import {
-  ColorPaletteNeutral000,
-  ColorPaletteNeutral200,
-  ColorPaletteNeutral500,
-  ColorPaletteNeutral600,
-  ColorPaletteNeutralWhite,
-  ColorPrimaryBase,
-  ColorPrimaryDark,
-  ColorTextBody,
-  ColorTextBodyInverse,
-  FontFamilyBase,
-  FontFamilyMono,
+  HueNeutral50,
+  HueNeutral200,
+  HueNeutral500,
+  HueNeutral600,
+  HueNeutralWhite,
+  PalettePrimaryMain,
+  PalettePrimaryDark,
+  TypographyColorBody,
+  TypographyColorBodyInverse,
+  TypographyFamilyBody,
+  TypographyFamilyMono,
 } from "@okta/odyssey-design-tokens";
 
 export default create({
   base: "light",
 
-  colorPrimary: ColorPrimaryBase,
-  colorSecondary: ColorPrimaryDark,
+  PalettePrimary: PalettePrimaryMain,
+  colorSecondary: PalettePrimaryDark,
 
   // UI
-  appBg: ColorPaletteNeutral000,
-  appContentBg: ColorPaletteNeutralWhite,
-  appBorderColor: ColorPaletteNeutral200,
+  appBg: HueNeutral50,
+  appContentBg: HueNeutralWhite,
+  appBorderColor: HueNeutral200,
   appBorderRadius: 4,
 
   // Typography
-  fontBase: FontFamilyBase,
-  fontCode: FontFamilyMono,
+  fontBase: TypographyFamilyBody,
+  fontCode: TypographyFamilyMono,
 
   // Text colors
-  textColor: ColorTextBody,
-  textInverseColor: ColorTextBodyInverse,
+  textColor: TypographyColorBody,
+  textInverseColor: TypographyColorBodyInverse,
 
   // Toolbar default and active colors
-  barTextColor: ColorPaletteNeutral600,
-  barSelectedColor: ColorTextBody,
-  barBg: ColorPaletteNeutralWhite,
+  barTextColor: HueNeutral600,
+  barSelectedColor: TypographyColorBody,
+  barBg: HueNeutralWhite,
 
   // Form colors
-  inputBg: ColorPaletteNeutralWhite,
-  inputBorder: ColorPaletteNeutral500,
-  inputTextColor: ColorTextBody,
+  inputBg: HueNeutralWhite,
+  inputBorder: HueNeutral500,
+  inputTextColor: TypographyColorBody,
   inputBorderRadius: 4,
 
   brandTitle: "Odyssey Design System",

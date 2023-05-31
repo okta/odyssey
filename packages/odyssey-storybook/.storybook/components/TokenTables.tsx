@@ -50,7 +50,11 @@ export const TokenTables = (): ReactNode => {
       if (!parts) return;
 
       let tokenType = parts[0];
-      if (parts[0] === "Color") {
+      if (
+        parts[0] === "Color" ||
+        parts[0] === "Hue" ||
+        parts[0] === "Palette"
+      ) {
         tokenType = `${parts[1]} ${parts[0]}s`;
       }
 
@@ -214,7 +218,8 @@ export const TokenTables = (): ReactNode => {
                     {token.name.includes("Border") &&
                       !token.name.includes("ColorBorder") &&
                       renderBorder(token)}
-                    {token.name.includes("Color") &&
+                    {(token.name.includes("Hue") ||
+                      token.name.includes("Palette")) &&
                       !token.name.includes("ColorText") &&
                       renderColor(token.value)}
                     {token.name.includes("ColorText") &&

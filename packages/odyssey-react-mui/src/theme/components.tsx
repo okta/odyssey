@@ -1047,7 +1047,7 @@ export const components: ThemeOptions["components"] = {
     styleOverrides: {
       root: ({ ownerState, theme }) => ({
         width: "100%",
-        maxWidth: "32rem",
+        maxWidth: theme.mixins.maxWidth,
         ...(ownerState.margin === "normal" && {
           marginTop: 0,
           marginBottom: theme.spacing(5),

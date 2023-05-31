@@ -18,15 +18,15 @@ export const spacing = (
   odysseyTokens: DesignTokensOverride
 ): ThemeOptions["spacing"] => {
   return [
-    0,
-    odysseyTokens.SpaceScale0 ?? Tokens.SpaceScale0,
-    odysseyTokens.SpaceScale1 ?? Tokens.SpaceScale1,
-    odysseyTokens.SpaceScale2 ?? Tokens.SpaceScale2,
-    odysseyTokens.SpaceScale3 ?? Tokens.SpaceScale3,
-    odysseyTokens.SpaceScale4 ?? Tokens.SpaceScale4,
-    odysseyTokens.SpaceScale5 ?? Tokens.SpaceScale5,
-    odysseyTokens.SpaceScale6 ?? Tokens.SpaceScale6,
-    odysseyTokens.SpaceScale7 ?? Tokens.SpaceScale7,
-    odysseyTokens.SpaceScale8 ?? Tokens.SpaceScale8,
+    odysseyTokens.Spacing0 ?? Tokens.Spacing0,
+    odysseyTokens.Spacing1 ?? Tokens.Spacing1,
+    odysseyTokens.Spacing2 ?? Tokens.Spacing2,
+    odysseyTokens.Spacing3 ?? Tokens.Spacing3,
+    odysseyTokens.Spacing4 ?? Tokens.Spacing4,
+    odysseyTokens.Spacing5 ?? Tokens.Spacing5,
+    odysseyTokens.Spacing6 ?? Tokens.Spacing6,
+    odysseyTokens.Spacing7 ?? Tokens.Spacing7,
+    odysseyTokens.Spacing8 ?? Tokens.Spacing8,
+    odysseyTokens.Spacing9 ?? Tokens.Spacing9,
   ];
 };
