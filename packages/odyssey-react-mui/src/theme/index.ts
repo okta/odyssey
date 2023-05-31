@@ -13,6 +13,6 @@
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 export * from "./theme";
-export { useTheme } from "./useTheme";
+export { useTheme } from "@mui/material/styles";
 
 export type DesignTokensOverride = Partial<typeof Tokens>;
