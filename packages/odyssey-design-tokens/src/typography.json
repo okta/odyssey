@@ -13,7 +13,7 @@
         "comment": "Inverse text color typically used on a colorful background",
         "value": "{hue.neutral.white.value}"
       },
-      "primary": {
+      "action": {
         "comment": "Branded text color, primarily used within button",
         "value": "{palette.primary.main.value}"
       },
