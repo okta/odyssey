@@ -1354,6 +1354,10 @@ export const components = (
           textDecoration: "underline",
           cursor: "pointer",
 
+          "&:visited": {
+            color: odysseyTokens.TypographyColorAction,
+          },
+
           "&:hover": {
             color: odysseyTokens.PalettePrimaryDark,
             textDecoration: "underline",
@@ -1366,10 +1370,6 @@ export const components = (
             outlineStyle: odysseyTokens.FocusOutlineStyle,
             outlineWidth: odysseyTokens.FocusOutlineWidthTight,
             textDecoration: "none",
-          },
-
-          "&:visited": {
-            color: odysseyTokens.TypographyColorAction,
           },
 
           ".Link-indicator, .Link-icon": {
