@@ -627,17 +627,16 @@ export const components = (
     },
     MuiCircularProgress: {
       defaultProps: {
-        // TODO: defaultProps cannot take a theme object; matches theme.typography.ui.lineHeight
-        size: "1.14285714rem",
+        size: odysseyTokens.TypographyScale2,
         thickness: 8,
         color: "primary",
         disableShrink: false,
         variant: "indeterminate",
       },
       styleOverrides: {
-        root: ({ theme, ownerState }) => ({
+        root: ({ ownerState }) => ({
           ...(ownerState.color !== "inherit" && {
-            color: theme.palette.primary.dark,
+            color: odysseyTokens.PalettePrimaryDark,
           }),
         }),
         circle: ({ ownerState }) => ({
