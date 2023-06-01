@@ -17,7 +17,6 @@ import {
   MenuItem,
   MenuList,
   MuiThemeProvider,
-  OdysseyTheme,
   OdysseyThemeProvider,
   Paper,
   Radio,
@@ -126,7 +125,7 @@ export const CustomComponentStory: StoryObj = {
         },
       };
     }, []);
-    const odysseyTheme: OdysseyTheme = createOdysseyMuiTheme(Tokens);
+    const odysseyTheme = createOdysseyMuiTheme(Tokens);
     const customOdysseyTheme = useMemo(
       () =>
         themeOverrides && createTheme(deepmerge(odysseyTheme, themeOverrides)),
