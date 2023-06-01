@@ -1402,12 +1402,12 @@ export const components = (
             color: odysseyTokens.TypographyColorBody,
             textDecoration: "underline",
 
-            "&:hover": {
-              color: odysseyTokens.TypographyColorSub,
-            },
-
             "&:visited": {
               color: odysseyTokens.TypographyColorBody,
+            },
+
+            "&:hover": {
+              color: odysseyTokens.TypographyColorSub,
             },
           },
         },
