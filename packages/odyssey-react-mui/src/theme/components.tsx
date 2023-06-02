@@ -29,6 +29,7 @@ import { tableHeadClasses } from "@mui/material/TableHead";
 import { tableRowClasses } from "@mui/material/TableRow";
 import { tableSortLabelClasses } from "@mui/material/TableSortLabel";
 import { tooltipClasses } from "@mui/material/Tooltip";
+
 import {
   AlertTriangleFilledIcon,
   ArrowDownIcon,
@@ -40,10 +41,10 @@ import {
   InformationCircleFilledIcon,
   SubtractIcon,
 } from "../iconDictionary";
-import { DesignTokensOverride } from ".";
+import { DesignTokens } from "./theme";
 
 export const components = (
-  odysseyTokens: DesignTokensOverride
+  odysseyTokens: DesignTokens
 ): ThemeOptions["components"] => {
   return {
     MuiAlert: {
