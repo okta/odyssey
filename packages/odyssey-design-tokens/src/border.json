@@ -16,7 +16,8 @@
     },
     "radius": {
       "main": { "value": "4px" },
-      "outer": { "value": "6px" }
+      "outer": { "value": "6px" },
+      "round": { "value": "1.5em" }
     },
     "style": {
       "main": { "value": "solid" }
