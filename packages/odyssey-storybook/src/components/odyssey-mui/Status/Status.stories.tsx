@@ -25,8 +25,13 @@ const storybookMeta: Meta<StatusProps> = {
       control: "radio",
       options: ["default", "error", "info", "success", "warning"],
     },
+    indicator: {
+      control: "radio",
+      options: ["lamp", "pill"],
+    },
   },
   args: {
+    indicator: "lamp",
     label: "Warp drive in standby",
     severity: "default",
   },
@@ -35,29 +40,60 @@ const storybookMeta: Meta<StatusProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<StatusProps> = {
+export const DefaultLamp: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
   },
 };
 
-export const Error: StoryObj<StatusProps> = {
+export const ErrorLamp: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive unstable",
     severity: "error",
   },
 };
 
-export const Success: StoryObj<StatusProps> = {
+export const SuccessLamp: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive online",
     severity: "success",
   },
 };
 
-export const Warning: StoryObj<StatusProps> = {
+export const WarningLamp: StoryObj<StatusProps> = {
   args: {
     label: "Warp fuel low",
     severity: "warning",
+  },
+};
+
+export const DefaultPill: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive in standby",
+    indicator: "pill",
+  },
+};
+
+export const ErrorPill: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive unstable",
+    severity: "error",
+    indicator: "pill",
+  },
+};
+
+export const SuccessPill: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive online",
+    severity: "success",
+    indicator: "pill",
+  },
+};
+
+export const WarningPill: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp fuel low",
+    severity: "warning",
+    indicator: "pill",
   },
 };
