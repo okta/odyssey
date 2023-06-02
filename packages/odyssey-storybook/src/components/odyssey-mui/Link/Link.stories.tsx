@@ -26,10 +26,6 @@ export default {
     children: {
       control: "text",
     },
-    variant: {
-      options: ["default", "monochrome"],
-      control: { type: "radio" },
-    },
     icon: {
       control: "object",
     },
@@ -41,6 +37,10 @@ export default {
     },
     onClick: {
       action: true,
+    },
+    variant: {
+      control: { type: "radio" },
+      options: ["default", "monochrome"],
     },
   },
   decorators: [MuiThemeDecorator],
