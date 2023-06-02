@@ -23,7 +23,8 @@
       "main": { "value": "solid" }
     },
     "width": {
-      "main": { "value": "1px" }
+      "main": { "value": "1px" },
+      "heavy": { "value": "1.5px" }
     }
   }
 }
