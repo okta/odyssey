@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef, ReactElement } from "react";
+import { forwardRef, memo, ReactElement } from "react";
 
 import {
   Link as MuiLink,
@@ -27,12 +27,13 @@ export type LinkProps = {
   variant?: MuiLinkProps["variant"];
 };
 
-export const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-  const { icon, children, target, variant, href, rel } = props;
-  return (
-    <MuiLink ref={ref} variant={variant} target={target} href={href} rel={rel}>
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ icon, children, target, variant, href, rel }, ref) => (
+    <MuiLink href={href} ref={ref} rel={rel} target={target} variant={variant}>
       {icon && <span className="Link-icon">{icon}</span>}
+
       {children}
+
       {target === "_blank" && (
         <span className="Link-indicator" role="presentation">
           <SvgIcon viewBox="0 0 16 16">
@@ -46,5 +47,11 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
         </span>
       )}
     </MuiLink>
-  );
-});
+  )
+);
+
+const MemoizedLink = memo(Link);
+
+MemoizedLink.displayName = "Link";
+
+export { MemoizedLink as Link };
