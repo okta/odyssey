@@ -16,7 +16,7 @@ import {
 export default create({
   base: "light",
 
-  PalettePrimary: PalettePrimaryMain,
+  colorPrimary: PalettePrimaryMain,
   colorSecondary: PalettePrimaryDark,
 
   // UI
