@@ -4,7 +4,8 @@
       "lighter": { "value": "{hue.blue.50.value}" },
       "light": { "value": "{hue.blue.300.value}" },
       "main": { "value": "{hue.blue.500.value}" },
-      "dark": { "value": "{hue.blue.900.value}" }
+      "dark": { "value": "{hue.blue.700.value}" },
+      "darker": { "value": "{hue.blue.900.value}" }
     },
     "danger": {
       "lighter": { "value": "{hue.red.50.value}" },

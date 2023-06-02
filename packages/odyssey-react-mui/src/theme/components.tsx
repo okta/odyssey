@@ -1349,25 +1349,27 @@ export const components = (
     },
     MuiLink: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.primary.main,
+        root: {
+          color: odysseyTokens.TypographyColorAction,
           textDecoration: "underline",
           cursor: "pointer",
 
+          "&:visited": {
+            color: odysseyTokens.TypographyColorAction,
+          },
+
           "&:hover": {
-            color: theme.palette.primary.dark,
+            color: odysseyTokens.PalettePrimaryDark,
             textDecoration: "underline",
           },
 
           "&:focus-visible": {
-            outlineColor: theme.palette.primary.main,
-            outlineOffset: "2px",
-            outlineStyle: "solid",
-            outlineWidth: "1px",
-          },
-
-          "&:visited": {
-            color: theme.palette.primary.main,
+            borderRadius: odysseyTokens.BorderRadiusMain,
+            outlineColor: odysseyTokens.FocusOutlineColorPrimary,
+            outlineOffset: odysseyTokens.FocusOutlineOffsetMain,
+            outlineStyle: odysseyTokens.FocusOutlineStyle,
+            outlineWidth: odysseyTokens.FocusOutlineWidthTight,
+            textDecoration: "none",
           },
 
           ".Link-indicator, .Link-icon": {
@@ -1377,44 +1379,37 @@ export const components = (
           },
 
           ".Link-indicator": {
-            marginInlineStart: theme.spacing(2),
+            marginInlineStart: odysseyTokens.Spacing2,
           },
 
           ".Link-icon": {
-            marginInlineEnd: theme.spacing(2),
+            marginInlineEnd: odysseyTokens.Spacing2,
           },
           svg: {
-            fontSize: "1rem",
+            fontSize: "1em",
             height: "1em",
             position: "relative",
             top: "-0.0625em",
             verticalAlign: "middle",
             width: "1em",
           },
-        }),
+        },
       },
       variants: [
         {
           props: { variant: "monochrome" },
-          style: ({ theme }) => ({
-            color: theme.palette.text.primary,
+          style: {
+            color: odysseyTokens.TypographyColorBody,
             textDecoration: "underline",
 
-            "&:hover": {
-              color: theme.palette.text.secondary,
-            },
-
-            "&:focus-visible": {
-              outlineColor: theme.palette.primary.main,
-              outlineOffset: "2px",
-              outlineStyle: "solid",
-              outlineWidth: "1px",
-            },
-
             "&:visited": {
-              color: theme.palette.text.primary,
+              color: odysseyTokens.TypographyColorBody,
             },
-          }),
+
+            "&:hover": {
+              color: odysseyTokens.TypographyColorSub,
+            },
+          },
         },
       ],
     },
