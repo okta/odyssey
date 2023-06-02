@@ -563,7 +563,7 @@ export const components = (
             },
           }),
 
-          ...(ownerState.variant === "status" && {
+          ...(ownerState.variant === "lamp" && {
             paddingBlock: 0,
             paddingInline: 0,
             borderRadius: 0,
@@ -572,28 +572,83 @@ export const components = (
 
             "&::before": {
               content: "''",
-              width: ".57em",
-              height: ".57em",
+              width: ".64em",
+              height: ".64em",
               marginInlineEnd: odysseyTokens.Spacing2,
               borderRadius: "100%",
-              backgroundColor: odysseyTokens.TypographyColorSub,
+              backgroundColor: "transparent",
+              borderColor: odysseyTokens.TypographyColorBody,
+              borderWidth: odysseyTokens.BorderWidthHeavy,
+              borderStyle: odysseyTokens.BorderStyleMain,
             },
 
             [`&.${chipClasses.colorError}`]: {
               "&::before": {
+                border: 0,
                 backgroundColor: odysseyTokens.PaletteDangerMain,
               },
             },
 
             [`&.${chipClasses.colorSuccess}`]: {
               "&::before": {
+                border: 0,
                 backgroundColor: odysseyTokens.PaletteSuccessMain,
               },
             },
 
             [`&.${chipClasses.colorWarning}`]: {
               "&::before": {
-                backgroundColor: odysseyTokens.PaletteWarningMain,
+                border: 0,
+                backgroundColor: odysseyTokens.HueYellow200,
+              },
+            },
+          }),
+
+          ...(ownerState.variant === "pill" && {
+            paddingBlock: odysseyTokens.Spacing1,
+            paddingInline: odysseyTokens.Spacing2,
+            borderRadius: odysseyTokens.BorderRadiusMain,
+            textTransform: "uppercase",
+            fontWeight: odysseyTokens.TypographyWeightHeadingBold,
+            lineHeight: odysseyTokens.TypographyLineHeightOverline,
+            letterSpacing: "0.05em",
+            backgroundColor: odysseyTokens.HueNeutral50,
+            color: odysseyTokens.TypographyColorSub,
+            fontSize: "0.71428571rem",
+
+            "&::before": {
+              content: "''",
+              width: ".64em",
+              height: ".64em",
+              marginInlineEnd: odysseyTokens.Spacing2,
+              borderRadius: "100%",
+              backgroundColor: odysseyTokens.HueNeutral600,
+            },
+
+            [`&.${chipClasses.colorError}`]: {
+              backgroundColor: odysseyTokens.PaletteDangerLighter,
+              color: odysseyTokens.PaletteDangerMain,
+
+              "&::before": {
+                backgroundColor: odysseyTokens.PaletteDangerMain,
+              },
+            },
+
+            [`&.${chipClasses.colorSuccess}`]: {
+              backgroundColor: odysseyTokens.PaletteSuccessLighter,
+              color: odysseyTokens.PaletteSuccessMain,
+
+              "&::before": {
+                backgroundColor: odysseyTokens.PaletteSuccessMain,
+              },
+            },
+
+            [`&.${chipClasses.colorWarning}`]: {
+              backgroundColor: odysseyTokens.PaletteWarningLighter,
+              color: odysseyTokens.HueYellow700,
+
+              "&::before": {
+                backgroundColor: odysseyTokens.HueYellow200,
               },
             },
           }),
