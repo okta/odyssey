@@ -13,7 +13,7 @@
       "main": { "value": "{hue.red.500.value}" },
       "dark": { "value": "{hue.red.900.value}" }
     },
-    "caution": {
+    "warning": {
       "lighter": { "value": "{hue.yellow.50.value}" },
       "light": { "value": "{hue.yellow.300.value}" },
       "main": { "value": "{hue.yellow.500.value}" },
