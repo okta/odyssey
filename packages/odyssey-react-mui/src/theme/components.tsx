@@ -260,7 +260,7 @@ export const components = (
             "&:hover, &:focus-visible": {
               backgroundColor: theme.palette.primary.lighter,
               borderColor: theme.palette.primary.light,
-              color: odysseyTokens.PalettePrimaryMain,
+              color: odysseyTokens.TypographyColorAction,
             },
 
             "&:active": {
@@ -627,7 +627,7 @@ export const components = (
 
             [`&.${chipClasses.colorError}`]: {
               backgroundColor: odysseyTokens.PaletteDangerLighter,
-              color: odysseyTokens.PaletteDangerMain,
+              color: odysseyTokens.TypographyColorDanger,
 
               "&::before": {
                 backgroundColor: odysseyTokens.PaletteDangerMain,
@@ -636,7 +636,7 @@ export const components = (
 
             [`&.${chipClasses.colorSuccess}`]: {
               backgroundColor: odysseyTokens.PaletteSuccessLighter,
-              color: odysseyTokens.PaletteSuccessMain,
+              color: odysseyTokens.TypographyColorSuccess,
 
               "&::before": {
                 backgroundColor: odysseyTokens.PaletteSuccessMain,
@@ -645,7 +645,7 @@ export const components = (
 
             [`&.${chipClasses.colorWarning}`]: {
               backgroundColor: odysseyTokens.PaletteWarningLighter,
-              color: odysseyTokens.HueYellow700,
+              color: odysseyTokens.TypographyColorWarning,
 
               "&::before": {
                 backgroundColor: odysseyTokens.HueYellow200,
@@ -1503,12 +1503,12 @@ export const components = (
           },
 
           [`&.${menuItemClasses.root}-destructive`]: {
-            color: odysseyTokens.PaletteDangerMain,
+            color: odysseyTokens.TypographyColorDanger,
           },
 
           [`&.${menuItemClasses.selected}`]: {
             backgroundColor: "transparent",
-            color: odysseyTokens.PalettePrimaryMain,
+            color: odysseyTokens.TypographyColorAction,
 
             "&:hover": {
               backgroundColor: theme.palette.primary.lighter,
@@ -1751,7 +1751,7 @@ export const components = (
             lineHeight: theme.typography.subtitle1.lineHeight,
           }),
           "&:hover": {
-            color: odysseyTokens.PalettePrimaryMain,
+            color: odysseyTokens.TypographyColorAction,
           },
           "&:focus-visible::before, &.Mui-focusVisible::before": {
             content: "''",
@@ -1769,7 +1769,7 @@ export const components = (
             color: odysseyTokens.TypographyColorBody,
             fontWeight: theme.typography.fontWeightBold,
             "&:hover": {
-              color: odysseyTokens.PalettePrimaryMain,
+              color: odysseyTokens.TypographyColorAction,
             },
           },
           "&.Mui-disabled": {
