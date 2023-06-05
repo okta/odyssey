@@ -14,7 +14,7 @@
     "directory": "packages/odyssey-storybook"
   },
   "devDependencies": {
-    "@applitools/eyes-storybook": "^3.31.2",
+    "@applitools/eyes-storybook": "^3.34.2",
     "@babel/core": "^7.19.3",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
