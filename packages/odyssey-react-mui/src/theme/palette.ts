@@ -11,11 +11,11 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import { DesignTokensOverride } from ".";
-import * as Tokens from "@okta/odyssey-design-tokens";
+
+import { DesignTokens } from "./theme";
 
 export const palette = (
-  odysseyTokens: DesignTokensOverride
+  odysseyTokens: DesignTokens
 ): ThemeOptions["palette"] => {
   return {
     mode: "light",
@@ -26,7 +26,7 @@ export const palette = (
     primary: {
       lighter: odysseyTokens.HueBlue50,
       light: odysseyTokens.HueBlue300,
-      main: odysseyTokens.HueBlue500 ?? Tokens.HueBlue500,
+      main: odysseyTokens.HueBlue500,
       dark: odysseyTokens.HueBlue900,
       contrastText: odysseyTokens.TypographyColorBodyInverse,
     },
@@ -39,28 +39,28 @@ export const palette = (
     error: {
       lighter: odysseyTokens.HueRed50,
       light: odysseyTokens.HueRed300,
-      main: odysseyTokens.HueRed500 ?? Tokens.HueRed500,
+      main: odysseyTokens.HueRed500,
       dark: odysseyTokens.HueRed900,
       contrastText: odysseyTokens.TypographyColorBodyInverse,
     },
     warning: {
       lighter: odysseyTokens.HueYellow50,
       light: odysseyTokens.HueYellow300,
-      main: odysseyTokens.HueYellow500 ?? Tokens.HueYellow500,
+      main: odysseyTokens.HueYellow500,
       dark: odysseyTokens.HueYellow900,
       contrastText: odysseyTokens.TypographyColorBody,
     },
     info: {
       lighter: odysseyTokens.HueBlue50,
       light: odysseyTokens.HueBlue300,
-      main: odysseyTokens.HueBlue500 ?? Tokens.HueBlue500,
+      main: odysseyTokens.HueBlue500,
       dark: odysseyTokens.HueBlue900,
       contrastText: odysseyTokens.TypographyColorBodyInverse,
     },
     success: {
       lighter: odysseyTokens.HueGreen50,
       light: odysseyTokens.HueGreen300,
-      main: odysseyTokens.HueGreen500 ?? Tokens.HueGreen500,
+      main: odysseyTokens.HueGreen500,
       dark: odysseyTokens.HueGreen900,
       contrastText: odysseyTokens.TypographyColorBodyInverse,
     },
