@@ -47,8 +47,8 @@ const storybookMeta: Meta<TooltipProps> = {
       },
     },
     placement: {
-      options: ["top", "right", "bottom", "left"],
       control: { type: "radio" },
+      options: ["bottom", "left", "right", "top"],
     },
   },
   args: {
@@ -109,18 +109,10 @@ export const Placement: StoryObj<TooltipProps> = {
   render: function C() {
     return (
       <>
-        <Tooltip text="Top" placement="top" ariaType="label">
-          <Button text="Top" />
-        </Tooltip>
-        <Tooltip text="Right" placement="right" ariaType="label">
-          <Button text="Right" />
-        </Tooltip>
-        <Tooltip text="Bottom" placement="bottom" ariaType="label">
-          <Button text="Bottom" />
-        </Tooltip>
-        <Tooltip text="Left" placement="left" ariaType="label">
-          <Button text="Left" />
-        </Tooltip>
+        <Button tooltipPlacement="top" tooltipText="Top" text="Top" />
+        <Button tooltipPlacement="right" tooltipText="Right" text="Right" />
+        <Button tooltipPlacement="bottom" tooltipText="Bottom" text="Bottom" />
+        <Button tooltipPlacement="left" tooltipText="Left" text="Left" />
       </>
     );
   },
