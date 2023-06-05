@@ -20,7 +20,7 @@
       "light": { "value": "{hue.yellow.300.value}" },
       "main": { "value": "{hue.yellow.500.value}" },
       "dark": { "value": "{hue.yellow.900.value}" },
-      "text": { "value": "{hue.yellow.700.value}" }
+      "text": { "value": "{hue.yellow.600.value}" }
     },
     "success": {
       "lighter": { "value": "{hue.green.50.value}" },
