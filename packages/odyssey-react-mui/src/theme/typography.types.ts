@@ -29,7 +29,7 @@ declare module "@mui/material/Typography" {
     body2: false;
     button: false;
     legend: true;
-    overline: false;
+    overline: true;
     subtitle1: true; // Design may refer to this as "caption"
     subtitle2: false;
     ui: true;

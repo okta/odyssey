@@ -10,57 +10,54 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { Status, StatusProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import StatusMdx from "./Status.mdx";
-
 const storybookMeta: Meta<StatusProps> = {
-  title: `MUI Components/Status`,
+  title: "MUI Components/Status",
   component: Status,
-  parameters: {
-    docs: {
-      page: StatusMdx,
-    },
-  },
   argTypes: {
     label: {
       control: "text",
-      defaultValue: "Warp drive in standby",
     },
     severity: {
       control: "radio",
       options: ["default", "error", "info", "success", "warning"],
-      defaultValue: "default",
     },
+  },
+  args: {
+    label: "Warp drive in standby",
+    severity: "default",
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-const DefaultTemplate: Story<StatusProps> = (args) => {
-  return <Status label={args.label} severity={args.severity} />;
+export const Default: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive in standby",
+  },
 };
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
-
-export const Error = DefaultTemplate.bind({});
-Error.args = {
-  label: "Warp drive unstable",
-  severity: "error",
+export const Error: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive unstable",
+    severity: "error",
+  },
 };
 
-export const Success = DefaultTemplate.bind({});
-Success.args = {
-  label: "Warp drive online",
-  severity: "success",
+export const Success: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive online",
+    severity: "success",
+  },
 };
 
-export const Warning = DefaultTemplate.bind({});
-Warning.args = {
-  label: "Warp fuel low",
-  severity: "warning",
+export const Warning: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp fuel low",
+    severity: "warning",
+  },
 };

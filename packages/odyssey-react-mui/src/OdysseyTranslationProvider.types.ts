@@ -39,4 +39,4 @@ export const supportedLanguages = [
   "zh-TW", // Chinese
 ] as const;
 
-export type SupportedLanguages = typeof supportedLanguages[number];
+export type SupportedLanguages = (typeof supportedLanguages)[number];

@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-labs",
-  "version": "0.23.0",
+  "version": "0.24.0",
   "description": "React components for Odyssey, that will eventually be part of Odyssey React but who's implementation isn't yet approved.",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -12,6 +12,9 @@
     ".": {
       "default": "./dist/index.js",
       "types": "./dist/src/index.d.ts"
+    },
+    "./README.md": {
+      "default": "./README.md"
     }
   },
   "repository": {
@@ -22,7 +25,7 @@
   "dependencies": {
     "@mui/icons-material": "^5.11.0",
     "@mui/lab": "^5.0.0-alpha.117",
-    "@mui/material": "^5.11.6",
+    "@mui/material": "^5.12.3",
     "@mui/utils": "^5.11.2",
     "@mui/x-date-pickers": "^5.0.15",
     "@okta/odyssey-react-mui": "workspace:*",
@@ -62,6 +65,7 @@
   "peerDependencies": {
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@okta/odyssey-design-tokens": "workspace:*",
     "@okta/odyssey-react-mui": "workspace:*",
     "react": ">=17 <19",
     "react-dom": ">=17 <19"

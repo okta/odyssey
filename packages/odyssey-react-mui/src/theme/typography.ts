@@ -11,88 +11,107 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
 
-export const typography: ThemeOptions["typography"] = {
-  htmlFontSize: 16,
-  fontFamily: Tokens.FontFamilyBase,
-  fontSize: 14,
-  fontWeightLight: 300,
-  fontWeightRegular: Number(Tokens.FontWeightNormal),
-  fontWeightMedium: 500,
-  fontWeightBold: Number(Tokens.FontWeightBold),
-  allVariants: {
-    fontFamily: Tokens.FontFamilyBase,
-    fontFeatureSettings: "'lnum', 'pnum'",
-    fontVariant: "normal",
-    letterSpacing: 0,
-  },
-  h1: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontSizeHeading1,
-    lineHeight: Tokens.FontLineHeightHeading1,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  h2: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontSizeHeading2,
-    lineHeight: Tokens.FontLineHeightHeading2,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  h3: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontSizeHeading3,
-    lineHeight: Tokens.FontLineHeightHeading3,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  h4: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontSizeHeading4,
-    lineHeight: Tokens.FontLineHeightHeading4,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  h5: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontSizeHeading5,
-    lineHeight: Tokens.FontLineHeightHeading5,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  h6: {
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontScale2,
-    lineHeight: Tokens.FontLineHeightHeading6,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  subtitle1: {
-    color: Tokens.ColorPaletteNeutral600,
-    fontWeight: Tokens.FontWeightNormal,
-    fontSize: Tokens.FontScale0,
-    lineHeight: Tokens.FontLineHeightBody,
-  },
-  subtitle2: undefined,
-  body1: {
-    fontFamily: Tokens.FontFamilyBase,
-    fontWeight: Number(Tokens.FontWeightNormal),
-    fontSize: Tokens.FontScale1,
-    fontFeatureSettings: "'lnum', 'pnum'",
-    fontVariant: "normal",
-    lineHeight: Tokens.FontLineHeightBody,
-    letterSpacing: "initial",
-  },
-  body2: undefined,
-  button: undefined,
-  overline: undefined,
-  legend: {
-    padding: 0,
-    fontWeight: Number(Tokens.FontWeightBold),
-    fontSize: Tokens.FontScale2,
-    lineHeight: Tokens.FontLineHeightHeading6,
-    marginBottom: Tokens.SpaceScale1,
-  },
-  ui: {
-    fontWeight: Number(Tokens.FontWeightNormal),
-    fontSize: Tokens.FontScale1,
-    lineHeight: Tokens.FontLineHeightUi,
-    letterSpacing: "initial",
-  },
+import { DesignTokens } from "./theme";
+
+export const typography = (
+  odysseyTokens: DesignTokens
+): ThemeOptions["typography"] => {
+  return {
+    htmlFontSize: 16,
+    fontFamily: odysseyTokens.TypographyFamilyBody,
+    fontSize: 14,
+    fontWeightLight: 300,
+    fontWeightRegular: Number(odysseyTokens.TypographyWeightBody),
+    fontWeightMedium: Number(odysseyTokens.TypographyWeightHeading),
+    fontWeightBold: Number(odysseyTokens.TypographyWeightHeadingBold),
+    allVariants: {
+      fontFamily: odysseyTokens.TypographyFamilyBody,
+      fontFeatureSettings: "'lnum', 'pnum'",
+      fontVariant: "normal",
+      letterSpacing: 0,
+    },
+    h1: {
+      color: odysseyTokens.TypographyColorHeading,
+      fontWeight: Number(odysseyTokens.TypographyWeightHeading),
+      fontSize: odysseyTokens.TypographySizeHeading1,
+      lineHeight: odysseyTokens.TypographyLineHeightHeading1,
+      marginBottom: odysseyTokens.Spacing2,
+    },
+    h2: {
+      color: odysseyTokens.TypographyColorHeading,
+      fontWeight: Number(odysseyTokens.TypographyWeightHeading),
+      fontSize: odysseyTokens.TypographySizeHeading2,
+      lineHeight: odysseyTokens.TypographyLineHeightHeading2,
+      marginBottom: odysseyTokens.Spacing2,
+    },
+    h3: {
+      color: odysseyTokens.TypographyColorHeading,
+      fontWeight: Number(odysseyTokens.TypographyWeightHeading),
+      fontSize: odysseyTokens.TypographySizeHeading3,
+      lineHeight: odysseyTokens.TypographyLineHeightHeading3,
+      marginBottom: odysseyTokens.Spacing2,
+    },
+    h4: {
+      color: odysseyTokens.TypographyColorHeading,
+      fontWeight: Number(odysseyTokens.TypographyWeightHeading),
+      fontSize: odysseyTokens.TypographySizeHeading4,
+      lineHeight: odysseyTokens.TypographyLineHeightHeading4,
+      marginBottom: odysseyTokens.Spacing2,
+    },
+    h5: {
+      color: odysseyTokens.TypographyColorHeading,
+      fontWeight: Number(odysseyTokens.TypographyWeightHeading),
+      fontSize: odysseyTokens.TypographySizeHeading5,
+      lineHeight: odysseyTokens.TypographyLineHeightHeading5,
+      marginBottom: odysseyTokens.Spacing2,
+    },
+    h6: {
+      color: odysseyTokens.TypographyColorHeading,
+      fontWeight: Number(odysseyTokens.TypographyWeightHeading),
+      fontSize: odysseyTokens.TypographyScale2,
+      lineHeight: odysseyTokens.TypographyLineHeightHeading6,
+      marginBottom: odysseyTokens.Spacing2,
+    },
+    subtitle1: {
+      color: odysseyTokens.HueNeutral600,
+      fontWeight: Number(odysseyTokens.TypographyWeightBody),
+      fontSize: odysseyTokens.TypographyScale0,
+      lineHeight: odysseyTokens.TypographyLineHeightBody,
+    },
+    subtitle2: undefined,
+    body1: {
+      color: odysseyTokens.TypographyColorBody,
+      fontFamily: odysseyTokens.TypographyFamilyBody,
+      fontWeight: Number(odysseyTokens.TypographyWeightBody),
+      fontSize: odysseyTokens.TypographyScale1,
+      fontFeatureSettings: "'lnum', 'pnum'",
+      fontVariant: "normal",
+      lineHeight: odysseyTokens.TypographyLineHeightBody,
+      letterSpacing: "initial",
+    },
+    body2: undefined,
+    button: undefined,
+    overline: {
+      fontWeight: Number(odysseyTokens.TypographyWeightHeadingBold),
+      fontFamily: odysseyTokens.TypographyFamilyBody,
+      lineHeight: odysseyTokens.TypographyLineHeightOverline,
+      letterSpacing: "5%",
+      textTransform: "uppercase",
+      fontSize: "0.71428571rem",
+    },
+    legend: {
+      padding: 0,
+      fontWeight: Number(odysseyTokens.TypographyWeightHeading),
+      fontSize: odysseyTokens.TypographyScale2,
+      lineHeight: odysseyTokens.TypographyLineHeightHeading6,
+      marginBottom: odysseyTokens.Spacing2,
+    },
+    ui: {
+      fontWeight: Number(odysseyTokens.TypographyWeightBody),
+      fontSize: odysseyTokens.TypographyScale1,
+      lineHeight: odysseyTokens.TypographyLineHeightUi,
+      letterSpacing: "initial",
+    },
+  };
 };

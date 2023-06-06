@@ -10,5 +10,5 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { theme as odysseyTheme } from "./theme";
-export { useTheme } from "./useTheme";
+export * from "./theme";
+export { useTheme } from "@mui/material/styles";

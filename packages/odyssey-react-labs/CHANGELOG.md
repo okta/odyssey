@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.0](https://github.com/okta/odyssey/compare/v0.23.0...v0.24.0) (2023-05-25)
+
+### Features
+
+- add odyssey token override support ([#1797](https://github.com/okta/odyssey/issues/1797)) ([52543cc](https://github.com/okta/odyssey/commit/52543cc5bc37ab5ad639434d80faa4683a1e8061))
+
+### Bug Fixes
+
+- exported DatePicker from Labs instead of MUI ([#1793](https://github.com/okta/odyssey/issues/1793)) ([c63244b](https://github.com/okta/odyssey/commit/c63244b75a708580ac71c9cb706bb0026290b18d))
+
 ## [0.23.0](https://github.com/okta/odyssey/compare/v0.22.0...v0.23.0) (2023-05-08)
 
 ### Bug Fixes

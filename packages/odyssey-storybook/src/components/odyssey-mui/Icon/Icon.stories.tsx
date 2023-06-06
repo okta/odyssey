@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
 import {
   Icon,
@@ -26,7 +26,7 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
 const storybookMeta: Meta<IconProps> = {
-  title: `MUI Components/Icon`,
+  title: "MUI Components/Icon",
   component: Icon,
   decorators: [MuiThemeDecorator],
   argTypes: {
@@ -49,19 +49,21 @@ const storybookMeta: Meta<IconProps> = {
 
 export default storybookMeta;
 
-const Template: Story<IconProps> = ({ ...args }) => (
-  <Icon
-    name={args.name}
-    size={args.size}
-    ariaLabelledby={args.ariaLabelledby}
-    label={args.label}
-  />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  name: "alert-triangle-filled",
-  size: "medium",
+export const Default: StoryObj<IconProps> = {
+  render: function C(args) {
+    return (
+      <Icon
+        name={args.name}
+        size={args.size}
+        ariaLabelledby={args.ariaLabelledby}
+        label={args.label}
+      />
+    );
+  },
+  args: {
+    name: "alert-triangle-filled",
+    size: "medium",
+  },
 };
 
 const icons: Array<{ name: keyof typeof iconDictionary; use: string }> = [
@@ -184,29 +186,33 @@ const icons: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   },
 ];
 
-export const Library: Story<IconProps> = () => (
-  <TableContainer>
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell>Icon</TableCell>
-          <TableCell>Name</TableCell>
-          <TableCell>Class Name</TableCell>
-          <TableCell>Use</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {icons.map(({ name, use }) => {
-          return (
-            <TableRow key={`${name}_row`}>
-              <TableCell>{createElement(iconDictionary[name])}</TableCell>
-              <TableCell>{name}</TableCell>
-              <TableCell>{iconDictionary[name].displayName}</TableCell>
-              <TableCell>{use}</TableCell>
+export const Library: StoryObj<IconProps> = {
+  render: function C() {
+    return (
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Icon</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Class Name</TableCell>
+              <TableCell>Use</TableCell>
             </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
-  </TableContainer>
-);
+          </TableHead>
+          <TableBody>
+            {icons.map(({ name, use }) => {
+              return (
+                <TableRow key={`${name}_row`}>
+                  <TableCell>{createElement(iconDictionary[name])}</TableCell>
+                  <TableCell>{name}</TableCell>
+                  <TableCell>{iconDictionary[name].displayName}</TableCell>
+                  <TableCell>{use}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  },
+};

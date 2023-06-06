@@ -27,6 +27,7 @@ export type CheckboxGroupProps = {
    */
   id?: string;
   isDisabled?: boolean;
+  isRequired?: boolean;
   label: string;
 };
 
@@ -36,6 +37,7 @@ const CheckboxGroup = ({
   errorMessage,
   hint,
   id: idOverride,
+  isRequired = false,
   label,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
@@ -51,10 +53,11 @@ const CheckboxGroup = ({
     <Field
       errorMessage={errorMessage}
       fieldType="group"
-      hasVisibleLabel={false}
+      hasVisibleLabel={true}
       hint={hint}
       id={idOverride}
       isDisabled={isDisabled}
+      isOptional={!isRequired}
       label={label}
       renderFieldComponent={renderFieldComponent}
     />

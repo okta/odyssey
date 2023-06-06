@@ -11,17 +11,22 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
 
-export const spacing: ThemeOptions["spacing"] = [
-  0,
-  Tokens.SpaceScale0,
-  Tokens.SpaceScale1,
-  Tokens.SpaceScale2,
-  Tokens.SpaceScale3,
-  Tokens.SpaceScale4,
-  Tokens.SpaceScale5,
-  Tokens.SpaceScale6,
-  Tokens.SpaceScale7,
-  Tokens.SpaceScale8,
-];
+import type { DesignTokens } from "./theme";
+
+export const spacing = (
+  odysseyTokens: DesignTokens
+): ThemeOptions["spacing"] => {
+  return [
+    odysseyTokens.Spacing0,
+    odysseyTokens.Spacing1,
+    odysseyTokens.Spacing2,
+    odysseyTokens.Spacing3,
+    odysseyTokens.Spacing4,
+    odysseyTokens.Spacing5,
+    odysseyTokens.Spacing6,
+    odysseyTokens.Spacing7,
+    odysseyTokens.Spacing8,
+    odysseyTokens.Spacing9,
+  ];
+};

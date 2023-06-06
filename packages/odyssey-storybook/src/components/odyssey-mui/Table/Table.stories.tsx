@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import * as React from "react";
 import {
   Button,
@@ -26,16 +26,10 @@ import {
   Typography,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import TableMdx from "./Table.mdx";
 
 const storybookMeta: Meta<TableProps> = {
-  title: `MUI Components/Table`,
+  title: "MUI Components/Table",
   component: Table,
-  parameters: {
-    docs: {
-      page: TableMdx,
-    },
-  },
   argTypes: {},
   decorators: [MuiThemeDecorator],
 };
@@ -298,152 +292,148 @@ function EnhancedTable() {
   );
 }
 
-const DefaultTemplate: Story = () => {
-  return (
-    <TableContainer>
-      <Typography component="figcaption" variant="h4">
-        Destinations
-      </Typography>
-      <Table>
-        <caption>Information about the largest and smallest planets.</caption>
-        <TableHead>
-          <TableRow>
-            <TableCell>Planet</TableCell>
-            <TableCell variant="number">Radius (km)</TableCell>
-            <TableCell>Type</TableCell>
-            <TableCell>Perihelion date</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell>{row.name}</TableCell>
-              <TableCell variant="number">
-                {row.radius.toLocaleString("en-US")}
-              </TableCell>
-              <TableCell>{row.type}</TableCell>
-              <TableCell variant="date">{row.perihelion}</TableCell>
-              <TableCell variant="action">
-                <Button variant="secondary" size="small" text="Plot course" />
-              </TableCell>
+export const Default: StoryObj<TableProps> = {
+  render: function C() {
+    return (
+      <TableContainer>
+        <Typography component="figcaption" variant="h4">
+          Destinations
+        </Typography>
+        <Table>
+          <caption>Information about the largest and smallest planets.</caption>
+          <TableHead>
+            <TableRow>
+              <TableCell>Planet</TableCell>
+              <TableCell variant="number">Radius (km)</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Perihelion date</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.name}>
+                <TableCell>{row.name}</TableCell>
+                <TableCell variant="number">
+                  {row.radius.toLocaleString("en-US")}
+                </TableCell>
+                <TableCell>{row.type}</TableCell>
+                <TableCell variant="date">{row.perihelion}</TableCell>
+                <TableCell variant="action">
+                  <Button variant="secondary" size="small" text="Plot course" />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  },
 };
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {};
-
-const RowHeadingTemplate: Story = () => {
-  return (
-    <TableContainer>
-      <Typography component="figcaption" variant="h4">
-        Destinations
-      </Typography>
-      <Table>
-        <caption>Information about the largest and smallest planets.</caption>
-        <TableHead>
-          <TableRow>
-            <TableCell>Planet</TableCell>
-            <TableCell variant="number">Radius (km)</TableCell>
-            <TableCell>Type</TableCell>
-            <TableCell>Perihelion date</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell variant="head">{row.name}</TableCell>
-              <TableCell variant="number">
-                {row.radius.toLocaleString("en-US")}
-              </TableCell>
-              <TableCell>{row.type}</TableCell>
-              <TableCell variant="date">{row.perihelion}</TableCell>
-              <TableCell variant="action">
-                <Button variant="secondary" size="small" text="Plot course" />
-              </TableCell>
+export const RowHeadings = {
+  render: function C() {
+    return (
+      <TableContainer>
+        <Typography component="figcaption" variant="h4">
+          Destinations
+        </Typography>
+        <Table>
+          <caption>Information about the largest and smallest planets.</caption>
+          <TableHead>
+            <TableRow>
+              <TableCell>Planet</TableCell>
+              <TableCell variant="number">Radius (km)</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Perihelion date</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.name}>
+                <TableCell variant="head">{row.name}</TableCell>
+                <TableCell variant="number">
+                  {row.radius.toLocaleString("en-US")}
+                </TableCell>
+                <TableCell>{row.type}</TableCell>
+                <TableCell variant="date">{row.perihelion}</TableCell>
+                <TableCell variant="action">
+                  <Button variant="secondary" size="small" text="Plot course" />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  },
 };
 
-export const RowHeadings = RowHeadingTemplate.bind({});
-RowHeadings.args = {};
-
-const RowGroupingTemplate: Story = () => {
-  return (
-    <TableContainer>
-      <Typography component="figcaption" variant="h4">
-        Destinations
-      </Typography>
-      <Table>
-        <caption>Information about the largest and smallest planets.</caption>
-        <TableHead>
-          <TableRow>
-            <TableCell>Type</TableCell>
-            <TableCell>Planet</TableCell>
-            <TableCell variant="number">Radius (km)</TableCell>
-            <TableCell>Descriptor</TableCell>
-            <TableCell>Perhihelion date</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell variant="head" scope="row" rowSpan={2}>
-              Gas giants
-            </TableCell>
-            <TableCell>Jupiter</TableCell>
-            <TableCell variant="number">69,991</TableCell>
-            <TableCell>Jovian</TableCell>
-            <TableCell variant="date">January 21, 2023</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Saturn</TableCell>
-            <TableCell variant="number">58,232</TableCell>
-            <TableCell>Saturnian</TableCell>
-            <TableCell variant="date">November 29, 2032</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell variant="head" scope="row" rowSpan={3}>
-              Terrestrial
-            </TableCell>
-            <TableCell>Earth</TableCell>
-            <TableCell variant="number">6,371</TableCell>
-            <TableCell>Terran</TableCell>
-            <TableCell variant="date">January 2, 2021</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Venus</TableCell>
-            <TableCell variant="number">6,052</TableCell>
-            <TableCell>Venusian</TableCell>
-            <TableCell variant="date">--</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Mars</TableCell>
-            <TableCell variant="number">3,389</TableCell>
-            <TableCell>Martian</TableCell>
-            <TableCell variant="date">August 3, 2020</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+export const RowGroupings = {
+  render: function C() {
+    return (
+      <TableContainer>
+        <Typography component="figcaption" variant="h4">
+          Destinations
+        </Typography>
+        <Table>
+          <caption>Information about the largest and smallest planets.</caption>
+          <TableHead>
+            <TableRow>
+              <TableCell>Type</TableCell>
+              <TableCell>Planet</TableCell>
+              <TableCell variant="number">Radius (km)</TableCell>
+              <TableCell>Descriptor</TableCell>
+              <TableCell>Perhihelion date</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell variant="head" scope="row" rowSpan={2}>
+                Gas giants
+              </TableCell>
+              <TableCell>Jupiter</TableCell>
+              <TableCell variant="number">69,991</TableCell>
+              <TableCell>Jovian</TableCell>
+              <TableCell variant="date">January 21, 2023</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Saturn</TableCell>
+              <TableCell variant="number">58,232</TableCell>
+              <TableCell>Saturnian</TableCell>
+              <TableCell variant="date">November 29, 2032</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell variant="head" scope="row" rowSpan={3}>
+                Terrestrial
+              </TableCell>
+              <TableCell>Earth</TableCell>
+              <TableCell variant="number">6,371</TableCell>
+              <TableCell>Terran</TableCell>
+              <TableCell variant="date">January 2, 2021</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Venus</TableCell>
+              <TableCell variant="number">6,052</TableCell>
+              <TableCell>Venusian</TableCell>
+              <TableCell variant="date">--</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Mars</TableCell>
+              <TableCell variant="number">3,389</TableCell>
+              <TableCell>Martian</TableCell>
+              <TableCell variant="date">August 3, 2020</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  },
 };
 
-export const RowGroupings = RowGroupingTemplate.bind({});
-RowGroupings.args = {};
-
-const EnhancedTemplate: Story = () => {
-  return <EnhancedTable />;
+export const Enhanced: StoryObj = {
+  render: function C() {
+    return <EnhancedTable />;
+  },
 };
-
-export const Enhanced = EnhancedTemplate.bind({});
-Enhanced.args = {};

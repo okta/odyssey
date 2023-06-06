@@ -1,13 +1,15 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Fieldset.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Forms/Fieldset" anchor />
 
 # Fieldset
 
 The fieldset component allows you to group related fields within a form.
 
 <Canvas>
-  <Story id="mui-components-forms-fieldset--simple" />
+  <Story of={Stories.Simple} />
 </Canvas>
 
 ## Content
@@ -21,7 +23,7 @@ Fieldsets require a legend that describes the group.
 An additional description can follow the heading.
 
 <Canvas>
-  <Story id="mui-components-forms-fieldset--description" />
+  <Story of={Stories.Description} />
 </Canvas>
 
 ### Errors
@@ -31,5 +33,5 @@ When multiple input selections are incompatible, the whole group may be made inv
 In this case, an infobox should be inserted at the top of the fieldset. This alert should persist until all input errors are resolved.
 
 <Canvas>
-  <Story id="mui-components-forms-fieldset--alert" />
+  <Story of={Stories.Alert} />
 </Canvas>

@@ -1,13 +1,15 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Tabs.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Tabs" anchor />
 
 # Tabs
 
 Navigation component used to organize content by grouping similar information on the same page. They allow content to be viewed without having to navigate away from that page or route.
 
 <Canvas>
-  <Story id="mui-components-tabs--default" />
+  <Story of={Stories.Default} />
 </Canvas>
 
 ## Behavior
@@ -43,8 +45,8 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
 
 ### Keyboard Support
 
-<figure class="ods-table--figure">
-  <table class="ods-table">
+<figure className="ods-table--figure">
+  <table className="ods-table">
     <caption>Tabs support the following keyboard shortcuts</caption>
     <thead>
       <tr>
@@ -54,7 +56,7 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
     </thead>
     <tbody>
       <tr>
-        <th scope="row" rowspan="2">
+        <th scope="row" rowSpan="2">
           <kbd>Tab</kbd>
         </th>
         <td>
@@ -79,7 +81,7 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
         </td>
       </tr>
       <tr>
-        <th scope="row" rowspan="2">
+        <th scope="row" rowSpan="2">
           <kbd>Right Arrow</kbd>
         </th>
         <td>
@@ -91,7 +93,7 @@ Use Tab sparingly. Limit the Tab component to one per page, and refrain from inc
         <td>If the last Tab is focused the focus is moved to the first Tab.</td>
       </tr>
       <tr>
-        <th scope="row" rowspan="2">
+        <th scope="row" rowSpan="2">
           <kbd>Left Arrow</kbd>
         </th>
         <td>

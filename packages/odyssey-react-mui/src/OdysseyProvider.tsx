@@ -13,6 +13,7 @@
 import { memo, ReactElement } from "react";
 
 import { ThemeOptions } from ".";
+import { DesignTokensOverride } from "../src/theme/index";
 import { OdysseyCacheProvider } from "./OdysseyCacheProvider";
 import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
 import {
@@ -25,6 +26,7 @@ type OdysseyProviderProps = {
   children: ReactElement;
   nonce?: string;
   themeOverride?: ThemeOptions;
+  designTokensOverride?: DesignTokensOverride;
   languageCode?: SupportedLanguages;
   translationOverrides?: TranslationOverrides;
 };
@@ -33,11 +35,15 @@ const OdysseyProvider = ({
   children,
   nonce,
   themeOverride,
+  designTokensOverride,
   languageCode,
   translationOverrides,
 }: OdysseyProviderProps) => (
   <OdysseyCacheProvider nonce={nonce}>
-    <OdysseyThemeProvider themeOverride={themeOverride}>
+    <OdysseyThemeProvider
+      themeOverride={themeOverride}
+      designTokensOverride={designTokensOverride}
+    >
       <OdysseyTranslationProvider
         languageCode={languageCode}
         translationOverrides={translationOverrides}

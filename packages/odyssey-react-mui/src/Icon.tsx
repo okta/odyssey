@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef } from "react";
 import { iconDictionary } from "./iconDictionary";
 
 export type IconProps = {
@@ -38,20 +37,18 @@ export type IconProps = {
  * This component includes all icon data as static imports. Favor individual
  * icon component imports where possible to keep your bundle size smaller.
  */
-export const Icon = forwardRef<SVGSVGElement, IconProps>(
-  ({ ariaLabelledby, label, name, size }) => {
-    if (!(name in iconDictionary)) return null;
+export const Icon = ({ ariaLabelledby, label, name, size }: IconProps) => {
+  if (!(name in iconDictionary)) return null;
 
-    const NamedIcon = iconDictionary[name];
+  const NamedIcon = iconDictionary[name];
 
-    return (
-      <NamedIcon
-        aria-labelledby={ariaLabelledby}
-        fontSize={size}
-        titleAccess={label}
-      />
-    );
-  }
-);
+  return (
+    <NamedIcon
+      aria-labelledby={ariaLabelledby}
+      fontSize={size}
+      titleAccess={label}
+    />
+  );
+};
 
 Icon.displayName = "Icon";

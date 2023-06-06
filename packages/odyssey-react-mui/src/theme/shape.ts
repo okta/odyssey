@@ -11,14 +11,17 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
 
-// Strip units from BorderRadiusBase to accommodate MUI's typing
-const NumericalBorderRadiusBase =
-  typeof Tokens.BorderRadiusBase === "string"
-    ? Number(Tokens.BorderRadiusBase.replace(/(\d+).*/, "$1"))
-    : Tokens.BorderRadiusBase;
+import { DesignTokens } from "./theme";
 
-export const shape: ThemeOptions["shape"] = {
-  borderRadius: NumericalBorderRadiusBase,
+export const shape = (odysseyTokens: DesignTokens): ThemeOptions["shape"] => {
+  // Strip units from BorderRadiusBase to accommodate MUI's typing
+  const NumericalBorderRadiusBase =
+    typeof odysseyTokens.BorderRadiusMain === "string"
+      ? Number(odysseyTokens.BorderRadiusMain.replace(/(\d+).*/, "$1"))
+      : odysseyTokens.BorderRadiusMain;
+
+  return {
+    borderRadius: NumericalBorderRadiusBase,
+  };
 };

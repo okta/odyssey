@@ -1,6 +1,8 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as InfoboxStories from "./Infobox.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Alerts/Infobox" anchor />
 
 # Infobox
 
@@ -17,7 +19,7 @@ This component may be present on load or triggered by different types of events,
 Use Infoboxes for communicating important guidance to the user. When using the Info variant, consider if plain copy will suffice on the page itself first. Reserve this component for "can’t miss" instructions.
 
 <Canvas>
-  <Story id="mui-components-alerts-infobox--info" />
+  <Story of={InfoboxStories.Info} />
 </Canvas>
 
 ### Error
@@ -27,7 +29,7 @@ Use Error Infoboxes to inform users that an error has occurred. You may also inf
 Include guidance to make sure users know what steps to take to address the error or avoid data loss.
 
 <Canvas>
-  <Story id="mui-components-alerts-infobox--error" />
+  <Story of={InfoboxStories.Error} />
 </Canvas>
 
 ### Warning
@@ -37,7 +39,7 @@ Use Warning Infoboxes to inform users of tasks or processes that need their atte
 When using the Warning variant, ensure the user does not need more context than you can give in the space available.
 
 <Canvas>
-  <Story id="mui-components-alerts-infobox--warning" />
+  <Story of={InfoboxStories.Warning} />
 </Canvas>
 
 ### Success
@@ -45,7 +47,7 @@ When using the Warning variant, ensure the user does not need more context than 
 Use Success Infoboxes for reporting successful actions, processes, or states to the user.
 
 <Canvas>
-  <Story id="mui-components-alerts-infobox--success" />
+  <Story of={InfoboxStories.Success} />
 </Canvas>
 
 ## Usage
@@ -59,7 +61,7 @@ Avoid overusing Infobox within the same view. They are intended to draw the eye,
 It is ideal to direct users toward an appropriate action, especially for addressing errors. To preserve clarity, limit Infoboxes to one link. If it's necessary to provide the user with an action, please direct them to the appropriate flow instead of beginning a new process inline.
 
 <Canvas>
-  <Story id="mui-components-alerts-infobox--block-link" />
+  <Story of={InfoboxStories.BlockLink} />
 </Canvas>
 
 ### Placement
@@ -81,11 +83,11 @@ Do not include images or other UIs within Infobox.
 Infobox should always include their main messaging within the body content. Titles are optional and offer quick context for your message.
 
 <Canvas>
-  <Story id="mui-components-alerts-infobox--info" />
+  <Story of={InfoboxStories.Info} />
 </Canvas>
 
 <Canvas>
-  <Story id="mui-components-alerts-infobox--success" />
+  <Story of={InfoboxStories.Success} />
 </Canvas>
 
 ## Accessibility
@@ -94,19 +96,19 @@ When deploying Infoboxes, two `role`s may apply. Error variants should utilize t
 
 ## References
 
-<figure class="ods-table--figure">
-  <figcaption class="ods-table--figcaption">Related Components</figcaption>
-  <table class="ods-table">
+<figure className="ods-table--figure">
+  <figcaption className="ods-table--figcaption">Related Components</figcaption>
+  <table className="ods-table">
     <caption>Differences between the available alert components</caption>
     <thead>
       <tr>
         <th scope="column">Component</th>
         <th scope="column">Available Variants</th>
         <th scope="column">
-          <span class="has-ods-tooltip">
+          <span className="has-ods-tooltip">
             <abbr aria-describedby="tip-dynamic">Dynamic</abbr>
             <aside
-              class="ods-tooltip is-ods-tooltip-top"
+              className="ods-tooltip is-ods-tooltip-top"
               id="tip-dynamic"
               role="tooltip"
             >
@@ -115,10 +117,10 @@ When deploying Infoboxes, two `role`s may apply. Error variants should utilize t
           </span>
         </th>
         <th scope="column">
-          <span class="has-ods-tooltip">
+          <span className="has-ods-tooltip">
             <abbr aria-describedby="tip-transient">Transient</abbr>
             <aside
-              class="ods-tooltip is-ods-tooltip-top"
+              className="ods-tooltip is-ods-tooltip-top"
               id="tip-transient"
               role="tooltip"
             >
@@ -127,10 +129,10 @@ When deploying Infoboxes, two `role`s may apply. Error variants should utilize t
           </span>
         </th>
         <th scope="column">
-          <span class="has-ods-tooltip">
+          <span className="has-ods-tooltip">
             <abbr aria-describedby="tip-dismissible">Dismissible</abbr>
             <aside
-              class="ods-tooltip is-ods-tooltip-top"
+              className="ods-tooltip is-ods-tooltip-top"
               id="tip-dismissible"
               role="tooltip"
             >
@@ -139,10 +141,10 @@ When deploying Infoboxes, two `role`s may apply. Error variants should utilize t
           </span>
         </th>
         <th scope="column">
-          <span class="has-ods-tooltip">
+          <span className="has-ods-tooltip">
             <abbr aria-describedby="tip-actionable">Actionable</abbr>
             <aside
-              class="ods-tooltip is-ods-tooltip-top"
+              className="ods-tooltip is-ods-tooltip-top"
               id="tip-actionable"
               role="tooltip"
             >

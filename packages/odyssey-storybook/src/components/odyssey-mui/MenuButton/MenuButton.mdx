@@ -1,6 +1,8 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./MenuButton.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Menu Button" anchor />
 
 # Menu Button
 
@@ -20,7 +22,7 @@ The Menu button component includes a button and a menu that contains menu items.
 - For expanding and collapsing section, use accordion.
 
 <Canvas>
-  <Story id="mui-components-menu-button--simple" />
+  <Story of={Stories.Simple} />
 </Canvas>
 
 ## Variants
@@ -34,7 +36,7 @@ The menu button is just like the regular button with additional functions. Regar
 Dropdown buttons are styled just like the regular buttons (primary, secondary, floating) but they have trailing chevron-down icon to indicate that there is additional content once toggled.
 
 <Canvas>
-  <Story id="mui-components-menu-button--button-variant" />
+  <Story of={Stories.ButtonVariant} />
 </Canvas>
 
 #### Icon button
@@ -42,7 +44,7 @@ Dropdown buttons are styled just like the regular buttons (primary, secondary, f
 When using an icon button as a trigger we pair it with the overflow-vertical icon.
 
 <Canvas>
-  <Story id="mui-components-menu-button--icon-button" />
+  <Story of={Stories.IconButton} />
 </Canvas>
 
 ### Menu item variants
@@ -52,7 +54,7 @@ When using an icon button as a trigger we pair it with the overflow-vertical ico
 Menu items by default are a plain label that explains the actions. An icon can also be included next to the label if it reinforces the label.
 
 <Canvas>
-  <Story id="mui-components-menu-button--action-icons" />
+  <Story of={Stories.ActionIcons} />
 </Canvas>
 
 #### Grouping
@@ -60,7 +62,7 @@ Menu items by default are a plain label that explains the actions. An icon can a
 You can group sections of actions within the menu by using a divider line, a section heading or both.
 
 <Canvas>
-  <Story id="mui-components-menu-button--groupings" />
+  <Story of={Stories.Groupings} />
 </Canvas>
 
 #### Destructive actions
@@ -68,7 +70,7 @@ You can group sections of actions within the menu by using a divider line, a sec
 Actions may be marked as destructive by using the `isDestructive` prop on the associated item.
 
 <Canvas>
-  <Story id="mui-components-menu-button--with-destructive" />
+  <Story of={Stories.WithDestructive} />
 </Canvas>
 
 ## Behaviors

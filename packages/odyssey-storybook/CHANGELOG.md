@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.0](https://github.com/okta/odyssey/compare/v0.23.0...v0.24.0) (2023-05-25)
+
+### Features
+
+- add odyssey token override support ([#1797](https://github.com/okta/odyssey/issues/1797)) ([52543cc](https://github.com/okta/odyssey/commit/52543cc5bc37ab5ad639434d80faa4683a1e8061))
+- make tranlationOverrides available via pass-through prop ([cb6fbe4](https://github.com/okta/odyssey/commit/cb6fbe45c14c05d639d147618f4279c538b034e2))
+- **odyssey-react-mui:** implement translation system via OdysseyTranslationProvider ([3c3fe2d](https://github.com/okta/odyssey/commit/3c3fe2dba78b21a8bc859ba33b5cd15e03c0c590))
+- wrap the Select ([26452d9](https://github.com/okta/odyssey/commit/26452d9712c69531d5e3637f84f6e4b8c187a526))
+
+### Bug Fixes
+
+- fix broken docs page ([6730a0e](https://github.com/okta/odyssey/commit/6730a0eee98806ccfb5be7c717353be0fe54bfff))
+- fix type errors ([30275bc](https://github.com/okta/odyssey/commit/30275bc70653f1ab2e07ee0e3f07faad2d8d7216))
+- remove vestigial Box import ([b12a589](https://github.com/okta/odyssey/commit/b12a589e68682c620e47bffda7eac6b367ac7b4e))
+
 ## [0.23.0](https://github.com/okta/odyssey/compare/v0.22.0...v0.23.0) (2023-05-08)
 
 ### Features

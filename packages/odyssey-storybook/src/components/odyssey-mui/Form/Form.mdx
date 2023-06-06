@@ -1,13 +1,15 @@
-import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs";
+import { ArgsTable, Canvas, Meta } from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as Stories from "./Form.stories";
 
-<Meta anchor />
+<Meta title="MUI Components/Forms/Form" anchor />
 
 # Form
 
 The form component arranges input controls to help with the layout and building of a form.
 
 <Canvas>
-  <Story id="mui-components-forms-form--simple" />
+  <Story of={Stories.Simple} />
 </Canvas>
 
 ## Content
@@ -21,7 +23,7 @@ Forms should include a heading that describes the form. This heading may be prov
 An additional description can follow the heading.
 
 <Canvas>
-  <Story id="mui-components-forms-form--description" />
+  <Story of={Stories.Description} />
 </Canvas>
 
 ### Errors
@@ -33,7 +35,7 @@ Some errors may occur at the highest level. For example, the server may be unabl
 In these cases, an infobox should be added at the top of the form to increase visibility. This alert should persist until the relevant errors are resolved.
 
 <Canvas>
-  <Story id="mui-components-forms-form--alert" />
+  <Story of={Stories.Alert} />
 </Canvas>
 
 ### Fieldset error
@@ -57,13 +59,13 @@ In addition to individual fields, forms support fieldsets as children. This allo
 Fieldsets should be labeled by a legend. They can also include descriptions.
 
 <Canvas>
-  <Story id="mui-components-forms-form--fieldsets" />
+  <Story of={Stories.Fieldsets} />
 </Canvas>
 
 ### The kitchen sink
 
 <Canvas>
-  <Story id="mui-components-forms-form--kitchen-sink" />
+  <Story of={Stories.KitchenSink} />
 </Canvas>
 
 ## Best practices

@@ -6,7 +6,8 @@ npm-debug.log
 package-lock.json
 storybook-static/
 yarn-error.log
-**/coverage
+**/coverage/
+**/reports/
 .pnp.*
 .yarn/*
 !.yarn/cache
