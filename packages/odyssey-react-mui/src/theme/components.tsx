@@ -22,6 +22,7 @@ import { inputBaseClasses } from "@mui/material/InputBase";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
 import { listItemTextClasses } from "@mui/material/ListItemText";
 import { menuItemClasses } from "@mui/material/MenuItem";
+import { stackClasses } from "@mui/material/Stack";
 import { svgIconClasses } from "@mui/material/SvgIcon";
 import { tableBodyClasses } from "@mui/material/TableBody";
 import { tableCellClasses } from "@mui/material/TableCell";
@@ -534,6 +535,10 @@ export const components = (
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           borderRadius: odysseyTokens.BorderRadiusRound,
           backgroundColor: odysseyTokens.HueNeutral100,
+          borderWidth: odysseyTokens.BorderWidthMain,
+          borderColor: odysseyTokens.HueNeutral200,
+          borderStyle: odysseyTokens.BorderStyleMain,
+          color: odysseyTokens.HueNeutral700,
 
           ...(ownerState.onDelete && {
             paddingInlineEnd: odysseyTokens.Spacing2,
@@ -543,7 +548,7 @@ export const components = (
             opacity: 1,
             pointerEvents: "none",
             backgroundColor: odysseyTokens.HueNeutral50,
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorDisabled,
           },
 
           ...(ownerState.clickable && {
@@ -553,7 +558,7 @@ export const components = (
             [`&.${chipClasses.focusVisible}`]: {
               backgroundColor: odysseyTokens.HueNeutral200,
               outlineColor: odysseyTokens.FocusOutlineColorPrimary,
-              outlineOffset: odysseyTokens.FocusOutlineOffsetMain,
+              outlineOffset: odysseyTokens.FocusOutlineOffsetTight,
               outlineStyle: odysseyTokens.FocusOutlineStyle,
               outlineWidth: odysseyTokens.FocusOutlineWidthMain,
             },
@@ -563,10 +568,16 @@ export const components = (
             },
           }),
 
+          [`& .${chipClasses.icon}`]: {
+            margin: 0,
+            marginInlineEnd: odysseyTokens.Spacing1,
+          },
+
           ...(ownerState.variant === "lamp" && {
             paddingBlock: 0,
             paddingInline: 0,
             borderRadius: 0,
+            border: 0,
             backgroundColor: "transparent",
             color: odysseyTokens.TypographyColorBody,
 
@@ -608,19 +619,18 @@ export const components = (
             paddingBlock: odysseyTokens.Spacing1,
             paddingInline: odysseyTokens.Spacing2,
             borderRadius: odysseyTokens.BorderRadiusMain,
-            textTransform: "uppercase",
+            border: 0,
             fontWeight: odysseyTokens.TypographyWeightHeadingBold,
             lineHeight: odysseyTokens.TypographyLineHeightOverline,
-            letterSpacing: "0.05em",
             backgroundColor: odysseyTokens.HueNeutral50,
             color: odysseyTokens.TypographyColorSub,
-            fontSize: "0.71428571rem",
+            fontSize: odysseyTokens.TypographySizeCaption,
 
             "&::before": {
               content: "''",
               width: ".64em",
               height: ".64em",
-              marginInlineEnd: odysseyTokens.Spacing2,
+              marginInlineEnd: odysseyTokens.Spacing1,
               borderRadius: "100%",
               backgroundColor: odysseyTokens.HueNeutral600,
             },
@@ -664,14 +674,14 @@ export const components = (
 
         deleteIcon: {
           WebkitTapHighlightColor: "transparent",
-          color: odysseyTokens.TypographyColorSub,
+          color: odysseyTokens.HueNeutral500,
           fontSize: "1em",
           cursor: "pointer",
           margin: "0",
           marginInlineStart: odysseyTokens.Spacing2,
 
           "&:hover": {
-            color: odysseyTokens.TypographyColorBody,
+            color: odysseyTokens.HueNeutral600,
           },
 
           [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
@@ -930,6 +940,13 @@ export const components = (
 
             "&:last-child": {
               marginBlockEnd: 0,
+            },
+          },
+
+          ul: {
+            [`&.${stackClasses.root}`]: {
+              padding: 0,
+              margin: 0,
             },
           },
 
