@@ -17,6 +17,9 @@
         "comment": "Text color for subordinate text like captions",
         "value": "{hue.neutral.600.value}"
       },
+      "disabled": {
+        "value": "{hue.neutral.300.value}"
+      },
       "action": {
         "comment": "Branded text color, primarily used within button",
         "value": "{palette.primary.text.value}"
