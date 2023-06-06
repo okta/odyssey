@@ -25,13 +25,13 @@ const storybookMeta: Meta<StatusProps> = {
       control: "radio",
       options: ["default", "error", "info", "success", "warning"],
     },
-    indicator: {
+    variant: {
       control: "radio",
       options: ["lamp", "pill"],
     },
   },
   args: {
-    indicator: "lamp",
+    variant: "lamp",
     label: "Warp drive in standby",
     severity: "default",
   },
@@ -70,7 +70,7 @@ export const WarningLamp: StoryObj<StatusProps> = {
 export const DefaultPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
-    indicator: "pill",
+    variant: "pill",
   },
 };
 
@@ -78,7 +78,7 @@ export const ErrorPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive unstable",
     severity: "error",
-    indicator: "pill",
+    variant: "pill",
   },
 };
 
@@ -86,7 +86,7 @@ export const SuccessPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive online",
     severity: "success",
-    indicator: "pill",
+    variant: "pill",
   },
 };
 
@@ -94,6 +94,6 @@ export const WarningPill: StoryObj<StatusProps> = {
   args: {
     label: "Warp fuel low",
     severity: "warning",
-    indicator: "pill",
+    variant: "pill",
   },
 };

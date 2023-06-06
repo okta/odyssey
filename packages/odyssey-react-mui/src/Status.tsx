@@ -26,11 +26,9 @@ export type StatusProps = {
   /**
    * The style of indicator
    */
-  indicator?: "lamp" | "pill";
+  variant?: "lamp" | "pill";
 };
 
-export const Status = ({
-  severity,
-  label,
-  indicator = "lamp",
-}: StatusProps) => <Chip label={label} color={severity} variant={indicator} />;
+export const Status = ({ severity, label, variant = "lamp" }: StatusProps) => (
+  <Chip label={label} color={severity} variant={variant} />
+);
