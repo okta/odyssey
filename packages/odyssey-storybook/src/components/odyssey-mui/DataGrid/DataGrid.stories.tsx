@@ -10,17 +10,27 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { DataGrid, DataGridColumnType } from "@okta/odyssey-react-mui";
-import { useMemo } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta = {
-  title: `MUI Components/Data Grid`,
+  title: "MUI Components/Data Grid",
   component: DataGrid,
   argTypes: {
-    //
+    columns: {
+      control: "array",
+    },
+    data: {
+      control: "object",
+    },
+    getRowId: {
+      control: "function",
+    },
+    hasRowSelection: {
+      control: "boolean",
+    },
   },
   decorators: [MuiThemeDecorator],
 };
@@ -62,69 +72,64 @@ const columns: DataGridColumnType<Person>[] = [
   },
 ];
 
-export const Example: Story<typeof DataGrid> = () => {
-  const data = useMemo<Person[]>(
-    () => [
-      {
-        address: "261 Erdman Ford",
-        city: "East Daphne",
-        id: "234823773",
-        name: {
-          firstName: "John",
-          lastName: "Doe",
-        },
-        state: "Kentucky",
-      },
-      {
-        address: "769 Dominic Grove",
-        city: "Columbus",
-        id: "234823774",
-        name: {
-          firstName: "Jane",
-          lastName: "Doe",
-        },
-        state: "Ohio",
-      },
-      {
-        address: "566 Brakus Inlet",
-        city: "South Linda",
-        id: "234823775",
-        name: {
-          firstName: "Joe",
-          lastName: "Doe",
-        },
-        state: "West Virginia",
-      },
-      {
-        address: "722 Emie Stream",
-        city: "Lincoln",
-        id: "234823776",
-        name: {
-          firstName: "Kevin",
-          lastName: "Vandy",
-        },
-        state: "Nebraska",
-      },
-      {
-        address: "32188 Larkin Turnpike",
-        city: "Omaha",
-        id: "234823777",
-        name: {
-          firstName: "Joshua",
-          lastName: "Rolluffs",
-        },
-        state: "Nebraska",
-      },
-    ],
-    []
-  );
+const data: Person[] = [
+  {
+    address: "261 Erdman Ford",
+    city: "East Daphne",
+    id: "234823773",
+    name: {
+      firstName: "John",
+      lastName: "Doe",
+    },
+    state: "Kentucky",
+  },
+  {
+    address: "769 Dominic Grove",
+    city: "Columbus",
+    id: "234823774",
+    name: {
+      firstName: "Jane",
+      lastName: "Doe",
+    },
+    state: "Ohio",
+  },
+  {
+    address: "566 Brakus Inlet",
+    city: "South Linda",
+    id: "234823775",
+    name: {
+      firstName: "Joe",
+      lastName: "Doe",
+    },
+    state: "West Virginia",
+  },
+  {
+    address: "722 Emie Stream",
+    city: "Lincoln",
+    id: "234823776",
+    name: {
+      firstName: "Kevin",
+      lastName: "Vandy",
+    },
+    state: "Nebraska",
+  },
+  {
+    address: "32188 Larkin Turnpike",
+    city: "Omaha",
+    id: "234823777",
+    name: {
+      firstName: "Joshua",
+      lastName: "Rolluffs",
+    },
+    state: "Nebraska",
+  },
+];
 
-  return (
-    <DataGrid
-      columns={columns}
-      data={data}
-      getRowId={({ id }) => id}
-      hasRowSelection
-    />
-  );
+export const Example: StoryObj<typeof DataGrid> = {
+  args: {
+    columns,
+    data,
+    getRowId: ({ id }: { id: string }) => id,
+    hasRowSelection: true,
+  },
 };
