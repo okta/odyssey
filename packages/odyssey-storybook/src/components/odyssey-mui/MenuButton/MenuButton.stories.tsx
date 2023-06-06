@@ -36,10 +36,13 @@ const storybookMeta: Meta<MenuButtonProps> = {
     buttonLabel: {
       control: "text",
     },
-    buttonEndIcon: {
+    buttonVariant: {
       control: "text",
     },
-    buttonVariant: {
+    endIcon: {
+      control: "text",
+    },
+    id: {
       control: "text",
     },
   },
@@ -51,16 +54,13 @@ const storybookMeta: Meta<MenuButtonProps> = {
 
 export default storybookMeta;
 
-const DefaultTemplate: StoryObj<MenuButtonProps> = {};
-
 export const Simple: StoryObj<MenuButtonProps> = {
-  ...DefaultTemplate,
   args: {
     buttonLabel: "More actions",
     children: [
-      <MenuItem>View details</MenuItem>,
-      <MenuItem>Edit configuration</MenuItem>,
-      <MenuItem>Launch</MenuItem>,
+      <MenuItem key="1">View details</MenuItem>,
+      <MenuItem key="2">Edit configuration</MenuItem>,
+      <MenuItem key="3">Launch</MenuItem>,
     ],
   },
 };
@@ -68,19 +68,19 @@ export const Simple: StoryObj<MenuButtonProps> = {
 export const ActionIcons: StoryObj<MenuButtonProps> = {
   args: {
     children: [
-      <MenuItem>
+      <MenuItem key="1">
         <ListItemIcon>
           <UserGroupIcon />
         </ListItemIcon>
         <ListItemText>Assign crew</ListItemText>
       </MenuItem>,
-      <MenuItem>
+      <MenuItem key="2">
         <ListItemIcon>
           <GlobeIcon />
         </ListItemIcon>
         <ListItemText>View destination</ListItemText>
       </MenuItem>,
-      <MenuItem>
+      <MenuItem key="3">
         <ListItemIcon>
           <CalendarIcon />
         </ListItemIcon>
@@ -95,9 +95,9 @@ export const ButtonVariant: StoryObj<MenuButtonProps> = {
     buttonLabel: "More actions",
     buttonVariant: "floating",
     children: [
-      <MenuItem>View details</MenuItem>,
-      <MenuItem>Edit configuration</MenuItem>,
-      <MenuItem>Launch</MenuItem>,
+      <MenuItem key="1">View details</MenuItem>,
+      <MenuItem key="2">Edit configuration</MenuItem>,
+      <MenuItem key="3">Launch</MenuItem>,
     ],
   },
 };
@@ -107,13 +107,13 @@ export const Groupings: StoryObj<MenuButtonProps> = {
     buttonLabel: "More actions",
     children: [
       <ListSubheader>Crew</ListSubheader>,
-      <MenuItem>Assign captain</MenuItem>,
-      <MenuItem>View roster</MenuItem>,
+      <MenuItem key="1">Assign captain</MenuItem>,
+      <MenuItem key="2">View roster</MenuItem>,
       <ListSubheader>Ship</ListSubheader>,
-      <MenuItem>Configure thrusters</MenuItem>,
-      <MenuItem>View cargo</MenuItem>,
+      <MenuItem key="3">Configure thrusters</MenuItem>,
+      <MenuItem key="4">View cargo</MenuItem>,
       <Divider />,
-      <MenuItem>Logout</MenuItem>,
+      <MenuItem key="5">Logout</MenuItem>,
     ],
   },
 };
@@ -122,9 +122,11 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
   args: {
     buttonLabel: "Cargo options",
     children: [
-      <MenuItem>View details</MenuItem>,
-      <MenuItem>Edit inventory</MenuItem>,
-      <MenuItem isDestructive>Jettison cargo</MenuItem>,
+      <MenuItem key="1">View details</MenuItem>,
+      <MenuItem key="2">Edit inventory</MenuItem>,
+      <MenuItem isDestructive key="3">
+        Jettison cargo
+      </MenuItem>,
     ],
   },
 };
@@ -132,11 +134,11 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
 export const IconButton: StoryObj<MenuButtonProps> = {
   args: {
     children: [
-      <MenuItem>View details</MenuItem>,
-      <MenuItem>Edit configuration</MenuItem>,
-      <MenuItem>Launch</MenuItem>,
+      <MenuItem key="1">View details</MenuItem>,
+      <MenuItem key="2">Edit configuration</MenuItem>,
+      <MenuItem key="3">Launch</MenuItem>,
     ],
     buttonLabel: "",
-    buttonEndIcon: <OverflowVerticalIcon />,
+    endIcon: <OverflowVerticalIcon />,
   },
 };
