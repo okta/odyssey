@@ -31,6 +31,7 @@ const Tag = ({ icon, isDisabled, label, onClick, onRemove }: TagProps) => {
       clickable={onClick ? true : false}
       component={chipElementType}
       disabled={isDisabled}
+      aria-disabled={isDisabled}
       icon={icon}
       label={label}
       onClick={onClick}
