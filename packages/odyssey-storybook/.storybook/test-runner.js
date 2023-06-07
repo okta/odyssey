@@ -22,6 +22,8 @@ module.exports = {
    * The context argument is a Storybook object containing the story's id, title, and name.
    */
   async postRender(page, context) {
+    await new Promise((r) => setTimeout(r, 500));
+
     // https://github.com/abhinaba-ghosh/axe-playwright#parameters-on-checka11y-axerun
     await checkA11y(
       // the page instance of playwright
@@ -36,7 +38,7 @@ module.exports = {
         detailedReport: true,
         detailedReportOptions: {
           // whether or not to include the full html for the offending nodes
-          html: false,
+          html: true,
         },
       },
 

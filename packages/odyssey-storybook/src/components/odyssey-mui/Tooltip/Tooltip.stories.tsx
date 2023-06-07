@@ -89,7 +89,7 @@ export const Icon: StoryObj<TooltipProps> = {
     children: (
       <Button
         variant="secondary"
-        ariaLabel="Donwload logs"
+        ariaLabel="Download logs"
         startIcon={<DownloadIcon />}
       />
     ),
