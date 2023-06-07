@@ -22,7 +22,7 @@ const storybookMeta: Meta<RadioProps> = {
     isDisabled: {
       control: "boolean",
     },
-    hasError: {
+    isInvalid: {
       control: "boolean",
     },
     label: {
