@@ -22,7 +22,6 @@ export type CheckboxProps = {
   isInvalid?: boolean;
   isValid?: boolean;
   isChecked?: boolean;
-  isDefaultChecked?: boolean;
   isDisabled?: boolean;
   isIndeterminate?: boolean;
   isRequired?: boolean;
