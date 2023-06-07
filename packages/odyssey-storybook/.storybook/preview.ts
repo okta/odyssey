@@ -48,6 +48,12 @@ const preview: Preview = {
       source: {
         excludeDecorators: true,
       },
+      argTypes: {
+        sort: "requiredFirst",
+      },
+      controls: {
+        sort: "requiredFirst",
+      },
     },
   },
 };

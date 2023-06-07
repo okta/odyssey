@@ -44,7 +44,7 @@ const Button = ({
   startIcon,
   text,
   tooltipText,
-  variant,
+  variant = "secondary",
 }: ButtonProps) => {
   const muiProps = useContext(MuiPropsContext);
 
