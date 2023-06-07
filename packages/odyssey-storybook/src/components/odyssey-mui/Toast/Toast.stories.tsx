@@ -12,7 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { Button, Toast, ToastProps, ToastStack } from "@okta/odyssey-react-mui";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -56,32 +56,22 @@ export default meta;
 
 const Single: StoryObj<ToastProps> = {
   args: {
-    isVisible: false,
+    isVisible: true,
   },
   render: function C(args) {
     const [isVisible, setIsVisible] = useState(args.isVisible);
-    const openToast = useCallback(() => setIsVisible(true), []);
     return (
-      <>
-        <Button
-          variant="primary"
-          onClick={openToast}
-          text={`Open ${args.severity} toast`}
-        />
-        <ToastStack>
-          <Toast
-            autoHideDuration={args.autoHideDuration}
-            isDismissable={args.isDismissable}
-            linkText={args.linkText}
-            linkUrl={args.linkUrl}
-            isVisible={isVisible}
-            onHide={() => setIsVisible(false)}
-            role={args.role}
-            severity={args.severity}
-            text={args.text}
-          />
-        </ToastStack>
-      </>
+      <Toast
+        autoHideDuration={args.autoHideDuration}
+        isDismissable={args.isDismissable}
+        linkText={args.linkText}
+        linkUrl={args.linkUrl}
+        isVisible={isVisible}
+        onHide={() => setIsVisible(false)}
+        role={args.role}
+        severity={args.severity}
+        text={args.text}
+      />
     );
   },
 };
@@ -96,14 +86,6 @@ const Static: StoryObj<ToastProps> = {
 };
 
 export const Info: StoryObj<ToastProps> = {
-  ...Single,
-  args: {
-    text: "Testing",
-    severity: "info",
-  },
-};
-
-export const InfoStatic: StoryObj<ToastProps> = {
   ...Static,
   args: {
     isVisible: true,
@@ -112,16 +94,7 @@ export const InfoStatic: StoryObj<ToastProps> = {
   },
 };
 
-export const Error = {
-  ...Single,
-  args: {
-    text: "Security breach in Hangar 18",
-    role: "alert",
-    severity: "error",
-  },
-};
-
-export const ErrorStatic: StoryObj<ToastProps> = {
+export const Error: StoryObj<ToastProps> = {
   ...Static,
   args: {
     isVisible: true,
@@ -132,15 +105,6 @@ export const ErrorStatic: StoryObj<ToastProps> = {
 };
 
 export const Warning: StoryObj<ToastProps> = {
-  ...Single,
-  args: {
-    text: "Severe solar winds may delay local system flights",
-    role: "status",
-    severity: "warning",
-  },
-};
-
-export const WarningStatic: StoryObj<ToastProps> = {
   ...Static,
   args: {
     isVisible: true,
@@ -151,15 +115,6 @@ export const WarningStatic: StoryObj<ToastProps> = {
 };
 
 export const Success: StoryObj<ToastProps> = {
-  ...Single,
-  args: {
-    text: "Docking completed",
-    role: "status",
-    severity: "success",
-  },
-};
-
-export const SuccessStatic: StoryObj<ToastProps> = {
   ...Static,
   args: {
     isVisible: true,
@@ -170,15 +125,6 @@ export const SuccessStatic: StoryObj<ToastProps> = {
 };
 
 export const Dismissible: StoryObj<ToastProps> = {
-  ...Single,
-  args: {
-    isDismissable: true,
-    linkText: "View report",
-    linkUrl: "#",
-  },
-};
-
-export const DismissibleStatic: StoryObj<ToastProps> = {
   ...Static,
   args: {
     isVisible: true,
