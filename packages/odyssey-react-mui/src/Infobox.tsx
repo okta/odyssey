@@ -12,7 +12,8 @@
 
 import { AlertColor } from "@mui/material";
 import { memo, ReactNode } from "react";
-import { Alert, AlertTitle, ScreenReaderText } from ".";
+import { Alert, AlertTitle } from "@mui/material";
+import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
 export type InfoboxProps = {

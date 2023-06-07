@@ -17,7 +17,8 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { Button, CloseIcon } from "./";
+import { Button } from "./Button";
+import { CloseIcon } from "./iconDictionary";
 import {
   memo,
   ReactNode,

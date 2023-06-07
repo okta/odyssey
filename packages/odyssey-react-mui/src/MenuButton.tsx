@@ -10,16 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  Button,
-  ButtonProps,
-  ChevronDownIcon,
-  Divider,
-  ListSubheader,
-  Menu,
-  MenuItem,
-  useUniqueId,
-} from "./";
+// import {
+//   Button,
+//   ButtonProps,
+//   ChevronDownIcon,
+//   Divider,
+//   ListSubheader,
+//   Menu,
+//   MenuItem,
+//   useUniqueId,
+// } from "./";
+
+import { Button, ButtonProps } from "./Button";
+import { ChevronDownIcon } from "./iconDictionary";
+import { Divider, ListSubheader, Menu } from "@mui/material";
+import { useUniqueId } from "./useUniqueId";
+import { MenuItem } from "./MenuItem";
+
 import { memo, MouseEvent, ReactElement, useMemo, useState } from "react";
 
 export type MenuButtonProps = {

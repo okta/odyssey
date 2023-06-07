@@ -10,11 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Checkbox as MuiCheckbox, Typography } from "@mui/material";
+import {
+  Checkbox as MuiCheckbox,
+  FormControlLabel,
+  Typography,
+} from "@mui/material";
 import { ChangeEventHandler, memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-
-import { FormControlLabel } from ".";
 
 export type CheckboxProps = {
   ariaLabel?: string;
