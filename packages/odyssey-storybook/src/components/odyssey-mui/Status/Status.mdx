@@ -7,23 +7,27 @@ import * as Stories from "./Status.stories";
 # Status
 
 <Canvas>
-  <Story of={Stories.Success} />
+  <Story of={Stories.SuccessLamp} />
 </Canvas>
 
 ## Behavior
 
 Status is not an interactive element. It is only intended to inform. If a Status indicates that a user should take action, be sure to provide the appropriate controls.
 
-## Variants
+## States
 
-There are four variants of Status available: Default, Success, Caution, and Danger.
+There are four states of Status available: Default, Success, Caution, and Danger. Each of these states is available in two indicator styles: **lamp** and **pill**.
 
 ### Default
 
 Default statuses are gray and should be used to indicate states like "Paused", "Not started", or "Queued".
 
 <Canvas>
-  <Story of={Stories.Default} />
+  <Story of={Stories.DefaultLamp} />
+</Canvas>
+
+<Canvas>
+  <Story of={Stories.DefaultPill} />
 </Canvas>
 
 ### Success
@@ -31,7 +35,11 @@ Default statuses are gray and should be used to indicate states like "Paused", "
 Success statuses are green and should be used to indicate states like "Complete", "Active", or "Service operational".
 
 <Canvas>
-  <Story of={Stories.Success} />
+  <Story of={Stories.SuccessLamp} />
+</Canvas>
+
+<Canvas>
+  <Story of={Stories.SuccessPill} />
 </Canvas>
 
 ### Warning
@@ -39,7 +47,11 @@ Success statuses are green and should be used to indicate states like "Complete"
 Warning statuses are yellow and should be used to indicate states like "Attention suggested" or "Service degradation".
 
 <Canvas>
-  <Story of={Stories.Warning} />
+  <Story of={Stories.WarningLamp} />
+</Canvas>
+
+<Canvas>
+  <Story of={Stories.WarningPill} />
 </Canvas>
 
 ### Error
@@ -47,7 +59,11 @@ Warning statuses are yellow and should be used to indicate states like "Attentio
 Error statuses are red and should be used to indicate states like "Error", "Failure", or "Service disruption".
 
 <Canvas>
-  <Story of={Stories.Error} />
+  <Story of={Stories.ErrorLamp} />
+</Canvas>
+
+<Canvas>
+  <Story of={Stories.ErrorPill} />
 </Canvas>
 
 ## Usage
