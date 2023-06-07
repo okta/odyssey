@@ -19,12 +19,6 @@ const storybookMeta: Meta<RadioProps> = {
   title: "MUI Components/Forms/Radio",
   component: Radio,
   argTypes: {
-    isChecked: {
-      control: "boolean",
-    },
-    isDefaultChecked: {
-      control: "boolean",
-    },
     isDisabled: {
       control: "boolean",
     },
