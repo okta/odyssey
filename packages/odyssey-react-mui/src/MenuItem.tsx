@@ -10,38 +10,33 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, forwardRef } from "react";
+import { ReactNode, memo } from "react";
 import { MenuItem as MuiMenuItem } from "@mui/material";
 import { menuItemClasses } from "@mui/material/MenuItem";
-import type { MenuItemProps as MuiMenuItemProps } from "@mui/material";
 
-export interface MenuItemProps
-  extends Omit<
-    MuiMenuItemProps,
-    | "component"
-    | "dense"
-    | "disableGutters"
-    | "divider"
-    | "focusVisibleClassName"
-  > {
-  /**
-   * Toggles whether or not the MenuItem represents a destructive action.
-   */
+export type MenuItemProps = {
+  hasInitialFocus?: boolean;
+  children: ReactNode;
+  isSelected?: boolean;
   isDestructive?: boolean;
-}
+};
 
-const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
-  ({ isDestructive, ...props }, ref) => (
-    <MuiMenuItem
-      {...props}
-      ref={ref}
-      className={
-        isDestructive ? `${menuItemClasses.root}-destructive` : undefined
-      }
-    >
-      {props.children}
-    </MuiMenuItem>
-  )
+const MenuItem = ({
+  children,
+  hasInitialFocus,
+  isDestructive,
+  isSelected,
+}: MenuItemProps) => (
+  <MuiMenuItem
+    /* eslint-disable-next-line jsx-a11y/no-autofocus */
+    autoFocus={hasInitialFocus}
+    className={
+      isDestructive ? `${menuItemClasses.root}-destructive` : undefined
+    }
+    selected={isSelected}
+  >
+    {children}
+  </MuiMenuItem>
 );
 
 const MemoizedMenuItem = memo(MenuItem);
