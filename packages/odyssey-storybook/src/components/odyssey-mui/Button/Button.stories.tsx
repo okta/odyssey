@@ -33,8 +33,9 @@ const iconMapping = Object.fromEntries(
   ])
 );
 
-type ButtonStoryProps = Omit<ButtonProps, "startIcon"> & {
+type ButtonStoryProps = Omit<ButtonProps, "startIcon" | "endIcon"> & {
   startIcon: keyof typeof iconDictionary;
+  endIcon: keyof typeof iconDictionary;
 };
 
 const storybookMeta: Meta<ButtonProps> = {
