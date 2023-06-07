@@ -12,14 +12,10 @@
 
 import { AlertColor } from "@mui/material";
 import { useEffect, memo, useState, useCallback } from "react";
-import {
-  Alert,
-  AlertTitle,
-  CloseIcon,
-  Link,
-  Snackbar,
-  visuallyHidden,
-} from ".";
+import { Alert, AlertTitle, Snackbar } from "@mui/material";
+import { visuallyHidden } from "@mui/utils";
+import { Link } from "./Link";
+import { CloseIcon } from "./iconDictionary";
 import { Button } from "./Button";
 import { useTranslation } from "react-i18next";
 

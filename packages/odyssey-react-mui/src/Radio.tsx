@@ -13,7 +13,7 @@
 import { Radio as MuiRadio } from "@mui/material";
 import { memo } from "react";
 
-import { FormControlLabel } from ".";
+import { FormControlLabel } from "@mui/material";
 
 export type RadioProps = {
   isChecked?: boolean;
