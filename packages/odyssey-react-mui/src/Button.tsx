@@ -32,6 +32,7 @@ export type ButtonProps = {
    */
   tooltipText?: string;
   variant?: "primary" | "secondary" | "danger" | "floating";
+  ariaLabel?: string;
 };
 
 const Button = ({
@@ -45,6 +46,7 @@ const Button = ({
   text,
   tooltipText,
   variant,
+  ariaLabel,
 }: ButtonProps) => {
   const muiProps = useContext(MuiPropsContext);
 
@@ -52,6 +54,7 @@ const Button = ({
     () => (
       <MuiButton
         {...muiProps}
+        aria-label={ariaLabel}
         disabled={isDisabled}
         endIcon={endIcon}
         fullWidth={isFullWidth}
@@ -75,6 +78,7 @@ const Button = ({
       startIcon,
       text,
       variant,
+      ariaLabel,
     ]
   );
 

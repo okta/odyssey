@@ -86,7 +86,13 @@ export const Default: StoryObj<TooltipProps> = {
 export const Icon: StoryObj<TooltipProps> = {
   ...Template,
   args: {
-    children: <Button variant="secondary" startIcon={<DownloadIcon />} />,
+    children: (
+      <Button
+        variant="secondary"
+        ariaLabel="Donwload logs"
+        startIcon={<DownloadIcon />}
+      />
+    ),
     ariaType: "label",
     placement: "top",
     text: "Download logs",

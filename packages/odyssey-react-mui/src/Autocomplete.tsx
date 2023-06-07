@@ -122,6 +122,7 @@ const Autocomplete = <
 
   return (
     <MuiAutocomplete
+      aria-disabled={isDisabled}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
       loading={isLoading}

@@ -41,8 +41,7 @@ module.exports = {
       },
 
       // skipFailures
-      // FIXME set to false once a11y issues (in stories) have been resolved
-      true,
+      false,
 
       // reporter "default" is terminal reporter, "html" writes results to file
       "default",

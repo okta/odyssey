@@ -108,7 +108,7 @@ const Toast = ({
         action={
           isDismissable === true && (
             <Button
-              aria-label={t("toast.close.text")}
+              ariaLabel={t("toast.close.text")}
               onClick={onHide}
               size="small"
               startIcon={<CloseIcon />}
