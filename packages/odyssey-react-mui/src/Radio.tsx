@@ -17,9 +17,8 @@ import { FormControlLabel } from ".";
 
 export type RadioProps = {
   isChecked?: boolean;
-  isDefaultChecked?: boolean;
   isDisabled?: boolean;
-  hasError?: boolean;
+  isInvalid?: boolean;
   label: string;
   name?: string;
   value: string;
@@ -27,18 +26,16 @@ export type RadioProps = {
 
 const Radio = ({
   isChecked,
-  isDefaultChecked,
   isDisabled,
-  hasError,
+  isInvalid,
   label,
   name,
   value,
 }: RadioProps) => (
   <FormControlLabel
     checked={isChecked}
-    className={hasError ? "Mui-error" : ""}
+    className={isInvalid ? "Mui-error" : ""}
     control={<MuiRadio />}
-    defaultChecked={isDefaultChecked}
     disabled={isDisabled}
     label={label}
     name={name}
