@@ -27,7 +27,7 @@ export const Tooltip = ({
   ariaType,
   children,
   text,
-  placement,
+  placement = "top",
 }: TooltipProps) => (
   <MuiTooltip
     describeChild={ariaType === "description"}

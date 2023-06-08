@@ -48,7 +48,10 @@ const storybookMeta: Meta<TooltipProps> = {
     },
     placement: {
       options: ["top", "right", "bottom", "left"],
-      control: { type: "radio" },
+      control: {
+        type: "radio",
+        defaultValue: "top",
+      },
     },
   },
   args: {
