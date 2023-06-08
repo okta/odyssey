@@ -12,7 +12,7 @@
 
 import { ThemeOptions } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
-//import radioClasses from "@mui/material";
+import { alertTitleClasses } from "@mui/material/AlertTitle";
 import { buttonClasses } from "@mui/material/Button";
 import { chipClasses } from "@mui/material/Chip";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
@@ -59,43 +59,70 @@ export const components = (
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => ({
-          padding: theme.spacing(4),
-          gap: theme.spacing(4),
+          padding: odysseyTokens.Spacing4,
+          gap: odysseyTokens.Spacing4,
           color: odysseyTokens.TypographyColorBody,
-          ...(ownerState.severity && {
-            backgroundColor: theme.palette[ownerState.severity].lighter,
-            borderColor: theme.palette[ownerState.severity].light,
+          border: 0,
+          ...(ownerState.severity === "success" && {
+            backgroundColor: odysseyTokens.HueGreen100,
+
+            [`& .${alertTitleClasses.root}`]: {
+              color: odysseyTokens.PaletteSuccessHeading,
+            },
+          }),
+          ...(ownerState.severity === "info" && {
+            backgroundColor: odysseyTokens.HueBlue100,
+
+            [`& .${alertTitleClasses.root}`]: {
+              color: odysseyTokens.PalettePrimaryHeading,
+            },
+          }),
+          ...(ownerState.severity === "error" && {
+            backgroundColor: odysseyTokens.HueRed100,
+
+            [`& .${alertTitleClasses.root}`]: {
+              color: odysseyTokens.PaletteDangerHeading,
+            },
+          }),
+          ...(ownerState.severity === "warning" && {
+            backgroundColor: odysseyTokens.HueYellow100,
+
+            [`& .${alertTitleClasses.root}`]: {
+              color: odysseyTokens.PaletteWarningHeading,
+            },
           }),
           ...(ownerState.variant === "banner" && {
             position: "relative",
             justifyContent: "center",
             alignItems: "center",
-            borderWidth: 0,
-            borderRadius: 0,
           }),
           ...(ownerState.variant === "infobox" && {
-            borderStyle: theme.mixins.borderStyle,
-            borderWidth: theme.mixins.borderWidth,
-            borderRadius: odysseyTokens.BorderRadiusMain,
+            borderRadius: odysseyTokens.BorderRadiusOuter,
             "&:not(:last-child)": {
               marginBottom: theme.spacing(4),
+            },
+
+            [`& .${alertTitleClasses.root}`]: {
+              marginBlockEnd: odysseyTokens.Spacing2,
+
+              [`&:last-child`]: {
+                marginBlockEnd: 0,
+              },
             },
           }),
           ...(ownerState.variant === "toast" && {
             maxWidth: theme.mixins.maxWidth,
-            borderStyle: theme.mixins.borderStyle,
-            borderWidth: theme.mixins.borderWidth,
-            borderRadius: theme.mixins.borderRadius,
+            borderRadius: odysseyTokens.BorderRadiusOuter,
             position: "relative",
             alignItems: "center",
           }),
         }),
-        action: ({ ownerState, theme }) => ({
+        action: ({ ownerState }) => ({
           ...(ownerState.variant === "banner" && {
             padding: 0,
             marginInlineEnd: 0,
             top: "50%",
-            right: theme.spacing(4),
+            right: odysseyTokens.Spacing2,
             position: "absolute",
             transform: "translateY(-50%)",
           }),
@@ -108,7 +135,7 @@ export const components = (
         icon: ({ ownerState, theme }) => ({
           marginInlineEnd: 0,
           padding: 0,
-          fontSize: "inherit",
+          height: `calc(${odysseyTokens.TypographySizeHeading6} * ${odysseyTokens.TypographyLineHeightHeading6})`,
           opacity: 1,
           ...(ownerState.severity && {
             color: theme.palette[ownerState.severity].main,
@@ -118,7 +145,8 @@ export const components = (
           }),
 
           [`& .${svgIconClasses.root}`]: {
-            fontSize: "1.429rem",
+            alignSelf: "center",
+            fontSize: odysseyTokens.TypographySizeHeading6,
           },
         }),
         message: ({ ownerState, theme }) => ({
@@ -138,17 +166,13 @@ export const components = (
     },
     MuiAlertTitle: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          marginTop: 0,
-          marginBottom: theme.spacing(1),
-          lineHeight: theme.typography.h6.lineHeight,
-          fontSize: theme.typography.h6.fontSize,
-          fontWeight: theme.typography.fontWeightBold,
-
-          "&:last-child": {
-            marginBlockEnd: 0,
-          },
-        }),
+        root: {
+          marginBlock: 0,
+          lineHeight: odysseyTokens.TypographyLineHeightHeading6,
+          fontSize: odysseyTokens.TypographySizeHeading6,
+          fontWeight: odysseyTokens.TypographyWeightHeading,
+          fontFamily: odysseyTokens.TypographyFamilyHeading,
+        },
       },
     },
     MuiAutocomplete: {
@@ -2157,9 +2181,13 @@ export const components = (
         },
       },
       styleOverrides: {
-        paragraph: ({ theme }) => ({
-          marginBottom: theme.spacing(4),
-        }),
+        paragraph: {
+          marginBlockEnd: odysseyTokens.Spacing4,
+
+          [`&:last-child`]: {
+            marginBlockEnd: 0,
+          },
+        },
       },
     },
   };
