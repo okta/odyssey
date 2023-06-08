@@ -56,6 +56,7 @@ export default meta;
 
 const Single: StoryObj<ToastProps> = {
   args: {
+    autoHideDuration: -1,
     isVisible: true,
   },
   render: function C(args) {
