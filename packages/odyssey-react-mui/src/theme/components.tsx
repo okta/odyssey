@@ -68,30 +68,38 @@ export const components = (
           ...(ownerState.severity === "success" && {
             backgroundColor: odysseyTokens.HueGreen100,
 
-            [`& .${alertTitleClasses.root}`]: {
-              color: odysseyTokens.PaletteSuccessHeading,
-            },
+            ...(ownerState.variant === "toast" && {
+              backgroundColor: odysseyTokens.HueGreen100.concat(
+                odysseyTokens.PaletteAlphaSemi
+              ),
+            }),
           }),
           ...(ownerState.severity === "info" && {
             backgroundColor: odysseyTokens.HueBlue100,
 
-            [`& .${alertTitleClasses.root}`]: {
-              color: odysseyTokens.PalettePrimaryHeading,
-            },
+            ...(ownerState.variant === "toast" && {
+              backgroundColor: odysseyTokens.HueBlue100.concat(
+                odysseyTokens.PaletteAlphaSemi
+              ),
+            }),
           }),
           ...(ownerState.severity === "error" && {
             backgroundColor: odysseyTokens.HueRed100,
 
-            [`& .${alertTitleClasses.root}`]: {
-              color: odysseyTokens.PaletteDangerHeading,
-            },
+            ...(ownerState.variant === "toast" && {
+              backgroundColor: odysseyTokens.HueRed100.concat(
+                odysseyTokens.PaletteAlphaSemi
+              ),
+            }),
           }),
           ...(ownerState.severity === "warning" && {
             backgroundColor: odysseyTokens.HueYellow100,
 
-            [`& .${alertTitleClasses.root}`]: {
-              color: odysseyTokens.PaletteWarningHeading,
-            },
+            ...(ownerState.variant === "toast" && {
+              backgroundColor: odysseyTokens.HueYellow100.concat(
+                odysseyTokens.PaletteAlphaSemi
+              ),
+            }),
           }),
 
           // Alert title variation
@@ -108,12 +116,8 @@ export const components = (
             ...(ownerState.severity === "warning" && {
               color: odysseyTokens.PaletteWarningHeading,
             }),
-            ...(ownerState.variant === "infobox" && {
-              marginBlockEnd: odysseyTokens.Spacing2,
-
-              [`&:last-child`]: {
-                marginBlockEnd: 0,
-              },
+            ...(ownerState.variant === "banner" && {
+              marginBlockEnd: 0,
             }),
           },
 
@@ -134,6 +138,7 @@ export const components = (
             borderRadius: odysseyTokens.BorderRadiusOuter,
             position: "relative",
             alignItems: "center",
+            backdropFilter: "blur(10px)",
           }),
         }),
         action: ({ ownerState }) => ({
@@ -185,11 +190,16 @@ export const components = (
     MuiAlertTitle: {
       styleOverrides: {
         root: {
-          marginBlock: 0,
+          marginBlockStart: 0,
+          marginBlockEnd: odysseyTokens.Spacing2,
           lineHeight: odysseyTokens.TypographyLineHeightHeading6,
           fontSize: odysseyTokens.TypographySizeHeading6,
           fontWeight: odysseyTokens.TypographyWeightHeading,
           fontFamily: odysseyTokens.TypographyFamilyHeading,
+
+          [`&:last-child`]: {
+            marginBlockEnd: 0,
+          },
         },
       },
     },
