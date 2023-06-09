@@ -38,8 +38,8 @@
       "dark": { "value": "{hue.neutral.900.value}" }
     },
     "alpha": {
-      "opaque": { "value": "1" },
-      "semi": { "value": "75" }
+      "opaque": { "value": "FF" },
+      "semi": { "value": "BF" }
     }
   }
 }
