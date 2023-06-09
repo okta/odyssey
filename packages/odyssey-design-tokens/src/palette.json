@@ -36,6 +36,10 @@
     "neutral": {
       "main": { "value": "{hue.neutral.600.value}" },
       "dark": { "value": "{hue.neutral.900.value}" }
+    },
+    "alpha": {
+      "opaque": { "value": "1" },
+      "semi": { "value": "75" }
     }
   }
 }
