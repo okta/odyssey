@@ -49,10 +49,10 @@ const preview: Preview = {
         excludeDecorators: true,
       },
       argTypes: {
-        sort: "requiredFirst",
+        sort: "alpha",
       },
       controls: {
-        sort: "requiredFirst",
+        sort: "alpha",
       },
     },
   },
