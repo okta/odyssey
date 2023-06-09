@@ -139,6 +139,7 @@ export const IconButton: StoryObj<MenuButtonProps> = {
       <MenuItem key="3">Launch</MenuItem>,
     ],
     buttonLabel: "",
-    endIcon: <OverflowVerticalIcon />,
+    buttonEndIcon: <OverflowVerticalIcon />,
+    ariaLabel: "Add",
   },
 };

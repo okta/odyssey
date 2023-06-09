@@ -13,15 +13,26 @@
         "comment": "Inverse text color typically used on a colorful background",
         "value": "{hue.neutral.white.value}"
       },
-      "action": {
-        "comment": "Branded text color, primarily used within button",
-        "value": "{palette.primary.main.value}"
-      },
       "sub": {
         "comment": "Text color for subordinate text like captions",
         "value": "{hue.neutral.600.value}"
       },
-      "danger": { "value": "{palette.danger.main.value}" }
+      "disabled": {
+        "value": "{hue.neutral.300.value}"
+      },
+      "action": {
+        "comment": "Branded text color, primarily used within button",
+        "value": "{palette.primary.text.value}"
+      },
+      "danger": {
+        "value": "{palette.danger.text.value}"
+      },
+      "success": {
+        "value": "{palette.success.text.value}"
+      },
+      "warning": {
+        "value": "{palette.warning.text.value}"
+      }
     },
     "family": {
       "body": {
