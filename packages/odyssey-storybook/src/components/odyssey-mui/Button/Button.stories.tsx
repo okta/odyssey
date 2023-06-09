@@ -138,7 +138,8 @@ export const ButtonWithIcon: StoryObj<ButtonProps> = {
 export const IconOnly: StoryObj<ButtonProps> = {
   args: {
     startIcon: <AddIcon />,
-    text: undefined, // FIXME
-    tooltipText: "Add crew", // FIXME
+    ariaLabel: "Add",
+    text: undefined,
+    tooltipText: "Add crew",
   },
 };
