@@ -271,10 +271,10 @@ function EnhancedTable() {
                   selected={isItemSelected}
                 >
                   <TableCell>
-                    <Checkbox
-                      ariaLabelledBy={labelId}
+                    {/* <Checkbox
+                      ariaLabel={labelId}
                       isChecked={isItemSelected}
-                    />
+                    /> */}
                   </TableCell>
                   <TableCell id={labelId}>{row.name}</TableCell>
                   <TableCell variant="number">

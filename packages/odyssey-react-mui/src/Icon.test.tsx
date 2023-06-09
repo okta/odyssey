@@ -40,12 +40,4 @@ describe("Icon", () => {
       <Icon name={name} children="child" />
     );
   });
-
-  /* NOTE: the DOM output here is valid and a11y but we're seeing a violation:
-     https://dequeuniversity.com/rules/axe/4.2/svg-img-alt
-
-  a11yCheck(() => {
-    const ret = render(<Icon name={name} titleAccess={title} />)
-  });
-  */
 });

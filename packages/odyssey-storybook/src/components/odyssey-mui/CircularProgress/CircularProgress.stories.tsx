@@ -31,11 +31,14 @@ const storybookMeta: Meta<CircularProgressProps> = {
 export default storybookMeta;
 
 export const Indeterminate: StoryObj<CircularProgressProps> = {
-  args: {},
+  args: {
+    ariaLabel: "progress",
+  },
 };
 
 export const Determinate: StoryObj<CircularProgressProps> = {
   args: {
     value: 70,
+    ariaLabel: "progress",
   },
 };

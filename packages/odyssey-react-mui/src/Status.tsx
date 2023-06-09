@@ -16,14 +16,19 @@ export type StatusProps = {
   /**
    * Determine the color and icon of the alert
    */
-  severity: "default" | "error" | "info" | "success" | "warning";
+  severity: "default" | "error" | "success" | "warning";
 
   /**
    * The text content of the status
    */
   label: string;
+
+  /**
+   * The style of indicator
+   */
+  variant?: "lamp" | "pill";
 };
 
-export const Status = ({ severity, label }: StatusProps) => (
-  <Chip label={label} color={severity} variant="status" />
+export const Status = ({ severity, label, variant = "lamp" }: StatusProps) => (
+  <Chip label={label} color={severity} variant={variant} />
 );

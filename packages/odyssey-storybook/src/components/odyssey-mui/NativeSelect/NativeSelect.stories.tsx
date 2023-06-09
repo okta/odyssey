@@ -43,6 +43,7 @@ const storybookMeta: Meta<NativeSelectProps> = {
     hint: "Select your destination in the Sol system.",
     isOptional: false,
     label: "Destination",
+    id: "SolarDestination",
   },
   decorators: [MuiThemeDecorator],
 };
@@ -53,6 +54,7 @@ const Template: StoryObj<NativeSelectProps> = {
   render: function C(args) {
     return (
       <NativeSelect
+        id={args.id}
         label={args.label}
         hint={args.hint}
         defaultValue={args.defaultValue}
@@ -80,6 +82,7 @@ const GroupTemplate: StoryObj<NativeSelectProps> = {
   render: function C(args) {
     return (
       <NativeSelect
+        id={args.id}
         label={args.label}
         hint={args.hint}
         errorMessage={args.errorMessage}

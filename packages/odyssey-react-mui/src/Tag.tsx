@@ -11,25 +11,29 @@
  */
 
 import { Chip, ChipProps } from "@mui/material";
-import { memo, useContext } from "react";
+import { memo, ReactElement, useContext } from "react";
 import { TagListContext } from "./TagListContext";
+import { Icon } from "./Icon";
 
 export type TagProps = {
+  icon?: ReactElement<typeof Icon>;
   isDisabled?: boolean;
   label: string;
   onClick?: ChipProps["onClick"];
   onRemove?: ChipProps["onDelete"];
 };
 
-const Tag = ({ isDisabled, label, onClick, onRemove }: TagProps) => {
+const Tag = ({ icon, isDisabled, label, onClick, onRemove }: TagProps) => {
   const { chipElementType } = useContext(TagListContext);
 
   return (
     <Chip
-      label={label}
       clickable={onClick ? true : false}
       component={chipElementType}
       disabled={isDisabled}
+      aria-disabled={isDisabled}
+      icon={icon}
+      label={label}
       onClick={onClick}
       onDelete={onRemove}
     />

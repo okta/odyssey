@@ -17,7 +17,6 @@ import {
   TabsProps,
   Tabs,
 } from "@okta/odyssey-react-mui";
-import { useMemo } from "react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {
@@ -44,45 +43,43 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
 
 export default storybookMeta;
 
-const ExampleTabContent = ({ label }: { label: string }) => {
-  return useMemo(() => <>{`Information about ${label}`}</>, [label]);
-};
-
 const DefaultTemplate: StoryObj<TabItemProps> = {
   render: function C(args) {
+    const tabs: TabItemProps[] = [];
+
+    tabs.push({
+      label: "Planets",
+      value: "planets",
+      children: "Information about Planets.",
+    });
+    tabs.push({
+      label: "Moons",
+      value: "moons",
+      children: "Information about Moons.",
+    });
+
+    if (args?.label) {
+      tabs.push({
+        label: args.label,
+        value: args.value,
+        isDisabled: args.isDisabled,
+        startIcon: args.startIcon,
+        children: args.children,
+      });
+    }
+
     return (
-      <Tabs
-        initialValue="planets"
-        ariaLabel="basic tabs example"
-        tabs={[
-          {
-            label: "Planets",
-            value: "planets",
-            children: "Information about Planets.",
-          },
-          {
-            label: "Moons",
-            value: "moons",
-            children: "Information about Moons.",
-          },
-          {
-            label: args.label,
-            value: args.value,
-            isDisabled: args.isDisabled,
-            startIcon: args.startIcon,
-            children: <ExampleTabContent label={args.label} />,
-          },
-        ]}
-      />
+      <Tabs initialValue="planets" ariaLabel="basic tabs example" tabs={tabs} />
     );
   },
 };
 
+const ExampleTabContent = ({ label }: { label: string }) => {
+  return <>Information about {label}</>;
+};
+
 export const Default: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
-  args: {
-    //
-  },
 };
 
 export const Disabled: StoryObj<TabItemProps> = {
@@ -98,5 +95,6 @@ export const Icons: StoryObj<TabItemProps> = {
   args: {
     startIcon: <FavoriteIcon />,
     label: "Icon Tab",
+    children: <ExampleTabContent label="Icon Tab" />,
   },
 };

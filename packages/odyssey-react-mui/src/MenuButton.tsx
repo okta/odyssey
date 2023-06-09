@@ -45,6 +45,10 @@ export type MenuButtonProps = {
    * The id of the `input` element.
    */
   id?: string;
+  /**
+   * aria-label to describe the button when the button label is empty, e.g., an Icon only Button
+   */
+  ariaLabel?: string;
 };
 
 const MenuButton = ({
@@ -53,6 +57,7 @@ const MenuButton = ({
   buttonEndIcon = <ChevronDownIcon />,
   buttonVariant = "secondary",
   id: idOverride,
+  ariaLabel,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -83,6 +88,7 @@ const MenuButton = ({
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         text={buttonLabel}
+        ariaLabel={ariaLabel}
         variant={buttonVariant}
       />
       <Menu
