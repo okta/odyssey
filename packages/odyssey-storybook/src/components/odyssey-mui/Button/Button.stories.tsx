@@ -63,8 +63,7 @@ export const ButtonPrimary: StoryObj<ButtonProps> = {
   play: async ({ args, canvasElement, step }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByText("Add crew");
-    await step("hover and click", async (ctx) => {
-      console.log(ctx);
+    await step("hover and click", async () => {
       await userEvent.hover(button);
       await userEvent.click(button);
       await expect(args.onClick).toHaveBeenCalledTimes(1);
@@ -138,7 +137,6 @@ export const ButtonWithIcon: StoryObj<ButtonProps> = {
 export const IconOnly: StoryObj<ButtonProps> = {
   args: {
     startIcon: <AddIcon />,
-    ariaLabel: "Add",
     text: undefined,
     tooltipText: "Add crew",
   },
