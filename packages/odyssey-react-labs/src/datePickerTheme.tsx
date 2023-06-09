@@ -302,8 +302,6 @@ export const datePickerTheme: ThemeOptions = {
     },
     PrivatePickersYear: {
       styleOverrides: {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error ts(2322)
         button: ({ theme }) => [
           yearStyles.default({ theme }),
           {
