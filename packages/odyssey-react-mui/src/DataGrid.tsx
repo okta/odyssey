@@ -13,10 +13,7 @@
 import { Typography } from "@mui/material";
 import MaterialReactTable, {
   MRT_ColumnFiltersState,
-  MRT_FilterOptionMenu,
-  MRT_FullScreenToggleButton,
   MRT_RowSelectionState,
-  MRT_ShowHideColumnsButton,
   MRT_TableInstance,
   MRT_Virtualizer,
 } from "material-react-table";
