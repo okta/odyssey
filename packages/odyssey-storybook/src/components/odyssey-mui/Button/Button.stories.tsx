@@ -12,31 +12,13 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Button, Icon, iconDictionary } from "@okta/odyssey-react-mui";
+import { Button } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
+import icons from "../../../../.storybook/components/iconUtils";
 
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
-
-const iconOptions = ["None", ...Object.keys(iconDictionary)];
-const iconMapping = Object.fromEntries(
-  iconOptions.map((value) => [
-    value,
-    value !== "None" ? (
-      <Icon
-        name={value as keyof typeof iconDictionary}
-        label={value}
-        size="medium"
-      />
-    ) : null,
-  ])
-);
-
-type ButtonStoryProps = Omit<ButtonProps, "startIcon" | "endIcon"> & {
-  startIcon: keyof typeof iconDictionary;
-  endIcon: keyof typeof iconDictionary;
-};
 
 const storybookMeta: Meta<ButtonProps> = {
   title: "MUI Components/Button",
@@ -77,9 +59,11 @@ const storybookMeta: Meta<ButtonProps> = {
       },
     },
     startIcon: {
-      control: { type: "select" },
-      options: iconOptions,
-      mapping: iconMapping,
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
       description: "An optional icon to display at the start of the button",
       table: {
         type: {
@@ -89,9 +73,7 @@ const storybookMeta: Meta<ButtonProps> = {
       },
     },
     endIcon: {
-      control: { type: "select" },
-      options: iconOptions,
-      mapping: iconMapping,
+      control: { type: "obj" },
       description: "An optional icon to display at the end of the button",
       table: {
         type: {
@@ -167,7 +149,7 @@ const storybookMeta: Meta<ButtonProps> = {
 
 export default storybookMeta;
 
-export const ButtonPrimary: StoryObj<ButtonStoryProps> = {
+export const ButtonPrimary: StoryObj<ButtonProps> = {
   name: "Primary",
   play: async ({ args, canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -181,7 +163,7 @@ export const ButtonPrimary: StoryObj<ButtonStoryProps> = {
   },
 };
 
-export const ButtonSecondary: StoryObj<ButtonStoryProps> = {
+export const ButtonSecondary: StoryObj<ButtonProps> = {
   name: "Secondary",
   args: {
     text: "Add crew",
@@ -189,7 +171,7 @@ export const ButtonSecondary: StoryObj<ButtonStoryProps> = {
   },
 };
 
-export const ButtonDanger: StoryObj<ButtonStoryProps> = {
+export const ButtonDanger: StoryObj<ButtonProps> = {
   name: "Danger",
   args: {
     text: "Add crew",
@@ -197,7 +179,7 @@ export const ButtonDanger: StoryObj<ButtonStoryProps> = {
   },
 };
 
-export const ButtonFloating: StoryObj<ButtonStoryProps> = {
+export const ButtonFloating: StoryObj<ButtonProps> = {
   name: "Floating",
   args: {
     text: "Add crew",
@@ -205,7 +187,7 @@ export const ButtonFloating: StoryObj<ButtonStoryProps> = {
   },
 };
 
-export const ButtonSmall: StoryObj<ButtonStoryProps> = {
+export const ButtonSmall: StoryObj<ButtonProps> = {
   name: "Small",
   args: {
     text: "Add crew",
@@ -213,7 +195,7 @@ export const ButtonSmall: StoryObj<ButtonStoryProps> = {
   },
 };
 
-export const ButtonMedium: StoryObj<ButtonStoryProps> = {
+export const ButtonMedium: StoryObj<ButtonProps> = {
   name: "Medium",
   args: {
     text: "Add crew",
@@ -221,7 +203,7 @@ export const ButtonMedium: StoryObj<ButtonStoryProps> = {
   },
 };
 
-export const ButtonLarge: StoryObj<ButtonStoryProps> = {
+export const ButtonLarge: StoryObj<ButtonProps> = {
   name: "Large",
   args: {
     text: "Add crew",
@@ -229,7 +211,7 @@ export const ButtonLarge: StoryObj<ButtonStoryProps> = {
   },
 };
 
-export const ButtonFullWidth: StoryObj<ButtonStoryProps> = {
+export const ButtonFullWidth: StoryObj<ButtonProps> = {
   name: "Full-width",
   args: {
     text: "Add crew",
@@ -237,7 +219,7 @@ export const ButtonFullWidth: StoryObj<ButtonStoryProps> = {
   },
 };
 
-export const ButtonPrimaryDisabled: StoryObj<ButtonStoryProps> = {
+export const ButtonPrimaryDisabled: StoryObj<ButtonProps> = {
   name: "Disabled",
   parameters: {
     docs: {
@@ -253,15 +235,15 @@ export const ButtonPrimaryDisabled: StoryObj<ButtonStoryProps> = {
   },
 };
 
-export const ButtonWithIcon: StoryObj<ButtonStoryProps> = {
+export const ButtonWithIcon: StoryObj<ButtonProps> = {
   name: "Icon",
   args: {
     text: "Add crew",
-    startIcon: "add",
+    startIcon: icons["add"],
   },
 };
 
-export const IconOnly: StoryObj<ButtonStoryProps> = {
+export const IconOnly: StoryObj<ButtonProps> = {
   name: "Icon-only",
   parameters: {
     docs: {
@@ -272,7 +254,7 @@ export const IconOnly: StoryObj<ButtonStoryProps> = {
     },
   },
   args: {
-    startIcon: "add",
+    startIcon: icons["add"],
     text: undefined, // FIXME
     tooltipText: "Add crew", // FIXME
   },
