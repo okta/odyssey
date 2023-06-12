@@ -132,7 +132,6 @@ const DataGrid = <TData extends DefaultMaterialReactTableData>({
     [fetchMoreData, totalFetchedRows]
   );
 
-  // table: MRT_TableInstance<TData>
   const renderTopToolbarCustomActions = useCallback<
     Exclude<
       MaterialReactTableProps<TData>["renderTopToolbarCustomActions"],
