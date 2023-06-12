@@ -11,6 +11,7 @@
  */
 
 import { createTheme } from "@mui/material/styles";
+import * as Tokens from "@okta/odyssey-design-tokens";
 
 import { components } from "./components";
 import { mixins } from "./mixins";
@@ -22,10 +23,12 @@ import "./components.types";
 import "./mixins.types";
 import "./palette.types";
 import "./typography.types";
-import { DesignTokensOverride } from ".";
 
-export const createOdysseyMuiTheme = (odysseyTokens: DesignTokensOverride) => {
-  return createTheme({
+export type DesignTokens = typeof Tokens;
+export type DesignTokensOverride = Partial<typeof Tokens>;
+
+export const createOdysseyMuiTheme = (odysseyTokens: DesignTokens) =>
+  createTheme({
     components: components(odysseyTokens),
     mixins: mixins(odysseyTokens),
     palette: palette(odysseyTokens),
@@ -33,4 +36,3 @@ export const createOdysseyMuiTheme = (odysseyTokens: DesignTokensOverride) => {
     spacing: spacing(odysseyTokens),
     typography: typography(odysseyTokens),
   });
-};

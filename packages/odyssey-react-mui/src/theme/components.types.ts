@@ -47,7 +47,8 @@ declare module "@mui/material/Button" {
 declare module "@mui/material/Chip" {
   interface ChipPropsVariantOverrides {
     // Enable Odyssey variant for Status component
-    status: true;
+    lamp: true;
+    pill: true;
   }
 }
 

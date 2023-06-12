@@ -16,13 +16,15 @@
     },
     "radius": {
       "main": { "value": "4px" },
-      "outer": { "value": "6px" }
+      "outer": { "value": "6px" },
+      "round": { "value": "1.5em" }
     },
     "style": {
       "main": { "value": "solid" }
     },
     "width": {
-      "main": { "value": "1px" }
+      "main": { "value": "1px" },
+      "heavy": { "value": "1.5px" }
     }
   }
 }

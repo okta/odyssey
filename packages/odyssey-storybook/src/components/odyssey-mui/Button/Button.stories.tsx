@@ -254,6 +254,7 @@ export const IconOnly: StoryObj<ButtonProps> = {
     },
   },
   args: {
+    ariaLabel: "Add",
     startIcon: icons["add"],
     text: undefined, // FIXME
     tooltipText: "Add crew", // FIXME

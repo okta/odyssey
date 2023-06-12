@@ -11,10 +11,11 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import { DesignTokensOverride } from ".";
+
+import { DesignTokens } from "./theme";
 
 export const typography = (
-  odysseyTokens: DesignTokensOverride
+  odysseyTokens: DesignTokens
 ): ThemeOptions["typography"] => {
   return {
     htmlFontSize: 16,

@@ -11,11 +11,10 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import { DesignTokensOverride } from ".";
 
-export const shape = (
-  odysseyTokens: DesignTokensOverride
-): ThemeOptions["shape"] => {
+import { DesignTokens } from "./theme";
+
+export const shape = (odysseyTokens: DesignTokens): ThemeOptions["shape"] => {
   // Strip units from BorderRadiusBase to accommodate MUI's typing
   const NumericalBorderRadiusBase =
     typeof odysseyTokens.BorderRadiusMain === "string"

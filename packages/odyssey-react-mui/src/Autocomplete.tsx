@@ -122,6 +122,8 @@ const Autocomplete = <
 
   return (
     <MuiAutocomplete
+      // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
+      aria-disabled={isDisabled}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
       loading={isLoading}

@@ -178,7 +178,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/eyes-storybook@npm:^3.31.2":
+"@applitools/eyes-storybook@npm:^3.34.2":
   version: 3.34.2
   resolution: "@applitools/eyes-storybook@npm:3.34.2"
   dependencies:
@@ -4436,7 +4436,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-storybook@workspace:packages/odyssey-storybook"
   dependencies:
-    "@applitools/eyes-storybook": ^3.31.2
+    "@applitools/eyes-storybook": ^3.34.2
     "@babel/core": ^7.19.3
     "@emotion/react": ^11.10.8
     "@emotion/styled": ^11.10.8
