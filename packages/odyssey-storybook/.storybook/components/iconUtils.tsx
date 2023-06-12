@@ -10,13 +10,89 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { iconDictionary, Icon } from "@okta/odyssey-react-mui";
+import {
+  AddCircleIcon,
+  AddIcon,
+  AlertCircleFilledIcon,
+  AlertCircleIcon,
+  AlertTriangleFilledIcon,
+  AnchorIcon,
+  ArrowDownIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowUpDownIcon,
+  ArrowUpIcon,
+  CalendarIcon,
+  CheckCircleFilledIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  CloseCircleFilledIcon,
+  CloseIcon,
+  CopyIcon,
+  DeleteIcon,
+  DownloadIcon,
+  DragHandleIcon,
+  EditIcon,
+  ExternalLinkIcon,
+  EyeOffIcon,
+  EyeIcon,
+  FilterIcon,
+  GlobeIcon,
+  HomeIcon,
+  InformationCircleFilledIcon,
+  InformationCircleIcon,
+  NotificationIcon,
+  OverflowVerticalIcon,
+  QuestionCircleFilledIcon,
+  QuestionCircleIcon,
+  SearchIcon,
+  SettingsIcon,
+  SubtractIcon,
+  UserGroupIcon,
+  UserIcon,
+} from "@okta/odyssey-react-mui";
+import { createElement } from "react";
 
-const icons = {} as { [key in keyof typeof iconDictionary]: JSX.Element };
-
-Object.keys(iconDictionary).forEach((key) => {
-  const iconKey = key as keyof typeof iconDictionary;
-  icons[iconKey] = <Icon name={iconKey} label={iconKey} size="medium" />;
-});
-
-export default icons;
+export const icons = [
+  AddCircleIcon,
+  AddIcon,
+  AlertCircleFilledIcon,
+  AlertCircleIcon,
+  AlertTriangleFilledIcon,
+  AnchorIcon,
+  ArrowDownIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowUpDownIcon,
+  ArrowUpIcon,
+  CalendarIcon,
+  CheckCircleFilledIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  CloseCircleFilledIcon,
+  CloseIcon,
+  CopyIcon,
+  DeleteIcon,
+  DownloadIcon,
+  DragHandleIcon,
+  EditIcon,
+  ExternalLinkIcon,
+  EyeOffIcon,
+  EyeIcon,
+  FilterIcon,
+  GlobeIcon,
+  HomeIcon,
+  InformationCircleFilledIcon,
+  InformationCircleIcon,
+  NotificationIcon,
+  OverflowVerticalIcon,
+  QuestionCircleFilledIcon,
+  QuestionCircleIcon,
+  SearchIcon,
+  SettingsIcon,
+  SubtractIcon,
+  UserGroupIcon,
+  UserIcon,
+].map((iconComponent) => createElement(iconComponent));

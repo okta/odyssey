@@ -15,7 +15,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
-import icons from "../../../../.storybook/components/iconUtils";
+import { icons } from "../../../../.storybook/components/iconUtils";
 
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
