@@ -2302,7 +2302,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.10.4, @emotion/react@npm:^11.10.8":
+"@emotion/react@npm:^11.10.4":
   version: 11.11.0
   resolution: "@emotion/react@npm:11.11.0"
   dependencies:
@@ -2343,7 +2343,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^11.10.4, @emotion/styled@npm:^11.10.8":
+"@emotion/styled@npm:^11.10.4":
   version: 11.11.0
   resolution: "@emotion/styled@npm:11.11.0"
   dependencies:
@@ -4439,8 +4439,6 @@ __metadata:
   dependencies:
     "@applitools/eyes-storybook": ^3.34.2
     "@babel/core": ^7.19.3
-    "@emotion/react": ^11.10.8
-    "@emotion/styled": ^11.10.8
     "@okta/odyssey-babel-loader": "workspace:*"
     "@okta/odyssey-design-tokens": "workspace:*"
     "@okta/odyssey-lifecycle": "workspace:*"
