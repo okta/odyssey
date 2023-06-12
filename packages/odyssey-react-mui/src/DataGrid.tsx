@@ -12,10 +12,10 @@
 
 import { Typography } from "@mui/material";
 import MaterialReactTable, {
-  MRT_ColumnFiltersState,
-  MRT_RowSelectionState,
-  MRT_TableInstance,
-  MRT_Virtualizer,
+  type MRT_ColumnFiltersState,
+  type MRT_RowSelectionState,
+  type MRT_TableInstance,
+  type MRT_Virtualizer,
 } from "material-react-table";
 import {
   FunctionComponent,

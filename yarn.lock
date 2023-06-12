@@ -4414,7 +4414,7 @@ __metadata:
     jest: ^29.3.1
     jest-axe: ^5.0.1
     jest-environment-jsdom: ^29.0.3
-    material-react-table: ^1.11.3
+    material-react-table: ^1.12.1
     npm-run-all: ^4.1.5
     properties: 1.2.1
     react: ^17.0.2
@@ -6016,15 +6016,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-table@npm:8.9.1":
-  version: 8.9.1
-  resolution: "@tanstack/react-table@npm:8.9.1"
+"@tanstack/react-table@npm:8.9.2":
+  version: 8.9.2
+  resolution: "@tanstack/react-table@npm:8.9.2"
   dependencies:
-    "@tanstack/table-core": 8.9.1
+    "@tanstack/table-core": 8.9.2
   peerDependencies:
     react: ">=16"
     react-dom: ">=16"
-  checksum: 16d044c382598aad3c984d8e175183c5fd48093249dfb51ee592d2f1bb16e253aa437e0834bf9d27d69043493feeb22a5185b3226c704b99e13c45950cb82141
+  checksum: 66473ee4f34c7ade6a269c6821dadf228a04e9ce76bedfa6a30bb48608f26023bb2c2b9a45cc3f2323212d676bb26f7a820cb3328c8cd37bd7369d5651fe9628
   languageName: node
   linkType: hard
 
@@ -6039,10 +6039,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/table-core@npm:8.9.1":
-  version: 8.9.1
-  resolution: "@tanstack/table-core@npm:8.9.1"
-  checksum: b9a514cfeb78b2ebece5116188ab929d0b0b72b6abfe6144c2b1dd68e32faafba5295b2b5dfefa9d3a0cf78dd0f20e7c313ff2dbdf013ee98232e856a549654f
+"@tanstack/table-core@npm:8.9.2":
+  version: 8.9.2
+  resolution: "@tanstack/table-core@npm:8.9.2"
+  checksum: eac43f6a95a08e2edae3f66b31e78b50b826507808ba32aa2fc2fae495aa4d9cdf97a7a1b745c647fdd9ec0c2559971e26df23a98720e0a959681be1caa35f26
   languageName: node
   linkType: hard
 
@@ -16761,12 +16761,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"material-react-table@npm:^1.11.3":
-  version: 1.11.3
-  resolution: "material-react-table@npm:1.11.3"
+"material-react-table@npm:^1.12.1":
+  version: 1.12.1
+  resolution: "material-react-table@npm:1.12.1"
   dependencies:
     "@tanstack/match-sorter-utils": 8.8.4
-    "@tanstack/react-table": 8.9.1
+    "@tanstack/react-table": 8.9.2
     "@tanstack/react-virtual": 3.0.0-beta.54
     highlight-words: 1.2.2
   peerDependencies:
@@ -16776,7 +16776,7 @@ __metadata:
     "@mui/material": ">=5"
     react: ">=17.0"
     react-dom: ">=17.0"
-  checksum: 9ddfb805186932459d370b6cab8d71be92875a3207b646ec7d4f053973fc170b4d471b6c866b3c2321e0863a0beb9588709c9566896926c7733d249ee7941b74
+  checksum: 861b8ce34e290158c96d0827cf245a3e1442dd5c8c33c606334cc556afedacbb5c32eebce0fa3c3b13c5c263c080a157094b35f69195aeb6bcdcb2893a394029
   languageName: node
   linkType: hard
 
