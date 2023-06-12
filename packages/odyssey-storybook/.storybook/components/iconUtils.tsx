@@ -54,7 +54,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import { createElement } from "react";
 
-export const icons = [
+export const icons: { [key: string]: JSX.Element } = [
   AddCircleIcon,
   AddIcon,
   AlertCircleFilledIcon,
@@ -95,4 +95,8 @@ export const icons = [
   SubtractIcon,
   UserGroupIcon,
   UserIcon,
-].map((iconComponent) => createElement(iconComponent));
+].reduce((acc: { [key: string]: JSX.Element }, iconComponent) => {
+  const iconName = iconComponent.displayName || iconComponent.name;
+  acc[iconName] = createElement(iconComponent) as JSX.Element;
+  return acc;
+}, {});

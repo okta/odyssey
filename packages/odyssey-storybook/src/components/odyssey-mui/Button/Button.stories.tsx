@@ -12,7 +12,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Button } from "@okta/odyssey-react-mui";
+import { Button, AddIcon } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 import { icons } from "../../../../.storybook/components/iconUtils";
@@ -73,7 +73,11 @@ const storybookMeta: Meta<ButtonProps> = {
       },
     },
     endIcon: {
-      control: { type: "obj" },
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
       description: "An optional icon to display at the end of the button",
       table: {
         type: {
@@ -239,7 +243,7 @@ export const ButtonWithIcon: StoryObj<ButtonProps> = {
   name: "Icon",
   args: {
     text: "Add crew",
-    startIcon: icons["add"],
+    startIcon: <AddIcon />,
   },
 };
 
@@ -255,7 +259,7 @@ export const IconOnly: StoryObj<ButtonProps> = {
   },
   args: {
     ariaLabel: "Add",
-    startIcon: icons["add"],
+    startIcon: <AddIcon />,
     text: undefined, // FIXME
     tooltipText: "Add crew", // FIXME
   },
