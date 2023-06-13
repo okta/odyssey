@@ -1062,9 +1062,15 @@ export const components = (
     MuiDialogActions: {
       styleOverrides: {
         root: ({ theme }) => ({
+          flexWrap: "wrap",
+          gap: odysseyTokens.Spacing2,
           paddingBlockStart: theme.spacing(4),
           paddingBlockEnd: theme.spacing(6),
           paddingInline: theme.spacing(6),
+
+          "& > *": {
+            margin: "0 !important",
+          },
         }),
       },
     },
