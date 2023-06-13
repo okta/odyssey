@@ -69,6 +69,32 @@ export const List: StoryObj<TagProps> = {
   },
 };
 
+export const ListWrappable: StoryObj<TagProps> = {
+  render: function C(args) {
+    return (
+      <TagList isWrappable>
+        <Tag {...args} />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+        <Tag label="Another tag" />
+      </TagList>
+    );
+  },
+  args: {
+    label: "Starship",
+  },
+};
+
 export const Icon: StoryObj<TagProps> = {
   args: {
     label: "Crew",
