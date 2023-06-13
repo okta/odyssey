@@ -1188,8 +1188,14 @@ export const components = (
             },
         }),
         label: {
+          display: "inline-flex",
+
           "&:not(:first-child)": {
             marginInlineStart: odysseyTokens.Spacing2,
+          },
+
+          "& > *": {
+            marginInlineStart: odysseyTokens.Spacing1,
           },
         },
         asterisk: () => ({
