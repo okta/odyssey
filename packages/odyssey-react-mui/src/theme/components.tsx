@@ -1227,13 +1227,19 @@ export const components = (
     MuiFormLabel: {
       styleOverrides: {
         root: {
+          alignItems: "center",
           color: odysseyTokens.TypographyColorBody,
+          display: "inline-flex",
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           fontSize: "1rem",
           fontWeight: 600,
           marginBottom: odysseyTokens.Spacing2,
           "&.Mui-focused, &.Mui-error, &.Mui-disabled": {
             color: odysseyTokens.TypographyColorBody,
+          },
+          "& > .MuiTypography-root": {
+            margin: "reset",
+            marginInlineStart: odysseyTokens.Spacing1,
           },
         },
       },
