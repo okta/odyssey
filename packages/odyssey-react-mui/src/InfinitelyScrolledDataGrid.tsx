@@ -27,7 +27,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 export type DefaultMaterialReactTableData = Record<string, unknown>;
 
@@ -130,11 +130,23 @@ const InfinitelyScrolledDataGrid = <
     () =>
       fetchMoreData ? (
         <Typography>
-          {t("datagrid.fetchedrows.text", String(totalFetchedRows))}
+          <Trans
+            count={totalFetchedRows}
+            i18nKey="datagrid.fetchedrows.text"
+            values={{
+              totalRows: totalFetchedRows,
+            }}
+          />
         </Typography>
       ) : (
         <Typography>
-          {t("datagrid.rows.text", String(totalFetchedRows))}
+          <Trans
+            count={totalFetchedRows}
+            i18nKey="datagrid.rows.text"
+            values={{
+              totalRows: totalFetchedRows,
+            }}
+          />
         </Typography>
       ),
     [fetchMoreData, totalFetchedRows]
