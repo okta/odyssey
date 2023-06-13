@@ -126,6 +126,7 @@ export const components = (
             position: "relative",
             justifyContent: "center",
             alignItems: "center",
+            borderRadius: 0,
           }),
           ...(ownerState.variant === "infobox" && {
             borderRadius: odysseyTokens.BorderRadiusOuter,
