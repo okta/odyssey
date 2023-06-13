@@ -101,6 +101,8 @@ export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
 export { deepmerge, visuallyHidden } from "@mui/utils";
 
+export type { MRT_ColumnDef as DataGridColumn } from "material-react-table";
+
 export * from "./Autocomplete";
 export * from "./Banner";
 export * from "./Button";
@@ -108,12 +110,12 @@ export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
 export * from "./createUniqueId";
-export * from "./DataGrid";
 export * from "./Dialog";
 export * from "./Fieldset";
 export * from "./Form";
 export * from "./Icon";
 export * from "./iconDictionary";
+export * from "./InfinitelyScrolledDataGrid";
 export * from "./Infobox";
 export * from "./Link";
 export * from "./MenuButton";
@@ -129,13 +131,14 @@ export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
+export * from "./StaticDataGrid";
 export * from "./Status";
 export * from "./Tabs";
 export * from "./Tag";
 export * from "./TagList";
 export * from "./TextField";
 export * from "./theme";
-export * from "./Tooltip";
 export * from "./Toast";
 export * from "./ToastStack";
+export * from "./Tooltip";
 export * from "./useUniqueId";

@@ -13,18 +13,17 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
-  DataGrid,
   DataGridColumn,
-  DataGridProps,
-  Link,
+  InfinitelyScrolledDataGrid,
+  InfinitelyScrolledDataGridProps,
 } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 const storybookMeta: Meta = {
-  title: "MUI Components/Data Grid",
-  component: DataGrid,
+  title: "MUI Components/Data Grid/Infinitely Scrolled",
+  component: InfinitelyScrolledDataGrid,
   argTypes: {
     columns: {
       control: "array",
@@ -506,7 +505,7 @@ const data: Person[] = [
   },
 ];
 
-export const Basic: StoryObj<DataGridProps<Person>> = {
+export const BasicUsage: StoryObj<InfinitelyScrolledDataGridProps<Person>> = {
   args: {
     columns,
     data,
@@ -514,27 +513,36 @@ export const Basic: StoryObj<DataGridProps<Person>> = {
   },
 };
 
-export const InfiniteScroll: StoryObj<DataGridProps<Person>> = {
-  args: {
-    columns,
-    data,
-    getRowId: ({ id }: { id: string }) => id,
-  },
-  render: function C(args) {
-    const countRef = useRef(15);
-    const [data, setData] = useState(args.data.slice(0, countRef.current));
+export const InfiniteScroll: StoryObj<InfinitelyScrolledDataGridProps<Person>> =
+  {
+    args: {
+      columns,
+      data,
+      getRowId: ({ id }: { id: string }) => id,
+    },
+    render: function C(args) {
+      const countRef = useRef(15);
+      const [data, setData] = useState(args.data.slice(0, countRef.current));
 
-    const fetchMoreData = useCallback(() => {
-      countRef.current = countRef.current + 5;
+      const fetchMoreData = useCallback(() => {
+        countRef.current = countRef.current + 5;
 
-      setData(args.data.slice(0, Math.min(countRef.current, args.data.length)));
-    }, [args.data]);
+        setData(
+          args.data.slice(0, Math.min(countRef.current, args.data.length))
+        );
+      }, [args.data]);
 
-    return <DataGrid {...args} data={data} fetchMoreData={fetchMoreData} />;
-  },
-};
+      return (
+        <InfinitelyScrolledDataGrid
+          {...args}
+          data={data}
+          fetchMoreData={fetchMoreData}
+        />
+      );
+    },
+  };
 
-export const Selection: StoryObj<DataGridProps<Person>> = {
+export const Selection: StoryObj<InfinitelyScrolledDataGridProps<Person>> = {
   args: {
     columns,
     data,
@@ -543,19 +551,20 @@ export const Selection: StoryObj<DataGridProps<Person>> = {
   },
 };
 
-export const CustomToolbar: StoryObj<DataGridProps<Person>> = {
-  args: {
-    columns,
-    data,
-    getRowId: ({ id }: { id: string }) => id,
-    ToolbarButtons: ({ table }) => (
-      <Button
-        onClick={() => console.info(table.getState())}
-        text="New Action"
-      />
-    ),
-  },
-};
+export const CustomToolbar: StoryObj<InfinitelyScrolledDataGridProps<Person>> =
+  {
+    args: {
+      columns,
+      data,
+      getRowId: ({ id }: { id: string }) => id,
+      ToolbarButtons: ({ table }) => (
+        <Button
+          onClick={() => console.info(table.getState())}
+          text="New Action"
+        />
+      ),
+    },
+  };
 
 // const reportColumns: DataGridColumn<any>[] = [
 //   {
