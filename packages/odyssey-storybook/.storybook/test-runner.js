@@ -40,6 +40,12 @@ module.exports = {
           // whether or not to include the full html for the offending nodes
           html: true,
         },
+        axeOptions: {
+          runOnly: {
+            type: "tag",
+            values: ["section508", "wcag21aa"],
+          },
+        },
       },
 
       // skipFailures

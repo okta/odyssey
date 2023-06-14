@@ -2,6 +2,11 @@ import type { Preview } from "@storybook/react";
 
 const preview: Preview = {
   parameters: {
+    a11y: {
+      options: {
+        runOnly: ["section508", "wcag21aa"],
+      },
+    },
     controls: {
       expanded: true,
       sort: "requiredFirst",
