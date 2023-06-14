@@ -93,7 +93,7 @@ const Button = ({
   return (
     <>
       {tooltipText && (
-        <Tooltip ariaType="description" placement="top" text={tooltipText}>
+        <Tooltip ariaType="description" text={tooltipText}>
           {button}
         </Tooltip>
       )}

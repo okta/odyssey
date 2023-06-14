@@ -20,7 +20,9 @@ import {
   MenuItem,
   useUniqueId,
 } from "./";
-import { memo, MouseEvent, ReactElement, useMemo, useState } from "react";
+import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
+
+import { MenuContext, MenuContextType } from "./MenuContext";
 
 export type MenuButtonProps = {
   /**
@@ -30,10 +32,6 @@ export type MenuButtonProps = {
     ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
   >;
   /**
-   * The end Icon on the trigggering Button
-   */
-  buttonEndIcon?: ReactElement;
-  /**
    * The label on the triggering Button
    */
   buttonLabel?: string;
@@ -41,6 +39,10 @@ export type MenuButtonProps = {
    * The variant of the triggering Button
    */
   buttonVariant?: ButtonProps["variant"];
+  /**
+   * The end Icon on the trigggering Button
+   */
+  endIcon?: ReactElement;
   /**
    * The id of the `input` element.
    */
@@ -53,23 +55,23 @@ export type MenuButtonProps = {
 
 const MenuButton = ({
   buttonLabel = "",
-  children,
-  buttonEndIcon = <ChevronDownIcon />,
   buttonVariant = "secondary",
+  children,
+  endIcon = <ChevronDownIcon />,
   id: idOverride,
   ariaLabel,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const open = Boolean(anchorEl);
+  const isOpen = Boolean(anchorEl);
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
+  const closeMenu = useCallback<MenuContextType["closeMenu"]>(() => {
     setAnchorEl(null);
-  };
+  }, []);
+
+  const openMenu = useCallback<MenuContextType["openMenu"]>((event) => {
+    setAnchorEl(event.currentTarget);
+  }, []);
 
   const uniqueId = useUniqueId(idOverride);
 
@@ -78,27 +80,38 @@ const MenuButton = ({
     [uniqueId]
   );
 
+  const providerValue = useMemo<MenuContextType>(
+    () => ({
+      closeMenu,
+      openMenu,
+    }),
+    [closeMenu, openMenu]
+  );
+
   return (
     <div>
       <Button
-        endIcon={buttonEndIcon}
-        id={`${uniqueId}-button`}
-        aria-controls={open ? `${uniqueId}-menu` : undefined}
+        aria-controls={isOpen ? `${uniqueId}-menu` : undefined}
+        aria-expanded={isOpen ? "true" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
+        endIcon={endIcon}
+        id={`${uniqueId}-button`}
+        onClick={openMenu}
         text={buttonLabel}
         ariaLabel={ariaLabel}
         variant={buttonVariant}
       />
+
       <Menu
-        id={`${uniqueId}-menu`}
         anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
+        id={`${uniqueId}-menu`}
         MenuListProps={menuListProps}
+        onClose={closeMenu}
+        open={isOpen}
       >
-        {children}
+        <MenuContext.Provider value={providerValue}>
+          {children}
+        </MenuContext.Provider>
       </Menu>
     </div>
   );
