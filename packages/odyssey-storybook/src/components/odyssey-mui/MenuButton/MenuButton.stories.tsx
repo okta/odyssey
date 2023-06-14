@@ -133,13 +133,13 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
 
 export const IconButton: StoryObj<MenuButtonProps> = {
   args: {
+    ariaLabel: "Add",
     children: [
       <MenuItem key="1">View details</MenuItem>,
       <MenuItem key="2">Edit configuration</MenuItem>,
       <MenuItem key="3">Launch</MenuItem>,
     ],
     buttonLabel: "",
-    buttonEndIcon: <OverflowVerticalIcon />,
-    ariaLabel: "Add",
+    endIcon: <OverflowVerticalIcon />,
   },
 };
