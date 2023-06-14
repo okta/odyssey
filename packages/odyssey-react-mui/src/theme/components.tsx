@@ -1636,6 +1636,7 @@ export const components = (
           },
         },
         icon: {
+          right: "unset",
           insetInlineEnd: odysseyTokens.Spacing3,
           color: odysseyTokens.TypographyColorBody,
         },
