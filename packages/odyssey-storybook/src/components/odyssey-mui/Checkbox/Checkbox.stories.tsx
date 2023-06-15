@@ -11,9 +11,15 @@
  */
 
 import { Checkbox, CheckboxProps } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, ReactRenderer, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+
+import { userEvent, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { axeRun } from "../../../axe-util";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { StepFunction } from "@storybook/types";
 
 const storybookMeta: Meta<CheckboxProps> = {
   title: "MUI Components/Forms/Checkbox",
@@ -44,9 +50,26 @@ const storybookMeta: Meta<CheckboxProps> = {
 
 export default storybookMeta;
 
+const checkTheBox = async (
+  canvasElement: HTMLElement,
+  step: StepFunction<ReactRenderer, CheckboxProps>,
+  action: string
+) => {
+  await step("check the box", async () => {
+    const canvas = within(canvasElement);
+    const checkBox = canvas.getByRole("checkbox") as HTMLInputElement;
+    checkBox && (await userEvent.click(checkBox));
+    expect(checkBox.checked).toBe(true);
+    await axeRun(action);
+  });
+};
+
 export const Default: StoryObj<CheckboxProps> = {
   args: {
     label: "Enable warp drive recalibration",
+  },
+  play: async ({ canvasElement, step }) => {
+    checkTheBox(canvasElement, step, "Checkbox Default");
   },
 };
 
@@ -54,5 +77,8 @@ export const Required: StoryObj<CheckboxProps> = {
   args: {
     label: "I agree to the terms and conditions",
     isRequired: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    checkTheBox(canvasElement, step, "Checkbox Required");
   },
 };

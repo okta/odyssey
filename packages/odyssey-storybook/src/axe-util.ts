@@ -13,32 +13,37 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axe from "axe-core";
 
+export const sleep = (ms = 1000) => new Promise((r) => setTimeout(r, ms));
+
 export const axeRun = async (interaction = "") => {
-  setTimeout(async () => {
-    await axe
-      .run({
-        runOnly: {
-          type: "tag",
-          values: [
-            "section508",
-            "wcag2a",
-            "wcag2aa",
-            "wcag21a",
-            "wcag21aa",
-            "wcag22aa",
-          ],
-        },
-      })
-      .then((results) => {
-        if (results.violations.length) {
-          console.log("Accessibility issues found ==> ", results.violations);
-          throw new Error(`Accessibility issues found ${interaction}`);
-        }
-      })
-      .catch((e) => {
-        throw new Error(
-          e instanceof Error ? e.message : "Unknown Error in play-test"
-        );
-      });
-  }, 1000);
+  await sleep();
+
+  await axe
+    .run({
+      runOnly: {
+        type: "tag",
+        values: [
+          "section508",
+          "wcag2a",
+          "wcag2aa",
+          "wcag21a",
+          "wcag21aa",
+          "wcag22aa",
+        ],
+      },
+    })
+    .then((results) => {
+      if (results.violations.length) {
+        console.log("Accessibility issues found ==> ", results.violations);
+        throw new Error(`Accessibility issues found ${interaction}`);
+      }
+    })
+    .catch((e) => {
+      console.log(
+        e instanceof Error ? e.message : "Unknown Error in play-test"
+      );
+      throw new Error(
+        e instanceof Error ? e.message : "Unknown Error in play-test"
+      );
+    });
 };

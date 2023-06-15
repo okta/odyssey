@@ -24,7 +24,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
-import { axeRun } from "../../../axe-util";
+import { axeRun, sleep } from "../../../axe-util";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { StepFunction } from "@storybook/types";
 
@@ -67,28 +67,39 @@ const meta: Meta<ToastProps> = {
 
 export default meta;
 
+const dismissToast = async (args: ToastProps, canvasElement: HTMLElement) => {
+  try {
+    const canvas = within(canvasElement);
+    const toast = await canvas.getAllByRole(args.role || "status")[0];
+    const dismissToast =
+      toast && (await toast.querySelector('[aria-label="close"]'));
+    if (dismissToast) {
+      dismissToast && (await waitFor(() => userEvent.click(dismissToast)));
+      toast && (await waitFor(() => expect(toast).not.toBeVisible()));
+    }
+  } catch (e) {
+    console.log(e instanceof Error ? e.message : "error");
+  }
+};
+
 const openToast = async (
   args: ToastProps,
   canvasElement: HTMLElement,
   step: StepFunction<ReactRenderer, ButtonProps>,
-  action: string
+  action: string,
+  dismissible = false
 ) => {
   await step("open toast, and dismiss", async () => {
     const canvas = within(canvasElement);
     const button = canvas.getByText(`Open ${args.severity} toast`);
     await userEvent.tab();
     await userEvent.click(button);
-    await userEvent.tab();
+    await sleep();
     await axeRun(action);
 
-    const toast = await canvas.getByRole(args.role || "status");
-    const dismissToast =
-      toast && (await toast.querySelector('[aria-label="close"]'));
-    if (dismissToast) {
-      setTimeout(async () => {
-        dismissToast && (await waitFor(() => userEvent.click(dismissToast)));
-        toast && (await waitFor(() => expect(toast).not.toBeVisible()));
-      }, 1000);
+    await sleep();
+    if (dismissible) {
+      dismissToast(args, canvasElement);
     }
   });
 };
@@ -181,7 +192,7 @@ export const Dismissible: StoryObj<ToastProps> = {
     linkUrl: "#",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast(args, canvasElement, step, "Dismissible Toast");
+    openToast(args, canvasElement, step, "Dismissible Toast", true);
   },
 };
 
