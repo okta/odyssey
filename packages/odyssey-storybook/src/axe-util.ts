@@ -14,27 +14,31 @@
 import axe from "axe-core";
 
 export const axeRun = async (interaction = "") => {
-  await axe
-    .run({
-      runOnly: {
-        type: "tag",
-        values: [
-          "section508",
-          "wcag2a",
-          "wcag2aa",
-          "wcag21a",
-          "wcag21aa",
-          "wcag22aa",
-        ],
-      },
-    })
-    .then((results) => {
-      if (results.violations.length) {
-        console.log("Accessibility issues found ==> ", results.violations);
-        throw new Error(`Accessibility issues found ${interaction}`);
-      }
-    })
-    .catch((err) => {
-      console.error(err.message);
-    });
+  setTimeout(async () => {
+    await axe
+      .run({
+        runOnly: {
+          type: "tag",
+          values: [
+            "section508",
+            "wcag2a",
+            "wcag2aa",
+            "wcag21a",
+            "wcag21aa",
+            "wcag22aa",
+          ],
+        },
+      })
+      .then((results) => {
+        if (results.violations.length) {
+          console.log("Accessibility issues found ==> ", results.violations);
+          throw new Error(`Accessibility issues found ${interaction}`);
+        }
+      })
+      .catch((e) => {
+        throw new Error(
+          e instanceof Error ? e.message : "Unknown Error in play-test"
+        );
+      });
+  }, 1000);
 };

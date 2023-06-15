@@ -76,10 +76,7 @@ const interactWithButton = async (
         await userEvent.tab();
         await userEvent.click(button);
         await expect(args.onClick).toHaveBeenCalledTimes(1);
-
-        setTimeout(async () => {
-          await axeRun(action);
-        }, 0);
+        await axeRun(action);
       });
     }
   } catch (e) {
