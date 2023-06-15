@@ -43,7 +43,14 @@ module.exports = {
         axeOptions: {
           runOnly: {
             type: "tag",
-            values: ["section508", "wcag21aa"],
+            values: [
+              "section508",
+              "wcag2a",
+              "wcag2aa",
+              "wcag21a",
+              "wcag21aa",
+              "wcag22aa",
+            ],
           },
         },
       },
