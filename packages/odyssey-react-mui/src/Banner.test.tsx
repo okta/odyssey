@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { Banner } from "./Banner";
 
 describe("Banner", () => {
@@ -45,5 +45,14 @@ describe("Banner", () => {
     );
 
     expect(screen.queryByText("test link text")).toBeNull();
+  });
+
+  it("calls onclose when close is clicked", async () => {
+    const handleOnClose = jest.fn();
+
+    render(<Banner severity="info" text="test text" onClose={handleOnClose} />);
+
+    fireEvent.click(screen.getByTitle("Close"));
+    await waitFor(() => expect(handleOnClose).toBeCalled());
   });
 });
