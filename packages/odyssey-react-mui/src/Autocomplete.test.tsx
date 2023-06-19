@@ -18,8 +18,18 @@ describe("Autocomplete", () => {
     render(
       <Autocomplete hint="hint" label="label" options={[{ label: "test" }]} />
     );
+
     const input = screen.getByRole("combobox");
+    fireEvent.click(input);
+    expect(screen.queryByRole("listbox")).toBeNull();
+
     fireEvent.mouseDown(input);
-    expect(screen.getByText("test")).toBeVisible();
+    expect(screen.queryByRole("listbox")).toBeDefined();
+
+    fireEvent.change(input, { target: { value: "a" } });
+    expect(screen.queryByRole("listbox")).toBeNull();
+
+    fireEvent.change(input, { target: { value: "t" } });
+    expect(screen.queryByRole("listbox")).toBeDefined();
   });
 });
