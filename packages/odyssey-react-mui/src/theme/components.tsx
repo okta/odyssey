@@ -1182,7 +1182,7 @@ export const components = (
           maxWidth: odysseyTokens.TypographyLineLengthMax,
           ...(ownerState.margin === "normal" && {
             marginTop: 0,
-            marginBottom: theme.spacing(3),
+            marginBottom: theme.spacing(4),
             "&:last-child": {
               marginBottom: 0,
             },
