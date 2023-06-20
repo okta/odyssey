@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, fireEvent, screen, waitFor } from "@testing-library/react";
+import {
+  render,
+  fireEvent,
+  screen,
+  waitFor,
+  getByText,
+} from "@testing-library/react";
 import { Autocomplete } from "./Autocomplete";
 
 describe("Autocomplete", () => {
@@ -31,5 +37,52 @@ describe("Autocomplete", () => {
 
     fireEvent.change(input, { target: { value: "t" } });
     expect(screen.queryByRole("listbox")).toBeDefined();
+  });
+
+  it("test when isDisabled is set the textbox is disabled", () => {
+    render(
+      <Autocomplete
+        hint="hint"
+        label="label"
+        options={[{ label: "test" }]}
+        isDisabled={true}
+      />
+    );
+    expect(screen.getByRole("combobox")).toHaveAttribute("disabled");
+  });
+
+  it("test when isReadOnly is set the textbox is readonly", () => {
+    render(
+      <Autocomplete
+        hint="hint"
+        label="label"
+        options={[{ label: "test" }]}
+        isReadOnly={true}
+      />
+    );
+    expect(screen.getByRole("combobox")).toHaveAttribute("readonly");
+  });
+
+  it("test when input is changed onChange/onInputChange is called", async () => {
+    const handleChange = jest.fn();
+    const handleInputChange = jest.fn();
+
+    render(
+      <Autocomplete
+        hint="hint"
+        label="label"
+        options={[{ label: "test" }]}
+        onInputChange={handleInputChange}
+        onChange={handleChange}
+      />
+    );
+
+    const input = screen.getByRole("combobox");
+    fireEvent.change(input, { target: { value: "test" } });
+    await waitFor(() => expect(handleInputChange).toBeCalled());
+    await waitFor(() => expect(handleChange).not.toBeCalled());
+
+    fireEvent.click(getByText(screen.getByRole("listbox"), "test"));
+    await waitFor(() => expect(handleChange).toBeCalled());
   });
 });
