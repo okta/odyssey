@@ -14,7 +14,7 @@ import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { Banner } from "./Banner";
 
 describe("Banner", () => {
-  it.each(["status", "alert", undefined])(
+  it.each(["status" as const, "alert" as const, undefined])(
     "renders a status based on role",
     (roleType) => {
       const text = "Test Alert";
