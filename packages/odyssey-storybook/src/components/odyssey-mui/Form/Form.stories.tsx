@@ -13,6 +13,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
+  Checkbox,
+  CheckboxGroup,
   Fieldset,
   Form,
   FormProps,
@@ -176,7 +178,23 @@ export const KitchenSink: StoryObj<FormProps> = {
             label="Name of vessel"
             errorMessage="This field is required."
           />
-          <TextField isMultiline label="Nature of visit" />
+          <CheckboxGroup label="Systems check" isRequired>
+            <Checkbox
+              label="Life support"
+              name="life-support"
+              value="life-support"
+            />
+            <Checkbox
+              label="Warp core containment"
+              name="warp-core"
+              value="warp-core"
+            />
+            <Checkbox
+              label="Cetacean ops"
+              name="cetacean-ops"
+              value="cetacean-ops"
+            />
+          </CheckboxGroup>
         </Fieldset>
         <Fieldset
           legend="Passenger information"

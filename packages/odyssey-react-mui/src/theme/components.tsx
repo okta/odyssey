@@ -500,7 +500,7 @@ export const components = (
         root: ({ theme }) => ({
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
-          borderRadius: theme.mixins.borderRadius,
+          borderRadius: odysseyTokens.BorderRadiusTight,
           borderWidth: theme.mixins.borderWidth,
           borderStyle: theme.mixins.borderStyle,
           borderColor: theme.palette.grey[500],
