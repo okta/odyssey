@@ -228,7 +228,7 @@ export const MultipleToasts: StoryObj<ToastProps> = {
           isVisible={true}
           severity="error"
           isDismissable
-          text={`Security breach in Hangar 10.`}
+          text={`Security breach in Hangar 10!`}
           key={Math.random()}
         />,
       ];
