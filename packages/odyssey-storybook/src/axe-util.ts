@@ -36,6 +36,9 @@ export const axeRun = async (interaction = "") => {
         }
       })
       .catch((e) => {
+        console.log(
+          e instanceof Error ? e.message : "Unknown Error in play-test"
+        );
         throw new Error(
           e instanceof Error ? e.message : "Unknown Error in play-test"
         );
