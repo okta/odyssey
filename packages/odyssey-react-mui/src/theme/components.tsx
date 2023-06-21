@@ -129,9 +129,9 @@ export const components = (
             borderRadius: 0,
           }),
           ...(ownerState.variant === "infobox" && {
-            borderRadius: odysseyTokens.BorderRadiusOuter,
+            borderRadius: odysseyTokens.BorderRadiusMain,
             "&:not(:last-child)": {
-              marginBottom: odysseyTokens.Spacing4,
+              marginBottom: odysseyTokens.Spacing6,
             },
           }),
           ...(ownerState.variant === "toast" && {
@@ -500,7 +500,7 @@ export const components = (
         root: ({ theme }) => ({
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
-          borderRadius: theme.mixins.borderRadius,
+          borderRadius: odysseyTokens.BorderRadiusTight,
           borderWidth: theme.mixins.borderWidth,
           borderStyle: theme.mixins.borderStyle,
           borderColor: theme.palette.grey[500],
@@ -1182,7 +1182,7 @@ export const components = (
           maxWidth: odysseyTokens.TypographyLineLengthMax,
           ...(ownerState.margin === "normal" && {
             marginTop: 0,
-            marginBottom: theme.spacing(5),
+            marginBottom: theme.spacing(4),
             "&:last-child": {
               marginBottom: 0,
             },
