@@ -1114,17 +1114,17 @@ export const components = (
     },
     MuiDialogActions: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: {
           flexWrap: "wrap",
           gap: odysseyTokens.Spacing2,
           paddingBlockStart: odysseyTokens.Spacing4,
-          paddingBlockEnd: theme.spacing(6),
-          paddingInline: theme.spacing(6),
+          paddingBlockEnd: odysseyTokens.Spacing6,
+          paddingInline: odysseyTokens.Spacing6,
 
-          "& > *": {
+          "& > .${ buttonClasses.root }": {
             margin: "0 !important",
           },
-        }),
+        },
       },
     },
     MuiDialogContent: {
