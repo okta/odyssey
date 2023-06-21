@@ -45,7 +45,6 @@ const storybookMeta: Meta<ButtonProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: "",
       },
     },
     size: {
@@ -303,7 +302,6 @@ export const IconOnly: StoryObj<ButtonProps> = {
     },
   },
   args: {
-    ariaLabel: "Add",
     startIcon: <AddIcon />,
     ariaLabel: "Add crew",
     text: "",
