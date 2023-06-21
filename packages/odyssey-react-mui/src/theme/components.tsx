@@ -1851,6 +1851,10 @@ export const components = (
               color: theme.palette.text.disabled,
             },
           },
+          "& .MuiTab-iconWrapper": {
+            marginRight: 0,
+            marginInlineEnd: odysseyTokens.Spacing1,
+          },
         }),
       },
     },
