@@ -26,17 +26,17 @@ export const supportedLanguages = [
   "ko", // Korean
   "ms", // Malaysian
   "nb", // Norwegian
-  "nl-NL", // Dutch
+  "nl_NL", // Dutch
   "pl", // Polish
-  "pt-BR", // Portuguese (Brazil)
+  "pt_BR", // Portuguese (Brazil)
   "ro", // Romanian
   "ru", // Russian
   "sv", // Swedish
   "th", // Thai
   "tr", // Turkish
   "uk", // Ukrainian
-  "zh-CN", // Chinese (PRC)
-  "zh-TW", // Chinese
+  "zh_CN", // Chinese (PRC)
+  "zh_TW", // Chinese
 ] as const;
 
 export type SupportedLanguages = (typeof supportedLanguages)[number];
