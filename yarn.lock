@@ -4414,7 +4414,7 @@ __metadata:
     jest: ^29.3.1
     jest-axe: ^5.0.1
     jest-environment-jsdom: ^29.0.3
-    material-react-table: ^1.12.1
+    material-react-table: ^1.14.0
     npm-run-all: ^4.1.5
     properties: 1.2.1
     react: ^17.0.2
@@ -16761,9 +16761,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"material-react-table@npm:^1.12.1":
-  version: 1.12.1
-  resolution: "material-react-table@npm:1.12.1"
+"material-react-table@npm:^1.14.0":
+  version: 1.14.0
+  resolution: "material-react-table@npm:1.14.0"
   dependencies:
     "@tanstack/match-sorter-utils": 8.8.4
     "@tanstack/react-table": 8.9.2
@@ -16776,7 +16776,7 @@ __metadata:
     "@mui/material": ">=5"
     react: ">=17.0"
     react-dom: ">=17.0"
-  checksum: 861b8ce34e290158c96d0827cf245a3e1442dd5c8c33c606334cc556afedacbb5c32eebce0fa3c3b13c5c263c080a157094b35f69195aeb6bcdcb2893a394029
+  checksum: 648cbe5c63212b7fd016410d14b1897b75b2a326404f77a975483a95ff8fc65d3bed1e30e6ace9c3784b520a3fde93267d53b4e7b4cbdb7f3278b0842e764a54
   languageName: node
   linkType: hard
 

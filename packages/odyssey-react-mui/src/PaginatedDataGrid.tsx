@@ -10,7 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AlertProps, TableContainerProps, Typography } from "@mui/material";
+import {
+  AlertProps,
+  TableContainerProps,
+  TablePaginationProps,
+  Typography,
+} from "@mui/material";
 import MaterialReactTable, {
   type MRT_ColumnFiltersState,
   type MRT_RowSelectionState,
@@ -34,7 +39,7 @@ import type {
   MaterialReactTableProps,
 } from "./materialReactTableTypes";
 
-export type InfinitelyScrolledDataGridProps<
+export type PaginatedDataGridProps<
   TData extends DefaultMaterialReactTableData
 > = {
   columns: MaterialReactTableProps<TData>["columns"];
@@ -46,6 +51,7 @@ export type InfinitelyScrolledDataGridProps<
   initialState?: MaterialReactTableProps<TData>["initialState"];
   isFetching?: boolean;
   onGlobalFilterChange?: MaterialReactTableProps<TData>["onGlobalFilterChange"];
+  onPaginationChange?: MaterialReactTableProps<TData>["onPaginationChange"];
   onRowSelectionChange?: MaterialReactTableProps<TData>["onRowSelectionChange"];
   // rowsPerPageOptions?: MaterialReactTableProps<TData>["muiTablePaginationProps"]['rowsPerPageOptions'];
   state?: MaterialReactTableProps<TData>["state"];
@@ -54,12 +60,12 @@ export type InfinitelyScrolledDataGridProps<
   >;
 };
 
-// Once the user has scrolled within this many pixels of the bottom of the table, fetch more data if we can.
-const scrollAmountBeforeFetchingData = 400;
+const initialPagination = {
+  pageIndex: 0,
+  pageSize: 10,
+};
 
-const InfinitelyScrolledDataGrid = <
-  TData extends DefaultMaterialReactTableData
->({
+const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
   columns,
   data,
   fetchMoreData,
@@ -69,13 +75,12 @@ const InfinitelyScrolledDataGrid = <
   initialState,
   isFetching,
   onGlobalFilterChange,
+  onPaginationChange,
   onRowSelectionChange: onRowSelectionChangeProp,
   state,
   ToolbarButtons,
-}: InfinitelyScrolledDataGridProps<TData>) => {
+}: PaginatedDataGridProps<TData>) => {
   const { t } = useTranslation();
-
-  const tableContainerRef = useRef<HTMLDivElement>(null);
 
   const rowVirtualizerInstanceRef =
     useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
@@ -94,23 +99,6 @@ const InfinitelyScrolledDataGrid = <
 
   const totalFetchedRows = data.length ?? 0;
 
-  const fetchMoreOnBottomReached = useCallback(
-    (containerRefElement?: HTMLDivElement | null) => {
-      if (containerRefElement) {
-        const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
-
-        if (
-          scrollHeight - scrollTop - clientHeight <
-            scrollAmountBeforeFetchingData &&
-          !isFetching
-        ) {
-          fetchMoreData?.();
-        }
-      }
-    },
-    [fetchMoreData, isFetching]
-  );
-
   useEffect(() => {
     try {
       // Scroll to top of table when sorting or filters change.
@@ -119,11 +107,6 @@ const InfinitelyScrolledDataGrid = <
       console.error(error);
     }
   }, [columnFilters, globalFilter]);
-
-  // Check on mount to see if the table is already scrolled to the bottom and immediately needs to fetch more data.
-  useEffect(() => {
-    fetchMoreOnBottomReached(tableContainerRef.current);
-  }, [fetchMoreOnBottomReached]);
 
   const renderBottomToolbarCustomActions = useCallback(
     () =>
@@ -167,23 +150,69 @@ const InfinitelyScrolledDataGrid = <
     onRowSelectionChangeProp?.(rowSelection);
   }, [onRowSelectionChangeProp, rowSelection]);
 
+  const [pagination, setPagination] = useState(
+    initialState?.pagination || initialPagination
+  );
+
+  const stuffPage = useCallback((p) => {
+    setPagination((op) => {
+      const newP = p(op);
+      console.log("p", newP);
+      return newP;
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("pagination updated");
+    const numberOfPages = Math.floor(data.length / pagination.pageSize);
+
+    if (!isFetching && pagination.pageIndex > numberOfPages - 1) {
+      console.log("fetching more data");
+      fetchMoreData?.();
+    }
+  }, [
+    data.length,
+    fetchMoreData,
+    isFetching,
+    pagination.pageIndex,
+    pagination.pageSize,
+  ]);
+
+  useEffect(() => {
+    onPaginationChange?.({
+      pageIndex: pagination.pageIndex,
+      pageSize: pagination.pageSize,
+    });
+  }, [onPaginationChange, pagination.pageIndex, pagination.pageSize]);
+
+  const modifiedInitialState = useMemo(
+    () => ({
+      pagination,
+      ...initialState,
+    }),
+    [initialState, pagination]
+  );
+
   const modifiedState = useMemo(
     () => ({
       ...state,
+      pagination: {
+        pageIndex: pagination.pageIndex,
+        pageSize: pagination.pageSize,
+      },
       rowSelection,
     }),
-    [rowSelection, state]
+    [pagination.pageIndex, pagination.pageSize, rowSelection, state]
   );
 
-  const muiTableContainerProps: TableContainerProps = useMemo(
-    () => ({
-      onScroll: (event: UIEvent<HTMLDivElement>) =>
-        fetchMoreOnBottomReached(event.target as HTMLDivElement),
-      ref: tableContainerRef,
-      sx: { maxHeight: String(500 / 14).concat("rem") },
-    }),
-    [fetchMoreOnBottomReached]
-  );
+  // const muiTableContainerProps: TableContainerProps = useMemo(
+  //   () => ({
+  //     onScroll: (event: UIEvent<HTMLDivElement>) =>
+  //       fetchMoreOnBottomReached(event.target as HTMLDivElement),
+  //     ref: tableContainerRef,
+  //   }),
+  //   [fetchMoreOnBottomReached]
+  // );
 
   const muiToolbarAlertBannerProps: AlertProps = useMemo(
     () =>
@@ -196,21 +225,35 @@ const InfinitelyScrolledDataGrid = <
     [hasError, t]
   );
 
+  const muiTablePaginationProps: Partial<
+    Omit<TablePaginationProps, "rowsPerPage">
+  > = useMemo(
+    () => ({
+      rowsPerPageOptions: [],
+      showFirstButton: false,
+      showLastButton: false,
+    }),
+    []
+  );
+
   return (
     <MaterialReactTable
       columns={columns}
       data={data}
       enableMultiRowSelection={hasRowSelection}
-      enablePagination={false}
+      enablePagination
       enableRowSelection={hasRowSelection}
-      enableRowVirtualization={data.length > 50}
       enableSorting={false}
       getRowId={getRowId}
-      initialState={initialState}
-      muiTableContainerProps={muiTableContainerProps}
+      initialState={modifiedInitialState}
+      // initialState={initialState}
+      // manualPagination
+      // muiTableContainerProps={muiTableContainerProps}
+      muiTablePaginationProps={muiTablePaginationProps}
       muiToolbarAlertBannerProps={muiToolbarAlertBannerProps}
       onColumnFiltersChange={setColumnFilters}
       onGlobalFilterChange={setGlobalFilter}
+      onPaginationChange={stuffPage}
       onRowSelectionChange={setRowSelection}
       renderBottomToolbarCustomActions={renderBottomToolbarCustomActions}
       renderTopToolbarCustomActions={renderTopToolbarCustomActions}
@@ -221,8 +264,11 @@ const InfinitelyScrolledDataGrid = <
   );
 };
 
-const MemoizedInfinitelyScrolledDataGrid = memo(
-  InfinitelyScrolledDataGrid
-) as typeof InfinitelyScrolledDataGrid;
+const MemoizedPaginatedDataGrid = memo(
+  PaginatedDataGrid
+) as typeof PaginatedDataGrid;
 
-export { MemoizedInfinitelyScrolledDataGrid as InfinitelyScrolledDataGrid };
+// @ts-expect-error | This is going to error because the component isn't and can't be defined as a `FunctionComponent`, and therefore, doesn't have a `displayName` prop.
+MemoizedPaginatedDataGrid.displayName = "PaginatedDataGrid";
+
+export { MemoizedPaginatedDataGrid as PaginatedDataGrid };

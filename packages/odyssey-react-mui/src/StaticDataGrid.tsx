@@ -25,12 +25,10 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 
-export type { MRT_ColumnDef as DataGridColumn } from "material-react-table";
-
-type DefaultMaterialReactTableData = Record<string, unknown>;
-
-type MaterialReactTableProps<TData extends DefaultMaterialReactTableData> =
-  Parameters<typeof MaterialReactTable<TData>>[0];
+import type {
+  DefaultMaterialReactTableData,
+  MaterialReactTableProps,
+} from "./materialReactTableTypes";
 
 export type StaticDataGridProps<TData extends DefaultMaterialReactTableData> = {
   columns: MaterialReactTableProps<TData>["columns"];
