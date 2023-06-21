@@ -1203,6 +1203,7 @@ export const components = (
     MuiFormControlLabel: {
       styleOverrides: {
         root: ({ theme, ownerState }) => ({
+          gap: odysseyTokens.Spacing2,
           marginInlineStart: 0,
           marginInlineEnd: 0, // used for row presentation of radio/checkbox
           ...(ownerState.labelPlacement === "start" && {
@@ -1242,14 +1243,7 @@ export const components = (
         }),
         label: {
           display: "inline-flex",
-
-          "&:not(:first-child)": {
-            marginInlineStart: odysseyTokens.Spacing2,
-          },
-
-          "& > *": {
-            marginInlineStart: odysseyTokens.Spacing1,
-          },
+          gap: odysseyTokens.Spacing1,
         },
         asterisk: () => ({
           display: "none",
