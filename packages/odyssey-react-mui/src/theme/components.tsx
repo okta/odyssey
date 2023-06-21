@@ -1242,7 +1242,6 @@ export const components = (
             },
         }),
         label: {
-          display: "inline-flex",
           gap: odysseyTokens.Spacing1,
         },
         asterisk: () => ({
