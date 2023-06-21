@@ -46,7 +46,7 @@ export default storybookMeta;
 
 export const DatePickerStandard: StoryObj<DatePickerProps<unknown, unknown>> = {
   render: function C(props) {
-    const [value, setValue] = useState<unknown>(Date.now());
+    const [value, setValue] = useState<unknown>("09/05/1977");
     const datePickerProps = useMemo(
       () => ({
         ...props,
