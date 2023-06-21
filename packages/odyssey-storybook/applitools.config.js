@@ -18,7 +18,7 @@ module.exports = {
   // exit non zero and our larger CI build to pass as we intend.
   // Validating VRT results is then handled through a separate applitools
   // github integration.
-  exitcode: false,
+  exitcode: true,
 
   matchLevel: "Strict",
   showStorybookOutput: true,

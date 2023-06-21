@@ -25,7 +25,7 @@ Each Toast is made up of up to three parts: Severity, Title, and Message.
 </dl>
 
 <Canvas>
-  <Story of={ToastStories.InfoStatic} />
+  <Story of={ToastStories.Info} />
 </Canvas>
 
 `Toast` handles the visual appearance and show/hide logic, but not positioning. To have a `Toast` positioned correctly, it must be wrapped inside
@@ -45,7 +45,7 @@ If multiple Toasts are triggered in a short time, they will stack in order of ap
 ### Dismissible
 
 <Canvas>
-  <Story of={ToastStories.DismissibleStatic} />
+  <Story of={ToastStories.Dismissible} />
 </Canvas>
 
 ## Severity
@@ -57,7 +57,7 @@ Use Info Toasts to surface neutral information to users.
 This is the default variant for this component.
 
 <Canvas>
-  <Story of={ToastStories.InfoStatic} />
+  <Story of={ToastStories.Info} />
 </Canvas>
 
 ### Success
@@ -65,7 +65,7 @@ This is the default variant for this component.
 Use Success Toasts to inform users of successful or completed processes.
 
 <Canvas>
-  <Story of={ToastStories.SuccessStatic} />
+  <Story of={ToastStories.Success} />
 </Canvas>
 
 ### Warning
@@ -75,7 +75,7 @@ Use Warning Toasts to inform users of tasks or processes that may need their att
 When using the Warning variant, ensure the user does not need more context than you can give in the space available.
 
 <Canvas>
-  <Story of={ToastStories.WarningStatic} />
+  <Story of={ToastStories.Warning} />
 </Canvas>
 
 ### Error
@@ -87,7 +87,7 @@ When using a Error Toast, be sure that the error is also logged elsewhere, so a 
 Do not use Error Toasts for in-page errors such as invalid form fields. Instead, use static messaging the user can refer to while addressing their error.
 
 <Canvas>
-  <Story of={ToastStories.ErrorStatic} />
+  <Story of={ToastStories.ErrorToast} />
 </Canvas>
 
 ### Multiple Toasts

@@ -10,9 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactNode, memo } from "react";
 import { MenuItem as MuiMenuItem } from "@mui/material";
 import { menuItemClasses } from "@mui/material/MenuItem";
+import type { MenuItemProps as MuiMenuItemProps } from "@mui/material";
+import { memo, useContext } from "react";
+
+import { MenuContext } from "./MenuContext";
 
 export type MenuItemProps = {
   hasInitialFocus?: boolean;
@@ -21,23 +24,22 @@ export type MenuItemProps = {
   isDestructive?: boolean;
 };
 
-const MenuItem = ({
-  children,
-  hasInitialFocus,
-  isDestructive,
-  isSelected,
-}: MenuItemProps) => (
-  <MuiMenuItem
-    /* eslint-disable-next-line jsx-a11y/no-autofocus */
-    autoFocus={hasInitialFocus}
-    className={
-      isDestructive ? `${menuItemClasses.root}-destructive` : undefined
-    }
-    selected={isSelected}
-  >
-    {children}
-  </MuiMenuItem>
-);
+const MenuItem = ({ isDestructive, ...props }: MenuItemProps) => {
+  const { closeMenu } = useContext(MenuContext);
+  console.log(closeMenu);
+
+  return (
+    <MuiMenuItem
+      {...props}
+      onClick={closeMenu}
+      className={
+        isDestructive ? `${menuItemClasses.root}-destructive` : undefined
+      }
+    >
+      {props.children}
+    </MuiMenuItem>
+  );
+};
 
 const MemoizedMenuItem = memo(MenuItem);
 MemoizedMenuItem.displayName = "MenuItem";
