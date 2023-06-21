@@ -10,28 +10,48 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { MenuItem as MuiMenuItem } from "@mui/material";
+import {
+  MenuItem as MuiMenuItem,
+  MenuItemProps as MuiMenuItemProps,
+} from "@mui/material";
 import { menuItemClasses } from "@mui/material/MenuItem";
-import type { MenuItemProps as MuiMenuItemProps } from "@mui/material";
-import { memo, useContext } from "react";
+import { ReactNode, memo, useCallback, useContext } from "react";
 
 import { MenuContext } from "./MenuContext";
 
 export type MenuItemProps = {
-  hasInitialFocus?: boolean;
   children: ReactNode;
+  content?: string;
+  "data-testid"?: string;
+  hasInitialFocus?: boolean;
+  href?: string;
   isSelected?: boolean;
   isDestructive?: boolean;
+  onClick?: MuiMenuItemProps["onClick"];
+  rel?: string;
+  rev?: string;
+  value?: string;
 };
 
-const MenuItem = ({ isDestructive, ...props }: MenuItemProps) => {
+const MenuItem = ({
+  isDestructive,
+  onClick: onClickProp,
+  ...props
+}: MenuItemProps) => {
   const { closeMenu } = useContext(MenuContext);
-  console.log(closeMenu);
+
+  const onClick = useCallback(
+    (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+      onClickProp?.(event);
+      closeMenu();
+    },
+    [onClickProp]
+  );
 
   return (
     <MuiMenuItem
       {...props}
-      onClick={closeMenu}
+      onClick={onClick}
       className={
         isDestructive ? `${menuItemClasses.root}-destructive` : undefined
       }
