@@ -118,5 +118,6 @@ const MenuButton = ({
 };
 
 const MemoizedMenuButton = memo(MenuButton);
+MemoizedMenuButton.displayName = "MenuButton";
 
 export { MemoizedMenuButton as MenuButton };

@@ -44,5 +44,6 @@ const OdysseyCacheProvider = ({
 };
 
 const MemoizedOdysseyCacheProvider = memo(OdysseyCacheProvider);
+MemoizedOdysseyCacheProvider.displayName = "OdysseyCacheProvider";
 
 export { MemoizedOdysseyCacheProvider as OdysseyCacheProvider };

@@ -71,5 +71,6 @@ const Banner = ({
 };
 
 const MemoizedBanner = memo(Banner);
+MemoizedBanner.displayName = "Banner";
 
 export { MemoizedBanner as Banner };
