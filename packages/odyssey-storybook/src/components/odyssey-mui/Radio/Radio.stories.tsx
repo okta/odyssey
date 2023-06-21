@@ -11,24 +11,24 @@
  */
 
 import { Radio, RadioProps } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, ReactRenderer, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+
+import { userEvent, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { axeRun } from "../../../axe-util";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { StepFunction } from "@storybook/types";
 
 const storybookMeta: Meta<RadioProps> = {
   title: "MUI Components/Forms/Radio",
   component: Radio,
   argTypes: {
-    isChecked: {
-      control: "boolean",
-    },
-    isDefaultChecked: {
-      control: "boolean",
-    },
     isDisabled: {
       control: "boolean",
     },
-    hasError: {
+    isInvalid: {
       control: "boolean",
     },
     label: {
@@ -50,4 +50,22 @@ const storybookMeta: Meta<RadioProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<RadioProps> = {};
+const selectRadio = async (
+  canvasElement: HTMLElement,
+  step: StepFunction<ReactRenderer, RadioProps>,
+  action: string
+) => {
+  await step("select the radio button", async () => {
+    const canvas = within(canvasElement);
+    const radio = canvas.getByRole("radio") as HTMLInputElement;
+    radio && (await userEvent.click(radio));
+    expect(radio.checked).toBe(true);
+    await axeRun(action);
+  });
+};
+
+export const Default: StoryObj<RadioProps> = {
+  play: async ({ canvasElement, step }) => {
+    selectRadio(canvasElement, step, "Radio Default");
+  },
+};

@@ -48,7 +48,10 @@ const storybookMeta: Meta<TooltipProps> = {
     },
     placement: {
       options: ["top", "right", "bottom", "left"],
-      control: { type: "radio" },
+      control: {
+        type: "radio",
+        defaultValue: "top",
+      },
     },
   },
   args: {
@@ -86,7 +89,13 @@ export const Default: StoryObj<TooltipProps> = {
 export const Icon: StoryObj<TooltipProps> = {
   ...Template,
   args: {
-    children: <Button variant="secondary" startIcon={<DownloadIcon />} />,
+    children: (
+      <Button
+        variant="secondary"
+        ariaLabel="Download logs"
+        startIcon={<DownloadIcon />}
+      />
+    ),
     ariaType: "label",
     placement: "top",
     text: "Download logs",

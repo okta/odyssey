@@ -39,8 +39,11 @@ const storybookMeta: Meta<InfoboxProps> = {
     },
   },
   args: {
-    children:
-      "You are currently logged in from Moonbase Alpha-6, located on Luna.",
+    children: (
+      <Typography paragraph>
+        You're signed in from Moonbase Alpha-6, located on Luna.
+      </Typography>
+    ),
     severity: "info",
   },
   decorators: [MuiThemeDecorator],
@@ -50,15 +53,22 @@ export default storybookMeta;
 
 export const Info: StoryObj<InfoboxProps> = {
   args: {
-    children: "You're signed in from Moonbase Alpha-6, located on Luna.",
+    children: (
+      <Typography paragraph>
+        You're signed in from Moonbase Alpha-6, located on Luna.
+      </Typography>
+    ),
     severity: "info",
   },
 };
 
 export const Error: StoryObj<InfoboxProps> = {
   args: {
-    children:
-      "Reconfigure the fuel mixture ratios and perform safety checks again.",
+    children: (
+      <Typography paragraph>
+        Reconfigure the fuel mixture ratios and perform safety checks again.
+      </Typography>
+    ),
     role: "alert",
     severity: "error",
     title: "Safety checks failed",
@@ -67,8 +77,12 @@ export const Error: StoryObj<InfoboxProps> = {
 
 export const Warning: StoryObj<InfoboxProps> = {
   args: {
-    children:
-      "Complete all safety checks before requesting approval to launch your mission.",
+    children: (
+      <Typography paragraph>
+        Complete all safety checks before requesting approval to launch your
+        mission.
+      </Typography>
+    ),
     role: "status",
     severity: "warning",
     title: "Safety checks incomplete",
@@ -77,7 +91,11 @@ export const Warning: StoryObj<InfoboxProps> = {
 
 export const Success: StoryObj<InfoboxProps> = {
   args: {
-    children: "Safety checks are complete. Your mission is ready for liftoff.",
+    children: (
+      <Typography paragraph>
+        Safety checks are complete. Your mission is ready for liftoff.
+      </Typography>
+    ),
     role: "status",
     severity: "success",
     title: "Approved for launch",
