@@ -17,10 +17,9 @@ import { ChipElementType, TagListContext } from "./TagListContext";
 
 export type TagListProps = {
   children: ReactElement<typeof Tag> | Array<ReactElement<typeof Tag>>;
-  isWrappable?: boolean;
 };
 
-const TagList = ({ children, isWrappable }: TagListProps) => {
+const TagList = ({ children }: TagListProps) => {
   const providerValue = useMemo<{
     chipElementType: ChipElementType;
   }>(
@@ -36,7 +35,7 @@ const TagList = ({ children, isWrappable }: TagListProps) => {
       direction="row"
       spacing={2}
       useFlexGap
-      sx={{ flexWrap: isWrappable ? "wrap" : "nowrap" }}
+      flexWrap="wrap"
     >
       <TagListContext.Provider value={providerValue}>
         {children}
