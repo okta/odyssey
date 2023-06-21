@@ -23,13 +23,16 @@ import {
 import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
+import { NullElement } from "./NullElement";
 
 export type MenuButtonProps = {
   /**
    * The <MenuItem> components within the Menu.
    */
   children: Array<
-    ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
+    ReactElement<
+      typeof MenuItem | typeof Divider | typeof ListSubheader | NullElement
+    >
   >;
   /**
    * The label on the triggering Button
