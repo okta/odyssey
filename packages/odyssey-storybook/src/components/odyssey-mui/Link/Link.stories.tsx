@@ -26,9 +26,21 @@ export default {
   argTypes: {
     children: {
       control: "text",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+        defaultValue: "",
+      },
     },
     href: {
       control: "text",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
     },
     icon: {
       control: {
@@ -46,15 +58,33 @@ export default {
     },
     rel: {
       control: "text",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
     },
     target: {
       control: "text",
       description:
         "If set to `_blank`, the Link will display an external icon.",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
     },
     variant: {
       control: { type: "radio" },
       options: ["default", "monochrome"],
+      table: {
+        type: {
+          summary: "default | monochrome",
+        },
+        defaultValue: "default",
+      },
     },
   },
   decorators: [MuiThemeDecorator],

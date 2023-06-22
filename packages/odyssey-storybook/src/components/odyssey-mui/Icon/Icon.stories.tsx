@@ -33,18 +33,44 @@ const storybookMeta: Meta<IconProps> = {
     name: {
       control: { type: "select" },
       options: Object.keys(iconDictionary),
+      description: "The name of the icon to render",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     size: {
       options: ["small", "medium", "large"],
       control: { type: "radio" },
+      defaultValue: "medium",
+      table: {
+        type: {
+          summary: "small | medium | large",
+        },
+      },
+      description: "The size of the icon",
     },
     ariaLabelledby: {
       control: "text",
+      description: "The element whose text describes the icon, if it exists",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     label: {
       control: "text",
+      description: "Text that describes the icon",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -63,6 +89,14 @@ export const Default: StoryObj<IconProps> = {
   args: {
     name: "alert-triangle-filled",
     size: "medium",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "While this story shows the icon selected by setting the `name` prop on the `<Icon>` component, the preferred way is to use named icon components — in other words, `<AddIcon>` instead of `<Icon name='add' />`.",
+      },
+    },
   },
 };
 
