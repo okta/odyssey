@@ -1203,6 +1203,7 @@ export const components = (
     MuiFormControlLabel: {
       styleOverrides: {
         root: ({ theme, ownerState }) => ({
+          gap: odysseyTokens.Spacing2,
           marginInlineStart: 0,
           marginInlineEnd: 0, // used for row presentation of radio/checkbox
           ...(ownerState.labelPlacement === "start" && {
@@ -1241,9 +1242,7 @@ export const components = (
             },
         }),
         label: {
-          "&:not(:first-child)": {
-            marginInlineStart: odysseyTokens.Spacing2,
-          },
+          gap: odysseyTokens.Spacing1,
         },
         asterisk: () => ({
           display: "none",
@@ -1274,13 +1273,19 @@ export const components = (
     MuiFormLabel: {
       styleOverrides: {
         root: {
+          alignItems: "center",
           color: odysseyTokens.TypographyColorBody,
+          display: "inline-flex",
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           fontSize: "1rem",
           fontWeight: 600,
           marginBottom: odysseyTokens.Spacing2,
           "&.Mui-focused, &.Mui-error, &.Mui-disabled": {
             color: odysseyTokens.TypographyColorBody,
+          },
+          "& > .MuiTypography-root": {
+            margin: "reset",
+            marginInlineStart: odysseyTokens.Spacing1,
           },
         },
       },
