@@ -32,5 +32,6 @@ const ScreenReaderText = ({ children }: ScreenReaderTextProps) => (
 );
 
 const MemoizedScreenReaderText = memo(ScreenReaderText);
+MemoizedScreenReaderText.displayName = "ScreenReaderText";
 
 export { MemoizedScreenReaderText as ScreenReaderText };

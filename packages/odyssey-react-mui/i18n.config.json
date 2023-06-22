@@ -1,5 +1,4 @@
 {
-  "defaultBranch": "develop",
   "resourceFile": "odyssey-react-mui.properties",
   "resourceFilePath": "packages/odyssey-react-mui/src/properties",
   "translationsFilePath": "packages/odyssey-react-mui/src/properties/translations",

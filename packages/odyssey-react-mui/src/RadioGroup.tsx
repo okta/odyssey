@@ -97,5 +97,6 @@ const RadioGroup = ({
 };
 
 const MemoizedRadioGroup = memo(RadioGroup);
+MemoizedRadioGroup.displayName = "RadioGroup";
 
 export { MemoizedRadioGroup as RadioGroup };
