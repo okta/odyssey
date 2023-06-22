@@ -29,6 +29,8 @@ import { translation as ko } from "./properties/ts/odyssey-react-mui_ko";
 import { translation as ms } from "./properties/ts/odyssey-react-mui_ms";
 import { translation as nb } from "./properties/ts/odyssey-react-mui_nb";
 import { translation as nlNL } from "./properties/ts/odyssey-react-mui_nl_NL";
+import { translation as okPL } from "./properties/ts/odyssey-react-mui_ok_PL";
+import { translation as okSK } from "./properties/ts/odyssey-react-mui_ok_SK";
 import { translation as pl } from "./properties/ts/odyssey-react-mui_pl";
 import { translation as ptBR } from "./properties/ts/odyssey-react-mui_pt_BR";
 import { translation as ro } from "./properties/ts/odyssey-react-mui_ro";
@@ -64,6 +66,8 @@ export const resources = {
   ms,
   nb,
   nl_NL: nlNL,
+  ok_PL: okPL,
+  ok_SK: okSK,
   pl,
   pt_BR: ptBR,
   ro,
