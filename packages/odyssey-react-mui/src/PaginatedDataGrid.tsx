@@ -10,13 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  AlertProps,
-  TableContainerProps,
-  TablePaginationProps,
-  Typography,
-} from "@mui/material";
+import { AlertProps, TablePaginationProps, Typography } from "@mui/material";
 import MaterialReactTable, {
+  MRT_PaginationState,
   type MRT_ColumnFiltersState,
   type MRT_RowSelectionState,
   type MRT_TableInstance,
@@ -25,7 +21,6 @@ import MaterialReactTable, {
 import {
   FunctionComponent,
   memo,
-  UIEvent,
   useCallback,
   useEffect,
   useMemo,
@@ -53,16 +48,11 @@ export type PaginatedDataGridProps<
   onGlobalFilterChange?: MaterialReactTableProps<TData>["onGlobalFilterChange"];
   onPaginationChange?: MaterialReactTableProps<TData>["onPaginationChange"];
   onRowSelectionChange?: MaterialReactTableProps<TData>["onRowSelectionChange"];
-  // rowsPerPageOptions?: MaterialReactTableProps<TData>["muiTablePaginationProps"]['rowsPerPageOptions'];
+  rowsPerPage?: number;
   state?: MaterialReactTableProps<TData>["state"];
   ToolbarButtons?: FunctionComponent<
     { table: MRT_TableInstance<TData> } & unknown
   >;
-};
-
-const initialPagination = {
-  pageIndex: 0,
-  pageSize: 10,
 };
 
 const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
@@ -77,6 +67,7 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
   onGlobalFilterChange,
   onPaginationChange,
   onRowSelectionChange: onRowSelectionChangeProp,
+  rowsPerPage = 10,
   state,
   ToolbarButtons,
 }: PaginatedDataGridProps<TData>) => {
@@ -150,24 +141,33 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
     onRowSelectionChangeProp?.(rowSelection);
   }, [onRowSelectionChangeProp, rowSelection]);
 
-  const [pagination, setPagination] = useState(
-    initialState?.pagination || initialPagination
+  const [pagination, setPagination] = useState<MRT_PaginationState>(
+    initialState?.pagination || {
+      pageIndex: 0,
+      pageSize: rowsPerPage,
+    }
   );
 
-  const stuffPage = useCallback((p) => {
-    setPagination((op) => {
-      const newP = p(op);
-      console.log("p", newP);
-      return newP;
-    });
-  }, []);
+  const dataLengthRef = useRef(data.length);
+
+  const updatePagination = useCallback(
+    (paginationFunction) => {
+      if (data.length === dataLengthRef.current) {
+        setPagination((previousPagination) => {
+          const nextPagination = paginationFunction(previousPagination);
+          return nextPagination;
+        });
+      } else {
+        dataLengthRef.current = data.length;
+      }
+    },
+    [data.length]
+  );
 
   useEffect(() => {
-    console.log("pagination updated");
     const numberOfPages = Math.floor(data.length / pagination.pageSize);
 
     if (!isFetching && pagination.pageIndex > numberOfPages - 1) {
-      console.log("fetching more data");
       fetchMoreData?.();
     }
   }, [
@@ -205,15 +205,6 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
     [pagination.pageIndex, pagination.pageSize, rowSelection, state]
   );
 
-  // const muiTableContainerProps: TableContainerProps = useMemo(
-  //   () => ({
-  //     onScroll: (event: UIEvent<HTMLDivElement>) =>
-  //       fetchMoreOnBottomReached(event.target as HTMLDivElement),
-  //     ref: tableContainerRef,
-  //   }),
-  //   [fetchMoreOnBottomReached]
-  // );
-
   const muiToolbarAlertBannerProps: AlertProps = useMemo(
     () =>
       hasError
@@ -246,14 +237,11 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
       enableSorting={false}
       getRowId={getRowId}
       initialState={modifiedInitialState}
-      // initialState={initialState}
-      // manualPagination
-      // muiTableContainerProps={muiTableContainerProps}
       muiTablePaginationProps={muiTablePaginationProps}
       muiToolbarAlertBannerProps={muiToolbarAlertBannerProps}
       onColumnFiltersChange={setColumnFilters}
       onGlobalFilterChange={setGlobalFilter}
-      onPaginationChange={stuffPage}
+      onPaginationChange={updatePagination}
       onRowSelectionChange={setRowSelection}
       renderBottomToolbarCustomActions={renderBottomToolbarCustomActions}
       renderTopToolbarCustomActions={renderTopToolbarCustomActions}
