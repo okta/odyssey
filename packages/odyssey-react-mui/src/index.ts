@@ -115,7 +115,6 @@ export * from "./Fieldset";
 export * from "./Form";
 export * from "./Icon";
 export * from "./iconDictionary";
-export * from "./InfinitelyScrolledDataGrid";
 export * from "./Infobox";
 export * from "./Link";
 export * from "./materialReactTableTypes";
