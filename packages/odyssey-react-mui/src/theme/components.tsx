@@ -129,7 +129,7 @@ export const components = (
             borderRadius: 0,
 
             ...(ownerState.onClose !== undefined && {
-              paddingInlineEnd: odysseyTokens.Spacing6,
+              paddingInline: odysseyTokens.Spacing6,
             }),
           }),
           ...(ownerState.variant === "infobox" && {
