@@ -20,14 +20,30 @@ const storybookMeta: Meta<StatusProps> = {
   argTypes: {
     label: {
       control: "text",
+      description: "The text describing the Status",
     },
     severity: {
       control: "radio",
-      options: ["default", "error", "info", "success", "warning"],
+      options: ["default", "error", "success", "warning"],
+      description: "The severity of the Status, as indicated by its styling",
+      table: {
+        type: {
+          summary: "default | error | success | warning",
+        },
+        defaultValue: "default",
+      },
     },
     variant: {
       control: "radio",
       options: ["lamp", "pill"],
+      description:
+        "Whether the Status is displayed uncontained (`lamp`) or contained (`pill`)",
+      table: {
+        type: {
+          summary: "lamp | pill",
+        },
+        defaultValue: "lamp",
+      },
     },
   },
   args: {
@@ -36,6 +52,7 @@ const storybookMeta: Meta<StatusProps> = {
     severity: "default",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
