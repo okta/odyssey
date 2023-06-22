@@ -179,14 +179,14 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const renderFieldComponent = useCallback(
       () => (
         <MuiSelect
+          children={children}
           id={idOverride}
-          name={idOverride}
           multiple={isMultiSelect}
+          name={idOverride}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
           ref={ref}
-          children={children}
           renderValue={isMultiSelect ? renderValue : undefined}
           value={selectedValue}
         />
