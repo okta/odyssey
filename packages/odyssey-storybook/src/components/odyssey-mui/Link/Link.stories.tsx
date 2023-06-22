@@ -18,6 +18,7 @@ import {
   Link,
   LinkProps,
 } from "@okta/odyssey-react-mui";
+import { icons } from "../../../../.storybook/components/iconUtils";
 
 export default {
   title: "MUI Components/Link",
@@ -26,17 +27,30 @@ export default {
     children: {
       control: "text",
     },
+    href: {
+      control: "text",
+    },
     icon: {
-      control: "object",
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
+      description: "An optional icon to display at the start of the Link",
+      table: {
+        type: {
+          summary: "<Icon />",
+        },
+        defaultValue: "",
+      },
     },
     rel: {
       control: "text",
     },
     target: {
       control: "text",
-    },
-    onClick: {
-      action: true,
+      description:
+        "If set to `_blank`, the Link will display an external icon.",
     },
     variant: {
       control: { type: "radio" },
