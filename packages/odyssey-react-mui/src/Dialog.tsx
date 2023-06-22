@@ -106,5 +106,6 @@ const Dialog = ({
 };
 
 const MemoizedDialog = memo(Dialog);
+MemoizedDialog.displayName = "Dialog";
 
 export { MemoizedDialog as Dialog };

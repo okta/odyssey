@@ -74,5 +74,6 @@ const Tabs = ({ ariaLabel, tabs, initialValue = "0" }: TabsProps) => {
 };
 
 const MemoizedTabs = memo(Tabs);
+MemoizedTabs.displayName = "Tabs";
 
 export { MemoizedTabs as Tabs };
