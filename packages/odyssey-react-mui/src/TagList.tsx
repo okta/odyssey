@@ -39,5 +39,6 @@ const TagList = ({ children }: TagListProps) => {
 };
 
 const MemoizedTagList = memo(TagList);
+MemoizedTagList.displayName = "TagList";
 
 export { MemoizedTagList as TagList };

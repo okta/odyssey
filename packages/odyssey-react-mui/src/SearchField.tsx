@@ -134,5 +134,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 );
 
 const MemoizedSearchField = memo(SearchField);
+MemoizedSearchField.displayName = "SearchField";
 
 export { MemoizedSearchField as SearchField };

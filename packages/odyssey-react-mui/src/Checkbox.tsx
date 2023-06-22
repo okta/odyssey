@@ -82,5 +82,6 @@ const Checkbox = ({
 };
 
 const MemoizedCheckbox = memo(Checkbox);
+MemoizedCheckbox.displayName = "Checkbox";
 
 export { MemoizedCheckbox as Checkbox };

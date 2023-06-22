@@ -49,5 +49,6 @@ const Infobox = ({ children, role, severity, title }: InfoboxProps) => {
 };
 
 const MemoizedInfobox = memo(Infobox);
+MemoizedInfobox.displayName = "Infobox";
 
 export { MemoizedInfobox as Infobox };

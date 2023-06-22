@@ -129,9 +129,9 @@ export const components = (
             borderRadius: 0,
           }),
           ...(ownerState.variant === "infobox" && {
-            borderRadius: odysseyTokens.BorderRadiusOuter,
+            borderRadius: odysseyTokens.BorderRadiusMain,
             "&:not(:last-child)": {
-              marginBottom: odysseyTokens.Spacing4,
+              marginBottom: odysseyTokens.Spacing6,
             },
           }),
           ...(ownerState.variant === "toast" && {
@@ -500,7 +500,7 @@ export const components = (
         root: ({ theme }) => ({
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
-          borderRadius: theme.mixins.borderRadius,
+          borderRadius: odysseyTokens.BorderRadiusTight,
           borderWidth: theme.mixins.borderWidth,
           borderStyle: theme.mixins.borderStyle,
           borderColor: theme.palette.grey[500],
@@ -1114,11 +1114,17 @@ export const components = (
     },
     MuiDialogActions: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: {
+          flexWrap: "wrap",
+          gap: odysseyTokens.Spacing2,
           paddingBlockStart: odysseyTokens.Spacing4,
-          paddingBlockEnd: theme.spacing(6),
-          paddingInline: theme.spacing(6),
-        }),
+          paddingBlockEnd: odysseyTokens.Spacing6,
+          paddingInline: odysseyTokens.Spacing6,
+
+          "& > .${ buttonClasses.root }": {
+            margin: "0 !important",
+          },
+        },
       },
     },
     MuiDialogContent: {
@@ -1182,7 +1188,7 @@ export const components = (
           maxWidth: odysseyTokens.TypographyLineLengthMax,
           ...(ownerState.margin === "normal" && {
             marginTop: 0,
-            marginBottom: theme.spacing(5),
+            marginBottom: theme.spacing(4),
             "&:last-child": {
               marginBottom: 0,
             },
@@ -1203,6 +1209,7 @@ export const components = (
     MuiFormControlLabel: {
       styleOverrides: {
         root: ({ theme, ownerState }) => ({
+          gap: odysseyTokens.Spacing2,
           marginInlineStart: 0,
           marginInlineEnd: 0, // used for row presentation of radio/checkbox
           ...(ownerState.labelPlacement === "start" && {
@@ -1241,9 +1248,7 @@ export const components = (
             },
         }),
         label: {
-          "&:not(:first-child)": {
-            marginInlineStart: odysseyTokens.Spacing2,
-          },
+          gap: odysseyTokens.Spacing1,
         },
         asterisk: () => ({
           display: "none",
@@ -1274,13 +1279,19 @@ export const components = (
     MuiFormLabel: {
       styleOverrides: {
         root: {
+          alignItems: "center",
           color: odysseyTokens.TypographyColorBody,
+          display: "inline-flex",
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           fontSize: "1rem",
           fontWeight: 600,
           marginBottom: odysseyTokens.Spacing2,
           "&.Mui-focused, &.Mui-error, &.Mui-disabled": {
             color: odysseyTokens.TypographyColorBody,
+          },
+          "& > .MuiTypography-root": {
+            margin: "reset",
+            marginInlineStart: odysseyTokens.Spacing1,
           },
         },
       },
