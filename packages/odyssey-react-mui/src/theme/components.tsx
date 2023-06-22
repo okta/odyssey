@@ -14,14 +14,18 @@ import { ThemeOptions } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
 import { alertTitleClasses } from "@mui/material/AlertTitle";
 import { buttonClasses } from "@mui/material/Button";
+import { checkboxClasses } from "@mui/material/Checkbox";
 import { chipClasses } from "@mui/material/Chip";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
 import { dividerClasses } from "@mui/material/Divider";
+import { formControlLabelClasses } from "@mui/material/FormControlLabel";
+import { formLabelClasses } from "@mui/material/FormLabel";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
 import { listItemTextClasses } from "@mui/material/ListItemText";
 import { menuItemClasses } from "@mui/material/MenuItem";
+import { radioClasses } from "@mui/material/Radio";
 import { stackClasses } from "@mui/material/Stack";
 import { svgIconClasses } from "@mui/material/SvgIcon";
 import { tableBodyClasses } from "@mui/material/TableBody";
@@ -30,6 +34,7 @@ import { tableHeadClasses } from "@mui/material/TableHead";
 import { tableRowClasses } from "@mui/material/TableRow";
 import { tableSortLabelClasses } from "@mui/material/TableSortLabel";
 import { tooltipClasses } from "@mui/material/Tooltip";
+import { typographyClasses } from "@mui/material/Typography";
 
 import {
   AlertTriangleFilledIcon,
@@ -437,7 +442,7 @@ export const components = (
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           whiteSpace: "nowrap",
 
-          ".MuiButton-root + &": {
+          [`.${buttonClasses.root} + &`]: {
             marginInlineStart: odysseyTokens.Spacing2,
           },
 
@@ -513,7 +518,7 @@ export const components = (
             }
           ),
 
-          ".MuiSvgIcon-root": {
+          [`.${svgIconClasses.root}`]: {
             color: theme.palette.common.white,
             transition: theme.transitions.create(["color"], {
               duration: theme.transitions.duration.short,
@@ -524,13 +529,13 @@ export const components = (
             backgroundColor: odysseyTokens.PalettePrimaryMain,
             borderColor: odysseyTokens.PalettePrimaryMain,
 
-            ".MuiFormControlLabel-root:hover > &": {
+            [`.${formControlLabelClasses.root}:hover > &`]: {
               backgroundColor: theme.palette.primary.dark,
               borderColor: theme.palette.primary.dark,
             },
           },
 
-          ".MuiFormControlLabel-root:hover > &": {
+          [`.${formControlLabelClasses.root}:hover > &`]: {
             backgroundColor: "transparent",
             borderColor: theme.palette.grey[900],
           },
@@ -569,7 +574,7 @@ export const components = (
               borderColor: odysseyTokens.HueNeutral300,
             },
 
-            ".MuiSvgIcon-root": {
+            [`.${svgIconClasses.root}`]: {
               color: theme.palette.common.black,
             },
           },
@@ -1221,21 +1226,18 @@ export const components = (
           "&.Mui-disabled": {
             pointerEvents: "none",
           },
-          //[`&:hover ${radioClasses.root}:not(${radioClasses.checked})`]: {
-          //color: odysseyTokens.TypographyColorBody,
-          //},
-          "&:hover .MuiRadio-root, &:hover .MuiCheckbox-root": {
+          [`&:hover .${radioClasses.root}, &:hover .${checkboxClasses.root}`]: {
             color: odysseyTokens.TypographyColorBody,
           },
-          "&:hover .MuiRadio-root.Mui-checked, &:hover .MuiCheckbox-root.Mui-checked":
+          [`&:hover .${radioClasses.root}.Mui-checked, &:hover .${checkboxClasses.root}.Mui-checked`]:
             {
               color: theme.palette.primary.dark,
             },
-          "&.Mui-error:hover .MuiRadio-root, &.Mui-error:hover .MuiCheckbox-root":
+          [`&.Mui-error:hover .${radioClasses.root}, &.Mui-error:hover .${checkboxClasses.root}`]:
             {
               color: odysseyTokens.PaletteDangerDark,
             },
-          "&.Mui-error:hover .MuiRadio-root.Mui-checked, &.Mui-error:hover .MuiCheckbox-root.Mui-checked":
+          [`&.Mui-error:hover .${radioClasses.root}.Mui-checked, &.Mui-error:hover .${checkboxClasses.root}.Mui-checked`]:
             {
               color: odysseyTokens.PaletteDangerDark,
             },
@@ -1259,7 +1261,7 @@ export const components = (
           fontSize: theme.typography.subtitle1.fontSize,
           lineHeight: "1.33333333",
           marginBlockStart: odysseyTokens.Spacing2,
-          ".MuiFormLabel-root + &": {
+          [`.${formLabelClasses.root} + &`]: {
             marginBlockStart: `-${theme.spacing(1)}`,
             color: odysseyTokens.TypographyColorSub,
           },
@@ -1464,7 +1466,7 @@ export const components = (
               transform: "none",
             }),
           }),
-          "& > .MuiTypography-root": {
+          [`& > .${typographyClasses.root}`]: {
             lineHeight: "unset",
           },
         }),
@@ -1687,7 +1689,7 @@ export const components = (
             }),
           },
 
-          ".MuiFormControlLabel-root:hover > &": {
+          [`.${formControlLabelClasses.root}:hover > &`]: {
             backgroundColor: "transparent",
             borderColor: theme.palette.grey[900],
           },
