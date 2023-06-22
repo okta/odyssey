@@ -88,8 +88,6 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
     }
   }, [globalFilter, onGlobalFilterChange]);
 
-  const totalFetchedRows = data.length ?? 0;
-
   useEffect(() => {
     try {
       // Scroll to top of table when sorting or filters change.
@@ -98,6 +96,8 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
       console.error(error);
     }
   }, [columnFilters, globalFilter]);
+
+  const totalFetchedRows = data.length ?? 0;
 
   const renderBottomToolbarCustomActions = useCallback(
     () =>
