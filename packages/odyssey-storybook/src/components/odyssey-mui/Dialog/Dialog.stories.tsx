@@ -27,26 +27,70 @@ const storybookMeta: Meta<DialogProps> = {
   argTypes: {
     callToActionPrimaryComponent: {
       control: null,
-      description: "An optional Button object",
+      description:
+        "An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.",
+      table: {
+        type: {
+          summary: "<Button />",
+        },
+      },
     },
     callToActionSecondaryComponent: {
       control: null,
-      description: "An optional Button object",
+      description:
+        "An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.",
+      table: {
+        type: {
+          summary: "<Button />",
+        },
+      },
     },
     callToActionTertiaryComponent: {
       control: null,
-      description: "An optional Button object",
+      description:
+        "An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.",
+      table: {
+        type: {
+          summary: "<Button />",
+        },
+      },
     },
     children: {
       control: "text",
+      description:
+        "The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.",
+      table: {
+        type: {
+          summary: "ReactNode | Array<ReactNode>",
+        },
+      },
     },
     onClose: {
       control: "function",
       description:
-        "The function that controls what happens when the dialog is dismissed.",
+        "Callback that controls what happens when the dialog is dismissed",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
+    },
+    isOpen: {
+      control: "boolean",
+      description: "When set to `true`, the Dialog will be visible.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     title: {
       control: "text",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
@@ -55,6 +99,7 @@ const storybookMeta: Meta<DialogProps> = {
     title: "Initiate self-destruct protocol",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -108,6 +153,14 @@ export const Default: StoryObj<DialogProps> = {
 
 export const Long: StoryObj<DialogProps> = {
   ...DefaultTemplate,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "If the `Dialog` content is longer than the available space, the body will automatically receive top and bottom borders to indicate scrollability.",
+      },
+    },
+  },
   args: {
     children: (
       <>
