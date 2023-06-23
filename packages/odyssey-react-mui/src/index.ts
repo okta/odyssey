@@ -101,7 +101,7 @@ export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
 export { deepmerge, visuallyHidden } from "@mui/utils";
 
-export type { MRT_ColumnDef as DataGridColumn } from "material-react-table";
+export type { MRT_ColumnDef as DataTableColumn } from "material-react-table";
 
 export * from "./Autocomplete";
 export * from "./Banner";
@@ -125,14 +125,14 @@ export * from "./OdysseyCacheProvider";
 export * from "./OdysseyProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./OdysseyTranslationProvider";
-export * from "./PaginatedDataGrid";
+export * from "./PaginatedDataTable";
 export * from "./PasswordField";
 export * from "./Radio";
 export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
-export * from "./StaticDataGrid";
+export * from "./StaticDataTable";
 export * from "./Status";
 export * from "./Tabs";
 export * from "./Tag";

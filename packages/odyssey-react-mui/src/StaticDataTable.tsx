@@ -30,20 +30,21 @@ import type {
   MaterialReactTableProps,
 } from "./materialReactTableTypes";
 
-export type StaticDataGridProps<TData extends DefaultMaterialReactTableData> = {
-  columns: MaterialReactTableProps<TData>["columns"];
-  data: MaterialReactTableProps<TData>["data"];
-  getRowId?: MaterialReactTableProps<TData>["getRowId"];
-  hasError?: boolean;
-  initialState?: MaterialReactTableProps<TData>["initialState"];
-  onGlobalFilterChange?: MaterialReactTableProps<TData>["onGlobalFilterChange"];
-  state?: MaterialReactTableProps<TData>["state"];
-  ToolbarButtons?: FunctionComponent<
-    { table: MRT_TableInstance<TData> } & unknown
-  >;
-};
+export type StaticDataTableProps<TData extends DefaultMaterialReactTableData> =
+  {
+    columns: MaterialReactTableProps<TData>["columns"];
+    data: MaterialReactTableProps<TData>["data"];
+    getRowId?: MaterialReactTableProps<TData>["getRowId"];
+    hasError?: boolean;
+    initialState?: MaterialReactTableProps<TData>["initialState"];
+    onGlobalFilterChange?: MaterialReactTableProps<TData>["onGlobalFilterChange"];
+    state?: MaterialReactTableProps<TData>["state"];
+    ToolbarButtons?: FunctionComponent<
+      { table: MRT_TableInstance<TData> } & unknown
+    >;
+  };
 
-const StaticDataGrid = <TData extends DefaultMaterialReactTableData>({
+const StaticDataTable = <TData extends DefaultMaterialReactTableData>({
   columns,
   data,
   getRowId,
@@ -52,7 +53,7 @@ const StaticDataGrid = <TData extends DefaultMaterialReactTableData>({
   onGlobalFilterChange,
   state,
   ToolbarButtons,
-}: StaticDataGridProps<TData>) => {
+}: StaticDataTableProps<TData>) => {
   const { t } = useTranslation();
 
   const rowVirtualizerInstanceRef =
@@ -102,7 +103,7 @@ const StaticDataGrid = <TData extends DefaultMaterialReactTableData>({
       muiToolbarAlertBannerProps={
         hasError
           ? {
-              children: t("datagrid.error"),
+              children: t("datatable.error"),
               color: "error",
             }
           : undefined
@@ -117,6 +118,6 @@ const StaticDataGrid = <TData extends DefaultMaterialReactTableData>({
   );
 };
 
-const MemoizedStaticDataGrid = memo(StaticDataGrid) as typeof StaticDataGrid;
+const MemoizedStaticDataTable = memo(StaticDataTable) as typeof StaticDataTable;
 
-export { MemoizedStaticDataGrid as StaticDataGrid };
+export { MemoizedStaticDataTable as StaticDataTable };

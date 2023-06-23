@@ -25,8 +25,8 @@ import { Field } from "./Field";
 
 export type SelectOption = {
   text: string;
-  value?: string;
   type?: "heading" | "option";
+  value?: string;
 };
 
 export type SelectProps = {

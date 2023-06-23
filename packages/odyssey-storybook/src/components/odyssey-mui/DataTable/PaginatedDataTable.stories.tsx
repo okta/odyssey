@@ -13,17 +13,17 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
-  DataGridColumn,
-  PaginatedDataGrid,
-  PaginatedDataGridProps,
+  DataTableColumn,
+  PaginatedDataTable,
+  PaginatedDataTableProps,
 } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { useCallback, useRef, useState } from "react";
 
 const storybookMeta: Meta = {
-  title: "MUI Components/Data Grid/Paginated",
-  component: PaginatedDataGrid,
+  title: "MUI Components/Data Table/Paginated",
+  component: PaginatedDataTable,
   argTypes: {
     columns: {
       control: "array",
@@ -81,7 +81,7 @@ type Person = {
   state: string;
 };
 
-const columns: DataGridColumn<Person>[] = [
+const columns: DataTableColumn<Person>[] = [
   {
     accessorKey: "name.firstName",
     header: "First Name",
@@ -508,7 +508,7 @@ const data: Person[] = [
   },
 ];
 
-export const BasicUsage: StoryObj<PaginatedDataGridProps<Person>> = {
+export const BasicUsage: StoryObj<PaginatedDataTableProps<Person>> = {
   args: {
     columns,
     data,
@@ -516,7 +516,7 @@ export const BasicUsage: StoryObj<PaginatedDataGridProps<Person>> = {
   },
 };
 
-export const Pagination: StoryObj<PaginatedDataGridProps<Person>> = {
+export const Pagination: StoryObj<PaginatedDataTableProps<Person>> = {
   args: {
     columns,
     data,
@@ -533,12 +533,12 @@ export const Pagination: StoryObj<PaginatedDataGridProps<Person>> = {
     }, [args.data]);
 
     return (
-      <PaginatedDataGrid {...args} data={data} fetchMoreData={fetchMoreData} />
+      <PaginatedDataTable {...args} data={data} fetchMoreData={fetchMoreData} />
     );
   },
 };
 
-export const Selection: StoryObj<PaginatedDataGridProps<Person>> = {
+export const Selection: StoryObj<PaginatedDataTableProps<Person>> = {
   args: {
     columns,
     data,
@@ -547,7 +547,7 @@ export const Selection: StoryObj<PaginatedDataGridProps<Person>> = {
   },
 };
 
-export const CustomToolbar: StoryObj<PaginatedDataGridProps<Person>> = {
+export const CustomToolbar: StoryObj<PaginatedDataTableProps<Person>> = {
   args: {
     columns,
     data,
@@ -561,7 +561,7 @@ export const CustomToolbar: StoryObj<PaginatedDataGridProps<Person>> = {
   },
 };
 
-// const reportColumns: DataGridColumn<any>[] = [
+// const reportColumns: DataTableColumn<any>[] = [
 //   {
 //     accessorKey: "name",
 //     Cell: ({ cell }) => <Link href="#none">{cell.getValue<string>()}</Link>,
@@ -669,7 +669,7 @@ export const CustomToolbar: StoryObj<PaginatedDataGridProps<Person>> = {
 - Infinite scroll.
 */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// export const Reports: StoryObj<DataGridProps<any>> = {
+// export const Reports: StoryObj<DataTableProps<any>> = {
 //   args: {
 //     columns: reportColumns,
 //     data: reportData,
@@ -698,5 +698,5 @@ export const CustomToolbar: StoryObj<PaginatedDataGridProps<Person>> = {
   - Text Alignment
   - `MenuButton`
   - Date display
-- `StaticDataGrid` with virtualization, no pagination, and no footer display nor toolbars.
+- `StaticDataTable` with virtualization, no pagination, and no footer display nor toolbars.
 */

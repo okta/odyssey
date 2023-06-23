@@ -34,7 +34,7 @@ import type {
   MaterialReactTableProps,
 } from "./materialReactTableTypes";
 
-export type PaginatedDataGridProps<
+export type PaginatedDataTableProps<
   TData extends DefaultMaterialReactTableData
 > = {
   columns: MaterialReactTableProps<TData>["columns"];
@@ -55,7 +55,7 @@ export type PaginatedDataGridProps<
   >;
 };
 
-const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
+const PaginatedDataTable = <TData extends DefaultMaterialReactTableData>({
   columns,
   data,
   fetchMoreData,
@@ -70,7 +70,7 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
   rowsPerPage = 10,
   state,
   ToolbarButtons,
-}: PaginatedDataGridProps<TData>) => {
+}: PaginatedDataTableProps<TData>) => {
   const { t } = useTranslation();
 
   const rowVirtualizerInstanceRef =
@@ -105,7 +105,7 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
         <Typography>
           <Trans
             count={totalFetchedRows}
-            i18nKey="datagrid.fetchedrows.text"
+            i18nKey="datatable.fetchedrows.text"
             values={{
               totalRows: totalFetchedRows,
             }}
@@ -115,7 +115,7 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
         <Typography>
           <Trans
             count={totalFetchedRows}
-            i18nKey="datagrid.rows.text"
+            i18nKey="datatable.rows.text"
             values={{
               totalRows: totalFetchedRows,
             }}
@@ -209,7 +209,7 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
     () =>
       hasError
         ? {
-            children: t("datagrid.error"),
+            children: t("datatable.error"),
             severity: "error",
           }
         : {},
@@ -252,11 +252,11 @@ const PaginatedDataGrid = <TData extends DefaultMaterialReactTableData>({
   );
 };
 
-const MemoizedPaginatedDataGrid = memo(
-  PaginatedDataGrid
-) as typeof PaginatedDataGrid;
+const MemoizedPaginatedDataTable = memo(
+  PaginatedDataTable
+) as typeof PaginatedDataTable;
 
 // @ts-expect-error | This is going to error because the component isn't and can't be defined as a `FunctionComponent`, and therefore, doesn't have a `displayName` prop.
-MemoizedPaginatedDataGrid.displayName = "PaginatedDataGrid";
+MemoizedPaginatedDataTable.displayName = "PaginatedDataTable";
 
-export { MemoizedPaginatedDataGrid as PaginatedDataGrid };
+export { MemoizedPaginatedDataTable as PaginatedDataTable };

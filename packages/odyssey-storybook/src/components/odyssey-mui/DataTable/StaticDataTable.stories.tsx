@@ -13,16 +13,16 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
-  DataGridColumn,
-  StaticDataGrid,
-  StaticDataGridProps,
+  DataTableColumn,
+  StaticDataTable,
+  StaticDataTableProps,
 } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta = {
-  title: "MUI Components/Data Grid/Static",
-  component: StaticDataGrid,
+  title: "MUI Components/Data Table/Static",
+  component: StaticDataTable,
   argTypes: {
     columns: {
       control: "array",
@@ -77,7 +77,7 @@ type Person = {
   state: string;
 };
 
-const columns: DataGridColumn<Person>[] = [
+const columns: DataTableColumn<Person>[] = [
   {
     accessorKey: "name.firstName",
     header: "First Name",
@@ -504,7 +504,7 @@ const data: Person[] = [
   },
 ];
 
-export const BasicUsage: StoryObj<StaticDataGridProps<Person>> = {
+export const BasicUsage: StoryObj<StaticDataTableProps<Person>> = {
   args: {
     columns,
     data,
@@ -512,7 +512,7 @@ export const BasicUsage: StoryObj<StaticDataGridProps<Person>> = {
   },
 };
 
-export const CustomToolbar: StoryObj<StaticDataGridProps<Person>> = {
+export const CustomToolbar: StoryObj<StaticDataTableProps<Person>> = {
   args: {
     columns,
     data,
