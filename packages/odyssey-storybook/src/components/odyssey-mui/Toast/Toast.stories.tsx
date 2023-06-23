@@ -34,26 +34,92 @@ const meta: Meta<ToastProps> = {
   argTypes: {
     autoHideDuration: {
       control: "number",
+      description:
+        "If set, this determines how long the toast should appear before automatically disappearing in milliseconds. It will only take effect if the toast is not dismissible. If left blank, it defaults to 6000",
+      table: {
+        type: {
+          summary: "number",
+        },
+        defaultValue: 6000,
+      },
     },
     isDismissable: {
       control: "boolean",
+      description: "If `true`, the alert will include a close button",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: false,
+      },
+    },
+    isVisible: {
+      control: "boolean",
+      description: "If true, the Toast is visible",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     linkText: {
       control: "text",
+      description:
+        "If linkUrl is defined, this is the text of the link. If left blank, it defaults to 'Learn more'. Note that linkText does nothing if linkUrl is not defined",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     linkUrl: {
       control: "text",
+      description: "If defined, the alert will include a link to the URL",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onHide: {
+      control: null,
+      description: "An optional function to run when the Toast is closed",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
     },
     role: {
-      control: "radio",
-      options: ["alert", "status", undefined],
+      options: ["status", "alert"],
+      control: { type: "radio" },
+      description:
+        "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
+      table: {
+        type: {
+          summary: "'status' | 'alert'",
+        },
+      },
     },
     severity: {
-      control: "radio",
-      options: ["error", "info", "success", "warning"],
+      options: ["success", "info", "warning", "error"],
+      control: { type: "radio" },
+      description: "Determine the color and icon of the alert",
+      table: {
+        type: {
+          summary: "AlertColor",
+        },
+      },
     },
     text: {
       control: "text",
+      description: "The text content of the alert",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
@@ -63,6 +129,7 @@ const meta: Meta<ToastProps> = {
     text: "The mission to Sagittarius A is set for January 7.",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default meta;
@@ -148,7 +215,7 @@ export const Info: StoryObj<ToastProps> = {
   },
 };
 
-export const ErrorToast: StoryObj<ToastProps> = {
+export const Error: StoryObj<ToastProps> = {
   ...Single,
   args: {
     text: "Security breach in Hangar 18",
@@ -197,6 +264,14 @@ export const Dismissible: StoryObj<ToastProps> = {
 };
 
 export const MultipleToasts: StoryObj<ToastProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`Toast` handles the visual appearance and show/hide logic, but not positioning. To have a Toast positioned correctly, it must be wrapped inside a `ToastStack`. There should only be one ToastStack per screen, regardless of how many Toasts there are, since a single ToastStack can accept multiple Toasts as children and will manage positioning accordingly.",
+      },
+    },
+  },
   render: function C() {
     const [toasts, setToasts] = useState([
       <Toast
