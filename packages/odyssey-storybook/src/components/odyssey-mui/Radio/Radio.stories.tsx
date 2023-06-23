@@ -25,20 +25,59 @@ const storybookMeta: Meta<RadioProps> = {
   title: "MUI Components/Forms/Radio",
   component: Radio,
   argTypes: {
+    isChecked: {
+      control: "boolean",
+      description: "If `true`, the radio button is checked",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isDisabled: {
       control: "boolean",
+      description: "If `true`, the radio button is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isInvalid: {
       control: "boolean",
+      description: "If `true`, the radio button has an invalid value",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     label: {
       control: "text",
+      description: "The label text for the radio button",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     name: {
       control: "text",
+      description: "The name attribute of the radio button",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     value: {
       control: "text",
+      description: "The value attribute of the radio button",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
@@ -46,6 +85,7 @@ const storybookMeta: Meta<RadioProps> = {
     value: "Value",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
