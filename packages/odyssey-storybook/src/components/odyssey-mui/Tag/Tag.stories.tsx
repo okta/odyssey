@@ -14,6 +14,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { UserGroupIcon } from "@okta/odyssey-react-mui";
+import { icons } from "../../../../.storybook/components/iconUtils";
 
 const storybookMeta: Meta<TagProps> = {
   title: "MUI Components/Tag",
@@ -24,9 +25,25 @@ const storybookMeta: Meta<TagProps> = {
   argTypes: {
     label: {
       control: "text",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     icon: {
-      control: "text",
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
+      description: "An optional icon to display at the start of the Tag",
+      table: {
+        type: {
+          summary: "<Icon />",
+        },
+        defaultValue: "",
+      },
     },
     isDisabled: {
       control: "boolean",
@@ -44,6 +61,7 @@ const storybookMeta: Meta<TagProps> = {
     onClick: undefined,
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;

@@ -19,38 +19,46 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-import TooltipMdx from "./Tooltip.mdx";
-
 const storybookMeta: Meta<TooltipProps> = {
   title: "MUI Components/Tooltip",
   component: Tooltip,
-  parameters: {
-    docs: {
-      page: TooltipMdx,
-    },
-  },
   argTypes: {
     children: {
-      control: { type: "object" },
+      control: "obj",
+      description: "The content that will trigger the tooltip",
+      table: {
+        type: {
+          summary: "ReactElement",
+        },
+      },
     },
     ariaType: {
-      control: {
-        options: ["label", "description"],
-        type: "radio",
+      options: ["description", "label"],
+      control: { type: "radio" },
+      description: "The type of ARIA attribute to use",
+      table: {
+        type: {
+          summary: "description | label",
+        },
       },
-      description:
-        "Choose `description` if the tooltip is an ARIA description of the child element. Otherwise, choose `label`. This must be explicitly set.",
     },
     text: {
-      control: {
-        type: "text",
+      control: "text",
+      description: "The text to display in the tooltip",
+      table: {
+        type: {
+          summary: "string",
+        },
       },
     },
     placement: {
       options: ["top", "right", "bottom", "left"],
-      control: {
-        type: "radio",
-        defaultValue: "top",
+      control: { type: "radio" },
+      description: "The placement of the tooltip",
+      table: {
+        type: {
+          summary: "top | right | bottom | left",
+        },
       },
     },
   },
@@ -58,6 +66,7 @@ const storybookMeta: Meta<TooltipProps> = {
     ariaType: "label",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
