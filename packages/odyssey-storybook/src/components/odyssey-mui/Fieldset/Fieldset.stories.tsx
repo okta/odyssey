@@ -25,24 +25,58 @@ const storybookMeta: Meta = {
   argTypes: {
     legend: {
       control: "text",
-    },
-    alert: {
-      control: "text",
-    },
-    children: {
-      control: "text",
+      description: "The title of the Fieldset",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     description: {
       control: "text",
+      description: "A supplementary description",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
-    id: {
-      control: "text",
+    children: {
+      control: "obj",
+      description: "Field components within the Fieldset",
+      table: {
+        type: {
+          summary: "ReactElement | Array<ReactElement>",
+        },
+      },
     },
-    isDisabled: {
-      control: "boolean",
+    alert: {
+      control: null,
+      description:
+        "An Infobox indicating a Fieldset-wide error or status update",
+      table: {
+        type: {
+          summary: "ReactElement<typeof Infobox>",
+        },
+      },
     },
     name: {
       control: "text",
+      description: "The name associated with the group",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    id: {
+      control: "text",
+      description: "Defines a unique identifier (ID) for the Fieldset",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
@@ -55,6 +89,7 @@ const storybookMeta: Meta = {
     ),
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
