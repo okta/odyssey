@@ -25,64 +25,181 @@ const storybookMeta: Meta<TextFieldProps> = {
   argTypes: {
     autoCompleteType: {
       control: "text",
-    },
-    hasInitialFocus: {
-      control: "boolean",
-    },
-    isDisabled: {
-      control: "boolean",
+      description:
+        "This prop helps users to fill forms faster, especially on mobile devices. You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill)",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     endAdornment: {
       control: "text",
+      description: "End `InputAdornment` for this component",
+      table: {
+        type: {
+          summary: "string | ReactElement<typeof Icon>",
+        },
+      },
     },
     errorMessage: {
       control: "text",
+      description:
+        "If `error` is not undefined, the `input` will indicate an error",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    hasInitialFocus: {
+      control: "boolean",
+      description: "If `true`, the component will receive focus automatically",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     hint: {
       control: "text",
+      description: "The helper text content",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     id: {
       control: "text",
+      description: "The id of the `input` element",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
-    label: {
-      control: "text",
+    isDisabled: {
+      control: "boolean",
+      description: "If `true`, the component is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isMultiline: {
       control: "boolean",
-    },
-    onBlur: {
-      control: "function",
-    },
-    onChange: {
-      control: "function",
-    },
-    onFocus: {
-      control: "function",
+      description: "If `true`, a TextareaAutosize element is rendered",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isOptional: {
       control: "boolean",
-    },
-    placeholder: {
-      control: "text",
+      description: "If `true`, the `input` element is not required",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isReadOnly: {
       control: "boolean",
+      description: "It prevents the user from changing the value of the field",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    label: {
+      control: "text",
+      description: "The label for the `input` element",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onBlur: {
+      control: null,
+      description: "Callback fired when the `input` element loses focus",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onChange: {
+      control: null,
+      description: "Callback fired when the value is changed",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onFocus: {
+      control: null,
+      description: "Callback fired when the `input` element gets focus",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    placeholder: {
+      control: "text",
+      description:
+        "The short hint displayed in the `input` before the user enters a value",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     startAdornment: {
       control: "text",
+      description: "Start `InputAdornment` for this component",
+      table: {
+        type: {
+          summary: "string | ReactElement<typeof Icon>",
+        },
+      },
     },
     type: {
-      control: "select",
       options: ["email", "number", "tel", "text", "url"],
+      control: { type: "radio" },
+      description:
+        "Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types)",
+      table: {
+        type: {
+          summary: "email | number | tel | text | url",
+        },
+      },
     },
     value: {
       control: "text",
+      description:
+        "The value of the `input` element, required for a controlled component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
     label: "Destination",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -96,6 +213,13 @@ export const Default: StoryObj<TextFieldProps> = {
 };
 
 export const Disabled: StoryObj<TextFieldProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "The values of disabled inputs will not be submitted.",
+      },
+    },
+  },
   args: {
     isDisabled: true,
     value: "Earth",
@@ -109,6 +233,13 @@ export const Optional: StoryObj<TextFieldProps> = {
 };
 
 export const ReadOnly: StoryObj<TextFieldProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "The values of readonly inputs will be submitted.",
+      },
+    },
+  },
   args: {
     isReadOnly: true,
     value: "Earth",
@@ -128,6 +259,13 @@ export const Hint: StoryObj<TextFieldProps> = {
 };
 
 export const Adornment: StoryObj<TextFieldProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "TextField supports both `string` and `<Icon />` adornments.",
+      },
+    },
+  },
   args: {
     label: "Cargo weight",
     endAdornment: <InputAdornment position="end">kg</InputAdornment>,
@@ -144,6 +282,14 @@ export const Email: StoryObj<TextFieldProps> = {
 };
 
 export const Multiline: StoryObj<TextFieldProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "As the user types, the field will grow vertically to accommodate the new lines.",
+      },
+    },
+  },
   args: {
     autoCompleteType: "shipping street-address",
     label: "Permanent residence",
@@ -152,6 +298,14 @@ export const Multiline: StoryObj<TextFieldProps> = {
 };
 
 export const Tel: StoryObj<TextFieldProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "TextFields of type `tel` are not automatically validated because global formats are so varied.",
+      },
+    },
+  },
   args: {
     autoCompleteType: "mobile tel",
     label: "Phone number",
