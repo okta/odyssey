@@ -18,7 +18,7 @@ export const sleep = (ms = 1000) => new Promise((r) => setTimeout(r, ms));
 export const axeRun = async (interaction = "") => {
   await sleep();
 
-  await axe
+  axe
     .run({
       runOnly: {
         type: "tag",
@@ -34,14 +34,14 @@ export const axeRun = async (interaction = "") => {
     })
     .then((results) => {
       if (results.violations.length) {
-        console.log("Accessibility issues found ==> ", results.violations);
-        throw new Error(`Accessibility issues found ${interaction}`);
+        throw new Error(
+          `Accessibility issues found in "${interaction}". ${JSON.stringify(
+            results.violations
+          )}`
+        );
       }
     })
     .catch((e) => {
-      console.log(
-        e instanceof Error ? e.message : "Unknown Error in play-test"
-      );
       throw new Error(
         e instanceof Error ? e.message : "Unknown Error in play-test"
       );
