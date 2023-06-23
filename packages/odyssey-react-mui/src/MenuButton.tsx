@@ -12,7 +12,7 @@
 
 import {
   Button,
-  ButtonProps,
+  buttonVariantValues,
   ChevronDownIcon,
   Divider,
   ListSubheader,
@@ -38,7 +38,7 @@ export type MenuButtonProps = {
   /**
    * The variant of the triggering Button
    */
-  buttonVariant?: ButtonProps["variant"];
+  buttonVariant?: (typeof buttonVariantValues)[number];
   /**
    * The end Icon on the trigggering Button
    */

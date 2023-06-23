@@ -18,20 +18,28 @@ import { Icon } from "./Icon";
 import { MuiPropsContext } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 
+export const buttonSizeValues = ["small", "medium", "large"] as const;
+export const buttonVariantValues = [
+  "primary",
+  "secondary",
+  "danger",
+  "floating",
+] as const;
+
 export type ButtonProps = {
   endIcon?: ReactElement<typeof Icon>;
   id?: string;
   isDisabled?: boolean;
   isFullWidth?: boolean;
   onClick?: MuiButtonProps["onClick"];
-  size?: MuiButtonProps["size"];
+  size?: (typeof buttonSizeValues)[number];
   startIcon?: ReactElement<typeof Icon>;
   text?: string;
   /**
    * `tooltipText` determines the text of the tooltip that wraps the button if it's icon-only.
    */
   tooltipText?: string;
-  variant?: "primary" | "secondary" | "danger" | "floating";
+  variant?: (typeof buttonVariantValues)[number];
   ariaLabel?: string;
   ariaLabelledBy?: string;
   ariaDescribedBy?: string;

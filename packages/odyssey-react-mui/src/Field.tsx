@@ -23,6 +23,8 @@ import { FieldLabel } from "./FieldLabel";
 import { useUniqueId } from "./useUniqueId";
 import { useTranslation } from "react-i18next";
 
+export const fieldTypeValues = ["single", "group"] as const;
+
 export type FieldProps = {
   /**
    * If `error` is not undefined, the `input` will indicate an error.
@@ -31,7 +33,7 @@ export type FieldProps = {
   /**
    * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
    */
-  fieldType: "single" | "group";
+  fieldType: (typeof fieldTypeValues)[number];
   hasVisibleLabel: boolean;
   /**
    * The helper text content.

@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AlertColor } from "@mui/material";
 import { useEffect, memo, useState, useCallback } from "react";
 import {
   Alert,
@@ -22,6 +21,14 @@ import {
 } from ".";
 import { Button } from "./Button";
 import { useTranslation } from "react-i18next";
+
+export const toastRoleValues = ["status", "alert"] as const;
+export const toastSeverityValues = [
+  "success",
+  "info",
+  "warning",
+  "error",
+] as const;
 
 export type ToastProps = {
   /**
@@ -57,11 +64,11 @@ export type ToastProps = {
    * ("status" for something that dynamically updates, "alert" for errors, null for something
    * unchanging)
    */
-  role?: "status" | "alert";
+  role?: (typeof toastRoleValues)[number];
   /**
    * Determine the color and icon of the alert
    */
-  severity: AlertColor;
+  severity: (typeof toastSeverityValues)[number];
   /**
    * The text content of the alert
    */

@@ -17,6 +17,14 @@ import { Button } from "./Button";
 import { Infobox } from "./Infobox";
 import { useUniqueId } from "./useUniqueId";
 
+export const formEncodingTypeValues = [
+  "application/x-www-form-urlencoded",
+  "multipart/form-data",
+  "text/plain",
+] as const;
+export const formHasAutoCompleteValues = ["on", "off"] as const;
+export const formMethodValues = ["post", "get", "dialog"] as const;
+
 export type FormProps = {
   /**
    * The title of the Form
@@ -38,7 +46,7 @@ export type FormProps = {
    * Indicates whether input elements can by default have their values automatically completed by the browser.
    * `autocomplete` attributes on form elements override it on <form>
    */
-  hasAutoComplete?: "on" | "off" | undefined;
+  hasAutoComplete?: (typeof formHasAutoCompleteValues)[number];
   /**
    * The name of the form. The value must not be the empty string, and must be unique among the form elements in the forms collection that it is in, if any.
    */
@@ -53,21 +61,17 @@ export type FormProps = {
    * If the value of the method attribute is post, enctype is the MIME type of the form submission.
    * This value can be overridden by formenctype attributes on <button>, <input type="submit">, or <input type="image"> elements.
    */
-  encodingType?:
-    | "application/x-www-form-urlencoded"
-    | "multipart/form-data"
-    | "text/plain"
-    | undefined;
+  encodingType?: (typeof formEncodingTypeValues)[number];
   /**
    * The HTTP method to submit the form with.
    * This value is overridden by formmethod attributes on <button>, <input type="submit">, or <input type="image"> elements.
    */
-  method?: "post" | "get" | "dialog" | undefined;
+  method?: (typeof formMethodValues)[number];
   /**
    * Indicates where to display the response after submitting the form. It is a name/keyword for a browsing context (for example, tab, window, or iframe).
    * This value can be overridden by a formtarget attribute on a <button>, <input type="submit">, or <input type="image"> element.
    */
-  target?: "post" | "get" | "dialog" | undefined;
+  target?: string;
   /**
    * The Field or FieldGroup components within the Form
    */

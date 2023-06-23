@@ -15,6 +15,7 @@ import {
   InputAdornment,
   TextField,
   TextFieldProps,
+  textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -174,13 +175,13 @@ const storybookMeta: Meta<TextFieldProps> = {
       },
     },
     type: {
-      options: ["email", "number", "tel", "text", "url"],
+      options: textFieldTypeValues,
       control: { type: "radio" },
       description:
         "Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types)",
       table: {
         type: {
-          summary: "email | number | tel | text | url",
+          summary: textFieldTypeValues.join(" | "),
         },
       },
     },

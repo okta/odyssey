@@ -10,7 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Banner, BannerProps } from "@okta/odyssey-react-mui";
+import {
+  Banner,
+  BannerProps,
+  bannerRoleValues,
+  bannerSeverityValues,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -50,23 +55,23 @@ const storybookMeta: Meta<typeof Banner> = {
       },
     },
     role: {
-      options: ["status", "alert"],
+      options: bannerRoleValues,
       control: { type: "radio" },
       description:
         "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
       table: {
         type: {
-          summary: "status | alert",
+          summary: bannerRoleValues.join(" | "),
         },
       },
     },
     severity: {
-      options: ["success", "info", "warning", "error"],
+      options: bannerSeverityValues,
       control: { type: "radio" },
       description: "Determine the color and icon of the alert",
       table: {
         type: {
-          summary: "success | info | warning | error",
+          summary: bannerSeverityValues.join(" | "),
         },
       },
     },

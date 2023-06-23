@@ -17,6 +17,7 @@ import {
   InformationCircleFilledIcon,
   Link,
   LinkProps,
+  linkVariantValues,
 } from "@okta/odyssey-react-mui";
 import { icons } from "../../../../.storybook/components/iconUtils";
 
@@ -78,10 +79,10 @@ export default {
     },
     variant: {
       control: { type: "radio" },
-      options: ["default", "monochrome"],
+      options: linkVariantValues,
       table: {
         type: {
-          summary: "default | monochrome",
+          summary: linkVariantValues.join(" | "),
         },
         defaultValue: "default",
       },

@@ -11,7 +11,12 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Status, StatusProps } from "@okta/odyssey-react-mui";
+import {
+  Status,
+  StatusProps,
+  statusSeverityValues,
+  statusVariantValues,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<StatusProps> = {
@@ -24,23 +29,23 @@ const storybookMeta: Meta<StatusProps> = {
     },
     severity: {
       control: "radio",
-      options: ["default", "error", "success", "warning"],
+      options: statusSeverityValues,
       description: "The severity of the Status, as indicated by its styling",
       table: {
         type: {
-          summary: "default | error | success | warning",
+          summary: statusSeverityValues.join(" | "),
         },
         defaultValue: "default",
       },
     },
     variant: {
       control: "radio",
-      options: ["lamp", "pill"],
+      options: statusVariantValues,
       description:
         "Whether the Status is displayed uncontained (`lamp`) or contained (`pill`)",
       table: {
         type: {
-          summary: "lamp | pill",
+          summary: statusVariantValues.join(" | "),
         },
         defaultValue: "lamp",
       },

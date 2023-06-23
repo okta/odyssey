@@ -16,6 +16,7 @@ import {
   Icon,
   IconProps,
   iconDictionary,
+  iconSizeValues,
   Table,
   TableBody,
   TableCell,
@@ -41,12 +42,12 @@ const storybookMeta: Meta<IconProps> = {
       },
     },
     size: {
-      options: ["small", "medium", "large"],
+      options: iconSizeValues,
       control: { type: "radio" },
       defaultValue: "medium",
       table: {
         type: {
-          summary: "small | medium | large",
+          summary: iconSizeValues.join(" | "),
         },
       },
       description: "The size of the icon",

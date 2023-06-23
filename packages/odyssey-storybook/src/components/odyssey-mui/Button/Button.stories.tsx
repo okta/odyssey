@@ -12,7 +12,12 @@
 
 import type { Meta, ReactRenderer, StoryObj } from "@storybook/react";
 
-import { Button, AddIcon } from "@okta/odyssey-react-mui";
+import {
+  Button,
+  buttonSizeValues,
+  buttonVariantValues,
+  AddIcon,
+} from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 import { icons } from "../../../../.storybook/components/iconUtils";
@@ -48,12 +53,12 @@ const storybookMeta: Meta<ButtonProps> = {
       },
     },
     size: {
-      options: ["small", "medium", "large"],
+      options: buttonSizeValues,
       control: { type: "radio" },
       description: "The size of the button",
       table: {
         type: {
-          summary: "small | medium | large",
+          summary: buttonSizeValues.join(" | "),
         },
         defaultValue: {
           summary: "medium",
@@ -121,13 +126,13 @@ const storybookMeta: Meta<ButtonProps> = {
       },
     },
     variant: {
-      options: ["primary", "secondary", "danger", "floating"],
+      options: buttonVariantValues,
       control: { type: "radio" },
       description: "The color and style of the button",
       defaultValue: "secondary",
       table: {
         type: {
-          summary: "primary | secondary | danger | floating",
+          summary: buttonVariantValues.join(" | "),
         },
         defaultValue: {
           summary: "secondary",

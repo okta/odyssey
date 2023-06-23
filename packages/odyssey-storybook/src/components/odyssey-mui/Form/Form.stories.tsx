@@ -18,6 +18,9 @@ import {
   Fieldset,
   Form,
   FormProps,
+  formEncodingTypeValues,
+  formHasAutoCompleteValues,
+  formMethodValues,
   Infobox,
   Link,
   TextField,
@@ -66,13 +69,13 @@ const storybookMeta: Meta<FormProps> = {
       },
     },
     hasAutoComplete: {
-      options: ["on", "off"],
+      options: formHasAutoCompleteValues,
       control: { type: "radio" },
       description:
         "Indicates whether input elements can have their values automatically completed by the browser",
       table: {
         type: {
-          summary: '"on" | "off" | undefined',
+          summary: formHasAutoCompleteValues.join(" | "),
         },
       },
     },
@@ -97,39 +100,33 @@ const storybookMeta: Meta<FormProps> = {
       },
     },
     encodingType: {
-      options: [
-        "application/x-www-form-urlencoded",
-        "multipart/form-data",
-        "text/plain",
-      ],
+      options: formEncodingTypeValues,
       control: { type: "radio" },
       description:
         "If the method attribute is set to 'post', the MIME type of the form submission",
       table: {
         type: {
-          summary:
-            '"application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain" | undefined',
+          summary: formEncodingTypeValues.join(" | "),
         },
       },
     },
     method: {
-      options: ["post", "get", "dialog"],
+      options: formMethodValues,
       control: { type: "radio" },
       description: "The HTTP method to submit the form with",
       table: {
         type: {
-          summary: '"post" | "get" | "dialog" | undefined',
+          summary: formMethodValues.join(" | "),
         },
       },
     },
     target: {
-      options: ["post", "get", "dialog"],
-      control: { type: "radio" },
+      control: "text",
       description:
         "Indicates where to display the response after submitting the form",
       table: {
         type: {
-          summary: '"post" | "get" | "dialog" | undefined',
+          summary: "string",
         },
       },
     },

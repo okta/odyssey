@@ -17,6 +17,8 @@ import {
   Toast,
   ToastProps,
   ToastStack,
+  toastRoleValues,
+  toastSeverityValues,
 } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 
@@ -92,23 +94,23 @@ const meta: Meta<ToastProps> = {
       },
     },
     role: {
-      options: ["status", "alert"],
+      options: toastRoleValues,
       control: { type: "radio" },
       description:
         "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
       table: {
         type: {
-          summary: "'status' | 'alert'",
+          summary: toastRoleValues.join(" | "),
         },
       },
     },
     severity: {
-      options: ["success", "info", "warning", "error"],
+      options: toastSeverityValues,
       control: { type: "radio" },
       description: "Determine the color and icon of the alert",
       table: {
         type: {
-          summary: "AlertColor",
+          summary: toastSeverityValues.join(" | "),
         },
       },
     },

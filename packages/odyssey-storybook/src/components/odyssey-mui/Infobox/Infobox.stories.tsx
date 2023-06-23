@@ -14,6 +14,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import {
   Infobox,
   InfoboxProps,
+  infoboxRoleValues,
+  infoboxSeverityValues,
   Link,
   Typography,
 } from "@okta/odyssey-react-mui";
@@ -33,23 +35,23 @@ const storybookMeta: Meta<InfoboxProps> = {
       },
     },
     role: {
-      options: ["status", "alert"],
+      options: infoboxRoleValues,
       control: { type: "radio" },
       description:
         "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
       table: {
         type: {
-          summary: "status | alert",
+          summary: infoboxRoleValues.join(" | "),
         },
       },
     },
     severity: {
-      options: ["success", "info", "warning", "error"],
+      options: infoboxSeverityValues,
       control: { type: "radio" },
       description: "Determine the color and icon of the alert",
       table: {
         type: {
-          summary: "AlertColor",
+          summary: infoboxSeverityValues.join(" | "),
         },
       },
     },

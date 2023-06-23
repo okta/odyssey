@@ -18,6 +18,7 @@ import {
   ListSubheader,
   MenuButton,
   MenuButtonProps,
+  buttonVariantValues,
   MenuItem,
   UserGroupIcon,
   GlobeIcon,
@@ -51,12 +52,12 @@ const storybookMeta: Meta<MenuButtonProps> = {
       },
     },
     buttonVariant: {
-      options: ["primary", "secondary", "danger", "floating"],
+      options: buttonVariantValues,
       control: { type: "radio" },
       description: "The variant of the triggering Button",
       table: {
         type: {
-          summary: "primary | secondary | danger | floating",
+          summary: buttonVariantValues.join(" | "),
         },
       },
     },
