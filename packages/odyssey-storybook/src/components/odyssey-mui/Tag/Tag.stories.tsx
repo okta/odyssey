@@ -23,36 +23,58 @@ const storybookMeta: Meta<TagProps> = {
     actions: { argTypesRegex: null },
   },
   argTypes: {
-    label: {
-      control: "text",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
     icon: {
       control: {
         type: "select",
       },
       options: Object.keys(icons),
       mapping: icons,
-      description: "An optional icon to display at the start of the Tag",
+      description: "An optional icon to display alongside the label",
       table: {
         type: {
           summary: "<Icon />",
         },
-        defaultValue: "",
       },
     },
     isDisabled: {
       control: "boolean",
+      description: "If `true`, the tag is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: false,
+      },
+    },
+    label: {
+      control: "text",
+      description: "The label text for the tag",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     onClick: {
+      control: "obj",
       action: true,
+      description: "Callback fired when the tag is clicked",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
     },
     onRemove: {
+      control: "obj",
       action: true,
+      description:
+        "Callback fired when the remove button of the tag is clicked",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
     },
   },
   args: {
