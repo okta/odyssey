@@ -24,18 +24,43 @@ const storybookMeta: Meta<InfoboxProps> = {
   component: Infobox,
   argTypes: {
     children: {
-      control: "text",
+      control: null,
+      description: "The contents of the alert",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
     },
     role: {
-      control: "radio",
-      options: ["alert", "status", undefined],
+      options: ["status", "alert"],
+      control: { type: "radio" },
+      description:
+        "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
+      table: {
+        type: {
+          summary: "status | alert",
+        },
+      },
     },
     severity: {
-      control: "radio",
-      options: ["error", "info", "success", "warning"],
+      options: ["success", "info", "warning", "error"],
+      control: { type: "radio" },
+      description: "Determine the color and icon of the alert",
+      table: {
+        type: {
+          summary: "AlertColor",
+        },
+      },
     },
     title: {
-      control: "string",
+      control: "text",
+      description: "The title of the alert",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
@@ -47,6 +72,7 @@ const storybookMeta: Meta<InfoboxProps> = {
     severity: "info",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
