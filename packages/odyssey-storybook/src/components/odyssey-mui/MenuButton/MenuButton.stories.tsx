@@ -23,7 +23,9 @@ import {
   GlobeIcon,
   CalendarIcon,
   OverflowVerticalIcon,
+  ChevronDownIcon,
 } from "@okta/odyssey-react-mui";
+import { icons } from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<MenuButtonProps> = {
@@ -31,25 +33,74 @@ const storybookMeta: Meta<MenuButtonProps> = {
   component: MenuButton,
   argTypes: {
     children: {
-      control: "text",
+      control: "obj",
+      description: "The <MenuItem> components within the Menu",
+      table: {
+        type: {
+          summary: "[MenuItem | Divider | ListSubheader]",
+        },
+      },
     },
     buttonLabel: {
       control: "text",
+      description: "The label on the triggering Button",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     buttonVariant: {
-      control: "text",
+      options: ["primary", "secondary", "danger", "floating"],
+      control: { type: "radio" },
+      description: "The variant of the triggering Button",
+      table: {
+        type: {
+          summary: "primary | secondary | danger | floating",
+        },
+      },
     },
     endIcon: {
-      control: "text",
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
+      description: "The end Icon on the triggering Button",
+      table: {
+        type: {
+          summary: "<Icon />",
+        },
+      },
     },
     id: {
       control: "text",
+      description: "The id of the Button",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
+    },
+    ariaLabel: {
+      control: "text",
+      description:
+        "aria-label to describe the button when the button label is empty",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
     buttonLabel: "More actions",
+    buttonVariant: "secondary",
+    endIcon: <ChevronDownIcon />,
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;

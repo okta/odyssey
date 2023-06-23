@@ -44,7 +44,7 @@ export type MenuButtonProps = {
    */
   endIcon?: ReactElement;
   /**
-   * The id of the `input` element.
+   * The id of the button
    */
   id?: string;
   /**
