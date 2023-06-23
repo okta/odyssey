@@ -32,6 +32,9 @@ export type ButtonProps = {
    */
   tooltipText?: string;
   variant?: "primary" | "secondary" | "danger" | "floating";
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
+  ariaDescribedBy?: string;
 };
 
 const Button = ({
@@ -45,6 +48,9 @@ const Button = ({
   text,
   tooltipText,
   variant,
+  ariaLabel,
+  ariaLabelledBy,
+  ariaDescribedBy,
 }: ButtonProps) => {
   const muiProps = useContext(MuiPropsContext);
 
@@ -52,6 +58,9 @@ const Button = ({
     (muiProps) => (
       <MuiButton
         {...muiProps}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
         disabled={isDisabled}
         endIcon={endIcon}
         fullWidth={isFullWidth}
@@ -74,6 +83,9 @@ const Button = ({
       startIcon,
       text,
       variant,
+      ariaLabel,
+      ariaLabelledBy,
+      ariaDescribedBy,
     ]
   );
 
@@ -91,5 +103,6 @@ const Button = ({
 };
 
 const MemoizedButton = memo(Button);
+MemoizedButton.displayName = "Button";
 
 export { MemoizedButton as Button };

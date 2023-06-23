@@ -22,7 +22,6 @@ export type CheckboxProps = {
   isInvalid?: boolean;
   isValid?: boolean;
   isChecked?: boolean;
-  isDefaultChecked?: boolean;
   isDisabled?: boolean;
   isIndeterminate?: boolean;
   isRequired?: boolean;
@@ -67,7 +66,6 @@ const Checkbox = ({
     <FormControlLabel
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
-      aria-required={isRequired}
       checked={isChecked}
       className={isInvalid ? "Mui-error" : isValid ? "Mui-valid" : ""}
       control={
@@ -84,5 +82,6 @@ const Checkbox = ({
 };
 
 const MemoizedCheckbox = memo(Checkbox);
+MemoizedCheckbox.displayName = "Checkbox";
 
 export { MemoizedCheckbox as Checkbox };

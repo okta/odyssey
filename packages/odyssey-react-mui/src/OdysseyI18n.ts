@@ -37,8 +37,8 @@ import { translation as sv } from "./properties/ts/odyssey-react-mui_sv";
 import { translation as th } from "./properties/ts/odyssey-react-mui_th";
 import { translation as tr } from "./properties/ts/odyssey-react-mui_tr";
 import { translation as uk } from "./properties/ts/odyssey-react-mui_uk";
-import { translation as zhCN } from "./properties/ts/odyssey-react-mui_zh-CN";
-import { translation as znTW } from "./properties/ts/odyssey-react-mui_zh-TW";
+import { translation as zhCN } from "./properties/ts/odyssey-react-mui_zh_CN";
+import { translation as znTW } from "./properties/ts/odyssey-react-mui_zh_TW";
 
 import {
   SupportedLanguages,

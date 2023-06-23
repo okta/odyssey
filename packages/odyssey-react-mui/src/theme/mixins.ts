@@ -11,11 +11,10 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import { DesignTokensOverride } from ".";
 
-export const mixins = (
-  odysseyTokens: DesignTokensOverride
-): ThemeOptions["mixins"] => {
+import { DesignTokens } from "./theme";
+
+export const mixins = (odysseyTokens: DesignTokens): ThemeOptions["mixins"] => {
   return {
     maxWidth: odysseyTokens.TypographyLineLengthMax,
     borderRadius: odysseyTokens.BorderRadiusMain,

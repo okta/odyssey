@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ReactElement, ReactNode, useCallback, useState } from "react";
+import React, {
+  ReactElement,
+  ReactNode,
+  memo,
+  useCallback,
+  useState,
+} from "react";
 import { Tab as MuiTab } from "@mui/material";
 import {
   TabList as MuiTabList,
@@ -67,4 +73,7 @@ const Tabs = ({ ariaLabel, tabs, initialValue = "0" }: TabsProps) => {
   );
 };
 
-export { Tabs };
+const MemoizedTabs = memo(Tabs);
+MemoizedTabs.displayName = "Tabs";
+
+export { MemoizedTabs as Tabs };

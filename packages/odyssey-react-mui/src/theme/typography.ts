@@ -11,10 +11,11 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import { DesignTokensOverride } from ".";
+
+import { DesignTokens } from "./theme";
 
 export const typography = (
-  odysseyTokens: DesignTokensOverride
+  odysseyTokens: DesignTokens
 ): ThemeOptions["typography"] => {
   return {
     htmlFontSize: 16,
@@ -78,7 +79,17 @@ export const typography = (
       fontSize: odysseyTokens.TypographyScale0,
       lineHeight: odysseyTokens.TypographyLineHeightBody,
     },
-    subtitle2: undefined,
+    subtitle2: {
+      color: odysseyTokens.HueNeutral700,
+      fontFamily: odysseyTokens.TypographyFamilyBody,
+      fontWeight: Number(odysseyTokens.TypographyWeightBody),
+      fontSize: odysseyTokens.TypographyScale1,
+      fontFeatureSettings: "'lnum', 'pnum'",
+      fontVariant: "normal",
+      lineHeight: odysseyTokens.TypographyLineHeightBody,
+      letterSpacing: "initial",
+      marginBlockEnd: odysseyTokens.Spacing5,
+    },
     body1: {
       color: odysseyTokens.TypographyColorBody,
       fontFamily: odysseyTokens.TypographyFamilyBody,
@@ -102,8 +113,8 @@ export const typography = (
     legend: {
       padding: 0,
       fontWeight: Number(odysseyTokens.TypographyWeightHeading),
-      fontSize: odysseyTokens.TypographyScale2,
-      lineHeight: odysseyTokens.TypographyLineHeightHeading6,
+      fontSize: odysseyTokens.TypographySizeHeading5,
+      lineHeight: odysseyTokens.TypographyLineHeightHeading5,
       marginBottom: odysseyTokens.Spacing2,
     },
     ui: {
