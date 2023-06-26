@@ -44,7 +44,7 @@ const storybookMeta: Meta<TooltipProps> = {
         type: "radio",
       },
       description:
-        "Choose `description` if the tooltip is an ARIA description of the child element. Otherwise, choose `label`. This must be explicitly set.",
+        "Choose `description` if the tooltip is an ARIA description of the child element, Otherwise, choose `label`. This must be explicitly set.",
     },
     text: {
       control: {
