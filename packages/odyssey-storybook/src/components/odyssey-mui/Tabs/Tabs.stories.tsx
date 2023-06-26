@@ -10,7 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, ReactRenderer, StoryObj } from "@storybook/react";
+
 import {
   FavoriteIcon,
   TabItemProps,
@@ -18,6 +19,13 @@ import {
   Tabs,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { axeRun, sleep } from "../../../axe-util";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { StepFunction } from "@storybook/types";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { screen } from "@testing-library/react";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {
   title: "MUI Components/Tabs",
@@ -43,6 +51,33 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
 
 export default storybookMeta;
 
+const selectTab = async (
+  canvasElement: HTMLElement,
+  step: StepFunction<ReactRenderer, TabItemProps>,
+  action: string,
+  tabName: string
+) => {
+  await step("select the tab", async () => {
+    await axeRun(action);
+    await sleep();
+
+    const canvas = within(canvasElement);
+    const tab = canvas.getByText(tabName);
+    await userEvent.click(tab);
+    await userEvent.tab();
+    await expect(
+      canvas.getByText(`Information about ${tabName}`)
+    ).not.toBeNull();
+
+    if (action === "Tab Disabled") {
+      const disabledTab = canvas.getByText("Disabled Tab");
+      await userEvent.click(disabledTab);
+      const tabData = screen.queryByText("Tab is disabled");
+      expect(tabData).toBeNull();
+    }
+  });
+};
+
 const DefaultTemplate: StoryObj<TabItemProps> = {
   render: function C(args) {
     const tabs: TabItemProps[] = [];
@@ -50,12 +85,12 @@ const DefaultTemplate: StoryObj<TabItemProps> = {
     tabs.push({
       label: "Planets",
       value: "planets",
-      children: "Information about Planets.",
+      children: "Information about Planets",
     });
     tabs.push({
       label: "Moons",
       value: "moons",
-      children: "Information about Moons.",
+      children: "Information about Moons",
     });
 
     if (args?.label) {
@@ -80,6 +115,9 @@ const ExampleTabContent = ({ label }: { label: string }) => {
 
 export const Default: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
+  play: async ({ canvasElement, step }) => {
+    selectTab(canvasElement, step, "Tab Default", "Moons");
+  },
 };
 
 export const Disabled: StoryObj<TabItemProps> = {
@@ -87,6 +125,10 @@ export const Disabled: StoryObj<TabItemProps> = {
   args: {
     isDisabled: true,
     label: "Disabled Tab",
+    children: "Tab is disabled",
+  },
+  play: async ({ canvasElement, step }) => {
+    selectTab(canvasElement, step, "Tab Disabled", "Moons");
   },
 };
 
@@ -96,5 +138,8 @@ export const Icons: StoryObj<TabItemProps> = {
     startIcon: <FavoriteIcon />,
     label: "Icon Tab",
     children: <ExampleTabContent label="Icon Tab" />,
+  },
+  play: async ({ canvasElement, step }) => {
+    selectTab(canvasElement, step, "Tab Icon", "Icon Tab");
   },
 };

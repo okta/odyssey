@@ -18,7 +18,7 @@ export const sleep = (ms = 1000) => new Promise((r) => setTimeout(r, ms));
 export const axeRun = async (interaction = "") => {
   await sleep();
 
-  axe
+  await axe
     .run({
       runOnly: {
         type: "tag",
