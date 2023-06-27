@@ -217,8 +217,9 @@ export const Info: StoryObj<ToastProps> = {
   },
 };
 
-export const Error: StoryObj<ToastProps> = {
+export const ErrorToast: StoryObj<ToastProps> = {
   ...Single,
+  name: "Error",
   args: {
     text: "Security breach in Hangar 18",
     role: "alert",
