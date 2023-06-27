@@ -127,6 +127,10 @@ export const components = (
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 0,
+
+            ...(ownerState.onClose !== undefined && {
+              paddingInline: odysseyTokens.Spacing6,
+            }),
           }),
           ...(ownerState.variant === "infobox" && {
             borderRadius: odysseyTokens.BorderRadiusMain,
@@ -1861,6 +1865,10 @@ export const components = (
             "&:hover": {
               color: theme.palette.text.disabled,
             },
+          },
+          "& .MuiTab-iconWrapper": {
+            marginRight: 0,
+            marginInlineEnd: odysseyTokens.Spacing1,
           },
         }),
       },
