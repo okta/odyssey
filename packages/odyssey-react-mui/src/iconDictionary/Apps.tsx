@@ -16,13 +16,13 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type DragHandleIconProps = SvgIconNoChildrenProps;
+export type AppsIconProps = SvgIconNoChildrenProps;
 
-export const DragHandleIcon = forwardRef<SVGSVGElement, DragHandleIconProps>(
+export const AppsIcon = forwardRef<SVGSVGElement, AppsIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const DragHandleIcon = forwardRef<SVGSVGElement, DragHandleIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M4.444 2.169a1 1 0 1 1 1.112 1.663 1 1 0 0 1-1.112-1.663Zm0 5a1 1 0 1 1 1.112 1.663 1 1 0 0 1-1.112-1.663ZM5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm5.444-9.831a1 1 0 1 1 1.112 1.663 1 1 0 0 1-1.112-1.663ZM11 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-.556 5.168a1 1 0 1 1 1.111 1.663 1 1 0 0 1-1.11-1.662Z"
+            d="M6.5 2a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM4 6.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0ZM6.5 13a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM4 17.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Zm9-11a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM17.5 4a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm0 9a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9ZM15 17.5a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Z"
             clipRule="evenodd"
           />
         </>
@@ -41,4 +41,4 @@ export const DragHandleIcon = forwardRef<SVGSVGElement, DragHandleIconProps>(
   }
 );
 
-DragHandleIcon.displayName = "DragHandleIcon";
+AppsIcon.displayName = "AppsIcon";

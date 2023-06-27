@@ -22,7 +22,7 @@ export const HomeIcon = forwardRef<SVGSVGElement, HomeIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -30,10 +30,10 @@ export const HomeIcon = forwardRef<SVGSVGElement, HomeIconProps>(
       >
         <>
           <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="m1 6.56.324-.297 6-5.5L8 .143l.676.62 6 5.5.324.297V12.525c0 .21 0 .415-.012.589a2.03 2.03 0 0 1-.14.65 2 2 0 0 1-1.083 1.082 2.03 2.03 0 0 1-.65.14 9.071 9.071 0 0 1-.588.012H10V10a2 2 0 1 0-4 0v4.998H3.474c-.21 0-.415 0-.59-.011a2.03 2.03 0 0 1-.65-.14 2 2 0 0 1-1.082-1.083 2.029 2.029 0 0 1-.14-.65C1 12.94 1 12.735 1 12.525V6.56ZM8 1.5 2 7v5.498c0 .466 0 .7.076.883a1 1 0 0 0 .541.541c.184.076.417.076.883.076H5V10a3 3 0 0 1 6 0v3.998h1.5c.466 0 .699 0 .883-.076a1 1 0 0 0 .54-.54c.077-.184.077-.418.077-.883V7L8 1.5Z"
-            clipRule="evenodd"
+            stroke="currentColor"
+            strokeMiterlimit={10}
+            strokeWidth={2}
+            d="m12 2 10 9v7.8c0 1.12 0 1.68-.218 2.108a2 2 0 0 1-.874.874C20.48 22 19.92 22 18.8 22H16v-6a4 4 0 0 0-8 0v6H5.2c-1.12 0-1.68 0-2.108-.218a2 2 0 0 1-.874-.874C2 20.48 2 19.92 2 18.8V11l10-9Z"
           />
         </>
       </SvgIcon>

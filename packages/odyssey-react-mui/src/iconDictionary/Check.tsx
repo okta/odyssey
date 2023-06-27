@@ -22,7 +22,7 @@ export const CheckIcon = forwardRef<SVGSVGElement, CheckIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -30,10 +30,10 @@ export const CheckIcon = forwardRef<SVGSVGElement, CheckIconProps>(
       >
         <>
           <path
-            fill="currentColor"
-            fillRule="evenodd"
-            d="m14.354 4.354-8 8a.5.5 0 0 1-.708 0l-4-4 .708-.708L6 11.293l7.646-7.647.708.708Z"
-            clipRule="evenodd"
+            stroke="currentColor"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="m5 11 4.646 4.646a.5.5 0 0 0 .708 0L19 7"
           />
         </>
       </SvgIcon>

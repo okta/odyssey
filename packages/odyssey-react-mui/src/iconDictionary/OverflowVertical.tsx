@@ -24,7 +24,7 @@ export const OverflowVerticalIcon = forwardRef<
 >((props, ref) => {
   return (
     <SvgIcon
-      viewBox="0 0 16 16"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       ref={ref}
@@ -34,7 +34,7 @@ export const OverflowVerticalIcon = forwardRef<
         <path
           fill="currentColor"
           fillRule="evenodd"
-          d="M8 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-.556 5.168a1 1 0 1 1 1.111 1.663 1 1 0 0 1-1.11-1.662Z"
+          d="M13.5 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 7.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM12 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
           clipRule="evenodd"
         />
       </>

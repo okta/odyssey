@@ -16,30 +16,29 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type AlertCircleFilledIconProps = SvgIconNoChildrenProps;
+export type ChevronLeftIconProps = SvgIconNoChildrenProps;
 
-export const AlertCircleFilledIcon = forwardRef<
-  SVGSVGElement,
-  AlertCircleFilledIconProps
->((props, ref) => {
-  return (
-    <SvgIcon
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
-      {...props}
-    >
-      <>
-        <path
-          fill="currentColor"
-          fillRule="evenodd"
-          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8 9a.5.5 0 0 1-.5-.5V4h1v4.5A.5.5 0 0 1 8 9Zm0 3a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
-          clipRule="evenodd"
-        />
-      </>
-    </SvgIcon>
-  );
-});
+export const ChevronLeftIcon = forwardRef<SVGSVGElement, ChevronLeftIconProps>(
+  (props, ref) => {
+    return (
+      <SvgIcon
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        ref={ref}
+        {...props}
+      >
+        <>
+          <path
+            stroke="currentColor"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="m14 6-5.646 5.646a.5.5 0 0 0 0 .708L14 18"
+          />
+        </>
+      </SvgIcon>
+    );
+  }
+);
 
-AlertCircleFilledIcon.displayName = "AlertCircleFilledIcon";
+ChevronLeftIcon.displayName = "ChevronLeftIcon";

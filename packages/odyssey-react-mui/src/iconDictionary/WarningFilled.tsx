@@ -16,15 +16,15 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type AlertTriangleFilledIconProps = SvgIconNoChildrenProps;
+export type WarningFilledIconProps = SvgIconNoChildrenProps;
 
-export const AlertTriangleFilledIcon = forwardRef<
+export const WarningFilledIcon = forwardRef<
   SVGSVGElement,
-  AlertTriangleFilledIconProps
+  WarningFilledIconProps
 >((props, ref) => {
   return (
     <SvgIcon
-      viewBox="0 0 16 16"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       ref={ref}
@@ -34,7 +34,7 @@ export const AlertTriangleFilledIcon = forwardRef<
         <path
           fill="currentColor"
           fillRule="evenodd"
-          d="M13.983 14.647c-.512.353-1.35.353-3.026.353H5.042c-1.675 0-2.513 0-3.025-.353a2 2 0 0 1-.839-1.322c-.101-.614.256-1.372.97-2.888l2.957-6.284C6.029 2.189 6.49 1.207 7.125.898a2 2 0 0 1 1.75 0c.634.309 1.096 1.29 2.02 3.255l2.958 6.284c.713 1.516 1.07 2.274.969 2.888a2 2 0 0 1-.839 1.322ZM8 10a.5.5 0 0 1-.5-.5V5h1v4.5a.5.5 0 0 1-.5.5Zm0 3a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+          d="M9.342 2.918c1.123-2.144 4.192-2.144 5.315 0l7.695 14.69C23.398 19.605 21.95 22 19.695 22H4.305c-2.255 0-3.703-2.395-2.657-4.392l7.694-14.69ZM12 14a1 1 0 0 1-1-1V8h2v5a1 1 0 0 1-1 1Zm0 1.75a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"
           clipRule="evenodd"
         />
       </>
@@ -42,4 +42,4 @@ export const AlertTriangleFilledIcon = forwardRef<
   );
 });
 
-AlertTriangleFilledIcon.displayName = "AlertTriangleFilledIcon";
+WarningFilledIcon.displayName = "WarningFilledIcon";

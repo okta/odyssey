@@ -16,13 +16,13 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type AlertCircleIconProps = SvgIconNoChildrenProps;
+export type DirectoryIconProps = SvgIconNoChildrenProps;
 
-export const AlertCircleIcon = forwardRef<SVGSVGElement, AlertCircleIconProps>(
+export const DirectoryIcon = forwardRef<SVGSVGElement, DirectoryIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const AlertCircleIcon = forwardRef<SVGSVGElement, AlertCircleIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-8 4a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-.5-3.5a.5.5 0 0 0 1 0V4h-1v4.5Z"
+            d="M5 2a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3H5ZM4 5a1 1 0 0 1 1-1h1v16H5a1 1 0 0 1-1-1V5Zm4 15h1.18l.251-1.254a4.66 4.66 0 0 1 9.138 0l.25 1.254H19a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H8v16Zm8.608-.862.172.862h-5.56l.172-.862a2.66 2.66 0 0 1 5.216 0ZM12 10a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm2-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"
             clipRule="evenodd"
           />
         </>
@@ -41,4 +41,4 @@ export const AlertCircleIcon = forwardRef<SVGSVGElement, AlertCircleIconProps>(
   }
 );
 
-AlertCircleIcon.displayName = "AlertCircleIcon";
+DirectoryIcon.displayName = "DirectoryIcon";

@@ -22,7 +22,7 @@ export const ArrowDownIcon = forwardRef<SVGSVGElement, ArrowDownIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const ArrowDownIcon = forwardRef<SVGSVGElement, ArrowDownIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="m8.5 13.293 4.146-4.147.708.708-5 5a.5.5 0 0 1-.708 0l-5-5 .708-.708L7.5 13.293V1h1v12.293Z"
+            d="M13 15.586V5h-2v10.586l-3.293-3.293-1.414 1.414 4.646 4.647a1.5 1.5 0 0 0 2.122 0l4.646-4.647-1.414-1.414L13 15.586Z"
             clipRule="evenodd"
           />
         </>
