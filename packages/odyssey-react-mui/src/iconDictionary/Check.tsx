@@ -30,10 +30,10 @@ export const CheckIcon = forwardRef<SVGSVGElement, CheckIconProps>(
       >
         <>
           <path
-            stroke="currentColor"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="m5 11 4.646 4.646a.5.5 0 0 0 .708 0L19 7"
+            fill="currentColor"
+            fillRule="evenodd"
+            d="m19.707 7.707-8.646 8.647a1.5 1.5 0 0 1-2.122 0l-4.646-4.647 1.414-1.414L10 14.586l8.293-8.293 1.414 1.414Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>

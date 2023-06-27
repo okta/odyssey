@@ -30,10 +30,10 @@ export const ChevronUpIcon = forwardRef<SVGSVGElement, ChevronUpIconProps>(
       >
         <>
           <path
-            stroke="currentColor"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="m18 15-5.576-5.576a.6.6 0 0 0-.848 0L6 15"
+            fill="currentColor"
+            fillRule="evenodd"
+            d="m13.131 8.717 5.576 5.576-1.414 1.414L12 10.414l-5.293 5.293-1.414-1.414 5.576-5.576a1.6 1.6 0 0 1 2.262 0Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>

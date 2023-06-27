@@ -30,10 +30,10 @@ export const HomeIcon = forwardRef<SVGSVGElement, HomeIconProps>(
       >
         <>
           <path
-            stroke="currentColor"
-            strokeMiterlimit={10}
-            strokeWidth={2}
-            d="m12 2 10 9v7.8c0 1.12 0 1.68-.218 2.108a2 2 0 0 1-.874.874C20.48 22 19.92 22 18.8 22H16v-6a4 4 0 0 0-8 0v6H5.2c-1.12 0-1.68 0-2.108-.218a2 2 0 0 1-.874-.874C2 20.48 2 19.92 2 18.8V11l10-9Z"
+            fill="currentColor"
+            fillRule="evenodd"
+            d="m12 .655.669.602 10 9 .331.298V20a3 3 0 0 1-3 3h-5v-7a3 3 0 1 0-6 0v7H4a3 3 0 0 1-3-3v-9.445l.331-.298 10-9L12 .655Zm-9 10.79V20a1 1 0 0 0 1 1h3v-5a5 5 0 0 1 10 0v5h3a1 1 0 0 0 1-1v-8.555l-9-8.1-9 8.1Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>

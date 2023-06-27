@@ -30,10 +30,10 @@ export const ChevronLeftIcon = forwardRef<SVGSVGElement, ChevronLeftIconProps>(
       >
         <>
           <path
-            stroke="currentColor"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="m14 6-5.646 5.646a.5.5 0 0 0 0 .708L14 18"
+            fill="currentColor"
+            fillRule="evenodd"
+            d="m7.646 10.94 5.647-5.647 1.414 1.414L9.414 12l5.293 5.293-1.414 1.414-5.647-5.646a1.5 1.5 0 0 1 0-2.122Z"
+            clipRule="evenodd"
           />
         </>
       </SvgIcon>

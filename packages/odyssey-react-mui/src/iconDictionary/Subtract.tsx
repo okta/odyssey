@@ -29,7 +29,12 @@ export const SubtractIcon = forwardRef<SVGSVGElement, SubtractIconProps>(
         {...props}
       >
         <>
-          <path stroke="currentColor" strokeWidth={2} d="M19 12H5" />
+          <path
+            fill="currentColor"
+            fillRule="evenodd"
+            d="M5 11h14v2H5v-2Z"
+            clipRule="evenodd"
+          />
         </>
       </SvgIcon>
     );

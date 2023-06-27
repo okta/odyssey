@@ -32,10 +32,10 @@ export const ChevronRightIcon = forwardRef<
     >
       <>
         <path
-          stroke="currentColor"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="m10 18 6-6-6-6"
+          fill="currentColor"
+          fillRule="evenodd"
+          d="m16.707 12.707-6 6-1.414-1.414L14.586 12 9.293 6.707l1.414-1.414 6 6a1 1 0 0 1 0 1.414Z"
+          clipRule="evenodd"
         />
       </>
     </SvgIcon>

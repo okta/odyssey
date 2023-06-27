@@ -46,12 +46,13 @@ import { DevicesIcon } from "./Devices";
 import { DirectoryIcon } from "./Directory";
 import { DocumentationIcon } from "./Documentation";
 import { DownloadIcon } from "./Download";
+import { DragHandleIcon } from "./DragHandle";
 import { EditIcon } from "./Edit";
 import { ExpandLeftIcon } from "./ExpandLeft";
 import { ExpandRightIcon } from "./ExpandRight";
 import { ExternalLinkIcon } from "./ExternalLink";
-import { EyeOffIcon } from "./EyeOff";
 import { EyeIcon } from "./Eye";
+import { EyeOffIcon } from "./EyeOff";
 import { FilterIcon } from "./Filter";
 import { FolderIcon } from "./Folder";
 import { GlobeIcon } from "./Globe";
@@ -64,7 +65,6 @@ import { LinkIcon } from "./Link";
 import { ListIcon } from "./List";
 import { LockIcon } from "./Lock";
 import { NotificationIcon } from "./Notification";
-import { OverflowVertical1Icon } from "./OverflowVertical1";
 import { OverflowVerticalIcon } from "./OverflowVertical";
 import { PauseIcon } from "./Pause";
 import { QuestionCircleFilledIcon } from "./QuestionCircleFilled";
@@ -84,65 +84,65 @@ import { VideoIcon } from "./Video";
 import { WarningFilledIcon } from "./WarningFilled";
 import { WarningIcon } from "./Warning";
 
-export * from "./AddCircle";
 export * from "./Add";
+export * from "./AddCircle";
 export * from "./Apps";
 export * from "./ArrowDown";
 export * from "./ArrowLeft";
 export * from "./ArrowLowerLeft";
 export * from "./ArrowLowerRight";
 export * from "./ArrowRight";
-export * from "./ArrowUpDown";
 export * from "./ArrowUp";
+export * from "./ArrowUpDown";
 export * from "./ArrowUpperLeft";
 export * from "./ArrowUpperRight";
 export * from "./Bug";
 export * from "./Calendar";
 export * from "./Call";
 export * from "./Chat";
-export * from "./CheckCircleFilled";
 export * from "./Check";
+export * from "./CheckCircleFilled";
 export * from "./ChevronDown";
 export * from "./ChevronLeft";
 export * from "./ChevronRight";
 export * from "./ChevronUp";
 export * from "./Clock";
-export * from "./CloseCircleFilled";
 export * from "./Close";
+export * from "./CloseCircleFilled";
 export * from "./CollapseLeft";
 export * from "./CollapseRight";
 export * from "./Copy";
-export * from "./DangerDiamondFilled";
 export * from "./DangerDiamond";
+export * from "./DangerDiamondFilled";
 export * from "./Delete";
 export * from "./Deny";
 export * from "./Devices";
 export * from "./Directory";
 export * from "./Documentation";
 export * from "./Download";
+export * from "./DragHandle";
 export * from "./Edit";
 export * from "./ExpandLeft";
 export * from "./ExpandRight";
 export * from "./ExternalLink";
-export * from "./EyeOff";
 export * from "./Eye";
+export * from "./EyeOff";
 export * from "./Filter";
 export * from "./Folder";
 export * from "./Globe";
 export * from "./Grid";
 export * from "./Group";
 export * from "./Home";
-export * from "./InformationCircleFilled";
 export * from "./InformationCircle";
+export * from "./InformationCircleFilled";
 export * from "./Link";
 export * from "./List";
 export * from "./Lock";
 export * from "./Notification";
-export * from "./OverflowVertical1";
 export * from "./OverflowVertical";
 export * from "./Pause";
-export * from "./QuestionCircleFilled";
 export * from "./QuestionCircle";
+export * from "./QuestionCircleFilled";
 export * from "./Refresh";
 export * from "./Reset";
 export * from "./Resume";
@@ -155,8 +155,8 @@ export * from "./Unlock";
 export * from "./Upload";
 export * from "./User";
 export * from "./Video";
-export * from "./WarningFilled";
 export * from "./Warning";
+export * from "./WarningFilled";
 
 export const iconDictionary = {
   "add-circle": AddCircleIcon,
@@ -195,6 +195,7 @@ export const iconDictionary = {
   directory: DirectoryIcon,
   documentation: DocumentationIcon,
   download: DownloadIcon,
+  "drag-handle": DragHandleIcon,
   edit: EditIcon,
   "expand-left": ExpandLeftIcon,
   "expand-right": ExpandRightIcon,
@@ -213,7 +214,7 @@ export const iconDictionary = {
   list: ListIcon,
   lock: LockIcon,
   notification: NotificationIcon,
-  "overflow-vertical1": OverflowVertical1Icon,
+  "overflow-vertical1": DragHandleIcon,
   "overflow-vertical": OverflowVerticalIcon,
   pause: PauseIcon,
   "question-circle-filled": QuestionCircleFilledIcon,

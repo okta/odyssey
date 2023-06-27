@@ -16,9 +16,9 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type ChevronDownIconProps = SvgIconNoChildrenProps;
+export type DragHandleIconProps = SvgIconNoChildrenProps;
 
-export const ChevronDownIcon = forwardRef<SVGSVGElement, ChevronDownIconProps>(
+export const DragHandleIcon = forwardRef<SVGSVGElement, DragHandleIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
@@ -32,7 +32,7 @@ export const ChevronDownIcon = forwardRef<SVGSVGElement, ChevronDownIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="m10.94 16.354-5.647-5.647 1.414-1.414L12 14.586l5.293-5.293 1.414 1.414-5.646 5.647a1.5 1.5 0 0 1-2.122 0Z"
+            d="M9 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm0 5.667a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm1.5 4.166a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 22a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm-9-11.333a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM9 14.833a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM7.5 22a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
             clipRule="evenodd"
           />
         </>
@@ -41,4 +41,4 @@ export const ChevronDownIcon = forwardRef<SVGSVGElement, ChevronDownIconProps>(
   }
 );
 
-ChevronDownIcon.displayName = "ChevronDownIcon";
+DragHandleIcon.displayName = "DragHandleIcon";
