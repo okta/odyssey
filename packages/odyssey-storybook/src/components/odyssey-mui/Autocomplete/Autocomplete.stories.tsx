@@ -13,6 +13,12 @@
 import { Autocomplete, AutocompleteProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { userEvent, within } from "@storybook/testing-library";
+import { axeRun, sleep } from "../../../axe-util";
+import { expect } from "@storybook/jest";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { screen } from "@testing-library/react";
+
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<typeof Autocomplete> = {
@@ -86,14 +92,55 @@ type AutocompleteType = AutocompleteProps<
   boolean | undefined
 >;
 
-export const Default: StoryObj<AutocompleteType> = {
+const Template: StoryObj<AutocompleteType> = {
   render: function C(props) {
     return <Autocomplete {...props} options={stations} />;
   },
 };
 
+export const Default: StoryObj<AutocompleteType> = {
+  ...Template,
+  play: async ({ canvasElement, step }) => {
+    await step("Filter and Select from listbox", async () => {
+      const canvas = within(canvasElement);
+      const comboBox = canvas.getByRole("combobox") as HTMLInputElement;
+      userEvent.click(comboBox);
+      const listbox = screen.getByRole("listbox");
+      expect(listbox).not.toBeNull();
+
+      await axeRun("Autocomplete Default");
+
+      await sleep(500);
+
+      // Check for "No options" in the list
+      userEvent.type(comboBox, "q");
+      const noOpts = screen.getByText("No options");
+      expect(noOpts).not.toBeNull();
+
+      // Check filtered item
+      await sleep(100);
+      userEvent.clear(comboBox);
+      userEvent.type(comboBox, "z");
+      const listItem = screen.getByRole("listbox").firstChild as HTMLLIElement;
+      expect(listItem?.textContent).toBe("Shirazi-Ma Complex");
+
+      // Check the selected item
+      await sleep(100);
+      userEvent.click(listItem);
+      expect(comboBox.value).toBe("Shirazi-Ma Complex");
+
+      //Clear the selected item
+      await sleep(100);
+      const clearButton = canvas.getByTitle("Clear");
+      userEvent.click(clearButton);
+      expect(comboBox.value).toBe("");
+      userEvent.tab();
+    });
+  },
+};
+
 export const Disabled: StoryObj<AutocompleteType> = {
-  ...Default,
+  ...Template,
   args: {
     isDisabled: true,
     value: { label: "Tycho Station" },
@@ -101,28 +148,65 @@ export const Disabled: StoryObj<AutocompleteType> = {
 };
 
 export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
-  ...Default,
+  ...Template,
   args: {
     isCustomValueAllowed: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Enter custom value", async () => {
+      const canvas = within(canvasElement);
+      const comboBox = canvas.getByRole("combobox") as HTMLInputElement;
+      userEvent.click(comboBox);
+
+      // Select filtered items
+      userEvent.type(comboBox, "qwerty");
+      userEvent.tab();
+      expect(comboBox.value).toBe("qwerty");
+    });
   },
 };
 
 export const Loading: StoryObj<AutocompleteType> = {
-  ...Default,
+  ...Template,
   args: {
     isLoading: true,
   },
 };
 
 export const Multiple: StoryObj<AutocompleteType> = {
-  ...Default,
+  ...Template,
   args: {
     hasMultipleChoices: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Select multiple items", async () => {
+      const canvas = within(canvasElement);
+      const comboBox = canvas.getByRole("combobox") as HTMLInputElement;
+      userEvent.click(comboBox);
+      const listbox = screen.getByRole("listbox");
+      expect(listbox).not.toBeNull();
+
+      // Select filtered items
+      userEvent.type(comboBox, "z");
+      userEvent.click(screen.getByRole("listbox").firstChild as HTMLLIElement);
+      userEvent.clear(comboBox);
+      userEvent.type(comboBox, "w");
+      userEvent.click(screen.getByRole("listbox").firstChild as HTMLLIElement);
+
+      await axeRun("Autocomplete Multiple");
+
+      //Clear the selected item
+      await sleep(500);
+      const clearButton = canvas.getByTitle("Clear");
+      userEvent.click(clearButton);
+      expect(comboBox.value).toBe("");
+      userEvent.tab();
+    });
   },
 };
 
 export const MultipleDisabled: StoryObj<AutocompleteType> = {
-  ...Default,
+  ...Template,
   args: {
     hasMultipleChoices: true,
     isDisabled: true,
@@ -131,7 +215,7 @@ export const MultipleDisabled: StoryObj<AutocompleteType> = {
 };
 
 export const MultipleReadOnly: StoryObj<AutocompleteType> = {
-  ...Default,
+  ...Template,
   args: {
     hasMultipleChoices: true,
     isReadOnly: true,
@@ -140,7 +224,7 @@ export const MultipleReadOnly: StoryObj<AutocompleteType> = {
 };
 
 export const ReadOnly: StoryObj<AutocompleteType> = {
-  ...Default,
+  ...Template,
   args: {
     isReadOnly: true,
     value: { label: "Tycho Station" },
