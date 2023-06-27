@@ -19,7 +19,7 @@ import {
   MenuButton,
   MenuButtonProps,
   MenuItem,
-  UserGroupIcon,
+  GroupIcon,
   GlobeIcon,
   CalendarIcon,
   OverflowVerticalIcon,
@@ -70,7 +70,7 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
     children: [
       <MenuItem key="1">
         <ListItemIcon>
-          <UserGroupIcon />
+          <GroupIcon />
         </ListItemIcon>
         <ListItemText>Assign crew</ListItemText>
       </MenuItem>,
