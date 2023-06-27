@@ -43,13 +43,6 @@ export {
   Snackbar,
   Stack,
   SvgIcon,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableSortLabel,
   ThemeProvider as MuiThemeProvider,
   Typography,
 } from "@mui/material";
@@ -86,13 +79,6 @@ export type {
   SnackbarProps,
   StackProps,
   SvgIconProps,
-  TableBodyProps,
-  TableCellProps,
-  TableContainerProps,
-  TableHeadProps,
-  TableProps,
-  TableRowProps,
-  TableSortLabelProps,
   ThemeOptions,
   TypographyProps,
 } from "@mui/material";
@@ -101,7 +87,7 @@ export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
 export { deepmerge, visuallyHidden } from "@mui/utils";
 
-export type { MRT_ColumnDef as DataTableColumn } from "material-react-table";
+export type { MRT_ColumnDef as TableColumn } from "material-react-table";
 
 export * from "./Autocomplete";
 export * from "./Banner";
@@ -125,14 +111,14 @@ export * from "./OdysseyCacheProvider";
 export * from "./OdysseyProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./OdysseyTranslationProvider";
-export * from "./PaginatedDataTable";
+export * from "./PaginatedTable";
 export * from "./PasswordField";
 export * from "./Radio";
 export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
-export * from "./StaticDataTable";
+export * from "./StaticTable";
 export * from "./Status";
 export * from "./Tabs";
 export * from "./Tag";

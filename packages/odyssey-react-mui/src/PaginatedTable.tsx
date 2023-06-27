@@ -34,9 +34,7 @@ import type {
   MaterialReactTableProps,
 } from "./materialReactTableTypes";
 
-export type PaginatedDataTableProps<
-  TData extends DefaultMaterialReactTableData
-> = {
+export type PaginatedTableProps<TData extends DefaultMaterialReactTableData> = {
   columns: MaterialReactTableProps<TData>["columns"];
   data: MaterialReactTableProps<TData>["data"];
   fetchMoreData?: () => void;
@@ -55,7 +53,7 @@ export type PaginatedDataTableProps<
   >;
 };
 
-const PaginatedDataTable = <TData extends DefaultMaterialReactTableData>({
+const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
   columns,
   data,
   fetchMoreData,
@@ -70,7 +68,7 @@ const PaginatedDataTable = <TData extends DefaultMaterialReactTableData>({
   rowsPerPage = 10,
   state,
   ToolbarButtons,
-}: PaginatedDataTableProps<TData>) => {
+}: PaginatedTableProps<TData>) => {
   const { t } = useTranslation();
 
   const rowVirtualizerInstanceRef =
@@ -105,7 +103,7 @@ const PaginatedDataTable = <TData extends DefaultMaterialReactTableData>({
         <Typography>
           <Trans
             count={totalFetchedRows}
-            i18nKey="datatable.fetchedrows.text"
+            i18nKey="Table.fetchedrows.text"
             values={{
               totalRows: totalFetchedRows,
             }}
@@ -115,7 +113,7 @@ const PaginatedDataTable = <TData extends DefaultMaterialReactTableData>({
         <Typography>
           <Trans
             count={totalFetchedRows}
-            i18nKey="datatable.rows.text"
+            i18nKey="Table.rows.text"
             values={{
               totalRows: totalFetchedRows,
             }}
@@ -209,7 +207,7 @@ const PaginatedDataTable = <TData extends DefaultMaterialReactTableData>({
     () =>
       hasError
         ? {
-            children: t("datatable.error"),
+            children: t("Table.error"),
             severity: "error",
           }
         : {},
@@ -227,6 +225,17 @@ const PaginatedDataTable = <TData extends DefaultMaterialReactTableData>({
     []
   );
 
+  const muiCheckboxStyles = useCallback(
+    (theme) =>
+      typeof theme.components?.MuiCheckbox?.styleOverrides?.root === "function"
+        ? theme.components?.MuiCheckbox?.styleOverrides?.root?.({
+            ownerState: {},
+            theme,
+          })
+        : "",
+    []
+  );
+
   return (
     <MaterialReactTable
       columns={columns}
@@ -237,6 +246,8 @@ const PaginatedDataTable = <TData extends DefaultMaterialReactTableData>({
       enableSorting={false}
       getRowId={getRowId}
       initialState={modifiedInitialState}
+      muiSelectAllCheckboxProps={{ sx: muiCheckboxStyles }}
+      muiSelectCheckboxProps={{ sx: muiCheckboxStyles }}
       muiTablePaginationProps={muiTablePaginationProps}
       muiToolbarAlertBannerProps={muiToolbarAlertBannerProps}
       onColumnFiltersChange={setColumnFilters}
@@ -252,11 +263,9 @@ const PaginatedDataTable = <TData extends DefaultMaterialReactTableData>({
   );
 };
 
-const MemoizedPaginatedDataTable = memo(
-  PaginatedDataTable
-) as typeof PaginatedDataTable;
+const MemoizedPaginatedTable = memo(PaginatedTable) as typeof PaginatedTable;
 
 // @ts-expect-error | This is going to error because the component isn't and can't be defined as a `FunctionComponent`, and therefore, doesn't have a `displayName` prop.
-MemoizedPaginatedDataTable.displayName = "PaginatedDataTable";
+MemoizedPaginatedTable.displayName = "PaginatedTable";
 
-export { MemoizedPaginatedDataTable as PaginatedDataTable };
+export { MemoizedPaginatedTable as PaginatedTable };

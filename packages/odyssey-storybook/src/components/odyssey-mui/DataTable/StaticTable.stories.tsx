@@ -13,16 +13,16 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
-  DataTableColumn,
-  StaticDataTable,
-  StaticDataTableProps,
+  TableColumn,
+  StaticTable,
+  StaticTableProps,
 } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta = {
-  title: "MUI Components/Data Table/Static",
-  component: StaticDataTable,
+  title: "MUI Components/Table/Static",
+  component: StaticTable,
   argTypes: {
     columns: {
       control: "array",
@@ -77,7 +77,7 @@ type Person = {
   state: string;
 };
 
-const columns: DataTableColumn<Person>[] = [
+const columns: TableColumn<Person>[] = [
   {
     accessorKey: "name.firstName",
     header: "First Name",
@@ -504,7 +504,7 @@ const data: Person[] = [
   },
 ];
 
-export const BasicUsage: StoryObj<StaticDataTableProps<Person>> = {
+export const BasicUsage: StoryObj<StaticTableProps<Person>> = {
   args: {
     columns,
     data,
@@ -512,7 +512,7 @@ export const BasicUsage: StoryObj<StaticDataTableProps<Person>> = {
   },
 };
 
-export const CustomToolbar: StoryObj<StaticDataTableProps<Person>> = {
+export const CustomToolbar: StoryObj<StaticTableProps<Person>> = {
   args: {
     columns,
     data,

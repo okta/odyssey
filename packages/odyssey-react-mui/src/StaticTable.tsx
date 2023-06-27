@@ -103,7 +103,7 @@ const StaticDataTable = <TData extends DefaultMaterialReactTableData>({
       muiToolbarAlertBannerProps={
         hasError
           ? {
-              children: t("datatable.error"),
+              children: t("table.error"),
               color: "error",
             }
           : undefined
