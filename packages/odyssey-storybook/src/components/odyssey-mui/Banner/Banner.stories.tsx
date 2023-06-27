@@ -14,6 +14,9 @@ import { Banner, BannerProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { expect, jest } from "@storybook/jest";
+import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<typeof Banner> = {
   title: "MUI Components/Alerts/Banner",
@@ -83,12 +86,27 @@ export const BannerWithLink: StoryObj<BannerProps> = {
     severity: "error",
     text: "An unidentified flying object compromised Hangar 18.",
   },
+  play: async ({ canvasElement, step }) => {
+    await step("check for the link text", async () => {
+      const canvas = within(canvasElement);
+      const link = canvas.getByText("View report") as HTMLAnchorElement;
+      expect(link?.tagName).toBe("A");
+      expect(link?.href).toBe(`${link?.baseURI}#anchor`);
+    });
+  },
 };
 
 export const DismissibleBanner: StoryObj<BannerProps> = {
   args: {
-    onClose: function noRefCheck(event) {
-      event;
-    },
+    onClose: jest.fn(),
+  },
+  play: async ({ args, canvasElement, step }) => {
+    await step("dismiss the banner on click", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByTitle("Close");
+      userEvent.click(button);
+      await waitFor(() => expect(args.onClose).toHaveBeenCalled());
+      await axeRun("Dismissible Banner");
+    });
   },
 };
