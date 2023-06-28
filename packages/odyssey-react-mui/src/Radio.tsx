@@ -44,5 +44,6 @@ const Radio = ({
 );
 
 const MemoizedRadio = memo(Radio);
+MemoizedRadio.displayName = "Radio";
 
 export { MemoizedRadio as Radio };

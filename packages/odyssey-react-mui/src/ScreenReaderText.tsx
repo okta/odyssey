@@ -29,9 +29,12 @@ export type ScreenReaderTextProps = {
 const style = { ...visuallyHidden };
 
 const ScreenReaderText = ({ children }: ScreenReaderTextProps) => (
-  <Box sx={style}>{children}</Box>
+  <Box sx={style} component="span">
+    {children}
+  </Box>
 );
 
 const MemoizedScreenReaderText = memo(ScreenReaderText);
+MemoizedScreenReaderText.displayName = "ScreenReaderText";
 
 export { MemoizedScreenReaderText as ScreenReaderText };

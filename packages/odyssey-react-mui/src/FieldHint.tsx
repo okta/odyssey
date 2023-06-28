@@ -24,5 +24,6 @@ const FieldHint = ({ id, text }: FieldHintProps) => {
 };
 
 const MemoizedFieldHint = memo(FieldHint);
+MemoizedFieldHint.displayName = "FieldHint";
 
 export { MemoizedFieldHint as FieldHint };

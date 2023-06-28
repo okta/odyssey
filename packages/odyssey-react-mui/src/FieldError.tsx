@@ -35,5 +35,6 @@ const FieldError = ({ id, text }: FieldErrorProps) => {
 };
 
 const MemoizedFieldError = memo(FieldError);
+MemoizedFieldError.displayName = "FieldError";
 
 export { MemoizedFieldError as FieldError };

@@ -117,7 +117,11 @@ const Form = ({
           {title}
         </Typography>
       )}
-      {description && <Typography paragraph>{description}</Typography>}
+      {description && (
+        <Typography component="p" variant="subtitle2">
+          {description}
+        </Typography>
+      )}
       {alert}
       {children}
       {formActions && (

@@ -56,5 +56,6 @@ const FieldLabel = ({
 };
 
 const MemoizedFieldLabel = memo(FieldLabel);
+MemoizedFieldLabel.displayName = "FieldLabel";
 
 export { MemoizedFieldLabel as FieldLabel };

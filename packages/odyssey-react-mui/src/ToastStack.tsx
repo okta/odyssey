@@ -29,5 +29,6 @@ const ToastStack = ({ children }: ToastStackProps) => {
 };
 
 const MemoizedToastStack = memo(ToastStack);
+MemoizedToastStack.displayName = "ToastStack";
 
 export { MemoizedToastStack as ToastStack };

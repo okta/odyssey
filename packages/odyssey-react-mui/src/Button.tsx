@@ -103,5 +103,6 @@ const Button = ({
 };
 
 const MemoizedButton = memo(Button);
+MemoizedButton.displayName = "Button";
 
 export { MemoizedButton as Button };
