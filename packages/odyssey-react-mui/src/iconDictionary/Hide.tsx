@@ -16,9 +16,9 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type EyeOffIconProps = SvgIconNoChildrenProps;
+export type HideIconProps = SvgIconNoChildrenProps;
 
-export const EyeOffIcon = forwardRef<SVGSVGElement, EyeOffIconProps>(
+export const HideIcon = forwardRef<SVGSVGElement, HideIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
@@ -41,4 +41,4 @@ export const EyeOffIcon = forwardRef<SVGSVGElement, EyeOffIconProps>(
   }
 );
 
-EyeOffIcon.displayName = "EyeOffIcon";
+HideIcon.displayName = "HideIcon";

@@ -18,7 +18,7 @@ import { ArrowLeftIcon } from "./ArrowLeft";
 import { ArrowLowerLeftIcon } from "./ArrowLowerLeft";
 import { ArrowLowerRightIcon } from "./ArrowLowerRight";
 import { ArrowRightIcon } from "./ArrowRight";
-import { ArrowUpDownIcon } from "./ArrowUpDown";
+import { ArrowUnsortedIcon } from "./ArrowUnsorted";
 import { ArrowUpIcon } from "./ArrowUp";
 import { ArrowUpperLeftIcon } from "./ArrowUpperLeft";
 import { ArrowUpperRightIcon } from "./ArrowUpperRight";
@@ -46,26 +46,25 @@ import { DevicesIcon } from "./Devices";
 import { DirectoryIcon } from "./Directory";
 import { DocumentationIcon } from "./Documentation";
 import { DownloadIcon } from "./Download";
-import { DragHandleIcon } from "./DragHandle";
+import { DragIndicatorIcon } from "./DragIndicator";
 import { EditIcon } from "./Edit";
 import { ExpandLeftIcon } from "./ExpandLeft";
 import { ExpandRightIcon } from "./ExpandRight";
 import { ExternalLinkIcon } from "./ExternalLink";
-import { EyeIcon } from "./Eye";
-import { EyeOffIcon } from "./EyeOff";
 import { FilterIcon } from "./Filter";
 import { FolderIcon } from "./Folder";
 import { GlobeIcon } from "./Globe";
 import { GridIcon } from "./Grid";
 import { GroupIcon } from "./Group";
+import { HideIcon } from "./Hide";
 import { HomeIcon } from "./Home";
 import { InformationCircleFilledIcon } from "./InformationCircleFilled";
 import { InformationCircleIcon } from "./InformationCircle";
 import { LinkIcon } from "./Link";
 import { ListIcon } from "./List";
 import { LockIcon } from "./Lock";
+import { MoreIcon } from "./More";
 import { NotificationIcon } from "./Notification";
-import { OverflowVerticalIcon } from "./OverflowVertical";
 import { PauseIcon } from "./Pause";
 import { QuestionCircleFilledIcon } from "./QuestionCircleFilled";
 import { QuestionCircleIcon } from "./QuestionCircle";
@@ -75,6 +74,7 @@ import { ResumeIcon } from "./Resume";
 import { SearchIcon } from "./Search";
 import { ServerIcon } from "./Server";
 import { SettingsIcon } from "./Settings";
+import { ShowIcon } from "./Show";
 import { SubtractIcon } from "./Subtract";
 import { SyncIcon } from "./Sync";
 import { UnlockIcon } from "./Unlock";
@@ -92,8 +92,8 @@ export * from "./ArrowLeft";
 export * from "./ArrowLowerLeft";
 export * from "./ArrowLowerRight";
 export * from "./ArrowRight";
+export * from "./ArrowUnsorted";
 export * from "./ArrowUp";
-export * from "./ArrowUpDown";
 export * from "./ArrowUpperLeft";
 export * from "./ArrowUpperRight";
 export * from "./Bug";
@@ -120,26 +120,25 @@ export * from "./Devices";
 export * from "./Directory";
 export * from "./Documentation";
 export * from "./Download";
-export * from "./DragHandle";
+export * from "./DragIndicator";
 export * from "./Edit";
 export * from "./ExpandLeft";
 export * from "./ExpandRight";
 export * from "./ExternalLink";
-export * from "./Eye";
-export * from "./EyeOff";
 export * from "./Filter";
 export * from "./Folder";
 export * from "./Globe";
 export * from "./Grid";
 export * from "./Group";
+export * from "./Hide";
 export * from "./Home";
 export * from "./InformationCircle";
 export * from "./InformationCircleFilled";
 export * from "./Link";
 export * from "./List";
 export * from "./Lock";
+export * from "./More";
 export * from "./Notification";
-export * from "./OverflowVertical";
 export * from "./Pause";
 export * from "./QuestionCircle";
 export * from "./QuestionCircleFilled";
@@ -149,6 +148,7 @@ export * from "./Resume";
 export * from "./Search";
 export * from "./Server";
 export * from "./Settings";
+export * from "./Show";
 export * from "./Subtract";
 export * from "./Sync";
 export * from "./Unlock";
@@ -167,7 +167,7 @@ export const iconDictionary = {
   "arrow-lower-left": ArrowLowerLeftIcon,
   "arrow-lower-right": ArrowLowerRightIcon,
   "arrow-right": ArrowRightIcon,
-  "arrow-up-down": ArrowUpDownIcon,
+  "arrow-unsorted": ArrowUnsortedIcon,
   "arrow-up": ArrowUpIcon,
   "arrow-upper-left": ArrowUpperLeftIcon,
   "arrow-upper-right": ArrowUpperRightIcon,
@@ -195,27 +195,25 @@ export const iconDictionary = {
   directory: DirectoryIcon,
   documentation: DocumentationIcon,
   download: DownloadIcon,
-  "drag-handle": DragHandleIcon,
+  "drag-indicator": DragIndicatorIcon,
   edit: EditIcon,
   "expand-left": ExpandLeftIcon,
   "expand-right": ExpandRightIcon,
   "external-link": ExternalLinkIcon,
-  "eye-off": EyeOffIcon,
-  eye: EyeIcon,
   filter: FilterIcon,
   folder: FolderIcon,
   globe: GlobeIcon,
   grid: GridIcon,
   group: GroupIcon,
+  hide: HideIcon,
   home: HomeIcon,
   "information-circle-filled": InformationCircleFilledIcon,
   "information-circle": InformationCircleIcon,
   link: LinkIcon,
   list: ListIcon,
   lock: LockIcon,
+  more: MoreIcon,
   notification: NotificationIcon,
-  "overflow-vertical1": DragHandleIcon,
-  "overflow-vertical": OverflowVerticalIcon,
   pause: PauseIcon,
   "question-circle-filled": QuestionCircleFilledIcon,
   "question-circle": QuestionCircleIcon,
@@ -225,6 +223,7 @@ export const iconDictionary = {
   search: SearchIcon,
   server: ServerIcon,
   settings: SettingsIcon,
+  show: ShowIcon,
   subtract: SubtractIcon,
   sync: SyncIcon,
   unlock: UnlockIcon,

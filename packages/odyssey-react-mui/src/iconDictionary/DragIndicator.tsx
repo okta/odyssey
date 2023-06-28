@@ -16,11 +16,11 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type OverflowVerticalIconProps = SvgIconNoChildrenProps;
+export type DragIndicatorIconProps = SvgIconNoChildrenProps;
 
-export const OverflowVerticalIcon = forwardRef<
+export const DragIndicatorIcon = forwardRef<
   SVGSVGElement,
-  OverflowVerticalIconProps
+  DragIndicatorIconProps
 >((props, ref) => {
   return (
     <SvgIcon
@@ -34,7 +34,7 @@ export const OverflowVerticalIcon = forwardRef<
         <path
           fill="currentColor"
           fillRule="evenodd"
-          d="M13.5 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 7.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM12 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+          d="M9 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm0 5.667a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm1.5 4.166a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 22a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm-9-11.333a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM9 14.833a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM7.5 22a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
           clipRule="evenodd"
         />
       </>
@@ -42,4 +42,4 @@ export const OverflowVerticalIcon = forwardRef<
   );
 });
 
-OverflowVerticalIcon.displayName = "OverflowVerticalIcon";
+DragIndicatorIcon.displayName = "DragIndicatorIcon";

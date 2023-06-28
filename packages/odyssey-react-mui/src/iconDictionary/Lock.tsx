@@ -32,7 +32,7 @@ export const LockIcon = forwardRef<SVGSVGElement, LockIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M5 11h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-8Zm12-5v3h4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9h4V6a5 5 0 0 1 10 0Zm-2 0v3H9V6a3 3 0 1 1 6 0Zm-3 11.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+            d="M5 11h14v7a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3v-7Zm2-5v3H3v9a5 5 0 0 0 5 5h8a5 5 0 0 0 5-5V9h-4V6A5 5 0 0 0 7 6Zm8 3V6a3 3 0 1 0-6 0v3h6Zm-3 8.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
             clipRule="evenodd"
           />
         </>

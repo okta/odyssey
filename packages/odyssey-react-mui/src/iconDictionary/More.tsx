@@ -16,9 +16,9 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type ArrowUpDownIconProps = SvgIconNoChildrenProps;
+export type MoreIconProps = SvgIconNoChildrenProps;
 
-export const ArrowUpDownIcon = forwardRef<SVGSVGElement, ArrowUpDownIconProps>(
+export const MoreIcon = forwardRef<SVGSVGElement, MoreIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
@@ -32,7 +32,7 @@ export const ArrowUpDownIcon = forwardRef<SVGSVGElement, ArrowUpDownIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M17 15.586V5h-2v10.586l-2.293-2.293-1.414 1.414 3.646 3.646a1.5 1.5 0 0 0 2.122 0l3.646-3.646-1.414-1.414L17 15.586ZM6.94 5.646 3.292 9.293l1.414 1.414L7 8.414V19h2V8.414l2.293 2.293 1.414-1.414-3.646-3.647a1.5 1.5 0 0 0-2.122 0Z"
+            d="M13.5 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 7.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM12 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
             clipRule="evenodd"
           />
         </>
@@ -41,4 +41,4 @@ export const ArrowUpDownIcon = forwardRef<SVGSVGElement, ArrowUpDownIconProps>(
   }
 );
 
-ArrowUpDownIcon.displayName = "ArrowUpDownIcon";
+MoreIcon.displayName = "MoreIcon";

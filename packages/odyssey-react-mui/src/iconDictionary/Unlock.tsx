@@ -32,7 +32,7 @@ export const UnlockIcon = forwardRef<SVGSVGElement, UnlockIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M9 6v3h12v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9h4V6a5 5 0 0 1 10 0v.5h-2V6a3 3 0 1 0-6 0Zm-4 5v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8H5Zm7 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+            d="M9 6v3h12v9a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V9h4V6a5 5 0 0 1 10 0v.5h-2V6a3 3 0 1 0-6 0Zm-4 5v7a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-7H5Zm7 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
             clipRule="evenodd"
           />
         </>

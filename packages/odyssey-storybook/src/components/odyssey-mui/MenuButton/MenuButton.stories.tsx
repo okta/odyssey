@@ -22,7 +22,7 @@ import {
   GroupIcon,
   GlobeIcon,
   CalendarIcon,
-  OverflowVerticalIcon,
+  MoreIcon,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -140,6 +140,6 @@ export const IconButton: StoryObj<MenuButtonProps> = {
       <MenuItem key="3">Launch</MenuItem>,
     ],
     buttonLabel: "",
-    endIcon: <OverflowVerticalIcon />,
+    endIcon: <MoreIcon />,
   },
 };

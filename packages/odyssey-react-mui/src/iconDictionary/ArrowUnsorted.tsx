@@ -16,11 +16,11 @@ import { forwardRef } from "react";
 import { SvgIcon } from "./SvgIcon";
 import type { SvgIconNoChildrenProps } from "./types";
 
-export type OverflowVertical1IconProps = SvgIconNoChildrenProps;
+export type ArrowUnsortedIconProps = SvgIconNoChildrenProps;
 
-export const OverflowVertical1Icon = forwardRef<
+export const ArrowUnsortedIcon = forwardRef<
   SVGSVGElement,
-  OverflowVertical1IconProps
+  ArrowUnsortedIconProps
 >((props, ref) => {
   return (
     <SvgIcon
@@ -34,7 +34,7 @@ export const OverflowVertical1Icon = forwardRef<
         <path
           fill="currentColor"
           fillRule="evenodd"
-          d="M9 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm0 5.667a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm1.5 4.166a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM16.5 22a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm-9-11.333a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM9 14.833a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM7.5 22a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+          d="M17 15.586V5h-2v10.586l-2.293-2.293-1.414 1.414 3.646 3.646a1.5 1.5 0 0 0 2.122 0l3.646-3.646-1.414-1.414L17 15.586ZM6.94 5.646 3.292 9.293l1.414 1.414L7 8.414V19h2V8.414l2.293 2.293 1.414-1.414-3.646-3.647a1.5 1.5 0 0 0-2.122 0Z"
           clipRule="evenodd"
         />
       </>
@@ -42,4 +42,4 @@ export const OverflowVertical1Icon = forwardRef<
   );
 });
 
-OverflowVertical1Icon.displayName = "OverflowVertical1Icon";
+ArrowUnsortedIcon.displayName = "ArrowUnsortedIcon";
