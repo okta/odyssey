@@ -103,7 +103,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
         <Typography>
           <Trans
             count={totalFetchedRows}
-            i18nKey="Table.fetchedrows.text"
+            i18nKey="table.fetchedrows.text"
             values={{
               totalRows: totalFetchedRows,
             }}
@@ -113,7 +113,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
         <Typography>
           <Trans
             count={totalFetchedRows}
-            i18nKey="Table.rows.text"
+            i18nKey="table.rows.text"
             values={{
               totalRows: totalFetchedRows,
             }}
@@ -207,7 +207,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
     () =>
       hasError
         ? {
-            children: t("Table.error"),
+            children: t("table.error"),
             severity: "error",
           }
         : {},
