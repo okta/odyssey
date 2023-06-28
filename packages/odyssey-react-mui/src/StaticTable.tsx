@@ -30,21 +30,20 @@ import type {
   MaterialReactTableProps,
 } from "./materialReactTableTypes";
 
-export type StaticDataTableProps<TData extends DefaultMaterialReactTableData> =
-  {
-    columns: MaterialReactTableProps<TData>["columns"];
-    data: MaterialReactTableProps<TData>["data"];
-    getRowId?: MaterialReactTableProps<TData>["getRowId"];
-    hasError?: boolean;
-    initialState?: MaterialReactTableProps<TData>["initialState"];
-    onGlobalFilterChange?: MaterialReactTableProps<TData>["onGlobalFilterChange"];
-    state?: MaterialReactTableProps<TData>["state"];
-    ToolbarButtons?: FunctionComponent<
-      { table: MRT_TableInstance<TData> } & unknown
-    >;
-  };
+export type StaticTableProps<TData extends DefaultMaterialReactTableData> = {
+  columns: MaterialReactTableProps<TData>["columns"];
+  data: MaterialReactTableProps<TData>["data"];
+  getRowId?: MaterialReactTableProps<TData>["getRowId"];
+  hasError?: boolean;
+  initialState?: MaterialReactTableProps<TData>["initialState"];
+  onGlobalFilterChange?: MaterialReactTableProps<TData>["onGlobalFilterChange"];
+  state?: MaterialReactTableProps<TData>["state"];
+  ToolbarButtons?: FunctionComponent<
+    { table: MRT_TableInstance<TData> } & unknown
+  >;
+};
 
-const StaticDataTable = <TData extends DefaultMaterialReactTableData>({
+const StaticTable = <TData extends DefaultMaterialReactTableData>({
   columns,
   data,
   getRowId,
@@ -53,7 +52,7 @@ const StaticDataTable = <TData extends DefaultMaterialReactTableData>({
   onGlobalFilterChange,
   state,
   ToolbarButtons,
-}: StaticDataTableProps<TData>) => {
+}: StaticTableProps<TData>) => {
   const { t } = useTranslation();
 
   const rowVirtualizerInstanceRef =
@@ -118,6 +117,6 @@ const StaticDataTable = <TData extends DefaultMaterialReactTableData>({
   );
 };
 
-const MemoizedStaticDataTable = memo(StaticDataTable) as typeof StaticDataTable;
+const MemoizedStaticTable = memo(StaticTable) as typeof StaticTable;
 
-export { MemoizedStaticDataTable as StaticDataTable };
+export { MemoizedStaticTable as StaticTable };

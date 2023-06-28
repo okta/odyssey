@@ -10,238 +10,267 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState, useEffect } from "react";
-import type { ReactNode } from "react";
+import { Fragment, ReactNode } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import {
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell,
+  StaticTable,
+  type TableColumn,
   Typography,
 } from "@okta/odyssey-react-mui";
 
 type FontWeight = 400 | 600;
 
-type Token = {
-  name: string;
-  value: string | number;
+type TokenName = keyof typeof Tokens;
+type TokenValue = (typeof Tokens)[TokenName];
+
+type TokenDataItem = {
+  name: TokenName;
+  value: TokenValue;
+};
+
+type TokenTableItem = TokenDataItem & {
+  tableName: string;
 };
 
 type TableData = {
   name: string;
-  values: Array<Token>;
+  values: TokenTableItem[];
 };
 
-type TokenName = keyof typeof Tokens;
+const renderBorder = (token: TokenDataItem) => (
+  <span
+    style={{
+      width: "1.25em",
+      height: "1.25em",
+      borderWidth: token.name.includes("BorderWidth") ? token.value : "1px",
+      borderStyle: token.name.includes("BorderStyle")
+        ? (token.value as string)
+        : "solid",
+      borderColor: "#d7d7dc",
+      borderRadius: `${token.name.includes("BorderRadius") ? token.value : ""}`,
+      display: "inline-block",
+      verticalAlign: "middle",
+    }}
+  ></span>
+);
 
-export const TokenTables = (): ReactNode => {
-  const [tables, setTables] = useState<Array<TableData>>([]);
+const renderColor = (value: TokenValue) => (
+  <span
+    style={{
+      width: "1em",
+      height: "1em",
+      display: "inline-block",
+      backgroundColor: `${value}`,
+      borderStyle: "solid",
+      borderColor: `${value === "#ffffff" ? "#d7d7dc" : "transparent"}`,
+      borderRadius: "4px",
+      verticalAlign: "middle",
+    }}
+  ></span>
+);
 
-  useEffect(() => {
-    const tokenKeys = Object.keys(Tokens);
-    const tempTables: Array<TableData> = [];
-    let currentType: string;
-    let currentValues: Array<Token>;
-    tokenKeys.forEach((tokenName) => {
-      const parts = tokenName.match(/[A-Z][a-z]+/g);
-      if (!parts) return;
+const renderColorText = (value: TokenValue) => (
+  <span
+    style={{
+      color: `${value}`,
+      display: "inline-block",
+      paddingInline: "4px",
+      backgroundColor: `${value === "#ffffff" ? "#000" : ""}`,
+    }}
+  >
+    Aa
+  </span>
+);
 
-      let tokenType = parts[0];
-      if (
-        parts[0] === "Color" ||
-        parts[0] === "Hue" ||
-        parts[0] === "Palette"
-      ) {
-        tokenType = `${parts[1]} ${parts[0]}s`;
-      }
+const renderSpace = (value: TokenValue) => (
+  <span
+    style={{
+      width: `${value}`,
+      height: `${value}`,
+      display: "inline-block",
+      backgroundColor: "#f88c90",
+    }}
+  ></span>
+);
 
-      if (tokenType !== currentType) {
-        currentValues = [];
-        tempTables.push({ name: tokenType, values: currentValues });
-        currentType = tokenType;
-      }
+const renderFont = (token: TokenDataItem) => (
+  <span
+    style={{
+      fontFamily: `${token.name.includes("FontFamily") ? token.value : ""}`,
+      fontSize: `${token.name.includes("FontSize") ? token.value : ""}`,
+      fontWeight: `${
+        token.name.includes("FontWeight") ? token.value : ""
+      }` as unknown as FontWeight,
+      lineHeight: `${token.name.includes("LineHeight") ? token.value : ""}`,
+      backgroundColor: `${token.name.includes("LineHeight") ? "#ebebed" : ""}`,
+      display: `${token.name.includes("LineHeight") ? "inline-block" : ""}`,
+    }}
+  >
+    Waltz, bad nymph, for quick jigs vex!
+  </span>
+);
 
-      currentValues.push({
-        name: tokenName,
-        value: Tokens[tokenName as TokenName],
-      });
-    });
+const renderFocus = (value: TokenValue) => (
+  <span
+    style={{
+      width: "1.25em",
+      height: "1.25em",
+      display: "inline-block",
+      boxShadow: `0 0 0 ${value} #a7b5ec`,
+    }}
+  ></span>
+);
 
-    tempTables
-      .find((table) => table.name === "Palette Colors")
-      ?.values.sort((a: Token, b: Token) => {
-        const nameA = a.name.toUpperCase();
-        const nameB = b.name.toUpperCase();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      });
+const renderShadow = (value: TokenValue) => (
+  <span
+    style={{
+      width: "1.5em",
+      height: "1.5em",
+      display: "inline-block",
+      boxShadow: `${value}`,
+    }}
+  ></span>
+);
 
-    setTables(tempTables);
-  }, [setTables]);
+const tokenTables = Object.entries(Tokens as Record<TokenName, TokenValue>)
+  .map(([key, value]) => ({
+    name: key as TokenName,
+    value,
+  }))
+  .reduce((tokenTables, { name, value }) => {
+    const parts = name.match(/[A-Z][a-z]+/g);
 
-  const renderBorder = (token: Token) => (
-    <span
-      style={{
-        width: "1.25em",
-        height: "1.25em",
-        borderWidth: token.name.includes("BorderWidth") ? token.value : "1px",
-        borderStyle: token.name.includes("BorderStyle")
-          ? (token.value as string)
-          : "solid",
-        borderColor: "#d7d7dc",
-        borderRadius: `${
-          token.name.includes("BorderRadius") ? token.value : ""
-        }`,
-        display: "inline-block",
-        verticalAlign: "middle",
-      }}
-    ></span>
-  );
-
-  const renderColor = (val: string | number) => (
-    <span
-      style={{
-        width: "1em",
-        height: "1em",
-        display: "inline-block",
-        backgroundColor: `${val}`,
-        borderStyle: "solid",
-        borderColor: `${val === "#ffffff" ? "#d7d7dc" : "transparent"}`,
-        borderRadius: "4px",
-        verticalAlign: "middle",
-      }}
-    ></span>
-  );
-
-  const renderColorText = (val: string | number) => (
-    <span
-      style={{
-        color: `${val}`,
-        display: "inline-block",
-        paddingInline: "4px",
-        backgroundColor: `${val === "#ffffff" ? "#000" : ""}`,
-      }}
-    >
-      Aa
-    </span>
-  );
-
-  const renderSpace = (val: string | number) => (
-    <span
-      style={{
-        width: `${val}`,
-        height: `${val}`,
-        display: "inline-block",
-        backgroundColor: "#f88c90",
-      }}
-    ></span>
-  );
-
-  const renderFont = (token: Token) => (
-    <span
-      style={{
-        fontFamily: `${token.name.includes("FontFamily") ? token.value : ""}`,
-        fontSize: `${token.name.includes("FontSize") ? token.value : ""}`,
-        fontWeight: `${
-          token.name.includes("FontWeight") ? token.value : ""
-        }` as unknown as FontWeight,
-        lineHeight: `${token.name.includes("LineHeight") ? token.value : ""}`,
-        backgroundColor: `${
-          token.name.includes("LineHeight") ? "#ebebed" : ""
-        }`,
-        display: `${token.name.includes("LineHeight") ? "inline-block" : ""}`,
-      }}
-    >
-      Waltz, bad nymph, for quick jigs vex!
-    </span>
-  );
-
-  const renderFocus = (val: string | number) => (
-    <span
-      style={{
-        width: "1.25em",
-        height: "1.25em",
-        display: "inline-block",
-        boxShadow: `0 0 0 ${val} #a7b5ec`,
-      }}
-    ></span>
-  );
-
-  const renderShadow = (val: string | number) => (
-    <span
-      style={{
-        width: "1.5em",
-        height: "1.5em",
-        display: "inline-block",
-        boxShadow: `${val}`,
-      }}
-    ></span>
-  );
-
-  function getDisplayedValue(tableName: string, val: string | number) {
-    if (!tableName.includes("Colors") || tableName === "Palette Colors") {
-      return val;
+    if (!parts) {
+      return tokenTables;
     }
-    const tokenValue = tables
-      .find((table) => table.name === "Palette Colors")
-      ?.values.find((value) => value.value === val) ?? { name: "" };
-    return tokenValue.name;
+
+    const tableName =
+      parts[0] === "Color" || parts[0] === "Hue" || parts[0] === "Palette"
+        ? `${parts[1]} ${parts[0]}s`
+        : parts[0];
+
+    const existingTokenTable =
+      tokenTables.find(({ name }) => name === tableName) ||
+      ({
+        name: tableName,
+        values: [],
+      } satisfies TableData);
+
+    return tokenTables
+      .filter(({ name }) => name !== tableName)
+      .concat({
+        ...existingTokenTable,
+        values: existingTokenTable.values
+          .concat({
+            name,
+            tableName,
+            value,
+          })
+          .sort((a, b) => {
+            const nameA = a.name.toUpperCase();
+            const nameB = b.name.toUpperCase();
+
+            if (nameA < nameB) {
+              return -1;
+            }
+
+            if (nameA > nameB) {
+              return 1;
+            }
+
+            return 0;
+          }),
+      });
+  }, [] as Array<TableData>);
+
+function getDisplayedValue(tableName: string, value: TokenValue) {
+  if (!tableName.includes("Colors") || tableName === "Palette Colors") {
+    return value;
   }
 
-  return (
-    <>
-      {tables.map((table) => (
-        <TableContainer key={table.name}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell scope="col">Token Name</TableCell>
-                <TableCell scope="col">Example</TableCell>
-                <TableCell scope="col">Value</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {table.values.map((token: Token) => (
-                <TableRow key={`${token.name}-row`}>
-                  <TableCell>
-                    <Typography>{token.name}</Typography>
-                  </TableCell>
-                  <TableCell>
-                    {token.name.includes("Border") &&
-                      !token.name.includes("ColorBorder") &&
-                      renderBorder(token)}
-                    {(token.name.includes("Hue") ||
-                      token.name.includes("Palette")) &&
-                      !token.name.includes("ColorText") &&
-                      renderColor(token.value)}
-                    {token.name.includes("ColorText") &&
-                      renderColorText(token.value)}
-                    {token.name.includes("Space") && renderSpace(token.value)}
-                    {token.name.includes("Font") && renderFont(token)}
-                    {token.name.includes("Focus") &&
-                      !token.name.includes("ColorFocus") &&
-                      renderFocus(token.value)}
-                    {token.name.includes("Shadow") && renderShadow(token.value)}
-                  </TableCell>
-                  <TableCell>
-                    <Typography>
-                      {getDisplayedValue(table.name, token.value)}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      ))}
-    </>
-  );
+  const tokenValue = tokenTables
+    .find(({ name }) => name === "Palette Colors")
+    ?.values.find(({ value: tokenValue }) => tokenValue === value) ?? {
+    name: "",
+  };
+
+  return tokenValue.name;
+}
+
+const columns: TableColumn<TokenTableItem>[] = [
+  {
+    accessorKey: "name",
+    Cell: ({ cell }) => <Typography>{cell.getValue<TokenValue>()}</Typography>,
+    header: "Token Name",
+  },
+  {
+    accessorFn: ({ name }) => `${name} example`,
+    Cell: ({ cell }) => {
+      const name = cell.row.getValue<TokenName>("name");
+      const value = Tokens[name] as TokenValue;
+
+      return (
+        <>
+          {name.includes("Border") &&
+            !name.includes("ColorBorder") &&
+            renderBorder({
+              name,
+              value,
+            })}
+          {(name.includes("Hue") || name.includes("Palette")) &&
+            !name.includes("ColorText") &&
+            renderColor(value)}
+          {name.includes("ColorText") && renderColorText(value)}
+          {name.includes("Space") && renderSpace(value)}
+          {name.includes("Font") &&
+            renderFont({
+              name,
+              value,
+            })}
+          {name.includes("Focus") &&
+            !name.includes("ColorFocus") &&
+            renderFocus(value)}
+          {name.includes("Shadow") && renderShadow(value)}
+        </>
+      );
+    },
+    header: "Example",
+  },
+  {
+    accessorKey: "tableName",
+    header: "Table Name",
+  },
+  {
+    accessorKey: "value",
+    Cell: ({ cell }) => {
+      const tableName = cell.row.getValue<string>("tableName");
+      const name = cell.row.getValue<TokenName>("name");
+      const value = Tokens[name] as TokenValue;
+
+      return <Typography>{getDisplayedValue(tableName, value)}</Typography>;
+    },
+    header: "Value",
+  },
+];
+
+const getRowId = ({ name }: { name: TokenDataItem["name"] }) => name;
+
+const initialState = {
+  columnVisibility: {
+    tableName: false,
+  },
 };
+
+export const TokenTables = (): ReactNode =>
+  tokenTables.map(({ name, values }) => (
+    <Fragment key={name}>
+      <Typography component="h2">{name}</Typography>
+
+      <StaticTable
+        columns={columns}
+        data={values}
+        getRowId={getRowId}
+        initialState={initialState}
+      />
+    </Fragment>
+  ));
