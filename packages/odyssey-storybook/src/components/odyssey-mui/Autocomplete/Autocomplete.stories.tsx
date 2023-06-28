@@ -21,41 +21,6 @@ import { screen } from "@testing-library/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<typeof Autocomplete> = {
-  title: "MUI Components/Forms/Autocomplete",
-  component: Autocomplete,
-  argTypes: {
-    label: {
-      control: "text",
-    },
-    hint: {
-      control: "text",
-    },
-    isDisabled: {
-      control: "boolean",
-    },
-    isCustomValueAllowed: {
-      control: "boolean",
-    },
-    isLoading: {
-      control: "boolean",
-    },
-    hasMultipleChoices: {
-      control: "boolean",
-    },
-    isReadOnly: {
-      control: "boolean",
-    },
-  },
-  args: {
-    label: "Destination",
-    hint: "Select your destination in the Sol system.",
-  },
-  decorators: [MuiThemeDecorator],
-};
-
-export default storybookMeta;
-
 type StationType = { label: string };
 
 const stations: ReadonlyArray<StationType> = [
@@ -86,6 +51,42 @@ const stations: ReadonlyArray<StationType> = [
   { label: "Vesta" },
 ];
 
+const storybookMeta: Meta<typeof Autocomplete> = {
+  title: "MUI Components/Forms/Autocomplete",
+  component: Autocomplete,
+  argTypes: {
+    label: {
+      control: "text",
+    },
+    hint: {
+      control: "text",
+    },
+    isDisabled: {
+      control: "boolean",
+    },
+    isCustomValueAllowed: {
+      control: "boolean",
+    },
+    isLoading: {
+      control: "boolean",
+    },
+    hasMultipleChoices: {
+      control: "boolean",
+    },
+    isReadOnly: {
+      control: "boolean",
+    },
+  },
+  args: {
+    label: "Destination",
+    hint: "Select your destination in the Sol system.",
+    options: stations,
+  },
+  decorators: [MuiThemeDecorator],
+};
+
+export default storybookMeta;
+
 type AutocompleteType = AutocompleteProps<
   StationType | undefined,
   boolean | undefined,
@@ -94,7 +95,7 @@ type AutocompleteType = AutocompleteProps<
 
 const Template: StoryObj<AutocompleteType> = {
   render: function C(props) {
-    return <Autocomplete {...props} options={stations} />;
+    return <Autocomplete {...props} />;
   },
 };
 

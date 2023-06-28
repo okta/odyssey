@@ -80,18 +80,18 @@ const selectTab = async (
 
 const DefaultTemplate: StoryObj<TabItemProps> = {
   render: function C(args) {
-    const tabs: TabItemProps[] = [];
-
-    tabs.push({
-      label: "Planets",
-      value: "planets",
-      children: "Information about Planets",
-    });
-    tabs.push({
-      label: "Moons",
-      value: "moons",
-      children: "Information about Moons",
-    });
+    const tabs: TabItemProps[] = [
+      {
+        label: "Planets",
+        value: "planets",
+        children: "Information about Planets",
+      },
+      {
+        label: "Moons",
+        value: "moons",
+        children: "Information about Moons",
+      },
+    ];
 
     if (args?.label) {
       tabs.push({
