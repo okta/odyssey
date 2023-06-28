@@ -10,23 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, ReactRenderer, StoryObj } from "@storybook/react";
-import {
-  Button,
-  ButtonProps,
-  Toast,
-  ToastProps,
-  ToastStack,
-} from "@okta/odyssey-react-mui";
+import { Meta, StoryObj } from "@storybook/react";
+import { Button, Toast, ToastProps, ToastStack } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
-import { axeRun, sleep } from "../../../axe-util";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { StepFunction } from "@storybook/types";
+import { axeRun } from "../../../axe-util";
+import type { PlaywrightProps } from "../storybookTypes";
 
 const meta: Meta<ToastProps> = {
   title: "MUI Components/Alerts/Toast",
@@ -61,47 +53,43 @@ const meta: Meta<ToastProps> = {
     role: "status",
     linkText: "Info",
     text: "The mission to Sagittarius A is set for January 7.",
+    autoHideDuration: 10000,
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default meta;
 
-const dismissToast = async (args: ToastProps, canvasElement: HTMLElement) => {
-  try {
+const openToast =
+  ({ canvasElement, step }: PlaywrightProps<ToastProps>) =>
+  async (args: ToastProps, actionName: string, dismissible = false) => {
     const canvas = within(canvasElement);
-    const toast = await canvas.getAllByRole(args.role || "status")[0];
-    const dismissToast =
-      toast && (await toast.querySelector('[aria-label="close"]'));
-    if (dismissToast) {
-      dismissToast && (await waitFor(() => userEvent.click(dismissToast)));
-      toast && (await waitFor(() => expect(toast).not.toBeVisible()));
-    }
-  } catch (e) {
-    console.log(e instanceof Error ? e.message : "error");
-  }
-};
-
-const openToast = async (
-  args: ToastProps,
-  canvasElement: HTMLElement,
-  step: StepFunction<ReactRenderer, ButtonProps>,
-  action: string,
-  dismissible = false
-) => {
-  await step("open toast, and dismiss", async () => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByText(`Open ${args.severity} toast`);
-    userEvent.tab();
-    userEvent.click(button);
-    await sleep();
-    await axeRun(action);
-    await sleep();
+    await step(`open ${actionName}`, async () => {
+      await waitFor(() => {
+        const buttonElement = canvas.getByText(`Open ${args.severity} toast`);
+        userEvent.hover(buttonElement);
+        userEvent.click(buttonElement);
+        userEvent.tab();
+      });
+      axeRun(actionName);
+    });
     if (dismissible) {
-      dismissToast(args, canvasElement);
+      await step("dismiss toast", async () => {
+        waitFor(() => {
+          const toastElement = canvas.getAllByRole(args.role || "status")[0];
+          if (toastElement) {
+            const dismissToastButton = toastElement.querySelector(
+              '[aria-label="close"]'
+            );
+            if (dismissToastButton) {
+              userEvent.click(dismissToastButton);
+              expect(toastElement).not.toBeVisible();
+            }
+          }
+        });
+      });
     }
-  });
-};
+  };
 
 const Single: StoryObj<ToastProps> = {
   args: {
@@ -143,7 +131,7 @@ export const Info: StoryObj<ToastProps> = {
     severity: "info",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast(args, canvasElement, step, "Info Toast");
+    openToast({ canvasElement, step })(args, "Info Toast");
   },
 };
 
@@ -155,7 +143,7 @@ export const ErrorToast: StoryObj<ToastProps> = {
     severity: "error",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast(args, canvasElement, step, "Error Toast");
+    openToast({ canvasElement, step })(args, "Error Toast");
   },
 };
 
@@ -167,7 +155,7 @@ export const Warning: StoryObj<ToastProps> = {
     severity: "warning",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast(args, canvasElement, step, "Warning Toast");
+    openToast({ canvasElement, step })(args, "Warning Toast");
   },
 };
 
@@ -179,7 +167,7 @@ export const Success: StoryObj<ToastProps> = {
     severity: "success",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast(args, canvasElement, step, "Success Toast");
+    openToast({ canvasElement, step })(args, "Success Toast");
   },
 };
 
@@ -191,7 +179,7 @@ export const Dismissible: StoryObj<ToastProps> = {
     linkUrl: "#",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast(args, canvasElement, step, "Dismissible Toast", true);
+    openToast({ canvasElement, step })(args, "Dismissible Toast", true);
   },
 };
 

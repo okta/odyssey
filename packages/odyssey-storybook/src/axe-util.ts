@@ -13,11 +13,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axe from "axe-core";
 
-export const sleep = (ms = 1000) => new Promise((r) => setTimeout(r, ms));
-
 export const axeRun = async (interaction = "") => {
-  await sleep();
-
   await axe
     .run({
       runOnly: {
@@ -36,7 +32,9 @@ export const axeRun = async (interaction = "") => {
       if (results.violations.length) {
         throw new Error(
           `Accessibility issues found in "${interaction}". ${JSON.stringify(
-            results.violations
+            results.violations,
+            null,
+            2
           )}`
         );
       }

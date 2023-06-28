@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, ReactRenderer, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import {
   FavoriteIcon,
@@ -19,13 +19,11 @@ import {
   Tabs,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, within } from "@storybook/testing-library";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
-import { axeRun, sleep } from "../../../axe-util";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { StepFunction } from "@storybook/types";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { screen } from "@testing-library/react";
+import { axeRun } from "../../../axe-util";
+import { screen } from "@storybook/testing-library";
+import type { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {
   title: "MUI Components/Tabs",
@@ -51,30 +49,28 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
 
 export default storybookMeta;
 
-const selectTab = async (
-  canvasElement: HTMLElement,
-  step: StepFunction<ReactRenderer, TabItemProps>,
-  action: string,
-  tabName: string
-) => {
-  await step("select the tab", async () => {
-    await axeRun(action);
-    await sleep();
+const selectTab =
+  ({ canvasElement, step }: PlaywrightProps<TabItemProps>) =>
+  async (actionName: string, tabName: string) => {
+    await step(`select the ${tabName} tab`, async () => {
+      await axeRun(actionName);
 
-    const canvas = within(canvasElement);
-    const tab = canvas.getByText(tabName);
-    userEvent.click(tab);
-    userEvent.tab();
-    expect(canvas.getByText(`Information about ${tabName}`)).not.toBeNull();
+      waitFor(() => {
+        const canvas = within(canvasElement);
+        const tab = canvas.getByText(tabName);
+        userEvent.click(tab);
+        userEvent.tab();
+        expect(canvas.getByText(`Information about ${tabName}`)).toBeVisible();
 
-    if (action === "Tab Disabled") {
-      const disabledTab = canvas.getByText("Disabled Tab");
-      userEvent.click(disabledTab);
-      const tabData = screen.queryByText("Tab is disabled");
-      expect(tabData).toBeNull();
-    }
-  });
-};
+        if (actionName === "Tab Disabled") {
+          const disabledTab = canvas.getByText("Disabled Tab");
+          userEvent.click(disabledTab);
+          const tabData = screen.queryByText("Tab is disabled");
+          expect(tabData).toBeNull();
+        }
+      });
+    });
+  };
 
 const DefaultTemplate: StoryObj<TabItemProps> = {
   render: function C(args) {
@@ -114,7 +110,7 @@ const ExampleTabContent = ({ label }: { label: string }) => {
 export const Default: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   play: async ({ canvasElement, step }) => {
-    selectTab(canvasElement, step, "Tab Default", "Moons");
+    selectTab({ canvasElement, step })("Tab Default", "Moons");
   },
 };
 
@@ -126,7 +122,7 @@ export const Disabled: StoryObj<TabItemProps> = {
     children: "Tab is disabled",
   },
   play: async ({ canvasElement, step }) => {
-    selectTab(canvasElement, step, "Tab Disabled", "Moons");
+    selectTab({ canvasElement, step })("Tab Disabled", "Moons");
   },
 };
 
@@ -138,6 +134,6 @@ export const Icons: StoryObj<TabItemProps> = {
     children: <ExampleTabContent label="Icon Tab" />,
   },
   play: async ({ canvasElement, step }) => {
-    selectTab(canvasElement, step, "Tab Icon", "Icon Tab");
+    selectTab({ canvasElement, step })("Tab Icon", "Icon Tab");
   },
 };

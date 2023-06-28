@@ -14,7 +14,7 @@ import { Banner, BannerProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { userEvent, within } from "@storybook/testing-library";
 import { expect, jest } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 
@@ -105,7 +105,8 @@ export const DismissibleBanner: StoryObj<BannerProps> = {
       const canvas = within(canvasElement);
       const button = canvas.getByTitle("Close");
       userEvent.click(button);
-      await waitFor(() => expect(args.onClose).toHaveBeenCalled());
+      userEvent.tab();
+      expect(args.onClose).toHaveBeenCalled();
       await axeRun("Dismissible Banner");
     });
   },

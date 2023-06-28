@@ -11,15 +11,12 @@
  */
 
 import { Checkbox, CheckboxProps } from "@okta/odyssey-react-mui";
-import { Meta, ReactRenderer, StoryObj } from "@storybook/react";
-
+import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { StepFunction } from "@storybook/types";
+import type { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<CheckboxProps> = {
   title: "MUI Components/Forms/Checkbox",
@@ -50,26 +47,27 @@ const storybookMeta: Meta<CheckboxProps> = {
 
 export default storybookMeta;
 
-const checkTheBox = async (
-  canvasElement: HTMLElement,
-  step: StepFunction<ReactRenderer, CheckboxProps>,
-  action: string
-) => {
-  await step("check the box", async () => {
-    const canvas = within(canvasElement);
-    const checkBox = canvas.getByRole("checkbox") as HTMLInputElement;
-    checkBox && userEvent.click(checkBox);
-    expect(checkBox.checked).toBe(true);
-    await axeRun(action);
-  });
-};
+const checkTheBox =
+  ({ canvasElement, step }: PlaywrightProps<CheckboxProps>) =>
+  async (actionName: string) => {
+    await step("check the box", async () => {
+      const canvas = within(canvasElement);
+      const checkBox = canvas.getByRole("checkbox") as HTMLInputElement;
+      if (checkBox) {
+        userEvent.click(checkBox);
+      }
+      userEvent.tab();
+      expect(checkBox).toBeChecked();
+      axeRun(actionName);
+    });
+  };
 
 export const Default: StoryObj<CheckboxProps> = {
   args: {
     label: "Enable warp drive recalibration",
   },
   play: async ({ canvasElement, step }) => {
-    checkTheBox(canvasElement, step, "Checkbox Default");
+    checkTheBox({ canvasElement, step })("Checkbox Default");
   },
 };
 
@@ -79,6 +77,6 @@ export const Required: StoryObj<CheckboxProps> = {
     isRequired: true,
   },
   play: async ({ canvasElement, step }) => {
-    checkTheBox(canvasElement, step, "Checkbox Required");
+    checkTheBox({ canvasElement, step })("Checkbox Required");
   },
 };

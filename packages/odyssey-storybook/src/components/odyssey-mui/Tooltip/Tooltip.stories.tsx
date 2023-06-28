@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, ReactRenderer, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
   DownloadIcon,
@@ -18,11 +18,9 @@ import {
   TooltipProps,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
 import { userEvent, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { StepFunction } from "@storybook/types";
+import type { PlaywrightProps } from "../storybookTypes";
 
 import TooltipMdx from "./Tooltip.mdx";
 
@@ -67,19 +65,6 @@ const storybookMeta: Meta<TooltipProps> = {
 
 export default storybookMeta;
 
-const showTooltip = async (
-  canvasElement: HTMLElement,
-  step: StepFunction<ReactRenderer, TooltipProps>,
-  action: string
-) => {
-  await step("show the tooltip on hover", async () => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByText("Launch");
-    await userEvent.hover(button);
-    await axeRun(action);
-  });
-};
-
 const Template: StoryObj<TooltipProps> = {
   render: function C(args) {
     return (
@@ -94,6 +79,17 @@ const Template: StoryObj<TooltipProps> = {
   },
 };
 
+const showTooltip =
+  ({ canvasElement, step }: PlaywrightProps<TooltipProps>) =>
+  async (actionName: string) => {
+    await step("show the tooltip on hover", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByText("Launch");
+      userEvent.hover(button);
+      await axeRun(actionName);
+    });
+  };
+
 export const Default: StoryObj<TooltipProps> = {
   ...Template,
   args: {
@@ -103,7 +99,7 @@ export const Default: StoryObj<TooltipProps> = {
     text: "This will begin a 10-second countdown",
   },
   play: async ({ canvasElement, step }) => {
-    showTooltip(canvasElement, step, "Tooltip Default");
+    showTooltip({ canvasElement, step })("Tooltip Default");
   },
 };
 

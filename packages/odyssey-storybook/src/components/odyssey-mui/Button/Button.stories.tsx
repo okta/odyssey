@@ -10,17 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Meta, ReactRenderer, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button, AddIcon } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
-import { userEvent, within } from "@storybook/testing-library";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { StepFunction } from "@storybook/types";
+import type { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<ButtonProps> = {
   title: "MUI Components/Button",
@@ -62,13 +61,9 @@ const storybookMeta: Meta<ButtonProps> = {
 
 export default storybookMeta;
 
-const interactWithButton = async (
-  args: ButtonProps,
-  canvasElement: HTMLElement,
-  step: StepFunction<ReactRenderer, ButtonProps>,
-  action: string
-) => {
-  try {
+const interactWithButton =
+  ({ canvasElement, step }: PlaywrightProps<ButtonProps>) =>
+  async (args: ButtonProps, actionName: string, hoverState = false) => {
     if (args.text) {
       await step("hover and click", async () => {
         const canvas = within(canvasElement);
@@ -76,20 +71,17 @@ const interactWithButton = async (
         userEvent.tab();
         userEvent.click(button);
         expect(args.onClick).toHaveBeenCalledTimes(1);
-        await axeRun(action);
+        axeRun(actionName);
+        if (!hoverState) {
+          waitFor(() => userEvent.tab());
+        }
       });
     }
-  } catch (e) {
-    console.log(e instanceof Error && e.message);
-    throw new Error(
-      e instanceof Error ? e.message : "Unknown Error in play-test"
-    );
-  }
-};
+  };
 
 export const ButtonPrimary: StoryObj<ButtonProps> = {
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton(args, canvasElement, step, "Button Primary: Hover");
+    interactWithButton({ canvasElement, step })(args, "Button Primary");
   },
 };
 
@@ -99,7 +91,7 @@ export const ButtonSecondary: StoryObj<ButtonProps> = {
     variant: "secondary",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton(args, canvasElement, step, "Button Secondary: Hover");
+    interactWithButton({ canvasElement, step })(args, "Button Secondary");
   },
 };
 
@@ -109,7 +101,7 @@ export const ButtonDanger: StoryObj<ButtonProps> = {
     variant: "danger",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton(args, canvasElement, step, "Button Danger: Hover");
+    interactWithButton({ canvasElement, step })(args, "Button Danger");
   },
 };
 
@@ -119,7 +111,7 @@ export const ButtonFloating: StoryObj<ButtonProps> = {
     variant: "floating",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton(args, canvasElement, step, "Button Floating: Hover");
+    interactWithButton({ canvasElement, step })(args, "Button Floating");
   },
 };
 
@@ -129,7 +121,7 @@ export const ButtonSmall: StoryObj<ButtonProps> = {
     size: "small",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton(args, canvasElement, step, "Button Small: Hover");
+    interactWithButton({ canvasElement, step })(args, "Button Small", true);
   },
 };
 
@@ -137,9 +129,10 @@ export const ButtonMedium: StoryObj<ButtonProps> = {
   args: {
     text: "Add crew",
     size: "medium",
+    variant: "secondary",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton(args, canvasElement, step, "Button Medium: Hover");
+    interactWithButton({ canvasElement, step })(args, "Button Medium", true);
   },
 };
 
@@ -147,9 +140,10 @@ export const ButtonLarge: StoryObj<ButtonProps> = {
   args: {
     text: "Add crew",
     size: "large",
+    variant: "danger",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton(args, canvasElement, step, "Button Large: Hover");
+    interactWithButton({ canvasElement, step })(args, "Button Large", true);
   },
 };
 
@@ -157,9 +151,10 @@ export const ButtonFullWidth: StoryObj<ButtonProps> = {
   args: {
     text: "Add crew",
     isFullWidth: true,
+    variant: "floating",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton(args, canvasElement, step, "Button FullWidth: Hover");
+    interactWithButton({ canvasElement, step })(args, "Button FullWidth", true);
   },
 };
 
@@ -176,7 +171,7 @@ export const ButtonWithIcon: StoryObj<ButtonProps> = {
     startIcon: <AddIcon />,
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton(args, canvasElement, step, "Button With Icon: Hover");
+    interactWithButton({ canvasElement, step })(args, "Button With Icon");
   },
 };
 
