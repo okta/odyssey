@@ -58,7 +58,7 @@ const checkTheBox = async (
   await step("check the box", async () => {
     const canvas = within(canvasElement);
     const checkBox = canvas.getByRole("checkbox") as HTMLInputElement;
-    checkBox && (await userEvent.click(checkBox));
+    checkBox && userEvent.click(checkBox);
     expect(checkBox.checked).toBe(true);
     await axeRun(action);
   });

@@ -92,11 +92,10 @@ const openToast = async (
   await step("open toast, and dismiss", async () => {
     const canvas = within(canvasElement);
     const button = canvas.getByText(`Open ${args.severity} toast`);
-    await userEvent.tab();
-    await userEvent.click(button);
+    userEvent.tab();
+    userEvent.click(button);
     await sleep();
     await axeRun(action);
-
     await sleep();
     if (dismissible) {
       dismissToast(args, canvasElement);

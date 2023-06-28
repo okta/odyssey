@@ -63,15 +63,13 @@ const selectTab = async (
 
     const canvas = within(canvasElement);
     const tab = canvas.getByText(tabName);
-    await userEvent.click(tab);
-    await userEvent.tab();
-    await expect(
-      canvas.getByText(`Information about ${tabName}`)
-    ).not.toBeNull();
+    userEvent.click(tab);
+    userEvent.tab();
+    expect(canvas.getByText(`Information about ${tabName}`)).not.toBeNull();
 
     if (action === "Tab Disabled") {
       const disabledTab = canvas.getByText("Disabled Tab");
-      await userEvent.click(disabledTab);
+      userEvent.click(disabledTab);
       const tabData = screen.queryByText("Tab is disabled");
       expect(tabData).toBeNull();
     }

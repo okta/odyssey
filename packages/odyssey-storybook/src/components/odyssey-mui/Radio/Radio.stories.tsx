@@ -58,7 +58,7 @@ const selectRadio = async (
   await step("select the radio button", async () => {
     const canvas = within(canvasElement);
     const radio = canvas.getByRole("radio") as HTMLInputElement;
-    radio && (await userEvent.click(radio));
+    radio && userEvent.click(radio);
     expect(radio.checked).toBe(true);
     await axeRun(action);
   });

@@ -73,9 +73,9 @@ const interactWithButton = async (
       await step("hover and click", async () => {
         const canvas = within(canvasElement);
         const button = canvas.getByText(args.text ?? "");
-        await userEvent.tab();
-        await userEvent.click(button);
-        await expect(args.onClick).toHaveBeenCalledTimes(1);
+        userEvent.tab();
+        userEvent.click(button);
+        expect(args.onClick).toHaveBeenCalledTimes(1);
         await axeRun(action);
       });
     }
