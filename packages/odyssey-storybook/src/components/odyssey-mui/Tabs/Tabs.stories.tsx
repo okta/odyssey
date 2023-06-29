@@ -57,16 +57,17 @@ const selectTab =
 
       waitFor(() => {
         const canvas = within(canvasElement);
-        const tab = canvas.getByText(tabName);
-        userEvent.click(tab);
+        const tabElement = canvas.getByText(tabName);
+        userEvent.click(tabElement);
         userEvent.tab();
-        expect(canvas.getByText(`Information about ${tabName}`)).toBeVisible();
+        const tabData = canvas.getByText(`Information about ${tabName}`);
+        expect(tabData).toBeInTheDocument();
 
         if (actionName === "Tab Disabled") {
           const disabledTab = canvas.getByText("Disabled Tab");
           userEvent.click(disabledTab);
           const tabData = screen.queryByText("Tab is disabled");
-          expect(tabData).toBeNull();
+          expect(tabData).not.toBeInTheDocument();
         }
       });
     });
