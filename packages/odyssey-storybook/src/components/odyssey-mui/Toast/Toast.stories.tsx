@@ -221,7 +221,7 @@ export const MultipleToasts: StoryObj<ToastProps> = {
           isVisible={true}
           severity="warning"
           isDismissable
-          text={`Severe solar winds may delay local system flights.`}
+          text={`Severe solar winds may delay local system flights`}
           key={Math.random()}
         />,
         <Toast
