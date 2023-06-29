@@ -62,7 +62,7 @@ export default meta;
 
 const openToast =
   ({ canvasElement, step }: PlaywrightProps<ToastProps>) =>
-  async (args: ToastProps, actionName: string, dismissible = false) => {
+  async (args: ToastProps, actionName: string) => {
     const canvas = within(canvasElement);
     await step(`open ${actionName}`, async () => {
       await waitFor(() => {
@@ -73,20 +73,20 @@ const openToast =
       });
       axeRun(actionName);
     });
-    if (dismissible) {
+    if (args.isDismissable) {
       await step("dismiss toast", async () => {
-        waitFor(() => {
-          const toastElement = canvas.getAllByRole(args.role || "status")[0];
-          if (toastElement) {
-            const dismissToastButton = toastElement.querySelector(
-              '[aria-label="close"]'
-            );
+        const toastElement = canvas.getAllByRole(args.role || "status")[0];
+        if (toastElement) {
+          const dismissToastButton = toastElement.querySelector(
+            '[aria-label="close"]'
+          );
+          waitFor(() => {
             if (dismissToastButton) {
               userEvent.click(dismissToastButton);
-              expect(toastElement).not.toBeVisible();
+              expect(toastElement).not.toBeInTheDocument();
             }
-          }
-        });
+          });
+        }
       });
     }
   };
@@ -179,7 +179,7 @@ export const Dismissible: StoryObj<ToastProps> = {
     linkUrl: "#",
   },
   play: async ({ args, canvasElement, step }) => {
-    openToast({ canvasElement, step })(args, "Dismissible Toast", true);
+    openToast({ canvasElement, step })(args, "Dismissible Toast");
   },
 };
 

@@ -92,8 +92,16 @@ jobs:
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: ${{ env.URL_STORYBOOK }}
+  a11y:
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
       - name: a11y test
         run: yarn workspace @okta/odyssey-storybook test:storybook --url ${{ env.URL_STORYBOOK }}
+  vrt:
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
       - name: visual regression test
         if: steps.changes.outputs.vrt == 'true'
         env:
