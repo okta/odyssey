@@ -22,7 +22,7 @@ export const AddCircleIcon = forwardRef<SVGSVGElement, AddCircleIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const AddCircleIcon = forwardRef<SVGSVGElement, AddCircleIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-7 8A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm-.5-5V8.5H5v-1h2.5V5h1v2.5H11v1H8.5V11h-1Z"
+            d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18ZM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12Zm10-1V8h2v3h3v2h-3v3h-2v-3H8v-2h3Z"
             clipRule="evenodd"
           />
         </>

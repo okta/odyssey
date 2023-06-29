@@ -13,7 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { UserGroupIcon } from "@okta/odyssey-react-mui";
+import { GroupIcon } from "@okta/odyssey-react-mui";
 
 const storybookMeta: Meta<TagProps> = {
   title: "MUI Components/Tag",
@@ -72,7 +72,7 @@ export const List: StoryObj<TagProps> = {
 export const Icon: StoryObj<TagProps> = {
   args: {
     label: "Crew",
-    icon: <UserGroupIcon />,
+    icon: <GroupIcon />,
   },
 };
 

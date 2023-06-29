@@ -19,10 +19,10 @@ import {
   MenuButton,
   MenuButtonProps,
   MenuItem,
-  UserGroupIcon,
+  GroupIcon,
   GlobeIcon,
   CalendarIcon,
-  OverflowVerticalIcon,
+  MoreIcon,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -70,7 +70,7 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
     children: [
       <MenuItem key="1">
         <ListItemIcon>
-          <UserGroupIcon />
+          <GroupIcon />
         </ListItemIcon>
         <ListItemText>Assign crew</ListItemText>
       </MenuItem>,
@@ -140,6 +140,6 @@ export const IconButton: StoryObj<MenuButtonProps> = {
       <MenuItem key="3">Launch</MenuItem>,
     ],
     buttonLabel: "",
-    endIcon: <OverflowVerticalIcon />,
+    endIcon: <MoreIcon />,
   },
 };
