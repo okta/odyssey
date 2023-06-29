@@ -1,12 +1,4 @@
 import { Meta } from "@storybook/blocks";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@okta/odyssey-react-mui";
 
 <Meta title="Guidelines/RTL" />
 
@@ -22,422 +14,423 @@ This table documents the related equivalents in physical and logical CSS, their 
 
 For a quick visualization of how these properties are related, see <a href="https://codepen.io/aardrian/full/bGGxrvM">this CodePen</a>.
 
-<TableContainer>
-  <Table>
-    <TableHead>
-      <TableRow>
-        <TableCell scope="column">Type</TableCell>
-        <TableCell scope="column">Physical CSS</TableCell>
-        <TableCell scope="column">Logical CSS</TableCell>
-        <TableCell scope="column">Lint status</TableCell>
-        <TableCell scope="column">Notes</TableCell>
-      </TableRow>
-    </TableHead>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <td scope="column">Type</td>
+        <td scope="column">Physical CSS</td>
+        <td scope="column">Logical CSS</td>
+        <td scope="column">Lint status</td>
+        <td scope="column">Notes</td>
+      </tr>
+    </thead>
     <tbody>
-      <TableRow>
-        <TableCell scope="row" rowSpan="7">
+      <tr>
+        <td scope="row" rowSpan="7">
           Margin
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>margin</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>no auto-fix</TableCell>
-        <TableCell>
+        </td>
+        <td></td>
+        <td>no auto-fix</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>margin-top</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>margin-block-start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>margin-bottom</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>margin-block-end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>margin-left</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>margin-inline-start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>margin-right</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>margin-inline-end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
           <code>margin-block</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>Sets both block margins</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell>
+        </td>
+        <td></td>
+        <td>Sets both block margins</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
           <code>margin-inline</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>Sets both inline margins</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell scope="row" rowSpan="7">
+        </td>
+        <td></td>
+        <td>Sets both inline margins</td>
+      </tr>
+      <tr>
+        <td scope="row" rowSpan="7">
           Padding
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>padding</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>no auto-fix</TableCell>
-        <TableCell>
+        </td>
+        <td></td>
+        <td>no auto-fix</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>padding-top</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>padding-block-start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>padding-bottom</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>padding-block-end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>padding-left</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>padding-inline-start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>padding-right</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>padding-inline-end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
           <code>padding-block</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>Sets both block paddings</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell>
+        </td>
+        <td></td>
+        <td>Sets both block paddings</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
           <code>padding-inline</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>Sets both inline paddings</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell scope="row" rowSpan="11">
+        </td>
+        <td></td>
+        <td>Sets both inline paddings</td>
+      </tr>
+      <tr>
+        <td scope="row" rowSpan="11">
           Borders
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>border-top</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>border-block-start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           Also applies to <code>*-size|style|color</code>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>border-bottom</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>border-block-end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           Also applies to <code>*-size|style|color</code>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>border-left</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>border-inline-start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           Also applies to <code>*-size|style|color</code>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>border-right</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>border-inline-end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>
           Also applies to <code>*-size|style|color</code>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
           <code>border-block</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>Sets both block borders</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell>
+        </td>
+        <td></td>
+        <td>Sets both block borders</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
           <code>border-inline</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>Sets both inline borders</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td></td>
+        <td>Sets both inline borders</td>
+      </tr>
+      <tr>
+        <td>
           <code>border-radius</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>no auto-fix</TableCell>
-        <TableCell>
+        </td>
+        <td></td>
+        <td>no auto-fix</td>
+        <td>
           See <a href="#linting-notes">Linting notes</a>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <code>border-top-left-radius</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>border-start-start-radius</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
           <code>border-top-right-radius</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>border-start-end-radius</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
           <code>border-bottom-left-radius</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>border-end-start-radius</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
           <code>border-bottom-right-radius</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>border-end-end-radius</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell scope="row" rowSpan="7">
+        </td>
+        <td>auto-fixed</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td scope="row" rowSpan="7">
           Position
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>top</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>inset-block-start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
           <code>bottom</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>inset-block-end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
           <code>left</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>inset-inline-start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
           <code>right</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>inset-inline-end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
           <code>inset</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>Sets all inset values</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell>
+        </td>
+        <td></td>
+        <td>Sets all inset values</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
           <code>inset-block</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>Sets block inset values</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell>
+        </td>
+        <td></td>
+        <td>Sets block inset values</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
           <code>inset-inline</code>
-        </TableCell>
-        <TableCell></TableCell>
-        <TableCell>Sets inline inset values</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell scope="row" rowSpan="6">
+        </td>
+        <td></td>
+        <td>Sets inline inset values</td>
+      </tr>
+      <tr>
+        <td scope="row" rowSpan="6">
           Layout
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>text-align: left</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>text-align: start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
           <code>text-align: right</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>text-align: end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell></TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
           <code>float: left</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>float: inline-start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>Prefer Grid or Flex instead</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>Prefer Grid or Flex instead</td>
+      </tr>
+      <tr>
+        <td>
           <code>float: right</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>float: inline-end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>Prefer Grid or Flex instead</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>Prefer Grid or Flex instead</td>
+      </tr>
+      <tr>
+        <td>
           <code>clear: left</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>clear: inline-start</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>Prefer Grid or Flex instead</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fixed</td>
+        <td>Prefer Grid or Flex instead</td>
+      </tr>
+      <tr>
+        <td>
           <code>clear: right</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>clear: inline-end</code>
-        </TableCell>
-        <TableCell>auto-fixed</TableCell>
-        <TableCell>Prefer Grid or Flex instead</TableCell>
-      </TableRow>
+        </td>
+        <td>auto-fixed</td>
+        <td>Prefer Grid or Flex instead</td>
+      </tr>
     </tbody>
-  </Table>
-</TableContainer>
+  </table>
+</div>
+
 ### Linting notes
 
 Browsers have not settled on a standard RTL syntax for 4-value shorthands. Currently, using standard 4-value shorthands (`margin: 4px 3px 2px 1px`) will be parsed as physical CSS by the browser. Stylelint's auto-fix behavior in this regard has a few gaps:
@@ -476,134 +469,135 @@ Safari is currently missing support for logical border-radius properties; howeve
 
 Our current implementation focuses on providing "automatic" RTL support with the least amount of overhead. For this reason, we haven't implemented properties related to vertical reading/writing. For completeness, the remaining Logical CSS properties are inventoried here:
 
-<TableContainer>
-  <Table>
-    <TableHead>
-      <TableRow>
-        <TableCell scope="column">Type</TableCell>
-        <TableCell scope="column">Physical CSS</TableCell>
-        <TableCell scope="column">Logical CSS</TableCell>
-        <TableCell scope="column">Lint status</TableCell>
-      </TableRow>
-    </TableHead>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <td scope="column">Type</td>
+        <td scope="column">Physical CSS</td>
+        <td scope="column">Logical CSS</td>
+        <td scope="column">Lint status</td>
+      </tr>
+    </thead>
     <tbody>
-      <TableRow>
-        <TableCell scope="row" rowSpan="6">
+      <tr>
+        <td scope="row" rowSpan="6">
           Box
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>width</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>inline-size</code>
-        </TableCell>
-        <TableCell>auto-fix available</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fix available</td>
+      </tr>
+      <tr>
+        <td>
           <code>min-width</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>min-inline-size</code>
-        </TableCell>
-        <TableCell>auto-fix available</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fix available</td>
+      </tr>
+      <tr>
+        <td>
           <code>max-width</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>max-inline-size</code>
-        </TableCell>
-        <TableCell>auto-fix available</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fix available</td>
+      </tr>
+      <tr>
+        <td>
           <code>height</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>block-size</code>
-        </TableCell>
-        <TableCell>auto-fix available</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fix available</td>
+      </tr>
+      <tr>
+        <td>
           <code>min-height</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>min-block-size</code>
-        </TableCell>
-        <TableCell>auto-fix available</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>auto-fix available</td>
+      </tr>
+      <tr>
+        <td>
           <code>max-height</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>max-block-size</code>
-        </TableCell>
-        <TableCell>auto-fix available</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell scope="row" rowSpan="6">
+        </td>
+        <td>auto-fix available</td>
+      </tr>
+      <tr>
+        <td scope="row" rowSpan="6">
           Overflow
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>overflow-y</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>overflow-block</code>
-        </TableCell>
-        <TableCell>undetected</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>undetected</td>
+      </tr>
+      <tr>
+        <td>
           <code>overflow-x</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>overflow-inline</code>
-        </TableCell>
-        <TableCell>undetected</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>undetected</td>
+      </tr>
+      <tr>
+        <td>
           <code>overscroll-behavior-y</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>overscroll-behavior-block</code>
-        </TableCell>
-        <TableCell>undetected</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>undetected</td>
+      </tr>
+      <tr>
+        <td>
           <code>overscroll-behavior-x</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>overscroll-behavior-inline</code>
-        </TableCell>
-        <TableCell>undetected</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>undetected</td>
+      </tr>
+      <tr>
+        <td>
           <code>resize: horizontal</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>resize: inline</code>
-        </TableCell>
-        <TableCell>undetected</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>
+        </td>
+        <td>undetected</td>
+      </tr>
+      <tr>
+        <td>
           <code>resize: vertical</code>
-        </TableCell>
-        <TableCell>
+        </td>
+        <td>
           <code>resize: block</code>
-        </TableCell>
-        <TableCell>undetected</TableCell>
-      </TableRow>
+        </td>
+        <td>undetected</td>
+      </tr>
     </tbody>
-  </Table>
-</TableContainer>
+  </table>
+</div>
+
 There are limited caveats to utilizing these properties today. However, they are
 not required for RTL support.
 
