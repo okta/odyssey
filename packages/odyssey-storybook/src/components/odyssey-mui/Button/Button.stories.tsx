@@ -63,7 +63,15 @@ export default storybookMeta;
 
 const interactWithButton =
   ({ canvasElement, step }: PlaywrightProps<ButtonProps>) =>
-  async (args: ButtonProps, actionName: string, hoverState = false) => {
+  async ({
+    args,
+    actionName,
+    hoverState,
+  }: {
+    args: ButtonProps;
+    actionName: string;
+    hoverState: boolean;
+  }) => {
     if (args.text) {
       await step("hover and click", async () => {
         const canvas = within(canvasElement);
@@ -81,7 +89,11 @@ const interactWithButton =
 
 export const ButtonPrimary: StoryObj<ButtonProps> = {
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton({ canvasElement, step })(args, "Button Primary");
+    interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Primary",
+      hoverState: false,
+    });
   },
 };
 
@@ -91,7 +103,11 @@ export const ButtonSecondary: StoryObj<ButtonProps> = {
     variant: "secondary",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton({ canvasElement, step })(args, "Button Secondary");
+    interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Secondary",
+      hoverState: false,
+    });
   },
 };
 
@@ -101,7 +117,11 @@ export const ButtonDanger: StoryObj<ButtonProps> = {
     variant: "danger",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton({ canvasElement, step })(args, "Button Danger");
+    interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Danger",
+      hoverState: false,
+    });
   },
 };
 
@@ -111,7 +131,11 @@ export const ButtonFloating: StoryObj<ButtonProps> = {
     variant: "floating",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton({ canvasElement, step })(args, "Button Floating");
+    interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Floating",
+      hoverState: false,
+    });
   },
 };
 
@@ -121,7 +145,11 @@ export const ButtonSmall: StoryObj<ButtonProps> = {
     size: "small",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton({ canvasElement, step })(args, "Button Small", true);
+    interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Small",
+      hoverState: true,
+    });
   },
 };
 
@@ -132,7 +160,11 @@ export const ButtonMedium: StoryObj<ButtonProps> = {
     variant: "secondary",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton({ canvasElement, step })(args, "Button Medium", true);
+    interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Medium",
+      hoverState: true,
+    });
   },
 };
 
@@ -143,7 +175,11 @@ export const ButtonLarge: StoryObj<ButtonProps> = {
     variant: "danger",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton({ canvasElement, step })(args, "Button Large", true);
+    interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Large",
+      hoverState: true,
+    });
   },
 };
 
@@ -154,7 +190,11 @@ export const ButtonFullWidth: StoryObj<ButtonProps> = {
     variant: "floating",
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton({ canvasElement, step })(args, "Button FullWidth", true);
+    interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Fullwidth",
+      hoverState: true,
+    });
   },
 };
 
@@ -171,7 +211,11 @@ export const ButtonWithIcon: StoryObj<ButtonProps> = {
     startIcon: <AddIcon />,
   },
   play: async ({ args, canvasElement, step }) => {
-    interactWithButton({ canvasElement, step })(args, "Button With Icon");
+    interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button with Icon",
+      hoverState: false,
+    });
   },
 };
 
