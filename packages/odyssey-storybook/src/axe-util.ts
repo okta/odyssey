@@ -34,12 +34,12 @@ export const axeRun = async (interaction = "") => {
     })
     .then((results) => {
       if (results.violations.length) {
-        console.log("Accessibility issues found ==> ", results.violations);
+        console.error("Accessibility issues found ==> ", results.violations);
         throw new Error(`Accessibility issues found ${interaction}`);
       }
     })
     .catch((e) => {
-      console.log(
+      console.error(
         e instanceof Error ? e.message : "Unknown Error in play-test"
       );
       throw new Error(

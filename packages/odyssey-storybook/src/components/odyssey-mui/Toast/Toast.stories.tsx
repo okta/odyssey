@@ -78,7 +78,7 @@ const dismissToast = async (args: ToastProps, canvasElement: HTMLElement) => {
       toast && (await waitFor(() => expect(toast).not.toBeVisible()));
     }
   } catch (e) {
-    console.log(e instanceof Error ? e.message : "error");
+    console.error(e instanceof Error ? e.message : "error");
   }
 };
 
