@@ -189,6 +189,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ref={ref}
           renderValue={isMultiSelect ? renderValue : undefined}
           value={selectedValue}
+          labelId={label}
         />
       ),
       [
@@ -201,6 +202,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         children,
         renderValue,
         selectedValue,
+        label,
       ]
     );
 
