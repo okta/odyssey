@@ -24,7 +24,7 @@ export const InformationCircleFilledIcon = forwardRef<
 >((props, ref) => {
   return (
     <SvgIcon
-      viewBox="0 0 16 16"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       ref={ref}
@@ -34,7 +34,7 @@ export const InformationCircleFilledIcon = forwardRef<
         <path
           fill="currentColor"
           fillRule="evenodd"
-          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8 5.5A.75.75 0 1 0 8 4a.75.75 0 0 0 0 1.5ZM8 7a.5.5 0 0 1 .5.5V12h-1V7.5A.5.5 0 0 1 8 7Z"
+          d="M23 12c0 6.075-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1s11 4.925 11 11ZM12 8.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5Zm0 1.75a1 1 0 0 1 1 1v6h-2v-6a1 1 0 0 1 1-1Z"
           clipRule="evenodd"
         />
       </>

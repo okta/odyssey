@@ -28,9 +28,11 @@ import { translation as ja } from "./properties/ts/odyssey-react-mui_ja";
 import { translation as ko } from "./properties/ts/odyssey-react-mui_ko";
 import { translation as ms } from "./properties/ts/odyssey-react-mui_ms";
 import { translation as nb } from "./properties/ts/odyssey-react-mui_nb";
-import { translation as nlNL } from "./properties/ts/odyssey-react-mui_nl-NL";
+import { translation as nlNL } from "./properties/ts/odyssey-react-mui_nl_NL";
+import { translation as okPL } from "./properties/ts/odyssey-react-mui_ok_PL";
+import { translation as okSK } from "./properties/ts/odyssey-react-mui_ok_SK";
 import { translation as pl } from "./properties/ts/odyssey-react-mui_pl";
-import { translation as ptBR } from "./properties/ts/odyssey-react-mui_pt-BR";
+import { translation as ptBR } from "./properties/ts/odyssey-react-mui_pt_BR";
 import { translation as ro } from "./properties/ts/odyssey-react-mui_ro";
 import { translation as ru } from "./properties/ts/odyssey-react-mui_ru";
 import { translation as sv } from "./properties/ts/odyssey-react-mui_sv";
@@ -63,17 +65,19 @@ export const resources = {
   ko,
   ms,
   nb,
-  "nl-NL": nlNL,
+  nl_NL: nlNL,
+  ok_PL: okPL,
+  ok_SK: okSK,
   pl,
-  "pt-BR": ptBR,
+  pt_BR: ptBR,
   ro,
   ru,
   sv,
   th,
   tr,
   uk,
-  "zh-CN": zhCN,
-  "zh-TW": znTW,
+  zh_CN: zhCN,
+  zh_TW: znTW,
 };
 
 i18n.use(initReactI18next).init({

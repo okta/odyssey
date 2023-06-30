@@ -37,15 +37,16 @@ import { tooltipClasses } from "@mui/material/Tooltip";
 import { typographyClasses } from "@mui/material/Typography";
 
 import {
-  AlertTriangleFilledIcon,
   ArrowDownIcon,
-  CheckIcon,
   CheckCircleFilledIcon,
+  CheckIcon,
   ChevronDownIcon,
   CloseCircleFilledIcon,
   CloseIcon,
+  DangerDiamondFilledIcon,
   InformationCircleFilledIcon,
   SubtractIcon,
+  WarningFilledIcon,
 } from "../iconDictionary";
 import { DesignTokens } from "./theme";
 
@@ -56,10 +57,10 @@ export const components = (
     MuiAlert: {
       defaultProps: {
         iconMapping: {
-          error: <AlertTriangleFilledIcon />,
+          error: <DangerDiamondFilledIcon />,
           info: <InformationCircleFilledIcon />,
           success: <CheckCircleFilledIcon />,
-          warning: <AlertTriangleFilledIcon />,
+          warning: <WarningFilledIcon />,
         },
       },
       styleOverrides: {

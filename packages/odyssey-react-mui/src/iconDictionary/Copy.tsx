@@ -22,7 +22,7 @@ export const CopyIcon = forwardRef<SVGSVGElement, CopyIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const CopyIcon = forwardRef<SVGSVGElement, CopyIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M2 2h7.8c.577 0 .949 0 1.232.024.272.022.373.06.422.085a1 1 0 0 1 .437.437c.025.05.063.15.085.422C12 3.25 12 3.623 12 4.2V12H4.2c-.577 0-.949 0-1.232-.024-.272-.022-.373-.06-.422-.085a1 1 0 0 1-.437-.437c-.025-.05-.063-.15-.085-.422C2 10.75 2 10.377 2 9.8V2ZM1 1h8.8c1.12 0 1.68 0 2.108.218a2 2 0 0 1 .874.874C13 2.52 13 3.08 13 4.2V13H4.2c-1.12 0-1.68 0-2.108-.218a2 2 0 0 1-.874-.874C1 11.48 1 10.92 1 9.8V1Zm13 3v10H4v1h11V4h-1Z"
+            d="M3.063 2.125h-1V15a3 3 0 0 0 3 3H18V5.125a3 3 0 0 0-3-3H3.062Zm1 12.875V4.125H15a1 1 0 0 1 1 1V16H5.062a1 1 0 0 1-1-1ZM20 7v12a1 1 0 0 1-1 1H6v2h13a3 3 0 0 0 3-3V7h-2Z"
             clipRule="evenodd"
           />
         </>
