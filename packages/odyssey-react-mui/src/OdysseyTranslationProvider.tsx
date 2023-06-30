@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactElement, useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 import { SupportedLanguages } from "./OdysseyTranslationProvider.types";
 
@@ -22,7 +22,7 @@ export type TranslationOverrides = {
 };
 
 type OdysseyTranslationProviderProps = {
-  children: ReactElement;
+  children: ReactNode;
   languageCode?: SupportedLanguages;
   translationOverrides?: TranslationOverrides;
 };

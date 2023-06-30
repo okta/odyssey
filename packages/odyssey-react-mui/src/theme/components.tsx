@@ -1965,7 +1965,7 @@ export const components = (
           }),
 
           [`.${tableHeadClasses.root} &`]: {
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorBody,
             lineHeight: theme.typography.body1.lineHeight,
             fontWeight: theme.typography.fontWeightBold,
             backgroundColor: odysseyTokens.HueNeutral50,

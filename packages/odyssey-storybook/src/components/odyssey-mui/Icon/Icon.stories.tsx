@@ -14,14 +14,10 @@ import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
 import {
   Icon,
-  IconProps,
+  type IconProps,
   iconDictionary,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
+  StaticTable,
+  type TableColumn,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
@@ -53,10 +49,10 @@ export const Default: StoryObj<IconProps> = {
   render: function C(args) {
     return (
       <Icon
-        name={args.name}
-        size={args.size}
         ariaLabelledby={args.ariaLabelledby}
         label={args.label}
+        name={args.name}
+        size={args.size}
       />
     );
   },
@@ -66,7 +62,35 @@ export const Default: StoryObj<IconProps> = {
   },
 };
 
-const icons: Array<{ name: keyof typeof iconDictionary; use: string }> = [
+type IconData = {
+  name: keyof typeof iconDictionary;
+  use: string;
+};
+
+const columns: TableColumn<IconData>[] = [
+  {
+    accessorKey: "name",
+    Cell: ({ cell }) =>
+      createElement(iconDictionary[cell.getValue<IconData["name"]>()]),
+    header: "Icon",
+  },
+  {
+    accessorKey: "name",
+    header: "Name",
+  },
+  {
+    accessorKey: "name",
+    Cell: ({ cell }) =>
+      iconDictionary[cell.getValue<IconData["name"]>()].displayName,
+    header: "Class Name",
+  },
+  {
+    accessorKey: "use",
+    header: "Use",
+  },
+];
+
+const icons: IconData[] = [
   { name: "add-circle", use: "To add" },
   { name: "add", use: "To add" },
   { name: "apps", use: "" },
@@ -142,33 +166,10 @@ const icons: Array<{ name: keyof typeof iconDictionary; use: string }> = [
   { name: "warning", use: "" },
 ];
 
+const getRowId = ({ name }: { name: IconData["name"] }) => name;
+
 export const Library: StoryObj<IconProps> = {
   render: function C() {
-    return (
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Icon</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Class Name</TableCell>
-              <TableCell>Use</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {icons.map(({ name, use }) => {
-              return (
-                <TableRow key={`${name}_row`}>
-                  <TableCell>{createElement(iconDictionary[name])}</TableCell>
-                  <TableCell>{name}</TableCell>
-                  <TableCell>{iconDictionary[name].displayName}</TableCell>
-                  <TableCell>{use}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
+    return <StaticTable columns={columns} data={icons} getRowId={getRowId} />;
   },
 };
