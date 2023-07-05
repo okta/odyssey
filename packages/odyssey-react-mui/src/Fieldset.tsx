@@ -12,7 +12,7 @@
 
 import { memo, ReactElement } from "react";
 
-import { Box, Typography } from ".";
+import { Box, Typography } from "@mui/material";
 import { Infobox } from "./Infobox";
 import { useUniqueId } from "./useUniqueId";
 
@@ -70,7 +70,7 @@ FieldsetProps) => {
       sx={{
         maxWidth: (theme) => theme.mixins.maxWidth,
         margin: (theme) => theme.spacing(0),
-        marginBlockEnd: (theme) => theme.spacing(4),
+        marginBlockEnd: (theme) => theme.spacing(6),
         padding: (theme) => theme.spacing(0),
         border: "0",
 
@@ -82,7 +82,11 @@ FieldsetProps) => {
       <Typography variant="legend" component="legend">
         {legend}
       </Typography>
-      {description && <Typography paragraph>{description}</Typography>}
+      {description && (
+        <Typography component="p" variant="subtitle2">
+          {description}
+        </Typography>
+      )}
       {alert}
       {children}
     </Box>

@@ -14,14 +14,18 @@ import { ThemeOptions } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
 import { alertTitleClasses } from "@mui/material/AlertTitle";
 import { buttonClasses } from "@mui/material/Button";
+import { checkboxClasses } from "@mui/material/Checkbox";
 import { chipClasses } from "@mui/material/Chip";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
 import { dividerClasses } from "@mui/material/Divider";
+import { formControlLabelClasses } from "@mui/material/FormControlLabel";
+import { formLabelClasses } from "@mui/material/FormLabel";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
 import { listItemTextClasses } from "@mui/material/ListItemText";
 import { menuItemClasses } from "@mui/material/MenuItem";
+import { radioClasses } from "@mui/material/Radio";
 import { stackClasses } from "@mui/material/Stack";
 import { svgIconClasses } from "@mui/material/SvgIcon";
 import { tableBodyClasses } from "@mui/material/TableBody";
@@ -30,17 +34,19 @@ import { tableHeadClasses } from "@mui/material/TableHead";
 import { tableRowClasses } from "@mui/material/TableRow";
 import { tableSortLabelClasses } from "@mui/material/TableSortLabel";
 import { tooltipClasses } from "@mui/material/Tooltip";
+import { typographyClasses } from "@mui/material/Typography";
 
 import {
-  AlertTriangleFilledIcon,
   ArrowDownIcon,
-  CheckIcon,
   CheckCircleFilledIcon,
+  CheckIcon,
   ChevronDownIcon,
   CloseCircleFilledIcon,
   CloseIcon,
+  DangerDiamondFilledIcon,
   InformationCircleFilledIcon,
   SubtractIcon,
+  WarningFilledIcon,
 } from "../iconDictionary";
 import { DesignTokens } from "./theme";
 
@@ -51,10 +57,10 @@ export const components = (
     MuiAlert: {
       defaultProps: {
         iconMapping: {
-          error: <AlertTriangleFilledIcon />,
+          error: <DangerDiamondFilledIcon />,
           info: <InformationCircleFilledIcon />,
           success: <CheckCircleFilledIcon />,
-          warning: <AlertTriangleFilledIcon />,
+          warning: <WarningFilledIcon />,
         },
       },
       styleOverrides: {
@@ -127,11 +133,15 @@ export const components = (
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 0,
+
+            ...(ownerState.onClose !== undefined && {
+              paddingInline: odysseyTokens.Spacing6,
+            }),
           }),
           ...(ownerState.variant === "infobox" && {
-            borderRadius: odysseyTokens.BorderRadiusOuter,
+            borderRadius: odysseyTokens.BorderRadiusMain,
             "&:not(:last-child)": {
-              marginBottom: odysseyTokens.Spacing4,
+              marginBottom: odysseyTokens.Spacing6,
             },
           }),
           ...(ownerState.variant === "toast" && {
@@ -437,7 +447,7 @@ export const components = (
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           whiteSpace: "nowrap",
 
-          ".MuiButton-root + &": {
+          [`.${buttonClasses.root} + &`]: {
             marginInlineStart: odysseyTokens.Spacing2,
           },
 
@@ -500,7 +510,7 @@ export const components = (
         root: ({ theme }) => ({
           width: `${odysseyTokens.TypographyLineHeightUi}em`,
           height: `${odysseyTokens.TypographyLineHeightUi}em`,
-          borderRadius: theme.mixins.borderRadius,
+          borderRadius: odysseyTokens.BorderRadiusTight,
           borderWidth: theme.mixins.borderWidth,
           borderStyle: theme.mixins.borderStyle,
           borderColor: theme.palette.grey[500],
@@ -513,7 +523,7 @@ export const components = (
             }
           ),
 
-          ".MuiSvgIcon-root": {
+          [`.${svgIconClasses.root}`]: {
             color: theme.palette.common.white,
             transition: theme.transitions.create(["color"], {
               duration: theme.transitions.duration.short,
@@ -524,13 +534,13 @@ export const components = (
             backgroundColor: odysseyTokens.PalettePrimaryMain,
             borderColor: odysseyTokens.PalettePrimaryMain,
 
-            ".MuiFormControlLabel-root:hover > &": {
+            [`.${formControlLabelClasses.root}:hover > &`]: {
               backgroundColor: theme.palette.primary.dark,
               borderColor: theme.palette.primary.dark,
             },
           },
 
-          ".MuiFormControlLabel-root:hover > &": {
+          [`.${formControlLabelClasses.root}:hover > &`]: {
             backgroundColor: "transparent",
             borderColor: theme.palette.grey[900],
           },
@@ -569,7 +579,7 @@ export const components = (
               borderColor: odysseyTokens.HueNeutral300,
             },
 
-            ".MuiSvgIcon-root": {
+            [`.${svgIconClasses.root}`]: {
               color: theme.palette.common.black,
             },
           },
@@ -1114,11 +1124,17 @@ export const components = (
     },
     MuiDialogActions: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: {
+          flexWrap: "wrap",
+          gap: odysseyTokens.Spacing2,
           paddingBlockStart: odysseyTokens.Spacing4,
-          paddingBlockEnd: theme.spacing(6),
-          paddingInline: theme.spacing(6),
-        }),
+          paddingBlockEnd: odysseyTokens.Spacing6,
+          paddingInline: odysseyTokens.Spacing6,
+
+          "& > .${ buttonClasses.root }": {
+            margin: "0 !important",
+          },
+        },
       },
     },
     MuiDialogContent: {
@@ -1182,7 +1198,7 @@ export const components = (
           maxWidth: odysseyTokens.TypographyLineLengthMax,
           ...(ownerState.margin === "normal" && {
             marginTop: 0,
-            marginBottom: theme.spacing(5),
+            marginBottom: theme.spacing(4),
             "&:last-child": {
               marginBottom: 0,
             },
@@ -1203,6 +1219,7 @@ export const components = (
     MuiFormControlLabel: {
       styleOverrides: {
         root: ({ theme, ownerState }) => ({
+          gap: odysseyTokens.Spacing2,
           marginInlineStart: 0,
           marginInlineEnd: 0, // used for row presentation of radio/checkbox
           ...(ownerState.labelPlacement === "start" && {
@@ -1221,29 +1238,24 @@ export const components = (
           "&.Mui-disabled": {
             pointerEvents: "none",
           },
-          //[`&:hover ${radioClasses.root}:not(${radioClasses.checked})`]: {
-          //color: odysseyTokens.TypographyColorBody,
-          //},
-          "&:hover .MuiRadio-root, &:hover .MuiCheckbox-root": {
+          [`&:hover .${radioClasses.root}, &:hover .${checkboxClasses.root}`]: {
             color: odysseyTokens.TypographyColorBody,
           },
-          "&:hover .MuiRadio-root.Mui-checked, &:hover .MuiCheckbox-root.Mui-checked":
+          [`&:hover .${radioClasses.root}.Mui-checked, &:hover .${checkboxClasses.root}.Mui-checked`]:
             {
               color: theme.palette.primary.dark,
             },
-          "&.Mui-error:hover .MuiRadio-root, &.Mui-error:hover .MuiCheckbox-root":
+          [`&.Mui-error:hover .${radioClasses.root}, &.Mui-error:hover .${checkboxClasses.root}`]:
             {
               color: odysseyTokens.PaletteDangerDark,
             },
-          "&.Mui-error:hover .MuiRadio-root.Mui-checked, &.Mui-error:hover .MuiCheckbox-root.Mui-checked":
+          [`&.Mui-error:hover .${radioClasses.root}.Mui-checked, &.Mui-error:hover .${checkboxClasses.root}.Mui-checked`]:
             {
               color: odysseyTokens.PaletteDangerDark,
             },
         }),
         label: {
-          "&:not(:first-child)": {
-            marginInlineStart: odysseyTokens.Spacing2,
-          },
+          gap: odysseyTokens.Spacing1,
         },
         asterisk: () => ({
           display: "none",
@@ -1259,7 +1271,7 @@ export const components = (
           fontSize: theme.typography.subtitle1.fontSize,
           lineHeight: "1.33333333",
           marginBlockStart: odysseyTokens.Spacing2,
-          ".MuiFormLabel-root + &": {
+          [`.${formLabelClasses.root} + &`]: {
             marginBlockStart: `-${theme.spacing(1)}`,
             color: odysseyTokens.TypographyColorSub,
           },
@@ -1274,13 +1286,19 @@ export const components = (
     MuiFormLabel: {
       styleOverrides: {
         root: {
+          alignItems: "center",
           color: odysseyTokens.TypographyColorBody,
+          display: "inline-flex",
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           fontSize: "1rem",
           fontWeight: 600,
           marginBottom: odysseyTokens.Spacing2,
           "&.Mui-focused, &.Mui-error, &.Mui-disabled": {
             color: odysseyTokens.TypographyColorBody,
+          },
+          "& > .MuiTypography-root": {
+            margin: "reset",
+            marginInlineStart: odysseyTokens.Spacing1,
           },
         },
       },
@@ -1464,7 +1482,7 @@ export const components = (
               transform: "none",
             }),
           }),
-          "& > .MuiTypography-root": {
+          [`& > .${typographyClasses.root}`]: {
             lineHeight: "unset",
           },
         }),
@@ -1687,7 +1705,7 @@ export const components = (
             }),
           },
 
-          ".MuiFormControlLabel-root:hover > &": {
+          [`.${formControlLabelClasses.root}:hover > &`]: {
             backgroundColor: "transparent",
             borderColor: theme.palette.grey[900],
           },
@@ -1851,6 +1869,10 @@ export const components = (
               color: theme.palette.text.disabled,
             },
           },
+          "& .MuiTab-iconWrapper": {
+            marginRight: 0,
+            marginInlineEnd: odysseyTokens.Spacing1,
+          },
         }),
       },
     },
@@ -1943,7 +1965,7 @@ export const components = (
           }),
 
           [`.${tableHeadClasses.root} &`]: {
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorBody,
             lineHeight: theme.typography.body1.lineHeight,
             fontWeight: theme.typography.fontWeightBold,
             backgroundColor: odysseyTokens.HueNeutral50,

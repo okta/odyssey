@@ -12,7 +12,7 @@
 
 import { memo, ReactElement } from "react";
 
-import { Box, Typography } from "./";
+import { Box, Typography } from "@mui/material";
 import { Button } from "./Button";
 import { Infobox } from "./Infobox";
 import { useUniqueId } from "./useUniqueId";
@@ -117,7 +117,11 @@ const Form = ({
           {title}
         </Typography>
       )}
-      {description && <Typography paragraph>{description}</Typography>}
+      {description && (
+        <Typography component="p" variant="subtitle2">
+          {description}
+        </Typography>
+      )}
       {alert}
       {children}
       {formActions && (

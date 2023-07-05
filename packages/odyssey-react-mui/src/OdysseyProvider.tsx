@@ -12,7 +12,7 @@
 
 import { memo, ReactElement } from "react";
 
-import { ThemeOptions } from ".";
+import { ThemeOptions } from "@mui/material";
 import { DesignTokensOverride } from "../src/theme/index";
 import { OdysseyCacheProvider } from "./OdysseyCacheProvider";
 import { OdysseyThemeProvider } from "./OdysseyThemeProvider";

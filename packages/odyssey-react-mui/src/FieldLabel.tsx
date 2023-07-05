@@ -15,7 +15,7 @@ import { memo, useMemo } from "react";
 
 import { useTranslation } from "react-i18next";
 import { ScreenReaderText } from "./ScreenReaderText";
-import { Typography } from ".";
+import { Typography } from "@mui/material";
 
 export type FieldLabelProps = {
   hasVisibleLabel: boolean;
@@ -56,5 +56,6 @@ const FieldLabel = ({
 };
 
 const MemoizedFieldLabel = memo(FieldLabel);
+MemoizedFieldLabel.displayName = "FieldLabel";
 
 export { MemoizedFieldLabel as FieldLabel };
