@@ -43,13 +43,6 @@ export {
   Snackbar,
   Stack,
   SvgIcon,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableSortLabel,
   ThemeProvider as MuiThemeProvider,
   Typography,
 } from "@mui/material";
@@ -86,13 +79,6 @@ export type {
   SnackbarProps,
   StackProps,
   SvgIconProps,
-  TableBodyProps,
-  TableCellProps,
-  TableContainerProps,
-  TableHeadProps,
-  TableProps,
-  TableRowProps,
-  TableSortLabelProps,
   ThemeOptions,
   TypographyProps,
 } from "@mui/material";
@@ -100,6 +86,8 @@ export type {
 export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
 
 export { deepmerge, visuallyHidden } from "@mui/utils";
+
+export type { MRT_ColumnDef as TableColumn } from "material-react-table";
 
 export * from "./Autocomplete";
 export * from "./Banner";
@@ -115,26 +103,30 @@ export * from "./Icon";
 export * from "./iconDictionary";
 export * from "./Infobox";
 export * from "./Link";
+export * from "./materialReactTableTypes";
 export * from "./MenuButton";
 export * from "./MenuItem";
 export * from "./NativeSelect";
+export * from "./NullElement";
 export * from "./OdysseyCacheProvider";
 export * from "./OdysseyProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./OdysseyTranslationProvider";
+export * from "./PaginatedTable";
 export * from "./PasswordField";
 export * from "./Radio";
 export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
+export * from "./StaticTable";
 export * from "./Status";
 export * from "./Tabs";
 export * from "./Tag";
 export * from "./TagList";
 export * from "./TextField";
 export * from "./theme";
-export * from "./Tooltip";
 export * from "./Toast";
 export * from "./ToastStack";
+export * from "./Tooltip";
 export * from "./useUniqueId";

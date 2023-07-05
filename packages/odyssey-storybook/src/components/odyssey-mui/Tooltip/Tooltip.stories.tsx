@@ -18,6 +18,9 @@ import {
   TooltipProps,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, within } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
+import type { PlaywrightProps } from "../storybookTypes";
 
 import TooltipMdx from "./Tooltip.mdx";
 
@@ -76,6 +79,17 @@ const Template: StoryObj<TooltipProps> = {
   },
 };
 
+const showTooltip =
+  ({ canvasElement, step }: PlaywrightProps<TooltipProps>) =>
+  async (actionName: string) => {
+    await step("show the tooltip on hover", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByText("Launch");
+      userEvent.hover(button);
+      await axeRun(actionName);
+    });
+  };
+
 export const Default: StoryObj<TooltipProps> = {
   ...Template,
   args: {
@@ -83,6 +97,9 @@ export const Default: StoryObj<TooltipProps> = {
     ariaType: "description",
     placement: "top",
     text: "This will begin a 10-second countdown",
+  },
+  play: async ({ canvasElement, step }) => {
+    showTooltip({ canvasElement, step })("Tooltip Default");
   },
 };
 

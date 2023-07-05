@@ -10,238 +10,373 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState, useEffect } from "react";
-import type { ReactNode } from "react";
+import {
+  CSSProperties,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
 import {
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell,
+  StaticTable,
+  type TableColumn,
   Typography,
 } from "@okta/odyssey-react-mui";
 
-type FontWeight = 400 | 600;
+type TokenName = keyof typeof Tokens;
+type TokenValue = (typeof Tokens)[TokenName];
 
-type Token = {
-  name: string;
-  value: string | number;
+type TokenDataItem = {
+  name: TokenName;
+  value: TokenValue;
+};
+
+type TokenTableItem = TokenDataItem & {
+  tableName: string;
 };
 
 type TableData = {
   name: string;
-  values: Array<Token>;
+  values: TokenTableItem[];
 };
 
-type TokenName = keyof typeof Tokens;
+const renderBorder = (token: TokenDataItem) => (
+  <span
+    style={{
+      borderColor: "#d7d7dc",
+      borderRadius: `${token.name.includes("BorderRadius") ? token.value : ""}`,
+      borderStyle: token.name.includes("BorderStyle")
+        ? (token.value as string)
+        : "solid",
+      borderWidth: token.name.includes("BorderWidth") ? token.value : "1px",
+      display: "inline-block",
+      height: "1.25em",
+      verticalAlign: "middle",
+      width: "1.25em",
+    }}
+  ></span>
+);
 
-export const TokenTables = (): ReactNode => {
-  const [tables, setTables] = useState<Array<TableData>>([]);
+const renderOutline = (token: TokenDataItem) => (
+  <span
+    style={{
+      display: "inline-block",
+      height: "1.25em",
+      outlineColor: "#d7d7dc",
+      outlineStyle: token.name.includes("OutlineStyle")
+        ? (token.value as string)
+        : "solid",
+      outlineWidth: token.name.includes("OutlineWidth") ? token.value : "1px",
+      verticalAlign: "middle",
+      width: "1.25em",
+    }}
+  ></span>
+);
 
-  useEffect(() => {
-    const tokenKeys = Object.keys(Tokens);
-    const tempTables: Array<TableData> = [];
-    let currentType: string;
-    let currentValues: Array<Token>;
-    tokenKeys.forEach((tokenName) => {
-      const parts = tokenName.match(/[A-Z][a-z]+/g);
-      if (!parts) return;
+const renderColor = (value: TokenValue) => (
+  <span
+    style={{
+      width: "1em",
+      height: "1em",
+      display: "inline-block",
+      backgroundColor: `${value}`,
+      borderStyle: "solid",
+      borderColor: `${value === "#ffffff" ? "#d7d7dc" : "transparent"}`,
+      borderRadius: "4px",
+      verticalAlign: "middle",
+    }}
+  ></span>
+);
 
-      let tokenType = parts[0];
-      if (
-        parts[0] === "Color" ||
-        parts[0] === "Hue" ||
-        parts[0] === "Palette"
-      ) {
-        tokenType = `${parts[1]} ${parts[0]}s`;
-      }
+const renderAlpha = (value: TokenValue) => (
+  <span
+    style={{
+      width: "1em",
+      height: "1em",
+      display: "inline-block",
+      backgroundColor: `#000000${value}`,
+      borderStyle: "solid",
+      borderColor: "#000000",
+      borderRadius: "4px",
+      verticalAlign: "middle",
+    }}
+  ></span>
+);
 
-      if (tokenType !== currentType) {
-        currentValues = [];
-        tempTables.push({ name: tokenType, values: currentValues });
-        currentType = tokenType;
-      }
+const renderColorText = (value: TokenValue) => (
+  <span
+    style={{
+      color: `${value}`,
+      display: "inline-block",
+      paddingInline: "4px",
+      backgroundColor: `${value === "#ffffff" ? "#000" : ""}`,
+    }}
+  >
+    Aa
+  </span>
+);
 
-      currentValues.push({
-        name: tokenName,
-        value: Tokens[tokenName as TokenName],
-      });
-    });
+const renderSpace = (value: TokenValue) => (
+  <span
+    style={{
+      width: `${value}`,
+      height: `${value}`,
+      display: "inline-block",
+      backgroundColor: "#f88c90",
+    }}
+  ></span>
+);
 
-    tempTables
-      .find((table) => table.name === "Palette Colors")
-      ?.values.sort((a: Token, b: Token) => {
-        const nameA = a.name.toUpperCase();
-        const nameB = b.name.toUpperCase();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      });
+const renderFont = ({ name, value }: TokenDataItem) => (
+  <span
+    style={{
+      backgroundColor: `${name.includes("LineHeight") ? "#ebebed" : ""}`,
+      display: `${name.includes("LineHeight") ? "inline-block" : ""}`,
+      fontFamily: `${name.includes("TypographyFamily") ? value : ""}`,
+      fontSize: `${name.includes("TypographySize") ? value : ""}`,
+      fontWeight: `${name.includes("TypographyWeight") ? value : ""}`,
+      lineHeight: `${name.includes("LineHeight") ? value : ""}`,
+      maxWidth: `${name.includes("LineLength") ? value : ""}`,
+    }}
+  >
+    Waltz, bad nymph, for quick jigs vex!
+  </span>
+);
 
-    setTables(tempTables);
-  }, [setTables]);
+const renderFocus = (value: TokenValue) => (
+  <span
+    style={{
+      width: "1.25em",
+      height: "1.25em",
+      display: "inline-block",
+      boxShadow: `0 0 0 ${value} #a7b5ec`,
+    }}
+  ></span>
+);
 
-  const renderBorder = (token: Token) => (
-    <span
-      style={{
-        width: "1.25em",
-        height: "1.25em",
-        borderWidth: token.name.includes("BorderWidth") ? token.value : "1px",
-        borderStyle: token.name.includes("BorderStyle")
-          ? (token.value as string)
-          : "solid",
-        borderColor: "#d7d7dc",
-        borderRadius: `${
-          token.name.includes("BorderRadius") ? token.value : ""
-        }`,
-        display: "inline-block",
-        verticalAlign: "middle",
-      }}
-    ></span>
+const renderShadow = (value: TokenValue) => (
+  <span
+    style={{
+      width: "1.5em",
+      height: "1.5em",
+      display: "inline-block",
+      boxShadow: `${value}`,
+    }}
+  ></span>
+);
+
+const renderTransition = ({ name, value }: TokenDataItem) => {
+  const defaultTransitionStyles = useMemo<CSSProperties>(
+    () => ({
+      background: "black",
+      display: "inline-block",
+      height: "1.5em",
+      opacity: 1,
+      transitionDuration: `${name.includes("Duration") ? value : "500ms"}`,
+      transitionProperty: "all",
+      transitionTimingFunction: `${
+        name.includes("Timing") ? value : "ease-in-out"
+      }`,
+      width: "1.5em",
+    }),
+    [name, value]
   );
 
-  const renderColor = (val: string | number) => (
-    <span
-      style={{
-        width: "1em",
-        height: "1em",
-        display: "inline-block",
-        backgroundColor: `${val}`,
-        borderStyle: "solid",
-        borderColor: `${val === "#ffffff" ? "#d7d7dc" : "transparent"}`,
-        borderRadius: "4px",
-        verticalAlign: "middle",
-      }}
-    ></span>
-  );
+  const [styles, setStyles] = useState(defaultTransitionStyles);
 
-  const renderColorText = (val: string | number) => (
-    <span
-      style={{
-        color: `${val}`,
-        display: "inline-block",
-        paddingInline: "4px",
-        backgroundColor: `${val === "#ffffff" ? "#000" : ""}`,
-      }}
-    >
-      Aa
-    </span>
-  );
+  const onMouseEnter = useCallback(() => {
+    setStyles((previousStyles) => ({
+      ...previousStyles,
+      opacity: 0.1,
+    }));
+  }, []);
 
-  const renderSpace = (val: string | number) => (
-    <span
-      style={{
-        width: `${val}`,
-        height: `${val}`,
-        display: "inline-block",
-        backgroundColor: "#f88c90",
-      }}
-    ></span>
-  );
-
-  const renderFont = (token: Token) => (
-    <span
-      style={{
-        fontFamily: `${token.name.includes("FontFamily") ? token.value : ""}`,
-        fontSize: `${token.name.includes("FontSize") ? token.value : ""}`,
-        fontWeight: `${
-          token.name.includes("FontWeight") ? token.value : ""
-        }` as unknown as FontWeight,
-        lineHeight: `${token.name.includes("LineHeight") ? token.value : ""}`,
-        backgroundColor: `${
-          token.name.includes("LineHeight") ? "#ebebed" : ""
-        }`,
-        display: `${token.name.includes("LineHeight") ? "inline-block" : ""}`,
-      }}
-    >
-      Waltz, bad nymph, for quick jigs vex!
-    </span>
-  );
-
-  const renderFocus = (val: string | number) => (
-    <span
-      style={{
-        width: "1.25em",
-        height: "1.25em",
-        display: "inline-block",
-        boxShadow: `0 0 0 ${val} #a7b5ec`,
-      }}
-    ></span>
-  );
-
-  const renderShadow = (val: string | number) => (
-    <span
-      style={{
-        width: "1.5em",
-        height: "1.5em",
-        display: "inline-block",
-        boxShadow: `${val}`,
-      }}
-    ></span>
-  );
-
-  function getDisplayedValue(tableName: string, val: string | number) {
-    if (!tableName.includes("Colors") || tableName === "Palette Colors") {
-      return val;
-    }
-    const tokenValue = tables
-      .find((table) => table.name === "Palette Colors")
-      ?.values.find((value) => value.value === val) ?? { name: "" };
-    return tokenValue.name;
-  }
+  const onMouseLeave = useCallback(() => {
+    setStyles((previousStyles) => ({
+      ...previousStyles,
+      opacity: defaultTransitionStyles.opacity,
+    }));
+  }, [defaultTransitionStyles]);
 
   return (
-    <>
-      {tables.map((table) => (
-        <TableContainer key={table.name}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell scope="col">Token Name</TableCell>
-                <TableCell scope="col">Example</TableCell>
-                <TableCell scope="col">Value</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {table.values.map((token: Token) => (
-                <TableRow key={`${token.name}-row`}>
-                  <TableCell>
-                    <Typography>{token.name}</Typography>
-                  </TableCell>
-                  <TableCell>
-                    {token.name.includes("Border") &&
-                      !token.name.includes("ColorBorder") &&
-                      renderBorder(token)}
-                    {(token.name.includes("Hue") ||
-                      token.name.includes("Palette")) &&
-                      !token.name.includes("ColorText") &&
-                      renderColor(token.value)}
-                    {token.name.includes("ColorText") &&
-                      renderColorText(token.value)}
-                    {token.name.includes("Space") && renderSpace(token.value)}
-                    {token.name.includes("Font") && renderFont(token)}
-                    {token.name.includes("Focus") &&
-                      !token.name.includes("ColorFocus") &&
-                      renderFocus(token.value)}
-                    {token.name.includes("Shadow") && renderShadow(token.value)}
-                  </TableCell>
-                  <TableCell>
-                    <Typography>
-                      {getDisplayedValue(table.name, token.value)}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      ))}
-    </>
+    <span
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      style={styles}
+    ></span>
   );
 };
+
+const tokenTables = Object.entries(Tokens as Record<TokenName, TokenValue>)
+  .map(([key, value]) => ({
+    name: key as TokenName,
+    value,
+  }))
+  .reduce((tokenTables, { name, value }) => {
+    const parts = name.match(/[A-Z][a-z]+/g);
+
+    if (!parts) {
+      return tokenTables;
+    }
+
+    const tableName =
+      parts[0] === "Color" || parts[0] === "Hue" || parts[0] === "Palette"
+        ? `${parts[1]} ${parts[0]}s`
+        : parts[0];
+
+    const existingTokenTable =
+      tokenTables.find(({ name }) => name === tableName) ||
+      ({
+        name: tableName,
+        values: [],
+      } satisfies TableData);
+
+    return tokenTables
+      .filter(({ name }) => name !== tableName)
+      .concat({
+        ...existingTokenTable,
+        values: existingTokenTable.values
+          .concat({
+            name,
+            tableName,
+            value,
+          })
+          .sort((a, b) => {
+            const nameA = a.name.toUpperCase();
+            const nameB = b.name.toUpperCase();
+
+            if (nameA < nameB) {
+              return -1;
+            }
+
+            if (nameA > nameB) {
+              return 1;
+            }
+
+            return 0;
+          }),
+      });
+  }, [] as Array<TableData>);
+
+function getDisplayedValue(tableName: string, value: TokenValue) {
+  if (!tableName.includes("Colors") || tableName === "Palette Colors") {
+    return value;
+  }
+
+  const tokenValue = tokenTables
+    .find(({ name }) => name === "Palette Colors")
+    ?.values.find(({ value: tokenValue }) => tokenValue === value) ?? {
+    name: "",
+  };
+
+  return tokenValue.name;
+}
+
+const columns: TableColumn<TokenTableItem>[] = [
+  {
+    accessorKey: "name",
+    Cell: ({ cell }) => <Typography>{cell.getValue<TokenValue>()}</Typography>,
+    header: "Token Name",
+  },
+  {
+    accessorFn: ({ name }) => `${name} example`,
+    Cell: ({ cell }) => {
+      const name = cell.row.getValue<TokenName>("name");
+      const value = Tokens[name] as TokenValue;
+
+      if (name.includes("PaletteAlpha")) {
+        return renderAlpha(value);
+      }
+
+      if (name.includes("TypographyColor")) {
+        return renderColorText(value);
+      }
+
+      if (
+        name.includes("Color") ||
+        name.includes("Hue") ||
+        name.includes("Palette")
+      ) {
+        return renderColor(value);
+      }
+
+      if (name.includes("Border")) {
+        return renderBorder({
+          name,
+          value,
+        });
+      }
+
+      if (name.includes("Outline")) {
+        return renderOutline({
+          name,
+          value,
+        });
+      }
+
+      if (name.includes("Spacing")) {
+        return renderSpace(value);
+      }
+
+      if (name.includes("Typography")) {
+        return renderFont({
+          name,
+          value,
+        });
+      }
+
+      if (name.includes("Focus")) {
+        return renderFocus(value);
+      }
+
+      if (name.includes("Shadow")) {
+        return renderShadow(value);
+      }
+
+      if (name.includes("Transition")) {
+        return renderTransition({
+          name,
+          value,
+        });
+      }
+
+      return null;
+    },
+    header: "Example",
+  },
+  {
+    accessorKey: "tableName",
+    header: "Table Name",
+  },
+  {
+    accessorKey: "value",
+    Cell: ({ cell }) => {
+      const tableName = cell.row.getValue<string>("tableName");
+      const name = cell.row.getValue<TokenName>("name");
+      const value = Tokens[name] as TokenValue;
+
+      return <Typography>{getDisplayedValue(tableName, value)}</Typography>;
+    },
+    header: "Value",
+  },
+];
+
+const getRowId = ({ name }: { name: TokenDataItem["name"] }) => name;
+
+const initialState = {
+  columnVisibility: {
+    tableName: false,
+  },
+};
+
+export const TokenTables = (): ReactNode =>
+  tokenTables.map(({ name, values }) => (
+    <StaticTable
+      columns={columns}
+      data={values}
+      getRowId={getRowId}
+      initialState={initialState}
+      key={name}
+    />
+  ));
