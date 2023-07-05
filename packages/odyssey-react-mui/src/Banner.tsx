@@ -10,8 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Alert, AlertColor, AlertTitle, AlertProps } from "@mui/material";
-import { Link, ScreenReaderText } from "./";
+import {
+  Alert,
+  AlertColor,
+  AlertTitle,
+  AlertProps,
+  Link,
+  ScreenReaderText,
+} from "./";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 

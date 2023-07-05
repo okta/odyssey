@@ -48,6 +48,7 @@ export {
 } from "@mui/material";
 
 export type {
+  AlertColor,
   AlertProps,
   AlertTitleProps,
   BoxProps,
