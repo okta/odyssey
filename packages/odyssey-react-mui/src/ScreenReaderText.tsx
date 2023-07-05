@@ -11,7 +11,8 @@
  */
 
 import { memo, ReactNode } from "react";
-import { Box, visuallyHidden } from "./";
+import { Box } from "@mui/material";
+import { visuallyHidden } from "@mui/utils";
 
 export type ScreenReaderTextProps = {
   /**
@@ -28,9 +29,12 @@ export type ScreenReaderTextProps = {
 const style = { ...visuallyHidden };
 
 const ScreenReaderText = ({ children }: ScreenReaderTextProps) => (
-  <Box sx={style}>{children}</Box>
+  <Box sx={style} component="span">
+    {children}
+  </Box>
 );
 
 const MemoizedScreenReaderText = memo(ScreenReaderText);
+MemoizedScreenReaderText.displayName = "ScreenReaderText";
 
 export { MemoizedScreenReaderText as ScreenReaderText };

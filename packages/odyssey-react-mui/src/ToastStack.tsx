@@ -11,7 +11,7 @@
  */
 
 import { memo, ReactElement } from "react";
-import { Box, Snackbar } from ".";
+import { Box, Snackbar } from "@mui/material";
 import { Toast } from "./Toast";
 
 export type ToastStackProps = {
@@ -29,5 +29,6 @@ const ToastStack = ({ children }: ToastStackProps) => {
 };
 
 const MemoizedToastStack = memo(ToastStack);
+MemoizedToastStack.displayName = "ToastStack";
 
 export { MemoizedToastStack as ToastStack };

@@ -10,10 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, forwardRef } from "react";
 import { MenuItem as MuiMenuItem } from "@mui/material";
 import { menuItemClasses } from "@mui/material/MenuItem";
 import type { MenuItemProps as MuiMenuItemProps } from "@mui/material";
+import { memo, useContext } from "react";
+
+import { MenuContext } from "./MenuContext";
 
 export interface MenuItemProps
   extends Omit<
@@ -30,19 +32,21 @@ export interface MenuItemProps
   isDestructive?: boolean;
 }
 
-const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
-  ({ isDestructive, ...props }, ref) => (
+const MenuItem = ({ isDestructive, ...props }: MenuItemProps) => {
+  const { closeMenu } = useContext(MenuContext);
+
+  return (
     <MuiMenuItem
       {...props}
-      ref={ref}
+      onClick={closeMenu}
       className={
         isDestructive ? `${menuItemClasses.root}-destructive` : undefined
       }
     >
       {props.children}
     </MuiMenuItem>
-  )
-);
+  );
+};
 
 const MemoizedMenuItem = memo(MenuItem);
 MemoizedMenuItem.displayName = "MenuItem";

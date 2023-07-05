@@ -65,5 +65,6 @@ const CheckboxGroup = ({
 };
 
 const MemoizedCheckboxGroup = memo(CheckboxGroup);
+MemoizedCheckboxGroup.displayName = "CheckboxGroup";
 
 export { MemoizedCheckboxGroup as CheckboxGroup };

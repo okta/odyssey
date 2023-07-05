@@ -13,11 +13,15 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
+  Checkbox,
+  CheckboxGroup,
   Fieldset,
   Form,
   FormProps,
   Infobox,
+  Link,
   TextField,
+  Typography,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -168,10 +172,29 @@ export const KitchenSink: StoryObj<FormProps> = {
         <Fieldset
           legend="Vessel information"
           name="vessel"
-          description="This information helps us verify vessel ownership and origination."
+          description="Taylor sat back in his chair reading the morning newspaper. The warm kitchen and the smell of coffee blended with the comfort of not having to go to work. This was his Rest Period, the first for a long time, and he was glad of it. He folded the second section back, sighing with contentment."
         >
-          <TextField label="Name of vessel" />
-          <TextField isMultiline label="Nature of visit" />
+          <TextField
+            label="Name of vessel"
+            errorMessage="This field is required."
+          />
+          <CheckboxGroup label="Systems check" isRequired>
+            <Checkbox
+              label="Life support"
+              name="life-support"
+              value="life-support"
+            />
+            <Checkbox
+              label="Warp core containment"
+              name="warp-core"
+              value="warp-core"
+            />
+            <Checkbox
+              label="Cetacean ops"
+              name="cetacean-ops"
+              value="cetacean-ops"
+            />
+          </CheckboxGroup>
         </Fieldset>
         <Fieldset
           legend="Passenger information"
@@ -179,12 +202,21 @@ export const KitchenSink: StoryObj<FormProps> = {
           description="This information will be used to track your passengers' whereabouts."
           alert={
             <Infobox severity="error" role="alert" title="Standby for boarding">
-              Your captain is a known space pirate. Your location has been
-              reported to Station Control.
+              <Typography paragraph>
+                There is an issue with the fuel mixture ratios. Reconfigure the
+                fuel mixture and perform the safety checks again.
+              </Typography>
+
+              <Link href="#" variant="monochrome">
+                Visit fueling console
+              </Link>
             </Infobox>
           }
         >
-          <TextField label="Number of passengers" />
+          <TextField
+            label="Number of passengers"
+            hint="Specify your destination within the Sol system."
+          />
           <TextField label="Captain's name" />
         </Fieldset>
       </>

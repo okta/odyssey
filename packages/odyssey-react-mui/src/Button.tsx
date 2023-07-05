@@ -93,7 +93,7 @@ const Button = ({
   return (
     <>
       {tooltipText && (
-        <Tooltip ariaType="description" placement="top" text={tooltipText}>
+        <Tooltip ariaType="description" text={tooltipText}>
           {button}
         </Tooltip>
       )}
@@ -103,5 +103,6 @@ const Button = ({
 };
 
 const MemoizedButton = memo(Button);
+MemoizedButton.displayName = "Button";
 
 export { MemoizedButton as Button };

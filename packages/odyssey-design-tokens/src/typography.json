@@ -21,7 +21,6 @@
         "value": "{hue.neutral.300.value}"
       },
       "action": {
-        "comment": "Branded text color, primarily used within button",
         "value": "{palette.primary.text.value}"
       },
       "danger": {

@@ -15,6 +15,10 @@ import { Button, Toast, ToastProps, ToastStack } from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { axeRun } from "../../../axe-util";
+import type { PlaywrightProps } from "../storybookTypes";
 
 const meta: Meta<ToastProps> = {
   title: "MUI Components/Alerts/Toast",
@@ -46,17 +50,51 @@ const meta: Meta<ToastProps> = {
   },
   args: {
     severity: "info",
+    role: "status",
     linkText: "Info",
     text: "The mission to Sagittarius A is set for January 7.",
+    autoHideDuration: 10000,
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default meta;
 
+const openToast =
+  ({ canvasElement, step }: PlaywrightProps<ToastProps>) =>
+  async (args: ToastProps, actionName: string) => {
+    const canvas = within(canvasElement);
+    await step(`open ${actionName}`, async () => {
+      await waitFor(() => {
+        const buttonElement = canvas.getByText(`Open ${args.severity} toast`);
+        userEvent.hover(buttonElement);
+        userEvent.click(buttonElement);
+        userEvent.tab();
+      });
+      axeRun(actionName);
+    });
+    if (args.isDismissable) {
+      await step("dismiss toast", async () => {
+        const toastElement = canvas.getAllByRole(args.role || "status")[0];
+        if (toastElement) {
+          const dismissToastButton = toastElement.querySelector(
+            '[aria-label="close"]'
+          );
+          if (dismissToastButton) {
+            userEvent.click(dismissToastButton);
+            waitFor(() => {
+              expect(toastElement).not.toBeInTheDocument();
+            });
+          }
+        }
+      });
+    }
+  };
+
 const Single: StoryObj<ToastProps> = {
   args: {
     isVisible: false,
+    role: "status",
   },
   render: function C(args) {
     const [isVisible, setIsVisible] = useState(args.isVisible);
@@ -86,48 +124,26 @@ const Single: StoryObj<ToastProps> = {
   },
 };
 
-const Static: StoryObj<ToastProps> = {
-  ...Single,
-  args: {
-    isVisible: true,
-    severity: "info",
-    text: "The mission to Sagittarius A is set for January 7.",
-  },
-};
-
 export const Info: StoryObj<ToastProps> = {
   ...Single,
   args: {
-    text: "Testing",
+    text: "The mission to Sagittarius A is set for January 7.",
     severity: "info",
+  },
+  play: async ({ args, canvasElement, step }) => {
+    openToast({ canvasElement, step })(args, "Info Toast");
   },
 };
 
-export const InfoStatic: StoryObj<ToastProps> = {
-  ...Static,
-  args: {
-    isVisible: true,
-    text: "Hello world!",
-    severity: "info",
-  },
-};
-
-export const Error = {
+export const ErrorToast: StoryObj<ToastProps> = {
   ...Single,
   args: {
     text: "Security breach in Hangar 18",
     role: "alert",
     severity: "error",
   },
-};
-
-export const ErrorStatic: StoryObj<ToastProps> = {
-  ...Static,
-  args: {
-    isVisible: true,
-    text: "Security breach in Hangar 18",
-    role: "alert",
-    severity: "error",
+  play: async ({ args, canvasElement, step }) => {
+    openToast({ canvasElement, step })(args, "Error Toast");
   },
 };
 
@@ -138,15 +154,8 @@ export const Warning: StoryObj<ToastProps> = {
     role: "status",
     severity: "warning",
   },
-};
-
-export const WarningStatic: StoryObj<ToastProps> = {
-  ...Static,
-  args: {
-    isVisible: true,
-    text: "Severe solar winds may delay local system flights",
-    role: "status",
-    severity: "warning",
+  play: async ({ args, canvasElement, step }) => {
+    openToast({ canvasElement, step })(args, "Warning Toast");
   },
 };
 
@@ -157,15 +166,8 @@ export const Success: StoryObj<ToastProps> = {
     role: "status",
     severity: "success",
   },
-};
-
-export const SuccessStatic: StoryObj<ToastProps> = {
-  ...Static,
-  args: {
-    isVisible: true,
-    text: "Docking completed",
-    role: "status",
-    severity: "success",
+  play: async ({ args, canvasElement, step }) => {
+    openToast({ canvasElement, step })(args, "Success Toast");
   },
 };
 
@@ -176,15 +178,8 @@ export const Dismissible: StoryObj<ToastProps> = {
     linkText: "View report",
     linkUrl: "#",
   },
-};
-
-export const DismissibleStatic: StoryObj<ToastProps> = {
-  ...Static,
-  args: {
-    isVisible: true,
-    isDismissable: true,
-    linkText: "View report",
-    linkUrl: "#",
+  play: async ({ args, canvasElement, step }) => {
+    openToast({ canvasElement, step })(args, "Dismissible Toast");
   },
 };
 
@@ -196,12 +191,14 @@ export const MultipleToasts: StoryObj<ToastProps> = {
         isVisible={true}
         severity="info"
         text="The mission to Sagittarius A is set for January 7."
+        key={Math.random()}
       />,
       <Toast
         isDismissable
         isVisible={true}
         severity="success"
         text="Docking completed."
+        key={Math.random()}
       />,
     ]);
 
@@ -209,25 +206,17 @@ export const MultipleToasts: StoryObj<ToastProps> = {
       const toastOptions = [
         <Toast
           isVisible={true}
-          severity="info"
-          text={`The mission to Sagittarius A is set for January 7.`}
-        />,
-        <Toast
-          isVisible={true}
-          severity="success"
-          text={`Docking completed.`}
-        />,
-        <Toast
-          isVisible={true}
           severity="warning"
           isDismissable
           text={`Severe solar winds may delay local system flights.`}
+          key={Math.random()}
         />,
         <Toast
           isVisible={true}
           severity="error"
           isDismissable
           text={`Security breach in Hangar 10.`}
+          key={Math.random()}
         />,
       ];
 

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Tag } from "./";
+import { Tag } from "./Tag";
 import { Stack } from "@mui/material";
 import { memo, ReactElement, useMemo } from "react";
 import { ChipElementType, TagListContext } from "./TagListContext";
@@ -45,5 +45,6 @@ const TagList = ({ children }: TagListProps) => {
 };
 
 const MemoizedTagList = memo(TagList);
+MemoizedTagList.displayName = "TagList";
 
 export { MemoizedTagList as TagList };

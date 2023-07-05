@@ -20,7 +20,7 @@ import {
   useCallback,
 } from "react";
 
-import { SearchIcon } from "./";
+import { SearchIcon } from "./iconDictionary";
 import { Field } from "./Field";
 
 export type SearchFieldProps = {
@@ -134,5 +134,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 );
 
 const MemoizedSearchField = memo(SearchField);
+MemoizedSearchField.displayName = "SearchField";
 
 export { MemoizedSearchField as SearchField };

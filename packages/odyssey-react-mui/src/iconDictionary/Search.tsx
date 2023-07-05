@@ -22,7 +22,7 @@ export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Zm-2.674 5.533a6 6 0 1 1 3.207-3.207l2.57 2.57a2.268 2.268 0 0 1-3.207 3.208l-2.57-2.571Zm.925-.49 2.353 2.353a1.268 1.268 0 1 0 1.792-1.792l-2.352-2.353a6.03 6.03 0 0 1-1.793 1.793Z"
+            d="M16 10a6 6 0 1 1-12 0 6 6 0 0 1 12 0Zm-1.13 6.348a8 8 0 1 1 1.422-1.406l5.415 5.415-1.414 1.414-5.423-5.423Z"
             clipRule="evenodd"
           />
         </>

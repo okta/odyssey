@@ -22,7 +22,7 @@ export const CalendarIcon = forwardRef<SVGSVGElement, CalendarIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const CalendarIcon = forwardRef<SVGSVGElement, CalendarIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M5 3v1h1V3h4v1h1V3h3v3H2V3h3Zm0-1H1v9.8c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C2.52 15 3.08 15 4.2 15h7.6c1.12 0 1.68 0 2.108-.218a2 2 0 0 0 .874-.874C15 13.48 15 12.92 15 11.8V2h-4V0h-1v2H6V0H5v2Zm-3 9.8V7h12v4.8c0 .577 0 .949-.024 1.232-.022.272-.06.373-.085.422a1 1 0 0 1-.437.437c-.05.025-.15.063-.422.085C12.75 14 12.377 14 11.8 14H4.2c-.577 0-.949 0-1.232-.024-.272-.022-.373-.06-.422-.085a1 1 0 0 1-.437-.437c-.025-.05-.063-.15-.085-.422C2 12.75 2 12.377 2 11.8Z"
+            d="M9 1v3h6V1h2v3h5v15a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V4h5V1h2Zm6 5v2h2V6h3v3H4V6h3v2h2V6h6ZM4 11v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8H4Z"
             clipRule="evenodd"
           />
         </>

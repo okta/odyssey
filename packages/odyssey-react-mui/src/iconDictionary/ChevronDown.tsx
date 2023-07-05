@@ -22,7 +22,7 @@ export const ChevronDownIcon = forwardRef<SVGSVGElement, ChevronDownIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const ChevronDownIcon = forwardRef<SVGSVGElement, ChevronDownIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="m8 10.293 4.646-4.647.708.708-5 5a.5.5 0 0 1-.708 0l-5-5 .708-.708L8 10.293Z"
+            d="m10.94 16.354-5.647-5.647 1.414-1.414L12 14.586l5.293-5.293 1.414 1.414-5.646 5.647a1.5 1.5 0 0 1-2.122 0Z"
             clipRule="evenodd"
           />
         </>

@@ -41,5 +41,6 @@ const Tag = ({ icon, isDisabled, label, onClick, onRemove }: TagProps) => {
 };
 
 const MemoizedTag = memo(Tag);
+MemoizedTag.displayName = "Tag";
 
 export { MemoizedTag as Tag };

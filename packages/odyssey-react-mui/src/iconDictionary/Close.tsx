@@ -22,7 +22,7 @@ export const CloseIcon = forwardRef<SVGSVGElement, CloseIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const CloseIcon = forwardRef<SVGSVGElement, CloseIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M8 7.293 2.354 1.646l-.708.708L7.293 8l-5.647 5.646.708.708L8 8.707l5.646 5.647.707-.708L8.707 8l5.647-5.646-.708-.708L8 7.293Z"
+            d="m10.586 12-4.293 4.293 1.414 1.414L12 13.414l4.293 4.293 1.414-1.414L13.414 12l4.293-4.293-1.414-1.414L12 10.586 7.707 6.293 6.293 7.707 10.586 12Z"
             clipRule="evenodd"
           />
         </>

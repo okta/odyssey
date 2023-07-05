@@ -10,9 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AlertColor, AlertProps } from "@mui/material";
+import {
+  Alert,
+  AlertColor,
+  AlertTitle,
+  AlertProps,
+  Link,
+  ScreenReaderText,
+} from "./";
 import { memo } from "react";
-import { Alert, Link, ScreenReaderText } from "./";
 import { useTranslation } from "react-i18next";
 
 export type BannerProps = {
@@ -60,7 +66,7 @@ const Banner = ({
   return (
     <Alert onClose={onClose} role={role} severity={severity} variant="banner">
       <ScreenReaderText>{t(`severity.${severity}`)}:</ScreenReaderText>
-      {text}
+      <AlertTitle>{text}</AlertTitle>
       {linkUrl && (
         <Link href={linkUrl} variant="monochrome">
           {linkText}
@@ -71,5 +77,6 @@ const Banner = ({
 };
 
 const MemoizedBanner = memo(Banner);
+MemoizedBanner.displayName = "Banner";
 
 export { MemoizedBanner as Banner };

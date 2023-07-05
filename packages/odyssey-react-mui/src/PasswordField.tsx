@@ -20,7 +20,8 @@ import {
   useState,
 } from "react";
 
-import { EyeIcon, EyeOffIcon, IconButton } from "./";
+import { ShowIcon, HideIcon } from "./iconDictionary";
+import { IconButton } from "@mui/material";
 import { Field } from "./Field";
 
 export type PasswordFieldProps = {
@@ -126,7 +127,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
                 edge="end"
                 onClick={togglePasswordVisibility}
               >
-                {inputType === "password" ? <EyeIcon /> : <EyeOffIcon />}
+                {inputType === "password" ? <ShowIcon /> : <HideIcon />}
               </IconButton>
             </InputAdornment>
           }

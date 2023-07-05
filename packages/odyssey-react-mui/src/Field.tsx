@@ -140,5 +140,6 @@ const Field = ({
 };
 
 const MemoizedField = memo(Field);
+MemoizedField.displayName = "Field";
 
 export { MemoizedField as Field };
