@@ -235,13 +235,13 @@ export const components = (
         selectOnFocus: true,
       },
       styleOverrides: {
-        clearIndicator: ({ theme }) => ({
+        clearIndicator: {
           marginRight: "unset",
-          padding: theme.spacing(1),
-        }),
+          padding: odysseyTokens.Spacing1,
+        },
         endAdornment: ({ theme, ownerState }) => ({
           display: "flex",
-          gap: theme.spacing(1),
+          gap: odysseyTokens.Spacing1,
           top: odysseyTokens.Spacing2,
           right: odysseyTokens.Spacing2,
           maxHeight: "unset",
@@ -261,10 +261,10 @@ export const components = (
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing4,
         },
-        popupIndicator: ({ theme }) => ({
-          padding: theme.spacing(1),
+        popupIndicator: {
+          padding: odysseyTokens.Spacing1,
           marginRight: "unset",
-        }),
+        },
         inputRoot: ({ ownerState }) => ({
           ...(ownerState.readOnly === true && {
             backgroundColor: odysseyTokens.HueNeutral50,
@@ -952,7 +952,7 @@ export const components = (
             borderRadius: odysseyTokens.BorderRadiusMain,
             borderColor: odysseyTokens.HueNeutral200,
             backgroundColor: odysseyTokens.HueNeutral50,
-            padding: `calc(${theme.spacing(1)} / 2) ${theme.spacing(1)}`,
+            padding: `calc(${odysseyTokens.Spacing1} / 2) ${odysseyTokens.Spacing1}`,
             fontFamily:
               "'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
             fontSize: odysseyTokens.TypographySizeCaption,
@@ -1036,7 +1036,7 @@ export const components = (
 
           "li:not([class])": {
             marginBlockEnd: odysseyTokens.Spacing2,
-            paddingInlineStart: theme.spacing(1),
+            paddingInlineStart: odysseyTokens.Spacing1,
 
             "ul, ol": {
               marginBlockStart: odysseyTokens.Spacing2,
@@ -1305,11 +1305,11 @@ export const components = (
     },
     MuiIconButton: {
       styleOverrides: {
-        edgeEnd: ({ theme }) => ({
-          marginInlineEnd: theme.spacing(1),
-        }),
-        root: ({ theme }) => ({
-          padding: theme.spacing(1),
+        edgeEnd: {
+          marginInlineEnd: odysseyTokens.Spacing1,
+        },
+        root: {
+          padding: odysseyTokens.Spacing1,
           fontSize: odysseyTokens.TypographySizeBody,
           backgroundColor: "transparent",
           color: odysseyTokens.TypographyColorBody,
@@ -1332,7 +1332,7 @@ export const components = (
             color: odysseyTokens.TypographyColorSub,
             borderColor: "transparent",
           },
-        }),
+        },
       },
     },
     MuiInput: {
@@ -1469,6 +1469,8 @@ export const components = (
         root: ({ ownerState }) => ({
           display: "flex",
           justifyContent: "space-between",
+          overflow: "unset",
+          whiteSpace: "unset",
           // @ts-expect-error: Incorrect typing in MUI
           ...(ownerState.formControl && {
             position: "initial",
@@ -1622,7 +1624,7 @@ export const components = (
           },
 
           [`& + .${dividerClasses.root}`]: {
-            marginBlock: theme.spacing(1),
+            marginBlock: odysseyTokens.Spacing1,
           },
 
           [`& .${listItemTextClasses.root}`]: {
@@ -1662,12 +1664,12 @@ export const components = (
     },
     MuiPopover: {
       styleOverrides: {
-        paper: ({ theme }) => ({
-          marginBlockStart: theme.spacing(1),
+        paper: {
+          marginBlockStart: odysseyTokens.Spacing1,
           borderWidth: odysseyTokens.BorderWidthMain,
           borderStyle: odysseyTokens.BorderStyleMain,
           borderColor: odysseyTokens.HueNeutral200,
-        }),
+        },
       },
     },
     MuiRadio: {
@@ -1771,7 +1773,7 @@ export const components = (
         IconComponent: ChevronDownIcon,
       },
       styleOverrides: {
-        select: ({ theme }) => ({
+        select: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing3,
 
@@ -1782,11 +1784,11 @@ export const components = (
           ".MuiBox-root": {
             display: "flex",
             flexWrap: "wrap",
-            gap: theme.spacing(1),
+            gap: odysseyTokens.Spacing1,
             marginBlock: `-${odysseyTokens.Spacing2}`,
             marginInline: `-${odysseyTokens.Spacing2}`,
           },
-        }),
+        },
         icon: {
           right: "unset",
           insetInlineEnd: odysseyTokens.Spacing3,
