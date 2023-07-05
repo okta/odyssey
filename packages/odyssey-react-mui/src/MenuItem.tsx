@@ -22,9 +22,7 @@ import { MenuContext } from "./MenuContext";
 export type MenuItemProps = {
   children: ReactNode;
   content?: string;
-  "data-testid"?: string;
   hasInitialFocus?: boolean;
-  href?: string;
   isSelected?: boolean;
   isDestructive?: boolean;
   onClick?: MuiMenuItemProps["onClick"];
@@ -34,9 +32,15 @@ export type MenuItemProps = {
 };
 
 const MenuItem = ({
+  children,
+  content,
+  hasInitialFocus,
+  isSelected,
   isDestructive,
   onClick: onClickProp,
-  ...props
+  rel,
+  rev,
+  value,
 }: MenuItemProps) => {
   const { closeMenu } = useContext(MenuContext);
 
@@ -45,18 +49,24 @@ const MenuItem = ({
       onClickProp?.(event);
       closeMenu();
     },
-    [onClickProp]
+    [onClickProp, closeMenu]
   );
 
   return (
     <MuiMenuItem
-      {...props}
+      content={content}
+      /* eslint-disable-next-line jsx-a11y/no-autofocus */
+      autoFocus={hasInitialFocus}
+      selected={isSelected}
+      rel={rel}
+      rev={rev}
+      value={value}
       onClick={onClick}
       className={
         isDestructive ? `${menuItemClasses.root}-destructive` : undefined
       }
     >
-      {props.children}
+      {children}
     </MuiMenuItem>
   );
 };
