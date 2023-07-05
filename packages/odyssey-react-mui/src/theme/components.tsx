@@ -593,7 +593,7 @@ export const components = (
       styleOverrides: {
         root: ({ ownerState }) => ({
           height: "auto",
-          paddingBlock: odysseyTokens.Spacing2,
+          paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
           paddingInline: odysseyTokens.Spacing3,
           fontSize: odysseyTokens.TypographySizeBody,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
@@ -1582,6 +1582,10 @@ export const components = (
           gap: odysseyTokens.Spacing2,
           minHeight: "unset",
           paddingBlock: odysseyTokens.Spacing3,
+
+          [`& .${formControlLabelClasses.root}`]: {
+            gap: "unset",
+          },
 
           "&:hover": {
             textDecoration: "none",
