@@ -15,37 +15,38 @@ import {
   MenuItemProps as MuiMenuItemProps,
 } from "@mui/material";
 import { menuItemClasses } from "@mui/material/MenuItem";
-import { ReactNode, memo, useCallback, useContext } from "react";
+import {
+  memo,
+  useCallback,
+  useContext,
+  type MouseEventHandler,
+  type ReactNode,
+} from "react";
 
 import { MenuContext } from "./MenuContext";
 
 export type MenuItemProps = {
   children: ReactNode;
-  content?: string;
   hasInitialFocus?: boolean;
   isSelected?: boolean;
   isDestructive?: boolean;
   onClick?: MuiMenuItemProps["onClick"];
-  rel?: string;
-  rev?: string;
   value?: string;
+  variant?: "default" | "destructive";
 };
 
 const MenuItem = ({
   children,
-  content,
   hasInitialFocus,
   isSelected,
-  isDestructive,
   onClick: onClickProp,
-  rel,
-  rev,
   value,
+  variant = "default",
 }: MenuItemProps) => {
   const { closeMenu } = useContext(MenuContext);
 
-  const onClick = useCallback(
-    (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+  const onClick = useCallback<MouseEventHandler<HTMLLIElement>>(
+    (event) => {
       onClickProp?.(event);
       closeMenu();
     },
@@ -54,16 +55,15 @@ const MenuItem = ({
 
   return (
     <MuiMenuItem
-      content={content}
       /* eslint-disable-next-line jsx-a11y/no-autofocus */
       autoFocus={hasInitialFocus}
       selected={isSelected}
-      rel={rel}
-      rev={rev}
       value={value}
       onClick={onClick}
       className={
-        isDestructive ? `${menuItemClasses.root}-destructive` : undefined
+        variant === "destructive"
+          ? `${menuItemClasses.root}-destructive`
+          : undefined
       }
     >
       {children}
