@@ -10,9 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AlertColor, AlertProps } from "@mui/material";
+import {
+  Alert,
+  AlertColor,
+  AlertTitle,
+  AlertProps,
+  Link,
+  ScreenReaderText,
+} from "./";
 import { memo } from "react";
-import { Alert, AlertTitle, Link, ScreenReaderText } from "./";
 import { useTranslation } from "react-i18next";
 
 export type BannerProps = {

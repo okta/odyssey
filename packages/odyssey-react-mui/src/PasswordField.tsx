@@ -20,7 +20,8 @@ import {
   useState,
 } from "react";
 
-import { ShowIcon, HideIcon, IconButton } from "./";
+import { ShowIcon, HideIcon } from "./iconDictionary";
+import { IconButton } from "@mui/material";
 import { Field } from "./Field";
 
 export type PasswordFieldProps = {
