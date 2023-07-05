@@ -257,9 +257,18 @@ export const components = (
             display: "none",
           }),
         }),
+        listbox: {
+          paddingBlock: odysseyTokens.Spacing2,
+          paddingInline: odysseyTokens.Spacing2,
+          borderRadius: odysseyTokens.BorderRadiusMain,
+        },
         loading: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing4,
+        },
+        option: {
+          paddingBlock: odysseyTokens.Spacing3,
+          borderRadius: odysseyTokens.BorderRadiusTight,
         },
         popupIndicator: {
           padding: odysseyTokens.Spacing1,
@@ -323,7 +332,7 @@ export const components = (
             borderColor: odysseyTokens.HueNeutral200,
             color: odysseyTokens.TypographyColorBody,
             "&:hover, &:focus-visible": {
-              backgroundColor: theme.palette.primary.lighter,
+              backgroundColor: odysseyTokens.PalettePrimaryLighter,
               borderColor: theme.palette.primary.light,
               color: odysseyTokens.TypographyColorAction,
             },
@@ -1576,12 +1585,22 @@ export const components = (
         }),
       },
     },
+    MuiMenu: {
+      styleOverrides: {
+        list: {
+          paddingBlock: odysseyTokens.Spacing2,
+          paddingInline: odysseyTokens.Spacing2,
+          borderRadius: odysseyTokens.BorderRadiusMain,
+        },
+      },
+    },
     MuiMenuItem: {
       styleOverrides: {
         root: ({ theme, ownerState }) => ({
           gap: odysseyTokens.Spacing2,
           minHeight: "unset",
           paddingBlock: odysseyTokens.Spacing3,
+          borderRadius: odysseyTokens.BorderRadiusTight,
 
           [`& .${formControlLabelClasses.root}`]: {
             gap: "unset",
@@ -1606,7 +1625,7 @@ export const components = (
             color: odysseyTokens.TypographyColorAction,
 
             "&:hover": {
-              backgroundColor: theme.palette.primary.lighter,
+              backgroundColor: odysseyTokens.PalettePrimaryLighter,
 
               "@media (hover: none)": {
                 backgroundColor: `rgba(${odysseyTokens.PalettePrimaryMain} / ${theme.palette.action.selectedOpacity})`,
@@ -2037,18 +2056,18 @@ export const components = (
     },
     MuiTableRow: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: {
           verticalAlign: "unset",
           [`&.${tableRowClasses.root}:hover`]: {
             backgroundColor: odysseyTokens.HueNeutral50,
           },
           [`&.${tableRowClasses.selected}`]: {
-            backgroundColor: theme.palette.primary.lighter,
+            backgroundColor: odysseyTokens.PalettePrimaryLighter,
             "&:hover": {
-              backgroundColor: theme.palette.primary.lighter,
+              backgroundColor: odysseyTokens.PalettePrimaryLighter,
             },
           },
-        }),
+        },
       },
     },
     MuiTableSortLabel: {
