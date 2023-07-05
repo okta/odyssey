@@ -22,7 +22,7 @@ export const EditIcon = forwardRef<SVGSVGElement, EditIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const EditIcon = forwardRef<SVGSVGElement, EditIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M10.354 2.06a.5.5 0 0 0-.708 0L8.707 3 11 5.293l.94-.94a.5.5 0 0 0 0-.707l-1.586-1.585ZM2 9.708l6-6L10.293 6l-6 6H2V9.707Zm6.94-8.353a1.5 1.5 0 0 1 2.12 0l1.586 1.585a1.5 1.5 0 0 1 0 2.122l-7.792 7.793-.147.146H1V9.293l.146-.147L8.94 1.354ZM1 14v1h14v-1H1Z"
+            d="M16.707 3.121a1 1 0 0 0-1.414 0L13.914 4.5 17.5 8.086l1.379-1.379a1 1 0 0 0 0-1.414L16.707 3.12ZM5 13.414l7.5-7.5L16.086 9.5l-7.5 7.5H5v-3.586Zm8.879-11.707a3 3 0 0 1 4.242 0l2.172 2.172a3 3 0 0 1 0 4.242L9.707 18.707 9.414 19H3v-6.414l.293-.293L13.879 1.707ZM3 23h18v-2H3v2Z"
             clipRule="evenodd"
           />
         </>

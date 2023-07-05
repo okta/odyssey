@@ -12,7 +12,7 @@
 
 import { memo, ReactElement } from "react";
 
-import { Box, Typography } from "./";
+import { Box, Typography } from "@mui/material";
 import { Button } from "./Button";
 import { Infobox } from "./Infobox";
 import { useUniqueId } from "./useUniqueId";

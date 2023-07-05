@@ -10,11 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from "@mui/material/styles";
 import { memo, ReactElement, useMemo } from "react";
 
-import { createTheme, deepmerge, ThemeOptions, DesignTokensOverride } from ".";
-import { createOdysseyMuiTheme } from "./theme";
+import { ThemeOptions } from "@mui/material";
+import { deepmerge } from "@mui/utils";
+import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 const OdysseyThemeProvider = ({

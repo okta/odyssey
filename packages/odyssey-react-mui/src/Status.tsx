@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip } from "./";
+import { Chip } from "@mui/material";
 
 export const statusSeverityValues = [
   "default",

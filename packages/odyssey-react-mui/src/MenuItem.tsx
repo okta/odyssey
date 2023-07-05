@@ -34,7 +34,6 @@ export interface MenuItemProps
 
 const MenuItem = ({ isDestructive, ...props }: MenuItemProps) => {
   const { closeMenu } = useContext(MenuContext);
-  console.log(closeMenu);
 
   return (
     <MuiMenuItem

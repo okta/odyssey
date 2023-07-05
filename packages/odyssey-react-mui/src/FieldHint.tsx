@@ -12,7 +12,7 @@
 
 import { memo } from "react";
 
-import { FormHelperText } from "./";
+import { FormHelperText } from "@mui/material";
 
 export type FieldHintProps = {
   id?: string;

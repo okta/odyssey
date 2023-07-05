@@ -20,11 +20,10 @@ import {
   MenuButtonProps,
   buttonVariantValues,
   MenuItem,
-  UserGroupIcon,
+  GroupIcon,
   GlobeIcon,
   CalendarIcon,
-  OverflowVerticalIcon,
-  ChevronDownIcon,
+  MoreIcon,
 } from "@okta/odyssey-react-mui";
 import { icons } from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -98,7 +97,7 @@ const storybookMeta: Meta<MenuButtonProps> = {
   args: {
     buttonLabel: "More actions",
     buttonVariant: "secondary",
-    endIcon: <ChevronDownIcon />,
+    endIcon: <MoreIcon />,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -122,7 +121,7 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
     children: [
       <MenuItem key="1">
         <ListItemIcon>
-          <UserGroupIcon />
+          <GroupIcon />
         </ListItemIcon>
         <ListItemText>Assign crew</ListItemText>
       </MenuItem>,
@@ -192,6 +191,6 @@ export const IconButton: StoryObj<MenuButtonProps> = {
       <MenuItem key="3">Launch</MenuItem>,
     ],
     buttonLabel: "",
-    endIcon: <OverflowVerticalIcon />,
+    endIcon: <MoreIcon />,
   },
 };
