@@ -118,7 +118,7 @@ const DefaultTemplate: StoryObj<DialogProps> = {
 
     return (
       <>
-        <Button onClick={onOpen} text="Open dialog" />
+        <Button variant="primary" onClick={onOpen} text="Open dialog" />
         <Dialog
           {...props}
           callToActionPrimaryComponent={
@@ -319,7 +319,7 @@ export const NoButtons: StoryObj<DialogProps> = {
 
     return (
       <>
-        <Button onClick={onOpen} text="Open dialog" />
+        <Button variant="primary" onClick={onOpen} text="Open dialog" />
         <Dialog {...props} onClose={onClose} isOpen={isVisible} />
       </>
     );

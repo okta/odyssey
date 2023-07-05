@@ -39,7 +39,7 @@ export type ButtonProps = {
    * `tooltipText` determines the text of the tooltip that wraps the button if it's icon-only.
    */
   tooltipText?: string;
-  variant?: (typeof buttonVariantValues)[number];
+  variant: (typeof buttonVariantValues)[number];
   ariaLabel?: string;
   ariaLabelledBy?: string;
   ariaDescribedBy?: string;
@@ -55,7 +55,7 @@ const Button = ({
   startIcon,
   text,
   tooltipText,
-  variant = "primary",
+  variant,
   ariaLabel,
   ariaLabelledBy,
   ariaDescribedBy,

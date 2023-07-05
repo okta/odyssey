@@ -19,7 +19,7 @@ import {
   Form,
   FormProps,
   formEncodingTypeValues,
-  formHasAutoCompleteValues,
+  formAutoCompleteTypeValues,
   formMethodValues,
   Infobox,
   Link,
@@ -68,14 +68,14 @@ const storybookMeta: Meta<FormProps> = {
         },
       },
     },
-    hasAutoComplete: {
-      options: formHasAutoCompleteValues,
+    autoCompleteType: {
+      options: formAutoCompleteTypeValues,
       control: { type: "radio" },
       description:
         "Indicates whether input elements can have their values automatically completed by the browser",
       table: {
         type: {
-          summary: formHasAutoCompleteValues.join(" | "),
+          summary: formAutoCompleteTypeValues.join(" | "),
         },
       },
     },
@@ -160,7 +160,7 @@ const storybookMeta: Meta<FormProps> = {
     ),
     formActions: (
       <>
-        <Button text="Submit" />
+        <Button variant="primary" text="Submit" />
         <Button variant="secondary" text="Reset" />
       </>
     ),
@@ -180,7 +180,7 @@ const Template: StoryObj<FormProps> = {
         description={args.description}
         formActions={args.formActions}
         alert={args.alert}
-        hasAutoComplete={args.hasAutoComplete}
+        autoCompleteType={args.autoCompleteType}
         encodingType={args.encodingType}
         method={args.method}
         noValidate={args.noValidate}

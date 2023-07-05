@@ -311,7 +311,11 @@ export const MultipleToasts: StoryObj<ToastProps> = {
 
     return (
       <>
-        <Button onClick={addToast} text="Open another Toast" />
+        <Button
+          variant="primary"
+          onClick={addToast}
+          text="Open another Toast"
+        />
         <ToastStack>{toasts}</ToastStack>
       </>
     );

@@ -102,7 +102,7 @@ const showTooltip =
 export const Default: StoryObj<TooltipProps> = {
   ...Template,
   args: {
-    children: <Button text="Launch" />,
+    children: <Button variant="primary" text="Launch" />,
     ariaType: "description",
     placement: "top",
     text: "This will begin a 10-second countdown",
@@ -145,16 +145,16 @@ export const Placement: StoryObj<TooltipProps> = {
     return (
       <>
         <Tooltip text="Top" placement="top" ariaType="label">
-          <Button text="Top" />
+          <Button variant="primary" text="Top" />
         </Tooltip>
         <Tooltip text="Right" placement="right" ariaType="label">
-          <Button text="Right" />
+          <Button variant="primary" text="Right" />
         </Tooltip>
         <Tooltip text="Bottom" placement="bottom" ariaType="label">
-          <Button text="Bottom" />
+          <Button variant="primary" text="Bottom" />
         </Tooltip>
         <Tooltip text="Left" placement="left" ariaType="label">
-          <Button text="Left" />
+          <Button variant="primary" text="Left" />
         </Tooltip>
       </>
     );

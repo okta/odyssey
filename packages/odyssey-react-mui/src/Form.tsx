@@ -19,10 +19,11 @@ import { useUniqueId } from "./useUniqueId";
 
 export const formEncodingTypeValues = [
   "application/x-www-form-urlencoded",
+  "application/json",
   "multipart/form-data",
   "text/plain",
 ] as const;
-export const formHasAutoCompleteValues = ["on", "off"] as const;
+export const formAutoCompleteTypeValues = ["on", "off"] as const;
 export const formMethodValues = ["post", "get", "dialog"] as const;
 
 export type FormProps = {
@@ -46,7 +47,7 @@ export type FormProps = {
    * Indicates whether input elements can by default have their values automatically completed by the browser.
    * `autocomplete` attributes on form elements override it on <form>
    */
-  hasAutoComplete?: (typeof formHasAutoCompleteValues)[number];
+  autoCompleteType?: (typeof formAutoCompleteTypeValues)[number];
   /**
    * The name of the form. The value must not be the empty string, and must be unique among the form elements in the forms collection that it is in, if any.
    */
@@ -90,7 +91,7 @@ const Form = ({
   description,
   encodingType,
   formActions,
-  hasAutoComplete,
+  autoCompleteType,
   id: idOverride,
   method,
   name,
@@ -103,7 +104,7 @@ const Form = ({
   return (
     <Box
       component="form"
-      autoComplete={hasAutoComplete}
+      autoComplete={autoCompleteType}
       name={name}
       encType={encodingType}
       method={method}

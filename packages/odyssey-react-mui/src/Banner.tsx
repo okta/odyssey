@@ -10,17 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Alert, AlertTitle, AlertProps, Link, ScreenReaderText } from "./";
+import {
+  Alert,
+  AlertTitle,
+  AlertProps,
+  Link,
+  ScreenReaderText,
+  AlertColor,
+} from "./";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 export const bannerRoleValues = ["status", "alert"] as const;
-export const bannerSeverityValues = [
+export const bannerSeverityValues: AlertColor[] = [
   "success",
   "info",
   "warning",
   "error",
-] as const;
+];
 
 export type BannerProps = {
   /**
