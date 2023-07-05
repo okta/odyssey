@@ -30,7 +30,13 @@ const TagList = ({ children }: TagListProps) => {
   );
 
   return (
-    <Stack component="ul" direction="row" spacing={2}>
+    <Stack
+      component="ul"
+      direction="row"
+      spacing={2}
+      useFlexGap
+      flexWrap="wrap"
+    >
       <TagListContext.Provider value={providerValue}>
         {children}
       </TagListContext.Provider>
