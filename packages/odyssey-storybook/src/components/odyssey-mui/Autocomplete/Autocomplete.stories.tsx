@@ -150,6 +150,7 @@ export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
 export const Loading: StoryObj<AutocompleteType> = {
   args: {
     isLoading: true,
+    options: [],
   },
 };
 
