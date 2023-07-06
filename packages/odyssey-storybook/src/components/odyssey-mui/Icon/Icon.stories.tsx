@@ -134,6 +134,14 @@ const icons: IconData[] = [
 const getRowId = ({ name }: { name: IconData["name"] }) => name;
 
 export const Default: StoryObj = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Icons can be included as a component using the class name. For example, to include the add circle icon, use `<AddCircleIcon />`.",
+      },
+    },
+  },
   render: function C() {
     return <StaticTable columns={columns} data={icons} getRowId={getRowId} />;
   },
