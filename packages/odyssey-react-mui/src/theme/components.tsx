@@ -1303,38 +1303,6 @@ export const components = (
         },
       },
     },
-    MuiIconButton: {
-      styleOverrides: {
-        edgeEnd: ({ theme }) => ({
-          marginInlineEnd: theme.spacing(1),
-        }),
-        root: ({ theme }) => ({
-          padding: theme.spacing(1),
-          fontSize: odysseyTokens.TypographySizeBody,
-          backgroundColor: "transparent",
-          color: odysseyTokens.TypographyColorBody,
-          borderColor: "transparent",
-          borderRadius: theme.mixins.borderRadius,
-
-          "&:hover, &:focus-visible": {
-            backgroundColor: "rgba(29, 29, 33, 0.1)",
-            borderColor: "transparent",
-          },
-          "&:focus-visible": {
-            outlineColor: odysseyTokens.FocusOutlineColorPrimary,
-          },
-          "&:active": {
-            backgroundColor: "rgba(29, 29, 33, 0.2)",
-            borderColor: "transparent",
-          },
-          "&:disabled": {
-            backgroundColor: "rgba(235, 235, 237, 0.6)",
-            color: odysseyTokens.TypographyColorSub,
-            borderColor: "transparent",
-          },
-        }),
-      },
-    },
     MuiInput: {
       defaultProps: {
         disableUnderline: true,
