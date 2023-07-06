@@ -13,54 +13,19 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
 import {
-  Icon,
-  type IconProps,
   iconDictionary,
   StaticTable,
   type TableColumn,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
 
-const storybookMeta: Meta<IconProps> = {
-  title: "MUI Components/Icon",
-  component: Icon,
+const storybookMeta: Meta = {
+  title: "MUI Components/Icons",
   decorators: [MuiThemeDecorator],
-  argTypes: {
-    name: {
-      control: { type: "select" },
-      options: Object.keys(iconDictionary),
-    },
-    size: {
-      options: ["small", "medium", "large"],
-      control: { type: "radio" },
-    },
-    ariaLabelledby: {
-      control: "text",
-    },
-    label: {
-      control: "text",
-    },
-  },
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
-
-export const Default: StoryObj<IconProps> = {
-  render: function C(args) {
-    return (
-      <Icon
-        ariaLabelledby={args.ariaLabelledby}
-        label={args.label}
-        name={args.name}
-        size={args.size}
-      />
-    );
-  },
-  args: {
-    name: "warning-filled",
-    size: "medium",
-  },
-};
 
 type IconData = {
   name: keyof typeof iconDictionary;
@@ -168,7 +133,7 @@ const icons: IconData[] = [
 
 const getRowId = ({ name }: { name: IconData["name"] }) => name;
 
-export const Library: StoryObj<IconProps> = {
+export const Default: StoryObj = {
   render: function C() {
     return <StaticTable columns={columns} data={icons} getRowId={getRowId} />;
   },

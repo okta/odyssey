@@ -13,10 +13,9 @@
 import { Chip, ChipProps } from "@mui/material";
 import { memo, ReactElement, useContext } from "react";
 import { TagListContext } from "./TagListContext";
-import { Icon } from "./Icon";
 
 export type TagProps = {
-  icon?: ReactElement<typeof Icon>;
+  icon?: ReactElement;
   isDisabled?: boolean;
   label: string;
   onClick?: ChipProps["onClick"];

@@ -22,7 +22,6 @@ import {
 } from "react";
 
 import { Field } from "./Field";
-import { Icon } from "./Icon";
 
 export type TextFieldProps = {
   /**
@@ -90,7 +89,7 @@ export type TextFieldProps = {
   /**
    * Start `InputAdornment` for this component.
    */
-  startAdornment?: string | ReactElement<typeof Icon>;
+  startAdornment?: string | ReactElement;
   /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */
