@@ -15,23 +15,40 @@ import {
   MenuItemProps as MuiMenuItemProps,
 } from "@mui/material";
 import { menuItemClasses } from "@mui/material/MenuItem";
-import {
-  memo,
-  useCallback,
-  useContext,
-  type MouseEventHandler,
-  type ReactNode,
-} from "react";
+import { memo, useCallback, useContext, type ReactNode } from "react";
 
 import { MenuContext } from "./MenuContext";
 
 export type MenuItemProps = {
+  /**
+   * The content of the menu item.
+   */
   children: ReactNode;
+  /**
+   * If `true`, the menu item will receive focus automatically.
+   */
   hasInitialFocus?: boolean;
+  /**
+   * If `true`, the menu item will be visually marked as selected.
+   */
   isSelected?: boolean;
+  /**
+   * If `true`, the menu item will be visually marked as destructive.
+   */
   isDestructive?: boolean;
+  /**
+   * Callback fired when the menu item is clicked.
+   */
   onClick?: MuiMenuItemProps["onClick"];
+  /**
+   * The value associated with the menu item.
+   */
   value?: string;
+  /**
+   * The variant of the menu item.
+   * - "default": The default variant.
+   * - "destructive": A variant indicating a destructive action.
+   */
   variant?: "default" | "destructive";
 };
 
@@ -45,7 +62,7 @@ const MenuItem = ({
 }: MenuItemProps) => {
   const { closeMenu } = useContext(MenuContext);
 
-  const onClick = useCallback<MouseEventHandler<HTMLLIElement>>(
+  const onClick = useCallback<MuiMenuItemProps["onClick"]>(
     (event) => {
       onClickProp?.(event);
       closeMenu();
