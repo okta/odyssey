@@ -561,7 +561,7 @@ export const components = (
             },
 
             [`.${svgIconClasses.root}`]: {
-              color: theme.palette.common.black,
+              color: odysseyTokens.HueNeutral900,
             },
           },
         }),
@@ -904,7 +904,7 @@ export const components = (
 
           ins: {
             display: "inline-block",
-            backgroundColor: theme.palette.success.light,
+            backgroundColor: odysseyTokens.PaletteSuccessLight,
 
             "&::before, &::after": {
               clip: "rect(0 0 0 0)",
@@ -1021,7 +1021,7 @@ export const components = (
 
             "ul, ol": {
               marginBlockStart: odysseyTokens.Spacing2,
-              marginInlineStart: `calc(${theme.spacing(6)} - 2ch)`,
+              marginInlineStart: `calc(${odysseyTokens.Spacing6} - 2ch)`,
             },
           },
 
@@ -1093,14 +1093,12 @@ export const components = (
         scroll: "paper",
       },
       styleOverrides: {
-        paper: ({ theme }) => ({
-          maxWidth: `calc(${
-            odysseyTokens.TypographyLineLengthMax
-          } + (${theme.spacing(6)} * 2))`,
+        paper: {
+          maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} + (${odysseyTokens.Spacing6} * 2))`,
           boxShadow: "none",
           filter:
             "drop-shadow(0px 1px 4px rgba(29, 29, 33, 0.08)) drop-shadow(0px 4px 10px rgba(29, 29, 33, 0.08)) drop-shadow(0px 8px 30px rgba(29, 29, 33, 0.1))",
-        }),
+        },
       },
     },
     MuiDialogActions: {
@@ -1120,13 +1118,13 @@ export const components = (
     },
     MuiDialogContent: {
       styleOverrides: {
-        root: ({ theme, ownerState }) => ({
+        root: ({ ownerState }) => ({
           padding: 0,
           paddingBlock: odysseyTokens.Spacing4,
-          paddingInline: theme.spacing(6),
+          paddingInline: odysseyTokens.Spacing6,
 
           "&:last-child": {
-            paddingBlockEnd: theme.spacing(6),
+            paddingBlockEnd: odysseyTokens.Spacing6,
           },
 
           ...(ownerState.dividers === false && {
@@ -1142,13 +1140,13 @@ export const components = (
         color: "text.primary",
       },
       styleOverrides: {
-        root: ({ theme }) => ({
-          marginBlockEnd: theme.spacing(5),
+        root: {
+          marginBlockEnd: odysseyTokens.Spacing5,
 
           "&:last-child": {
             marginBlockEnd: "0",
           },
-        }),
+        },
       },
     },
     MuiDialogTitle: {
@@ -1157,16 +1155,16 @@ export const components = (
         variant: "h5",
       },
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           marginBlockEnd: 0,
           padding: 0,
-          paddingBlockStart: theme.spacing(5),
+          paddingBlockStart: odysseyTokens.Spacing5,
           paddingBlockEnd: odysseyTokens.Spacing4,
-          paddingInline: theme.spacing(6),
-        }),
+          paddingInline: odysseyTokens.Spacing6,
+        },
       },
     },
     MuiFormControl: {
@@ -1174,19 +1172,19 @@ export const components = (
         margin: "normal",
       },
       styleOverrides: {
-        root: ({ ownerState, theme }) => ({
+        root: ({ ownerState }) => ({
           width: "100%",
           maxWidth: odysseyTokens.TypographyLineLengthMax,
           ...(ownerState.margin === "normal" && {
             marginTop: 0,
-            marginBottom: theme.spacing(4),
+            marginBottom: odysseyTokens.Spacing4,
             "&:last-child": {
               marginBottom: 0,
             },
           }),
           ...(ownerState.margin === "dense" && {
             marginTop: 0,
-            marginBottom: theme.spacing(5),
+            marginBottom: odysseyTokens.Spacing5,
             "&:last-child": {
               marginBottom: 0,
             },
@@ -1199,7 +1197,7 @@ export const components = (
     },
     MuiFormControlLabel: {
       styleOverrides: {
-        root: ({ theme, ownerState }) => ({
+        root: ({ ownerState }) => ({
           gap: odysseyTokens.Spacing2,
           marginInlineStart: 0,
           marginInlineEnd: 0, // used for row presentation of radio/checkbox
@@ -1881,15 +1879,15 @@ export const components = (
     },
     MuiTable: {
       styleOverrides: {
-        root: ({ theme, ownerState }) => ({
+        root: ({ ownerState }) => ({
           display: "table",
           width: "auto",
           borderCollapse: "separate",
           borderSpacing: 0,
           border: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100}`,
           borderRadius: odysseyTokens.BorderRadiusMain,
-          marginBlock: theme.spacing(0),
-          marginInline: theme.spacing(0),
+          marginBlock: odysseyTokens.Spacing0,
+          marginInline: odysseyTokens.Spacing0,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
 
           "&:only-child": {
@@ -2011,10 +2009,10 @@ export const components = (
         component: "figure",
       },
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: {
           width: "unset",
           maxWidth: "100%",
-          marginBlockStart: theme.spacing(0),
+          marginBlockStart: odysseyTokens.Spacing0,
           marginBlockEnd: odysseyTokens.Spacing4,
           marginInline: 0,
           overflowX: "auto",
@@ -2022,7 +2020,7 @@ export const components = (
           "&:last-child": {
             marginBlock: 0,
           },
-        }),
+        },
       },
     },
     MuiTableRow: {
@@ -2103,12 +2101,13 @@ export const components = (
     },
     MuiTabs: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: {
           minHeight: "unset",
-          marginBottom: theme.spacing(5),
-        }),
+          marginBottom: odysseyTokens.Spacing5,
+        },
+
         flexContainer: ({ theme }) => ({
-          gap: theme.spacing(5),
+          gap: odysseyTokens.Spacing5,
           borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${theme.palette.divider}`,
         }),
       },
