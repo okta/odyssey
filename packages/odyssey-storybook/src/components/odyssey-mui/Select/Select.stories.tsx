@@ -14,6 +14,91 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
+const optionsArray: SelectProps["options"] = [
+  "Earth",
+  "Mars",
+  "Ceres",
+  "Eros",
+  "Tycho Station",
+  "Phoebe",
+  "Ganymede",
+];
+
+const optionsObject: SelectProps["options"] = [
+  {
+    text: "Earth",
+    value: "earth",
+  },
+  {
+    text: "Mars",
+    value: "mars",
+  },
+  {
+    text: "Ceres",
+    value: "ceres",
+  },
+  {
+    text: "Eros",
+    value: "eros",
+  },
+  {
+    text: "Tycho Station",
+    value: "tycho-station",
+  },
+  {
+    text: "Phoebe",
+    value: "phoebe",
+  },
+  {
+    text: "Ganymede",
+    value: "ganymede",
+  },
+];
+
+const optionsGrouped: SelectProps["options"] = [
+  {
+    text: "Sol System",
+    type: "heading",
+  },
+  {
+    text: "Earth",
+    value: "earth",
+  },
+  {
+    text: "Mars",
+    value: "mars",
+  },
+  {
+    text: "Ceres",
+    value: "ceres",
+  },
+  {
+    text: "Eros",
+    value: "eros",
+  },
+  {
+    text: "Tycho Station",
+    value: "tycho-station",
+  },
+  {
+    text: "Phoebe",
+    value: "phoebe",
+  },
+  {
+    text: "Ganymede",
+    value: "ganymede",
+  },
+  {
+    text: "Extrasolar",
+    type: "heading",
+  },
+  "Auberon",
+  "Al-Halub",
+  "Freehold",
+  "Laconia",
+  "New Terra",
+];
+
 const storybookMeta: Meta<SelectProps> = {
   title: "MUI Components/Forms/Select",
   component: Select,
@@ -134,97 +219,13 @@ const storybookMeta: Meta<SelectProps> = {
   args: {
     hint: "Select your destination in the Sol system.",
     label: "Destination",
+    options: optionsArray,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
 };
 
 export default storybookMeta;
-
-const optionsArray: SelectProps["options"] = [
-  "Earth",
-  "Mars",
-  "Ceres",
-  "Eros",
-  "Tycho Station",
-  "Phoebe",
-  "Ganymede",
-];
-
-const optionsObject: SelectProps["options"] = [
-  {
-    text: "Earth",
-    value: "earth",
-  },
-  {
-    text: "Mars",
-    value: "mars",
-  },
-  {
-    text: "Ceres",
-    value: "ceres",
-  },
-  {
-    text: "Eros",
-    value: "eros",
-  },
-  {
-    text: "Tycho Station",
-    value: "tycho-station",
-  },
-  {
-    text: "Phoebe",
-    value: "phoebe",
-  },
-  {
-    text: "Ganymede",
-    value: "ganymede",
-  },
-];
-
-const optionsGrouped: SelectProps["options"] = [
-  {
-    text: "Sol System",
-    type: "heading",
-  },
-  {
-    text: "Earth",
-    value: "earth",
-  },
-  {
-    text: "Mars",
-    value: "mars",
-  },
-  {
-    text: "Ceres",
-    value: "ceres",
-  },
-  {
-    text: "Eros",
-    value: "eros",
-  },
-  {
-    text: "Tycho Station",
-    value: "tycho-station",
-  },
-  {
-    text: "Phoebe",
-    value: "phoebe",
-  },
-  {
-    text: "Ganymede",
-    value: "ganymede",
-  },
-  {
-    text: "Extrasolar",
-    type: "heading",
-  },
-  "Auberon",
-  "Al-Halub",
-  "Freehold",
-  "Laconia",
-  "New Terra",
-];
 
 const Template: StoryObj<SelectProps> = {
   render: function C(args) {
@@ -236,42 +237,7 @@ const Template: StoryObj<SelectProps> = {
         isDisabled={args.isDisabled}
         isMultiSelect={args.isMultiSelect}
         isOptional={args.isOptional}
-        options={optionsArray}
-      />
-    );
-  },
-};
-
-const ObjectTemplate: StoryObj<SelectProps> = {
-  render: function C(args) {
-    return (
-      <Select
-        label={args.label}
-        hint={args.hint}
-        errorMessage={args.errorMessage}
-        isDisabled={args.isDisabled}
-        isMultiSelect={args.isMultiSelect}
-        isOptional={args.isOptional}
-        options={optionsObject}
-      />
-    );
-  },
-  args: {
-    hint: "Select your destination in the Sol system.",
-  },
-};
-
-const GroupTemplate: StoryObj<SelectProps> = {
-  render: function C(args) {
-    return (
-      <Select
-        label={args.label}
-        hint={args.hint}
-        errorMessage={args.errorMessage}
-        isDisabled={args.isDisabled}
-        isMultiSelect={args.isMultiSelect}
-        isOptional={args.isOptional}
-        options={optionsGrouped}
+        options={args.options}
       />
     );
   },
@@ -297,7 +263,10 @@ export const Error: StoryObj<SelectProps> = {
 };
 
 export const OptionsObject: StoryObj<SelectProps> = {
-  ...ObjectTemplate,
+  ...Template,
+  args: {
+    options: optionsObject,
+  },
   parameters: {
     docs: {
       description: {
@@ -309,7 +278,10 @@ export const OptionsObject: StoryObj<SelectProps> = {
 };
 
 export const OptionsGrouped: StoryObj<SelectProps> = {
-  ...GroupTemplate,
+  ...Template,
+  args: {
+    options: optionsGrouped,
+  },
   parameters: {
     docs: {
       description: {
