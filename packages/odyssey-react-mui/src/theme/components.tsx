@@ -765,7 +765,7 @@ export const components = (
     },
     MuiScopedCssBaseline: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: {
           abbr: {
             borderBottomWidth: "1px",
             borderBottomStyle: "dashed",
@@ -927,7 +927,7 @@ export const components = (
 
           kbd: {
             display: "inline-block",
-            minWidth: `calc(${theme.typography.subtitle1.fontSize} * ${theme.typography.h5.lineHeight})`,
+            minWidth: `calc(${odysseyTokens.TypographySizeCaption} * ${odysseyTokens.TypographyLineHeightHeading5})`,
             borderStyle: odysseyTokens.BorderStyleMain,
             borderWidth: odysseyTokens.BorderWidthMain,
             borderRadius: odysseyTokens.BorderRadiusMain,
@@ -937,13 +937,13 @@ export const components = (
             fontFamily:
               "'Inconsolata', 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
             fontSize: odysseyTokens.TypographySizeCaption,
-            fontWeight: theme.typography.fontWeightRegular,
-            lineHeight: theme.typography.h5.lineHeight,
+            fontWeight: odysseyTokens.Spacing5,
+            lineHeight: odysseyTokens.TypographyLineHeightHeading5,
             boxShadow: `0 1px 1px 0 hsla(240, 6%, 12%, 0.05)`,
           },
 
           mark: {
-            backgroundColor: theme.palette.warning.light,
+            backgroundColor: odysseyTokens.PaletteWarningLight,
 
             "&::before, &::after": {
               clip: "rect(0 0 0 0)",
@@ -1053,18 +1053,18 @@ export const components = (
           },
 
           small: {
-            fontSize: theme.typography.caption.fontSize,
+            fontSize: odysseyTokens.TypographySizeCaption,
           },
 
           sub: {
-            fontSize: theme.typography.caption.fontSize,
+            fontSize: odysseyTokens.TypographySizeCaption,
             lineHeight: 1,
             verticalAlign: "sub",
           },
 
           summary: {
             fontSize: odysseyTokens.TypographySizeBody,
-            fontWeight: theme.typography.fontWeightBold,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
             cursor: "default",
 
             "&:focus-visible": {
@@ -1076,16 +1076,16 @@ export const components = (
           },
 
           sup: {
-            fontSize: theme.typography.caption.fontSize,
+            fontSize: odysseyTokens.TypographySizeCaption,
             lineHeight: 1,
             verticalAlign: "super",
           },
 
           var: {
             fontStyle: "italic",
-            fontWeight: theme.typography.fontWeightBold,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
           },
-        }),
+        },
       },
     },
     MuiDialog: {
@@ -1547,8 +1547,8 @@ export const components = (
         root: ({ theme }) => ({
           paddingBlock: odysseyTokens.Spacing2,
           paddingInline: odysseyTokens.Spacing4,
-          fontSize: theme.typography.caption.fontSize,
-          fontWeight: theme.typography.fontWeightBold,
+          fontSize: odysseyTokens.TypographySizeCaption,
+          fontWeight: odysseyTokens.TypographyWeightBodyBold,
           lineHeight: theme.typography.caption.lineHeight,
           color: odysseyTokens.TypographyColorSub,
           textTransform: "uppercase",
@@ -1822,7 +1822,7 @@ export const components = (
           minWidth: "unset",
           minHeight: "unset",
           padding: `${odysseyTokens.Spacing4} 0`,
-          lineHeight: theme.typography.body1.lineHeight,
+          lineHeight: odysseyTokens.TypographyLineHeightBody,
           overflow: "visible",
           ...(ownerState.selected == true && {
             color: odysseyTokens.TypographyColorBody,
@@ -1852,7 +1852,7 @@ export const components = (
           },
           "&.Mui-selected": {
             color: odysseyTokens.TypographyColorBody,
-            fontWeight: theme.typography.fontWeightBold,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
             "&:hover": {
               color: odysseyTokens.TypographyColorAction,
             },
@@ -1954,20 +1954,20 @@ export const components = (
 
           ...(ownerState.variant === "footer" && {
             color: odysseyTokens.TypographyColorSub,
-            lineHeight: theme.typography.body1.lineHeight,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontSize: odysseyTokens.TypographySizeBody,
           }),
 
           [`.${tableHeadClasses.root} &`]: {
             color: odysseyTokens.TypographyColorBody,
-            lineHeight: theme.typography.body1.lineHeight,
-            fontWeight: theme.typography.fontWeightBold,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
             backgroundColor: odysseyTokens.HueNeutral50,
           },
 
           ...(ownerState.variant === "head" && {
-            lineHeight: theme.typography.body1.lineHeight,
-            fontWeight: theme.typography.fontWeightBold,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
           }),
 
           ...(ownerState.variant === "number" && {
@@ -2133,7 +2133,7 @@ export const components = (
             paddingInline: odysseyTokens.Spacing3,
             fontSize: odysseyTokens.TypographySizeCaption,
             lineHeight: theme.typography.subtitle1.lineHeight,
-            fontWeight: theme.typography.fontWeightRegular,
+            fontWeight: odysseyTokens.TypographyWeightBody,
           }),
           [`.${tooltipClasses.popper}[data-popper-placement*="left"] &`]: {
             transformOrigin: "right center",
