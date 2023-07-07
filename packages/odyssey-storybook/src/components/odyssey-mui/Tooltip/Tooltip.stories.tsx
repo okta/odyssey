@@ -18,39 +18,50 @@ import {
   TooltipProps,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
-import TooltipMdx from "./Tooltip.mdx";
+import { userEvent, within } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
+import type { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<TooltipProps> = {
   title: "MUI Components/Tooltip",
   component: Tooltip,
-  parameters: {
-    docs: {
-      page: TooltipMdx,
-    },
-  },
   argTypes: {
     children: {
-      control: { type: "object" },
+      control: "obj",
+      description: "The content that will trigger the tooltip",
+      table: {
+        type: {
+          summary: "ReactElement",
+        },
+      },
     },
     ariaType: {
-      control: {
-        options: ["label", "description"],
-        type: "radio",
+      options: ["description", "label"],
+      control: { type: "radio" },
+      description: "The type of ARIA attribute to use",
+      table: {
+        type: {
+          summary: "description | label",
+        },
       },
-      description:
-        "Choose `description` if the tooltip is an ARIA description of the child element. Otherwise, choose `label`. This must be explicitly set.",
     },
     text: {
-      control: {
-        type: "text",
+      control: "text",
+      description: "The text to display in the tooltip",
+      table: {
+        type: {
+          summary: "string",
+        },
       },
     },
     placement: {
       options: ["top", "right", "bottom", "left"],
-      control: {
-        type: "radio",
-        defaultValue: "top",
+      control: { type: "radio" },
+      description: "The placement of the tooltip",
+      table: {
+        type: {
+          summary: "top | right | bottom | left",
+        },
       },
     },
   },
@@ -58,6 +69,7 @@ const storybookMeta: Meta<TooltipProps> = {
     ariaType: "label",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -76,13 +88,27 @@ const Template: StoryObj<TooltipProps> = {
   },
 };
 
+const showTooltip =
+  ({ canvasElement, step }: PlaywrightProps<TooltipProps>) =>
+  async (actionName: string) => {
+    await step("show the tooltip on hover", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByText("Launch");
+      userEvent.hover(button);
+      await axeRun(actionName);
+    });
+  };
+
 export const Default: StoryObj<TooltipProps> = {
   ...Template,
   args: {
-    children: <Button text="Launch" />,
+    children: <Button variant="primary" text="Launch" />,
     ariaType: "description",
     placement: "top",
     text: "This will begin a 10-second countdown",
+  },
+  play: async ({ canvasElement, step }) => {
+    showTooltip({ canvasElement, step })("Tooltip Default");
   },
 };
 
@@ -118,10 +144,18 @@ export const Placement: StoryObj<TooltipProps> = {
   render: function C() {
     return (
       <>
-        <Button tooltipPlacement="top" tooltipText="Top" text="Top" />
-        <Button tooltipPlacement="right" tooltipText="Right" text="Right" />
-        <Button tooltipPlacement="bottom" tooltipText="Bottom" text="Bottom" />
-        <Button tooltipPlacement="left" tooltipText="Left" text="Left" />
+        <Tooltip text="Top" placement="top" ariaType="label">
+          <Button variant="primary" text="Top" />
+        </Tooltip>
+        <Tooltip text="Right" placement="right" ariaType="label">
+          <Button variant="primary" text="Right" />
+        </Tooltip>
+        <Tooltip text="Bottom" placement="bottom" ariaType="label">
+          <Button variant="primary" text="Bottom" />
+        </Tooltip>
+        <Tooltip text="Left" placement="left" ariaType="label">
+          <Button variant="primary" text="Left" />
+        </Tooltip>
       </>
     );
   },

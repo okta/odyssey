@@ -10,13 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip } from "./";
+import { Chip } from "@mui/material";
+
+export const statusSeverityValues = [
+  "default",
+  "error",
+  "success",
+  "warning",
+] as const;
+export const statusVariantValues = ["lamp", "pill"] as const;
 
 export type StatusProps = {
   /**
    * Determine the color and icon of the alert
    */
-  severity: "default" | "error" | "success" | "warning";
+  severity: (typeof statusSeverityValues)[number];
 
   /**
    * The text content of the status
@@ -26,7 +34,7 @@ export type StatusProps = {
   /**
    * The style of indicator
    */
-  variant?: "lamp" | "pill";
+  variant?: (typeof statusVariantValues)[number];
 };
 
 export const Status = ({ severity, label, variant = "lamp" }: StatusProps) => (

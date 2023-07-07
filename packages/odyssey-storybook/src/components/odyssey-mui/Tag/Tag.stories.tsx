@@ -13,7 +13,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { UserGroupIcon } from "@okta/odyssey-react-mui";
+import { GroupIcon } from "@okta/odyssey-react-mui";
+import { icons } from "../../../../.storybook/components/iconUtils";
 
 const storybookMeta: Meta<TagProps> = {
   title: "MUI Components/Tag",
@@ -22,20 +23,58 @@ const storybookMeta: Meta<TagProps> = {
     actions: { argTypesRegex: null },
   },
   argTypes: {
-    label: {
-      control: "text",
-    },
     icon: {
-      control: "text",
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
+      description: "An optional icon to display alongside the label",
+      table: {
+        type: {
+          summary: "<Icon />",
+        },
+      },
     },
     isDisabled: {
       control: "boolean",
+      description: "If `true`, the tag is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: false,
+      },
+    },
+    label: {
+      control: "text",
+      description: "The label text for the tag",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     onClick: {
+      control: "obj",
       action: true,
+      description: "Callback fired when the tag is clicked",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
     },
     onRemove: {
+      control: "obj",
       action: true,
+      description:
+        "Callback fired when the remove button of the tag is clicked",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
     },
   },
   args: {
@@ -44,6 +83,7 @@ const storybookMeta: Meta<TagProps> = {
     onClick: undefined,
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -72,7 +112,7 @@ export const List: StoryObj<TagProps> = {
 export const Icon: StoryObj<TagProps> = {
   args: {
     label: "Crew",
-    icon: <UserGroupIcon />,
+    icon: <GroupIcon />,
   },
 };
 

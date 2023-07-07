@@ -21,7 +21,7 @@ export type AddIconProps = SvgIconNoChildrenProps;
 export const AddIcon = forwardRef<SVGSVGElement, AddIconProps>((props, ref) => {
   return (
     <SvgIcon
-      viewBox="0 0 16 16"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       ref={ref}
@@ -31,7 +31,7 @@ export const AddIcon = forwardRef<SVGSVGElement, AddIconProps>((props, ref) => {
         <path
           fill="currentColor"
           fillRule="evenodd"
-          d="M7.5 1V7.5H1v1H7.5V15h1V8.5H15v-1H8.5V1h-1Z"
+          d="M11 13v5h2v-5h5v-2h-5V6h-2v5H6v2h5Z"
           clipRule="evenodd"
         />
       </>

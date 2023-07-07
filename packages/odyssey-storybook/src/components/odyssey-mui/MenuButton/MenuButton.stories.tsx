@@ -18,12 +18,14 @@ import {
   ListSubheader,
   MenuButton,
   MenuButtonProps,
+  buttonVariantValues,
   MenuItem,
-  UserGroupIcon,
+  GroupIcon,
   GlobeIcon,
   CalendarIcon,
-  OverflowVerticalIcon,
+  MoreIcon,
 } from "@okta/odyssey-react-mui";
+import { icons } from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<MenuButtonProps> = {
@@ -31,25 +33,74 @@ const storybookMeta: Meta<MenuButtonProps> = {
   component: MenuButton,
   argTypes: {
     children: {
-      control: "text",
+      control: "obj",
+      description: "The <MenuItem> components within the Menu",
+      table: {
+        type: {
+          summary: "[MenuItem | Divider | ListSubheader]",
+        },
+      },
     },
     buttonLabel: {
       control: "text",
+      description: "The label on the triggering Button",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     buttonVariant: {
-      control: "text",
+      options: buttonVariantValues,
+      control: { type: "radio" },
+      description: "The variant of the triggering Button",
+      table: {
+        type: {
+          summary: buttonVariantValues.join(" | "),
+        },
+      },
     },
     endIcon: {
-      control: "text",
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
+      description: "The end Icon on the triggering Button",
+      table: {
+        type: {
+          summary: "<Icon />",
+        },
+      },
     },
     id: {
       control: "text",
+      description: "The id of the Button",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
+    },
+    ariaLabel: {
+      control: "text",
+      description:
+        "aria-label to describe the button when the button label is empty",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
     buttonLabel: "More actions",
+    buttonVariant: "secondary",
+    endIcon: <MoreIcon />,
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -70,7 +121,7 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
     children: [
       <MenuItem key="1">
         <ListItemIcon>
-          <UserGroupIcon />
+          <GroupIcon />
         </ListItemIcon>
         <ListItemText>Assign crew</ListItemText>
       </MenuItem>,
@@ -140,6 +191,6 @@ export const IconButton: StoryObj<MenuButtonProps> = {
       <MenuItem key="3">Launch</MenuItem>,
     ],
     buttonLabel: "",
-    endIcon: <OverflowVerticalIcon />,
+    endIcon: <MoreIcon />,
   },
 };

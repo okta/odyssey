@@ -11,7 +11,8 @@
  */
 
 import { memo, ReactNode } from "react";
-import { Box, visuallyHidden } from "./";
+import { Box } from "@mui/material";
+import { visuallyHidden } from "@mui/utils";
 
 export type ScreenReaderTextProps = {
   /**

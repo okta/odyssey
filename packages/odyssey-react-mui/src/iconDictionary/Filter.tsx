@@ -22,7 +22,7 @@ export const FilterIcon = forwardRef<SVGSVGElement, FilterIconProps>(
   (props, ref) => {
     return (
       <SvgIcon
-        viewBox="0 0 16 16"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         ref={ref}
@@ -32,7 +32,7 @@ export const FilterIcon = forwardRef<SVGSVGElement, FilterIconProps>(
           <path
             fill="currentColor"
             fillRule="evenodd"
-            d="M1 2h14v1H1V2Zm2 4h10v1H3V6Zm8 4H5v1h6v-1Zm-4 4h2v1H7v-1Z"
+            d="M1 4h22V2H1v2Zm3 6h16V8H4v2Zm13 6H7v-2h10v2Zm-7 6h4v-2h-4v2Z"
             clipRule="evenodd"
           />
         </>

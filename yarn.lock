@@ -2302,7 +2302,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.10.4, @emotion/react@npm:^11.10.8":
+"@emotion/react@npm:^11.10.4":
   version: 11.11.0
   resolution: "@emotion/react@npm:11.11.0"
   dependencies:
@@ -2343,7 +2343,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^11.10.4, @emotion/styled@npm:^11.10.8":
+"@emotion/styled@npm:^11.10.4":
   version: 11.11.0
   resolution: "@emotion/styled@npm:11.11.0"
   dependencies:
@@ -4414,6 +4414,7 @@ __metadata:
     jest: ^29.3.1
     jest-axe: ^5.0.1
     jest-environment-jsdom: ^29.0.3
+    material-react-table: ^1.14.0
     npm-run-all: ^4.1.5
     properties: 1.2.1
     react: ^17.0.2
@@ -4438,8 +4439,6 @@ __metadata:
   dependencies:
     "@applitools/eyes-storybook": ^3.34.2
     "@babel/core": ^7.19.3
-    "@emotion/react": ^11.10.8
-    "@emotion/styled": ^11.10.8
     "@okta/odyssey-babel-loader": "workspace:*"
     "@okta/odyssey-design-tokens": "workspace:*"
     "@okta/odyssey-lifecycle": "workspace:*"
@@ -6006,6 +6005,52 @@ __metadata:
   dependencies:
     defer-to-connect: ^2.0.0
   checksum: c29df3bcec6fc3bdec2b17981d89d9c9fc9bd7d0c9bcfe92821dc533f4440bc890ccde79971838b4ceed1921d456973c4180d7175ee1d0023ad0562240a58d95
+  languageName: node
+  linkType: hard
+
+"@tanstack/match-sorter-utils@npm:8.8.4":
+  version: 8.8.4
+  resolution: "@tanstack/match-sorter-utils@npm:8.8.4"
+  dependencies:
+    remove-accents: 0.4.2
+  checksum: d005f500754f52ef94966cbbe4217f26e7e3c07291faa2578b06bca9a5abe01689569994c37a1d01c6e783addf5ffbb28fa82eba7961d36eabf43ec43d1e496b
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-table@npm:8.9.2":
+  version: 8.9.2
+  resolution: "@tanstack/react-table@npm:8.9.2"
+  dependencies:
+    "@tanstack/table-core": 8.9.2
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 66473ee4f34c7ade6a269c6821dadf228a04e9ce76bedfa6a30bb48608f26023bb2c2b9a45cc3f2323212d676bb26f7a820cb3328c8cd37bd7369d5651fe9628
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-virtual@npm:3.0.0-beta.54":
+  version: 3.0.0-beta.54
+  resolution: "@tanstack/react-virtual@npm:3.0.0-beta.54"
+  dependencies:
+    "@tanstack/virtual-core": 3.0.0-beta.54
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: ddeb3cb46db89365609d5bc402b8a8d410dc7e5f38ee579f39e5589c62a2123799ba36586939a5a6ad1a701650a5b169f657fd24687687bf08f4827b0099bc75
+  languageName: node
+  linkType: hard
+
+"@tanstack/table-core@npm:8.9.2":
+  version: 8.9.2
+  resolution: "@tanstack/table-core@npm:8.9.2"
+  checksum: eac43f6a95a08e2edae3f66b31e78b50b826507808ba32aa2fc2fae495aa4d9cdf97a7a1b745c647fdd9ec0c2559971e26df23a98720e0a959681be1caa35f26
+  languageName: node
+  linkType: hard
+
+"@tanstack/virtual-core@npm:3.0.0-beta.54":
+  version: 3.0.0-beta.54
+  resolution: "@tanstack/virtual-core@npm:3.0.0-beta.54"
+  checksum: a58cb30e1bbf8a0420caea8693df11c909c1190908163fef75aeddfa11bba621ca993ab218f4e7537c05c1651f9398e61016f3e3d374093c87029b52c868f0e7
   languageName: node
   linkType: hard
 
@@ -13406,6 +13451,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"highlight-words@npm:1.2.2":
+  version: 1.2.2
+  resolution: "highlight-words@npm:1.2.2"
+  checksum: d7bc9f84428447b98c09e4818875e9052f946141d28b9071a9cc5cf444d8dfdff7e2eb682ae78a5ed0e1c3850125d3534eb21ea47834f51bb3cc043cf6495757
+  languageName: node
+  linkType: hard
+
 "hmac-drbg@npm:^1.0.1":
   version: 1.0.1
   resolution: "hmac-drbg@npm:1.0.1"
@@ -16717,6 +16769,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"material-react-table@npm:^1.14.0":
+  version: 1.14.0
+  resolution: "material-react-table@npm:1.14.0"
+  dependencies:
+    "@tanstack/match-sorter-utils": 8.8.4
+    "@tanstack/react-table": 8.9.2
+    "@tanstack/react-virtual": 3.0.0-beta.54
+    highlight-words: 1.2.2
+  peerDependencies:
+    "@emotion/react": ">=11"
+    "@emotion/styled": ">=11"
+    "@mui/icons-material": ">=5"
+    "@mui/material": ">=5"
+    react: ">=17.0"
+    react-dom: ">=17.0"
+  checksum: 648cbe5c63212b7fd016410d14b1897b75b2a326404f77a975483a95ff8fc65d3bed1e30e6ace9c3784b520a3fde93267d53b4e7b4cbdb7f3278b0842e764a54
+  languageName: node
+  linkType: hard
+
 "mathml-tag-names@npm:^2.1.3":
   version: 2.1.3
   resolution: "mathml-tag-names@npm:2.1.3"
@@ -18188,7 +18259,7 @@ __metadata:
     lerna: ^6.5.1
     lint-staged: ^11.1.2
     npm-run-all: ^4.1.5
-    prettier: ^2.4.0
+    prettier: ^2.8.8
     stylelint: ^14.13.0
   languageName: unknown
   linkType: soft
@@ -19162,7 +19233,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.4.0, prettier@npm:^2.8.0, prettier@npm:^2.8.7":
+"prettier@npm:^2.8.0, prettier@npm:^2.8.7, prettier@npm:^2.8.8":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
   bin:
@@ -20233,6 +20304,13 @@ __metadata:
     mdast-util-to-string: ^1.0.0
     unist-util-visit: ^2.0.0
   checksum: 81fff0dcfaf6d6117ef1293bb1d26c3e25483d99c65c22434298eed93583a89ea5d7b94063d9a7f47c0647a708ce84f00ff62d274503f248feec03c344cabb20
+  languageName: node
+  linkType: hard
+
+"remove-accents@npm:0.4.2":
+  version: 0.4.2
+  resolution: "remove-accents@npm:0.4.2"
+  checksum: 84a6988555dea24115e2d1954db99509588d43fe55a1590f0b5894802776f7b488b3151c37ceb9e4f4b646f26b80b7325dcea2fae58bc3865df146e1fa606711
   languageName: node
   linkType: hard
 

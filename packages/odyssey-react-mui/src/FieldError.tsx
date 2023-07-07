@@ -12,7 +12,7 @@
 
 import { memo } from "react";
 
-import { FormHelperText } from ".";
+import { FormHelperText } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 

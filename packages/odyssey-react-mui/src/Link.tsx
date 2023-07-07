@@ -12,11 +12,11 @@
 
 import { forwardRef, memo, ReactElement } from "react";
 
-import {
-  Link as MuiLink,
-  LinkProps as MuiLinkProps,
-  SvgIcon,
-} from "@mui/material";
+import { ExternalLinkIcon } from "./iconDictionary";
+
+import { Link as MuiLink } from "@mui/material";
+
+export const linkVariantValues = ["default", "monochrome"] as const;
 
 export type LinkProps = {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ export type LinkProps = {
   icon?: ReactElement;
   rel?: string;
   target?: "_self" | "_blank" | "_parent" | "_top" | string;
-  variant?: MuiLinkProps["variant"];
+  variant?: (typeof linkVariantValues)[number];
 };
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
@@ -36,14 +36,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 
       {target === "_blank" && (
         <span className="Link-indicator" role="presentation">
-          <SvgIcon viewBox="0 0 16 16">
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M13.2929 2H7.99998V1H14.5C14.7761 1 15 1.22386 15 1.5V8H14V2.70711L6.35353 10.3536L5.64642 9.64645L13.2929 2ZM1.5 4H1V4.5V14.5V15H1.5H11.5H12V14.5V8H11V14H2V5H8V4H1.5Z"
-              fill="currentColor"
-            />
-          </SvgIcon>
+          <ExternalLinkIcon />
         </span>
       )}
     </MuiLink>

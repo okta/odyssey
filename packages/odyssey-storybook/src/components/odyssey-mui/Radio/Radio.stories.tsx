@@ -11,34 +11,69 @@
  */
 
 import { Radio, RadioProps } from "@okta/odyssey-react-mui";
-import { Meta, ReactRenderer, StoryObj } from "@storybook/react";
-
+import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { StepFunction } from "@storybook/types";
 
 const storybookMeta: Meta<RadioProps> = {
   title: "MUI Components/Forms/Radio",
   component: Radio,
   argTypes: {
+    isChecked: {
+      control: "boolean",
+      description: "If `true`, the radio button is checked",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isDisabled: {
       control: "boolean",
+      description: "If `true`, the radio button is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isInvalid: {
       control: "boolean",
+      description: "If `true`, the radio button has an invalid value",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     label: {
       control: "text",
+      description: "The label text for the radio button",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     name: {
       control: "text",
+      description: "The name attribute of the radio button",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     value: {
       control: "text",
+      description: "The value attribute of the radio button",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
@@ -46,26 +81,21 @@ const storybookMeta: Meta<RadioProps> = {
     value: "Value",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
 
-const selectRadio = async (
-  canvasElement: HTMLElement,
-  step: StepFunction<ReactRenderer, RadioProps>,
-  action: string
-) => {
-  await step("select the radio button", async () => {
-    const canvas = within(canvasElement);
-    const radio = canvas.getByRole("radio") as HTMLInputElement;
-    radio && (await userEvent.click(radio));
-    expect(radio.checked).toBe(true);
-    await axeRun(action);
-  });
-};
-
 export const Default: StoryObj<RadioProps> = {
   play: async ({ canvasElement, step }) => {
-    selectRadio(canvasElement, step, "Radio Default");
+    await step("select the radio button", async () => {
+      const canvas = within(canvasElement);
+      const radio = canvas.getByRole("radio") as HTMLInputElement;
+      if (radio) {
+        userEvent.click(radio);
+      }
+      expect(radio).toBeChecked();
+      axeRun("Radio Default");
+    });
   },
 };
