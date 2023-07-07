@@ -22,18 +22,57 @@ export type NativeSelectOption = {
 };
 
 export type NativeSelectProps = {
+  /**
+   * The options or optgroup elements within the NativeSelect
+   */
   children?: ReactElement<"option"> | ReactElement<"optgroup">;
+  /**
+   * The default value of the NativeSelect. Only applicable if `value` is not provided
+   */
   defaultValue?: string;
+  /**
+   * The error message for the NativeSelect
+   */
   errorMessage?: string;
+  /**
+   * The hint text for the NativeSelect
+   */
   hint?: string;
+  /**
+   * The id attribute of the NativeSelect
+   */
   id?: string;
+  /**
+   * If `true`, the NativeSelect is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * If `true`, the NativeSelect allows multiple selections
+   */
   isMultiSelect?: boolean;
+  /**
+   * If `true`, the NativeSelect is optional
+   */
   isOptional?: boolean;
+  /**
+   * The label text for the NativeSelect
+   */
   label: string;
+  /**
+   * Callback fired when the NativeSelect loses focus
+   */
   onBlur?: MuiSelectProps["onBlur"];
+  /**
+   * Callback fired when the value of the NativeSelect changes
+   */
   onChange?: MuiSelectProps["onChange"];
+  /**
+   * Callback fired when the NativeSelect gains focus
+   */
   onFocus?: MuiSelectProps["onFocus"];
+  /**
+   * The value or values selected in the NativeSelect
+   */
   value?: string | string[];
 };
 

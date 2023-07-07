@@ -65,6 +65,15 @@ const storybookMeta: Meta<DialogProps> = {
         },
       },
     },
+    isOpen: {
+      control: "boolean",
+      description: "When set to `true`, the Dialog will be visible.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     onClose: {
       control: "function",
       description:
@@ -72,15 +81,6 @@ const storybookMeta: Meta<DialogProps> = {
       table: {
         type: {
           summary: "func",
-        },
-      },
-    },
-    isOpen: {
-      control: "boolean",
-      description: "When set to `true`, the Dialog will be visible.",
-      table: {
-        type: {
-          summary: "boolean",
         },
       },
     },

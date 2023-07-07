@@ -19,11 +19,29 @@ import { Link as MuiLink } from "@mui/material";
 export const linkVariantValues = ["default", "monochrome"] as const;
 
 export type LinkProps = {
+  /**
+   * The content within the Link
+   */
   children: React.ReactNode;
+  /**
+   * The Link destination
+   */
   href: string;
+  /**
+   * An optional Icon component at the start of the Link
+   */
   icon?: ReactElement;
+  /**
+   * The HTML `rel` attribute for the Link
+   */
   rel?: string;
+  /**
+   * The HTML `target` attribute for the Link
+   */
   target?: "_self" | "_blank" | "_parent" | "_top" | string;
+  /**
+   * The visual presentation of the Link (default or monochrome)
+   */
   variant?: (typeof linkVariantValues)[number];
 };
 

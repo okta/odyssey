@@ -30,17 +30,53 @@ export type SelectOption = {
 };
 
 export type SelectProps = {
+  /**
+   * The error message for the Select
+   */
   errorMessage?: string;
+  /**
+   * The hint text for the Select
+   */
   hint?: string;
+  /**
+   * The id attribute of the Select
+   */
   id?: string;
+  /**
+   * If `true`, the Select is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * If `true`, the Select allows multiple selections
+   */
   isMultiSelect?: boolean;
+  /**
+   * If `true`, the Select is optional
+   */
   isOptional?: boolean;
+  /**
+   * The label text for the Select
+   */
   label: string;
+  /**
+   * Callback fired when the Select loses focus
+   */
   onBlur?: MuiSelectProps["onBlur"];
+  /**
+   * Callback fired when the value of the Select changes
+   */
   onChange?: MuiSelectProps["onChange"];
+  /**
+   * Callback fired when the Select gains focus
+   */
   onFocus?: MuiSelectProps["onFocus"];
+  /**
+   * The options for the Select
+   */
   options: (string | SelectOption)[];
+  /**
+   * The value or values selected in the Select
+   */
   value?: string | string[];
 };
 

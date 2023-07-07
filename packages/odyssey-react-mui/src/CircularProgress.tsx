@@ -13,7 +13,14 @@
 import { CircularProgress as MuiCircularProgress } from "@mui/material";
 
 export type CircularProgressProps = {
+  /**
+   * The ARIA label for the progress spinner
+   */
   ariaLabel?: string;
+  /**
+   * The percentage filled the spinner should be, as an integer.
+   * If undefined, the spinner will spin perpetually.
+   */
   value?: number;
 };
 

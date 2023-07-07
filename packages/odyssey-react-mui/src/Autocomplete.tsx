@@ -24,56 +24,89 @@ export type AutocompleteProps<
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 > = {
+  /**
+   * Enables multiple choice selection
+   */
   hasMultipleChoices?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["multiple"];
+  /**
+   * The hint text for the Autocomplete input
+   */
   hint?: string;
+  /**
+   * Allows the input of custom values
+   */
   isCustomValueAllowed?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["freeSolo"];
+  /**
+   * Disables the Autocomplete input
+   */
   isDisabled?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["disabled"];
+  /**
+   * Displays a loading indicator
+   */
   isLoading?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["loading"];
+  /**
+   * Makes the Autocomplete input read-only
+   */
   isReadOnly?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["readOnly"];
+  /**
+   * The label text for the autocomplete input
+   */
   label: string;
+  /**
+   * Callback fired when the value of the autocomplete input changes
+   */
   onChange?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["onChange"];
+  /**
+   * Callback fired when the input value of the autocomplete input changes
+   */
   onInputChange?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["onInputChange"];
+  /**
+   * The options for the Autocomplete input
+   */
   options: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["options"];
+  /**
+   * The value of the Autocomplete input
+   */
   value?: MuiAutocompleteProps<
     OptionType,
     HasMultipleChoices,

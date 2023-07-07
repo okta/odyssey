@@ -16,10 +16,25 @@ import { TagListContext } from "./TagListContext";
 import { Icon } from "./Icon";
 
 export type TagProps = {
+  /**
+   * An optional icon to display alongside the Tag label
+   */
   icon?: ReactElement<typeof Icon>;
+  /**
+   * If `true`, the Tag is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * The label text for the Tag
+   */
   label: string;
+  /**
+   * Callback fired when the Tag is clicked
+   */
   onClick?: ChipProps["onClick"];
+  /**
+   * Callback fired when the remove button of the Tag is clicked
+   */
   onRemove?: ChipProps["onDelete"];
 };
 

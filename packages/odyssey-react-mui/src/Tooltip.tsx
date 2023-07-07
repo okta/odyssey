@@ -24,9 +24,21 @@ export type TooltipProps = {
 };
 
 export const Tooltip = ({
+  /**
+   * The type of ARIA attribute to use
+   */
   ariaType,
+  /**
+   * The content that triggers the Tooltip when hovered
+   */
   children,
+  /**
+   * The placement of the Tooltip
+   */
   placement = "top",
+  /**
+   * The text to display in the Tooltip
+   */
   text,
 }: TooltipProps) => (
   <MuiTooltip

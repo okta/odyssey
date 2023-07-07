@@ -25,21 +25,21 @@ export const infoboxSeverityValues = [
 
 export type InfoboxProps = {
   /**
-   * The contents of the alert
+   * The contents of the Infobox
    */
   children: ReactNode;
   /**
-   * Sets the ARIA role of the alert
+   * Sets the ARIA role of the Infobox
    * ("status" for something that dynamically updates, "alert" for errors, null for something
    * unchanging)
    */
   role?: (typeof infoboxRoleValues)[number];
   /**
-   * Determine the color and icon of the alert
+   * Determine the color and icon of the Infobox
    */
   severity: (typeof infoboxSeverityValues)[number];
   /**
-   * The title of the alert
+   * The title of the Infobox
    */
   title?: string;
 };

@@ -51,7 +51,7 @@ export type MenuButtonProps = {
    */
   endIcon?: ReactElement;
   /**
-   * The id of the button
+   * The id of the Button
    */
   id?: string;
 };

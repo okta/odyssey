@@ -25,16 +25,40 @@ import {
 } from "@mui/lab";
 
 export type TabItemProps = {
+  /**
+   * The content of the Tab itself
+   */
   children: ReactNode;
+  /**
+   * If `true`, the TabItem is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * The label text for the TabItem
+   */
   label: string;
+  /**
+   * An optional icon to display at the start of the TabItem
+   */
   startIcon?: ReactElement;
+  /**
+   * The value associated with the TabItem
+   */
   value?: string;
 };
 
 export type TabsProps = {
+  /**
+   * The ARIA label for the full Tabs group
+   */
   ariaLabel?: string;
+  /**
+   * The value of the Tab that should be selected by default
+   */
   initialValue?: string;
+  /**
+   * The TabItems to be included in the Tabs group
+   */
   tabs: TabItemProps[];
 };
 

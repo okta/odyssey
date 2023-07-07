@@ -28,13 +28,13 @@ export const toastSeverityValues = [
 
 export type ToastProps = {
   /**
-   * If set, this determines how long the toast should appear before automatically disappearing in milliseconds.
-   * It will only take effect if the toast is not dismissible.
+   * If set, this determines how long the Toast should appear before automatically disappearing in milliseconds.
+   * It will only take effect if the Toast is not dismissible.
    * If left blank, it defaults to 6000.
    */
   autoHideDuration?: number;
   /**
-   * If `true`, the alert will include a close button.
+   * If `true`, the Toast will include a close button.
    */
   isDismissable?: boolean;
   /**
@@ -48,7 +48,7 @@ export type ToastProps = {
    */
   linkText?: string;
   /**
-   * If defined, the alert will include a link to the URL
+   * If defined, the Toast will include a link to the URL
    */
   linkUrl?: string;
   /**
@@ -56,17 +56,17 @@ export type ToastProps = {
    */
   onHide?: () => void;
   /**
-   * Sets the ARIA role of the alert
+   * Sets the ARIA role of the Toast
    * ("status" for something that dynamically updates, "alert" for errors, null for something
    * unchanging)
    */
   role?: (typeof toastRoleValues)[number];
   /**
-   * Determine the color and icon of the alert
+   * Determine the color and icon of the Toast
    */
   severity: (typeof toastSeverityValues)[number];
   /**
-   * The text content of the alert
+   * The text content of the Toast
    */
   text: string;
 };

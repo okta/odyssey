@@ -29,12 +29,33 @@ import {
 } from "react";
 
 export type DialogProps = {
+  /**
+   * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
+   */
   callToActionPrimaryComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.
+   */
   callToActionSecondaryComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.
+   */
   callToActionTertiaryComponent?: ReactElement<typeof Button>;
+  /**
+   * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
+   */
   children: ReactNode | Array<ReactNode>;
+  /**
+   * When set to `true`, the Dialog will be visible.
+   */
   isOpen: boolean;
+  /**
+   * Callback that controls what happens when the Dialog is dismissed
+   */
   onClose: () => void;
+  /**
+   * The title of the Dialog
+   */
   title: string;
 };
 
