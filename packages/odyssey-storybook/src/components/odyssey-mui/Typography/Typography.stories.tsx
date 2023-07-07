@@ -41,6 +41,7 @@ const storybookMeta: Meta<TypographyProps> = {
     children: "Spice is vital for space travel.",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;

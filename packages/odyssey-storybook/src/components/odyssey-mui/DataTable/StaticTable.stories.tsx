@@ -519,6 +519,7 @@ export const CustomToolbar: StoryObj<StaticTableProps<Person>> = {
     getRowId: ({ id }: { id: string }) => id,
     ToolbarButtons: ({ table }) => (
       <Button
+        variant="primary"
         onClick={() => console.info(table.getState())}
         text="New Action"
       />

@@ -18,24 +18,133 @@ const storybookMeta: Meta<NativeSelectProps> = {
   title: "MUI Components/Forms/NativeSelect",
   component: NativeSelect,
   argTypes: {
-    isDisabled: {
-      control: "boolean",
-    },
-    errorMessage: {
-      control: "text",
-    },
-    hint: {
-      control: "text",
-    },
-    isOptional: {
-      control: "boolean",
-    },
-    label: {
-      control: "text",
+    children: {
+      control: null,
+      description:
+        "The options or optgroup elements within the native select component",
+      table: {
+        type: {
+          summary:
+            "ReactElement<'option'> | ReactElement<'optgroup'> | undefined",
+        },
+      },
     },
     defaultValue: {
       control: "text",
-      description: "The default value, if the control is native.",
+      description:
+        "The default value of the native select component. Only applicable if `value` is not provided",
+      table: {
+        type: {
+          summary: "string | undefined",
+        },
+      },
+    },
+    errorMessage: {
+      control: "text",
+      description: "The error message for the native select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    hint: {
+      control: "text",
+      description: "The hint text for the native select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    id: {
+      control: "text",
+      description: "The id attribute of the native select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "If `true`, the native select component is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isMultiSelect: {
+      control: "boolean",
+      description:
+        "If `true`, the native select component allows multiple selections",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isOptional: {
+      control: "boolean",
+      description: "If `true`, the native select component is optional",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    label: {
+      control: "text",
+      description: "The label text for the native select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onBlur: {
+      control: null,
+      description:
+        "Callback fired when the native select component loses focus",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onChange: {
+      control: null,
+      description:
+        "Callback fired when the value of the native select component changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onFocus: {
+      control: null,
+      description:
+        "Callback fired when the native select component gains focus",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    value: {
+      control: "text",
+      description:
+        "The value or values selected in the native select component",
+      table: {
+        type: {
+          summary: "string | string[]",
+        },
+      },
     },
   },
   args: {
@@ -46,6 +155,7 @@ const storybookMeta: Meta<NativeSelectProps> = {
     id: "SolarDestination",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;

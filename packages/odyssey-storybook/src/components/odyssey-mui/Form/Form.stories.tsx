@@ -18,6 +18,9 @@ import {
   Fieldset,
   Form,
   FormProps,
+  formEncodingTypeValues,
+  formAutoCompleteTypeValues,
+  formMethodValues,
   Infobox,
   Link,
   TextField,
@@ -31,39 +34,120 @@ const storybookMeta: Meta<FormProps> = {
   argTypes: {
     title: {
       control: "text",
-    },
-    alert: {
-      control: "text",
-    },
-    children: {
-      control: "text",
+      description: "The title of the Form",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     description: {
       control: "text",
+      description: "A supplementary description",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
-    formActions: {
-      control: "text",
+    children: {
+      control: "obj",
+      description: "Field or FieldSet components within the Form",
+      table: {
+        type: {
+          summary: "ReactElement | Array<ReactElement>",
+        },
+      },
     },
-    hasAutoComplete: {
-      control: "boolean",
+    alert: {
+      control: null,
+      description: "An Infobox indicating a Form-wide error or status update",
+      table: {
+        type: {
+          summary: "ReactElement<typeof Infobox>",
+        },
+      },
     },
-    encodingType: {
-      control: "text",
-    },
-    method: {
-      control: "text",
-    },
-    noValidate: {
-      control: "boolean",
-    },
-    target: {
-      control: "text",
-    },
-    id: {
-      control: "text",
+    autoCompleteType: {
+      options: formAutoCompleteTypeValues,
+      control: { type: "radio" },
+      description:
+        "Indicates whether input elements can have their values automatically completed by the browser",
+      table: {
+        type: {
+          summary: formAutoCompleteTypeValues.join(" | "),
+        },
+      },
     },
     name: {
       control: "text",
+      description:
+        "The name of the form. The value must not be an empty string and must be unique among the form elements",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    noValidate: {
+      control: "boolean",
+      description:
+        "This Boolean attribute indicates that the form shouldn't be validated when submitted",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    encodingType: {
+      options: formEncodingTypeValues,
+      control: { type: "radio" },
+      description:
+        "If the method attribute is set to 'post', the MIME type of the form submission",
+      table: {
+        type: {
+          summary: formEncodingTypeValues.join(" | "),
+        },
+      },
+    },
+    method: {
+      options: formMethodValues,
+      control: { type: "radio" },
+      description: "The HTTP method to submit the form with",
+      table: {
+        type: {
+          summary: formMethodValues.join(" | "),
+        },
+      },
+    },
+    target: {
+      control: "text",
+      description:
+        "Indicates where to display the response after submitting the form",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    formActions: {
+      control: "obj",
+      description: "One or more Buttons that conclude the form.",
+      table: {
+        type: {
+          summary:
+            "ReactElement<typeof Button> | Array<ReactElement<typeof Button>>",
+        },
+      },
+    },
+    id: {
+      control: "text",
+      description: "Defines a unique identifier (ID) for the Form",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
@@ -76,12 +160,13 @@ const storybookMeta: Meta<FormProps> = {
     ),
     formActions: (
       <>
-        <Button text="Submit" />
+        <Button variant="primary" text="Submit" />
         <Button variant="secondary" text="Reset" />
       </>
     ),
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -95,7 +180,7 @@ const Template: StoryObj<FormProps> = {
         description={args.description}
         formActions={args.formActions}
         alert={args.alert}
-        hasAutoComplete={args.hasAutoComplete}
+        autoCompleteType={args.autoCompleteType}
         encodingType={args.encodingType}
         method={args.method}
         noValidate={args.noValidate}

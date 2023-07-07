@@ -60,6 +60,12 @@ const preview: Preview = {
       source: {
         excludeDecorators: true,
       },
+      argTypes: {
+        sort: "alpha",
+      },
+      controls: {
+        sort: "alpha",
+      },
     },
   },
 };

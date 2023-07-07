@@ -22,27 +22,119 @@ const storybookMeta: Meta<CheckboxProps> = {
   title: "MUI Components/Forms/Checkbox",
   component: Checkbox,
   argTypes: {
-    label: {
+    ariaLabel: {
       control: "text",
+      description: "Aria-label for the checkbox",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
-    name: {
+    ariaLabelledBy: {
       control: "text",
+      description: "Aria-labelledby for the checkbox",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    isInvalid: {
+      control: "boolean",
+      description:
+        "If `true`, indicates that the checkbox has an invalid value",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isValid: {
+      control: "boolean",
+      description: "If `true`, indicates that the checkbox has a valid value",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isChecked: {
+      control: "boolean",
+      description: "If `true`, the checkbox is checked",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "If `true`, the checkbox is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isIndeterminate: {
       control: "boolean",
+      description: "If `true`, the checkbox is in an indeterminate state",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isRequired: {
       control: "boolean",
-      defaultValue: false,
+      description: "If `true`, the checkbox is required",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    label: {
+      control: "text",
+      description: "The label text for the checkbox",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    name: {
+      control: "text",
+      description: "The name attribute of the checkbox",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     onChange: {
-      control: "function",
+      control: null,
+      description: "Callback fired when the checkbox value changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
     },
     value: {
       control: "text",
+      description: "The value attribute of the checkbox",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -72,11 +164,73 @@ export const Default: StoryObj<CheckboxProps> = {
 };
 
 export const Required: StoryObj<CheckboxProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Checkboxes are optional by default, and there are few circumstances in which a checkbox is required. Odyssey provides an `isRequired` boolean that, when set to `true`, makes the checkbox required. Note that when a checkbox is required, it must be checked for the form to submit, so this is only appropriate for checkboxes that must be checked to continue, such as a confirmation.",
+      },
+    },
+  },
   args: {
     label: "I agree to the terms and conditions",
     isRequired: true,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Required");
+  },
+};
+
+export const Checked: StoryObj<CheckboxProps> = {
+  args: {
+    label: "Pre-flight systems check complete",
+    isChecked: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    checkTheBox({ canvasElement, step })("Checkbox Checked");
+  },
+};
+
+export const Disabled: StoryObj<CheckboxProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Checkboxes may be disabled individually or as a group. The values of disabled inputs will not be submitted.",
+      },
+    },
+  },
+  args: {
+    label: "Pre-flight systems check complete",
+    isDisabled: true,
+  },
+};
+
+export const Indeterminate: StoryObj<CheckboxProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "In the case of nested checkboxes, an indeterminate state may be required. Note that this state is visual- only and will be submitted as either checked or unchecked depending on the internal state.",
+      },
+    },
+  },
+  args: {
+    label: "Pre-flight systems check complete",
+    isIndeterminate: true,
+    isChecked: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    checkTheBox({ canvasElement, step })("Checkbox Indeterminate");
+  },
+};
+
+export const Invalid: StoryObj<CheckboxProps> = {
+  args: {
+    label: "Pre-flight systems check complete",
+    isInvalid: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    checkTheBox({ canvasElement, step })("Checkbox Disabled");
   },
 };
