@@ -17,17 +17,17 @@ import { MuiPropsChild } from "./MuiPropsChild";
 import { ReactElement } from "react";
 
 export type TooltipProps = {
-  children: ReactElement;
   ariaType: "description" | "label";
-  text: string;
+  children: ReactElement;
   placement?: MuiTooltipProps["placement"];
+  text: string;
 };
 
 export const Tooltip = ({
   ariaType,
   children,
-  text,
   placement = "top",
+  text,
 }: TooltipProps) => (
   <MuiTooltip
     describeChild={ariaType === "description"}

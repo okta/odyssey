@@ -33,10 +33,10 @@ export type CheckboxGroupProps = {
 
 const CheckboxGroup = ({
   children,
-  isDisabled,
   errorMessage,
   hint,
   id: idOverride,
+  isDisabled,
   isRequired = false,
   label,
 }: CheckboxGroupProps) => {

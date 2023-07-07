@@ -27,6 +27,9 @@ export const buttonVariantValues = [
 ] as const;
 
 export type ButtonProps = {
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
+  ariaDescribedBy?: string;
   endIcon?: ReactElement<typeof Icon>;
   id?: string;
   isDisabled?: boolean;
@@ -40,12 +43,12 @@ export type ButtonProps = {
    */
   tooltipText?: string;
   variant: (typeof buttonVariantValues)[number];
-  ariaLabel?: string;
-  ariaLabelledBy?: string;
-  ariaDescribedBy?: string;
 };
 
 const Button = ({
+  ariaDescribedBy,
+  ariaLabel,
+  ariaLabelledBy,
   endIcon,
   id,
   isDisabled,
@@ -56,9 +59,6 @@ const Button = ({
   text,
   tooltipText,
   variant,
-  ariaLabel,
-  ariaLabelledBy,
-  ariaDescribedBy,
 }: ButtonProps) => {
   const muiProps = useContext(MuiPropsContext);
 

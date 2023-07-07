@@ -33,8 +33,8 @@ export type DialogProps = {
   callToActionSecondaryComponent?: ReactElement<typeof Button>;
   callToActionTertiaryComponent?: ReactElement<typeof Button>;
   children: ReactNode | Array<ReactNode>;
-  onClose: () => void;
   isOpen: boolean;
+  onClose: () => void;
   title: string;
 };
 

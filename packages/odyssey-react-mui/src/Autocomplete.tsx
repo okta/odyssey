@@ -87,8 +87,8 @@ const Autocomplete = <
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 >({
-  isCustomValueAllowed,
   hasMultipleChoices,
+  isCustomValueAllowed,
   isDisabled,
   isLoading,
   isReadOnly,

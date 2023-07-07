@@ -24,19 +24,19 @@ import { SupportedLanguages } from "./OdysseyTranslationProvider.types";
 
 type OdysseyProviderProps = {
   children: ReactElement;
-  nonce?: string;
-  themeOverride?: ThemeOptions;
   designTokensOverride?: DesignTokensOverride;
   languageCode?: SupportedLanguages;
+  nonce?: string;
+  themeOverride?: ThemeOptions;
   translationOverrides?: TranslationOverrides;
 };
 
 const OdysseyProvider = ({
   children,
-  nonce,
-  themeOverride,
   designTokensOverride,
   languageCode,
+  nonce,
+  themeOverride,
   translationOverrides,
 }: OdysseyProviderProps) => (
   <OdysseyCacheProvider nonce={nonce}>

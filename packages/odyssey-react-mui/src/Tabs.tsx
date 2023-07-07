@@ -26,19 +26,19 @@ import {
 
 export type TabItemProps = {
   children: ReactNode;
-  startIcon?: ReactElement;
-  label: string;
   isDisabled?: boolean;
+  label: string;
+  startIcon?: ReactElement;
   value?: string;
 };
 
 export type TabsProps = {
-  tabs: TabItemProps[];
-  initialValue?: string;
   ariaLabel?: string;
+  initialValue?: string;
+  tabs: TabItemProps[];
 };
 
-const Tabs = ({ ariaLabel, tabs, initialValue = "0" }: TabsProps) => {
+const Tabs = ({ ariaLabel, initialValue = "0", tabs }: TabsProps) => {
   const [tabState, setTabState] = useState(initialValue);
 
   const onChange = useCallback(

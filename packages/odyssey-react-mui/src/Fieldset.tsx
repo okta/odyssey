@@ -18,47 +18,39 @@ import { useUniqueId } from "./useUniqueId";
 
 export type FieldsetProps = {
   /**
-   * The title of the Fieldset
+   * An Infobox indicating a Fieldset-wide error or status update.
    */
-  legend: string;
-  /**
-   * A supplementary description
-   */
-  description?: string;
+  alert?: ReactElement<typeof Infobox>;
   /**
    * The Field components within the Fieldset
    */
   children: ReactElement | Array<ReactElement>;
   /**
-   * An Infobox indicating a Fieldset-wide error or status update.
+   * A supplementary description
    */
-  alert?: ReactElement<typeof Infobox>;
-  /**
-   * The name associated with the group.
-   */
-  name?: string;
-  // /**
-  //  * If this Boolean attribute is set, all form controls that are descendants of the <fieldset>, are disabled, meaning they are not editable and won't be submitted along with the <form>.
-  //  * They won't receive any browsing events, like mouse clicks or focus-related events.
-  //  * Note that form elements inside the <legend> element won't be disabled.
-  //  */
-  // NOTE: Functionality is currently disabled. This will correctly disable child <input>s, but will not pass `isDisabled` to the child components.
-  // isDisabled?: boolean;
+  description?: string;
   /**
    * Defines a unique identifier (ID) which must be unique in the whole document.
    */
   id?: string;
+  /**
+   * The title of the Fieldset
+   */
+  legend: string;
+  /**
+   * The name associated with the group.
+   */
+  name?: string;
 };
 
 const Fieldset = ({
   alert,
   children,
   description,
+  id: idOverride,
   legend,
   name,
-  id: idOverride,
-}: // isDisabled,
-FieldsetProps) => {
+}: FieldsetProps) => {
   const id = useUniqueId(idOverride);
 
   return (

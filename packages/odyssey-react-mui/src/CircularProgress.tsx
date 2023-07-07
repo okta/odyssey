@@ -13,13 +13,13 @@
 import { CircularProgress as MuiCircularProgress } from "@mui/material";
 
 export type CircularProgressProps = {
-  value?: number;
   ariaLabel?: string;
+  value?: number;
 };
 
 export const CircularProgress = ({
-  value,
   ariaLabel,
+  value,
 }: CircularProgressProps) => (
   <MuiCircularProgress
     value={value}

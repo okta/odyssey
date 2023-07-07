@@ -21,12 +21,12 @@ import { useTranslation } from "react-i18next";
 export type CheckboxProps = {
   ariaLabel?: string;
   ariaLabelledBy?: string;
-  isInvalid?: boolean;
-  isValid?: boolean;
   isChecked?: boolean;
   isDisabled?: boolean;
   isIndeterminate?: boolean;
+  isInvalid?: boolean;
   isRequired?: boolean;
+  isValid?: boolean;
   label?: string;
   name?: string;
   onChange?: ChangeEventHandler<EventTarget>;
@@ -36,12 +36,12 @@ export type CheckboxProps = {
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
-  isInvalid,
-  isValid,
   isChecked,
   isDisabled,
   isIndeterminate,
+  isInvalid,
   isRequired,
+  isValid,
   label: labelProp,
   name,
   onChange,
