@@ -18,8 +18,6 @@ import { axeRun } from "../../../axe-util";
 import { expect } from "@storybook/jest";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-type StationType = { label: string };
-
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },
   { label: "Bara Gaon Complex" },
@@ -52,26 +50,109 @@ const storybookMeta: Meta<typeof Autocomplete> = {
   title: "MUI Components/Forms/Autocomplete",
   component: Autocomplete,
   argTypes: {
-    label: {
-      control: "text",
+    hasMultipleChoices: {
+      control: "boolean",
+      description: "Enables multiple choice selection",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     hint: {
       control: "text",
-    },
-    isDisabled: {
-      control: "boolean",
+      description: "The hint text for the autocomplete input",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     isCustomValueAllowed: {
       control: "boolean",
+      description: "Allows the input of custom values",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Disables the autocomplete input",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isLoading: {
       control: "boolean",
-    },
-    hasMultipleChoices: {
-      control: "boolean",
+      description: "Displays a loading indicator",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isReadOnly: {
       control: "boolean",
+      description: "Makes the autocomplete input read-only",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    label: {
+      control: "text",
+      description: "The label text for the autocomplete input",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onChange: {
+      control: null,
+      description:
+        "Callback fired when the value of the autocomplete input changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onInputChange: {
+      control: null,
+      description:
+        "Callback fired when the input value of the autocomplete input changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    options: {
+      control: null,
+      description: "The options for the autocomplete input",
+      table: {
+        type: {
+          summary:
+            "Array<OptionType> | GroupedOptionType<OptionType>[] | Promise<Array<OptionType> | GroupedOptionType<OptionType>[]>",
+        },
+      },
+    },
+    value: {
+      control: null,
+      description: "The value of the autocomplete input",
+      table: {
+        type: {
+          summary: "OptionType | OptionType[]",
+        },
+      },
     },
   },
   args: {
@@ -80,10 +161,12 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     options: stations,
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
 
+type StationType = { label: string };
 type AutocompleteType = AutocompleteProps<
   StationType | undefined,
   boolean | undefined,
@@ -132,6 +215,15 @@ export const Disabled: StoryObj<AutocompleteType> = {
 };
 
 export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Autocomplete supports user-submitted values via the `isCustomValueAllowed` prop.",
+      },
+    },
+  },
+  ...Default,
   args: {
     isCustomValueAllowed: true,
   },
@@ -150,6 +242,7 @@ export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
 export const Loading: StoryObj<AutocompleteType> = {
   args: {
     isLoading: true,
+    options: [],
   },
 };
 

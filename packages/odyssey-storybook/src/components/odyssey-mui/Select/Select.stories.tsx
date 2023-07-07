@@ -18,20 +18,117 @@ const storybookMeta: Meta<SelectProps> = {
   title: "MUI Components/Forms/Select",
   component: Select,
   argTypes: {
-    isDisabled: {
-      control: "boolean",
-    },
     errorMessage: {
       control: "text",
+      description: "The error message for the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     hint: {
       control: "text",
+      description: "The hint text for the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    id: {
+      control: "text",
+      description: "The id attribute of the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "If `true`, the select component is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isMultiSelect: {
+      control: "boolean",
+      description: "If `true`, the select component allows multiple selections",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isOptional: {
       control: "boolean",
+      description: "If `true`, the select component is optional",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     label: {
       control: "text",
+      description: "The label text for the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onBlur: {
+      control: null,
+      description: "Callback fired when the select component loses focus",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onChange: {
+      control: null,
+      description:
+        "Callback fired when the value of the select component changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onFocus: {
+      control: null,
+      description: "Callback fired when the select component gains focus",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    options: {
+      control: "object",
+      description: "The options for the select component",
+      table: {
+        type: {
+          summary: "(string | SelectOption)[]",
+        },
+      },
+    },
+    value: {
+      control: "text",
+      description: "The value or values selected in the select component",
+      table: {
+        type: {
+          summary: "string | string[]",
+        },
+      },
     },
   },
   args: {
@@ -39,6 +136,7 @@ const storybookMeta: Meta<SelectProps> = {
     label: "Destination",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -184,29 +282,45 @@ export const Default: StoryObj<SelectProps> = {
 };
 Default.args = {};
 
-export const DefaultDisabled: StoryObj<SelectProps> = {
+export const Disabled: StoryObj<SelectProps> = {
   ...Template,
   args: {
     isDisabled: true,
   },
 };
 
-export const DefaultError: StoryObj<SelectProps> = {
+export const Error: StoryObj<SelectProps> = {
   ...Template,
   args: {
     errorMessage: "Select your destination.",
   },
 };
 
-export const DefaultObject: StoryObj<SelectProps> = {
+export const OptionsObject: StoryObj<SelectProps> = {
   ...ObjectTemplate,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Select can accept `options` as a flat array, an array of objects, or both. This demonstrates an array of objects with `value` and `name`.",
+      },
+    },
+  },
 };
 
-export const DefaultGrouped: StoryObj<SelectProps> = {
+export const OptionsGrouped: StoryObj<SelectProps> = {
   ...GroupTemplate,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Objects with `type: "heading"` will have their `text` displayed as a heading.',
+      },
+    },
+  },
 };
 
-export const Multi: StoryObj<SelectProps> = {
+export const MultiSelect: StoryObj<SelectProps> = {
   ...Template,
   args: {
     isMultiSelect: true,

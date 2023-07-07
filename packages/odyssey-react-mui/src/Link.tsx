@@ -14,7 +14,9 @@ import { forwardRef, memo, ReactElement } from "react";
 
 import { ExternalLinkIcon } from "./iconDictionary";
 
-import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
+import { Link as MuiLink } from "@mui/material";
+
+export const linkVariantValues = ["default", "monochrome"] as const;
 
 export type LinkProps = {
   children: React.ReactNode;
@@ -22,7 +24,7 @@ export type LinkProps = {
   icon?: ReactElement;
   rel?: string;
   target?: "_self" | "_blank" | "_parent" | "_top" | string;
-  variant?: MuiLinkProps["variant"];
+  variant?: (typeof linkVariantValues)[number];
 };
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
