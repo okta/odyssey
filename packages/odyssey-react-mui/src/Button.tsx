@@ -12,11 +12,19 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, useContext, useMemo } from "react";
+import { memo, ReactElement, useCallback, useContext } from "react";
 
 import { Icon } from "./Icon";
 import { MuiPropsContext } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
+
+export const buttonSizeValues = ["small", "medium", "large"] as const;
+export const buttonVariantValues = [
+  "primary",
+  "secondary",
+  "danger",
+  "floating",
+] as const;
 
 export type ButtonProps = {
   endIcon?: ReactElement<typeof Icon>;
@@ -24,14 +32,14 @@ export type ButtonProps = {
   isDisabled?: boolean;
   isFullWidth?: boolean;
   onClick?: MuiButtonProps["onClick"];
-  size?: MuiButtonProps["size"];
+  size?: (typeof buttonSizeValues)[number];
   startIcon?: ReactElement<typeof Icon>;
   text?: string;
   /**
    * `tooltipText` determines the text of the tooltip that wraps the button if it's icon-only.
    */
   tooltipText?: string;
-  variant?: "primary" | "secondary" | "danger" | "floating";
+  variant: (typeof buttonVariantValues)[number];
   ariaLabel?: string;
   ariaLabelledBy?: string;
   ariaDescribedBy?: string;
@@ -54,8 +62,8 @@ const Button = ({
 }: ButtonProps) => {
   const muiProps = useContext(MuiPropsContext);
 
-  const button = useMemo(
-    () => (
+  const renderButton = useCallback(
+    (muiProps) => (
       <MuiButton
         {...muiProps}
         aria-label={ariaLabel}
@@ -78,7 +86,6 @@ const Button = ({
       id,
       isDisabled,
       isFullWidth,
-      muiProps,
       onClick,
       size,
       startIcon,
@@ -93,11 +100,12 @@ const Button = ({
   return (
     <>
       {tooltipText && (
-        <Tooltip ariaType="description" text={tooltipText}>
-          {button}
+        <Tooltip ariaType="description" placement="top" text={tooltipText}>
+          <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
         </Tooltip>
       )}
-      {!tooltipText && button}
+
+      {!tooltipText && renderButton(muiProps)}
     </>
   );
 };

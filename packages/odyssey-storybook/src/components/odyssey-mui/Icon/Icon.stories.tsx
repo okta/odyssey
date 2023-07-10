@@ -16,6 +16,7 @@ import {
   Icon,
   type IconProps,
   iconDictionary,
+  iconSizeValues,
   StaticTable,
   type TableColumn,
 } from "@okta/odyssey-react-mui";
@@ -29,18 +30,44 @@ const storybookMeta: Meta<IconProps> = {
     name: {
       control: { type: "select" },
       options: Object.keys(iconDictionary),
+      description: "The name of the icon to render",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     size: {
-      options: ["small", "medium", "large"],
+      options: iconSizeValues,
       control: { type: "radio" },
+      defaultValue: "medium",
+      table: {
+        type: {
+          summary: iconSizeValues.join(" | "),
+        },
+      },
+      description: "The size of the icon",
     },
     ariaLabelledby: {
       control: "text",
+      description: "The element whose text describes the icon, if it exists",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     label: {
       control: "text",
+      description: "Text that describes the icon",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -83,10 +110,6 @@ const columns: TableColumn<IconData>[] = [
     Cell: ({ cell }) =>
       iconDictionary[cell.getValue<IconData["name"]>()].displayName,
     header: "Class Name",
-  },
-  {
-    accessorKey: "use",
-    header: "Use",
   },
 ];
 
