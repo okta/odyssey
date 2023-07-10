@@ -14,7 +14,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
 import {
   iconDictionary,
-  iconSizeValues,
   StaticTable,
   type TableColumn,
 } from "@okta/odyssey-react-mui";
