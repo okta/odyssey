@@ -10,16 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  Alert,
-  AlertColor,
-  AlertTitle,
-  AlertProps,
-  Link,
-  ScreenReaderText,
-} from "./";
+import { Alert, AlertColor, AlertTitle, AlertProps } from "@mui/material";
+import { Link } from "./Link";
+import { ScreenReaderText } from "./ScreenReaderText";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
+
+export const bannerRoleValues = ["status", "alert"] as const;
+export const bannerSeverityValues: AlertColor[] = [
+  "success",
+  "info",
+  "warning",
+  "error",
+];
 
 export type BannerProps = {
   /**
@@ -42,11 +45,11 @@ export type BannerProps = {
    * ("status" for something that dynamically updates, "alert" for errors, null for something
    * unchanging)
    */
-  role?: "status" | "alert";
+  role?: (typeof bannerRoleValues)[number];
   /**
    * Determine the color and icon of the alert
    */
-  severity: AlertColor;
+  severity: (typeof bannerSeverityValues)[number];
   /**
    * The text content of the alert
    */

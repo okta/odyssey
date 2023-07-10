@@ -23,6 +23,14 @@ import {
 
 import { Field } from "./Field";
 
+export const textFieldTypeValues = [
+  "email",
+  "number",
+  "tel",
+  "text",
+  "url",
+] as const;
+
 export type TextFieldProps = {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
@@ -93,7 +101,7 @@ export type TextFieldProps = {
   /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */
-  type?: "email" | "number" | "tel" | "text" | "url";
+  type?: (typeof textFieldTypeValues)[number];
   /**
    * The value of the `input` element, required for a controlled component.
    */

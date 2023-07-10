@@ -24,25 +24,67 @@ import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 import { screen } from "@storybook/testing-library";
 import type { PlaywrightProps } from "../storybookTypes";
+import { icons } from "../../../../.storybook/components/iconUtils";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {
   title: "MUI Components/Tabs",
   component: Tabs,
   argTypes: {
-    isDisabled: {
-      control: "boolean",
-      defaultValue: false,
+    children: {
+      control: "text",
+      description: "The content of the tab item",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
     },
     startIcon: {
-      control: "text",
-      defaultValue: null,
-    },
-    value: {
-      control: "text",
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
+      description: "An optional icon to display at the start of the tab item",
+      table: {
+        type: {
+          summary: "<Icon />",
+        },
+      },
     },
     label: {
       control: "text",
+      description: "The label text for the tab item",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
+    isDisabled: {
+      control: "boolean",
+      description: "If `true`, the tab item is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: false,
+      },
+    },
+    value: {
+      control: "text",
+      description: "The value associated with the tab item",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+  },
+  args: {
+    value: "stars",
+    label: "Stars",
+    children: "This is the tab content. This tab happens to be about stars.",
   },
   decorators: [MuiThemeDecorator],
 };

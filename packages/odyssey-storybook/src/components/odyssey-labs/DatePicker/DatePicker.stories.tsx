@@ -40,6 +40,7 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
     },
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;

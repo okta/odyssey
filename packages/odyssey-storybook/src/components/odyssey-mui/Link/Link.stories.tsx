@@ -17,7 +17,9 @@ import {
   InformationCircleFilledIcon,
   Link,
   LinkProps,
+  linkVariantValues,
 } from "@okta/odyssey-react-mui";
+import { icons } from "../../../../.storybook/components/iconUtils";
 
 export default {
   title: "MUI Components/Link",
@@ -25,22 +27,65 @@ export default {
   argTypes: {
     children: {
       control: "text",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+        defaultValue: "",
+      },
+    },
+    href: {
+      control: "text",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
     },
     icon: {
-      control: "object",
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
+      description: "An optional icon to display at the start of the Link",
+      table: {
+        type: {
+          summary: "<Icon />",
+        },
+        defaultValue: "",
+      },
     },
     rel: {
       control: "text",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
     },
     target: {
       control: "text",
-    },
-    onClick: {
-      action: true,
+      description:
+        "If set to `_blank`, the Link will display an external icon.",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
     },
     variant: {
       control: { type: "radio" },
-      options: ["default", "monochrome"],
+      options: linkVariantValues,
+      table: {
+        type: {
+          summary: linkVariantValues.join(" | "),
+        },
+        defaultValue: "default",
+      },
     },
   },
   decorators: [MuiThemeDecorator],

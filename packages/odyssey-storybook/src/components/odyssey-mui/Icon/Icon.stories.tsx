@@ -14,6 +14,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
 import {
   iconDictionary,
+  iconSizeValues,
   StaticTable,
   type TableColumn,
 } from "@okta/odyssey-react-mui";
@@ -48,10 +49,6 @@ const columns: TableColumn<IconData>[] = [
     Cell: ({ cell }) =>
       iconDictionary[cell.getValue<IconData["name"]>()].displayName,
     header: "Class Name",
-  },
-  {
-    accessorKey: "use",
-    header: "Use",
   },
 ];
 
