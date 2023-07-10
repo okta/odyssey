@@ -41,7 +41,7 @@ export type TextFieldProps = {
   /**
    * End `InputAdornment` for this component.
    */
-  endAdornment?: string | ReactElement<typeof Icon>;
+  endAdornment?: string | ReactElement;
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
