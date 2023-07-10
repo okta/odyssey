@@ -85,8 +85,11 @@ const Dialog = ({
         {title}
         <Button
           variant="floating"
+          size="small"
           onClick={onClose}
           startIcon={<CloseIcon />}
+          ariaLabel="Add crew"
+          text=""
         />
       </DialogTitle>
       <DialogContent dividers={isContentScrollable} ref={dialogContentRef}>

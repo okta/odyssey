@@ -29,6 +29,7 @@ declare module "@mui/material/Button" {
     primary: true;
     secondary: true;
     danger: true;
+    tertiary: true;
     text: false;
     contained: false;
     outlined: false;
