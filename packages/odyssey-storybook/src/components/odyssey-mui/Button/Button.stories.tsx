@@ -293,7 +293,6 @@ export const ButtonFullWidth: StoryObj<ButtonProps> = {
   args: {
     text: "Add crew",
     isFullWidth: true,
-    variant: "floating",
   },
   play: async ({ args, canvasElement, step }) => {
     interactWithButton({ canvasElement, step })({
