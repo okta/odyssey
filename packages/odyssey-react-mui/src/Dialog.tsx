@@ -88,7 +88,7 @@ const Dialog = ({
           size="small"
           onClick={onClose}
           startIcon={<CloseIcon />}
-          ariaLabel="Add crew"
+          ariaLabel="Close dialog"
           text=""
         />
       </DialogTitle>
