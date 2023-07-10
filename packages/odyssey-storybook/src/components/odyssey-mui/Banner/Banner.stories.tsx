@@ -10,7 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Banner, BannerProps } from "@okta/odyssey-react-mui";
+import {
+  Banner,
+  BannerProps,
+  bannerRoleValues,
+  bannerSeverityValues,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -24,25 +29,63 @@ const storybookMeta: Meta<typeof Banner> = {
   argTypes: {
     linkText: {
       control: "text",
+      description:
+        "If linkUrl is defined, this is the text of the link. If left blank, it defaults to 'Learn more'. Note that linkText does nothing if linkUrl is not defined",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     linkUrl: {
       control: "text",
+      description: "If defined, the alert will include a link to the URL",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     onClose: {
-      action: "closed",
+      control: null,
+      description:
+        "The function that's fired when the user clicks the close button. If undefined, the close button will not be shown",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
     },
     role: {
-      control: "radio",
-      options: ["status", undefined],
+      options: bannerRoleValues,
+      control: { type: "radio" },
+      description:
+        "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
+      table: {
+        type: {
+          summary: bannerRoleValues.join(" | "),
+        },
+      },
     },
     severity: {
-      control: "radio",
-      options: ["error", "info", "warning"],
-      defaultValue: "info",
+      options: bannerSeverityValues,
+      control: { type: "radio" },
+      description: "Determine the color and icon of the alert",
+      table: {
+        type: {
+          summary: bannerSeverityValues.join(" | "),
+        },
+      },
     },
     text: {
       control: "text",
-      defaultValue: "The mission to Sagittarius A is set for January 7.",
+      description: "The text content of the alert",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
@@ -51,18 +94,19 @@ const storybookMeta: Meta<typeof Banner> = {
     onClose: undefined,
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
 
-export const InfoBanner: StoryObj<BannerProps> = {
+export const Info: StoryObj<BannerProps> = {
   args: {
     severity: "info",
     text: "The mission to Sagittarius A is set for January 7.",
   },
 };
 
-export const ErrorBanner: StoryObj<BannerProps> = {
+export const Error: StoryObj<BannerProps> = {
   args: {
     role: "status",
     severity: "error",
@@ -70,7 +114,7 @@ export const ErrorBanner: StoryObj<BannerProps> = {
   },
 };
 
-export const WarningBanner: StoryObj<BannerProps> = {
+export const Warning: StoryObj<BannerProps> = {
   args: {
     role: "status",
     severity: "warning",
@@ -78,7 +122,7 @@ export const WarningBanner: StoryObj<BannerProps> = {
   },
 };
 
-export const BannerWithLink: StoryObj<BannerProps> = {
+export const Linked: StoryObj<BannerProps> = {
   args: {
     linkText: "View report",
     linkUrl: "#anchor",
@@ -96,7 +140,7 @@ export const BannerWithLink: StoryObj<BannerProps> = {
   },
 };
 
-export const DismissibleBanner: StoryObj<BannerProps> = {
+export const Dismissible: StoryObj<BannerProps> = {
   args: {
     onClose: jest.fn(),
   },

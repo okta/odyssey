@@ -37,7 +37,7 @@ const FieldLabel = ({
   const inputLabel = useMemo(
     () => (
       <MuiInputLabel htmlFor={inputId} id={id}>
-        {text}
+        <span>{text}</span>
         {isOptional && (
           <Typography variant="subtitle1">
             {t("fieldlabel.optional.text")}

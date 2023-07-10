@@ -12,6 +12,8 @@
 
 import { iconDictionary } from "./iconDictionary";
 
+export const iconSizeValues = ["small", "medium", "large"] as const;
+
 export type IconProps = {
   /*
    ** The element whose text describes the icon, if it exists
@@ -28,7 +30,7 @@ export type IconProps = {
   /*
    ** The size of the icon
    */
-  size: "small" | "medium" | "large";
+  size: (typeof iconSizeValues)[number];
 };
 
 /**
