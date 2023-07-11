@@ -173,10 +173,10 @@ export const Icons: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   args: {
     startIcon: <BugIcon />,
-    label: "Xenomorphs",
-    children: <ExampleTabContent label="Xenomorphs" />,
+    label: "Icon Tab",
+    children: <ExampleTabContent label="Icon Tab" />,
   },
   play: async ({ canvasElement, step }) => {
-    selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
+    selectTab({ canvasElement, step })("Tab Icon", "Icon Tab");
   },
 };

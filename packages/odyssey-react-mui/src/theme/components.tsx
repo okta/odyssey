@@ -1871,7 +1871,6 @@ export const components = (
 
           ...(ownerState.disabled && {
             color: odysseyTokens.TypographyColorDisabled,
-            pointerEvents: "none",
           }),
 
           ...(ownerState.wrapped && {
