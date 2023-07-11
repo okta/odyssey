@@ -13,7 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import {
-  FavoriteIcon,
+  BugIcon,
   TabItemProps,
   TabsProps,
   Tabs,
@@ -172,11 +172,11 @@ export const Disabled: StoryObj<TabItemProps> = {
 export const Icons: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   args: {
-    startIcon: <FavoriteIcon />,
-    label: "Icon Tab",
-    children: <ExampleTabContent label="Icon Tab" />,
+    startIcon: <BugIcon />,
+    label: "Xenomorphs",
+    children: <ExampleTabContent label="Xenomorphs" />,
   },
   play: async ({ canvasElement, step }) => {
-    selectTab({ canvasElement, step })("Tab Icon", "Icon Tab");
+    selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
   },
 };

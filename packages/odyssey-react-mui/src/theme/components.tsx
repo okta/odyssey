@@ -1855,21 +1855,23 @@ export const components = (
           minWidth: "unset",
           minHeight: "unset",
           padding: `${odysseyTokens.Spacing4} 0`,
+          fontFamily: odysseyTokens.TypographyFamilyHeading,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           overflow: "visible",
-
-          ...(ownerState.selected == true && {
-            color: odysseyTokens.TypographyColorBody,
-            fontWeight: odysseyTokens.TypographyWeightBodyBold,
-
-            "&:hover": {
-              color: odysseyTokens.TypographyColorAction,
-            },
-          }),
 
           ...(ownerState.textColor === "inherit" && {
             color: "inherit",
             opacity: 1,
+          }),
+
+          ...(ownerState.selected == true && {
+            color: odysseyTokens.TypographyColorAction,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
+          }),
+
+          ...(ownerState.disabled && {
+            color: odysseyTokens.TypographyColorDisabled,
+            pointerEvents: "none",
           }),
 
           ...(ownerState.wrapped && {
@@ -1892,14 +1894,6 @@ export const components = (
             borderStyle: odysseyTokens.BorderStyleMain,
             borderColor: odysseyTokens.PalettePrimaryMain,
             borderRadius: odysseyTokens.BorderRadiusMain,
-          },
-
-          "&.Mui-disabled": {
-            cursor: "not-allowed",
-            pointerEvents: "unset",
-            "&:hover": {
-              color: odysseyTokens.TypographyColorDisabled,
-            },
           },
 
           "& .MuiTab-iconWrapper": {
