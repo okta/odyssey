@@ -13,6 +13,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, waitFor, screen } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
+import { expect } from "@storybook/jest";
 
 const optionsArray: SelectProps["options"] = [
   "Earth",
@@ -245,6 +248,25 @@ const Template: StoryObj<SelectProps> = {
 
 export const Default: StoryObj<SelectProps> = {
   ...Template,
+  play: async ({ canvasElement, step }) => {
+    await step("Select Earth from the listbox", async () => {
+      const comboBoxElement = canvasElement.querySelector(
+        '[aria-haspopup="listbox"]'
+      );
+      if (comboBoxElement) {
+        userEvent.click(comboBoxElement);
+        const listboxElement = screen.getByRole("listbox");
+        expect(listboxElement).toBeInTheDocument();
+        const listItem = listboxElement.children[0];
+        userEvent.click(listItem);
+        userEvent.tab();
+        await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
+        const inputElement = canvasElement.querySelector("input");
+        expect(inputElement?.value).toBe("Earth");
+        await waitFor(() => axeRun("Select Default"));
+      }
+    });
+  },
 };
 Default.args = {};
 
@@ -259,6 +281,11 @@ export const Error: StoryObj<SelectProps> = {
   ...Template,
   args: {
     errorMessage: "Select your destination.",
+  },
+  play: async ({ step }) => {
+    await step("Check for a11y errors on Select Error", async () => {
+      await waitFor(() => axeRun("Select Error"));
+    });
   },
 };
 
@@ -296,5 +323,26 @@ export const MultiSelect: StoryObj<SelectProps> = {
   ...Template,
   args: {
     isMultiSelect: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Select Multiple items from the listbox", async () => {
+      const comboBoxElement = canvasElement.querySelector(
+        '[aria-haspopup="listbox"]'
+      );
+      if (comboBoxElement) {
+        userEvent.click(comboBoxElement);
+        const listboxElement = screen.getByRole("listbox");
+        expect(listboxElement).toBeInTheDocument();
+
+        userEvent.click(listboxElement.children[0]);
+        userEvent.click(listboxElement.children[1]);
+        userEvent.tab();
+        await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
+        const inputElement = canvasElement.querySelector("input");
+        expect(inputElement?.value).toBe("Earth,Mars");
+        userEvent.click(canvasElement);
+        await waitFor(() => axeRun("Select Multiple"));
+      }
+    });
   },
 };
