@@ -13,21 +13,23 @@
 import type { StoryObj } from "@storybook/react";
 import {
   Button,
-  ListItemText,
   MenuItem,
-  MenuList,
-  MuiThemeProvider,
   OdysseyThemeProvider,
-  Paper,
   Radio,
   RadioGroup,
   TextField,
-  ThemeOptions,
   DesignTokensOverride,
   createOdysseyMuiTheme,
-  createTheme,
   deepmerge,
 } from "@okta/odyssey-react-mui";
+import {
+  ListItemText,
+  MenuList,
+  ThemeProvider as MuiThemeProvider,
+  Paper,
+  ThemeOptions,
+  createTheme,
+} from "@mui/material";
 
 import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator";
 import { useMemo } from "react";

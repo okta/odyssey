@@ -12,11 +12,11 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
-  InputAdornment,
   TextField,
   TextFieldProps,
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
+import { InputAdornment } from "@mui/material";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 

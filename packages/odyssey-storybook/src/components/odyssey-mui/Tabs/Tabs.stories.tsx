@@ -13,7 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import {
-  FavoriteIcon,
+  GlobeIcon,
   TabItemProps,
   TabsProps,
   Tabs,
@@ -172,7 +172,7 @@ export const Disabled: StoryObj<TabItemProps> = {
 export const Icons: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   args: {
-    startIcon: <FavoriteIcon />,
+    startIcon: <GlobeIcon />,
     label: "Icon Tab",
     children: <ExampleTabContent label="Icon Tab" />,
   },

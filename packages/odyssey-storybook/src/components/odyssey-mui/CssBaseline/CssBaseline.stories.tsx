@@ -16,7 +16,7 @@ import {
   CssBaselineProps,
   ScopedCssBaseline,
   ScopedCssBaselineProps,
-} from "@okta/odyssey-react-mui";
+} from "@mui/material";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<CssBaselineProps> = {

@@ -11,12 +11,8 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  Button,
-  Dialog,
-  DialogContentText,
-  DialogProps,
-} from "@okta/odyssey-react-mui";
+import { Button, Dialog, DialogProps } from "@okta/odyssey-react-mui";
+import { DialogContentText } from "@mui/material";
 import { useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
