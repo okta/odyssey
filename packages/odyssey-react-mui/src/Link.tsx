@@ -12,7 +12,7 @@
 
 import { forwardRef, memo, ReactElement } from "react";
 
-import { ExternalLinkIcon } from "./iconDictionary";
+import { ExternalLinkIcon } from "./icons";
 
 import { Link as MuiLink } from "@mui/material";
 

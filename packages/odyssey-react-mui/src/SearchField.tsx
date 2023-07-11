@@ -20,7 +20,7 @@ import {
   useCallback,
 } from "react";
 
-import { SearchIcon } from "./iconDictionary";
+import { SearchIcon } from "./icons";
 import { Field } from "./Field";
 
 export type SearchFieldProps = {

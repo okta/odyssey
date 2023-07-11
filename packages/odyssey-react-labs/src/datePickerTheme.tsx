@@ -11,14 +11,13 @@
  */
 
 import { CSSInterpolation } from "@mui/material/styles";
+import { createOdysseyMuiTheme, ThemeOptions } from "@okta/odyssey-react-mui";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  CalendarIcon,
   ChevronDownIcon,
-  createOdysseyMuiTheme,
-  ThemeOptions,
-} from "@okta/odyssey-react-mui";
+  CalendarIcon,
+} from "@okta/odyssey-react-mui/dist/src/icons";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 const popupSpacingValue = 5;

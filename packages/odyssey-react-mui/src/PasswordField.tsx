@@ -20,7 +20,7 @@ import {
   useState,
 } from "react";
 
-import { ShowIcon, HideIcon } from "./iconDictionary";
+import { ShowIcon, HideIcon } from "./icons";
 import { IconButton } from "@mui/material";
 import { Field } from "./Field";
 

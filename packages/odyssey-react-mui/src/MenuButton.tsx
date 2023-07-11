@@ -13,13 +13,13 @@
 import {
   Button,
   buttonVariantValues,
-  ChevronDownIcon,
   Divider,
   ListSubheader,
   Menu,
   MenuItem,
   useUniqueId,
 } from "./";
+import { ChevronDownIcon } from "./icons";
 import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
