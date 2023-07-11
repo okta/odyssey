@@ -1855,22 +1855,32 @@ export const components = (
           minWidth: "unset",
           minHeight: "unset",
           padding: `${odysseyTokens.Spacing4} 0`,
-          lineHeight: odysseyTokens.TypographyLineHeightBody,
+          lineHeight: odysseyTokens.TypographyLineHeightUi,
           overflow: "visible",
+
           ...(ownerState.selected == true && {
             color: odysseyTokens.TypographyColorBody,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
+
+            "&:hover": {
+              color: odysseyTokens.TypographyColorAction,
+            },
           }),
+
           ...(ownerState.textColor === "inherit" && {
             color: "inherit",
             opacity: 1,
           }),
+
           ...(ownerState.wrapped && {
             fontSize: odysseyTokens.TypographySizeCaption,
             lineHeight: theme.typography.subtitle1.lineHeight,
           }),
+
           "&:hover": {
             color: odysseyTokens.TypographyColorAction,
           },
+
           "&:focus-visible::before, &.Mui-focusVisible::before": {
             content: "''",
             position: "absolute",
@@ -1883,13 +1893,7 @@ export const components = (
             borderColor: odysseyTokens.PalettePrimaryMain,
             borderRadius: odysseyTokens.BorderRadiusMain,
           },
-          "&.Mui-selected": {
-            color: odysseyTokens.TypographyColorBody,
-            fontWeight: odysseyTokens.TypographyWeightBodyBold,
-            "&:hover": {
-              color: odysseyTokens.TypographyColorAction,
-            },
-          },
+
           "&.Mui-disabled": {
             cursor: "not-allowed",
             pointerEvents: "unset",
@@ -1897,6 +1901,7 @@ export const components = (
               color: odysseyTokens.TypographyColorDisabled,
             },
           },
+
           "& .MuiTab-iconWrapper": {
             marginInlineEnd: odysseyTokens.Spacing1,
           },
@@ -2133,6 +2138,9 @@ export const components = (
       },
     },
     MuiTabs: {
+      defaultProps: {
+        textColor: "inherit",
+      },
       styleOverrides: {
         root: {
           minHeight: "unset",
