@@ -22,6 +22,7 @@ export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonVariantValues = [
   "primary",
   "secondary",
+  "tertiary",
   "danger",
   "floating",
 ] as const;

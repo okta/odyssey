@@ -196,6 +196,23 @@ export const ButtonPrimary: StoryObj<ButtonProps> = {
   },
 };
 
+export const ButtonPrimaryDisabled: StoryObj<ButtonProps> = {
+  name: "Primary, Disabled",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Disabled buttons should be paired with a Tooltip to provide additional context. A tooltip can be added by setting the `tooltipText` prop on the button to a string.",
+      },
+    },
+  },
+  args: {
+    text: "Add crew",
+    isDisabled: true,
+    variant: "primary",
+  },
+};
+
 export const ButtonSecondary: StoryObj<ButtonProps> = {
   name: "Secondary",
   args: {
@@ -208,6 +225,39 @@ export const ButtonSecondary: StoryObj<ButtonProps> = {
       actionName: "Button Secondary",
       hoverState: false,
     });
+  },
+};
+
+export const ButtonSecondaryDisabled: StoryObj<ButtonProps> = {
+  name: "Secondary, Disabled",
+  args: {
+    text: "Add crew",
+    isDisabled: true,
+    variant: "secondary",
+  },
+};
+
+export const ButtonTertiary: StoryObj<ButtonProps> = {
+  name: "Tertiary",
+  args: {
+    text: "Add crew",
+    variant: "tertiary",
+  },
+  play: async ({ args, canvasElement, step }) => {
+    interactWithButton({ canvasElement, step })({
+      args,
+      actionName: "Button Tertiary",
+      hoverState: false,
+    });
+  },
+};
+
+export const ButtonTertiaryDisabled: StoryObj<ButtonProps> = {
+  name: "Tertiary, Disabled",
+  args: {
+    text: "Add crew",
+    isDisabled: true,
+    variant: "tertiary",
   },
 };
 
@@ -226,6 +276,15 @@ export const ButtonDanger: StoryObj<ButtonProps> = {
   },
 };
 
+export const ButtonDangerDisabled: StoryObj<ButtonProps> = {
+  name: "Danger, Disabled",
+  args: {
+    text: "Add crew",
+    isDisabled: true,
+    variant: "danger",
+  },
+};
+
 export const ButtonFloating: StoryObj<ButtonProps> = {
   name: "Floating",
   args: {
@@ -238,6 +297,15 @@ export const ButtonFloating: StoryObj<ButtonProps> = {
       actionName: "Button Floating",
       hoverState: false,
     });
+  },
+};
+
+export const ButtonFloatingDisabled: StoryObj<ButtonProps> = {
+  name: "Floating, Disabled",
+  args: {
+    text: "Add crew",
+    isDisabled: true,
+    variant: "floating",
   },
 };
 
@@ -300,22 +368,6 @@ export const ButtonFullWidth: StoryObj<ButtonProps> = {
       actionName: "Button Fullwidth",
       hoverState: true,
     });
-  },
-};
-
-export const ButtonPrimaryDisabled: StoryObj<ButtonProps> = {
-  name: "Disabled",
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Disabled buttons should be paired with a Tooltip to provide additional context. A tooltip can be added by setting the `tooltipText` prop on the button to a string.",
-      },
-    },
-  },
-  args: {
-    text: "Add crew",
-    isDisabled: true,
   },
 };
 
