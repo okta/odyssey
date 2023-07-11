@@ -12,7 +12,7 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, useContext, useMemo } from "react";
+import { memo, ReactElement, useCallback, useContext } from "react";
 
 import { Icon } from "./Icon";
 import { MuiPropsContext } from "./MuiPropsContext";
@@ -22,6 +22,7 @@ export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonVariantValues = [
   "primary",
   "secondary",
+  "tertiary",
   "danger",
   "floating",
 ] as const;
@@ -98,8 +99,8 @@ const Button = ({
 }: ButtonProps) => {
   const muiProps = useContext(MuiPropsContext);
 
-  const button = useMemo(
-    () => (
+  const renderButton = useCallback(
+    (muiProps) => (
       <MuiButton
         {...muiProps}
         aria-label={ariaLabel}
@@ -122,7 +123,6 @@ const Button = ({
       id,
       isDisabled,
       isFullWidth,
-      muiProps,
       onClick,
       size,
       startIcon,
@@ -137,11 +137,12 @@ const Button = ({
   return (
     <>
       {tooltipText && (
-        <Tooltip ariaType="description" text={tooltipText}>
-          {button}
+        <Tooltip ariaType="description" placement="top" text={tooltipText}>
+          <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
         </Tooltip>
       )}
-      {!tooltipText && button}
+
+      {!tooltipText && renderButton(muiProps)}
     </>
   );
 };
