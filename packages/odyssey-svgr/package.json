@@ -16,8 +16,8 @@
     "@babel/generator": "^7.19.0",
     "@babel/types": "^7.19.0",
     "@okta/odyssey-typescript": "workspace:*",
-    "@svgr/babel-plugin-transform-svg-component": "^7.0.0",
-    "@svgr/core": "^7.0.0",
-    "typescript": "^4.9.4"
+    "@svgr/babel-plugin-transform-svg-component": "^8.0.0",
+    "@svgr/core": "^8.0.0",
+    "typescript": "^5.1.6"
   }
 }
