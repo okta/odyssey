@@ -855,7 +855,7 @@ export const components = (
 
           del: {
             display: "inline-block",
-            backgroundColor: odysseyTokens.HueRed100,
+            backgroundColor: odysseyTokens.PaletteDangerHighlight,
 
             "&::before, &::after": {
               clip: "rect(0 0 0 0)",
@@ -948,7 +948,7 @@ export const components = (
 
           ins: {
             display: "inline-block",
-            backgroundColor: odysseyTokens.HueGreen100,
+            backgroundColor: odysseyTokens.PaletteSuccessHighlight,
 
             "&::before, &::after": {
               clip: "rect(0 0 0 0)",
@@ -987,7 +987,7 @@ export const components = (
           },
 
           mark: {
-            backgroundColor: odysseyTokens.HueYellow100,
+            backgroundColor: odysseyTokens.PaletteWarningHighlight,
 
             "&::before, &::after": {
               clip: "rect(0 0 0 0)",
