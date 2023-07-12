@@ -1855,22 +1855,33 @@ export const components = (
           minWidth: "unset",
           minHeight: "unset",
           padding: `${odysseyTokens.Spacing4} 0`,
-          lineHeight: odysseyTokens.TypographyLineHeightBody,
+          fontFamily: odysseyTokens.TypographyFamilyHeading,
+          lineHeight: odysseyTokens.TypographyLineHeightUi,
           overflow: "visible",
-          ...(ownerState.selected == true && {
-            color: odysseyTokens.TypographyColorBody,
-          }),
+
           ...(ownerState.textColor === "inherit" && {
             color: "inherit",
             opacity: 1,
           }),
+
+          ...(ownerState.selected == true && {
+            color: odysseyTokens.TypographyColorAction,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
+          }),
+
+          ...(ownerState.disabled && {
+            color: odysseyTokens.TypographyColorDisabled,
+          }),
+
           ...(ownerState.wrapped && {
             fontSize: odysseyTokens.TypographySizeCaption,
             lineHeight: theme.typography.subtitle1.lineHeight,
           }),
+
           "&:hover": {
             color: odysseyTokens.TypographyColorAction,
           },
+
           "&:focus-visible::before, &.Mui-focusVisible::before": {
             content: "''",
             position: "absolute",
@@ -1883,20 +1894,7 @@ export const components = (
             borderColor: odysseyTokens.PalettePrimaryMain,
             borderRadius: odysseyTokens.BorderRadiusMain,
           },
-          "&.Mui-selected": {
-            color: odysseyTokens.TypographyColorBody,
-            fontWeight: odysseyTokens.TypographyWeightBodyBold,
-            "&:hover": {
-              color: odysseyTokens.TypographyColorAction,
-            },
-          },
-          "&.Mui-disabled": {
-            cursor: "not-allowed",
-            pointerEvents: "unset",
-            "&:hover": {
-              color: odysseyTokens.TypographyColorDisabled,
-            },
-          },
+
           "& .MuiTab-iconWrapper": {
             marginInlineEnd: odysseyTokens.Spacing1,
           },
@@ -2133,6 +2131,9 @@ export const components = (
       },
     },
     MuiTabs: {
+      defaultProps: {
+        textColor: "inherit",
+      },
       styleOverrides: {
         root: {
           minHeight: "unset",
