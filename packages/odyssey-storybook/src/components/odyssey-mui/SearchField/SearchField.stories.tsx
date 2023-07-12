@@ -21,33 +21,110 @@ const storybookMeta: Meta<SearchFieldProps> = {
   argTypes: {
     autoCompleteType: {
       control: "text",
+      description:
+        "This prop helps users to fill forms faster, especially on mobile devices. The name can be confusing, as it's more like an autofill. You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill)",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     hasInitialFocus: {
       control: "boolean",
+      description: "If `true`, the component will receive focus automatically",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isDisabled: {
       control: "boolean",
+      description: "If `true`, the component is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     id: {
       control: "text",
+      description: "The id of the `input` element",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     label: {
       control: "text",
+      description:
+        "This label won't show up visually, but it's required for accessibility",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     onBlur: {
       control: "function",
+      description: "Callback fired when the `input` element loses focus",
+      table: {
+        type: {
+          summary: "function",
+        },
+        defaultValue: "",
+      },
+    },
+    onClear: {
+      control: "function",
+      description: "Callback fired when the clear button is pressed",
+      table: {
+        type: {
+          summary: "function",
+        },
+        defaultValue: "",
+      },
     },
     onChange: {
       control: "function",
+      description: "Callback fired when the value is changed",
+      table: {
+        type: {
+          summary: "function",
+        },
+        defaultValue: "",
+      },
     },
     onFocus: {
       control: "function",
+      description: "Callback fired when the `input` element gets focus",
+      table: {
+        type: {
+          summary: "function",
+        },
+        defaultValue: "",
+      },
     },
     placeholder: {
       control: "text",
+      description:
+        "The short hint displayed in the `input` before the user enters a value",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     value: {
       control: "text",
+      description:
+        "The value of the `input` element, required for a controlled component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
@@ -55,6 +132,7 @@ const storybookMeta: Meta<SearchFieldProps> = {
     placeholder: "Search planets",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;

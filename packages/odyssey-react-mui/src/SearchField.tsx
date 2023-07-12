@@ -124,6 +124,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
               <InputAdornment position="end">
                 <Button
                   ariaLabel="Clear"
+                  isDisabled={isDisabled}
                   onClick={onClear}
                   size="small"
                   startIcon={<CloseCircleFilledIcon />}
@@ -154,6 +155,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       [
         autoCompleteType,
         hasInitialFocus,
+        isDisabled,
         onChange,
         onFocus,
         onBlur,
