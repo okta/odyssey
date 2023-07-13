@@ -1174,6 +1174,10 @@ export const components = (
             paddingBlock: odysseyTokens.Spacing6,
             color: odysseyTokens.HueNeutral600,
           }),
+
+          ["&:last-child"]: {
+            paddingBlockEnd: odysseyTokens.Spacing6,
+          },
         }),
       },
     },
