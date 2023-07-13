@@ -302,6 +302,8 @@ export const datePickerTheme: ThemeOptions = {
     },
     PrivatePickersYear: {
       styleOverrides: {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error TEMP. Arrays are valid styles return values for Emotion.
         button: ({ theme }) => [
           yearStyles.default({ theme }),
           {
