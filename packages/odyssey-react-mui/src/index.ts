@@ -24,7 +24,6 @@ export {
   FormGroup,
   FormHelperText,
   FormLabel,
-  IconButton,
   /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextField`. */
   InputAdornment,
   /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextField`. */
@@ -60,7 +59,6 @@ export type {
   FormGroupProps,
   FormHelperTextProps,
   FormLabelProps,
-  IconButtonProps,
   /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextFieldProps`. */
   InputAdornmentProps,
   /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextFieldProps`. */
