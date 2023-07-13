@@ -370,13 +370,13 @@ export const components = (
 
             "&:hover": {
               backgroundColor: odysseyTokens.HueBlue200,
-              borderColor: odysseyTokens.PalettePrimaryMain,
+              borderColor: odysseyTokens.BorderColorPrimaryMain,
               color: odysseyTokens.HueBlue800,
             },
 
             "&:active": {
               backgroundColor: odysseyTokens.PalettePrimaryLight,
-              borderColor: odysseyTokens.PalettePrimaryMain,
+              borderColor: odysseyTokens.BorderColorPrimaryMain,
               color: odysseyTokens.HueBlue800,
             },
 
@@ -439,13 +439,12 @@ export const components = (
             borderColor: "transparent",
 
             "&:hover": {
-              backgroundColor: odysseyTokens.HueBlue100,
+              backgroundColor: odysseyTokens.HueNeutral100,
               borderColor: "transparent",
             },
 
             "&:active": {
-              backgroundColor: odysseyTokens.PalettePrimaryLight,
-              color: odysseyTokens.HueBlue800,
+              backgroundColor: odysseyTokens.HueNeutral200,
             },
 
             "&:disabled": {
