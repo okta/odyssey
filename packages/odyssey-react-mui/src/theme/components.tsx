@@ -1143,6 +1143,7 @@ export const components = (
       styleOverrides: {
         paper: {
           maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} + (${odysseyTokens.Spacing6} * 2))`,
+          borderRadius: odysseyTokens.BorderRadiusOuter,
           boxShadow: "none",
           filter:
             "drop-shadow(0px 1px 4px rgba(29, 29, 33, 0.08)) drop-shadow(0px 4px 10px rgba(29, 29, 33, 0.08)) drop-shadow(0px 8px 30px rgba(29, 29, 33, 0.1))",
@@ -1154,7 +1155,7 @@ export const components = (
         root: {
           flexWrap: "wrap",
           gap: odysseyTokens.Spacing2,
-          paddingBlockStart: odysseyTokens.Spacing4,
+          paddingBlockStart: odysseyTokens.Spacing6,
           paddingBlockEnd: odysseyTokens.Spacing6,
           paddingInline: odysseyTokens.Spacing6,
 
@@ -1167,29 +1168,21 @@ export const components = (
     MuiDialogContent: {
       styleOverrides: {
         root: ({ ownerState }) => ({
-          padding: 0,
-          paddingBlock: odysseyTokens.Spacing4,
+          paddingBlock: 0,
           paddingInline: odysseyTokens.Spacing6,
 
-          "&:last-child": {
-            paddingBlockEnd: odysseyTokens.Spacing6,
-          },
-
-          ...(ownerState.dividers === false && {
-            [`& + .${dialogActionsClasses.root}`]: {
-              paddingBlockStart: odysseyTokens.Spacing4,
-            },
+          ...(ownerState.dividers === true && {
+            paddingBlock: odysseyTokens.Spacing6,
+            color: odysseyTokens.HueNeutral600,
           }),
         }),
       },
     },
     MuiDialogContentText: {
-      defaultProps: {
-        color: "text.primary",
-      },
       styleOverrides: {
         root: {
           marginBlockEnd: odysseyTokens.Spacing5,
+          color: odysseyTokens.HueNeutral700,
 
           "&:last-child": {
             marginBlockEnd: "0",
@@ -1212,6 +1205,7 @@ export const components = (
           paddingBlockStart: odysseyTokens.Spacing5,
           paddingBlockEnd: odysseyTokens.Spacing4,
           paddingInline: odysseyTokens.Spacing6,
+          fontFamily: odysseyTokens.TypographyFamilyHeading,
         },
       },
     },

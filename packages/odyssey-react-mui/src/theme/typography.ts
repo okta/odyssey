@@ -26,12 +26,12 @@ export const typography = (
     fontWeightMedium: Number(odysseyTokens.TypographyWeightHeading),
     fontWeightBold: Number(odysseyTokens.TypographyWeightHeadingBold),
     allVariants: {
-      fontFamily: odysseyTokens.TypographyFamilyBody,
       fontFeatureSettings: "'lnum', 'pnum'",
       fontVariant: "normal",
       letterSpacing: 0,
     },
     h1: {
+      fontFamily: odysseyTokens.TypographyFamilyHeading,
       color: odysseyTokens.TypographyColorHeading,
       fontWeight: Number(odysseyTokens.TypographyWeightHeading),
       fontSize: odysseyTokens.TypographySizeHeading1,
@@ -39,6 +39,7 @@ export const typography = (
       marginBottom: odysseyTokens.Spacing2,
     },
     h2: {
+      fontFamily: odysseyTokens.TypographyFamilyHeading,
       color: odysseyTokens.TypographyColorHeading,
       fontWeight: Number(odysseyTokens.TypographyWeightHeading),
       fontSize: odysseyTokens.TypographySizeHeading2,
@@ -46,6 +47,7 @@ export const typography = (
       marginBottom: odysseyTokens.Spacing2,
     },
     h3: {
+      fontFamily: odysseyTokens.TypographyFamilyHeading,
       color: odysseyTokens.TypographyColorHeading,
       fontWeight: Number(odysseyTokens.TypographyWeightHeading),
       fontSize: odysseyTokens.TypographySizeHeading3,
@@ -53,6 +55,7 @@ export const typography = (
       marginBottom: odysseyTokens.Spacing2,
     },
     h4: {
+      fontFamily: odysseyTokens.TypographyFamilyHeading,
       color: odysseyTokens.TypographyColorHeading,
       fontWeight: Number(odysseyTokens.TypographyWeightHeading),
       fontSize: odysseyTokens.TypographySizeHeading4,
@@ -60,6 +63,7 @@ export const typography = (
       marginBottom: odysseyTokens.Spacing2,
     },
     h5: {
+      fontFamily: odysseyTokens.TypographyFamilyHeading,
       color: odysseyTokens.TypographyColorHeading,
       fontWeight: Number(odysseyTokens.TypographyWeightHeading),
       fontSize: odysseyTokens.TypographySizeHeading5,
@@ -67,6 +71,7 @@ export const typography = (
       marginBottom: odysseyTokens.Spacing2,
     },
     h6: {
+      fontFamily: odysseyTokens.TypographyFamilyHeading,
       color: odysseyTokens.TypographyColorHeading,
       fontWeight: Number(odysseyTokens.TypographyWeightHeading),
       fontSize: odysseyTokens.TypographyScale2,
@@ -112,6 +117,7 @@ export const typography = (
     },
     legend: {
       padding: 0,
+      fontFamily: odysseyTokens.TypographyFamilyHeading,
       fontWeight: Number(odysseyTokens.TypographyWeightHeading),
       fontSize: odysseyTokens.TypographySizeHeading5,
       lineHeight: odysseyTokens.TypographyLineHeightHeading5,
