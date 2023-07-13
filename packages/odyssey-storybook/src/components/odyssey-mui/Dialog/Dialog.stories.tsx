@@ -14,6 +14,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Button, Dialog, DialogProps } from "@okta/odyssey-react-mui";
 import { DialogContentText } from "@mui/material";
 import { useState } from "react";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -88,11 +90,15 @@ const storybookMeta: Meta<DialogProps> = {
         },
       },
     },
+    ariaLabel: {
+      control: "text",
+    },
   },
   args: {
     children:
       "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     title: "Initiate self-destruct protocol",
+    ariaLabel: "close",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -144,6 +150,16 @@ export const Default: StoryObj<DialogProps> = {
     children:
       "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     title: "Initiate self-destruct protocol",
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    await step("open Default Dialog", async () => {
+      const buttonElement = canvas.getByText("Open dialog");
+      userEvent.click(buttonElement);
+      await waitFor(() => {
+        axeRun("Default Dialog");
+      });
+    });
   },
 };
 

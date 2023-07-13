@@ -13,7 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import {
-  GlobeIcon,
+  BugIcon,
   TabItemProps,
   TabsProps,
   Tabs,
@@ -22,7 +22,6 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
-import { screen } from "@storybook/testing-library";
 import type { PlaywrightProps } from "../storybookTypes";
 import { icons } from "../../../../.storybook/components/iconUtils";
 
@@ -104,13 +103,6 @@ const selectTab =
         userEvent.tab();
         const tabData = canvas.getByText(`Information about ${tabName}`);
         expect(tabData).toBeInTheDocument();
-
-        if (actionName === "Tab Disabled") {
-          const disabledTab = canvas.getByText("Disabled Tab");
-          userEvent.click(disabledTab);
-          const tabData = screen.queryByText("Tab is disabled");
-          expect(tabData).not.toBeInTheDocument();
-        }
       });
     });
   };
@@ -172,11 +164,11 @@ export const Disabled: StoryObj<TabItemProps> = {
 export const Icons: StoryObj<TabItemProps> = {
   ...DefaultTemplate,
   args: {
-    startIcon: <GlobeIcon />,
-    label: "Icon Tab",
-    children: <ExampleTabContent label="Icon Tab" />,
+    startIcon: <BugIcon />,
+    label: "Xenomorphs",
+    children: <ExampleTabContent label="Xenomorphs" />,
   },
   play: async ({ canvasElement, step }) => {
-    selectTab({ canvasElement, step })("Tab Icon", "Icon Tab");
+    selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
   },
 };

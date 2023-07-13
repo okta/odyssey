@@ -29,6 +29,9 @@ import {
 } from "@mui/material";
 import { icons } from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
+import type { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<MenuButtonProps> = {
   title: "MUI Components/Menu Button",
@@ -107,6 +110,19 @@ const storybookMeta: Meta<MenuButtonProps> = {
 
 export default storybookMeta;
 
+const clickMenuButton =
+  ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) =>
+  async (args: MenuButtonProps, actionName: string) => {
+    const canvas = within(canvasElement);
+    await step("open menu button", async () => {
+      const buttonElement = canvas.getByText(args.buttonLabel || "");
+      userEvent.click(buttonElement);
+      await waitFor(() => {
+        axeRun(actionName);
+      });
+    });
+  };
+
 export const Simple: StoryObj<MenuButtonProps> = {
   args: {
     buttonLabel: "More actions",
@@ -115,6 +131,9 @@ export const Simple: StoryObj<MenuButtonProps> = {
       <MenuItem key="2">Edit configuration</MenuItem>,
       <MenuItem key="3">Launch</MenuItem>,
     ],
+  },
+  play: async ({ args, canvasElement, step }) => {
+    clickMenuButton({ canvasElement, step })(args, "Menu Button Simple");
   },
 };
 
@@ -141,6 +160,9 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
       </MenuItem>,
     ],
   },
+  play: async ({ args, canvasElement, step }) => {
+    clickMenuButton({ canvasElement, step })(args, "Menu Button Action Icons");
+  },
 };
 
 export const ButtonVariant: StoryObj<MenuButtonProps> = {
@@ -159,13 +181,13 @@ export const Groupings: StoryObj<MenuButtonProps> = {
   args: {
     buttonLabel: "More actions",
     children: [
-      <ListSubheader>Crew</ListSubheader>,
+      <ListSubheader key="sh1">Crew</ListSubheader>,
       <MenuItem key="1">Assign captain</MenuItem>,
       <MenuItem key="2">View roster</MenuItem>,
-      <ListSubheader>Ship</ListSubheader>,
+      <ListSubheader key="sh2">Ship</ListSubheader>,
       <MenuItem key="3">Configure thrusters</MenuItem>,
       <MenuItem key="4">View cargo</MenuItem>,
-      <Divider />,
+      <Divider key="div2" />,
       <MenuItem key="5">Logout</MenuItem>,
     ],
   },
@@ -181,6 +203,9 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
         Jettison cargo
       </MenuItem>,
     ],
+  },
+  play: async ({ args, canvasElement, step }) => {
+    clickMenuButton({ canvasElement, step })(args, "Menu Button Destructive");
   },
 };
 

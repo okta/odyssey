@@ -89,3 +89,18 @@ The following keys can have their values overriden:
 - `severity.info`
 - `severity.error`
 - `toast.close.text`
+
+## Passing the language from the Monolith
+
+```
+import { getOktaLocale } from '@okta/ui-libraries-monolith';
+
+<OdysseyProvider languageCode={getOktaLocale()}>
+  <CssBaseline>
+
+    // Add code here
+
+  </CssBaseline>
+</OdysseyProvider>
+
+```
