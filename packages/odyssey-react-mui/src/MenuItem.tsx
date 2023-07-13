@@ -62,7 +62,7 @@ const MenuItem = ({
 }: MenuItemProps) => {
   const { closeMenu } = useContext(MenuContext);
 
-  const onClick = useCallback<MuiMenuItemProps["onClick"]>(
+  const onClick = useCallback<NonNullable<MuiMenuItemProps["onClick"]>>(
     (event) => {
       onClickProp?.(event);
       closeMenu();
