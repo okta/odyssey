@@ -10,8 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef, memo, ReactElement } from "react";
-
+import { memo, ReactElement } from "react";
 import { ExternalLinkIcon } from "./iconDictionary";
 
 import { Link as MuiLink } from "@mui/material";
@@ -27,20 +26,18 @@ export type LinkProps = {
   variant?: (typeof linkVariantValues)[number];
 };
 
-const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ icon, children, target, variant, href, rel }, ref) => (
-    <MuiLink href={href} ref={ref} rel={rel} target={target} variant={variant}>
-      {icon && <span className="Link-icon">{icon}</span>}
+const Link = ({ icon, children, target, variant, href, rel }: LinkProps) => (
+  <MuiLink href={href} rel={rel} target={target} variant={variant}>
+    {icon && <span className="Link-icon">{icon}</span>}
 
-      {children}
+    {children}
 
-      {target === "_blank" && (
-        <span className="Link-indicator" role="presentation">
-          <ExternalLinkIcon />
-        </span>
-      )}
-    </MuiLink>
-  )
+    {target === "_blank" && (
+      <span className="Link-indicator" role="presentation">
+        <ExternalLinkIcon />
+      </span>
+    )}
+  </MuiLink>
 );
 
 const MemoizedLink = memo(Link);

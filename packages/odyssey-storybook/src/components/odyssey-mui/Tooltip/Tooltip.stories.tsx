@@ -14,6 +14,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
   DownloadIcon,
+  Tag,
   Tooltip,
   TooltipProps,
 } from "@okta/odyssey-react-mui";
@@ -145,16 +146,19 @@ export const Placement: StoryObj<TooltipProps> = {
     return (
       <>
         <Tooltip text="Top" placement="top" ariaType="label">
-          <Button variant="primary" text="Top" />
+          <Tag label="Bow" />
         </Tooltip>
-        <Tooltip text="Right" placement="right" ariaType="label">
-          <Button variant="primary" text="Right" />
-        </Tooltip>
-        <Tooltip text="Bottom" placement="bottom" ariaType="label">
-          <Button variant="primary" text="Bottom" />
-        </Tooltip>
+
         <Tooltip text="Left" placement="left" ariaType="label">
-          <Button variant="primary" text="Left" />
+          <Tag label="Stern" />
+        </Tooltip>
+
+        <Tooltip text="Bottom" placement="bottom" ariaType="label">
+          <Tag label="Port" />
+        </Tooltip>
+
+        <Tooltip text="Right" placement="right" ariaType="label">
+          <Tag label="Starboard" />
         </Tooltip>
       </>
     );
