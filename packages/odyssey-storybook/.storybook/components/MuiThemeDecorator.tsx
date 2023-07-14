@@ -1,10 +1,9 @@
 import {
-  CssBaseline,
   createOdysseyMuiTheme,
   OdysseyThemeProvider,
   OdysseyTranslationProvider,
-  ScopedCssBaseline,
 } from "@okta/odyssey-react-mui";
+import { CssBaseline, ScopedCssBaseline } from "@mui/material";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
 import type { Decorator } from "@storybook/react";
 import { Fragment } from "react";

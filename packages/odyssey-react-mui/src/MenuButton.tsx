@@ -14,12 +14,10 @@ import {
   Button,
   buttonVariantValues,
   ChevronDownIcon,
-  Divider,
-  ListSubheader,
-  Menu,
   MenuItem,
   useUniqueId,
 } from "./";
+import { Divider, ListSubheader, Menu } from "@mui/material";
 import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
