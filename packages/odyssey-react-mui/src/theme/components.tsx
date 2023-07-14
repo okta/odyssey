@@ -1208,6 +1208,11 @@ export const components = (
           paddingBlockEnd: odysseyTokens.Spacing4,
           paddingInline: odysseyTokens.Spacing6,
           fontFamily: odysseyTokens.TypographyFamilyHeading,
+
+          [`.${buttonClasses.root}`]: {
+            // Pull close button by inline padding amount
+            marginInlineEnd: `-${odysseyTokens.Spacing3}`,
+          },
         },
       },
     },
