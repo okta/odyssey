@@ -93,17 +93,18 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   ) => {
     const [uncontrolledValue, setUncontrolledValue] = useState("");
 
-    const onChange = useCallback(
-      (e) => {
-        setUncontrolledValue(e.currentTarget.value);
-        if (onChangeProp) onChangeProp(e);
-      },
-      [onChangeProp]
-    );
+    const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> =
+      useCallback(
+        (event) => {
+          setUncontrolledValue(event.currentTarget.value);
+          onChangeProp?.(event);
+        },
+        [onChangeProp]
+      );
 
     const onClear = useCallback(() => {
       setUncontrolledValue("");
-      if (onClearProp) onClearProp();
+      onClearProp?.();
     }, [onClearProp]);
 
     useEffect(() => {
@@ -161,6 +162,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         onBlur,
         placeholder,
         ref,
+        controlledValue,
         uncontrolledValue,
       ]
     );
