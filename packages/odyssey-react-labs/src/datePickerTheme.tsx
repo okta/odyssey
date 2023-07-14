@@ -17,8 +17,9 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   ChevronDownIcon,
-  CalendarIcon,
+  createOdysseyMuiTheme,
 } from "@okta/odyssey-react-mui";
+import { ThemeOptions } from "@mui/material";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
 const popupSpacingValue = 5;
@@ -302,6 +303,8 @@ export const datePickerTheme: ThemeOptions = {
     },
     PrivatePickersYear: {
       styleOverrides: {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error TEMP. Arrays are valid styles return values for Emotion.
         button: ({ theme }) => [
           yearStyles.default({ theme }),
           {

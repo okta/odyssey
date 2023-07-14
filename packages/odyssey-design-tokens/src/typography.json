@@ -18,7 +18,7 @@
         "value": "{hue.neutral.600.value}"
       },
       "disabled": {
-        "value": "{hue.neutral.300.value}"
+        "value": "{hue.neutral.400.value}"
       },
       "action": {
         "value": "{palette.primary.text.value}"
