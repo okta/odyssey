@@ -318,6 +318,7 @@ export const components = (
           borderWidth: odysseyTokens.BorderWidthMain,
           borderStyle: odysseyTokens.BorderStyleMain,
           borderRadius: odysseyTokens.BorderRadiusMain,
+          borderColor: "transparent",
           fontSize: odysseyTokens.TypographySizeBody,
           fontWeight: odysseyTokens.TypographyWeightBodyBold,
           fontFamily: odysseyTokens.TypographyFamilyButton,
@@ -346,7 +347,6 @@ export const components = (
 
           ...(ownerState.variant === "primary" && {
             color: odysseyTokens.HueNeutralWhite,
-            borderColor: "transparent",
             backgroundColor: odysseyTokens.PalettePrimaryMain,
 
             "&:hover": {
@@ -365,47 +365,39 @@ export const components = (
 
           ...(ownerState.variant === "secondary" && {
             backgroundColor: odysseyTokens.HueBlue100,
-            borderColor: "transparent",
             color: odysseyTokens.PalettePrimaryDark,
 
             "&:hover": {
               backgroundColor: odysseyTokens.HueBlue200,
-              borderColor: odysseyTokens.BorderColorPrimaryMain,
               color: odysseyTokens.HueBlue800,
             },
 
             "&:active": {
               backgroundColor: odysseyTokens.PalettePrimaryLight,
-              borderColor: odysseyTokens.BorderColorPrimaryMain,
               color: odysseyTokens.HueBlue800,
             },
 
             "&:disabled": {
-              borderColor: "transparent",
               backgroundColor: odysseyTokens.HueNeutral100,
               color: odysseyTokens.TypographyColorDisabled,
             },
           }),
 
           ...(ownerState.variant === "tertiary" && {
-            backgroundColor: odysseyTokens.HueNeutral200,
-            borderColor: "transparent",
+            backgroundColor: odysseyTokens.HueNeutral100,
             color: odysseyTokens.HueNeutral700,
 
             "&:hover": {
               backgroundColor: odysseyTokens.HueNeutral200,
-              borderColor: odysseyTokens.BorderColorUi,
               color: odysseyTokens.HueNeutral800,
             },
 
             "&:active": {
               backgroundColor: odysseyTokens.HueNeutral300,
-              borderColor: odysseyTokens.BorderColorUi,
               color: odysseyTokens.HueNeutral800,
             },
 
             "&:disabled": {
-              borderColor: "transparent",
               backgroundColor: odysseyTokens.HueNeutral100,
               color: odysseyTokens.TypographyColorDisabled,
             },
@@ -414,7 +406,6 @@ export const components = (
           ...(ownerState.variant === "danger" && {
             backgroundColor: odysseyTokens.PaletteDangerMain,
             color: odysseyTokens.HueNeutralWhite,
-            borderColor: "transparent",
 
             "&:hover": {
               backgroundColor: odysseyTokens.PaletteDangerDark,
@@ -436,11 +427,9 @@ export const components = (
           ...(ownerState.variant === "floating" && {
             backgroundColor: "transparent",
             color: odysseyTokens.TypographyColorBody,
-            borderColor: "transparent",
 
             "&:hover": {
               backgroundColor: odysseyTokens.HueNeutral100,
-              borderColor: "transparent",
             },
 
             "&:active": {
