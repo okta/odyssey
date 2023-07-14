@@ -10,85 +10,57 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+export { deepmerge, visuallyHidden } from "@mui/utils";
+
+export type { MRT_ColumnDef as TableColumn } from "material-react-table";
+
 export {
-  Alert,
-  AlertTitle,
-  Box,
-  Chip,
   createTheme,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  Box,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   CssBaseline,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   DialogContentText,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   Divider,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  FormHelperText,
-  FormLabel,
-  IconButton,
-  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextField`. */
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   InputAdornment,
-  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextField`. */
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   InputBase,
-  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextField`. */
-  InputLabel,
-  List,
-  ListItem,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ListItemIcon,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ListItemText,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ListSubheader,
-  Menu,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   MenuList,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   Paper,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ScopedCssBaseline,
-  Snackbar,
-  Stack,
-  SvgIcon,
-  ThemeProvider as MuiThemeProvider,
+  ThemeProvider,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   Typography,
 } from "@mui/material";
 
 export type {
-  AlertColor,
-  AlertProps,
-  AlertTitleProps,
   BoxProps,
-  ChipProps,
   CssBaselineProps,
+  DialogContentTextProps,
   DividerProps,
-  FormControlLabelProps,
-  FormControlProps,
-  FormGroupProps,
-  FormHelperTextProps,
-  FormLabelProps,
-  IconButtonProps,
-  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextFieldProps`. */
   InputAdornmentProps,
-  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextFieldProps`. */
   InputBaseProps,
-  /** @deprecated Will be removed in a future Odyssey version. Please switch to `TextFieldProps`. */
-  InputLabelProps,
-  ListProps,
-  ListItemProps,
   ListItemIconProps,
   ListItemTextProps,
   ListSubheaderProps,
-  MenuProps,
   MenuListProps,
   PaperProps,
   ScopedCssBaselineProps,
-  SelectChangeEvent,
-  SnackbarProps,
-  StackProps,
-  SvgIconProps,
   ThemeOptions,
   TypographyProps,
 } from "@mui/material";
-
-export { default as FavoriteIcon } from "@mui/icons-material/Favorite";
-
-export { deepmerge, visuallyHidden } from "@mui/utils";
-
-export type { MRT_ColumnDef as TableColumn } from "material-react-table";
 
 export * from "./Autocomplete";
 export * from "./Banner";

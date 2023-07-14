@@ -12,6 +12,9 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { PasswordField, PasswordFieldProps } from "@okta/odyssey-react-mui";
+import { userEvent, waitFor } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { axeRun } from "../../../axe-util";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -66,10 +69,39 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     autoCompleteType: "current-password",
     label: "Password",
     isOptional: false,
+    id: "password-input",
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-export const Default: StoryObj<PasswordFieldProps> = {};
+export const Default: StoryObj<PasswordFieldProps> = {
+  play: async ({ args, canvasElement, step }) => {
+    await step("toggle password", async () => {
+      const fieldElement = canvasElement.querySelector(
+        `#${args.id}`
+      ) as HTMLInputElement;
+      expect(fieldElement.type).toBe("password");
+
+      const buttonElement = canvasElement.querySelector(
+        '[aria-label="toggle password visibility"]'
+      );
+      if (buttonElement) {
+        userEvent.type(fieldElement, "qwerty");
+        userEvent.click(buttonElement);
+        userEvent.tab();
+        await waitFor(() => {
+          expect(fieldElement.type).toBe("text");
+        });
+        userEvent.click(buttonElement);
+        await waitFor(() => {
+          expect(fieldElement.type).toBe("password");
+        });
+      }
+      await waitFor(() => {
+        axeRun("Password Field Default");
+      });
+    });
+  },
+};

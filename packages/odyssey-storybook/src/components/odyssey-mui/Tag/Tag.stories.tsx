@@ -15,6 +15,9 @@ import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { GroupIcon } from "@okta/odyssey-react-mui";
 import { icons } from "../../../../.storybook/components/iconUtils";
+import { userEvent } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<TagProps> = {
   title: "MUI Components/Tag",
@@ -79,8 +82,6 @@ const storybookMeta: Meta<TagProps> = {
   },
   args: {
     label: "Starship",
-    onRemove: undefined,
-    onClick: undefined,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -98,7 +99,7 @@ export const List: StoryObj<TagProps> = {
   render: function C(args) {
     return (
       <TagList>
-        <Tag {...args} />
+        <Tag label={args.label} />
         <Tag label="Another tag" />
         <Tag label="A third tag" />
       </TagList>
@@ -128,9 +129,18 @@ export const Clickable: StoryObj<TagProps> = {
 export const Removable: StoryObj<TagProps> = {
   args: {
     label: "Starship",
-    onRemove: function noRefCheck(event) {
-      event;
-    },
+  },
+  play: async ({ args, canvasElement, step }) => {
+    await step("remove the tag on click", async () => {
+      const tagElement = canvasElement.querySelector('[role="button"]');
+      const removeIcon = tagElement?.querySelector("svg");
+      if (removeIcon) {
+        userEvent.click(removeIcon);
+        userEvent.tab();
+        expect(args.onRemove).toHaveBeenCalled();
+      }
+      await axeRun("Removable Tag");
+    });
   },
 };
 

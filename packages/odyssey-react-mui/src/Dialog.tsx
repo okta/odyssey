@@ -32,10 +32,11 @@ export type DialogProps = {
   callToActionPrimaryComponent?: ReactElement<typeof Button>;
   callToActionSecondaryComponent?: ReactElement<typeof Button>;
   callToActionTertiaryComponent?: ReactElement<typeof Button>;
-  children: ReactNode | Array<ReactNode>;
+  children: ReactNode;
   onClose: () => void;
   isOpen: boolean;
   title: string;
+  ariaLabel: string;
 };
 
 const Dialog = ({
@@ -46,6 +47,7 @@ const Dialog = ({
   isOpen,
   onClose,
   title,
+  ariaLabel,
 }: DialogProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
@@ -88,7 +90,7 @@ const Dialog = ({
           size="small"
           onClick={onClose}
           startIcon={<CloseIcon />}
-          ariaLabel="Close dialog"
+          ariaLabel={ariaLabel}
           text=""
         />
       </DialogTitle>
