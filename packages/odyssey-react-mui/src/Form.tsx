@@ -28,18 +28,6 @@ export const formMethodValues = ["post", "get", "dialog"] as const;
 
 export type FormProps = {
   /**
-   * The title of the Form
-   */
-  title?: string;
-  /**
-   * A supplementary description
-   */
-  description?: string;
-  /**
-   * The Field or FieldSet components within the Form
-   */
-  children: ReactElement | Array<ReactElement>;
-  /**
    * An Infobox indicating a Form-wide error or status update.
    */
   alert?: ReactElement<typeof Infobox>;
@@ -48,6 +36,34 @@ export type FormProps = {
    * `autocomplete` attributes on form elements override it on <form>
    */
   autoCompleteType?: (typeof formAutoCompleteTypeValues)[number];
+  /**
+   * The Field or FieldSet components within the Form
+   */
+  children: ReactElement | Array<ReactElement>;
+  /**
+   * A supplementary description
+   */
+  description?: string;
+  /**
+   * If the value of the method attribute is post, enctype is the MIME type of the form submission.
+   * This value can be overridden by formenctype attributes on <button>, <input type="submit">, or <input type="image"> elements.
+   */
+  encodingType?: (typeof formEncodingTypeValues)[number];
+  /**
+   * The Field or FieldGroup components within the Form
+   */
+  formActions?:
+    | ReactElement<typeof Button>
+    | Array<ReactElement<typeof Button>>;
+  /**
+   * Defines a unique identifier (ID) which must be unique in the whole document.
+   */
+  id?: string;
+  /**
+   * The HTTP method to submit the form with.
+   * This value is overridden by formmethod attributes on <button>, <input type="submit">, or <input type="image"> elements.
+   */
+  method?: (typeof formMethodValues)[number];
   /**
    * The name of the form. The value must not be the empty string, and must be unique among the form elements in the forms collection that it is in, if any.
    */
@@ -59,39 +75,23 @@ export type FormProps = {
    */
   noValidate?: boolean;
   /**
-   * If the value of the method attribute is post, enctype is the MIME type of the form submission.
-   * This value can be overridden by formenctype attributes on <button>, <input type="submit">, or <input type="image"> elements.
-   */
-  encodingType?: (typeof formEncodingTypeValues)[number];
-  /**
-   * The HTTP method to submit the form with.
-   * This value is overridden by formmethod attributes on <button>, <input type="submit">, or <input type="image"> elements.
-   */
-  method?: (typeof formMethodValues)[number];
-  /**
    * Indicates where to display the response after submitting the form. It is a name/keyword for a browsing context (for example, tab, window, or iframe).
    * This value can be overridden by a formtarget attribute on a <button>, <input type="submit">, or <input type="image"> element.
    */
   target?: string;
   /**
-   * The Field or FieldGroup components within the Form
+   * The title of the Form
    */
-  formActions?:
-    | ReactElement<typeof Button>
-    | Array<ReactElement<typeof Button>>;
-  /**
-   * Defines a unique identifier (ID) which must be unique in the whole document.
-   */
-  id?: string;
+  title?: string;
 };
 
 const Form = ({
   alert,
+  autoCompleteType,
   children,
   description,
   encodingType,
   formActions,
-  autoCompleteType,
   id: idOverride,
   method,
   name,

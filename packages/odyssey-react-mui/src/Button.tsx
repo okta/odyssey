@@ -27,25 +27,64 @@ export const buttonVariantValues = [
 ] as const;
 
 export type ButtonProps = {
+  /**
+   * The ARIA label for the Button
+   */
+  ariaLabel?: string;
+  /**
+   * The ID of the element that labels the Button
+   */
+  ariaLabelledBy?: string;
+  /**
+   * The ID of the element that describes the Button
+   */
+  ariaDescribedBy?: string;
+  /**
+   * The icon element to display at the end of the Button
+   */
   endIcon?: ReactElement;
+  /**
+   * The ID of the Button
+   */
   id?: string;
+  /**
+   * Determines whether the Button is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * Determines whether the Button should take up the full available width
+   */
   isFullWidth?: boolean;
+  /**
+   * The click event handler for the Button
+   */
   onClick?: MuiButtonProps["onClick"];
+  /**
+   * The size of the button
+   */
   size?: (typeof buttonSizeValues)[number];
+  /**
+   * The icon element to display at the start of the Button
+   */
   startIcon?: ReactElement;
+  /**
+   * The text content of the Button
+   */
   text?: string;
   /**
-   * `tooltipText` determines the text of the tooltip that wraps the button if it's icon-only.
+   * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
+  /**
+   * The variant of the Button
+   */
   variant: (typeof buttonVariantValues)[number];
-  ariaLabel?: string;
-  ariaLabelledBy?: string;
-  ariaDescribedBy?: string;
 };
 
 const Button = ({
+  ariaDescribedBy,
+  ariaLabel,
+  ariaLabelledBy,
   endIcon,
   id,
   isDisabled,
@@ -56,9 +95,6 @@ const Button = ({
   text,
   tooltipText,
   variant,
-  ariaLabel,
-  ariaLabelledBy,
-  ariaDescribedBy,
 }: ButtonProps) => {
   const muiProps = useContext(MuiPropsContext);
 

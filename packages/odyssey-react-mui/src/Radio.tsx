@@ -16,11 +16,29 @@ import { memo } from "react";
 import { FormControlLabel } from "@mui/material";
 
 export type RadioProps = {
+  /**
+   * If `true`, the Radio is selected
+   */
   isChecked?: boolean;
+  /**
+   * If `true`, the Radio is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * If `true`, the Radio has an invalid value
+   */
   isInvalid?: boolean;
+  /**
+   * The label text for the Radio
+   */
   label: string;
+  /**
+   * The name attribute of the Radio
+   */
   name?: string;
+  /**
+   * The value attribute of the Radio
+   */
   value: string;
 };
 

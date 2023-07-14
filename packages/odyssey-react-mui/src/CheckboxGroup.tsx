@@ -17,26 +17,44 @@ import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
 
 export type CheckboxGroupProps = {
+  /**
+   * A single Checkbox element or an array of Checkbox elements
+   */
   children:
     | ReactElement<typeof Checkbox>
     | Array<ReactElement<typeof Checkbox>>;
+  /**
+   * The error message for the CheckboxGroup
+   */
   errorMessage?: string;
+  /**
+   * The hint text for the CheckboxGroup
+   */
   hint?: string;
   /**
    * The id of the `input` element. This will also be the input's `name` field.
    */
   id?: string;
+  /**
+   * If `true`, the CheckboxGroup is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * If `true`, the CheckboxGroup is required
+   */
   isRequired?: boolean;
+  /**
+   * The label text for the CheckboxGroup
+   */
   label: string;
 };
 
 const CheckboxGroup = ({
   children,
-  isDisabled,
   errorMessage,
   hint,
   id: idOverride,
+  isDisabled,
   isRequired = false,
   label,
 }: CheckboxGroupProps) => {

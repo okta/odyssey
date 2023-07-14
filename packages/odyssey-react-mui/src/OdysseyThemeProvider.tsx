@@ -23,12 +23,12 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 
 const OdysseyThemeProvider = ({
   children,
-  themeOverride,
   designTokensOverride,
+  themeOverride,
 }: {
   children: ReactElement;
-  themeOverride?: ThemeOptions;
   designTokensOverride?: DesignTokensOverride;
+  themeOverride?: ThemeOptions;
 }) => {
   const odysseyTokens = { ...Tokens, ...designTokensOverride };
   const odysseyTheme = createOdysseyMuiTheme(odysseyTokens);

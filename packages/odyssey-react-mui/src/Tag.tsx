@@ -17,10 +17,25 @@ import { Icon } from "./Icon";
 import { MuiPropsContext } from "./MuiPropsContext";
 
 export type TagProps = {
+  /**
+   * An optional icon to display alongside the Tag label
+   */
   icon?: ReactElement<typeof Icon>;
+  /**
+   * If `true`, the Tag is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * The label text for the Tag
+   */
   label: string;
+  /**
+   * Callback fired when the Tag is clicked
+   */
   onClick?: MuiChipProps["onClick"];
+  /**
+   * Callback fired when the remove button of the Tag is clicked
+   */
   onRemove?: MuiChipProps["onDelete"];
 };
 

@@ -25,13 +25,9 @@ import { NullElement } from "./NullElement";
 
 export type MenuButtonProps = {
   /**
-   * The <MenuItem> components within the Menu.
+   * aria-label to describe the button when the button label is empty, e.g., an Icon only Button
    */
-  children: Array<
-    ReactElement<
-      typeof MenuItem | typeof Divider | typeof ListSubheader | NullElement
-    >
-  >;
+  ariaLabel?: string;
   /**
    * The label on the triggering Button
    */
@@ -41,26 +37,30 @@ export type MenuButtonProps = {
    */
   buttonVariant?: (typeof buttonVariantValues)[number];
   /**
+   * The <MenuItem> components within the Menu.
+   */
+  children: Array<
+    ReactElement<
+      typeof MenuItem | typeof Divider | typeof ListSubheader | NullElement
+    >
+  >;
+  /**
    * The end Icon on the trigggering Button
    */
   endIcon?: ReactElement;
   /**
-   * The id of the button
+   * The id of the Button
    */
   id?: string;
-  /**
-   * aria-label to describe the button when the button label is empty, e.g., an Icon only Button
-   */
-  ariaLabel?: string;
 };
 
 const MenuButton = ({
+  ariaLabel,
   buttonLabel = "",
   buttonVariant = "secondary",
   children,
   endIcon = <ChevronDownIcon />,
   id: idOverride,
-  ariaLabel,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 

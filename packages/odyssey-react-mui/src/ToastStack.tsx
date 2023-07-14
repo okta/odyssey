@@ -15,6 +15,9 @@ import { Box, Snackbar } from "@mui/material";
 import { Toast } from "./Toast";
 
 export type ToastStackProps = {
+  /**
+   * The Toast or array of Toasts within the ToastStack
+   */
   children: ReactElement<typeof Toast> | Array<ReactElement<typeof Toast>>;
 };
 
