@@ -17,8 +17,8 @@ import {
   infoboxRoleValues,
   infoboxSeverityValues,
   Link,
+  Typography,
 } from "@okta/odyssey-react-mui";
-import { Typography } from "@mui/material";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<InfoboxProps> = {

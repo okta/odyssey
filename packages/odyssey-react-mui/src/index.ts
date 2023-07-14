@@ -14,6 +14,54 @@ export { deepmerge, visuallyHidden } from "@mui/utils";
 
 export type { MRT_ColumnDef as TableColumn } from "material-react-table";
 
+export {
+  createTheme,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  Box,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  CssBaseline,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  DialogContentText,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  Divider,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  InputAdornment,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  InputBase,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  ListItemIcon,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  ListItemText,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  ListSubheader,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  MenuList,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  Paper,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  ScopedCssBaseline,
+  ThemeProvider,
+  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
+  Typography,
+} from "@mui/material";
+
+export type {
+  BoxProps,
+  CssBaselineProps,
+  DialogContentTextProps,
+  DividerProps,
+  InputAdornmentProps,
+  InputBaseProps,
+  ListItemIconProps,
+  ListItemTextProps,
+  ListSubheaderProps,
+  MenuListProps,
+  PaperProps,
+  ScopedCssBaselineProps,
+  ThemeOptions,
+  TypographyProps,
+} from "@mui/material";
+
 export * from "./Autocomplete";
 export * from "./Banner";
 export * from "./Button";

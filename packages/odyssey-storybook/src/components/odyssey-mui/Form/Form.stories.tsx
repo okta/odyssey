@@ -24,8 +24,8 @@ import {
   Infobox,
   Link,
   TextField,
+  Typography,
 } from "@okta/odyssey-react-mui";
-import { Typography } from "@mui/material";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<FormProps> = {

@@ -11,8 +11,12 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Button, Dialog, DialogProps } from "@okta/odyssey-react-mui";
-import { DialogContentText } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogContentText,
+  DialogProps,
+} from "@okta/odyssey-react-mui";
 import { useState } from "react";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";

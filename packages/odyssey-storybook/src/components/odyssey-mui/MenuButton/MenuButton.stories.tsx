@@ -12,6 +12,10 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
   MenuButton,
   MenuButtonProps,
   buttonVariantValues,
@@ -21,12 +25,6 @@ import {
   CalendarIcon,
   MoreIcon,
 } from "@okta/odyssey-react-mui";
-import {
-  Divider,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader,
-} from "@mui/material";
 import { icons } from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
