@@ -95,7 +95,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 
     const onChange = useCallback(
       (e) => {
-        setUncontrolledValue(e.target.value);
+        setUncontrolledValue(e.currentTarget.value);
         if (onChangeProp) onChangeProp(e);
       },
       [onChangeProp]
