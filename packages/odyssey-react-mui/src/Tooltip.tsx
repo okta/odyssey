@@ -17,28 +17,28 @@ import { MuiPropsChild } from "./MuiPropsChild";
 import { ReactElement } from "react";
 
 export type TooltipProps = {
+  /**
+   * The type of ARIA attribute to use
+   */
   ariaType: "description" | "label";
+  /**
+   * The content that triggers the Tooltip when hovered
+   */
   children: ReactElement;
+  /**
+   * The placement of the Tooltip
+   */
   placement?: MuiTooltipProps["placement"];
+  /**
+   * The text to display in the Tooltip
+   */
   text: string;
 };
 
 export const Tooltip = ({
-  /**
-   * The type of ARIA attribute to use
-   */
   ariaType,
-  /**
-   * The content that triggers the Tooltip when hovered
-   */
   children,
-  /**
-   * The placement of the Tooltip
-   */
   placement = "top",
-  /**
-   * The text to display in the Tooltip
-   */
   text,
 }: TooltipProps) => (
   <MuiTooltip
