@@ -44,7 +44,7 @@ export type DialogProps = {
   /**
    * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
-  children: ReactNode | Array<ReactNode>;
+  children: ReactNode;
   /**
    * When set to `true`, the Dialog will be visible.
    */
@@ -57,6 +57,7 @@ export type DialogProps = {
    * The title of the Dialog
    */
   title: string;
+  ariaLabel: string;
 };
 
 const Dialog = ({
@@ -67,6 +68,7 @@ const Dialog = ({
   isOpen,
   onClose,
   title,
+  ariaLabel,
 }: DialogProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
@@ -109,7 +111,7 @@ const Dialog = ({
           size="small"
           onClick={onClose}
           startIcon={<CloseIcon />}
-          ariaLabel="Close dialog"
+          ariaLabel={ariaLabel}
           text=""
         />
       </DialogTitle>

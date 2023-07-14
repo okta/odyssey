@@ -14,7 +14,6 @@ import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 import { memo, ReactElement, useCallback, useContext } from "react";
 
-import { Icon } from "./Icon";
 import { MuiPropsContext } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 
@@ -43,7 +42,7 @@ export type ButtonProps = {
   /**
    * The icon element to display at the end of the Button
    */
-  endIcon?: ReactElement<typeof Icon>;
+  endIcon?: ReactElement;
   /**
    * The ID of the Button
    */
@@ -67,7 +66,7 @@ export type ButtonProps = {
   /**
    * The icon element to display at the start of the Button
    */
-  startIcon?: ReactElement<typeof Icon>;
+  startIcon?: ReactElement;
   /**
    * The text content of the Button
    */
