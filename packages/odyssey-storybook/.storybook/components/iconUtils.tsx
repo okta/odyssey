@@ -84,7 +84,7 @@ import {
   VideoIcon,
   WarningFilledIcon,
   WarningIcon,
-} from "@okta/odyssey-react-mui";
+} from "@okta/odyssey-react-mui/icons";
 import { ReactElement, createElement } from "react";
 
 export const icons: { [key: string]: ReactElement } = [

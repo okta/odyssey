@@ -73,7 +73,6 @@ export * from "./Dialog";
 export * from "./Fieldset";
 export * from "./Form";
 export * from "./icons";
-export { iconDictionary } from "./iconDictionary";
 export * from "./Infobox";
 export * from "./Link";
 export * from "./materialReactTableTypes";
