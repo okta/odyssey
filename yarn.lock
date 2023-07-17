@@ -5681,55 +5681,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/odyssey-react-labs@workspace:*, @okta/odyssey-react-labs@workspace:packages/odyssey-react-labs":
-  version: 0.0.0-use.local
-  resolution: "@okta/odyssey-react-labs@workspace:packages/odyssey-react-labs"
-  dependencies:
-    "@babel/cli": ^7.22.9
-    "@babel/core": ^7.22.9
-    "@emotion/react": ^11.11.1
-    "@emotion/styled": ^11.11.0
-    "@mui/icons-material": ^5.11.0
-    "@mui/lab": ^5.0.0-alpha.117
-    "@mui/material": ^5.12.3
-    "@mui/utils": ^5.11.2
-    "@mui/x-date-pickers": ^5.0.15
-    "@okta/browserslist-config-odyssey": "workspace:*"
-    "@okta/odyssey-babel-preset": "workspace:*"
-    "@okta/odyssey-icons": "workspace:*"
-    "@okta/odyssey-lifecycle": "workspace:*"
-    "@okta/odyssey-react-mui": "workspace:*"
-    "@okta/odyssey-typescript": "workspace:*"
-    "@testing-library/dom": ^7.28.1
-    "@testing-library/jest-dom": ^5.12.0
-    "@testing-library/react": ^11.2.7
-    "@testing-library/react-hooks": ^7.0.2
-    "@testing-library/user-event": ^13.5.0
-    "@types/jest-axe": ^3.5.1
-    "@types/react": ^17.0.30
-    "@types/react-dom": ^17.0.5
-    babel-plugin-import: ^1.13.5
-    date-fns: ^2.29.3
-    eslint: ^8.44.0
-    jest: ^29.6.1
-    jest-axe: ^5.0.1
-    jest-environment-jsdom: ^29.6.1
-    npm-run-all: ^4.1.5
-    react: ^17.0.2
-    react-dom: ^17.0.2
-    regenerator-runtime: ^0.13.7
-    stylelint: ^14.13.0
-    typescript: ^5.1.6
-  peerDependencies:
-    "@emotion/react": ^11
-    "@emotion/styled": ^11
-    "@okta/odyssey-design-tokens": "workspace:*"
-    "@okta/odyssey-react-mui": "workspace:*"
-    react: ">=17 <19"
-    react-dom: ">=17 <19"
-  languageName: unknown
-  linkType: soft
-
 "@okta/odyssey-react-mui@workspace:*, @okta/odyssey-react-mui@workspace:packages/odyssey-react-mui":
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-react-mui@workspace:packages/odyssey-react-mui"
@@ -5743,6 +5694,7 @@ __metadata:
     "@mui/lab": ^5.0.0-alpha.117
     "@mui/material": ^5.12.3
     "@mui/utils": ^5.11.2
+    "@mui/x-date-pickers": ^5.0.15
     "@okta/browserslist-config-odyssey": "workspace:*"
     "@okta/odyssey-babel-preset": "workspace:*"
     "@okta/odyssey-design-tokens": "workspace:*"
@@ -5761,12 +5713,14 @@ __metadata:
     "@types/react-dom": ^17.0.5
     "@types/yargs": ^17
     babel-plugin-import: ^1.13.5
+    date-fns: ^2.30.0
     eslint: ^8.44.0
     i18next: ^22.4.15
     jest: ^29.6.1
     jest-axe: ^5.0.1
     jest-environment-jsdom: ^29.6.1
     material-react-table: ^1.14.0
+    node-ts: ^6.0.1
     npm-run-all: ^4.1.5
     properties: 1.2.1
     react: ^17.0.2
@@ -5795,7 +5749,6 @@ __metadata:
     "@okta/odyssey-babel-loader": "workspace:*"
     "@okta/odyssey-design-tokens": "workspace:*"
     "@okta/odyssey-lifecycle": "workspace:*"
-    "@okta/odyssey-react-labs": "workspace:*"
     "@okta/odyssey-react-mui": "workspace:*"
     "@okta/odyssey-typescript": "workspace:*"
     "@pxblue/storybook-rtl-addon": ^1.1.0
@@ -5911,6 +5864,15 @@ __metadata:
     "@storybook/components": ">= 5.x"
     "@storybook/core-events": ">= 5.x"
   checksum: f5c03b9616cdb470ca0f4914fa54fea042b6d1dcb3a0f8ad4708d0dcc6815bc1bff6df87bf9797ecf146a4a94b7ee02365a01ff617d831b182553649d27a721b
+  languageName: node
+  linkType: hard
+
+"@rauschma/stringio@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@rauschma/stringio@npm:1.4.0"
+  dependencies:
+    "@types/node": ^10.0.3
+  checksum: 0c6fae0519dc9db378966924894c37cfc854a19fc10b6867c5a2f362025c7d9e4f7cf65c120453036bb7503cdee3d7cc43ae9485f47dac3aad315bc83d93a24c
   languageName: node
   linkType: hard
 
@@ -8018,6 +7980,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^10.0.3":
+  version: 10.17.60
+  resolution: "@types/node@npm:10.17.60"
+  checksum: 2cdb3a77d071ba8513e5e8306fa64bf50e3c3302390feeaeff1fd325dd25c8441369715dfc8e3701011a72fed5958c7dfa94eb9239a81b3c286caa4d97db6eef
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^16.0.0":
   version: 16.18.32
   resolution: "@types/node@npm:16.18.32"
@@ -8029,6 +7998,13 @@ __metadata:
   version: 18.16.14
   resolution: "@types/node@npm:18.16.14"
   checksum: c11cb3c787236414efe58240ae71854971592554d82ff9d201876ce7cafd51c37aaa001c63602d002e8238614d7331bd6d48ac4c1c0caa826799980b6846fb08
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.2.4":
+  version: 20.4.2
+  resolution: "@types/node@npm:20.4.2"
+  checksum: 99e544ea7560d51f01f95627fc40394c24a13da8f041121a0da13e4ef0a2aa332932eaf9a5e8d0e30d1c07106e96a183be392cbba62e8cf0bf6a085d5c0f4149
   languageName: node
   linkType: hard
 
@@ -11898,7 +11874,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.29.3":
+"date-fns@npm:^2.30.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
   dependencies:
@@ -19468,6 +19444,16 @@ __metadata:
   version: 2.0.12
   resolution: "node-releases@npm:2.0.12"
   checksum: b8c56db82c4642a0f443332b331a4396dae452a2ac5a65c8dbd93ef89ecb2fbb0da9d42ac5366d4764973febadca816cf7587dad492dce18d2a6b2af59cda260
+  languageName: node
+  linkType: hard
+
+"node-ts@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "node-ts@npm:6.0.1"
+  dependencies:
+    "@rauschma/stringio": ^1.4.0
+    "@types/node": ^20.2.4
+  checksum: 15f799ca5de904a71932795c734aeecf490b22e89dac4a9c85bb8a195439bef6ae8f3a8eb23e3bad4274527d64927f1edbc56de843a8ce44c2a0f23b9c1ccc16
   languageName: node
   linkType: hard
 

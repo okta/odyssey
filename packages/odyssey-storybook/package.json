@@ -20,7 +20,6 @@
     "@okta/odyssey-babel-loader": "workspace:*",
     "@okta/odyssey-design-tokens": "workspace:*",
     "@okta/odyssey-lifecycle": "workspace:*",
-    "@okta/odyssey-react-labs": "workspace:*",
     "@okta/odyssey-react-mui": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
     "@pxblue/storybook-rtl-addon": "^1.1.0",
