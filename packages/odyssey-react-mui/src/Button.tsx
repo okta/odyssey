@@ -92,7 +92,7 @@ const Button = ({
   onClick,
   size = "medium",
   startIcon,
-  text,
+  text = "",
   tooltipText,
   variant,
 }: ButtonProps) => {
