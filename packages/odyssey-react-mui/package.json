@@ -20,9 +20,6 @@
     "./labs": {
       "types": "./dist/src/labs/index.d.ts",
       "default": "./dist/labs/index.js"
-    },
-    "./labs/README.md": {
-      "default": "./src/labs/README.md"
     }
   },
   "repository": {
