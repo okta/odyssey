@@ -9,18 +9,20 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/src/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/src/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./README.md": {
-      "default": "./README.md"
-    },
-    "./labs": {
-      "types": "./dist/src/labs/index.d.ts",
-      "default": "./dist/labs/index.js"
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/src/index.d.ts"
+      ],
+      "labs": [
+        "./dist/src/labs/index.d.ts"
+      ]
     }
+  },
+  "exports": {
+    "./labs": "./dist/labs/index.js",
+    ".": "./dist/index.js",
+    "./README.md": "./README.md"
   },
   "repository": {
     "type": "git",
