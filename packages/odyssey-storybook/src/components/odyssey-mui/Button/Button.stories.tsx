@@ -19,7 +19,7 @@ import {
   AddIcon,
 } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { icons } from "../../../../.storybook/components/iconUtils";
 
 import { userEvent, waitFor, within } from "@storybook/testing-library";

@@ -21,7 +21,7 @@ import {
   LocalizationProvider,
 } from "@okta/odyssey-react-mui/labs";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
   title: "Labs Components/DatePicker",
