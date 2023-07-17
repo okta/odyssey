@@ -27,7 +27,7 @@ const storybookMeta: Meta<DialogProps> = {
   title: "MUI Components/Dialog",
   component: Dialog,
   argTypes: {
-    callToActionPrimaryComponent: {
+    callToActionFirstComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.",
@@ -37,7 +37,7 @@ const storybookMeta: Meta<DialogProps> = {
         },
       },
     },
-    callToActionSecondaryComponent: {
+    callToActionSecondComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.",
@@ -47,7 +47,7 @@ const storybookMeta: Meta<DialogProps> = {
         },
       },
     },
-    callToActionTertiaryComponent: {
+    callToActionLastComponent: {
       control: null,
       description:
         "An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.",
@@ -127,17 +127,17 @@ const DefaultTemplate: StoryObj<DialogProps> = {
         <Button variant="primary" onClick={onOpen} text="Open dialog" />
         <Dialog
           {...props}
-          callToActionPrimaryComponent={
+          callToActionFirstComponent={
             <Button variant="primary" onClick={onClose} text="Primary action" />
           }
-          callToActionSecondaryComponent={
+          callToActionSecondComponent={
             <Button
               variant="secondary"
               onClick={onClose}
               text="Secondary action"
             />
           }
-          callToActionTertiaryComponent={
+          callToActionLastComponent={
             <Button variant="floating" onClick={onClose} text="Cancel" />
           }
           onClose={onClose}
