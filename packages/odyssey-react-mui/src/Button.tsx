@@ -79,7 +79,18 @@ export type ButtonProps = {
    * The variant of the Button
    */
   variant: (typeof buttonVariantValues)[number];
-};
+} & (
+  | {
+      text: string;
+      ariaLabel?: string;
+      ariaLabelledBy?: string;
+    }
+  | {
+      text?: undefined | "";
+      ariaLabel: string;
+      ariaLabelledBy?: string;
+    }
+);
 
 const Button = ({
   ariaDescribedBy,
