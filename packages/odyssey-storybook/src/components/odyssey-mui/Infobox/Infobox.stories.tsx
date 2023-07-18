@@ -12,12 +12,12 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
-  Body,
   Infobox,
   InfoboxProps,
   infoboxRoleValues,
   infoboxSeverityValues,
   Link,
+  P,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -66,9 +66,7 @@ const storybookMeta: Meta<InfoboxProps> = {
     },
   },
   args: {
-    children: (
-      <Body>You're signed in from Moonbase Alpha-6, located on Luna.</Body>
-    ),
+    children: <P>You're signed in from Moonbase Alpha-6, located on Luna.</P>,
     severity: "info",
   },
   decorators: [MuiThemeDecorator],
@@ -79,9 +77,7 @@ export default storybookMeta;
 
 export const Info: StoryObj<InfoboxProps> = {
   args: {
-    children: (
-      <Body>You're signed in from Moonbase Alpha-6, located on Luna.</Body>
-    ),
+    children: <P>You're signed in from Moonbase Alpha-6, located on Luna.</P>,
     severity: "info",
   },
 };
@@ -89,9 +85,9 @@ export const Info: StoryObj<InfoboxProps> = {
 export const Error: StoryObj<InfoboxProps> = {
   args: {
     children: (
-      <Body>
+      <P>
         Reconfigure the fuel mixture ratios and perform safety checks again.
-      </Body>
+      </P>
     ),
     role: "alert",
     severity: "error",
@@ -102,10 +98,10 @@ export const Error: StoryObj<InfoboxProps> = {
 export const Warning: StoryObj<InfoboxProps> = {
   args: {
     children: (
-      <Body>
+      <P>
         Complete all safety checks before requesting approval to launch your
         mission.
-      </Body>
+      </P>
     ),
     role: "status",
     severity: "warning",
@@ -116,9 +112,7 @@ export const Warning: StoryObj<InfoboxProps> = {
 export const Success: StoryObj<InfoboxProps> = {
   args: {
     children: (
-      <Body>
-        Safety checks are complete. Your mission is ready for liftoff.
-      </Body>
+      <P>Safety checks are complete. Your mission is ready for liftoff.</P>
     ),
     role: "status",
     severity: "success",
@@ -130,10 +124,10 @@ export const BlockLink: StoryObj<InfoboxProps> = {
   args: {
     children: (
       <>
-        <Body>
+        <P>
           There is an issue with the fuel mixture ratios. Reconfigure the fuel
           mixture and perform the safety checks again.
-        </Body>
+        </P>
 
         <Link href="#" variant="monochrome">
           Visit fueling console

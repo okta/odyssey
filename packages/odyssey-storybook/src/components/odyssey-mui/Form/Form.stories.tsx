@@ -12,7 +12,6 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
-  Body,
   Button,
   Checkbox,
   CheckboxGroup,
@@ -24,6 +23,7 @@ import {
   formMethodValues,
   Infobox,
   Link,
+  P,
   TextField,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -287,10 +287,10 @@ export const KitchenSink: StoryObj<FormProps> = {
           description="This information will be used to track your passengers' whereabouts."
           alert={
             <Infobox severity="error" role="alert" title="Standby for boarding">
-              <Body>
+              <P>
                 There is an issue with the fuel mixture ratios. Reconfigure the
                 fuel mixture and perform the safety checks again.
-              </Body>
+              </P>
 
               <Link href="#" variant="monochrome">
                 Visit fueling console

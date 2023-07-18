@@ -15,11 +15,11 @@ import { memo, ReactElement, useMemo } from "react";
 import {
   FormControl as MuiFormControl,
   FormLabel as MuiFormLabel,
-  Typography,
 } from "@mui/material";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
+import { Typography } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 import { useTranslation } from "react-i18next";
 

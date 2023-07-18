@@ -25,8 +25,17 @@ export const typographyVariantValues = {
   h6: "h6",
   body: "body1",
   caption: "subtitle1",
+  subtitle2: "subtitle2",
   legend: "legend",
 };
+
+export const typographyColorValues = [
+  "primary",
+  "textPrimary",
+  "secondary",
+  "textSecondary",
+  "error",
+];
 
 export type TypographyProps = {
   /**
@@ -50,6 +59,10 @@ export type TypographyProps = {
    */
   classes?: object;
   /**
+   * The color of the text.
+   */
+  color?: (typeof typographyColorValues)[number];
+  /**
    * The HTML element the component should render, if different from the default.
    */
   component?: ElementType;
@@ -65,16 +78,17 @@ export const Typography = ({
   ariaLabelledBy,
   children,
   classes,
+  color,
   component,
   variant = "body",
 }: TypographyProps) => {
   if (!component) {
-    component = variant;
     if (variant === "body") {
       component = "p";
-    }
-    if (variant === "caption") {
+    } else if (variant === "caption" || variant === "subtitle2") {
       component = "h6";
+    } else {
+      component = variant;
     }
   }
 
@@ -85,6 +99,7 @@ export const Typography = ({
       ariaLabelledBy={ariaLabelledBy}
       children={children}
       classes={classes}
+      color={color}
       component={component}
       variant={
         typographyVariantValues[variant] as MuiTypographyProps["variant"]
@@ -101,6 +116,7 @@ export const H1 = ({
   ariaLabelledBy,
   children,
   classes,
+  color,
   component,
 }: TypographyProps) => (
   <Typography
@@ -109,6 +125,7 @@ export const H1 = ({
     ariaLabelledBy={ariaLabelledBy}
     children={children}
     classes={classes}
+    color={color}
     component={component}
     variant="h1"
   />
@@ -122,6 +139,7 @@ export const H2 = ({
   ariaLabelledBy,
   children,
   classes,
+  color,
   component,
 }: TypographyProps) => (
   <Typography
@@ -130,6 +148,7 @@ export const H2 = ({
     ariaLabelledBy={ariaLabelledBy}
     children={children}
     classes={classes}
+    color={color}
     component={component}
     variant="h2"
   />
@@ -143,6 +162,7 @@ export const H3 = ({
   ariaLabelledBy,
   children,
   classes,
+  color,
   component,
 }: TypographyProps) => (
   <Typography
@@ -151,6 +171,7 @@ export const H3 = ({
     ariaLabelledBy={ariaLabelledBy}
     children={children}
     classes={classes}
+    color={color}
     component={component}
     variant="h3"
   />
@@ -164,6 +185,7 @@ export const H4 = ({
   ariaLabelledBy,
   children,
   classes,
+  color,
   component,
 }: TypographyProps) => (
   <Typography
@@ -172,6 +194,7 @@ export const H4 = ({
     ariaLabelledBy={ariaLabelledBy}
     children={children}
     classes={classes}
+    color={color}
     component={component}
     variant="h4"
   />
@@ -185,6 +208,7 @@ export const H5 = ({
   ariaLabelledBy,
   children,
   classes,
+  color,
   component,
 }: TypographyProps) => (
   <Typography
@@ -193,6 +217,7 @@ export const H5 = ({
     ariaLabelledBy={ariaLabelledBy}
     children={children}
     classes={classes}
+    color={color}
     component={component}
     variant="h5"
   />
@@ -206,6 +231,7 @@ export const H6 = ({
   ariaLabelledBy,
   children,
   classes,
+  color,
   component,
 }: TypographyProps) => (
   <Typography
@@ -214,6 +240,7 @@ export const H6 = ({
     ariaLabelledBy={ariaLabelledBy}
     children={children}
     classes={classes}
+    color={color}
     component={component}
     variant="h6"
   />
@@ -221,12 +248,13 @@ export const H6 = ({
 
 H6.displayName = "H6";
 
-export const Body = ({
+export const P = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
   children,
   classes,
+  color,
   component,
 }: TypographyProps) => (
   <Typography
@@ -235,12 +263,13 @@ export const Body = ({
     ariaLabelledBy={ariaLabelledBy}
     children={children}
     classes={classes}
+    color={color}
     component={component}
     variant="body"
   />
 );
 
-Body.displayName = "Body";
+P.displayName = "P";
 
 export const Caption = ({
   ariaDescribedBy,
@@ -248,6 +277,7 @@ export const Caption = ({
   ariaLabelledBy,
   children,
   classes,
+  color,
   component,
 }: TypographyProps) => (
   <Typography
@@ -256,6 +286,7 @@ export const Caption = ({
     ariaLabelledBy={ariaLabelledBy}
     children={children}
     classes={classes}
+    color={color}
     component={component}
     variant="caption"
   />
@@ -269,6 +300,7 @@ export const Legend = ({
   ariaLabelledBy,
   children,
   classes,
+  color,
   component,
 }: TypographyProps) => (
   <Typography
@@ -277,6 +309,7 @@ export const Legend = ({
     ariaLabelledBy={ariaLabelledBy}
     children={children}
     classes={classes}
+    color={color}
     component={component}
     variant="legend"
   />

@@ -12,8 +12,9 @@
 
 import { memo, ReactElement } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { Infobox } from "./Infobox";
+import { Typography } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
 export type FieldsetProps = {
@@ -75,7 +76,7 @@ const Fieldset = ({
         {legend}
       </Typography>
       {description && (
-        <Typography component="p" variant="subtitle2">
+        <Typography component="p" variant="caption">
           {description}
         </Typography>
       )}

@@ -19,10 +19,11 @@ import {
   H4,
   H5,
   H6,
-  Body,
+  P,
   Caption,
   Legend,
   TypographyProps,
+  typographyColorValues,
   typographyVariantValues,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -79,6 +80,16 @@ const storybookMeta: Meta<TypographyProps> = {
       table: {
         type: {
           summary: "object",
+        },
+      },
+    },
+    color: {
+      options: typographyColorValues,
+      control: { type: "select" },
+      description: "The color of the text.",
+      table: {
+        type: {
+          summary: typographyColorValues.join(" | "),
         },
       },
     },
@@ -194,12 +205,12 @@ export const H6Story: StoryObj<TypographyProps> = {
 };
 
 export const BodyStory: StoryObj<TypographyProps> = {
-  name: "Body",
+  name: "P",
   args: {
     children: "This is body copy.",
     variant: "body",
   },
-  render: (args) => <Body children={args.children} />,
+  render: (args) => <P children={args.children} />,
   play: async ({}) => {
     await axeRun("Typopgraphy body");
   },
