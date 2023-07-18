@@ -109,7 +109,6 @@ const storybookMeta: Meta<typeof RadioGroup> = {
     label: "Speed",
   },
   decorators: [MuiThemeDecorator],
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;
