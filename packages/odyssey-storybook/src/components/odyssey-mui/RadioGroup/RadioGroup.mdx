@@ -1,0 +1,26 @@
+import {
+  Canvas,
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Controls,
+  Stories,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as RadioGroupStories from "./RadioGroup.stories";
+
+<Meta of={RadioGroupStories} />
+
+<Title of={RadioGroupStories} />
+<Subtitle of={RadioGroupStories} />
+<Description of={RadioGroupStories} />
+<Primary of={RadioGroupStories} />
+
+Note that `RadioGroup` does not include an `isOptional` prop, since a `RadioGroup` should
+only be used if it's required. If you need similar functionality that supports optionality,
+use a `Checkbox` or `CheckboxGroup` instead.
+
+<Controls />
+<Stories />
