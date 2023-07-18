@@ -12,7 +12,6 @@
 
 import { ReactNode, forwardRef, memo, useCallback, useState } from "react";
 import {
-  Box,
   Chip,
   ListSubheader,
   MenuItem,
@@ -20,6 +19,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
+import { Box } from "./Box";
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
 

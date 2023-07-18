@@ -11,7 +11,8 @@
  */
 
 import { memo, ReactElement } from "react";
-import { Box, Snackbar } from "@mui/material";
+import { Snackbar } from "@mui/material";
+import { Box } from "./Box";
 import { Toast } from "./Toast";
 
 export type ToastStackProps = {
@@ -24,7 +25,13 @@ export type ToastStackProps = {
 const ToastStack = ({ children }: ToastStackProps) => {
   return (
     <Snackbar open={true}>
-      <Box display="flex" flexDirection="column-reverse" gap={2}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column-reverse",
+          gap: 2,
+        }}
+      >
         {children}
       </Box>
     </Snackbar>
