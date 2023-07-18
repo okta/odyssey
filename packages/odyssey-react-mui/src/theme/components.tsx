@@ -560,11 +560,11 @@ export const components = (
             },
           },
           ".Mui-error:not(.Mui-valid) > &": {
-            borderColor: odysseyTokens.BorderColorDangerMain,
+            borderColor: odysseyTokens.BorderColorDangerControl,
 
             "&.Mui-checked": {
               backgroundColor: odysseyTokens.PaletteDangerMain,
-              borderColor: odysseyTokens.BorderColorDangerMain,
+              borderColor: odysseyTokens.BorderColorDangerControl,
             },
 
             "&.Mui-focusVisible": {
@@ -1406,7 +1406,7 @@ export const components = (
           },
 
           [`&.${inputBaseClasses.error}`]: {
-            borderColor: odysseyTokens.BorderColorDangerMain,
+            borderColor: odysseyTokens.BorderColorDangerControl,
           },
 
           [`&.${inputBaseClasses.error}:hover`]: {
@@ -1414,7 +1414,7 @@ export const components = (
           },
 
           [`&.${inputBaseClasses.error}.${inputBaseClasses.focused}`]: {
-            borderColor: odysseyTokens.BorderColorDangerMain,
+            borderColor: odysseyTokens.BorderColorDangerControl,
             boxShadow: `0 0 0 1px ${odysseyTokens.PaletteDangerMain}`,
           },
 
@@ -1724,7 +1724,7 @@ export const components = (
             },
           },
           ".Mui-error > &": {
-            borderColor: odysseyTokens.BorderColorDangerMain,
+            borderColor: odysseyTokens.BorderColorDangerControl,
 
             "&.Mui-focusVisible": {
               boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PaletteDangerMain}`,
