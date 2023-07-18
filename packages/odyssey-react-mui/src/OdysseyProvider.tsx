@@ -12,7 +12,7 @@
 
 import { memo, ReactElement } from "react";
 
-import { ThemeOptions } from "@mui/material";
+import { CssBaseline, ScopedCssBaseline, ThemeOptions } from "@mui/material";
 import { DesignTokensOverride } from "../src/theme/index";
 import { OdysseyCacheProvider } from "./OdysseyCacheProvider";
 import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
@@ -48,7 +48,9 @@ const OdysseyProvider = ({
         languageCode={languageCode}
         translationOverrides={translationOverrides}
       >
-        {children}
+        <CssBaseline>
+          <ScopedCssBaseline>{children}</ScopedCssBaseline>
+        </CssBaseline>
       </OdysseyTranslationProvider>
     </OdysseyThemeProvider>
   </OdysseyCacheProvider>
