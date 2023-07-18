@@ -37,6 +37,33 @@ const storybookMeta: Meta<TypographyProps> = {
     },
   },
   argTypes: {
+    ariaDescribedBy: {
+      control: null,
+      description: "The ID of the element that describes the component.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    ariaLabel: {
+      control: "text",
+      description: "The ARIA label for the component.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    ariaLabelledBy: {
+      control: null,
+      description: "The ID of the element that labels the component.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     children: {
       control: "text",
       description: "The text content of the component.",

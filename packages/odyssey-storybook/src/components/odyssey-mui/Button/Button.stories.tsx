@@ -31,6 +31,33 @@ const storybookMeta: Meta<ButtonProps> = {
   title: "MUI Components/Button",
   component: Button,
   argTypes: {
+    ariaDescribedBy: {
+      control: null,
+      description: "The ID of the element that describes the component.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    ariaLabel: {
+      control: "text",
+      description: "The ARIA label for the component.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    ariaLabelledBy: {
+      control: null,
+      description: "The ID of the element that labels the component.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     isDisabled: {
       control: "boolean",
       description: "If `true`, the button is disabled",
