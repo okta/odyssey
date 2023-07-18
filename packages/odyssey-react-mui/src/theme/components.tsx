@@ -166,16 +166,22 @@ export const components = (
             marginInlineEnd: 0,
           }),
         }),
-        icon: ({ ownerState, theme }) => ({
+        icon: ({ ownerState }) => ({
           marginInlineEnd: 0,
           padding: 0,
           height: `calc(${odysseyTokens.TypographySizeHeading6} * ${odysseyTokens.TypographyLineHeightHeading6})`,
           opacity: 1,
-          ...(ownerState.severity && {
-            color: theme.palette[ownerState.severity].main,
+          ...(ownerState.severity === "info" && {
+            color: odysseyTokens.PalettePrimaryMain,
+          }),
+          ...(ownerState.severity === "error" && {
+            color: odysseyTokens.PaletteDangerMain,
+          }),
+          ...(ownerState.severity === "success" && {
+            color: odysseyTokens.PaletteSuccessMain,
           }),
           ...(ownerState.severity === "warning" && {
-            color: theme.palette[ownerState.severity].dark,
+            color: odysseyTokens.PaletteWarningDark,
           }),
 
           [`& .${svgIconClasses.root}`]: {
@@ -238,7 +244,7 @@ export const components = (
           marginRight: "unset",
           padding: odysseyTokens.Spacing1,
         },
-        endAdornment: ({ theme, ownerState }) => ({
+        endAdornment: ({ ownerState }) => ({
           display: "flex",
           gap: odysseyTokens.Spacing1,
           top: "unset",
@@ -248,7 +254,7 @@ export const components = (
           maxHeight: "unset",
           alignItems: "center",
           whiteSpace: "nowrap",
-          color: theme.palette.action.active,
+          color: odysseyTokens.TypographyColorCaption,
 
           ...(ownerState.disabled === true && {
             display: "none",
@@ -554,11 +560,11 @@ export const components = (
             },
           },
           ".Mui-error:not(.Mui-valid) > &": {
-            borderColor: odysseyTokens.BorderColorDangerMain,
+            borderColor: odysseyTokens.BorderColorDangerControl,
 
             "&.Mui-checked": {
               backgroundColor: odysseyTokens.PaletteDangerMain,
-              borderColor: odysseyTokens.BorderColorDangerMain,
+              borderColor: odysseyTokens.BorderColorDangerControl,
             },
 
             "&.Mui-focusVisible": {
@@ -688,7 +694,7 @@ export const components = (
             fontWeight: odysseyTokens.TypographyWeightHeadingBold,
             lineHeight: odysseyTokens.TypographyLineHeightOverline,
             backgroundColor: odysseyTokens.HueNeutral50,
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorCaption,
             fontSize: odysseyTokens.TypographySizeCaption,
 
             "&::before": {
@@ -921,7 +927,7 @@ export const components = (
           },
 
           "figcaption:not([class])": {
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorCaption,
             fontSize: odysseyTokens.TypographySizeCaption,
           },
 
@@ -1290,7 +1296,7 @@ export const components = (
           marginBlockStart: odysseyTokens.Spacing2,
           [`.${formLabelClasses.root} + &`]: {
             marginBlockStart: `-${odysseyTokens.Spacing1}`,
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorCaption,
           },
           marginBlockEnd: odysseyTokens.Spacing2,
           "&:last-child": {
@@ -1334,14 +1340,14 @@ export const components = (
     },
     MuiInputAdornment: {
       styleOverrides: {
-        root: ({ theme, ownerState }) => ({
+        root: ({ ownerState }) => ({
           display: "flex",
           minWidth: "1.25em",
           maxHeight: "unset",
           margin: 0,
           alignItems: "center",
           whiteSpace: "nowrap",
-          color: theme.palette.action.active,
+          color: odysseyTokens.TypographyColorCaption,
           ...(ownerState.position === "start" && {
             marginInlineStart: odysseyTokens.Spacing2,
           }),
@@ -1400,7 +1406,7 @@ export const components = (
           },
 
           [`&.${inputBaseClasses.error}`]: {
-            borderColor: odysseyTokens.BorderColorDangerMain,
+            borderColor: odysseyTokens.BorderColorDangerControl,
           },
 
           [`&.${inputBaseClasses.error}:hover`]: {
@@ -1408,7 +1414,7 @@ export const components = (
           },
 
           [`&.${inputBaseClasses.error}.${inputBaseClasses.focused}`]: {
-            borderColor: odysseyTokens.BorderColorDangerMain,
+            borderColor: odysseyTokens.BorderColorDangerControl,
             boxShadow: `0 0 0 1px ${odysseyTokens.PaletteDangerMain}`,
           },
 
@@ -1438,7 +1444,7 @@ export const components = (
 
           [`label[data-shrink=false] + .${inputBaseClasses.formControl} &`]: {
             "&::placeholder": {
-              color: odysseyTokens.TypographyColorSub,
+              color: odysseyTokens.TypographyColorCaption,
               opacity: "1 !important",
             },
           },
@@ -1535,7 +1541,7 @@ export const components = (
             },
 
             "&:hover": {
-              color: odysseyTokens.TypographyColorSub,
+              color: odysseyTokens.TypographyColorCaption,
             },
           },
         },
@@ -1550,15 +1556,15 @@ export const components = (
     },
     MuiListSubheader: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: {
           paddingBlock: odysseyTokens.Spacing2,
           paddingInline: odysseyTokens.Spacing4,
           fontSize: odysseyTokens.TypographySizeCaption,
           fontWeight: odysseyTokens.TypographyWeightBodyBold,
-          lineHeight: theme.typography.caption.lineHeight,
-          color: odysseyTokens.TypographyColorSub,
+          lineHeight: odysseyTokens.TypographyLineHeightUi,
+          color: odysseyTokens.TypographyColorCaption,
           textTransform: "uppercase",
-        }),
+        },
       },
     },
     MuiMenu: {
@@ -1572,7 +1578,7 @@ export const components = (
     },
     MuiMenuItem: {
       styleOverrides: {
-        root: ({ theme, ownerState }) => ({
+        root: ({ ownerState }) => ({
           gap: odysseyTokens.Spacing2,
           minHeight: "unset",
           paddingBlock: odysseyTokens.Spacing3,
@@ -1604,7 +1610,7 @@ export const components = (
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
 
               "@media (hover: none)": {
-                backgroundColor: `rgba(${odysseyTokens.PalettePrimaryMain} / ${theme.palette.action.selectedOpacity})`,
+                backgroundColor: odysseyTokens.PalettePrimaryLighter,
               },
             },
           },
@@ -1614,7 +1620,7 @@ export const components = (
           }),
 
           ...(ownerState.divider && {
-            borderBlockEnd: `1px solid ${theme.palette.divider}`,
+            borderBlockEnd: `1px solid ${odysseyTokens.BorderColorDisplay}`,
           }),
 
           [`&.${menuItemClasses.disabled}`]: {
@@ -1718,7 +1724,7 @@ export const components = (
             },
           },
           ".Mui-error > &": {
-            borderColor: odysseyTokens.BorderColorDangerMain,
+            borderColor: odysseyTokens.BorderColorDangerControl,
 
             "&.Mui-focusVisible": {
               boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PaletteDangerMain}`,
@@ -1823,7 +1829,7 @@ export const components = (
         iconPosition: "start",
       },
       styleOverrides: {
-        root: ({ theme, ownerState }) => ({
+        root: ({ ownerState }) => ({
           maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} / 2)`,
           minWidth: "unset",
           minHeight: "unset",
@@ -1848,7 +1854,7 @@ export const components = (
 
           ...(ownerState.wrapped && {
             fontSize: odysseyTokens.TypographySizeCaption,
-            lineHeight: theme.typography.subtitle1.lineHeight,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
           }),
 
           "&:hover": {
@@ -1957,7 +1963,7 @@ export const components = (
           }),
 
           ...(ownerState.variant === "footer" && {
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorCaption,
             lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontSize: odysseyTokens.TypographySizeBody,
           }),
@@ -2068,7 +2074,7 @@ export const components = (
             },
           },
           [`&.${tableSortLabelClasses.active}`]: {
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorCaption,
             [`& .${tableSortLabelClasses.icon}`]: {
               opacity: 1,
               color: "inherit",
@@ -2113,10 +2119,10 @@ export const components = (
           marginBottom: odysseyTokens.Spacing5,
         },
 
-        flexContainer: ({ theme }) => ({
+        flexContainer: {
           gap: odysseyTokens.Spacing5,
-          borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${theme.palette.divider}`,
-        }),
+          borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.BorderColorDisplay}`,
+        },
       },
     },
     MuiTooltip: {
@@ -2127,19 +2133,19 @@ export const components = (
         placement: "top",
       },
       styleOverrides: {
-        tooltip: ({ theme, ownerState }) => ({
+        tooltip: ({ ownerState }) => ({
           maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} / 2)`,
           paddingBlock: odysseyTokens.Spacing2,
           paddingInline: odysseyTokens.Spacing3,
           backgroundColor: odysseyTokens.HueNeutral900,
           color: odysseyTokens.HueNeutralWhite,
           fontSize: odysseyTokens.TypographySizeCaption,
-          lineHeight: theme.typography.subtitle1.lineHeight,
+          lineHeight: odysseyTokens.TypographyLineHeightBody,
           ...(ownerState.touch === true && {
             paddingBlock: odysseyTokens.Spacing2,
             paddingInline: odysseyTokens.Spacing3,
             fontSize: odysseyTokens.TypographySizeCaption,
-            lineHeight: theme.typography.subtitle1.lineHeight,
+            lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontWeight: odysseyTokens.TypographyWeightBody,
           }),
           [`.${tooltipClasses.popper}[data-popper-placement*="left"] &`]: {

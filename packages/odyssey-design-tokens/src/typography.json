@@ -9,11 +9,14 @@
         "comment": "Base text color used for headings",
         "value": "{hue.neutral.900.value}"
       },
-      "bodyInverse": {
+      "inverse": {
         "comment": "Inverse text color typically used on a colorful background",
         "value": "{hue.neutral.white.value}"
       },
-      "sub": {
+      "support": {
+        "value": "{hue.neutral.700.value}"
+      },
+      "caption": {
         "comment": "Text color for subordinate text like captions",
         "value": "{hue.neutral.600.value}"
       },
