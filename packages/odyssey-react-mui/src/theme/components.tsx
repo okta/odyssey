@@ -254,7 +254,7 @@ export const components = (
           maxHeight: "unset",
           alignItems: "center",
           whiteSpace: "nowrap",
-          color: odysseyTokens.TypographyColorSub,
+          color: odysseyTokens.TypographyColorCaption,
 
           ...(ownerState.disabled === true && {
             display: "none",
@@ -694,7 +694,7 @@ export const components = (
             fontWeight: odysseyTokens.TypographyWeightHeadingBold,
             lineHeight: odysseyTokens.TypographyLineHeightOverline,
             backgroundColor: odysseyTokens.HueNeutral50,
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorCaption,
             fontSize: odysseyTokens.TypographySizeCaption,
 
             "&::before": {
@@ -927,7 +927,7 @@ export const components = (
           },
 
           "figcaption:not([class])": {
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorCaption,
             fontSize: odysseyTokens.TypographySizeCaption,
           },
 
@@ -1296,7 +1296,7 @@ export const components = (
           marginBlockStart: odysseyTokens.Spacing2,
           [`.${formLabelClasses.root} + &`]: {
             marginBlockStart: `-${odysseyTokens.Spacing1}`,
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorCaption,
           },
           marginBlockEnd: odysseyTokens.Spacing2,
           "&:last-child": {
@@ -1347,7 +1347,7 @@ export const components = (
           margin: 0,
           alignItems: "center",
           whiteSpace: "nowrap",
-          color: odysseyTokens.TypographyColorSub,
+          color: odysseyTokens.TypographyColorCaption,
           ...(ownerState.position === "start" && {
             marginInlineStart: odysseyTokens.Spacing2,
           }),
@@ -1444,7 +1444,7 @@ export const components = (
 
           [`label[data-shrink=false] + .${inputBaseClasses.formControl} &`]: {
             "&::placeholder": {
-              color: odysseyTokens.TypographyColorSub,
+              color: odysseyTokens.TypographyColorCaption,
               opacity: "1 !important",
             },
           },
@@ -1541,7 +1541,7 @@ export const components = (
             },
 
             "&:hover": {
-              color: odysseyTokens.TypographyColorSub,
+              color: odysseyTokens.TypographyColorCaption,
             },
           },
         },
@@ -1562,7 +1562,7 @@ export const components = (
           fontSize: odysseyTokens.TypographySizeCaption,
           fontWeight: odysseyTokens.TypographyWeightBodyBold,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
-          color: odysseyTokens.TypographyColorSub,
+          color: odysseyTokens.TypographyColorCaption,
           textTransform: "uppercase",
         },
       },
@@ -1963,7 +1963,7 @@ export const components = (
           }),
 
           ...(ownerState.variant === "footer" && {
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorCaption,
             lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontSize: odysseyTokens.TypographySizeBody,
           }),
@@ -2074,7 +2074,7 @@ export const components = (
             },
           },
           [`&.${tableSortLabelClasses.active}`]: {
-            color: odysseyTokens.TypographyColorSub,
+            color: odysseyTokens.TypographyColorCaption,
             [`& .${tableSortLabelClasses.icon}`]: {
               opacity: 1,
               color: "inherit",

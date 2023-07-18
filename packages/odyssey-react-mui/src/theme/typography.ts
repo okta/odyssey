@@ -79,16 +79,18 @@ export const typography = (
       marginBottom: odysseyTokens.Spacing2,
     },
     subtitle1: {
-      color: odysseyTokens.HueNeutral600,
+      // "caption"
+      color: odysseyTokens.TypographyColorCaption,
       fontWeight: Number(odysseyTokens.TypographyWeightBody),
-      fontSize: odysseyTokens.TypographyScale0,
+      fontSize: odysseyTokens.TypographySizeCaption,
       lineHeight: odysseyTokens.TypographyLineHeightBody,
     },
     subtitle2: {
-      color: odysseyTokens.HueNeutral700,
+      // "body.light"
+      color: odysseyTokens.TypographyColorSupport,
       fontFamily: odysseyTokens.TypographyFamilyBody,
       fontWeight: Number(odysseyTokens.TypographyWeightBody),
-      fontSize: odysseyTokens.TypographyScale1,
+      fontSize: odysseyTokens.TypographySizeBody,
       fontFeatureSettings: "'lnum', 'pnum'",
       fontVariant: "normal",
       lineHeight: odysseyTokens.TypographyLineHeightBody,
