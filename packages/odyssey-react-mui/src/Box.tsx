@@ -11,7 +11,7 @@
  */
 
 import { Box as MuiBox, BoxProps as MuiBoxProps } from "@mui/material";
-import { ReactNode } from "react";
+import { ReactNode, forwardRef } from "react";
 
 export type BoxProps = {
   children?: ReactNode;
@@ -19,8 +19,10 @@ export type BoxProps = {
   sx?: MuiBoxProps["sx"];
 };
 
-export const Box = ({ children, component, sx }: BoxProps) => (
-  <MuiBox children={children} component={component} sx={sx} />
+export const Box = forwardRef<HTMLElement, BoxProps>(
+  ({ children, component, sx }, ref) => (
+    <MuiBox ref={ref} children={children} component={component} sx={sx} />
+  )
 );
 
 Box.displayName = "Box";
