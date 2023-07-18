@@ -105,7 +105,7 @@ const storybookMeta: Meta<ButtonProps> = {
     text: {
       control: "text",
       description:
-        "The button text. If blank, the button must include an icon.",
+        "The button text. If blank, the button must include an icon and either `ariaLabel` or `ariaLabelledBy`.",
       table: {
         type: {
           summary: "string",

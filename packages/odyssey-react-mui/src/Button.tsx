@@ -90,6 +90,11 @@ export type ButtonProps = {
       ariaLabel: string;
       ariaLabelledBy?: string;
     }
+  | {
+      text?: undefined | "";
+      ariaLabel?: string;
+      ariaLabelledBy: string;
+    }
 );
 
 const Button = ({

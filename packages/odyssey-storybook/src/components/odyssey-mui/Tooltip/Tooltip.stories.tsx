@@ -133,7 +133,12 @@ export const Disabled: StoryObj<TooltipProps> = {
   ...Template,
   args: {
     children: (
-      <Button variant="secondary" isDisabled startIcon={<DownloadIcon />} />
+      <Button
+        variant="secondary"
+        isDisabled
+        startIcon={<DownloadIcon />}
+        ariaLabel="Download"
+      />
     ),
     ariaType: "description",
     placement: "top",
