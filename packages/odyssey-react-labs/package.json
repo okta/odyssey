@@ -29,7 +29,10 @@
     "@mui/utils": "^5.11.2",
     "@mui/x-date-pickers": "^5.0.15",
     "@okta/odyssey-react-mui": "workspace:*",
-    "date-fns": "^2.29.3"
+    "date-fns": "^2.29.3",
+    "material-react-table": "^1.14.0",
+    "i18next": "^22.4.15",
+    "react-i18next": "^12.2.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.9",

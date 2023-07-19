@@ -18,7 +18,7 @@ import {
   useState,
 } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
-import { StaticTable, type TableColumn } from "@okta/odyssey-react-mui";
+import { StaticTable, type TableColumn } from "@okta/odyssey-react-labs";
 import { Typography } from "@mui/material";
 
 type TokenName = keyof typeof Tokens;
