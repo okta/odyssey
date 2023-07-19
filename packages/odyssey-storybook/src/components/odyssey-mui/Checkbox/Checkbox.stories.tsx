@@ -44,9 +44,9 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
-    isChecked: {
+    isDefaultChecked: {
       control: "boolean",
-      description: "If `true`, the checkbox is checked",
+      description: "If `true`, the checkbox starts checked",
       table: {
         type: {
           summary: "boolean",
@@ -183,7 +183,7 @@ export const Required: StoryObj<CheckboxProps> = {
 export const Checked: StoryObj<CheckboxProps> = {
   args: {
     label: "Pre-flight systems check complete",
-    isChecked: true,
+    isDefaultChecked: true,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Checked");
@@ -217,7 +217,7 @@ export const Indeterminate: StoryObj<CheckboxProps> = {
   args: {
     label: "Pre-flight systems check complete",
     isIndeterminate: true,
-    isChecked: true,
+    isDefaultChecked: true,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Indeterminate");
@@ -227,7 +227,7 @@ export const Indeterminate: StoryObj<CheckboxProps> = {
 export const Invalid: StoryObj<CheckboxProps> = {
   args: {
     label: "Pre-flight systems check complete",
-    isInvalid: true,
+    validity: "invalid",
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Disabled");

@@ -20,7 +20,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 type CheckboxGroupStoryProps = CheckboxGroupProps & {
-  isChecked: Parameters<typeof Checkbox>[0]["isChecked"];
+  isDefaultChecked: Parameters<typeof Checkbox>[0]["isDefaultChecked"];
   isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
 };
 
@@ -120,7 +120,7 @@ const GroupTemplate: StoryObj<CheckboxGroupProps> = {
   ),
   parameters: {
     controls: {
-      exclude: ["isChecked", "isIndeterminate"],
+      exclude: ["isDefaultChecked", "isIndeterminate"],
     },
   },
 };
@@ -133,7 +133,7 @@ export const Disabled: StoryObj<CheckboxGroupStoryProps> = {
   ...GroupTemplate,
   parameters: {
     controls: {
-      exclude: ["isChecked", "isIndeterminate"],
+      exclude: ["isDefaultChecked", "isIndeterminate"],
     },
   },
   args: {
@@ -145,7 +145,7 @@ export const Error: StoryObj<CheckboxGroupStoryProps> = {
   ...GroupTemplate,
   parameters: {
     controls: {
-      exclude: ["isChecked", "isIndeterminate"],
+      exclude: ["isDefaultChecked", "isIndeterminate"],
     },
     docs: {
       description: {
@@ -170,7 +170,7 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
     >
       <Checkbox label="Alfred" name="alfred" value="alfred" validity="valid" />
       <Checkbox
-        isChecked
+        isDefaultChecked
         label="Barbara Gordon"
         name="barbara-gordon"
         value="barbara-gordon"
@@ -182,7 +182,7 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
         validity="valid"
       />
       <Checkbox
-        isChecked
+        isDefaultChecked
         label="The Joker"
         name="the-joker"
         value="the-joker"
@@ -191,7 +191,7 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
   ),
   parameters: {
     controls: {
-      exclude: ["isChecked", "isIndeterminate"],
+      exclude: ["isDefaultChecked", "isIndeterminate"],
     },
     docs: {
       description: {
