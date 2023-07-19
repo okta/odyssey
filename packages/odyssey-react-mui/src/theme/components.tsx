@@ -560,11 +560,11 @@ export const components = (
             },
           },
           ".Mui-error:not(.Mui-valid) > &": {
-            borderColor: odysseyTokens.BorderColorDangerMain,
+            borderColor: odysseyTokens.BorderColorDangerControl,
 
             "&.Mui-checked": {
               backgroundColor: odysseyTokens.PaletteDangerMain,
-              borderColor: odysseyTokens.BorderColorDangerMain,
+              borderColor: odysseyTokens.BorderColorDangerControl,
             },
 
             "&.Mui-focusVisible": {

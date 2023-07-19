@@ -12,10 +12,11 @@
 
 import {
   Checkbox as MuiCheckbox,
+  CheckboxProps as MuiCheckboxProps,
   FormControlLabel,
   Typography,
 } from "@mui/material";
-import { ChangeEvent, memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
@@ -56,7 +57,7 @@ export type CheckboxProps = {
   /**
    * The change event handler for the Checkbox
    */
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: MuiCheckboxProps["onChange"];
   /**
    * The checkbox validity, if different from its enclosing group. Defaults to "inherit".
    */
@@ -99,9 +100,9 @@ const Checkbox = ({
   }, [isRequired, labelProp, t]);
 
   const onChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
-      setIsCheckedValue(checked);
-      onChangeProp?.(event);
+    (event, checked) => {
+      setIsCheckedValue(event.target.checked);
+      onChangeProp?.(event, checked);
     },
     [onChangeProp]
   );
