@@ -18,6 +18,8 @@ import {
 import { ChangeEventHandler, memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
+export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
+
 export type CheckboxProps = {
   /**
    * The ARIA label for the Checkbox
@@ -40,17 +42,9 @@ export type CheckboxProps = {
    */
   isIndeterminate?: boolean;
   /**
-   * Determines whether the Checkbox has an invalid value
-   */
-  isInvalid?: boolean;
-  /**
    * Determines whether the Checkbox is required
    */
   isRequired?: boolean;
-  /**
-   * Determines whether the Checkbox has a valid value
-   */
-  isValid?: boolean;
   /**
    * The label text for the Checkbox
    */
@@ -64,6 +58,10 @@ export type CheckboxProps = {
    */
   onChange?: ChangeEventHandler<EventTarget>;
   /**
+   * The checkbox validity, if different from its enclosing group. Defaults to "inherit".
+   */
+  validity?: (typeof checkboxValidityValues)[number];
+  /**
    * The value attribute of the Checkbox
    */
   value?: string;
@@ -75,12 +73,11 @@ const Checkbox = ({
   isChecked,
   isDisabled,
   isIndeterminate,
-  isInvalid,
   isRequired,
-  isValid,
   label: labelProp,
   name,
   onChange,
+  validity = "inherit",
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
@@ -105,7 +102,13 @@ const Checkbox = ({
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       checked={isChecked}
-      className={isInvalid ? "Mui-error" : isValid ? "Mui-valid" : ""}
+      className={
+        validity === "invalid"
+          ? "Mui-error"
+          : validity === "valid"
+          ? "Mui-valid"
+          : ""
+      }
       control={
         <MuiCheckbox indeterminate={isIndeterminate} required={isRequired} />
       }

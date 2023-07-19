@@ -168,7 +168,7 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
       label="Who will you invite to your birthday?"
       isRequired={args.isRequired}
     >
-      <Checkbox label="Alfred" name="alfred" value="alfred" isValid />
+      <Checkbox label="Alfred" name="alfred" value="alfred" validity="valid" />
       <Checkbox
         isChecked
         label="Barbara Gordon"
@@ -179,7 +179,7 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
         label="Hal Jordan"
         name="hal-jordan"
         value="hal-jordan"
-        isValid
+        validity="valid"
       />
       <Checkbox
         isChecked

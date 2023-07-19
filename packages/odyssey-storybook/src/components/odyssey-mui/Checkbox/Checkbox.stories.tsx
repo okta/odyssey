@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Checkbox, CheckboxProps } from "@okta/odyssey-react-mui";
+import {
+  Checkbox,
+  CheckboxProps,
+  checkboxValidityValues,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
@@ -37,25 +41,6 @@ const storybookMeta: Meta<CheckboxProps> = {
       table: {
         type: {
           summary: "string",
-        },
-      },
-    },
-    isInvalid: {
-      control: "boolean",
-      description:
-        "If `true`, indicates that the checkbox has an invalid value",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    isValid: {
-      control: "boolean",
-      description: "If `true`, indicates that the checkbox has a valid value",
-      table: {
-        type: {
-          summary: "boolean",
         },
       },
     },
@@ -121,6 +106,20 @@ const storybookMeta: Meta<CheckboxProps> = {
           summary: "func",
         },
         defaultValue: "",
+      },
+    },
+    validity: {
+      options: checkboxValidityValues,
+      control: { type: "radio" },
+      description:
+        "The checkbox validity, if different from its enclosing group. Doesn't need to be set if the checkbox isn't a different validity from an enclosing `CheckboxGroup`.",
+      table: {
+        type: {
+          summary: checkboxValidityValues.join(" | "),
+        },
+        defaultValue: {
+          summary: "inherit",
+        },
       },
     },
     value: {
