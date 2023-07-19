@@ -25,9 +25,17 @@ import { NullElement } from "./NullElement";
 
 export type MenuButtonProps = {
   /**
-   * aria-label to describe the button when the button label is empty, e.g., an Icon only Button
+   * The ARIA label for the Button
    */
   ariaLabel?: string;
+  /**
+   * The ID of the element that labels the Button
+   */
+  ariaLabelledBy?: string;
+  /**
+   * The ID of the element that describes the Button
+   */
+  ariaDescribedBy?: string;
   /**
    * The label on the triggering Button
    */
@@ -52,10 +60,28 @@ export type MenuButtonProps = {
    * The id of the Button
    */
   id?: string;
-};
+} & (
+  | {
+      buttonLabel: string;
+      ariaLabel?: string;
+      ariaLabelledBy?: string;
+    }
+  | {
+      buttonLabel?: undefined | "";
+      ariaLabel: string;
+      ariaLabelledBy?: string;
+    }
+  | {
+      buttonLabel?: undefined | "";
+      ariaLabel?: string;
+      ariaLabelledBy: string;
+    }
+);
 
 const MenuButton = ({
   ariaLabel,
+  ariaLabelledBy,
+  ariaDescribedBy,
   buttonLabel = "",
   buttonVariant = "secondary",
   children,
@@ -100,6 +126,8 @@ const MenuButton = ({
         onClick={openMenu}
         text={buttonLabel}
         ariaLabel={ariaLabel}
+        ariaLabelledBy={ariaLabelledBy}
+        ariaDescribedBy={ariaDescribedBy}
         variant={buttonVariant}
       />
 
