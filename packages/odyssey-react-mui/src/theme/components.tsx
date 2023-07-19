@@ -526,14 +526,14 @@ export const components = (
           transition: theme.transitions.create(
             ["border-color", "background-color", "box-shadow"],
             {
-              duration: theme.transitions.duration.short,
+              duration: odysseyTokens.TransitionDurationMain,
             }
           ),
 
           [`.${svgIconClasses.root}`]: {
             color: odysseyTokens.HueNeutralWhite,
             transition: theme.transitions.create(["color"], {
-              duration: theme.transitions.duration.short,
+              duration: odysseyTokens.TransitionDurationMain,
             }),
           },
 
@@ -1381,7 +1381,7 @@ export const components = (
           transition: theme.transitions.create(
             ["border-color", "background-color", "box-shadow"],
             {
-              duration: theme.transitions.duration.short,
+              duration: odysseyTokens.TransitionDurationMain,
             }
           ),
 
@@ -1696,7 +1696,7 @@ export const components = (
           transition: theme.transitions.create(
             ["border-color", "background-color", "box-shadow"],
             {
-              duration: theme.transitions.duration.short,
+              duration: odysseyTokens.TransitionDurationMain,
             }
           ),
 
@@ -1708,7 +1708,7 @@ export const components = (
             borderRadius: "50%",
             backgroundColor: "transparent",
             transition: theme.transitions.create(["background-color"], {
-              duration: theme.transitions.duration.short,
+              duration: odysseyTokens.TransitionDurationMain,
             }),
           },
 
@@ -2088,7 +2088,7 @@ export const components = (
           opacity: 0,
           color: "inherit",
           transition: theme.transitions.create(["opacity", "transform"], {
-            duration: theme.transitions.duration.shorter,
+            duration: odysseyTokens.TransitionDurationMain,
           }),
           userSelect: "none",
 
