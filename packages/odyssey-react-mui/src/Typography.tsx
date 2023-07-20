@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { ElementType, ReactNode } from "react";
 
-export const typographyVariantValues: Record<
+export type TypographyComponentValue =
   | "h1"
   | "h2"
   | "h3"
@@ -26,7 +26,10 @@ export const typographyVariantValues: Record<
   | "body"
   | "subtitle2"
   | "caption"
-  | "legend",
+  | "legend";
+
+export const typographyVariantValue: Record<
+  TypographyComponentValue,
   MuiTypographyProps["variant"]
 > = {
   h1: "h1",
@@ -81,7 +84,7 @@ export type TypographyProps = {
   /**
    * The variant of Typography to render.
    */
-  variant?: keyof typeof typographyVariantValues;
+  variant?: keyof typeof typographyVariantValue;
 };
 
 export const Typography = ({
@@ -113,7 +116,7 @@ export const Typography = ({
       classes={classes}
       color={color}
       component={component}
-      variant={typographyVariantValues[variant]}
+      variant={typographyVariantValue[variant]}
     />
   );
 };
