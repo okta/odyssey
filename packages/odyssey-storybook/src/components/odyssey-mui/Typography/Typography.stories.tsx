@@ -24,7 +24,7 @@ import {
   Legend,
   TypographyProps,
   typographyColorValues,
-  typographyVariantValues,
+  typographyVariantMapping,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
@@ -104,12 +104,12 @@ const storybookMeta: Meta<TypographyProps> = {
       },
     },
     variant: {
-      options: Object.keys(typographyVariantValues),
+      options: Object.keys(typographyVariantMapping),
       control: { type: "select" },
       description: "The variant of Typography to render.",
       table: {
         type: {
-          summary: Object.keys(typographyVariantValues).join(" | "),
+          summary: Object.keys(typographyVariantMapping).join(" | "),
         },
       },
     },

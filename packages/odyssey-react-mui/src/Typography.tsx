@@ -14,9 +14,9 @@ import {
   Typography as MuiTypography,
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
-import { ElementType, ReactNode } from "react";
+import { ElementType, ReactNode, useMemo } from "react";
 
-export type TypographyComponentValue =
+export type TypographyVariantValue =
   | "h1"
   | "h2"
   | "h3"
@@ -28,8 +28,8 @@ export type TypographyComponentValue =
   | "caption"
   | "legend";
 
-export const typographyVariantValue: Record<
-  TypographyComponentValue,
+export const typographyVariantMapping: Record<
+  TypographyVariantValue,
   MuiTypographyProps["variant"]
 > = {
   h1: "h1",
@@ -84,7 +84,7 @@ export type TypographyProps = {
   /**
    * The variant of Typography to render.
    */
-  variant?: keyof typeof typographyVariantValue;
+  variant?: keyof typeof typographyVariantMapping;
 };
 
 export const Typography = ({
@@ -94,18 +94,21 @@ export const Typography = ({
   children,
   classes,
   color,
-  component,
+  component: componentProp,
   variant = "body",
 }: TypographyProps) => {
-  if (!component) {
-    if (variant === "body") {
-      component = "p";
-    } else if (variant === "caption" || variant === "subtitle2") {
-      component = "h6";
-    } else {
-      component = variant;
+  const component = useMemo(() => {
+    if (!componentProp) {
+      if (variant === "body") {
+        return "p";
+      } else if (variant === "caption" || variant === "subtitle2") {
+        return "h6";
+      } else {
+        return variant;
+      }
     }
-  }
+    return componentProp;
+  }, [componentProp, variant]);
 
   return (
     <MuiTypography
@@ -116,7 +119,7 @@ export const Typography = ({
       classes={classes}
       color={color}
       component={component}
-      variant={typographyVariantValue[variant]}
+      variant={typographyVariantMapping[variant]}
     />
   );
 };
