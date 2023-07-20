@@ -12,7 +12,7 @@
 
 import type { StoryObj } from "@storybook/react";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import {
   InformationCircleFilledIcon,
   Link,

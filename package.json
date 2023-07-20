@@ -21,7 +21,6 @@
     "postinstall": "yarn build && [ -z ${CI:-} ] && husky install || exit 0",
     "prettier-check": "prettier --ignore-unknown --loglevel warn --check .",
     "prettier-write": "prettier --ignore-unknown --loglevel warn --write .",
-    "start:labs": "yarn workspace @okta/odyssey-react-labs dev",
     "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "start": "npm-run-all --sequential build --parallel dev:source start:storybook",

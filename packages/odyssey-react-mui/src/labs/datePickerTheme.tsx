@@ -16,8 +16,8 @@ import {
   ArrowRightIcon,
   CalendarIcon,
   ChevronDownIcon,
-  createOdysseyMuiTheme,
-} from "@okta/odyssey-react-mui";
+} from "../iconDictionary";
+import { createOdysseyMuiTheme } from "../theme";
 import { ThemeOptions } from "@mui/material";
 import * as Tokens from "@okta/odyssey-design-tokens";
 

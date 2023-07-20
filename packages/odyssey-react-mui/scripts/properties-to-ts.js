@@ -13,16 +13,18 @@
 // Part of this has been copied over from @okta/ui-build-tools' own internal node script
 // https://github.com/okta/ui-build-tools/blob/master/packages/clis/i18n/properties-to-json.js
 
-const { resolve, join, basename, extname } = require("node:path");
-const {
+import { resolve, join, basename, extname } from "node:path";
+import {
   readFileSync,
   writeFileSync,
   rmSync,
   existsSync,
   mkdirSync,
-} = require("fs");
-const properties = require("properties");
-const readdir = require("recursive-readdir");
+} from "node:fs";
+import properties from "properties";
+import readdir from "recursive-readdir";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 
 const convert = (baseFiles, propertiesTargetDir) => {
   for (const src of baseFiles) {
@@ -63,16 +65,7 @@ async function convertPropertiesToJson({ resourcePath, targetJsonPath }) {
   convert(baseFiles, propertiesTargetDirectory);
 }
 
-exports.handler = async (argv) => {
-  const { resourcePath, targetJsonPath } = argv;
-
-  await convertPropertiesToJson({
-    resourcePath,
-    targetJsonPath,
-  });
-};
-
-require("yargs")
+yargs(hideBin(process.argv))
   .scriptName("properties-to-ts")
   .usage("$0 <cmd> [args]")
   .command(
