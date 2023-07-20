@@ -16,7 +16,7 @@ declare global {
   }
 }
 
-import createCache from "@emotion/cache";
+import createCache, { StylisPlugin } from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import { memo, ReactElement, useMemo } from "react";
 
@@ -25,9 +25,11 @@ import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
 const OdysseyCacheProvider = ({
   children,
   nonce,
+  stylisPlugins,
 }: {
   children: ReactElement;
   nonce?: string;
+  stylisPlugins: StylisPlugin[];
 }) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
 
@@ -36,8 +38,9 @@ const OdysseyCacheProvider = ({
       createCache({
         key: uniqueAlphabeticalId,
         nonce: nonce || window.cspNonce,
+        stylisPlugins,
       }),
-    [nonce, uniqueAlphabeticalId]
+    [nonce, stylisPlugins, uniqueAlphabeticalId]
   );
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
