@@ -11,12 +11,13 @@
  */
 
 import * as odysseyIcons from "@okta/odyssey-react-mui/icons";
-import { ReactElement, createElement } from "react";
+import { createElement } from "react";
 
-const icons: { [key: string]: ReactElement } = {};
-
-Object.values(odysseyIcons).forEach((iconComponent) => {
-  icons[iconComponent.displayName || ""] = createElement(iconComponent);
-});
+const icons = Object.values(odysseyIcons)
+  .filter((iconComponent) => iconComponent.displayName)
+  .map((iconComponent) => ({
+    [iconComponent.displayName]: createElement(iconComponent),
+  }))
+  .reduce((accumulator, iconObject) => ({ ...accumulator, ...iconObject }), {});
 
 export default icons;
