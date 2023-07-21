@@ -13,8 +13,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { GroupIcon } from "@okta/odyssey-react-mui";
-import { icons } from "../../../../.storybook/components/iconUtils";
+import { GroupIcon } from "@okta/odyssey-react-mui/icons";
+import icons from "../../../../.storybook/components/iconUtils";
 import { userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";

@@ -16,11 +16,15 @@
       ],
       "labs": [
         "./dist/src/labs/index.d.ts"
+      ],
+      "icons": [
+        "./dist/src/icons/index.d.ts"
       ]
     }
   },
   "exports": {
     "./labs": "./dist/labs/index.js",
+    "./icons": "./dist/icons/index.js",
     ".": "./dist/index.js",
     "./README.md": "./README.md"
   },
