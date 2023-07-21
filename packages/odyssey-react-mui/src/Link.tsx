@@ -37,7 +37,12 @@ export type LinkProps = {
   /**
    * The HTML `target` attribute for the Link
    */
-  target?: "_self" | "_blank" | "_parent" | "_top" | string;
+  target?:
+    | "_self"
+    | "_blank"
+    | "_parent"
+    | "_top"
+    | (string & NonNullable<unknown>);
   /**
    * The visual presentation of the Link (default or monochrome)
    */
