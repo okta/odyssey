@@ -205,7 +205,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       return (
         <MenuItem key={option.value} value={option.value}>
           {isMultiSelect && (
-            <Checkbox isChecked={selectedValue.includes(option.value)} />
+            <Checkbox isDefaultChecked={selectedValue.includes(option.value)} />
           )}
           {option.text}
         </MenuItem>
