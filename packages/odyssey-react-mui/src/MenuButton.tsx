@@ -20,13 +20,17 @@ import { NullElement } from "./NullElement";
 
 export type MenuButtonProps = {
   /**
-   * The <MenuItem> components within the Menu.
+   * The ARIA label for the Button
    */
-  children: Array<
-    ReactElement<
-      typeof MenuItem | typeof Divider | typeof ListSubheader | NullElement
-    >
-  >;
+  ariaLabel?: string;
+  /**
+   * The ID of the element that labels the Button
+   */
+  ariaLabelledBy?: string;
+  /**
+   * The ID of the element that describes the Button
+   */
+  ariaDescribedBy?: string;
   /**
    * The label on the triggering Button
    */
@@ -36,26 +40,48 @@ export type MenuButtonProps = {
    */
   buttonVariant?: (typeof buttonVariantValues)[number];
   /**
+   * The <MenuItem> components within the Menu.
+   */
+  children: Array<
+    ReactElement<
+      typeof MenuItem | typeof Divider | typeof ListSubheader | NullElement
+    >
+  >;
+  /**
    * The end Icon on the trigggering Button
    */
   endIcon?: ReactElement;
   /**
-   * The id of the button
+   * The id of the Button
    */
   id?: string;
-  /**
-   * aria-label to describe the button when the button label is empty, e.g., an Icon only Button
-   */
-  ariaLabel?: string;
-};
+} & (
+  | {
+      buttonLabel: string;
+      ariaLabel?: string;
+      ariaLabelledBy?: string;
+    }
+  | {
+      buttonLabel?: undefined | "";
+      ariaLabel: string;
+      ariaLabelledBy?: string;
+    }
+  | {
+      buttonLabel?: undefined | "";
+      ariaLabel?: string;
+      ariaLabelledBy: string;
+    }
+);
 
 const MenuButton = ({
+  ariaLabel,
+  ariaLabelledBy,
+  ariaDescribedBy,
   buttonLabel = "",
   buttonVariant = "secondary",
   children,
   endIcon = <ChevronDownIcon />,
   id: idOverride,
-  ariaLabel,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -95,6 +121,8 @@ const MenuButton = ({
         onClick={openMenu}
         text={buttonLabel}
         ariaLabel={ariaLabel}
+        ariaLabelledBy={ariaLabelledBy}
+        ariaDescribedBy={ariaDescribedBy}
         variant={buttonVariant}
       />
 

@@ -34,6 +34,9 @@ export type FieldProps = {
    * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
    */
   fieldType: (typeof fieldTypeValues)[number];
+  /**
+   * If `true`, the Field label will be shown
+   */
   hasVisibleLabel: boolean;
   /**
    * The helper text content.

@@ -29,20 +29,41 @@ import {
 } from "react";
 
 export type DialogProps = {
-  callToActionPrimaryComponent?: ReactElement<typeof Button>;
-  callToActionSecondaryComponent?: ReactElement<typeof Button>;
-  callToActionTertiaryComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
+   */
+  callToActionFirstComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.
+   */
+  callToActionSecondComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.
+   */
+  callToActionLastComponent?: ReactElement<typeof Button>;
+  /**
+   * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
+   */
   children: ReactNode;
-  onClose: () => void;
+  /**
+   * When set to `true`, the Dialog will be visible.
+   */
   isOpen: boolean;
+  /**
+   * Callback that controls what happens when the Dialog is dismissed
+   */
+  onClose: () => void;
+  /**
+   * The title of the Dialog
+   */
   title: string;
   ariaLabel: string;
 };
 
 const Dialog = ({
-  callToActionPrimaryComponent,
-  callToActionSecondaryComponent,
-  callToActionTertiaryComponent,
+  callToActionFirstComponent,
+  callToActionSecondComponent,
+  callToActionLastComponent,
   children,
   isOpen,
   onClose,
@@ -98,13 +119,13 @@ const Dialog = ({
         {content}
       </DialogContent>
 
-      {(callToActionPrimaryComponent ||
-        callToActionSecondaryComponent ||
-        callToActionTertiaryComponent) && (
+      {(callToActionFirstComponent ||
+        callToActionSecondComponent ||
+        callToActionLastComponent) && (
         <DialogActions>
-          {callToActionTertiaryComponent}
-          {callToActionSecondaryComponent}
-          {callToActionPrimaryComponent}
+          {callToActionLastComponent}
+          {callToActionSecondComponent}
+          {callToActionFirstComponent}
         </DialogActions>
       )}
     </MuiDialog>

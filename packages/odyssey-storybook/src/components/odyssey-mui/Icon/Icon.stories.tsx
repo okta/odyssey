@@ -17,7 +17,7 @@ import {
   StaticTable,
   type TableColumn,
 } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta = {
   title: "MUI Components/Icons",

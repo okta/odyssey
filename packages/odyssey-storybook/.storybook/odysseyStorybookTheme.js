@@ -8,7 +8,7 @@ import {
   PalettePrimaryMain,
   PalettePrimaryDark,
   TypographyColorBody,
-  TypographyColorBodyInverse,
+  TypographyColorInverse,
   TypographyFamilyBody,
   TypographyFamilyMono,
 } from "@okta/odyssey-design-tokens";
@@ -31,7 +31,7 @@ export default create({
 
   // Text colors
   textColor: TypographyColorBody,
-  textInverseColor: TypographyColorBodyInverse,
+  textInverseColor: TypographyColorInverse,
 
   // Toolbar default and active colors
   barTextColor: HueNeutral600,

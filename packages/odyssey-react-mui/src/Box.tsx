@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2022-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,13 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// TEMP: Remove this file when we get real tests.
+import { Box as MuiBox, BoxProps as MuiBoxProps } from "@mui/material";
+import { ReactNode, forwardRef } from "react";
 
-// `export {}` is a hack to tell TS this is a module, not a global JS file.
-export {};
+export type BoxProps = {
+  children?: ReactNode;
+  component?: MuiBoxProps["component"];
+  sx?: MuiBoxProps["sx"];
+};
 
-describe("Labs Sample", () => {
-  test("Fake", () => {
-    expect(1 + 1).toBe(2);
-  });
-});
+export const Box = forwardRef<HTMLElement, BoxProps>(
+  ({ children, component, sx }, ref) => (
+    <MuiBox ref={ref} children={children} component={component} sx={sx} />
+  )
+);
+
+Box.displayName = "Box";

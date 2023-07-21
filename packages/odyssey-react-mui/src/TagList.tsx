@@ -16,6 +16,9 @@ import { memo, ReactElement, useMemo } from "react";
 import { ChipElementType, TagListContext } from "./TagListContext";
 
 export type TagListProps = {
+  /**
+   * The Tag or array of Tags within the TagList
+   */
   children: ReactElement<typeof Tag> | Array<ReactElement<typeof Tag>>;
 };
 

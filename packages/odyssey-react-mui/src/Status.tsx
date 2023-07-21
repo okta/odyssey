@@ -22,17 +22,15 @@ export const statusVariantValues = ["lamp", "pill"] as const;
 
 export type StatusProps = {
   /**
-   * Determine the color and icon of the alert
-   */
-  severity: (typeof statusSeverityValues)[number];
-
-  /**
-   * The text content of the status
+   * The text content of the Status
    */
   label: string;
-
   /**
-   * The style of indicator
+   * Determine the color and icon of the Status
+   */
+  severity: (typeof statusSeverityValues)[number];
+  /**
+   * The style of the Status indicator
    */
   variant?: (typeof statusVariantValues)[number];
 };

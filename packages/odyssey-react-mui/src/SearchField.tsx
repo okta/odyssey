@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useState, useEffect } from "react";
 import { InputAdornment, InputBase } from "@mui/material";
 import {
   ChangeEventHandler,
@@ -20,8 +21,9 @@ import {
   useCallback,
 } from "react";
 
-import { SearchIcon } from "./icons";
+import { CloseCircleFilledIcon, SearchIcon } from "./icons";
 import { Field } from "./Field";
+import { Button } from "./Button";
 
 export type SearchFieldProps = {
   /**
@@ -51,6 +53,10 @@ export type SearchFieldProps = {
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
+   * Callback fired when the clear button is pressed.
+   */
+  onClear?: () => void;
+  /**
    * Callback fired when the value is changed.
    */
   onChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
@@ -76,14 +82,37 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       id: idOverride,
       isDisabled = false,
       label,
-      onChange,
+      onChange: onChangeProp,
       onFocus,
       onBlur,
+      onClear: onClearProp,
       placeholder,
-      value,
+      value: controlledValue,
     },
     ref
   ) => {
+    const [uncontrolledValue, setUncontrolledValue] = useState("");
+
+    const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> =
+      useCallback(
+        (event) => {
+          setUncontrolledValue(event.currentTarget.value);
+          onChangeProp?.(event);
+        },
+        [onChangeProp]
+      );
+
+    const onClear = useCallback(() => {
+      setUncontrolledValue("");
+      onClearProp?.();
+    }, [onClearProp]);
+
+    useEffect(() => {
+      if (controlledValue !== undefined) {
+        setUncontrolledValue(controlledValue);
+      }
+    }, [controlledValue]);
+
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id }) => (
         <InputBase
@@ -91,6 +120,21 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
+          endAdornment={
+            uncontrolledValue && (
+              <InputAdornment position="end">
+                <Button
+                  ariaLabel="Clear"
+                  isDisabled={isDisabled}
+                  onClick={onClear}
+                  size="small"
+                  startIcon={<CloseCircleFilledIcon />}
+                  text=""
+                  variant="floating"
+                />
+              </InputAdornment>
+            )
+          }
           id={id}
           name={id}
           onChange={onChange}
@@ -104,18 +148,23 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             </InputAdornment>
           }
           type="search"
-          value={value}
+          value={
+            controlledValue === undefined ? uncontrolledValue : controlledValue
+          }
         />
       ),
       [
         autoCompleteType,
         hasInitialFocus,
+        isDisabled,
+        onClear,
         onChange,
         onFocus,
         onBlur,
         placeholder,
         ref,
-        value,
+        controlledValue,
+        uncontrolledValue,
       ]
     );
 

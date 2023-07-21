@@ -19,29 +19,65 @@ import { ChangeEventHandler, memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 export type CheckboxProps = {
+  /**
+   * The ARIA label for the Checkbox
+   */
   ariaLabel?: string;
+  /**
+   * The ID of the element that labels the Checkbox
+   */
   ariaLabelledBy?: string;
-  isInvalid?: boolean;
-  isValid?: boolean;
+  /**
+   * Determines whether the Checkbox is checked
+   */
   isChecked?: boolean;
+  /**
+   * Determines whether the Checkbox is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * Determines whether the Checkbox is in an indeterminate state
+   */
   isIndeterminate?: boolean;
+  /**
+   * Determines whether the Checkbox has an invalid value
+   */
+  isInvalid?: boolean;
+  /**
+   * Determines whether the Checkbox is required
+   */
   isRequired?: boolean;
+  /**
+   * Determines whether the Checkbox has a valid value
+   */
+  isValid?: boolean;
+  /**
+   * The label text for the Checkbox
+   */
   label?: string;
+  /**
+   * The name attribute of the Checkbox
+   */
   name?: string;
+  /**
+   * The change event handler for the Checkbox
+   */
   onChange?: ChangeEventHandler<EventTarget>;
+  /**
+   * The value attribute of the Checkbox
+   */
   value?: string;
 };
 
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
-  isInvalid,
-  isValid,
   isChecked,
   isDisabled,
   isIndeterminate,
+  isInvalid,
   isRequired,
+  isValid,
   label: labelProp,
   name,
   onChange,
