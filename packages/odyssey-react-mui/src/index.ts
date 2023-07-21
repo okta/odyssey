@@ -12,8 +12,6 @@
 
 export { deepmerge, visuallyHidden } from "@mui/utils";
 
-export type { MRT_ColumnDef as TableColumn } from "material-react-table";
-
 export {
   createTheme,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
@@ -74,7 +72,6 @@ export * from "./Icon";
 export * from "./iconDictionary";
 export * from "./Infobox";
 export * from "./Link";
-export * from "./materialReactTableTypes";
 export * from "./MenuButton";
 export * from "./MenuItem";
 export * from "./NativeSelect";
@@ -83,14 +80,12 @@ export * from "./OdysseyCacheProvider";
 export * from "./OdysseyProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./OdysseyTranslationProvider";
-export * from "./PaginatedTable";
 export * from "./PasswordField";
 export * from "./Radio";
 export * from "./RadioGroup";
 export * from "./ScreenReaderText";
 export * from "./SearchField";
 export * from "./Select";
-export * from "./StaticTable";
 export * from "./Status";
 export * from "./Tabs";
 export * from "./Tag";

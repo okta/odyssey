@@ -11,12 +11,12 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
+import { Button } from "@okta/odyssey-react-mui";
 import {
-  Button,
   TableColumn,
   StaticTable,
   StaticTableProps,
-} from "@okta/odyssey-react-mui";
+} from "@okta/odyssey-react-mui/labs";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
