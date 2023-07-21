@@ -10,13 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import * as OdysseyIcons from "@okta/odyssey-react-mui/icons";
+import * as odysseyIcons from "@okta/odyssey-react-mui/icons";
 import { ReactElement, createElement } from "react";
 
 const icons: { [key: string]: ReactElement } = {};
 
-Object.values(OdysseyIcons).forEach((iconComponent) => {
-  icons[iconComponent.displayName as string] = createElement(iconComponent);
+Object.values(odysseyIcons).forEach((iconComponent) => {
+  icons[iconComponent.displayName || ""] = createElement(iconComponent);
 });
 
 export default icons;
