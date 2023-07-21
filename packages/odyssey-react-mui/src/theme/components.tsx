@@ -1448,6 +1448,21 @@ export const components = (
               opacity: "1 !important",
             },
           },
+
+          [`&::-webkit-search-cancel-button`]: {
+            display: "none",
+            "-webkit-appearance": "none",
+            "-moz-appearance": "none",
+          },
+
+          [`&::-moz-search-cancel-button`]: {
+            display: "none",
+            "-moz-appearance": "none",
+          },
+
+          [`&::-ms-clear`]: {
+            display: "none",
+          },
         },
       },
     },
