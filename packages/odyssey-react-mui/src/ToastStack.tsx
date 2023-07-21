@@ -11,8 +11,7 @@
  */
 
 import { memo, ReactElement } from "react";
-import { Snackbar } from "@mui/material";
-import { Box } from "./Box";
+import { Box, Snackbar } from "@mui/material";
 import { Toast } from "./Toast";
 
 export type ToastStackProps = {
