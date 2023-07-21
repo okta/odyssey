@@ -27,7 +27,7 @@ import {
   CalendarIcon,
   MoreIcon,
 } from "@okta/odyssey-react-mui/icons";
-import { icons } from "../../../../.storybook/components/iconUtils";
+import icons from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";

@@ -19,7 +19,7 @@ import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
-import { icons } from "../../../../.storybook/components/iconUtils";
+import icons from "../../../../.storybook/components/iconUtils";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {
   title: "MUI Components/Tabs",
