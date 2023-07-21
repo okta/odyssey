@@ -89,7 +89,27 @@ const storybookMeta: Meta<MenuButtonProps> = {
     ariaLabel: {
       control: "text",
       description:
-        "aria-label to describe the button when the button label is empty",
+        "aria-label to describe the MenuButton when the button label is empty",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    ariaLabelledBy: {
+      control: "text",
+      description:
+        "The ID of the element that labels the MenuButton. Only needed if the button has no text and `ariaLabel` is empty.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    ariaDescribedBy: {
+      control: "text",
+      description:
+        "The ID of the element that describes the MenuButton, if one exists.",
       table: {
         type: {
           summary: "string",
@@ -130,7 +150,15 @@ export const Simple: StoryObj<MenuButtonProps> = {
       <MenuItem key="3">Launch</MenuItem>,
     ],
   },
-  play: async ({ args, canvasElement, step }) => {
+  play: async ({
+    args,
+    canvasElement,
+    step,
+  }: {
+    args: MenuButtonProps;
+    canvasElement: HTMLElement;
+    step: PlaywrightProps<MenuButtonProps>["step"];
+  }) => {
     clickMenuButton({ canvasElement, step })(args, "Menu Button Simple");
   },
 };
@@ -158,7 +186,15 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
       </MenuItem>,
     ],
   },
-  play: async ({ args, canvasElement, step }) => {
+  play: async ({
+    args,
+    canvasElement,
+    step,
+  }: {
+    args: MenuButtonProps;
+    canvasElement: HTMLElement;
+    step: PlaywrightProps<MenuButtonProps>["step"];
+  }) => {
     clickMenuButton({ canvasElement, step })(args, "Menu Button Action Icons");
   },
 };
@@ -202,7 +238,15 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
       </MenuItem>,
     ],
   },
-  play: async ({ args, canvasElement, step }) => {
+  play: async ({
+    args,
+    canvasElement,
+    step,
+  }: {
+    args: MenuButtonProps;
+    canvasElement: HTMLElement;
+    step: PlaywrightProps<MenuButtonProps>["step"];
+  }) => {
     clickMenuButton({ canvasElement, step })(args, "Menu Button Destructive");
   },
 };
