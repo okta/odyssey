@@ -80,9 +80,9 @@ export const typography = (
     },
     subtitle1: {
       // "caption"
-      color: odysseyTokens.TypographyColorCaption,
+      color: odysseyTokens.TypographyColorSubordinate,
       fontWeight: Number(odysseyTokens.TypographyWeightBody),
-      fontSize: odysseyTokens.TypographySizeCaption,
+      fontSize: odysseyTokens.TypographySizeSubordinate,
       lineHeight: odysseyTokens.TypographyLineHeightBody,
     },
     subtitle2: {
@@ -95,7 +95,7 @@ export const typography = (
       fontVariant: "normal",
       lineHeight: odysseyTokens.TypographyLineHeightBody,
       letterSpacing: "initial",
-      marginBlockEnd: odysseyTokens.Spacing5,
+      marginBlockEnd: odysseyTokens.Spacing4,
     },
     body1: {
       color: odysseyTokens.TypographyColorBody,

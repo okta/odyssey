@@ -12,7 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
-import { StaticTable, type TableColumn } from "@okta/odyssey-react-mui";
+import { StaticTable, type TableColumn } from "@okta/odyssey-react-mui/labs";
 import * as iconDictionary from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 

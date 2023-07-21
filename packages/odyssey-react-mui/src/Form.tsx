@@ -117,18 +117,25 @@ const Form = ({
         padding: (theme) => theme.spacing(0),
       }}
     >
-      {title && (
-        <Typography variant="h4" component="h1">
-          {title}
-        </Typography>
-      )}
-      {description && (
-        <Typography component="p" variant="subtitle2">
-          {description}
-        </Typography>
-      )}
-      {alert}
-      {children}
+      <Box
+        component="div"
+        sx={{
+          marginBlockEnd: (theme) => theme.spacing(4),
+        }}
+      >
+        {title && (
+          <Typography variant="h4" component="h1">
+            {title}
+          </Typography>
+        )}
+        {description && (
+          <Typography component="p" variant="subtitle2">
+            {description}
+          </Typography>
+        )}
+        {alert}
+      </Box>
+      <Box component="div">{children}</Box>
       {formActions && (
         <Box
           component="div"
@@ -136,6 +143,7 @@ const Form = ({
             display: "flex",
             justifyContent: "flex-start",
             gap: (theme) => theme.spacing(1),
+            marginBlockStart: (theme) => theme.spacing(7),
           }}
         >
           {formActions}
