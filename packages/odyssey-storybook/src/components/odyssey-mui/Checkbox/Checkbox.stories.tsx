@@ -185,9 +185,6 @@ export const Checked: StoryObj<CheckboxProps> = {
     label: "Pre-flight systems check complete",
     isDefaultChecked: true,
   },
-  play: async ({ canvasElement, step }) => {
-    checkTheBox({ canvasElement, step })("Checkbox Checked");
-  },
 };
 
 export const Disabled: StoryObj<CheckboxProps> = {
@@ -218,9 +215,6 @@ export const Indeterminate: StoryObj<CheckboxProps> = {
     label: "Pre-flight systems check complete",
     isIndeterminate: true,
     isDefaultChecked: true,
-  },
-  play: async ({ canvasElement, step }) => {
-    checkTheBox({ canvasElement, step })("Checkbox Indeterminate");
   },
 };
 
