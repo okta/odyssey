@@ -157,6 +157,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         autoCompleteType,
         hasInitialFocus,
         isDisabled,
+        onClear,
         onChange,
         onFocus,
         onBlur,
