@@ -12,9 +12,10 @@
 
 import { memo, ReactElement } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { Button } from "./Button";
 import { Infobox } from "./Infobox";
+import { Heading4, Support } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
 export const formEncodingTypeValues = [
@@ -123,16 +124,8 @@ const Form = ({
           marginBlockEnd: (theme) => theme.spacing(4),
         }}
       >
-        {title && (
-          <Typography variant="h4" component="h1">
-            {title}
-          </Typography>
-        )}
-        {description && (
-          <Typography component="p" variant="subtitle2">
-            {description}
-          </Typography>
-        )}
+        {title && <Heading4 component="h1">{title}</Heading4>}
+        {description && <Support>{description}</Support>}
         {alert}
       </Box>
       <Box component="div">{children}</Box>

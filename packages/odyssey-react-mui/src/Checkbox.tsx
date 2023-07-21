@@ -14,8 +14,8 @@ import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
   FormControlLabel,
-  Typography,
 } from "@mui/material";
+import { Typography } from "./Typography";
 import { memo, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 

@@ -10,7 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { AlertProps, TablePaginationProps, Typography } from "@mui/material";
+import { AlertProps, TablePaginationProps } from "@mui/material";
+import { Typography } from "./Typography";
 import MaterialReactTable, {
   MRT_PaginationState,
   type MRT_ColumnFiltersState,

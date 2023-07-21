@@ -17,7 +17,7 @@ import {
   infoboxRoleValues,
   infoboxSeverityValues,
   Link,
-  Typography,
+  Paragraph,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -67,9 +67,9 @@ const storybookMeta: Meta<InfoboxProps> = {
   },
   args: {
     children: (
-      <Typography paragraph>
+      <Paragraph>
         You're signed in from Moonbase Alpha-6, located on Luna.
-      </Typography>
+      </Paragraph>
     ),
     severity: "info",
   },
@@ -82,9 +82,9 @@ export default storybookMeta;
 export const Info: StoryObj<InfoboxProps> = {
   args: {
     children: (
-      <Typography paragraph>
+      <Paragraph>
         You're signed in from Moonbase Alpha-6, located on Luna.
-      </Typography>
+      </Paragraph>
     ),
     severity: "info",
   },
@@ -93,9 +93,9 @@ export const Info: StoryObj<InfoboxProps> = {
 export const Error: StoryObj<InfoboxProps> = {
   args: {
     children: (
-      <Typography paragraph>
+      <Paragraph>
         Reconfigure the fuel mixture ratios and perform safety checks again.
-      </Typography>
+      </Paragraph>
     ),
     role: "alert",
     severity: "error",
@@ -106,10 +106,10 @@ export const Error: StoryObj<InfoboxProps> = {
 export const Warning: StoryObj<InfoboxProps> = {
   args: {
     children: (
-      <Typography paragraph>
+      <Paragraph>
         Complete all safety checks before requesting approval to launch your
         mission.
-      </Typography>
+      </Paragraph>
     ),
     role: "status",
     severity: "warning",
@@ -120,9 +120,9 @@ export const Warning: StoryObj<InfoboxProps> = {
 export const Success: StoryObj<InfoboxProps> = {
   args: {
     children: (
-      <Typography paragraph>
+      <Paragraph>
         Safety checks are complete. Your mission is ready for liftoff.
-      </Typography>
+      </Paragraph>
     ),
     role: "status",
     severity: "success",
@@ -134,10 +134,10 @@ export const BlockLink: StoryObj<InfoboxProps> = {
   args: {
     children: (
       <>
-        <Typography paragraph>
+        <Paragraph>
           There is an issue with the fuel mixture ratios. Reconfigure the fuel
           mixture and perform the safety checks again.
-        </Typography>
+        </Paragraph>
 
         <Link href="#" variant="monochrome">
           Visit fueling console

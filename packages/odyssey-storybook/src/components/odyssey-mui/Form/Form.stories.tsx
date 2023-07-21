@@ -23,8 +23,8 @@ import {
   formMethodValues,
   Infobox,
   Link,
+  Paragraph,
   TextField,
-  Typography,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -287,10 +287,10 @@ export const KitchenSink: StoryObj<FormProps> = {
           description="This information will be used to track your passengers' whereabouts."
           alert={
             <Infobox severity="error" role="alert" title="Standby for boarding">
-              <Typography paragraph>
+              <Paragraph>
                 There is an issue with the fuel mixture ratios. Reconfigure the
                 fuel mixture and perform the safety checks again.
-              </Typography>
+              </Paragraph>
 
               <Link href="#" variant="monochrome">
                 Visit fueling console

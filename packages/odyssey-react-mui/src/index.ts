@@ -37,8 +37,6 @@ export {
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   ScopedCssBaseline,
   ThemeProvider,
-  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
-  Typography,
 } from "@mui/material";
 
 export type {
@@ -54,7 +52,6 @@ export type {
   PaperProps,
   ScopedCssBaselineProps,
   ThemeOptions,
-  TypographyProps,
 } from "@mui/material";
 
 export * from "./Autocomplete";
@@ -95,4 +92,5 @@ export * from "./theme";
 export * from "./Toast";
 export * from "./ToastStack";
 export * from "./Tooltip";
+export * from "./Typography";
 export * from "./useUniqueId";
