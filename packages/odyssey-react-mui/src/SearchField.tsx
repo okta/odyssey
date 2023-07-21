@@ -121,7 +121,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
           endAdornment={
-            uncontrolledValue.length > 0 && (
+            uncontrolledValue && (
               <InputAdornment position="end">
                 <Button
                   ariaLabel="Clear"
