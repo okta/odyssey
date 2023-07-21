@@ -11,7 +11,7 @@
  */
 
 import { memo, ReactNode } from "react";
-import { Alert, AlertTitle } from "@mui/material";
+import { Alert, AlertTitle, Box } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
@@ -51,7 +51,7 @@ const Infobox = ({ children, role, severity, title }: InfoboxProps) => {
     <Alert role={role} severity={severity} variant="infobox">
       <ScreenReaderText>{t(`severity.${severity}`)}: </ScreenReaderText>
       {title && <AlertTitle>{title}</AlertTitle>}
-      {children}
+      <Box component="div">{children}</Box>
     </Alert>
   );
 };

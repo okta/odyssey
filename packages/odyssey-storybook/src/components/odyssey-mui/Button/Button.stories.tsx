@@ -15,47 +15,46 @@ import type { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
   buttonSizeValues,
+  buttonTypeValues,
   buttonVariantValues,
   AddIcon,
 } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { icons } from "../../../../.storybook/components/iconUtils";
 
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
+import { Box } from "@mui/material";
 
 const storybookMeta: Meta<ButtonProps> = {
   title: "MUI Components/Button",
   component: Button,
   argTypes: {
-    ariaDescribedBy: {
-      control: null,
-      description: "The ID of the element that describes the component.",
+    endIcon: {
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
+      description: "An optional icon to display at the end of the button",
       table: {
         type: {
-          summary: "string",
+          summary: "<Icon />",
         },
+        defaultValue: "",
       },
     },
-    ariaLabel: {
-      control: "text",
-      description: "The ARIA label for the component.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    ariaLabelledBy: {
+    id: {
       control: null,
-      description: "The ID of the element that labels the component.",
+      description: "An optional ID for the button",
       table: {
         type: {
           summary: "string",
         },
+        defaultValue: "",
       },
     },
     isDisabled: {
@@ -76,6 +75,16 @@ const storybookMeta: Meta<ButtonProps> = {
         type: {
           summary: "boolean",
         },
+      },
+    },
+    onClick: {
+      action: true,
+      description: "Callback fired when the button is clicked",
+      table: {
+        type: {
+          summary: "(() => void)",
+        },
+        defaultValue: "",
       },
     },
     size: {
@@ -105,30 +114,6 @@ const storybookMeta: Meta<ButtonProps> = {
         defaultValue: "",
       },
     },
-    endIcon: {
-      control: {
-        type: "select",
-      },
-      options: Object.keys(icons),
-      mapping: icons,
-      description: "An optional icon to display at the end of the button",
-      table: {
-        type: {
-          summary: "<Icon />",
-        },
-        defaultValue: "",
-      },
-    },
-    id: {
-      control: null,
-      description: "An optional ID for the button",
-      table: {
-        type: {
-          summary: "string",
-        },
-        defaultValue: "",
-      },
-    },
     text: {
       control: "text",
       description:
@@ -151,6 +136,20 @@ const storybookMeta: Meta<ButtonProps> = {
         defaultValue: "",
       },
     },
+    type: {
+      options: buttonTypeValues,
+      control: { type: "radio" },
+      description: "The type of the HTML button element.",
+      defaultValue: "button",
+      table: {
+        type: {
+          summary: buttonTypeValues.join(" | "),
+        },
+        defaultValue: {
+          summary: "button",
+        },
+      },
+    },
     variant: {
       options: buttonVariantValues,
       control: { type: "radio" },
@@ -163,16 +162,6 @@ const storybookMeta: Meta<ButtonProps> = {
         defaultValue: {
           summary: "secondary",
         },
-      },
-    },
-    onClick: {
-      action: true,
-      description: "Callback fired when the button is clicked",
-      table: {
-        type: {
-          summary: "(() => void)",
-        },
-        defaultValue: "",
       },
     },
   },
@@ -426,7 +415,21 @@ export const IconOnly: StoryObj<ButtonProps> = {
   args: {
     startIcon: <AddIcon />,
     ariaLabel: "Add crew",
-    text: "",
+    text: undefined,
     tooltipText: "Add crew",
   },
+};
+
+export const KitchenSink: StoryObj<ButtonProps> = {
+  name: "Kitchen sink",
+  render: () => (
+    <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
+      <Button variant="primary" text="Primary" />
+      <Button variant="secondary" text="Secondary" />
+      <Button variant="tertiary" text="Tertiary" />
+      <Button variant="danger" text="Danger" />
+      <Button variant="floating" text="Floating" />
+      <Button variant="primary" startIcon={<AddIcon />} ariaLabel="Add" />
+    </Box>
+  ),
 };

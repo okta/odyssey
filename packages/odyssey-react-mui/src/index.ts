@@ -17,8 +17,6 @@ export type { MRT_ColumnDef as TableColumn } from "material-react-table";
 export {
   createTheme,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
-  Box,
-  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   CssBaseline,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   DialogContentText,
@@ -44,7 +42,6 @@ export {
 } from "@mui/material";
 
 export type {
-  BoxProps,
   CssBaselineProps,
   DialogContentTextProps,
   DividerProps,
@@ -61,6 +58,7 @@ export type {
 
 export * from "./Autocomplete";
 export * from "./Banner";
+export * from "./Box";
 export * from "./Button";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";

@@ -15,7 +15,7 @@ import { memo, useMemo } from "react";
 
 import { useTranslation } from "react-i18next";
 import { ScreenReaderText } from "./ScreenReaderText";
-import { Caption } from "./Typography";
+import { Subordinate } from "./Typography";
 
 export type FieldLabelProps = {
   hasVisibleLabel: boolean;
@@ -38,7 +38,9 @@ const FieldLabel = ({
     () => (
       <MuiInputLabel htmlFor={inputId} id={id}>
         <span>{text}</span>
-        {isOptional && <Caption>{t("fieldlabel.optional.text")}</Caption>}
+        {isOptional && (
+          <Subordinate>{t("fieldlabel.optional.text")}</Subordinate>
+        )}
       </MuiInputLabel>
     ),
     [id, inputId, isOptional, text, t]

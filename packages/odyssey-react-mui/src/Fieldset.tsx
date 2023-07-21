@@ -14,7 +14,7 @@ import { memo, ReactElement } from "react";
 
 import { Box } from "@mui/material";
 import { Infobox } from "./Infobox";
-import { Caption, Legend } from "./Typography";
+import { Legend, Subordinate } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
 export type FieldsetProps = {
@@ -73,7 +73,7 @@ const Fieldset = ({
       }}
     >
       <Legend>{legend}</Legend>
-      {description && <Caption component="p">{description}</Caption>}
+      {description && <Subordinate component="p">{description}</Subordinate>}
       {alert}
       {children}
     </Box>

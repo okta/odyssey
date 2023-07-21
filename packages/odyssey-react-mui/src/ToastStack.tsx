@@ -24,7 +24,13 @@ export type ToastStackProps = {
 const ToastStack = ({ children }: ToastStackProps) => {
   return (
     <Snackbar open={true}>
-      <Box display="flex" flexDirection="column-reverse" gap={2}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column-reverse",
+          gap: 2,
+        }}
+      >
         {children}
       </Box>
     </Snackbar>

@@ -10,10 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Checkbox as MuiCheckbox, FormControlLabel } from "@mui/material";
+import {
+  Checkbox as MuiCheckbox,
+  CheckboxProps as MuiCheckboxProps,
+  FormControlLabel,
+} from "@mui/material";
 import { Typography } from "./Typography";
-import { ChangeEventHandler, memo, useMemo } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
 export type CheckboxProps = {
   /**
@@ -27,7 +33,7 @@ export type CheckboxProps = {
   /**
    * Determines whether the Checkbox is checked
    */
-  isChecked?: boolean;
+  isDefaultChecked?: boolean;
   /**
    * Determines whether the Checkbox is disabled
    */
@@ -37,17 +43,9 @@ export type CheckboxProps = {
    */
   isIndeterminate?: boolean;
   /**
-   * Determines whether the Checkbox has an invalid value
-   */
-  isInvalid?: boolean;
-  /**
    * Determines whether the Checkbox is required
    */
   isRequired?: boolean;
-  /**
-   * Determines whether the Checkbox has a valid value
-   */
-  isValid?: boolean;
   /**
    * The label text for the Checkbox
    */
@@ -59,7 +57,11 @@ export type CheckboxProps = {
   /**
    * The change event handler for the Checkbox
    */
-  onChange?: ChangeEventHandler<EventTarget>;
+  onChange?: MuiCheckboxProps["onChange"];
+  /**
+   * The checkbox validity, if different from its enclosing group. Defaults to "inherit".
+   */
+  validity?: (typeof checkboxValidityValues)[number];
   /**
    * The value attribute of the Checkbox
    */
@@ -69,18 +71,18 @@ export type CheckboxProps = {
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
-  isChecked,
+  isDefaultChecked = false,
   isDisabled,
   isIndeterminate,
-  isInvalid,
   isRequired,
-  isValid,
   label: labelProp,
   name,
-  onChange,
+  onChange: onChangeProp,
+  validity = "inherit",
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
+  const [isCheckedValue, setIsCheckedValue] = useState(isDefaultChecked);
 
   const label = useMemo(() => {
     if (isRequired) {
@@ -97,12 +99,26 @@ const Checkbox = ({
     }
   }, [isRequired, labelProp, t]);
 
+  const onChange = useCallback(
+    (event, checked) => {
+      setIsCheckedValue(event.target.checked);
+      onChangeProp?.(event, checked);
+    },
+    [onChangeProp]
+  );
+
   return (
     <FormControlLabel
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
-      checked={isChecked}
-      className={isInvalid ? "Mui-error" : isValid ? "Mui-valid" : ""}
+      checked={isCheckedValue}
+      className={
+        validity === "invalid"
+          ? "Mui-error"
+          : validity === "valid"
+          ? "Mui-valid"
+          : ""
+      }
       control={
         <MuiCheckbox indeterminate={isIndeterminate} required={isRequired} />
       }

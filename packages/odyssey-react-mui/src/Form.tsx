@@ -118,10 +118,17 @@ const Form = ({
         padding: (theme) => theme.spacing(0),
       }}
     >
-      {title && <Heading4 component="h1">{title}</Heading4>}
-      {description && <Support component="p">{description}</Support>}
-      {alert}
-      {children}
+      <Box
+        component="div"
+        sx={{
+          marginBlockEnd: (theme) => theme.spacing(4),
+        }}
+      >
+        {title && <Heading4 component="h1">{title}</Heading4>}
+        {description && <Support>{description}</Support>}
+        {alert}
+      </Box>
+      <Box component="div">{children}</Box>
       {formActions && (
         <Box
           component="div"
@@ -129,6 +136,7 @@ const Form = ({
             display: "flex",
             justifyContent: "flex-start",
             gap: (theme) => theme.spacing(1),
+            marginBlockStart: (theme) => theme.spacing(7),
           }}
         >
           {formActions}

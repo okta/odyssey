@@ -20,7 +20,7 @@ import {
   Heading5,
   Heading6,
   Paragraph,
-  Caption,
+  Subordinate,
   Support,
   Legend,
   TypographyProps,
@@ -217,15 +217,15 @@ export const BodyStory: StoryObj<TypographyProps> = {
   },
 };
 
-export const CaptionStory: StoryObj<TypographyProps> = {
-  name: "Caption",
+export const SubordinateStory: StoryObj<TypographyProps> = {
+  name: "Subordinate",
   args: {
-    children: "This is a caption.",
-    variant: "caption",
+    children: "This is subordinate text.",
+    variant: "subordinate",
   },
-  render: (args) => <Caption children={args.children} />,
+  render: (args) => <Subordinate children={args.children} />,
   play: async ({}) => {
-    await axeRun("Typopgraphy caption");
+    await axeRun("Typopgraphy subordinate");
   },
 };
 

@@ -29,7 +29,7 @@ const preview: Preview = {
           "Welcome",
           ["Introduction (README)", "Docs Status"],
           "Installation",
-          ["Odyssey-React-MUI", "Odyssey-React-Labs"],
+          "Odyssey-React-MUI",
           "Guidelines",
           "Contributing",
           "MUI Components",

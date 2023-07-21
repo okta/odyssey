@@ -32,15 +32,15 @@ export type DialogProps = {
   /**
    * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
    */
-  callToActionPrimaryComponent?: ReactElement<typeof Button>;
+  callToActionFirstComponent?: ReactElement<typeof Button>;
   /**
    * An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.
    */
-  callToActionSecondaryComponent?: ReactElement<typeof Button>;
+  callToActionSecondComponent?: ReactElement<typeof Button>;
   /**
    * An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.
    */
-  callToActionTertiaryComponent?: ReactElement<typeof Button>;
+  callToActionLastComponent?: ReactElement<typeof Button>;
   /**
    * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
    */
@@ -61,9 +61,9 @@ export type DialogProps = {
 };
 
 const Dialog = ({
-  callToActionPrimaryComponent,
-  callToActionSecondaryComponent,
-  callToActionTertiaryComponent,
+  callToActionFirstComponent,
+  callToActionSecondComponent,
+  callToActionLastComponent,
   children,
   isOpen,
   onClose,
@@ -119,13 +119,13 @@ const Dialog = ({
         {content}
       </DialogContent>
 
-      {(callToActionPrimaryComponent ||
-        callToActionSecondaryComponent ||
-        callToActionTertiaryComponent) && (
+      {(callToActionFirstComponent ||
+        callToActionSecondComponent ||
+        callToActionLastComponent) && (
         <DialogActions>
-          {callToActionTertiaryComponent}
-          {callToActionSecondaryComponent}
-          {callToActionPrimaryComponent}
+          {callToActionLastComponent}
+          {callToActionSecondComponent}
+          {callToActionFirstComponent}
         </DialogActions>
       )}
     </MuiDialog>

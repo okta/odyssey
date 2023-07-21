@@ -24,7 +24,7 @@ export type TypographyVariantValue =
   | "h5"
   | "h6"
   | "body"
-  | "caption"
+  | "subordinate"
   | "support"
   | "legend";
 
@@ -39,7 +39,7 @@ export const typographyVariantMapping: Record<
   h5: "h5",
   h6: "h6",
   body: "body1",
-  caption: "subtitle1",
+  subordinate: "subtitle1",
   support: "subtitle2",
   legend: "legend",
 } as const;
@@ -101,7 +101,7 @@ export const Typography = ({
     if (!componentProp) {
       if (variant === "body") {
         return "p";
-      } else if (variant === "caption" || variant === "support") {
+      } else if (variant === "subordinate" || variant === "support") {
         return "h6";
       } else {
         return variant;
@@ -287,7 +287,7 @@ export const Paragraph = ({
 
 Paragraph.displayName = "Paragraph";
 
-export const Caption = ({
+export const Subordinate = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -304,11 +304,11 @@ export const Caption = ({
     classes={classes}
     color={color}
     component={component}
-    variant="caption"
+    variant="subordinate"
   />
 );
 
-Caption.displayName = "Caption";
+Subordinate.displayName = "Subordinate";
 
 export const Support = ({
   ariaDescribedBy,

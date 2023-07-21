@@ -18,6 +18,7 @@ import { MuiPropsContext } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
+export const buttonTypeValues = ["button", "submit", "reset"] as const;
 export const buttonVariantValues = [
   "primary",
   "secondary",
@@ -76,6 +77,10 @@ export type ButtonProps = {
    */
   tooltipText?: string;
   /**
+   * The type of the HTML button element
+   */
+  type?: (typeof buttonTypeValues)[number];
+  /**
    * The variant of the Button
    */
   variant: (typeof buttonVariantValues)[number];
@@ -92,8 +97,9 @@ const Button = ({
   onClick,
   size = "medium",
   startIcon,
-  text,
+  text = "",
   tooltipText,
+  type = "button",
   variant,
 }: ButtonProps) => {
   const muiProps = useContext(MuiPropsContext);
@@ -112,12 +118,16 @@ const Button = ({
         onClick={onClick}
         size={size}
         startIcon={startIcon}
+        type={type}
         variant={variant}
       >
         {text}
       </MuiButton>
     ),
     [
+      ariaLabel,
+      ariaLabelledBy,
+      ariaDescribedBy,
       endIcon,
       id,
       isDisabled,
@@ -126,10 +136,8 @@ const Button = ({
       size,
       startIcon,
       text,
+      type,
       variant,
-      ariaLabel,
-      ariaLabelledBy,
-      ariaDescribedBy,
     ]
   );
 
