@@ -17,7 +17,7 @@ import {
   infoboxRoleValues,
   infoboxSeverityValues,
   Link,
-  P,
+  Paragraph,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -66,7 +66,11 @@ const storybookMeta: Meta<InfoboxProps> = {
     },
   },
   args: {
-    children: <P>You're signed in from Moonbase Alpha-6, located on Luna.</P>,
+    children: (
+      <Paragraph>
+        You're signed in from Moonbase Alpha-6, located on Luna.
+      </Paragraph>
+    ),
     severity: "info",
   },
   decorators: [MuiThemeDecorator],
@@ -77,7 +81,11 @@ export default storybookMeta;
 
 export const Info: StoryObj<InfoboxProps> = {
   args: {
-    children: <P>You're signed in from Moonbase Alpha-6, located on Luna.</P>,
+    children: (
+      <Paragraph>
+        You're signed in from Moonbase Alpha-6, located on Luna.
+      </Paragraph>
+    ),
     severity: "info",
   },
 };
@@ -85,9 +93,9 @@ export const Info: StoryObj<InfoboxProps> = {
 export const Error: StoryObj<InfoboxProps> = {
   args: {
     children: (
-      <P>
+      <Paragraph>
         Reconfigure the fuel mixture ratios and perform safety checks again.
-      </P>
+      </Paragraph>
     ),
     role: "alert",
     severity: "error",
@@ -98,10 +106,10 @@ export const Error: StoryObj<InfoboxProps> = {
 export const Warning: StoryObj<InfoboxProps> = {
   args: {
     children: (
-      <P>
+      <Paragraph>
         Complete all safety checks before requesting approval to launch your
         mission.
-      </P>
+      </Paragraph>
     ),
     role: "status",
     severity: "warning",
@@ -112,7 +120,9 @@ export const Warning: StoryObj<InfoboxProps> = {
 export const Success: StoryObj<InfoboxProps> = {
   args: {
     children: (
-      <P>Safety checks are complete. Your mission is ready for liftoff.</P>
+      <Paragraph>
+        Safety checks are complete. Your mission is ready for liftoff.
+      </Paragraph>
     ),
     role: "status",
     severity: "success",
@@ -124,10 +134,10 @@ export const BlockLink: StoryObj<InfoboxProps> = {
   args: {
     children: (
       <>
-        <P>
+        <Paragraph>
           There is an issue with the fuel mixture ratios. Reconfigure the fuel
           mixture and perform the safety checks again.
-        </P>
+        </Paragraph>
 
         <Link href="#" variant="monochrome">
           Visit fueling console
