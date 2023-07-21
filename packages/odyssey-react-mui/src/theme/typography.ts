@@ -80,9 +80,9 @@ export const typography = (
     },
     subtitle1: {
       // "caption"
-      color: odysseyTokens.TypographyColorCaption,
+      color: odysseyTokens.TypographyColorSubordinate,
       fontWeight: Number(odysseyTokens.TypographyWeightBody),
-      fontSize: odysseyTokens.TypographySizeCaption,
+      fontSize: odysseyTokens.TypographySizeSubordinate,
       lineHeight: odysseyTokens.TypographyLineHeightBody,
     },
     subtitle2: {

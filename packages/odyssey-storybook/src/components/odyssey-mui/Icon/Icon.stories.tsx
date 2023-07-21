@@ -17,9 +17,8 @@ import {
   type IconProps,
   iconDictionary,
   iconSizeValues,
-  StaticTable,
-  type TableColumn,
 } from "@okta/odyssey-react-mui";
+import { StaticTable, type TableColumn } from "@okta/odyssey-react-mui/labs";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<IconProps> = {
