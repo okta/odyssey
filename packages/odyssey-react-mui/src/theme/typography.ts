@@ -95,7 +95,7 @@ export const typography = (
       fontVariant: "normal",
       lineHeight: odysseyTokens.TypographyLineHeightBody,
       letterSpacing: "initial",
-      marginBlockEnd: odysseyTokens.Spacing5,
+      marginBlockEnd: odysseyTokens.Spacing4,
     },
     body1: {
       color: odysseyTokens.TypographyColorBody,
