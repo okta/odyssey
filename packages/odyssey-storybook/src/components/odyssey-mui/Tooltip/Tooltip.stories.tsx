@@ -11,13 +11,8 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  Button,
-  DownloadIcon,
-  Tag,
-  Tooltip,
-  TooltipProps,
-} from "@okta/odyssey-react-mui";
+import { Button, Tag, Tooltip, TooltipProps } from "@okta/odyssey-react-mui";
+import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";

@@ -10,14 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  Button,
-  buttonVariantValues,
-  ChevronDownIcon,
-  MenuItem,
-  useUniqueId,
-} from "./";
+import { Button, buttonVariantValues, MenuItem, useUniqueId } from "./";
 import { Divider, ListSubheader, Menu } from "@mui/material";
+import { ChevronDownIcon } from "./icons";
 import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";

@@ -12,18 +12,14 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import {
-  BugIcon,
-  TabItemProps,
-  TabsProps,
-  Tabs,
-} from "@okta/odyssey-react-mui";
+import { TabItemProps, TabsProps, Tabs } from "@okta/odyssey-react-mui";
+import { BugIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
-import { icons } from "../../../../.storybook/components/iconUtils";
+import icons from "../../../../.storybook/components/iconUtils";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {
   title: "MUI Components/Tabs",

@@ -13,17 +13,10 @@
 import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
 import { memo, ReactElement, useCallback, useContext } from "react";
 import { TagListContext } from "./TagListContext";
-import { Icon } from "./Icon";
 import { MuiPropsContext } from "./MuiPropsContext";
 
 export type TagProps = {
-  /**
-   * An optional icon to display alongside the Tag label
-   */
-  icon?: ReactElement<typeof Icon>;
-  /**
-   * If `true`, the Tag is disabled
-   */
+  icon?: ReactElement;
   isDisabled?: boolean;
   /**
    * The label text for the Tag
