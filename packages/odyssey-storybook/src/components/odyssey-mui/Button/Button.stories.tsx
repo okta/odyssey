@@ -27,6 +27,12 @@ import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
+type playType = {
+  args: ButtonProps;
+  canvasElement: HTMLElement;
+  step: PlaywrightProps<ButtonProps>["step"];
+};
+
 const storybookMeta: Meta<ButtonProps> = {
   title: "MUI Components/Button",
   component: Button,
@@ -187,15 +193,7 @@ const interactWithButton =
 
 export const ButtonPrimary: StoryObj<ButtonProps> = {
   name: "Primary",
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: ButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<ButtonProps>["step"];
-  }) => {
+  play: async ({ args, canvasElement, step }: playType) => {
     interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Primary",
@@ -227,15 +225,7 @@ export const ButtonSecondary: StoryObj<ButtonProps> = {
     text: "Add crew",
     variant: "secondary",
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: ButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<ButtonProps>["step"];
-  }) => {
+  play: async ({ args, canvasElement, step }: playType) => {
     interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Secondary",
@@ -259,15 +249,7 @@ export const ButtonTertiary: StoryObj<ButtonProps> = {
     text: "Add crew",
     variant: "tertiary",
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: ButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<ButtonProps>["step"];
-  }) => {
+  play: async ({ args, canvasElement, step }: playType) => {
     interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Tertiary",
@@ -291,15 +273,7 @@ export const ButtonDanger: StoryObj<ButtonProps> = {
     text: "Add crew",
     variant: "danger",
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: ButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<ButtonProps>["step"];
-  }) => {
+  play: async ({ args, canvasElement, step }: playType) => {
     interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Danger",
@@ -323,15 +297,7 @@ export const ButtonFloating: StoryObj<ButtonProps> = {
     text: "Add crew",
     variant: "floating",
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: ButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<ButtonProps>["step"];
-  }) => {
+  play: async ({ args, canvasElement, step }: playType) => {
     interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Floating",
@@ -355,15 +321,7 @@ export const ButtonSmall: StoryObj<ButtonProps> = {
     text: "Add crew",
     size: "small",
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: ButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<ButtonProps>["step"];
-  }) => {
+  play: async ({ args, canvasElement, step }: playType) => {
     interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Small",
@@ -379,15 +337,7 @@ export const ButtonMedium: StoryObj<ButtonProps> = {
     size: "medium",
     variant: "secondary",
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: ButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<ButtonProps>["step"];
-  }) => {
+  play: async ({ args, canvasElement, step }: playType) => {
     interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Medium",
@@ -403,15 +353,7 @@ export const ButtonLarge: StoryObj<ButtonProps> = {
     size: "large",
     variant: "danger",
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: ButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<ButtonProps>["step"];
-  }) => {
+  play: async ({ args, canvasElement, step }: playType) => {
     interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Large",
@@ -426,15 +368,7 @@ export const ButtonFullWidth: StoryObj<ButtonProps> = {
     text: "Add crew",
     isFullWidth: true,
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: ButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<ButtonProps>["step"];
-  }) => {
+  play: async ({ args, canvasElement, step }: playType) => {
     interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button Fullwidth",
@@ -449,15 +383,7 @@ export const ButtonWithIcon: StoryObj<ButtonProps> = {
     text: "Add crew",
     startIcon: <AddIcon />,
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: ButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<ButtonProps>["step"];
-  }) => {
+  play: async ({ args, canvasElement, step }: playType) => {
     interactWithButton({ canvasElement, step })({
       args,
       actionName: "Button with Icon",
