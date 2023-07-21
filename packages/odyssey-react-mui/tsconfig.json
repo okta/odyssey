@@ -3,5 +3,8 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react"
+  },
+  "ts-node": {
+    "files": true
   }
 }

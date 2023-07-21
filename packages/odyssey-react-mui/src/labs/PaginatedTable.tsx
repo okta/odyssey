@@ -11,7 +11,7 @@
  */
 
 import { AlertProps, TablePaginationProps } from "@mui/material";
-import { Typography } from "./Typography";
+import { Typography } from "../Typography";
 import MaterialReactTable, {
   MRT_PaginationState,
   type MRT_ColumnFiltersState,

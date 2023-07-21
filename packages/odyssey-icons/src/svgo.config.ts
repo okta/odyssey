@@ -12,7 +12,7 @@
 
 import type { Config } from "svgo";
 
-const config: Config = {
+const svgoConfig: Config = {
   multipass: true,
   plugins: [
     {
@@ -25,6 +25,4 @@ const config: Config = {
   ],
 };
 
-module.exports = config;
-
-export default config;
+export default svgoConfig;

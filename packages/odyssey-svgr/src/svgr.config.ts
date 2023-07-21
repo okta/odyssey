@@ -25,4 +25,5 @@ const svgrConfig: Config = {
 
 export default svgrConfig;
 
+// Don't remove this. It's critical for the CLI script to run properly.
 module.exports = svgrConfig;
