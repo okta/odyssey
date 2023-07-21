@@ -399,7 +399,7 @@ export const IconOnly: StoryObj<ButtonProps> = {
   args: {
     startIcon: <AddIcon />,
     ariaLabel: "Add crew",
-    text: "",
+    text: undefined,
     tooltipText: "Add crew",
   },
 };
