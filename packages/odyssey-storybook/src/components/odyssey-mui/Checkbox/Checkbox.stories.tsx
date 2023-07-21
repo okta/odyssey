@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Checkbox, CheckboxProps } from "@okta/odyssey-react-mui";
+import {
+  Checkbox,
+  CheckboxProps,
+  checkboxValidityValues,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
@@ -40,28 +44,9 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
-    isInvalid: {
+    isDefaultChecked: {
       control: "boolean",
-      description:
-        "If `true`, indicates that the checkbox has an invalid value",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    isValid: {
-      control: "boolean",
-      description: "If `true`, indicates that the checkbox has a valid value",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
-    isChecked: {
-      control: "boolean",
-      description: "If `true`, the checkbox is checked",
+      description: "If `true`, the checkbox starts checked",
       table: {
         type: {
           summary: "boolean",
@@ -121,6 +106,20 @@ const storybookMeta: Meta<CheckboxProps> = {
           summary: "func",
         },
         defaultValue: "",
+      },
+    },
+    validity: {
+      options: checkboxValidityValues,
+      control: { type: "radio" },
+      description:
+        "The checkbox validity, if different from its enclosing group. Doesn't need to be set if the checkbox isn't a different validity from an enclosing `CheckboxGroup`.",
+      table: {
+        type: {
+          summary: checkboxValidityValues.join(" | "),
+        },
+        defaultValue: {
+          summary: "inherit",
+        },
       },
     },
     value: {
@@ -184,10 +183,7 @@ export const Required: StoryObj<CheckboxProps> = {
 export const Checked: StoryObj<CheckboxProps> = {
   args: {
     label: "Pre-flight systems check complete",
-    isChecked: true,
-  },
-  play: async ({ canvasElement, step }) => {
-    checkTheBox({ canvasElement, step })("Checkbox Checked");
+    isDefaultChecked: true,
   },
 };
 
@@ -218,17 +214,14 @@ export const Indeterminate: StoryObj<CheckboxProps> = {
   args: {
     label: "Pre-flight systems check complete",
     isIndeterminate: true,
-    isChecked: true,
-  },
-  play: async ({ canvasElement, step }) => {
-    checkTheBox({ canvasElement, step })("Checkbox Indeterminate");
+    isDefaultChecked: true,
   },
 };
 
 export const Invalid: StoryObj<CheckboxProps> = {
   args: {
     label: "Pre-flight systems check complete",
-    isInvalid: true,
+    validity: "invalid",
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Disabled");
