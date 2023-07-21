@@ -414,7 +414,7 @@ export const KitchenSink: StoryObj<ButtonProps> = {
       <Button variant="tertiary" text="Tertiary" />
       <Button variant="danger" text="Danger" />
       <Button variant="floating" text="Floating" />
-      <Button variant="primary" startIcon={<AddIcon />} />
+      <Button variant="primary" startIcon={<AddIcon />} ariaLabel="Add" />
     </Box>
   ),
 };
