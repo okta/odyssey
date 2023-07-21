@@ -21,12 +21,6 @@ export type TranslationOverrides = {
   [key in SupportedLanguages]?: Partial<(typeof resources)["en"]>;
 };
 
-type OdysseyTranslationProviderProps = {
-  children: ReactNode;
-  languageCode?: SupportedLanguages;
-  translationOverrides?: TranslationOverrides;
-};
-
 const mergeBundleOverrides = (
   languageCode: SupportedLanguages,
   translationOverrides: TranslationOverrides
@@ -37,6 +31,12 @@ const mergeBundleOverrides = (
     ...bundle,
     ...overrides,
   };
+};
+
+export type OdysseyTranslationProviderProps = {
+  children: ReactNode;
+  languageCode?: SupportedLanguages;
+  translationOverrides?: TranslationOverrides;
 };
 
 export const OdysseyTranslationProvider = ({

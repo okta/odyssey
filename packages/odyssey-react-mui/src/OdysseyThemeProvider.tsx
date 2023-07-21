@@ -14,22 +14,24 @@ import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material/styles";
-import { memo, ReactElement, useMemo } from "react";
+import { memo, ReactNode, useMemo } from "react";
 
 import { ThemeOptions } from "@mui/material";
 import { deepmerge } from "@mui/utils";
 import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
+export type OdysseyThemeProviderProps = {
+  children: ReactNode;
+  designTokensOverride?: DesignTokensOverride;
+  themeOverride?: ThemeOptions;
+};
+
 const OdysseyThemeProvider = ({
   children,
   designTokensOverride,
   themeOverride,
-}: {
-  children: ReactElement;
-  designTokensOverride?: DesignTokensOverride;
-  themeOverride?: ThemeOptions;
-}) => {
+}: OdysseyThemeProviderProps) => {
   const odysseyTokens = { ...Tokens, ...designTokensOverride };
   const odysseyTheme = createOdysseyMuiTheme(odysseyTokens);
 
