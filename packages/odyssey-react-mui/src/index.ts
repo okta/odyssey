@@ -70,7 +70,6 @@ export * from "./createUniqueId";
 export * from "./Dialog";
 export * from "./Fieldset";
 export * from "./Form";
-export * from "./icons";
 export * from "./Infobox";
 export * from "./Link";
 export * from "./materialReactTableTypes";
