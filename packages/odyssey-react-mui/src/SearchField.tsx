@@ -149,7 +149,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           }
           type="search"
           value={
-            controlledValue !== undefined ? controlledValue : uncontrolledValue
+            controlledValue === undefined ? uncontrolledValue : controlledValue
           }
         />
       ),
