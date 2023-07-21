@@ -16,7 +16,7 @@
       "support": {
         "value": "{hue.neutral.700.value}"
       },
-      "caption": {
+      "subordinate": {
         "comment": "Text color for subordinate text like captions",
         "value": "{hue.neutral.600.value}"
       },
@@ -67,7 +67,7 @@
     },
     "size": {
       "base": { "value": "87.5%" },
-      "caption": { "value": "{typography.scale.0.value}" },
+      "subordinate": { "value": "{typography.scale.0.value}" },
       "body": { "value": "{typography.scale.1.value}" },
       "heading6": { "value": "{typography.scale.2.value}" },
       "heading5": { "value": "{typography.scale.3.value}" },
