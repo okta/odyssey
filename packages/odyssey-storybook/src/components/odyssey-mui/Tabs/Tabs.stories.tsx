@@ -12,12 +12,8 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import {
-  BugIcon,
-  TabItemProps,
-  TabsProps,
-  Tabs,
-} from "@okta/odyssey-react-mui";
+import { TabItemProps, TabsProps, Tabs } from "@okta/odyssey-react-mui";
+import { BugIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";

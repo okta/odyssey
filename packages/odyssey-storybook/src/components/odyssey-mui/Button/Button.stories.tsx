@@ -16,9 +16,9 @@ import {
   Button,
   buttonSizeValues,
   buttonVariantValues,
-  AddIcon,
 } from "@okta/odyssey-react-mui";
 import type { ButtonProps } from "@okta/odyssey-react-mui";
+import { AddIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { icons } from "../../../../.storybook/components/iconUtils";
 

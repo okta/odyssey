@@ -20,11 +20,13 @@ import {
   MenuButtonProps,
   buttonVariantValues,
   MenuItem,
+} from "@okta/odyssey-react-mui";
+import {
   GroupIcon,
   GlobeIcon,
   CalendarIcon,
   MoreIcon,
-} from "@okta/odyssey-react-mui";
+} from "@okta/odyssey-react-mui/icons";
 import { icons } from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
