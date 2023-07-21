@@ -13,14 +13,15 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Typography,
-  H1,
-  H2,
-  H3,
-  H4,
-  H5,
-  H6,
-  P,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+  Paragraph,
   Caption,
+  Support,
   Legend,
   TypographyProps,
   typographyColorValues,
@@ -130,13 +131,13 @@ export const TypographyStory: StoryObj<TypographyProps> = {
   },
 };
 
-export const H1Story: StoryObj<TypographyProps> = {
+export const Heading1Story: StoryObj<TypographyProps> = {
   name: "Heading 1",
   args: {
     children: "Heading 1",
     variant: "h1",
   },
-  render: (args) => <H1 children={args.children} />,
+  render: (args) => <Heading1 children={args.children} />,
   // h1 & h2 stories throw the "Incomplete" accessibility violation on color-contrast. Even though the contrast is correct,
   // disabling it for now as the typography color- contrast test is covered by other headings below.
   // play: async ({}) => {
@@ -144,73 +145,73 @@ export const H1Story: StoryObj<TypographyProps> = {
   // },
 };
 
-export const H2Story: StoryObj<TypographyProps> = {
+export const Heading2Story: StoryObj<TypographyProps> = {
   name: "Heading 2",
   args: {
     children: "Heading 2",
     variant: "h2",
   },
-  render: (args) => <H2 children={args.children} />,
+  render: (args) => <Heading2 children={args.children} />,
   // play: async ({}) => {
   //   await axeRun('Typopgraphy h2');
   // },
 };
 
-export const H3Story: StoryObj<TypographyProps> = {
+export const Heading3Story: StoryObj<TypographyProps> = {
   name: "Heading 3",
   args: {
     children: "Heading 3",
     variant: "h3",
   },
-  render: (args) => <H3 children={args.children} />,
+  render: (args) => <Heading3 children={args.children} />,
   play: async ({}) => {
     await axeRun("Typopgraphy h3");
   },
 };
 
-export const H4Story: StoryObj<TypographyProps> = {
+export const Heading4Story: StoryObj<TypographyProps> = {
   name: "Heading 4",
   args: {
     children: "Heading 4",
     variant: "h4",
   },
-  render: (args) => <H4 children={args.children} />,
+  render: (args) => <Heading4 children={args.children} />,
   play: async ({}) => {
     await axeRun("Typopgraphy h4");
   },
 };
 
-export const H5Story: StoryObj<TypographyProps> = {
+export const Heading5Story: StoryObj<TypographyProps> = {
   name: "Heading 5",
   args: {
     children: "Heading 5",
     variant: "h5",
   },
-  render: (args) => <H5 children={args.children} />,
+  render: (args) => <Heading5 children={args.children} />,
   play: async ({}) => {
     await axeRun("Typopgraphy h5");
   },
 };
 
-export const H6Story: StoryObj<TypographyProps> = {
+export const Heading6Story: StoryObj<TypographyProps> = {
   name: "Heading 6",
   args: {
     children: "Heading 6",
     variant: "h6",
   },
-  render: (args) => <H6 children={args.children} />,
+  render: (args) => <Heading6 children={args.children} />,
   play: async ({}) => {
     await axeRun("Typopgraphy h6");
   },
 };
 
 export const BodyStory: StoryObj<TypographyProps> = {
-  name: "P",
+  name: "Paragraph",
   args: {
     children: "This is body copy.",
     variant: "body",
   },
-  render: (args) => <P children={args.children} />,
+  render: (args) => <Paragraph children={args.children} />,
   play: async ({}) => {
     await axeRun("Typopgraphy body");
   },
@@ -225,6 +226,18 @@ export const CaptionStory: StoryObj<TypographyProps> = {
   render: (args) => <Caption children={args.children} />,
   play: async ({}) => {
     await axeRun("Typopgraphy caption");
+  },
+};
+
+export const SupportStory: StoryObj<TypographyProps> = {
+  name: "Support",
+  args: {
+    children: "This is support text.",
+    variant: "support",
+  },
+  render: (args) => <Support children={args.children} />,
+  play: async ({}) => {
+    await axeRun("Typopgraphy support");
   },
 };
 

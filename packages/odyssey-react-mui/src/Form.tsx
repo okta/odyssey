@@ -15,7 +15,7 @@ import { memo, ReactElement } from "react";
 import { Box } from "@mui/material";
 import { Button } from "./Button";
 import { Infobox } from "./Infobox";
-import { Typography } from "./Typography";
+import { Heading4, Support } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
 export const formEncodingTypeValues = [
@@ -118,16 +118,8 @@ const Form = ({
         padding: (theme) => theme.spacing(0),
       }}
     >
-      {title && (
-        <Typography variant="h4" component="h1">
-          {title}
-        </Typography>
-      )}
-      {description && (
-        <Typography component="p" variant="subtitle2">
-          {description}
-        </Typography>
-      )}
+      {title && <Heading4 component="h1">{title}</Heading4>}
+      {description && <Support component="p">{description}</Support>}
       {alert}
       {children}
       {formActions && (

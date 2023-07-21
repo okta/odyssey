@@ -24,8 +24,8 @@ export type TypographyVariantValue =
   | "h5"
   | "h6"
   | "body"
-  | "subtitle2"
   | "caption"
+  | "support"
   | "legend";
 
 export const typographyVariantMapping: Record<
@@ -40,7 +40,7 @@ export const typographyVariantMapping: Record<
   h6: "h6",
   body: "body1",
   caption: "subtitle1",
-  subtitle2: "subtitle2",
+  support: "subtitle2",
   legend: "legend",
 } as const;
 
@@ -101,7 +101,7 @@ export const Typography = ({
     if (!componentProp) {
       if (variant === "body") {
         return "p";
-      } else if (variant === "caption" || variant === "subtitle2") {
+      } else if (variant === "caption" || variant === "support") {
         return "h6";
       } else {
         return variant;
@@ -126,7 +126,7 @@ export const Typography = ({
 
 Typography.displayName = "Typography";
 
-export const H1 = ({
+export const Heading1 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -147,9 +147,9 @@ export const H1 = ({
   />
 );
 
-H1.displayName = "H1";
+Heading1.displayName = "Heading1";
 
-export const H2 = ({
+export const Heading2 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -170,9 +170,9 @@ export const H2 = ({
   />
 );
 
-H2.displayName = "H2";
+Heading2.displayName = "Heading2";
 
-export const H3 = ({
+export const Heading3 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -193,9 +193,9 @@ export const H3 = ({
   />
 );
 
-H3.displayName = "H3";
+Heading3.displayName = "Heading3";
 
-export const H4 = ({
+export const Heading4 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -216,9 +216,9 @@ export const H4 = ({
   />
 );
 
-H4.displayName = "H4";
+Heading4.displayName = "Heading4";
 
-export const H5 = ({
+export const Heading5 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -239,9 +239,9 @@ export const H5 = ({
   />
 );
 
-H5.displayName = "H5";
+Heading5.displayName = "Heading5";
 
-export const H6 = ({
+export const Heading6 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -262,9 +262,9 @@ export const H6 = ({
   />
 );
 
-H6.displayName = "H6";
+Heading6.displayName = "Heading6";
 
-export const P = ({
+export const Paragraph = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -285,7 +285,7 @@ export const P = ({
   />
 );
 
-P.displayName = "P";
+Paragraph.displayName = "Paragraph";
 
 export const Caption = ({
   ariaDescribedBy,
@@ -309,6 +309,29 @@ export const Caption = ({
 );
 
 Caption.displayName = "Caption";
+
+export const Support = ({
+  ariaDescribedBy,
+  ariaLabel,
+  ariaLabelledBy,
+  children,
+  classes,
+  color,
+  component,
+}: TypographyProps) => (
+  <Typography
+    ariaDescribedBy={ariaDescribedBy}
+    ariaLabel={ariaLabel}
+    ariaLabelledBy={ariaLabelledBy}
+    children={children}
+    classes={classes}
+    color={color}
+    component={component}
+    variant="support"
+  />
+);
+
+Support.displayName = "Support";
 
 export const Legend = ({
   ariaDescribedBy,
