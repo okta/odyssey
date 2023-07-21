@@ -16,7 +16,7 @@ import { createElement } from "react";
 const icons = Object.values(odysseyIcons)
   .filter((iconComponent) => iconComponent.displayName)
   .map((iconComponent) => ({
-    [iconComponent.displayName]: createElement(iconComponent),
+    [iconComponent.displayName || ""]: createElement(iconComponent),
   }))
   .reduce((accumulator, iconObject) => ({ ...accumulator, ...iconObject }), {});
 
