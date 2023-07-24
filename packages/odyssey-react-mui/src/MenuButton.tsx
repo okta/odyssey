@@ -12,7 +12,7 @@
 
 import { Button, buttonVariantValues, MenuItem, useUniqueId } from "./";
 import { Divider, ListSubheader, Menu } from "@mui/material";
-import { ChevronDownIcon } from "./icons";
+import { ChevronDownIcon } from "./icons.generated";
 import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";

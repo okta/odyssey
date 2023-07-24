@@ -46,7 +46,7 @@ import {
   InformationCircleFilledIcon,
   SubtractIcon,
   WarningFilledIcon,
-} from "../icons";
+} from "../icons.generated";
 import { DesignTokens } from "./theme";
 
 export const components = (

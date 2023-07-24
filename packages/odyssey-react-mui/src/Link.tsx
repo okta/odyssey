@@ -11,7 +11,7 @@
  */
 
 import { memo, ReactElement } from "react";
-import { ExternalLinkIcon } from "./icons";
+import { ExternalLinkIcon } from "./icons.generated";
 
 import { Link as MuiLink } from "@mui/material";
 

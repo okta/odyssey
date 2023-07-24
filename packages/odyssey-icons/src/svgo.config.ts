@@ -26,3 +26,6 @@ const svgoConfig: Config = {
 };
 
 export default svgoConfig;
+
+// Don't remove this. It's critical for the CLI script to run properly.
+module.exports = svgoConfig;

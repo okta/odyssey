@@ -11,6 +11,7 @@
  */
 
 import { readdir, writeFile } from "node:fs/promises";
+import { extname, basename } from "node:path";
 
 const currentYear = new Date().getFullYear();
 
@@ -33,7 +34,10 @@ export const headerComment = `/*!
 readdir("./src/icons.generated")
   .then((filenames) =>
     headerComment.concat(
-      filenames.map((filename) => `export * from "./${filename}";`).join("\n")
+      filenames
+        .map((filename) => basename(filename, extname(filename)))
+        .map((filename) => `export * from "./${filename}";`)
+        .join("\n")
     )
   )
   .then((content) => writeFile("./src/icons.generated/index.ts", content))

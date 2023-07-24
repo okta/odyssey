@@ -48,8 +48,7 @@ export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
 ${headerComment}
 
 import { forwardRef } from "react";
-import { SvgIcon } from './SvgIcon';
-import type { SvgIconNoChildrenProps } from './types';
+import { SvgIcon, type SvgIconNoChildrenProps } from '../SvgIcon';
 
 ${newLine}
 

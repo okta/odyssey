@@ -5661,7 +5661,7 @@ __metadata:
   dependencies:
     "@okta/odyssey-typescript": "workspace:*"
     rimraf: ^5.0.1
-    svgo: 3.0.2
+    svgo: ^3.0.2
     typescript: ^5.1.6
   languageName: unknown
   linkType: soft
@@ -24080,7 +24080,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svgo@npm:3.0.2, svgo@npm:^3.0.2":
+"svgo@npm:^3.0.2":
   version: 3.0.2
   resolution: "svgo@npm:3.0.2"
   dependencies:
