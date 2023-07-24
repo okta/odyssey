@@ -31,7 +31,7 @@ export const AddCircleIcon = forwardRef<SVGSVGElement, AddCircleIconProps>(
           <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3ZM1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12ZM11 11V8H13V11H16V13H13V16H11V13H8V11H11Z"
+            d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18ZM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12Zm10-1V8h2v3h3v2h-3v3h-2v-3H8v-2h3Z"
             fill="currentColor"
           />
         </>

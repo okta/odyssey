@@ -31,7 +31,7 @@ export const SubtractIcon = forwardRef<SVGSVGElement, SubtractIconProps>(
           <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M5 11L19 11L19 13L5 13L5 11Z"
+            d="M5 11h14v2H5v-2Z"
             fill="currentColor"
           />
         </>

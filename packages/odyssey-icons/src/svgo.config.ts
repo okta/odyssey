@@ -21,6 +21,7 @@ const svgoConfig: Config = {
         currentColor: true,
       },
     },
+    "convertPathData",
     "removeDimensions",
   ],
 };

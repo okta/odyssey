@@ -31,7 +31,7 @@ export const FilterIcon = forwardRef<SVGSVGElement, FilterIconProps>(
           <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M1 4H23V2H1V4ZM4 10H20V8H4V10ZM17 16H7V14H17V16ZM10 22H14V20H10V22Z"
+            d="M1 4h22V2H1v2Zm3 6h16V8H4v2Zm13 6H7v-2h10v2Zm-7 6h4v-2h-4v2Z"
             fill="currentColor"
           />
         </>

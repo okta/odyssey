@@ -33,7 +33,7 @@ export const ArrowUpperLeftIcon = forwardRef<
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M6 7.5V14H8L8 9.41421L16.2929 17.7071L17.7071 16.2929L9.41421 8L14 8V6H7.5C6.67157 6 6 6.67157 6 7.5Z"
+          d="M6 7.5V14h2V9.414l8.293 8.293 1.414-1.414L9.414 8H14V6H7.5A1.5 1.5 0 0 0 6 7.5Z"
           fill="currentColor"
         />
       </>

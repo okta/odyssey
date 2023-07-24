@@ -31,7 +31,7 @@ export const CheckIcon = forwardRef<SVGSVGElement, CheckIconProps>(
           <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M19.7071 7.70712L11.0607 16.3536C10.4749 16.9394 9.52513 16.9394 8.93934 16.3536L4.29289 11.7071L5.70711 10.2929L10 14.5858L18.2929 6.29291L19.7071 7.70712Z"
+            d="m19.707 7.707-8.646 8.647a1.5 1.5 0 0 1-2.122 0l-4.646-4.647 1.414-1.414L10 14.586l8.293-8.293 1.414 1.414Z"
             fill="currentColor"
           />
         </>

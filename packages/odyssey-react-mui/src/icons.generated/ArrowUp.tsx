@@ -31,7 +31,7 @@ export const ArrowUpIcon = forwardRef<SVGSVGElement, ArrowUpIconProps>(
           <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M10.9393 5.64643L6.29289 10.2929L7.70711 11.7071L11 8.4142V19H13V8.4142L16.2929 11.7071L17.7071 10.2929L13.0607 5.64643C12.4749 5.06065 11.5251 5.06064 10.9393 5.64643Z"
+            d="m10.94 5.646-4.647 4.647 1.414 1.414L11 8.414V19h2V8.414l3.293 3.293 1.414-1.414-4.646-4.647a1.5 1.5 0 0 0-2.122 0Z"
             fill="currentColor"
           />
         </>
