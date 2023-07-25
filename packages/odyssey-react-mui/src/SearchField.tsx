@@ -21,7 +21,7 @@ import {
   useCallback,
 } from "react";
 
-import { CloseCircleFilledIcon, SearchIcon } from "./icons";
+import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
 import { Button } from "./Button";
 

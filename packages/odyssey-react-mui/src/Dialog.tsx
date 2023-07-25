@@ -18,7 +18,7 @@ import {
   DialogActions,
 } from "@mui/material";
 import { Button } from "./Button";
-import { CloseIcon } from "./icons";
+import { CloseIcon } from "./icons.generated";
 import {
   memo,
   ReactNode,
