@@ -20,7 +20,7 @@ import {
   useState,
 } from "react";
 
-import { ShowIcon, HideIcon } from "./icons";
+import { ShowIcon, HideIcon } from "./icons.generated";
 import { Button } from "./Button";
 import { Field } from "./Field";
 
