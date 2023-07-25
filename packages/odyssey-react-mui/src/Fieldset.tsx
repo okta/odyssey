@@ -10,11 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { Box } from "@mui/material";
 import { memo, ReactElement } from "react";
 
-import { Box } from "@mui/material";
 import { Infobox } from "./Infobox";
 import { Legend, Subordinate } from "./Typography";
+import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { useUniqueId } from "./useUniqueId";
 
 export type FieldsetProps = {
@@ -52,6 +53,7 @@ const Fieldset = ({
   legend,
   name,
 }: FieldsetProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
   const id = useUniqueId(idOverride);
 
   return (
@@ -61,14 +63,14 @@ const Fieldset = ({
       name={name}
       id={id}
       sx={{
-        maxWidth: (theme) => theme.mixins.maxWidth,
-        margin: (theme) => theme.spacing(0),
-        marginBlockEnd: (theme) => theme.spacing(6),
-        padding: (theme) => theme.spacing(0),
         border: "0",
+        margin: odysseyDesignTokens.Spacing0,
+        marginBlockEnd: odysseyDesignTokens.Spacing6,
+        maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
+        padding: odysseyDesignTokens.Spacing0,
 
         "&:last-child": {
-          marginBlockEnd: (theme) => theme.spacing(0),
+          marginBlockEnd: odysseyDesignTokens.Spacing0,
         },
       }}
     >

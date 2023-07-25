@@ -20,6 +20,7 @@ import { ScopedCssBaseline, ThemeOptions } from "@mui/material";
 import { deepmerge } from "@mui/utils";
 import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
+import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
 
 export type OdysseyThemeProviderProps = {
   children: ReactNode;
@@ -32,8 +33,14 @@ const OdysseyThemeProvider = ({
   designTokensOverride,
   themeOverride,
 }: OdysseyThemeProviderProps) => {
-  const odysseyTokens = { ...Tokens, ...designTokensOverride };
-  const odysseyTheme = createOdysseyMuiTheme(odysseyTokens);
+  const odysseyTokens = useMemo(
+    () => ({ ...Tokens, ...designTokensOverride }),
+    [designTokensOverride]
+  );
+  const odysseyTheme = useMemo(
+    () => createOdysseyMuiTheme(odysseyTokens),
+    [odysseyTokens]
+  );
 
   const customOdysseyTheme = useMemo(
     () => themeOverride && createTheme(deepmerge(odysseyTheme, themeOverride)),
@@ -42,7 +49,11 @@ const OdysseyThemeProvider = ({
 
   return (
     <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
-      <ScopedCssBaseline>{children}</ScopedCssBaseline>
+      <ScopedCssBaseline>
+        <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
+          {children}
+        </OdysseyDesignTokensContext.Provider>
+      </ScopedCssBaseline>
     </MuiThemeProvider>
   );
 };

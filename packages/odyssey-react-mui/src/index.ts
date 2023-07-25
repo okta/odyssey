@@ -54,6 +54,8 @@ export type {
   ThemeOptions,
 } from "@mui/material";
 
+export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
+
 export * from "./Autocomplete";
 export * from "./Banner";
 export * from "./Box";

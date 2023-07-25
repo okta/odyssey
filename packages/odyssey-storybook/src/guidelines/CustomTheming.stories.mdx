@@ -10,11 +10,11 @@ While our internal system relies on Material-UI, you don't need to know any of t
 
 ## Custom Component with Odyssey styles
 
-Customizing component styles with Odyssey theming is very simple. Just import `useTheme`, and everything is in there ready for you.
+Customizing component styles with Odyssey theming is very simple. Just import `useOdysseyDesignTokens`, and everything is in there ready for you.
 
 ```tsx
 import { css } from "@emotion/react";
-import { useTheme } from "@okta/odyssey-react-mui";
+import { useOdysseyDesignTokens } from "@okta/odyssey-react-mui";
 import { MouseEventHandler, ReactNode, useMemo } from "react";
 
 export type WhatchamacallitProps = {
@@ -26,15 +26,15 @@ export const Whatchamacallit = ({
   children,
   onClick,
 }: WhatchamacallitProps) => {
-  const theme = useTheme();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const whatchamacallitStyles = useMemo(
     () => css`
-      border-radius: ${theme.shape.borderRadius};
-      color: ${theme.palette.text.secondary};
-      padding: ${theme.spacing(2)};
+      border-radius: ${odysseyDesignTokens.BorderRadiusMain};
+      color: ${odysseyDesignTokens.PaletteDangerText};
+      padding: ${odysseyDesignTokens.Spacing2};
     `,
-    [theme]
+    [odysseyDesignTokens]
   );
 
   return (
@@ -49,7 +49,7 @@ If the global theme switches from light to dark mode, you'll get that change as 
 
 ### Theme Variables
 
-When using `useTheme`, you have access to these configuration variables:
+When using `useOdysseyDesignTokens`, you have access to these configuration variables:
 
 - `breakpoints`
 - `components`
