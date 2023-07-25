@@ -154,8 +154,8 @@ const storybookMeta: Meta<FormProps> = {
     title: "Docking registration",
     children: (
       <>
-        <TextField label="Name of vessel" />
-        <TextField isMultiline label="Nature of visit" />
+        <TextField label="Vessel name" />
+        <TextField isMultiline label="Reason for visit" />
       </>
     ),
     formActions: (
@@ -200,8 +200,8 @@ export const Simple: StoryObj<FormProps> = {
   args: {
     children: (
       <>
-        <TextField label="Name of vessel" />
-        <TextField isMultiline label="Nature of visit" />
+        <TextField label="Vessel name" />
+        <TextField isMultiline label="Reason for visit" />
       </>
     ),
   },
@@ -213,8 +213,8 @@ export const Fieldsets: StoryObj<FormProps> = {
     children: (
       <>
         <Fieldset legend="Vessel information" name="vessel">
-          <TextField label="Name of vessel" />
-          <TextField isMultiline label="Nature of visit" />
+          <TextField label="Vessel name" />
+          <TextField isMultiline label="Reason for visit" />
         </Fieldset>
         <Fieldset legend="Passenger information" name="passengers">
           <TextField label="Number of passengers" />
@@ -228,8 +228,7 @@ export const Fieldsets: StoryObj<FormProps> = {
 export const Description: StoryObj<FormProps> = {
   ...Template,
   args: {
-    description:
-      "Before docking with the station, please register your ship and crew.",
+    description: "Register your ship before docking with the station.",
   },
 };
 
@@ -237,8 +236,8 @@ export const Alert: StoryObj<FormProps> = {
   ...Template,
   args: {
     alert: (
-      <Infobox severity="error" role="alert" title="Something's wrong">
-        Something has gone horribly awry.
+      <Infobox severity="error" role="alert" title="Something went wrong">
+        Please try your request again later.
       </Infobox>
     ),
   },
@@ -248,8 +247,8 @@ export const KitchenSink: StoryObj<FormProps> = {
   ...Template,
   args: {
     alert: (
-      <Infobox severity="error" role="alert" title="Something's wrong">
-        Something has gone horribly awry.
+      <Infobox severity="error" role="alert" title="Something went wrong">
+        Please try your request again later.
       </Infobox>
     ),
     children: (
@@ -257,10 +256,10 @@ export const KitchenSink: StoryObj<FormProps> = {
         <Fieldset
           legend="Vessel information"
           name="vessel"
-          description="Taylor sat back in his chair reading the morning newspaper. The warm kitchen and the smell of coffee blended with the comfort of not having to go to work. This was his Rest Period, the first for a long time, and he was glad of it. He folded the second section back, sighing with contentment."
+          description="This information is used to verify vessel ownership and origin."
         >
           <TextField
-            label="Name of vessel"
+            label="Vessel name"
             errorMessage="This field is required."
           />
           <CheckboxGroup label="Systems check" isRequired>
@@ -306,7 +305,6 @@ export const KitchenSink: StoryObj<FormProps> = {
         </Fieldset>
       </>
     ),
-    description:
-      "Before docking with the station, please register your ship and crew.",
+    description: "Register your ship before docking with the station.",
   },
 };

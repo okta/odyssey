@@ -80,11 +80,11 @@ const storybookMeta: Meta = {
     },
   },
   args: {
-    legend: "Ship registration information",
+    legend: "Docking registration",
     children: (
       <>
-        <TextField label="Name of vessel" />
-        <TextField isMultiline label="Nature of visit" />
+        <TextField label="Vessel name" />
+        <TextField isMultiline label="Reason for visit" />
       </>
     ),
   },
@@ -119,8 +119,7 @@ export const Simple: StoryObj<FieldsetProps> = {
 export const Description: StoryObj<FieldsetProps> = {
   ...Template,
   args: {
-    description:
-      "Before docking with the station, please register your ship and crew.",
+    description: "Register your ship before docking with the station.",
   },
 };
 
@@ -128,8 +127,8 @@ export const Alert: StoryObj<FieldsetProps> = {
   ...Template,
   args: {
     alert: (
-      <Infobox severity="error" role="alert" title="Something's wrong">
-        Something has gone horribly awry.
+      <Infobox severity="error" role="alert" title="Something went wrong">
+        Please try your request again later.
       </Infobox>
     ),
   },
