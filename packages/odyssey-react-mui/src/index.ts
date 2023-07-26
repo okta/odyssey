@@ -67,7 +67,7 @@ export * from "./createUniqueId";
 export * from "./Dialog";
 export * from "./Fieldset";
 export * from "./Form";
-export * from "./Infobox";
+export * from "./Callout";
 export * from "./Link";
 export * from "./MenuButton";
 export * from "./MenuItem";

@@ -14,7 +14,7 @@ import { memo, ReactElement } from "react";
 
 import { Box } from "@mui/material";
 import { Button } from "./Button";
-import { Infobox } from "./Infobox";
+import { Callout } from "./Callout";
 import { Heading4, Support } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
 
@@ -29,9 +29,9 @@ export const formMethodValues = ["post", "get", "dialog"] as const;
 
 export type FormProps = {
   /**
-   * An Infobox indicating a Form-wide error or status update.
+   * An Callout indicating a Form-wide error or status update.
    */
-  alert?: ReactElement<typeof Infobox>;
+  alert?: ReactElement<typeof Callout>;
   /**
    * Indicates whether input elements can by default have their values automatically completed by the browser.
    * `autocomplete` attributes on form elements override it on <form>

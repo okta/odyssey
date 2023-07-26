@@ -15,40 +15,40 @@ import { Alert, AlertTitle, Box } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
-export const infoboxRoleValues = ["status", "alert"] as const;
-export const infoboxSeverityValues = [
+export const calloutRoleValues = ["status", "alert"] as const;
+export const calloutSeverityValues = [
   "success",
   "info",
   "warning",
   "error",
 ] as const;
 
-export type InfoboxProps = {
+export type CalloutProps = {
   /**
-   * The contents of the Infobox
+   * The contents of the Callout
    */
   children: ReactNode;
   /**
-   * Sets the ARIA role of the Infobox
+   * Sets the ARIA role of the Callout
    * ("status" for something that dynamically updates, "alert" for errors, null for something
    * unchanging)
    */
-  role?: (typeof infoboxRoleValues)[number];
+  role?: (typeof calloutRoleValues)[number];
   /**
-   * Determine the color and icon of the Infobox
+   * Determine the color and icon of the Callout
    */
-  severity: (typeof infoboxSeverityValues)[number];
+  severity: (typeof calloutSeverityValues)[number];
   /**
-   * The title of the Infobox
+   * The title of the Callout
    */
   title?: string;
 };
 
-const Infobox = ({ children, role, severity, title }: InfoboxProps) => {
+const Callout = ({ children, role, severity, title }: CalloutProps) => {
   const { t } = useTranslation();
 
   return (
-    <Alert role={role} severity={severity} variant="infobox">
+    <Alert role={role} severity={severity} variant="callout">
       <ScreenReaderText>{t(`severity.${severity}`)}: </ScreenReaderText>
       {title && <AlertTitle>{title}</AlertTitle>}
       <Box component="div">{children}</Box>
@@ -56,7 +56,7 @@ const Infobox = ({ children, role, severity, title }: InfoboxProps) => {
   );
 };
 
-const MemoizedInfobox = memo(Infobox);
-MemoizedInfobox.displayName = "Infobox";
+const MemoizedCallout = memo(Callout);
+MemoizedCallout.displayName = "Callout";
 
-export { MemoizedInfobox as Infobox };
+export { MemoizedCallout as Callout };

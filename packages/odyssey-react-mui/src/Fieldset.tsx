@@ -13,16 +13,16 @@
 import { Box } from "@mui/material";
 import { memo, ReactElement } from "react";
 
-import { Infobox } from "./Infobox";
+import { Callout } from "./Callout";
 import { Legend, Subordinate } from "./Typography";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { useUniqueId } from "./useUniqueId";
 
 export type FieldsetProps = {
   /**
-   * An Infobox indicating a Fieldset-wide error or status update.
+   * An Callout indicating a Fieldset-wide error or status update.
    */
-  alert?: ReactElement<typeof Infobox>;
+  alert?: ReactElement<typeof Callout>;
   /**
    * The Field components within the Fieldset
    */
