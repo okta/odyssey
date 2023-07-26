@@ -53,7 +53,7 @@ const storybookMeta: Meta = {
     alert: {
       control: null,
       description:
-        "An Callout indicating a Fieldset-wide error or status update",
+        "A Callout indicating a Fieldset-wide error or status update",
       table: {
         type: {
           summary: "ReactElement<typeof Callout>",

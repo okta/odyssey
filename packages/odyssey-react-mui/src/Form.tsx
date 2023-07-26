@@ -29,7 +29,7 @@ export const formMethodValues = ["post", "get", "dialog"] as const;
 
 export type FormProps = {
   /**
-   * An Callout indicating a Form-wide error or status update.
+   * A Callout indicating a Form-wide error or status update.
    */
   alert?: ReactElement<typeof Callout>;
   /**

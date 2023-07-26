@@ -20,7 +20,7 @@ import { useUniqueId } from "./useUniqueId";
 
 export type FieldsetProps = {
   /**
-   * An Callout indicating a Fieldset-wide error or status update.
+   * A Callout indicating a Fieldset-wide error or status update.
    */
   alert?: ReactElement<typeof Callout>;
   /**
