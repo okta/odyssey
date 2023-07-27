@@ -14,7 +14,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import {
   Fieldset,
   FieldsetProps,
-  Infobox,
+  Callout,
   TextField,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -53,10 +53,10 @@ const storybookMeta: Meta = {
     alert: {
       control: null,
       description:
-        "An Infobox indicating a Fieldset-wide error or status update",
+        "A Callout indicating a Fieldset-wide error or status update",
       table: {
         type: {
-          summary: "ReactElement<typeof Infobox>",
+          summary: "ReactElement<typeof Callout>",
         },
       },
     },
@@ -127,9 +127,9 @@ export const Alert: StoryObj<FieldsetProps> = {
   ...Template,
   args: {
     alert: (
-      <Infobox severity="error" role="alert" title="Something went wrong">
+      <Callout severity="error" role="alert" title="Something went wrong">
         Please try your request again later.
-      </Infobox>
+      </Callout>
     ),
   },
 };

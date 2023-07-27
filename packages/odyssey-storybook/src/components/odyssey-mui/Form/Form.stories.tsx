@@ -21,7 +21,7 @@ import {
   formEncodingTypeValues,
   formAutoCompleteTypeValues,
   formMethodValues,
-  Infobox,
+  Callout,
   Link,
   Paragraph,
   TextField,
@@ -61,10 +61,10 @@ const storybookMeta: Meta<FormProps> = {
     },
     alert: {
       control: null,
-      description: "An Infobox indicating a Form-wide error or status update",
+      description: "A Callout indicating a Form-wide error or status update",
       table: {
         type: {
-          summary: "ReactElement<typeof Infobox>",
+          summary: "ReactElement<typeof Callout>",
         },
       },
     },
@@ -236,9 +236,9 @@ export const Alert: StoryObj<FormProps> = {
   ...Template,
   args: {
     alert: (
-      <Infobox severity="error" role="alert" title="Something went wrong">
+      <Callout severity="error" role="alert" title="Something went wrong">
         Please try your request again later.
-      </Infobox>
+      </Callout>
     ),
   },
 };
@@ -247,9 +247,9 @@ export const KitchenSink: StoryObj<FormProps> = {
   ...Template,
   args: {
     alert: (
-      <Infobox severity="error" role="alert" title="Something went wrong">
+      <Callout severity="error" role="alert" title="Something went wrong">
         Please try your request again later.
-      </Infobox>
+      </Callout>
     ),
     children: (
       <>
@@ -285,7 +285,7 @@ export const KitchenSink: StoryObj<FormProps> = {
           name="passengers"
           description="This information will be used to track your passengers' whereabouts."
           alert={
-            <Infobox severity="error" role="alert" title="Standby for boarding">
+            <Callout severity="error" role="alert" title="Standby for boarding">
               <Paragraph>
                 There is an issue with the fuel mixture ratios. Reconfigure the
                 fuel mixture and perform the safety checks again.
@@ -294,7 +294,7 @@ export const KitchenSink: StoryObj<FormProps> = {
               <Link href="#" variant="monochrome">
                 Visit fueling console
               </Link>
-            </Infobox>
+            </Callout>
           }
         >
           <TextField

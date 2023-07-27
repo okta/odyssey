@@ -12,18 +12,18 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
-  Infobox,
-  InfoboxProps,
-  infoboxRoleValues,
-  infoboxSeverityValues,
+  Callout,
+  CalloutProps,
+  calloutRoleValues,
+  calloutSeverityValues,
   Link,
   Paragraph,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<InfoboxProps> = {
-  title: "MUI Components/Alerts/Infobox",
-  component: Infobox,
+const storybookMeta: Meta<CalloutProps> = {
+  title: "MUI Components/Alerts/Callout",
+  component: Callout,
   argTypes: {
     children: {
       control: null,
@@ -35,23 +35,23 @@ const storybookMeta: Meta<InfoboxProps> = {
       },
     },
     role: {
-      options: infoboxRoleValues,
+      options: calloutRoleValues,
       control: { type: "radio" },
       description:
         "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
       table: {
         type: {
-          summary: infoboxRoleValues.join(" | "),
+          summary: calloutRoleValues.join(" | "),
         },
       },
     },
     severity: {
-      options: infoboxSeverityValues,
+      options: calloutSeverityValues,
       control: { type: "radio" },
       description: "Determine the color and icon of the alert",
       table: {
         type: {
-          summary: infoboxSeverityValues.join(" | "),
+          summary: calloutSeverityValues.join(" | "),
         },
       },
     },
@@ -79,7 +79,7 @@ const storybookMeta: Meta<InfoboxProps> = {
 
 export default storybookMeta;
 
-export const Info: StoryObj<InfoboxProps> = {
+export const Info: StoryObj<CalloutProps> = {
   args: {
     children: (
       <Paragraph>
@@ -90,7 +90,7 @@ export const Info: StoryObj<InfoboxProps> = {
   },
 };
 
-export const Error: StoryObj<InfoboxProps> = {
+export const Error: StoryObj<CalloutProps> = {
   args: {
     children: (
       <Paragraph>
@@ -103,7 +103,7 @@ export const Error: StoryObj<InfoboxProps> = {
   },
 };
 
-export const Warning: StoryObj<InfoboxProps> = {
+export const Warning: StoryObj<CalloutProps> = {
   args: {
     children: (
       <Paragraph>
@@ -117,7 +117,7 @@ export const Warning: StoryObj<InfoboxProps> = {
   },
 };
 
-export const Success: StoryObj<InfoboxProps> = {
+export const Success: StoryObj<CalloutProps> = {
   args: {
     children: (
       <Paragraph>
@@ -130,7 +130,7 @@ export const Success: StoryObj<InfoboxProps> = {
   },
 };
 
-export const BlockLink: StoryObj<InfoboxProps> = {
+export const BlockLink: StoryObj<CalloutProps> = {
   args: {
     children: (
       <>

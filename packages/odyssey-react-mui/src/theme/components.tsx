@@ -137,7 +137,7 @@ export const components = (
               paddingInline: odysseyTokens.Spacing6,
             }),
           }),
-          ...(ownerState.variant === "infobox" && {
+          ...(ownerState.variant === "callout" && {
             borderRadius: odysseyTokens.BorderRadiusMain,
             "&:not(:last-child)": {
               marginBottom: odysseyTokens.Spacing6,

@@ -18,7 +18,7 @@ declare module "@mui/material/Alert" {
     standard: false;
     // Enable Odyssey variants
     banner: true;
-    infobox: true;
+    callout: true;
     toast: true;
   }
 }
