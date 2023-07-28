@@ -554,9 +554,9 @@ export const CustomToolbar: StoryObj<PaginatedTableProps<Person>> = {
     getRowId: ({ id }: { id: string }) => id,
     ToolbarButtons: ({ table }) => (
       <Button
-        variant="primary"
+        label="New Action"
         onClick={() => console.info(table.getState())}
-        text="New Action"
+        variant="primary"
       />
     ),
   },

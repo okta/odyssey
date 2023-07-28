@@ -107,12 +107,12 @@ const Dialog = ({
       <DialogTitle>
         {title}
         <Button
-          variant="floating"
-          size="small"
-          onClick={onClose}
-          startIcon={<CloseIcon />}
           ariaLabel={ariaLabel}
-          text=""
+          label=""
+          onClick={onClose}
+          size="small"
+          startIcon={<CloseIcon />}
+          variant="floating"
         />
       </DialogTitle>
       <DialogContent dividers={isContentScrollable} ref={dialogContentRef}>

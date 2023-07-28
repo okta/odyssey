@@ -29,7 +29,7 @@ describe("OdysseyCacheProvider", () => {
   it("themes a Button", () => {
     render(
       <OdysseyCacheProvider>
-        <Button variant="primary" text="text" />
+        <Button label="text" variant="primary" />
       </OdysseyCacheProvider>
     );
 

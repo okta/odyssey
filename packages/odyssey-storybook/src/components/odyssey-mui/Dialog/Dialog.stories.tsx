@@ -124,21 +124,25 @@ const DefaultTemplate: StoryObj<DialogProps> = {
 
     return (
       <>
-        <Button variant="primary" onClick={onOpen} text="Open dialog" />
+        <Button label="Open dialog" onClick={onOpen} variant="primary" />
         <Dialog
           {...props}
           callToActionFirstComponent={
-            <Button variant="primary" onClick={onClose} text="Primary action" />
+            <Button
+              label="Primary action"
+              onClick={onClose}
+              variant="primary"
+            />
           }
           callToActionSecondComponent={
             <Button
-              variant="secondary"
+              label="Secondary action"
               onClick={onClose}
-              text="Secondary action"
+              variant="secondary"
             />
           }
           callToActionLastComponent={
-            <Button variant="floating" onClick={onClose} text="Cancel" />
+            <Button label="Cancel" onClick={onClose} variant="floating" />
           }
           onClose={onClose}
           isOpen={isVisible}
@@ -335,7 +339,7 @@ export const NoButtons: StoryObj<DialogProps> = {
 
     return (
       <>
-        <Button variant="primary" onClick={onOpen} text="Open dialog" />
+        <Button label="Open dialog" onClick={onOpen} variant="primary" />
         <Dialog {...props} onClose={onClose} isOpen={isVisible} />
       </>
     );

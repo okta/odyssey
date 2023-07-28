@@ -176,9 +176,9 @@ const Single: StoryObj<ToastProps> = {
     return (
       <>
         <Button
-          variant="primary"
+          label={`Open ${args.severity} toast`}
           onClick={openToast}
-          text={`Open ${args.severity} toast`}
+          variant="primary"
         />
         <ToastStack>
           <Toast
@@ -312,9 +312,9 @@ export const MultipleToasts: StoryObj<ToastProps> = {
     return (
       <>
         <Button
-          variant="primary"
+          label="Open another Toast"
           onClick={addToast}
-          text="Open another Toast"
+          variant="primary"
         />
         <ToastStack>{toasts}</ToastStack>
       </>

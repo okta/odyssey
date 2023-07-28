@@ -104,7 +104,7 @@ const showTooltip =
 export const Default: StoryObj<TooltipProps> = {
   ...Template,
   args: {
-    children: <Button variant="primary" text="Launch" />,
+    children: <Button label="Launch" variant="primary" />,
     ariaType: "description",
     placement: "top",
     text: "This will begin a 10-second countdown",

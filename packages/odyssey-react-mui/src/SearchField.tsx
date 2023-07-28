@@ -126,10 +126,10 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
                 <Button
                   ariaLabel="Clear"
                   isDisabled={isDisabled}
+                  label=""
                   onClick={onClear}
                   size="small"
                   startIcon={<CloseCircleFilledIcon />}
-                  text=""
                   variant="floating"
                 />
               </InputAdornment>

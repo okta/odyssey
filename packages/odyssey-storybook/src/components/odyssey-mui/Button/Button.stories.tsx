@@ -83,6 +83,17 @@ const storybookMeta: Meta<ButtonProps> = {
         },
       },
     },
+    label: {
+      control: "text",
+      description:
+        "The button text. If blank, the button must include an icon.",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
+    },
     onClick: {
       action: true,
       description: "Callback fired when the button is clicked",
@@ -116,17 +127,6 @@ const storybookMeta: Meta<ButtonProps> = {
       table: {
         type: {
           summary: "<Icon />",
-        },
-        defaultValue: "",
-      },
-    },
-    text: {
-      control: "text",
-      description:
-        "The button text. If blank, the button must include an icon.",
-      table: {
-        type: {
-          summary: "string",
         },
         defaultValue: "",
       },
@@ -172,7 +172,7 @@ const storybookMeta: Meta<ButtonProps> = {
     },
   },
   args: {
-    text: "Add crew",
+    label: "Add crew",
     variant: "primary",
   },
   decorators: [MuiThemeDecorator],
@@ -192,10 +192,10 @@ const interactWithButton =
     actionName: string;
     hoverState: boolean;
   }) => {
-    if (args.text) {
+    if (args.label) {
       await step("hover and click", async () => {
         const canvas = within(canvasElement);
-        const button = canvas.getByText(args.text ?? "");
+        const button = canvas.getByText(args.label ?? "");
         userEvent.tab();
         userEvent.click(button);
         expect(args.onClick).toHaveBeenCalledTimes(1);
@@ -229,8 +229,8 @@ export const ButtonPrimaryDisabled: StoryObj<ButtonProps> = {
     },
   },
   args: {
-    text: "Add crew",
     isDisabled: true,
+    label: "Add crew",
     variant: "primary",
   },
 };
@@ -238,7 +238,7 @@ export const ButtonPrimaryDisabled: StoryObj<ButtonProps> = {
 export const ButtonSecondary: StoryObj<ButtonProps> = {
   name: "Secondary",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     variant: "secondary",
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -253,8 +253,8 @@ export const ButtonSecondary: StoryObj<ButtonProps> = {
 export const ButtonSecondaryDisabled: StoryObj<ButtonProps> = {
   name: "Secondary, Disabled",
   args: {
-    text: "Add crew",
     isDisabled: true,
+    label: "Add crew",
     variant: "secondary",
   },
 };
@@ -262,7 +262,7 @@ export const ButtonSecondaryDisabled: StoryObj<ButtonProps> = {
 export const ButtonTertiary: StoryObj<ButtonProps> = {
   name: "Tertiary",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     variant: "tertiary",
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -277,7 +277,7 @@ export const ButtonTertiary: StoryObj<ButtonProps> = {
 export const ButtonTertiaryDisabled: StoryObj<ButtonProps> = {
   name: "Tertiary, Disabled",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     isDisabled: true,
     variant: "tertiary",
   },
@@ -286,7 +286,7 @@ export const ButtonTertiaryDisabled: StoryObj<ButtonProps> = {
 export const ButtonDanger: StoryObj<ButtonProps> = {
   name: "Danger",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     variant: "danger",
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -301,7 +301,7 @@ export const ButtonDanger: StoryObj<ButtonProps> = {
 export const ButtonDangerDisabled: StoryObj<ButtonProps> = {
   name: "Danger, Disabled",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     isDisabled: true,
     variant: "danger",
   },
@@ -310,7 +310,7 @@ export const ButtonDangerDisabled: StoryObj<ButtonProps> = {
 export const ButtonFloating: StoryObj<ButtonProps> = {
   name: "Floating",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     variant: "floating",
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -325,7 +325,7 @@ export const ButtonFloating: StoryObj<ButtonProps> = {
 export const ButtonFloatingDisabled: StoryObj<ButtonProps> = {
   name: "Floating, Disabled",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     isDisabled: true,
     variant: "floating",
   },
@@ -334,7 +334,7 @@ export const ButtonFloatingDisabled: StoryObj<ButtonProps> = {
 export const ButtonSmall: StoryObj<ButtonProps> = {
   name: "Small",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     size: "small",
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -349,7 +349,7 @@ export const ButtonSmall: StoryObj<ButtonProps> = {
 export const ButtonMedium: StoryObj<ButtonProps> = {
   name: "Medium",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     size: "medium",
     variant: "secondary",
   },
@@ -365,7 +365,7 @@ export const ButtonMedium: StoryObj<ButtonProps> = {
 export const ButtonLarge: StoryObj<ButtonProps> = {
   name: "Large",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     size: "large",
     variant: "danger",
   },
@@ -381,7 +381,7 @@ export const ButtonLarge: StoryObj<ButtonProps> = {
 export const ButtonFullWidth: StoryObj<ButtonProps> = {
   name: "Full-width",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     isFullWidth: true,
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -396,7 +396,7 @@ export const ButtonFullWidth: StoryObj<ButtonProps> = {
 export const ButtonWithIcon: StoryObj<ButtonProps> = {
   name: "Icon",
   args: {
-    text: "Add crew",
+    label: "Add crew",
     startIcon: <AddIcon />,
   },
   play: async ({ args, canvasElement, step }: playType) => {
@@ -421,7 +421,7 @@ export const IconOnly: StoryObj<ButtonProps> = {
   args: {
     startIcon: <AddIcon />,
     ariaLabel: "Add crew",
-    text: undefined,
+    label: undefined,
     tooltipText: "Add crew",
   },
 };
@@ -430,12 +430,12 @@ export const KitchenSink: StoryObj<ButtonProps> = {
   name: "Kitchen sink",
   render: () => (
     <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
-      <Button variant="primary" text="Primary" />
-      <Button variant="secondary" text="Secondary" />
-      <Button variant="tertiary" text="Tertiary" />
-      <Button variant="danger" text="Danger" />
-      <Button variant="floating" text="Floating" />
-      <Button variant="primary" startIcon={<AddIcon />} ariaLabel="Add" />
+      <Button label="Primary" variant="primary" />
+      <Button label="Secondary" variant="secondary" />
+      <Button label="Tertiary" variant="tertiary" />
+      <Button label="Danger" variant="danger" />
+      <Button label="Floating" variant="floating" />
+      <Button ariaLabel="Add" startIcon={<AddIcon />} variant="primary" />
     </Box>
   ),
 };
