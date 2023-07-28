@@ -86,19 +86,19 @@ export type ButtonProps = {
   variant: (typeof buttonVariantValues)[number];
 } & (
   | {
+      endIcon?: ReactElement;
+      startIcon?: ReactElement;
       text: string;
-      startIcon?: ReactElement;
-      endIcon?: ReactElement;
     }
   | {
-      text?: undefined | "";
+      endIcon?: ReactElement;
       startIcon: ReactElement;
-      endIcon?: ReactElement;
+      text?: "" | undefined;
     }
   | {
-      text?: undefined | "";
-      startIcon?: ReactElement;
       endIcon: ReactElement;
+      startIcon?: ReactElement;
+      text?: "" | undefined;
     }
 );
 
