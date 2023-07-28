@@ -12,9 +12,9 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, useCallback, useContext } from "react";
+import { memo, ReactElement, useCallback } from "react";
 
-import { MuiPropsContext } from "./MuiPropsContext";
+import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
@@ -118,7 +118,7 @@ const Button = ({
   type = "button",
   variant,
 }: ButtonProps) => {
-  const muiProps = useContext(MuiPropsContext);
+  const muiProps = useMuiProps();
 
   const renderButton = useCallback(
     (muiProps) => (
