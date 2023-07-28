@@ -126,8 +126,8 @@ const MenuButton = ({
         ariaLabelledBy={ariaLabelledBy}
         endIcon={endIcon}
         id={`${uniqueId}-button`}
+        label={buttonLabel}
         onClick={openMenu}
-        text={buttonLabel}
         tooltipText={tooltipText}
         variant={buttonVariant}
       />
