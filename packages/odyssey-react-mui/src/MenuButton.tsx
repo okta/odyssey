@@ -57,19 +57,19 @@ export type MenuButtonProps = {
   id?: string;
 } & (
   | {
-      buttonLabel: string;
       ariaLabel?: string;
       ariaLabelledBy?: string;
+      buttonLabel: string;
     }
   | {
-      buttonLabel?: undefined | "";
       ariaLabel: string;
       ariaLabelledBy?: string;
+      buttonLabel?: undefined | "";
     }
   | {
-      buttonLabel?: undefined | "";
       ariaLabel?: string;
       ariaLabelledBy: string;
+      buttonLabel?: undefined | "";
     }
 );
 

@@ -20,8 +20,9 @@ import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
 import { Typography } from "./Typography";
-import { useUniqueId } from "./useUniqueId";
+import { useFieldset } from "./FieldsetContext";
 import { useTranslation } from "react-i18next";
+import { useUniqueId } from "./useUniqueId";
 
 export const fieldTypeValues = ["single", "group"] as const;
 
@@ -88,7 +89,7 @@ const Field = ({
   hasVisibleLabel,
   hint,
   id: idOverride,
-  isDisabled = false,
+  isDisabled: isDisabledProp = false,
   isRadioGroup = false,
   isOptional = false,
   label,
@@ -104,6 +105,13 @@ const Field = ({
   const ariaDescribedBy = useMemo(
     () => [hintId, errorId].join(" ").trim() || undefined,
     [errorId, hintId]
+  );
+
+  const { isDisabled: isFieldsetDisabled } = useFieldset();
+
+  const isDisabled = useMemo(
+    () => isDisabledProp || isFieldsetDisabled,
+    [isDisabledProp, isFieldsetDisabled]
   );
 
   return (
