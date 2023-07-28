@@ -11,9 +11,10 @@
  */
 
 import { Box } from "@mui/material";
-import { memo, ReactElement } from "react";
+import { memo, ReactElement, useMemo } from "react";
 
 import { Callout } from "./Callout";
+import { FieldsetContext } from "./FieldsetContext";
 import { Legend, Subordinate } from "./Typography";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { useUniqueId } from "./useUniqueId";
@@ -36,6 +37,10 @@ export type FieldsetProps = {
    */
   id?: string;
   /**
+   * Disables the component and any wrapped input fields.
+   */
+  isDisabled?: boolean;
+  /**
    * The title of the Fieldset
    */
   legend: string;
@@ -50,16 +55,24 @@ const Fieldset = ({
   children,
   description,
   id: idOverride,
+  isDisabled = false,
   legend,
   name,
 }: FieldsetProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const id = useUniqueId(idOverride);
 
+  const fieldsetContextValue = useMemo(
+    () => ({
+      isDisabled,
+    }),
+    [isDisabled]
+  );
+
   return (
     <Box
       component="fieldset"
-      // disabled={isDisabled}
+      disabled={isDisabled}
       name={name}
       id={id}
       sx={{
@@ -75,9 +88,14 @@ const Fieldset = ({
       }}
     >
       <Legend>{legend}</Legend>
+
       {description && <Subordinate component="p">{description}</Subordinate>}
+
       {alert}
-      {children}
+
+      <FieldsetContext.Provider value={fieldsetContextValue}>
+        {children}
+      </FieldsetContext.Provider>
     </Box>
   );
 };

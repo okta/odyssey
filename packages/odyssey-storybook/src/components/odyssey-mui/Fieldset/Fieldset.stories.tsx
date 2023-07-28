@@ -19,25 +19,17 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta = {
+const storybookMeta: Meta<FieldsetProps> = {
   title: "MUI Components/Forms/Fieldset",
   component: Fieldset,
   argTypes: {
-    legend: {
-      control: "text",
-      description: "The title of the Fieldset",
+    alert: {
+      control: null,
+      description:
+        "A Callout indicating a Fieldset-wide error or status update",
       table: {
         type: {
-          summary: "string",
-        },
-      },
-    },
-    description: {
-      control: "text",
-      description: "A supplementary description",
-      table: {
-        type: {
-          summary: "string",
+          summary: "ReactElement<typeof Callout>",
         },
       },
     },
@@ -50,19 +42,9 @@ const storybookMeta: Meta = {
         },
       },
     },
-    alert: {
-      control: null,
-      description:
-        "A Callout indicating a Fieldset-wide error or status update",
-      table: {
-        type: {
-          summary: "ReactElement<typeof Callout>",
-        },
-      },
-    },
-    name: {
+    description: {
       control: "text",
-      description: "The name associated with the group",
+      description: "A supplementary description",
       table: {
         type: {
           summary: "string",
@@ -78,15 +60,42 @@ const storybookMeta: Meta = {
         },
       },
     },
+    isDisabled: {
+      control: "boolean",
+      description: "Disables the component and any wrapped input fields.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    legend: {
+      control: "text",
+      description: "The title of the Fieldset",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    name: {
+      control: "text",
+      description: "The name associated with the group",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
   },
   args: {
-    legend: "Docking registration",
     children: (
       <>
         <TextField label="Vessel name" />
         <TextField isMultiline label="Reason for visit" />
       </>
     ),
+    legend: "Docking registration",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -94,37 +103,15 @@ const storybookMeta: Meta = {
 
 export default storybookMeta;
 
-const Template: StoryObj<FieldsetProps> = {
-  render: function C(args) {
-    return (
-      <Fieldset
-        legend={args.legend}
-        name={args.name}
-        description={args.description}
-        alert={args.alert}
-        id={args.id}
-      >
-        {args.children}
-      </Fieldset>
-    );
-  },
-};
-
-// States
-
-export const Simple: StoryObj<FieldsetProps> = {
-  ...Template,
-};
+export const Simple: StoryObj<FieldsetProps> = {};
 
 export const Description: StoryObj<FieldsetProps> = {
-  ...Template,
   args: {
     description: "Register your ship before docking with the station.",
   },
 };
 
 export const Alert: StoryObj<FieldsetProps> = {
-  ...Template,
   args: {
     alert: (
       <Callout severity="error" role="alert" title="Something went wrong">
