@@ -12,6 +12,8 @@
 
 import { Chip } from "@mui/material";
 
+import { useMuiProps } from "./MuiPropsContext";
+
 export const statusSeverityValues = [
   "default",
   "error",
@@ -35,6 +37,10 @@ export type StatusProps = {
   variant?: (typeof statusVariantValues)[number];
 };
 
-export const Status = ({ severity, label, variant = "lamp" }: StatusProps) => (
-  <Chip label={label} color={severity} variant={variant} />
-);
+export const Status = ({ severity, label, variant = "lamp" }: StatusProps) => {
+  const muiProps = useMuiProps();
+
+  return (
+    <Chip {...muiProps} label={label} color={severity} variant={variant} />
+  );
+};
