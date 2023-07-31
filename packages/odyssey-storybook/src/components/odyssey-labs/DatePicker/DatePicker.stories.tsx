@@ -12,12 +12,13 @@
 
 import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import * as Tokens from "@okta/odyssey-design-tokens";
 import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
 import {
   AdapterDateFns,
+  createDatePickerTheme,
   DatePicker,
   DatePickerProps,
-  datePickerTheme,
   LocalizationProvider,
 } from "@okta/odyssey-react-mui/labs";
 
@@ -48,6 +49,7 @@ export default storybookMeta;
 export const DatePickerStandard: StoryObj<DatePickerProps<unknown, unknown>> = {
   render: function C(props) {
     const [value, setValue] = useState<unknown>("09/05/1977");
+
     const datePickerProps = useMemo(
       () => ({
         ...props,
@@ -56,6 +58,8 @@ export const DatePickerStandard: StoryObj<DatePickerProps<unknown, unknown>> = {
       }),
       [props, value]
     );
+
+    const datePickerTheme = useMemo(() => createDatePickerTheme(Tokens), []);
 
     return (
       <OdysseyThemeProvider themeOverride={datePickerTheme}>
