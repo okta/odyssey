@@ -12,7 +12,7 @@
 
 import type { Config } from "svgo";
 
-const config: Config = {
+const svgoConfig: Config = {
   multipass: true,
   plugins: [
     {
@@ -21,10 +21,12 @@ const config: Config = {
         currentColor: true,
       },
     },
+    "convertPathData",
     "removeDimensions",
   ],
 };
 
-module.exports = config;
+export default svgoConfig;
 
-export default config;
+// Don't remove this. It's critical for the CLI script to run properly.
+module.exports = svgoConfig;

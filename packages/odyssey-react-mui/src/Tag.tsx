@@ -10,32 +10,52 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip, ChipProps } from "@mui/material";
-import { memo, useContext } from "react";
+import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
+import { memo, ReactElement, useCallback, useContext } from "react";
 import { TagListContext } from "./TagListContext";
+import { MuiPropsContext } from "./MuiPropsContext";
 
 export type TagProps = {
+  icon?: ReactElement;
   isDisabled?: boolean;
+  /**
+   * The label text for the Tag
+   */
   label: string;
-  onClick?: ChipProps["onClick"];
-  onRemove?: ChipProps["onDelete"];
+  /**
+   * Callback fired when the Tag is clicked
+   */
+  onClick?: MuiChipProps["onClick"];
+  /**
+   * Callback fired when the remove button of the Tag is clicked
+   */
+  onRemove?: MuiChipProps["onDelete"];
 };
 
-const Tag = ({ isDisabled, label, onClick, onRemove }: TagProps) => {
+const Tag = ({ icon, isDisabled, label, onClick, onRemove }: TagProps) => {
   const { chipElementType } = useContext(TagListContext);
 
-  return (
-    <Chip
-      label={label}
-      clickable={onClick ? true : false}
-      component={chipElementType}
-      disabled={isDisabled}
-      onClick={onClick}
-      onDelete={onRemove}
-    />
+  const renderTag = useCallback(
+    (muiProps) => (
+      <MuiChip
+        {...muiProps}
+        aria-disabled={isDisabled}
+        clickable={onClick ? true : false}
+        component={chipElementType}
+        disabled={isDisabled}
+        icon={icon}
+        label={label}
+        onClick={onClick}
+        onDelete={onRemove}
+      />
+    ),
+    [chipElementType, icon, isDisabled, label, onClick, onRemove]
   );
+
+  return <MuiPropsContext.Consumer>{renderTag}</MuiPropsContext.Consumer>;
 };
 
 const MemoizedTag = memo(Tag);
+MemoizedTag.displayName = "Tag";
 
 export { MemoizedTag as Tag };

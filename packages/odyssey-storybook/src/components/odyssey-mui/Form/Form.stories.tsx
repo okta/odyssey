@@ -13,10 +13,17 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
+  Checkbox,
+  CheckboxGroup,
   Fieldset,
   Form,
   FormProps,
-  Infobox,
+  formEncodingTypeValues,
+  formAutoCompleteTypeValues,
+  formMethodValues,
+  Callout,
+  Link,
+  Paragraph,
   TextField,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -27,57 +34,139 @@ const storybookMeta: Meta<FormProps> = {
   argTypes: {
     title: {
       control: "text",
-    },
-    alert: {
-      control: "text",
-    },
-    children: {
-      control: "text",
+      description: "The title of the Form",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     description: {
       control: "text",
+      description: "A supplementary description",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
-    formActions: {
-      control: "text",
+    children: {
+      control: "obj",
+      description: "Field or FieldSet components within the Form",
+      table: {
+        type: {
+          summary: "ReactElement | Array<ReactElement>",
+        },
+      },
     },
-    hasAutoComplete: {
-      control: "boolean",
+    alert: {
+      control: null,
+      description: "A Callout indicating a Form-wide error or status update",
+      table: {
+        type: {
+          summary: "ReactElement<typeof Callout>",
+        },
+      },
     },
-    encodingType: {
-      control: "text",
-    },
-    method: {
-      control: "text",
-    },
-    noValidate: {
-      control: "boolean",
-    },
-    target: {
-      control: "text",
-    },
-    id: {
-      control: "text",
+    autoCompleteType: {
+      options: formAutoCompleteTypeValues,
+      control: { type: "radio" },
+      description:
+        "Indicates whether input elements can have their values automatically completed by the browser",
+      table: {
+        type: {
+          summary: formAutoCompleteTypeValues.join(" | "),
+        },
+      },
     },
     name: {
       control: "text",
+      description:
+        "The name of the form. The value must not be an empty string and must be unique among the form elements",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    noValidate: {
+      control: "boolean",
+      description:
+        "This Boolean attribute indicates that the form shouldn't be validated when submitted",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    encodingType: {
+      options: formEncodingTypeValues,
+      control: { type: "radio" },
+      description:
+        "If the method attribute is set to 'post', the MIME type of the form submission",
+      table: {
+        type: {
+          summary: formEncodingTypeValues.join(" | "),
+        },
+      },
+    },
+    method: {
+      options: formMethodValues,
+      control: { type: "radio" },
+      description: "The HTTP method to submit the form with",
+      table: {
+        type: {
+          summary: formMethodValues.join(" | "),
+        },
+      },
+    },
+    target: {
+      control: "text",
+      description:
+        "Indicates where to display the response after submitting the form",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    formActions: {
+      control: "obj",
+      description: "One or more Buttons that conclude the form.",
+      table: {
+        type: {
+          summary:
+            "ReactElement<typeof Button> | Array<ReactElement<typeof Button>>",
+        },
+      },
+    },
+    id: {
+      control: "text",
+      description: "Defines a unique identifier (ID) for the Form",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
     title: "Docking registration",
     children: (
       <>
-        <TextField label="Name of vessel" />
-        <TextField isMultiline label="Nature of visit" />
+        <TextField label="Vessel name" />
+        <TextField isMultiline label="Reason for visit" />
       </>
     ),
     formActions: (
       <>
-        <Button text="Submit" />
-        <Button variant="secondary" text="Reset" />
+        <Button label="Submit" variant="primary" />
+        <Button label="Reset" variant="secondary" />
       </>
     ),
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -91,7 +180,7 @@ const Template: StoryObj<FormProps> = {
         description={args.description}
         formActions={args.formActions}
         alert={args.alert}
-        hasAutoComplete={args.hasAutoComplete}
+        autoCompleteType={args.autoCompleteType}
         encodingType={args.encodingType}
         method={args.method}
         noValidate={args.noValidate}
@@ -111,8 +200,8 @@ export const Simple: StoryObj<FormProps> = {
   args: {
     children: (
       <>
-        <TextField label="Name of vessel" />
-        <TextField isMultiline label="Nature of visit" />
+        <TextField label="Vessel name" />
+        <TextField isMultiline label="Reason for visit" />
       </>
     ),
   },
@@ -124,8 +213,8 @@ export const Fieldsets: StoryObj<FormProps> = {
     children: (
       <>
         <Fieldset legend="Vessel information" name="vessel">
-          <TextField label="Name of vessel" />
-          <TextField isMultiline label="Nature of visit" />
+          <TextField label="Vessel name" />
+          <TextField isMultiline label="Reason for visit" />
         </Fieldset>
         <Fieldset legend="Passenger information" name="passengers">
           <TextField label="Number of passengers" />
@@ -139,8 +228,7 @@ export const Fieldsets: StoryObj<FormProps> = {
 export const Description: StoryObj<FormProps> = {
   ...Template,
   args: {
-    description:
-      "Before docking with the station, please register your ship and crew.",
+    description: "Register your ship before docking with the station.",
   },
 };
 
@@ -148,9 +236,9 @@ export const Alert: StoryObj<FormProps> = {
   ...Template,
   args: {
     alert: (
-      <Infobox severity="error" role="alert" title="Something's wrong">
-        Something has gone horribly awry.
-      </Infobox>
+      <Callout severity="error" role="alert" title="Something went wrong">
+        Please try your request again later.
+      </Callout>
     ),
   },
 };
@@ -159,37 +247,64 @@ export const KitchenSink: StoryObj<FormProps> = {
   ...Template,
   args: {
     alert: (
-      <Infobox severity="error" role="alert" title="Something's wrong">
-        Something has gone horribly awry.
-      </Infobox>
+      <Callout severity="error" role="alert" title="Something went wrong">
+        Please try your request again later.
+      </Callout>
     ),
     children: (
       <>
         <Fieldset
           legend="Vessel information"
           name="vessel"
-          description="This information helps us verify vessel ownership and origination."
+          description="This information is used to verify vessel ownership and origin."
         >
-          <TextField label="Name of vessel" />
-          <TextField isMultiline label="Nature of visit" />
+          <TextField
+            label="Vessel name"
+            errorMessage="This field is required."
+          />
+          <CheckboxGroup label="Systems check" isRequired>
+            <Checkbox
+              label="Life support"
+              name="life-support"
+              value="life-support"
+            />
+            <Checkbox
+              label="Warp core containment"
+              name="warp-core"
+              value="warp-core"
+            />
+            <Checkbox
+              label="Cetacean ops"
+              name="cetacean-ops"
+              value="cetacean-ops"
+            />
+          </CheckboxGroup>
         </Fieldset>
         <Fieldset
           legend="Passenger information"
           name="passengers"
           description="This information will be used to track your passengers' whereabouts."
           alert={
-            <Infobox severity="error" role="alert" title="Standby for boarding">
-              Your captain is a known space pirate. Your location has been
-              reported to Station Control.
-            </Infobox>
+            <Callout severity="error" role="alert" title="Standby for boarding">
+              <Paragraph>
+                There is an issue with the fuel mixture ratios. Reconfigure the
+                fuel mixture and perform the safety checks again.
+              </Paragraph>
+
+              <Link href="#" variant="monochrome">
+                Visit fueling console
+              </Link>
+            </Callout>
           }
         >
-          <TextField label="Number of passengers" />
+          <TextField
+            label="Number of passengers"
+            hint="Specify your destination within the Sol system."
+          />
           <TextField label="Captain's name" />
         </Fieldset>
       </>
     ),
-    description:
-      "Before docking with the station, please register your ship and crew.",
+    description: "Register your ship before docking with the station.",
   },
 };

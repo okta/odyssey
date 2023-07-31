@@ -10,36 +10,37 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement } from "react";
+import { memo, ReactNode } from "react";
 
-import { ThemeOptions } from ".";
-import { DesignTokensOverride } from "../src/theme/index";
-import { OdysseyCacheProvider } from "./OdysseyCacheProvider";
-import { OdysseyThemeProvider } from "./OdysseyThemeProvider";
+import {
+  OdysseyCacheProvider,
+  OdysseyCacheProviderProps,
+} from "./OdysseyCacheProvider";
+import {
+  OdysseyThemeProvider,
+  OdysseyThemeProviderProps,
+} from "./OdysseyThemeProvider";
 import {
   OdysseyTranslationProvider,
-  TranslationOverrides,
+  OdysseyTranslationProviderProps,
 } from "./OdysseyTranslationProvider";
-import { SupportedLanguages } from "./OdysseyTranslationProvider.types";
 
-type OdysseyProviderProps = {
-  children: ReactElement;
-  nonce?: string;
-  themeOverride?: ThemeOptions;
-  designTokensOverride?: DesignTokensOverride;
-  languageCode?: SupportedLanguages;
-  translationOverrides?: TranslationOverrides;
-};
+export type OdysseyProviderProps = OdysseyCacheProviderProps &
+  OdysseyThemeProviderProps &
+  OdysseyTranslationProviderProps & {
+    children: ReactNode;
+  };
 
 const OdysseyProvider = ({
   children,
-  nonce,
-  themeOverride,
   designTokensOverride,
   languageCode,
+  nonce,
+  stylisPlugins,
+  themeOverride,
   translationOverrides,
 }: OdysseyProviderProps) => (
-  <OdysseyCacheProvider nonce={nonce}>
+  <OdysseyCacheProvider nonce={nonce} stylisPlugins={stylisPlugins}>
     <OdysseyThemeProvider
       themeOverride={themeOverride}
       designTokensOverride={designTokensOverride}

@@ -13,6 +13,11 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Tag, TagList, TagProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { GroupIcon } from "@okta/odyssey-react-mui/icons";
+import icons from "../../../../.storybook/components/iconUtils";
+import { userEvent } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<TagProps> = {
   title: "MUI Components/Tag",
@@ -21,25 +26,65 @@ const storybookMeta: Meta<TagProps> = {
     actions: { argTypesRegex: null },
   },
   argTypes: {
-    label: {
-      control: "text",
+    icon: {
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
+      description: "An optional icon to display alongside the label",
+      table: {
+        type: {
+          summary: "<Icon />",
+        },
+      },
     },
     isDisabled: {
       control: "boolean",
+      description: "If `true`, the tag is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: false,
+      },
+    },
+    label: {
+      control: "text",
+      description: "The label text for the tag",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     onClick: {
+      control: "obj",
       action: true,
+      description: "Callback fired when the tag is clicked",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
     },
     onRemove: {
+      control: "obj",
       action: true,
+      description:
+        "Callback fired when the remove button of the tag is clicked",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
     },
   },
   args: {
     label: "Starship",
-    onRemove: undefined,
-    onClick: undefined,
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -54,7 +99,7 @@ export const List: StoryObj<TagProps> = {
   render: function C(args) {
     return (
       <TagList>
-        <Tag {...args} />
+        <Tag label={args.label} />
         <Tag label="Another tag" />
         <Tag label="A third tag" />
       </TagList>
@@ -62,6 +107,13 @@ export const List: StoryObj<TagProps> = {
   },
   args: {
     label: "Starship",
+  },
+};
+
+export const Icon: StoryObj<TagProps> = {
+  args: {
+    label: "Crew",
+    icon: <GroupIcon />,
   },
 };
 
@@ -77,9 +129,18 @@ export const Clickable: StoryObj<TagProps> = {
 export const Removable: StoryObj<TagProps> = {
   args: {
     label: "Starship",
-    onRemove: function noRefCheck(event) {
-      event;
-    },
+  },
+  play: async ({ args, canvasElement, step }) => {
+    await step("remove the tag on click", async () => {
+      const tagElement = canvasElement.querySelector('[role="button"]');
+      const removeIcon = tagElement?.querySelector("svg");
+      if (removeIcon) {
+        userEvent.click(removeIcon);
+        userEvent.tab();
+        expect(args.onRemove).toHaveBeenCalled();
+      }
+      await axeRun("Removable Tag");
+    });
   },
 };
 

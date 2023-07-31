@@ -20,31 +20,88 @@ const storybookMeta: Meta<typeof RadioGroup> = {
   component: RadioGroup,
   argTypes: {
     children: {
-      control: "text",
+      control: null,
+      description: "An array of Radio components within the group",
+      table: {
+        type: {
+          summary: "Array<ReactElement<typeof Radio>>",
+        },
+      },
     },
     defaultValue: {
       control: "text",
+      description:
+        "The text value of the radio that should be selected by default",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     errorMessage: {
       control: "text",
+      description: "The error text for an invalid group",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     hint: {
       control: "text",
+      description: "Optional hint text",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     id: {
       control: "text",
+      description:
+        "The id of the `input` element. This will also be the input's `name` field",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     isDisabled: {
       control: "boolean",
+      description: "Disables the whole radio group",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     label: {
       control: "text",
+      description: "The text label for the radio group",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     onChange: {
-      control: "function",
+      control: null,
+      description: "Callback fired when the value of the radio group changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
     },
     value: {
       control: "text",
+      description: "The `value` on the selected radio button",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
@@ -88,6 +145,14 @@ export const Disabled: StoryObj<RadioGroupProps> = {
 
 export const Error: StoryObj<RadioGroupProps> = {
   ...Template,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Validation should happen on the group and not individually on each item.",
+      },
+    },
+  },
   args: {
     errorMessage: "This field is required.",
   },

@@ -25,22 +25,58 @@ import { Field } from "./Field";
 
 export type SelectOption = {
   text: string;
-  value?: string;
   type?: "heading" | "option";
+  value?: string;
 };
 
 export type SelectProps = {
+  /**
+   * The error message for the Select
+   */
   errorMessage?: string;
+  /**
+   * The hint text for the Select
+   */
   hint?: string;
+  /**
+   * The id attribute of the Select
+   */
   id?: string;
+  /**
+   * If `true`, the Select is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * If `true`, the Select allows multiple selections
+   */
   isMultiSelect?: boolean;
+  /**
+   * If `true`, the Select is optional
+   */
   isOptional?: boolean;
+  /**
+   * The label text for the Select
+   */
   label: string;
+  /**
+   * Callback fired when the Select loses focus
+   */
   onBlur?: MuiSelectProps["onBlur"];
+  /**
+   * Callback fired when the value of the Select changes
+   */
   onChange?: MuiSelectProps["onChange"];
+  /**
+   * Callback fired when the Select gains focus
+   */
   onFocus?: MuiSelectProps["onFocus"];
+  /**
+   * The options for the Select
+   */
   options: (string | SelectOption)[];
+  /**
+   * The value or values selected in the Select
+   */
   value?: string | string[];
 };
 
@@ -169,7 +205,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       return (
         <MenuItem key={option.value} value={option.value}>
           {isMultiSelect && (
-            <Checkbox isChecked={selectedValue.includes(option.value)} />
+            <Checkbox isDefaultChecked={selectedValue.includes(option.value)} />
           )}
           {option.text}
         </MenuItem>
@@ -179,16 +215,17 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const renderFieldComponent = useCallback(
       () => (
         <MuiSelect
+          children={children}
           id={idOverride}
-          name={idOverride}
           multiple={isMultiSelect}
+          name={idOverride}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
           ref={ref}
-          children={children}
           renderValue={isMultiSelect ? renderValue : undefined}
           value={selectedValue}
+          labelId={label}
         />
       ),
       [
@@ -201,6 +238,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         children,
         renderValue,
         selectedValue,
+        label,
       ]
     );
 

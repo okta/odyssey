@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0](https://github.com/okta/odyssey/compare/v0.24.0...v1.0.0) (2023-07-31)
+
+### Features
+
+- **odyssey-design-tokens:** add 'disabled' type color ([6810a9c](https://github.com/okta/odyssey/commit/6810a9ca0c5ea945aebe7f457e22a5c2599cf150))
+- **odyssey-design-tokens:** add "darker" to primary palette ([775ffcb](https://github.com/okta/odyssey/commit/775ffcb925e0bf9b0c829daecd57a8ea1fe7d18f))
+- **odyssey-design-tokens:** add alpha tokens ([a861769](https://github.com/okta/odyssey/commit/a861769bba77c5a6b12681c801bd6bb5807a102e))
+- **odyssey-design-tokens:** add border.outer and palette.x.heading ([553d3bc](https://github.com/okta/odyssey/commit/553d3bca6232a363205a35d56e63d643d47101fa))
+- **odyssey-design-tokens:** add border.radius.round ([be1a4f2](https://github.com/okta/odyssey/commit/be1a4f25f42de89e50744af05f46cee8ac9bb74a))
+- **odyssey-design-tokens:** add border.width.heavy ([b825c03](https://github.com/okta/odyssey/commit/b825c03555044eedacb240fb0d8322f873bdaf98))
+- **odyssey-design-tokens:** add token for border.radius.tight ([a3978ae](https://github.com/okta/odyssey/commit/a3978ae662769b5603aee9bcf0cd75d96436a0b4))
+- **odyssey-design-tokens:** add tokens for colorized text ([6f89fc8](https://github.com/okta/odyssey/commit/6f89fc8cf20313f99915797c9b764990be020ef2))
+
 ## [0.24.0](https://github.com/okta/odyssey/compare/v0.23.0...v0.24.0) (2023-05-25)
 
 **Note:** Version bump only for package @okta/odyssey-design-tokens

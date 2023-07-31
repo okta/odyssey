@@ -11,7 +11,12 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Status, StatusProps } from "@okta/odyssey-react-mui";
+import {
+  Status,
+  StatusProps,
+  statusSeverityValues,
+  statusVariantValues,
+} from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<StatusProps> = {
@@ -20,44 +25,97 @@ const storybookMeta: Meta<StatusProps> = {
   argTypes: {
     label: {
       control: "text",
+      description: "The text describing the Status",
     },
     severity: {
       control: "radio",
-      options: ["default", "error", "info", "success", "warning"],
+      options: statusSeverityValues,
+      description: "The severity of the Status, as indicated by its styling",
+      table: {
+        type: {
+          summary: statusSeverityValues.join(" | "),
+        },
+        defaultValue: "default",
+      },
+    },
+    variant: {
+      control: "radio",
+      options: statusVariantValues,
+      description:
+        "Whether the Status is displayed uncontained (`lamp`) or contained (`pill`)",
+      table: {
+        type: {
+          summary: statusVariantValues.join(" | "),
+        },
+        defaultValue: "lamp",
+      },
     },
   },
   args: {
+    variant: "lamp",
     label: "Warp drive in standby",
     severity: "default",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
 
-export const Default: StoryObj<StatusProps> = {
+export const DefaultLamp: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
   },
 };
 
-export const Error: StoryObj<StatusProps> = {
+export const ErrorLamp: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive unstable",
     severity: "error",
   },
 };
 
-export const Success: StoryObj<StatusProps> = {
+export const SuccessLamp: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive online",
     severity: "success",
   },
 };
 
-export const Warning: StoryObj<StatusProps> = {
+export const WarningLamp: StoryObj<StatusProps> = {
   args: {
     label: "Warp fuel low",
     severity: "warning",
+  },
+};
+
+export const DefaultPill: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive in standby",
+    variant: "pill",
+  },
+};
+
+export const ErrorPill: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive unstable",
+    severity: "error",
+    variant: "pill",
+  },
+};
+
+export const SuccessPill: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp drive online",
+    severity: "success",
+    variant: "pill",
+  },
+};
+
+export const WarningPill: StoryObj<StatusProps> = {
+  args: {
+    label: "Warp fuel low",
+    severity: "warning",
+    variant: "pill",
   },
 };

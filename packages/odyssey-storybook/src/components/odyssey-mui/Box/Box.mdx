@@ -1,0 +1,28 @@
+import {
+  Canvas,
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Controls,
+  Stories,
+} from "@storybook/addon-docs";
+import { Story } from "@storybook/blocks";
+import * as BoxStories from "./Box.stories";
+
+<Meta of={BoxStories} />
+
+<Title of={BoxStories} />
+<Subtitle of={BoxStories} />
+<Description of={BoxStories} />
+<Primary of={BoxStories} />
+
+`<Box>` is a utility component that renders a simple HTML `<div>`, which can then be used for styling or layout. CSS properties
+can be set using the `sx` prop, as detailed in the [MUI documentation on `sx`](https://mui.com/system/getting-started/the-sx-prop/).
+The component can also be set to render another element besides `<div>`.
+
+`<Box>` is useful as an "escape hatch" when you need to create a layout or pattern not yet supported by Odyssey.
+
+<Controls />
+<Stories />

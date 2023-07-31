@@ -11,17 +11,16 @@
     "node": ">=16 <17"
   },
   "scripts": {
-    "build": "lerna run build --ignore @okta/odyssey-storybook --ignore @okta/odyssey-icons --ignore @okta/odyssey-svgr",
+    "build": "lerna run build --ignore @okta/odyssey-storybook --ignore @okta/odyssey-icons",
     "dev:source": "lerna run dev:source",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-svgr build && yarn workspace @okta/odyssey-react-mui build:icons",
+    "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-svgr build && yarn workspace @okta/odyssey-react-mui generate:icons",
     "lerna-publish": "lerna publish from-package --no-push --force-publish --no-verify-registry",
-    "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
+    "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --conventional-graduate --no-push --force-publish",
     "lint": "yarn eslint && yarn stylelint && yarn prettier-check",
     "postinstall": "yarn build && [ -z ${CI:-} ] && husky install || exit 0",
     "prettier-check": "prettier --ignore-unknown --loglevel warn --check .",
     "prettier-write": "prettier --ignore-unknown --loglevel warn --write .",
-    "start:labs": "yarn workspace @okta/odyssey-react-labs dev",
     "start:mui": "yarn workspace @okta/odyssey-react-mui dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "start": "npm-run-all --sequential build --parallel dev:source start:storybook",
@@ -30,19 +29,19 @@
     "typecheck": "lerna run typecheck"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.4",
+    "@commitlint/cli": "^17.6.6",
     "@okta/odyssey-commitlint": "workspace:*",
     "@okta/odyssey-eslint-config": "workspace:*",
     "@okta/odyssey-lint-staged": "workspace:*",
     "@okta/odyssey-stylelint": "workspace:*",
     "caniuse-lite": "^1.0.30001412",
-    "eslint": "^7.27.0",
+    "eslint": "^8.44.0",
     "husky": "^7.0.2",
     "lerna": "^6.5.1",
     "lint-staged": "^11.1.2",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.4.0",
-    "stylelint": "^14.13.0"
+    "prettier": "^2.8.8",
+    "stylelint": "^15.10.1"
   },
   "version": "0.5.0",
   "packageManager": "yarn@3.5.1"

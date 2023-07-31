@@ -12,12 +12,10 @@
 
 import type { StoryObj } from "@storybook/react";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
-import {
-  InformationCircleFilledIcon,
-  Link,
-  LinkProps,
-} from "@okta/odyssey-react-mui";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { Link, LinkProps, linkVariantValues } from "@okta/odyssey-react-mui";
+import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";
+import icons from "../../../../.storybook/components/iconUtils";
 
 export default {
   title: "MUI Components/Link",
@@ -25,22 +23,65 @@ export default {
   argTypes: {
     children: {
       control: "text",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+        defaultValue: "",
+      },
     },
-    variant: {
-      options: ["default", "monochrome"],
-      control: { type: "radio" },
+    href: {
+      control: "text",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
     },
     icon: {
-      control: "object",
+      control: {
+        type: "select",
+      },
+      options: Object.keys(icons),
+      mapping: icons,
+      description: "An optional icon to display at the start of the Link",
+      table: {
+        type: {
+          summary: "<Icon />",
+        },
+        defaultValue: "",
+      },
     },
     rel: {
       control: "text",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
     },
     target: {
       control: "text",
+      description:
+        "If set to `_blank`, the Link will display an external icon.",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: "",
+      },
     },
-    onClick: {
-      action: true,
+    variant: {
+      control: { type: "radio" },
+      options: linkVariantValues,
+      table: {
+        type: {
+          summary: linkVariantValues.join(" | "),
+        },
+        defaultValue: "default",
+      },
     },
   },
   decorators: [MuiThemeDecorator],

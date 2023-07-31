@@ -11,10 +11,21 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Button, Toast, ToastProps, ToastStack } from "@okta/odyssey-react-mui";
+import {
+  Button,
+  Toast,
+  ToastProps,
+  ToastStack,
+  toastRoleValues,
+  toastSeverityValues,
+} from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+import { axeRun } from "../../../axe-util";
+import type { PlaywrightProps } from "../storybookTypes";
 
 const meta: Meta<ToastProps> = {
   title: "MUI Components/Alerts/Toast",
@@ -22,41 +33,142 @@ const meta: Meta<ToastProps> = {
   argTypes: {
     autoHideDuration: {
       control: "number",
+      description:
+        "If set, this determines how long the toast should appear before automatically disappearing in milliseconds. It will only take effect if the toast is not dismissible. If left blank, it defaults to 6000",
+      table: {
+        type: {
+          summary: "number",
+        },
+        defaultValue: 6000,
+      },
     },
     isDismissable: {
       control: "boolean",
+      description: "If `true`, the alert will include a close button",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: false,
+      },
+    },
+    isVisible: {
+      control: "boolean",
+      description: "If true, the Toast is visible",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     linkText: {
       control: "text",
+      description:
+        "If linkUrl is defined, this is the text of the link. If left blank, it defaults to 'Learn more'. Note that linkText does nothing if linkUrl is not defined",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     linkUrl: {
       control: "text",
+      description: "If defined, the alert will include a link to the URL",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onHide: {
+      control: null,
+      description: "An optional function to run when the Toast is closed",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
     },
     role: {
-      control: "radio",
-      options: ["alert", "status", undefined],
+      options: toastRoleValues,
+      control: { type: "radio" },
+      description:
+        "Sets the ARIA role of the alert ('status' for something that dynamically updates, 'alert' for errors, null for something unchanging)",
+      table: {
+        type: {
+          summary: toastRoleValues.join(" | "),
+        },
+      },
     },
     severity: {
-      control: "radio",
-      options: ["error", "info", "success", "warning"],
+      options: toastSeverityValues,
+      control: { type: "radio" },
+      description: "Determine the color and icon of the alert",
+      table: {
+        type: {
+          summary: toastSeverityValues.join(" | "),
+        },
+      },
     },
     text: {
       control: "text",
+      description: "The text content of the alert",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   args: {
     severity: "info",
+    role: "status",
     linkText: "Info",
     text: "The mission to Sagittarius A is set for January 7.",
+    autoHideDuration: 10000,
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default meta;
 
+const openToast =
+  ({ canvasElement, step }: PlaywrightProps<ToastProps>) =>
+  async (args: ToastProps, actionName: string) => {
+    const canvas = within(canvasElement);
+    await step(`open ${actionName}`, async () => {
+      await waitFor(() => {
+        const buttonElement = canvas.getByText(`Open ${args.severity} toast`);
+        userEvent.hover(buttonElement);
+        userEvent.click(buttonElement);
+        userEvent.tab();
+      });
+      axeRun(actionName);
+    });
+    if (args.isDismissable) {
+      await step("dismiss toast", async () => {
+        const toastElement = canvas.getAllByRole(args.role || "status")[0];
+        if (toastElement) {
+          const dismissToastButton = toastElement.querySelector(
+            '[aria-label="close"]'
+          );
+          if (dismissToastButton) {
+            userEvent.click(dismissToastButton);
+            waitFor(() => {
+              expect(toastElement).not.toBeInTheDocument();
+            });
+          }
+        }
+      });
+    }
+  };
+
 const Single: StoryObj<ToastProps> = {
   args: {
     isVisible: false,
+    role: "status",
   },
   render: function C(args) {
     const [isVisible, setIsVisible] = useState(args.isVisible);
@@ -64,9 +176,9 @@ const Single: StoryObj<ToastProps> = {
     return (
       <>
         <Button
-          variant="primary"
+          label={`Open ${args.severity} toast`}
           onClick={openToast}
-          text={`Open ${args.severity} toast`}
+          variant="primary"
         />
         <ToastStack>
           <Toast
@@ -86,48 +198,27 @@ const Single: StoryObj<ToastProps> = {
   },
 };
 
-const Static: StoryObj<ToastProps> = {
-  ...Single,
-  args: {
-    isVisible: true,
-    severity: "info",
-    text: "The mission to Sagittarius A is set for January 7.",
-  },
-};
-
 export const Info: StoryObj<ToastProps> = {
   ...Single,
   args: {
-    text: "Testing",
+    text: "The mission to Sagittarius A is set for January 7.",
     severity: "info",
+  },
+  play: async ({ args, canvasElement, step }) => {
+    openToast({ canvasElement, step })(args, "Info Toast");
   },
 };
 
-export const InfoStatic: StoryObj<ToastProps> = {
-  ...Static,
-  args: {
-    isVisible: true,
-    text: "Hello world!",
-    severity: "info",
-  },
-};
-
-export const Error = {
+export const ErrorToast: StoryObj<ToastProps> = {
   ...Single,
+  name: "Error",
   args: {
     text: "Security breach in Hangar 18",
     role: "alert",
     severity: "error",
   },
-};
-
-export const ErrorStatic: StoryObj<ToastProps> = {
-  ...Static,
-  args: {
-    isVisible: true,
-    text: "Security breach in Hangar 18",
-    role: "alert",
-    severity: "error",
+  play: async ({ args, canvasElement, step }) => {
+    openToast({ canvasElement, step })(args, "Error Toast");
   },
 };
 
@@ -138,15 +229,8 @@ export const Warning: StoryObj<ToastProps> = {
     role: "status",
     severity: "warning",
   },
-};
-
-export const WarningStatic: StoryObj<ToastProps> = {
-  ...Static,
-  args: {
-    isVisible: true,
-    text: "Severe solar winds may delay local system flights",
-    role: "status",
-    severity: "warning",
+  play: async ({ args, canvasElement, step }) => {
+    openToast({ canvasElement, step })(args, "Warning Toast");
   },
 };
 
@@ -157,15 +241,8 @@ export const Success: StoryObj<ToastProps> = {
     role: "status",
     severity: "success",
   },
-};
-
-export const SuccessStatic: StoryObj<ToastProps> = {
-  ...Static,
-  args: {
-    isVisible: true,
-    text: "Docking completed",
-    role: "status",
-    severity: "success",
+  play: async ({ args, canvasElement, step }) => {
+    openToast({ canvasElement, step })(args, "Success Toast");
   },
 };
 
@@ -176,19 +253,20 @@ export const Dismissible: StoryObj<ToastProps> = {
     linkText: "View report",
     linkUrl: "#",
   },
-};
-
-export const DismissibleStatic: StoryObj<ToastProps> = {
-  ...Static,
-  args: {
-    isVisible: true,
-    isDismissable: true,
-    linkText: "View report",
-    linkUrl: "#",
+  play: async ({ args, canvasElement, step }) => {
+    openToast({ canvasElement, step })(args, "Dismissible Toast");
   },
 };
 
 export const MultipleToasts: StoryObj<ToastProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`Toast` handles the visual appearance and show/hide logic, but not positioning. To have a Toast positioned correctly, it must be wrapped inside a `ToastStack`. There should only be one ToastStack per screen, regardless of how many Toasts there are, since a single ToastStack can accept multiple Toasts as children and will manage positioning accordingly.",
+      },
+    },
+  },
   render: function C() {
     const [toasts, setToasts] = useState([
       <Toast
@@ -196,12 +274,14 @@ export const MultipleToasts: StoryObj<ToastProps> = {
         isVisible={true}
         severity="info"
         text="The mission to Sagittarius A is set for January 7."
+        key={Math.random()}
       />,
       <Toast
         isDismissable
         isVisible={true}
         severity="success"
         text="Docking completed."
+        key={Math.random()}
       />,
     ]);
 
@@ -209,25 +289,17 @@ export const MultipleToasts: StoryObj<ToastProps> = {
       const toastOptions = [
         <Toast
           isVisible={true}
-          severity="info"
-          text={`The mission to Sagittarius A is set for January 7.`}
-        />,
-        <Toast
-          isVisible={true}
-          severity="success"
-          text={`Docking completed.`}
-        />,
-        <Toast
-          isVisible={true}
           severity="warning"
           isDismissable
           text={`Severe solar winds may delay local system flights.`}
+          key={Math.random()}
         />,
         <Toast
           isVisible={true}
           severity="error"
           isDismissable
           text={`Security breach in Hangar 10.`}
+          key={Math.random()}
         />,
       ];
 
@@ -239,7 +311,11 @@ export const MultipleToasts: StoryObj<ToastProps> = {
 
     return (
       <>
-        <Button onClick={addToast} text="Open another Toast" />
+        <Button
+          label="Open another Toast"
+          onClick={addToast}
+          variant="primary"
+        />
         <ToastStack>{toasts}</ToastStack>
       </>
     );

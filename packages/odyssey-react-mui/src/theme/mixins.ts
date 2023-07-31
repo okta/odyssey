@@ -11,15 +11,14 @@
  */
 
 import type { ThemeOptions } from "@mui/material";
-import { DesignTokensOverride } from ".";
 
-export const mixins = (
-  odysseyTokens: DesignTokensOverride
-): ThemeOptions["mixins"] => {
+import { DesignTokens } from "./theme";
+
+export const mixins = (odysseyTokens: DesignTokens): ThemeOptions["mixins"] => {
   return {
-    maxWidth: odysseyTokens.FontLineLengthMax,
-    borderRadius: odysseyTokens.BorderRadiusBase,
-    borderStyle: odysseyTokens.BorderStyleBase,
-    borderWidth: odysseyTokens.BorderWidthBase,
+    maxWidth: odysseyTokens.TypographyLineLengthMax,
+    borderRadius: odysseyTokens.BorderRadiusMain,
+    borderStyle: odysseyTokens.BorderStyleMain,
+    borderWidth: odysseyTokens.BorderWidthMain,
   };
 };

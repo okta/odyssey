@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactElement, useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 import { SupportedLanguages } from "./OdysseyTranslationProvider.types";
 
@@ -19,12 +19,6 @@ import { I18nextProvider } from "react-i18next";
 
 export type TranslationOverrides = {
   [key in SupportedLanguages]?: Partial<(typeof resources)["en"]>;
-};
-
-type OdysseyTranslationProviderProps = {
-  children: ReactElement;
-  languageCode?: SupportedLanguages;
-  translationOverrides?: TranslationOverrides;
 };
 
 const mergeBundleOverrides = (
@@ -37,6 +31,12 @@ const mergeBundleOverrides = (
     ...bundle,
     ...overrides,
   };
+};
+
+export type OdysseyTranslationProviderProps = {
+  children: ReactNode;
+  languageCode?: SupportedLanguages;
+  translationOverrides?: TranslationOverrides;
 };
 
 export const OdysseyTranslationProvider = ({

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const VRT_IGNORE = "Toast.Provider Infobox.Form Infobox.Table".split(" ");
+const VRT_IGNORE = "Toast.Provider Callout.Form Callout.Table".split(" ");
 
 module.exports = {
   // NOTE: the docs for this exitcode config are incorrect as of this
@@ -18,7 +18,7 @@ module.exports = {
   // exit non zero and our larger CI build to pass as we intend.
   // Validating VRT results is then handled through a separate applitools
   // github integration.
-  exitcode: false,
+  exitcode: true,
 
   matchLevel: "Strict",
   showStorybookOutput: true,

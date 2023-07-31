@@ -13,32 +13,47 @@
 import { Radio as MuiRadio } from "@mui/material";
 import { memo } from "react";
 
-import { FormControlLabel } from ".";
+import { FormControlLabel } from "@mui/material";
 
 export type RadioProps = {
+  /**
+   * If `true`, the Radio is selected
+   */
   isChecked?: boolean;
-  isDefaultChecked?: boolean;
+  /**
+   * If `true`, the Radio is disabled
+   */
   isDisabled?: boolean;
-  hasError?: boolean;
+  /**
+   * If `true`, the Radio has an invalid value
+   */
+  isInvalid?: boolean;
+  /**
+   * The label text for the Radio
+   */
   label: string;
+  /**
+   * The name attribute of the Radio
+   */
   name?: string;
+  /**
+   * The value attribute of the Radio
+   */
   value: string;
 };
 
 const Radio = ({
   isChecked,
-  isDefaultChecked,
   isDisabled,
-  hasError,
+  isInvalid,
   label,
   name,
   value,
 }: RadioProps) => (
   <FormControlLabel
     checked={isChecked}
-    className={hasError ? "Mui-error" : ""}
+    className={isInvalid ? "Mui-error" : ""}
     control={<MuiRadio />}
-    defaultChecked={isDefaultChecked}
     disabled={isDisabled}
     label={label}
     name={name}
@@ -47,5 +62,6 @@ const Radio = ({
 );
 
 const MemoizedRadio = memo(Radio);
+MemoizedRadio.displayName = "Radio";
 
 export { MemoizedRadio as Radio };

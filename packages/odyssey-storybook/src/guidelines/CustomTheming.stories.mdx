@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/blocks";
 
 <Meta title="Guidelines/Custom Theming" />
 
@@ -10,11 +10,11 @@ While our internal system relies on Material-UI, you don't need to know any of t
 
 ## Custom Component with Odyssey styles
 
-Customizing component styles with Odyssey theming is very simple. Just import `useTheme`, and everything is in there ready for you.
+Customizing component styles with Odyssey theming is very simple. Just import `useOdysseyDesignTokens`, and everything is in there ready for you.
 
 ```tsx
 import { css } from "@emotion/react";
-import { useTheme } from "@okta/odyssey-react-mui";
+import { useOdysseyDesignTokens } from "@okta/odyssey-react-mui";
 import { MouseEventHandler, ReactNode, useMemo } from "react";
 
 export type WhatchamacallitProps = {
@@ -26,15 +26,15 @@ export const Whatchamacallit = ({
   children,
   onClick,
 }: WhatchamacallitProps) => {
-  const theme = useTheme();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const whatchamacallitStyles = useMemo(
     () => css`
-      border-radius: ${theme.shape.borderRadius};
-      color: ${theme.palette.text.secondary};
-      padding: ${theme.spacing(2)};
+      border-radius: ${odysseyDesignTokens.BorderRadiusMain};
+      color: ${odysseyDesignTokens.PaletteDangerText};
+      padding: ${odysseyDesignTokens.Spacing2};
     `,
-    [theme]
+    [odysseyDesignTokens]
   );
 
   return (
@@ -49,7 +49,7 @@ If the global theme switches from light to dark mode, you'll get that change as 
 
 ### Theme Variables
 
-When using `useTheme`, you have access to these configuration variables:
+When using `useOdysseyDesignTokens`, you have access to these configuration variables:
 
 - `breakpoints`
 - `components`
@@ -73,61 +73,76 @@ You can also override Odyssey's global theme. Doing so is much more complex than
 
 In general, we advise teams never shift any colors or spacing values from the defaults unless you have an explict design reason to do so.
 
-To customize your theme, you'll want `OdysseyThemeProvider`. This component automatically merges any theme changes into the Odyssey theme for you.
+To customize your theme, you need to use `MuiThemeProvider` directly after merging your theme changes with the Odyssey theme.
 
 Our theming utilizes MUI's `ThemeOptions` under-the-hood, so you can find more in-depth information customizing the theme [in their docs](https://mui.com/material-ui/customization/theming/).
 
 ```jsx
 import * as Tokens from "@okta/odyssey-design-tokens";
 import {
-  createTheme,
+  ThemeOptions,
   OdysseyCacheProvider,
-  OdysseyThemeProvider,
+  DesignTokensOverride,
+  createOdysseyMuiTheme,
+  createTheme,
+  deepmerge,
+  MuiThemeProvider,
 } from "@okta/odyssey-react-mui";
 
-const myThemeOverrides = {
-  components: {
-    MuiAlert: {
-      styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.text.secondary,
-        }),
+import { useMemo } from "react";
+import * as Tokens from "@okta/odyssey-design-tokens";
+
+const themeOverrides: ThemeOptions = useMemo(() => {
+  return {
+    components: {
+      MuiAlert: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            color: theme.palette.text.secondary,
+          }),
+        },
       },
     },
-  },
-  mixins: {
-    borderWidth: Tokens.BorderWidthBase + 2,
-  },
-  palette: {
-    primary: {
-      main: Tokens.ColorPaletteNeutral900,
-    }
-  },
-  shape: {
-    borderRadius: 4,
-  },
-  spacing: [
-    Tokens.SpaceScale0,
-    Tokens.SpaceScale1,
-    Tokens.SpaceScale2,
-    Tokens.SpaceScale3,
-    Tokens.SpaceScale4,
-    Tokens.SpaceScale5,
-    Tokens.SpaceScale6,
-    Tokens.SpaceScale7,
-    Tokens.SpaceScale8,
-    Tokens.SpaceScale9,
-  ],
-  typography: {
-    fontSize: 16,
-  },
-}
+    mixins: {
+      borderWidth: Tokens.BorderWidthBase + 2,
+    },
+    palette: {
+      primary: {
+        main: Tokens.ColorPaletteNeutral900,
+      }
+    },
+    shape: {
+      borderRadius: 4,
+    },
+    spacing: [
+      Tokens.SpaceScale0,
+      Tokens.SpaceScale1,
+      Tokens.SpaceScale2,
+      Tokens.SpaceScale3,
+      Tokens.SpaceScale4,
+      Tokens.SpaceScale5,
+      Tokens.SpaceScale6,
+      Tokens.SpaceScale7,
+      Tokens.SpaceScale8,
+      Tokens.SpaceScale9,
+    ],
+    typography: {
+      fontSize: 16,
+    },
+}, []);
+
+const odysseyTheme = createOdysseyMuiTheme(Tokens);
+const customOdysseyTheme = useMemo(
+  () =>
+    themeOverrides && createTheme(deepmerge(odysseyTheme, themeOverrides)),
+  [odysseyTheme, themeOverrides]
+);
 
 const YourAppRoot = ({ children }) => (
   <OdysseyCacheProvider>
-    <OdysseyThemeProvider themeOverride={myThemeOverrides}>
+    <MuiThemeProvider theme={customOdysseyTheme}>
       {children}
-    <OdysseyThemeProvider>
+    </MuiThemeProvider>
   </OdysseyCacheProvider>
 );
 ```

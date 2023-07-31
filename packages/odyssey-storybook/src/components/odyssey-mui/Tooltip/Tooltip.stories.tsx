@@ -13,48 +13,65 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
-  DownloadIcon,
+  Status,
+  Tag,
   Tooltip,
   TooltipProps,
 } from "@okta/odyssey-react-mui";
+import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
-import TooltipMdx from "./Tooltip.mdx";
+import { userEvent, within } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
+import type { PlaywrightProps } from "../storybookTypes";
 
 const storybookMeta: Meta<TooltipProps> = {
   title: "MUI Components/Tooltip",
   component: Tooltip,
-  parameters: {
-    docs: {
-      page: TooltipMdx,
-    },
-  },
   argTypes: {
     children: {
-      control: { type: "object" },
+      control: "obj",
+      description: "The content that will trigger the tooltip",
+      table: {
+        type: {
+          summary: "ReactElement",
+        },
+      },
     },
     ariaType: {
-      control: {
-        options: ["label", "description"],
-        type: "radio",
+      options: ["description", "label"],
+      control: { type: "radio" },
+      description: "The type of ARIA attribute to use",
+      table: {
+        type: {
+          summary: "description | label",
+        },
       },
-      description:
-        "Choose `description` if the tooltip is an ARIA description of the child element. Otherwise, choose `label`. This must be explicitly set.",
     },
     text: {
-      control: {
-        type: "text",
+      control: "text",
+      description: "The text to display in the tooltip",
+      table: {
+        type: {
+          summary: "string",
+        },
       },
     },
     placement: {
       options: ["top", "right", "bottom", "left"],
       control: { type: "radio" },
+      description: "The placement of the tooltip",
+      table: {
+        type: {
+          summary: "top | right | bottom | left",
+        },
+      },
     },
   },
   args: {
     ariaType: "label",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -73,23 +90,53 @@ const Template: StoryObj<TooltipProps> = {
   },
 };
 
+const showTooltip =
+  ({ canvasElement, step }: PlaywrightProps<TooltipProps>) =>
+  async (actionName: string) => {
+    await step("show the tooltip on hover", async () => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByText("Launch");
+      userEvent.hover(button);
+      await axeRun(actionName);
+    });
+  };
+
 export const Default: StoryObj<TooltipProps> = {
   ...Template,
   args: {
-    children: <Button text="Launch" />,
+    children: <Button label="Launch" variant="primary" />,
     ariaType: "description",
     placement: "top",
     text: "This will begin a 10-second countdown",
   },
+  play: async ({ canvasElement, step }) => {
+    showTooltip({ canvasElement, step })("Tooltip Default");
+  },
 };
 
-export const Icon: StoryObj<TooltipProps> = {
+export const IconButton: StoryObj<TooltipProps> = {
   ...Template,
   args: {
-    children: <Button variant="secondary" startIcon={<DownloadIcon />} />,
+    children: (
+      <Button
+        ariaLabel="Download logs"
+        startIcon={<DownloadIcon />}
+        variant="secondary"
+      />
+    ),
     ariaType: "label",
     placement: "top",
     text: "Download logs",
+  },
+};
+
+export const StatusWrapper: StoryObj<TooltipProps> = {
+  ...Template,
+  args: {
+    children: <Status label="Warp drive online" severity="success" />,
+    ariaType: "label",
+    placement: "top",
+    text: "The warp drive is currently online.",
   },
 };
 
@@ -110,16 +157,19 @@ export const Placement: StoryObj<TooltipProps> = {
     return (
       <>
         <Tooltip text="Top" placement="top" ariaType="label">
-          <Button text="Top" />
+          <Tag label="Bow" />
         </Tooltip>
-        <Tooltip text="Right" placement="right" ariaType="label">
-          <Button text="Right" />
-        </Tooltip>
-        <Tooltip text="Bottom" placement="bottom" ariaType="label">
-          <Button text="Bottom" />
-        </Tooltip>
+
         <Tooltip text="Left" placement="left" ariaType="label">
-          <Button text="Left" />
+          <Tag label="Stern" />
+        </Tooltip>
+
+        <Tooltip text="Bottom" placement="bottom" ariaType="label">
+          <Tag label="Port" />
+        </Tooltip>
+
+        <Tooltip text="Right" placement="right" ariaType="label">
+          <Tag label="Starboard" />
         </Tooltip>
       </>
     );

@@ -37,5 +37,6 @@ const MuiPropsChild = forwardRef<HTMLElement, MuiPropsChildProps>(
 );
 
 const MemoizedMuiPropsChild = memo(MuiPropsChild);
+MemoizedMuiPropsChild.displayName = "MuiPropsChild";
 
 export { MemoizedMuiPropsChild as MuiPropsChild };

@@ -10,41 +10,61 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { forwardRef, ReactElement } from "react";
+import { memo, ReactElement } from "react";
+import { ExternalLinkIcon } from "./icons.generated";
 
-import {
-  Link as MuiLink,
-  LinkProps as MuiLinkProps,
-  SvgIcon,
-} from "@mui/material";
+import { Link as MuiLink } from "@mui/material";
+
+export const linkVariantValues = ["default", "monochrome"] as const;
 
 export type LinkProps = {
+  /**
+   * The content within the Link
+   */
   children: React.ReactNode;
+  /**
+   * The Link destination
+   */
   href: string;
+  /**
+   * An optional Icon component at the start of the Link
+   */
   icon?: ReactElement;
+  /**
+   * The HTML `rel` attribute for the Link
+   */
   rel?: string;
-  target?: "_self" | "_blank" | "_parent" | "_top" | string;
-  variant?: MuiLinkProps["variant"];
+  /**
+   * The HTML `target` attribute for the Link
+   */
+  target?:
+    | "_self"
+    | "_blank"
+    | "_parent"
+    | "_top"
+    | (string & NonNullable<unknown>);
+  /**
+   * The visual presentation of the Link (default or monochrome)
+   */
+  variant?: (typeof linkVariantValues)[number];
 };
 
-export const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-  const { icon, children, target, variant, href, rel } = props;
-  return (
-    <MuiLink ref={ref} variant={variant} target={target} href={href} rel={rel}>
-      {icon && <span className="Link-icon">{icon}</span>}
-      {children}
-      {target === "_blank" && (
-        <span className="Link-indicator" role="presentation">
-          <SvgIcon viewBox="0 0 16 16">
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M13.2929 2H7.99998V1H14.5C14.7761 1 15 1.22386 15 1.5V8H14V2.70711L6.35353 10.3536L5.64642 9.64645L13.2929 2ZM1.5 4H1V4.5V14.5V15H1.5H11.5H12V14.5V8H11V14H2V5H8V4H1.5Z"
-              fill="currentColor"
-            />
-          </SvgIcon>
-        </span>
-      )}
-    </MuiLink>
-  );
-});
+const Link = ({ children, href, icon, target, rel, variant }: LinkProps) => (
+  <MuiLink href={href} rel={rel} target={target} variant={variant}>
+    {icon && <span className="Link-icon">{icon}</span>}
+
+    {children}
+
+    {target === "_blank" && (
+      <span className="Link-indicator" role="presentation">
+        <ExternalLinkIcon />
+      </span>
+    )}
+  </MuiLink>
+);
+
+const MemoizedLink = memo(Link);
+
+MemoizedLink.displayName = "Link";
+
+export { MemoizedLink as Link };

@@ -10,29 +10,27 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  Button,
-  ButtonProps,
-  ChevronDownIcon,
-  Divider,
-  ListSubheader,
-  Menu,
-  MenuItem,
-  useUniqueId,
-} from "./";
-import { memo, MouseEvent, ReactElement, useMemo, useState } from "react";
+import { Button, buttonVariantValues, MenuItem, useUniqueId } from "./";
+import { Divider, ListSubheader, Menu } from "@mui/material";
+import { ChevronDownIcon } from "./icons.generated";
+import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
+
+import { MenuContext, MenuContextType } from "./MenuContext";
+import { NullElement } from "./NullElement";
 
 export type MenuButtonProps = {
   /**
-   * The <MenuItem> components within the Menu.
+   * The ARIA label for the Button
    */
-  children: Array<
-    ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
-  >;
+  ariaLabel?: string;
   /**
-   * The end Icon on the trigggering Button
+   * The ID of the element that labels the Button
    */
-  buttonEndIcon?: ReactElement;
+  ariaLabelledBy?: string;
+  /**
+   * The ID of the element that describes the Button
+   */
+  ariaDescribedBy?: string;
   /**
    * The label on the triggering Button
    */
@@ -40,31 +38,67 @@ export type MenuButtonProps = {
   /**
    * The variant of the triggering Button
    */
-  buttonVariant?: ButtonProps["variant"];
+  buttonVariant?: (typeof buttonVariantValues)[number];
   /**
-   * The id of the `input` element.
+   * The <MenuItem> components within the Menu.
+   */
+  children: Array<
+    ReactElement<
+      typeof MenuItem | typeof Divider | typeof ListSubheader | NullElement
+    >
+  >;
+  /**
+   * The end Icon on the trigggering Button
+   */
+  endIcon?: ReactElement;
+  /**
+   * The id of the Button
    */
   id?: string;
-};
+  /**
+   * The tooltip text for the Button if it's icon-only
+   */
+  tooltipText?: string;
+} & (
+  | {
+      ariaLabel?: string;
+      ariaLabelledBy?: string;
+      buttonLabel: string;
+    }
+  | {
+      ariaLabel: string;
+      ariaLabelledBy?: string;
+      buttonLabel?: undefined | "";
+    }
+  | {
+      ariaLabel?: string;
+      ariaLabelledBy: string;
+      buttonLabel?: undefined | "";
+    }
+);
 
 const MenuButton = ({
+  ariaLabel,
+  ariaLabelledBy,
+  ariaDescribedBy,
   buttonLabel = "",
-  children,
-  buttonEndIcon = <ChevronDownIcon />,
   buttonVariant = "secondary",
+  children,
+  endIcon = <ChevronDownIcon />,
   id: idOverride,
+  tooltipText,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const open = Boolean(anchorEl);
+  const isOpen = Boolean(anchorEl);
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
+  const closeMenu = useCallback<MenuContextType["closeMenu"]>(() => {
     setAnchorEl(null);
-  };
+  }, []);
+
+  const openMenu = useCallback<MenuContextType["openMenu"]>((event) => {
+    setAnchorEl(event.currentTarget);
+  }, []);
 
   const uniqueId = useUniqueId(idOverride);
 
@@ -73,31 +107,47 @@ const MenuButton = ({
     [uniqueId]
   );
 
+  const providerValue = useMemo<MenuContextType>(
+    () => ({
+      closeMenu,
+      openMenu,
+    }),
+    [closeMenu, openMenu]
+  );
+
   return (
     <div>
       <Button
-        endIcon={buttonEndIcon}
-        id={`${uniqueId}-button`}
-        aria-controls={open ? `${uniqueId}-menu` : undefined}
+        aria-controls={isOpen ? `${uniqueId}-menu` : undefined}
+        aria-expanded={isOpen ? "true" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        text={buttonLabel}
+        ariaDescribedBy={ariaDescribedBy}
+        ariaLabel={ariaLabel}
+        ariaLabelledBy={ariaLabelledBy}
+        endIcon={endIcon}
+        id={`${uniqueId}-button`}
+        label={buttonLabel}
+        onClick={openMenu}
+        tooltipText={tooltipText}
         variant={buttonVariant}
       />
+
       <Menu
-        id={`${uniqueId}-menu`}
         anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
+        id={`${uniqueId}-menu`}
         MenuListProps={menuListProps}
+        onClose={closeMenu}
+        open={isOpen}
       >
-        {children}
+        <MenuContext.Provider value={providerValue}>
+          {children}
+        </MenuContext.Provider>
       </Menu>
     </div>
   );
 };
 
 const MemoizedMenuButton = memo(MenuButton);
+MemoizedMenuButton.displayName = "MenuButton";
 
 export { MemoizedMenuButton as MenuButton };

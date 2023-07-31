@@ -19,9 +19,9 @@ import {
   DatePickerProps,
   datePickerTheme,
   LocalizationProvider,
-} from "@okta/odyssey-react-labs";
+} from "@okta/odyssey-react-mui/labs";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
   title: "Labs Components/DatePicker",
@@ -40,13 +40,14 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
     },
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
 
 export const DatePickerStandard: StoryObj<DatePickerProps<unknown, unknown>> = {
   render: function C(props) {
-    const [value, setValue] = useState<unknown>(Date.now());
+    const [value, setValue] = useState<unknown>("09/05/1977");
     const datePickerProps = useMemo(
       () => ({
         ...props,
