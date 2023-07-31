@@ -12,9 +12,9 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, useCallback, useContext } from "react";
+import { memo, ReactElement, useCallback } from "react";
 
-import { MuiPropsContext } from "./MuiPropsContext";
+import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
@@ -57,6 +57,10 @@ export type ButtonProps = {
    */
   isFullWidth?: boolean;
   /**
+   * The text content of the Button
+   */
+  label?: string;
+  /**
    * The click event handler for the Button
    */
   onClick?: MuiButtonProps["onClick"];
@@ -68,10 +72,6 @@ export type ButtonProps = {
    * The icon element to display at the start of the Button
    */
   startIcon?: ReactElement;
-  /**
-   * The text content of the Button
-   */
-  text?: string;
   /**
    * The tooltip text for the Button if it's icon-only
    */
@@ -86,19 +86,19 @@ export type ButtonProps = {
   variant: (typeof buttonVariantValues)[number];
 } & (
   | {
-      text: string;
-      startIcon?: ReactElement;
       endIcon?: ReactElement;
+      label: string;
+      startIcon?: ReactElement;
     }
   | {
-      text?: undefined | "";
+      endIcon?: ReactElement;
+      label?: "" | undefined;
       startIcon: ReactElement;
-      endIcon?: ReactElement;
     }
   | {
-      text?: undefined | "";
-      startIcon?: ReactElement;
       endIcon: ReactElement;
+      label?: "" | undefined;
+      startIcon?: ReactElement;
     }
 );
 
@@ -110,15 +110,15 @@ const Button = ({
   id,
   isDisabled,
   isFullWidth,
+  label = "",
   onClick,
   size = "medium",
   startIcon,
-  text = "",
   tooltipText,
   type = "button",
   variant,
 }: ButtonProps) => {
-  const muiProps = useContext(MuiPropsContext);
+  const muiProps = useMuiProps();
 
   const renderButton = useCallback(
     (muiProps) => (
@@ -137,21 +137,21 @@ const Button = ({
         type={type}
         variant={variant}
       >
-        {text}
+        {label}
       </MuiButton>
     ),
     [
+      ariaDescribedBy,
       ariaLabel,
       ariaLabelledBy,
-      ariaDescribedBy,
       endIcon,
       id,
       isDisabled,
       isFullWidth,
+      label,
       onClick,
       size,
       startIcon,
-      text,
       type,
       variant,
     ]

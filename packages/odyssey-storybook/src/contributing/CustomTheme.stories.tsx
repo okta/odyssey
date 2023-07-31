@@ -51,7 +51,7 @@ export const ButtonStory: StoryObj = {
     return (
       <OdysseyThemeProvider designTokensOverride={odysseyDesignTokensOverrides}>
         <div>
-          <Button variant="primary" text="Primary" />
+          <Button label="Primary" variant="primary" />
         </div>
       </OdysseyThemeProvider>
     );

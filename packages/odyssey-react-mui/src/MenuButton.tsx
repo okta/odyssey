@@ -55,6 +55,10 @@ export type MenuButtonProps = {
    * The id of the Button
    */
   id?: string;
+  /**
+   * The tooltip text for the Button if it's icon-only
+   */
+  tooltipText?: string;
 } & (
   | {
       ariaLabel?: string;
@@ -82,6 +86,7 @@ const MenuButton = ({
   children,
   endIcon = <ChevronDownIcon />,
   id: idOverride,
+  tooltipText,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -116,13 +121,14 @@ const MenuButton = ({
         aria-controls={isOpen ? `${uniqueId}-menu` : undefined}
         aria-expanded={isOpen ? "true" : undefined}
         aria-haspopup="true"
-        endIcon={endIcon}
-        id={`${uniqueId}-button`}
-        onClick={openMenu}
-        text={buttonLabel}
+        ariaDescribedBy={ariaDescribedBy}
         ariaLabel={ariaLabel}
         ariaLabelledBy={ariaLabelledBy}
-        ariaDescribedBy={ariaDescribedBy}
+        endIcon={endIcon}
+        id={`${uniqueId}-button`}
+        label={buttonLabel}
+        onClick={openMenu}
+        tooltipText={tooltipText}
         variant={buttonVariant}
       />
 

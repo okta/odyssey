@@ -37,12 +37,33 @@ const storybookMeta: Meta<MenuButtonProps> = {
   title: "MUI Components/Menu Button",
   component: MenuButton,
   argTypes: {
-    children: {
-      control: "obj",
-      description: "The <MenuItem> components within the Menu",
+    ariaDescribedBy: {
+      control: "text",
+      description:
+        "The ID of the element that describes the MenuButton, if one exists.",
       table: {
         type: {
-          summary: "[MenuItem | Divider | ListSubheader]",
+          summary: "string",
+        },
+      },
+    },
+    ariaLabel: {
+      control: "text",
+      description:
+        "aria-label to describe the MenuButton when the button label is empty",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    ariaLabelledBy: {
+      control: "text",
+      description:
+        "The ID of the element that labels the MenuButton. Only needed if the button has no text and `ariaLabel` is empty.",
+      table: {
+        type: {
+          summary: "string",
         },
       },
     },
@@ -62,6 +83,15 @@ const storybookMeta: Meta<MenuButtonProps> = {
       table: {
         type: {
           summary: buttonVariantValues.join(" | "),
+        },
+      },
+    },
+    children: {
+      control: "obj",
+      description: "The <MenuItem> components within the Menu",
+      table: {
+        type: {
+          summary: "[MenuItem | Divider | ListSubheader]",
         },
       },
     },
@@ -88,34 +118,15 @@ const storybookMeta: Meta<MenuButtonProps> = {
         defaultValue: "",
       },
     },
-    ariaLabel: {
+    tooltipText: {
       control: "text",
       description:
-        "aria-label to describe the MenuButton when the button label is empty",
+        "If defined, the button will include a tooltip that contains the string.",
       table: {
         type: {
           summary: "string",
         },
-      },
-    },
-    ariaLabelledBy: {
-      control: "text",
-      description:
-        "The ID of the element that labels the MenuButton. Only needed if the button has no text and `ariaLabel` is empty.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    ariaDescribedBy: {
-      control: "text",
-      description:
-        "The ID of the element that describes the MenuButton, if one exists.",
-      table: {
-        type: {
-          summary: "string",
-        },
+        defaultValue: "",
       },
     },
   },
@@ -255,13 +266,14 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
 
 export const IconButton: StoryObj<MenuButtonProps> = {
   args: {
-    ariaLabel: "Add",
+    ariaLabel: "Add confirmation",
+    buttonLabel: "",
     children: [
       <MenuItem key="1">View details</MenuItem>,
       <MenuItem key="2">Edit configuration</MenuItem>,
       <MenuItem key="3">Launch</MenuItem>,
     ],
-    buttonLabel: "",
     endIcon: <MoreIcon />,
+    tooltipText: "Add confirmation",
   },
 };

@@ -160,8 +160,8 @@ const storybookMeta: Meta<FormProps> = {
     ),
     formActions: (
       <>
-        <Button variant="primary" text="Submit" />
-        <Button variant="secondary" text="Reset" />
+        <Button label="Submit" variant="primary" />
+        <Button label="Reset" variant="secondary" />
       </>
     ),
   },

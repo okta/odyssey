@@ -11,7 +11,13 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { Button, Tag, Tooltip, TooltipProps } from "@okta/odyssey-react-mui";
+import {
+  Button,
+  Status,
+  Tag,
+  Tooltip,
+  TooltipProps,
+} from "@okta/odyssey-react-mui";
 import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
@@ -98,7 +104,7 @@ const showTooltip =
 export const Default: StoryObj<TooltipProps> = {
   ...Template,
   args: {
-    children: <Button variant="primary" text="Launch" />,
+    children: <Button label="Launch" variant="primary" />,
     ariaType: "description",
     placement: "top",
     text: "This will begin a 10-second countdown",
@@ -108,19 +114,29 @@ export const Default: StoryObj<TooltipProps> = {
   },
 };
 
-export const Icon: StoryObj<TooltipProps> = {
+export const IconButton: StoryObj<TooltipProps> = {
   ...Template,
   args: {
     children: (
       <Button
-        variant="secondary"
         ariaLabel="Download logs"
         startIcon={<DownloadIcon />}
+        variant="secondary"
       />
     ),
     ariaType: "label",
     placement: "top",
     text: "Download logs",
+  },
+};
+
+export const StatusWrapper: StoryObj<TooltipProps> = {
+  ...Template,
+  args: {
+    children: <Status label="Warp drive online" severity="success" />,
+    ariaType: "label",
+    placement: "top",
+    text: "The warp drive is currently online.",
   },
 };
 
