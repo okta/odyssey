@@ -6,9 +6,6 @@
   "references": [
     {
       "path": "../odyssey-react-mui/tsconfig.production.json"
-    },
-    {
-      "path": "../odyssey-react-labs/tsconfig.production.json"
     }
   ]
 }

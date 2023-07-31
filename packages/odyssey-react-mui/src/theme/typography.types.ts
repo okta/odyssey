@@ -29,9 +29,9 @@ declare module "@mui/material/Typography" {
     body2: false;
     button: false;
     legend: true;
-    overline: false;
+    overline: true;
     subtitle1: true; // Design may refer to this as "caption"
-    subtitle2: false;
+    subtitle2: true;
     ui: true;
     default: true; // used by <Link>
     monochrome: true; // used by <Link>

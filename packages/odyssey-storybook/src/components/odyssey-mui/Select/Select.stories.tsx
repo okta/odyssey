@@ -13,35 +13,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-
-const storybookMeta: Meta<SelectProps> = {
-  title: "MUI Components/Forms/Select",
-  component: Select,
-  argTypes: {
-    isDisabled: {
-      control: "boolean",
-    },
-    errorMessage: {
-      control: "text",
-    },
-    hint: {
-      control: "text",
-    },
-    isOptional: {
-      control: "boolean",
-    },
-    label: {
-      control: "text",
-    },
-  },
-  args: {
-    hint: "Select your destination in the Sol system.",
-    label: "Destination",
-  },
-  decorators: [MuiThemeDecorator],
-};
-
-export default storybookMeta;
+import { userEvent, waitFor, screen } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
+import { expect } from "@storybook/jest";
 
 const optionsArray: SelectProps["options"] = [
   "Earth",
@@ -128,6 +102,134 @@ const optionsGrouped: SelectProps["options"] = [
   "New Terra",
 ];
 
+const storybookMeta: Meta<SelectProps> = {
+  title: "MUI Components/Forms/Select",
+  component: Select,
+  argTypes: {
+    errorMessage: {
+      control: "text",
+      description: "The error message for the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    hint: {
+      control: "text",
+      description: "The hint text for the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    id: {
+      control: "text",
+      description: "The id attribute of the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "If `true`, the select component is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isMultiSelect: {
+      control: "boolean",
+      description: "If `true`, the select component allows multiple selections",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isOptional: {
+      control: "boolean",
+      description: "If `true`, the select component is optional",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    label: {
+      control: "text",
+      description: "The label text for the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onBlur: {
+      control: null,
+      description: "Callback fired when the select component loses focus",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onChange: {
+      control: null,
+      description:
+        "Callback fired when the value of the select component changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onFocus: {
+      control: null,
+      description: "Callback fired when the select component gains focus",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    options: {
+      control: "object",
+      description: "The options for the select component",
+      table: {
+        type: {
+          summary: "(string | SelectOption)[]",
+        },
+      },
+    },
+    value: {
+      control: "text",
+      description: "The value or values selected in the select component",
+      table: {
+        type: {
+          summary: "string | string[]",
+        },
+      },
+    },
+  },
+  args: {
+    hint: "Select your destination in the Sol system.",
+    label: "Destination",
+    options: optionsArray,
+  },
+  decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
+};
+
+export default storybookMeta;
+
 const Template: StoryObj<SelectProps> = {
   render: function C(args) {
     return (
@@ -138,42 +240,7 @@ const Template: StoryObj<SelectProps> = {
         isDisabled={args.isDisabled}
         isMultiSelect={args.isMultiSelect}
         isOptional={args.isOptional}
-        options={optionsArray}
-      />
-    );
-  },
-};
-
-const ObjectTemplate: StoryObj<SelectProps> = {
-  render: function C(args) {
-    return (
-      <Select
-        label={args.label}
-        hint={args.hint}
-        errorMessage={args.errorMessage}
-        isDisabled={args.isDisabled}
-        isMultiSelect={args.isMultiSelect}
-        isOptional={args.isOptional}
-        options={optionsObject}
-      />
-    );
-  },
-  args: {
-    hint: "Select your destination in the Sol system.",
-  },
-};
-
-const GroupTemplate: StoryObj<SelectProps> = {
-  render: function C(args) {
-    return (
-      <Select
-        label={args.label}
-        hint={args.hint}
-        errorMessage={args.errorMessage}
-        isDisabled={args.isDisabled}
-        isMultiSelect={args.isMultiSelect}
-        isOptional={args.isOptional}
-        options={optionsGrouped}
+        options={args.options}
       />
     );
   },
@@ -181,34 +248,101 @@ const GroupTemplate: StoryObj<SelectProps> = {
 
 export const Default: StoryObj<SelectProps> = {
   ...Template,
+  play: async ({ canvasElement, step }) => {
+    await step("Select Earth from the listbox", async () => {
+      const comboBoxElement = canvasElement.querySelector(
+        '[aria-haspopup="listbox"]'
+      );
+      if (comboBoxElement) {
+        userEvent.click(comboBoxElement);
+        const listboxElement = screen.getByRole("listbox");
+        expect(listboxElement).toBeInTheDocument();
+        const listItem = listboxElement.children[0];
+        userEvent.click(listItem);
+        userEvent.tab();
+        await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
+        const inputElement = canvasElement.querySelector("input");
+        expect(inputElement?.value).toBe("Earth");
+        await waitFor(() => axeRun("Select Default"));
+      }
+    });
+  },
 };
 Default.args = {};
 
-export const DefaultDisabled: StoryObj<SelectProps> = {
+export const Disabled: StoryObj<SelectProps> = {
   ...Template,
   args: {
     isDisabled: true,
   },
 };
 
-export const DefaultError: StoryObj<SelectProps> = {
+export const Error: StoryObj<SelectProps> = {
   ...Template,
   args: {
     errorMessage: "Select your destination.",
   },
+  play: async ({ step }) => {
+    await step("Check for a11y errors on Select Error", async () => {
+      await waitFor(() => axeRun("Select Error"));
+    });
+  },
 };
 
-export const DefaultObject: StoryObj<SelectProps> = {
-  ...ObjectTemplate,
+export const OptionsObject: StoryObj<SelectProps> = {
+  ...Template,
+  args: {
+    options: optionsObject,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Select can accept `options` as a flat array, an array of objects, or both. This demonstrates an array of objects with `value` and `name`.",
+      },
+    },
+  },
 };
 
-export const DefaultGrouped: StoryObj<SelectProps> = {
-  ...GroupTemplate,
+export const OptionsGrouped: StoryObj<SelectProps> = {
+  ...Template,
+  args: {
+    options: optionsGrouped,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Objects with `type: "heading"` will have their `text` displayed as a heading.',
+      },
+    },
+  },
 };
 
-export const Multi: StoryObj<SelectProps> = {
+export const MultiSelect: StoryObj<SelectProps> = {
   ...Template,
   args: {
     isMultiSelect: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Select Multiple items from the listbox", async () => {
+      const comboBoxElement = canvasElement.querySelector(
+        '[aria-haspopup="listbox"]'
+      );
+      if (comboBoxElement) {
+        userEvent.click(comboBoxElement);
+        const listboxElement = screen.getByRole("listbox");
+        expect(listboxElement).toBeInTheDocument();
+
+        userEvent.click(listboxElement.children[0]);
+        userEvent.click(listboxElement.children[1]);
+        userEvent.tab();
+        await waitFor(() => expect(listboxElement).not.toBeInTheDocument());
+        const inputElement = canvasElement.querySelector("input");
+        expect(inputElement?.value).toBe("Earth,Mars");
+        userEvent.click(canvasElement);
+        await waitFor(() => axeRun("Select Multiple"));
+      }
+    });
   },
 };

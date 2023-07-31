@@ -10,8 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 export type MuiPropsContextType = Record<string, unknown>;
 
 export const MuiPropsContext = createContext<MuiPropsContextType>({});
+
+export const useMuiProps = () => useContext(MuiPropsContext);

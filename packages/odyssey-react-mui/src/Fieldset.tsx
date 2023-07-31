@@ -10,81 +10,92 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement } from "react";
+import { Box } from "@mui/material";
+import { memo, ReactElement, useMemo } from "react";
 
-import { Box, Typography } from ".";
-import { Infobox } from "./Infobox";
+import { Callout } from "./Callout";
+import { FieldsetContext } from "./FieldsetContext";
+import { Legend, Subordinate } from "./Typography";
+import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { useUniqueId } from "./useUniqueId";
 
 export type FieldsetProps = {
   /**
-   * The title of the Fieldset
+   * A Callout indicating a Fieldset-wide error or status update.
    */
-  legend: string;
-  /**
-   * A supplementary description
-   */
-  description?: string;
+  alert?: ReactElement<typeof Callout>;
   /**
    * The Field components within the Fieldset
    */
   children: ReactElement | Array<ReactElement>;
   /**
-   * An Infobox indicating a Fieldset-wide error or status update.
+   * A supplementary description
    */
-  alert?: ReactElement<typeof Infobox>;
-  /**
-   * The name associated with the group.
-   */
-  name?: string;
-  // /**
-  //  * If this Boolean attribute is set, all form controls that are descendants of the <fieldset>, are disabled, meaning they are not editable and won't be submitted along with the <form>.
-  //  * They won't receive any browsing events, like mouse clicks or focus-related events.
-  //  * Note that form elements inside the <legend> element won't be disabled.
-  //  */
-  // NOTE: Functionality is currently disabled. This will correctly disable child <input>s, but will not pass `isDisabled` to the child components.
-  // isDisabled?: boolean;
+  description?: string;
   /**
    * Defines a unique identifier (ID) which must be unique in the whole document.
    */
   id?: string;
+  /**
+   * Disables the component and any wrapped input fields.
+   */
+  isDisabled?: boolean;
+  /**
+   * The title of the Fieldset
+   */
+  legend: string;
+  /**
+   * The name associated with the group.
+   */
+  name?: string;
 };
 
 const Fieldset = ({
   alert,
   children,
   description,
+  id: idOverride,
+  isDisabled = false,
   legend,
   name,
-  id: idOverride,
-}: // isDisabled,
-FieldsetProps) => {
+}: FieldsetProps) => {
+  const odysseyDesignTokens = useOdysseyDesignTokens();
   const id = useUniqueId(idOverride);
+
+  const fieldsetContextValue = useMemo(
+    () => ({
+      isDisabled,
+    }),
+    [isDisabled]
+  );
 
   return (
     <Box
       component="fieldset"
-      // disabled={isDisabled}
+      disabled={isDisabled}
       name={name}
       id={id}
       sx={{
-        maxWidth: (theme) => theme.mixins.maxWidth,
-        margin: (theme) => theme.spacing(0),
-        marginBlockEnd: (theme) => theme.spacing(4),
-        padding: (theme) => theme.spacing(0),
         border: "0",
+        margin: odysseyDesignTokens.Spacing0,
+        marginBlockEnd: odysseyDesignTokens.Spacing6,
+        maxWidth: odysseyDesignTokens.TypographyLineLengthMax,
+        padding: odysseyDesignTokens.Spacing0,
 
         "&:last-child": {
-          marginBlockEnd: (theme) => theme.spacing(0),
+          marginBlockEnd: odysseyDesignTokens.Spacing0,
         },
       }}
     >
-      <Typography variant="legend" component="legend">
-        {legend}
-      </Typography>
-      {description && <Typography paragraph>{description}</Typography>}
+      <Legend>{legend}</Legend>
+
+      {description && <Subordinate component="p">{description}</Subordinate>}
+
       {alert}
-      {children}
+
+      <FieldsetContext.Provider value={fieldsetContextValue}>
+        {children}
+      </FieldsetContext.Provider>
     </Box>
   );
 };

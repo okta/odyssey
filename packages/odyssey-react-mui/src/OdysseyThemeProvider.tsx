@@ -10,24 +10,37 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { memo, ReactElement, useMemo } from "react";
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from "@mui/material/styles";
+import { memo, ReactNode, useMemo } from "react";
 
-import { createTheme, deepmerge, ThemeOptions, DesignTokensOverride } from ".";
-import { createOdysseyMuiTheme } from "./theme";
+import { ScopedCssBaseline, ThemeOptions } from "@mui/material";
+import { deepmerge } from "@mui/utils";
+import { createOdysseyMuiTheme, DesignTokensOverride } from "./theme";
 import * as Tokens from "@okta/odyssey-design-tokens";
+import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
+
+export type OdysseyThemeProviderProps = {
+  children: ReactNode;
+  designTokensOverride?: DesignTokensOverride;
+  themeOverride?: ThemeOptions;
+};
 
 const OdysseyThemeProvider = ({
   children,
-  themeOverride,
   designTokensOverride,
-}: {
-  children: ReactElement;
-  themeOverride?: ThemeOptions;
-  designTokensOverride?: DesignTokensOverride;
-}) => {
-  const odysseyTokens = { ...Tokens, ...designTokensOverride };
-  const odysseyTheme = createOdysseyMuiTheme(odysseyTokens);
+  themeOverride,
+}: OdysseyThemeProviderProps) => {
+  const odysseyTokens = useMemo(
+    () => ({ ...Tokens, ...designTokensOverride }),
+    [designTokensOverride]
+  );
+  const odysseyTheme = useMemo(
+    () => createOdysseyMuiTheme(odysseyTokens),
+    [odysseyTokens]
+  );
 
   const customOdysseyTheme = useMemo(
     () => themeOverride && createTheme(deepmerge(odysseyTheme, themeOverride)),
@@ -36,7 +49,11 @@ const OdysseyThemeProvider = ({
 
   return (
     <MuiThemeProvider theme={customOdysseyTheme ?? odysseyTheme}>
-      {children}
+      <ScopedCssBaseline>
+        <OdysseyDesignTokensContext.Provider value={odysseyTokens}>
+          {children}
+        </OdysseyDesignTokensContext.Provider>
+      </ScopedCssBaseline>
     </MuiThemeProvider>
   );
 };

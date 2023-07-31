@@ -13,21 +13,20 @@
 import type { StoryObj } from "@storybook/react";
 import {
   Button,
+  createOdysseyMuiTheme,
+  createTheme,
+  deepmerge,
+  DesignTokensOverride,
   ListItemText,
   MenuItem,
   MenuList,
-  MuiThemeProvider,
-  OdysseyTheme,
   OdysseyThemeProvider,
   Paper,
   Radio,
   RadioGroup,
   TextField,
   ThemeOptions,
-  DesignTokensOverride,
-  createOdysseyMuiTheme,
-  createTheme,
-  deepmerge,
+  ThemeProvider as MuiThemeProvider,
 } from "@okta/odyssey-react-mui";
 
 import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator";
@@ -42,18 +41,17 @@ export default {
 export const ButtonStory: StoryObj = {
   render: function C() {
     const odysseyDesignTokensOverrides: DesignTokensOverride = {
-      BorderRadiusBase: "12px",
-      ColorBackgroundBase: "cyan", //focus border color
-      ColorPaletteBlue500: "green", //base background color
-      ColorPaletteBlue900: "rgb(150,0,0,1)", //used for hover/focus
-      FontLineHeightHeading1: 1.2,
-      SpaceScale0: "1rem",
+      BorderRadiusMain: "12px",
+      HueBlue500: "green", //base background color
+      HueBlue900: "rgb(150,0,0,1)", //used for hover/focus
+      TypographyLineHeightHeading1: 1.2,
+      Spacing0: "1rem",
     };
 
     return (
       <OdysseyThemeProvider designTokensOverride={odysseyDesignTokensOverrides}>
         <div>
-          <Button variant="primary" text="Primary" />
+          <Button label="Primary" variant="primary" />
         </div>
       </OdysseyThemeProvider>
     );
@@ -65,7 +63,7 @@ ButtonStory.storyName = "Button";
 export const TextFieldStory: StoryObj = {
   render: function C() {
     const odysseyDesignTokensOverrides: DesignTokensOverride = {
-      ColorPaletteBlue500: "orange",
+      HueBlue500: "orange",
     };
 
     return (
@@ -88,7 +86,7 @@ TextFieldStory.storyName = "TextField";
 export const RadioGroupStory: StoryObj = {
   render: function C() {
     const odysseyDesignTokensOverrides: DesignTokensOverride = {
-      ColorPaletteBlue500: "rgba(0, 160, 100, 1)", // THIS IS A SAMPLE. DO NOT USE!
+      HueBlue500: "rgba(0, 160, 100, 1)", // THIS IS A SAMPLE. DO NOT USE!
     };
 
     return (
@@ -127,7 +125,7 @@ export const CustomComponentStory: StoryObj = {
         },
       };
     }, []);
-    const odysseyTheme: OdysseyTheme = createOdysseyMuiTheme(Tokens);
+    const odysseyTheme = createOdysseyMuiTheme(Tokens);
     const customOdysseyTheme = useMemo(
       () =>
         themeOverrides && createTheme(deepmerge(odysseyTheme, themeOverrides)),

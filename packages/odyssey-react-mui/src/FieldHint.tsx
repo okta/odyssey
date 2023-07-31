@@ -12,7 +12,7 @@
 
 import { memo } from "react";
 
-import { FormHelperText } from "./";
+import { FormHelperText } from "@mui/material";
 
 export type FieldHintProps = {
   id?: string;
@@ -24,5 +24,6 @@ const FieldHint = ({ id, text }: FieldHintProps) => {
 };
 
 const MemoizedFieldHint = memo(FieldHint);
+MemoizedFieldHint.displayName = "FieldHint";
 
 export { MemoizedFieldHint as FieldHint };

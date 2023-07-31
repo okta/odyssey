@@ -15,13 +15,16 @@ import { memo, ReactElement, useMemo } from "react";
 import {
   FormControl as MuiFormControl,
   FormLabel as MuiFormLabel,
-  Typography,
 } from "@mui/material";
 import { FieldError } from "./FieldError";
 import { FieldHint } from "./FieldHint";
 import { FieldLabel } from "./FieldLabel";
-import { useUniqueId } from "./useUniqueId";
+import { Typography } from "./Typography";
+import { useFieldset } from "./FieldsetContext";
 import { useTranslation } from "react-i18next";
+import { useUniqueId } from "./useUniqueId";
+
+export const fieldTypeValues = ["single", "group"] as const;
 
 export type FieldProps = {
   /**
@@ -31,7 +34,10 @@ export type FieldProps = {
   /**
    * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
    */
-  fieldType: "single" | "group";
+  fieldType: (typeof fieldTypeValues)[number];
+  /**
+   * If `true`, the Field label will be shown
+   */
   hasVisibleLabel: boolean;
   /**
    * The helper text content.
@@ -83,7 +89,7 @@ const Field = ({
   hasVisibleLabel,
   hint,
   id: idOverride,
-  isDisabled = false,
+  isDisabled: isDisabledProp = false,
   isRadioGroup = false,
   isOptional = false,
   label,
@@ -99,6 +105,13 @@ const Field = ({
   const ariaDescribedBy = useMemo(
     () => [hintId, errorId].join(" ").trim() || undefined,
     [errorId, hintId]
+  );
+
+  const { isDisabled: isFieldsetDisabled } = useFieldset();
+
+  const isDisabled = useMemo(
+    () => isDisabledProp || isFieldsetDisabled,
+    [isDisabledProp, isFieldsetDisabled]
   );
 
   return (
@@ -140,5 +153,6 @@ const Field = ({
 };
 
 const MemoizedField = memo(Field);
+MemoizedField.displayName = "Field";
 
 export { MemoizedField as Field };

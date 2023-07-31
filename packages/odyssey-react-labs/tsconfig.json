@@ -1,6 +1,0 @@
-{
-  "extends": "@okta/odyssey-typescript/tsconfig.react.json",
-  "compilerOptions": {
-    "jsx": "react-jsx"
-  }
-}

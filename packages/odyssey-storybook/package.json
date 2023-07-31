@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "0.24.0",
+  "version": "1.0.0",
   "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -14,14 +14,12 @@
     "directory": "packages/odyssey-storybook"
   },
   "devDependencies": {
-    "@applitools/eyes-storybook": "^3.31.2",
+    "@applitools/eyes-storybook": "^3.34.2",
     "@babel/core": "^7.19.3",
-    "@emotion/react": "^11.10.8",
-    "@emotion/styled": "^11.10.8",
+    "@mui/material": "^5.12.3",
     "@okta/odyssey-babel-loader": "workspace:*",
     "@okta/odyssey-design-tokens": "workspace:*",
     "@okta/odyssey-lifecycle": "workspace:*",
-    "@okta/odyssey-react-labs": "workspace:*",
     "@okta/odyssey-react-mui": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
     "@pxblue/storybook-rtl-addon": "^1.1.0",
@@ -46,8 +44,9 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.2",
     "@vitejs/plugin-react-swc": "^3.0.0",
+    "axe-core": "^4.7.2",
     "axe-playwright": "^1.2.3",
-    "babel-loader": "^8",
+    "babel-loader": "^9.1.3",
     "markdown-to-jsx": "^7.1.7",
     "npm-run-all": "^4.1.5",
     "playwright": "^1.33.0",
@@ -55,7 +54,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "storybook": "^7.0.8",
-    "typescript": "^5.0.2",
+    "typescript": "^5.1.6",
     "vite": "^4.3.2"
   },
   "scripts": {

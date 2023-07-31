@@ -12,46 +12,121 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, useContext, useMemo } from "react";
+import { memo, ReactElement, useCallback } from "react";
 
-import { Icon } from "./Icon";
-import { MuiPropsContext } from "./MuiPropsContext";
+import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
 
+export const buttonSizeValues = ["small", "medium", "large"] as const;
+export const buttonTypeValues = ["button", "submit", "reset"] as const;
+export const buttonVariantValues = [
+  "primary",
+  "secondary",
+  "tertiary",
+  "danger",
+  "floating",
+] as const;
+
 export type ButtonProps = {
-  endIcon?: ReactElement<typeof Icon>;
-  id?: string;
-  isDisabled?: boolean;
-  isFullWidth?: boolean;
-  onClick?: MuiButtonProps["onClick"];
-  size?: MuiButtonProps["size"];
-  startIcon?: ReactElement<typeof Icon>;
-  text?: string;
   /**
-   * `tooltipText` determines the text of the tooltip that wraps the button if it's icon-only.
+   * The ARIA label for the Button
+   */
+  ariaLabel?: string;
+  /**
+   * The ID of the element that labels the Button
+   */
+  ariaLabelledBy?: string;
+  /**
+   * The ID of the element that describes the Button
+   */
+  ariaDescribedBy?: string;
+  /**
+   * The icon element to display at the end of the Button
+   */
+  endIcon?: ReactElement;
+  /**
+   * The ID of the Button
+   */
+  id?: string;
+  /**
+   * Determines whether the Button is disabled
+   */
+  isDisabled?: boolean;
+  /**
+   * Determines whether the Button should take up the full available width
+   */
+  isFullWidth?: boolean;
+  /**
+   * The text content of the Button
+   */
+  label?: string;
+  /**
+   * The click event handler for the Button
+   */
+  onClick?: MuiButtonProps["onClick"];
+  /**
+   * The size of the button
+   */
+  size?: (typeof buttonSizeValues)[number];
+  /**
+   * The icon element to display at the start of the Button
+   */
+  startIcon?: ReactElement;
+  /**
+   * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
-  variant?: "primary" | "secondary" | "danger" | "floating";
-};
+  /**
+   * The type of the HTML button element
+   */
+  type?: (typeof buttonTypeValues)[number];
+  /**
+   * The variant of the Button
+   */
+  variant: (typeof buttonVariantValues)[number];
+} & (
+  | {
+      endIcon?: ReactElement;
+      label: string;
+      startIcon?: ReactElement;
+    }
+  | {
+      endIcon?: ReactElement;
+      label?: "" | undefined;
+      startIcon: ReactElement;
+    }
+  | {
+      endIcon: ReactElement;
+      label?: "" | undefined;
+      startIcon?: ReactElement;
+    }
+);
 
 const Button = ({
+  ariaDescribedBy,
+  ariaLabel,
+  ariaLabelledBy,
   endIcon,
   id,
   isDisabled,
   isFullWidth,
+  label = "",
   onClick,
   size = "medium",
   startIcon,
-  text,
   tooltipText,
+  type = "button",
   variant,
 }: ButtonProps) => {
-  const muiProps = useContext(MuiPropsContext);
+  const muiProps = useMuiProps();
 
-  const button = useMemo(
-    () => (
+  const renderButton = useCallback(
+    (muiProps) => (
       <MuiButton
         {...muiProps}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
         disabled={isDisabled}
         endIcon={endIcon}
         fullWidth={isFullWidth}
@@ -59,21 +134,25 @@ const Button = ({
         onClick={onClick}
         size={size}
         startIcon={startIcon}
+        type={type}
         variant={variant}
       >
-        {text}
+        {label}
       </MuiButton>
     ),
     [
+      ariaDescribedBy,
+      ariaLabel,
+      ariaLabelledBy,
       endIcon,
       id,
       isDisabled,
       isFullWidth,
-      muiProps,
+      label,
       onClick,
       size,
       startIcon,
-      text,
+      type,
       variant,
     ]
   );
@@ -82,14 +161,16 @@ const Button = ({
     <>
       {tooltipText && (
         <Tooltip ariaType="description" placement="top" text={tooltipText}>
-          {button}
+          <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
         </Tooltip>
       )}
-      {!tooltipText && button}
+
+      {!tooltipText && renderButton(muiProps)}
     </>
   );
 };
 
 const MemoizedButton = memo(Button);
+MemoizedButton.displayName = "Button";
 
 export { MemoizedButton as Button };

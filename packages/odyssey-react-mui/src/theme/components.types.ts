@@ -18,7 +18,7 @@ declare module "@mui/material/Alert" {
     standard: false;
     // Enable Odyssey variants
     banner: true;
-    infobox: true;
+    callout: true;
     toast: true;
   }
 }
@@ -29,6 +29,7 @@ declare module "@mui/material/Button" {
     primary: true;
     secondary: true;
     danger: true;
+    tertiary: true;
     text: false;
     contained: false;
     outlined: false;
@@ -47,7 +48,8 @@ declare module "@mui/material/Button" {
 declare module "@mui/material/Chip" {
   interface ChipPropsVariantOverrides {
     // Enable Odyssey variant for Status component
-    status: true;
+    lamp: true;
+    pill: true;
   }
 }
 

@@ -2,6 +2,18 @@ import type { Preview } from "@storybook/react";
 
 const preview: Preview = {
   parameters: {
+    a11y: {
+      options: {
+        runOnly: [
+          "section508",
+          "wcag2a",
+          "wcag2aa",
+          "wcag21a",
+          "wcag21aa",
+          "wcag22aa",
+        ],
+      },
+    },
     controls: {
       expanded: true,
       sort: "requiredFirst",
@@ -17,7 +29,7 @@ const preview: Preview = {
           "Welcome",
           ["Introduction (README)", "Docs Status"],
           "Installation",
-          ["Odyssey-React-MUI", "Odyssey-React-Labs"],
+          "Odyssey-React-MUI",
           "Guidelines",
           "Contributing",
           "MUI Components",
@@ -47,6 +59,12 @@ const preview: Preview = {
     docs: {
       source: {
         excludeDecorators: true,
+      },
+      argTypes: {
+        sort: "alpha",
+      },
+      controls: {
+        sort: "alpha",
       },
     },
   },

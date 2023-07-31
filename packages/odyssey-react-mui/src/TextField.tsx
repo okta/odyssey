@@ -22,7 +22,14 @@ import {
 } from "react";
 
 import { Field } from "./Field";
-import { Icon } from "./Icon";
+
+export const textFieldTypeValues = [
+  "email",
+  "number",
+  "tel",
+  "text",
+  "url",
+] as const;
 
 export type TextFieldProps = {
   /**
@@ -34,7 +41,7 @@ export type TextFieldProps = {
   /**
    * End `InputAdornment` for this component.
    */
-  endAdornment?: string | ReactElement<typeof Icon>;
+  endAdornment?: string | ReactElement;
   /**
    * If `error` is not undefined, the `input` will indicate an error.
    */
@@ -90,11 +97,11 @@ export type TextFieldProps = {
   /**
    * Start `InputAdornment` for this component.
    */
-  startAdornment?: string | ReactElement<typeof Icon>;
+  startAdornment?: string | ReactElement;
   /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */
-  type?: "email" | "number" | "tel" | "text" | "url";
+  type?: (typeof textFieldTypeValues)[number];
   /**
    * The value of the `input` element, required for a controlled component.
    */

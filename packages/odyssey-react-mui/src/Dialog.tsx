@@ -17,7 +17,8 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { Button, CloseIcon } from "./";
+import { Button } from "./Button";
+import { CloseIcon } from "./icons.generated";
 import {
   memo,
   ReactNode,
@@ -28,23 +29,46 @@ import {
 } from "react";
 
 export type DialogProps = {
-  callToActionPrimaryComponent?: ReactElement<typeof Button>;
-  callToActionSecondaryComponent?: ReactElement<typeof Button>;
-  callToActionTertiaryComponent?: ReactElement<typeof Button>;
-  children: ReactNode | Array<ReactNode>;
-  onClose: () => void;
+  /**
+   * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
+   */
+  callToActionFirstComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.
+   */
+  callToActionSecondComponent?: ReactElement<typeof Button>;
+  /**
+   * An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.
+   */
+  callToActionLastComponent?: ReactElement<typeof Button>;
+  /**
+   * The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.
+   */
+  children: ReactNode;
+  /**
+   * When set to `true`, the Dialog will be visible.
+   */
   isOpen: boolean;
+  /**
+   * Callback that controls what happens when the Dialog is dismissed
+   */
+  onClose: () => void;
+  /**
+   * The title of the Dialog
+   */
   title: string;
+  ariaLabel: string;
 };
 
 const Dialog = ({
-  callToActionPrimaryComponent,
-  callToActionSecondaryComponent,
-  callToActionTertiaryComponent,
+  callToActionFirstComponent,
+  callToActionSecondComponent,
+  callToActionLastComponent,
   children,
   isOpen,
   onClose,
   title,
+  ariaLabel,
 }: DialogProps) => {
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
@@ -83,22 +107,25 @@ const Dialog = ({
       <DialogTitle>
         {title}
         <Button
-          variant="floating"
+          ariaLabel={ariaLabel}
+          label=""
           onClick={onClose}
+          size="small"
           startIcon={<CloseIcon />}
+          variant="floating"
         />
       </DialogTitle>
       <DialogContent dividers={isContentScrollable} ref={dialogContentRef}>
         {content}
       </DialogContent>
 
-      {(callToActionPrimaryComponent ||
-        callToActionSecondaryComponent ||
-        callToActionTertiaryComponent) && (
+      {(callToActionFirstComponent ||
+        callToActionSecondComponent ||
+        callToActionLastComponent) && (
         <DialogActions>
-          {callToActionTertiaryComponent}
-          {callToActionSecondaryComponent}
-          {callToActionPrimaryComponent}
+          {callToActionLastComponent}
+          {callToActionSecondComponent}
+          {callToActionFirstComponent}
         </DialogActions>
       )}
     </MuiDialog>
@@ -106,5 +133,6 @@ const Dialog = ({
 };
 
 const MemoizedDialog = memo(Dialog);
+MemoizedDialog.displayName = "Dialog";
 
 export { MemoizedDialog as Dialog };

@@ -10,39 +10,83 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, forwardRef } from "react";
-import { MenuItem as MuiMenuItem } from "@mui/material";
+import {
+  MenuItem as MuiMenuItem,
+  MenuItemProps as MuiMenuItemProps,
+} from "@mui/material";
 import { menuItemClasses } from "@mui/material/MenuItem";
-import type { MenuItemProps as MuiMenuItemProps } from "@mui/material";
+import { memo, useCallback, useContext, type ReactNode } from "react";
 
-export interface MenuItemProps
-  extends Omit<
-    MuiMenuItemProps,
-    | "component"
-    | "dense"
-    | "disableGutters"
-    | "divider"
-    | "focusVisibleClassName"
-  > {
+import { MenuContext } from "./MenuContext";
+
+export type MenuItemProps = {
   /**
-   * Toggles whether or not the MenuItem represents a destructive action.
+   * The content of the menu item.
+   */
+  children: ReactNode;
+  /**
+   * If `true`, the menu item will receive focus automatically.
+   */
+  hasInitialFocus?: boolean;
+  /**
+   * If `true`, the menu item will be visually marked as selected.
+   */
+  isSelected?: boolean;
+  /**
+   * If `true`, the menu item will be visually marked as destructive.
    */
   isDestructive?: boolean;
-}
+  /**
+   * Callback fired when the menu item is clicked.
+   */
+  onClick?: MuiMenuItemProps["onClick"];
+  /**
+   * The value associated with the menu item.
+   */
+  value?: string;
+  /**
+   * The variant of the menu item.
+   * - "default": The default variant.
+   * - "destructive": A variant indicating a destructive action.
+   */
+  variant?: "default" | "destructive";
+};
 
-const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
-  ({ isDestructive, ...props }, ref) => (
+const MenuItem = ({
+  children,
+  hasInitialFocus,
+  isSelected,
+  onClick: onClickProp,
+  value,
+  variant = "default",
+}: MenuItemProps) => {
+  const { closeMenu } = useContext(MenuContext);
+
+  const onClick = useCallback<NonNullable<MuiMenuItemProps["onClick"]>>(
+    (event) => {
+      onClickProp?.(event);
+      closeMenu();
+    },
+    [onClickProp, closeMenu]
+  );
+
+  return (
     <MuiMenuItem
-      {...props}
-      ref={ref}
+      /* eslint-disable-next-line jsx-a11y/no-autofocus */
+      autoFocus={hasInitialFocus}
+      selected={isSelected}
+      value={value}
+      onClick={onClick}
       className={
-        isDestructive ? `${menuItemClasses.root}-destructive` : undefined
+        variant === "destructive"
+          ? `${menuItemClasses.root}-destructive`
+          : undefined
       }
     >
-      {props.children}
+      {children}
     </MuiMenuItem>
-  )
-);
+  );
+};
 
 const MemoizedMenuItem = memo(MenuItem);
 MemoizedMenuItem.displayName = "MenuItem";

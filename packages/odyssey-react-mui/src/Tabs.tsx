@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, { ReactElement, ReactNode, useCallback, useState } from "react";
+import React, {
+  ReactElement,
+  ReactNode,
+  memo,
+  useCallback,
+  useState,
+} from "react";
 import { Tab as MuiTab } from "@mui/material";
 import {
   TabList as MuiTabList,
@@ -19,20 +25,44 @@ import {
 } from "@mui/lab";
 
 export type TabItemProps = {
+  /**
+   * The content of the Tab itself
+   */
   children: ReactNode;
-  startIcon?: ReactElement;
-  label: string;
+  /**
+   * If `true`, the TabItem is disabled
+   */
   isDisabled?: boolean;
+  /**
+   * The label text for the TabItem
+   */
+  label: string;
+  /**
+   * An optional icon to display at the start of the TabItem
+   */
+  startIcon?: ReactElement;
+  /**
+   * The value associated with the TabItem
+   */
   value?: string;
 };
 
 export type TabsProps = {
-  tabs: TabItemProps[];
-  initialValue?: string;
+  /**
+   * The ARIA label for the full Tabs group
+   */
   ariaLabel?: string;
+  /**
+   * The value of the Tab that should be selected by default
+   */
+  initialValue?: string;
+  /**
+   * The TabItems to be included in the Tabs group
+   */
+  tabs: TabItemProps[];
 };
 
-const Tabs = ({ ariaLabel, tabs, initialValue = "0" }: TabsProps) => {
+const Tabs = ({ ariaLabel, initialValue = "0", tabs }: TabsProps) => {
   const [tabState, setTabState] = useState(initialValue);
 
   const onChange = useCallback(
@@ -67,4 +97,7 @@ const Tabs = ({ ariaLabel, tabs, initialValue = "0" }: TabsProps) => {
   );
 };
 
-export { Tabs };
+const MemoizedTabs = memo(Tabs);
+MemoizedTabs.displayName = "Tabs";
+
+export { MemoizedTabs as Tabs };

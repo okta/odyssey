@@ -20,7 +20,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 type CheckboxGroupStoryProps = CheckboxGroupProps & {
-  isChecked: Parameters<typeof Checkbox>[0]["isChecked"];
+  isDefaultChecked: Parameters<typeof Checkbox>[0]["isDefaultChecked"];
   isIndeterminate: Parameters<typeof Checkbox>[0]["isIndeterminate"];
 };
 
@@ -28,88 +28,77 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
   title: "MUI Components/Forms/CheckboxGroup",
   component: CheckboxGroup,
   argTypes: {
-    isChecked: {
-      control: "boolean",
-      defaultValue: false,
-    },
-    isDisabled: {
-      control: "boolean",
-      defaultValue: false,
+    children: {
+      control: null,
+      description: "A single Checkbox element or an array of Checkbox elements",
+      table: {
+        type: {
+          summary:
+            "ReactElement<typeof Checkbox> | Array<ReactElement<typeof Checkbox>>",
+        },
+      },
     },
     errorMessage: {
       control: "text",
-      defaultValue: null,
+      description: "The error message for the checkbox group",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
     hint: {
       control: "text",
-      defaultValue:
-        "Ensure these systems are operating before initiating warp.",
+      description: "The hint text for the checkbox group",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
-    isIndeterminate: {
+    id: {
+      control: "text",
+      description:
+        "The id of the `input` element. This will also be the input's `name` field",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    isDisabled: {
       control: "boolean",
-      defaultValue: false,
+      description: "If `true`, the checkbox group is disabled",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     isRequired: {
       control: "boolean",
-      defaultValue: false,
+      description: "If `true`, the checkbox group is required",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     label: {
       control: "text",
-      defaultValue: "Systems check",
+      description: "The label text for the checkbox group",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
     },
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
-
-const SingleTemplate: StoryObj<CheckboxGroupStoryProps> = {
-  render: (args) => (
-    <CheckboxGroup
-      errorMessage={args.errorMessage}
-      hint={args.hint}
-      isDisabled={args.isDisabled}
-      label={args.label}
-    >
-      <Checkbox
-        isChecked={args.isChecked}
-        isIndeterminate={args.isIndeterminate}
-        label="Pre-flight systems check complete"
-        name="life-support"
-        value="life-support"
-      />
-    </CheckboxGroup>
-  ),
-};
-
-export const Single: StoryObj<CheckboxGroupStoryProps> = {
-  ...SingleTemplate,
-  parameters: {
-    controls: {
-      exclude: ["hint", "label"],
-    },
-  },
-  args: {},
-};
-
-export const Checked: StoryObj<CheckboxGroupStoryProps> = {
-  ...Single,
-  parameters: {
-    controls: {
-      exclude: ["hint", "label"],
-    },
-  },
-  args: {
-    isChecked: true,
-  },
-};
-export const Indeterminate: StoryObj<CheckboxGroupStoryProps> = {
-  ...Single,
-  parameters: { controls: { exclude: ["hint", "label"] } },
-  args: {
-    isIndeterminate: true,
-  },
-};
 
 const GroupTemplate: StoryObj<CheckboxGroupProps> = {
   render: (args) => (
@@ -131,7 +120,7 @@ const GroupTemplate: StoryObj<CheckboxGroupProps> = {
   ),
   parameters: {
     controls: {
-      exclude: ["isChecked", "isIndeterminate"],
+      exclude: ["isDefaultChecked", "isIndeterminate"],
     },
   },
 };
@@ -144,7 +133,7 @@ export const Disabled: StoryObj<CheckboxGroupStoryProps> = {
   ...GroupTemplate,
   parameters: {
     controls: {
-      exclude: ["isChecked", "isIndeterminate"],
+      exclude: ["isDefaultChecked", "isIndeterminate"],
     },
   },
   args: {
@@ -156,7 +145,13 @@ export const Error: StoryObj<CheckboxGroupStoryProps> = {
   ...GroupTemplate,
   parameters: {
     controls: {
-      exclude: ["isChecked", "isIndeterminate"],
+      exclude: ["isDefaultChecked", "isIndeterminate"],
+    },
+    docs: {
+      description: {
+        story:
+          "Unlike Radio Buttons, Checkboxes validate individually, not as a group. Validity must be set individually on each checkbox using the `isInvalid` prop, even if the group has an `errorMessage` set.",
+      },
     },
   },
   args: {
@@ -173,9 +168,9 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
       label="Who will you invite to your birthday?"
       isRequired={args.isRequired}
     >
-      <Checkbox label="Alfred" name="alfred" value="alfred" isValid />
+      <Checkbox label="Alfred" name="alfred" value="alfred" validity="valid" />
       <Checkbox
-        isChecked
+        isDefaultChecked
         label="Barbara Gordon"
         name="barbara-gordon"
         value="barbara-gordon"
@@ -184,10 +179,10 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
         label="Hal Jordan"
         name="hal-jordan"
         value="hal-jordan"
-        isValid
+        validity="valid"
       />
       <Checkbox
-        isChecked
+        isDefaultChecked
         label="The Joker"
         name="the-joker"
         value="the-joker"
@@ -196,7 +191,13 @@ export const MixedError: StoryObj<CheckboxGroupStoryProps> = {
   ),
   parameters: {
     controls: {
-      exclude: ["isChecked", "isIndeterminate"],
+      exclude: ["isDefaultChecked", "isIndeterminate"],
+    },
+    docs: {
+      description: {
+        story:
+          "Individual checkboxes can take a different validity than the whole group; if a group is invalid, individual checkboxes can be marked valid, and vice versa. This is particularly useful in cases where the state of particular checkboxes affect the validity of the entire group.",
+      },
     },
   },
   args: {

@@ -26,16 +26,36 @@ const storybookMeta: Meta<CircularProgressProps> = {
     },
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
 
 export const Indeterminate: StoryObj<CircularProgressProps> = {
-  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "If the component `value` is undefined or `0`, the component will spin indefinitely.",
+      },
+    },
+  },
+  args: {
+    ariaLabel: "progress",
+  },
 };
 
 export const Determinate: StoryObj<CircularProgressProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "If the component has a set `value`, it will show as a static circular progress bar with that value filled as a percentage.",
+      },
+    },
+  },
   args: {
     value: 70,
+    ariaLabel: "progress",
   },
 };

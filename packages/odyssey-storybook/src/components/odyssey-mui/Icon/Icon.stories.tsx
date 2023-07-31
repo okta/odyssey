@@ -12,207 +12,130 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
-import {
-  Icon,
-  IconProps,
-  iconDictionary,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@okta/odyssey-react-mui";
-import { MuiThemeDecorator } from "../../../../.storybook/components/MuiThemeDecorator";
+import { StaticTable, type TableColumn } from "@okta/odyssey-react-mui/labs";
+import * as iconDictionary from "@okta/odyssey-react-mui/icons";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<IconProps> = {
-  title: "MUI Components/Icon",
-  component: Icon,
+const storybookMeta: Meta = {
+  title: "MUI Components/Icons",
   decorators: [MuiThemeDecorator],
-  argTypes: {
-    name: {
-      control: { type: "select" },
-      options: Object.keys(iconDictionary),
-    },
-    size: {
-      options: ["small", "medium", "large"],
-      control: { type: "radio" },
-    },
-    ariaLabelledby: {
-      control: "text",
-    },
-    label: {
-      control: "text",
-    },
-  },
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
 
-export const Default: StoryObj<IconProps> = {
-  render: function C(args) {
-    return (
-      <Icon
-        name={args.name}
-        size={args.size}
-        ariaLabelledby={args.ariaLabelledby}
-        label={args.label}
-      />
-    );
-  },
-  args: {
-    name: "alert-triangle-filled",
-    size: "medium",
-  },
+type IconData = {
+  name: keyof typeof iconDictionary;
+  use: string;
 };
 
-const icons: Array<{ name: keyof typeof iconDictionary; use: string }> = [
-  { name: "add", use: "To add" },
+const columns: TableColumn<IconData>[] = [
   {
-    name: "add-circle",
-    use: "To add",
+    accessorKey: "name",
+    Cell: ({ cell }) =>
+      createElement(iconDictionary[cell.getValue<IconData["name"]>()]),
+    header: "Icon",
   },
   {
-    name: "alert-circle",
-    use: "To indicate an error",
+    accessorKey: "name",
+    header: "Name",
   },
   {
-    name: "alert-circle-filled",
-    use: "To indicate an error",
-  },
-  {
-    name: "alert-triangle-filled",
-    use: "To indicate a crucial decision",
-  },
-  {
-    name: "anchor",
-    use: "UI indicator - element contains in page anchor link",
-  },
-  {
-    name: "arrow-down",
-    use: "",
-  },
-  {
-    name: "arrow-left",
-    use: "",
-  },
-  {
-    name: "arrow-right",
-    use: "",
-  },
-  {
-    name: "arrow-up",
-    use: "",
-  },
-  {
-    name: "arrow-up-down",
-    use: "",
-  },
-  {
-    name: "calendar",
-    use: "",
-  },
-  {
-    name: "check",
-    use: "To show a completed process",
-  },
-  {
-    name: "chevron-down",
-    use: "UI indicator - element triggers open",
-  },
-  {
-    name: "chevron-up",
-    use: "UI indicator - element triggers close",
-  },
-  {
-    name: "close",
-    use: "To close a modal or other UI",
-  },
-  {
-    name: "close-circle-filled",
-    use: "",
-  },
-  { name: "copy", use: "To copy text" },
-  { name: "delete", use: "To delete something" },
-  { name: "download", use: "To download" },
-  {
-    name: "drag-handle",
-    use: "Element is draggable",
-  },
-  { name: "edit", use: "To edit something" },
-  {
-    name: "external-link",
-    use: "UI indicator - external link",
-  },
-  { name: "eye", use: "To show something" },
-  { name: "eye-off", use: "To hide something" },
-  { name: "filter", use: "To filter results" },
-  { name: "globe", use: "" },
-  { name: "home", use: "" },
-  {
-    name: "information-circle",
-    use: "To get information",
-  },
-  {
-    name: "information-circle-filled",
-    use: "To get information",
-  },
-  {
-    name: "notification",
-    use: "To notify the user of something",
-  },
-  { name: "overflow-vertical", use: "" },
-  {
-    name: "question-circle",
-    use: "To provide clarification",
-  },
-  {
-    name: "question-circle-filled",
-    use: "To provide clarification",
-  },
-  { name: "search", use: "To search for something" },
-  {
-    name: "settings",
-    use: "To edit user or app settings",
-  },
-  {
-    name: "subtract",
-    use: "To subtract or remove",
-  },
-  { name: "user", use: "To support a user name" },
-  {
-    name: "user-group",
-    use: "To represent a group of users",
+    accessorKey: "name",
+    Cell: ({ cell }) =>
+      iconDictionary[cell.getValue<IconData["name"]>()].displayName,
+    header: "Class Name",
   },
 ];
 
-export const Library: StoryObj<IconProps> = {
+const icons: IconData[] = [
+  { name: "AddCircleIcon", use: "To add" },
+  { name: "AddIcon", use: "To add" },
+  { name: "AppsIcon", use: "" },
+  { name: "ArrowDownIcon", use: "" },
+  { name: "ArrowLeftIcon", use: "" },
+  { name: "ArrowLowerLeftIcon", use: "" },
+  { name: "ArrowLowerRightIcon", use: "" },
+  { name: "ArrowRightIcon", use: "" },
+  { name: "ArrowUnsortedIcon", use: "" },
+  { name: "ArrowUpIcon", use: "" },
+  { name: "ArrowUpperLeftIcon", use: "" },
+  { name: "ArrowUpperRightIcon", use: "" },
+  { name: "BugIcon", use: "" },
+  { name: "CalendarIcon", use: "" },
+  { name: "CallIcon", use: "" },
+  { name: "ChatIcon", use: "" },
+  { name: "CheckCircleFilledIcon", use: "" },
+  { name: "CheckIcon", use: "To show a completed process" },
+  { name: "ChevronDownIcon", use: "UI indicator - element triggers open" },
+  { name: "ChevronLeftIcon", use: "" },
+  { name: "ChevronRightIcon", use: "" },
+  { name: "ChevronUpIcon", use: "UI indicator - element triggers close" },
+  { name: "ClockIcon", use: "" },
+  { name: "CloseCircleFilledIcon", use: "" },
+  { name: "CloseIcon", use: "To close a modal or other UI" },
+  { name: "CollapseLeftIcon", use: "" },
+  { name: "CollapseRightIcon", use: "" },
+  { name: "CopyIcon", use: "To copy text" },
+  { name: "DangerDiamondFilledIcon", use: "" },
+  { name: "DangerDiamondIcon", use: "" },
+  { name: "DeleteIcon", use: "To delete something" },
+  { name: "DenyIcon", use: "" },
+  { name: "DevicesIcon", use: "" },
+  { name: "DirectoryIcon", use: "" },
+  { name: "DocumentationIcon", use: "" },
+  { name: "DownloadIcon", use: "To download" },
+  { name: "DragIndicatorIcon", use: "" },
+  { name: "EditIcon", use: "To edit something" },
+  { name: "ExpandLeftIcon", use: "" },
+  { name: "ExpandRightIcon", use: "" },
+  { name: "ExternalLinkIcon", use: "UI indicator - external link" },
+  { name: "FilterIcon", use: "To filter results" },
+  { name: "FolderIcon", use: "" },
+  { name: "GlobeIcon", use: "" },
+  { name: "GridIcon", use: "" },
+  { name: "GroupIcon", use: "" },
+  { name: "HideIcon", use: "To hide something" },
+  { name: "HomeIcon", use: "" },
+  { name: "InformationCircleFilledIcon", use: "To get information" },
+  { name: "InformationCircleIcon", use: "To get information" },
+  { name: "LinkIcon", use: "" },
+  { name: "ListIcon", use: "" },
+  { name: "LockIcon", use: "" },
+  { name: "MoreIcon", use: "" },
+  { name: "NotificationIcon", use: "To notify the user of something" },
+  { name: "PauseIcon", use: "" },
+  { name: "QuestionCircleFilledIcon", use: "To provide clarification" },
+  { name: "QuestionCircleIcon", use: "To provide clarification" },
+  { name: "RefreshIcon", use: "" },
+  { name: "ResetIcon", use: "" },
+  { name: "ResumeIcon", use: "" },
+  { name: "SearchIcon", use: "To search for something" },
+  { name: "ServerIcon", use: "" },
+  { name: "SettingsIcon", use: "To edit user or app settings" },
+  { name: "ShowIcon", use: "To show something" },
+  { name: "SubtractIcon", use: "To subtract or remove" },
+  { name: "SyncIcon", use: "" },
+  { name: "UnlockIcon", use: "" },
+  { name: "UploadIcon", use: "" },
+  { name: "UserIcon", use: "To support a user name" },
+  { name: "VideoIcon", use: "" },
+  { name: "WarningFilledIcon", use: "" },
+  { name: "WarningIcon", use: "" },
+];
+
+const getRowId = ({ name }: { name: IconData["name"] }) => name;
+
+export const Default: StoryObj = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Icons can be included as a component using the class name. For example, to include the add circle icon, use `<AddCircleIcon />`.",
+      },
+    },
+  },
   render: function C() {
-    return (
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Icon</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Class Name</TableCell>
-              <TableCell>Use</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {icons.map(({ name, use }) => {
-              return (
-                <TableRow key={`${name}_row`}>
-                  <TableCell>{createElement(iconDictionary[name])}</TableCell>
-                  <TableCell>{name}</TableCell>
-                  <TableCell>{iconDictionary[name].displayName}</TableCell>
-                  <TableCell>{use}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
+    return <StaticTable columns={columns} data={icons} getRowId={getRowId} />;
   },
 };

@@ -18,6 +18,8 @@ import {
   DialogProps,
 } from "@okta/odyssey-react-mui";
 import { useState } from "react";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -25,27 +27,74 @@ const storybookMeta: Meta<DialogProps> = {
   title: "MUI Components/Dialog",
   component: Dialog,
   argTypes: {
-    callToActionPrimaryComponent: {
+    callToActionFirstComponent: {
       control: null,
-      description: "An optional Button object",
+      description:
+        "An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.",
+      table: {
+        type: {
+          summary: "<Button />",
+        },
+      },
     },
-    callToActionSecondaryComponent: {
+    callToActionSecondComponent: {
       control: null,
-      description: "An optional Button object",
+      description:
+        "An optional Button object to be situated in the Dialog footer, alongside the `callToActionPrimaryComponent`.",
+      table: {
+        type: {
+          summary: "<Button />",
+        },
+      },
     },
-    callToActionTertiaryComponent: {
+    callToActionLastComponent: {
       control: null,
-      description: "An optional Button object",
+      description:
+        "An optional Button object to be situated in the Dialog footer, alongside the other two `callToAction` components.",
+      table: {
+        type: {
+          summary: "<Button />",
+        },
+      },
     },
     children: {
       control: "text",
+      description:
+        "The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.",
+      table: {
+        type: {
+          summary: "ReactNode | Array<ReactNode>",
+        },
+      },
+    },
+    isOpen: {
+      control: "boolean",
+      description: "When set to `true`, the Dialog will be visible.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
     },
     onClose: {
       control: "function",
       description:
-        "The function that controls what happens when the dialog is dismissed.",
+        "Callback that controls what happens when the dialog is dismissed",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
     },
     title: {
+      control: "text",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    ariaLabel: {
       control: "text",
     },
   },
@@ -53,8 +102,10 @@ const storybookMeta: Meta<DialogProps> = {
     children:
       "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     title: "Initiate self-destruct protocol",
+    ariaLabel: "close",
   },
   decorators: [MuiThemeDecorator],
+  tags: ["autodocs"],
 };
 
 export default storybookMeta;
@@ -73,21 +124,25 @@ const DefaultTemplate: StoryObj<DialogProps> = {
 
     return (
       <>
-        <Button onClick={onOpen} text="Open dialog" />
+        <Button label="Open dialog" onClick={onOpen} variant="primary" />
         <Dialog
           {...props}
-          callToActionPrimaryComponent={
-            <Button variant="primary" onClick={onClose} text="Primary action" />
-          }
-          callToActionSecondaryComponent={
+          callToActionFirstComponent={
             <Button
-              variant="secondary"
+              label="Primary action"
               onClick={onClose}
-              text="Secondary action"
+              variant="primary"
             />
           }
-          callToActionTertiaryComponent={
-            <Button variant="floating" onClick={onClose} text="Cancel" />
+          callToActionSecondComponent={
+            <Button
+              label="Secondary action"
+              onClick={onClose}
+              variant="secondary"
+            />
+          }
+          callToActionLastComponent={
+            <Button label="Cancel" onClick={onClose} variant="floating" />
           }
           onClose={onClose}
           isOpen={isVisible}
@@ -104,10 +159,28 @@ export const Default: StoryObj<DialogProps> = {
       "You are initiating this ship's self-destruct protocol. This ship, and its occupants, will be destroyed.",
     title: "Initiate self-destruct protocol",
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    await step("open Default Dialog", async () => {
+      const buttonElement = canvas.getByText("Open dialog");
+      userEvent.click(buttonElement);
+      await waitFor(() => {
+        axeRun("Default Dialog");
+      });
+    });
+  },
 };
 
 export const Long: StoryObj<DialogProps> = {
   ...DefaultTemplate,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "If the `Dialog` content is longer than the available space, the body will automatically receive top and bottom borders to indicate scrollability.",
+      },
+    },
+  },
   args: {
     children: (
       <>
@@ -266,7 +339,7 @@ export const NoButtons: StoryObj<DialogProps> = {
 
     return (
       <>
-        <Button onClick={onOpen} text="Open dialog" />
+        <Button label="Open dialog" onClick={onOpen} variant="primary" />
         <Dialog {...props} onClose={onClose} isOpen={isVisible} />
       </>
     );

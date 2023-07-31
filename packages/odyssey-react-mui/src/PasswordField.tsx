@@ -20,7 +20,8 @@ import {
   useState,
 } from "react";
 
-import { EyeIcon, EyeOffIcon, IconButton } from "./";
+import { ShowIcon, HideIcon } from "./icons.generated";
+import { Button } from "./Button";
 import { Field } from "./Field";
 
 export type PasswordFieldProps = {
@@ -121,13 +122,13 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoFocus={hasInitialFocus}
           endAdornment={
             <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                edge="end"
+              <Button
+                ariaLabel="toggle password visibility"
+                endIcon={inputType === "password" ? <ShowIcon /> : <HideIcon />}
                 onClick={togglePasswordVisibility}
-              >
-                {inputType === "password" ? <EyeIcon /> : <EyeOffIcon />}
-              </IconButton>
+                size="small"
+                variant="floating"
+              />
             </InputAdornment>
           }
           id={id}

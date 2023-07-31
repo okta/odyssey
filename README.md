@@ -16,9 +16,33 @@ Build and design consistent, efficient, and accessible UIs for all Okta users.
 
 Odyssey browser support mirrors Okta's [Supported platforms, browsers, and operating systems](https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm) with the exception of IE 11.
 
+## Generating Okta Test Language files
+
+For`*_ok_PL.properties` and `*_ok_SK.properties` you will need to download `@okta/tools.i18n.pseudo-loc` in the respective package directory (This will require access to our internal VPN).
+
+Once that is downloaded you can run
+
+```
+yarn pseudo-loc generate --packageName ${absolutePathToPackage} --resourcePath ${pathToEnglishPropertiesFile} --bundle ${bundleName}
+```
+
+### Example:
+
+```
+(from odyssey root)
+cd packages/odyssey-react-mui
+yarn add @okta/tools.i18n.pseudo-loc
+yarn pseudo-loc generate --packageName ${OKTA_HOME}/odyssey/packages/odyssey-react-mui --resourcePath src/properties --bundle odyssey-react-mui
+```
+
+Note:
+
+- `${OKTA_HOME}` should contain an absolute path
+- You may need to specify the `npmRegistryServer` property explicitly in `.yarnrc.yml` with the internal yarn registry URL
+
 ## Questions & Contributing
 
-Please follow our [Getting Started guide](https://odyssey.okta.design/?path=/story/contributing-getting-started--page).
+Please follow our [Getting Started guide](https://odyssey-storybook.okta.design/?path=/story/contributing-getting-started--page).
 
 ## License
 

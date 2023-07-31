@@ -10,20 +10,37 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Chip } from "./";
+import { Chip } from "@mui/material";
+
+import { useMuiProps } from "./MuiPropsContext";
+
+export const statusSeverityValues = [
+  "default",
+  "error",
+  "success",
+  "warning",
+] as const;
+export const statusVariantValues = ["lamp", "pill"] as const;
 
 export type StatusProps = {
   /**
-   * Determine the color and icon of the alert
-   */
-  severity: "default" | "error" | "info" | "success" | "warning";
-
-  /**
-   * The text content of the status
+   * The text content of the Status
    */
   label: string;
+  /**
+   * Determine the color and icon of the Status
+   */
+  severity: (typeof statusSeverityValues)[number];
+  /**
+   * The style of the Status indicator
+   */
+  variant?: (typeof statusVariantValues)[number];
 };
 
-export const Status = ({ severity, label }: StatusProps) => (
-  <Chip label={label} color={severity} variant="status" />
-);
+export const Status = ({ severity, label, variant = "lamp" }: StatusProps) => {
+  const muiProps = useMuiProps();
+
+  return (
+    <Chip {...muiProps} label={label} color={severity} variant={variant} />
+  );
+};

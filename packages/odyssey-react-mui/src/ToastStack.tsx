@@ -11,17 +11,26 @@
  */
 
 import { memo, ReactElement } from "react";
-import { Box, Snackbar } from ".";
+import { Box, Snackbar } from "@mui/material";
 import { Toast } from "./Toast";
 
 export type ToastStackProps = {
+  /**
+   * The Toast or array of Toasts within the ToastStack
+   */
   children: ReactElement<typeof Toast> | Array<ReactElement<typeof Toast>>;
 };
 
 const ToastStack = ({ children }: ToastStackProps) => {
   return (
     <Snackbar open={true}>
-      <Box display="flex" flexDirection="column-reverse" gap={2}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column-reverse",
+          gap: 2,
+        }}
+      >
         {children}
       </Box>
     </Snackbar>
@@ -29,5 +38,6 @@ const ToastStack = ({ children }: ToastStackProps) => {
 };
 
 const MemoizedToastStack = memo(ToastStack);
+MemoizedToastStack.displayName = "ToastStack";
 
 export { MemoizedToastStack as ToastStack };

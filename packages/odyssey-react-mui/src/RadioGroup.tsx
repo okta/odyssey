@@ -18,15 +18,15 @@ import { Field } from "./Field";
 
 export type RadioGroupProps = {
   /**
-   * The <Radio> components within the group. Must include two or more.
+   * The Radio components within the group. Must include two or more.
    */
   children: Array<ReactElement<typeof Radio>>;
   /**
-   * The text value of the radio that should be selected by default
+   * The text value of the Radio that should be selected by default
    */
   defaultValue?: string;
   /**
-   * The error text for an invalid group
+   * The error text for an invalid RadioGroup
    */
   errorMessage?: string;
   /**
@@ -38,19 +38,19 @@ export type RadioGroupProps = {
    */
   id?: string;
   /**
-   * Disables the whole radio group
+   * Disables the whole RadioGroup
    */
   isDisabled?: boolean;
   /**
-   * The text label for the radio group
+   * The text label for the RadioGroup
    */
   label: string;
   /**
-   * Listen for changes in the browser that change `value`.
+   * Listen for changes in the browser that change `value`
    */
   onChange?: ChangeEventHandler<EventTarget>;
   /**
-   * The `value` on the selected radio button.
+   * The `value` on the selected Radio
    */
   value?: RadioProps["value"];
 };
@@ -97,5 +97,6 @@ const RadioGroup = ({
 };
 
 const MemoizedRadioGroup = memo(RadioGroup);
+MemoizedRadioGroup.displayName = "RadioGroup";
 
 export { MemoizedRadioGroup as RadioGroup };

@@ -32,7 +32,7 @@ export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
   const svgChildren = generate(fragmentJsx).code;
 
   const icon = `<SvgIcon
-  viewBox="0 0 16 16"
+  viewBox="0 0 24 24"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
   ref={ref}
@@ -48,8 +48,7 @@ export const iconTemplate: Template = ({ componentName, jsx }, { tpl }) => {
 ${headerComment}
 
 import { forwardRef } from "react";
-import { SvgIcon } from './SvgIcon';
-import type { SvgIconNoChildrenProps } from './types';
+import { SvgIcon, type SvgIconNoChildrenProps } from '../SvgIcon';
 
 ${newLine}
 
