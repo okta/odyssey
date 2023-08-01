@@ -28,7 +28,7 @@ import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
 const meta: Meta<ToastProps> = {
-  title: "MUI Components/Alerts/Toast",
+  title: "MUI Components/Toast",
   component: Toast,
   argTypes: {
     autoHideDuration: {
