@@ -32,10 +32,20 @@ const storybookMeta: Meta<BoxProps> = {
     component: {
       control: null,
       description:
-        "The HTML element the component should render, if different from the default",
+        "The HTML element the component should render, if different from the default.",
       table: {
         type: {
           summary: "ElementType",
+        },
+      },
+    },
+    id: {
+      control: "text",
+      description:
+        "An optional id for the HTML elemenet rendered by the component.",
+      table: {
+        type: {
+          summary: "string",
         },
       },
     },

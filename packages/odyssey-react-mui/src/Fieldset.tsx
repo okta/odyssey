@@ -15,7 +15,7 @@ import { memo, ReactElement, useMemo } from "react";
 
 import { Callout } from "./Callout";
 import { FieldsetContext } from "./FieldsetContext";
-import { Legend, Subordinate } from "./Typography";
+import { Legend, Support } from "./Typography";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { useUniqueId } from "./useUniqueId";
 
@@ -89,7 +89,7 @@ const Fieldset = ({
     >
       <Legend>{legend}</Legend>
 
-      {description && <Subordinate component="p">{description}</Subordinate>}
+      {description && <Support>{description}</Support>}
 
       {alert}
 
