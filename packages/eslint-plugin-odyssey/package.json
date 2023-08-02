@@ -9,6 +9,9 @@
   "scripts": {
     "test": "jest"
   },
+  "dependencies": {
+    "word-wrap": "~1.2.5"
+  },
   "peerDependencies": {
     "eslint": ">=7.27.0 <=8"
   },
