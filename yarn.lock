@@ -5585,7 +5585,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/conventional-changelog-odyssey@workspace:packages/conventional-changelog-odyssey"
   dependencies:
-    conventional-changelog-conventionalcommits: ^5.0.0
+    conventional-changelog-conventionalcommits: ^6.1.0
   languageName: unknown
   linkType: soft
 
@@ -11926,6 +11926,15 @@ __metadata:
     lodash: ^4.17.15
     q: ^1.5.1
   checksum: b67d12e4e0fdde5baa32c3d77af472de38646a18657b26f5543eecce041a318103092fbfcef247e2319a16957c9ac78c6ea78acc11a5db6acf74be79a28c561f
+  languageName: node
+  linkType: hard
+
+"conventional-changelog-conventionalcommits@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "conventional-changelog-conventionalcommits@npm:6.1.0"
+  dependencies:
+    compare-func: ^2.0.0
+  checksum: 4383a35cdf72f5964e194a1146e7f78276e301f73bd993b71627bb93586b6470d411b9613507ceb37e0fed0b023199c95e941541fa47172b4e6a7916fc3a53ff
   languageName: node
   linkType: hard
 
