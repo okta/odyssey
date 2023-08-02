@@ -35,7 +35,7 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.6",
+    "@commitlint/cli": "^17.6.7",
     "@okta/odyssey-commitlint": "workspace:*",
     "@okta/odyssey-eslint-config": "workspace:*",
     "@okta/odyssey-lint-staged": "workspace:*",
