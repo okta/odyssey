@@ -1,3 +1,4 @@
+import { dirname, join } from "path";
 /*!
  * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
@@ -11,7 +12,6 @@
  */
 
 import type { StorybookConfig } from "@storybook/react-vite";
-
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -21,13 +21,14 @@ const config: StorybookConfig = {
         transcludeMarkdown: true,
       },
     },
-    "@storybook/addon-links",
-    "@storybook/addon-a11y",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-interactions"),
+    getAbsolutePath("@storybook/addon-mdx-gfm"),
   ],
   framework: {
-    name: "@storybook/react-vite",
+    name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
   typescript: {
@@ -44,6 +45,15 @@ const config: StorybookConfig = {
       },
     },
   },
+  docs: {
+    autodocs: true,
+  },
 };
-
 export default config;
+/**
+ * This function is used to resolve the absolute path of a package.
+ * It is needed in projects that use Yarn PnP or are set up within a monorepo.
+ */
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, "package.json")));
+}
