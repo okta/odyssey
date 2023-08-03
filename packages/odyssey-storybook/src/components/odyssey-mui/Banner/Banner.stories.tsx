@@ -24,7 +24,7 @@ import { expect, jest } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<typeof Banner> = {
-  title: "MUI Components/Alerts/Banner",
+  title: "MUI Components/Banner",
   component: Banner,
   argTypes: {
     linkText: {

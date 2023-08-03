@@ -22,7 +22,7 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<CalloutProps> = {
-  title: "MUI Components/Alerts/Callout",
+  title: "MUI Components/Callout",
   component: Callout,
   argTypes: {
     children: {
