@@ -1,6 +1,6 @@
 {
   "name": "@okta/eslint-plugin-odyssey",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -8,6 +8,9 @@
   "private": true,
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "word-wrap": "~1.2.5"
   },
   "peerDependencies": {
     "eslint": ">=7.27.0 <=8"
