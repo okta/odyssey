@@ -2,19 +2,21 @@
 
 ## Production Readiness
 
-This project has not yet hit version 1.0.0 and is still in active development.
+Odyssey is production-ready and available to use for real things. The API
+is stable for the duration of the point-release, meaning that while Odyssey is
+in version 1.x.x, there will be no changes that break the API.
 
-That said, it is beyond the early alpha stage in some key areas. For some
-early-adopters that means it is good enough to use for real things. Some
-other people think this means it is not ready yet.
+**Odyssey Labs** is the home for components that are usable, but not feature-complete.
+At minimum, they'll provide a good jumping-off point for your project; however, they
+are not guaranteed to have full support for the full suite of things that Odyssey
+provides, such as RTL support, internationalization, etc.
 
-Even though the project is in development, effort is still made to keep
-the API stable. Patch versions are intended for backwards-compatible
-changes and minor versions are intended for backwards-incompatible changes.
+This project follows semantic versioning conventions:
 
-If you plan to use this for something real, you should either pin the
-exact version (maximum safety) or pin the major and minor versions
-(only accept backwards-compatible upgrades).
+- **Major point releases** may include breaking changes, but the API is stable for the duration of
+  the major point release (for example, 1.x.x)
+- **Minor point releases** include new features and are backwards-compatible (eg, x.1.x)
+- **Patch releases** include bug fixes (eg, x.x.1)
 
 ## Getting Started
 

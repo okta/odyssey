@@ -16,12 +16,19 @@ import { ReactNode, forwardRef } from "react";
 export type BoxProps = {
   children?: ReactNode;
   component?: MuiBoxProps["component"];
+  id?: MuiBoxProps["id"];
   sx?: MuiBoxProps["sx"];
 };
 
 export const Box = forwardRef<HTMLElement, BoxProps>(
-  ({ children, component, sx }, ref) => (
-    <MuiBox ref={ref} children={children} component={component} sx={sx} />
+  ({ children, component, id, sx }, ref) => (
+    <MuiBox
+      ref={ref}
+      children={children}
+      component={component}
+      id={id}
+      sx={sx}
+    />
   )
 );
 
