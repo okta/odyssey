@@ -7,6 +7,6 @@
   "private": true,
   "sideEffects": false,
   "dependencies": {
-    "conventional-changelog-conventionalcommits": "^5.0.0"
+    "conventional-changelog-conventionalcommits": "^6.1.0"
   }
 }
