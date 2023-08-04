@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/okta/odyssey/compare/v1.0.1...v1.0.2) (2023-08-04)
+
+### Features
+
+- **odyssey-svgr:** update template to support 24x24 sources ([104a998](https://github.com/okta/odyssey/commit/104a9986685437947f570ce20a588c34156a40af))
+
+### Bug Fixes
+
+- Upgrade many packages to fix vulns ([#1880](https://github.com/okta/odyssey/issues/1880)) ([6f617e2](https://github.com/okta/odyssey/commit/6f617e2efb5fc23be5ec47af7b88f3519ac59261))
+
 ## [1.0.1](https://github.com/okta/odyssey/compare/v1.0.0...v1.0.1) (2023-08-02)
 
 ### Features
