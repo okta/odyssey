@@ -48,6 +48,7 @@ import {
   WarningFilledIcon,
 } from "../icons.generated";
 import { DesignTokens } from "./theme";
+import { CSSProperties } from "react";
 
 export const components = (
   odysseyTokens: DesignTokens
@@ -1451,14 +1452,14 @@ export const components = (
 
           [`&::-webkit-search-cancel-button`]: {
             display: "none",
-            "-webkit-appearance": "none",
-            "-moz-appearance": "none",
-          },
+            MozAppearance: "none",
+            WebkitAppearance: "none",
+          } satisfies CSSProperties,
 
           [`&::-moz-search-cancel-button`]: {
             display: "none",
-            "-moz-appearance": "none",
-          },
+            MozAppearance: "none",
+          } satisfies CSSProperties,
 
           [`&::-ms-clear`]: {
             display: "none",
