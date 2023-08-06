@@ -112,9 +112,9 @@ export const Typography = ({
 
   return (
     <MuiTypography
-      ariaDescribedBy={ariaDescribedBy}
-      ariaLabel={ariaLabel}
-      ariaLabelledBy={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
       children={children}
       classes={classes}
       color={color}
