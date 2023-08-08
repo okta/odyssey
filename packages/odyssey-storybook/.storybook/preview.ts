@@ -1,5 +1,9 @@
 import type { Preview } from "@storybook/react";
 
+export const globalTypes = {
+  rtlDirection: "ltr",
+};
+
 const preview: Preview = {
   parameters: {
     a11y: {
