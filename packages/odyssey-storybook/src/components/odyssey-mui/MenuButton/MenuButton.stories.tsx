@@ -246,7 +246,7 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
     children: [
       <MenuItem key="1">View details</MenuItem>,
       <MenuItem key="2">Edit inventory</MenuItem>,
-      <MenuItem isDestructive key="3">
+      <MenuItem variant="destructive" key="3">
         Jettison cargo
       </MenuItem>,
     ],

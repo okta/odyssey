@@ -33,10 +33,6 @@ export type MenuItemProps = {
    */
   isSelected?: boolean;
   /**
-   * If `true`, the menu item will be visually marked as destructive.
-   */
-  isDestructive?: boolean;
-  /**
    * If `true`, the menu item will be visually marked as disabled.
    */
   isDisabled?: boolean;
