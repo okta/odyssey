@@ -139,10 +139,8 @@ const customOdysseyTheme = useMemo(
 );
 
 const YourAppRoot = ({ children }) => (
-  <OdysseyCacheProvider>
-    <MuiThemeProvider theme={customOdysseyTheme}>
-      {children}
-    </MuiThemeProvider>
-  </OdysseyCacheProvider>
+  <OdysseyProvider muiTheme={muiTheme}>
+    {children}
+  </OdysseyProvider>
 );
 ```
