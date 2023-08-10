@@ -66,7 +66,7 @@
     "@mui/lab": "^5.0.0-alpha.117",
     "@mui/material": "^5.12.3",
     "@mui/utils": "^5.11.2",
-    "@mui/x-date-pickers": "^5.0.15",
+    "@mui/x-date-pickers": "^6.11.0",
     "@okta/odyssey-design-tokens": "workspace:*",
     "date-fns": "^2.30.0",
     "i18next": "^22.4.15",

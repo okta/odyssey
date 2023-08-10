@@ -23,7 +23,7 @@ import {
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
+const storybookMeta: Meta<DatePickerProps<Date>> = {
   title: "Labs Components/DatePicker",
   component: DatePicker,
   argTypes: {
@@ -45,13 +45,13 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
 
 export default storybookMeta;
 
-export const DatePickerStandard: StoryObj<DatePickerProps<unknown, unknown>> = {
+export const DatePickerStandard: StoryObj<DatePickerProps<Date>> = {
   render: function C(props) {
-    const [value, setValue] = useState<unknown>("09/05/1977");
+    const [value, setValue] = useState<Date | null | undefined>();
     const datePickerProps = useMemo(
       () => ({
         ...props,
-        onChange: (newValue: unknown) => setValue(newValue),
+        onChange: (newValue: Date | null) => setValue(newValue),
         value,
       }),
       [props, value]

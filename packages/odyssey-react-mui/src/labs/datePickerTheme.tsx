@@ -11,12 +11,6 @@
  */
 
 import { CSSInterpolation } from "@mui/material/styles";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  CalendarIcon,
-  ChevronDownIcon,
-} from "../icons.generated";
 import { createOdysseyMuiTheme } from "../theme";
 import { ThemeOptions } from "@mui/material";
 import * as Tokens from "@okta/odyssey-design-tokens";
@@ -125,9 +119,9 @@ const yearCheckStyles: StateStyles = {
 
 export const datePickerTheme: ThemeOptions = {
   components: {
-    MuiCalendarPicker: {
+    MuiDateCalendar: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: ({ theme }: any) => ({
           borderColor: theme.palette.divider,
           borderStyle: theme.mixins.borderStyle,
           borderWidth: theme.mixins.borderWidth,
@@ -138,32 +132,18 @@ export const datePickerTheme: ThemeOptions = {
         }),
       },
     },
-    MuiCalendarOrClockPicker: {
+    MuiPickersLayout: {
       styleOverrides: {
-        root: () => ({
+        contentWrapper: () => ({
           "& > div": {
             width: `${(296 / 16) * (16 / 14)}rem`,
           },
         }),
       },
-      defaultProps: {
-        components: {
-          LeftArrowIcon: ArrowLeftIcon,
-          RightArrowIcon: ArrowRightIcon,
-          SwitchViewIcon: ChevronDownIcon,
-        },
-      },
     },
-    MuiDesktopDatePicker: {
-      defaultProps: {
-        components: {
-          OpenPickerIcon: CalendarIcon,
-        },
-      },
-    },
-    MuiDayPicker: {
+    MuiDayCalendar: {
       styleOverrides: {
-        header: ({ theme }) => ({
+        header: ({ theme }: any) => ({
           gap: theme.spacing(1),
           justifyContent: "space-between",
           paddingLeft: theme.spacing(popupSpacingValue),
@@ -172,7 +152,7 @@ export const datePickerTheme: ThemeOptions = {
         slideTransition: () => ({
           minHeight: `${(214 / 16) * (16 / 14)}rem`,
         }),
-        weekContainer: ({ theme }) => ({
+        weekContainer: ({ theme }: any) => ({
           gap: theme.spacing(1),
           justifyContent: "space-between",
           marginBottom: theme.spacing(1),
@@ -185,7 +165,7 @@ export const datePickerTheme: ThemeOptions = {
             marginBottom: 0,
           },
         }),
-        weekDayLabel: ({ theme }) => ({
+        weekDayLabel: ({ theme }: any) => ({
           color: theme.palette.grey[900],
           flexBasis: theme.spacing(6),
           flexShrink: 0,
@@ -201,14 +181,16 @@ export const datePickerTheme: ThemeOptions = {
     },
     MuiDatePicker: {
       defaultProps: {
-        PopperProps: {
-          popperOptions: {
-            placement: "auto-start",
+        slotProps: {
+          popper: {
+            popperOptions: {
+              placement: "auto-start",
+            },
           },
         },
         showDaysOutsideCurrentMonth: true,
         views: ["year", "day"],
-      },
+      }
     },
     MuiPickersCalendarHeader: {
       styleOverrides: {
@@ -275,20 +257,17 @@ export const datePickerTheme: ThemeOptions = {
     MuiPickersPopper: {
       styleOverrides: {
         paper: ({ theme }) => ({
-          boxShadow: `0 ${(1 / 16) * (16 / 14)}rem ${
-            (4 / 16) * (16 / 14)
-          }rem rgba(29, 29, 33, 0.08), 0 ${(4 / 16) * (16 / 14)}rem ${
-            (10 / 16) * (16 / 14)
-          }rem rgba(29, 29, 33, 0.08), 0 ${(8 / 16) * (16 / 14)}rem ${
-            (30 / 16) * (16 / 14)
-          }rem rgba(29, 29, 33, 0.1)`,
+          boxShadow: `0 ${(1 / 16) * (16 / 14)}rem ${(4 / 16) * (16 / 14)
+            }rem rgba(29, 29, 33, 0.08), 0 ${(4 / 16) * (16 / 14)}rem ${(10 / 16) * (16 / 14)
+            }rem rgba(29, 29, 33, 0.08), 0 ${(8 / 16) * (16 / 14)}rem ${(30 / 16) * (16 / 14)
+            }rem rgba(29, 29, 33, 0.1)`,
           marginTop: theme.spacing(1),
         }),
       },
     },
-    MuiYearPicker: {
+    MuiYearCalendar: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: ({ theme }: any) => ({
           alignItems: "flex-start",
           flexDirection: "column",
           flexWrap: "nowrap",
@@ -300,7 +279,7 @@ export const datePickerTheme: ThemeOptions = {
         }),
       },
     },
-    PrivatePickersYear: {
+    MuiPickersYear: {
       styleOverrides: {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error TEMP. Arrays are valid styles return values for Emotion.
@@ -330,7 +309,7 @@ export const datePickerTheme: ThemeOptions = {
         root: () => ({
           width: "100%",
         }),
-        selected: ({ theme }) => ({
+        selected: ({ theme }: any) => ({
           "&, &:focus": yearStyles.selected({ theme }),
           "&:hover": yearStyles.hoverSelected({ theme }),
           "&::after": yearCheckStyles.default({ theme }),

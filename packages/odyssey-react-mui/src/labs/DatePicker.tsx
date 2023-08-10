@@ -10,39 +10,72 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputBase } from "@mui/material";
 import {
   DatePicker as MuiDatePicker,
   DatePickerProps as MuiDatePickerProps,
 } from "@mui/x-date-pickers";
-import { useCallback } from "react";
+import { InputAdornment } from "@mui/material";
+import { Button } from "../Button";
+import { ArrowLeftIcon, ArrowRightIcon, CalendarIcon, ChevronDownIcon } from "../icons.generated";
+import { TextField } from "../TextField";
+import { forwardRef, memo, useCallback, useState } from "react";
 
-export type DatePickerProps<TInputDate, TDate> = {
-  label: MuiDatePickerProps<TInputDate, TDate>["label"];
-  onChange: MuiDatePickerProps<TInputDate, TDate>["onChange"];
-  value: MuiDatePickerProps<TInputDate, TDate>["value"];
+export type DatePickerProps<Date> = {
+  label: string;
+  onChange: MuiDatePickerProps<Date>["onChange"];
+  value: MuiDatePickerProps<Date>["value"];
 };
+const DatePicker = forwardRef<HTMLInputElement, DatePickerProps<Date>>(
+  (
+    {
+      label,
+      onChange,
+      value = null,
+    }, ref) => {
+    const [isOpen, setIsOpen] = useState(false);
 
-export const DatePicker = <TInputDate, TDate>({
-  label,
-  onChange,
-  value = null,
-}: DatePickerProps<TInputDate, TDate>) => {
-  const renderInput = useCallback(({ InputProps, ...props }) => {
-    const combinedProps = {
-      ...InputProps,
-      ...props,
-    };
+    const renderFieldComponent = useCallback(({ label, onChange, value }) => {
+      return (
+        <TextField
+          endAdornment={
+            <InputAdornment position="end">
+              <Button
+                ariaLabel="Calendar"
+                label=""
+                size="small"
+                startIcon={<CalendarIcon />}
+                variant="floating"
+                onClick={() => setIsOpen(true)}
+              />
+            </InputAdornment>
+          }
+          hint="MM/DD/YYYY"
+          label={label}
+          onChange={onChange}
+          ref={ref}
+          value={value}
+        />
+      );
+    }, [label, onChange, value]);
 
-    return <InputBase {...combinedProps} />;
-  }, []);
+    return (
+      <MuiDatePicker
+        label={label}
+        onChange={onChange}
+        onClose={() => setIsOpen(false)}
+        open={isOpen}
+        value={value}
+        slots={{
+          field: renderFieldComponent,
+          leftArrowIcon: () => <ArrowLeftIcon />,
+          rightArrowIcon: () => <ArrowRightIcon />,
+          switchViewIcon: () => <ChevronDownIcon />,
+        }}
+      />
+    );
+  });
 
-  return (
-    <MuiDatePicker
-      label={label}
-      onChange={onChange}
-      renderInput={renderInput}
-      value={value}
-    />
-  );
-};
+const MemoizedDatePicker = memo(DatePicker);
+MemoizedDatePicker.displayName = "DatePicker";
+
+export { MemoizedDatePicker as DatePicker };
