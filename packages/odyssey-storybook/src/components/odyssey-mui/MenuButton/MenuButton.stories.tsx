@@ -90,7 +90,7 @@ const storybookMeta: Meta<MenuButtonProps> = {
       description: "The <MenuItem> components within the Menu",
       table: {
         type: {
-          summary: "[MenuItem | Divider | ListSubheader]",
+          summary: "[MenuItem | Divider | ListSubheader | NullElement]",
         },
       },
     },
@@ -169,6 +169,34 @@ export const Simple: StoryObj<MenuButtonProps> = {
       <MenuItem key="1">View details</MenuItem>,
       <MenuItem key="2">Edit configuration</MenuItem>,
       <MenuItem key="3">Launch</MenuItem>,
+    ],
+  },
+  play: async ({
+    args,
+    canvasElement,
+    step,
+  }: {
+    args: MenuButtonProps;
+    canvasElement: HTMLElement;
+    step: PlaywrightProps<MenuButtonProps>["step"];
+  }) => {
+    clickMenuButton({ canvasElement, step })(args, "Menu Button Simple");
+  },
+};
+
+/**
+ * Note that the falsy children in the following MenuButton won't appear in the source
+ * code in the actual story in your browser, but this illustrates that there are no
+ * compile-time issues with the falsy items passed as children.
+ */
+export const FalsyChildren: StoryObj<MenuButtonProps> = {
+  args: {
+    buttonLabel: "More actions",
+    children: [
+      <MenuItem key="1">Truthy Menu Item</MenuItem>,
+      false,
+      null,
+      undefined,
     ],
   },
   play: async ({
