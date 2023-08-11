@@ -42,7 +42,7 @@ Note:
 
 ## Questions & Contributing
 
-Please follow our [Getting Started guide](https://odyssey-storybook.okta.design/?path=/story/contributing-getting-started--page).
+Please follow our [Getting Started guide](https://odyssey-storybook.okta.design/?path=/docs/contributing-getting-started--docs).
 
 ## License
 

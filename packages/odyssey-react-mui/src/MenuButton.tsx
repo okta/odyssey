@@ -43,9 +43,8 @@ export type MenuButtonProps = {
    * The <MenuItem> components within the Menu.
    */
   children: Array<
-    ReactElement<
-      typeof MenuItem | typeof Divider | typeof ListSubheader | NullElement
-    >
+    | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
+    | NullElement
   >;
   /**
    * The end Icon on the trigggering Button
