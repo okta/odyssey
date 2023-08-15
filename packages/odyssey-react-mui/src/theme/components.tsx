@@ -1640,6 +1640,10 @@ export const components = (
             },
           },
 
+          [`:focus-visible`]: {
+            backgroundColor: odysseyTokens.HueNeutral100,
+          },
+
           [`&.${menuItemClasses.root}-destructive`]: {
             color: odysseyTokens.TypographyColorDanger,
           },
