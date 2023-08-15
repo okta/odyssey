@@ -277,6 +277,14 @@ export const components = (
             paddingInline: odysseyTokens.Spacing4,
             borderRadius: odysseyTokens.BorderRadiusTight,
 
+            [`&:hover`]: {
+              backgroundColor: odysseyTokens.HueNeutral100,
+            },
+
+            [`&.${autocompleteClasses.focused}`]: {
+              backgroundColor: odysseyTokens.HueNeutral100,
+            },
+
             [`&[aria-selected="true"]`]: {
               backgroundColor: "transparent",
               color: odysseyTokens.TypographyColorAction,
