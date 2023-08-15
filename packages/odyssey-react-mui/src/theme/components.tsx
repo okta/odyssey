@@ -280,6 +280,14 @@ export const components = (
             [`&[aria-selected="true"]`]: {
               backgroundColor: "transparent",
               color: odysseyTokens.TypographyColorAction,
+
+              [`&:hover`]: {
+                backgroundColor: odysseyTokens.PalettePrimaryLighter,
+              },
+
+              [`&.${autocompleteClasses.focused}`]: {
+                backgroundColor: odysseyTokens.PalettePrimaryLighter,
+              },
             },
           },
         },
