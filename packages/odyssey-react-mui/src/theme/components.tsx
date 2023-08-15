@@ -13,6 +13,7 @@
 import { ThemeOptions } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
 import { alertTitleClasses } from "@mui/material/AlertTitle";
+import { autocompleteClasses } from "@mui/material/Autocomplete";
 import { buttonClasses } from "@mui/material/Button";
 import { checkboxClasses } from "@mui/material/Checkbox";
 import { chipClasses } from "@mui/material/Chip";
@@ -269,14 +270,22 @@ export const components = (
           paddingBlock: odysseyTokens.Spacing2,
           paddingInline: odysseyTokens.Spacing2,
           borderRadius: odysseyTokens.BorderRadiusMain,
+
+          [`& .${autocompleteClasses.option}`]: {
+            minHeight: "unset",
+            paddingBlock: odysseyTokens.Spacing3,
+            paddingInline: odysseyTokens.Spacing4,
+            borderRadius: odysseyTokens.BorderRadiusTight,
+
+            [`&[aria-selected="true"]`]: {
+              backgroundColor: "transparent",
+              color: odysseyTokens.TypographyColorAction,
+            },
+          },
         },
         loading: {
           paddingBlock: odysseyTokens.Spacing3,
           paddingInline: odysseyTokens.Spacing4,
-        },
-        option: {
-          paddingBlock: odysseyTokens.Spacing3,
-          borderRadius: odysseyTokens.BorderRadiusTight,
         },
         popupIndicator: {
           padding: odysseyTokens.Spacing1,
@@ -1598,6 +1607,7 @@ export const components = (
           gap: odysseyTokens.Spacing2,
           minHeight: "unset",
           paddingBlock: odysseyTokens.Spacing3,
+          paddingInline: odysseyTokens.Spacing4,
           borderRadius: odysseyTokens.BorderRadiusTight,
 
           [`& .${formControlLabelClasses.root}`]: {
