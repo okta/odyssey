@@ -11,7 +11,7 @@
  */
 
 import { Box as MuiBox, BoxProps as MuiBoxProps } from "@mui/material";
-import { ReactNode, forwardRef } from "react";
+import { ReactNode, forwardRef, memo } from "react";
 
 export type BoxProps = {
   children?: ReactNode;
@@ -20,7 +20,7 @@ export type BoxProps = {
   sx?: MuiBoxProps["sx"];
 };
 
-export const Box = forwardRef<HTMLElement, BoxProps>(
+const Box = forwardRef<HTMLElement, BoxProps>(
   ({ children, component, id, sx }, ref) => (
     <MuiBox
       ref={ref}
@@ -32,4 +32,7 @@ export const Box = forwardRef<HTMLElement, BoxProps>(
   )
 );
 
-Box.displayName = "Box";
+const MemoizedBox = memo(Box);
+MemoizedBox.displayName = "Box";
+
+export { MemoizedBox as Box };
