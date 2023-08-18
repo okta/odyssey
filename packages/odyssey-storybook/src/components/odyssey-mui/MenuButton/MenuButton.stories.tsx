@@ -184,34 +184,6 @@ export const Simple: StoryObj<MenuButtonProps> = {
   },
 };
 
-/**
- * Note that the falsy children in the following MenuButton won't appear in the source
- * code in the actual story in your browser, but this illustrates that there are no
- * compile-time issues with the falsy items passed as children.
- */
-export const FalsyChildren: StoryObj<MenuButtonProps> = {
-  args: {
-    buttonLabel: "More actions",
-    children: [
-      <MenuItem key="1">Truthy Menu Item</MenuItem>,
-      false,
-      null,
-      undefined,
-    ],
-  },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: MenuButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<MenuButtonProps>["step"];
-  }) => {
-    clickMenuButton({ canvasElement, step })(args, "Menu Button Simple");
-  },
-};
-
 export const ActionIcons: StoryObj<MenuButtonProps> = {
   args: {
     children: [
