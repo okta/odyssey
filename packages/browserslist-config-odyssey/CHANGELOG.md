@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/okta/odyssey/compare/v1.0.1...v1.0.3) (2023-08-18)
+
+### Bug Fixes
+
+- Upgrade many packages to fix vulns ([#1880](https://github.com/okta/odyssey/issues/1880)) ([6f617e2](https://github.com/okta/odyssey/commit/6f617e2efb5fc23be5ec47af7b88f3519ac59261))
+
 ## [1.0.2](https://github.com/okta/odyssey/compare/v1.0.1...v1.0.2) (2023-08-04)
 
 ### Bug Fixes
