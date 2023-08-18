@@ -25,7 +25,6 @@ import {
   GroupIcon,
   GlobeIcon,
   CalendarIcon,
-  MoreIcon,
 } from "@okta/odyssey-react-mui/icons";
 import icons from "../../../../.storybook/components/iconUtils";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -118,6 +117,16 @@ const storybookMeta: Meta<MenuButtonProps> = {
         defaultValue: "",
       },
     },
+    isOverflow: {
+      control: "boolean",
+      description: "If the MenuButton is an overflow menu or standard menu.",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: "",
+      },
+    },
     tooltipText: {
       control: "text",
       description:
@@ -133,7 +142,6 @@ const storybookMeta: Meta<MenuButtonProps> = {
   args: {
     buttonLabel: "More actions",
     buttonVariant: "secondary",
-    endIcon: <MoreIcon />,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -273,7 +281,6 @@ export const IconButton: StoryObj<MenuButtonProps> = {
       <MenuItem key="2">Edit configuration</MenuItem>,
       <MenuItem key="3">Launch</MenuItem>,
     ],
-    endIcon: <MoreIcon />,
     tooltipText: "Add confirmation",
   },
 };
