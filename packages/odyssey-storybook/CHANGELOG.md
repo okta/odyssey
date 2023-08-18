@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/okta/odyssey/compare/v1.0.1...v2.0.0) (2023-08-18)
+
+### Features
+
+- add `isDisabled` in context from Fieldset to Field ([#1911](https://github.com/okta/odyssey/issues/1911)) ([135dbbb](https://github.com/okta/odyssey/commit/135dbbb6bf98514deb164713b84ea23b5a4296d1))
+- add Button types ([#1903](https://github.com/okta/odyssey/issues/1903)) ([5b78259](https://github.com/okta/odyssey/commit/5b78259045eb36e50a2a24f387c6b213471bbcac))
+- add LTR-RTL button to support rtl languages ([#1927](https://github.com/okta/odyssey/issues/1927)) ([3427494](https://github.com/okta/odyssey/commit/3427494a3a97df34327755570c8ed0947a9a45ef))
+- enable overflow and default MenuButton ([32c56f2](https://github.com/okta/odyssey/commit/32c56f20e4847c7e715a6ac2f948df96ac26deb8))
+- **odyssey-react-mui:** add icon support to Tag ([6d1adc4](https://github.com/okta/odyssey/commit/6d1adc4422609b9623a320fa6bb4dcafa088f13d))
+- remove Icon component ([#1864](https://github.com/okta/odyssey/issues/1864)) ([b897485](https://github.com/okta/odyssey/commit/b897485c5e7bfedae2770b0329b9ce6d7c974e69))
+
+### Bug Fixes
+
+- add play test for dialog, menubutton, select, tag, passwordfield ([#1861](https://github.com/okta/odyssey/issues/1861)) ([2957e6a](https://github.com/okta/odyssey/commit/2957e6ab7685301dd0713556129c3fd7a44451ae))
+- add tooltip play test ([#1854](https://github.com/okta/odyssey/issues/1854)) ([1306cbd](https://github.com/okta/odyssey/commit/1306cbd7ae27fde29a8f5ce9ae4cd7a33f6f9dbd))
+- Applitools VRT ([#1827](https://github.com/okta/odyssey/issues/1827)) ([ab9a391](https://github.com/okta/odyssey/commit/ab9a39105f217592cda5ae55480239988e041a8e))
+- Button's `tooltipText` needs to show on hover ([#1817](https://github.com/okta/odyssey/issues/1817)) ([0ca21ff](https://github.com/okta/odyssey/commit/0ca21ff190a35ecaf05e1f1c9e71bd0757edee4d))
+- change to DesignTokens type rather than the overrides in theme ([#1816](https://github.com/okta/odyssey/issues/1816)) ([47c106b](https://github.com/okta/odyssey/commit/47c106bdeb2cdec597c58ba3b7ca9040091a10e4))
+- clicking MenuItem closes MenuButton ([#1820](https://github.com/okta/odyssey/issues/1820)) ([bde9d88](https://github.com/okta/odyssey/commit/bde9d880a87038949e2df22cf02e6380168bd3eb))
+- enable a11y tests in CI ([#1826](https://github.com/okta/odyssey/issues/1826)) ([cd98022](https://github.com/okta/odyssey/commit/cd9802265de5fc10a96a8ed28ce3f2e762c530cc))
+- memoize the Link component ([#1813](https://github.com/okta/odyssey/issues/1813)) ([a98dd87](https://github.com/okta/odyssey/commit/a98dd873a2a92a558202901e4aa456f9be4d0cae))
+- **odyssey-storybook:** match storybook ui to new tokens ([46d5e7d](https://github.com/okta/odyssey/commit/46d5e7d7d40377589e53653df2c6b2374262b7d3))
+- remove useless isDestructive prop ([ea5e44c](https://github.com/okta/odyssey/commit/ea5e44c3a3e89c2cffc1a2cf5afe6b73221590d2))
+- revert Odyssey bundle exports ([#1920](https://github.com/okta/odyssey/issues/1920)) ([dfc32ab](https://github.com/okta/odyssey/commit/dfc32ab8034658e0a1925beafab94feaf37118c0))
+- specfy accessibility tags section508, wcag21aa ([#1839](https://github.com/okta/odyssey/issues/1839)) ([0da693e](https://github.com/okta/odyssey/commit/0da693ef8c917775035191e0dc319201be98fccd))
+- Upgrade many packages to fix vulns ([#1880](https://github.com/okta/odyssey/issues/1880)) ([6f617e2](https://github.com/okta/odyssey/commit/6f617e2efb5fc23be5ec47af7b88f3519ac59261))
+- use odyssey tokens inside mui components style override ([6863535](https://github.com/okta/odyssey/commit/68635351df8f17eb6401b94f43b9b7672eb9684e))
+
 ## [1.0.2](https://github.com/okta/odyssey/compare/v1.0.1...v1.0.2) (2023-08-04)
 
 ### Features

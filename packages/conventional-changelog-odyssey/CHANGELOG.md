@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/okta/odyssey/compare/v1.0.1...v2.0.0) (2023-08-18)
+
+### ⚠ BREAKING CHANGES
+
+- allow major version bumps (#1913)
+
+### Bug Fixes
+
+- allow major version bumps ([#1913](https://github.com/okta/odyssey/issues/1913)) ([ad4205a](https://github.com/okta/odyssey/commit/ad4205ae21c904c043b2593ff34829089961ee27))
+
 ## [1.0.2](https://github.com/okta/odyssey/compare/v1.0.1...v1.0.2) (2023-08-04)
 
 ### ⚠ BREAKING CHANGES

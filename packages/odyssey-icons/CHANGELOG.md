@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/okta/odyssey/compare/v1.0.1...v2.0.0) (2023-08-18)
+
+### Features
+
+- **odyssey-icons:** update all icon source SVGs ([06cf17a](https://github.com/okta/odyssey/commit/06cf17aaeb0255e6d8c3eb5d20650af30ae0fe95))
+
+### Bug Fixes
+
+- Upgrade many packages to fix vulns ([#1880](https://github.com/okta/odyssey/issues/1880)) ([6f617e2](https://github.com/okta/odyssey/commit/6f617e2efb5fc23be5ec47af7b88f3519ac59261))
+
 ## [1.0.2](https://github.com/okta/odyssey/compare/v1.0.1...v1.0.2) (2023-08-04)
 
 ### Features

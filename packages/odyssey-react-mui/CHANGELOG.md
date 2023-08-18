@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/okta/odyssey/compare/v1.0.1...v2.0.0) (2023-08-18)
+
+### Features
+
+- add `isDisabled` in context from Fieldset to Field ([#1911](https://github.com/okta/odyssey/issues/1911)) ([135dbbb](https://github.com/okta/odyssey/commit/135dbbb6bf98514deb164713b84ea23b5a4296d1))
+- add Button types ([#1903](https://github.com/okta/odyssey/issues/1903)) ([5b78259](https://github.com/okta/odyssey/commit/5b78259045eb36e50a2a24f387c6b213471bbcac))
+- adds ScopedCssBaseline to OdysseyThemeProvider ([#1904](https://github.com/okta/odyssey/issues/1904)) ([bbb734d](https://github.com/okta/odyssey/commit/bbb734d6c17a9831502cd6d4fd620d5cf1066a34))
+- enable overflow and default MenuButton ([32c56f2](https://github.com/okta/odyssey/commit/32c56f20e4847c7e715a6ac2f948df96ac26deb8))
+- memoize Box and Typography ([03b5b20](https://github.com/okta/odyssey/commit/03b5b2066691722697322bdc4001f082bda25339))
+- **odyssey-react-mui:** add icon support to Tag ([6d1adc4](https://github.com/okta/odyssey/commit/6d1adc4422609b9623a320fa6bb4dcafa088f13d))
+- **odyssey-react-mui:** add sub2 type style ([0d7b2a0](https://github.com/okta/odyssey/commit/0d7b2a082c6a89c3395c84708b2e9de2796817f5))
+- **odyssey-react-mui:** add transparency and blur to Toast ([497ed8c](https://github.com/okta/odyssey/commit/497ed8c00dc45214a0455623aed89610b40562d2))
+- **odyssey-react-mui:** generate new and updated icon components ([a5aa7ab](https://github.com/okta/odyssey/commit/a5aa7ab62b0ac3b50163b98730b5eb9fe23ac791))
+- **odyssey-react-mui:** include color properties in type styles ([a817ffb](https://github.com/okta/odyssey/commit/a817ffb56f8c960840b342cde701247a1f2fcbc4))
+- **odyssey-react-mui:** manually update icon index, update references in styling ([6ed2aab](https://github.com/okta/odyssey/commit/6ed2aabf9635f0c5dd31b626bdf55bf6e6c46fd9))
+- **odyssey-react-mui:** update Button to match Rebrand ([d017b46](https://github.com/okta/odyssey/commit/d017b467b56999d62c35c9681c6829faa96eb487))
+- **odyssey-react-mui:** update Dialog to match Rebrand ([2894c1d](https://github.com/okta/odyssey/commit/2894c1d6854be19721a9830062f27c73e93242b2))
+- **odyssey-react-mui:** update Link to match new brand standards ([5afc6ed](https://github.com/okta/odyssey/commit/5afc6ed73e81c13d1feeede8e686eee42dee37c8))
+- **odyssey-react-mui:** update Status styles and variants to match brand ([2da6aa6](https://github.com/okta/odyssey/commit/2da6aa69c65f79f84c19a6a360a31ad17666749d))
+- **odyssey-react-mui:** updated ScopedCSSBaseline for rebrand ([e9e2514](https://github.com/okta/odyssey/commit/e9e2514cf8cefeaefe0afe9cbfc0d65f8f09e947))
+- remove Icon component ([#1864](https://github.com/okta/odyssey/issues/1864)) ([b897485](https://github.com/okta/odyssey/commit/b897485c5e7bfedae2770b0329b9ce6d7c974e69))
+
+### Bug Fixes
+
+- add back isDisabled to MenuItem ([2a51459](https://github.com/okta/odyssey/commit/2a514593246778f6d9ebb0700da24de63707905d))
+- add play test for dialog, menubutton, select, tag, passwordfield ([#1861](https://github.com/okta/odyssey/issues/1861)) ([2957e6a](https://github.com/okta/odyssey/commit/2957e6ab7685301dd0713556129c3fd7a44451ae))
+- broken styles in MuiInputBase ([#1921](https://github.com/okta/odyssey/issues/1921)) ([42fc2c4](https://github.com/okta/odyssey/commit/42fc2c4d0503f8e1bfbb8ae83c4da6f35760d720))
+- Button's `tooltipText` needs to show on hover ([#1817](https://github.com/okta/odyssey/issues/1817)) ([0ca21ff](https://github.com/okta/odyssey/commit/0ca21ff190a35ecaf05e1f1c9e71bd0757edee4d))
+- change to DesignTokens type rather than the overrides in theme ([#1816](https://github.com/okta/odyssey/issues/1816)) ([47c106b](https://github.com/okta/odyssey/commit/47c106bdeb2cdec597c58ba3b7ca9040091a10e4))
+- clicking MenuItem closes MenuButton ([#1820](https://github.com/okta/odyssey/issues/1820)) ([bde9d88](https://github.com/okta/odyssey/commit/bde9d880a87038949e2df22cf02e6380168bd3eb))
+- enable a11y tests in CI ([#1826](https://github.com/okta/odyssey/issues/1826)) ([cd98022](https://github.com/okta/odyssey/commit/cd9802265de5fc10a96a8ed28ce3f2e762c530cc))
+- memoize the Link component ([#1813](https://github.com/okta/odyssey/issues/1813)) ([a98dd87](https://github.com/okta/odyssey/commit/a98dd873a2a92a558202901e4aa456f9be4d0cae))
+- **odyssey-react-mui:** add aria-disabled to Tag ([f798e48](https://github.com/okta/odyssey/commit/f798e481b4f03eeb8834bb8e413b85f3aef18f03))
+- **odyssey-react-mui:** autocomplete is now RTL friendly ([e14265e](https://github.com/okta/odyssey/commit/e14265ea4eeee6cd4f108f032a8158272402f3b2))
+- **odyssey-react-mui:** lengthy field labels are no longer cut off ([6231951](https://github.com/okta/odyssey/commit/6231951d9d98a5815c48820b73505beeb6319659))
+- **odyssey-react-mui:** make Autocomplete option focus a11y-compliant ([40e6957](https://github.com/okta/odyssey/commit/40e69578be7430ff5c8f6ff533c2b2f20c87bc9f))
+- **odyssey-react-mui:** make Autocomplete option styles match Select ([de1547d](https://github.com/okta/odyssey/commit/de1547d626c7d031b7b6b8ff666578763b85bc84))
+- **odyssey-react-mui:** make Form, Infobox spacing constent across uses ([752461c](https://github.com/okta/odyssey/commit/752461c711235310e63cb96ff18c09ff3a1f7640))
+- orrectly import zh-CN and zh-TW files ([659d140](https://github.com/okta/odyssey/commit/659d14091476e3b4b3785f39254e80f4842453d7))
+- remove useless isDestructive prop ([ea5e44c](https://github.com/okta/odyssey/commit/ea5e44c3a3e89c2cffc1a2cf5afe6b73221590d2))
+- revert Odyssey bundle exports ([#1920](https://github.com/okta/odyssey/issues/1920)) ([dfc32ab](https://github.com/okta/odyssey/commit/dfc32ab8034658e0a1925beafab94feaf37118c0))
+- update aria props passthrough ([21da6c9](https://github.com/okta/odyssey/commit/21da6c9f4926fbe13c33af2999dfef50d8c9d222))
+- Upgrade many packages to fix vulns ([#1880](https://github.com/okta/odyssey/issues/1880)) ([6f617e2](https://github.com/okta/odyssey/commit/6f617e2efb5fc23be5ec47af7b88f3519ac59261))
+- use odyssey tokens inside mui components style override ([6863535](https://github.com/okta/odyssey/commit/68635351df8f17eb6401b94f43b9b7672eb9684e))
+
 ## [1.0.2](https://github.com/okta/odyssey/compare/v1.0.1...v1.0.2) (2023-08-04)
 
 ### Features
