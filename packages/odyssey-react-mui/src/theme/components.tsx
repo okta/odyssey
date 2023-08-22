@@ -1352,6 +1352,13 @@ export const components = (
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          padding: odysseyTokens.Spacing1,
+        },
+      },
+    },
     MuiInput: {
       defaultProps: {
         disableUnderline: true,
