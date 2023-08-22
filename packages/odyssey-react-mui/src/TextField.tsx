@@ -79,6 +79,10 @@ export type TextFieldProps = {
    */
   label: string;
   /**
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
+  /**
    * Callback fired when the `input` element loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -122,6 +126,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       isOptional = false,
       isReadOnly,
       label,
+      name: nameOverride,
       onBlur,
       onChange,
       onFocus,
@@ -146,7 +151,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           }
           id={id}
           multiline={isMultiline}
-          name={id}
+          name={nameOverride ? nameOverride : id}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
@@ -167,6 +172,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         hasInitialFocus,
         endAdornment,
         isMultiline,
+        nameOverride,
         onChange,
         onFocus,
         onBlur,

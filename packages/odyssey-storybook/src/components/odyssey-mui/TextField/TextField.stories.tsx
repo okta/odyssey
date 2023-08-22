@@ -125,6 +125,16 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
+    name: {
+      control: "text",
+      description:
+        "The name of the `input` element. Defaults to the `id` if not set.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     onBlur: {
       control: null,
       description: "Callback fired when the `input` element loses focus",
