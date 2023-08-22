@@ -13,6 +13,9 @@
 const branchName = process.env.GITHUB_HEAD_REF;
 const parentBranchName = process.env.GITHUB_BASE_REF;
 
+console.log({ branchName });
+console.log({ parentBranchName });
+
 module.exports = {
   // NOTE: the docs for this exitcode config are incorrect as of this
   // writing. An explicit `false` value here allows a failed VRT run to
@@ -25,11 +28,12 @@ module.exports = {
     level: "AA",
     guidelinesVersion: "WCAG_2_1",
   },
-  branchName,
   baselineBranchName: parentBranchName,
-  parentBranchName,
+  branchName,
   browser: [{ width: 1024, height: 768, name: "chrome" }],
   matchLevel: "Strict",
+  parentBranchName,
+  showLogs: true,
   showStorybookOutput: true,
   testConcurrency: 20,
 };
