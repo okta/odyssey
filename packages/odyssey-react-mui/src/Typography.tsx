@@ -102,7 +102,7 @@ const Typography = ({
       if (variant === "body") {
         return "p";
       } else if (variant === "subordinate" || variant === "support") {
-        return "h6";
+        return "p";
       } else {
         return variant;
       }

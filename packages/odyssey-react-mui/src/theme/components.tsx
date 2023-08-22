@@ -2271,8 +2271,6 @@ export const components = (
     },
     MuiTypography: {
       defaultProps: {
-        fontFamily:
-          "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
         variantMapping: {
           h1: "h1",
           h2: "h2",
