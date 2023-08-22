@@ -10,7 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const VRT_IGNORE = "Toast.Provider Callout.Form Callout.Table".split(" ");
+const branchName = process.env.GITHUB_HEAD_REF;
+const parentBranchName = process.env.GITHUB_BASE_REF;
 
 module.exports = {
   // NOTE: the docs for this exitcode config are incorrect as of this
@@ -20,16 +21,15 @@ module.exports = {
   // github integration.
   exitcode: true,
 
-  matchLevel: "Strict",
-  showStorybookOutput: true,
-  testConcurrency: 20,
-  browser: [{ width: 1024, height: 768, name: "chrome" }],
   accessibilityValidation: {
     level: "AA",
     guidelinesVersion: "WCAG_2_1",
   },
-  include({ name }) {
-    if (VRT_IGNORE.includes(name)) return false;
-    return true;
-  },
+  branchName,
+  baselineBranchName: parentBranchName,
+  parentBranchName,
+  browser: [{ width: 1024, height: 768, name: "chrome" }],
+  matchLevel: "Strict",
+  showStorybookOutput: true,
+  testConcurrency: 20,
 };
