@@ -32,10 +32,6 @@ export type CheckboxGroupProps = {
    */
   hint?: string;
   /**
-   * The id of the `input` element. This will also be the input's `name` field.
-   */
-  id?: string;
-  /**
    * If `true`, the CheckboxGroup is disabled
    */
   isDisabled?: boolean;
@@ -53,7 +49,6 @@ const CheckboxGroup = ({
   children,
   errorMessage,
   hint,
-  id: idOverride,
   isDisabled,
   isRequired = false,
   label,
@@ -73,7 +68,6 @@ const CheckboxGroup = ({
       fieldType="group"
       hasVisibleLabel={true}
       hint={hint}
-      id={idOverride}
       isDisabled={isDisabled}
       isOptional={!isRequired}
       label={label}

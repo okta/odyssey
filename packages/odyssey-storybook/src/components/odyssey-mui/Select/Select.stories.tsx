@@ -169,6 +169,16 @@ const storybookMeta: Meta<SelectProps> = {
         },
       },
     },
+    name: {
+      control: "text",
+      description:
+        "The name of the select component. Defaults to the `id` if not set.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     onBlur: {
       control: null,
       description: "Callback fired when the select component loses focus",
