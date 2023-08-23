@@ -62,6 +62,8 @@
   },
   "dependencies": {
     "@emotion/cache": "^11.10.5",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.0",
     "@mui/lab": "^5.0.0-alpha.117",
     "@mui/material": "^5.12.3",
@@ -78,8 +80,6 @@
   "devDependencies": {
     "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
     "@okta/browserslist-config-odyssey": "workspace:*",
     "@okta/odyssey-babel-preset": "workspace:*",
     "@okta/odyssey-icons": "workspace:*",
@@ -114,8 +114,6 @@
     "yargs": "^17.7.2"
   },
   "peerDependencies": {
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
     "react": ">=17 <19",
     "react-dom": ">=17 <19"
   }
