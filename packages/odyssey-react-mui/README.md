@@ -18,7 +18,7 @@ This project follows semantic versioning conventions:
 Install the package and peer dependencies:
 
 ```sh
-yarn add @okta/odyssey-react-mui @emotion/react
+yarn add @okta/odyssey-react-mui
 ```
 
 Include fonts:
