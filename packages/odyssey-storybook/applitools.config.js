@@ -13,27 +13,16 @@
 const branchName = process.env.GITHUB_HEAD_REF;
 const parentBranchName = process.env.GITHUB_BASE_REF;
 
-console.log({ branchName });
-console.log({ parentBranchName });
-
 module.exports = {
-  // NOTE: the docs for this exitcode config are incorrect as of this
-  // writing. An explicit `false` value here allows a failed VRT run to
-  // exit non zero and our larger CI build to pass as we intend.
-  // Validating VRT results is then handled through a separate applitools
-  // github integration.
-  exitcode: true,
-
   accessibilityValidation: {
     level: "AA",
     guidelinesVersion: "WCAG_2_1",
   },
-  baselineBranchName: parentBranchName,
   branchName,
   browser: [{ width: 1024, height: 768, name: "chrome" }],
+  exitcode: true,
   matchLevel: "Strict",
   parentBranchName,
-  showLogs: true,
   showStorybookOutput: true,
   testConcurrency: 20,
 };
