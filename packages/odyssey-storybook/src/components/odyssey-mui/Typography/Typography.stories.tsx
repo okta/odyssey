@@ -26,7 +26,7 @@ import {
   TypographyProps,
   typographyColorValues,
   typographyVariantMapping,
-  TypographyVariantValue,
+  type TypographyVariantValue,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
