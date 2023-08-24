@@ -12,12 +12,14 @@
 
 const branchName = process.env.GITHUB_HEAD_REF;
 const parentBranchName = process.env.GITHUB_BASE_REF;
+const shortCommitHash = process.env.GITHUB_SHA.slice(0, 7);
 
 module.exports = {
   accessibilityValidation: {
     level: "AA",
     guidelinesVersion: "WCAG_2_1",
   },
+  batchName: branchName?.concat(" ", shortCommitHash),
   branchName,
   browser: [{ width: 1024, height: 768, name: "chrome" }],
   exitcode: true,
