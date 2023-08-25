@@ -54,7 +54,7 @@ export type TabsProps = {
    */
   ariaLabel?: string;
   /**
-   * The value of the Tab that should be selected by default. 
+   * The value of the Tab that should be selected by default.
    * If value is provided as well, value takes precedence.
    */
   initialValue?: string;
@@ -80,9 +80,9 @@ const Tabs = ({ ariaLabel, initialValue = "0", tabs, value }: TabsProps) => {
 
   useEffect(() => {
     if (value) {
-      setTabState(value)
+      setTabState(value);
     }
-  }, [value])
+  }, [value]);
 
   return (
     <MuiTabContext value={tabState}>
