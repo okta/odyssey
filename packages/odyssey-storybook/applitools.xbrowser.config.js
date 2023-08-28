@@ -15,8 +15,8 @@ const config = require("./applitools.config");
 module.exports = Object.assign(config, {
   batch: {
     name: "okta/odyssey: x-browser",
-    sequenceName: "x-browser",
     notifyOnCompletion: true,
+    sequenceName: "x-browser",
   },
   browser: [
     { width: 1024, height: 768, name: "edgechromium" },

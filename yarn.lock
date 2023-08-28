@@ -5746,8 +5746,6 @@ __metadata:
     word-wrap: ~1.2.5
     yargs: ^17.7.2
   peerDependencies:
-    "@emotion/react": ^11
-    "@emotion/styled": ^11
     react: ">=17 <19"
     react-dom: ">=17 <19"
   languageName: unknown
@@ -5798,6 +5796,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     storybook: ^7.2.0
+    storybook-addon-rtl-direction: ^0.0.19
     typescript: ^5.1.6
     vite: ^4.3.2
   languageName: unknown
@@ -24490,6 +24489,26 @@ __metadata:
   version: 2.14.2
   resolution: "store2@npm:2.14.2"
   checksum: 6f270fc5bab99b63f45fcc7bd8b99c2714b4adf880f557ed7ffb5ed3987131251165bccde425a00928aaf044870aee79ddeef548576d093c68703ed2edec45d7
+  languageName: node
+  linkType: hard
+
+"storybook-addon-rtl-direction@npm:^0.0.19":
+  version: 0.0.19
+  resolution: "storybook-addon-rtl-direction@npm:0.0.19"
+  peerDependencies:
+    "@storybook/addons": ^6.5.8
+    "@storybook/api": ^6.5.8
+    "@storybook/components": ^6.5.8
+    "@storybook/core-events": ^6.5.8
+    "@storybook/theming": ^6.5.8
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 688ac4c510e959f1d147ce2f2cfb18456a32bbae1c70a854e3657a6a0f042da4c5a2f0bbe445caa68806f6e0a247ae48e2b04648541e383029eec61e76b522ea
   languageName: node
   linkType: hard
 

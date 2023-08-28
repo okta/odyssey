@@ -14,13 +14,13 @@ import { ReactNode, forwardRef, memo, useCallback, useState } from "react";
 import {
   Box,
   Chip,
+  Checkbox as MuiCheckbox,
   ListSubheader,
   MenuItem,
   Select as MuiSelect,
   SelectChangeEvent,
 } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
-import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
 
 export type SelectOption = {
@@ -205,7 +205,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       return (
         <MenuItem key={option.value} value={option.value}>
           {isMultiSelect && (
-            <Checkbox isDefaultChecked={selectedValue.includes(option.value)} />
+            <MuiCheckbox checked={selectedValue.includes(option.value)} />
           )}
           {option.text}
         </MenuItem>

@@ -10,26 +10,21 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-const VRT_IGNORE = "Toast.Provider Callout.Form Callout.Table".split(" ");
+const branchName = process.env.GITHUB_HEAD_REF;
+const parentBranchName = process.env.GITHUB_BASE_REF;
+const shortCommitHash = process.env.GITHUB_SHA.slice(0, 7);
 
 module.exports = {
-  // NOTE: the docs for this exitcode config are incorrect as of this
-  // writing. An explicit `false` value here allows a failed VRT run to
-  // exit non zero and our larger CI build to pass as we intend.
-  // Validating VRT results is then handled through a separate applitools
-  // github integration.
-  exitcode: true,
-
-  matchLevel: "Strict",
-  showStorybookOutput: true,
-  testConcurrency: 20,
-  browser: [{ width: 1024, height: 768, name: "chrome" }],
   accessibilityValidation: {
     level: "AA",
     guidelinesVersion: "WCAG_2_1",
   },
-  include({ name }) {
-    if (VRT_IGNORE.includes(name)) return false;
-    return true;
-  },
+  batchName: branchName?.concat(" ", shortCommitHash),
+  branchName,
+  browser: [{ width: 1024, height: 768, name: "chrome" }],
+  exitcode: true,
+  matchLevel: "Strict",
+  parentBranchName,
+  showStorybookOutput: true,
+  testConcurrency: 20,
 };

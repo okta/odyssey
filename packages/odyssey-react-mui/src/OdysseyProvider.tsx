@@ -11,6 +11,7 @@
  */
 
 import { memo, ReactNode } from "react";
+import { ScopedCssBaseline } from "@mui/material";
 
 import {
   OdysseyCacheProvider,
@@ -45,12 +46,14 @@ const OdysseyProvider = ({
       themeOverride={themeOverride}
       designTokensOverride={designTokensOverride}
     >
-      <OdysseyTranslationProvider
-        languageCode={languageCode}
-        translationOverrides={translationOverrides}
-      >
-        {children}
-      </OdysseyTranslationProvider>
+      <ScopedCssBaseline>
+        <OdysseyTranslationProvider
+          languageCode={languageCode}
+          translationOverrides={translationOverrides}
+        >
+          {children}
+        </OdysseyTranslationProvider>
+      </ScopedCssBaseline>
     </OdysseyThemeProvider>
   </OdysseyCacheProvider>
 );

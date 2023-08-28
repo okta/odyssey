@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { InputAdornment, InputBase } from "@mui/material";
+import { InputAdornment, InputBase, IconButton } from "@mui/material";
 import {
   ChangeEventHandler,
   FocusEventHandler,
@@ -21,7 +21,6 @@ import {
 } from "react";
 
 import { ShowIcon, HideIcon } from "./icons.generated";
-import { Button } from "./Button";
 import { Field } from "./Field";
 
 export type PasswordFieldProps = {
@@ -122,13 +121,12 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoFocus={hasInitialFocus}
           endAdornment={
             <InputAdornment position="end">
-              <Button
-                ariaLabel="toggle password visibility"
-                endIcon={inputType === "password" ? <ShowIcon /> : <HideIcon />}
+              <IconButton
+                aria-label="toggle password visibility"
                 onClick={togglePasswordVisibility}
-                size="small"
-                variant="floating"
-              />
+              >
+                {inputType === "password" ? <ShowIcon /> : <HideIcon />}
+              </IconButton>
             </InputAdornment>
           }
           id={id}
