@@ -11,7 +11,7 @@
  */
 
 import { useState, useEffect } from "react";
-import { InputAdornment, InputBase } from "@mui/material";
+import { InputAdornment, InputBase, IconButton } from "@mui/material";
 import {
   ChangeEventHandler,
   FocusEventHandler,
@@ -23,7 +23,6 @@ import {
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
-import { Button } from "./Button";
 
 export type SearchFieldProps = {
   /**
@@ -123,15 +122,14 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           endAdornment={
             uncontrolledValue && (
               <InputAdornment position="end">
-                <Button
-                  ariaLabel="Clear"
-                  isDisabled={isDisabled}
-                  label=""
+                <IconButton
+                  aria-label="Clear"
+                  disabled={isDisabled}
                   onClick={onClear}
                   size="small"
-                  startIcon={<CloseCircleFilledIcon />}
-                  variant="floating"
-                />
+                >
+                  <CloseCircleFilledIcon />
+                </IconButton>
               </InputAdornment>
             )
           }
