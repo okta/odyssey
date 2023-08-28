@@ -5711,8 +5711,6 @@ __metadata:
     word-wrap: ~1.2.5
     yargs: ^17.7.2
   peerDependencies:
-    "@emotion/react": ^11
-    "@emotion/styled": ^11
     react: ">=17 <19"
     react-dom: ">=17 <19"
   languageName: unknown

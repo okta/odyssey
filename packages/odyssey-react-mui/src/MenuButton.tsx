@@ -12,7 +12,7 @@
 
 import { Button, buttonVariantValues, MenuItem, useUniqueId } from "./";
 import { Divider, ListSubheader, Menu } from "@mui/material";
-import { ChevronDownIcon } from "./icons.generated";
+import { ChevronDownIcon, MoreIcon } from "./icons.generated";
 import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
@@ -56,6 +56,10 @@ export type MenuButtonProps = {
    */
   id?: string;
   /**
+   * If the MenuButton is an overflow menu or standard menu.
+   */
+  isOverflow?: boolean;
+  /**
    * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
@@ -84,8 +88,9 @@ const MenuButton = ({
   buttonLabel = "",
   buttonVariant = "secondary",
   children,
-  endIcon = <ChevronDownIcon />,
+  endIcon: endIconProp,
   id: idOverride,
+  isOverflow,
   tooltipText,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -113,6 +118,14 @@ const MenuButton = ({
       openMenu,
     }),
     [closeMenu, openMenu]
+  );
+
+  const endIcon = endIconProp ? (
+    endIconProp
+  ) : isOverflow ? (
+    <MoreIcon />
+  ) : (
+    <ChevronDownIcon />
   );
 
   return (

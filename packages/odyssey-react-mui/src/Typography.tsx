@@ -14,7 +14,7 @@ import {
   Typography as MuiTypography,
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
-import { ElementType, ReactNode, useMemo } from "react";
+import { ElementType, ReactNode, memo, useMemo } from "react";
 
 export type TypographyVariantValue =
   | "h1"
@@ -87,7 +87,7 @@ export type TypographyProps = {
   variant?: keyof typeof typographyVariantMapping;
 };
 
-export const Typography = ({
+const Typography = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -102,7 +102,7 @@ export const Typography = ({
       if (variant === "body") {
         return "p";
       } else if (variant === "subordinate" || variant === "support") {
-        return "h6";
+        return "p";
       } else {
         return variant;
       }
@@ -112,9 +112,9 @@ export const Typography = ({
 
   return (
     <MuiTypography
-      ariaDescribedBy={ariaDescribedBy}
-      ariaLabel={ariaLabel}
-      ariaLabelledBy={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
       children={children}
       classes={classes}
       color={color}
@@ -124,9 +124,10 @@ export const Typography = ({
   );
 };
 
-Typography.displayName = "Typography";
+const MemoizedTypography = memo(Typography);
+MemoizedTypography.displayName = "Typography";
 
-export const Heading1 = ({
+const Heading1 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -147,9 +148,10 @@ export const Heading1 = ({
   />
 );
 
-Heading1.displayName = "Heading1";
+const MemoizedHeading1 = memo(Heading1);
+MemoizedHeading1.displayName = "Heading1";
 
-export const Heading2 = ({
+const Heading2 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -170,9 +172,10 @@ export const Heading2 = ({
   />
 );
 
-Heading2.displayName = "Heading2";
+const MemoizedHeading2 = memo(Heading2);
+MemoizedHeading2.displayName = "Heading2";
 
-export const Heading3 = ({
+const Heading3 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -193,9 +196,10 @@ export const Heading3 = ({
   />
 );
 
-Heading3.displayName = "Heading3";
+const MemoizedHeading3 = memo(Heading3);
+MemoizedHeading3.displayName = "Heading3";
 
-export const Heading4 = ({
+const Heading4 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -216,9 +220,10 @@ export const Heading4 = ({
   />
 );
 
-Heading4.displayName = "Heading4";
+const MemoizedHeading4 = memo(Heading4);
+MemoizedHeading4.displayName = "Heading4";
 
-export const Heading5 = ({
+const Heading5 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -239,9 +244,10 @@ export const Heading5 = ({
   />
 );
 
-Heading5.displayName = "Heading5";
+const MemoizedHeading5 = memo(Heading5);
+MemoizedHeading5.displayName = "Heading5";
 
-export const Heading6 = ({
+const Heading6 = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -262,9 +268,10 @@ export const Heading6 = ({
   />
 );
 
-Heading6.displayName = "Heading6";
+const MemoizedHeading6 = memo(Heading6);
+MemoizedHeading6.displayName = "Heading6";
 
-export const Paragraph = ({
+const Paragraph = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -285,9 +292,10 @@ export const Paragraph = ({
   />
 );
 
-Paragraph.displayName = "Paragraph";
+const MemoizedParagraph = memo(Paragraph);
+MemoizedParagraph.displayName = "Paragraph";
 
-export const Subordinate = ({
+const Subordinate = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -308,9 +316,10 @@ export const Subordinate = ({
   />
 );
 
-Subordinate.displayName = "Subordinate";
+const MemoizedSubordinate = memo(Subordinate);
+MemoizedSubordinate.displayName = "Subordinate";
 
-export const Support = ({
+const Support = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -331,9 +340,10 @@ export const Support = ({
   />
 );
 
-Support.displayName = "Support";
+const MemoizedSupport = memo(Support);
+MemoizedSupport.displayName = "Support";
 
-export const Legend = ({
+const Legend = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
@@ -354,4 +364,19 @@ export const Legend = ({
   />
 );
 
-Legend.displayName = "Legend";
+const MemoizedLegend = memo(Legend);
+MemoizedLegend.displayName = "Legend";
+
+export {
+  MemoizedTypography as Typography,
+  MemoizedHeading1 as Heading1,
+  MemoizedHeading2 as Heading2,
+  MemoizedHeading3 as Heading3,
+  MemoizedHeading4 as Heading4,
+  MemoizedHeading5 as Heading5,
+  MemoizedHeading6 as Heading6,
+  MemoizedLegend as Legend,
+  MemoizedParagraph as Paragraph,
+  MemoizedSubordinate as Subordinate,
+  MemoizedSupport as Support,
+};

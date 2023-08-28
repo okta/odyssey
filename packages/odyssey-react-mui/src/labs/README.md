@@ -20,10 +20,10 @@ This project follows semantic versioning conventions:
 
 ## Getting Started
 
-Install the package and peer dependencies:
+To use Odyssey Labs, import as:
 
 ```sh
-yarn add @okta/odyssey-react-mui @okta/odyssey-react-labs @emotion/react
+import from "@okta/odyssey-react-mui/labs"
 ```
 
 ## Components
