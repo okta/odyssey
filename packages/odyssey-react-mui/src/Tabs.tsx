@@ -54,8 +54,8 @@ export type TabsProps = {
    */
   ariaLabel?: string;
   /**
-   * The value of the Tab that should be selected by default.
-   * If value is provided as well, value takes precedence.
+   * @deprecated please use value instead
+   * When `value` is provided, `initialValue` isn't used.
    */
   initialValue?: string;
   /**
@@ -68,8 +68,8 @@ export type TabsProps = {
   value?: string;
 };
 
-const Tabs = ({ ariaLabel, initialValue = "0", tabs, value }: TabsProps) => {
-  const [tabState, setTabState] = useState(initialValue);
+const Tabs = ({ ariaLabel, initialValue, tabs, value }: TabsProps) => {
+  const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
 
   const onChange = useCallback(
     (_event: React.SyntheticEvent, newState: string) => {
@@ -79,7 +79,7 @@ const Tabs = ({ ariaLabel, initialValue = "0", tabs, value }: TabsProps) => {
   );
 
   useEffect(() => {
-    if (value) {
+    if (value !== undefined) {
       setTabState(value);
     }
   }, [value]);
