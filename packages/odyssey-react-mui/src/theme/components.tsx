@@ -1174,8 +1174,8 @@ export const components = (
         root: {
           flexWrap: "wrap",
           gap: odysseyTokens.Spacing2,
-          paddingBlockStart: odysseyTokens.Spacing6,
-          paddingBlockEnd: odysseyTokens.Spacing6,
+          paddingBlockStart: odysseyTokens.Spacing5,
+          paddingBlockEnd: odysseyTokens.Spacing5,
           paddingInline: odysseyTokens.Spacing6,
 
           "& > .${ buttonClasses.root }": {
