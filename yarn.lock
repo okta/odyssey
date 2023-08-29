@@ -4809,35 +4809,87 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lerna/child-process@npm:7.1.4":
-  version: 7.1.4
-  resolution: "@lerna/child-process@npm:7.1.4"
+"@lerna/child-process@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@lerna/child-process@npm:7.2.0"
   dependencies:
     chalk: ^4.1.0
     execa: ^5.0.0
     strong-log-transformer: ^2.1.0
-  checksum: faac89a6c0b2eb205688fdf4307ce7fd06ee60b0c10f45e159c257cebcdb02a1bd048682ec56d3fa8c52d3f4e0b5d9113a6f419a0b040da70b1eba5aea2a3945
+  checksum: 05e8ee2bc72ab95fa3e5a5fe97f1aa498c9e0c121efae210db1aadcf2b50979f9e6ffcd77319a0ea85d56bc0b38d57b3c74b42a0538aeebc5d168317cf901a44
   languageName: node
   linkType: hard
 
-"@lerna/create@npm:7.1.4":
-  version: 7.1.4
-  resolution: "@lerna/create@npm:7.1.4"
+"@lerna/create@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@lerna/create@npm:7.2.0"
   dependencies:
-    "@lerna/child-process": 7.1.4
+    "@lerna/child-process": 7.2.0
+    "@npmcli/run-script": 6.0.2
+    "@nx/devkit": ">=16.5.1 < 17"
+    "@octokit/plugin-enterprise-rest": 6.0.1
+    "@octokit/rest": 19.0.11
+    byte-size: 8.1.1
+    chalk: 4.1.0
+    clone-deep: 4.0.1
+    cmd-shim: 6.0.1
+    columnify: 1.6.0
+    conventional-changelog-core: 5.0.1
+    conventional-recommended-bump: 7.0.1
+    cosmiconfig: ^8.2.0
     dedent: 0.7.0
+    execa: 5.0.0
     fs-extra: ^11.1.1
+    get-stream: 6.0.0
+    git-url-parse: 13.1.0
+    glob-parent: 5.1.2
+    globby: 11.1.0
+    graceful-fs: 4.2.11
+    has-unicode: 2.0.1
+    ini: ^1.3.8
     init-package-json: 5.0.0
+    inquirer: ^8.2.4
+    is-ci: 3.0.1
+    is-stream: 2.0.0
+    js-yaml: 4.1.0
+    libnpmpublish: 7.3.0
+    load-json-file: 6.2.0
+    lodash: ^4.17.21
+    make-dir: 3.1.0
+    minimatch: 3.0.5
+    multimatch: 5.0.0
+    node-fetch: 2.6.7
     npm-package-arg: 8.1.1
+    npm-packlist: 5.1.1
+    npm-registry-fetch: ^14.0.5
+    npmlog: ^6.0.2
+    nx: ">=16.5.1 < 17"
+    p-map: 4.0.0
+    p-map-series: 2.1.0
+    p-queue: 6.6.2
     p-reduce: ^2.1.0
     pacote: ^15.2.0
     pify: 5.0.0
+    read-cmd-shim: 4.0.0
+    read-package-json: 6.0.4
+    resolve-from: 5.0.0
+    rimraf: ^4.4.1
     semver: ^7.3.4
+    signal-exit: 3.0.7
     slash: ^3.0.0
+    ssri: ^9.0.1
+    strong-log-transformer: 2.1.0
+    tar: 6.1.11
+    temp-dir: 1.0.0
+    upath: 2.0.1
+    uuid: ^9.0.0
     validate-npm-package-license: ^3.0.4
     validate-npm-package-name: 5.0.0
+    write-file-atomic: 5.0.1
+    write-pkg: 4.0.0
+    yargs: 16.2.0
     yargs-parser: 20.2.4
-  checksum: e826bc5cf07d8e2ddf100a96bb8f39f2ee907343c91e0a111e03bd02fc03c62b783686fb7497dfcf7ae95cb6448e3bff07f5b4b3419d1bd7069a8bb15572b1d1
+  checksum: 62885f5378711b7bbe34b9eae6fbaf2dd4cd97d2f93cc0d5eadaa540cebb9020baa36dda9d19020e612664fb67e255638b15fa768e8b4050dfad829610169620
   languageName: node
   linkType: hard
 
@@ -18529,12 +18581,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lerna@npm:^7.1.4":
-  version: 7.1.4
-  resolution: "lerna@npm:7.1.4"
+"lerna@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "lerna@npm:7.2.0"
   dependencies:
-    "@lerna/child-process": 7.1.4
-    "@lerna/create": 7.1.4
+    "@lerna/child-process": 7.2.0
+    "@lerna/create": 7.2.0
     "@npmcli/run-script": 6.0.2
     "@nx/devkit": ">=16.5.1 < 17"
     "@octokit/plugin-enterprise-rest": 6.0.1
@@ -18610,7 +18662,7 @@ __metadata:
     yargs-parser: 20.2.4
   bin:
     lerna: dist/cli.js
-  checksum: 5abd20dd13cfc770e1ca0c0915f5c1c820e08824379dabffc27376684f386d1aa43036294aa252106b25acd5ac20dbcf8a535eb4e59b783d60fcae7783eeacf4
+  checksum: 15b0e890f1cdbd32c3b2aa4eb5767e5974d1fceea0201aae0d5ce9d207223b2c92c8b36b68b554621a307515c127963f4a5df38e59ab84f4dcf659e00099b18a
   languageName: node
   linkType: hard
 
@@ -21165,7 +21217,7 @@ __metadata:
     decode-uri-component: ^0.2.2
     eslint: ^8.44.0
     husky: ^7.0.2
-    lerna: ^7.1.4
+    lerna: ^7.2.0
     lint-staged: ^11.1.2
     loader-utils: ^3.2.1
     npm-run-all: ^4.1.5
