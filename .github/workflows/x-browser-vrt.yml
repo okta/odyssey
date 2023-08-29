@@ -12,7 +12,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          ref: develop
+          ref: main
           fetch-depth: 3
 
       - name: setup node
