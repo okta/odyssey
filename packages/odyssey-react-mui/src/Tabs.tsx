@@ -15,6 +15,7 @@ import React, {
   ReactNode,
   memo,
   useCallback,
+  useEffect,
   useState,
 } from "react";
 import { Tab as MuiTab } from "@mui/material";
@@ -53,17 +54,22 @@ export type TabsProps = {
    */
   ariaLabel?: string;
   /**
-   * The value of the Tab that should be selected by default
+   * @deprecated please use the `value` prop instead
+   * When `value` is provided, `initialValue` isn't used.
    */
   initialValue?: string;
   /**
    * The TabItems to be included in the Tabs group
    */
   tabs: TabItemProps[];
+  /**
+   * Identifier for the selected tab.
+   */
+  value?: string;
 };
 
-const Tabs = ({ ariaLabel, initialValue = "0", tabs }: TabsProps) => {
-  const [tabState, setTabState] = useState(initialValue);
+const Tabs = ({ ariaLabel, initialValue, tabs, value }: TabsProps) => {
+  const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
 
   const onChange = useCallback(
     (_event: React.SyntheticEvent, newState: string) => {
@@ -71,6 +77,12 @@ const Tabs = ({ ariaLabel, initialValue = "0", tabs }: TabsProps) => {
     },
     []
   );
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setTabState(value);
+    }
+  }, [value]);
 
   return (
     <MuiTabContext value={tabState}>
