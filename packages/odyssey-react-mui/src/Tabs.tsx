@@ -54,7 +54,7 @@ export type TabsProps = {
    */
   ariaLabel?: string;
   /**
-   * @deprecated please use value instead
+   * @deprecated please use the `value` prop instead
    * When `value` is provided, `initialValue` isn't used.
    */
   initialValue?: string;
@@ -63,7 +63,7 @@ export type TabsProps = {
    */
   tabs: TabItemProps[];
   /**
-   * The value of the Tab that is selected
+   * Identifier for the selected tab.
    */
   value?: string;
 };
