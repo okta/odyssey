@@ -10,7 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Button, buttonVariantValues, MenuItem, useUniqueId } from "./";
+import {
+  Button,
+  buttonSizeValues,
+  buttonVariantValues,
+  MenuItem,
+  useUniqueId,
+} from "./";
 import { Divider, ListSubheader, Menu } from "@mui/material";
 import { ChevronDownIcon, MoreIcon } from "./icons.generated";
 import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
@@ -60,6 +66,10 @@ export type MenuButtonProps = {
    */
   isOverflow?: boolean;
   /**
+   * The size of the button
+   */
+  size?: (typeof buttonSizeValues)[number];
+  /**
    * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
@@ -91,6 +101,7 @@ const MenuButton = ({
   endIcon: endIconProp,
   id: idOverride,
   isOverflow,
+  size,
   tooltipText,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -141,6 +152,7 @@ const MenuButton = ({
         id={`${uniqueId}-button`}
         label={buttonLabel}
         onClick={openMenu}
+        size={size}
         tooltipText={tooltipText}
         variant={buttonVariant}
       />
