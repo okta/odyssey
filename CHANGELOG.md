@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://github.com/okta/odyssey/compare/v1.0.3...v1.0.4) (2023-08-29)
+
+### Bug Fixes
+
+- update github workflows to point to `main` ([8e8abe5](https://github.com/okta/odyssey/commit/8e8abe5347fa4eb13f2a832466bf1516d9a3ab52))
+- upgrades Lerna version ([#1951](https://github.com/okta/odyssey/issues/1951)) ([303cc31](https://github.com/okta/odyssey/commit/303cc317b36731ff17e2e95754ca74260a1d216b))
+- upgrades Yarn version ([3da71f5](https://github.com/okta/odyssey/commit/3da71f501b6bab322122fdd35b12374243af383a))
+
 ## [1.0.3](https://github.com/okta/odyssey/compare/v1.0.2...v1.0.3) (2023-08-28)
 
 **Note:** Version bump only for package odyssey
