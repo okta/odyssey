@@ -28,6 +28,8 @@ import {
   ReactElement,
 } from "react";
 
+import type { SeleniumProps } from "./SeleniumProps";
+
 export type DialogProps = {
   /**
    * An optional Button object to be situated in the Dialog footer. Should almost always be of variant `primary`.
@@ -58,7 +60,7 @@ export type DialogProps = {
    */
   title: string;
   ariaLabel: string;
-};
+} & SeleniumProps;
 
 const Dialog = ({
   callToActionFirstComponent,
@@ -67,6 +69,7 @@ const Dialog = ({
   children,
   isOpen,
   onClose,
+  testId,
   title,
   ariaLabel,
 }: DialogProps) => {
@@ -103,7 +106,7 @@ const Dialog = ({
     );
 
   return (
-    <MuiDialog open={isOpen} onClose={onClose}>
+    <MuiDialog data-se={testId} open={isOpen} onClose={onClose}>
       <DialogTitle>
         {title}
         <Button
