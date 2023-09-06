@@ -28,9 +28,9 @@ const Box = forwardRef<HTMLElement, BoxProps>(
       ref={ref}
       children={children}
       component={component}
+      data-se={testId}
       id={id}
       sx={sx}
-      data-se={testId}
     />
   )
 );
