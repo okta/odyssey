@@ -14,13 +14,15 @@ import { memo } from "react";
 
 import { FormHelperText } from "@mui/material";
 
+import type { SeleniumProps } from "./SeleniumProps";
+
 export type FieldHintProps = {
   id?: string;
   text: string;
-};
+} & SeleniumProps;
 
-const FieldHint = ({ id, text }: FieldHintProps) => {
-  return <FormHelperText id={id}>{text}</FormHelperText>;
+const FieldHint = ({ id, testId, text }: FieldHintProps) => {
+  return <FormHelperText data-se={testId} id={id}>{text}</FormHelperText>;
 };
 
 const MemoizedFieldHint = memo(FieldHint);
