@@ -23,6 +23,7 @@ import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "./NullElement";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type MenuButtonProps = {
   /**
@@ -89,7 +90,7 @@ export type MenuButtonProps = {
       ariaLabelledBy: string;
       buttonLabel?: undefined | "";
     }
-);
+) & SeleniumProps;
 
 const MenuButton = ({
   ariaLabel,
@@ -102,6 +103,7 @@ const MenuButton = ({
   id: idOverride,
   isOverflow,
   size,
+  testId,
   tooltipText,
 }: MenuButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -140,7 +142,7 @@ const MenuButton = ({
   );
 
   return (
-    <div>
+    <div data-se={testId}>
       <Button
         aria-controls={isOpen ? `${uniqueId}-menu` : undefined}
         aria-expanded={isOpen ? "true" : undefined}
