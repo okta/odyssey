@@ -23,6 +23,7 @@ import { Typography } from "./Typography";
 import { useFieldset } from "./FieldsetContext";
 import { useTranslation } from "react-i18next";
 import { useUniqueId } from "./useUniqueId";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export const fieldTypeValues = ["single", "group"] as const;
 
@@ -81,7 +82,7 @@ export type FieldProps = {
     ariaDescribedBy?: string;
     id: string;
   }) => ReactElement;
-};
+} & SeleniumProps;
 
 const Field = ({
   errorMessage,
@@ -94,6 +95,7 @@ const Field = ({
   isOptional = false,
   label,
   renderFieldComponent,
+  testId,
 }: FieldProps) => {
   const { t } = useTranslation();
 
@@ -117,6 +119,7 @@ const Field = ({
   return (
     <MuiFormControl
       component={fieldType === "group" ? "fieldset" : "div"}
+      data-se={testId}
       disabled={isDisabled}
       error={Boolean(errorMessage)}
       role={isRadioGroup ? "radiogroup" : undefined}

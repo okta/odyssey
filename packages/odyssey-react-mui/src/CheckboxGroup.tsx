@@ -15,6 +15,7 @@ import { memo, ReactElement, useCallback } from "react";
 
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type CheckboxGroupProps = {
   /**
@@ -47,7 +48,7 @@ export type CheckboxGroupProps = {
    * The label text for the CheckboxGroup
    */
   label: string;
-};
+} & SeleniumProps;
 
 const CheckboxGroup = ({
   children,
@@ -57,6 +58,7 @@ const CheckboxGroup = ({
   isDisabled,
   isRequired = false,
   label,
+  testId,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, id }) => (
@@ -78,6 +80,7 @@ const CheckboxGroup = ({
       isOptional={!isRequired}
       label={label}
       renderFieldComponent={renderFieldComponent}
+      testId={testId}
     />
   );
 };
