@@ -16,6 +16,7 @@ import { memo, ReactElement, useCallback } from "react";
 
 import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export const buttonSizeValues = ["small", "medium", "large"] as const;
 export const buttonTypeValues = ["button", "submit", "reset"] as const;
@@ -100,7 +101,7 @@ export type ButtonProps = {
       label?: "" | undefined;
       startIcon?: ReactElement;
     }
-);
+) & SeleniumProps;
 
 const Button = ({
   ariaDescribedBy,
@@ -114,6 +115,7 @@ const Button = ({
   onClick,
   size = "medium",
   startIcon,
+  testId,
   tooltipText,
   type = "button",
   variant,
@@ -127,6 +129,7 @@ const Button = ({
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         aria-describedby={ariaDescribedBy}
+        data-se={testId}
         disabled={isDisabled}
         endIcon={endIcon}
         fullWidth={isFullWidth}
@@ -152,6 +155,7 @@ const Button = ({
       onClick,
       size,
       startIcon,
+      testId,
       type,
       variant,
     ]
