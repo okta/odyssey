@@ -13,21 +13,24 @@
 import { Box as MuiBox, BoxProps as MuiBoxProps } from "@mui/material";
 import { ReactNode, forwardRef, memo } from "react";
 
+import type { TestProps } from "./testTypes";
+
 export type BoxProps = {
   children?: ReactNode;
   component?: MuiBoxProps["component"];
   id?: MuiBoxProps["id"];
   sx?: MuiBoxProps["sx"];
-};
+} & TestProps;
 
 const Box = forwardRef<HTMLElement, BoxProps>(
-  ({ children, component, id, sx }, ref) => (
+  ({ children, component, id, sx, testId }, ref) => (
     <MuiBox
       ref={ref}
       children={children}
       component={component}
       id={id}
       sx={sx}
+      data-se={testId}
     />
   )
 );
