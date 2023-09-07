@@ -37,6 +37,7 @@ export const supportedLanguages = [
   "th", // Thai
   "tr", // Turkish
   "uk", // Ukrainian
+  "vi", // Vietnamese
   "zh_CN", // Chinese (PRC)
   "zh_TW", // Chinese
 ] as const;
