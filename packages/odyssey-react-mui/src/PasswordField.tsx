@@ -22,6 +22,7 @@ import {
 
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type PasswordFieldProps = {
   /**
@@ -82,7 +83,7 @@ export type PasswordFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-};
+} & SeleniumProps;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
@@ -100,6 +101,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       onFocus,
       onBlur,
       placeholder,
+      testId,
       value,
     },
     ref
@@ -169,6 +171,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}
+        testId={testId}
       />
     );
   }
