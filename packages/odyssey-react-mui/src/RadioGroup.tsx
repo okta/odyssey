@@ -15,6 +15,7 @@ import { ChangeEventHandler, memo, ReactElement, useCallback } from "react";
 
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type RadioGroupProps = {
   /**
@@ -53,7 +54,7 @@ export type RadioGroupProps = {
    * The `value` on the selected Radio
    */
   value?: RadioProps["value"];
-};
+} & SeleniumProps;
 
 const RadioGroup = ({
   children,
@@ -64,6 +65,7 @@ const RadioGroup = ({
   isDisabled,
   label,
   onChange,
+  testId,
   value,
 }: RadioGroupProps) => {
   const renderFieldComponent = useCallback(
@@ -92,6 +94,7 @@ const RadioGroup = ({
       isDisabled={isDisabled}
       label={label}
       renderFieldComponent={renderFieldComponent}
+      testId={testId}
     />
   );
 };
