@@ -23,6 +23,7 @@ import {
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type SearchFieldProps = {
   /**
@@ -71,7 +72,7 @@ export type SearchFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-};
+} & SeleniumProps;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
@@ -86,6 +87,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       onBlur,
       onClear: onClearProp,
       placeholder,
+      testId,
       value: controlledValue,
     },
     ref
@@ -175,6 +177,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         isOptional={true}
         label={label}
         renderFieldComponent={renderFieldComponent}
+        testId={testId}
       />
     );
   }
