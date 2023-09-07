@@ -15,6 +15,7 @@ import {
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
 import { ElementType, ReactNode, memo, useMemo } from "react";
+import { SeleniumProps } from "./SeleniumProps";
 
 export type TypographyVariantValue =
   | "h1"
@@ -85,7 +86,7 @@ export type TypographyProps = {
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
-};
+} & SeleniumProps;
 
 const Typography = ({
   ariaDescribedBy,
@@ -95,6 +96,7 @@ const Typography = ({
   classes,
   color,
   component: componentProp,
+  testId,
   variant = "body",
 }: TypographyProps) => {
   const component = useMemo(() => {
@@ -119,6 +121,7 @@ const Typography = ({
       classes={classes}
       color={color}
       component={component}
+      data-se={testId}
       variant={typographyVariantMapping[variant]}
     />
   );
@@ -135,6 +138,7 @@ const Heading1 = ({
   classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -144,6 +148,7 @@ const Heading1 = ({
     classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h1"
   />
 );
@@ -159,6 +164,7 @@ const Heading2 = ({
   classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -168,6 +174,7 @@ const Heading2 = ({
     classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h2"
   />
 );
@@ -183,6 +190,7 @@ const Heading3 = ({
   classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -192,6 +200,7 @@ const Heading3 = ({
     classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h3"
   />
 );
@@ -207,6 +216,7 @@ const Heading4 = ({
   classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -216,6 +226,7 @@ const Heading4 = ({
     classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h4"
   />
 );
@@ -231,6 +242,7 @@ const Heading5 = ({
   classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -240,6 +252,7 @@ const Heading5 = ({
     classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h5"
   />
 );
@@ -255,6 +268,7 @@ const Heading6 = ({
   classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -264,6 +278,7 @@ const Heading6 = ({
     classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h6"
   />
 );
@@ -279,6 +294,7 @@ const Paragraph = ({
   classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -288,6 +304,7 @@ const Paragraph = ({
     classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="body"
   />
 );
@@ -303,6 +320,7 @@ const Subordinate = ({
   classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -312,6 +330,7 @@ const Subordinate = ({
     classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="subordinate"
   />
 );
@@ -327,6 +346,7 @@ const Support = ({
   classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -336,6 +356,7 @@ const Support = ({
     classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="support"
   />
 );
@@ -351,6 +372,7 @@ const Legend = ({
   classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
@@ -360,6 +382,7 @@ const Legend = ({
     classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="legend"
   />
 );
