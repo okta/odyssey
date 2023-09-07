@@ -13,6 +13,7 @@
 import { Chip } from "@mui/material";
 
 import { useMuiProps } from "./MuiPropsContext";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export const statusSeverityValues = [
   "default",
@@ -35,12 +36,12 @@ export type StatusProps = {
    * The style of the Status indicator
    */
   variant?: (typeof statusVariantValues)[number];
-};
+} & SeleniumProps;
 
-export const Status = ({ severity, label, variant = "lamp" }: StatusProps) => {
+export const Status = ({ label, severity, testId, variant = "lamp" }: StatusProps) => {
   const muiProps = useMuiProps();
 
   return (
-    <Chip {...muiProps} label={label} color={severity} variant={variant} />
+    <Chip {...muiProps} color={severity} data-se={testId} label={label} variant={variant} />
   );
 };
