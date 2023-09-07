@@ -38,10 +38,21 @@ export type StatusProps = {
   variant?: (typeof statusVariantValues)[number];
 } & SeleniumProps;
 
-export const Status = ({ label, severity, testId, variant = "lamp" }: StatusProps) => {
+export const Status = ({
+  label,
+  severity,
+  testId,
+  variant = "lamp",
+}: StatusProps) => {
   const muiProps = useMuiProps();
 
   return (
-    <Chip {...muiProps} color={severity} data-se={testId} label={label} variant={variant} />
+    <Chip
+      {...muiProps}
+      color={severity}
+      data-se={testId}
+      label={label}
+      variant={variant}
+    />
   );
 };

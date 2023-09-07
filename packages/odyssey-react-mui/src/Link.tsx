@@ -50,8 +50,22 @@ export type LinkProps = {
   variant?: (typeof linkVariantValues)[number];
 } & SeleniumProps;
 
-const Link = ({ children, href, icon, rel, target, testId, variant }: LinkProps) => (
-  <MuiLink data-se={testId} href={href} rel={rel} target={target} variant={variant}>
+const Link = ({
+  children,
+  href,
+  icon,
+  rel,
+  target,
+  testId,
+  variant,
+}: LinkProps) => (
+  <MuiLink
+    data-se={testId}
+    href={href}
+    rel={rel}
+    target={target}
+    variant={variant}
+  >
     {icon && <span className="Link-icon">{icon}</span>}
 
     {children}

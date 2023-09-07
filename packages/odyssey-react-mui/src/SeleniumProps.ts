@@ -13,7 +13,7 @@
 export type SeleniumProps = {
   /**
    * This prop puts a `data` attribute on an HTML element in this component with the value provided.
-   * 
+   *
    * @deprecated **WARNING:** You should be using Semantic Selectors instead of this property. This is a temporary measure for backwards compatibility with existing Selenium tests.
    */
   testId?: string;

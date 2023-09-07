@@ -101,7 +101,8 @@ export type ButtonProps = {
       label?: "" | undefined;
       startIcon?: ReactElement;
     }
-) & SeleniumProps;
+) &
+  SeleniumProps;
 
 const Button = ({
   ariaDescribedBy,

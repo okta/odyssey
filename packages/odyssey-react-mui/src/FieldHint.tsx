@@ -22,7 +22,11 @@ export type FieldHintProps = {
 } & SeleniumProps;
 
 const FieldHint = ({ id, testId, text }: FieldHintProps) => {
-  return <FormHelperText data-se={testId} id={id}>{text}</FormHelperText>;
+  return (
+    <FormHelperText data-se={testId} id={id}>
+      {text}
+    </FormHelperText>
+  );
 };
 
 const MemoizedFieldHint = memo(FieldHint);

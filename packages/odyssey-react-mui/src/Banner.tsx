@@ -70,7 +70,13 @@ const Banner = ({
   const { t } = useTranslation();
 
   return (
-    <Alert data-se={testId} onClose={onClose} role={role} severity={severity} variant="banner">
+    <Alert
+      data-se={testId}
+      onClose={onClose}
+      role={role}
+      severity={severity}
+      variant="banner"
+    >
       <ScreenReaderText>{t(`severity.${severity}`)}:</ScreenReaderText>
       <AlertTitle>{text}</AlertTitle>
       {linkUrl && (

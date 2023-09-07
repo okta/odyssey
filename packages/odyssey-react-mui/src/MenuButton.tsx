@@ -90,7 +90,8 @@ export type MenuButtonProps = {
       ariaLabelledBy: string;
       buttonLabel?: undefined | "";
     }
-) & SeleniumProps;
+) &
+  SeleniumProps;
 
 const MenuButton = ({
   ariaLabel,

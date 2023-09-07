@@ -33,7 +33,14 @@ export type TagProps = {
   onRemove?: MuiChipProps["onDelete"];
 } & SeleniumProps;
 
-const Tag = ({ icon, isDisabled, label, onClick, onRemove, testId }: TagProps) => {
+const Tag = ({
+  icon,
+  isDisabled,
+  label,
+  onClick,
+  onRemove,
+  testId,
+}: TagProps) => {
   const { chipElementType } = useContext(TagListContext);
 
   const renderTag = useCallback(
