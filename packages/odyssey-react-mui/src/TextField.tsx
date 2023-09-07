@@ -22,6 +22,7 @@ import {
 } from "react";
 
 import { Field } from "./Field";
+import { SeleniumProps } from "./SeleniumProps";
 
 export const textFieldTypeValues = [
   "email",
@@ -106,7 +107,7 @@ export type TextFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-};
+} & SeleniumProps;
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
@@ -127,6 +128,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       onFocus,
       placeholder,
       startAdornment,
+      testId,
       type = "text",
       value,
     },
@@ -190,6 +192,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}
+        testId={testId}
       />
     );
   }
