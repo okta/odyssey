@@ -24,6 +24,7 @@ import {
   TabPanel as MuiTabPanel,
   TabContext as MuiTabContext,
 } from "@mui/lab";
+import { SeleniumProps } from "./SeleniumProps";
 
 export type TabItemProps = {
   /**
@@ -46,7 +47,7 @@ export type TabItemProps = {
    * The value associated with the TabItem
    */
   value?: string;
-};
+} & SeleniumProps;
 
 export type TabsProps = {
   /**
@@ -66,9 +67,9 @@ export type TabsProps = {
    * Identifier for the selected tab.
    */
   value?: string;
-};
+} & SeleniumProps;
 
-const Tabs = ({ ariaLabel, initialValue, tabs, value }: TabsProps) => {
+const Tabs = ({ ariaLabel, initialValue, tabs, testId, value }: TabsProps) => {
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
 
   const onChange = useCallback(
@@ -86,9 +87,10 @@ const Tabs = ({ ariaLabel, initialValue, tabs, value }: TabsProps) => {
 
   return (
     <MuiTabContext value={tabState}>
-      <MuiTabList onChange={onChange} aria-label={ariaLabel}>
+      <MuiTabList data-se={testId} onChange={onChange} aria-label={ariaLabel}>
         {tabs.map((tab, index) => (
           <MuiTab
+            data-se={tab.testId}
             disabled={tab.isDisabled}
             icon={tab.startIcon}
             label={tab.label}
@@ -99,6 +101,7 @@ const Tabs = ({ ariaLabel, initialValue, tabs, value }: TabsProps) => {
       </MuiTabList>
       {tabs.map((tab, index) => (
         <MuiTabPanel
+          data-se={tab.testId}
           value={tab.value ? tab.value : index.toString()}
           key={tab.value ? tab.value : index.toString()}
         >
