@@ -143,7 +143,7 @@ const MenuButton = ({
   );
 
   return (
-    <div data-se={testId}>
+    <div>
       <Button
         aria-controls={isOpen ? `${uniqueId}-menu` : undefined}
         aria-expanded={isOpen ? "true" : undefined}
@@ -151,6 +151,7 @@ const MenuButton = ({
         ariaDescribedBy={ariaDescribedBy}
         ariaLabel={ariaLabel}
         ariaLabelledBy={ariaLabelledBy}
+        data-se={testId}
         endIcon={endIcon}
         id={`${uniqueId}-button`}
         label={buttonLabel}
