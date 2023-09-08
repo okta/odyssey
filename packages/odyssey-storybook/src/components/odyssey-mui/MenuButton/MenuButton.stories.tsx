@@ -243,7 +243,7 @@ export const Groupings: StoryObj<MenuButtonProps> = {
       <MenuItem key="3">Configure thrusters</MenuItem>,
       <MenuItem key="4">View cargo</MenuItem>,
       <Divider key="div2" />,
-      <MenuItem key="5">Logout</MenuItem>,
+      <MenuItem key="5">Log out</MenuItem>,
     ],
   },
 };
@@ -274,13 +274,13 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
 
 export const IconButton: StoryObj<MenuButtonProps> = {
   args: {
-    ariaLabel: "Add confirmation",
+    ariaLabel: "More actions",
     buttonLabel: "",
     children: [
       <MenuItem key="1">View details</MenuItem>,
       <MenuItem key="2">Edit configuration</MenuItem>,
       <MenuItem key="3">Launch</MenuItem>,
     ],
-    tooltipText: "Add confirmation",
+    tooltipText: "More actions",
   },
 };
