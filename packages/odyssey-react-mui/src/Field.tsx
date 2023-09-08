@@ -77,9 +77,11 @@ export type FieldProps = {
    */
   renderFieldComponent: ({
     ariaDescribedBy,
+    dataSe,
     id,
   }: {
     ariaDescribedBy?: string;
+    dataSe?: string;
     id: string;
   }) => ReactElement;
 } & SeleniumProps;
@@ -119,7 +121,6 @@ const Field = ({
   return (
     <MuiFormControl
       component={fieldType === "group" ? "fieldset" : "div"}
-      data-se={testId}
       disabled={isDisabled}
       error={Boolean(errorMessage)}
       role={isRadioGroup ? "radiogroup" : undefined}
@@ -148,6 +149,7 @@ const Field = ({
       {renderFieldComponent({
         ariaDescribedBy,
         id,
+        dataSe: testId,
       })}
 
       {errorMessage && <FieldError id={errorId} text={errorMessage} />}
