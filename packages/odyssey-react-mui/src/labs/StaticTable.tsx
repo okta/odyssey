@@ -95,7 +95,7 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
       data={data}
       enableBottomToolbar={false}
       enablePagination={false}
-      enableRowVirtualization={data.length > 50}
+      enableRowVirtualization
       enableSorting={false}
       getRowId={getRowId}
       initialState={initialState}
