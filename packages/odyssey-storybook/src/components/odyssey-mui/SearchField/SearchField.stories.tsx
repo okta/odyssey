@@ -66,6 +66,16 @@ const storybookMeta: Meta<SearchFieldProps> = {
         },
       },
     },
+    name: {
+      control: "text",
+      description:
+        "The name of the `input` element. Defaults to the `id` if not set.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     onBlur: {
       control: "function",
       description: "Callback fired when the `input` element loses focus",

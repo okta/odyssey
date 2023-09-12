@@ -63,6 +63,10 @@ export type PasswordFieldProps = {
    */
   label: string;
   /**
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
+  /**
    * Callback fired when the `input` element loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -96,6 +100,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       isOptional = false,
       isReadOnly,
       label,
+      name: nameOverride,
       onChange,
       onFocus,
       onBlur,
@@ -130,7 +135,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
             </InputAdornment>
           }
           id={id}
-          name={id}
+          name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -147,6 +152,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hasInitialFocus,
         togglePasswordVisibility,
         inputType,
+        nameOverride,
         onChange,
         onFocus,
         onBlur,
