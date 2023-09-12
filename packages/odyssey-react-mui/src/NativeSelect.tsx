@@ -101,6 +101,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
     const renderFieldComponent = useCallback(
       () => (
         <MuiSelect
+          data-se={testId}
           defaultValue={defaultValue}
           id={idOverride}
           name={idOverride}
@@ -115,6 +116,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
         />
       ),
       [
+        children,
         defaultValue,
         idOverride,
         isMultiSelect,
@@ -122,7 +124,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
         onChange,
         onFocus,
         ref,
-        children,
+        testId,
         value,
       ]
     );
@@ -138,7 +140,6 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}
-        testId={testId}
       />
     );
   }

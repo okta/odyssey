@@ -23,7 +23,6 @@ import { Typography } from "./Typography";
 import { useFieldset } from "./FieldsetContext";
 import { useTranslation } from "react-i18next";
 import { useUniqueId } from "./useUniqueId";
-import type { SeleniumProps } from "./SeleniumProps";
 
 export const fieldTypeValues = ["single", "group"] as const;
 
@@ -84,7 +83,7 @@ export type FieldProps = {
     dataSe?: string;
     id: string;
   }) => ReactElement;
-} & SeleniumProps;
+};
 
 const Field = ({
   errorMessage,
@@ -97,7 +96,6 @@ const Field = ({
   isOptional = false,
   label,
   renderFieldComponent,
-  testId,
 }: FieldProps) => {
   const { t } = useTranslation();
 
@@ -149,7 +147,6 @@ const Field = ({
       {renderFieldComponent({
         ariaDescribedBy,
         id,
-        dataSe: testId,
       })}
 
       {errorMessage && <FieldError id={errorId} text={errorMessage} />}

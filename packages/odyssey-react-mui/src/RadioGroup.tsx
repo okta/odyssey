@@ -72,6 +72,7 @@ const RadioGroup = ({
     ({ ariaDescribedBy, id }) => (
       <MuiRadioGroup
         aria-describedby={ariaDescribedBy}
+        data-se={testId}
         defaultValue={defaultValue}
         id={id}
         name={id}
@@ -81,7 +82,7 @@ const RadioGroup = ({
         {children}
       </MuiRadioGroup>
     ),
-    [children, defaultValue, onChange, value]
+    [children, defaultValue, onChange, testId, value]
   );
 
   return (
@@ -94,7 +95,6 @@ const RadioGroup = ({
       isDisabled={isDisabled}
       label={label}
       renderFieldComponent={renderFieldComponent}
-      testId={testId}
     />
   );
 };

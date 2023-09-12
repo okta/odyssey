@@ -218,6 +218,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       () => (
         <MuiSelect
           children={children}
+          data-se={testId}
           id={idOverride}
           multiple={isMultiSelect}
           name={idOverride}
@@ -240,6 +241,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         children,
         renderValue,
         selectedValue,
+        testId,
         label,
       ]
     );
@@ -255,7 +257,6 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}
-        testId={testId}
       />
     );
   }

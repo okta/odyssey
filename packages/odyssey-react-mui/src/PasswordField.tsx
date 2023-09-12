@@ -121,6 +121,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
+          data-se={testId}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -156,6 +157,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         isOptional,
         isReadOnly,
         ref,
+        testId,
         value,
       ]
     );
@@ -171,7 +173,6 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}
-        testId={testId}
       />
     );
   }

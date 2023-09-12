@@ -141,6 +141,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
+          data-se={testId}
           endAdornment={
             endAdornment && (
               <InputAdornment position="end">{endAdornment}</InputAdornment>
@@ -176,6 +177,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         isReadOnly,
         ref,
         startAdornment,
+        testId,
         type,
         value,
       ]
@@ -192,7 +194,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}
-        testId={testId}
       />
     );
   }

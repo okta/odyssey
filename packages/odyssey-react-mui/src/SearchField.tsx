@@ -121,6 +121,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
+          data-se={testId}
           endAdornment={
             uncontrolledValue && (
               <InputAdornment position="end">
@@ -163,6 +164,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         onBlur,
         placeholder,
         ref,
+        testId,
         controlledValue,
         uncontrolledValue,
       ]
@@ -177,7 +179,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         isOptional={true}
         label={label}
         renderFieldComponent={renderFieldComponent}
-        testId={testId}
       />
     );
   }
