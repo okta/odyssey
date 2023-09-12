@@ -82,7 +82,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
   const [globalFilter, setGlobalFilter] = useState<string>();
 
   useEffect(() => {
-    if (globalFilter) {
+    if (globalFilter !== undefined) {
       onGlobalFilterChange?.(globalFilter);
     }
   }, [globalFilter, onGlobalFilterChange]);
