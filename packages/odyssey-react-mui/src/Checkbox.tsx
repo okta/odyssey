@@ -65,8 +65,7 @@ type BaseCheckboxProps = {
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   SeleniumProps;
 
-export type CheckboxProps = (
-BaseCheckboxProps & {
+export type CheckboxProps = BaseCheckboxProps & {
   /**
    * Sets the checked state of the Checkbox
    */
@@ -81,8 +80,7 @@ BaseCheckboxProps & {
    * Must be used if `isChecked` is used
    */
   onChange: MuiCheckboxProps["onChange"];
-} |
-BaseCheckboxProps & {
+} | BaseCheckboxProps & {
   /**
    * Sets the checked state of the Checkbox
    * Should not be used if `isDefaultChecked` is used
@@ -96,7 +94,7 @@ BaseCheckboxProps & {
    * The change event handler for the Checkbox
    */
   onChange?: MuiCheckboxProps["onChange"];
-});
+};
 
 const Checkbox = ({
   ariaLabel,
@@ -134,7 +132,7 @@ const Checkbox = ({
 
   const onChange = useCallback(
     (event, checked) => {
-      setIsCheckedValue(event.target.checked);
+      setIsCheckedValue(event.currentTarget.checked);
       onChangeProp?.(event, checked);
     },
     [onChangeProp, setIsCheckedValue]
