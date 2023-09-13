@@ -194,7 +194,6 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
 
   const modifiedState = useMemo(
     () => ({
-      ...state,
       pagination: {
         pageIndex: pagination.pageIndex,
         pageSize: pagination.pageSize,
@@ -202,6 +201,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
       rowSelection,
       globalFilter,
       columnFilters,
+      ...state,
     }),
     [
       pagination.pageIndex,
