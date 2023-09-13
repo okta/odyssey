@@ -11,7 +11,7 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useMemo } from "react";
 import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
@@ -21,6 +21,7 @@ import {
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Typography } from "./Typography";
 import type { SeleniumProps } from "./SeleniumProps";
+import { useControlledState } from "./useControlledState";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
@@ -114,20 +115,7 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
-  const useControlledValue = <S,>(value: S | undefined): ReturnType<typeof useState<S>> => {
-    const isControlled = useRef(value !== undefined);
-    const [stateValue, setStateValue] = useState(value);
-
-    useEffect(() => {
-      setStateValue(value);
-    }, [value])
-
-    return [
-      stateValue,
-      isControlled.current ? () => undefined : setStateValue,
-    ];
-  };
-  const [isCheckedValue, setIsCheckedValue] = useControlledValue(isChecked || isDefaultChecked);
+  const [isCheckedValue, setIsCheckedValue] = useControlledState(isChecked || isDefaultChecked);
 
   const label = useMemo(() => {
     if (isRequired) {
