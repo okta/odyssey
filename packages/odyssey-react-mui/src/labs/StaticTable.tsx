@@ -73,9 +73,9 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
 
   const modifiedState = useMemo(
     () => ({
-      ...state,
       globalFilter,
       columnFilters,
+      ...state,
     }),
     [globalFilter, columnFilters, state]
   );
