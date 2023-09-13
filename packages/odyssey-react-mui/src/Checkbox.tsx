@@ -129,10 +129,6 @@ const Checkbox = ({
   };
   const [isCheckedValue, setIsCheckedValue] = useControlledValue(isChecked || isDefaultChecked);
 
-  useEffect(() => {
-    setIsCheckedValue(isChecked);
-  }, [isChecked, setIsCheckedValue])
-
   const label = useMemo(() => {
     if (isRequired) {
       return (
