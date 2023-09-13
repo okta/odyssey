@@ -75,7 +75,7 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
     () => ({
       ...state,
       globalFilter,
-      columnFilters
+      columnFilters,
     }),
     [globalFilter, columnFilters, state]
   );

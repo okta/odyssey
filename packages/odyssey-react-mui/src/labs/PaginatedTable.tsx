@@ -201,9 +201,16 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
       },
       rowSelection,
       globalFilter,
-      columnFilters
+      columnFilters,
     }),
-    [pagination.pageIndex, pagination.pageSize, rowSelection, globalFilter, columnFilters, state]
+    [
+      pagination.pageIndex,
+      pagination.pageSize,
+      rowSelection,
+      globalFilter,
+      columnFilters,
+      state,
+    ]
   );
 
   const muiToolbarAlertBannerProps: AlertProps = useMemo(
