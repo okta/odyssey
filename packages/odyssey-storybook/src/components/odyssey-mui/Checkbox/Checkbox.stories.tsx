@@ -16,6 +16,7 @@ import {
   checkboxValidityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 
@@ -47,6 +48,15 @@ const storybookMeta: Meta<CheckboxProps> = {
       },
     },
     id: fieldComponentPropsMetaData.id,
+    isChecked: {
+      control: "boolean",
+      description: "The checkbox checked state",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isDefaultChecked: {
       control: "boolean",
       description: "If `true`, the checkbox starts checked",
@@ -145,6 +155,19 @@ const checkTheBox =
 export const Default: StoryObj<CheckboxProps> = {
   args: {
     label: "Enable warp drive recalibration",
+  },
+  render: ({ label }) => {
+    const [isChecked, setIsChecked] = useState(false);
+    return (
+      <Checkbox
+        label={label}
+        isChecked={isChecked}
+        onChange={(_, checked) => {
+          console.warn('onChange', checked);
+          setIsChecked(checked);
+        }}
+      />
+    );
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Default");
