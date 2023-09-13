@@ -24,7 +24,7 @@ import type { SeleniumProps } from "./SeleniumProps";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
-export type CheckboxProps = {
+type BaseCheckboxProps = {
   /**
    * The ARIA label for the Checkbox
    */
@@ -54,10 +54,6 @@ export type CheckboxProps = {
    */
   label?: string;
   /**
-   * The change event handler for the Checkbox
-   */
-  onChange?: MuiCheckboxProps["onChange"];
-  /**
    * The checkbox validity, if different from its enclosing group. Defaults to "inherit".
    */
   validity?: (typeof checkboxValidityValues)[number];
@@ -67,6 +63,39 @@ export type CheckboxProps = {
   value?: string;
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   SeleniumProps;
+
+export type CheckboxProps = (
+BaseCheckboxProps & {
+  /**
+   * Sets the checked state of the Checkbox
+   */
+  isChecked: boolean;
+  /**
+   * Determines whether the Checkbox is checked
+   * Should not be used if `isChecked` is used
+   */
+  isDefaultChecked?: never;
+  /**
+   * The change event handler for the Checkbox
+   * Must be used if `isChecked` is used
+   */
+  onChange: MuiCheckboxProps["onChange"];
+} |
+BaseCheckboxProps & {
+  /**
+   * Sets the checked state of the Checkbox
+   * Should not be used if `isDefaultChecked` is used
+   */
+  isChecked?: never;
+  /**
+   * Determines whether the Checkbox is checked
+   */
+  isDefaultChecked?: boolean;
+  /**
+   * The change event handler for the Checkbox
+   */
+  onChange?: MuiCheckboxProps["onChange"];
+});
 
 const Checkbox = ({
   ariaLabel,
