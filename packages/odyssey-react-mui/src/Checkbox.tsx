@@ -11,7 +11,7 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
@@ -85,13 +85,24 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
-  const [isCheckedValue, setIsCheckedValue] = useState(isChecked || isDefaultChecked);
+  const useControlledValue = <S,>(value: S | undefined): ReturnType<typeof useState<S>> => {
+    const isControlled = useRef(value !== undefined);
+    const [stateValue, setStateValue] = useState(value);
+
+    useEffect(() => {
+      setStateValue(value);
+    }, [value])
+
+    return [
+      stateValue,
+      isControlled.current ? () => undefined : setStateValue,
+    ];
+  };
+  const [isCheckedValue, setIsCheckedValue] = useControlledValue(isChecked || isDefaultChecked);
 
   useEffect(() => {
-    if (typeof isChecked !== 'undefined') {
-      setIsCheckedValue(isChecked);
-    }
-  }, [isChecked])
+    setIsCheckedValue(isChecked);
+  }, [isChecked, setIsCheckedValue])
 
   const label = useMemo(() => {
     if (isRequired) {
@@ -113,7 +124,7 @@ const Checkbox = ({
       setIsCheckedValue(event.target.checked);
       onChangeProp?.(event, checked);
     },
-    [onChangeProp]
+    [onChangeProp, setIsCheckedValue]
   );
 
   return (
