@@ -12,6 +12,8 @@
 
 import { CircularProgress as MuiCircularProgress } from "@mui/material";
 
+import type { SeleniumProps } from "./SeleniumProps";
+
 export type CircularProgressProps = {
   /**
    * The ARIA label for the progress spinner
@@ -22,13 +24,15 @@ export type CircularProgressProps = {
    * If undefined, the spinner will spin perpetually.
    */
   value?: number;
-};
+} & SeleniumProps;
 
 export const CircularProgress = ({
   ariaLabel,
+  testId,
   value,
 }: CircularProgressProps) => (
   <MuiCircularProgress
+    data-se={testId}
     value={value}
     variant={value ? "determinate" : "indeterminate"}
     aria-label={ariaLabel}

@@ -76,9 +76,11 @@ export type FieldProps = {
    */
   renderFieldComponent: ({
     ariaDescribedBy,
+    dataSe,
     id,
   }: {
     ariaDescribedBy?: string;
+    dataSe?: string;
     id: string;
   }) => ReactElement;
 };

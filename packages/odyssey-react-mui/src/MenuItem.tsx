@@ -18,6 +18,7 @@ import { menuItemClasses } from "@mui/material/MenuItem";
 import { memo, useCallback, useContext, type ReactNode } from "react";
 
 import { MenuContext } from "./MenuContext";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type MenuItemProps = {
   /**
@@ -50,7 +51,7 @@ export type MenuItemProps = {
    * - "destructive": A variant indicating a destructive action.
    */
   variant?: "default" | "destructive";
-};
+} & SeleniumProps;
 
 const MenuItem = ({
   children,
@@ -58,6 +59,7 @@ const MenuItem = ({
   isSelected,
   isDisabled,
   onClick: onClickProp,
+  testId,
   value,
   variant = "default",
 }: MenuItemProps) => {
@@ -75,15 +77,16 @@ const MenuItem = ({
     <MuiMenuItem
       /* eslint-disable-next-line jsx-a11y/no-autofocus */
       autoFocus={hasInitialFocus}
-      selected={isSelected}
-      disabled={isDisabled}
-      value={value}
-      onClick={onClick}
       className={
         variant === "destructive"
           ? `${menuItemClasses.root}-destructive`
           : undefined
       }
+      data-se={testId}
+      disabled={isDisabled}
+      onClick={onClick}
+      selected={isSelected}
+      value={value}
     >
       {children}
     </MuiMenuItem>
