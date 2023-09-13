@@ -26,9 +26,24 @@ import {
   TypographyProps,
   typographyColorValues,
   typographyVariantMapping,
+  TypographyVariantValue,
 } from "@okta/odyssey-react-mui";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
+import { createElement } from "react";
+
+const variantMapping = {
+  h1: Heading1,
+  h2: Heading2,
+  h3: Heading3,
+  h4: Heading4,
+  h5: Heading5,
+  h6: Heading6,
+  body: Paragraph,
+  subordinate: Subordinate,
+  support: Support,
+  legend: Legend,
+};
 
 const storybookMeta: Meta<TypographyProps> = {
   title: "MUI Components/Typography",
@@ -128,6 +143,13 @@ export const TypographyStory: StoryObj<TypographyProps> = {
   args: {
     children: "This is standard text.",
     variant: "body",
+  },
+  render: (args) => {
+    const { variant, ...props } = args;
+    return createElement(
+      variantMapping[variant as TypographyVariantValue],
+      props as TypographyProps
+    );
   },
 };
 
