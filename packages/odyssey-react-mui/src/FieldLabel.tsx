@@ -16,6 +16,7 @@ import { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { Subordinate } from "./Typography";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type FieldLabelProps = {
   hasVisibleLabel: boolean;
@@ -23,27 +24,28 @@ export type FieldLabelProps = {
   inputId: string;
   isOptional: boolean;
   text: string;
-};
+} & SeleniumProps;
 
 const FieldLabel = ({
   hasVisibleLabel,
   id,
   inputId,
   isOptional,
+  testId,
   text,
 }: FieldLabelProps) => {
   const { t } = useTranslation();
 
   const inputLabel = useMemo(
     () => (
-      <MuiInputLabel htmlFor={inputId} id={id}>
+      <MuiInputLabel data-se={testId} htmlFor={inputId} id={id}>
         <span>{text}</span>
         {isOptional && (
           <Subordinate>{t("fieldlabel.optional.text")}</Subordinate>
         )}
       </MuiInputLabel>
     ),
-    [id, inputId, isOptional, text, t]
+    [id, inputId, isOptional, testId, text, t]
   );
 
   return hasVisibleLabel ? (
