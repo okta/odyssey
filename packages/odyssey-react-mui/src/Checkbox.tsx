@@ -11,7 +11,7 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
@@ -33,6 +33,10 @@ export type CheckboxProps = {
    * The ID of the element that labels the Checkbox
    */
   ariaLabelledBy?: string;
+  /**
+   * Sets the checked state of the Checkbox
+   */
+  isChecked?: boolean;
   /**
    * Determines whether the Checkbox is checked
    */
@@ -68,6 +72,7 @@ const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
   id: idOverride,
+  isChecked,
   isDefaultChecked = false,
   isDisabled,
   isIndeterminate,
@@ -80,7 +85,13 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
-  const [isCheckedValue, setIsCheckedValue] = useState(isDefaultChecked);
+  const [isCheckedValue, setIsCheckedValue] = useState(isChecked || isDefaultChecked);
+
+  useEffect(() => {
+    if (typeof isChecked !== 'undefined') {
+      setIsCheckedValue(isChecked);
+    }
+  }, [isChecked])
 
   const label = useMemo(() => {
     if (isRequired) {
