@@ -67,6 +67,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/lab": "^5.0.0-alpha.117",
     "@mui/material": "^5.12.3",
+    "@mui/system": "^5.14.9",
     "@mui/utils": "^5.11.2",
     "@mui/x-date-pickers": "^5.0.15",
     "@okta/odyssey-design-tokens": "workspace:*",
