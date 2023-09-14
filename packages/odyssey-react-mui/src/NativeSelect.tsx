@@ -15,6 +15,8 @@ import { Select as MuiSelect } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 
+import type { SeleniumProps } from "./SeleniumProps";
+
 export type NativeSelectOption = {
   text: string;
   value?: string;
@@ -74,7 +76,7 @@ export type NativeSelectProps = {
    * The value or values selected in the NativeSelect
    */
   value?: string | string[];
-};
+} & SeleniumProps;
 
 const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   (
@@ -90,6 +92,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
       onBlur,
       onChange,
       onFocus,
+      testId,
       value,
       children,
     },
@@ -98,6 +101,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
     const renderFieldComponent = useCallback(
       () => (
         <MuiSelect
+          data-se={testId}
           defaultValue={defaultValue}
           id={idOverride}
           name={idOverride}
@@ -112,6 +116,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
         />
       ),
       [
+        children,
         defaultValue,
         idOverride,
         isMultiSelect,
@@ -119,7 +124,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
         onChange,
         onFocus,
         ref,
-        children,
+        testId,
         value,
       ]
     );

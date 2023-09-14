@@ -22,6 +22,7 @@ import {
 } from "react";
 
 import { Field } from "./Field";
+import { SeleniumProps } from "./SeleniumProps";
 
 export const textFieldTypeValues = [
   "email",
@@ -110,7 +111,7 @@ export type TextFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-};
+} & SeleniumProps;
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
@@ -132,6 +133,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       onFocus,
       placeholder,
       startAdornment,
+      testId,
       type = "text",
       value,
     },
@@ -144,6 +146,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
+          data-se={testId}
           endAdornment={
             endAdornment && (
               <InputAdornment position="end">{endAdornment}</InputAdornment>
@@ -158,6 +161,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}
+          required={!isOptional}
           startAdornment={
             startAdornment && (
               <InputAdornment position="start">{startAdornment}</InputAdornment>
@@ -177,9 +181,11 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         onFocus,
         onBlur,
         placeholder,
+        isOptional,
         isReadOnly,
         ref,
         startAdornment,
+        testId,
         type,
         value,
       ]

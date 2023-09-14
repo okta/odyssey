@@ -23,6 +23,7 @@ import {
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type SearchFieldProps = {
   /**
@@ -75,7 +76,7 @@ export type SearchFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-};
+} & SeleniumProps;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
@@ -91,6 +92,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       onBlur,
       onClear: onClearProp,
       placeholder,
+      testId,
       value: controlledValue,
     },
     ref
@@ -124,6 +126,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
+          data-se={testId}
           endAdornment={
             uncontrolledValue && (
               <InputAdornment position="end">
@@ -140,9 +143,9 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           }
           id={id}
           name={nameOverride ?? id}
+          onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
-          onBlur={onBlur}
           placeholder={placeholder}
           ref={ref}
           startAdornment={
@@ -158,16 +161,17 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       ),
       [
         autoCompleteType,
+        controlledValue,
         hasInitialFocus,
         isDisabled,
         nameOverride,
-        onClear,
-        onChange,
-        onFocus,
         onBlur,
+        onChange,
+        onClear,
+        onFocus,
         placeholder,
         ref,
-        controlledValue,
+        testId,
         uncontrolledValue,
       ]
     );

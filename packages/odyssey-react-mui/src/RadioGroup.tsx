@@ -15,6 +15,7 @@ import { ChangeEventHandler, memo, ReactElement, useCallback } from "react";
 
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type RadioGroupProps = {
   /**
@@ -57,7 +58,7 @@ export type RadioGroupProps = {
    * The `value` on the selected Radio
    */
   value?: RadioProps["value"];
-};
+} & SeleniumProps;
 
 const RadioGroup = ({
   children,
@@ -69,12 +70,14 @@ const RadioGroup = ({
   label,
   name: nameOverride,
   onChange,
+  testId,
   value,
 }: RadioGroupProps) => {
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, id }) => (
       <MuiRadioGroup
         aria-describedby={ariaDescribedBy}
+        data-se={testId}
         defaultValue={defaultValue}
         id={id}
         name={nameOverride ?? id}
@@ -84,7 +87,7 @@ const RadioGroup = ({
         {children}
       </MuiRadioGroup>
     ),
-    [children, defaultValue, nameOverride, onChange, value]
+    [children, defaultValue, nameOverride, onChange, testId, value]
   );
 
   return (

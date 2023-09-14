@@ -22,6 +22,7 @@ import {
 } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type SelectOption = {
   text: string;
@@ -82,7 +83,7 @@ export type SelectProps = {
    * The value or values selected in the Select
    */
   value?: string | string[];
-};
+} & SeleniumProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -114,6 +115,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       onChange: onChangeProp,
       onFocus,
       value,
+      testId,
       options,
     },
     ref
@@ -221,6 +223,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       () => (
         <MuiSelect
           children={children}
+          data-se={testId}
           id={idOverride}
           multiple={isMultiSelect}
           name={nameOverride ?? idOverride}
@@ -245,6 +248,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         ref,
         renderValue,
         selectedValue,
+        testId,
       ]
     );
 
