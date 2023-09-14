@@ -20,6 +20,7 @@ import {
   memo,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -70,6 +71,15 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
     }
   }, [globalFilter, onGlobalFilterChange]);
 
+  const modifiedState = useMemo(
+    () => ({
+      globalFilter,
+      columnFilters,
+      ...state,
+    }),
+    [globalFilter, columnFilters, state]
+  );
+
   const renderTopToolbarCustomActions = useCallback<
     Exclude<
       MaterialReactTableProps<TData>["renderTopToolbarCustomActions"],
@@ -112,7 +122,7 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
       renderTopToolbarCustomActions={renderTopToolbarCustomActions}
       rowVirtualizerInstanceRef={rowVirtualizerInstanceRef}
       rowVirtualizerProps={{ overscan: 4 }}
-      state={state}
+      state={modifiedState}
     />
   );
 };
