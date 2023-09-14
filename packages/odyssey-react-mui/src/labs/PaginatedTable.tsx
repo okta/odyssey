@@ -194,14 +194,23 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
 
   const modifiedState = useMemo(
     () => ({
-      ...state,
       pagination: {
         pageIndex: pagination.pageIndex,
         pageSize: pagination.pageSize,
       },
       rowSelection,
+      globalFilter,
+      columnFilters,
+      ...state,
     }),
-    [pagination.pageIndex, pagination.pageSize, rowSelection, state]
+    [
+      pagination.pageIndex,
+      pagination.pageSize,
+      rowSelection,
+      globalFilter,
+      columnFilters,
+      state,
+    ]
   );
 
   const muiToolbarAlertBannerProps: AlertProps = useMemo(
