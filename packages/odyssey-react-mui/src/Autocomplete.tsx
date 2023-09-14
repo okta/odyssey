@@ -66,6 +66,10 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["loading"];
   /**
+   * If `true`, the `input` element is not required.
+   */
+  isOptional?: boolean;
+  /**
    * Makes the Autocomplete input read-only
    */
   isReadOnly?: MuiAutocompleteProps<
@@ -125,6 +129,7 @@ const Autocomplete = <
   isCustomValueAllowed,
   isDisabled,
   isLoading,
+  isOptional = false,
   isReadOnly,
   hint,
   label,
@@ -142,17 +147,19 @@ const Autocomplete = <
         id={InputLabelProps.htmlFor}
         hint={hint}
         label={label}
+        isOptional={isOptional}
         renderFieldComponent={({ ariaDescribedBy, id }) => (
           <InputBase
             {...params}
             {...InputProps}
             aria-describedby={ariaDescribedBy}
             id={id}
+            required={!isOptional}
           />
         )}
       />
     ),
-    [hint, label]
+    [hint, isOptional, label]
   );
 
   return (

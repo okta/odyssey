@@ -156,6 +156,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           placeholder={placeholder}
           readOnly={isReadOnly}
           ref={ref}
+          required={!isOptional}
           startAdornment={
             startAdornment && (
               <InputAdornment position="start">{startAdornment}</InputAdornment>
@@ -174,6 +175,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         onFocus,
         onBlur,
         placeholder,
+        isOptional,
         isReadOnly,
         ref,
         startAdornment,

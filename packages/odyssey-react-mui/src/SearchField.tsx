@@ -138,9 +138,9 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           }
           id={id}
           name={id}
+          onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
-          onBlur={onBlur}
           placeholder={placeholder}
           ref={ref}
           startAdornment={
@@ -156,16 +156,16 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       ),
       [
         autoCompleteType,
+        controlledValue,
         hasInitialFocus,
         isDisabled,
-        onClear,
-        onChange,
-        onFocus,
         onBlur,
+        onChange,
+        onClear,
+        onFocus,
         placeholder,
         ref,
         testId,
-        controlledValue,
         uncontrolledValue,
       ]
     );
