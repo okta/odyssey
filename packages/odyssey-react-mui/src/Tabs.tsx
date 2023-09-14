@@ -24,6 +24,7 @@ import {
   TabPanel as MuiTabPanel,
   TabContext as MuiTabContext,
 } from "@mui/lab";
+import { SeleniumProps } from "./SeleniumProps";
 
 export type TabItemProps = {
   /**
@@ -46,7 +47,7 @@ export type TabItemProps = {
    * The value associated with the TabItem
    */
   value?: string;
-};
+} & SeleniumProps;
 
 export type TabsProps = {
   /**
@@ -89,6 +90,7 @@ const Tabs = ({ ariaLabel, initialValue, tabs, value }: TabsProps) => {
       <MuiTabList onChange={onChange} aria-label={ariaLabel}>
         {tabs.map((tab, index) => (
           <MuiTab
+            data-se={tab.testId}
             disabled={tab.isDisabled}
             icon={tab.startIcon}
             label={tab.label}

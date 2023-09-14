@@ -10,26 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo } from "react";
-
-import { FormHelperText } from "@mui/material";
-
-import type { SeleniumProps } from "./SeleniumProps";
-
-export type FieldHintProps = {
-  id?: string;
-  text: string;
-} & SeleniumProps;
-
-const FieldHint = ({ id, testId, text }: FieldHintProps) => {
-  return (
-    <FormHelperText data-se={testId} id={id}>
-      {text}
-    </FormHelperText>
-  );
+export type SeleniumProps = {
+  /**
+   * This prop puts a `data` attribute on an HTML element in this component with the value provided.
+   *
+   * @deprecated **WARNING:** You should be using Semantic Selectors instead of this property. This is a temporary measure for backwards compatibility with existing Selenium tests.
+   */
+  testId?: string;
 };
-
-const MemoizedFieldHint = memo(FieldHint);
-MemoizedFieldHint.displayName = "FieldHint";
-
-export { MemoizedFieldHint as FieldHint };

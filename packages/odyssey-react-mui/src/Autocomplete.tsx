@@ -18,6 +18,7 @@ import {
 import { memo, useCallback } from "react";
 
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type AutocompleteProps<
   OptionType,
@@ -117,7 +118,7 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["value"];
-};
+} & SeleniumProps;
 
 const Autocomplete = <
   OptionType,
@@ -136,6 +137,7 @@ const Autocomplete = <
   onInputChange,
   options,
   value,
+  testId,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
@@ -164,6 +166,7 @@ const Autocomplete = <
     <MuiAutocomplete
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
+      data-se={testId}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
