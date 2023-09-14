@@ -49,6 +49,10 @@ export type SearchFieldProps = {
    */
   label: string;
   /**
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
+  /**
    * Callback fired when the `input` element loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -82,6 +86,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       id: idOverride,
       isDisabled = false,
       label,
+      name: nameOverride,
       onChange: onChangeProp,
       onFocus,
       onBlur,
@@ -137,7 +142,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             )
           }
           id={id}
-          name={id}
+          name={nameOverride ?? id}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
@@ -159,6 +164,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         controlledValue,
         hasInitialFocus,
         isDisabled,
+        nameOverride,
         onBlur,
         onChange,
         onClear,

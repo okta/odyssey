@@ -33,6 +33,10 @@ export type CheckboxProps = {
    */
   ariaLabelledBy?: string;
   /**
+   * The id of the `input` element.
+   */
+  id?: string;
+  /**
    * Determines whether the Checkbox is checked
    */
   isDefaultChecked?: boolean;
@@ -53,7 +57,7 @@ export type CheckboxProps = {
    */
   label?: string;
   /**
-   * The name attribute of the Checkbox
+   * The name of the `input` element. Defaults to the `id` if not set.
    */
   name?: string;
   /**
@@ -73,12 +77,13 @@ export type CheckboxProps = {
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
+  id: idOverride,
   isDefaultChecked = false,
   isDisabled,
   isIndeterminate,
   isRequired,
   label: labelProp,
-  name,
+  name: nameOverride,
   onChange: onChangeProp,
   testId,
   validity = "inherit",
@@ -127,8 +132,9 @@ const Checkbox = ({
       }
       data-se={testId}
       disabled={isDisabled}
+      id={idOverride}
       label={label}
-      name={name}
+      name={nameOverride ?? idOverride}
       onChange={onChange}
       value={value}
       required={isRequired}

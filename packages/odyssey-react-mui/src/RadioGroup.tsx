@@ -35,7 +35,7 @@ export type RadioGroupProps = {
    */
   hint?: string;
   /**
-   * The id of the `input` element. This will also be the input's `name` field.
+   * The id of the `input` element.
    */
   id?: string;
   /**
@@ -46,6 +46,10 @@ export type RadioGroupProps = {
    * The text label for the RadioGroup
    */
   label: string;
+  /**
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
   /**
    * Listen for changes in the browser that change `value`
    */
@@ -64,6 +68,7 @@ const RadioGroup = ({
   id: idOverride,
   isDisabled,
   label,
+  name: nameOverride,
   onChange,
   testId,
   value,
@@ -75,14 +80,14 @@ const RadioGroup = ({
         data-se={testId}
         defaultValue={defaultValue}
         id={id}
-        name={id}
+        name={nameOverride ?? id}
         onChange={onChange}
         value={value}
       >
         {children}
       </MuiRadioGroup>
     ),
-    [children, defaultValue, onChange, testId, value]
+    [children, defaultValue, nameOverride, onChange, testId, value]
   );
 
   return (
