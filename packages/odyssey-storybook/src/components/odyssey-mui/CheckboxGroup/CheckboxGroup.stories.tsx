@@ -56,16 +56,6 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
         },
       },
     },
-    id: {
-      control: "text",
-      description:
-        "The id of the `input` element. This will also be the input's `name` field",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
     isDisabled: {
       control: "boolean",
       description: "If `true`, the checkbox group is disabled",

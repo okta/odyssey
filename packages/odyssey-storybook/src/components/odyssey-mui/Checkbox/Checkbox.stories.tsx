@@ -44,6 +44,15 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
+    id: {
+      control: "text",
+      description: "The id of the `input` element",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     isDefaultChecked: {
       control: "boolean",
       description: "If `true`, the checkbox starts checked",
@@ -91,7 +100,8 @@ const storybookMeta: Meta<CheckboxProps> = {
     },
     name: {
       control: "text",
-      description: "The name attribute of the checkbox",
+      description:
+        "The name of the `input` element. Defaults to the `id` if not set.",
       table: {
         type: {
           summary: "string",

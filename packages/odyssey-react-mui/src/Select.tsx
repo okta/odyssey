@@ -60,6 +60,10 @@ export type SelectProps = {
    */
   label: string;
   /**
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
+  /**
    * Callback fired when the Select loses focus
    */
   onBlur?: MuiSelectProps["onBlur"];
@@ -106,6 +110,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       isMultiSelect = false,
       isOptional = false,
       label,
+      name: nameOverride,
       onBlur,
       onChange: onChangeProp,
       onFocus,
@@ -221,7 +226,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           data-se={testId}
           id={idOverride}
           multiple={isMultiSelect}
-          name={idOverride}
+          name={nameOverride ?? idOverride}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
@@ -232,17 +237,18 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         />
       ),
       [
+        children,
         idOverride,
         isMultiSelect,
+        label,
+        nameOverride,
         onBlur,
         onChange,
         onFocus,
         ref,
-        children,
         renderValue,
         selectedValue,
         testId,
-        label,
       ]
     );
 
