@@ -16,7 +16,7 @@
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-svgr build && yarn workspace @okta/odyssey-react-mui generate:icons",
     "lerna-publish": "lerna publish from-package --no-verify-registry --no-push --force-publish",
-    "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --conventional-graduate --no-push --force-publish",
+    "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish",
     "lint": "yarn eslint && yarn stylelint && yarn prettier-check",
     "postinstall": "yarn build && [ -z ${CI:-} ] && husky install || exit 0",
     "prettier-check": "prettier --ignore-unknown --loglevel warn --check .",
