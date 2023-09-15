@@ -37,7 +37,6 @@ import { tooltipClasses } from "@mui/material/Tooltip";
 import { typographyClasses } from "@mui/material/Typography";
 
 import {
-  ArrowDownIcon,
   CheckCircleFilledIcon,
   CheckIcon,
   ChevronDownIcon,
@@ -1947,8 +1946,6 @@ export const components = (
           width: "auto",
           borderCollapse: "separate",
           borderSpacing: 0,
-          border: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100}`,
-          borderRadius: odysseyTokens.BorderRadiusMain,
           marginBlock: odysseyTokens.Spacing0,
           marginInline: odysseyTokens.Spacing0,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
@@ -2022,10 +2019,22 @@ export const components = (
           }),
 
           [`.${tableHeadClasses.root} &`]: {
-            color: odysseyTokens.TypographyColorBody,
+            color: odysseyTokens.TypographyColorSubordinate,
+            fontSize: odysseyTokens.TypographySizeSubordinate,
             lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
             backgroundColor: odysseyTokens.HueNeutral50,
+            borderBottom: 0,
+          },
+
+          [`.${tableHeadClasses.root} &:first-child`]: {
+            borderTopLeftRadius: odysseyTokens.Spacing2,
+            borderBottomLeftRadius: odysseyTokens.Spacing2,
+          },
+
+          [`.${tableHeadClasses.root} &:last-child`]: {
+            borderTopRightRadius: odysseyTokens.Spacing2,
+            borderBottomRightRadius: odysseyTokens.Spacing2,
           },
 
           ...(ownerState.variant === "head" && {
@@ -2063,6 +2072,29 @@ export const components = (
           ...(ownerState.align === "justify" && {
             textAlign: "justify",
           }),
+
+          ["&.MuiTableCell-comfortable"]: {
+            padding: odysseyTokens.Spacing3,
+          },
+
+          ["&.MuiTableCell-compact"]: {
+            fontSize: odysseyTokens.TypographySizeSubordinate,
+            padding: odysseyTokens.Spacing2,
+          },
+
+          ["&.MuiTableCell-spacious"]: {
+            padding: odysseyTokens.Spacing4,
+          },
+
+          [`& .${checkboxClasses.root}`]: {
+            width: `${odysseyTokens.TypographyLineHeightUi}rem`,
+            height: `${odysseyTokens.TypographyLineHeightUi}rem`,
+            margin: 0,
+          },
+
+          [`& .${dividerClasses.vertical}`]: {
+            borderStyle: "dashed",
+          },
         }),
       },
     },
@@ -2079,6 +2111,8 @@ export const components = (
           marginBlockEnd: odysseyTokens.Spacing4,
           marginInline: 0,
           overflowX: "auto",
+          paddingInline: odysseyTokens.Spacing4,
+          paddingBlockEnd: odysseyTokens.Spacing4,
 
           "&:last-child": {
             marginBlock: 0,
@@ -2099,13 +2133,13 @@ export const components = (
               backgroundColor: odysseyTokens.PalettePrimaryLighter,
             },
           },
+          [`&.${tableRowClasses.head}`]: {
+            boxShadow: "none !important",
+          },
         },
       },
     },
     MuiTableSortLabel: {
-      defaultProps: {
-        IconComponent: ArrowDownIcon,
-      },
       styleOverrides: {
         root: {
           cursor: "pointer",
@@ -2122,15 +2156,12 @@ export const components = (
           },
           "&:hover": {
             color: odysseyTokens.TypographyColorBody,
-            [`& .${tableSortLabelClasses.icon}`]: {
-              opacity: 1,
-            },
           },
           [`&.${tableSortLabelClasses.active}`]: {
             color: odysseyTokens.TypographyColorSubordinate,
             [`& .${tableSortLabelClasses.icon}`]: {
-              opacity: 1,
-              color: "inherit",
+              opacity: "1 !important",
+              color: "inherit !important",
             },
           },
         },
@@ -2144,6 +2175,12 @@ export const components = (
             duration: odysseyTokens.TransitionDurationMain,
           }),
           userSelect: "none",
+          width: odysseyTokens.Spacing4,
+          height: odysseyTokens.Spacing4,
+
+          [`.${tableCellClasses.root}:hover &`]: {
+            opacity: 0.5,
+          },
 
           [`.${tableCellClasses.alignRight} &`]: {
             marginInlineEnd: odysseyTokens.Spacing2,
@@ -2301,5 +2338,7 @@ export const components = (
         },
       },
     },
+
+    // LABS DataTable
   };
 };

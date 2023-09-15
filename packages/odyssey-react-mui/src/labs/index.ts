@@ -19,6 +19,7 @@ export type { MRT_ColumnDef as TableColumn } from "material-react-table";
 export * from "./DatePicker";
 export * from "./datePickerTheme";
 
+export * from "./dataTableTheme";
 export * from "./materialReactTableTypes";
 export * from "./PaginatedTable";
 export * from "./StaticTable";
