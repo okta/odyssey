@@ -134,8 +134,8 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
               <IconButton
                 aria-label={
                   inputType === "password"
-                    ? t("passwordfield.icon.arialabel.show")
-                    : t("passwordfield.icon.arialabel.hide")
+                    ? t("passwordfield.icon.label.show")
+                    : t("passwordfield.icon.label.hide")
                 }
                 onClick={togglePasswordVisibility}
               >
@@ -159,6 +159,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       [
         autoCompleteType,
         hasInitialFocus,
+        t,
         togglePasswordVisibility,
         inputType,
         nameOverride,
