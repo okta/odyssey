@@ -85,7 +85,7 @@ export const Default: StoryObj<PasswordFieldProps> = {
       expect(fieldElement.type).toBe("password");
 
       const buttonElement = canvasElement.querySelector(
-        '[aria-label="toggle password visibility"]'
+        '[aria-label="Show password"]'
       );
       if (buttonElement) {
         userEvent.type(fieldElement, "qwerty");
