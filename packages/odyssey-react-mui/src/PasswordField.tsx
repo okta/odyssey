@@ -132,7 +132,11 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           endAdornment={
             <InputAdornment position="end">
               <IconButton
-                aria-label={t("passwordfield.icon.arialabel")}
+                aria-label={
+                  inputType === "password"
+                    ? t("passwordfield.icon.arialabel.show")
+                    : t("passwordfield.icon.arialabel.hide")
+                }
                 onClick={togglePasswordVisibility}
               >
                 {inputType === "password" ? <ShowIcon /> : <HideIcon />}
