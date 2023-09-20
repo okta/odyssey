@@ -61,6 +61,10 @@ export type PasswordFieldProps = {
    */
   isReadOnly?: boolean;
   /**
+   * If `true`, the show/hide icon is not shown to the user
+   */
+  isShowPasswordIconDisabled?: boolean;
+  /**
    * The label for the `input` element.
    */
   label: string;
@@ -100,6 +104,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       id: idOverride,
       isDisabled = false,
       isOptional = false,
+      isShowPasswordIconDisabled = false,
       isReadOnly,
       label,
       name: nameOverride,
@@ -130,18 +135,20 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoFocus={hasInitialFocus}
           data-se={testId}
           endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label={
-                  inputType === "password"
-                    ? t("passwordfield.icon.label.show")
-                    : t("passwordfield.icon.label.hide")
-                }
-                onClick={togglePasswordVisibility}
-              >
-                {inputType === "password" ? <ShowIcon /> : <HideIcon />}
-              </IconButton>
-            </InputAdornment>
+            !isShowPasswordIconDisabled && (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={
+                    inputType === "password"
+                      ? t("passwordfield.icon.label.show")
+                      : t("passwordfield.icon.label.hide")
+                  }
+                  onClick={togglePasswordVisibility}
+                >
+                  {inputType === "password" ? <ShowIcon /> : <HideIcon />}
+                </IconButton>
+              </InputAdornment>
+            )
           }
           id={id}
           name={nameOverride ?? id}
@@ -169,6 +176,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         placeholder,
         isOptional,
         isReadOnly,
+        isShowPasswordIconDisabled,
         ref,
         testId,
         value,

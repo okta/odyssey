@@ -66,6 +66,9 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     isOptional: {
       control: "boolean",
     },
+    isShowPasswordIconDisabled: {
+      control: "boolean",
+    },
     value: {
       control: "text",
     },
@@ -74,6 +77,7 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     autoCompleteType: "current-password",
     label: "Password",
     isOptional: false,
+    isShowPasswordIconDisabled: false,
     id: "password-input",
   },
   decorators: [MuiThemeDecorator],
