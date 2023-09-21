@@ -18,5 +18,6 @@ declare module "i18next" {
     resources: {
       translations: typeof en;
     };
+    returnNull: false;
   }
 }

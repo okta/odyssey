@@ -97,11 +97,12 @@ i18n.use(initReactI18next).init({
     useSuspense: false,
     bindI18nStore: "added",
   },
+  returnNull: false,
 });
 
 Object.entries(resources).forEach(([locale, property]) => {
   i18n.addResourceBundle(locale, defaultNS, property);
 });
 
-// eslint-disable-next-line import/no-default-export
-export default i18n;
+export const odysseyTranslate = i18n.t.bind(i18n);
+export { i18n };
