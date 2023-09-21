@@ -41,6 +41,10 @@ export type PasswordFieldProps = {
    */
   hasInitialFocus?: boolean;
   /**
+   * If `true`, the show/hide icon is not shown to the user
+   */
+  hasShowPassword?: boolean;
+  /**
    * The helper text content.
    */
   hint?: string;
@@ -60,10 +64,6 @@ export type PasswordFieldProps = {
    * It prevents the user from changing the value of the field
    */
   isReadOnly?: boolean;
-  /**
-   * If `true`, the show/hide icon is not shown to the user
-   */
-  isShowPasswordIconDisabled?: boolean;
   /**
    * The label for the `input` element.
    */
@@ -104,7 +104,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       id: idOverride,
       isDisabled = false,
       isOptional = false,
-      isShowPasswordIconDisabled = false,
+      hasShowPassword = true,
       isReadOnly,
       label,
       name: nameOverride,
@@ -135,7 +135,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoFocus={hasInitialFocus}
           data-se={testId}
           endAdornment={
-            !isShowPasswordIconDisabled && (
+            hasShowPassword && (
               <InputAdornment position="end">
                 <IconButton
                   aria-label={
@@ -176,7 +176,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         placeholder,
         isOptional,
         isReadOnly,
-        isShowPasswordIconDisabled,
+        hasShowPassword,
         ref,
         testId,
         value,
