@@ -77,7 +77,6 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     autoCompleteType: "current-password",
     label: "Password",
     isOptional: false,
-    hasShowPassword: true,
     id: "password-input",
   },
   decorators: [MuiThemeDecorator],
@@ -117,6 +116,25 @@ export const Default: StoryObj<PasswordFieldProps> = {
       await waitFor(() => {
         axeRun("Password Field Default");
       });
+    });
+  },
+};
+
+export const NoShowPassword: StoryObj<PasswordFieldProps> = {
+  args: {
+    hasShowPassword: false,
+  },
+  play: async ({ args, canvasElement, step }) => {
+    await step("toggle password", async () => {
+      const fieldElement = canvasElement.querySelector(
+        `#${args.id}`
+      ) as HTMLInputElement;
+      expect(fieldElement.type).toBe("password");
+
+      const buttonElement = canvasElement.querySelector(
+        '[aria-label="toggle password visibility"]'
+      );
+      expect(buttonElement).toBe(null);
     });
   },
 };
