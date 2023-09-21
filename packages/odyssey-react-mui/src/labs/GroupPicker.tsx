@@ -14,10 +14,8 @@ import type { AutocompleteGetTagProps } from "@mui/material/useAutocomplete";
 
 import {
   Autocomplete as MuiAutocomplete,
-  AutocompleteProps as MuiAutocompleteProps,
   Avatar as MuiAvatar,
   Box,
-  Chip as MuiChip,
   InputBase,
 } from "@mui/material";
 import { avatarClasses } from "@mui/material/Avatar";
@@ -26,6 +24,7 @@ import { memo, useCallback } from "react";
 import { AutocompleteProps } from "../Autocomplete";
 import { Field } from "../Field";
 import { Subordinate } from "../Typography";
+import { Tag } from "../Tag";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 import { UserIcon, GridIcon, GroupIcon } from "../icons.generated";
 
@@ -39,26 +38,6 @@ export type GroupPickerOptionType = {
   usersCount?: number;
 };
 
-export type GroupPickerProps<
-  GroupPickerOptionType,
-  HasMultipleChoices extends boolean | undefined,
-  IsCustomValueAllowed extends boolean | undefined
-> = AutocompleteProps<
-  GroupPickerOptionType,
-  HasMultipleChoices,
-  IsCustomValueAllowed
-> & {
-  /**
-   * Hide selected options
-   */
-  isFilterSelectedOptions?: MuiAutocompleteProps<
-    GroupPickerOptionType,
-    HasMultipleChoices,
-    undefined,
-    IsCustomValueAllowed
-  >["filterSelectedOptions"];
-};
-
 const GroupPicker = <
   OptionType extends GroupPickerOptionType,
   HasMultipleChoices extends boolean | undefined,
@@ -67,7 +46,6 @@ const GroupPicker = <
   hasMultipleChoices,
   isCustomValueAllowed,
   isDisabled,
-  isFilterSelectedOptions,
   isLoading,
   isOptional = false,
   isReadOnly,
@@ -78,9 +56,10 @@ const GroupPicker = <
   options,
   value,
   testId,
-}: GroupPickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+}: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const avatarImageSize = 24;
+  const avatarImageSizeSmall = 16;
+  const avatarImageSizeMedium = 26;
 
   const isOptionEqualToValue = useCallback((sourceValue, targetValue) => {
     return sourceValue.id === targetValue.id;
@@ -108,9 +87,9 @@ const GroupPicker = <
                   [`.${avatarClasses.fallback}`]: {
                     visibility: "hidden",
                   },
-                  backgroundColor: "transparent",
-                  height: avatarImageSize,
-                  width: avatarImageSize,
+                  background: "transparent",
+                  height: avatarImageSizeMedium,
+                  width: avatarImageSizeMedium,
                 }}
               />
             </Box>
@@ -165,28 +144,35 @@ const GroupPicker = <
 
   const renderTags = useCallback(
     (values: OptionType[], getTagProps: AutocompleteGetTagProps) =>
-      values.map((option, index) => (
-        <MuiChip
-          avatar={
-            <MuiAvatar
-              src={option.logo}
-              sx={{
-                left: `-${odysseyDesignTokens.Spacing2}`,
-                backgroundColor: "transparent",
-              }}
+      values.map((option, index) => {
+        const { key, onDelete } = getTagProps({ index });
+        return (
+          <Box
+            key={key}
+            sx={{
+              margin: odysseyDesignTokens.Spacing1,
+            }}
+          >
+            <Tag
+              icon={
+                <MuiAvatar
+                  src={option.logo}
+                  sx={{
+                    [`.${avatarClasses.fallback}`]: {
+                      visibility: "hidden",
+                    },
+                    background: "transparent",
+                    height: avatarImageSizeSmall,
+                    width: avatarImageSizeSmall,
+                  }}
+                />
+              }
+              label={option.name}
+              onRemove={onDelete}
             />
-          }
-          label={option.name}
-          size="small"
-          sx={{
-            [`.${avatarClasses.fallback}`]: {
-              visibility: "hidden",
-            },
-            margin: odysseyDesignTokens.Spacing1,
-          }}
-          {...getTagProps({ index })}
-        />
-      )),
+          </Box>
+        );
+      }),
     [odysseyDesignTokens]
   );
 
@@ -218,9 +204,8 @@ const GroupPicker = <
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       data-se={testId}
-      disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
-      filterSelectedOptions={isFilterSelectedOptions}
+      filterSelectedOptions={true}
       freeSolo={isCustomValueAllowed}
       getOptionLabel={getOptionLabel}
       isOptionEqualToValue={isOptionEqualToValue}

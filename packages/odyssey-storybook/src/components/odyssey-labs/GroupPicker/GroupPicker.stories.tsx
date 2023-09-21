@@ -12,9 +12,9 @@
 
 import {
   GroupPicker,
-  GroupPickerProps,
   GroupPickerOptionType,
 } from "@okta/odyssey-react-mui/labs";
+import { AutocompleteProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { userEvent, within, screen } from "@storybook/testing-library";
@@ -159,15 +159,6 @@ const storybookMeta: Meta<typeof GroupPicker> = {
         },
       },
     },
-    isFilterSelectedOptions: {
-      control: "boolean",
-      description: "Filter out selected options",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
   },
   args: {
     label: "Languages",
@@ -180,7 +171,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
 
 export default storybookMeta;
 
-type GroupPickerType = GroupPickerProps<
+type GroupPickerType = AutocompleteProps<
   GroupPickerOptionType,
   boolean | undefined,
   boolean | undefined
@@ -209,12 +200,5 @@ export const GroupPickerDefault: StoryObj<GroupPickerType> = {
 export const Multiple: StoryObj<GroupPickerType> = {
   args: {
     hasMultipleChoices: true,
-  },
-};
-
-export const FilterSelectedOptions: StoryObj<GroupPickerType> = {
-  args: {
-    hasMultipleChoices: true,
-    isFilterSelectedOptions: true,
   },
 };
