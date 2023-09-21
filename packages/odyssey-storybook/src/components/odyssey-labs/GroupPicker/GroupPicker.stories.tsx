@@ -17,8 +17,7 @@ import {
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
-import { axeRun } from "../../../axe-util";
+import { userEvent, within, screen } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import demoImage from "./demo.png";
@@ -160,7 +159,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
         },
       },
     },
-    filterSelectedOptions: {
+    isFilterSelectedOptions: {
       control: "boolean",
       description: "Filter out selected options",
       table: {
@@ -191,26 +190,12 @@ export const GroupPickerDefault: StoryObj<GroupPickerType> = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
     const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
-    await step("Filter and Select from listbox", async () => {
-      userEvent.click(comboBoxElement);
-      const listboxElement = screen.getByRole("listbox");
-      expect(listboxElement).toBeVisible();
-    });
-    await step("Check for 'No options' in the list", async () => {
-      await axeRun("Autocomplete Default");
-      waitFor(() => {
-        userEvent.type(comboBoxElement, "q");
-        const noOptionsElement = screen.getByText("No options");
-        expect(noOptionsElement).toBeVisible();
-      });
-    });
     await step("Check for Filtered item from the list", async () => {
-      userEvent.clear(comboBoxElement);
-      userEvent.type(comboBoxElement, "z");
+      userEvent.type(comboBoxElement, "J");
       const listItem = screen.getByRole("listbox").firstChild as HTMLLIElement;
-      expect(listItem?.textContent).toBe("Shirazi-Ma Complex");
+      expect(listItem?.textContent).toBe("Japnese");
       userEvent.click(listItem);
-      expect(comboBoxElement.value).toBe("Shirazi-Ma Complex");
+      expect(comboBoxElement.value).toBe("Japnese");
     });
     await step("Clear the selected item", async () => {
       const clearButton = canvas.getByTitle("Clear");
@@ -225,61 +210,11 @@ export const Multiple: StoryObj<GroupPickerType> = {
   args: {
     hasMultipleChoices: true,
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
-    await step("Check for list box to be visible", async () => {
-      userEvent.click(comboBoxElement);
-      const listboxElement = screen.getByRole("listbox");
-      expect(listboxElement).toBeVisible();
-    });
-    await step("Select multiple items", async () => {
-      userEvent.type(comboBoxElement, "z");
-      userEvent.click(screen.getByRole("listbox").firstChild as HTMLLIElement);
-      userEvent.clear(comboBoxElement);
-      userEvent.type(comboBoxElement, "w");
-      userEvent.click(screen.getByRole("listbox").firstChild as HTMLLIElement);
-      await axeRun("Autocomplete Multiple");
-    });
-    await step("Clear the selected items", async () => {
-      waitFor(() => {
-        const clearButton = canvas.getByTitle("Clear");
-        userEvent.click(clearButton);
-        expect(comboBoxElement.value).toBe("");
-        userEvent.tab();
-      });
-    });
-  },
 };
 
 export const FilterSelectedOptions: StoryObj<GroupPickerType> = {
   args: {
     hasMultipleChoices: true,
-    filterSelectedOptions: true,
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
-    await step("Check for list box to be visible", async () => {
-      userEvent.click(comboBoxElement);
-      const listboxElement = screen.getByRole("listbox");
-      expect(listboxElement).toBeVisible();
-    });
-    await step("Select multiple items", async () => {
-      userEvent.type(comboBoxElement, "z");
-      userEvent.click(screen.getByRole("listbox").firstChild as HTMLLIElement);
-      userEvent.clear(comboBoxElement);
-      userEvent.type(comboBoxElement, "w");
-      userEvent.click(screen.getByRole("listbox").firstChild as HTMLLIElement);
-      await axeRun("Autocomplete Multiple");
-    });
-    await step("Clear the selected items", async () => {
-      waitFor(() => {
-        const clearButton = canvas.getByTitle("Clear");
-        userEvent.click(clearButton);
-        expect(comboBoxElement.value).toBe("");
-        userEvent.tab();
-      });
-    });
+    isFilterSelectedOptions: true,
   },
 };

@@ -15,58 +15,59 @@ import type { AutocompleteGetTagProps } from "@mui/material/useAutocomplete";
 import {
   Autocomplete as MuiAutocomplete,
   AutocompleteProps as MuiAutocompleteProps,
+  Avatar as MuiAvatar,
   Box,
   Chip as MuiChip,
   InputBase,
-  Avatar as MuiAvatar,
 } from "@mui/material";
-import { HTMLAttributes, memo, useCallback } from "react";
+import { avatarClasses } from "@mui/material/Avatar";
+import { memo, useCallback } from "react";
 
 import { AutocompleteProps } from "../Autocomplete";
 import { Field } from "../Field";
 import { Subordinate } from "../Typography";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
-
 import { UserIcon, GridIcon, GroupIcon } from "../icons.generated";
 
 export type GroupPickerOptionType = {
-  id: string;
-  name: string;
-  description: string;
-  logo?: string;
-  usersCount?: number;
   appsCount?: number;
+  description: string;
   groupPushMappingsCount?: number;
+  id: string;
+  logo?: string;
+  name: string;
+  usersCount?: number;
 };
 
 export type GroupPickerProps<
   GroupPickerOptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
-> = {
+> = AutocompleteProps<
+  GroupPickerOptionType,
+  HasMultipleChoices,
+  IsCustomValueAllowed
+> & {
   /**
    * Hide selected options
    */
-  filterSelectedOptions?: MuiAutocompleteProps<
+  isFilterSelectedOptions?: MuiAutocompleteProps<
     GroupPickerOptionType,
     HasMultipleChoices,
     undefined,
     IsCustomValueAllowed
   >["filterSelectedOptions"];
-} & AutocompleteProps<
-  GroupPickerOptionType,
-  HasMultipleChoices,
-  IsCustomValueAllowed
->;
+};
 
 const GroupPicker = <
-  optionType extends GroupPickerOptionType,
+  OptionType extends GroupPickerOptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 >({
   hasMultipleChoices,
   isCustomValueAllowed,
   isDisabled,
+  isFilterSelectedOptions,
   isLoading,
   isOptional = false,
   isReadOnly,
@@ -76,44 +77,42 @@ const GroupPicker = <
   onInputChange,
   options,
   value,
-  filterSelectedOptions,
   testId,
-}: GroupPickerProps<optionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+}: GroupPickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const avatarImageSize = 24;
 
-  const isOptionEqualToValue = useCallback(
-    (sourceValue: optionType, targetValue: optionType) => {
-      return sourceValue.id === targetValue.id;
-    },
-    []
-  );
+  const isOptionEqualToValue = useCallback((sourceValue, targetValue) => {
+    return sourceValue.id === targetValue.id;
+  }, []);
 
-  const getOptionLabel = useCallback((option: string | optionType) => {
-    return typeof option === "string" ? option : option.name;
+  const getOptionLabel = useCallback((option) => {
+    return option.name;
   }, []);
 
   const renderOption = useCallback(
-    (props: HTMLAttributes<HTMLLIElement>, option: optionType) => {
+    (props, option) => {
       return (
         <li {...props} key={option.id}>
           <Box
             sx={{
+              alignItems: "top",
               display: "flex",
               flexDirection: "row",
-              alignItems: "top",
             }}
           >
             <Box sx={{ paddingRight: odysseyDesignTokens.Spacing2 }}>
               <MuiAvatar
-                sx={{
-                  backgroundColor: "transparent",
-                  width: 24,
-                  height: 24,
-                }}
                 src={option.logo}
-              >
-                &nbsp;
-              </MuiAvatar>
+                sx={{
+                  [`.${avatarClasses.fallback}`]: {
+                    visibility: "hidden",
+                  },
+                  backgroundColor: "transparent",
+                  height: avatarImageSize,
+                  width: avatarImageSize,
+                }}
+              />
             </Box>
             <Box>
               {option.name}
@@ -125,7 +124,7 @@ const GroupPicker = <
                   paddingTop: odysseyDesignTokens.Spacing1,
                 }}
               >
-                {option.usersCount !== undefined && (
+                {typeof option.usersCount === "number" && (
                   <Box
                     sx={{
                       display: "flex",
@@ -137,7 +136,7 @@ const GroupPicker = <
                     {option.usersCount}
                   </Box>
                 )}
-                {option.appsCount !== undefined && (
+                {typeof option.appsCount === "number" && (
                   <Box
                     sx={{
                       display: "flex",
@@ -149,7 +148,7 @@ const GroupPicker = <
                     {option.appsCount}
                   </Box>
                 )}
-                {option.groupPushMappingsCount !== undefined && (
+                {typeof option.groupPushMappingsCount === "number" && (
                   <Box sx={{ display: "flex", flexDirection: "row" }}>
                     <GroupIcon />
                     {option.groupPushMappingsCount}
@@ -165,32 +164,29 @@ const GroupPicker = <
   );
 
   const renderTags = useCallback(
-    (values: optionType[], getTagProps: AutocompleteGetTagProps) =>
-      values.map((option: optionType, index: number) => {
-        const { onDelete } = getTagProps({ index });
-
-        return (
-          <div key={option.id}>
-            <MuiChip
-              sx={{ margin: odysseyDesignTokens.Spacing1 }}
-              size="small"
-              avatar={
-                <MuiAvatar
-                  sx={{
-                    left: `-${odysseyDesignTokens.Spacing2}`,
-                    backgroundColor: "transparent",
-                  }}
-                  src={option.logo}
-                >
-                  &nbsp;
-                </MuiAvatar>
-              }
-              label={option.name}
-              onDelete={onDelete}
+    (values: OptionType[], getTagProps: AutocompleteGetTagProps) =>
+      values.map((option, index) => (
+        <MuiChip
+          avatar={
+            <MuiAvatar
+              src={option.logo}
+              sx={{
+                left: `-${odysseyDesignTokens.Spacing2}`,
+                backgroundColor: "transparent",
+              }}
             />
-          </div>
-        );
-      }),
+          }
+          label={option.name}
+          size="small"
+          sx={{
+            [`.${avatarClasses.fallback}`]: {
+              visibility: "hidden",
+            },
+            margin: odysseyDesignTokens.Spacing1,
+          }}
+          {...getTagProps({ index })}
+        />
+      )),
     [odysseyDesignTokens]
   );
 
@@ -224,7 +220,10 @@ const GroupPicker = <
       data-se={testId}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
+      filterSelectedOptions={isFilterSelectedOptions}
       freeSolo={isCustomValueAllowed}
+      getOptionLabel={getOptionLabel}
+      isOptionEqualToValue={isOptionEqualToValue}
       loading={isLoading}
       multiple={hasMultipleChoices}
       onChange={onChange}
@@ -232,12 +231,9 @@ const GroupPicker = <
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}
-      value={value}
-      filterSelectedOptions={filterSelectedOptions}
-      isOptionEqualToValue={isOptionEqualToValue}
-      getOptionLabel={getOptionLabel}
       renderOption={renderOption}
       renderTags={renderTags}
+      value={value}
     />
   );
 };
