@@ -214,6 +214,17 @@ export const Disabled: StoryObj<AutocompleteType> = {
   },
 };
 
+export const Error: StoryObj<AutocompleteType> = {
+  args: {
+    errorMessage: "Select your destination.",
+  },
+  play: async ({ step }) => {
+    await step("Check for a11y errors on Select Error", async () => {
+      await waitFor(() => axeRun("Select Error"));
+    });
+  },
+};
+
 export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
   parameters: {
     docs: {
