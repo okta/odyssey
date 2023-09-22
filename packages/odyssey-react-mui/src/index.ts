@@ -65,6 +65,8 @@ export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
 export * from "./createUniqueId";
+export * from "./DataFilters";
+export * from "./DataTable";
 export * from "./Dialog";
 export * from "./Fieldset";
 export * from "./Form";

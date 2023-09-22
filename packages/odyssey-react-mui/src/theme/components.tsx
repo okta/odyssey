@@ -328,6 +328,18 @@ export const components = (
         }),
       },
     },
+    MuiBadge: {
+      styleOverrides: {
+        badge: () => ({
+          backgroundColor: odysseyTokens.PalettePrimaryMain,
+          outlineColor: odysseyTokens.TypographyColorInverse,
+          borderRadius: odysseyTokens.BorderRadiusRound,
+          outlineStyle: "solid",
+          outlineWidth: 2,
+          color: odysseyTokens.TypographyColorInverse,
+        }),
+      },
+    },
     MuiButton: {
       defaultProps: {
         variant: "primary",
@@ -529,6 +541,16 @@ export const components = (
     MuiButtonBase: {
       defaultProps: {
         disableRipple: true,
+      },
+    },
+    MuiButtonGroup: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        grouped: {
+          minWidth: "unset",
+        },
       },
     },
     MuiCheckbox: {
@@ -2027,12 +2049,12 @@ export const components = (
             borderBottom: 0,
           },
 
-          [`.${tableHeadClasses.root} &:first-child`]: {
+          [`.${tableHeadClasses.root} &:first-of-type`]: {
             borderTopLeftRadius: odysseyTokens.Spacing2,
             borderBottomLeftRadius: odysseyTokens.Spacing2,
           },
 
-          [`.${tableHeadClasses.root} &:last-child`]: {
+          [`.${tableHeadClasses.root} &:last-of-type`]: {
             borderTopRightRadius: odysseyTokens.Spacing2,
             borderBottomRightRadius: odysseyTokens.Spacing2,
           },

@@ -13,7 +13,7 @@
 import { createContext, MouseEventHandler } from "react";
 
 export type MenuContextType = {
-  closeMenu: () => void;
+  closeMenu: (event?: object, reason?: string) => void;
   openMenu: MouseEventHandler<HTMLElement>;
 };
 

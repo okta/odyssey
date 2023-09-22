@@ -11,57 +11,15 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
-import {
-  dataTableTheme,
-  TableColumn,
-  StaticTable,
-  StaticTableProps,
-} from "@okta/odyssey-react-mui/labs";
+import { TableColumn } from "@okta/odyssey-react-mui/labs";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { DataTable, DataTableProps } from "@okta/odyssey-react-mui";
 
 const storybookMeta: Meta = {
   title: "MUI Components/Table/DataTable",
-  component: StaticTable,
-  argTypes: {
-    columns: {
-      control: "array",
-    },
-    data: {
-      control: "object",
-    },
-    getRowId: {
-      control: "function",
-    },
-    fetchMoreData: {
-      control: "function",
-    },
-    hasError: {
-      control: "boolean",
-    },
-    hasRowSelection: {
-      control: "boolean",
-    },
-    initialState: {
-      control: "object",
-    },
-    isFetching: {
-      control: "boolean",
-    },
-    onGlobalFilterChange: {
-      control: "function",
-    },
-    onPaginationChange: {
-      control: "function",
-    },
-    onRowSelectionChange: {
-      control: "function",
-    },
-    state: {
-      control: "object",
-    },
-  },
+  component: DataTable,
+  argTypes: {},
   decorators: [MuiThemeDecorator],
 };
 
@@ -505,17 +463,15 @@ const data: Person[] = [
   },
 ];
 
-export const BasicUsage: StoryObj<StaticTableProps<Person>> = {
+export const BasicUsage: StoryObj<DataTableProps<Person>> = {
   args: {
     columns,
     data,
     getRowId: ({ id }: { id: string }) => id,
+    isColumnResizingEnabled: true,
+    isRowSelectionEnabled: true,
   },
   render: function C(props) {
-    return (
-      <OdysseyThemeProvider themeOverride={dataTableTheme}>
-        <StaticTable {...props} />
-      </OdysseyThemeProvider>
-    );
+    return <DataTable {...props} />;
   },
 };
