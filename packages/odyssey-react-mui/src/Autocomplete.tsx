@@ -26,6 +26,10 @@ export type AutocompleteProps<
   IsCustomValueAllowed extends boolean | undefined
 > = {
   /**
+   * The error message for the Select
+   */
+  errorMessage?: string;
+  /**
    * Enables multiple choice selection
    */
   hasMultipleChoices?: MuiAutocompleteProps<
@@ -125,6 +129,7 @@ const Autocomplete = <
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 >({
+  errorMessage,
   hasMultipleChoices,
   isCustomValueAllowed,
   isDisabled,
@@ -142,6 +147,7 @@ const Autocomplete = <
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
+        errorMessage={errorMessage}
         fieldType="single"
         hasVisibleLabel
         id={InputLabelProps.htmlFor}
@@ -159,7 +165,7 @@ const Autocomplete = <
         )}
       />
     ),
-    [hint, isOptional, label]
+    [errorMessage, hint, isOptional, label]
   );
 
   return (
