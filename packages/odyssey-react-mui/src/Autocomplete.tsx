@@ -182,6 +182,7 @@ const Autocomplete = <
   );
 };
 
-const MemoizedAutocomplete = memo(Autocomplete) as typeof Autocomplete;
+const MemoizedAutocomplete = memo(Autocomplete);
+MemoizedAutocomplete.displayName = "Autocomplete";
 
 export { MemoizedAutocomplete as Autocomplete };
