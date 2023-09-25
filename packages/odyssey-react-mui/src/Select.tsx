@@ -19,10 +19,12 @@ import {
   MenuItem,
   Select as MuiSelect,
   SelectChangeEvent,
+  ListItemSecondaryAction,
 } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 import type { SeleniumProps } from "./SeleniumProps";
+import { CheckIcon } from "./icons.generated";
 
 export type SelectOption = {
   text: string;
@@ -215,6 +217,11 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             <MuiCheckbox checked={selectedValue.includes(option.value)} />
           )}
           {option.text}
+          {selectedValue == option.value && (
+            <ListItemSecondaryAction>
+              <CheckIcon />
+            </ListItemSecondaryAction>
+          )}
         </MenuItem>
       );
     });

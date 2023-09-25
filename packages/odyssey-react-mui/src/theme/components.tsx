@@ -1694,6 +1694,13 @@ export const components = (
         }),
       },
     },
+    MuiListItemSecondaryAction: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+        },
+      },
+    },
     MuiListItemIcon: {
       styleOverrides: {
         root: {
