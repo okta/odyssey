@@ -11,7 +11,12 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { PasswordField, PasswordFieldProps } from "@okta/odyssey-react-mui";
+import { screen } from "@storybook/testing-library";
+import {
+  PasswordField,
+  PasswordFieldProps,
+  odysseyTranslate,
+} from "@okta/odyssey-react-mui";
 import { userEvent, waitFor } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
@@ -84,19 +89,25 @@ export const Default: StoryObj<PasswordFieldProps> = {
       ) as HTMLInputElement;
       expect(fieldElement.type).toBe("password");
 
-      const buttonElement = canvasElement.querySelector(
-        '[aria-label="toggle password visibility"]'
-      );
+      const buttonElement = screen.getByRole("button", {
+        name: odysseyTranslate("passwordfield.icon.label.show"),
+      });
       if (buttonElement) {
         userEvent.type(fieldElement, "qwerty");
         userEvent.click(buttonElement);
         userEvent.tab();
         await waitFor(() => {
           expect(fieldElement.type).toBe("text");
+          expect(buttonElement.ariaLabel).toBe(
+            odysseyTranslate("passwordfield.icon.label.hide")
+          );
         });
         userEvent.click(buttonElement);
         await waitFor(() => {
           expect(fieldElement.type).toBe("password");
+          expect(buttonElement.ariaLabel).toBe(
+            odysseyTranslate("passwordfield.icon.label.show")
+          );
         });
       }
       await waitFor(() => {

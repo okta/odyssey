@@ -23,6 +23,7 @@ import {
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
 import type { SeleniumProps } from "./SeleniumProps";
+import { useTranslation } from "react-i18next";
 
 export type PasswordFieldProps = {
   /**
@@ -111,6 +112,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     },
     ref
   ) => {
+    const { t } = useTranslation();
     const [inputType, setInputType] = useState("password");
 
     const togglePasswordVisibility = useCallback(() => {
@@ -130,7 +132,11 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           endAdornment={
             <InputAdornment position="end">
               <IconButton
-                aria-label="toggle password visibility"
+                aria-label={
+                  inputType === "password"
+                    ? t("passwordfield.icon.label.show")
+                    : t("passwordfield.icon.label.hide")
+                }
                 onClick={togglePasswordVisibility}
               >
                 {inputType === "password" ? <ShowIcon /> : <HideIcon />}
@@ -153,6 +159,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       [
         autoCompleteType,
         hasInitialFocus,
+        t,
         togglePasswordVisibility,
         inputType,
         nameOverride,
