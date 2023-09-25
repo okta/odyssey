@@ -267,6 +267,7 @@ const DataTable = <TData extends DefaultMaterialReactTableData>({
       enableRowVirtualization={data.length > 50}
       enableRowSelection={isRowSelectionEnabled}
       enableColumnActions={false}
+      enableColumnFilters={false}
       enableGlobalFilter={true}
       globalFilterFn="contains"
       getRowId={getRowId}
