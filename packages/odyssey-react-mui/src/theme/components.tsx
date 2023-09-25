@@ -1852,6 +1852,10 @@ export const components = (
             marginBlock: `-${odysseyTokens.Spacing2}`,
             marginInline: `-${odysseyTokens.Spacing2}`,
           },
+
+          ".MuiListItemSecondaryAction-root": {
+            display: "none",
+          },
         },
         icon: {
           right: "unset",
