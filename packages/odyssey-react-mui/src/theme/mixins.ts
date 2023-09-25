@@ -14,7 +14,11 @@ import type { ThemeOptions } from "@mui/material";
 
 import { DesignTokens } from "./theme";
 
-export const mixins = (odysseyTokens: DesignTokens): ThemeOptions["mixins"] => {
+export const mixins = ({
+  odysseyTokens,
+}: {
+  odysseyTokens: DesignTokens;
+}): ThemeOptions["mixins"] => {
   return {
     maxWidth: odysseyTokens.TypographyLineLengthMax,
     borderRadius: odysseyTokens.BorderRadiusMain,
