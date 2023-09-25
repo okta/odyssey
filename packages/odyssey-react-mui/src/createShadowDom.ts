@@ -40,7 +40,7 @@ export const createShadowDom = (containerElement: HTMLElement) => {
 //   shadowRootElement
 // )
 // .render(
-//   <OdysseyProvider emotionRootElement={emotionRootElement}>
+//   <OdysseyProvider emotionRootElement={emotionRootElement} shadowRootElement={shadowRootElement}>
 //     <App />
 //   </OdysseyProvider>
 // )

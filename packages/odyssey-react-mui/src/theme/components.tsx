@@ -51,9 +51,13 @@ import {
 import { DesignTokens } from "./theme";
 import { CSSProperties } from "react";
 
-export const components = (
-  odysseyTokens: DesignTokens
-): ThemeOptions["components"] => {
+export const components = ({
+  odysseyTokens,
+  shadowRootElement,
+}: {
+  odysseyTokens: DesignTokens;
+  shadowRootElement?: HTMLDivElement;
+}): ThemeOptions["components"] => {
   return {
     MuiAlert: {
       defaultProps: {
@@ -1601,6 +1605,14 @@ export const components = (
         },
       },
     },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: "unset",
+          color: "inherit",
+        },
+      },
+    },
     MuiListSubheader: {
       styleOverrides: {
         root: {
@@ -1694,12 +1706,9 @@ export const components = (
         }),
       },
     },
-    MuiListItemIcon: {
-      styleOverrides: {
-        root: {
-          minWidth: "unset",
-          color: "inherit",
-        },
+    MuiModal: {
+      defaultProps: {
+        container: shadowRootElement,
       },
     },
     MuiNativeSelect: {
@@ -1720,6 +1729,9 @@ export const components = (
       },
     },
     MuiPopover: {
+      defaultProps: {
+        container: shadowRootElement,
+      },
       styleOverrides: {
         paper: {
           marginBlockStart: odysseyTokens.Spacing1,
@@ -1727,6 +1739,11 @@ export const components = (
           borderStyle: odysseyTokens.BorderStyleMain,
           borderColor: odysseyTokens.HueNeutral200,
         },
+      },
+    },
+    MuiPopper: {
+      defaultProps: {
+        container: shadowRootElement,
       },
     },
     MuiRadio: {
