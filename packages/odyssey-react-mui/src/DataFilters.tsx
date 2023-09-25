@@ -29,7 +29,6 @@ import {
   Paragraph,
   Subordinate,
   TextField,
-  TextFieldProps,
 } from ".";
 
 type FilterButtonProps = {
@@ -45,13 +44,13 @@ type FilterPopoverProps = {
   filters: Array<DataFilter>;
   isOpen: boolean;
   onClose: MuiPopoverProps["onClose"];
-  setFiltersFn: TextFieldProps["onChange"];
+  setFiltersFn: (id: string, value: string) => void;
 };
 
 type DataFiltersProps = {
   allFilters: Array<DataFilter>;
   activeFilters?: Array<DataFilter>;
-  onChange: TextFieldProps["onChange"];
+  onChange: (id: string, value: string) => void;
   onClosePopover: MuiPopoverProps["onClose"];
 };
 
@@ -96,7 +95,7 @@ const FilterPopover = ({
         <TextField
           hasInitialFocus
           label={filter.name ?? ""}
-          value={filter.value}
+          value={typeof filter.value === "string" ? filter.value : ""}
           onChange={(ev) =>
             setFiltersFn?.({ id: filter.id, value: ev.target.value })
           }
@@ -113,7 +112,7 @@ const DataFilters = ({
   onClosePopover,
 }: DataFiltersProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const menuRef = useRef();
+  const menuRef = useRef<HTMLDivElement>(null);
   const [popoverState, setPopoverState] = useState<{
     isOpen: boolean;
     anchorEl: HTMLElement | null;
@@ -132,7 +131,7 @@ const DataFilters = ({
           buttonLabel="Filter"
           size="small"
           buttonVariant="tertiary"
-          onClose={({ reason }: { reason: string | undefined }) => {
+          onClose={(reason) => {
             if (reason !== undefined) {
               setIsMenuOpen(false);
             }
@@ -148,7 +147,7 @@ const DataFilters = ({
                 setPopoverState({
                   isOpen: true,
                   anchorOrigin: { vertical: "top", horizontal: "right" },
-                  anchorEl: ev.target,
+                  anchorEl: ev.target as HTMLElement,
                   filter: filter,
                 });
               }}
@@ -186,7 +185,7 @@ const DataFilters = ({
                 setPopoverState({
                   isOpen: true,
                   anchorOrigin: { vertical: "bottom", horizontal: "left" },
-                  anchorEl: ev.target,
+                  anchorEl: ev.target as HTMLElement,
                   filter: filter,
                 });
               }}
@@ -201,7 +200,10 @@ const DataFilters = ({
         filters={allFilters}
         isOpen={popoverState.isOpen}
         setFiltersFn={onChange}
-        onClose={(ev: MouseEvent) => {
+        onClose={(
+          ev: MouseEvent,
+          reason: "backdropClick" | "escapeKeyDown"
+        ) => {
           if (menuRef.current) {
             const menuRect = menuRef.current.getBoundingClientRect();
             const clickInsideMenu =
@@ -216,7 +218,7 @@ const DataFilters = ({
           }
 
           setPopoverState({ ...popoverState, isOpen: false });
-          onClosePopover?.(ev);
+          onClosePopover?.(ev, reason);
         }}
       />
     </>

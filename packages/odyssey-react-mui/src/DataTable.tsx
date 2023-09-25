@@ -22,20 +22,21 @@ import { DefaultMaterialReactTableData, MaterialReactTableProps } from "./labs";
 import { PopoverProps as MuiPopoverProps } from "@mui/material";
 import MaterialReactTable, {
   MRT_DensityState,
+  MRT_Column,
   MRT_TableInstance,
   MRT_Virtualizer,
 } from "material-react-table";
 import { ArrowDownIcon, FilterIcon, SettingsIcon } from "./icons.generated";
 import { Box } from "./Box";
 import { SearchField } from "./SearchField";
-import { Badge, Checkbox } from "@mui/material";
+import { Badge } from "@mui/material";
 import { Button, ButtonProps } from "./Button";
 import { DataFilters, DataFilter } from "./DataFilters";
 import { RadioGroup } from "./RadioGroup";
+import { Checkbox } from "./Checkbox";
 import { Radio } from "./Radio";
 import { Dialog } from "./Dialog";
 import { CheckboxGroup } from "./CheckboxGroup";
-import { TextFieldProps } from "./TextField";
 
 export type DataTableProps<TData extends DefaultMaterialReactTableData> = {
   columns: MaterialReactTableProps<TData>["columns"];
@@ -53,7 +54,7 @@ type DataTableSettingsProps = {
     SetStateAction<
       MaterialReactTableProps<DefaultMaterialReactTableData>["state"]
     >
-  >; // Assuming DefaultMaterialReactTableData is the default type
+  >;
   columns: MaterialReactTableProps<DefaultMaterialReactTableData>["columns"];
   visibleColumns: MaterialReactTableProps<DefaultMaterialReactTableData>["columns"];
 };
@@ -73,7 +74,7 @@ const DataTableToolbar = ({
   isFiltersOpen: boolean;
   onToggleFilters: ButtonProps["onClick"];
   onToggleSettings: ButtonProps["onClick"];
-  onChangeFilters: TextFieldProps["onChange"];
+  onChangeFilters: (id: string, value: string) => void;
   onClosePopover: MuiPopoverProps["onClose"];
   allFilters: Array<DataFilter>;
   activeFilters: Array<DataFilter>;
@@ -105,7 +106,7 @@ const DataTableToolbar = ({
               variant={activeFiltersCount > 0 ? "secondary" : "tertiary"}
               endIcon={<FilterIcon />}
               onClick={() => {
-                onToggleFilters(!isFiltersOpen);
+                onToggleFilters?.(!isFiltersOpen);
               }}
               ariaLabel="Open table filters"
             />
@@ -114,7 +115,7 @@ const DataTableToolbar = ({
             variant="tertiary"
             startIcon={<SettingsIcon />}
             onClick={() => {
-              onToggleSettings(true);
+              onToggleSettings?.(true);
             }}
             ariaLabel="Open table settings"
           />
@@ -206,10 +207,13 @@ const DataTableSettings = ({
             {columns.map((column) => (
               <Checkbox
                 key={column.id}
-                label={column.columnDef.header}
-                isDefaultChecked={column.getIsVisible()}
-                onChange={() => column.toggleVisibility()}
-                isDisabled={column.getIsVisible() && visibleColumns <= 1}
+                label={(column as MRT_Column).columnDef.header}
+                isDefaultChecked={(column as MRT_Column).getIsVisible()}
+                onChange={() => (column as MRT_Column).toggleVisibility()}
+                isDisabled={
+                  (column as MRT_Column).getIsVisible() &&
+                  visibleColumns.length <= 1
+                }
               />
             ))}
           </>
