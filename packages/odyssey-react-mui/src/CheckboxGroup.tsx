@@ -15,6 +15,7 @@ import { memo, ReactElement, useCallback } from "react";
 
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type CheckboxGroupProps = {
   /**
@@ -32,10 +33,6 @@ export type CheckboxGroupProps = {
    */
   hint?: string;
   /**
-   * The id of the `input` element. This will also be the input's `name` field.
-   */
-  id?: string;
-  /**
    * If `true`, the CheckboxGroup is disabled
    */
   isDisabled?: boolean;
@@ -47,24 +44,24 @@ export type CheckboxGroupProps = {
    * The label text for the CheckboxGroup
    */
   label: string;
-};
+} & SeleniumProps;
 
 const CheckboxGroup = ({
   children,
   errorMessage,
   hint,
-  id: idOverride,
   isDisabled,
   isRequired = false,
   label,
+  testId,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, id }) => (
-      <MuiFormGroup aria-describedby={ariaDescribedBy} id={id}>
+    ({ ariaDescribedBy }) => (
+      <MuiFormGroup aria-describedby={ariaDescribedBy} data-se={testId}>
         {children}
       </MuiFormGroup>
     ),
-    [children]
+    [children, testId]
   );
 
   return (
@@ -73,7 +70,6 @@ const CheckboxGroup = ({
       fieldType="group"
       hasVisibleLabel={true}
       hint={hint}
-      id={idOverride}
       isDisabled={isDisabled}
       isOptional={!isRequired}
       label={label}

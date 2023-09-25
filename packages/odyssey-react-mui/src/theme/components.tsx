@@ -1396,7 +1396,6 @@ export const components = (
     MuiInputBase: {
       defaultProps: {
         minRows: 3,
-        required: true,
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => ({

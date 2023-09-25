@@ -19,6 +19,8 @@ import { Typography } from "./Typography";
 import { memo, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import type { SeleniumProps } from "./SeleniumProps";
+
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
 export type CheckboxProps = {
@@ -30,6 +32,10 @@ export type CheckboxProps = {
    * The ID of the element that labels the Checkbox
    */
   ariaLabelledBy?: string;
+  /**
+   * The id of the `input` element.
+   */
+  id?: string;
   /**
    * Determines whether the Checkbox is checked
    */
@@ -51,7 +57,7 @@ export type CheckboxProps = {
    */
   label?: string;
   /**
-   * The name attribute of the Checkbox
+   * The name of the `input` element. Defaults to the `id` if not set.
    */
   name?: string;
   /**
@@ -66,18 +72,20 @@ export type CheckboxProps = {
    * The value attribute of the Checkbox
    */
   value?: string;
-};
+} & SeleniumProps;
 
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
+  id: idOverride,
   isDefaultChecked = false,
   isDisabled,
   isIndeterminate,
   isRequired,
   label: labelProp,
-  name,
+  name: nameOverride,
   onChange: onChangeProp,
+  testId,
   validity = "inherit",
   value,
 }: CheckboxProps) => {
@@ -122,9 +130,11 @@ const Checkbox = ({
       control={
         <MuiCheckbox indeterminate={isIndeterminate} required={isRequired} />
       }
+      data-se={testId}
       disabled={isDisabled}
+      id={idOverride}
       label={label}
-      name={name}
+      name={nameOverride ?? idOverride}
       onChange={onChange}
       value={value}
       required={isRequired}

@@ -22,6 +22,7 @@ import {
 } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type SelectOption = {
   text: string;
@@ -59,6 +60,10 @@ export type SelectProps = {
    */
   label: string;
   /**
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
+  /**
    * Callback fired when the Select loses focus
    */
   onBlur?: MuiSelectProps["onBlur"];
@@ -78,7 +83,7 @@ export type SelectProps = {
    * The value or values selected in the Select
    */
   value?: string | string[];
-};
+} & SeleniumProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
@@ -105,10 +110,12 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       isMultiSelect = false,
       isOptional = false,
       label,
+      name: nameOverride,
       onBlur,
       onChange: onChangeProp,
       onFocus,
       value,
+      testId,
       options,
     },
     ref
@@ -216,9 +223,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       () => (
         <MuiSelect
           children={children}
+          data-se={testId}
           id={idOverride}
           multiple={isMultiSelect}
-          name={idOverride}
+          name={nameOverride ?? idOverride}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
@@ -229,16 +237,18 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         />
       ),
       [
+        children,
         idOverride,
         isMultiSelect,
+        label,
+        nameOverride,
         onBlur,
         onChange,
         onFocus,
         ref,
-        children,
         renderValue,
         selectedValue,
-        label,
+        testId,
       ]
     );
 

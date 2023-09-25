@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/okta/odyssey/compare/v1.1.0...v1.1.1) (2023-09-15)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.1.0](https://github.com/okta/odyssey/compare/v1.0.5...v1.1.0) (2023-09-14)
+
+### Features
+
+- enable name in all form fields ([#1969](https://github.com/okta/odyssey/issues/1969)) ([45ae220](https://github.com/okta/odyssey/commit/45ae220ca8a2bce0af484a52001e5477cf253147))
+
+### Bug Fixes
+
+- add @mui/system as dependency ([8294649](https://github.com/okta/odyssey/commit/8294649debb136a2c92733b8427aedf838200a07))
+- flip ordering of state to allow consumer to override ([4c48230](https://github.com/okta/odyssey/commit/4c482302d8ca74fa8566afcf66989064dd397d8a))
+- html `required` attribute removed when adding `isOptional` prop ([#1965](https://github.com/okta/odyssey/issues/1965)) ([793210d](https://github.com/okta/odyssey/commit/793210d8c3f3aa4aea3df815e30cb1029c71d511))
+- make global + column filtering work ([5df3006](https://github.com/okta/odyssey/commit/5df30067887a456fc3ad373ef8e548e4386590b1))
+- onGlobalFilterChange should fire when string removed ([#1970](https://github.com/okta/odyssey/issues/1970)) ([1c424b9](https://github.com/okta/odyssey/commit/1c424b9ac86547f4fb55b955f240f24fac83cb2b))
+- prettier adjustments ([cd7111c](https://github.com/okta/odyssey/commit/cd7111c9c510591db866831c58db3ed6f8e6466f))
+- static tables to always have virtualization enabled ([#1967](https://github.com/okta/odyssey/issues/1967)) ([f4362ce](https://github.com/okta/odyssey/commit/f4362ce45e7f70aa3667b361f4696af063a78612))
+
 ## [1.0.5](https://github.com/okta/odyssey/compare/v1.0.4...v1.0.5) (2023-09-11)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui

@@ -22,6 +22,8 @@ import {
 
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
+import { useTranslation } from "react-i18next";
 
 export type PasswordFieldProps = {
   /**
@@ -63,6 +65,10 @@ export type PasswordFieldProps = {
    */
   label: string;
   /**
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
+  /**
    * Callback fired when the `input` element loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -82,7 +88,7 @@ export type PasswordFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-};
+} & SeleniumProps;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
@@ -96,14 +102,17 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       isOptional = false,
       isReadOnly,
       label,
+      name: nameOverride,
       onChange,
       onFocus,
       onBlur,
       placeholder,
+      testId,
       value,
     },
     ref
   ) => {
+    const { t } = useTranslation();
     const [inputType, setInputType] = useState("password");
 
     const togglePasswordVisibility = useCallback(() => {
@@ -119,10 +128,15 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
+          data-se={testId}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
-                aria-label="toggle password visibility"
+                aria-label={
+                  inputType === "password"
+                    ? t("passwordfield.icon.label.show")
+                    : t("passwordfield.icon.label.hide")
+                }
                 onClick={togglePasswordVisibility}
               >
                 {inputType === "password" ? <ShowIcon /> : <HideIcon />}
@@ -130,7 +144,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
             </InputAdornment>
           }
           id={id}
-          name={id}
+          name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -145,8 +159,10 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       [
         autoCompleteType,
         hasInitialFocus,
+        t,
         togglePasswordVisibility,
         inputType,
+        nameOverride,
         onChange,
         onFocus,
         onBlur,
@@ -154,6 +170,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         isOptional,
         isReadOnly,
         ref,
+        testId,
         value,
       ]
     );
