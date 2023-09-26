@@ -7,14 +7,14 @@ import { CssBaseline, ScopedCssBaseline } from "@mui/material";
 import { ThemeProvider as StorybookThemeProvider } from "@storybook/theming";
 import type { Decorator } from "@storybook/react";
 import { Fragment } from "react";
-import * as Tokens from "@okta/odyssey-design-tokens";
+import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
 const styles = {
   fontFamily:
     "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
 };
 
-const odysseyTheme = createOdysseyMuiTheme(Tokens);
+const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
 
 export const MuiThemeDecorator: Decorator = (Story) => (
   <OdysseyThemeProvider>

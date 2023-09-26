@@ -31,7 +31,7 @@ import {
 
 import { MuiThemeDecorator } from "../../.storybook/components/MuiThemeDecorator";
 import { useMemo } from "react";
-import * as Tokens from "@okta/odyssey-design-tokens";
+import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
 export default {
   title: "Customization/Components",
@@ -125,7 +125,7 @@ export const CustomComponentStory: StoryObj = {
         },
       };
     }, []);
-    const odysseyTheme = createOdysseyMuiTheme(Tokens);
+    const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
     const customOdysseyTheme = useMemo(
       () =>
         themeOverrides && createTheme(deepmerge(odysseyTheme, themeOverrides)),
