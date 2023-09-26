@@ -170,6 +170,7 @@ const Autocomplete = <
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
+      filterSelectedOptions={true}
       loading={isLoading}
       multiple={hasMultipleChoices}
       onChange={onChange}
