@@ -240,24 +240,7 @@ const storybookMeta: Meta<SelectProps> = {
 
 export default storybookMeta;
 
-const Template: StoryObj<SelectProps> = {
-  render: function C(args) {
-    return (
-      <Select
-        label={args.label}
-        hint={args.hint}
-        errorMessage={args.errorMessage}
-        isDisabled={args.isDisabled}
-        isMultiSelect={args.isMultiSelect}
-        isOptional={args.isOptional}
-        options={args.options}
-      />
-    );
-  },
-};
-
 export const Default: StoryObj<SelectProps> = {
-  ...Template,
   play: async ({ canvasElement, step }) => {
     await step("Select Earth from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
@@ -281,14 +264,12 @@ export const Default: StoryObj<SelectProps> = {
 Default.args = {};
 
 export const Disabled: StoryObj<SelectProps> = {
-  ...Template,
   args: {
     isDisabled: true,
   },
 };
 
 export const Error: StoryObj<SelectProps> = {
-  ...Template,
   args: {
     errorMessage: "Select your destination.",
   },
@@ -300,7 +281,6 @@ export const Error: StoryObj<SelectProps> = {
 };
 
 export const OptionsObject: StoryObj<SelectProps> = {
-  ...Template,
   args: {
     options: optionsObject,
   },
@@ -315,7 +295,6 @@ export const OptionsObject: StoryObj<SelectProps> = {
 };
 
 export const OptionsGrouped: StoryObj<SelectProps> = {
-  ...Template,
   args: {
     options: optionsGrouped,
   },
@@ -330,7 +309,6 @@ export const OptionsGrouped: StoryObj<SelectProps> = {
 };
 
 export const MultiSelect: StoryObj<SelectProps> = {
-  ...Template,
   args: {
     isMultiSelect: true,
   },
