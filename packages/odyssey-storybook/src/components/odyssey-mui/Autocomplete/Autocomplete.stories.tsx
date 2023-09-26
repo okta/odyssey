@@ -50,6 +50,15 @@ const storybookMeta: Meta<typeof Autocomplete> = {
   title: "MUI Components/Forms/Autocomplete",
   component: Autocomplete,
   argTypes: {
+    errorMessage: {
+      control: "text",
+      description: "The error message for the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     hasMultipleChoices: {
       control: "boolean",
       description: "Enables multiple choice selection",
@@ -89,6 +98,15 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     isLoading: {
       control: "boolean",
       description: "Displays a loading indicator",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
+    isOptional: {
+      control: "boolean",
+      description: "If `true`, the select component is optional",
       table: {
         type: {
           summary: "boolean",
@@ -301,6 +319,12 @@ export const MultipleReadOnly: StoryObj<AutocompleteType> = {
     hasMultipleChoices: true,
     isReadOnly: true,
     value: [{ label: "Tycho Station" }],
+  },
+};
+
+export const Optional: StoryObj<AutocompleteType> = {
+  args: {
+    isOptional: true,
   },
 };
 
