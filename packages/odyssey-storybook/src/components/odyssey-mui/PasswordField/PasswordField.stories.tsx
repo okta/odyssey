@@ -75,9 +75,10 @@ const storybookMeta: Meta<PasswordFieldProps> = {
   },
   args: {
     autoCompleteType: "current-password",
-    label: "Password",
+    hasShowPassword: true,
     isOptional: false,
     id: "password-input",
+    label: "Password",
   },
   decorators: [MuiThemeDecorator],
 };
@@ -131,9 +132,9 @@ export const NoShowPassword: StoryObj<PasswordFieldProps> = {
       ) as HTMLInputElement;
       expect(fieldElement.type).toBe("password");
 
-      const buttonElement = canvasElement.querySelector(
-        '[aria-label="toggle password visibility"]'
-      );
+      const buttonElement = screen.queryByRole("button", {
+        name: odysseyTranslate("passwordfield.icon.label.show"),
+      });
       expect(buttonElement).toBe(null);
     });
   },
