@@ -71,10 +71,6 @@ export type TypographyProps = {
    */
   children: ReactNode;
   /**
-   * Additional classes to add to the component.
-   */
-  classes?: object;
-  /**
    * The color of the text.
    */
   color?: (typeof typographyColorValues)[number];
@@ -93,7 +89,6 @@ const Typography = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component: componentProp,
   testId,
@@ -118,7 +113,6 @@ const Typography = ({
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       children={children}
-      classes={classes}
       color={color}
       component={component}
       data-se={testId}
@@ -135,7 +129,6 @@ const Heading1 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
   testId,
@@ -145,7 +138,6 @@ const Heading1 = ({
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
     data-se={testId}
@@ -161,7 +153,6 @@ const Heading2 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
   testId,
@@ -171,7 +162,6 @@ const Heading2 = ({
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
     data-se={testId}
@@ -187,7 +177,6 @@ const Heading3 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
   testId,
@@ -197,7 +186,6 @@ const Heading3 = ({
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
     data-se={testId}
@@ -213,7 +201,6 @@ const Heading4 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
   testId,
@@ -223,7 +210,6 @@ const Heading4 = ({
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
     data-se={testId}
@@ -239,7 +225,6 @@ const Heading5 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
   testId,
@@ -249,7 +234,6 @@ const Heading5 = ({
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
     data-se={testId}
@@ -265,7 +249,6 @@ const Heading6 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
   testId,
@@ -275,7 +258,6 @@ const Heading6 = ({
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
     data-se={testId}
@@ -291,7 +273,6 @@ const Paragraph = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
   testId,
@@ -301,7 +282,6 @@ const Paragraph = ({
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
     data-se={testId}
@@ -317,7 +297,6 @@ const Subordinate = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
   testId,
@@ -327,7 +306,6 @@ const Subordinate = ({
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
     data-se={testId}
@@ -343,7 +321,6 @@ const Support = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
   testId,
@@ -353,7 +330,6 @@ const Support = ({
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
     data-se={testId}
@@ -369,7 +345,6 @@ const Legend = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
   testId,
@@ -379,7 +354,6 @@ const Legend = ({
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
     data-se={testId}
