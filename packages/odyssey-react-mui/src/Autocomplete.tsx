@@ -43,6 +43,10 @@ export type AutocompleteProps<
    */
   hint?: string;
   /**
+   * The id attribute of the Select
+   */
+  id?: string;
+  /**
    * Allows the input of custom values
    */
   isCustomValueAllowed?: MuiAutocompleteProps<
@@ -87,6 +91,19 @@ export type AutocompleteProps<
    */
   label: string;
   /**
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
+  /**
+   * Callback fired when the autocomplete loses focus
+   */
+  onBlur?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["onBlur"];
+  /**
    * Callback fired when the value of the autocomplete input changes
    */
   onChange?: MuiAutocompleteProps<
@@ -104,6 +121,15 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["onInputChange"];
+  /**
+   * Callback fired when the Select gains focus
+   */
+  onFocus?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["onFocus"];
   /**
    * The options for the Autocomplete input
    */
@@ -131,6 +157,7 @@ const Autocomplete = <
 >({
   errorMessage,
   hasMultipleChoices,
+  id: idOverride,
   isCustomValueAllowed,
   isDisabled,
   isLoading,
@@ -138,8 +165,11 @@ const Autocomplete = <
   isReadOnly,
   hint,
   label,
+  name: nameOverride,
+  onBlur,
   onChange,
   onInputChange,
+  onFocus,
   options,
   value,
   testId,
@@ -160,12 +190,13 @@ const Autocomplete = <
             {...InputProps}
             aria-describedby={ariaDescribedBy}
             id={id}
+            name={nameOverride ?? id}
             required={!isOptional}
           />
         )}
       />
     ),
-    [errorMessage, hint, isOptional, label]
+    [errorMessage, hint, isOptional, label, nameOverride]
   );
 
   return (
@@ -177,10 +208,13 @@ const Autocomplete = <
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
       filterSelectedOptions={true}
+      id={idOverride}
       loading={isLoading}
       multiple={hasMultipleChoices}
+      onBlur={onBlur}
       onChange={onChange}
       onInputChange={onInputChange}
+      onFocus={onFocus}
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}
