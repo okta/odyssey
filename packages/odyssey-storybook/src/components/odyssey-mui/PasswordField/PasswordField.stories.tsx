@@ -11,7 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { screen } from "@storybook/testing-library";
+import { within } from "@storybook/testing-library";
 import {
   PasswordField,
   PasswordFieldProps,
@@ -86,14 +86,15 @@ const storybookMeta: Meta<PasswordFieldProps> = {
 export default storybookMeta;
 
 export const Default: StoryObj<PasswordFieldProps> = {
-  play: async ({ args, canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     await step("toggle password", async () => {
-      const fieldElement = canvasElement.querySelector(
-        `#${args.id}`
-      ) as HTMLInputElement;
-      expect(fieldElement.type).toBe("password");
+      const canvas = within(canvasElement);
+      const fieldElement = canvas.getByRole("textbox", {
+        name: "Password",
+      });
+      expect(fieldElement).toHaveAttribute("type", "password");
 
-      const buttonElement = screen.getByRole("button", {
+      const buttonElement = canvas.getByRole("button", {
         name: odysseyTranslate("passwordfield.icon.label.show"),
       });
       if (buttonElement) {
@@ -101,14 +102,14 @@ export const Default: StoryObj<PasswordFieldProps> = {
         userEvent.click(buttonElement);
         userEvent.tab();
         await waitFor(() => {
-          expect(fieldElement.type).toBe("text");
+          expect(fieldElement).toHaveAttribute("type", "text");
           expect(buttonElement.ariaLabel).toBe(
             odysseyTranslate("passwordfield.icon.label.hide")
           );
         });
         userEvent.click(buttonElement);
         await waitFor(() => {
-          expect(fieldElement.type).toBe("password");
+          expect(fieldElement).toHaveAttribute("type", "password");
           expect(buttonElement.ariaLabel).toBe(
             odysseyTranslate("passwordfield.icon.label.show")
           );
@@ -125,14 +126,15 @@ export const NoShowPassword: StoryObj<PasswordFieldProps> = {
   args: {
     hasShowPassword: false,
   },
-  play: async ({ args, canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     await step("toggle password", async () => {
-      const fieldElement = canvasElement.querySelector(
-        `#${args.id}`
-      ) as HTMLInputElement;
-      expect(fieldElement.type).toBe("password");
+      const canvas = within(canvasElement);
+      const fieldElement = canvas.getByRole("textbox", {
+        name: "Password",
+      });
+      expect(fieldElement).toHaveAttribute("type", "password");
 
-      const buttonElement = screen.queryByRole("button", {
+      const buttonElement = canvas.queryByRole("button", {
         name: odysseyTranslate("passwordfield.icon.label.show"),
       });
       expect(buttonElement).toBe(null);

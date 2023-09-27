@@ -151,6 +151,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
             )
           }
           id={id}
+          inputProps={{ role: "textbox" }}
           name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}
