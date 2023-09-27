@@ -77,6 +77,15 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
+    id: {
+      control: "text",
+      description: "The id attribute of the autocomplete component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     isCustomValueAllowed: {
       control: "boolean",
       description: "Allows the input of custom values",
@@ -131,6 +140,26 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
+    name: {
+      control: "text",
+      description:
+        "The name of the select component. Defaults to the `id` if not set.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onBlur: {
+      control: null,
+      description: "Callback fired when the autocomplete component loses focus",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
     onChange: {
       control: null,
       description:
@@ -146,6 +175,16 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       control: null,
       description:
         "Callback fired when the input value of the autocomplete input changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onFocus: {
+      control: null,
+      description: "Callback fired when the select component gains focus",
       table: {
         type: {
           summary: "func",
