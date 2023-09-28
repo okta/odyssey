@@ -688,7 +688,7 @@ export const components = ({
               height: ".64em",
               marginInlineEnd: odysseyTokens.Spacing2,
               borderRadius: "100%",
-              backgroundColor: "transparent",
+              backgroundColor: odysseyTokens.HueNeutral600,
               borderColor: odysseyTokens.TypographyColorBody,
               borderWidth: odysseyTokens.BorderWidthHeavy,
               borderStyle: odysseyTokens.BorderStyleMain,
