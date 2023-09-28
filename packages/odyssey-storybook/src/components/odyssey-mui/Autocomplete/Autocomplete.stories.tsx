@@ -213,8 +213,9 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
   },
   args: {
-    label: "Destination",
     hint: "Select your destination in the Sol system.",
+    id: "testId",
+    label: "Destination",
     options: stations,
   },
   decorators: [MuiThemeDecorator],
@@ -260,6 +261,10 @@ export const Default: StoryObj<AutocompleteType> = {
       userEvent.click(clearButton);
       expect(comboBoxElement.value).toBe("");
       userEvent.tab();
+    });
+    step("Check id and name", () => {
+      expect(comboBoxElement.getAttribute("id")).toBe("testId");
+      expect(comboBoxElement.getAttribute("name")).toBe("testId");
     });
   },
 };
@@ -317,6 +322,7 @@ export const Loading: StoryObj<AutocompleteType> = {
 export const Multiple: StoryObj<AutocompleteType> = {
   args: {
     hasMultipleChoices: true,
+    name: "testName",
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -341,6 +347,10 @@ export const Multiple: StoryObj<AutocompleteType> = {
         expect(comboBoxElement.value).toBe("");
         userEvent.tab();
       });
+    });
+    step("Check id and name", () => {
+      expect(comboBoxElement.getAttribute("id")).toBe("testId");
+      expect(comboBoxElement.getAttribute("name")).toBe("testName");
     });
   },
 };
