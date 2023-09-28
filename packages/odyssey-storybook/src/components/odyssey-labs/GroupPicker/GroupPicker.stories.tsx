@@ -12,9 +12,9 @@
 
 import {
   GroupPicker,
+  GroupPickerProps,
   GroupPickerOptionType,
 } from "@okta/odyssey-react-mui/labs";
-import { AutocompleteProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -169,8 +169,8 @@ const storybookMeta: Meta<typeof GroupPicker> = {
 
 export default storybookMeta;
 
-type GroupPickerPropsType = AutocompleteProps<
-  GroupPickerOptionType,
+type GroupPickerPropsType = GroupPickerProps<
+  GroupPickerOptionType | undefined,
   boolean | undefined,
   boolean | undefined
 >;
