@@ -76,7 +76,7 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     id: {
       control: "text",
       description:
-        "An optional id for the HTML elemenet rendered by the component. It will also be the `name` prop by default",
+        "An optional id for the HTML elemenet rendered by the component.",
       table: {
         type: {
           summary: "string",
@@ -221,6 +221,32 @@ export const Default: StoryObj<PasswordFieldProps> = {
   },
 };
 
+export const Disabled: StoryObj<PasswordFieldProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "The values of disabled inputs will not be submitted.",
+      },
+    },
+  },
+  args: {
+    isDisabled: true,
+    value: "PasswordValue",
+  },
+};
+
+export const Error: StoryObj<PasswordFieldProps> = {
+  args: {
+    errorMessage: "This password is incorrect",
+  },
+};
+
+export const Hint: StoryObj<PasswordFieldProps> = {
+  args: {
+    hint: "Your first pet's name",
+  },
+};
+
 export const NoShowPassword: StoryObj<PasswordFieldProps> = {
   args: {
     hasShowPassword: false,
@@ -238,5 +264,25 @@ export const NoShowPassword: StoryObj<PasswordFieldProps> = {
       });
       expect(buttonElement).toBe(null);
     });
+  },
+};
+
+export const Optional: StoryObj<PasswordFieldProps> = {
+  args: {
+    isOptional: true,
+  },
+};
+
+export const ReadOnly: StoryObj<PasswordFieldProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "The values of readonly inputs will be submitted.",
+      },
+    },
+  },
+  args: {
+    isReadOnly: true,
+    value: "PasswordValue",
   },
 };
