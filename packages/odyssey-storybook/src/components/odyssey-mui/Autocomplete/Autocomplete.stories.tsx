@@ -152,7 +152,8 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     onBlur: {
       control: null,
-      description: "Callback fired when the autocomplete component loses focus",
+      description:
+        "Callback fired when the autocomplete component loses focus.",
       table: {
         type: {
           summary: "func",
@@ -162,8 +163,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     onChange: {
       control: null,
-      description:
-        "Callback fired when the value of the autocomplete input changes",
+      description: "Callback fired when a selection is made.",
       table: {
         type: {
           summary: "func",
@@ -173,8 +173,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     onInputChange: {
       control: null,
-      description:
-        "Callback fired when the input value of the autocomplete input changes",
+      description: "Callback fired when the textbox receives typed characters.",
       table: {
         type: {
           summary: "func",
@@ -184,7 +183,8 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     onFocus: {
       control: null,
-      description: "Callback fired when the select component gains focus",
+      description:
+        "Callback fired when the autocomplete component gains focus.",
       table: {
         type: {
           summary: "func",

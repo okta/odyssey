@@ -95,7 +95,7 @@ export type AutocompleteProps<
    */
   name?: string;
   /**
-   * Callback fired when the autocomplete loses focus
+   * Callback fired when the autocomplete loses focus.
    */
   onBlur?: MuiAutocompleteProps<
     OptionType,
@@ -104,7 +104,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["onBlur"];
   /**
-   * Callback fired when the value of the autocomplete input changes
+   * Callback fired when a selection is made.
    */
   onChange?: MuiAutocompleteProps<
     OptionType,
@@ -113,7 +113,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["onChange"];
   /**
-   * Callback fired when the input value of the autocomplete input changes
+   * Callback fired when the textbox receives typed characters.
    */
   onInputChange?: MuiAutocompleteProps<
     OptionType,
@@ -122,7 +122,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["onInputChange"];
   /**
-   * Callback fired when the Select gains focus
+   * Callback fired when the autocomplete gains focus.
    */
   onFocus?: MuiAutocompleteProps<
     OptionType,
