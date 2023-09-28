@@ -50,6 +50,15 @@ const storybookMeta: Meta<typeof Autocomplete> = {
   title: "MUI Components/Forms/Autocomplete",
   component: Autocomplete,
   argTypes: {
+    errorMessage: {
+      control: "text",
+      description: "The error message for the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     hasMultipleChoices: {
       control: "boolean",
       description: "Enables multiple choice selection",
@@ -62,6 +71,15 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     hint: {
       control: "text",
       description: "The hint text for the autocomplete input",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    id: {
+      control: "text",
+      description: "The id attribute of the autocomplete component",
       table: {
         type: {
           summary: "string",
@@ -95,6 +113,15 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
+    isOptional: {
+      control: "boolean",
+      description: "If `true`, the select component is optional",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isReadOnly: {
       control: "boolean",
       description: "Makes the autocomplete input read-only",
@@ -113,10 +140,30 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
-    onChange: {
+    name: {
+      control: "text",
+      description:
+        "The name of the select component. Defaults to the `id` if not set.",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
+    onBlur: {
       control: null,
       description:
-        "Callback fired when the value of the autocomplete input changes",
+        "Callback fired when the autocomplete component loses focus.",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onChange: {
+      control: null,
+      description: "Callback fired when a selection is made.",
       table: {
         type: {
           summary: "func",
@@ -126,8 +173,18 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     onInputChange: {
       control: null,
+      description: "Callback fired when the textbox receives typed characters.",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
+      },
+    },
+    onFocus: {
+      control: null,
       description:
-        "Callback fired when the input value of the autocomplete input changes",
+        "Callback fired when the autocomplete component gains focus.",
       table: {
         type: {
           summary: "func",
@@ -156,8 +213,9 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
   },
   args: {
-    label: "Destination",
     hint: "Select your destination in the Sol system.",
+    id: "testId",
+    label: "Destination",
     options: stations,
   },
   decorators: [MuiThemeDecorator],
@@ -204,6 +262,10 @@ export const Default: StoryObj<AutocompleteType> = {
       expect(comboBoxElement.value).toBe("");
       userEvent.tab();
     });
+    step("Check id and name", () => {
+      expect(comboBoxElement.getAttribute("id")).toBe("testId");
+      expect(comboBoxElement.getAttribute("name")).toBe("testId");
+    });
   },
 };
 
@@ -211,6 +273,17 @@ export const Disabled: StoryObj<AutocompleteType> = {
   args: {
     isDisabled: true,
     value: { label: "Tycho Station" },
+  },
+};
+
+export const Error: StoryObj<AutocompleteType> = {
+  args: {
+    errorMessage: "Select your destination.",
+  },
+  play: async ({ step }) => {
+    await step("Check for a11y errors on Select Error", async () => {
+      await waitFor(() => axeRun("Select Error"));
+    });
   },
 };
 
@@ -249,6 +322,7 @@ export const Loading: StoryObj<AutocompleteType> = {
 export const Multiple: StoryObj<AutocompleteType> = {
   args: {
     hasMultipleChoices: true,
+    name: "testName",
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -274,6 +348,10 @@ export const Multiple: StoryObj<AutocompleteType> = {
         userEvent.tab();
       });
     });
+    step("Check id and name", () => {
+      expect(comboBoxElement.getAttribute("id")).toBe("testId");
+      expect(comboBoxElement.getAttribute("name")).toBe("testName");
+    });
   },
 };
 
@@ -290,6 +368,12 @@ export const MultipleReadOnly: StoryObj<AutocompleteType> = {
     hasMultipleChoices: true,
     isReadOnly: true,
     value: [{ label: "Tycho Station" }],
+  },
+};
+
+export const Optional: StoryObj<AutocompleteType> = {
+  args: {
+    isOptional: true,
   },
 };
 
