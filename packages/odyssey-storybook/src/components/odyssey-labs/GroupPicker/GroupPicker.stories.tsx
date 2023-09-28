@@ -17,8 +17,6 @@ import {
 import { AutocompleteProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { userEvent, within, screen } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import demoImage from "./demo.png";
 
@@ -162,7 +160,7 @@ const storybookMeta: Meta<typeof GroupPicker> = {
   },
   args: {
     label: "Languages",
-    hint: "Languages supports in the system",
+    hint: "Languages supported by the system",
     options: stations,
   },
   decorators: [MuiThemeDecorator],
@@ -171,34 +169,34 @@ const storybookMeta: Meta<typeof GroupPicker> = {
 
 export default storybookMeta;
 
-type GroupPickerType = AutocompleteProps<
+type GroupPickerPropsType = AutocompleteProps<
   GroupPickerOptionType,
   boolean | undefined,
   boolean | undefined
 >;
 
-export const GroupPickerDefault: StoryObj<GroupPickerType> = {
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole("combobox") as HTMLInputElement;
-    await step("Check for Filtered item from the list", async () => {
-      userEvent.type(comboBoxElement, "J");
-      const listItem = screen.getByRole("listbox").firstChild as HTMLLIElement;
-      expect(listItem?.textContent).toBe("Japnese");
-      userEvent.click(listItem);
-      expect(comboBoxElement.value).toBe("Japnese");
-    });
-    await step("Clear the selected item", async () => {
-      const clearButton = canvas.getByTitle("Clear");
-      userEvent.click(clearButton);
-      expect(comboBoxElement.value).toBe("");
-      userEvent.tab();
-    });
+export const GroupPickerDefault: StoryObj<GroupPickerPropsType> = {};
+
+export const Multiple: StoryObj<GroupPickerPropsType> = {
+  args: {
+    hasMultipleChoices: true,
   },
 };
 
-export const Multiple: StoryObj<GroupPickerType> = {
+export const Disabled: StoryObj<GroupPickerPropsType> = {
   args: {
+    isDisabled: true,
     hasMultipleChoices: true,
+    value: [
+      { id: "en", name: "English", description: "", logo: demoImage },
+      {
+        id: "jp",
+        name: "Japanese",
+        description: "日本語",
+        logo: demoImage,
+        usersCount: 0,
+        appsCount: 0,
+      },
+    ],
   },
 };

@@ -38,6 +38,19 @@ export type GroupPickerOptionType = {
   usersCount?: number;
 };
 
+export type GroupPickerProps<
+  GroupPickerOptionType,
+  HasMultipleChoices extends boolean | undefined,
+  IsCustomValueAllowed extends boolean | undefined
+> = AutocompleteProps<
+  GroupPickerOptionType,
+  HasMultipleChoices,
+  IsCustomValueAllowed
+>;
+
+const avatarImageSizeSmall = 16;
+const avatarImageSizeMedium = 24;
+
 const GroupPicker = <
   OptionType extends GroupPickerOptionType,
   HasMultipleChoices extends boolean | undefined,
@@ -56,10 +69,8 @@ const GroupPicker = <
   options,
   value,
   testId,
-}: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+}: GroupPickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const avatarImageSizeSmall = 16;
-  const avatarImageSizeMedium = 26;
 
   const isOptionEqualToValue = useCallback((sourceValue, targetValue) => {
     return sourceValue.id === targetValue.id;
@@ -82,6 +93,7 @@ const GroupPicker = <
           >
             <Box sx={{ paddingRight: odysseyDesignTokens.Spacing2 }}>
               <MuiAvatar
+                alt={option.name}
                 src={option.logo}
                 sx={{
                   [`.${avatarClasses.fallback}`]: {
@@ -156,6 +168,7 @@ const GroupPicker = <
             <Tag
               icon={
                 <MuiAvatar
+                  alt={option.name}
                   src={option.logo}
                   sx={{
                     [`.${avatarClasses.fallback}`]: {
