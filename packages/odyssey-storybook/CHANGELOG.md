@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/okta/odyssey/compare/v1.1.1...v1.2.0) (2023-09-29)
+
+### Features
+
+- **odyssey-react-mui:** add new storyObj with hasShowPassowrd=false ([1e55998](https://github.com/okta/odyssey/commit/1e559983fb6ef323535965569315e148d625452a))
+- **odyssey-react-mui:** adding new prop for PasswordField to control show password button ([58ad6c8](https://github.com/okta/odyssey/commit/58ad6c8027d963a557fc501acba7ebc5724e2410))
+- **odyssey-react-mui:** renamed prop to hasShowPassword and changed default to true ([6c3b8d2](https://github.com/okta/odyssey/commit/6c3b8d2d8486afbee6869a12c5320f2ea152dc5a))
+
+### Bug Fixes
+
+- id and name not changing in Storybook ([#1987](https://github.com/okta/odyssey/issues/1987)) ([2f57e15](https://github.com/okta/odyssey/commit/2f57e156f27c64954e8aa39662198d9c04ff9518))
+- **odyssey-react-mui:** add id and name tests ([027f8f8](https://github.com/okta/odyssey/commit/027f8f8588f7665c9e9b0cb3f08840625995d348))
+- **odyssey-react-mui:** add mising prop errorMessage to autocomplete ([1c1360c](https://github.com/okta/odyssey/commit/1c1360cd33f74b5d91f961ed859ab0972633995d))
+- **odyssey-react-mui:** add props onBlur, onFocus, id, name ([66ad838](https://github.com/okta/odyssey/commit/66ad838821ba18c3ee4c24f729b89c76eb62df3e))
+- **odyssey-react-mui:** adding isOptional to stories ([6fd080c](https://github.com/okta/odyssey/commit/6fd080c993e66f4abd0fb20c32bd8a381d376937))
+- **odyssey-react-mui:** address PR comments ([f10a903](https://github.com/okta/odyssey/commit/f10a903cece4f873f91a588b3b603d96b6055eb1))
+- **odyssey-react-mui:** fix test ([2be6755](https://github.com/okta/odyssey/commit/2be675516ba1e1218a4bce34ed61fa8a25048f45))
+- **odyssey-react-mui:** fixing test to use queryByRole to expect null ([aa85df0](https://github.com/okta/odyssey/commit/aa85df050c0e7fd67d5e9b0332e37b812f508c80))
+- **odyssey-react-mui:** fixing tests to use getByRole and canvas ([cd7feed](https://github.com/okta/odyssey/commit/cd7feed17147397e5f79eed31e31d59ee17f562d))
+- **odyssey-react-mui:** updating descriptions for props ([12b9587](https://github.com/okta/odyssey/commit/12b9587cda9058ff00180e0cc7b2bcb4debeb27f))
+- removed classes prop from Typography components ([#1989](https://github.com/okta/odyssey/issues/1989)) ([889f369](https://github.com/okta/odyssey/commit/889f3697582da68f71f2db801c1e7702a29fd9f5))
+- some TS errors went through the cracks ([#1986](https://github.com/okta/odyssey/issues/1986)) ([49f891f](https://github.com/okta/odyssey/commit/49f891f80ed3419c04ef1eec5dfee8a860811e5e))
+
 ## [1.1.1](https://github.com/okta/odyssey/compare/v1.1.0...v1.1.1) (2023-09-15)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
