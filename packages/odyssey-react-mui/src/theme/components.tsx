@@ -688,10 +688,7 @@ export const components = ({
               height: ".64em",
               marginInlineEnd: odysseyTokens.Spacing2,
               borderRadius: "100%",
-              backgroundColor: "transparent",
-              borderColor: odysseyTokens.TypographyColorBody,
-              borderWidth: odysseyTokens.BorderWidthHeavy,
-              borderStyle: odysseyTokens.BorderStyleMain,
+              backgroundColor: odysseyTokens.HueNeutral600,
             },
 
             [`&.${chipClasses.colorError}`]: {
