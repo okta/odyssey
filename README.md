@@ -4,13 +4,13 @@ Build and design consistent, efficient, and accessible UIs for all Okta users.
 
 ## Packages
 
-| Package/README                                                                                                                  | Description          |
-| ------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| [@okta/odyssey-design-tokens](https://github.com/okta/odyssey/blob/master/packages/odyssey-design-tokens/README.md)             | Design tokens        |
-| [@okta/browserslist-config-odyssey](https://github.com/okta/odyssey/blob/master/packages/browserslist-config-odyssey/README.md) | Browserslist config  |
-| [@okta/odyssey-babel-preset](https://github.com/okta/odyssey/blob/master/packages/odyssey-babel-preset/README.md)               | Babel preset         |
-| [@okta/odyssey-babel-loader](https://github.com/okta/odyssey/blob/master/packages/odyssey-babel-loader/README.md)               | Babel webpack loader |
-| [@okta/odyssey-react-mui](https://github.com/okta/odyssey/blob/master/packages/odyssey-react-mui/README.md)                     | React MUI components |
+| Package/README                                                                                                                | Description          |
+| ----------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| [@okta/odyssey-design-tokens](https://github.com/okta/odyssey/blob/main/packages/odyssey-design-tokens/README.md)             | Design tokens        |
+| [@okta/browserslist-config-odyssey](https://github.com/okta/odyssey/blob/main/packages/browserslist-config-odyssey/README.md) | Browserslist config  |
+| [@okta/odyssey-babel-preset](https://github.com/okta/odyssey/blob/main/packages/odyssey-babel-preset/README.md)               | Babel preset         |
+| [@okta/odyssey-babel-loader](https://github.com/okta/odyssey/blob/main/packages/odyssey-babel-loader/README.md)               | Babel webpack loader |
+| [@okta/odyssey-react-mui](https://github.com/okta/odyssey/blob/main/packages/odyssey-react-mui/README.md)                     | React MUI components |
 
 ## Browser Support
 
@@ -46,7 +46,7 @@ Please follow our [Getting Started guide](https://odyssey-storybook.okta.design/
 
 ## License
 
-[Apache Version 2.0](https://github.com/okta/odyssey/blob/master/LICENSE)
+[Apache Version 2.0](https://github.com/okta/odyssey/blob/main/LICENSE)
 
 ## Support Disclaimer
 
