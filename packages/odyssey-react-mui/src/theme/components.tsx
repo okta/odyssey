@@ -2000,9 +2000,7 @@ export const components = (
           borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100}`,
           textAlign: "start",
           verticalAlign: "baseline",
-          padding: "unset",
-          paddingBlock: odysseyTokens.Spacing4,
-          paddingInline: odysseyTokens.Spacing4,
+          padding: odysseyTokens.Spacing3,
           overflowWrap: "break-word",
 
           [`.${tableRowClasses.root}:hover &[rowspan]`]: {
@@ -2094,10 +2092,6 @@ export const components = (
           ...(ownerState.align === "justify" && {
             textAlign: "justify",
           }),
-
-          ["&.MuiTableCell-comfortable"]: {
-            padding: odysseyTokens.Spacing3,
-          },
 
           ["&.MuiTableCell-compact"]: {
             fontSize: odysseyTokens.TypographySizeSubordinate,

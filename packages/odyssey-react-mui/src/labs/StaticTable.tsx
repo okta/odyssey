@@ -34,7 +34,7 @@ import {
   Button,
   Checkbox,
   CheckboxGroup,
-  DataFilters,
+  // DataFilters,
   Dialog,
   Radio,
   RadioGroup,
@@ -160,59 +160,59 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
 
           const filtersCount = activeFilters?.length ?? 0;
 
-          const changeFilters = ({
-            id,
-            value,
-          }: {
-            id: string;
-            value: string | number | null | undefined;
-          }) => {
-            if (value === null) {
-              setState({
-                ...state,
-                columnFilters: activeFilters?.filter(
-                  (column) => column.id !== id
-                ),
-              });
-              return;
-            }
+          // const changeFilters = ({
+          //   id,
+          //   value,
+          // }: {
+          //   id: string;
+          //   value: string | number | null | undefined;
+          // }) => {
+          //   if (value === null) {
+          //     setState({
+          //       ...state,
+          //       columnFilters: activeFilters?.filter(
+          //         (column) => column.id !== id
+          //       ),
+          //     });
+          //     return;
+          //   }
 
-            let updatedFilters = activeFilters?.map((filter) => {
-              if (filter.id === id) {
-                return { ...filter, value: value };
-              }
+          //   let updatedFilters = activeFilters?.map((filter) => {
+          //     if (filter.id === id) {
+          //       return { ...filter, value: value };
+          //     }
 
-              return filter;
-            });
+          //     return filter;
+          //   });
 
-            if (!updatedFilters) {
-              updatedFilters = [];
-            }
+          //   if (!updatedFilters) {
+          //     updatedFilters = [];
+          //   }
 
-            const column = allFilters.find((column) => column.id === id);
-            if (!column) {
-              return;
-            }
+          //   const column = allFilters.find((column) => column.id === id);
+          //   if (!column) {
+          //     return;
+          //   }
 
-            if (!updatedFilters?.some((filter) => filter.id === id)) {
-              updatedFilters?.push({
-                id: id,
-                name: column.name,
-                value: value,
-              });
-            }
+          //   if (!updatedFilters?.some((filter) => filter.id === id)) {
+          //     updatedFilters?.push({
+          //       id: id,
+          //       name: column.name,
+          //       value: value,
+          //     });
+          //   }
 
-            setState({ ...state, columnFilters: updatedFilters });
-          };
+          //   setState({ ...state, columnFilters: updatedFilters });
+          // };
 
-          const scrubFilters = () => {
-            setState({
-              ...state,
-              columnFilters: activeFilters?.filter(
-                (column) => column.value !== "" && column.value !== null
-              ),
-            });
-          };
+          // const scrubFilters = () => {
+          //   setState({
+          //     ...state,
+          //     columnFilters: activeFilters?.filter(
+          //       (column) => column.value !== "" && column.value !== null
+          //     ),
+          //   });
+          // };
 
           return (
             <>
@@ -267,12 +267,12 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
                       gap: 2,
                     }}
                   >
-                    <DataFilters
+                    {/* <DataFilters
                       allFilters={allFilters}
                       activeFilters={activeFilters}
                       onChange={changeFilters}
                       onClosePopover={scrubFilters}
-                    />
+                    /> */}
                   </Box>
                 )}
               </Box>

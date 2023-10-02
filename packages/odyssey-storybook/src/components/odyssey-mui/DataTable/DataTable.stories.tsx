@@ -468,10 +468,18 @@ export const BasicUsage: StoryObj<DataTableProps<Person>> = {
     columns,
     data,
     getRowId: ({ id }: { id: string }) => id,
-    isColumnResizingEnabled: true,
-    isRowSelectionEnabled: true,
+    hasFilters: true,
+    hasSearch: true,
+    hasPagination: true,
+    hasColumnVisibility: true,
+    hasColumnResizing: true,
+    hasRowSelection: true,
+    hasChangeableDensity: true,
+    defaultDensity: "spacious",
   },
   render: function C(props) {
+    // return <DataTable {...props} />;
+
     return <DataTable {...props} />;
   },
 };

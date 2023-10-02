@@ -58,6 +58,10 @@ export type TextFieldProps = {
    * The id of the `input` element.
    */
   id?: string;
+  /*
+   * The starting value of the input, if uncontrolled.
+   */
+  initialValue?: string;
   /**
    * If `true`, the component is disabled.
    */
@@ -117,6 +121,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       errorMessage,
       hint,
       id: idOverride,
+      initialValue,
       isDisabled = false,
       isMultiline = false,
       isOptional = false,
@@ -145,6 +150,8 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             )
           }
           id={id}
+          defaultValue={initialValue}
+          inputRef={ref}
           multiline={isMultiline}
           name={id}
           onBlur={onBlur}
@@ -152,7 +159,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           onFocus={onFocus}
           placeholder={placeholder}
           readOnly={isReadOnly}
-          ref={ref}
           startAdornment={
             startAdornment && (
               <InputAdornment position="start">{startAdornment}</InputAdornment>
@@ -166,6 +172,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         autoCompleteType,
         hasInitialFocus,
         endAdornment,
+        initialValue,
         isMultiline,
         onChange,
         onFocus,

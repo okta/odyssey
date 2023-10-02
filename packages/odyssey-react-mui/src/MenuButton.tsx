@@ -12,7 +12,6 @@
 
 import {
   Button,
-  ButtonProps,
   buttonSizeValues,
   buttonVariantValues,
   MenuItem,
@@ -32,6 +31,8 @@ import {
   useMemo,
   useState,
   forwardRef,
+  MouseEventHandler,
+  // MouseEventHandler,
 } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
@@ -89,7 +90,7 @@ export type MenuButtonProps = {
   /**
    * An optional function to call when the menu is opened
    */
-  onOpen?: ButtonProps["onClick"];
+  onOpen?: MouseEventHandler;
   /**
    * The size of the button
    */
@@ -141,7 +142,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     const isOpen = isOpenProp ?? Boolean(anchorEl);
 
     const closeMenu = useCallback(
-      (event?: object, reason?: string) => {
+      (event, reason) => {
         // setAnchorEl(null);
         onClose?.(event, reason);
       },
