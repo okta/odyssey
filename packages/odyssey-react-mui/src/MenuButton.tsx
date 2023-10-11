@@ -17,26 +17,13 @@ import {
   MenuItem,
   useUniqueId,
 } from "./";
-import {
-  Divider,
-  ListSubheader,
-  Menu,
-  MenuProps as MuiMenuProps,
-} from "@mui/material";
+import { Divider, ListSubheader, Menu } from "@mui/material";
 import { ChevronDownIcon, MoreIcon } from "./icons.generated";
-import {
-  memo,
-  type ReactElement,
-  useCallback,
-  useMemo,
-  useState,
-  forwardRef,
-  MouseEventHandler,
-  // MouseEventHandler,
-} from "react";
+import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "./NullElement";
+// import type { SeleniumProps } from "./SeleniumProps";
 
 export type MenuButtonProps = {
   /**
@@ -62,11 +49,15 @@ export type MenuButtonProps = {
   /**
    * The <MenuItem> components within the Menu.
    */
-  children: Array<
-    ReactElement<
-      typeof MenuItem | typeof Divider | typeof ListSubheader | NullElement
-    >
-  >;
+  children:
+    | ReactElement<
+        typeof MenuItem | typeof Divider | typeof ListSubheader | NullElement
+      >
+    | Array<
+        ReactElement<
+          typeof MenuItem | typeof Divider | typeof ListSubheader | NullElement
+        >
+      >;
   /**
    * The end Icon on the trigggering Button
    */
@@ -76,21 +67,9 @@ export type MenuButtonProps = {
    */
   id?: string;
   /**
-   * If set, this determines whether the menu is open
-   */
-  isOpen?: boolean;
-  /**
    * If the MenuButton is an overflow menu or standard menu.
    */
   isOverflow?: boolean;
-  /**
-   * An optional function to call when the menu is closed
-   */
-  onClose?: MuiMenuProps["onClose"];
-  /**
-   * An optional function to call when the menu is opened
-   */
-  onOpen?: MouseEventHandler;
   /**
    * The size of the button
    */
@@ -116,106 +95,91 @@ export type MenuButtonProps = {
       buttonLabel?: undefined | "";
     }
 );
+// ) &
+// SeleniumProps;
 
-const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
-  (
-    {
-      ariaLabel,
-      ariaLabelledBy,
-      ariaDescribedBy,
-      buttonLabel = "",
-      buttonVariant = "secondary",
-      children,
-      endIcon: endIconProp,
-      id: idOverride,
-      isOpen: isOpenProp,
-      isOverflow,
-      onClose,
-      onOpen,
-      size,
-      tooltipText,
-    }: MenuButtonProps,
-    ref
-  ) => {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+const MenuButton = ({
+  ariaLabel,
+  ariaLabelledBy,
+  ariaDescribedBy,
+  buttonLabel = "",
+  buttonVariant = "secondary",
+  children,
+  endIcon: endIconProp,
+  id: idOverride,
+  isOverflow,
+  size,
+  // testId,
+  tooltipText,
+}: MenuButtonProps) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-    const isOpen = isOpenProp ?? Boolean(anchorEl);
+  const isOpen = Boolean(anchorEl);
 
-    const closeMenu = useCallback(
-      (event, reason) => {
-        // setAnchorEl(null);
-        onClose?.(event, reason);
-      },
-      [onClose]
-    );
+  const closeMenu = useCallback<MenuContextType["closeMenu"]>(() => {
+    setAnchorEl(null);
+  }, []);
 
-    const openMenu = useCallback<MenuContextType["openMenu"]>(
-      (event) => {
-        setAnchorEl(event.currentTarget);
-        onOpen?.(event);
-      },
-      [onOpen]
-    );
+  const openMenu = useCallback<MenuContextType["openMenu"]>((event) => {
+    setAnchorEl(event.currentTarget);
+  }, []);
 
-    const uniqueId = useUniqueId(idOverride);
+  const uniqueId = useUniqueId(idOverride);
 
-    const menuListProps = useMemo(
-      () => ({ "aria-labelledby": `${uniqueId}-button` }),
-      [uniqueId]
-    );
+  const menuListProps = useMemo(
+    () => ({ "aria-labelledby": `${uniqueId}-button` }),
+    [uniqueId]
+  );
 
-    const providerValue = useMemo<MenuContextType>(
-      () => ({
-        closeMenu,
-        openMenu,
-      }),
-      [closeMenu, openMenu]
-    );
+  const providerValue = useMemo<MenuContextType>(
+    () => ({
+      closeMenu,
+      openMenu,
+    }),
+    [closeMenu, openMenu]
+  );
 
-    const endIcon = endIconProp ? (
-      endIconProp
-    ) : isOverflow ? (
-      <MoreIcon />
-    ) : (
-      <ChevronDownIcon />
-    );
+  const endIcon = endIconProp ? (
+    endIconProp
+  ) : isOverflow ? (
+    <MoreIcon />
+  ) : (
+    <ChevronDownIcon />
+  );
 
-    return (
-      <div>
-        <Button
-          aria-controls={isOpen ? `${uniqueId}-menu` : undefined}
-          aria-expanded={isOpen ? "true" : undefined}
-          aria-haspopup="true"
-          ariaDescribedBy={ariaDescribedBy}
-          ariaLabel={ariaLabel}
-          ariaLabelledBy={ariaLabelledBy}
-          endIcon={endIcon}
-          id={`${uniqueId}-button`}
-          label={buttonLabel}
-          onClick={openMenu}
-          size={size}
-          tooltipText={tooltipText}
-          variant={buttonVariant}
-        />
+  return (
+    <div>
+      <Button
+        aria-controls={isOpen ? `${uniqueId}-menu` : undefined}
+        aria-expanded={isOpen ? "true" : undefined}
+        aria-haspopup="true"
+        ariaDescribedBy={ariaDescribedBy}
+        ariaLabel={ariaLabel}
+        ariaLabelledBy={ariaLabelledBy}
+        // data-se={testId}
+        endIcon={endIcon}
+        id={`${uniqueId}-button`}
+        label={buttonLabel}
+        onClick={openMenu}
+        size={size}
+        tooltipText={tooltipText}
+        variant={buttonVariant}
+      />
 
-        <Menu
-          anchorEl={anchorEl}
-          id={`${uniqueId}-menu`}
-          MenuListProps={menuListProps}
-          onClose={closeMenu}
-          open={isOpen}
-          PaperProps={{
-            ref: ref,
-          }}
-        >
-          <MenuContext.Provider value={providerValue}>
-            {children}
-          </MenuContext.Provider>
-        </Menu>
-      </div>
-    );
-  }
-);
+      <Menu
+        anchorEl={anchorEl}
+        id={`${uniqueId}-menu`}
+        MenuListProps={menuListProps}
+        onClose={closeMenu}
+        open={isOpen}
+      >
+        <MenuContext.Provider value={providerValue}>
+          {children}
+        </MenuContext.Provider>
+      </Menu>
+    </div>
+  );
+};
 
 const MemoizedMenuButton = memo(MenuButton);
 MemoizedMenuButton.displayName = "MenuButton";

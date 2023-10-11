@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,63 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@okta/odyssey-react-mui";
-import {
-  TableColumn,
-  StaticTable,
-  StaticTableProps,
-} from "@okta/odyssey-react-mui/labs";
+import { TableColumn } from "@okta/odyssey-react-mui/labs";
 
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-
-const storybookMeta: Meta = {
-  title: "MUI Components/Table/Static",
-  component: StaticTable,
-  argTypes: {
-    columns: {
-      control: "array",
-    },
-    data: {
-      control: "object",
-    },
-    getRowId: {
-      control: "function",
-    },
-    fetchMoreData: {
-      control: "function",
-    },
-    hasError: {
-      control: "boolean",
-    },
-    hasRowSelection: {
-      control: "boolean",
-    },
-    initialState: {
-      control: "object",
-    },
-    isFetching: {
-      control: "boolean",
-    },
-    onGlobalFilterChange: {
-      control: "function",
-    },
-    onPaginationChange: {
-      control: "function",
-    },
-    onRowSelectionChange: {
-      control: "function",
-    },
-    state: {
-      control: "object",
-    },
-  },
-  decorators: [MuiThemeDecorator],
-};
-
-export default storybookMeta;
-
-type Person = {
+export type Person = {
   id: string;
   name: {
     firstName: string;
@@ -77,7 +23,7 @@ type Person = {
   state: string;
 };
 
-const columns: TableColumn<Person>[] = [
+export const columns: TableColumn<Person>[] = [
   {
     accessorKey: "name.firstName",
     header: "First Name",
@@ -101,7 +47,7 @@ const columns: TableColumn<Person>[] = [
   },
 ];
 
-const data: Person[] = [
+export const data: Person[] = [
   {
     address: "261 Erdman Ford",
     city: "East Daphne",
@@ -503,26 +449,3 @@ const data: Person[] = [
     state: "Nebraska",
   },
 ];
-
-export const BasicUsage: StoryObj<StaticTableProps<Person>> = {
-  args: {
-    columns,
-    data,
-    getRowId: ({ id }: { id: string }) => id,
-  },
-};
-
-export const CustomToolbar: StoryObj<StaticTableProps<Person>> = {
-  args: {
-    columns,
-    data,
-    getRowId: ({ id }: { id: string }) => id,
-    ToolbarButtons: ({ table }) => (
-      <Button
-        label="New Action"
-        onClick={() => console.info(table.getState())}
-        variant="primary"
-      />
-    ),
-  },
-};

@@ -1972,6 +1972,11 @@ export const components = (
           marginInline: odysseyTokens.Spacing0,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
 
+          "&.narrow": {
+            width: "100%",
+            tableLayout: "fixed",
+          },
+
           "&:only-child": {
             marginBlockEnd: 0,
           },
@@ -2002,6 +2007,10 @@ export const components = (
           verticalAlign: "baseline",
           padding: odysseyTokens.Spacing3,
           overflowWrap: "break-word",
+
+          [`.MuiTable-root.narrow &:last-child`]: {
+            width: "auto",
+          },
 
           [`.${tableRowClasses.root}:hover &[rowspan]`]: {
             backgroundColor: odysseyTokens.HueNeutralWhite,
@@ -2127,8 +2136,6 @@ export const components = (
           marginBlockEnd: odysseyTokens.Spacing4,
           marginInline: 0,
           overflowX: "auto",
-          paddingInline: odysseyTokens.Spacing4,
-          paddingBlockEnd: odysseyTokens.Spacing4,
 
           "&:last-child": {
             marginBlock: 0,
@@ -2345,6 +2352,11 @@ export const components = (
         },
       },
       styleOverrides: {
+        root: {
+          ["&:not(p)"]: {
+            marginBlockEnd: 0,
+          },
+        },
         paragraph: {
           marginBlockEnd: odysseyTokens.Spacing4,
 
