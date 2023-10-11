@@ -18,7 +18,6 @@ import {
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { UserIcon, GroupIcon } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<BreadcrumbsProps> = {
   title: "Labs Components/Breadcrumbs",
@@ -68,11 +67,11 @@ export const Default: StoryObj<BreadcrumbsProps> = {
     <BreadcrumbList {...args}>
       <Breadcrumb href="#">One</Breadcrumb>
       <Breadcrumb href="#">Two</Breadcrumb>
-      <Breadcrumb href="#" startIcon={<UserIcon />}>
+      <Breadcrumb href="#" icon="user">
         Three
       </Breadcrumb>
       <Breadcrumb href="#">Four</Breadcrumb>
-      <Breadcrumb href="#" startIcon={<GroupIcon />}>
+      <Breadcrumb href="#" icon="group">
         Five
       </Breadcrumb>
       <Breadcrumb href="#">Six</Breadcrumb>

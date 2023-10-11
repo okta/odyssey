@@ -25,7 +25,7 @@ export type BreadcrumbProps = {
   children?: string;
   href: string;
   isCurrent?: boolean;
-  startIcon?: null | ReactElement<typeof UserIcon | typeof GroupIcon>;
+  icon?: "user" | "group";
 };
 
 export type BreadcrumbsProps = {
@@ -40,13 +40,13 @@ export const Breadcrumb = ({
   children,
   href,
   isCurrent,
-  startIcon,
+  icon,
 }: BreadcrumbProps) => {
   const isInsideMenu = useContext(BreadcrumbContext);
 
   const breadcrumbContent = (
     <>
-      {startIcon}
+      {icon === "group" ? <GroupIcon /> : icon === "user" ? <UserIcon /> : null}
       {children}
     </>
   );
