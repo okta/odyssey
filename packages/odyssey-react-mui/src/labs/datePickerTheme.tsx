@@ -19,11 +19,11 @@ import {
 } from "../icons.generated";
 import { createOdysseyMuiTheme } from "../theme";
 import { ThemeOptions } from "@mui/material";
-import * as Tokens from "@okta/odyssey-design-tokens";
+import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
 const popupSpacingValue = 5;
 
-const odysseyTheme = createOdysseyMuiTheme(Tokens);
+const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
 
 type ThemeStyles = ({
   theme,

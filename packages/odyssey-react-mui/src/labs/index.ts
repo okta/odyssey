@@ -22,3 +22,4 @@ export * from "./datePickerTheme";
 export * from "./materialReactTableTypes";
 export * from "./PaginatedTable";
 export * from "./StaticTable";
+export * from "./GroupPicker";

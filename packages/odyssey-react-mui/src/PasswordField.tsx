@@ -41,6 +41,10 @@ export type PasswordFieldProps = {
    */
   hasInitialFocus?: boolean;
   /**
+   * If `true`, the show/hide icon is not shown to the user
+   */
+  hasShowPassword?: boolean;
+  /**
    * The helper text content.
    */
   hint?: string;
@@ -100,6 +104,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       id: idOverride,
       isDisabled = false,
       isOptional = false,
+      hasShowPassword = true,
       isReadOnly,
       label,
       name: nameOverride,
@@ -130,20 +135,23 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoFocus={hasInitialFocus}
           data-se={testId}
           endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label={
-                  inputType === "password"
-                    ? t("passwordfield.icon.label.show")
-                    : t("passwordfield.icon.label.hide")
-                }
-                onClick={togglePasswordVisibility}
-              >
-                {inputType === "password" ? <ShowIcon /> : <HideIcon />}
-              </IconButton>
-            </InputAdornment>
+            hasShowPassword && (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={
+                    inputType === "password"
+                      ? t("passwordfield.icon.label.show")
+                      : t("passwordfield.icon.label.hide")
+                  }
+                  onClick={togglePasswordVisibility}
+                >
+                  {inputType === "password" ? <ShowIcon /> : <HideIcon />}
+                </IconButton>
+              </InputAdornment>
+            )
           }
           id={id}
+          inputProps={{ role: "textbox" }}
           name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}
@@ -169,6 +177,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         placeholder,
         isOptional,
         isReadOnly,
+        hasShowPassword,
         ref,
         testId,
         value,

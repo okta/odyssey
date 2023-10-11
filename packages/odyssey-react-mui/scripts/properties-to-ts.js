@@ -11,7 +11,7 @@
  */
 
 // Part of this has been copied over from @okta/ui-build-tools' own internal node script
-// https://github.com/okta/ui-build-tools/blob/master/packages/clis/i18n/properties-to-json.js
+// https://github.com/okta/ui-build-tools/blob/main/packages/clis/i18n/properties-to-json.js
 
 const { resolve, join, basename, extname } = require("node:path");
 const {
