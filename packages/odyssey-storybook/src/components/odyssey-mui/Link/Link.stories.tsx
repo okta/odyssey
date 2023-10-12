@@ -23,20 +23,20 @@ export default {
   argTypes: {
     children: {
       control: "text",
+      description: "<b>Required.</b>",
       table: {
         type: {
           summary: "ReactNode",
         },
-        defaultValue: "",
       },
     },
     href: {
       control: "text",
+      description: "<b>Required.</b>",
       table: {
         type: {
           summary: "string",
         },
-        defaultValue: "",
       },
     },
     icon: {
@@ -50,7 +50,6 @@ export default {
         type: {
           summary: "<Icon />",
         },
-        defaultValue: "",
       },
     },
     rel: {
@@ -59,18 +58,16 @@ export default {
         type: {
           summary: "string",
         },
-        defaultValue: "",
       },
     },
     target: {
       control: "text",
       description:
-        "If set to `_blank`, the Link will display an external icon.",
+        "<b>Required.</b> If set to `_blank`, the Link will display an external icon.",
       table: {
         type: {
           summary: "string",
         },
-        defaultValue: "",
       },
     },
     variant: {
@@ -80,7 +77,9 @@ export default {
         type: {
           summary: linkVariantValues.join(" | "),
         },
-        defaultValue: "default",
+        defaultValue: {
+          summary: "default",
+        },
       },
     },
   },

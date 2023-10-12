@@ -140,6 +140,9 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isMultiSelect: {
@@ -148,6 +151,9 @@ const storybookMeta: Meta<SelectProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -158,11 +164,14 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     label: {
       control: "text",
-      description: "The label text for the select component",
+      description: "<b>Required.</b> The label text for the select component",
       table: {
         type: {
           summary: "string",
@@ -186,7 +195,6 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -197,7 +205,6 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -207,12 +214,11 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     options: {
       control: "object",
-      description: "The options for the select component",
+      description: "<b>Required.</b> The options for the select component",
       table: {
         type: {
           summary: "(string | SelectOption)[]",

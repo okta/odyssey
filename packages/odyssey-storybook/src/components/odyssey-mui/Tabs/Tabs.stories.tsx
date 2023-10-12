@@ -27,7 +27,7 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
   argTypes: {
     children: {
       control: "text",
-      description: "The content of the tab item",
+      description: "<b>Required.</b> The content of the tab item",
       table: {
         type: {
           summary: "ReactNode",
@@ -49,7 +49,7 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
     },
     label: {
       control: "text",
-      description: "The label text for the tab item",
+      description: "<b>Required.</b> The label text for the tab item",
       table: {
         type: {
           summary: "string",
@@ -63,7 +63,9 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: false,
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     value: {

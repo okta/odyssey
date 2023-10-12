@@ -21,7 +21,8 @@ const storybookMeta: Meta<typeof RadioGroup> = {
   argTypes: {
     children: {
       control: null,
-      description: "An array of Radio components within the group",
+      description:
+        "<b>Required.</b> An array of Radio components within the group",
       table: {
         type: {
           summary: "Array<ReactElement<typeof Radio>>",
@@ -77,7 +78,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
     },
     label: {
       control: "text",
-      description: "The text label for the radio group",
+      description: "<b>Required.</b> The text label for the radio group",
       table: {
         type: {
           summary: "string",
@@ -91,7 +92,6 @@ const storybookMeta: Meta<typeof RadioGroup> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     value: {

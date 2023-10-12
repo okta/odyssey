@@ -83,7 +83,7 @@ const storybookMeta: Meta<TypographyProps> = {
     },
     children: {
       control: "text",
-      description: "The text content of the component.",
+      description: "<b>Required.</b> The text content of the component.",
       table: {
         type: {
           summary: "ReactNode",

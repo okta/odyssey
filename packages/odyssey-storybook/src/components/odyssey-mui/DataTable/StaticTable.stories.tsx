@@ -26,9 +26,11 @@ const storybookMeta: Meta = {
   argTypes: {
     columns: {
       control: "array",
+      description: "<b>Required.</b> ",
     },
     data: {
       control: "object",
+      description: "<b>Required.</b> ",
     },
     getRowId: {
       control: "function",

@@ -30,7 +30,8 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
   argTypes: {
     children: {
       control: null,
-      description: "A single Checkbox element or an array of Checkbox elements",
+      description:
+        "<b>Required.</b> A single Checkbox element or an array of Checkbox elements",
       table: {
         type: {
           summary:
@@ -72,11 +73,14 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     label: {
       control: "text",
-      description: "The label text for the checkbox group",
+      description: "<b>Required.</b> The label text for the checkbox group",
       table: {
         type: {
           summary: "string",
