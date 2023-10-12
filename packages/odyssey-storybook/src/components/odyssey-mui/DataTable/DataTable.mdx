@@ -1,5 +1,12 @@
 import { Canvas, Meta } from "@storybook/addon-docs";
 import { Story, ArgsTable } from "@storybook/blocks";
+import {
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableHead,
+} from "@mui/material";
 import * as Stories from "./DataTable.stories";
 
 <Meta title="Labs Components/DataTable" anchor />
@@ -7,3 +14,253 @@ import * as Stories from "./DataTable.stories";
 # DataTable
 
 This is a complicated beast of a component with lots of moving parts. Let's talk about them.
+
+Our goal with `<DataTable>` is to abstract away as much of the complexity as possible, so you can focus on
+your data rather than the mechanics of building the table to display it.
+
+The simplest `<DataTable>` you can write looks like this:
+
+```tsx
+<DataTable columns={columns} data={data} getRowId={({ id }) => id} />
+```
+
+And a table with all the bells and whistles looks as deliberately unintimidating as possible:
+
+```tsx
+<DataTable
+  columns={columns}
+  data={[]}
+  defaultDensity={density}
+  getRowId={({ id }) => id}
+  hasChangeableDensity
+  hasColumnResizing
+  hasColumnVisibility
+  hasFilters
+  hasPagination
+  hasRowSelection
+  hasSearch
+  hasSorting
+  paginationType="loadMore"
+  bulkActions={<MyBulkActions />}
+  bulkMenuItems={<MyBulkMenuItems />}
+  errorMessage="Error text"
+  resultsPerPage={25}
+  manualData
+  onFetchData={onFetchDataFn}
+/>
+```
+
+`<DataTable>` is built on top of the [Material-React-Table](https://www.material-react-table.com/) library, which is
+in turn built on [TanStack Table](https://tanstack.com/table/v8). This gives us lots of Okta-standard functionality
+for free, while wrapping it gives us a chance to enforce Odyssey consistency on every `DataTable` we produce.
+
+## Props
+
+`<DataTable>` is built to work with only three props set, with additional functionality layered on by defining additional props.
+
+### Required props
+
+- `columns` — The table columns to be displayed, in the format described below.
+- `data` — The data that goes into the table. _In most cases, this will be served via an API call, in which case you can set this to an empty array and load the data in via `onFetchData`._
+- `getRowId` — A function that returns the ID of the current row. This will almost always be something simple, like `({ id }) => id`.
+
+### Features
+
+- `hasChangeableDensity` — Allows the end user to choose the density of the table cells.
+- `hasColumnResizing ` — Allows the end user to customize the size of each column.
+- `hasColumnVisibility ` — Allows the end user to show/hide columns.
+- `hasFilters` — Exposds the UI for filtering the table data by row values.
+- `hasPagination ` — Exposes the UI for loading additional data. Requires the use of `onFetchData` to work; if your table is loading all data via the `data` prop, this won't do anything.
+- `paginationType` — The type of pagination UI. By default it's `paged`, which shows a UI to go to the next or previous page. Can also be set to `loadMore`, to provide a single button that loads more data inline.
+- `hasRowSelection ` — Exposes the UI for selecting individual or bulk rows, as well as the UI for customizable bulk actions (see "Customizable slots" below).
+- `hasSearch ` — Exposes a search UI. If using `onFetchData`, the search input will be sent there; otherwise, it will do a simple `contains` search across all currently-loaded data.
+- `hasSorting` — Exposes the UI to sort each column ascending, descending, or neither. If using `onFetchData`, the sorting params will be sent there; otherwise, it will do a client-side sort against all currently-loaded data.
+
+### Table state
+
+- `errorMessage` — A string to display as an error at the top of the table. If using `onFetchData`, this will be overridden by any API errors.
+- `page` — The initial pagination page to start the table on. This doesn't do anything unless `onFetchData` is being used and pagination is enabled.
+- `resultsPerPage` — asdfasdf
+- `totalResults` — The total number of results to expect, if available. This doesn't do anything unless `onFetchData` is being used and pagination is enabled. _Note that in many cases, the total number of results won't be available. If this is the case, the table will disable the "next" pagination button when it detects that it's reached the limit._
+- `defaultDensity` — The density of the table cells.
+
+### Customizable slots
+
+- `bulkActions` — The (optional) top-level `<Button>`s that display when 1+ rows are selected.
+- `bulkMenuItems` — The (optional) `<MenuItem>`s that appear in the bulk actions menu that appears when 1+ rows are selecgted.
+
+### Custom data fetching
+
+- `manualData` — If true, the table will use `onFetchData` to manage data, instead of the `data` prop.
+- `onFetchData` — The function that fetches data manually. Includes args for `page`, `resultsPerPage`, `filters`, `search`, `sort`
+
+## Data shapes
+
+Your columns and data should be similarly-shaped, and you should define the type prior:
+
+```ts
+type Person = {
+  id: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+  address: string;
+  city: string;
+  state: string;
+};
+```
+
+### Columns
+
+For the full list of props that a column can support, see the [Material React Table docs](https://www.material-react-table.com/docs/api/column-options).
+
+```ts
+const columns: TableColumn<Person>[] = [
+  {
+    accessorKey: "name.firstName",
+    header: "First Name",
+  },
+  {
+    accessorKey: "name.lastName",
+    header: "Last Name",
+  },
+  {
+    accessorKey: "address",
+    Cell: ({ cell }) => cell.getValue<string>().concat(","),
+    header: "Address",
+  },
+  {
+    accessorKey: "city",
+    header: "City",
+  },
+  {
+    accessorKey: "state",
+    header: "State",
+  },
+];
+```
+
+### Data
+
+```ts
+const data: Person[] = [
+  {
+    address: "261 Erdman Ford",
+    city: "East Daphne",
+    id: "234823773",
+    name: {
+      firstName: "John",
+      lastName: "Doe",
+    },
+    state: "Kentucky",
+  },
+  ...
+];
+```
+
+## Table features
+
+`<DataTable>` comes with a variety of filtering, sorting, and display settings out-of-the-box. Our goal is to provide flexibility to suit your needs while still enforcing the consistency and quality that defines Odyssey.
+
+### Filtering
+
+If `hasFilters` is `true`, table filters will be available via a Filters icon at the top of the table. Clicking the filter button reveals a dropdown menu that lists every available column. Clicking on a column will reveal a `TextInput`, the contents of which will be used to filter the rows by that column's value.
+
+_Currently, the filtering UI is only available as a text input — in the future, more options such as dropdowns or range sliders may be available._
+
+Note that the columns only filter on submit. To submit the input, the user may either:
+
+- Click the submit button (with the checkmark icon) next to the TextField
+- Press `enter` within the TextField
+- Close the popover by clicking externally
+
+If there are active filters:
+
+- The filter button will include a badge showing the number of active filters
+- A "clear all" button will appear, which clears all active filters when clicked
+- The active filters will be shown as a `TagList` with removable tags.
+
+If `hasSearch` is `true`, a `SearchField` will be shown above the table. When loading `data` directly, the SearchField acts as a global filter, filtering the entire table by value. When using `onFetchData`, the search value will become one of the params sent to the function, for manual evaluation.
+
+Note that the `SearchField` will automatically submit during typing, with a 500ms debounce to prevent too many requests. _TODO: We should look into making this happen on submit to prevent excessive API calls._
+
+<Canvas>
+  <Story of={Stories.FilterAndSearch} />
+</Canvas>
+
+### Table settings
+
+A settings icon will appear when `hasChangeableDensity` and/or `hasColumnVisibility` are enabled. Clicking the icon reveals a `<Dialog>` with settings for the end user to control table density and/or column visibility.
+
+<Canvas>
+  <Story of={Stories.TableDensity} />
+</Canvas>
+
+### Row selection & actions
+
+To add row selection, set `hasRowSelection` to `true`. This enables both individual row selection, and bulk row selection via a checkbox in the table header.
+
+There's not much point to selectable rows if you don't provide actions to perform on those rows when selected, so `<DataTable>` exposes two slots for providing additional UI when rows are selected. `bulkActions` accepts `<Button>`s which will be displayed above the table, and `bulkMenuItems` accepts `<MenuItem>`s to display inside a dropdown menu.
+
+With just the menu:
+
+<Canvas>
+  <Story of={Stories.RowSelectionWithMenu} />
+</Canvas>
+
+With just the actions:
+
+<Canvas>
+  <Story of={Stories.RowSelectionWithActions} />
+</Canvas>
+
+With both menu and actions:
+
+<Canvas>
+  <Story of={Stories.RowSelectionWithMenuAndActions} />
+</Canvas>
+
+### Pagination
+
+Pagination can be enabled via `hasPagination`.
+
+Pagination happens via `onFetchData`. By default, it provides a back/forward button UI, but can be changed to a simple "Load more" button by setting `paginationType` to `loadMore`.
+
+_Note that pagination only works via `onFetchData` and will be nonfunctional if that function isn't defined and `manualData` is not set to `true`._
+
+The following initial values can be set to control pagination:
+
+- `page` is the current page (defaults to 1)
+- `resultsPerPage` is the number of rows loaded at a time (defaults to 20)
+- `totalResults` is the total number of rows to expect. When this is unavailable, the table will continue to show the pagination UI until it detects that it's run out of results.
+
+<Canvas>
+  <Story of={Stories.ServerData} />
+</Canvas>
+
+<Canvas>
+  <Story of={Stories.LoadMorePagination} />
+</Canvas>
+
+### Table & column sizing
+
+Columns can be made resizable by setting `hasColumnResizing` to `true`.
+
+For aesthetic reasons, `<DataTable>` will always take up at least 100% of the width of its container. If the table has less content than fits its container, the last column will expand to consume the remaining space. If it takes up more than 100% the width of its container, it will be horizontally scrollable.
+
+To account for the container being resized, the table will detect resize events and change layout accordingly. This should not be noticeable, and is only mentioned here so you have some indication that it's doing something in case something goes wrong.
+
+<Canvas>
+  <Story of={Stories.ColumnFeatures} />
+</Canvas>
+
+## What needs to happen to promote this out of Labs
+
+- [ ] Ensure RTL support
+- [ ] Make all baked-in strings internationalizable
+- [ ] Check that bulk actions pass through the selected rows
+- [ ] Get initial row density working
+- [ ] Fix height of skeleton loaders to avoid vertical jumping
+- [ ] Allow for search to fire on submit rather than on change, to avoid excess API calls
+- [ ] See if we can eliminate `manualData` boolean and just detect if `onFetchData` is set

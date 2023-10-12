@@ -290,7 +290,7 @@ export const Default: StoryObj = {
         columns={
           args.clientOrServer === "client" ? clientColumns : serverColumns
         }
-        data={args.clientOrServer === "client" ? clientData : []}
+        data={args.clientOrServer === "client" ? clientData.slice(0, 10) : []}
         defaultDensity={args.defaultDensity}
         getRowId={({ id }) => id}
         hasChangeableDensity={args.hasChangeableDensity}
@@ -368,6 +368,7 @@ export const FilterAndSearch: StoryObj = {
 export const ServerData: StoryObj = {
   ...Default,
   args: {
+    resultsPerPage: 8,
     clientOrServer: "server",
     hasSearch: true,
     hasPagination: true,
@@ -377,6 +378,7 @@ export const ServerData: StoryObj = {
 export const LoadMorePagination: StoryObj = {
   ...Default,
   args: {
+    resultsPerPage: 8,
     clientOrServer: "server",
     hasSearch: true,
     hasPagination: true,

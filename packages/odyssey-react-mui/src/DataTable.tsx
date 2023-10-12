@@ -44,7 +44,6 @@ export type DataTableProps<TData extends DefaultMaterialReactTableData> = {
   // Table parameters
   columns: MaterialReactTableProps<TData>["columns"];
   data: MaterialReactTableProps<TData>["data"];
-  defaultDensity?: (typeof densityValues)[number];
   getRowId?: MaterialReactTableProps<TData>["getRowId"];
 
   // Table features
@@ -59,14 +58,17 @@ export type DataTableProps<TData extends DefaultMaterialReactTableData> = {
   paginationType?: (typeof paginationTypeValues)[number];
 
   // Slots
-  bulkActions?: (table: MRT_TableInstance) => ReactElement | ReactElement[];
-  bulkMenuItems?: (table: MRT_TableInstance) => ReactElement | ReactElement[];
+  bulkActions?: (
+    table: MRT_TableInstance<TData>
+  ) => ReactElement | ReactElement[];
+  bulkMenuItems?: (table: MRT_TableInstance<TData>) => ReactElement[];
 
   // Table state
   errorMessage?: string;
   page?: number;
   resultsPerPage?: number;
   totalResults?: number;
+  defaultDensity?: (typeof densityValues)[number];
 
   // Manual data
   manualData?: boolean;
@@ -82,7 +84,7 @@ export type DataTableProps<TData extends DefaultMaterialReactTableData> = {
     filters?: MRT_ColumnFiltersState;
     search?: string;
     sort?: MRT_SortingState;
-  }) => TData;
+  }) => object;
 };
 
 const DataTable = <TData extends DefaultMaterialReactTableData>({
