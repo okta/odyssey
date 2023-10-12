@@ -339,7 +339,7 @@ export const components = ({
           fontSize: odysseyTokens.TypographySizeBody,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
 
-          "& a, & button": {
+          "& > a, & > button": {
             borderRadius: odysseyTokens.BorderRadiusTight,
             color: odysseyTokens.TypographyColorSubordinate,
             display: "flex",

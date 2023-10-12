@@ -34,7 +34,7 @@ const storybookMeta: Meta<BreadcrumbsProps> = {
     },
     homeHref: {
       control: "text",
-      description: "The destination of the home breadcrumb",
+      description: 'URL of the "Home" breadcrumb.',
       table: {
         type: {
           summary: "string",
@@ -44,7 +44,7 @@ const storybookMeta: Meta<BreadcrumbsProps> = {
     maxItemsCount: {
       control: "number",
       description:
-        "The number of breadcrumbs displayed. Any additional breadcrumbs will be shown in a menu.",
+        "The number of breadcrumbs displayed. Any additional breadcrumbs will be shown in a dropdown menu.",
       table: {
         type: {
           summary: "number",
@@ -60,27 +60,25 @@ export default storybookMeta;
 
 export const Default: StoryObj<BreadcrumbsProps> = {
   args: {
-    homeHref: "#",
+    homeHref: "#home",
     maxItemsCount: 4,
   },
   render: (args) => (
     <BreadcrumbList {...args}>
-      <Breadcrumb href="#">One</Breadcrumb>
-      <Breadcrumb href="#">Two</Breadcrumb>
-      <Breadcrumb href="#" icon="user">
+      <Breadcrumb href="#one">One</Breadcrumb>
+      <Breadcrumb href="#two">Two</Breadcrumb>
+      <Breadcrumb href="#three" icon="user">
         Three
       </Breadcrumb>
-      <Breadcrumb href="#">Four</Breadcrumb>
-      <Breadcrumb href="#" icon="group">
+      <Breadcrumb href="#four">Four</Breadcrumb>
+      <Breadcrumb href="#five" icon="group">
         Five
       </Breadcrumb>
-      <Breadcrumb href="#">Six</Breadcrumb>
-      <Breadcrumb href="#">Seven</Breadcrumb>
-      <Breadcrumb href="#">Eight</Breadcrumb>
-      <Breadcrumb href="#">Nine</Breadcrumb>
-      <Breadcrumb href="#" isCurrent>
-        Ten
-      </Breadcrumb>
+      <Breadcrumb href="#six">Six</Breadcrumb>
+      <Breadcrumb href="#seven">Seven</Breadcrumb>
+      <Breadcrumb href="#eight">Eight</Breadcrumb>
+      <Breadcrumb href="#nine">Nine</Breadcrumb>
+      <Breadcrumb href="#ten">Ten</Breadcrumb>
     </BreadcrumbList>
   ),
 };

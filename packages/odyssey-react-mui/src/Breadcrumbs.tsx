@@ -16,7 +16,14 @@ import {
   MenuItem,
   Breadcrumbs as MuiBreadcrumbs,
 } from "@mui/material";
-import { ReactElement, createContext, memo, useContext, useState } from "react";
+import {
+  ReactElement,
+  createContext,
+  memo,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated";
 import { Typography } from "./Typography";
 import { useTranslation } from "react-i18next";
@@ -24,7 +31,6 @@ import { useTranslation } from "react-i18next";
 export type BreadcrumbProps = {
   children?: string;
   href: string;
-  isCurrent?: boolean;
   icon?: "user" | "group";
 };
 
@@ -34,15 +40,13 @@ export type BreadcrumbsProps = {
   maxItemsCount?: number;
 };
 
-const BreadcrumbContext = createContext(false);
+const BreadcrumbContext = createContext({
+  isInsideMenu: false,
+  isCurrentPage: false,
+});
 
-export const Breadcrumb = ({
-  children,
-  href,
-  isCurrent,
-  icon,
-}: BreadcrumbProps) => {
-  const isInsideMenu = useContext(BreadcrumbContext);
+export const Breadcrumb = ({ children, href, icon }: BreadcrumbProps) => {
+  const { isInsideMenu, isCurrentPage } = useContext(BreadcrumbContext);
 
   const breadcrumbContent = (
     <>
@@ -55,7 +59,7 @@ export const Breadcrumb = ({
     return <MenuItem href={href}>{breadcrumbContent}</MenuItem>;
   }
 
-  if (isCurrent) {
+  if (isCurrentPage) {
     return <Typography>{breadcrumbContent}</Typography>;
   }
 
@@ -65,38 +69,35 @@ export const Breadcrumb = ({
 const BreadcrumbList = ({
   children,
   homeHref,
-  maxItemsCount = children.length,
+  maxItemsCount: maxItemsCountOverride,
 }: BreadcrumbsProps) => {
+  const maxItemsCount = maxItemsCountOverride ?? children.length;
+
   const { t } = useTranslation();
 
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [anchor, setAnchor] = useState<HTMLElement | null>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  const handleExpansionClick = (ev: React.MouseEvent<HTMLElement>) => {
-    setIsExpanded(!isExpanded);
-    setAnchor(ev.currentTarget);
-  };
+  const breadcrumbSections = useMemo(() => {
+    let breadcrumbContents;
 
-  const childrenCount = children.length;
-
-  const calculateSegments = () => {
-    if (childrenCount <= maxItemsCount) {
-      return [children, [], []];
+    if (children.length <= maxItemsCount) {
+      breadcrumbContents = {
+        beforeMenu: null,
+        insideMenu: null,
+        remainingBreadcrumbs: children,
+      };
+    } else {
+      const menuStart = Math.floor(maxItemsCount / 2);
+      const menuLength = children.length - maxItemsCount;
+      breadcrumbContents = {
+        beforeMenu: children.slice(0, menuStart),
+        insideMenu: children.slice(menuStart, menuStart + menuLength),
+        remainingBreadcrumbs: children.slice(menuStart + menuLength),
+      };
     }
 
-    const middleStart = Math.floor(maxItemsCount / 2);
-    const middleCount = childrenCount - maxItemsCount;
-    const leftSegment = children.slice(0, middleStart);
-    const middleSegment = children.slice(
-      middleStart,
-      middleStart + middleCount
-    );
-    const rightSegment = children.slice(middleStart + middleCount);
-
-    return [leftSegment, middleSegment, rightSegment];
-  };
-
-  const [leftSegment, middleSegment, rightSegment] = calculateSegments();
+    return breadcrumbContents;
+  }, [children, maxItemsCount]);
 
   return (
     <MuiBreadcrumbs
@@ -108,14 +109,18 @@ const BreadcrumbList = ({
           <HomeIcon />
         </ButtonBase>
       )}
-      {leftSegment}
-      {middleSegment.length > 0 && (
+
+      {breadcrumbSections.beforeMenu}
+
+      {breadcrumbSections.insideMenu && (
         <>
-          <ButtonBase onClick={handleExpansionClick}>…</ButtonBase>
+          <ButtonBase onClick={(ev) => setAnchorEl(ev.currentTarget)}>
+            …
+          </ButtonBase>
           <Menu
-            open={isExpanded}
-            onClose={() => setIsExpanded(false)}
-            anchorEl={anchor}
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+            anchorEl={anchorEl}
             anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
             MenuListProps={{
               sx: {
@@ -123,13 +128,27 @@ const BreadcrumbList = ({
               },
             }}
           >
-            <BreadcrumbContext.Provider value={true}>
-              {middleSegment}
+            <BreadcrumbContext.Provider
+              value={{ isInsideMenu: true, isCurrentPage: false }}
+            >
+              {breadcrumbSections.insideMenu}
             </BreadcrumbContext.Provider>
           </Menu>
         </>
       )}
-      {rightSegment}
+
+      {breadcrumbSections.remainingBreadcrumbs.map((breadcrumb, i) => {
+        if (i === breadcrumbSections.remainingBreadcrumbs.length - 1) {
+          return (
+            <BreadcrumbContext.Provider
+              value={{ isInsideMenu: false, isCurrentPage: true }}
+            >
+              {breadcrumb}
+            </BreadcrumbContext.Provider>
+          );
+        }
+        return breadcrumb;
+      })}
     </MuiBreadcrumbs>
   );
 };
