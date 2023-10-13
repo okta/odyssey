@@ -84,10 +84,10 @@ const Tabs = ({
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
 
   const handleChange = useCallback(
-    (_event: SyntheticEvent, value: string) => {
+    (event: SyntheticEvent, value: string) => {
       setTabState(value);
       if (onChange) {
-        onChange(_event, value);
+        onChange(event, value);
       }
     },
     [onChange]
