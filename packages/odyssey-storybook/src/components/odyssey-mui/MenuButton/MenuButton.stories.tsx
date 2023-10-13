@@ -90,7 +90,7 @@ const storybookMeta: Meta<MenuButtonProps> = {
       description: "The <MenuItem> components within the Menu",
       table: {
         type: {
-          summary: "[MenuItem | Divider | ListSubheader]",
+          summary: "[MenuItem | Divider | ListSubheader | NullElement]",
         },
       },
     },
