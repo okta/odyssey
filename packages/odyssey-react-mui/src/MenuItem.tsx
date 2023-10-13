@@ -38,10 +38,6 @@ export type MenuItemProps = {
    */
   isDisabled?: boolean;
   /**
-   * If `true`, the menu item will be visually marked as disabled.
-   */
-  isDisabled?: boolean;
-  /**
    * Callback fired when the menu item is clicked.
    */
   onClick?: MuiMenuItemProps["onClick"];
@@ -81,10 +77,6 @@ const MenuItem = ({
     <MuiMenuItem
       /* eslint-disable-next-line jsx-a11y/no-autofocus */
       autoFocus={hasInitialFocus}
-      selected={isSelected}
-      disabled={isDisabled}
-      value={value}
-      onClick={onClick}
       className={
         variant === "destructive"
           ? `${menuItemClasses.root}-destructive`
