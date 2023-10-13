@@ -25,12 +25,14 @@ import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
 export type OdysseyThemeProviderProps = {
   children: ReactNode;
   designTokensOverride?: DesignTokensOverride;
+  shadowRootElement?: HTMLDivElement;
   themeOverride?: ThemeOptions;
 };
 
 const OdysseyThemeProvider = ({
   children,
   designTokensOverride,
+  shadowRootElement,
   themeOverride,
 }: OdysseyThemeProviderProps) => {
   const odysseyTokens = useMemo(
@@ -38,8 +40,12 @@ const OdysseyThemeProvider = ({
     [designTokensOverride]
   );
   const odysseyTheme = useMemo(
-    () => createOdysseyMuiTheme(odysseyTokens),
-    [odysseyTokens]
+    () =>
+      createOdysseyMuiTheme({
+        odysseyTokens,
+        shadowRootElement,
+      }),
+    [odysseyTokens, shadowRootElement]
   );
 
   const customOdysseyTheme = useMemo(

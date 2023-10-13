@@ -97,7 +97,6 @@ i18n.use(initReactI18next).init({
     useSuspense: false,
     bindI18nStore: "added",
   },
-  returnNull: false,
 });
 
 Object.entries(resources).forEach(([locale, property]) => {

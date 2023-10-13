@@ -23,6 +23,7 @@ import {
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
 import type { SeleniumProps } from "./SeleniumProps";
+import { useTranslation } from "react-i18next";
 
 export type PasswordFieldProps = {
   /**
@@ -39,6 +40,10 @@ export type PasswordFieldProps = {
    * If `true`, the component will receive focus automatically.
    */
   hasInitialFocus?: boolean;
+  /**
+   * If `true`, the show/hide icon is not shown to the user
+   */
+  hasShowPassword?: boolean;
   /**
    * The helper text content.
    */
@@ -99,6 +104,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       id: idOverride,
       isDisabled = false,
       isOptional = false,
+      hasShowPassword = true,
       isReadOnly,
       label,
       name: nameOverride,
@@ -111,6 +117,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     },
     ref
   ) => {
+    const { t } = useTranslation();
     const [inputType, setInputType] = useState("password");
 
     const togglePasswordVisibility = useCallback(() => {
@@ -128,16 +135,23 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           autoFocus={hasInitialFocus}
           data-se={testId}
           endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={togglePasswordVisibility}
-              >
-                {inputType === "password" ? <ShowIcon /> : <HideIcon />}
-              </IconButton>
-            </InputAdornment>
+            hasShowPassword && (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={
+                    inputType === "password"
+                      ? t("passwordfield.icon.label.show")
+                      : t("passwordfield.icon.label.hide")
+                  }
+                  onClick={togglePasswordVisibility}
+                >
+                  {inputType === "password" ? <ShowIcon /> : <HideIcon />}
+                </IconButton>
+              </InputAdornment>
+            )
           }
           id={id}
+          inputProps={{ role: "textbox" }}
           name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}
@@ -153,6 +167,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       [
         autoCompleteType,
         hasInitialFocus,
+        t,
         togglePasswordVisibility,
         inputType,
         nameOverride,
@@ -162,6 +177,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         placeholder,
         isOptional,
         isReadOnly,
+        hasShowPassword,
         ref,
         testId,
         value,

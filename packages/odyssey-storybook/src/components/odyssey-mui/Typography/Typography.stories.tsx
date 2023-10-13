@@ -90,15 +90,6 @@ const storybookMeta: Meta<TypographyProps> = {
         },
       },
     },
-    classes: {
-      control: null,
-      description: "Additional classes to add to the component.",
-      table: {
-        type: {
-          summary: "object",
-        },
-      },
-    },
     color: {
       options: typographyColorValues,
       control: { type: "select" },
