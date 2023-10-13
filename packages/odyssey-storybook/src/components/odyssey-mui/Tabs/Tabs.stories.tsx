@@ -10,9 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { TabItemProps, TabsProps, Tabs } from "@okta/odyssey-react-mui";
+import {
+  Button,
+  TabItemProps,
+  Tabs,
+  TabsProps,
+  Typography,
+} from "@okta/odyssey-react-mui";
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
@@ -73,6 +80,16 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
         type: {
           summary: "string",
         },
+      },
+    },
+    onChange: {
+      control: null,
+      description: "Callback fired when the active tab is changed",
+      table: {
+        type: {
+          summary: "func",
+        },
+        defaultValue: "",
       },
     },
   },
@@ -166,5 +183,54 @@ export const Icons: StoryObj<TabItemProps> = {
   },
   play: async ({ canvasElement, step }) => {
     selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
+  },
+};
+
+export const Controlled: StoryObj<TabItemProps> = {
+  render: function C() {
+    const [value, setValue] = useState("planets");
+
+    const onChange = (_e: unknown, value: string) => {
+      setValue(value);
+    };
+
+    const tabs: TabItemProps[] = [
+      {
+        label: "Planets",
+        value: "planets",
+        children: "Information about Planets",
+      },
+      {
+        label: "Moons",
+        value: "moons",
+        children: "Information about Moons",
+      },
+      {
+        label: "Galaxies",
+        value: "galaxies",
+        children: "Information about Galaxies",
+      },
+    ];
+
+    return (
+      <>
+        <Tabs
+          value={value}
+          ariaLabel="controlled tabs example"
+          tabs={tabs}
+          onChange={onChange}
+        />
+        <br />
+        <Typography>{`Current tab is ${value}`}</Typography>
+        <Button
+          label="Navigate to Galaxies externally"
+          variant="primary"
+          onClick={() => {
+            setValue("galaxies");
+          }}
+          size="small"
+        />
+      </>
+    );
   },
 };

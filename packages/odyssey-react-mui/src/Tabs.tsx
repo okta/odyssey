@@ -10,9 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, {
+import {
   ReactElement,
   ReactNode,
+  SyntheticEvent,
   memo,
   useCallback,
   useEffect,
@@ -67,16 +68,29 @@ export type TabsProps = {
    * Identifier for the selected tab.
    */
   value?: string;
+  /**
+   * Callback fired when the active tab is changed.
+   */
+  onChange?: (event: SyntheticEvent, value: string) => void;
 };
 
-const Tabs = ({ ariaLabel, initialValue, tabs, value }: TabsProps) => {
+const Tabs = ({
+  ariaLabel,
+  initialValue,
+  tabs,
+  value,
+  onChange,
+}: TabsProps) => {
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
 
-  const onChange = useCallback(
-    (_event: React.SyntheticEvent, newState: string) => {
-      setTabState(newState);
+  const handleChange = useCallback(
+    (_event: SyntheticEvent, value: string) => {
+      setTabState(value);
+      if (onChange) {
+        onChange(_event, value);
+      }
     },
-    []
+    [onChange]
   );
 
   useEffect(() => {
@@ -87,7 +101,7 @@ const Tabs = ({ ariaLabel, initialValue, tabs, value }: TabsProps) => {
 
   return (
     <MuiTabContext value={tabState}>
-      <MuiTabList onChange={onChange} aria-label={ariaLabel}>
+      <MuiTabList onChange={handleChange} aria-label={ariaLabel}>
         {tabs.map((tab, index) => (
           <MuiTab
             data-se={tab.testId}
