@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ThemeOptions } from "@mui/material";
+import { ThemeOptions, listItemClasses } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
 import { alertTitleClasses } from "@mui/material/AlertTitle";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
@@ -1896,7 +1896,7 @@ export const components = ({
             backgroundColor: "transparent",
           },
 
-          ".MuiBox-root": {
+          "& > .MuiBox-root": {
             display: "flex",
             flexWrap: "wrap",
             gap: odysseyTokens.Spacing1,
@@ -1904,7 +1904,7 @@ export const components = ({
             marginInline: `-${odysseyTokens.Spacing2}`,
           },
 
-          ".MuiListItemSecondaryAction-root": {
+          [listItemClasses.secondaryAction]: {
             display: "none",
           },
         },
