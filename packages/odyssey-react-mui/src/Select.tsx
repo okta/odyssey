@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactNode, forwardRef, memo, useCallback, useState } from "react";
+import { ReactNode, memo, useCallback, useMemo, useState } from "react";
 import {
   Box,
   Chip,
@@ -102,178 +102,173 @@ export type SelectProps = {
  *   - { text: string, type: "heading" } — Used to display a group heading with the text
  */
 
-const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  (
-    {
-      errorMessage,
-      hint,
-      id: idOverride,
-      isDisabled = false,
-      isMultiSelect = false,
-      isOptional = false,
-      label,
-      name: nameOverride,
-      onBlur,
-      onChange: onChangeProp,
-      onFocus,
-      value,
-      testId,
-      options,
-    },
-    ref
-  ) => {
-    // If there's no value set, we set it to a blank string (if it's a single-select)
-    // or an empty array (if it's a multi-select)
-    if (typeof value === "undefined") {
-      value = isMultiSelect ? [] : "";
-    }
-
-    const [selectedValue, setSelectedValue] = useState<string | string[]>(
-      value
-    );
-
-    const onChange = useCallback(
-      (event: SelectChangeEvent<string | string[]>, child: ReactNode) => {
-        const {
-          target: { value },
-        } = event;
-
-        // Set the field value, with some additional logic to handle array values
-        // for multi-selects
-        if (isMultiSelect) {
-          setSelectedValue(
-            typeof value === "string" ? value.split(",") : value
-          );
-        } else {
-          setSelectedValue(value);
-        }
-
-        // Trigger the onChange event, if one has been passed
-        if (onChangeProp) {
-          onChangeProp(event, child);
-        }
-      },
-      [isMultiSelect, onChangeProp, setSelectedValue]
-    );
-
-    // Normalize the options array to accommodate the various
-    // data types that might be passed
-    const normalizedOptions = options.map((option) => {
-      if (typeof option === "object") {
-        return {
-          text: option.text,
-          value: option.value || option.text,
-          type: option.type === "heading" ? "heading" : "option",
-        };
-      }
-
-      return { text: option, value: option, type: "option" };
-    });
-
-    const renderValue = useCallback(
-      (selected: string | string[]) => {
-        // If the selected value isn't an array, then we don't need to display
-        // chips and should fall back to the default render behavior
-        if (typeof selected === "string") {
-          return undefined;
-        }
-
-        // Convert the selected options array into <Chip>s
-        const renderedChips = selected
-          .map((item: string) => {
-            const selectedOption = normalizedOptions.find(
-              (option) => option.value === item
-            );
-
-            if (!selectedOption) {
-              return null;
-            }
-
-            return <Chip key={item} label={selectedOption.text} />;
-          })
-          .filter(Boolean);
-
-        if (renderedChips.length === 0) {
-          return null;
-        }
-
-        // We need the <Box> to surround the <Chip>s for
-        // proper styling
-        return <Box>{renderedChips}</Box>;
-      },
-      [normalizedOptions]
-    );
-
-    // Convert the options into the ReactNode children
-    // that will populate the <Select>
-    const children = normalizedOptions.map((option) => {
-      if (option.type === "heading") {
-        return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
-      }
-
-      return (
-        <MenuItem key={option.value} value={option.value}>
-          {isMultiSelect && (
-            <MuiCheckbox checked={selectedValue.includes(option.value)} />
-          )}
-          {option.text}
-          {selectedValue == option.value && (
-            <ListItemSecondaryAction>
-              <CheckIcon />
-            </ListItemSecondaryAction>
-          )}
-        </MenuItem>
-      );
-    });
-
-    const renderFieldComponent = useCallback(
-      () => (
-        <MuiSelect
-          children={children}
-          data-se={testId}
-          id={idOverride}
-          multiple={isMultiSelect}
-          name={nameOverride ?? idOverride}
-          onBlur={onBlur}
-          onChange={onChange}
-          onFocus={onFocus}
-          ref={ref}
-          renderValue={isMultiSelect ? renderValue : undefined}
-          value={selectedValue}
-          labelId={label}
-        />
-      ),
-      [
-        children,
-        idOverride,
-        isMultiSelect,
-        label,
-        nameOverride,
-        onBlur,
-        onChange,
-        onFocus,
-        ref,
-        renderValue,
-        selectedValue,
-        testId,
-      ]
-    );
-
-    return (
-      <Field
-        errorMessage={errorMessage}
-        fieldType="single"
-        hasVisibleLabel
-        hint={hint}
-        id={idOverride}
-        isDisabled={isDisabled}
-        isOptional={isOptional}
-        label={label}
-        renderFieldComponent={renderFieldComponent}
-      />
-    );
+const Select = ({
+  errorMessage,
+  hint,
+  id: idOverride,
+  isDisabled = false,
+  isMultiSelect = false,
+  isOptional = false,
+  label,
+  name: nameOverride,
+  onBlur,
+  onChange: onChangeProp,
+  onFocus,
+  value,
+  testId,
+  options,
+}: SelectProps) => {
+  // If there's no value set, we set it to a blank string (if it's a single-select)
+  // or an empty array (if it's a multi-select)
+  if (typeof value === "undefined") {
+    value = isMultiSelect ? [] : "";
   }
-);
+
+  const [selectedValue, setSelectedValue] = useState<string | string[]>(value);
+
+  const onChange = useCallback(
+    (event: SelectChangeEvent<string | string[]>, child: ReactNode) => {
+      const {
+        target: { value },
+      } = event;
+
+      // Set the field value, with some additional logic to handle array values
+      // for multi-selects
+      if (isMultiSelect) {
+        setSelectedValue(typeof value === "string" ? value.split(",") : value);
+      } else {
+        setSelectedValue(value);
+      }
+
+      // Trigger the onChange event, if one has been passed
+      if (onChangeProp) {
+        onChangeProp(event, child);
+      }
+    },
+    [isMultiSelect, onChangeProp, setSelectedValue]
+  );
+
+  // Normalize the options array to accommodate the various
+  // data types that might be passed
+  const normalizedOptions = useMemo(
+    () =>
+      options.map((option) =>
+        typeof option === "object"
+          ? {
+              text: option.text,
+              value: option.value || option.text,
+              type: option.type === "heading" ? "heading" : "option",
+            }
+          : { text: option, value: option, type: "option" }
+      ),
+    [options]
+  );
+
+  const renderValue = useCallback(
+    (selected: string | string[]) => {
+      // If the selected value isn't an array, then we don't need to display
+      // chips and should fall back to the default render behavior
+      if (typeof selected === "string") {
+        return undefined;
+      }
+
+      // Convert the selected options array into <Chip>s
+      const renderedChips = selected
+        .map((item: string) => {
+          const selectedOption = normalizedOptions.find(
+            (option) => option.value === item
+          );
+
+          if (!selectedOption) {
+            return null;
+          }
+
+          return <Chip key={item} label={selectedOption.text} />;
+        })
+        .filter(Boolean);
+
+      if (renderedChips.length === 0) {
+        return null;
+      }
+
+      // We need the <Box> to surround the <Chip>s for
+      // proper styling
+      return <Box>{renderedChips}</Box>;
+    },
+    [normalizedOptions]
+  );
+
+  // Convert the options into the ReactNode children
+  // that will populate the <Select>
+  const children = useMemo(
+    () =>
+      normalizedOptions.map((option) => {
+        if (option.type === "heading") {
+          return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
+        }
+
+        return (
+          <MenuItem key={option.value} value={option.value}>
+            {isMultiSelect && (
+              <MuiCheckbox checked={selectedValue.includes(option.value)} />
+            )}
+            {option.text}
+            {selectedValue == option.value && (
+              <ListItemSecondaryAction>
+                <CheckIcon />
+              </ListItemSecondaryAction>
+            )}
+          </MenuItem>
+        );
+      }),
+    [isMultiSelect, normalizedOptions, selectedValue]
+  );
+
+  const renderFieldComponent = useCallback(
+    ({ ariaDescribedBy, id }) => (
+      <MuiSelect
+        aria-describedby={ariaDescribedBy}
+        children={children}
+        data-se={testId}
+        id={id}
+        labelId={label}
+        multiple={isMultiSelect}
+        name={nameOverride ?? id}
+        onBlur={onBlur}
+        onChange={onChange}
+        onFocus={onFocus}
+        renderValue={isMultiSelect ? renderValue : undefined}
+        value={selectedValue}
+      />
+    ),
+    [
+      children,
+      isMultiSelect,
+      label,
+      nameOverride,
+      onBlur,
+      onChange,
+      onFocus,
+      renderValue,
+      selectedValue,
+      testId,
+    ]
+  );
+
+  return (
+    <Field
+      errorMessage={errorMessage}
+      fieldType="single"
+      hasVisibleLabel
+      hint={hint}
+      id={idOverride}
+      isDisabled={isDisabled}
+      isOptional={isOptional}
+      label={label}
+      renderFieldComponent={renderFieldComponent}
+    />
+  );
+};
 
 const MemoizedSelect = memo(Select);
 MemoizedSelect.displayName = "Select";

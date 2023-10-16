@@ -26,6 +26,10 @@ export type AutocompleteProps<
   IsCustomValueAllowed extends boolean | undefined
 > = {
   /**
+   * The error message for the Select
+   */
+  errorMessage?: string;
+  /**
    * Enables multiple choice selection
    */
   hasMultipleChoices?: MuiAutocompleteProps<
@@ -38,6 +42,10 @@ export type AutocompleteProps<
    * The hint text for the Autocomplete input
    */
   hint?: string;
+  /**
+   * The id attribute of the Select
+   */
+  id?: string;
   /**
    * Allows the input of custom values
    */
@@ -83,7 +91,20 @@ export type AutocompleteProps<
    */
   label: string;
   /**
-   * Callback fired when the value of the autocomplete input changes
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
+  /**
+   * Callback fired when the autocomplete loses focus.
+   */
+  onBlur?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["onBlur"];
+  /**
+   * Callback fired when a selection is made.
    */
   onChange?: MuiAutocompleteProps<
     OptionType,
@@ -92,7 +113,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["onChange"];
   /**
-   * Callback fired when the input value of the autocomplete input changes
+   * Callback fired when the textbox receives typed characters.
    */
   onInputChange?: MuiAutocompleteProps<
     OptionType,
@@ -100,6 +121,15 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["onInputChange"];
+  /**
+   * Callback fired when the autocomplete gains focus.
+   */
+  onFocus?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["onFocus"];
   /**
    * The options for the Autocomplete input
    */
@@ -125,7 +155,9 @@ const Autocomplete = <
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 >({
+  errorMessage,
   hasMultipleChoices,
+  id: idOverride,
   isCustomValueAllowed,
   isDisabled,
   isLoading,
@@ -133,8 +165,11 @@ const Autocomplete = <
   isReadOnly,
   hint,
   label,
+  name: nameOverride,
+  onBlur,
   onChange,
   onInputChange,
+  onFocus,
   options,
   value,
   testId,
@@ -142,6 +177,7 @@ const Autocomplete = <
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
+        errorMessage={errorMessage}
         fieldType="single"
         hasVisibleLabel
         id={InputLabelProps.htmlFor}
@@ -154,12 +190,13 @@ const Autocomplete = <
             {...InputProps}
             aria-describedby={ariaDescribedBy}
             id={id}
+            name={nameOverride ?? id}
             required={!isOptional}
           />
         )}
       />
     ),
-    [hint, isOptional, label]
+    [errorMessage, hint, isOptional, label, nameOverride]
   );
 
   return (
@@ -170,10 +207,14 @@ const Autocomplete = <
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
+      filterSelectedOptions={true}
+      id={idOverride}
       loading={isLoading}
       multiple={hasMultipleChoices}
+      onBlur={onBlur}
       onChange={onChange}
       onInputChange={onInputChange}
+      onFocus={onFocus}
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}
