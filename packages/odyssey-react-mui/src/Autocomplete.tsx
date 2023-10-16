@@ -223,7 +223,9 @@ const Autocomplete = <
   );
 };
 
-const MemoizedAutocomplete = memo(Autocomplete);
+// Need the typeof Autocomplete because generics don't get passed through
+const MemoizedAutocomplete = memo(Autocomplete) as typeof Autocomplete;
+// @ts-expect-error displayName is expected to not be on typeof Autocomplete
 MemoizedAutocomplete.displayName = "Autocomplete";
 
 export { MemoizedAutocomplete as Autocomplete };
