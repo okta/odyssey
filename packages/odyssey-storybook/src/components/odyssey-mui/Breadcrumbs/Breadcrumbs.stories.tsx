@@ -41,7 +41,7 @@ const storybookMeta: Meta<BreadcrumbsProps> = {
         },
       },
     },
-    maxItemsCount: {
+    maxVisibleItems: {
       control: "number",
       description:
         "The number of breadcrumbs displayed. Any additional breadcrumbs will be shown in a dropdown menu.",
@@ -61,17 +61,17 @@ export default storybookMeta;
 export const Default: StoryObj<BreadcrumbsProps> = {
   args: {
     homeHref: "#home",
-    maxItemsCount: 4,
+    maxVisibleItems: 4,
   },
   render: (args) => (
     <BreadcrumbList {...args}>
       <Breadcrumb href="#one">One</Breadcrumb>
       <Breadcrumb href="#two">Two</Breadcrumb>
-      <Breadcrumb href="#three" icon="user">
+      <Breadcrumb href="#three" iconName="user">
         Three
       </Breadcrumb>
       <Breadcrumb href="#four">Four</Breadcrumb>
-      <Breadcrumb href="#five" icon="group">
+      <Breadcrumb href="#five" iconName="group">
         Five
       </Breadcrumb>
       <Breadcrumb href="#six">Six</Breadcrumb>

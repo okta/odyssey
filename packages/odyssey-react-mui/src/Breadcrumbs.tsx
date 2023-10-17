@@ -17,9 +17,11 @@ import {
   Breadcrumbs as MuiBreadcrumbs,
 } from "@mui/material";
 import {
+  MouseEventHandler,
   ReactElement,
   createContext,
   memo,
+  useCallback,
   useContext,
   useMemo,
   useState,
@@ -28,76 +30,109 @@ import { GroupIcon, HomeIcon, UserIcon } from "./icons.generated";
 import { Typography } from "./Typography";
 import { useTranslation } from "react-i18next";
 
+export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";
+
 export type BreadcrumbProps = {
   children?: string;
   href: string;
-  icon?: "user" | "group";
+  iconName?: "user" | "group";
 };
 
 export type BreadcrumbsProps = {
   children: ReactElement<typeof Breadcrumb>[];
   homeHref?: string;
-  maxItemsCount?: number;
+  maxVisibleItems?: number;
 };
 
-const BreadcrumbContext = createContext({
-  isInsideMenu: false,
-  isCurrentPage: false,
+export type BreadcrumbContextType = {
+  breadcrumbType: BreadcrumbType;
+};
+
+export const BreadcrumbContext = createContext<BreadcrumbContextType>({
+  breadcrumbType: "listItem",
 });
 
-export const Breadcrumb = ({ children, href, icon }: BreadcrumbProps) => {
-  const { isInsideMenu, isCurrentPage } = useContext(BreadcrumbContext);
+export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
+  const { breadcrumbType } = useContext(BreadcrumbContext);
 
   const breadcrumbContent = (
     <>
-      {icon === "group" ? <GroupIcon /> : icon === "user" ? <UserIcon /> : null}
+      {iconName === "group" ? (
+        <GroupIcon />
+      ) : iconName === "user" ? (
+        <UserIcon />
+      ) : null}
       {children}
     </>
   );
 
-  if (isInsideMenu) {
+  if (breadcrumbType === "menuItem") {
     return <MenuItem href={href}>{breadcrumbContent}</MenuItem>;
   }
 
-  if (isCurrentPage) {
+  if (breadcrumbType === "currentPage") {
     return <Typography>{breadcrumbContent}</Typography>;
   }
 
-  return <ButtonBase href={href}>{breadcrumbContent}</ButtonBase>;
+  if (breadcrumbType === "listItem") {
+    return <ButtonBase href={href}>{breadcrumbContent}</ButtonBase>;
+  }
+
+  return;
+};
+
+const breadcrumbProviderValue: Record<
+  BreadcrumbType,
+  { breadcrumbType: BreadcrumbType }
+> = {
+  currentPage: {
+    breadcrumbType: "currentPage",
+  },
+  listItem: {
+    breadcrumbType: "listItem",
+  },
+  menuItem: {
+    breadcrumbType: "menuItem",
+  },
 };
 
 const BreadcrumbList = ({
   children,
   homeHref,
-  maxItemsCount: maxItemsCountOverride,
+  maxVisibleItems: maxVisibleItemsOverride,
 }: BreadcrumbsProps) => {
-  const maxItemsCount = maxItemsCountOverride ?? children.length;
+  const maxVisibleItems = maxVisibleItemsOverride ?? children.length;
 
   const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const breadcrumbSections = useMemo(() => {
-    let breadcrumbContents;
-
-    if (children.length <= maxItemsCount) {
-      breadcrumbContents = {
-        beforeMenu: null,
-        insideMenu: null,
+    if (children.length <= maxVisibleItems) {
+      return {
+        beforeMenu: [],
+        insideMenu: [],
         remainingBreadcrumbs: children,
       };
     } else {
-      const menuStart = Math.floor(maxItemsCount / 2);
-      const menuLength = children.length - maxItemsCount;
-      breadcrumbContents = {
+      const menuStart = Math.floor(maxVisibleItems / 2);
+      const menuLength = children.length - maxVisibleItems;
+
+      return {
         beforeMenu: children.slice(0, menuStart),
         insideMenu: children.slice(menuStart, menuStart + menuLength),
         remainingBreadcrumbs: children.slice(menuStart + menuLength),
       };
     }
+  }, [children, maxVisibleItems]);
 
-    return breadcrumbContents;
-  }, [children, maxItemsCount]);
+  const onMenuButtonClick = useCallback<MouseEventHandler<HTMLButtonElement>>(
+    (event) => setAnchorEl(event.currentTarget),
+    []
+  );
+  const onCloseMenu = useCallback(() => {
+    setAnchorEl(null);
+  }, []);
 
   return (
     <MuiBreadcrumbs
@@ -110,16 +145,18 @@ const BreadcrumbList = ({
         </ButtonBase>
       )}
 
-      {breadcrumbSections.beforeMenu}
+      {breadcrumbSections.beforeMenu.map((breadcrumb) => (
+        <BreadcrumbContext.Provider value={breadcrumbProviderValue.listItem}>
+          {breadcrumb}
+        </BreadcrumbContext.Provider>
+      ))}
 
       {breadcrumbSections.insideMenu && (
         <>
-          <ButtonBase onClick={(ev) => setAnchorEl(ev.currentTarget)}>
-            …
-          </ButtonBase>
+          <ButtonBase onClick={onMenuButtonClick}>…</ButtonBase>
           <Menu
             open={Boolean(anchorEl)}
-            onClose={() => setAnchorEl(null)}
+            onClose={onCloseMenu}
             anchorEl={anchorEl}
             anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
             MenuListProps={{
@@ -129,7 +166,7 @@ const BreadcrumbList = ({
             }}
           >
             <BreadcrumbContext.Provider
-              value={{ isInsideMenu: true, isCurrentPage: false }}
+              value={breadcrumbProviderValue.menuItem}
             >
               {breadcrumbSections.insideMenu}
             </BreadcrumbContext.Provider>
@@ -141,13 +178,17 @@ const BreadcrumbList = ({
         if (i === breadcrumbSections.remainingBreadcrumbs.length - 1) {
           return (
             <BreadcrumbContext.Provider
-              value={{ isInsideMenu: false, isCurrentPage: true }}
+              value={breadcrumbProviderValue.currentPage}
             >
               {breadcrumb}
             </BreadcrumbContext.Provider>
           );
         }
-        return breadcrumb;
+        return (
+          <BreadcrumbContext.Provider value={breadcrumbProviderValue.listItem}>
+            {breadcrumb}
+          </BreadcrumbContext.Provider>
+        );
       })}
     </MuiBreadcrumbs>
   );
