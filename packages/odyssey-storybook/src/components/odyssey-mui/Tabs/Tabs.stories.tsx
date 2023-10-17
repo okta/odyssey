@@ -13,7 +13,13 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
-import { Button, TabItemProps, Tabs, TabsProps } from "@okta/odyssey-react-mui";
+import {
+  Box,
+  Button,
+  TabItemProps,
+  Tabs,
+  TabsProps,
+} from "@okta/odyssey-react-mui";
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
 import { expect } from "@storybook/jest";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
@@ -213,14 +219,16 @@ export const Controlled: StoryObj<TabItemProps> = {
           tabs={tabs}
           onChange={onChange}
         />
-        <Button
-          label="Navigate to Galaxies"
-          variant="primary"
-          onClick={() => {
-            setValue("galaxies");
-          }}
-          size="small"
-        />
+        <Box sx={{ marginTop: 4 }}>
+          <Button
+            label="Navigate to Galaxies"
+            variant="primary"
+            onClick={() => {
+              setValue("galaxies");
+            }}
+            size="small"
+          />
+        </Box>
       </>
     );
   },
