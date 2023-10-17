@@ -1748,19 +1748,17 @@ export const components = ({
       styleOverrides: {
         // depth/menu
         elevation1: {
-          boxShadow: "0px 1px 2px 0px rgba(39, 39, 39, 0.07)",
+          boxShadow: odysseyTokens.DepthMenu,
         },
 
         // depth/dialog
         elevation2: {
-          boxShadow:
-            "0px 1px 4px 0px rgba(39, 39, 39, 0.08), 0px 4px 6px 0px rgba(39, 39, 39, 0.01), 0px 5px 15px 0px rgba(39, 39, 39, 0.05)",
+          boxShadow: odysseyTokens.DepthDialog,
         },
 
         // depth/drawer
         elevation3: {
-          boxShadow:
-            "0px 1px 4px 0px rgba(39, 39, 39, 0.08), 0px 4px 10px 0px rgba(39, 39, 39, 0.08), 0px 8px 30px 0px rgba(39, 39, 39, 0.10)",
+          boxShadow: odysseyTokens.DepthDrawer,
         },
       },
     },
