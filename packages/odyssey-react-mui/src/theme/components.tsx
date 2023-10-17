@@ -22,7 +22,6 @@ import { formControlLabelClasses } from "@mui/material/FormControlLabel";
 import { formLabelClasses } from "@mui/material/FormLabel";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
-import { listItemClasses } from "@mui/material";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
 import { listItemTextClasses } from "@mui/material/ListItemText";
 import { menuItemClasses } from "@mui/material/MenuItem";
@@ -1895,7 +1894,7 @@ export const components = ({
             backgroundColor: "transparent",
           },
 
-          "& > .MuiBox-root": {
+          "& .MuiBox-root": {
             display: "flex",
             flexWrap: "wrap",
             gap: odysseyTokens.Spacing1,
@@ -1903,7 +1902,7 @@ export const components = ({
             marginInline: `-${odysseyTokens.Spacing2}`,
           },
 
-          [listItemClasses.secondaryAction]: {
+          ["& .MuiListItemSecondaryAction-root"]: {
             display: "none",
           },
         },
