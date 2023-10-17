@@ -89,7 +89,6 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
   },
@@ -220,7 +219,6 @@ export const Controlled: StoryObj<TabItemProps> = {
           tabs={tabs}
           onChange={onChange}
         />
-        <br />
         <Typography>{`Current tab is ${value}`}</Typography>
         <Button
           label="Navigate to Galaxies externally"
