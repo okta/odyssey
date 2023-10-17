@@ -333,6 +333,40 @@ export const components = ({
         }),
       },
     },
+    MuiBreadcrumbs: {
+      styleOverrides: {
+        li: {
+          fontSize: odysseyTokens.TypographySizeBody,
+          lineHeight: odysseyTokens.TypographyLineHeightUi,
+
+          "& > a, & > button": {
+            borderRadius: odysseyTokens.BorderRadiusTight,
+            color: odysseyTokens.TypographyColorSubordinate,
+            display: "flex",
+            gap: odysseyTokens.Spacing1,
+            padding: odysseyTokens.Spacing1,
+            transitionProperty: "color, background-color",
+            transitionDuration: "100ms",
+            transitionTimingFunction: "linear",
+
+            "&:hover": {
+              backgroundColor: odysseyTokens.HueNeutral200,
+              color: odysseyTokens.TypographyColorBody,
+            },
+
+            "&:focus-visible": {
+              boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
+              outline: "2px solid transparent",
+              outlineOffset: "1px",
+            },
+          },
+        },
+        separator: {
+          color: odysseyTokens.BorderColorDisplay,
+          marginInline: odysseyTokens.Spacing1,
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         variant: "primary",
