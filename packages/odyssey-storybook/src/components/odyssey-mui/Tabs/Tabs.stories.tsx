@@ -10,23 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 
-import {
-  Button,
-  TabItemProps,
-  Tabs,
-  TabsProps,
-  Typography,
-} from "@okta/odyssey-react-mui";
+import { Button, TabItemProps, Tabs, TabsProps } from "@okta/odyssey-react-mui";
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
+import icons from "../../../../.storybook/components/iconUtils";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
-import icons from "../../../../.storybook/components/iconUtils";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {
   title: "MUI Components/Tabs",
@@ -219,9 +213,8 @@ export const Controlled: StoryObj<TabItemProps> = {
           tabs={tabs}
           onChange={onChange}
         />
-        <Typography>{`Current tab is ${value}`}</Typography>
         <Button
-          label="Navigate to Galaxies externally"
+          label="Navigate to Galaxies"
           variant="primary"
           onClick={() => {
             setValue("galaxies");
