@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ThemeOptions, listItemClasses } from "@mui/material";
+import { ThemeOptions } from "@mui/material";
 import type {} from "@mui/lab/themeAugmentation";
 import { alertTitleClasses } from "@mui/material/AlertTitle";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
@@ -22,6 +22,7 @@ import { formControlLabelClasses } from "@mui/material/FormControlLabel";
 import { formLabelClasses } from "@mui/material/FormLabel";
 import { inputAdornmentClasses } from "@mui/material/InputAdornment";
 import { inputBaseClasses } from "@mui/material/InputBase";
+import { listItemClasses } from "@mui/material";
 import { listItemIconClasses } from "@mui/material/ListItemIcon";
 import { listItemTextClasses } from "@mui/material/ListItemText";
 import { menuItemClasses } from "@mui/material/MenuItem";
