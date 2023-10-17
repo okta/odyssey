@@ -74,11 +74,10 @@ export const Breadcrumb = ({ children, href, iconName }: BreadcrumbProps) => {
     return <Typography>{breadcrumbContent}</Typography>;
   }
 
-  if (breadcrumbType === "listItem") {
-    return <ButtonBase href={href}>{breadcrumbContent}</ButtonBase>;
-  }
-
-  return;
+  // breadcrumbType === "listItem" is the default
+  // Provided here without a conditional to get TS to be quiet
+  // about potential undefined returns
+  return <ButtonBase href={href}>{breadcrumbContent}</ButtonBase>;
 };
 
 const breadcrumbProviderValue: Record<
