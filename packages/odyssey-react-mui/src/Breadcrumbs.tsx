@@ -139,7 +139,7 @@ const BreadcrumbList = ({
       aria-label={t("breadcrumbs.label.text")}
     >
       {homeHref && (
-        <ButtonBase href={homeHref} aria-label="Home">
+        <ButtonBase href={homeHref} aria-label={t("breadcrumbs.home.text")}>
           <HomeIcon />
         </ButtonBase>
       )}
