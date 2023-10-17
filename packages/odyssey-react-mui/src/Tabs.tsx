@@ -11,20 +11,20 @@
  */
 
 import {
+  TabContext as MuiTabContext,
+  TabList as MuiTabList,
+  TabListProps as MuiTabListProps,
+  TabPanel as MuiTabPanel,
+} from "@mui/lab";
+import { Tab as MuiTab } from "@mui/material";
+import {
   ReactElement,
   ReactNode,
-  SyntheticEvent,
   memo,
   useCallback,
   useEffect,
   useState,
 } from "react";
-import { Tab as MuiTab } from "@mui/material";
-import {
-  TabList as MuiTabList,
-  TabPanel as MuiTabPanel,
-  TabContext as MuiTabContext,
-} from "@mui/lab";
 import { SeleniumProps } from "./SeleniumProps";
 
 export type TabItemProps = {
@@ -71,7 +71,7 @@ export type TabsProps = {
   /**
    * Callback fired when the active tab is changed.
    */
-  onChange?: (event: SyntheticEvent, value: string) => void;
+  onChange?: MuiTabListProps["onChange"];
 };
 
 const Tabs = ({
@@ -79,18 +79,16 @@ const Tabs = ({
   initialValue,
   tabs,
   value,
-  onChange,
+  onChange: onChangeProp,
 }: TabsProps) => {
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
 
-  const handleChange = useCallback(
-    (event: SyntheticEvent, value: string) => {
+  const onChange = useCallback<NonNullable<MuiTabListProps["onChange"]>>(
+    (event, value: string) => {
       setTabState(value);
-      if (onChange) {
-        onChange(event, value);
-      }
+      onChangeProp?.(event, value);
     },
-    [onChange]
+    [onChangeProp]
   );
 
   useEffect(() => {
@@ -101,7 +99,7 @@ const Tabs = ({
 
   return (
     <MuiTabContext value={tabState}>
-      <MuiTabList onChange={handleChange} aria-label={ariaLabel}>
+      <MuiTabList onChange={onChange} aria-label={ariaLabel}>
         {tabs.map((tab, index) => (
           <MuiTab
             data-se={tab.testId}
