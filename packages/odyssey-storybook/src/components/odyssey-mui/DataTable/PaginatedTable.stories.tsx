@@ -27,9 +27,11 @@ const storybookMeta: Meta = {
   argTypes: {
     columns: {
       control: "array",
+      description: "<b>Required.</b> ",
     },
     data: {
       control: "object",
+      description: "<b>Required.</b> ",
     },
     getRowId: {
       control: "function",
@@ -63,6 +65,13 @@ const storybookMeta: Meta = {
     },
     ToolbarButtons: {
       control: "function",
+    },
+    rowsPerPage: {
+      table: {
+        defaultValue: {
+          summary: 10,
+        },
+      },
     },
   },
   decorators: [MuiThemeDecorator],

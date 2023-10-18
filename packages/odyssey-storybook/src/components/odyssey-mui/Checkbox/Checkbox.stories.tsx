@@ -22,7 +22,7 @@ import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
-const storybookMeta: Meta<CheckboxProps> = {
+const storybookMeta: Meta<typeof Checkbox> = {
   title: "MUI Components/Forms/Checkbox",
   component: Checkbox,
   argTypes: {
@@ -59,6 +59,9 @@ const storybookMeta: Meta<CheckboxProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -115,7 +118,6 @@ const storybookMeta: Meta<CheckboxProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     validity: {

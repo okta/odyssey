@@ -62,6 +62,9 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: true,
+        },
       },
     },
     hint: {
@@ -90,6 +93,9 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isOptional: {
@@ -98,6 +104,9 @@ const storybookMeta: Meta<PasswordFieldProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -112,7 +121,8 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     },
     label: {
       control: "text",
-      description: "The label text for the password field input",
+      description:
+        "<b>Required.</b> The label text for the password field input",
       table: {
         type: {
           summary: "string",
@@ -127,7 +137,6 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -137,7 +146,6 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -148,7 +156,6 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     placeholder: {

@@ -39,7 +39,9 @@ const meta: Meta<ToastProps> = {
         type: {
           summary: "number",
         },
-        defaultValue: 6000,
+        defaultValue: {
+          summary: 6000,
+        },
       },
     },
     isDismissable: {
@@ -49,7 +51,9 @@ const meta: Meta<ToastProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: false,
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isVisible: {
@@ -87,7 +91,6 @@ const meta: Meta<ToastProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     role: {
@@ -104,7 +107,7 @@ const meta: Meta<ToastProps> = {
     severity: {
       options: toastSeverityValues,
       control: { type: "radio" },
-      description: "Determine the color and icon of the alert",
+      description: "<b>Required.</b> Determine the color and icon of the alert",
       table: {
         type: {
           summary: toastSeverityValues.join(" | "),
@@ -113,7 +116,7 @@ const meta: Meta<ToastProps> = {
     },
     text: {
       control: "text",
-      description: "The text content of the alert",
+      description: "<b>Required.</b> The text content of the alert",
       table: {
         type: {
           summary: "string",

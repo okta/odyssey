@@ -120,6 +120,9 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isReadOnly: {
@@ -133,7 +136,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     label: {
       control: "text",
-      description: "The label text for the autocomplete input",
+      description: "<b>Required.</b> The label text for the autocomplete input",
       table: {
         type: {
           summary: "string",
@@ -158,7 +161,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -168,7 +170,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onInputChange: {
@@ -178,7 +179,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -189,12 +189,11 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     options: {
       control: null,
-      description: "The options for the autocomplete input",
+      description: "<b>Required.</b> The options for the autocomplete input",
       table: {
         type: {
           summary:

@@ -49,7 +49,6 @@ const storybookMeta: Meta<ButtonProps> = {
         type: {
           summary: "<Icon />",
         },
-        defaultValue: "",
       },
     },
     id: {
@@ -59,7 +58,6 @@ const storybookMeta: Meta<ButtonProps> = {
         type: {
           summary: "string",
         },
-        defaultValue: "",
       },
     },
     isDisabled: {
@@ -69,7 +67,6 @@ const storybookMeta: Meta<ButtonProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: "",
       },
     },
     isFullWidth: {
@@ -90,7 +87,6 @@ const storybookMeta: Meta<ButtonProps> = {
         type: {
           summary: "string",
         },
-        defaultValue: "",
       },
     },
     onClick: {
@@ -100,7 +96,6 @@ const storybookMeta: Meta<ButtonProps> = {
         type: {
           summary: "(() => void)",
         },
-        defaultValue: "",
       },
     },
     size: {
@@ -127,7 +122,6 @@ const storybookMeta: Meta<ButtonProps> = {
         type: {
           summary: "<Icon />",
         },
-        defaultValue: "",
       },
     },
     tooltipText: {
@@ -138,14 +132,12 @@ const storybookMeta: Meta<ButtonProps> = {
         type: {
           summary: "string",
         },
-        defaultValue: "",
       },
     },
     type: {
       options: buttonTypeValues,
       control: { type: "radio" },
       description: "The type of the HTML button element.",
-      defaultValue: "button",
       table: {
         type: {
           summary: buttonTypeValues.join(" | "),
@@ -158,8 +150,7 @@ const storybookMeta: Meta<ButtonProps> = {
     variant: {
       options: buttonVariantValues,
       control: { type: "radio" },
-      description: "The color and style of the button",
-      defaultValue: "secondary",
+      description: "<b>Required.</b> The color and style of the button",
       table: {
         type: {
           summary: buttonVariantValues.join(" | "),

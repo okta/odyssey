@@ -52,7 +52,8 @@ const storybookMeta: Meta<FormProps> = {
     },
     children: {
       control: "obj",
-      description: "Field or FieldSet components within the Form",
+      description:
+        "<b>Required.</b> Field or FieldSet components within the Form",
       table: {
         type: {
           summary: "ReactElement | Array<ReactElement>",
@@ -82,7 +83,7 @@ const storybookMeta: Meta<FormProps> = {
     name: {
       control: "text",
       description:
-        "The name of the form. The value must not be an empty string and must be unique among the form elements",
+        "<b>Required.</b> The name of the form. The value must not be an empty string and must be unique among the form elements",
       table: {
         type: {
           summary: "string",
@@ -96,6 +97,9 @@ const storybookMeta: Meta<FormProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },

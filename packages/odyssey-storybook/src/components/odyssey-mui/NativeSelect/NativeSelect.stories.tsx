@@ -73,6 +73,9 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isMultiSelect: {
@@ -83,6 +86,9 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isOptional: {
@@ -92,11 +98,15 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     label: {
       control: "text",
-      description: "The label text for the native select component",
+      description:
+        "<b>Required.</b> The label text for the native select component",
       table: {
         type: {
           summary: "string",
@@ -111,7 +121,6 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -122,7 +131,6 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -133,7 +141,6 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     value: {

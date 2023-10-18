@@ -45,6 +45,9 @@ const storybookMeta: Meta<SearchFieldProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     id: {
@@ -59,7 +62,7 @@ const storybookMeta: Meta<SearchFieldProps> = {
     label: {
       control: "text",
       description:
-        "This label won't show up visually, but it's required for accessibility",
+        "<b>Required.</b> This label won't show up visually, but it's required for accessibility",
       table: {
         type: {
           summary: "string",
@@ -83,7 +86,6 @@ const storybookMeta: Meta<SearchFieldProps> = {
         type: {
           summary: "function",
         },
-        defaultValue: "",
       },
     },
     onClear: {
@@ -93,7 +95,6 @@ const storybookMeta: Meta<SearchFieldProps> = {
         type: {
           summary: "function",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -103,7 +104,6 @@ const storybookMeta: Meta<SearchFieldProps> = {
         type: {
           summary: "function",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -113,7 +113,6 @@ const storybookMeta: Meta<SearchFieldProps> = {
         type: {
           summary: "function",
         },
-        defaultValue: "",
       },
     },
     placeholder: {

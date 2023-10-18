@@ -46,12 +46,14 @@ const storybookMeta: Meta<TagProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: false,
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     label: {
       control: "text",
-      description: "The label text for the tag",
+      description: "<b>Required.</b> The label text for the tag",
       table: {
         type: {
           summary: "string",
