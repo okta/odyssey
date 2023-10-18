@@ -163,7 +163,7 @@ export const Default: StoryObj<CheckboxProps> = {
         label={label}
         isChecked={isChecked}
         onChange={(_, checked) => {
-          console.warn("onChange", checked);
+          console.log("onChange", checked);
           setIsChecked(checked);
         }}
       />

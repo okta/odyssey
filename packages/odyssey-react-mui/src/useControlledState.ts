@@ -17,7 +17,7 @@ import { useEffect, useRef, useState } from "react";
  * When `initialState` is passed, the returned function to update it does nothing. This is
  * useful to handle values in components that may be controlled externally when that value is
  * passed in props and thus wish to prevent internal updates of the same value.
- * 
+ *
  * @param initialState
  * @see https://react.dev/reference/react/useState
  */
@@ -27,11 +27,11 @@ export const useControlledState: typeof useState = (initialState?) => {
 
   useEffect(() => {
     setStateValue(initialState);
-  }, [initialState])
+  }, [initialState]);
 
   return [
     stateValue,
-    // is value is controlled external to the component then we ignore calls to the setter
+    // If `value` is controlled externally, ignore calls to the setter.
     isControlled.current ? () => undefined : setStateValue,
   ];
 };
