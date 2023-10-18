@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0](https://github.com/okta/odyssey/compare/v1.2.0...v1.3.0) (2023-10-18)
+
+### Features
+
+- group picker ([71171e0](https://github.com/okta/odyssey/commit/71171e009460f6f6606cd4b87647d36c8d5b119a))
+
+### Bug Fixes
+
+- concurrency in Applitools being too high ([#1997](https://github.com/okta/odyssey/issues/1997)) ([34a3299](https://github.com/okta/odyssey/commit/34a3299b031dd93be1b13ba3c9b69fa929311d04))
+- menu button not allowing falsey children ([#1999](https://github.com/okta/odyssey/issues/1999)) ([b63b117](https://github.com/okta/odyssey/commit/b63b117beb7d86671a91d76256092400d0c7e204))
+- **odyssey-react-mui:** added more stories ([29fa4fa](https://github.com/okta/odyssey/commit/29fa4fa258b05a40de5cee4a59d19ab6a64d01da))
+- **odyssey-react-mui:** improve PasswordField docs ([6c1cd05](https://github.com/okta/odyssey/commit/6c1cd052ae11d870d2ad7f1413d719ebfc9c1c60))
+
 ## [1.2.0](https://github.com/okta/odyssey/compare/v1.1.1...v1.2.0) (2023-09-29)
 
 ### Features

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0](https://github.com/okta/odyssey/compare/v1.2.0...v1.3.0) (2023-10-18)
+
+### Features
+
+- group picker ([71171e0](https://github.com/okta/odyssey/commit/71171e009460f6f6606cd4b87647d36c8d5b119a))
+
+### Bug Fixes
+
+- gray color in default Status lamp variant ([1dd74df](https://github.com/okta/odyssey/commit/1dd74df9cb86147ed4cb02e3deb04c0be7f6fe6c))
+- inclusive language adjustments ([#1995](https://github.com/okta/odyssey/issues/1995)) ([82f4cb5](https://github.com/okta/odyssey/commit/82f4cb5290d418623c35fdb2504da37ab05a2d89))
+- menu button not allowing falsey children ([#1999](https://github.com/okta/odyssey/issues/1999)) ([b63b117](https://github.com/okta/odyssey/commit/b63b117beb7d86671a91d76256092400d0c7e204))
+- remove border from default status lamp ([5bacb73](https://github.com/okta/odyssey/commit/5bacb73d76662e6d4c4a5423fdf6cb96ac677913))
+- update displayName for Autocomplete ([#1983](https://github.com/okta/odyssey/issues/1983)) ([65abc8e](https://github.com/okta/odyssey/commit/65abc8e99949d9bafacace4a5591dec93ca3cc1f))
+
 ## [1.2.0](https://github.com/okta/odyssey/compare/v1.1.1...v1.2.0) (2023-09-29)
 
 ### Features
