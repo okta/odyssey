@@ -189,7 +189,7 @@ export const Controlled: StoryObj<TabItemProps> = {
   render: function C() {
     const [value, setValue] = useState("planets");
 
-    const onChange = (_e: unknown, value: string) => {
+    const onChange: TabsProps["onChange"] = (_e: unknown, value: string) => {
       setValue(value);
     };
 
