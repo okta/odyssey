@@ -156,14 +156,14 @@ export const Default: StoryObj<CheckboxProps> = {
   args: {
     label: "Enable warp drive recalibration",
   },
-  render: ({ label }) => {
+  render: function C({ label }) {
     const [isChecked, setIsChecked] = useState(false);
     return (
       <Checkbox
         label={label}
         isChecked={isChecked}
         onChange={(_, checked) => {
-          console.warn('onChange', checked);
+          console.warn("onChange", checked);
           setIsChecked(checked);
         }}
       />

@@ -65,36 +65,38 @@ type BaseCheckboxProps = {
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   SeleniumProps;
 
-export type CheckboxProps = BaseCheckboxProps & {
-  /**
-   * Sets the checked state of the Checkbox
-   */
-  isChecked: boolean;
-  /**
-   * Determines whether the Checkbox is checked
-   * Should not be used if `isChecked` is used
-   */
-  isDefaultChecked?: never;
-  /**
-   * The change event handler for the Checkbox
-   * Must be used if `isChecked` is used
-   */
-  onChange: MuiCheckboxProps["onChange"];
-} | BaseCheckboxProps & {
-  /**
-   * Sets the checked state of the Checkbox
-   * Should not be used if `isDefaultChecked` is used
-   */
-  isChecked?: never;
-  /**
-   * Determines whether the Checkbox is checked
-   */
-  isDefaultChecked?: boolean;
-  /**
-   * The change event handler for the Checkbox
-   */
-  onChange?: MuiCheckboxProps["onChange"];
-};
+export type CheckboxProps =
+  | (BaseCheckboxProps & {
+      /**
+       * Sets the checked state of the Checkbox
+       */
+      isChecked: boolean;
+      /**
+       * Determines whether the Checkbox is checked
+       * Should not be used if `isChecked` is used
+       */
+      isDefaultChecked?: never;
+      /**
+       * The change event handler for the Checkbox
+       * Must be used if `isChecked` is used
+       */
+      onChange: MuiCheckboxProps["onChange"];
+    })
+  | (BaseCheckboxProps & {
+      /**
+       * Sets the checked state of the Checkbox
+       * Should not be used if `isDefaultChecked` is used
+       */
+      isChecked?: never;
+      /**
+       * Determines whether the Checkbox is checked
+       */
+      isDefaultChecked?: boolean;
+      /**
+       * The change event handler for the Checkbox
+       */
+      onChange?: MuiCheckboxProps["onChange"];
+    });
 
 const Checkbox = ({
   ariaLabel,
@@ -113,7 +115,9 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
-  const [isCheckedValue, setIsCheckedValue] = useControlledState(isChecked || isDefaultChecked);
+  const [isCheckedValue, setIsCheckedValue] = useControlledState(
+    isChecked || isDefaultChecked
+  );
 
   const label = useMemo(() => {
     if (isRequired) {
