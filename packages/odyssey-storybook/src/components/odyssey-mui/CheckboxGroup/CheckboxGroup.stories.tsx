@@ -30,13 +30,15 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
   argTypes: {
     children: {
       control: null,
-      description:
-        "<b>Required.</b> A single Checkbox element or an array of Checkbox elements",
+      description: "A single Checkbox element or an array of Checkbox elements",
       table: {
         type: {
           summary:
             "ReactElement<typeof Checkbox> | Array<ReactElement<typeof Checkbox>>",
         },
+      },
+      type: {
+        required: true,
       },
     },
     errorMessage: {
@@ -80,11 +82,14 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
     },
     label: {
       control: "text",
-      description: "<b>Required.</b> The label text for the checkbox group",
+      description: "The label text for the checkbox group",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
   },

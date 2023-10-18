@@ -90,11 +90,14 @@ const storybookMeta: Meta<MenuButtonProps> = {
     },
     children: {
       control: "obj",
-      description: "<b>Required.</b> The <MenuItem> components within the Menu",
+      description: "The <MenuItem> components within the Menu",
       table: {
         type: {
           summary: "[MenuItem | Divider | ListSubheader]",
         },
+      },
+      type: {
+        required: true,
       },
     },
     endIcon: {

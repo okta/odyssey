@@ -150,7 +150,7 @@ const storybookMeta: Meta<ButtonProps> = {
     variant: {
       options: buttonVariantValues,
       control: { type: "radio" },
-      description: "<b>Required.</b> The color and style of the button",
+      description: "The color and style of the button",
       table: {
         type: {
           summary: buttonVariantValues.join(" | "),
@@ -158,6 +158,9 @@ const storybookMeta: Meta<ButtonProps> = {
         defaultValue: {
           summary: "secondary",
         },
+      },
+      type: {
+        required: true,
       },
     },
   },

@@ -105,12 +105,14 @@ const storybookMeta: Meta<NativeSelectProps> = {
     },
     label: {
       control: "text",
-      description:
-        "<b>Required.</b> The label text for the native select component",
+      description: "The label text for the native select component",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     onBlur: {

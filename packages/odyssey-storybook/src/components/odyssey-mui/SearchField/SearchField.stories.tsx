@@ -62,11 +62,14 @@ const storybookMeta: Meta<SearchFieldProps> = {
     label: {
       control: "text",
       description:
-        "<b>Required.</b> This label won't show up visually, but it's required for accessibility",
+        "This label won't show up visually, but it's required for accessibility",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     name: {

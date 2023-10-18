@@ -53,11 +53,14 @@ const storybookMeta: Meta<TagProps> = {
     },
     label: {
       control: "text",
-      description: "<b>Required.</b> The label text for the tag",
+      description: "The label text for the tag",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     onClick: {

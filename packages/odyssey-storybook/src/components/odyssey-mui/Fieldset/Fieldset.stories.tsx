@@ -35,11 +35,14 @@ const storybookMeta: Meta<FieldsetProps> = {
     },
     children: {
       control: "obj",
-      description: "<b>Required.</b> Field components within the Fieldset",
+      description: "Field components within the Fieldset",
       table: {
         type: {
           summary: "ReactElement | Array<ReactElement>",
         },
+      },
+      type: {
+        required: true,
       },
     },
     description: {
@@ -71,11 +74,14 @@ const storybookMeta: Meta<FieldsetProps> = {
     },
     legend: {
       control: "text",
-      description: "<b>Required.</b> The title of the Fieldset",
+      description: "The title of the Fieldset",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     name: {

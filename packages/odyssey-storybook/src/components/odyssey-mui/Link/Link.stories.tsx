@@ -29,6 +29,9 @@ export default {
           summary: "ReactNode",
         },
       },
+      type: {
+        required: true,
+      },
     },
     href: {
       control: "text",
@@ -37,6 +40,9 @@ export default {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     icon: {
@@ -63,11 +69,14 @@ export default {
     target: {
       control: "text",
       description:
-        "<b>Required.</b> If set to `_blank`, the Link will display an external icon.",
+        "If set to `_blank`, the Link will display an external icon.",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     variant: {

@@ -60,21 +60,26 @@ const storybookMeta: Meta<DialogProps> = {
     children: {
       control: "text",
       description:
-        "<b>Required.</b> The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.",
+        "The content of the Dialog. May be a `string` or any other `ReactNode` or array of `ReactNode`s.",
       table: {
         type: {
           summary: "ReactNode | Array<ReactNode>",
         },
       },
+      type: {
+        required: true,
+      },
     },
     isOpen: {
       control: "boolean",
-      description:
-        "<b>Required.</b> When set to `true`, the Dialog will be visible.",
+      description: "When set to `true`, the Dialog will be visible.",
       table: {
         type: {
           summary: "boolean",
         },
+      },
+      type: {
+        required: true,
       },
     },
     onClose: {
@@ -89,15 +94,19 @@ const storybookMeta: Meta<DialogProps> = {
     },
     title: {
       control: "text",
-      description: "<b>Required.</b> ",
       table: {
         type: {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+      },
     },
     ariaLabel: {
-      description: "<b>Required.</b> ",
+      type: {
+        required: true,
+      },
       control: "text",
     },
   },

@@ -127,11 +127,14 @@ const storybookMeta: Meta<TextFieldProps> = {
     },
     label: {
       control: "text",
-      description: "<b>Required.</b> The label for the `input` element",
+      description: "The label for the `input` element",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     name: {

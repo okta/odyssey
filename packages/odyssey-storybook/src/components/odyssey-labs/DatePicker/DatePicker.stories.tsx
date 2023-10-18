@@ -29,11 +29,13 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
   argTypes: {
     label: {
       control: "text",
-      description: "<b>Required.</b> ",
       table: {
         defaultValue: {
           summary: "DatePicker label",
         },
+      },
+      type: {
+        required: true,
       },
     },
     onChange: {
@@ -49,11 +51,13 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
     },
     value: {
       control: "text",
-      description: "<b>Required.</b> ",
       table: {
         defaultValue: {
           summary: null,
         },
+      },
+      type: {
+        required: true,
       },
     },
   },

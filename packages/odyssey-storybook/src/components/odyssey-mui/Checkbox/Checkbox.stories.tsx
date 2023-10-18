@@ -22,13 +22,13 @@ import { expect } from "@storybook/jest";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
-const storybookMeta: Meta<typeof Checkbox> = {
+const storybookMeta: Meta<CheckboxProps> = {
   title: "MUI Components/Forms/Checkbox",
   component: Checkbox,
   argTypes: {
     ariaLabel: {
       control: "text",
-      description: "Aria-label for the checkbox",
+      description: "Aria-label for the checkboxx",
       table: {
         type: {
           summary: "string",

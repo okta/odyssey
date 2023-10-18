@@ -30,30 +30,39 @@ const storybookMeta: Meta<TooltipProps> = {
   argTypes: {
     children: {
       control: "obj",
-      description: "<b>Required.</b> The content that will trigger the tooltip",
+      description: "The content that will trigger the tooltip",
       table: {
         type: {
           summary: "ReactElement",
         },
       },
+      type: {
+        required: true,
+      },
     },
     ariaType: {
       options: ["description", "label"],
       control: { type: "radio" },
-      description: "<b>Required.</b> The type of ARIA attribute to use",
+      description: "The type of ARIA attribute to use",
       table: {
         type: {
           summary: "description | label",
         },
       },
+      type: {
+        required: true,
+      },
     },
     text: {
       control: "text",
-      description: "<b>Required.</b> The text to display in the tooltip",
+      description: "The text to display in the tooltip",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     placement: {

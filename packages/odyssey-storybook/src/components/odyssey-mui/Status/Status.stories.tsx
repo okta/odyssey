@@ -25,13 +25,15 @@ const storybookMeta: Meta<StatusProps> = {
   argTypes: {
     label: {
       control: "text",
-      description: "<b>Required.</b> The text describing the Status",
+      description: "The text describing the Status",
+      type: {
+        required: true,
+      },
     },
     severity: {
       control: "radio",
       options: statusSeverityValues,
-      description:
-        "<b>Required.</b> The severity of the Status, as indicated by its styling",
+      description: "The severity of the Status, as indicated by its styling",
       table: {
         type: {
           summary: statusSeverityValues.join(" | "),
@@ -39,6 +41,9 @@ const storybookMeta: Meta<StatusProps> = {
         defaultValue: {
           summary: "default",
         },
+      },
+      type: {
+        required: true,
       },
     },
     variant: {

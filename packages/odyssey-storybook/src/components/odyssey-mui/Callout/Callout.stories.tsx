@@ -27,11 +27,14 @@ const storybookMeta: Meta<CalloutProps> = {
   argTypes: {
     children: {
       control: null,
-      description: "<b>Required.</b> The contents of the alert",
+      description: "The contents of the alert",
       table: {
         type: {
           summary: "ReactNode",
         },
+      },
+      type: {
+        required: true,
       },
     },
     role: {
@@ -48,11 +51,14 @@ const storybookMeta: Meta<CalloutProps> = {
     severity: {
       options: calloutSeverityValues,
       control: { type: "radio" },
-      description: "<b>Required.</b> Determine the color and icon of the alert",
+      description: "Determine the color and icon of the alert",
       table: {
         type: {
           summary: calloutSeverityValues.join(" | "),
         },
+      },
+      type: {
+        required: true,
       },
     },
     title: {

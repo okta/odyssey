@@ -107,20 +107,26 @@ const meta: Meta<ToastProps> = {
     severity: {
       options: toastSeverityValues,
       control: { type: "radio" },
-      description: "<b>Required.</b> Determine the color and icon of the alert",
+      description: "Determine the color and icon of the alert",
       table: {
         type: {
           summary: toastSeverityValues.join(" | "),
         },
       },
+      type: {
+        required: true,
+      },
     },
     text: {
       control: "text",
-      description: "<b>Required.</b> The text content of the alert",
+      description: "The text content of the alert",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
   },

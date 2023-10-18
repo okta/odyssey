@@ -27,11 +27,14 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
   argTypes: {
     children: {
       control: "text",
-      description: "<b>Required.</b> The content of the tab item",
+      description: "The content of the tab item",
       table: {
         type: {
           summary: "ReactNode",
         },
+      },
+      type: {
+        required: true,
       },
     },
     startIcon: {
@@ -49,11 +52,14 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
     },
     label: {
       control: "text",
-      description: "<b>Required.</b> The label text for the tab item",
+      description: "The label text for the tab item",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     isDisabled: {

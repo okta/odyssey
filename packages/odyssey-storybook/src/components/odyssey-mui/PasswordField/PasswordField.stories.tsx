@@ -121,12 +121,14 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     },
     label: {
       control: "text",
-      description:
-        "<b>Required.</b> The label text for the password field input",
+      description: "The label text for the password field input",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     onBlur: {

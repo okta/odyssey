@@ -136,11 +136,14 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     label: {
       control: "text",
-      description: "<b>Required.</b> The label text for the autocomplete input",
+      description: "The label text for the autocomplete input",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     name: {
@@ -193,12 +196,15 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     options: {
       control: null,
-      description: "<b>Required.</b> The options for the autocomplete input",
+      description: "The options for the autocomplete input",
       table: {
         type: {
           summary:
             "Array<OptionType> | GroupedOptionType<OptionType>[] | Promise<Array<OptionType> | GroupedOptionType<OptionType>[]>",
         },
+      },
+      type: {
+        required: true,
       },
     },
     value: {

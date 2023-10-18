@@ -171,11 +171,14 @@ const storybookMeta: Meta<SelectProps> = {
     },
     label: {
       control: "text",
-      description: "<b>Required.</b> The label text for the select component",
+      description: "The label text for the select component",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     name: {
@@ -218,11 +221,14 @@ const storybookMeta: Meta<SelectProps> = {
     },
     options: {
       control: "object",
-      description: "<b>Required.</b> The options for the select component",
+      description: "The options for the select component",
       table: {
         type: {
           summary: "(string | SelectOption)[]",
         },
+      },
+      type: {
+        required: true,
       },
     },
     value: {

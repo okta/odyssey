@@ -50,11 +50,14 @@ const storybookMeta: Meta<RadioProps> = {
     },
     label: {
       control: "text",
-      description: "<b>Required.</b> The label text for the radio button",
+      description: "The label text for the radio button",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
     name: {
@@ -68,11 +71,14 @@ const storybookMeta: Meta<RadioProps> = {
     },
     value: {
       control: "text",
-      description: "<b>Required.</b> The value attribute of the radio button",
+      description: "The value attribute of the radio button",
       table: {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
       },
     },
   },
