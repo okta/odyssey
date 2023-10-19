@@ -91,6 +91,16 @@ export default {
         },
       },
     },
+    onClick: {
+      action: true,
+      description: "Callback fired when the link is clicked",
+      table: {
+        type: {
+          summary: "(() => void)",
+        },
+        defaultValue: "",
+      },
+    },
   },
   decorators: [MuiThemeDecorator],
 };
