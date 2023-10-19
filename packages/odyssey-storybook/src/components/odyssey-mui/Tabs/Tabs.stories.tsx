@@ -40,6 +40,10 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
           summary: "ReactNode",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     startIcon: {
       control: {
@@ -62,6 +66,10 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     isDisabled: {
       control: "boolean",
@@ -70,7 +78,9 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: false,
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     value: {

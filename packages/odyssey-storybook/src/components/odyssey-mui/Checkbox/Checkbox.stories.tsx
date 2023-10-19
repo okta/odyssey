@@ -28,7 +28,7 @@ const storybookMeta: Meta<CheckboxProps> = {
   argTypes: {
     ariaLabel: {
       control: "text",
-      description: "Aria-label for the checkbox",
+      description: "Aria-label for the checkboxx",
       table: {
         type: {
           summary: "string",
@@ -59,6 +59,9 @@ const storybookMeta: Meta<CheckboxProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -115,7 +118,6 @@ const storybookMeta: Meta<CheckboxProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     validity: {

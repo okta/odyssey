@@ -54,7 +54,6 @@ const storybookMeta: Meta<typeof Banner> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     role: {
@@ -77,6 +76,11 @@ const storybookMeta: Meta<typeof Banner> = {
           summary: bannerSeverityValues.join(" | "),
         },
       },
+      type: {
+        required: true,
+        name: "other",
+        value: "radio",
+      },
     },
     text: {
       control: "text",
@@ -85,6 +89,10 @@ const storybookMeta: Meta<typeof Banner> = {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
+        name: "string",
       },
     },
   },
