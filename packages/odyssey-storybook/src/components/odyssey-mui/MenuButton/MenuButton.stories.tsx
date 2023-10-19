@@ -127,6 +127,16 @@ const storybookMeta: Meta<MenuButtonProps> = {
         defaultValue: "",
       },
     },
+    menuAlignment: {
+      options: ["left", "right"],
+      control: { type: "radio" },
+      description: "The horizontal alignment of the menu.",
+      table: {
+        type: {
+          summary: "left | right",
+        },
+      },
+    },
     tooltipText: {
       control: "text",
       description:

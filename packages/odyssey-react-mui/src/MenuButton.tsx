@@ -17,9 +17,22 @@ import {
   MenuItem,
   useUniqueId,
 } from "./";
-import { Divider, ListSubheader, Menu } from "@mui/material";
+import {
+  ButtonProps,
+  Divider,
+  ListSubheader,
+  Menu,
+  MenuProps,
+} from "@mui/material";
 import { ChevronDownIcon, MoreIcon } from "./icons.generated";
-import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
+import {
+  memo,
+  type ReactElement,
+  useCallback,
+  useMemo,
+  useState,
+  ReactFragment,
+} from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "./NullElement";
@@ -49,10 +62,12 @@ export type MenuButtonProps = {
   /**
    * The <MenuItem> components within the Menu.
    */
-  children: Array<
-    | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
-    | NullElement
-  >;
+  children:
+    | ReactFragment
+    | Array<
+        | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
+        | NullElement
+      >;
   /**
    * The end Icon on the trigggering Button
    */
@@ -65,6 +80,18 @@ export type MenuButtonProps = {
    * If the MenuButton is an overflow menu or standard menu.
    */
   isOverflow?: boolean;
+  /**
+   * The horizontal alignment of the menu.
+   */
+  menuAlignment?: "left" | "right";
+  /**
+   * Optional function to fire on button click
+   */
+  onClick?: ButtonProps["onClick"];
+  /**
+   * Optional function to fire on memu close
+   */
+  onClose?: MenuProps["onClose"];
   /**
    * The size of the button
    */
@@ -102,6 +129,9 @@ const MenuButton = ({
   endIcon: endIconProp,
   id: idOverride,
   isOverflow,
+  menuAlignment = "left",
+  onClick,
+  onClose,
   size,
   testId,
   tooltipText,
@@ -110,11 +140,13 @@ const MenuButton = ({
 
   const isOpen = Boolean(anchorEl);
 
-  const closeMenu = useCallback<MenuContextType["closeMenu"]>(() => {
+  const closeMenu = useCallback((event, reason) => {
+    onClose?.(event, reason);
     setAnchorEl(null);
   }, []);
 
-  const openMenu = useCallback<MenuContextType["openMenu"]>((event) => {
+  const openMenu = useCallback((event) => {
+    onClick?.(event);
     setAnchorEl(event.currentTarget);
   }, []);
 
@@ -162,6 +194,8 @@ const MenuButton = ({
 
       <Menu
         anchorEl={anchorEl}
+        anchorOrigin={{ horizontal: menuAlignment, vertical: "bottom" }}
+        transformOrigin={{ horizontal: menuAlignment, vertical: "top" }}
         id={`${uniqueId}-menu`}
         MenuListProps={menuListProps}
         onClose={closeMenu}

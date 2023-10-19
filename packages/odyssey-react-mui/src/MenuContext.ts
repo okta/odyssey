@@ -10,11 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createContext, MouseEventHandler } from "react";
+import { MenuProps } from "@mui/material";
+import { createContext } from "react";
+import { ButtonProps } from "./Button";
 
 export type MenuContextType = {
-  closeMenu: () => void;
-  openMenu: MouseEventHandler<HTMLElement>;
+  closeMenu: MenuProps["onClose"];
+  openMenu: ButtonProps["onClick"];
 };
 
 export const MenuContext = createContext<MenuContextType>({

@@ -68,7 +68,7 @@ const MenuItem = ({
   const onClick = useCallback<NonNullable<MuiMenuItemProps["onClick"]>>(
     (event) => {
       onClickProp?.(event);
-      closeMenu();
+      closeMenu?.(event, "backdropClick");
     },
     [onClickProp, closeMenu]
   );

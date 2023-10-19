@@ -536,6 +536,66 @@ export const components = ({
         disableRipple: true,
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: () => ({
+          borderRadius: odysseyTokens.BorderRadiusOuter,
+          boxShadow: odysseyTokens.DepthMenu,
+          padding: odysseyTokens.Spacing5,
+          position: "relative",
+
+          "& img": {
+            height: "64px",
+          },
+
+          "&.isClickable:hover": {
+            boxShadow: odysseyTokens.DepthDialog,
+          },
+
+          [`& .${typographyClasses.h5}`]: {
+            marginBottom: 0,
+          },
+
+          [`& .${typographyClasses.subtitle2}`]: {
+            marginBottom: 0,
+            textTransform: "uppercase",
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
+            fontSize: odysseyTokens.TypographySizeSubordinate,
+            color: odysseyTokens.TypographyColorSubordinate,
+            letterSpacing: 1.3,
+          },
+        }),
+      },
+    },
+    MuiCardActionArea: {
+      styleOverrides: {
+        root: () => ({
+          margin: `-${odysseyTokens.Spacing5}`,
+          padding: odysseyTokens.Spacing5,
+          width: `calc(100% + (${odysseyTokens.Spacing5} * 2))`,
+
+          "&:hover": {
+            background: odysseyTokens.HueNeutralWhite,
+
+            "& .MuiCardActionArea-focusHighlight": {
+              display: "none",
+            },
+          },
+        }),
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: () => ({
+          marginBlockStart: odysseyTokens.Spacing4,
+          padding: 0,
+
+          [`& > .${buttonClasses.root}`]: {
+            marginBlockEnd: "0 !important",
+          },
+        }),
+      },
+    },
     MuiCheckbox: {
       defaultProps: {
         size: "small",
@@ -819,6 +879,8 @@ export const components = ({
     MuiScopedCssBaseline: {
       styleOverrides: {
         root: {
+          background: "transparent",
+
           abbr: {
             borderBottomWidth: odysseyTokens.BorderWidthMain,
             borderBottomStyle: "dashed", // Token?
