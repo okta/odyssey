@@ -60,7 +60,7 @@ export * from "./Autocomplete";
 export * from "./Banner";
 export * from "./Box";
 export * from "./Button";
-export * from "./Card";
+export * from "./Tile";
 export * from "./Callout";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";

@@ -31,8 +31,8 @@ export type TileProps = {
   menuItems?: ReactElement;
   overline?: string;
   title?: string;
-} & // You can't have actions and onClick at the same time
-(| {
+} & ( // You can't have actions and onClick at the same time
+  | {
       actions?:
         | ReactElement<typeof Button>
         | Array<ReactElement<typeof Button>>
