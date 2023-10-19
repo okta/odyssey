@@ -120,6 +120,9 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isReadOnly: {
@@ -138,6 +141,10 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
+        name: "string",
       },
     },
     name: {
@@ -158,7 +165,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -168,7 +174,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onInputChange: {
@@ -178,7 +183,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -189,7 +193,6 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     options: {
@@ -200,6 +203,12 @@ const storybookMeta: Meta<typeof Autocomplete> = {
           summary:
             "Array<OptionType> | GroupedOptionType<OptionType>[] | Promise<Array<OptionType> | GroupedOptionType<OptionType>[]>",
         },
+      },
+      type: {
+        required: true,
+        name: "other",
+        value:
+          "Array<OptionType> | GroupedOptionType<OptionType>[] | Promise<Array<OptionType> | GroupedOptionType<OptionType>[]>",
       },
     },
     value: {

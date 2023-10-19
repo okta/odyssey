@@ -83,6 +83,9 @@ const storybookMeta: Meta<MenuButtonProps> = {
         type: {
           summary: buttonVariantValues.join(" | "),
         },
+        defaultValue: {
+          summary: "secondary",
+        },
       },
     },
     children: {
@@ -92,6 +95,11 @@ const storybookMeta: Meta<MenuButtonProps> = {
         type: {
           summary: "[MenuItem | Divider | ListSubheader | NullElement]",
         },
+      },
+      type: {
+        required: true,
+        name: "other",
+        value: "[MenuItem | Divider | ListSubheader]",
       },
     },
     endIcon: {
@@ -114,7 +122,6 @@ const storybookMeta: Meta<MenuButtonProps> = {
         type: {
           summary: "string",
         },
-        defaultValue: "",
       },
     },
     isOverflow: {
@@ -124,7 +131,6 @@ const storybookMeta: Meta<MenuButtonProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: "",
       },
     },
     tooltipText: {
@@ -135,7 +141,6 @@ const storybookMeta: Meta<MenuButtonProps> = {
         type: {
           summary: "string",
         },
-        defaultValue: "",
       },
     },
   },

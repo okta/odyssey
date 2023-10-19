@@ -140,6 +140,9 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isMultiSelect: {
@@ -148,6 +151,9 @@ const storybookMeta: Meta<SelectProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -158,6 +164,9 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     label: {
@@ -167,6 +176,10 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
+        name: "string",
       },
     },
     name: {
@@ -186,7 +199,6 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -197,7 +209,6 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -207,7 +218,6 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     options: {
@@ -217,6 +227,11 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "(string | SelectOption)[]",
         },
+      },
+      type: {
+        required: true,
+        name: "other",
+        value: "(string | SelectOption)[]",
       },
     },
     value: {

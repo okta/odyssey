@@ -124,7 +124,6 @@ const storybookMeta: Meta<typeof GroupPicker> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onInputChange: {
@@ -135,7 +134,6 @@ const storybookMeta: Meta<typeof GroupPicker> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     options: {
@@ -154,6 +152,17 @@ const storybookMeta: Meta<typeof GroupPicker> = {
       table: {
         type: {
           summary: "OptionType | OptionType[]",
+        },
+      },
+    },
+    isOptional: {
+      control: "boolean",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
