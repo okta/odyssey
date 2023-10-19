@@ -129,6 +129,7 @@ const storybookMeta: Meta<PasswordFieldProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     onBlur: {

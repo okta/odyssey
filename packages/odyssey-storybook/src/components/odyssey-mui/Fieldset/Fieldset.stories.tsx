@@ -43,6 +43,8 @@ const storybookMeta: Meta<FieldsetProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "ReactElement | Array<ReactElement>",
       },
     },
     description: {
@@ -82,6 +84,7 @@ const storybookMeta: Meta<FieldsetProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     name: {

@@ -28,6 +28,7 @@ const storybookMeta: Meta<StatusProps> = {
       description: "The text describing the Status",
       type: {
         required: true,
+        name: "string",
       },
     },
     severity: {
@@ -44,6 +45,8 @@ const storybookMeta: Meta<StatusProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "radio",
       },
     },
     variant: {

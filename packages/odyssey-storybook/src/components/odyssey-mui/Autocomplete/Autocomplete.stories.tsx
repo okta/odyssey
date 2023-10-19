@@ -144,6 +144,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     name: {
@@ -205,6 +206,9 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
       type: {
         required: true,
+        name: "other",
+        value:
+          "Array<OptionType> | GroupedOptionType<OptionType>[] | Promise<Array<OptionType> | GroupedOptionType<OptionType>[]>",
       },
     },
     value: {

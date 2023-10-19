@@ -78,6 +78,8 @@ const storybookMeta: Meta<typeof Banner> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "radio",
       },
     },
     text: {
@@ -90,6 +92,7 @@ const storybookMeta: Meta<typeof Banner> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
   },

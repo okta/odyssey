@@ -29,12 +29,16 @@ const storybookMeta: Meta = {
       control: "array",
       type: {
         required: true,
+        name: "other",
+        value: "MaterialReactTableProps<TData>",
       },
     },
     data: {
       control: "object",
       type: {
         required: true,
+        name: "other",
+        value: "MaterialReactTableProps<TData>",
       },
     },
     getRowId: {

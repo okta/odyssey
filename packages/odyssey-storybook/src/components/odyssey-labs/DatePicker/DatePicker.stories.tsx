@@ -36,6 +36,7 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     onChange: {
@@ -58,6 +59,7 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
   },

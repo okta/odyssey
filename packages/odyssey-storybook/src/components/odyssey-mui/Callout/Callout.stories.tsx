@@ -35,6 +35,8 @@ const storybookMeta: Meta<CalloutProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "ReactNode",
       },
     },
     role: {
@@ -59,6 +61,8 @@ const storybookMeta: Meta<CalloutProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "radio",
       },
     },
     title: {

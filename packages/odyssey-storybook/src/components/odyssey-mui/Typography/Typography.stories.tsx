@@ -91,6 +91,7 @@ const storybookMeta: Meta<TypographyProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     color: {

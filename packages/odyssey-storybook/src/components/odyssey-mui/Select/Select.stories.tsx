@@ -179,6 +179,7 @@ const storybookMeta: Meta<SelectProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     name: {
@@ -229,6 +230,8 @@ const storybookMeta: Meta<SelectProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "(string | SelectOption)[]",
       },
     },
     value: {

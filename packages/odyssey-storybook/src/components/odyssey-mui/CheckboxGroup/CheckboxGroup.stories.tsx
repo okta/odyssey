@@ -39,6 +39,9 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value:
+          "ReactElement<typeof Checkbox> | Array<ReactElement<typeof Checkbox>>",
       },
     },
     errorMessage: {
@@ -90,6 +93,7 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
   },

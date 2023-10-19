@@ -98,6 +98,8 @@ const storybookMeta: Meta<MenuButtonProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "[MenuItem | Divider | ListSubheader]",
       },
     },
     endIcon: {

@@ -60,6 +60,8 @@ const storybookMeta: Meta<FormProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "ReactElement | Array<ReactElement>",
       },
     },
     alert: {
@@ -93,6 +95,7 @@ const storybookMeta: Meta<FormProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     noValidate: {

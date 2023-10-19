@@ -35,6 +35,7 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     startIcon: {
@@ -60,6 +61,7 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     isDisabled: {

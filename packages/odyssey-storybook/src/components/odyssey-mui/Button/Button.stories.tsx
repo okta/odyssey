@@ -161,6 +161,8 @@ const storybookMeta: Meta<ButtonProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "radio",
       },
     },
   },

@@ -68,6 +68,8 @@ const storybookMeta: Meta<DialogProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "ReactNode | Array<ReactNode>",
       },
     },
     isOpen: {
@@ -80,6 +82,7 @@ const storybookMeta: Meta<DialogProps> = {
       },
       type: {
         required: true,
+        name: "boolean",
       },
     },
     onClose: {
@@ -101,11 +104,13 @@ const storybookMeta: Meta<DialogProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     ariaLabel: {
       type: {
         required: true,
+        name: "string",
       },
       control: "text",
     },

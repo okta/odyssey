@@ -135,6 +135,7 @@ const storybookMeta: Meta<TextFieldProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     name: {

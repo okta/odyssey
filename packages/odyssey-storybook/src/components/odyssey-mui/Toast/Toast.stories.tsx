@@ -115,6 +115,8 @@ const meta: Meta<ToastProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "radio",
       },
     },
     text: {
@@ -127,6 +129,7 @@ const meta: Meta<ToastProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
   },

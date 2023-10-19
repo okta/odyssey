@@ -58,6 +58,7 @@ const storybookMeta: Meta<RadioProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     name: {
@@ -79,6 +80,7 @@ const storybookMeta: Meta<RadioProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
   },

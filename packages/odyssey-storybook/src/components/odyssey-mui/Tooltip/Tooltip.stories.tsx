@@ -38,6 +38,8 @@ const storybookMeta: Meta<TooltipProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "ReactElement",
       },
     },
     ariaType: {
@@ -51,6 +53,8 @@ const storybookMeta: Meta<TooltipProps> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "radio",
       },
     },
     text: {
@@ -63,6 +67,7 @@ const storybookMeta: Meta<TooltipProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     placement: {

@@ -29,6 +29,8 @@ const storybookMeta: Meta<typeof RadioGroup> = {
       },
       type: {
         required: true,
+        name: "other",
+        value: "Array<ReactElement<typeof Radio>>",
       },
     },
     defaultValue: {
@@ -88,6 +90,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     onChange: {

@@ -61,6 +61,7 @@ const storybookMeta: Meta<TagProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     onClick: {

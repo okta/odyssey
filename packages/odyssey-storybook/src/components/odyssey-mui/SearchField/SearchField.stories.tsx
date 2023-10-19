@@ -70,6 +70,7 @@ const storybookMeta: Meta<SearchFieldProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     name: {

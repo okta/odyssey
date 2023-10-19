@@ -113,6 +113,7 @@ const storybookMeta: Meta<NativeSelectProps> = {
       },
       type: {
         required: true,
+        name: "string",
       },
     },
     onBlur: {
