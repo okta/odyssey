@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ReactElement } from "react";
+import { memo, ElementType, ReactElement } from "react";
 import { ExternalLinkIcon } from "./icons.generated";
 import type { SeleniumProps } from "./SeleniumProps";
 
-import { Link as MuiLink } from "@mui/material";
+import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
 
 export const linkVariantValues = ["default", "monochrome"] as const;
 
@@ -28,9 +28,17 @@ export type LinkProps = {
    */
   href: string;
   /**
+   * The component used for the root node. Either a string to use a HTML element or a component.
+   */
+  component?: ElementType;
+  /**
    * An optional Icon component at the start of the Link
    */
   icon?: ReactElement;
+  /**
+   * The click event handler for the Link
+   */
+  onClick?: MuiLinkProps["onClick"];
   /**
    * The HTML `rel` attribute for the Link
    */
@@ -58,6 +66,7 @@ const Link = ({
   target,
   testId,
   variant,
+  ...rest
 }: LinkProps) => (
   <MuiLink
     data-se={testId}
@@ -65,6 +74,7 @@ const Link = ({
     rel={rel}
     target={target}
     variant={variant}
+    {...rest}
   >
     {icon && <span className="Link-icon">{icon}</span>}
 

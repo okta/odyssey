@@ -13,7 +13,12 @@
 import type { StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { Link, LinkProps, linkVariantValues } from "@okta/odyssey-react-mui";
+import {
+  Link,
+  LinkProps,
+  linkVariantValues,
+  Tag,
+} from "@okta/odyssey-react-mui";
 import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";
 import icons from "../../../../.storybook/components/iconUtils";
 
@@ -117,5 +122,12 @@ export const External: StoryObj<LinkProps> = {
     children: "Visit okta.com",
     rel: "noopener",
     target: "_blank",
+  },
+};
+
+export const WithComponent: StoryObj<LinkProps> = {
+  args: {
+    component: Tag,
+    label: "Starship",
   },
 };
