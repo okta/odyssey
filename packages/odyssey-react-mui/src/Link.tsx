@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, ElementType, ReactElement } from "react";
+import { memo, ReactElement } from "react";
 import { ExternalLinkIcon } from "./icons.generated";
 import type { SeleniumProps } from "./SeleniumProps";
 
@@ -27,10 +27,6 @@ export type LinkProps = {
    * The Link destination
    */
   href: string;
-  /**
-   * The component used for the root node. Either a string to use a HTML element or a component.
-   */
-  component?: ElementType;
   /**
    * An optional Icon component at the start of the Link
    */
@@ -66,7 +62,7 @@ const Link = ({
   target,
   testId,
   variant,
-  ...rest
+  onClick,
 }: LinkProps) => (
   <MuiLink
     data-se={testId}
@@ -74,7 +70,7 @@ const Link = ({
     rel={rel}
     target={target}
     variant={variant}
-    {...rest}
+    onClick={onClick}
   >
     {icon && <span className="Link-icon">{icon}</span>}
 
