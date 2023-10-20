@@ -37,6 +37,15 @@ const storybookMeta: Meta<AccordionProps> = {
         },
       },
     },
+    hideShadow: {
+      control: "boolean",
+      description: "",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isDisabled: {
       control: "boolean",
       description: "",
@@ -58,11 +67,21 @@ const storybookMeta: Meta<AccordionProps> = {
   },
   args: {
     children: "Lorem ipsum dolor sit amet.",
+    hideShadow: true,
     isDisabled: false,
     isExpanded: undefined,
     label: "Title",
   },
   decorators: [MuiThemeDecorator],
+  parameters: {
+    backgrounds: {
+      default: "gray",
+      values: [
+        { name: "gray", value: "#d7d7d7" },
+        { name: "white", value: "#ffffff" },
+      ],
+    },
+  },
 };
 
 export default storybookMeta;
@@ -75,6 +94,7 @@ export const Single: StoryObj<AccordionProps> = {
     return (
       <Accordion
         label={props.label}
+        hideShadow={props.hideShadow}
         isDisabled={props.isDisabled}
         isExpanded={props.isExpanded}
       >
@@ -84,7 +104,7 @@ export const Single: StoryObj<AccordionProps> = {
   },
 };
 
-export const Mult: StoryObj<AccordionProps> = {
+export const Multi: StoryObj<AccordionProps> = {
   args: {
     children: "This is the content of the box.",
   },
@@ -93,21 +113,22 @@ export const Mult: StoryObj<AccordionProps> = {
       <>
         <Accordion
           label={props.label}
+          hideShadow={props.hideShadow}
           isDisabled={props.isDisabled}
           isExpanded={props.isExpanded}
         >
           {props.children}
         </Accordion>
-        <Accordion label="Accordion 2">
+        <Accordion label="Accordion 2" hideShadow={props.hideShadow}>
           This is the second accordion item.
         </Accordion>
-        <Accordion label="Accordion 3">
+        <Accordion label="Accordion 3" hideShadow={props.hideShadow}>
           This is the third accordion item.
         </Accordion>
-        <Accordion label="Accordion 4">
+        <Accordion label="Accordion 4" hideShadow={props.hideShadow}>
           This is the fourth accordion item.
         </Accordion>
-        <Accordion label="Accordion 5">
+        <Accordion label="Accordion 5" hideShadow={props.hideShadow}>
           This is the fifth accordion item.
         </Accordion>
       </>

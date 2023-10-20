@@ -19,17 +19,21 @@ import {
   AccordionProps as MuiAccordionProps,
 } from "@mui/material";
 import { ChevronDownIcon } from "./icons.generated";
-import { Heading6 } from "./Typography";
+import { Support } from "./Typography";
 
 export type AccordionProps = {
   /**
-   * The content of the AccordionItem itself
+   * The content of the Accordion itself
    */
   children: ReactNode;
   /**
    * The label text for the AccordionSummary
    */
   label: string;
+  /**
+   * If true, the Accordion item won't have a shadow.
+   */
+  hideShadow?: boolean;
   /**
    * Whether the item is expanded by default
    */
@@ -51,6 +55,7 @@ export type AccordionProps = {
 const Accordion = ({
   children,
   label,
+  hideShadow,
   isDefaultExpanded,
   isDisabled,
   isExpanded,
@@ -63,9 +68,10 @@ const Accordion = ({
       disableGutters
       expanded={isExpanded}
       onChange={onChange}
+      className={hideShadow ? `noShadow` : undefined}
     >
       <MuiAccordionSummary expandIcon={<ChevronDownIcon />}>
-        <Heading6 component="div">{label}</Heading6>
+        <Support component="div">{label}</Support>
       </MuiAccordionSummary>
       <MuiAccordionDetails>{children}</MuiAccordionDetails>
     </MuiAccordion>
