@@ -13,7 +13,13 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { Badge, BadgeProps } from "@okta/odyssey-react-mui";
+import {
+  Badge,
+  BadgeProps,
+  badgeTypeValues,
+  badgeVariantValues,
+} from "@okta/odyssey-react-mui";
+import { HomeIcon } from "@okta/odyssey-react-mui/icons";
 
 const storybookMeta: Meta<BadgeProps> = {
   title: "MUI Components/Badge",
@@ -29,17 +35,80 @@ const storybookMeta: Meta<BadgeProps> = {
         },
       },
     },
-  },
-  args: {
-    children: "This is the tab content. This tab happens to be about stars.",
+    type: {
+      options: badgeTypeValues,
+      control: { type: "radio" },
+      type: {
+        required: false,
+        name: "other",
+        value: "radio",
+      },
+    },
+    variant: {
+      options: badgeVariantValues,
+      control: { type: "radio" },
+      type: {
+        required: false,
+        name: "other",
+        value: "radio",
+      },
+    },
   },
   decorators: [MuiThemeDecorator],
 };
 
 export default storybookMeta;
 
-export const Single: StoryObj<BadgeProps> = {
+export const Primary: StoryObj<BadgeProps> = {
   args: {
-    children: "This is the content of the box.",
+    badgeContent: 8,
+    children: <HomeIcon />,
+    type: "primary",
+    variant: "standard",
+  },
+};
+
+export const Default: StoryObj<BadgeProps> = {
+  args: {
+    badgeContent: 8,
+    children: <HomeIcon />,
+    type: "default",
+    variant: "standard",
+  },
+};
+
+export const Error: StoryObj<BadgeProps> = {
+  args: {
+    badgeContent: 8,
+    children: <HomeIcon />,
+    type: "error",
+    variant: "standard",
+  },
+};
+
+export const PrimaryDot: StoryObj<BadgeProps> = {
+  args: {
+    badgeContent: 8,
+    children: <HomeIcon />,
+    type: "primary",
+    variant: "dot",
+  },
+};
+
+export const DefaultDot: StoryObj<BadgeProps> = {
+  args: {
+    badgeContent: 8,
+    children: <HomeIcon />,
+    type: "default",
+    variant: "dot",
+  },
+};
+
+export const ErrorDot: StoryObj<BadgeProps> = {
+  args: {
+    badgeContent: 8,
+    children: <HomeIcon />,
+    type: "error",
+    variant: "dot",
   },
 };
