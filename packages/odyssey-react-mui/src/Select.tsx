@@ -218,8 +218,11 @@ const Select = ({
   );
 
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, id }) => (
+    ({ ariaDescribedBy, id, errorMessageId }) => (
       <MuiSelect
+        inputProps={{
+          "aria-errormessage": errorMessageId,
+        }}
         aria-describedby={ariaDescribedBy}
         children={children}
         data-se={testId}
