@@ -51,7 +51,7 @@ const Callout = ({ children, role, severity, testId, title }: CalloutProps) => {
 
   return (
     <Alert data-se={testId} role={role} severity={severity} variant="callout">
-      <ScreenReaderText>{t(`severity.${severity}`)}: </ScreenReaderText>
+      <ScreenReaderText>{t(`severity.${severity}`)}</ScreenReaderText>
       {title && <AlertTitle>{title}</AlertTitle>}
       <Box component="div">{children}</Box>
     </Alert>
