@@ -82,6 +82,7 @@ export type FieldProps = {
     ariaDescribedBy?: string;
     dataSe?: string;
     id: string;
+    errorMessageId?: string;
   }) => ReactElement;
 };
 
@@ -147,6 +148,7 @@ const Field = ({
       {renderFieldComponent({
         ariaDescribedBy,
         id,
+        errorMessageId: errorId,
       })}
 
       {errorMessage && <FieldError id={errorId} text={errorMessage} />}
