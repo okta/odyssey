@@ -18,8 +18,13 @@ import {
   BadgeProps,
   badgeTypeValues,
   badgeVariantValues,
+  Button,
 } from "@okta/odyssey-react-mui";
 import { HomeIcon } from "@okta/odyssey-react-mui/icons";
+
+const DemoComponent = () => {
+  return <Button endIcon={<HomeIcon />} variant="floating" />;
+};
 
 const storybookMeta: Meta<BadgeProps> = {
   title: "MUI Components/Badge",
@@ -27,8 +32,7 @@ const storybookMeta: Meta<BadgeProps> = {
   argTypes: {
     children: {
       control: null,
-      description:
-        "The content of the component, whether text or other components.",
+      description: "The content of the component.",
       table: {
         type: {
           summary: "ReactNode",
@@ -43,6 +47,11 @@ const storybookMeta: Meta<BadgeProps> = {
         name: "other",
         value: "radio",
       },
+      table: {
+        defaultValue: {
+          summary: "primary",
+        },
+      },
     },
     variant: {
       options: badgeVariantValues,
@@ -51,6 +60,28 @@ const storybookMeta: Meta<BadgeProps> = {
         required: false,
         name: "other",
         value: "radio",
+      },
+      table: {
+        defaultValue: {
+          summary: "standard",
+        },
+      },
+    },
+    badgeContentMax: {
+      control: { type: "number" },
+      description:
+        "The limit at which the badge will show '`{badgeContentMax}`+'. A number between 0-1000",
+      table: {
+        type: {
+          summary: "number",
+        },
+        defaultValue: {
+          summary: "999",
+        },
+      },
+      type: {
+        required: false,
+        name: "number",
       },
     },
   },
@@ -62,7 +93,7 @@ export default storybookMeta;
 export const Primary: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    children: <HomeIcon />,
+    children: <DemoComponent />,
     type: "primary",
     variant: "standard",
   },
@@ -71,7 +102,7 @@ export const Primary: StoryObj<BadgeProps> = {
 export const Default: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    children: <HomeIcon />,
+    children: <DemoComponent />,
     type: "default",
     variant: "standard",
   },
@@ -80,7 +111,7 @@ export const Default: StoryObj<BadgeProps> = {
 export const Error: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    children: <HomeIcon />,
+    children: <DemoComponent />,
     type: "error",
     variant: "standard",
   },
@@ -89,7 +120,7 @@ export const Error: StoryObj<BadgeProps> = {
 export const PrimaryDot: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    children: <HomeIcon />,
+    children: <DemoComponent />,
     type: "primary",
     variant: "dot",
   },
@@ -98,7 +129,7 @@ export const PrimaryDot: StoryObj<BadgeProps> = {
 export const DefaultDot: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    children: <HomeIcon />,
+    children: <DemoComponent />,
     type: "default",
     variant: "dot",
   },
@@ -107,7 +138,7 @@ export const DefaultDot: StoryObj<BadgeProps> = {
 export const ErrorDot: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    children: <HomeIcon />,
+    children: <DemoComponent />,
     type: "error",
     variant: "dot",
   },
