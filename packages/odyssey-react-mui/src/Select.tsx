@@ -10,7 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactNode, memo, useCallback, useMemo, useState } from "react";
+import {
+  ReactElement,
+  ReactNode,
+  memo,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 import {
   Box,
   Chip,
@@ -24,9 +31,13 @@ import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 import type { SeleniumProps } from "./SeleniumProps";
 
+export type SelectOptionType = "heading" | "option";
+
 export type SelectOption = {
+  description?: string;
+  icon?: ReactElement<SVGSVGElement>;
   text: string;
-  type?: "heading" | "option";
+  type?: SelectOptionType;
   value?: string;
 };
 
@@ -112,9 +123,9 @@ const Select = ({
   onBlur,
   onChange: onChangeProp,
   onFocus,
-  value,
-  testId,
   options,
+  testId,
+  value,
 }: SelectProps) => {
   // If there's no value set, we set it to a blank string (if it's a single-select)
   // or an empty array (if it's a multi-select)
@@ -153,11 +164,13 @@ const Select = ({
       options.map((option) =>
         typeof option === "object"
           ? {
+              description: option.description,
+              icon: option.icon,
               text: option.text,
-              value: option.value || option.text,
               type: option.type === "heading" ? "heading" : "option",
+              value: option.value || option.text,
             }
-          : { text: option, value: option, type: "option" }
+          : { text: option, type: "option", value: option }
       ),
     [options]
   );
@@ -177,11 +190,9 @@ const Select = ({
             (option) => option.value === item
           );
 
-          if (!selectedOption) {
-            return null;
-          }
-
-          return <Chip key={item} label={selectedOption.text} />;
+          return selectedOption ? (
+            <Chip key={item} label={selectedOption.text} />
+          ) : null;
         })
         .filter(Boolean);
 
@@ -210,7 +221,17 @@ const Select = ({
             {isMultiSelect && (
               <MuiCheckbox checked={selectedValue.includes(option.value)} />
             )}
-            {option.text}
+            <div
+              style={{ display: "flex", gap: "8px", alignItems: "flex-start" }}
+            >
+              {option.icon && <div>{option.icon}</div>}
+              <div>
+                <div style={{ lineHeight: 1 }}>{option.text}</div>
+                {option.description && (
+                  <div style={{ color: "gray" }}>{option.description}</div>
+                )}
+              </div>
+            </div>
           </MenuItem>
         );
       }),

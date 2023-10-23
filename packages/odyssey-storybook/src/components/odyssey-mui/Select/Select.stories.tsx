@@ -12,6 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { Select, SelectProps } from "@okta/odyssey-react-mui";
+import { AddCircleIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, screen } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
@@ -25,6 +26,89 @@ const optionsArray: SelectProps["options"] = [
   "Tycho Station",
   "Phoebe",
   "Ganymede",
+];
+
+const optionsWithIcons: SelectProps["options"] = [
+  {
+    icon: <AddCircleIcon />,
+    text: "Earth",
+    value: "earth",
+  },
+  {
+    icon: <SettingsIcon />,
+    text: "Mars",
+    value: "mars",
+  },
+  {
+    icon: <SettingsIcon />,
+    text: "Ceres",
+    value: "ceres",
+  },
+  {
+    icon: <AddCircleIcon />,
+    text: "Eros",
+    value: "eros",
+  },
+  {
+    icon: <AddCircleIcon />,
+    text: "Tycho Station",
+    value: "tycho-station",
+  },
+  {
+    icon: <SettingsIcon />,
+    text: "Phoebe",
+    value: "phoebe",
+  },
+  {
+    icon: <SettingsIcon />,
+    text: "Ganymede",
+    value: "ganymede",
+  },
+];
+
+const optionsWithIconsAndDescription: SelectProps["options"] = [
+  {
+    description: "This is some text about Earth.",
+    icon: <AddCircleIcon />,
+    text: "Earth",
+    value: "earth",
+  },
+  {
+    description: "This is some text about Mars.",
+    icon: <SettingsIcon />,
+    text: "Mars",
+    value: "mars",
+  },
+  {
+    description: "This is some text about Ceres.",
+    icon: <SettingsIcon />,
+    text: "Ceres",
+    value: "ceres",
+  },
+  {
+    description: "This is some text about Eros.",
+    icon: <AddCircleIcon />,
+    text: "Eros",
+    value: "eros",
+  },
+  {
+    description: "This is some text about Tycho Station.",
+    icon: <AddCircleIcon />,
+    text: "Tycho Station",
+    value: "tycho-station",
+  },
+  {
+    description: "This is some text about Phoebe.",
+    icon: <SettingsIcon />,
+    text: "Phoebe",
+    value: "phoebe",
+  },
+  {
+    description: "This is some text about Ganymede.",
+    icon: <SettingsIcon />,
+    text: "Ganymede",
+    value: "ganymede",
+  },
 ];
 
 const optionsObject: SelectProps["options"] = [
@@ -318,6 +402,34 @@ export const OptionsGrouped: StoryObj<SelectProps> = {
       description: {
         story:
           'Objects with `type: "heading"` will have their `text` displayed as a heading.',
+      },
+    },
+  },
+};
+
+export const OptionsWithIcons: StoryObj<SelectProps> = {
+  args: {
+    options: optionsWithIcons,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Select can accept `options` as a flat array, an array of objects, or both. This demonstrates an array of objects with `value` and `name`.",
+      },
+    },
+  },
+};
+
+export const OptionsWithIconsAndDescription: StoryObj<SelectProps> = {
+  args: {
+    options: optionsWithIconsAndDescription,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Select can accept `options` as a flat array, an array of objects, or both. This demonstrates an array of objects with `value` and `name`.",
       },
     },
   },

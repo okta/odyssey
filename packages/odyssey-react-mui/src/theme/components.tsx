@@ -1669,6 +1669,7 @@ export const components = ({
     MuiMenuItem: {
       styleOverrides: {
         root: ({ ownerState }) => ({
+          // display: 'flex',
           gap: odysseyTokens.Spacing2,
           minHeight: "unset",
           paddingBlock: odysseyTokens.Spacing3,
