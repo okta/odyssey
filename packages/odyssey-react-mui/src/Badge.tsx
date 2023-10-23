@@ -20,7 +20,7 @@ export const badgeVariantValues = ["dot", "standard"] as const;
 export type BadgeProps = {
   children?: ReactNode;
   badgeContent?: number;
-  max?: MuiBadgeProps["max"];
+  badgeContentMax?: MuiBadgeProps["max"];
   variant?: (typeof badgeVariantValues)[number];
   type?: (typeof badgeTypeValues)[number];
 } & SeleniumProps;
@@ -28,11 +28,11 @@ export type BadgeProps = {
 const Badge = ({
   children,
   badgeContent,
-  max = 999,
+  badgeContentMax = 999,
   variant = "standard",
   type = "default",
 }: BadgeProps) => {
-  const threeDigitLimitedMax = max > 999 ? 999 : max;
+  const threeDigitLimitedMax = badgeContentMax > 999 ? 999 : badgeContentMax;
 
   return (
     <MuiBadge
