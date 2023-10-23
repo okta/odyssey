@@ -184,10 +184,14 @@ const Autocomplete = <
         hint={hint}
         label={label}
         isOptional={isOptional}
-        renderFieldComponent={({ ariaDescribedBy, id }) => (
+        renderFieldComponent={({ ariaDescribedBy, id, errorMessageId }) => (
           <InputBase
             {...params}
             {...InputProps}
+            inputProps={{
+              ...params.inputProps,
+              "aria-errormessage": errorMessageId,
+            }}
             aria-describedby={ariaDescribedBy}
             id={id}
             name={nameOverride ?? id}
