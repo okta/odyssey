@@ -140,10 +140,11 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     ref
   ) => {
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id, errorMessageId }) => (
+      ({ ariaDescribedBy, id, errorMessageId, labelId }) => (
         <InputBase
           inputProps={{
             "aria-errormessage": errorMessageId,
+            "aria-labelledby": labelId,
           }}
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
