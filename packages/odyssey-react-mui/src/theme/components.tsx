@@ -454,7 +454,7 @@ export const components = ({
       styleOverrides: {
         badge: ({ ownerState }) => ({
           ...(ownerState.color === "primary" && {
-            backgroundColor: odysseyTokens.HueBlue500,
+            backgroundColor: odysseyTokens.PalettePrimaryMain,
           }),
 
           ...(ownerState.color === "default" && {
@@ -463,7 +463,7 @@ export const components = ({
           }),
 
           ...(ownerState.color === "error" && {
-            backgroundColor: odysseyTokens.HueRed500,
+            backgroundColor: odysseyTokens.PaletteDangerMain,
           }),
         }),
       },
