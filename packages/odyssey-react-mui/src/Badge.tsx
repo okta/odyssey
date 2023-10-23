@@ -11,14 +11,39 @@
  */
 
 import { ReactNode, memo } from "react";
+import { Badge as MuiBadge, BadgeProps as MuiBadgeProps } from "@mui/material";
 import type { SeleniumProps } from "./SeleniumProps";
+
+export const badgeTypeValues = ["default", "primary", "error"] as const;
+export const badgeVariantValues = ["dot", "standard"] as const;
 
 export type BadgeProps = {
   children?: ReactNode;
+  badgeContent?: number;
+  max?: MuiBadgeProps["max"];
+  variant?: (typeof badgeVariantValues)[number];
+  type?: (typeof badgeTypeValues)[number];
 } & SeleniumProps;
 
-const Badge = () => {
-  return <p>Badge</p>;
+const Badge = ({
+  children,
+  badgeContent,
+  max = 999,
+  variant = "standard",
+  type = "default",
+}: BadgeProps) => {
+  const threeDigitLimitedMax = max > 999 ? 999 : max;
+
+  return (
+    <MuiBadge
+      badgeContent={badgeContent}
+      max={threeDigitLimitedMax}
+      color={type}
+      variant={variant}
+    >
+      {children}
+    </MuiBadge>
+  );
 };
 
 const MemoizedBadge = memo(Badge);

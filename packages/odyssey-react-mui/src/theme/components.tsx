@@ -450,6 +450,24 @@ export const components = ({
         }),
       },
     },
+    MuiBadge: {
+      styleOverrides: {
+        badge: ({ ownerState }) => ({
+          ...(ownerState.color === "primary" && {
+            backgroundColor: odysseyTokens.HueBlue500,
+          }),
+
+          ...(ownerState.color === "default" && {
+            backgroundColor: odysseyTokens.HueNeutral200,
+            color: odysseyTokens.HueNeutral700,
+          }),
+
+          ...(ownerState.color === "error" && {
+            backgroundColor: odysseyTokens.HueRed500,
+          }),
+        }),
+      },
+    },
     MuiBreadcrumbs: {
       styleOverrides: {
         li: {
