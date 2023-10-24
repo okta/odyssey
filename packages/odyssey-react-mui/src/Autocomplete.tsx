@@ -174,6 +174,7 @@ const Autocomplete = <
   value,
   testId,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+  console.log("rendering");
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
@@ -184,13 +185,19 @@ const Autocomplete = <
         hint={hint}
         label={label}
         isOptional={isOptional}
-        renderFieldComponent={({ ariaDescribedBy, id, errorMessageId }) => (
+        renderFieldComponent={({
+          ariaDescribedBy,
+          id,
+          errorMessageId,
+          labelId,
+        }) => (
           <InputBase
             {...params}
             {...InputProps}
             inputProps={{
               ...params.inputProps,
               "aria-errormessage": errorMessageId,
+              "aria-labelledby": labelId,
             }}
             aria-describedby={ariaDescribedBy}
             id={id}

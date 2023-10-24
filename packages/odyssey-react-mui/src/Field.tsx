@@ -78,6 +78,8 @@ export type FieldProps = {
     ariaDescribedBy,
     dataSe,
     id,
+    errorMessageId,
+    labelId,
   }: {
     ariaDescribedBy?: string;
     dataSe?: string;
