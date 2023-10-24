@@ -174,7 +174,6 @@ const Autocomplete = <
   value,
   testId,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
-  console.log("rendering");
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
