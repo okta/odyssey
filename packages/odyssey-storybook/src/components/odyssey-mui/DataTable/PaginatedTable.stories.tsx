@@ -22,7 +22,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { useCallback, useRef, useState } from "react";
 
 const storybookMeta: Meta = {
-  title: "MUI Components/Table/Paginated",
+  title: "Labs Components/PaginatedTable",
   component: PaginatedTable,
   argTypes: {
     columns: {
