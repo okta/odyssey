@@ -105,12 +105,12 @@ const Field = ({
 
   const id = useUniqueId(idOverride);
   const hintId = hint ? `${id}-hint` : undefined;
-  const errorId = errorMessage ? `${id}-error` : undefined;
+  const errorMessageId = errorMessage ? `${id}-error` : undefined;
   const labelId = `${id}-label`;
 
   const ariaDescribedBy = useMemo(
-    () => [hintId, errorId].join(" ").trim() || undefined,
-    [errorId, hintId]
+    () => [hintId, errorMessageId].join(" ").trim() || undefined,
+    [errorMessageId, hintId]
   );
 
   const { isDisabled: isFieldsetDisabled } = useFieldset();
@@ -151,11 +151,11 @@ const Field = ({
       {renderFieldComponent({
         ariaDescribedBy,
         id,
-        errorMessageId: errorId,
+        errorMessageId,
         labelId,
       })}
 
-      {errorMessage && <FieldError id={errorId} text={errorMessage} />}
+      {errorMessage && <FieldError id={errorMessageId} text={errorMessage} />}
     </MuiFormControl>
   );
 };
