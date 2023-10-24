@@ -59,6 +59,7 @@ export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 export * from "./Autocomplete";
 export * from "./Banner";
 export * from "./Box";
+export * from "./Breadcrumbs";
 export * from "./Button";
 export * from "./Tile";
 export * from "./Callout";

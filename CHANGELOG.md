@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0](https://github.com/okta/odyssey/compare/v1.3.0...v1.4.0) (2023-10-23)
+
+### Features
+
+- add onclick prop to link component ([#2003](https://github.com/okta/odyssey/issues/2003)) ([7ae351e](https://github.com/okta/odyssey/commit/7ae351edb3001de752ffc292133a05a9b64c57be))
+
+## [1.3.0](https://github.com/okta/odyssey/compare/v1.2.0...v1.3.0) (2023-10-18)
+
+### Features
+
+- group picker ([71171e0](https://github.com/okta/odyssey/commit/71171e009460f6f6606cd4b87647d36c8d5b119a))
+- upgrades to Node v20 ([#1996](https://github.com/okta/odyssey/issues/1996)) ([110c0d4](https://github.com/okta/odyssey/commit/110c0d4e47563cb73087c49d52185c1e5c03ebd9))
+
+### Bug Fixes
+
+- concurrency in Applitools being too high ([#1997](https://github.com/okta/odyssey/issues/1997)) ([34a3299](https://github.com/okta/odyssey/commit/34a3299b031dd93be1b13ba3c9b69fa929311d04))
+- gray color in default Status lamp variant ([1dd74df](https://github.com/okta/odyssey/commit/1dd74df9cb86147ed4cb02e3deb04c0be7f6fe6c))
+- inclusive language adjustments ([#1995](https://github.com/okta/odyssey/issues/1995)) ([82f4cb5](https://github.com/okta/odyssey/commit/82f4cb5290d418623c35fdb2504da37ab05a2d89))
+- menu button not allowing falsey children ([#1999](https://github.com/okta/odyssey/issues/1999)) ([b63b117](https://github.com/okta/odyssey/commit/b63b117beb7d86671a91d76256092400d0c7e204))
+- **odyssey-react-mui:** added more stories ([29fa4fa](https://github.com/okta/odyssey/commit/29fa4fa258b05a40de5cee4a59d19ab6a64d01da))
+- **odyssey-react-mui:** improve PasswordField docs ([6c1cd05](https://github.com/okta/odyssey/commit/6c1cd052ae11d870d2ad7f1413d719ebfc9c1c60))
+- remove border from default status lamp ([5bacb73](https://github.com/okta/odyssey/commit/5bacb73d76662e6d4c4a5423fdf6cb96ac677913))
+- update displayName for Autocomplete ([#1983](https://github.com/okta/odyssey/issues/1983)) ([65abc8e](https://github.com/okta/odyssey/commit/65abc8e99949d9bafacace4a5591dec93ca3cc1f))
+
 ## [1.2.0](https://github.com/okta/odyssey/compare/v1.1.1...v1.2.0) (2023-09-29)
 
 ### Features

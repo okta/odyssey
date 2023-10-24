@@ -62,6 +62,9 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: true,
+        },
       },
     },
     hint: {
@@ -90,6 +93,9 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isOptional: {
@@ -98,6 +104,9 @@ const storybookMeta: Meta<PasswordFieldProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -118,6 +127,10 @@ const storybookMeta: Meta<PasswordFieldProps> = {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     onBlur: {
       control: null,
@@ -127,7 +140,6 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -137,7 +149,6 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -148,7 +159,6 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     placeholder: {

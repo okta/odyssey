@@ -56,6 +56,10 @@ const storybookMeta: Meta<RadioProps> = {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     name: {
       control: "text",
@@ -73,6 +77,10 @@ const storybookMeta: Meta<RadioProps> = {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
+        name: "string",
       },
     },
   },

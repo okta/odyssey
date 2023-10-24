@@ -26,6 +26,10 @@ const storybookMeta: Meta<StatusProps> = {
     label: {
       control: "text",
       description: "The text describing the Status",
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     severity: {
       control: "radio",
@@ -35,7 +39,14 @@ const storybookMeta: Meta<StatusProps> = {
         type: {
           summary: statusSeverityValues.join(" | "),
         },
-        defaultValue: "default",
+        defaultValue: {
+          summary: "default",
+        },
+      },
+      type: {
+        required: true,
+        name: "other",
+        value: "radio",
       },
     },
     variant: {
@@ -47,7 +58,9 @@ const storybookMeta: Meta<StatusProps> = {
         type: {
           summary: statusVariantValues.join(" | "),
         },
-        defaultValue: "lamp",
+        defaultValue: {
+          summary: "lamp",
+        },
       },
     },
   },

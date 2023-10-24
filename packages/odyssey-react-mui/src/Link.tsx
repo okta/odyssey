@@ -14,7 +14,7 @@ import { memo, ReactElement } from "react";
 import { ExternalLinkIcon } from "./icons.generated";
 import type { SeleniumProps } from "./SeleniumProps";
 
-import { Link as MuiLink } from "@mui/material";
+import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
 
 export const linkVariantValues = ["default", "monochrome"] as const;
 
@@ -31,6 +31,10 @@ export type LinkProps = {
    * An optional Icon component at the start of the Link
    */
   icon?: ReactElement;
+  /**
+   * The click event handler for the Link
+   */
+  onClick?: MuiLinkProps["onClick"];
   /**
    * The HTML `rel` attribute for the Link
    */
@@ -58,6 +62,7 @@ const Link = ({
   target,
   testId,
   variant,
+  onClick,
 }: LinkProps) => (
   <MuiLink
     data-se={testId}
@@ -65,6 +70,7 @@ const Link = ({
     rel={rel}
     target={target}
     variant={variant}
+    onClick={onClick}
   >
     {icon && <span className="Link-icon">{icon}</span>}
 

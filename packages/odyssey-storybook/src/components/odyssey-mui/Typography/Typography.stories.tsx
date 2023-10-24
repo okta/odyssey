@@ -89,6 +89,10 @@ const storybookMeta: Meta<TypographyProps> = {
           summary: "ReactNode",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     color: {
       options: typographyColorValues,

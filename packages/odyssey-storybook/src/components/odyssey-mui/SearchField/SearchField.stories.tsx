@@ -45,6 +45,9 @@ const storybookMeta: Meta<SearchFieldProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     id: {
@@ -65,6 +68,10 @@ const storybookMeta: Meta<SearchFieldProps> = {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     name: {
       control: "text",
@@ -83,7 +90,6 @@ const storybookMeta: Meta<SearchFieldProps> = {
         type: {
           summary: "function",
         },
-        defaultValue: "",
       },
     },
     onClear: {
@@ -93,7 +99,6 @@ const storybookMeta: Meta<SearchFieldProps> = {
         type: {
           summary: "function",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -103,7 +108,6 @@ const storybookMeta: Meta<SearchFieldProps> = {
         type: {
           summary: "function",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -113,7 +117,6 @@ const storybookMeta: Meta<SearchFieldProps> = {
         type: {
           summary: "function",
         },
-        defaultValue: "",
       },
     },
     placeholder: {
