@@ -98,10 +98,8 @@ const breadcrumbProviderValue: Record<
 const BreadcrumbList = ({
   children,
   homeHref,
-  maxVisibleItems: maxVisibleItemsOverride,
+  maxVisibleItems = 5,
 }: BreadcrumbsProps) => {
-  const maxVisibleItems = maxVisibleItemsOverride ?? children.length;
-
   const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
