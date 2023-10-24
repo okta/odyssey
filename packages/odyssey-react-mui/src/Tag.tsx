@@ -36,19 +36,22 @@ const Tag = ({ icon, isDisabled, label, onClick, onRemove }: TagProps) => {
   const { chipElementType } = useContext(TagListContext);
 
   const renderTag = useCallback(
-    (muiProps) => (
-      <MuiChip
-        {...muiProps}
-        aria-disabled={isDisabled}
-        clickable={onClick ? true : false}
-        component={chipElementType}
-        disabled={isDisabled}
-        icon={icon}
-        label={label}
-        onClick={onClick}
-        onDelete={onRemove}
-      />
-    ),
+    (muiProps) =>
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      console.log({ muiProps }) || (
+        <MuiChip
+          {...muiProps}
+          aria-disabled={isDisabled}
+          clickable={onClick ? true : false}
+          component={chipElementType}
+          disabled={isDisabled}
+          icon={icon}
+          label={label}
+          onClick={onClick}
+          onDelete={onRemove}
+        />
+      ),
     [chipElementType, icon, isDisabled, label, onClick, onRemove]
   );
 
