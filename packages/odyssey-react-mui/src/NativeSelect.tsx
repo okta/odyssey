@@ -99,11 +99,17 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
     ref
   ) => {
     const renderFieldComponent = useCallback(
-      () => (
+      ({ ariaDescribedBy, errorMessageId, labelId }) => (
         <MuiSelect
+          aria-describedby={ariaDescribedBy}
+          children={children}
           data-se={testId}
           defaultValue={defaultValue}
           id={idOverride}
+          inputProps={{
+            "aria-errormessage": errorMessageId,
+            "aria-labelledby": labelId,
+          }}
           name={idOverride}
           multiple={isMultiSelect}
           native={true}
@@ -112,7 +118,6 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
           onFocus={onFocus}
           ref={ref}
           value={value}
-          children={children}
         />
       ),
       [
