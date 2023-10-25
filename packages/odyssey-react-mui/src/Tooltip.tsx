@@ -52,3 +52,5 @@ export const Tooltip = ({
     <MuiPropsChild>{children}</MuiPropsChild>
   </MuiTooltip>
 );
+
+Tooltip.displayName = "Tooltip";
