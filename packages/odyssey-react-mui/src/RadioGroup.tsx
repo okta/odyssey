@@ -74,11 +74,11 @@ const RadioGroup = ({
   value,
 }: RadioGroupProps) => {
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, id, errorMessageId, labelId }) => (
+    ({ ariaDescribedBy, id, errorMessageId, labelElementId }) => (
       <MuiRadioGroup
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageId}
-        aria-labelledby={labelId}
+        aria-labelledby={labelElementId}
         data-se={testId}
         defaultValue={defaultValue}
         id={id}

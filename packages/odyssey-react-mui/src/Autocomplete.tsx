@@ -188,7 +188,7 @@ const Autocomplete = <
           ariaDescribedBy,
           id,
           errorMessageId,
-          labelId,
+          labelElementId,
         }) => (
           <InputBase
             {...params}
@@ -196,7 +196,7 @@ const Autocomplete = <
             inputProps={{
               ...params.inputProps,
               "aria-errormessage": errorMessageId,
-              "aria-labelledby": labelId,
+              "aria-labelledby": labelElementId,
             }}
             aria-describedby={ariaDescribedBy}
             id={id}

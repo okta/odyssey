@@ -79,13 +79,13 @@ export type FieldProps = {
     dataSe,
     id,
     errorMessageId,
-    labelId,
+    labelElementId,
   }: {
     ariaDescribedBy?: string;
     dataSe?: string;
     id: string;
     errorMessageId?: string;
-    labelId: string;
+    labelElementId: string;
   }) => ReactElement;
 };
 
@@ -106,7 +106,7 @@ const Field = ({
   const id = useUniqueId(idOverride);
   const hintId = hint ? `${id}-hint` : undefined;
   const errorMessageId = errorMessage ? `${id}-error` : undefined;
-  const labelId = `${id}-label`;
+  const labelElementId = `${id}-label`;
 
   const ariaDescribedBy = useMemo(
     () => [hintId, errorMessageId].join(" ").trim() || undefined,
@@ -139,7 +139,7 @@ const Field = ({
       ) : (
         <FieldLabel
           hasVisibleLabel={hasVisibleLabel}
-          id={labelId}
+          id={labelElementId}
           inputId={id}
           isOptional={isOptional}
           text={label}
@@ -152,7 +152,7 @@ const Field = ({
         ariaDescribedBy,
         id,
         errorMessageId,
-        labelId,
+        labelElementId,
       })}
 
       {errorMessage && <FieldError id={errorMessageId} text={errorMessage} />}

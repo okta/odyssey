@@ -127,7 +127,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     }, []);
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id, errorMessageId, labelId }) => (
+      ({ ariaDescribedBy, id, errorMessageId, labelElementId }) => (
         <InputBase
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
@@ -154,7 +154,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           inputProps={{
             role: "textbox",
             "aria-errormessage": errorMessageId,
-            "aria-labelledby": labelId,
+            "aria-labelledby": labelElementId,
           }}
           name={nameOverride ?? id}
           onChange={onChange}
