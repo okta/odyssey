@@ -187,7 +187,7 @@ const Autocomplete = <
         renderFieldComponent={({
           ariaDescribedBy,
           id,
-          errorMessageId,
+          errorMessageElementId,
           labelElementId,
         }) => (
           <InputBase
@@ -195,7 +195,7 @@ const Autocomplete = <
             {...InputProps}
             inputProps={{
               ...params.inputProps,
-              "aria-errormessage": errorMessageId,
+              "aria-errormessage": errorMessageElementId,
               "aria-labelledby": labelElementId,
             }}
             aria-describedby={ariaDescribedBy}
