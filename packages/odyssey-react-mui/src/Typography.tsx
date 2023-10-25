@@ -14,8 +14,9 @@ import {
   Typography as MuiTypography,
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
-import { ElementType, ReactNode, memo, useMemo } from "react";
+import { ElementType, ReactNode, memo, useCallback, useMemo } from "react";
 import { SeleniumProps } from "./SeleniumProps";
+import { MuiPropsContext } from "./MuiPropsContext";
 
 export type TypographyVariantValue =
   | "h1"
@@ -107,17 +108,34 @@ const Typography = ({
     return componentProp;
   }, [componentProp, variant]);
 
+  const renderTypography = useCallback(
+    (muiProps) => (
+      <MuiTypography
+        {...muiProps}
+        aria-describedby={ariaDescribedBy}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        children={children}
+        color={color}
+        component={component}
+        data-se={testId}
+        variant={typographyVariantMapping[variant]}
+      />
+    ),
+    [
+      ariaDescribedBy,
+      ariaLabel,
+      ariaLabelledBy,
+      children,
+      color,
+      component,
+      testId,
+      variant,
+    ]
+  );
+
   return (
-    <MuiTypography
-      aria-describedby={ariaDescribedBy}
-      aria-label={ariaLabel}
-      aria-labelledby={ariaLabelledBy}
-      children={children}
-      color={color}
-      component={component}
-      data-se={testId}
-      variant={typographyVariantMapping[variant]}
-    />
+    <MuiPropsContext.Consumer>{renderTypography}</MuiPropsContext.Consumer>
   );
 };
 
