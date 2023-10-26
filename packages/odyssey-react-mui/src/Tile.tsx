@@ -19,7 +19,7 @@ import {
   CardActions as MuiCardActions,
   CardActionArea as MuiCardActionArea,
 } from "@mui/material";
-import { Button } from "./Button";
+import { Button, ButtonContext } from "./Button";
 import { Box } from "./Box";
 import { Heading5, Paragraph, Support } from "./Typography";
 import { MenuButton } from ".";
@@ -33,28 +33,22 @@ export type TileProps = {
   title?: string;
 } & ( // You can't have actions and onClick at the same time
   | {
-      actions?:
-        | ReactElement<typeof Button>
-        | Array<ReactElement<typeof Button>>
-        | NullElement;
+      button?: ReactElement<typeof Button> | NullElement;
       onClick: () => void;
     }
   | {
-      actions:
-        | ReactElement<typeof Button>
-        | Array<ReactElement<typeof Button>>
-        | NullElement;
+      button: ReactElement<typeof Button> | NullElement;
       onClick?: () => void;
     }
   | {
-      actions: undefined | null;
+      button: undefined | null;
       onClick: undefined | null;
     }
 ) &
   SeleniumProps;
 
 const Tile = ({
-  actions,
+  button,
   description,
   image,
   menuItems,
@@ -75,7 +69,7 @@ const Tile = ({
               display: "flex",
               alignItems: "flex-start",
               maxHeight: "64px",
-              marginBlockEnd: 4,
+              marginBlockEnd: 5,
               paddingRight: menuItems ? "20px" : 0,
             }}
           >
@@ -89,10 +83,16 @@ const Tile = ({
           <Paragraph color="textSecondary">{description}</Paragraph>
         )}
 
-        {actions && <MuiCardActions>{actions}</MuiCardActions>}
+        {button && (
+          <MuiCardActions>
+            <ButtonContext.Provider value={{ isFullWidth: true }}>
+              {button}
+            </ButtonContext.Provider>
+          </MuiCardActions>
+        )}
       </>
     );
-  }, [actions, description, image, menuItems, overline, title]);
+  }, [button, description, image, menuItems, overline, title]);
 
   return (
     <MuiCard className={onClick ? "isClickable" : ""}>

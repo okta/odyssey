@@ -48,16 +48,9 @@ const storybookMeta: Meta = {
         defaultValue: "",
       },
     },
-    hasActions: {
-      control: "radio",
-      options: ["0", "1", "2", "3"],
-      description: "STORY ONLY: How many action buttons does the card include?",
-      defaultValue: "No actions",
-    },
-    hasActionsFullWidth: {
+    hasButton: {
       control: "boolean",
-      description:
-        "STORY ONLY: If the card has action buttons, are they full-width?",
+      description: "STORY ONLY: Does the card include a button?",
     },
     hasImage: {
       control: "boolean",
@@ -74,13 +67,13 @@ const storybookMeta: Meta = {
   },
   args: {
     title: "Title",
-    description: "Lorem ipsum dolor sit amet",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...",
     overline: "Overline",
     isClickable: false,
-    hasMenu: false,
-    hasImage: false,
-    hasActions: "0",
-    hasActionsFullWidth: false,
+    hasMenu: true,
+    hasImage: true,
+    hasButton: true,
   },
   decorators: [MuiThemeDecorator],
   parameters: {
@@ -99,8 +92,7 @@ export default storybookMeta;
 
 export const Default: StoryObj = {
   render: function C(props: {
-    hasActions?: "0" | "1" | "2" | "3";
-    hasActionsFullWidth?: boolean;
+    hasButton?: boolean;
     isClickable?: boolean;
     title?: string;
     description?: string;
@@ -108,66 +100,16 @@ export const Default: StoryObj = {
     hasImage?: boolean;
     hasMenu?: boolean;
   }) {
-    let actions = null;
-    switch (props.hasActions) {
-      case "1":
-        actions = (
-          <Button
-            variant="primary"
-            label="Action"
-            isFullWidth={props.hasActionsFullWidth}
-          />
-        );
-        break;
-      case "2":
-        actions = (
-          <>
-            <Button
-              variant="primary"
-              label="Action"
-              isFullWidth={props.hasActionsFullWidth}
-            />
-            <Button
-              variant="secondary"
-              label="Action"
-              isFullWidth={props.hasActionsFullWidth}
-            />
-          </>
-        );
-        break;
-      case "3":
-        actions = (
-          <>
-            <Button
-              variant="primary"
-              label="Action"
-              isFullWidth={props.hasActionsFullWidth}
-            />
-            <Button
-              variant="secondary"
-              label="Action"
-              isFullWidth={props.hasActionsFullWidth}
-            />
-            <Button
-              variant="tertiary"
-              label="Action"
-              isFullWidth={props.hasActionsFullWidth}
-            />
-          </>
-        );
-        break;
-    }
-
     const onClick = () => {
       alert("Clicked!");
     };
 
     return (
       <>
-        {props.isClickable && props.hasActions !== "0" && (
+        {props.isClickable && props.hasButton && (
           <Callout severity="error">
-            A card can't include actions while also being clickable. Actions
-            have been disabled while isClickable is true.
+            A card can't include a button while also being clickable. The button
+            has been disabled while isClickable is true.
           </Callout>
         )}
 
@@ -190,7 +132,11 @@ export const Default: StoryObj = {
                 </>
               ) : undefined
             }
-            actions={!props.isClickable ? actions : undefined}
+            button={
+              !props.isClickable && props.hasButton ? (
+                <Button variant="primary" label="Button" />
+              ) : undefined
+            }
             onClick={props.isClickable ? onClick : undefined}
           />
         </Box>

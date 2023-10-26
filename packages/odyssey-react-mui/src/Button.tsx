@@ -12,7 +12,13 @@
 
 import { Button as MuiButton } from "@mui/material";
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
-import { memo, ReactElement, useCallback } from "react";
+import {
+  createContext,
+  memo,
+  ReactElement,
+  useCallback,
+  useContext,
+} from "react";
 
 import { MuiPropsContext, useMuiProps } from "./MuiPropsContext";
 import { Tooltip } from "./Tooltip";
@@ -104,6 +110,14 @@ export type ButtonProps = {
 ) &
   SeleniumProps;
 
+export type ButtonContextValue = {
+  isFullWidth?: boolean;
+};
+
+export const ButtonContext = createContext<ButtonContextValue>({
+  isFullWidth: undefined,
+});
+
 const Button = ({
   ariaDescribedBy,
   ariaLabel,
@@ -111,7 +125,7 @@ const Button = ({
   endIcon,
   id,
   isDisabled,
-  isFullWidth,
+  isFullWidth: isFullWidthProp,
   label = "",
   onClick,
   size = "medium",
@@ -123,6 +137,8 @@ const Button = ({
 }: ButtonProps) => {
   const muiProps = useMuiProps();
 
+  const { isFullWidth } = useContext(ButtonContext);
+
   const renderButton = useCallback(
     (muiProps) => (
       <MuiButton
@@ -133,7 +149,7 @@ const Button = ({
         data-se={testId}
         disabled={isDisabled}
         endIcon={endIcon}
-        fullWidth={isFullWidth}
+        fullWidth={isFullWidth ?? isFullWidthProp}
         id={id}
         onClick={onClick}
         size={size}
@@ -151,7 +167,7 @@ const Button = ({
       endIcon,
       id,
       isDisabled,
-      isFullWidth,
+      isFullWidthProp,
       label,
       onClick,
       size,

@@ -586,7 +586,7 @@ export const components = ({
       styleOverrides: {
         root: () => ({
           borderRadius: odysseyTokens.BorderRadiusOuter,
-          boxShadow: odysseyTokens.DepthMenu,
+          boxShadow: odysseyTokens.DepthDialog,
           padding: odysseyTokens.Spacing5,
           position: "relative",
 
@@ -595,20 +595,27 @@ export const components = ({
           },
 
           "&.isClickable:hover": {
-            boxShadow: odysseyTokens.DepthDialog,
+            boxShadow: odysseyTokens.DepthDrawer,
           },
 
           [`& .${typographyClasses.h5}`]: {
-            marginBottom: 0,
+            lineHeight: 1.3,
+            marginBottom: odysseyTokens.Spacing3,
           },
 
           [`& .${typographyClasses.subtitle2}`]: {
-            marginBottom: 0,
+            marginBottom: odysseyTokens.Spacing1,
             textTransform: "uppercase",
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
-            fontSize: odysseyTokens.TypographySizeSubordinate,
+            fontSize: 10,
+            lineHeight: 1.3,
             color: odysseyTokens.TypographyColorSubordinate,
             letterSpacing: 1.3,
+          },
+
+          [`& .${typographyClasses.body1}`]: {
+            fontSize: odysseyTokens.TypographySizeSubordinate,
+            lineHeight: 1.5,
           },
         }),
       },
@@ -633,12 +640,8 @@ export const components = ({
     MuiCardActions: {
       styleOverrides: {
         root: () => ({
-          marginBlockStart: odysseyTokens.Spacing4,
+          marginBlockStart: odysseyTokens.Spacing5,
           padding: 0,
-
-          [`& > .${buttonClasses.root}`]: {
-            marginBlockEnd: "0 !important",
-          },
         }),
       },
     },
