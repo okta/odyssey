@@ -25,7 +25,7 @@ import { useControlledState } from "./useControlledState";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
-type BaseCheckboxProps = {
+export type CheckboxProps = {
   /**
    * The ARIA label for the Checkbox
    */
@@ -63,10 +63,8 @@ type BaseCheckboxProps = {
    */
   value?: string;
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
-  SeleniumProps;
-
-export type CheckboxProps =
-  | (BaseCheckboxProps & {
+  (
+  | {
       /**
        * Sets the checked state of the Checkbox
        */
@@ -81,8 +79,8 @@ export type CheckboxProps =
        * Must be used if `isChecked` is used
        */
       onChange: MuiCheckboxProps["onChange"];
-    })
-  | (BaseCheckboxProps & {
+    }
+  | {
       /**
        * Sets the checked state of the Checkbox
        * Should not be used if `isDefaultChecked` is used
@@ -96,7 +94,9 @@ export type CheckboxProps =
        * The change event handler for the Checkbox
        */
       onChange?: MuiCheckboxProps["onChange"];
-    });
+    }
+) &
+  SeleniumProps;
 
 const Checkbox = ({
   ariaLabel,
@@ -116,7 +116,7 @@ const Checkbox = ({
 }: CheckboxProps) => {
   const { t } = useTranslation();
   const [isCheckedValue, setIsCheckedValue] = useControlledState(
-    isChecked || isDefaultChecked
+    isChecked ?? isDefaultChecked
   );
 
   const label = useMemo(() => {
