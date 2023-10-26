@@ -460,9 +460,9 @@ export const components = ({
               color: odysseyTokens.TypographyColorAction,
             },
 
-            "&:focus": {
-              backgroundColor: odysseyTokens.HueNeutralWhite,
-            },
+            // "&:focus": {
+            //   backgroundColor: odysseyTokens.HueNeutralWhite,
+            // },
 
             "&:disabled": {
               backgroundColor: odysseyTokens.HueNeutral100,
