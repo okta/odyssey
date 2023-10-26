@@ -115,7 +115,7 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
-  const [isCheckedValue, setIsCheckedValue] = useControlledState(
+  const [isLocalChecked, setIsLocalChecked] = useControlledState(
     isChecked ?? isDefaultChecked
   );
 
@@ -136,17 +136,17 @@ const Checkbox = ({
 
   const onChange = useCallback(
     (event, checked) => {
-      setIsCheckedValue(event.currentTarget.checked);
+      setIsLocalChecked(event.currentTarget.checked);
       onChangeProp?.(event, checked);
     },
-    [onChangeProp, setIsCheckedValue]
+    [onChangeProp, setIsLocalChecked]
   );
 
   return (
     <FormControlLabel
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
-      checked={isCheckedValue}
+      checked={isLocalChecked}
       className={
         validity === "invalid"
           ? "Mui-error"
