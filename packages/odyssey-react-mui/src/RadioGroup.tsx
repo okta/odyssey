@@ -12,7 +12,7 @@
 
 import {
   RadioGroup as MuiRadioGroup,
-  RadioGroupProps as MuiRadioGroupProps,
+  type RadioGroupProps as MuiRadioGroupProps,
 } from "@mui/material";
 import { memo, ReactElement, useCallback } from "react";
 
