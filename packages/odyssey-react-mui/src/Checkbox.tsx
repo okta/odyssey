@@ -35,13 +35,13 @@ type BaseCheckboxProps = {
    */
   ariaLabelledBy?: string;
   /**
-   * Sets the checked state of the Checkbox
+   * The id of the `input` element.
    */
-  isChecked?: boolean;
+  id?: string;
   /**
-   * Determines whether the Checkbox is checked
+   * Determines whether the Checkbox is disabled
    */
-  isDefaultChecked?: boolean;
+  isDisabled?: boolean;
   /**
    * Determines whether the Checkbox is in an indeterminate state
    */
