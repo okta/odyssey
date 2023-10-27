@@ -31,9 +31,9 @@ export type AccordionProps = {
    */
   label: string;
   /**
-   * If true, the Accordion item won't have a shadow.
+   * If true, the Accordion item will have a shadow.
    */
-  hideShadow?: boolean;
+  hasShadow?: boolean;
   /**
    * Whether the item is expanded by default
    */
@@ -50,12 +50,22 @@ export type AccordionProps = {
    * Event fired when the expansion state of the accordion is changed
    */
   onChange?: MuiAccordionProps["onChange"];
-} & SeleniumProps;
+} & (
+  | {
+      isExpanded: boolean;
+      isDefaultExpanded?: never;
+    }
+  | {
+      isDefaultExpanded?: boolean;
+      isExpanded?: never;
+    }
+) &
+  SeleniumProps;
 
 const Accordion = ({
   children,
   label,
-  hideShadow,
+  hasShadow = true,
   isDefaultExpanded,
   isDisabled,
   isExpanded,
@@ -68,7 +78,7 @@ const Accordion = ({
       disableGutters
       expanded={isExpanded}
       onChange={onChange}
-      className={hideShadow ? `noShadow` : undefined}
+      className={hasShadow ? `hasShadow` : undefined}
     >
       <MuiAccordionSummary expandIcon={<ChevronDownIcon />}>
         <Support component="div">{label}</Support>

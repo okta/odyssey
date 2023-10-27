@@ -37,7 +37,7 @@ const storybookMeta: Meta<AccordionProps> = {
         },
       },
     },
-    hideShadow: {
+    hasShadow: {
       control: "boolean",
       description: "",
       table: {
@@ -67,7 +67,7 @@ const storybookMeta: Meta<AccordionProps> = {
   },
   args: {
     children: "Lorem ipsum dolor sit amet.",
-    hideShadow: true,
+    hasShadow: true,
     isDisabled: false,
     isExpanded: undefined,
     label: "Title",
@@ -94,7 +94,7 @@ export const Single: StoryObj<AccordionProps> = {
     return (
       <Accordion
         label={props.label}
-        hideShadow={props.hideShadow}
+        hasShadow={props.hasShadow}
         isDisabled={props.isDisabled}
         isExpanded={props.isExpanded}
       >
@@ -113,22 +113,22 @@ export const Multi: StoryObj<AccordionProps> = {
       <>
         <Accordion
           label={props.label}
-          hideShadow={props.hideShadow}
+          hasShadow={props.hasShadow}
           isDisabled={props.isDisabled}
           isExpanded={props.isExpanded}
         >
           {props.children}
         </Accordion>
-        <Accordion label="Accordion 2" hideShadow={props.hideShadow}>
+        <Accordion label="Accordion 2" hasShadow={props.hasShadow}>
           This is the second accordion item.
         </Accordion>
-        <Accordion label="Accordion 3" hideShadow={props.hideShadow}>
+        <Accordion label="Accordion 3" hasShadow={props.hasShadow}>
           This is the third accordion item.
         </Accordion>
-        <Accordion label="Accordion 4" hideShadow={props.hideShadow}>
+        <Accordion label="Accordion 4" hasShadow={props.hasShadow}>
           This is the fourth accordion item.
         </Accordion>
-        <Accordion label="Accordion 5" hideShadow={props.hideShadow}>
+        <Accordion label="Accordion 5" hasShadow={props.hasShadow}>
           This is the fifth accordion item.
         </Accordion>
       </>

@@ -66,10 +66,10 @@ export const components = ({
           borderWidth: 1,
           borderInlineStyle: "solid",
           borderColor: odysseyTokens.HueNeutral100,
-          boxShadow: odysseyTokens.DepthMenu,
+          boxShadow: "none",
 
-          "&.noShadow": {
-            boxShadow: "none !important",
+          "&.hasShadow": {
+            boxShadow: odysseyTokens.DepthLow,
           },
 
           "&.Mui-disabled": {
