@@ -103,7 +103,7 @@ const Checkbox = ({
   ariaLabelledBy,
   id: idOverride,
   isChecked,
-  isDefaultChecked = false,
+  isDefaultChecked,
   isDisabled,
   isIndeterminate,
   isRequired,
@@ -115,9 +115,14 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
-  const [isLocalChecked, setIsLocalChecked] = useControlledState(
-    isChecked ?? isDefaultChecked
-  );
+  console.log("isChecked", isChecked);
+  console.log("isDefaultChecked", isDefaultChecked);
+  const [isLocalChecked, setIsLocalChecked] = useControlledState({
+    controlledValue: isChecked,
+    uncontrolledValue: isDefaultChecked,
+  });
+
+  console.log("localChecked", isLocalChecked);
 
   const label = useMemo(() => {
     if (isRequired) {
@@ -134,9 +139,9 @@ const Checkbox = ({
     }
   }, [isRequired, labelProp, t]);
 
-  const onChange = useCallback(
+  const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
-      setIsLocalChecked(event.currentTarget.checked);
+      setIsLocalChecked(checked);
       onChangeProp?.(event, checked);
     },
     [onChangeProp, setIsLocalChecked]
@@ -146,7 +151,6 @@ const Checkbox = ({
     <FormControlLabel
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
-      checked={isLocalChecked}
       className={
         validity === "invalid"
           ? "Mui-error"
@@ -155,14 +159,18 @@ const Checkbox = ({
           : ""
       }
       control={
-        <MuiCheckbox indeterminate={isIndeterminate} required={isRequired} />
+        <MuiCheckbox
+          checked={isLocalChecked}
+          indeterminate={isIndeterminate}
+          onChange={onChange}
+          required={isRequired}
+        />
       }
       data-se={testId}
       disabled={isDisabled}
       id={idOverride}
       label={label}
       name={nameOverride ?? idOverride}
-      onChange={onChange}
       value={value}
       required={isRequired}
     />

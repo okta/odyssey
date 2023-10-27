@@ -25,7 +25,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
-const storybookMeta: Meta<CheckboxProps> = {
+const storybookMeta: Meta<typeof Checkbox> = {
   title: "MUI Components/Forms/Checkbox",
   component: Checkbox,
   argTypes: {
@@ -144,6 +144,7 @@ const checkTheBox =
       const canvas = within(canvasElement);
       const checkBox = canvas.getByRole("checkbox") as HTMLInputElement;
       if (checkBox) {
+        console.log("checkbox", checkBox);
         userEvent.click(checkBox);
       }
       userEvent.tab();
@@ -152,9 +153,10 @@ const checkTheBox =
     });
   };
 
-export const Default: StoryObj<CheckboxProps> = {
+export const Default: StoryObj<typeof Checkbox> = {
   args: {
     label: "Enable warp drive recalibration",
+    isChecked: true,
   },
   render: function C({ label }) {
     const [isChecked, setIsChecked] = useState(false);
@@ -173,7 +175,7 @@ export const Default: StoryObj<CheckboxProps> = {
   },
 };
 
-export const Required: StoryObj<CheckboxProps> = {
+export const Required: StoryObj<typeof Checkbox> = {
   parameters: {
     docs: {
       description: {
@@ -185,6 +187,7 @@ export const Required: StoryObj<CheckboxProps> = {
   args: {
     label: "I agree to the terms and conditions",
     isRequired: true,
+    isChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Required");
@@ -195,10 +198,11 @@ export const Checked: StoryObj<CheckboxProps> = {
   args: {
     label: "Pre-flight systems check complete",
     isDefaultChecked: true,
+    isChecked: undefined,
   },
 };
 
-export const Disabled: StoryObj<CheckboxProps> = {
+export const Disabled: StoryObj<typeof Checkbox> = {
   parameters: {
     docs: {
       description: {
@@ -229,10 +233,12 @@ export const Indeterminate: StoryObj<CheckboxProps> = {
   },
 };
 
-export const Invalid: StoryObj<CheckboxProps> = {
+export const Invalid: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     validity: "invalid",
+    isDefaultChecked: false,
+    // onChange: void
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Disabled");

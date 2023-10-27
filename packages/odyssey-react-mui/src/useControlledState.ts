@@ -12,6 +12,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
+type UseControlledStateProps<Value> = {
+  controlledValue?: Value; // isChecked
+  uncontrolledValue?: Value; // isDefaultChecked
+};
+
 /**
  * Use the same way as `useState`. Returns a stateful value, and a function to update it.
  * When `initialState` is passed, the returned function to update it does nothing. This is
@@ -21,17 +26,31 @@ import { useEffect, useRef, useState } from "react";
  * @param initialState
  * @see https://react.dev/reference/react/useState
  */
-export const useControlledState: typeof useState = (initialState?) => {
-  const isControlled = useRef(initialState !== undefined);
-  const [stateValue, setStateValue] = useState(initialState);
+export const useControlledState = <Value>({
+  controlledValue,
+  uncontrolledValue,
+}: UseControlledStateProps<Value>) => {
+  const isControlledMode = useRef(controlledValue !== undefined);
+  const [stateValue, setStateValue] = useState(
+    isControlledMode.current ? controlledValue : uncontrolledValue
+  );
 
   useEffect(() => {
-    setStateValue(initialState);
-  }, [initialState]);
+    if (isControlledMode.current) {
+      setStateValue(controlledValue);
+    }
+  }, [controlledValue]);
+
+  const setState: typeof setStateValue = (value) => {
+    if (isControlledMode.current) {
+      setStateValue(value);
+    }
+  };
 
   return [
     stateValue,
     // If `value` is controlled externally, ignore calls to the setter.
-    isControlled.current ? () => undefined : setStateValue,
-  ];
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setState,
+  ] as const;
 };
