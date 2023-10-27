@@ -90,7 +90,7 @@ export const Single: StoryObj<AccordionProps> = {
   args: {
     children: "This is the content of the box.",
   },
-  render: function C(props) {
+  render: function C(props: AccordionProps) {
     return (
       <Accordion
         label={props.label}
@@ -108,7 +108,7 @@ export const Multi: StoryObj<AccordionProps> = {
   args: {
     children: "This is the content of the box.",
   },
-  render: function C(props) {
+  render: function C(props: AccordionProps) {
     return (
       <>
         <Accordion
