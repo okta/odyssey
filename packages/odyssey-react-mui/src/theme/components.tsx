@@ -63,6 +63,9 @@ export const components = ({
       styleOverrides: {
         root: () => ({
           backgroundColor: odysseyTokens.HueNeutralWhite,
+          borderWidth: 1,
+          borderInlineStyle: "solid",
+          borderColor: odysseyTokens.HueNeutral100,
           boxShadow: odysseyTokens.DepthMenu,
 
           "&.noShadow": {
@@ -87,11 +90,13 @@ export const components = ({
           "&:first-of-type": {
             borderTopLeftRadius: odysseyTokens.BorderRadiusMain,
             borderTopRightRadius: odysseyTokens.BorderRadiusMain,
+            borderBlockStartStyle: "solid",
           },
 
           "&:last-of-type": {
             borderBottomLeftRadius: odysseyTokens.BorderRadiusMain,
             borderBottomRightRadius: odysseyTokens.BorderRadiusMain,
+            borderBlockEndStyle: "solid",
           },
         }),
       },
