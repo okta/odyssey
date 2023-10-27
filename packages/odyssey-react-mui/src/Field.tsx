@@ -77,14 +77,14 @@ export type FieldProps = {
   renderFieldComponent: ({
     ariaDescribedBy,
     dataSe,
-    id,
     errorMessageElementId,
+    id,
     labelElementId,
   }: {
     ariaDescribedBy?: string;
     dataSe?: string;
-    id: string;
     errorMessageElementId?: string;
+    id: string;
     labelElementId: string;
   }) => ReactElement;
 };
@@ -150,8 +150,8 @@ const Field = ({
 
       {renderFieldComponent({
         ariaDescribedBy,
-        id,
         errorMessageElementId,
+        id,
         labelElementId,
       })}
 
