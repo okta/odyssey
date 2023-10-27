@@ -1786,19 +1786,19 @@ export const components = ({
     },
     MuiPaper: {
       styleOverrides: {
-        // depth/menu
+        // depth/low
         elevation1: {
-          boxShadow: odysseyTokens.DepthMenu,
+          boxShadow: odysseyTokens.DepthLow,
         },
 
-        // depth/dialog
+        // depth/medium
         elevation2: {
-          boxShadow: odysseyTokens.DepthDialog,
+          boxShadow: odysseyTokens.DepthMedium,
         },
 
-        // depth/drawer
+        // depth/high
         elevation3: {
-          boxShadow: odysseyTokens.DepthDrawer,
+          boxShadow: odysseyTokens.DepthHigh,
         },
       },
     },

@@ -95,13 +95,13 @@ const breadcrumbProviderValue: Record<
   },
 };
 
+const defaultTruncationValue = 5;
+
 const BreadcrumbList = ({
   children,
   homeHref,
-  maxVisibleItems: maxVisibleItemsOverride,
+  maxVisibleItems = defaultTruncationValue,
 }: BreadcrumbsProps) => {
-  const maxVisibleItems = maxVisibleItemsOverride ?? children.length;
-
   const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);

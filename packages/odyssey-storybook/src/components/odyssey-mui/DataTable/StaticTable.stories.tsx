@@ -21,7 +21,7 @@ import {
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta = {
-  title: "MUI Components/Table/Static",
+  title: "Labs Components/StaticTable",
   component: StaticTable,
   argTypes: {
     columns: {

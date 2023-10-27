@@ -10,8 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { RadioGroup as MuiRadioGroup } from "@mui/material";
-import { ChangeEventHandler, memo, ReactElement, useCallback } from "react";
+import {
+  RadioGroup as MuiRadioGroup,
+  type RadioGroupProps as MuiRadioGroupProps,
+} from "@mui/material";
+import { memo, ReactElement, useCallback } from "react";
 
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
@@ -53,7 +56,7 @@ export type RadioGroupProps = {
   /**
    * Listen for changes in the browser that change `value`
    */
-  onChange?: ChangeEventHandler<EventTarget>;
+  onChange?: MuiRadioGroupProps["onChange"];
   /**
    * The `value` on the selected Radio
    */
