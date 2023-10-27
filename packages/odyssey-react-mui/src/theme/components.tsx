@@ -538,21 +538,23 @@ export const components = ({
           }),
 
           ...(ownerState.variant === "secondary" && {
-            backgroundColor: odysseyTokens.HueBlue100,
-            color: odysseyTokens.PalettePrimaryDark,
+            backgroundColor: "transparent",
+            borderColor: odysseyTokens.HueNeutral300,
+            color: odysseyTokens.TypographyColorBody,
 
             "&:hover": {
-              backgroundColor: odysseyTokens.HueBlue200,
-              color: odysseyTokens.HueBlue800,
+              backgroundColor: odysseyTokens.HueNeutral100,
             },
 
             "&:active": {
-              backgroundColor: odysseyTokens.PalettePrimaryLight,
-              color: odysseyTokens.HueBlue800,
+              backgroundColor: "transparent",
+              borderColor: odysseyTokens.BorderColorPrimaryControl,
+              color: odysseyTokens.TypographyColorAction,
             },
 
             "&:disabled": {
               backgroundColor: odysseyTokens.HueNeutral100,
+              borderColor: "transparent",
               color: odysseyTokens.TypographyColorDisabled,
             },
           }),
