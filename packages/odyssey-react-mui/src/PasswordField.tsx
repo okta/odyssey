@@ -154,7 +154,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
-            // role: "textbox" added because password inputs do not have a role assigned
+            // role: "textbox" Added because password inputs don't have an implicit role assigned. This causes problems with element selection.
             role: "textbox",
           }}
           name={nameOverride ?? id}
