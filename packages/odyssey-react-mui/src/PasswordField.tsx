@@ -154,7 +154,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
-            // role: "textbox" added for unit testing purposes
+            // role: "textbox" added because password inputs do not have a role assigned
             role: "textbox",
           }}
           name={nameOverride ?? id}
