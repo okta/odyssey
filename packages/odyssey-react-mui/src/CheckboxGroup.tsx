@@ -56,8 +56,13 @@ const CheckboxGroup = ({
   testId,
 }: CheckboxGroupProps) => {
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy }) => (
-      <MuiFormGroup aria-describedby={ariaDescribedBy} data-se={testId}>
+    ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
+      <MuiFormGroup
+        aria-describedby={ariaDescribedBy}
+        aria-errormessage={errorMessageElementId}
+        aria-labelledby={labelElementId}
+        data-se={testId}
+      >
         {children}
       </MuiFormGroup>
     ),

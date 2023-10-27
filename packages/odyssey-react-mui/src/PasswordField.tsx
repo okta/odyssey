@@ -127,7 +127,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     }, []);
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }) => (
+      ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
@@ -151,7 +151,12 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
             )
           }
           id={id}
-          inputProps={{ role: "textbox" }}
+          inputProps={{
+            "aria-errormessage": errorMessageElementId,
+            "aria-labelledby": labelElementId,
+            // role: "textbox" Added because password inputs don't have an implicit role assigned. This causes problems with element selection.
+            role: "textbox",
+          }}
           name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}

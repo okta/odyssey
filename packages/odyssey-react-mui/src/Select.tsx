@@ -225,13 +225,14 @@ const Select = ({
   );
 
   const renderFieldComponent = useCallback(
-    ({ ariaDescribedBy, id }) => (
+    ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiSelect
-        aria-describedby={ariaDescribedBy}
         children={children}
         data-se={testId}
         id={id}
-        labelId={label}
+        aria-errormessage={errorMessageElementId}
+        aria-describedby={ariaDescribedBy}
+        labelId={labelElementId}
         multiple={isMultiSelect}
         name={nameOverride ?? id}
         onBlur={onBlur}
@@ -244,7 +245,6 @@ const Select = ({
     [
       children,
       isMultiSelect,
-      label,
       nameOverride,
       onBlur,
       onChange,
