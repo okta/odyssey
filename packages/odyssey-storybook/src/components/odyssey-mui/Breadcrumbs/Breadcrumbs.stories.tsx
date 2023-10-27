@@ -20,7 +20,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<BreadcrumbsProps> = {
-  title: "Labs Components/Breadcrumbs",
+  title: "MUI Components/Breadcrumbs",
   component: BreadcrumbList,
   argTypes: {
     children: {
@@ -52,6 +52,9 @@ const storybookMeta: Meta<BreadcrumbsProps> = {
       },
     },
   },
+  args: {
+    maxVisibleItems: 5,
+  },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
 };
@@ -61,7 +64,6 @@ export default storybookMeta;
 export const Default: StoryObj<BreadcrumbsProps> = {
   args: {
     homeHref: "#home",
-    maxVisibleItems: 4,
   },
   render: (args) => (
     <BreadcrumbList {...args}>

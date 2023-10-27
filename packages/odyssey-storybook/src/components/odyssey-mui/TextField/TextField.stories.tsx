@@ -87,6 +87,9 @@ const storybookMeta: Meta<TextFieldProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isMultiline: {
@@ -96,6 +99,9 @@ const storybookMeta: Meta<TextFieldProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isOptional: {
@@ -104,6 +110,9 @@ const storybookMeta: Meta<TextFieldProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -124,6 +133,10 @@ const storybookMeta: Meta<TextFieldProps> = {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     name: {
       control: "text",
@@ -142,7 +155,6 @@ const storybookMeta: Meta<TextFieldProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -152,7 +164,6 @@ const storybookMeta: Meta<TextFieldProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -162,7 +173,6 @@ const storybookMeta: Meta<TextFieldProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     placeholder: {
@@ -192,6 +202,9 @@ const storybookMeta: Meta<TextFieldProps> = {
       table: {
         type: {
           summary: textFieldTypeValues.join(" | "),
+        },
+        defaultValue: {
+          summary: "text",
         },
       },
     },

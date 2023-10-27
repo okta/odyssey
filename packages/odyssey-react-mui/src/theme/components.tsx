@@ -336,6 +336,11 @@ export const components = ({
         openOnFocus: false,
         popupIcon: <ChevronDownIcon />,
         selectOnFocus: true,
+        slotProps: {
+          paper: {
+            elevation: 1,
+          },
+        },
       },
       styleOverrides: {
         clearIndicator: {
@@ -363,6 +368,9 @@ export const components = ({
           }),
         }),
         listbox: {
+          borderWidth: odysseyTokens.BorderWidthMain,
+          borderStyle: odysseyTokens.BorderStyleMain,
+          borderColor: odysseyTokens.HueNeutral200,
           paddingBlock: odysseyTokens.Spacing2,
           paddingInline: odysseyTokens.Spacing2,
           borderRadius: odysseyTokens.BorderRadiusMain,
@@ -402,6 +410,10 @@ export const components = ({
         popupIndicator: {
           padding: odysseyTokens.Spacing1,
           marginRight: "unset",
+        },
+        popper: {
+          background: "transparent",
+          paddingBlockStart: odysseyTokens.Spacing1,
         },
         inputRoot: ({ ownerState }) => ({
           ...(ownerState.readOnly === true && {
@@ -1831,6 +1843,13 @@ export const components = ({
         }),
       },
     },
+    MuiListItemSecondaryAction: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+        },
+      },
+    },
     MuiModal: {
       defaultProps: {
         container: shadowRootElement,
@@ -1850,6 +1869,24 @@ export const components = ({
           right: "unset",
           insetInlineEnd: odysseyTokens.Spacing3,
           color: odysseyTokens.TypographyColorBody,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        // depth/low
+        elevation1: {
+          boxShadow: odysseyTokens.DepthLow,
+        },
+
+        // depth/medium
+        elevation2: {
+          boxShadow: odysseyTokens.DepthMedium,
+        },
+
+        // depth/high
+        elevation3: {
+          boxShadow: odysseyTokens.DepthHigh,
         },
       },
     },
@@ -1970,6 +2007,11 @@ export const components = ({
       defaultProps: {
         variant: "standard",
         IconComponent: ChevronDownIcon,
+        MenuProps: {
+          PaperProps: {
+            elevation: 1,
+          },
+        },
       },
       styleOverrides: {
         select: {
@@ -1980,18 +2022,22 @@ export const components = ({
             backgroundColor: "transparent",
           },
 
-          ".MuiBox-root": {
+          "& .MuiBox-root": {
             display: "flex",
             flexWrap: "wrap",
             gap: odysseyTokens.Spacing1,
             marginBlock: `-${odysseyTokens.Spacing2}`,
             marginInline: `-${odysseyTokens.Spacing2}`,
           },
+
+          ["& .MuiListItemSecondaryAction-root"]: {
+            display: "none",
+          },
         },
         icon: {
           right: "unset",
           insetInlineEnd: odysseyTokens.Spacing3,
-          color: odysseyTokens.TypographyColorBody,
+          color: odysseyTokens.TypographyColorSubordinate,
         },
       },
     },

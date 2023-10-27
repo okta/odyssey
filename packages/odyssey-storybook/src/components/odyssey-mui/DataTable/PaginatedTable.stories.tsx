@@ -22,14 +22,24 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { useCallback, useRef, useState } from "react";
 
 const storybookMeta: Meta = {
-  title: "MUI Components/Table/Paginated",
+  title: "Labs Components/PaginatedTable",
   component: PaginatedTable,
   argTypes: {
     columns: {
       control: "array",
+      type: {
+        required: true,
+        name: "other",
+        value: "MaterialReactTableProps<TData>",
+      },
     },
     data: {
       control: "object",
+      type: {
+        required: true,
+        name: "other",
+        value: "MaterialReactTableProps<TData>",
+      },
     },
     getRowId: {
       control: "function",
@@ -63,6 +73,13 @@ const storybookMeta: Meta = {
     },
     ToolbarButtons: {
       control: "function",
+    },
+    rowsPerPage: {
+      table: {
+        defaultValue: {
+          summary: 10,
+        },
+      },
     },
   },
   decorators: [MuiThemeDecorator],

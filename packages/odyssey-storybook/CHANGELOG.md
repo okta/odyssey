@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0](https://github.com/okta/odyssey/compare/v1.3.0...v1.4.0) (2023-10-23)
+
+### Features
+
+- add onclick prop to link component ([#2003](https://github.com/okta/odyssey/issues/2003)) ([7ae351e](https://github.com/okta/odyssey/commit/7ae351edb3001de752ffc292133a05a9b64c57be))
+
 ## [1.3.0](https://github.com/okta/odyssey/compare/v1.2.0...v1.3.0) (2023-10-18)
 
 ### Features
