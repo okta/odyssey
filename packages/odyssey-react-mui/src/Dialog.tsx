@@ -118,7 +118,13 @@ const Dialog = ({
           variant="floating"
         />
       </DialogTitle>
-      <DialogContent dividers={isContentScrollable} ref={dialogContentRef}>
+      <DialogContent
+        dividers={isContentScrollable}
+        ref={dialogContentRef}
+        {...(isContentScrollable && {
+          tabIndex: 0,
+        })}
+      >
         {content}
       </DialogContent>
 
