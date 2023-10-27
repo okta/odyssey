@@ -127,7 +127,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     }, []);
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id, errorMessageElementId, labelElementId }) => (
+      ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
