@@ -95,10 +95,12 @@ const breadcrumbProviderValue: Record<
   },
 };
 
+const defaultTruncationValue = 5;
+
 const BreadcrumbList = ({
   children,
   homeHref,
-  maxVisibleItems = 5,
+  maxVisibleItems = defaultTruncationValue,
 }: BreadcrumbsProps) => {
   const { t } = useTranslation();
 
