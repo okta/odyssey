@@ -238,7 +238,6 @@ const Select = ({
     [
       children,
       isMultiSelect,
-      label,
       nameOverride,
       onBlur,
       onChange,
