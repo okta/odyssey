@@ -10,29 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createTheme } from "@mui/material/styles";
-import * as Tokens from "@okta/odyssey-design-tokens";
-
-import { components } from "./components";
-import { mixins } from "./mixins";
-import { palette } from "./palette";
-import { shape } from "./shape";
-import { spacing } from "./spacing";
-import { typography } from "./typography";
-import "./components.types";
-import "./mixins.types";
-import "./palette.types";
-import "./typography.types";
-
-export type DesignTokens = typeof Tokens;
-export type DesignTokensOverride = Partial<typeof Tokens>;
-
-export const createOdysseyMuiTheme = (odysseyTokens: DesignTokens) =>
-  createTheme({
-    components: components(odysseyTokens),
-    mixins: mixins(odysseyTokens),
-    palette: palette(odysseyTokens),
-    shape: shape(odysseyTokens),
-    spacing: spacing(odysseyTokens),
-    typography: typography(odysseyTokens),
-  });
+export * from "./createOdysseyMuiTheme";

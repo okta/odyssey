@@ -19,23 +19,31 @@ import { useCallback } from "react";
 
 export type DatePickerProps<TInputDate, TDate> = {
   label: MuiDatePickerProps<TInputDate, TDate>["label"];
+  /**
+   * If `true`, the `input` element is not required.
+   */
+  isOptional?: boolean;
   onChange: MuiDatePickerProps<TInputDate, TDate>["onChange"];
   value: MuiDatePickerProps<TInputDate, TDate>["value"];
 };
 
 export const DatePicker = <TInputDate, TDate>({
   label,
+  isOptional = false,
   onChange,
   value = null,
 }: DatePickerProps<TInputDate, TDate>) => {
-  const renderInput = useCallback(({ InputProps, ...props }) => {
-    const combinedProps = {
-      ...InputProps,
-      ...props,
-    };
+  const renderInput = useCallback(
+    ({ InputProps, ...props }) => {
+      const combinedProps = {
+        ...InputProps,
+        ...props,
+      };
 
-    return <InputBase {...combinedProps} />;
-  }, []);
+      return <InputBase {...combinedProps} required={!isOptional} />;
+    },
+    [isOptional]
+  );
 
   return (
     <MuiDatePicker

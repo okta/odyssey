@@ -25,5 +25,6 @@ lerna-debug.log
 
 # bundled properties files (i18n)
 **/src/properties/ts/*.ts
+**/src/properties/ts/.ts.DS_Store
 
 *.tsbuildinfo

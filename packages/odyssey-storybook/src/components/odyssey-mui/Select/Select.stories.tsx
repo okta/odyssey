@@ -140,6 +140,9 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isMultiSelect: {
@@ -148,6 +151,9 @@ const storybookMeta: Meta<SelectProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -158,11 +164,28 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     label: {
       control: "text",
       description: "The label text for the select component",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+      type: {
+        required: true,
+        name: "string",
+      },
+    },
+    name: {
+      control: "text",
+      description:
+        "The name of the select component. Defaults to the `id` if not set.",
       table: {
         type: {
           summary: "string",
@@ -176,7 +199,6 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -187,7 +209,6 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -197,7 +218,6 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     options: {
@@ -207,6 +227,11 @@ const storybookMeta: Meta<SelectProps> = {
         type: {
           summary: "(string | SelectOption)[]",
         },
+      },
+      type: {
+        required: true,
+        name: "other",
+        value: "(string | SelectOption)[]",
       },
     },
     value: {
@@ -230,24 +255,7 @@ const storybookMeta: Meta<SelectProps> = {
 
 export default storybookMeta;
 
-const Template: StoryObj<SelectProps> = {
-  render: function C(args) {
-    return (
-      <Select
-        label={args.label}
-        hint={args.hint}
-        errorMessage={args.errorMessage}
-        isDisabled={args.isDisabled}
-        isMultiSelect={args.isMultiSelect}
-        isOptional={args.isOptional}
-        options={args.options}
-      />
-    );
-  },
-};
-
 export const Default: StoryObj<SelectProps> = {
-  ...Template,
   play: async ({ canvasElement, step }) => {
     await step("Select Earth from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
@@ -271,14 +279,12 @@ export const Default: StoryObj<SelectProps> = {
 Default.args = {};
 
 export const Disabled: StoryObj<SelectProps> = {
-  ...Template,
   args: {
     isDisabled: true,
   },
 };
 
 export const Error: StoryObj<SelectProps> = {
-  ...Template,
   args: {
     errorMessage: "Select your destination.",
   },
@@ -290,7 +296,6 @@ export const Error: StoryObj<SelectProps> = {
 };
 
 export const OptionsObject: StoryObj<SelectProps> = {
-  ...Template,
   args: {
     options: optionsObject,
   },
@@ -305,7 +310,6 @@ export const OptionsObject: StoryObj<SelectProps> = {
 };
 
 export const OptionsGrouped: StoryObj<SelectProps> = {
-  ...Template,
   args: {
     options: optionsGrouped,
   },
@@ -320,7 +324,6 @@ export const OptionsGrouped: StoryObj<SelectProps> = {
 };
 
 export const MultiSelect: StoryObj<SelectProps> = {
-  ...Template,
   args: {
     isMultiSelect: true,
   },

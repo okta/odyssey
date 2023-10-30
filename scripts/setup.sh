@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NODE_VERSION=16.19.0
+NODE_VERSION=20.7.0
 
 # Note: Yarn will automatically switch over to yarn 3 after installing yarn 1.x
 YARN_VERSION=1.22.19

@@ -15,6 +15,8 @@ import { memo } from "react";
 
 import { FormControlLabel } from "@mui/material";
 
+import type { SeleniumProps } from "./SeleniumProps";
+
 export type RadioProps = {
   /**
    * If `true`, the Radio is selected
@@ -40,7 +42,7 @@ export type RadioProps = {
    * The value attribute of the Radio
    */
   value: string;
-};
+} & SeleniumProps;
 
 const Radio = ({
   isChecked,
@@ -48,12 +50,14 @@ const Radio = ({
   isInvalid,
   label,
   name,
+  testId,
   value,
 }: RadioProps) => (
   <FormControlLabel
     checked={isChecked}
     className={isInvalid ? "Mui-error" : ""}
     control={<MuiRadio />}
+    data-se={testId}
     disabled={isDisabled}
     label={label}
     name={name}

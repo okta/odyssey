@@ -15,6 +15,7 @@ import {
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
 import { ElementType, ReactNode, memo, useMemo } from "react";
+import { SeleniumProps } from "./SeleniumProps";
 
 export type TypographyVariantValue =
   | "h1"
@@ -70,10 +71,6 @@ export type TypographyProps = {
    */
   children: ReactNode;
   /**
-   * Additional classes to add to the component.
-   */
-  classes?: object;
-  /**
    * The color of the text.
    */
   color?: (typeof typographyColorValues)[number];
@@ -85,16 +82,16 @@ export type TypographyProps = {
    * The variant of Typography to render.
    */
   variant?: keyof typeof typographyVariantMapping;
-};
+} & SeleniumProps;
 
 const Typography = ({
   ariaDescribedBy,
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component: componentProp,
+  testId,
   variant = "body",
 }: TypographyProps) => {
   const component = useMemo(() => {
@@ -116,9 +113,9 @@ const Typography = ({
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       children={children}
-      classes={classes}
       color={color}
       component={component}
+      data-se={testId}
       variant={typographyVariantMapping[variant]}
     />
   );
@@ -132,18 +129,18 @@ const Heading1 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h1"
   />
 );
@@ -156,18 +153,18 @@ const Heading2 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h2"
   />
 );
@@ -180,18 +177,18 @@ const Heading3 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h3"
   />
 );
@@ -204,18 +201,18 @@ const Heading4 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h4"
   />
 );
@@ -228,18 +225,18 @@ const Heading5 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h5"
   />
 );
@@ -252,18 +249,18 @@ const Heading6 = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="h6"
   />
 );
@@ -276,18 +273,18 @@ const Paragraph = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="body"
   />
 );
@@ -300,18 +297,18 @@ const Subordinate = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="subordinate"
   />
 );
@@ -324,18 +321,18 @@ const Support = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="support"
   />
 );
@@ -348,18 +345,18 @@ const Legend = ({
   ariaLabel,
   ariaLabelledBy,
   children,
-  classes,
   color,
   component,
+  testId,
 }: TypographyProps) => (
   <Typography
     ariaDescribedBy={ariaDescribedBy}
     ariaLabel={ariaLabel}
     ariaLabelledBy={ariaLabelledBy}
     children={children}
-    classes={classes}
     color={color}
     component={component}
+    data-se={testId}
     variant="legend"
   />
 );

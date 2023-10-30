@@ -27,6 +27,11 @@ const storybookMeta: Meta<typeof RadioGroup> = {
           summary: "Array<ReactElement<typeof Radio>>",
         },
       },
+      type: {
+        required: true,
+        name: "other",
+        value: "Array<ReactElement<typeof Radio>>",
+      },
     },
     defaultValue: {
       control: "text",
@@ -83,6 +88,10 @@ const storybookMeta: Meta<typeof RadioGroup> = {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     onChange: {
       control: null,
@@ -91,7 +100,6 @@ const storybookMeta: Meta<typeof RadioGroup> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     value: {

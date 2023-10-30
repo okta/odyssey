@@ -76,10 +76,16 @@ export type FieldProps = {
    */
   renderFieldComponent: ({
     ariaDescribedBy,
+    dataSe,
+    errorMessageElementId,
     id,
+    labelElementId,
   }: {
     ariaDescribedBy?: string;
+    dataSe?: string;
+    errorMessageElementId?: string;
     id: string;
+    labelElementId: string;
   }) => ReactElement;
 };
 
@@ -99,12 +105,12 @@ const Field = ({
 
   const id = useUniqueId(idOverride);
   const hintId = hint ? `${id}-hint` : undefined;
-  const errorId = errorMessage ? `${id}-error` : undefined;
-  const labelId = `${id}-label`;
+  const errorMessageElementId = errorMessage ? `${id}-error` : undefined;
+  const labelElementId = `${id}-label`;
 
   const ariaDescribedBy = useMemo(
-    () => [hintId, errorId].join(" ").trim() || undefined,
-    [errorId, hintId]
+    () => [hintId, errorMessageElementId].join(" ").trim() || undefined,
+    [errorMessageElementId, hintId]
   );
 
   const { isDisabled: isFieldsetDisabled } = useFieldset();
@@ -133,7 +139,7 @@ const Field = ({
       ) : (
         <FieldLabel
           hasVisibleLabel={hasVisibleLabel}
-          id={labelId}
+          id={labelElementId}
           inputId={id}
           isOptional={isOptional}
           text={label}
@@ -144,10 +150,14 @@ const Field = ({
 
       {renderFieldComponent({
         ariaDescribedBy,
+        errorMessageElementId,
         id,
+        labelElementId,
       })}
 
-      {errorMessage && <FieldError id={errorId} text={errorMessage} />}
+      {errorMessage && (
+        <FieldError id={errorMessageElementId} text={errorMessage} />
+      )}
     </MuiFormControl>
   );
 };

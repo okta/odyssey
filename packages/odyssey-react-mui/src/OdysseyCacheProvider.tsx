@@ -24,12 +24,18 @@ import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId";
 
 export type OdysseyCacheProviderProps = {
   children: ReactNode;
+  /**
+   * Emotion renders into this HTML element.
+   * When enabling this prop, Emotion renders at the top of this component rather than the bottom like it does in the HTML `<head>`.
+   */
+  emotionRootElement?: HTMLStyleElement;
   nonce?: string;
   stylisPlugins?: StylisPlugin[];
 };
 
 const OdysseyCacheProvider = ({
   children,
+  emotionRootElement,
   nonce,
   stylisPlugins,
 }: OdysseyCacheProviderProps) => {
@@ -38,11 +44,13 @@ const OdysseyCacheProvider = ({
   const emotionCache = useMemo(
     () =>
       createCache({
+        container: emotionRootElement,
         key: uniqueAlphabeticalId,
         nonce: nonce || window.cspNonce,
+        prepend: Boolean(emotionRootElement),
         stylisPlugins,
       }),
-    [nonce, stylisPlugins, uniqueAlphabeticalId]
+    [emotionRootElement, nonce, stylisPlugins, uniqueAlphabeticalId]
   );
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;

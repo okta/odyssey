@@ -37,6 +37,12 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
             "ReactElement<typeof Checkbox> | Array<ReactElement<typeof Checkbox>>",
         },
       },
+      type: {
+        required: true,
+        name: "other",
+        value:
+          "ReactElement<typeof Checkbox> | Array<ReactElement<typeof Checkbox>>",
+      },
     },
     errorMessage: {
       control: "text",
@@ -50,16 +56,6 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
     hint: {
       control: "text",
       description: "The hint text for the checkbox group",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description:
-        "The id of the `input` element. This will also be the input's `name` field",
       table: {
         type: {
           summary: "string",
@@ -82,6 +78,9 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     label: {
@@ -91,6 +90,10 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
+        name: "string",
       },
     },
   },

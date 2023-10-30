@@ -14,9 +14,11 @@ import type { ThemeOptions } from "@mui/material";
 
 import { DesignTokens } from "./theme";
 
-export const palette = (
-  odysseyTokens: DesignTokens
-): ThemeOptions["palette"] => {
+export const palette = ({
+  odysseyTokens,
+}: {
+  odysseyTokens: DesignTokens;
+}): ThemeOptions["palette"] => {
   return {
     mode: "light",
     common: {

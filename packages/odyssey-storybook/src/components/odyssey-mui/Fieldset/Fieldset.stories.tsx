@@ -41,6 +41,11 @@ const storybookMeta: Meta<FieldsetProps> = {
           summary: "ReactElement | Array<ReactElement>",
         },
       },
+      type: {
+        required: true,
+        name: "other",
+        value: "ReactElement | Array<ReactElement>",
+      },
     },
     description: {
       control: "text",
@@ -76,6 +81,10 @@ const storybookMeta: Meta<FieldsetProps> = {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
+        name: "string",
       },
     },
     name: {

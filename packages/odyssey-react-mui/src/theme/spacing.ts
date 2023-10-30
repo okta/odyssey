@@ -14,9 +14,11 @@ import type { ThemeOptions } from "@mui/material";
 
 import type { DesignTokens } from "./theme";
 
-export const spacing = (
-  odysseyTokens: DesignTokens
-): ThemeOptions["spacing"] => {
+export const spacing = ({
+  odysseyTokens,
+}: {
+  odysseyTokens: DesignTokens;
+}): ThemeOptions["spacing"] => {
   return [
     odysseyTokens.Spacing0,
     odysseyTokens.Spacing1,

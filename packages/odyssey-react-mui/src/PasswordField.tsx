@@ -22,6 +22,8 @@ import {
 
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
+import type { SeleniumProps } from "./SeleniumProps";
+import { useTranslation } from "react-i18next";
 
 export type PasswordFieldProps = {
   /**
@@ -38,6 +40,10 @@ export type PasswordFieldProps = {
    * If `true`, the component will receive focus automatically.
    */
   hasInitialFocus?: boolean;
+  /**
+   * If `true`, the show/hide icon is not shown to the user
+   */
+  hasShowPassword?: boolean;
   /**
    * The helper text content.
    */
@@ -63,6 +69,10 @@ export type PasswordFieldProps = {
    */
   label: string;
   /**
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
+  /**
    * Callback fired when the `input` element loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -82,7 +92,7 @@ export type PasswordFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-};
+} & SeleniumProps;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
@@ -94,16 +104,20 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       id: idOverride,
       isDisabled = false,
       isOptional = false,
+      hasShowPassword = true,
       isReadOnly,
       label,
+      name: nameOverride,
       onChange,
       onFocus,
       onBlur,
       placeholder,
+      testId,
       value,
     },
     ref
   ) => {
+    const { t } = useTranslation();
     const [inputType, setInputType] = useState("password");
 
     const togglePasswordVisibility = useCallback(() => {
@@ -113,24 +127,37 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     }, []);
 
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }) => (
+      ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
+          data-se={testId}
           endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={togglePasswordVisibility}
-              >
-                {inputType === "password" ? <ShowIcon /> : <HideIcon />}
-              </IconButton>
-            </InputAdornment>
+            hasShowPassword && (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={
+                    inputType === "password"
+                      ? t("passwordfield.icon.label.show")
+                      : t("passwordfield.icon.label.hide")
+                  }
+                  onClick={togglePasswordVisibility}
+                >
+                  {inputType === "password" ? <ShowIcon /> : <HideIcon />}
+                </IconButton>
+              </InputAdornment>
+            )
           }
           id={id}
-          name={id}
+          inputProps={{
+            "aria-errormessage": errorMessageElementId,
+            "aria-labelledby": labelElementId,
+            // role: "textbox" Added because password inputs don't have an implicit role assigned. This causes problems with element selection.
+            role: "textbox",
+          }}
+          name={nameOverride ?? id}
           onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -145,15 +172,19 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       [
         autoCompleteType,
         hasInitialFocus,
+        t,
         togglePasswordVisibility,
         inputType,
+        nameOverride,
         onChange,
         onFocus,
         onBlur,
         placeholder,
         isOptional,
         isReadOnly,
+        hasShowPassword,
         ref,
+        testId,
         value,
       ]
     );

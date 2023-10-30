@@ -10,7 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, {
+import {
+  TabContext as MuiTabContext,
+  TabList as MuiTabList,
+  TabListProps as MuiTabListProps,
+  TabPanel as MuiTabPanel,
+} from "@mui/lab";
+import { Tab as MuiTab } from "@mui/material";
+import {
   ReactElement,
   ReactNode,
   memo,
@@ -18,12 +25,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Tab as MuiTab } from "@mui/material";
-import {
-  TabList as MuiTabList,
-  TabPanel as MuiTabPanel,
-  TabContext as MuiTabContext,
-} from "@mui/lab";
+import { SeleniumProps } from "./SeleniumProps";
 
 export type TabItemProps = {
   /**
@@ -46,7 +48,7 @@ export type TabItemProps = {
    * The value associated with the TabItem
    */
   value?: string;
-};
+} & SeleniumProps;
 
 export type TabsProps = {
   /**
@@ -66,16 +68,27 @@ export type TabsProps = {
    * Identifier for the selected tab.
    */
   value?: string;
+  /**
+   * Callback fired when the active tab is changed.
+   */
+  onChange?: MuiTabListProps["onChange"];
 };
 
-const Tabs = ({ ariaLabel, initialValue, tabs, value }: TabsProps) => {
+const Tabs = ({
+  ariaLabel,
+  initialValue,
+  tabs,
+  value,
+  onChange: onChangeProp,
+}: TabsProps) => {
   const [tabState, setTabState] = useState(initialValue ?? value ?? "0");
 
-  const onChange = useCallback(
-    (_event: React.SyntheticEvent, newState: string) => {
-      setTabState(newState);
+  const onChange = useCallback<NonNullable<MuiTabListProps["onChange"]>>(
+    (event, value: string) => {
+      setTabState(value);
+      onChangeProp?.(event, value);
     },
-    []
+    [onChangeProp]
   );
 
   useEffect(() => {
@@ -89,6 +102,7 @@ const Tabs = ({ ariaLabel, initialValue, tabs, value }: TabsProps) => {
       <MuiTabList onChange={onChange} aria-label={ariaLabel}>
         {tabs.map((tab, index) => (
           <MuiTab
+            data-se={tab.testId}
             disabled={tab.isDisabled}
             icon={tab.startIcon}
             label={tab.label}

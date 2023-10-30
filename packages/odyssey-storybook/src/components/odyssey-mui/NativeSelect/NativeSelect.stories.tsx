@@ -73,6 +73,9 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isMultiSelect: {
@@ -83,6 +86,9 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "boolean",
         },
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isOptional: {
@@ -91,6 +97,9 @@ const storybookMeta: Meta<NativeSelectProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -102,6 +111,10 @@ const storybookMeta: Meta<NativeSelectProps> = {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     onBlur: {
       control: null,
@@ -111,7 +124,6 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onChange: {
@@ -122,7 +134,6 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     onFocus: {
@@ -133,7 +144,6 @@ const storybookMeta: Meta<NativeSelectProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     value: {

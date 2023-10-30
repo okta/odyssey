@@ -16,16 +16,18 @@ import { FormHelperText } from "@mui/material";
 import { ScreenReaderText } from "./ScreenReaderText";
 import { useTranslation } from "react-i18next";
 
+import type { SeleniumProps } from "./SeleniumProps";
+
 export type FieldErrorProps = {
   id?: string;
   text: string;
-};
+} & SeleniumProps;
 
-const FieldError = ({ id, text }: FieldErrorProps) => {
+const FieldError = ({ id, testId, text }: FieldErrorProps) => {
   const { t } = useTranslation();
 
   return (
-    <FormHelperText error id={id}>
+    <FormHelperText data-se={testId} error id={id}>
       <ScreenReaderText>{`${t(
         "fielderror.screenreader.text"
       )}:`}</ScreenReaderText>

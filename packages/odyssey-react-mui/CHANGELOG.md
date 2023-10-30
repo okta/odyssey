@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0](https://github.com/okta/odyssey/compare/v1.3.0...v1.4.0) (2023-10-23)
+
+### Features
+
+- add onclick prop to link component ([#2003](https://github.com/okta/odyssey/issues/2003)) ([7ae351e](https://github.com/okta/odyssey/commit/7ae351edb3001de752ffc292133a05a9b64c57be))
+
+## [1.3.0](https://github.com/okta/odyssey/compare/v1.2.0...v1.3.0) (2023-10-18)
+
+### Features
+
+- group picker ([71171e0](https://github.com/okta/odyssey/commit/71171e009460f6f6606cd4b87647d36c8d5b119a))
+
+### Bug Fixes
+
+- gray color in default Status lamp variant ([1dd74df](https://github.com/okta/odyssey/commit/1dd74df9cb86147ed4cb02e3deb04c0be7f6fe6c))
+- inclusive language adjustments ([#1995](https://github.com/okta/odyssey/issues/1995)) ([82f4cb5](https://github.com/okta/odyssey/commit/82f4cb5290d418623c35fdb2504da37ab05a2d89))
+- menu button not allowing falsey children ([#1999](https://github.com/okta/odyssey/issues/1999)) ([b63b117](https://github.com/okta/odyssey/commit/b63b117beb7d86671a91d76256092400d0c7e204))
+- remove border from default status lamp ([5bacb73](https://github.com/okta/odyssey/commit/5bacb73d76662e6d4c4a5423fdf6cb96ac677913))
+- update displayName for Autocomplete ([#1983](https://github.com/okta/odyssey/issues/1983)) ([65abc8e](https://github.com/okta/odyssey/commit/65abc8e99949d9bafacace4a5591dec93ca3cc1f))
+
+## [1.2.0](https://github.com/okta/odyssey/compare/v1.1.1...v1.2.0) (2023-09-29)
+
+### Features
+
+- adds ability to use Shadow DOM with Odyssey ([#1966](https://github.com/okta/odyssey/issues/1966)) ([6b52246](https://github.com/okta/odyssey/commit/6b5224662982d7e214457292d0ab168719dc8c29))
+- hide selected Autocomplete items ([#1984](https://github.com/okta/odyssey/issues/1984)) ([11aa9ee](https://github.com/okta/odyssey/commit/11aa9ee0211e7f5b2c2512d77ee7efd8b4c7426e))
+- **odyssey-react-mui:** adding new prop for PasswordField to control show password button ([58ad6c8](https://github.com/okta/odyssey/commit/58ad6c8027d963a557fc501acba7ebc5724e2410))
+- **odyssey-react-mui:** renamed prop to hasShowPassword and changed default to true ([6c3b8d2](https://github.com/okta/odyssey/commit/6c3b8d2d8486afbee6869a12c5320f2ea152dc5a))
+
+### Bug Fixes
+
+- id and name not changing in Storybook ([#1987](https://github.com/okta/odyssey/issues/1987)) ([2f57e15](https://github.com/okta/odyssey/commit/2f57e156f27c64954e8aa39662198d9c04ff9518))
+- **odyssey-react-mui:** add mising prop errorMessage to autocomplete ([1c1360c](https://github.com/okta/odyssey/commit/1c1360cd33f74b5d91f961ed859ab0972633995d))
+- **odyssey-react-mui:** add props onBlur, onFocus, id, name ([66ad838](https://github.com/okta/odyssey/commit/66ad838821ba18c3ee4c24f729b89c76eb62df3e))
+- **odyssey-react-mui:** address PR comments ([f10a903](https://github.com/okta/odyssey/commit/f10a903cece4f873f91a588b3b603d96b6055eb1))
+- **odyssey-react-mui:** fixing issue with t function type by upgrading package ([c0b8343](https://github.com/okta/odyssey/commit/c0b834326afda7e42aacb64af174def159c31e90))
+- **odyssey-react-mui:** fixing tests to use getByRole and canvas ([cd7feed](https://github.com/okta/odyssey/commit/cd7feed17147397e5f79eed31e31d59ee17f562d))
+- **odyssey-react-mui:** localizing the aria-label for the PasswordField component ([e9d332a](https://github.com/okta/odyssey/commit/e9d332a5f691742609533e679bb58d7f910c9a1b))
+- **odyssey-react-mui:** toggle aria label based on password ([405fd71](https://github.com/okta/odyssey/commit/405fd7155d8ac9bb5b697bbb8b4dad3c021a0e63))
+- **odyssey-react-mui:** updating descriptions for props ([12b9587](https://github.com/okta/odyssey/commit/12b9587cda9058ff00180e0cc7b2bcb4debeb27f))
+- removed classes prop from Typography components ([#1989](https://github.com/okta/odyssey/issues/1989)) ([889f369](https://github.com/okta/odyssey/commit/889f3697582da68f71f2db801c1e7702a29fd9f5))
+
+## [1.1.1](https://github.com/okta/odyssey/compare/v1.1.0...v1.1.1) (2023-09-15)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.1.0](https://github.com/okta/odyssey/compare/v1.0.5...v1.1.0) (2023-09-14)
+
+### Features
+
+- enable name in all form fields ([#1969](https://github.com/okta/odyssey/issues/1969)) ([45ae220](https://github.com/okta/odyssey/commit/45ae220ca8a2bce0af484a52001e5477cf253147))
+
+### Bug Fixes
+
+- add @mui/system as dependency ([8294649](https://github.com/okta/odyssey/commit/8294649debb136a2c92733b8427aedf838200a07))
+- flip ordering of state to allow consumer to override ([4c48230](https://github.com/okta/odyssey/commit/4c482302d8ca74fa8566afcf66989064dd397d8a))
+- html `required` attribute removed when adding `isOptional` prop ([#1965](https://github.com/okta/odyssey/issues/1965)) ([793210d](https://github.com/okta/odyssey/commit/793210d8c3f3aa4aea3df815e30cb1029c71d511))
+- make global + column filtering work ([5df3006](https://github.com/okta/odyssey/commit/5df30067887a456fc3ad373ef8e548e4386590b1))
+- onGlobalFilterChange should fire when string removed ([#1970](https://github.com/okta/odyssey/issues/1970)) ([1c424b9](https://github.com/okta/odyssey/commit/1c424b9ac86547f4fb55b955f240f24fac83cb2b))
+- prettier adjustments ([cd7111c](https://github.com/okta/odyssey/commit/cd7111c9c510591db866831c58db3ed6f8e6466f))
+- static tables to always have virtualization enabled ([#1967](https://github.com/okta/odyssey/issues/1967)) ([f4362ce](https://github.com/okta/odyssey/commit/f4362ce45e7f70aa3667b361f4696af063a78612))
+
 ## [1.0.5](https://github.com/okta/odyssey/compare/v1.0.4...v1.0.5) (2023-09-11)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui

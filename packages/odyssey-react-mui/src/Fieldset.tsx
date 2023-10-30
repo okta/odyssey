@@ -18,6 +18,7 @@ import { FieldsetContext } from "./FieldsetContext";
 import { Legend, Support } from "./Typography";
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 import { useUniqueId } from "./useUniqueId";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type FieldsetProps = {
   /**
@@ -48,7 +49,7 @@ export type FieldsetProps = {
    * The name associated with the group.
    */
   name?: string;
-};
+} & SeleniumProps;
 
 const Fieldset = ({
   alert,
@@ -58,6 +59,7 @@ const Fieldset = ({
   isDisabled = false,
   legend,
   name,
+  testId,
 }: FieldsetProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const id = useUniqueId(idOverride);
@@ -72,6 +74,7 @@ const Fieldset = ({
   return (
     <Box
       component="fieldset"
+      data-se={testId}
       disabled={isDisabled}
       name={name}
       id={id}

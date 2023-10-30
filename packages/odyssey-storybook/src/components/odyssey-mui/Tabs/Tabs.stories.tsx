@@ -11,15 +11,22 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 
-import { TabItemProps, TabsProps, Tabs } from "@okta/odyssey-react-mui";
+import {
+  Box,
+  Button,
+  TabItemProps,
+  Tabs,
+  TabsProps,
+} from "@okta/odyssey-react-mui";
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
+import icons from "../../../../.storybook/components/iconUtils";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
-import icons from "../../../../.storybook/components/iconUtils";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {
   title: "MUI Components/Tabs",
@@ -32,6 +39,10 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
         type: {
           summary: "ReactNode",
         },
+      },
+      type: {
+        required: true,
+        name: "string",
       },
     },
     startIcon: {
@@ -55,6 +66,10 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     isDisabled: {
       control: "boolean",
@@ -63,7 +78,9 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: false,
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     value: {
@@ -72,6 +89,15 @@ const storybookMeta: Meta<TabsProps & TabItemProps> = {
       table: {
         type: {
           summary: "string",
+        },
+      },
+    },
+    onChange: {
+      control: null,
+      description: "Callback fired when the active tab is changed",
+      table: {
+        type: {
+          summary: "func",
         },
       },
     },
@@ -166,5 +192,54 @@ export const Icons: StoryObj<TabItemProps> = {
   },
   play: async ({ canvasElement, step }) => {
     selectTab({ canvasElement, step })("Tab Icon", "Xenomorphs");
+  },
+};
+
+export const Controlled: StoryObj<TabItemProps> = {
+  render: function C() {
+    const [value, setValue] = useState("planets");
+
+    const onChange: TabsProps["onChange"] = (_e: unknown, value: string) => {
+      setValue(value);
+    };
+
+    const tabs: TabItemProps[] = [
+      {
+        label: "Planets",
+        value: "planets",
+        children: "Information about Planets",
+      },
+      {
+        label: "Moons",
+        value: "moons",
+        children: "Information about Moons",
+      },
+      {
+        label: "Galaxies",
+        value: "galaxies",
+        children: "Information about Galaxies",
+      },
+    ];
+
+    return (
+      <>
+        <Tabs
+          value={value}
+          ariaLabel="controlled tabs example"
+          tabs={tabs}
+          onChange={onChange}
+        />
+        <Box sx={{ marginTop: 4 }}>
+          <Button
+            label="Navigate to Galaxies"
+            variant="primary"
+            onClick={() => {
+              setValue("galaxies");
+            }}
+            size="small"
+          />
+        </Box>
+      </>
+    );
   },
 };

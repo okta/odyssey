@@ -56,9 +56,11 @@ export type {
 
 export { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext";
 
+export * from "./Accordion";
 export * from "./Autocomplete";
 export * from "./Banner";
 export * from "./Box";
+export * from "./Breadcrumbs";
 export * from "./Button";
 export * from "./Callout";
 export * from "./Checkbox";
@@ -76,6 +78,7 @@ export * from "./MenuItem";
 export * from "./NativeSelect";
 export * from "./NullElement";
 export * from "./OdysseyCacheProvider";
+export { odysseyTranslate } from "./i18n";
 export * from "./OdysseyProvider";
 export * from "./OdysseyThemeProvider";
 export * from "./OdysseyTranslationProvider";

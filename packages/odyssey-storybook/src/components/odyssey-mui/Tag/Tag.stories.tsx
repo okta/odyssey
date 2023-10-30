@@ -46,7 +46,9 @@ const storybookMeta: Meta<TagProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: false,
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     label: {
@@ -56,6 +58,10 @@ const storybookMeta: Meta<TagProps> = {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
+        name: "string",
       },
     },
     onClick: {

@@ -36,6 +36,11 @@ const storybookMeta: Meta<TooltipProps> = {
           summary: "ReactElement",
         },
       },
+      type: {
+        required: true,
+        name: "other",
+        value: "ReactElement",
+      },
     },
     ariaType: {
       options: ["description", "label"],
@@ -46,6 +51,11 @@ const storybookMeta: Meta<TooltipProps> = {
           summary: "description | label",
         },
       },
+      type: {
+        required: true,
+        name: "other",
+        value: "radio",
+      },
     },
     text: {
       control: "text",
@@ -55,6 +65,10 @@ const storybookMeta: Meta<TooltipProps> = {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     placement: {
       options: ["top", "right", "bottom", "left"],
@@ -63,6 +77,9 @@ const storybookMeta: Meta<TooltipProps> = {
       table: {
         type: {
           summary: "top | right | bottom | left",
+        },
+        defaultValue: {
+          summary: "top",
         },
       },
     },

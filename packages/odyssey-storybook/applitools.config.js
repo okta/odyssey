@@ -26,5 +26,5 @@ module.exports = {
   matchLevel: "Strict",
   parentBranchName,
   showStorybookOutput: true,
-  testConcurrency: 20,
+  testConcurrency: 10,
 };

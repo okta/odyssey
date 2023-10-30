@@ -22,6 +22,7 @@ import {
 } from "react";
 
 import { Field } from "./Field";
+import { SeleniumProps } from "./SeleniumProps";
 
 export const textFieldTypeValues = [
   "email",
@@ -83,6 +84,10 @@ export type TextFieldProps = {
    */
   label: string;
   /**
+   * The name of the `input` element. Defaults to the `id` if not set.
+   */
+  name?: string;
+  /**
    * Callback fired when the `input` element loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -110,7 +115,7 @@ export type TextFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-};
+} & SeleniumProps;
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
@@ -127,23 +132,30 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       isOptional = false,
       isReadOnly,
       label,
+      name: nameOverride,
       onBlur,
       onChange,
       onFocus,
       placeholder,
       startAdornment,
+      testId,
       type = "text",
       value,
     },
     ref
   ) => {
     const renderFieldComponent = useCallback(
-      ({ ariaDescribedBy, id }) => (
+      ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
+          inputProps={{
+            "aria-errormessage": errorMessageElementId,
+            "aria-labelledby": labelElementId,
+          }}
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
+          data-se={testId}
           endAdornment={
             endAdornment && (
               <InputAdornment position="end">{endAdornment}</InputAdornment>
@@ -153,12 +165,14 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           defaultValue={initialValue}
           inputRef={ref}
           multiline={isMultiline}
-          name={id}
+          name={nameOverride ?? id}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
           placeholder={placeholder}
           readOnly={isReadOnly}
+          ref={ref}
+          required={!isOptional}
           startAdornment={
             startAdornment && (
               <InputAdornment position="start">{startAdornment}</InputAdornment>
@@ -174,13 +188,16 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         endAdornment,
         initialValue,
         isMultiline,
+        nameOverride,
         onChange,
         onFocus,
         onBlur,
         placeholder,
+        isOptional,
         isReadOnly,
         ref,
         startAdornment,
+        testId,
         type,
         value,
       ]

@@ -17,6 +17,7 @@ import { Button } from "./Button";
 import { Callout } from "./Callout";
 import { Heading4, Support } from "./Typography";
 import { useUniqueId } from "./useUniqueId";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export const formEncodingTypeValues = [
   "application/x-www-form-urlencoded",
@@ -84,7 +85,7 @@ export type FormProps = {
    * The title of the Form
    */
   title?: string;
-};
+} & SeleniumProps;
 
 const Form = ({
   alert,
@@ -98,20 +99,22 @@ const Form = ({
   name,
   noValidate = false,
   target,
+  testId,
   title,
 }: FormProps) => {
   const id = useUniqueId(idOverride);
 
   return (
     <Box
-      component="form"
       autoComplete={autoCompleteType}
-      name={name}
+      component="form"
+      data-se={testId}
       encType={encodingType}
+      id={id}
       method={method}
+      name={name}
       noValidate={noValidate}
       target={target}
-      id={id}
       sx={{
         maxWidth: (theme) => theme.mixins.maxWidth,
         margin: (theme) => theme.spacing(0),

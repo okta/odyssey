@@ -14,7 +14,7 @@ import { ReactNode, useEffect } from "react";
 
 import { SupportedLanguages } from "./OdysseyTranslationProvider.types";
 
-import i18n, { defaultNS, resources } from "./OdysseyI18n";
+import { i18n, defaultNS, resources } from "./i18n";
 import { I18nextProvider } from "react-i18next";
 
 export type TranslationOverrides = {

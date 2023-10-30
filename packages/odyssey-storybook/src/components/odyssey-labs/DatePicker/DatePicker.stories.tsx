@@ -29,14 +29,38 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
   argTypes: {
     label: {
       control: "text",
-      defaultValue: "DatePicker label",
+      table: {
+        defaultValue: {
+          summary: "DatePicker label",
+        },
+      },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     onChange: {
       control: "function",
     },
+    isOptional: {
+      control: "boolean",
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+    },
     value: {
       control: "text",
-      defaultValue: null,
+      table: {
+        defaultValue: {
+          summary: null,
+        },
+      },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
   },
   decorators: [MuiThemeDecorator],

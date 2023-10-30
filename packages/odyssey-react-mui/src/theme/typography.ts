@@ -14,9 +14,11 @@ import type { ThemeOptions } from "@mui/material";
 
 import { DesignTokens } from "./theme";
 
-export const typography = (
-  odysseyTokens: DesignTokens
-): ThemeOptions["typography"] => {
+export const typography = ({
+  odysseyTokens,
+}: {
+  odysseyTokens: DesignTokens;
+}): ThemeOptions["typography"] => {
   return {
     htmlFontSize: 16,
     fontFamily: odysseyTokens.TypographyFamilyBody,

@@ -12,14 +12,14 @@
 
 import { render, screen } from "@testing-library/react";
 import { OdysseyTranslationProvider } from "./OdysseyTranslationProvider";
-import i18n from "./OdysseyI18n";
+import { odysseyTranslate } from "./i18n";
 import { TextField } from "./TextField";
 
 describe("OdysseyTranslationProvider", () => {
   it("defaults to 'en' translation bundle", () => {
     render(
       <OdysseyTranslationProvider>
-        <span>{i18n.t("fieldlabel.optional.text")}</span>
+        <span>{odysseyTranslate("fieldlabel.optional.text")}</span>
       </OdysseyTranslationProvider>
     );
 

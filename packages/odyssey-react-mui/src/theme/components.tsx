@@ -50,10 +50,106 @@ import {
 import { DesignTokens } from "./theme";
 import { CSSProperties } from "react";
 
-export const components = (
-  odysseyTokens: DesignTokens
-): ThemeOptions["components"] => {
+export const components = ({
+  odysseyTokens,
+  shadowRootElement,
+}: {
+  odysseyTokens: DesignTokens;
+  shadowRootElement?: HTMLDivElement;
+}): ThemeOptions["components"] => {
   return {
+    MuiAccordion: {
+      styleOverrides: {
+        root: () => ({
+          backgroundColor: odysseyTokens.HueNeutralWhite,
+          borderWidth: 1,
+          borderInlineStyle: "solid",
+          borderColor: odysseyTokens.HueNeutral100,
+          boxShadow: "none",
+
+          "&.hasShadow": {
+            boxShadow: odysseyTokens.DepthLow,
+          },
+
+          "&.Mui-disabled": {
+            backgroundColor: odysseyTokens.HueNeutralWhite,
+            color: odysseyTokens.TypographyColorDisabled,
+            cursor: "default",
+
+            "& .MuiAccordionSummary-content": {
+              color: odysseyTokens.TypographyColorDisabled,
+            },
+          },
+
+          "&::before": {
+            backgroundColor: odysseyTokens.BorderColorDisplay,
+            opacity: "1 !important",
+          },
+
+          "&:first-of-type": {
+            borderTopLeftRadius: odysseyTokens.BorderRadiusMain,
+            borderTopRightRadius: odysseyTokens.BorderRadiusMain,
+            borderBlockStartStyle: "solid",
+          },
+
+          "&:last-of-type": {
+            borderBottomLeftRadius: odysseyTokens.BorderRadiusMain,
+            borderBottomRightRadius: odysseyTokens.BorderRadiusMain,
+            borderBlockEndStyle: "solid",
+          },
+        }),
+      },
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: () => ({
+          paddingBlock: odysseyTokens.Spacing4,
+          paddingInline: odysseyTokens.Spacing3,
+
+          ".MuiAccordion-root:first-of-type &": {
+            borderTopLeftRadius: odysseyTokens.BorderRadiusMain,
+            borderTopRightRadius: odysseyTokens.BorderRadiusMain,
+          },
+
+          ".MuiAccordion-root:last-of-type &": {
+            borderBottomLeftRadius: odysseyTokens.BorderRadiusMain,
+            borderBottomRightRadius: odysseyTokens.BorderRadiusMain,
+          },
+
+          ".MuiAccordion-root.Mui-expanded &": {
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0,
+          },
+
+          "&:hover, &:focus": {
+            backgroundColor: odysseyTokens.HueNeutral50,
+          },
+
+          "&:focus-visible": {
+            outlineColor: odysseyTokens.PalettePrimaryMain,
+            outlineWidth: 2,
+            outlineStyle: "solid",
+            zIndex: 1,
+          },
+        }),
+        content: () => ({
+          marginBlock: 0,
+
+          [`& > .${typographyClasses.root}`]: {
+            marginBlockEnd: 0,
+            fontWeight: odysseyTokens.TypographyWeightBodyBold,
+          },
+        }),
+      },
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: () => ({
+          paddingInline: odysseyTokens.Spacing3,
+          paddingBlock: odysseyTokens.Spacing4,
+        }),
+      },
+    },
     MuiAlert: {
       defaultProps: {
         iconMapping: {
@@ -239,6 +335,11 @@ export const components = (
         openOnFocus: false,
         popupIcon: <ChevronDownIcon />,
         selectOnFocus: true,
+        slotProps: {
+          paper: {
+            elevation: 1,
+          },
+        },
       },
       styleOverrides: {
         clearIndicator: {
@@ -266,6 +367,9 @@ export const components = (
           }),
         }),
         listbox: {
+          borderWidth: odysseyTokens.BorderWidthMain,
+          borderStyle: odysseyTokens.BorderStyleMain,
+          borderColor: odysseyTokens.HueNeutral200,
           paddingBlock: odysseyTokens.Spacing2,
           paddingInline: odysseyTokens.Spacing2,
           borderRadius: odysseyTokens.BorderRadiusMain,
@@ -306,6 +410,10 @@ export const components = (
           padding: odysseyTokens.Spacing1,
           marginRight: "unset",
         },
+        popper: {
+          background: "transparent",
+          paddingBlockStart: odysseyTokens.Spacing1,
+        },
         inputRoot: ({ ownerState }) => ({
           ...(ownerState.readOnly === true && {
             backgroundColor: odysseyTokens.HueNeutral50,
@@ -328,16 +436,38 @@ export const components = (
         }),
       },
     },
-    MuiBadge: {
+    MuiBreadcrumbs: {
       styleOverrides: {
-        badge: () => ({
-          backgroundColor: odysseyTokens.PalettePrimaryMain,
-          outlineColor: odysseyTokens.TypographyColorInverse,
-          borderRadius: odysseyTokens.BorderRadiusRound,
-          outlineStyle: "solid",
-          outlineWidth: 2,
-          color: odysseyTokens.TypographyColorInverse,
-        }),
+        li: {
+          fontSize: odysseyTokens.TypographySizeBody,
+          lineHeight: odysseyTokens.TypographyLineHeightUi,
+
+          "& > a, & > button": {
+            borderRadius: odysseyTokens.BorderRadiusTight,
+            color: odysseyTokens.TypographyColorSubordinate,
+            display: "flex",
+            gap: odysseyTokens.Spacing1,
+            padding: odysseyTokens.Spacing1,
+            transitionProperty: "color, background-color",
+            transitionDuration: "100ms",
+            transitionTimingFunction: "linear",
+
+            "&:hover": {
+              backgroundColor: odysseyTokens.HueNeutral200,
+              color: odysseyTokens.TypographyColorBody,
+            },
+
+            "&:focus-visible": {
+              boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
+              outline: "2px solid transparent",
+              outlineOffset: "1px",
+            },
+          },
+        },
+        separator: {
+          color: odysseyTokens.BorderColorDisplay,
+          marginInline: odysseyTokens.Spacing1,
+        },
       },
     },
     MuiButton: {
@@ -407,21 +537,23 @@ export const components = (
           }),
 
           ...(ownerState.variant === "secondary" && {
-            backgroundColor: odysseyTokens.HueBlue100,
-            color: odysseyTokens.PalettePrimaryDark,
+            backgroundColor: "transparent",
+            borderColor: odysseyTokens.HueNeutral300,
+            color: odysseyTokens.TypographyColorBody,
 
             "&:hover": {
-              backgroundColor: odysseyTokens.HueBlue200,
-              color: odysseyTokens.HueBlue800,
+              backgroundColor: odysseyTokens.HueNeutral100,
             },
 
             "&:active": {
-              backgroundColor: odysseyTokens.PalettePrimaryLight,
-              color: odysseyTokens.HueBlue800,
+              backgroundColor: "transparent",
+              borderColor: odysseyTokens.BorderColorPrimaryControl,
+              color: odysseyTokens.TypographyColorAction,
             },
 
             "&:disabled": {
               backgroundColor: odysseyTokens.HueNeutral100,
+              borderColor: "transparent",
               color: odysseyTokens.TypographyColorDisabled,
             },
           }),
@@ -705,10 +837,7 @@ export const components = (
               height: ".64em",
               marginInlineEnd: odysseyTokens.Spacing2,
               borderRadius: "100%",
-              backgroundColor: "transparent",
-              borderColor: odysseyTokens.TypographyColorBody,
-              borderWidth: odysseyTokens.BorderWidthHeavy,
-              borderStyle: odysseyTokens.BorderStyleMain,
+              backgroundColor: odysseyTokens.HueNeutral600,
             },
 
             [`&.${chipClasses.colorError}`]: {
@@ -839,6 +968,8 @@ export const components = (
     MuiScopedCssBaseline: {
       styleOverrides: {
         root: {
+          background: "transparent",
+
           abbr: {
             borderBottomWidth: odysseyTokens.BorderWidthMain,
             borderBottomStyle: "dashed", // Token?
@@ -1417,7 +1548,6 @@ export const components = (
     MuiInputBase: {
       defaultProps: {
         minRows: 3,
-        required: true,
       },
       styleOverrides: {
         root: ({ ownerState, theme }) => ({
@@ -1623,6 +1753,14 @@ export const components = (
         },
       },
     },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: "unset",
+          color: "inherit",
+        },
+      },
+    },
     MuiListSubheader: {
       styleOverrides: {
         root: {
@@ -1716,12 +1854,16 @@ export const components = (
         }),
       },
     },
-    MuiListItemIcon: {
+    MuiListItemSecondaryAction: {
       styleOverrides: {
         root: {
-          minWidth: "unset",
-          color: "inherit",
+          display: "flex",
         },
+      },
+    },
+    MuiModal: {
+      defaultProps: {
+        container: shadowRootElement,
       },
     },
     MuiNativeSelect: {
@@ -1741,7 +1883,28 @@ export const components = (
         },
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        // depth/low
+        elevation1: {
+          boxShadow: odysseyTokens.DepthLow,
+        },
+
+        // depth/medium
+        elevation2: {
+          boxShadow: odysseyTokens.DepthMedium,
+        },
+
+        // depth/high
+        elevation3: {
+          boxShadow: odysseyTokens.DepthHigh,
+        },
+      },
+    },
     MuiPopover: {
+      defaultProps: {
+        container: shadowRootElement,
+      },
       styleOverrides: {
         paper: {
           marginBlockStart: odysseyTokens.Spacing1,
@@ -1749,6 +1912,11 @@ export const components = (
           borderStyle: odysseyTokens.BorderStyleMain,
           borderColor: odysseyTokens.HueNeutral200,
         },
+      },
+    },
+    MuiPopper: {
+      defaultProps: {
+        container: shadowRootElement,
       },
     },
     MuiRadio: {
@@ -1850,6 +2018,11 @@ export const components = (
       defaultProps: {
         variant: "standard",
         IconComponent: ChevronDownIcon,
+        MenuProps: {
+          PaperProps: {
+            elevation: 1,
+          },
+        },
       },
       styleOverrides: {
         select: {
@@ -1860,18 +2033,22 @@ export const components = (
             backgroundColor: "transparent",
           },
 
-          ".MuiBox-root": {
+          "& .MuiBox-root": {
             display: "flex",
             flexWrap: "wrap",
             gap: odysseyTokens.Spacing1,
             marginBlock: `-${odysseyTokens.Spacing2}`,
             marginInline: `-${odysseyTokens.Spacing2}`,
           },
+
+          ["& .MuiListItemSecondaryAction-root"]: {
+            display: "none",
+          },
         },
         icon: {
           right: "unset",
           insetInlineEnd: odysseyTokens.Spacing3,
-          color: odysseyTokens.TypographyColorBody,
+          color: odysseyTokens.TypographyColorSubordinate,
         },
       },
     },

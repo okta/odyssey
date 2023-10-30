@@ -39,7 +39,9 @@ const meta: Meta<ToastProps> = {
         type: {
           summary: "number",
         },
-        defaultValue: 6000,
+        defaultValue: {
+          summary: 6000,
+        },
       },
     },
     isDismissable: {
@@ -49,7 +51,9 @@ const meta: Meta<ToastProps> = {
         type: {
           summary: "boolean",
         },
-        defaultValue: false,
+        defaultValue: {
+          summary: false,
+        },
       },
     },
     isVisible: {
@@ -87,7 +91,6 @@ const meta: Meta<ToastProps> = {
         type: {
           summary: "func",
         },
-        defaultValue: "",
       },
     },
     role: {
@@ -110,6 +113,11 @@ const meta: Meta<ToastProps> = {
           summary: toastSeverityValues.join(" | "),
         },
       },
+      type: {
+        required: true,
+        name: "other",
+        value: "radio",
+      },
     },
     text: {
       control: "text",
@@ -118,6 +126,10 @@ const meta: Meta<ToastProps> = {
         type: {
           summary: "string",
         },
+      },
+      type: {
+        required: true,
+        name: "string",
       },
     },
   },

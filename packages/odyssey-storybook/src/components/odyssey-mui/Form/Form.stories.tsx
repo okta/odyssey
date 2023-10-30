@@ -58,6 +58,11 @@ const storybookMeta: Meta<FormProps> = {
           summary: "ReactElement | Array<ReactElement>",
         },
       },
+      type: {
+        required: true,
+        name: "other",
+        value: "ReactElement | Array<ReactElement>",
+      },
     },
     alert: {
       control: null,
@@ -88,6 +93,10 @@ const storybookMeta: Meta<FormProps> = {
           summary: "string",
         },
       },
+      type: {
+        required: true,
+        name: "string",
+      },
     },
     noValidate: {
       control: "boolean",
@@ -96,6 +105,9 @@ const storybookMeta: Meta<FormProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },

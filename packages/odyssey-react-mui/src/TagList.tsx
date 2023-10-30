@@ -14,15 +14,16 @@ import { Tag } from "./Tag";
 import { Stack } from "@mui/material";
 import { memo, ReactElement, useMemo } from "react";
 import { ChipElementType, TagListContext } from "./TagListContext";
+import { SeleniumProps } from "./SeleniumProps";
 
 export type TagListProps = {
   /**
    * The Tag or array of Tags within the TagList
    */
   children: ReactElement<typeof Tag> | Array<ReactElement<typeof Tag>>;
-};
+} & SeleniumProps;
 
-const TagList = ({ children }: TagListProps) => {
+const TagList = ({ children, testId }: TagListProps) => {
   const providerValue = useMemo<{
     chipElementType: ChipElementType;
   }>(
@@ -35,6 +36,7 @@ const TagList = ({ children }: TagListProps) => {
   return (
     <Stack
       component="ul"
+      data-se={testId}
       direction="row"
       spacing={2}
       useFlexGap

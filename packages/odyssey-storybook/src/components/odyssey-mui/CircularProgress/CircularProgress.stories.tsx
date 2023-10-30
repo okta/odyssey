@@ -24,6 +24,9 @@ const storybookMeta: Meta<CircularProgressProps> = {
     value: {
       control: { type: "number" },
     },
+    ariaLabel: {
+      control: { type: "string" },
+    },
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
