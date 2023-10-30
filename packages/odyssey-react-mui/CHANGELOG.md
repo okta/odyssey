@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0](https://github.com/okta/odyssey/compare/v1.4.0...v1.5.0) (2023-10-27)
+
+### Features
+
+- update secondary Button style ([#2011](https://github.com/okta/odyssey/issues/2011)) ([0d02217](https://github.com/okta/odyssey/commit/0d02217c3c4de1788a4e5a786b041ae749f96c2d))
+
+### Bug Fixes
+
+- remove ":" from ScreenReaderText ([37393e5](https://github.com/okta/odyssey/commit/37393e5025a3b8694074554de8c74e33feebc5a7))
+
 ## [1.4.0](https://github.com/okta/odyssey/compare/v1.3.0...v1.4.0) (2023-10-23)
 
 ### Features
