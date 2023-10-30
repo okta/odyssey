@@ -130,7 +130,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
           aria-describedby={ariaDescribedBy}
-          autoComplete={autoCompleteType}
+          autoComplete={inputType === "password" ? autoCompleteType : "off"}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
           data-se={testId}
