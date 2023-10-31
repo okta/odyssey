@@ -1355,6 +1355,55 @@ export const components = ({
         },
       },
     },
+    MuiSwitch: {
+      styleOverrides: {
+        root: {
+          position: "relative",
+          padding: `${odysseyTokens.Spacing0} 0`,
+          width: odysseyTokens.Spacing7,
+          height: odysseyTokens.Spacing5,
+          overflow: "visible",
+        },
+        switchBase: ({ ownerState }) => ({
+          top: odysseyTokens.Spacing1,
+          left: odysseyTokens.Spacing1,
+          padding: `${odysseyTokens.Spacing0} 0`,
+
+          ...(ownerState.checked === true && {
+            color: `${odysseyTokens.HueNeutralWhite} !important`,
+            transform: `translateX(${odysseyTokens.Spacing4}) !important`,
+          }),
+
+          "&:hover": {
+            backgroundColor: "transparent",
+
+            ...(ownerState.checked === true && {
+              backgroundColor: "transparent !important",
+            }),
+          },
+        }),
+        thumb: {
+          width: odysseyTokens.Spacing4,
+          height: odysseyTokens.Spacing4,
+          boxShadow: "none",
+        },
+        track: ({ ownerState }) => ({
+          borderRadius: odysseyTokens.BorderRadiusRound,
+          backgroundColor: `${odysseyTokens.HueNeutral300}`,
+          opacity: 1,
+
+          ...(ownerState.checked === true && {
+            // !important used to override more specific .Mui-checked class
+            opacity: "1 !important",
+            backgroundColor: `${odysseyTokens.PaletteSuccessLight} !important`,
+          }),
+        }),
+        input: {
+          height: "44px",
+          top: "-14px",
+        },
+      },
+    },
     MuiDialog: {
       defaultProps: {
         scroll: "paper",
