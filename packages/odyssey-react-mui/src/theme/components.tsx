@@ -1703,11 +1703,11 @@ export const components = ({
           },
 
           ".Link-indicator": {
-            marginInlineStart: odysseyTokens.Spacing2,
+            marginInlineStart: odysseyTokens.Spacing1,
           },
 
           ".Link-icon": {
-            marginInlineEnd: odysseyTokens.Spacing2,
+            marginInlineEnd: odysseyTokens.Spacing1,
           },
           svg: {
             fontSize: "1em",
