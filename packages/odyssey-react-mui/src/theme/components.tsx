@@ -1675,7 +1675,7 @@ export const components = ({
       styleOverrides: {
         root: {
           color: odysseyTokens.TypographyColorAction,
-          textDecoration: "underline",
+          textDecoration: "none",
           cursor: "pointer",
 
           "&:visited": {
