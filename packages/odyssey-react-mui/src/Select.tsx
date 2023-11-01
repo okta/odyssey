@@ -26,13 +26,15 @@ import { Field } from "./Field";
 import type { SeleniumProps } from "./SeleniumProps";
 import { CheckIcon } from "./icons.generated";
 
+export type SelectValueType = string | string[];
+
 export type SelectOption = {
   text: string;
   type?: "heading" | "option";
   value?: string;
 };
 
-export type SelectProps = {
+export type SelectProps<Value extends SelectValueType, HasMultipleChoices extends boolean> = {
   /**
    * The error message for the Select
    */
@@ -52,7 +54,7 @@ export type SelectProps = {
   /**
    * If `true`, the Select allows multiple selections
    */
-  isMultiSelect?: boolean;
+  isMultiSelect?: HasMultipleChoices;
   /**
    * If `true`, the Select is optional
    */
@@ -68,15 +70,15 @@ export type SelectProps = {
   /**
    * Callback fired when the Select loses focus
    */
-  onBlur?: MuiSelectProps["onBlur"];
+  onBlur?: MuiSelectProps<Value>["onBlur"];
   /**
    * Callback fired when the value of the Select changes
    */
-  onChange?: MuiSelectProps["onChange"];
+  onChange?: MuiSelectProps<Value>["onChange"];
   /**
    * Callback fired when the Select gains focus
    */
-  onFocus?: MuiSelectProps["onFocus"];
+  onFocus?: MuiSelectProps<Value>["onFocus"];
   /**
    * The options for the Select
    */
@@ -84,7 +86,7 @@ export type SelectProps = {
   /**
    * The value or values selected in the Select
    */
-  value?: string | string[];
+  value?: HasMultipleChoices extends true ? string[] : string;
 } & SeleniumProps;
 
 /**
@@ -102,12 +104,13 @@ export type SelectProps = {
  *   - { text: string, type: "heading" } — Used to display a group heading with the text
  */
 
-const Select = ({
+
+const Select = <Value extends SelectValueType, HasMultipleChoices extends boolean>({
   errorMessage,
   hint,
   id: idOverride,
   isDisabled = false,
-  isMultiSelect = false,
+  isMultiSelect,
   isOptional = false,
   label,
   name: nameOverride,
@@ -117,33 +120,22 @@ const Select = ({
   value,
   testId,
   options,
-}: SelectProps) => {
-  // If there's no value set, we set it to a blank string (if it's a single-select)
-  // or an empty array (if it's a multi-select)
-  if (typeof value === "undefined") {
-    value = isMultiSelect ? [] : "";
-  }
+}: SelectProps<Value, HasMultipleChoices>) => {
+  const formattedValueForMultiSelect = (isMultiSelect ? [] as string[] : "" as string); 
 
-  const [selectedValue, setSelectedValue] = useState<string | string[]>(value);
+  const [selectedValue, setSelectedValue] = useState(value === undefined ? formattedValueForMultiSelect : value);
 
-  const onChange = useCallback(
-    (event: SelectChangeEvent<string | string[]>, child: ReactNode) => {
-      const {
-        target: { value },
-      } = event;
+  const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
+    (event, child) => {
+      const valueFromEvent = event.target.value;
 
-      // Set the field value, with some additional logic to handle array values
-      // for multi-selects
       if (isMultiSelect) {
-        setSelectedValue(typeof value === "string" ? value.split(",") : value);
+        setSelectedValue(typeof valueFromEvent === "string" ? valueFromEvent.split(",") : valueFromEvent);
       } else {
-        setSelectedValue(value);
+        setSelectedValue(valueFromEvent);
       }
 
-      // Trigger the onChange event, if one has been passed
-      if (onChangeProp) {
-        onChangeProp(event, child);
-      }
+      onChangeProp?.(event, child);
     },
     [isMultiSelect, onChangeProp, setSelectedValue]
   );
@@ -165,7 +157,7 @@ const Select = ({
   );
 
   const renderValue = useCallback(
-    (selected: string | string[]) => {
+    (selected: Value) => {
       // If the selected value isn't an array, then we don't need to display
       // chips and should fall back to the default render behavior
       if (typeof selected === "string") {
