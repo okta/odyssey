@@ -17,7 +17,7 @@ import { userEvent, waitFor, screen } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
 import { expect } from "@storybook/jest";
 
-const optionsArray: SelectProps["options"] = [
+const optionsArray: SelectProps<string | string[], boolean>["options"] = [
   "Earth",
   "Mars",
   "Ceres",
@@ -27,7 +27,7 @@ const optionsArray: SelectProps["options"] = [
   "Ganymede",
 ];
 
-const optionsObject: SelectProps["options"] = [
+const optionsObject: SelectProps<string | string[], boolean>["options"] = [
   {
     text: "Earth",
     value: "earth",
@@ -58,7 +58,7 @@ const optionsObject: SelectProps["options"] = [
   },
 ];
 
-const optionsGrouped: SelectProps["options"] = [
+const optionsGrouped: SelectProps<string | string[], boolean>["options"] = [
   {
     text: "Sol System",
     type: "heading",
@@ -102,7 +102,7 @@ const optionsGrouped: SelectProps["options"] = [
   "New Terra",
 ];
 
-const storybookMeta: Meta<SelectProps> = {
+const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
   title: "MUI Components/Forms/Select",
   component: Select,
   argTypes: {
@@ -112,6 +112,18 @@ const storybookMeta: Meta<SelectProps> = {
       table: {
         type: {
           summary: "string",
+        },
+      },
+    },
+    hasMultipleChoices: {
+      control: "boolean",
+      description: "If `true`, the select component allows multiple selections",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -136,18 +148,6 @@ const storybookMeta: Meta<SelectProps> = {
     isDisabled: {
       control: "boolean",
       description: "If `true`, the select component is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
-    isMultiSelect: {
-      control: "boolean",
-      description: "If `true`, the select component allows multiple selections",
       table: {
         type: {
           summary: "boolean",
@@ -255,7 +255,7 @@ const storybookMeta: Meta<SelectProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<SelectProps> = {
+export const Default: StoryObj<SelectProps<string | string[], boolean>> = {
   play: async ({ canvasElement, step }) => {
     await step("Select Earth from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
@@ -278,13 +278,13 @@ export const Default: StoryObj<SelectProps> = {
 };
 Default.args = {};
 
-export const Disabled: StoryObj<SelectProps> = {
+export const Disabled: StoryObj<SelectProps<string | string[], boolean>> = {
   args: {
     isDisabled: true,
   },
 };
 
-export const Error: StoryObj<SelectProps> = {
+export const Error: StoryObj<SelectProps<string | string[], boolean>> = {
   args: {
     errorMessage: "Select your destination.",
   },
@@ -295,35 +295,37 @@ export const Error: StoryObj<SelectProps> = {
   },
 };
 
-export const OptionsObject: StoryObj<SelectProps> = {
-  args: {
-    options: optionsObject,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Select can accept `options` as a flat array, an array of objects, or both. This demonstrates an array of objects with `value` and `name`.",
+export const OptionsObject: StoryObj<SelectProps<string | string[], boolean>> =
+  {
+    args: {
+      options: optionsObject,
+    },
+    parameters: {
+      docs: {
+        description: {
+          story:
+            "Select can accept `options` as a flat array, an array of objects, or both. This demonstrates an array of objects with `value` and `name`.",
+        },
       },
     },
-  },
-};
+  };
 
-export const OptionsGrouped: StoryObj<SelectProps> = {
-  args: {
-    options: optionsGrouped,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Objects with `type: "heading"` will have their `text` displayed as a heading.',
+export const OptionsGrouped: StoryObj<SelectProps<string | string[], boolean>> =
+  {
+    args: {
+      options: optionsGrouped,
+    },
+    parameters: {
+      docs: {
+        description: {
+          story:
+            'Objects with `type: "heading"` will have their `text` displayed as a heading.',
+        },
       },
     },
-  },
-};
+  };
 
-export const MultiSelect: StoryObj<SelectProps> = {
+export const MultiSelect: StoryObj<SelectProps<string | string[], boolean>> = {
   args: {
     isMultiSelect: true,
   },

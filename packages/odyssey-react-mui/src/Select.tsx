@@ -43,6 +43,10 @@ export type SelectProps<
    */
   errorMessage?: string;
   /**
+   * If `true`, the Select allows multiple selections
+   */
+  hasMultipleChoices?: HasMultipleChoices;
+  /**
    * The hint text for the Select
    */
   hint?: string;
@@ -55,8 +59,9 @@ export type SelectProps<
    */
   isDisabled?: boolean;
   /**
-   * If `true`, the Select allows multiple selections
+   * @deprecated Use `hasMultipleChoices` instead.
    */
+  /** **Deprecated:** use `hasMultipleChoices` */
   isMultiSelect?: HasMultipleChoices;
   /**
    * If `true`, the Select is optional
@@ -112,6 +117,7 @@ const Select = <
   HasMultipleChoices extends boolean
 >({
   errorMessage,
+  hasMultipleChoices: hasMultipleChoicesProp,
   hint,
   id: idOverride,
   isDisabled = false,
@@ -122,9 +128,9 @@ const Select = <
   onBlur,
   onChange: onChangeProp,
   onFocus,
-  value,
-  testId,
   options,
+  testId,
+  value,
 }: SelectProps<Value, HasMultipleChoices>) => {
   const hasMultipleChoices = useMemo(
     () =>
@@ -133,6 +139,13 @@ const Select = <
         : hasMultipleChoicesProp,
     [hasMultipleChoicesProp, isMultiSelect]
   );
+
+  const formattedValueForMultiSelect =
+    value === undefined
+      ? isMultiSelect
+        ? ([] as string[] as Value)
+        : ("" as string as Value)
+      : value;
 
   const formattedValueForMultiSelect = isMultiSelect
     ? ([] as string[] as Value)
@@ -147,7 +160,7 @@ const Select = <
       const valueFromEvent = event.target.value;
 
       if (typeof valueFromEvent === "string") {
-        if (isMultiSelect) {
+        if (hasMultipleChoices) {
           setSelectedValue(valueFromEvent.split(",") as Value);
         } else {
           setSelectedValue(valueFromEvent as Value);
@@ -158,7 +171,7 @@ const Select = <
 
       onChangeProp?.(event, child);
     },
-    [isMultiSelect, onChangeProp, setSelectedValue]
+    [hasMultipleChoices, onChangeProp, setSelectedValue]
   );
 
   // Normalize the options array to accommodate the various
@@ -222,7 +235,7 @@ const Select = <
 
         return (
           <MenuItem key={option.value} value={option.value}>
-            {isMultiSelect && (
+            {hasMultipleChoices && (
               <MuiCheckbox checked={selectedValue.includes(option.value)} />
             )}
             {option.text}
@@ -234,30 +247,30 @@ const Select = <
           </MenuItem>
         );
       }),
-    [isMultiSelect, normalizedOptions, selectedValue]
+    [hasMultipleChoices, normalizedOptions, selectedValue]
   );
 
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiSelect
+        aria-describedby={ariaDescribedBy}
+        aria-errormessage={errorMessageElementId}
         children={children}
         data-se={testId}
         id={id}
-        aria-errormessage={errorMessageElementId}
-        aria-describedby={ariaDescribedBy}
         labelId={labelElementId}
-        multiple={isMultiSelect}
+        multiple={hasMultipleChoices}
         name={nameOverride ?? id}
         onBlur={onBlur}
         onChange={onChange}
         onFocus={onFocus}
-        renderValue={isMultiSelect ? renderValue : undefined}
+        renderValue={hasMultipleChoices ? renderValue : undefined}
         value={selectedValue}
       />
     ),
     [
       children,
-      isMultiSelect,
+      hasMultipleChoices,
       nameOverride,
       onBlur,
       onChange,
