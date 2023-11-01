@@ -2082,7 +2082,7 @@ export const components = ({
           overflow: "visible",
 
           ...(ownerState.textColor === "inherit" && {
-            color: "inherit",
+            color: odysseyTokens.HueNeutral600,
             opacity: 1,
           }),
 
