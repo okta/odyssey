@@ -10,23 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactNode, memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import {
   Box,
-  Chip,
   Checkbox as MuiCheckbox,
+  Chip,
+  ListItemSecondaryAction,
   ListSubheader,
   MenuItem,
   Select as MuiSelect,
-  SelectChangeEvent,
-  ListItemSecondaryAction,
 } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
 import type { SeleniumProps } from "./SeleniumProps";
 import { CheckIcon } from "./icons.generated";
-
-export type SelectValueType = string | string[];
 
 export type SelectOption = {
   text: string;
@@ -34,7 +31,13 @@ export type SelectOption = {
   value?: string;
 };
 
-export type SelectProps<Value extends SelectValueType, HasMultipleChoices extends boolean> = {
+export type SelectValueType<HasMultipleChoices> =
+  HasMultipleChoices extends true ? string[] : string;
+
+export type SelectProps<
+  Value extends SelectValueType<HasMultipleChoices>,
+  HasMultipleChoices extends boolean
+> = {
   /**
    * The error message for the Select
    */
@@ -86,7 +89,7 @@ export type SelectProps<Value extends SelectValueType, HasMultipleChoices extend
   /**
    * The value or values selected in the Select
    */
-  value?: HasMultipleChoices extends true ? string[] : string;
+  value: Value;
 } & SeleniumProps;
 
 /**
@@ -104,8 +107,10 @@ export type SelectProps<Value extends SelectValueType, HasMultipleChoices extend
  *   - { text: string, type: "heading" } — Used to display a group heading with the text
  */
 
-
-const Select = <Value extends SelectValueType, HasMultipleChoices extends boolean>({
+const Select = <
+  Value extends SelectValueType<HasMultipleChoices>,
+  HasMultipleChoices extends boolean
+>({
   errorMessage,
   hint,
   id: idOverride,
@@ -121,16 +126,32 @@ const Select = <Value extends SelectValueType, HasMultipleChoices extends boolea
   testId,
   options,
 }: SelectProps<Value, HasMultipleChoices>) => {
-  const formattedValueForMultiSelect = (isMultiSelect ? [] as string[] : "" as string); 
+  const hasMultipleChoices = useMemo(
+    () =>
+      hasMultipleChoicesProp === undefined
+        ? isMultiSelect
+        : hasMultipleChoicesProp,
+    [hasMultipleChoicesProp, isMultiSelect]
+  );
 
-  const [selectedValue, setSelectedValue] = useState(value === undefined ? formattedValueForMultiSelect : value);
+  const formattedValueForMultiSelect = isMultiSelect
+    ? ([] as string[] as Value)
+    : ("" as string as Value);
+
+  const [selectedValue, setSelectedValue] = useState(
+    value === undefined ? formattedValueForMultiSelect : value
+  );
 
   const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
     (event, child) => {
       const valueFromEvent = event.target.value;
 
-      if (isMultiSelect) {
-        setSelectedValue(typeof valueFromEvent === "string" ? valueFromEvent.split(",") : valueFromEvent);
+      if (typeof valueFromEvent === "string") {
+        if (isMultiSelect) {
+          setSelectedValue(valueFromEvent.split(",") as Value);
+        } else {
+          setSelectedValue(valueFromEvent as Value);
+        }
       } else {
         setSelectedValue(valueFromEvent);
       }
