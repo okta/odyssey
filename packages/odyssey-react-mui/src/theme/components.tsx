@@ -788,7 +788,7 @@ export const components = ({
           [`&.${chipClasses.disabled}`]: {
             opacity: 1,
             pointerEvents: "none",
-            backgroundColor: odysseyTokens.HueNeutral50,
+            backgroundColor: odysseyTokens.HueNeutral200,
             color: odysseyTokens.TypographyColorDisabled,
           },
 
@@ -908,6 +908,11 @@ export const components = ({
 
         label: {
           padding: 0,
+
+          [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
+            color: odysseyTokens.TypographyColorDisabled,
+            "-webkit-text-fill-color": odysseyTokens.TypographyColorDisabled,
+          },
         },
 
         deleteIcon: {
