@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0](https://github.com/okta/odyssey/compare/v1.5.0...v1.6.0) (2023-11-02)
+
+### Features
+
+- **odyssey-react-mui:** wrapped typography component with context ([#2013](https://github.com/okta/odyssey/issues/2013)) ([4ae50de](https://github.com/okta/odyssey/commit/4ae50debc051299774847804509aa1dae0dad831))
+
+### Bug Fixes
+
+- revert [#2013](https://github.com/okta/odyssey/issues/2013) ([#2029](https://github.com/okta/odyssey/issues/2029)) ([9f75603](https://github.com/okta/odyssey/commit/9f7560336221ea00014b21627488932ade2d6e16))
+
 ## [1.5.0](https://github.com/okta/odyssey/compare/v1.4.0...v1.5.0) (2023-10-27)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
