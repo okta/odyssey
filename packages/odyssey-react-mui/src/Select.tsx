@@ -140,13 +140,6 @@ const Select = <
     [hasMultipleChoicesProp, isMultiSelect]
   );
 
-  const formattedValueForMultiSelect =
-    value === undefined
-      ? isMultiSelect
-        ? ([] as string[] as Value)
-        : ("" as string as Value)
-      : value;
-
   const formattedValueForMultiSelect = isMultiSelect
     ? ([] as string[] as Value)
     : ("" as string as Value);
