@@ -13,7 +13,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import {
   Button,
-  Paragraph,
   Status,
   Tag,
   Tooltip,
@@ -145,16 +144,6 @@ export const IconButton: StoryObj<TooltipProps> = {
     ariaType: "label",
     placement: "top",
     text: "Download logs",
-  },
-};
-
-export const ParagraphWrapper: StoryObj<TooltipProps> = {
-  ...Template,
-  args: {
-    children: <Paragraph children="This is body copy." variant="body" />,
-    ariaType: "label",
-    placement: "top",
-    text: "This is a tooltip on body copy.",
   },
 };
 
