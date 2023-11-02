@@ -10,16 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactNode, memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import {
   Box,
-  Chip,
   Checkbox as MuiCheckbox,
+  Chip,
+  ListItemSecondaryAction,
   ListSubheader,
   MenuItem,
   Select as MuiSelect,
-  SelectChangeEvent,
-  ListItemSecondaryAction,
 } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
@@ -32,11 +31,21 @@ export type SelectOption = {
   value?: string;
 };
 
-export type SelectProps = {
+export type SelectValueType<HasMultipleChoices> =
+  HasMultipleChoices extends true ? string[] : string;
+
+export type SelectProps<
+  Value extends SelectValueType<HasMultipleChoices>,
+  HasMultipleChoices extends boolean
+> = {
   /**
    * The error message for the Select
    */
   errorMessage?: string;
+  /**
+   * If `true`, the Select allows multiple selections
+   */
+  hasMultipleChoices?: HasMultipleChoices;
   /**
    * The hint text for the Select
    */
@@ -50,9 +59,10 @@ export type SelectProps = {
    */
   isDisabled?: boolean;
   /**
-   * If `true`, the Select allows multiple selections
+   * @deprecated Use `hasMultipleChoices` instead.
    */
-  isMultiSelect?: boolean;
+  /** **Deprecated:** use `hasMultipleChoices` */
+  isMultiSelect?: HasMultipleChoices;
   /**
    * If `true`, the Select is optional
    */
@@ -68,15 +78,15 @@ export type SelectProps = {
   /**
    * Callback fired when the Select loses focus
    */
-  onBlur?: MuiSelectProps["onBlur"];
+  onBlur?: MuiSelectProps<Value>["onBlur"];
   /**
    * Callback fired when the value of the Select changes
    */
-  onChange?: MuiSelectProps["onChange"];
+  onChange?: MuiSelectProps<Value>["onChange"];
   /**
    * Callback fired when the Select gains focus
    */
-  onFocus?: MuiSelectProps["onFocus"];
+  onFocus?: MuiSelectProps<Value>["onFocus"];
   /**
    * The options for the Select
    */
@@ -84,7 +94,7 @@ export type SelectProps = {
   /**
    * The value or values selected in the Select
    */
-  value?: string | string[];
+  value?: Value;
 } & SeleniumProps;
 
 /**
@@ -102,50 +112,59 @@ export type SelectProps = {
  *   - { text: string, type: "heading" } — Used to display a group heading with the text
  */
 
-const Select = ({
+const Select = <
+  Value extends SelectValueType<HasMultipleChoices>,
+  HasMultipleChoices extends boolean
+>({
   errorMessage,
+  hasMultipleChoices: hasMultipleChoicesProp,
   hint,
   id: idOverride,
   isDisabled = false,
-  isMultiSelect = false,
+  isMultiSelect,
   isOptional = false,
   label,
   name: nameOverride,
   onBlur,
   onChange: onChangeProp,
   onFocus,
-  value,
-  testId,
   options,
-}: SelectProps) => {
-  // If there's no value set, we set it to a blank string (if it's a single-select)
-  // or an empty array (if it's a multi-select)
-  if (typeof value === "undefined") {
-    value = isMultiSelect ? [] : "";
-  }
+  testId,
+  value,
+}: SelectProps<Value, HasMultipleChoices>) => {
+  const hasMultipleChoices = useMemo(
+    () =>
+      hasMultipleChoicesProp === undefined
+        ? isMultiSelect
+        : hasMultipleChoicesProp,
+    [hasMultipleChoicesProp, isMultiSelect]
+  );
 
-  const [selectedValue, setSelectedValue] = useState<string | string[]>(value);
+  const formattedValueForMultiSelect = isMultiSelect
+    ? ([] as string[] as Value)
+    : ("" as string as Value);
 
-  const onChange = useCallback(
-    (event: SelectChangeEvent<string | string[]>, child: ReactNode) => {
-      const {
-        target: { value },
-      } = event;
+  const [selectedValue, setSelectedValue] = useState(
+    value === undefined ? formattedValueForMultiSelect : value
+  );
 
-      // Set the field value, with some additional logic to handle array values
-      // for multi-selects
-      if (isMultiSelect) {
-        setSelectedValue(typeof value === "string" ? value.split(",") : value);
+  const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
+    (event, child) => {
+      const valueFromEvent = event.target.value;
+
+      if (typeof valueFromEvent === "string") {
+        if (hasMultipleChoices) {
+          setSelectedValue(valueFromEvent.split(",") as Value);
+        } else {
+          setSelectedValue(valueFromEvent as Value);
+        }
       } else {
-        setSelectedValue(value);
+        setSelectedValue(valueFromEvent);
       }
 
-      // Trigger the onChange event, if one has been passed
-      if (onChangeProp) {
-        onChangeProp(event, child);
-      }
+      onChangeProp?.(event, child);
     },
-    [isMultiSelect, onChangeProp, setSelectedValue]
+    [hasMultipleChoices, onChangeProp, setSelectedValue]
   );
 
   // Normalize the options array to accommodate the various
@@ -165,7 +184,7 @@ const Select = ({
   );
 
   const renderValue = useCallback(
-    (selected: string | string[]) => {
+    (selected: Value) => {
       // If the selected value isn't an array, then we don't need to display
       // chips and should fall back to the default render behavior
       if (typeof selected === "string") {
@@ -209,7 +228,7 @@ const Select = ({
 
         return (
           <MenuItem key={option.value} value={option.value}>
-            {isMultiSelect && (
+            {hasMultipleChoices && (
               <MuiCheckbox checked={selectedValue.includes(option.value)} />
             )}
             {option.text}
@@ -221,30 +240,30 @@ const Select = ({
           </MenuItem>
         );
       }),
-    [isMultiSelect, normalizedOptions, selectedValue]
+    [hasMultipleChoices, normalizedOptions, selectedValue]
   );
 
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiSelect
+        aria-describedby={ariaDescribedBy}
+        aria-errormessage={errorMessageElementId}
         children={children}
         data-se={testId}
         id={id}
-        aria-errormessage={errorMessageElementId}
-        aria-describedby={ariaDescribedBy}
         labelId={labelElementId}
-        multiple={isMultiSelect}
+        multiple={hasMultipleChoices}
         name={nameOverride ?? id}
         onBlur={onBlur}
         onChange={onChange}
         onFocus={onFocus}
-        renderValue={isMultiSelect ? renderValue : undefined}
+        renderValue={hasMultipleChoices ? renderValue : undefined}
         value={selectedValue}
       />
     ),
     [
       children,
-      isMultiSelect,
+      hasMultipleChoices,
       nameOverride,
       onBlur,
       onChange,
