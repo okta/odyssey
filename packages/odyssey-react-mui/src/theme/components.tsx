@@ -911,8 +911,8 @@ export const components = ({
 
           [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
             color: odysseyTokens.TypographyColorDisabled,
-            "-webkit-text-fill-color": odysseyTokens.TypographyColorDisabled,
-          },
+            WebkitTextFillColor: odysseyTokens.TypographyColorDisabled,
+          } satisfies CSSProperties,
         },
 
         deleteIcon: {
