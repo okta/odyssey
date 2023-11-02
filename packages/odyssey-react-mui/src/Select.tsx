@@ -94,7 +94,7 @@ export type SelectProps<
   /**
    * The value or values selected in the Select
    */
-  value: Value;
+  value?: Value;
 } & SeleniumProps;
 
 /**
