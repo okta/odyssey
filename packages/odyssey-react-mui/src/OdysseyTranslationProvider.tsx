@@ -39,14 +39,33 @@ export type OdysseyTranslationProviderProps = {
   translationOverrides?: TranslationOverrides;
 };
 
+const formatLanguageCodeToHyphenated = (
+  languageCode: OdysseyTranslationProviderProps["languageCode"]
+) => languageCode?.replace(/_/g, "-");
+
 export const OdysseyTranslationProvider = ({
   children,
   languageCode,
   translationOverrides,
 }: OdysseyTranslationProviderProps) => {
   useEffect(() => {
+    const languageCodeIncludesUnderscore = languageCode?.includes("_");
+
+    const normalizedLanguageCode = languageCodeIncludesUnderscore
+      ? formatLanguageCodeToHyphenated(languageCode)
+      : languageCode;
+    console.log({ languageCodeIncludesUnderscore }, { normalizedLanguageCode });
+    const changeHtmlLangAttr = () => {
+      window.document.documentElement.setAttribute(
+        "lang",
+        normalizedLanguageCode || "en"
+      );
+    };
     // Defaults to the browser's language if available otherwise `en` will be used
-    i18n.changeLanguage(languageCode || window.navigator.language);
+    i18n.changeLanguage(
+      normalizedLanguageCode || window.navigator.language,
+      changeHtmlLangAttr
+    );
   }, [languageCode]);
 
   useEffect(() => {
