@@ -37,11 +37,23 @@
       }
     },
     "family": {
+      "system": {
+        "value": "'-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Oxygen-Sans', 'Ubuntu', 'Cantarell'"
+      },
+      "fallBack": {
+        "value": "'Helvetica Neue', sans-serif"
+      },
+      "aeonik": {
+        "value": "'Aeonik'"
+      },
+      "inter": {
+        "value": "'Inter'"
+      },
       "body": {
-        "value": "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif"
+        "value": "{typography.family.inter.value}, {typography.family.system.value}, {typography.family.fallBack.value}"
       },
       "heading": {
-        "value": "'Aeonik', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif"
+        "value": "{typography.family.aeonik.value}, {typography.family.inter.value}, {typography.family.system.value}, {typography.family.fallBack.value}"
       },
       "button": {
         "value": "{typography.family.heading.value}"

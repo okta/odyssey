@@ -44,14 +44,33 @@ export type OdysseyTranslationProviderProps<
   translationOverrides?: TranslationOverrides<SupportedLanguages>;
 };
 
+const formatLanguageCodeToHyphenated = <SupportedLanguages extends string>(
+  languageCode: OdysseyTranslationProviderProps<SupportedLanguages>["languageCode"]
+) => languageCode?.replace(/_/g, "-");
+
 export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   children,
   languageCode,
   translationOverrides,
 }: OdysseyTranslationProviderProps<SupportedLanguages>) => {
   useEffect(() => {
+    const languageCodeIncludesUnderscore = languageCode?.includes("_");
+
+    const normalizedLanguageCode = languageCodeIncludesUnderscore
+      ? formatLanguageCodeToHyphenated<SupportedLanguages>(languageCode)
+      : languageCode;
+
+    const changeHtmlLangAttr = () => {
+      window.document.documentElement.setAttribute(
+        "lang",
+        normalizedLanguageCode || "en"
+      );
+    };
     // Defaults to the browser's language if available otherwise `en` will be used
-    i18n.changeLanguage(languageCode || window.navigator.language);
+    i18n.changeLanguage(
+      normalizedLanguageCode || window.navigator.language,
+      changeHtmlLangAttr
+    );
   }, [languageCode]);
 
   useEffect(() => {

@@ -972,6 +972,32 @@ export const components = ({
       html {
         font-size: calc((${themeParam.typography.fontSize} / 16) * 100%);
       }
+
+      :not(code) &, :not(pre) & {
+          :lang(el) {
+            font-family: 'Noto Sans', sans-serif;
+          }
+
+          :lang(ja) {
+            font-family: 'Noto Sans JP', sans-serif;
+          }
+
+          :lang(ko) {
+            font-family: 'Noto Sans KR', sans-serif;
+          }
+
+          :lang(th) {
+            font-family: 'Noto Sans Thai', sans-serif;
+          }
+
+          :lang(zh-CN) {
+            font-family: 'Noto Sans SC', sans-serif;
+          }
+
+          :lang(zh-TW) {
+            font-family: 'Noto Sans TC', sans-serif;
+          }
+        }
     `,
     },
     MuiScopedCssBaseline: {
@@ -2115,6 +2141,7 @@ export const components = ({
 
           ...(ownerState.disabled && {
             color: odysseyTokens.TypographyColorDisabled,
+            opacity: "1 !important",
           }),
 
           ...(ownerState.wrapped && {
