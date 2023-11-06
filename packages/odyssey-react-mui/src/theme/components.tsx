@@ -2080,11 +2080,8 @@ export const components = ({
           fontFamily: odysseyTokens.TypographyFamilyHeading,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           overflow: "visible",
-
-          ...(ownerState.textColor === "inherit" && {
-            color: odysseyTokens.HueNeutral600,
-            opacity: 1,
-          }),
+          color: odysseyTokens.HueNeutral600,
+          opacity: 1,
 
           ...(ownerState.selected == true && {
             color: odysseyTokens.TypographyColorAction,
