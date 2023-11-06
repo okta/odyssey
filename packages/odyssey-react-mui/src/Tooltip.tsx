@@ -14,7 +14,7 @@ import { Tooltip as MuiTooltip } from "@mui/material";
 import type { TooltipProps as MuiTooltipProps } from "@mui/material";
 
 import { MuiPropsChild } from "./MuiPropsChild";
-import { ReactElement } from "react";
+import { ReactElement, memo } from "react";
 import { SeleniumProps } from "./SeleniumProps";
 
 export type TooltipProps = {
@@ -36,7 +36,7 @@ export type TooltipProps = {
   text: string;
 } & SeleniumProps;
 
-export const Tooltip = ({
+const Tooltip = ({
   ariaType,
   children,
   placement = "top",
@@ -53,4 +53,7 @@ export const Tooltip = ({
   </MuiTooltip>
 );
 
-Tooltip.displayName = "Tooltip";
+const MemoizedTooltip = memo(Tooltip);
+MemoizedTooltip.displayName = "Tooltip";
+
+export { MemoizedTooltip as Tooltip };
