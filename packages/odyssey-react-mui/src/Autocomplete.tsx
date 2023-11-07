@@ -18,17 +18,19 @@ import {
 import { memo, useCallback } from "react";
 
 import { Field } from "./Field";
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+
+type FieldComponentPropsUsedByAutocomplete = Omit<
+  FieldComponentProps,
+  "isDisabled" | "isReadOnly"
+>;
 
 export type AutocompleteProps<
   OptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
 > = {
-  /**
-   * The error message for the Select
-   */
-  errorMessage?: string;
   /**
    * Enables multiple choice selection
    */
@@ -38,10 +40,6 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["multiple"];
-  /**
-   * The hint text for the Autocomplete input
-   */
-  hint?: string;
   /**
    * The id attribute of the Select
    */
@@ -74,10 +72,6 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["loading"];
   /**
-   * If `true`, the `input` element is not required.
-   */
-  isOptional?: boolean;
-  /**
    * Makes the Autocomplete input read-only
    */
   isReadOnly?: MuiAutocompleteProps<
@@ -90,10 +84,6 @@ export type AutocompleteProps<
    * The label text for the autocomplete input
    */
   label: string;
-  /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
   /**
    * Callback fired when the autocomplete loses focus.
    */
@@ -148,7 +138,8 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["value"];
-} & SeleniumProps;
+} & SeleniumProps &
+  FieldComponentPropsUsedByAutocomplete;
 
 const Autocomplete = <
   OptionType,
