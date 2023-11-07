@@ -1,0 +1,48 @@
+name: Bump Versions
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  version-packages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          cache: yarn
+          node-version: v20.7.0
+
+      - name: node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-node-modules-cache-
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Bump versions
+        run: yarn run lerna-version --yes
+
+      - name: Commit changes
+        run: |
+          git add yarn.lock
+          git add '*.json'
+          git commit -m "build: bump versions"
+          yarn prettier-write
+          git add '*.md'
+          git commit -m "docs: update CHANGELOGs"
+
+      - name: Push changes
+        run: git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
