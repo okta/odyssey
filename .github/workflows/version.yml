@@ -33,11 +33,14 @@ jobs:
       - name: Bump versions
         run: yarn run lerna-version --yes
 
-      - name: Commit changes
+      - name: Commit version changes
         run: |
           git add yarn.lock
           git add '*.json'
           git commit -m "build: bump versions"
+
+      - name: Commit CHANGELOG changes
+        run: |
           yarn prettier-write
           git add '*.md'
           git commit -m "docs: update CHANGELOGs"
