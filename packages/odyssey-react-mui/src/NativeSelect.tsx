@@ -23,11 +23,6 @@ export type NativeSelectOption = {
   type?: "heading" | "option";
 };
 
-type FieldComponentPropsUsedByNativeSelect = Omit<
-  FieldComponentProps,
-  "isReadOnly" | "name"
->;
-
 export type NativeSelectProps = {
   /**
    * The options or optgroup elements within the NativeSelect
@@ -61,8 +56,11 @@ export type NativeSelectProps = {
    * The value or values selected in the NativeSelect
    */
   value?: string | string[];
-} & SeleniumProps &
-  FieldComponentPropsUsedByNativeSelect;
+} & Pick<
+  FieldComponentProps,
+  "errorMessage" | "hint" | "id" | "isDisabled" | "isOptional"
+> &
+  SeleniumProps;
 
 const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   (

@@ -18,11 +18,6 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
-type FieldComponentPropsUsedByCheckboxGroup = Pick<
-  FieldComponentProps,
-  "errorMessage" | "hint" | "isDisabled"
->;
-
 export type CheckboxGroupProps = {
   /**
    * A single Checkbox element or an array of Checkbox elements
@@ -38,8 +33,8 @@ export type CheckboxGroupProps = {
    * The label text for the CheckboxGroup
    */
   label: string;
-} & SeleniumProps &
-  FieldComponentPropsUsedByCheckboxGroup;
+} & Pick<FieldComponentProps, "errorMessage" | "hint" | "isDisabled"> &
+  SeleniumProps;
 
 const CheckboxGroup = ({
   children,

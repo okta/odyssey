@@ -24,11 +24,6 @@ import type { SeleniumProps } from "./SeleniumProps";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
-type FieldComponentPropsUsedByCheckbox = Pick<
-  FieldComponentProps,
-  "id" | "isDisabled" | "name"
->;
-
 export type CheckboxProps = {
   /**
    * The ARIA label for the Checkbox
@@ -66,8 +61,8 @@ export type CheckboxProps = {
    * The value attribute of the Checkbox
    */
   value?: string;
-} & SeleniumProps &
-  FieldComponentPropsUsedByCheckbox;
+} & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
+  SeleniumProps;
 
 const Checkbox = ({
   ariaLabel,

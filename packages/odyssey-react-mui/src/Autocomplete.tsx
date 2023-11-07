@@ -21,11 +21,6 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
-type FieldComponentPropsUsedByAutocomplete = Omit<
-  FieldComponentProps,
-  "isDisabled" | "isReadOnly"
->;
-
 export type AutocompleteProps<
   OptionType,
   HasMultipleChoices extends boolean | undefined,
@@ -134,8 +129,11 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["value"];
-} & SeleniumProps &
-  FieldComponentPropsUsedByAutocomplete;
+} & Pick<
+  FieldComponentProps,
+  "errorMessage" | "hint" | "id" | "isOptional" | "name"
+> &
+  SeleniumProps;
 
 const Autocomplete = <
   OptionType,

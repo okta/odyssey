@@ -65,8 +65,8 @@ export type PasswordFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-} & SeleniumProps &
-  FieldComponentProps;
+} & FieldComponentProps &
+  SeleniumProps;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (

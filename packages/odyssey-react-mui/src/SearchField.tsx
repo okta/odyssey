@@ -26,11 +26,6 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
-type FieldComponentPropsUsedBySearchField = Pick<
-  FieldComponentProps,
-  "id" | "isDisabled" | "name"
->;
-
 export type SearchFieldProps = {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
@@ -70,8 +65,8 @@ export type SearchFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-} & SeleniumProps &
-  FieldComponentPropsUsedBySearchField;
+} & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
+  SeleniumProps;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
