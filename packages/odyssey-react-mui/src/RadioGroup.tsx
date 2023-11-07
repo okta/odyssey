@@ -21,7 +21,7 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
-type FieldComponentPropsUseByRadioGroup = Pick<
+type FieldComponentPropsUsedByRadioGroup = Pick<
   FieldComponentProps,
   "errorMessage" | "hint" | "isDisabled" | "name"
 >;
@@ -52,7 +52,7 @@ export type RadioGroupProps = {
    */
   value?: RadioProps["value"];
 } & SeleniumProps &
-  FieldComponentPropsUseByRadioGroup;
+  FieldComponentPropsUsedByRadioGroup;
 
 const RadioGroup = ({
   children,

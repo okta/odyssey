@@ -26,7 +26,7 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
-type FieldComponentPropsUseBySearchField = Pick<
+type FieldComponentPropsUsedBySearchField = Pick<
   FieldComponentProps,
   "isDisabled" | "name"
 >;
@@ -75,7 +75,7 @@ export type SearchFieldProps = {
    */
   value?: string;
 } & SeleniumProps &
-  FieldComponentPropsUseBySearchField;
+  FieldComponentPropsUsedBySearchField;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
