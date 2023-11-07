@@ -28,7 +28,7 @@ import type { SeleniumProps } from "./SeleniumProps";
 
 type FieldComponentPropsUsedBySearchField = Pick<
   FieldComponentProps,
-  "isDisabled" | "name"
+  "id" | "isDisabled" | "name"
 >;
 
 export type SearchFieldProps = {
@@ -42,10 +42,6 @@ export type SearchFieldProps = {
    * If `true`, the component will receive focus automatically.
    */
   hasInitialFocus?: boolean;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
   /**
    * This label won't show up visually, but it's required for accessibility.
    */

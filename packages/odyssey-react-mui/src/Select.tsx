@@ -47,10 +47,6 @@ export type SelectProps<
    */
   hasMultipleChoices?: HasMultipleChoices;
   /**
-   * The id attribute of the Select
-   */
-  id?: string;
-  /**
    * @deprecated Use `hasMultipleChoices` instead.
    */
   /** **Deprecated:** use `hasMultipleChoices` */

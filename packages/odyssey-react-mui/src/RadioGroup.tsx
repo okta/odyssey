@@ -23,7 +23,7 @@ import type { SeleniumProps } from "./SeleniumProps";
 
 type FieldComponentPropsUsedByRadioGroup = Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "isDisabled" | "name"
+  "errorMessage" | "hint" | "id" | "isDisabled" | "name"
 >;
 
 export type RadioGroupProps = {
@@ -35,10 +35,6 @@ export type RadioGroupProps = {
    * The text value of the Radio that should be selected by default
    */
   defaultValue?: string;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
   /**
    * The text label for the RadioGroup
    */

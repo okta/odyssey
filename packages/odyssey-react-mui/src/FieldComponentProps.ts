@@ -20,6 +20,10 @@ export type FieldComponentProps = {
    */
   hint?: string;
   /**
+   * The id of the `input` element.
+   */
+  id?: string;
+  /**
    * If `true`, the component is disabled.
    */
   isDisabled?: boolean;

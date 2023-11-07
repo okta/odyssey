@@ -49,10 +49,6 @@ export type TextFieldProps = {
    */
   hasInitialFocus?: boolean;
   /**
-   * The id of the `input` element.
-   */
-  id?: string;
-  /**
    * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
    */
   isMultiline?: boolean;

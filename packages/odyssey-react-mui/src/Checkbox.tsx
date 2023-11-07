@@ -26,7 +26,7 @@ export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
 type FieldComponentPropsUsedByCheckbox = Pick<
   FieldComponentProps,
-  "isDisabled" | "name"
+  "id" | "isDisabled" | "name"
 >;
 
 export type CheckboxProps = {
@@ -38,10 +38,6 @@ export type CheckboxProps = {
    * The ID of the element that labels the Checkbox
    */
   ariaLabelledBy?: string;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
   /**
    * Determines whether the Checkbox is checked
    */

@@ -41,10 +41,6 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["multiple"];
   /**
-   * The id attribute of the Select
-   */
-  id?: string;
-  /**
    * Allows the input of custom values
    */
   isCustomValueAllowed?: MuiAutocompleteProps<

@@ -42,10 +42,6 @@ export type PasswordFieldProps = {
    */
   hasShowPassword?: boolean;
   /**
-   * The id of the `input` element.
-   */
-  id?: string;
-  /**
    * The label for the `input` element.
    */
   label: string;

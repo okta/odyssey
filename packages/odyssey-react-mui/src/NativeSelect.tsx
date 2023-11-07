@@ -38,10 +38,6 @@ export type NativeSelectProps = {
    */
   defaultValue?: string;
   /**
-   * The id attribute of the NativeSelect
-   */
-  id?: string;
-  /**
    * If `true`, the NativeSelect allows multiple selections
    */
   isMultiSelect?: boolean;
