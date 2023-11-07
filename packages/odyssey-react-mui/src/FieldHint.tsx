@@ -14,17 +14,23 @@ import { memo } from "react";
 
 import { FormHelperText } from "@mui/material";
 
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
 export type FieldHintProps = {
+  LinkComponent?: FieldComponentProps["HintLinkComponent"];
   id?: string;
   text: string;
 } & SeleniumProps;
 
-const FieldHint = ({ id, testId, text }: FieldHintProps) => {
+const FieldHint = ({ id, LinkComponent, testId, text }: FieldHintProps) => {
+  console.log({ LinkComponent });
   return (
     <FormHelperText data-se={testId} id={id}>
       {text}
+      {LinkComponent && (
+        <span className="field-hint-link-component">{LinkComponent}</span>
+      )}
     </FormHelperText>
   );
 };

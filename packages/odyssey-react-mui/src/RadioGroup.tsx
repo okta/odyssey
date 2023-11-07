@@ -45,7 +45,7 @@ export type RadioGroupProps = {
   value?: RadioProps["value"];
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isDisabled" | "name"
+  "errorMessage" | "hint" | "HintLinkComponent" | "id" | "isDisabled" | "name"
 > &
   SeleniumProps;
 
@@ -54,6 +54,7 @@ const RadioGroup = ({
   defaultValue,
   errorMessage,
   hint,
+  HintLinkComponent,
   id: idOverride,
   isDisabled,
   label,
@@ -101,6 +102,7 @@ const RadioGroup = ({
       fieldType="group"
       hasVisibleLabel={false}
       hint={hint}
+      HintLinkComponent={HintLinkComponent}
       id={idOverride}
       isDisabled={isDisabled}
       label={label}

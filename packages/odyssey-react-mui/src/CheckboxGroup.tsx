@@ -33,13 +33,17 @@ export type CheckboxGroupProps = {
    * The label text for the CheckboxGroup
    */
   label: string;
-} & Pick<FieldComponentProps, "errorMessage" | "hint" | "isDisabled"> &
+} & Pick<
+  FieldComponentProps,
+  "errorMessage" | "hint" | "HintLinkComponent" | "isDisabled"
+> &
   SeleniumProps;
 
 const CheckboxGroup = ({
   children,
   errorMessage,
   hint,
+  HintLinkComponent,
   isDisabled,
   isRequired = false,
   label,
@@ -65,6 +69,7 @@ const CheckboxGroup = ({
       fieldType="group"
       hasVisibleLabel={true}
       hint={hint}
+      HintLinkComponent={HintLinkComponent}
       isDisabled={isDisabled}
       isOptional={!isRequired}
       label={label}
