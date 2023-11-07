@@ -9,25 +9,31 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout code
         uses: actions/checkout@v2
-      - name: setup node
+
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: v16.17.1
           cache: yarn
+          node-version: v20.7.0
+
       - name: node_modules cache
         uses: actions/cache@v2
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-node-modules-cache-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-node-modules-cache-
-      - name: install dependencies
+
+      - name: Install dependencies
         run: yarn install --immutable
+
       - name: lint
         run: yarn lint
+
       - name: type check
         run: yarn typecheck
+
       - name: unit test
         run: yarn test
 
@@ -44,6 +50,7 @@ jobs:
               - './packages/odyssey-react/src/**'
               - './packages/odyssey-react-mui/src/**'
               - './packages/odyssey-storybook/**'
+
       - name: setup AWS
         if: steps.changes.outputs.deploy == 'true'
         uses: aws-actions/configure-aws-credentials@v1
@@ -51,18 +58,23 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
+
       - name: set $SHA7
         if: steps.changes.outputs.deploy == 'true'
         run: echo "SHA7=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})" >> $GITHUB_ENV
+
       - name: set $URL_STORYBOOK
         if: steps.changes.outputs.deploy == 'true'
         run: echo "URL_STORYBOOK="https://${SHA7}.ods.dev"" >> $GITHUB_ENV
+
       - name: set $COMMIT_MSG
         if: steps.changes.outputs.deploy == 'true'
         run: echo "COMMIT_MSG=${{ github.event.head_commit.message || github.event.pull_request.title }}" >> $GITHUB_ENV
+
       - name: build storybook
         if: steps.changes.outputs.deploy == 'true'
         run: cd ./packages/odyssey-storybook && rm -rf ./node_modules/.cache && yarn build
+
       - name: create deployment
         if: steps.changes.outputs.deploy == 'true'
         uses: bobheadxi/deployments@v0.4.3
@@ -71,9 +83,11 @@ jobs:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
           env: preview
+
       - name: deploy
         if: steps.changes.outputs.deploy == 'true'
         run: aws s3 sync ./packages/odyssey-storybook/dist/ s3://ods.dev/$SHA7 --delete
+
       - name: "inform slack of deployment (#odyssey-deployments)"
         if: steps.changes.outputs.deploy == 'true'
         run: bash ./scripts/notify-slack.sh
@@ -82,6 +96,7 @@ jobs:
           AUTHOR_NAME: ${{github.actor}}
           BRANCH_NAME: ${{github.head_ref}}
           PULL_REQUEST_ID: ${{github.event.pull_request.number}}
+
       - name: update deployment status
         if: steps.changes.outputs.deploy == 'true'
         uses: bobheadxi/deployments@v0.4.3
@@ -91,9 +106,11 @@ jobs:
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: ${{ env.URL_STORYBOOK }}
+
       - name: a11y test
         if: steps.changes.outputs.deploy == 'true'
         run: yarn workspace @okta/odyssey-storybook test:storybook --url ${{ env.URL_STORYBOOK }}
+
       - name: visual regression test
         if: steps.changes.outputs.vrt == 'true'
         env:
