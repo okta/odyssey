@@ -2080,19 +2080,17 @@ export const components = ({
           maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} / 2)`,
           minWidth: "unset",
           minHeight: "unset",
-          padding: `${odysseyTokens.Spacing4} 0`,
+          padding: `${odysseyTokens.Spacing4} ${odysseyTokens.Spacing1}`,
+          fontSize: odysseyTokens.TypographySizeHeading6,
           fontFamily: odysseyTokens.TypographyFamilyHeading,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           overflow: "visible",
-
-          ...(ownerState.textColor === "inherit" && {
-            color: "inherit",
-            opacity: 1,
-          }),
+          color: odysseyTokens.HueNeutral600,
+          opacity: 1,
 
           ...(ownerState.selected == true && {
             color: odysseyTokens.TypographyColorAction,
-            fontWeight: odysseyTokens.TypographyWeightBodyBold,
+            fontWeight: odysseyTokens.TypographyWeightHeading,
           }),
 
           ...(ownerState.disabled && {
