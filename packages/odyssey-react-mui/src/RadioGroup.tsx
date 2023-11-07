@@ -18,7 +18,13 @@ import { memo, ReactElement, useCallback } from "react";
 
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+
+type FieldComponentPropsUseByRadioGroup = Pick<
+  FieldComponentProps,
+  "errorMessage" | "hint" | "isDisabled" | "name"
+>;
 
 export type RadioGroupProps = {
   /**
@@ -30,29 +36,13 @@ export type RadioGroupProps = {
    */
   defaultValue?: string;
   /**
-   * The error text for an invalid RadioGroup
-   */
-  errorMessage?: string;
-  /**
-   * Optional hint text
-   */
-  hint?: string;
-  /**
    * The id of the `input` element.
    */
   id?: string;
   /**
-   * Disables the whole RadioGroup
-   */
-  isDisabled?: boolean;
-  /**
    * The text label for the RadioGroup
    */
   label: string;
-  /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
   /**
    * Listen for changes in the browser that change `value`
    */
@@ -61,7 +51,8 @@ export type RadioGroupProps = {
    * The `value` on the selected Radio
    */
   value?: RadioProps["value"];
-} & SeleniumProps;
+} & SeleniumProps &
+  FieldComponentPropsUseByRadioGroup;
 
 const RadioGroup = ({
   children,
