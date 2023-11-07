@@ -33,6 +33,8 @@ export type SelectOption = {
   value?: string;
 };
 
+type FieldComponentPropsUsedBySelect = Omit<FieldComponentProps, "isReadOnly">;
+
 export type SelectValueType<HasMultipleChoices> =
   HasMultipleChoices extends true ? string[] : string;
 
@@ -78,7 +80,7 @@ export type SelectProps<
    */
   value?: Value;
 } & SeleniumProps &
-  FieldComponentProps;
+  FieldComponentPropsUsedBySelect;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
