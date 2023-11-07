@@ -47,6 +47,7 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     hint: fieldComponentPropsMetaData.hint,
+    HintLinkComponent: fieldComponentPropsMetaData.HintLinkComponent,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
     isRequired: {
       control: "boolean",
