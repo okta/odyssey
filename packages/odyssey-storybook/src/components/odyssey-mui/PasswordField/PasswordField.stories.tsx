@@ -13,6 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within } from "@storybook/testing-library";
 import {
+  fieldComponentPropsStorybookMetaData,
   PasswordField,
   PasswordFieldProps,
   odysseyTranslate,
@@ -37,15 +38,7 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         },
       },
     },
-    errorMessage: {
-      control: "text",
-      description: "The error message for the password field component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    errorMessage: fieldComponentPropsStorybookMetaData.errorMessage,
     hasInitialFocus: {
       control: "boolean",
       description: "If `true`, the component will receive focus automatically",
@@ -67,58 +60,11 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         },
       },
     },
-    hint: {
-      control: "text",
-      description: "The hint text for the password field component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description:
-        "An optional id for the HTML elemenet rendered by the component.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the component is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
-    isOptional: {
-      control: "boolean",
-      description: "If `true`, the `input` element is not required",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
-    isReadOnly: {
-      control: "boolean",
-      description: "It prevents the user from changing the value of the field",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    hint: fieldComponentPropsStorybookMetaData.hint,
+    id: fieldComponentPropsStorybookMetaData.id,
+    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
+    isOptional: fieldComponentPropsStorybookMetaData.isOptional,
+    isReadOnly: fieldComponentPropsStorybookMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The label text for the password field input",

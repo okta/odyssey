@@ -14,6 +14,7 @@ import {
   Checkbox,
   CheckboxProps,
   checkboxValidityValues,
+  fieldComponentPropsStorybookMetaData,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -44,15 +45,7 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
-    id: {
-      control: "text",
-      description: "The id of the `input` element",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    id: fieldComponentPropsStorybookMetaData.id,
     isDefaultChecked: {
       control: "boolean",
       description: "If `true`, the checkbox starts checked",
@@ -65,15 +58,7 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the checkbox is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
     isIndeterminate: {
       control: "boolean",
       description: "If `true`, the checkbox is in an indeterminate state",
@@ -101,16 +86,7 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
-    name: {
-      control: "text",
-      description:
-        "The name of the `input` element. Defaults to the `id` if not set.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    name: fieldComponentPropsStorybookMetaData.name,
     onChange: {
       control: null,
       description: "Callback fired when the checkbox value changes",

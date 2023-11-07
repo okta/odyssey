@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Autocomplete, AutocompleteProps } from "@okta/odyssey-react-mui";
+import {
+  Autocomplete,
+  AutocompleteProps,
+  fieldComponentPropsStorybookMetaData,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
@@ -50,15 +54,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
   title: "MUI Components/Forms/Autocomplete",
   component: Autocomplete,
   argTypes: {
-    errorMessage: {
-      control: "text",
-      description: "The error message for the select component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    errorMessage: fieldComponentPropsStorybookMetaData.errorMessage,
     hasMultipleChoices: {
       control: "boolean",
       description: "Enables multiple choice selection",
@@ -68,24 +64,8 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
-    hint: {
-      control: "text",
-      description: "The hint text for the autocomplete input",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description: "The id attribute of the autocomplete component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    hint: fieldComponentPropsStorybookMetaData.hint,
+    id: fieldComponentPropsStorybookMetaData.id,
     isCustomValueAllowed: {
       control: "boolean",
       description: "Allows the input of custom values",
@@ -95,15 +75,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
-    isDisabled: {
-      control: "boolean",
-      description: "Disables the autocomplete input",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
     isLoading: {
       control: "boolean",
       description: "Displays a loading indicator",
@@ -113,27 +85,8 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
-    isOptional: {
-      control: "boolean",
-      description: "If `true`, the select component is optional",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
-    isReadOnly: {
-      control: "boolean",
-      description: "Makes the autocomplete input read-only",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isOptional: fieldComponentPropsStorybookMetaData.isOptional,
+    isReadOnly: fieldComponentPropsStorybookMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The label text for the autocomplete input",
@@ -147,16 +100,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         name: "string",
       },
     },
-    name: {
-      control: "text",
-      description:
-        "The name of the select component. Defaults to the `id` if not set.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    name: fieldComponentPropsStorybookMetaData.name,
     onBlur: {
       control: null,
       description:

@@ -10,7 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio, RadioProps } from "@okta/odyssey-react-mui";
+import {
+  fieldComponentPropsStorybookMetaData,
+  Radio,
+  RadioProps,
+} from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
@@ -30,15 +34,7 @@ const storybookMeta: Meta<RadioProps> = {
         },
       },
     },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the radio button is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
     isInvalid: {
       control: "boolean",
       description: "If `true`, the radio button has an invalid value",
@@ -61,15 +57,7 @@ const storybookMeta: Meta<RadioProps> = {
         name: "string",
       },
     },
-    name: {
-      control: "text",
-      description: "The name attribute of the radio button",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    name: fieldComponentPropsStorybookMetaData.name,
     value: {
       control: "text",
       description: "The value attribute of the radio button",
