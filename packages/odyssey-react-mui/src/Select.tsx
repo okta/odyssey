@@ -21,9 +21,11 @@ import {
   Select as MuiSelect,
 } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
+
 import { Field } from "./Field";
-import type { SeleniumProps } from "./SeleniumProps";
+import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
+import type { SeleniumProps } from "./SeleniumProps";
 
 export type SelectOption = {
   text: string;
@@ -39,42 +41,22 @@ export type SelectProps<
   HasMultipleChoices extends boolean
 > = {
   /**
-   * The error message for the Select
-   */
-  errorMessage?: string;
-  /**
    * If `true`, the Select allows multiple selections
    */
   hasMultipleChoices?: HasMultipleChoices;
   /**
-   * The hint text for the Select
-   */
-  hint?: string;
-  /**
    * The id attribute of the Select
    */
   id?: string;
-  /**
-   * If `true`, the Select is disabled
-   */
-  isDisabled?: boolean;
   /**
    * @deprecated Use `hasMultipleChoices` instead.
    */
   /** **Deprecated:** use `hasMultipleChoices` */
   isMultiSelect?: HasMultipleChoices;
   /**
-   * If `true`, the Select is optional
-   */
-  isOptional?: boolean;
-  /**
    * The label text for the Select
    */
   label: string;
-  /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
   /**
    * Callback fired when the Select loses focus
    */
@@ -95,7 +77,8 @@ export type SelectProps<
    * The value or values selected in the Select
    */
   value?: Value;
-} & SeleniumProps;
+} & SeleniumProps &
+  FieldComponentProps;
 
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
