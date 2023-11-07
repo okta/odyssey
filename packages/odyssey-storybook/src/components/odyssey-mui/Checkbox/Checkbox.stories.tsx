@@ -144,7 +144,6 @@ const checkTheBox =
       const canvas = within(canvasElement);
       const checkBox = canvas.getByRole("checkbox") as HTMLInputElement;
       if (checkBox) {
-        console.log("checkbox", checkBox);
         userEvent.click(checkBox);
       }
       userEvent.tab();

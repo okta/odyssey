@@ -10,13 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio as MuiRadio } from "@mui/material";
-import { memo } from "react";
+import { Radio as MuiRadio, RadioProps as MuiRadioProps } from "@mui/material";
+import { memo, useCallback } from "react";
 
 import { FormControlLabel } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+import { FormCheckedProps } from "./FormCheckedProps";
+import { useControlledState } from "./useControlledState";
 
 export type RadioProps = {
   /**
@@ -36,28 +38,45 @@ export type RadioProps = {
    */
   value: string;
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
+  FormCheckedProps<MuiRadioProps> &
   SeleniumProps;
 
 const Radio = ({
   isChecked,
+  isDefaultChecked,
   isDisabled,
   isInvalid,
   label,
   name,
+  onChange: onChangeProp,
   testId,
   value,
-}: RadioProps) => (
-  <FormControlLabel
-    checked={isChecked}
-    className={isInvalid ? "Mui-error" : ""}
-    control={<MuiRadio />}
-    data-se={testId}
-    disabled={isDisabled}
-    label={label}
-    name={name}
-    value={value}
-  />
-);
+}: RadioProps) => {
+  const [isLocalChecked, setIsLocalChecked] = useControlledState({
+    controlledValue: isChecked,
+    uncontrolledValue: isDefaultChecked,
+  });
+
+  const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
+    (event, checked) => {
+      setIsLocalChecked(checked);
+      onChangeProp?.(event, checked);
+    },
+    [onChangeProp, setIsLocalChecked]
+  );
+
+  return (
+    <FormControlLabel
+      className={isInvalid ? "Mui-error" : ""}
+      control={<MuiRadio checked={isLocalChecked} onChange={onChange} />}
+      data-se={testId}
+      disabled={isDisabled}
+      label={label}
+      name={name}
+      value={value}
+    />
+  );
+};
 
 const MemoizedRadio = memo(Radio);
 MemoizedRadio.displayName = "Radio";

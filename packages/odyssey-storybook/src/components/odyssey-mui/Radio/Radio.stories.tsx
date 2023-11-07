@@ -18,6 +18,7 @@ import { expect } from "@storybook/jest";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
+import { useState } from "react";
 
 const storybookMeta: Meta<RadioProps> = {
   title: "MUI Components/Forms/Radio",
@@ -29,6 +30,18 @@ const storybookMeta: Meta<RadioProps> = {
       table: {
         type: {
           summary: "boolean",
+        },
+      },
+    },
+    isDefaultChecked: {
+      control: "boolean",
+      description: "If `true`, the radio button is checked",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
         },
       },
     },
@@ -53,6 +66,15 @@ const storybookMeta: Meta<RadioProps> = {
       type: {
         required: true,
         name: "string",
+      },
+    },
+    onChange: {
+      control: null,
+      description: "Callback fired when the the radio button value changes",
+      table: {
+        type: {
+          summary: "func",
+        },
       },
     },
     name: fieldComponentPropsMetaData.name,
@@ -80,7 +102,7 @@ const storybookMeta: Meta<RadioProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<RadioProps> = {
+export const Default: StoryObj<typeof Radio> = {
   play: async ({ canvasElement, step }) => {
     await step("select the radio button", async () => {
       const canvas = within(canvasElement);
@@ -90,6 +112,68 @@ export const Default: StoryObj<RadioProps> = {
       }
       expect(radio).toBeChecked();
       axeRun("Radio Default");
+    });
+  },
+};
+
+export const ControlledCheck: StoryObj<typeof Radio> = {
+  args: {
+    label: "Enable warp drive recalibration",
+    isChecked: true,
+  },
+  render: function C({ label }) {
+    const [isChecked, setIsChecked] = useState(false);
+    return (
+      <Radio
+        label={label}
+        value="warp"
+        isChecked={isChecked}
+        onChange={(_, isChecked) => {
+          setIsChecked(isChecked);
+        }}
+      />
+    );
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Button is controlled-checked", async () => {
+      const canvas = within(canvasElement);
+      const radio = canvas.getByRole("radio") as HTMLInputElement;
+      if (radio) {
+        userEvent.click(radio);
+      }
+      expect(radio).toBeChecked();
+      axeRun("Radio Controlled Checked");
+    });
+  },
+};
+
+export const UncontrolledCheck: StoryObj<typeof Radio> = {
+  args: {
+    label: "Enable warp drive recalibration",
+    isDefaultChecked: true,
+  },
+  render: function C({ label }) {
+    const [isChecked, setIsChecked] = useState(false);
+    return (
+      <Radio
+        label={label}
+        value="warp"
+        isDefaultChecked={isChecked}
+        onChange={(_, isChecked) => {
+          setIsChecked(isChecked);
+        }}
+      />
+    );
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Button is uncontrolled-checked", async () => {
+      const canvas = within(canvasElement);
+      const radio = canvas.getByRole("radio") as HTMLInputElement;
+      if (radio) {
+        userEvent.click(radio);
+      }
+      expect(radio).toBeChecked();
+      axeRun("Radio Uncontrolled Checked");
     });
   },
 };

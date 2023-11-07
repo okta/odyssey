@@ -22,6 +22,7 @@ import { FieldComponentProps } from "./FieldComponentProps";
 import { Typography } from "./Typography";
 import type { SeleniumProps } from "./SeleniumProps";
 import { useControlledState } from "./useControlledState";
+import { FormCheckedProps } from "./FormCheckedProps";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
@@ -63,39 +64,7 @@ export type CheckboxProps = {
    */
   value?: string;
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
-  (
-  | {
-      /**
-       * Sets the checked state of the Checkbox
-       */
-      isChecked: boolean;
-      /**
-       * Determines whether the Checkbox is checked
-       * Should not be used if `isChecked` is used
-       */
-      isDefaultChecked?: never;
-      /**
-       * The change event handler for the Checkbox
-       * Must be used if `isChecked` is used
-       */
-      onChange: MuiCheckboxProps["onChange"];
-    }
-  | {
-      /**
-       * Sets the checked state of the Checkbox
-       * Should not be used if `isDefaultChecked` is used
-       */
-      isChecked?: never;
-      /**
-       * Determines whether the Checkbox is checked
-       */
-      isDefaultChecked?: boolean;
-      /**
-       * The change event handler for the Checkbox
-       */
-      onChange?: MuiCheckboxProps["onChange"];
-    }
-) &
+  FormCheckedProps<MuiCheckboxProps> &
   SeleniumProps;
 
 const Checkbox = ({
@@ -115,14 +84,10 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
-  console.log("isChecked", isChecked);
-  console.log("isDefaultChecked", isDefaultChecked);
   const [isLocalChecked, setIsLocalChecked] = useControlledState({
     controlledValue: isChecked,
     uncontrolledValue: isDefaultChecked,
   });
-
-  console.log("localChecked", isLocalChecked);
 
   const label = useMemo(() => {
     if (isRequired) {
