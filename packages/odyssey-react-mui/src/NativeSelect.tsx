@@ -14,7 +14,7 @@ import { ReactElement, forwardRef, memo, useCallback } from "react";
 import { Select as MuiSelect } from "@mui/material";
 import { SelectProps as MuiSelectProps } from "@mui/material";
 import { Field } from "./Field";
-
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
 export type NativeSelectOption = {
@@ -22,6 +22,11 @@ export type NativeSelectOption = {
   value?: string;
   type?: "heading" | "option";
 };
+
+type FieldComponentPropsUsedByNativeSelect = Omit<
+  FieldComponentProps,
+  "isReadOnly" | "name"
+>;
 
 export type NativeSelectProps = {
   /**
@@ -33,29 +38,13 @@ export type NativeSelectProps = {
    */
   defaultValue?: string;
   /**
-   * The error message for the NativeSelect
-   */
-  errorMessage?: string;
-  /**
-   * The hint text for the NativeSelect
-   */
-  hint?: string;
-  /**
    * The id attribute of the NativeSelect
    */
   id?: string;
   /**
-   * If `true`, the NativeSelect is disabled
-   */
-  isDisabled?: boolean;
-  /**
    * If `true`, the NativeSelect allows multiple selections
    */
   isMultiSelect?: boolean;
-  /**
-   * If `true`, the NativeSelect is optional
-   */
-  isOptional?: boolean;
   /**
    * The label text for the NativeSelect
    */
@@ -76,7 +65,8 @@ export type NativeSelectProps = {
    * The value or values selected in the NativeSelect
    */
   value?: string | string[];
-} & SeleniumProps;
+} & SeleniumProps &
+  FieldComponentPropsUsedByNativeSelect;
 
 const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   (
