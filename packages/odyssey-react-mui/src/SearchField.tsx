@@ -23,7 +23,13 @@ import {
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+
+type FieldComponentPropsUseBySearchField = Pick<
+  FieldComponentProps,
+  "isDisabled" | "name"
+>;
 
 export type SearchFieldProps = {
   /**
@@ -41,17 +47,9 @@ export type SearchFieldProps = {
    */
   id?: string;
   /**
-   * If `true`, the component is disabled.
-   */
-  isDisabled?: boolean;
-  /**
    * This label won't show up visually, but it's required for accessibility.
    */
   label: string;
-  /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
   /**
    * Callback fired when the `input` element loses focus.
    */
@@ -76,7 +74,8 @@ export type SearchFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-} & SeleniumProps;
+} & SeleniumProps &
+  FieldComponentPropsUseBySearchField;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
