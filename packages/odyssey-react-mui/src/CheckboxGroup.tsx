@@ -15,7 +15,13 @@ import { memo, ReactElement, useCallback } from "react";
 
 import { Checkbox } from "./Checkbox";
 import { Field } from "./Field";
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+
+type FieldComponentPropsUsedByCheckboxGroup = Pick<
+  FieldComponentProps,
+  "errorMessage" | "hint" | "isDisabled"
+>;
 
 export type CheckboxGroupProps = {
   /**
@@ -25,18 +31,6 @@ export type CheckboxGroupProps = {
     | ReactElement<typeof Checkbox>
     | Array<ReactElement<typeof Checkbox>>;
   /**
-   * The error message for the CheckboxGroup
-   */
-  errorMessage?: string;
-  /**
-   * The hint text for the CheckboxGroup
-   */
-  hint?: string;
-  /**
-   * If `true`, the CheckboxGroup is disabled
-   */
-  isDisabled?: boolean;
-  /**
    * If `true`, the CheckboxGroup is required
    */
   isRequired?: boolean;
@@ -44,7 +38,8 @@ export type CheckboxGroupProps = {
    * The label text for the CheckboxGroup
    */
   label: string;
-} & SeleniumProps;
+} & SeleniumProps &
+  FieldComponentPropsUsedByCheckboxGroup;
 
 const CheckboxGroup = ({
   children,
