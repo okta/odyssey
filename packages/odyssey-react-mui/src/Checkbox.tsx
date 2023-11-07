@@ -10,18 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { useTranslation } from "react-i18next";
+import { memo, useCallback, useMemo, useState } from "react";
 import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
   FormControlLabel,
 } from "@mui/material";
-import { Typography } from "./Typography";
-import { memo, useCallback, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
 
+import { FieldComponentProps } from "./FieldComponentProps";
+import { Typography } from "./Typography";
 import type { SeleniumProps } from "./SeleniumProps";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
+
+type FieldComponentPropsUsedByCheckbox = Pick<
+  FieldComponentProps,
+  "isDisabled" | "name"
+>;
 
 export type CheckboxProps = {
   /**
@@ -41,10 +47,6 @@ export type CheckboxProps = {
    */
   isDefaultChecked?: boolean;
   /**
-   * Determines whether the Checkbox is disabled
-   */
-  isDisabled?: boolean;
-  /**
    * Determines whether the Checkbox is in an indeterminate state
    */
   isIndeterminate?: boolean;
@@ -57,10 +59,6 @@ export type CheckboxProps = {
    */
   label?: string;
   /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
-  /**
    * The change event handler for the Checkbox
    */
   onChange?: MuiCheckboxProps["onChange"];
@@ -72,7 +70,8 @@ export type CheckboxProps = {
    * The value attribute of the Checkbox
    */
   value?: string;
-} & SeleniumProps;
+} & SeleniumProps &
+  FieldComponentPropsUsedByCheckbox;
 
 const Checkbox = ({
   ariaLabel,
