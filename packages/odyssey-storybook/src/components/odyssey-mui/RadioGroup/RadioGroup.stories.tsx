@@ -15,6 +15,8 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, within } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<typeof RadioGroup> = {
   title: "MUI Components/Forms/RadioGroup",
@@ -131,5 +133,45 @@ export const Error: StoryObj<RadioGroupProps> = {
   },
   args: {
     errorMessage: "This field is required.",
+  },
+};
+
+export const UncontrolledRadioGroup: StoryObj<RadioGroupProps> = {
+  ...Template,
+  args: {
+    defaultValue: "Warp Speed",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("select controlled radio button", async () => {
+      const canvas = within(canvasElement);
+      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
+      const radio = canvas.getByLabelText(
+        "Ludicrous Speed"
+      ) as HTMLInputElement;
+      if (radiogroup && radio) {
+        userEvent.click(radio);
+      }
+      expect(radio).not.toBeChecked();
+      axeRun("select uncontrolled radio button");
+    });
+  },
+};
+
+export const ControlledRadioGroup: StoryObj<RadioGroupProps> = {
+  ...Template,
+  args: {
+    value: "Ludicrous Speed",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("select uncontrolled radio button", async () => {
+      const canvas = within(canvasElement);
+      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
+      const radio = canvas.getByLabelText("Warp Speed") as HTMLInputElement;
+      if (radiogroup && radio) {
+        userEvent.click(radio);
+      }
+      expect(radio).toBeChecked();
+      axeRun("select controlled radio button");
+    });
   },
 };

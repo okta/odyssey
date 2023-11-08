@@ -243,3 +243,24 @@ export const Invalid: StoryObj<typeof Checkbox> = {
     checkTheBox({ canvasElement, step })("Checkbox Disabled");
   },
 };
+
+export const Uncontrolled: StoryObj<typeof Checkbox> = {
+  args: {
+    label: "Pre-flight systems check complete",
+    isDefaultChecked: true,
+  },
+  render: function C({ label, isDefaultChecked }) {
+    return <Checkbox label={label} isDefaultChecked={isDefaultChecked} />;
+  },
+};
+
+export const Controlled: StoryObj<typeof Checkbox> = {
+  args: {
+    label: "Pre-flight systems check complete",
+    isChecked: true,
+    onChange: () => {},
+  },
+  render: function C({ label, isChecked, onChange }) {
+    return <Checkbox label={label} isChecked={isChecked} onChange={onChange} />;
+  },
+};

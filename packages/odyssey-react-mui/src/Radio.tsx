@@ -17,8 +17,6 @@ import { FormControlLabel } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
-import { FormCheckedProps } from "./FormCheckedProps";
-import { useControlledState } from "./useControlledState";
 
 export type RadioProps = {
   /**
@@ -37,38 +35,35 @@ export type RadioProps = {
    * The value attribute of the Radio
    */
   value: string;
-} & Pick<FieldComponentProps, "isDisabled" | "name"> &
-  FormCheckedProps<MuiRadioProps> &
-  SeleniumProps;
+  /**
+   * Callback fired when the state is changed. Provides event and checked value.
+   */
+  onChange?: MuiRadioProps["onChange"];
+} & Pick<FieldComponentProps, "isDisabled" | "name"> 
+& SeleniumProps;
 
 const Radio = ({
   isChecked,
-  isDefaultChecked,
   isDisabled,
   isInvalid,
   label,
   name,
-  onChange: onChangeProp,
   testId,
   value,
+  onChange: onChangeProp,
 }: RadioProps) => {
-  const [isLocalChecked, setIsLocalChecked] = useControlledState({
-    controlledValue: isChecked,
-    uncontrolledValue: isDefaultChecked,
-  });
-
   const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
     (event, checked) => {
-      setIsLocalChecked(checked);
       onChangeProp?.(event, checked);
     },
-    [onChangeProp, setIsLocalChecked]
+    [onChangeProp]
   );
 
   return (
     <FormControlLabel
+      checked={isChecked}
       className={isInvalid ? "Mui-error" : ""}
-      control={<MuiRadio checked={isLocalChecked} onChange={onChange} />}
+      control={<MuiRadio onChange={onChange} />}
       data-se={testId}
       disabled={isDisabled}
       label={label}

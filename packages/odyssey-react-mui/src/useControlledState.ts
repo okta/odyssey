@@ -42,7 +42,7 @@ export const useControlledState = <Value>({
   }, [controlledValue]);
 
   const setState: typeof setStateValue = (value) => {
-    if (isControlledMode.current) {
+    if (!isControlledMode.current) {
       setStateValue(value);
     }
   };
