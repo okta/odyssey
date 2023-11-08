@@ -10,10 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {
-  Radio,
-  RadioProps,
-} from "@okta/odyssey-react-mui";
+import { Radio, RadioProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";

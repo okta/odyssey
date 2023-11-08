@@ -11,10 +11,7 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  SearchField,
-  SearchFieldProps,
-} from "@okta/odyssey-react-mui";
+import { SearchField, SearchFieldProps } from "@okta/odyssey-react-mui";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
