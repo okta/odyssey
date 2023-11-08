@@ -12,10 +12,11 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
-  fieldComponentPropsStorybookMetaData,
   NativeSelect,
   NativeSelectProps,
 } from "@okta/odyssey-react-mui";
+
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<NativeSelectProps> = {
@@ -43,10 +44,10 @@ const storybookMeta: Meta<NativeSelectProps> = {
         },
       },
     },
-    errorMessage: fieldComponentPropsStorybookMetaData.errorMessage,
-    hint: fieldComponentPropsStorybookMetaData.hint,
-    id: fieldComponentPropsStorybookMetaData.id,
-    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isMultiSelect: {
       control: "boolean",
       description:
@@ -60,7 +61,7 @@ const storybookMeta: Meta<NativeSelectProps> = {
         },
       },
     },
-    isOptional: fieldComponentPropsStorybookMetaData.isOptional,
+    isOptional: fieldComponentPropsMetaData.isOptional,
     label: {
       control: "text",
       description: "The label text for the native select component",

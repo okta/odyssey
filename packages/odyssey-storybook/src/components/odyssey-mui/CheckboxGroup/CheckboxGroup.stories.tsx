@@ -14,10 +14,10 @@ import {
   Checkbox,
   CheckboxGroup,
   CheckboxGroupProps,
-  fieldComponentPropsStorybookMetaData,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 type CheckboxGroupStoryProps = CheckboxGroupProps & {
@@ -45,9 +45,9 @@ const storybookMeta: Meta<CheckboxGroupStoryProps> = {
           "ReactElement<typeof Checkbox> | Array<ReactElement<typeof Checkbox>>",
       },
     },
-    errorMessage: fieldComponentPropsStorybookMetaData.errorMessage,
-    hint: fieldComponentPropsStorybookMetaData.hint,
-    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
+    hint: fieldComponentPropsMetaData.hint,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isRequired: {
       control: "boolean",
       description: "If `true`, the checkbox group is required",

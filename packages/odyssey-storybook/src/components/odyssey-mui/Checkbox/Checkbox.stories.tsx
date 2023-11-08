@@ -14,12 +14,13 @@ import {
   Checkbox,
   CheckboxProps,
   checkboxValidityValues,
-  fieldComponentPropsStorybookMetaData,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
 
@@ -45,7 +46,7 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
-    id: fieldComponentPropsStorybookMetaData.id,
+    id: fieldComponentPropsMetaData.id,
     isDefaultChecked: {
       control: "boolean",
       description: "If `true`, the checkbox starts checked",
@@ -58,7 +59,7 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
-    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isIndeterminate: {
       control: "boolean",
       description: "If `true`, the checkbox is in an indeterminate state",
@@ -86,7 +87,7 @@ const storybookMeta: Meta<CheckboxProps> = {
         },
       },
     },
-    name: fieldComponentPropsStorybookMetaData.name,
+    name: fieldComponentPropsMetaData.name,
     onChange: {
       control: null,
       description: "Callback fired when the checkbox value changes",

@@ -36,6 +36,7 @@ module.exports = {
       "error",
       {
         devDependencies: [
+          "**/*.ts",
           "**/*.stories.*",
           "**/*.docgen.*",
           "**/jest.setup.js",

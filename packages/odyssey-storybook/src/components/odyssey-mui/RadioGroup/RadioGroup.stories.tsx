@@ -11,13 +11,13 @@
  */
 
 import {
-  fieldComponentPropsStorybookMetaData,
   Radio,
   RadioGroup,
   RadioGroupProps,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<typeof RadioGroup> = {
@@ -48,10 +48,10 @@ const storybookMeta: Meta<typeof RadioGroup> = {
         },
       },
     },
-    errorMessage: fieldComponentPropsStorybookMetaData.errorMessage,
-    hint: fieldComponentPropsStorybookMetaData.hint,
-    id: fieldComponentPropsStorybookMetaData.id,
-    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     label: {
       control: "text",
       description: "The text label for the radio group",

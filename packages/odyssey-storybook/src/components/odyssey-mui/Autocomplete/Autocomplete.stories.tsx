@@ -13,13 +13,13 @@
 import {
   Autocomplete,
   AutocompleteProps,
-  fieldComponentPropsStorybookMetaData,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-
-import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
-import { axeRun } from "../../../axe-util";
 import { expect } from "@storybook/jest";
+import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
+
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
+import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const stations: ReadonlyArray<StationType> = [
@@ -54,7 +54,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
   title: "MUI Components/Forms/Autocomplete",
   component: Autocomplete,
   argTypes: {
-    errorMessage: fieldComponentPropsStorybookMetaData.errorMessage,
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
     hasMultipleChoices: {
       control: "boolean",
       description: "Enables multiple choice selection",
@@ -64,8 +64,8 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
-    hint: fieldComponentPropsStorybookMetaData.hint,
-    id: fieldComponentPropsStorybookMetaData.id,
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
     isCustomValueAllowed: {
       control: "boolean",
       description: "Allows the input of custom values",
@@ -75,7 +75,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
-    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isLoading: {
       control: "boolean",
       description: "Displays a loading indicator",
@@ -85,8 +85,8 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         },
       },
     },
-    isOptional: fieldComponentPropsStorybookMetaData.isOptional,
-    isReadOnly: fieldComponentPropsStorybookMetaData.isReadOnly,
+    isOptional: fieldComponentPropsMetaData.isOptional,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The label text for the autocomplete input",
@@ -100,7 +100,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
         name: "string",
       },
     },
-    name: fieldComponentPropsStorybookMetaData.name,
+    name: fieldComponentPropsMetaData.name,
     onBlur: {
       control: null,
       description:

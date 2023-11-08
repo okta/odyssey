@@ -13,13 +13,14 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within } from "@storybook/testing-library";
 import {
-  fieldComponentPropsStorybookMetaData,
   PasswordField,
   PasswordFieldProps,
   odysseyTranslate,
 } from "@okta/odyssey-react-mui";
 import { userEvent, waitFor } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
@@ -38,7 +39,7 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         },
       },
     },
-    errorMessage: fieldComponentPropsStorybookMetaData.errorMessage,
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
     hasInitialFocus: {
       control: "boolean",
       description: "If `true`, the component will receive focus automatically",
@@ -60,11 +61,11 @@ const storybookMeta: Meta<PasswordFieldProps> = {
         },
       },
     },
-    hint: fieldComponentPropsStorybookMetaData.hint,
-    id: fieldComponentPropsStorybookMetaData.id,
-    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
-    isOptional: fieldComponentPropsStorybookMetaData.isOptional,
-    isReadOnly: fieldComponentPropsStorybookMetaData.isReadOnly,
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isOptional: fieldComponentPropsMetaData.isOptional,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The label text for the password field input",

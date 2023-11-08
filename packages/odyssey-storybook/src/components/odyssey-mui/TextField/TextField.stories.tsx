@@ -12,13 +12,13 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
-  fieldComponentPropsStorybookMetaData,
   InputAdornment,
   TextField,
   TextFieldProps,
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
 
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<TextFieldProps> = {
@@ -44,7 +44,7 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
-    errorMessage: fieldComponentPropsStorybookMetaData.errorMessage,
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
     hasInitialFocus: {
       control: "boolean",
       description: "If `true`, the component will receive focus automatically",
@@ -54,9 +54,9 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
-    hint: fieldComponentPropsStorybookMetaData.hint,
-    id: fieldComponentPropsStorybookMetaData.id,
-    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isMultiline: {
       control: "boolean",
       description: "If `true`, a TextareaAutosize element is rendered",
@@ -69,8 +69,8 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
-    isOptional: fieldComponentPropsStorybookMetaData.isOptional,
-    isReadOnly: fieldComponentPropsStorybookMetaData.isReadOnly,
+    isOptional: fieldComponentPropsMetaData.isOptional,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The label for the `input` element",
@@ -84,7 +84,7 @@ const storybookMeta: Meta<TextFieldProps> = {
         name: "string",
       },
     },
-    name: fieldComponentPropsStorybookMetaData.name,
+    name: fieldComponentPropsMetaData.name,
     onBlur: {
       control: null,
       description: "Callback fired when the `input` element loses focus",

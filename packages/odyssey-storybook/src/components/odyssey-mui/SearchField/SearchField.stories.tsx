@@ -12,11 +12,11 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import {
-  fieldComponentPropsStorybookMetaData,
   SearchField,
   SearchFieldProps,
 } from "@okta/odyssey-react-mui";
 
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<SearchFieldProps> = {
@@ -42,8 +42,8 @@ const storybookMeta: Meta<SearchFieldProps> = {
         },
       },
     },
-    isDisabled: fieldComponentPropsStorybookMetaData.isDisabled,
-    id: fieldComponentPropsStorybookMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
+    id: fieldComponentPropsMetaData.id,
     label: {
       control: "text",
       description:
@@ -58,7 +58,7 @@ const storybookMeta: Meta<SearchFieldProps> = {
         name: "string",
       },
     },
-    name: fieldComponentPropsStorybookMetaData.name,
+    name: fieldComponentPropsMetaData.name,
     onBlur: {
       control: "function",
       description: "Callback fired when the `input` element loses focus",

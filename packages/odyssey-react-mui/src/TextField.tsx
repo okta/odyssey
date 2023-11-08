@@ -84,8 +84,7 @@ export type TextFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-} & SeleniumProps &
-  FieldComponentProps;
+} & FieldComponentProps & SeleniumProps
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
