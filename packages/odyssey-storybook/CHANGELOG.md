@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/okta/odyssey/compare/v1.6.0...v1.6.1) (2023-11-08)
+
+### Bug Fixes
+
+- issue with Odyssey rendering <style> tags in a <style> tag in Shadow DOM ([#2037](https://github.com/okta/odyssey/issues/2037)) ([9279c0b](https://github.com/okta/odyssey/commit/9279c0bf7a6139b1497e09a7ea58a08c3411727c))
+
 ## [1.6.0](https://github.com/okta/odyssey/compare/v1.5.0...v1.6.0) (2023-11-02)
 
 ### Features
