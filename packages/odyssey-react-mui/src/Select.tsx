@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useMemo, useState, useEffect } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import {
   Box,
   Checkbox as MuiCheckbox,
@@ -148,12 +148,6 @@ const Select = <
     },
     [hasMultipleChoices, onChangeProp, setSelectedValue]
   );
-
-  useEffect(() => {
-    if (value !== undefined) {
-      setSelectedValue(value);
-    }
-  }, [value]);
 
   // Normalize the options array to accommodate the various
   // data types that might be passed

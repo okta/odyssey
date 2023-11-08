@@ -16,7 +16,6 @@ import {
   checkboxValidityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 
@@ -155,19 +154,6 @@ const checkTheBox =
 export const Default: StoryObj<typeof Checkbox> = {
   args: {
     label: "Enable warp drive recalibration",
-    isChecked: true,
-  },
-  render: function C({ label }) {
-    const [isChecked, setIsChecked] = useState(false);
-    return (
-      <Checkbox
-        label={label}
-        isChecked={isChecked}
-        onChange={(_, isChecked) => {
-          setIsChecked(isChecked);
-        }}
-      />
-    );
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Default");
@@ -186,18 +172,16 @@ export const Required: StoryObj<typeof Checkbox> = {
   args: {
     label: "I agree to the terms and conditions",
     isRequired: true,
-    isChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Required");
   },
 };
 
-export const Checked: StoryObj<CheckboxProps> = {
+export const Checked: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     isDefaultChecked: true,
-    isChecked: undefined,
   },
 };
 
@@ -216,7 +200,7 @@ export const Disabled: StoryObj<typeof Checkbox> = {
   },
 };
 
-export const Indeterminate: StoryObj<CheckboxProps> = {
+export const Indeterminate: StoryObj<typeof Checkbox> = {
   parameters: {
     docs: {
       description: {
@@ -236,8 +220,6 @@ export const Invalid: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     validity: "invalid",
-    isDefaultChecked: false,
-    // onChange: void
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Disabled");
@@ -249,9 +231,6 @@ export const Uncontrolled: StoryObj<typeof Checkbox> = {
     label: "Pre-flight systems check complete",
     isDefaultChecked: true,
   },
-  render: function C({ label, isDefaultChecked }) {
-    return <Checkbox label={label} isDefaultChecked={isDefaultChecked} />;
-  },
 };
 
 export const Controlled: StoryObj<typeof Checkbox> = {
@@ -259,8 +238,5 @@ export const Controlled: StoryObj<typeof Checkbox> = {
     label: "Pre-flight systems check complete",
     isChecked: true,
     onChange: () => {},
-  },
-  render: function C({ label, isChecked, onChange }) {
-    return <Checkbox label={label} isChecked={isChecked} onChange={onChange} />;
   },
 };

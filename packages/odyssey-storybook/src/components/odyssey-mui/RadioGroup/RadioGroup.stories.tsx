@@ -12,6 +12,7 @@
 
 import { Radio, RadioGroup, RadioGroupProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
+import { expect } from "@storybook/jest";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
