@@ -53,10 +53,10 @@ import { CSSProperties } from "react";
 
 export const components = ({
   odysseyTokens,
-  shadowRootElement,
+  shadowDomElement,
 }: {
   odysseyTokens: DesignTokens;
-  shadowRootElement?: HTMLDivElement;
+  shadowDomElement?: HTMLDivElement;
 }): ThemeOptions["components"] => {
   return {
     MuiAccordion: {
@@ -1859,7 +1859,7 @@ export const components = ({
     },
     MuiModal: {
       defaultProps: {
-        container: shadowRootElement,
+        container: shadowDomElement,
       },
     },
     MuiNativeSelect: {
@@ -1899,7 +1899,7 @@ export const components = ({
     },
     MuiPopover: {
       defaultProps: {
-        container: shadowRootElement,
+        container: shadowDomElement,
       },
       styleOverrides: {
         paper: {
@@ -1912,7 +1912,7 @@ export const components = ({
     },
     MuiPopper: {
       defaultProps: {
-        container: shadowRootElement,
+        container: shadowDomElement,
       },
     },
     MuiRadio: {

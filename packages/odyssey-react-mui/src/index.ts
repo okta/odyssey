@@ -66,7 +66,7 @@ export * from "./Callout";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
-export * from "./createShadowDom";
+export * from "./createShadowRootElement";
 export * from "./createUniqueId";
 export * from "./Dialog";
 export * from "./Fieldset";
