@@ -303,7 +303,7 @@ export const components = ({
     },
     MuiAlertTitle: {
       styleOverrides: {
-        root: {
+        root: ({ ownerState }) => ({
           marginBlockStart: 0,
           marginBlockEnd: odysseyTokens.Spacing2,
           lineHeight: odysseyTokens.TypographyLineHeightHeading6,
@@ -311,10 +311,26 @@ export const components = ({
           fontWeight: odysseyTokens.TypographyWeightHeading,
           fontFamily: odysseyTokens.TypographyFamilyHeading,
 
+          ...(ownerState.severity === "info" && {
+            color: odysseyTokens.PalettePrimaryDark,
+          }),
+
+          ...(ownerState.severity === "error" && {
+            color: odysseyTokens.PaletteDangerDarker,
+          }),
+
+          ...(ownerState.severity === "success" && {
+            color: odysseyTokens.PaletteSuccessDarker,
+          }),
+
+          ...(ownerState.severity === "warning" && {
+            color: odysseyTokens.PaletteWarningDarker,
+          }),
+
           [`&:last-child`]: {
             marginBlockEnd: 0,
           },
-        },
+        }),
       },
     },
     MuiAutocomplete: {
