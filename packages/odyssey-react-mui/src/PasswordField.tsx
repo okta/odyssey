@@ -22,6 +22,7 @@ import {
 
 import { ShowIcon, HideIcon } from "./icons.generated";
 import { Field } from "./Field";
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 import { useTranslation } from "react-i18next";
 
@@ -33,10 +34,6 @@ export type PasswordFieldProps = {
    */
   autoCompleteType?: "current-password" | "new-password";
   /**
-   * If `error` is not undefined, the `input` will indicate an error.
-   */
-  errorMessage?: string;
-  /**
    * If `true`, the component will receive focus automatically.
    */
   hasInitialFocus?: boolean;
@@ -45,33 +42,9 @@ export type PasswordFieldProps = {
    */
   hasShowPassword?: boolean;
   /**
-   * The helper text content.
-   */
-  hint?: string;
-  /**
-   * The id of the `input` element.
-   */
-  id?: string;
-  /**
-   * If `true`, the component is disabled.
-   */
-  isDisabled?: boolean;
-  /**
-   * If `true`, the `input` element is not required.
-   */
-  isOptional?: boolean;
-  /**
-   * It prevents the user from changing the value of the field
-   */
-  isReadOnly?: boolean;
-  /**
    * The label for the `input` element.
    */
   label: string;
-  /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
   /**
    * Callback fired when the `input` element loses focus.
    */
@@ -92,7 +65,8 @@ export type PasswordFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-} & SeleniumProps;
+} & FieldComponentProps &
+  SeleniumProps;
 
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (

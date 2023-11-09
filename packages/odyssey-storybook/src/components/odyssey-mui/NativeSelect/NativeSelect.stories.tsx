@@ -12,6 +12,8 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { NativeSelect, NativeSelectProps } from "@okta/odyssey-react-mui";
+
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<NativeSelectProps> = {
@@ -39,45 +41,10 @@ const storybookMeta: Meta<NativeSelectProps> = {
         },
       },
     },
-    errorMessage: {
-      control: "text",
-      description: "The error message for the native select component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    hint: {
-      control: "text",
-      description: "The hint text for the native select component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description: "The id attribute of the native select component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the native select component is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isMultiSelect: {
       control: "boolean",
       description:
@@ -91,18 +58,7 @@ const storybookMeta: Meta<NativeSelectProps> = {
         },
       },
     },
-    isOptional: {
-      control: "boolean",
-      description: "If `true`, the native select component is optional",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
+    isOptional: fieldComponentPropsMetaData.isOptional,
     label: {
       control: "text",
       description: "The label text for the native select component",

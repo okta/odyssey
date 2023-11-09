@@ -70,6 +70,7 @@ export * from "./createShadowRootElement";
 export * from "./createUniqueId";
 export * from "./Dialog";
 export * from "./Fieldset";
+export * from "./FieldComponentProps";
 export * from "./Form";
 export * from "./Link";
 export * from "./MenuButton";

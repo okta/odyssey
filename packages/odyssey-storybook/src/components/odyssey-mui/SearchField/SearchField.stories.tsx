@@ -13,6 +13,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { SearchField, SearchFieldProps } from "@okta/odyssey-react-mui";
 
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<SearchFieldProps> = {
@@ -38,27 +39,8 @@ const storybookMeta: Meta<SearchFieldProps> = {
         },
       },
     },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the component is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description: "The id of the `input` element",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
+    id: fieldComponentPropsMetaData.id,
     label: {
       control: "text",
       description:
@@ -73,16 +55,7 @@ const storybookMeta: Meta<SearchFieldProps> = {
         name: "string",
       },
     },
-    name: {
-      control: "text",
-      description:
-        "The name of the `input` element. Defaults to the `id` if not set.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    name: fieldComponentPropsMetaData.name,
     onBlur: {
       control: "function",
       description: "Callback fired when the `input` element loses focus",
