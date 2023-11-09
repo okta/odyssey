@@ -69,13 +69,13 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
 
 export default storybookMeta;
 
-export const DatePickerStandard: StoryObj<DatePickerProps<unknown, unknown>> = {
+export const DatePickerStandard: StoryObj<DatePickerProps<string, string>> = {
   render: function C(props) {
-    const [value, setValue] = useState<unknown>("09/05/1977");
-    const datePickerProps = useMemo(
+    const [value, setValue] = useState("09/05/1977");
+    const datePickerProps = useMemo<DatePickerProps<string, string>>(
       () => ({
         ...props,
-        onChange: (newValue: unknown) => setValue(newValue),
+        onChange: (newValue) => setValue(newValue ?? ""),
         value,
       }),
       [props, value]
