@@ -39,8 +39,8 @@ export type RadioProps = {
    * Callback fired when the state is changed. Provides event and checked value.
    */
   onChange?: MuiRadioProps["onChange"];
-} & Pick<FieldComponentProps, "isDisabled" | "name"> 
-& SeleniumProps;
+} & Pick<FieldComponentProps, "isDisabled" | "name"> &
+  SeleniumProps;
 
 const Radio = ({
   isChecked,

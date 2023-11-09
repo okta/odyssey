@@ -18,6 +18,7 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
+import { useCallback, useState } from "react";
 
 const storybookMeta: Meta<typeof RadioGroup> = {
   title: "MUI Components/Forms/RadioGroup",
@@ -163,6 +164,17 @@ export const ControlledRadioGroup: StoryObj<RadioGroupProps> = {
   args: {
     value: "Ludicrous Speed",
   },
+  render: function C(props) {
+    const [value, setValue] = useState("Ludicrous Speed");
+    const onChange = useCallback((_, value) => setValue(value), []);
+    return (
+      <RadioGroup {...{ ...props, value, onChange }}>
+        <Radio label="Light Speed" value="Light Speed" />
+        <Radio label="Warp Speed" value="Warp Speed" />
+        <Radio label="Ludicrous Speed" value="Ludicrous Speed" />
+      </RadioGroup>
+    );
+  },
   play: async ({ canvasElement, step }) => {
     await step("select uncontrolled radio button", async () => {
       const canvas = within(canvasElement);
@@ -171,7 +183,7 @@ export const ControlledRadioGroup: StoryObj<RadioGroupProps> = {
       if (radiogroup && radio) {
         userEvent.click(radio);
       }
-      expect(radio).not.toBeChecked();
+      expect(radio).toBeChecked();
       axeRun("select controlled radio button");
     });
   },
