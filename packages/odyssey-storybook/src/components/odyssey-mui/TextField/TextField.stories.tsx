@@ -18,6 +18,7 @@ import {
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
 
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
 const storybookMeta: Meta<TextFieldProps> = {
@@ -43,16 +44,7 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
-    errorMessage: {
-      control: "text",
-      description:
-        "If `error` is not undefined, the `input` will indicate an error",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
     hasInitialFocus: {
       control: "boolean",
       description: "If `true`, the component will receive focus automatically",
@@ -62,36 +54,9 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
-    hint: {
-      control: "text",
-      description: "The helper text content",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description: "The id of the `input` element",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the component is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isMultiline: {
       control: "boolean",
       description: "If `true`, a TextareaAutosize element is rendered",
@@ -104,27 +69,8 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
-    isOptional: {
-      control: "boolean",
-      description: "If `true`, the `input` element is not required",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
-    isReadOnly: {
-      control: "boolean",
-      description: "It prevents the user from changing the value of the field",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isOptional: fieldComponentPropsMetaData.isOptional,
+    isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {
       control: "text",
       description: "The label for the `input` element",
@@ -138,16 +84,7 @@ const storybookMeta: Meta<TextFieldProps> = {
         name: "string",
       },
     },
-    name: {
-      control: "text",
-      description:
-        "The name of the `input` element. Defaults to the `id` if not set.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    name: fieldComponentPropsMetaData.name,
     onBlur: {
       control: null,
       description: "Callback fired when the `input` element loses focus",
