@@ -22,7 +22,7 @@ import { FieldComponentProps } from "./FieldComponentProps";
 import { Typography } from "./Typography";
 import type { SeleniumProps } from "./SeleniumProps";
 import { useControlledState } from "./useControlledState";
-import { FormCheckedProps } from "./FormCheckedProps";
+import { CheckedFieldProps } from "./FormCheckedProps";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
@@ -64,7 +64,7 @@ export type CheckboxProps = {
    */
   value?: string;
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
-  FormCheckedProps<MuiCheckboxProps> &
+  CheckedFieldProps<MuiCheckboxProps> &
   SeleniumProps;
 
 const Checkbox = ({

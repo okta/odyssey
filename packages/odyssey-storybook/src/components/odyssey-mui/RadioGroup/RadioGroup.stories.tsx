@@ -154,7 +154,7 @@ export const UncontrolledRadioGroup: StoryObj<RadioGroupProps> = {
         userEvent.click(radio);
       }
       expect(radio).toBeChecked();
-      axeRun("select uncontrolled radio button");
+      axeRun("select controlled radio button");
     });
   },
 };
@@ -184,7 +184,7 @@ export const ControlledRadioGroup: StoryObj<RadioGroupProps> = {
         userEvent.click(radio);
       }
       expect(radio).toBeChecked();
-      axeRun("select controlled radio button");
+      axeRun("select uncontrolled radio button");
     });
   },
 };

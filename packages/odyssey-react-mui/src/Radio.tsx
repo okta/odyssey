@@ -10,10 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio as MuiRadio, RadioProps as MuiRadioProps } from "@mui/material";
+import {
+  FormControlLabel,
+  Radio as MuiRadio,
+  RadioProps as MuiRadioProps,
+} from "@mui/material";
 import { memo, useCallback } from "react";
-
-import { FormControlLabel } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";

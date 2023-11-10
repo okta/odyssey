@@ -242,7 +242,10 @@ export const Controlled: StoryObj<typeof Checkbox> = {
     const onChange = useCallback((_, checked) => setIsChecked(checked), []);
     return (
       <Checkbox
-        {...{ ...args, isChecked, onChange, isDefaultChecked: undefined }}
+        {...args}
+        isChecked={isChecked}
+        isDefaultChecked={undefined}
+        onChange={onChange}
       />
     );
   },
