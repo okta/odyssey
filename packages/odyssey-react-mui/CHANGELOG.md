@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.4](https://github.com/okta/odyssey/compare/v1.6.3...v1.6.4) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.6.3](https://github.com/okta/odyssey/compare/v1.6.2...v1.6.3) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.6.2](https://github.com/okta/odyssey/compare/v1.6.1...v1.6.2) (2023-11-09)
+
+**Note:** Version bump only for package @okta/odyssey-react-mui
+
+## [1.6.1](https://github.com/okta/odyssey/compare/v1.6.0...v1.6.1) (2023-11-08)
+
+### Bug Fixes
+
+- issue with Odyssey rendering <style> tags in a <style> tag in Shadow DOM ([#2037](https://github.com/okta/odyssey/issues/2037)) ([9279c0b](https://github.com/okta/odyssey/commit/9279c0bf7a6139b1497e09a7ea58a08c3411727c))
+- **odyssey-react-mui:** add padding to Tabs label ([78a5e80](https://github.com/okta/odyssey/commit/78a5e806bbfb97aac6babb61ecb2d94918c406e0))
+- **odyssey-react-mui:** remove color logic from Tabs label ([b05c0cc](https://github.com/okta/odyssey/commit/b05c0ccaefc62bd0545d2ebaa676cb7df76b700f))
+- **odyssey-react-mui:** update default Tabs label color ([f79272e](https://github.com/okta/odyssey/commit/f79272ea5e7abc8ec878a6b8d8a7789339a932ea))
+
+## [1.6.0](https://github.com/okta/odyssey/compare/v1.5.0...v1.6.0) (2023-11-02)
+
+### Features
+
+- **odyssey-react-mui:** wrapped typography component with context ([#2013](https://github.com/okta/odyssey/issues/2013)) ([4ae50de](https://github.com/okta/odyssey/commit/4ae50debc051299774847804509aa1dae0dad831))
+
+### Bug Fixes
+
+- revert [#2013](https://github.com/okta/odyssey/issues/2013) ([#2029](https://github.com/okta/odyssey/issues/2029)) ([9f75603](https://github.com/okta/odyssey/commit/9f7560336221ea00014b21627488932ade2d6e16))
+
 ## [1.5.0](https://github.com/okta/odyssey/compare/v1.4.0...v1.5.0) (2023-10-27)
 
 ### Features
