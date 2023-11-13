@@ -23,7 +23,6 @@ import {
   MRT_RowSelectionState,
   MRT_Row,
   MRT_ColumnDef,
-  MRT_ColumnFiltersState,
 } from "material-react-table";
 import {
   Fragment,
@@ -112,7 +111,7 @@ export type DataTableProps = {
     page?: number;
     resultsPerPage?: number;
     search?: string;
-    filters?: MRT_ColumnFiltersState;
+    filters?: DataFilter[];
     sort?: MRT_SortingState;
   }) => MRT_TableOptions<MRT_RowData>["data"];
   reorderDataFn: ({

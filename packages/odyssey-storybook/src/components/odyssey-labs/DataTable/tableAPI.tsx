@@ -47,8 +47,8 @@ export const columns: DataColumn[] = [
   {
     accessorKey: "age",
     header: "Age",
-    filterVariant: "number",
     size: 80,
+    filterVariant: "range",
   },
   {
     accessorKey: "risk",
@@ -65,18 +65,18 @@ export const columns: DataColumn[] = [
         />
       );
     },
-    filterVariant: "checkbox",
+    filterVariant: "multi-select",
     filterSelectOptions: [
       {
-        text: "Low",
+        label: "Low",
         value: "low",
       },
       {
-        text: "Medium",
+        label: "Medium",
         value: "medium",
       },
       {
-        text: "High",
+        label: "High",
         value: "high",
       },
     ],

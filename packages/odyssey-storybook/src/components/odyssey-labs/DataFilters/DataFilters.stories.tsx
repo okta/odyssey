@@ -20,9 +20,6 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { BugIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 import { Box, Button } from "@okta/odyssey-react-mui";
 
-// additionalActions ?: ReactNode;
-// filters: Array<DataFilter>;
-
 const storybookMeta: Meta<DataFiltersProps> = {
   title: "Labs Components/DataFilters",
   component: DataFilters,
@@ -106,12 +103,12 @@ const demoFilters: Array<DataFilter> = [
   {
     id: "number-filter",
     label: "Number filter",
-    variant: "number",
+    variant: "range",
   },
   {
     id: "checkbox-filter",
     label: "Checkbox filter",
-    variant: "checkbox",
+    variant: "multi-select",
     options: [
       {
         label: "Option 1",
@@ -130,7 +127,7 @@ const demoFilters: Array<DataFilter> = [
   {
     id: "radio-filter",
     label: "Radio filter",
-    variant: "radio",
+    variant: "select",
     options: [
       {
         label: "Option 1",

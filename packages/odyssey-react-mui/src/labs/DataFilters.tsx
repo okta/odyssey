@@ -40,10 +40,15 @@ import { RadioGroup } from "../RadioGroup";
 import { Radio } from "../Radio";
 
 export const dataFilterVariantValues = [
-  "text",
-  "number",
+  "autocomplete",
   "checkbox",
-  "radio",
+  "date",
+  "date-range",
+  "multi-select",
+  "range",
+  "range-slider",
+  "select",
+  "text",
 ] as const;
 
 export type DataFilter = {
@@ -293,7 +298,7 @@ const DataFilters = ({
                   >
                     {/* Text or Number */}
                     {(popoverState?.filter?.variant === "text" ||
-                      popoverState?.filter?.variant === "number") && (
+                      popoverState?.filter?.variant === "range") && (
                       <Box
                         sx={{
                           display: "flex",
@@ -305,7 +310,11 @@ const DataFilters = ({
                           <TextField
                             hasInitialFocus
                             label={popoverState.filter.label}
-                            type={popoverState.filter.variant}
+                            type={
+                              popoverState.filter.variant === "range"
+                                ? "number"
+                                : "text"
+                            }
                             value={
                               (inputValues[popoverState.filter.id] as string) ??
                               ""
@@ -344,7 +353,7 @@ const DataFilters = ({
                     )}
 
                     {/* Checkbox */}
-                    {popoverState?.filter?.variant === "checkbox" &&
+                    {popoverState?.filter?.variant === "multi-select" &&
                       popoverState?.filter?.options && (
                         <CheckboxGroup
                           label={popoverState.filter.label}
@@ -377,7 +386,7 @@ const DataFilters = ({
                       )}
 
                     {/* Radio */}
-                    {popoverState?.filter?.variant === "radio" &&
+                    {popoverState?.filter?.variant === "select" &&
                       popoverState?.filter?.options && (
                         <RadioGroup
                           label={popoverState.filter.label}
