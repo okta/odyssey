@@ -164,13 +164,13 @@ const Button = ({
 
   return (
     <>
-      {tooltipText && (
+      {tooltipText && !isDisabled && (
         <Tooltip ariaType="description" placement="top" text={tooltipText}>
           <MuiPropsContext.Consumer>{renderButton}</MuiPropsContext.Consumer>
         </Tooltip>
       )}
 
-      {!tooltipText && renderButton(muiProps)}
+      {!(tooltipText && !isDisabled) && renderButton(muiProps)}
     </>
   );
 };

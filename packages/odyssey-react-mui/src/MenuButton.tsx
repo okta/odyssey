@@ -17,9 +17,24 @@ import {
   MenuItem,
   useUniqueId,
 } from "./";
-import { Divider, ListSubheader, Menu } from "@mui/material";
+import {
+  ButtonProps,
+  Divider,
+  ListSubheader,
+  Menu,
+  MenuProps,
+} from "@mui/material";
 import { ChevronDownIcon, MoreIcon } from "./icons.generated";
-import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
+import {
+  memo,
+  type ReactElement,
+  useCallback,
+  useMemo,
+  useState,
+  ReactFragment,
+  MutableRefObject,
+  useEffect,
+} from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "./NullElement";
@@ -49,10 +64,12 @@ export type MenuButtonProps = {
   /**
    * The <MenuItem> components within the Menu.
    */
-  children: Array<
-    | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
-    | NullElement
-  >;
+  children:
+    | ReactFragment
+    | Array<
+        | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
+        | NullElement
+      >;
   /**
    * The end Icon on the trigggering Button
    */
@@ -66,9 +83,24 @@ export type MenuButtonProps = {
    */
   isOverflow?: boolean;
   /**
+   * The horizontal alignment of the menu.
+   */
+  menuAlignment?: "left" | "right";
+  /**
+   * Optional function to fire on button click
+   */
+  onClick?: ButtonProps["onClick"];
+  /**
+   * Optional function to fire on memu close
+   */
+  menuPaperRef?: MutableRefObject<HTMLDivElement>;
+  onClose?: MenuProps["onClose"];
+  preventCloseOnChildClick?: boolean;
+  /**
    * The size of the button
    */
   size?: (typeof buttonSizeValues)[number];
+  forceMenuState?: boolean;
   /**
    * The tooltip text for the Button if it's icon-only
    */
@@ -100,8 +132,14 @@ const MenuButton = ({
   buttonVariant = "secondary",
   children,
   endIcon: endIconProp,
+  forceMenuState,
   id: idOverride,
   isOverflow,
+  menuPaperRef,
+  menuAlignment = "left",
+  onClick,
+  onClose,
+  preventCloseOnChildClick,
   size,
   testId,
   tooltipText,
@@ -110,13 +148,25 @@ const MenuButton = ({
 
   const isOpen = Boolean(anchorEl);
 
-  const closeMenu = useCallback<MenuContextType["closeMenu"]>(() => {
-    setAnchorEl(null);
-  }, []);
+  const closeMenu = useCallback(
+    (event?, reason?) => {
+      if (preventCloseOnChildClick && reason !== "backdropClick") {
+        return;
+      }
 
-  const openMenu = useCallback<MenuContextType["openMenu"]>((event) => {
-    setAnchorEl(event.currentTarget);
-  }, []);
+      onClose?.(event, reason);
+      setAnchorEl(null);
+    },
+    [preventCloseOnChildClick, onClose]
+  );
+
+  const openMenu = useCallback(
+    (event) => {
+      onClick?.(event);
+      setAnchorEl(event.currentTarget);
+    },
+    [onClick]
+  );
 
   const uniqueId = useUniqueId(idOverride);
 
@@ -125,12 +175,19 @@ const MenuButton = ({
     [uniqueId]
   );
 
+  useEffect(() => {
+    if (forceMenuState === false) {
+      closeMenu({}, "backdropClick");
+    }
+  }, [forceMenuState, closeMenu]);
+
   const providerValue = useMemo<MenuContextType>(
     () => ({
       closeMenu,
       openMenu,
+      preventCloseOnChildClick,
     }),
-    [closeMenu, openMenu]
+    [closeMenu, openMenu, preventCloseOnChildClick]
   );
 
   const endIcon = endIconProp ? (
@@ -162,10 +219,15 @@ const MenuButton = ({
 
       <Menu
         anchorEl={anchorEl}
+        anchorOrigin={{ horizontal: menuAlignment, vertical: "bottom" }}
+        transformOrigin={{ horizontal: menuAlignment, vertical: "top" }}
         id={`${uniqueId}-menu`}
         MenuListProps={menuListProps}
         onClose={closeMenu}
         open={isOpen}
+        PaperProps={{
+          ref: menuPaperRef,
+        }}
       >
         <MenuContext.Provider value={providerValue}>
           {children}
