@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.6](https://github.com/okta/odyssey/compare/v1.6.5...v1.6.6) (2023-11-13)
+
+**Note:** Version bump only for package @okta/eslint-plugin-odyssey
+
 ## [1.6.5](https://github.com/okta/odyssey/compare/v1.6.4...v1.6.5) (2023-11-13)
 
 **Note:** Version bump only for package @okta/eslint-plugin-odyssey
