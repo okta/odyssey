@@ -15,6 +15,7 @@ import { memo } from "react";
 
 import { FormControlLabel } from "@mui/material";
 
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
 export type RadioProps = {
@@ -22,10 +23,6 @@ export type RadioProps = {
    * If `true`, the Radio is selected
    */
   isChecked?: boolean;
-  /**
-   * If `true`, the Radio is disabled
-   */
-  isDisabled?: boolean;
   /**
    * If `true`, the Radio has an invalid value
    */
@@ -35,14 +32,11 @@ export type RadioProps = {
    */
   label: string;
   /**
-   * The name attribute of the Radio
-   */
-  name?: string;
-  /**
    * The value attribute of the Radio
    */
   value: string;
-} & SeleniumProps;
+} & Pick<FieldComponentProps, "isDisabled" | "name"> &
+  SeleniumProps;
 
 const Radio = ({
   isChecked,

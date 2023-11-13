@@ -50,10 +50,10 @@ import { CSSProperties } from "react";
 
 export const components = ({
   odysseyTokens,
-  shadowRootElement,
+  shadowDomElement,
 }: {
   odysseyTokens: DesignTokens;
-  shadowRootElement?: HTMLDivElement;
+  shadowDomElement?: HTMLDivElement;
 }): ThemeOptions["components"] => {
   return {
     MuiAccordion: {
@@ -300,7 +300,7 @@ export const components = ({
     },
     MuiAlertTitle: {
       styleOverrides: {
-        root: {
+        root: ({ ownerState }) => ({
           marginBlockStart: 0,
           marginBlockEnd: odysseyTokens.Spacing2,
           lineHeight: odysseyTokens.TypographyLineHeightHeading6,
@@ -308,10 +308,26 @@ export const components = ({
           fontWeight: odysseyTokens.TypographyWeightHeading,
           fontFamily: odysseyTokens.TypographyFamilyHeading,
 
+          ...(ownerState.severity === "info" && {
+            color: odysseyTokens.PalettePrimaryDark,
+          }),
+
+          ...(ownerState.severity === "error" && {
+            color: odysseyTokens.PaletteDangerDarker,
+          }),
+
+          ...(ownerState.severity === "success" && {
+            color: odysseyTokens.PaletteSuccessDarker,
+          }),
+
+          ...(ownerState.severity === "warning" && {
+            color: odysseyTokens.PaletteWarningDarker,
+          }),
+
           [`&:last-child`]: {
             marginBlockEnd: 0,
           },
-        },
+        }),
       },
     },
     MuiAutocomplete: {
@@ -785,7 +801,7 @@ export const components = ({
           [`&.${chipClasses.disabled}`]: {
             opacity: 1,
             pointerEvents: "none",
-            backgroundColor: odysseyTokens.HueNeutral50,
+            backgroundColor: odysseyTokens.HueNeutral200,
             color: odysseyTokens.TypographyColorDisabled,
           },
 
@@ -905,6 +921,11 @@ export const components = ({
 
         label: {
           padding: 0,
+
+          [`.${inputBaseClasses.root}.${inputBaseClasses.disabled} &`]: {
+            color: odysseyTokens.TypographyColorDisabled,
+            WebkitTextFillColor: odysseyTokens.TypographyColorDisabled,
+          } satisfies CSSProperties,
         },
 
         deleteIcon: {
@@ -1672,7 +1693,7 @@ export const components = ({
       styleOverrides: {
         root: {
           color: odysseyTokens.TypographyColorAction,
-          textDecoration: "underline",
+          textDecoration: "none",
           cursor: "pointer",
 
           "&:visited": {
@@ -1700,11 +1721,11 @@ export const components = ({
           },
 
           ".Link-indicator": {
-            marginInlineStart: odysseyTokens.Spacing2,
+            marginInlineStart: odysseyTokens.Spacing1,
           },
 
           ".Link-icon": {
-            marginInlineEnd: odysseyTokens.Spacing2,
+            marginInlineEnd: odysseyTokens.Spacing1,
           },
           svg: {
             fontSize: "1em",
@@ -1858,7 +1879,7 @@ export const components = ({
     },
     MuiModal: {
       defaultProps: {
-        container: shadowRootElement,
+        container: shadowDomElement,
       },
     },
     MuiNativeSelect: {
@@ -1898,7 +1919,7 @@ export const components = ({
     },
     MuiPopover: {
       defaultProps: {
-        container: shadowRootElement,
+        container: shadowDomElement,
       },
       styleOverrides: {
         paper: {
@@ -1911,7 +1932,7 @@ export const components = ({
     },
     MuiPopper: {
       defaultProps: {
-        container: shadowRootElement,
+        container: shadowDomElement,
       },
     },
     MuiRadio: {
@@ -2079,19 +2100,17 @@ export const components = ({
           maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} / 2)`,
           minWidth: "unset",
           minHeight: "unset",
-          padding: `${odysseyTokens.Spacing4} 0`,
+          padding: `${odysseyTokens.Spacing4} ${odysseyTokens.Spacing1}`,
+          fontSize: odysseyTokens.TypographySizeHeading6,
           fontFamily: odysseyTokens.TypographyFamilyHeading,
           lineHeight: odysseyTokens.TypographyLineHeightUi,
           overflow: "visible",
-
-          ...(ownerState.textColor === "inherit" && {
-            color: "inherit",
-            opacity: 1,
-          }),
+          color: odysseyTokens.HueNeutral600,
+          opacity: 1,
 
           ...(ownerState.selected == true && {
             color: odysseyTokens.TypographyColorAction,
-            fontWeight: odysseyTokens.TypographyWeightBodyBold,
+            fontWeight: odysseyTokens.TypographyWeightHeading,
           }),
 
           ...(ownerState.disabled && {

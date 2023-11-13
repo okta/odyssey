@@ -23,6 +23,7 @@ import {
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
+import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 
 export type SearchFieldProps = {
@@ -50,10 +51,6 @@ export type SearchFieldProps = {
    */
   label: string;
   /**
-   * The name of the `input` element. Defaults to the `id` if not set.
-   */
-  name?: string;
-  /**
    * Callback fired when the `input` element loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -77,7 +74,8 @@ export type SearchFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-} & SeleniumProps;
+} & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
+  SeleniumProps;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (

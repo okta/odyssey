@@ -15,8 +15,6 @@ export { deepmerge, visuallyHidden } from "@mui/utils";
 export {
   createTheme,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
-  CssBaseline,
-  /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   DialogContentText,
   /** @deprecated Will be removed in a future Odyssey version in lieu of a wrapped version. */
   Divider,
@@ -66,9 +64,12 @@ export * from "./Callout";
 export * from "./Checkbox";
 export * from "./CheckboxGroup";
 export * from "./CircularProgress";
+export * from "./CssBaseline";
+export * from "./createShadowRootElement";
 export * from "./createUniqueId";
 export * from "./Dialog";
 export * from "./Fieldset";
+export * from "./FieldComponentProps";
 export * from "./Form";
 export * from "./Link";
 export * from "./MenuButton";

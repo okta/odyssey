@@ -15,6 +15,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
 
 const storybookMeta: Meta<RadioProps> = {
@@ -30,15 +32,7 @@ const storybookMeta: Meta<RadioProps> = {
         },
       },
     },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the radio button is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-      },
-    },
+    isDisabled: fieldComponentPropsMetaData.isDisabled,
     isInvalid: {
       control: "boolean",
       description: "If `true`, the radio button has an invalid value",
@@ -61,15 +55,7 @@ const storybookMeta: Meta<RadioProps> = {
         name: "string",
       },
     },
-    name: {
-      control: "text",
-      description: "The name attribute of the radio button",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    name: fieldComponentPropsMetaData.name,
     value: {
       control: "text",
       description: "The value attribute of the radio button",

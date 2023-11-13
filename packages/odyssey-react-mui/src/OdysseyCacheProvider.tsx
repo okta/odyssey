@@ -28,18 +28,28 @@ export type OdysseyCacheProviderProps = {
    * Emotion renders into this HTML element.
    * When enabling this prop, Emotion renders at the top of this component rather than the bottom like it does in the HTML `<head>`.
    */
-  emotionRootElement?: HTMLStyleElement;
   nonce?: string;
+  shadowDomElement?: HTMLDivElement;
   stylisPlugins?: StylisPlugin[];
 };
 
 const OdysseyCacheProvider = ({
   children,
-  emotionRootElement,
   nonce,
+  shadowDomElement,
   stylisPlugins,
 }: OdysseyCacheProviderProps) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
+
+  const emotionRootElement = useMemo(() => {
+    const emotionRootElement = document.createElement("div");
+
+    emotionRootElement.setAttribute("data-emotion-root", "data-emotion-root");
+
+    shadowDomElement?.prepend?.(emotionRootElement);
+
+    return emotionRootElement;
+  }, [shadowDomElement]);
 
   const emotionCache = useMemo(
     () =>
