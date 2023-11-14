@@ -373,5 +373,6 @@ export const TokenTables = (): ReactNode =>
       getRowId={({ id }) => id}
       initialState={initialState}
       key={name}
+      hasSorting={false}
     />
   ));
