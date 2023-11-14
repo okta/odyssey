@@ -23,43 +23,57 @@ import {
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
-const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
+const StorybookDatePicker = (props: DatePickerProps<Date>) => {
+  const [value, setValue] = useState<Date | null | undefined>();
+
+  const datePickerProps = useMemo(
+    () => ({
+      ...props,
+      onChange: (newValue: Date | null) => {
+        // console.log({ newValue });
+        // setValue(newValue);
+      },
+      value,
+    }),
+    [props, value]
+  );
+
+  return (
+    <OdysseyThemeProvider themeOverride={datePickerTheme}>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <DatePicker {...datePickerProps} />
+      </LocalizationProvider>
+    </OdysseyThemeProvider>
+  );
+};
+
+const storybookMeta: Meta<DatePickerProps<Date>> = {
   title: "Labs Components/DatePicker",
-  component: DatePicker,
+  component: StorybookDatePicker,
   argTypes: {
     label: {
       control: "text",
-      table: {
-        defaultValue: {
-          summary: "DatePicker label",
-        },
-      },
-      type: {
-        required: true,
-        name: "string",
-      },
+      defaultValue: "DatePicker label",
     },
     onChange: {
       control: "function",
     },
-    isOptional: {
-      control: "boolean",
+    value: {
+      description:
+        "A date object passed into the component to pre-fill the input",
       table: {
-        defaultValue: {
-          summary: false,
+        type: {
+          summary: "string",
         },
       },
     },
-    value: {
+    hint: {
       control: "text",
+      description: "The hint text for the autocomplete input",
       table: {
-        defaultValue: {
-          summary: null,
+        type: {
+          summary: "string",
         },
-      },
-      type: {
-        required: true,
-        name: "string",
       },
     },
   },
@@ -69,34 +83,9 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
 
 export default storybookMeta;
 
-export const DatePickerStandard: StoryObj<DatePickerProps<string, string>> = {
-  decorators: [
-    (Story, context) => {
-      const { canvasElement } = context;
-      const parentElement = canvasElement.parentElement ?? undefined;
-      return (
-        <OdysseyProvider
-          themeOverride={datePickerTheme}
-          shadowDomElement={parentElement}
-        >
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Story />
-          </LocalizationProvider>
-        </OdysseyProvider>
-      );
-    },
-  ],
-  render: function C(props) {
-    const [value, setValue] = useState("09/05/1977");
-    const datePickerProps = useMemo<DatePickerProps<string, string>>(
-      () => ({
-        ...props,
-        onChange: (newValue) => setValue(newValue ?? ""),
-        value,
-      }),
-      [props, value],
-    );
-
-    return <DatePicker {...datePickerProps} />;
+export const DatePickerStandard: StoryObj<DatePickerProps<Date>> = {
+  args: {
+    label: "Choose a date",
+    hint: "Use MM/DD/YYYY format",
   },
 };
