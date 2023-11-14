@@ -18,6 +18,7 @@ import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { useCallback, useState } from "react";
 
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },
@@ -331,5 +332,80 @@ export const ReadOnly: StoryObj<AutocompleteType> = {
   args: {
     isReadOnly: true,
     value: { label: "Tycho Station" },
+  },
+};
+
+type IssueOption = {
+  id: string;
+  label: string;
+  externalValue: string;
+  description: string;
+};
+export const Issue: StoryObj<
+  typeof Autocomplete<IssueOption, boolean, boolean>
+> = {
+  args: {
+    options: [
+      {
+        id: "ent1rs1yjAIYGKjX48g6",
+        label: "SE4 value1",
+        externalValue: "externalValue SE4 value1",
+        description: "Description SE4 value1",
+      },
+      {
+        id: "ent1rs1ys3O7JDBxe8g6",
+        label: "SE4 value10",
+        externalValue: "externalValue SE4 value10",
+        description: "Description SE4 value10",
+      },
+      {
+        id: "ent1rs21aA4w60TJG8g6",
+        label: "SE4 value100",
+        externalValue: "externalValue SE4 value100",
+        description: "Description SE4 value100",
+      },
+      {
+        id: "ent1rs2qgOg42zhYV8g6",
+        label: "SE4 value1006",
+        externalValue: "externalValue SE4 value1006",
+        description: "Description SE4 value1006",
+      },
+    ],
+    value: [
+      {
+        id: "ent1rs21aA4w60TJG8g6",
+        label: "SE4 value100",
+        externalValue: "externalValue SE4 value100",
+        description: "Description SE4 value100",
+      },
+      {
+        id: "ent1rs1yjAIYGKjX48g6",
+        label: "SE4 value1",
+        externalValue: "externalValue SE4 value1",
+        description: "Description SE4 value1",
+      },
+    ],
+    hasMultipleChoices: true,
+    isReadOnly: false,
+    label: "label",
+    isOptionEqualToValue: (option, value) => option.id === value.id,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState([
+      {
+        id: "ent1rs21aA4w60TJG8g6",
+        label: "SE4 value100",
+        externalValue: "externalValue SE4 value100",
+        description: "Description SE4 value100",
+      },
+      {
+        id: "ent1rs1yjAIYGKjX48g6",
+        label: "SE4 value1",
+        externalValue: "externalValue SE4 value1",
+        description: "Description SE4 value1",
+      },
+    ]);
+    const onChange = useCallback((_, v) => setLocalValue(v), []);
+    return <Autocomplete {...props} value={localValue} onChange={onChange} />;
   },
 };
