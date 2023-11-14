@@ -14,9 +14,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { columns, data as incomingData, Person } from "./tableAPI";
 import { Box, Button, Callout, MenuItem } from "@okta/odyssey-react-mui";
 import {
+  DataFilter,
   DataTable,
   DataTableProps,
-  MRT_ColumnFiltersState,
   MRT_SortingState,
   densityValues,
   paginationTypeValues,
@@ -268,7 +268,7 @@ const processData = ({
   page?: number;
   resultsPerPage?: number;
   search?: string;
-  filters?: MRT_ColumnFiltersState;
+  filters?: DataFilter[];
   sort?: MRT_SortingState;
 }) => {
   let filteredData = [...initialData];
@@ -292,18 +292,18 @@ const processData = ({
         }
 
         // Specific filtering for 'age' column
-        if (id === "age") {
-          const { min, max } = value;
-          return row[id] >= min && row[id] <= max;
-        }
+        // if (id === "age") {
+        //   const { min, max }: { min: number, max: number } = value;
+        //   return row[id] >= min && row[id] <= max;
+        // }
 
         // Specific filtering for 'type' column
-        if (id === "type") {
-          return row[id] === value;
-        }
+        // if (id === "type") {
+        //   return row[id] === value;
+        // }
 
         // General filtering for other columns
-        return row[id]?.toString().includes(value.toString());
+        return row[id as keyof Person]?.toString().includes(value.toString());
       });
     });
   }
@@ -312,8 +312,8 @@ const processData = ({
   if (sort && sort.length > 0) {
     filteredData.sort((a, b) => {
       for (const { id, desc } of sort) {
-        const aValue = a[id];
-        const bValue = b[id];
+        const aValue = a[id as keyof Person];
+        const bValue = b[id as keyof Person];
 
         if (aValue < bValue) return desc ? 1 : -1;
         if (aValue > bValue) return desc ? -1 : 1;
@@ -357,7 +357,7 @@ export const Default: StoryObj<DataTableProps> = {
       page?: number;
       resultsPerPage?: number;
       search?: string;
-      filters?: MRT_ColumnFiltersState;
+      filters?: DataFilter[];
       sort?: MRT_SortingState;
     }) => {
       return processData({

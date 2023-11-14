@@ -62,6 +62,7 @@ export const densityValues = ["comfortable", "spacious", "compact"] as const;
 export type {
   MRT_ColumnFiltersState,
   MRT_SortingState,
+  MRT_ColumnDef as TableColumn,
 } from "material-react-table";
 
 export type DataColumn = {
@@ -114,7 +115,7 @@ export type DataTableProps = {
     filters?: DataFilter[];
     sort?: MRT_SortingState;
   }) => MRT_TableOptions<MRT_RowData>["data"];
-  reorderDataFn: ({
+  reorderDataFn?: ({
     rowId,
     newIndex,
   }: {
@@ -187,10 +188,11 @@ const DataTable = ({
         search: globalFilter,
         filters: filters,
       });
-
       setData(newData);
+      setShowSkeletons(false);
     } catch (error) {
       console.log(error);
+      setShowSkeletons(false);
     }
   };
 
@@ -238,7 +240,7 @@ const DataTable = ({
       return;
     }
 
-    reorderDataFn({ rowId: rowId, newIndex: newIndex });
+    reorderDataFn?.({ rowId: rowId, newIndex: newIndex });
     refreshData();
   };
 
@@ -248,7 +250,7 @@ const DataTable = ({
 
   useEffect(() => {
     refreshData();
-  }, [page, resultsPerPage, sorting, globalFilter, filters, refreshData]);
+  }, [page, resultsPerPage, sorting, globalFilter, filters]);
 
   useEffect(() => {
     onRowSelectionChange?.(rowSelection);
