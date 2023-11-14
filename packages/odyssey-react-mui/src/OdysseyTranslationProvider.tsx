@@ -50,6 +50,7 @@ export const OdysseyTranslationProvider = <SupportedLanguages extends string>({
   languageCode,
   translationOverrides,
 }: OdysseyTranslationProviderProps<SupportedLanguages>) => {
+
   useEffect(() => {
     // Defaults to the browser's language if available otherwise `en` will be used
     i18n.changeLanguage(languageCode || window.navigator.language);

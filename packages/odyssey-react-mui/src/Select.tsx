@@ -236,6 +236,7 @@ const Select = <
   const [internalSelectedValues, setInternalSelectedValues] = useState(
     controlledStateRef.current === CONTROLLED ? value : defaultValue,
   );
+  
   const localInputRef = useRef<HTMLSelectElement>(null);
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
