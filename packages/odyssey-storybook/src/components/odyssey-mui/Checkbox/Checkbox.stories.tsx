@@ -23,8 +23,9 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { axeRun } from "../../../axe-util";
 import type { PlaywrightProps } from "../storybookTypes";
+import { useCallback, useState } from "react";
 
-const storybookMeta: Meta<CheckboxProps> = {
+const storybookMeta: Meta<typeof Checkbox> = {
   title: "MUI Components/Forms/Checkbox",
   component: Checkbox,
   argTypes: {
@@ -47,15 +48,21 @@ const storybookMeta: Meta<CheckboxProps> = {
       },
     },
     id: fieldComponentPropsMetaData.id,
+    isChecked: {
+      control: "boolean",
+      description: "The checkbox checked state",
+      table: {
+        type: {
+          summary: "boolean",
+        },
+      },
+    },
     isDefaultChecked: {
       control: "boolean",
       description: "If `true`, the checkbox starts checked",
       table: {
         type: {
           summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
         },
       },
     },
@@ -142,7 +149,7 @@ const checkTheBox =
     });
   };
 
-export const Default: StoryObj<CheckboxProps> = {
+export const Default: StoryObj<typeof Checkbox> = {
   args: {
     label: "Enable warp drive recalibration",
   },
@@ -151,7 +158,7 @@ export const Default: StoryObj<CheckboxProps> = {
   },
 };
 
-export const Required: StoryObj<CheckboxProps> = {
+export const Required: StoryObj<typeof Checkbox> = {
   parameters: {
     docs: {
       description: {
@@ -169,14 +176,14 @@ export const Required: StoryObj<CheckboxProps> = {
   },
 };
 
-export const Checked: StoryObj<CheckboxProps> = {
+export const Checked: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     isDefaultChecked: true,
   },
 };
 
-export const Disabled: StoryObj<CheckboxProps> = {
+export const Disabled: StoryObj<typeof Checkbox> = {
   parameters: {
     docs: {
       description: {
@@ -191,7 +198,7 @@ export const Disabled: StoryObj<CheckboxProps> = {
   },
 };
 
-export const Indeterminate: StoryObj<CheckboxProps> = {
+export const Indeterminate: StoryObj<typeof Checkbox> = {
   parameters: {
     docs: {
       description: {
@@ -207,12 +214,39 @@ export const Indeterminate: StoryObj<CheckboxProps> = {
   },
 };
 
-export const Invalid: StoryObj<CheckboxProps> = {
+export const Invalid: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     validity: "invalid",
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Disabled");
+  },
+};
+
+export const Uncontrolled: StoryObj<typeof Checkbox> = {
+  args: {
+    label: "Pre-flight systems check complete",
+    isDefaultChecked: true,
+  },
+};
+
+export const Controlled: StoryObj<typeof Checkbox> = {
+  args: {
+    label: "Pre-flight systems check complete",
+    isChecked: true,
+    onChange: () => {},
+  },
+  render: function C(args) {
+    const [isChecked, setIsChecked] = useState(true);
+    const onChange = useCallback((_, checked) => setIsChecked(checked), []);
+    return (
+      <Checkbox
+        {...args}
+        isChecked={isChecked}
+        isDefaultChecked={undefined}
+        onChange={onChange}
+      />
+    );
   },
 };

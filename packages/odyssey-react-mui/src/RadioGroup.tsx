@@ -20,6 +20,7 @@ import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+import { useControlledState } from "./useControlledState";
 
 export type RadioGroupProps = {
   /**
@@ -57,10 +58,22 @@ const RadioGroup = ({
   isDisabled,
   label,
   name: nameOverride,
-  onChange,
+  onChange: onChangeProp,
   testId,
   value,
 }: RadioGroupProps) => {
+  const [localValue, setLocalValue] = useControlledState({
+    controlledValue: value,
+    uncontrolledValue: defaultValue,
+  });
+
+  const onChange = useCallback<NonNullable<MuiRadioGroupProps["onChange"]>>(
+    (event, value) => {
+      setLocalValue(value);
+      onChangeProp?.(event, value);
+    },
+    [onChangeProp, setLocalValue]
+  );
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiRadioGroup
@@ -72,12 +85,12 @@ const RadioGroup = ({
         id={id}
         name={nameOverride ?? id}
         onChange={onChange}
-        value={value}
+        value={localValue}
       >
         {children}
       </MuiRadioGroup>
     ),
-    [children, defaultValue, nameOverride, onChange, testId, value]
+    [children, defaultValue, nameOverride, onChange, testId, localValue]
   );
 
   return (

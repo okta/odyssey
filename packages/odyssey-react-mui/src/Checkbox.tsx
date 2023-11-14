@@ -11,7 +11,7 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useMemo } from "react";
 import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
@@ -21,6 +21,8 @@ import {
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Typography } from "./Typography";
 import type { SeleniumProps } from "./SeleniumProps";
+import { useControlledState } from "./useControlledState";
+import { CheckedFieldProps } from "./FormCheckedProps";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
@@ -34,9 +36,13 @@ export type CheckboxProps = {
    */
   ariaLabelledBy?: string;
   /**
-   * Determines whether the Checkbox is checked
+   * The id of the `input` element.
    */
-  isDefaultChecked?: boolean;
+  id?: string;
+  /**
+   * Determines whether the Checkbox is disabled
+   */
+  isDisabled?: boolean;
   /**
    * Determines whether the Checkbox is in an indeterminate state
    */
@@ -50,10 +56,6 @@ export type CheckboxProps = {
    */
   label?: string;
   /**
-   * The change event handler for the Checkbox
-   */
-  onChange?: MuiCheckboxProps["onChange"];
-  /**
    * The checkbox validity, if different from its enclosing group. Defaults to "inherit".
    */
   validity?: (typeof checkboxValidityValues)[number];
@@ -62,13 +64,15 @@ export type CheckboxProps = {
    */
   value?: string;
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
+  CheckedFieldProps<MuiCheckboxProps> &
   SeleniumProps;
 
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,
   id: idOverride,
-  isDefaultChecked = false,
+  isChecked,
+  isDefaultChecked,
   isDisabled,
   isIndeterminate,
   isRequired,
@@ -80,7 +84,10 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
-  const [isCheckedValue, setIsCheckedValue] = useState(isDefaultChecked);
+  const [isLocalChecked, setIsLocalChecked] = useControlledState({
+    controlledValue: isChecked,
+    uncontrolledValue: isDefaultChecked,
+  });
 
   const label = useMemo(() => {
     if (isRequired) {
@@ -97,19 +104,18 @@ const Checkbox = ({
     }
   }, [isRequired, labelProp, t]);
 
-  const onChange = useCallback(
+  const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
-      setIsCheckedValue(event.target.checked);
+      setIsLocalChecked(checked);
       onChangeProp?.(event, checked);
     },
-    [onChangeProp]
+    [onChangeProp, setIsLocalChecked]
   );
 
   return (
     <FormControlLabel
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
-      checked={isCheckedValue}
       className={
         validity === "invalid"
           ? "Mui-error"
@@ -118,14 +124,18 @@ const Checkbox = ({
           : ""
       }
       control={
-        <MuiCheckbox indeterminate={isIndeterminate} required={isRequired} />
+        <MuiCheckbox
+          checked={isLocalChecked}
+          indeterminate={isIndeterminate}
+          onChange={onChange}
+          required={isRequired}
+        />
       }
       data-se={testId}
       disabled={isDisabled}
       id={idOverride}
       label={label}
       name={nameOverride ?? idOverride}
-      onChange={onChange}
       value={value}
       required={isRequired}
     />

@@ -10,10 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio as MuiRadio } from "@mui/material";
-import { memo } from "react";
-
-import { FormControlLabel } from "@mui/material";
+import {
+  FormControlLabel,
+  Radio as MuiRadio,
+  RadioProps as MuiRadioProps,
+} from "@mui/material";
+import { memo, useCallback } from "react";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
@@ -35,6 +37,10 @@ export type RadioProps = {
    * The value attribute of the Radio
    */
   value: string;
+  /**
+   * Callback fired when the state is changed. Provides event and checked value.
+   */
+  onChange?: MuiRadioProps["onChange"];
 } & Pick<FieldComponentProps, "isDisabled" | "name"> &
   SeleniumProps;
 
@@ -46,18 +52,28 @@ const Radio = ({
   name,
   testId,
   value,
-}: RadioProps) => (
-  <FormControlLabel
-    checked={isChecked}
-    className={isInvalid ? "Mui-error" : ""}
-    control={<MuiRadio />}
-    data-se={testId}
-    disabled={isDisabled}
-    label={label}
-    name={name}
-    value={value}
-  />
-);
+  onChange: onChangeProp,
+}: RadioProps) => {
+  const onChange = useCallback<NonNullable<MuiRadioProps["onChange"]>>(
+    (event, checked) => {
+      onChangeProp?.(event, checked);
+    },
+    [onChangeProp]
+  );
+
+  return (
+    <FormControlLabel
+      checked={isChecked}
+      className={isInvalid ? "Mui-error" : ""}
+      control={<MuiRadio onChange={onChange} />}
+      data-se={testId}
+      disabled={isDisabled}
+      label={label}
+      name={name}
+      value={value}
+    />
+  );
+};
 
 const MemoizedRadio = memo(Radio);
 MemoizedRadio.displayName = "Radio";
