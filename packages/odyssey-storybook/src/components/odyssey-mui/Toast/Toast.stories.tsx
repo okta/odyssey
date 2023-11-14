@@ -184,12 +184,13 @@ const Single: StoryObj<ToastProps> = {
   },
   render: function C(args) {
     const [isVisible, setIsVisible] = useState(args.isVisible);
-    const openToast = useCallback(() => setIsVisible(true), []);
+    const showToast = useCallback(() => setIsVisible(true), []);
+    const hideToast = useCallback(() => setIsVisible(false), []);
     return (
       <>
         <Button
           label={`Open ${args.severity} toast`}
-          onClick={openToast}
+          onClick={showToast}
           variant="primary"
         />
         <ToastStack>
@@ -199,7 +200,7 @@ const Single: StoryObj<ToastProps> = {
             linkText={args.linkText}
             linkUrl={args.linkUrl}
             isVisible={isVisible}
-            onHide={() => setIsVisible(false)}
+            onHide={hideToast}
             role={args.role}
             severity={args.severity}
             text={args.text}
