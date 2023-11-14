@@ -18,7 +18,7 @@ import {
   useState,
 } from "react";
 import * as Tokens from "@okta/odyssey-design-tokens";
-import { DataTable, type TableColumn } from "@okta/odyssey-react-mui/labs";
+import { DataColumn, DataTable } from "@okta/odyssey-react-mui/labs";
 import { Typography } from "@okta/odyssey-react-mui";
 
 type TokenName = keyof typeof Tokens;
@@ -270,14 +270,14 @@ function getDisplayedValue(tableName: string, value: TokenValue) {
   return tokenValue.name;
 }
 
-const columns: TableColumn<TokenTableItem>[] = [
+const columns: DataColumn[] = [
   {
     accessorKey: "name",
     Cell: ({ cell }) => <Typography>{cell.getValue<TokenValue>()}</Typography>,
     header: "Token Name",
   },
   {
-    accessorFn: ({ name }) => `${name} example`,
+    accessorKey: "example",
     Cell: ({ cell }) => {
       const name = cell.row.getValue<TokenName>("name");
       const value = Tokens[name] as TokenValue;
@@ -359,19 +359,13 @@ const columns: TableColumn<TokenTableItem>[] = [
   },
 ];
 
-const initialState = {
-  columnVisibility: {
-    tableName: false,
-  },
-};
-
 export const TokenTables = (): ReactNode =>
   tokenTables.map(({ name, values }) => (
     <DataTable
       columns={columns}
       data={values}
+      fetchDataFn={() => values}
       getRowId={({ id }) => id}
-      initialState={initialState}
       key={name}
       hasSorting={false}
     />
