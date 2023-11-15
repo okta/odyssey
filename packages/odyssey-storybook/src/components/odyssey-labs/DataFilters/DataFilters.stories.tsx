@@ -89,7 +89,6 @@ const storybookMeta: Meta<DataFiltersProps> = {
     },
   },
   decorators: [MuiThemeDecorator],
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

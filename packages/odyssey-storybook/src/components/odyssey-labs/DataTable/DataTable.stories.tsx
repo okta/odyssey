@@ -251,7 +251,6 @@ const storybookMeta: Meta<DataTableProps> = {
     },
   },
   decorators: [MuiThemeDecorator],
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;

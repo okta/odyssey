@@ -18,6 +18,7 @@ import {
 } from "@okta/odyssey-react-mui/labs";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { useEffect, useState } from "react";
+import { Callout } from "@okta/odyssey-react-mui";
 
 const storybookMeta: Meta<DataTablePaginationProps> = {
   title: "Labs Components/DataTablePagination",
@@ -89,12 +90,11 @@ const storybookMeta: Meta<DataTablePaginationProps> = {
     },
   },
   decorators: [MuiThemeDecorator],
-  tags: ["autodocs"],
 };
 
 export default storybookMeta;
 
-export const Default: StoryObj<DataTablePaginationProps> = {
+export const Paged: StoryObj<DataTablePaginationProps> = {
   args: {
     currentPage: 1,
     currentNumberOfResults: 100,
@@ -117,6 +117,29 @@ export const Default: StoryObj<DataTablePaginationProps> = {
         isPreviousButtonDisabled={page <= 1}
         paginationType={props.paginationType}
       />
+    );
+  },
+};
+
+export const LoadMore: StoryObj<DataTablePaginationProps> = {
+  args: {
+    currentPage: 1,
+    currentNumberOfResults: 20,
+    isNextButtonDisabled: false,
+    isPreviousButtonDisabled: false,
+    paginationType: "loadMore",
+  },
+  render: function C(props) {
+    const [results, setResults] = useState<number>(20);
+
+    return (
+      <>
+        <Callout severity="info">Showing up to item {results}</Callout>
+        <DataTablePagination
+          onClickNext={() => setResults(results + 20)}
+          paginationType={props.paginationType}
+        />
+      </>
     );
   },
 };
