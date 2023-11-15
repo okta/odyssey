@@ -2420,81 +2420,10 @@ export const components = ({
               borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100} !important`,
               opacity: 0.5,
             },
-
-            "& .DataTableRowActions-hoverActions": {
-              opacity: "0 !important",
-            },
-
-            "& .DataTableRowActions-dummyButtons": {
-              opacity: "1 !important",
-            },
           },
 
           "&.isDragging.isDragTarget::after": {
             borderColor: odysseyTokens.PalettePrimaryMain,
-          },
-
-          "& .DataTableRowActions-root": {
-            position: "relative",
-          },
-
-          "& .DataTableRowActions-buttons": {
-            display: "flex",
-            alignItems: "center",
-
-            "& .MuiButton-root": {
-              marginInlineStart: 0,
-            },
-          },
-
-          "& .DataTableRowActions-hoverActions": {
-            backgroundColor: odysseyTokens.HueNeutralWhite,
-            boxShadow: odysseyTokens.DepthMedium,
-            borderRadius: odysseyTokens.BorderRadiusOuter,
-            padding: odysseyTokens.Spacing1,
-            display: "flex",
-            opacity: 0,
-            position: "absolute",
-            right: `-${odysseyTokens.Spacing1}`,
-            top: `-${odysseyTokens.Spacing1}`,
-            zIndex: 1,
-          },
-
-          "& .DataTableRowActions-reorderButtons": {
-            display: "flex",
-            alignItems: "center",
-
-            "& .MuiButton-root": {
-              marginInlineStart: 0,
-            },
-
-            "&::after": {
-              content: '""',
-              marginInline: odysseyTokens.Spacing2,
-              width: 2,
-              height: odysseyTokens.Spacing3,
-              backgroundColor: odysseyTokens.BorderColorDisplay,
-            },
-          },
-
-          "& .DataTableRowActions-dummyButtons": {
-            display: "flex",
-
-            "& .MuiButton-root": {
-              marginInlineStart: 0,
-            },
-          },
-
-          "&:hover, &:focus-within": {
-            backgroundColor: odysseyTokens.HueNeutral50 + " !important",
-
-            "& .DataTableRowActions-dummyButtons": {
-              opacity: 0,
-            },
-
-            "& .DataTableRowActions-hoverActions": {
-              opacity: 1,
-            },
           },
         }),
       },

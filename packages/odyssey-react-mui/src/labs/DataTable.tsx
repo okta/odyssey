@@ -382,158 +382,66 @@ const DataTable = ({
       const currentIndex = row.index + (page - 1) * resultsPerPage;
 
       return (
-        <>
-          {hasRowReordering ? (
-            <div className="DataTableRowActions-root">
-              <div className="DataTableRowActions-hoverActions">
-                <div className="DataTableRowActions-reorderButtons">
-                  <Button
-                    endIcon={<ArrowTopIcon />}
-                    isDisabled={currentIndex <= 0}
-                    ariaLabel="Move to top"
-                    tooltipText="Move to start"
-                    variant="floating"
-                    size="small"
-                    onClick={() =>
-                      handleReordering({ rowId: row.id, newIndex: 0 })
-                    }
-                  />
-                  <Button
-                    endIcon={<ArrowUpIcon />}
-                    isDisabled={currentIndex <= 0}
-                    ariaLabel="Move up one position"
-                    tooltipText="Move up one position"
-                    variant="floating"
-                    size="small"
-                    onClick={() =>
-                      handleReordering({
-                        rowId: row.id,
-                        newIndex: currentIndex - 1,
-                      })
-                    }
-                  />
-                  <Button
-                    endIcon={<ArrowDownIcon />}
-                    isDisabled={
-                      totalRows ? currentIndex >= totalRows - 1 : false
-                    }
-                    tooltipText="Move down one position"
-                    ariaLabel="Move down one position"
-                    variant="floating"
-                    size="small"
-                    onClick={() =>
-                      handleReordering({
-                        rowId: row.id,
-                        newIndex: currentIndex + 1,
-                      })
-                    }
-                  />
-                  {totalRows && (
-                    <Button
-                      endIcon={<ArrowBottomIcon />}
-                      isDisabled={currentIndex >= totalRows - 1}
-                      tooltipText="Move to end"
-                      ariaLabel="Move to end"
-                      variant="floating"
-                      size="small"
-                      onClick={() =>
-                        handleReordering({ rowId: row.id, newIndex: totalRows })
-                      }
-                    />
-                  )}
-                </div>
-
-                <Box sx={{ display: "flex" }}>
-                  {rowActionButtons?.(row)}
-                  <MenuButton
-                    endIcon={<MoreIcon />}
-                    size="small"
-                    buttonVariant="floating"
-                    ariaLabel="More actions"
-                    menuAlignment="right"
-                  >
-                    {rowActionMenuItems && (
-                      <>
-                        {rowActionMenuItems(row)}
-                        <hr />
-                      </>
-                    )}
-                    <MenuItem
-                      isDisabled={currentIndex <= 0}
-                      onClick={() =>
-                        handleReordering({ rowId: row.id, newIndex: 0 })
-                      }
-                    >
-                      <ArrowTopIcon /> Move to start
-                    </MenuItem>
-                    <MenuItem
-                      isDisabled={currentIndex <= 0}
-                      onClick={() =>
-                        handleReordering({
-                          rowId: row.id,
-                          newIndex: currentIndex - 1,
-                        })
-                      }
-                    >
-                      <ArrowUpIcon /> Move up one position
-                    </MenuItem>
-                    <MenuItem
-                      isDisabled={
-                        totalRows ? currentIndex >= totalRows - 1 : false
-                      }
-                      onClick={() =>
-                        handleReordering({
-                          rowId: row.id,
-                          newIndex: currentIndex + 1,
-                        })
-                      }
-                    >
-                      <ArrowDownIcon /> Move down one position
-                    </MenuItem>
-                    {totalRows && (
-                      <MenuItem
-                        isDisabled={currentIndex >= totalRows - 1}
-                        onClick={() =>
-                          handleReordering({
-                            rowId: row.id,
-                            newIndex: totalRows,
-                          })
-                        }
-                      >
-                        <ArrowBottomIcon /> Move to end
-                      </MenuItem>
-                    )}
-                  </MenuButton>
-                </Box>
-              </div>
-
-              <div
-                className="DataTableRowActions-dummyButtons"
-                aria-hidden={true}
-              >
-                {rowActionButtons?.(row)}
-                <Button
-                  endIcon={<MoreIcon />}
-                  size="small"
-                  variant="floating"
-                  ariaLabel="More actions"
-                />
-              </div>
-            </div>
-          ) : (
-            <div className="DataTableRowActions-buttons">
-              {rowActionButtons?.(row)}
+        <Box sx={{ display: "flex" }}>
+          {rowActionButtons?.(row)}
+          {(rowActionMenuItems || hasRowReordering) && (
+            <MenuButton
+              endIcon={<MoreIcon />}
+              size="small"
+              buttonVariant="floating"
+              ariaLabel="More actions"
+              menuAlignment="right"
+            >
               {rowActionMenuItems && (
-                <Button
-                  endIcon={<MoreIcon />}
-                  size="small"
-                  variant="floating"
-                  ariaLabel="More actions"
-                />
+                <>
+                  {rowActionMenuItems(row)}
+                  <hr />
+                </>
               )}
-            </div>
+              <MenuItem
+                isDisabled={currentIndex <= 0}
+                onClick={() => handleReordering({ rowId: row.id, newIndex: 0 })}
+              >
+                <ArrowTopIcon /> Move to start
+              </MenuItem>
+              <MenuItem
+                isDisabled={currentIndex <= 0}
+                onClick={() =>
+                  handleReordering({
+                    rowId: row.id,
+                    newIndex: currentIndex - 1,
+                  })
+                }
+              >
+                <ArrowUpIcon /> Move up one position
+              </MenuItem>
+              <MenuItem
+                isDisabled={totalRows ? currentIndex >= totalRows - 1 : false}
+                onClick={() =>
+                  handleReordering({
+                    rowId: row.id,
+                    newIndex: currentIndex + 1,
+                  })
+                }
+              >
+                <ArrowDownIcon /> Move down one position
+              </MenuItem>
+              {totalRows && (
+                <MenuItem
+                  isDisabled={currentIndex >= totalRows - 1}
+                  onClick={() =>
+                    handleReordering({
+                      rowId: row.id,
+                      newIndex: totalRows,
+                    })
+                  }
+                >
+                  <ArrowBottomIcon /> Move to end
+                </MenuItem>
+              )}
+            </MenuButton>
           )}
-        </>
+        </Box>
       );
     },
   });
