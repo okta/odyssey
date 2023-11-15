@@ -13,9 +13,9 @@
 export const createShadowRootElement = (containerElement: HTMLElement) => {
   const shadowRoot = containerElement.attachShadow({ mode: "open" });
 
-  const ShadowRootElement = document.createElement("div");
+  const shadowRootElement = document.createElement("div");
 
-  shadowRoot.append(ShadowRootElement);
+  shadowRoot.append(shadowRootElement);
 
-  return createShadowRootElement;
+  return shadowRoot;
 };
