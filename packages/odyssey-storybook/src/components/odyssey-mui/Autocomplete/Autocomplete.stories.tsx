@@ -335,77 +335,100 @@ export const ReadOnly: StoryObj<AutocompleteType> = {
   },
 };
 
-type IssueOption = {
+type MoonMeta = {
   id: string;
   label: string;
-  externalValue: string;
+  diameterInKm: number;
   description: string;
 };
-export const Issue: StoryObj<
-  typeof Autocomplete<IssueOption, boolean, boolean>
-> = {
+
+type JupiterMoonsAutocomplete = typeof Autocomplete<MoonMeta, boolean, boolean>;
+
+const jupiterGalileanMoons: MoonMeta[] = [
+  {
+    id: "ent1rs1yjAIYGKjX48g6",
+    label: "Io",
+    diameterInKm: 3643.2,
+    description:
+      "The innermost and third-largest of the four Galilean moons of the planet Jupiter.",
+  },
+  {
+    id: "ent1rs1ys3O7JDBxe8g6",
+    label: "Europa",
+    diameterInKm: 3121.6,
+    description:
+      "The smallest of the four Galilean moons orbiting Jupiter, and the sixth-closest to the planet of all the 95 known moons of Jupiter.",
+  },
+  {
+    id: "ent1rs21aA4w60TJG8g6",
+    label: "Ganymede",
+    diameterInKm: 5268.2,
+    description:
+      "The largest and most massive natural satellite of Jupiter as well as in the Solar System, being a planetary-mass moon.",
+  },
+  {
+    id: "ent1rs2qgOg42zhYV8g6",
+    label: "Callisto",
+    diameterInKm: 4820.6,
+    description:
+      "The third-largest moon after Ganymede and Saturn's largest moon Titan, and as large as the smallest planet Mercury",
+  },
+];
+
+export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
+  {
+    args: {
+      options: jupiterGalileanMoons,
+      value: jupiterGalileanMoons.slice(0, 2),
+      hasMultipleChoices: true,
+      isReadOnly: false,
+      label: "label",
+      isOptionEqualToValue: (option, value) => option.id === value.id,
+    },
+    render: function C(props) {
+      const [localValue, setLocalValue] = useState<MoonMeta[] | undefined>(
+        jupiterGalileanMoons.slice(0, 2)
+      );
+      const onChange = useCallback((_, v) => setLocalValue(v), []);
+      return <Autocomplete {...props} value={localValue} onChange={onChange} />;
+    },
+  };
+
+export const UnontrolledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
+  {
+    args: {
+      options: jupiterGalileanMoons,
+      defaultValue: jupiterGalileanMoons.slice(0, 2),
+      hasMultipleChoices: true,
+      isReadOnly: false,
+      label: "label",
+      isOptionEqualToValue: (option, value) => option.id === value.id,
+    },
+  };
+
+export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
   args: {
-    options: [
-      {
-        id: "ent1rs1yjAIYGKjX48g6",
-        label: "SE4 value1",
-        externalValue: "externalValue SE4 value1",
-        description: "Description SE4 value1",
-      },
-      {
-        id: "ent1rs1ys3O7JDBxe8g6",
-        label: "SE4 value10",
-        externalValue: "externalValue SE4 value10",
-        description: "Description SE4 value10",
-      },
-      {
-        id: "ent1rs21aA4w60TJG8g6",
-        label: "SE4 value100",
-        externalValue: "externalValue SE4 value100",
-        description: "Description SE4 value100",
-      },
-      {
-        id: "ent1rs2qgOg42zhYV8g6",
-        label: "SE4 value1006",
-        externalValue: "externalValue SE4 value1006",
-        description: "Description SE4 value1006",
-      },
-    ],
-    value: [
-      {
-        id: "ent1rs21aA4w60TJG8g6",
-        label: "SE4 value100",
-        externalValue: "externalValue SE4 value100",
-        description: "Description SE4 value100",
-      },
-      {
-        id: "ent1rs1yjAIYGKjX48g6",
-        label: "SE4 value1",
-        externalValue: "externalValue SE4 value1",
-        description: "Description SE4 value1",
-      },
-    ],
-    hasMultipleChoices: true,
+    options: jupiterGalileanMoons,
+    value: jupiterGalileanMoons[0],
     isReadOnly: false,
     label: "label",
     isOptionEqualToValue: (option, value) => option.id === value.id,
   },
   render: function C(props) {
-    const [localValue, setLocalValue] = useState([
-      {
-        id: "ent1rs21aA4w60TJG8g6",
-        label: "SE4 value100",
-        externalValue: "externalValue SE4 value100",
-        description: "Description SE4 value100",
-      },
-      {
-        id: "ent1rs1yjAIYGKjX48g6",
-        label: "SE4 value1",
-        externalValue: "externalValue SE4 value1",
-        description: "Description SE4 value1",
-      },
-    ]);
+    const [localValue, setLocalValue] = useState<MoonMeta | undefined>(
+      jupiterGalileanMoons[0]
+    );
     const onChange = useCallback((_, v) => setLocalValue(v), []);
     return <Autocomplete {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
+export const UnontrolledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
+  args: {
+    options: jupiterGalileanMoons,
+    defaultValue: jupiterGalileanMoons[0],
+    isReadOnly: false,
+    label: "label",
+    isOptionEqualToValue: (option, value) => option.id === value.id,
   },
 };

@@ -15,8 +15,9 @@ import {
   AutocompleteProps as MuiAutocompleteProps,
   InputBase,
   UseAutocompleteProps,
+  AutocompleteValue,
 } from "@mui/material";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useMemo } from "react";
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
@@ -87,6 +88,9 @@ export type AutocompleteProps<
    * The label text for the autocomplete input
    */
   label: string;
+  ListboxComponent?: React.JSXElementConstructor<
+    React.HTMLAttributes<HTMLElement>
+  >;
   /**
    * Callback fired when the autocomplete loses focus.
    */
@@ -138,10 +142,12 @@ export type AutocompleteProps<
   >["value"];
 
   /**
-   * Used to determine if the option represents the given value. Uses strict equality by default in none provided.
+   * Used to determine if the option represents the given value. Uses strict equality by default if none provided.
    * Both arguments need to be handled, an option can only match with one value.
    * option: the option to test
    * value: the value to test against
+   *
+   * You will need to implement this function if your `option` items are objects.
    */
   isOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
@@ -166,6 +172,7 @@ const Autocomplete = <
   isReadOnly,
   hint,
   label,
+  ListboxComponent,
   name: nameOverride,
   onBlur,
   onChange: onChangeProp,
@@ -211,9 +218,30 @@ const Autocomplete = <
     [errorMessage, hint, isOptional, label, nameOverride]
   );
 
+  const defaultValuesProp:
+    | AutocompleteValue<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >
+    | undefined = useMemo(() => {
+    if (hasMultipleChoices) {
+      return defaultValue == undefined
+        ? ([] as AutocompleteValue<
+            OptionType,
+            HasMultipleChoices,
+            undefined,
+            IsCustomValueAllowed
+          >)
+        : defaultValue;
+    }
+    return defaultValue ?? undefined;
+  }, [defaultValue, hasMultipleChoices]);
+
   const [localValue, setLocalValue] = useControlledState({
     controlledValue: value,
-    uncontrolledValue: defaultValue,
+    uncontrolledValue: defaultValuesProp,
   });
 
   const onChange = useCallback<
@@ -238,11 +266,13 @@ const Autocomplete = <
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       data-se={testId}
+      defaultValue={defaultValuesProp}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
       filterSelectedOptions={true}
       id={idOverride}
+      ListboxComponent={ListboxComponent}
       loading={isLoading}
       multiple={hasMultipleChoices}
       onBlur={onBlur}
