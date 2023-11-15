@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.18](https://github.com/okta/odyssey/compare/v1.6.17...v1.6.18) (2023-11-15)
+
+### Bug Fixes
+
+- shadow DOM function using wrong return value ([#2043](https://github.com/okta/odyssey/issues/2043)) ([c701afb](https://github.com/okta/odyssey/commit/c701afb6b43fd52cbfd486cbaa41fdde65b6ba30))
+
 ## [1.6.17](https://github.com/okta/odyssey/compare/v1.6.16...v1.6.17) (2023-11-14)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui
