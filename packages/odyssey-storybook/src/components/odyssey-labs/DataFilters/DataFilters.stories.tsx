@@ -243,7 +243,11 @@ export const AdditionalActions: StoryObj<DataFiltersProps> = {
           endIcon={<BugIcon />}
           label="Another button"
         />
-        <Button variant="secondary" endIcon={<SettingsIcon />} />
+        <Button
+          variant="secondary"
+          endIcon={<SettingsIcon />}
+          ariaLabel="Settings"
+        />
       </Box>
     ),
   },
