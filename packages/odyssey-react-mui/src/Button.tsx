@@ -170,7 +170,7 @@ const Button = ({
         </Tooltip>
       )}
 
-      {!(tooltipText && !isDisabled) && renderButton(muiProps)}
+      {(isDisabled || !tooltipText) && renderButton(muiProps)}
     </>
   );
 };
