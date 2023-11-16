@@ -421,6 +421,7 @@ export const Default: StoryObj<DataTableProps> = {
           rowActionButtons={(row) => (
             <Button
               endIcon={<DeleteIcon />}
+              ariaLabel="Delete"
               variant="floating"
               size="small"
               onClick={() =>
