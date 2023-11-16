@@ -2255,10 +2255,11 @@ export const components = ({
           }),
 
           [`.${tableHeadClasses.root} &`]: {
-            color: odysseyTokens.TypographyColorSubordinate,
+            color: odysseyTokens.TypographyColorHeading,
             fontSize: odysseyTokens.TypographySizeSubordinate,
             lineHeight: odysseyTokens.TypographyLineHeightBody,
             fontWeight: odysseyTokens.TypographyWeightBodyBold,
+            textTransform: "uppercase",
             backgroundColor: odysseyTokens.HueNeutral50,
             borderBottom: 0,
           },

@@ -541,12 +541,14 @@ export const Pagination: StoryObj<PaginatedTableProps<Person>> = {
   },
   render: function C(args) {
     const countRef = useRef(15);
-    const [data, setData] = useState(args.data.slice(0, countRef.current));
+    const dataArg = args.data ?? [];
+
+    const [data, setData] = useState(dataArg.slice(0, countRef.current));
 
     const fetchMoreData = useCallback(() => {
       countRef.current = countRef.current + 10;
 
-      setData(args.data.slice(0, Math.min(countRef.current, args.data.length)));
+      setData(dataArg.slice(0, Math.min(countRef.current, dataArg.length)));
     }, [args.data]);
 
     return (
