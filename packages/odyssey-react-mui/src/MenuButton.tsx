@@ -17,28 +17,15 @@ import {
   MenuItem,
   useUniqueId,
 } from "./";
-import {
-  ButtonProps,
-  Divider,
-  ListSubheader,
-  Menu,
-  MenuProps,
-} from "@mui/material";
+import { Divider, ListSubheader, Menu } from "@mui/material";
 import { ChevronDownIcon, MoreIcon } from "./icons.generated";
-import {
-  memo,
-  type ReactElement,
-  useCallback,
-  useMemo,
-  useState,
-  ReactFragment,
-  MutableRefObject,
-  useEffect,
-} from "react";
+import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
 import { MenuContext, MenuContextType } from "./MenuContext";
 import { NullElement } from "./NullElement";
 import type { SeleniumProps } from "./SeleniumProps";
+
+export const menuAlignmentValues = ["left", "right"] as const;
 
 export type MenuButtonProps = {
   /**
@@ -65,11 +52,12 @@ export type MenuButtonProps = {
    * The <MenuItem> components within the Menu.
    */
   children:
-    | ReactFragment
+    | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
     | Array<
         | ReactElement<typeof MenuItem | typeof Divider | typeof ListSubheader>
         | NullElement
-      >;
+      >
+    | NullElement;
   /**
    * The end Icon on the trigggering Button
    */
@@ -85,22 +73,16 @@ export type MenuButtonProps = {
   /**
    * The horizontal alignment of the menu.
    */
-  menuAlignment?: "left" | "right";
+  menuAlignment?: (typeof menuAlignmentValues)[number];
   /**
-   * Optional function to fire on button click
+   * If true (the default), the menu will close when a child MenuItem is clicked.
+   * Otherwise, it will remain open.
    */
-  onClick?: ButtonProps["onClick"];
-  /**
-   * Optional function to fire on memu close
-   */
-  menuPaperRef?: MutableRefObject<HTMLDivElement>;
-  onClose?: MenuProps["onClose"];
-  preventCloseOnChildClick?: boolean;
+  shouldCloseOnSelect?: boolean;
   /**
    * The size of the button
    */
   size?: (typeof buttonSizeValues)[number];
-  forceMenuState?: boolean;
   /**
    * The tooltip text for the Button if it's icon-only
    */
@@ -131,15 +113,11 @@ const MenuButton = ({
   buttonLabel = "",
   buttonVariant = "secondary",
   children,
+  shouldCloseOnSelect = true,
   endIcon: endIconProp,
-  forceMenuState,
   id: idOverride,
   isOverflow,
-  menuPaperRef,
   menuAlignment = "left",
-  onClick,
-  onClose,
-  preventCloseOnChildClick,
   size,
   testId,
   tooltipText,
@@ -148,25 +126,13 @@ const MenuButton = ({
 
   const isOpen = Boolean(anchorEl);
 
-  const closeMenu = useCallback(
-    (event?, reason?) => {
-      if (preventCloseOnChildClick && reason !== "backdropClick") {
-        return;
-      }
+  const closeMenu = useCallback(() => {
+    setAnchorEl(null);
+  }, []);
 
-      onClose?.(event, reason);
-      setAnchorEl(null);
-    },
-    [preventCloseOnChildClick, onClose]
-  );
-
-  const openMenu = useCallback(
-    (event) => {
-      onClick?.(event);
-      setAnchorEl(event.currentTarget);
-    },
-    [onClick]
-  );
+  const openMenu = useCallback<MenuContextType["openMenu"]>((event) => {
+    setAnchorEl(event.currentTarget);
+  }, []);
 
   const uniqueId = useUniqueId(idOverride);
 
@@ -175,19 +141,13 @@ const MenuButton = ({
     [uniqueId]
   );
 
-  useEffect(() => {
-    if (forceMenuState === false) {
-      closeMenu({}, "backdropClick");
-    }
-  }, [forceMenuState, closeMenu]);
-
   const providerValue = useMemo<MenuContextType>(
     () => ({
       closeMenu,
       openMenu,
-      preventCloseOnChildClick,
+      shouldCloseOnSelect,
     }),
-    [closeMenu, openMenu, preventCloseOnChildClick]
+    [closeMenu, openMenu, shouldCloseOnSelect]
   );
 
   const endIcon = endIconProp ? (
@@ -218,16 +178,13 @@ const MenuButton = ({
       />
 
       <Menu
-        anchorEl={anchorEl}
         anchorOrigin={{ horizontal: menuAlignment, vertical: "bottom" }}
         transformOrigin={{ horizontal: menuAlignment, vertical: "top" }}
+        anchorEl={anchorEl}
         id={`${uniqueId}-menu`}
         MenuListProps={menuListProps}
         onClose={closeMenu}
         open={isOpen}
-        PaperProps={{
-          ref: menuPaperRef,
-        }}
       >
         <MenuContext.Provider value={providerValue}>
           {children}

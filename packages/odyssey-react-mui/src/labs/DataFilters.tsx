@@ -15,6 +15,7 @@ import {
   ReactNode,
   memo,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -23,7 +24,7 @@ import { TagList } from "../TagList";
 import { Tag } from "../Tag";
 import { SearchField } from "../SearchField";
 import { Button } from "../Button";
-import { IconButton, Popover } from "@mui/material";
+import { IconButton, Menu, Popover } from "@mui/material";
 import {
   CheckIcon,
   ChevronRightIcon,
@@ -35,7 +36,6 @@ import { Paragraph, Subordinate } from "../Typography";
 import { TextField } from "../TextField";
 import { CheckboxGroup } from "../CheckboxGroup";
 import { Checkbox } from "../Checkbox";
-import { MenuButton } from "../MenuButton";
 import { RadioGroup } from "../RadioGroup";
 import { Radio } from "../Radio";
 
@@ -95,7 +95,10 @@ const DataFilters = ({
   );
   const [search, setSearch] = useState<string>(initialSearchTerm ?? "");
   const activeFilters = filters.filter((filter) => filter.value);
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(undefined);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [menuAnchorEl, setMenuAnchorEl] = useState<HTMLElement | undefined>(
+    undefined
+  );
   const [popoverState, setPopoverState] = useState<{
     isOpen: boolean;
     anchorEl?: HTMLElement;
@@ -201,6 +204,86 @@ const DataFilters = ({
     setFilters(updatedFilters);
   };
 
+  const filterMenu = useMemo(
+    () => (
+      <>
+        <Box>
+          <Button
+            aria-controls={isMenuOpen ? "filters-menu" : undefined}
+            aria-expanded={isMenuOpen ? "true" : undefined}
+            aria-haspopup="true"
+            ariaLabel="Filters"
+            endIcon={<FilterIcon />}
+            onClick={(event) => {
+              setMenuAnchorEl(event.currentTarget);
+              setIsMenuOpen(true);
+            }}
+            variant="secondary"
+          />
+        </Box>
+
+        <Menu
+          anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+          transformOrigin={{ horizontal: "left", vertical: "top" }}
+          id="filters-menu"
+          anchorEl={menuAnchorEl}
+          onClose={() => setIsMenuOpen(false)}
+          open={isMenuOpen}
+          PaperProps={{
+            ref: menuRef as MutableRefObject<HTMLDivElement>,
+          }}
+        >
+          {filtersProp.map((filter) => {
+            // Unintuitively, we can't just use filter.value to grab the filter value.
+            // `filter` is the initial set of filters provided to the comoponent, so its
+            // value prop may not reflect the current value of the filter.
+            const latestFilterValue = filters.find(
+              (f) => f.id === filter.id
+            )?.value;
+
+            return (
+              <MenuItem
+                key={filter.id}
+                onClick={(ev) => {
+                  setPopoverState({
+                    isOpen: true,
+                    anchorEl: ev.currentTarget,
+                    filter: filter,
+                  });
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    width: "100%",
+                    minWidth: 180,
+                  }}
+                >
+                  <Box sx={{ marginRight: 2 }}>
+                    <Paragraph component="div">{filter.label}</Paragraph>
+                    <Subordinate component="div">
+                      {!latestFilterValue ||
+                      (Array.isArray(latestFilterValue) &&
+                        latestFilterValue.length === 0)
+                        ? `Any ${filter.label.toLowerCase()}`
+                        : Array.isArray(latestFilterValue)
+                        ? `${latestFilterValue.length} selected`
+                        : latestFilterValue}
+                    </Subordinate>
+                  </Box>
+                  <ChevronRightIcon />
+                </Box>
+              </MenuItem>
+            );
+          })}
+        </Menu>
+      </>
+    ),
+    [isMenuOpen, menuAnchorEl]
+  );
+
   return (
     <Box>
       {/* Upper section */}
@@ -210,61 +293,7 @@ const DataFilters = ({
           {/* Filter menu */}
           {filters.length > 0 && (
             <>
-              <MenuButton
-                endIcon={<FilterIcon />}
-                ariaLabel="Filters"
-                preventCloseOnChildClick
-                menuPaperRef={menuRef as MutableRefObject<HTMLDivElement>}
-                forceMenuState={isMenuOpen}
-                onClose={() => setIsMenuOpen(undefined)}
-              >
-                {filtersProp.map((filter) => {
-                  // Unintuitively, we can't just use filter.value to grab the filter value.
-                  // `filter` is the initial set of filters provided to the comoponent, so its
-                  // value prop may not reflect the current value of the filter.
-                  const latestFilterValue = filters.find(
-                    (f) => f.id === filter.id
-                  )?.value;
-
-                  return (
-                    <MenuItem
-                      key={filter.id}
-                      onClick={(ev) => {
-                        setPopoverState({
-                          isOpen: true,
-                          anchorEl: ev.currentTarget,
-                          filter: filter,
-                        });
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          width: "100%",
-                          minWidth: 180,
-                        }}
-                      >
-                        <Box sx={{ marginRight: 2 }}>
-                          <Paragraph component="div">{filter.label}</Paragraph>
-                          <Subordinate component="div">
-                            {!latestFilterValue ||
-                            (Array.isArray(latestFilterValue) &&
-                              latestFilterValue.length === 0)
-                              ? `Any ${filter.label.toLowerCase()}`
-                              : Array.isArray(latestFilterValue)
-                              ? `${latestFilterValue.length} selected`
-                              : latestFilterValue}
-                          </Subordinate>
-                        </Box>
-                        <ChevronRightIcon />
-                      </Box>
-                    </MenuItem>
-                  );
-                })}
-              </MenuButton>
-
+              {filterMenu}
               {/* Filter popover */}
               <Popover
                 anchorEl={popoverState.anchorEl}

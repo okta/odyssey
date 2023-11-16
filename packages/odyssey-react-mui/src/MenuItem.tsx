@@ -63,16 +63,16 @@ const MenuItem = ({
   value,
   variant = "default",
 }: MenuItemProps) => {
-  const { closeMenu, preventCloseOnChildClick } = useContext(MenuContext);
+  const { closeMenu, shouldCloseOnSelect } = useContext(MenuContext);
 
   const onClick = useCallback<NonNullable<MuiMenuItemProps["onClick"]>>(
     (event) => {
       onClickProp?.(event);
-      if (!preventCloseOnChildClick) {
+      if (shouldCloseOnSelect) {
         closeMenu();
       }
     },
-    [onClickProp, closeMenu, preventCloseOnChildClick]
+    [onClickProp, closeMenu, shouldCloseOnSelect]
   );
 
   return (

@@ -29,6 +29,7 @@ import {
   ReactElement,
   memo,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -426,19 +427,21 @@ const DataTable = ({
               >
                 <ArrowDownIcon /> Move down one position
               </MenuItem>
-              {totalRows && (
-                <MenuItem
-                  isDisabled={currentIndex >= totalRows - 1}
-                  onClick={() =>
-                    handleReordering({
-                      rowId: row.id,
-                      newIndex: totalRows,
-                    })
-                  }
-                >
-                  <ArrowBottomIcon /> Move to end
-                </MenuItem>
-              )}
+              <>
+                {totalRows && (
+                  <MenuItem
+                    isDisabled={currentIndex >= totalRows - 1}
+                    onClick={() =>
+                      handleReordering({
+                        rowId: row.id,
+                        newIndex: totalRows,
+                      })
+                    }
+                  >
+                    <ArrowBottomIcon /> Move to end
+                  </MenuItem>
+                )}
+              </>
             </MenuButton>
           )}
         </Box>
@@ -446,15 +449,15 @@ const DataTable = ({
     },
   });
 
-  const TableSettings = () => {
-    return (
+  const tableSettings = useMemo(
+    () => (
       <>
         {hasChangeableDensity && (
           <MenuButton
             endIcon={<ListIcon />}
             ariaLabel="Table density"
             menuAlignment="right"
-            preventCloseOnChildClick
+            shouldCloseOnSelect={false}
           >
             <>
               {densityValues.map((value: MRT_DensityState) => (
@@ -475,7 +478,7 @@ const DataTable = ({
             endIcon={<ShowIcon />}
             ariaLabel="Show/hide columns"
             menuAlignment="right"
-            preventCloseOnChildClick
+            shouldCloseOnSelect={false}
           >
             <>
               {columns
@@ -499,8 +502,9 @@ const DataTable = ({
           </MenuButton>
         )}
       </>
-    );
-  };
+    ),
+    [density, columnVisibility]
+  );
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -508,7 +512,7 @@ const DataTable = ({
         onChangeSearch={hasSearch ? handleSearch : undefined}
         onChangeFilters={handleFilters}
         searchOnSubmit={searchOnSubmit}
-        additionalActions={<TableSettings />}
+        additionalActions={tableSettings}
         filters={
           hasFilters
             ? columns
