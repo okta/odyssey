@@ -21,4 +21,8 @@ export * from "./DataTable";
 export * from "./DataTablePagination";
 export * from "./DataFilters";
 
+export * from "./materialReactTableTypes";
+export * from "./StaticTable";
+export * from "./PaginatedTable";
+
 export * from "./GroupPicker";
