@@ -56,21 +56,21 @@ const storybookMeta: Meta<BadgeProps> = {
 
 export default storybookMeta;
 
-export const Primary: StoryObj<BadgeProps> = {
+export const Default: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
     type: "default",
   },
 };
 
-export const Default: StoryObj<BadgeProps> = {
+export const Attention: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
     type: "attention",
   },
 };
 
-export const Error: StoryObj<BadgeProps> = {
+export const Danger: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
     type: "danger",
