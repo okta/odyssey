@@ -49,6 +49,15 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["multiple"];
   /**
+   * The value for the input
+   */
+  inputValue?: UseAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["inputValue"];
+  /**
    * Allows the input of custom values
    */
   isCustomValueAllowed?: MuiAutocompleteProps<
@@ -165,6 +174,7 @@ const Autocomplete = <
   errorMessage,
   hasMultipleChoices,
   id: idOverride,
+  inputValue,
   isCustomValueAllowed,
   isDisabled,
   isLoading,
@@ -176,7 +186,7 @@ const Autocomplete = <
   name: nameOverride,
   onBlur,
   onChange: onChangeProp,
-  onInputChange,
+  onInputChange: onInputChangeProp,
   onFocus,
   options,
   value,
@@ -218,16 +228,17 @@ const Autocomplete = <
     [errorMessage, hint, isOptional, label, nameOverride]
   );
 
-  const defaultValuesProp:
+  const defaultValuesProp = useMemo<
     | AutocompleteValue<
         OptionType,
         HasMultipleChoices,
         undefined,
         IsCustomValueAllowed
       >
-    | undefined = useMemo(() => {
+    | undefined
+  >(() => {
     if (hasMultipleChoices) {
-      return defaultValue == undefined
+      return defaultValue === undefined
         ? ([] as AutocompleteValue<
             OptionType,
             HasMultipleChoices,
@@ -242,6 +253,11 @@ const Autocomplete = <
   const [localValue, setLocalValue] = useControlledState({
     controlledValue: value,
     uncontrolledValue: defaultValuesProp,
+  });
+
+  const [localInputValue, setLocalInputValue] = useControlledState({
+    controlledValue: inputValue,
+    uncontrolledValue: undefined,
   });
 
   const onChange = useCallback<
@@ -259,6 +275,23 @@ const Autocomplete = <
       onChangeProp?.(event, value, reason, details);
     },
     [onChangeProp, setLocalValue]
+  );
+
+  const onInputChange = useCallback<
+    NonNullable<
+      UseAutocompleteProps<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >["onInputChange"]
+    >
+  >(
+    (event, value, reason) => {
+      setLocalInputValue(value);
+      onInputChangeProp?.(event, value, reason);
+    },
+    [onInputChangeProp, setLocalInputValue]
   );
 
   return (
@@ -283,7 +316,7 @@ const Autocomplete = <
       readOnly={isReadOnly}
       renderInput={renderInput}
       value={localValue}
-      inputValue={undefined}
+      inputValue={localInputValue}
       isOptionEqualToValue={isOptionEqualToValue}
     />
   );
