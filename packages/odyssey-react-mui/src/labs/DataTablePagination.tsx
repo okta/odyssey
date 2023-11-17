@@ -42,7 +42,7 @@ const DataTablePagination = ({
       {paginationType === "loadMore" ? (
         <>
           <Button
-            label="Load more"
+            label="Show more"
             variant="secondary"
             onClick={onClickNext}
             isDisabled={isNextButtonDisabled}
