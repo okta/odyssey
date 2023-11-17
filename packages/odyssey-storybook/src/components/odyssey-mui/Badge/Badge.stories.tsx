@@ -13,32 +13,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import { MuiThemeDecorator } from "../../../../.storybook/components";
-import {
-  Badge,
-  BadgeProps,
-  badgeTypeValues,
-  badgeVariantValues,
-  Button,
-} from "@okta/odyssey-react-mui";
-import { HomeIcon } from "@okta/odyssey-react-mui/icons";
-
-const DemoComponent = () => {
-  return <Button endIcon={<HomeIcon />} variant="floating" />;
-};
+import { Badge, BadgeProps, badgeTypeValues } from "@okta/odyssey-react-mui";
 
 const storybookMeta: Meta<BadgeProps> = {
   title: "MUI Components/Badge",
   component: Badge,
   argTypes: {
-    children: {
-      control: null,
-      description: "The content of the component.",
-      table: {
-        type: {
-          summary: "ReactNode",
-        },
-      },
-    },
     type: {
       options: badgeTypeValues,
       control: { type: "radio" },
@@ -50,20 +30,6 @@ const storybookMeta: Meta<BadgeProps> = {
       table: {
         defaultValue: {
           summary: "primary",
-        },
-      },
-    },
-    variant: {
-      options: badgeVariantValues,
-      control: { type: "radio" },
-      type: {
-        required: false,
-        name: "other",
-        value: "radio",
-      },
-      table: {
-        defaultValue: {
-          summary: "standard",
         },
       },
     },
@@ -93,53 +59,20 @@ export default storybookMeta;
 export const Primary: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    children: <DemoComponent />,
     type: "primary",
-    variant: "standard",
   },
 };
 
 export const Default: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    children: <DemoComponent />,
     type: "default",
-    variant: "standard",
   },
 };
 
 export const Error: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    children: <DemoComponent />,
     type: "error",
-    variant: "standard",
-  },
-};
-
-export const PrimaryDot: StoryObj<BadgeProps> = {
-  args: {
-    badgeContent: 8,
-    children: <DemoComponent />,
-    type: "primary",
-    variant: "dot",
-  },
-};
-
-export const DefaultDot: StoryObj<BadgeProps> = {
-  args: {
-    badgeContent: 8,
-    children: <DemoComponent />,
-    type: "default",
-    variant: "dot",
-  },
-};
-
-export const ErrorDot: StoryObj<BadgeProps> = {
-  args: {
-    badgeContent: 8,
-    children: <DemoComponent />,
-    type: "error",
-    variant: "dot",
   },
 };
