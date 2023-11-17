@@ -161,7 +161,7 @@ const storybookMeta: Meta<DataTableProps> = {
         },
       },
     },
-    searchOnSubmit: {
+    hasSearchSubmitButton: {
       control: "boolean",
       description: "",
       table: {
@@ -406,7 +406,7 @@ export const Default: StoryObj<DataTableProps> = {
           getRowId={({ id }) => id}
           fetchDataFn={fetchData}
           reorderDataFn={reorderData}
-          searchOnSubmit={true}
+          hasSearchSubmitButton={true}
           hasChangeableDensity={props.hasChangeableDensity}
           hasColumnResizing={props.hasColumnResizing}
           hasColumnVisibility={props.hasColumnVisibility}

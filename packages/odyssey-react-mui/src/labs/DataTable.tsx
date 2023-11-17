@@ -28,6 +28,7 @@ import {
   Fragment,
   ReactElement,
   memo,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -48,11 +49,7 @@ import {
   DataTablePagination,
   paginationTypeValues,
 } from "./DataTablePagination";
-import {
-  DataFilter,
-  DataFilters,
-  dataFilterVariantValues,
-} from "./DataFilters";
+import { DataFilter, DataFilters } from "./DataFilters";
 import { Button } from "../Button";
 import { Box } from "../Box";
 import { MenuButton, MenuItem } from "..";
@@ -66,43 +63,140 @@ export type {
   MRT_ColumnDef as TableColumn,
 } from "material-react-table";
 
+// The shape of the table columns,
+// with props named to match their MRT_ColumnDef counterparts
 export type DataColumn = {
+  /**
+   * The unique ID of the column
+   */
   accessorKey: string;
+  /**
+   * The human-friendly title of the column
+   */
   header: string;
+  /**
+   * Customize the way each cell in the column is
+   * displayed via a custom React component.
+   */
   Cell?: MRT_ColumnDef<MRT_RowData>["Cell"];
+  /**
+   * The UI control that will be used to filter the column.
+   * Defaults to a standard text input.
+   */
   filterVariant?: MRT_ColumnDef<MRT_RowData>["filterVariant"];
-  filterControl?: (typeof dataFilterVariantValues)[number];
+  /**
+   * If the filter control has preset options (such as a select or multi-select),
+   * these are the options provided.
+   */
   filterSelectOptions?: Array<{ label: string; value: string }>;
+  /**
+   * The optional column width, in pixels
+   */
   size?: number;
+  /**
+   * The minimum column width, in pixels
+   */
   minSize?: number;
+  /**
+   * The maximum column width, in pixels
+   */
   maxSize?: number;
+  /**
+   * If set to false, the column won't be filterable
+   */
   enableColumnFilter?: boolean;
+  /**
+   * If set to false, the column won't be searchable
+   */
   enableGlobalFilter?: boolean;
+  /**
+   * If set to false, the column won't be sortable
+   */
   enableSorting?: boolean;
+  /**
+   * If set to false, the column won't be resizable
+   */
   enableResizing?: boolean;
+  /**
+   * If set to false, the column won't be hideable
+   */
   enableHiding?: boolean;
 };
 
 export type DataTableProps = {
+  /**
+   * The columns that make up the table
+   */
   columns: DataColumn[];
+  /**
+   * The data that goes into the table, which will be displayed
+   * as the table rows
+   */
   data: MRT_TableOptions<MRT_RowData>["data"];
+  /**
+   * The total number of rows in the table. Optional, because it's sometimes impossible
+   * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
+   */
   totalRows?: number;
+  /**
+   * The function to get the ID of a row
+   */
   getRowId?: MRT_TableOptions<MRT_RowData>["getRowId"];
+  /**
+   * The initial density of the table. This is available even if the table density
+   * isn't changeable.
+   */
   initialDensity?: (typeof densityValues)[number];
-
+  /**
+   * If true, the end user will be able to change the table density.
+   */
   hasChangeableDensity?: boolean;
+  /**
+   * If true, the end user can resize individual columns.
+   */
   hasColumnResizing?: boolean;
+  /**
+   * If true, the end user will be able to show/hide columns.
+   */
   hasColumnVisibility?: boolean;
+  /**
+   * If true, the end user will be able to filter columns.
+   */
   hasFilters?: boolean;
+  /**
+   * If true, the table will include pagination controls.
+   */
   hasPagination?: boolean;
+  /**
+   * If true, the table will include checkboxes on each row, enabling
+   * the user to select some or all rows.
+   */
   hasRowSelection?: boolean;
+  /**
+   * If true, the global table search controls will be shown.
+   */
   hasSearch?: boolean;
+  /**
+   * If true, the end user can sort columns (ascending, descending, or neither)
+   */
   hasSorting?: boolean;
+  /**
+   * If true, the end user can reorder rows via a drag-and-drop interface
+   */
   hasRowReordering?: boolean;
-
-  searchOnSubmit?: boolean;
+  /**
+   * If true, the search field will include a Search button, rather than
+   * firing on input change.
+   */
+  hasSearchSubmitButton?: boolean;
+  /**
+   * Callback that fires when a row (or rows) is selected or unselected.
+   */
   onRowSelectionChange?: (rowSelection: MRT_RowSelectionState) => void;
-
+  /**
+   * Callback that fires whenever the table needs to fetch new data, due to changes in
+   * page, results per page, search input, filters, or sorting
+   */
   fetchDataFn: ({
     page,
     resultsPerPage,
@@ -116,6 +210,10 @@ export type DataTableProps = {
     filters?: DataFilter[];
     sort?: MRT_SortingState;
   }) => MRT_TableOptions<MRT_RowData>["data"];
+  /**
+   * Callback that fires when the user reorders rows within the table. Can be used
+   * to propogate order change to the backend.
+   */
   reorderDataFn?: ({
     rowId,
     newIndex,
@@ -123,13 +221,28 @@ export type DataTableProps = {
     rowId: string;
     newIndex: number;
   }) => void;
-
+  /**
+   * The current page number.
+   */
   page?: number;
+  /**
+   * The number of results per page.
+   */
   resultsPerPage?: number;
+  /**
+   * The type of pagination controls shown. Defaults to next/prev buttons, but can be
+   * set to a simple "Load more" button by setting to "loadMore".
+   */
   paginationType?: (typeof paginationTypeValues)[number];
+  /**
+   * Action buttons to display in each row
+   */
   rowActionButtons?: (
     row: MRT_RowData
   ) => ReactElement<typeof Button | typeof Fragment>;
+  /**
+   * Menu items to include in the optional actions menu on each row.
+   */
   rowActionMenuItems?: (
     row: MRT_RowData
   ) => ReactElement<typeof MenuItem | typeof Fragment>;
@@ -145,7 +258,7 @@ const DataTable = ({
   fetchDataFn,
   reorderDataFn,
   totalRows,
-  searchOnSubmit,
+  hasSearchSubmitButton,
   paginationType = "paged",
   onRowSelectionChange,
   rowActionButtons,
@@ -170,16 +283,22 @@ const DataTable = ({
   const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
   const [sorting, setSorting] = useState<MRT_SortingState>([]);
   const [density, setDensity] = useState<MRT_DensityState>(initialDensity);
-  const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>(
-    columns.reduce((acc, column) => {
+
+  const initialColumnVisibility = useMemo(() => {
+    return columns.reduce((acc, column) => {
       acc[column.accessorKey as string] = true;
       return acc;
-    }, {} as MRT_VisibilityState)
+    }, {} as MRT_VisibilityState);
+  }, [columns]);
+
+  const [columnVisibility, setColumnVisibility] = useState<MRT_VisibilityState>(
+    initialColumnVisibility
   );
+
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [filters, setFilters] = useState<Array<DataFilter>>();
 
-  const refreshData = async () => {
+  const refreshData = useCallback(async () => {
     setShowSkeletons(true);
     try {
       const newData = await fetchDataFn({
@@ -195,55 +314,65 @@ const DataTable = ({
       console.log(error);
       setShowSkeletons(false);
     }
-  };
+  }, [page, resultsPerPage, sorting, globalFilter, filters, fetchDataFn]);
 
-  const handleSortingChange = (updater: MRT_Updater<MRT_SortingState>) => {
-    setSorting((prevSorting) =>
-      updater instanceof Function ? updater(prevSorting) : sorting
-    );
-  };
+  const handleSortingChange = useCallback(
+    (updater: MRT_Updater<MRT_SortingState>) => {
+      setSorting((prevSorting) =>
+        updater instanceof Function ? updater(prevSorting) : sorting
+      );
+    },
+    [sorting]
+  );
 
-  const handleColumnVisibility = (columnId: string) => {
-    setColumnVisibility((prevVisibility) => ({
-      ...prevVisibility,
-      [columnId]: !columnVisibility[columnId],
-    }));
-  };
+  const handleColumnVisibility = useCallback(
+    (columnId: string) => {
+      setColumnVisibility((prevVisibility) => ({
+        ...prevVisibility,
+        [columnId]: !columnVisibility[columnId],
+      }));
+    },
+    [columnVisibility]
+  );
 
-  const handleSearch = (value: string) => {
-    setGlobalFilter(value);
-  };
+  const handleSearch = useCallback(
+    (value: string) => {
+      setGlobalFilter(value);
+    },
+    [globalFilter]
+  );
 
-  const handleFilters = (updatedFilters: Array<DataFilter>) => {
-    setFilters(updatedFilters);
-  };
+  const handleFilters = useCallback(
+    (updatedFilters: Array<DataFilter>) => {
+      setFilters(updatedFilters);
+    },
+    [filters]
+  );
 
-  const handleRowSelectionChange = (
-    updater: MRT_Updater<MRT_RowSelectionState>
-  ) => {
-    setRowSelection((prevRowSelection) =>
-      updater instanceof Function ? updater(prevRowSelection) : rowSelection
-    );
-  };
+  const handleRowSelectionChange = useCallback(
+    (updater: MRT_Updater<MRT_RowSelectionState>) => {
+      setRowSelection((prevRowSelection) =>
+        updater instanceof Function ? updater(prevRowSelection) : rowSelection
+      );
+    },
+    [rowSelection]
+  );
 
-  const handleReordering = ({
-    rowId,
-    newIndex,
-  }: {
-    rowId: string;
-    newIndex: number;
-  }) => {
-    if (newIndex < 0) {
-      return;
-    }
+  const handleReordering = useCallback(
+    ({ rowId, newIndex }: { rowId: string; newIndex: number }) => {
+      if (newIndex < 0) {
+        return;
+      }
 
-    if (totalRows && newIndex > totalRows) {
-      return;
-    }
+      if (totalRows && newIndex > totalRows) {
+        return;
+      }
 
-    reorderDataFn?.({ rowId: rowId, newIndex: newIndex });
-    refreshData();
-  };
+      reorderDataFn?.({ rowId: rowId, newIndex: newIndex });
+      refreshData();
+    },
+    []
+  );
 
   useEffect(() => {
     setShowSkeletons(false);
@@ -251,7 +380,7 @@ const DataTable = ({
 
   useEffect(() => {
     refreshData();
-  }, [page, resultsPerPage, sorting, globalFilter, filters]);
+  }, [refreshData, page, resultsPerPage, sorting, globalFilter, filters]);
 
   useEffect(() => {
     onRowSelectionChange?.(rowSelection);
@@ -503,7 +632,7 @@ const DataTable = ({
         )}
       </>
     ),
-    [density, columnVisibility]
+    [density, columnVisibility, columns]
   );
 
   return (
@@ -511,7 +640,7 @@ const DataTable = ({
       <DataFilters
         onChangeSearch={hasSearch ? handleSearch : undefined}
         onChangeFilters={handleFilters}
-        searchOnSubmit={searchOnSubmit}
+        hasSearchSubmitButton={hasSearchSubmitButton}
         additionalActions={tableSettings}
         filters={
           hasFilters
@@ -521,7 +650,7 @@ const DataTable = ({
                   return {
                     id: column.accessorKey as string,
                     label: column.header,
-                    variant: column.filterControl ?? "text",
+                    variant: column.filterVariant ?? "text",
                     options: column.filterSelectOptions,
                   };
                 })

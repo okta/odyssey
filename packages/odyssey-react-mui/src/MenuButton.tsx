@@ -17,7 +17,12 @@ import {
   MenuItem,
   useUniqueId,
 } from "./";
-import { Divider, ListSubheader, Menu } from "@mui/material";
+import {
+  Divider,
+  ListSubheader,
+  Menu as MuiMenu,
+  PopoverOrigin,
+} from "@mui/material";
 import { ChevronDownIcon, MoreIcon } from "./icons.generated";
 import { memo, type ReactElement, useCallback, useMemo, useState } from "react";
 
@@ -158,6 +163,24 @@ const MenuButton = ({
     <ChevronDownIcon />
   );
 
+  const anchorOrigin = useMemo(
+    () =>
+      ({
+        horizontal: menuAlignment,
+        vertical: "bottom",
+      } as PopoverOrigin),
+    [menuAlignment]
+  );
+
+  const transformOrigin = useMemo(
+    () =>
+      ({
+        horizontal: menuAlignment,
+        vertical: "top",
+      } as PopoverOrigin),
+    [menuAlignment]
+  );
+
   return (
     <div>
       <Button
@@ -177,9 +200,9 @@ const MenuButton = ({
         variant={buttonVariant}
       />
 
-      <Menu
-        anchorOrigin={{ horizontal: menuAlignment, vertical: "bottom" }}
-        transformOrigin={{ horizontal: menuAlignment, vertical: "top" }}
+      <MuiMenu
+        anchorOrigin={anchorOrigin}
+        transformOrigin={transformOrigin}
         anchorEl={anchorEl}
         id={`${uniqueId}-menu`}
         MenuListProps={menuListProps}
@@ -189,7 +212,7 @@ const MenuButton = ({
         <MenuContext.Provider value={providerValue}>
           {children}
         </MenuContext.Provider>
-      </Menu>
+      </MuiMenu>
     </div>
   );
 };

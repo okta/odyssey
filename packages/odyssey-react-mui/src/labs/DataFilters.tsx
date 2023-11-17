@@ -14,6 +14,7 @@ import {
   MutableRefObject,
   ReactNode,
   memo,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -24,7 +25,11 @@ import { TagList } from "../TagList";
 import { Tag } from "../Tag";
 import { SearchField } from "../SearchField";
 import { Button } from "../Button";
-import { IconButton, Menu, Popover } from "@mui/material";
+import {
+  IconButton as MuiIconButton,
+  Menu as MuiMenu,
+  Popover as MuiPopover,
+} from "@mui/material";
 import {
   CheckIcon,
   ChevronRightIcon,
@@ -38,77 +43,117 @@ import { CheckboxGroup } from "../CheckboxGroup";
 import { Checkbox } from "../Checkbox";
 import { RadioGroup } from "../RadioGroup";
 import { Radio } from "../Radio";
+import { MRT_ColumnDef, MRT_RowData } from "material-react-table";
 
-export const dataFilterVariantValues = [
-  "autocomplete",
-  "checkbox",
-  "date",
-  "date-range",
-  "multi-select",
-  "range",
-  "range-slider",
-  "select",
-  "text",
-] as const;
+export type DataFilterValue = string | string[] | undefined;
 
+// This is the shape of each individual filter
 export type DataFilter = {
+  /**
+   * A unique ID for the filter, typically the same id
+   * as the column it'll be applied to.
+   */
   id: string;
+  /**
+   * The human-friendly name of the filter.
+   */
   label: string;
-  variant?: (typeof dataFilterVariantValues)[number];
-  value?: string | string[] | undefined;
+  /**
+   * The type of filter, which determines which filtering control
+   * is shown.
+   */
+  variant?: MRT_ColumnDef<MRT_RowData>["filterVariant"];
+  /**
+   * The current value of the filter. Typically a string, but
+   * filters that allow for multiple selections (such as multi-select)
+   * can accept an array.
+   */
+  value?: DataFilterValue;
+  /**
+   * If the filter control has preset options (such as a select or multi-select),
+   * these are the options provided.
+   */
   options?: Array<{ label: string; value: string }>;
 };
 
+// This is the type of the DataFilters component itself
 export type DataFiltersProps = {
+  /**
+   * The callback that's fired when the search input changes
+   * (either on change or on submit, based on the value of `hasSearchSubmitButton`).
+   * If this is undefined, the search input will not be shown.
+   */
   onChangeSearch?: (value: string) => void;
+  /**
+   * The callback that's fired when filter values change.
+   */
   onChangeFilters?: (filters: Array<DataFilter>) => void;
-  searchOnSubmit?: boolean;
-  searchDelay?: number;
-  initialSearchTerm?: string;
+  /**
+   * If true, a Search button will be provided alongside the search input
+   * and `onChangeSearch` will fire when the button is clicked, rather than
+   * whenever the input value changes.
+   */
+  hasSearchSubmitButton?: boolean;
+  /**
+   * The debounce time, in milliseconds, for the search input firing
+   * `onChangeSearch` when changed. If `hasSearchSubmitButton` is true,
+   * this doesn't do anything.
+   */
+  searchDelayTime?: number;
+  /**
+   * The starting value of the search input
+   */
+  defaultSearchTerm?: string;
+  /**
+   * A slot for optional additional actions, like buttons, to be displayed
+   * on the opposite side of the top row from the search and filter controls.
+   */
   additionalActions?: ReactNode;
+  /**
+   * The filters available in the filter menu. If undefined,
+   * the filter menu won't be shown.
+   */
   filters?: Array<DataFilter>;
 };
 
 const DataFilters = ({
   onChangeSearch,
   onChangeFilters,
-  searchOnSubmit = false,
-  searchDelay = 200,
-  initialSearchTerm,
+  hasSearchSubmitButton = false,
+  searchDelayTime = 200,
+  defaultSearchTerm = "",
   additionalActions,
   filters: filtersProp = [],
 }: DataFiltersProps) => {
   const [filters, setFilters] = useState<DataFilter[]>(filtersProp);
-  const [inputValues, setInputValues] = useState<{
-    [key: string]: string | string[] | undefined;
-  }>(
-    filtersProp.reduce(
-      (
-        accumulator: { [key: string]: string | string[] | undefined },
-        filter: DataFilter
-      ) => {
-        accumulator[filter.id] = filter.value;
-        return accumulator;
-      },
-      {}
-    )
+
+  const initialInputValues = useMemo(() => {
+    return filtersProp.reduce((accumulator, filter) => {
+      accumulator[filter.id] = filter.value;
+      return accumulator;
+    }, {} as Record<string, DataFilterValue>);
+  }, [filtersProp]);
+
+  const [inputValues, setInputValues] = useState(initialInputValues);
+
+  const [searchValue, setSearchValue] = useState<string>(defaultSearchTerm);
+  const activeFilters = filters.filter(
+    (filter) => typeof filter.value === "string" && filter.value
   );
-  const [search, setSearch] = useState<string>(initialSearchTerm ?? "");
-  const activeFilters = filters.filter((filter) => filter.value);
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [menuAnchorEl, setMenuAnchorEl] = useState<HTMLElement | undefined>(
-    undefined
-  );
-  const [popoverState, setPopoverState] = useState<{
-    isOpen: boolean;
-    anchorEl?: HTMLElement;
-    filter?: DataFilter;
-  }>({
-    isOpen: false,
-  });
+  const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState<boolean>(false);
+  const [filtersMenuAnchorElement, setFiltersMenuAnchorElement] = useState<
+    HTMLElement | undefined
+  >();
+  const [isFilterPopoverOpen, setIsFilterPopoverOpen] =
+    useState<boolean>(false);
+  const [filterPopoverAnchorElement, setFilterPopoverAnchorElement] = useState<
+    HTMLElement | undefined
+  >();
+  const [filterPopoverCurrentFilter, setFilterPopoverCurrentFilter] = useState<
+    DataFilter | undefined
+  >();
 
   const menuRef = useRef<HTMLDivElement>();
-  const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     onChangeFilters?.(filters);
@@ -116,74 +161,67 @@ const DataFilters = ({
 
   const debouncer = useRef<NodeJS.Timeout | undefined>(undefined);
   useEffect(() => {
-    if (!searchOnSubmit) {
+    if (!hasSearchSubmitButton) {
       if (debouncer.current) {
         clearTimeout(debouncer.current);
       }
 
       debouncer.current = setTimeout(() => {
-        onChangeSearch?.(search ?? "");
-      }, searchDelay);
+        onChangeSearch?.(searchValue ?? "");
+      }, searchDelayTime);
     }
-  }, [onChangeSearch, search, searchDelay, searchOnSubmit]);
+  }, [onChangeSearch, searchValue, searchDelayTime, hasSearchSubmitButton]);
 
-  const handleInputChange = (
-    filterId: string,
-    value: string | string[] | undefined,
-    submit: boolean = false
-  ) => {
-    setInputValues({ ...inputValues, [filterId]: value });
+  const handleInputChange = useCallback(
+    (filterId: string, value: DataFilterValue, submit: boolean = false) => {
+      setInputValues({ ...inputValues, [filterId]: value });
 
-    if (submit) {
-      const updatedFilters = filtersProp.map((filter) => ({
-        ...filter,
-        value: filter.id === filterId ? value : inputValues[filter.id],
-      }));
+      if (submit) {
+        const updatedFilters = filtersProp.map((filter) => ({
+          ...filter,
+          value: filter.id === filterId ? value : inputValues[filter.id],
+        }));
 
-      setFilters(updatedFilters);
-    }
-  };
+        setFilters(updatedFilters);
+      }
+    },
+    [inputValues, filtersProp]
+  );
 
-  const handleMultiSelectChange = (
-    filterId: string,
-    value: string,
-    submit: boolean = false
-  ) => {
-    const startingValues = filtersProp
-      .find((filter) => filter.id === filterId)
-      ?.options?.map((option) => option.value);
-    const currentValues = (inputValues[filterId] ?? startingValues) as string[];
-    const updatedValues = currentValues.includes(value)
-      ? currentValues.filter((item: string) => item !== value)
-      : [...currentValues, value];
-    const valuesToSave =
-      updatedValues.sort().join() === startingValues?.sort().join()
-        ? undefined
-        : updatedValues;
+  const handleMultiSelectChange = useCallback(
+    (filterId: string, value: string, submit: boolean = false) => {
+      const startingValues = filtersProp
+        .find((filter) => filter.id === filterId)
+        ?.options?.map((option) => option.value);
+      const currentValues = (inputValues[filterId] ??
+        startingValues) as string[];
+      const updatedValues = currentValues.includes(value)
+        ? currentValues.filter((item: string) => item !== value)
+        : [...currentValues, value];
+      const valuesToSave =
+        updatedValues.sort().join() === startingValues?.sort().join()
+          ? undefined
+          : updatedValues;
 
-    setInputValues({ ...inputValues, [filterId]: valuesToSave });
+      setInputValues({ ...inputValues, [filterId]: valuesToSave });
 
-    if (submit) {
-      const updatedFilters = filtersProp.map((filter) => ({
-        ...filter,
-        value: filter.id === filterId ? valuesToSave : inputValues[filter.id],
-      }));
+      if (submit) {
+        const updatedFilters = filtersProp.map((filter) => ({
+          ...filter,
+          value: filter.id === filterId ? valuesToSave : inputValues[filter.id],
+        }));
 
-      setFilters(updatedFilters);
-    }
-  };
+        setFilters(updatedFilters);
+      }
+    },
+    [inputValues, filtersProp]
+  );
 
-  const clearAllFilters = () => {
-    const updatedInputValues = filtersProp.reduce(
-      (
-        accumulator: { [key: string]: string | string[] | undefined },
-        filter: DataFilter
-      ) => {
-        accumulator[filter.id] = undefined;
-        return accumulator;
-      },
-      {}
-    );
+  const clearAllFilters = useCallback(() => {
+    const updatedInputValues = filtersProp.reduce((accumulator, filter) => {
+      accumulator[filter.id] = undefined;
+      return accumulator;
+    }, {} as Record<string, DataFilterValue>);
 
     setInputValues(updatedInputValues);
 
@@ -193,42 +231,42 @@ const DataFilters = ({
     }));
 
     setFilters(updatedFilters);
-  };
+  }, [filtersProp]);
 
-  const handleFilterSubmit = () => {
+  const handleFilterSubmit = useCallback(() => {
     const updatedFilters = filtersProp.map((filter) => ({
       ...filter,
       value: inputValues[filter.id],
     }));
 
     setFilters(updatedFilters);
-  };
+  }, [inputValues, filtersProp]);
 
   const filterMenu = useMemo(
     () => (
       <>
         <Box>
           <Button
-            aria-controls={isMenuOpen ? "filters-menu" : undefined}
-            aria-expanded={isMenuOpen ? "true" : undefined}
+            aria-controls={isFiltersMenuOpen ? "filters-menu" : undefined}
+            aria-expanded={isFiltersMenuOpen ? "true" : undefined}
             aria-haspopup="true"
             ariaLabel="Filters"
             endIcon={<FilterIcon />}
             onClick={(event) => {
-              setMenuAnchorEl(event.currentTarget);
-              setIsMenuOpen(true);
+              setFiltersMenuAnchorElement(event.currentTarget);
+              setIsFiltersMenuOpen(true);
             }}
             variant="secondary"
           />
         </Box>
 
-        <Menu
+        <MuiMenu
           anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
           transformOrigin={{ horizontal: "left", vertical: "top" }}
           id="filters-menu"
-          anchorEl={menuAnchorEl}
-          onClose={() => setIsMenuOpen(false)}
-          open={isMenuOpen}
+          anchorEl={filtersMenuAnchorElement}
+          onClose={() => setIsFiltersMenuOpen(false)}
+          open={isFiltersMenuOpen}
           PaperProps={{
             ref: menuRef as MutableRefObject<HTMLDivElement>,
           }}
@@ -244,12 +282,10 @@ const DataFilters = ({
             return (
               <MenuItem
                 key={filter.id}
-                onClick={(ev) => {
-                  setPopoverState({
-                    isOpen: true,
-                    anchorEl: ev.currentTarget,
-                    filter: filter,
-                  });
+                onClick={(event) => {
+                  setIsFilterPopoverOpen(true);
+                  setFilterPopoverAnchorElement(event.currentTarget);
+                  setFilterPopoverCurrentFilter(filter);
                 }}
               >
                 <Box
@@ -278,10 +314,10 @@ const DataFilters = ({
               </MenuItem>
             );
           })}
-        </Menu>
+        </MuiMenu>
       </>
     ),
-    [isMenuOpen, menuAnchorEl]
+    [isFiltersMenuOpen, filtersMenuAnchorElement, filtersProp]
   );
 
   return (
@@ -295,9 +331,9 @@ const DataFilters = ({
             <>
               {filterMenu}
               {/* Filter popover */}
-              <Popover
-                anchorEl={popoverState.anchorEl}
-                open={popoverState.isOpen}
+              <MuiPopover
+                anchorEl={filterPopoverAnchorElement}
+                open={isFilterPopoverOpen}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 onClose={(ev: MouseEvent) => {
                   if (menuRef.current) {
@@ -309,11 +345,11 @@ const DataFilters = ({
                       ev.clientY <= menuRect.bottom;
 
                     if (!clickInsideMenu) {
-                      setIsMenuOpen(false);
+                      setIsFiltersMenuOpen(false);
                     }
                   }
 
-                  setPopoverState({ ...popoverState, isOpen: false });
+                  setIsFilterPopoverOpen(false);
                 }}
               >
                 <Box sx={{ padding: 4, minWidth: 320 }}>
@@ -321,13 +357,13 @@ const DataFilters = ({
                     onSubmit={(ev) => {
                       ev.preventDefault();
                       handleFilterSubmit();
-                      setPopoverState({ ...popoverState, isOpen: false });
-                      setIsMenuOpen(false);
+                      setIsFilterPopoverOpen(false);
+                      setIsFiltersMenuOpen(false);
                     }}
                   >
                     {/* Text or Number */}
-                    {(popoverState?.filter?.variant === "text" ||
-                      popoverState?.filter?.variant === "range") && (
+                    {(filterPopoverCurrentFilter?.variant === "text" ||
+                      filterPopoverCurrentFilter?.variant === "range") && (
                       <Box
                         sx={{
                           display: "flex",
@@ -338,37 +374,38 @@ const DataFilters = ({
                         <Box sx={{ width: "100%" }}>
                           <TextField
                             hasInitialFocus
-                            label={popoverState.filter.label}
+                            label={filterPopoverCurrentFilter.label}
                             type={
-                              popoverState.filter.variant === "range"
+                              filterPopoverCurrentFilter.variant === "range"
                                 ? "number"
                                 : "text"
                             }
                             value={
-                              (inputValues[popoverState.filter.id] as string) ??
-                              ""
+                              (inputValues[
+                                filterPopoverCurrentFilter.id
+                              ] as string) ?? ""
                             }
                             onChange={(ev) =>
                               handleInputChange(
-                                popoverState.filter!.id,
+                                filterPopoverCurrentFilter.id,
                                 ev.currentTarget.value
                               )
                             }
                             endAdornment={
-                              inputValues[popoverState.filter.id] && (
-                                <IconButton
+                              inputValues[filterPopoverCurrentFilter.id] && (
+                                <MuiIconButton
                                   size="small"
                                   aria-label="Clear filter"
                                   onClick={() => {
                                     handleInputChange(
-                                      popoverState.filter!.id,
+                                      filterPopoverCurrentFilter.id,
                                       undefined,
                                       true
                                     );
                                   }}
                                 >
                                   <CloseCircleFilledIcon />
-                                </IconButton>
+                                </MuiIconButton>
                               )
                             }
                           />
@@ -382,13 +419,13 @@ const DataFilters = ({
                     )}
 
                     {/* Checkbox */}
-                    {popoverState?.filter?.variant === "multi-select" &&
-                      popoverState?.filter?.options && (
+                    {filterPopoverCurrentFilter?.variant === "multi-select" &&
+                      filterPopoverCurrentFilter?.options && (
                         <CheckboxGroup
-                          label={popoverState.filter.label}
+                          label={filterPopoverCurrentFilter.label}
                           isRequired
                         >
-                          {popoverState.filter.options.map(
+                          {filterPopoverCurrentFilter.options.map(
                             (option: { label: string; value: string }) => (
                               <Checkbox
                                 key={option.value}
@@ -396,14 +433,14 @@ const DataFilters = ({
                                 value={option.value}
                                 isDefaultChecked={
                                   inputValues[
-                                    popoverState.filter!.id
+                                    filterPopoverCurrentFilter.id
                                   ]?.includes(option.value) ||
-                                  inputValues[popoverState.filter!.id] ===
+                                  inputValues[filterPopoverCurrentFilter.id] ===
                                     undefined
                                 }
                                 onChange={() =>
                                   handleMultiSelectChange(
-                                    popoverState.filter!.id,
+                                    filterPopoverCurrentFilter.id,
                                     option.value,
                                     true
                                   )
@@ -415,13 +452,13 @@ const DataFilters = ({
                       )}
 
                     {/* Radio */}
-                    {popoverState?.filter?.variant === "select" &&
-                      popoverState?.filter?.options && (
+                    {filterPopoverCurrentFilter?.variant === "select" &&
+                      filterPopoverCurrentFilter?.options && (
                         <RadioGroup
-                          label={popoverState.filter.label}
+                          label={filterPopoverCurrentFilter.label}
                           onChange={(_, value) =>
                             handleInputChange(
-                              popoverState.filter!.id,
+                              filterPopoverCurrentFilter.id,
                               value,
                               true
                             )
@@ -430,18 +467,21 @@ const DataFilters = ({
                           <Radio
                             label="Any"
                             value={""}
-                            isChecked={!inputValues[popoverState.filter.id]}
+                            isChecked={
+                              !inputValues[filterPopoverCurrentFilter.id]
+                            }
                           />
                           <>
-                            {popoverState.filter.options.map(
+                            {filterPopoverCurrentFilter.options.map(
                               (option: { label: string; value: string }) => (
                                 <Radio
                                   key={option.value}
                                   label={option.label}
                                   value={option.value}
                                   isChecked={
-                                    inputValues[popoverState.filter!.id] ===
-                                    option.value
+                                    inputValues[
+                                      filterPopoverCurrentFilter.id
+                                    ] === option.value
                                   }
                                 />
                               )
@@ -451,7 +491,7 @@ const DataFilters = ({
                       )}
                   </form>
                 </Box>
-              </Popover>
+              </MuiPopover>
             </>
           )}
 
@@ -461,30 +501,27 @@ const DataFilters = ({
               style={{ width: "100%" }}
               onSubmit={(event) => {
                 event.preventDefault();
-                if (searchOnSubmit) {
-                  onChangeSearch(searchRef.current?.value ?? "");
+                if (hasSearchSubmitButton) {
+                  onChangeSearch(searchValue);
                 }
               }}
             >
               <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
                 <SearchField
-                  value={search}
+                  value={searchValue}
                   label="Search"
-                  inputRef={searchRef}
                   onClear={() => {
-                    setSearch("");
+                    setSearchValue("");
                     onChangeSearch("");
                   }}
-                  onChange={(ev) => setSearch(ev.target.value)}
+                  onChange={(ev) => setSearchValue(ev.target.value)}
                 />
-                {searchOnSubmit && (
+                {hasSearchSubmitButton && (
                   <Box>
                     <Button
                       variant="primary"
                       label="Search"
-                      onClick={() =>
-                        onChangeSearch(searchRef.current?.value ?? "")
-                      }
+                      onClick={() => onChangeSearch(searchValue)}
                     />
                   </Box>
                 )}

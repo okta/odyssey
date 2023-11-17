@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState, useEffect, Ref } from "react";
+import { useState, useEffect } from "react";
 import { InputAdornment, InputBase, IconButton } from "@mui/material";
 import {
   ChangeEventHandler,
@@ -41,7 +41,6 @@ export type SearchFieldProps = {
    * The id of the `input` element.
    */
   id?: string;
-  inputRef?: Ref<HTMLInputElement>;
   /**
    * If `true`, the component is disabled.
    */
@@ -83,7 +82,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       autoCompleteType,
       hasInitialFocus,
       id: idOverride,
-      inputRef,
       isDisabled = false,
       label,
       name: nameOverride,
@@ -148,7 +146,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           onFocus={onFocus}
           placeholder={placeholder}
           ref={ref}
-          inputRef={inputRef}
           startAdornment={
             <InputAdornment position="start">
               <SearchIcon />
@@ -164,7 +161,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         autoCompleteType,
         controlledValue,
         hasInitialFocus,
-        inputRef,
         isDisabled,
         nameOverride,
         onBlur,

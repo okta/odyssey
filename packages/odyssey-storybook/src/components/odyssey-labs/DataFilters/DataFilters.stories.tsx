@@ -42,7 +42,7 @@ const storybookMeta: Meta<DataFiltersProps> = {
         },
       },
     },
-    searchOnSubmit: {
+    hasSearchSubmitButton: {
       control: "boolean",
       description: "",
       table: {
@@ -51,7 +51,7 @@ const storybookMeta: Meta<DataFiltersProps> = {
         },
       },
     },
-    searchDelay: {
+    searchDelayTime: {
       control: "number",
       description: "",
       table: {
@@ -60,7 +60,7 @@ const storybookMeta: Meta<DataFiltersProps> = {
         },
       },
     },
-    initialSearchTerm: {
+    defaultSearchTerm: {
       control: "text",
       description: "",
       table: {
@@ -142,62 +142,12 @@ const demoFilters: Array<DataFilter> = [
       },
     ],
   },
-  {
-    id: "autocomplete",
-    label: "Autocomplete filter",
-    variant: "autocomplete",
-    options: [
-      {
-        label: "Mercury",
-        value: "mercury",
-      },
-      {
-        label: "Venus",
-        value: "venus",
-      },
-      {
-        label: "Earth",
-        value: "earth",
-      },
-      {
-        label: "Mars",
-        value: "mars",
-      },
-      {
-        label: "Jupiter",
-        value: "jupiter",
-      },
-      {
-        label: "Saturn",
-        value: "saturn",
-      },
-      {
-        label: "Uranus",
-        value: "uranus",
-      },
-      {
-        label: "Neptune",
-        value: "neptune",
-      },
-      {
-        label: "Pluto",
-        value: "pluto",
-      },
-      {
-        label: "Ceres",
-        value: "ceres",
-      },
-      {
-        label: "Tycho Station",
-        value: "tycho-station",
-      },
-    ],
-  },
 ];
 
 export const Default: StoryObj<DataFiltersProps> = {
   args: {
     filters: demoFilters,
+    onChangeSearch: (value) => console.log(value),
   },
   render: function C(props) {
     return <DataFilters {...props} />;
@@ -217,6 +167,7 @@ export const NoSearch: StoryObj<DataFiltersProps> = {
 export const JustSearch: StoryObj<DataFiltersProps> = {
   args: {
     filters: [],
+    onChangeSearch: (value) => console.log(value),
   },
   render: function C(props) {
     return <DataFilters {...props} />;
@@ -226,7 +177,8 @@ export const JustSearch: StoryObj<DataFiltersProps> = {
 export const SearchOnSubmit: StoryObj<DataFiltersProps> = {
   args: {
     filters: [],
-    searchOnSubmit: true,
+    hasSearchSubmitButton: true,
+    onChangeSearch: (value) => console.log(value),
   },
   render: function C(props) {
     return <DataFilters {...props} />;
@@ -236,6 +188,7 @@ export const SearchOnSubmit: StoryObj<DataFiltersProps> = {
 export const AdditionalActions: StoryObj<DataFiltersProps> = {
   args: {
     filters: demoFilters,
+    onChangeSearch: (value) => console.log(value),
     additionalActions: (
       <Box>
         <Button

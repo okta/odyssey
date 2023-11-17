@@ -20,6 +20,7 @@ import {
   MenuButtonProps,
   buttonVariantValues,
   MenuItem,
+  menuAlignmentValues,
 } from "@okta/odyssey-react-mui";
 import {
   GroupIcon,
@@ -133,6 +134,19 @@ const storybookMeta: Meta<MenuButtonProps> = {
         },
       },
     },
+    menuAlignment: {
+      options: menuAlignmentValues,
+      control: { type: "radio" },
+      description: "The horizontal alignment of the menu.",
+      table: {
+        type: {
+          summary: menuAlignmentValues.join(" | "),
+        },
+        defaultValue: {
+          summary: "left",
+        },
+      },
+    },
     tooltipText: {
       control: "text",
       description:
@@ -147,6 +161,7 @@ const storybookMeta: Meta<MenuButtonProps> = {
   args: {
     buttonLabel: "More actions",
     buttonVariant: "secondary",
+    menuAlignment: "left",
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
