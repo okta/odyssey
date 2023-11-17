@@ -10,40 +10,85 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactNode, memo } from "react";
-import { Badge as MuiBadge, BadgeProps as MuiBadgeProps } from "@mui/material";
+import { CSSProperties, memo, useMemo } from "react";
+
+import {
+  useOdysseyDesignTokens,
+  DesignTokens,
+} from "./OdysseyDesignTokensContext";
+import { Box } from "./Box";
 import type { SeleniumProps } from "./SeleniumProps";
 
 export const badgeTypeValues = ["default", "primary", "error"] as const;
-export const badgeVariantValues = ["dot", "standard"] as const;
 
 export type BadgeProps = {
-  children?: ReactNode;
-  badgeContent?: number;
-  badgeContentMax?: MuiBadgeProps["max"];
-  variant?: (typeof badgeVariantValues)[number];
+  badgeContent: number;
+  badgeContentMax?: number;
   type?: (typeof badgeTypeValues)[number];
 } & SeleniumProps;
 
+const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
+  default: {
+    background: odysseyTokens.HueNeutral200,
+    font: odysseyTokens.TypographyColorBody,
+  },
+  primary: {
+    background: odysseyTokens.PalettePrimaryMain,
+    font: odysseyTokens.TypographyColorInverse,
+  },
+  error: {
+    background: odysseyTokens.PaletteDangerMain,
+    font: odysseyTokens.TypographyColorInverse,
+  },
+});
+
 const Badge = ({
-  children,
   badgeContent,
   badgeContentMax = 999,
-  variant = "standard",
   type = "default",
 }: BadgeProps) => {
-  const threeDigitLimitedMax = badgeContentMax > 999 ? 999 : badgeContentMax;
+  const odysseyDesignTokens = useOdysseyDesignTokens();
 
-  return (
-    <MuiBadge
-      badgeContent={badgeContent}
-      max={threeDigitLimitedMax}
-      color={type}
-      variant={variant}
-    >
-      {children}
-    </MuiBadge>
+  const greaterThanZeroContentMax = badgeContentMax > 0 ? badgeContentMax : 1;
+  const threeDigitLimitedMax =
+    greaterThanZeroContentMax > 999 ? 999 : greaterThanZeroContentMax;
+  const isOverContentMax = Boolean(
+    badgeContent && badgeContent > threeDigitLimitedMax
   );
+  const overContentMaxMessage = `${greaterThanZeroContentMax}+`;
+  const formattedContent = isOverContentMax
+    ? overContentMaxMessage
+    : badgeContent;
+  const contentIsLongerThanOneChar = formattedContent?.toString()?.length > 1;
+
+  const badgeStyles = useMemo<CSSProperties>(
+    () => ({
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      minWidth: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
+      height: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
+      minHeight: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
+      // 6px horizontal padding per design requirements
+      padding: `0 calc(${odysseyDesignTokens.Spacing1} * 1.5)`,
+      backgroundColor: badgeTypeColors(odysseyDesignTokens)[type].background,
+      color: badgeTypeColors(odysseyDesignTokens)[type].font,
+      borderRadius: contentIsLongerThanOneChar
+        ? `${odysseyDesignTokens.Spacing3}`
+        : "50%",
+      fontSize: `${odysseyDesignTokens.TypographyScale0}`,
+      lineHeight: 1,
+    }),
+    [type]
+  );
+
+  const shouldHideBadge = !badgeContent;
+
+  if (shouldHideBadge) {
+    return null;
+  }
+
+  return <Box sx={badgeStyles}>{formattedContent}</Box>;
 };
 
 const MemoizedBadge = memo(Badge);
