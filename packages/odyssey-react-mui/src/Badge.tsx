@@ -19,7 +19,7 @@ import {
 import { Box } from "./Box";
 import type { SeleniumProps } from "./SeleniumProps";
 
-export const badgeTypeValues = ["default", "primary", "error"] as const;
+export const badgeTypeValues = ["default", "attention", "danger"] as const;
 
 export type BadgeProps = {
   badgeContent: number;
@@ -32,11 +32,11 @@ const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
     background: odysseyTokens.HueNeutral200,
     font: odysseyTokens.TypographyColorBody,
   },
-  primary: {
+  attention: {
     background: odysseyTokens.PalettePrimaryMain,
     font: odysseyTokens.TypographyColorInverse,
   },
-  error: {
+  danger: {
     background: odysseyTokens.PaletteDangerMain,
     font: odysseyTokens.TypographyColorInverse,
   },
@@ -77,6 +77,7 @@ const Badge = ({
         ? `${odysseyDesignTokens.Spacing3}`
         : "50%",
       fontSize: `${odysseyDesignTokens.TypographyScale0}`,
+      fontFamily: `${odysseyDesignTokens.TypographyFamilyMono}`,
       lineHeight: 1,
     }),
     [type]

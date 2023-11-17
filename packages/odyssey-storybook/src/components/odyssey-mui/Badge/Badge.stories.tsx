@@ -59,20 +59,20 @@ export default storybookMeta;
 export const Primary: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    type: "primary",
+    type: "default",
   },
 };
 
 export const Default: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    type: "default",
+    type: "attention",
   },
 };
 
 export const Error: StoryObj<BadgeProps> = {
   args: {
     badgeContent: 8,
-    type: "error",
+    type: "danger",
   },
 };
