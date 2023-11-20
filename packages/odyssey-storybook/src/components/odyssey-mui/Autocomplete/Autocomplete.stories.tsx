@@ -423,7 +423,7 @@ export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
   },
 };
 
-export const UnontrolledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
+export const UncontrolledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
   args: {
     options: jupiterGalileanMoons,
     defaultValue: jupiterGalileanMoons[0],
