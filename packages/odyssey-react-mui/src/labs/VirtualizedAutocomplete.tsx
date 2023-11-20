@@ -19,10 +19,10 @@ import {
 } from "@mui/material";
 import { memo, useCallback, useMemo } from "react";
 
-import { Field } from "./Field";
-import { FieldComponentProps } from "./FieldComponentProps";
-import type { SeleniumProps } from "./SeleniumProps";
-import { useControlledState } from "./useControlledState";
+import { Field } from "../Field";
+import { FieldComponentProps } from "../FieldComponentProps";
+import type { SeleniumProps } from "../SeleniumProps";
+import { useControlledState } from "../useControlledState";
 
 export type AutocompleteProps<
   OptionType,
@@ -98,6 +98,12 @@ export type AutocompleteProps<
    */
   label: string;
   /**
+   * The component used to render the listbox.
+   */
+  ListboxComponent?: React.JSXElementConstructor<
+    React.HTMLAttributes<HTMLElement>
+  >;
+  /**
    * Callback fired when the autocomplete loses focus.
    */
   onBlur?: MuiAutocompleteProps<
@@ -162,7 +168,7 @@ export type AutocompleteProps<
 > &
   SeleniumProps;
 
-const Autocomplete = <
+const VirtualizedAutocomplete = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,
   IsCustomValueAllowed extends boolean | undefined
@@ -179,6 +185,7 @@ const Autocomplete = <
   isReadOnly,
   hint,
   label,
+  ListboxComponent,
   name: nameOverride,
   onBlur,
   onChange: onChangeProp,
@@ -301,6 +308,7 @@ const Autocomplete = <
       freeSolo={isCustomValueAllowed}
       filterSelectedOptions={true}
       id={idOverride}
+      ListboxComponent={ListboxComponent}
       loading={isLoading}
       multiple={hasMultipleChoices}
       onBlur={onBlur}
@@ -318,8 +326,10 @@ const Autocomplete = <
 };
 
 // Need the `typeof Autocomplete` because generics don't get passed through
-const MemoizedAutocomplete = memo(Autocomplete) as typeof Autocomplete;
+const MemoizedAutocomplete = memo(
+  VirtualizedAutocomplete
+) as typeof VirtualizedAutocomplete;
 // @ts-expect-error displayName is expected to not be on `typeof Autocomplete`
 MemoizedAutocomplete.displayName = "Autocomplete";
 
-export { MemoizedAutocomplete as Autocomplete };
+export { MemoizedAutocomplete as VirtualizedAutocomplete };
