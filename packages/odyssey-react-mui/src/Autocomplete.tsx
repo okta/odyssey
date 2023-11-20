@@ -155,7 +155,7 @@ export type AutocompleteProps<
    *
    * You will need to implement this function if your `option` items are objects.
    */
-  isOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
+  getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
   "errorMessage" | "hint" | "id" | "isOptional" | "name"
@@ -186,7 +186,7 @@ const Autocomplete = <
   onFocus,
   options,
   value,
-  isOptionEqualToValue,
+  getIsOptionEqualToValue,
   testId,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
   const renderInput = useCallback(
@@ -312,7 +312,7 @@ const Autocomplete = <
       renderInput={renderInput}
       value={localValue}
       inputValue={localInputValue}
-      isOptionEqualToValue={isOptionEqualToValue}
+      isOptionEqualToValue={getIsOptionEqualToValue}
     />
   );
 };

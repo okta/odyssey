@@ -383,7 +383,7 @@ export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> 
       hasMultipleChoices: true,
       isReadOnly: false,
       label: "label",
-      isOptionEqualToValue: (option, value) => option.id === value.id,
+      getIsOptionEqualToValue: (option, value) => option.id === value.id,
     },
     render: function C(props) {
       const [localValue, setLocalValue] = useState<MoonMeta[] | undefined>(
@@ -402,7 +402,7 @@ export const UnontrolledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete>
       hasMultipleChoices: true,
       isReadOnly: false,
       label: "label",
-      isOptionEqualToValue: (option, value) => option.id === value.id,
+      getIsOptionEqualToValue: (option, value) => option.id === value.id,
     },
   };
 
@@ -412,7 +412,7 @@ export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
     value: jupiterGalileanMoons[0],
     isReadOnly: false,
     label: "label",
-    isOptionEqualToValue: (option, value) => option.id === value.id,
+    getIsOptionEqualToValue: (option, value) => option.id === value.id,
   },
   render: function C(props) {
     const [localValue, setLocalValue] = useState<MoonMeta | undefined>(
@@ -429,6 +429,6 @@ export const UnontrolledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
     defaultValue: jupiterGalileanMoons[0],
     isReadOnly: false,
     label: "label",
-    isOptionEqualToValue: (option, value) => option.id === value.id,
+    getIsOptionEqualToValue: (option, value) => option.id === value.id,
   },
 };
