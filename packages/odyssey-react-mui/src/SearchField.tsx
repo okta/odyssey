@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useState, useEffect } from "react";
 import { InputAdornment, InputBase, IconButton } from "@mui/material";
 import {
   ChangeEventHandler,
@@ -19,12 +18,14 @@ import {
   InputHTMLAttributes,
   memo,
   useCallback,
+  useMemo,
 } from "react";
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+import { useControlledState } from "./useControlledState";
 
 export type SearchFieldProps = {
   /**
@@ -33,6 +34,10 @@ export type SearchFieldProps = {
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
+  /**
+   * The value of the `input` element to use when uncontrolled.
+   */
+  defaultValue?: string;
   /**
    * If `true`, the component will receive focus automatically.
    */
@@ -70,7 +75,7 @@ export type SearchFieldProps = {
    */
   placeholder?: string;
   /**
-   * The value of the `input` element, required for a controlled component.
+   * The value of the `input` element, to use when controlled.
    */
   value?: string;
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
@@ -80,6 +85,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
       autoCompleteType,
+      defaultValue: uncontrolledValue,
       hasInitialFocus,
       id: idOverride,
       isDisabled = false,
@@ -95,27 +101,31 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     },
     ref
   ) => {
-    const [uncontrolledValue, setUncontrolledValue] = useState("");
+    const [localValue, setLocalValue] = useControlledState({
+      controlledValue,
+      uncontrolledValue,
+    });
 
     const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> =
       useCallback(
         (event) => {
-          setUncontrolledValue(event.currentTarget.value);
+          setLocalValue(event.currentTarget.value);
           onChangeProp?.(event);
         },
-        [onChangeProp]
+        [onChangeProp, setLocalValue]
       );
 
     const onClear = useCallback(() => {
-      setUncontrolledValue("");
+      setLocalValue("");
       onClearProp?.();
-    }, [onClearProp]);
+    }, [onClearProp, setLocalValue]);
 
-    useEffect(() => {
-      if (controlledValue !== undefined) {
-        setUncontrolledValue(controlledValue);
+    const valueProp = useMemo(() => {
+      if (uncontrolledValue === undefined) {
+        return localValue;
       }
-    }, [controlledValue]);
+      return undefined;
+    }, [uncontrolledValue, localValue]);
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id }) => (
@@ -140,6 +150,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             )
           }
           id={id}
+          defaultValue={uncontrolledValue}
           name={nameOverride ?? id}
           onBlur={onBlur}
           onChange={onChange}
@@ -152,14 +163,11 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             </InputAdornment>
           }
           type="search"
-          value={
-            controlledValue === undefined ? uncontrolledValue : controlledValue
-          }
+          value={valueProp}
         />
       ),
       [
         autoCompleteType,
-        controlledValue,
         hasInitialFocus,
         isDisabled,
         nameOverride,
@@ -171,6 +179,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         ref,
         testId,
         uncontrolledValue,
+        valueProp,
       ]
     );
 

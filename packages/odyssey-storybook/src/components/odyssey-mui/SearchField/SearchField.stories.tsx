@@ -15,6 +15,7 @@ import { SearchField, SearchFieldProps } from "@okta/odyssey-react-mui";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { useCallback, useState } from "react";
 
 const storybookMeta: Meta<SearchFieldProps> = {
   title: "MUI Components/Forms/SearchField",
@@ -24,6 +25,19 @@ const storybookMeta: Meta<SearchFieldProps> = {
       control: "text",
       description:
         "This prop helps users to fill forms faster, especially on mobile devices. The name can be confusing, as it's more like an autofill. You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill)",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: {
+          summary: undefined,
+        },
+      },
+    },
+    defaultValue: {
+      control: "text",
+      description:
+        "The value of the `input` element. Use when the component is not controlled",
       table: {
         type: {
           summary: "string",
@@ -105,10 +119,13 @@ const storybookMeta: Meta<SearchFieldProps> = {
     value: {
       control: "text",
       description:
-        "The value of the `input` element, required for a controlled component",
+        "The value of the `input` element. Use when the component is controlled",
       table: {
         type: {
           summary: "string",
+        },
+        defaultValue: {
+          summary: undefined,
         },
       },
     },
@@ -123,4 +140,24 @@ const storybookMeta: Meta<SearchFieldProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<SearchFieldProps> = {};
+export const Default: StoryObj<typeof SearchField> = {
+  args: {
+    defaultValue: "",
+  },
+};
+
+export const ControlledSearch: StoryObj<typeof SearchField> = {
+  args: {
+    defaultValue: undefined,
+  },
+  render: function C(props) {
+    const [constrolledValue, setControlledValue] = useState("Foo");
+    const onChange = useCallback(
+      (event) => setControlledValue(event.target.value),
+      []
+    );
+    return (
+      <SearchField {...props} value={constrolledValue} onChange={onChange} />
+    );
+  },
+};
