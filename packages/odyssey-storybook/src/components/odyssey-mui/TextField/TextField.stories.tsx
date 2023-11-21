@@ -169,7 +169,7 @@ export default storybookMeta;
 
 export const Default: StoryObj<TextFieldProps> = {
   args: {
-    //
+    defaultValue: "",
   },
 };
 
@@ -183,13 +183,14 @@ export const Disabled: StoryObj<TextFieldProps> = {
   },
   args: {
     isDisabled: true,
-    value: "Earth",
+    defaultValue: "Earth",
   },
 };
 
 export const Optional: StoryObj<TextFieldProps> = {
   args: {
     isOptional: true,
+    defaultValue: "",
   },
 };
 
@@ -210,12 +211,14 @@ export const ReadOnly: StoryObj<TextFieldProps> = {
 export const Error: StoryObj<TextFieldProps> = {
   args: {
     errorMessage: "This field is required.",
+    defaultValue: "",
   },
 };
 
 export const Hint: StoryObj<TextFieldProps> = {
   args: {
     hint: "Specify your destination within the Sol system.",
+    defaultValue: "",
   },
 };
 
@@ -230,6 +233,7 @@ export const Adornment: StoryObj<TextFieldProps> = {
   args: {
     label: "Cargo weight",
     endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+    defaultValue: "",
   },
 };
 
@@ -239,6 +243,7 @@ export const Email: StoryObj<TextFieldProps> = {
     autoCompleteType: "work email",
     label: "Company email",
     type: "email",
+    defaultValue: "",
   },
 };
 
@@ -255,6 +260,7 @@ export const Multiline: StoryObj<TextFieldProps> = {
     autoCompleteType: "shipping street-address",
     label: "Permanent residence",
     isMultiline: true,
+    defaultValue: "",
   },
 };
 
@@ -272,5 +278,6 @@ export const Tel: StoryObj<TextFieldProps> = {
     label: "Phone number",
     startAdornment: <InputAdornment position="start">+1</InputAdornment>,
     type: "tel",
+    defaultValue: "",
   },
 };

@@ -18,12 +18,14 @@ import {
   memo,
   ReactElement,
   useCallback,
+  useMemo,
 } from "react";
 import { InputAdornment, InputBase } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
 import { SeleniumProps } from "./SeleniumProps";
+import { useControlledState } from "./useControlledState";
 
 export const textFieldTypeValues = [
   "email",
@@ -40,6 +42,10 @@ export type TextFieldProps = {
    * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
+  /**
+   * The default value. Use when the component is not controlled.
+   */
+  defaultValue?: string;
   /**
    * End `InputAdornment` for this component.
    */
@@ -91,6 +97,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
       autoCompleteType,
+      defaultValue,
       hasInitialFocus,
       endAdornment,
       errorMessage,
@@ -103,16 +110,38 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       label,
       name: nameOverride,
       onBlur,
-      onChange,
+      onChange: onChangeProp,
       onFocus,
       placeholder,
       startAdornment,
       testId,
       type = "text",
-      value,
+      value: valueProp,
     },
     ref
   ) => {
+    const [localValue, setLocalValue] = useControlledState({
+      controlledValue: valueProp,
+      uncontrolledValue: defaultValue,
+    });
+
+    const onChange = useCallback<
+      NonNullable<ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>>
+    >(
+      (event) => {
+        setLocalValue(event.target.value);
+        onChangeProp?.(event);
+      },
+      [onChangeProp, setLocalValue]
+    );
+
+    const value = useMemo(() => {
+      if (defaultValue === undefined) {
+        return localValue;
+      }
+      return undefined;
+    }, [defaultValue, localValue]);
+
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
@@ -125,6 +154,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
           data-se={testId}
+          defaultValue={defaultValue}
           endAdornment={
             endAdornment && (
               <InputAdornment position="end">{endAdornment}</InputAdornment>
@@ -151,6 +181,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       ),
       [
         autoCompleteType,
+        defaultValue,
         hasInitialFocus,
         endAdornment,
         isMultiline,
