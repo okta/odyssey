@@ -16,6 +16,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, screen } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
 import { expect } from "@storybook/jest";
+import { useCallback, useState } from "react";
 
 const optionsArray: SelectProps<string | string[], boolean>["options"] = [
   "Earth",
@@ -106,6 +107,19 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
   title: "MUI Components/Forms/Select",
   component: Select,
   argTypes: {
+    defaultValue: {
+      control: "text",
+      description:
+        "The default value. Use when the component is not controlled.",
+      table: {
+        type: {
+          summary: "string | string[]",
+        },
+        defaultValue: {
+          summary: undefined,
+        },
+      },
+    },
     errorMessage: {
       control: "text",
       description: "The error message for the select component",
@@ -236,7 +250,8 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
     },
     value: {
       control: "text",
-      description: "The value or values selected in the select component",
+      description:
+        "The `input` value. Use when the component is controlled.\n\nProviding an empty string will select no options.\n\nSet to an empty string `''` if you don't want any of the available options to be selected.",
       table: {
         type: {
           summary: "string | string[]",
@@ -255,7 +270,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<SelectProps<string | string[], boolean>> = {
+export const Default: StoryObj<typeof Select> = {
   play: async ({ canvasElement, step }) => {
     await step("Select Earth from the listbox", async () => {
       const comboBoxElement = canvasElement.querySelector(
@@ -276,17 +291,19 @@ export const Default: StoryObj<SelectProps<string | string[], boolean>> = {
     });
   },
 };
-Default.args = {};
+Default.args = { defaultValue: "" };
 
-export const Disabled: StoryObj<SelectProps<string | string[], boolean>> = {
+export const Disabled: StoryObj<typeof Select> = {
   args: {
     isDisabled: true,
+    defaultValue: "",
   },
 };
 
-export const Error: StoryObj<SelectProps<string | string[], boolean>> = {
+export const Error: StoryObj<typeof Select> = {
   args: {
     errorMessage: "Select your destination.",
+    defaultValue: "",
   },
   play: async ({ step }) => {
     await step("Check for a11y errors on Select Error", async () => {
@@ -295,39 +312,40 @@ export const Error: StoryObj<SelectProps<string | string[], boolean>> = {
   },
 };
 
-export const OptionsObject: StoryObj<SelectProps<string | string[], boolean>> =
-  {
-    args: {
-      options: optionsObject,
-    },
-    parameters: {
-      docs: {
-        description: {
-          story:
-            "Select can accept `options` as a flat array, an array of objects, or both. This demonstrates an array of objects with `value` and `name`.",
-        },
+export const OptionsObject: StoryObj<typeof Select> = {
+  args: {
+    options: optionsObject,
+    defaultValue: "",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Select can accept `options` as a flat array, an array of objects, or both. This demonstrates an array of objects with `value` and `name`.",
       },
     },
-  };
+  },
+};
 
-export const OptionsGrouped: StoryObj<SelectProps<string | string[], boolean>> =
-  {
-    args: {
-      options: optionsGrouped,
-    },
-    parameters: {
-      docs: {
-        description: {
-          story:
-            'Objects with `type: "heading"` will have their `text` displayed as a heading.',
-        },
+export const OptionsGrouped: StoryObj<typeof Select> = {
+  args: {
+    options: optionsGrouped,
+    defaultValue: "",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Objects with `type: "heading"` will have their `text` displayed as a heading.',
       },
     },
-  };
+  },
+};
 
-export const MultiSelect: StoryObj<SelectProps<string | string[], boolean>> = {
+export const MultiSelect: StoryObj<typeof Select> = {
   args: {
     isMultiSelect: true,
+    defaultValue: [],
   },
   play: async ({ canvasElement, step }) => {
     await step("Select Multiple items from the listbox", async () => {
@@ -349,5 +367,49 @@ export const MultiSelect: StoryObj<SelectProps<string | string[], boolean>> = {
         await waitFor(() => axeRun("Select Multiple"));
       }
     });
+  },
+};
+
+export const ControlledSelect: StoryObj<typeof Select> = {
+  args: {
+    value: "",
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState("");
+    const onChange = useCallback(
+      (event) => setLocalValue(event.target.value),
+      []
+    );
+    return <Select {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
+export const ControlledMultipleSelect: StoryObj<typeof Select> = {
+  args: {
+    value: [],
+    hasMultipleChoices: true,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState([]);
+    const onChange = useCallback(
+      (event) => setLocalValue(event.target.value),
+      []
+    );
+    return <Select {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
+export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
+  args: {
+    value: [],
+    hasMultipleChoices: true,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState(["Earth", "Mars"]);
+    const onChange = useCallback(
+      (event) => setLocalValue(event.target.value),
+      []
+    );
+    return <Select {...props} value={localValue} onChange={onChange} />;
   },
 };

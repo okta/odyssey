@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useMemo } from "react";
 import {
   Box,
   Checkbox as MuiCheckbox,
@@ -26,6 +26,7 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
 import type { SeleniumProps } from "./SeleniumProps";
+import { useControlledState } from "./useControlledState";
 
 export type SelectOption = {
   text: string;
@@ -40,6 +41,10 @@ export type SelectProps<
   Value extends SelectValueType<HasMultipleChoices>,
   HasMultipleChoices extends boolean
 > = {
+  /**
+   * The default value. Use when the component is not controlled.
+   */
+  defaultValue?: MuiSelectProps<Value>["defaultValue"];
   /**
    * If `true`, the Select allows multiple selections
    */
@@ -98,6 +103,7 @@ const Select = <
   Value extends SelectValueType<HasMultipleChoices>,
   HasMultipleChoices extends boolean
 >({
+  defaultValue,
   errorMessage,
   hasMultipleChoices: hasMultipleChoicesProp,
   hint,
@@ -122,31 +128,21 @@ const Select = <
     [hasMultipleChoicesProp, isMultiSelect]
   );
 
-  const formattedValueForMultiSelect = isMultiSelect
-    ? ([] as string[] as Value)
-    : ("" as string as Value);
-
-  const [selectedValue, setSelectedValue] = useState(
-    value === undefined ? formattedValueForMultiSelect : value
+  const [localSelectedValue, setLocalSelectedValue] = useControlledState<Value>(
+    { controlledValue: value, uncontrolledValue: defaultValue }
   );
 
   const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
     (event, child) => {
-      const valueFromEvent = event.target.value;
-
-      if (typeof valueFromEvent === "string") {
-        if (hasMultipleChoices) {
-          setSelectedValue(valueFromEvent.split(",") as Value);
-        } else {
-          setSelectedValue(valueFromEvent as Value);
-        }
-      } else {
-        setSelectedValue(valueFromEvent);
-      }
-
+      const {
+        target: { value },
+      } = event;
+      setLocalSelectedValue(
+        (typeof value === "string" ? value.split(",") : value) as Value
+      );
       onChangeProp?.(event, child);
     },
-    [hasMultipleChoices, onChangeProp, setSelectedValue]
+    [onChangeProp, setLocalSelectedValue]
   );
 
   // Normalize the options array to accommodate the various
@@ -211,10 +207,12 @@ const Select = <
         return (
           <MenuItem key={option.value} value={option.value}>
             {hasMultipleChoices && (
-              <MuiCheckbox checked={selectedValue.includes(option.value)} />
+              <MuiCheckbox
+                checked={localSelectedValue?.includes(option.value)}
+              />
             )}
             {option.text}
-            {selectedValue == option.value && (
+            {localSelectedValue == option.value && (
               <ListItemSecondaryAction>
                 <CheckIcon />
               </ListItemSecondaryAction>
@@ -222,7 +220,7 @@ const Select = <
           </MenuItem>
         );
       }),
-    [hasMultipleChoices, normalizedOptions, selectedValue]
+    [hasMultipleChoices, normalizedOptions, localSelectedValue]
   );
 
   const renderFieldComponent = useCallback(
@@ -232,6 +230,7 @@ const Select = <
         aria-errormessage={errorMessageElementId}
         children={children}
         data-se={testId}
+        defaultValue={defaultValue}
         id={id}
         labelId={labelElementId}
         multiple={hasMultipleChoices}
@@ -240,18 +239,19 @@ const Select = <
         onChange={onChange}
         onFocus={onFocus}
         renderValue={hasMultipleChoices ? renderValue : undefined}
-        value={selectedValue}
+        value={localSelectedValue}
       />
     ),
     [
       children,
+      defaultValue,
       hasMultipleChoices,
+      localSelectedValue,
       nameOverride,
       onBlur,
       onChange,
       onFocus,
       renderValue,
-      selectedValue,
       testId,
     ]
   );

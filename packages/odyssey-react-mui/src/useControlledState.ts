@@ -10,12 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
 type UseControlledStateProps<Value> = {
   controlledValue?: Value; // isChecked
   uncontrolledValue?: Value; // isDefaultChecked
 };
+
+type ControlledState<Value> = [
+  stateValue: Value | undefined,
+  setState: Dispatch<SetStateAction<Value | undefined>>
+];
 
 /**
  * Use the same way as `useState`. Returns a stateful value, and a function to update it.
@@ -29,7 +34,7 @@ type UseControlledStateProps<Value> = {
 export const useControlledState = <Value>({
   controlledValue,
   uncontrolledValue,
-}: UseControlledStateProps<Value>) => {
+}: UseControlledStateProps<Value>): ControlledState<Value> => {
   const isControlledMode = useRef(controlledValue !== undefined);
   const [stateValue, setStateValue] = useState(
     isControlledMode.current ? controlledValue : uncontrolledValue
@@ -47,10 +52,5 @@ export const useControlledState = <Value>({
     }
   };
 
-  return [
-    stateValue,
-    // If `value` is controlled externally, ignore calls to the setter.
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    setState,
-  ] as const;
+  return [stateValue, setState];
 };
