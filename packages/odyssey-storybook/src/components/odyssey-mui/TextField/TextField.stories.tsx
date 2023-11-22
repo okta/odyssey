@@ -36,6 +36,16 @@ const storybookMeta: Meta<TextFieldProps> = {
         },
       },
     },
+    defaultValue: {
+      control: "text",
+      description:
+        "The value of the `input` element. Use when the component is not controlled",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     endAdornment: {
       control: "text",
       description: "End `InputAdornment` for this component",
