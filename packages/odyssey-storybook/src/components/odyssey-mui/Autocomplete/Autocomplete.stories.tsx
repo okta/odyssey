@@ -377,6 +377,14 @@ const jupiterGalileanMoons: MoonMeta[] = [
 
 export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
   {
+    parameters: {
+      docs: {
+        description: {
+          story:
+            "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`",
+        },
+      },
+    },
     args: {
       options: jupiterGalileanMoons,
       value: jupiterGalileanMoons.slice(0, 2),
@@ -407,6 +415,14 @@ export const UnontrolledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete>
   };
 
 export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`",
+      },
+    },
+  },
   args: {
     options: jupiterGalileanMoons,
     value: jupiterGalileanMoons[0],

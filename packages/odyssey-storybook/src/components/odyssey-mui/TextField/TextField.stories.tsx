@@ -20,6 +20,7 @@ import {
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { useCallback, useState } from "react";
 
 const storybookMeta: Meta<TextFieldProps> = {
   title: "MUI Components/Forms/TextField",
@@ -279,5 +280,27 @@ export const Tel: StoryObj<TextFieldProps> = {
     startAdornment: <InputAdornment position="start">+1</InputAdornment>,
     type: "tel",
     defaultValue: "",
+  },
+};
+
+export const ControlledTextField: StoryObj<typeof TextField> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`",
+      },
+    },
+  },
+  args: {
+    value: "Initial state",
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState("Initial state");
+    const onChange = useCallback(
+      (event) => setLocalValue(event.target.value),
+      []
+    );
+    return <TextField {...props} value={localValue} onChange={onChange} />;
   },
 };
