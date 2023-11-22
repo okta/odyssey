@@ -10,12 +10,22 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { ReactElement, forwardRef, memo, useCallback } from "react";
-import { Select as MuiSelect } from "@mui/material";
-import { SelectProps as MuiSelectProps } from "@mui/material";
+import React, {
+  ReactElement,
+  forwardRef,
+  memo,
+  useCallback,
+  useMemo,
+} from "react";
+import {
+  Select as MuiSelect,
+  SelectProps as MuiSelectProps,
+} from "@mui/material";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
+import { useControlledState } from "./useControlledState";
+import { ForwardRefWithType } from "./@types/react-augment";
 
 export type NativeSelectOption = {
   text: string;
@@ -23,19 +33,30 @@ export type NativeSelectOption = {
   type?: "heading" | "option";
 };
 
-export type NativeSelectProps = {
+export type NativeSelectValueType<HasMultipleChoices> =
+  HasMultipleChoices extends true ? string[] : string;
+
+export type NativeSelectProps<
+  Value extends NativeSelectValueType<HasMultipleChoices>,
+  HasMultipleChoices extends boolean
+> = {
   /**
    * The options or optgroup elements within the NativeSelect
    */
   children?: ReactElement<"option"> | ReactElement<"optgroup">;
   /**
-   * The default value of the NativeSelect. Only applicable if `value` is not provided
+   * The default value of the NativeSelect. Use when component is uncontrolled
    */
-  defaultValue?: string;
+  defaultValue?: Value;
   /**
-   * If `true`, the NativeSelect allows multiple selections
+   * If `true`, the Select allows multiple selections
    */
-  isMultiSelect?: boolean;
+  hasMultipleChoices?: HasMultipleChoices;
+  /**
+   * @deprecated Use `hasMultipleChoices` instead
+   */
+  /** **Deprecated:** use `hasMultipleChoices` */
+  isMultiSelect?: HasMultipleChoices;
   /**
    * The label text for the NativeSelect
    */
@@ -43,45 +64,85 @@ export type NativeSelectProps = {
   /**
    * Callback fired when the NativeSelect loses focus
    */
-  onBlur?: MuiSelectProps["onBlur"];
+  onBlur?: MuiSelectProps<Value>["onBlur"];
   /**
    * Callback fired when the value of the NativeSelect changes
    */
-  onChange?: MuiSelectProps["onChange"];
+  onChange?: MuiSelectProps<Value>["onChange"];
   /**
    * Callback fired when the NativeSelect gains focus
    */
-  onFocus?: MuiSelectProps["onFocus"];
+  onFocus?: MuiSelectProps<Value>["onFocus"];
+  options: Value;
   /**
-   * The value or values selected in the NativeSelect
+   * The value or values selected in the NativeSelect. Use when component is controlled
    */
-  value?: string | string[];
+  value?: Value;
 } & Pick<
   FieldComponentProps,
   "errorMessage" | "hint" | "id" | "isDisabled" | "isOptional"
 > &
   SeleniumProps;
 
-const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
-  (
+const NativeSelect: ForwardRefWithType = forwardRef(
+  <
+    Value extends NativeSelectValueType<HasMultipleChoices>,
+    HasMultipleChoices extends boolean
+  >(
     {
       defaultValue,
       errorMessage,
+      hasMultipleChoices: hasMultipleChoicesProp,
       hint,
       id: idOverride,
       isDisabled = false,
-      isMultiSelect = false,
+      isMultiSelect,
       isOptional = false,
       label,
       onBlur,
-      onChange,
+      onChange: onChangeProp,
       onFocus,
       testId,
-      value,
+      value: valueProp,
       children,
-    },
-    ref
+    }: NativeSelectProps<Value, HasMultipleChoices>,
+    ref?: React.Ref<ReactElement>
   ) => {
+    const [localValue, setLocalValue] = useControlledState({
+      controlledValue: valueProp,
+      uncontrolledValue: defaultValue,
+    });
+
+    const value = useMemo(() => {
+      if (defaultValue === undefined) {
+        return localValue;
+      }
+      return undefined;
+    }, [defaultValue, localValue]);
+
+    const onChange = useCallback<
+      NonNullable<MuiSelectProps<Value>["onChange"]>
+    >(
+      (event, child) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-expect-error
+        const { options } = event.target as HTMLSelectElement;
+        const selectedOptions = [...options]
+          .filter((option) => option.selected)
+          .map((selectedOption) => selectedOption.value);
+        setLocalValue(selectedOptions as Value);
+        onChangeProp?.(event, child);
+      },
+      [onChangeProp, setLocalValue]
+    );
+
+    const hasMultipleChoices = useMemo(
+      () =>
+        hasMultipleChoicesProp === undefined
+          ? isMultiSelect
+          : hasMultipleChoicesProp,
+      [hasMultipleChoicesProp, isMultiSelect]
+    );
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
         <MuiSelect
@@ -95,7 +156,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
             "aria-labelledby": labelElementId,
           }}
           name={idOverride}
-          multiple={isMultiSelect}
+          multiple={hasMultipleChoices}
           native={true}
           onBlur={onBlur}
           onChange={onChange}
@@ -108,7 +169,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
         children,
         defaultValue,
         idOverride,
-        isMultiSelect,
+        hasMultipleChoices,
         onBlur,
         onChange,
         onFocus,
