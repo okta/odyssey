@@ -276,7 +276,14 @@ export const Controlled: StoryObj<typeof PasswordField> = {
       (event) => setLocalValue(event?.target.value),
       []
     );
-    return <PasswordField {...props} value={localValue} onChange={onChange} />;
+    return (
+      <PasswordField
+        {...props}
+        defaultValue={undefined}
+        value={localValue}
+        onChange={onChange}
+      />
+    );
   },
 };
 
@@ -298,6 +305,13 @@ export const ControlledDefaultInput: StoryObj<typeof PasswordField> = {
       (event) => setLocalValue(event?.target.value),
       []
     );
-    return <PasswordField {...props} value={localValue} onChange={onChange} />;
+    return (
+      <PasswordField
+        {...props}
+        defaultValue={undefined}
+        value={localValue}
+        onChange={onChange}
+      />
+    );
   },
 };

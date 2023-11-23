@@ -331,7 +331,7 @@ export const Optional: StoryObj<AutocompleteType> = {
 export const ReadOnly: StoryObj<AutocompleteType> = {
   args: {
     isReadOnly: true,
-    value: { label: "Tycho Station" },
+    defaultValue: { label: "Tycho Station" },
   },
 };
 

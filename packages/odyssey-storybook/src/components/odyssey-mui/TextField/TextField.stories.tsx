@@ -171,6 +171,7 @@ const storybookMeta: Meta<typeof TextField> = {
   },
   args: {
     label: "Destination",
+    defaultValue: undefined,
   },
   decorators: [MuiThemeDecorator],
   tags: ["autodocs"],
@@ -307,7 +308,7 @@ export const ControlledTextField: StoryObj<typeof TextField> = {
   args: {
     value: "Initial state",
   },
-  render: function C(props) {
+  render: function C({ ...props }) {
     const [localValue, setLocalValue] = useState("Initial state");
     const onChange = useCallback(
       (event) => setLocalValue(event.target.value),

@@ -162,7 +162,7 @@ export const ControlledSearch: StoryObj<typeof SearchField> = {
     defaultValue: undefined,
   },
   render: function C(props) {
-    const [constrolledValue, setControlledValue] = useState("Foo");
+    const [constrolledValue, setControlledValue] = useState("Jupiter");
     const onChange = useCallback(
       (event) => setControlledValue(event.target.value),
       []
