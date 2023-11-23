@@ -95,6 +95,13 @@ const Checkbox = ({
     uncontrolledValue: isDefaultChecked,
   });
 
+  const inputValues = useMemo(() => {
+    if (isLocalChecked === undefined) {
+      return { defaultChecked: isDefaultChecked };
+    }
+    return { checked: isLocalChecked };
+  }, [isDefaultChecked, isLocalChecked]);
+
   const label = useMemo(() => {
     return (
       <>
@@ -134,7 +141,7 @@ const Checkbox = ({
       }
       control={
         <MuiCheckbox
-          checked={isLocalChecked}
+          {...inputValues}
           indeterminate={isIndeterminate}
           onChange={onChange}
           required={isRequired}

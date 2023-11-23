@@ -111,11 +111,11 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       controlledValue: valueProp,
       uncontrolledValue: defaultValue,
     });
-    const value = useMemo(() => {
-      if (defaultValue === undefined) {
-        return localValue;
+    const inputValues = useMemo(() => {
+      if (localValue === undefined) {
+        return { defaultValue };
       }
-      return undefined;
+      return { value: localValue };
     }, [defaultValue, localValue]);
 
     const onChange = useCallback<
@@ -131,12 +131,12 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
+          {...inputValues}
           aria-describedby={ariaDescribedBy}
           autoComplete={inputType === "password" ? autoCompleteType : "off"}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
           data-se={testId}
-          defaultValue={defaultValue}
           endAdornment={
             hasShowPassword && (
               <InputAdornment position="end">
@@ -169,13 +169,12 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
           ref={ref}
           required={!isOptional}
           type={inputType}
-          value={value}
         />
       ),
       [
         autoCompleteType,
-        defaultValue,
         hasInitialFocus,
+        inputValues,
         t,
         togglePasswordVisibility,
         inputType,
@@ -189,7 +188,6 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hasShowPassword,
         ref,
         testId,
-        value,
       ]
     );
 

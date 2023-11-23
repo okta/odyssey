@@ -132,6 +132,13 @@ const Select = <
     { controlledValue: value, uncontrolledValue: defaultValue }
   );
 
+  const inputValues = useMemo(() => {
+    if (localSelectedValue === undefined) {
+      return { defaultValue };
+    }
+    return { value: localSelectedValue };
+  }, [localSelectedValue, defaultValue]);
+
   const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
     (event, child) => {
       const {
@@ -226,11 +233,11 @@ const Select = <
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiSelect
+        {...inputValues}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         children={children}
         data-se={testId}
-        defaultValue={defaultValue}
         id={id}
         labelId={labelElementId}
         multiple={hasMultipleChoices}
@@ -239,14 +246,12 @@ const Select = <
         onChange={onChange}
         onFocus={onFocus}
         renderValue={hasMultipleChoices ? renderValue : undefined}
-        value={localSelectedValue}
       />
     ),
     [
       children,
-      defaultValue,
+      inputValues,
       hasMultipleChoices,
-      localSelectedValue,
       nameOverride,
       onBlur,
       onChange,

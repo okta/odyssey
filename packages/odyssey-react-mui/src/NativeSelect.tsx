@@ -113,11 +113,11 @@ const NativeSelect: ForwardRefWithType = forwardRef(
       uncontrolledValue: defaultValue,
     });
 
-    const value = useMemo(() => {
-      if (defaultValue === undefined) {
-        return localValue;
+    const inputValues = useMemo(() => {
+      if (localValue === undefined) {
+        return { defaultValue };
       }
-      return undefined;
+      return { value: localValue };
     }, [defaultValue, localValue]);
 
     const onChange = useCallback<
@@ -146,10 +146,10 @@ const NativeSelect: ForwardRefWithType = forwardRef(
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, errorMessageElementId, labelElementId }) => (
         <MuiSelect
+          {...inputValues}
           aria-describedby={ariaDescribedBy}
           children={children}
           data-se={testId}
-          defaultValue={defaultValue}
           id={idOverride}
           inputProps={{
             "aria-errormessage": errorMessageElementId,
@@ -162,20 +162,18 @@ const NativeSelect: ForwardRefWithType = forwardRef(
           onChange={onChange}
           onFocus={onFocus}
           ref={ref}
-          value={value}
         />
       ),
       [
         children,
-        defaultValue,
         idOverride,
+        inputValues,
         hasMultipleChoices,
         onBlur,
         onChange,
         onFocus,
         ref,
         testId,
-        value,
       ]
     );
 

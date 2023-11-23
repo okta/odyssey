@@ -120,16 +120,17 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       onClearProp?.();
     }, [onClearProp, setLocalValue]);
 
-    const valueProp = useMemo(() => {
-      if (uncontrolledValue === undefined) {
-        return localValue;
+    const inputValues = useMemo(() => {
+      if (localValue === undefined) {
+        return { defaultValue: uncontrolledValue };
       }
-      return undefined;
+      return { value: localValue };
     }, [uncontrolledValue, localValue]);
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id }) => (
         <InputBase
+          {...inputValues}
           aria-describedby={ariaDescribedBy}
           autoComplete={autoCompleteType}
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
@@ -150,7 +151,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             )
           }
           id={id}
-          defaultValue={uncontrolledValue}
           name={nameOverride ?? id}
           onBlur={onBlur}
           onChange={onChange}
@@ -163,12 +163,12 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             </InputAdornment>
           }
           type="search"
-          value={valueProp}
         />
       ),
       [
         autoCompleteType,
         hasInitialFocus,
+        inputValues,
         isDisabled,
         nameOverride,
         onBlur,
@@ -179,7 +179,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         ref,
         testId,
         uncontrolledValue,
-        valueProp,
       ]
     );
 

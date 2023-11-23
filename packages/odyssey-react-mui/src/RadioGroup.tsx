@@ -14,7 +14,7 @@ import {
   RadioGroup as MuiRadioGroup,
   type RadioGroupProps as MuiRadioGroupProps,
 } from "@mui/material";
-import { memo, ReactElement, useCallback } from "react";
+import { memo, ReactElement, useCallback, useMemo } from "react";
 
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
@@ -67,6 +67,13 @@ const RadioGroup = ({
     uncontrolledValue: defaultValue,
   });
 
+  const inputValues = useMemo(() => {
+    if (localValue === undefined) {
+      return { defaultValue };
+    }
+    return { value: localValue };
+  }, [localValue, defaultValue]);
+
   const onChange = useCallback<NonNullable<MuiRadioGroupProps["onChange"]>>(
     (event, value) => {
       setLocalValue(value);
@@ -77,20 +84,19 @@ const RadioGroup = ({
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiRadioGroup
+        {...inputValues}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         aria-labelledby={labelElementId}
         data-se={testId}
-        defaultValue={defaultValue}
         id={id}
         name={nameOverride ?? id}
         onChange={onChange}
-        value={localValue}
       >
         {children}
       </MuiRadioGroup>
     ),
-    [children, defaultValue, nameOverride, onChange, testId, localValue]
+    [children, inputValues, nameOverride, onChange, testId]
   );
 
   return (

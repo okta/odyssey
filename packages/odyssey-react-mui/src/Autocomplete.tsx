@@ -251,10 +251,23 @@ const Autocomplete = <
     uncontrolledValue: defaultValuesProp,
   });
 
+  const valueProps = useMemo(() => {
+    if (localValue === undefined) {
+      return { defaultValue: defaultValuesProp };
+    }
+    return { value: localValue };
+  }, [defaultValuesProp, localValue]);
+
   const [localInputValue, setLocalInputValue] = useControlledState({
     controlledValue: inputValue,
     uncontrolledValue: undefined,
   });
+
+  const inputValueProp = useMemo(() => {
+    return {
+      inputValue: inputValue === undefined ? undefined : localInputValue,
+    };
+  }, [inputValue, localInputValue]);
 
   const onChange = useCallback<
     NonNullable<
@@ -292,10 +305,11 @@ const Autocomplete = <
 
   return (
     <MuiAutocomplete
+      {...valueProps}
+      {...inputValueProp}
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
       data-se={testId}
-      defaultValue={defaultValuesProp}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
       freeSolo={isCustomValueAllowed}
@@ -310,8 +324,6 @@ const Autocomplete = <
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}
-      value={localValue}
-      inputValue={localInputValue}
       isOptionEqualToValue={getIsOptionEqualToValue}
     />
   );

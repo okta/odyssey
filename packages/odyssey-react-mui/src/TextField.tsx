@@ -124,6 +124,12 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       controlledValue: valueProp,
       uncontrolledValue: defaultValue,
     });
+    const inputValue = useMemo(() => {
+      if (localValue === undefined) {
+        return { defaultValue };
+      }
+      return { value: localValue };
+    }, [localValue, defaultValue]);
 
     const onChange = useCallback<
       NonNullable<ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>>
@@ -135,16 +141,10 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       [onChangeProp, setLocalValue]
     );
 
-    const value = useMemo(() => {
-      if (defaultValue === undefined) {
-        return localValue;
-      }
-      return undefined;
-    }, [defaultValue, localValue]);
-
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
+          {...inputValue}
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
@@ -154,7 +154,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus={hasInitialFocus}
           data-se={testId}
-          defaultValue={defaultValue}
           endAdornment={
             endAdornment && (
               <InputAdornment position="end">{endAdornment}</InputAdornment>
@@ -176,19 +175,18 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             )
           }
           type={type}
-          value={value}
         />
       ),
       [
         autoCompleteType,
-        defaultValue,
+        inputValue,
         hasInitialFocus,
         endAdornment,
         isMultiline,
         nameOverride,
+        onBlur,
         onChange,
         onFocus,
-        onBlur,
         placeholder,
         isOptional,
         isReadOnly,
@@ -196,7 +194,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         startAdornment,
         testId,
         type,
-        value,
       ]
     );
 
