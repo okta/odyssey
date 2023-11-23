@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Radio, RadioGroup, RadioGroupProps } from "@okta/odyssey-react-mui";
+import { Radio, RadioGroup } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
 import { expect } from "@storybook/jest";
 
@@ -93,7 +93,7 @@ const storybookMeta: Meta<typeof RadioGroup> = {
 
 export default storybookMeta;
 
-const Template: StoryObj<RadioGroupProps> = {
+const Template: StoryObj<typeof RadioGroup> = {
   render: function C(props) {
     return (
       <RadioGroup {...props}>
@@ -105,25 +105,30 @@ const Template: StoryObj<RadioGroupProps> = {
   },
 };
 
-export const Default: StoryObj<RadioGroupProps> = {
+export const Default: StoryObj<typeof RadioGroup> = {
   ...Template,
+  args: {
+    defaultValue: "",
+  },
 };
 
-export const Hint: StoryObj<RadioGroupProps> = {
+export const Hint: StoryObj<typeof RadioGroup> = {
   ...Template,
   args: {
     hint: "Select the speed at which you wish to travel.",
+    defaultValue: "",
   },
 };
 
-export const Disabled: StoryObj<RadioGroupProps> = {
+export const Disabled: StoryObj<typeof RadioGroup> = {
   ...Template,
   args: {
     isDisabled: true,
+    defaultValue: "",
   },
 };
 
-export const Error: StoryObj<RadioGroupProps> = {
+export const Error: StoryObj<typeof RadioGroup> = {
   ...Template,
   parameters: {
     docs: {
@@ -135,10 +140,11 @@ export const Error: StoryObj<RadioGroupProps> = {
   },
   args: {
     errorMessage: "This field is required.",
+    defaultValue: "",
   },
 };
 
-export const UncontrolledRadioGroup: StoryObj<RadioGroupProps> = {
+export const UncontrolledRadioGroup: StoryObj<typeof RadioGroup> = {
   ...Template,
   args: {
     defaultValue: "Warp Speed",
@@ -159,8 +165,15 @@ export const UncontrolledRadioGroup: StoryObj<RadioGroupProps> = {
   },
 };
 
-export const ControlledRadioGroup: StoryObj<RadioGroupProps> = {
-  ...Template,
+export const ControlledRadioGroup: StoryObj<typeof RadioGroup> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of `RadioGroup`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
   args: {
     value: "Ludicrous Speed",
   },

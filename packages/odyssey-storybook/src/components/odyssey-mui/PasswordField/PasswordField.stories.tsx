@@ -44,6 +44,9 @@ const storybookMeta: Meta<typeof PasswordField> = {
         type: {
           summary: "string",
         },
+        defaultValue: {
+          summary: undefined,
+        },
       },
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,

@@ -381,7 +381,7 @@ export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> 
       docs: {
         description: {
           story:
-            "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`",
+            "When the component is controlled, the parent component is responsible for managing the state of Autocomplete. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
         },
       },
     },
@@ -419,7 +419,7 @@ export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
     docs: {
       description: {
         story:
-          "When the component is controlled, the parent component is responsible for passing `value` to the component and listening for changes with `onChange`",
+          "When the component is controlled, the parent component is responsible for managing the state of Autocomplete. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
       },
     },
   },

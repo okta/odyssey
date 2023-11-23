@@ -14,7 +14,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import {
   InputAdornment,
   TextField,
-  TextFieldProps,
   textFieldTypeValues,
 } from "@okta/odyssey-react-mui";
 
@@ -22,7 +21,7 @@ import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaDat
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { useCallback, useState } from "react";
 
-const storybookMeta: Meta<TextFieldProps> = {
+const storybookMeta: Meta<typeof TextField> = {
   title: "MUI Components/Forms/TextField",
   component: TextField,
   argTypes: {
@@ -43,6 +42,9 @@ const storybookMeta: Meta<TextFieldProps> = {
       table: {
         type: {
           summary: "string",
+        },
+        defaultValue: {
+          summary: undefined,
         },
       },
     },
@@ -178,13 +180,13 @@ export default storybookMeta;
 
 // States
 
-export const Default: StoryObj<TextFieldProps> = {
+export const Default: StoryObj<typeof TextField> = {
   args: {
     defaultValue: "",
   },
 };
 
-export const Disabled: StoryObj<TextFieldProps> = {
+export const Disabled: StoryObj<typeof TextField> = {
   parameters: {
     docs: {
       description: {
@@ -198,14 +200,14 @@ export const Disabled: StoryObj<TextFieldProps> = {
   },
 };
 
-export const Optional: StoryObj<TextFieldProps> = {
+export const Optional: StoryObj<typeof TextField> = {
   args: {
     isOptional: true,
     defaultValue: "",
   },
 };
 
-export const ReadOnly: StoryObj<TextFieldProps> = {
+export const ReadOnly: StoryObj<typeof TextField> = {
   parameters: {
     docs: {
       description: {
@@ -219,21 +221,21 @@ export const ReadOnly: StoryObj<TextFieldProps> = {
   },
 };
 
-export const Error: StoryObj<TextFieldProps> = {
+export const Error: StoryObj<typeof TextField> = {
   args: {
     errorMessage: "This field is required.",
     defaultValue: "",
   },
 };
 
-export const Hint: StoryObj<TextFieldProps> = {
+export const Hint: StoryObj<typeof TextField> = {
   args: {
     hint: "Specify your destination within the Sol system.",
     defaultValue: "",
   },
 };
 
-export const Adornment: StoryObj<TextFieldProps> = {
+export const Adornment: StoryObj<typeof TextField> = {
   parameters: {
     docs: {
       description: {
@@ -249,7 +251,7 @@ export const Adornment: StoryObj<TextFieldProps> = {
 };
 
 // Types
-export const Email: StoryObj<TextFieldProps> = {
+export const Email: StoryObj<typeof TextField> = {
   args: {
     autoCompleteType: "work email",
     label: "Company email",
@@ -258,7 +260,7 @@ export const Email: StoryObj<TextFieldProps> = {
   },
 };
 
-export const Multiline: StoryObj<TextFieldProps> = {
+export const Multiline: StoryObj<typeof TextField> = {
   parameters: {
     docs: {
       description: {
@@ -275,7 +277,7 @@ export const Multiline: StoryObj<TextFieldProps> = {
   },
 };
 
-export const Tel: StoryObj<TextFieldProps> = {
+export const Tel: StoryObj<typeof TextField> = {
   parameters: {
     docs: {
       description: {

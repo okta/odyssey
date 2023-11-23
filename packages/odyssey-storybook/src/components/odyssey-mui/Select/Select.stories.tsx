@@ -371,6 +371,14 @@ export const MultiSelect: StoryObj<typeof Select> = {
 };
 
 export const ControlledSelect: StoryObj<typeof Select> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of `Select`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
   args: {
     value: "",
   },
@@ -385,12 +393,20 @@ export const ControlledSelect: StoryObj<typeof Select> = {
 };
 
 export const ControlledMultipleSelect: StoryObj<typeof Select> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'When the component is controlled, the parent component is responsible for managing the state of `Select`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.\n\nWhen `hasMultipleChoices` is `true` and nothing is preselected, pass `[""]` as this initial controlled `value`',
+      },
+    },
+  },
   args: {
     value: [],
     hasMultipleChoices: true,
   },
   render: function C(props) {
-    const [localValue, setLocalValue] = useState([]);
+    const [localValue, setLocalValue] = useState([""]);
     const onChange = useCallback(
       (event) => setLocalValue(event.target.value),
       []
@@ -400,6 +416,14 @@ export const ControlledMultipleSelect: StoryObj<typeof Select> = {
 };
 
 export const ControlledPreselectedMultipleSelect: StoryObj<typeof Select> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of `Select`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
   args: {
     value: [],
     hasMultipleChoices: true,
