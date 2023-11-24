@@ -18,14 +18,14 @@ import {
   memo,
   ReactElement,
   useCallback,
-  useMemo,
+  useRef,
 } from "react";
 import { InputAdornment, InputBase } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Field } from "./Field";
 import { SeleniumProps } from "./SeleniumProps";
-import { useControlledState } from "./useControlledState";
+import { useInputValues, getControlState } from "./inputUtils";
 
 export const textFieldTypeValues = [
   "email",
@@ -116,35 +116,35 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       startAdornment,
       testId,
       type = "text",
-      value: valueProp,
+      value: value,
     },
     ref
   ) => {
-    const [localValue, setLocalValue] = useControlledState({
-      controlledValue: valueProp,
-      uncontrolledValue: defaultValue,
+    const controlledStateRef = useRef(
+      getControlState({
+        controlledValue: value,
+        uncontrolledValue: defaultValue,
+      })
+    );
+    const inputValues = useInputValues({
+      defaultValue,
+      value,
+      controlState: controlledStateRef.current,
     });
-    const inputValue = useMemo(() => {
-      if (localValue === undefined) {
-        return { defaultValue };
-      }
-      return { value: localValue };
-    }, [localValue, defaultValue]);
 
     const onChange = useCallback<
       NonNullable<ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>>
     >(
       (event) => {
-        setLocalValue(event.target.value);
         onChangeProp?.(event);
       },
-      [onChangeProp, setLocalValue]
+      [onChangeProp]
     );
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
         <InputBase
-          {...inputValue}
+          {...inputValues}
           inputProps={{
             "aria-errormessage": errorMessageElementId,
             "aria-labelledby": labelElementId,
@@ -179,7 +179,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       ),
       [
         autoCompleteType,
-        inputValue,
+        inputValues,
         hasInitialFocus,
         endAdornment,
         isMultiline,

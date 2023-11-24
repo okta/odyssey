@@ -17,12 +17,16 @@ import {
   UseAutocompleteProps,
   AutocompleteValue,
 } from "@mui/material";
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo, useRef } from "react";
 
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
-import { useControlledState } from "./useControlledState";
+import {
+  ComponentControlledState,
+  useInputValues,
+  getControlState,
+} from "./inputUtils";
 
 export type AutocompleteProps<
   OptionType,
@@ -31,7 +35,6 @@ export type AutocompleteProps<
 > = {
   /**
    * The default value. Use when the component is not controlled.
-   * @default props.multiple ? [] : null
    */
   defaultValue?: UseAutocompleteProps<
     OptionType,
@@ -189,6 +192,45 @@ const Autocomplete = <
   getIsOptionEqualToValue,
   testId,
 }: AutocompleteProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+  const controlledStateRef = useRef(
+    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+  );
+  const defaultValueProp = useMemo<
+    | AutocompleteValue<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >
+    | undefined
+  >(() => {
+    if (hasMultipleChoices) {
+      if (value === undefined) {
+        return defaultValue;
+      }
+      return [] as AutocompleteValue<
+        OptionType,
+        HasMultipleChoices,
+        undefined,
+        IsCustomValueAllowed
+      >;
+    }
+    return value === undefined ? defaultValue : undefined;
+  }, [defaultValue, hasMultipleChoices, value]);
+
+  const valueProps = useInputValues({
+    defaultValue: defaultValueProp,
+    value: value,
+    controlState: controlledStateRef.current,
+  });
+
+  const inputValueProp = useMemo(() => {
+    if (controlledStateRef.current === ComponentControlledState.CONTROLLED) {
+      return { inputValue };
+    }
+    return undefined;
+  }, [inputValue]);
+
   const renderInput = useCallback(
     ({ InputLabelProps, InputProps, ...params }) => (
       <Field
@@ -223,52 +265,6 @@ const Autocomplete = <
     ),
     [errorMessage, hint, isOptional, label, nameOverride]
   );
-
-  const defaultValuesProp = useMemo<
-    | AutocompleteValue<
-        OptionType,
-        HasMultipleChoices,
-        undefined,
-        IsCustomValueAllowed
-      >
-    | undefined
-  >(() => {
-    if (hasMultipleChoices) {
-      return defaultValue === undefined
-        ? ([] as AutocompleteValue<
-            OptionType,
-            HasMultipleChoices,
-            undefined,
-            IsCustomValueAllowed
-          >)
-        : defaultValue;
-    }
-    return defaultValue ?? undefined;
-  }, [defaultValue, hasMultipleChoices]);
-
-  const [localValue, setLocalValue] = useControlledState({
-    controlledValue: value,
-    uncontrolledValue: defaultValuesProp,
-  });
-
-  const valueProps = useMemo(() => {
-    if (localValue === undefined) {
-      return { defaultValue: defaultValuesProp };
-    }
-    return { value: localValue };
-  }, [defaultValuesProp, localValue]);
-
-  const [localInputValue, setLocalInputValue] = useControlledState({
-    controlledValue: inputValue,
-    uncontrolledValue: undefined,
-  });
-
-  const inputValueProp = useMemo(() => {
-    return {
-      inputValue: inputValue === undefined ? undefined : localInputValue,
-    };
-  }, [inputValue, localInputValue]);
-
   const onChange = useCallback<
     NonNullable<
       UseAutocompleteProps<
@@ -280,10 +276,9 @@ const Autocomplete = <
     >
   >(
     (event, value, reason, details) => {
-      setLocalValue(value);
       onChangeProp?.(event, value, reason, details);
     },
-    [onChangeProp, setLocalValue]
+    [onChangeProp]
   );
 
   const onInputChange = useCallback<
@@ -297,10 +292,9 @@ const Autocomplete = <
     >
   >(
     (event, value, reason) => {
-      setLocalInputValue(value);
       onInputChangeProp?.(event, value, reason);
     },
-    [onInputChangeProp, setLocalInputValue]
+    [onInputChangeProp]
   );
 
   return (

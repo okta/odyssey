@@ -16,6 +16,7 @@ import React, {
   memo,
   useCallback,
   useMemo,
+  useRef,
 } from "react";
 import {
   Select as MuiSelect,
@@ -24,7 +25,7 @@ import {
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
-import { useControlledState } from "./useControlledState";
+import { getControlState, useInputValues } from "./inputUtils";
 import { ForwardRefWithType } from "./@types/react-augment";
 
 export type NativeSelectOption = {
@@ -103,37 +104,30 @@ const NativeSelect: ForwardRefWithType = forwardRef(
       onChange: onChangeProp,
       onFocus,
       testId,
-      value: valueProp,
+      value,
       children,
     }: NativeSelectProps<Value, HasMultipleChoices>,
     ref?: React.Ref<ReactElement>
   ) => {
-    const [localValue, setLocalValue] = useControlledState({
-      controlledValue: valueProp,
-      uncontrolledValue: defaultValue,
+    const controlledStateRef = useRef(
+      getControlState({
+        controlledValue: value,
+        uncontrolledValue: defaultValue,
+      })
+    );
+    const inputValues = useInputValues({
+      defaultValue,
+      value,
+      controlState: controlledStateRef.current,
     });
-
-    const inputValues = useMemo(() => {
-      if (localValue === undefined) {
-        return { defaultValue };
-      }
-      return { value: localValue };
-    }, [defaultValue, localValue]);
 
     const onChange = useCallback<
       NonNullable<MuiSelectProps<Value>["onChange"]>
     >(
       (event, child) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-expect-error
-        const { options } = event.target as HTMLSelectElement;
-        const selectedOptions = [...options]
-          .filter((option) => option.selected)
-          .map((selectedOption) => selectedOption.value);
-        setLocalValue(selectedOptions as Value);
         onChangeProp?.(event, child);
       },
-      [onChangeProp, setLocalValue]
+      [onChangeProp]
     );
 
     const hasMultipleChoices = useMemo(

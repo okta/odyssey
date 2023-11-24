@@ -11,7 +11,7 @@
  */
 
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo, useRef } from "react";
 import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
@@ -22,7 +22,7 @@ import {
 import { FieldComponentProps } from "./FieldComponentProps";
 import { Typography } from "./Typography";
 import type { SeleniumProps } from "./SeleniumProps";
-import { useControlledState } from "./useControlledState";
+import { ComponentControlledState, getControlState } from "./inputUtils";
 import { CheckedFieldProps } from "./FormCheckedProps";
 
 export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
@@ -90,17 +90,18 @@ const Checkbox = ({
   value,
 }: CheckboxProps) => {
   const { t } = useTranslation();
-  const [isLocalChecked, setIsLocalChecked] = useControlledState({
-    controlledValue: isChecked,
-    uncontrolledValue: isDefaultChecked,
-  });
-
+  const controlledStateRef = useRef(
+    getControlState({
+      controlledValue: isChecked,
+      uncontrolledValue: isDefaultChecked,
+    })
+  );
   const inputValues = useMemo(() => {
-    if (isLocalChecked === undefined) {
-      return { defaultChecked: isDefaultChecked };
+    if (controlledStateRef.current === ComponentControlledState.CONTROLLED) {
+      return { checked: isChecked };
     }
-    return { checked: isLocalChecked };
-  }, [isDefaultChecked, isLocalChecked]);
+    return { defaultChecked: isDefaultChecked };
+  }, [isDefaultChecked, isChecked]);
 
   const label = useMemo(() => {
     return (
@@ -121,10 +122,9 @@ const Checkbox = ({
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
-      setIsLocalChecked(checked);
       onChangeProp?.(event, checked);
     },
-    [onChangeProp, setIsLocalChecked]
+    [onChangeProp]
   );
 
   return (

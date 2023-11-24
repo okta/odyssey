@@ -18,14 +18,14 @@ import {
   InputHTMLAttributes,
   memo,
   useCallback,
-  useMemo,
+  useRef,
 } from "react";
 
 import { CloseCircleFilledIcon, SearchIcon } from "./icons.generated";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
-import { useControlledState } from "./useControlledState";
+import { getControlState, useInputValues } from "./inputUtils";
 
 export type SearchFieldProps = {
   /**
@@ -85,7 +85,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
       autoCompleteType,
-      defaultValue: uncontrolledValue,
+      defaultValue,
       hasInitialFocus,
       id: idOverride,
       isDisabled = false,
@@ -97,35 +97,33 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       onClear: onClearProp,
       placeholder,
       testId,
-      value: controlledValue,
+      value,
     },
     ref
   ) => {
-    const [localValue, setLocalValue] = useControlledState({
-      controlledValue,
-      uncontrolledValue,
-    });
-
     const onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> =
       useCallback(
         (event) => {
-          setLocalValue(event.currentTarget.value);
           onChangeProp?.(event);
         },
-        [onChangeProp, setLocalValue]
+        [onChangeProp]
       );
 
     const onClear = useCallback(() => {
-      setLocalValue("");
       onClearProp?.();
-    }, [onClearProp, setLocalValue]);
+    }, [onClearProp]);
 
-    const inputValues = useMemo(() => {
-      if (localValue === undefined) {
-        return { defaultValue: uncontrolledValue };
-      }
-      return { value: localValue };
-    }, [uncontrolledValue, localValue]);
+    const controlledStateRef = useRef(
+      getControlState({
+        controlledValue: value,
+        uncontrolledValue: defaultValue,
+      })
+    );
+    const inputValues = useInputValues({
+      defaultValue,
+      value,
+      controlState: controlledStateRef.current,
+    });
 
     const renderFieldComponent = useCallback(
       ({ ariaDescribedBy, id }) => (
@@ -137,7 +135,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           autoFocus={hasInitialFocus}
           data-se={testId}
           endAdornment={
-            uncontrolledValue && (
+            defaultValue && (
               <InputAdornment position="end">
                 <IconButton
                   aria-label="Clear"
@@ -167,6 +165,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       ),
       [
         autoCompleteType,
+        defaultValue,
         hasInitialFocus,
         inputValues,
         isDisabled,
@@ -178,7 +177,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         placeholder,
         ref,
         testId,
-        uncontrolledValue,
       ]
     );
 

@@ -17,7 +17,7 @@ import {
   forwardRef,
   memo,
   useCallback,
-  useMemo,
+  useRef,
   useState,
 } from "react";
 
@@ -26,7 +26,7 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
 import { useTranslation } from "react-i18next";
-import { useControlledState } from "./useControlledState";
+import { getControlState, useInputValues } from "./inputUtils";
 
 export type PasswordFieldProps = {
   /**
@@ -94,7 +94,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       onBlur,
       placeholder,
       testId,
-      value: valueProp,
+      value,
     },
     ref
   ) => {
@@ -107,25 +107,25 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       );
     }, []);
 
-    const [localValue, setLocalValue] = useControlledState({
-      controlledValue: valueProp,
-      uncontrolledValue: defaultValue,
+    const controlledStateRef = useRef(
+      getControlState({
+        controlledValue: value,
+        uncontrolledValue: defaultValue,
+      })
+    );
+    const inputValues = useInputValues({
+      defaultValue,
+      value,
+      controlState: controlledStateRef.current,
     });
-    const inputValues = useMemo(() => {
-      if (localValue === undefined) {
-        return { defaultValue };
-      }
-      return { value: localValue };
-    }, [defaultValue, localValue]);
 
     const onChange = useCallback<
       ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
     >(
       (event) => {
-        setLocalValue(event.target.value);
         onChangeProp?.(event);
       },
-      [onChangeProp, setLocalValue]
+      [onChangeProp]
     );
 
     const renderFieldComponent = useCallback(
