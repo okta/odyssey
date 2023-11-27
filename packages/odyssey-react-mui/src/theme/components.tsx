@@ -2230,9 +2230,9 @@ export const components = ({
 
           [`.${tableBodyClasses.root} .${tableRowClasses.root}:first-of-type &`]:
             {
-              borderTopWidth: odysseyTokens.BorderWidthMain,
-              borderTopStyle: "solid",
               borderTopColor: odysseyTokens.HueNeutralWhite,
+              borderTopStyle: "solid",
+              borderTopWidth: odysseyTokens.BorderWidthMain,
             },
 
           [`.${tableRowClasses.selected} &`]: {
