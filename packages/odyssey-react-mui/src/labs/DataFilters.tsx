@@ -20,6 +20,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { Autocomplete } from "../Autocomplete";
 import { Box } from "../Box";
 import { TagList } from "../TagList";
 import { Tag } from "../Tag";
@@ -363,6 +364,27 @@ const DataFilters = ({
                       setIsFiltersMenuOpen(false);
                     }}
                   >
+                    {/* Autocomplete */}
+                    {filterPopoverCurrentFilter?.variant === "autocomplete" &&
+                      filterPopoverCurrentFilter?.options && (
+                        <Autocomplete
+                          label={filterPopoverCurrentFilter.label}
+                          value={
+                            (inputValues[
+                              filterPopoverCurrentFilter.id
+                            ] as string) ?? ""
+                          }
+                          onBlur={function ro() {}}
+                          onChange={function ro() {}}
+                          onFocus={function ro() {}}
+                          onInputChange={function ro() {}}
+                          options={filterPopoverCurrentFilter.options.map(
+                            (option: { label: string }) => ({
+                              label: option.label,
+                            })
+                          )}
+                        />
+                      )}
                     {/* Text or Number */}
                     {(filterPopoverCurrentFilter?.variant === "text" ||
                       filterPopoverCurrentFilter?.variant === "range") && (
