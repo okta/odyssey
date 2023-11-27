@@ -76,6 +76,7 @@ const Badge = ({
       borderRadius: contentIsLongerThanOneChar ? "10px" : "50%",
       fontSize: `${odysseyDesignTokens.TypographyScale0}`,
       fontFamily: `${odysseyDesignTokens.TypographyFamilyMono}`,
+      fontWeight: `${odysseyDesignTokens.TypographyWeightBodyBold}`,
       lineHeight: 1,
     }),
     [type, contentIsLongerThanOneChar]
