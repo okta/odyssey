@@ -137,9 +137,11 @@ const DataFilters = ({
   const [inputValues, setInputValues] = useState(initialInputValues);
 
   const [searchValue, setSearchValue] = useState<string>(defaultSearchTerm);
-  const activeFilters = filters.filter(
-    (filter) => typeof filter.value === "string" && filter.value
-  );
+  const activeFilters = useMemo(() => {
+    return filters.filter(
+      (filter) => typeof filter.value === "string" && filter.value
+    );
+  }, [filters]);
   const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState<boolean>(false);
   const [filtersMenuAnchorElement, setFiltersMenuAnchorElement] = useState<
     HTMLElement | undefined
@@ -317,7 +319,7 @@ const DataFilters = ({
         </MuiMenu>
       </>
     ),
-    [isFiltersMenuOpen, filtersMenuAnchorElement, filtersProp]
+    [isFiltersMenuOpen, filtersMenuAnchorElement, filtersProp, filters]
   );
 
   return (

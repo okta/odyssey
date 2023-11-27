@@ -2228,6 +2228,13 @@ export const components = ({
               borderBottom: 0,
             },
 
+          [`.${tableBodyClasses.root} .${tableRowClasses.root}:first-of-type &`]:
+            {
+              borderTopWidth: odysseyTokens.BorderWidthMain,
+              borderTopStyle: "solid",
+              borderTopColor: odysseyTokens.HueNeutralWhite,
+            },
+
           [`.${tableRowClasses.selected} &`]: {
             borderBottomColor: odysseyTokens.PalettePrimaryLight,
           },

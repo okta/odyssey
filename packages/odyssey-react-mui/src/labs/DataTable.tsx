@@ -335,19 +335,13 @@ const DataTable = ({
     [columnVisibility]
   );
 
-  const handleSearch = useCallback(
-    (value: string) => {
-      setGlobalFilter(value);
-    },
-    [globalFilter]
-  );
+  const handleSearch = useCallback((value: string) => {
+    setGlobalFilter(value);
+  }, []);
 
-  const handleFilters = useCallback(
-    (updatedFilters: Array<DataFilter>) => {
-      setFilters(updatedFilters);
-    },
-    [filters]
-  );
+  const handleFilters = useCallback((updatedFilters: Array<DataFilter>) => {
+    setFilters(updatedFilters);
+  }, []);
 
   const handleRowSelectionChange = useCallback(
     (updater: MRT_Updater<MRT_RowSelectionState>) => {
@@ -368,10 +362,10 @@ const DataTable = ({
         return;
       }
 
-      reorderDataFn?.({ rowId: rowId, newIndex: newIndex });
+      reorderDataFn?.({ rowId, newIndex });
       refreshData();
     },
-    []
+    [totalRows, reorderDataFn, refreshData]
   );
 
   useEffect(() => {
@@ -539,7 +533,7 @@ const DataTable = ({
                 onClick={() =>
                   handleReordering({
                     rowId: row.id,
-                    newIndex: currentIndex - 1,
+                    newIndex: currentIndex <= 0 ? 0 : currentIndex - 1,
                   })
                 }
               >
@@ -632,7 +626,7 @@ const DataTable = ({
         )}
       </>
     ),
-    [density, columnVisibility, columns]
+    [density, columnVisibility, columns, hasChangeableDensity]
   );
 
   return (
