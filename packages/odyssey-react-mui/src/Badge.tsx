@@ -73,14 +73,12 @@ const Badge = ({
       padding: `0 calc(${odysseyDesignTokens.Spacing1} * 1.5)`,
       backgroundColor: badgeTypeColors(odysseyDesignTokens)[type].background,
       color: badgeTypeColors(odysseyDesignTokens)[type].font,
-      borderRadius: contentIsLongerThanOneChar
-        ? `${odysseyDesignTokens.Spacing3}`
-        : "50%",
+      borderRadius: contentIsLongerThanOneChar ? "10px" : "50%",
       fontSize: `${odysseyDesignTokens.TypographyScale0}`,
       fontFamily: `${odysseyDesignTokens.TypographyFamilyMono}`,
       lineHeight: 1,
     }),
-    [type]
+    [type, contentIsLongerThanOneChar]
   );
 
   const shouldHideBadge = !badgeContent;
