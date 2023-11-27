@@ -55,6 +55,15 @@ const storybookMeta: Meta<RadioProps> = {
         name: "string",
       },
     },
+    onChange: {
+      control: null,
+      description: "Callback fired when the the radio button value changes",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
+    },
     name: fieldComponentPropsMetaData.name,
     value: {
       control: "text",
@@ -80,7 +89,7 @@ const storybookMeta: Meta<RadioProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<RadioProps> = {
+export const Default: StoryObj<typeof Radio> = {
   play: async ({ canvasElement, step }) => {
     await step("select the radio button", async () => {
       const canvas = within(canvasElement);

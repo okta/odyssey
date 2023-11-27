@@ -17,7 +17,7 @@ import {
   DialogContentText,
   DialogProps,
 } from "@okta/odyssey-react-mui";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
 
@@ -131,13 +131,13 @@ const DefaultTemplate: StoryObj<DialogProps> = {
   render: function C(props) {
     const [isVisible, setIsVisible] = useState(false);
 
-    const onOpen = () => {
+    const onOpen = useCallback(() => {
       setIsVisible(true);
-    };
+    }, []);
 
-    const onClose = () => {
+    const onClose = useCallback(() => {
       setIsVisible(false);
-    };
+    }, []);
 
     return (
       <>
@@ -346,13 +346,13 @@ export const NoButtons: StoryObj<DialogProps> = {
   render: function C(props) {
     const [isVisible, setIsVisible] = useState(false);
 
-    const onOpen = () => {
+    const onOpen = useCallback(() => {
       setIsVisible(true);
-    };
+    }, []);
 
-    const onClose = () => {
+    const onClose = useCallback(() => {
       setIsVisible(false);
-    };
+    }, []);
 
     return (
       <>

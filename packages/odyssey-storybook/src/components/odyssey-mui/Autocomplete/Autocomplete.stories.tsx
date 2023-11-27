@@ -18,6 +18,7 @@ import { userEvent, waitFor, within, screen } from "@storybook/testing-library";
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { axeRun } from "../../../axe-util";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { useCallback, useState } from "react";
 
 const stations: ReadonlyArray<StationType> = [
   { label: "Anderson Station" },
@@ -331,5 +332,103 @@ export const ReadOnly: StoryObj<AutocompleteType> = {
   args: {
     isReadOnly: true,
     value: { label: "Tycho Station" },
+  },
+};
+
+type MoonMeta = {
+  id: string;
+  label: string;
+  diameterInKm: number;
+  description: string;
+};
+
+type JupiterMoonsAutocomplete = typeof Autocomplete<MoonMeta, boolean, boolean>;
+
+const jupiterGalileanMoons: MoonMeta[] = [
+  {
+    id: "ent1rs1yjAIYGKjX48g6",
+    label: "Io",
+    diameterInKm: 3643.2,
+    description:
+      "The innermost and third-largest of the four Galilean moons of the planet Jupiter.",
+  },
+  {
+    id: "ent1rs1ys3O7JDBxe8g6",
+    label: "Europa",
+    diameterInKm: 3121.6,
+    description:
+      "The smallest of the four Galilean moons orbiting Jupiter, and the sixth-closest to the planet of all the 95 known moons of Jupiter.",
+  },
+  {
+    id: "ent1rs21aA4w60TJG8g6",
+    label: "Ganymede",
+    diameterInKm: 5268.2,
+    description:
+      "The largest and most massive natural satellite of Jupiter as well as in the Solar System, being a planetary-mass moon.",
+  },
+  {
+    id: "ent1rs2qgOg42zhYV8g6",
+    label: "Callisto",
+    diameterInKm: 4820.6,
+    description:
+      "The third-largest moon after Ganymede and Saturn's largest moon Titan, and as large as the smallest planet Mercury",
+  },
+];
+
+export const ControlledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
+  {
+    args: {
+      options: jupiterGalileanMoons,
+      value: jupiterGalileanMoons.slice(0, 2),
+      hasMultipleChoices: true,
+      isReadOnly: false,
+      label: "label",
+      getIsOptionEqualToValue: (option, value) => option.id === value.id,
+    },
+    render: function C(props) {
+      const [localValue, setLocalValue] = useState<MoonMeta[] | undefined>(
+        jupiterGalileanMoons.slice(0, 2)
+      );
+      const onChange = useCallback((_, v) => setLocalValue(v), []);
+      return <Autocomplete {...props} value={localValue} onChange={onChange} />;
+    },
+  };
+
+export const UnontrolledMultipleAutocomplete: StoryObj<JupiterMoonsAutocomplete> =
+  {
+    args: {
+      options: jupiterGalileanMoons,
+      defaultValue: jupiterGalileanMoons.slice(0, 2),
+      hasMultipleChoices: true,
+      isReadOnly: false,
+      label: "label",
+      getIsOptionEqualToValue: (option, value) => option.id === value.id,
+    },
+  };
+
+export const ControlledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
+  args: {
+    options: jupiterGalileanMoons,
+    value: jupiterGalileanMoons[0],
+    isReadOnly: false,
+    label: "label",
+    getIsOptionEqualToValue: (option, value) => option.id === value.id,
+  },
+  render: function C(props) {
+    const [localValue, setLocalValue] = useState<MoonMeta | undefined>(
+      jupiterGalileanMoons[0]
+    );
+    const onChange = useCallback((_, v) => setLocalValue(v), []);
+    return <Autocomplete {...props} value={localValue} onChange={onChange} />;
+  },
+};
+
+export const UncontrolledAutocomplete: StoryObj<JupiterMoonsAutocomplete> = {
+  args: {
+    options: jupiterGalileanMoons,
+    defaultValue: jupiterGalileanMoons[0],
+    isReadOnly: false,
+    label: "label",
+    getIsOptionEqualToValue: (option, value) => option.id === value.id,
   },
 };
