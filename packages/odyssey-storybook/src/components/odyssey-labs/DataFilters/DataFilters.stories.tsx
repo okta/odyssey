@@ -100,6 +100,25 @@ const demoFilters: Array<DataFilter> = [
     variant: "text",
   },
   {
+    id: "autocomplete-filter",
+    label: "Autocomplete filter",
+    variant: "autocomplete",
+    options: [
+      {
+        label: "Option 1",
+        value: "option1",
+      },
+      {
+        label: "Option 2",
+        value: "option2",
+      },
+      {
+        label: "Option 3",
+        value: "option3",
+      },
+    ],
+  },
+  {
     id: "number-filter",
     label: "Number filter",
     variant: "range",
