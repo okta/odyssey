@@ -12,9 +12,13 @@
 
 import { Radio, RadioGroup, RadioGroupProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react";
+import { expect } from "@storybook/jest";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { userEvent, within } from "@storybook/testing-library";
+import { axeRun } from "../../../axe-util";
+import { useCallback, useState } from "react";
 
 const storybookMeta: Meta<typeof RadioGroup> = {
   title: "MUI Components/Forms/RadioGroup",
@@ -131,5 +135,56 @@ export const Error: StoryObj<RadioGroupProps> = {
   },
   args: {
     errorMessage: "This field is required.",
+  },
+};
+
+export const UncontrolledRadioGroup: StoryObj<RadioGroupProps> = {
+  ...Template,
+  args: {
+    defaultValue: "Warp Speed",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("select controlled radio button", async () => {
+      const canvas = within(canvasElement);
+      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
+      const radio = canvas.getByLabelText(
+        "Ludicrous Speed"
+      ) as HTMLInputElement;
+      if (radiogroup && radio) {
+        userEvent.click(radio);
+      }
+      expect(radio).toBeChecked();
+      axeRun("select controlled radio button");
+    });
+  },
+};
+
+export const ControlledRadioGroup: StoryObj<RadioGroupProps> = {
+  ...Template,
+  args: {
+    value: "Ludicrous Speed",
+  },
+  render: function C(props) {
+    const [value, setValue] = useState("Ludicrous Speed");
+    const onChange = useCallback((_, value) => setValue(value), []);
+    return (
+      <RadioGroup {...{ ...props, value, onChange }}>
+        <Radio label="Light Speed" value="Light Speed" />
+        <Radio label="Warp Speed" value="Warp Speed" />
+        <Radio label="Ludicrous Speed" value="Ludicrous Speed" />
+      </RadioGroup>
+    );
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("select uncontrolled radio button", async () => {
+      const canvas = within(canvasElement);
+      const radiogroup = canvas.getByRole("radiogroup") as HTMLInputElement;
+      const radio = canvas.getByLabelText("Warp Speed") as HTMLInputElement;
+      if (radiogroup && radio) {
+        userEvent.click(radio);
+      }
+      expect(radio).toBeChecked();
+      axeRun("select uncontrolled radio button");
+    });
   },
 };

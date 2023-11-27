@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.19](https://github.com/okta/odyssey/compare/v1.6.18...v1.6.19) (2023-11-20)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.18](https://github.com/okta/odyssey/compare/v1.6.17...v1.6.18) (2023-11-15)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.17](https://github.com/okta/odyssey/compare/v1.6.16...v1.6.17) (2023-11-14)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.16](https://github.com/okta/odyssey/compare/v1.6.15...v1.6.16) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.15](https://github.com/okta/odyssey/compare/v1.6.14...v1.6.15) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.14](https://github.com/okta/odyssey/compare/v1.6.13...v1.6.14) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.13](https://github.com/okta/odyssey/compare/v1.6.12...v1.6.13) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.12](https://github.com/okta/odyssey/compare/v1.6.11...v1.6.12) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.11](https://github.com/okta/odyssey/compare/v1.6.10...v1.6.11) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.10](https://github.com/okta/odyssey/compare/v1.6.9...v1.6.10) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.9](https://github.com/okta/odyssey/compare/v1.6.8...v1.6.9) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.8](https://github.com/okta/odyssey/compare/v1.6.7...v1.6.8) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.7](https://github.com/okta/odyssey/compare/v1.6.6...v1.6.7) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.6](https://github.com/okta/odyssey/compare/v1.6.5...v1.6.6) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
+## [1.6.5](https://github.com/okta/odyssey/compare/v1.6.4...v1.6.5) (2023-11-13)
+
+**Note:** Version bump only for package @okta/odyssey-commitlint
+
 ## [1.6.4](https://github.com/okta/odyssey/compare/v1.6.3...v1.6.4) (2023-11-13)
 
 **Note:** Version bump only for package @okta/odyssey-commitlint
