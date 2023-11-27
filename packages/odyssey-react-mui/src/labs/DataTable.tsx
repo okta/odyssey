@@ -526,7 +526,7 @@ const DataTable = ({
                 isDisabled={currentIndex <= 0}
                 onClick={() => handleReordering({ rowId: row.id, newIndex: 0 })}
               >
-                <ArrowTopIcon /> Move to start
+                <ArrowTopIcon /> Bring to front
               </MenuItem>
               <MenuItem
                 isDisabled={currentIndex <= 0}
@@ -537,7 +537,7 @@ const DataTable = ({
                   })
                 }
               >
-                <ArrowUpIcon /> Move up one position
+                <ArrowUpIcon /> Bring forward
               </MenuItem>
               <MenuItem
                 isDisabled={totalRows ? currentIndex >= totalRows - 1 : false}
@@ -548,7 +548,7 @@ const DataTable = ({
                   })
                 }
               >
-                <ArrowDownIcon /> Move down one position
+                <ArrowDownIcon /> Send backward
               </MenuItem>
               <>
                 {totalRows && (
@@ -561,7 +561,7 @@ const DataTable = ({
                       })
                     }
                   >
-                    <ArrowBottomIcon /> Move to end
+                    <ArrowBottomIcon /> Send to back
                   </MenuItem>
                 )}
               </>
