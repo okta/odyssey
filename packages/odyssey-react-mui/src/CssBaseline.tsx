@@ -10,6 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { CssBaseline as MuiCssBaseline } from "@mui/material";
+import {
+  CssBaseline as MuiCssBaseline,
+  CssBaselineProps as MuiCssBaselineProps,
+} from "@mui/material";
 
-export const CssBaseline = () => <MuiCssBaseline />;
+export const CssBaseline = (props: MuiCssBaselineProps) => (
+  <MuiCssBaseline {...props} />
+);
