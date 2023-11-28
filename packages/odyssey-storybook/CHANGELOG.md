@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.20](https://github.com/okta/odyssey/compare/v1.6.19...v1.6.20) (2023-11-28)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
 ## [1.6.19](https://github.com/okta/odyssey/compare/v1.6.18...v1.6.19) (2023-11-20)
 
 **Note:** Version bump only for package @okta/odyssey-storybook
