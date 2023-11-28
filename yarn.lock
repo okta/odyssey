@@ -4079,6 +4079,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@faker-js/faker@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "@faker-js/faker@npm:8.2.0"
+  checksum: febc17018acfb841a348591bfe415e815ea981bf7fa0a12670ac2b449479ad7e9e7b130c42878ec30210da964c13a620a3303dc00d63cb13ded00c6fc701e2be
+  languageName: node
+  linkType: hard
+
 "@fal-works/esbuild-plugin-global-externals@npm:^2.1.2":
   version: 2.1.2
   resolution: "@fal-works/esbuild-plugin-global-externals@npm:2.1.2"
@@ -5947,7 +5954,7 @@ __metadata:
     jest: ^29.6.1
     jest-axe: ^5.0.1
     jest-environment-jsdom: ^29.6.1
-    material-react-table: ^1.14.0
+    material-react-table: ^2.0.2
     node-ts: ^6.0.1
     npm-run-all: ^4.1.5
     properties: 1.2.1
@@ -5974,6 +5981,7 @@ __metadata:
   dependencies:
     "@applitools/eyes-storybook": ^3.34.2
     "@babel/core": ^7.19.3
+    "@faker-js/faker": ^8.2.0
     "@mui/material": ^5.12.3
     "@okta/odyssey-babel-loader": "workspace:*"
     "@okta/odyssey-design-tokens": "workspace:*"
@@ -8304,40 +8312,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-table@npm:8.9.2":
-  version: 8.9.2
-  resolution: "@tanstack/react-table@npm:8.9.2"
+"@tanstack/react-table@npm:8.10.7":
+  version: 8.10.7
+  resolution: "@tanstack/react-table@npm:8.10.7"
   dependencies:
-    "@tanstack/table-core": 8.9.2
+    "@tanstack/table-core": 8.10.7
   peerDependencies:
     react: ">=16"
     react-dom: ">=16"
-  checksum: 66473ee4f34c7ade6a269c6821dadf228a04e9ce76bedfa6a30bb48608f26023bb2c2b9a45cc3f2323212d676bb26f7a820cb3328c8cd37bd7369d5651fe9628
+  checksum: f8f19ae3ad8531e0f3cb838b61213d9acd0b64b27d1a8a05a699e6ed50e25c9d3c9478ae3f6d20883288f601eec06e8264fac9503b36122471c2f8778782e1e2
   languageName: node
   linkType: hard
 
-"@tanstack/react-virtual@npm:3.0.0-beta.54":
-  version: 3.0.0-beta.54
-  resolution: "@tanstack/react-virtual@npm:3.0.0-beta.54"
+"@tanstack/react-virtual@npm:3.0.0-beta.68":
+  version: 3.0.0-beta.68
+  resolution: "@tanstack/react-virtual@npm:3.0.0-beta.68"
   dependencies:
-    "@tanstack/virtual-core": 3.0.0-beta.54
+    "@tanstack/virtual-core": 3.0.0-beta.68
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: ddeb3cb46db89365609d5bc402b8a8d410dc7e5f38ee579f39e5589c62a2123799ba36586939a5a6ad1a701650a5b169f657fd24687687bf08f4827b0099bc75
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: e8d4110fde9eb7e27b7067a300ac8bb08622a19b7c25a3b1b313b61e76093f1c500a90723011584971a0f5c4c7832df0c90276d4cf2d43f06281199636e50c4a
   languageName: node
   linkType: hard
 
-"@tanstack/table-core@npm:8.9.2":
-  version: 8.9.2
-  resolution: "@tanstack/table-core@npm:8.9.2"
-  checksum: eac43f6a95a08e2edae3f66b31e78b50b826507808ba32aa2fc2fae495aa4d9cdf97a7a1b745c647fdd9ec0c2559971e26df23a98720e0a959681be1caa35f26
+"@tanstack/table-core@npm:8.10.7":
+  version: 8.10.7
+  resolution: "@tanstack/table-core@npm:8.10.7"
+  checksum: 2a364917e7ab051ef3f33d6f18e5e1ddb75cfed4b5ee0e2b9c74a8cb72d3b86cdd4ffbab67565c68b4333f761b6fde9a7215196387a9a3b3d5811119d8859bad
   languageName: node
   linkType: hard
 
-"@tanstack/virtual-core@npm:3.0.0-beta.54":
-  version: 3.0.0-beta.54
-  resolution: "@tanstack/virtual-core@npm:3.0.0-beta.54"
-  checksum: a58cb30e1bbf8a0420caea8693df11c909c1190908163fef75aeddfa11bba621ca993ab218f4e7537c05c1651f9398e61016f3e3d374093c87029b52c868f0e7
+"@tanstack/virtual-core@npm:3.0.0-beta.68":
+  version: 3.0.0-beta.68
+  resolution: "@tanstack/virtual-core@npm:3.0.0-beta.68"
+  checksum: f06898afc6501e6a6240425f2bdbd0e2dc637f4f58cb4a9e13fca7e8e25b93be25543559c53b243bf70e386302844f419d9110010db964916a523495db114f51
   languageName: node
   linkType: hard
 
@@ -19501,22 +19510,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"material-react-table@npm:^1.14.0":
-  version: 1.14.0
-  resolution: "material-react-table@npm:1.14.0"
+"material-react-table@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "material-react-table@npm:2.0.2"
   dependencies:
     "@tanstack/match-sorter-utils": 8.8.4
-    "@tanstack/react-table": 8.9.2
-    "@tanstack/react-virtual": 3.0.0-beta.54
+    "@tanstack/react-table": 8.10.7
+    "@tanstack/react-virtual": 3.0.0-beta.68
     highlight-words: 1.2.2
   peerDependencies:
-    "@emotion/react": ">=11"
-    "@emotion/styled": ">=11"
-    "@mui/icons-material": ">=5"
-    "@mui/material": ">=5"
-    react: ">=17.0"
-    react-dom: ">=17.0"
-  checksum: 648cbe5c63212b7fd016410d14b1897b75b2a326404f77a975483a95ff8fc65d3bed1e30e6ace9c3784b520a3fde93267d53b4e7b4cbdb7f3278b0842e764a54
+    "@emotion/react": ">=11.11"
+    "@emotion/styled": ">=11.11"
+    "@mui/icons-material": ">=5.11"
+    "@mui/material": ">=5.13"
+    "@mui/x-date-pickers": ">=6.15.0"
+    react: ">=18.0"
+    react-dom: ">=18.0"
+  checksum: 85be9099d9ea3a03590efcad59f91d3e94540f3a16badee7f03e6ceb967a3a91975859f8b75235a373610b1ea67ea2e2bc982411c5f18259857167cd34630bb5
   languageName: node
   linkType: hard
 
@@ -21425,6 +21435,7 @@ __metadata:
   resolution: "odyssey@workspace:."
   dependencies:
     "@commitlint/cli": ^17.6.7
+    "@faker-js/faker": ^8.2.0
     "@okta/odyssey-commitlint": "workspace:*"
     "@okta/odyssey-eslint-config": "workspace:*"
     "@okta/odyssey-lint-staged": "workspace:*"

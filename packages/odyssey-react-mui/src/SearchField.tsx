@@ -38,6 +38,14 @@ export type SearchFieldProps = {
    */
   hasInitialFocus?: boolean;
   /**
+   * The id of the `input` element.
+   */
+  id?: string;
+  /**
+   * If `true`, the component is disabled.
+   */
+  isDisabled?: boolean;
+  /**
    * This label won't show up visually, but it's required for accessibility.
    */
   label: string;

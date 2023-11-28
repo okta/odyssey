@@ -10,10 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import MaterialReactTable, {
+import {
+  useMaterialReactTable,
   type MRT_ColumnFiltersState,
   type MRT_TableInstance,
   type MRT_Virtualizer,
+  MaterialReactTable,
 } from "material-react-table";
 import {
   FunctionComponent,
@@ -45,8 +47,8 @@ export type StaticTableProps<TData extends DefaultMaterialReactTableData> = {
 };
 
 const StaticTable = <TData extends DefaultMaterialReactTableData>({
-  columns,
-  data,
+  columns = [],
+  data = [],
   getRowId,
   hasError,
   initialState,
@@ -99,32 +101,27 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
     }
   }, [columnFilters, globalFilter]);
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={data}
-      enableBottomToolbar={false}
-      enablePagination={false}
-      enableRowVirtualization
-      enableSorting={false}
-      getRowId={getRowId}
-      initialState={initialState}
-      muiToolbarAlertBannerProps={
-        hasError
-          ? {
-              children: t("table.error"),
-              color: "error",
-            }
-          : undefined
-      }
-      onColumnFiltersChange={setColumnFilters}
-      onGlobalFilterChange={setGlobalFilter}
-      renderTopToolbarCustomActions={renderTopToolbarCustomActions}
-      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef}
-      rowVirtualizerProps={{ overscan: 4 }}
-      state={modifiedState}
-    />
-  );
+  const table = useMaterialReactTable({
+    columns: columns,
+    data: data,
+    enableBottomToolbar: false,
+    enablePagination: false,
+    enableRowVirtualization: true,
+    enableSorting: false,
+    getRowId: getRowId,
+    initialState: initialState,
+    muiToolbarAlertBannerProps: hasError
+      ? { children: t("table.error"), color: "error" }
+      : undefined,
+    onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
+    renderTopToolbarCustomActions: renderTopToolbarCustomActions,
+    rowVirtualizerInstanceRef: rowVirtualizerInstanceRef,
+    rowVirtualizerOptions: { overscan: 4 },
+    state: modifiedState,
+  });
+
+  return <MaterialReactTable table={table} />;
 };
 
 const MemoizedStaticTable = memo(StaticTable) as typeof StaticTable;

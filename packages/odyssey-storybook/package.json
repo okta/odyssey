@@ -13,6 +13,10 @@
     "url": "https://github.com/okta/odyssey",
     "directory": "packages/odyssey-storybook"
   },
+  "dependencies": {
+    "@faker-js/faker": "^8.2.0",
+    "@okta/odyssey-react-mui": "workspace:*"
+  },
   "devDependencies": {
     "@applitools/eyes-storybook": "^3.34.2",
     "@babel/core": "^7.19.3",
@@ -20,7 +24,6 @@
     "@okta/odyssey-babel-loader": "workspace:*",
     "@okta/odyssey-design-tokens": "workspace:*",
     "@okta/odyssey-lifecycle": "workspace:*",
-    "@okta/odyssey-react-mui": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
     "@pxblue/storybook-rtl-addon": "^1.1.0",
     "@storybook/addon-a11y": "^7.2.0",

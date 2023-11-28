@@ -15,6 +15,7 @@ import { createContext, MouseEventHandler } from "react";
 export type MenuContextType = {
   closeMenu: () => void;
   openMenu: MouseEventHandler<HTMLElement>;
+  shouldCloseOnSelect: boolean;
 };
 
 export const MenuContext = createContext<MenuContextType>({
@@ -22,4 +23,5 @@ export const MenuContext = createContext<MenuContextType>({
   closeMenu: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   openMenu: () => {},
+  shouldCloseOnSelect: true,
 });
