@@ -22,7 +22,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { useCallback, useRef, useState } from "react";
 
 const storybookMeta: Meta = {
-  title: "Labs Components/PaginatedTable",
+  title: "Labs Components/Legacy Table/PaginatedTable",
   component: PaginatedTable,
   argTypes: {
     columns: {
@@ -541,13 +541,15 @@ export const Pagination: StoryObj<PaginatedTableProps<Person>> = {
   },
   render: function C(args) {
     const countRef = useRef(15);
-    const [data, setData] = useState(args.data.slice(0, countRef.current));
+    const dataArg = args.data ?? [];
+
+    const [data, setData] = useState(dataArg.slice(0, countRef.current));
 
     const fetchMoreData = useCallback(() => {
       countRef.current = countRef.current + 10;
 
-      setData(args.data.slice(0, Math.min(countRef.current, args.data.length)));
-    }, [args.data]);
+      setData(dataArg.slice(0, Math.min(countRef.current, dataArg.length)));
+    }, [args.data, dataArg]);
 
     return (
       <PaginatedTable {...args} data={data} fetchMoreData={fetchMoreData} />

@@ -12,7 +12,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { createElement } from "react";
-import { StaticTable, type TableColumn } from "@okta/odyssey-react-mui/labs";
+import { DataColumn, DataTable } from "@okta/odyssey-react-mui/labs";
 import * as iconDictionary from "@okta/odyssey-react-mui/icons";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
 
@@ -29,11 +29,11 @@ type IconData = {
   use: string;
 };
 
-const columns: TableColumn<IconData>[] = [
+const columns: DataColumn[] = [
   {
-    accessorKey: "name",
-    Cell: ({ cell }) =>
-      createElement(iconDictionary[cell.getValue<IconData["name"]>()]),
+    accessorKey: "icon",
+    Cell: ({ row }) =>
+      createElement(iconDictionary[row.id as keyof typeof iconDictionary]),
     header: "Icon",
   },
   {
@@ -41,9 +41,9 @@ const columns: TableColumn<IconData>[] = [
     header: "Name",
   },
   {
-    accessorKey: "name",
-    Cell: ({ cell }) =>
-      iconDictionary[cell.getValue<IconData["name"]>()].displayName,
+    accessorKey: "className",
+    Cell: ({ row }) =>
+      iconDictionary[row.id as keyof typeof iconDictionary]?.displayName ?? "",
     header: "Class Name",
   },
 ];
@@ -124,7 +124,13 @@ const icons: IconData[] = [
   { name: "WarningIcon", use: "" },
 ];
 
-const getRowId = ({ name }: { name: IconData["name"] }) => name;
+const iconTableData = icons.map((icon) => {
+  return {
+    name: icon.name,
+    use: icon.use,
+    id: icon.name,
+  };
+});
 
 export const Default: StoryObj = {
   parameters: {
@@ -136,6 +142,14 @@ export const Default: StoryObj = {
     },
   },
   render: function C() {
-    return <StaticTable columns={columns} data={icons} getRowId={getRowId} />;
+    return (
+      <DataTable
+        columns={columns}
+        data={iconTableData}
+        getRowId={({ id }) => id}
+        fetchDataFn={() => iconTableData}
+        hasSorting={false}
+      />
+    );
   },
 };
