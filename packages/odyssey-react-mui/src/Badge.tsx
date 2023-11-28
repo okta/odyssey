@@ -73,18 +73,18 @@ const Badge = ({
       padding: `0 calc(${odysseyDesignTokens.Spacing1} * 1.5)`,
       backgroundColor: badgeTypeColors(odysseyDesignTokens)[type].background,
       color: badgeTypeColors(odysseyDesignTokens)[type].font,
-      borderRadius: contentIsLongerThanOneChar ? "10px" : "50%",
+      borderRadius: contentIsLongerThanOneChar
+        ? `${odysseyDesignTokens.BorderRadiusOuter}`
+        : "50%",
       fontSize: `${odysseyDesignTokens.TypographyScale0}`,
       fontFamily: `${odysseyDesignTokens.TypographyFamilyMono}`,
       fontWeight: `${odysseyDesignTokens.TypographyWeightBodyBold}`,
       lineHeight: 1,
     }),
-    [type, contentIsLongerThanOneChar]
+    [type, contentIsLongerThanOneChar, odysseyDesignTokens]
   );
 
-  const shouldHideBadge = !badgeContent;
-
-  if (shouldHideBadge) {
+  if (!badgeContent) {
     return null;
   }
 
