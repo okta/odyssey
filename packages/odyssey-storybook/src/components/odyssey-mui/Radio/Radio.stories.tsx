@@ -64,6 +64,15 @@ const storybookMeta: Meta<RadioProps> = {
         },
       },
     },
+    onBlur: {
+      control: null,
+      description: "Callback fired when the blur event happens",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
+    },
     name: fieldComponentPropsMetaData.name,
     value: {
       control: "text",
