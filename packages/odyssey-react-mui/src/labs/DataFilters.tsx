@@ -367,23 +367,46 @@ const DataFilters = ({
                     {/* Autocomplete */}
                     {filterPopoverCurrentFilter?.variant === "autocomplete" &&
                       filterPopoverCurrentFilter?.options && (
-                        <Autocomplete
-                          label={filterPopoverCurrentFilter.label}
-                          value={
-                            (inputValues[
-                              filterPopoverCurrentFilter.id
-                            ] as string) ?? ""
-                          }
-                          onBlur={function ro() {}}
-                          onChange={function ro() {}}
-                          onFocus={function ro() {}}
-                          onInputChange={function ro() {}}
-                          options={filterPopoverCurrentFilter.options.map(
-                            (option: { label: string }) => ({
-                              label: option.label,
-                            })
-                          )}
-                        />
+                        <Box
+                          sx={{
+                            display: "flex",
+                            gap: 2,
+                            alignItems: "flex-end",
+                          }}
+                        >
+                          <Box sx={{ width: "100%" }}>
+                            <Autocomplete
+                              label={filterPopoverCurrentFilter.label}
+                              value={
+                                (inputValues[
+                                  filterPopoverCurrentFilter.id
+                                ] as string) ?? ""
+                              }
+                              onChange={(_, value) => {
+                                const label =
+                                  typeof value === "object" &&
+                                  value !== null &&
+                                  "label" in value
+                                    ? (value as { label: string }).label
+                                    : (value as string);
+                                handleInputChange(
+                                  filterPopoverCurrentFilter.id,
+                                  label
+                                );
+                              }}
+                              options={filterPopoverCurrentFilter.options.map(
+                                (option: { label: string }) => ({
+                                  label: option.label,
+                                })
+                              )}
+                            />
+                          </Box>
+                          <Button
+                            variant="primary"
+                            endIcon={<CheckIcon />}
+                            type="submit"
+                          />
+                        </Box>
                       )}
                     {/* Text or Number */}
                     {(filterPopoverCurrentFilter?.variant === "text" ||
