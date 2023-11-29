@@ -113,6 +113,15 @@ const storybookMeta: Meta<typeof Checkbox> = {
         },
       },
     },
+    onBlur: {
+      control: null,
+      description: "Callback fired when the blur event happens",
+      table: {
+        type: {
+          summary: "func",
+        },
+      },
+    },
     validity: {
       options: checkboxValidityValues,
       control: { type: "radio" },
