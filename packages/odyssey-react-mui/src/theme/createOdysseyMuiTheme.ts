@@ -32,7 +32,7 @@ export const createOdysseyMuiTheme = ({
   shadowDomElement,
 }: {
   odysseyTokens: DesignTokens;
-  shadowDomElement?: HTMLDivElement;
+  shadowDomElement?: HTMLElement;
 }) =>
   createTheme({
     components: components({

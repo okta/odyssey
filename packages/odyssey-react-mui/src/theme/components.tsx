@@ -53,7 +53,7 @@ export const components = ({
   shadowDomElement,
 }: {
   odysseyTokens: DesignTokens;
-  shadowDomElement?: HTMLDivElement;
+  shadowDomElement?: HTMLElement;
 }): ThemeOptions["components"] => {
   return {
     MuiAccordion: {

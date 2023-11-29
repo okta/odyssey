@@ -1,6 +1,6 @@
 import {
   createOdysseyMuiTheme,
-  OdysseyThemeProvider,
+  OdysseyProvider,
   OdysseyTranslationProvider,
 } from "@okta/odyssey-react-mui";
 import { CssBaseline, ScopedCssBaseline } from "@mui/material";
@@ -15,18 +15,22 @@ const styles = {
 
 const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
 
-export const MuiThemeDecorator: Decorator = (Story, context) => (
-  <OdysseyThemeProvider>
-    <OdysseyTranslationProvider languageCode={context.globals.locale}>
-      {/* @ts-expect-error type mismatch on "typography" */}
-      <StorybookThemeProvider theme={odysseyTheme}>
-        <CssBaseline />
-        <div style={styles}>
-          <ScopedCssBaseline>
-            <Story />
-          </ScopedCssBaseline>
-        </div>
-      </StorybookThemeProvider>
-    </OdysseyTranslationProvider>
-  </OdysseyThemeProvider>
-);
+export const MuiThemeDecorator: Decorator = (Story, context) => {
+  const { canvasElement } = context;
+  const shadowRootElement = canvasElement.parentElement ?? undefined;
+  return (
+    <OdysseyProvider shadowDomElement={shadowRootElement}>
+      <OdysseyTranslationProvider languageCode={context.globals.locale}>
+        {/* @ts-expect-error type mismatch on "typography" */}
+        <StorybookThemeProvider theme={odysseyTheme}>
+          <CssBaseline />
+          <div style={styles}>
+            <ScopedCssBaseline>
+              <Story />
+            </ScopedCssBaseline>
+          </div>
+        </StorybookThemeProvider>
+      </OdysseyTranslationProvider>
+    </OdysseyProvider>
+  );
+};

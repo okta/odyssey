@@ -25,7 +25,7 @@ import { OdysseyDesignTokensContext } from "./OdysseyDesignTokensContext";
 export type OdysseyThemeProviderProps = {
   children: ReactNode;
   designTokensOverride?: DesignTokensOverride;
-  shadowDomElement?: HTMLDivElement;
+  shadowDomElement?: HTMLElement;
   themeOverride?: ThemeOptions;
 };
 

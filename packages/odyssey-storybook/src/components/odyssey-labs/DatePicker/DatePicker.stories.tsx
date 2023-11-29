@@ -12,7 +12,7 @@
 
 import { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { OdysseyThemeProvider } from "@okta/odyssey-react-mui";
+import { OdysseyProvider } from "@okta/odyssey-react-mui";
 import {
   AdapterDateFns,
   DatePicker,
@@ -70,6 +70,22 @@ const storybookMeta: Meta<DatePickerProps<unknown, unknown>> = {
 export default storybookMeta;
 
 export const DatePickerStandard: StoryObj<DatePickerProps<string, string>> = {
+  decorators: [
+    (Story, context) => {
+      const { canvasElement } = context;
+      const parentElement = canvasElement.parentElement ?? undefined;
+      return (
+        <OdysseyProvider
+          themeOverride={datePickerTheme}
+          shadowDomElement={parentElement}
+        >
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Story />
+          </LocalizationProvider>
+        </OdysseyProvider>
+      );
+    },
+  ],
   render: function C(props) {
     const [value, setValue] = useState("09/05/1977");
     const datePickerProps = useMemo<DatePickerProps<string, string>>(
@@ -81,12 +97,6 @@ export const DatePickerStandard: StoryObj<DatePickerProps<string, string>> = {
       [props, value]
     );
 
-    return (
-      <OdysseyThemeProvider themeOverride={datePickerTheme}>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker {...datePickerProps} />
-        </LocalizationProvider>
-      </OdysseyThemeProvider>
-    );
+    return <DatePicker {...datePickerProps} />;
   },
 };
