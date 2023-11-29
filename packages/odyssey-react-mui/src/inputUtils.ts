@@ -13,8 +13,8 @@
 import { useMemo } from "react";
 
 type UseControlledStateProps<Value> = {
-  controlledValue?: Value; // isChecked
-  uncontrolledValue?: Value; // isDefaultChecked
+  controlledValue?: Value;
+  uncontrolledValue?: Value;
 };
 
 export const ComponentControlledState = {
