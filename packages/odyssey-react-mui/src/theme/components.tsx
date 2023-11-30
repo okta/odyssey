@@ -2208,7 +2208,6 @@ export const components = ({
       styleOverrides: {
         root: ({ theme, ownerState }) => ({
           ...theme.typography.body1,
-          maxWidth: odysseyTokens.TypographyLineLengthMax,
           borderBottom: `${odysseyTokens.BorderWidthMain} ${odysseyTokens.BorderStyleMain} ${odysseyTokens.HueNeutral100}`,
           textAlign: "start",
           verticalAlign: "baseline",
@@ -2354,6 +2353,7 @@ export const components = ({
           marginBlockEnd: odysseyTokens.Spacing4,
           marginInline: 0,
           overflowX: "auto",
+          display: "block !important",
 
           "&:last-child": {
             marginBlock: 0,
