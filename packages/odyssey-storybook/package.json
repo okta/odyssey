@@ -15,14 +15,15 @@
   },
   "dependencies": {
     "@faker-js/faker": "^8.2.0",
-    "@okta/odyssey-react-mui": "workspace:*"
+    "@okta/odyssey-react-mui": "workspace:*",
+    "@storybook/theming": "^7.2.0",
+    "@okta/odyssey-design-tokens": "workspace:*"
   },
   "devDependencies": {
     "@applitools/eyes-storybook": "^3.34.2",
     "@babel/core": "^7.19.3",
     "@mui/material": "^5.12.3",
     "@okta/odyssey-babel-loader": "workspace:*",
-    "@okta/odyssey-design-tokens": "workspace:*",
     "@okta/odyssey-lifecycle": "workspace:*",
     "@okta/odyssey-typescript": "workspace:*",
     "@pxblue/storybook-rtl-addon": "^1.1.0",
@@ -43,7 +44,6 @@
     "@storybook/react-vite": "^7.2.0",
     "@storybook/test-runner": "^0.10.0",
     "@storybook/testing-library": "^0.1.0",
-    "@storybook/theming": "^7.2.0",
     "@types/mdx": "^2.0.1",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.2",
