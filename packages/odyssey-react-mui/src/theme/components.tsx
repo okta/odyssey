@@ -2333,8 +2333,10 @@ export const components = ({
           },
 
           [`& .${dividerClasses.vertical}`]: {
-            borderStyle: "dotted",
+            borderStyle: "none none none dotted",
             borderWidth: 2,
+            borderRadius: 0,
+            marginRight: 2,
           },
         }),
       },
