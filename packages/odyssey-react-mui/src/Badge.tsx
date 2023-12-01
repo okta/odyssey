@@ -84,7 +84,9 @@ const Badge = ({
     [type, contentIsLongerThanOneChar, odysseyDesignTokens]
   );
 
-  if (!badgeContent) {
+  const shouldHideBadge = badgeContent <= 0 || !badgeContent;
+
+  if (shouldHideBadge) {
     return null;
   }
 
