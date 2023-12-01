@@ -23,6 +23,7 @@ import {
   MRT_RowSelectionState,
   MRT_Row,
   MRT_ColumnDef,
+  MRT_TableInstance,
 } from "material-react-table";
 import {
   Fragment,
@@ -33,6 +34,7 @@ import {
   useMemo,
   useRef,
   useState,
+  KeyboardEvent,
 } from "react";
 import {
   ArrowTopIcon,
@@ -45,6 +47,7 @@ import {
   MoreIcon,
 } from "../icons.generated";
 import { Checkbox as MuiCheckbox } from "@mui/material";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext";
 import {
   DataTablePagination,
   paginationTypeValues,
@@ -280,6 +283,7 @@ const DataTable = ({
   hasSearch,
   hasSorting,
 }: DataTableProps) => {
+  const odysseyTokens = useOdysseyDesignTokens();
   const [draggingRow, setDraggingRow] = useState<MRT_Row<MRT_RowData> | null>();
   const [showSkeletons, setShowSkeletons] = useState<boolean>(true);
   const [data, setData] =
@@ -390,6 +394,16 @@ const DataTable = ({
   const rowVirtualizerInstanceRef =
     useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
 
+  const getRowFromTableAndSetHovered = (
+    table: MRT_TableInstance<MRT_RowData>,
+    id: MRT_RowData["id"]
+  ) => {
+    const nextRow: MRT_RowData = table.getRow(id);
+    if (nextRow) {
+      table.setHoveredRow(nextRow);
+    }
+  };
+
   const table = useMaterialReactTable({
     columns: columns,
     data: data,
@@ -440,13 +454,13 @@ const DataTable = ({
         muiTableBodyCellProps: {
           sx: {
             minWidth: 0,
-            width: 32,
+            width: "auto",
           },
         },
         muiTableHeadCellProps: {
           sx: {
             minWidth: 0,
-            width: 32,
+            width: "auto",
           },
         },
       },
@@ -487,28 +501,128 @@ const DataTable = ({
           : undefined,
     }),
 
-    muiRowDragHandleProps: {
-      tabIndex: -1,
-      onDragEnd: () => {
-        const cols = table.getAllColumns();
-        cols[0].toggleVisibility();
+    muiRowDragHandleProps: ({ table, row }) => {
+      return {
+        title:
+          "Drag or press space key to enable row reordering. Press space key again to stop reordering",
+        onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => {
+          const { hoveredRow } = table.getState();
 
-        const { draggingRow, hoveredRow } = table.getState();
-        if (draggingRow) {
-          handleReordering({
-            rowId: draggingRow.id,
-            newIndex: (hoveredRow as MRT_RowData).index,
-          });
-        }
+          const { key } = event;
+          const isSpacebar = key === " ";
 
-        setDraggingRow(null);
-      },
+          if (isSpacebar) {
+            event.preventDefault();
+          }
 
-      onDragCapture: () => {
-        if (!draggingRow && table.getState().draggingRow?.id) {
-          setDraggingRow(table.getState().draggingRow);
-        }
-      },
+          const isArrowDown = key === "ArrowDown";
+          const isArrowUp = key === "ArrowUp";
+
+          const currentIndex = row.index + (page - 1) * resultsPerPage;
+
+          if (draggingRow) {
+            if (hoveredRow && hoveredRow.index) {
+              const { index } = hoveredRow;
+
+              if (isSpacebar && index != currentIndex) {
+                handleReordering({
+                  rowId: row.id,
+                  newIndex: index,
+                });
+                setDraggingRow(null);
+                table.setHoveredRow(null);
+                return;
+              }
+
+              if (isArrowDown) {
+                const nextRowFromDataAfterDownArrow = data[index + 1];
+
+                if (nextRowFromDataAfterDownArrow) {
+                  getRowFromTableAndSetHovered(
+                    table,
+                    nextRowFromDataAfterDownArrow.id
+                  );
+                }
+              }
+
+              if (isArrowUp) {
+                const nextRowFromDataAfterUpArrow = data[index - 1];
+
+                if (nextRowFromDataAfterUpArrow) {
+                  getRowFromTableAndSetHovered(
+                    table,
+                    nextRowFromDataAfterUpArrow.id
+                  );
+                }
+              }
+            } else {
+              if (isArrowDown || isArrowUp) {
+                if (isArrowDown) {
+                  const shouldDisableReOrder =
+                    currentIndex === page * resultsPerPage - 1;
+                  if (shouldDisableReOrder) {
+                    return;
+                  }
+                }
+
+                if (isArrowUp) {
+                  const shouldDisableReOrder =
+                    currentIndex === 0 ||
+                    currentIndex === (page - 1) * resultsPerPage;
+                  if (shouldDisableReOrder) {
+                    return;
+                  }
+                }
+
+                const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
+                const nextRowFromData = data[nextIndex];
+
+                if (nextRowFromData) {
+                  getRowFromTableAndSetHovered(table, nextRowFromData.id);
+                }
+              }
+            }
+          } else {
+            if (isSpacebar) {
+              setDraggingRow(row);
+            }
+          }
+        },
+        onBlur: () => {
+          setDraggingRow(null);
+          table.setHoveredRow(null);
+        },
+        onDragEnd: () => {
+          const cols = table.getAllColumns();
+          cols[0].toggleVisibility();
+
+          const { draggingRow, hoveredRow } = table.getState();
+          if (draggingRow) {
+            handleReordering({
+              rowId: draggingRow.id,
+              newIndex: (hoveredRow as MRT_RowData).index,
+            });
+          }
+
+          setDraggingRow(null);
+        },
+
+        onDragCapture: () => {
+          if (!draggingRow && table.getState().draggingRow?.id) {
+            setDraggingRow(table.getState().draggingRow);
+          }
+        },
+        sx: {
+          padding: odysseyTokens.Spacing1,
+          borderRadius: odysseyTokens.BorderRadiusMain,
+
+          "&:focus-visible": {
+            boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
+            outline: "2px solid transparent",
+            outlineOffset: "1px",
+          },
+        },
+      };
     },
 
     renderRowActions: ({ row }) => {
