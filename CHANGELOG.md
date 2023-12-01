@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/okta/odyssey/compare/v1.8.0...v1.8.1) (2023-12-01)
+
+### Bug Fixes
+
+- support controlled and uncontrolled states in form components ([#2045](https://github.com/okta/odyssey/issues/2045)) ([eacf2b4](https://github.com/okta/odyssey/commit/eacf2b496e0650388c8f0bc6015c88a3fc1ef47d))
+
 ## [1.8.0](https://github.com/okta/odyssey/compare/v1.7.1...v1.8.0) (2023-12-01)
 
 ### Features
