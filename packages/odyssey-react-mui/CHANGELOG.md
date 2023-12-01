@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.0](https://github.com/okta/odyssey/compare/v1.7.1...v1.8.0) (2023-12-01)
+
+### Features
+
+- add hint prop to Checkbox ([#2050](https://github.com/okta/odyssey/issues/2050)) ([1fdc55e](https://github.com/okta/odyssey/commit/1fdc55e667c89b7768f300a160d550a62e6e8eb0))
+
 ## [1.7.1](https://github.com/okta/odyssey/compare/v1.7.0...v1.7.1) (2023-12-01)
 
 **Note:** Version bump only for package @okta/odyssey-react-mui
