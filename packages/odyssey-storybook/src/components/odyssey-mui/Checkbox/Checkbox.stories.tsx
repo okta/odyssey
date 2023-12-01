@@ -94,6 +94,15 @@ const storybookMeta: Meta<typeof Checkbox> = {
         },
       },
     },
+    hint: {
+      control: "text",
+      description: "The helper text content",
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+    },
     name: fieldComponentPropsMetaData.name,
     onChange: {
       control: null,
@@ -221,6 +230,23 @@ export const Invalid: StoryObj<typeof Checkbox> = {
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Disabled");
+  },
+};
+
+export const Hint: StoryObj<typeof Checkbox> = {
+  parameters: {
+    docs: {
+      description: {
+        story: "hint provides helper text to the Checkbox",
+      },
+    },
+  },
+  args: {
+    label: "I agree to the terms and conditions",
+    hint: "Really helpful hint",
+  },
+  play: async ({ canvasElement, step }) => {
+    checkTheBox({ canvasElement, step })("Checkbox Hint");
   },
 };
 
