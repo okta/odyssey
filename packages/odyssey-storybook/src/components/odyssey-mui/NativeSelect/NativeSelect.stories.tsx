@@ -45,6 +45,7 @@ const storybookMeta: Meta<NativeSelectProps> = {
     hint: fieldComponentPropsMetaData.hint,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isMultiSelect: {
       control: "boolean",
       description:

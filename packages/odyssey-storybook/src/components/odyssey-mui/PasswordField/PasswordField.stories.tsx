@@ -64,6 +64,7 @@ const storybookMeta: Meta<PasswordFieldProps> = {
     hint: fieldComponentPropsMetaData.hint,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isOptional: fieldComponentPropsMetaData.isOptional,
     isReadOnly: fieldComponentPropsMetaData.isReadOnly,
     label: {

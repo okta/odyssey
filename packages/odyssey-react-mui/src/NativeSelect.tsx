@@ -58,7 +58,7 @@ export type NativeSelectProps = {
   value?: string | string[];
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isDisabled" | "isOptional"
+  "errorMessage" | "hint" | "id" | "isDisabled" | "isOptional" | "isFullWidth"
 > &
   SeleniumProps;
 
@@ -70,6 +70,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
       hint,
       id: idOverride,
       isDisabled = false,
+      isFullWidth = false,
       isMultiSelect = false,
       isOptional = false,
       label,
@@ -126,6 +127,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}

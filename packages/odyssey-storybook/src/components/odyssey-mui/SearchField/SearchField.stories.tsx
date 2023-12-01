@@ -40,6 +40,7 @@ const storybookMeta: Meta<SearchFieldProps> = {
       },
     },
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     id: fieldComponentPropsMetaData.id,
     label: {
       control: "text",

@@ -97,6 +97,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       hint,
       id: idOverride,
       isDisabled = false,
+      isFullWidth = false,
       isMultiline = false,
       isOptional = false,
       isReadOnly,
@@ -177,6 +178,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}

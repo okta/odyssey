@@ -75,7 +75,13 @@ export type SelectProps<
   value?: Value;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isDisabled" | "isOptional" | "name"
+  | "errorMessage"
+  | "hint"
+  | "id"
+  | "isDisabled"
+  | "isOptional"
+  | "name"
+  | "isFullWidth"
 > &
   SeleniumProps;
 
@@ -103,6 +109,7 @@ const Select = <
   hint,
   id: idOverride,
   isDisabled = false,
+  isFullWidth = false,
   isMultiSelect,
   isOptional = false,
   label,
@@ -264,6 +271,7 @@ const Select = <
       hint={hint}
       id={idOverride}
       isDisabled={isDisabled}
+      isFullWidth={isFullWidth}
       isOptional={isOptional}
       label={label}
       renderFieldComponent={renderFieldComponent}

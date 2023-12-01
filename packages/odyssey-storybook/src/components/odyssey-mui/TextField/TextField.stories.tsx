@@ -57,6 +57,7 @@ const storybookMeta: Meta<TextFieldProps> = {
     hint: fieldComponentPropsMetaData.hint,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isMultiline: {
       control: "boolean",
       description: "If `true`, a TextareaAutosize element is rendered",

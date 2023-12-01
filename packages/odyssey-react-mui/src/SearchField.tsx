@@ -73,7 +73,7 @@ export type SearchFieldProps = {
    * The value of the `input` element, required for a controlled component.
    */
   value?: string;
-} & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
+} & Pick<FieldComponentProps, "id" | "isDisabled" | "name" | "isFullWidth"> &
   SeleniumProps;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
@@ -83,6 +83,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       hasInitialFocus,
       id: idOverride,
       isDisabled = false,
+      isFullWidth = false,
       label,
       name: nameOverride,
       onChange: onChangeProp,
@@ -180,6 +181,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         hasVisibleLabel={false}
         id={idOverride}
         isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
         isOptional={true}
         label={label}
         renderFieldComponent={renderFieldComponent}

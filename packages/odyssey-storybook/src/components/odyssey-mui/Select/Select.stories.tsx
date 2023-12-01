@@ -16,6 +16,7 @@ import { MuiThemeDecorator } from "../../../../.storybook/components";
 import { userEvent, waitFor, screen } from "@storybook/testing-library";
 import { axeRun } from "../../../axe-util";
 import { expect } from "@storybook/jest";
+import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 
 const optionsArray: SelectProps<string | string[], boolean>["options"] = [
   "Earth",
@@ -106,15 +107,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
   title: "MUI Components/Forms/Select",
   component: Select,
   argTypes: {
-    errorMessage: {
-      control: "text",
-      description: "The error message for the select component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    errorMessage: fieldComponentPropsMetaData.errorMessage,
     hasMultipleChoices: {
       control: "boolean",
       description: "If `true`, the select component allows multiple selections",
@@ -127,36 +120,10 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
         },
       },
     },
-    hint: {
-      control: "text",
-      description: "The hint text for the select component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    id: {
-      control: "text",
-      description: "The id attribute of the select component",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
-    isDisabled: {
-      control: "boolean",
-      description: "If `true`, the select component is disabled",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: {
-          summary: false,
-        },
-      },
-    },
+    hint: fieldComponentPropsMetaData.hint,
+    id: fieldComponentPropsMetaData.id,
+    isDisabled: fieldComponentPropsMetaData.isFullWidth,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isOptional: {
       control: "boolean",
       description: "If `true`, the select component is optional",
@@ -182,16 +149,7 @@ const storybookMeta: Meta<SelectProps<string | string[], boolean>> = {
         name: "string",
       },
     },
-    name: {
-      control: "text",
-      description:
-        "The name of the select component. Defaults to the `id` if not set.",
-      table: {
-        type: {
-          summary: "string",
-        },
-      },
-    },
+    name: fieldComponentPropsMetaData.name,
     onBlur: {
       control: null,
       description: "Callback fired when the select component loses focus",
