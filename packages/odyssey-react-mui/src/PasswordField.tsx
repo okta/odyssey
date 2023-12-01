@@ -84,6 +84,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       hint,
       id: idOverride,
       isDisabled = false,
+      isFullWidth = false,
       isOptional = false,
       hasShowPassword = true,
       isReadOnly,
@@ -199,6 +200,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         hint={hint}
         id={idOverride}
         isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
         isOptional={isOptional}
         label={label}
         renderFieldComponent={renderFieldComponent}
