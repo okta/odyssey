@@ -16,6 +16,7 @@ import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
   FormControlLabel,
+  FormHelperText,
 } from "@mui/material";
 
 import { FieldComponentProps } from "./FieldComponentProps";
@@ -56,6 +57,10 @@ export type CheckboxProps = {
    */
   label?: string;
   /**
+   * The helper text content
+   */
+  hint?: string;
+  /**
    * The checkbox validity, if different from its enclosing group. Defaults to "inherit".
    */
   validity?: (typeof checkboxValidityValues)[number];
@@ -77,6 +82,7 @@ const Checkbox = ({
   isIndeterminate,
   isRequired,
   label: labelProp,
+  hint,
   name: nameOverride,
   onChange: onChangeProp,
   testId,
@@ -90,19 +96,21 @@ const Checkbox = ({
   });
 
   const label = useMemo(() => {
-    if (isRequired) {
-      return (
-        <>
-          {labelProp}{" "}
-          <Typography component="span" color="textSecondary">
-            ({t("fieldlabel.required.text")})
-          </Typography>
-        </>
-      );
-    } else {
-      return <>{labelProp}</>;
-    }
-  }, [isRequired, labelProp, t]);
+    return (
+      <>
+        {labelProp}
+        {isRequired && (
+          <>
+            {" "}
+            <Typography component="span" color="textSecondary">
+              ({t("fieldlabel.required.text")})
+            </Typography>
+          </>
+        )}
+        {hint && <FormHelperText>{hint}</FormHelperText>}
+      </>
+    );
+  }, [isRequired, labelProp, hint, t]);
 
   const onChange = useCallback<NonNullable<MuiCheckboxProps["onChange"]>>(
     (event, checked) => {
@@ -114,6 +122,7 @@ const Checkbox = ({
 
   return (
     <FormControlLabel
+      sx={{ alignItems: "flex-start" }}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       className={
@@ -129,6 +138,9 @@ const Checkbox = ({
           indeterminate={isIndeterminate}
           onChange={onChange}
           required={isRequired}
+          sx={() => ({
+            marginBlockStart: "2px",
+          })}
         />
       }
       data-se={testId}
