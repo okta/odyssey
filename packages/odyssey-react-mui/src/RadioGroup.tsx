@@ -14,13 +14,13 @@ import {
   RadioGroup as MuiRadioGroup,
   type RadioGroupProps as MuiRadioGroupProps,
 } from "@mui/material";
-import { memo, ReactElement, useCallback } from "react";
+import { memo, ReactElement, useCallback, useRef } from "react";
 
 import { Radio, RadioProps } from "./Radio";
 import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import type { SeleniumProps } from "./SeleniumProps";
-import { useControlledState } from "./useControlledState";
+import { getControlState, useInputValues } from "./inputUtils";
 
 export type RadioGroupProps = {
   /**
@@ -62,35 +62,37 @@ const RadioGroup = ({
   testId,
   value,
 }: RadioGroupProps) => {
-  const [localValue, setLocalValue] = useControlledState({
-    controlledValue: value,
-    uncontrolledValue: defaultValue,
+  const controlledStateRef = useRef(
+    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
+  );
+  const inputValues = useInputValues({
+    defaultValue,
+    value,
+    controlState: controlledStateRef.current,
   });
 
   const onChange = useCallback<NonNullable<MuiRadioGroupProps["onChange"]>>(
     (event, value) => {
-      setLocalValue(value);
       onChangeProp?.(event, value);
     },
-    [onChangeProp, setLocalValue]
+    [onChangeProp]
   );
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiRadioGroup
+        {...inputValues}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         aria-labelledby={labelElementId}
         data-se={testId}
-        defaultValue={defaultValue}
         id={id}
         name={nameOverride ?? id}
         onChange={onChange}
-        value={localValue}
       >
         {children}
       </MuiRadioGroup>
     ),
-    [children, defaultValue, nameOverride, onChange, testId, localValue]
+    [children, inputValues, nameOverride, onChange, testId]
   );
 
   return (

@@ -11,12 +11,13 @@
  */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { SearchField, SearchFieldProps } from "@okta/odyssey-react-mui";
+import { SearchField } from "@okta/odyssey-react-mui";
 
 import { fieldComponentPropsMetaData } from "../../../fieldComponentPropsMetaData";
 import { MuiThemeDecorator } from "../../../../.storybook/components";
+import { useCallback, useState } from "react";
 
-const storybookMeta: Meta<SearchFieldProps> = {
+const storybookMeta: Meta<typeof SearchField> = {
   title: "MUI Components/Forms/SearchField",
   component: SearchField,
   argTypes: {
@@ -27,6 +28,22 @@ const storybookMeta: Meta<SearchFieldProps> = {
       table: {
         type: {
           summary: "string",
+        },
+        defaultValue: {
+          summary: undefined,
+        },
+      },
+    },
+    defaultValue: {
+      control: "text",
+      description:
+        "The value of the `input` element. Use when the component is not controlled",
+      table: {
+        type: {
+          summary: "string",
+        },
+        defaultValue: {
+          summary: undefined,
         },
       },
     },
@@ -106,10 +123,13 @@ const storybookMeta: Meta<SearchFieldProps> = {
     value: {
       control: "text",
       description:
-        "The value of the `input` element, required for a controlled component",
+        "The value of the `input` element. Use when the component is controlled",
       table: {
         type: {
           summary: "string",
+        },
+        defaultValue: {
+          summary: undefined,
         },
       },
     },
@@ -124,4 +144,32 @@ const storybookMeta: Meta<SearchFieldProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<SearchFieldProps> = {};
+export const Default: StoryObj<typeof SearchField> = {
+  args: {
+    defaultValue: "",
+  },
+};
+
+export const ControlledSearch: StoryObj<typeof SearchField> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of `SearchField`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
+  args: {
+    defaultValue: undefined,
+  },
+  render: function C(props) {
+    const [constrolledValue, setControlledValue] = useState("Jupiter");
+    const onChange = useCallback(
+      (event) => setControlledValue(event.target.value),
+      []
+    );
+    return (
+      <SearchField {...props} value={constrolledValue} onChange={onChange} />
+    );
+  },
+};

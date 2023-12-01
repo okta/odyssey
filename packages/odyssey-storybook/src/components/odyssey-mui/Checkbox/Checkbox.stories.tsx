@@ -161,6 +161,7 @@ const checkTheBox =
 export const Default: StoryObj<typeof Checkbox> = {
   args: {
     label: "Enable warp drive recalibration",
+    isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Default");
@@ -179,6 +180,7 @@ export const Required: StoryObj<typeof Checkbox> = {
   args: {
     label: "I agree to the terms and conditions",
     isRequired: true,
+    isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Required");
@@ -204,6 +206,7 @@ export const Disabled: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     isDisabled: true,
+    isDefaultChecked: false,
   },
 };
 
@@ -227,6 +230,7 @@ export const Invalid: StoryObj<typeof Checkbox> = {
   args: {
     label: "Pre-flight systems check complete",
     validity: "invalid",
+    isDefaultChecked: false,
   },
   play: async ({ canvasElement, step }) => {
     checkTheBox({ canvasElement, step })("Checkbox Disabled");
@@ -250,14 +254,15 @@ export const Hint: StoryObj<typeof Checkbox> = {
   },
 };
 
-export const Uncontrolled: StoryObj<typeof Checkbox> = {
-  args: {
-    label: "Pre-flight systems check complete",
-    isDefaultChecked: true,
-  },
-};
-
 export const Controlled: StoryObj<typeof Checkbox> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When the component is controlled, the parent component is responsible for managing the state of `Checkbox`. `onChange` should be used to listen for component changes and to update the values in the `value` prop.",
+      },
+    },
+  },
   args: {
     label: "Pre-flight systems check complete",
     isChecked: true,

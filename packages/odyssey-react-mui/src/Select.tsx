@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Box,
   Checkbox as MuiCheckbox,
@@ -26,6 +26,11 @@ import { Field } from "./Field";
 import { FieldComponentProps } from "./FieldComponentProps";
 import { CheckIcon } from "./icons.generated";
 import type { SeleniumProps } from "./SeleniumProps";
+import {
+  ComponentControlledState,
+  useInputValues,
+  getControlState,
+} from "./inputUtils";
 
 export type SelectOption = {
   text: string;
@@ -40,6 +45,10 @@ export type SelectProps<
   Value extends SelectValueType<HasMultipleChoices>,
   HasMultipleChoices extends boolean
 > = {
+  /**
+   * The default value. Use when the component is not controlled.
+   */
+  defaultValue?: MuiSelectProps<Value>["defaultValue"];
   /**
    * If `true`, the Select allows multiple selections
    */
@@ -100,10 +109,12 @@ export type SelectProps<
  *   - { text: string, type: "heading" } — Used to display a group heading with the text
  */
 
+const { CONTROLLED } = ComponentControlledState;
 const Select = <
   Value extends SelectValueType<HasMultipleChoices>,
   HasMultipleChoices extends boolean
 >({
+  defaultValue,
   errorMessage,
   hasMultipleChoices: hasMultipleChoicesProp,
   hint,
@@ -128,32 +139,38 @@ const Select = <
         : hasMultipleChoicesProp,
     [hasMultipleChoicesProp, isMultiSelect]
   );
-
-  const formattedValueForMultiSelect = isMultiSelect
-    ? ([] as string[] as Value)
-    : ("" as string as Value);
-
-  const [selectedValue, setSelectedValue] = useState(
-    value === undefined ? formattedValueForMultiSelect : value
+  const controlledStateRef = useRef(
+    getControlState({ controlledValue: value, uncontrolledValue: defaultValue })
   );
+  const [internalSelectedValues, setInternalSelectedValues] = useState(
+    controlledStateRef.current === CONTROLLED ? value : defaultValue
+  );
+
+  useEffect(() => {
+    if (controlledStateRef.current === CONTROLLED) {
+      setInternalSelectedValues(value);
+    }
+  }, [value]);
+
+  const inputValues = useInputValues({
+    defaultValue,
+    value,
+    controlState: controlledStateRef.current,
+  });
 
   const onChange = useCallback<NonNullable<MuiSelectProps<Value>["onChange"]>>(
     (event, child) => {
-      const valueFromEvent = event.target.value;
-
-      if (typeof valueFromEvent === "string") {
-        if (hasMultipleChoices) {
-          setSelectedValue(valueFromEvent.split(",") as Value);
-        } else {
-          setSelectedValue(valueFromEvent as Value);
-        }
-      } else {
-        setSelectedValue(valueFromEvent);
+      const {
+        target: { value },
+      } = event;
+      if (controlledStateRef.current !== CONTROLLED) {
+        setInternalSelectedValues(
+          (typeof value === "string" ? value.split(",") : value) as Value
+        );
       }
-
       onChangeProp?.(event, child);
     },
-    [hasMultipleChoices, onChangeProp, setSelectedValue]
+    [onChangeProp]
   );
 
   // Normalize the options array to accommodate the various
@@ -214,14 +231,15 @@ const Select = <
         if (option.type === "heading") {
           return <ListSubheader key={option.text}>{option.text}</ListSubheader>;
         }
-
         return (
           <MenuItem key={option.value} value={option.value}>
             {hasMultipleChoices && (
-              <MuiCheckbox checked={selectedValue.includes(option.value)} />
+              <MuiCheckbox
+                checked={internalSelectedValues?.includes(option.value)}
+              />
             )}
             {option.text}
-            {selectedValue == option.value && (
+            {internalSelectedValues === option.value && (
               <ListItemSecondaryAction>
                 <CheckIcon />
               </ListItemSecondaryAction>
@@ -229,12 +247,13 @@ const Select = <
           </MenuItem>
         );
       }),
-    [hasMultipleChoices, normalizedOptions, selectedValue]
+    [hasMultipleChoices, normalizedOptions, internalSelectedValues]
   );
 
   const renderFieldComponent = useCallback(
     ({ ariaDescribedBy, errorMessageElementId, id, labelElementId }) => (
       <MuiSelect
+        {...inputValues}
         aria-describedby={ariaDescribedBy}
         aria-errormessage={errorMessageElementId}
         children={children}
@@ -247,18 +266,17 @@ const Select = <
         onChange={onChange}
         onFocus={onFocus}
         renderValue={hasMultipleChoices ? renderValue : undefined}
-        value={selectedValue}
       />
     ),
     [
       children,
+      inputValues,
       hasMultipleChoices,
       nameOverride,
       onBlur,
       onChange,
       onFocus,
       renderValue,
-      selectedValue,
       testId,
     ]
   );
