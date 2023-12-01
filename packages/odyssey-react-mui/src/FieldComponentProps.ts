@@ -28,6 +28,10 @@ export type FieldComponentProps = {
    */
   isDisabled?: boolean;
   /**
+   * If `true`, the component can stretch to fill the width of the container.
+   */
+  isFullWidth?: boolean;
+  /**
    * If `true`, the `input` element is not required.
    */
   isOptional?: boolean;

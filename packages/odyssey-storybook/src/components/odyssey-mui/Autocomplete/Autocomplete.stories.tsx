@@ -74,6 +74,7 @@ const storybookMeta: Meta<typeof Autocomplete> = {
       },
     },
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     isLoading: {
       control: "boolean",
       description: "Displays a loading indicator",

@@ -60,6 +60,10 @@ export type FieldProps = {
    */
   isDisabled?: boolean;
   /**
+   * If `true`, the component can stretch to fill the width of the container.
+   */
+  isFullWidth?: boolean;
+  /**
    * If `true`, the `input` element is not required.
    */
   isOptional?: boolean;
@@ -96,6 +100,7 @@ const Field = ({
   hint,
   id: idOverride,
   isDisabled: isDisabledProp = false,
+  isFullWidth = false,
   isRadioGroup = false,
   isOptional = false,
   label,
@@ -126,6 +131,7 @@ const Field = ({
       disabled={isDisabled}
       error={Boolean(errorMessage)}
       role={isRadioGroup ? "radiogroup" : undefined}
+      fullWidth={isFullWidth}
     >
       {fieldType === "group" ? (
         <MuiFormLabel component="legend">

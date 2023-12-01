@@ -161,7 +161,7 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 } & Pick<
   FieldComponentProps,
-  "errorMessage" | "hint" | "id" | "isOptional" | "name"
+  "errorMessage" | "hint" | "id" | "isOptional" | "name" | "isFullWidth"
 > &
   SeleniumProps;
 
@@ -177,6 +177,7 @@ const Autocomplete = <
   inputValue,
   isCustomValueAllowed,
   isDisabled,
+  isFullWidth = false,
   isLoading,
   isOptional = false,
   isReadOnly,
@@ -309,6 +310,7 @@ const Autocomplete = <
       freeSolo={isCustomValueAllowed}
       filterSelectedOptions={true}
       id={idOverride}
+      fullWidth={isFullWidth}
       loading={isLoading}
       multiple={hasMultipleChoices}
       onBlur={onBlur}

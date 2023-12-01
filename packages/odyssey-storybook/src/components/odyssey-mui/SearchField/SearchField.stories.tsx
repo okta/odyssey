@@ -57,6 +57,7 @@ const storybookMeta: Meta<typeof SearchField> = {
       },
     },
     isDisabled: fieldComponentPropsMetaData.isDisabled,
+    isFullWidth: fieldComponentPropsMetaData.isFullWidth,
     id: fieldComponentPropsMetaData.id,
     label: {
       control: "text",

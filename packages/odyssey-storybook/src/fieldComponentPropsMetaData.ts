@@ -56,6 +56,19 @@ export const fieldComponentPropsMetaData: Partial<
       },
     },
   },
+  isFullWidth: {
+    control: "boolean",
+    description:
+      "If `true`, the component can stretch to fill the width of the container",
+    table: {
+      type: {
+        summary: "boolean",
+      },
+      defaultValue: {
+        summary: false,
+      },
+    },
+  },
   isOptional: {
     control: "boolean",
     description: "If `true`, the `input` element is not required",
