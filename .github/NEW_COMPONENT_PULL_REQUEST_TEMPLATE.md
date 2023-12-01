@@ -42,8 +42,8 @@ Thank you for contributing! Please follow the steps below to help us process you
 ### Responsive implementation
 
 - [ ] Use CSS media queries to define breakpoints and apply styles.
-- [ ] Test fluid layouts and resizing behavior at each breakpoint.
-- [ ] Optimize images for different screen resolutions.
+- [ ] Test fluid layouts and resizing behavior at each breakpoint as needed.
+- [ ] Optimize images for different screen resolutions as needed.
 
 ### Cross-browser compatibility
 
