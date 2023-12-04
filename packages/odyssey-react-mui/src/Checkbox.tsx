@@ -16,6 +16,7 @@ import {
   Checkbox as MuiCheckbox,
   CheckboxProps as MuiCheckboxProps,
   FormControlLabel,
+  FormControlLabelProps as MuiFormControlLabelProps,
   FormHelperText,
 } from "@mui/material";
 
@@ -68,6 +69,10 @@ export type CheckboxProps = {
    * The value attribute of the Checkbox
    */
   value?: string;
+  /**
+   * Callback fired when the blur event happens. Provides event value.
+   */
+  onBlur?: MuiFormControlLabelProps["onBlur"];
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name"> &
   CheckedFieldProps<MuiCheckboxProps> &
   SeleniumProps;
@@ -85,6 +90,7 @@ const Checkbox = ({
   hint,
   name: nameOverride,
   onChange: onChangeProp,
+  onBlur: onBlurProp,
   testId,
   validity = "inherit",
   value,
@@ -127,6 +133,13 @@ const Checkbox = ({
     [onChangeProp]
   );
 
+  const onBlur = useCallback<NonNullable<MuiFormControlLabelProps["onBlur"]>>(
+    (event) => {
+      onBlurProp?.(event);
+    },
+    [onBlurProp]
+  );
+
   return (
     <FormControlLabel
       sx={{ alignItems: "flex-start" }}
@@ -157,6 +170,7 @@ const Checkbox = ({
       name={nameOverride ?? idOverride}
       value={value}
       required={isRequired}
+      onBlur={onBlur}
     />
   );
 };
