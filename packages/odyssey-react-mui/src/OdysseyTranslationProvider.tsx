@@ -36,17 +36,19 @@ const mergeBundleOverrides = <CustomLanguages extends string>(
   };
 };
 
-export type OdysseyTranslationProviderProps = {
+export type OdysseyTranslationProviderProps<Languages extends string> = {
   children: ReactNode;
   languageCode?: Languages;
   translationOverrides?: TranslationOverrides;
 };
 
-export const OdysseyTranslationProvider = ({
+export const OdysseyTranslationProvider = <
+  Languages extends string = SupportedLanguages
+>({
   children,
   languageCode,
   translationOverrides,
-}: OdysseyTranslationProviderProps) => {
+}: OdysseyTranslationProviderProps<Languages>) => {
   useEffect(() => {
     // Defaults to the browser's language if available otherwise `en` will be used
     i18n.changeLanguage(languageCode || window.navigator.language);
